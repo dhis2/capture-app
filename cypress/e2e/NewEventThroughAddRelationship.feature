@@ -23,3 +23,8 @@ Feature: User adds events
         And you submit the event form with the associated relationship to the already existing person
         Then the event and relationship should be sent to the server successfully
 
+    Scenario: User gets navigated correctly when clicking on the back button
+        Given you open the the new event page in Ngelehun and malaria case context
+        When you navigate to register a person relationship
+        And you click the cancel button
+        Then you should be navigated back to the event form

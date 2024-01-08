@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Dialog } from '@material-ui/core';
+import { Modal } from '@dhis2/ui';
 import { NewTemplateContents } from './NewTemplateContents.component';
 
 type Props = {
@@ -16,16 +16,21 @@ export const NewTemplateDialog = (props: Props) => {
         onSaveTemplate,
     } = props;
 
+    if (!open) {
+        return null;
+    }
+
     return (
-        <Dialog
-            open={open}
+        <Modal
+            hide={!open}
             onClose={onClose}
-            fullWidth
+            dataTest={'new-template-dialog'}
+            position={'center'}
         >
             <NewTemplateContents
                 onSaveTemplate={onSaveTemplate}
                 onClose={onClose}
             />
-        </Dialog>
+        </Modal>
     );
 };

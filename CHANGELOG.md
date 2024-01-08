@@ -1,3 +1,67 @@
+## [100.50.3](https://github.com/dhis2/capture-app/compare/v100.50.2...v100.50.3) (2023-12-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c92b38e](https://github.com/dhis2/capture-app/commit/c92b38e8f775d20476fc0e2619f95ba48377ec5a))
+
+## [100.50.2](https://github.com/dhis2/capture-app/compare/v100.50.1...v100.50.2) (2023-12-20)
+
+
+### Bug Fixes
+
+* [TECH-1676] cypress test deleting wrong working list template ([#3489](https://github.com/dhis2/capture-app/issues/3489)) ([b5e038b](https://github.com/dhis2/capture-app/commit/b5e038b823128386f7106da46025a2a38a00db1b))
+
+## [100.50.1](https://github.com/dhis2/capture-app/compare/v100.50.0...v100.50.1) (2023-12-20)
+
+
+### Bug Fixes
+
+* [DHIS2-16317] Incorrect error message on orgUnit type data element ([#3484](https://github.com/dhis2/capture-app/issues/3484)) ([ef30449](https://github.com/dhis2/capture-app/commit/ef304499fda3296320ca71fae72d33f2dfad88fa))
+
+# [100.50.0](https://github.com/dhis2/capture-app/compare/v100.49.0...v100.50.0) (2023-12-18)
+
+
+### Features
+
+* [DHIS-11419] display assigned users on events in enrollment overview page ([#3453](https://github.com/dhis2/capture-app/issues/3453)) ([44fb2be](https://github.com/dhis2/capture-app/commit/44fb2bedf0e2f9d394c58d5a588087cff2c8fa3c))
+
+# [100.49.0](https://github.com/dhis2/capture-app/compare/v100.48.0...v100.49.0) (2023-12-18)
+
+
+### Features
+
+* [DHIS2-12544] Add verbose logging to rules engine ([#3480](https://github.com/dhis2/capture-app/issues/3480)) ([2a6d4a8](https://github.com/dhis2/capture-app/commit/2a6d4a839ae0daed7b2ddbf09a401c29dbb3cfd7))
+
+# [100.48.0](https://github.com/dhis2/capture-app/compare/v100.47.3...v100.48.0) (2023-12-15)
+
+
+### Features
+
+* [DHIS2-15783] Tooltip on long working list names ([#3474](https://github.com/dhis2/capture-app/issues/3474)) ([6263aa8](https://github.com/dhis2/capture-app/commit/6263aa8a2114b028afff3b78c39f699c0946e682))
+
+## [100.47.3](https://github.com/dhis2/capture-app/compare/v100.47.2...v100.47.3) (2023-12-14)
+
+
+### Bug Fixes
+
+* [DHIS2-16084] Filter unidirectional relationship types ([#3477](https://github.com/dhis2/capture-app/issues/3477)) ([3579fc0](https://github.com/dhis2/capture-app/commit/3579fc05d02f6210f381f93414d07b60a0cfea53))
+
+## [100.47.2](https://github.com/dhis2/capture-app/compare/v100.47.1...v100.47.2) (2023-12-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1a4e748](https://github.com/dhis2/capture-app/commit/1a4e7482467656e19ce58f34862a306e6ae008cc))
+
+## [100.47.1](https://github.com/dhis2/capture-app/compare/v100.47.0...v100.47.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15694] Cancel button in Relationship ([#3471](https://github.com/dhis2/capture-app/issues/3471)) ([c1dfbdb](https://github.com/dhis2/capture-app/commit/c1dfbdb3352388bba7d51b8bc2b9d033d10967c3))
+* [DHIS2-15983] Enrollment date not assigned on form init ([#3475](https://github.com/dhis2/capture-app/issues/3475)) ([a13a766](https://github.com/dhis2/capture-app/commit/a13a766ea463514dfdd090b8d40db6406dac80bb))
+
 # [100.47.0](https://github.com/dhis2/capture-app/compare/v100.46.1...v100.47.0) (2023-12-03)
 
 

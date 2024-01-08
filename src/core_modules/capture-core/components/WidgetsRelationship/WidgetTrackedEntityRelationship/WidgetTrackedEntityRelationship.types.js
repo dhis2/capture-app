@@ -38,6 +38,7 @@ export type WidgetTrackedEntityRelationshipProps = {|
         programId: string,
         onLinkToTrackedEntityFromRegistration: OnLinkToTrackedEntityFromRegistration,
         onLinkToTrackedEntityFromSearch: OnLinkToTrackedEntityFromSearch,
+        onCancel: () => void,
     ) => React.Element<any>,
     renderTrackedEntitySearch?: (
         trackedEntityTypeId: string,

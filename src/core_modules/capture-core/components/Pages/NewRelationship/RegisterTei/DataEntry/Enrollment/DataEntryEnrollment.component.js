@@ -12,6 +12,7 @@ const NewEnrollmentRelationshipPlain =
     ({
         theme,
         onSave,
+        onCancel,
         programId,
         duplicatesReviewPageSize,
         renderDuplicatesDialogActions,
@@ -33,6 +34,7 @@ const NewEnrollmentRelationshipPlain =
                     interpolation: { escapeValue: false },
                 })}
                 onSave={onSave}
+                onCancel={onCancel}
                 duplicatesReviewPageSize={duplicatesReviewPageSize}
                 renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                 renderDuplicatesCardActions={renderDuplicatesCardActions}

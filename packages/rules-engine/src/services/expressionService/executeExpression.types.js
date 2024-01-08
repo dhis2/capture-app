@@ -1,5 +1,5 @@
 // @flow
-import type { RuleVariables } from '../../rulesEngine.types';
+import type { Flag, RuleVariables } from '../../rulesEngine.types';
 import type { D2Functions, D2FunctionConfig } from '../../d2Functions';
 
 export type ExpressionSet = $ReadOnly<{|
@@ -23,5 +23,7 @@ export type ExecuteExpressionInput = $ReadOnly<{|
     expression: string,
     dhisFunctions: D2Functions,
     variablesHash: RuleVariables,
+    flags?: Flag,
     onError: ErrorHandler,
+    onVerboseLog: (expressionWithInjectedVariableValues: string) => void,
 |}>;

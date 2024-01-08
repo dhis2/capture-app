@@ -3,7 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconEdit24, Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import { ConditionalTooltip } from 'capture-core/components/ConditionalTooltip';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { Assignee } from './WidgetAssignee.types';
 
 const styles = () => ({

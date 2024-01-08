@@ -2,10 +2,7 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions';
-import { Button } from '@dhis2/ui';
+import { Button, ModalContent, ModalTitle, ModalActions } from '@dhis2/ui';
 import { CardList } from '../../../CardList';
 import type { Props } from './existingTeiContents.types';
 
@@ -35,18 +32,18 @@ const ExistingTEIContentsComponentPlain = ({
 
     return (
         <React.Fragment>
-            <DialogContent>
-                <DialogTitle>
+            <ModalContent>
+                <ModalTitle>
                     {i18n.t('Registered person')}
-                </DialogTitle>
+                </ModalTitle>
                 <CardList
                     currentProgramId={programId}
                     // $FlowFixMe
                     items={items}
                     dataElements={dataElements}
                 />
-            </DialogContent>
-            <DialogActions>
+            </ModalContent>
+            <ModalActions>
                 <Button
                     onClick={onCancel}
                     secondary
@@ -61,7 +58,7 @@ const ExistingTEIContentsComponentPlain = ({
                         />
                     </div>
                 )}
-            </DialogActions>
+            </ModalActions>
         </React.Fragment>
     );
 };

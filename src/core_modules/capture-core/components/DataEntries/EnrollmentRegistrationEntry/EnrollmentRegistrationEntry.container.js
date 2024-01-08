@@ -19,6 +19,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     orgUnitId,
     teiId,
     onSave,
+    onCancel,
     ...passOnProps
 }) => {
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
@@ -68,6 +69,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
             formId={formId}
             formFoundation={formFoundation}
             id={id}
+            onCancel={onCancel}
             saveButtonText={saveButtonText(trackedEntityTypeNameLC)}
             ready={ready && !!enrollmentMetadata}
             teiId={teiId}

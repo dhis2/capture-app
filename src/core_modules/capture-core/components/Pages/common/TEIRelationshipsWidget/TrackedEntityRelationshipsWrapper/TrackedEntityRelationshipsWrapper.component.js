@@ -15,7 +15,7 @@ import {
 } from '../../../NewRelationship/TeiRelationship/SearchResults/TeiRelationshipSearchResults.component';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import { RegisterTei } from '../RegisterTei';
-import { useOrganisationUnit } from '../../../../../dataQueries';
+import { useCoreOrgUnit } from '../../../../../metadataRetrieval/coreOrgUnit';
 
 export const TrackedEntityRelationshipsWrapper = ({
     trackedEntityTypeId,
@@ -29,7 +29,8 @@ export const TrackedEntityRelationshipsWrapper = ({
 }: Props) => {
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
-    const { orgUnit: initialOrgUnit } = useOrganisationUnit(orgUnitId, 'id,displayName,code');
+    const { orgUnit } = useCoreOrgUnit(orgUnitId);
+    const initialOrgUnit = orgUnit ? { id: orgUnitId, name: orgUnit.name, path: orgUnit.path } : null;
 
     const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
         dispatch(selectFindMode({
@@ -47,7 +48,7 @@ export const TrackedEntityRelationshipsWrapper = ({
         );
     }
 
-    if (!relationshipTypes || !addRelationshipRenderElement) {
+    if (!relationshipTypes?.length || !addRelationshipRenderElement) {
         return null;
     }
 
@@ -70,6 +71,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                     suggestedProgramId,
                     onLinkToTrackedEntityFromRegistration,
                     onLinkToTrackedEntityFromSearch,
+                    onCancel,
                 ) => (
                     <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
                         <RegisterTei
@@ -79,6 +81,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                             teiId={teiId}
                             onGetUnsavedAttributeValues={() => console.log('get unsaved')}
                             trackedEntityTypeId={selectedTrackedEntityTypeId}
+                            onCancel={onCancel}
                         />
                     </ResultsPageSizeContext.Provider>
                 )}

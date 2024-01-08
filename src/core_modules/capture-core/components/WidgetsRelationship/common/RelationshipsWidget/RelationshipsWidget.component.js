@@ -4,7 +4,6 @@ import { Chip, IconLink24, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
 import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
-import { useRelationshipTypes } from './useRelationshipTypes';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props, StyledProps } from './relationshipsWidget.types';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
@@ -23,14 +22,13 @@ const RelationshipsWidgetPlain = ({
     title,
     relationships,
     isLoading,
-    cachedRelationshipTypes,
     sourceId,
+    relationshipTypes,
     onLinkedRecordClick,
     children,
     classes,
 }: StyledProps) => {
     const [open, setOpenStatus] = useState(true);
-    const { data: relationshipTypes } = useRelationshipTypes(cachedRelationshipTypes);
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships);
 
     if (isLoading) {
@@ -83,9 +81,8 @@ const RelationshipsWidgetPlain = ({
                             onLinkedRecordClick={onLinkedRecordClick}
                         />
                     )
-                }{
-                    relationshipTypes && children(relationshipTypes)
                 }
+                {children}
             </Widget>
         </div>
     );
