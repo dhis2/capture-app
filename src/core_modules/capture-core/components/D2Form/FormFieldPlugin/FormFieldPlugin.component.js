@@ -1,7 +1,6 @@
 // @flow
 import React, { useEffect, useRef, useState } from 'react';
-// $FlowFixMe - Export will be part of the next release
-import { Plugin } from '@dhis2/app-runtime';
+import { Plugin } from '@dhis2/app-runtime/build/es/experimental';
 import type { ComponentProps } from './FormFieldPlugin.types';
 
 export const FormFieldPluginComponent = (props: ComponentProps) => {

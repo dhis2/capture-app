@@ -10,7 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/app-runtime": "^3.10.0-alpha.6",
+        "@dhis2/app-runtime": "^3.10.2",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
         "@dhis2/d2-ui-app": "^2.0.0",
@@ -95,7 +95,7 @@
         "@babel/preset-react": "^7.16.7",
         "@badeball/cypress-cucumber-preprocessor": "17.2.1",
         "@cypress/webpack-preprocessor": "^6.0.0",
-        "@dhis2/cli-app-scripts": "^10.4.0-alpha.5",
+        "@dhis2/cli-app-scripts": "^10.4.0",
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.4.1",
         "@dhis2/cli-utils-cypress": "^9.0.2",
@@ -132,8 +132,8 @@
         "wait-on": "^6.0.1"
     },
     "resolutions": {
-        "@dhis2/app-runtime": "3.10.0-alpha.6",
-        "@dhis2/cli-app-scripts": "10.4.0-alpha.5",
+        "@dhis2/cli-app-scripts": "^10.4.0",
+        "@dhis2/app-runtime": "^3.10.2",
         "react-scripts": "4.0.3",
         "@babel/preset-react": "7.16.7",
         "@js-temporal/polyfill": "0.4.3",

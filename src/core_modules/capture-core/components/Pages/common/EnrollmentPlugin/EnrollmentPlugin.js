@@ -1,7 +1,6 @@
 // @flow
 import React, { useEffect, useRef, useState } from 'react';
-// $FlowFixMe - Export will be available in next app-runtime release
-import { Plugin } from '@dhis2/app-runtime';
+import { Plugin } from '@dhis2/app-runtime/build/es/experimental';
 import { useHistory } from 'react-router-dom';
 
 type EnrollmentPluginProps = {|
