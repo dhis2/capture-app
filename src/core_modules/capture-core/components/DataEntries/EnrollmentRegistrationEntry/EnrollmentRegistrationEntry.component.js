@@ -4,7 +4,6 @@ import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
-import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
@@ -14,7 +13,6 @@ import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor';
-import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
@@ -52,6 +50,7 @@ const EnrollmentRegistrationEntryPlain =
       saveButtonText,
       classes,
       onSave,
+      onCancel,
       onPostProcessErrorMessage,
       orgUnitId,
       orgUnit,
@@ -60,25 +59,15 @@ const EnrollmentRegistrationEntryPlain =
       isSavingInProgress,
       ...rest
   }: PlainProps) => {
-      const { push } = useHistory();
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
-              navigateToWorkingListsPage();
+              onCancel();
           } else {
               setShowWarning(true);
           }
-      };
-      const navigateToWorkingListsPage = () => {
-          const url =
-            scopeType === scopeTypes.TRACKER_PROGRAM
-                ?
-                buildUrlQueryString({ programId: selectedScopeId, orgUnitId })
-                :
-                buildUrlQueryString({ orgUnitId });
-          return push(`/?${url}`);
       };
 
       return (
@@ -130,7 +119,7 @@ const EnrollmentRegistrationEntryPlain =
               }
               <DiscardDialog
                   {...defaultDialogProps}
-                  onDestroy={navigateToWorkingListsPage}
+                  onDestroy={onCancel}
                   open={!!showWarning}
                   onCancel={() => { setShowWarning(false); }}
               />

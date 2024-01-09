@@ -21,6 +21,7 @@ export type Stage = {
     description?: ?string,
     icon?: Icon,
     dataElements: Array<StageDataElement>,
+    enableUserAssignment: boolean,
     hideDueDate?: boolean,
     repeatable?: boolean
 }
@@ -49,7 +50,6 @@ export type Event = {|
     occurredAt: string,
     updatedAt: string,
     orgUnit: string,
-    orgUnitName: string,
     program: string,
     programStage: string,
     status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',

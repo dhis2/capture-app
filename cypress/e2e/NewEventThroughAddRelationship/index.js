@@ -168,3 +168,12 @@ Then('the event and relationship should be sent to the server successfully', () 
                 });
         });
 });
+
+When('you click the cancel button', () => {
+    cy.get('[data-test="cancel-button"]')
+        .click();
+});
+
+Then('you should be navigated back to the event form', () => {
+    cy.contains('New Malaria case registration');
+});

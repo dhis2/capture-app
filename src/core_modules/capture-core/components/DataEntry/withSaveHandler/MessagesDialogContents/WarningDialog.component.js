@@ -1,11 +1,7 @@
 // @flow
 import * as React from 'react';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
+import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 
 type Props = {
@@ -51,15 +47,13 @@ class WarningDialogPlain extends React.Component<Props> {
         const { onAbort, onSave, classes } = this.props;
         return (
             <React.Fragment>
-                <DialogTitle id="save-dialog-errors-and-warnings-title">
+                <ModalTitle id="save-dialog-errors-and-warnings-title">
                     {i18n.t('Validation warnings')}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {this.getContents()}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
+                </ModalTitle>
+                <ModalContent>
+                    {this.getContents()}
+                </ModalContent>
+                <ModalActions>
                     <div style={{ margin: '0 20px 12px 20px' }}>
                         <Button onClick={onAbort} color="primary">
                             {i18n.t('Back to form')}
@@ -73,7 +67,7 @@ class WarningDialogPlain extends React.Component<Props> {
                             {i18n.t('Save anyway')}
                         </Button>
                     </div>
-                </DialogActions>
+                </ModalActions>
             </React.Fragment>
         );
     }

@@ -546,6 +546,9 @@ msgstr "begin met typen om te zoeken"
 msgid "suggestions could not be retrieved"
 msgstr "suggesties konden niet worden opgehaald"
 
+msgid "No results found"
+msgstr "Geen resultaten gevonden"
+
 msgid "No items to display"
 msgstr "Geen items om weer te geven"
 
@@ -1000,9 +1003,6 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr "Mogelijke duplicaten gevonden"
 
-msgid "No results found"
-msgstr "Geen resultaten gevonden"
-
 msgid "An error occurred loading possible duplicates"
 msgstr "Er is een fout opgetreden bij het laden van mogelijke duplicaten"
 
@@ -1220,6 +1220,33 @@ msgstr "Markeer voor vervolg"
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr "Breedtegraad"
+
+msgid "Longitude"
+msgstr "Lengtegraad"
+
+msgid "Edit"
+msgstr "Bewerk"
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr ""
+
+msgid "Delete polygon"
+msgstr "Polygoon verwijderen"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "Gebied instellen"
+
 msgid "Enrollment date"
 msgstr "Inschrijvingsdatum"
 
@@ -1244,6 +1271,12 @@ msgstr "Laatst bijgewerkt {{datum}}"
 
 msgid "Cancelled"
 msgstr "Geannuleerd"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "Opmerkingen over deze inschrijving"
@@ -1377,9 +1410,6 @@ msgstr "Profielwidget kan niet worden geladen. Probeer het later opnieuw"
 
 msgid "{{TETName}} profile"
 msgstr "{{TETNaam}} profiel"
-
-msgid "Edit"
-msgstr "Bewerk"
 
 msgid "tracked entity instance"
 msgstr "gevolgd entiteitsexemplaar"
@@ -1632,12 +1662,6 @@ msgstr "Timen"
 
 msgid "Page {{currentPage}}"
 msgstr "Pagina {{huidigePagina}}"
-
-msgid "Delete polygon"
-msgstr "Polygoon verwijderen"
-
-msgid "Set area"
-msgstr "Gebied instellen"
 
 msgid "Area on map saved"
 msgstr "Gebied op kaart opgeslagen"

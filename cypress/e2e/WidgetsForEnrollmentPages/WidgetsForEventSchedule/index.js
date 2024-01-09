@@ -18,7 +18,7 @@ When('you click cancel in Schedule tab', () => {
 });
 
 Then('you should see confirm dialog', () => {
-    cy.get('[role="dialog"]')
+    cy.get('aside[role="dialog"]')
         .find('[data-test="dhis2-uicore-modaltitle"]')
         .contains('Discard unsaved changes?')
         .should('exist');

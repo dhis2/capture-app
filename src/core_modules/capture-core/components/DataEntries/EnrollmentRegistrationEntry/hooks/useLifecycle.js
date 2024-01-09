@@ -45,7 +45,7 @@ export const useLifecycle = (
     });
     useEffect(() => {
         dataEntryReadyRef.current = false;
-    }, [teiId]);
+    }, [teiId, selectedScopeId]);
 
     useEffect(() => {
         if (

@@ -1,16 +1,17 @@
 // @flow
+import { useMemo } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import type { apiProgramStage } from 'capture-core/metaDataStoreLoaders/programs/quickStoreOperations/types';
 import { Program } from '../../../../../metaData';
 
-export const useProgramStages = (program: Program, programStages?: Array<apiProgramStage>) => {
+export const useProgramStages = (program: Program, programStages?: Array<apiProgramStage>) => useMemo(() => {
     const stages = [];
     if (program && programStages) {
         program.stages.forEach((item) => {
             const { id, name, icon, stageForm } = item;
-            const { hideDueDate, programStageDataElements, repeatable } = programStages.find(p => p.id === id) || {};
+            const { hideDueDate, programStageDataElements, repeatable, enableUserAssignment } = programStages.find(p => p.id === id) || {};
             if (!programStageDataElements) {
                 log.error(errorCreator(i18n.t('Program stage not found'))(id));
             } else {
@@ -20,6 +21,7 @@ export const useProgramStages = (program: Program, programStages?: Array<apiProg
                     icon,
                     hideDueDate,
                     repeatable,
+                    enableUserAssignment,
                     description: stageForm.description,
                     dataElements: programStageDataElements?.reduce((acc, currentStageData) => {
                         const { displayInReports, dataElement } = currentStageData;
@@ -48,4 +50,4 @@ export const useProgramStages = (program: Program, programStages?: Array<apiProg
 
 
     return stages;
-};
+}, [program, programStages]);

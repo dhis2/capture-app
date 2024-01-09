@@ -1,9 +1,8 @@
 // @flow
 import * as React from 'react';
-import { colors, Button } from '@dhis2/ui';
+import { colors, Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { NewTemplateTextField } from './NewTemplateTextField.component';
 
 const getStyles = (theme: Theme) => ({
@@ -46,8 +45,8 @@ const NewTemplateContentsPlain = (props: Props) => {
 
     return (
         <React.Fragment>
-            <DialogTitle>{i18n.t('Save As view')}</DialogTitle>
-            <DialogContent>
+            <ModalTitle>{i18n.t('Save As view')}</ModalTitle>
+            <ModalContent>
                 <NewTemplateTextField
                     onBlur={nameBlurHandler}
                     className={classes.input}
@@ -64,8 +63,8 @@ const NewTemplateContentsPlain = (props: Props) => {
                 >
                     {error}
                 </div>
-            </DialogContent>
-            <DialogActions
+            </ModalContent>
+            <ModalActions
                 className={classes.buttonContainer}
             >
                 <Button onClick={onClose}>
@@ -74,7 +73,7 @@ const NewTemplateContentsPlain = (props: Props) => {
                 <Button onClick={handleSave} primary>
                     {i18n.t('Save')}
                 </Button>
-            </DialogActions>
+            </ModalActions>
         </React.Fragment>
     );
 };

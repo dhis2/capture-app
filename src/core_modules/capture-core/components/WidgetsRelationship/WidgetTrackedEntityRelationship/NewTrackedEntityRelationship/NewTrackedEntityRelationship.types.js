@@ -7,16 +7,19 @@ import type {
     OnSelectFindMode,
 } from '../WidgetTrackedEntityRelationship.types';
 
-type RenderTrackedEntitySearch =
-    (trackedEntityTypeId: string, programId: string, onLinkToTrackedEntity: OnLinkToTrackedEntityFromSearch) => React.Element<any>
+type RenderTrackedEntitySearch = (
+    trackedEntityTypeId: string,
+    programId: string,
+    onLinkToTrackedEntity: OnLinkToTrackedEntityFromSearch,
+) => React.Element<any>
 
-type RenderTrackedEntityRegistration =
-     (
-         trackedEntityTypeId: string,
-         programId: string,
-         onLinkToTrackedEntityFromRegistration: OnLinkToTrackedEntityFromRegistration,
-         onLinkToTrackedEntity: OnLinkToTrackedEntityFromSearch,
-     ) => React.Element<any>
+type RenderTrackedEntityRegistration = (
+     trackedEntityTypeId: string,
+     programId: string,
+     onLinkToTrackedEntityFromRegistration: OnLinkToTrackedEntityFromRegistration,
+     onLinkToTrackedEntity: OnLinkToTrackedEntityFromSearch,
+     onCancel: () => void,
+) => React.Element<any>
 
 export type ContainerProps = $ReadOnly<{|
     teiId: string,

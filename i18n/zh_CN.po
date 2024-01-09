@@ -77,7 +77,7 @@ msgstr "错误"
 
 msgid ""
 "Plugins are not yet available - Please contact your system administrator"
-msgstr ""
+msgstr "插件尚不可用 - 请联系您的系统管理员"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -158,10 +158,10 @@ msgid "Complete event"
 msgstr "完成事件"
 
 msgid "{{ stageName }} - Basic info"
-msgstr ""
+msgstr "{{ stageName }} - 基本信息"
 
 msgid "{{ stageName }} - Status"
-msgstr ""
+msgstr "{{ stageName }} - 状态"
 
 msgid "Please select {{categoryName}}"
 msgstr "请选择{{categoryName}}"
@@ -182,10 +182,10 @@ msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
 msgid "{{ stageName }} - Details"
-msgstr ""
+msgstr "{{ stageName }} - 详细信息"
 
 msgid "{{ stageName }} - {{ sectionName }}"
-msgstr ""
+msgstr "{{ 阶段名称 }} - {{ 部分名称 }}"
 
 msgid "Assigned user"
 msgstr "分配的用户"
@@ -284,7 +284,7 @@ msgid ""
 msgstr "离开本页将丢掉你的新关系的选择"
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "是的，放弃更改"
 
 msgid "No, cancel"
 msgstr "不，取消"
@@ -383,7 +383,7 @@ msgstr "运作中"
 msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
-msgstr ""
+msgstr "此事件有未保存的更改。离开此页面而不保存将丢失这些更改。您确定要放弃未保存的更改吗？"
 
 msgid "No events to display"
 msgstr "无事件可显示"
@@ -494,7 +494,7 @@ msgid "Select image"
 msgstr "选择图像"
 
 msgid "Type to filter options"
-msgstr ""
+msgstr "输入筛选选项"
 
 msgid "No match found"
 msgstr "未找到匹配项"
@@ -522,6 +522,9 @@ msgstr "开始输入搜索内容"
 
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"
+
+msgid "No results found"
+msgstr "没有结果"
 
 msgid "No items to display"
 msgstr "无条目可显示"
@@ -596,13 +599,13 @@ msgid "Write comment"
 msgstr "写备注"
 
 msgid "was blanked out and hidden by your last action"
-msgstr ""
+msgstr "被你的最后一个动作清空并隐藏"
 
 msgid "Notice"
-msgstr ""
+msgstr "注意"
 
 msgid "Close the notice"
-msgstr ""
+msgstr "关闭通知"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "为 {{programName}} 使用新的注册仪表板"
@@ -768,7 +771,7 @@ msgid "Refer"
 msgstr "转诊"
 
 msgid "You can't add any more {{ programStageName }} events"
-msgstr ""
+msgstr "您无法添加更多的 {{ programStageName }} 事件"
 
 msgid "Cancel without saving"
 msgstr "取消而不保存"
@@ -832,7 +835,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}的新报名"
 
 msgid "Save {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "保存{{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"
@@ -939,13 +942,10 @@ msgid "Search by attributes"
 msgstr "按属性搜索"
 
 msgid "Could not retrieve metadata. Please try again later."
-msgstr ""
+msgstr "无法检索元数据。请稍后再试。"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
-
-msgid "No results found"
-msgstr "没有结果"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
@@ -1145,7 +1145,34 @@ msgid "Mark for follow-up"
 msgstr "后续标记"
 
 msgid "Existing dates for auto-generated events will not be updated."
+msgstr "自动生成的事件的现有日期将不会更新。"
+
+msgid "Latitude"
+msgstr "纬度"
+
+msgid "Longitude"
+msgstr "经度"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Set coordinates"
 msgstr ""
+
+msgid "Coordinates"
+msgstr "坐标"
+
+msgid "Delete polygon"
+msgstr "删除多边形"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr "设置区域"
 
 msgid "Enrollment date"
 msgstr "报名日期"
@@ -1170,6 +1197,12 @@ msgstr "最近更新的{{date}}"
 
 msgid "Cancelled"
 msgstr "已取消"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "关于本次报名的评论"
@@ -1293,9 +1326,6 @@ msgstr "无法加载个人资料窗口小部件。请稍后再试"
 msgid "{{TETName}} profile"
 msgstr "{{TETName}}个人资料"
 
-msgid "Edit"
-msgstr "编辑"
-
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
 
@@ -1333,38 +1363,38 @@ msgid "Stages and Events"
 msgstr "阶段与活动"
 
 msgid "New TEI Relationship"
-msgstr ""
+msgstr "新的 TEI 关系"
 
 msgid "Missing implementation step"
-msgstr ""
+msgstr "缺少实施步骤"
 
 msgid "Go back without saving relationship"
-msgstr ""
+msgstr "不保存关系返回"
 
 msgid "New Relationship"
-msgstr ""
+msgstr "新关系"
 
 msgid "Link to an existing {{tetName}}"
-msgstr ""
+msgstr "链接到现有的 {{tetName}}"
 
 msgid "An error occurred while adding the relationship"
-msgstr ""
+msgstr "添加关系时出错"
 
 msgid ""
 "Something went wrong while loading relationships. Please try again later."
-msgstr ""
+msgstr "加载关系时出现问题。请稍后再试。"
 
 msgid "{{trackedEntityTypeName}} relationships"
-msgstr ""
+msgstr "{{trackedEntityTypeName}} 关系"
 
 msgid "To open this relationship, please wait until saving is complete"
-msgstr ""
+msgstr "要打开此关系，请等待保存完成"
 
 msgid "Type"
 msgstr "类型"
 
 msgid "Created date"
-msgstr ""
+msgstr "创建日期"
 
 msgid "Program stage name"
 msgstr "项目阶段名称"
@@ -1542,12 +1572,6 @@ msgstr "到时间"
 
 msgid "Page {{currentPage}}"
 msgstr "第{{currentPage}}页"
-
-msgid "Delete polygon"
-msgstr "删除多边形"
-
-msgid "Set area"
-msgstr "设置区域"
 
 msgid "Area on map saved"
 msgstr "地图上的区域已保存"
