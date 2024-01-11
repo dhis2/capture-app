@@ -9,12 +9,21 @@ import {
     Button,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import type { TransferModalProps } from './TransferModal.types';
 import { OrgUnitField } from './OrgUnitField/OrgUnitField.component';
 
-export const TransferModal = ({ onUpdate, enrollment, setOpenTransfer }: TransferModalProps) => {
-    const [selectedOrgUnit, setSelectedOrgUnit] = useState([]);
+export const TransferModal = ({
+    enrollment,
+    setOpenTransfer,
+    onUpdateOwnership,
+}: TransferModalProps) => {
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState();
+
+    const onUpdate = (updatedOrgUnitId) => {
+        onUpdateOwnership(updatedOrgUnitId);
+    };
+
     return (
         <Modal
             large
@@ -41,7 +50,15 @@ export const TransferModal = ({ onUpdate, enrollment, setOpenTransfer }: Transfe
                     >
                         {i18n.t('Cancel')}
                     </Button>
-                    <Button primary>
+                    <Button
+                        primary
+                        disabled={!selectedOrgUnit}
+                        onClick={() => {
+                            if (!selectedOrgUnit) return;
+                            onUpdate(selectedOrgUnit.id);
+                            setOpenTransfer(false);
+                        }}
+                    >
                         {i18n.t('Transfer')}
                     </Button>
                 </ButtonStrip>

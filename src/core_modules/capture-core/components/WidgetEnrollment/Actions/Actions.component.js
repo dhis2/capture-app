@@ -34,6 +34,7 @@ export const ActionsPlain = ({
     canAddNew,
     onUpdate,
     onDelete,
+    onUpdateOwnership,
     onAddNew,
     loading,
     onlyEnrollOnce,
@@ -123,8 +124,8 @@ export const ActionsPlain = ({
             {isOpenTransfer && (
                 <TransferModal
                     enrollment={enrollment}
-                    onUpdate={handleOnUpdate}
                     setOpenTransfer={setOpenTransfer}
+                    onUpdateOwnership={onUpdateOwnership}
                 />
             )}
         </>

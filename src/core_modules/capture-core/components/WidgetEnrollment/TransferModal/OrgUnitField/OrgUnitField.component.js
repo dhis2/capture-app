@@ -22,7 +22,7 @@ const styles = {
         maxHeight: 300,
         overflowY: 'auto',
         margin: '10px 0',
-        padding: '0 8px'
+        padding: '0 8px',
     },
 };
 
@@ -46,6 +46,8 @@ export const OrgUnitFieldPlain = ({ onSelect, selectedOrgUnit, classes }: Props)
         return <div>Loading...</div>;
     }
 
+    const selectedPath = [selectedOrgUnit?.path];
+    console.log('selectedPath', selectedPath);
     return (
         <>
             <div className={classes.root}>
@@ -59,9 +61,9 @@ export const OrgUnitFieldPlain = ({ onSelect, selectedOrgUnit, classes }: Props)
                 <div className={classes.orgUnitTreeContainer}>
                     <OrganisationUnitTree
                         roots={searchOrgUnits}
-                        selected={selectedOrgUnit}
+                        selected={selectedOrgUnit ? [selectedOrgUnit?.path] : []}
                         singleSelection
-                        onChange={orgUnit => onSelect(orgUnit.selected)}
+                        onChange={orgUnit => onSelect(orgUnit)}
                     />
                 </div>
             </div>
