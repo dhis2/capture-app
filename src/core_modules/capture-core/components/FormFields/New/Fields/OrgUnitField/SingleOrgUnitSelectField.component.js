@@ -13,7 +13,7 @@ const getStyles = () => ({
 
 type OrgUnitValue = {
     id: string,
-    displayName: string,
+    name: string,
     path: string,
 }
 
@@ -44,7 +44,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, State> {
         const { classes } = this.props;
         return (
             <div className={classes.selectedOrgUnitContainer}>
-                <Chip onRemove={this.onDeselectOrgUnit}>{selectedOrgUnit.displayName}</Chip>
+                <Chip onRemove={this.onDeselectOrgUnit}>{selectedOrgUnit.name}</Chip>
             </div>
         );
     }
@@ -52,7 +52,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, State> {
     onSelectOrgUnit = (orgUnit: Object) => {
         this.props.onBlur({
             id: orgUnit.id,
-            displayName: orgUnit.displayName,
+            name: orgUnit.displayName,
             path: orgUnit.path,
         });
     }

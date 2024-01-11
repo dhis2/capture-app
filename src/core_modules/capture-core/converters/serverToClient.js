@@ -11,6 +11,15 @@ function convertTime(d2Value: string) {
     return parseData.momentTime;
 }
 
+const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) =>
+    ((assignedUser && assignedUser.uid) ? {
+        id: assignedUser.uid,
+        name: assignedUser.displayName,
+        username: assignedUser.username,
+        firstName: assignedUser.firstName,
+        surname: assignedUser.surname,
+    } : null);
+
 const optionSetConvertersForType = {
     [dataElementTypes.NUMBER]: parseNumber,
     [dataElementTypes.INTEGER]: parseNumber,
@@ -51,6 +60,7 @@ const valueConvertersForType = {
         return { latitude: arr[1], longitude: arr[0] };
     },
     [dataElementTypes.POLYGON]: () => 'Polygon',
+    [dataElementTypes.ASSIGNEE]: convertAssignedUserToClient,
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {

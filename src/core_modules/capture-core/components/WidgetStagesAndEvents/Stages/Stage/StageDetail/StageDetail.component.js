@@ -66,6 +66,7 @@ const StageDetailPlain = (props: Props) => {
         dataElements,
         hideDueDate = false,
         repeatable = false,
+        enableUserAssignment = false,
         onEventClick,
         onViewAll,
         onCreateNew,
@@ -76,7 +77,7 @@ const StageDetailPlain = (props: Props) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, stage?.stageForm);
+    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElements, events);
 
 

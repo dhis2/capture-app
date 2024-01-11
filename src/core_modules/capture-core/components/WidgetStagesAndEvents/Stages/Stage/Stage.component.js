@@ -30,7 +30,7 @@ const hideProgramStage = (ruleEffects, stageId) => (
 
 export const StagePlain = ({ stage, events, classes, className, onCreateNew, ruleEffects, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const { id, name, icon, description, dataElements, hideDueDate, repeatable } = stage;
+    const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const hiddenProgramStage = hideProgramStage(ruleEffects, id);
 
     return (
@@ -57,6 +57,7 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                     dataElements={dataElements}
                     hideDueDate={hideDueDate}
                     repeatable={repeatable}
+                    enableUserAssignment={enableUserAssignment}
                     onCreateNew={onCreateNew}
                     hiddenProgramStage={hiddenProgramStage}
                     {...passOnProps}

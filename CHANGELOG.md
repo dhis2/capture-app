@@ -1,3 +1,31 @@
+## [100.50.3](https://github.com/dhis2/capture-app/compare/v100.50.2...v100.50.3) (2023-12-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c92b38e](https://github.com/dhis2/capture-app/commit/c92b38e8f775d20476fc0e2619f95ba48377ec5a))
+
+## [100.50.2](https://github.com/dhis2/capture-app/compare/v100.50.1...v100.50.2) (2023-12-20)
+
+
+### Bug Fixes
+
+* [TECH-1676] cypress test deleting wrong working list template ([#3489](https://github.com/dhis2/capture-app/issues/3489)) ([b5e038b](https://github.com/dhis2/capture-app/commit/b5e038b823128386f7106da46025a2a38a00db1b))
+
+## [100.50.1](https://github.com/dhis2/capture-app/compare/v100.50.0...v100.50.1) (2023-12-20)
+
+
+### Bug Fixes
+
+* [DHIS2-16317] Incorrect error message on orgUnit type data element ([#3484](https://github.com/dhis2/capture-app/issues/3484)) ([ef30449](https://github.com/dhis2/capture-app/commit/ef304499fda3296320ca71fae72d33f2dfad88fa))
+
+# [100.50.0](https://github.com/dhis2/capture-app/compare/v100.49.0...v100.50.0) (2023-12-18)
+
+
+### Features
+
+* [DHIS-11419] display assigned users on events in enrollment overview page ([#3453](https://github.com/dhis2/capture-app/issues/3453)) ([44fb2be](https://github.com/dhis2/capture-app/commit/44fb2bedf0e2f9d394c58d5a588087cff2c8fa3c))
+
 # [100.49.0](https://github.com/dhis2/capture-app/compare/v100.48.0...v100.49.0) (2023-12-18)
 
 
