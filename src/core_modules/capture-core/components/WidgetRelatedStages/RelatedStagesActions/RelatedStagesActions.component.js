@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Radio, colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
+import { Radio, colors, spacers, spacersNum, IconInfo16, Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
 import { DataSection } from '../../DataSection';
@@ -30,6 +30,9 @@ const styles = () => ({
     fieldContent: {
         flexGrow: 1,
         flexShrink: 0,
+    },
+    clearSelections: {
+        marginTop: spacers.dp8,
     },
     infoBox: {
         margin: '8px 8px',
@@ -90,6 +93,17 @@ export const RelatedStagesActionsPlain = ({
                     <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
                     : null
                 }
+                {!!selectedAction && (
+                    <div className={classes.clearSelections}>
+                        <Button
+                            secondary
+                            small
+                            onClick={() => updateSelectedAction('')}
+                        >
+                            {i18n.t('Clear selection')}
+                        </Button>
+                    </div>
+                )}
             </div>
 
             {selectedAction === RelatedStagesActionTypes.SCHEDULE_IN_ORG && (
@@ -127,6 +141,7 @@ export const RelatedStagesActionsPlain = ({
                     saveAttempted={saveAttempted}
                 />
             )}
+
         </DataSection>);
 };
 

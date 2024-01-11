@@ -17,7 +17,7 @@ type OrgUnitValue = {|
     checked: boolean,
     id: string,
     children: number,
-    displayName: string,
+    name: string,
     path: string,
     selected: string[],
 |}
