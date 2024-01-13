@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2021
+# Philip Larsen Donnelly, 2020
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2022
+# Karoline Tufte Lien <karoline@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2022\n"
-"Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
+"Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -650,7 +650,7 @@ msgstr ""
 "{{tetName}}."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr "Registrer en ny {{teiDisplayName}} i dette programmet"
+msgstr "Registrer en ny {{selectedTetName}} i dette programmet"
 
 msgid "{{programName}} is an event program and does not have enrollments."
 msgstr "{{programName}} er et hendelsesprogram og har ikke registreringer."
