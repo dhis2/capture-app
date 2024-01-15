@@ -5,6 +5,7 @@ import { CancelButton } from './CancelButton.container';
 type Props = {
     id: string,
     onCancel: () => void,
+    cancelButtonIsDisabled?: boolean,
     cancelButtonRef?: ?Function,
 };
 
@@ -22,7 +23,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
         getWrappedInstance = () => this.innerInstance;
 
         render() {
-            const { onCancel, cancelButtonRef, ...passOnProps } = this.props;
+            const { onCancel, cancelButtonIsDisabled, cancelButtonRef, ...passOnProps } = this.props;
             const options = (optionsFn && optionsFn(this.props)) || {};
 
             return (
@@ -34,6 +35,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
                             id={this.props.id}
                             onCancel={onCancel}
                             options={options}
+                            disabled={cancelButtonIsDisabled}
                         />
                     }
                     {...passOnProps}

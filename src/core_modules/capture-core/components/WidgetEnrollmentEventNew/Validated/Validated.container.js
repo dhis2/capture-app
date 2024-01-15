@@ -1,15 +1,23 @@
 // @flow
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
 import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
-import { requestSaveEvent, startCreateNewAfterCompleting } from './validated.actions';
-import type { ContainerProps } from './validated.types';
+import {
+    cleanUpEventSaveInProgress,
+    newEventBatchActionTypes,
+    requestSaveEvent,
+    setSaveEnrollmentEventInProgress,
+    startCreateNewAfterCompleting,
+} from './validated.actions';
+import type { ContainerProps, ReferralRefPayload } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
-import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
+import { useBuildNewEventPayload } from './useBuildNewEventPayload';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
@@ -29,6 +37,20 @@ export const Validated = ({
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
+    const referralRef = useRef<ReferralRefPayload | null>(null);
+    const eventSaveInProgress = useSelector(
+        ({ enrollmentDomain }) => !!enrollmentDomain.eventSaveInProgress?.requestEventId,
+    );
+    const { buildNewEventPayload } = useBuildNewEventPayload({
+        dataEntryId,
+        itemId,
+        programId: program.id,
+        orgUnitId: orgUnit.id,
+        orgUnitName: orgUnit.name,
+        teiId,
+        enrollmentId,
+        formFoundation,
+    });
 
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
@@ -44,72 +66,59 @@ export const Validated = ({
         rulesExecutionDependenciesClientFormatted,
     });
 
-
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, program.id);
 
     const dispatch = useDispatch();
     const handleSave = useCallback((
-        eventId: string,
+        dataEntryItemId: string,
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
-        saveType?: ?string,
+        saveType: ?$Values<typeof addEventSaveTypes>,
     ) => {
-        window.scrollTo(0, 0);
-        const completed = saveType === addEventSaveTypes.COMPLETE;
-        dispatch(requestSaveEvent({
-            eventId,
-            dataEntryId: dataEntryIdArgument,
-            formFoundation: formFoundationArgument,
-            completed,
-            programId: program.id,
-            orgUnitId: orgUnit.id,
-            orgUnitName: orgUnit.name || '',
-            teiId,
-            enrollmentId,
-            onSaveExternal,
-            onSaveSuccessActionType,
-            onSaveErrorActionType,
-        }));
-    }, [
-        dispatch,
-        program.id,
-        orgUnit,
-        teiId,
-        enrollmentId,
-        onSaveExternal,
-        onSaveSuccessActionType,
-        onSaveErrorActionType,
-    ]);
+        // window.scrollTo(0, 0);
+        const {
+            clientRequestEvent,
+            formHasError,
+            referralEvent,
+            relationship,
+            referralMode,
+        } = buildNewEventPayload(saveType, referralRef);
+
+        if (formHasError) return;
+
+        dispatch(batchActions([
+            requestSaveEvent({
+                requestEvent: clientRequestEvent,
+                referralEvent,
+                relationship,
+                referralMode,
+                onSaveExternal,
+                onSaveSuccessActionType,
+                onSaveErrorActionType,
+            }),
+            // stores meta in redux to be used when navigating after save
+            setSaveEnrollmentEventInProgress({
+                requestEventId: clientRequestEvent?.event,
+                referralEventId: referralEvent?.event,
+                referralOrgUnitId: referralEvent?.orgUnit,
+                referralMode,
+            }),
+        ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS),
+        );
+    }, [buildNewEventPayload, onSaveExternal, dispatch, onSaveSuccessActionType, onSaveErrorActionType]);
 
     const handleCreateNew = useCallback((isCreateNew?: boolean) => {
-        dispatch(requestSaveEvent({
-            eventId: itemId,
-            dataEntryId,
-            formFoundation,
-            completed: true,
-            programId: program.id,
-            orgUnitId: orgUnit.id,
-            orgUnitName: orgUnit.name || '',
-            teiId,
-            enrollmentId,
-            onSaveExternal,
-            onSaveSuccessActionType,
-            onSaveErrorActionType,
-        }));
+        handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
+
         dispatch(startCreateNewAfterCompleting({
             enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId, availableProgramStages,
         }));
-    }, [dispatch,
-        program.id,
-        orgUnit,
-        teiId,
-        enrollmentId,
-        onSaveExternal,
-        onSaveSuccessActionType,
-        onSaveErrorActionType,
-        formFoundation,
-        availableProgramStages,
-    ]);
+    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
+
+    // Clean up data entry on unmount in case the user navigates away, stopping delayed navigation
+    useEffect(() => () => {
+        dispatch(cleanUpEventSaveInProgress());
+    }, [dispatch]);
 
     return (
         <AskToCreateNewHandlerHOC
@@ -117,13 +126,17 @@ export const Validated = ({
             stage={stage}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             availableProgramStages={availableProgramStages}
+            eventSaveInProgress={eventSaveInProgress}
             ready={ready}
             id={dataEntryId}
             itemId={itemId}
+            enrollmentId={enrollmentId}
             formFoundation={formFoundation}
+            referralRef={referralRef}
             onSave={handleSave}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}
+            programId={program.id}
             programName={program.name}
             orgUnit={orgUnit}
             rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}

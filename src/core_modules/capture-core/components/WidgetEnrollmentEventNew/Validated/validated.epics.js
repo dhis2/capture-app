@@ -1,50 +1,42 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { v4 as uuid } from 'uuid';
 import { map } from 'rxjs/operators';
-import { newEventWidgetActionTypes, saveEvent } from './validated.actions';
+import { newEventBatchActionTypes, newEventWidgetActionTypes, saveEvents } from './validated.actions';
 
-import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedAddEvent';
-
-export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveNewEnrollmentEventEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(newEventWidgetActionTypes.EVENT_SAVE_REQUEST),
+        ofType(
+            newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS,
+        ),
+        map(actionBatch =>
+            actionBatch
+                .payload
+                .find(action => action.type === newEventWidgetActionTypes.EVENT_SAVE_REQUEST),
+        ),
         map((action) => {
-            const state = store.value;
-            const uid = uuid();
             const {
-                formFoundation,
-                dataEntryId,
-                eventId,
-                completed,
-                programId,
-                orgUnitId,
-                orgUnitName,
-                teiId,
-                enrollmentId,
+                requestEvent,
+                referralEvent,
+                relationship,
+                referralMode,
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             } = action.payload;
 
-            const dataEntryKey = getDataEntryKey(dataEntryId, eventId);
-            const { formClientValues, mainDataClientValues }
-                = getNewEventClientValues(state, dataEntryKey, formFoundation);
+            const serverData = referralEvent ? {
+                events: [requestEvent, referralEvent],
+                relationships: [relationship],
+            } : {
+                events: [requestEvent],
+            };
 
-            const serverData = getAddEventEnrollmentServerData({
-                formFoundation,
-                formClientValues,
-                mainDataClientValues,
-                programId,
-                orgUnitId,
-                orgUnitName,
-                teiId,
-                enrollmentId,
-                completed,
+            onSaveExternal && onSaveExternal({ referralMode, ...serverData });
+            return saveEvents({
+                serverData,
+                onSaveSuccessActionType,
+                onSaveErrorActionType,
+                ...action.payload,
             });
-
-            onSaveExternal && onSaveExternal(serverData, uid);
-            return saveEvent(serverData, onSaveSuccessActionType, onSaveErrorActionType, uid);
         }),
     );

@@ -9,6 +9,7 @@ import {
 } from './WidgetEventSchedule.actions';
 import { statusTypes } from '../../events/statusTypes';
 import { convertCategoryOptionsToServer } from '../../converters/clientToServer';
+import { generateUID } from '../../utils/uid/generateUID';
 
 export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -23,7 +24,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
                 stageId,
                 teiId,
                 enrollmentId,
-                eventId,
+                eventId = generateUID(),
                 categoryOptions,
                 onSaveExternal,
                 onSaveSuccessActionType,

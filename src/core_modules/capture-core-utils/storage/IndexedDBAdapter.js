@@ -78,7 +78,7 @@ export class IndexedDBAdapter {
         });
     }
 
-    static get(store, key, db, keyPath) {
+    static get(store, key, options, db, keyPath) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -105,11 +105,13 @@ export class IndexedDBAdapter {
                 const request = objectStore.get(key);
                 request.onsuccess = (e) => {
                     const object = e.target.result;
+                    const { project } = options || {};
 
                     if (isDefined(object)) {
                         object[keyPath] = key;
                     }
-                    resultObject = object;
+
+                    resultObject = project ? project(object) : object;
                 };
             } catch (error) {
                 if (tx) {
@@ -392,8 +394,8 @@ export class IndexedDBAdapter {
         });
     }
 
-    get(store, key) {
-        return IndexedDBAdapter.get(store, key, this.db, this.keyPath);
+    get(store, key, options) {
+        return IndexedDBAdapter.get(store, key, options, this.db, this.keyPath);
     }
 
     // eslint-disable-next-line class-methods-use-this
