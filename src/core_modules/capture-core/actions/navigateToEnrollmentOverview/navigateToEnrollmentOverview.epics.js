@@ -40,10 +40,15 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         switchMap((action) => {
             const { teiId, programId, orgUnitId } = action.payload;
             const enrollmentId = programId && (action.payload?.enrollmentId || 'AUTO');
-            const { dataStore, userDataStore, temp } = store.value.useNewDashboard;
+            const { dataStore, userDataStore } = store.value.useNewDashboard;
 
             if (dataStore || userDataStore) {
-                const shouldRedirectToEnrollmentDashboard = shouldUseNewDashboard(userDataStore, dataStore, temp, programId);
+                const shouldRedirectToEnrollmentDashboard = shouldUseNewDashboard({
+                    userDataStore,
+                    dataStore,
+                    programId,
+                    teiId,
+                });
                 if (shouldRedirectToEnrollmentDashboard) {
                     redirectToEnrollmentDashboard({ dependencies, teiId, programId, orgUnitId, enrollmentId });
                     return EMPTY;

@@ -37,12 +37,11 @@ Feature: User interacts with Main page
 
     Scenario: The admin user can optin to use the new Enrollment Dashboard
         Given you open the main page with Ngelehun and child programme context
-        And you see the opt in component for Child Programme
-        When you opt in to use the new enrollment Dashboard for Child Programme
-        Then you see the opt out component for Child Programme
+        And you see the opt out component for Child Programme
         When you opt out to use the new enrollment Dashboard for Child Programme
         Then you see the opt in component for Child Programme
-
+        When you opt in to use the new enrollment Dashboard for Child Programme
+        Then you see the opt out component for Child Programme
     @v<41
     Scenario: The icon is rendered as an svg
         Given you are in the main page with no selections made

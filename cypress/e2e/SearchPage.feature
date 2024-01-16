@@ -27,7 +27,7 @@ Feature: User interacts with Search page
         When you select the search domain WHO RMNCH Tracker
         And you fill in the unique identifier field with values that will return a tracked entity instance
         And you click find
-        Then you are navigated to the Tracker Capture
+        Then you are navigated to the enrollment dashboard page
 
     # Scenario: Searching using attributes in Tracker Program returns no results
     #     Given you are on the default search page
@@ -102,7 +102,7 @@ Feature: User interacts with Search page
         And you click search
         And you can see the first page of the results
         And you click the view dashboard button
-        Then you are navigated to the Tracker Capture
+        Then you are navigated to the enrollment dashboard page
 
     Scenario: Searching using attributes in TEType navigates user to dashboard view
         Given you are on the default search page
@@ -112,7 +112,7 @@ Feature: User interacts with Search page
         And you click search
         And you can see the first page of the results
         And you click the view dashboard button
-        Then you are navigated to the Tracker Capture without program
+        Then you are navigated to the enrollment dashboard page without enrollment
 
     Scenario: Searching using attributes in Tracker Program domain has disabled pagination
         Given you are on the default search page
@@ -164,7 +164,7 @@ Feature: User interacts with Search page
         Given you are on the default search page
         When you select the search domain WHO RMNCH Tracker
         And you press enter after filling in the unique identifier field with values that will return a tracked entity instance
-        Then you are navigated to the Tracker Capture 
+        Then you are navigated to the enrollment dashboard page
 
     Scenario: Pressing enter should trigger search attributes returns results
         Given you are in the search page with the Child Programme being preselected from the url

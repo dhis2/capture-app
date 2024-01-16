@@ -12,10 +12,6 @@ Given('the tei created by this test is cleared from the database', () => {
             ));
 });
 
-And('you opt temporarily in on new enrollment dashboard in Child programme and WHO RMNCH Tracker', () => {
-    cy.visit('/#/?newDashboard=IpHINAT79UW,WSGAb5XwJ3Y');
-});
-
 And('you create a new tei in Child programme from Ngelehun CHC', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW');
     cy.get('[data-test="capture-ui-input"]')

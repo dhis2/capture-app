@@ -155,12 +155,15 @@ Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
     cy.contains(message).should(not ? 'not.exist' : 'exist'),
 );
 
-And('you navigated to the enrollment dashboard page', () => {
-    cy.url().should('include', 'enrollment?enrollmentId');
+And('you are navigated to the enrollment dashboard page', () => {
+    cy.url().should('include', 'enrollment?');
+    cy.url().should('include', 'enrollmentId');
 });
 
-And('you navigated to the enrollment dashboard page without enrollment', () => {
-    cy.url().should('include', 'enrollment?orgUnit');
+And('you are navigated to the enrollment dashboard page without enrollment', () => {
+    cy.url().should('include', 'enrollment?');
+    cy.url().should('not.include', 'enrollmentId');
+    cy.url().should('include', 'teiId');
 });
 
 Then('you should see no results found', () => {
