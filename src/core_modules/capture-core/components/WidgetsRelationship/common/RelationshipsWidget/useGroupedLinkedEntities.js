@@ -8,7 +8,7 @@ import { dataElementTypes } from '../../../../metaData';
 import { RELATIONSHIP_ENTITIES } from '../constants';
 import { convertClientToList, convertServerToClient } from '../../../../converters';
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
-import type { InputRelationshipData, RelationshipTypes } from '../Types';
+import type { ApiLinkedEntity, InputRelationshipData, RelationshipTypes } from '../Types';
 
 
 const getFallbackFieldsByRelationshipEntity = {
@@ -137,18 +137,19 @@ const getLinkedEntityData = (apiLinkedEntity, relationshipCreatedAt, pendingApiR
     return null;
 };
 
-const determineLinkedEntity = (fromEntity, toEntity, sourceId) => {
-    if (fromEntity.trackedEntity?.trackedEntity === sourceId || fromEntity.event?.event === sourceId) {
-        return toEntity;
-    }
+export const determineLinkedEntity =
+    (fromEntity: ApiLinkedEntity, toEntity: ApiLinkedEntity, sourceId: string): ApiLinkedEntity | null => {
+        if (fromEntity.trackedEntity?.trackedEntity === sourceId || fromEntity.event?.event === sourceId) {
+            return toEntity;
+        }
 
-    if (toEntity.trackedEntity?.trackedEntity === sourceId || toEntity.event?.event === sourceId) {
-        return fromEntity;
-    }
+        if (toEntity.trackedEntity?.trackedEntity === sourceId || toEntity.event?.event === sourceId) {
+            return fromEntity;
+        }
 
-    log.error(errorCreator('Could not determine linked entity')({ fromEntity, toEntity, sourceId }));
-    return null;
-};
+        log.error(errorCreator('Could not determine linked entity')({ fromEntity, toEntity, sourceId }));
+        return null;
+    };
 
 export const useGroupedLinkedEntities = (
     sourceId: string,
@@ -181,6 +182,10 @@ export const useGroupedLinkedEntities = (
 
             const apiLinkedEntity = determineLinkedEntity(fromEntity, toEntity, sourceId);
             if (!apiLinkedEntity) {
+                return accGroupedLinkedEntities;
+            }
+
+            if (!relationshipType.bidirectional && apiLinkedEntity === fromEntity) {
                 return accGroupedLinkedEntities;
             }
 

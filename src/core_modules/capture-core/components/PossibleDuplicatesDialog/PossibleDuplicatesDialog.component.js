@@ -1,8 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
+import { Modal, ModalActions } from '@dhis2/ui';
 import { ReviewDialogContents } from './ReviewDialogContents/ReviewDialogContents.container';
 import type { RenderCustomCardActions } from '../CardList/CardList.types';
 
@@ -15,37 +13,29 @@ type Props = {|
     selectedScopeId: string
 |};
 
-const StyledDialogActions = withStyles({
-    root: { margin: 24 },
-})(DialogActions);
-
 class ReviewDialogClass extends React.Component<Props > {
-    static paperProps = {
-        style: {
-            maxHeight: 'calc(100% - 100px)',
-        },
-    };
-
     render() {
         const { open, onCancel, extraActions, selectedScopeId, dataEntryId, renderCardActions } = this.props;
 
+        if (!open) {
+            return null;
+        }
+
         return (
-            <Dialog
-                open={open}
+            <Modal
+                hide={!open}
+                dataTest={'duplicates-modal'}
                 onClose={onCancel}
-                maxWidth="sm"
-                fullWidth
-                PaperProps={PossibleDuplicatesDialog.paperProps}
             >
                 <ReviewDialogContents
                     dataEntryId={dataEntryId}
                     selectedScopeId={selectedScopeId}
                     renderCardActions={renderCardActions}
                 />
-                <StyledDialogActions>
+                <ModalActions>
                     {extraActions}
-                </StyledDialogActions>
-            </Dialog>
+                </ModalActions>
+            </Modal>
         );
     }
 }

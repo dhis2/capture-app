@@ -12,7 +12,7 @@ const styles = {
     },
 };
 
-const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharingType }: Props) => {
+const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharingType, dataTest }: Props) => {
     const { refetch } = useDataQuery(
         useMemo(
             () => ({
@@ -61,6 +61,7 @@ const SharingDialogPlain = ({ onClose, open, templateId, classes, templateSharin
                 id={templateId}
                 onClose={handleClose}
                 className={classes.dialog}
+                dataTest={dataTest}
             /> : null
     );
 };

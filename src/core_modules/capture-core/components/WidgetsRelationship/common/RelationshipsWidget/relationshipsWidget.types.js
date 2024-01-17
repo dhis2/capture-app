@@ -6,11 +6,11 @@ import type { LinkedRecordClick } from './types';
 export type Props = $ReadOnly<{|
     title: string,
     relationships?: Array<InputRelationshipData>,
-    cachedRelationshipTypes?: RelationshipTypes,
+    relationshipTypes: RelationshipTypes,
     isLoading: boolean,
     sourceId: string,
     onLinkedRecordClick: LinkedRecordClick,
-    children: (relationshipTypes: RelationshipTypes) => Node,
+    children: Node,
 |}>;
 
 export type StyledProps = $ReadOnly<{|

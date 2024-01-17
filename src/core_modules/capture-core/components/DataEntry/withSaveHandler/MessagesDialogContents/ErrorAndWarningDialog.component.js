@@ -1,12 +1,8 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
+import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     errors: {
@@ -134,17 +130,15 @@ class ErrorAndWarningDialogPlain extends React.Component<Props> {
     render() {
         return (
             <React.Fragment>
-                <DialogTitle id="save-dialog-errors-and-warnings-title">
+                <ModalTitle id="save-dialog-errors-and-warnings-title">
                     {i18n.t('Validation errors and warnings')}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {this.getContents()}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
+                </ModalTitle>
+                <ModalContent>
+                    {this.getContents()}
+                </ModalContent>
+                <ModalActions>
                     {this.getButtons()}
-                </DialogActions>
+                </ModalActions>
             </React.Fragment>
         );
     }

@@ -20,6 +20,9 @@ import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunc
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
+import {
+    FieldElementObjectTypes,
+} from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -139,7 +142,7 @@ export class EnrollmentFactory {
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
             if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
                 const attributes = trackedEntityAttribute.fieldMap
-                    .filter(attributeField => attributeField.objectType === 'Attribute')
+                    .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
                     .reduce((acc, attribute) => {
                         acc[attribute.IdFromApp] = attribute;
                         return acc;
@@ -154,7 +157,7 @@ export class EnrollmentFactory {
                 });
 
                 await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
-                    if (field.objectType && field.objectType === 'dataElement') {
+                    if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                         const fieldElement = await this.dataElementFactory.build(field, section);
                         if (!fieldElement) return;
 
