@@ -4,7 +4,7 @@ import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects 
 import { type RenderFoundation, dataElementTypes } from '../metaData';
 
 const isValidOptionSet = (optionSets, effectValue) => {
-    if (!optionSets || !optionSets.options || effectValue === null || effectValue === '') {
+    if (!optionSets.options || effectValue === null || effectValue === '') {
         return false;
     }
     // Using == because effect.value is always a string whereas option.value can be a number
@@ -44,7 +44,7 @@ const postProcessAssignEffects = ({
 
     // If a value gets assigned to an option set it must match one of its available options
     assignValueEffects.map((effect) => {
-        if (!isValidOptionSet(optionSets[effect.id], effect.value)) {
+        if (optionSets[effect.id] && !isValidOptionSet(optionSets[effect.id], effect.value)) {
             effect.value = null;
         }
         return effect;

@@ -12,7 +12,7 @@ test('Post process rules effects', () => {
         { type: 'HIDEPROGRAMSTAGE', id: 'PUZaKR0Jh2k' },
         { id: 'SWfdBhglX0fk', type: 'HIDESECTION' },
         { id: 'w75KJ2mc4zz', type: 'ASSIGN', value: 'value1' },
-        { id: 'wasdJ2mc4zz', type: 'ASSIGN', value: 'true' },
+        { id: 'wasdJ2mc4zz', type: 'ASSIGN', value: 32 },
         { id: 'pjsdJ2mc4zz', type: 'ASSIGN', value: 'value1,value2' },
         { id: 'ky6dJ2mc4zz', type: 'ASSIGN', value: 'value1,value2' },
         {
@@ -186,7 +186,7 @@ test('Post process rules effects', () => {
         {
             id: 'wasdJ2mc4zz',
             type: 'ASSIGN',
-            value: null,
+            value: 32,
         },
         {
             id: 'pjsdJ2mc4zz',
