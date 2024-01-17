@@ -2596,6 +2596,7 @@ describe('Assign effects', () => {
         fgrr9Dvnyt5: { id: 'fgrr9Dvnyt5', valueType: 'IMAGE' },
         oZ3fhkd9taw: { id: 'oZ3fhkd9taw', valueType: 'UNKNOWN' },
         hyur9Dvnyt5: { id: 'hyur9Dvnyt5', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
+        ght5r9Dnyt5: { id: 'ght5r9Dnyt5', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
     };
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const optionSets = {
@@ -2727,6 +2728,12 @@ describe('Assign effects', () => {
                         id: 'juyur9Dvnyt5',
                         data: "'Male,Female'",
                         dataElementId: 'hyur9Dvnyt5',
+                        programRuleActionType: 'ASSIGN',
+                    },
+                    {
+                        id: 'gty5r9Dvnyt5',
+                        data: "'Female,Male,Female'",
+                        dataElementId: 'ght5r9Dnyt5',
                         programRuleActionType: 'ASSIGN',
                     },
                     {
@@ -2883,6 +2890,12 @@ describe('Assign effects', () => {
                 targetDataType: 'dataElement',
                 type: 'ASSIGN',
                 value: 'Male,Female',
+            },
+            {
+                id: 'ght5r9Dnyt5',
+                targetDataType: 'dataElement',
+                type: 'ASSIGN',
+                value: 'Female,Male',
             },
             {
                 id: 'plor9Dvnyt5',
