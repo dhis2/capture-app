@@ -10,7 +10,7 @@ export const FormFieldPluginComponent = (props: ComponentProps) => {
 
     useEffect(() => {
         const { current: container } = containerRef;
-        if (!container) return;
+        if (!container) return () => {};
 
         const resizeObserver = new ResizeObserver((entries) => {
             entries.forEach(entry => setPluginWidth(entry.contentRect.width));
@@ -19,7 +19,6 @@ export const FormFieldPluginComponent = (props: ComponentProps) => {
         resizeObserver.observe(container);
 
         // Cleanup function
-        // eslint-disable-next-line consistent-return
         return () => {
             resizeObserver.unobserve(container);
             resizeObserver.disconnect();
