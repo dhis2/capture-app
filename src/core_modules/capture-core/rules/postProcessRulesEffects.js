@@ -3,15 +3,15 @@ import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from '@dhis2/rules-engine-javascript';
 import { type RenderFoundation, dataElementTypes } from '../metaData';
 
-const isValidOptionSet = (optionSets, effectValue) => {
-    if (!optionSets.options || effectValue === null || effectValue === '') {
+const isValidOptionSet = (optionSet, effectValue) => {
+    if (!optionSet.options || effectValue === null || effectValue === '') {
         return false;
     }
     // Using == because effect.value is always a string whereas option.value can be a number
-    if (optionSets.dataElementType === dataElementTypes.MULTI_TEXT) {
-        return effectValue.split(',').every(value => optionSets.options.some(option => option.value == value));
+    if (optionSet.dataElementType === dataElementTypes.MULTI_TEXT) {
+        return effectValue.split(',').every(value => optionSet.options.some(option => option.value == value));
     }
-    return optionSets.options.some(option => option.value == effectValue);
+    return optionSet.options.some(option => option.value == effectValue);
 };
 
 const getAssignEffectsBasedOnHideField = (hideEffects: Array<HideOutputEffect>) =>
