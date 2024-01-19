@@ -6,8 +6,8 @@ export const useNewDashboardDesc = createReducerDescription({
     [dataStoreActionTypes.SAVE_DATA_STORE]: (state, action) => {
         const newState = { ...state };
         const { dataStore, userDataStore } = action.payload;
-        dataStore && (newState.dataStore = dataStore);
-        userDataStore && (newState.userDataStore = userDataStore);
+        newState.dataStore = dataStore;
+        newState.userDataStore = userDataStore;
 
         return newState;
     },

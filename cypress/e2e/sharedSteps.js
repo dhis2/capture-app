@@ -214,7 +214,7 @@ Then(/^you see the opt in component for (.*)$/, (program) => {
 });
 
 And('the data store is clean', () => {
-    cy.buildApiUrl('dataStore', 'capture/useNewDashboard')
+    cy.buildApiUrl('dataStore/capture/useNewDashboard')
         .then(dataStoreUrl =>
-            cy.request('PUT', dataStoreUrl, {}));
+            cy.request({ method: 'DELETE', url: dataStoreUrl, failOnStatusCode: false }));
 });
