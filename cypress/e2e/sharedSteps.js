@@ -212,3 +212,9 @@ When(/^you opt out to use the new enrollment Dashboard for (.*)$/, (program) => 
 Then(/^you see the opt in component for (.*)$/, (program) => {
     cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`);
 });
+
+And('the data store is clean', () => {
+    cy.buildApiUrl('dataStore', 'capture/useNewDashboard')
+        .then(dataStoreUrl =>
+            cy.request('PUT', dataStoreUrl, {}));
+});

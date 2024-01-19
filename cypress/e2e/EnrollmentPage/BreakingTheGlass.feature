@@ -4,6 +4,7 @@ Feature: Breaking the glass page
   @skip
   Scenario: User with search scope access tries to access an enrollment in a protected program
     Given the tei created by this test is cleared from the database
+    And the data store is clean
     And you create a new tei in Child programme from Ngelehun CHC
     And you change program to WHO RMNCH Tracker
     And you enroll the tei from Njandama MCHP

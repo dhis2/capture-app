@@ -24,6 +24,7 @@ Feature: User interacts with Search page
 
     Scenario: Searching using unique identifier returns results
         Given you are on the default search page
+        And the data store is clean
         When you select the search domain WHO RMNCH Tracker
         And you fill in the unique identifier field with values that will return a tracked entity instance
         And you click find
@@ -96,6 +97,7 @@ Feature: User interacts with Search page
 
     Scenario: Searching using attributes in Tracker Program navigates user to the dashboard view
         Given you are on the default search page
+        And the data store is clean
         When you select the search domain WHO RMNCH Tracker
         And you expand the attributes search area
         And you fill in the last name with values that will return results
@@ -106,6 +108,7 @@ Feature: User interacts with Search page
 
     Scenario: Searching using attributes in TEType navigates user to dashboard view
         Given you are on the default search page
+        And the data store is clean
         When you select the search domain Person
         And you expand the attributes search area
         And you fill in the the form with first name value: Cla
@@ -162,6 +165,7 @@ Feature: User interacts with Search page
 
     Scenario: Pressing enter should trigger search unique identifier returns results
         Given you are on the default search page
+        And the data store is clean
         When you select the search domain WHO RMNCH Tracker
         And you press enter after filling in the unique identifier field with values that will return a tracked entity instance
         Then you are navigated to the enrollment dashboard page
