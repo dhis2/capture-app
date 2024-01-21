@@ -1,3 +1,10 @@
+## [100.50.6](https://github.com/dhis2/capture-app/compare/v100.50.5...v100.50.6) (2024-01-21)
+
+
+### Bug Fixes
+
+* [DHIS2-16352] Add spacing between event overview cards ([#3500](https://github.com/dhis2/capture-app/issues/3500)) ([2041d60](https://github.com/dhis2/capture-app/commit/2041d605454529b3bcd77fa3b53a4655ae1495cf))
+
 ## [100.50.5](https://github.com/dhis2/capture-app/compare/v100.50.4...v100.50.5) (2024-01-21)
 
 
