@@ -8,7 +8,6 @@ import { convertMainEventClientToServer } from '../../../../events/mainConverter
 const programIdSelector = state => state.currentSelections.programId;
 const categoriesMetaSelector = state => state.currentSelections.categoriesMeta;
 const eventContainerSelector = state => state.viewEventPage.loadedValues?.eventContainer;
-const eventIdSelector = state => state.viewEventPage.eventId;
 
 // $FlowFixMe[missing-annot] automated comment
 export const makeProgramStageSelector = () => createSelector(
@@ -23,7 +22,7 @@ export const makeEventAccessSelector = () => createSelector(
 
 export const makeAssignedUserContextSelector = () =>
     // $FlowFixMe[missing-annot]
-    createSelector(eventContainerSelector, eventIdSelector, (eventContainer) => {
+    createSelector(eventContainerSelector, (eventContainer) => {
         const { event: clientMainValues, values: clientValues } = eventContainer;
         const program = getEventProgramThrowIfNotFound(clientMainValues.programId);
         const formFoundation = program.stage.stageForm;
