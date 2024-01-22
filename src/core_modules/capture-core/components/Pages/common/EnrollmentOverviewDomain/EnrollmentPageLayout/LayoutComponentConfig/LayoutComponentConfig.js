@@ -182,7 +182,7 @@ export const EditEventWorkspace: WidgetConfig = {
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
-        scheduleDate,
+        initialScheduleDate,
     }) => ({
         programStage,
         onGoBack,
@@ -193,7 +193,7 @@ export const EditEventWorkspace: WidgetConfig = {
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
-        initialScheduleDate: scheduleDate,
+        initialScheduleDate,
     }),
 };
 
