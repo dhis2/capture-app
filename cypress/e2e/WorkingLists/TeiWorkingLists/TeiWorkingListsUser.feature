@@ -1,5 +1,13 @@
 Feature: User interacts with tei working lists
 
+  Scenario: The TEI custom working can be shared
+    Given you open the main page with Ngelehun and Malaria focus investigation context
+    And you see the custom TEI working lists
+    And you can load the view with the name Events assigned to me
+    And you create a copy of the working list
+    When you change the sharing settings
+    Then you see the new sharing settings
+
 Scenario: User opens the default working list for a tracker program
 Given you open the main page with Ngelehun and child programme context
 Then the default working list should be displayed
@@ -81,7 +89,7 @@ When you change rows per page to 10
 Then the list should display 10 rows of data
 And for a tracker program the page navigation should show that you are on the first page
 
-Scenario: Show teis ordered ascendingly by first name 
+Scenario: Show teis ordered ascendingly by first name
 Given you open the main page with Ngelehun and child programme context
 When you click the first name column header
 Then the sort arrow should indicate ascending order
@@ -93,13 +101,7 @@ Given you open the main page with Ngelehun and Malaria focus investigation conte
 Then you see the custom TEI working lists
 And you can load the view with the name Events assigned to me
 
-Scenario: The TEI custom working can be shared
-Given you open the main page with Ngelehun and Malaria focus investigation context
-And you see the custom TEI working lists
-And you can load the view with the name Events assigned to me
-And you create a copy of the working list
-When you change the sharing settings
-Then you see the new sharing settings
+
 
 Scenario: The user creates, updates and deletes a TEI custom working list
 Given you open the main page with Ngelehun and Malaria case diagnosis context
@@ -139,7 +141,7 @@ And you select a data element columns and save from the column selector
 Then you see data elements specific filters and columns
 
 @v>=39
-Scenario: While in a program stage working list, the user can filter by both TEA and data elements 
+Scenario: While in a program stage working list, the user can filter by both TEA and data elements
 Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
 When you set the enrollment status filter to active
 And you apply the current filter
@@ -152,7 +154,7 @@ And you apply the current filter
 Then the list should display 1 row of data
 
 @v>=39
-Scenario: While in a program stage working list, the user can sort by both TEA and data elements 
+Scenario: While in a program stage working list, the user can sort by both TEA and data elements
 Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
 And you set the first name filter to u
 And you apply the current filter

@@ -225,6 +225,56 @@ describe('Rules engine', () => {
         // then
         expect(rulesEffects).toEqual([]);
     });
+
+    test('The rules engine can enable verbose logging', () => {
+        // When
+        rulesEngine.setFlags({ verbose: true });
+
+        // Then
+        expect(rulesEngine.getFlags()).toEqual({ verbose: true });
+    });
+
+    test('Rules are calculated when verbose is set', () => {
+        const programRules = [
+            {
+                id: 'GC4gpdoSD4r',
+                condition: 'true',
+                description: 'Show error if hemoglobin is dangerously low',
+                displayName: 'Hemoglobin error',
+                programId: 'lxAQ7Zs9VYR',
+                programRuleActions: [
+                    {
+                        id: 'SWfdB5lX0fk',
+                        content: 'Hemoglobin value lower than normal',
+                        displayContent: 'Hemoglobin value lower than normal',
+                        programRuleActionType: 'SHOWERROR',
+                    },
+                ],
+            },
+        ];
+
+        // When
+        rulesEngine.setFlags({ verbose: true });
+        const rulesEffects = rulesEngine.getProgramRuleEffects({
+            programRulesContainer: { programRuleVariables, programRules, constants },
+            currentEvent,
+            dataElements: dataElementsInProgram,
+            selectedOrgUnit: orgUnit,
+            optionSets,
+        });
+
+        // then
+        expect(rulesEffects).toEqual([
+            {
+                id: 'general',
+                type: 'SHOWERROR',
+                error: {
+                    id: 'SWfdB5lX0fk',
+                    message: 'Hemoglobin value lower than normal ',
+                },
+            },
+        ]);
+    });
 });
 
 describe('Program Rule Variables corner cases', () => {

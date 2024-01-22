@@ -81,7 +81,6 @@ When('you can close the modal', () => {
         .contains('Back to search')
         .click();
     cy.get('[data-test="dhis2-uicore-modal"]')
-        .contains('No results found')
         .should('not.exist');
 });
 

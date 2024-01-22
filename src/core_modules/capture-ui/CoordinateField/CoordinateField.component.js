@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
-import { IconCross24, Button } from '@dhis2/ui';
+import { IconCross24, Button, ModalActions, ModalContent } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import { AddLocationIcon } from '../Icons';
 import { CoordinateInput } from '../internal/CoordinateInput/CoordinateInput.component';
@@ -54,6 +54,13 @@ export class CoordinateField extends React.Component<Props, State> {
             showMap: false,
             zoom: 13,
         };
+    }
+
+    componentDidUpdate() {
+        // Invalidate map size to fix rendering bug
+        if (this.mapInstance && this.state.showMap) {
+            this.mapInstance.leafletElement.invalidateSize();
+        }
     }
 
     toSixDecimal = (value: string) => (parseFloat(value) ? parseFloat(value).toFixed(6) : null)
@@ -139,13 +146,15 @@ export class CoordinateField extends React.Component<Props, State> {
         const clonedDialog = React.cloneElement(
 
             this.props.mapDialog,
-            { open: this.state.showMap, onClose: this.closeMap },
+            { hide: !this.state.showMap, onClose: this.closeMap },
 
             [...React.Children.toArray(this.props.mapDialog.props.children), (
-                <div className={defaultClasses.dialogContent} key="dialogContent">
-                    {this.renderMap()}
+                <>
+                    <ModalContent className={defaultClasses.dialogContent} key="dialogContent">
+                        {this.renderMap()}
+                    </ModalContent>
                     {this.renderDialogActions()}
-                </div>
+                </>
             )],
         );
         return clonedDialog;
@@ -185,7 +194,7 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     renderDialogActions = () => (
-        <div className={defaultClasses.dialogActionOuterContainer}>
+        <ModalActions className={defaultClasses.dialogActionOuterContainer}>
             <div className={defaultClasses.dialogActionInnerContainer}>
                 {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button kind="basic" onClick={this.closeMap}>
@@ -198,7 +207,7 @@ export class CoordinateField extends React.Component<Props, State> {
                     {i18n.t('Set coordinate')}
                 </Button>
             </div>
-        </div>
+        </ModalActions>
     );
 
     renderLatitude = () => {
