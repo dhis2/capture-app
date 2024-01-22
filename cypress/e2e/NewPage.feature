@@ -5,6 +5,7 @@ Feature: User creates a new entries from the registration page
     Given you are on the default registration page
     Then there should be informative message explaining you need to select an organisation unit
 
+  @v>=41
   Scenario: New person in Tracker Program > Filling the Allergies with multiple options
     Given you are in the WHO RMNCH program registration page
     And the data store is clean
