@@ -23,7 +23,7 @@ export const makeEventAccessSelector = () => createSelector(
 
 export const makeAssignedUserContextSelector = () =>
     // $FlowFixMe[missing-annot]
-    createSelector(eventContainerSelector, eventIdSelector, (eventContainer, eventId) => {
+    createSelector(eventContainerSelector, eventIdSelector, (eventContainer) => {
         const { event: clientMainValues, values: clientValues } = eventContainer;
         const program = getEventProgramThrowIfNotFound(clientMainValues.programId);
         const formFoundation = program.stage.stageForm;
@@ -39,5 +39,5 @@ export const makeAssignedUserContextSelector = () =>
                 })),
             };
 
-        return { eventId, event };
+        return { event };
     });

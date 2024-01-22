@@ -33,7 +33,7 @@ export type PlainProps = {|
         read: boolean,
         write: boolean,
     |} | null,
-    onGetAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
+    getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
     assignee: UserFormField | null,
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,

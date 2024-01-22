@@ -11,7 +11,7 @@ type Props = {|
         read: boolean,
         write: boolean,
     |} | null,
-    onGetAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
+    getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
 |};
@@ -19,7 +19,7 @@ type Props = {|
 export const AssigneeSection = ({
     assignee,
     programStage,
-    onGetAssignedUserSaveContext,
+    getAssignedUserSaveContext,
     eventAccess,
     onSaveAssignee,
     onSaveAssigneeError,
@@ -27,7 +27,7 @@ export const AssigneeSection = ({
     <WidgetAssignee
         enabled={programStage?.enableUserAssignment || false}
         assignee={assignee}
-        onGetSaveContext={onGetAssignedUserSaveContext}
+        getSaveContext={getAssignedUserSaveContext}
         writeAccess={eventAccess?.write || false}
         onSave={onSaveAssignee}
         onSaveError={onSaveAssigneeError}

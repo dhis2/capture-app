@@ -12,7 +12,7 @@ export type Props = {|
     assignee: Assignee | null,
     enabled: boolean,
     writeAccess: boolean,
-    onGetSaveContext: () => { event: ApiEnrollmentEvent },
+    getSaveContext: () => { event: ApiEnrollmentEvent },
     onSave: (newAssignee: Assignee) => void,
     onSaveError: (prevAssignee: Assignee | null) => void,
 |};

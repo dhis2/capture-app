@@ -155,7 +155,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         event,
     });
     const assignee = useAssignee(event);
-    const onGetAssignedUserSaveContext = useAssignedUserSaveContext(event);
+    const getAssignedUserSaveContext = useAssignedUserSaveContext(event);
     const onSaveAssignee = (newAssignee) => {
         // $FlowFixMe dataElementTypes flow error
         const assignedUser: ApiAssignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
@@ -197,7 +197,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
-            onGetAssignedUserSaveContext={onGetAssignedUserSaveContext}
+            getAssignedUserSaveContext={getAssignedUserSaveContext}
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}
         />

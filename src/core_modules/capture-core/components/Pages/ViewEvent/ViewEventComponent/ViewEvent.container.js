@@ -32,7 +32,7 @@ const makeMapStateToProps = () => {
             currentDataEntryKey,
             isUserInteractionInProgress,
             assignee: state.viewEventPage.loadedValues?.eventContainer.event.assignee,
-            onGetAssignedUserSaveContext: () => assignedUserContextSelector(state),
+            getAssignedUserSaveContext: () => assignedUserContextSelector(state),
             eventId: state.viewEventPage.eventId,
         };
     };

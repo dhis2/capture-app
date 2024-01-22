@@ -49,7 +49,7 @@ type Props = {
         showAllEvents: string,
     },
     assignee: UserFormField,
-    onGetAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
+    getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
 };
@@ -80,7 +80,7 @@ class ViewEventPlain extends Component<Props, State> {
             currentDataEntryKey,
             eventAccess,
             assignee,
-            onGetAssignedUserSaveContext,
+            getAssignedUserSaveContext,
             onSaveAssignee,
             onSaveAssigneeError,
         } = this.props;
@@ -104,7 +104,7 @@ class ViewEventPlain extends Component<Props, State> {
                         programStage={programStage}
                         dataEntryKey={currentDataEntryKey}
                         assignee={assignee}
-                        onGetAssignedUserSaveContext={onGetAssignedUserSaveContext}
+                        getAssignedUserSaveContext={getAssignedUserSaveContext}
                         onSaveAssignee={onSaveAssignee}
                         onSaveAssigneeError={onSaveAssigneeError}
                     />

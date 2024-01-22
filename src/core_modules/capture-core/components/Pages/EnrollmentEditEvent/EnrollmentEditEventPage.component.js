@@ -113,7 +113,7 @@ const EnrollmentEditEventPageRight = ({
     assignee,
     onEnrollmentError,
     onEnrollmentSuccess,
-    onGetAssignedUserSaveContext,
+    getAssignedUserSaveContext,
     onSaveAssignee,
     onSaveAssigneeError,
     addRelationShipContainerElement,
@@ -123,7 +123,7 @@ const EnrollmentEditEventPageRight = ({
         <WidgetAssignee
             enabled={programStage?.enableUserAssignment || false}
             assignee={assignee}
-            onGetSaveContext={onGetAssignedUserSaveContext}
+            getSaveContext={getAssignedUserSaveContext}
             writeAccess={eventAccess?.write || false}
             onSave={onSaveAssignee}
             onSaveError={onSaveAssigneeError}
@@ -198,7 +198,7 @@ const EnrollmentEditEventPagePain = ({
     onEnrollmentSuccess,
     onCancelEditEvent,
     onHandleScheduleSave,
-    onGetAssignedUserSaveContext,
+    getAssignedUserSaveContext,
     onSaveAssignee,
     onSaveAssigneeError,
 }: PlainProps) => {
@@ -267,7 +267,7 @@ const EnrollmentEditEventPagePain = ({
                             assignee={assignee}
                             onEnrollmentError={onEnrollmentError}
                             onEnrollmentSuccess={onEnrollmentSuccess}
-                            onGetAssignedUserSaveContext={onGetAssignedUserSaveContext}
+                            getAssignedUserSaveContext={getAssignedUserSaveContext}
                             onSaveAssignee={onSaveAssignee}
                             onSaveAssigneeError={onSaveAssigneeError}
                             addRelationShipContainerElement={addRelationShipContainerElement}
