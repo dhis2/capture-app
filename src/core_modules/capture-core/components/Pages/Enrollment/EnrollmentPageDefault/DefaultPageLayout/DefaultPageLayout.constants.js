@@ -14,7 +14,7 @@ import type {
 export const WidgetsForEnrollmentPageDefault: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     QuickActions,
     StagesAndEvents,
-    Notes: EnrollmentComment,
+    EnrollmentComment,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
