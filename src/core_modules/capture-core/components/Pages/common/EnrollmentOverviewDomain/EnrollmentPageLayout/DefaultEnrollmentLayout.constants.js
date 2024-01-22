@@ -19,9 +19,9 @@ export const EnrollmentPageKeys = Object.freeze({
 
 export const DefaultPageTitle = {
     OVERVIEW: i18n.t('Dashboard'),
-    NEW_EVENT: i18n.t('New event'),
-    EDIT_EVENT: i18n.t('Edit event'),
-    VIEW_EVENT: i18n.t('View event'),
+    NEW_EVENT: i18n.t('New Event'),
+    EDIT_EVENT: i18n.t('Edit Event'),
+    VIEW_EVENT: i18n.t('View Event'),
 };
 
 // Default components are available across all Enrollment Pages
