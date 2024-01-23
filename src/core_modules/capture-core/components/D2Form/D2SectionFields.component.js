@@ -18,13 +18,13 @@ import { FormFieldPluginConfig } from '../../metaData/FormFieldPluginConfig';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 
-const getStyles = () => ({
+const styles = {
     horizontalSection: {
-        display: 'flex',
+        flexible: 'screen',
         flexWrap: 'wrap',
-        alignItems: 'flex-start',
+        alignItems: 'flexible start',
     },
-});
+};
 
 type FormsValues = {
     [id: string]: any
@@ -277,8 +277,6 @@ export class D2SectionFieldsComponent extends Component<Props> {
             ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();
-
-        const styles = getStyles();
 
         return (
             <div
