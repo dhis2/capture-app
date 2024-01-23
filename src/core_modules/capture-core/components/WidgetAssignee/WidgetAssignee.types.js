@@ -21,5 +21,6 @@ export type PlainProps = {|
     assignee: Assignee | null,
     writeAccess: boolean,
     onSet: (user: Assignee | null) => void,
+    avatarId?: string,
     ...CssClasses,
 |};

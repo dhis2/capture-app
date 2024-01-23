@@ -17,6 +17,10 @@ const styles = () => ({
     assignButton: {
         margin: spacers.dp4,
     },
+    avatarWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+    },
     avatar: {
         margin: spacers.dp4,
     },
@@ -26,15 +30,16 @@ type Props = {
     assignee: Assignee | null,
     onEdit: () => {},
     writeAccess: boolean,
+    avatarId?: string,
     ...CssClasses,
 };
 
-const DisplayModePlain = ({ assignee, onEdit, writeAccess, classes }: Props) => (
+const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: Props) => (
     assignee ? (
         <div className={classes.wrapper}>
-            <div>
+            <div className={classes.avatarWrapper}>
                 {i18n.t('Assigned to')}
-                <UserAvatar name={assignee.name} className={classes.avatar} />
+                <UserAvatar name={assignee.name} className={classes.avatar} avatarId={avatarId} />
                 {assignee.name}
             </div>
             <ConditionalTooltip

@@ -18,7 +18,7 @@ const styles = () => ({
     },
 });
 
-const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, classes }: PlainProps) => {
+const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const [editMode, setEditMode] = useState(false);
 
@@ -46,7 +46,12 @@ const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, classes }: PlainPro
                     {editMode ? (
                         <EditMode onCancel={() => setEditMode(false)} onSet={handleSet} assignee={assignee} />
                     ) : (
-                        <DisplayMode assignee={assignee} onEdit={() => setEditMode(true)} writeAccess={writeAccess} />
+                        <DisplayMode
+                            assignee={assignee}
+                            onEdit={() => setEditMode(true)}
+                            writeAccess={writeAccess}
+                            avatarId={avatarId}
+                        />
                     )}
                 </div>
             </Widget>
