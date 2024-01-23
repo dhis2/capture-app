@@ -12,7 +12,7 @@ const styles = () => ({
         alignItems: 'center',
     },
     editButton: {
-        margin: spacers.dp4,
+        marginLeft: spacers.dp12,
     },
     assignButton: {
         margin: spacers.dp4,
@@ -20,6 +20,7 @@ const styles = () => ({
     avatarWrapper: {
         display: 'flex',
         alignItems: 'center',
+        fontSize: 14,
     },
     avatar: {
         margin: spacers.dp4,
@@ -39,7 +40,7 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
         <div className={classes.wrapper}>
             <div className={classes.avatarWrapper}>
                 {i18n.t('Assigned to')}
-                <UserAvatar name={assignee.name} className={classes.avatar} avatarId={avatarId} />
+                <UserAvatar name={assignee.name} className={classes.avatar} avatarId={avatarId} small />
                 {assignee.name}
             </div>
             <ConditionalTooltip
@@ -52,6 +53,7 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
                     dataTest="widget-assignee-edit"
                     disabled={!writeAccess}
                     secondary
+                    small
                 >
                     {i18n.t('Edit')}
                 </Button>
