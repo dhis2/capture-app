@@ -1,3 +1,10 @@
+## [100.50.7](https://github.com/dhis2/capture-app/compare/v100.50.6...v100.50.7) (2024-01-23)
+
+
+### Bug Fixes
+
+* [DHIS2-15888] multi text element in program rules ([#3482](https://github.com/dhis2/capture-app/issues/3482)) ([fd0776d](https://github.com/dhis2/capture-app/commit/fd0776d2261b761c9985db3f6bfb0fda4a2ad18c))
+
 ## [100.50.6](https://github.com/dhis2/capture-app/compare/v100.50.5...v100.50.6) (2024-01-21)
 
 
