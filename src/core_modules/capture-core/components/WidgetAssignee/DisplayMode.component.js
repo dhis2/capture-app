@@ -10,17 +10,17 @@ const styles = () => ({
     wrapper: {
         display: 'flex',
         alignItems: 'center',
+        fontSize: 14,
     },
     editButton: {
         marginLeft: spacers.dp12,
     },
     assignButton: {
-        margin: spacers.dp4,
+        marginLeft: spacers.dp12,
     },
     avatarWrapper: {
         display: 'flex',
         alignItems: 'center',
-        fontSize: 14,
     },
     avatar: {
         margin: spacers.dp4,
@@ -36,7 +36,7 @@ type Props = {
 };
 
 const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: Props) => (
-    assignee ? (
+    assignee?.name ? (
         <div className={classes.wrapper}>
             <div className={classes.avatarWrapper}>
                 {i18n.t('Assigned to')}
@@ -71,6 +71,7 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
                     className={classes.assignButton}
                     dataTest="widget-assignee-assign"
                     small
+                    secondary
                     disabled={!writeAccess}
                 >
                     {i18n.t('Assign')}
