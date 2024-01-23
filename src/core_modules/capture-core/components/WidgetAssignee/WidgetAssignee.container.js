@@ -9,7 +9,7 @@ import { useUserAvatar } from './hooks';
 const WidgetAssigneeWithHooks = (props: Props) => {
     const { assignee, writeAccess, getSaveContext, onSave, onSaveError } = props;
     const prevAssignee = useRef(assignee);
-    const { avatarId } = useUserAvatar(assignee?.id);
+    const { avatarId, isLoading } = useUserAvatar(assignee?.id);
 
     const [updateMutation] = useDataMutation(
         {
@@ -33,6 +33,10 @@ const WidgetAssigneeWithHooks = (props: Props) => {
         },
         [updateMutation, getSaveContext, onSave, assignee],
     );
+
+    if (isLoading) {
+        return null;
+    }
 
     return <WidgetAssigneeComponent assignee={assignee} writeAccess={writeAccess} avatarId={avatarId} onSet={onSet} />;
 };

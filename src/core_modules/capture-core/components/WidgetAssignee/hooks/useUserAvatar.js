@@ -11,9 +11,10 @@ export const useUserAvatar = (userId?: string) => {
         },
     };
     const queryOptions = { enabled: Boolean(userId) };
-    const { data } = useApiMetadataQuery<any>(queryKey, queryFn, queryOptions);
+    const { data, isLoading } = useApiMetadataQuery<any>(queryKey, queryFn, queryOptions);
 
     return {
         avatarId: data?.avatar?.id,
+        isLoading,
     };
 };
