@@ -592,13 +592,13 @@ Events can be assigned to users. This feature must be enabled per program.
 
     ![](resources/images/user_assignment_edit.png)
 
-4. Click the edit button, or the **Assign** button if the event is not currently assigned to anyone.
+4. Click the **Edit** button, or the **Assign** button if the event is not currently assigned to anyone.
 
     ![](resources/images/user_assignment_edit_button.png)
 
     ![](resources/images/user_assignment_edit_add.png)
 
-5. Search for and select the user you would like to reassign the event to. The assignment is saved immediately.
+5. Search for and select the user you would like to reassign the event to. Click the **Save** button.
 
 ### Assignee in the event list { #capture_user_assignment_event_list } 
 
@@ -1192,6 +1192,23 @@ If this flag has been enabled for the stage in Stage details in Maintenance, a m
 Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
 
 The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
+
+#### Change assignee
+
+1. In View/Edit enrollment event page
+
+2. In the right column you will find the assignee widget.
+
+    ![](resources/images/user_assignment_edit_enrollment.png)
+
+3. Click the **Edit** button, or the **Assign** button if the event is not currently assigned to anyone.
+
+    ![](resources/images/user_assignment_edit_button.png)
+
+    ![](resources/images/user_assignment_edit_add.png)
+
+4. Search for and select the user you would like to reassign the event to. Click the **Save** button.
+
 
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.
