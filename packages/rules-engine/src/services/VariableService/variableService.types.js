@@ -51,7 +51,7 @@ export type Enrollment = {
     +enrollmentId?: string,
 };
 
-type Option = {
+export type Option = {
     id: string,
     code: string,
     displayName: string,
