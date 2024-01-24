@@ -296,11 +296,4 @@ export const getD2Functions = ({
             return params[0];
         },
     },
-    multiTextContains: {
-        parameters: 2,
-        execute: (params: any) => {
-            log.warn('multiTextContains not implemented yet');
-            return params[0];
-        },
-    },
 });

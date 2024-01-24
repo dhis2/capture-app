@@ -11,10 +11,8 @@ test('Post process rules effects', () => {
         },
         { type: 'HIDEPROGRAMSTAGE', id: 'PUZaKR0Jh2k' },
         { id: 'SWfdBhglX0fk', type: 'HIDESECTION' },
-        { id: 'w75KJ2mc4zz', type: 'ASSIGN', value: 'value1' },
-        { id: 'wasdJ2mc4zz', type: 'ASSIGN', value: 32 },
-        { id: 'pjsdJ2mc4zz', type: 'ASSIGN', value: 'value1,value2' },
-        { id: 'ky6dJ2mc4zz', type: 'ASSIGN', value: 'value1,value2' },
+        { id: 'w75KJ2mc4zz', type: 'ASSIGN', value: 'true' },
+        { id: 'wasdJ2mc4zz', type: 'ASSIGN', value: 'true' },
         {
             id: 'w75KJ2mc4zz',
             message: ' true',
@@ -65,8 +63,7 @@ test('Post process rules effects', () => {
                 id: 'optionSet',
                 name: 'optionSet',
                 code: 'optionSet',
-                options: [{ value: 'value1' }],
-                dataElement: { type: dataElementTypes.TEXT },
+                options: [{ option: { value: false } }],
             };
         });
 
@@ -76,37 +73,8 @@ test('Post process rules effects', () => {
             o.type = dataElementTypes.NUMBER;
             o.compulsory = true;
         });
-
-        const dataElement3 = new DataElement((o) => {
-            o.id = 'pjsdJ2mc4zz';
-            o.name = 'dataElement3';
-            o.type = dataElementTypes.MULTI_TEXT;
-            o.optionSet = {
-                id: 'optionSet3',
-                name: 'optionSet3',
-                code: 'optionSet3',
-                options: [{ value: 'value1' }, { value: 'value2' }],
-                dataElement: { type: dataElementTypes.MULTI_TEXT },
-            };
-        });
-
-        const dataElement4 = new DataElement((o) => {
-            o.id = 'ky6dJ2mc4zz';
-            o.name = 'dataElement4';
-            o.type = dataElementTypes.MULTI_TEXT;
-            o.optionSet = {
-                id: 'optionSet4',
-                name: 'optionSet4',
-                code: 'optionSet4',
-                options: [{ value: 'value1' }, { value: 'notAMatch' }],
-                dataElement: { type: dataElementTypes.MULTI_TEXT },
-                useNameForOptionSet: true,
-            };
-        });
         initSection.addElement(dataElement1);
         initSection.addElement(dataElement2);
-        initSection.addElement(dataElement3);
-        initSection.addElement(dataElement4);
     });
 
     const section2 = new Section((initSection) => {
@@ -181,22 +149,12 @@ test('Post process rules effects', () => {
         {
             id: 'w75KJ2mc4zz',
             type: 'ASSIGN',
-            value: 'value1',
+            value: null,
         },
         {
             id: 'wasdJ2mc4zz',
             type: 'ASSIGN',
-            value: 32,
-        },
-        {
-            id: 'pjsdJ2mc4zz',
-            type: 'ASSIGN',
-            value: 'value1,value2',
-        },
-        {
-            id: 'ky6dJ2mc4zz',
-            type: 'ASSIGN',
-            value: null,
+            value: 'true',
         },
     ]);
 });

@@ -39,7 +39,6 @@ export const normalizeRuleVariable = (data: any, valueType: string) => {
         [typeKeys.AGE]: convertString,
         [typeKeys.TEXT]: convertString,
         [typeKeys.LONG_TEXT]: convertString,
-        [typeKeys.MULTI_TEXT]: convertString,
     };
 
     if (!data && data !== 0 && data !== false) {

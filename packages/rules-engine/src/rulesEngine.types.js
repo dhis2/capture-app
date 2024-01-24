@@ -175,7 +175,6 @@ export type IDateUtils = {|
 
 export type IConvertInputRulesValue = {|
     convertText(value: any): ?string,
-    convertMultiText(value: any): ?string,
     convertLongText(value: any): ?string,
     convertLetter(value: any): ?string,
     convertPhoneNumber(value: any): ?string,
@@ -204,7 +203,6 @@ export type IConvertInputRulesValue = {|
 
 export type IConvertOutputRulesEffectsValue = {|
     convertText(value: string): any,
-    convertMultiText(value: string): any,
     convertLongText(value: string): any,
     convertLetter(value: string): any,
     convertPhoneNumber(value: string): any,

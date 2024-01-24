@@ -10,16 +10,16 @@
 # Janeth Cruz, 2023
 # Prabhjot Singh, 2023
 # Christian Atavillos, 2023
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2023
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,7 +176,7 @@ msgid "Complete event"
 msgstr "Completar el evento"
 
 msgid "{{ stageName }} - Basic info"
-msgstr "{{ stageName }} - Información básica"
+msgstr ""
 
 msgid "{{ stageName }} - Status"
 msgstr ""

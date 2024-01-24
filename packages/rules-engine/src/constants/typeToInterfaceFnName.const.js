@@ -3,7 +3,6 @@ import { typeKeys } from './typeKeys.const';
 
 export const mapTypeToInterfaceFnName = {
     [typeKeys.TEXT]: 'convertText',
-    [typeKeys.MULTI_TEXT]: 'convertMultiText',
     [typeKeys.LONG_TEXT]: 'convertLongText',
     [typeKeys.LETTER]: 'convertLetter',
     [typeKeys.PHONE_NUMBER]: 'convertPhoneNumber',

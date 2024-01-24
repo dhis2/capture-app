@@ -12,7 +12,6 @@ test('expressions with d2Functions in tracker program', () => {
         Z5z8vFQy0w0: { id: 'Z5z8vFQy0w0', valueType: 'URL' },
         TzqawmlPkI5: { id: 'TzqawmlPkI5', valueType: 'AGE' },
         f8j4XDEozvj: { id: 'f8j4XDEozvj', valueType: 'FILE_RESOURCE' },
-        g6yEXDEozvj: { id: 'g6yEXDEozvj', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
         jBBkFuPKctq: { id: 'jBBkFuPKctq', valueType: 'ORGANISATION_UNIT' },
         A4Fg6jgWauf: { id: 'A4Fg6jgWauf', valueType: 'IMAGE' },
         CUbZcLm9LyN: { id: 'CUbZcLm9LyN', valueType: 'USERNAME' },
@@ -243,14 +242,6 @@ test('expressions with d2Functions in tracker program', () => {
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
-                    id: 'ghy5rwfRAVr',
-                    displayContent:
-                        "d2:multiTextContains('multiTextValues', 'searchString')",
-                    data: "d2:multiTextContains('multiTextValues', 'searchString')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
                     id: 'AFkfzcDf4Fs',
                     displayContent: "d2:inOrgUnitGroup('CHC') = ",
                     data: "d2:inOrgUnitGroup('CHC')",
@@ -423,7 +414,6 @@ test('expressions with d2Functions in tracker program', () => {
                 { id: 'khtgyO5SSxu', trackedEntityAttributeId: 'Z5z8vFQy0w0', programRuleActionType: 'HIDEFIELD' },
                 { id: 'hwgyOgy4Sxu', trackedEntityAttributeId: 'TzqawmlPkI5', programRuleActionType: 'HIDEFIELD' },
                 { id: 'hwgyloeSSxu', trackedEntityAttributeId: 'f8j4XDEozvj', programRuleActionType: 'HIDEFIELD' },
-                { id: 'ghyjloeSSxu', trackedEntityAttributeId: 'g6yEXDEozvj', programRuleActionType: 'HIDEFIELD' },
                 { id: 'lkoeO59SSxu', trackedEntityAttributeId: 'jBBkFuPKctq', programRuleActionType: 'HIDEFIELD' },
                 { id: 'poe4O59SSxu', trackedEntityAttributeId: 'A4Fg6jgWauf', programRuleActionType: 'HIDEFIELD' },
                 { id: 'gtyyO59SSxu', trackedEntityAttributeId: 'CUbZcLm9LyN', programRuleActionType: 'HIDEFIELD' },
@@ -464,24 +454,12 @@ test('expressions with d2Functions in tracker program', () => {
             programId: 'IpHINAT79UW',
         },
     ];
-    const optionSets = {
-        pC3N9N77UmT: {
-            id: 'pC3N9N77UmT',
-            displayName: 'Gender',
-            version: 0,
-            valueType: 'MULTI_TEXT',
-            options: [
-                { id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] },
-                { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] },
-            ],
-            dataElement: { type: 'MULTI_TEXT' },
-        } };
+    const optionSets = {};
     const teiValues = {
         zDhUuAYrxNC: 'value',
         Z5z8vFQy0w0: 'https://www.google.com/',
         TzqawmlPkI5: '30',
         f8j4XDEozvj: 'FILE_RESOURCE',
-        g6yEXDEozvj: 'Male',
         jBBkFuPKctq: 'ORGANISATION_UNIT',
         A4Fg6jgWauf: 'IMAGE',
         CUbZcLm9LyN: 'USERNAME',
@@ -706,15 +684,6 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: {
-                id: 'ghy5rwfRAVr',
-                message:
-                    "d2:multiTextContains('multiTextValues', 'searchString') multiTextValues",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
             displayText: { id: 'AFkfzcDf4Fs', message: "d2:inOrgUnitGroup('CHC') =  " },
         },
         {
@@ -848,14 +817,6 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'f8j4XDEozvj',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
-        },
-        {
-            content: undefined,
-            type: 'HIDEFIELD',
-            id: 'g6yEXDEozvj',
-            hadValue: true,
-            name: undefined,
-            targetDataType: 'trackedEntityAttribute',
         },
         {
             content: undefined,

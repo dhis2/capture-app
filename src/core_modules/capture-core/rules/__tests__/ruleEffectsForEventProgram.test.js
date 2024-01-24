@@ -426,7 +426,6 @@ describe('Event rules engine', () => {
         ovY6E8BSdto: { id: 'ovY6E8BSdto', valueType: 'TEXT', optionSetId: 'dsgBmIZ0Yrq' },
         Z5z8vFQy0w0: { id: 'Z5z8vFQy0w0', valueType: 'TEXT' },
         TzqawmlPkI5: { id: 'TzqawmlPkI5', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' },
-        leqawmlPkI5: { id: 'leqawmlPkI5', valueType: 'MULTI_TEXT', optionSetId: 'Jy0pZDJkCwX' },
         f8j4XDEozvj: { id: 'f8j4XDEozvj', valueType: 'TEXT', optionSetId: 'xD9QOIvNAjw' },
         jBBkFuPKctq: { id: 'jBBkFuPKctq', valueType: 'TEXT', optionSetId: 'T9zjyaIkRqH' },
         A4Fg6jgWauf: { id: 'A4Fg6jgWauf', valueType: 'TEXT', optionSetId: 'w1vUkxq8IOl' },
@@ -717,14 +716,6 @@ describe('Event rules engine', () => {
             useNameForOptionSet: true,
         },
         {
-            id: 'rapvdmYrwLb',
-            dataElementId: 'leqawmlPkI5',
-            displayName: 'HISTORY',
-            programId: 'PNClHaZARtz',
-            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
-            useNameForOptionSet: true,
-        },
-        {
             id: 'JPIyrAmJapV',
             dataElementId: 'CUbZcLm9LyN',
             displayName: 'HOSPITALISED',
@@ -829,31 +820,6 @@ describe('Event rules engine', () => {
                         { property: 'NAME', locale: 'pt', value: 'Desconhecido' },
                         { property: 'NAME', locale: 'ru', value: 'Неизвестно' },
                     ],
-                },
-            ],
-        },
-        Jy0pZDJkCwX: {
-            id: 'Jy0pZDJkCwX',
-            displayName: 'Yes/No/Unknown',
-            version: 3,
-            valueType: 'MULTI_TEXT',
-            options: [
-                {
-                    id: 'x9yVKkv9koc',
-                    displayName: 'Yes',
-                    code: 'Yes',
-                    translations: [],
-                },
-                {
-                    id: 'R98tI2c6rF5',
-                    displayName: 'No',
-                    code: 'No',
-                    translations: [],
-                },
-                {
-                    id: 'pqxvAQU1z9W',
-                    code: 'Unknown',
-                    translations: [],
                 },
             ],
         },
@@ -1018,7 +984,7 @@ describe('Event rules engine', () => {
             ],
         ],
         [
-            { QQLXTXVidW2: 'Yes', leqawmlPkI5: 'Yes,No' },
+            { QQLXTXVidW2: 'Yes' },
             [
                 {
                     type: 'ASSIGN',
@@ -1093,7 +1059,7 @@ describe('Event rules engine', () => {
             ],
         ],
         [
-            { QQLXTXVidW2: 'No', leqawmlPkI5: 'Yes,No' },
+            { QQLXTXVidW2: 'No' },
             [
                 {
                     type: 'ASSIGN',
@@ -2595,22 +2561,9 @@ describe('Assign effects', () => {
         mjus9Dvnyt5: { id: 'mjus9Dvnyt5', valueType: 'FILE_RESOURCE' },
         fgrr9Dvnyt5: { id: 'fgrr9Dvnyt5', valueType: 'IMAGE' },
         oZ3fhkd9taw: { id: 'oZ3fhkd9taw', valueType: 'UNKNOWN' },
-        hyur9Dvnyt5: { id: 'hyur9Dvnyt5', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
-        ght5r9Dnyt5: { id: 'ght5r9Dnyt5', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
     };
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
-    const optionSets = {
-        pC3N9N77UmT: {
-            id: 'pC3N9N77UmT',
-            displayName: 'Gender',
-            version: 0,
-            valueType: 'MULTI_TEXT',
-            options: [
-                { id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] },
-                { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] },
-            ],
-            dataElement: { type: 'MULTI_TEXT' },
-        } };
+    const optionSets = {};
     const currentEvent = {};
 
     test('Assign effect corner cases', () => {
@@ -2722,18 +2675,6 @@ describe('Assign effects', () => {
                         id: 'hjyur9Dvnyt5',
                         data: '-30',
                         dataElementId: 'jhrr9Dvnyt5',
-                        programRuleActionType: 'ASSIGN',
-                    },
-                    {
-                        id: 'juyur9Dvnyt5',
-                        data: "'Male,Female'",
-                        dataElementId: 'hyur9Dvnyt5',
-                        programRuleActionType: 'ASSIGN',
-                    },
-                    {
-                        id: 'gty5r9Dvnyt5',
-                        data: "'Female,Male,Female'",
-                        dataElementId: 'ght5r9Dnyt5',
                         programRuleActionType: 'ASSIGN',
                     },
                     {
@@ -2884,18 +2825,6 @@ describe('Assign effects', () => {
                 targetDataType: 'dataElement',
                 type: 'ASSIGN',
                 value: '-30',
-            },
-            {
-                id: 'hyur9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: 'Male,Female',
-            },
-            {
-                id: 'ght5r9Dnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: 'Female,Male',
             },
             {
                 id: 'plor9Dvnyt5',

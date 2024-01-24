@@ -24,7 +24,7 @@ const styles = theme => ({
 const MULTI_TEXT_SEPARATOR = ',';
 
 const MultiSelectFieldComponentPlain = (props: Props) => {
-    const { onSelect, options, value = '', translations, onFocus, onBlur, disabled } = props;
+    const { onSelect, options, value = '', translations, onFocus, onBlur } = props;
     const [selected, setSelected] = useState([]);
 
     useEffect(() => {
@@ -54,7 +54,6 @@ const MultiSelectFieldComponentPlain = (props: Props) => {
                 filterable
                 filterPlaceholder={translations.filterPlaceholder}
                 noMatchText={translations.noMatchText}
-                disabled={disabled}
             >
                 {options.map(option => (
                     <MultiSelectOption key={option.id} label={option.label} value={option.value} />
