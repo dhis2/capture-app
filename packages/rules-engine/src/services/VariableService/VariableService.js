@@ -274,7 +274,7 @@ export class VariableService {
     ) {
         const value = this.onProcessValue(rawValue, valueType);
         return (value !== null && useNameForOptionSet && dataElements && dataElements[dataElementId] && dataElements[dataElementId].optionSetId) ?
-            OptionSetHelper.getName(optionSets[dataElements[dataElementId].optionSetId].options, value) :
+            OptionSetHelper.getName(optionSets[dataElements[dataElementId].optionSetId].options, value, dataElements[dataElementId].valueType) :
             value;
     }
 

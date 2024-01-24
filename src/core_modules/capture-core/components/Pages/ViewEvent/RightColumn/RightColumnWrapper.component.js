@@ -1,6 +1,7 @@
 
 // @flow
 import * as React from 'react';
+import { spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 import { WarningsSection } from './WarningsSection/WarningsSection.container';
@@ -18,9 +19,12 @@ type Props = {
 
 const getStyles = (theme: Theme) => ({
     container: {
+        display: 'flex',
+        flexDirection: 'column',
         flexBasis: theme.typography.pxToRem(0),
         flexGrow: 1,
         minWidth: theme.typography.pxToRem(300),
+        gap: spacers.dp16,
     },
 });
 
