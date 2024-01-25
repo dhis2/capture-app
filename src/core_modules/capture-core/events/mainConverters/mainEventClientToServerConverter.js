@@ -1,5 +1,5 @@
 // @flow
-import { convertClientToServer, convertAssigneeToServer } from '../../converters';
+import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
 import { convertEventAttributeOptions } from '../convertEventAttributeOptions';
@@ -10,7 +10,7 @@ export function convertMainEventClientToServer(event: Object) {
         programId: 'program',
         programStageId: 'programStage',
         orgUnitId: 'orgUnit',
-        trackedEntityInstanceId: 'trackedEntityInstance',
+        trackedEntityId: 'trackedEntity',
         enrollmentId: 'enrollment',
         assignee: 'assignedUser',
     };
@@ -26,7 +26,7 @@ export function convertMainEventClientToServer(event: Object) {
             convertedValue = convertClientToServer(value, dataElementTypes.DATE);
             break;
         case 'assignee':
-            convertedValue = value && convertAssigneeToServer(value);
+            convertedValue = value && convertClientToServer(value, dataElementTypes.ASSIGNEE);
             break;
         default:
             convertedValue = value;

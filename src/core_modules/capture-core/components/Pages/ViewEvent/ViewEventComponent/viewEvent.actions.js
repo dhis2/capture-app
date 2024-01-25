@@ -1,6 +1,7 @@
 // @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { UserFormField } from '../../../FormFields/UserField';
 
 export const actionTypes = {
     VIEW_EVENT_FROM_URL: 'ViewEventFromUrl',
@@ -19,6 +20,8 @@ export const actionTypes = {
     UPDATE_WORKING_LIST_PENDING_ON_BACK_TO_MAIN_PAGE: 'UpdateWorkingListPendingOnBackToMainPageForViewEvent',
     OPEN_VIEW_EVENT_PAGE_FAILED: 'OpenViewEventPageFailed',
     INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE: 'InitializeWorkingListsOnBackToMainPage',
+    ASSIGNEE_SET: 'SingleEvent.AssigneeSet',
+    ASSIGNEE_SAVE_FAILED: 'SingleEvent.AssigneeSaveFailed',
 };
 
 export const viewEventFromUrl = (data: Object) =>
@@ -74,3 +77,10 @@ export const updateEventContainer = (eventContainer: Object, orgUnit: OrgUnit) =
 
 export const openViewEventPageFailed = (error: string) =>
     actionCreator(actionTypes.OPEN_VIEW_EVENT_PAGE_FAILED)({ error });
+
+export const setAssignee = (assignee: UserFormField, eventId: string) =>
+    actionCreator(actionTypes.ASSIGNEE_SET)({ assignee, eventId });
+
+export const rollbackAssignee = (assignee: UserFormField, eventId: string) =>
+    actionCreator(actionTypes.ASSIGNEE_SAVE_FAILED)({ assignee, eventId });
+
