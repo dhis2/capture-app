@@ -1,6 +1,7 @@
 // @flow
 export const typeKeys = {
     TEXT: 'TEXT',
+    MULTI_TEXT: 'MULTI_TEXT',
     LONG_TEXT: 'LONG_TEXT',
     LETTER: 'LETTER',
     PHONE_NUMBER: 'PHONE_NUMBER',

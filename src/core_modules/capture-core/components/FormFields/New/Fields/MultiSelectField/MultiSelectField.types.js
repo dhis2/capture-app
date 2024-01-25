@@ -14,6 +14,7 @@ export type Props = {
     onBlur: (value: ?string) => void,
     options: Array<MultiSelectOptionConfig>,
     value?: string,
+    disabled: boolean,
     translations: {
         filterPlaceholder: string,
         noMatchText: string,
