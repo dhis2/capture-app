@@ -3,7 +3,7 @@
 declare type ApiAssignedUser = {|
     uid: string,
     username: string,
-    displayName: string,
+    displayName?: string,
     firstName: string,
     surname: string,
 |};

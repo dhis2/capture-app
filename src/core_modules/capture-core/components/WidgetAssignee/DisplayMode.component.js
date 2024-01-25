@@ -36,7 +36,7 @@ type Props = {
 };
 
 const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: Props) => (
-    assignee?.name ? (
+    assignee ? (
         <div className={classes.wrapper}>
             <div className={classes.avatarWrapper}>
                 {i18n.t('Assigned to')}
