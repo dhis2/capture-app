@@ -9,6 +9,7 @@ type Props = {
     refetchTEI: QueryRefetchFunction,
 }
 
+
 const UpdateEnrollmentOwnershipMutation = {
     resource: 'tracker/ownership/transfer',
     type: 'update',
@@ -21,6 +22,39 @@ const UpdateEnrollmentOwnershipMutation = {
 
 export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
     const dataEngine = useDataEngine();
+    const orgUnitIsInScope = async (orgUnitId: string) => {
+        const captureScopeQuery = dataEngine.query({
+            orgUnits: {
+                resource: 'organisationUnits',
+                params: {
+                    paging: false,
+                    userOnly: true,
+                    fields: 'id',
+                },
+            },
+        });
+
+        const ancestorsQuery = dataEngine.query({
+            ancestors: {
+                resource: 'organisationUnits',
+                id: orgUnitId,
+                params: {
+                    fields: 'ancestors',
+                },
+            },
+        });
+
+        const result = await Promise.all([
+            captureScopeQuery,
+            ancestorsQuery,
+        ]);
+
+        const [{ orgUnits: { organisationUnits } }, { ancestors: { ancestors } }] = result;
+        debugger;
+        ancestors.push({ id: orgUnitId });
+        return ancestors.some(({ id: ancestorId }) => organisationUnits.some(({ id }) => ancestorId === id));
+    };
+
     // $FlowFixMe
     const { mutate: updateEnrollmentOwnership } = useMutation(
         (orgUnitId: string) => dataEngine.mutate(UpdateEnrollmentOwnershipMutation, {
@@ -31,8 +65,13 @@ export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
             },
         }),
         {
-            onSuccess: () => {
-                refetchTEI();
+            onMutate: (orgUnitId) => {
+                orgUnitIsInScope(orgUnitId).then((isInScope) => {
+                    debugger;
+                    if (isInScope) {
+                        refetchTEI();
+                    }
+                });
             },
         },
     );
