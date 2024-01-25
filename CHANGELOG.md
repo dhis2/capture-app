@@ -1,3 +1,10 @@
+# [100.52.0](https://github.com/dhis2/capture-app/compare/v100.51.0...v100.52.0) (2024-01-25)
+
+
+### Features
+
+* [DHIS2-16204] make opt-in to new dashboard the default ([#3508](https://github.com/dhis2/capture-app/issues/3508)) ([5407d7c](https://github.com/dhis2/capture-app/commit/5407d7c98257e16cd647438a7cfe693a5fcd2e0e))
+
 # [100.51.0](https://github.com/dhis2/capture-app/compare/v100.50.7...v100.51.0) (2024-01-25)
 
 
