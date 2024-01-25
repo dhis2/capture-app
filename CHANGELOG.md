@@ -1,3 +1,10 @@
+# [100.51.0](https://github.com/dhis2/capture-app/compare/v100.50.7...v100.51.0) (2024-01-25)
+
+
+### Features
+
+* [DHIS2-15480] widget assignee ([#3412](https://github.com/dhis2/capture-app/issues/3412)) ([d61efae](https://github.com/dhis2/capture-app/commit/d61efae8b24ffb34a84e765bc397de87ce76c125))
+
 ## [100.50.7](https://github.com/dhis2/capture-app/compare/v100.50.6...v100.50.7) (2024-01-23)
 
 
