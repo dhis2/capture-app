@@ -7,12 +7,14 @@ import {
     DefaultWidgetsForEnrollmentOverview,
     EditEventWorkspace,
     EventComment,
+    AssigneeWidget,
     WidgetTypes,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
 export const WidgetsForEnrollmentEventEdit: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     EditEventWorkspace,
     EventComment,
+    AssigneeWidget,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
@@ -24,6 +26,10 @@ export const DefaultPageLayout: PageLayoutConfig = {
         },
     ],
     rightColumn: [
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'AssigneeWidget',
+        },
         {
             type: WidgetTypes.COMPONENT,
             name: 'ErrorWidget',

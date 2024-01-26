@@ -25,6 +25,7 @@ import type { WidgetConfig } from '../DefaultEnrollmentLayout.types';
 import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';
 import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
 import { WidgetEventComment } from '../../../../../WidgetEventComment';
+import { WidgetAssignee } from '../../../../../WidgetAssignee';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
@@ -183,6 +184,7 @@ export const EditEventWorkspace: WidgetConfig = {
         onCancelEditEvent,
         onHandleScheduleSave,
         initialScheduleDate,
+        assignee,
     }) => ({
         programStage,
         onGoBack,
@@ -194,6 +196,26 @@ export const EditEventWorkspace: WidgetConfig = {
         onCancelEditEvent,
         onHandleScheduleSave,
         initialScheduleDate,
+        assignee,
+    }),
+};
+
+export const AssigneeWidget: WidgetConfig = {
+    Component: WidgetAssignee,
+    getProps: ({
+        programStage,
+        assignee,
+        getAssignedUserSaveContext,
+        eventAccess,
+        onSaveAssignee,
+        onSaveAssigneeError,
+    }) => ({
+        enabled: programStage?.enableUserAssignment || false,
+        assignee,
+        getSaveContext: getAssignedUserSaveContext,
+        writeAccess: eventAccess?.write || false,
+        onSave: onSaveAssignee,
+        onSaveError: onSaveAssigneeError,
     }),
 };
 
