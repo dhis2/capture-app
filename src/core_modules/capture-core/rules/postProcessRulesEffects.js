@@ -1,7 +1,18 @@
 // @flow
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from '@dhis2/rules-engine-javascript';
-import type { RenderFoundation } from '.././metaData';
+import { type RenderFoundation, dataElementTypes } from '../metaData';
+
+const isValidOptionSet = (optionSet, effectValue) => {
+    if (!optionSet.options || effectValue === null || effectValue === '') {
+        return false;
+    }
+    // Using == because effect.value is always a string whereas option.value can be a number
+    if (optionSet.dataElementType === dataElementTypes.MULTI_TEXT) {
+        return effectValue.split(',').every(value => optionSet.options.some(option => option.value == value));
+    }
+    return optionSet.options.some(option => option.value == effectValue);
+};
 
 const getAssignEffectsBasedOnHideField = (hideEffects: Array<HideOutputEffect>) =>
     hideEffects
@@ -27,14 +38,13 @@ const postProcessAssignEffects = ({
 }) => {
     const optionSets = foundation.getElements().filter(({ optionSet }) => optionSet).reduce((acc, { id, optionSet }) => {
         // $FlowFixMe
-        acc[id] = optionSet.options;
+        acc[id] = { options: optionSet.options, dataElementType: optionSet.dataElement.type };
         return acc;
     }, {});
 
     // If a value gets assigned to an option set it must match one of its available options
     assignValueEffects.map((effect) => {
-        // Using == because effect.value is always a string whereas option.value can be a number
-        if (optionSets[effect.id] && !optionSets[effect.id].some(option => option.value == effect.value)) {
+        if (optionSets[effect.id] && !isValidOptionSet(optionSets[effect.id], effect.value)) {
             effect.value = null;
         }
         return effect;

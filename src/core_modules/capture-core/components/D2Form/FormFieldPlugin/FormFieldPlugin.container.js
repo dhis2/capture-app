@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FormFieldPluginComponent } from './FormFieldPlugin.component';
 import type { ContainerProps } from './FormFieldPlugin.types';
 import { usePluginMessages } from './hooks/usePluginMessages';
@@ -9,7 +9,14 @@ import { formatPluginConfig } from './formatPluginConfig';
 import { useLocationQuery } from '../../../utils/routing';
 
 export const FormFieldPlugin = (props: ContainerProps) => {
-    const { pluginSource, fieldsMetadata, formId, onUpdateField, pluginContext } = props;
+    const {
+        pluginSource,
+        fieldsMetadata,
+        formId,
+        onUpdateField,
+        customAttributes,
+        pluginContext,
+    } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
     const { orgUnitId } = useLocationQuery();
@@ -24,20 +31,18 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         pluginContext,
     });
 
-    // Expanding iframe height temporarily to fit content - LIBS-487
-    useEffect(() => {
-        const iframe = document.querySelector('iframe');
-        if (iframe) iframe.style.height = '500px';
-    }, []);
-
     // Remove ids from plugin metadata before passing to plugin
     const formattedMetadata = useMemo(() => {
         const metadata = [...fieldsMetadata.entries()];
-        return metadata.reduce((acc, [pluginId, pluginMetadata]) => {
-            const formattedPluginMetadata = formatPluginConfig(pluginMetadata, { keysToOmit: ['id'] });
-            return { ...acc, [pluginId]: formattedPluginMetadata };
+
+        return metadata.reduce((acc, [pluginFieldId, pluginMetadata]) => {
+            const formattedPluginMetadata = formatPluginConfig(pluginMetadata, {
+                attributes: customAttributes,
+                keysToOmit: ['id', 'dataElement', 'section'],
+            });
+            return { ...acc, [pluginFieldId]: formattedPluginMetadata };
         }, {});
-    }, [fieldsMetadata]);
+    }, [customAttributes, fieldsMetadata]);
 
     return (
         <FormFieldPluginComponent
