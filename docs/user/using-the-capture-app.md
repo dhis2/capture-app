@@ -566,11 +566,11 @@ You can set up your own views and save them for later use. The views can also be
 
     ![](resources/images/view_delete.png)
 
-## User assignment { #capture_user_assignment } 
+## User assignment in events programs { #capture_user_assignment } 
 
 Events can be assigned to users. This feature must be enabled per program.
 
-### Assigning new events { #capture_user_assignment_new } 
+### Assigning user to new events { #capture_user_assignment_new } 
 
 1. Select an organisation unit and a program with user assignment enabled.
 
@@ -1193,8 +1193,16 @@ Instead of reporting an event the user can select to schedule an event for later
 
 The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
 
-#### Change assignee
+### Assigning user to new events
+When reporting or scheduling an event, you can assign a user to it. This feature must be enabled per program stage in a tracker program by clicking the "Allow user assignment of events" check box.
 
+You will find the assignee section near the bottom of the data entry page. Search for and select the user you would like to assign the event to. The assignee will be preserved when you save the event.
+
+![](resources/images/user_assignment_report_new.png)
+
+![](resources/images/user_assignment_schedule_new_filled.png)
+
+### Change assignee
 1. In View/Edit enrollment event page
 
 2. In the right column you will find the assignee widget.
