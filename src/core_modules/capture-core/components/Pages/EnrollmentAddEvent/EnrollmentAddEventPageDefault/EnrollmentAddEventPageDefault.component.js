@@ -6,6 +6,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import {
+    EnrollmentPageKeys,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
 const styles = ({ typography }) => ({
     container: {
@@ -76,6 +79,7 @@ const EnrollmentAddEventPagePain = ({
         <div>
             <EnrollmentPageLayout
                 {...passOnProps}
+                currentPage={EnrollmentPageKeys.NEW_EVENT}
                 program={program}
                 pageLayout={pageLayout}
                 stageId={stageId}

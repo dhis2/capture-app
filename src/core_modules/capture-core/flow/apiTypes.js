@@ -3,7 +3,7 @@
 declare type ApiAssignedUser = {|
     uid: string,
     username: string,
-    displayName: string,
+    displayName?: string,
     firstName: string,
     surname: string,
 |};
@@ -18,7 +18,7 @@ declare type ApiEnrollmentEvent = {|
     program: string,
     programStage: string,
     orgUnit: string,
-    trackedEntityInstance: string,
+    trackedEntity: string,
     enrollment: string,
     enrollmentStatus: string,
     status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
@@ -29,6 +29,8 @@ declare type ApiEnrollmentEvent = {|
     notes?: Array<Object>,
     deleted?: boolean,
     pendingApiResponse?: ?boolean,
+    assignedUser?: ApiAssignedUser,
+    followUp?: boolean,
 |};
 
 type ApiAttributeValues = {

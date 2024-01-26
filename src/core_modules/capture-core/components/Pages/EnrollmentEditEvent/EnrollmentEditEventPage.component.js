@@ -7,6 +7,9 @@ import { TopBar } from './TopBar.container';
 import { NoticeBox } from '../../NoticeBox';
 import { EnrollmentPageLayout } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { WidgetsForEnrollmentEventEdit } from './PageLayout/DefaultPageLayout.constants';
+import {
+    EnrollmentPageKeys,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
 export const EnrollmentEditEventPageComponent = ({
     pageLayout,
@@ -29,11 +32,16 @@ export const EnrollmentEditEventPageComponent = ({
     eventDate,
     scheduleDate,
     eventStatus,
+    eventAccess,
+    assignee,
     pageStatus,
     onEnrollmentError,
     onEnrollmentSuccess,
     onCancelEditEvent,
     onHandleScheduleSave,
+    getAssignedUserSaveContext,
+    onSaveAssignee,
+    onSaveAssigneeError,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -51,6 +59,7 @@ export const EnrollmentEditEventPageComponent = ({
         />
         <EnrollmentPageLayout
             pageLayout={pageLayout}
+            currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
 
             trackedEntityTypeId={trackedEntityTypeId}
@@ -74,6 +83,11 @@ export const EnrollmentEditEventPageComponent = ({
             hideWidgets={hideWidgets}
             onDelete={onDelete}
             onAddNew={onAddNew}
+            eventAccess={eventAccess}
+            assignee={assignee}
+            getAssignedUserSaveContext={getAssignedUserSaveContext}
+            onSaveAssignee={onSaveAssignee}
+            onSaveAssigneeError={onSaveAssigneeError}
         />
         <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
     </OrgUnitFetcher>

@@ -1,5 +1,4 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import {
     QuickActions,
     StagesAndEvents,
@@ -8,19 +7,18 @@ import {
     WidgetTypes,
 } from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import type {
-    DefaultPageLayoutConfig,
+    PageLayoutConfig,
     WidgetConfig,
 } from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 
 export const WidgetsForEnrollmentPageDefault: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     QuickActions,
     StagesAndEvents,
-    Notes: EnrollmentComment,
+    EnrollmentComment,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
-export const DefaultPageLayout: DefaultPageLayoutConfig = Object.freeze({
-    title: i18n.t('Enrollment Dashboard'),
+export const DefaultPageLayout: PageLayoutConfig = Object.freeze({
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,

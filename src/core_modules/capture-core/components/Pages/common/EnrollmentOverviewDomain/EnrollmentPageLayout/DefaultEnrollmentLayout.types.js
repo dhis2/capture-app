@@ -5,6 +5,7 @@ import { WidgetTypes } from './DefaultEnrollmentLayout.constants';
 
 type DefaultComponents = 'QuickActions'
     | 'StagesAndEvents'
+    | 'AssigneeWidget'
     | 'NewEventWorkspace'
     | 'EditEventWorkspace'
     | 'EnrollmentComment'
@@ -31,12 +32,10 @@ export type PluginWidgetColumnConfig = {
 export type ColumnConfig = DefaultWidgetColumnComfig | PluginWidgetColumnConfig;
 
 export type PageLayoutConfig = {
-    title: ?string,
+    title?: ?string,
     leftColumn: ?Array<ColumnConfig>,
     rightColumn: ?Array<ColumnConfig>,
 }
-
-export type DefaultPageLayoutConfig = $Exact<PageLayoutConfig>;
 
 export type WidgetConfig = {
     Component: React$ComponentType<any>,

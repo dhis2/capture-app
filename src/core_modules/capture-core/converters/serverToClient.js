@@ -14,7 +14,7 @@ function convertTime(d2Value: string) {
 const convertAssignedUserToClient = (assignedUser?: ApiAssignedUser) =>
     ((assignedUser && assignedUser.uid) ? {
         id: assignedUser.uid,
-        name: assignedUser.displayName,
+        name: assignedUser.displayName || `${assignedUser.firstName} ${assignedUser.surname}`,
         username: assignedUser.username,
         firstName: assignedUser.firstName,
         surname: assignedUser.surname,

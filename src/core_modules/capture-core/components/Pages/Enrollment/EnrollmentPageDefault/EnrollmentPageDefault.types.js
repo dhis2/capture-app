@@ -8,8 +8,12 @@ import type { LinkedRecordClick } from '../../../WidgetsRelationship/WidgetTrack
 import type {
     PageLayoutConfig, WidgetConfig,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+import {
+    EnrollmentPageKeys,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
 export type Props = {|
+    currentPage: $Values<typeof EnrollmentPageKeys>,
     program: TrackerProgram,
     enrollmentId: string,
     teiId: string,

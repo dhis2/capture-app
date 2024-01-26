@@ -57,6 +57,7 @@ export const WidgetEventEditPlain = ({
     orgUnitId,
     enrollmentId,
     teiId,
+    assignee,
     classes,
 }: PlainProps) => {
     const dispatch = useDispatch();
@@ -144,6 +145,7 @@ export const WidgetEventEditPlain = ({
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
+                            assignee={assignee}
                         />
                     )}
                 </div>

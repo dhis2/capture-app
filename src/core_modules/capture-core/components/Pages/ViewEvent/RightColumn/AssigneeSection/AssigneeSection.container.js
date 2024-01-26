@@ -1,25 +1,35 @@
 // @flow
-import { connect } from 'react-redux';
-import { AssigneeSectionComponent } from './AssigneeSection.component';
-import { setAssignee } from './assigneeSection.actions';
+import React from 'react';
+import { WidgetAssignee } from '../../../../WidgetAssignee';
+import type { ProgramStage } from '../../../../../metaData';
+import type { UserFormField } from '../../../../FormFields/UserField';
 
-const mapStateToProps = (state: ReduxState) => {
-    const assigneeSection = state.viewEventPage.assigneeSection || {};
+type Props = {|
+    assignee: UserFormField | null,
+    programStage: ?ProgramStage,
+    eventAccess: {|
+        read: boolean,
+        write: boolean,
+    |} | null,
+    getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
+    onSaveAssignee: (newAssignee: UserFormField) => void,
+    onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
+|};
 
-    return {
-        assignee: (!assigneeSection.isLoading) ?
-            state.viewEventPage.loadedValues.eventContainer.event.assignee :
-            undefined,
-        ready: !assigneeSection.isLoading,
-    };
-};
-
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onSet: (user: Object) => {
-        dispatch(setAssignee(user));
-    },
-});
-
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
-export const AssigneeSection = connect(mapStateToProps, mapDispatchToProps)(AssigneeSectionComponent);
+export const AssigneeSection = ({
+    assignee,
+    programStage,
+    getAssignedUserSaveContext,
+    eventAccess,
+    onSaveAssignee,
+    onSaveAssigneeError,
+}: Props) => (
+    <WidgetAssignee
+        enabled={programStage?.enableUserAssignment || false}
+        assignee={assignee}
+        getSaveContext={getAssignedUserSaveContext}
+        writeAccess={eventAccess?.write || false}
+        onSave={onSaveAssignee}
+        onSaveError={onSaveAssigneeError}
+    />
+);

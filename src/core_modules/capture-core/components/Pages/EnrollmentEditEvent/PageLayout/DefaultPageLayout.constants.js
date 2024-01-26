@@ -1,24 +1,24 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import type {
-    DefaultPageLayoutConfig,
+    PageLayoutConfig,
     WidgetConfig,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 import {
     DefaultWidgetsForEnrollmentOverview,
     EditEventWorkspace,
     EventComment,
+    AssigneeWidget,
     WidgetTypes,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
 export const WidgetsForEnrollmentEventEdit: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     EditEventWorkspace,
     EventComment,
+    AssigneeWidget,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
-export const DefaultPageLayout: DefaultPageLayoutConfig = {
-    title: i18n.t('Enrollment{{escape}} Edit event', { escape: ':' }),
+export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
@@ -26,6 +26,10 @@ export const DefaultPageLayout: DefaultPageLayoutConfig = {
         },
     ],
     rightColumn: [
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'AssigneeWidget',
+        },
         {
             type: WidgetTypes.COMPONENT,
             name: 'ErrorWidget',

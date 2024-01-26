@@ -668,9 +668,6 @@ msgstr "There is an error while opening this enrollment. Please enter a valid ur
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
-msgid "Enrollment Dashboard"
-msgstr "Enrollment Dashboard"
-
 msgid "Quick actions"
 msgstr "Quick actions"
 
@@ -769,9 +766,6 @@ msgstr "Schedule"
 msgid "Refer"
 msgstr "Refer"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "Enrollment{{escape}} New Event"
-
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "You can't add any more {{ programStageName }} events"
 
@@ -786,9 +780,6 @@ msgstr "Program Stages could not be loaded"
 
 msgid "Stage"
 msgstr "Stage"
-
-msgid "Enrollment{{escape}} Edit event"
-msgstr "Enrollment{{escape}} Edit event"
 
 msgid "Registered events"
 msgstr "Registered events"
@@ -902,15 +893,6 @@ msgstr ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 
-msgid "No one is assigned to this event"
-msgstr "No one is assigned to this event"
-
-msgid "Assign"
-msgstr "Assign"
-
-msgid "Event assigned to {{name}}"
-msgstr "Event assigned to {{name}}"
-
 msgid "Feedbacks"
 msgstr "Feedbacks"
 
@@ -925,6 +907,15 @@ msgstr "Event could not be loaded"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Edit Event"
+msgstr "Edit Event"
+
+msgid "View Event"
+msgstr "View Event"
 
 msgid "No feedback for this enrollment yet"
 msgstr "No feedback for this enrollment yet"
@@ -1086,11 +1077,23 @@ msgstr "New {{trackedEntityName}} in {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
 
-msgid "To work with the selected program,"
-msgstr "To work with the selected program,"
+msgid "Assigned to"
+msgstr "Assigned to"
 
-msgid "open the Tracker Capture app"
-msgstr "open the Tracker Capture app"
+msgid "You don't have access to edit this assignee"
+msgstr "You don't have access to edit this assignee"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "No one is assigned to this event"
+msgstr "No one is assigned to this event"
+
+msgid "You don't have access to assign an assignee"
+msgstr "You don't have access to assign an assignee"
+
+msgid "Assign"
+msgstr "Assign"
 
 msgid "This program is protected"
 msgstr "This program is protected"
@@ -1166,9 +1169,6 @@ msgstr "Latitude"
 
 msgid "Longitude"
 msgstr "Longitude"
-
-msgid "Edit"
-msgstr "Edit"
 
 msgid "Set coordinates"
 msgstr "Set coordinates"
@@ -1365,9 +1365,6 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
-msgid "Assigned to"
-msgstr "Assigned to"
-
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"
 
@@ -1562,6 +1559,9 @@ msgstr "Error deleting the enrollment event"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "Error editing the event, the changes made were not saved"
+
+msgid "Error updating the Assignee"
+msgstr "Error updating the Assignee"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
