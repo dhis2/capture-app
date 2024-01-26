@@ -22,6 +22,13 @@ type Props = {
 const MemoizedWidgets: { [key: string]: React$ComponentType<any> } = {};
 const UnsupportedWidgets: { [key: string]: boolean } = {};
 
+const getPropsForPlugin = ({ program, enrollmentId, teiId, orgUnitId }) => ({
+    programId: program.id,
+    enrollmentId,
+    teiId,
+    orgUnitId,
+});
+
 const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
     const { type } = widget;
 
@@ -76,15 +83,7 @@ const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
             PluginWidget = EnrollmentPlugin;
             MemoizedWidgets[source] = (PluginWidget);
         }
-
-        const getProps = ({ program, enrollmentId, teiId, orgUnitId }) => ({
-            programId: program.id,
-            enrollmentId,
-            teiId,
-            orgUnitId,
-        });
-
-        const widgetProps = getProps(props);
+        const widgetProps = getPropsForPlugin(props);
 
         return (
             <PluginWidget
