@@ -103,3 +103,12 @@ Feature: The user interacts with the widgets on the enrollment edit event
     Then the enrollment widget should be loaded
     When you click edit mode
     Then list should contain the new comment: new test comment
+
+  Scenario: You can assign a user to a event
+  Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=veuwiLC2x0e&orgUnitId=g8upMTyEZGZ
+  When you assign the user Geetha in the view mode
+  Then the event has the user Geetha Alwan assigned
+  When you assign the user Tracker demo User in the edit mode
+  Then the event has the user Tracker demo User assigned
+  When you remove the assigned user
+  Then the event has no assignd user

@@ -14,6 +14,7 @@ import { WidgetFeedback } from '../../WidgetFeedback';
 import { WidgetIndicator } from '../../WidgetIndicator';
 import { WidgetProfile } from '../../WidgetProfile';
 import { WidgetEnrollment } from '../../WidgetEnrollment';
+import { WidgetAssignee } from '../../WidgetAssignee';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEventComment } from '../../WidgetEventComment';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
@@ -54,6 +55,121 @@ const styles = ({ typography }) => ({
     },
 });
 
+const EnrollmentEditEventPageLeft = ({
+    programStage,
+    teiId,
+    enrollmentId,
+    programId,
+    onGoBack,
+    orgUnitId,
+    scheduleDate,
+    eventStatus,
+    pageStatus,
+    onCancelEditEvent,
+    onHandleScheduleSave,
+    assignee,
+}) => (
+    <>
+        {pageStatus === pageStatuses.DEFAULT && programStage && (
+            <WidgetEventEdit
+                programStage={programStage}
+                onGoBack={onGoBack}
+                programId={programId}
+                orgUnitId={orgUnitId}
+                teiId={teiId}
+                enrollmentId={enrollmentId}
+                eventStatus={eventStatus}
+                initialScheduleDate={scheduleDate}
+                onCancelEditEvent={onCancelEditEvent}
+                onHandleScheduleSave={onHandleScheduleSave}
+                assignee={assignee}
+            />
+        )}
+        {pageStatus === pageStatuses.MISSING_DATA && (
+            <span>{i18n.t('The enrollment event data could not be found')}</span>
+        )}
+        {pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
+            <IncompleteSelectionsMessage>
+                {i18n.t('Choose a registering unit to start reporting')}
+            </IncompleteSelectionsMessage>
+        )}
+    </>
+);
+
+const EnrollmentEditEventPageRight = ({
+    mode,
+    programStage,
+    teiId,
+    enrollmentId,
+    trackedEntityTypeId,
+    programId,
+    widgetEffects,
+    hideWidgets,
+    onDelete,
+    onAddNew,
+    onLinkedRecordClick,
+    orgUnitId,
+    eventAccess,
+    assignee,
+    onEnrollmentError,
+    onEnrollmentSuccess,
+    getAssignedUserSaveContext,
+    onSaveAssignee,
+    onSaveAssigneeError,
+    addRelationShipContainerElement,
+    toggleVisibility,
+}) => (
+    <>
+        <WidgetAssignee
+            enabled={programStage?.enableUserAssignment || false}
+            assignee={assignee}
+            getSaveContext={getAssignedUserSaveContext}
+            writeAccess={eventAccess?.write || false}
+            onSave={onSaveAssignee}
+            onSaveError={onSaveAssigneeError}
+        />
+        <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
+        <WidgetError error={widgetEffects.errors} />
+        <WidgetWarning warning={widgetEffects.warnings} />
+        {!hideWidgets.feedback && (
+            <WidgetFeedback
+                emptyText={i18n.t('There are no feedback for this event')}
+                feedback={widgetEffects.feedbacks}
+            />
+        )}
+        {!hideWidgets.indicator && (
+            <WidgetIndicator
+                emptyText={i18n.t('There are no indicators for this event')}
+                indicators={widgetEffects.indicators}
+            />
+        )}
+        {addRelationShipContainerElement && (
+            <TrackedEntityRelationshipsWrapper
+                trackedEntityTypeId={trackedEntityTypeId}
+                teiId={teiId}
+                programId={programId}
+                orgUnitId={orgUnitId}
+                addRelationshipRenderElement={addRelationShipContainerElement}
+                onOpenAddRelationship={toggleVisibility}
+                onCloseAddRelationship={toggleVisibility}
+                onAddRelationship={() => {}}
+                onLinkedRecordClick={onLinkedRecordClick}
+            />
+        )}
+        <WidgetProfile teiId={teiId} programId={programId} />
+        <WidgetEnrollment
+            teiId={teiId}
+            enrollmentId={enrollmentId}
+            programId={programId}
+            readOnlyMode
+            onDelete={onDelete}
+            onAddNew={onAddNew}
+            onError={onEnrollmentError}
+            onSuccess={onEnrollmentSuccess}
+        />
+    </>
+);
+
 const EnrollmentEditEventPagePain = ({
     mode,
     programStage,
@@ -75,11 +191,16 @@ const EnrollmentEditEventPagePain = ({
     eventDate,
     scheduleDate,
     eventStatus,
+    eventAccess,
+    assignee,
     pageStatus,
     onEnrollmentError,
     onEnrollmentSuccess,
     onCancelEditEvent,
     onHandleScheduleSave,
+    getAssignedUserSaveContext,
+    onSaveAssignee,
+    onSaveAssigneeError,
 }: PlainProps) => {
     const [mainContentVisible, setMainContentVisible] = useState(true);
     const [addRelationShipContainerElement, setAddRelationShipContainerElement] = useState<?HTMLDivElement>(undefined);
@@ -104,10 +225,7 @@ const EnrollmentEditEventPagePain = ({
             <div className={classes.addRelationshipContainer}>
                 <AddRelationshipRefWrapper setRelationshipRef={setAddRelationShipContainerElement} />
             </div>
-            <div
-                className={classes.page}
-                style={!mainContentVisible ? { display: 'none' } : undefined}
-            >
+            <div className={classes.page} style={!mainContentVisible ? { display: 'none' } : undefined}>
                 <div className={classes.title}>
                     {mode === dataEntryKeys.VIEW
                         ? i18n.t('Enrollment{{escape}} View Event', { escape: ':' })
@@ -115,68 +233,45 @@ const EnrollmentEditEventPagePain = ({
                 </div>
                 <div className={classes.columns}>
                     <div className={classes.leftColumn}>
-                        {pageStatus === pageStatuses.DEFAULT && programStage && (
-                            <WidgetEventEdit
-                                programStage={programStage}
-                                onGoBack={onGoBack}
-                                programId={programId}
-                                orgUnitId={orgUnitId}
-                                teiId={teiId}
-                                enrollmentId={enrollmentId}
-                                eventStatus={eventStatus}
-                                initialScheduleDate={scheduleDate}
-                                onCancelEditEvent={onCancelEditEvent}
-                                onHandleScheduleSave={onHandleScheduleSave}
-                            />
-                        )}
-                        {pageStatus === pageStatuses.MISSING_DATA && (
-                            <span>{i18n.t('The enrollment event data could not be found')}</span>
-                        )}
-                        {pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
-                            <IncompleteSelectionsMessage>
-                                {i18n.t('Choose a registering unit to start reporting')}
-                            </IncompleteSelectionsMessage>
-                        )}
-                    </div>
-                    <div className={classes.rightColumn}>
-                        <WidgetEventComment dataEntryKey={mode} dataEntryId={dataEntryIds.ENROLLMENT_EVENT} />
-                        <WidgetError error={widgetEffects.errors} />
-                        <WidgetWarning warning={widgetEffects.warnings} />
-                        {!hideWidgets.feedback && (
-                            <WidgetFeedback
-                                emptyText={i18n.t('There are no feedback for this event')}
-                                feedback={widgetEffects.feedbacks}
-                            />
-                        )}
-                        {!hideWidgets.indicator && (
-                            <WidgetIndicator
-                                emptyText={i18n.t('There are no indicators for this event')}
-                                indicators={widgetEffects.indicators}
-                            />
-                        )}
-                        {addRelationShipContainerElement &&
-                            <TrackedEntityRelationshipsWrapper
-                                trackedEntityTypeId={trackedEntityTypeId}
-                                teiId={teiId}
-                                programId={programId}
-                                orgUnitId={orgUnitId}
-                                addRelationshipRenderElement={addRelationShipContainerElement}
-                                onOpenAddRelationship={toggleVisibility}
-                                onCloseAddRelationship={toggleVisibility}
-                                onAddRelationship={() => {}}
-                                onLinkedRecordClick={onLinkedRecordClick}
-                            />
-                        }
-                        <WidgetProfile teiId={teiId} programId={programId} />
-                        <WidgetEnrollment
+                        <EnrollmentEditEventPageLeft
+                            programStage={programStage}
                             teiId={teiId}
                             enrollmentId={enrollmentId}
                             programId={programId}
-                            readOnlyMode
+                            classes={classes}
+                            onGoBack={onGoBack}
+                            orgUnitId={orgUnitId}
+                            scheduleDate={scheduleDate}
+                            eventStatus={eventStatus}
+                            pageStatus={pageStatus}
+                            onCancelEditEvent={onCancelEditEvent}
+                            onHandleScheduleSave={onHandleScheduleSave}
+                            assignee={assignee}
+                        />
+                    </div>
+                    <div className={classes.rightColumn}>
+                        <EnrollmentEditEventPageRight
+                            mode={mode}
+                            programStage={programStage}
+                            teiId={teiId}
+                            enrollmentId={enrollmentId}
+                            trackedEntityTypeId={trackedEntityTypeId}
+                            programId={programId}
+                            widgetEffects={widgetEffects}
+                            hideWidgets={hideWidgets}
                             onDelete={onDelete}
                             onAddNew={onAddNew}
-                            onError={onEnrollmentError}
-                            onSuccess={onEnrollmentSuccess}
+                            onLinkedRecordClick={onLinkedRecordClick}
+                            orgUnitId={orgUnitId}
+                            eventAccess={eventAccess}
+                            assignee={assignee}
+                            onEnrollmentError={onEnrollmentError}
+                            onEnrollmentSuccess={onEnrollmentSuccess}
+                            getAssignedUserSaveContext={getAssignedUserSaveContext}
+                            onSaveAssignee={onSaveAssignee}
+                            onSaveAssigneeError={onSaveAssigneeError}
+                            addRelationShipContainerElement={addRelationShipContainerElement}
+                            toggleVisibility={toggleVisibility}
                         />
                     </div>
                 </div>

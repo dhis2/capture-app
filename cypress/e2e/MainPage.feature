@@ -35,13 +35,14 @@ Feature: User interacts with Main page
         Then the current url is /#/?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF&selectedTemplateId=uy2gU8kT1jF-default
         And the TEI working list is displayed
 
-    Scenario: The admin user can optin to use the new Enrollment Dashboard
+    Scenario: The admin user can optout from using the new Enrollment Dashboard
         Given you open the main page with Ngelehun and child programme context
-        And you see the opt in component for Child Programme
-        When you opt in to use the new enrollment Dashboard for Child Programme
-        Then you see the opt out component for Child Programme
+        And the data store is clean
+        And you see the opt out component for Child Programme
         When you opt out to use the new enrollment Dashboard for Child Programme
         Then you see the opt in component for Child Programme
+        When you opt in to use the new enrollment Dashboard for Child Programme
+        Then you see the opt out component for Child Programme
 
     @v<41
     Scenario: The icon is rendered as an svg
