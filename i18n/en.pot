@@ -71,9 +71,6 @@ msgstr "error encountered during field validation"
 msgid "error"
 msgstr "error"
 
-msgid "Plugins are not yet available - Please contact your system administrator"
-msgstr "Plugins are not yet available - Please contact your system administrator"
-
 msgid "This value is validating"
 msgstr "This value is validating"
 

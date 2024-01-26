@@ -592,13 +592,13 @@ Events can be assigned to users. This feature must be enabled per program.
 
     ![](resources/images/user_assignment_edit.png)
 
-4. Click the edit button, or the **Assign** button if the event is not currently assigned to anyone.
+4. Click the **Edit** button, or the **Assign** button if the event is not currently assigned to anyone.
 
     ![](resources/images/user_assignment_edit_button.png)
 
     ![](resources/images/user_assignment_edit_add.png)
 
-5. Search for and select the user you would like to reassign the event to. The assignment is saved immediately.
+5. Search for and select the user you would like to reassign the event to. Click the **Save** button.
 
 ### Assignee in the event list { #capture_user_assignment_event_list } 
 
@@ -1201,6 +1201,22 @@ You will find the assignee section near the bottom of the data entry page. Searc
 ![](resources/images/user_assignment_report_new.png)
 
 ![](resources/images/user_assignment_schedule_new_filled.png)
+
+### Change assignee
+1. In View/Edit enrollment event page
+
+2. In the right column you will find the assignee widget.
+
+    ![](resources/images/user_assignment_edit_enrollment.png)
+
+3. Click the **Edit** button, or the **Assign** button if the event is not currently assigned to anyone.
+
+    ![](resources/images/user_assignment_edit_button.png)
+
+    ![](resources/images/user_assignment_edit_add.png)
+
+4. Search for and select the user you would like to reassign the event to. Click the **Save** button.
+
 
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.
