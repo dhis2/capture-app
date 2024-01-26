@@ -1,5 +1,6 @@
 // @flow
 import { useMemo, useEffect } from 'react';
+import { handleAPIResponse } from 'capture-core/utils/api';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useEventsInOrgUnit = (orgUnitId: string, selectedDate: string) => {
@@ -31,5 +32,6 @@ export const useEventsInOrgUnit = (orgUnitId: string, selectedDate: string) => {
         }
     }, [refetch, orgUnitId, selectedDate]);
 
-    return { error, events: !loading && data ? data.events.instances : [] };
+    const apiEvents = handleAPIResponse('events', data?.events);
+    return { error, events: !loading && data ? apiEvents : [] };
 };

@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
+import { handleAPIResponse } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator } from 'capture-core-utils';
 
@@ -81,7 +82,8 @@ const buildDataElementUnique = (
                 });
             }
             return requestPromise.then((result) => {
-                const otherTrackedEntityInstances = result?.instances?.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId) || [];
+                const apiTrackedEntities = handleAPIResponse('trackedEntities', result);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
                 const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 
                 const data = {

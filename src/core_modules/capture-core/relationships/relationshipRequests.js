@@ -1,5 +1,5 @@
 // @flow
-import isArray from 'd2-utilizr/lib/isArray';
+import { handleAPIResponse } from 'capture-core/utils/api';
 import { getProgramThrowIfNotFound, EventProgram } from '../metaData';
 import type { RelationshipType } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
@@ -11,11 +11,13 @@ async function getRelationships(
     relationshipTypes: Array<RelationshipType>,
     querySingleResource: QuerySingleResource,
 ) {
-    const apiRes = await querySingleResource({
+    const apiResponse = await querySingleResource({
         resource: 'tracker/relationships',
         params: queryParams,
     });
-    return apiRes?.instances && isArray(apiRes.instances) ? apiRes.instances?.map(rel => convertServerRelationshipToClient(rel, relationshipTypes)) : null;
+    const apiRelationships = handleAPIResponse('relationships', apiResponse);
+    // $FlowFixMe
+    return apiRelationships.map(rel => convertServerRelationshipToClient(rel, relationshipTypes));
 }
 
 export function getRelationshipsForEvent(
