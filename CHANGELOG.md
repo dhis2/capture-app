@@ -1,3 +1,10 @@
+# [100.53.0](https://github.com/dhis2/capture-app/compare/v100.52.0...v100.53.0) (2024-01-26)
+
+
+### Features
+
+* [DHIS2-15475] Form Field Plugins ([#3502](https://github.com/dhis2/capture-app/issues/3502)) ([2ccb87b](https://github.com/dhis2/capture-app/commit/2ccb87bb775056c701dfaf9b4f9494b0008a57c3))
+
 # [100.52.0](https://github.com/dhis2/capture-app/compare/v100.51.0...v100.52.0) (2024-01-25)
 
 
