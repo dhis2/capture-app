@@ -34,21 +34,21 @@ const styles = {
 
 type Props = {|
     programId: string,
-        setShowAccessible: () => void,
+    setShowAccessible: () => void,
     ...CssClasses,
 |}
 
 const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, classes }: Props) => {
     // TODO - this hook breaks the app when the program is not found
     const { program, programType } = useProgramInfo(programId);
-
-    const messageKey = programType === programTypes.TRACKER_PROGRAM ? '[TEI]' : 'events';
-    const IncompleteSelectionMessage = useMemo(() => (
-        i18n.t(`Or see all ${messageKey} accessible to you in {{program}}`, {
+    const IncompleteSelectionMessage = useMemo(() => (programType === programTypes.TRACKER_PROGRAM ? (
+        i18n.t('Or see all records accessible to you in {{program}} ', {
             program: program.name,
             interpolation: { escapeValue: false },
         })
-    ), [messageKey, program.name]);
+    ) : i18n.t('Or see all events accessible to you in {{program}}',
+        { program: program.name, interpolation: { escapeValue: false } })),
+    [program.name, programType]);
 
     return (
         <div
