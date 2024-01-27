@@ -9,9 +9,24 @@ export const enrollmentPageActionTypes = {
     INFORMATION_ERROR_FETCH: 'EnrollmentPage.ErrorOnFetching',
     INFORMATION_SUCCESS_FETCH: 'EnrollmentPage.SuccessOnFetching',
 
-    ENROLLMENTS_FETCH: 'EnrollmentPage.EnrollmentFetch',
-    ENROLLMENTS_ERROR_FETCH: 'EnrollmentPage.EnrollmentFetchFailure',
-    ENROLLMENTS_SUCCESS_FETCH: 'EnrollmentPage.EnrollmentFetchSuccess',
+    PROCESS_ENROLLMENT_ID: 'EnrollmentPage.EnrollmentUrlIdUpdated',
+    FETCH_ENROLLMENT_ID: 'EnrollmentPage.FetchEnrollmentId',
+    VERIFY_ENROLLMENT_ID_SUCCESS: 'EnrollmentPage.VerifyEnrollmentIdSuccess',
+    FETCH_ENROLLMENT_ID_SUCCESS: 'EnrollmentPage.FetchEnrollmentIdSuccess',
+    FETCH_ENROLLMENT_ID_ERROR: 'EnrollmentPage.FetchEnrollmentIdError',
+
+    PROCESS_TEI_ID: 'EnrollmentPage.TeiUrlIdUpdated',
+    FETCH_TEI: 'EnrollmentPage.FetchTei',
+    VERIFY_FETCH_TEI_SUCCESS: 'EnrollmentPage.VerifyFetchTeiSuccess',
+    FETCH_TEI_SUCCESS: 'EnrollmentPage.FetchTeiSuccess',
+    FETCH_TEI_ERROR: 'EnrollmentPage.FetchTeiError',
+
+    PROCESS_PROGRAM_ID: 'EnrollmentPage.ProgramUrlIdUpdated',
+    COMMIT_PROGRAM_ID: 'EnrollmentPage.CommitProgramId',
+
+    FETCH_ENROLLMENTS: 'EnrollmentPage.FetchEnrollments',
+    FETCH_ENROLLMENTS_ERROR: 'EnrollmentPage.FetchEnrollmentsError',
+    FETCH_ENROLLMENTS_SUCCESS: 'EnrollmentPage.FetchEnrollmentsSuccess',
 
     PAGE_OPEN: 'EnrollmentPage.Open',
     PAGE_CLEAN: 'EnrollmentPage.CleanOnUnmount',
@@ -50,17 +65,58 @@ export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayN
     actionCreator(enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH)(
         { teiDisplayName, tetId });
 
-export const fetchEnrollments = () =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_FETCH)();
+type IdSuite = {
+    teiId?: ?string,
+    programId?: ?string,
+};
 
-export const updateEnrollmentAccessLevel = ({ programId, accessLevel }: { programId: string, accessLevel: string }) =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_ERROR_FETCH)({ programId, accessLevel });
+export const changedEnrollmentId = (enrollmentId: string) =>
+    actionCreator(enrollmentPageActionTypes.PROCESS_ENROLLMENT_ID)({ enrollmentId });
+
+export const fetchEnrollmentId = (enrollmentId: string) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID)({ enrollmentId });
+
+export const verifyEnrollmentIdSuccess = ({ enrollmentId, trackedEntity, program }: Object) =>
+    actionCreator(enrollmentPageActionTypes.VERIFY_ENROLLMENT_ID_SUCCESS)({ enrollmentId, teiId: trackedEntity, programId: program });
+
+export const fetchEnrollmentIdSuccess = (payload: IdSuite) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_SUCCESS)(payload);
+
+export const fetchEnrollmentIdError = (error: string) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR)({ error });
+
+export const changedTeiId = (payload: IdSuite) =>
+    actionCreator(enrollmentPageActionTypes.PROCESS_TEI_ID)(payload);
+
+export const fetchTei = (payload: IdSuite) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_TEI)(payload);
+
+export const verifyFetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string }) =>
+    actionCreator(enrollmentPageActionTypes.VERIFY_FETCH_TEI_SUCCESS)(payload);
+
+export const fetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string }) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_TEI_SUCCESS)(payload);
+
+export const fetchTeiError = (teiId: string) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_TEI_ERROR)(teiId);
+
+export const changedProgramId = (payload: IdSuite) =>
+    actionCreator(enrollmentPageActionTypes.PROCESS_PROGRAM_ID)(payload);
+
+export const commitProgramId = (payload: IdSuite) =>
+    actionCreator(enrollmentPageActionTypes.COMMIT_PROGRAM_ID)(payload);
+
+export const fetchEnrollments = () =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS)();
+
+export const fetchEnrollmentsError = ({ accessLevel }: { accessLevel: string }) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_ERROR)({ accessLevel });
 
 export const saveEnrollments = ({ programId, enrollments }: any) =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENTS_SUCCESS_FETCH)({ programId, enrollments });
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ programId, enrollments });
 
-export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
-    actionCreator(enrollmentPageActionTypes.PAGE_OPEN)({ programId, orgUnitId, teiId, enrollmentId });
+export const openEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.PAGE_OPEN)();
 
 export const cleanEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();

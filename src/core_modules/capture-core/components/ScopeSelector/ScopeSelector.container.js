@@ -42,7 +42,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     }, [displayName, selectedOrgUnit, setSelectedOrgUnit]);
 
     useEffect(() => {
-        if (selectedOrgUnitId && !selectedOrgUnit.id) {
+        if (selectedOrgUnitId && selectedOrgUnit.id !== selectedOrgUnitId) {
             selectedOrgUnitId && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
         }
     }, [selectedOrgUnitId, selectedOrgUnit, setSelectedOrgUnit]);

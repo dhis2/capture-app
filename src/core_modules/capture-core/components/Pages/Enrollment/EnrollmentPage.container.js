@@ -1,14 +1,17 @@
 // @flow
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback, useRef } from 'react';
 import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
 import {
+    openEnrollmentPage,
     cleanEnrollmentPage,
+    changedEnrollmentId,
+    changedTeiId,
+    changedProgramId,
     fetchEnrollmentPageInformation,
     fetchEnrollments,
-    updateEnrollmentAccessLevel,
     showDefaultViewOnEnrollmentPage,
     showMissingMessageViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
@@ -22,7 +25,7 @@ import {
     buildEnrollmentsAsOptions,
     useSetEnrollmentId,
 } from '../../ScopeSelector';
-import { useLocationQuery } from '../../../utils/routing';
+import { useLocationQuery, getLocationQuery } from '../../../utils/routing';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
@@ -98,25 +101,12 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
 
     useEffect(() => {
-        dispatch(fetchEnrollmentPageInformation());
-    },
-    [
-        dispatch,
-        teiId,
-    ]);
+        dispatch(openEnrollmentPage());
+    }, []);
 
-    useEffect(() => {
-        programId ?
-            dispatch(fetchEnrollments()) :
-            dispatch(updateEnrollmentAccessLevel({
-                programId,
-                accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
-            }));
-    },
-    [
-        dispatch,
-        programId,
-    ]);
+    useEffect(() => { dispatch(changedEnrollmentId(enrollmentId)) }, [dispatch, enrollmentId]);
+    useEffect(() => { dispatch(changedTeiId({ teiId })) }, [dispatch, teiId])
+    useEffect(() => { dispatch(changedProgramId({ programId })) }, [dispatch, programId]);
 
     const error: boolean =
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
