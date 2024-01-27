@@ -12,6 +12,7 @@ const convertObjectToString = (value: ?{ name: string }) => (value ? value.name 
 
 export const inputConverter: IConvertInputRulesValue = {
     convertText: convertStringValue,
+    convertMultiText: convertStringValue,
     convertLongText: convertStringValue,
     convertLetter: convertStringValue,
     convertPhoneNumber: convertStringValue,

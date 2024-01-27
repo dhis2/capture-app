@@ -6,4 +6,4 @@ export const isNotValidOptionSet = (
     optionSet?: ?{
         +options: Array<Option>,
     },
-) => valueType === dataElementTypes.MULTI_TEXT && (!optionSet || optionSet.options.length === 0);
+) => valueType === dataElementTypes.MULTI_TEXT && (!optionSet || !optionSet.options || optionSet.options.length === 0);

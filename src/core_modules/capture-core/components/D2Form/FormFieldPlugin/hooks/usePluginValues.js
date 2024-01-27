@@ -6,7 +6,7 @@ import type { MetadataByPluginId, PluginContext } from '../FormFieldPlugin.types
 export const usePluginValues = (
     formId: string,
     metadataByPluginId: MetadataByPluginId,
-    pluginContext: PluginContext,
+    pluginContext: PluginContext = {},
 ) => {
     const formValuesRedux = useSelector(({ formsValues }) => formsValues[formId]);
 
