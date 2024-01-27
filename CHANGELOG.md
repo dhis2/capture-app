@@ -1,24 +1,3 @@
-# [100.53.0](https://github.com/dhis2/capture-app/compare/v100.52.0...v100.53.0) (2024-01-26)
-
-
-### Features
-
-* [DHIS2-15475] Form Field Plugins ([#3502](https://github.com/dhis2/capture-app/issues/3502)) ([2ccb87b](https://github.com/dhis2/capture-app/commit/2ccb87bb775056c701dfaf9b4f9494b0008a57c3))
-
-# [100.52.0](https://github.com/dhis2/capture-app/compare/v100.51.0...v100.52.0) (2024-01-25)
-
-
-### Features
-
-* [DHIS2-16204] make opt-in to new dashboard the default ([#3508](https://github.com/dhis2/capture-app/issues/3508)) ([5407d7c](https://github.com/dhis2/capture-app/commit/5407d7c98257e16cd647438a7cfe693a5fcd2e0e))
-
-# [100.51.0](https://github.com/dhis2/capture-app/compare/v100.50.7...v100.51.0) (2024-01-25)
-
-
-### Features
-
-* [DHIS2-15480] widget assignee ([#3412](https://github.com/dhis2/capture-app/issues/3412)) ([d61efae](https://github.com/dhis2/capture-app/commit/d61efae8b24ffb34a84e765bc397de87ce76c125))
-
 ## [100.50.7](https://github.com/dhis2/capture-app/compare/v100.50.6...v100.50.7) (2024-01-23)
 
 
