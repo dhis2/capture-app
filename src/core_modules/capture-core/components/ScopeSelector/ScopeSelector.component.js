@@ -87,9 +87,18 @@ class ScopeSelectorClass extends Component<Props, State> {
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+        const stickyTopBar = {
+            position: 'sticky',
+            top: 0,
+            zIndex: 1000,
+            width: '100%',
+        };
 
         return (
-            <div data-test={'scope-selector'}>
+            <div
+                style={stickyTopBar}
+                data-test={'scope-selector'}
+            >
                 <QuickSelector
                     onSetOrgUnit={onSetOrgUnit}
                     onSetProgramId={onSetProgramId}
