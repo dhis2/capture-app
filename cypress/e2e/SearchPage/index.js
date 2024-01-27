@@ -93,19 +93,6 @@ When('you fill in the unique identifier field with values that will return a tra
         .blur();
 });
 
-Then('you are navigated to the Tracker Capture', () => {
-    cy.url()
-        .should('include', 'dhis-web-tracker-capture/')
-        .should('include', 'dashboard?tei=')
-        .should('include', 'program=WSGAb5XwJ3Y');
-});
-
-Then('you are navigated to the Tracker Capture without program', () => {
-    cy.url()
-        .should('include', 'dhis-web-tracker-capture/')
-        .should('include', 'dashboard?tei=')
-        .should('include', 'tracked_entity_type=nEenWmSyUEp');
-});
 
 When('you fill in the first name with values that will return no results', () => {
     cy.get('[data-test="form-attributes"]')

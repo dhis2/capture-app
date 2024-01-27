@@ -82,8 +82,11 @@ export class D2SectionFieldsComponent extends Component<Props> {
                         component: FormFieldPlugin,
                         plugin: true,
                         props: {
+                            pluginId: metaDataElement.id,
+                            name: metaDataElement.name,
                             pluginSource: metaDataElement.pluginSource,
                             fieldsMetadata: metaDataElement.fields,
+                            customAttributes: metaDataElement.customAttributes,
                             formId: props.formId,
                         },
                     });

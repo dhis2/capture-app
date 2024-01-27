@@ -537,8 +537,10 @@ export class FormBuilder extends React.Component<Props> {
             pluginContext,
         } = this.props;
         const {
-            fieldsMetadata,
+            pluginId,
             pluginSource,
+            fieldsMetadata,
+            customAttributes,
             name,
             formId,
         } = field.props;
@@ -546,8 +548,10 @@ export class FormBuilder extends React.Component<Props> {
         return (
             <field.component
                 name={name}
-                fieldsMetadata={fieldsMetadata}
+                pluginId={pluginId}
+                customAttributes={customAttributes}
                 pluginSource={pluginSource}
+                fieldsMetadata={fieldsMetadata}
                 formId={formId}
                 onUpdateField={this.commitFieldUpdateFromPlugin.bind(this)}
                 pluginContext={pluginContext}

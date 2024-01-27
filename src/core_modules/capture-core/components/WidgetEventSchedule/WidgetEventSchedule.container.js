@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess } from '../../metaData';
+import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
 import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
 import type { ContainerProps } from './widgetEventSchedule.types';
@@ -18,7 +18,7 @@ import {
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
-import { convertAssigneeToServer } from '../../converters';
+import { convertClientToServer } from '../../converters';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -31,6 +31,8 @@ export const WidgetEventSchedule = ({
     onSaveErrorActionType,
     onCancel,
     initialScheduleDate,
+    enableUserAssignment,
+    assignee: storedAssignee,
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -44,7 +46,7 @@ export const WidgetEventSchedule = ({
     const { currentUser, noteId } = useCommentDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [comments, setComments] = useState([]);
-    const [assignee, setAssignee] = useState();
+    const [assignee, setAssignee] = useState(storedAssignee);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events
@@ -56,6 +58,10 @@ export const WidgetEventSchedule = ({
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
     }, [suggestedScheduleDate, scheduleDate]);
+
+    useEffect(() => {
+        setAssignee(storedAssignee);
+    }, [storedAssignee]);
 
     const onHandleSchedule = useCallback(() => {
         if (programCategory?.categories &&
@@ -82,7 +88,8 @@ export const WidgetEventSchedule = ({
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            ...(assignee && { assignedUser: convertAssigneeToServer(assignee) }),
+            // $FlowFixMe[incompatible-call]
+            ...(assignee && { assignedUser: convertClientToServer(assignee, dataElementTypes.ASSIGNEE) }),
         }));
     }, [
         dispatch,
@@ -170,7 +177,7 @@ export const WidgetEventSchedule = ({
             programId={programId}
             programCategory={programCategory}
             programName={program.name}
-            enableUserAssignment={stage?.enableUserAssignment}
+            enableUserAssignment={enableUserAssignment && stage?.enableUserAssignment}
             scheduleDate={scheduleDate}
             displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
             suggestedScheduleDate={suggestedScheduleDate}
