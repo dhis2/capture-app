@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-02T15:05:21.040Z\n"
-"PO-Revision-Date: 2024-01-02T15:05:21.040Z\n"
+"POT-Creation-Date: 2024-01-27T19:47:16.278Z\n"
+"PO-Revision-Date: 2024-01-27T19:47:16.278Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -816,6 +816,12 @@ msgstr "Registered events"
 
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
+
+msgid "Or see all records accessible to you in {{program}} "
+msgstr "Or see all records accessible to you in {{program}} "
+
+msgid "Or see all events accessible to you in {{program}}"
+msgstr "Or see all events accessible to you in {{program}}"
 
 msgid "Please select an organisation unit."
 msgstr "Please select an organisation unit."
