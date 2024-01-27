@@ -8,7 +8,7 @@ import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container'
 import { IndicatorsSection } from './IndicatorsSection/IndicatorsSection.container';
 import { RelationshipsSection } from './RelationshipsSection/RelationshipsSection.container';
 import { NotesSection } from './NotesSection/NotesSection.container';
-import { AssigneeSection } from './AssigneeSection/AssigneeSection.container';
+import { AssigneeSection } from './AssigneeSection';
 
 type Props = {
     classes: {

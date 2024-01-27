@@ -72,7 +72,7 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
                 program: programId,
                 programStage: formFoundation.id,
                 orgUnit: orgUnitId,
-                trackedEntityInstance: teiId,
+                trackedEntity: teiId,
                 enrollment: enrollmentId,
                 ...getApiCategoriesArgument(state.currentSelections.categories),
                 dataValues: Object

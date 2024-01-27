@@ -7,7 +7,6 @@ import { programCollection } from 'capture-core/metaDataMemoryStores/programColl
 import { MainPageComponent } from './MainPage.component';
 import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
-import { enableNewDashboardsTemporarily } from '../../../utils/routing/newDashboard.actions';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
@@ -87,7 +86,7 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, history 
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { all, programId, orgUnitId, selectedTemplateId, newDashboard } = useLocationQuery();
+    const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
     const showAllAccessible = all !== undefined;
 
     const {
@@ -111,12 +110,6 @@ const MainPageContainer = () => {
     useEffect(() => {
         dispatch(updateShowAccessibleStatus(showAllAccessible));
     }, [showAllAccessible, dispatch]);
-
-    useEffect(() => {
-        if (newDashboard) {
-            dispatch(enableNewDashboardsTemporarily(newDashboard.split(',')));
-        }
-    }, [dispatch, newDashboard]);
 
     useEffect(() => {
         if (programId && trackedEntityTypeId && displayFrontPageList && selectedTemplateId === undefined) {

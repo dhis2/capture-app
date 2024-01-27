@@ -1,3 +1,52 @@
+# [100.53.0](https://github.com/dhis2/capture-app/compare/v100.52.0...v100.53.0) (2024-01-26)
+
+
+### Features
+
+* [DHIS2-15475] Form Field Plugins ([#3502](https://github.com/dhis2/capture-app/issues/3502)) ([2ccb87b](https://github.com/dhis2/capture-app/commit/2ccb87bb775056c701dfaf9b4f9494b0008a57c3))
+
+# [100.52.0](https://github.com/dhis2/capture-app/compare/v100.51.0...v100.52.0) (2024-01-25)
+
+
+### Features
+
+* [DHIS2-16204] make opt-in to new dashboard the default ([#3508](https://github.com/dhis2/capture-app/issues/3508)) ([5407d7c](https://github.com/dhis2/capture-app/commit/5407d7c98257e16cd647438a7cfe693a5fcd2e0e))
+
+# [100.51.0](https://github.com/dhis2/capture-app/compare/v100.50.7...v100.51.0) (2024-01-25)
+
+
+### Features
+
+* [DHIS2-15480] widget assignee ([#3412](https://github.com/dhis2/capture-app/issues/3412)) ([d61efae](https://github.com/dhis2/capture-app/commit/d61efae8b24ffb34a84e765bc397de87ce76c125))
+
+## [100.50.7](https://github.com/dhis2/capture-app/compare/v100.50.6...v100.50.7) (2024-01-23)
+
+
+### Bug Fixes
+
+* [DHIS2-15888] multi text element in program rules ([#3482](https://github.com/dhis2/capture-app/issues/3482)) ([fd0776d](https://github.com/dhis2/capture-app/commit/fd0776d2261b761c9985db3f6bfb0fda4a2ad18c))
+
+## [100.50.6](https://github.com/dhis2/capture-app/compare/v100.50.5...v100.50.6) (2024-01-21)
+
+
+### Bug Fixes
+
+* [DHIS2-16352] Add spacing between event overview cards ([#3500](https://github.com/dhis2/capture-app/issues/3500)) ([2041d60](https://github.com/dhis2/capture-app/commit/2041d605454529b3bcd77fa3b53a4655ae1495cf))
+
+## [100.50.5](https://github.com/dhis2/capture-app/compare/v100.50.4...v100.50.5) (2024-01-21)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([eca1ba4](https://github.com/dhis2/capture-app/commit/eca1ba418e672a58df08785b74430c60e8eb9bcb))
+
+## [100.50.4](https://github.com/dhis2/capture-app/compare/v100.50.3...v100.50.4) (2024-01-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ad60c3a](https://github.com/dhis2/capture-app/commit/ad60c3a4500176c8db08ceb05e074eedfcf5e2b3))
+
 ## [100.50.3](https://github.com/dhis2/capture-app/compare/v100.50.2...v100.50.3) (2023-12-24)
 
 

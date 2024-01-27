@@ -4,7 +4,7 @@ import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
-import { EMPTY, of } from 'rxjs';
+import { EMPTY } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -38,7 +38,6 @@ import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString'
 import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { navigateToEnrollmentOverview } from '../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
 
 const getDataEntryId = (event): string => (
@@ -220,6 +219,7 @@ export const startCreateNewAfterCompletingEpic = (
 
                 return EMPTY;
             }
-            return of(navigateToEnrollmentOverview(params));
+            history.push(`/enrollment?${buildUrlQueryString(params)}`);
+            return EMPTY;
         }));
 
