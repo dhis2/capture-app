@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-05T11:12:17.180Z\n"
-"PO-Revision-Date: 2024-01-05T11:12:17.180Z\n"
+"POT-Creation-Date: 2024-01-28T18:28:58.743Z\n"
+"PO-Revision-Date: 2024-01-28T18:28:58.743Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1176,6 +1176,9 @@ msgstr "Mark for follow-up"
 msgid "Transfer"
 msgstr "Transfer"
 
+msgid "An error occurred while transferring ownership"
+msgstr "An error occurred while transferring ownership"
+
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "Existing dates for auto-generated events will not be updated."
 
@@ -1205,9 +1208,6 @@ msgstr "Finish drawing before saving"
 
 msgid "Set area"
 msgstr "Set area"
-
-msgid "Search for an organisation unit"
-msgstr "Search for an organisation unit"
 
 msgid "Transfer Ownership"
 msgstr "Transfer Ownership"

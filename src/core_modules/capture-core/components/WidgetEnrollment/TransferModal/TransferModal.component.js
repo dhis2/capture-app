@@ -11,7 +11,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
 import type { TransferModalProps } from './TransferModal.types';
-import { OrgUnitField } from './OrgUnitField/OrgUnitField.component';
+import { OrgUnitField } from './OrgUnitField/OrgUnitField.container';
 
 export const TransferModal = ({
     enrollment,
@@ -36,8 +36,8 @@ export const TransferModal = ({
                 </div>
 
                 <OrgUnitField
-                    selectedOrgUnit={selectedOrgUnit}
-                    onSelect={setSelectedOrgUnit}
+                    selected={selectedOrgUnit}
+                    onSelectClick={setSelectedOrgUnit}
                 />
 
                 {/* Alert */}

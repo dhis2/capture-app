@@ -1,74 +1,104 @@
 // @flow
-import React, { useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
+import * as React from 'react';
+import { OrganisationUnitTree } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import { colors, OrganisationUnitTree } from '@dhis2/ui';
-import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
-import type { Props } from './OrgUnitField.types';
-import { DebounceField } from '../../../../../capture-ui';
+import { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';
 
-const styles = {
-    root: {
-        border: '1px solid #ccc',
-        margin: '20px 0',
+const getStyles = () => ({
+    orgunitTree: {
+        padding: 4,
+        minHeight: 42,
+        paddingTop: 8,
+        backgroundColor: 'white',
+        display: 'flex',
+        maxWidth: '100vw',
     },
-    debounceFieldContainer: {
-        padding: 8,
-        background: colors.grey100,
-        borderTopLeftRadius: 3,
-        borderTopRightRadius: 3,
+});
+
+type Props = {
+    roots: Array<Object>,
+    classes: {
+        orgunitTree: string,
     },
-    orgUnitTreeContainer: {
-        maxHeight: 300,
-        overflowY: 'auto',
-        margin: '10px 0',
-        padding: '0 8px',
-    },
+    onSelectClick: Function,
+    selected: ?{ path: string, id: string },
+    treeKey: string,
+    previousOrgUnitId?: Object
 };
 
-export const OrgUnitFieldPlain = ({ onSelect, selectedOrgUnit, classes }: Props) => {
-    const [searchQuery, setSearchQuery] = useState();
+const OrgUnitTreePlain = (props: Props) => {
+    const { roots, selected, classes, treeKey, previousOrgUnitId, onSelectClick } = props;
+    const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId);
+    const getExpandedItems = () => {
+        if (roots && roots.length === 1) {
+            return [`/${roots[0].id}`];
+        } else if (roots?.length > 1) {
+            return roots.map(root => root.path);
+        }
 
-    const { data: searchOrgUnits, isLoading } = useApiMetadataQuery(
-        ['organisationUnits', 'searchScope'],
-        {
-            resource: 'me',
-            params: {
-                fields: 'teiSearchOrganisationUnits[id,displayName,path]',
-            },
-        },
-        {
-            select: ({ teiSearchOrganisationUnits }) => teiSearchOrganisationUnits.map(orgUnit => orgUnit.id),
-        },
-    );
+        return undefined;
+    };
 
-    if (isLoading) {
-        return <div>Loading...</div>;
+    const getHighlightedItems = () => {
+        if (selected?.path) {
+            return [selected?.path];
+        }
+        if (previousSelectedOrgUnit?.path) {
+            return [previousSelectedOrgUnit?.path];
+        }
+        return undefined;
+    };
+
+    const initiallyExpanded = getExpandedItems();
+
+    const [expanded, setExpanded] = React.useState(initiallyExpanded);
+
+    React.useEffect(() => {
+        if (previousSelectedOrgUnit?.expandedPaths) {
+            setExpanded(previousSelectedOrgUnit.expandedPaths);
+        }
+    }, [previousSelectedOrgUnit?.expandedPaths]);
+
+    const handleExpand = ({ path }) => {
+        if (expanded && !expanded.includes(path)) {
+            setExpanded([...expanded, path]);
+        }
+    };
+
+    const handleCollapse = ({ path }) => {
+        const pathIndex = expanded?.indexOf(path);
+
+        if (pathIndex && pathIndex !== -1 && expanded) {
+            const updatedExpanded =
+                pathIndex === 0
+                    ? expanded.slice(1)
+                    : [
+                        ...expanded.slice(0, pathIndex),
+                        ...expanded.slice(pathIndex + 1),
+                    ];
+            setExpanded(updatedExpanded);
+        }
+    };
+
+
+    if (!roots) {
+        return null;
     }
 
-    const selectedPath = [selectedOrgUnit?.path];
-    console.log('selectedPath', selectedPath);
     return (
-        <>
-            <div className={classes.root}>
-                <div className={classes.debounceFieldContainer}>
-                    <DebounceField
-                        value={searchQuery}
-                        onDebounced={event => setSearchQuery(event.currentTarget.value)}
-                        placeholder={i18n.t('Search for an organisation unit')}
-                    />
-                </div>
-                <div className={classes.orgUnitTreeContainer}>
-                    <OrganisationUnitTree
-                        roots={searchOrgUnits}
-                        selected={selectedOrgUnit ? [selectedOrgUnit?.path] : []}
-                        singleSelection
-                        onChange={orgUnit => onSelect(orgUnit)}
-                    />
-                </div>
-            </div>
-        </>
+        <div className={classes.orgunitTree}>
+            <OrganisationUnitTree
+                key={treeKey}
+                roots={roots.map(item => item.id)}
+                expanded={expanded}
+                handleExpand={handleExpand}
+                handleCollapse={handleCollapse}
+                singleSelection
+                selected={getHighlightedItems()}
+                onChange={onSelectClick}
+            />
+        </div>
     );
 };
 
-export const OrgUnitField = withStyles(styles)(OrgUnitFieldPlain);
+export const OrgUnitTreeComponent = withStyles(getStyles)(OrgUnitTreePlain);

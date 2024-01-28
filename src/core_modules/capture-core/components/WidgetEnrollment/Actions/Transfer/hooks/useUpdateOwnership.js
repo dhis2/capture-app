@@ -1,6 +1,7 @@
 // @flow
 import type { QueryRefetchFunction } from '@dhis2/app-runtime';
-import { useDataEngine } from '@dhis2/app-runtime';
+import i18n from '@dhis2/d2-i18n';
+import { useAlert, useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { useMutation } from 'react-query';
 
 type Props = {
@@ -13,15 +14,31 @@ type Props = {
 const UpdateEnrollmentOwnershipMutation = {
     resource: 'tracker/ownership/transfer',
     type: 'update',
-    params: ({ teiId, programId, orgUnitId }) => ({
-        trackedEntity: teiId,
-        program: programId,
-        ou: orgUnitId,
-    }),
+    params: ({ teiId, programId, orgUnitId, apiVersion }) => {
+        const params = {
+            program: programId,
+            ou: orgUnitId,
+            trackedEntityInstance: null,
+            trackedEntity: null,
+        };
+
+        if (apiVersion <= 40) {
+            params.trackedEntityInstance = teiId;
+        } else {
+            params.trackedEntity = teiId;
+        }
+
+        return params;
+    },
 };
 
 export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
     const dataEngine = useDataEngine();
+    const { apiVersion } = useConfig();
+    const { show: showErrorAlert } = useAlert(
+        i18n.t('An error occurred while transferring ownership'),
+        { critical: true },
+    );
     const orgUnitIsInScope = async (orgUnitId: string) => {
         const captureScopeQuery = dataEngine.query({
             orgUnits: {
@@ -29,7 +46,7 @@ export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
                 params: {
                     paging: false,
                     userOnly: true,
-                    fields: 'id',
+                    fields: 'id,displayName',
                 },
             },
         });
@@ -39,7 +56,7 @@ export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
                 resource: 'organisationUnits',
                 id: orgUnitId,
                 params: {
-                    fields: 'ancestors',
+                    fields: 'ancestors[id,displayName]',
                 },
             },
         });
@@ -50,9 +67,11 @@ export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
         ]);
 
         const [{ orgUnits: { organisationUnits } }, { ancestors: { ancestors } }] = result;
-        debugger;
         ancestors.push({ id: orgUnitId });
-        return ancestors.some(({ id: ancestorId }) => organisationUnits.some(({ id }) => ancestorId === id));
+        debugger;
+        return ancestors.some(({ id: ancestorId }) => organisationUnits.some(({ id }) => {
+            return ancestorId === id;
+        }));
     };
 
     // $FlowFixMe
@@ -62,17 +81,18 @@ export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
                 programId,
                 teiId,
                 orgUnitId,
+                apiVersion,
             },
         }),
         {
             onMutate: (orgUnitId) => {
                 orgUnitIsInScope(orgUnitId).then((isInScope) => {
-                    debugger;
                     if (isInScope) {
                         refetchTEI();
                     }
                 });
             },
+            onError: () => showErrorAlert(),
         },
     );
 
