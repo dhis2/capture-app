@@ -116,6 +116,7 @@ const EnrollmentEditEventPageRight = ({
     getAssignedUserSaveContext,
     onSaveAssignee,
     onSaveAssigneeError,
+    onTransferOutsideCaptureScope,
     addRelationShipContainerElement,
     toggleVisibility,
 }) => (
@@ -152,7 +153,8 @@ const EnrollmentEditEventPageRight = ({
                 addRelationshipRenderElement={addRelationShipContainerElement}
                 onOpenAddRelationship={toggleVisibility}
                 onCloseAddRelationship={toggleVisibility}
-                onAddRelationship={() => {}}
+                onAddRelationship={() => {
+                }}
                 onLinkedRecordClick={onLinkedRecordClick}
             />
         )}
@@ -166,6 +168,7 @@ const EnrollmentEditEventPageRight = ({
             onAddNew={onAddNew}
             onError={onEnrollmentError}
             onSuccess={onEnrollmentSuccess}
+            onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
         />
     </>
 );
@@ -201,6 +204,7 @@ const EnrollmentEditEventPagePain = ({
     getAssignedUserSaveContext,
     onSaveAssignee,
     onSaveAssigneeError,
+    onTransferOutsideCaptureScope,
 }: PlainProps) => {
     const [mainContentVisible, setMainContentVisible] = useState(true);
     const [addRelationShipContainerElement, setAddRelationShipContainerElement] = useState<?HTMLDivElement>(undefined);
@@ -272,6 +276,7 @@ const EnrollmentEditEventPagePain = ({
                             onSaveAssigneeError={onSaveAssigneeError}
                             addRelationShipContainerElement={addRelationShipContainerElement}
                             toggleVisibility={toggleVisibility}
+                            onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
                         />
                     </div>
                 </div>

@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { DebounceField } from 'capture-ui';
 import { withStyles } from '@material-ui/core/styles';
 import { OrgUnitTreeComponent } from './OrgUnitField.component';
-import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
+import { useSearchScopeWithFallback } from './useSearchScopeWithFallback';
 
 const styles = {
     root: {
@@ -36,39 +36,45 @@ type Props = {
     },
 };
 
+const DefaultTreeKey = 'Initial';
+
 export const OrgUnitFieldPlain = ({ selected, onSelectClick, classes }: Props) => {
-    const { data: searchOrgUnits, isLoading } = useApiMetadataQuery(
-        ['organisationUnits', 'searchScope'],
-        {
-            resource: 'me',
-            params: {
-                // fields: 'teiSearchOrganisationUnits[id,displayName,path]',
-                fields: 'organisationUnits[id,displayName,path]',
-            },
-        },
-        {
-            select: ({ organisationUnits }) => organisationUnits,
-        },
-    );
+    const [searchText, setSearchText] = useState(undefined);
+    const [key, setKey] = useState(DefaultTreeKey);
+    const { orgUnitRoots, isLoading } = useSearchScopeWithFallback({
+        searchText,
+    });
+
+    useEffect(() => {
+        if (searchText?.length) {
+            setKey(`${searchText}-${new Date().getTime()}`);
+            return;
+        }
+        setKey(DefaultTreeKey);
+    }, [searchText]);
 
     if (isLoading) {
         return null;
     }
 
+    const handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
+        setSearchText(event.currentTarget.value);
+    };
+
     return (
         <div className={classes.root}>
             <div className={classes.debounceFieldContainer}>
                 <DebounceField
-                    onDebounced={(...props) => console.log('onDebounced', props)}
-                    // value={searchText}
+                    onDebounced={handleFilterChange}
+                    value={searchText}
                     placeholder={i18n.t('Search')}
                     classes={classes}
-                    // disabled={disabled}
                 />
             </div>
             <div className={classes.orgUnitTreeContainer}>
                 <OrgUnitTreeComponent
-                    roots={searchOrgUnits}
+                    treeKey={searchText ? key : DefaultTreeKey}
+                    roots={orgUnitRoots}
                     selected={selected}
                     onSelectClick={onSelectClick}
                 />

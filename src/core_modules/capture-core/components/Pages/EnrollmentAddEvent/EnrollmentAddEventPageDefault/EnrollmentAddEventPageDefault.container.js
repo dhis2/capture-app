@@ -64,6 +64,10 @@ export const EnrollmentAddEventPageDefault = ({
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
+    const onTransferOutsideCaptureScope = () => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    };
+
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
     const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
@@ -151,6 +155,7 @@ export const EnrollmentAddEventPageDefault = ({
                 dataEntryHasChanges={dataEntryHasChanges}
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
+                onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
             />
         </>
     );

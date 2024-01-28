@@ -27,6 +27,7 @@ export type PlainProps = {|
     onEnrollmentSuccess: () => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) => void,
+    onTransferOutsideCaptureScope?: () => void,
     pageStatus: string,
     eventStatus?: string,
     eventAccess: {|

@@ -12,17 +12,25 @@ import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
 import type { TransferModalProps } from './TransferModal.types';
 import { OrgUnitField } from './OrgUnitField/OrgUnitField.container';
+import { useTransferValidation } from './hooks/useTransferValidation';
+import { InfoBoxes } from './InfoBoxes';
 
 export const TransferModal = ({
     enrollment,
+    ownerOrgUnitId,
     setOpenTransfer,
     onUpdateOwnership,
 }: TransferModalProps) => {
     const [selectedOrgUnit, setSelectedOrgUnit] = useState();
-
-    const onUpdate = (updatedOrgUnitId) => {
-        onUpdateOwnership(updatedOrgUnitId);
-    };
+    const {
+        validOrgUnit,
+        orgUnitScopes,
+        programAccessLevel,
+    } = useTransferValidation({
+        selectedOrgUnit,
+        programId: enrollment.program,
+        ownerOrgUnitId,
+    });
 
     return (
         <Modal
@@ -41,6 +49,12 @@ export const TransferModal = ({
                 />
 
                 {/* Alert */}
+                <InfoBoxes
+                    ownerOrgUnitId={ownerOrgUnitId}
+                    validOrgUnitId={validOrgUnit?.id}
+                    programAccessLevel={programAccessLevel}
+                    orgUnitScopes={orgUnitScopes}
+                />
             </ModalContent>
 
             <ModalActions>
@@ -52,10 +66,15 @@ export const TransferModal = ({
                     </Button>
                     <Button
                         primary
-                        disabled={!selectedOrgUnit}
+                        disabled={!selectedOrgUnit || !validOrgUnit}
+                        loading={selectedOrgUnit && validOrgUnit?.id !== selectedOrgUnit?.id}
                         onClick={() => {
-                            if (!selectedOrgUnit) return;
-                            onUpdate(selectedOrgUnit.id);
+                            if (!validOrgUnit) return;
+                            onUpdateOwnership({
+                                orgUnitId: validOrgUnit.id,
+                                programAccessLevel,
+                                orgUnitScopes,
+                            });
                             setOpenTransfer(false);
                         }}
                     >

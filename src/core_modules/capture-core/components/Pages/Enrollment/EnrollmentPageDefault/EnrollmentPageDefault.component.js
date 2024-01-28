@@ -72,6 +72,7 @@ export const EnrollmentPageDefaultPlain = ({
     onUpdateIncidentDate,
     onEnrollmentError,
     ruleEffects,
+    onTransferOutsideCaptureScope,
 }: PlainProps) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
     const [addRelationShipContainerElement, setAddRelationshipContainerElement] =
@@ -149,6 +150,7 @@ export const EnrollmentPageDefaultPlain = ({
                             onUpdateEnrollmentDate={onUpdateEnrollmentDate}
                             onUpdateIncidentDate={onUpdateIncidentDate}
                             onError={onEnrollmentError}
+                            onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
                         />}
                     </div>
                 </div>

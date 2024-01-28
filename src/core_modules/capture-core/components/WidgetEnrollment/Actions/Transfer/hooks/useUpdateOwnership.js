@@ -3,12 +3,24 @@ import type { QueryRefetchFunction } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { useMutation } from 'react-query';
+import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
+import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
 
 type Props = {
     teiId: ?string,
     programId: ?string,
+    onTransferOutsideCaptureScope?: () => void,
     refetchTEI: QueryRefetchFunction,
 }
+
+export type UpdateEnrollmentOwnership = {|
+    orgUnitId: string,
+    programAccessLevel: ?$Values<typeof ProgramAccessLevels>,
+    orgUnitScopes: {
+        ORIGIN: ?$Values<typeof OrgUnitScopes>,
+        DESTINATION: ?$Values<typeof OrgUnitScopes>,
+    },
+|} => void;
 
 
 const UpdateEnrollmentOwnershipMutation = {
@@ -32,51 +44,22 @@ const UpdateEnrollmentOwnershipMutation = {
     },
 };
 
-export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
+export const useUpdateOwnership = ({
+    refetchTEI,
+    programId,
+    teiId,
+    onTransferOutsideCaptureScope,
+}: Props): { updateEnrollmentOwnership: UpdateEnrollmentOwnership } => {
     const dataEngine = useDataEngine();
     const { apiVersion } = useConfig();
     const { show: showErrorAlert } = useAlert(
         i18n.t('An error occurred while transferring ownership'),
         { critical: true },
     );
-    const orgUnitIsInScope = async (orgUnitId: string) => {
-        const captureScopeQuery = dataEngine.query({
-            orgUnits: {
-                resource: 'organisationUnits',
-                params: {
-                    paging: false,
-                    userOnly: true,
-                    fields: 'id,displayName',
-                },
-            },
-        });
-
-        const ancestorsQuery = dataEngine.query({
-            ancestors: {
-                resource: 'organisationUnits',
-                id: orgUnitId,
-                params: {
-                    fields: 'ancestors[id,displayName]',
-                },
-            },
-        });
-
-        const result = await Promise.all([
-            captureScopeQuery,
-            ancestorsQuery,
-        ]);
-
-        const [{ orgUnits: { organisationUnits } }, { ancestors: { ancestors } }] = result;
-        ancestors.push({ id: orgUnitId });
-        debugger;
-        return ancestors.some(({ id: ancestorId }) => organisationUnits.some(({ id }) => {
-            return ancestorId === id;
-        }));
-    };
 
     // $FlowFixMe
     const { mutate: updateEnrollmentOwnership } = useMutation(
-        (orgUnitId: string) => dataEngine.mutate(UpdateEnrollmentOwnershipMutation, {
+        ({ orgUnitId }) => dataEngine.mutate(UpdateEnrollmentOwnershipMutation, {
             variables: {
                 programId,
                 teiId,
@@ -85,12 +68,33 @@ export const useUpdateOwnership = ({ refetchTEI, programId, teiId }: Props) => {
             },
         }),
         {
-            onMutate: (orgUnitId) => {
-                orgUnitIsInScope(orgUnitId).then((isInScope) => {
-                    if (isInScope) {
+            onMutate: ({ programAccessLevel, orgUnitScopes }) => {
+                // If the user is transferring ownership to a capture scope, we stay on the same page
+                if (orgUnitScopes.DESTINATION === OrgUnitScopes.CAPTURE) {
+                    refetchTEI();
+                    return;
+                }
+
+                if ([ProgramAccessLevels.OPEN, ProgramAccessLevels.AUDITED].includes(programAccessLevel)) {
+                    refetchTEI();
+                    return;
+                }
+
+                // Assuming that all cases are outside the capture scope and program is protected or closed
+
+                if (programAccessLevel === ProgramAccessLevels.PROTECTED) {
+                    if (orgUnitScopes.ORIGIN === OrgUnitScopes.CAPTURE) {
+                        onTransferOutsideCaptureScope && onTransferOutsideCaptureScope();
+                        return;
+                    } else if (orgUnitScopes.ORIGIN === OrgUnitScopes.SEARCH) {
                         refetchTEI();
+                        return;
                     }
-                });
+                }
+
+                if (programAccessLevel === ProgramAccessLevels.CLOSED) {
+                    onTransferOutsideCaptureScope && onTransferOutsideCaptureScope();
+                }
             },
             onError: () => showErrorAlert(),
         },

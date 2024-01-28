@@ -30,6 +30,7 @@ const styles = {
 
 export const ActionsPlain = ({
     enrollment = {},
+    ownerOrgUnitId,
     tetName,
     canAddNew,
     onUpdate,
@@ -124,6 +125,7 @@ export const ActionsPlain = ({
             {isOpenTransfer && (
                 <TransferModal
                     enrollment={enrollment}
+                    ownerOrgUnitId={ownerOrgUnitId}
                     setOpenTransfer={setOpenTransfer}
                     onUpdateOwnership={onUpdateOwnership}
                 />

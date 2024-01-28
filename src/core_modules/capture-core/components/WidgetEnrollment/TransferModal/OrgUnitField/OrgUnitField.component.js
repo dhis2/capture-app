@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { OrganisationUnitTree } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import { usePreviousOrganizationUnit } from './usePreviousOrganizationUnit';
 
 const getStyles = () => ({
     orgunitTree: {
@@ -23,12 +22,10 @@ type Props = {
     onSelectClick: Function,
     selected: ?{ path: string, id: string },
     treeKey: string,
-    previousOrgUnitId?: Object
 };
 
 const OrgUnitTreePlain = (props: Props) => {
-    const { roots, selected, classes, treeKey, previousOrgUnitId, onSelectClick } = props;
-    const previousSelectedOrgUnit = usePreviousOrganizationUnit(previousOrgUnitId);
+    const { roots, selected, classes, treeKey, onSelectClick } = props;
     const getExpandedItems = () => {
         if (roots && roots.length === 1) {
             return [`/${roots[0].id}`];
@@ -43,21 +40,12 @@ const OrgUnitTreePlain = (props: Props) => {
         if (selected?.path) {
             return [selected?.path];
         }
-        if (previousSelectedOrgUnit?.path) {
-            return [previousSelectedOrgUnit?.path];
-        }
         return undefined;
     };
 
     const initiallyExpanded = getExpandedItems();
 
     const [expanded, setExpanded] = React.useState(initiallyExpanded);
-
-    React.useEffect(() => {
-        if (previousSelectedOrgUnit?.expandedPaths) {
-            setExpanded(previousSelectedOrgUnit.expandedPaths);
-        }
-    }, [previousSelectedOrgUnit?.expandedPaths]);
 
     const handleExpand = ({ path }) => {
         if (expanded && !expanded.includes(path)) {

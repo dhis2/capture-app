@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-28T18:28:58.743Z\n"
-"PO-Revision-Date: 2024-01-28T18:28:58.743Z\n"
+"POT-Creation-Date: 2024-01-29T10:42:09.557Z\n"
+"PO-Revision-Date: 2024-01-29T10:42:09.557Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1206,6 +1206,20 @@ msgstr "Finish drawing before saving"
 msgid "Set area"
 msgstr "Set area"
 
+msgid ""
+"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"{{newOrgUnit}}{{escape}}"
+msgstr ""
+"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"{{newOrgUnit}}{{escape}}"
+
+msgid ""
+"You will lose access to the enrollment when transferring ownership to "
+"{{organisationUnit}}."
+msgstr ""
+"You will lose access to the enrollment when transferring ownership to "
+"{{organisationUnit}}."
+
 msgid "Transfer Ownership"
 msgstr "Transfer Ownership"
 
@@ -1392,9 +1406,6 @@ msgstr "This stage can only have one event"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
-
-msgid "Assigned to"
-msgstr "Assigned to"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"

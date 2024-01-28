@@ -12,6 +12,7 @@ export const Actions = ({
     onDelete,
     onError,
     onSuccess,
+    onTransferOutsideCaptureScope,
     ...passOnProps
 }: Props) => {
     const { updateMutation, updateLoading } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
@@ -19,6 +20,7 @@ export const Actions = ({
     const { updateEnrollmentOwnership } = useUpdateOwnership({
         teiId: enrollment.trackedEntity,
         programId: enrollment.program,
+        onTransferOutsideCaptureScope,
         refetchTEI,
     });
 
