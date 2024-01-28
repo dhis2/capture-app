@@ -47,9 +47,8 @@ Feature: User interacts with the Enrollment New Event Workspace
     Then the input should throw an error with error-message Please provide a positive integer
 
   Scenario: User should be asked to create new event after completing a stage and choose to cancel
-    Given you open the main page with Ngelehun and Malaria focus investigation context
-    And you opt in to use the new enrollment Dashboard for Malaria focus investigation
-    Then you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=CWaAcQYKVpq&teiId=S3JjTA4QMNe
+    Given you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=CWaAcQYKVpq&teiId=S3JjTA4QMNe
+    And the data store is clean
     Then you see the following Enrollment: New Event
     And you see the widget header Foci investigation & classification
     And you type 2022-01-01 in the input number 0

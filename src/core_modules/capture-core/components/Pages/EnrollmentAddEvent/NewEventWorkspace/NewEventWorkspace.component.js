@@ -105,6 +105,7 @@ const NewEventWorkspacePlain = ({
                         onSave={onSave}
                         onCancel={onCancel}
                         hideDueDate={stage?.hideDueDate}
+                        enableUserAssignment
                     />}
                 </div>
             </Widget>
