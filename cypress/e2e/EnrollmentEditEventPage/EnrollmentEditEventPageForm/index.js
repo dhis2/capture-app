@@ -54,6 +54,7 @@ When(/^the user changes the gender to (.*)/, gender =>
 When(/^the user sets Plurality assessed to (.*)/, text =>
     cy
         .get('[data-test="widget-enrollment-event"]')
+        .get('[data-test="scope-selector"]').invoke('css', 'z-index', '1')
         .get('[data-test="virtualized-select"]')
         .eq(4)
         .click()
