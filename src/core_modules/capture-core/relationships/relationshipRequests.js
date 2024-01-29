@@ -16,7 +16,7 @@ async function getRelationships(
         params: queryParams,
     });
     const apiRelationships = handleAPIResponse('relationships', apiResponse);
-    // $FlowFixMe
+    // $FlowFixMe[missing-annot]
     return apiRelationships.map(rel => convertServerRelationshipToClient(rel, relationshipTypes));
 }
 

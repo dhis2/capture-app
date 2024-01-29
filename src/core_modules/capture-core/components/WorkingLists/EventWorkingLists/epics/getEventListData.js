@@ -182,7 +182,6 @@ export const getEventListData = async ({
     querySingleResource: QuerySingleResource,
 }) => {
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
-    // $FlowFixMe
     const { eventContainers, pagingData, request } = await getEvents(
         createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId),
         absoluteApiPath,

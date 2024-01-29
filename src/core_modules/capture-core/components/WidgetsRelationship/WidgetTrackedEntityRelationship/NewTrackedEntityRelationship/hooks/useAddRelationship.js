@@ -1,7 +1,9 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import { FEATURES, useFeature } from 'capture-core-utils';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
+import { handleAPIResponse } from 'capture-core/utils/api';
 
 type Props = {
     teiId: string;
@@ -19,6 +21,7 @@ const addRelationshipMutation = {
 
 export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     const queryClient = useQueryClient();
+    const queryKey: string = useFeature(FEATURES.exportablePayload) ? 'relationships' : 'instances';
     const dataEngine = useDataEngine();
     const { show: showSnackbar } = useAlert(
         i18n.t('An error occurred while adding the relationship'),
@@ -36,11 +39,12 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
             onError: (_, requestData) => {
                 showSnackbar();
                 const apiRelationshipId = requestData.clientRelationship.relationship;
-                const currentRelationships = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
+                const apiResponse = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
+                const apiRelationships = handleAPIResponse('relationships', apiResponse);
 
-                if (!currentRelationships?.instances) return;
+                if (apiRelationships.length === 0) return;
 
-                const newRelationships = currentRelationships.instances.reduce((acc, relationship) => {
+                const newRelationships = apiRelationships.reduce((acc, relationship) => {
                     if (relationship.relationship === apiRelationshipId) {
                         return acc;
                     }
@@ -50,7 +54,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
 
                 queryClient.setQueryData(
                     [ReactQueryAppNamespace, 'relationships', teiId],
-                    { instances: newRelationships },
+                    { [queryKey]: newRelationships },
                 );
             },
             onMutate: (...props) => {
@@ -58,18 +62,19 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
                 const { clientRelationship } = props[0];
                 if (!clientRelationship) return;
 
-                queryClient.setQueryData([ReactQueryAppNamespace, 'relationships', teiId], (oldData) => {
-                    const instances = oldData?.instances || [];
-                    const updatedInstances = [clientRelationship, ...instances];
-                    return { instances: updatedInstances };
+                queryClient.setQueryData([ReactQueryAppNamespace, 'relationships', teiId], (apiResponse) => {
+                    const apiRelationships = handleAPIResponse('relationships', apiResponse);
+                    const updatedInstances = [clientRelationship, ...apiRelationships];
+                    return { [queryKey]: updatedInstances };
                 });
             },
             onSuccess: async (apiResponse, requestData) => {
                 const apiRelationshipId = apiResponse.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
                 const currentRelationships = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
-                if (!currentRelationships?.instances) return;
+                const apiRelationships = handleAPIResponse('relationships', currentRelationships);
+                if (apiRelationships.length === 0) return;
 
-                const newRelationships = currentRelationships.instances.map((relationship) => {
+                const newRelationships = apiRelationships.map((relationship) => {
                     if (relationship.relationship === apiRelationshipId) {
                         return {
                             ...relationship,
@@ -81,7 +86,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
 
                 queryClient.setQueryData(
                     [ReactQueryAppNamespace, 'relationships', teiId],
-                    { instances: newRelationships },
+                    { [queryKey]: newRelationships },
                 );
                 onSuccess && onSuccess(apiResponse, requestData);
             },

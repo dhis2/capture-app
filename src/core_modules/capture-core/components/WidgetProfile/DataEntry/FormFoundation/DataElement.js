@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-import { handleAPIResponse } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator } from 'capture-core-utils';
 
@@ -20,7 +19,14 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../../metaDataMemoryStoreBuilders/common/helpers';
 import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
-import { getFeatureType, getDataElement, getLabel, isNotValidOptionSet, escapeString } from '../helpers';
+import {
+    getFeatureType,
+    getDataElement,
+    getLabel,
+    isNotValidOptionSet,
+    escapeString,
+    handleAPIResponse,
+} from '../helpers';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';

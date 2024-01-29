@@ -182,7 +182,7 @@ export async function getEvents(
     });
 
     const apiEvents = handleAPIResponse('events', apiResponse);
-    const eventContainers = await apiEvents.reduce(async (accEventsPromise, apiEvent) => {
+    const eventContainers: Array<Object> = await apiEvents.reduce(async (accEventsPromise, apiEvent) => {
         const accEvents = await accEventsPromise;
         const eventContainer = await convertToClientEvent(apiEvent, absoluteApiPath, querySingleResource);
         if (eventContainer) {
