@@ -1,101 +1,16 @@
 // @flow
-import React, { useCallback, useMemo } from 'react';
-import log from 'loglevel';
-import { errorCreator } from '../../../../../../../capture-core-utils';
-
-import { WidgetTypes } from '../DefaultEnrollmentLayout.constants';
-import { EnrollmentPlugin } from '../../../EnrollmentPlugin';
+import { useCallback, useMemo } from 'react';
 import type {
     ColumnConfig,
     PageLayoutConfig,
     WidgetConfig,
-    DefaultWidgetColumnComfig,
-    PluginWidgetColumnConfig,
 } from '../DefaultEnrollmentLayout.types';
+import { renderWidgets } from '../renderPageComponents';
 
 type Props = {
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
     props: Object,
-};
-
-const MemoizedWidgets: { [key: string]: React$ComponentType<any> } = {};
-const UnsupportedWidgets: { [key: string]: boolean } = {};
-
-const getPropsForPlugin = ({ program, enrollmentId, teiId, orgUnitId }) => ({
-    programId: program.id,
-    enrollmentId,
-    teiId,
-    orgUnitId,
-});
-
-const renderWidget = (widget: ColumnConfig, availableWidgets, props) => {
-    const { type } = widget;
-
-    if (type.toLowerCase() === WidgetTypes.COMPONENT) {
-        // Manually casting type to DefaultWidgetColumnComfig
-        const { name, settings = {} } = ((widget: any): DefaultWidgetColumnComfig);
-        const widgetConfig = availableWidgets[name];
-
-        if (!widgetConfig) {
-            if (!UnsupportedWidgets[name]) {
-                log.error(errorCreator(`Widget ${name} is not supported`)({ name }));
-                UnsupportedWidgets[name] = true;
-            }
-            return null;
-        }
-
-        const { getProps, shouldHideWidget, getCustomSettings } = widgetConfig;
-
-        const hideWidget = shouldHideWidget && shouldHideWidget(props);
-        if (hideWidget) return null;
-        let widgetProps = {};
-
-        // In case the widget is not supported, we don't want to crash the app
-        try {
-            widgetProps = getProps(props);
-        } catch (error) {
-            log.error(errorCreator(`Error while getting widget props for widget ${name}`)({ error, props }));
-            return null;
-        }
-        const customSettings = getCustomSettings && getCustomSettings(settings);
-
-        let Widget = MemoizedWidgets[name];
-
-        if (!Widget) {
-            Widget = widgetConfig.Component;
-            MemoizedWidgets[name] = React.memo(Widget);
-        }
-
-        return (
-            <Widget
-                {...widgetProps}
-                {...customSettings}
-                key={name}
-            />
-        );
-    } else if (type.toLowerCase() === WidgetTypes.PLUGIN) {
-        // Manually casting type to PluginWidgetColumnConfig
-        const { source } = ((widget: any): PluginWidgetColumnConfig);
-        let PluginWidget = MemoizedWidgets[source];
-
-        if (!PluginWidget) {
-            PluginWidget = EnrollmentPlugin;
-            MemoizedWidgets[source] = (PluginWidget);
-        }
-        const widgetProps = getPropsForPlugin(props);
-
-        return (
-            <PluginWidget
-                key={source}
-                pluginSource={source}
-                {...widgetProps}
-            />
-        );
-    }
-
-    log.error(errorCreator(`Widget type ${type} is not supported`)({ type }));
-    return null;
 };
 
 export const useWidgetColumns = ({
@@ -109,7 +24,7 @@ export const useWidgetColumns = ({
     } = pageLayout;
 
     const createColumnWidgets = useCallback(column =>
-        column?.map((widget: ColumnConfig) => renderWidget(widget, availableWidgets, props)).filter(Boolean),
+        column?.map((widget: ColumnConfig) => renderWidgets(widget, availableWidgets, props)).filter(Boolean),
     [availableWidgets, props],
     );
 

@@ -18,7 +18,7 @@ export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPlu
 
     useEffect(() => {
         const { current: container } = containerRef;
-        if (!container) return;
+        if (!container) return () => {};
 
         const resizeObserver = new ResizeObserver((entries) => {
             entries.forEach(entry => setPluginWidth(entry.contentRect.width));
@@ -27,7 +27,6 @@ export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPlu
         resizeObserver.observe(container);
 
         // Cleanup function
-        // eslint-disable-next-line consistent-return
         return () => {
             resizeObserver.unobserve(container);
             resizeObserver.disconnect();
