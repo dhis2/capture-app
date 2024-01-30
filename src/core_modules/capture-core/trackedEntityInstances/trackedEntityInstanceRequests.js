@@ -1,5 +1,5 @@
 // @flow
-import { handleAPIResponse } from 'capture-core/utils/api';
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { type DataElement, convertDataElementsValues } from '../metaData';
 import { convertValue } from '../converters/serverToClient';
 import { getSubValues } from './getSubValues';
@@ -68,7 +68,7 @@ export async function getTrackedEntityInstances(
         resource: 'tracker/trackedEntities',
         params: queryParams,
     });
-    const apiTrackedEntities = handleAPIResponse('trackedEntities', apiResponse);
+    const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiResponse);
 
     const trackedEntityInstanceContainers = await apiTrackedEntities.reduce(async (accTeiPromise, apiTei) => {
         const accTeis = await accTeiPromise;

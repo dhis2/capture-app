@@ -1,5 +1,5 @@
 // @flow
-import { handleAPIResponse } from 'capture-core/utils/api';
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { getProgramThrowIfNotFound, EventProgram } from '../metaData';
 import type { RelationshipType } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
@@ -15,7 +15,7 @@ async function getRelationships(
         resource: 'tracker/relationships',
         params: queryParams,
     });
-    const apiRelationships = handleAPIResponse('relationships', apiResponse);
+    const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);
     // $FlowFixMe[missing-annot]
     return apiRelationships.map(rel => convertServerRelationshipToClient(rel, relationshipTypes));
 }

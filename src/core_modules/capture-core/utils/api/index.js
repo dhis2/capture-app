@@ -1,4 +1,4 @@
 // @flow
 export { makeQuerySingleResource } from './makeQuerySingleResource';
-export { handleAPIResponse } from './handleAPIResponse';
+export { handleAPIResponse, REQUESTED_ENTITIES } from './handleAPIResponse';
 export type * from './api.types';

@@ -1,5 +1,5 @@
 // @flow
-import { handleAPIResponse } from 'capture-core/utils/api';
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { convertToClientTeis } from './convertToClientTeis';
 import { getSubvalues, getApiFilterQueryArgs, getMainApiFilterQueryArgs } from '../getListDataCommon';
 import type { RawQueryArgs } from './types';
@@ -46,7 +46,7 @@ export const getTeiListData = async (
         resource,
         params: queryArgs,
     });
-    const apiTrackedEntities = handleAPIResponse('trackedEntities', apiResponse);
+    const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiResponse);
     const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
     const clientTeis = convertToClientTeis(apiTrackedEntities, columnsMetaForDataFetchingArray, rawQueryArgs.programId);
     const clientTeisWithSubvalues = await getSubvalues(querySingleResource, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);

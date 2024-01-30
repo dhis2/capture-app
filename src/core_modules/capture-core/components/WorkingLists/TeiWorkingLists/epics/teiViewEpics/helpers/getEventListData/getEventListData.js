@@ -1,5 +1,5 @@
 // @flow
-import { handleAPIResponse } from 'capture-core/utils/api';
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { convertToClientEvents } from './convertToClientEvents';
 import {
     getSubvalues,
@@ -68,7 +68,7 @@ export const getEventListData = async (
         resource: resourceEvents,
         params: queryArgsEvents,
     });
-    const apiEvents = handleAPIResponse('events', apiEventsResponse);
+    const apiEvents = handleAPIResponse(REQUESTED_ENTITIES.events, apiEventsResponse);
 
     const trackedEntityIds = apiEvents
         .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])
@@ -82,7 +82,7 @@ export const getEventListData = async (
         resource: resourceTEIs,
         params: queryArgsTEIs,
     });
-    const apiTrackedEntities = handleAPIResponse('trackedEntities', apiTEIResponse);
+    const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiTEIResponse);
 
     const columnsMetaForDataFetchingArray = getColumnsQueryArgs(columnsMetaForDataFetching);
     const clientEvents = convertToClientEvents(addTEIsData(apiEvents, apiTrackedEntities), columnsMetaForDataFetchingArray);

@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
-import { handleAPIResponse } from 'capture-core/utils/api';
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 
 type Props = {
     teiId: string;
@@ -40,7 +40,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
                 showSnackbar();
                 const apiRelationshipId = requestData.clientRelationship.relationship;
                 const apiResponse = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
-                const apiRelationships = handleAPIResponse('relationships', apiResponse);
+                const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);
 
                 if (apiRelationships.length === 0) return;
 
@@ -63,7 +63,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
                 if (!clientRelationship) return;
 
                 queryClient.setQueryData([ReactQueryAppNamespace, 'relationships', teiId], (apiResponse) => {
-                    const apiRelationships = handleAPIResponse('relationships', apiResponse);
+                    const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);
                     const updatedInstances = [clientRelationship, ...apiRelationships];
                     return { [queryKey]: updatedInstances };
                 });
@@ -71,7 +71,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
             onSuccess: async (apiResponse, requestData) => {
                 const apiRelationshipId = apiResponse.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
                 const currentRelationships = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
-                const apiRelationships = handleAPIResponse('relationships', currentRelationships);
+                const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, currentRelationships);
                 if (apiRelationships.length === 0) return;
 
                 const newRelationships = apiRelationships.map((relationship) => {

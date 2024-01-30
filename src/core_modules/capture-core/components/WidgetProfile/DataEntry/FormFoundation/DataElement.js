@@ -26,6 +26,7 @@ import {
     isNotValidOptionSet,
     escapeString,
     handleAPIResponse,
+    REQUESTED_ENTITIES,
 } from '../helpers';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
@@ -88,7 +89,7 @@ const buildDataElementUnique = (
                 });
             }
             return requestPromise.then((result) => {
-                const apiTrackedEntities = handleAPIResponse('trackedEntities', result);
+                const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
                 const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
                 const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 

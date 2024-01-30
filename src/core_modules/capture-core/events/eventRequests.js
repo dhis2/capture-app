@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { handleAPIResponse } from 'capture-core/utils/api';
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { errorCreator } from 'capture-core-utils';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
@@ -181,7 +181,7 @@ export async function getEvents(
         params: queryParams,
     });
 
-    const apiEvents = handleAPIResponse('events', apiResponse);
+    const apiEvents = handleAPIResponse(REQUESTED_ENTITIES.events, apiResponse);
     const eventContainers: Array<Object> = await apiEvents.reduce(async (accEventsPromise, apiEvent) => {
         const accEvents = await accEventsPromise;
         const eventContainer = await convertToClientEvent(apiEvent, absoluteApiPath, querySingleResource);

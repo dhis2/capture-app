@@ -1,6 +1,6 @@
 // @flow
 import { useMemo } from 'react';
-import { handleAPIResponse } from 'capture-core/utils/api';
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import type { InputRelationshipData, RelationshipTypes } from '../Types';
 import { determineLinkedEntity } from '../RelationshipsWidget/useGroupedLinkedEntities';
@@ -35,7 +35,7 @@ export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Pr
         {
             enabled: !!entityId,
             select: (apiResponse: any) => {
-                const apiRelationships = handleAPIResponse('relationships', apiResponse);
+                const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);
                 if (!relationshipTypes?.length || !apiRelationships?.length) {
                     return [];
                 }
