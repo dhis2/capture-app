@@ -35,7 +35,7 @@ export const useEvents = (enrollment: any, elementsById: Array<any>) => {
                 programStageId: event.programStage,
                 orgUnitId: event.orgUnit,
                 orgUnitName: orgUnitNames[event.orgUnit],
-                trackedEntityInstanceId: event.trackedEntityInstance,
+                trackedEntityInstanceId: event.trackedEntity,
                 enrollmentId: event.enrollment,
                 enrollmentStatus: event.enrollmentStatus,
                 status: event.status,

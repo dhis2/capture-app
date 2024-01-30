@@ -44,7 +44,7 @@ export const getAddEventEnrollmentServerData = ({
                 program: programId,
                 programStage: formFoundation.id,
                 orgUnit: orgUnitId,
-                trackedEntityInstance: teiId,
+                trackedEntity: teiId,
                 enrollment: enrollmentId,
                 scheduledAt: mainDataServerValues.occurredAt,
                 orgUnitName,

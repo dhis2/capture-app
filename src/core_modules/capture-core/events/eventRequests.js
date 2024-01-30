@@ -61,7 +61,7 @@ const mapEventInputKeyToOutputKey = {
     program: 'programId',
     programStage: 'programStageId',
     orgUnit: 'orgUnitId',
-    trackedEntityInstance: 'trackedEntityInstanceId',
+    trackedEntity: 'trackedEntityId',
     enrollment: 'enrollmentId',
 };
 

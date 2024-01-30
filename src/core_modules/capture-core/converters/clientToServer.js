@@ -30,6 +30,17 @@ function convertRange(parser: (value: any) => any, rangeValue: RangeValue) {
     };
 }
 
+const convertAssigneeToServer = (assignee?: Assignee | null): ApiAssignedUser | null =>
+    (assignee
+        ? {
+            uid: assignee.id,
+            displayName: assignee.name,
+            username: assignee.username,
+            firstName: assignee.firstName,
+            surname: assignee.surname,
+        }
+        : null);
+
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.NUMBER_RANGE]: (value: RangeValue) => convertRange(stringifyNumber, value),
@@ -51,6 +62,7 @@ const valueConvertersForType = {
     [dataElementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.id,
     [dataElementTypes.AGE]: (rawValue: Object) => convertDate(rawValue),
+    [dataElementTypes.ASSIGNEE]: convertAssigneeToServer,
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
@@ -72,14 +84,4 @@ export function convertCategoryOptionsToServer(value: {[categoryId: string]: str
         }, []).join(';');
     }
     return value;
-}
-
-export function convertAssigneeToServer(assignee: Assignee): ApiAssignedUser {
-    return {
-        uid: assignee.id,
-        displayName: assignee.name,
-        username: assignee.username,
-        firstName: assignee.firstName,
-        surname: assignee.surname,
-    };
 }

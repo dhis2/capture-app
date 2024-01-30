@@ -58,6 +58,7 @@ export const WidgetEventEditPlain = ({
     orgUnitId,
     enrollmentId,
     teiId,
+    assignee,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -144,6 +145,7 @@ export const WidgetEventEditPlain = ({
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
+                            assignee={assignee}
                         />
                     )}
                 </div>

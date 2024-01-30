@@ -24,10 +24,11 @@ Feature: User interacts with Search page
 
     Scenario: Searching using unique identifier returns results
         Given you are on the default search page
+        And the data store is clean
         When you select the search domain WHO RMNCH Tracker
         And you fill in the unique identifier field with values that will return a tracked entity instance
         And you click find
-        Then you are navigated to the Tracker Capture
+        Then you are navigated to the enrollment dashboard page
 
     # Scenario: Searching using attributes in Tracker Program returns no results
     #     Given you are on the default search page
@@ -96,23 +97,25 @@ Feature: User interacts with Search page
 
     Scenario: Searching using attributes in Tracker Program navigates user to the dashboard view
         Given you are on the default search page
+        And the data store is clean
         When you select the search domain WHO RMNCH Tracker
         And you expand the attributes search area
         And you fill in the last name with values that will return results
         And you click search
         And you can see the first page of the results
         And you click the view dashboard button
-        Then you are navigated to the Tracker Capture
+        Then you are navigated to the enrollment dashboard page
 
     Scenario: Searching using attributes in TEType navigates user to dashboard view
         Given you are on the default search page
+        And the data store is clean
         When you select the search domain Person
         And you expand the attributes search area
         And you fill in the the form with first name value: Cla
         And you click search
         And you can see the first page of the results
         And you click the view dashboard button
-        Then you are navigated to the Tracker Capture without program
+        Then you are navigated to the enrollment dashboard page without enrollment
 
     Scenario: Searching using attributes in Tracker Program domain has disabled pagination
         Given you are on the default search page
@@ -162,9 +165,10 @@ Feature: User interacts with Search page
 
     Scenario: Pressing enter should trigger search unique identifier returns results
         Given you are on the default search page
+        And the data store is clean
         When you select the search domain WHO RMNCH Tracker
         And you press enter after filling in the unique identifier field with values that will return a tracked entity instance
-        Then you are navigated to the Tracker Capture 
+        Then you are navigated to the enrollment dashboard page
 
     Scenario: Pressing enter should trigger search attributes returns results
         Given you are in the search page with the Child Programme being preselected from the url
