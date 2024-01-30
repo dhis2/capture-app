@@ -24,7 +24,7 @@ export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Pr
         params: {
             // $FlowFixMe - searchMode should be a valid key of RelationshipSearchEntities
             [searchMode]: entityId,
-            fields: 'relationshipType,createdAt,from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]',
+            fields: 'relationship,relationshipType,createdAt,from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]',
         },
     }), [entityId, searchMode]);
 
