@@ -2,7 +2,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { colors, IconInfo16 } from '@dhis2/ui';
+import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useOrgUnitName } from '../../../../metadataRetrieval/orgUnitName';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';
@@ -38,9 +38,6 @@ const styles = {
         '&.warning': {
             backgroundColor: colors.yellow100,
         },
-        '&.error': {
-            backgroundColor: colors.red600,
-        },
     },
 };
 
@@ -72,7 +69,7 @@ const InfoBoxesPlain = ({
 
             {showWarning && (
                 <div className={cx(classes.alert, { warning: true })}>
-                    <IconInfo16 />
+                    <IconWarning16 />
                     {i18n.t('You will lose access to the enrollment when transferring ownership to {{organisationUnit}}.', {
                         organisationUnit: newOrgUnitName,
                     })}
