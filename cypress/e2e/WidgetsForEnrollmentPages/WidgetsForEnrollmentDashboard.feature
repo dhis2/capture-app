@@ -31,7 +31,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     And the user sets the birthday date to the current date
     Then the user see the following text: The womans age is outside the normal range. With the birthdate entered, the age would be: 0
 
-  Scenario: The user updates the TEI attributes. The changes are reflected in the whole page. 
+  Scenario: The user updates the TEI attributes. The changes are reflected in the whole page.
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=TjP3J9cf0z1&orgUnitId=CgunjDKbM45&programId=WSGAb5XwJ3Y&teiId=jzIwoNXIZsK
     When the user clicks the element containing the text: Edit
     And the user sees the edit profile modal
@@ -123,6 +123,33 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     When the user opens the enrollment actions menu
     And the user clicks on the delete action
     Then the user sees the delete enrollment modal
+
+  Scenario: User can open the transfer modal
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    Then the user sees the transfer modal
+
+  Scenario: User can select an organisation unit in the transfer modal
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    And the user sees the transfer modal
+    And the user sees the organisation unit tree
+    When the user clicks on the organisation unit with text: Sierra Leone
+    Then the user sees the organisation unit with text: Sierra Leone is selected
+
+  Scenario: User can transfer the enrollment to another organisation unit
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    And the user sees the transfer modal
+    And the user sees the organisation unit tree
+    When the user clicks on the organisation unit with text: Sierra Leone
+    Then the user successfully transfers the enrollment
 
   Scenario: User can add note on enrollment dashboard page
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE

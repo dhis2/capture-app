@@ -32,10 +32,16 @@ export const TransferModal = ({
         ownerOrgUnitId,
     });
 
+    const handleSelectOrgUnit = (orgUnit) => {
+        if (orgUnit.id === selectedOrgUnit?.id) return;
+        setSelectedOrgUnit(orgUnit);
+    };
+
     return (
         <Modal
             large
             onClose={() => setOpenTransfer(false)}
+            dataTest={'widget-enrollment-transfer-modal'}
         >
             <ModalTitle>{i18n.t('Transfer Ownership')}</ModalTitle>
             <ModalContent>
@@ -45,7 +51,7 @@ export const TransferModal = ({
 
                 <OrgUnitField
                     selected={selectedOrgUnit}
-                    onSelectClick={setSelectedOrgUnit}
+                    onSelectClick={handleSelectOrgUnit}
                 />
 
                 {/* Alert */}
@@ -65,6 +71,7 @@ export const TransferModal = ({
                         {i18n.t('Cancel')}
                     </Button>
                     <Button
+                        dataTest={'widget-enrollment-transfer-button'}
                         primary
                         disabled={!selectedOrgUnit || !validOrgUnit}
                         loading={selectedOrgUnit && validOrgUnit?.id !== selectedOrgUnit?.id}

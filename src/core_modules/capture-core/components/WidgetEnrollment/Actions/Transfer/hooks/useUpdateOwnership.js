@@ -1,10 +1,11 @@
 // @flow
 import type { QueryRefetchFunction } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
-import { useAlert, useDataEngine, useConfig } from '@dhis2/app-runtime';
+import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation } from 'react-query';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
 import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
+import { FEATURES, useFeature } from '../../../../../../capture-core-utils';
 
 type Props = {
     teiId: ?string,
@@ -26,19 +27,12 @@ export type UpdateEnrollmentOwnership = {|
 const UpdateEnrollmentOwnershipMutation = {
     resource: 'tracker/ownership/transfer',
     type: 'update',
-    params: ({ teiId, programId, orgUnitId, apiVersion }) => {
+    params: ({ teiId, programId, orgUnitId, teiParamKey }) => {
         const params = {
             program: programId,
             ou: orgUnitId,
-            trackedEntityInstance: null,
-            trackedEntity: null,
+            [teiParamKey]: teiId,
         };
-
-        if (apiVersion <= 40) {
-            params.trackedEntityInstance = teiId;
-        } else {
-            params.trackedEntity = teiId;
-        }
 
         return params;
     },
@@ -51,7 +45,7 @@ export const useUpdateOwnership = ({
     onTransferOutsideCaptureScope,
 }: Props): { updateEnrollmentOwnership: UpdateEnrollmentOwnership } => {
     const dataEngine = useDataEngine();
-    const { apiVersion } = useConfig();
+    const teiParamKey = useFeature(FEATURES.newTransferQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
     const { show: showErrorAlert } = useAlert(
         i18n.t('An error occurred while transferring ownership'),
         { critical: true },
@@ -64,7 +58,7 @@ export const useUpdateOwnership = ({
                 programId,
                 teiId,
                 orgUnitId,
-                apiVersion,
+                teiParamKey,
             },
         }),
         {

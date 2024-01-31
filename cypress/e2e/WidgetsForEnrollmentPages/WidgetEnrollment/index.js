@@ -106,6 +106,10 @@ When(/^the user clicks on the delete action/, () =>
     cy.get('[data-test="widget-enrollment-actions-delete"]').click(),
 );
 
+When(/^the user clicks on the transfer action/, () => {
+    cy.get('[data-test="widget-enrollment-actions-transfer"]').click();
+});
+
 Then(/^the user sees the delete enrollment modal/, () =>
     cy.get('[data-test="widget-enrollment-actions-modal"]').within(() => {
         cy.contains('Delete enrollment').should('exist');
@@ -116,3 +120,57 @@ Then(/^the user sees the delete enrollment modal/, () =>
         cy.contains('Yes, delete enrollment').should('exist');
     }),
 );
+
+Then(/^the user sees the transfer modal/, () =>
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.contains('Transfer Ownership').should('exist');
+        cy.contains(
+            'Choose the organisation unit to which enrollment ownership should be transferred.',
+        ).should('exist');
+        cy.contains('Cancel').should('exist');
+        cy.contains('Transfer').should('exist');
+    }),
+);
+
+Then(/^the user sees the organisation unit tree/, () =>
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="widget-enrollment-transfer-orgunit-tree"]').should(
+            'exist',
+        );
+    }),
+);
+
+// test step for scenario: the user clicks on the organisation unit with text: Sierra Leone
+Then(/^the user clicks on the organisation unit with text: (.*)/, orgunit =>
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="widget-enrollment-transfer-orgunit-tree"]').within(
+            () => {
+                cy.contains(orgunit).click();
+            },
+        );
+    }),
+);
+
+Then(/^the user sees the organisation unit with text: (.*) is selected/, orgunit =>
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="widget-enrollment-transfer-orgunit-tree"]').within(
+            () => {
+                cy.contains(orgunit).should('have.class', 'checked');
+            },
+        );
+    }),
+);
+
+Then(/^the user successfully transfers the enrollment/, () => {
+    cy.intercept(
+        { method: 'PUT', url: '**/tracker/ownership/transfer**' },
+        { statusCode: 200 },
+    ).as('transferOwnership');
+
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="widget-enrollment-transfer-button"]').click();
+    });
+
+    cy.wait('@transferOwnership');
+});
+

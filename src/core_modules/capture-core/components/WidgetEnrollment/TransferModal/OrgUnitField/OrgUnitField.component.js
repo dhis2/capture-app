@@ -77,6 +77,7 @@ const OrgUnitTreePlain = (props: Props) => {
         <div className={classes.orgunitTree}>
             <OrganisationUnitTree
                 key={treeKey}
+                dataTest={'widget-enrollment-transfer-orgunit-tree'}
                 roots={roots.map(item => item.id)}
                 expanded={expanded}
                 handleExpand={handleExpand}
