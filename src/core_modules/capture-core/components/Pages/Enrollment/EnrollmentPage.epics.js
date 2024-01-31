@@ -23,7 +23,9 @@ import {
     verifyFetchTeiSuccess,
     fetchTeiSuccess,
     fetchTeiError,
-    commitProgramId,
+    commitTrackerProgramId,
+    commitNonTrackerProgramId,
+    programIdError,
     fetchEnrollments,
 } from './EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages, selectionStatus } from './EnrollmentPage.constants';
@@ -89,8 +91,14 @@ const teiIdReady = (store: ReduxStore): boolean => {
     return teiId && fetchStatus.teiId === selectionStatus.READY;
 };
 
+const programIdReady = (store: ReduxStore): boolean => {
+    const { fetchStatus } = store.value.enrollmentPage;
+    return fetchStatus.programId === selectionStatus.READY;
+};
+
 const enrollmentIdLoaded = (enrollmentId: string, enrollments: ?Array<Object>) =>
     enrollments && enrollments.some(enrollment => enrollment.enrollment === enrollmentId);
+
 
 // Epics for enrollmentId
 export const changedEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -109,7 +117,7 @@ export const fetchEnrollmentIdEpic = (action$: InputObservable, store: ReduxStor
         mergeMap(({ payload: { enrollmentId } }) =>
             querySingleResource(enrollmentIdQuery(enrollmentId))
                 .then(result => verifyEnrollmentIdSuccess({ enrollmentId, ...result }))
-                .catch(error => fetchEnrollmentIdError(error))),
+                .catch(error => fetchEnrollmentIdError(enrollmentId))),
         startWith(showLoadingViewOnEnrollmentPage()),
     );
 
@@ -123,7 +131,11 @@ export const verifyEnrollmentIdSuccessEpic = (action$: InputObservable, store: R
 export const enrollmentIdErrorEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
-        map(({ error }) => showErrorViewOnEnrollmentPage({ error })),
+        map(({ payload: { enrollmentId } }) => showErrorViewOnEnrollmentPage({
+            error: i18n.t('Invalid enrollment id {{enrollmentId}}.', {
+                enrollmentId,
+                interpolation: { escapeValue: false },
+            })})),
     );
 
 // Epics for teiId
@@ -149,7 +161,7 @@ export const fetchTeiIdEpic = (action$: InputObservable, store: ReduxStore, { qu
                     programId,
                 });
             })
-            .catch(() => fetchTeiError(teiId)))),
+            .catch(() => { return fetchTeiError(teiId) }))),
     );
 
 export const verifyTeiFetchSuccessEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
@@ -172,32 +184,51 @@ export const changedProgramIdEpic = (action$: InputObservable, store: ReduxStore
         filter(({ payload: { programId } }) =>
             enrollmentIdReady(store) &&
             store.value.enrollmentPage.programId !== programId),
-        map(({ payload }) => commitProgramId(payload)),
+        map(({ payload: { programId } }) => {
+            const { scopeType } = getScopeInfo(programId);
+            if (scopeType === scopeTypes.TRACKER_PROGRAM) {
+                return commitTrackerProgramId(programId);
+            } else if (!programId || scopeType === scopeTypes.EVENT_PROGRAM) {
+                return commitNonTrackerProgramId(programId);
+            }
+            return programIdError(programId);
+        }),
     );
 
-export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const programIdErrorEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.FETCH_TEI_SUCCESS, enrollmentPageActionTypes.COMMIT_PROGRAM_ID),
-        filter(({ payload: { teiId, programId } }) =>
-            teiIdReady(store) &&
-            store.value.enrollmentPage.programId),
-        map(() => fetchEnrollments()),
+        ofType(enrollmentPageActionTypes.PROGRAM_ID_ERROR),
+        map(({ payload: { programId } }) =>
+            showErrorViewOnEnrollmentPage({ error: i18n.t('Program with id "{{programId}}" does not exist', { programId }) })),
+    );
+
+export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+    action$.pipe(
+        ofType(
+            enrollmentPageActionTypes.FETCH_TEI_SUCCESS,
+            enrollmentPageActionTypes.COMMIT_TRACKER_PROGRAM_ID,
+            enrollmentPageActionTypes.COMMIT_NON_TRACKER_PROGRAM_ID),
+        map(() => {
+            // Update url
+            const { teiId, programId } = store.value.enrollmentPage;
+            history.push(`/enrollment?${buildUrlQueryString({ ...getLocationQuery(), teiId, programId })}`);
+
+            if (teiIdReady(store) && programIdReady(store)) {
+                return fetchEnrollments();
+            } else if (enrollmentIdReady(store) && teiIdReady(store)) {
+                return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS });
+            }
+
+            return null;
+        }),
+        filter(action => action),
     );
 
 export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
         mergeMap(() => {
-            // Update url
             const { teiId, programId } = store.value.enrollmentPage;
-            const { teiId: urlTeiId, programId: urlProgramId, ...restOfQueries } = getLocationQuery();
-            history.push(`/enrollment?${buildUrlQueryString({ ...restOfQueries, teiId, programId })}`);
-
-            //const { scopeType } = getScopeInfo(programId);
-            // if (scopeType === scopeTypes.EVENT_PROGRAM) {
-            //     return enrollmentPageStatuses.MISSING_SELECTIONS;
-            // }
-
             return from(querySingleResource(enrollmentsQuery(teiId, programId)))
                 .pipe(
                     map(({ enrollments }) => {

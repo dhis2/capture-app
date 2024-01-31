@@ -9,8 +9,10 @@ import {
 
 const initialReducerValue = {
     enrollmentPageStatus: null,
+    enrollmentAccessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
     fetchStatus: {
         enrollmentId: selectionStatus.READY,
+        programId: selectionStatus.READY,
         teiId: selectionStatus.READY,
     },
 };
@@ -24,7 +26,10 @@ const {
     FETCH_TEI,
     FETCH_TEI_SUCCESS,
     FETCH_TEI_ERROR,
-    COMMIT_PROGRAM_ID,
+    COMMIT_TRACKER_PROGRAM_ID,
+    COMMIT_NON_TRACKER_PROGRAM_ID,
+    PROGRAM_ID_ERROR,
+    FETCH_ENROLLMENTS,
     FETCH_ENROLLMENTS_ERROR,
     FETCH_ENROLLMENTS_SUCCESS,
     PAGE_CLEAN,
@@ -56,12 +61,29 @@ export const enrollmentPageDesc = createReducerDescription({
           tetId,
       }),
     [FETCH_ENROLLMENT_ID]:
-        (state, { payload: { enrollmentId } }) => ({
+        ({ programId, teiId, enrollments, ...state }, { payload: { enrollmentId } }) => ({
             ...state,
             enrollmentId,
             fetchStatus: {
                 ...state.fetchStatus,
                 enrollmentId: selectionStatus.LOADING,
+            },
+            enrollmentPageStatus: enrollmentPageStatuses.LOADING,
+        }),
+    [FETCH_ENROLLMENT_ID_SUCCESS]:
+        (state, { payload: { programId } }) => ({
+            ...state,
+            fetchStatus: {
+                ...state.fetchStatus,
+                enrollmentId: selectionStatus.READY,
+            },
+        }),
+    [FETCH_ENROLLMENT_ID_ERROR]:
+        state => ({
+            ...state,
+            fetchStatus: {
+                ...state.fetchStatus,
+                enrollmentId: selectionStatus.ERROR,
             },
         }),
     [FETCH_TEI]:
@@ -72,15 +94,8 @@ export const enrollmentPageDesc = createReducerDescription({
                 ...state.fetchStatus,
                 teiId: selectionStatus.LOADING,
             },
+            enrollmentPageStatus: enrollmentPageStatuses.LOADING,
             enrollmentAccessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
-        }),
-    [FETCH_ENROLLMENT_ID_SUCCESS]:
-        (state, { payload: { programId } }) => ({
-            ...state,
-            fetchStatus: {
-                ...state.fetchStatus,
-                enrollmentId: selectionStatus.READY,
-            },
         }),
     [FETCH_TEI_SUCCESS]:
         (state, { payload: { tetId, teiDisplayName } }) => ({
@@ -92,14 +107,6 @@ export const enrollmentPageDesc = createReducerDescription({
                 teiId: selectionStatus.READY,
             },
         }),
-    [FETCH_ENROLLMENT_ID_ERROR]:
-        state => ({
-            ...state,
-            fetchStatus: {
-                ...state.fetchStatus,
-                enrollmentId: selectionStatus.ERROR,
-            },
-        }),
     [FETCH_TEI_ERROR]:
         state => ({
             ...state,
@@ -108,26 +115,53 @@ export const enrollmentPageDesc = createReducerDescription({
                 teiId: selectionStatus.ERROR,
             },
         }),
-    [COMMIT_PROGRAM_ID]:
+    [COMMIT_TRACKER_PROGRAM_ID]:
         ({ enrollments, ...state }, { payload: { programId } }) => ({
             ...state,
             programId,
-            enrollmentPageStatus: programId ? state.enrollmentPageStatus : enrollmentPageStatuses.MISSING_SELECTIONS,
+            fetchStatus: {
+                ...state.fetchStatus,
+                programId: selectionStatus.READY,
+            },
             enrollmentAccessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
+        }),
+    [COMMIT_NON_TRACKER_PROGRAM_ID]:
+        ({ enrollments, ...state }, { payload: { programId } }) => ({
+            ...state,
+            programId,
+            fetchStatus: {
+                ...state.fetchStatus,
+                programId: selectionStatus.ERROR,
+            },
+            enrollmentAccessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
+        }),
+    [PROGRAM_ID_ERROR]:
+        (state, { payload: { programId } }) => ({
+            ...state,
+            programId,
+            fetchStatus: {
+                ...state.fetchStatus,
+                programId: selectionStatus.ERROR,
+            },
+        }),
+    [FETCH_ENROLLMENTS]:
+        ({ enrollments, ...state }) => ({
+            ...state,
+            enrollmentPageStatus: enrollmentPageStatuses.LOADING,
+            enrollmentAccessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
+        }),
+    [FETCH_ENROLLMENTS_SUCCESS]:
+        (state, { payload: { enrollments } }) => ({
+            ...state,
+            enrollments,
+            enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
+            enrollmentAccessLevel: enrollmentAccessLevels.FULL_ACCESS,
         }),
     [FETCH_ENROLLMENTS_ERROR]:
         ({ enrollments, ...state }, { payload: { accessLevel } }) => ({
             ...state,
             enrollmentPageStatus: enrollmentPageStatuses.MISSING_SELECTIONS,
             enrollmentAccessLevel: accessLevel,
-        }),
-    [FETCH_ENROLLMENTS_SUCCESS]:
-        (state, { payload: { enrollments, programId } }) => ({
-            ...state,
-            programId,
-            enrollments,
-            enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
-            enrollmentAccessLevel: enrollmentAccessLevels.FULL_ACCESS,
         }),
     [DEFAULT_VIEW]:
         state => ({

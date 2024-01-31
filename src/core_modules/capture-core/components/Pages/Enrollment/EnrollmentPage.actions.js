@@ -22,7 +22,9 @@ export const enrollmentPageActionTypes = {
     FETCH_TEI_ERROR: 'EnrollmentPage.FetchTeiError',
 
     PROCESS_PROGRAM_ID: 'EnrollmentPage.ProgramUrlIdUpdated',
-    COMMIT_PROGRAM_ID: 'EnrollmentPage.CommitProgramId',
+    COMMIT_TRACKER_PROGRAM_ID: 'EnrollmentPage.CommitTrackerProgramId',
+    COMMIT_NON_TRACKER_PROGRAM_ID: 'EnrollmentPage.CommitNonTrackerProgramId',
+    PROGRAM_ID_ERROR: 'EnrollmentPage.ProgramIdError',
 
     FETCH_ENROLLMENTS: 'EnrollmentPage.FetchEnrollments',
     FETCH_ENROLLMENTS_ERROR: 'EnrollmentPage.FetchEnrollmentsError',
@@ -82,8 +84,8 @@ export const verifyEnrollmentIdSuccess = ({ enrollmentId, trackedEntity, program
 export const fetchEnrollmentIdSuccess = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_SUCCESS)(payload);
 
-export const fetchEnrollmentIdError = (error: string) =>
-    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR)({ error });
+export const fetchEnrollmentIdError = (enrollmentId: string) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR)({ enrollmentId });
 
 export const changedTeiId = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.PROCESS_TEI_ID)(payload);
@@ -98,13 +100,19 @@ export const fetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, t
     actionCreator(enrollmentPageActionTypes.FETCH_TEI_SUCCESS)(payload);
 
 export const fetchTeiError = (teiId: string) =>
-    actionCreator(enrollmentPageActionTypes.FETCH_TEI_ERROR)(teiId);
+    actionCreator(enrollmentPageActionTypes.FETCH_TEI_ERROR)({ teiId });
 
 export const changedProgramId = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.PROCESS_PROGRAM_ID)(payload);
 
-export const commitProgramId = (payload: IdSuite) =>
-    actionCreator(enrollmentPageActionTypes.COMMIT_PROGRAM_ID)(payload);
+export const commitTrackerProgramId = (programId: string) =>
+    actionCreator(enrollmentPageActionTypes.COMMIT_TRACKER_PROGRAM_ID)({ programId });
+
+export const commitNonTrackerProgramId = (programId: string) =>
+    actionCreator(enrollmentPageActionTypes.COMMIT_NON_TRACKER_PROGRAM_ID)({ programId });
+
+export const programIdError = (programId: string) =>
+    actionCreator(enrollmentPageActionTypes.PROGRAM_ID_ERROR)({ programId });
 
 export const fetchEnrollments = () =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS)();
@@ -112,8 +120,8 @@ export const fetchEnrollments = () =>
 export const fetchEnrollmentsError = ({ accessLevel }: { accessLevel: string }) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_ERROR)({ accessLevel });
 
-export const saveEnrollments = ({ programId, enrollments }: any) =>
-    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ programId, enrollments });
+export const saveEnrollments = ({ enrollments }: any) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ enrollments });
 
 export const openEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_OPEN)();
