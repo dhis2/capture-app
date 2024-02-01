@@ -27,6 +27,7 @@ export const enrollmentPageActionTypes = {
     PROGRAM_ID_ERROR: 'EnrollmentPage.ProgramIdError',
 
     FETCH_ENROLLMENTS: 'EnrollmentPage.FetchEnrollments',
+    VERIFY_FETCHED_ENROLLMENTS: 'EnrollmentPage.VerifyFetchedEnrollments',
     FETCH_ENROLLMENTS_ERROR: 'EnrollmentPage.FetchEnrollmentsError',
     FETCH_ENROLLMENTS_SUCCESS: 'EnrollmentPage.FetchEnrollmentsSuccess',
 
@@ -116,6 +117,9 @@ export const programIdError = (programId: string) =>
 
 export const fetchEnrollments = () =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS)();
+
+export const verifyFetchedEnrollments = ({ teiId, programId, action }: Object) =>
+    actionCreator(enrollmentPageActionTypes.VERIFY_FETCHED_ENROLLMENTS)({ teiId, programId, action });
 
 export const fetchEnrollmentsError = ({ accessLevel }: { accessLevel: string }) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_ERROR)({ accessLevel });

@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, mergeMap, concatMap, map, filter, startWith } from 'rxjs/operators';
+import { catchError, concatMap, map, filter, startWith } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
 import { from, of } from 'rxjs';
@@ -27,12 +27,14 @@ import {
     commitNonTrackerProgramId,
     programIdError,
     fetchEnrollments,
+    verifyFetchedEnrollments,
 } from './EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages, selectionStatus } from './EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { getScopeInfo } from '../../../metaData';
 import { scopeTypes } from '../../../metaData/helpers/constants';
+import { actionCreator } from '../../../actions/actions.utils';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
@@ -100,6 +102,12 @@ const enrollmentIdLoaded = (enrollmentId: string, enrollments: ?Array<Object>) =
     enrollments && enrollments.some(enrollment => enrollment.enrollment === enrollmentId);
 
 
+// The verification epics which are triggered by the completion of
+// async requests (e.g. verifyEnrollmentIdSuccessEpic) are not subject
+// to race conditions with other async requests because the chain of
+// epics and reducers triggered by the completion is resolved
+// synchronously before moving on to the next completed request.
+
 // Epics for enrollmentId
 export const changedEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -114,7 +122,7 @@ export const changedEnrollmentIdEpic = (action$: InputObservable, store: ReduxSt
 export const fetchEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID),
-        mergeMap(({ payload: { enrollmentId } }) =>
+        concatMap(({ payload: { enrollmentId } }) =>
             querySingleResource(enrollmentIdQuery(enrollmentId))
                 .then(result => verifyEnrollmentIdSuccess({ enrollmentId, ...result }))
                 .catch(error => fetchEnrollmentIdError(enrollmentId))),
@@ -151,7 +159,7 @@ export const changedTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
 export const fetchTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI),
-        mergeMap(({ payload: { teiId, programId }}) => from(querySingleResource(teiQuery(teiId))
+        concatMap(({ payload: { teiId, programId }}) => from(querySingleResource(teiQuery(teiId))
             .then(({ attributes, trackedEntityType }) => {
                 const teiDisplayName = deriveTeiName(attributes, trackedEntityType, teiId);
                 return verifyFetchTeiSuccess({
@@ -177,7 +185,7 @@ export const fetchTeiErrorEpic = (action$: InputObservable) =>
         map(({ payload: { teiId } }) => showErrorViewOnEnrollmentPage({ error: i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId }) })),
     );
 
-// Epics for programId / enrollments
+// Epics for programId
 export const changedProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROCESS_PROGRAM_ID, enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_SUCCESS),
@@ -202,6 +210,7 @@ export const programIdErrorEpic = (action$: InputObservable, store: ReduxStore) 
             showErrorViewOnEnrollmentPage({ error: i18n.t('Program with id "{{programId}}" does not exist', { programId }) })),
     );
 
+// Epics for enrollments
 export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(
@@ -227,7 +236,7 @@ export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxSto
 export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
-        mergeMap(() => {
+        concatMap(() => {
             const { teiId, programId } = store.value.enrollmentPage;
             return from(querySingleResource(enrollmentsQuery(teiId, programId)))
                 .pipe(
@@ -253,6 +262,20 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
                     }),
                 );
         }),
+        map(action => {
+            const { teiId, programId } = store.value.enrollmentPage;
+            return verifyFetchedEnrollments({ teiId, programId, action });
+        }),
+    );
+
+export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.VERIFY_FETCHED_ENROLLMENTS),
+        filter(({ payload: { teiId: fetchedTeiId, programId: fetchedProgramId } }) => {
+            const { teiId, programId } = store.value.enrollmentPage;
+            return fetchedTeiId === teiId && fetchedProgramId === programId;
+        }),
+        map(({ payload: { action } }) => action),
     );
 
 // Auto-switch orgUnit epic
@@ -260,13 +283,13 @@ export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStor
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
         map(() => (({ teiId, programId }) => ({ teiId, programId }))(store.value.enrollmentPage)),
-        mergeMap(({ teiId, programId }) => from(querySingleResource(programOwnersQuery(teiId, programId)))
+        concatMap(({ teiId, programId }) => from(querySingleResource(programOwnersQuery(teiId, programId)))
             .pipe(
                 map(({ programOwners }) => programOwners.find(programOwner => programOwner.program === programId)),
                 filter(programOwner => programOwner),
-                mergeMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
+                concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
                     .pipe(
-                        mergeMap(({ organisationUnits }) => {
+                        concatMap(({ organisationUnits }) => {
                             if (organisationUnits.length > 0) {
                                 // Update orgUnitId in url
                                 const { orgUnitId, ...restOfQueries } = getLocationQuery();

@@ -199,6 +199,7 @@ import {
     programIdErrorEpic,
     teiOrProgramChangeEpic,
     fetchEnrollmentsEpic,
+    verifyFetchedEnrollmentsEpic,
     autoSwitchOrgUnitEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
@@ -342,11 +343,12 @@ export const epics = combineEpics(
     fetchTeiIdEpic,
     verifyTeiFetchSuccessEpic,
     fetchTeiErrorEpic,
-    autoSwitchOrgUnitEpic,
     changedProgramIdEpic,
     programIdErrorEpic,
     teiOrProgramChangeEpic,
     fetchEnrollmentsEpic,
+    verifyFetchedEnrollmentsEpic,
+    autoSwitchOrgUnitEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
     saveNewEventInStageLocationChangeEpic,
