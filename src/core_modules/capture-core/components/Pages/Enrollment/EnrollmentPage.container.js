@@ -10,7 +10,6 @@ import {
     changedEnrollmentId,
     changedTeiId,
     changedProgramId,
-    fetchEnrollmentPageInformation,
     fetchEnrollments,
     showDefaultViewOnEnrollmentPage,
     showMissingMessageViewOnEnrollmentPage,

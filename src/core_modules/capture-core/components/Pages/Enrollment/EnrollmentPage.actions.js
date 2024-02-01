@@ -2,12 +2,8 @@
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const enrollmentPageActionTypes = {
-    INFORMATION_FETCH: 'EnrollmentPage.Fetch',
-    INFORMATION_USING_TEI_ID_FETCH: 'EnrollmentPage.StartFetchingUsingTeiId',
-    INFORMATION_USING_ENROLLMENT_ID_FETCH: 'EnrollmentPage.StartFetchingUsingEnrollmentId',
-    INFORMATION_LOADING_FETCH: 'EnrollmentPage.LoadingOnFetching',
-    INFORMATION_ERROR_FETCH: 'EnrollmentPage.ErrorOnFetching',
-    INFORMATION_SUCCESS_FETCH: 'EnrollmentPage.SuccessOnFetching',
+    PAGE_OPEN: 'EnrollmentPage.Open',
+    PAGE_CLEAN: 'EnrollmentPage.CleanOnUnmount',
 
     PROCESS_ENROLLMENT_ID: 'EnrollmentPage.EnrollmentUrlIdUpdated',
     FETCH_ENROLLMENT_ID: 'EnrollmentPage.FetchEnrollmentId',
@@ -31,48 +27,29 @@ export const enrollmentPageActionTypes = {
     FETCH_ENROLLMENTS_ERROR: 'EnrollmentPage.FetchEnrollmentsError',
     FETCH_ENROLLMENTS_SUCCESS: 'EnrollmentPage.FetchEnrollmentsSuccess',
 
-    PAGE_OPEN: 'EnrollmentPage.Open',
-    PAGE_CLEAN: 'EnrollmentPage.CleanOnUnmount',
-    CUSTOM_PROGRAM_RESET: 'EnrollmentPage.CustomProgramReset',
-
     DEFAULT_VIEW: 'EnrollmentPage.DefaultView',
+    LOADING_VIEW: 'EnrollmentPage.LoadingView',
     MISSING_MESSAGE_VIEW: 'EnrollmentPage.MissingMessageView',
+    ERROR_VIEW: 'EnrollmentPage.ErrorView',
 
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
     UPDATE_TEI_DISPLAY_NAME: 'EnrollmentPage.UpdateTeiDisplayName',
     UPDATE_ENROLLMENT_DATE: 'EnrollmentPage.UpdateEnrollmentDate',
 };
 
-export const fetchEnrollmentPageInformation = () =>
-    actionCreator(enrollmentPageActionTypes.INFORMATION_FETCH)();
-
-export const startFetchingTeiFromTeiId = () =>
-    actionCreator(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH)();
-
-export const startFetchingTeiFromEnrollmentId = () =>
-    actionCreator(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH)();
-
-export const showLoadingViewOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.INFORMATION_LOADING_FETCH)();
-
-export const showDefaultViewOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.DEFAULT_VIEW)();
-
-export const showMissingMessageViewOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.MISSING_MESSAGE_VIEW)();
-
-export const showErrorViewOnEnrollmentPage = ({ error }: { error: string }) =>
-    actionCreator(enrollmentPageActionTypes.INFORMATION_ERROR_FETCH)({ error });
-
-export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayName, tetId }: Object) =>
-    actionCreator(enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH)(
-        { teiDisplayName, tetId });
 
 type IdSuite = {
     teiId?: ?string,
     programId?: ?string,
 };
 
+export const openEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.PAGE_OPEN)();
+
+export const cleanEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();
+
+// enrollmentId
 export const changedEnrollmentId = (enrollmentId: string) =>
     actionCreator(enrollmentPageActionTypes.PROCESS_ENROLLMENT_ID)({ enrollmentId });
 
@@ -88,6 +65,7 @@ export const fetchEnrollmentIdSuccess = (payload: IdSuite) =>
 export const fetchEnrollmentIdError = (enrollmentId: string) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR)({ enrollmentId });
 
+// teiId
 export const changedTeiId = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.PROCESS_TEI_ID)(payload);
 
@@ -103,6 +81,7 @@ export const fetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, t
 export const fetchTeiError = (teiId: string) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI_ERROR)({ teiId });
 
+// programId
 export const changedProgramId = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.PROCESS_PROGRAM_ID)(payload);
 
@@ -115,6 +94,7 @@ export const commitNonTrackerProgramId = (programId: string) =>
 export const programIdError = (programId: string) =>
     actionCreator(enrollmentPageActionTypes.PROGRAM_ID_ERROR)({ programId });
 
+// enrollments
 export const fetchEnrollments = () =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS)();
 
@@ -127,12 +107,20 @@ export const fetchEnrollmentsError = ({ accessLevel }: { accessLevel: string }) 
 export const saveEnrollments = ({ enrollments }: any) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ enrollments });
 
-export const openEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.PAGE_OPEN)();
+// Page status
+export const showDefaultViewOnEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.DEFAULT_VIEW)();
 
-export const cleanEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();
+export const showLoadingViewOnEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.LOADING_VIEW)();
 
+export const showMissingMessageViewOnEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.MISSING_MESSAGE_VIEW)();
+
+export const showErrorViewOnEnrollmentPage = ({ error }: { error: string }) =>
+    actionCreator(enrollmentPageActionTypes.ERROR_VIEW)({ error });
+
+// Mutations
 export const deleteEnrollment = ({ enrollmentId }: { enrollmentId: string }) =>
     actionCreator(enrollmentPageActionTypes.DELETE_ENROLLMENT)({
         enrollmentId,

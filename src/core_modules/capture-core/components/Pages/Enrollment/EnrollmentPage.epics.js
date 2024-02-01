@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, concatMap, map, filter, startWith } from 'rxjs/operators';
+import { catchError, concatMap, map, filter } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
 import { from, of } from 'rxjs';
@@ -9,12 +9,6 @@ import {
     enrollmentPageActionTypes,
     showErrorViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
-    successfulFetchingEnrollmentPageInformationFromUrl,
-    fetchEnrollmentsError,
-    saveEnrollments,
-    openEnrollmentPage,
-    startFetchingTeiFromEnrollmentId,
-    startFetchingTeiFromTeiId,
     fetchEnrollmentId,
     verifyEnrollmentIdSuccess,
     fetchEnrollmentIdSuccess,
@@ -28,6 +22,8 @@ import {
     programIdError,
     fetchEnrollments,
     verifyFetchedEnrollments,
+    saveEnrollments,
+    fetchEnrollmentsError,
 } from './EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages, selectionStatus } from './EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
@@ -126,7 +122,6 @@ export const fetchEnrollmentIdEpic = (action$: InputObservable, store: ReduxStor
             querySingleResource(enrollmentIdQuery(enrollmentId))
                 .then(result => verifyEnrollmentIdSuccess({ enrollmentId, ...result }))
                 .catch(error => fetchEnrollmentIdError(enrollmentId))),
-        startWith(showLoadingViewOnEnrollmentPage()),
     );
 
 export const verifyEnrollmentIdSuccessEpic = (action$: InputObservable, store: ReduxStore) =>

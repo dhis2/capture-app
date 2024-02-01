@@ -17,9 +17,6 @@ const initialReducerValue = {
     },
 };
 const {
-    INFORMATION_LOADING_FETCH,
-    INFORMATION_ERROR_FETCH,
-    INFORMATION_SUCCESS_FETCH,
     FETCH_ENROLLMENT_ID,
     FETCH_ENROLLMENT_ID_SUCCESS,
     FETCH_ENROLLMENT_ID_ERROR,
@@ -34,32 +31,16 @@ const {
     FETCH_ENROLLMENTS_SUCCESS,
     PAGE_CLEAN,
     DEFAULT_VIEW,
+    LOADING_VIEW,
     MISSING_MESSAGE_VIEW,
+    ERROR_VIEW,
     DELETE_ENROLLMENT,
     UPDATE_TEI_DISPLAY_NAME,
     UPDATE_ENROLLMENT_DATE,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
-    [INFORMATION_LOADING_FETCH]: state => ({
-        ...state,
-        enrollmentPageStatus: enrollmentPageStatuses.LOADING,
-    }),
-    [INFORMATION_ERROR_FETCH]: state => ({
-        ...state,
-        enrollmentPageStatus: enrollmentPageStatuses.ERROR,
-    }),
-    [INFORMATION_SUCCESS_FETCH]:
-      (state, { payload:
-        {
-            teiDisplayName,
-            tetId,
-        },
-      }) => ({
-          ...state,
-          teiDisplayName,
-          tetId,
-      }),
+    [PAGE_CLEAN]: () => initialReducerValue,
     [FETCH_ENROLLMENT_ID]:
         ({ programId, teiId, enrollments, ...state }, { payload: { enrollmentId } }) => ({
             ...state,
@@ -168,10 +149,18 @@ export const enrollmentPageDesc = createReducerDescription({
             ...state,
             enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
         }),
+    [LOADING_VIEW]: state => ({
+            ...state,
+            enrollmentPageStatus: enrollmentPageStatuses.LOADING,
+        }),
     [MISSING_MESSAGE_VIEW]:
         state => ({
             ...state,
             enrollmentPageStatus: enrollmentPageStatuses.MISSING_SELECTIONS,
+        }),
+    [ERROR_VIEW]: state => ({
+            ...state,
+            enrollmentPageStatus: enrollmentPageStatuses.ERROR,
         }),
     [UPDATE_TEI_DISPLAY_NAME]:
         (state, { payload: { teiDisplayName } }) => ({
@@ -188,7 +177,6 @@ export const enrollmentPageDesc = createReducerDescription({
                 return enrollment;
             }),
         }),
-    [PAGE_CLEAN]: () => initialReducerValue,
     [DELETE_ENROLLMENT]: (state, { payload: { enrollmentId } }) => ({
         ...state,
         enrollments: [
