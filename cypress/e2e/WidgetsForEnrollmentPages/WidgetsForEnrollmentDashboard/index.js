@@ -1,6 +1,7 @@
 import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import moment from 'moment';
 import '../sharedSteps';
+import '../WidgetTeiRelationship';
 import '../WidgetEnrollment';
 import '../WidgetProfile';
 import '../WidgetEnrollmentComment';

@@ -11,6 +11,7 @@ import {
     ModalActions,
     ButtonStrip,
     Button,
+    colors,
 } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import { withStyles } from '@material-ui/core/styles';
@@ -27,7 +28,6 @@ const styles = {
     tableCell: {
         display: 'flex',
         justifyContent: 'center',
-        zIndex: 1000,
     },
 };
 
@@ -41,8 +41,9 @@ export const DeleteRelationshipPlain = ({ handleDeleteRelationship, disabled, cl
                         if (disabled) return;
                         setIsModalOpen(true);
                     }}
+                    dataTest={'delete-relationship-button'}
                 >
-                    <IconDelete16 />
+                    <IconDelete16 color={colors.red600} />
                 </IconButton>
             </DataTableCell>
 
@@ -50,6 +51,7 @@ export const DeleteRelationshipPlain = ({ handleDeleteRelationship, disabled, cl
                 <Modal
                     hide={!isModalOpen}
                     onClose={() => setIsModalOpen(false)}
+                    dataTest={'delete-relationship-modal'}
                 >
                     <ModalTitle>{i18n.t('Delete relationship')}</ModalTitle>
                     <ModalContent>
@@ -64,6 +66,7 @@ export const DeleteRelationshipPlain = ({ handleDeleteRelationship, disabled, cl
 
                             <Button
                                 destructive
+                                dataTest={'delete-relationship-confirmation-button'}
                                 onClick={() => {
                                     handleDeleteRelationship();
                                     setIsModalOpen(false);

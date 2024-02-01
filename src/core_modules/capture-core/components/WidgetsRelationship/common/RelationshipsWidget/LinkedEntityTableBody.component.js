@@ -30,7 +30,7 @@ const LinkedEntityTableBodyPlain = ({
     onDeleteRelationship,
     classes,
 }: StyledProps) => (
-    <DataTableBody>
+    <DataTableBody dataTest="relationship-table-body">
         {
             linkedEntities
                 .map(({ id: entityId, values, baseValues, navigation }) => {
@@ -38,6 +38,7 @@ const LinkedEntityTableBodyPlain = ({
                     return (
                         <DataTableRow
                             key={entityId}
+                            dataTest={'relationship-table-row'}
                             className={pendingApiResponse ? classes.rowDisabled : classes.row}
                         >
                             {

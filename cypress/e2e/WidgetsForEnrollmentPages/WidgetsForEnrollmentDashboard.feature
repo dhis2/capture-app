@@ -31,7 +31,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     And the user sets the birthday date to the current date
     Then the user see the following text: The womans age is outside the normal range. With the birthdate entered, the age would be: 0
 
-  Scenario: The user updates the TEI attributes. The changes are reflected in the whole page. 
+  Scenario: The user updates the TEI attributes. The changes are reflected in the whole page.
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=TjP3J9cf0z1&orgUnitId=CgunjDKbM45&programId=WSGAb5XwJ3Y&teiId=jzIwoNXIZsK
     When the user clicks the element containing the text: Edit
     And the user sees the edit profile modal
@@ -133,3 +133,14 @@ Feature: The user interacts with the widgets on the enrollment dashboard
   Scenario: The program rules are triggered and the effects are displayed in the sidebar widgets
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the user can see the program rules effect in the indicator widget
+
+# TODO: Enable this test before merge. Blocked by a bug in the API.
+#  @with-mocked-relationship-data
+#  Scenario: The user is able to delete a relationship
+#    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+#    Then the user can see the relationship widget
+#    And there is an existing relationship
+#    When the user clicks the delete button
+#    Then the user can see the delete relationship modal
+#    When the user clicks the confirm delete button
+#    Then the user can see the relationship widget without the deleted relationship

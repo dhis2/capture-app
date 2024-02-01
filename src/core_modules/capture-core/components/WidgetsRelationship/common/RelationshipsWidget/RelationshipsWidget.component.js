@@ -56,7 +56,7 @@ const RelationshipsWidgetPlain = ({
 
     return (
         <div
-            data-test="relationship-widget"
+            data-test="tracked-entity-relationship-widget"
         >
             <Widget
                 header={(

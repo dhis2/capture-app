@@ -1,5 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { ReactQueryAppNamespace } from '../../../../../utils/reactQueryHelpers';
@@ -34,18 +36,29 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
         ({ relationshipId }) => dataEngine.mutate(deleteRelationshipMutation, { variables: { relationshipId } }),
         {
             onMutate: ({ relationshipId }) => {
-                const currentRelationships = queryClient
+                const prevRelationships = queryClient
                     .getQueryData([ReactQueryAppNamespace, 'relationships', sourceId]);
 
-                const newRelationships = currentRelationships
+                const newRelationships = prevRelationships
                     ?.instances
                     .filter(({ relationship }) => relationship !== relationshipId);
 
                 queryClient.setQueryData(
                     [ReactQueryAppNamespace, 'relationships', sourceId],
                     { instances: newRelationships });
+
+                return { prevRelationships };
             },
-            onError: showError,
+            onError: (error, { relationshipId }, context) => {
+                log.error(errorCreator('An error occurred while deleting the relationship')({ error, relationshipId }));
+                showError();
+
+                if (!context?.prevRelationships) return;
+                queryClient.setQueryData(
+                    [ReactQueryAppNamespace, 'relationships', sourceId],
+                    context.prevRelationships,
+                );
+            },
         },
     );
 
