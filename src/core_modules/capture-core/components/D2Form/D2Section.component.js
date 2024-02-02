@@ -86,16 +86,18 @@ class D2SectionPlain extends React.PureComponent<Props> {
         );
 
         if (sectionMetaData.showContainer) {
-            <div>
-                <Section
-                    header={this.renderSectionHeader()}
-                    description={this.renderSectionDescription()}
-                    elevation={2}
-                    className={classes.section}
-                >
-                    {sectionFields}
-                </Section>
-            </div>;
+            return (
+                <div>
+                    <Section
+                        header={this.renderSectionHeader()}
+                        description={this.renderSectionDescription()}
+                        elevation={2}
+                        className={classes.section}
+                    >
+                        {sectionFields}
+                    </Section>
+                </div>
+            );
         }
         return sectionFields;
     }
