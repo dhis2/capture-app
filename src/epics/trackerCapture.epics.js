@@ -201,6 +201,7 @@ import {
     fetchEnrollmentsEpic,
     verifyFetchedEnrollmentsEpic,
     autoSwitchOrgUnitEpic,
+    clearErrorViewEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
     saveNewEventSucceededEpic,
@@ -349,6 +350,7 @@ export const epics = combineEpics(
     fetchEnrollmentsEpic,
     verifyFetchedEnrollmentsEpic,
     autoSwitchOrgUnitEpic,
+    clearErrorViewEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
     saveNewEventInStageLocationChangeEpic,

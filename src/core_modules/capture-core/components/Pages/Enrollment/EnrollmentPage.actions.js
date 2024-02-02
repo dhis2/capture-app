@@ -32,6 +32,7 @@ export const enrollmentPageActionTypes = {
     LOADING_VIEW: 'EnrollmentPage.LoadingView',
     MISSING_MESSAGE_VIEW: 'EnrollmentPage.MissingMessageView',
     ERROR_VIEW: 'EnrollmentPage.ErrorView',
+    CLEAR_ERROR_VIEW: 'EnrollmentPage.ClearErrorView',
 
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
     UPDATE_TEI_DISPLAY_NAME: 'EnrollmentPage.UpdateTeiDisplayName',
@@ -123,6 +124,9 @@ export const showMissingMessageViewOnEnrollmentPage = () =>
 
 export const showErrorViewOnEnrollmentPage = ({ error }: { error: string }) =>
     actionCreator(enrollmentPageActionTypes.ERROR_VIEW)({ error });
+
+export const clearErrorView =() =>
+    actionCreator(enrollmentPageActionTypes.CLEAR_ERROR_VIEW)();
 
 // Mutations
 export const deleteEnrollment = ({ enrollmentId }: { enrollmentId: string }) =>

@@ -86,11 +86,7 @@ export const activePageDesc = createReducerDescription({
         lockedSelectorLoads: false,
         selectionsError: { error },
     }),
-    [enrollmentPageActionTypes.FETCH_ENROLLMENT_ID]: state => ({
-        ...state,
-        selectionsError: null,
-    }),
-    [enrollmentPageActionTypes.FETCH_ENROLLMENTS]: state => ({
+    [enrollmentPageActionTypes.CLEAR_ERROR_VIEW]: state => ({
         ...state,
         selectionsError: null,
     }),

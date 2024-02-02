@@ -25,6 +25,7 @@ import {
     fetchEnrollmentsError,
     showErrorViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
+    clearErrorView,
 } from './EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages, selectionStatus } from './EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
@@ -312,4 +313,22 @@ export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStor
                     )),
                 catchError(() => EMPTY),
         )),
+    );
+
+// Manage error messages for unsuccessful data fetches.
+export const clearErrorViewEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(
+            enrollmentPageActionTypes.RESET_ENROLLMENT_ID,
+            enrollmentPageActionTypes.FETCH_ENROLLMENT_ID,
+            enrollmentPageActionTypes.FETCH_TEI,
+            enrollmentPageActionTypes.COMMIT_TRACKER_PROGRAM_ID),
+        filter(() => { return store.value.activePage.selectionsError; }),
+        filter(() => {
+            const fetchStatus = store.value.enrollmentPage.fetchStatus;
+            return fetchStatus.enrollmentId !== selectionStatus.ERROR &&
+                fetchStatus.programId !== selectionStatus.ERROR &&
+                fetchStatus.teiId !== selectionStatus.ERROR;
+        }),
+        map(() => clearErrorView()),
     );
