@@ -1,3 +1,10 @@
+## [100.53.1](https://github.com/dhis2/capture-app/compare/v100.53.0...v100.53.1) (2024-02-01)
+
+
+### Bug Fixes
+
+* [DHIS2-16499] Handle different API response format ([#3517](https://github.com/dhis2/capture-app/issues/3517)) ([206d56c](https://github.com/dhis2/capture-app/commit/206d56c8c86f6cf3bdfc8792e87409c082237401))
+
 # [100.53.0](https://github.com/dhis2/capture-app/compare/v100.52.0...v100.53.0) (2024-01-26)
 
 
