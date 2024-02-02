@@ -6,6 +6,7 @@ export const enrollmentPageActionTypes = {
     PAGE_CLEAN: 'EnrollmentPage.CleanOnUnmount',
 
     PROCESS_ENROLLMENT_ID: 'EnrollmentPage.EnrollmentUrlIdUpdated',
+    RESET_ENROLLMENT_ID: 'EnrollmentPage.ResetEnrollmentId',
     FETCH_ENROLLMENT_ID: 'EnrollmentPage.FetchEnrollmentId',
     VERIFY_ENROLLMENT_ID_SUCCESS: 'EnrollmentPage.VerifyEnrollmentIdSuccess',
     FETCH_ENROLLMENT_ID_SUCCESS: 'EnrollmentPage.FetchEnrollmentIdSuccess',
@@ -50,8 +51,11 @@ export const cleanEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();
 
 // enrollmentId
-export const changedEnrollmentId = (enrollmentId: string) =>
-    actionCreator(enrollmentPageActionTypes.PROCESS_ENROLLMENT_ID)({ enrollmentId });
+export const changedEnrollmentId = (enrollmentId: ?string) =>
+    actionCreator(enrollmentPageActionTypes.PROCESS_ENROLLMENT_ID)(enrollmentId);
+
+export const resetEnrollmentId = (payload: IdSuite) =>
+    actionCreator(enrollmentPageActionTypes.RESET_ENROLLMENT_ID)(payload);
 
 export const fetchEnrollmentId = (enrollmentId: string) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID)({ enrollmentId });

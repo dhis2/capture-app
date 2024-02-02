@@ -7,8 +7,7 @@ import { from, of } from 'rxjs';
 import moment from 'moment';
 import {
     enrollmentPageActionTypes,
-    showErrorViewOnEnrollmentPage,
-    showLoadingViewOnEnrollmentPage,
+    resetEnrollmentId,
     fetchEnrollmentId,
     verifyEnrollmentIdSuccess,
     fetchEnrollmentIdSuccess,
@@ -24,6 +23,8 @@ import {
     verifyFetchedEnrollments,
     saveEnrollments,
     fetchEnrollmentsError,
+    showErrorViewOnEnrollmentPage,
+    showLoadingViewOnEnrollmentPage,
 } from './EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages, selectionStatus } from './EnrollmentPage.constants';
 import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
@@ -80,7 +81,7 @@ const captureScopeQuery = orgUnitId => ({
 
 // Check fetch status
 const enrollmentIdReady = (store: ReduxStore): boolean => {
-    const {  fetchStatus } = store.value.enrollmentPage;
+    const { fetchStatus } = store.value.enrollmentPage;
     return fetchStatus.enrollmentId === selectionStatus.READY;
 };
 
@@ -104,15 +105,26 @@ const enrollmentIdLoaded = (enrollmentId: string, enrollments: ?Array<Object>) =
 // epics and reducers triggered by the completion is resolved
 // synchronously before moving on to the next completed request.
 
+// Note that the reason for doing the verification in a separate epic
+// is to make sure we are using the most recent version of the redux
+// store (but we might in fact have access to the most recent state
+// using the old store object as well).
+
 // Epics for enrollmentId
 export const changedEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROCESS_ENROLLMENT_ID),
-        filter(({ payload: { enrollmentId } }) =>
-            enrollmentId &&
-            enrollmentId !== 'AUTO' &&
-            !enrollmentIdLoaded(enrollmentId, store.value.enrollmentPage.enrollments)),
-        map(({ payload: { enrollmentId } }) => fetchEnrollmentId(enrollmentId)),
+        filter(({ payload: enrollmentId }) =>
+            (!enrollmentId || enrollmentId === 'AUTO') ?
+                store.value.enrollmentPage.enrollmentId :
+                !enrollmentIdLoaded(enrollmentId, store.value.enrollmentPage.enrollments)),
+        map(({ payload: enrollmentId }) => {
+            if (!enrollmentId || enrollmentId === 'AUTO') {
+                const { programId, teiId } = getLocationQuery();
+                return resetEnrollmentId({ programId, teiId });
+            }
+            return fetchEnrollmentId(enrollmentId);
+        }),
     );
 
 export const fetchEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
@@ -144,7 +156,10 @@ export const enrollmentIdErrorEpic = (action$: InputObservable, store: ReduxStor
 // Epics for teiId
 export const changedTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.PROCESS_TEI_ID, enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_SUCCESS),
+        ofType(
+            enrollmentPageActionTypes.PROCESS_TEI_ID,
+            enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_SUCCESS,
+            enrollmentPageActionTypes.RESET_ENROLLMENT_ID),
         filter(({ payload: { teiId } }) =>
             enrollmentIdReady(store) &&
             teiId && store.value.enrollmentPage.teiId !== teiId),
@@ -183,7 +198,10 @@ export const fetchTeiErrorEpic = (action$: InputObservable) =>
 // Epics for programId
 export const changedProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.PROCESS_PROGRAM_ID, enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_SUCCESS),
+        ofType(
+            enrollmentPageActionTypes.PROCESS_PROGRAM_ID,
+            enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_SUCCESS,
+            enrollmentPageActionTypes.RESET_ENROLLMENT_ID),
         filter(({ payload: { programId } }) =>
             enrollmentIdReady(store) &&
             store.value.enrollmentPage.programId !== programId),
@@ -255,17 +273,15 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
                         const errorMessage = i18n.t('An error occurred while fetching enrollments. Please enter a valid url.');
                         return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
                     }),
+                    map(action => verifyFetchedEnrollments({ teiId, programId, action })),
                 );
-        }),
-        map(action => {
-            const { teiId, programId } = store.value.enrollmentPage;
-            return verifyFetchedEnrollments({ teiId, programId, action });
         }),
     );
 
 export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.VERIFY_FETCHED_ENROLLMENTS),
+        filter(() => enrollmentIdReady(store)),
         filter(({ payload: { teiId: fetchedTeiId, programId: fetchedProgramId } }) => {
             const { teiId, programId } = store.value.enrollmentPage;
             return fetchedTeiId === teiId && fetchedProgramId === programId;
@@ -292,6 +308,8 @@ export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStor
                             }
                             return EMPTY;
                         }),
+                        catchError(() => EMPTY),
                     )),
+                catchError(() => EMPTY),
         )),
     );

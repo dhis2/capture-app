@@ -17,6 +17,7 @@ const initialReducerValue = {
     },
 };
 const {
+    RESET_ENROLLMENT_ID,
     FETCH_ENROLLMENT_ID,
     FETCH_ENROLLMENT_ID_SUCCESS,
     FETCH_ENROLLMENT_ID_ERROR,
@@ -41,6 +42,14 @@ const {
 
 export const enrollmentPageDesc = createReducerDescription({
     [PAGE_CLEAN]: () => initialReducerValue,
+    [RESET_ENROLLMENT_ID]:
+        ({ enrollmentId, ...state }) => ({
+            ...state,
+            fetchStatus: {
+                ...state.fetchStatus,
+                enrollmentId: selectionStatus.READY,
+            },
+        }),
     [FETCH_ENROLLMENT_ID]:
         ({ programId, teiId, enrollments, ...state }, { payload: { enrollmentId } }) => ({
             ...state,
