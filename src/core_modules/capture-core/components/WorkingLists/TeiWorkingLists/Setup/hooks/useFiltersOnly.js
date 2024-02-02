@@ -64,6 +64,14 @@ export const useFiltersOnly = ({
                     },
                 ]
                 : []),
+            {
+                id: MAIN_FILTERS.FOLLOW_UP,
+                type: dataElementTypes.TRUE_ONLY,
+                header: i18n.t('Follow up'),
+                transformRecordsFilter: (rawFilter: string) => ({
+                    followUp: rawFilter.split(':')[1],
+                }),
+            },
             ...(enableUserAssignment
                 ? [
                     {

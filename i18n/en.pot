@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-25T12:12:47.253Z\n"
-"PO-Revision-Date: 2024-01-25T12:12:47.253Z\n"
+"POT-Creation-Date: 2024-02-02T08:19:34.582Z\n"
+"PO-Revision-Date: 2024-02-02T08:19:34.582Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1377,9 +1377,6 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
-msgid "Assigned to"
-msgstr "Assigned to"
-
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} events"
 
@@ -1454,6 +1451,9 @@ msgstr "Inactive"
 
 msgid "Enrollment status"
 msgstr "Enrollment status"
+
+msgid "Follow up"
+msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
