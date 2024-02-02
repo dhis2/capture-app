@@ -48,6 +48,7 @@ import {
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers/';
 import { getProgramThrowIfNotFound, EventProgram } from '../../../metaData';
+import type { UserFormField } from '../../FormFields/UserField';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -400,6 +401,7 @@ type Props = {
     eventStatus?: string,
     enrollmentId?: string,
     isCompleted?: boolean,
+    assignee?: UserFormField | null,
 };
 
 
@@ -460,6 +462,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             classes,
             dataEntryId,
             onCancelEditEvent,
+            assignee,
             ...passOnProps
         } = this.props;
 
@@ -487,6 +490,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                     orgUnitId={orgUnit.id}
                     onSaveSuccessActionType={actionTypes.EVENT_SCHEDULE_SUCCESS}
                     onSaveErrorActionType={actionTypes.EVENT_SCHEDULE_ERROR}
+                    assignee={assignee}
                     {...passOnProps}
                 />}
             </div>

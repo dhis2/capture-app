@@ -4,6 +4,7 @@ import { enrollmentSiteActionTypes } from '../../components/Pages/common/Enrollm
 import { actionTypes as enrollmentNoteActionTypes }
     from '../../components/WidgetEnrollmentComment/WidgetEnrollmentComment.actions';
 import { actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+import { enrollmentEditEventActionTypes } from '../../components/Pages/EnrollmentEditEvent';
 
 const initialReducerValue = {};
 const {
@@ -18,6 +19,17 @@ const {
     COMMIT_ENROLLMENT_EVENT,
     COMMIT_ENROLLMENT_EVENT_WITHOUT_ID,
 } = enrollmentSiteActionTypes;
+
+const setAssignee = (state, action) => {
+    const { assignedUser, eventId } = action.payload;
+
+    const events = state.enrollment.events.reduce(
+        (acc, e) => (e.event === eventId ? [...acc, { ...e, assignedUser }] : [...acc, e]),
+        [],
+    );
+
+    return { ...state, enrollment: { ...state.enrollment, events } };
+};
 
 export const enrollmentDomainDesc = createReducerDescription(
     {
@@ -143,6 +155,8 @@ export const enrollmentDomainDesc = createReducerDescription(
             });
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
+        [enrollmentEditEventActionTypes.ASSIGNEE_SET]: setAssignee,
+        [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: setAssignee,
     },
     'enrollmentDomain',
     initialReducerValue,

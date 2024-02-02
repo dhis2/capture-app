@@ -1,4 +1,5 @@
 // @flow
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { convertToClientEvents } from './convertToClientEvents';
 import {
     getSubvalues,
@@ -63,10 +64,11 @@ export const getEventListData = async (
         resource: 'tracker/events',
         queryArgs: createApiEventQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
     };
-    const { instances: apiEvents = [] } = await querySingleResource({
+    const apiEventsResponse = await querySingleResource({
         resource: resourceEvents,
         params: queryArgsEvents,
     });
+    const apiEvents = handleAPIResponse(REQUESTED_ENTITIES.events, apiEventsResponse);
 
     const trackedEntityIds = apiEvents
         .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])
@@ -76,13 +78,14 @@ export const getEventListData = async (
         resource: 'tracker/trackedEntities',
         queryArgs: createApiTEIsQueryArgs(rawQueryArgs, trackedEntityIds),
     };
-    const { instances: apiTeis = [] } = await querySingleResource({
+    const apiTEIResponse = await querySingleResource({
         resource: resourceTEIs,
         params: queryArgsTEIs,
     });
+    const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiTEIResponse);
 
     const columnsMetaForDataFetchingArray = getColumnsQueryArgs(columnsMetaForDataFetching);
-    const clientEvents = convertToClientEvents(addTEIsData(apiEvents, apiTeis), columnsMetaForDataFetchingArray);
+    const clientEvents = convertToClientEvents(addTEIsData(apiEvents, apiTrackedEntities), columnsMetaForDataFetchingArray);
     const clientWithSubvalues = await getSubvalues(querySingleResource, absoluteApiPath)(
         clientEvents,
         columnsMetaForDataFetchingArray,
