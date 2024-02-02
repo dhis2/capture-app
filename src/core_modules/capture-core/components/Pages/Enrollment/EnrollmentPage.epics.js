@@ -166,6 +166,17 @@ export const changedTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
         map(({ payload }) => fetchTei(payload)),
     );
 
+export const resetTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.RESET_TEI_ID),
+        filter(({ payload: deselectTei }) =>
+            (({ fetchStatus }) =>
+                fetchStatus.enrollmentId !== selectionStatus.LOADING &&
+                fetchStatus.teiId !== selectionStatus.LOADING &&
+                deselectTei('/') && false
+            )(store.value.enrollmentPage)),
+    );
+
 export const fetchTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI),

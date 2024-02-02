@@ -13,6 +13,7 @@ export const enrollmentPageActionTypes = {
     FETCH_ENROLLMENT_ID_ERROR: 'EnrollmentPage.FetchEnrollmentIdError',
 
     PROCESS_TEI_ID: 'EnrollmentPage.TeiUrlIdUpdated',
+    RESET_TEI_ID: 'EnrollmentPage.ResetTeiId',
     FETCH_TEI: 'EnrollmentPage.FetchTei',
     VERIFY_FETCH_TEI_SUCCESS: 'EnrollmentPage.VerifyFetchTeiSuccess',
     FETCH_TEI_SUCCESS: 'EnrollmentPage.FetchTeiSuccess',
@@ -73,6 +74,9 @@ export const fetchEnrollmentIdError = (enrollmentId: string) =>
 // teiId
 export const changedTeiId = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.PROCESS_TEI_ID)(payload);
+
+export const resetTeiId = (resetFunction: () => void) =>
+    actionCreator(enrollmentPageActionTypes.RESET_TEI_ID)(resetFunction);
 
 export const fetchTei = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI)(payload);

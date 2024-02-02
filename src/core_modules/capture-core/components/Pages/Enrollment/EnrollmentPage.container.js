@@ -9,6 +9,7 @@ import {
     changedEnrollmentId,
     changedTeiId,
     changedProgramId,
+    resetTeiId,
     showDefaultViewOnEnrollmentPage,
     showMissingMessageViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
@@ -100,7 +101,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     const { programId, orgUnitId, enrollmentId, teiId } = useLocationQuery();
     const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
-    const { resetTeiId } = useResetTeiId();
+    const { resetTeiId: deselectTei } = useResetTeiId();
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
 
     useEffect(() => {
@@ -108,7 +109,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     }, [dispatch]);
 
     useEffect(() => { dispatch(changedEnrollmentId(enrollmentId)); }, [dispatch, enrollmentId]);
-    useEffect(() => { teiId ? dispatch(changedTeiId({ teiId })) : resetTeiId('/'); }, [dispatch, teiId, resetTeiId]);
+    useEffect(() => { dispatch(teiId ? changedTeiId({ teiId }) : resetTeiId(deselectTei)); }, [dispatch, teiId, deselectTei]);
     useEffect(() => { dispatch(changedProgramId({ programId })); }, [dispatch, programId]);
 
     const error: boolean =
