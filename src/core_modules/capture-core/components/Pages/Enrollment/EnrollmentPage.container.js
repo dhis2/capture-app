@@ -1,16 +1,14 @@
 // @flow
-import React, { useEffect, useMemo, useCallback, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
-import type { EnrollmentPageStatus } from './EnrollmentPage.types';
 import {
     openEnrollmentPage,
     cleanEnrollmentPage,
     changedEnrollmentId,
     changedTeiId,
     changedProgramId,
-    fetchEnrollments,
     showDefaultViewOnEnrollmentPage,
     showMissingMessageViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
@@ -18,14 +16,14 @@ import {
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
-import { enrollmentPageStatuses, enrollmentAccessLevels } from './EnrollmentPage.constants';
+import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { getScopeInfo } from '../../../metaData';
 import {
     buildEnrollmentsAsOptions,
     useSetEnrollmentId,
     useResetTeiId,
 } from '../../ScopeSelector';
-import { useLocationQuery, getLocationQuery } from '../../../utils/routing';
+import { useLocationQuery } from '../../../utils/routing';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
@@ -71,7 +69,7 @@ const useComputedEnrollmentPageStatus = () => {
     const {
         enrollmentPageStatus,
         programId: reduxProgramId,
-     } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
     const { teiId, programId, enrollmentId } = useLocationQuery();
     const { scopeType } = useScopeInfo(programId);
@@ -104,15 +102,14 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     const { trackedEntityName } = getScopeInfo(tetId);
     const { resetTeiId } = useResetTeiId();
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
-    const enrollmentPageStatus = useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
     useEffect(() => {
         dispatch(openEnrollmentPage());
-    }, []);
+    }, [dispatch]);
 
-    useEffect(() => { dispatch(changedEnrollmentId(enrollmentId)) }, [dispatch, enrollmentId]);
-    useEffect(() => { teiId ? dispatch(changedTeiId({ teiId })) : resetTeiId('/') }, [dispatch, teiId, resetTeiId]);
-    useEffect(() => { dispatch(changedProgramId({ programId })) }, [dispatch, programId]);
+    useEffect(() => { dispatch(changedEnrollmentId(enrollmentId)); }, [dispatch, enrollmentId]);
+    useEffect(() => { teiId ? dispatch(changedTeiId({ teiId })) : resetTeiId('/'); }, [dispatch, teiId, resetTeiId]);
+    useEffect(() => { dispatch(changedProgramId({ programId })); }, [dispatch, programId]);
 
     const error: boolean =
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);

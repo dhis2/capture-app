@@ -1,9 +1,8 @@
 // @flow
 import { ofType } from 'redux-observable';
 import { catchError, concatMap, map, filter } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { from, of, EMPTY } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
-import { from, of } from 'rxjs';
 import moment from 'moment';
 import {
     enrollmentPageActionTypes,
@@ -24,7 +23,6 @@ import {
     saveEnrollments,
     fetchEnrollmentsError,
     showErrorViewOnEnrollmentPage,
-    showLoadingViewOnEnrollmentPage,
     clearErrorView,
 } from './EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages, selectionStatus } from './EnrollmentPage.constants';
@@ -32,7 +30,6 @@ import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { getScopeInfo } from '../../../metaData';
 import { scopeTypes } from '../../../metaData/helpers/constants';
-import { actionCreator } from '../../../actions/actions.utils';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
@@ -45,12 +42,12 @@ const teiQuery = id => ({
     },
 });
 
-const  enrollmentIdQuery = enrollmentId => ({
+const enrollmentIdQuery = enrollmentId => ({
     resource: 'tracker/enrollments',
     id: enrollmentId,
     params: {
         fields: ['trackedEntity', 'program'],
-    }
+    },
 });
 
 const enrollmentsQuery = (teiId, programId) => ({
@@ -116,9 +113,9 @@ export const changedEnrollmentIdEpic = (action$: InputObservable, store: ReduxSt
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROCESS_ENROLLMENT_ID),
         filter(({ payload: enrollmentId }) =>
-            (!enrollmentId || enrollmentId === 'AUTO') ?
+            ((!enrollmentId || enrollmentId === 'AUTO') ?
                 store.value.enrollmentPage.enrollmentId :
-                !enrollmentIdLoaded(enrollmentId, store.value.enrollmentPage.enrollments)),
+                !enrollmentIdLoaded(enrollmentId, store.value.enrollmentPage.enrollments))),
         map(({ payload: enrollmentId }) => {
             if (!enrollmentId || enrollmentId === 'AUTO') {
                 const { programId, teiId } = getLocationQuery();
@@ -134,7 +131,7 @@ export const fetchEnrollmentIdEpic = (action$: InputObservable, store: ReduxStor
         concatMap(({ payload: { enrollmentId } }) =>
             querySingleResource(enrollmentIdQuery(enrollmentId))
                 .then(result => verifyEnrollmentIdSuccess({ enrollmentId, ...result }))
-                .catch(error => fetchEnrollmentIdError(enrollmentId))),
+                .catch(() => fetchEnrollmentIdError(enrollmentId))),
     );
 
 export const verifyEnrollmentIdSuccessEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -144,14 +141,16 @@ export const verifyEnrollmentIdSuccessEpic = (action$: InputObservable, store: R
         map(({ payload }) => fetchEnrollmentIdSuccess(payload)),
     );
 
-export const enrollmentIdErrorEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
+export const enrollmentIdErrorEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
-        map(({ payload: { enrollmentId } }) => showErrorViewOnEnrollmentPage({
-            error: i18n.t('Invalid enrollment id {{enrollmentId}}.', {
-                enrollmentId,
-                interpolation: { escapeValue: false },
-            })})),
+        map(({ payload: { enrollmentId } }) =>
+            showErrorViewOnEnrollmentPage({
+                error: i18n.t('Invalid enrollment id {{enrollmentId}}.', {
+                    enrollmentId,
+                    interpolation: { escapeValue: false },
+                }),
+            })),
     );
 
 // Epics for teiId
@@ -170,7 +169,7 @@ export const changedTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
 export const fetchTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI),
-        concatMap(({ payload: { teiId, programId }}) => from(querySingleResource(teiQuery(teiId))
+        concatMap(({ payload: { teiId, programId } }) => from(querySingleResource(teiQuery(teiId))
             .then(({ attributes, trackedEntityType }) => {
                 const teiDisplayName = deriveTeiName(attributes, trackedEntityType, teiId);
                 return verifyFetchTeiSuccess({
@@ -180,10 +179,10 @@ export const fetchTeiIdEpic = (action$: InputObservable, store: ReduxStore, { qu
                     programId,
                 });
             })
-            .catch(() => { return fetchTeiError(teiId) }))),
+            .catch(() => fetchTeiError(teiId)))),
     );
 
-export const verifyTeiFetchSuccessEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const verifyTeiFetchSuccessEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.VERIFY_FETCH_TEI_SUCCESS),
         filter(() => enrollmentIdReady(store)),
@@ -217,7 +216,7 @@ export const changedProgramIdEpic = (action$: InputObservable, store: ReduxStore
         }),
     );
 
-export const programIdErrorEpic = (action$: InputObservable, store: ReduxStore) =>
+export const programIdErrorEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PROGRAM_ID_ERROR),
         map(({ payload: { programId } }) =>
@@ -247,7 +246,7 @@ export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxSto
         filter(action => action),
     );
 
-export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
+export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
         concatMap(() => {
@@ -312,7 +311,7 @@ export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStor
                         catchError(() => EMPTY),
                     )),
                 catchError(() => EMPTY),
-        )),
+            )),
     );
 
 // Manage error messages for unsuccessful data fetches.
@@ -323,7 +322,7 @@ export const clearErrorViewEpic = (action$: InputObservable, store: ReduxStore) 
             enrollmentPageActionTypes.FETCH_ENROLLMENT_ID,
             enrollmentPageActionTypes.FETCH_TEI,
             enrollmentPageActionTypes.COMMIT_TRACKER_PROGRAM_ID),
-        filter(() => { return store.value.activePage.selectionsError; }),
+        filter(() => store.value.activePage.selectionsError),
         filter(() => {
             const fetchStatus = store.value.enrollmentPage.fetchStatus;
             return fetchStatus.enrollmentId !== selectionStatus.ERROR &&

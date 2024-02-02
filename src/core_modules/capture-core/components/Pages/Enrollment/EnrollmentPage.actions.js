@@ -125,7 +125,7 @@ export const showMissingMessageViewOnEnrollmentPage = () =>
 export const showErrorViewOnEnrollmentPage = ({ error }: { error: string }) =>
     actionCreator(enrollmentPageActionTypes.ERROR_VIEW)({ error });
 
-export const clearErrorView =() =>
+export const clearErrorView = () =>
     actionCreator(enrollmentPageActionTypes.CLEAR_ERROR_VIEW)();
 
 // Mutations

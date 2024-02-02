@@ -61,7 +61,7 @@ export const enrollmentPageDesc = createReducerDescription({
             enrollmentPageStatus: enrollmentPageStatuses.LOADING,
         }),
     [FETCH_ENROLLMENT_ID_SUCCESS]:
-        (state, { payload: { programId } }) => ({
+        state => ({
             ...state,
             fetchStatus: {
                 ...state.fetchStatus,
@@ -158,7 +158,8 @@ export const enrollmentPageDesc = createReducerDescription({
             ...state,
             enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
         }),
-    [LOADING_VIEW]: state => ({
+    [LOADING_VIEW]:
+        state => ({
             ...state,
             enrollmentPageStatus: enrollmentPageStatuses.LOADING,
         }),
@@ -167,7 +168,8 @@ export const enrollmentPageDesc = createReducerDescription({
             ...state,
             enrollmentPageStatus: enrollmentPageStatuses.MISSING_SELECTIONS,
         }),
-    [ERROR_VIEW]: state => ({
+    [ERROR_VIEW]:
+        state => ({
             ...state,
             enrollmentPageStatus: enrollmentPageStatuses.ERROR,
         }),
@@ -179,7 +181,7 @@ export const enrollmentPageDesc = createReducerDescription({
     [UPDATE_ENROLLMENT_DATE]:
         (state, { payload: { enrollmentId, enrollmentDate } }) => ({
             ...state,
-            enrollments: state.enrollments.map(enrollment => {
+            enrollments: state.enrollments.map((enrollment) => {
                 if (enrollment.enrollment === enrollmentId) {
                     enrollment.enrolledAt = enrollmentDate;
                 }
