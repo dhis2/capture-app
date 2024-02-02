@@ -23,6 +23,7 @@ import { getScopeInfo } from '../../../metaData';
 import {
     buildEnrollmentsAsOptions,
     useSetEnrollmentId,
+    useResetTeiId,
 } from '../../ScopeSelector';
 import { useLocationQuery, getLocationQuery } from '../../../utils/routing';
 
@@ -101,6 +102,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     const { programId, orgUnitId, enrollmentId, teiId } = useLocationQuery();
     const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
+    const { resetTeiId } = useResetTeiId();
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
     const enrollmentPageStatus = useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
@@ -109,7 +111,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     }, []);
 
     useEffect(() => { dispatch(changedEnrollmentId(enrollmentId)) }, [dispatch, enrollmentId]);
-    useEffect(() => { dispatch(changedTeiId({ teiId })) }, [dispatch, teiId])
+    useEffect(() => { teiId ? dispatch(changedTeiId({ teiId })) : resetTeiId('/') }, [dispatch, teiId, resetTeiId]);
     useEffect(() => { dispatch(changedProgramId({ programId })) }, [dispatch, programId]);
 
     const error: boolean =
