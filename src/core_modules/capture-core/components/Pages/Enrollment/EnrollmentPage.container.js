@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import {
     openEnrollmentPage,
-    cleanEnrollmentPage,
+    closeEnrollmentPage,
     changedEnrollmentId,
     changedTeiId,
     changedProgramId,
@@ -63,7 +63,7 @@ const useComponentLifecycle = () => {
         enrollmentProgramId,
     ]);
 
-    useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch]);
+    useEffect(() => () => dispatch(closeEnrollmentPage()), [dispatch]);
 };
 
 const useComputedEnrollmentPageStatus = () => {

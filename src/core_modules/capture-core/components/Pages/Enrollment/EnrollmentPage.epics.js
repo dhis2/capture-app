@@ -241,6 +241,7 @@ export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxSto
             enrollmentPageActionTypes.FETCH_TEI_SUCCESS,
             enrollmentPageActionTypes.COMMIT_TRACKER_PROGRAM_ID,
             enrollmentPageActionTypes.COMMIT_NON_TRACKER_PROGRAM_ID),
+        filter(() => store.value.enrollmentPage.pageOpen),
         map(() => {
             // Update url
             const { teiId, programId } = store.value.enrollmentPage;
@@ -312,7 +313,7 @@ export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStor
                 concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
                     .pipe(
                         concatMap(({ organisationUnits }) => {
-                            if (organisationUnits.length > 0) {
+                            if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
                                 // Update orgUnitId in url
                                 const { orgUnitId, ...restOfQueries } = getLocationQuery();
                                 history.push(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwner.orgUnit })}`);

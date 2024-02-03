@@ -8,6 +8,7 @@ import {
 } from '../../components/Pages/Enrollment/EnrollmentPage.constants';
 
 const initialReducerValue = {
+    pageOpen: true,
     enrollmentPageStatus: null,
     enrollmentAccessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
     fetchStatus: {
@@ -17,6 +18,8 @@ const initialReducerValue = {
     },
 };
 const {
+    PAGE_OPEN,
+    PAGE_CLOSE,
     RESET_ENROLLMENT_ID,
     FETCH_ENROLLMENT_ID,
     FETCH_ENROLLMENT_ID_SUCCESS,
@@ -30,7 +33,6 @@ const {
     FETCH_ENROLLMENTS,
     FETCH_ENROLLMENTS_ERROR,
     FETCH_ENROLLMENTS_SUCCESS,
-    PAGE_CLEAN,
     DEFAULT_VIEW,
     LOADING_VIEW,
     MISSING_MESSAGE_VIEW,
@@ -41,7 +43,13 @@ const {
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
-    [PAGE_CLEAN]: () => initialReducerValue,
+    [PAGE_OPEN]:
+        () => initialReducerValue,
+    [PAGE_CLOSE]:
+        state => ({
+            ...state,
+            pageOpen: false,
+        }),
     [RESET_ENROLLMENT_ID]:
         ({ enrollmentId, ...state }) => ({
             ...state,

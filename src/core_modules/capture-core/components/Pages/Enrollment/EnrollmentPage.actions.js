@@ -3,7 +3,7 @@ import { actionCreator } from '../../../actions/actions.utils';
 
 export const enrollmentPageActionTypes = {
     PAGE_OPEN: 'EnrollmentPage.Open',
-    PAGE_CLEAN: 'EnrollmentPage.CleanOnUnmount',
+    PAGE_CLOSE: 'EnrollmentPage.Close',
 
     PROCESS_ENROLLMENT_ID: 'EnrollmentPage.EnrollmentUrlIdUpdated',
     RESET_ENROLLMENT_ID: 'EnrollmentPage.ResetEnrollmentId',
@@ -49,8 +49,8 @@ type IdSuite = {
 export const openEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_OPEN)();
 
-export const cleanEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();
+export const closeEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.PAGE_CLOSE)();
 
 // enrollmentId
 export const changedEnrollmentId = (enrollmentId: ?string) =>
