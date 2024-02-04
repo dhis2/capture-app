@@ -1,3 +1,10 @@
+# [100.54.0](https://github.com/dhis2/capture-app/compare/v100.53.1...v100.54.0) (2024-02-04)
+
+
+### Features
+
+* [DHIS2-16262] Support Custom Layout for Enrollment Pages ([#3481](https://github.com/dhis2/capture-app/issues/3481)) ([9cc3d70](https://github.com/dhis2/capture-app/commit/9cc3d707f855bba0971a144f1371765afedda55f))
+
 ## [100.53.1](https://github.com/dhis2/capture-app/compare/v100.53.0...v100.53.1) (2024-02-01)
 
 
