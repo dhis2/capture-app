@@ -1,11 +1,12 @@
 // @flow
 import type { QueryRefetchFunction } from '@dhis2/app-runtime';
+import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation } from 'react-query';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
 import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
-import { FEATURES, useFeature } from '../../../../../../capture-core-utils';
+import { errorCreator, FEATURES, useFeature } from '../../../../../../capture-core-utils';
 
 type Props = {
     teiId: ?string,
@@ -62,7 +63,7 @@ export const useUpdateOwnership = ({
             },
         }),
         {
-            onMutate: ({ programAccessLevel, orgUnitScopes }) => {
+            onSuccess: ({ programAccessLevel, orgUnitScopes }) => {
                 // If the user is transferring ownership to a capture scope, we stay on the same page
                 if (orgUnitScopes.DESTINATION === OrgUnitScopes.CAPTURE) {
                     refetchTEI();
@@ -90,7 +91,14 @@ export const useUpdateOwnership = ({
                     onTransferOutsideCaptureScope && onTransferOutsideCaptureScope();
                 }
             },
-            onError: () => showErrorAlert(),
+            onError: (error) => {
+                showErrorAlert();
+                log.error(
+                    errorCreator('Failed to transfer ownership')({
+                        error,
+                    }),
+                );
+            },
         },
     );
 
