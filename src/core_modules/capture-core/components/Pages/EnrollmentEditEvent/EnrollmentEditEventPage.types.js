@@ -3,14 +3,19 @@ import type { ProgramStage } from '../../../metaData';
 import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
 import type { UserFormField } from '../../FormFields/UserField';
 import type { LinkedRecordClick } from '../../WidgetsRelationship/WidgetTrackedEntityRelationship';
+import type {
+    PageLayoutConfig,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+import { Program } from '../../../metaData';
 
 export type PlainProps = {|
+    pageLayout: ?PageLayoutConfig,
     programStage: ?ProgramStage,
     widgetEffects: WidgetEffects,
     hideWidgets: HideWidgets,
     teiId: string,
     enrollmentId: string,
-    programId: string,
+    program: Program,
     trackedEntityTypeId: string,
     mode: string,
     orgUnitId: string,
@@ -38,7 +43,6 @@ export type PlainProps = {|
     assignee: UserFormField | null,
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
-    ...CssClasses,
 |};
 
 export type Props = {|
