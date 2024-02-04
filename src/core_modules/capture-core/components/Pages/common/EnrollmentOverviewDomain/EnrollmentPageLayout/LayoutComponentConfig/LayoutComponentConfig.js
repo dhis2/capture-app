@@ -159,7 +159,7 @@ export const EnrollmentWidget: WidgetConfig = {
     getCustomSettings: ({ readOnlyMode }) => ({
         readOnlyMode,
     }),
-    getProps: ({ teiId, enrollmentId, program, onDelete, onAddNew, onUpdateEnrollmentDate, onUpdateIncidentDate, onEnrollmentError }): WidgetEnrollmentProps => ({
+    getProps: ({ teiId, enrollmentId, program, onDelete, onAddNew, onUpdateEnrollmentDate, onUpdateIncidentDate, onEnrollmentError, onTransferOutsideCaptureScope }): WidgetEnrollmentProps => ({
         teiId,
         enrollmentId,
         programId: program.id,
@@ -168,6 +168,7 @@ export const EnrollmentWidget: WidgetConfig = {
         onUpdateEnrollmentDate,
         onUpdateIncidentDate,
         onError: onEnrollmentError,
+        onTransferOutsideCaptureScope,
     }),
 };
 
