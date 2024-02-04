@@ -42,7 +42,7 @@ Then('teis should be retrieved from the api using the default query args', () =>
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('teis');
+    cy.get('@result').its('response.body').as('teis');
 });
 
 Then('the first page of the default tei working list should be displayed', () => {
@@ -89,7 +89,7 @@ Then('teis with an active enrollment should be retrieved from the api', () => {
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('teis');
+    cy.get('@result').its('response.body').as('teis');
 });
 
 When('you apply the assignee filter', () => {
@@ -118,7 +118,7 @@ Then('teis with active enrollments and unassigned events should be retrieved fro
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('teis');
+    cy.get('@result').its('response.body').as('teis');
 });
 
 When('you apply the current filter on the tei working list', () => {
@@ -143,25 +143,27 @@ Then('teis with a first name containing John should be retrieved from the api', 
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('teis');
+    cy.get('@result').its('response.body').as('teis');
 });
 
 Then('the list should display the teis retrieved from the api', () => {
     cy.get('@teis')
-        .then((teis) => {
+        .then((body) => {
+            const apiTrackedEntities = body.trackedEntities || body.instances || [];
             cy.get('[data-test="tei-working-lists"]')
                 .find('tr')
-                .should('have.length', teis.length + 1);
+                .should('have.length', apiTrackedEntities.length + 1);
         });
 
     cy.get('@teis')
-        .then((teis) => {
+        .then((body) => {
+            const apiTrackedEntities = body.trackedEntities || body.instances || [];
             cy.get('[data-test="tei-working-lists"]')
                 .find('tr')
                 .each(($teiRow, index) => {
                     const rowId = $teiRow.get(0).getAttribute('data-test');
                     if (index > 1) {
-                        expect(rowId).to.equal(teis[index - 1].trackedEntity);
+                        expect(rowId).to.equal(apiTrackedEntities[index - 1].trackedEntity);
                     }
                 });
         });
@@ -184,7 +186,7 @@ Then('new teis should be retrieved from the api', () => {
         .its('response.statusCode')
         .should('eq', 200);
 
-    cy.get('@result').its('response.body.instances').as('teis');
+    cy.get('@result').its('response.body').as('teis');
 });
 
 
@@ -222,7 +224,7 @@ Then('a tei batch capped at 50 records should be retrieved from the api', () => 
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('teis');
+    cy.get('@result').its('response.body').as('teis');
 });
 
 When('you click the first page button on the tei working list', () => {
@@ -259,5 +261,5 @@ Then('teis should be retrieved from the api ordered ascendingly by first name', 
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('teis');
+    cy.get('@result').its('response.body').as('teis');
 });

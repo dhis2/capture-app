@@ -19,7 +19,15 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../../metaDataMemoryStoreBuilders/common/helpers';
 import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
-import { getFeatureType, getDataElement, getLabel, isNotValidOptionSet, escapeString } from '../helpers';
+import {
+    getFeatureType,
+    getDataElement,
+    getLabel,
+    isNotValidOptionSet,
+    escapeString,
+    handleAPIResponse,
+    REQUESTED_ENTITIES,
+} from '../helpers';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';
@@ -81,7 +89,8 @@ const buildDataElementUnique = (
                 });
             }
             return requestPromise.then((result) => {
-                const otherTrackedEntityInstances = result?.instances?.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId) || [];
+                const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
                 const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 
                 const data = {
