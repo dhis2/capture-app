@@ -24,6 +24,7 @@ export type PlainProps = {|
     onDelete: (arg: Object) => void,
     onAddNew: (arg: Object) => void,
     onUpdateOwnership: UpdateEnrollmentOwnership,
+    isTransferLoading: boolean,
     loading: boolean,
     canAddNew: boolean,
     onlyEnrollOnce: boolean,

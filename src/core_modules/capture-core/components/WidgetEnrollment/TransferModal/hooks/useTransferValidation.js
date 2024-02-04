@@ -3,8 +3,12 @@ import { useEffect, useState } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { ProgramAccessLevels, useProgramAccessLevel } from './useProgramAccessLevel';
 
+type OrgUnit = {
+    id: string,
+    path: Array<string>,
+};
+
 type Props = {
-    selectedOrgUnit: Object,
     programId: string,
     ownerOrgUnitId: string,
 };
@@ -46,8 +50,9 @@ const orgUnitIsInCaptureScope = async (orgUnitId: string, dataEngine: { query: (
     return ancestors.some(({ id: ancestorId }) => organisationUnits.some(({ id }) => ancestorId === id));
 };
 
-export const useTransferValidation = ({ selectedOrgUnit, ownerOrgUnitId, programId }: Props) => {
-    const [validOrgUnit, setValidOrgUnit] = useState();
+export const useTransferValidation = ({ ownerOrgUnitId, programId }: Props) => {
+    const [loading, setLoading] = useState(false);
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState<?OrgUnit>();
     const [orgUnitScopes, setOrgUnitScopes] = useState({
         ORIGIN: null,
         DESTINATION: null,
@@ -72,32 +77,35 @@ export const useTransferValidation = ({ selectedOrgUnit, ownerOrgUnitId, program
         });
     }, [dataEngine, ownerOrgUnitId]);
 
-    useEffect(() => {
-        if (!selectedOrgUnit) return;
-        const updateDestinationScope = (newScope: $Values<typeof OrgUnitScopes>) => setOrgUnitScopes(
-            prevOrgUnitScopes => ({
-                ...prevOrgUnitScopes,
-                DESTINATION: newScope,
-            }),
-        );
+    const updateDestinationScope = (newScope: $Values<typeof OrgUnitScopes>) => setOrgUnitScopes(
+        prevOrgUnitScopes => ({
+            ...prevOrgUnitScopes,
+            DESTINATION: newScope,
+        }),
+    );
 
+    const handleOrgUnitChange = async (orgUnit: OrgUnit) => {
+        if (!orgUnit || orgUnit.id === selectedOrgUnit) return;
+        setLoading(true);
         if (accessLevel === ProgramAccessLevels.OPEN || accessLevel === ProgramAccessLevels.AUDITED) {
             updateDestinationScope(OrgUnitScopes.CAPTURE);
         }
         if (accessLevel === ProgramAccessLevels.PROTECTED || accessLevel === ProgramAccessLevels.CLOSED) {
-            orgUnitIsInCaptureScope(selectedOrgUnit?.id, dataEngine).then((isInCaptureScope) => {
-                if (isInCaptureScope) {
-                    updateDestinationScope(OrgUnitScopes.CAPTURE);
-                } else {
-                    updateDestinationScope(OrgUnitScopes.SEARCH);
-                }
-            });
+            const isInCaptureScope = await orgUnitIsInCaptureScope(orgUnit.id, dataEngine);
+            if (isInCaptureScope) {
+                updateDestinationScope(OrgUnitScopes.CAPTURE);
+            } else {
+                updateDestinationScope(OrgUnitScopes.SEARCH);
+            }
         }
-        setValidOrgUnit(selectedOrgUnit);
-    }, [accessLevel, dataEngine, selectedOrgUnit]);
+        setSelectedOrgUnit(orgUnit);
+        setLoading(false);
+    };
 
     return {
-        validOrgUnit,
+        handleOrgUnitChange,
+        loading,
+        selectedOrgUnit,
         programAccessLevel: accessLevel,
         orgUnitScopes,
     };

@@ -7,4 +7,5 @@ export type TransferModalProps = {|
     ownerOrgUnitId: string,
     setOpenTransfer: (toggle: boolean) => void,
     onUpdateOwnership: UpdateEnrollmentOwnership,
+    isTransferLoading: boolean,
 |}

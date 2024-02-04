@@ -36,6 +36,7 @@ export const ActionsPlain = ({
     onUpdate,
     onDelete,
     onUpdateOwnership,
+    isTransferLoading,
     onAddNew,
     loading,
     onlyEnrollOnce,
@@ -128,6 +129,7 @@ export const ActionsPlain = ({
                     ownerOrgUnitId={ownerOrgUnitId}
                     setOpenTransfer={setOpenTransfer}
                     onUpdateOwnership={onUpdateOwnership}
+                    isTransferLoading={isTransferLoading}
                 />
             )}
         </>

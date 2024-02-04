@@ -1,5 +1,5 @@
 // @flow
-
+import React from 'react';
 import {
     Modal,
     ModalTitle,
@@ -9,7 +9,6 @@ import {
     Button,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import React, { useState } from 'react';
 import type { TransferModalProps } from './TransferModal.types';
 import { OrgUnitField } from './OrgUnitField/OrgUnitField.container';
 import { useTransferValidation } from './hooks/useTransferValidation';
@@ -20,21 +19,27 @@ export const TransferModal = ({
     ownerOrgUnitId,
     setOpenTransfer,
     onUpdateOwnership,
+    isTransferLoading,
 }: TransferModalProps) => {
-    const [selectedOrgUnit, setSelectedOrgUnit] = useState();
     const {
-        validOrgUnit,
+        selectedOrgUnit,
+        handleOrgUnitChange,
         orgUnitScopes,
+        loading,
         programAccessLevel,
     } = useTransferValidation({
-        selectedOrgUnit,
         programId: enrollment.program,
         ownerOrgUnitId,
     });
 
-    const handleSelectOrgUnit = (orgUnit) => {
-        if (orgUnit.id === selectedOrgUnit?.id) return;
-        setSelectedOrgUnit(orgUnit);
+    const handleOnUpdateOwnership = async () => {
+        if (!selectedOrgUnit) return;
+        await onUpdateOwnership({
+            orgUnitId: selectedOrgUnit.id,
+            programAccessLevel,
+            orgUnitScopes,
+        });
+        setOpenTransfer(false);
     };
 
     return (
@@ -51,13 +56,13 @@ export const TransferModal = ({
 
                 <OrgUnitField
                     selected={selectedOrgUnit}
-                    onSelectClick={handleSelectOrgUnit}
+                    onSelectClick={handleOrgUnitChange}
                 />
 
                 {/* Alert */}
                 <InfoBoxes
                     ownerOrgUnitId={ownerOrgUnitId}
-                    validOrgUnitId={validOrgUnit?.id}
+                    validOrgUnitId={selectedOrgUnit?.id}
                     programAccessLevel={programAccessLevel}
                     orgUnitScopes={orgUnitScopes}
                 />
@@ -65,25 +70,15 @@ export const TransferModal = ({
 
             <ModalActions>
                 <ButtonStrip end>
-                    <Button
-                        onClick={() => setOpenTransfer(false)}
-                    >
+                    <Button onClick={() => setOpenTransfer(false)}>
                         {i18n.t('Cancel')}
                     </Button>
                     <Button
                         dataTest={'widget-enrollment-transfer-button'}
                         primary
-                        disabled={!selectedOrgUnit || !validOrgUnit}
-                        loading={selectedOrgUnit && validOrgUnit?.id !== selectedOrgUnit?.id}
-                        onClick={() => {
-                            if (!validOrgUnit) return;
-                            onUpdateOwnership({
-                                orgUnitId: validOrgUnit.id,
-                                programAccessLevel,
-                                orgUnitScopes,
-                            });
-                            setOpenTransfer(false);
-                        }}
+                        disabled={!selectedOrgUnit}
+                        loading={loading || isTransferLoading}
+                        onClick={handleOnUpdateOwnership}
                     >
                         {i18n.t('Transfer')}
                     </Button>
