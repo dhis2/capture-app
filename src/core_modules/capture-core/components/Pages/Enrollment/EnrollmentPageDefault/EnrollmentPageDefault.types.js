@@ -5,8 +5,15 @@ import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { LinkedRecordClick } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
+import type {
+    PageLayoutConfig, WidgetConfig,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+import {
+    EnrollmentPageKeys,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
 export type Props = {|
+    currentPage: $Values<typeof EnrollmentPageKeys>,
     program: TrackerProgram,
     enrollmentId: string,
     teiId: string,
@@ -26,6 +33,8 @@ export type Props = {|
     onUpdateIncidentDate: (incidentDate: string) => void,
     onEnrollmentError: (message: string) => void,
     ruleEffects?: Array<{id: string, type: $Values<effectActions>}>;
+    pageLayout: PageLayoutConfig,
+    availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
 |};
 
 export type PlainProps = {|

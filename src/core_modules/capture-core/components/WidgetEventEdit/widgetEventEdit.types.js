@@ -15,5 +15,9 @@ export type Props = {|
     teiId: string,
     initialScheduleDate?: string,
     assignee?: UserFormField | null,
-    ...CssClasses,
 |};
+
+export type PlainProps = {|
+    ...Props,
+    ...CssClasses,
+|}

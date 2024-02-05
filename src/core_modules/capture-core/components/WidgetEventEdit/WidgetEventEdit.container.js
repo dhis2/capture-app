@@ -8,7 +8,7 @@ import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
 import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
-import type { Props } from './widgetEventEdit.types';
+import type { PlainProps, Props } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -46,7 +46,6 @@ const styles = {
 };
 
 export const WidgetEventEditPlain = ({
-    classes,
     eventStatus,
     initialScheduleDate,
     programStage,
@@ -59,7 +58,8 @@ export const WidgetEventEditPlain = ({
     enrollmentId,
     teiId,
     assignee,
-}: Props) => {
+    classes,
+}: PlainProps) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
@@ -153,4 +153,4 @@ export const WidgetEventEditPlain = ({
         </div>
     ) : <LoadingMaskElementCenter />;
 };
-export const WidgetEventEdit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventEditPlain);
+export const WidgetEventEdit: ComponentType<Props> = withStyles(styles)(WidgetEventEditPlain);
