@@ -21,6 +21,7 @@ export type PluginFormFieldMetadata = {|
     searchable: ?boolean;
     url: ?string;
     attributeValues?: { [pluginId: string]: any }
+
 |}
 
 type FieldValueOptions = {|
@@ -45,10 +46,12 @@ export type PluginContext = {|
 |}
 
 export type ContainerProps = {|
+    pluginId: string,
     pluginSource: string,
     fieldsMetadata: Map<string, PluginFormFieldMetadata>,
     pluginContext: PluginContext,
     formId: string,
+    customAttributes: { [id: string]: { IdFromPlugin: string, IdFromApp: string } },
     onUpdateField: (fieldMetadata: PluginFormFieldMetadata, value: any, options?: FieldValueOptions) => void,
 |}
 

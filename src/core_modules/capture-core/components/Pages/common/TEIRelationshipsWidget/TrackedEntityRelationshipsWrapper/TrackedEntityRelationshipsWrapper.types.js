@@ -6,7 +6,6 @@ export type Props = {|
     teiId: string,
     programId: string,
     orgUnitId: string,
-    onAddRelationship: () => void,
     addRelationshipRenderElement: HTMLDivElement,
     onOpenAddRelationship: () => void,
     onCloseAddRelationship: () => void,
