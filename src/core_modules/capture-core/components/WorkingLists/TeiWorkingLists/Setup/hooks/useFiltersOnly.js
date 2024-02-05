@@ -66,8 +66,13 @@ export const useFiltersOnly = ({
                 : []),
             {
                 id: MAIN_FILTERS.FOLLOW_UP,
-                type: dataElementTypes.TRUE_ONLY,
+                type: dataElementTypes.TEXT,
+                options: [
+                    { text: i18n.t('Yes'), value: 'true' },
+                    { text: i18n.t('No'), value: 'false' },
+                ],
                 header: i18n.t('Follow up'),
+                showInMoreFilters: true,
                 transformRecordsFilter: (rawFilter: string) => ({
                     followUp: rawFilter.split(':')[1],
                 }),
