@@ -30,7 +30,6 @@ type Props = {
 };
 
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
-    // $FlowFixMe
     new Map(
         columns
             .filter(col => Object.values(filterTypesObject).includes(col.type) && !col.filterHidden)
@@ -281,7 +280,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         const validColumnElementConfigs = getValidElementConfigsVisiblePrioritized(notEmptyColumns);
         const validFilterConfigs = getValidFilterConfigs(filtersOnlyForShowInMoreFilters);
 
-        const validElementConfig: Map<string, Column | FilterOnly> = new Map([
+        const validElementConfigs: Map<string, Column | FilterOnly> = new Map([
             ...validColumnElementConfigs,
             ...validFilterConfigs,
         ]);
@@ -289,7 +288,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         const { filtersWithValueOnInit, userSelectedFilters } = stickyFilters;
 
         const { initValueElements, remainingElements: remainingElementsAfterInitSplit } =
-            splitBasedOnHasValueOnInit(validElementConfig, filtersWithValueOnInit);
+            splitBasedOnHasValueOnInit(validElementConfigs, filtersWithValueOnInit);
 
         const { fillUpElements, remainingElements: remainingElementsAfterFillUp } =
         fillUpIndividualElements(
@@ -313,7 +312,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
 
         const individualElementsArray =
             getIndividualElementsArray(
-                validElementConfig,
+                validElementConfigs,
                 initValueElements,
                 fillUpElements,
                 userSelectedElements,

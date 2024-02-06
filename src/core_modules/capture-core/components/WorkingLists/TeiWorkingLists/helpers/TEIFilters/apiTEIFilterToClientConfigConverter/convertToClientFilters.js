@@ -137,7 +137,7 @@ const mainFiltersTable = {
     [MAIN_FILTERS.PROGRAM_STATUS]: getMainFilterOptionSet,
     [MAIN_FILTERS.ENROLLED_AT]: getDateFilterContent,
     [MAIN_FILTERS.OCCURED_AT]: getDateFilterContent,
-    [MAIN_FILTERS.FOLLOW_UP]: getTrueOnlyFilter,
+    [MAIN_FILTERS.FOLLOW_UP]: getMainFilterOptionSet,
     [ADDITIONAL_FILTERS.programStage]: getMainFilterOptionSet,
     [ADDITIONAL_FILTERS.status]: getMainFilterOptionSet,
     [ADDITIONAL_FILTERS.occurredAt]: getDateFilterContent,

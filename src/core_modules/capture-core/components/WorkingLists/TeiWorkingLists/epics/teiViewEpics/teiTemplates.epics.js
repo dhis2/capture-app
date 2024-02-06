@@ -39,6 +39,7 @@ export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, 
                     occurredAt,
                     attributeValueFilters,
                     order,
+                    followUp,
                     displayColumnOrder,
                     assignedUserMode,
                     assignedUsers,
@@ -54,6 +55,7 @@ export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, 
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
                     ...(programStatus && { enrollmentStatus: programStatus }),
+                    ...(followUp && { followUp }),
                     ...(enrolledAt && { enrollmentCreatedDate: enrolledAt }),
                     ...(occurredAt && { enrollmentIncidentDate: occurredAt }),
                     ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
@@ -156,7 +158,7 @@ export const updateTEITemplateEpic = (action$: InputObservable, store: ReduxStor
                 storeId,
                 criteria,
             } = action.payload;
-            const { programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayColumnOrder, assignedUserMode, assignedUsers } =
+            const { programStatus, enrolledAt, occurredAt, attributeValueFilters, order, displayColumnOrder, assignedUserMode, assignedUsers, followUp } =
                 criteria;
             const trackedEntityInstanceFilters = {
                 name,
@@ -174,6 +176,7 @@ export const updateTEITemplateEpic = (action$: InputObservable, store: ReduxStor
                     ...(programStatus && { enrollmentStatus: programStatus }),
                     ...(enrolledAt && { enrollmentCreatedDate: enrolledAt }),
                     ...(occurredAt && { enrollmentIncidentDate: occurredAt }),
+                    ...(followUp && { followUp }),
                     ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
                 },
             };
