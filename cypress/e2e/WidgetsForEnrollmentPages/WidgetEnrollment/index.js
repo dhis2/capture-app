@@ -1,5 +1,17 @@
-import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { When, Then, After, Given } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
+
+// Will run on v>=40
+After({ tags: '@with-transfer-ownership-data' }, () => {
+    cy.buildApiUrl('tracker', 'ownership/transfer?program=IpHINAT79UW&ou=DiszpKrYNg8&trackedEntityInstance=EaOyKGOIGRp')
+        .then(url => cy.request('PUT', url));
+});
+
+// Will run on v<40
+After({ tags: '@with-transfer-ownership-data' }, () => {
+    cy.buildApiUrl('tracker', 'ownership/transfer?program=IpHINAT79UW&ou=DiszpKrYNg8&trackedEntity=EaOyKGOIGRp')
+        .then(url => cy.request('PUT', url));
+});
 
 When('you click the enrollment widget toggle open close button', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
@@ -164,7 +176,6 @@ Then(/^the user sees the organisation unit with text: (.*) is selected/, orgunit
 Then(/^the user successfully transfers the enrollment/, () => {
     cy.intercept(
         { method: 'PUT', url: '**/tracker/ownership/transfer**' },
-        { statusCode: 200 },
     ).as('transferOwnership');
 
     cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
@@ -172,5 +183,19 @@ Then(/^the user successfully transfers the enrollment/, () => {
     });
 
     cy.wait('@transferOwnership');
+
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-owner-orgunit"]')
+            .contains('Owned by Sierra Leone')
+            .should('exist');
+    });
 });
 
+// Implement step for: the enrollment owner organisation unit is Sierra Leone
+Given(/^the enrollment owner organisation unit is (.*)/, (orgunit) => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-owner-orgunit"]')
+            .contains(`Owned by ${orgunit}`)
+            .should('exist');
+    });
+});
