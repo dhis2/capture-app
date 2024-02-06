@@ -131,14 +131,13 @@ And('you fill in the the form with values that will return exactly 5 results', (
 
 When('you fill in the zip code range numbers', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(5)
+        .find('input[description="Zip code"]')
+        .eq(0)
         .type('7130')
         .blur();
-
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(6)
+        .find('input[description="Zip code"]')
+        .eq(1)
         .type('7135')
         .blur();
 });

@@ -18,11 +18,18 @@ type DefaultComponents = 'QuickActions'
     | 'ProfileWidget'
     | 'EnrollmentWidget';
 
-export type ColumnConfig = {
-    type: $Values<typeof WidgetTypes>,
+export type DefaultWidgetColumnConfig = {
+    type: typeof WidgetTypes.COMPONENT,
     name: DefaultComponents,
     settings?: Object,
 }
+
+export type PluginWidgetColumnConfig = {
+    type: typeof WidgetTypes.PLUGIN,
+    source: string,
+}
+
+export type ColumnConfig = DefaultWidgetColumnConfig | PluginWidgetColumnConfig;
 
 export type PageLayoutConfig = {
     title?: ?string,
