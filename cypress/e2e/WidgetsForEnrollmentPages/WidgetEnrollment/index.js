@@ -3,7 +3,7 @@ import { getCurrentYear } from '../../../support/date';
 import { hasVersionSupport } from '../../../support/tagUtils';
 
 After({ tags: '@with-transfer-ownership-data-cleanup' }, () => {
-    const teiQueryKey = hasVersionSupport('@v>=40') ? 'trackedEntity' : 'trackedEntityInstance';
+    const teiQueryKey = hasVersionSupport('@v>=41') ? 'trackedEntity' : 'trackedEntityInstance';
     cy.buildApiUrl('tracker', `ownership/transfer?program=IpHINAT79UW&ou=DiszpKrYNg8&${teiQueryKey}=EaOyKGOIGRp`)
         .then(url => cy.request('PUT', url));
 });
