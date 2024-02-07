@@ -21,8 +21,8 @@ import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfi
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
 import {
-    formatPluginConfig,
-} from '../../../../components/D2Form/FormFieldPlugin/formatPluginConfig';
+    FieldElementObjectTypes,
+} from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -143,28 +143,27 @@ export class EnrollmentFactory {
         // $FlowFixMe
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
             if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
-                const element = new FormFieldPluginConfig((o) => {
-                    o.id = trackedEntityAttribute.id;
-                    o.name = trackedEntityAttribute.name;
-                    o.pluginSource = trackedEntityAttribute.pluginSource;
-                    o.fields = new Map();
-                });
-
                 const attributes = trackedEntityAttribute.fieldMap
-                    .filter(attributeField => attributeField.objectType === 'Attribute')
+                    .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
                     .reduce((acc, attribute) => {
                         acc[attribute.IdFromApp] = attribute;
                         return acc;
                     }, {});
 
+                const element = new FormFieldPluginConfig((o) => {
+                    o.id = trackedEntityAttribute.id;
+                    o.name = trackedEntityAttribute.name;
+                    o.pluginSource = trackedEntityAttribute.pluginSource;
+                    o.fields = new Map();
+                    o.customAttributes = attributes;
+                });
+
                 await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
-                    if (field.objectType) {
-                        const fieldElement = await this.dataElementFactory.build(field);
+                    if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                        const fieldElement = await this.dataElementFactory.build(field, section);
                         if (!fieldElement) return;
 
-                        const fieldMetadata = formatPluginConfig(fieldElement, { attributes });
-
-                        element.addField(field.IdFromPlugin, fieldMetadata);
+                        element.addField(field.IdFromPlugin, fieldElement);
                     }
                 });
 

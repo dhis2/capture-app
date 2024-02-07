@@ -1,15 +1,38 @@
 // @flow
-import React from 'react';
-import i18n from '@dhis2/d2-i18n';
+import React, { useEffect, useRef, useState } from 'react';
+import { Plugin } from '@dhis2/app-runtime/build/es/experimental';
 import type { ComponentProps } from './FormFieldPlugin.types';
 
 export const FormFieldPluginComponent = (props: ComponentProps) => {
-    // eslint-disable-next-line no-unused-vars
     const { pluginSource, ...passOnProps } = props;
+    const containerRef = useRef<?HTMLDivElement>(null);
+    const [pluginWidth, setPluginWidth] = useState(0);
+
+    useEffect(() => {
+        const { current: container } = containerRef;
+        if (!container) return () => {};
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            entries.forEach(entry => setPluginWidth(entry.contentRect.width));
+        });
+
+        resizeObserver.observe(container);
+
+        // Cleanup function
+        return () => {
+            resizeObserver.unobserve(container);
+            resizeObserver.disconnect();
+        };
+    }, [containerRef]);
+
 
     return (
-        <p>
-            {i18n.t('Plugins are not yet available - Please contact your system administrator')}
-        </p>
+        <div ref={containerRef}>
+            <Plugin
+                pluginSource={pluginSource}
+                width={pluginWidth}
+                {...passOnProps}
+            />
+        </div>
     );
 };

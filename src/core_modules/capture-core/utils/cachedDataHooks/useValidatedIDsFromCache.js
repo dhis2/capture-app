@@ -16,7 +16,19 @@ export const IdTypes = Object.freeze({
     ORG_UNIT_ID: 'orgUnitId',
 });
 
-export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
+type ReturnTypes = {|
+    valid: {
+        [key: string]: ?{
+            id: string,
+            valid: boolean,
+            type: $Values<typeof IdTypes>,
+        },
+    },
+    loading: boolean,
+    error?: Error,
+|}
+
+export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props): ReturnTypes => {
     const [valid, setValid] = useState({
         [IdTypes.PROGRAM_ID]: undefined,
         [IdTypes.ORG_UNIT_ID]: undefined,

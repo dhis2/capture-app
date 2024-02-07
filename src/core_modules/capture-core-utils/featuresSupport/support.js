@@ -4,6 +4,7 @@ export const FEATURES = Object.freeze({
     storeProgramStageWorkingList: 'storeProgramStageWorkingList',
     multiText: 'multiText',
     customIcons: 'customIcons',
+    exportablePayload: 'exportablePayload',
 });
 
 // The first minor version that supports the feature
@@ -12,6 +13,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.storeProgramStageWorkingList]: 40,
     [FEATURES.multiText]: 41,
     [FEATURES.customIcons]: 41,
+    [FEATURES.exportablePayload]: 41,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>

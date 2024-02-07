@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator } from 'capture-core-utils';
 import type {
@@ -173,15 +174,15 @@ export class DataElementFactory {
                     }
                     return requestPromise
                         .then((result) => {
-                            const trackedEntityInstance =
-                                (result.instances && result.instances[0]) || {};
+                            const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
+                            const trackedEntityInstance = apiTrackedEntities[0] || {};
                             const data = {
                                 id: trackedEntityInstance.trackedEntity,
                                 tetId: trackedEntityInstance.trackedEntityType,
                             };
 
                             return {
-                                valid: result.instances.length === 0,
+                                valid: apiTrackedEntities.length === 0,
                                 data,
                             };
                         });

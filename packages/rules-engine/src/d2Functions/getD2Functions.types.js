@@ -55,4 +55,5 @@ export type D2Functions = $ReadOnly<{|
     lastEventDate: D2FunctionConfig,
     addControlDigits: D2FunctionConfig,
     checkControlDigits: D2FunctionConfig,
+    multiTextContains: D2FunctionConfig,
 |}>;

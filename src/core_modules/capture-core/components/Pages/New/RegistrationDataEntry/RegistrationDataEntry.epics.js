@@ -53,11 +53,11 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
             const { currentSelections: { programId } } = store.value;
-            const { dataStore, userDataStore, temp } = store.value.useNewDashboard;
+            const { dataStore, userDataStore } = store.value.useNewDashboard;
             const { enrollmentPayload, uid } = action.payload;
             const { stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
 
-            const shouldRedirect = shouldUseNewDashboard(userDataStore, dataStore, temp, programId);
+            const shouldRedirect = shouldUseNewDashboard({ userDataStore, dataStore, programId });
             const { stageWithOpenAfterEnrollment, redirectTo } = getStageWithOpenAfterEnrollment(
                 stages,
                 useFirstStageDuringRegistration,

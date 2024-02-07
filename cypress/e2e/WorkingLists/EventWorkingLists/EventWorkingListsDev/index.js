@@ -36,25 +36,27 @@ Then('events should be retrieved from the api using the default query args', () 
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('events');
+    cy.get('@result').its('response.body').as('events');
 });
 
 Then('the list should display the events retrieved from the api', () => {
     cy.get('@events')
-        .then((events) => {
+        .then((body) => {
+            const apiEvents = body.events || body.instances || [];
             cy.get('[data-test="event-working-lists"]')
                 .find('tr')
-                .should('have.length', events.length + 1);
+                .should('have.length', apiEvents.length + 1);
         });
 
     cy.get('@events')
-        .then((teis) => {
+        .then((body) => {
+            const apiEvents = body.events || body.instances || [];
             cy.get('[data-test="event-working-lists"]')
                 .find('tr')
                 .each(($teiRow, index) => {
                     const rowId = $teiRow.get(0).getAttribute('data-test');
                     if (index > 1) {
-                        expect(rowId).to.equal(teis[index - 1].event);
+                        expect(rowId).to.equal(apiEvents[index - 1].event);
                     }
                 });
         });
@@ -87,7 +89,7 @@ Then('events assigned to anyone should be retrieved from the api', () => {
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('events');
+    cy.get('@result').its('response.body').as('events');
 });
 
 When('you apply the assignee filter', () => {
@@ -123,7 +125,7 @@ Then('active events that are assigned to anyone should be retrieved from the api
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('events');
+    cy.get('@result').its('response.body').as('events');
 });
 
 When('you apply the current filter on the event working list', () => {
@@ -152,7 +154,7 @@ Then('events where age is between 10 and 20 should be retrieved from the api', (
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('events');
+    cy.get('@result').its('response.body').as('events');
 });
 
 When('you click the next page button on the event working list', () => {
@@ -172,7 +174,7 @@ Then('new events should be retrieved from the api', () => {
         .its('response.statusCode')
         .should('equal', 200);
 
-    cy.get('@result').its('response.body.instances').as('events');
+    cy.get('@result').its('response.body').as('events');
 });
 
 When('you click the previous page button on the event working list', () => {
@@ -216,7 +218,7 @@ Then('an event batch capped at 50 records should be retrieved from the api', () 
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@result').its('response.body.instances').as('events');
+    cy.get('@result').its('response.body').as('events');
 });
 
 When('you click the report date column header', () => {
@@ -248,5 +250,5 @@ Then('events should be retrieved from the api ordered ascendingly by report date
         .its('response.url')
         .should('include', 'page=1');
 
-    cy.get('@resultAsc').its('response.body.instances').as('events');
+    cy.get('@resultAsc').its('response.body').as('events');
 });

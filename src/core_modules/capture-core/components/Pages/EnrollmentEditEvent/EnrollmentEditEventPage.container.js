@@ -17,13 +17,21 @@ import { changeEventFromUrl } from '../ViewEvent/ViewEventComponent/viewEvent.ac
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { useEvent } from './hooks';
+import { useEvent, useAssignee, useAssignedUserSaveContext } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
 import { useLinkedRecordClick } from '../common/TEIRelationshipsWidget';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
+import {
+    useEnrollmentPageLayout,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
+import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
+import { getProgramEventAccess } from '../../../metaData';
+import { setAssignee, rollbackAssignee } from './EnrollmentEditEventPage.actions';
+import { convertClientToServer } from '../../../converters';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -37,7 +45,10 @@ const getEventScheduleDate = (event) => {
     return eventDataConvertValue?.toString();
 };
 
-const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, event }) => {
+const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }) => {
+    if (isLoading) {
+        return pageStatuses.LOADING;
+    }
     if (orgUnitId) {
         return enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
             ? pageStatuses.DEFAULT
@@ -55,6 +66,8 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
+    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
+    const storedEvent = enrollmentSite?.events?.find(item => item.event === eventId);
 
     useEffect(() => {
         if (!urlEventId) {
@@ -65,16 +78,17 @@ export const EnrollmentEditEventPage = () => {
         }
     }, [dispatch, history, eventId, urlEventId, orgUnitId]);
 
-    return (!loading && eventId === urlEventId) || error ? (
+    return ((!loading && eventId === urlEventId) || error) && storedEvent ? (
         <EnrollmentEditEventPageWithContext
             programId={programId}
             stageId={stageId}
             teiId={teiId}
             enrollmentId={enrollmentId}
             orgUnitId={orgUnitId}
-            eventId={eventId}
             error={error}
             initMode={initMode}
+            enrollmentSite={enrollmentSite}
+            event={storedEvent}
         />
     ) : <LoadingMaskForPage />;
 };
@@ -85,11 +99,18 @@ const EnrollmentEditEventPageWithContextPlain = ({
     teiId,
     enrollmentId,
     orgUnitId,
-    eventId,
     initMode,
+    enrollmentSite,
+    event,
 }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { pageLayout, isLoading } = useEnrollmentPageLayout({
+        selectedScopeId: programId,
+        dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_EDIT,
+        defaultPageLayout: DefaultPageLayout,
+    });
+    const { event: eventId } = event;
 
     const { onLinkedRecordClick } = useLinkedRecordClick();
 
@@ -119,7 +140,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
         }
     }, [initMode, enrollmentId, eventId, orgUnitId, history]);
 
-    const { enrollment: enrollmentSite } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
@@ -131,12 +151,12 @@ const EnrollmentEditEventPageWithContextPlain = ({
     // $FlowFixMe
     const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
-    const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
+    const eventAccess = getProgramEventAccess(programId, programStage?.id);
 
 
     const pageStatus = getPageStatus({
@@ -146,10 +166,30 @@ const EnrollmentEditEventPageWithContextPlain = ({
         trackedEntityName,
         programStage,
         event,
+        isLoading,
     });
+    const assignee = useAssignee(event);
+    const getAssignedUserSaveContext = useAssignedUserSaveContext(event);
+    const onSaveAssignee = (newAssignee) => {
+        // $FlowFixMe dataElementTypes flow error
+        const assignedUser: ApiAssignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
+        dispatch(setAssignee(assignedUser, newAssignee, eventId));
+    };
+    const onSaveAssigneeError = (prevAssignee) => {
+        const assignedUser: ApiAssignedUser | typeof undefined = prevAssignee
+            // $FlowFixMe dataElementTypes flow error
+            ? convertClientToServer(prevAssignee, dataElementTypes.ASSIGNEE)
+            : undefined;
+        dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
+    };
+
+    if (pageStatus === pageStatuses.LOADING) {
+        return <LoadingMaskForPage />;
+    }
 
     return (
         <EnrollmentEditEventPageComponent
+            pageLayout={pageLayout}
             mode={currentPageMode}
             pageStatus={pageStatus}
             programStage={programStage}
@@ -162,18 +202,23 @@ const EnrollmentEditEventPageWithContextPlain = ({
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
             trackedEntityName={trackedEntityName}
-            programId={programId}
+            program={program}
             onDelete={onDelete}
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            assignee={assignee}
             onLinkedRecordClick={onLinkedRecordClick}
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
             eventStatus={event?.status}
+            eventAccess={eventAccess}
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
+            getAssignedUserSaveContext={getAssignedUserSaveContext}
+            onSaveAssignee={onSaveAssignee}
+            onSaveAssigneeError={onSaveAssigneeError}
         />
     );
 };

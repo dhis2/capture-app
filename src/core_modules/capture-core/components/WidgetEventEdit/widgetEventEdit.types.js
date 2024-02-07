@@ -1,6 +1,7 @@
 // @flow
 
 import type { ProgramStage } from '../../metaData';
+import type { UserFormField } from '../FormFields/UserField';
 
 export type Props = {|
     programStage: ProgramStage,
@@ -13,5 +14,10 @@ export type Props = {|
     enrollmentId: string,
     teiId: string,
     initialScheduleDate?: string,
-    ...CssClasses,
+    assignee?: UserFormField | null,
 |};
+
+export type PlainProps = {|
+    ...Props,
+    ...CssClasses,
+|}

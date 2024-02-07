@@ -34,14 +34,17 @@ export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
             }
 
             // Recursively process nested objects and arrays
-            if (value && typeof value === 'object') {
-                if (Array.isArray(value)) {
-                    acc[modifiedKey] = value.map(removeUnderscoreFromObjectAttributes).filter(Boolean);
+            if (value !== null) {
+                if (typeof value === 'object') {
+                    if (Array.isArray(value)) {
+                        acc[modifiedKey] = value.map(removeUnderscoreFromObjectAttributes)
+                            .filter(Boolean);
+                    } else {
+                        acc[modifiedKey] = removeUnderscoreFromObjectAttributes(value);
+                    }
                 } else {
-                    acc[modifiedKey] = removeUnderscoreFromObjectAttributes(value);
+                    acc[modifiedKey] = value;
                 }
-            } else {
-                acc[modifiedKey] = value;
             }
 
             return acc;
