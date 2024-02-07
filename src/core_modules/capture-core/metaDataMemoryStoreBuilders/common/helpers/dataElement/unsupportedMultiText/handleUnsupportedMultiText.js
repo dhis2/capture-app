@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { isMultiTextWithoutOptionset } from './isMultiTextWithoutOptionset';
-import { handleMultiTextPreV41 } from './handleMultiTextPreV41';
+import { handleMultiTextInUnsupportedBackendVersions } from './handleMultiTextInUnsupportedBackendVersions';
 import type { DataElement } from '../../../../../metaData';
 
 export const handleUnsupportedMultiText = (dataElement: DataElement, minorServerVersion: number) => {
@@ -10,5 +10,5 @@ export const handleUnsupportedMultiText = (dataElement: DataElement, minorServer
         log.error(errorCreator('MULTI_TEXT without optionset is not supported')({ dataElement }));
         return null;
     }
-    return handleMultiTextPreV41(dataElement, minorServerVersion);
+    return handleMultiTextInUnsupportedBackendVersions(dataElement, minorServerVersion);
 };
