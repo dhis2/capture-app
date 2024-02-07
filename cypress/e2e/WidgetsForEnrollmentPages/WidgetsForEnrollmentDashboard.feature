@@ -17,22 +17,8 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     When the user clicks on the organisation unit with text: Sierra Leone
     Then the user sees the organisation unit with text: Sierra Leone is selected
 
-  @v>=40
-  @with-transfer-ownership-data
+  @with-transfer-ownership-data-cleanup
   Scenario: User can transfer the enrollment to another organisation unit
-    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
-    Then the enrollment widget should be opened
-    And the enrollment owner organisation unit is Ngelehun CHC
-    When the user opens the enrollment actions menu
-    And the user clicks on the transfer action
-    And the user sees the transfer modal
-    And the user sees the organisation unit tree
-    When the user clicks on the organisation unit with text: Sierra Leone
-    Then the user successfully transfers the enrollment
-
-  @v<40
-  @with-transfer-ownership-data
-  Scenario: User can transfer the enrollment to another organisation unit on older versions
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the enrollment widget should be opened
     And the enrollment owner organisation unit is Ngelehun CHC

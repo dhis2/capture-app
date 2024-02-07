@@ -1,15 +1,10 @@
 import { When, Then, After, Given } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
+import { hasVersionSupport } from '../../../support/tagUtils';
 
-// Will run on v>=40
-After({ tags: '@with-transfer-ownership-data' }, () => {
-    cy.buildApiUrl('tracker', 'ownership/transfer?program=IpHINAT79UW&ou=DiszpKrYNg8&trackedEntityInstance=EaOyKGOIGRp')
-        .then(url => cy.request('PUT', url));
-});
-
-// Will run on v<40
-After({ tags: '@with-transfer-ownership-data' }, () => {
-    cy.buildApiUrl('tracker', 'ownership/transfer?program=IpHINAT79UW&ou=DiszpKrYNg8&trackedEntity=EaOyKGOIGRp')
+After({ tags: '@with-transfer-ownership-data-cleanup' }, () => {
+    const teiQueryKey = hasVersionSupport('@v>=40') ? 'trackedEntity' : 'trackedEntityInstance';
+    cy.buildApiUrl('tracker', `ownership/transfer?program=IpHINAT79UW&ou=DiszpKrYNg8&${teiQueryKey}=EaOyKGOIGRp`)
         .then(url => cy.request('PUT', url));
 });
 
