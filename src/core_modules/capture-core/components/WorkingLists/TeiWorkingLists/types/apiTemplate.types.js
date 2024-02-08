@@ -10,7 +10,7 @@ export type ApiDataFilterNumeric = {|
 
 export type ApiDataFilterBoolean = {|
     in: Array<string>,
-|};
+|} | boolean;
 
 export type ApiDataFilterTrueOnly = {|
     eq: string,

@@ -1,11 +1,14 @@
 // @flow
-import type { BooleanFilterData } from './types';
+import type { BooleanFilterStringified } from './types';
 
 export function getBooleanFilterData(
     values: Array<string>,
-): BooleanFilterData {
+): BooleanFilterStringified {
     return {
-        values: values
-            .map(value => (value === 'true')),
+        values: values.map(value => value),
     };
 }
+
+export const getSingleSelectBooleanFilterData = (value: any) => getBooleanFilterData([value]);
+
+export const getMultiSelectBooleanFilterData = (values: any) => getBooleanFilterData(values);
