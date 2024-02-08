@@ -24,6 +24,7 @@ type RenderTrackedEntityRegistration = (
 export type ContainerProps = $ReadOnly<{|
     teiId: string,
     orgUnitId: string,
+    trackedEntityTypeName: ?string,
     renderElement: HTMLElement,
     relationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
@@ -46,6 +47,7 @@ export type PortalProps = $ReadOnly<{|
     orgUnitId: string,
     relationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
+    trackedEntityTypeName: ?string,
     programId: string,
     onSave: () => void,
     onCancel: () => void,
@@ -65,6 +67,7 @@ export type ComponentProps = $ReadOnly<{|
     orgUnitId: string,
     relationshipTypes: RelationshipTypes,
     trackedEntityTypeId: string,
+    trackedEntityTypeName: ?string,
     programId: string,
     onSave: () => void,
     onCancel: () => void,

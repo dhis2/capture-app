@@ -17,6 +17,7 @@ export const NewTrackedEntityRelationshipPlain = ({
     teiId,
     orgUnitId,
     programId,
+    trackedEntityTypeName,
     relationshipTypes,
     trackedEntityTypeId,
     onCloseAddRelationship,
@@ -54,6 +55,7 @@ export const NewTrackedEntityRelationshipPlain = ({
                         relationshipTypes={relationshipTypes}
                         teiId={teiId}
                         orgUnitId={orgUnitId}
+                        trackedEntityTypeName={trackedEntityTypeName}
                         trackedEntityTypeId={trackedEntityTypeId}
                         programId={programId}
                         renderElement={renderElement}
