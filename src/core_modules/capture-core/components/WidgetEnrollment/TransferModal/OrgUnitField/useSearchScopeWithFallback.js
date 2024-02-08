@@ -32,10 +32,7 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         {
             resource: 'organisationUnits',
             params: {
-                fields: [
-                    'id,displayName,path,publicAccess,access,lastUpdated',
-                    'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                ].join(','),
+                fields: ['id,path'],
                 paging: true,
                 query: searchText,
                 withinUserSearchHierarchy: true,

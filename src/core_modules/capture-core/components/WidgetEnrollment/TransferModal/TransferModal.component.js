@@ -25,7 +25,7 @@ export const TransferModal = ({
         selectedOrgUnit,
         handleOrgUnitChange,
         orgUnitScopes,
-        loading,
+        ready,
         programAccessLevel,
     } = useTransferValidation({
         programId: enrollment.program,
@@ -76,8 +76,8 @@ export const TransferModal = ({
                     <Button
                         dataTest={'widget-enrollment-transfer-button'}
                         primary
-                        disabled={!selectedOrgUnit}
-                        loading={loading || isTransferLoading}
+                        disabled={!ready || !selectedOrgUnit}
+                        loading={isTransferLoading}
                         onClick={handleOnUpdateOwnership}
                     >
                         {i18n.t('Transfer')}

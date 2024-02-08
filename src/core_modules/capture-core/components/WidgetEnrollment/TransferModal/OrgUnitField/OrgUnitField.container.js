@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { DebounceField } from 'capture-ui';
@@ -36,29 +36,19 @@ type Props = {
     },
 };
 
-const DefaultTreeKey = 'Initial';
-
 export const OrgUnitFieldPlain = ({ selected, onSelectClick, classes }: Props) => {
     const [searchText, setSearchText] = useState(undefined);
-    const [key, setKey] = useState(DefaultTreeKey);
     const { orgUnitRoots, isLoading } = useSearchScopeWithFallback({
         searchText,
     });
-
-    useEffect(() => {
-        if (searchText?.length) {
-            setKey(`${searchText}-${new Date().getTime()}`);
-            return;
-        }
-        setKey(DefaultTreeKey);
-    }, [searchText]);
 
     if (isLoading) {
         return null;
     }
 
     const handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
-        setSearchText(event.currentTarget.value);
+        const { value } = event.currentTarget;
+        setSearchText(value);
     };
 
     return (
@@ -73,7 +63,7 @@ export const OrgUnitFieldPlain = ({ selected, onSelectClick, classes }: Props) =
             </div>
             <div className={classes.orgUnitTreeContainer}>
                 <OrgUnitTreeComponent
-                    treeKey={searchText ? key : DefaultTreeKey}
+                    treeKey={JSON.stringify(orgUnitRoots)}
                     roots={orgUnitRoots}
                     selected={selected}
                     onSelectClick={onSelectClick}

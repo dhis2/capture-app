@@ -29,7 +29,7 @@ type ReturnTypes = {
     isTransferLoading: boolean,
 }
 
-const UpdateEnrollmentOwnershipMutation = {
+const updateEnrollmentOwnershipMutation = {
     resource: 'tracker/ownership/transfer',
     type: 'update',
     params: ({ teiId, programId, orgUnitId, teiParamKey }) => ({
@@ -54,7 +54,7 @@ export const useUpdateOwnership = ({
 
     // $FlowFixMe
     const { mutateAsync: updateEnrollmentOwnership, isLoading } = useMutation(
-        ({ orgUnitId }) => dataEngine.mutate(UpdateEnrollmentOwnershipMutation, {
+        ({ orgUnitId }) => dataEngine.mutate(updateEnrollmentOwnershipMutation, {
             variables: {
                 programId,
                 teiId,
