@@ -24,6 +24,10 @@ export type ContentType = {|
 export type Props = {|
     feedback?: ?Array<string | FilteredText | FilteredKeyValue>,
     emptyText: string,
+|}
+
+export type PlainProps = {|
+    ...PlainProps,
     ...CssClasses
 |}
 

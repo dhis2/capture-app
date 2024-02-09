@@ -3230,6 +3230,13 @@
     jsbi "^4.1.0"
     tslib "^2.3.1"
 
+"@jsdoc/salty@^0.2.1":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@jsdoc/salty/-/salty-0.2.7.tgz#98ddce519fd95d7bee605a658fabf6e8cbf7556d"
+  integrity sha512-mh8LbS9d4Jq84KLw8pzho7XC2q2/IJGiJss3xwRoLD1A+EE16SjN4PfaG4jRCzKegTFLlN0Zd8SdUPE6XdoPFg==
+  dependencies:
+    lodash "^4.17.21"
+
 "@juggle/resize-observer@^3.3.1":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz#08d6c5e20cf7e4cc02fd181c4b0c225cd31dbb60"
@@ -8095,10 +8102,12 @@ docdash@^0.4.0:
   resolved "https://registry.yarnpkg.com/docdash/-/docdash-0.4.0.tgz#05c3a50d83189981699ee0c076d3a3950db7ec00"
   integrity sha512-cdmktbSCiqO0gr6/YO5AQAZLOpCTv7usry2+cgsjcO0YnTtG4tlZvyVvZ+BLp3vyOovp6cunldeK+gjCPnG4Dg==
 
-docdash@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/docdash/-/docdash-1.2.0.tgz#f99dde5b8a89aa4ed083a3150383e042d06c7f49"
-  integrity sha512-IYZbgYthPTspgqYeciRJNPhSwL51yer7HAwDXhF5p+H7mTDbPvY3PCk/QDjNxdPCpWkaJVFC4t7iCNB/t9E5Kw==
+docdash@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/docdash/-/docdash-2.0.2.tgz#e86dafb260b5dee4fbf1f7b34c8752634aa22f78"
+  integrity sha512-3SDDheh9ddrwjzf6dPFe1a16M6ftstqTNjik2+1fx46l24H9dD2osT2q9y+nBEC1wWz4GIqA48JmicOLQ0R8xA==
+  dependencies:
+    "@jsdoc/salty" "^0.2.1"
 
 doctrine@^2.1.0:
   version "2.1.0"
