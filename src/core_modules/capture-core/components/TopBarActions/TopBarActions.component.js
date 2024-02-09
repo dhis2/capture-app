@@ -18,7 +18,6 @@ const styles = () => ({
 });
 
 const ActionButtonsPlain = ({
-    onNewClick,
     onNewClickWithoutProgramId,
     onFindClick,
     onFindClickWithoutProgramId,
@@ -29,6 +28,7 @@ const ActionButtonsPlain = ({
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
     const [openNew, setOpenNew] = useState(false);
     const [openSearch, setOpenSearch] = useState(false);
+
     useEffect(() => {
         setOpenNew(false);
         setOpenSearch(false);
@@ -44,7 +44,7 @@ const ActionButtonsPlain = ({
                     className={classes.marginRight}
                     onClick={onNewClickWithoutProgramId}
                 >
-                    {i18n.t('New')}
+                    {i18n.t('Create new')}
                 </Button>
             ) : (
                 <SplitButton
@@ -58,23 +58,19 @@ const ActionButtonsPlain = ({
                         <FlyoutMenu dense maxWidth="250px">
                             <MenuItem
                                 dataTest="new-menuitem-one"
-                                label={i18n.t('New {{trackedEntityName}} in {{programName}}', {
-                                    trackedEntityName,
-                                    programName,
-                                    interpolation: { escapeValue: false },
-                                })}
-                                onClick={() => { setOpenNew(prev => !prev); onNewClick(); }}
-                            />
-                            <MenuItem
-                                dataTest="new-menuitem-two"
-                                label={`${i18n.t('New')}...`}
+                                label={`${i18n.t('Create new in another program')}...`}
                                 onClick={() => { setOpenNew(prev => !prev); onNewClickWithoutProgramId(); }}
                             />
                         </FlyoutMenu>
                     }
                 >
-                    {i18n.t('Create new {{trackedEntityName}}',
-                        { trackedEntityName, interpolation: { escapeValue: false } })}
+                    {scopeType === scopeTypes.TRACKER_PROGRAM && (
+                        i18n.t('Create new {{trackedEntityName}}',
+                            { trackedEntityName, interpolation: { escapeValue: false } })
+                    )}
+                    {scopeType === scopeTypes.EVENT_PROGRAM && (
+                        i18n.t('Create new event')
+                    )}
                 </SplitButton>
             )}
 
