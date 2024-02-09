@@ -2,13 +2,13 @@
 import React from 'react';
 import { colors } from '@dhis2/ui';
 import { Widget } from '../../Widget';
-import type { Props } from './WidgetError.types';
+import type { PlainProps } from './WidgetError.types';
 import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningContent';
 import { WidgetErrorHeader } from './WidgetErrorHeader';
 import { widgetTypes } from '../content/WidgetTypes';
 
 
-export const WidgetError = ({ error, classes }: Props) => {
+export const WidgetError = ({ error, classes }: PlainProps) => {
     const widgetType = widgetTypes.ERROR;
 
     if (!error?.length) {

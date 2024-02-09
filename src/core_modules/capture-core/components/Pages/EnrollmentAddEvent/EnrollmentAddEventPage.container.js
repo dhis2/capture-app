@@ -13,6 +13,11 @@ import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomai
 import { EnrollmentAddEventPageStatuses } from './EnrollmentAddEventPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { type Props } from './EnrollmentAddEventPage.types';
+import {
+    useEnrollmentPageLayout,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
+import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 
 const styles = {
     informativeMessage: {
@@ -29,6 +34,11 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
         attributeValues,
         error: commonDataError,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const { pageLayout, isLoading } = useEnrollmentPageLayout({
+        selectedScopeId: validIds[IdTypes.PROGRAM_ID]?.id,
+        dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_NEW,
+        defaultPageLayout: DefaultPageLayout,
+    });
 
     // $FlowFixMe
     const pageIsInvalid = (!loading && !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
@@ -47,11 +57,11 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
         if (pageIsInvalid) {
             return EnrollmentAddEventPageStatuses.PAGE_INVALID;
         }
-        if (loading) {
+        if (loading || isLoading) {
             return EnrollmentAddEventPageStatuses.LOADING;
         }
         return EnrollmentAddEventPageStatuses.DEFAULT;
-    }, [enrollmentId, loading, pageIsInvalid, programId, teiId, validIds]);
+    }, [enrollmentId, isLoading, loading, pageIsInvalid, programId, teiId, validIds]);
 
     if (pageStatus === EnrollmentAddEventPageStatuses.LOADING) {
         return <LoadingMaskForPage />;
@@ -60,6 +70,8 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     if (pageStatus === EnrollmentAddEventPageStatuses.DEFAULT) {
         return (
             <EnrollmentAddEventPageDefault
+                // $FlowFixMe - Business logic dictates that pageLayout is defined
+                pageLayout={pageLayout}
                 enrollment={enrollment}
                 attributeValues={attributeValues}
                 commonDataError={Boolean(commonDataError)}

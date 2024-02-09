@@ -12,9 +12,6 @@ import { EnrollmentPageDefault } from './EnrollmentPageDefault';
 import { TopBar } from './TopBar.container';
 
 const getStyles = ({ typography }) => ({
-    container: {
-        padding: '16px 24px 16px 24px',
-    },
     loadingMask: {
         height: '100vh',
     },
@@ -43,7 +40,7 @@ const EnrollmentPagePlain = ({
             enrollmentId={enrollmentId}
         />
 
-        <div data-test="enrollment-page-content" className={classes.container}>
+        <div data-test="enrollment-page-content">
             {enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS && <MissingMessage />}
 
             {enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && <EnrollmentPageDefault />}

@@ -4,15 +4,11 @@ import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
-import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
-import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
-import { WidgetFeedback } from '../../../WidgetFeedback';
-import { WidgetIndicator } from '../../../WidgetIndicator';
-import { WidgetProfile } from '../../../WidgetProfile';
-import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
-import { ProgramStageSelector } from '../ProgramStageSelector';
-import { NewEventWorkspace } from '../NewEventWorkspace';
+import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import {
+    EnrollmentPageKeys,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
 const styles = ({ typography }) => ({
     container: {
@@ -42,7 +38,9 @@ const styles = ({ typography }) => ({
 });
 
 const EnrollmentAddEventPagePain = ({
-    programId,
+    pageLayout,
+    availableWidgets,
+    program,
     stageId,
     orgUnitId,
     teiId,
@@ -57,88 +55,48 @@ const EnrollmentAddEventPagePain = ({
     ready,
     classes,
     ...passOnProps
-}: Props) => (
-    <div className={classes.container}>
-        <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
-        {(() => {
-            if (pageFailure) {
-                return (
-                    <div>
-                        {i18n.t('There was an error loading the page')}
-                    </div>
-                );
-            } else if (!orgUnitId) {
-                return (
-                    <IncompleteSelectionsMessage>
-                        {i18n.t('Choose a registering unit to start reporting')}
-                    </IncompleteSelectionsMessage>
-                );
-            } else if (!ready) {
-                return null;
-            }
+}: Props) => {
+    if (pageFailure) {
+        return (
+            <div>
+                {i18n.t('There was an error loading the page')}
+            </div>
+        );
+    }
 
-            return (
-                <div>
-                    <div className={classes.columns}>
-                        <div className={classes.leftColumn}>
-                            <div
-                                className={classes.addEventContainer}
-                                data-test="add-event-enrollment-page-content"
-                            >
-                                {!stageId ?
-                                    <ProgramStageSelector
-                                        programId={programId}
-                                        orgUnitId={orgUnitId}
-                                        teiId={teiId}
-                                        enrollmentId={enrollmentId}
-                                    />
-                                    :
-                                    <NewEventWorkspace
-                                        {...passOnProps}
-                                        programId={programId}
-                                        stageId={stageId}
-                                        orgUnitId={orgUnitId}
-                                        teiId={teiId}
-                                        enrollmentId={enrollmentId}
-                                    />
-                                }
-                            </div>
-                        </div>
-                        <div className={classes.rightColumn}>
-                            <WidgetError error={widgetEffects?.errors} />
-                            <WidgetWarning warning={widgetEffects?.warnings} />
-                            {!hideWidgets.feedback && (
-                                <WidgetFeedback
-                                    emptyText={i18n.t('There is no feedback for this event')}
-                                    feedback={widgetEffects?.feedbacks}
-                                />
-                            )}
-                            {!hideWidgets.indicator && (
-                                <WidgetIndicator
-                                    emptyText={i18n.t('There are no indicators for this event')}
-                                    indicators={widgetEffects?.indicators}
-                                />
-                            )}
-                            <WidgetProfile
-                                teiId={teiId}
-                                programId={programId}
-                            />
-                            <WidgetEnrollment
-                                teiId={teiId}
-                                enrollmentId={enrollmentId}
-                                programId={programId}
-                                readOnlyMode
-                                onDelete={onDelete}
-                                onAddNew={onAddNew}
-                                onError={onEnrollmentError}
-                                onSuccess={onEnrollmentSuccess}
-                            />
-                        </div>
-                    </div>
-                </div>
-            );
-        })()}
-    </div>);
+    if (!orgUnitId) {
+        return (
+            <IncompleteSelectionsMessage>
+                {i18n.t('Choose a registering unit to start reporting')}
+            </IncompleteSelectionsMessage>
+        );
+    }
+
+    if (!ready) {
+        return null;
+    }
+    return (
+        <div>
+            <EnrollmentPageLayout
+                {...passOnProps}
+                currentPage={EnrollmentPageKeys.NEW_EVENT}
+                program={program}
+                pageLayout={pageLayout}
+                stageId={stageId}
+                availableWidgets={availableWidgets}
+                orgUnitId={orgUnitId}
+                teiId={teiId}
+                enrollmentId={enrollmentId}
+                widgetEffects={widgetEffects}
+                hideWidgets={hideWidgets}
+                onDelete={onDelete}
+                onAddNew={onAddNew}
+                onEnrollmentError={onEnrollmentError}
+                onEnrollmentSuccess={onEnrollmentSuccess}
+            />
+        </div>
+    );
+};
 
 export const EnrollmentAddEventPageDefaultComponent: ComponentType<$Diff<Props, CssClasses>> =
     withStyles(styles)(EnrollmentAddEventPagePain);
