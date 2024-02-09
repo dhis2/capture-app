@@ -15,8 +15,10 @@ const styles = {
 
 const Slash = withStyles({ slash: { padding: 5 } })(({ classes }) => <span className={classes.slash}>/</span>);
 
-const LinkedEntityMetadataSelectorStep = ({ currentStep, onNavigate }) => {
-    const initialText = i18n.t('New TEI Relationship');
+const LinkedEntityMetadataSelectorStep = ({ currentStep, trackedEntityTypeName, onNavigate }) => {
+    const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {
+        trackedEntityTypeName: trackedEntityTypeName?.toLowerCase(),
+    });
     return (currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.value ?
         <LinkButton onClick={onNavigate}>{initialText}</LinkButton> :
         <span>{initialText}</span>);
@@ -64,11 +66,13 @@ const BreadcrumbsPlain = ({
     currentStep,
     onNavigate,
     linkedEntityMetadataName,
+    trackedEntityTypeName,
     classes,
 }: PlainProps) => (
     <div className={classes.container}>
         <LinkedEntityMetadataSelectorStep
             currentStep={currentStep}
+            trackedEntityTypeName={trackedEntityTypeName}
             onNavigate={() =>
                 onNavigate(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA)}
         />

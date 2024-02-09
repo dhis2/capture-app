@@ -1,4 +1,5 @@
 // @flow
+import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { type DataElement, convertDataElementsValues } from '../metaData';
 import { convertValue } from '../converters/serverToClient';
 import { getSubValues } from './getSubValues';
@@ -63,19 +64,20 @@ export async function getTrackedEntityInstances(
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
 ): TrackedEntityInstancesPromise {
-    const apiRes = await querySingleResource({
+    const apiResponse = await querySingleResource({
         resource: 'tracker/trackedEntities',
         params: queryParams,
     });
+    const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiResponse);
 
-    const trackedEntityInstanceContainers = apiRes && apiRes.instances ? await apiRes.instances.reduce(async (accTeiPromise, apiTei) => {
+    const trackedEntityInstanceContainers = await apiTrackedEntities.reduce(async (accTeiPromise, apiTei) => {
         const accTeis = await accTeiPromise;
         const teiContainer = await convertToClientTei(apiTei, attributes, absoluteApiPath, querySingleResource);
         if (teiContainer) {
             accTeis.push(teiContainer);
         }
         return accTeis;
-    }, Promise.resolve([])) : null;
+    }, Promise.resolve([]));
 
     const pagingData = {
         rowsPerPage: queryParams.pageSize,

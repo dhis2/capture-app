@@ -5,12 +5,14 @@ import '../../sharedSteps';
 Given('the tei created by this test is cleared from the database', () => {
     cy.buildApiUrl('tracker', 'trackedEntities?filter=w75KJ2mc4zz:like:Breaking&filter=zDhUuAYrxNC:like:TheGlass&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&ouMode=ACCESSIBLE')
         .then(url => cy.request(url))
-        .then(({ body }) =>
-            body.instances.forEach(({ trackedEntity }) =>
-                cy.buildApiUrl('trackedEntityInstances', trackedEntity)
-                    .then(trackedEntityUrl =>
-                        cy.request('DELETE', trackedEntityUrl)),
-            ));
+        .then(({ body }) => {
+            const apiTrackedEntities = body.trackedEntities || body.instances || [];
+            return apiTrackedEntities.forEach(({ trackedEntity }) =>
+                cy
+                    .buildApiUrl('trackedEntityInstances', trackedEntity)
+                    .then(trackedEntityUrl => cy.request('DELETE', trackedEntityUrl)),
+            );
+        });
 });
 
 And('you create a new tei in Child programme from Ngelehun CHC', () => {

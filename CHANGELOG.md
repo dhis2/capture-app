@@ -1,3 +1,24 @@
+# [100.55.0](https://github.com/dhis2/capture-app/compare/v100.54.0...v100.55.0) (2024-02-05)
+
+
+### Features
+
+* [DHIS2-16305] Enrollment Overview Plugins ([#3515](https://github.com/dhis2/capture-app/issues/3515)) ([8e06dbc](https://github.com/dhis2/capture-app/commit/8e06dbcb54bdb9b308b9f01427b4139a9a00c977))
+
+# [100.54.0](https://github.com/dhis2/capture-app/compare/v100.53.1...v100.54.0) (2024-02-04)
+
+
+### Features
+
+* [DHIS2-16262] Support Custom Layout for Enrollment Pages ([#3481](https://github.com/dhis2/capture-app/issues/3481)) ([9cc3d70](https://github.com/dhis2/capture-app/commit/9cc3d707f855bba0971a144f1371765afedda55f))
+
+## [100.53.1](https://github.com/dhis2/capture-app/compare/v100.53.0...v100.53.1) (2024-02-01)
+
+
+### Bug Fixes
+
+* [DHIS2-16499] Handle different API response format ([#3517](https://github.com/dhis2/capture-app/issues/3517)) ([206d56c](https://github.com/dhis2/capture-app/commit/206d56c8c86f6cf3bdfc8792e87409c082237401))
+
 # [100.53.0](https://github.com/dhis2/capture-app/compare/v100.52.0...v100.53.0) (2024-01-26)
 
 
