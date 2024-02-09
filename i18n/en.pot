@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-09T08:06:34.910Z\n"
-"PO-Revision-Date: 2024-02-09T08:06:34.910Z\n"
+"POT-Creation-Date: 2024-02-07T10:43:51.606Z\n"
+"PO-Revision-Date: 2024-02-07T10:43:51.606Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -668,15 +668,6 @@ msgstr "There is an error while opening this enrollment. Please enter a valid ur
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
-msgid "Enrollment Dashboard"
-msgstr "Enrollment Dashboard"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "No indicator output for this enrollment yet"
-
-msgid "No feedback for this enrollment yet"
-msgstr "No feedback for this enrollment yet"
-
 msgid "Quick actions"
 msgstr "Quick actions"
 
@@ -757,20 +748,11 @@ msgstr "Org unit is not valid with current program"
 msgid "There was an error opening the Page"
 msgstr "There was an error opening the Page"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "Enrollment{{escape}} New Event"
-
 msgid "There was an error loading the page"
 msgstr "There was an error loading the page"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Choose a registering unit to start reporting"
-
-msgid "There are no feedbacks for this event"
-msgstr "There are no feedbacks for this event"
-
-msgid "There are no indicators for this event"
-msgstr "There are no indicators for this event"
 
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
@@ -798,18 +780,6 @@ msgstr "Program Stages could not be loaded"
 
 msgid "Stage"
 msgstr "Stage"
-
-msgid "The enrollment event data could not be found"
-msgstr "The enrollment event data could not be found"
-
-msgid "There are no feedback for this event"
-msgstr "There are no feedback for this event"
-
-msgid "Enrollment{{escape}} View Event"
-msgstr "Enrollment{{escape}} View Event"
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr "Enrollment{{escape}} Edit Event"
 
 msgid "Registered events"
 msgstr "Registered events"
@@ -938,6 +908,21 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Edit Event"
+msgstr "Edit Event"
+
+msgid "View Event"
+msgstr "View Event"
+
+msgid "No feedback for this enrollment yet"
+msgstr "No feedback for this enrollment yet"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "No indicator output for this enrollment yet"
+
 msgid "Selected program"
 msgstr "Selected program"
 
@@ -949,6 +934,9 @@ msgstr "Search by attributes"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
+
+msgid "The enrollment event data could not be found"
+msgstr "The enrollment event data could not be found"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
@@ -1395,8 +1383,8 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
-msgid "New TEI Relationship"
-msgstr "New TEI Relationship"
+msgid "New {{trackedEntityTypeName}} relationship"
+msgstr "New {{trackedEntityTypeName}} relationship"
 
 msgid "Missing implementation step"
 msgstr "Missing implementation step"

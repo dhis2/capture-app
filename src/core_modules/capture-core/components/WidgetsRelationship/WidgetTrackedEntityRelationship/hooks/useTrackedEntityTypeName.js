@@ -2,10 +2,6 @@
 import { useMemo } from 'react';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 
-type ReturnData = {
-    displayName: string,
-}
-
 export const useTrackedEntityTypeName = (tetId: string) => {
     const query = useMemo(() => ({
         resource: 'trackedEntityTypes',
@@ -15,7 +11,7 @@ export const useTrackedEntityTypeName = (tetId: string) => {
         },
     }), [tetId]);
 
-    const { data, isLoading, error } = useApiDataQuery<ReturnData>(
+    const { data, isLoading, error } = useApiDataQuery<?string>(
         ['trackedEntityTypeName', tetId],
         query,
         {
