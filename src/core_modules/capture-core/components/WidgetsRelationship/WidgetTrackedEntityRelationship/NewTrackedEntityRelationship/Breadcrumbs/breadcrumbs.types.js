@@ -4,6 +4,7 @@ import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS } from '../wizardSteps.con
 export type Props = {|
     currentStep: $Values<typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS>,
     onNavigate: ($Values<typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS>) => void,
+    trackedEntityTypeName: ?string,
     linkedEntityMetadataName?: string,
 |};
 

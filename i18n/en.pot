@@ -1377,8 +1377,8 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
-msgid "New TEI Relationship"
-msgstr "New TEI Relationship"
+msgid "New {{trackedEntityTypeName}} relationship"
+msgstr "New {{trackedEntityTypeName}} relationship"
 
 msgid "Missing implementation step"
 msgstr "Missing implementation step"
