@@ -33,6 +33,10 @@ Feature: User interacts with Enrollment page
     Given you enter enrollment page by typing: #/enrollment?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=pybd813kIWx&enrollmentId=AUTO
     Then you should be redirect to #/enrollment?enrollmentId=FS085BEkJo2&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=pybd813kIWx
 
+  Scenario: Auto select orgunit when opening enrollment dashboard
+    Given you enter enrollment page by typing: #/enrollment?enrollmentId=avqvQMtX8DG&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=btoHJM9byeF
+    Then you should be redirect to #/enrollment?enrollmentId=avqvQMtX8DG&orgUnitId=NnGUNkc5Zq8&programId=IpHINAT79UW&teiId=btoHJM9byeF
+
   Scenario: Reset tei
     Given you land on the enrollment page by having typed only the enrollmentId in the url
     When you reset the tei selection
