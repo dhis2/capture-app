@@ -146,10 +146,7 @@ export const enrollmentIdErrorEpic = (action$: InputObservable) =>
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENT_ID_ERROR),
         map(({ payload: { enrollmentId } }) =>
             showErrorViewOnEnrollmentPage({
-                error: i18n.t('Invalid enrollment id {{enrollmentId}}.', {
-                    enrollmentId,
-                    interpolation: { escapeValue: false },
-                }),
+                error: i18n.t({ error: i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId }) }),
             })),
     );
 
