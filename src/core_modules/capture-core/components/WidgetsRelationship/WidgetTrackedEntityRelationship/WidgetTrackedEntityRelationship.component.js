@@ -65,6 +65,7 @@ export const WidgetTrackedEntityRelationship = ({
             <NewTrackedEntityRelationship
                 teiId={teiId}
                 renderElement={addRelationshipRenderElement}
+                trackedEntityTypeName={trackedEntityTypeName}
                 relationshipTypes={relationshipTypes}
                 trackedEntityTypeId={trackedEntityTypeId}
                 programId={programId}
