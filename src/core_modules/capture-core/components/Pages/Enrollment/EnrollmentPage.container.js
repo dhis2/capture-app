@@ -22,7 +22,6 @@ import { getScopeInfo } from '../../../metaData';
 import {
     buildEnrollmentsAsOptions,
     useSetEnrollmentId,
-    useResetTeiId,
 } from '../../ScopeSelector';
 import { useLocationQuery } from '../../../utils/routing';
 
@@ -101,7 +100,6 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     const { programId, orgUnitId, enrollmentId, teiId } = useLocationQuery();
     const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
-    const { resetTeiId: deselectTei } = useResetTeiId();
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
 
     useEffect(() => {
@@ -109,7 +107,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     }, [dispatch]);
 
     useEffect(() => { dispatch(changedEnrollmentId(enrollmentId)); }, [dispatch, enrollmentId]);
-    useEffect(() => { dispatch(teiId ? changedTeiId({ teiId }) : resetTeiId(deselectTei)); }, [dispatch, teiId, deselectTei]);
+    useEffect(() => { dispatch(teiId ? changedTeiId({ teiId }) : resetTeiId()); }, [dispatch, teiId]);
     useEffect(() => { dispatch(changedProgramId({ programId })); }, [dispatch, programId]);
 
     const error: boolean =

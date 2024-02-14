@@ -75,8 +75,8 @@ export const fetchEnrollmentIdError = (enrollmentId: string) =>
 export const changedTeiId = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.PROCESS_TEI_ID)(payload);
 
-export const resetTeiId = (resetFunction: () => void) =>
-    actionCreator(enrollmentPageActionTypes.RESET_TEI_ID)(resetFunction);
+export const resetTeiId = () =>
+    actionCreator(enrollmentPageActionTypes.RESET_TEI_ID)();
 
 export const fetchTei = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI)(payload);

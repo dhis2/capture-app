@@ -77,6 +77,12 @@ const captureScopeQuery = orgUnitId => ({
     },
 });
 
+const deselectTei = (history) => {
+    const { programId, orgUnitId } = getLocationQuery();
+    history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+    return false;
+};
+
 // Check fetch status
 const enrollmentIdReady = (store: ReduxStore): boolean => {
     const { fetchStatus } = store.value.enrollmentPage;
@@ -163,14 +169,14 @@ export const changedTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
         map(({ payload }) => fetchTei(payload)),
     );
 
-export const resetTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetTeiIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.RESET_TEI_ID),
-        filter(({ payload: deselectTei }) =>
+        filter(() =>
             (({ fetchStatus }) =>
                 fetchStatus.enrollmentId !== selectionStatus.LOADING &&
                 fetchStatus.teiId !== selectionStatus.LOADING &&
-                deselectTei('/') && false
+                deselectTei(history)
             )(store.value.enrollmentPage)),
     );
 
