@@ -85,7 +85,7 @@ class D2SectionPlain extends React.PureComponent<Props> {
             />
         );
 
-        if (sectionMetaData.showContainer) {
+        if (sectionMetaData.showContainer && !this.props.formHorizontal) {
             return (
                 <div>
                     <Section

@@ -20,9 +20,9 @@ const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColo
 
 const styles = {
     horizontalSection: {
-        flexible: 'screen',
+        display: 'flex',
         flexWrap: 'wrap',
-        alignItems: 'flexible start',
+        alignItems: 'flex-start',
     },
 };
 
