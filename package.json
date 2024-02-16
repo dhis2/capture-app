@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "100.55.0",
+    "version": "100.56.0",
     "cacheVersion": "7",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
@@ -10,7 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/rules-engine-javascript": "100.55.0",
+        "@dhis2/rules-engine-javascript": "100.56.0",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
@@ -103,7 +103,7 @@
         "@typescript-eslint/eslint-plugin": "^4.33.0",
         "@vercel/ncc": "^0.34.0",
         "babel-plugin-module-resolver": "^5.0.0",
-        "concurrently": "^7.0.0",
+        "concurrently": "^8.2.2",
         "cypress": "12",
         "docdash": "^2.0.2",
         "dotenv": "^16.0.3",
