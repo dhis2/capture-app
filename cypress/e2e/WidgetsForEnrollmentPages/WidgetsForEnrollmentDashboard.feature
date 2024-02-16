@@ -133,14 +133,3 @@ Feature: The user interacts with the widgets on the enrollment dashboard
   Scenario: The program rules are triggered and the effects are displayed in the sidebar widgets
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the user can see the program rules effect in the indicator widget
-
-# TODO: Enable this test before merge. Blocked by a bug in the API.
-#  @with-mocked-relationship-data
-#  Scenario: The user is able to delete a relationship
-#    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
-#    Then the user can see the relationship widget
-#    And there is an existing relationship
-#    When the user clicks the delete button
-#    Then the user can see the delete relationship modal
-#    When the user clicks the confirm delete button
-#    Then the user can see the relationship widget without the deleted relationship
