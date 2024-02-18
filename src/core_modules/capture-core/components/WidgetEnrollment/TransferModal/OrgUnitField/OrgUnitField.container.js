@@ -38,13 +38,8 @@ type Props = {
 
 export const OrgUnitFieldPlain = ({ selected, onSelectClick, classes }: Props) => {
     const [searchText, setSearchText] = useState(undefined);
-    const { orgUnitRoots, isLoading } = useSearchScopeWithFallback({
-        searchText,
-    });
+    const { orgUnitRoots } = useSearchScopeWithFallback({ searchText });
 
-    if (isLoading) {
-        return null;
-    }
 
     const handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
         const { value } = event.currentTarget;
