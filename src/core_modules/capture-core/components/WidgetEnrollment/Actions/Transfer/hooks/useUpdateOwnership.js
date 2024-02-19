@@ -12,8 +12,8 @@ export type UpdateEnrollmentOwnership = {|
     orgUnitId: string,
     programAccessLevel: ?$Values<typeof ProgramAccessLevels>,
     orgUnitScopes: {
-        ORIGIN: ?$Values<typeof OrgUnitScopes>,
-        DESTINATION: ?$Values<typeof OrgUnitScopes>,
+        origin: ?$Values<typeof OrgUnitScopes>,
+        destination: ?$Values<typeof OrgUnitScopes>,
     },
 |} => Promise<void>;
 
@@ -65,7 +65,7 @@ export const useUpdateOwnership = ({
         {
             onSuccess: (_, { programAccessLevel, orgUnitScopes }) => {
                 // If the user is transferring ownership to a capture scope, we stay on the same page
-                if (orgUnitScopes.DESTINATION === OrgUnitScopes.CAPTURE) {
+                if (orgUnitScopes.destination === OrgUnitScopes.CAPTURE) {
                     refetchTEI();
                     return;
                 }
@@ -77,10 +77,10 @@ export const useUpdateOwnership = ({
 
                 // Assuming that all cases are outside the capture scope and program is protected or closed
                 if (programAccessLevel === ProgramAccessLevels.PROTECTED) {
-                    if (orgUnitScopes.ORIGIN === OrgUnitScopes.CAPTURE) {
+                    if (orgUnitScopes.origin === OrgUnitScopes.CAPTURE) {
                         onTransferOutsideCaptureScope && onTransferOutsideCaptureScope();
                         return;
-                    } else if (orgUnitScopes.ORIGIN === OrgUnitScopes.SEARCH) {
+                    } else if (orgUnitScopes.origin === OrgUnitScopes.SEARCH) {
                         refetchTEI();
                         return;
                     }

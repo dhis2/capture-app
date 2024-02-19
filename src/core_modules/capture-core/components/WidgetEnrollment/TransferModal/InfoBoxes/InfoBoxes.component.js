@@ -13,8 +13,8 @@ type Props = {
     validOrgUnitId: ?string,
     programAccessLevel: string,
     orgUnitScopes: {
-        ORIGIN: $Keys<typeof OrgUnitScopes>,
-        DESTINATION: $Keys<typeof OrgUnitScopes>,
+        origin: $Keys<typeof OrgUnitScopes>,
+        destination: $Keys<typeof OrgUnitScopes>,
     },
     classes: Object,
 };
@@ -52,7 +52,7 @@ const InfoBoxesPlain = ({
     const { displayName: newOrgUnitName } = useOrgUnitName(validOrgUnitId);
 
     const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.PROTECTED].includes(programAccessLevel)
-        && orgUnitScopes.DESTINATION === OrgUnitScopes.SEARCH;
+        && orgUnitScopes.destination === OrgUnitScopes.SEARCH;
 
     return (
         <div className={classes.container}>

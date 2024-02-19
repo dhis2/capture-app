@@ -38,19 +38,19 @@ export const useTransferValidation = ({ ownerOrgUnitId, programId }: Props) => {
     const dataEngine = useDataEngine();
     const [selectedOrgUnit, setSelectedOrgUnit] = useState<?OrgUnit>();
     const [orgUnitScopes, setOrgUnitScopes] = useState({
-        ORIGIN: null,
-        DESTINATION: null,
+        origin: null,
+        destination: null,
     });
     const { accessLevel } = useProgramAccessLevel({ programId });
 
-    const ready = useMemo(() => !!accessLevel && !!orgUnitScopes.ORIGIN,
-        [accessLevel, orgUnitScopes.ORIGIN]);
+    const ready = useMemo(() => !!accessLevel && !!orgUnitScopes.origin,
+        [accessLevel, orgUnitScopes.origin]);
 
     useEffect(() => {
         const updateOriginScope = (newScope: $Values<typeof OrgUnitScopes>) => setOrgUnitScopes(
             prevOrgUnitScopes => ({
                 ...prevOrgUnitScopes,
-                ORIGIN: newScope,
+                origin: newScope,
             }),
         );
 
@@ -63,7 +63,7 @@ export const useTransferValidation = ({ ownerOrgUnitId, programId }: Props) => {
     const updateDestinationScope = (newScope: $Values<typeof OrgUnitScopes>) => setOrgUnitScopes(
         prevOrgUnitScopes => ({
             ...prevOrgUnitScopes,
-            DESTINATION: newScope,
+            destination: newScope,
         }),
     );
 
