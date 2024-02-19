@@ -147,7 +147,6 @@ Then(/^the user sees the organisation unit tree/, () =>
     }),
 );
 
-// test step for scenario: the user clicks on the organisation unit with text: Sierra Leone
 Then(/^the user clicks on the organisation unit with text: (.*)/, orgunit =>
     cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
         cy.get('[data-test="widget-enrollment-transfer-orgunit-tree"]').within(
@@ -186,7 +185,6 @@ Then(/^the user successfully transfers the enrollment/, () => {
     });
 });
 
-// Implement step for: the enrollment owner organisation unit is Sierra Leone
 Given(/^the enrollment owner organisation unit is (.*)/, (orgunit) => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
