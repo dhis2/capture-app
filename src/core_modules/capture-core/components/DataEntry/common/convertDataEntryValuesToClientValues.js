@@ -1,9 +1,7 @@
 // @flow
-/* eslint-disable no-new-func */
 import { convertValue } from '../../../converters/formToClient';
 import type { RenderFoundation } from '../../../metaData';
 
-// $FlowSuppress
 // $FlowFixMe[prop-missing] automated comment
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
 
@@ -17,12 +15,13 @@ export function convertDataEntryValuesToClientValues(
     }
     const eventValues = Object
         .keys(dataEntryValues)
-        // eslint-disable-next-line complexity
         .reduce((accEventValues, key) => {
-            const type = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].type;
-            const onConvertOut = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].onConvertOut;
-            const clientIgnore = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].clientIgnore;
-            const customFeatureType = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].featureType;
+            const {
+                type,
+                onConvertOut,
+                clientIgnore,
+                featureType: customFeatureType,
+            } = dataEntryValuesMeta[key] || {};
             if (clientIgnore) {
                 return accEventValues;
             }
@@ -30,7 +29,7 @@ export function convertDataEntryValuesToClientValues(
                 const value = dataEntryValues[key];
                 accEventValues[key] = convertValue(value, type);
             } else if (onConvertOut) {
-                const clientId = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].clientId;
+                const clientId = dataEntryValuesMeta[key].clientId;
                 const dataEntryValue = dataEntryValues[key];
                 const onConvertOutFn = getFunctionFromString(onConvertOut);
                 accEventValues[clientId] = onConvertOutFn(dataEntryValue, foundation, customFeatureType);
