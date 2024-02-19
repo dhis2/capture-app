@@ -17,6 +17,8 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         },
         {
             enabled: !searchText,
+            // Clearing cache after 60 minutes to avoid memory leaks
+            cacheTime: 60 * 60 * 1000,
             select: (data) => {
                 const { teiSearchOrganisationUnits, organisationUnits } = data;
                 return teiSearchOrganisationUnits.length
@@ -41,6 +43,8 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         },
         {
             enabled: Boolean(searchText),
+            // Clearing cache after 60 minutes to avoid memory leaks
+            cacheTime: 60 * 60 * 1000,
             select: (data) => {
                 const { organisationUnits } = data;
                 return organisationUnits;
