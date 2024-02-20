@@ -152,6 +152,9 @@ msgstr "Complete event"
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Basic info"
 
+msgid "{{ stageName }} - Assignee"
+msgstr "{{ stageName }} - Assignee"
+
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Status"
 
@@ -895,9 +898,6 @@ msgid ""
 msgstr ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-
-msgid "Feedbacks"
-msgstr "Feedbacks"
 
 msgid "Show all events"
 msgstr "Show all events"

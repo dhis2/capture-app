@@ -1,3 +1,17 @@
+# [100.57.0](https://github.com/dhis2/capture-app/compare/v100.56.0...v100.57.0) (2024-02-19)
+
+
+### Features
+
+* [DHIS2-16527] assign user on first stage registration ([#3530](https://github.com/dhis2/capture-app/issues/3530)) ([54eef90](https://github.com/dhis2/capture-app/commit/54eef906e5c86ab6d65813c337242ff738882c5b))
+
+# [100.56.0](https://github.com/dhis2/capture-app/compare/v100.55.0...v100.56.0) (2024-02-16)
+
+
+### Features
+
+* [DHIS2-12007] Text String Improvements ([#3498](https://github.com/dhis2/capture-app/issues/3498)) ([836368a](https://github.com/dhis2/capture-app/commit/836368ae33d191abf209a2813a6a8cbd26107581))
+
 # [100.55.0](https://github.com/dhis2/capture-app/compare/v100.54.0...v100.55.0) (2024-02-05)
 
 

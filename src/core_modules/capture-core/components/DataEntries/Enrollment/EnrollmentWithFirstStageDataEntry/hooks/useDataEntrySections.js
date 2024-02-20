@@ -23,6 +23,12 @@ export const useDataEntrySections = (stageName: string, beforeSectionId: string)
                 beforeSectionId,
                 placement: placements.BEFORE_METADATA_BASED_SECTION,
             },
+            [sectionKeysForFirstStageDataEntry.ASSIGNEE]: {
+                placement: placements.BOTTOM,
+                name: i18n.t('{{ stageName }} - Assignee', {
+                    stageName,
+                }),
+            },
             [sectionKeysForFirstStageDataEntry.STATUS]: {
                 placement: placements.BOTTOM,
                 name: i18n.t('{{ stageName }} - Status', {
