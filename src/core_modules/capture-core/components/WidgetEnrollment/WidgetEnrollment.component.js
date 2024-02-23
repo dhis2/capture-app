@@ -46,6 +46,7 @@ const getIncidentDateLabel = program => program.displayIncidentDateLabel || i18n
 
 export const WidgetEnrollmentPlain = ({
     classes,
+    events,
     enrollment = {},
     program = {},
     ownerOrgUnit = {},
@@ -63,11 +64,14 @@ export const WidgetEnrollmentPlain = ({
     updateIncidentDate,
     onError,
     onSuccess,
+    onUpdateEnrollmentStatus,
+    onUpdateEnrollmentStatusError,
+    onUpdateEnrollmentStatusSuccess,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const geometryType = getGeometryType(enrollment?.geometry?.type);
-    const { displayName: orgUnitName } = useOrgUnitName(enrollment.orgUnit);
+    const { displayName: orgUnitName } = useOrgUnitName(enrollment?.orgUnit);
 
     return (
         <div data-test="widget-enrollment">
@@ -163,7 +167,9 @@ export const WidgetEnrollmentPlain = ({
                         <Actions
                             tetName={program.trackedEntityType.displayName}
                             onlyEnrollOnce={program.onlyEnrollOnce}
+                            programStages={program.programStages}
                             enrollment={enrollment}
+                            events={events}
                             refetchEnrollment={refetchEnrollment}
                             refetchTEI={refetchTEI}
                             onDelete={onDelete}
@@ -171,6 +177,9 @@ export const WidgetEnrollmentPlain = ({
                             canAddNew={canAddNew}
                             onError={onError}
                             onSuccess={onSuccess}
+                            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                         />
                     </div>
                 )}

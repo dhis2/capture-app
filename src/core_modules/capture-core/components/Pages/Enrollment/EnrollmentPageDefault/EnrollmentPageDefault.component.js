@@ -71,7 +71,11 @@ export const EnrollmentPageDefaultPlain = ({
     onUpdateEnrollmentDate,
     onUpdateIncidentDate,
     onEnrollmentError,
+    onUpdateEnrollmentStatus,
+    onUpdateEnrollmentStatusError,
+    onUpdateEnrollmentStatusSuccess,
     ruleEffects,
+    widgetEnrollmentStatus,
 }: PlainProps) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
     const [addRelationShipContainerElement, setAddRelationshipContainerElement] =
@@ -149,6 +153,10 @@ export const EnrollmentPageDefaultPlain = ({
                             onUpdateEnrollmentDate={onUpdateEnrollmentDate}
                             onUpdateIncidentDate={onUpdateIncidentDate}
                             onError={onEnrollmentError}
+                            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                            externalData={{ status: widgetEnrollmentStatus, events }}
                         />}
                     </div>
                 </div>

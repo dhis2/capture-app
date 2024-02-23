@@ -39,6 +39,7 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
+import { withAskToCompleteEnrollment } from '../../DataEntry/withAskToCompleteEnrollment';
 import { actionTypes } from './editEventDataEntry.actions';
 import {
     AOCsectionKey,
@@ -372,7 +373,8 @@ const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);
 const AskToCreateNewDataEntry = withAskToCreateNew()(DeletableDataEntry);
-const DataEntryWrapper = withBrowserBackWarning()(AskToCreateNewDataEntry);
+const AskToCompleteEnrollment = withAskToCompleteEnrollment()(AskToCreateNewDataEntry);
+const DataEntryWrapper = withBrowserBackWarning()(AskToCompleteEnrollment);
 
 type Props = {
     formFoundation: ?RenderFoundation,
@@ -384,6 +386,9 @@ type Props = {
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSaveAndCompleteEnrollment: (
+        orgUnit: OrgUnit,
+    ) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onHandleScheduleSave: (eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
@@ -504,6 +509,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onUpdateField,
             onStartAsyncUpdateField,
             onSave,
+            onSaveAndCompleteEnrollment,
             classes,
             ...passOnProps
         } = this.props;
@@ -515,6 +521,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onUpdateFormField={onUpdateField(orgUnit, programId)}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
                 onSave={onSave(orgUnit)}
+                onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
                 programId={programId}

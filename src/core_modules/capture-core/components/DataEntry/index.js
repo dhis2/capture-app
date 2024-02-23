@@ -15,6 +15,7 @@ export { withErrorOutput } from './dataEntryOutput/withErrorOutput';
 export { withIndicatorOutput } from './dataEntryOutput/withIndicatorOutput';
 export { withCleanUp } from './withCleanUp';
 export { withAskToCreateNew } from './withAskToCreateNew';
+export { withAskToCompleteEnrollment } from './withAskToCompleteEnrollment';
 
 // misc
 export { inMemoryFileStore } from './file/inMemoryFileStore';

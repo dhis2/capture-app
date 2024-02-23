@@ -16,6 +16,8 @@ export const getAddEventEnrollmentServerData = ({
     teiId,
     enrollmentId,
     completed,
+    fromClientDate,
+    uid,
 }: {
     formFoundation: RenderFoundation,
     formClientValues: Object,
@@ -26,9 +28,14 @@ export const getAddEventEnrollmentServerData = ({
     teiId: string,
     enrollmentId: string,
     completed?: boolean,
+    fromClientDate: (date: Date) => { getServerZonedISOString: () => string },
+    uid: string,
 }) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+    const nowClient = fromClientDate(new Date());
+    const nowServer = new Date(nowClient.getServerZonedISOString());
+    const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
 
     if (!mainDataServerValues.status) {
         mainDataServerValues.status = completed ? 'COMPLETED' : 'ACTIVE';
@@ -48,6 +55,8 @@ export const getAddEventEnrollmentServerData = ({
                 enrollment: enrollmentId,
                 scheduledAt: mainDataServerValues.occurredAt,
                 orgUnitName,
+                updatedAt,
+                uid,
                 dataValues: Object
                     .keys(formServerValues)
                     .map(key => ({

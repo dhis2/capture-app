@@ -116,6 +116,7 @@ export type CachedProgramStage = {
     enableUserAssignment?: ?boolean,
     autoGenerateEvent?: ?boolean,
     allowGenerateNextVisit?: ?boolean,
+    remindCompleted?: ?boolean,
     openAfterEnrollment?: ?boolean,
     generatedByEnrollmentDate?: ?boolean,
     hideDueDate?: ?boolean,

@@ -59,6 +59,9 @@ export const WidgetEventEditPlain = ({
     enrollmentId,
     teiId,
     assignee,
+    onSaveAndCompleteEnrollmentExternal,
+    onSaveAndCompleteEnrollmentSuccessActionType,
+    onSaveAndCompleteEnrollmentErrorActionType,
 }: Props) => {
     const dispatch = useDispatch();
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
@@ -143,9 +146,13 @@ export const WidgetEventEditPlain = ({
                             onHandleScheduleSave={onHandleScheduleSave}
                             initialScheduleDate={initialScheduleDate}
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
+                            remindCompleted={programStage.remindCompleted}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
                             assignee={assignee}
+                            onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollmentExternal}
+                            onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
+                            onSaveAndCompleteEnrollmentSuccessActionType={onSaveAndCompleteEnrollmentSuccessActionType}
                         />
                     )}
                 </div>

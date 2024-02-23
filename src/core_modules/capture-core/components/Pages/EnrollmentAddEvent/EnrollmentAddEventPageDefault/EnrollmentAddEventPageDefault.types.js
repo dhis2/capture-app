@@ -21,6 +21,11 @@ export type Props = {|
     pageFailure: boolean,
     ready: boolean,
     widgetReducerName: string,
+    events?: Array<ApiEnrollmentEvent>,
+    onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
+    onUpdateEnrollmentStatus?: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError?: (message: string) => void,
     ...CssClasses,
 |};
 

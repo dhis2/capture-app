@@ -116,3 +116,53 @@ Then(/^the user sees the delete enrollment modal/, () =>
         cy.contains('Yes, delete enrollment').should('exist');
     }),
 );
+
+Then('the user sees the enrollment status and the Baby Postnatal event status is active', () => {
+    cy.buildApiUrl('tracker', 'trackedEntities/osF4RF4EiqP?program=IpHINAT79UW&fields=enrollments')
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'qyx7tscVpVB');
+            const eventsToUpdate = enrollment.events.reduce(
+                (acc, e) => [...acc, e.programStage === 'ZzYYXq4fJie' ? { ...e, status: 'ACTIVE' } : e],
+                [],
+            );
+            const enrollmentToUpdate = { ...enrollment, status: 'ACTIVE', events: eventsToUpdate };
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
+                .then(enrollmentUrl => cy.request('POST', enrollmentUrl, { enrollments: [enrollmentToUpdate] }))
+                .then(() => {
+                    cy.reload();
+                    cy.get('[data-test="widget-enrollment"]').within(() => {
+                        cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
+                    });
+                });
+        });
+});
+
+Then('the user sees the enrollment status and the Baby Postnatal event status is completed', () => {
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/enrollment?`);
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-status"]').contains('Completed').should('exist');
+    });
+
+    cy.get('[data-test="stage-content"]')
+        .eq(1)
+        .within(() => {
+            cy.get('[data-test="dhis2-uicore-tag-text"]').contains('Completed').should('exist');
+        });
+});
+
+When('the user completes the enrollment and the active events', () => {
+    cy.get('[data-test="widget-enrollment-actions-complete"]').click();
+
+    cy.get('[data-test="widget-enrollment-complete-modal"]').within(() => {
+        cy.contains('Would you like to complete the enrollment and all active events as well?').should('exist');
+        cy.contains('The following events will be completed:').should('exist');
+        cy.contains('1 event in Baby Postnatal').should('exist');
+        cy.contains('No, cancel').should('exist');
+        cy.contains('Complete enrollment only').should('exist');
+        cy.contains('Yes, complete enrollment and events').should('exist');
+    });
+    cy.get('[data-test="widget-enrollment-actions-complete-button"]').click();
+});

@@ -24,6 +24,7 @@ import {
 } from '../common/TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import { NoticeBox } from '../../NoticeBox';
+import { actionTypes } from './EnrollmentEditEventPage.actions';
 
 const styles = ({ typography }) => ({
     page: {
@@ -68,6 +69,7 @@ const EnrollmentEditEventPageLeft = ({
     onCancelEditEvent,
     onHandleScheduleSave,
     assignee,
+    onSaveAndCompleteEnrollment,
 }) => (
     <>
         {pageStatus === pageStatuses.DEFAULT && programStage && (
@@ -83,6 +85,9 @@ const EnrollmentEditEventPageLeft = ({
                 onCancelEditEvent={onCancelEditEvent}
                 onHandleScheduleSave={onHandleScheduleSave}
                 assignee={assignee}
+                onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
+                onSaveAndCompleteEnrollmentSuccessActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS}
+                onSaveAndCompleteEnrollmentErrorActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR}
             />
         )}
         {pageStatus === pageStatuses.MISSING_DATA && (
@@ -97,6 +102,7 @@ const EnrollmentEditEventPageLeft = ({
 );
 
 const EnrollmentEditEventPageRight = ({
+    events,
     mode,
     programStage,
     teiId,
@@ -113,6 +119,9 @@ const EnrollmentEditEventPageRight = ({
     assignee,
     onEnrollmentError,
     onEnrollmentSuccess,
+    onUpdateEnrollmentStatus,
+    onUpdateEnrollmentStatusError,
+    onUpdateEnrollmentStatusSuccess,
     getAssignedUserSaveContext,
     onSaveAssignee,
     onSaveAssigneeError,
@@ -166,11 +175,16 @@ const EnrollmentEditEventPageRight = ({
             onAddNew={onAddNew}
             onError={onEnrollmentError}
             onSuccess={onEnrollmentSuccess}
+            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+            externalData={{ events }}
         />
     </>
 );
 
 const EnrollmentEditEventPagePain = ({
+    events,
     mode,
     programStage,
     teiId,
@@ -196,6 +210,10 @@ const EnrollmentEditEventPagePain = ({
     pageStatus,
     onEnrollmentError,
     onEnrollmentSuccess,
+    onUpdateEnrollmentStatus,
+    onUpdateEnrollmentStatusError,
+    onUpdateEnrollmentStatusSuccess,
+    onSaveAndCompleteEnrollment,
     onCancelEditEvent,
     onHandleScheduleSave,
     getAssignedUserSaveContext,
@@ -247,6 +265,7 @@ const EnrollmentEditEventPagePain = ({
                             onCancelEditEvent={onCancelEditEvent}
                             onHandleScheduleSave={onHandleScheduleSave}
                             assignee={assignee}
+                            onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
                         />
                     </div>
                     <div className={classes.rightColumn}>
@@ -267,11 +286,15 @@ const EnrollmentEditEventPagePain = ({
                             assignee={assignee}
                             onEnrollmentError={onEnrollmentError}
                             onEnrollmentSuccess={onEnrollmentSuccess}
+                            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                             getAssignedUserSaveContext={getAssignedUserSaveContext}
                             onSaveAssignee={onSaveAssignee}
                             onSaveAssigneeError={onSaveAssigneeError}
                             addRelationShipContainerElement={addRelationShipContainerElement}
                             toggleVisibility={toggleVisibility}
+                            events={events}
                         />
                     </div>
                 </div>

@@ -25,7 +25,11 @@ export type Props = {|
     onUpdateEnrollmentDate: (enrollmentDate: string) => void,
     onUpdateIncidentDate: (incidentDate: string) => void,
     onEnrollmentError: (message: string) => void,
+    onUpdateEnrollmentStatus?: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError?: (message: string) => void,
     ruleEffects?: Array<{id: string, type: $Values<effectActions>}>;
+    widgetEnrollmentStatus: ?string,
 |};
 
 export type PlainProps = {|

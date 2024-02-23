@@ -15,5 +15,8 @@ export type Props = {|
     teiId: string,
     initialScheduleDate?: string,
     assignee?: UserFormField | null,
+    onSaveAndCompleteEnrollmentExternal?: (enrollment: ApiEnrollment) => void,
+    onSaveAndCompleteEnrollmentSuccessActionType?: string,
+    onSaveAndCompleteEnrollmentErrorActionType?: string,
     ...CssClasses,
 |};

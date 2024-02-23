@@ -42,6 +42,7 @@ const styles = ({ typography }) => ({
 });
 
 const EnrollmentAddEventPagePain = ({
+    events,
     programId,
     stageId,
     orgUnitId,
@@ -53,6 +54,9 @@ const EnrollmentAddEventPagePain = ({
     onAddNew,
     onEnrollmentError,
     onEnrollmentSuccess,
+    onUpdateEnrollmentStatus,
+    onUpdateEnrollmentStatusError,
+    onUpdateEnrollmentStatusSuccess,
     pageFailure,
     ready,
     classes,
@@ -132,6 +136,10 @@ const EnrollmentAddEventPagePain = ({
                                 onAddNew={onAddNew}
                                 onError={onEnrollmentError}
                                 onSuccess={onEnrollmentSuccess}
+                                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                                onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                                onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                                externalData={{ events }}
                             />
                         </div>
                     </div>

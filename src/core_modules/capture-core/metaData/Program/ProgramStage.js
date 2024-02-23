@@ -1,4 +1,3 @@
-
 // @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
@@ -12,6 +11,7 @@ import type { RelationshipType } from '../RelationshipType';
 export class ProgramStage {
     _id: string;
     _name: string;
+    _access: { data: { write: boolean } };
     _untranslatedName: string;
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
@@ -19,6 +19,7 @@ export class ProgramStage {
     _autoGenerateEvent: boolean;
     _openAfterEnrollment: boolean;
     _allowGenerateNextVisit: boolean;
+    _remindCompleted: boolean;
     _generatedByEnrollmentDate: boolean;
     _repeatable: boolean;
     _hideDueDate: boolean;
@@ -54,6 +55,14 @@ export class ProgramStage {
 
     set name(name: string) {
         this._name = name;
+    }
+
+    get access(): { data: { write: boolean } } {
+        return this._access;
+    }
+
+    set access(acess: { data: { write: boolean } }) {
+        this._access = acess;
     }
 
     get untranslatedName(): string {
@@ -105,6 +114,14 @@ export class ProgramStage {
 
     set allowGenerateNextVisit(generateNextVisit: boolean) {
         this._allowGenerateNextVisit = generateNextVisit;
+    }
+
+    get remindCompleted(): boolean {
+        return this._remindCompleted;
+    }
+
+    set remindCompleted(remindCompleted: boolean) {
+        this._remindCompleted = remindCompleted;
     }
 
     get hideDueDate(): boolean {

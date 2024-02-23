@@ -8,6 +8,7 @@ type Props = {
     onUpdateEnrollmentDate?: (date: string) => void,
     onUpdateIncidentDate?: (date: string) => void,
     onError?: (error: any) => void,
+    externalData?: {status: ?string, events?: ?Array<Object> },
 }
 
 export const useEnrollment = ({
@@ -15,6 +16,7 @@ export const useEnrollment = ({
     onUpdateEnrollmentDate,
     onUpdateIncidentDate,
     onError,
+    externalData,
 }: Props) => {
     const [enrollment, setEnrollment] = useState();
 
@@ -37,9 +39,13 @@ export const useEnrollment = ({
 
     useEffect(() => {
         if (data) {
-            setEnrollment(data.enrollment);
+            if (externalData?.status) {
+                setEnrollment({ ...data.enrollment, status: externalData.status });
+            } else {
+                setEnrollment(data.enrollment);
+            }
         }
-    }, [setEnrollment, data]);
+    }, [setEnrollment, data, externalData?.status]);
 
     const updateEnrollmentDate = useUpdateEnrollment({
         enrollment,
@@ -60,7 +66,7 @@ export const useEnrollment = ({
     return {
         error,
         refetch,
-        enrollment: !loading && enrollment,
+        enrollment: !loading ? enrollment : null,
         updateEnrollmentDate,
         updateIncidentDate,
     };

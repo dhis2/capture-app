@@ -25,6 +25,10 @@ export type PlainProps = {|
     onLinkedRecordClick: LinkedRecordClick,
     onEnrollmentError: (message: string) => void,
     onEnrollmentSuccess: () => void,
+    onUpdateEnrollmentStatus?: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError?: (message: string) => void,
+    onSaveAndCompleteEnrollment?: (enrollment: Object) => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) => void,
     pageStatus: string,
@@ -37,6 +41,7 @@ export type PlainProps = {|
     assignee: UserFormField | null,
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
+    events: Array<any>,
     ...CssClasses,
 |};
 
