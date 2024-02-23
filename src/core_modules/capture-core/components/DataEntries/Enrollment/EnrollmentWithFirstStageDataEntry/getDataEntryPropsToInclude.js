@@ -1,5 +1,5 @@
 // @flow
-import type { RenderFoundation } from '../../../../metaData';
+import type { ProgramStage } from '../../../../metaData';
 import { getEventDateValidatorContainers } from './fieldValidators';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusIn, convertStatusOut } from '../../converters';
 
@@ -7,6 +7,7 @@ export const stageMainDataIds = {
     OCCURRED_AT: 'stageOccurredAt',
     COMPLETE: 'stageComplete',
     GEOMETRY: 'stageGeometry',
+    ASSIGNEE: 'assignee',
 };
 
 const stageMainDataRulesEngineIds = {
@@ -17,7 +18,7 @@ const stageMainDataRulesEngineIds = {
 
 export const convertToRulesEngineIds = (id: string) => stageMainDataRulesEngineIds[id];
 
-export const getDataEntryPropsToInclude = (formFoundation: RenderFoundation) => [
+export const getDataEntryPropsToInclude = (firstStage: ProgramStage) => [
     {
         id: stageMainDataIds.OCCURRED_AT,
         type: 'DATE',
@@ -32,8 +33,12 @@ export const getDataEntryPropsToInclude = (formFoundation: RenderFoundation) => 
     {
         clientId: stageMainDataIds.GEOMETRY,
         dataEntryId: stageMainDataIds.GEOMETRY,
-        onConvertIn: getConvertGeometryIn(formFoundation),
+        onConvertIn: getConvertGeometryIn(firstStage.stageForm),
         onConvertOut: convertGeometryOut,
-        featureType: formFoundation.featureType,
+        featureType: firstStage.stageForm.featureType,
     },
+    ...(firstStage.enableUserAssignment ? [{
+        id: stageMainDataIds.ASSIGNEE,
+        type: 'ASSIGNEE',
+    }] : []),
 ];

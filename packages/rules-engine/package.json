@@ -1,6 +1,6 @@
 {
     "name": "@dhis2/rules-engine-javascript",
-    "version": "100.56.0",
+    "version": "100.57.0",
     "license": "BSD-3-Clause",
     "main": "./build/cjs/index.js",
     "scripts": {
@@ -12,7 +12,7 @@
     },
     "dependencies": {
         "d2-utilizr": "^0.2.15",
-        "loglevel": "^1.8.0"
+        "loglevel": "^1.9.1"
     },
     "module": "./build/es/index.js",
     "exports": {

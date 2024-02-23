@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-07T10:43:51.606Z\n"
-"PO-Revision-Date: 2024-02-07T10:43:51.606Z\n"
+"POT-Creation-Date: 2024-02-09T11:22:44.980Z\n"
+"PO-Revision-Date: 2024-02-09T11:22:44.980Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -151,6 +151,9 @@ msgstr "Complete event"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Basic info"
+
+msgid "{{ stageName }} - Assignee"
+msgstr "{{ stageName }} - Assignee"
 
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Status"
