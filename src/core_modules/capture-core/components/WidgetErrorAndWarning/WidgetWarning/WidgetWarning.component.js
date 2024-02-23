@@ -2,12 +2,12 @@
 import React from 'react';
 import { colors } from '@dhis2/ui';
 import { Widget } from '../../Widget';
-import type { Props } from './WidgetWarning.types';
+import type { PlainProps } from './WidgetWarning.types';
 import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningContent';
 import { WidgetWarningHeader } from './WidgetWarningHeader';
 import { widgetTypes } from '../content/WidgetTypes';
 
-export const WidgetWarning = ({ warning }: Props) => {
+export const WidgetWarning = ({ warning }: PlainProps) => {
     const widgetType = widgetTypes.WARNING;
 
     if (!warning?.length) {

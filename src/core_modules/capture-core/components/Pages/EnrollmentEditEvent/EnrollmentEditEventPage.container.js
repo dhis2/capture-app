@@ -33,6 +33,11 @@ import { cleanUpDataEntry } from '../../DataEntry';
 import { useLinkedRecordClick } from '../common/TEIRelationshipsWidget';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
+import {
+    useEnrollmentPageLayout,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
+import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { getProgramEventAccess } from '../../../metaData';
 import { setAssignee, rollbackAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer } from '../../../converters';
@@ -50,7 +55,10 @@ const getEventScheduleDate = (event) => {
     return eventDataConvertValue?.toString();
 };
 
-const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, event }) => {
+const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }) => {
+    if (isLoading) {
+        return pageStatuses.LOADING;
+    }
     if (orgUnitId) {
         return enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
             ? pageStatuses.DEFAULT
@@ -107,6 +115,11 @@ const EnrollmentEditEventPageWithContextPlain = ({
 }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { pageLayout, isLoading } = useEnrollmentPageLayout({
+        selectedScopeId: programId,
+        dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_EDIT,
+        defaultPageLayout: DefaultPageLayout,
+    });
     const { event: eventId } = event;
 
     const { onLinkedRecordClick } = useLinkedRecordClick();
@@ -185,6 +198,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         trackedEntityName,
         programStage,
         event,
+        isLoading,
     });
     const assignee = useAssignee(event);
     const getAssignedUserSaveContext = useAssignedUserSaveContext(event);
@@ -201,8 +215,13 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
     };
 
+    if (pageStatus === pageStatuses.LOADING) {
+        return <LoadingMaskForPage />;
+    }
+
     return (
         <EnrollmentEditEventPageComponent
+            pageLayout={pageLayout}
             mode={currentPageMode}
             pageStatus={pageStatus}
             programStage={programStage}
@@ -215,7 +234,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
             trackedEntityName={trackedEntityName}
-            programId={programId}
+            program={program}
             onDelete={onDelete}
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}

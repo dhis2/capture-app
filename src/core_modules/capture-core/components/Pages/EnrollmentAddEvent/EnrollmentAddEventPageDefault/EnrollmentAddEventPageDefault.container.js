@@ -8,7 +8,6 @@ import { NoticeBox } from '@dhis2/ui';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
-import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
 
 import { useWidgetDataFromStore } from '../hooks';
@@ -27,8 +26,11 @@ import {
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 import { statusTypes } from '../../../../enrollment';
+import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
+import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 
 export const EnrollmentAddEventPageDefault = ({
+    pageLayout,
     enrollment,
     attributeValues,
     commonDataError,
@@ -154,7 +156,9 @@ export const EnrollmentAddEventPageDefault = ({
                 enrollmentSelectorFailure={commonDataError}
             />
             <EnrollmentAddEventPageDefaultComponent
-                programId={programId}
+                pageLayout={pageLayout}
+                availableWidgets={WidgetsForEnrollmentEventNew}
+                program={program}
                 stageId={stageId}
                 orgUnitId={orgUnitId}
                 teiId={teiId}
@@ -167,10 +171,10 @@ export const EnrollmentAddEventPageDefault = ({
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
                 widgetReducerName={widgetReducerName}
-                rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={commonDataError}
-                ready={Boolean(enrollment)}
+                rulesExecutionDependencies={rulesExecutionDependencies}
                 dataEntryHasChanges={dataEntryHasChanges}
+                ready={Boolean(enrollment)}
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
                 events={enrollment?.events}

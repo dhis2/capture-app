@@ -24,7 +24,7 @@ import {
 } from '../EnrollmentPage.actions';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
-import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
+import { EnrollmentPageLayout, DataStoreKeyByPage } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import {
     useProgramMetadata,
     useHideWidgetByRuleLocations,
@@ -33,6 +33,15 @@ import {
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
+import {
+    useEnrollmentPageLayout,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
+import { DefaultPageLayout, WidgetsForEnrollmentPageDefault } from './DefaultPageLayout';
+import { LoadingMaskForPage } from '../../../LoadingMasks';
+import {
+    EnrollmentPageKeys,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
+
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
@@ -41,6 +50,14 @@ export const EnrollmentPageDefault = () => {
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
+    const {
+        pageLayout,
+        isLoading,
+    } = useEnrollmentPageLayout({
+        selectedScopeId: programId,
+        defaultPageLayout: DefaultPageLayout,
+        dataStoreKey: DataStoreKeyByPage.ENROLLMENT_OVERVIEW,
+    });
 
     const program = useTrackerProgram(programId);
     const {
@@ -125,12 +142,22 @@ export const EnrollmentPageDefault = () => {
         dispatch(commitEnrollmentAndEvents());
     }, [dispatch]);
 
+    if (isLoading) {
+        return (
+            <LoadingMaskForPage />
+        );
+    }
+
     if (error) {
-        return error.errorComponent;
+        return error?.errorComponent;
     }
 
     return (
-        <EnrollmentPageDefaultComponent
+        <EnrollmentPageLayout
+            pageLayout={pageLayout}
+            currentPage={EnrollmentPageKeys.OVERVIEW}
+            availableWidgets={WidgetsForEnrollmentPageDefault}
+
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}

@@ -13,5 +13,9 @@ export type Props = {|
     onSave: ExternalSaveHandler,
     onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
     onCancel: () => void,
+|};
+
+export type PlainProps = {|
+    ...Props,
     ...CssClasses
 |};

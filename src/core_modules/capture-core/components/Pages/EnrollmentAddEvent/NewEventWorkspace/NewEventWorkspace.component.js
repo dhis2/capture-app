@@ -12,7 +12,7 @@ import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import { addEnrollmentEventPageDefaultActionTypes } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
-import type { Props } from './newEventWorkspace.types';
+import type { PlainProps, Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
 import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
@@ -34,7 +34,7 @@ const NewEventWorkspacePlain = ({
     onSaveAndCompleteEnrollment,
     classes,
     ...passOnProps
-}: Props) => {
+}: PlainProps) => {
     const { tab } = useLocationQuery();
     const { events, enrolledAt, occurredAt } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(tab ?? tabMode.REPORT);
@@ -59,7 +59,7 @@ const NewEventWorkspacePlain = ({
                     <WidgetStageHeader stage={stage} />
                 }
             >
-                <div className={classes.innerWrapper}>
+                <div data-test={'add-event-enrollment-page-content'} className={classes.innerWrapper}>
                     <TabBar dataTest="new-event-tab-bar">
                         <Tab
                             key="report-tab"
@@ -128,5 +128,5 @@ const NewEventWorkspacePlain = ({
 };
 
 export const NewEventWorkspace: ComponentType<
-    $Diff<Props, CssClasses>,
+    Props,
 > = withStyles(styles)(NewEventWorkspacePlain);

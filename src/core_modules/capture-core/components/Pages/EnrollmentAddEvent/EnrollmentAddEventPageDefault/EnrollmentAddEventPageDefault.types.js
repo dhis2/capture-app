@@ -1,9 +1,13 @@
 // @flow
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
+import type {
+    PageLayoutConfig, WidgetConfig,
+} from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+import { Program } from '../../../../metaData';
 
 export type Props = {|
-    programId: string,
+    program: Program,
     stageId: string,
     orgUnitId: string,
     teiId: string,
@@ -23,13 +27,16 @@ export type Props = {|
     widgetReducerName: string,
     events?: Array<ApiEnrollmentEvent>,
     onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
-    onUpdateEnrollmentStatus?: (enrollment: Object) => void,
-    onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
-    onUpdateEnrollmentStatusError?: (message: string) => void,
+    onUpdateEnrollmentStatus: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError: (message: string) => void,
+    pageLayout: PageLayoutConfig,
+    availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
     ...CssClasses,
 |};
 
 export type ContainerProps = {|
+    pageLayout: PageLayoutConfig,
     enrollment: ?Object,
     attributeValues: ?Object,
     commonDataError: boolean,

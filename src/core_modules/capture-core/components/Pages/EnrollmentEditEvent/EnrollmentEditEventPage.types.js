@@ -3,14 +3,19 @@ import type { ProgramStage } from '../../../metaData';
 import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
 import type { UserFormField } from '../../FormFields/UserField';
 import type { LinkedRecordClick } from '../../WidgetsRelationship/WidgetTrackedEntityRelationship';
+import type {
+    PageLayoutConfig,
+} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+import { Program } from '../../../metaData';
 
 export type PlainProps = {|
+    pageLayout: ?PageLayoutConfig,
     programStage: ?ProgramStage,
     widgetEffects: WidgetEffects,
     hideWidgets: HideWidgets,
     teiId: string,
     enrollmentId: string,
-    programId: string,
+    program: Program,
     trackedEntityTypeId: string,
     mode: string,
     orgUnitId: string,
@@ -25,10 +30,10 @@ export type PlainProps = {|
     onLinkedRecordClick: LinkedRecordClick,
     onEnrollmentError: (message: string) => void,
     onEnrollmentSuccess: () => void,
-    onUpdateEnrollmentStatus?: (enrollment: Object) => void,
-    onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
-    onUpdateEnrollmentStatusError?: (message: string) => void,
-    onSaveAndCompleteEnrollment?: (enrollment: Object) => void,
+    onUpdateEnrollmentStatus: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError: (message: string) => void,
+    onSaveAndCompleteEnrollment: (enrollment: Object) => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) => void,
     pageStatus: string,
@@ -42,7 +47,6 @@ export type PlainProps = {|
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
     events: Array<any>,
-    ...CssClasses,
 |};
 
 export type Props = {|
