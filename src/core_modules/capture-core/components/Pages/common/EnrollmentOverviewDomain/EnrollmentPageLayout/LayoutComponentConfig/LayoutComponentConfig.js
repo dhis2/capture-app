@@ -210,7 +210,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
-        classes,
     }): WidgetEventEditProps => ({
         programStage,
         onGoBack,
@@ -226,7 +225,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
-        classes,
     }),
 };
 

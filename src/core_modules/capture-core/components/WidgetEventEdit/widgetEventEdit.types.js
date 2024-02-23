@@ -18,7 +18,6 @@ export type Props = {|
     onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
     onSaveAndCompleteEnrollmentSuccessActionType?: string,
     onSaveAndCompleteEnrollmentErrorActionType?: string,
-    ...CssClasses,
 |};
 
 export type PlainProps = {|
