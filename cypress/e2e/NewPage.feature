@@ -19,8 +19,7 @@ Feature: User creates a new entries from the registration page
     Given you are in the main page with no selections made
     And you select org unit
     And you select the Contraceptives Voucher Program
-    Then you see a split button
-    When you click the the "Create new event" option
+    When you click the Create new button
     Then you are navigated to the Contraceptives Voucher Program registration page with program selected
     And there should be informative message explaining you need to complete your selections
 
@@ -57,8 +56,7 @@ Feature: User creates a new entries from the registration page
     Given you are in the main page with no selections made
     And you select org unit
     And you select Child Programme
-    Then you see a split button
-    When you click the "Create new in another program..." option
+    When you click the first option in split button dropdown
     Then you are navigated to the registration page without program selected
     And you see the dropdown menu for selecting tracked entity type
     And you have no program selection
@@ -67,8 +65,7 @@ Feature: User creates a new entries from the registration page
     Given you are in the main page with no selections made
     And you select org unit
     And you select Child Programme
-    Then you see a split button
-    When you click the the first option
+    When you click the Create new button
     Then you are navigated to the Child Programme registration page with program selected
     And you see a registration form for the Child Programme
     And you have Child Programme selected
@@ -77,8 +74,7 @@ Feature: User creates a new entries from the registration page
     Given you are in the main page with no selections made
     And you select org unit
     And you select the Contraceptives Voucher Program
-    Then you see a split button
-    When you click the the first option
+    When you click the Create new button
     Then you are navigated to the Contraceptives Voucher Program registration page with program selected
     And there should be informative message explaining you need to complete your selections
     When you select the first category
@@ -90,8 +86,7 @@ Feature: User creates a new entries from the registration page
     And you select the Antenatal care visit program
     Then you see a list of events
     When you select one of the events
-    Then you see a split button
-    When you click the the first option
+    When you click the Create new button
     Then you are navigated to the Antenatal care visit registration page
     Then program and organisation unit is still selected in top bar
 
