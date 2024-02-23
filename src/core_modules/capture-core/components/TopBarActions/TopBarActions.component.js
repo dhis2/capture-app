@@ -18,6 +18,7 @@ const styles = () => ({
 });
 
 const ActionButtonsPlain = ({
+    onNewClick,
     onNewClickWithoutProgramId,
     onFindClick,
     onFindClickWithoutProgramId,
@@ -26,11 +27,9 @@ const ActionButtonsPlain = ({
     openConfirmDialog,
 }: PlainProps & CssClasses) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
-    const [openNew, setOpenNew] = useState(false);
     const [openSearch, setOpenSearch] = useState(false);
 
     useEffect(() => {
-        setOpenNew(false);
         setOpenSearch(false);
     }, [openConfirmDialog]);
 
@@ -52,14 +51,13 @@ const ActionButtonsPlain = ({
                     secondary
                     dataTest="new-button"
                     className={classes.marginRight}
-                    open={openNew}
-                    onClick={() => setOpenNew(prev => !prev)}
+                    onClick={() => { onNewClick(); }}
                     component={
                         <FlyoutMenu dense maxWidth="250px">
                             <MenuItem
                                 dataTest="new-menuitem-one"
                                 label={`${i18n.t('Create new in another program')}...`}
-                                onClick={() => { setOpenNew(prev => !prev); onNewClickWithoutProgramId(); }}
+                                onClick={() => { onNewClickWithoutProgramId(); }}
                             />
                         </FlyoutMenu>
                     }
@@ -101,12 +99,12 @@ const ActionButtonsPlain = ({
                                     programName,
                                     interpolation: { escapeValue: false },
                                 })}
-                                onClick={() => { setOpenSearch(prev => !prev); onFindClick(); }}
+                                onClick={() => { onFindClick(); setOpenSearch(prev => !prev); }} // Rekkefølge endret
                             />
                             <MenuItem
                                 dataTest="find-menuitem-two"
                                 label={`${i18n.t('Search')}...`}
-                                onClick={() => { setOpenSearch(prev => !prev); onFindClickWithoutProgramId(); }}
+                                onClick={() => { onFindClickWithoutProgramId(); setOpenSearch(prev => !prev); }} // Rekkefølge endret
                             />
                         </FlyoutMenu>
                     }
