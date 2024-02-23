@@ -1,3 +1,10 @@
+## [100.57.1](https://github.com/dhis2/capture-app/compare/v100.57.0...v100.57.1) (2024-02-23)
+
+
+### Bug Fixes
+
+* [DHIS2-16205] Sticky Locked Selector ([#3516](https://github.com/dhis2/capture-app/issues/3516)) ([61158b1](https://github.com/dhis2/capture-app/commit/61158b1097843309ac51187fe41e1af842220f71))
+
 # [100.57.0](https://github.com/dhis2/capture-app/compare/v100.56.0...v100.57.0) (2024-02-19)
 
 
