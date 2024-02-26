@@ -75,38 +75,33 @@ class D2SectionPlain extends React.PureComponent<Props> {
     renderSection(sectionProps) {
         const { sectionMetaData, classes, sectionId, ...passOnProps } = sectionProps;
 
-        if (!sectionMetaData.showContainer || this.props.formHorizontal) {
+        const sectionFields = (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
+            <D2SectionFields
+                ref={(instance) => { this.sectionFieldsInstance = instance; }}
+                fieldsMetaData={sectionMetaData.elements}
+                customForm={sectionMetaData.customForm}
+                {...passOnProps}
+            />
+        );
+
+        if (sectionMetaData.showContainer && !this.props.formHorizontal) {
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
-                <D2SectionFields
-                    ref={(instance) => { this.sectionFieldsInstance = instance; }}
-                    fieldsMetaData={sectionMetaData.elements}
-                    customForm={sectionMetaData.customForm}
-                    {...passOnProps}
-                />
+                <div>
+                    <Section
+                        header={this.renderSectionHeader()}
+                        description={this.renderSectionDescription()}
+                        elevation={2}
+                        className={classes.section}
+                    >
+                        {sectionFields}
+                    </Section>
+                </div>
             );
         }
-        return (
-            <div>
-                <Section
-                    header={this.renderSectionHeader()}
-                    description={this.renderSectionDescription()}
-                    elevation={2}
-                    className={classes.section}
-                >
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                    <D2SectionFields
-                        ref={(instance) => {
-                            this.sectionFieldsInstance = instance;
-                        }}
-                        fieldsMetaData={sectionMetaData.elements}
-                        {...passOnProps}
-                    />
-
-                </Section>
-            </div>
-        );
+        return sectionFields;
     }
+
 
     render() {
         const { isHidden, applyCustomFormClass, ...passOnProps } = this.props;
@@ -116,7 +111,7 @@ class D2SectionPlain extends React.PureComponent<Props> {
         }
 
         return (<div
-            data-test="d2-form-component"
+            data-test="d2-section"
             className={applyCustomFormClass ? this.props.classes.containerCustomForm : ''}
         >
             {
