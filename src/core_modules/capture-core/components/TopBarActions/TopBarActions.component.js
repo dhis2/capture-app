@@ -99,12 +99,12 @@ const ActionButtonsPlain = ({
                                     programName,
                                     interpolation: { escapeValue: false },
                                 })}
-                                onClick={() => { onFindClick(); setOpenSearch(prev => !prev); }} // Rekkefølge endret
+                                onClick={() => { onFindClick(); setOpenSearch(prev => !prev); }}
                             />
                             <MenuItem
                                 dataTest="find-menuitem-two"
                                 label={`${i18n.t('Search')}...`}
-                                onClick={() => { onFindClickWithoutProgramId(); setOpenSearch(prev => !prev); }} // Rekkefølge endret
+                                onClick={() => { onFindClickWithoutProgramId(); setOpenSearch(prev => !prev); }}
                             />
                         </FlyoutMenu>
                     }
