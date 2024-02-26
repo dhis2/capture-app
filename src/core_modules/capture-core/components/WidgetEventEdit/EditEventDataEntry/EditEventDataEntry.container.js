@@ -91,7 +91,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         dispatch(startAsyncUpdateFieldForEditEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        const { onSaveExternal } = props;
         window.scrollTo(0, 0);
+        onSaveExternal && onSaveExternal(eventId);
         dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
     },
     onCancel: () => {

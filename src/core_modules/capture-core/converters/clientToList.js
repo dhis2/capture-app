@@ -112,3 +112,30 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
+
+
+// This function will replace the convertValue function in the future (as it should not require a dataElement class to use optionSet)
+export function convert(
+    value: any,
+    type: $Keys<typeof dataElementTypes>,
+    options: ?Array<{ code: string, name: string}>,
+) {
+    if (!value && value !== 0 && value !== false) {
+        return value;
+    }
+
+    if (options) {
+        if (type === dataElementTypes.MULTI_TEXT) {
+            return options
+                .filter(option => value.includes(option.code))
+                .map(option => option.name)
+                .join(', ');
+        }
+        return options
+            .find(option => option.code === value)
+            ?.name;
+    }
+
+    // $FlowFixMe dataElementTypes flow error
+    return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+}

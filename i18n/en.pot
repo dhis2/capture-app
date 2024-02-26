@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-09T11:22:44.980Z\n"
-"PO-Revision-Date: 2024-02-09T11:22:44.980Z\n"
+"POT-Creation-Date: 2024-02-27T15:15:55.309Z\n"
+"PO-Revision-Date: 2024-02-27T15:15:55.309Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1272,6 +1272,9 @@ msgstr "Event completed"
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"
 
+msgid "View changelog"
+msgstr "View changelog"
+
 msgid "Schedule date info"
 msgstr "Schedule date info"
 
@@ -1376,6 +1379,30 @@ msgstr "{{ scheduledEvents }} scheduled"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
+
+msgid "Changelog"
+msgstr "Changelog"
+
+msgid "No changes to display"
+msgstr "No changes to display"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Deleted"
+msgstr "Deleted"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "User"
+msgstr "User"
+
+msgid "Data item"
+msgstr "Data item"
+
+msgid "Change"
+msgstr "Change"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
@@ -1565,9 +1592,6 @@ msgstr "Error updating the Assignee"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "Date"
-msgstr "Date"
 
 msgid "Time"
 msgstr "Time"

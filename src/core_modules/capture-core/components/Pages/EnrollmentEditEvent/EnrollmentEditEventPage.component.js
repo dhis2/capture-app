@@ -39,6 +39,7 @@ export const EnrollmentEditEventPageComponent = ({
     onEnrollmentSuccess,
     onCancelEditEvent,
     onHandleScheduleSave,
+    onSaveExternal,
     getAssignedUserSaveContext,
     onSaveAssignee,
     onSaveAssigneeError,
@@ -62,6 +63,7 @@ export const EnrollmentEditEventPageComponent = ({
             currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
 
+            onSaveExternal={onSaveExternal}
             trackedEntityTypeId={trackedEntityTypeId}
             programStage={programStage}
             onGoBack={onGoBack}

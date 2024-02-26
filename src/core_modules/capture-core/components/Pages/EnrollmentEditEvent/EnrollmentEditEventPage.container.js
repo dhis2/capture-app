@@ -1,5 +1,6 @@
 // @flow
 import React, { useEffect, useCallback } from 'react';
+import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
@@ -32,6 +33,8 @@ import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { getProgramEventAccess } from '../../../metaData';
 import { setAssignee, rollbackAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer } from '../../../converters';
+import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
+import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -105,6 +108,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
 }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
     const { pageLayout, isLoading } = useEnrollmentPageLayout({
         selectedScopeId: programId,
         dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_EDIT,
@@ -147,6 +151,12 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(updateEnrollmentEvents(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
+
+    const onSaveExternal = () => {
+        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
+        queryClient.removeQueries(queryKey);
+    };
+
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
     const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
@@ -216,6 +226,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
+            onSaveExternal={onSaveExternal}
             getAssignedUserSaveContext={getAssignedUserSaveContext}
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}

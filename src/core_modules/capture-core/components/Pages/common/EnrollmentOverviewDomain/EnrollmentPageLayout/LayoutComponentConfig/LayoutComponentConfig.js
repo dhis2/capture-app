@@ -183,6 +183,7 @@ export const EditEventWorkspace: WidgetConfig = {
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
+        onSaveExternal,
         initialScheduleDate,
         assignee,
     }) => ({
@@ -195,6 +196,7 @@ export const EditEventWorkspace: WidgetConfig = {
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
+        onSaveExternal,
         initialScheduleDate,
         assignee,
     }),
