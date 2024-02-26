@@ -1,3 +1,10 @@
+## [100.57.2](https://github.com/dhis2/capture-app/compare/v100.57.1...v100.57.2) (2024-02-26)
+
+
+### Bug Fixes
+
+* [DHIS2-15621] row view broken up in section ([#3457](https://github.com/dhis2/capture-app/issues/3457)) ([ce7282c](https://github.com/dhis2/capture-app/commit/ce7282ca440c1bddae3f02b938d505a9412d9ea6))
+
 ## [100.57.1](https://github.com/dhis2/capture-app/compare/v100.57.0...v100.57.1) (2024-02-23)
 
 
