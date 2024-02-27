@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-09T11:22:44.980Z\n"
-"PO-Revision-Date: 2024-02-09T11:22:44.980Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
+"PO-Revision-Date: 2024-02-14T10:01:26.732Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -662,11 +662,14 @@ msgstr "Stop using new Enrollment dashboard for {{programName}}"
 msgid "Opt out for {{programName}}"
 msgstr "Opt out for {{programName}}"
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
 
-msgid "There is an error while opening this enrollment. Please enter a valid url."
-msgstr "There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Program with id \"{{programId}}\" does not exist"
 
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."
