@@ -1,3 +1,10 @@
+## [100.57.3](https://github.com/dhis2/capture-app/compare/v100.57.2...v100.57.3) (2024-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16318] enrollment page url management ([#3522](https://github.com/dhis2/capture-app/issues/3522)) ([0abec43](https://github.com/dhis2/capture-app/commit/0abec430ac4e74907c01b46fcd264194b542539e))
+
 ## [100.57.2](https://github.com/dhis2/capture-app/compare/v100.57.1...v100.57.2) (2024-02-26)
 
 
