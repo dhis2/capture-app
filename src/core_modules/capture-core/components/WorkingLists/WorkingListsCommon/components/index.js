@@ -1,1 +1,1 @@
-export { WorkingListImage } from './WorkingListImage/WorkingListImage.component.js';
+export { WorkingListImage } from './WorkingListImage/WorkingListImage.component';
