@@ -52,7 +52,7 @@ const subValueGetterByElementType = {
                 ({
                     name: res.name,
                     value: res.id,
-                    url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                    url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`
                 }))
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
