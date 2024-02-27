@@ -7,6 +7,7 @@ import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
+import { WorkingListImage } from '../components/WorkingLists/WorkingListsCommon/components';
 
 function convertDateForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
@@ -41,6 +42,14 @@ function convertResourceForDisplay(clientValue: FileClientValue) {
         >
             {clientValue.name}
         </a>
+    );
+}
+
+function convertImageForDisplay(clientValue: FileClientValue) {
+    return (
+        <WorkingListImage
+            url={clientValue.url}
+        />
     );
 }
 
@@ -90,7 +99,7 @@ const valueConvertersForType = {
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.AGE]: convertDateForListDisplay,
     [dataElementTypes.FILE_RESOURCE]: convertResourceForDisplay,
-    [dataElementTypes.IMAGE]: convertResourceForDisplay,
+    [dataElementTypes.IMAGE]: convertImageForDisplay,
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
     [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,

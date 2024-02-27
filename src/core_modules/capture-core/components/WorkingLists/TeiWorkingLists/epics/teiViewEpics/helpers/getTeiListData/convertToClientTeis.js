@@ -29,7 +29,7 @@ export const convertToClientTeis = (
                     return {
                         id,
                         value: convertServerToClient(value, type),
-                        urlPath: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
+                        urlPath: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image`,
                     };
                 })
                 .filter(({ value }) => value != null)
