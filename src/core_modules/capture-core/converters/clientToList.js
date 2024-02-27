@@ -32,7 +32,7 @@ type FileClientValue = {
     value: string,
 };
 
-function convertResourceForDisplay(clientValue: FileClientValue) {
+function convertFileForDisplay(clientValue: FileClientValue) {
     return (
         <a
             href={clientValue.url}
@@ -98,7 +98,7 @@ const valueConvertersForType = {
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.AGE]: convertDateForListDisplay,
-    [dataElementTypes.FILE_RESOURCE]: convertResourceForDisplay,
+    [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
     [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
