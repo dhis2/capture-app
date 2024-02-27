@@ -1,4 +1,5 @@
 // @flow
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
@@ -35,7 +36,9 @@ const getImageSubvalue = async (keys: Object, querySingleResource: QuerySingleRe
                 return {
                     id,
                     name,
-                    url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image?dimension=small`,
+                    url: featureAvailable(FEATURES.trackerImageEndpoint) ?
+                        `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image?dimension=small` :
+                        `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}`,
                 };
             }
             return {};

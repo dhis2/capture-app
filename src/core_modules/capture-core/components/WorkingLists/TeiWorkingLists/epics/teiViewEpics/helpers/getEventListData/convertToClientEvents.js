@@ -1,5 +1,6 @@
 // @flow
 import { translatedStatusTypes } from 'capture-core/events/statusTypes';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { convertServerToClient } from '../../../../../../../converters';
 import type {
     ApiEvents,
@@ -46,7 +47,9 @@ const buildTEIRecord = ({
         return {
             id,
             value: convertServerToClient(value, type),
-            urlPath: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?dimension=small`,
+            urlPath: featureAvailable(FEATURES.trackerImageEndpoint) ?
+                `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?dimension=small` :
+                `/trackedEntityInstances/${trackedEntity}/${id}/image`,
         };
     });
 
@@ -75,7 +78,9 @@ const buildEventRecord = ({
         return {
             id: getFilterClientName(id),
             value: clientValue,
-            urlPath: `/tracker/events/${apiEvent.event}/dataValues/${id}/image?dimension=small`,
+            urlPath: featureAvailable(FEATURES.trackerImageEndpoint) ?
+                `/tracker/events/${apiEvent.event}/dataValues/${id}/image?dimension=small` :
+                `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
         };
     });
 

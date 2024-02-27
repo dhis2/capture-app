@@ -1,4 +1,5 @@
 // @flow
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { convertServerToClient } from '../../../../../../../converters';
 import type { ApiTeis, ApiTeiAttributes, TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
 
@@ -29,7 +30,9 @@ export const convertToClientTeis = (
                     return {
                         id,
                         value: convertServerToClient(value, type),
-                        urlPath: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?dimension=small`,
+                        urlPath: featureAvailable(FEATURES.trackerImageEndpoint) ?
+                            `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?dimension=small` :
+                            `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
                     };
                 })
                 .filter(({ value }) => value != null)
