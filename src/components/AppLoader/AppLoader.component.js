@@ -46,6 +46,7 @@ export const AppLoader = (props: Props) => {
             await initializeAsync(
                 onCacheExpired,
                 querySingleResource,
+                serverVersion.minor,
             );
             const store = getStore(
                 history, {

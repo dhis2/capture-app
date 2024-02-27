@@ -124,9 +124,9 @@ async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
     initI18n(locale);
 }
 
-async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function) {
+async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function, minorServerVersion: number) {
     await loadMetaData(onQueryApi);
-    await buildMetaDataAsync(dbLocale);
+    await buildMetaDataAsync(dbLocale, minorServerVersion);
 }
 
 async function initializeSystemSettingsAsync(
@@ -140,6 +140,7 @@ async function initializeSystemSettingsAsync(
 export async function initializeAsync(
     onCacheExpired: Function,
     onQueryApi: Function,
+    minorServerVersion: number,
 ) {
     setLogLevel();
 
@@ -179,5 +180,5 @@ export async function initializeAsync(
     await initializeSystemSettingsAsync(uiLocale, systemSettings);
 
     // initialize metadata
-    await initializeMetaDataAsync(dbLocale, onQueryApi);
+    await initializeMetaDataAsync(dbLocale, onQueryApi, minorServerVersion);
 }

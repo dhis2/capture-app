@@ -1,4 +1,5 @@
 // @flow
+import { useConfig } from '@dhis2/app-runtime';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildTrackedEntityTypeCollection } from '../buildFunctions/buildTrackedEntityTypeCollection';
 import type { OptionSet, TrackedEntityType } from '../../../../../../metaData';
@@ -40,6 +41,8 @@ export const useTrackedEntityTypeCollection = ({
         { enabled: !!trackedEntityType },
     );
 
+    const { serverVersion: { minor: minorServerVersion } } = useConfig();
+
     const { data: trackedEntityTypeCollection } = useIndexedDBQuery(
         // $FlowFixMe - QueryKey can be undefined
         ['trackedEntityTypeCollection', trackedEntityType?.id],
@@ -55,6 +58,7 @@ export const useTrackedEntityTypeCollection = ({
             dataEntryFormConfig,
             // $FlowFixMe
             locale,
+            minorServerVersion,
         }),
         {
             enabled:
