@@ -42,6 +42,7 @@ const NewTrackedEntityRelationshipPlain = ({
     trackedEntityTypeId,
     programId,
     teiId,
+    trackedEntityTypeName,
     orgUnitId,
     onCancel,
     onSave,
@@ -275,6 +276,7 @@ const NewTrackedEntityRelationshipPlain = ({
                         currentStep={currentStep}
                         onNavigate={handleNavigation}
                         linkedEntityMetadataName={selectedLinkedEntityMetadata?.name}
+                        trackedEntityTypeName={trackedEntityTypeName}
                     />
                 )}
             >

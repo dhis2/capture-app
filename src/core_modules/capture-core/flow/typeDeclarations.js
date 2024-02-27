@@ -202,14 +202,14 @@ declare type ApiUtilsWithoutHistory = {|
     querySingleResource: QuerySingleResource,
     mutate: DataEngineMutate,
     absoluteApiPath: string,
-    serverVersion: { minor: string },
+    serverVersion: { minor: number },
 |}
 
 declare type ApiUtils = {|
     querySingleResource: QuerySingleResource,
     mutate: DataEngineMutate,
     absoluteApiPath: string,
-    serverVersion: { minor: string },
+    serverVersion: { minor: number },
     history: {
         push: () => void,
         ...PassOnProps,
