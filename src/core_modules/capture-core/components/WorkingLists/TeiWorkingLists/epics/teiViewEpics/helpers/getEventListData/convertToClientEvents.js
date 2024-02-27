@@ -46,7 +46,7 @@ const buildTEIRecord = ({
         return {
             id,
             value: convertServerToClient(value, type),
-            urlPath: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
+            urlPath: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?dimension=small`,
         };
     });
 
@@ -75,7 +75,7 @@ const buildEventRecord = ({
         return {
             id: getFilterClientName(id),
             value: clientValue,
-            urlPath: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
+            urlPath: `/tracker/events/${apiEvent.event}/dataValues/${id}/image?dimension=small`,
         };
     });
 
