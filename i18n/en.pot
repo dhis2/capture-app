@@ -662,11 +662,14 @@ msgstr "Stop using new Enrollment dashboard for {{programName}}"
 msgid "Opt out for {{programName}}"
 msgstr "Opt out for {{programName}}"
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
 
-msgid "There is an error while opening this enrollment. Please enter a valid url."
-msgstr "There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Program with id \"{{programId}}\" does not exist"
 
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."

@@ -6,6 +6,12 @@ export const enrollmentPageStatuses = {
     MISSING_SELECTIONS: 'MISSING_SELECTIONS',
 };
 
+export const selectionStatus = {
+    READY: 'READY',
+    ERROR: 'ERROR',
+    LOADING: 'LOADING',
+};
+
 export const enrollmentAccessLevels = {
     FULL_ACCESS: 'FULL_ACCESS',
     LIMITED_ACCESS: 'LIMITED_ACCESS',

@@ -1,3 +1,24 @@
+## [100.57.4](https://github.com/dhis2/capture-app/compare/v100.57.3...v100.57.4) (2024-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16016] handle multi-text in v40 ([#3491](https://github.com/dhis2/capture-app/issues/3491)) ([25d79cc](https://github.com/dhis2/capture-app/commit/25d79ccb9a8a880815d93659821348d1ebea253f))
+
+## [100.57.3](https://github.com/dhis2/capture-app/compare/v100.57.2...v100.57.3) (2024-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16318] enrollment page url management ([#3522](https://github.com/dhis2/capture-app/issues/3522)) ([0abec43](https://github.com/dhis2/capture-app/commit/0abec430ac4e74907c01b46fcd264194b542539e))
+
+## [100.57.2](https://github.com/dhis2/capture-app/compare/v100.57.1...v100.57.2) (2024-02-26)
+
+
+### Bug Fixes
+
+* [DHIS2-15621] row view broken up in section ([#3457](https://github.com/dhis2/capture-app/issues/3457)) ([ce7282c](https://github.com/dhis2/capture-app/commit/ce7282ca440c1bddae3f02b938d505a9412d9ea6))
+
 ## [100.57.1](https://github.com/dhis2/capture-app/compare/v100.57.0...v100.57.1) (2024-02-23)
 
 
