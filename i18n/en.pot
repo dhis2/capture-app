@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-09T11:22:44.980Z\n"
-"PO-Revision-Date: 2024-02-09T11:22:44.980Z\n"
+"POT-Creation-Date: 2024-02-28T07:40:16.852Z\n"
+"PO-Revision-Date: 2024-02-28T07:40:16.852Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -932,6 +932,11 @@ msgstr "Search {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Search by attributes"
 
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] "Fill in at least {{count}} attribute to search"
+msgstr[1] "Fill in at least {{count}} attributes to search"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
 
@@ -1281,11 +1286,21 @@ msgstr "Scheduled automatically for {{suggestedScheduleDate}}"
 msgid "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "The scheduled date matches the suggested date, but can be changed if needed."
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural "The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
+msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
+
 msgid "after"
 msgstr "after"
 
 msgid "before"
 msgstr "before"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
 msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1334,6 +1349,34 @@ msgstr "Try again or contact your system administrator for support"
 
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
+
+msgid "You don't have access to delete this {{TETName}}"
+msgstr "You don't have access to delete this {{TETName}}"
+
+msgid ""
+"You can't delete this {{TETName}} when it has associated enrollments and "
+"events"
+msgstr ""
+"You can't delete this {{TETName}} when it has associated enrollments and "
+"events"
+
+msgid "Delete {{TETName}}"
+msgstr "Delete {{TETName}}"
+
+msgid ""
+"Are you sure you want to delete this {{TETName}}? This will permanently "
+"remove the {{TETName}} and all its associated enrollments and events in all "
+"programs."
+msgstr ""
+"Are you sure you want to delete this {{TETName}}? This will permanently "
+"remove the {{TETName}} and all its associated enrollments and events in all "
+"programs."
+
+msgid "Yes, delete {{TETName}}"
+msgstr "Yes, delete {{TETName}}"
+
+msgid "View changelog"
+msgstr "View changelog"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"

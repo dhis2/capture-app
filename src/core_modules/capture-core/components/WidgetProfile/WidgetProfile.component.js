@@ -20,6 +20,7 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
+import { OverflowMenu } from './OverflowMenu';
 
 const styles = {
     header: {
@@ -31,6 +32,9 @@ const styles = {
     container: {
         padding: `0 ${spacers.dp16}`,
         marginBottom: spacers.dp8,
+    },
+    actions: {
+        display: 'flex',
     },
 };
 
@@ -58,6 +62,7 @@ const WidgetProfilePlain = ({
         error: trackedEntityInstancesError,
         trackedEntityInstanceAttributes,
         trackedEntityTypeName,
+        trackedEntityTypeAccess,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
     const {
@@ -96,6 +101,11 @@ const WidgetProfilePlain = ({
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 
+    const canWriteData = useMemo(
+        () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
+        [trackedEntityTypeAccess, program],
+    );
+
     const renderProfile = () => {
         if (loading) {
             return <LoadingMaskElementCenter />;
@@ -122,11 +132,17 @@ const WidgetProfilePlain = ({
                             TETName: trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}</div>
-                        {isEditable && (
-                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
-                                {i18n.t('Edit')}
-                            </Button>
-                        )}
+                        <div className={classes.actions}>
+                            {isEditable && (
+                                <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
+                                    {i18n.t('Edit')}
+                                </Button>
+                            )}
+                            <OverflowMenu
+                                trackedEntityTypeName={trackedEntityTypeName}
+                                canWriteData={canWriteData}
+                            />
+                        </div>
                     </div>
                 }
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
