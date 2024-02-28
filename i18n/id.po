@@ -3,19 +3,19 @@
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2022
-# Philip Larsen Donnelly, 2023
 # Raja Fathurrahim, 2023
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2023
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
-# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2023
+# Philip Larsen Donnelly, 2024
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2023\n"
+"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,10 +86,6 @@ msgstr "kesalahan yang ditemui selama validasi bidang"
 
 msgid "error"
 msgstr "kesalahan"
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
-msgstr ""
 
 msgid "This value is validating"
 msgstr "Nilai ini memvalidasi"
@@ -172,6 +168,9 @@ msgstr "Even lengkap"
 msgid "{{ stageName }} - Basic info"
 msgstr ""
 
+msgid "{{ stageName }} - Assignee"
+msgstr ""
+
 msgid "{{ stageName }} - Status"
 msgstr ""
 
@@ -221,7 +220,7 @@ msgid "Assignee"
 msgstr "penerima tugas"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr "Simpan ke {{Nama program}} pada {{Nama Organisasi unit}}"
+msgstr "Simpan ke {{programName}} pada {{orgUnitName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -629,7 +628,7 @@ msgid "Close the notice"
 msgstr ""
 
 msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "Gunakan dasbor pendaftaran baru pada {{Nama program}}"
+msgstr "Gunakan dasbor pendaftaran baru pada {{programName}}"
 
 msgid "Opt in for {{programName}}"
 msgstr ""
@@ -659,32 +658,23 @@ msgid "Yes, opt in"
 msgstr ""
 
 msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "Berhenti menggunakan dasbor pendafataran baru pada {{Nama program}}"
+msgstr "Berhenti menggunakan dasbor pendafataran baru pada {{programName}}"
 
 msgid "Opt out for {{programName}}"
 msgstr ""
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Pendaftaran dengan id \"{{enrollmentId}}\" tidak tersedia"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance entitas terlacak dengan id \"{{teiId}}\" tidak ada"
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
-"Terjadi kesalahan saat membuka pendaftaran ini. Harap masukkan url yang "
-"valid."
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
-
-msgid "Enrollment Dashboard"
-msgstr "Dasbor pendaftaran"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Belum ada indikator keluaran untuk pendaftran ini"
-
-msgid "No feedback for this enrollment yet"
-msgstr "Belum ada umpan balik untuk pendaftaran ini"
 
 msgid "Quick actions"
 msgstr "Aksi cepat"
@@ -768,20 +758,11 @@ msgstr ""
 msgid "There was an error opening the Page"
 msgstr "Telah terjadi sebuah kesalahan saat membuka Halaman"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr ""
-
 msgid "There was an error loading the page"
 msgstr "Telah terjadi sebuah kesalahan saat memuat halaman"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Pilih unit pendaftaran untuk memulai pelaporan"
-
-msgid "There are no feedbacks for this event"
-msgstr "Tidak ada umpan balik untuk acara ini"
-
-msgid "There are no indicators for this event"
-msgstr "Tidak ada indikator untuk acara ini"
 
 msgid "Program stage is invalid"
 msgstr "Tahapan program tidak valid"
@@ -809,18 +790,6 @@ msgstr "Tahapan program tidak dapat dimuat"
 
 msgid "Stage"
 msgstr "Stage"
-
-msgid "Enrollment{{escape}} View Event"
-msgstr "Pendaftaran{{escape}} Lihat Even"
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr "Pendaftaran{{escape}} Edit Even"
-
-msgid "The enrollment event data could not be found"
-msgstr ""
-
-msgid "There are no feedback for this event"
-msgstr ""
 
 msgid "Registered events"
 msgstr "Even terdaftar"
@@ -936,18 +905,6 @@ msgstr ""
 "Meninggalkan halaman ini akan membuang semua pilihan yang Anda buat untuk "
 "hubungan baru"
 
-msgid "No one is assigned to this event"
-msgstr "Tidak ada yang ditugaskan untuk even ini"
-
-msgid "Assign"
-msgstr "Daftarkan"
-
-msgid "Event assigned to {{name}}"
-msgstr "Even ditugaskan ke {{name}}"
-
-msgid "Feedbacks"
-msgstr "Umpan balik"
-
 msgid "Show all events"
 msgstr "Tampilkan semua even"
 
@@ -960,6 +917,21 @@ msgstr "Even tidak dapat dimuat"
 msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
 
+msgid "Dashboard"
+msgstr ""
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr "Belum ada umpan balik untuk pendaftaran ini"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Belum ada indikator keluaran untuk pendaftran ini"
+
 msgid "Selected program"
 msgstr "Program yang dipilih"
 
@@ -970,6 +942,9 @@ msgid "Search by attributes"
 msgstr "Cari berdasarkan atribut"
 
 msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
+msgid "The enrollment event data could not be found"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1030,10 +1005,10 @@ msgid "Choose a type to start searching"
 msgstr "Pilih jenis untuk mulai mencari"
 
 msgid "Search {{name}}"
-msgstr "Telusuri {{nama}}"
+msgstr "Telusuri {{name}}"
 
 msgid "Search by {{name}}"
-msgstr "Cari berdasarkan {{nama}}"
+msgstr "Cari berdasarkan {{name}}"
 
 msgid "all programs"
 msgstr ""
@@ -1110,11 +1085,23 @@ msgstr "{{trackedEntityName}} baru di {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Telusuri {{trackedEntityName}} di {{programName}}"
 
-msgid "To work with the selected program,"
-msgstr "Untuk bekerja dengan program yang dipilih,"
+msgid "Assigned to"
+msgstr "Ditugaskan pada"
 
-msgid "open the Tracker Capture app"
-msgstr "buka aplikasi Tracker Capture"
+msgid "You don't have access to edit this assignee"
+msgstr ""
+
+msgid "Edit"
+msgstr "Sunting"
+
+msgid "No one is assigned to this event"
+msgstr "Tidak ada yang ditugaskan untuk even ini"
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
+msgstr "Daftarkan"
 
 msgid "This program is protected"
 msgstr "Program ini dilindungi"
@@ -1186,9 +1173,6 @@ msgstr "Garis lintang"
 
 msgid "Longitude"
 msgstr "Garis bujur"
-
-msgid "Edit"
-msgstr "Sunting"
 
 msgid "Set coordinates"
 msgstr ""
@@ -1396,7 +1380,7 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Tahapan dan Even"
 
-msgid "New TEI Relationship"
+msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
 msgid "Missing implementation step"
@@ -1450,9 +1434,6 @@ msgstr "Unduh data..."
 
 msgid "an error occurred loading working lists"
 msgstr "terjadi kesalahan saat memuat daftar kerja"
-
-msgid "Assigned to"
-msgstr "Ditugaskan pada"
 
 msgid "Registration Date"
 msgstr "tanggal registrasi"
@@ -1583,6 +1564,9 @@ msgstr ""
 msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
+msgid "Error updating the Assignee"
+msgstr ""
+
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"
 
@@ -1605,7 +1589,7 @@ msgid "To time"
 msgstr "Ke waktu"
 
 msgid "Page {{currentPage}}"
-msgstr "Halaman {{Halaman saat ini}}"
+msgstr "Halaman {{currentPage}}"
 
 msgid "Area on map saved"
 msgstr ""

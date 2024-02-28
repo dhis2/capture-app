@@ -1,12 +1,13 @@
 # 
 # Translators:
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2023
+# Philip Larsen Donnelly, 2024
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
@@ -46,16 +47,16 @@ msgstr ""
 "versiones."
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "Ver panel de {{programName}}"
 
 msgid "View dashboard"
 msgstr "Ver tablero"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "Ver inscripción activa"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "Volver a inscribir"
 
 msgid "in"
 msgstr "en"
@@ -76,14 +77,10 @@ msgid "Last updated"
 msgstr "Última actualización"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "error encontrado durante la validación del campo"
 
 msgid "error"
-msgstr ""
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
-msgstr ""
+msgstr "Error"
 
 msgid "This value is validating"
 msgstr "Este valor está siendo validado"
@@ -164,13 +161,16 @@ msgid "Complete event"
 msgstr "Evento completo"
 
 msgid "{{ stageName }} - Basic info"
+msgstr "{{ stageName }} - Información básica"
+
+msgid "{{ stageName }} - Assignee"
 msgstr ""
 
 msgid "{{ stageName }} - Status"
-msgstr ""
+msgstr "{{ stageName }} - Estado"
 
 msgid "Please select {{categoryName}}"
-msgstr ""
+msgstr "Seleccione {{categoryName}}."
 
 msgid "A future date is not allowed"
 msgstr "No se permite una fecha futura"
@@ -192,10 +192,10 @@ msgstr ""
 "para más detalles"
 
 msgid "{{ stageName }} - Details"
-msgstr ""
+msgstr "{{ stageName }} - Detalles"
 
 msgid "{{ stageName }} - {{ sectionName }}"
-msgstr ""
+msgstr "{{ stageName }} - {{ sectionName }}"
 
 msgid "Assigned user"
 msgstr "Usuario asignado"
@@ -299,7 +299,7 @@ msgstr ""
 "relación."
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "Sí, descartar cambios"
 
 msgid "No, cancel"
 msgstr "No, cancelar"
@@ -405,6 +405,9 @@ msgid ""
 "This event has unsaved changes. Leaving this page without saving will lose "
 "these changes. Are you sure you want to discard unsaved changes?"
 msgstr ""
+"Este evento tiene cambios no guardados. Si abandona esta página sin guardar,"
+" se perderán estos cambios. ¿Está seguro de que desea descartar los cambios "
+"no guardados?"
 
 msgid "No events to display"
 msgstr "No hay eventos para mostrar"
@@ -515,10 +518,10 @@ msgid "Select image"
 msgstr "Seleccionar imagen"
 
 msgid "Type to filter options"
-msgstr ""
+msgstr "Escriba para filtrar opciones"
 
 msgid "No match found"
-msgstr ""
+msgstr "No se han encontraron resultados"
 
 msgid "Search"
 msgstr "Buscar"
@@ -536,7 +539,7 @@ msgid "URL"
 msgstr "URL"
 
 msgid "Icon for {{field}}"
-msgstr "Icono para {{campo}}"
+msgstr "Icono para {{field}}"
 
 msgid "start typing to search"
 msgstr "Empiece a escribir para buscar"
@@ -545,7 +548,7 @@ msgid "suggestions could not be retrieved"
 msgstr "no se pudieron cargar las sugerencias"
 
 msgid "No results found"
-msgstr ""
+msgstr "No se han encontrado resultados"
 
 msgid "No items to display"
 msgstr "No hay elementos para mostrar"
@@ -572,10 +575,10 @@ msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} a {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr "después o igual a {{fecha}}"
+msgstr "después o igual a {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr "antes o igual a {{fecha}}"
+msgstr "antes o igual a {{date}}"
 
 msgid "greater than or equal to"
 msgstr "Mayor qué o igual a"
@@ -622,13 +625,13 @@ msgid "Write comment"
 msgstr "Escribir comentario"
 
 msgid "was blanked out and hidden by your last action"
-msgstr ""
+msgstr "fue borrado y oculto por tu última acción"
 
 msgid "Notice"
-msgstr ""
+msgstr "Aviso"
 
 msgid "Close the notice"
-msgstr ""
+msgstr "cerrar el aviso"
 
 msgid "Use new Enrollment dashboard for {{programName}}"
 msgstr "Usar el nuevo panel de inscripción para {{programName}}"
@@ -644,18 +647,30 @@ msgid ""
 "functionality in Capture is ongoing and will be added in upcoming app "
 "releases."
 msgstr ""
+"Al hacer clic en registrarse, comenzará a utilizar el nuevo panel de "
+"inscripción en Capture para este programa. Por el momento, hay ciertas "
+"funciones de la Tracker Capture que aún no se han agregado, incluida la "
+"función de relación y referencia. El trabajo para incluir esta funcionalidad"
+" Tracker en Capture está en curso y se agregará en próximos lanzamientos de "
+"la aplicación."
 
 msgid ""
 "The core team appreciates any feedback on this new functionality which is "
 "currently being beta tested, please report any issues and feedback in the "
 "DHIS2 JIRA project."
 msgstr ""
+"El equipo de desarrollo agradece cualquier comentario sobre esta nueva "
+"funcionalidad que actualmente se está probando en versión beta. Informe "
+"cualquier problema y comentario en el proyecto de JIRA de DHIS2."
 
 msgid ""
 "Click the button below to opt-in to the new enrollment dashboard "
 "functionality in the Capture app (beta) for this Tracker program for all "
 "users."
 msgstr ""
+"Haga clic en el botón de abajo para optar por la nueva funcionalidad del "
+"panel de inscripción en la aplicación Capture (beta) para este programa "
+"Tracker para todos los usuarios."
 
 msgid "Yes, opt in"
 msgstr "Sí, opt in"
@@ -666,26 +681,20 @@ msgstr "Deje de usar el nuevo panel de inscripción para {{programName}}"
 msgid "Opt out for {{programName}}"
 msgstr "Dejar de probar la nueva app con el programa \"{{programName}}\""
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "La inscripción con id \"{{enrollmentId}}\" no existe"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "La instancia de entidad rastreada con id \"{{teiId}}\" no existe"
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
-"Hay un error al abrir esta inscripción. Por favor introduzca un URL válido."
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
-
-msgid "Enrollment Dashboard"
-msgstr "Panel de inscripción"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Aún no hay resultados de indicadores para esta inscripción"
-
-msgid "No feedback for this enrollment yet"
-msgstr "Aún no hay comentarios para esta inscripción"
+"Se produjo un error al obtener las inscripciones. Por favor introduzca un "
+"URL válido."
 
 msgid "Quick actions"
 msgstr "Acciones rápidas"
@@ -719,19 +728,20 @@ msgstr ""
 "tablero."
 
 msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
+msgstr "ID de inscripción no válida {{enrollmentId}}."
 
 msgid "Choose an enrollment to view the dashboard."
 msgstr "Elija una inscripción para ver el tablero."
 
 msgid "There are no active enrollments."
-msgstr ""
+msgstr "No hay inscripciones activas."
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
+"Agregue una nueva inscripción para {{teiDisplayName}} en este programa."
 
 msgid "No access to program owner."
-msgstr ""
+msgstr "Sin acceso al propietario del programa."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} no está inscrito en este programa."
@@ -771,20 +781,11 @@ msgstr "La unidad organizativa no es válida con el programa actual"
 msgid "There was an error opening the Page"
 msgstr "Hubo un error al abrir la página"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "Nuevo evento"
-
 msgid "There was an error loading the page"
 msgstr "Hubo un error al cargar la página"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Elija una unidad de registro para comenzar a informar"
-
-msgid "There are no feedbacks for this event"
-msgstr "No hay comentarios para este evento."
-
-msgid "There are no indicators for this event"
-msgstr "No hay indicadores para este evento."
 
 msgid "Program stage is invalid"
 msgstr "La etapa del programa no es válida"
@@ -799,7 +800,7 @@ msgid "Refer"
 msgstr "Referir"
 
 msgid "You can't add any more {{ programStageName }} events"
-msgstr ""
+msgstr "No se pueden agregar más eventos de {{ programStageName }}"
 
 msgid "Cancel without saving"
 msgstr "Cancelar sin guardar"
@@ -811,25 +812,13 @@ msgid "Program Stages could not be loaded"
 msgstr "No se pudieron cargar las etapas del programa"
 
 msgid "Stage"
-msgstr ""
-
-msgid "Enrollment{{escape}} View Event"
-msgstr "Inscripción{{escape}} Ver evento"
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr "Inscripción{{escape}} Editar evento"
-
-msgid "The enrollment event data could not be found"
-msgstr "No se pudieron encontrar los datos del evento de inscripción"
-
-msgid "There are no feedback for this event"
-msgstr "No hay comentarios para este evento."
+msgstr "Etapa"
 
 msgid "Registered events"
 msgstr "Eventos registrados"
 
 msgid "Please select {{category}}."
-msgstr "Seleccione {{categoría}}."
+msgstr "Seleccione {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "O vea todos los registros accesibles para su usuario en {{program}}"
@@ -865,7 +854,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nueva inscripción en el programa{{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Guardar {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Guardar {{trackedEntityName}}"
@@ -877,43 +866,43 @@ msgid "Link"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Guardar como nuevo {{trackedEntityName}}"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Se están filtrando algunos programas."
 
 msgid "Show all"
-msgstr ""
+msgstr "Mostrar todo"
 
 msgid "Program"
-msgstr ""
+msgstr "Programa"
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Unidad Organizativa"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registro"
 
 msgid "Search results"
-msgstr ""
+msgstr "Resultados de la búsqueda"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "No se encontró {{trackedEntityTypeName}}."
 
 msgid "New search"
-msgstr ""
+msgstr "Nueva búsqueda"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Editar búsqueda"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Enlace a un {{trackedEntityType}} existente"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Crear nuevo {{trackedEntityType}}"
 
 msgid "Register"
-msgstr ""
+msgstr "Registrar"
 
 msgid "Back"
 msgstr "Atrás"
@@ -922,84 +911,93 @@ msgid "events"
 msgstr "Eventos"
 
 msgid "event"
-msgstr ""
+msgstr "evento"
 
 msgid "You don't have access to edit this event"
-msgstr ""
+msgstr "No tienes acceso para editar este evento."
 
 msgid "Edit event"
-msgstr ""
+msgstr "Editar evento"
 
 msgid "Event details"
-msgstr ""
+msgstr "Detalles del evento"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
-
-msgid "No one is assigned to this event"
-msgstr ""
-
-msgid "Assign"
-msgstr ""
-
-msgid "Event assigned to {{name}}"
-msgstr ""
-
-msgid "Feedbacks"
-msgstr "Retroalimentación"
+"Al salir de esta página, se descartarán las selecciones que haya realizado "
+"para una nueva relación."
 
 msgid "Show all events"
-msgstr ""
+msgstr "Mostrar todos los eventos"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "No se pudo cargar el evento"
 
 msgid "Organisation unit could not be loaded"
+msgstr "No se pudo cargar la unidad organizativa"
+
+msgid "Dashboard"
 msgstr ""
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr "Aún no hay comentarios para esta inscripción"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Aún no hay resultados de indicadores para esta inscripción"
 
 msgid "Selected program"
-msgstr ""
+msgstr "Programa seleccionado"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Buscar {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Buscar por atributos"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
+"No se pudo recuperar los metadatos. Por favor, inténtelo de nuevo más tarde."
+
+msgid "The enrollment event data could not be found"
+msgstr "No se pudieron encontrar los datos del evento de inscripción"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Posibles duplicados encontrados."
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "Se produjo un error al cargar posibles duplicados"
 
 msgid "You don't have access to delete this relationship"
-msgstr ""
+msgstr "No tiene acceso para eliminar esta relación."
 
 msgid "You don't have access to create any relationships"
-msgstr ""
+msgstr "No tiene acceso para crear ninguna relación."
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Añadir relación"
 
 msgid "No results found for "
-msgstr ""
+msgstr "No se encontraron resultados para"
 
 msgid "Registering unit"
-msgstr ""
+msgstr "Unidad de registro"
 
 msgid "Choose a registering unit"
 msgstr ""
 
 msgid "Clear selection"
-msgstr ""
+msgstr "Despejar selecciones"
 
 msgid "No programs available."
 msgstr ""
@@ -1009,39 +1007,44 @@ msgstr ""
 
 msgid "Some programs are being filtered by the chosen registering unit"
 msgstr ""
+"Algunos programas están siendo filtrados por la unidad de registro "
+"seleccionada."
 
 msgid "Show all programs"
-msgstr ""
+msgstr "Mostrar todos los programas"
 
 msgid "Choose a program"
-msgstr ""
+msgstr "Elige un programa"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Buscar por {{titleText}}"
 
 msgid "Search for"
-msgstr ""
+msgstr "Buscar por"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
+"También puede elegir un programa de la barra superior y buscar en ese "
+"programa"
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Elija un tipo para comenzar a buscar"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Buscar {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Buscar por {{name}}"
 
 msgid "all programs"
-msgstr ""
+msgstr "todos los programas"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
+"¿No encuentra los resultados que buscaba? Intente buscar todos los programas"
 
 msgid "Search in all programs"
 msgstr ""
@@ -1106,11 +1109,23 @@ msgstr ""
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
-msgid "To work with the selected program,"
+msgid "Assigned to"
 msgstr ""
 
-msgid "open the Tracker Capture app"
+msgid "You don't have access to edit this assignee"
 msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "No one is assigned to this event"
+msgstr "No hay nadie asignado a este evento."
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
+msgstr "Asignar"
 
 msgid "This program is protected"
 msgstr "Este programa está protegido"
@@ -1180,9 +1195,6 @@ msgstr "Latitud"
 
 msgid "Longitude"
 msgstr "Longitud"
-
-msgid "Edit"
-msgstr ""
 
 msgid "Set coordinates"
 msgstr ""
@@ -1390,7 +1402,7 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
-msgid "New TEI Relationship"
+msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
 msgid "Missing implementation step"
@@ -1443,9 +1455,6 @@ msgid "Download data..."
 msgstr ""
 
 msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Assigned to"
 msgstr ""
 
 msgid "Registration Date"
@@ -1575,6 +1584,9 @@ msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"
+msgstr ""
+
+msgid "Error updating the Assignee"
 msgstr ""
 
 msgid "Set coordinate"
