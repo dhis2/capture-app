@@ -21,6 +21,7 @@ export type LinkableEvent = {
 
 export type Props = {|
     type: string,
+    relationshipName: string,
     relatedStagesDataValues: RelatedStageDataValueStates,
     linkableEvents: Array<LinkableEvent>,
     scheduledLabel: string,

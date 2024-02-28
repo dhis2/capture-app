@@ -48,6 +48,7 @@ const styles = () => ({
 export const RelatedStagesActionsPlain = ({
     classes,
     type,
+    relationshipName,
     scheduledLabel,
     linkableEvents,
     relatedStagesDataValues,
@@ -61,7 +62,7 @@ export const RelatedStagesActionsPlain = ({
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
-    const updateSelectedAction = (action: $Values<typeof RelatedStagesActionTypes>) => {
+    const updateSelectedAction = (action: ?$Values<typeof RelatedStagesActionTypes>) => {
         setRelatedStagesDataValues(prevState => ({
             ...prevState,
             linkMode: action,
@@ -75,7 +76,7 @@ export const RelatedStagesActionsPlain = ({
     return (
         <DataSection
             dataTest="related-stages-section"
-            sectionName={i18n.t('Actions: {{linkedStageLabel}}', { linkedStageLabel: programStage.stageForm.name })}
+            sectionName={i18n.t('Actions: {{relationshipName}}', { relationshipName })}
         >
             <div className={classes.wrapper}>
                 {type === relatedStageStatus.LINKABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
@@ -98,7 +99,7 @@ export const RelatedStagesActionsPlain = ({
                         <Button
                             secondary
                             small
-                            onClick={() => updateSelectedAction('')}
+                            onClick={() => updateSelectedAction(undefined)}
                         >
                             {i18n.t('Clear selection')}
                         </Button>

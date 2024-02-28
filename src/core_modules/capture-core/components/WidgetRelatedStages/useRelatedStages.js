@@ -1,8 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import { relatedStageStatus } from './constants';
-import { getUserStorageController } from '../../storageControllers';
-import { userStores } from '../../storageControllers/stores';
+import { getUserStorageController, userStores } from '../../storageControllers';
 import { useIndexedDBQuery } from '../../utils/reactQueryHelpers';
 import { RELATIONSHIP_ENTITIES } from './WidgetRelatedStages.constants';
 
@@ -34,21 +33,22 @@ export const useRelatedStages = ({ programStageId, programId }: Props) => {
                         return false;
                     }
 
-                    // Related stages should not be able to refer to itself
-                    if (fromConstraint.programStage.id === programStageId
-                        && toConstraint.programStage.id === programStageId) {
+                    // Either the from or to side should be the current stage
+                    if (fromConstraint.programStage.id !== programStageId
+                        && toConstraint.programStage.id !== programStageId) {
                         return false;
                     }
 
                     // Related stages should only be able to refer to stages in the same program
-                    if (fromConstraint.programStage.program?.id !== programId
-                        || toConstraint.programStage.program?.id !== programId) {
+                    if (fromConstraint.programStage.program.id !== programId
+                        || toConstraint.programStage.program.id !== programId) {
                         return false;
                     }
 
-                    // If the stage is unidirectional and the current stage is the to side, it should not be included
-                    if (relationshipType.bidirectional === false
-                        && toConstraint.programStage.id === programStageId) {
+                    const isSelfReferencing = fromConstraint.programStage.id === programStageId
+                        && toConstraint.programStage.id === programStageId;
+
+                    if (!isSelfReferencing && fromConstraint.programStage.id !== programStageId) {
                         return false;
                     }
 

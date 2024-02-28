@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { convertDateObjectToDateFormatString } from '../../../utils/converters/date';
 import type { LinkableEvent } from '../RelatedStagesActions/RelatedStagesActions.types';
 import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
+import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../utils/api';
 
 type Props = {
     stageId: ?string,
@@ -44,7 +45,8 @@ export const useAvailableRelatedStageEvents = ({
             cacheTime: 0,
             staleTime: 0,
             select: (response: any) => {
-                const events = response?.instances.filter(instance => ['SCHEDULE', 'ACTIVE'].includes(instance.status));
+                const events = handleAPIResponse(REQUESTED_ENTITIES.events, response)
+                    .filter(instance => ['SCHEDULE', 'ACTIVE'].includes(instance.status));
 
                 if (events.length === 0) return [];
 

@@ -14,6 +14,6 @@ export const actions = Object.freeze({
 
 export const mainOptionTranslatedTexts = {
     [actions.SCHEDULE_IN_ORG]: i18n.t('Schedule'),
-    [actions.ENTER_DATA]: i18n.t('Report now'),
+    [actions.ENTER_DATA]: i18n.t('Enter details now'),
     [actions.LINK_EXISTING_RESPONSE]: i18n.t('Link to an existing'),
 };

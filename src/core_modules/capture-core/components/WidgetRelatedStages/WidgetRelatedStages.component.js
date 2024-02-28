@@ -87,6 +87,7 @@ const WidgetRelatedStagesPlain = ({
 
     return (
         <RelatedStagesActions
+            relationshipName={selectedRelationshipType.displayName}
             scheduledLabel={scheduledLabel}
             type={currentRelatedStagesStatus}
             linkableEvents={linkableEvents}
