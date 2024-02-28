@@ -3,7 +3,7 @@ import { hasAPISupportForFeature } from './support';
 
 let minorVersion = '';
 
-export const initFeatureAvailability = (serverVersion: { minor: string }) => {
+export const initFeatureAvailability = (serverVersion: { minor: number }) => {
     minorVersion = serverVersion.minor;
 };
 
