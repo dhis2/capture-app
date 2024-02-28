@@ -1,3 +1,115 @@
+## [100.57.4](https://github.com/dhis2/capture-app/compare/v100.57.3...v100.57.4) (2024-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16016] handle multi-text in v40 ([#3491](https://github.com/dhis2/capture-app/issues/3491)) ([25d79cc](https://github.com/dhis2/capture-app/commit/25d79ccb9a8a880815d93659821348d1ebea253f))
+
+## [100.57.3](https://github.com/dhis2/capture-app/compare/v100.57.2...v100.57.3) (2024-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16318] enrollment page url management ([#3522](https://github.com/dhis2/capture-app/issues/3522)) ([0abec43](https://github.com/dhis2/capture-app/commit/0abec430ac4e74907c01b46fcd264194b542539e))
+
+## [100.57.2](https://github.com/dhis2/capture-app/compare/v100.57.1...v100.57.2) (2024-02-26)
+
+
+### Bug Fixes
+
+* [DHIS2-15621] row view broken up in section ([#3457](https://github.com/dhis2/capture-app/issues/3457)) ([ce7282c](https://github.com/dhis2/capture-app/commit/ce7282ca440c1bddae3f02b938d505a9412d9ea6))
+
+## [100.57.1](https://github.com/dhis2/capture-app/compare/v100.57.0...v100.57.1) (2024-02-23)
+
+
+### Bug Fixes
+
+* [DHIS2-16205] Sticky Locked Selector ([#3516](https://github.com/dhis2/capture-app/issues/3516)) ([61158b1](https://github.com/dhis2/capture-app/commit/61158b1097843309ac51187fe41e1af842220f71))
+
+# [100.57.0](https://github.com/dhis2/capture-app/compare/v100.56.0...v100.57.0) (2024-02-19)
+
+
+### Features
+
+* [DHIS2-16527] assign user on first stage registration ([#3530](https://github.com/dhis2/capture-app/issues/3530)) ([54eef90](https://github.com/dhis2/capture-app/commit/54eef906e5c86ab6d65813c337242ff738882c5b))
+
+# [100.56.0](https://github.com/dhis2/capture-app/compare/v100.55.0...v100.56.0) (2024-02-16)
+
+
+### Features
+
+* [DHIS2-12007] Text String Improvements ([#3498](https://github.com/dhis2/capture-app/issues/3498)) ([836368a](https://github.com/dhis2/capture-app/commit/836368ae33d191abf209a2813a6a8cbd26107581))
+
+# [100.55.0](https://github.com/dhis2/capture-app/compare/v100.54.0...v100.55.0) (2024-02-05)
+
+
+### Features
+
+* [DHIS2-16305] Enrollment Overview Plugins ([#3515](https://github.com/dhis2/capture-app/issues/3515)) ([8e06dbc](https://github.com/dhis2/capture-app/commit/8e06dbcb54bdb9b308b9f01427b4139a9a00c977))
+
+# [100.54.0](https://github.com/dhis2/capture-app/compare/v100.53.1...v100.54.0) (2024-02-04)
+
+
+### Features
+
+* [DHIS2-16262] Support Custom Layout for Enrollment Pages ([#3481](https://github.com/dhis2/capture-app/issues/3481)) ([9cc3d70](https://github.com/dhis2/capture-app/commit/9cc3d707f855bba0971a144f1371765afedda55f))
+
+## [100.53.1](https://github.com/dhis2/capture-app/compare/v100.53.0...v100.53.1) (2024-02-01)
+
+
+### Bug Fixes
+
+* [DHIS2-16499] Handle different API response format ([#3517](https://github.com/dhis2/capture-app/issues/3517)) ([206d56c](https://github.com/dhis2/capture-app/commit/206d56c8c86f6cf3bdfc8792e87409c082237401))
+
+# [100.53.0](https://github.com/dhis2/capture-app/compare/v100.52.0...v100.53.0) (2024-01-26)
+
+
+### Features
+
+* [DHIS2-15475] Form Field Plugins ([#3502](https://github.com/dhis2/capture-app/issues/3502)) ([2ccb87b](https://github.com/dhis2/capture-app/commit/2ccb87bb775056c701dfaf9b4f9494b0008a57c3))
+
+# [100.52.0](https://github.com/dhis2/capture-app/compare/v100.51.0...v100.52.0) (2024-01-25)
+
+
+### Features
+
+* [DHIS2-16204] make opt-in to new dashboard the default ([#3508](https://github.com/dhis2/capture-app/issues/3508)) ([5407d7c](https://github.com/dhis2/capture-app/commit/5407d7c98257e16cd647438a7cfe693a5fcd2e0e))
+
+# [100.51.0](https://github.com/dhis2/capture-app/compare/v100.50.7...v100.51.0) (2024-01-25)
+
+
+### Features
+
+* [DHIS2-15480] widget assignee ([#3412](https://github.com/dhis2/capture-app/issues/3412)) ([d61efae](https://github.com/dhis2/capture-app/commit/d61efae8b24ffb34a84e765bc397de87ce76c125))
+
+## [100.50.7](https://github.com/dhis2/capture-app/compare/v100.50.6...v100.50.7) (2024-01-23)
+
+
+### Bug Fixes
+
+* [DHIS2-15888] multi text element in program rules ([#3482](https://github.com/dhis2/capture-app/issues/3482)) ([fd0776d](https://github.com/dhis2/capture-app/commit/fd0776d2261b761c9985db3f6bfb0fda4a2ad18c))
+
+## [100.50.6](https://github.com/dhis2/capture-app/compare/v100.50.5...v100.50.6) (2024-01-21)
+
+
+### Bug Fixes
+
+* [DHIS2-16352] Add spacing between event overview cards ([#3500](https://github.com/dhis2/capture-app/issues/3500)) ([2041d60](https://github.com/dhis2/capture-app/commit/2041d605454529b3bcd77fa3b53a4655ae1495cf))
+
+## [100.50.5](https://github.com/dhis2/capture-app/compare/v100.50.4...v100.50.5) (2024-01-21)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([eca1ba4](https://github.com/dhis2/capture-app/commit/eca1ba418e672a58df08785b74430c60e8eb9bcb))
+
+## [100.50.4](https://github.com/dhis2/capture-app/compare/v100.50.3...v100.50.4) (2024-01-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ad60c3a](https://github.com/dhis2/capture-app/commit/ad60c3a4500176c8db08ceb05e074eedfcf5e2b3))
+
 ## [100.50.3](https://github.com/dhis2/capture-app/compare/v100.50.2...v100.50.3) (2023-12-24)
 
 

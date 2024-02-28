@@ -121,7 +121,7 @@ Then('all pagination is disabled', () => {
 
 And('you click search', () => {
     // click outside of the input for the values to be updated
-    cy.get('[data-test="d2-form-component"]')
+    cy.get('[data-test="d2-section"]')
         .click();
 
     cy.get('button')
@@ -155,12 +155,15 @@ Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
     cy.contains(message).should(not ? 'not.exist' : 'exist'),
 );
 
-And('you navigated to the enrollment dashboard page', () => {
-    cy.url().should('include', 'enrollment?enrollmentId');
+And('you are navigated to the enrollment dashboard page', () => {
+    cy.url().should('include', 'enrollment?');
+    cy.url().should('include', 'enrollmentId');
 });
 
-And('you navigated to the enrollment dashboard page without enrollment', () => {
-    cy.url().should('include', 'enrollment?orgUnit');
+And('you are navigated to the enrollment dashboard page without enrollment', () => {
+    cy.url().should('include', 'enrollment?');
+    cy.url().should('not.include', 'enrollmentId');
+    cy.url().should('include', 'teiId');
 });
 
 Then('you should see no results found', () => {
@@ -208,4 +211,10 @@ When(/^you opt out to use the new enrollment Dashboard for (.*)$/, (program) => 
 
 Then(/^you see the opt in component for (.*)$/, (program) => {
     cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`);
+});
+
+And('the data store is clean', () => {
+    cy.buildApiUrl('dataStore/capture/useNewDashboard')
+        .then(dataStoreUrl =>
+            cy.request({ method: 'DELETE', url: dataStoreUrl, failOnStatusCode: false }));
 });

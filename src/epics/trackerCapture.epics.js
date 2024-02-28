@@ -135,7 +135,6 @@ import {
     runRulesOnEnrollmentFieldUpdateEpic,
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
 } from 'capture-core/components/DataEntries';
-import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
 import { triggerLoadCoreEpic, loadAppEpic } from '../components/AppStart';
 
@@ -188,11 +187,22 @@ import {
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 
 import {
-    fetchEnrollmentPageInformationFromUrlEpic,
-    startFetchingTeiFromEnrollmentIdEpic,
-    startFetchingTeiFromTeiIdEpic,
+    changedEnrollmentIdEpic,
+    fetchEnrollmentIdEpic,
+    verifyEnrollmentIdSuccessEpic,
+    enrollmentIdErrorEpic,
+    changedTeiIdEpic,
+    resetTeiIdEpic,
+    fetchTeiIdEpic,
+    verifyTeiFetchSuccessEpic,
+    fetchTeiErrorEpic,
+    changedProgramIdEpic,
+    programIdErrorEpic,
+    teiOrProgramChangeEpic,
     fetchEnrollmentsEpic,
-    openEnrollmentPageEpic,
+    verifyFetchedEnrollmentsEpic,
+    autoSwitchOrgUnitEpic,
+    clearErrorViewEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
     saveNewEventSucceededEpic,
@@ -309,7 +319,6 @@ export const epics = combineEpics(
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
-    saveAssigneeEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
@@ -328,11 +337,22 @@ export const epics = combineEpics(
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     completeSavingNewTrackedEntityInstanceEpic,
     completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
-    fetchEnrollmentPageInformationFromUrlEpic,
-    startFetchingTeiFromEnrollmentIdEpic,
-    startFetchingTeiFromTeiIdEpic,
+    changedEnrollmentIdEpic,
+    fetchEnrollmentIdEpic,
+    verifyEnrollmentIdSuccessEpic,
+    enrollmentIdErrorEpic,
+    changedTeiIdEpic,
+    resetTeiIdEpic,
+    fetchTeiIdEpic,
+    verifyTeiFetchSuccessEpic,
+    fetchTeiErrorEpic,
+    changedProgramIdEpic,
+    programIdErrorEpic,
+    teiOrProgramChangeEpic,
     fetchEnrollmentsEpic,
-    openEnrollmentPageEpic,
+    verifyFetchedEnrollmentsEpic,
+    autoSwitchOrgUnitEpic,
+    clearErrorViewEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
     saveNewEventInStageLocationChangeEpic,

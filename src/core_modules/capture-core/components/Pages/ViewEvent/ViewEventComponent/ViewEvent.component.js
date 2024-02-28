@@ -8,7 +8,7 @@ import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component'
 import type { ProgramStage } from '../../../../metaData';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
-
+import type { UserFormField } from '../../../FormFields/UserField';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -48,6 +48,10 @@ type Props = {
         header: string,
         showAllEvents: string,
     },
+    assignee: UserFormField,
+    getAssignedUserSaveContext: () => { event: ApiEnrollmentEvent },
+    onSaveAssignee: (newAssignee: UserFormField) => void,
+    onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
 };
 
 type State = {
@@ -70,7 +74,17 @@ class ViewEventPlain extends Component<Props, State> {
     }
 
     render() {
-        const { classes, programStage, currentDataEntryKey, eventAccess } = this.props;
+        const {
+            classes,
+            programStage,
+            currentDataEntryKey,
+            eventAccess,
+            assignee,
+            getAssignedUserSaveContext,
+            onSaveAssignee,
+            onSaveAssigneeError,
+        } = this.props;
+
         return (
             <div className={classes.container}>
                 <Button
@@ -89,6 +103,10 @@ class ViewEventPlain extends Component<Props, State> {
                         eventAccess={eventAccess}
                         programStage={programStage}
                         dataEntryKey={currentDataEntryKey}
+                        assignee={assignee}
+                        getAssignedUserSaveContext={getAssignedUserSaveContext}
+                        onSaveAssignee={onSaveAssignee}
+                        onSaveAssigneeError={onSaveAssigneeError}
                     />
                 </div>
                 <DiscardDialog

@@ -17,6 +17,9 @@ const getStyles = () => ({
     },
     label: {
         flexBasis: 200,
+        fontSize: 14,
+        paddingLeft: 5,
+        color: 'rgba(0, 0, 0, 0.87)',
     },
     field: {
         flexBasis: 150,

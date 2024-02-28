@@ -93,19 +93,6 @@ When('you fill in the unique identifier field with values that will return a tra
         .blur();
 });
 
-Then('you are navigated to the Tracker Capture', () => {
-    cy.url()
-        .should('include', 'dhis-web-tracker-capture/')
-        .should('include', 'dashboard?tei=')
-        .should('include', 'program=WSGAb5XwJ3Y');
-});
-
-Then('you are navigated to the Tracker Capture without program', () => {
-    cy.url()
-        .should('include', 'dhis-web-tracker-capture/')
-        .should('include', 'dashboard?tei=')
-        .should('include', 'tracked_entity_type=nEenWmSyUEp');
-});
 
 When('you fill in the first name with values that will return no results', () => {
     cy.get('[data-test="form-attributes"]')
@@ -276,13 +263,13 @@ Given('you are in the search page with the TB program being preselected from the
 
 When('you fill in the zip code range numbers', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(5)
+        .find('input[description="Zip code"]')
+        .eq(0)
         .type('7130')
         .blur();
     cy.get('[data-test="form-attributes"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(6)
+        .find('input[description="Zip code"]')
+        .eq(1)
         .type('7135')
         .blur();
 });

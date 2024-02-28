@@ -487,10 +487,6 @@ And('you fill in child programme first name with value that has duplicates', () 
         .blur();
 });
 
-Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => {
-    cy.url().should('include', 'dashboard?tei=');
-    cy.url().should('include', 'ou=DiszpKrYNg8&program=WSGAb5XwJ3Y');
-});
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
     cy.get('[data-test="capture-ui-input"]')

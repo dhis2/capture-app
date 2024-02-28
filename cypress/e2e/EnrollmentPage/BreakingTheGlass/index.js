@@ -1,19 +1,18 @@
 import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
+import '../../sharedSteps';
 
 Given('the tei created by this test is cleared from the database', () => {
     cy.buildApiUrl('tracker', 'trackedEntities?filter=w75KJ2mc4zz:like:Breaking&filter=zDhUuAYrxNC:like:TheGlass&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&ouMode=ACCESSIBLE')
         .then(url => cy.request(url))
-        .then(({ body }) =>
-            body.instances.forEach(({ trackedEntity }) =>
-                cy.buildApiUrl('trackedEntityInstances', trackedEntity)
-                    .then(trackedEntityUrl =>
-                        cy.request('DELETE', trackedEntityUrl)),
-            ));
-});
-
-And('you opt temporarily in on new enrollment dashboard in Child programme and WHO RMNCH Tracker', () => {
-    cy.visit('/#/?newDashboard=IpHINAT79UW,WSGAb5XwJ3Y');
+        .then(({ body }) => {
+            const apiTrackedEntities = body.trackedEntities || body.instances || [];
+            return apiTrackedEntities.forEach(({ trackedEntity }) =>
+                cy
+                    .buildApiUrl('trackedEntityInstances', trackedEntity)
+                    .then(trackedEntityUrl => cy.request('DELETE', trackedEntityUrl)),
+            );
+        });
 });
 
 And('you create a new tei in Child programme from Ngelehun CHC', () => {
@@ -22,12 +21,12 @@ And('you create a new tei in Child programme from Ngelehun CHC', () => {
         .eq(1)
         .type('1999-09-01')
         .blur();
-    cy.get('[data-test="d2-form-component"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Breaking')
         .blur();
-    cy.get('[data-test="d2-form-component"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('TheGlass')
@@ -69,7 +68,7 @@ And('you enroll the tei from Njandama MCHP', () => {
         .contains('Enroll Breaking TheGlass in this program')
         .click();
 
-    cy.get('[data-test="d2-form-component"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(8)
         .type('1999-09-01')

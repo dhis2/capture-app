@@ -12,5 +12,9 @@ export type Props = {|
     rulesExecutionDependencies: Object,
     onSave: ExternalSaveHandler,
     onCancel: () => void,
+|};
+
+export type PlainProps = {|
+    ...Props,
     ...CssClasses
 |};

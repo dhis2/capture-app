@@ -1,11 +1,21 @@
 // @flow
 import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
+import { withStyles } from '@material-ui/core';
 import { QuickSelector } from './QuickSelector/QuickSelector.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 import type { Props, State } from './ScopeSelector.types';
 import { withLoadingIndicator } from '../../HOC';
+
+const styles = {
+    stickyTopBar: {
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+        width: '100%',
+    },
+};
 
 class ScopeSelectorClass extends Component<Props, State> {
     constructor(props: Props) {
@@ -89,7 +99,10 @@ class ScopeSelectorClass extends Component<Props, State> {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
 
         return (
-            <div data-test={'scope-selector'}>
+            <div
+                className={this.props.classes.stickyTopBar}
+                data-test={'scope-selector'}
+            >
                 <QuickSelector
                     onSetOrgUnit={onSetOrgUnit}
                     onSetProgramId={onSetProgramId}
@@ -139,4 +152,5 @@ class ScopeSelectorClass extends Component<Props, State> {
 
 export const ScopeSelectorComponent: ComponentType<$Diff<Props, CssClasses>> = compose(
     withLoadingIndicator(() => ({ height: '100px' })),
+    withStyles(styles),
 )(ScopeSelectorClass);

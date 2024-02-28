@@ -20,7 +20,6 @@ import type { ConstructorInput } from './teiRegistrationFactory.types';
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
-import { formatPluginConfig } from '../../../../components/D2Form/FormFieldPlugin/formatPluginConfig';
 import {
     FieldElementObjectTypes,
 } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
@@ -64,12 +63,14 @@ export class TeiRegistrationFactory {
         cachedOptionSets,
         dataEntryFormConfig,
         locale,
+        minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
+            minorServerVersion,
         });
         this.dataEntryFormConfig = dataEntryFormConfig;
     }
@@ -123,27 +124,27 @@ export class TeiRegistrationFactory {
 
                 await fieldElements.asyncForEach(async (trackedEntityAttribute) => {
                     if (trackedEntityAttribute?.type === FormFieldTypes.PLUGIN) {
-                        const element = new FormFieldPluginConfig((o) => {
-                            o.id = trackedEntityAttribute.id;
-                            o.name = trackedEntityAttribute.name;
-                            o.pluginSource = trackedEntityAttribute.pluginSource;
-                            o.fields = new Map();
-                        });
-
                         const attributes = trackedEntityAttribute.fieldMap
                             .filter(attributeField => attributeField.objectType === 'Attribute')
                             .reduce((acc, attribute) => {
                                 acc[attribute.IdFromApp] = attribute;
                                 return acc;
                             }, {});
+                        const element = new FormFieldPluginConfig((o) => {
+                            o.id = trackedEntityAttribute.id;
+                            o.name = trackedEntityAttribute.name;
+                            o.pluginSource = trackedEntityAttribute.pluginSource;
+                            o.fields = new Map();
+                            o.customAttributes = attributes;
+                        });
+
 
                         await trackedEntityAttribute.fieldMap.asyncForEach(async (field) => {
                             if (field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
                                 const dataElement = await this.dataElementFactory.build(field);
                                 if (!dataElement) return;
 
-                                const fieldMetadata = formatPluginConfig(dataElement, { attributes });
-                                element.addField(field.IdFromPlugin, fieldMetadata);
+                                element.addField(field.IdFromPlugin, dataElement);
                             }
                         });
 
