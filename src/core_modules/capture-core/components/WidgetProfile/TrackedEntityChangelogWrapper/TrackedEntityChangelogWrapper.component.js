@@ -1,15 +1,19 @@
 // @flow
 import React, { useMemo } from 'react';
+import { dataElementTypes, RenderFoundation } from '../../../metaData';
+import { useFormFoundation } from '../DataEntry/hooks';
 import type { DataElement } from '../../../metaData';
-import { dataElementTypes } from '../../../metaData';
-import type { Props } from './EventChangelogWrapper.types';
+import type { Props } from './TrackedEntityChangelogWrapper.types';
 import { Changelog, CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
 
-export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps }: Props) => {
+export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, ...passOnProps }: Props) => {
+    const formFoundation: RenderFoundation = useFormFoundation(programAPI);
+
     const {
         dataItemDefinitions,
         metadataItemDefinitions,
     } = useMemo(() => {
+        if (!Object.keys(formFoundation)?.length) return {};
         const elements = formFoundation.getElements();
         const contextLabels = formFoundation.getLabels();
 
@@ -54,8 +58,8 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps 
     return (
         <Changelog
             {...passOnProps}
-            entityId={eventId}
-            entityType={CHANGELOG_ENTITY_TYPES.EVENT}
+            entityType={CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY}
+            entityId={teiId}
             dataItemDefinitions={dataItemDefinitions}
             metadataItemDefinitions={metadataItemDefinitions}
         />

@@ -3,7 +3,7 @@ import React from 'react';
 import { DataTableCell, DataTableRow } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { ChangelogChangeCell } from './ChangelogChangeCell';
-import type { ChangelogRecord } from '../Changelog/Changelog.types';
+import type { ChangelogRecord } from '../../Changelog/Changelog.types';
 
 type Props = {|
     record: ChangelogRecord,

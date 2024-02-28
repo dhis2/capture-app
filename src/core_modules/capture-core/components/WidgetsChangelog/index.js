@@ -1,2 +1,2 @@
 // @flow
-export { CHANGELOG_ENTITY_TYPES } from './common/Changelog';
+export { CHANGELOG_ENTITY_TYPES, Changelog } from './Changelog';

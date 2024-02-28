@@ -2,20 +2,23 @@
 import React from 'react';
 import { Modal } from '@dhis2/ui';
 import { useChangelogData } from '../common/hooks';
-import { Changelog, CHANGELOG_ENTITY_TYPES } from '../common/Changelog';
+import { ChangelogComponent } from './Changelog.component';
+import { CHANGELOG_ENTITY_TYPES } from './index';
 import { LoadingMaskElementCenter } from '../../LoadingMasks';
-import type { ItemDefinitions } from '../common/Changelog/Changelog.types';
+import type { ItemDefinitions } from './Changelog.types';
 
 type Props = {
-    eventId: string,
+    entityId: string,
+    entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
     isOpen: boolean,
     setIsOpen: (boolean | boolean => boolean) => void,
     dataItemDefinitions: ItemDefinitions,
     metadataItemDefinitions: ItemDefinitions,
 }
 
-export const EventChangelog = ({
-    eventId,
+export const Changelog = ({
+    entityId,
+    entityType,
     isOpen,
     setIsOpen,
     dataItemDefinitions,
@@ -30,8 +33,8 @@ export const EventChangelog = ({
         sortDirection,
         setSortDirection,
     } = useChangelogData({
-        entityId: eventId,
-        entityType: CHANGELOG_ENTITY_TYPES.EVENT,
+        entityId,
+        entityType,
         dataItemDefinitions,
         metadataItemDefinitions,
     });
@@ -45,7 +48,7 @@ export const EventChangelog = ({
     }
 
     return (
-        <Changelog
+        <ChangelogComponent
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             records={records}

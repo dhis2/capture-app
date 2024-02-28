@@ -1,3 +1,3 @@
 // @flow
 
-export { EventChangelogWrapperComponent } from './EventChangelogWrapper.component';
+export { EventChangelogWrapper } from './EventChangelogWrapper.component';

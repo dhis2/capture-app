@@ -4,8 +4,8 @@ import { v4 as uuid } from 'uuid';
 import { useMemo, useState } from 'react';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
-import { CHANGELOG_ENTITY_TYPES, QUERY_KEYS_BY_ENTITY_TYPE } from '../Changelog/Changelog.constants';
-import type { Change, ChangelogRecord, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
+import { CHANGELOG_ENTITY_TYPES, QUERY_KEYS_BY_ENTITY_TYPE } from '../../Changelog/Changelog.constants';
+import type { Change, ChangelogRecord, ItemDefinitions, SortDirection } from '../../Changelog/Changelog.types';
 import { convertServerToClient } from '../../../../converters';
 import { convert } from '../../../../converters/clientToList';
 

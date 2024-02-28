@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Button, spacers } from '@dhis2/ui';
+import { Button, FlyoutMenu, IconMore16, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
@@ -20,6 +20,9 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
+import { FEATURES, useFeature } from '../../../capture-core-utils';
+import { OverflowButton } from '../Buttons';
+import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
 
 const styles = {
     header: {
@@ -45,8 +48,11 @@ const WidgetProfilePlain = ({
     onUpdateTeiAttributeValues,
     classes,
 }: PlainProps) => {
+    const supportsChangelog = useFeature(FEATURES.changelogs);
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
+    const [changelogIsOpen, setChangelogIsOpen] = useState(false);
+    const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
@@ -122,11 +128,33 @@ const WidgetProfilePlain = ({
                             TETName: trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}</div>
-                        {isEditable && (
-                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
-                                {i18n.t('Edit')}
-                            </Button>
-                        )}
+                        <div style={{ display: 'flex', gap: '4px' }}>
+                            {isEditable && (
+                                <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
+                                    {i18n.t('Edit')}
+                                </Button>
+                            )}
+                            {supportsChangelog && (
+                                <OverflowButton
+                                    open={actionsIsOpen}
+                                    onClick={() => setActionsIsOpen(prev => !prev)}
+                                    secondary
+                                    small
+                                    icon={<IconMore16 />}
+                                    component={(
+                                        <FlyoutMenu dense maxWidth="250px">
+                                            <MenuItem
+                                                label={i18n.t('View changelog')}
+                                                onClick={() => {
+                                                    setChangelogIsOpen(true);
+                                                    setActionsIsOpen(false);
+                                                }}
+                                            />
+                                        </FlyoutMenu>
+                                    )}
+                                />
+                            )}
+                        </div>
                     </div>
                 }
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
@@ -153,6 +181,14 @@ const WidgetProfilePlain = ({
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>
+            )}
+            {supportsChangelog && changelogIsOpen && (
+                <TrackedEntityChangelogWrapper
+                    teiId={teiId}
+                    programAPI={program}
+                    isOpen
+                    setIsOpen={setChangelogIsOpen}
+                />
             )}
         </div>
     );

@@ -1,6 +1,6 @@
 // @flow
 import { CHANGE_TYPES } from './Changelog.constants';
-import { dataElementTypes } from '../../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 
 type CreatedChange = {|
     type: typeof CHANGE_TYPES.CREATED,

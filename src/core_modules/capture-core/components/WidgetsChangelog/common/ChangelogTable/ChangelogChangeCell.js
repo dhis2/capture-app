@@ -4,7 +4,7 @@ import log from 'loglevel';
 import { colors, IconArrowRight16, spacers, Tag } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { CHANGE_TYPES } from '../Changelog/Changelog.constants';
+import { CHANGE_TYPES } from '../../Changelog/Changelog.constants';
 import { errorCreator } from '../../../../../capture-core-utils';
 
 type Props = {

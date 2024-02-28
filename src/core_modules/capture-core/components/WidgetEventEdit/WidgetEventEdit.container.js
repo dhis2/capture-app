@@ -28,7 +28,7 @@ import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../metaData';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../Buttons';
-import { EventChangelogWrapperComponent } from './EventChangelogWrapper';
+import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { FEATURES, useFeature } from '../../../capture-core-utils';
 
 const styles = {
@@ -198,7 +198,7 @@ export const WidgetEventEditPlain = ({
             </Widget>
 
             {supportsChangelog && changeLogIsOpen && (
-                <EventChangelogWrapperComponent
+                <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
                     eventId={loadedValues.eventContainer.id}

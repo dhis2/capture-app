@@ -11,10 +11,10 @@ import {
     ModalTitle, Pagination,
 } from '@dhis2/ui';
 import React from 'react';
-import { ChangelogTableHeader, ChangelogTableRow } from '../ChangelogTable';
+import { ChangelogTableHeader, ChangelogTableRow } from '../common/ChangelogTable';
 import type { ChangelogProps } from './Changelog.types';
 
-export const Changelog = ({
+export const ChangelogComponent = ({
     isOpen,
     setIsOpen,
     records,
