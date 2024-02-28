@@ -91,6 +91,7 @@ export const useTrackedEntityInstances = (
 
     return { error,
         loading,
+        trackedEntity: !loading && data?.trackedEntityInstance,
         trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
         trackedEntityTypeName: !tetLoading && tetData?.trackedEntityType?.displayName,
         trackedEntityTypeAccess: !tetLoading && tetData?.trackedEntityType?.access,

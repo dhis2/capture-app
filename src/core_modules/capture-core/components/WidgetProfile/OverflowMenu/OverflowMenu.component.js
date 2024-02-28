@@ -14,7 +14,14 @@ const styles = {
     },
 };
 
-const MenuPlain = ({ trackedEntityTypeName, canWriteData, canCascadeDeleteTei, classes }: PlainProps) => {
+const MenuPlain = ({
+    trackedEntity,
+    trackedEntityTypeName,
+    canWriteData,
+    canCascadeDeleteTei,
+    onDeleteSuccess,
+    classes,
+}: PlainProps) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
     // const [changelogIsOpen, setChangelogIsOpen] = useState(false);
@@ -50,7 +57,12 @@ const MenuPlain = ({ trackedEntityTypeName, canWriteData, canCascadeDeleteTei, c
                 }
             />
             {deleteModalIsOpen && (
-                <DeleteModal trackedEntityTypeName={trackedEntityTypeName} setOpenModal={setDeleteModalIsOpen} />
+                <DeleteModal
+                    trackedEntityTypeName={trackedEntityTypeName}
+                    trackedEntity={trackedEntity}
+                    setOpenModal={setDeleteModalIsOpen}
+                    onDeleteSuccess={onDeleteSuccess}
+                />
             )}
             {/* {changelogIsOpen && supportsChangelog && <> DHIS2-16764 </>} */}
         </>

@@ -47,6 +47,7 @@ const WidgetProfilePlain = ({
     readOnlyMode = false,
     orgUnitId = '',
     onUpdateTeiAttributeValues,
+    onDeleteSuccess,
     classes,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
@@ -60,6 +61,7 @@ const WidgetProfilePlain = ({
     const {
         loading: trackedEntityInstancesLoading,
         error: trackedEntityInstancesError,
+        trackedEntity,
         trackedEntityInstanceAttributes,
         trackedEntityTypeName,
         trackedEntityTypeAccess,
@@ -141,6 +143,8 @@ const WidgetProfilePlain = ({
                             <OverflowMenu
                                 trackedEntityTypeName={trackedEntityTypeName}
                                 canWriteData={canWriteData}
+                                trackedEntity={trackedEntity}
+                                onDeleteSuccess={onDeleteSuccess}
                             />
                         </div>
                     </div>

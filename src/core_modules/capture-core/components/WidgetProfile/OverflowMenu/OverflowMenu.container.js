@@ -9,7 +9,7 @@ const auth = {
     ALL: 'ALL',
 };
 
-export const OverflowMenu = ({ trackedEntityTypeName, canWriteData }: Props) => {
+export const OverflowMenu = ({ trackedEntityTypeName, canWriteData, trackedEntity, onDeleteSuccess }: Props) => {
     const { authorities } = useAuthorities();
     const canCascadeDeleteTei = useMemo(
         () =>
@@ -23,6 +23,8 @@ export const OverflowMenu = ({ trackedEntityTypeName, canWriteData }: Props) => 
             trackedEntityTypeName={trackedEntityTypeName}
             canWriteData={canWriteData}
             canCascadeDeleteTei={canCascadeDeleteTei}
+            trackedEntity={trackedEntity}
+            onDeleteSuccess={onDeleteSuccess}
         />
     );
 };

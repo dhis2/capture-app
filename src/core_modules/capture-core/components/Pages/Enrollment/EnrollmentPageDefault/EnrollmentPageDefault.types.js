@@ -35,6 +35,7 @@ export type Props = {|
     ruleEffects?: Array<{id: string, type: $Values<effectActions>}>;
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
+    onDeleteTrackedEntitySuccess: () => void,
 |};
 
 export type PlainProps = {|

@@ -17,19 +17,14 @@ const processErrorReports = (error) => {
         : error.message;
 };
 
-
-export const useDeleteTrackedEntity = (
-    onDelete: () => void,
-    onError: (message: string) => void,
-) => {
-    const [deleteMutation, { loading: deleteLoading }] = useDataMutation(
-        trackedEntityDelete,
-        {
-            onComplete: onDelete,
-            onError: (e) => {
-                onError(processErrorReports(e));
-            },
+export const useDeleteTrackedEntity = (onSuccess?: () => void, onError?: (message: string) => void) => {
+    const [deleteMutation, { loading: deleteLoading }] = useDataMutation(trackedEntityDelete, {
+        onComplete: () => {
+            onSuccess && onSuccess();
         },
-    );
+        onError: (e) => {
+            onError && onError(processErrorReports(e));
+        },
+    });
     return { deleteMutation, deleteLoading };
 };

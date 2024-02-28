@@ -118,11 +118,13 @@ export const ProfileWidget: WidgetConfig = {
         program,
         orgUnitId,
         onUpdateTeiAttributeValues,
+        onDeleteTrackedEntitySuccess,
     }): WidgetProfileProps => ({
         teiId,
         programId: program.id,
         orgUnitId,
         onUpdateTeiAttributeValues,
+        onDeleteSuccess: onDeleteTrackedEntitySuccess,
     }),
 };
 

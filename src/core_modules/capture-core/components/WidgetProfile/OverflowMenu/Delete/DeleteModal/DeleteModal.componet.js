@@ -5,9 +5,9 @@ import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button } fr
 import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './useDeleteTrackedEntity';
 
-export const DeleteModal = ({ trackedEntityTypeName, setOpenModal }: Props) => {
-    const { deleteLoading } = useDeleteTrackedEntity(
-        () => console.log('Success callback'),
+export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
+    const { deleteMutation, deleteLoading } = useDeleteTrackedEntity(
+        onDeleteSuccess,
         () => console.log('Error Callback'),
     );
 
@@ -33,7 +33,7 @@ export const DeleteModal = ({ trackedEntityTypeName, setOpenModal }: Props) => {
                     <Button onClick={() => setOpenModal(false)} secondary>
                         {i18n.t('No, cancel')}
                     </Button>
-                    <Button onClick={() => console.log('TODO')} primary loading={deleteLoading}>
+                    <Button onClick={() => deleteMutation(trackedEntity)} primary loading={deleteLoading}>
                         {i18n.t('Yes, delete {{TETName}}', {
                             TETName: trackedEntityTypeName,
                             interpolation: { escapeValue: false },

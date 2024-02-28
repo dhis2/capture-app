@@ -27,6 +27,7 @@ export type Props = {|
     widgetReducerName: string,
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
+    onDeleteTrackedEntitySuccess: () => void,
     ...CssClasses,
 |};
 
