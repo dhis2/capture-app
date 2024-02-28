@@ -365,13 +365,13 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Se están filtrando algunos programas."
 
 msgid "Show all"
-msgstr ""
+msgstr "Mostrar todo"
 
 msgid "Program"
-msgstr ""
+msgstr "Programa"
 
 msgid "Select program"
 msgstr ""
@@ -419,19 +419,19 @@ msgid "Save"
 msgstr "Guardar"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Mostrar todos los eventos"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Editar evento"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "No se pudo cargar el evento"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "No se pudo cargar la unidad organizativa"
 
 msgid "View event info"
 msgstr ""
@@ -674,7 +674,7 @@ msgid "Create {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Posibles duplicados encontrados."
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
@@ -686,43 +686,43 @@ msgid "Save as new {{tetName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Unidad Organizativa"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registro"
 
 msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
+msgstr "Resultados de la búsqueda"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "No se encontró {{trackedEntityTypeName}}."
 
 msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
-msgstr ""
+msgstr "Nueva búsqueda"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Editar búsqueda"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Enlace a un {{trackedEntityType}} existente"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Crear nuevo {{trackedEntityType}}"
 
 msgid "Register"
-msgstr ""
+msgstr "Registrar"
 
 msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Event details"
-msgstr ""
+msgstr "Detalles del evento"
 
 msgid "Event completed"
 msgstr "Evento completado"
@@ -731,15 +731,17 @@ msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"Al salir de esta página, se descartarán las selecciones que haya realizado "
+"para una nueva relación."
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "Nadie está asignado a este evento."
 
 msgid "Assign"
-msgstr ""
+msgstr "Asignar"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Evento asignado a {{name}}"
 
 msgid "Feedbacks"
 msgstr "Comentarios"
@@ -751,7 +753,7 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Añadir relación"
 
 msgid "Open"
 msgstr "Abierto"
@@ -766,13 +768,13 @@ msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Selected program"
-msgstr ""
+msgstr "Programa seleccionado"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Buscar {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Buscar por atributos"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
@@ -844,10 +846,10 @@ msgid "To time"
 msgstr ""
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "error encontrado durante la validación del campo"
 
 msgid "error"
-msgstr ""
+msgstr "Error"
 
 msgid "Delete polygon"
 msgstr ""

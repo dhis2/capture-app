@@ -4,13 +4,14 @@
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Rica Zamora Duchateau, 2022
 # Charel van den Elsen, 2023
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: Charel van den Elsen, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -445,13 +446,13 @@ msgid "Update"
 msgstr "Bijwerken"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{vanDatum}} tot {{totDatum}}"
+msgstr "{{fromDate}} tot {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr "na of gelijk aan {{datum}}"
+msgstr "na of gelijk aan {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr "voor of gelijk aan {{datum}}"
+msgstr "voor of gelijk aan {{date}}"
 
 msgid "greater than or equal to"
 msgstr "groter dan of gelijk aan"
@@ -499,7 +500,7 @@ msgid "Share view..."
 msgstr "Weergave delen..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Weet u zeker dat u de weergave '{{templateNaam}}' wilt verwijderen?"
+msgstr "Weet u zeker dat u de weergave '{{templateName}}' wilt verwijderen?"
 
 msgid "Confirm"
 msgstr "Bevestigen"
@@ -643,20 +644,20 @@ msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
-"Een item met deze {{attribuutNaam}} is al geregistreerd, maar je hebt er "
+"Een item met deze {{attributeName}} is al geregistreerd, maar je hebt er "
 "geen toegang toe"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "Je hebt deze {{attribuutNaam}} al geregistreerd"
+msgstr "Je hebt deze {{attributeName}} al geregistreerd"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"Een {{trackedEntityTypeNaam}} met deze {{attribuutNaam}} is al geregistreerd"
+"Een {{trackedEntityTypeName}} met deze {{attributeName}} is al geregistreerd"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Toon geregistreerde {{trackedEntityTypeNaam}}"
+msgstr "Toon geregistreerde {{trackedEntityTypeName}}"
 
 msgid "Registered person"
 msgstr "Geregistreerde persoon"
@@ -698,7 +699,7 @@ msgid "Search results"
 msgstr "Zoekresultaten"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr "Geen {{trackedEntityTypeNaam}} gevonden."
+msgstr "Geen {{trackedEntityTypeName}} gevonden."
 
 msgid "{{teiCount}} results found for"
 msgstr ""
@@ -741,7 +742,7 @@ msgid "Assign"
 msgstr "Toewijzen"
 
 msgid "Event assigned to {{name}}"
-msgstr "Evenement toegewezen aan {{naam}}"
+msgstr "Evenement toegewezen aan {{name}}"
 
 msgid "Feedbacks"
 msgstr "Feedbacks"
@@ -771,7 +772,7 @@ msgid "Selected program"
 msgstr "Geselecteerd programma"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr "Zoek {{uniqueAttrNaam}}"
+msgstr "Zoek {{uniqueAttrName}}"
 
 msgid "Search by attributes"
 msgstr "Zoek op attributen"
@@ -828,7 +829,7 @@ msgid "Longitude"
 msgstr "Lengtegraad"
 
 msgid "Date"
-msgstr "Datum\n"
+msgstr "Datum"
 
 msgid "Time"
 msgstr "Tijd"

@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2020
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
-"Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -328,7 +328,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr "Chương trình đã chọn không hợp lệ cho đơn vị đăng ký đã chọn"
 
 msgid "New {{typeName}}"
-msgstr "{{TypeName}} mới"
+msgstr "{{typeName}} mới"
 
 msgid "New"
 msgstr "Mới"
@@ -584,7 +584,7 @@ msgstr "Sự kiện này"
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
-msgstr "Kiểu quan hệ {{mối quan hệTypeName}} với {{entityName}} đã tồn tại"
+msgstr "Kiểu quan hệ {{relationshipTypeName}} với {{entityName}} đã tồn tại"
 
 msgid "Assigned to"
 msgstr "Đã gán cho"
@@ -647,7 +647,7 @@ msgstr "Bạn đã đăng ký {{attributeName}} này"
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr "{{TrackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
+msgstr "{{trackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
 
 msgid "Show registered {{trackedEntityTypeName}}"
 msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
