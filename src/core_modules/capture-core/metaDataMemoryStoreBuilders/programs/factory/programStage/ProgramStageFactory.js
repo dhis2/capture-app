@@ -33,6 +33,7 @@ export class ProgramStageFactory {
         cachedOptionSets,
         cachedRelationshipTypes,
         locale,
+        minorServerVersion,
     }: ConstructorInput) {
         this.cachedOptionSets = cachedOptionSets;
         this.locale = locale;
@@ -42,6 +43,7 @@ export class ProgramStageFactory {
         this.dataElementFactory = new DataElementFactory(
             cachedOptionSets,
             locale,
+            minorServerVersion,
         );
     }
 

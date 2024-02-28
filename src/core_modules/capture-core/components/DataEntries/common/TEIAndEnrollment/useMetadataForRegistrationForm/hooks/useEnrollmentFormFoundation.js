@@ -1,4 +1,5 @@
 // @flow
+import { useConfig } from '@dhis2/app-runtime';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
 import type { TrackedEntityType, Program } from '../../../../../../metaData';
@@ -29,6 +30,7 @@ export const useEnrollmentFormFoundation = ({
     program,
     locale,
 }: Props) => {
+    const { serverVersion: { minor: minorServerVersion } } = useConfig();
     const { data: enrollment, isLoading, error } = useIndexedDBQuery(
         // $FlowFixMe - QueryKey can be undefined
         ['enrollmentForm', program?.id],
@@ -45,6 +47,7 @@ export const useEnrollmentFormFoundation = ({
             cachedOptionSets: optionSets,
             dataEntryFormConfig,
             locale,
+            minorServerVersion,
         }),
         {
             enabled: (
