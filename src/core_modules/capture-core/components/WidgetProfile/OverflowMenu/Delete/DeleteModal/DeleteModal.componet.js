@@ -1,15 +1,16 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
+import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
 import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './useDeleteTrackedEntity';
 
 export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
-    const { deleteMutation, deleteLoading } = useDeleteTrackedEntity(
-        onDeleteSuccess,
-        () => console.log('Error Callback'),
-    );
+    const [errorReports, setErrorReports] = useState([]);
+    const handleErrors = (errors) => {
+        setErrorReports(errors);
+    };
+    const { deleteMutation, deleteLoading } = useDeleteTrackedEntity(onDeleteSuccess, handleErrors);
 
     return (
         <Modal>
@@ -20,12 +21,29 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
                 })}
             </ModalTitle>
             <ModalContent>
-                {i18n.t(
-                    'Are you sure you want to delete this {{TETName}}? This will permanently remove the {{TETName}} and all its associated enrollments and events in all programs.',
-                    {
-                        TETName: trackedEntityTypeName,
-                        interpolation: { escapeValue: false },
-                    },
+                <p>
+                    {i18n.t(
+                        'Are you sure you want to delete this {{TETName}}? This will permanently remove the {{TETName}} and all its associated enrollments and events in all programs.',
+                        {
+                            TETName: trackedEntityTypeName,
+                            interpolation: { escapeValue: false },
+                        },
+                    )}
+                </p>
+                {errorReports.length > 0 && (
+                    <NoticeBox
+                        title={i18n.t('There was a problem deleting the {{TETName}}', {
+                            TETName: trackedEntityTypeName,
+                            interpolation: { escapeValue: false },
+                        })}
+                        error
+                    >
+                        <ul>
+                            {errorReports.map(content => (
+                                <li key={content.uid}>{content.message}</li>
+                            ))}
+                        </ul>
+                    </NoticeBox>
                 )}
             </ModalContent>
             <ModalActions>

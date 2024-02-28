@@ -1,5 +1,6 @@
 // @flow
 import { useDataMutation } from '@dhis2/app-runtime';
+import { v4 as uuid } from 'uuid';
 
 const trackedEntityDelete = {
     resource: 'tracker?async=false&importStrategy=DELETE',
@@ -9,15 +10,16 @@ const trackedEntityDelete = {
     }),
 };
 
-const processErrorReports = (error) => {
+const processErrorReports = (error): Array<{ message: string, uid: string }> => {
     // $FlowFixMe[prop-missing]
     const errorReports = error?.details?.validationReport?.errorReports;
-    return errorReports?.length > 0
-        ? errorReports.reduce((acc, errorReport) => `${acc} ${errorReport.message}`, '')
-        : error.message;
+    return errorReports?.length > 0 ? errorReports : [{ uid: uuid(), message: error.message }];
 };
 
-export const useDeleteTrackedEntity = (onSuccess?: () => void, onError?: (message: string) => void) => {
+export const useDeleteTrackedEntity = (
+    onSuccess?: () => void,
+    onError?: (errorReports: Array<{ message: string, uid: string }>) => void,
+) => {
     const [deleteMutation, { loading: deleteLoading }] = useDataMutation(trackedEntityDelete, {
         onComplete: () => {
             onSuccess && onSuccess();
