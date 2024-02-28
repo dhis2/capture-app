@@ -33,7 +33,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
     onGetUpdateData() {
         const { value, allowMultiple } = this.props;
 
-        if (!value) {
+        if (!value && value !== false) {
             return null;
         }
 

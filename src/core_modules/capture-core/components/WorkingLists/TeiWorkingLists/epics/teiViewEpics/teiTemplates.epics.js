@@ -46,6 +46,7 @@ export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 },
                 callBacks: { onChangeTemplate },
             } = action.payload;
+            debugger;
             const trackedEntityInstanceFilters = {
                 name,
                 program,

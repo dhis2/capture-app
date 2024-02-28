@@ -69,6 +69,7 @@ export const useFiltersOnly = ({
                 type: dataElementTypes.BOOLEAN,
                 header: i18n.t('Follow up'),
                 showInMoreFilters: true,
+                // multiValueFilter: true,
                 transformRecordsFilter: (rawFilter: string) => ({
                     followUp: rawFilter.split(':')[1],
                 }),
