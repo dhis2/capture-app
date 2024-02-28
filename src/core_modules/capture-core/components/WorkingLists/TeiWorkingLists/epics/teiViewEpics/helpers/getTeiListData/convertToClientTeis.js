@@ -31,7 +31,7 @@ export const convertToClientTeis = (
                         id,
                         value: convertServerToClient(value, type),
                         urlPath: featureAvailable(FEATURES.trackerImageEndpoint) ?
-                            `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?dimension=small` :
+                            `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small` :
                             `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
                     };
                 })

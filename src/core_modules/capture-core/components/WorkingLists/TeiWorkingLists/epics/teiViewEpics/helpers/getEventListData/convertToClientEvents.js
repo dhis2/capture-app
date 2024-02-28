@@ -36,11 +36,13 @@ const buildTEIRecord = ({
     apiTEI,
     attributeValuesById,
     trackedEntity,
+    programId,
 }: {
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray,
     apiTEI: ApiTei,
     attributeValuesById: Object,
     trackedEntity: string,
+    programId: string,
 }) =>
     columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
         const value = mainProperty ? apiTEI[id] : attributeValuesById[id];
@@ -48,7 +50,7 @@ const buildTEIRecord = ({
             id,
             value: convertServerToClient(value, type),
             urlPath: featureAvailable(FEATURES.trackerImageEndpoint) ?
-                `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?dimension=small` :
+                `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small` :
                 `/trackedEntityInstances/${trackedEntity}/${id}/image`,
         };
     });
@@ -103,6 +105,7 @@ export const convertToClientEvents = (
                 apiTEI,
                 attributeValuesById,
                 trackedEntity: apiEvent.trackedEntity,
+                programId: apiEvent.program,
             })
             : [];
 
