@@ -7,7 +7,7 @@ import { Button, FlyoutMenu, IconMore16, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -20,7 +20,6 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
-import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { OverflowButton } from '../Buttons';
 import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
 
