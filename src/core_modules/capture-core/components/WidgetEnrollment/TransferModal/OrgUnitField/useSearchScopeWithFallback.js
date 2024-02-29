@@ -6,6 +6,7 @@ type Props = {
     searchText: ?string,
 };
 
+
 export const useSearchScopeWithFallback = ({ searchText }: Props) => {
     const { data: orgUnitRoots, isLoading } = useApiMetadataQuery(
         ['organisationUnits', 'userOrgUnitScope'],
