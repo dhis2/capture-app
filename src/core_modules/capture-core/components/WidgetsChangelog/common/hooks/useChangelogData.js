@@ -54,7 +54,9 @@ export const useChangelogData = ({
             params: {
                 page,
                 pageSize,
-                ...{ sortDirection: sortDirection === DEFAULT_SORT_DIRECTION ? undefined : sortDirection },
+                ...{
+                    order: sortDirection === DEFAULT_SORT_DIRECTION ? undefined : `createdAt:${sortDirection}`,
+                },
             },
         },
         {

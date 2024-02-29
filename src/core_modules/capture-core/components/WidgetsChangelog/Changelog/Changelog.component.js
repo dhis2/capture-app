@@ -76,8 +76,11 @@ export const ChangelogComponent = ({
 
         <ModalActions>
             <ButtonStrip>
-                <Button onClick={() => setIsOpen(false)}>
-                    Close
+                <Button
+                    onClick={() => setIsOpen(false)}
+                    secondary
+                >
+                    {i18n.t('Close')}
                 </Button>
             </ButtonStrip>
         </ModalActions>

@@ -1,9 +1,10 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from '@material-ui/core/';
-import { spacers, IconFileDocument24, Button } from '@dhis2/ui';
+import { spacers, IconFileDocument24, Button, IconMore16, FlyoutMenu, MenuItem } from '@dhis2/ui';
+import { useQueryClient } from 'react-query';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
@@ -13,18 +14,29 @@ import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/
 import type { ProgramStage } from '../../../../metaData';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
+import { FEATURES, useFeature } from '../../../../../capture-core-utils';
+import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWrapper';
+import { OverflowButton } from '../../../Buttons';
+import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
+import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 
 const getStyles = () => ({
     container: {
         flexGrow: 2,
         flexBasis: 0,
     },
-    content: {
+    dataEntryContent: {
         display: 'flex',
         gap: spacers.dp8,
     },
     dataEntryContainer: {
         flexGrow: 1,
+    },
+    headerContainer: {
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     actionsContainer: {
         flexShrink: 0,
@@ -38,12 +50,14 @@ const getStyles = () => ({
 
 type Props = {
     showEditEvent: ?boolean,
+    eventId: string,
     onOpenEditEvent: (orgUnit: Object) => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
     classes: {
         container: string,
-        content: string,
+        headerContainer: string,
+        dataEntryContent: string,
         dataEntryContainer: string,
         actionsContainer: string,
         button: string,
@@ -54,6 +68,7 @@ type Props = {
 const EventDetailsSectionPlain = (props: Props) => {
     const {
         classes,
+        eventId,
         onOpenEditEvent,
         showEditEvent,
         programStage,
@@ -61,6 +76,15 @@ const EventDetailsSectionPlain = (props: Props) => {
         ...passOnProps } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const queryClient = useQueryClient();
+    const supportsChangelog = useFeature(FEATURES.changelogs);
+    const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
+    const [actionsIsOpen, setActionsIsOpen] = useState(false);
+
+    const onSaveExternal = () => {
+        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
+        queryClient.removeQueries(queryKey);
+    };
 
     if (error) {
         return error.errorComponent;
@@ -76,6 +100,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                         dataEntryId={dataEntryIds.SINGLE_EVENT}
                         formFoundation={formFoundation}
                         orgUnit={orgUnit}
+                        onSaveExternal={onSaveExternal}
                         {...passOnProps}
                     /> :
                     // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -112,6 +137,26 @@ const EventDetailsSectionPlain = (props: Props) => {
                         </Button>
                     </ConditionalTooltip>
                 </div>}
+                {supportsChangelog && (
+                    <OverflowButton
+                        open={actionsIsOpen}
+                        onClick={() => setActionsIsOpen(prev => !prev)}
+                        secondary
+                        small
+                        icon={<IconMore16 />}
+                        component={(
+                            <FlyoutMenu dense maxWidth="250px">
+                                <MenuItem
+                                    label={i18n.t('View changelog')}
+                                    onClick={() => {
+                                        setChangeLogIsOpen(true);
+                                        setActionsIsOpen(false);
+                                    }}
+                                />
+                            </FlyoutMenu>
+                        )}
+                    />
+                )}
             </div>
         );
     };
@@ -120,14 +165,26 @@ const EventDetailsSectionPlain = (props: Props) => {
     return orgUnit ? (
         <div className={classes.container}>
             <ViewEventSection
-                header={<ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />}
+                header={(
+                    <div className={classes.headerContainer}>
+                        <ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />
+                        {renderActionsContainer()}
+                    </div>
+                )}
             >
-                <div className={classes.content}>
+                <div className={classes.dataEntryContainer}>
                     {renderDataEntryContainer()}
-                    {renderActionsContainer()}
                 </div>
                 {showEditEvent && <NoticeBox formId={`${dataEntryIds.SINGLE_EVENT}-${dataEntryKeys.EDIT}`} /> }
             </ViewEventSection>
+            {supportsChangelog && changeLogIsOpen && (
+                <EventChangelogWrapper
+                    isOpen
+                    setIsOpen={setChangeLogIsOpen}
+                    eventId={eventId}
+                    formFoundation={programStage.stageForm}
+                />
+            )}
         </div>
     ) : null;
 };

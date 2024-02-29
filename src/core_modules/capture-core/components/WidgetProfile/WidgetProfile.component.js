@@ -133,7 +133,7 @@ const WidgetProfilePlain = ({
                                     {i18n.t('Edit')}
                                 </Button>
                             )}
-                            {supportsChangelog && (
+                            {!readOnlyMode && supportsChangelog && (
                                 <OverflowButton
                                     open={actionsIsOpen}
                                     onClick={() => setActionsIsOpen(prev => !prev)}
