@@ -15,7 +15,7 @@ const styles = () => ({
     },
     image: {
         height: 80,
-        maxWidth: 120,
+        width: 120,
         objectFit: 'contain',
     },
     icon: {
