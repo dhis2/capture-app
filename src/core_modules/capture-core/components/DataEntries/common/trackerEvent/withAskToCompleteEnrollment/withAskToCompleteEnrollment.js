@@ -11,6 +11,7 @@ type Props = {
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
     askCompleteEnrollmentOnEventComplete?: ?boolean,
     isCompleted?: boolean,
+    eventId?: ?string,
     formFoundation: RenderFoundation,
     onSaveAndCompleteEnrollment: (
         eventId: string,
@@ -21,8 +22,14 @@ type Props = {
 };
 
 const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (props: Props) => {
-    const { askCompleteEnrollmentOnEventComplete, onSave, isCompleted, onSaveAndCompleteEnrollment, ...passOnProps } =
-        props;
+    const {
+        askCompleteEnrollmentOnEventComplete,
+        onSave,
+        isCompleted,
+        onSaveAndCompleteEnrollment,
+        eventId,
+        ...passOnProps
+    } = props;
     const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const events = enrollment.events;
     const hasActiveEvents = useMemo(() => events.some(event => event.status === eventStatuses.ACTIVE), [events]);
@@ -31,27 +38,27 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
 
     const handleOnSaveEvent = () => {
         setOpenCompleteModal(false);
-        const { eventId, dataEntryId, formFoundation, saveType } = eventDataToSave.current;
-        onSave(eventId, dataEntryId, formFoundation, saveType);
+        const { itemId, dataEntryId, formFoundation, saveType } = eventDataToSave.current;
+        onSave(itemId, dataEntryId, formFoundation, saveType);
     };
 
     const handleCompleteEnrollment = (updatedEnrollment) => {
         setOpenCompleteModal(false);
-        const { eventId, dataEntryId, formFoundation } = eventDataToSave.current;
-        onSaveAndCompleteEnrollment(eventId, dataEntryId, formFoundation, updatedEnrollment);
+        const { itemId, dataEntryId, formFoundation } = eventDataToSave.current;
+        onSaveAndCompleteEnrollment(itemId, dataEntryId, formFoundation, updatedEnrollment);
     };
 
     const handleOnSave = (
-        eventId: string,
+        itemId: string,
         dataEntryId: string,
         formFoundation: RenderFoundation,
         saveType?: string,
     ) => {
-        eventDataToSave.current = { eventId, dataEntryId, formFoundation, saveType };
+        eventDataToSave.current = { itemId, dataEntryId, formFoundation, saveType };
         if (askCompleteEnrollmentOnEventComplete && (isCompleted || saveType === addEventSaveTypes.COMPLETE)) {
             setOpenCompleteModal(true);
         } else {
-            onSave(eventId, dataEntryId, formFoundation, saveType);
+            onSave(itemId, dataEntryId, formFoundation, saveType);
         }
     };
 
@@ -66,6 +73,7 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
             {isOpenCompleteModal && (
                 <CompleteModal
                     programId={enrollment?.program}
+                    eventId={eventId}
                     onCancel={handleOnSaveEvent}
                     onCompleteEnrollment={handleCompleteEnrollment}
                     enrollment={enrollment}

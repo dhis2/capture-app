@@ -10,6 +10,7 @@ import type { Props } from './completeModal.types';
 
 export const CompleteModal = ({
     programId,
+    eventId,
     enrollment,
     events,
     onCancel,
@@ -58,7 +59,8 @@ export const CompleteModal = ({
         const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
         const eventsToComplete = events.reduce((acc, event) => {
             const { access } = programStages.find(p => p.id === event.programStage) || {};
-            if (event.status === eventStatuses.ACTIVE && access.data.write) {
+            const isCurrentEvent = eventId && event.event === eventId;
+            if (event.status === eventStatuses.ACTIVE && access.data.write && !isCurrentEvent) {
                 return [...acc, { ...event, status: eventStatuses.COMPLETED, updatedAt }];
             }
             return acc;
@@ -70,7 +72,7 @@ export const CompleteModal = ({
             events: eventsToComplete,
         };
         onCompleteEnrollment(enrollmentWithCompletedEvents);
-    }, [events, programStages, enrollment, onCompleteEnrollment, fromClientDate]);
+    }, [events, programStages, enrollment, onCompleteEnrollment, fromClientDate, eventId]);
 
     return hasActiveEvents ? (
         <CompleteEnrollmentAndEventsModalComponent

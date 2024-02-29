@@ -15,6 +15,7 @@ export type PlainProps = {|
     hideWidgets: HideWidgets,
     teiId: string,
     enrollmentId: string,
+    eventId: string,
     program: Program,
     trackedEntityTypeId: string,
     mode: string,

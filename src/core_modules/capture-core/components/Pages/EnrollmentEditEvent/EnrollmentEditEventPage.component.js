@@ -18,6 +18,7 @@ export const EnrollmentEditEventPageComponent = ({
     programStage,
     teiId,
     enrollmentId,
+    eventId,
     trackedEntityTypeId,
     program,
     enrollmentsAsOptions,
@@ -74,6 +75,7 @@ export const EnrollmentEditEventPageComponent = ({
             orgUnitId={orgUnitId}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            eventId={eventId}
             eventStatus={eventStatus}
             initialScheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}

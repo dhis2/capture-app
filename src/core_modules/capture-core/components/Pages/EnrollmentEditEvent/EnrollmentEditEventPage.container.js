@@ -228,6 +228,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             hideWidgets={hideWidgets}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            eventId={eventId}
             trackedEntityTypeId={trackedEntityTypeId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}

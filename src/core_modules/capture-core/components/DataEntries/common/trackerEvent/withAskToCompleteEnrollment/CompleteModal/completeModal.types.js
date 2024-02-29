@@ -2,6 +2,7 @@
 
 export type Props = {|
     programId: string,
+    eventId?: ?string,
     enrollment: ApiEnrollment,
     events: Array<ApiEnrollmentEvent>,
     hasActiveEvents: boolean,

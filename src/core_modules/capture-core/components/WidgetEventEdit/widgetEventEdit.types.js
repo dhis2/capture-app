@@ -12,6 +12,7 @@ export type Props = {|
     orgUnitId: string,
     programId: string,
     enrollmentId: string,
+    eventId: string,
     teiId: string,
     initialScheduleDate?: string,
     assignee?: UserFormField | null,

@@ -56,6 +56,7 @@ export const WidgetEventEditPlain = ({
     programId,
     orgUnitId,
     enrollmentId,
+    eventId,
     teiId,
     assignee,
     onSaveAndCompleteEnrollment,
@@ -140,6 +141,7 @@ export const WidgetEventEditPlain = ({
                             stageId={programStage.id}
                             teiId={teiId}
                             enrollmentId={enrollmentId}
+                            eventId={eventId}
                             eventStatus={eventStatus}
                             onCancelEditEvent={onCancelEditEvent}
                             hasDeleteButton
