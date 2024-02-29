@@ -46,6 +46,14 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     Then the profile widget attributes list contains the text Maria
     And the scope selector list contains the text Maria
 
+  Scenario: You can delete a tracked entity from the profile widget
+    Given you add a new tracked entity in the Malaria focus investigation program
+    When the user clicks the "Back to all stages and events" button 
+    When you open the overflow menu and click the "Delete Focus area" button
+    Then you see the delete tracked entity confirmation modal
+    When you confirm by clicking the "Yes, delete Focus area" button
+    Then you are redirected to the home page
+
   Scenario: User can close the Enrollment Widget
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     And the enrollment widget should be opened

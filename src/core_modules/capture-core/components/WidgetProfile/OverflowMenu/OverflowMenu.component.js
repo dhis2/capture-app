@@ -35,6 +35,7 @@ const MenuPlain = ({
                 small
                 secondary
                 className={classes.iconButton}
+                dataTest="widget-profile-overflow-menu"
                 component={
                     <FlyoutMenu dense>
                         {/* To enable in DHIS2-16764

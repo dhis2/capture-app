@@ -13,7 +13,7 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
     const { deleteMutation, deleteLoading } = useDeleteTrackedEntity(onDeleteSuccess, handleErrors);
 
     return (
-        <Modal>
+        <Modal dataTest="widget-profile-delete-modal">
             <ModalTitle>
                 {i18n.t('Delete {{TETName}}', {
                     TETName: trackedEntityTypeName,
