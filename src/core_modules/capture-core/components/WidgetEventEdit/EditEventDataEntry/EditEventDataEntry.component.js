@@ -39,7 +39,7 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
-import { withAskToCompleteEnrollment } from '../../DataEntry/withAskToCompleteEnrollment';
+import { withAskToCompleteEnrollment } from '../../DataEntries';
 import { actionTypes } from './editEventDataEntry.actions';
 import {
     AOCsectionKey,

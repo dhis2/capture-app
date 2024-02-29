@@ -2,7 +2,8 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { withAskToCreateNew, withAskToCompleteEnrollment, withSaveHandler } from '../../DataEntry';
+import { withAskToCompleteEnrollment } from '../../DataEntries';
+import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';

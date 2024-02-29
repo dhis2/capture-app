@@ -2,9 +2,9 @@
 import React, { useMemo, useCallback } from 'react';
 import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
-import { statusTypes } from '../../../../enrollment';
-import { statusTypes as eventStatuses } from '../../../../events/statusTypes';
+import { getTrackerProgramThrowIfNotFound } from '../../../../../../metaData';
+import { statusTypes } from '../../../../../../enrollment';
+import { statusTypes as eventStatuses } from '../../../../../../events/statusTypes';
 import { CompleteEnrollmentAndEventsModalComponent, CompleteEnrollmentModalComponent } from './CompleteModal.component';
 import type { Props } from './completeModal.types';
 

@@ -3,9 +3,9 @@ import React, { useState, useRef, useMemo } from 'react';
 import { type ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import { CompleteModal } from './CompleteModal';
-import { statusTypes as eventStatuses } from '../../../events/statusTypes';
-import { type RenderFoundation } from '../../../metaData';
-import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { statusTypes as eventStatuses } from '../../../../../events/statusTypes';
+import { type RenderFoundation } from '../../../../../metaData';
+import { addEventSaveTypes } from '../../../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
