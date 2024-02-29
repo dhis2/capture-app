@@ -18,7 +18,6 @@ export const enrollmentSiteActionTypes = {
     ROLLBACK_ENROLLMENT_AND_EVENTS: 'Enrollment.RollbackEnrollmentAndEvents',
     COMMIT_ENROLLMENT_AND_EVENTS: 'Enrollment.CommitEnrollmentAndEvents',
     SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
-    REMOVE_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.RemoveExternalEnrollmentStatus',
 };
 
 export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: ApiAttributeValues) =>
@@ -98,6 +97,3 @@ export const setExternalEnrollmentStatus = (status: string) =>
     actionCreator(enrollmentSiteActionTypes.SET_EXTERNAL_ENROLLMENT_STATUS)({
         status,
     });
-
-export const removeExternalEnrollmentStatus = () =>
-    actionCreator(enrollmentSiteActionTypes.REMOVE_EXTERNAL_ENROLLMENT_STATUS)({});

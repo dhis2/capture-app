@@ -6,7 +6,7 @@ export type Props = {|
     enrollmentId: string,
     programId: string,
     readOnlyMode?: boolean,
-    externalData: {status?: ?string, events?: ?Array<Object> },
+    externalData: { status: { value: ?string }, events?: ?Array<Object> },
     onDelete: () => void,
     onAddNew: () => void,
     onUpdateEnrollmentDate?: (enrollmentDate: string) => void,

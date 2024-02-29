@@ -20,7 +20,6 @@ import {
     updateEnrollmentAndEvents,
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
-    removeExternalEnrollmentStatus,
     setExternalEnrollmentStatus,
 } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
@@ -54,7 +53,6 @@ export const EnrollmentAddEventPageDefault = ({
     }, [dispatch]);
 
     const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
-        dispatch(removeExternalEnrollmentStatus());
         dispatch(commitEnrollmentAndEvents());
         redirect && history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);

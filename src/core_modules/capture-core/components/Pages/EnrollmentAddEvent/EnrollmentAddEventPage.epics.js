@@ -11,7 +11,6 @@ import {
     saveFailed,
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
-    removeExternalEnrollmentStatus,
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
 
 export const saveNewEventSucceededEpic = (action$: InputObservable) =>
@@ -56,7 +55,7 @@ export const saveEventAndCompleteEnrollmentFailedEpic = (action$: InputObservabl
         map((action) => {
             const meta = action.meta;
             return batchActions(
-                [saveFailed(), removeExternalEnrollmentStatus(), rollbackEnrollmentAndEvents(meta.uid)],
+                [saveFailed(), rollbackEnrollmentAndEvents(meta.uid)],
                 'NewEvent.saveEventAndCompleteEnrollmentFailed',
             );
         }),

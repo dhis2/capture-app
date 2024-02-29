@@ -15,7 +15,6 @@ import {
     updateEnrollmentAndEvents,
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
-    removeExternalEnrollmentStatus,
 } from '../../common/EnrollmentOverviewDomain';
 import {
     updateEnrollmentDate as updateTopBarEnrollmentDate,
@@ -138,7 +137,6 @@ export const EnrollmentPageDefault = () => {
         [dispatch],
     );
     const onUpdateEnrollmentStatusSuccess = useCallback(() => {
-        dispatch(removeExternalEnrollmentStatus());
         dispatch(commitEnrollmentAndEvents());
     }, [dispatch]);
 

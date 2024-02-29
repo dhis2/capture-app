@@ -5,12 +5,11 @@ import { enrollmentSiteActionTypes } from '../../components/Pages/common/Enrollm
 export const widgetEnrollmentDesc = createReducerDescription(
     {
         [enrollmentSiteActionTypes.SET_EXTERNAL_ENROLLMENT_STATUS]: (state, action) => ({
-            status: action.payload.status,
+            status: { value: action.payload.status },
         }),
-        [enrollmentSiteActionTypes.REMOVE_EXTERNAL_ENROLLMENT_STATUS]: () => ({ status: null }),
     },
     'widgetEnrollment',
     {
-        status: null,
+        status: { value: null },
     },
 );

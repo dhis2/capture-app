@@ -19,7 +19,6 @@ import {
     rollbackEnrollmentAndEvents,
     commitEnrollmentAndEvents,
     enrollmentSiteActionTypes,
-    removeExternalEnrollmentStatus,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { TrackerProgram } from '../../../metaData/Program';
 import {
@@ -201,7 +200,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
                 actions = [...actions, rollbackEnrollmentEvent(eventContainer.event.eventId)];
             }
             if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR) {
-                actions = [...actions, rollbackEnrollmentAndEvents(), removeExternalEnrollmentStatus()];
+                actions = [...actions, rollbackEnrollmentAndEvents()];
             }
             return batchActions(actions);
         }));

@@ -11,7 +11,6 @@ import {
     updateEnrollmentAndEvents,
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
-    removeExternalEnrollmentStatus,
     setExternalEnrollmentStatus,
 } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
@@ -149,7 +148,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch]);
 
     const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
-        dispatch(removeExternalEnrollmentStatus());
         dispatch(commitEnrollmentAndEvents());
         redirect && history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
