@@ -63,12 +63,14 @@ export class TeiRegistrationFactory {
         cachedOptionSets,
         dataEntryFormConfig,
         locale,
+        minorServerVersion,
     }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
+            minorServerVersion,
         });
         this.dataEntryFormConfig = dataEntryFormConfig;
     }

@@ -21,12 +21,12 @@ And('you create a new tei in Child programme from Ngelehun CHC', () => {
         .eq(1)
         .type('1999-09-01')
         .blur();
-    cy.get('[data-test="d2-form-component"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Breaking')
         .blur();
-    cy.get('[data-test="d2-form-component"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('TheGlass')
@@ -68,7 +68,7 @@ And('you enroll the tei from Njandama MCHP', () => {
         .contains('Enroll Breaking TheGlass in this program')
         .click();
 
-    cy.get('[data-test="d2-form-component"]')
+    cy.get('[data-test="d2-section"]')
         .find('[data-test="capture-ui-input"]')
         .eq(8)
         .type('1999-09-01')

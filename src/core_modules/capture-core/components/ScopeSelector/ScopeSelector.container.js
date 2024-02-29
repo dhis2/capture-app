@@ -7,10 +7,10 @@ import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
 
-const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName, displayName) => {
+const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName, displayName, ouNameError) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
-    if (selectedOrgUnitId && (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
+    if (!ouNameError && selectedOrgUnitId && (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
         return false;
     }
     return !lockedSelectorLoads;
@@ -33,7 +33,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
 }) => {
     const dispatch = useDispatch();
     const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: undefined, id: selectedOrgUnitId });
-    const { displayName } = useOrgUnitName(selectedOrgUnit.id);
+    const { displayName, error: ouNameError } = useOrgUnitName(selectedOrgUnit.id);
 
     useEffect(() => {
         if (displayName && selectedOrgUnit.name !== displayName) {
@@ -42,7 +42,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     }, [displayName, selectedOrgUnit, setSelectedOrgUnit]);
 
     useEffect(() => {
-        if (selectedOrgUnitId && !selectedOrgUnit.id) {
+        if (selectedOrgUnitId && selectedOrgUnit.id !== selectedOrgUnitId) {
             selectedOrgUnitId && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
         }
     }, [selectedOrgUnitId, selectedOrgUnit, setSelectedOrgUnit]);
@@ -58,7 +58,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             previousOrgUnitId: app.previousOrgUnitId,
         }
     ));
-    const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnit.id, selectedOrgUnit.name, displayName);
+    const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnit.id, selectedOrgUnit.name, displayName, ouNameError);
 
     return (
         <ScopeSelectorComponent
@@ -73,7 +73,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             onSetProgramId={onSetProgramId}
             onSetOrgUnit={handleSetOrgUnit}
             previousOrgUnitId={previousOrgUnitId}
-            selectedOrgUnit={selectedOrgUnit}
+            selectedOrgUnit={{ ...selectedOrgUnit, name: ouNameError ? undefined : selectedOrgUnit.name }}
             selectedOrgUnitId={selectedOrgUnitId}
             selectedProgramId={selectedProgramId}
             selectedCategories={selectedCategories}

@@ -12,10 +12,8 @@ import type
     CachedTrackedEntityType,
     CachedTrackedEntityTypeAttribute,
     CachedTrackedEntityTypeTranslation,
-    CachedTrackedEntityAttribute,
-    CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
-import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
+import type { ConstructorInput } from './trackedEntityTypeFactory.types';
 
 export class TrackedEntityTypeFactory {
     static translationPropertyNames = {
@@ -29,17 +27,19 @@ export class TrackedEntityTypeFactory {
     searchGroupFactory: SearchGroupFactory;
     teiRegistrationFactory: TeiRegistrationFactory;
 
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
-        dataEntryFormConfig: ?DataEntryFormConfig,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        locale,
+        dataEntryFormConfig,
+        minorServerVersion,
+    }: ConstructorInput) {
         this.locale = locale;
         this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
+            minorServerVersion,
         });
         this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
@@ -51,6 +51,7 @@ export class TrackedEntityTypeFactory {
             cachedOptionSets,
             dataEntryFormConfig,
             locale,
+            minorServerVersion,
         });
     }
 
@@ -67,14 +68,15 @@ export class TrackedEntityTypeFactory {
 
     async _buildAttributes(
         cachedTrackedEntityTypeAttributes: Array<CachedTrackedEntityTypeAttribute>): Promise<Array<DataElement>> {
-        const attributePromises = cachedTrackedEntityTypeAttributes.map(async (teta) => {
+        const attributePromises = cachedTrackedEntityTypeAttributes.map<Promise<DataElement | null>>(async (teta) => {
             const attribute = await this.dataElementFactory.build(teta);
             return attribute;
         });
-        const attributes = await Promise.all(attributePromises);
+        const attributes: Array<DataElement | null> = await Promise.all(attributePromises);
 
         return attributes
-            .filter(a => a);
+            // $FlowFixMe
+            .filter<DataElement>(attribute => attribute);
     }
 
     async build(cachedType: CachedTrackedEntityType) {

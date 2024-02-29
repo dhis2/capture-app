@@ -8,12 +8,14 @@ export async function buildTrackedEntityTypes({
     cachedTrackedEntityAttributes,
     cachedOptionSets,
     locale,
+    minorServerVersion,
 }: BuildTrackedEntityTypesInput) {
-    const trackedEntityTypeFactory = new TrackedEntityTypeFactory(
+    const trackedEntityTypeFactory = new TrackedEntityTypeFactory({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
         locale,
-    );
+        minorServerVersion,
+    });
 
     // $FlowFixMe
     await [...cachedTrackedEntityTypes.values()].asyncForEach(async (cachedType) => {
