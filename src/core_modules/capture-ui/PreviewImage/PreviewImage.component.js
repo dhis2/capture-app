@@ -39,11 +39,12 @@ const PreviewImagePlain = (props: {
     },
 }) => {
     const { url, classes } = props;
+    const linkUrl = url.replace(/.dimension=small/g, '');
 
     return (
         <div className={classes.container}>
             <a
-                href={url}
+                href={linkUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(event) => { event.stopPropagation(); }}
