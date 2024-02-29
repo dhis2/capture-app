@@ -57,12 +57,14 @@ const buildMainSection = async ({
     optionSets,
     programTrackedEntityAttributes,
     querySingleResource,
+    minorServerVersion,
 }: {
     trackedEntityType: TrackedEntityType,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSet>,
     programTrackedEntityAttributes?: ?Array<ProgramTrackedEntityAttribute>,
     querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
 }) => {
     const section = new Section((o) => {
         o.id = Section.MAIN_SECTION_ID;
@@ -82,6 +84,7 @@ const buildMainSection = async ({
         optionSets,
         section,
         querySingleResource,
+        minorServerVersion,
     });
     return section;
 };
@@ -92,12 +95,14 @@ const buildElementsForSection = async ({
     optionSets,
     section,
     querySingleResource,
+    minorServerVersion,
 }: {
     programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSet>,
     section: Section,
     querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
 }) => {
     for (const trackedEntityAttribute of programTrackedEntityAttributes) {
         // eslint-disable-next-line no-await-in-loop
@@ -106,6 +111,7 @@ const buildElementsForSection = async ({
             trackedEntityAttributes,
             optionSets,
             querySingleResource,
+            minorServerVersion,
         );
         element && section.addElement(element);
     }
@@ -119,6 +125,7 @@ const buildSection = async ({
     sectionCustomLabel,
     sectionCustomId,
     querySingleResource,
+    minorServerVersion,
 }: {
     programTrackedEntityAttributes?: Array<ProgramTrackedEntityAttribute>,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
@@ -126,6 +133,7 @@ const buildSection = async ({
     sectionCustomLabel: string,
     sectionCustomId: string,
     querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
 }) => {
     if (!programTrackedEntityAttributes?.length) {
         return null;
@@ -142,11 +150,12 @@ const buildSection = async ({
         optionSets,
         section,
         querySingleResource,
+        minorServerVersion,
     });
     return section;
 };
 
-export const buildFormFoundation = async (program: any, querySingleResource: QuerySingleResource) => {
+export const buildFormFoundation = async (program: any, querySingleResource: QuerySingleResource, minorServerVersion: number) => {
     const { programSections, trackedEntityType } = program;
     const programTrackedEntityAttributes = getProgramTrackedEntityAttributes(program.programTrackedEntityAttributes);
     const trackedEntityTypeId: string = getTrackedEntityTypeId(program);
@@ -189,6 +198,7 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
                     sectionCustomLabel: programSection.displayFormName,
                     sectionCustomId: programSection.id,
                     querySingleResource,
+                    minorServerVersion,
                 });
                 section && renderFoundation.addSection(section);
             }
@@ -200,6 +210,7 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
             optionSets,
             programTrackedEntityAttributes,
             querySingleResource,
+            minorServerVersion,
         });
         section && renderFoundation.addSection(section);
     }
@@ -210,7 +221,8 @@ export const build = async (
     program: any,
     setFormFoundation?: (formFoundation: RenderFoundation) => void,
     querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
 ) => {
-    const formFoundation = (await buildFormFoundation(program, querySingleResource)) || {};
+    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion)) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

@@ -28,14 +28,11 @@ const getSuitableEnrollmentId = (enrollments, teiId) => {
 };
 
 export const useEnrollmentInfo = (enrollmentId: string, programId: string, teiId: string) => {
-    const enrollments = useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
-    const tetId = useSelector(({ enrollmentPage }) => enrollmentPage.tetId);
-    const programHasEnrollments = enrollments && enrollments.some(({ program }) => programId === program);
+    const { enrollments, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const programHasEnrollments = enrollments && enrollments.length > 0;
     const programHasActiveEnrollments = programHasEnrollments && enrollments
-        .filter(({ program }) => program === programId)
         .some(({ status }) => status === 'ACTIVE');
     const enrollmentsOnProgramContainEnrollmentId = enrollments && enrollments
-        .filter(({ program }) => program === programId)
         .some(({ enrollment }) => enrollmentId === enrollment);
     const onlyEnrollOnce = programId && programCollection.get(programId)?.onlyEnrollOnce;
     const enrollmentsInProgram = enrollments && enrollments.filter(({ program }) => program === programId);
