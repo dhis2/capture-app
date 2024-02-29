@@ -19,7 +19,7 @@ export class ProgramStage {
     _autoGenerateEvent: boolean;
     _openAfterEnrollment: boolean;
     _allowGenerateNextVisit: boolean;
-    _remindCompleted: boolean;
+    _askCompleteEnrollmentOnEventComplete: boolean;
     _generatedByEnrollmentDate: boolean;
     _repeatable: boolean;
     _hideDueDate: boolean;
@@ -116,12 +116,12 @@ export class ProgramStage {
         this._allowGenerateNextVisit = generateNextVisit;
     }
 
-    get remindCompleted(): boolean {
-        return this._remindCompleted;
+    get askCompleteEnrollmentOnEventComplete(): boolean {
+        return this._askCompleteEnrollmentOnEventComplete;
     }
 
-    set remindCompleted(remindCompleted: boolean) {
-        this._remindCompleted = remindCompleted;
+    set askCompleteEnrollmentOnEventComplete(askCompleteEnrollmentOnEventComplete: boolean) {
+        this._askCompleteEnrollmentOnEventComplete = askCompleteEnrollmentOnEventComplete;
     }
 
     get hideDueDate(): boolean {

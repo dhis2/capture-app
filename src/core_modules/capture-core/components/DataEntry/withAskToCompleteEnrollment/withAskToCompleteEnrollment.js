@@ -9,7 +9,7 @@ import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addE
 
 type Props = {
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
-    remindCompleted?: ?boolean,
+    askCompleteEnrollmentOnEventComplete?: ?boolean,
     isCompleted?: boolean,
     formFoundation: RenderFoundation,
     onSaveAndCompleteEnrollment: (
@@ -21,7 +21,8 @@ type Props = {
 };
 
 const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (props: Props) => {
-    const { remindCompleted, onSave, isCompleted, onSaveAndCompleteEnrollment, ...passOnProps } = props;
+    const { askCompleteEnrollmentOnEventComplete, onSave, isCompleted, onSaveAndCompleteEnrollment, ...passOnProps } =
+        props;
     const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const events = enrollment.events;
     const hasActiveEvents = useMemo(() => events.some(event => event.status === eventStatuses.ACTIVE), [events]);
@@ -47,7 +48,7 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         saveType?: string,
     ) => {
         eventDataToSave.current = { eventId, dataEntryId, formFoundation, saveType };
-        if (remindCompleted && (isCompleted || saveType === addEventSaveTypes.COMPLETE)) {
+        if (askCompleteEnrollmentOnEventComplete && (isCompleted || saveType === addEventSaveTypes.COMPLETE)) {
             setOpenCompleteModal(true);
         } else {
             onSave(eventId, dataEntryId, formFoundation, saveType);
@@ -58,7 +59,7 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         <>
             <InnerComponent
                 {...passOnProps}
-                remindCompleted={remindCompleted}
+                askCompleteEnrollmentOnEventComplete={askCompleteEnrollmentOnEventComplete}
                 onSave={handleOnSave}
                 isCompleted={isCompleted}
             />

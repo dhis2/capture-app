@@ -10,7 +10,7 @@ type Props = {
     onConfirmCreateNew: (itemId: string) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
     allowGenerateNextVisit?: ?boolean,
-    remindCompleted?: ?boolean,
+    askCompleteEnrollmentOnEventComplete?: ?boolean,
     availableProgramStages?: ?Array<Object>,
     isCompleted?: boolean,
     itemId: string
@@ -41,7 +41,7 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
                 this.props.availableProgramStages &&
                 this.props.availableProgramStages.length > 0 &&
                 (this.props.isCompleted || saveType === addEventSaveTypes.COMPLETE) &&
-                !this.props.remindCompleted
+                !this.props.askCompleteEnrollmentOnEventComplete
             ) {
                 this.setState({ isOpen: true });
             } else {

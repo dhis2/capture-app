@@ -163,7 +163,7 @@ export const Validated = ({
             {...passOnProps}
             stage={stage}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
-            remindCompleted={stage.remindCompleted}
+            askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
             availableProgramStages={availableProgramStages}
             ready={ready}
             id={dataEntryId}
