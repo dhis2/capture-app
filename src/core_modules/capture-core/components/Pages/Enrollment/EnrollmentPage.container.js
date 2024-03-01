@@ -3,12 +3,13 @@ import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
-import type { EnrollmentPageStatus } from './EnrollmentPage.types';
 import {
-    cleanEnrollmentPage,
-    fetchEnrollmentPageInformation,
-    fetchEnrollments,
-    updateEnrollmentAccessLevel,
+    openEnrollmentPage,
+    closeEnrollmentPage,
+    changedEnrollmentId,
+    changedTeiId,
+    changedProgramId,
+    resetTeiId,
     showDefaultViewOnEnrollmentPage,
     showMissingMessageViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
@@ -16,7 +17,7 @@ import {
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
-import { enrollmentPageStatuses, enrollmentAccessLevels } from './EnrollmentPage.constants';
+import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { getScopeInfo } from '../../../metaData';
 import {
     buildEnrollmentsAsOptions,
@@ -30,7 +31,10 @@ const useComponentLifecycle = () => {
 
     const { scopeType } = useScopeInfo(programId);
     const { setEnrollmentId } = useSetEnrollmentId();
-    const { enrollmentAccessLevel, programId: enrollmentProgramId } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const {
+        enrollmentPageStatus,
+        programId: enrollmentProgramId,
+    } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
     const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, autoEnrollmentId } = useEnrollmentInfo(enrollmentId, programId, teiId);
     useEffect(() => {
@@ -39,7 +43,7 @@ const useComponentLifecycle = () => {
             setEnrollmentId({ enrollmentId: autoEnrollmentId, shouldReplaceHistory: true });
         } else if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
-        } else if (programId === enrollmentProgramId) {
+        } else if (programId === enrollmentProgramId && enrollmentPageStatus !== enrollmentPageStatuses.LOADING) {
             dispatch(showMissingMessageViewOnEnrollmentPage());
         } else {
             dispatch(showLoadingViewOnEnrollmentPage());
@@ -54,18 +58,18 @@ const useComponentLifecycle = () => {
         scopeType,
         enrollmentId,
         autoEnrollmentId,
-        enrollmentAccessLevel,
+        enrollmentPageStatus,
         enrollmentProgramId,
     ]);
 
-    useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId]);
+    useEffect(() => () => dispatch(closeEnrollmentPage()), [dispatch]);
 };
 
-// dirty fix for scenarios where you deselect the program.
-// This should be removed as part of fixing the url sync issue, https://jira.dhis2.org/browse/TECH-580
 const useComputedEnrollmentPageStatus = () => {
-    const enrollmentPageStatus: EnrollmentPageStatus =
-    useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
+    const {
+        enrollmentPageStatus,
+        programId: reduxProgramId,
+    } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
     const { teiId, programId, enrollmentId } = useLocationQuery();
     const { scopeType } = useScopeInfo(programId);
@@ -75,7 +79,7 @@ const useComputedEnrollmentPageStatus = () => {
             return enrollmentPageStatuses.MISSING_SELECTIONS;
         }
         if (enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
-            !(programId && teiId && enrollmentId)) {
+            !(programId && teiId && enrollmentId && programId === reduxProgramId)) {
             return enrollmentPageStatuses.LOADING;
         }
         return enrollmentPageStatus;
@@ -85,6 +89,7 @@ const useComputedEnrollmentPageStatus = () => {
         enrollmentId,
         teiId,
         programId,
+        reduxProgramId,
     ]);
 };
 
@@ -98,25 +103,12 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
 
     useEffect(() => {
-        dispatch(fetchEnrollmentPageInformation());
-    },
-    [
-        dispatch,
-        teiId,
-    ]);
+        dispatch(openEnrollmentPage());
+    }, [dispatch]);
 
-    useEffect(() => {
-        programId ?
-            dispatch(fetchEnrollments()) :
-            dispatch(updateEnrollmentAccessLevel({
-                programId,
-                accessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
-            }));
-    },
-    [
-        dispatch,
-        programId,
-    ]);
+    useEffect(() => { dispatch(changedEnrollmentId(enrollmentId)); }, [dispatch, enrollmentId]);
+    useEffect(() => { dispatch(teiId ? changedTeiId({ teiId }) : resetTeiId()); }, [dispatch, teiId]);
+    useEffect(() => { dispatch(changedProgramId({ programId })); }, [dispatch, programId]);
 
     const error: boolean =
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
