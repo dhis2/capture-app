@@ -72,7 +72,7 @@ const WidgetProfilePlain = ({
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program, trackedEntityInstanceAttributes);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
