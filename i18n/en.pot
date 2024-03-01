@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
-"PO-Revision-Date: 2024-02-14T10:01:26.732Z\n"
+"POT-Creation-Date: 2024-03-01T19:32:05.081Z\n"
+"PO-Revision-Date: 2024-03-01T19:32:05.081Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -319,6 +319,11 @@ msgstr "{{programStageName}} completed"
 
 msgid "Would you like to complete the enrollment and all active events as well?"
 msgstr "Would you like to complete the enrollment and all active events as well?"
+
+msgid "{{count}} event in {{programStageName}}"
+msgid_plural "{{count}} event in {{programStageName}}"
+msgstr[0] "{{count}} event in {{programStageName}}"
+msgstr[1] "{{count}} events in {{programStageName}}"
 
 msgid "Yes, complete enrollment and events"
 msgstr "Yes, complete enrollment and events"
@@ -953,6 +958,11 @@ msgstr "Search {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Search by attributes"
 
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] "Fill in at least {{count}} attribute to search"
+msgstr[1] "Fill in at least {{count}} attributes to search"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
 
@@ -1302,11 +1312,21 @@ msgstr "Scheduled automatically for {{suggestedScheduleDate}}"
 msgid "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr "The scheduled date matches the suggested date, but can be changed if needed."
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural "The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
+msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
+
 msgid "after"
 msgstr "after"
 
 msgid "before"
 msgstr "before"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
 msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"

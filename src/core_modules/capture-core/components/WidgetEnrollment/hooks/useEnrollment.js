@@ -47,7 +47,7 @@ export const useEnrollment = ({
         if (externalData?.status?.value) {
             setEnrollment(e => ({ ...e, status: externalData?.status?.value }));
         }
-    }, [setEnrollment, externalData?.status?.value]);
+    }, [setEnrollment, externalData?.status]);
 
     const updateEnrollmentDate = useUpdateEnrollment({
         enrollment,
