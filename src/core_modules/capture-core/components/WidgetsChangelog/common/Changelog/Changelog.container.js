@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { Modal } from '@dhis2/ui';
-import { useChangelogData } from '../common/hooks';
+import { useChangelogData } from '../hooks';
 import { ChangelogComponent } from './Changelog.component';
 import { CHANGELOG_ENTITY_TYPES } from './index';
-import { LoadingMaskElementCenter } from '../../LoadingMasks';
+import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import type { ItemDefinitions } from './Changelog.types';
 
 type Props = {
@@ -13,16 +13,16 @@ type Props = {
     isOpen: boolean,
     setIsOpen: (boolean | boolean => boolean) => void,
     dataItemDefinitions: ItemDefinitions,
-    metadataItemDefinitions: ItemDefinitions,
+    programId?: string,
 }
 
 export const Changelog = ({
     entityId,
     entityType,
+    programId,
     isOpen,
     setIsOpen,
     dataItemDefinitions,
-    metadataItemDefinitions,
 }: Props) => {
     const {
         records,
@@ -35,8 +35,8 @@ export const Changelog = ({
     } = useChangelogData({
         entityId,
         entityType,
+        programId,
         dataItemDefinitions,
-        metadataItemDefinitions,
     });
 
     if (isLoading) {

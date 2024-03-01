@@ -4,16 +4,16 @@ import { v4 as uuid } from 'uuid';
 import { useMemo, useState } from 'react';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
-import { CHANGELOG_ENTITY_TYPES, QUERY_KEYS_BY_ENTITY_TYPE } from '../../Changelog/Changelog.constants';
-import type { Change, ChangelogRecord, ItemDefinitions, SortDirection } from '../../Changelog/Changelog.types';
+import { CHANGELOG_ENTITY_TYPES, QUERY_KEYS_BY_ENTITY_TYPE } from '../Changelog/Changelog.constants';
+import type { Change, ChangelogRecord, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
 import { convertServerToClient } from '../../../../converters';
 import { convert } from '../../../../converters/clientToList';
 
 type Props = {
     entityId: string,
+    programId?: string,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
     dataItemDefinitions: ItemDefinitions,
-    metadataItemDefinitions: ItemDefinitions,
 }
 
 const DEFAULT_PAGE_SIZE = 10;
@@ -23,15 +23,10 @@ const getMetadataItemDefinition = (
     elementKey: string,
     change: Change,
     dataItemDefinitions: ItemDefinitions,
-    metadataItemDefinitions: ItemDefinitions,
 ) => {
     const { dataElement, trackedEntityAttribute } = change;
-    let metadataElement = metadataItemDefinitions[elementKey];
     const fieldId = dataElement ?? trackedEntityAttribute;
-
-    if (!metadataElement && fieldId) {
-        metadataElement = dataItemDefinitions[fieldId];
-    }
+    const metadataElement = fieldId ? dataItemDefinitions[fieldId] : dataItemDefinitions[elementKey];
 
     return { metadataElement, fieldId };
 };
@@ -40,7 +35,6 @@ export const useChangelogData = ({
     entityId,
     entityType,
     dataItemDefinitions,
-    metadataItemDefinitions,
 }: Props) => {
     const [page, setPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(DEFAULT_PAGE_SIZE);
@@ -75,7 +69,6 @@ export const useChangelogData = ({
                 elementKey,
                 change,
                 dataItemDefinitions,
-                metadataItemDefinitions,
             );
             if (!metadataElement) return null;
 
@@ -105,7 +98,7 @@ export const useChangelogData = ({
                 currentValue,
             };
         }).filter(Boolean);
-    }, [data, dataItemDefinitions, fromServerDate, metadataItemDefinitions]);
+    }, [data, dataItemDefinitions, fromServerDate]);
 
     return {
         records,

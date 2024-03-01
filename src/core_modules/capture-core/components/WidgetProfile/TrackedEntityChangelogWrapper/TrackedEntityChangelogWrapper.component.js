@@ -4,15 +4,12 @@ import { dataElementTypes, RenderFoundation } from '../../../metaData';
 import { useFormFoundation } from '../DataEntry/hooks';
 import type { DataElement } from '../../../metaData';
 import type { Props } from './TrackedEntityChangelogWrapper.types';
-import { Changelog, CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
+import { WidgetTrackedEntityChangelog } from '../../WidgetsChangelog';
 
 export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, ...passOnProps }: Props) => {
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);
 
-    const {
-        dataItemDefinitions,
-        metadataItemDefinitions,
-    } = useMemo(() => {
+    const dataItemDefinitions = useMemo(() => {
         if (!Object.keys(formFoundation)?.length) return {};
         const elements = formFoundation.getElements();
         const contextLabels = formFoundation.getLabels();
@@ -50,18 +47,17 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, ...passOnProp
         }, {});
 
         return {
-            dataItemDefinitions: fieldElementsById,
-            metadataItemDefinitions: fieldElementsContext,
+            ...fieldElementsById,
+            ...fieldElementsContext,
         };
     }, [formFoundation]);
 
     return (
-        <Changelog
+        <WidgetTrackedEntityChangelog
             {...passOnProps}
-            entityType={CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY}
-            entityId={teiId}
+            teiId={teiId}
+            programId={programAPI.id}
             dataItemDefinitions={dataItemDefinitions}
-            metadataItemDefinitions={metadataItemDefinitions}
         />
     );
 };

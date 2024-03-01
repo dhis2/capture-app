@@ -3,13 +3,10 @@ import React, { useMemo } from 'react';
 import type { DataElement } from '../../../metaData';
 import { dataElementTypes } from '../../../metaData';
 import type { Props } from './EventChangelogWrapper.types';
-import { Changelog, CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
+import { WidgetEventChangelog } from '../../WidgetsChangelog';
 
 export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps }: Props) => {
-    const {
-        dataItemDefinitions,
-        metadataItemDefinitions,
-    } = useMemo(() => {
+    const dataItemDefinitions = useMemo(() => {
         const elements = formFoundation.getElements();
         const contextLabels = formFoundation.getLabels();
 
@@ -46,18 +43,16 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps 
         }, {});
 
         return {
-            dataItemDefinitions: fieldElementsById,
-            metadataItemDefinitions: fieldElementsContext,
+            ...fieldElementsById,
+            ...fieldElementsContext,
         };
     }, [formFoundation]);
 
     return (
-        <Changelog
+        <WidgetEventChangelog
             {...passOnProps}
-            entityId={eventId}
-            entityType={CHANGELOG_ENTITY_TYPES.EVENT}
+            eventId={eventId}
             dataItemDefinitions={dataItemDefinitions}
-            metadataItemDefinitions={metadataItemDefinitions}
         />
     );
 };

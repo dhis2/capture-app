@@ -40,6 +40,8 @@ const getStyles = () => ({
     },
     actionsContainer: {
         flexShrink: 0,
+        display: 'flex',
+        gap: spacers.dp4,
     },
     button: {
         whiteSpace: 'nowrap',
