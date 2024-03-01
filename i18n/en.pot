@@ -152,6 +152,9 @@ msgstr "Complete event"
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Basic info"
 
+msgid "{{ stageName }} - Assignee"
+msgstr "{{ stageName }} - Assignee"
+
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Status"
 
@@ -659,11 +662,14 @@ msgstr "Stop using new Enrollment dashboard for {{programName}}"
 msgid "Opt out for {{programName}}"
 msgstr "Opt out for {{programName}}"
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
 
-msgid "There is an error while opening this enrollment. Please enter a valid url."
-msgstr "There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Program with id \"{{programId}}\" does not exist"
 
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."
@@ -892,9 +898,6 @@ msgid ""
 msgstr ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-
-msgid "Feedbacks"
-msgstr "Feedbacks"
 
 msgid "Show all events"
 msgstr "Show all events"

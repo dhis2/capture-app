@@ -17,6 +17,15 @@ import { FormFieldPlugin } from './FormFieldPlugin';
 import { FormFieldPluginConfig } from '../../metaData/FormFieldPluginConfig';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
+
+const styles = {
+    horizontalSection: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+    },
+};
+
 type FormsValues = {
     [id: string]: any
 };
@@ -178,8 +187,8 @@ export class D2SectionFieldsComponent extends Component<Props> {
     getInvalidFields() {
         const messagesInvalidFields = Object.keys(this.props.rulesMessages).reduce((accInvalidFields, key) => {
             if (this.props.rulesMessages[key] &&
-                    (this.props.rulesMessages[key][messageStateKeys.ERROR] ||
-                        this.props.rulesMessages[key][messageStateKeys.ERROR_ON_COMPLETE])) {
+                (this.props.rulesMessages[key][messageStateKeys.ERROR] ||
+                    this.props.rulesMessages[key][messageStateKeys.ERROR_ON_COMPLETE])) {
                 accInvalidFields[key] = true;
             }
             return accInvalidFields;
@@ -273,19 +282,24 @@ export class D2SectionFieldsComponent extends Component<Props> {
         this.buildRulesCompulsoryErrors();
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <CustomFormHOC
-                formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
-                id={formId}
-                fields={this.getFieldConfigWithRulesEffects()}
-                dataElements={this.formFields}
-                values={values}
-                onUpdateField={this.handleUpdateField}
-                onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                validateIfNoUIData
-                loadNr={loadNr}
-                {...passOnProps}
-            />
+            <div
+                data-test="d2-section-fields"
+                style={this.props.formHorizontal ? styles.horizontalSection : {}}
+            >
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                <CustomFormHOC
+                    formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
+                    id={formId}
+                    fields={this.getFieldConfigWithRulesEffects()}
+                    dataElements={this.formFields}
+                    values={values}
+                    onUpdateField={this.handleUpdateField}
+                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                    validateIfNoUIData
+                    loadNr={loadNr}
+                    {...passOnProps}
+                />
+            </div>
         );
     }
 }

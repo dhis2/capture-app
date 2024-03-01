@@ -1,3 +1,52 @@
+## [100.57.5](https://github.com/dhis2/capture-app/compare/v100.57.4...v100.57.5) (2024-02-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f3cb465](https://github.com/dhis2/capture-app/commit/f3cb465aa8d3d99275e995eda05075070ed6c393))
+
+## [100.57.4](https://github.com/dhis2/capture-app/compare/v100.57.3...v100.57.4) (2024-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16016] handle multi-text in v40 ([#3491](https://github.com/dhis2/capture-app/issues/3491)) ([25d79cc](https://github.com/dhis2/capture-app/commit/25d79ccb9a8a880815d93659821348d1ebea253f))
+
+## [100.57.3](https://github.com/dhis2/capture-app/compare/v100.57.2...v100.57.3) (2024-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-16318] enrollment page url management ([#3522](https://github.com/dhis2/capture-app/issues/3522)) ([0abec43](https://github.com/dhis2/capture-app/commit/0abec430ac4e74907c01b46fcd264194b542539e))
+
+## [100.57.2](https://github.com/dhis2/capture-app/compare/v100.57.1...v100.57.2) (2024-02-26)
+
+
+### Bug Fixes
+
+* [DHIS2-15621] row view broken up in section ([#3457](https://github.com/dhis2/capture-app/issues/3457)) ([ce7282c](https://github.com/dhis2/capture-app/commit/ce7282ca440c1bddae3f02b938d505a9412d9ea6))
+
+## [100.57.1](https://github.com/dhis2/capture-app/compare/v100.57.0...v100.57.1) (2024-02-23)
+
+
+### Bug Fixes
+
+* [DHIS2-16205] Sticky Locked Selector ([#3516](https://github.com/dhis2/capture-app/issues/3516)) ([61158b1](https://github.com/dhis2/capture-app/commit/61158b1097843309ac51187fe41e1af842220f71))
+
+# [100.57.0](https://github.com/dhis2/capture-app/compare/v100.56.0...v100.57.0) (2024-02-19)
+
+
+### Features
+
+* [DHIS2-16527] assign user on first stage registration ([#3530](https://github.com/dhis2/capture-app/issues/3530)) ([54eef90](https://github.com/dhis2/capture-app/commit/54eef906e5c86ab6d65813c337242ff738882c5b))
+
+# [100.56.0](https://github.com/dhis2/capture-app/compare/v100.55.0...v100.56.0) (2024-02-16)
+
+
+### Features
+
+* [DHIS2-12007] Text String Improvements ([#3498](https://github.com/dhis2/capture-app/issues/3498)) ([836368a](https://github.com/dhis2/capture-app/commit/836368ae33d191abf209a2813a6a8cbd26107581))
+
 # [100.55.0](https://github.com/dhis2/capture-app/compare/v100.54.0...v100.55.0) (2024-02-05)
 
 

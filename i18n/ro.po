@@ -1,13 +1,14 @@
 # 
 # Translators:
 # Valeriu Plesca <vplesca@gmail.com>, 2022
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,10 +79,6 @@ msgstr "eroare întâlnită în timpul validării câmpului"
 
 msgid "error"
 msgstr "eroare"
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
-msgstr ""
 
 msgid "This value is validating"
 msgstr "Această valoare se validează"
@@ -162,6 +159,9 @@ msgid "Complete event"
 msgstr "Eveniment complet"
 
 msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Assignee"
 msgstr ""
 
 msgid "{{ stageName }} - Status"
@@ -535,6 +535,9 @@ msgstr "începeți să tastați pentru a căuta"
 msgid "suggestions could not be retrieved"
 msgstr "sugestiile nu au putut fi preluate"
 
+msgid "No results found"
+msgstr "Nu au fost găsite rezultate"
+
 msgid "No items to display"
 msgstr "Nu există elemente pentru afișare"
 
@@ -560,7 +563,7 @@ msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
 msgid "after or equal to {{date}}"
-msgstr "după sau egal cu {{data}}"
+msgstr "după sau egal cu {{date}}"
 
 msgid "before or equal to {{date}}"
 msgstr "înainte sau egal cu {{date}}"
@@ -652,24 +655,17 @@ msgstr ""
 msgid "Opt out for {{programName}}"
 msgstr "Renunțare la {{programName}}"
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-
-msgid "Enrollment Dashboard"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
-msgstr ""
-
-msgid "No feedback for this enrollment yet"
 msgstr ""
 
 msgid "Quick actions"
@@ -749,20 +745,11 @@ msgstr "Unitatea organizațională nu este validă cu programul curent"
 msgid "There was an error opening the Page"
 msgstr "A apărut o eroare la deschiderea paginii"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr ""
-
 msgid "There was an error loading the page"
 msgstr "A apărut o eroare la încărcarea paginii"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Alegeți o unitate de înregistrare pentru a începe raportarea"
-
-msgid "There are no feedbacks for this event"
-msgstr "Nu există feedback pentru acest eveniment"
-
-msgid "There are no indicators for this event"
-msgstr "Nu există indicatori pentru acest eveniment"
 
 msgid "Program stage is invalid"
 msgstr "Etapa programului este nevalidă"
@@ -790,18 +777,6 @@ msgstr "Etapele programului nu au putut fi încărcate"
 
 msgid "Stage"
 msgstr ""
-
-msgid "Enrollment{{escape}} View Event"
-msgstr ""
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr ""
-
-msgid "The enrollment event data could not be found"
-msgstr ""
-
-msgid "There are no feedback for this event"
-msgstr "Nu există feedback pentru acest eveniment"
 
 msgid "Registered events"
 msgstr "Evenimente înregistrate"
@@ -916,18 +891,6 @@ msgid ""
 "relationship"
 msgstr ""
 
-msgid "No one is assigned to this event"
-msgstr ""
-
-msgid "Assign"
-msgstr "Atribuire"
-
-msgid "Event assigned to {{name}}"
-msgstr "Eveniment atribuit lui {{name}}"
-
-msgid "Feedbacks"
-msgstr "Feedback-uri"
-
 msgid "Show all events"
 msgstr "Afișarea tuturor evenimentelor"
 
@@ -939,6 +902,21 @@ msgstr "Evenimentul nu a putut fi încărcat"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Unitatea organizațională nu a putut fi încărcată"
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Programul selectat"
@@ -952,11 +930,11 @@ msgstr "Căutare după atribute"
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
+msgid "The enrollment event data could not be found"
+msgstr ""
+
 msgid "Possible duplicates found"
 msgstr "S-au găsit posibile duplicate"
-
-msgid "No results found"
-msgstr "Nu au fost găsite rezultate"
 
 msgid "An error occurred loading possible duplicates"
 msgstr "A apărut o eroare la încărcarea posibilelor duplicate"
@@ -1091,11 +1069,23 @@ msgstr "{{trackedEntityName}} nou în {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Căutare un {{trackedEntityName}} în {{programName}}"
 
-msgid "To work with the selected program,"
+msgid "Assigned to"
 msgstr ""
 
-msgid "open the Tracker Capture app"
+msgid "You don't have access to edit this assignee"
 msgstr ""
+
+msgid "Edit"
+msgstr "Editare"
+
+msgid "No one is assigned to this event"
+msgstr ""
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
+msgstr "Atribuire"
 
 msgid "This program is protected"
 msgstr ""
@@ -1160,6 +1150,30 @@ msgstr ""
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr ""
+
+msgid "Delete polygon"
+msgstr "Lichidare poligon"
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Data înrolării"
 
@@ -1183,6 +1197,12 @@ msgstr "Ultima actualizare {{date}}"
 
 msgid "Cancelled"
 msgstr "Anulat"
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
 
 msgid "Comments about this enrollment"
 msgstr "Comentarii despre această înrolare"
@@ -1307,9 +1327,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "Editare"
-
 msgid "tracked entity instance"
 msgstr ""
 
@@ -1346,7 +1363,7 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Etape și Evenimente"
 
-msgid "New TEI Relationship"
+msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
 msgid "Missing implementation step"
@@ -1399,9 +1416,6 @@ msgid "Download data..."
 msgstr "Descărcare date..."
 
 msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Assigned to"
 msgstr ""
 
 msgid "Registration Date"
@@ -1533,6 +1547,9 @@ msgstr "Eroare la lichidarea evenimentului de înrolare"
 msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
+msgid "Error updating the Assignee"
+msgstr ""
+
 msgid "Set coordinate"
 msgstr "Setarea coordonatelor"
 
@@ -1556,12 +1573,6 @@ msgstr "Pînă la ora"
 
 msgid "Page {{currentPage}}"
 msgstr "Pagina {{currentPage}}"
-
-msgid "Delete polygon"
-msgstr "Lichidare poligon"
-
-msgid "Set area"
-msgstr ""
 
 msgid "Area on map saved"
 msgstr ""

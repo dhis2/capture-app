@@ -6,8 +6,8 @@ import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { convertValue as convertServerToClient } from '../../../converters/serverToClient';
 import { subValueGetterByElementType } from './getSubValueForTei';
-import { isNotValidOptionSet } from '../DataEntry';
 import { Option } from '../../../metaData';
+import { isMultiTextWithoutOptionset } from '../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 
 type InputProgramData = {
     programTrackedEntityAttributes: Array<{
@@ -65,7 +65,7 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
 
                 const acc = await promisedAcc;
 
-                if (isNotValidOptionSet(valueType, optionSet)) {
+                if (isMultiTextWithoutOptionset(valueType, optionSet)) {
                     log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ optionSet }));
                     return acc;
                 }

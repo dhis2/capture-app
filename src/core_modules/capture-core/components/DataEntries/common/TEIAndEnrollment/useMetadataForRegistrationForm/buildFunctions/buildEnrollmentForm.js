@@ -18,6 +18,7 @@ type Props = {|
     cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
     dataEntryFormConfig: ?DataEntryFormConfig,
     locale: string,
+    minorServerVersion: number,
 |}
 
 export const buildEnrollmentForm = async ({
@@ -28,6 +29,7 @@ export const buildEnrollmentForm = async ({
     cachedTrackedEntityAttributes,
     dataEntryFormConfig,
     locale,
+    minorServerVersion,
 }: Props) => {
     // $FlowFixMe - cachedProgram does not contain trackedEntityTypeAttributes
     const searchGroups = await buildSearchGroup(cachedProgram, locale);
@@ -38,6 +40,7 @@ export const buildEnrollmentForm = async ({
         trackedEntityTypeCollection: new Map([[trackedEntityTypeCollection.id, trackedEntityTypeCollection]]),
         locale,
         dataEntryFormConfig,
+        minorServerVersion,
     });
 
     return enrollmentFactory.build(cachedProgram, searchGroups);
