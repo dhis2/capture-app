@@ -20,7 +20,7 @@ export type UpdateEnrollmentOwnership = {|
 type Props = {
     teiId: ?string,
     programId: ?string,
-    onTransferOutsideCaptureScope?: () => void,
+    onAccessLostFromTransfer?: () => void,
     refetchTEI: QueryRefetchFunction,
 }
 
@@ -43,7 +43,7 @@ export const useUpdateOwnership = ({
     refetchTEI,
     programId,
     teiId,
-    onTransferOutsideCaptureScope,
+    onAccessLostFromTransfer,
 }: Props): ReturnTypes => {
     const dataEngine = useDataEngine();
     const teiParamKey = useFeature(FEATURES.newTransferQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
@@ -78,7 +78,7 @@ export const useUpdateOwnership = ({
                 // Assuming that all cases are outside the capture scope and program is protected or closed
                 if (programAccessLevel === ProgramAccessLevels.PROTECTED) {
                     if (orgUnitScopes.origin === OrgUnitScopes.CAPTURE) {
-                        onTransferOutsideCaptureScope && onTransferOutsideCaptureScope();
+                        onAccessLostFromTransfer && onAccessLostFromTransfer();
                         return;
                     } else if (orgUnitScopes.origin === OrgUnitScopes.SEARCH) {
                         refetchTEI();
@@ -87,7 +87,7 @@ export const useUpdateOwnership = ({
                 }
 
                 if (programAccessLevel === ProgramAccessLevels.CLOSED) {
-                    onTransferOutsideCaptureScope && onTransferOutsideCaptureScope();
+                    onAccessLostFromTransfer && onAccessLostFromTransfer();
                 }
             },
             onError: (error) => {

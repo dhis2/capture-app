@@ -175,7 +175,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         const assignedUser: ApiAssignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
         dispatch(setAssignee(assignedUser, newAssignee, eventId));
     };
-    const onTransferOutsideCaptureScope = () => {
+    const onAccessLostFromTransfer = () => {
         history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
     const onSaveAssigneeError = (prevAssignee) => {
@@ -222,7 +222,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             getAssignedUserSaveContext={getAssignedUserSaveContext}
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}
-            onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
+            onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
     );
 };

@@ -120,7 +120,7 @@ export const EnrollmentPageDefault = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
 
-    const onTransferOutsideCaptureScope = () => {
+    const onAccessLostFromTransfer = () => {
         history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
 
@@ -162,7 +162,7 @@ export const EnrollmentPageDefault = () => {
             onUpdateIncidentDate={onUpdateIncidentDate}
             onEnrollmentError={onEnrollmentError}
             ruleEffects={ruleEffects}
-            onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
+            onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
     );
 };

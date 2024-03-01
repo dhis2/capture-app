@@ -63,7 +63,7 @@ export const WidgetEnrollmentPlain = ({
     updateIncidentDate,
     onError,
     onSuccess,
-    onTransferOutsideCaptureScope,
+    onAccessLostFromTransfer,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -173,7 +173,7 @@ export const WidgetEnrollmentPlain = ({
                             canAddNew={canAddNew}
                             onError={onError}
                             onSuccess={onSuccess}
-                            onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
+                            onAccessLostFromTransfer={onAccessLostFromTransfer}
                         />
                     </div>
                 )}

@@ -18,7 +18,7 @@ export type Props = {|
     onDelete: () => void,
     onAddNew: () => void,
     onEnrollmentError: (message: string) => void,
-    onTransferOutsideCaptureScope?: () => void,
+    onAccessLostFromTransfer?: () => void,
     onEnrollmentSuccess: () => void,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,

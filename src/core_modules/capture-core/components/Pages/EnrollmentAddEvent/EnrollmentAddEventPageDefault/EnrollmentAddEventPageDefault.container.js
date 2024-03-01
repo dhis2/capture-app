@@ -66,7 +66,7 @@ export const EnrollmentAddEventPageDefault = ({
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
-    const onTransferOutsideCaptureScope = () => {
+    const onAccessLostFromTransfer = () => {
         history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
 
@@ -159,7 +159,7 @@ export const EnrollmentAddEventPageDefault = ({
                 ready={Boolean(enrollment)}
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
-                onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
+                onAccessLostFromTransfer={onAccessLostFromTransfer}
             />
         </>
     );

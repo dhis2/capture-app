@@ -51,7 +51,7 @@ const InfoBoxesPlain = ({
     const { displayName: ownerOrgUnitName } = useOrgUnitName(ownerOrgUnitId);
     const { displayName: newOrgUnitName } = useOrgUnitName(validOrgUnitId);
 
-    const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.PROTECTED].includes(programAccessLevel)
+    const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.CLOSED].includes(programAccessLevel)
         && orgUnitScopes.destination === OrgUnitScopes.SEARCH;
 
     return (

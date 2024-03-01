@@ -14,7 +14,7 @@ export type Props = {|
     canAddNew: boolean,
     onlyEnrollOnce: boolean,
     tetName: string,
-    onTransferOutsideCaptureScope?: () => void,
+    onAccessLostFromTransfer?: () => void,
 |};
 
 export type PlainProps = {|

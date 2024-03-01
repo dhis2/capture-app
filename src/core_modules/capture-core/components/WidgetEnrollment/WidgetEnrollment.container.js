@@ -22,7 +22,7 @@ export const WidgetEnrollment = ({
     onUpdateIncidentDate,
     onError,
     onSuccess,
-    onTransferOutsideCaptureScope,
+    onAccessLostFromTransfer,
 }: Props) => {
     const {
         enrollment,
@@ -74,7 +74,7 @@ export const WidgetEnrollment = ({
             initError={error}
             onError={onError}
             onSuccess={onSuccess}
-            onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
+            onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
     );
 };

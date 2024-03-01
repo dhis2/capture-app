@@ -31,7 +31,7 @@ export type Props = {|
     onLinkedRecordClick: LinkedRecordClick,
     onUpdateEnrollmentDate: (enrollmentDate: string) => void,
     onUpdateIncidentDate: (incidentDate: string) => void,
-    onTransferOutsideCaptureScope: () => void,
+    onAccessLostFromTransfer: () => void,
     onEnrollmentError: (message: string) => void,
     ruleEffects?: Array<{id: string, type: $Values<effectActions>}>;
     pageLayout: PageLayoutConfig,

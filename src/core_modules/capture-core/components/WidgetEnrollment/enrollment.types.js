@@ -12,7 +12,7 @@ export type Props = {|
     onUpdateIncidentDate?: (enrollmentDate: string) => void,
     onError?: (message: string) => void,
     onSuccess?: () => void,
-    onTransferOutsideCaptureScope?: () => void,
+    onAccessLostFromTransfer?: () => void,
 |};
 
 export type PlainProps = {|
@@ -33,6 +33,6 @@ export type PlainProps = {|
     onAddNew: () => void,
     onError?: (message: string) => void,
     onSuccess?: () => void,
-    onTransferOutsideCaptureScope?: () => void,
+    onAccessLostFromTransfer?: () => void,
     ...CssClasses,
 |};

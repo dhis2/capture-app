@@ -53,7 +53,7 @@ const EnrollmentAddEventPagePain = ({
     onEnrollmentSuccess,
     pageFailure,
     ready,
-    onTransferOutsideCaptureScope,
+    onAccessLostFromTransfer,
     classes,
     ...passOnProps
 }: Props) => {
@@ -94,7 +94,7 @@ const EnrollmentAddEventPagePain = ({
                 onAddNew={onAddNew}
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
-                onTransferOutsideCaptureScope={onTransferOutsideCaptureScope}
+                onAccessLostFromTransfer={onAccessLostFromTransfer}
             />
         </div>
     );
