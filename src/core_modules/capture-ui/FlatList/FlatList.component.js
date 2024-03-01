@@ -5,7 +5,6 @@ import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import type { Props } from './flatList.types';
 
-
 const styles = {
     itemRow: {
         borderBottom: `1px solid${colors.grey300}`,
@@ -16,10 +15,14 @@ const styles = {
         '&.isLastItem': {
             borderBottomWidth: 0,
         },
+        gap: '5px',
     },
     itemKey: {
-        width: 128,
+        flex: '50%',
         color: colors.grey600,
+    },
+    itemValue: {
+        flex: '50%',
     },
 };
 
@@ -31,18 +34,15 @@ const FlatListPlain = ({ list, classes, dataTest }: Props) => {
             className={cx(classes.itemRow, { isLastItem: item.reactKey === lastItemKey })}
         >
             <div className={classes.itemKey}>{item.key}</div>
-            <div>{item.value}</div>
+            <div className={classes.itemValue}>{item.value}</div> {/* Added className */}
         </div>
     );
 
     return (
-        <div
-            data-test={dataTest}
-        >
+        <div data-test={dataTest}>
             {list.map(item => renderItem(item))}
         </div>
     );
 };
-
 
 export const FlatList: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(FlatListPlain);
