@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
-"PO-Revision-Date: 2024-02-14T10:01:26.732Z\n"
+"POT-Creation-Date: 2024-03-01T09:24:34.436Z\n"
+"PO-Revision-Date: 2024-03-01T09:24:34.436Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -188,14 +188,14 @@ msgstr "Assigned user"
 msgid "Search for user"
 msgstr "Search for user"
 
+msgid "Notes"
+msgstr "Notes"
+
 msgid "Basic info"
 msgstr "Basic info"
 
 msgid "Status"
 msgstr "Status"
-
-msgid "Notes"
-msgstr "Notes"
 
 msgid "Relationships"
 msgstr "Relationships"
