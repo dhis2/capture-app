@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
 import type { Props } from './DeleteModal.types';
-import { useDeleteTrackedEntity } from './useDeleteTrackedEntity';
+import { useDeleteTrackedEntity } from './hooks';
 
 export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
     const [errorReports, setErrorReports] = useState([]);
