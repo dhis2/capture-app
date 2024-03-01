@@ -34,7 +34,7 @@ const FlatListPlain = ({ list, classes, dataTest }: Props) => {
             className={cx(classes.itemRow, { isLastItem: item.reactKey === lastItemKey })}
         >
             <div className={classes.itemKey}>{item.key}</div>
-            <div className={classes.itemValue}>{item.value}</div> {/* Added className */}
+            <div className={classes.itemValue}>{item.value}</div>
         </div>
     );
 
