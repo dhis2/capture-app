@@ -273,7 +273,6 @@ const buildNotesSettingsFn = () => {
             section: dataEntrySectionNames.COMMENTS,
         }),
     };
-
     return notesSettings;
 };
 
