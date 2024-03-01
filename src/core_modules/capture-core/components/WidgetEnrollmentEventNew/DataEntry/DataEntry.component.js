@@ -275,7 +275,6 @@ const buildNotesSettingsFn = () => {
     };
 
     return notesSettings;
-    debugger;
 };
 
 const buildAssigneeSettingsFn = () => {
