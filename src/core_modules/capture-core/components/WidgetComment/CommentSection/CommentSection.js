@@ -145,7 +145,7 @@ const CommentSectionPlain = ({
                     onClick={onAddComment}
                     primary
                 >
-                    {i18n.t('Save comment')}
+                    {i18n.t('Save note')}
                 </Button>
                 <Button
                     dataTest="cancel-comment-btn"

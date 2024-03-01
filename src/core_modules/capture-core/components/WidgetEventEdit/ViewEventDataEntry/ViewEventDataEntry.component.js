@@ -280,7 +280,7 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.COMMENTS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Comments'),
+        name: i18n.t('Notes'),
     },
     [AOCsectionKey]: {
         placement: placements.TOP,

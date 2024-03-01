@@ -228,8 +228,8 @@ const buildGeometrySettingsFn = () => ({
 
         return createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: 'Coordinate',
-            dialogLabel: 'Coordinate',
+            label: i18n.t('Coordinate'),
+            dialogLabel: i18n.t('Coordinate'),
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
@@ -261,7 +261,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Comments',
+            label: i18n.t('Notes'),
             onAddNote: props.onAddNote,
             id: 'comments',
             dataEntryId: props.id,
@@ -403,7 +403,7 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.COMMENTS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Comments'),
+        name: i18n.t('Notes'),
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,

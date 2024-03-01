@@ -17,9 +17,9 @@ export const WidgetEventComment = ({ dataEntryKey, dataEntryId }: Props) => {
     return (
         <div data-test="event-comment-widget">
             <WidgetComment
-                title={i18n.t('Comments about this event')}
-                placeholder={i18n.t('Write a comment about this event')}
-                emptyCommentMessage={i18n.t('This event doesn\'t have any comments')}
+                title={i18n.t('Notes about this event')}
+                placeholder={i18n.t('Write a note about this event')}
+                emptyCommentMessage={i18n.t('This event doesn\'t have any notes')}
                 comments={comments}
                 onAddComment={onAddComment}
             />
