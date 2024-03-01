@@ -18,9 +18,9 @@ export const WidgetEnrollmentComment = () => {
     return (
         <div data-test="enrollment-comment-widget">
             <WidgetComment
-                title={i18n.t('Comments about this enrollment')}
-                placeholder={i18n.t('Write a comment about this enrollment')}
-                emptyCommentMessage={i18n.t('This enrollment doesn\'t have any comments')}
+                title={i18n.t('Notes about this enrollment')}
+                placeholder={i18n.t('Write a note about this enrollment')}
+                emptyCommentMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 comments={comments}
                 onAddComment={onAddComment}
             />

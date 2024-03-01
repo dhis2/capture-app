@@ -160,7 +160,7 @@ class NotesPlain extends React.Component<Props, State> {
                         primary
                         small
                     >
-                        {i18n.t('Add comment')}
+                        {i18n.t('Add note')}
                     </Button>
                     <Button
                         onClick={this.onCancel}
@@ -183,7 +183,7 @@ class NotesPlain extends React.Component<Props, State> {
                 data-test="new-comment-button"
             >
                 <ConditionalTooltip
-                    content={i18n.t('You don\'t have access to write comments')}
+                    content={i18n.t('You don\'t have access to write notes')}
                     enabled={!canAddComment}
                 >
                     <Button
@@ -191,7 +191,7 @@ class NotesPlain extends React.Component<Props, State> {
                         disabled={!canAddComment}
                         small={smallMainButton}
                     >
-                        {i18n.t('Write comment')}
+                        {i18n.t('Write note')}
                     </Button>
                 </ConditionalTooltip>
             </div>

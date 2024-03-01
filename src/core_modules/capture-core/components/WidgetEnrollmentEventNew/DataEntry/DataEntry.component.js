@@ -275,6 +275,7 @@ const buildNotesSettingsFn = () => {
     };
 
     return notesSettings;
+    debugger;
 };
 
 const buildAssigneeSettingsFn = () => {
@@ -403,7 +404,7 @@ const dataEntrySectionDefinitions = {
     },
     [dataEntrySectionNames.COMMENTS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Comments'),
+        name: i18n.t('Notes'),
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
