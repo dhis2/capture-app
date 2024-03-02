@@ -4,13 +4,14 @@
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Rica Zamora Duchateau, 2022
 # Charel van den Elsen, 2023
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Charel van den Elsen, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -220,7 +221,7 @@ msgid "No write access"
 msgstr "Geen schrijfrechten"
 
 msgid "New {{titleText}}"
-msgstr "Nieuwe {{titelTekst}}"
+msgstr "Nieuwe {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Schakel over naar formulierweergave"
@@ -275,7 +276,7 @@ msgstr ""
 "hebt aangebracht, ongedaan gemaakt."
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr "Een {{trackedEntityNaam}} opslaan"
+msgstr "Een {{trackedEntityName}} opslaan"
 
 msgid "without"
 msgstr "zonder"
@@ -300,20 +301,20 @@ msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
-"Een item met deze {{attribuutNaam}} is al geregistreerd, maar je hebt er "
+"Een item met deze {{attributeName}} is al geregistreerd, maar je hebt er "
 "geen toegang toe"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "Je hebt deze {{attribuutNaam}} al geregistreerd"
+msgstr "Je hebt deze {{attributeName}} al geregistreerd"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"Een {{trackedEntityTypeNaam}} met deze {{attribuutNaam}} is al geregistreerd"
+"Een {{trackedEntityTypeName}} met deze {{attributeName}} is al geregistreerd"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Toon geregistreerde {{trackedEntityTypeNaam}}"
+msgstr "Toon geregistreerde {{trackedEntityTypeName}}"
 
 msgid "Registered person"
 msgstr "Geregistreerde persoon"
@@ -502,13 +503,13 @@ msgid "Apply"
 msgstr "Toepassen"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{vanDatum}} tot {{totDatum}}"
+msgstr "{{fromDate}} tot {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr "na of gelijk aan {{datum}}"
+msgstr "na of gelijk aan {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr "voor of gelijk aan {{datum}}"
+msgstr "voor of gelijk aan {{date}}"
 
 msgid "greater than or equal to"
 msgstr "groter dan of gelijk aan"
@@ -537,10 +538,10 @@ msgid "New"
 msgstr "Nieuw"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "Nieuwe {{trackedEntityNaam}} in {{programmaNaam}}"
+msgstr "Nieuwe {{trackedEntityName}} in {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr "Zoek naar een {{trackedEntityNaam}} in {{programmaNaam}}"
+msgstr "Zoek naar een {{trackedEntityName}} in {{programName}}"
 
 msgid "Clear selections"
 msgstr ""
@@ -635,8 +636,8 @@ msgstr ""
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
-"{{programmaNaam}} heeft categorieën. Kies alle categorieën om het dashboard "
-"te bekijken."
+"{{programName}} heeft categorieën. Kies alle categorieën om het dashboard te"
+" bekijken."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
@@ -644,25 +645,25 @@ msgid ""
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr "{{teiDisplayNaam}} is niet ingeschreven voor dit programma."
+msgstr "{{teiDisplayName}} is niet ingeschreven voor dit programma."
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr "Schrijf {{teiDisplayNaam}} in voor dit programma."
+msgstr "Schrijf {{teiDisplayName}} in voor dit programma."
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
-"{{teiDisplayNaam}} is een {{tetNaam}} en kan niet worden ingeschreven in de "
-"{{programmaNaam}}. Kies een ander programma dat {{tetNaam}} inschrijving "
+"{{teiDisplayName}} is een {{tetName}} en kan niet worden ingeschreven in de "
+"{{programName}}. Kies een ander programma dat {{tetName}} inschrijving "
 "toestaat."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr "Schrijf een nieuwe {{selectedTetNaam}} in voor dit programma."
+msgstr "Schrijf een nieuwe {{selectedTetName}} in voor dit programma."
 
 msgid "{{programName}} is an event program and does not have enrollments."
 msgstr ""
-"{{programmaNaam}} is een evenementprogramma en heeft geen inschrijvingen."
+"{{programName}} is een evenementprogramma en heeft geen inschrijvingen."
 
 msgid "Create a new event in this program."
 msgstr "Maak een nieuw evenement aan in dit programma."
@@ -731,7 +732,7 @@ msgid "Share view..."
 msgstr "Weergave delen..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Weet u zeker dat u de weergave '{{templateNaam}}' wilt verwijderen?"
+msgstr "Weet u zeker dat u de weergave '{{templateName}}' wilt verwijderen?"
 
 msgid "Confirm"
 msgstr "Bevestigen"
@@ -752,7 +753,7 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Kies een registratie-eenheid om rapportage te starten"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr "Kies de {{missende Categorieën}} om te beginnen met rapporteren"
+msgstr "Kies de {{missingCategories}} om te beginnen met rapporteren"
 
 msgid "Save as new"
 msgstr "Opslaan als nieuw"
@@ -773,13 +774,13 @@ msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr "Sla nieuwe {{trackedEntityTypeNaam}} en link op"
+msgstr "Sla nieuwe {{trackedEntityTypeName}} en link op"
 
 msgid "Link"
 msgstr "Link"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr "Opslaan als nieuwe {{trackedEntityNaam}}"
+msgstr "Opslaan als nieuwe {{trackedEntityName}}"
 
 msgid "Organisation Unit"
 msgstr "Organisatieëenheid"
@@ -791,7 +792,7 @@ msgid "Search results"
 msgstr "Zoekresultaten"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr "Geen {{trackedEntityTypeNaam}} gevonden."
+msgstr "Geen {{trackedEntityTypeName}} gevonden."
 
 msgid "New search"
 msgstr "Nieuwe zoekopdracht"
@@ -813,10 +814,10 @@ msgid ""
 msgstr ""
 
 msgid "Search {{name}}"
-msgstr "Zoek {{naam}}"
+msgstr "Zoek {{name}}"
 
 msgid "Search by {{name}}"
-msgstr "Zoek op ((naam}}"
+msgstr "Zoek op {{name}}"
 
 msgid "Search by attributes"
 msgstr "Zoek op attributen"
@@ -825,7 +826,7 @@ msgid "Back"
 msgstr "Terug"
 
 msgid "Search for {{titleText}}"
-msgstr "Zoeken naar {{titel tekst}}"
+msgstr "Zoeken naar {{titleText}}"
 
 msgid "Search for"
 msgstr "Zoeken"
@@ -906,7 +907,7 @@ msgid "Assign"
 msgstr "Toewijzen"
 
 msgid "Event assigned to {{name}}"
-msgstr "Evenement toegewezen aan {{naam}}"
+msgstr "Evenement toegewezen aan {{name}}"
 
 msgid "Feedbacks"
 msgstr "Feedbacks"
@@ -939,7 +940,7 @@ msgid "Organisation unit scope"
 msgstr "Bereik organisatie-eenheid"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr "Zoek {{uniqueAttrNaam}}"
+msgstr "Zoek {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
@@ -954,7 +955,7 @@ msgid "An error has occured. See log for details"
 msgstr "Er is een fout opgetreden. Zie logboek voor details"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr "{{trackedEntityNaam}} in programma{{escape}} {{programmaNaam}}"
+msgstr "{{trackedEntityName}} in programma{{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Programma niet gevonden"
@@ -1005,10 +1006,10 @@ msgid "Longitude"
 msgstr "Lengtegraad"
 
 msgid "Page {{currentPage}}"
-msgstr "Pagina {{huidigePagina}}"
+msgstr "Pagina {{currentPage}}"
 
 msgid "Date"
-msgstr "Datum\n"
+msgstr "Datum"
 
 msgid "Time"
 msgstr "Tijd"
