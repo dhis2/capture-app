@@ -1,6 +1,8 @@
 // @flow
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { useMemo, useState } from 'react';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
@@ -34,6 +36,7 @@ const getMetadataItemDefinition = (
 export const useChangelogData = ({
     entityId,
     entityType,
+    programId,
     dataItemDefinitions,
 }: Props) => {
     const [page, setPage] = useState<number>(1);
@@ -42,12 +45,13 @@ export const useChangelogData = ({
     const { fromServerDate } = useTimeZoneConversion();
 
     const { data, isLoading, isError } = useApiDataQuery(
-        ['changelog', entityType, entityId, { sortDirection, page, pageSize }],
+        ['changelog', entityType, entityId, { sortDirection, page, pageSize, programId }],
         {
             resource: `tracker/${QUERY_KEYS_BY_ENTITY_TYPE[entityType]}/${entityId}/changeLogs`,
             params: {
                 page,
                 pageSize,
+                program: programId,
                 ...{
                     order: sortDirection === DEFAULT_SORT_DIRECTION ? undefined : `createdAt:${sortDirection}`,
                 },
@@ -70,7 +74,12 @@ export const useChangelogData = ({
                 change,
                 dataItemDefinitions,
             );
-            if (!metadataElement) return null;
+            if (!metadataElement) {
+                log.error(errorCreator('Could not find metadata for element')({
+                    ...changelog,
+                }));
+                return null;
+            }
 
             const { firstName, surname, username } = createdBy;
             const { options } = metadataElement;

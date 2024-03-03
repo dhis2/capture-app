@@ -130,10 +130,12 @@ export const WidgetEventEditPlain = ({
                                 icon={<IconMore16 />}
                                 small
                                 secondary
+                                dataTest={'widget-event-edit-overflow-button'}
                                 component={(
                                     <FlyoutMenu dense maxWidth="250px">
                                         <MenuItem
                                             label={i18n.t('View changelog')}
+                                            dataTest={'event-overflow-view-changelog'}
                                             onClick={() => {
                                                 setChangeLogIsOpen(true);
                                                 setActionsIsOpen(false);

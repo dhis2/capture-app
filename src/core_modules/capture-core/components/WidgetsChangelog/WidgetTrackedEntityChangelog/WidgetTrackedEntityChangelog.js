@@ -19,6 +19,7 @@ export const WidgetTrackedEntityChangelog = ({
     <Changelog
         {...passOnProps}
         entityId={teiId}
+        programId={programId}
         entityType={CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY}
     />
 );

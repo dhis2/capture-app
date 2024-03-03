@@ -27,19 +27,24 @@ export const ChangelogComponent = ({
     <Modal
         large
         hide={!isOpen}
+        dataTest={'changelog-modal'}
         onClose={() => setIsOpen(false)}
     >
         <ModalTitle>{i18n.t('Changelog')}</ModalTitle>
 
         <ModalContent>
-            <DataTable>
+            <DataTable
+                dataTest={'changelog-data-table'}
+            >
                 <ChangelogTableHeader
                     sortDirection={sortDirection}
                     setSortDirection={setSortDirection}
                 />
 
                 {records && records.length > 0 ? (
-                    <DataTableBody>
+                    <DataTableBody
+                        dataTest={'changelog-data-table-body'}
+                    >
                         {records?.map(record => (
                             <ChangelogTableRow
                                 key={record.reactKey}
@@ -66,6 +71,7 @@ export const ChangelogComponent = ({
                                     onPageChange={setPage}
                                     onPageSizeChange={setPageSize}
                                     isLastPage={!pager.nextPage}
+                                    dataTest={'changelog-pagination'}
                                 />
                             </DataTableCell>
                         </DataTableRow>
