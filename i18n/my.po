@@ -3,14 +3,14 @@
 # Aung Kyi Min <AungKyi.Min@savethechildren.org>, 2019
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Wanda <wanda@frontlineaids.org>, 2021
-# Philip Larsen Donnelly, 2023
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Burmese (https://app.transifex.com/hisp-uio/teams/100509/my/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,10 +73,6 @@ msgid "error encountered during field validation"
 msgstr ""
 
 msgid "error"
-msgstr ""
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
 msgstr ""
 
 msgid "This value is validating"
@@ -158,6 +154,9 @@ msgid "Complete event"
 msgstr ""
 
 msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Assignee"
 msgstr ""
 
 msgid "{{ stageName }} - Status"
@@ -643,24 +642,17 @@ msgstr ""
 msgid "Opt out for {{programName}}"
 msgstr ""
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-
-msgid "Enrollment Dashboard"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
-msgstr ""
-
-msgid "No feedback for this enrollment yet"
 msgstr ""
 
 msgid "Quick actions"
@@ -740,19 +732,10 @@ msgstr ""
 msgid "There was an error opening the Page"
 msgstr ""
 
-msgid "Enrollment{{escape}} New Event"
-msgstr ""
-
 msgid "There was an error loading the page"
 msgstr ""
 
 msgid "Choose a registering unit to start reporting"
-msgstr ""
-
-msgid "There are no feedbacks for this event"
-msgstr ""
-
-msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Program stage is invalid"
@@ -780,18 +763,6 @@ msgid "Program Stages could not be loaded"
 msgstr ""
 
 msgid "Stage"
-msgstr ""
-
-msgid "Enrollment{{escape}} View Event"
-msgstr ""
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr ""
-
-msgid "The enrollment event data could not be found"
-msgstr ""
-
-msgid "There are no feedback for this event"
 msgstr ""
 
 msgid "Registered events"
@@ -905,18 +876,6 @@ msgid ""
 "relationship"
 msgstr ""
 
-msgid "No one is assigned to this event"
-msgstr ""
-
-msgid "Assign"
-msgstr ""
-
-msgid "Event assigned to {{name}}"
-msgstr ""
-
-msgid "Feedbacks"
-msgstr ""
-
 msgid "Show all events"
 msgstr ""
 
@@ -929,6 +888,21 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "Dashboard"
+msgstr "အချက်အလက်များလေ့လာဆန်းစစ်ခြင်း"
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "Selected program"
 msgstr ""
 
@@ -939,6 +913,9 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
+msgid "The enrollment event data could not be found"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1073,10 +1050,22 @@ msgstr ""
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
-msgid "To work with the selected program,"
+msgid "Assigned to"
 msgstr ""
 
-msgid "open the Tracker Capture app"
+msgid "You don't have access to edit this assignee"
+msgstr ""
+
+msgid "Edit"
+msgstr "တည်းဖြတ်သည်"
+
+msgid "No one is assigned to this event"
+msgstr ""
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
 msgstr ""
 
 msgid "This program is protected"
@@ -1142,6 +1131,30 @@ msgstr ""
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
+
+msgid "Set coordinates"
+msgstr ""
+
+msgid "Coordinates"
+msgstr ""
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "Finish drawing before saving"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Enrollment date"
 msgstr "Дата зачисления"
 
@@ -1164,6 +1177,12 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
+msgstr ""
+
+msgid "Add coordinates"
+msgstr ""
+
+msgid "Add area"
 msgstr ""
 
 msgid "Comments about this enrollment"
@@ -1288,9 +1307,6 @@ msgstr ""
 msgid "{{TETName}} profile"
 msgstr ""
 
-msgid "Edit"
-msgstr "တည်းဖြတ်သည်"
-
 msgid "tracked entity instance"
 msgstr ""
 
@@ -1327,7 +1343,7 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
-msgid "New TEI Relationship"
+msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
 msgid "Missing implementation step"
@@ -1380,9 +1396,6 @@ msgid "Download data..."
 msgstr ""
 
 msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Assigned to"
 msgstr ""
 
 msgid "Registration Date"
@@ -1514,6 +1527,9 @@ msgstr ""
 msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
+msgid "Error updating the Assignee"
+msgstr ""
+
 msgid "Set coordinate"
 msgstr ""
 
@@ -1536,12 +1552,6 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid "Area on map saved"
