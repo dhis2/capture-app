@@ -1,3 +1,10 @@
+# [100.58.0](https://github.com/dhis2/capture-app/compare/v100.57.6...v100.58.0) (2024-03-03)
+
+
+### Features
+
+* [DHIS2-16372] Delete Relationships ([#3520](https://github.com/dhis2/capture-app/issues/3520)) ([9fed562](https://github.com/dhis2/capture-app/commit/9fed562c0f06186d95255e40d73479b4428f206d))
+
 ## [100.57.6](https://github.com/dhis2/capture-app/compare/v100.57.5...v100.57.6) (2024-03-03)
 
 
