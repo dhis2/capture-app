@@ -32,25 +32,25 @@ const styles = () => ({
 
 const PreviewImagePlain = (props: {
     url: string,
+    previewUrl: string,
     classes: {
         container: string,
         image: string,
         icon: string,
     },
 }) => {
-    const { url, classes } = props;
-    const linkUrl = url.replace(/.dimension=small/g, '');
+    const { url, previewUrl, classes } = props;
 
     return (
         <div className={classes.container}>
             <a
-                href={linkUrl}
+                href={url}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(event) => { event.stopPropagation(); }}
             >
                 <img
-                    src={url}
+                    src={previewUrl}
                     className={classes.image}
                 />
                 <div className={classes.icon}>

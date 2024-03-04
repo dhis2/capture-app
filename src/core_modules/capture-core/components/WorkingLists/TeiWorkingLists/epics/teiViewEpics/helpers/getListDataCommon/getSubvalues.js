@@ -49,11 +49,12 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
             subvalueKey: value,
             subvalue: name,
             urlPath,
+            previewUrl,
         }) => ({
             name,
             value,
-            url: `${absoluteApiPath}${urlPath}`
-            ,
+            url: `${absoluteApiPath}${urlPath}`,
+            previewUrl: `${absoluteApiPath}${previewUrl}`,
         }),
         [dataElementTypes.FILE_RESOURCE]: ({
             subvalueKey: value,
@@ -136,6 +137,7 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
                                     columnId,
                                     id,
                                     urlPath: record[columnId].urlPath,
+                                    previewUrl: record[columnId].previewUrl,
                                 }) :
                                 subvalue;
                         }

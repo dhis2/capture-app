@@ -33,6 +33,11 @@ type FileClientValue = {
     value: string,
 };
 
+type ImageClientValue = {
+    ...FileClientValue,
+    previewUrl: string,
+};
+
 function convertFileForDisplay(clientValue: FileClientValue) {
     return (
         <a
@@ -46,10 +51,11 @@ function convertFileForDisplay(clientValue: FileClientValue) {
     );
 }
 
-function convertImageForDisplay(clientValue: FileClientValue) {
+function convertImageForDisplay(clientValue: ImageClientValue) {
     return featureAvailable(FEATURES.trackerImageEndpoint) ? (
         <PreviewImage
             url={clientValue.url}
+            previewUrl={clientValue.previewUrl}
         />
     ) : convertFileForDisplay(clientValue);
 }
