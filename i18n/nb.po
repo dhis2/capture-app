@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -78,11 +78,6 @@ msgstr "En feil oppsto under feltvalidering"
 
 msgid "error"
 msgstr "Feil"
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
-msgstr ""
-"Plugins er ikke tilgjengelig ennå - Ta kontakt med systemadministratoren din"
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -164,6 +159,9 @@ msgstr "Fullfør hendelse"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Grunnleggende informasjon"
+
+msgid "{{ stageName }} - Assignee"
+msgstr ""
 
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Status"
@@ -672,29 +670,20 @@ msgstr "Slutt å bruke nytt registreringsdashbord for {{programName}}"
 msgid "Opt out for {{programName}}"
 msgstr "Meld ut for {{programName}}"
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
-"Det oppsto en feil under åpningen av denne registreringen. Vennligst skriv "
-"inn en gyldig url."
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 "Det oppsto en feil under henting av registreringer. Vennligst skriv inn en "
 "gyldig url."
-
-msgid "Enrollment Dashboard"
-msgstr "Registreringsdashbord"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Ingen indikatorresultat for denne registreringen enda"
-
-msgid "No feedback for this enrollment yet"
-msgstr "Ingen tilbakemeldinger for denne registreringen enda"
 
 msgid "Quick actions"
 msgstr "Snarveier"
@@ -779,20 +768,11 @@ msgstr "Organisasjonsenheten er ikke gyldig med gjeldende program"
 msgid "There was an error opening the Page"
 msgstr "Det oppsto en feil ved åpning av siden"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "Registrering{{escape}} Ny hendelse"
-
 msgid "There was an error loading the page"
 msgstr "Det oppsto en feil under lasting av siden"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Velg en registreringsenhet for å starte rapportering"
-
-msgid "There are no feedbacks for this event"
-msgstr "Det er ingen tilbakemeldinger for denne hendelsen"
-
-msgid "There are no indicators for this event"
-msgstr "Det er ingen indikatorer for denne hendelsen"
 
 msgid "Program stage is invalid"
 msgstr "Programfase er ugyldig"
@@ -820,18 +800,6 @@ msgstr "Programfaser kunne ikke lastes inn"
 
 msgid "Stage"
 msgstr "Fase"
-
-msgid "Enrollment{{escape}} View Event"
-msgstr "Registrering{{escape}} Vis hendelse"
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr "Registrering{{escape}} Rediger hendelse"
-
-msgid "The enrollment event data could not be found"
-msgstr "Hendelsessdataene ble ikke funnet"
-
-msgid "There are no feedback for this event"
-msgstr "Det er ingen tilbakemeldinger for denne hendelsen"
 
 msgid "Registered events"
 msgstr "Registrerte hendelser"
@@ -947,18 +915,6 @@ msgstr ""
 "Hvis du forlater denne siden, vil valgene du har satt bli forkastet for "
 "denne relasjonen"
 
-msgid "No one is assigned to this event"
-msgstr "Ingen er tildelt denne hendelsen"
-
-msgid "Assign"
-msgstr "Tildel"
-
-msgid "Event assigned to {{name}}"
-msgstr "Hendelse er tildelt til {{name}}"
-
-msgid "Feedbacks"
-msgstr "Tilbakemeldinger"
-
 msgid "Show all events"
 msgstr "Vis alle hendelser"
 
@@ -971,6 +927,21 @@ msgstr "Hendelse kunne ikke lastes inn"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
+msgid "Dashboard"
+msgstr ""
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr "Ingen tilbakemeldinger for denne registreringen enda"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Ingen indikatorresultat for denne registreringen enda"
+
 msgid "Selected program"
 msgstr "Valgt program"
 
@@ -982,6 +953,9 @@ msgstr "Søk etter attributter"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
+
+msgid "The enrollment event data could not be found"
+msgstr "Hendelsessdataene ble ikke funnet"
 
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
@@ -1122,11 +1096,23 @@ msgstr "Ny {{trackedEntityName}} i {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
 
-msgid "To work with the selected program,"
-msgstr "For å jobbe med det valgte programmet,"
+msgid "Assigned to"
+msgstr "Tildelt til"
 
-msgid "open the Tracker Capture app"
-msgstr "åpne Tracker Capture app"
+msgid "You don't have access to edit this assignee"
+msgstr ""
+
+msgid "Edit"
+msgstr "Rediger"
+
+msgid "No one is assigned to this event"
+msgstr "Ingen er tildelt denne hendelsen"
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
+msgstr "Tildel"
 
 msgid "This program is protected"
 msgstr "Dette programmet er beskyttet"
@@ -1204,9 +1190,6 @@ msgstr "Breddegrad"
 
 msgid "Longitude"
 msgstr "Lengdegrad"
-
-msgid "Edit"
-msgstr "Rediger"
 
 msgid "Set coordinates"
 msgstr ""
@@ -1420,7 +1403,7 @@ msgstr "{{ scheduledEvents }} planlagt"
 msgid "Stages and Events"
 msgstr "Faser og hendelser"
 
-msgid "New TEI Relationship"
+msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
 msgid "Missing implementation step"
@@ -1474,9 +1457,6 @@ msgstr "Last ned data..."
 
 msgid "an error occurred loading working lists"
 msgstr "en feil oppstod ved lasting av arbeidslister"
-
-msgid "Assigned to"
-msgstr "Tildelt til"
 
 msgid "Registration Date"
 msgstr "Innregistreringsdato"
@@ -1606,6 +1586,9 @@ msgstr "Feil ved sletting av hendelsen"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "Feil under redigering av hendelsen, endringer ble ikke lagret"
+
+msgid "Error updating the Assignee"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
