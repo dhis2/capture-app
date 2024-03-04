@@ -5,7 +5,7 @@ import { FlyoutMenu, IconMore16, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import type { PlainProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
-import { OverflowButton } from './OverflowButton';
+import { OverflowButton } from '../../Buttons';
 
 const styles = {
     iconButton: {
