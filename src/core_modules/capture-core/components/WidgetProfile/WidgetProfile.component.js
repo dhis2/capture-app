@@ -7,6 +7,7 @@ import { Button, FlyoutMenu, IconMore16, MenuItem, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
+import { useQueryClient } from 'react-query';
 import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
@@ -22,6 +23,8 @@ import {
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
 import { OverflowButton } from '../Buttons';
 import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
+import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
+import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
 
 const styles = {
     header: {
@@ -48,6 +51,7 @@ const WidgetProfilePlain = ({
     classes,
 }: PlainProps) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
+    const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const [changelogIsOpen, setChangelogIsOpen] = useState(false);
@@ -79,6 +83,7 @@ const WidgetProfilePlain = ({
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
+    const displayChangelog = !readOnlyMode && supportsChangelog && program.trackedEntityType?.allowAuditLog;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
@@ -89,6 +94,10 @@ const WidgetProfilePlain = ({
                 attribute, key, value, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues]);
+
+    const onSaveExternal = useCallback(() => {
+        queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
+    }, [queryClient, teiId]);
 
     useEffect(() => {
         hasError && setTeiModalState(TEI_MODAL_STATE.OPEN_ERROR);
@@ -133,7 +142,7 @@ const WidgetProfilePlain = ({
                                     {i18n.t('Edit')}
                                 </Button>
                             )}
-                            {!readOnlyMode && supportsChangelog && (
+                            {displayChangelog && (
                                 <OverflowButton
                                     open={actionsIsOpen}
                                     onClick={() => setActionsIsOpen(prev => !prev)}
@@ -174,6 +183,7 @@ const WidgetProfilePlain = ({
                         trackedEntityInstanceId={teiId}
                         onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
                         onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
+                        onSaveExternal={onSaveExternal}
                         modalState={modalState}
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}
@@ -181,7 +191,7 @@ const WidgetProfilePlain = ({
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>
             )}
-            {supportsChangelog && changelogIsOpen && (
+            {displayChangelog && changelogIsOpen && (
                 <TrackedEntityChangelogWrapper
                     teiId={teiId}
                     programAPI={program}

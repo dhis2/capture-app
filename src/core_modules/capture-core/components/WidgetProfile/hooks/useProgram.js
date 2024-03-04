@@ -16,7 +16,7 @@ const fields =
         'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,optionSetValue,style,optionSet[id,displayName,version,valueType,options[id,displayName,code,style, translations]]]]' +
     '],' +
     'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,displayShortName,displayFormName,description,valueType,optionSetValue,unique,orgunitScope,pattern,translations[property,locale,value],optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]]],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
-    'trackedEntityType[id,access,displayName,minAttributesRequiredToSearch,featureType,trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],translations[property,locale,value]],' +
+    'trackedEntityType[id,access,displayName,allowAuditLog,minAttributesRequiredToSearch,featureType,trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],translations[property,locale,value]],' +
     'userRoles[id,displayName]';
 
 export const useProgram = (programId: string) => {

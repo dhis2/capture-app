@@ -5,14 +5,14 @@ import { dataElementTypes } from '../../../../metaData';
 type CreatedChange = {|
     type: typeof CHANGE_TYPES.CREATED,
     dataElement?: string,
-    trackedEntityAttribute?: string,
+    attribute?: string,
     currentValue: any,
 |}
 
 type UpdatedChange = {|
     type: typeof CHANGE_TYPES.UPDATED,
     dataElement?: string,
-    trackedEntityAttribute?: string,
+    attribute?: string,
     previousValue: any,
     currentValue: any,
 |}
@@ -20,7 +20,7 @@ type UpdatedChange = {|
 type DeletedChange = {|
     type: typeof CHANGE_TYPES.DELETED,
     dataElement?: string,
-    trackedEntityAttribute?: string,
+    attribute?: string,
     previousValue: any,
 |}
 

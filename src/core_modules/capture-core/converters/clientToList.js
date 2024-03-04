@@ -133,7 +133,7 @@ export function convert(
         }
         return options
             .find(option => option.code === value)
-            ?.name;
+            ?.name ?? value;
     }
 
     // $FlowFixMe dataElementTypes flow error

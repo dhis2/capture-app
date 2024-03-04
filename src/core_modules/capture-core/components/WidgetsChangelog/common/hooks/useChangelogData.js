@@ -26,8 +26,8 @@ const getMetadataItemDefinition = (
     change: Change,
     dataItemDefinitions: ItemDefinitions,
 ) => {
-    const { dataElement, trackedEntityAttribute } = change;
-    const fieldId = dataElement ?? trackedEntityAttribute;
+    const { dataElement, attribute } = change;
+    const fieldId = dataElement ?? attribute;
     const metadataElement = fieldId ? dataItemDefinitions[fieldId] : dataItemDefinitions[elementKey];
 
     return { metadataElement, fieldId };
@@ -69,11 +69,13 @@ export const useChangelogData = ({
             const { change: apiChange, createdAt, createdBy } = changelog;
             const elementKey = Object.keys(apiChange)[0];
             const change = apiChange[elementKey];
+
             const { metadataElement, fieldId } = getMetadataItemDefinition(
                 elementKey,
                 change,
                 dataItemDefinitions,
             );
+
             if (!metadataElement) {
                 log.error(errorCreator('Could not find metadata for element')({
                     ...changelog,
