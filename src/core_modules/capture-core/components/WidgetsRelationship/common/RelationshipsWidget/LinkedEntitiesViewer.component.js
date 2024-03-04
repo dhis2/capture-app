@@ -21,7 +21,12 @@ const styles = {
 };
 
 
-const LinkedEntitiesViewerPlain = ({ groupedLinkedEntities, onLinkedRecordClick, classes }: StyledProps) => (
+const LinkedEntitiesViewerPlain = ({
+    groupedLinkedEntities,
+    onLinkedRecordClick,
+    onDeleteRelationship,
+    classes,
+}: StyledProps) => (
     <div
         data-test="relationships"
         className={classes.container}
@@ -35,6 +40,7 @@ const LinkedEntitiesViewerPlain = ({ groupedLinkedEntities, onLinkedRecordClick,
                         linkedEntities={linkedEntities}
                         columns={columns}
                         onLinkedRecordClick={onLinkedRecordClick}
+                        onDeleteRelationship={onDeleteRelationship}
                         context={context}
                     />
                 </div>

@@ -31,7 +31,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     And the user sets the birthday date to the current date
     Then the user see the following text: The womans age is outside the normal range. With the birthdate entered, the age would be: 0
 
-  Scenario: The user updates the TEI attributes. The changes are reflected in the whole page. 
+  Scenario: The user updates the TEI attributes. The changes are reflected in the whole page.
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=TjP3J9cf0z1&orgUnitId=CgunjDKbM45&programId=WSGAb5XwJ3Y&teiId=jzIwoNXIZsK
     When the user clicks the element containing the text: Edit
     And the user sees the edit profile modal
