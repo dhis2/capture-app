@@ -31,10 +31,10 @@ export const convertToClientTeis = (
                     const urls = (type === dataElementTypes.IMAGE) ?
                         (featureAvailable(FEATURES.trackerImageEndpoint) ?
                             {
-                                urlPath: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}`,
+                                imageUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}`,
                                 previewUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
                             } : {
-                                urlPath: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
+                                imageUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
                                 previewUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
                             }
                         ) : {};
@@ -46,10 +46,10 @@ export const convertToClientTeis = (
                     };
                 })
                 .filter(({ value }) => value != null)
-                .reduce((acc, { id, value, urlPath, previewUrl }) => {
+                .reduce((acc, { id, value, imageUrl, previewUrl }) => {
                     acc[id] = {
                         convertedValue: value,
-                        ...(urlPath ? { urlPath, previewUrl } : {}),
+                        ...(imageUrl ? { imageUrl, previewUrl } : {}),
                     };
                     return acc;
                 }, {});

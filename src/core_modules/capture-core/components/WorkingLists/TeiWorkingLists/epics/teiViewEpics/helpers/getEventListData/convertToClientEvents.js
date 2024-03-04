@@ -50,10 +50,10 @@ const buildTEIRecord = ({
         const urls = (type === dataElementTypes.IMAGE) ?
             (featureAvailable(FEATURES.trackerImageEndpoint) ?
                 {
-                    urlPath: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}`,
+                    imageUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}`,
                     previewUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
                 } : {
-                    urlPath: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
+                    imageUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
                     previewUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
                 }
             ) : {};
@@ -90,10 +90,10 @@ const buildEventRecord = ({
         const urls = (type === dataElementTypes.IMAGE) ?
             (featureAvailable(FEATURES.trackerImageEndpoint) ?
                 {
-                    urlPath: `/tracker/events/${apiEvent.event}/dataValues/${id}/image`,
+                    imageUrl: `/tracker/events/${apiEvent.event}/dataValues/${id}/image`,
                     previewUrl: `/tracker/events/${apiEvent.event}/dataValues/${id}/image?dimension=small`,
                 } : {
-                    urlPath: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
+                    imageUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
                     previewUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
                 }
             ) : {};
@@ -133,10 +133,10 @@ export const convertToClientEvents = (
             ...TEIRecord,
         ]
             .filter(({ value }) => value != null)
-            .reduce((acc, { id, value, urlPath, previewUrl }) => {
+            .reduce((acc, { id, value, imageUrl, previewUrl }) => {
                 acc[id] = {
                     convertedValue: value,
-                    ...(urlPath ? { urlPath, previewUrl } : {}),
+                    ...(imageUrl ? { imageUrl, previewUrl } : {}),
                 };
                 return acc;
             }, {});
