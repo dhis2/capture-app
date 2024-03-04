@@ -7,14 +7,14 @@ import { ConditionalTooltip } from './ConditionalTooltip';
 
 const getTooltipContent = (canWriteData, canCascadeDeleteTei, trackedEntityTypeName) => {
     if (!canWriteData) {
-        return i18n.t("You don't have access to delete this {{TETName}}", {
-            TETName: trackedEntityTypeName,
+        return i18n.t("You don't have access to delete this {{trackedEntityTypeName}}", {
+            trackedEntityTypeName,
             interpolation: { escapeValue: false },
         });
     }
     if (!canCascadeDeleteTei) {
-        return i18n.t("You can't delete this {{TETName}} when it has associated enrollments and events", {
-            TETName: trackedEntityTypeName,
+        return i18n.t("You can't delete this {{trackedEntityTypeName}} when it has associated enrollments and events", {
+            trackedEntityTypeName,
             interpolation: { escapeValue: false },
         });
     }
@@ -36,8 +36,8 @@ export const DeleteMenuItem = ({
                 destructive
                 dense
                 icon={<IconDelete16 />}
-                label={i18n.t('Delete {{TETName}}', {
-                    TETName: trackedEntityTypeName,
+                label={i18n.t('Delete {{trackedEntityTypeName}}', {
+                    trackedEntityTypeName,
                     interpolation: { escapeValue: false },
                 })}
                 onClick={() => {

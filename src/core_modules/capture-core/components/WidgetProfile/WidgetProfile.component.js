@@ -130,8 +130,8 @@ const WidgetProfilePlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <div>{i18n.t('{{TETName}} profile', {
-                            TETName: trackedEntityTypeName,
+                        <div>{i18n.t('{{trackedEntityTypeName}} profile', {
+                            trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}</div>
                         <div className={classes.actions}>

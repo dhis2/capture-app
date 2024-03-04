@@ -15,25 +15,25 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
     return (
         <Modal dataTest="widget-profile-delete-modal">
             <ModalTitle>
-                {i18n.t('Delete {{TETName}}', {
-                    TETName: trackedEntityTypeName,
+                {i18n.t('Delete {{trackedEntityTypeName}}', {
+                    trackedEntityTypeName,
                     interpolation: { escapeValue: false },
                 })}
             </ModalTitle>
             <ModalContent>
                 <p>
                     {i18n.t(
-                        'Are you sure you want to delete this {{TETName}}? This will permanently remove the {{TETName}} and all its associated enrollments and events in all programs.',
+                        'Are you sure you want to delete this {{trackedEntityTypeName}}? This will permanently remove the {{trackedEntityTypeName}} and all its associated enrollments and events in all programs.',
                         {
-                            TETName: trackedEntityTypeName,
+                            trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         },
                     )}
                 </p>
                 {errorReports.length > 0 && (
                     <NoticeBox
-                        title={i18n.t('There was a problem deleting the {{TETName}}', {
-                            TETName: trackedEntityTypeName,
+                        title={i18n.t('There was a problem deleting the {{trackedEntityTypeName}}', {
+                            trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}
                         error
@@ -51,9 +51,9 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
                     <Button onClick={() => setOpenModal(false)} secondary>
                         {i18n.t('No, cancel')}
                     </Button>
-                    <Button onClick={() => deleteMutation(trackedEntity)} primary loading={deleteLoading}>
-                        {i18n.t('Yes, delete {{TETName}}', {
-                            TETName: trackedEntityTypeName,
+                    <Button onClick={() => deleteMutation(trackedEntity)} primary loading={deleteLoading} destructive>
+                        {i18n.t('Yes, delete {{trackedEntityTypeName}}', {
+                            trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}
                     </Button>
