@@ -9,7 +9,6 @@ import type { Access } from '../Access';
 export class TrackedEntityType {
     _id: string;
     _access: Access;
-    _allowAuditLog: boolean;
     _name: string;
     _teiRegistration: TeiRegistration;
     _attributes: Array<DataElement>;
@@ -60,13 +59,5 @@ export class TrackedEntityType {
     }
     get attributes(): Array<DataElement> {
         return this._attributes;
-    }
-
-    set allowAuditLog(allowAuditLog: boolean) {
-        this._allowAuditLog = allowAuditLog;
-    }
-
-    get allowAuditLog(): boolean {
-        return this._allowAuditLog;
     }
 }

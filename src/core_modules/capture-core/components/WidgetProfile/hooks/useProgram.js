@@ -35,5 +35,17 @@ export const useProgram = (programId: string) => {
         ),
     );
 
-    return { error, loading, program: !loading && data?.programs };
+    const programMetadata = useMemo(() => {
+        if (data?.programs) {
+            const program = data.programs;
+            if (program.trackedEntityType) {
+                program.trackedEntityType.changelogEnabled = program.trackedEntityType.allowAuditLog;
+                delete program.trackedEntityType.allowAuditLog;
+            }
+            return program;
+        }
+        return null;
+    }, [data]);
+
+    return { error, loading, program: !loading && programMetadata };
 };
