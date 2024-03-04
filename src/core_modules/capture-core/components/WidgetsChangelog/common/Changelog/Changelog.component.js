@@ -16,7 +16,7 @@ import type { ChangelogProps } from './Changelog.types';
 
 export const ChangelogComponent = ({
     isOpen,
-    setIsOpen,
+    close,
     records,
     pager,
     setPage,
@@ -28,7 +28,7 @@ export const ChangelogComponent = ({
         large
         hide={!isOpen}
         dataTest={'changelog-modal'}
-        onClose={() => setIsOpen(false)}
+        onClose={close}
     >
         <ModalTitle>{i18n.t('Changelog')}</ModalTitle>
 
@@ -83,7 +83,7 @@ export const ChangelogComponent = ({
         <ModalActions>
             <ButtonStrip>
                 <Button
-                    onClick={() => setIsOpen(false)}
+                    onClick={close}
                     secondary
                 >
                     {i18n.t('Close')}

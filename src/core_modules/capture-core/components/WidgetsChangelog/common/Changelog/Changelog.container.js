@@ -11,7 +11,7 @@ type Props = {
     entityId: string,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
     isOpen: boolean,
-    setIsOpen: (boolean | boolean => boolean) => void,
+    close: () => void,
     dataItemDefinitions: ItemDefinitions,
     programId?: string,
 }
@@ -21,7 +21,7 @@ export const Changelog = ({
     entityType,
     programId,
     isOpen,
-    setIsOpen,
+    close,
     dataItemDefinitions,
 }: Props) => {
     const {
@@ -41,7 +41,7 @@ export const Changelog = ({
 
     if (isLoading) {
         return (
-            <Modal onClose={() => setIsOpen(false)}>
+            <Modal onClose={close}>
                 <LoadingMaskElementCenter />
             </Modal>
         );
@@ -50,7 +50,7 @@ export const Changelog = ({
     return (
         <ChangelogComponent
             isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            close={close}
             records={records}
             pager={pager}
             setPage={setPage}

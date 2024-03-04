@@ -12,10 +12,12 @@ type Props = {
 
 export const WidgetEventChangelog = ({
     eventId,
+    setIsOpen,
     ...passOnProps
 }: Props) => (
     <Changelog
         {...passOnProps}
+        close={() => setIsOpen(false)}
         entityId={eventId}
         entityType={CHANGELOG_ENTITY_TYPES.EVENT}
     />

@@ -6,7 +6,7 @@ import type { DataElement } from '../../../metaData';
 import type { Props } from './TrackedEntityChangelogWrapper.types';
 import { WidgetTrackedEntityChangelog } from '../../WidgetsChangelog';
 
-export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, ...passOnProps }: Props) => {
+export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, ...passOnProps }: Props) => {
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);
 
     const dataItemDefinitions = useMemo(() => {
@@ -56,6 +56,7 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, ...passOnProp
         <WidgetTrackedEntityChangelog
             {...passOnProps}
             teiId={teiId}
+            close={() => setIsOpen(false)}
             programId={programAPI.id}
             dataItemDefinitions={dataItemDefinitions}
         />

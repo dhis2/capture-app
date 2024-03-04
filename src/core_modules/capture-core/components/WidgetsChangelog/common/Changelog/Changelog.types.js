@@ -60,7 +60,7 @@ export type ChangelogRecord = {
 
 export type ChangelogProps = {
     isOpen: boolean,
-    setIsOpen: (boolean) => void,
+    close: () => void,
     pager: ?Pager,
     records: ?Array<ChangelogRecord>,
     setPage: (number) => void,

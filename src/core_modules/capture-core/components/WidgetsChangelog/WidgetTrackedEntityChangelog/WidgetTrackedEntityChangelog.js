@@ -8,16 +8,18 @@ type Props = {
     programId?: string,
     dataItemDefinitions: ItemDefinitions,
     isOpen: boolean,
-    setIsOpen: (boolean | boolean => boolean) => void,
+    close: () => void,
 }
 
 export const WidgetTrackedEntityChangelog = ({
     teiId,
     programId,
+    close,
     ...passOnProps
 }: Props) => (
     <Changelog
         {...passOnProps}
+        close={close}
         entityId={teiId}
         programId={programId}
         entityType={CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY}
