@@ -2,6 +2,42 @@ import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber
 import '../sharedSteps';
 import '../../sharedSteps';
 
+const changeEnrollmentAndEventsStatus = () => (
+    cy.buildApiUrl(
+        'tracker',
+        'trackedEntities/bj4UmUpqaSp?program=qDkgAbB5Jlk&fields=enrollments[enrollment,events,orgUnit,program,enrolledAt,trackedEntity]',
+    )
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'FZAa7j0muDj');
+            const eventToDelete = enrollment.events.find(e => e.programStage === 'eHvTba5ijAh');
+            const { events, ...rest } = enrollment;
+            const enrollmentToUpdate = { ...rest, status: 'ACTIVE' };
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
+                .then(enrollmentUrl => cy.request('POST', enrollmentUrl, { enrollments: [enrollmentToUpdate] }))
+                .then(() => {
+                    if (eventToDelete) {
+                        cy.buildApiUrl('events', eventToDelete.event)
+                            .then((eventUrl) => {
+                                cy.request('DELETE', eventUrl);
+                            }).then(() => {
+                                cy.reload();
+                                cy.get('[data-test="widget-enrollment"]').within(() => {
+                                    cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
+                                });
+                            });
+                    } else {
+                        cy.reload();
+                        cy.get('[data-test="widget-enrollment"]').within(() => {
+                            cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
+                        });
+                    }
+                });
+        })
+);
+
 const showAllEventsInProgramStage = () => {
     cy.get('[data-test="dhis2-uicore-tablefoot"]')
         .then(($footer) => {
@@ -159,39 +195,7 @@ Then('the user clicks the first second antenatal care visit event', () => {
 });
 
 And('the enrollment status is active', () => {
-    cy.buildApiUrl(
-        'tracker',
-        'trackedEntities/bj4UmUpqaSp?program=qDkgAbB5Jlk&fields=enrollments[enrollment,events,orgUnit,program,enrolledAt,trackedEntity]',
-    )
-        .then(url => cy.request(url))
-        .then(({ body }) => {
-            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'FZAa7j0muDj');
-            const eventToDelete = enrollment.events.find(e => e.programStage === 'eHvTba5ijAh');
-            const { events, ...rest } = enrollment;
-            const enrollmentToUpdate = { ...rest, status: 'ACTIVE' };
-
-            return cy
-                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
-                .then(enrollmentUrl => cy.request('POST', enrollmentUrl, { enrollments: [enrollmentToUpdate] }))
-                .then(() => {
-                    if (eventToDelete) {
-                        cy.buildApiUrl('events', eventToDelete.event)
-                            .then((eventUrl) => {
-                                cy.request('DELETE', eventUrl);
-                            }).then(() => {
-                                cy.reload();
-                                cy.get('[data-test="widget-enrollment"]').within(() => {
-                                    cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
-                                });
-                            });
-                    } else {
-                        cy.reload();
-                        cy.get('[data-test="widget-enrollment"]').within(() => {
-                            cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
-                        });
-                    }
-                });
-        });
+    changeEnrollmentAndEventsStatus();
 });
 
 And('the user completes the event', () => {
@@ -225,4 +229,5 @@ Then('the user sees the enrollment status and recently added event in Case outco
         .within(() => {
             cy.get('[data-test="dhis2-uicore-tag-text"]').contains('Completed').should('exist');
         });
+    changeEnrollmentAndEventsStatus();
 });

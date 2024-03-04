@@ -2,6 +2,33 @@ import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber
 import { getCurrentYear } from '../../../support/date';
 import '../../sharedSteps';
 
+const changeEnrollmentAndEventsStatus = () => (
+    cy.buildApiUrl(
+        'tracker',
+        'trackedEntities/JM29jwvw8Ub?program=qDkgAbB5Jlk&fields=enrollments[enrollment,events,orgUnit,program,enrolledAt,trackedEntity]',
+    )
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'C4iB0VTbfrK');
+            const eventToUpdate = enrollment.events.find((e => e.programStage === 'eHvTba5ijAh'));
+            const enrollmentToUpdate = {
+                ...enrollment,
+                status: 'ACTIVE',
+                events: [{ ...eventToUpdate, status: 'ACTIVE' }],
+            };
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
+                .then(enrollmentUrl => cy.request('POST', enrollmentUrl, { enrollments: [enrollmentToUpdate] }))
+                .then(() => {
+                    cy.reload();
+                    cy.get('[data-test="widget-enrollment"]').within(() => {
+                        cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
+                    });
+                });
+        })
+);
+
 Given(/^you land on the enrollment event page with selected (.*) by having typed (.*)$/, (tet, url) => {
     cy.visit(url);
     cy.get('[data-test="scope-selector"]').contains(`${tet}`);
@@ -97,30 +124,7 @@ Then(/^the user see the schedule date field with tooltip: (.*)$/, (tooltipConten
 });
 
 And('the enrollment status is active', () => {
-    cy.buildApiUrl(
-        'tracker',
-        'trackedEntities/JM29jwvw8Ub?program=qDkgAbB5Jlk&fields=enrollments[enrollment,events,orgUnit,program,enrolledAt,trackedEntity]',
-    )
-        .then(url => cy.request(url))
-        .then(({ body }) => {
-            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'C4iB0VTbfrK');
-            const eventToUpdate = enrollment.events.find((e => e.programStage === 'eHvTba5ijAh'));
-            const enrollmentToUpdate = {
-                ...enrollment,
-                status: 'ACTIVE',
-                events: [{ ...eventToUpdate, status: 'ACTIVE' }],
-            };
-
-            return cy
-                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
-                .then(enrollmentUrl => cy.request('POST', enrollmentUrl, { enrollments: [enrollmentToUpdate] }))
-                .then(() => {
-                    cy.reload();
-                    cy.get('[data-test="widget-enrollment"]').within(() => {
-                        cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
-                    });
-                });
-        });
+    changeEnrollmentAndEventsStatus();
 });
 
 And('the user completes the event', () => {
@@ -161,5 +165,6 @@ Then('the user sees the enrollment status and recently edited event in Case outc
         .within(() => {
             cy.get('[data-test="dhis2-uicore-tag-text"]').contains('Completed').should('exist');
         });
+    changeEnrollmentAndEventsStatus();
 });
 

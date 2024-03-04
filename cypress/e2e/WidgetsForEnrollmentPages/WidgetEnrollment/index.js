@@ -1,6 +1,26 @@
 import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
 
+const changeEnrollmentAndEventsStatus = () => (
+    cy.buildApiUrl('tracker', 'trackedEntities/osF4RF4EiqP?program=IpHINAT79UW&fields=enrollments')
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'qyx7tscVpVB');
+            const eventsToUpdate = enrollment.events.map(e => ({ ...e, status: 'ACTIVE' }));
+            const enrollmentToUpdate = { ...enrollment, status: 'ACTIVE', events: eventsToUpdate };
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
+                .then(enrollmentUrl => cy.request('POST', enrollmentUrl, { enrollments: [enrollmentToUpdate] }))
+                .then(() => {
+                    cy.reload();
+                    cy.get('[data-test="widget-enrollment"]').within(() => {
+                        cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
+                    });
+                });
+        })
+);
+
 When('you click the enrollment widget toggle open close button', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-open-close-toggle-button"]').click();
@@ -118,26 +138,7 @@ Then(/^the user sees the delete enrollment modal/, () =>
 );
 
 Then('the user sees the enrollment status and the Baby Postnatal event status is active', () => {
-    cy.buildApiUrl('tracker', 'trackedEntities/osF4RF4EiqP?program=IpHINAT79UW&fields=enrollments')
-        .then(url => cy.request(url))
-        .then(({ body }) => {
-            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'qyx7tscVpVB');
-            const eventsToUpdate = enrollment.events.reduce(
-                (acc, e) => [...acc, e.programStage === 'ZzYYXq4fJie' ? { ...e, status: 'ACTIVE' } : e],
-                [],
-            );
-            const enrollmentToUpdate = { ...enrollment, status: 'ACTIVE', events: eventsToUpdate };
-
-            return cy
-                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
-                .then(enrollmentUrl => cy.request('POST', enrollmentUrl, { enrollments: [enrollmentToUpdate] }))
-                .then(() => {
-                    cy.reload();
-                    cy.get('[data-test="widget-enrollment"]').within(() => {
-                        cy.get('[data-test="widget-enrollment-status"]').contains('Active').should('exist');
-                    });
-                });
-        });
+    changeEnrollmentAndEventsStatus();
 });
 
 Then('the user sees the enrollment status and the Baby Postnatal event status is completed', () => {
@@ -151,6 +152,7 @@ Then('the user sees the enrollment status and the Baby Postnatal event status is
         .within(() => {
             cy.get('[data-test="dhis2-uicore-tag-text"]').contains('Completed').should('exist');
         });
+    changeEnrollmentAndEventsStatus();
 });
 
 When('the user completes the enrollment and the active events', () => {
