@@ -23,7 +23,14 @@ const styles = {
     },
 };
 
-const LinkedEntityTablePlain = ({ linkedEntities, columns, onLinkedRecordClick, context, classes }: StyledProps) => {
+const LinkedEntityTablePlain = ({
+    linkedEntities,
+    columns,
+    onLinkedRecordClick,
+    onDeleteRelationship,
+    context,
+    classes,
+}: StyledProps) => {
     const [visibleRowsCount, setVisibleRowsCount] = useState(DEFAULT_VISIBLE_ROWS_COUNT);
 
     const visibleLinkedEntities = useMemo(() =>
@@ -39,12 +46,14 @@ const LinkedEntityTablePlain = ({ linkedEntities, columns, onLinkedRecordClick, 
             <DataTable>
                 <LinkedEntityTableHeader
                     columns={columns}
+                    context={context}
                 />
                 <LinkedEntityTableBody
                     linkedEntities={visibleLinkedEntities}
                     columns={columns}
                     onLinkedRecordClick={onLinkedRecordClick}
                     context={context}
+                    onDeleteRelationship={onDeleteRelationship}
                 />
             </DataTable>
             {showMoreButtonVisible && (
