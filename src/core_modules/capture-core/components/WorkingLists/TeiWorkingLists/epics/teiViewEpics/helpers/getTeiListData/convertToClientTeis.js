@@ -29,7 +29,7 @@ export const convertToClientTeis = (
                     }
 
                     const urls = (type === dataElementTypes.IMAGE) ?
-                        (featureAvailable(FEATURES.trackerImageEndpoint) ?
+                        (() => (featureAvailable(FEATURES.trackerImageEndpoint) ?
                             {
                                 imageUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}`,
                                 previewUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
@@ -37,7 +37,7 @@ export const convertToClientTeis = (
                                 imageUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
                                 previewUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
                             }
-                        ) : {};
+                        ))() : {};
 
                     return {
                         id,
@@ -46,7 +46,7 @@ export const convertToClientTeis = (
                     };
                 })
                 .filter(({ value }) => value != null)
-                .reduce((acc, { id, value, imageUrl, previewUrl }) => {
+                .reduce((acc, { id, value, imageUrl, previewUrl }: any) => {
                     acc[id] = {
                         convertedValue: value,
                         ...(imageUrl ? { imageUrl, previewUrl } : {}),

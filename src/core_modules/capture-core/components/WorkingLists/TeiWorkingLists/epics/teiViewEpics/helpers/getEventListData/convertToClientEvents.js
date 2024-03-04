@@ -48,7 +48,7 @@ const buildTEIRecord = ({
     columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
         const value = mainProperty ? apiTEI[id] : attributeValuesById[id];
         const urls = (type === dataElementTypes.IMAGE) ?
-            (featureAvailable(FEATURES.trackerImageEndpoint) ?
+            (() => (featureAvailable(FEATURES.trackerImageEndpoint) ?
                 {
                     imageUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}`,
                     previewUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
@@ -56,7 +56,7 @@ const buildTEIRecord = ({
                     imageUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
                     previewUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
                 }
-            ) : {};
+            ))() : {};
 
         return {
             id,
@@ -86,9 +86,9 @@ const buildEventRecord = ({
         const clientValue = isStatus
             ? convertServerStatusToClient(value, apiEvent.scheduledAt)
             : convertServerToClient(value, type);
-    
+
         const urls = (type === dataElementTypes.IMAGE) ?
-            (featureAvailable(FEATURES.trackerImageEndpoint) ?
+            (() => (featureAvailable(FEATURES.trackerImageEndpoint) ?
                 {
                     imageUrl: `/tracker/events/${apiEvent.event}/dataValues/${id}/image`,
                     previewUrl: `/tracker/events/${apiEvent.event}/dataValues/${id}/image?dimension=small`,
@@ -96,7 +96,7 @@ const buildEventRecord = ({
                     imageUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
                     previewUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
                 }
-            ) : {};
+            ))() : {};
 
         return {
             id: getFilterClientName(id),
@@ -133,7 +133,7 @@ export const convertToClientEvents = (
             ...TEIRecord,
         ]
             .filter(({ value }) => value != null)
-            .reduce((acc, { id, value, imageUrl, previewUrl }) => {
+            .reduce((acc, { id, value, imageUrl, previewUrl }: any) => {
                 acc[id] = {
                     convertedValue: value,
                     ...(imageUrl ? { imageUrl, previewUrl } : {}),
