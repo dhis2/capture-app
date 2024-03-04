@@ -7,7 +7,7 @@ import {
 } from '@dhis2/ui';
 import type { Props } from './linkedEntityTableHeader.types';
 
-export const LinkedEntityTableHeader = ({ columns }: Props) => (
+export const LinkedEntityTableHeader = ({ columns, context }: Props) => (
     <DataTableHead>
         <DataTableRow>
             {
@@ -20,6 +20,9 @@ export const LinkedEntityTableHeader = ({ columns }: Props) => (
                         </DataTableColumnHeader>
                     ))
             }
+            {context.display.showDeleteButton && (
+                <DataTableColumnHeader />
+            )}
         </DataTableRow>
     </DataTableHead>
 );

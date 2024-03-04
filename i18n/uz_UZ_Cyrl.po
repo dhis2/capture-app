@@ -1,13 +1,14 @@
 # 
 # Translators:
-# Ibatov <ibatovk@who.int>, 2023
+# Philip Larsen Donnelly, 2024
+# Ibatov <ibatovk@who.int>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Ibatov <ibatovk@who.int>, 2023\n"
+"Last-Translator: Ibatov <ibatovk@who.int>, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,10 +78,6 @@ msgstr "майдонни текшириш вақтида хатолик юз б�
 
 msgid "error"
 msgstr "хато"
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
-msgstr ""
 
 msgid "This value is validating"
 msgstr "Ушбу қиймат тасдиқланмоқда"
@@ -161,6 +158,9 @@ msgid "Complete event"
 msgstr "Ҳодиса/тадбирни якунлаш"
 
 msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Assignee"
 msgstr ""
 
 msgid "{{ stageName }} - Status"
@@ -659,28 +659,19 @@ msgstr ""
 msgid "Opt out for {{programName}}"
 msgstr ""
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "\"{{enrollmentId}}\" идентификатори билан қайд қилиш имконсиз"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 "\"{{teiId}}\" идентификатори билан кузатувдаги объект намунаси мавжуд эмас"
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
-"Ушбу қайд бўлимини очишда хатолик юз берди. Илтимос, Ҳақиқий URL манзилни "
-"киритинг."
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
-
-msgid "Enrollment Dashboard"
-msgstr "Қайд этиш панели"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Ушбу қайд этишда индикатор ахбороти мавжуд эмас"
-
-msgid "No feedback for this enrollment yet"
-msgstr "Ушбу қайд этишда қайта алоқа ахбороти мавжуд эмас"
 
 msgid "Quick actions"
 msgstr "Тезкор харакатлар"
@@ -765,20 +756,11 @@ msgstr "Жорий дастур учун ташкилий бирлик яроқ�
 msgid "There was an error opening the Page"
 msgstr "Саҳифани очишда хатолик мавжуд"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "Рўйхатга олишда {{escape}} Янги Ҳодиса/Ҳолат"
-
 msgid "There was an error loading the page"
 msgstr ""
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
-
-msgid "There are no feedbacks for this event"
-msgstr ""
-
-msgid "There are no indicators for this event"
-msgstr ""
 
 msgid "Program stage is invalid"
 msgstr ""
@@ -806,18 +788,6 @@ msgstr ""
 
 msgid "Stage"
 msgstr "Босқич"
-
-msgid "Enrollment{{escape}} View Event"
-msgstr ""
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr ""
-
-msgid "The enrollment event data could not be found"
-msgstr ""
-
-msgid "There are no feedback for this event"
-msgstr ""
 
 msgid "Registered events"
 msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
@@ -934,18 +904,6 @@ msgstr ""
 "Ушбу саҳифани тарк этсангиз, янги алоқа-муносабатлар учун қилинган барча "
 "танловлар бекор қилинади "
 
-msgid "No one is assigned to this event"
-msgstr "Ушбу ҳодиса/тадбирга ҳеч ким бириктирилмаган"
-
-msgid "Assign"
-msgstr "Тайинланган"
-
-msgid "Event assigned to {{name}}"
-msgstr "Ҳодиса/тадбир {{name}} га бириктирилди"
-
-msgid "Feedbacks"
-msgstr "Қайта алоқалар"
-
 msgid "Show all events"
 msgstr "Барча ҳодиса/тадбирларни кўрсатиш"
 
@@ -958,6 +916,21 @@ msgstr "Ҳодиса/тадбирни юклаб бўлмади"
 msgid "Organisation unit could not be loaded"
 msgstr "Ташкилий бўлимни юклаб бўлмади"
 
+msgid "Dashboard"
+msgstr "Бошқарув панели"
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr "Ушбу қайд этишда қайта алоқа ахбороти мавжуд эмас"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Ушбу қайд этишда индикатор ахбороти мавжуд эмас"
+
 msgid "Selected program"
 msgstr "Танланган дастур"
 
@@ -968,6 +941,9 @@ msgid "Search by attributes"
 msgstr "Атрибут орқали қидириш"
 
 msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
+msgid "The enrollment event data could not be found"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1108,11 +1084,23 @@ msgstr "Янги {{trackedEntityName}} да {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
 
-msgid "To work with the selected program,"
-msgstr "Танланган дастур билан ишлаш учун,"
+msgid "Assigned to"
+msgstr "Тайинланган"
 
-msgid "open the Tracker Capture app"
-msgstr "Кузатув-Назорат дастурини очинг"
+msgid "You don't have access to edit this assignee"
+msgstr ""
+
+msgid "Edit"
+msgstr "Таҳрирлаш"
+
+msgid "No one is assigned to this event"
+msgstr "Ушбу ҳодиса/тадбирга ҳеч ким бириктирилмаган"
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
+msgstr "Тайинланган"
 
 msgid "This program is protected"
 msgstr "Ушбу дастур ҳимояланган"
@@ -1183,9 +1171,6 @@ msgstr "Кенглик"
 msgid "Longitude"
 msgstr "Узунлик"
 
-msgid "Edit"
-msgstr "Таҳрирлаш"
-
 msgid "Set coordinates"
 msgstr ""
 
@@ -1221,7 +1206,7 @@ msgid "Started at {{orgUnitName}}"
 msgstr " {{orgUnitName}} да бошланган"
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr " {{orgUnitName}} эгалиги асосида"
+msgstr " {{ownerOrgUnit}} эгалиги асосида"
 
 msgid "Last updated {{date}}"
 msgstr " {{date}}да охирги марта янгиланган"
@@ -1394,7 +1379,7 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 
-msgid "New TEI Relationship"
+msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
 msgid "Missing implementation step"
@@ -1448,9 +1433,6 @@ msgstr "Маълумотларни юклаб олиш ..."
 
 msgid "an error occurred loading working lists"
 msgstr "ишчи рўйхатни юклашда хатолик юз берди"
-
-msgid "Assigned to"
-msgstr "Тайинланган"
 
 msgid "Registration Date"
 msgstr "Рўйхатга олинган сана"
@@ -1579,6 +1561,9 @@ msgid "Error deleting the enrollment event"
 msgstr ""
 
 msgid "Error editing the event, the changes made were not saved"
+msgstr ""
+
+msgid "Error updating the Assignee"
 msgstr ""
 
 msgid "Set coordinate"
