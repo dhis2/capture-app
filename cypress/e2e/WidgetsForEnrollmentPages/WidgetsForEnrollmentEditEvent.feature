@@ -119,7 +119,8 @@ Feature: The user interacts with the widgets on the enrollment edit event
     Then the event has the user Tracker demo User assigned
     When you remove the assigned user
     Then the event has no assignd user
-
+  
+  @v>=41
   Scenario: The user can view an event changelog on the enrollment edit event
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
     When you select view changelog in the event overflow button
@@ -127,14 +128,16 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the changelog modal should contain data
     # One row is filtered out as the metadata is no longer there
     And the number of changelog table rows should be 9
-
+  
+  @v>=41
   Scenario: The user can change changelog page size
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
     When you select view changelog in the event overflow button
     And you change the page size to 20
     # One row is filtered out as the metadata is no longer there
     Then the number of changelog table rows should be 19
-
+  
+  @v>=41
   Scenario: The user can move to the next page in the changelog
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
     When you select view changelog in the event overflow button
