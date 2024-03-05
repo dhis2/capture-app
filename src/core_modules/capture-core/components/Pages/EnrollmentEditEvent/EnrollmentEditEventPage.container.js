@@ -5,7 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
-import { useCommonEnrollmentDomainData, showEnrollmentError, updateEnrollmentEvents } from '../common/EnrollmentOverviewDomain';
+import {
+    useCommonEnrollmentDomainData,
+    showEnrollmentError,
+    updateEnrollmentEvent,
+    updateEnrollmentAndEvents,
+    commitEnrollmentAndEvents,
+    rollbackEnrollmentAndEvents,
+    setExternalEnrollmentStatus,
+} from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -35,6 +43,7 @@ import { setAssignee, rollbackAssignee } from './EnrollmentEditEventPage.actions
 import { convertClientToServer } from '../../../converters';
 import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
 import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
+import { statusTypes } from '../../../enrollment';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -132,6 +141,27 @@ const EnrollmentEditEventPageWithContextPlain = ({
     };
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
+
+    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate) => {
+        dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentStatusError = useCallback((message) => {
+        dispatch(rollbackEnrollmentAndEvents());
+        dispatch(showEnrollmentError({ message }));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
+        dispatch(commitEnrollmentAndEvents());
+        redirect && history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
+
+    const onSaveAndCompleteEnrollment = useCallback((enrollmentToUpdate) => {
+        dispatch(setExternalEnrollmentStatus(statusTypes.COMPLETED));
+        dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
+        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
+
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
@@ -148,7 +178,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
     const onHandleScheduleSave = (eventData: Object) => {
-        dispatch(updateEnrollmentEvents(eventId, eventData));
+        dispatch(updateEnrollmentEvent(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
@@ -211,6 +241,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             hideWidgets={hideWidgets}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            eventId={eventId}
             trackedEntityTypeId={trackedEntityTypeId}
             enrollmentsAsOptions={enrollmentsAsOptions}
             teiDisplayName={teiDisplayName}
@@ -224,6 +255,10 @@ const EnrollmentEditEventPageWithContextPlain = ({
             onLinkedRecordClick={onLinkedRecordClick}
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
+            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+            onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
             eventStatus={event?.status}
             eventAccess={eventAccess}
             scheduleDate={scheduleDate}
@@ -233,6 +268,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             getAssignedUserSaveContext={getAssignedUserSaveContext}
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}
+            events={enrollmentSite?.events}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
     );

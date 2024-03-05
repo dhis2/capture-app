@@ -13,9 +13,13 @@ export type Props = {|
     orgUnitId: string,
     programId: string,
     enrollmentId: string,
+    eventId: string,
     teiId: string,
     initialScheduleDate?: string,
     assignee?: UserFormField | null,
+    onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
+    onSaveAndCompleteEnrollmentSuccessActionType?: string,
+    onSaveAndCompleteEnrollmentErrorActionType?: string,
 |};
 
 export type PlainProps = {|

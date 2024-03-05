@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "100.59.0",
+    "version": "100.62.0",
     "cacheVersion": "7",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
@@ -10,7 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/rules-engine-javascript": "100.59.0",
+        "@dhis2/rules-engine-javascript": "100.62.0",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
@@ -137,7 +137,8 @@
         "@babel/preset-react": "7.16.7",
         "@dhis2/ui": "^9.1.1",
         "@js-temporal/polyfill": "0.4.3",
-        "core-js": "2.5.7"
+        "core-js": "2.5.7",
+        "i18next": "^20.5.0"
     },
     "browserslist": {
         "production": [

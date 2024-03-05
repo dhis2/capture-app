@@ -133,3 +133,12 @@ Feature: The user interacts with the widgets on the enrollment edit event
     When you select view changelog in the event overflow button
     And you move to the next page
     Then the table footer should display page 2
+
+  Scenario: User can complete the enrollment and the active events
+    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=OWpIzQ4xabC&orgUnitId=DiszpKrYNg8
+    And the enrollment widget should be opened
+    And the user sees the enrollment status and the Baby Postnatal event status is active
+    And the user opens the enrollment actions menu
+    When the user completes the enrollment and the active events
+    Then the user sees the enrollment status and the Baby Postnatal event status is completed
+

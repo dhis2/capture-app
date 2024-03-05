@@ -77,6 +77,7 @@ import { enrollmentDomainDesc } from '../../core_modules/capture-core/reducers/d
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
 import { trackedEntityInstanceDesc } from '../../core_modules/capture-core/reducers/descriptions/trackedEntityInstance.reducerDescription';
+import { widgetEnrollmentDesc } from '../../core_modules/capture-core/reducers/descriptions/widgetEnrollment.reducerDescription';
 
 export const reducerDescriptions = [
     activePageDesc,
@@ -138,4 +139,5 @@ export const reducerDescriptions = [
     workingListsStickyFiltersDesc,
     workingListsListRecordsDesc,
     workingListsTemplatesDesc,
+    widgetEnrollmentDesc,
 ];

@@ -14,8 +14,10 @@ import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDa
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
 import {
     commitEnrollmentEvent,
-    updateEnrollmentEvents,
+    updateEnrollmentEvent,
     rollbackEnrollmentEvent,
+    rollbackEnrollmentAndEvents,
+    commitEnrollmentAndEvents,
     enrollmentSiteActionTypes,
 } from '../../Pages/common/EnrollmentOverviewDomain';
 import { TrackerProgram } from '../../../metaData/Program';
@@ -39,6 +41,7 @@ import {
     updateEventContainer,
 } from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
+import { enrollmentEditEventActionTypes } from '../../Pages/EnrollmentEditEvent';
 
 const getDataEntryId = (event): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -83,16 +86,20 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
         map((action) => {
+            const {
+                dataEntryId,
+                itemId,
+                formFoundation,
+                orgUnit,
+            } = action.payload;
             const state = store.value;
-            const payload = action.payload;
-            const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
-            const eventId = state.dataEntries[payload.dataEntryId].eventId;
+            const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+            const eventId = state.dataEntries[dataEntryId].eventId;
 
             const formValues = state.formsValues[dataEntryKey];
             const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
             const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
             const prevEventMainData = state.viewEventPage.loadedValues.eventContainer.event;
-            const formFoundation = payload.formFoundation;
             const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
                 formFoundation,
                 formValues,
@@ -121,7 +128,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 },
             };
 
-            const orgUnit = payload.orgUnit;
             const serverData = {
                 events: [{
                     ...mainDataServerValues,
@@ -144,7 +150,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             if (program instanceof TrackerProgram) {
                 return batchActions([
                     updateEventContainer(eventContainer, orgUnit),
-                    updateEnrollmentEvents(eventId, serverData.events[0]),
+                    updateEnrollmentEvent(eventId, serverData.events[0]),
                     startSaveEditEventDataEntry(eventId, serverData, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
@@ -157,8 +163,16 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED),
-        filter(({ meta }) => meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT),
-        map(({ meta }) => commitEnrollmentEvent(meta.eventId)));
+        map((action) => {
+            const meta = action.meta;
+            if (meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT) {
+                return commitEnrollmentEvent(meta.eventId);
+            }
+            if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS) {
+                return commitEnrollmentAndEvents();
+            }
+            return EMPTY;
+        }));
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -184,6 +198,9 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
 
             if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {
                 actions = [...actions, rollbackEnrollmentEvent(eventContainer.event.eventId)];
+            }
+            if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR) {
+                actions = [...actions, rollbackEnrollmentAndEvents()];
             }
             return batchActions(actions);
         }));
@@ -223,3 +240,81 @@ export const startCreateNewAfterCompletingEpic = (
             return EMPTY;
         }));
 
+export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST),
+        map((action) => {
+            const {
+                itemId,
+                dataEntryId,
+                formFoundation,
+                orgUnit,
+                onSaveAndCompleteEnrollmentExternal,
+                onSaveAndCompleteEnrollmentSuccessActionType,
+                onSaveAndCompleteEnrollmentErrorActionType,
+                enrollment,
+            } = action.payload;
+
+            const state = store.value;
+            const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+            const eventId = state.dataEntries[dataEntryId].eventId;
+            const formValues = state.formsValues[dataEntryKey];
+            const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
+            const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
+            const prevEventMainData = state.viewEventPage.loadedValues.eventContainer.event;
+            const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
+                formFoundation,
+                formValues,
+                dataEntryValues,
+                dataEntryValuesMeta,
+            );
+
+            const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
+            const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+
+            if (!prevEventMainData.completedAt) {
+                mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
+            }
+
+            const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
+            const eventContainer = {
+                ...prevEventContainer,
+                event: {
+                    ...prevEventContainer.event,
+                    ...dataEntryClientValues,
+                },
+                values: {
+                    ...formClientValues,
+                },
+            };
+
+            const editEvent = {
+                ...mainDataServerValues,
+                attributeOptionCombo: undefined,
+                dataValues: formFoundation
+                    .getElements()
+                    .map(({ id }) => ({
+                        dataElement: id,
+                        value: formServerValues[id] || null,
+                    })),
+            };
+
+            const enrollmentWithAllEvents = enrollment.events
+                ? { ...enrollment, events: [editEvent, ...enrollment.events] }
+                : { ...enrollment, events: [editEvent] };
+
+            const serverData = { enrollments: [enrollmentWithAllEvents] };
+
+            onSaveAndCompleteEnrollmentExternal && onSaveAndCompleteEnrollmentExternal(enrollmentWithAllEvents);
+            return batchActions([
+                updateEventContainer(eventContainer, orgUnit),
+                startSaveEditEventDataEntry(
+                    eventId,
+                    serverData,
+                    onSaveAndCompleteEnrollmentSuccessActionType,
+                    onSaveAndCompleteEnrollmentErrorActionType,
+                ),
+            ]);
+        }),
+    );

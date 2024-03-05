@@ -77,8 +77,12 @@ export const WidgetEventEditPlain = ({
     programId,
     orgUnitId,
     enrollmentId,
+    eventId,
     teiId,
     assignee,
+    onSaveAndCompleteEnrollment,
+    onSaveAndCompleteEnrollmentSuccessActionType,
+    onSaveAndCompleteEnrollmentErrorActionType,
     classes,
 }: PlainProps) => {
     const dispatch = useDispatch();
@@ -184,6 +188,7 @@ export const WidgetEventEditPlain = ({
                             stageId={programStage.id}
                             teiId={teiId}
                             enrollmentId={enrollmentId}
+                            eventId={eventId}
                             eventStatus={eventStatus}
                             onCancelEditEvent={onCancelEditEvent}
                             hasDeleteButton
@@ -191,9 +196,13 @@ export const WidgetEventEditPlain = ({
                             onSaveExternal={onSaveExternal}
                             initialScheduleDate={initialScheduleDate}
                             allowGenerateNextVisit={programStage.allowGenerateNextVisit}
+                            askCompleteEnrollmentOnEventComplete={programStage.askCompleteEnrollmentOnEventComplete}
                             availableProgramStages={availableProgramStages}
                             hideDueDate={programStage.hideDueDate}
                             assignee={assignee}
+                            onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
+                            onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
+                            onSaveAndCompleteEnrollmentSuccessActionType={onSaveAndCompleteEnrollmentSuccessActionType}
                         />
                     )}
                 </div>
