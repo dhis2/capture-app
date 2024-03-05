@@ -1,8 +1,8 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, buildUrl } from 'capture-core-utils';
 import { useState, useCallback, useEffect } from 'react';
-import { useDataEngine } from '@dhis2/app-runtime';
+import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { convertValue as convertServerToClient } from '../../../converters/serverToClient';
 import { subValueGetterByElementType } from './getSubValueForTei';
@@ -10,6 +10,7 @@ import { Option } from '../../../metaData';
 import { isMultiTextWithoutOptionset } from '../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 
 type InputProgramData = {
+    id: string,
     programTrackedEntityAttributes: Array<{
         trackedEntityAttribute: {
             id: string,
@@ -38,8 +39,10 @@ type InputAttribute = {
 const MULIT_TEXT_WITH_NO_OPTIONS_SET =
     'could not create the metadata because a MULIT_TEXT without associated option sets was found';
 
-export const useClientAttributesWithSubvalues = (program: InputProgramData, trackedEntityInstanceAttributes: Array<InputAttribute>) => {
+export const useClientAttributesWithSubvalues = (teiId: string, program: InputProgramData, trackedEntityInstanceAttributes: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
+    const { baseUrl, apiVersion } = useConfig();
+    const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
 
     const [listAttributes, setListAttributes] = useState([]);
 
@@ -56,7 +59,13 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
                 let value;
                 if (foundAttribute) {
                     if (subValueGetterByElementType[valueType]) {
-                        value = await subValueGetterByElementType[valueType](foundAttribute.value, querySingleResource);
+                        value = await subValueGetterByElementType[valueType]({
+                            value: foundAttribute.value,
+                            id,
+                            teiId,
+                            programId: program.id,
+                            absoluteApiPath,
+                        }, querySingleResource);
                     } else {
                         // $FlowFixMe dataElementTypes flow error
                         value = convertServerToClient(foundAttribute.value, valueType);
@@ -85,7 +94,7 @@ export const useClientAttributesWithSubvalues = (program: InputProgramData, trac
 
             setListAttributes(computedAttributes);
         }
-    }, [program, trackedEntityInstanceAttributes, dataEngine]);
+    }, [program, trackedEntityInstanceAttributes, teiId, absoluteApiPath, dataEngine]);
 
     useEffect(() => {
         getListAttributes();
