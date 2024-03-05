@@ -41,8 +41,7 @@ const getNumericFilter = (filter: ApiDataFilterNumeric): ?NumericFilterData => {
 // Api returns a boolean as an object if we filter attributes, but it returns a boolean if it's a main filter
 const getBooleanFilter = (filter: ApiDataFilterBoolean): any => {
     if (typeof filter === 'boolean') {
-        const stringifiedFilter = filter.toString();
-        return { values: [stringifiedFilter] };
+        return { values: [filter] };
     }
     if (filter.in) {
         return { values: filter.in.map(value => value === 'true') };

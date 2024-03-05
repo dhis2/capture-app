@@ -46,7 +46,6 @@ export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 },
                 callBacks: { onChangeTemplate },
             } = action.payload;
-            debugger;
             const trackedEntityInstanceFilters = {
                 name,
                 program,
@@ -56,7 +55,7 @@ export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, 
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
                     ...(programStatus && { enrollmentStatus: programStatus }),
-                    ...(followUp && { followUp }),
+                    ...(!!followUp && { followUp }),
                     ...(enrolledAt && { enrollmentCreatedDate: enrolledAt }),
                     ...(occurredAt && { enrollmentIncidentDate: occurredAt }),
                     ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
