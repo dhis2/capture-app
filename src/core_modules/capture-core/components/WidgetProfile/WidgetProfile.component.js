@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable complexity */
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,7 +8,8 @@ import { Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
-import { errorCreator } from 'capture-core-utils';
+import { useQueryClient } from 'react-query';
+import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -20,6 +22,8 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
+import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
+import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
 import { OverflowMenu } from './OverflowMenu';
 
 const styles = {
@@ -35,6 +39,7 @@ const styles = {
     },
     actions: {
         display: 'flex',
+        gap: '4px',
     },
 };
 
@@ -50,6 +55,8 @@ const WidgetProfilePlain = ({
     onDeleteSuccess,
     classes,
 }: PlainProps) => {
+    const supportsChangelog = useFeature(FEATURES.changelogs);
+    const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
@@ -81,6 +88,7 @@ const WidgetProfilePlain = ({
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program, trackedEntityInstanceAttributes);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
+    const displayChangelog = supportsChangelog && program.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
@@ -91,6 +99,10 @@ const WidgetProfilePlain = ({
                 attribute, key, value, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues]);
+
+    const onSaveExternal = useCallback(() => {
+        queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
+    }, [queryClient, teiId]);
 
     useEffect(() => {
         hasError && setTeiModalState(TEI_MODAL_STATE.OPEN_ERROR);
@@ -145,6 +157,9 @@ const WidgetProfilePlain = ({
                                 canWriteData={canWriteData}
                                 trackedEntity={trackedEntity}
                                 onDeleteSuccess={onDeleteSuccess}
+                                displayChangelog={displayChangelog}
+                                teiId={teiId}
+                                programAPI={program}
                             />
                         </div>
                     </div>
@@ -167,6 +182,7 @@ const WidgetProfilePlain = ({
                         trackedEntityInstanceId={teiId}
                         onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
                         onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
+                        onSaveExternal={onSaveExternal}
                         modalState={modalState}
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}

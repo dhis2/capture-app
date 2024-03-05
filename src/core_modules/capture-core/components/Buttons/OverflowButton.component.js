@@ -14,7 +14,6 @@ type Props = {
     dataTest?: string,
     small?: boolean,
     large?: boolean,
-    className: string,
 };
 
 export const OverflowButton = ({
@@ -28,7 +27,6 @@ export const OverflowButton = ({
     icon,
     dataTest,
     component,
-    className,
 }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const anchorRef = useRef(null);
@@ -51,7 +49,6 @@ export const OverflowButton = ({
                 large={large}
                 onClick={toggle}
                 icon={icon}
-                className={className}
             >
                 {label}
             </Button>

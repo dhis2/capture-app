@@ -1,30 +1,25 @@
 // @flow
 import React, { useState } from 'react';
-import type { ComponentType } from 'react';
-import { FlyoutMenu, IconMore16, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { FlyoutMenu, IconMore16, MenuItem, MenuDivider } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
 import { OverflowButton } from '../../Buttons';
+import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
 
-const styles = {
-    iconButton: {
-        display: 'flex',
-        marginLeft: spacers.dp4,
-    },
-};
-
-const MenuPlain = ({
+export const OverflowMenuComponent = ({
     trackedEntity,
     trackedEntityTypeName,
     canWriteData,
     canCascadeDeleteTei,
     onDeleteSuccess,
-    classes,
+    displayChangelog,
+    teiId,
+    programAPI,
 }: PlainProps) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
-    // const [changelogIsOpen, setChangelogIsOpen] = useState(false);
+    const [changelogIsOpen, setChangelogIsOpen] = useState(false);
 
     return (
         <>
@@ -34,19 +29,20 @@ const MenuPlain = ({
                 icon={<IconMore16 />}
                 small
                 secondary
-                className={classes.iconButton}
                 dataTest="widget-profile-overflow-menu"
                 component={
                     <FlyoutMenu dense>
-                        {/* To enable in DHIS2-16764
-                        <MenuItem
-                            label={i18n.t('View changelog')}
-                            onClick={() => {
-                                setChangelogIsOpen(true);
-                                setActionsIsOpen(false);
-                            }}
-                        />
-                        <MenuDivider dense /> */}
+                        {
+                            displayChangelog && (
+                                <MenuItem
+                                    label={i18n.t('View changelog')}
+                                    onClick={() => {
+                                        setChangelogIsOpen(true);
+                                        setActionsIsOpen(false);
+                                    }}
+                                />)
+                        }
+                        <MenuDivider dense />
                         <DeleteMenuItem
                             trackedEntityTypeName={trackedEntityTypeName}
                             canWriteData={canWriteData}
@@ -65,9 +61,14 @@ const MenuPlain = ({
                     onDeleteSuccess={onDeleteSuccess}
                 />
             )}
-            {/* {changelogIsOpen && supportsChangelog && <> DHIS2-16764 </>} */}
+            {changelogIsOpen && (
+                <TrackedEntityChangelogWrapper
+                    teiId={teiId}
+                    programAPI={programAPI}
+                    isOpen={changelogIsOpen}
+                    setIsOpen={setChangelogIsOpen}
+                />
+            )}
         </>
     );
 };
-
-export const OverflowMenuComponet: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(MenuPlain);

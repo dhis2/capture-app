@@ -5,6 +5,9 @@ export type Props = {|
     trackedEntityTypeName: string,
     canWriteData: boolean,
     onDeleteSuccess?: () => void,
+    displayChangelog: boolean,
+    teiId: string,
+    programAPI: any,
 |};
 
 export type PlainProps = {|
@@ -13,5 +16,7 @@ export type PlainProps = {|
     canWriteData: boolean,
     canCascadeDeleteTei: boolean,
     onDeleteSuccess?: () => void,
-    ...CssClasses,
+    displayChangelog: boolean,
+    teiId: string,
+    programAPI: any,
 |};
