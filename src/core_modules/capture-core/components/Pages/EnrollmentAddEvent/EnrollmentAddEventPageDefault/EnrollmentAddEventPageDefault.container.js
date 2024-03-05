@@ -70,6 +70,10 @@ export const EnrollmentAddEventPageDefault = ({
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
+    const onAccessLostFromTransfer = () => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    };
+
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
     const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
@@ -160,6 +164,7 @@ export const EnrollmentAddEventPageDefault = ({
                 ready={Boolean(enrollment)}
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
+                onAccessLostFromTransfer={onAccessLostFromTransfer}
             />
         </>
     );
