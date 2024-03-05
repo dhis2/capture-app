@@ -1,3 +1,10 @@
+# [100.61.0](https://github.com/dhis2/capture-app/compare/v100.60.0...v100.61.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-15391] preview images in working lists and on enrollment dashboard ([#3546](https://github.com/dhis2/capture-app/issues/3546)) ([191c22f](https://github.com/dhis2/capture-app/commit/191c22fd5f393fa682640e6c081ce34ff36eccfa))
+
 # [100.60.0](https://github.com/dhis2/capture-app/compare/v100.59.0...v100.60.0) (2024-03-05)
 
 
