@@ -1,3 +1,10 @@
+# [100.65.0](https://github.com/dhis2/capture-app/compare/v100.64.0...v100.65.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-16764][DHIS2-16759][DHIS2-16781] Changelog ([#3540](https://github.com/dhis2/capture-app/issues/3540)) ([fa54ee4](https://github.com/dhis2/capture-app/commit/fa54ee4fc5657094ee5b240d3f5d936e42cc6c09))
+
 # [100.64.0](https://github.com/dhis2/capture-app/compare/v100.63.0...v100.64.0) (2024-03-05)
 
 
