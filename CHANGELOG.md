@@ -1,3 +1,10 @@
+# [100.59.0](https://github.com/dhis2/capture-app/compare/v100.58.0...v100.59.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-16322] One Click Transfer ([#3519](https://github.com/dhis2/capture-app/issues/3519)) ([b115ee8](https://github.com/dhis2/capture-app/commit/b115ee87eec638f9a8a16d7cd22ebd0ec2516841))
+
 # [100.58.0](https://github.com/dhis2/capture-app/compare/v100.57.6...v100.58.0) (2024-03-03)
 
 

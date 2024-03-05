@@ -142,6 +142,7 @@ const OrgUnitFieldPlain = (props: Props) => {
         onBlur && onBlur(null);
     };
 
+
     const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
     return (
         <div

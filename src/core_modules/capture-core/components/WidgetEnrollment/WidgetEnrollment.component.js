@@ -63,6 +63,7 @@ export const WidgetEnrollmentPlain = ({
     updateIncidentDate,
     onError,
     onSuccess,
+    onAccessLostFromTransfer,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -164,6 +165,7 @@ export const WidgetEnrollmentPlain = ({
                             tetName={program.trackedEntityType.displayName}
                             onlyEnrollOnce={program.onlyEnrollOnce}
                             enrollment={enrollment}
+                            ownerOrgUnitId={ownerOrgUnit.id}
                             refetchEnrollment={refetchEnrollment}
                             refetchTEI={refetchTEI}
                             onDelete={onDelete}
@@ -171,6 +173,7 @@ export const WidgetEnrollmentPlain = ({
                             canAddNew={canAddNew}
                             onError={onError}
                             onSuccess={onSuccess}
+                            onAccessLostFromTransfer={onAccessLostFromTransfer}
                         />
                     </div>
                 )}
