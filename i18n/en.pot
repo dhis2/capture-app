@@ -1164,6 +1164,12 @@ msgstr "Remove mark for follow-up"
 msgid "Mark for follow-up"
 msgstr "Mark for follow-up"
 
+msgid "Transfer"
+msgstr "Transfer"
+
+msgid "An error occurred while transferring ownership"
+msgstr "An error occurred while transferring ownership"
+
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr "Existing dates for auto-generated events will not be updated."
 
@@ -1190,6 +1196,30 @@ msgstr "Finish drawing before saving"
 
 msgid "Set area"
 msgstr "Set area"
+
+msgid ""
+"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"{{newOrgUnit}}{{escape}}"
+msgstr ""
+"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"{{newOrgUnit}}{{escape}}"
+
+msgid ""
+"You will lose access to the enrollment when transferring ownership to "
+"{{organisationUnit}}."
+msgstr ""
+"You will lose access to the enrollment when transferring ownership to "
+"{{organisationUnit}}."
+
+msgid "Transfer Ownership"
+msgstr "Transfer Ownership"
+
+msgid ""
+"Choose the organisation unit to which enrollment ownership should be "
+"transferred."
+msgstr ""
+"Choose the organisation unit to which enrollment ownership should be "
+"transferred."
 
 msgid "Enrollment date"
 msgstr "Enrollment date"

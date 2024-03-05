@@ -1,5 +1,34 @@
 Feature: The user interacts with the widgets on the enrollment dashboard
 
+  Scenario: User can open the transfer modal
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    Then the user sees the transfer modal
+
+  Scenario: User can select an organisation unit in the transfer modal
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    And the user sees the transfer modal
+    And the user sees the organisation unit tree
+    When the user clicks on the organisation unit with text: Sierra Leone
+    Then the user sees the organisation unit with text: Sierra Leone is selected
+
+  @with-transfer-ownership-data-cleanup
+  Scenario: User can transfer the enrollment to another organisation unit
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    And the enrollment owner organisation unit is Ngelehun CHC
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    And the user sees the transfer modal
+    And the user sees the organisation unit tree
+    When the user clicks on the organisation unit with text: Sierra Leone
+    Then the user successfully transfers the enrollment
+
   # Scenarios linked to the enrollment dashboard
   Scenario: The profile widget can be closed on the enrollment dashboard
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
@@ -123,6 +152,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     When the user opens the enrollment actions menu
     And the user clicks on the delete action
     Then the user sees the delete enrollment modal
+
 
   Scenario: User can add note on enrollment dashboard page
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE

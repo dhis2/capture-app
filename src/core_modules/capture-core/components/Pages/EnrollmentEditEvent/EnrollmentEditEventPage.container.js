@@ -175,6 +175,9 @@ const EnrollmentEditEventPageWithContextPlain = ({
         const assignedUser: ApiAssignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
         dispatch(setAssignee(assignedUser, newAssignee, eventId));
     };
+    const onAccessLostFromTransfer = () => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    };
     const onSaveAssigneeError = (prevAssignee) => {
         const assignedUser: ApiAssignedUser | typeof undefined = prevAssignee
             // $FlowFixMe dataElementTypes flow error
@@ -219,6 +222,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             getAssignedUserSaveContext={getAssignedUserSaveContext}
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}
+            onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
     );
 };
