@@ -7,6 +7,7 @@ import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
 import type { Props, StyledProps } from './relationshipsWidget.types';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
+import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
 
 const styles = {
     header: {
@@ -30,6 +31,7 @@ const RelationshipsWidgetPlain = ({
 }: StyledProps) => {
     const [open, setOpenStatus] = useState(true);
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships);
+    const { onDeleteRelationship } = useDeleteRelationship({ sourceId });
 
     if (isLoading) {
         return (
@@ -54,7 +56,7 @@ const RelationshipsWidgetPlain = ({
 
     return (
         <div
-            data-test="relationship-widget"
+            data-test="tracked-entity-relationship-widget"
         >
             <Widget
                 header={(
@@ -79,6 +81,7 @@ const RelationshipsWidgetPlain = ({
                         <LinkedEntitiesViewer
                             groupedLinkedEntities={groupedLinkedEntities}
                             onLinkedRecordClick={onLinkedRecordClick}
+                            onDeleteRelationship={onDeleteRelationship}
                         />
                     )
                 }

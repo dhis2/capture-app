@@ -13,6 +13,9 @@ export type ContainerProps = {|
     onSaveExternal?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
+    onSaveAndCompleteEnrollmentExternal?: (enrollment: ApiEnrollment) => void,
+    onSaveAndCompleteEnrollmentSuccessActionType?: string,
+    onSaveAndCompleteEnrollmentErrorActionType?: string,
     widgetReducerName: string,
     onCancel?: () => void,
 |};

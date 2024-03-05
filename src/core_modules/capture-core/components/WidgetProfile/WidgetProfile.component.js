@@ -20,6 +20,7 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
+import { OverflowMenu } from './OverflowMenu';
 
 const styles = {
     header: {
@@ -32,6 +33,9 @@ const styles = {
         padding: `0 ${spacers.dp16}`,
         marginBottom: spacers.dp8,
     },
+    actions: {
+        display: 'flex',
+    },
 };
 
 const showEditModal = (loading, error, showEdit, modalState) =>
@@ -43,6 +47,7 @@ const WidgetProfilePlain = ({
     readOnlyMode = false,
     orgUnitId = '',
     onUpdateTeiAttributeValues,
+    onDeleteSuccess,
     classes,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
@@ -56,8 +61,10 @@ const WidgetProfilePlain = ({
     const {
         loading: trackedEntityInstancesLoading,
         error: trackedEntityInstancesError,
+        trackedEntity,
         trackedEntityInstanceAttributes,
         trackedEntityTypeName,
+        trackedEntityTypeAccess,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
     const {
@@ -96,6 +103,11 @@ const WidgetProfilePlain = ({
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 
+    const canWriteData = useMemo(
+        () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
+        [trackedEntityTypeAccess, program],
+    );
+
     const renderProfile = () => {
         if (loading) {
             return <LoadingMaskElementCenter />;
@@ -118,15 +130,23 @@ const WidgetProfilePlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <div>{i18n.t('{{TETName}} profile', {
-                            TETName: trackedEntityTypeName,
+                        <div>{i18n.t('{{trackedEntityTypeName}} profile', {
+                            trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}</div>
-                        {isEditable && (
-                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
-                                {i18n.t('Edit')}
-                            </Button>
-                        )}
+                        <div className={classes.actions}>
+                            {isEditable && (
+                                <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
+                                    {i18n.t('Edit')}
+                                </Button>
+                            )}
+                            <OverflowMenu
+                                trackedEntityTypeName={trackedEntityTypeName}
+                                canWriteData={canWriteData}
+                                trackedEntity={trackedEntity}
+                                onDeleteSuccess={onDeleteSuccess}
+                            />
+                        </div>
                     </div>
                 }
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}

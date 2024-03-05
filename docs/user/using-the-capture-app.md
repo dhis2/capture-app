@@ -972,11 +972,21 @@ If the program only allows one enrollment per tracked entity instance, the **Add
 
 ![](resources/images/enrollment-dash-enrollment-widget-add-new.png)
 
+In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
+
+![](resources/images/enrollment-dash-enrollment-widget-transfer.png)
+
 #### Delete the enrollment
 
 You can delete the enrollment by clicking the delete button and confirming the action in the modal. 
 
 ![](resources/images/enrollment-dash-enrollment-widget-3.png)
+
+#### Complete the enrollment
+
+You can complete the enrollment by clicking the complete button. When there are active events, you can choose to complete the enrollment along with the events from the confirmation modal.
+
+![](resources/images/enrollment-dash-enrollment-widget-4.png)
 
 #### Enrollment comment widget
 
@@ -1028,6 +1038,10 @@ On the enrollment dashboard, you can view the tracked entity instance profile wi
 Click the **Edit** button to make changes to the tracked entity instance profile. Editing the profile opens a dialog where the profile attributes can be changed.
 
 ![](resources/images/enrollment-dash-tei-profile-widget-edit.png)
+
+Click the **Delete ${tracked entity type}** button to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, tracked entity and all its associated enrollment and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
+
+![](resources/images/enrollment-dash-tei-profile-widget-delete.png)
 
 ### Feedback widget
 
@@ -1114,10 +1128,6 @@ To go to Enrollment Overview page you can:
 
 ![](resources/images/enrollment-event-new-navigation.png) 
 
-### New event widget form
-This is the form where you can modify the event details before saving. In the header you can see the stage name and icon.
-![](resources/images/new-event-widget-form-header.png)
-
 
 ### Scheduled date in edit event form
 If an event has the status Scheduled or Overdue, you will be able to see the **Report** and **Schedule** tab. 
@@ -1140,6 +1150,10 @@ If the flag “Hide due date” in the Maintenance configuration is enabled, sch
 However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" that has been configured in Maintenance, and this can not be changed. 
 In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
 
+### Ask user to complete program when stage is complete
+If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user checks the **Complete** event checkbox and clicks save.
+
+![](resources/images/ask-user-to-complete-enrollment-edit-event.png)
 
 #### View mode
 
@@ -1163,9 +1177,24 @@ In this form you can also delete the event by clicking `Delete` button, a modal 
 
 The widgets seen in the right-hand column will display and function the same way as mentioned in the [enrollment dashboard](#enrollment-dashboard).
 
+##### Widget assignee
+1. In View/Edit enrollment event page
+
+2. In the right column you will find the assignee widget.
+
+    ![](resources/images/user_assignment_edit_enrollment.png)
+
+3. Click the **Edit** button, or the **Assign** button if the event is not currently assigned to anyone.
+
+    ![](resources/images/user_assignment_edit_button.png)
+
+    ![](resources/images/user_assignment_edit_add.png)
+
+4. Search for and select the user you would like to reassign the event to. Click the **Save** button.
+
 ![](resources/images/enrollment-event-view-edit-widgets.png)
 
-## Add event in enrollment page
+## Enrollment event new page
 
 You can reach this page add event page by clicking in the **New {stage event name}** button in the overview page. 
 In this page you can switch between different tabs: **Report** to add new event, **Schedule** to schedule an event and **Refer** to refer event.
@@ -1185,13 +1214,14 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
+### Ask user to complete program when stage is complete
+If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button.
+
+![](resources/images/ask-user-to-complete-enrollment-new-event.png)
+
 ### Ask user to create new event when stage is complete
 If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button or checks the **Complete** event checkbox and clicks save. The user can choose the button **Yes, create new event** to navigate to the New Event page or **No, cancel** to navigate back to the enrollment dashboard. If there is only one possible stage available, the user will be taken directly to the New event workspace for that stage.
 
-### Schedule event widget form
-Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
-
-The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
 
 ### Assigning user to new events
 When reporting or scheduling an event, you can assign a user to it. This feature must be enabled per program stage in a tracker program by clicking the "Allow user assignment of events" check box.
@@ -1202,21 +1232,10 @@ You will find the assignee section near the bottom of the data entry page. Searc
 
 ![](resources/images/user_assignment_schedule_new_filled.png)
 
-### Change assignee
-1. In View/Edit enrollment event page
+### Schedule event widget form
+Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
 
-2. In the right column you will find the assignee widget.
-
-    ![](resources/images/user_assignment_edit_enrollment.png)
-
-3. Click the **Edit** button, or the **Assign** button if the event is not currently assigned to anyone.
-
-    ![](resources/images/user_assignment_edit_button.png)
-
-    ![](resources/images/user_assignment_edit_add.png)
-
-4. Search for and select the user you would like to reassign the event to. Click the **Save** button.
-
+The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
 
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.

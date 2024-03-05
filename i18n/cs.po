@@ -1,13 +1,14 @@
 # 
 # Translators:
-# Jiří Podhorecký, 2023
+# Philip Larsen Donnelly, 2024
+# Jiří Podhorecký, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Jiří Podhorecký, 2023\n"
+"Last-Translator: Jiří Podhorecký, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,10 +78,6 @@ msgstr "během ověřování pole došlo k chybě"
 
 msgid "error"
 msgstr "chyba"
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
-msgstr "Pluginy zatím nejsou k dispozici – obraťte se na správce systému"
 
 msgid "This value is validating"
 msgstr "Tato hodnota se ověřuje"
@@ -162,6 +159,9 @@ msgstr "Dokončit událost"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Základní informace"
+
+msgid "{{ stageName }} - Assignee"
+msgstr ""
 
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - Stav"
@@ -338,7 +338,7 @@ msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"{{TrackedEntityTypeName}} s tímto {{attributeName}} je již zaregistrován"
+"{{trackedEntityTypeName}} s tímto {{attributeName}} je již zaregistrován"
 
 msgid "Show registered {{trackedEntityTypeName}}"
 msgstr "Zobrazit registrovaného {{trackedEntityTypeName}}"
@@ -667,27 +667,19 @@ msgstr "Přestat používat nový ovládací panel zápisu pro {{programName}}"
 msgid "Opt out for {{programName}}"
 msgstr "Odhlásit se z {{programName}}"
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
-"Při otevírání tohoto zápuisu došlo k chybě. Zadejte platnou adresu URL."
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 "Při načítání registrací došlo k chybě. Zadejte prosím platnou adresu URL."
-
-msgid "Enrollment Dashboard"
-msgstr "Ovládací panel zápisu"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
-
-msgid "No feedback for this enrollment yet"
-msgstr "K tomuto zápisu zatím není žádná zpětná vazba"
 
 msgid "Quick actions"
 msgstr "Rychlé akce"
@@ -772,20 +764,11 @@ msgstr "Organizační jednotka není platná pro aktuální program"
 msgid "There was an error opening the Page"
 msgstr "Při otevírání stránky došlo k chybě"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "Zápis{{escape}} Nová událost"
-
 msgid "There was an error loading the page"
 msgstr "Při načítání stránky došlo k chybě"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Vyberte registraci jednotky a začněte hlásit"
-
-msgid "There are no feedbacks for this event"
-msgstr "Pro tuto událost neexistují žádné zpětné vazby"
-
-msgid "There are no indicators for this event"
-msgstr "Pro tuto událost neexistují žádné ukazatele"
 
 msgid "Program stage is invalid"
 msgstr "Fáze programu je neplatná"
@@ -813,18 +796,6 @@ msgstr "Program Stages nelze načíst"
 
 msgid "Stage"
 msgstr "Fáze"
-
-msgid "Enrollment{{escape}} View Event"
-msgstr "Zobrazit událost Enrollment{{escape}}"
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr "Upravit událost Enrollment{{escape}}"
-
-msgid "The enrollment event data could not be found"
-msgstr "Data zápisu události nebyla nalezena"
-
-msgid "There are no feedback for this event"
-msgstr "K této události není žádná zpětná vazba"
 
 msgid "Registered events"
 msgstr "Registrované události"
@@ -939,18 +910,6 @@ msgstr ""
 "Opuštěním této stránky zrušíte všechny výběry, které jste provedli pro nový "
 "vztah"
 
-msgid "No one is assigned to this event"
-msgstr "K této události není nikdo přiřazen"
-
-msgid "Assign"
-msgstr "Přiřadit"
-
-msgid "Event assigned to {{name}}"
-msgstr "Událost přiřazená uživateli {{name}}"
-
-msgid "Feedbacks"
-msgstr "Zpětná vazba"
-
 msgid "Show all events"
 msgstr "Zobrazit všechny události"
 
@@ -963,6 +922,21 @@ msgstr "Událost se nepodařilo načíst"
 msgid "Organisation unit could not be loaded"
 msgstr "Organizační jednotku se nepodařilo načíst"
 
+msgid "Dashboard"
+msgstr ""
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr "K tomuto zápisu zatím není žádná zpětná vazba"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
+
 msgid "Selected program"
 msgstr "Vybraný program"
 
@@ -974,6 +948,9 @@ msgstr "Hledání podle atributů"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Nepodařilo se načíst metadata. Prosím zkuste to znovu později."
+
+msgid "The enrollment event data could not be found"
+msgstr "Data zápisu události nebyla nalezena"
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
@@ -1117,11 +1094,23 @@ msgstr "Nový {{trackedEntityName}} v {{programName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
 
-msgid "To work with the selected program,"
-msgstr "Chcete-li pracovat s vybraným programem,"
+msgid "Assigned to"
+msgstr "Přiřazen k"
 
-msgid "open the Tracker Capture app"
-msgstr "otevřít aplikaci Tracker Capture"
+msgid "You don't have access to edit this assignee"
+msgstr ""
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "No one is assigned to this event"
+msgstr "K této události není nikdo přiřazen"
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
+msgstr "Přiřadit"
 
 msgid "This program is protected"
 msgstr "Tento program je chráněn"
@@ -1196,9 +1185,6 @@ msgstr "Zeměpisná šířka"
 
 msgid "Longitude"
 msgstr "Zeměpisná délka"
-
-msgid "Edit"
-msgstr "Upravit"
 
 msgid "Set coordinates"
 msgstr "Nastavit souřadnice"
@@ -1386,7 +1372,7 @@ msgid "To open this event, please wait until saving is complete"
 msgstr "Chcete-li otevřít tuto událost, počkejte na dokončení ukládání"
 
 msgid "Show {{ rest }} more"
-msgstr "Zobrazit {{rest}} více"
+msgstr "Zobrazit {{ rest }} více"
 
 msgid "Reset list"
 msgstr "Resetovat seznam"
@@ -1412,8 +1398,8 @@ msgstr "{{ scheduledEvents }} naplánováno"
 msgid "Stages and Events"
 msgstr "Fáze a události"
 
-msgid "New TEI Relationship"
-msgstr "Nový vztah TEI"
+msgid "New {{trackedEntityTypeName}} relationship"
+msgstr ""
 
 msgid "Missing implementation step"
 msgstr "Chybí krok implementace"
@@ -1466,9 +1452,6 @@ msgstr "Stáhnout data ..."
 
 msgid "an error occurred loading working lists"
 msgstr "při načítání pracovních seznamů došlo k chybě"
-
-msgid "Assigned to"
-msgstr "Přiřazen k"
 
 msgid "Registration Date"
 msgstr "Datum registrace"
@@ -1537,13 +1520,13 @@ msgid "An error has occured. See log for details"
 msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr "Naplánováno na {{escape}} kvůli {{time}}"
+msgstr "Naplánováno na {{ escape }} kvůli {{ time }}"
 
 msgid "Scheduled"
 msgstr "Naplánováno"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr "Po termínu {{escape}} kvůli {{time}}"
+msgstr "Po termínu {{ escape }} kvůli {{ time }}"
 
 msgid "Overdue"
 msgstr "Po termínu"
@@ -1598,6 +1581,9 @@ msgstr "Při mazání události zápisu došlo k chybě"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
+
+msgid "Error updating the Assignee"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

@@ -44,7 +44,7 @@ export const useTrackedEntityInstances = (
                     resource: 'trackedEntityTypes',
                     id: ({ variables: { tetId } }) => tetId,
                     params: {
-                        fields: 'displayName',
+                        fields: 'displayName,access',
                     },
                 },
             }),
@@ -91,8 +91,10 @@ export const useTrackedEntityInstances = (
 
     return { error,
         loading,
+        trackedEntity: !loading && data?.trackedEntityInstance,
         trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
         trackedEntityTypeName: !tetLoading && tetData?.trackedEntityType?.displayName,
+        trackedEntityTypeAccess: !tetLoading && tetData?.trackedEntityType?.access,
         geometry,
     };
 };
