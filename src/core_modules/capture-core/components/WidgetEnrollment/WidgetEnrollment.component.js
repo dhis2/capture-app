@@ -67,6 +67,7 @@ export const WidgetEnrollmentPlain = ({
     onUpdateEnrollmentStatus,
     onUpdateEnrollmentStatusError,
     onUpdateEnrollmentStatusSuccess,
+    onAccessLostFromTransfer,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
@@ -170,6 +171,7 @@ export const WidgetEnrollmentPlain = ({
                             programStages={program.programStages}
                             enrollment={enrollment}
                             events={events}
+                            ownerOrgUnitId={ownerOrgUnit.id}
                             refetchEnrollment={refetchEnrollment}
                             refetchTEI={refetchTEI}
                             onDelete={onDelete}
@@ -180,6 +182,7 @@ export const WidgetEnrollmentPlain = ({
                             onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                             onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                             onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                            onAccessLostFromTransfer={onAccessLostFromTransfer}
                         />
                     </div>
                 )}

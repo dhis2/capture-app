@@ -124,6 +124,10 @@ export const EnrollmentPageDefault = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
 
+    const onAccessLostFromTransfer = () => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    };
+
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onUpdateEnrollmentStatus = useCallback(
         (enrollmentToUpdate: Object) => dispatch(updateEnrollmentAndEvents(enrollmentToUpdate)),
@@ -180,6 +184,7 @@ export const EnrollmentPageDefault = () => {
             onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
             ruleEffects={ruleEffects}
             widgetEnrollmentStatus={widgetEnrollmentStatus}
+            onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
     );
 };

@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';
 import { useUpdateEnrollment, useDeleteEnrollment } from '../dataMutation/dataMutation';
+import { useUpdateOwnership } from './Transfer/hooks';
 
 export const Actions = ({
     enrollment = {},
@@ -14,10 +15,17 @@ export const Actions = ({
     onUpdateEnrollmentStatusError,
     onUpdateEnrollmentStatusSuccess,
     onSuccess,
+    onAccessLostFromTransfer,
     ...passOnProps
 }: Props) => {
     const { updateMutation, updateLoading } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError, onSuccess);
     const { deleteMutation, deleteLoading } = useDeleteEnrollment(onDelete, onError, onSuccess);
+    const { updateEnrollmentOwnership, isTransferLoading } = useUpdateOwnership({
+        teiId: enrollment.trackedEntity,
+        programId: enrollment.program,
+        onAccessLostFromTransfer,
+        refetchTEI,
+    });
     const {
         updateMutation: updateStatusMutation,
         updateLoading: updateStatusLoading,
@@ -45,6 +53,8 @@ export const Actions = ({
             onUpdateStatus={handleUpdateStatus}
             onDelete={deleteMutation}
             loading={updateLoading || deleteLoading || updateStatusLoading}
+            onUpdateOwnership={updateEnrollmentOwnership}
+            isTransferLoading={isTransferLoading}
             {...passOnProps}
         />
     );

@@ -43,6 +43,7 @@ export const WidgetEnrollment = ({
     onUpdateEnrollmentStatus,
     onUpdateEnrollmentStatusError,
     onUpdateEnrollmentStatusSuccess,
+    onAccessLostFromTransfer,
 }: Props) => {
     const {
         enrollment,
@@ -100,6 +101,7 @@ export const WidgetEnrollment = ({
             onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
             onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
             onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+            onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
     );
 };

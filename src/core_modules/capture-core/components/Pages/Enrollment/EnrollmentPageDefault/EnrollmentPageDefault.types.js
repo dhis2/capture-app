@@ -31,6 +31,7 @@ export type Props = {|
     onLinkedRecordClick: LinkedRecordClick,
     onUpdateEnrollmentDate: (enrollmentDate: string) => void,
     onUpdateIncidentDate: (incidentDate: string) => void,
+    onAccessLostFromTransfer: () => void,
     onEnrollmentError: (message: string) => void,
     onUpdateEnrollmentStatus: (enrollment: Object) => void,
     onUpdateEnrollmentStatusSuccess: ({ redirect?: boolean }) => void,

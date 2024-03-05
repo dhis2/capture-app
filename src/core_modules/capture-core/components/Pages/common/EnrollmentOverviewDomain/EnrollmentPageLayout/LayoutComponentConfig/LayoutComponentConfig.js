@@ -3,16 +3,12 @@ import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
-import type {
-    Props as TrackedEntityRelationshipProps,
-} from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
+import type { Props as TrackedEntityRelationshipProps } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
 import { WidgetError } from '../../../../../WidgetErrorAndWarning/WidgetError';
 import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWarning/WidgetError/WidgetError.types';
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
-import type {
-    Props as WidgetWarningProps,
-} from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
+import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
 import { WidgetFeedback } from '../../../../../WidgetFeedback';
 import type { IndicatorProps, Props as WidgetFeedbackProps } from '../../../../../WidgetFeedback/WidgetFeedback.types';
 import { WidgetIndicator } from '../../../../../WidgetIndicator';
@@ -40,7 +36,15 @@ export const QuickActions: WidgetConfig = {
 
 export const StagesAndEvents: WidgetConfig = {
     Component: WidgetStagesAndEvents,
-    getProps: ({ program, stages, events, onViewAll, onCreateNew, onEventClick, ruleEffects }): StagesAndEventProps => ({
+    getProps: ({
+        program,
+        stages,
+        events,
+        onViewAll,
+        onCreateNew,
+        onEventClick,
+        ruleEffects,
+    }): StagesAndEventProps => ({
         programId: program.id,
         stages,
         events,
@@ -115,12 +119,7 @@ export const ProfileWidget: WidgetConfig = {
     getCustomSettings: ({ readOnlyMode = true }) => ({
         readOnlyMode,
     }),
-    getProps: ({
-        teiId,
-        program,
-        orgUnitId,
-        onUpdateTeiAttributeValues,
-    }): WidgetProfileProps => ({
+    getProps: ({ teiId, program, orgUnitId, onUpdateTeiAttributeValues }): WidgetProfileProps => ({
         teiId,
         programId: program.id,
         orgUnitId,
@@ -167,16 +166,17 @@ export const EnrollmentWidget: WidgetConfig = {
         teiId,
         enrollmentId,
         program,
+        events,
+        widgetEnrollmentStatus,
         onDelete,
         onAddNew,
         onUpdateEnrollmentDate,
         onUpdateIncidentDate,
-        onEnrollmentError,
         onUpdateEnrollmentStatus,
         onUpdateEnrollmentStatusSuccess,
         onUpdateEnrollmentStatusError,
-        events,
-        widgetEnrollmentStatus,
+        onEnrollmentError,
+        onAccessLostFromTransfer,
     }): WidgetEnrollmentProps => ({
         teiId,
         enrollmentId,
@@ -190,6 +190,7 @@ export const EnrollmentWidget: WidgetConfig = {
         onUpdateEnrollmentStatusError,
         externalData: { status: widgetEnrollmentStatus, events },
         onError: onEnrollmentError,
+        onAccessLostFromTransfer,
     }),
 };
 
@@ -251,10 +252,7 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventComment: WidgetConfig = {
     Component: WidgetEventComment,
-    getProps: ({
-        dataEntryKey,
-        dataEntryId,
-    }) => ({
+    getProps: ({ dataEntryKey, dataEntryId }) => ({
         dataEntryKey,
         dataEntryId,
     }),

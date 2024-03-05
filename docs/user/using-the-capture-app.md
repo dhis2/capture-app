@@ -972,6 +972,10 @@ If the program only allows one enrollment per tracked entity instance, the **Add
 
 ![](resources/images/enrollment-dash-enrollment-widget-add-new.png)
 
+In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
+
+![](resources/images/enrollment-dash-enrollment-widget-transfer.png)
+
 #### Delete the enrollment
 
 You can delete the enrollment by clicking the delete button and confirming the action in the modal. 

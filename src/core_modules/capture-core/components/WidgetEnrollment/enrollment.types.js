@@ -16,6 +16,7 @@ export type Props = {|
     onUpdateEnrollmentStatus?: (enrollment: Object) => void,
     onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
     onUpdateEnrollmentStatusError?: (message: string) => void,
+    onAccessLostFromTransfer?: () => void,
 |};
 
 export type PlainProps = {|
@@ -40,5 +41,6 @@ export type PlainProps = {|
     onUpdateEnrollmentStatus?: (enrollment: Object) => void,
     onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
     onUpdateEnrollmentStatusError?: (message: string) => void,
+    onAccessLostFromTransfer?: () => void,
     ...CssClasses,
 |};

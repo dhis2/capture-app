@@ -1,5 +1,12 @@
-import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { When, Then, After, Given } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
+import { hasVersionSupport } from '../../../support/tagUtils';
+
+After({ tags: '@with-transfer-ownership-data-cleanup' }, () => {
+    const teiQueryKey = hasVersionSupport('@v>=41') ? 'trackedEntity' : 'trackedEntityInstance';
+    cy.buildApiUrl('tracker', `ownership/transfer?program=IpHINAT79UW&ou=DiszpKrYNg8&${teiQueryKey}=EaOyKGOIGRp`)
+        .then(url => cy.request('PUT', url));
+});
 
 const changeEnrollmentAndEventsStatus = () => (
     cy.buildApiUrl('tracker', 'trackedEntities/osF4RF4EiqP?program=IpHINAT79UW&fields=enrollments')
@@ -126,6 +133,10 @@ When(/^the user clicks on the delete action/, () =>
     cy.get('[data-test="widget-enrollment-actions-delete"]').click(),
 );
 
+When(/^the user clicks on the transfer action/, () => {
+    cy.get('[data-test="widget-enrollment-actions-transfer"]').click();
+});
+
 Then(/^the user sees the delete enrollment modal/, () =>
     cy.get('[data-test="widget-enrollment-actions-modal"]').within(() => {
         cy.contains('Delete enrollment').should('exist');
@@ -167,4 +178,69 @@ When('the user completes the enrollment and the active events', () => {
         cy.contains('Yes, complete enrollment and events').should('exist');
     });
     cy.get('[data-test="widget-enrollment-actions-complete-button"]').click();
+});
+
+Then(/^the user sees the transfer modal/, () =>
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.contains('Transfer Ownership').should('exist');
+        cy.contains(
+            'Choose the organisation unit to which enrollment ownership should be transferred.',
+        ).should('exist');
+        cy.contains('Cancel').should('exist');
+        cy.contains('Transfer').should('exist');
+    }),
+);
+
+Then(/^the user sees the organisation unit tree/, () =>
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="widget-enrollment-transfer-orgunit-tree"]').should(
+            'exist',
+        );
+    }),
+);
+
+Then(/^the user clicks on the organisation unit with text: (.*)/, orgunit =>
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="widget-enrollment-transfer-orgunit-tree"]').within(
+            () => {
+                cy.contains(orgunit).click();
+            },
+        );
+    }),
+);
+
+Then(/^the user sees the organisation unit with text: (.*) is selected/, orgunit =>
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="widget-enrollment-transfer-orgunit-tree"]').within(
+            () => {
+                cy.contains(orgunit).should('have.class', 'checked');
+            },
+        );
+    }),
+);
+
+Then(/^the user successfully transfers the enrollment/, () => {
+    cy.intercept(
+        { method: 'PUT', url: '**/tracker/ownership/transfer**' },
+    ).as('transferOwnership');
+
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="widget-enrollment-transfer-button"]').click();
+    });
+
+    cy.wait('@transferOwnership');
+
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-owner-orgunit"]')
+            .contains('Owned by Sierra Leone')
+            .should('exist');
+    });
+});
+
+Given(/^the enrollment owner organisation unit is (.*)/, (orgunit) => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-owner-orgunit"]')
+            .contains(`Owned by ${orgunit}`)
+            .should('exist');
+    });
 });
