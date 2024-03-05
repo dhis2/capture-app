@@ -1,3 +1,10 @@
+# [100.64.0](https://github.com/dhis2/capture-app/compare/v100.63.0...v100.64.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-15392] preview images in forms ([#3557](https://github.com/dhis2/capture-app/issues/3557)) ([51c7168](https://github.com/dhis2/capture-app/commit/51c7168cd71f1e5591913501348206e332f0ffc1))
+
 # [100.63.0](https://github.com/dhis2/capture-app/compare/v100.62.0...v100.63.0) (2024-03-05)
 
 
