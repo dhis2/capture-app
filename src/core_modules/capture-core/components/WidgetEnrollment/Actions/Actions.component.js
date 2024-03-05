@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import React, { type ComponentType, useState } from 'react';
 import { Cancel } from './Cancel';
-import { Complete } from './Complete';
+import { Complete, CompleteModal } from './Complete';
 import { Delete } from './Delete';
 import { Followup } from './Followup';
 import { AddNew } from './AddNew';
@@ -12,6 +12,8 @@ import { AddLocation } from './AddLocation';
 import type { PlainProps } from './actions.types';
 import { LoadingMaskForButton } from '../../LoadingMasks';
 import { MapModal } from '../MapModal';
+import { Transfer } from './Transfer';
+import { TransferModal } from '../TransferModal';
 
 const styles = {
     actions: {
@@ -28,10 +30,16 @@ const styles = {
 
 export const ActionsPlain = ({
     enrollment = {},
+    events,
+    programStages,
+    ownerOrgUnitId,
     tetName,
     canAddNew,
+    onUpdateStatus,
     onUpdate,
     onDelete,
+    onUpdateOwnership,
+    isTransferLoading,
     onAddNew,
     loading,
     onlyEnrollOnce,
@@ -39,6 +47,9 @@ export const ActionsPlain = ({
 }: PlainProps) => {
     const [isOpenActions, setOpenActions] = useState(false);
     const [isOpenMap, setOpenMap] = useState(false);
+    const [isOpenTransfer, setOpenTransfer] = useState(false);
+    const [isOpenCompleteModal, setOpenCompleteModal] = useState(false);
+
     const handleOnUpdate = (arg) => {
         setOpenActions(false);
         onUpdate(arg);
@@ -46,6 +57,10 @@ export const ActionsPlain = ({
     const handleOnDelete = (arg) => {
         setOpenActions(false);
         onDelete(arg);
+    };
+    const handleOnUpdateStatus = (arg, redirect) => {
+        setOpenActions(false);
+        onUpdateStatus(arg, redirect);
     };
 
     return (
@@ -69,11 +84,23 @@ export const ActionsPlain = ({
                             />
                             <Complete
                                 enrollment={enrollment}
-                                onUpdate={handleOnUpdate}
+                                events={events}
+                                onUpdate={handleOnUpdateStatus}
+                                setOpenCompleteModal={(modalState) => {
+                                    setOpenCompleteModal(modalState);
+                                    setOpenActions(!modalState);
+                                }}
                             />
                             <Followup
                                 enrollment={enrollment}
                                 onUpdate={handleOnUpdate}
+                            />
+                            <Transfer
+                                enrollment={enrollment}
+                                setOpenTransfer={() => {
+                                    setOpenTransfer(true);
+                                    setOpenActions(false);
+                                }}
                             />
                             <AddLocation
                                 enrollment={enrollment}
@@ -85,7 +112,7 @@ export const ActionsPlain = ({
                             <MenuDivider />
                             <Cancel
                                 enrollment={enrollment}
-                                onUpdate={handleOnUpdate}
+                                onUpdate={handleOnUpdateStatus}
                             />
                             <Delete
                                 enrollment={enrollment}
@@ -110,6 +137,24 @@ export const ActionsPlain = ({
                 onUpdate={handleOnUpdate}
                 setOpenMap={setOpenMap}
             />}
+            {isOpenTransfer && (
+                <TransferModal
+                    enrollment={enrollment}
+                    ownerOrgUnitId={ownerOrgUnitId}
+                    setOpenTransfer={setOpenTransfer}
+                    onUpdateOwnership={onUpdateOwnership}
+                    isTransferLoading={isTransferLoading}
+                />
+            )}
+            {isOpenCompleteModal && (
+                <CompleteModal
+                    enrollment={enrollment}
+                    events={events}
+                    programStages={programStages}
+                    setOpenCompleteModal={setOpenCompleteModal}
+                    onUpdateStatus={handleOnUpdateStatus}
+                />
+            )}
         </>
     );
 };

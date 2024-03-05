@@ -17,12 +17,20 @@ import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
-import { addEnrollmentEvents, showEnrollmentError } from '../../common/EnrollmentOverviewDomain';
+import {
+    addEnrollmentEvents,
+    showEnrollmentError,
+    updateEnrollmentAndEvents,
+    commitEnrollmentAndEvents,
+    rollbackEnrollmentAndEvents,
+    setExternalEnrollmentStatus,
+} from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
-import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
+import { statusTypes } from '../../../../enrollment';
 import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
+import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
 
 export const EnrollmentAddEventPageDefault = ({
     pageLayout,
@@ -39,6 +47,20 @@ export const EnrollmentAddEventPageDefault = ({
     const handleCancel = useCallback(() => {
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [history, programId, orgUnitId, teiId, enrollmentId]);
+
+    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate) => {
+        dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentStatusError = useCallback((message) => {
+        dispatch(rollbackEnrollmentAndEvents());
+        dispatch(showEnrollmentError({ message }));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
+        dispatch(commitEnrollmentAndEvents());
+        redirect && history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
         ({ events, linkMode }) => {
@@ -58,6 +80,16 @@ export const EnrollmentAddEventPageDefault = ({
         },
         [fromClientDate, dispatch, history, programId, orgUnitId, teiId, enrollmentId],
     );
+
+    const handleSaveAndCompleteEnrollment = useCallback(
+        (enrollmentToUpdate) => {
+            dispatch(setExternalEnrollmentStatus(statusTypes.COMPLETED));
+            dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
+            history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+        },
+        [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
+    );
+
     const handleAddNew = useCallback(() => {
         history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     }, [history, programId, orgUnitId, teiId]);
@@ -68,6 +100,10 @@ export const EnrollmentAddEventPageDefault = ({
     }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
+
+    const onAccessLostFromTransfer = () => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    };
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
@@ -146,6 +182,7 @@ export const EnrollmentAddEventPageDefault = ({
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 onSave={handleSave}
+                onSaveAndCompleteEnrollment={handleSaveAndCompleteEnrollment}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
                 onAddNew={handleAddNew}
@@ -158,6 +195,11 @@ export const EnrollmentAddEventPageDefault = ({
                 ready={Boolean(enrollment)}
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
+                events={enrollment?.events}
+                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+                onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+                onAccessLostFromTransfer={onAccessLostFromTransfer}
             />
         </>
     );

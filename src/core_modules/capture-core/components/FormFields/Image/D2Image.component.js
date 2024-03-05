@@ -175,6 +175,7 @@ class D2ImagePlain extends Component<Props, State> {
                                                 target="_blank"
                                                 href={imageUrl}
                                                 rel="noopener noreferrer"
+                                                onBlur={(event) => { event.stopPropagation(); }}
                                             >
                                                 <img src={imageUrl} alt="" className={classes.image} />
                                             </a>

@@ -8,6 +8,7 @@ export const enrollmentSiteActionTypes = {
     UPDATE_INCIDENT_DATE: 'Enrollment.UpdateIncidentDate',
     UPDATE_ENROLLMENT_EVENT: 'Enrollment.UpdateEnrollmentEvent',
     ADD_ENROLLMENT_EVENTS: 'Enrollment.AddEnrollmentEvents',
+    UPDATE_ENROLLMENT_EVENT_WITHOUT_ID: 'Enrollment.UpdateEnrollmentEventWithoutId',
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES: 'Enrollment.UpdateEnrollmentAttributeValues',
     ROLLBACK_ENROLLMENT_EVENT: 'Enrollment.RollbackEnrollmentEvent',
     ROLLBACK_ENROLLMENT_EVENTS: 'Enrollment.RollbackEnrollmentEvents',
@@ -16,6 +17,10 @@ export const enrollmentSiteActionTypes = {
     SAVE_FAILED: 'Enrollment.SaveFailed',
     ERROR_ENROLLMENT: 'Enrollment.ErrorEnrollment',
     ADD_PERSISTED_ENROLLMENT_EVENTS: 'Enrollment.AddPersistedEnrollmentEvents',
+    UPDATE_ENROLLMENT_AND_EVENTS: 'Enrollment.UpdateEnrollmentAndEvents',
+    ROLLBACK_ENROLLMENT_AND_EVENTS: 'Enrollment.RollbackEnrollmentAndEvents',
+    COMMIT_ENROLLMENT_AND_EVENTS: 'Enrollment.CommitEnrollmentAndEvents',
+    SET_EXTERNAL_ENROLLMENT_STATUS: 'Enrollment.SetExternalEnrollmentStatus',
 };
 
 export const setCommonEnrollmentSiteData = (enrollment: ApiEnrollment, attributeValues: ApiAttributeValues) =>
@@ -56,6 +61,22 @@ export const rollbackEnrollmentEvents = ({ events }: EventReducerProps) =>
 export const commitEnrollmentEvents = ({ events }: EventReducerProps) =>
     actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENTS)({ events });
 
+export const updateEnrollmentEventWithoutId = (uid: string, eventData: Object) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT_WITHOUT_ID)({
+        eventData,
+        uid,
+    });
+
+export const rollbackEnrollmentEventWithoutId = (uid: string) =>
+    actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID)({
+        uid,
+    });
+
+export const commitEnrollmentEventWithoutId = (uid: string, eventId: string) =>
+    actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT_WITHOUT_ID)({
+        eventId,
+        uid,
+    });
 export const saveFailed = () => actionCreator(enrollmentSiteActionTypes.SAVE_FAILED)();
 
 export const updateEnrollmentAttributeValues = (attributeValues: Array<{ [key: string]: string }>) =>
@@ -66,6 +87,27 @@ export const updateEnrollmentAttributeValues = (attributeValues: Array<{ [key: s
 export const showEnrollmentError = ({ message }: { message: string }) =>
     actionCreator(enrollmentSiteActionTypes.ERROR_ENROLLMENT)({
         message,
+    });
+
+export const updateEnrollmentAndEvents = (enrollment: ApiEnrollment) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_AND_EVENTS)({
+        enrollment,
+    });
+
+export const rollbackEnrollmentAndEvents = (uid?: string) =>
+    actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_AND_EVENTS)({
+        uid,
+    });
+
+export const commitEnrollmentAndEvents = (uid?: string, eventId?: string) =>
+    actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_AND_EVENTS)({
+        uid,
+        eventId,
+    });
+
+export const setExternalEnrollmentStatus = (status: string) =>
+    actionCreator(enrollmentSiteActionTypes.SET_EXTERNAL_ENROLLMENT_STATUS)({
+        status,
     });
 
 export const addPersistedEnrollmentEvents = ({ events }: EventReducerProps) =>

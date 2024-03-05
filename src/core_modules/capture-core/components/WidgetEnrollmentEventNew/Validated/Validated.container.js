@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import { withAskToCompleteEnrollment } from '../../DataEntries';
 import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
@@ -12,6 +13,7 @@ import {
     requestSaveEvent,
     setSaveEnrollmentEventInProgress,
     startCreateNewAfterCompleting,
+    requestSaveAndCompleteEnrollment,
 } from './validated.actions';
 import type { ContainerProps, RelatedStageRefPayload } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
@@ -21,6 +23,7 @@ import { useBuildNewEventPayload } from './useBuildNewEventPayload';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
+const DataEntry = withAskToCompleteEnrollment()(AskToCreateNewHandlerHOC);
 
 export const Validated = ({
     program,
@@ -33,6 +36,9 @@ export const Validated = ({
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
+    onSaveAndCompleteEnrollmentExternal,
+    onSaveAndCompleteEnrollmentSuccessActionType,
+    onSaveAndCompleteEnrollmentErrorActionType,
     ...passOnProps
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
@@ -75,7 +81,7 @@ export const Validated = ({
         formFoundationArgument: RenderFoundation,
         saveType: ?$Values<typeof addEventSaveTypes>,
     ) => {
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         const {
             clientRequestEvent,
             formHasError,
@@ -120,11 +126,47 @@ export const Validated = ({
         dispatch(cleanUpEventSaveInProgress());
     }, [dispatch]);
 
+    const handleSaveAndCompleteEnrollment = useCallback(
+        (
+            eventId: string,
+            dataEntryIdArgument: string,
+            formFoundationArgument: RenderFoundation,
+            enrollment: string,
+        ) => {
+            dispatch(requestSaveAndCompleteEnrollment({
+                eventId,
+                dataEntryId: dataEntryIdArgument,
+                formFoundation: formFoundationArgument,
+                completed: true,
+                programId: program.id,
+                orgUnitId: orgUnit.id,
+                orgUnitName: orgUnit.name || '',
+                teiId,
+                enrollmentId,
+                enrollment,
+                onSaveAndCompleteEnrollmentExternal,
+                onSaveAndCompleteEnrollmentSuccessActionType,
+                onSaveAndCompleteEnrollmentErrorActionType,
+            }));
+        },
+        [
+            dispatch,
+            program.id,
+            orgUnit,
+            teiId,
+            enrollmentId,
+            onSaveAndCompleteEnrollmentExternal,
+            onSaveAndCompleteEnrollmentSuccessActionType,
+            onSaveAndCompleteEnrollmentErrorActionType,
+        ],
+    );
+
     return (
-        <AskToCreateNewHandlerHOC
+        <DataEntry
             {...passOnProps}
             stage={stage}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
+            askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
             availableProgramStages={availableProgramStages}
             eventSaveInProgress={eventSaveInProgress}
             ready={ready}
@@ -137,6 +179,7 @@ export const Validated = ({
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}
             programId={program.id}
+            onSaveAndCompleteEnrollment={handleSaveAndCompleteEnrollment}
             programName={program.name}
             orgUnit={orgUnit}
             rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}

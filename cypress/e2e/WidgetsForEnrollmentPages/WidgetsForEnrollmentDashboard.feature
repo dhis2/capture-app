@@ -1,5 +1,34 @@
 Feature: The user interacts with the widgets on the enrollment dashboard
 
+  Scenario: User can open the transfer modal
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    Then the user sees the transfer modal
+
+  Scenario: User can select an organisation unit in the transfer modal
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    And the user sees the transfer modal
+    And the user sees the organisation unit tree
+    When the user clicks on the organisation unit with text: Sierra Leone
+    Then the user sees the organisation unit with text: Sierra Leone is selected
+
+  @with-transfer-ownership-data-cleanup
+  Scenario: User can transfer the enrollment to another organisation unit
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+    Then the enrollment widget should be opened
+    And the enrollment owner organisation unit is Ngelehun CHC
+    When the user opens the enrollment actions menu
+    And the user clicks on the transfer action
+    And the user sees the transfer modal
+    And the user sees the organisation unit tree
+    When the user clicks on the organisation unit with text: Sierra Leone
+    Then the user successfully transfers the enrollment
+
   # Scenarios linked to the enrollment dashboard
   Scenario: The profile widget can be closed on the enrollment dashboard
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
@@ -124,6 +153,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     And the user clicks on the delete action
     Then the user sees the delete enrollment modal
 
+
   Scenario: User can add note on enrollment dashboard page
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the stages and events should be loaded
@@ -133,3 +163,11 @@ Feature: The user interacts with the widgets on the enrollment dashboard
   Scenario: The program rules are triggered and the effects are displayed in the sidebar widgets
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the user can see the program rules effect in the indicator widget
+
+  Scenario: User can complete the enrollment and the active events
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=qyx7tscVpVB
+    And the enrollment widget should be opened
+    And the user sees the enrollment status and the Baby Postnatal event status is active
+    And the user opens the enrollment actions menu
+    When the user completes the enrollment and the active events
+    Then the user sees the enrollment status and the Baby Postnatal event status is completed

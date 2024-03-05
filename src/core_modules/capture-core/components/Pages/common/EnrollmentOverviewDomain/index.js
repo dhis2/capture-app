@@ -8,8 +8,13 @@ export {
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
     addEnrollmentEvents,
+    updateEnrollmentEventWithoutId,
     updateEnrollmentAttributeValues,
     showEnrollmentError,
+    updateEnrollmentAndEvents,
+    commitEnrollmentAndEvents,
+    rollbackEnrollmentAndEvents,
+    setExternalEnrollmentStatus,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
 export { useRuleEffects } from './useRuleEffects';

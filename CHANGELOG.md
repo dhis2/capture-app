@@ -1,3 +1,24 @@
+# [100.61.0](https://github.com/dhis2/capture-app/compare/v100.60.0...v100.61.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-15391] preview images in working lists and on enrollment dashboard ([#3546](https://github.com/dhis2/capture-app/issues/3546)) ([191c22f](https://github.com/dhis2/capture-app/commit/191c22fd5f393fa682640e6c081ce34ff36eccfa))
+
+# [100.60.0](https://github.com/dhis2/capture-app/compare/v100.59.0...v100.60.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-13800] ask user to complete enrollment and events ([#3535](https://github.com/dhis2/capture-app/issues/3535)) ([fd1863d](https://github.com/dhis2/capture-app/commit/fd1863d0e0dddd8ab590c2e7c5620cbc074df51e))
+
+# [100.59.0](https://github.com/dhis2/capture-app/compare/v100.58.0...v100.59.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-16322] One Click Transfer ([#3519](https://github.com/dhis2/capture-app/issues/3519)) ([b115ee8](https://github.com/dhis2/capture-app/commit/b115ee87eec638f9a8a16d7cd22ebd0ec2516841))
+
 # [100.58.0](https://github.com/dhis2/capture-app/compare/v100.57.6...v100.58.0) (2024-03-03)
 
 

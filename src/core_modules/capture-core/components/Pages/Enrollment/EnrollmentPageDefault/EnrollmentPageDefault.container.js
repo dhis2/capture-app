@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
     useCommonEnrollmentDomainData,
@@ -12,6 +12,9 @@ import {
     updateEnrollmentDate,
     updateIncidentDate,
     showEnrollmentError,
+    updateEnrollmentAndEvents,
+    commitEnrollmentAndEvents,
+    rollbackEnrollmentAndEvents,
 } from '../../common/EnrollmentOverviewDomain';
 import {
     updateEnrollmentDate as updateTopBarEnrollmentDate,
@@ -42,6 +45,7 @@ import {
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
@@ -120,7 +124,25 @@ export const EnrollmentPageDefault = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
 
+    const onAccessLostFromTransfer = () => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    };
+
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onUpdateEnrollmentStatus = useCallback(
+        (enrollmentToUpdate: Object) => dispatch(updateEnrollmentAndEvents(enrollmentToUpdate)),
+        [dispatch],
+    );
+    const onUpdateEnrollmentStatusError = useCallback(
+        (message) => {
+            dispatch(rollbackEnrollmentAndEvents());
+            dispatch(showEnrollmentError({ message }));
+        },
+        [dispatch],
+    );
+    const onUpdateEnrollmentStatusSuccess = useCallback(() => {
+        dispatch(commitEnrollmentAndEvents());
+    }, [dispatch]);
 
     if (isLoading) {
         return (
@@ -157,7 +179,12 @@ export const EnrollmentPageDefault = () => {
             onUpdateEnrollmentDate={onUpdateEnrollmentDate}
             onUpdateIncidentDate={onUpdateIncidentDate}
             onEnrollmentError={onEnrollmentError}
+            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
             ruleEffects={ruleEffects}
+            widgetEnrollmentStatus={widgetEnrollmentStatus}
+            onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
     );
 };
