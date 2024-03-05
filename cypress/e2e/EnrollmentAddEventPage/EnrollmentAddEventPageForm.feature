@@ -77,3 +77,12 @@ Feature: User interacts with the Enrollment New Event Workspace
     And you select the schedule tab
     When you add a comment to the event
     And the events saves successfully
+
+  Scenario: User can add a new event and complete the enrollment
+    Given you land on the enrollment new event page by having typed #/enrollmentEventNew?enrollmentId=FZAa7j0muDj&orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&stageId=eHvTba5ijAh&teiId=bj4UmUpqaSp
+    And the enrollment status is active
+    And you type 2021-10-15 in the input number 0
+    And you select Died in the select number 0
+    And the user completes the event
+    And the user completes the enrollment
+    Then the user sees the enrollment status and recently added event in Case outcome event status is completed

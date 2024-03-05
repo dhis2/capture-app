@@ -3,16 +3,12 @@ import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
-import type {
-    Props as TrackedEntityRelationshipProps,
-} from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
+import type { Props as TrackedEntityRelationshipProps } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper/TrackedEntityRelationshipsWrapper.types';
 import { WidgetError } from '../../../../../WidgetErrorAndWarning/WidgetError';
 import type { Props as WidgetErrorProps } from '../../../../../WidgetErrorAndWarning/WidgetError/WidgetError.types';
 import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDefault/EnrollmentQuickActions';
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
-import type {
-    Props as WidgetWarningProps,
-} from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
+import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
 import { WidgetFeedback } from '../../../../../WidgetFeedback';
 import type { IndicatorProps, Props as WidgetFeedbackProps } from '../../../../../WidgetFeedback/WidgetFeedback.types';
 import { WidgetIndicator } from '../../../../../WidgetIndicator';
@@ -21,6 +17,8 @@ import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
 import { WidgetEnrollment } from '../../../../../WidgetEnrollment';
 import type { Props as WidgetEnrollmentProps } from '../../../../../WidgetEnrollment/enrollment.types';
+import type { Props as NewEventWorkspaceWrapperProps } from '../../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.types';
+import type { Props as WidgetEventEditProps } from '../../../../../WidgetEventEdit/widgetEventEdit.types';
 import type { WidgetConfig } from '../DefaultEnrollmentLayout.types';
 import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';
 import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
@@ -38,7 +36,15 @@ export const QuickActions: WidgetConfig = {
 
 export const StagesAndEvents: WidgetConfig = {
     Component: WidgetStagesAndEvents,
-    getProps: ({ program, stages, events, onViewAll, onCreateNew, onEventClick, ruleEffects }): StagesAndEventProps => ({
+    getProps: ({
+        program,
+        stages,
+        events,
+        onViewAll,
+        onCreateNew,
+        onEventClick,
+        ruleEffects,
+    }): StagesAndEventProps => ({
         programId: program.id,
         stages,
         events,
@@ -140,8 +146,9 @@ export const NewEventWorkspace: WidgetConfig = {
         widgetReducerName,
         rulesExecutionDependencies,
         onSave,
+        onSaveAndCompleteEnrollment,
         onCancel,
-    }) => ({
+    }): NewEventWorkspaceWrapperProps => ({
         programId: program.id,
         stageId,
         orgUnitId,
@@ -151,6 +158,7 @@ export const NewEventWorkspace: WidgetConfig = {
         widgetReducerName,
         rulesExecutionDependencies,
         onSave,
+        onSaveAndCompleteEnrollment,
         onCancel,
     }),
 };
@@ -161,7 +169,22 @@ export const EnrollmentWidget: WidgetConfig = {
     getCustomSettings: ({ readOnlyMode }) => ({
         readOnlyMode,
     }),
-    getProps: ({ teiId, enrollmentId, program, onDelete, onAddNew, onUpdateEnrollmentDate, onUpdateIncidentDate, onEnrollmentError, onAccessLostFromTransfer }): WidgetEnrollmentProps => ({
+    getProps: ({
+        teiId,
+        enrollmentId,
+        program,
+        events,
+        widgetEnrollmentStatus,
+        onDelete,
+        onAddNew,
+        onUpdateEnrollmentDate,
+        onUpdateIncidentDate,
+        onUpdateEnrollmentStatus,
+        onUpdateEnrollmentStatusSuccess,
+        onUpdateEnrollmentStatusError,
+        onEnrollmentError,
+        onAccessLostFromTransfer,
+    }): WidgetEnrollmentProps => ({
         teiId,
         enrollmentId,
         programId: program.id,
@@ -169,6 +192,10 @@ export const EnrollmentWidget: WidgetConfig = {
         onAddNew,
         onUpdateEnrollmentDate,
         onUpdateIncidentDate,
+        onUpdateEnrollmentStatus,
+        onUpdateEnrollmentStatusSuccess,
+        onUpdateEnrollmentStatusError,
+        externalData: { status: widgetEnrollmentStatus, events },
         onError: onEnrollmentError,
         onAccessLostFromTransfer,
     }),
@@ -183,23 +210,31 @@ export const EditEventWorkspace: WidgetConfig = {
         orgUnitId,
         teiId,
         enrollmentId,
+        eventId,
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
         initialScheduleDate,
         assignee,
-    }) => ({
+        onSaveAndCompleteEnrollment,
+        onSaveAndCompleteEnrollmentErrorActionType,
+        onSaveAndCompleteEnrollmentSuccessActionType,
+    }): WidgetEventEditProps => ({
         programStage,
         onGoBack,
         programId: program.id,
         orgUnitId,
         teiId,
         enrollmentId,
+        eventId,
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
         initialScheduleDate,
         assignee,
+        onSaveAndCompleteEnrollment,
+        onSaveAndCompleteEnrollmentErrorActionType,
+        onSaveAndCompleteEnrollmentSuccessActionType,
     }),
 };
 
@@ -224,10 +259,7 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventComment: WidgetConfig = {
     Component: WidgetEventComment,
-    getProps: ({
-        dataEntryKey,
-        dataEntryId,
-    }) => ({
+    getProps: ({ dataEntryKey, dataEntryId }) => ({
         dataEntryKey,
         dataEntryId,
     }),

@@ -171,3 +171,11 @@ Feature: The user interacts with the widgets on the enrollment dashboard
   Scenario: The program rules are triggered and the effects are displayed in the sidebar widgets
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the user can see the program rules effect in the indicator widget
+
+  Scenario: User can complete the enrollment and the active events
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=qyx7tscVpVB
+    And the enrollment widget should be opened
+    And the user sees the enrollment status and the Baby Postnatal event status is active
+    And the user opens the enrollment actions menu
+    When the user completes the enrollment and the active events
+    Then the user sees the enrollment status and the Baby Postnatal event status is completed

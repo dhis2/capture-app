@@ -11,6 +11,8 @@ export const newEventWidgetActionTypes = {
     EVENT_SAVE_ERROR: 'NewEvent.SaveEventError', // TEMPORARY - pass in error action name to the widget
     EVENT_NOTE_ADD: 'NewEvent.AddEventNote',
     START_CREATE_NEW_AFTER_COMPLETING: 'NewEvent.StartCreateNewAfterCompleting',
+    EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST: 'NewEvent.EventSaveAndEnrollmentCompleteRequest',
+    EVENT_SAVE_ENROLLMENT_COMPLETE: 'NewEvent.EventSaveAndEnrollmentComplete',
 };
 
 export const requestSaveEvent = ({
@@ -23,6 +25,7 @@ export const requestSaveEvent = ({
     teiId,
     enrollmentId,
     completed,
+    fromClientDate,
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
@@ -36,6 +39,7 @@ export const requestSaveEvent = ({
     teiId: string,
     enrollmentId: string,
     completed?: boolean,
+    fromClientDate: (date: Date) => { getServerZonedISOString: () => string },
     onSaveExternal?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
@@ -50,6 +54,7 @@ export const requestSaveEvent = ({
         teiId,
         enrollmentId,
         completed,
+        fromClientDate,
         onSaveExternal,
         onSaveSuccessActionType,
         onSaveErrorActionType,
@@ -69,3 +74,82 @@ export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, 
     });
 export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: Object) =>
     actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages });
+
+
+export const requestSaveAndCompleteEnrollment = ({
+    eventId,
+    dataEntryId,
+    formFoundation,
+    programId,
+    orgUnitId,
+    orgUnitName,
+    teiId,
+    enrollmentId,
+    completed,
+    fromClientDate,
+    onSaveAndCompleteEnrollmentExternal,
+    onSaveAndCompleteEnrollmentSuccessActionType,
+    onSaveAndCompleteEnrollmentErrorActionType,
+    enrollment,
+}: {
+    eventId: string,
+    dataEntryId: string,
+    formFoundation: Object,
+    programId: string,
+    orgUnitId: string,
+    orgUnitName: string,
+    teiId: string,
+    enrollmentId: string,
+    completed?: boolean,
+    fromClientDate: (date: Date) => { getServerZonedISOString: () => string },
+    onSaveAndCompleteEnrollmentExternal?: (enrollmnet: ApiEnrollment) => void,
+    onSaveAndCompleteEnrollmentSuccessActionType?: string,
+    onSaveAndCompleteEnrollmentErrorActionType?: string,
+    enrollment: Object,
+}) =>
+    actionCreator(newEventWidgetActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST)(
+        {
+            eventId,
+            dataEntryId,
+            formFoundation,
+            programId,
+            orgUnitId,
+            orgUnitName,
+            teiId,
+            enrollmentId,
+            completed,
+            fromClientDate,
+            onSaveAndCompleteEnrollmentExternal,
+            onSaveAndCompleteEnrollmentSuccessActionType,
+            onSaveAndCompleteEnrollmentErrorActionType,
+            enrollment,
+        },
+        { skipLogging: ['formFoundation'] },
+    );
+
+export const saveEventAndCompleteEnrollment = (
+    serverData: Object,
+    onCompleteEnrollmentSuccessActionType?: string,
+    onCompleteEnrollmentErrorActionType?: string,
+    uid: string,
+) =>
+    actionCreator(newEventWidgetActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE)(
+        {},
+        {
+            offline: {
+                effect: {
+                    url: 'tracker?async=false&importStrategy=CREATE_AND_UPDATE',
+                    method: effectMethods.POST,
+                    data: serverData,
+                },
+                commit: onCompleteEnrollmentSuccessActionType && {
+                    type: onCompleteEnrollmentSuccessActionType,
+                    meta: { serverData, uid },
+                },
+                rollback: onCompleteEnrollmentErrorActionType && {
+                    type: onCompleteEnrollmentErrorActionType,
+                    meta: { serverData, uid },
+                },
+            },
+        },
+    );

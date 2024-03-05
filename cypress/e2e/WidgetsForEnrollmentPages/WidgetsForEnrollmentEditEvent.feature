@@ -119,3 +119,11 @@ Feature: The user interacts with the widgets on the enrollment edit event
   Then the event has the user Tracker demo User assigned
   When you remove the assigned user
   Then the event has no assignd user
+
+    Scenario: User can complete the enrollment and the active events
+    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=OWpIzQ4xabC&orgUnitId=DiszpKrYNg8
+    And the enrollment widget should be opened
+    And the user sees the enrollment status and the Baby Postnatal event status is active
+    And the user opens the enrollment actions menu
+    When the user completes the enrollment and the active events
+    Then the user sees the enrollment status and the Baby Postnatal event status is completed

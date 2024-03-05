@@ -14,6 +14,7 @@ declare type ApiDataValue = {
 };
 
 declare type ApiEnrollmentEvent = {|
+    enrollment: string,
     event: string,
     program: string,
     programStage: string,

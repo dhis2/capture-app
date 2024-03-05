@@ -33,7 +33,11 @@ export type Props = {|
     onUpdateIncidentDate: (incidentDate: string) => void,
     onAccessLostFromTransfer: () => void,
     onEnrollmentError: (message: string) => void,
+    onUpdateEnrollmentStatus: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError: (message: string) => void,
     ruleEffects?: Array<{id: string, type: $Values<effectActions>}>;
+    widgetEnrollmentStatus: ?string,
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
     onDeleteTrackedEntitySuccess: () => void,
