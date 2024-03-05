@@ -4,6 +4,7 @@ export const FEATURES = Object.freeze({
     storeProgramStageWorkingList: 'storeProgramStageWorkingList',
     multiText: 'multiText',
     customIcons: 'customIcons',
+    newTransferQueryParam: 'newTransferQueryParam',
     exportablePayload: 'exportablePayload',
     trackerImageEndpoint: 'trackerImageEndpoint',
 });
@@ -16,6 +17,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.customIcons]: 41,
     [FEATURES.exportablePayload]: 41,
     [FEATURES.trackerImageEndpoint]: 41,
+    [FEATURES.newTransferQueryParam]: 41,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>

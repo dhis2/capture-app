@@ -61,6 +61,7 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
             },
             display: {
                 trackedEntityTypeName: trackedEntityType.name,
+                showDeleteButton: true,
             },
         };
     }
@@ -70,6 +71,7 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
             navigation: {},
             display: {
                 programStageName: programStage.name,
+                showDeleteButton: false,
             },
         };
     }
@@ -80,7 +82,7 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
     };
 };
 
-const getEventData = ({ dataValues, event, program: programId }, relationshipCreatedAt, pendingApiResponse): LinkedEntityData => {
+const getEventData = ({ dataValues, event, program: programId }, { relationshipCreatedAt, relationshipId }, pendingApiResponse): LinkedEntityData => {
     const values = dataValues.reduce((acc, dataValue) => {
         acc[dataValue.dataElement] = dataValue.value;
         return acc;
@@ -91,6 +93,7 @@ const getEventData = ({ dataValues, event, program: programId }, relationshipCre
         values,
         baseValues: {
             relationshipCreatedAt,
+            relationshipId,
             pendingApiResponse,
         },
         navigation: {
@@ -100,7 +103,7 @@ const getEventData = ({ dataValues, event, program: programId }, relationshipCre
     };
 };
 
-const getTrackedEntityData = ({ attributes, trackedEntity }, relationshipCreatedAt, pendingApiResponse?: boolean): LinkedEntityData => {
+const getTrackedEntityData = ({ attributes, trackedEntity }, { relationshipCreatedAt, relationshipId }, pendingApiResponse?: boolean): LinkedEntityData => {
     const values = attributes.reduce((acc, attribute) => {
         acc[attribute.attribute] = attribute.value;
         return acc;
@@ -112,6 +115,7 @@ const getTrackedEntityData = ({ attributes, trackedEntity }, relationshipCreated
         baseValues: {
             pendingApiResponse,
             relationshipCreatedAt,
+            relationshipId,
         },
         navigation: {
             trackedEntityId: trackedEntity,
@@ -119,13 +123,13 @@ const getTrackedEntityData = ({ attributes, trackedEntity }, relationshipCreated
     };
 };
 
-const getLinkedEntityData = (apiLinkedEntity, relationshipCreatedAt, pendingApiResponse) => {
+const getLinkedEntityData = (apiLinkedEntity, relationshipMeta, pendingApiResponse) => {
     if (apiLinkedEntity.trackedEntity) {
-        return getTrackedEntityData(apiLinkedEntity.trackedEntity, relationshipCreatedAt, pendingApiResponse);
+        return getTrackedEntityData(apiLinkedEntity.trackedEntity, relationshipMeta, pendingApiResponse);
     }
 
     if (apiLinkedEntity.event) {
-        return getEventData(apiLinkedEntity.event, relationshipCreatedAt, pendingApiResponse);
+        return getEventData(apiLinkedEntity.event, relationshipMeta, pendingApiResponse);
     }
 
     if (apiLinkedEntity.enrollment) {
@@ -165,6 +169,7 @@ export const useGroupedLinkedEntities = (
             .diff(moment(a.createdAt)))
         .reduce((accGroupedLinkedEntities, relationship) => {
             const {
+                relationship: relationshipId,
                 relationshipType: relationshipTypeId,
                 from: fromEntity,
                 to: toEntity,
@@ -189,7 +194,10 @@ export const useGroupedLinkedEntities = (
                 return accGroupedLinkedEntities;
             }
 
-            const linkedEntityData = getLinkedEntityData(apiLinkedEntity, relationshipCreatedAt, pendingApiResponse);
+            const linkedEntityData = getLinkedEntityData(
+                apiLinkedEntity,
+                { relationshipCreatedAt, relationshipId },
+                pendingApiResponse);
             if (!linkedEntityData) {
                 return accGroupedLinkedEntities;
             }

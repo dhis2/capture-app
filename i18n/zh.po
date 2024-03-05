@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Philip Larsen Donnelly, 2022
 # 晓东 林 <13981924470@126.com>, 2023
 # Viktor Varland <viktor@dhis2.org>, 2023
-# easylin <lin_xd@126.com>, 2023
+# Philip Larsen Donnelly, 2024
+# easylin <lin_xd@126.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,10 +76,6 @@ msgstr "字段验证发生错误。"
 
 msgid "error"
 msgstr "错误"
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
-msgstr "插件尚不可用 - 请联系您的系统管理员"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -162,6 +158,9 @@ msgstr "完成事件"
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - 基本信息"
 
+msgid "{{ stageName }} - Assignee"
+msgstr ""
+
 msgid "{{ stageName }} - Status"
 msgstr "{{ stageName }} - 状态"
 
@@ -187,7 +186,7 @@ msgid "{{ stageName }} - Details"
 msgstr "{{ stageName }} - 详细信息"
 
 msgid "{{ stageName }} - {{ sectionName }}"
-msgstr "{{ 阶段名称 }} - {{ 部分名称 }}"
+msgstr "{{ stageName }} - {{ sectionName }}"
 
 msgid "Assigned user"
 msgstr "分配的用户"
@@ -647,25 +646,18 @@ msgstr "停止为 {{programName}} 使用新的注册信息中心"
 msgid "Opt out for {{programName}}"
 msgstr "选择退出 {{programName}}"
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "ID为“ {{enrollmentId}}”的报名不存在"
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
-msgstr "打开此报名时出现错误。请输入有效网址。"
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "获取注册时出错。请输入有效网址。"
-
-msgid "Enrollment Dashboard"
-msgstr "报名仪表板"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "此报名尚无指标输出"
-
-msgid "No feedback for this enrollment yet"
-msgstr "此报名尚无反馈"
 
 msgid "Quick actions"
 msgstr "快速行动"
@@ -745,20 +737,11 @@ msgstr "机构对当前项目无效"
 msgid "There was an error opening the Page"
 msgstr "打开页面时出错"
 
-msgid "Enrollment{{escape}} New Event"
-msgstr "注册{{escape}}新事件"
-
 msgid "There was an error loading the page"
 msgstr "加载页面时出错"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
-
-msgid "There are no feedbacks for this event"
-msgstr "本次事件暂无反馈"
-
-msgid "There are no indicators for this event"
-msgstr "此事件没有指标"
 
 msgid "Program stage is invalid"
 msgstr "项目阶段无效"
@@ -786,18 +769,6 @@ msgstr "无法加载项目阶段"
 
 msgid "Stage"
 msgstr "阶段"
-
-msgid "Enrollment{{escape}} View Event"
-msgstr "报名{{escape}} 查看事件"
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr "报名{{escape}} 编辑事件"
-
-msgid "The enrollment event data could not be found"
-msgstr "找不到报名事件数据"
-
-msgid "There are no feedback for this event"
-msgstr "本次活动暂无反馈"
 
 msgid "Registered events"
 msgstr "注册的事件"
@@ -910,18 +881,6 @@ msgid ""
 "relationship"
 msgstr "离开该页将丢失你创建新关系的所有选择"
 
-msgid "No one is assigned to this event"
-msgstr "没有人被分配到的该事件"
-
-msgid "Assign"
-msgstr "分配"
-
-msgid "Event assigned to {{name}}"
-msgstr "事件被分配到  {{name}}"
-
-msgid "Feedbacks"
-msgstr "反馈"
-
 msgid "Show all events"
 msgstr "显示所有事件"
 
@@ -934,6 +893,21 @@ msgstr "事件不能载入"
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
+msgid "Dashboard"
+msgstr "仪表盘"
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr "此报名尚无反馈"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "此报名尚无指标输出"
+
 msgid "Selected program"
 msgstr "选择的项目"
 
@@ -945,6 +919,9 @@ msgstr "按属性搜索"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "无法检索元数据。请稍后再试。"
+
+msgid "The enrollment event data could not be found"
+msgstr "找不到报名事件数据"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -1080,11 +1057,23 @@ msgstr "{{programName}}中的新{{trackedEntityName}}"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "在{{programName}}中搜索{{trackedEntityName}}"
 
-msgid "To work with the selected program,"
-msgstr "基于选择的项目工作"
+msgid "Assigned to"
+msgstr "指派到"
 
-msgid "open the Tracker Capture app"
-msgstr "打开跟踪记录APP"
+msgid "You don't have access to edit this assignee"
+msgstr ""
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "No one is assigned to this event"
+msgstr "没有人被分配到的该事件"
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
+msgstr "分配"
 
 msgid "This program is protected"
 msgstr "该项目受保护"
@@ -1154,9 +1143,6 @@ msgstr "维度"
 
 msgid "Longitude"
 msgstr "经度"
-
-msgid "Edit"
-msgstr "编辑"
 
 msgid "Set coordinates"
 msgstr "设置坐标"
@@ -1338,7 +1324,7 @@ msgid "To open this event, please wait until saving is complete"
 msgstr "要打开此活动，请等待保存完成"
 
 msgid "Show {{ rest }} more"
-msgstr "显示 {{ rest}} 更多"
+msgstr "显示 {{ rest }} 更多"
 
 msgid "Reset list"
 msgstr "重置列表"
@@ -1359,13 +1345,13 @@ msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} 逾期"
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr "{{ ScheduledEvents }} 已安排"
+msgstr "{{ scheduledEvents }} 已安排"
 
 msgid "Stages and Events"
 msgstr "阶段与活动"
 
-msgid "New TEI Relationship"
-msgstr "新加TEI 关系"
+msgid "New {{trackedEntityTypeName}} relationship"
+msgstr ""
 
 msgid "Missing implementation step"
 msgstr "缺少实施步骤"
@@ -1418,9 +1404,6 @@ msgstr "下载数据"
 
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
-
-msgid "Assigned to"
-msgstr "指派到"
 
 msgid "Registration Date"
 msgstr "登记日期"
@@ -1489,7 +1472,7 @@ msgid "An error has occured. See log for details"
 msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr "调度{{escape }}到期{{ time }}"
+msgstr "调度{{ escape }}到期{{ time }}"
 
 msgid "Scheduled"
 msgstr "已经调度"
@@ -1550,6 +1533,9 @@ msgstr "删除注册事件时出错"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "编辑事件时出错，所做的更改未保存"
+
+msgid "Error updating the Assignee"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "设置坐标"
