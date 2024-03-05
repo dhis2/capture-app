@@ -51,9 +51,9 @@ const getImageSubvalue = async (keys: Object, querySingleResource: QuerySingleRe
         });
 
     return (await Promise.all(promises))
-        .reduce((acc, { id, name, url }) => {
+        .reduce((acc, { id, name, url, previewUrl }) => {
             if (id) {
-                acc[id] = { value: id, name, url };
+                acc[id] = { value: id, name, url, previewUrl };
             }
             return acc;
         }, {});
