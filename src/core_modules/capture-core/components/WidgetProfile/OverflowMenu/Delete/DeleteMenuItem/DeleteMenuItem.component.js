@@ -1,19 +1,13 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconDelete16, MenuItem } from '@dhis2/ui';
 import type { Props } from './DeleteMenuItem.types';
 import { ConditionalTooltip } from './ConditionalTooltip';
 
-const getTooltipContent = (canWriteData, canCascadeDeleteTei, trackedEntityTypeName) => {
-    if (!canWriteData) {
-        return i18n.t("You don't have access to delete this {{trackedEntityTypeName}}", {
-            trackedEntityTypeName,
-            interpolation: { escapeValue: false },
-        });
-    }
-    if (!canCascadeDeleteTei) {
-        return i18n.t("You can't delete this {{trackedEntityTypeName}} when it has associated enrollments and events", {
+const getTooltipContent = (disabled, trackedEntityTypeName) => {
+    if (disabled) {
+        return i18n.t('You do not have access to delete this {{trackedEntityTypeName}}', {
             trackedEntityTypeName,
             interpolation: { escapeValue: false },
         });
@@ -28,10 +22,11 @@ export const DeleteMenuItem = ({
     setActionsIsOpen,
     setDeleteModalIsOpen,
 }: Props) => {
-    const tooltipContent = getTooltipContent(canWriteData, canCascadeDeleteTei, trackedEntityTypeName);
+    const disabled = useMemo(() => !canWriteData || !canCascadeDeleteTei, [canWriteData, canCascadeDeleteTei]);
+    const tooltipContent = getTooltipContent(disabled, trackedEntityTypeName);
 
     return (
-        <ConditionalTooltip content={tooltipContent} enabled={!canWriteData || !canCascadeDeleteTei}>
+        <ConditionalTooltip content={tooltipContent} enabled={disabled}>
             <MenuItem
                 destructive
                 dense
@@ -44,7 +39,7 @@ export const DeleteMenuItem = ({
                     setDeleteModalIsOpen(true);
                     setActionsIsOpen(false);
                 }}
-                disabled={!canWriteData || !canCascadeDeleteTei}
+                disabled={disabled}
             />
         </ConditionalTooltip>
     );
