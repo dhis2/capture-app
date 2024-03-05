@@ -3,6 +3,8 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { Tag } from '@dhis2/ui';
+import { PreviewImage } from 'capture-ui';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
@@ -31,7 +33,12 @@ type FileClientValue = {
     value: string,
 };
 
-function convertResourceForDisplay(clientValue: FileClientValue) {
+type ImageClientValue = {
+    ...FileClientValue,
+    previewUrl: string,
+};
+
+function convertFileForDisplay(clientValue: FileClientValue) {
     return (
         <a
             href={clientValue.url}
@@ -42,6 +49,15 @@ function convertResourceForDisplay(clientValue: FileClientValue) {
             {clientValue.name}
         </a>
     );
+}
+
+function convertImageForDisplay(clientValue: ImageClientValue) {
+    return featureAvailable(FEATURES.trackerImageEndpoint) ? (
+        <PreviewImage
+            url={clientValue.url}
+            previewUrl={clientValue.previewUrl}
+        />
+    ) : convertFileForDisplay(clientValue);
 }
 
 function convertRangeForDisplay(parser: any, clientValue: any) {
@@ -89,8 +105,8 @@ const valueConvertersForType = {
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.AGE]: convertDateForListDisplay,
-    [dataElementTypes.FILE_RESOURCE]: convertResourceForDisplay,
-    [dataElementTypes.IMAGE]: convertResourceForDisplay,
+    [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
+    [dataElementTypes.IMAGE]: convertImageForDisplay,
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
     [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,

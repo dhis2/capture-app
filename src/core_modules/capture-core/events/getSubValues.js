@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
 import { type RenderFoundation, dataElementTypes } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
@@ -52,7 +52,15 @@ const subValueGetterByElementType = {
                 ({
                     name: res.name,
                     value: res.id,
-                    url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                    ...(featureAvailable(FEATURES.trackerImageEndpoint) ?
+                        {
+                            url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image`,
+                            previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`,
+                        } : {
+                            url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                            previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                        }
+                    ),
                 }))
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
