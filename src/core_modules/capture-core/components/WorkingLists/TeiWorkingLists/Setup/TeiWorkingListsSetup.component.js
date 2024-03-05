@@ -54,6 +54,7 @@ export const TeiWorkingListsSetup = ({
     onAddTemplate,
     onUpdateTemplate,
     onDeleteTemplate,
+    forceUpdateOnMount,
     ...passOnProps
 }: Props) => {
     const prevProgramStageId = useRef(programStageId);
@@ -186,6 +187,7 @@ export const TeiWorkingListsSetup = ({
     return (
         <WorkingListsBase
             {...passOnProps}
+            forceUpdateOnMount={forceUpdateOnMount}
             currentTemplate={useCurrentTemplate(templates, currentTemplateId)}
             templates={templates}
             columns={columns}

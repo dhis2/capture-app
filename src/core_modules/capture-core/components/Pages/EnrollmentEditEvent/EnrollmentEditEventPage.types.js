@@ -48,6 +48,7 @@ export type PlainProps = {|
     assignee: UserFormField | null,
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
+    onDeleteTrackedEntitySuccess: () => void,
     events: Array<any>,
 |};
 

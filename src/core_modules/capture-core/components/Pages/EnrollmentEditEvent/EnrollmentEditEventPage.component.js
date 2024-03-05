@@ -49,6 +49,7 @@ export const EnrollmentEditEventPageComponent = ({
     getAssignedUserSaveContext,
     onSaveAssignee,
     onSaveAssigneeError,
+    onDeleteTrackedEntitySuccess,
     onAccessLostFromTransfer,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
@@ -103,6 +104,7 @@ export const EnrollmentEditEventPageComponent = ({
             getAssignedUserSaveContext={getAssignedUserSaveContext}
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}
+            onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
         <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
