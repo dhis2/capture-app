@@ -16,7 +16,7 @@ In the Capture app you register events that occurred at a particular time and pl
 
 4. If the program has a category combination set the category option will have to be selected.
 
-5. Click **New**.
+5. Click **Create new person**. Please note that the label of this button corresponds to the tracked entity type of the program, which could vary, such as "Building," "Person," etc.
 
     ![create new event](resources/images/create_new_event.png)
 
