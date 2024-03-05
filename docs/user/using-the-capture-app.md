@@ -1029,6 +1029,10 @@ Click the **Edit** button to make changes to the tracked entity instance profile
 
 ![](resources/images/enrollment-dash-tei-profile-widget-edit.png)
 
+Click the **Delete ${tracked entity type}** button to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, tracked entity and all its associated enrollment and events across all programs will be deleted. 
+
+![](resources/images/enrollment-dash-tei-profile-widget-delete.png)
+
 ### Feedback widget
 
 ![](resources/images/enrollment-dash-feedback-widget-1.png)
