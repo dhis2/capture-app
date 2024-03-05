@@ -1,3 +1,10 @@
+# [100.62.0](https://github.com/dhis2/capture-app/compare/v100.61.0...v100.62.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-15170] Adjust context selector for "new" button ([#3523](https://github.com/dhis2/capture-app/issues/3523)) ([3779c9d](https://github.com/dhis2/capture-app/commit/3779c9dd4e79a28db375fddfed99eb34c84d4465))
+
 # [100.61.0](https://github.com/dhis2/capture-app/compare/v100.60.0...v100.61.0) (2024-03-05)
 
 
