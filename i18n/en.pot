@@ -1092,8 +1092,14 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Create saved list"
 
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "New {{trackedEntityName}} in {{programName}}"
+msgid "Create new in another program"
+msgstr "Create new in another program"
+
+msgid "Create new {{trackedEntityName}}"
+msgstr "Create new {{trackedEntityName}}"
+
+msgid "Create new event"
+msgstr "Create new event"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
