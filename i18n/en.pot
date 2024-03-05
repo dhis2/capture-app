@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T15:44:19.257Z\n"
-"PO-Revision-Date: 2024-03-05T15:44:19.257Z\n"
+"POT-Creation-Date: 2024-03-05T12:36:05.806Z\n"
+"PO-Revision-Date: 2024-03-05T12:36:05.806Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1415,11 +1415,35 @@ msgstr "Try again or contact your system administrator for support"
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
 
+msgid "You do not have access to delete this {{trackedEntityTypeName}}"
+msgstr "You do not have access to delete this {{trackedEntityTypeName}}"
+
+msgid "Delete {{trackedEntityTypeName}}"
+msgstr "Delete {{trackedEntityTypeName}}"
+
+msgid ""
+"Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
+"permanently remove the {{trackedEntityTypeName}} and all its associated "
+"enrollments and events in all programs."
+msgstr ""
+"Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
+"permanently remove the {{trackedEntityTypeName}} and all its associated "
+"enrollments and events in all programs."
+
+msgid "There was a problem deleting the {{trackedEntityTypeName}}"
+msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
+
+msgid "Yes, delete {{trackedEntityTypeName}}"
+msgstr "Yes, delete {{trackedEntityTypeName}}"
+
+msgid "View changelog"
+msgstr "View changelog"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
-msgid "{{TETName}} profile"
-msgstr "{{TETName}} profile"
+msgid "{{trackedEntityTypeName}} profile"
+msgstr "{{trackedEntityTypeName}} profile"
 
 msgid "tracked entity instance"
 msgstr "tracked entity instance"

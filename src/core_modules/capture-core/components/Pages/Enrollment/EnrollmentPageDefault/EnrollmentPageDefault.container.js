@@ -84,6 +84,10 @@ export const EnrollmentPageDefault = () => {
     const outputEffects = useFilteredWidgetData(ruleEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
+    const onDeleteTrackedEntitySuccess = useCallback(() => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [history, orgUnitId, programId]);
+
     const onDelete = () => {
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
@@ -169,6 +173,7 @@ export const EnrollmentPageDefault = () => {
             enrollmentId={enrollmentId}
             onAddNew={onAddNew}
             onDelete={onDelete}
+            onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
             onViewAll={onViewAll}
             onCreateNew={onCreateNew}
             widgetEffects={outputEffects}

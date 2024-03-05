@@ -1,9 +1,10 @@
 // @flow
+/* eslint-disable complexity */
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Button, FlyoutMenu, IconMore16, MenuItem, spacers } from '@dhis2/ui';
+import { Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
@@ -21,10 +22,9 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
-import { OverflowButton } from '../Buttons';
-import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
 import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
+import { OverflowMenu } from './OverflowMenu';
 
 const styles = {
     header: {
@@ -37,6 +37,9 @@ const styles = {
         padding: `0 ${spacers.dp16}`,
         marginBottom: spacers.dp8,
     },
+    actions: {
+        display: 'flex',
+    },
 };
 
 const showEditModal = (loading, error, showEdit, modalState) =>
@@ -48,14 +51,13 @@ const WidgetProfilePlain = ({
     readOnlyMode = false,
     orgUnitId = '',
     onUpdateTeiAttributeValues,
+    onDeleteSuccess,
     classes,
 }: PlainProps) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
-    const [changelogIsOpen, setChangelogIsOpen] = useState(false);
-    const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
@@ -65,8 +67,10 @@ const WidgetProfilePlain = ({
     const {
         loading: trackedEntityInstancesLoading,
         error: trackedEntityInstancesError,
+        trackedEntity,
         trackedEntityInstanceAttributes,
         trackedEntityTypeName,
+        trackedEntityTypeAccess,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
     const {
@@ -110,6 +114,11 @@ const WidgetProfilePlain = ({
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 
+    const canWriteData = useMemo(
+        () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
+        [trackedEntityTypeAccess, program],
+    );
+
     const renderProfile = () => {
         if (loading) {
             return <LoadingMaskElementCenter />;
@@ -132,36 +141,25 @@ const WidgetProfilePlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <div>{i18n.t('{{TETName}} profile', {
-                            TETName: trackedEntityTypeName,
+                        <div>{i18n.t('{{trackedEntityTypeName}} profile', {
+                            trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}</div>
-                        <div style={{ display: 'flex', gap: '4px' }}>
+                        <div className={classes.actions}>
                             {isEditable && (
                                 <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
                                     {i18n.t('Edit')}
                                 </Button>
                             )}
-                            {displayChangelog && (
-                                <OverflowButton
-                                    open={actionsIsOpen}
-                                    onClick={() => setActionsIsOpen(prev => !prev)}
-                                    secondary
-                                    small
-                                    icon={<IconMore16 />}
-                                    component={(
-                                        <FlyoutMenu dense maxWidth="250px">
-                                            <MenuItem
-                                                label={i18n.t('View changelog')}
-                                                onClick={() => {
-                                                    setChangelogIsOpen(true);
-                                                    setActionsIsOpen(false);
-                                                }}
-                                            />
-                                        </FlyoutMenu>
-                                    )}
-                                />
-                            )}
+                            <OverflowMenu
+                                trackedEntityTypeName={trackedEntityTypeName}
+                                canWriteData={canWriteData}
+                                trackedEntity={trackedEntity}
+                                onDeleteSuccess={onDeleteSuccess}
+                                displayChangelog={displayChangelog}
+                                teiId={teiId}
+                                programAPI={program}
+                            />
                         </div>
                     </div>
                 }
@@ -190,14 +188,6 @@ const WidgetProfilePlain = ({
                     />
                     <NoticeBox formId="trackedEntityProfile-edit" />
                 </>
-            )}
-            {displayChangelog && changelogIsOpen && (
-                <TrackedEntityChangelogWrapper
-                    teiId={teiId}
-                    programAPI={program}
-                    isOpen
-                    setIsOpen={setChangelogIsOpen}
-                />
             )}
         </div>
     );

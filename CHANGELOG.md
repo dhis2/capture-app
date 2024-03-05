@@ -1,3 +1,10 @@
+# [100.63.0](https://github.com/dhis2/capture-app/compare/v100.62.0...v100.63.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-16922] Delete Tracked entity from profile Widget ([#3545](https://github.com/dhis2/capture-app/issues/3545)) ([fb8171e](https://github.com/dhis2/capture-app/commit/fb8171e515eee7fb081e6e8954d5b14959fbe4f2))
+
 # [100.62.0](https://github.com/dhis2/capture-app/compare/v100.61.0...v100.62.0) (2024-03-05)
 
 

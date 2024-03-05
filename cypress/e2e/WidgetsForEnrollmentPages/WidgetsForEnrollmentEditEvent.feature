@@ -38,6 +38,13 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the user sees the owner organisation unit
     And the user sees the last update date
 
+  Scenario: You can delete a tracked entity from the profile widget
+    Given you add a new tracked entity in the Malaria focus investigation program
+    When you open the overflow menu and click the "Delete Focus area" button
+    Then you see the delete tracked entity confirmation modal
+    When you confirm by clicking the "Yes, delete Focus area" button
+    Then you are redirected to the home page
+
   # TODO DHIS2-11482 - The test cases related with enrollment status edit are flaky. Move them to unit tests.
   # Scenario: User can modify the enrollment from Active to Complete
   #   Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR

@@ -40,6 +40,7 @@ export type Props = {|
     widgetEnrollmentStatus: ?string,
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
+    onDeleteTrackedEntitySuccess: () => void,
 |};
 
 export type PlainProps = {|

@@ -14,7 +14,8 @@ type Props = {
     dataTest?: string,
     small?: boolean,
     large?: boolean,
-}
+    className: string,
+};
 
 export const OverflowButton = ({
     label,
@@ -27,6 +28,7 @@ export const OverflowButton = ({
     icon,
     dataTest,
     component,
+    className,
 }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const anchorRef = useRef(null);
@@ -49,21 +51,18 @@ export const OverflowButton = ({
                 large={large}
                 onClick={toggle}
                 icon={icon}
+                className={className}
             >
                 {label}
             </Button>
 
             {open && (
                 <Layer onBackdropClick={toggle} transparent>
-                    <Popper
-                        reference={anchorRef}
-                        placement="bottom-start"
-                    >
+                    <Popper reference={anchorRef} placement="bottom-end">
                         {component}
                     </Popper>
                 </Layer>
             )}
-
         </div>
     );
 };
