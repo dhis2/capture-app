@@ -39,6 +39,7 @@ const styles = {
     },
     actions: {
         display: 'flex',
+        gap: '4px',
     },
 };
 
@@ -87,7 +88,7 @@ const WidgetProfilePlain = ({
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
-    const displayChangelog = !readOnlyMode && supportsChangelog && program.trackedEntityType?.changelogEnabled;
+    const displayChangelog = supportsChangelog && program.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)

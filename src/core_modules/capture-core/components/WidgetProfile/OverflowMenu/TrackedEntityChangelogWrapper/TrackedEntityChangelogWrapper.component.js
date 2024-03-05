@@ -1,10 +1,9 @@
 // @flow
 import React, { useMemo } from 'react';
-import { dataElementTypes, RenderFoundation } from '../../../metaData';
-import { useFormFoundation } from '../DataEntry/hooks';
-import type { DataElement } from '../../../metaData';
+import { dataElementTypes, RenderFoundation, type DataElement } from '../../../../metaData';
+import { useFormFoundation } from '../../DataEntry/hooks';
+import { WidgetTrackedEntityChangelog } from '../../../WidgetsChangelog';
 import type { Props } from './TrackedEntityChangelogWrapper.types';
-import { WidgetTrackedEntityChangelog } from '../../WidgetsChangelog';
 
 export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, ...passOnProps }: Props) => {
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);

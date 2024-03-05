@@ -59,7 +59,7 @@ const styles = {
     menuActions: {
         display: 'flex',
         alignItems: 'center',
-        gap: spacers.dp8,
+        gap: spacers.dp4,
     },
     button: { margin: spacersNum.dp8 },
     tooltip: { display: 'inline-flex' },

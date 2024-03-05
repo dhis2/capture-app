@@ -147,7 +147,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                         small
                         icon={<IconMore16 />}
                         component={(
-                            <FlyoutMenu dense maxWidth="250px">
+                            <FlyoutMenu dense>
                                 <MenuItem
                                     label={i18n.t('View changelog')}
                                     onClick={() => {

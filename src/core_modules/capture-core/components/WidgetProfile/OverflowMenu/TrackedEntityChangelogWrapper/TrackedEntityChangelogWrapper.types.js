@@ -1,5 +1,5 @@
 // @flow
-import type { TrackerProgram } from '../../../metaData';
+import type { TrackerProgram } from '../../../../metaData';
 
 type PassOnProps = {|
     teiId: string,
