@@ -137,7 +137,8 @@
         "@babel/preset-react": "7.16.7",
         "@dhis2/ui": "^9.1.1",
         "@js-temporal/polyfill": "0.4.3",
-        "core-js": "2.5.7"
+        "core-js": "2.5.7",
+        "i18next": "^20.5.0"
     },
     "browserslist": {
         "production": [

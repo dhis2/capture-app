@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-16T12:15:15.668Z\n"
-"PO-Revision-Date: 2024-02-16T12:15:15.668Z\n"
+"POT-Creation-Date: 2024-03-05T07:44:33.812Z\n"
+"PO-Revision-Date: 2024-03-05T07:44:33.812Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -313,6 +313,24 @@ msgstr "Enroll in a program by selecting a program from the top bar."
 
 msgid "An error has occurred. See log for details"
 msgstr "An error has occurred. See log for details"
+
+msgid "{{programStageName}} completed"
+msgstr "{{programStageName}} completed"
+
+msgid "Would you like to complete the enrollment and all active events as well?"
+msgstr "Would you like to complete the enrollment and all active events as well?"
+
+msgid "Yes, complete enrollment and events"
+msgstr "Yes, complete enrollment and events"
+
+msgid "Complete enrollment only"
+msgstr "Complete enrollment only"
+
+msgid "Would you like to complete the enrollment?"
+msgstr "Would you like to complete the enrollment?"
+
+msgid "Complete enrollment"
+msgstr "Complete enrollment"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "A duplicate exists (but there were some errors, see log for details"

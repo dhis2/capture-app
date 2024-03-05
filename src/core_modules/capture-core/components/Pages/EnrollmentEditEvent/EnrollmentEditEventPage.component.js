@@ -10,6 +10,7 @@ import { WidgetsForEnrollmentEventEdit } from './PageLayout/DefaultPageLayout.co
 import {
     EnrollmentPageKeys,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
+import { actionTypes } from './EnrollmentEditEventPage.actions';
 
 export const EnrollmentEditEventPageComponent = ({
     pageLayout,
@@ -17,6 +18,7 @@ export const EnrollmentEditEventPageComponent = ({
     programStage,
     teiId,
     enrollmentId,
+    eventId,
     trackedEntityTypeId,
     program,
     enrollmentsAsOptions,
@@ -35,8 +37,13 @@ export const EnrollmentEditEventPageComponent = ({
     eventAccess,
     assignee,
     pageStatus,
+    events,
     onEnrollmentError,
     onEnrollmentSuccess,
+    onUpdateEnrollmentStatus,
+    onUpdateEnrollmentStatusError,
+    onUpdateEnrollmentStatusSuccess,
+    onSaveAndCompleteEnrollment,
     onCancelEditEvent,
     onHandleScheduleSave,
     getAssignedUserSaveContext,
@@ -62,7 +69,6 @@ export const EnrollmentEditEventPageComponent = ({
             pageLayout={pageLayout}
             currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
-
             trackedEntityTypeId={trackedEntityTypeId}
             programStage={programStage}
             onGoBack={onGoBack}
@@ -70,6 +76,7 @@ export const EnrollmentEditEventPageComponent = ({
             orgUnitId={orgUnitId}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            eventId={eventId}
             eventStatus={eventStatus}
             initialScheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
@@ -79,6 +86,13 @@ export const EnrollmentEditEventPageComponent = ({
             onLinkedRecordClick={onLinkedRecordClick}
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
+            onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
+            onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
+            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+            onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
+            onSaveAndCompleteEnrollmentSuccessActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS}
+            onSaveAndCompleteEnrollmentErrorActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR}
+            events={events}
             pageStatus={pageStatus}
             widgetEffects={widgetEffects}
             hideWidgets={hideWidgets}

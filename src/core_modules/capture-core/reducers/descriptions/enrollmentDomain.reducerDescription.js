@@ -11,13 +11,16 @@ const {
     COMMON_ENROLLMENT_SITE_DATA_SET,
     UPDATE_ENROLLMENT_DATE,
     UPDATE_INCIDENT_DATE,
-    UPDATE_ENROLLMENT_EVENTS,
-    UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID,
+    UPDATE_ENROLLMENT_EVENT,
+    UPDATE_ENROLLMENT_EVENT_WITHOUT_ID,
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES,
+    UPDATE_ENROLLMENT_AND_EVENTS,
     ROLLBACK_ENROLLMENT_EVENT,
     ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID,
+    ROLLBACK_ENROLLMENT_AND_EVENTS,
     COMMIT_ENROLLMENT_EVENT,
     COMMIT_ENROLLMENT_EVENT_WITHOUT_ID,
+    COMMIT_ENROLLMENT_AND_EVENTS,
 } = enrollmentSiteActionTypes;
 
 const setAssignee = (state, action) => {
@@ -53,7 +56,7 @@ export const enrollmentDomainDesc = createReducerDescription(
                 occurredAt: incidentDate,
             },
         }),
-        [UPDATE_ENROLLMENT_EVENTS]: (
+        [UPDATE_ENROLLMENT_EVENT]: (
             state,
             { payload: { eventId, eventData } },
         ) => {
@@ -91,7 +94,7 @@ export const enrollmentDomainDesc = createReducerDescription(
 
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
-        [UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID]: (
+        [UPDATE_ENROLLMENT_EVENT_WITHOUT_ID]: (
             state,
             { payload: { eventData, uid } },
         ) => {
@@ -118,6 +121,59 @@ export const enrollmentDomainDesc = createReducerDescription(
             ...state,
             attributeValues,
         }),
+        [UPDATE_ENROLLMENT_AND_EVENTS]: (state, { payload: { enrollment } }) => {
+            const enrollmentToUpdate = { ...enrollment, pendingApiResponse: true, dataToRollback: state.enrollment };
+
+            if (enrollmentToUpdate.events?.length > 0) {
+                const eventsToUpdate = state.enrollment.events.map((event) => {
+                    const eventToUpdate = enrollmentToUpdate.events.find(e => e.event === event.event);
+                    return eventToUpdate
+                        ? {
+                            ...eventToUpdate,
+                            pendingApiResponse: true,
+                            dataToRollback: event,
+                        }
+                        : event;
+                });
+                const eventWithoutId = enrollmentToUpdate.events.find(event => event.uid);
+                const eventsToUpdateAndAdd = eventWithoutId ?
+                    [...eventsToUpdate, { ...eventWithoutId, pendingApiResponse: true }] : eventsToUpdate;
+
+                return {
+                    ...state,
+                    enrollment: { ...state.enrollment, ...enrollmentToUpdate, events: eventsToUpdateAndAdd },
+                };
+            }
+
+            return { ...state, enrollment: { ...state.enrollment, ...enrollmentToUpdate } };
+        },
+        [ROLLBACK_ENROLLMENT_AND_EVENTS]: (state, { payload: { uid } }) => {
+            const enrollment = state.enrollment.dataToRollback;
+            const events = state.enrollment.events.reduce((acc, event) => {
+                if (uid && event.uid === uid) {
+                    return acc;
+                }
+                const eventToRollback = event.dataToRollback ? event.dataToRollback : event;
+                return [...acc, eventToRollback];
+            }, []);
+
+            return { ...state, enrollment: { ...state.enrollment, ...enrollment, events } };
+        },
+        [COMMIT_ENROLLMENT_AND_EVENTS]: (state, { payload: { eventId, uid } }) => {
+            const { pendingApiResponse, dataToRollback, ...enrollmentToCommit } = state.enrollment;
+            const eventsToCommit = state.enrollment.events.map((event) => {
+                const id = uid && event.uid === uid ? eventId : event.event;
+                const {
+                    pendingApiResponse: pendingApiResponseEvent,
+                    dataToRollback: dataToRollbackEvent,
+                    uid: uidToRemove,
+                    ...dataToCommit
+                } = event;
+                return { ...dataToCommit, event: id };
+            });
+
+            return { ...state, enrollment: { ...enrollmentToCommit, events: eventsToCommit } };
+        },
         [enrollmentNoteActionTypes.ADD_ENROLLMENT_NOTE]:
         (state, { payload: { note } }) => ({
             ...state,

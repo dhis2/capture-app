@@ -15,6 +15,7 @@ export type PlainProps = {|
     hideWidgets: HideWidgets,
     teiId: string,
     enrollmentId: string,
+    eventId: string,
     program: Program,
     trackedEntityTypeId: string,
     mode: string,
@@ -30,6 +31,10 @@ export type PlainProps = {|
     onLinkedRecordClick: LinkedRecordClick,
     onEnrollmentError: (message: string) => void,
     onEnrollmentSuccess: () => void,
+    onUpdateEnrollmentStatus: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError: (message: string) => void,
+    onSaveAndCompleteEnrollment: (enrollment: Object) => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) => void,
     onAccessLostFromTransfer?: () => void,
@@ -43,6 +48,7 @@ export type PlainProps = {|
     assignee: UserFormField | null,
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
+    events: Array<any>,
 |};
 
 export type Props = {|
