@@ -39,6 +39,10 @@ type ImageClientValue = {
 };
 
 function convertFileForDisplay(clientValue: FileClientValue) {
+    // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
+    if (typeof clientValue === 'string' || clientValue instanceof String) {
+        return clientValue;
+    }
     return (
         <a
             href={clientValue.url}
@@ -52,6 +56,10 @@ function convertFileForDisplay(clientValue: FileClientValue) {
 }
 
 function convertImageForDisplay(clientValue: ImageClientValue) {
+    // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
+    if (typeof clientValue === 'string' || clientValue instanceof String) {
+        return clientValue;
+    }
     return featureAvailable(FEATURES.trackerImageEndpoint) ? (
         <PreviewImage
             url={clientValue.url}
