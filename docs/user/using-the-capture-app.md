@@ -10,13 +10,13 @@ In the Capture app you register events that occurred at a particular time and pl
 
 2. Select an organisation unit.
 
-3. Select a program.
+3. Select an event program.
 
     You will only see programs associated with the selected organisation unit and programs you have access to, and that are shared with your user group through data level sharing.
 
 4. If the program has a category combination set the category option will have to be selected.
 
-5. Click **Create new person**. Please note that the label of this button corresponds to the tracked entity type of the program, which could vary, such as "Building," "Person," etc.
+5. Click **Create new event**.
 
     ![create new event](resources/images/create_new_event.png)
 
@@ -71,7 +71,7 @@ The second option, is to register a tracked entity instance with program and enr
 
 2. Select an organisation unit.
 
-3. Click the "New" button.
+3. Click **Create new**.
 
     ![image](resources/images/register-without-enrollment-new-button.png)
 
@@ -106,7 +106,7 @@ The second option, is to register a tracked entity instance with program and enr
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. Click the **Save new** button to register the tracked entity instance.
+7. Click the **Save person** button to register the tracked entity instance. 
     
 8. You will now be prompted to the tracked entity instance dashboard. 
 
@@ -118,17 +118,11 @@ The second option, is to register a tracked entity instance with program and enr
 
 2. Select an organisation unit.
 
-3. Select a tracker program of your choice similar to the image below.
+3. Select a tracker program of your choice.
+
+4. Click **Create new person**. Please note that the label of this button corresponds to the tracked entity type of the program, which could vary, such as "Building," "Person," etc.
 
     ![create new event](resources/images/register-and-enroll-program-selection.png)
-
-4. Click the "New" dropdown button and then click the first option. 
-
-    The first option will look something similar to the image below. 
-    The text in our example is "New person in Child programme". 
-    Clicking this option will prompt you to the registration and enrollment 
-    page of the program you selected. 
-    ![create new event](resources/images/register-and-enroll-dropdown-button-new-person-in-program.png)
  
 5. Now, you will be able to see a form similar to the image below. 
 
@@ -152,7 +146,7 @@ The second option, is to register a tracked entity instance with program and enr
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. Click **Save new** to register the tracked entity instance. 
+7. Click **Save person** to register the tracked entity instance. 
     The **Save** button shows a loading spinner and the **Cancel** button is disabled while the request is processing.
     
 8. You will now be prompted to the tracked entity instance dashboard. 
@@ -266,17 +260,17 @@ Let us explain this with an example that demonstrates the detection of possible 
 2. Select your organisation unit and program from the menu on the top.
 ![](resources/images/duplicates-on-creation-01.png)
 
-3. Click "New" -> "New person in Child Programme"
+3. Click **Create new person**
 ![](resources/images/duplicates-on-creation-02.png)
 
 4. Fill in the first name in the form. **Remember, the first name we have checked as "Searchable" in the maintenance app.** 
-Click **Save new**. The system will start looking for possible duplicates that match the name Sarah.
+Click **Save person**. The system will start looking for possible duplicates that match the name Sarah.
 ![](resources/images/duplicates-on-creation-03.png)
 
 5. The system will automatically show a list of possible duplicates if there are any. 
 ![](resources/images/duplicates-on-creation-04.png)
 
-6. You can choose to make a new enrollement by clicking **Save new** or if you see the right person in the list - you can view the dashboard.
+6. You can choose to make a new enrollement by clicking **Save as new** or if you see the right person in the list - you can view the dashboard.
 ![](resources/images/duplicates-on-creation-05.png)
 
 > **Tip**
