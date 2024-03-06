@@ -1584,6 +1584,9 @@ msgstr "Inactive"
 msgid "Enrollment status"
 msgstr "Enrollment status"
 
+msgid "Follow up"
+msgstr "Follow up"
+
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
 
