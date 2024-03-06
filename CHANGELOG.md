@@ -1,3 +1,10 @@
+# [100.66.0](https://github.com/dhis2/capture-app/compare/v100.65.0...v100.66.0) (2024-03-06)
+
+
+### Features
+
+* [DHIS2-14799] Working list for follow up ([#3521](https://github.com/dhis2/capture-app/issues/3521)) ([0ad3891](https://github.com/dhis2/capture-app/commit/0ad38914ba4674ba2c71377e4f83036f6b4fcbf6))
+
 # [100.65.0](https://github.com/dhis2/capture-app/compare/v100.64.0...v100.65.0) (2024-03-05)
 
 
