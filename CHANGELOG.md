@@ -1,3 +1,10 @@
+## [100.66.1](https://github.com/dhis2/capture-app/compare/v100.66.0...v100.66.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* change translations key ([#3559](https://github.com/dhis2/capture-app/issues/3559)) ([0e80d4f](https://github.com/dhis2/capture-app/commit/0e80d4f65290331d52672560f53561e7f5e0ba33))
+
 # [100.66.0](https://github.com/dhis2/capture-app/compare/v100.65.0...v100.66.0) (2024-03-06)
 
 
