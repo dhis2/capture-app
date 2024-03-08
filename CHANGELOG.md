@@ -1,3 +1,10 @@
+## [100.66.2](https://github.com/dhis2/capture-app/compare/v100.66.1...v100.66.2) (2024-03-08)
+
+
+### Bug Fixes
+
+* search form padding, spacing, borders ([#3479](https://github.com/dhis2/capture-app/issues/3479)) ([222cbd8](https://github.com/dhis2/capture-app/commit/222cbd8568e99f06674bcf9d8fe54e34d629476e))
+
 ## [100.66.1](https://github.com/dhis2/capture-app/compare/v100.66.0...v100.66.1) (2024-03-07)
 
 
