@@ -1,3 +1,31 @@
+## [100.66.1](https://github.com/dhis2/capture-app/compare/v100.66.0...v100.66.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* change translations key ([#3559](https://github.com/dhis2/capture-app/issues/3559)) ([0e80d4f](https://github.com/dhis2/capture-app/commit/0e80d4f65290331d52672560f53561e7f5e0ba33))
+
+# [100.66.0](https://github.com/dhis2/capture-app/compare/v100.65.0...v100.66.0) (2024-03-06)
+
+
+### Features
+
+* [DHIS2-14799] Working list for follow up ([#3521](https://github.com/dhis2/capture-app/issues/3521)) ([0ad3891](https://github.com/dhis2/capture-app/commit/0ad38914ba4674ba2c71377e4f83036f6b4fcbf6))
+
+# [100.65.0](https://github.com/dhis2/capture-app/compare/v100.64.0...v100.65.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-16764][DHIS2-16759][DHIS2-16781] Changelog ([#3540](https://github.com/dhis2/capture-app/issues/3540)) ([fa54ee4](https://github.com/dhis2/capture-app/commit/fa54ee4fc5657094ee5b240d3f5d936e42cc6c09))
+
+# [100.64.0](https://github.com/dhis2/capture-app/compare/v100.63.0...v100.64.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-15392] preview images in forms ([#3557](https://github.com/dhis2/capture-app/issues/3557)) ([51c7168](https://github.com/dhis2/capture-app/commit/51c7168cd71f1e5591913501348206e332f0ffc1))
+
 # [100.63.0](https://github.com/dhis2/capture-app/compare/v100.62.0...v100.63.0) (2024-03-05)
 
 

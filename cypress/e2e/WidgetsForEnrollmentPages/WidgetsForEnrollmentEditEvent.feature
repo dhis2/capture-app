@@ -112,18 +112,43 @@ Feature: The user interacts with the widgets on the enrollment edit event
     Then list should contain the new comment: new test comment
 
   Scenario: You can assign a user to a event
-  Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=veuwiLC2x0e&orgUnitId=g8upMTyEZGZ
-  When you assign the user Geetha in the view mode
-  Then the event has the user Geetha Alwan assigned
-  When you assign the user Tracker demo User in the edit mode
-  Then the event has the user Tracker demo User assigned
-  When you remove the assigned user
-  Then the event has no assignd user
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=veuwiLC2x0e&orgUnitId=g8upMTyEZGZ
+    When you assign the user Geetha in the view mode
+    Then the event has the user Geetha Alwan assigned
+    When you assign the user Tracker demo User in the edit mode
+    Then the event has the user Tracker demo User assigned
+    When you remove the assigned user
+    Then the event has no assignd user
+  
+  @v>=41
+  Scenario: The user can view an event changelog on the enrollment edit event
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
+    When you select view changelog in the event overflow button
+    Then the changelog modal should be visible
+    And the changelog modal should contain data
+    # One row is filtered out as the metadata is no longer there
+    And the number of changelog table rows should be 9
+  
+  @v>=41
+  Scenario: The user can change changelog page size
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
+    When you select view changelog in the event overflow button
+    And you change the page size to 20
+    # One row is filtered out as the metadata is no longer there
+    Then the number of changelog table rows should be 19
+  
+  @v>=41
+  Scenario: The user can move to the next page in the changelog
+    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
+    When you select view changelog in the event overflow button
+    And you move to the next page
+    Then the table footer should display page 2
 
-    Scenario: User can complete the enrollment and the active events
+  Scenario: User can complete the enrollment and the active events
     Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=OWpIzQ4xabC&orgUnitId=DiszpKrYNg8
     And the enrollment widget should be opened
     And the user sees the enrollment status and the Baby Postnatal event status is active
     And the user opens the enrollment actions menu
     When the user completes the enrollment and the active events
     Then the user sees the enrollment status and the Baby Postnatal event status is completed
+

@@ -9,7 +9,7 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { withApiUtils } from '../../../HOC';
 
 type Props = {
-    value: ?{ value: string, name: string, url?: ?string },
+    value: ?{ value: string, name: string, url?: ?string, previewUrl: ?string },
     orientation: $Values<typeof orientations>,
     disabled?: ?boolean,
     classes: {
@@ -135,11 +135,20 @@ class D2ImagePlain extends Component<Props, State> {
         return null;
     }
 
+    getPreviewUrl = () => {
+        const value = this.props.value;
+        if (value) {
+            return value.previewUrl || inMemoryFileStore.get(value.value);
+        }
+        return null;
+    }
+
     render = () => {
         const { value, classes, asyncUIState, orientation, disabled } = this.props;
         const isVertical = orientation === orientations.VERTICAL;
         const isUploading = asyncUIState && asyncUIState.loading;
         const imageUrl = this.getImageUrl();
+        const previewUrl = this.getPreviewUrl();
         // $FlowFixMe[prop-missing] automated comment
         const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
         // $FlowFixMe[prop-missing] automated comment
@@ -177,7 +186,7 @@ class D2ImagePlain extends Component<Props, State> {
                                                 rel="noopener noreferrer"
                                                 onBlur={(event) => { event.stopPropagation(); }}
                                             >
-                                                <img src={imageUrl} alt="" className={classes.image} />
+                                                <img src={previewUrl} alt="" className={classes.image} />
                                             </a>
                                         </div>
                                     }

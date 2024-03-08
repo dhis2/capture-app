@@ -27,7 +27,7 @@ export const buildArgumentsForTemplate = ({
     programId: string,
     programStageId?: string,
 }) => {
-    const { programStatus, occurredAt, enrolledAt, assignedUserMode, assignedUsers } = convertMainFilters({
+    const { programStatus, occurredAt, enrolledAt, assignedUserMode, assignedUsers, followUp } = convertMainFilters({
         filters,
         mainFilters: filtersOnly,
     });
@@ -54,6 +54,7 @@ export const buildArgumentsForTemplate = ({
         assignedUserMode,
         assignedUsers,
         status,
+        followUp,
         eventOccurredAt,
         scheduledAt,
         attributeValueFilters,

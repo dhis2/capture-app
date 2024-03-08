@@ -39,6 +39,10 @@ type ImageClientValue = {
 };
 
 function convertFileForDisplay(clientValue: FileClientValue) {
+    // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
+    if (typeof clientValue === 'string' || clientValue instanceof String) {
+        return clientValue;
+    }
     return (
         <a
             href={clientValue.url}
@@ -52,6 +56,10 @@ function convertFileForDisplay(clientValue: FileClientValue) {
 }
 
 function convertImageForDisplay(clientValue: ImageClientValue) {
+    // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
+    if (typeof clientValue === 'string' || clientValue instanceof String) {
+        return clientValue;
+    }
     return featureAvailable(FEATURES.trackerImageEndpoint) ? (
         <PreviewImage
             url={clientValue.url}
@@ -123,6 +131,33 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
             return dataElement.optionSet.getMultiOptionsText(value);
         }
         return dataElement.optionSet.getOptionText(value);
+    }
+
+    // $FlowFixMe dataElementTypes flow error
+    return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+}
+
+
+// This function will replace the convertValue function in the future (as it should not require a dataElement class to use optionSet)
+export function convert(
+    value: any,
+    type: $Keys<typeof dataElementTypes>,
+    options: ?Array<{ code: string, name: string}>,
+) {
+    if (!value && value !== 0 && value !== false) {
+        return value;
+    }
+
+    if (options) {
+        if (type === dataElementTypes.MULTI_TEXT) {
+            return options
+                .filter(option => value.includes(option.code))
+                .map(option => option.name)
+                .join(', ');
+        }
+        return options
+            .find(option => option.code === value)
+            ?.name ?? value;
     }
 
     // $FlowFixMe dataElementTypes flow error

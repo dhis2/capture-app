@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T17:51:26.881Z\n"
-"PO-Revision-Date: 2024-03-05T17:51:26.881Z\n"
+"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"PO-Revision-Date: 2024-03-07T14:47:33.932Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -912,6 +912,9 @@ msgstr "You don't have access to edit this event"
 msgid "Edit event"
 msgstr "Edit event"
 
+msgid "View changelog"
+msgstr "View changelog"
+
 msgid "Event details"
 msgstr "Event details"
 
@@ -1104,9 +1107,6 @@ msgstr "Create saved list"
 
 msgid "Create new in another program"
 msgstr "Create new in another program"
-
-msgid "Create new {{trackedEntityName}}"
-msgstr "Create new {{trackedEntityName}}"
 
 msgid "Create new event"
 msgstr "Create new event"
@@ -1433,9 +1433,6 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
-msgid "View changelog"
-msgstr "View changelog"
-
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
@@ -1477,6 +1474,30 @@ msgstr "{{ scheduledEvents }} scheduled"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
+
+msgid "Changelog"
+msgstr "Changelog"
+
+msgid "No changes to display"
+msgstr "No changes to display"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Deleted"
+msgstr "Deleted"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "User"
+msgstr "User"
+
+msgid "Data item"
+msgstr "Data item"
+
+msgid "Change"
+msgstr "Change"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
@@ -1556,6 +1577,9 @@ msgstr "Inactive"
 
 msgid "Enrollment status"
 msgstr "Enrollment status"
+
+msgid "Follow up"
+msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
@@ -1682,9 +1706,6 @@ msgstr "Error updating the Assignee"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "Date"
-msgstr "Date"
 
 msgid "Time"
 msgstr "Time"
