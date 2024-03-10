@@ -31,7 +31,7 @@ export const getAddEventEnrollmentServerData = ({
     enrollmentId: string,
     completed?: boolean,
     fromClientDate: (date: Date) => { getServerZonedISOString: () => string },
-    uid: string,
+    uid?: string,
 }) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);

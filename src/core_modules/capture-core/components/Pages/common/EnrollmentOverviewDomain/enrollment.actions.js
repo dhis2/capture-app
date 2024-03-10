@@ -67,16 +67,6 @@ export const updateEnrollmentEventWithoutId = (uid: string, eventData: Object) =
         uid,
     });
 
-export const rollbackEnrollmentEventWithoutId = (uid: string) =>
-    actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID)({
-        uid,
-    });
-
-export const commitEnrollmentEventWithoutId = (uid: string, eventId: string) =>
-    actionCreator(enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT_WITHOUT_ID)({
-        eventId,
-        uid,
-    });
 export const saveFailed = () => actionCreator(enrollmentSiteActionTypes.SAVE_FAILED)();
 
 export const updateEnrollmentAttributeValues = (attributeValues: Array<{ [key: string]: string }>) =>

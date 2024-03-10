@@ -1,7 +1,11 @@
 // @flow
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { newEventBatchActionTypes, newEventWidgetActionTypes, saveEvents } from './validated.actions';
+import {
+    newEventBatchActionTypes,
+    newEventWidgetActionTypes,
+    saveEvents,
+} from './validated.actions';
 
 export const saveNewEnrollmentEventEpic = (action$: InputObservable) =>
     action$.pipe(
@@ -18,20 +22,16 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable) =>
                 requestEvent,
                 linkedEvent,
                 relationship,
+                serverData,
                 linkMode,
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             } = action.payload;
+            const events = linkedEvent ? [requestEvent, linkedEvent] : [requestEvent];
+            const relationships = relationship ? [relationship] : [];
 
-            const serverData = linkedEvent ? {
-                events: [requestEvent, linkedEvent],
-                relationships: [relationship],
-            } : {
-                events: [requestEvent],
-            };
-
-            onSaveExternal && onSaveExternal({ linkMode, ...serverData });
+            onSaveExternal && onSaveExternal({ linkMode, events, relationships, ...serverData });
             return saveEvents({
                 serverData,
                 onSaveSuccessActionType,

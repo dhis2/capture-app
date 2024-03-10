@@ -4,6 +4,7 @@ import { generateUID } from '../../../../utils/uid/generateUID';
 import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
 import type { ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
 import { errorCreator } from '../../../../../capture-core-utils';
+import { type LinkedRequestEvent } from '../validated.types';
 
 const getEventDetailsByLinkMode = ({
     relatedStageDataValues,
@@ -14,7 +15,10 @@ const getEventDetailsByLinkMode = ({
     teiId,
     enrollmentId,
     clientRequestEvent,
-}) => {
+}): {
+    linkedEvent: ?LinkedRequestEvent,
+    linkedEventId: ?string,
+} => {
     const baseEventDetails = {
         event: generateUID(),
         program: programId,
@@ -24,17 +28,27 @@ const getEventDetailsByLinkMode = ({
         trackedEntity: teiId,
         enrollment: enrollmentId,
         dataValues: [],
+        notes: [],
         status: 'SCHEDULE',
     };
 
     if (linkMode === RelatedStageModes.SCHEDULE_IN_ORG) {
         const { scheduledAt: linkedEventScheduledAt, orgUnit: linkedEventOrgUnit } = relatedStageDataValues;
+        if (!linkedEventScheduledAt || !linkedEventOrgUnit) {
+            // Business logic dictates that these values will not be null here
+            throw new Error(
+                errorCreator('Missing required data for creating related stage event')({
+                    linkedEventOrgUnit,
+                    linkedEventScheduledAt,
+                }),
+            );
+        }
 
         return ({
             linkedEvent: {
                 ...baseEventDetails,
                 scheduledAt: linkedEventScheduledAt,
-                orgUnit: linkedEventOrgUnit?.id,
+                orgUnit: linkedEventOrgUnit.id,
             },
             linkedEventId: baseEventDetails.event,
         });

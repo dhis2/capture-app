@@ -44,7 +44,8 @@ export const saveNewEventSucceededEpic = (action$: InputObservable, state: Redux
             const actions = [];
             const { enrollmentDomain } = state.value;
             const eventsFromApi = action.payload.bundleReport.typeReportMap.EVENT.objectReports;
-            const serverDataEvents = action.meta.serverData.events;
+            const { serverData: { events, enrollments } } = action.meta;
+            const serverDataEvents = events ?? enrollments[0].events;
             const enrollmentEvents = enrollmentDomain.enrollment.events;
 
             const { eventsToCommit, eventsToAdd } = serverDataEvents.reduce((acc, event) => {

@@ -7,25 +7,33 @@ import type {
     RulesExecutionDependenciesClientFormatted,
 } from '../common.types';
 
-
-export type RequestEvent = {
+type CommonEventDetails = {
     event: string,
     program: string,
     programStage: string,
     orgUnit: string,
-    orgUnitName: string,
     trackedEntity: string,
     enrollment: string,
     scheduledAt: string,
-    occurredAt: string,
     dataValues: Array<{ dataElement: string, value: any }>,
-    notes: Array<{ value: string }>,
-    status: ?string,
-    completedAt: ?string,
+    status?: string,
+}
+
+export type RequestEvent = {
+    ...CommonEventDetails,
+    occurredAt: string,
+    notes?: Array<{ value: string }>,
+    completedAt?: string,
+}
+
+export type LinkedRequestEvent = {
+    ...CommonEventDetails,
+    occurredAt?: string,
+    completedAt?: string,
 }
 
 export type RelatedStageRefPayload = {|
-    getLinkedStageValues: (eventId: string) => any,
+    getLinkedStageValues: () => any,
     eventHasLinkableStageRelationship: () => boolean,
     formIsValidOnSave: () => boolean,
 |}

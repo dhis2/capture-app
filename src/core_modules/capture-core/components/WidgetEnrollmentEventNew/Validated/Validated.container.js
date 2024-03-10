@@ -13,13 +13,12 @@ import {
     requestSaveEvent,
     setSaveEnrollmentEventInProgress,
     startCreateNewAfterCompleting,
-    requestSaveAndCompleteEnrollment,
 } from './validated.actions';
 import type { ContainerProps, RelatedStageRefPayload } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
-import { useBuildNewEventPayload } from './useBuildNewEventPayload';
+import { createServerData, useBuildNewEventPayload } from './useBuildNewEventPayload';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
@@ -36,14 +35,11 @@ export const Validated = ({
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
-    onSaveAndCompleteEnrollmentExternal,
-    onSaveAndCompleteEnrollmentSuccessActionType,
-    onSaveAndCompleteEnrollmentErrorActionType,
     ...passOnProps
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
-    const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
+    const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
     const eventSaveInProgress = useSelector(
         ({ enrollmentDomain }) => !!enrollmentDomain.eventSaveInProgress?.requestEventId,
     );
@@ -80,6 +76,7 @@ export const Validated = ({
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
         saveType: ?$Values<typeof addEventSaveTypes>,
+        enrollment: ?Object,
     ) => {
         window.scrollTo(0, 0);
         const {
@@ -88,20 +85,32 @@ export const Validated = ({
             linkedEvent,
             relationship,
             linkMode,
-        } = buildNewEventPayload(saveType, relatedStageRef);
+        } = buildNewEventPayload(
+            saveType,
+            relatedStageRef,
+        );
 
         if (formHasError) return;
+
+        const serverData = createServerData({
+            clientRequestEvent,
+            linkedEvent,
+            relationship,
+            enrollment,
+        });
 
         dispatch(batchActions([
             requestSaveEvent({
                 requestEvent: clientRequestEvent,
                 linkedEvent,
                 relationship,
+                serverData,
                 linkMode,
                 onSaveExternal,
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             }),
+
             // stores meta in redux to be used when navigating after save
             setSaveEnrollmentEventInProgress({
                 requestEventId: clientRequestEvent?.event,
@@ -117,49 +126,38 @@ export const Validated = ({
         handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
 
         dispatch(startCreateNewAfterCompleting({
-            enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId, availableProgramStages,
+            enrollmentId,
+            isCreateNew,
+            orgUnitId: orgUnit.id,
+            programId: program.id,
+            teiId,
+            availableProgramStages,
         }));
     }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
+
+
+    const handleSaveAndCompleteEnrollment = useCallback(
+        (
+            dataEntryItemId: string,
+            dataEntryIdArgument: string,
+            formFoundationArgument: RenderFoundation,
+            enrollment: Object,
+        ) => {
+            handleSave(
+                dataEntryItemId,
+                dataEntryIdArgument,
+                formFoundationArgument,
+                addEventSaveTypes.COMPLETE,
+                enrollment,
+            );
+        },
+        [handleSave],
+    );
 
     // Clean up data entry on unmount in case the user navigates away, stopping delayed navigation
     useEffect(() => () => {
         dispatch(cleanUpEventSaveInProgress());
     }, [dispatch]);
-
-    const handleSaveAndCompleteEnrollment = useCallback(
-        (
-            eventId: string,
-            dataEntryIdArgument: string,
-            formFoundationArgument: RenderFoundation,
-            enrollment: string,
-        ) => {
-            dispatch(requestSaveAndCompleteEnrollment({
-                eventId,
-                dataEntryId: dataEntryIdArgument,
-                formFoundation: formFoundationArgument,
-                completed: true,
-                programId: program.id,
-                orgUnitId: orgUnit.id,
-                orgUnitName: orgUnit.name || '',
-                teiId,
-                enrollmentId,
-                enrollment,
-                onSaveAndCompleteEnrollmentExternal,
-                onSaveAndCompleteEnrollmentSuccessActionType,
-                onSaveAndCompleteEnrollmentErrorActionType,
-            }));
-        },
-        [
-            dispatch,
-            program.id,
-            orgUnit,
-            teiId,
-            enrollmentId,
-            onSaveAndCompleteEnrollmentExternal,
-            onSaveAndCompleteEnrollmentSuccessActionType,
-            onSaveAndCompleteEnrollmentErrorActionType,
-        ],
-    );
 
     return (
         <DataEntry

@@ -2,7 +2,7 @@
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 import { actions as RelatedStageModes } from '../../WidgetRelatedStages/constants';
-import type { RequestEvent } from './validated.types';
+import type { RequestEvent, LinkedRequestEvent } from './validated.types';
 import type { ExternalSaveHandler } from '../common.types';
 
 export const newEventBatchActionTypes = {
@@ -27,14 +27,16 @@ export const requestSaveEvent = ({
     requestEvent,
     linkedEvent,
     relationship,
+    serverData,
     linkMode,
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
 }: {
     requestEvent: RequestEvent,
-    linkedEvent?: Object,
-    relationship?: Object,
+    linkedEvent: ?LinkedRequestEvent,
+    relationship: ?Object,
+    serverData: Object,
     linkMode: ?$Keys<typeof RelatedStageModes>,
     onSaveExternal: ?ExternalSaveHandler,
     onSaveSuccessActionType?: string,
@@ -44,6 +46,7 @@ export const requestSaveEvent = ({
         requestEvent,
         linkedEvent,
         relationship,
+        serverData,
         linkMode,
         onSaveExternal,
         onSaveSuccessActionType,
@@ -82,85 +85,6 @@ export const saveEvents = ({ serverData, onSaveErrorActionType, onSaveSuccessAct
 
 export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: Object) =>
     actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages });
-
-
-export const requestSaveAndCompleteEnrollment = ({
-    eventId,
-    dataEntryId,
-    formFoundation,
-    programId,
-    orgUnitId,
-    orgUnitName,
-    teiId,
-    enrollmentId,
-    completed,
-    fromClientDate,
-    onSaveAndCompleteEnrollmentExternal,
-    onSaveAndCompleteEnrollmentSuccessActionType,
-    onSaveAndCompleteEnrollmentErrorActionType,
-    enrollment,
-}: {
-    eventId: string,
-    dataEntryId: string,
-    formFoundation: Object,
-    programId: string,
-    orgUnitId: string,
-    orgUnitName: string,
-    teiId: string,
-    enrollmentId: string,
-    completed?: boolean,
-    fromClientDate: (date: Date) => { getServerZonedISOString: () => string },
-    onSaveAndCompleteEnrollmentExternal?: (enrollmnet: ApiEnrollment) => void,
-    onSaveAndCompleteEnrollmentSuccessActionType?: string,
-    onSaveAndCompleteEnrollmentErrorActionType?: string,
-    enrollment: Object,
-}) =>
-    actionCreator(newEventWidgetActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST)(
-        {
-            eventId,
-            dataEntryId,
-            formFoundation,
-            programId,
-            orgUnitId,
-            orgUnitName,
-            teiId,
-            enrollmentId,
-            completed,
-            fromClientDate,
-            onSaveAndCompleteEnrollmentExternal,
-            onSaveAndCompleteEnrollmentSuccessActionType,
-            onSaveAndCompleteEnrollmentErrorActionType,
-            enrollment,
-        },
-        { skipLogging: ['formFoundation'] },
-    );
-
-export const saveEventAndCompleteEnrollment = (
-    serverData: Object,
-    onCompleteEnrollmentSuccessActionType?: string,
-    onCompleteEnrollmentErrorActionType?: string,
-    uid: string,
-) =>
-    actionCreator(newEventWidgetActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE)(
-        {},
-        {
-            offline: {
-                effect: {
-                    url: 'tracker?async=false&importStrategy=CREATE_AND_UPDATE',
-                    method: effectMethods.POST,
-                    data: serverData,
-                },
-                commit: onCompleteEnrollmentSuccessActionType && {
-                    type: onCompleteEnrollmentSuccessActionType,
-                    meta: { serverData, uid },
-                },
-                rollback: onCompleteEnrollmentErrorActionType && {
-                    type: onCompleteEnrollmentErrorActionType,
-                    meta: { serverData, uid },
-                },
-            },
-        },
-    );
 
 export const cleanUpEventSaveInProgress = () =>
     actionCreator(newEventWidgetActionTypes.CLEAN_UP_EVENT_SAVE_IN_PROGRESS)();

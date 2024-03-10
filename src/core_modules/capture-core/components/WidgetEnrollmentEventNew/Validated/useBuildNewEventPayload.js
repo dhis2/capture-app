@@ -1,12 +1,13 @@
 // @flow
 import { useSelector } from 'react-redux';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { RenderFoundation } from '../../../metaData';
 import { getAddEventEnrollmentServerData } from './getConvertedAddEvent';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { generateUID } from '../../../utils/uid/generateUID';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { getConvertedRelatedStageEvent } from './getConvertedRelatedStageEvent';
-import type { RelatedStageRefPayload } from './validated.types';
+import type { LinkedRequestEvent, RelatedStageRefPayload, RequestEvent } from './validated.types';
 
 type Props = {
     dataEntryId: string,
@@ -17,6 +18,34 @@ type Props = {
     enrollmentId: string,
     orgUnitName: string,
     teiId: string,
+};
+
+export const createServerData = ({
+    clientRequestEvent,
+    linkedEvent,
+    relationship,
+    enrollment,
+}: {
+    clientRequestEvent: RequestEvent,
+    linkedEvent: ?LinkedRequestEvent,
+    relationship: ?Object,
+    enrollment: ?Object,
+}) => {
+    const relationships = relationship ? [relationship] : undefined;
+    const newEvents = linkedEvent ? [clientRequestEvent, linkedEvent] : [clientRequestEvent];
+
+    if (enrollment) {
+        const updatedEnrollment = { ...enrollment, events: [...(enrollment.events || []), ...newEvents] };
+        return {
+            enrollments: [updatedEnrollment],
+            relationships,
+        };
+    }
+
+    return {
+        events: newEvents,
+        relationships,
+    };
 };
 
 export const useBuildNewEventPayload = ({
@@ -34,6 +63,7 @@ export const useBuildNewEventPayload = ({
     const dataEntryValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
     const dataEntryValuesMeta = useSelector(({ dataEntriesFieldsMeta }) => dataEntriesFieldsMeta[dataEntryKey]);
     const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[dataEntryKey]);
+    const { fromClientDate } = useTimeZoneConversion();
 
     const buildRelatedStageEventPayload = (clientRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
         if (
@@ -51,7 +81,7 @@ export const useBuildNewEventPayload = ({
             }
 
             const { selectedRelationshipType, relatedStageDataValues, linkMode } = relatedStageRef.current
-                .getLinkedStageValues(clientRequestEvent.event);
+                .getLinkedStageValues();
 
             if (!linkMode) {
                 return {
@@ -90,7 +120,7 @@ export const useBuildNewEventPayload = ({
 
     const buildNewEventPayload = (
         saveType: ?$Values<typeof addEventSaveTypes>,
-        relatedStageRef: {| current: (RelatedStageRefPayload | null) |},
+        relatedStageRef: {| current: (?RelatedStageRefPayload) |},
     ) => {
         const requestEventId = generateUID();
 
@@ -113,6 +143,7 @@ export const useBuildNewEventPayload = ({
             teiId,
             orgUnitName,
             completed: saveType === addEventSaveTypes.COMPLETE,
+            fromClientDate,
         });
 
         const {
