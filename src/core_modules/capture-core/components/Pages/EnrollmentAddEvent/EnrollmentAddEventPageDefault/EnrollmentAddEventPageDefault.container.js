@@ -46,6 +46,10 @@ export const EnrollmentAddEventPageDefault = ({
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [history, programId, orgUnitId, teiId, enrollmentId]);
 
+    const onDeleteTrackedEntitySuccess = useCallback(() => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [history, orgUnitId, programId]);
+
     const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate) => {
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
     }, [dispatch]);
@@ -172,6 +176,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onSave={handleSave}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
+                onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
                 onAddNew={handleAddNew}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}

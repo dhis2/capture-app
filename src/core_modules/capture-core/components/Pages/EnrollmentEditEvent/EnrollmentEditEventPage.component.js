@@ -46,9 +46,11 @@ export const EnrollmentEditEventPageComponent = ({
     onSaveAndCompleteEnrollment,
     onCancelEditEvent,
     onHandleScheduleSave,
+    onSaveExternal,
     getAssignedUserSaveContext,
     onSaveAssignee,
     onSaveAssigneeError,
+    onDeleteTrackedEntitySuccess,
     onAccessLostFromTransfer,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
@@ -69,6 +71,7 @@ export const EnrollmentEditEventPageComponent = ({
             pageLayout={pageLayout}
             currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
+            onSaveExternal={onSaveExternal}
             trackedEntityTypeId={trackedEntityTypeId}
             programStage={programStage}
             onGoBack={onGoBack}
@@ -103,6 +106,7 @@ export const EnrollmentEditEventPageComponent = ({
             getAssignedUserSaveContext={getAssignedUserSaveContext}
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}
+            onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
         />
         <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />

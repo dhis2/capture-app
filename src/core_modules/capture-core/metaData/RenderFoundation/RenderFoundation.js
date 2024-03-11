@@ -106,6 +106,10 @@ export class RenderFoundation {
         return this._labels[id];
     }
 
+    getLabels() {
+        return this._labels;
+    }
+
     addSection(newSection: Section) {
         this._sections.set(newSection.id, newSection);
     }

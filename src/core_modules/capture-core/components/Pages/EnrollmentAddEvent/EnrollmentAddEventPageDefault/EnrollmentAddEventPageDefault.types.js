@@ -31,6 +31,7 @@ export type Props = {|
     onUpdateEnrollmentStatusError: (message: string) => void,
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
+    onDeleteTrackedEntitySuccess: () => void,
     ...CssClasses,
 |};
 

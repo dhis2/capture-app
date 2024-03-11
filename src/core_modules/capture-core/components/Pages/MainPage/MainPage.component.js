@@ -1,7 +1,7 @@
 // @flow
 import React, { useMemo } from 'react';
 import { compose } from 'redux';
-import { spacers } from '@dhis2/ui';
+import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { WorkingListsType } from './WorkingListsType';
 import type { Props, PlainProps } from './mainPage.types';
@@ -21,13 +21,20 @@ const getStyles = () => ({
         display: 'flex',
         flexWrap: 'wrap',
         gap: spacers.dp16,
+        padding: spacers.dp16,
     },
     half: {
         flex: 1,
     },
     quarter: {
         flex: 0.4,
-        padding: `${spacers.dp12} ${spacers.dp24} ${spacers.dp24} 0`,
+    },
+    searchBoxWrapper: {
+        padding: spacers.dp16,
+        background: colors.white,
+        border: '1px solid',
+        borderColor: colors.grey400,
+        borderRadius: 3,
     },
 });
 
@@ -61,7 +68,7 @@ const MainPageBody = compose(
             </>
         ) : (
             <div className={classes.container}>
-                <div className={classes.half}>
+                <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
                     <SearchBox programId={programId} />
                 </div>
                 <div className={classes.quarter}>

@@ -37,6 +37,7 @@ export type PlainProps = {|
     onSaveAndCompleteEnrollment: (enrollment: Object) => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) => void,
+    onSaveExternal: () => void,
     onAccessLostFromTransfer?: () => void,
     pageStatus: string,
     eventStatus?: string,
@@ -48,6 +49,7 @@ export type PlainProps = {|
     assignee: UserFormField | null,
     onSaveAssignee: (newAssignee: UserFormField) => void,
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
+    onDeleteTrackedEntitySuccess: () => void,
     events: Array<any>,
 |};
 

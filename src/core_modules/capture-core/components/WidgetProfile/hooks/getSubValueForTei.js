@@ -2,10 +2,18 @@
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { dataElementTypes } from '../../../metaData';
 
-const getImageOrFileResourceSubvalue = async (key: string, querySingleResource: QuerySingleResource) => {
-    if (!key) return null;
+type Attribute = {
+    id: string,
+    value: string,
+    teiId: string,
+    programId: string,
+    absoluteApiPath: string,
+};
 
-    const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: key });
+const getFileResourceSubvalue = async (attribute: Attribute, querySingleResource: QuerySingleResource) => {
+    if (!attribute.value) return null;
+
+    const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: attribute.value });
     return {
         id,
         name,
@@ -13,10 +21,23 @@ const getImageOrFileResourceSubvalue = async (key: string, querySingleResource: 
     };
 };
 
-const getOrganisationUnitSubvalue = async (key: string, querySingleResource: QuerySingleResource) => {
+const getImageResourceSubvalue = async (attribute: Attribute, querySingleResource: QuerySingleResource) => {
+    const { id, value, teiId, programId, absoluteApiPath } = attribute;
+    if (!value) return null;
+
+    const { displayName } = await querySingleResource({ resource: 'fileResources', id: value });
+    return {
+        name: displayName,
+        value,
+        url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}`,
+        previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}&dimension=small`,
+    };
+};
+
+const getOrganisationUnitSubvalue = async (attribute: Attribute, querySingleResource: QuerySingleResource) => {
     const organisationUnit = await querySingleResource({
         resource: 'organisationUnits',
-        id: key,
+        id: attribute.value,
         params: {
             fields: 'id,name',
         },
@@ -25,7 +46,7 @@ const getOrganisationUnitSubvalue = async (key: string, querySingleResource: Que
 };
 
 export const subValueGetterByElementType = {
-    [dataElementTypes.FILE_RESOURCE]: getImageOrFileResourceSubvalue,
-    [dataElementTypes.IMAGE]: getImageOrFileResourceSubvalue,
+    [dataElementTypes.FILE_RESOURCE]: getFileResourceSubvalue,
+    [dataElementTypes.IMAGE]: getImageResourceSubvalue,
     [dataElementTypes.ORGANISATION_UNIT]: getOrganisationUnitSubvalue,
 };

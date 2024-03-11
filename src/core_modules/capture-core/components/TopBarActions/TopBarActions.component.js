@@ -2,7 +2,7 @@
 import React, { type ComponentType, useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
+import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
 import { scopeTypes } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
@@ -27,10 +27,9 @@ const ActionButtonsPlain = ({
     openConfirmDialog,
 }: PlainProps & CssClasses) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
-    const [openNew, setOpenNew] = useState(false);
     const [openSearch, setOpenSearch] = useState(false);
+
     useEffect(() => {
-        setOpenNew(false);
         setOpenSearch(false);
     }, [openConfirmDialog]);
 
@@ -44,37 +43,35 @@ const ActionButtonsPlain = ({
                     className={classes.marginRight}
                     onClick={onNewClickWithoutProgramId}
                 >
-                    {i18n.t('New')}
+                    {i18n.t('Create new')}
                 </Button>
             ) : (
-                <DropdownButton
+                <SplitButton
                     small
                     secondary
                     dataTest="new-button"
                     className={classes.marginRight}
-                    open={openNew}
-                    onClick={() => setOpenNew(prev => !prev)}
+                    onClick={() => { onNewClick(); }}
                     component={
                         <FlyoutMenu dense maxWidth="250px">
                             <MenuItem
                                 dataTest="new-menuitem-one"
-                                label={i18n.t('New {{trackedEntityName}} in {{programName}}', {
-                                    trackedEntityName,
-                                    programName,
-                                    interpolation: { escapeValue: false },
-                                })}
-                                onClick={() => { setOpenNew(prev => !prev); onNewClick(); }}
-                            />
-                            <MenuItem
-                                dataTest="new-menuitem-two"
-                                label={`${i18n.t('New')}...`}
-                                onClick={() => { setOpenNew(prev => !prev); onNewClickWithoutProgramId(); }}
+                                label={`${i18n.t('Create new in another program')}...`}
+                                onClick={() => { onNewClickWithoutProgramId(); }}
                             />
                         </FlyoutMenu>
                     }
                 >
-                    {i18n.t('New')}
-                </DropdownButton>
+                    {scopeType === scopeTypes.TRACKER_PROGRAM && (
+                        i18n.t('Create new {{trackedEntityType}}', {
+                            trackedEntityType: trackedEntityName,
+                            interpolation: { escapeValue: false },
+                        })
+                    )}
+                    {scopeType === scopeTypes.EVENT_PROGRAM && (
+                        i18n.t('Create new event')
+                    )}
+                </SplitButton>
             )}
 
             {scopeType !== scopeTypes.TRACKER_PROGRAM ? (
@@ -104,12 +101,12 @@ const ActionButtonsPlain = ({
                                     programName,
                                     interpolation: { escapeValue: false },
                                 })}
-                                onClick={() => { setOpenSearch(prev => !prev); onFindClick(); }}
+                                onClick={() => { onFindClick(); setOpenSearch(prev => !prev); }}
                             />
                             <MenuItem
                                 dataTest="find-menuitem-two"
                                 label={`${i18n.t('Search')}...`}
-                                onClick={() => { setOpenSearch(prev => !prev); onFindClickWithoutProgramId(); }}
+                                onClick={() => { onFindClickWithoutProgramId(); setOpenSearch(prev => !prev); }}
                             />
                         </FlyoutMenu>
                     }

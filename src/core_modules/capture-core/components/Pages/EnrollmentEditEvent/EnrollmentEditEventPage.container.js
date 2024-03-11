@@ -1,5 +1,6 @@
 // @flow
 import React, { useEffect, useCallback } from 'react';
+import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
@@ -40,6 +41,8 @@ import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { getProgramEventAccess } from '../../../metaData';
 import { setAssignee, rollbackAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer } from '../../../converters';
+import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
+import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
 import { statusTypes } from '../../../enrollment';
 
 const getEventDate = (event) => {
@@ -114,6 +117,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
 }: Props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
     const { pageLayout, isLoading } = useEnrollmentPageLayout({
         selectedScopeId: programId,
         dataStoreKey: DataStoreKeyByPage.ENROLLMENT_EVENT_EDIT,
@@ -130,6 +134,10 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(programStage?.programRules));
+
+    const onDeleteTrackedEntitySuccess = useCallback(() => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [history, orgUnitId, programId]);
 
     const onDelete = () => {
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
@@ -177,6 +185,12 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(updateEnrollmentEvent(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
+
+    const onSaveExternal = () => {
+        const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
+        queryClient.removeQueries(queryKey);
+    };
+
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
     const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
@@ -238,6 +252,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             trackedEntityName={trackedEntityName}
             program={program}
             onDelete={onDelete}
+            onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
             onAddNew={onAddNew}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
@@ -254,6 +269,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}
+            onSaveExternal={onSaveExternal}
             getAssignedUserSaveContext={getAssignedUserSaveContext}
             onSaveAssignee={onSaveAssignee}
             onSaveAssigneeError={onSaveAssigneeError}

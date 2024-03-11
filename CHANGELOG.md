@@ -1,3 +1,59 @@
+## [100.66.3](https://github.com/dhis2/capture-app/compare/v100.66.2...v100.66.3) (2024-03-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([41eafdd](https://github.com/dhis2/capture-app/commit/41eafdd32a756ef667af660e7baa0681d7a0fde1))
+
+## [100.66.2](https://github.com/dhis2/capture-app/compare/v100.66.1...v100.66.2) (2024-03-08)
+
+
+### Bug Fixes
+
+* search form padding, spacing, borders ([#3479](https://github.com/dhis2/capture-app/issues/3479)) ([222cbd8](https://github.com/dhis2/capture-app/commit/222cbd8568e99f06674bcf9d8fe54e34d629476e))
+
+## [100.66.1](https://github.com/dhis2/capture-app/compare/v100.66.0...v100.66.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* change translations key ([#3559](https://github.com/dhis2/capture-app/issues/3559)) ([0e80d4f](https://github.com/dhis2/capture-app/commit/0e80d4f65290331d52672560f53561e7f5e0ba33))
+
+# [100.66.0](https://github.com/dhis2/capture-app/compare/v100.65.0...v100.66.0) (2024-03-06)
+
+
+### Features
+
+* [DHIS2-14799] Working list for follow up ([#3521](https://github.com/dhis2/capture-app/issues/3521)) ([0ad3891](https://github.com/dhis2/capture-app/commit/0ad38914ba4674ba2c71377e4f83036f6b4fcbf6))
+
+# [100.65.0](https://github.com/dhis2/capture-app/compare/v100.64.0...v100.65.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-16764][DHIS2-16759][DHIS2-16781] Changelog ([#3540](https://github.com/dhis2/capture-app/issues/3540)) ([fa54ee4](https://github.com/dhis2/capture-app/commit/fa54ee4fc5657094ee5b240d3f5d936e42cc6c09))
+
+# [100.64.0](https://github.com/dhis2/capture-app/compare/v100.63.0...v100.64.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-15392] preview images in forms ([#3557](https://github.com/dhis2/capture-app/issues/3557)) ([51c7168](https://github.com/dhis2/capture-app/commit/51c7168cd71f1e5591913501348206e332f0ffc1))
+
+# [100.63.0](https://github.com/dhis2/capture-app/compare/v100.62.0...v100.63.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-16922] Delete Tracked entity from profile Widget ([#3545](https://github.com/dhis2/capture-app/issues/3545)) ([fb8171e](https://github.com/dhis2/capture-app/commit/fb8171e515eee7fb081e6e8954d5b14959fbe4f2))
+
+# [100.62.0](https://github.com/dhis2/capture-app/compare/v100.61.0...v100.62.0) (2024-03-05)
+
+
+### Features
+
+* [DHIS2-15170] Adjust context selector for "new" button ([#3523](https://github.com/dhis2/capture-app/issues/3523)) ([3779c9d](https://github.com/dhis2/capture-app/commit/3779c9dd4e79a28db375fddfed99eb34c84d4465))
+
 # [100.61.0](https://github.com/dhis2/capture-app/compare/v100.60.0...v100.61.0) (2024-03-05)
 
 

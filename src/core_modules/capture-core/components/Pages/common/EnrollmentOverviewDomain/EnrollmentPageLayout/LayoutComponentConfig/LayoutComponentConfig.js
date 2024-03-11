@@ -119,11 +119,18 @@ export const ProfileWidget: WidgetConfig = {
     getCustomSettings: ({ readOnlyMode = true }) => ({
         readOnlyMode,
     }),
-    getProps: ({ teiId, program, orgUnitId, onUpdateTeiAttributeValues }): WidgetProfileProps => ({
+    getProps: ({
+        teiId,
+        program,
+        orgUnitId,
+        onUpdateTeiAttributeValues,
+        onDeleteTrackedEntitySuccess,
+    }): WidgetProfileProps => ({
         teiId,
         programId: program.id,
         orgUnitId,
         onUpdateTeiAttributeValues,
+        onDeleteSuccess: onDeleteTrackedEntitySuccess,
     }),
 };
 
@@ -205,6 +212,7 @@ export const EditEventWorkspace: WidgetConfig = {
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
+        onSaveExternal,
         initialScheduleDate,
         assignee,
         onSaveAndCompleteEnrollment,
@@ -221,6 +229,7 @@ export const EditEventWorkspace: WidgetConfig = {
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
+        onSaveExternal,
         initialScheduleDate,
         assignee,
         onSaveAndCompleteEnrollment,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T13:59:32.645Z\n"
-"PO-Revision-Date: 2024-03-05T13:59:32.645Z\n"
+"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"PO-Revision-Date: 2024-03-07T14:47:33.932Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -912,6 +912,9 @@ msgstr "You don't have access to edit this event"
 msgid "Edit event"
 msgstr "Edit event"
 
+msgid "View changelog"
+msgstr "View changelog"
+
 msgid "Event details"
 msgstr "Event details"
 
@@ -1102,8 +1105,11 @@ msgstr ""
 msgid "Create saved list"
 msgstr "Create saved list"
 
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "New {{trackedEntityName}} in {{programName}}"
+msgid "Create new in another program"
+msgstr "Create new in another program"
+
+msgid "Create new event"
+msgstr "Create new event"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
@@ -1406,11 +1412,32 @@ msgstr "Try again or contact your system administrator for support"
 msgid "Fix errors in the form to continue."
 msgstr "Fix errors in the form to continue."
 
+msgid "You do not have access to delete this {{trackedEntityTypeName}}"
+msgstr "You do not have access to delete this {{trackedEntityTypeName}}"
+
+msgid "Delete {{trackedEntityTypeName}}"
+msgstr "Delete {{trackedEntityTypeName}}"
+
+msgid ""
+"Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
+"permanently remove the {{trackedEntityTypeName}} and all its associated "
+"enrollments and events in all programs."
+msgstr ""
+"Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
+"permanently remove the {{trackedEntityTypeName}} and all its associated "
+"enrollments and events in all programs."
+
+msgid "There was a problem deleting the {{trackedEntityTypeName}}"
+msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
+
+msgid "Yes, delete {{trackedEntityTypeName}}"
+msgstr "Yes, delete {{trackedEntityTypeName}}"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
-msgid "{{TETName}} profile"
-msgstr "{{TETName}} profile"
+msgid "{{trackedEntityTypeName}} profile"
+msgstr "{{trackedEntityTypeName}} profile"
 
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
@@ -1478,6 +1505,30 @@ msgstr "{{ scheduledEvents }} scheduled"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
+
+msgid "Changelog"
+msgstr "Changelog"
+
+msgid "No changes to display"
+msgstr "No changes to display"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Deleted"
+msgstr "Deleted"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "User"
+msgstr "User"
+
+msgid "Data item"
+msgstr "Data item"
+
+msgid "Change"
+msgstr "Change"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
@@ -1557,6 +1608,9 @@ msgstr "Inactive"
 
 msgid "Enrollment status"
 msgstr "Enrollment status"
+
+msgid "Follow up"
+msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
@@ -1683,9 +1737,6 @@ msgstr "Error updating the Assignee"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
-
-msgid "Date"
-msgstr "Date"
 
 msgid "Time"
 msgstr "Time"
