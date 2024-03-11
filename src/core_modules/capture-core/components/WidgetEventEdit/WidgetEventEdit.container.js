@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useState, useEffect } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -30,6 +30,7 @@ import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategor
 import { OverflowButton } from '../Buttons';
 import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { FEATURES, useFeature } from '../../../capture-core-utils';
+import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 
 const styles = {
     header: {
@@ -85,6 +86,7 @@ export const WidgetEventEditPlain = ({
     onSaveAndCompleteEnrollmentErrorActionType,
     classes,
 }: PlainProps) => {
+    useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
