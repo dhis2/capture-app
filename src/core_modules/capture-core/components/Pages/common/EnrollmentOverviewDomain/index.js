@@ -7,7 +7,7 @@ export {
     updateIncidentDate,
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
-    addEnrollmentEvents,
+    updateOrAddEnrollmentEvents,
     updateEnrollmentEventWithoutId,
     updateEnrollmentAttributeValues,
     showEnrollmentError,

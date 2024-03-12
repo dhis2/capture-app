@@ -35,6 +35,8 @@ export const Validated = ({
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
+    onSaveAndCompleteEnrollmentSuccessActionType,
+    onSaveAndCompleteEnrollmentErrorActionType,
     ...passOnProps
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
@@ -77,20 +79,24 @@ export const Validated = ({
         formFoundationArgument: RenderFoundation,
         saveType: ?$Values<typeof addEventSaveTypes>,
         enrollment: ?Object,
-    ) => {
+    ) => new Promise((resolve, reject) => {
+        // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
         const {
             clientRequestEvent,
-            formHasError,
             linkedEvent,
             relationship,
             linkMode,
+            formHasError,
         } = buildNewEventPayload(
             saveType,
             relatedStageRef,
         );
 
-        if (formHasError) return;
+        if (formHasError) {
+            reject(new Error('Form has error'));
+            return;
+        }
 
         const serverData = createServerData({
             clientRequestEvent,
@@ -107,8 +113,8 @@ export const Validated = ({
                 serverData,
                 linkMode,
                 onSaveExternal,
-                onSaveSuccessActionType,
-                onSaveErrorActionType,
+                onSaveSuccessActionType: enrollment ? onSaveAndCompleteEnrollmentSuccessActionType : onSaveSuccessActionType,
+                onSaveErrorActionType: enrollment ? onSaveAndCompleteEnrollmentErrorActionType : onSaveErrorActionType,
             }),
 
             // stores meta in redux to be used when navigating after save
@@ -120,19 +126,25 @@ export const Validated = ({
             }),
         ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS),
         );
-    }, [buildNewEventPayload, onSaveExternal, dispatch, onSaveSuccessActionType, onSaveErrorActionType]);
 
-    const handleCreateNew = useCallback((isCreateNew?: boolean) => {
-        handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
+        resolve();
+    }), [buildNewEventPayload, dispatch, onSaveExternal, onSaveAndCompleteEnrollmentSuccessActionType, onSaveSuccessActionType, onSaveAndCompleteEnrollmentErrorActionType, onSaveErrorActionType]);
 
-        dispatch(startCreateNewAfterCompleting({
-            enrollmentId,
-            isCreateNew,
-            orgUnitId: orgUnit.id,
-            programId: program.id,
-            teiId,
-            availableProgramStages,
-        }));
+    const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
+        try {
+            await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
+
+            dispatch(startCreateNewAfterCompleting({
+                enrollmentId,
+                isCreateNew,
+                orgUnitId: orgUnit.id,
+                programId: program.id,
+                teiId,
+                availableProgramStages,
+            }));
+        } catch (error) {
+            // Related stages has displayed an error message. No need to do anything here.
+        }
     }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
 
 
@@ -173,6 +185,7 @@ export const Validated = ({
             enrollmentId={enrollmentId}
             formFoundation={formFoundation}
             relatedStageRef={relatedStageRef}
+            // $FlowFixMe - Promise should be ignored downstream
             onSave={handleSave}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}

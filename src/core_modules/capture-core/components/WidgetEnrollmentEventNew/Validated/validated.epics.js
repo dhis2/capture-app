@@ -19,8 +19,6 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable) =>
         ),
         map((action) => {
             const {
-                requestEvent,
-                linkedEvent,
                 relationship,
                 serverData,
                 linkMode,
@@ -28,7 +26,7 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable) =>
                 onSaveSuccessActionType,
                 onSaveErrorActionType,
             } = action.payload;
-            const events = linkedEvent ? [requestEvent, linkedEvent] : [requestEvent];
+            const events = serverData.events ?? serverData.enrollments[0].events;
             const relationships = relationship ? [relationship] : [];
 
             onSaveExternal && onSaveExternal({ linkMode, events, relationships, ...serverData });

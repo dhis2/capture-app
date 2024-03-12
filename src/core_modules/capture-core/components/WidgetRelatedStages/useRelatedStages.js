@@ -4,6 +4,7 @@ import { relatedStageStatus } from './constants';
 import { getUserStorageController, userStores } from '../../storageControllers';
 import { useIndexedDBQuery } from '../../utils/reactQueryHelpers';
 import { RELATIONSHIP_ENTITIES } from './WidgetRelatedStages.constants';
+import type { RelationshipType } from './WidgetRelatedStages.types';
 
 const getRelationshipTypeFromIndexedDB = () => {
     const storageController = getUserStorageController();
@@ -13,19 +14,32 @@ const getRelationshipTypeFromIndexedDB = () => {
 type Props = {|
     programStageId: string,
     programId: string,
-|}
+|};
 
+const filterBidirectionalRelationship = (): boolean => true;
+
+const filterUnidirectionalRelationship = (relationshipType: RelationshipType, programStageId: string): boolean => {
+    const { fromConstraint, toConstraint } = relationshipType;
+
+    const isSelfReferencing = fromConstraint.programStage.id === programStageId
+        && toConstraint.programStage.id === programStageId;
+
+    if (fromConstraint.programStage.id !== programStageId && !isSelfReferencing) {
+        return false;
+    }
+
+    return true;
+};
 export const useRelatedStages = ({ programStageId, programId }: Props) => {
     const { data: relationshipTypes } = useIndexedDBQuery(
         ['RelatedStages', 'relationshipTypes', programId, programStageId],
         () => getRelationshipTypeFromIndexedDB(), {
-            select: allRelationshipTypes => allRelationshipTypes
+            select: (allRelationshipTypes: Array<RelationshipType>) => allRelationshipTypes
                 ?.filter((relationshipType) => {
                     if (!relationshipType.access.data.write) {
                         return false;
                     }
-
-                    const { fromConstraint, toConstraint } = relationshipType;
+                    const { fromConstraint, toConstraint, bidirectional } = relationshipType;
 
                     // Related stages should be of type program stage
                     if (fromConstraint.relationshipEntity !== RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE
@@ -45,14 +59,9 @@ export const useRelatedStages = ({ programStageId, programId }: Props) => {
                         return false;
                     }
 
-                    const isSelfReferencing = fromConstraint.programStage.id === programStageId
-                        && toConstraint.programStage.id === programStageId;
-
-                    if (!isSelfReferencing && fromConstraint.programStage.id !== programStageId) {
-                        return false;
-                    }
-
-                    return true;
+                    return bidirectional ?
+                        filterBidirectionalRelationship() :
+                        filterUnidirectionalRelationship(relationshipType, programStageId);
                 }) ?? [],
         });
 

@@ -1,12 +1,15 @@
 // @flow
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
-type Constraint = {
+export type Constraint = {|
     programStage: {
         id: string,
+        program: {
+            id: string,
+        },
     },
     relationshipEntity: 'PROGRAM_STAGE_INSTANCE',
-}
+|}
 
 export type ErrorMessagesForRelatedStages = {|
     scheduledAt?: ?string,

@@ -10,8 +10,6 @@ import {
     commitEnrollmentEvents,
     rollbackEnrollmentEvents,
     saveFailed,
-    commitEnrollmentAndEvents,
-    rollbackEnrollmentAndEvents,
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
 import { actions as RelatedStageActions } from '../../WidgetRelatedStages/constants';
 import { buildUrlQueryString } from '../../../utils/routing';
@@ -104,30 +102,15 @@ export const saveNewEventFailedEpic = (action$: InputObservable) =>
             addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR,
         ),
         map((action) => {
-            const { serverData } = action.meta;
-            return batchActions([saveFailed(), rollbackEnrollmentEvents({ events: serverData.events })]);
+            const { serverData: { events, enrollments } } = action.meta;
+            const rollbackEvents = events ?? enrollments[0].events;
+
+            return batchActions([
+                saveFailed(),
+                rollbackEnrollmentEvents({
+                    events: rollbackEvents,
+                }),
+            ]);
         }),
     );
 
-export const saveEventAndCompleteEnrollmentSucceededEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS),
-        map((action) => {
-            const meta = action.meta;
-            // the bundleReport returns the events in the same order as the payload order. Therefore, we know that the first event is the newly added one.
-            const eventId = action.payload.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
-            return commitEnrollmentAndEvents(meta.uid, eventId);
-        }),
-    );
-
-export const saveEventAndCompleteEnrollmentFailedEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR),
-        map((action) => {
-            const meta = action.meta;
-            return batchActions(
-                [saveFailed(), rollbackEnrollmentAndEvents(meta.uid)],
-                'NewEvent.saveEventAndCompleteEnrollmentFailed',
-            );
-        }),
-    );

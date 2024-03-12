@@ -18,7 +18,7 @@ import {
     useHideWidgetByRuleLocations,
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
 import {
-    addEnrollmentEvents,
+    updateOrAddEnrollmentEvents,
     showEnrollmentError,
     updateEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
@@ -63,10 +63,6 @@ export const EnrollmentAddEventPageDefault = ({
         ({ enrollments, events, linkMode }) => {
             if (linkMode && linkMode === RelatedStageModes.ENTER_DATA) return;
 
-            if (enrollments && enrollments[0]) {
-                dispatch(setExternalEnrollmentStatus(enrollments[0].status));
-            }
-
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
@@ -76,7 +72,13 @@ export const EnrollmentAddEventPageDefault = ({
                 updatedAt,
             }));
 
-            dispatch(addEnrollmentEvents({ events: eventsWithUpdatedDate }));
+            if (enrollments) {
+                dispatch(setExternalEnrollmentStatus(enrollments[0].status));
+                dispatch(updateEnrollmentAndEvents(enrollments[0]));
+            } else if (events) {
+                dispatch(updateOrAddEnrollmentEvents({ events: eventsWithUpdatedDate }));
+            }
+
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
         [fromClientDate, dispatch, history, programId, orgUnitId, teiId, enrollmentId],

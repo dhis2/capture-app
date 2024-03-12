@@ -208,12 +208,12 @@ import {
 import {
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
-    saveEventAndCompleteEnrollmentSucceededEpic,
-    saveEventAndCompleteEnrollmentFailedEpic,
+
+
 } from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent/EnrollmentAddEventPage.epics';
 import {
     updateEventSucceededEpic,
-    updateEventFailedEpic,
+    updateEventFailedEpic, saveEventAndCompleteEnrollmentFailedEpic, saveEventAndCompleteEnrollmentSucceededEpic,
 } from '../core_modules/capture-core/components/Pages/EnrollmentEditEvent';
 import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,

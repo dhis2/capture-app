@@ -87,6 +87,12 @@ const NewEventWorkspacePlain = ({
                         enrollmentId={enrollmentId}
                         onSaveSuccessActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS}
                         onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR}
+                        onSaveAndCompleteEnrollmentSuccessActionType={
+                            addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS
+                        }
+                        onSaveAndCompleteEnrollmentErrorActionType={
+                            addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR
+                        }
                         onSave={onSave}
                         onCancel={onCancel}
                         {...passOnProps}

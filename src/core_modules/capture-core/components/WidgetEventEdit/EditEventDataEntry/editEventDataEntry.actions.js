@@ -24,6 +24,8 @@ export const actionTypes = {
     EVENT_SCHEDULE_ERROR: 'ScheduleEvent.UpdateScheduleEventError',
     START_CREATE_NEW_AFTER_COMPLETING: 'WidgetEventEdit.StartCreateNewAfterCompleting',
     EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST: 'WidgetEventEdit.EventSaveAndEnrollmentCompleteRequest',
+    EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS: 'NewEnrollmentEventPage.EventSaveAndEnrollmentCompleteSuccess',
+    EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR: 'NewEnrollmentEventPage.EventSaveAndEnrollmentCompleteError',
 };
 
 export const cancelEditEventDataEntry = () =>

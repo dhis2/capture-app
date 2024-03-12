@@ -7,7 +7,7 @@ export const enrollmentSiteActionTypes = {
     UPDATE_ENROLLMENT_DATE: 'Enrollment.UpdateEnrollmentDate',
     UPDATE_INCIDENT_DATE: 'Enrollment.UpdateIncidentDate',
     UPDATE_ENROLLMENT_EVENT: 'Enrollment.UpdateEnrollmentEvent',
-    ADD_ENROLLMENT_EVENTS: 'Enrollment.AddEnrollmentEvents',
+    UPDATE_OR_ADD_ENROLLMENT_EVENTS: 'Enrollment.UpdateOrAddEnrollmentEvents',
     UPDATE_ENROLLMENT_EVENT_WITHOUT_ID: 'Enrollment.UpdateEnrollmentEventWithoutId',
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES: 'Enrollment.UpdateEnrollmentAttributeValues',
     ROLLBACK_ENROLLMENT_EVENT: 'Enrollment.RollbackEnrollmentEvent',
@@ -52,8 +52,8 @@ export const commitEnrollmentEvent = (eventId: string) =>
         eventId,
     });
 
-export const addEnrollmentEvents = ({ events }: EventReducerProps) =>
-    actionCreator(enrollmentSiteActionTypes.ADD_ENROLLMENT_EVENTS)({ events });
+export const updateOrAddEnrollmentEvents = ({ events }: EventReducerProps) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_OR_ADD_ENROLLMENT_EVENTS)({ events });
 
 export const rollbackEnrollmentEvents = ({ events }: EventReducerProps) =>
     actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENTS)({ events });

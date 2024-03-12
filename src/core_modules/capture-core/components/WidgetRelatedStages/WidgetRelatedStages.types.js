@@ -1,5 +1,19 @@
 // @flow
 import { actions as LinkModes } from './constants';
+import type { Constraint } from './RelatedStagesActions/RelatedStagesActions.types';
+
+export type RelationshipType = {|
+    fromConstraint: Constraint,
+    toConstraint: Constraint,
+    bidirectional: boolean,
+    displayName: string,
+    id: string,
+    access: {
+        data: {
+            write: boolean,
+        }
+    }
+|}
 
 export type Props = {|
     programId: string,
