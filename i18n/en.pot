@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-11T13:15:34.360Z\n"
-"PO-Revision-Date: 2024-03-11T13:15:34.360Z\n"
+"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"PO-Revision-Date: 2024-03-07T14:47:33.932Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1107,9 +1107,6 @@ msgstr "Create saved list"
 
 msgid "Create new in another program"
 msgstr "Create new in another program"
-
-msgid "Create new {{trackedEntityName}}"
-msgstr "Create new {{trackedEntityName}}"
 
 msgid "Create new event"
 msgstr "Create new event"

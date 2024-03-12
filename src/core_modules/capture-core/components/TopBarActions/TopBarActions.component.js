@@ -63,8 +63,10 @@ const ActionButtonsPlain = ({
                     }
                 >
                     {scopeType === scopeTypes.TRACKER_PROGRAM && (
-                        i18n.t('Create new {{trackedEntityName}}',
-                            { trackedEntityName, interpolation: { escapeValue: false } })
+                        i18n.t('Create new {{trackedEntityType}}', {
+                            trackedEntityType: trackedEntityName,
+                            interpolation: { escapeValue: false },
+                        })
                     )}
                     {scopeType === scopeTypes.EVENT_PROGRAM && (
                         i18n.t('Create new event')

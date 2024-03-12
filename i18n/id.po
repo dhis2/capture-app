@@ -1,21 +1,22 @@
 # 
 # Translators:
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
-# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
-# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2022
 # Raja Fathurrahim, 2023
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2023
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2023
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Philip Larsen Donnelly, 2024
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2024
+# ratih syabrina, 2024
+# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2024
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2024
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
+"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -328,6 +329,29 @@ msgstr "Mendaftar dalam program dengan memilih program dari bilah atas."
 
 msgid "An error has occurred. See log for details"
 msgstr "Sebuah kesalahan telah terjadi. Lihat log untuk detailnya"
+
+msgid "{{programStageName}} completed"
+msgstr ""
+
+msgid ""
+"Would you like to complete the enrollment and all active events as well?"
+msgstr ""
+
+msgid "{{count}} event in {{programStageName}}"
+msgid_plural "{{count}} event in {{programStageName}}"
+msgstr[0] ""
+
+msgid "Yes, complete enrollment and events"
+msgstr ""
+
+msgid "Complete enrollment only"
+msgstr ""
+
+msgid "Would you like to complete the enrollment?"
+msgstr ""
+
+msgid "Complete enrollment"
+msgstr "Selesaikan pendaftaran"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -895,6 +919,9 @@ msgstr ""
 msgid "Edit event"
 msgstr "Sunting even"
 
+msgid "View changelog"
+msgstr ""
+
 msgid "Event details"
 msgstr "Detail even"
 
@@ -918,7 +945,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "Dasbor"
 
 msgid "Edit Event"
 msgstr ""
@@ -940,6 +967,10 @@ msgstr "Telusuri {{uniqueAttrName}}"
 
 msgid "Search by attributes"
 msgstr "Cari berdasarkan atribut"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
@@ -1079,8 +1110,11 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "{{trackedEntityName}} baru di {{programName}}"
+msgid "Create new in another program"
+msgstr ""
+
+msgid "Create new event"
+msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Telusuri {{trackedEntityName}} di {{programName}}"
@@ -1165,6 +1199,12 @@ msgstr "Hapus tanda untuk ditindaklanjuti"
 msgid "Mark for follow-up"
 msgstr "Tandai untuk follow up"
 
+msgid "Transfer"
+msgstr ""
+
+msgid "An error occurred while transferring ownership"
+msgstr ""
+
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
@@ -1191,6 +1231,24 @@ msgstr ""
 
 msgid "Set area"
 msgstr "Setel luas"
+
+msgid ""
+"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"{{newOrgUnit}}{{escape}}"
+msgstr ""
+
+msgid ""
+"You will lose access to the enrollment when transferring ownership to "
+"{{organisationUnit}}."
+msgstr ""
+
+msgid "Transfer Ownership"
+msgstr ""
+
+msgid ""
+"Choose the organisation unit to which enrollment ownership should be "
+"transferred."
+msgstr ""
 
 msgid "Enrollment date"
 msgstr "Tanggal pendaftaran"
@@ -1286,11 +1344,21 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+
 msgid "after"
 msgstr "Setelah"
 
 msgid "before"
 msgstr "Sebelum"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1338,10 +1406,28 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr ""
 
+msgid "You do not have access to delete this {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Delete {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
+"permanently remove the {{trackedEntityTypeName}} and all its associated "
+"enrollments and events in all programs."
+msgstr ""
+
+msgid "There was a problem deleting the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, delete {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profil tidak dapat dimuat. Silakan coba lagi nanti"
 
-msgid "{{TETName}} profile"
+msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
 msgid "tracked entity instance"
@@ -1380,6 +1466,30 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Tahapan dan Even"
 
+msgid "Changelog"
+msgstr ""
+
+msgid "No changes to display"
+msgstr ""
+
+msgid "Created"
+msgstr "Dibuat"
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Date"
+msgstr "Tanggal"
+
+msgid "User"
+msgstr ""
+
+msgid "Data item"
+msgstr "Data item"
+
+msgid "Change"
+msgstr ""
+
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
@@ -1403,6 +1513,20 @@ msgid ""
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "Delete relationship"
+msgstr "Hapus hubungan"
+
+msgid ""
+"Deleting the relationship is permanent and cannot be undone. Are you sure "
+"you want to delete this relationship?"
+msgstr ""
+
+msgid "Yes, delete relationship"
+msgstr ""
+
+msgid "An error occurred while deleting the relationship."
 msgstr ""
 
 msgid "To open this relationship, please wait until saving is complete"
@@ -1443,6 +1567,9 @@ msgstr "Inaktif"
 
 msgid "Enrollment status"
 msgstr "Status pendaftaran"
+
+msgid "Follow up"
+msgstr "Tindak lanjut"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
@@ -1569,9 +1696,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"
-
-msgid "Date"
-msgstr "Tanggal"
 
 msgid "Time"
 msgstr "Waktu"
