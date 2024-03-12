@@ -60,13 +60,13 @@ export const getEventListData = async (
     rawQueryArgs: RawQueryArgs,
     { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching, querySingleResource, absoluteApiPath }: InputMeta,
 ) => {
-    const { resource: resourceEvents, queryArgs: queryArgsEvents } = {
-        resource: 'tracker/events',
-        queryArgs: createApiEventQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
+    const { url: urlEvents, queryParams: queryParamsEvents } = {
+        url: 'tracker/events',
+        queryParams: createApiEventQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
     };
     const apiEventsResponse = await querySingleResource({
-        resource: resourceEvents,
-        params: queryArgsEvents,
+        resource: urlEvents,
+        params: queryParamsEvents,
     });
     const apiEvents = handleAPIResponse(REQUESTED_ENTITIES.events, apiEventsResponse);
 
@@ -74,13 +74,13 @@ export const getEventListData = async (
         .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])
         .join(';');
 
-    const { resource: resourceTEIs, queryArgs: queryArgsTEIs } = {
-        resource: 'tracker/trackedEntities',
-        queryArgs: createApiTEIsQueryArgs(rawQueryArgs, trackedEntityIds),
+    const { url: urlTEIs, queryParams: queryParamsTEIs } = {
+        url: 'tracker/trackedEntities',
+        queryParams: createApiTEIsQueryArgs(rawQueryArgs, trackedEntityIds),
     };
     const apiTEIResponse = await querySingleResource({
-        resource: resourceTEIs,
-        params: queryArgsTEIs,
+        resource: urlTEIs,
+        params: queryParamsTEIs,
     });
     const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiTEIResponse);
 
@@ -93,8 +93,8 @@ export const getEventListData = async (
     return {
         recordContainers: clientWithSubvalues,
         request: {
-            resource: resourceEvents,
-            queryArgs: queryArgsEvents,
+            url: urlEvents,
+            queryParams: queryParamsEvents,
         },
     };
 };

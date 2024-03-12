@@ -38,3 +38,8 @@ export type Props = $ReadOnly<{|
     ...TeiWorkingListsReduxOutputProps,
     ...ExtractedProps,
 |}>;
+
+export type TrackerWorkingListsSetupOutputProps = $ReadOnly<{|
+    ...TeiWorkingListsReduxOutputProps,
+    ...ExtractedProps,
+|}>;

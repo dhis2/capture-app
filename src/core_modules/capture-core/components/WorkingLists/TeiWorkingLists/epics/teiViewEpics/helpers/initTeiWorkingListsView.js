@@ -10,7 +10,7 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
-import { convertToClientFilters, convertSortOrder, getCustomColumnsConfiguration } from '../../../helpers/TEIFilters';
+import { convertToClientConfig } from '../../../helpers/TEIFilters';
 
 export const initTeiWorkingListsViewAsync = async ({
     programId,
@@ -22,21 +22,12 @@ export const initTeiWorkingListsViewAsync = async ({
     querySingleResource,
     absoluteApiPath,
 }: Input) => {
-    const { sortById, sortByDirection } = convertSortOrder(
-        selectedTemplate?.criteria?.order,
-        columnsMetaForDataFetching,
-    );
-    const customColumnOrder = getCustomColumnsConfiguration(
-        selectedTemplate?.criteria?.displayColumnOrder,
-        columnsMetaForDataFetching,
-    );
-    const pageSize = 15;
-    const page = 1;
-    const filters = await convertToClientFilters(
-        selectedTemplate.criteria,
+    const clientConfig = await convertToClientConfig(
+        selectedTemplate,
         columnsMetaForDataFetching,
         querySingleResource,
     );
+    const { currentPage, rowsPerPage, sortById, sortByDirection, filters, customColumnOrder } = clientConfig;
     const apiFilters = buildFilterQueryArgs(filters, {
         columns: columnsMetaForDataFetching,
         filtersOnly: filtersOnlyMetaForDataFetching,
@@ -44,7 +35,15 @@ export const initTeiWorkingListsViewAsync = async ({
         isInit: true,
     });
 
-    const rawQueryArgs = { programId, orgUnitId, pageSize, page, sortById, sortByDirection, filters: apiFilters };
+    const rawQueryArgs = {
+        programId,
+        orgUnitId,
+        pageSize: rowsPerPage,
+        page: currentPage,
+        sortById,
+        sortByDirection,
+        filters: apiFilters,
+    };
     const params = { columnsMetaForDataFetching, filtersOnlyMetaForDataFetching, querySingleResource, absoluteApiPath };
     const programStageId = selectedTemplate?.criteria?.programStage;
     const promiseToGetRecordsList = programStageId
@@ -56,8 +55,8 @@ export const initTeiWorkingListsViewAsync = async ({
             initListViewSuccess(storeId, {
                 recordContainers,
                 pagingData: {
-                    rowsPerPage: pageSize,
-                    currentPage: page,
+                    rowsPerPage,
+                    currentPage,
                 },
                 request,
                 config: {

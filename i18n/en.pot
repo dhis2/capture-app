@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-05T12:36:05.806Z\n"
-"PO-Revision-Date: 2024-03-05T12:36:05.806Z\n"
+"POT-Creation-Date: 2024-03-11T13:15:34.360Z\n"
+"PO-Revision-Date: 2024-03-11T13:15:34.360Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1436,9 +1436,6 @@ msgstr "There was a problem deleting the {{trackedEntityTypeName}}"
 msgid "Yes, delete {{trackedEntityTypeName}}"
 msgstr "Yes, delete {{trackedEntityTypeName}}"
 
-msgid "View changelog"
-msgstr "View changelog"
-
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
 
@@ -1560,15 +1557,6 @@ msgstr "Program stage name"
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
 
-msgid "Download as JSON"
-msgstr "Download as JSON"
-
-msgid "Download as CSV"
-msgstr "Download as CSV"
-
-msgid "Download with current filters"
-msgstr "Download with current filters"
-
 msgid "Download data..."
 msgstr "Download data..."
 
@@ -1640,6 +1628,15 @@ msgstr "Show Less"
 
 msgid "Show All"
 msgstr "Show All"
+
+msgid "Download as JSON"
+msgstr "Download as JSON"
+
+msgid "Download as CSV"
+msgstr "Download as CSV"
+
+msgid "Download with current filters"
+msgstr "Download with current filters"
 
 msgid "An error has occured. See log for details"
 msgstr "An error has occured. See log for details"
