@@ -84,6 +84,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
         <>
             <TeiWorkingListsSetup
                 {...passOnProps}
+                programStageId={programStageId}
                 customListViewMenuContents={customListViewMenuContents}
                 onLoadView={injectDownloadRequestToLoadView}
                 onUpdateList={injectDownloadRequestToUpdateList}
