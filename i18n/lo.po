@@ -1,17 +1,17 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2023
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2023
 # Saysamone Sibounma, 2023
 # Somkhit Bouavong <bouavongk@gmail.com>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
+"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Somkhit Bouavong <bouavongk@gmail.com>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -312,6 +312,29 @@ msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr ""
+
+msgid "{{programStageName}} completed"
+msgstr ""
+
+msgid ""
+"Would you like to complete the enrollment and all active events as well?"
+msgstr ""
+
+msgid "{{count}} event in {{programStageName}}"
+msgid_plural "{{count}} event in {{programStageName}}"
+msgstr[0] ""
+
+msgid "Yes, complete enrollment and events"
+msgstr ""
+
+msgid "Complete enrollment only"
+msgstr ""
+
+msgid "Would you like to complete the enrollment?"
+msgstr ""
+
+msgid "Complete enrollment"
+msgstr "ການລົງທະບຽນສົມບູນ"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -869,6 +892,9 @@ msgstr ""
 msgid "Edit event"
 msgstr ""
 
+msgid "View changelog"
+msgstr ""
+
 msgid "Event details"
 msgstr "ລາຍລະອຽດເຫດການ"
 
@@ -912,6 +938,10 @@ msgstr ""
 
 msgid "Search by attributes"
 msgstr ""
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
@@ -1045,8 +1075,11 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "New {{trackedEntityName}} in {{programName}}"
+msgid "Create new in another program"
 msgstr ""
+
+msgid "Create new event"
+msgstr "ສ້າງເຫດການໃໝ່"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -1129,6 +1162,12 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "ໝາຍໄວ້ເພື່ອຕິດຕາມ"
 
+msgid "Transfer"
+msgstr ""
+
+msgid "An error occurred while transferring ownership"
+msgstr ""
+
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
@@ -1154,6 +1193,24 @@ msgid "Finish drawing before saving"
 msgstr ""
 
 msgid "Set area"
+msgstr ""
+
+msgid ""
+"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"{{newOrgUnit}}{{escape}}"
+msgstr ""
+
+msgid ""
+"You will lose access to the enrollment when transferring ownership to "
+"{{organisationUnit}}."
+msgstr ""
+
+msgid "Transfer Ownership"
+msgstr ""
+
+msgid ""
+"Choose the organisation unit to which enrollment ownership should be "
+"transferred."
 msgstr ""
 
 msgid "Enrollment date"
@@ -1250,11 +1307,21 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1302,10 +1369,28 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr ""
 
+msgid "You do not have access to delete this {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Delete {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
+"permanently remove the {{trackedEntityTypeName}} and all its associated "
+"enrollments and events in all programs."
+msgstr ""
+
+msgid "There was a problem deleting the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, delete {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "{{TETName}} profile"
+msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
 msgid "tracked entity instance"
@@ -1344,6 +1429,30 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Changelog"
+msgstr ""
+
+msgid "No changes to display"
+msgstr ""
+
+msgid "Created"
+msgstr "ສ້າງແລ້ວ"
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Date"
+msgstr "ວັນທີ່"
+
+msgid "User"
+msgstr "User"
+
+msgid "Data item"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
@@ -1367,6 +1476,20 @@ msgid ""
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "Delete relationship"
+msgstr "ລຶບຄວາມສຳພັນ"
+
+msgid ""
+"Deleting the relationship is permanent and cannot be undone. Are you sure "
+"you want to delete this relationship?"
+msgstr ""
+
+msgid "Yes, delete relationship"
+msgstr ""
+
+msgid "An error occurred while deleting the relationship."
 msgstr ""
 
 msgid "To open this relationship, please wait until saving is complete"
@@ -1407,6 +1530,9 @@ msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
 
 msgid "Enrollment status"
 msgstr "ສະຖານະການລົງທະບຽນ"
+
+msgid "Follow up"
+msgstr "ຕິດຕາມ"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
@@ -1533,9 +1659,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
-
-msgid "Date"
-msgstr "ວັນທີ່"
 
 msgid "Time"
 msgstr ""
