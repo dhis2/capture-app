@@ -72,7 +72,7 @@ const DownloadDialogPlain = ({ open, onClose, request = {}, absoluteApiPath, cla
     }
 
     return (
-        <Modal hide={!open} onClose={onClose} position={'center'}>
+        <Modal hide={!open} onClose={onClose} position={'center'} dataTest="working-lists-download-dialog">
             <ModalTitle>{i18n.t('Download with current filters')}</ModalTitle>
             <ModalContent>{renderButtons()}</ModalContent>
             <ModalActions>

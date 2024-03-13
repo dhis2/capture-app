@@ -254,3 +254,8 @@ Then the new Custom Program stage list is created
 And the TEI working list initial configuration was kept
 And you delete the name Custom Program stage list
 Then the Custom Program stage list is deleted
+
+Scenario: The user can download the tracked entity working list
+Given you open the main page with Ngelehun and child programme context
+And you open the menu and click the "Download data..." button
+Then the download dialog opens
