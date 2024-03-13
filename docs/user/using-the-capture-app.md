@@ -484,7 +484,7 @@ assigned to a program stage.
 
 > **Note**
 >
-> You can download an event list in JSON, XML or CSV formats.
+> You can download an event list in JSON or CSV formats.
 
 ## Predefined list views { #capture_views } 
 
@@ -783,6 +783,18 @@ Click the **gear** icon in the top right corner of the list. Tick the checkboxes
 You will find the predefined list views above the filters for the list. Click to load a view. 
 
 ![](resources/images/tei_list_predefined_views.png)
+
+### Download the tracked entities list
+
+1. Open the **Capture** app.
+2. Select an organisation unit.
+3. Select a tracker program with "Display front page list" set to true.
+4. Click the **three dots** icon on the top right of the tracked entities list.
+5. Click **Download data**.
+6. Select the format you want to download.
+    ![download tracked entities list](resources/images/download_tracked_entities_list.png)
+> **Note**
+> You can download the tracked entities list in JSON or CSV formats.
 
 ## Tracker program stage working list
 
