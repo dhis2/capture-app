@@ -1,6 +1,6 @@
 // @flow
 export type Props = $ReadOnly<{
-    storeId: string,
+    request: { url: string, queryParams: ?Object },
     open: boolean,
     onClose: Function,
 }>;

@@ -793,3 +793,4 @@ Then('the download dialog opens', () => {
                 .should('have.attr', 'href').and('include', `/trackedEntities.csv?${params}`);
         });
 });
+

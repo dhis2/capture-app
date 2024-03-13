@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, useMemo, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
@@ -17,6 +18,9 @@ export const TrackerWorkingListsViewMenuSetup = ({
     programStageId,
     ...passOnProps
 }: Props) => {
+    const downloadRequest = useSelector(
+        ({ workingLists }) => workingLists[storeId] && workingLists[storeId].currentRequest,
+    );
     const dataEngine = useDataEngine();
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
     const customListViewMenuContents: CustomMenuContents = useMemo(() => {
@@ -89,7 +93,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 onLoadView={injectDownloadRequestToLoadView}
                 onUpdateList={injectDownloadRequestToUpdateList}
             />
-            <DownloadDialog open={downloadDialogOpen} onClose={handleCloseDialog} storeId={storeId} />
+            <DownloadDialog open={downloadDialogOpen} onClose={handleCloseDialog} request={downloadRequest} />
         </>
     );
 };
