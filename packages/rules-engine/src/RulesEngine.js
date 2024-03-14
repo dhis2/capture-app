@@ -123,13 +123,13 @@ export class RulesEngine {
                             `Expression with rule id: ${rule.id} could not be run. ` +
                             `Original condition was: ${expression} - ` +
                             `Evaluation ended up as: ${injectedExpression} - ` +
-                            `Result of evaluation was: ${evalutationResult.toString()} - ` +
+                            `Result of evaluation was: ${evalutationResult?.toString()} - ` +
                             `error message: ${error}`),
                         onVerboseLog: (injectedExpression, evalutationResult) => console.log(
                             `Expression with rule id: ${rule.id} was run. ` +
                             `Original condition was: ${expression} - ` +
                             `Evaluation ended up as: ${injectedExpression} - ` +
-                            `Result of evaluation was: ${evalutationResult.toString()}`),
+                            `Result of evaluation was: ${evalutationResult?.toString()}`),
                     });
                 } else {
                     log.warn(`Rule id:'${rule.id}' and name:'${rule.displayName}' ` +
@@ -166,13 +166,13 @@ export class RulesEngine {
                                     `Expression with action id: action:${id} could not be run. ` +
                                     `Original condition was: ${actionExpression} - ` +
                                     `Evaluation ended up as:${injectedExpression} - ` +
-                                    `Result of evaluation was: ${evalutationResult.toString()} - ` +
+                                    `Result of evaluation was: ${evalutationResult?.toString()} - ` +
                                     `Error message:${error}`),
                                 onVerboseLog: (injectedExpression, evalutationResult) => console.log(
                                     `Expression with action id: action:${id} was run. ` +
                                     `Original condition was: ${actionExpression} - ` +
                                     `Evaluation ended up as: ${injectedExpression} - ` +
-                                    `Result of evaluation was: ${evalutationResult.toString()}`),
+                                    `Result of evaluation was: ${evalutationResult?.toString()}`),
                             });
                         }
 
