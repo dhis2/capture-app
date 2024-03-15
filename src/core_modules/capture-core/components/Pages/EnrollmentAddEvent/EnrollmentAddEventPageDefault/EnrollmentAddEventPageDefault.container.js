@@ -22,7 +22,7 @@ import {
     showEnrollmentError,
     updateEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
-    setExternalEnrollmentStatus,
+    setExternalEnrollmentStatus, commitEnrollmentAndEvents,
 } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
@@ -58,6 +58,11 @@ export const EnrollmentAddEventPageDefault = ({
         dispatch(rollbackEnrollmentAndEvents());
         dispatch(showEnrollmentError({ message }));
     }, [dispatch]);
+
+    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
+        dispatch(commitEnrollmentAndEvents());
+        redirect && history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
         ({ enrollments, events, linkMode }) => {
@@ -190,6 +195,7 @@ export const EnrollmentAddEventPageDefault = ({
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
                 events={enrollment?.events}
+                onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                 onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}

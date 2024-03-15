@@ -28,6 +28,7 @@ export type Props = {|
     widgetReducerName: string,
     events?: Array<ApiEnrollmentEvent>,
     onUpdateEnrollmentStatus: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess: ({ redirect?: boolean }) => void,
     onUpdateEnrollmentStatusError: (message: string) => void,
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
