@@ -44,6 +44,11 @@ export const useChangelogData = ({
     const [sortDirection, setSortDirection] = useState<SortDirection>(DEFAULT_SORT_DIRECTION);
     const { fromServerDate } = useTimeZoneConversion();
 
+    const handleChangePageSize = (newPageSize: number) => {
+        setPage(1);
+        setPageSize(newPageSize);
+    };
+
     const { data, isLoading, isError } = useApiDataQuery(
         ['changelog', entityType, entityId, { sortDirection, page, pageSize, programId }],
         {
@@ -115,7 +120,7 @@ export const useChangelogData = ({
         records,
         pager: data?.pager,
         setPage,
-        setPageSize,
+        setPageSize: handleChangePageSize,
         sortDirection,
         setSortDirection,
         isLoading,
