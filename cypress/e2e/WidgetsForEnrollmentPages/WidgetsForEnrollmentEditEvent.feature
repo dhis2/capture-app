@@ -136,6 +136,9 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And you change the page size to 20
     # One row is filtered out as the metadata is no longer there
     Then the number of changelog table rows should be 19
+    And you change the page size to 100
+    Then the number of changelog table rows should be 37
+    Then the table footer should display page 1
   
   @v>=41
   Scenario: The user can move to the next page in the changelog
