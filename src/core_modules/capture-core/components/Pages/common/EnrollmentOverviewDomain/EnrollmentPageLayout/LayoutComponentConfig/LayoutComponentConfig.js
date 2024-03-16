@@ -1,5 +1,4 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
@@ -10,7 +9,7 @@ import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDef
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
 import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
 import { WidgetFeedback } from '../../../../../WidgetFeedback';
-import type { IndicatorProps, Props as WidgetFeedbackProps } from '../../../../../WidgetFeedback/WidgetFeedback.types';
+import type { IndicatorProps } from '../../../../../WidgetFeedback/WidgetFeedback.types';
 import { WidgetIndicator } from '../../../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../../../WidgetEnrollmentComment';
 import { WidgetProfile } from '../../../../../WidgetProfile';
@@ -94,18 +93,18 @@ export const WarningWidget: WidgetConfig = {
 export const FeedbackWidget: WidgetConfig = {
     Component: WidgetFeedback,
     shouldHideWidget: ({ hideWidgets }) => hideWidgets?.feedback,
-    getProps: ({ widgetEffects }): WidgetFeedbackProps => ({
+    getProps: ({ widgetEffects, feedbackEmptyText }) => ({
         feedback: widgetEffects?.feedbacks,
-        emptyText: i18n.t('No feedback for this enrollment yet'),
+        emptyText: feedbackEmptyText,
     }),
 };
 
 export const IndicatorWidget: WidgetConfig = {
     Component: WidgetIndicator,
     shouldHideWidget: ({ hideWidgets }) => hideWidgets?.indicator,
-    getProps: ({ widgetEffects }): IndicatorProps => ({
+    getProps: ({ widgetEffects, indicatorEmptyText }): IndicatorProps => ({
         indicators: widgetEffects?.indicators,
-        emptyText: i18n.t('No indicator output for this enrollment yet'),
+        emptyText: indicatorEmptyText,
     }),
 };
 
