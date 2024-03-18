@@ -9,7 +9,6 @@ import { EnrollmentQuickActions } from '../../../../Enrollment/EnrollmentPageDef
 import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarning';
 import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
 import { WidgetFeedback } from '../../../../../WidgetFeedback';
-import type { IndicatorProps } from '../../../../../WidgetFeedback/WidgetFeedback.types';
 import { WidgetIndicator } from '../../../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../../../WidgetEnrollmentComment';
 import { WidgetProfile } from '../../../../../WidgetProfile';
@@ -23,6 +22,12 @@ import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';
 import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
 import { WidgetEventComment } from '../../../../../WidgetEventComment';
 import { WidgetAssignee } from '../../../../../WidgetAssignee';
+import type {
+    IndicatorProps,
+    Props as WidgetFeedbackProps,
+    InputFeedbackProps,
+    InputIndicatorProps,
+} from '../../../../../WidgetFeedback/WidgetFeedback.types';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
@@ -93,7 +98,7 @@ export const WarningWidget: WidgetConfig = {
 export const FeedbackWidget: WidgetConfig = {
     Component: WidgetFeedback,
     shouldHideWidget: ({ hideWidgets }) => hideWidgets?.feedback,
-    getProps: ({ widgetEffects, feedbackEmptyText }) => ({
+    getProps: ({ widgetEffects, feedbackEmptyText }: InputFeedbackProps): WidgetFeedbackProps => ({
         feedback: widgetEffects?.feedbacks,
         emptyText: feedbackEmptyText,
     }),
@@ -102,7 +107,7 @@ export const FeedbackWidget: WidgetConfig = {
 export const IndicatorWidget: WidgetConfig = {
     Component: WidgetIndicator,
     shouldHideWidget: ({ hideWidgets }) => hideWidgets?.indicator,
-    getProps: ({ widgetEffects, indicatorEmptyText }): IndicatorProps => ({
+    getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
         indicators: widgetEffects?.indicators,
         emptyText: indicatorEmptyText,
     }),
