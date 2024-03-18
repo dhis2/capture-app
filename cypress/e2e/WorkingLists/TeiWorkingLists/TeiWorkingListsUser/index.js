@@ -784,7 +784,7 @@ Then('the download dialog opens', () => {
 });
 
 Then('the CSV button exists', () => {
-    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download as CSV');
@@ -796,7 +796,7 @@ Then('the CSV button exists', () => {
 });
 
 Then('the JSON button exists', () => {
-    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download as JSON');
