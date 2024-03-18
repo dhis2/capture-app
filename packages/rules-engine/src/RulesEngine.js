@@ -119,14 +119,17 @@ export class RulesEngine {
                         dhisFunctions,
                         variablesHash,
                         flags: this.flags,
-                        onError: (error, injectedExpression) => log.warn(
-                            `Expression with id rule:${rule.id} could not be run. ` +
+                        onError: (error, injectedExpression, evalutationResult) => log.error(
+                            `Expression with rule id: ${rule.id} could not be run. ` +
                             `Original condition was: ${expression} - ` +
-                            `Evaluation ended up as:${injectedExpression} - error message:${error}`),
-                        onVerboseLog: injectedExpression => console.log(
-                            `Expression with id rule:${rule.id} was run. ` +
+                            `Evaluation ended up as: ${injectedExpression} - ` +
+                            `Result of evaluation was: ${evalutationResult?.toString()} - ` +
+                            `error message: ${error}`),
+                        onVerboseLog: (injectedExpression, evalutationResult) => console.log(
+                            `Expression with rule id: ${rule.id} was run. ` +
                             `Original condition was: ${expression} - ` +
-                            `Evaluation ended up as:${injectedExpression}`),
+                            `Evaluation ended up as: ${injectedExpression} - ` +
+                            `Result of evaluation was: ${evalutationResult?.toString()}`),
                     });
                 } else {
                     log.warn(`Rule id:'${rule.id}' and name:'${rule.displayName}' ` +
@@ -159,14 +162,17 @@ export class RulesEngine {
                                 dhisFunctions,
                                 variablesHash,
                                 flags: this.flags,
-                                onError: (error, injectedExpression) => log.warn(
-                                    `Expression with id rule: action:${id} could not be run. ` +
+                                onError: (error, injectedExpression, evalutationResult) => log.error(
+                                    `Expression with action id: action:${id} could not be run. ` +
                                     `Original condition was: ${actionExpression} - ` +
-                                    `Evaluation ended up as:${injectedExpression} - error message:${error}`),
-                                onVerboseLog: injectedExpression => log.info(
-                                    `Expression with id rule: action:${id} was run. ` +
+                                    `Evaluation ended up as:${injectedExpression} - ` +
+                                    `Result of evaluation was: ${evalutationResult?.toString()} - ` +
+                                    `Error message:${error}`),
+                                onVerboseLog: (injectedExpression, evalutationResult) => console.log(
+                                    `Expression with action id: action:${id} was run. ` +
                                     `Original condition was: ${actionExpression} - ` +
-                                    `Evaluation ended up as: ${injectedExpression}`),
+                                    `Evaluation ended up as: ${injectedExpression} - ` +
+                                    `Result of evaluation was: ${evalutationResult?.toString()}`),
                             });
                         }
 
