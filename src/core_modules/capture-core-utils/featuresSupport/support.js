@@ -8,6 +8,7 @@ export const FEATURES = Object.freeze({
     exportablePayload: 'exportablePayload',
     changelogs: 'changelogs',
     trackerImageEndpoint: 'trackerImageEndpoint',
+    trackedEntitiesCSVandJSON: 'trackedEntitiesCSVandJSON',
 });
 
 // The first minor version that supports the feature
@@ -20,6 +21,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.trackerImageEndpoint]: 41,
     [FEATURES.newTransferQueryParam]: 41,
     [FEATURES.changelogs]: 41,
+    [FEATURES.trackedEntitiesCSVandJSON]: 40,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>

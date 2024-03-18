@@ -10,6 +10,7 @@ import type { Props } from './TrackerWorkingListsViewMenuSetup.types';
 import { DownloadDialog } from '../../WorkingListsCommon';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/TEIFilters';
+import { FEATURES, useFeature } from '../../../../../capture-core-utils';
 
 export const TrackerWorkingListsViewMenuSetup = ({
     onLoadView,
@@ -18,13 +19,14 @@ export const TrackerWorkingListsViewMenuSetup = ({
     programStageId,
     ...passOnProps
 }: Props) => {
+    const supportsCSVandJSON = useFeature(FEATURES.trackedEntitiesCSVandJSON);
     const downloadRequest = useSelector(
         ({ workingLists }) => workingLists[storeId] && workingLists[storeId].currentRequest,
     );
     const dataEngine = useDataEngine();
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
     const customListViewMenuContents: CustomMenuContents = useMemo(() => {
-        if (programStageId) {
+        if (!supportsCSVandJSON || programStageId) {
             return [];
         }
 
@@ -35,7 +37,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 element: i18n.t('Download data...'),
             },
         ];
-    }, [setDownloadDialogOpenStatus, programStageId]);
+    }, [setDownloadDialogOpenStatus, programStageId, supportsCSVandJSON]);
 
     const handleCloseDialog = useCallback(() => {
         setDownloadDialogOpenStatus(false);
