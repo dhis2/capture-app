@@ -1,3 +1,11 @@
+## [100.66.6](https://github.com/dhis2/capture-app/compare/v100.66.5...v100.66.6) (2024-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-17037] edit event page crashes for event programs ([#3565](https://github.com/dhis2/capture-app/issues/3565)) ([6ea6a1f](https://github.com/dhis2/capture-app/commit/6ea6a1ffb37a0a4b6a55b550051a02c4485b6140))
+* [DHIS2-17072] Improve verbose rules engine message ([#3571](https://github.com/dhis2/capture-app/issues/3571)) ([a505fd9](https://github.com/dhis2/capture-app/commit/a505fd96420f228291fa65ba81e7133b34dca338))
+
 ## [100.66.5](https://github.com/dhis2/capture-app/compare/v100.66.4...v100.66.5) (2024-03-18)
 
 
