@@ -19,14 +19,14 @@ export const TrackerWorkingListsViewMenuSetup = ({
     programStageId,
     ...passOnProps
 }: Props) => {
-    const supportsCSVandJSON = useFeature(FEATURES.trackedEntitiesCSVandJSON);
+    const hasCSVSupport = useFeature(FEATURES.trackedEntitiesCSV);
     const downloadRequest = useSelector(
         ({ workingLists }) => workingLists[storeId] && workingLists[storeId].currentRequest,
     );
     const dataEngine = useDataEngine();
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
     const customListViewMenuContents: CustomMenuContents = useMemo(() => {
-        if (!supportsCSVandJSON || programStageId) {
+        if (programStageId) {
             return [];
         }
 
@@ -37,7 +37,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 element: i18n.t('Download data...'),
             },
         ];
-    }, [setDownloadDialogOpenStatus, programStageId, supportsCSVandJSON]);
+    }, [setDownloadDialogOpenStatus, programStageId]);
 
     const handleCloseDialog = useCallback(() => {
         setDownloadDialogOpenStatus(false);
@@ -95,7 +95,12 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 onLoadView={injectDownloadRequestToLoadView}
                 onUpdateList={injectDownloadRequestToUpdateList}
             />
-            <DownloadDialog open={downloadDialogOpen} onClose={handleCloseDialog} request={downloadRequest} />
+            <DownloadDialog
+                open={downloadDialogOpen}
+                onClose={handleCloseDialog}
+                request={downloadRequest}
+                hasCSVSupport={hasCSVSupport}
+            />
         </>
     );
 };

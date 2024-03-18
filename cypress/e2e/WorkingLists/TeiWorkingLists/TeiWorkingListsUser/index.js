@@ -777,16 +777,17 @@ And('you open the menu and click the "Download data..." button', () => {
 });
 
 Then('the download dialog opens', () => {
-    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download with current filters');
-            cy.contains('Download as JSON');
-            cy.contains('Download as CSV');
+        });
+});
 
-            cy.get('a')
-                .eq(0)
-                .should('have.attr', 'href').and('include', `/trackedEntities.json?${params}`);
+Then('the CSV button exists', () => {
+    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    cy.get('[data-test="working-lists-download-dialog"]')
+        .within(() => {
+            cy.contains('Download as CSV');
 
             cy.get('a')
                 .eq(1)
@@ -794,3 +795,14 @@ Then('the download dialog opens', () => {
         });
 });
 
+Then('the JSON button exists', () => {
+    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    cy.get('[data-test="working-lists-download-dialog"]')
+        .within(() => {
+            cy.contains('Download as JSON');
+
+            cy.get('a')
+                .eq(0)
+                .should('have.attr', 'href').and('include', `/trackedEntities.json?${params}`);
+        });
+});

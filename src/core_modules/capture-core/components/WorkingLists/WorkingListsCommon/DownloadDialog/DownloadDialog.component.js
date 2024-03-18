@@ -20,7 +20,7 @@ const getStyles = () => ({
     },
 });
 
-const DownloadDialogPlain = ({ open, onClose, request = {}, absoluteApiPath, classes }: PlainProps) => {
+const DownloadDialogPlain = ({ open, onClose, request = {}, absoluteApiPath, classes, hasCSVSupport }: PlainProps) => {
     const getUrlEncodedParamsString = (params: Object) => {
         const { filter, ...restParams } = params;
         const searchParams = new URLSearchParams(restParams);
@@ -54,15 +54,17 @@ const DownloadDialogPlain = ({ open, onClose, request = {}, absoluteApiPath, cla
                         <Button>{i18n.t('Download as JSON')}</Button>
                     </a>
                 </div>
-                <div className={classes.downloadLinkContainer}>
-                    <a
-                        download={`${request.url}.csv`}
-                        href={`${url}.csv?${searchParamsString}`}
-                        className={classes.downloadLink}
-                    >
-                        <Button>{i18n.t('Download as CSV')}</Button>
-                    </a>
-                </div>
+                {hasCSVSupport &&
+                    <div className={classes.downloadLinkContainer}>
+                        <a
+                            download={`${request.url}.csv`}
+                            href={`${url}.csv?${searchParamsString}`}
+                            className={classes.downloadLink}
+                        >
+                            <Button>{i18n.t('Download as CSV')}</Button>
+                        </a>
+                    </div>
+                }
             </div>
         );
     };
