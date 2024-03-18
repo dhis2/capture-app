@@ -23,7 +23,7 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps 
             if (optionSet && optionSet.options) {
                 metadata.optionSet = optionSet.id;
                 metadata.options = optionSet.options.map(option => ({
-                    code: option.code,
+                    code: option.value,
                     name: option.text,
                 }));
             }

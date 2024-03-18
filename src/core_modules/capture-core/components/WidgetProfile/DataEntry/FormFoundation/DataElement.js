@@ -206,7 +206,6 @@ const buildOptionSet = async (
         const icon = buildIcon(optionSetOption.style);
         return new Option((option) => {
             option.id = optionSetOption.id;
-            option.code = optionSetOption.code;
             option.value = optionSetOption.code;
             option.text = optionSetOption.displayName;
             option.icon = icon;
