@@ -1,3 +1,17 @@
+## [100.66.5](https://github.com/dhis2/capture-app/compare/v100.66.4...v100.66.5) (2024-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-17087] don't retrieve relationships in TE working lists ([#3573](https://github.com/dhis2/capture-app/issues/3573)) ([05ec096](https://github.com/dhis2/capture-app/commit/05ec096ff4dbf5ae1ab6b381ddc091812e41bd3a))
+
+## [100.66.4](https://github.com/dhis2/capture-app/compare/v100.66.3...v100.66.4) (2024-03-13)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([94198ea](https://github.com/dhis2/capture-app/commit/94198ea3abb4169a0749b670ca337d4269d9fc34))
+
 ## [100.66.3](https://github.com/dhis2/capture-app/compare/v100.66.2...v100.66.3) (2024-03-10)
 
 

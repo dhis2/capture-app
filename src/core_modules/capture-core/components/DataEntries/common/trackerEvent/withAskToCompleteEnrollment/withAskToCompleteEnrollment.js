@@ -31,8 +31,8 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         ...passOnProps
     } = props;
     const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
-    const events = enrollment.events;
-    const hasActiveEvents = useMemo(() => events.some(event => event.status === eventStatuses.ACTIVE), [events]);
+    const events = enrollment?.events;
+    const hasActiveEvents = useMemo(() => events?.some(event => event.status === eventStatuses.ACTIVE), [events]);
     const [isOpenCompleteModal, setOpenCompleteModal] = useState(false);
     const eventDataToSave = useRef({});
 

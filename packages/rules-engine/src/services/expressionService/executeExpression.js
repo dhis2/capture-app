@@ -195,10 +195,10 @@ export const executeExpression = ({
         );
 
         if (flags.verbose) {
-            onVerboseLog(expressionWithInjectedVariableValues);
+            onVerboseLog(expressionWithInjectedVariableValues, answer);
         }
     } catch (error) {
-        onError(error.message, expressionWithInjectedVariableValues);
+        onError(error.message, expressionWithInjectedVariableValues, answer);
     }
     return answer;
 };
