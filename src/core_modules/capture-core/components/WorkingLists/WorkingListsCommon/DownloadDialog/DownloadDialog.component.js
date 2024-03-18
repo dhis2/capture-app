@@ -47,16 +47,16 @@ const DownloadDialogPlain = ({ open, onClose, request = {}, absoluteApiPath, cla
             <div className={classes.downloadContainer}>
                 <div className={classes.downloadLinkContainer}>
                     <a
-                        download={`${url}.json`}
+                        download={`${request.url}.json`}
                         href={`${url}.json?${searchParamsString}`}
                         className={classes.downloadLink}
                     >
                         <Button>{i18n.t('Download as JSON')}</Button>
                     </a>
                 </div>
-                <div>
+                <div className={classes.downloadLinkContainer}>
                     <a
-                        download={`${url}.csv`}
+                        download={`${request.url}.csv`}
                         href={`${url}.csv?${searchParamsString}`}
                         className={classes.downloadLink}
                     >
