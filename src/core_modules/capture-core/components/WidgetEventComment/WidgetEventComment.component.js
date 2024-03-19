@@ -15,7 +15,7 @@ export const WidgetEventComment = ({ dataEntryKey, dataEntryId }: Props) => {
     };
 
     return (
-        <div data-test="event-comment-widget">
+        <div data-test="event-note-widget">
             <WidgetComment
                 title={i18n.t('Notes about this event')}
                 placeholder={i18n.t('Write a note about this event')}

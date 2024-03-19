@@ -16,7 +16,7 @@ export const WidgetEnrollmentComment = () => {
     };
 
     return (
-        <div data-test="enrollment-comment-widget">
+        <div data-test="enrollment-note-widget">
             <WidgetComment
                 title={i18n.t('Notes about this enrollment')}
                 placeholder={i18n.t('Write a note about this enrollment')}

@@ -113,7 +113,7 @@ const WidgetEventSchedulePlain = ({
             />
         </DataSection>}
         <DataSection
-            dataTest="comment-section"
+            dataTest="note-section"
             sectionName={i18n.t('Event notes')}
         >
             <CommentSection

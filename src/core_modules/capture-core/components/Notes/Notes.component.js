@@ -150,10 +150,10 @@ class NotesPlain extends React.Component<Props, State> {
                         onChange={this.handleChange}
                         value={this.state.value}
                         multiLine
-                        data-test="comment-textfield"
+                        data-test="note-textfield"
                     />
                 </Editor>
-                <div className={classes.newCommentButtonContainer} data-test="comment-buttons-container">
+                <div className={classes.newCommentButtonContainer} data-test="note-buttons-container">
                     <Button
                         onClick={this.handleAddNote}
                         className={classes.addCommentContainer}
@@ -180,7 +180,7 @@ class NotesPlain extends React.Component<Props, State> {
         return (
             <div
                 className={classes.newNoteButtonContainer}
-                data-test="new-comment-button"
+                data-test="new-note-button"
             >
                 <ConditionalTooltip
                     content={i18n.t('You don\'t have access to write notes')}
@@ -207,17 +207,17 @@ class NotesPlain extends React.Component<Props, State> {
                         <MenuItem
                             className={classes.noteItem}
                             key={n.clientId}
-                            data-test="comment"
+                            data-test="note"
                             label={<>
                                 <div className={classes.noteItemHeader}>
-                                    <div className={classes.noteItemUser} data-test="comment-user">
+                                    <div className={classes.noteItemUser} data-test="note-user">
                                         {n.createdBy ? `${n.createdBy.firstName} ${n.createdBy.surname}` : `${n.storedBy}` }
                                     </div>
-                                    <div className={classes.noteItemDate} data-test="comment-date">
+                                    <div className={classes.noteItemDate} data-test="note-date">
                                         {n.storedDate}
                                     </div>
                                 </div>
-                                <div data-test="comment-text">
+                                <div data-test="note-text">
                                     <Parser>{n.value}</Parser>
                                 </div>
                             </>}
@@ -225,7 +225,7 @@ class NotesPlain extends React.Component<Props, State> {
                     ))}
                 </Menu>
                 {
-                    <div className={classes.newNoteContainer} data-test="new-comment-container">
+                    <div className={classes.newNoteContainer} data-test="new-note-container">
                         { this.state.addIsOpen ? this.renderInput() : this.renderButton(entityAccess.write) }
                     </div>
                 }

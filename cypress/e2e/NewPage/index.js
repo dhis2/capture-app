@@ -115,10 +115,10 @@ And('you see the registration form for the Malaria case registration', () => {
         .contains('Complete event')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Comments')
+        .contains('Notes')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Write comment')
+        .contains('Write note')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
         .contains('Relationships')
@@ -296,10 +296,10 @@ And('you see the registration form for the specific category', () => {
         .contains('Complete event')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Comments')
+        .contains('Notes')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Write comment')
+        .contains('Write note')
         .should('exist');
 
     cy.get('[data-test="dhis2-uicore-splitbutton"]')

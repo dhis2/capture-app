@@ -10,18 +10,18 @@ When('you click edit mode', () => {
     cy.contains('Enrollment: Edit Event').should('exist');
 });
 
-When(/^you fill in the comment: (.*)$/, (comment) => {
-    cy.get('[data-test="event-comment-widget"]').within(() => {
-        cy.get('[data-test="comment-textfield"]').type(comment);
+When(/^you fill in the note: (.*)$/, (note) => {
+    cy.get('[data-test="event-note-widget"]').within(() => {
+        cy.get('[data-test="note-textfield"]').type(note);
         cy.wait(100);
 
-        cy.get('[data-test="add-comment-btn"]').should('exist');
-        cy.get('[data-test="add-comment-btn"]').click();
+        cy.get('[data-test="add-note-btn"]').should('exist');
+        cy.get('[data-test="add-note-btn"]').click();
     });
 });
 
-Then(/^list should contain the new comment: (.*)$/, (comment) => {
-    cy.get('[data-test="event-comment-widget"]').within(() => {
-        cy.get('[data-test="comment-item"]').contains(comment).should('exist');
+Then(/^list should contain the new note: (.*)$/, (note) => {
+    cy.get('[data-test="event-note-widget"]').within(() => {
+        cy.get('[data-test="note-item"]').contains(note).should('exist');
     });
 });

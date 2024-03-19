@@ -96,7 +96,7 @@ const CommentSectionPlain = ({
     }, [handleAddComment, newCommentValue]);
 
     const CommentItem = ({ value, storedAt, createdBy }) => (
-        <div data-test="comment-item" className={cx(classes.item)}>
+        <div data-test="note-item" className={cx(classes.item)}>
             {/* TODO: add avatar */}
             <div className={classes.rightColumn}>
                 <div className={classes.header}>
@@ -134,14 +134,14 @@ const CommentSectionPlain = ({
                         placeholder={placeholder}
                         onChange={handleChange}
                         value={newCommentValue}
-                        data-test="comment-textfield"
+                        data-test="note-textfield"
                     />
                 </Editor>
             </div>
 
-            {isEditing && <div className={classes.newCommentButtonContainer} data-test="comment-buttons-container">
+            {isEditing && <div className={classes.newCommentButtonContainer} data-test="note-buttons-container">
                 <Button
-                    dataTest="add-comment-btn"
+                    dataTest="add-note-btn"
                     onClick={onAddComment}
                     primary
                 >
