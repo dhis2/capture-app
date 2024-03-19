@@ -768,3 +768,41 @@ Then('the program stage working list is loaded', () => {
         .contains('WHOMCH Hemoglobin value')
         .should('exist');
 });
+
+And('you open the menu and click the "Download data..." button', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Download data...')
+        .click();
+});
+
+Then('the download dialog opens', () => {
+    cy.get('[data-test="working-lists-download-dialog"]')
+        .within(() => {
+            cy.contains('Download with current filters');
+        });
+});
+
+Then('the CSV button exists', () => {
+    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    cy.get('[data-test="working-lists-download-dialog"]')
+        .within(() => {
+            cy.contains('Download as CSV');
+
+            cy.get('a')
+                .eq(1)
+                .should('have.attr', 'href').and('include', `/trackedEntities.csv?${params}`);
+        });
+});
+
+Then('the JSON button exists', () => {
+    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    cy.get('[data-test="working-lists-download-dialog"]')
+        .within(() => {
+            cy.contains('Download as JSON');
+
+            cy.get('a')
+                .eq(0)
+                .should('have.attr', 'href').and('include', `/trackedEntities.json?${params}`);
+        });
+});

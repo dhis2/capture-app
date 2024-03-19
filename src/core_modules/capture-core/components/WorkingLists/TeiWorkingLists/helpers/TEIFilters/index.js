@@ -1,3 +1,2 @@
 // @flow
-export { getCustomColumnsConfiguration } from './getCustomColumnsConfiguration';
-export { convertToClientFilters, convertSortOrder } from './apiTEIFilterToClientConfigConverter';
+export { convertToClientConfig } from './apiTEIFilterToClientConfigConverter';

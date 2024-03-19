@@ -1554,15 +1554,6 @@ msgstr "Program stage name"
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
 
-msgid "Download as JSON"
-msgstr "Download as JSON"
-
-msgid "Download as CSV"
-msgstr "Download as CSV"
-
-msgid "Download with current filters"
-msgstr "Download with current filters"
-
 msgid "Download data..."
 msgstr "Download data..."
 
@@ -1634,6 +1625,15 @@ msgstr "Show Less"
 
 msgid "Show All"
 msgstr "Show All"
+
+msgid "Download as JSON"
+msgstr "Download as JSON"
+
+msgid "Download as CSV"
+msgstr "Download as CSV"
+
+msgid "Download with current filters"
+msgstr "Download with current filters"
 
 msgid "An error has occured. See log for details"
 msgstr "An error has occured. See log for details"
