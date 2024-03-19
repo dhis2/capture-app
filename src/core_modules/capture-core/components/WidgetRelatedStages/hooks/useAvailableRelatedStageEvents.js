@@ -45,8 +45,7 @@ export const useAvailableRelatedStageEvents = ({
             cacheTime: 0,
             staleTime: 0,
             select: (response: any) => {
-                const events = handleAPIResponse(REQUESTED_ENTITIES.events, response)
-                    .filter(instance => ['SCHEDULE', 'ACTIVE'].includes(instance.status));
+                const events = handleAPIResponse(REQUESTED_ENTITIES.events, response);
 
                 if (events.length === 0) return [];
 

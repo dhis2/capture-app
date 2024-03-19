@@ -4,5 +4,3 @@ export { updateEventSucceededEpic, updateEventFailedEpic } from './EnrollmentEdi
 export {
     actionTypes as enrollmentEditEventActionTypes,
 } from './EnrollmentEditEventPage.actions';
-export { saveEventAndCompleteEnrollmentFailedEpic } from './EnrollmentEditEventPage.epics';
-export { saveEventAndCompleteEnrollmentSucceededEpic } from './EnrollmentEditEventPage.epics';
