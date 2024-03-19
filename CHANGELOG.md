@@ -1,3 +1,10 @@
+# [100.67.0](https://github.com/dhis2/capture-app/compare/v100.66.6...v100.67.0) (2024-03-19)
+
+
+### Features
+
+* [DHIS2-13233] download tracked entities working lists ([#3569](https://github.com/dhis2/capture-app/issues/3569)) ([cca2064](https://github.com/dhis2/capture-app/commit/cca2064f99c64c291da9a8e157948cc18cac7e43))
+
 ## [100.66.6](https://github.com/dhis2/capture-app/compare/v100.66.5...v100.66.6) (2024-03-18)
 
 
