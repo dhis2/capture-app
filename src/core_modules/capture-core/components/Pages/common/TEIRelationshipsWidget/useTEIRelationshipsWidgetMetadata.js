@@ -10,7 +10,7 @@ import {
 const getRelationshipTypes = async (): Promise<RelationshipTypes> => {
     const userStorageController = getUserStorageController();
     const cachedRelationshipTypes = await userStorageController.getAll(userStores.RELATIONSHIP_TYPES, {
-        predicate: ({ access }) => access.data.write,
+        predicate: ({ access }) => access.data.read,
     });
 
     const { dataElementIds, attributeIds } = extractElementIdsFromRelationshipTypes(cachedRelationshipTypes);

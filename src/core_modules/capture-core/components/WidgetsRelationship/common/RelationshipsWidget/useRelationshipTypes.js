@@ -24,7 +24,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         {
             enabled: !cachedRelationshipTypes?.length,
             select: ({ relationshipTypes }: any) => relationshipTypes
-                .filter(({ access }) => access.data.write),
+                .filter(({ access }) => access.data.read),
         },
     );
 
