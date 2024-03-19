@@ -13,7 +13,7 @@ type Element = {|
 const relationshipTypesQuery = {
     resource: 'relationshipTypes',
     params: {
-        fields: 'id,displayName,fromToName,toFromName,fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
+        fields: 'id,displayName,fromToName,toFromName,access[data[read,write],read,write],fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
     },
 };
 
@@ -23,7 +23,8 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         relationshipTypesQuery,
         {
             enabled: !cachedRelationshipTypes?.length,
-            select: ({ relationshipTypes }: any) => relationshipTypes,
+            select: ({ relationshipTypes }: any) => relationshipTypes
+                .filter(({ access }) => access.data.write),
         },
     );
 
