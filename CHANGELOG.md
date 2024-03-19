@@ -1,3 +1,11 @@
+## [100.67.1](https://github.com/dhis2/capture-app/compare/v100.67.0...v100.67.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* [DHIS2-16393] use option name in Stages&Events ([#3578](https://github.com/dhis2/capture-app/issues/3578)) ([b75398d](https://github.com/dhis2/capture-app/commit/b75398d605d5bee1c37e1a0c3f8718513a4aeb9c))
+* [DHIS2-16394] use option name in relationship table ([#3579](https://github.com/dhis2/capture-app/issues/3579)) ([6b98c37](https://github.com/dhis2/capture-app/commit/6b98c375bb782045ee204417e8169a264762191d))
+
 # [100.67.0](https://github.com/dhis2/capture-app/compare/v100.66.6...v100.67.0) (2024-03-19)
 
 
