@@ -116,7 +116,7 @@ export const useBuildEnrollmentPayload = ({
             dataEntryFieldsMeta,
             formFoundation,
         );
-        const { enrolledAt, occurredAt, assignee } = serverValuesForMainValues;
+        const { enrolledAt, occurredAt, assignee, geometry: enrollmentGeometry } = serverValuesForMainValues;
 
         const { stages } = getTrackerProgramThrowIfNotFound(programId);
 
@@ -167,6 +167,7 @@ export const useBuildEnrollmentPayload = ({
             enrolledAt,
             attributes,
             events: allEventsToBeCreated,
+            geometry: enrollmentGeometry,
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(serverValuesForFormValues);
