@@ -10,7 +10,6 @@ import { convertClientToServer, convertFormToClient } from '../../../../converte
 import {
     convertDataEntryValuesToClientValues,
 } from '../../../DataEntry/common/convertDataEntryValuesToClientValues';
-import { capitalizeFirstLetter } from '../../../../../capture-core-utils/string';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import {
     useBuildFirstStageRegistration,
@@ -25,8 +24,8 @@ import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
 } from '../../../Pages/New/RegistrationDataEntry/helpers';
-import { FEATURETYPE } from '../../../../constants';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
+import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -65,35 +64,6 @@ function getServerValuesForMainValues(
 
     return serverValues;
 }
-
-function getPossibleTetFeatureTypeKey(serverValues: Object) {
-    return Object
-        .keys(serverValues)
-        .find(key => key.startsWith('FEATURETYPE_'));
-}
-
-function buildGeometryProp(key: string, serverValues: Object) {
-    if (!serverValues[key]) {
-        return undefined;
-    }
-    const type = capitalizeFirstLetter(key.replace('FEATURETYPE_', '').toLocaleLowerCase());
-    const coordinates = standardGeoJson(serverValues[key]);
-    return {
-        type,
-        coordinates,
-    };
-}
-
-const standardGeoJson = (geometry: Array<number> | { longitude: number, latitude: number }) => {
-    if (Array.isArray(geometry)) {
-        return geometry;
-    } else if (geometry.longitude && geometry.latitude) {
-        return [geometry.longitude, geometry.latitude];
-    }
-    return undefined;
-};
-
-const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
 
 const deriveAttributesFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
