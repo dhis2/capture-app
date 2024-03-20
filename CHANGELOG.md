@@ -1,3 +1,10 @@
+## [100.67.3](https://github.com/dhis2/capture-app/compare/v100.67.2...v100.67.3) (2024-03-20)
+
+
+### Bug Fixes
+
+* [DHIS2-17108][DHIS2-15681] enrollment and TET geometry are not stored and properly displayed ([#3582](https://github.com/dhis2/capture-app/issues/3582)) ([46b9546](https://github.com/dhis2/capture-app/commit/46b9546235c5fceafd8576af8c77687eeb61bd1a))
+
 ## [100.67.2](https://github.com/dhis2/capture-app/compare/v100.67.1...v100.67.2) (2024-03-20)
 
 
