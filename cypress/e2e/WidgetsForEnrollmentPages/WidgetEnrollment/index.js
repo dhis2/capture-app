@@ -244,3 +244,10 @@ Given(/^the enrollment owner organisation unit is (.*)/, (orgunit) => {
             .should('exist');
     });
 });
+
+When('you see the enrollment minimap', () => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('.leaflet-container').should('exist');
+    });
+});
+

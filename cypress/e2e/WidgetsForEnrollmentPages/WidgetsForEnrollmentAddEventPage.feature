@@ -121,3 +121,7 @@ Feature: The user interacts with the widgets on the enrollment add event page
     And the user opens the enrollment actions menu
     When the user completes the enrollment and the active events
     Then the user sees the enrollment status and the Baby Postnatal event status is completed
+
+  Scenario: User can see the enrollment minimap
+    Given you land on the enrollment dashboard page by having typed #/enrollmentEventNew?enrollmentId=LltDWGFdwTX&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=lmcLfONF8rY&stageId=A03MvHHogjR
+    Then you see the enrollment minimap
