@@ -1,3 +1,10 @@
+## [100.67.2](https://github.com/dhis2/capture-app/compare/v100.67.1...v100.67.2) (2024-03-20)
+
+
+### Bug Fixes
+
+* [DHIS2-16767] Refactor widgets empty text to be dynamic ([#3574](https://github.com/dhis2/capture-app/issues/3574)) ([093cf9d](https://github.com/dhis2/capture-app/commit/093cf9d05e764eb4cccceb0e4a5b646308263b04))
+
 ## [100.67.1](https://github.com/dhis2/capture-app/compare/v100.67.0...v100.67.1) (2024-03-19)
 
 
