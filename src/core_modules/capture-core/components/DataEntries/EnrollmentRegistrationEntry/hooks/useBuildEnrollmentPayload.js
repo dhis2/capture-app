@@ -170,19 +170,17 @@ export const useBuildEnrollmentPayload = ({
             geometry: enrollmentGeometry,
         };
 
-        const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(serverValuesForFormValues);
-        let geometry;
-        if (tetFeatureTypeKey) {
-            geometry = buildGeometryProp(tetFeatureTypeKey, serverValuesForFormValues);
-            delete serverValuesForFormValues[tetFeatureTypeKey];
-        }
+        const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
+        const tetGeometry = tetFeatureTypeKey ?
+            buildGeometryProp(tetFeatureTypeKey, formServerValues)
+            : undefined;
 
         return {
             trackedEntity: teiId || generateUID(),
             orgUnit: orgUnitId,
             trackedEntityType: trackedEntityTypeId,
             attributes,
-            geometry,
+            geometry: tetGeometry,
             enrollments: [enrollment],
         };
     };
