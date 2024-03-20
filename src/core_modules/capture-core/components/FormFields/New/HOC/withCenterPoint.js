@@ -19,7 +19,7 @@ const getCenterPoint = (InnerComponent: ComponentType<any>) => (props: Object) =
     const { orgUnit, ...passOnProps } = props;
     const [orgUnitKey, setOrgUnitKey] = useState(orgUnit.id);
     const [shouldFetch, setShouldFetch] = useState(false);
-    const queryKey = ['organisationUnit', orgUnitKey];
+    const queryKey = ['organisationUnit', 'geometry', orgUnitKey];
     const queryFn = {
         resource: 'organisationUnits',
         id: () => orgUnitKey,

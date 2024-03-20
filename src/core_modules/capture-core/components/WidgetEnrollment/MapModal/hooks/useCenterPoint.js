@@ -17,7 +17,7 @@ const convertToClientCoordinates = ({ coordinates, type }: { coordinates: any[],
 
 export const useCenterPoint = (orgUnitId: string, storedCenter: ?[number, number]) => {
     const [orgUnitKey, setOrgUnitKey] = useState(orgUnitId);
-    const queryKey = ['organisationUnit', orgUnitKey];
+    const queryKey = ['organisationUnit', 'geometry', orgUnitKey];
     const queryFn = {
         resource: 'organisationUnits',
         id: () => orgUnitKey,
