@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Mai Nguyen <thanhmai.jica@gmail.com>, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2023
-# Philip Larsen Donnelly, 2023
-# Viktor Varland <viktor@dhis2.org>, 2023
+# Philip Larsen Donnelly, 2024
+# Mai Nguyen <thanhmai.jica@gmail.com>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2023-09-12T06:24:49.265Z\n"
+"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2023\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,10 +80,6 @@ msgstr "gặp lỗi trong quá trình xác thực trường"
 
 msgid "error"
 msgstr "lỗi"
-
-msgid ""
-"Plugins are not yet available - Please contact your system administrator"
-msgstr ""
 
 msgid "This value is validating"
 msgstr "Giá trị này đang xác thực"
@@ -164,6 +160,9 @@ msgid "Complete event"
 msgstr "Hoàn tất chương trình"
 
 msgid "{{ stageName }} - Basic info"
+msgstr ""
+
+msgid "{{ stageName }} - Assignee"
 msgstr ""
 
 msgid "{{ stageName }} - Status"
@@ -324,6 +323,29 @@ msgstr ""
 msgid "An error has occurred. See log for details"
 msgstr "Một lỗi đã xảy ra. Xem nhật ký để biết chi tiết"
 
+msgid "{{programStageName}} completed"
+msgstr ""
+
+msgid ""
+"Would you like to complete the enrollment and all active events as well?"
+msgstr ""
+
+msgid "{{count}} event in {{programStageName}}"
+msgid_plural "{{count}} event in {{programStageName}}"
+msgstr[0] ""
+
+msgid "Yes, complete enrollment and events"
+msgstr ""
+
+msgid "Complete enrollment only"
+msgstr ""
+
+msgid "Would you like to complete the enrollment?"
+msgstr ""
+
+msgid "Complete enrollment"
+msgstr "Hoàn tất đăng ký"
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Tồn tại một bản sao nhưng có một số lỗi, hãy xem nhật ký để biết chi tiết"
@@ -341,7 +363,7 @@ msgstr "Bạn đã đăng ký {{attributeName}} này"
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr "{{TrackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
+msgstr "{{trackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
 
 msgid "Show registered {{trackedEntityTypeName}}"
 msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
@@ -657,24 +679,17 @@ msgstr ""
 msgid "Opt out for {{programName}}"
 msgstr ""
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
-msgid ""
-"There is an error while opening this enrollment. Please enter a valid url."
+msgid "Program with id \"{{programId}}\" does not exist"
 msgstr ""
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-
-msgid "Enrollment Dashboard"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
-msgstr ""
-
-msgid "No feedback for this enrollment yet"
 msgstr ""
 
 msgid "Quick actions"
@@ -754,20 +769,11 @@ msgstr ""
 msgid "There was an error opening the Page"
 msgstr ""
 
-msgid "Enrollment{{escape}} New Event"
-msgstr ""
-
 msgid "There was an error loading the page"
 msgstr ""
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Chọn một đơn vị đăng ký để bắt đầu báo cáo"
-
-msgid "There are no feedbacks for this event"
-msgstr ""
-
-msgid "There are no indicators for this event"
-msgstr ""
 
 msgid "Program stage is invalid"
 msgstr ""
@@ -795,18 +801,6 @@ msgstr ""
 
 msgid "Stage"
 msgstr "Giai Đoạn Chương Trình"
-
-msgid "Enrollment{{escape}} View Event"
-msgstr ""
-
-msgid "Enrollment{{escape}} Edit Event"
-msgstr ""
-
-msgid "The enrollment event data could not be found"
-msgstr ""
-
-msgid "There are no feedback for this event"
-msgstr ""
 
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
@@ -911,6 +905,9 @@ msgstr ""
 msgid "Edit event"
 msgstr "Sửa sự kiện"
 
+msgid "View changelog"
+msgstr ""
+
 msgid "Event details"
 msgstr "Chi tiết sự kiện"
 
@@ -920,18 +917,6 @@ msgid ""
 msgstr ""
 "Rời khỏi trang này sẽ hủy mọi lựa chọn bạn đã thực hiện cho một mối quan hệ "
 "mới"
-
-msgid "No one is assigned to this event"
-msgstr "Không ai được chỉ định cho sự kiện này"
-
-msgid "Assign"
-msgstr "Gán"
-
-msgid "Event assigned to {{name}}"
-msgstr "Sự kiện được chỉ định cho {{name}}"
-
-msgid "Feedbacks"
-msgstr "Phản hồi"
 
 msgid "Show all events"
 msgstr "Hiện tất cả sự kiện"
@@ -945,6 +930,21 @@ msgstr "Không thể tải sự kiện"
 msgid "Organisation unit could not be loaded"
 msgstr "Không thể tải đơn vị"
 
+msgid "Dashboard"
+msgstr "Bảng điều khiển"
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "Selected program"
 msgstr "Chương trình đã chọn"
 
@@ -954,7 +954,14 @@ msgstr "Tìm kiếm {{uniqueAttrName}}"
 msgid "Search by attributes"
 msgstr "Tìm kiếm theo thuộc tính"
 
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+
 msgid "Could not retrieve metadata. Please try again later."
+msgstr ""
+
+msgid "The enrollment event data could not be found"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1089,17 +1096,32 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "New {{trackedEntityName}} in {{programName}}"
+msgid "Create new in another program"
 msgstr ""
+
+msgid "Create new event"
+msgstr "Tạo Sự Kiện mới"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
-msgid "To work with the selected program,"
-msgstr "Để làm việc với chương trình đã chọn,"
+msgid "Assigned to"
+msgstr "Đã gán cho"
 
-msgid "open the Tracker Capture app"
-msgstr "mở ứng dụng Tracker Capture"
+msgid "You don't have access to edit this assignee"
+msgstr ""
+
+msgid "Edit"
+msgstr "Chỉnh sửa"
+
+msgid "No one is assigned to this event"
+msgstr "Không ai được chỉ định cho sự kiện này"
+
+msgid "You don't have access to assign an assignee"
+msgstr ""
+
+msgid "Assign"
+msgstr "Gán"
 
 msgid "This program is protected"
 msgstr "Chương trình này đã được bảo vệ"
@@ -1161,6 +1183,12 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr "Đánh dấu để theo-dõi"
 
+msgid "Transfer"
+msgstr ""
+
+msgid "An error occurred while transferring ownership"
+msgstr ""
+
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
@@ -1169,9 +1197,6 @@ msgstr "Vĩ độ"
 
 msgid "Longitude"
 msgstr "Kinh độ"
-
-msgid "Edit"
-msgstr "Chỉnh sửa"
 
 msgid "Set coordinates"
 msgstr ""
@@ -1190,6 +1215,24 @@ msgstr ""
 
 msgid "Set area"
 msgstr "Đặt khu vực"
+
+msgid ""
+"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"{{newOrgUnit}}{{escape}}"
+msgstr ""
+
+msgid ""
+"You will lose access to the enrollment when transferring ownership to "
+"{{organisationUnit}}."
+msgstr ""
+
+msgid "Transfer Ownership"
+msgstr ""
+
+msgid ""
+"Choose the organisation unit to which enrollment ownership should be "
+"transferred."
+msgstr ""
 
 msgid "Enrollment date"
 msgstr "Ngày ghi vào"
@@ -1285,11 +1328,21 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+
 msgid "after"
 msgstr ""
 
 msgid "before"
 msgstr ""
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1337,10 +1390,28 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr ""
 
+msgid "You do not have access to delete this {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Delete {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
+"permanently remove the {{trackedEntityTypeName}} and all its associated "
+"enrollments and events in all programs."
+msgstr ""
+
+msgid "There was a problem deleting the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, delete {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "{{TETName}} profile"
+msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
 msgid "tracked entity instance"
@@ -1379,7 +1450,31 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
-msgid "New TEI Relationship"
+msgid "Changelog"
+msgstr ""
+
+msgid "No changes to display"
+msgstr ""
+
+msgid "Created"
+msgstr "Đã tạo"
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Date"
+msgstr "Ngày"
+
+msgid "User"
+msgstr "Người dùng"
+
+msgid "Data item"
+msgstr "Mục dữ liệu"
+
+msgid "Change"
+msgstr ""
+
+msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
 msgid "Missing implementation step"
@@ -1402,6 +1497,20 @@ msgid ""
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "Delete relationship"
+msgstr "Xóa quan hệ"
+
+msgid ""
+"Deleting the relationship is permanent and cannot be undone. Are you sure "
+"you want to delete this relationship?"
+msgstr ""
+
+msgid "Yes, delete relationship"
+msgstr ""
+
+msgid "An error occurred while deleting the relationship."
 msgstr ""
 
 msgid "To open this relationship, please wait until saving is complete"
@@ -1434,9 +1543,6 @@ msgstr "Tải xuống dữ liệu ..."
 msgid "an error occurred loading working lists"
 msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 
-msgid "Assigned to"
-msgstr "Đã gán cho"
-
 msgid "Registration Date"
 msgstr "Ngày đăng ký"
 
@@ -1445,6 +1551,9 @@ msgstr "Không kích hoạt"
 
 msgid "Enrollment status"
 msgstr "Trạng thái đăng ký"
+
+msgid "Follow up"
+msgstr "Theo dõi"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
@@ -1566,11 +1675,11 @@ msgstr ""
 msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
+msgid "Error updating the Assignee"
+msgstr ""
+
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"
-
-msgid "Date"
-msgstr "Ngày"
 
 msgid "Time"
 msgstr "Thời gian"

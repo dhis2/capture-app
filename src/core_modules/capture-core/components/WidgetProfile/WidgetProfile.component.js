@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable complexity */
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,7 +8,8 @@ import { Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
-import { errorCreator } from 'capture-core-utils';
+import { useQueryClient } from 'react-query';
+import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
@@ -20,6 +22,9 @@ import {
     useTeiDisplayName,
 } from './hooks';
 import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
+import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
+import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
+import { OverflowMenu } from './OverflowMenu';
 
 const styles = {
     header: {
@@ -32,6 +37,10 @@ const styles = {
         padding: `0 ${spacers.dp16}`,
         marginBottom: spacers.dp8,
     },
+    actions: {
+        display: 'flex',
+        gap: '4px',
+    },
 };
 
 const showEditModal = (loading, error, showEdit, modalState) =>
@@ -43,8 +52,11 @@ const WidgetProfilePlain = ({
     readOnlyMode = false,
     orgUnitId = '',
     onUpdateTeiAttributeValues,
+    onDeleteSuccess,
     classes,
 }: PlainProps) => {
+    const supportsChangelog = useFeature(FEATURES.changelogs);
+    const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
@@ -56,8 +68,10 @@ const WidgetProfilePlain = ({
     const {
         loading: trackedEntityInstancesLoading,
         error: trackedEntityInstancesError,
+        trackedEntity,
         trackedEntityInstanceAttributes,
         trackedEntityTypeName,
+        trackedEntityTypeAccess,
         geometry,
     } = useTrackedEntityInstances(teiId, programId, storedAttributeValues, storedGeometry);
     const {
@@ -72,8 +86,9 @@ const WidgetProfilePlain = ({
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(program, trackedEntityInstanceAttributes);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program, trackedEntityInstanceAttributes);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
+    const displayChangelog = supportsChangelog && program.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
@@ -85,6 +100,10 @@ const WidgetProfilePlain = ({
             };
         }), [clientAttributesWithSubvalues]);
 
+    const onSaveExternal = useCallback(() => {
+        queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
+    }, [queryClient, teiId]);
+
     useEffect(() => {
         hasError && setTeiModalState(TEI_MODAL_STATE.OPEN_ERROR);
     }, [hasError]);
@@ -95,6 +114,11 @@ const WidgetProfilePlain = ({
             onUpdateTeiAttributeValues && onUpdateTeiAttributeValues(storedAttributeValues, teiDisplayName);
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
+
+    const canWriteData = useMemo(
+        () => trackedEntityTypeAccess?.data?.write && program?.access?.data?.write,
+        [trackedEntityTypeAccess, program],
+    );
 
     const renderProfile = () => {
         if (loading) {
@@ -118,15 +142,26 @@ const WidgetProfilePlain = ({
             <Widget
                 header={
                     <div className={classes.header}>
-                        <div>{i18n.t('{{TETName}} profile', {
-                            TETName: trackedEntityTypeName,
+                        <div>{i18n.t('{{trackedEntityTypeName}} profile', {
+                            trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         })}</div>
-                        {isEditable && (
-                            <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
-                                {i18n.t('Edit')}
-                            </Button>
-                        )}
+                        <div className={classes.actions}>
+                            {isEditable && (
+                                <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
+                                    {i18n.t('Edit')}
+                                </Button>
+                            )}
+                            <OverflowMenu
+                                trackedEntityTypeName={trackedEntityTypeName}
+                                canWriteData={canWriteData}
+                                trackedEntity={trackedEntity}
+                                onDeleteSuccess={onDeleteSuccess}
+                                displayChangelog={displayChangelog}
+                                teiId={teiId}
+                                programAPI={program}
+                            />
+                        </div>
                     </div>
                 }
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
@@ -147,6 +182,7 @@ const WidgetProfilePlain = ({
                         trackedEntityInstanceId={teiId}
                         onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
                         onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
+                        onSaveExternal={onSaveExternal}
                         modalState={modalState}
                         geometry={geometry}
                         trackedEntityName={trackedEntityTypeName}

@@ -116,7 +116,7 @@ export const useBuildEnrollmentPayload = ({
             dataEntryFieldsMeta,
             formFoundation,
         );
-        const { enrolledAt, occurredAt } = serverValuesForMainValues;
+        const { enrolledAt, occurredAt, assignee } = serverValuesForMainValues;
 
         const { stages } = getTrackerProgramThrowIfNotFound(programId);
 
@@ -140,6 +140,7 @@ export const useBuildEnrollmentPayload = ({
             currentEventValues,
             fieldsValue: dataEntryFieldValues,
             attributeCategoryOptions,
+            assignee,
         });
 
         const autoGenerateEvents = deriveAutoGenerateEvents({

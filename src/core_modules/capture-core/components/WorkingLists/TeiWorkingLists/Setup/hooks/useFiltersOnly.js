@@ -64,6 +64,16 @@ export const useFiltersOnly = ({
                     },
                 ]
                 : []),
+            {
+                id: MAIN_FILTERS.FOLLOW_UP,
+                type: dataElementTypes.BOOLEAN,
+                header: i18n.t('Follow up'),
+                showInMoreFilters: true,
+                multiValueFilter: false,
+                transformRecordsFilter: (rawFilter: string) => ({
+                    followUp: rawFilter.split(':')[1],
+                }),
+            },
             ...(enableUserAssignment
                 ? [
                     {

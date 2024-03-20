@@ -10,6 +10,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { convertServerToClient, convertClientToList } from '../../../../converters';
 import type { Props, StyledProps } from './linkedEntityTableBody.types';
+import { DeleteRelationship } from './DeleteRelationship';
 
 const styles = {
     row: {
@@ -26,16 +27,18 @@ const LinkedEntityTableBodyPlain = ({
     columns,
     onLinkedRecordClick,
     context,
+    onDeleteRelationship,
     classes,
 }: StyledProps) => (
-    <DataTableBody>
+    <DataTableBody dataTest="relationship-table-body">
         {
             linkedEntities
                 .map(({ id: entityId, values, baseValues, navigation }) => {
-                    const { pendingApiResponse } = baseValues || {};
+                    const { pendingApiResponse, relationshipId } = baseValues || {};
                     return (
                         <DataTableRow
                             key={entityId}
+                            dataTest={'relationship-table-row'}
                             className={pendingApiResponse ? classes.rowDisabled : classes.row}
                         >
                             {
@@ -76,6 +79,12 @@ const LinkedEntityTableBodyPlain = ({
                                         </Tooltip>
                                     );
                                 })}
+                            {context.display.showDeleteButton && (
+                                <DeleteRelationship
+                                    handleDeleteRelationship={() => onDeleteRelationship({ relationshipId })}
+                                    disabled={pendingApiResponse}
+                                />
+                            )}
                         </DataTableRow>
                     );
                 })

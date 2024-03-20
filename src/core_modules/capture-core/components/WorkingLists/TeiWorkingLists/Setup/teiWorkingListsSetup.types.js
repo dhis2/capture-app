@@ -30,7 +30,8 @@ type ExtractedProps = $ReadOnly<{|
     sortById: string,
     sortByDirection: string,
     templateSharingType: string,
-    apiTemplates: WorkingListTemplates
+    apiTemplates: WorkingListTemplates,
+    forceUpdateOnMount?: boolean,
 |}>;
 
 export type Props = $ReadOnly<{|

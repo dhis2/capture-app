@@ -1,6 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { DataEntry } from '../../../DataEntry';
+import { Assignee } from '../../SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -23,6 +24,7 @@ import labelTypeClasses from './fieldLabels.module.css';
 import { withCleanUp } from './withCleanUp';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 import { stageMainDataIds } from './getDataEntryPropsToInclude';
+import { withTransformPropName } from '../../../../HOC';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -228,6 +230,36 @@ const getReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+const getAssigneeSettingsFn = () => {
+    const assigneeComponent =
+        withTransformPropName(['onBlur', 'onSet'])(
+            withFocusSaver()(
+                withFilterProps((props: Object) => {
+                    const defaultFiltred = defaultFilterProps(props);
+                    const { validationAttempted, touched, ...passOnProps } = defaultFiltred;
+                    return passOnProps;
+                })(Assignee),
+            ),
+        );
+
+    return {
+        isApplicable: (props: Object) => {
+            const enableUserAssignment = props.firstStageMetaData && props.firstStageMetaData.stage.enableUserAssignment;
+            return !!enableUserAssignment;
+        },
+        getComponent: () => assigneeComponent,
+        getComponentProps: (props: Object) => createComponentProps({}, {
+            orientation: getOrientation(props.formHorizontal),
+        }),
+        getPropName: () => 'assignee',
+        getValidatorContainers: () => [],
+        getMeta: () => ({
+            section: sectionKeysForFirstStageDataEntry.ASSIGNEE,
+        }),
+    };
+};
+
 const StageLocationHOC = withDataEntryFieldIfApplicable(getStageGeometrySettings())(withCleanUp()(DataEntry));
 const CompleteHOC = withDataEntryFieldIfApplicable(getCompleteFieldSettingsFn())(StageLocationHOC);
-export const FirstStageDataEntry = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(CompleteHOC);
+const AssigneeHOC = withDataEntryFieldIfApplicable(getAssigneeSettingsFn())(CompleteHOC);
+export const FirstStageDataEntry = withDataEntryFieldIfApplicable(getReportDateSettingsFn())(AssigneeHOC);

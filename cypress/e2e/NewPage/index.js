@@ -203,21 +203,13 @@ When('you select the Inpatient morbidity and mortality program', () => {
         .click();
 });
 
-When('you see a dropdown button', () => {
+When('you click the Create new button', () => {
     cy.get('[data-test="new-button"]')
-        .contains('New')
-        .should('exist');
-});
-
-When('you click the "New..." option', () => {
-    cy.get('[data-test="new-button"]')
-        .click();
-    cy.get('[data-test="new-menuitem-two"]')
         .click();
 });
 
-When('you click the the first option option', () => {
-    cy.get('[data-test="new-button"]')
+When('you click the first option in split button dropdown', () => {
+    cy.get('[data-test="new-button-toggle"]')
         .click();
     cy.get('[data-test="new-menuitem-one"]')
         .click();

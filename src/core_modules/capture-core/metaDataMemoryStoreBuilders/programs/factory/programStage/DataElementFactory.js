@@ -12,7 +12,9 @@ import type {
 import { DataElement, DateDataElement, dataElementTypes, Section } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';
-import { isNotValidOptionSet } from '../../../../utils/isNotValidOptionSet';
+import {
+    handleUnsupportedMultiText,
+} from '../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 
 export class DataElementFactory {
     static propertyNames = {
@@ -35,13 +37,16 @@ export class DataElementFactory {
     }
 
     locale: ?string;
+    minorServerVersion: number;
     optionSetFactory: OptionSetFactory;
 
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,
+        minorServerVersion: number,
     ) {
         this.locale = locale;
+        this.minorServerVersion = minorServerVersion;
         this.optionSetFactory = new OptionSetFactory(
             cachedOptionSets,
             locale,
@@ -105,11 +110,8 @@ export class DataElementFactory {
         dataElement.section = section;
         dataElement.type = dataElementType;
         await this._setBaseProperties(dataElement, cachedProgramStageDataElement, cachedDataElement);
-        if (isNotValidOptionSet(dataElement.type, dataElement.optionSet)) {
-            log.error(errorCreator(DataElementFactory.errorMessages.MULIT_TEXT_WITH_NO_OPTIONS_SET)({ dataElement }));
-            return null;
-        }
-        return dataElement;
+
+        return handleUnsupportedMultiText(dataElement, this.minorServerVersion);
     }
 
     async _buildDateDataElement(

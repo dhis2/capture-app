@@ -25,3 +25,5 @@ export { TeiRegistrationEntry } from './TeiRegistrationEntry/TeiRegistrationEntr
 export { SingleEventRegistrationEntry } from './SingleEventRegistrationEntry/SingleEventRegistrationEntry.container';
 export type { SaveForDuplicateCheck as SaveForEnrollmentAndTeiRegistration } from './common/TEIAndEnrollment/DuplicateCheckOnSave';
 export type { ExistingUniqueValueDialogActionsComponent } from './withErrorMessagePostProcessor';
+export { withAskToCompleteEnrollment } from './common/trackerEvent';
+

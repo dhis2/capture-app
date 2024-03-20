@@ -8,6 +8,7 @@ import { DisplayException } from 'capture-core/utils/exceptions';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { environments } from 'capture-core/constants';
 import { buildUrl } from 'capture-core-utils';
+import { initFeatureAvailability } from 'capture-core-utils/featuresSupport';
 import { initializeAsync } from './init';
 import { getStore } from '../../store/getStore';
 
@@ -43,9 +44,11 @@ export const AppLoader = (props: Props) => {
 
     const load = useCallback(async () => {
         try {
+            initFeatureAvailability(serverVersion);
             await initializeAsync(
                 onCacheExpired,
                 querySingleResource,
+                serverVersion.minor,
             );
             const store = getStore(
                 history, {

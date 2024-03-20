@@ -3,6 +3,8 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { Tag } from '@dhis2/ui';
+import { PreviewImage } from 'capture-ui';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
@@ -31,7 +33,16 @@ type FileClientValue = {
     value: string,
 };
 
-function convertResourceForDisplay(clientValue: FileClientValue) {
+type ImageClientValue = {
+    ...FileClientValue,
+    previewUrl: string,
+};
+
+function convertFileForDisplay(clientValue: FileClientValue) {
+    // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
+    if (typeof clientValue === 'string' || clientValue instanceof String) {
+        return clientValue;
+    }
     return (
         <a
             href={clientValue.url}
@@ -42,6 +53,19 @@ function convertResourceForDisplay(clientValue: FileClientValue) {
             {clientValue.name}
         </a>
     );
+}
+
+function convertImageForDisplay(clientValue: ImageClientValue) {
+    // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
+    if (typeof clientValue === 'string' || clientValue instanceof String) {
+        return clientValue;
+    }
+    return featureAvailable(FEATURES.trackerImageEndpoint) ? (
+        <PreviewImage
+            url={clientValue.url}
+            previewUrl={clientValue.previewUrl}
+        />
+    ) : convertFileForDisplay(clientValue);
 }
 
 function convertRangeForDisplay(parser: any, clientValue: any) {
@@ -89,8 +113,8 @@ const valueConvertersForType = {
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.AGE]: convertDateForListDisplay,
-    [dataElementTypes.FILE_RESOURCE]: convertResourceForDisplay,
-    [dataElementTypes.IMAGE]: convertResourceForDisplay,
+    [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
+    [dataElementTypes.IMAGE]: convertImageForDisplay,
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
     [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
@@ -107,6 +131,33 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
             return dataElement.optionSet.getMultiOptionsText(value);
         }
         return dataElement.optionSet.getOptionText(value);
+    }
+
+    // $FlowFixMe dataElementTypes flow error
+    return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+}
+
+
+// This function will replace the convertValue function in the future (as it should not require a dataElement class to use optionSet)
+export function convert(
+    value: any,
+    type: $Keys<typeof dataElementTypes>,
+    options: ?Array<{ code: string, name: string}>,
+) {
+    if (!value && value !== 0 && value !== false) {
+        return value;
+    }
+
+    if (options) {
+        if (type === dataElementTypes.MULTI_TEXT) {
+            return options
+                .filter(option => value.includes(option.code))
+                .map(option => option.name)
+                .join(', ');
+        }
+        return options
+            .find(option => option.code === value)
+            ?.name ?? value;
     }
 
     // $FlowFixMe dataElementTypes flow error
