@@ -430,6 +430,10 @@ And('you are in Child programme registration page', () => {
     cy.visit('/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+And('you are in Child programme and Buma MCHP organization unit registration page', () => {
+    cy.visit('/#/new?programId=IpHINAT79UW&orgUnitId=AXZq6q7Dr6E');
+});
+
 And('you fill the form with age 0', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(9)

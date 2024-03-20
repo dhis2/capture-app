@@ -175,7 +175,7 @@ Feature: User creates a new entries from the registration page
     Then you see the enrollment event Edit page
 
   Scenario: New person in Tracker Program > Submitting the form with enrollment coordinate
-    Given you are in Child programme registration page
+    Given you are in Child programme and Buma MCHP organization unit registration page
     When you fill the Child Program program registration form with unique values
     And you click the save person submit button
     And you see the enrollment minimap
