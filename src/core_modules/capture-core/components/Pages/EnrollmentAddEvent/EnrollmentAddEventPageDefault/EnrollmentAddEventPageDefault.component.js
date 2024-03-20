@@ -95,6 +95,8 @@ const EnrollmentAddEventPagePain = ({
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
+                feedbackEmptyText={i18n.t('No feedback for this event yet')}
+                indicatorEmptyText={i18n.t('No indicator output for this event yet')}
             />
         </div>
     );
