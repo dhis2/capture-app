@@ -1,2 +1,2 @@
 // @flow
-export { getTeiListData } from './getTeiListData';
+export { getTeiListData, createApiQueryArgs as createApiTrackedEntitiesQueryArgs } from './getTeiListData';

@@ -142,7 +142,7 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
 export function convert(
     value: any,
     type: $Keys<typeof dataElementTypes>,
-    options: ?Array<{ code: string, name: string}>,
+    options: ?Array<{ code: string, name: string }>,
 ) {
     if (!value && value !== 0 && value !== false) {
         return value;

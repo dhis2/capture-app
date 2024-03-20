@@ -83,7 +83,7 @@ export const useTrackedEntityInstances = (
     }, [data?.trackedEntityInstance?.trackedEntityType, refetchTET]);
 
     useEffect(() => {
-        if (storedGeometry) {
+        if (storedGeometry !== undefined) {
             setGeometry(storedGeometry);
         }
     }, [storedGeometry]);

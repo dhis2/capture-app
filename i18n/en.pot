@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
-"PO-Revision-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
+"PO-Revision-Date: 2024-03-16T14:40:27.542Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -697,6 +697,12 @@ msgstr "Program with id \"{{programId}}\" does not exist"
 msgid "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
+msgid "No feedback for this enrollment yet"
+msgstr "No feedback for this enrollment yet"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "No indicator output for this enrollment yet"
+
 msgid "Quick actions"
 msgstr "Quick actions"
 
@@ -782,6 +788,12 @@ msgstr "There was an error loading the page"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Choose a registering unit to start reporting"
+
+msgid "No feedback for this event yet"
+msgstr "No feedback for this event yet"
+
+msgid "No indicator output for this event yet"
+msgstr "No indicator output for this event yet"
 
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
@@ -945,12 +957,6 @@ msgstr "Edit Event"
 
 msgid "View Event"
 msgstr "View Event"
-
-msgid "No feedback for this enrollment yet"
-msgstr "No feedback for this enrollment yet"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "No indicator output for this enrollment yet"
 
 msgid "Selected program"
 msgstr "Selected program"
@@ -1554,15 +1560,6 @@ msgstr "Program stage name"
 msgid "Working list could not be loaded"
 msgstr "Working list could not be loaded"
 
-msgid "Download as JSON"
-msgstr "Download as JSON"
-
-msgid "Download as CSV"
-msgstr "Download as CSV"
-
-msgid "Download with current filters"
-msgstr "Download with current filters"
-
 msgid "Download data..."
 msgstr "Download data..."
 
@@ -1634,6 +1631,15 @@ msgstr "Show Less"
 
 msgid "Show All"
 msgstr "Show All"
+
+msgid "Download as JSON"
+msgstr "Download as JSON"
+
+msgid "Download as CSV"
+msgstr "Download as CSV"
+
+msgid "Download with current filters"
+msgstr "Download with current filters"
 
 msgid "An error has occured. See log for details"
 msgstr "An error has occured. See log for details"

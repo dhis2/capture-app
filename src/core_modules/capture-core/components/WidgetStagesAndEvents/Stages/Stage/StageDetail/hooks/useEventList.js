@@ -49,22 +49,11 @@ const getAllFieldsWithValue = (
     dataElements: Array<StageDataElement>,
     dataElementsByType: Array<{type: string, eventId: string, ids: Object}>,
 ) => dataElements
-    .reduce((acc, { id, type, options }) => {
+    .reduce((acc, { id, type }) => {
         const value = dataElementsByType
             .find(item => item.type === type && item.eventId === eventId)?.ids?.[id];
         if (type && value) {
-            if (options) {
-                if (options[value]) {
-                    acc[id] = options[value];
-                } else {
-                    log.error(
-                        errorCreator('Missing value in options')({ id, value, options }),
-                    );
-                    acc[id] = convertServerToClient(value, type);
-                }
-            } else {
-                acc[id] = convertServerToClient(value, type);
-            }
+            acc[id] = convertServerToClient(value, type);
         } else {
             acc[id] = undefined;
         }

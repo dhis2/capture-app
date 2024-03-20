@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { dataEntryIds } from 'capture-core/constants';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
@@ -108,6 +109,8 @@ export const EnrollmentEditEventPageComponent = ({
             onSaveAssigneeError={onSaveAssigneeError}
             onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
+            feedbackEmptyText={i18n.t('No feedback for this event yet')}
+            indicatorEmptyText={i18n.t('No indicator output for this event yet')}
         />
         <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
     </OrgUnitFetcher>

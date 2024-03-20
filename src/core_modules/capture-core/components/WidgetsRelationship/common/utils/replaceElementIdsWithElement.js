@@ -16,6 +16,7 @@ type Elements = {|
         id: string,
         displayName: string,
         valueType: $Keys<typeof dataElementTypes>,
+        options?: Array<{ code: string, name: string }>,
     },
 |}
 
@@ -28,6 +29,7 @@ type ElementArray = $ReadOnlyArray<{|
     id: string,
     type: $Keys<typeof dataElementTypes>,
     displayName: string,
+    options?: Array<{ code: string, name: string }>,
 |}>;
 
 export const replaceElementIdsWithElement = (
@@ -64,6 +66,7 @@ export const replaceElementIdsWithElement = (
                 id: elementId,
                 type: element.valueType,
                 displayName: element.displayName,
+                options: element.options,
             };
         })
         .filter(element => element);

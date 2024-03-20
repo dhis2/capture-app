@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
@@ -190,6 +191,8 @@ export const EnrollmentPageDefault = () => {
             ruleEffects={ruleEffects}
             widgetEnrollmentStatus={widgetEnrollmentStatus}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
+            feedbackEmptyText={i18n.t('No feedback for this enrollment yet')}
+            indicatorEmptyText={i18n.t('No indicator output for this enrollment yet')}
         />
     );
 };

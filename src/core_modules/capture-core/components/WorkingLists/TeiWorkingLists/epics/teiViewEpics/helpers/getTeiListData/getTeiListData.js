@@ -6,7 +6,7 @@ import type { RawQueryArgs } from './types';
 import type { InputMeta } from './getTeiListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
 
-const createApiQueryArgs = ({
+export const createApiQueryArgs = ({
     page,
     pageSize,
     programId: program,
@@ -37,14 +37,14 @@ export const getTeiListData = async (
         absoluteApiPath,
     }: InputMeta,
 ) => {
-    const { resource, queryArgs } = {
-        resource: 'tracker/trackedEntities',
-        queryArgs: createApiQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
+    const { url, queryParams } = {
+        url: 'tracker/trackedEntities',
+        queryParams: createApiQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
     };
 
     const apiResponse = await querySingleResource({
-        resource,
-        params: queryArgs,
+        resource: url,
+        params: queryParams,
     });
     const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, apiResponse);
     const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
@@ -54,8 +54,8 @@ export const getTeiListData = async (
     return {
         recordContainers: clientTeisWithSubvalues,
         request: {
-            resource,
-            queryArgs,
+            url,
+            queryParams,
         },
     };
 };

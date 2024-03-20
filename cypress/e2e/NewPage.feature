@@ -174,6 +174,13 @@ Feature: User creates a new entries from the registration page
     And you click the save person submit button
     Then you see the enrollment event Edit page
 
+  Scenario: New person in Tracker Program > Submitting the form with enrollment coordinate
+    Given you are in Child programme and Buma MCHP organization unit registration page
+    When you fill the Child Program program registration form with unique values
+    And you click the save person submit button
+    And you see the enrollment minimap
+    And you delete the recently added tracked entity
+
   Scenario: New person in Tracker Program > Submitting the form from the duplicates modal navigates you to the user dashboard
     Given you are in the WHO RMNCH program registration page
     And the data store is clean

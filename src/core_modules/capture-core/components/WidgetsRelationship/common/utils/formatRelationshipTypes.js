@@ -11,6 +11,12 @@ type Element = {|
     id: string,
     valueType: string,
     displayName: string,
+    optionSet?: {|
+        options: Array<{
+            code: string,
+            name: string,
+        }>,
+    |},
 |}
 
 type Props = {|
@@ -24,13 +30,21 @@ export const formatRelationshipTypes = ({
     attributes,
     dataElements,
 }: Props): RelationshipTypes => {
-    const attributesById = attributes.reduce((acc, { id, valueType, displayName }) => {
-        acc[id] = { valueType, displayName };
+    const attributesById = attributes.reduce((acc, { id, valueType, displayName, optionSet }) => {
+        acc[id] = {
+            valueType,
+            displayName,
+            options: optionSet?.options,
+        };
         return acc;
     }, {});
 
-    const dataElementsById = dataElements.reduce((acc, { id, valueType, displayName }) => {
-        acc[id] = { valueType, displayName };
+    const dataElementsById = dataElements.reduce((acc, { id, valueType, displayName, optionSet }) => {
+        acc[id] = {
+            valueType,
+            displayName,
+            options: optionSet?.options,
+        };
         return acc;
     }, {});
 

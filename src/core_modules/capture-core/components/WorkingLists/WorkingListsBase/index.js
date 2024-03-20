@@ -52,4 +52,5 @@ export type {
     UpdateTemplate,
     WorkingListTemplate,
     WorkingListTemplates,
+    WorkingListsOutputProps,
 } from './workingListsBase.types';

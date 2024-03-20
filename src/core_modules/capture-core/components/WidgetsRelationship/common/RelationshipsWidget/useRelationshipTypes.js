@@ -8,6 +8,12 @@ type Element = {|
     id: string,
     displayName: string,
     valueType: string,
+    optionSet?: {|
+        options: Array<{
+            code: string,
+            name: string,
+        }>,
+    |},
 |};
 
 const relationshipTypesQuery = {
@@ -34,7 +40,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         const filteredAttributeQuery = {
             resource: 'trackedEntityAttributes',
             params: {
-                fields: 'id,displayName,valueType',
+                fields: 'id,displayName,valueType,optionSet[id,options[code,name]]',
                 filter: `id:in:[${Object.keys(attributeIds).join(',')}]`,
                 paging: false,
             },
@@ -43,7 +49,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         const filteredDataElementQuery = {
             resource: 'dataElements',
             params: {
-                fields: 'id,displayName,valueType',
+                fields: 'id,displayName,valueType,optionSet[id,options[code,name]]',
                 filter: `id:in:[${Object.keys(dataElementIds).join(',')}]`,
                 paging: false,
             },
