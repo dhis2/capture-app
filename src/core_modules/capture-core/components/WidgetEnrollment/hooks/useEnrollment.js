@@ -27,7 +27,7 @@ export const useEnrollment = ({
                     resource: 'tracker/enrollments/',
                     id: ({ variables: { enrollmentId: updatedEnrollmentId } }) => updatedEnrollmentId,
                     params: {
-                        fields: 'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,occurredAt,followUp,deleted,createdBy,updatedBy,attributes',
+                        fields: 'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,occurredAt,followUp,deleted,createdBy,updatedBy,attributes,geometry',
                     },
                 },
             }),
