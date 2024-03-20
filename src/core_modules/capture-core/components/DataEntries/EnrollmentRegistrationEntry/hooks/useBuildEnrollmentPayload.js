@@ -77,11 +77,21 @@ function buildGeometryProp(key: string, serverValues: Object) {
         return undefined;
     }
     const type = capitalizeFirstLetter(key.replace('FEATURETYPE_', '').toLocaleLowerCase());
+    const coordinates = standardGeoJson(serverValues[key]);
     return {
         type,
-        coordinates: serverValues[key],
+        coordinates,
     };
 }
+
+const standardGeoJson = (geometry: Array<number> | { longitude: number, latitude: number }) => {
+    if (Array.isArray(geometry)) {
+        return geometry;
+    } else if (geometry.longitude && geometry.latitude) {
+        return [geometry.longitude, geometry.latitude];
+    }
+    return undefined;
+};
 
 const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
 
@@ -172,7 +182,7 @@ export const useBuildEnrollmentPayload = ({
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
         const tetGeometry = tetFeatureTypeKey ?
-            buildGeometryProp(tetFeatureTypeKey, formServerValues)
+            buildGeometryProp(tetFeatureTypeKey, formValues)
             : undefined;
 
         return {
