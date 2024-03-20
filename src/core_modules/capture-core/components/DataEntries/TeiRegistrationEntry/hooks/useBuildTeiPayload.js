@@ -6,6 +6,7 @@ import { convertClientToServer, convertFormToClient } from '../../../../converte
 import { capitalizeFirstLetter } from '../../../../../capture-core-utils/string';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import { FEATURETYPE } from '../../../../constants';
 import type {
     TeiPayload,
 } from '../../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
@@ -37,6 +38,12 @@ function buildGeometryProp(key: string, serverValues: Object) {
         coordinates: serverValues[key],
     };
 }
+const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
+
+const deriveAttributesFromFormValues = (formValues = {}) =>
+    Object.keys(formValues)
+        .filter(key => !geometryType(key))
+        .map(key => ({ attribute: key, value: formValues[key] }));
 
 export const useBuildTeiPayload = ({
     trackedEntityTypeId,
@@ -53,26 +60,19 @@ export const useBuildTeiPayload = ({
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
         const serverValuesForFormValues = formFoundation.convertValues(clientValues, convertClientToServer);
 
-        // $FlowFixMe
-        const attributes = Object.keys(serverValuesForFormValues)
-            .map(key => ({
-                attribute: key,
-                value: serverValuesForFormValues[key],
-            }));
+        const attributes = deriveAttributesFromFormValues(serverValuesForFormValues);
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(serverValuesForFormValues);
-        let geometry;
-        if (tetFeatureTypeKey) {
-            geometry = buildGeometryProp(tetFeatureTypeKey, serverValuesForFormValues);
-            delete serverValuesForFormValues[tetFeatureTypeKey];
-        }
+        const tetGeometry = tetFeatureTypeKey
+            ? buildGeometryProp(tetFeatureTypeKey, serverValuesForFormValues)
+            : undefined;
 
         return {
             attributes,
             trackedEntity: generateUID(),
             orgUnit: orgUnitId,
             trackedEntityType: trackedEntityTypeId,
-            geometry,
+            geometry: tetGeometry,
             enrollments: [],
         };
     };
