@@ -152,3 +152,7 @@ Feature: The user interacts with the widgets on the enrollment edit event
     When the user completes the enrollment and the active events
     Then the user sees the enrollment status and the Baby Postnatal event status is completed
 
+  Scenario: User can see the enrollment minimap
+    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=W1uHdJEjZUI&orgUnitId=DiszpKrYNg8
+    Then you see the enrollment minimap
+

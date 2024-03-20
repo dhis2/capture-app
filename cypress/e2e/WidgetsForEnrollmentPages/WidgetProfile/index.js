@@ -68,3 +68,10 @@ When('you confirm by clicking the "Yes, delete Focus area" button', () => {
 Then('you are redirected to the home page', () => {
     cy.url().should('include', 'selectedTemplateId=M3xtLkYBlKI');
 });
+
+Then('the user sees the tracked entity type polygon geometry', () => {
+    cy.get('[data-test="modal-edit-profile"]').within(() => {
+        cy.contains('Area on map saved').should('exist');
+        cy.contains('Edit area on map').should('exist');
+    });
+});

@@ -179,3 +179,13 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     And the user opens the enrollment actions menu
     When the user completes the enrollment and the active events
     Then the user sees the enrollment status and the Baby Postnatal event status is completed
+
+  Scenario: User can see the enrollment minimap
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=LltDWGFdwTX&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=lmcLfONF8rY
+    Then you see the enrollment minimap
+
+  Scenario: User can see in the profile widget the tracked entity type polygon geometry
+    Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=ZjixUoY4jE8&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&teiId=Imv2o18b9wX
+    And you see the widget with data-test profile-widget
+    When the user clicks the element containing the text: Edit
+    Then the user sees the tracked entity type polygon geometry
