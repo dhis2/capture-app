@@ -425,6 +425,7 @@ Then('you submit the form again from the duplicates modal', () => {
 And('you are in the WHO RMNCH program registration page', () => {
     cy.visit('/#/new?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
 });
+
 And('you are in Child programme registration page', () => {
     cy.visit('/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
@@ -588,4 +589,48 @@ Then('the first stage appears on registration page', () => {
         cy.contains('Report date').should('exist');
         cy.contains('Apgar Score').should('exist');
     });
+});
+
+And('you fill the Child Program program registration form with unique values', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('2021-01-01')
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type(20);
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(3)
+        .type(30)
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(4)
+        .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`)
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(5)
+        .type(`Beth-${Math.round((new Date()).getTime() / 1000)}`)
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(7)
+        .type('2021-01-01')
+        .blur();
+});
+
+And('you see the enrollment minimap', () => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('.leaflet-container').should('exist');
+    });
+});
+
+And('you delete the recently added tracked entity', () => {
+    cy.get('[data-test="widget-profile-overflow-menu"]')
+        .click();
+    cy.contains('Delete Person')
+        .click();
+    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
+        cy.contains('Yes, delete Person')
+            .click();
+    });
+    cy.url().should('include', 'selectedTemplateId=IpHINAT79UW');
 });
