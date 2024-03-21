@@ -1,3 +1,10 @@
+## [100.67.6](https://github.com/dhis2/capture-app/compare/v100.67.5...v100.67.6) (2024-03-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17035] changelog prioritised bugs ([#3572](https://github.com/dhis2/capture-app/issues/3572)) ([42a8892](https://github.com/dhis2/capture-app/commit/42a88922424ca61b05fcb3e60e8774165eaa1557))
+
 ## [100.67.5](https://github.com/dhis2/capture-app/compare/v100.67.4...v100.67.5) (2024-03-21)
 
 
