@@ -1,3 +1,10 @@
+## [100.67.4](https://github.com/dhis2/capture-app/compare/v100.67.3...v100.67.4) (2024-03-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17001] show image previews after editing event ([#3564](https://github.com/dhis2/capture-app/issues/3564)) ([67a820d](https://github.com/dhis2/capture-app/commit/67a820d7b2ddb7bf5f273ea2fa58c962ac1a3c17))
+
 ## [100.67.3](https://github.com/dhis2/capture-app/compare/v100.67.2...v100.67.3) (2024-03-20)
 
 
