@@ -48,7 +48,7 @@ const CoordinatesPlain = ({
     onSetCoordinates,
 }: CoordinatesProps) => {
     const [position, setPosition] = useState(defaultValues);
-    const [center, setCenter] = useState(initialCenter);
+    const [center, setCenter] = useState();
     const [tempLatitude, setTempLatitude] = useState(position?.[0]);
     const [tempLongitude, setTempLongitude] = useState(position?.[1]);
     const [isEditing, setEditing] = useState(!defaultValues);
@@ -92,7 +92,7 @@ const CoordinatesPlain = ({
 
     const renderMap = () => (
         <Map
-            center={center}
+            center={center ?? initialCenter}
             zoom={13}
             ref={(ref) => {
                 if (ref?.leafletElement) {

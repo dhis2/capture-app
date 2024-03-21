@@ -69,6 +69,7 @@ export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, 
     return (
         <DataEntryComponent
             {...passOnProps}
+            orgUnit={orgUnit}
             orgUnitId={orgUnitId}
             programId={programId}
             onUpdateDataEntryField={onUpdateDataEntryField}
