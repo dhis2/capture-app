@@ -26,7 +26,7 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, ..
             if (optionSet && optionSet.options) {
                 metadata.optionSet = optionSet.id;
                 metadata.options = optionSet.options.map(option => ({
-                    code: option.code,
+                    code: option.value,
                     name: option.text,
                 }));
             }
