@@ -35,7 +35,6 @@ import {
     VirtualizedSelectField,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
-import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
@@ -444,10 +443,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
         this.dataEntrySections = dataEntrySectionDefinitions;
         this.state = { mode: tabMode.REPORT };
         this.onHandleSwitchTab = this.onHandleSwitchTab.bind(this);
-    }
-
-    componentWillUnmount() {
-        inMemoryFileStore.clear();
     }
 
     onHandleSwitchTab = newMode => this.setState({ mode: newMode })
