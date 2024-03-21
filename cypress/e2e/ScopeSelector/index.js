@@ -294,7 +294,7 @@ And('you see the enrollment event Edit page but there is no org unit id in the u
 
 And('you see the enrollment event New page but there is no org unit id in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&programId=IpHINAT79UW&stageId=A03MvHHogjR&teiId=fhFQhO0xILJ`);
-    cy.contains('Choose a organisation unit to start reporting');
+    cy.contains('Choose an organisation unit to start reporting');
 });
 
 And('you see the enrollment event New page but there is no stage id in the url', () => {
