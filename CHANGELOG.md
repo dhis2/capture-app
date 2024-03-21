@@ -1,3 +1,10 @@
+## [100.67.8](https://github.com/dhis2/capture-app/compare/v100.67.7...v100.67.8) (2024-03-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17084] Filter Relationship Types for write access ([#3580](https://github.com/dhis2/capture-app/issues/3580)) ([439c7eb](https://github.com/dhis2/capture-app/commit/439c7eb267289442a3876104511135aa9363dc15))
+
 ## [100.67.7](https://github.com/dhis2/capture-app/compare/v100.67.6...v100.67.7) (2024-03-21)
 
 
