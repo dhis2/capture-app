@@ -1,3 +1,10 @@
+## [100.67.7](https://github.com/dhis2/capture-app/compare/v100.67.6...v100.67.7) (2024-03-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17110] Hide delete-icon in relationships if no write access ([#3581](https://github.com/dhis2/capture-app/issues/3581)) ([2471b94](https://github.com/dhis2/capture-app/commit/2471b941a8bc7be921addeac2e10c1f4c3d93008))
+
 ## [100.67.6](https://github.com/dhis2/capture-app/compare/v100.67.5...v100.67.6) (2024-03-21)
 
 
