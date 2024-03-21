@@ -1,3 +1,10 @@
+## [100.67.5](https://github.com/dhis2/capture-app/compare/v100.67.4...v100.67.5) (2024-03-21)
+
+
+### Bug Fixes
+
+* [DHIS2-6335] use custom map center point ([#3312](https://github.com/dhis2/capture-app/issues/3312)) ([2dbaffe](https://github.com/dhis2/capture-app/commit/2dbaffe5a01a11aa3eefc2cb9f5995c7d226bc88))
+
 ## [100.67.4](https://github.com/dhis2/capture-app/compare/v100.67.3...v100.67.4) (2024-03-21)
 
 
