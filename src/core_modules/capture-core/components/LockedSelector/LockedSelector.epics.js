@@ -63,7 +63,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable)
                 }
 
                 if (orgUnitId && !program.organisationUnits[orgUnitId]) {
-                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for selected registering unit'));
+                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for selected organisation unit'));
                 }
             }
 

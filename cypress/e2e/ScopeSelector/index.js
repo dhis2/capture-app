@@ -236,8 +236,8 @@ const selectedChildProgram = ['Program', 'Child Programme'];
 const selectedMalariaProgram = ['Program', 'Malaria case diagnosis'];
 const selectedEventProgram = ['Program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Choose a program'];
-const selectedOrgUnit = ['Registering unit', 'Taninahun (Malen) CHP'];
-const emptyOrgUnitSelection = ['Choose a registering unit'];
+const selectedOrgUnit = ['Organisation unit', 'Taninahun (Malen) CHP'];
+const emptyOrgUnitSelection = ['Choose an organisation unit'];
 const selectedTei = ['Person', 'Carlos Cruz'];
 const selectedEnrollment = ['Enrollment', `${getCurrentYear() + 1}-07-01 12:05`];
 
@@ -294,7 +294,7 @@ And('you see the enrollment event Edit page but there is no org unit id in the u
 
 And('you see the enrollment event New page but there is no org unit id in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&programId=IpHINAT79UW&stageId=A03MvHHogjR&teiId=fhFQhO0xILJ`);
-    cy.contains('Choose a registering unit to start reporting');
+    cy.contains('Choose a organisation unit to start reporting');
 });
 
 And('you see the enrollment event New page but there is no stage id in the url', () => {
@@ -370,7 +370,7 @@ When('you select org unit that is incompatible with the already selected program
 
 Then('you can see message on the scope selector', () => {
     cy.get('[data-test="error-message-handler"]')
-        .contains('Selected program is invalid for selected registering unit');
+        .contains('Selected program is invalid for selected organisation unit');
     cy.get('[data-test="program-selector-container-clear-icon"]')
         .click();
     cy.get('[data-test="program-selector-container"]')
