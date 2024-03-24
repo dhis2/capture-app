@@ -16,7 +16,7 @@ import {
 } from './searchOrgUnitSelector.actions';
 
 
-const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
+const RETRIEVE_ERROR = 'Could not retrieve organisation unit list';
 
 
 const isInitializeTeiSearch = (action: Object, searchId: string) =>

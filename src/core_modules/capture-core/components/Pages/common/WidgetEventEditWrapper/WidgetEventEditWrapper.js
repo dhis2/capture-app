@@ -15,7 +15,7 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     if (pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED) {
         return (
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose a registering unit to start reporting')}
+                {i18n.t('Choose an organisation unit to start reporting')}
             </IncompleteSelectionsMessage>
         );
     }

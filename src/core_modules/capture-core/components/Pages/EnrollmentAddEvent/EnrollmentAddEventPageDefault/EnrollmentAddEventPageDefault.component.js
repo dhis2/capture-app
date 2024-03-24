@@ -68,7 +68,7 @@ const EnrollmentAddEventPagePain = ({
     if (!orgUnitId) {
         return (
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose a registering unit to start reporting')}
+                {i18n.t('Choose an organisation unit to start reporting')}
             </IncompleteSelectionsMessage>
         );
     }

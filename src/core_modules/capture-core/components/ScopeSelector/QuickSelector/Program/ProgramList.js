@@ -58,7 +58,7 @@ const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgU
                 <>
                     <MenuDivider />
                     <div className={classes.filterWarning}>
-                        <span>{i18n.t('Some programs are being filtered by the chosen registering unit')}</span>
+                        <span>{i18n.t('Some programs are being filtered by the chosen organisation unit')}</span>
                         <Button small secondary onClick={() => onResetOrgUnit()}>
                             {i18n.t('Show all programs')}
                         </Button>

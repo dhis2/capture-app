@@ -11,7 +11,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumn
             id: 'orgUnit',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: i18n.t('Registering unit'),
+            header: i18n.t('Organisation unit'),
         },
         {
             id: 'createdAt',

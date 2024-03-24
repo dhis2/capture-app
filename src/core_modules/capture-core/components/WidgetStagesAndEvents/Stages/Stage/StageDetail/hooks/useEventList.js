@@ -35,7 +35,7 @@ const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Assigned to'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    { header: i18n.t('Registering unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: i18n.t('Organisation unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('scheduledAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: '', sortDirection: null, isPredefined: true },
 ];

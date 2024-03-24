@@ -53,11 +53,11 @@ And the list should display teis with John as the first name
 And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
-Scenario: Show the registering unit column
+Scenario: Show the organisation unitt column
 Given you open the main page with Ngelehun and child programme context
 When you open the column selector
-And you select the registering unit and save from the column selector
-Then the registering unit should display in the list
+And you select the organisation unit and save from the column selector
+Then the organisation unit should display in the list
 
 Scenario: Show next page
 Given you open the main page with Ngelehun and child programme context
