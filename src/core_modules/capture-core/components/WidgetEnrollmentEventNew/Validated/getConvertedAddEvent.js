@@ -10,6 +10,7 @@ export const getAddEventEnrollmentServerData = ({
     formFoundation,
     formClientValues,
     mainDataClientValues,
+    eventId,
     programId,
     orgUnitId,
     orgUnitName,
@@ -22,6 +23,7 @@ export const getAddEventEnrollmentServerData = ({
     formFoundation: RenderFoundation,
     formClientValues: Object,
     mainDataClientValues: Object,
+    eventId: string,
     programId: string,
     orgUnitId: string,
     orgUnitName: string,
@@ -29,7 +31,7 @@ export const getAddEventEnrollmentServerData = ({
     enrollmentId: string,
     completed?: boolean,
     fromClientDate: (date: Date) => { getServerZonedISOString: () => string },
-    uid: string,
+    uid?: string,
 }) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
@@ -45,27 +47,24 @@ export const getAddEventEnrollmentServerData = ({
     }
 
     return {
-        events: [
-            {
-                ...mainDataServerValues,
-                program: programId,
-                programStage: formFoundation.id,
-                orgUnit: orgUnitId,
-                trackedEntity: teiId,
-                enrollment: enrollmentId,
-                scheduledAt: mainDataServerValues.occurredAt,
-                orgUnitName,
-                updatedAt,
-                uid,
-                dataValues: Object
-                    .keys(formServerValues)
-                    .map(key => ({
-                        dataElement: key,
-                        value: formServerValues[key],
-                    }))
-                    .filter(({ value }) => value != null),
-            },
-        ],
+        ...mainDataServerValues,
+        event: eventId,
+        program: programId,
+        programStage: formFoundation.id,
+        orgUnit: orgUnitId,
+        trackedEntity: teiId,
+        enrollment: enrollmentId,
+        scheduledAt: mainDataServerValues.occurredAt,
+        orgUnitName,
+        updatedAt,
+        uid,
+        dataValues: Object
+            .keys(formServerValues)
+            .map(key => ({
+                dataElement: key,
+                value: formServerValues[key],
+            }))
+            .filter(({ value }) => value != null),
     };
 };
 

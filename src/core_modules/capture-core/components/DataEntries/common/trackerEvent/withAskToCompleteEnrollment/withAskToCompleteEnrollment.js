@@ -6,6 +6,8 @@ import { CompleteModal } from './CompleteModal';
 import { statusTypes as eventStatuses } from '../../../../../events/statusTypes';
 import { type RenderFoundation } from '../../../../../metaData';
 import { addEventSaveTypes } from '../../../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { actions as LinkModes } from '../../../../WidgetRelatedStages/constants';
+import type { RelatedStageRefPayload } from '../../../../WidgetEnrollmentEventNew/Validated/validated.types';
 
 type Props = {
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
@@ -13,6 +15,7 @@ type Props = {
     isCompleted?: boolean,
     eventId?: ?string,
     formFoundation: RenderFoundation,
+    relatedStageRef: { current?: ?RelatedStageRefPayload },
     onSaveAndCompleteEnrollment: (
         eventId: string,
         dataEntryId: string,
@@ -28,6 +31,7 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         isCompleted,
         onSaveAndCompleteEnrollment,
         eventId,
+        relatedStageRef,
         ...passOnProps
     } = props;
     const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
@@ -54,8 +58,9 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         formFoundation: RenderFoundation,
         saveType?: string,
     ) => {
+        const { linkMode } = relatedStageRef?.current?.getLinkedStageValues() ?? {};
         eventDataToSave.current = { itemId, dataEntryId, formFoundation, saveType };
-        if (askCompleteEnrollmentOnEventComplete && (isCompleted || saveType === addEventSaveTypes.COMPLETE)) {
+        if (askCompleteEnrollmentOnEventComplete && (isCompleted || saveType === addEventSaveTypes.COMPLETE) && linkMode !== LinkModes.ENTER_DATA) {
             setOpenCompleteModal(true);
         } else {
             onSave(itemId, dataEntryId, formFoundation, saveType);
@@ -66,6 +71,7 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         <>
             <InnerComponent
                 {...passOnProps}
+                relatedStageRef={relatedStageRef}
                 askCompleteEnrollmentOnEventComplete={askCompleteEnrollmentOnEventComplete}
                 onSave={handleOnSave}
                 isCompleted={isCompleted}

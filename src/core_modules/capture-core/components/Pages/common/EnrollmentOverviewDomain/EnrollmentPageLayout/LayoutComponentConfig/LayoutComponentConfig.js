@@ -150,7 +150,6 @@ export const NewEventWorkspace: WidgetConfig = {
         widgetReducerName,
         rulesExecutionDependencies,
         onSave,
-        onSaveAndCompleteEnrollment,
         onCancel,
     }): NewEventWorkspaceWrapperProps => ({
         programId: program.id,
@@ -162,7 +161,6 @@ export const NewEventWorkspace: WidgetConfig = {
         widgetReducerName,
         rulesExecutionDependencies,
         onSave,
-        onSaveAndCompleteEnrollment,
         onCancel,
     }),
 };

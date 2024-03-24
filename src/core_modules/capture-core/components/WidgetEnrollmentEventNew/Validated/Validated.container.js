@@ -1,17 +1,24 @@
 // @flow
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
 import { withAskToCompleteEnrollment } from '../../DataEntries';
 import { withAskToCreateNew, withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
-import { requestSaveEvent, startCreateNewAfterCompleting, requestSaveAndCompleteEnrollment } from './validated.actions';
-import type { ContainerProps } from './validated.types';
+import {
+    cleanUpEventSaveInProgress,
+    newEventBatchActionTypes,
+    requestSaveEvent,
+    setSaveEnrollmentEventInProgress,
+    startCreateNewAfterCompleting,
+} from './validated.actions';
+import type { ContainerProps, RelatedStageRefPayload } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
-import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
+import { createServerData, useBuildNewEventPayload } from './useBuildNewEventPayload';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
@@ -28,14 +35,26 @@ export const Validated = ({
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
-    onSaveAndCompleteEnrollmentExternal,
     onSaveAndCompleteEnrollmentSuccessActionType,
     onSaveAndCompleteEnrollmentErrorActionType,
     ...passOnProps
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
-    const { fromClientDate } = useTimeZoneConversion();
+    const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
+    const eventSaveInProgress = useSelector(
+        ({ enrollmentDomain }) => !!enrollmentDomain.eventSaveInProgress?.requestEventId,
+    );
+    const { buildNewEventPayload } = useBuildNewEventPayload({
+        dataEntryId,
+        itemId,
+        programId: program.id,
+        orgUnitId: orgUnit.id,
+        orgUnitName: orgUnit.name,
+        teiId,
+        enrollmentId,
+        formFoundation,
+    });
 
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
@@ -51,113 +70,106 @@ export const Validated = ({
         rulesExecutionDependenciesClientFormatted,
     });
 
-
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, program.id);
 
     const dispatch = useDispatch();
     const handleSave = useCallback((
-        eventId: string,
+        dataEntryItemId: string,
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
-        saveType?: ?string,
-    ) => {
+        saveType: ?$Values<typeof addEventSaveTypes>,
+        enrollment: ?Object,
+    ) => new Promise((resolve, reject) => {
+        // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
-        const completed = saveType === addEventSaveTypes.COMPLETE;
-        dispatch(requestSaveEvent({
-            eventId,
-            dataEntryId: dataEntryIdArgument,
-            formFoundation: formFoundationArgument,
-            completed,
-            programId: program.id,
-            orgUnitId: orgUnit.id,
-            orgUnitName: orgUnit.name || '',
-            teiId,
-            enrollmentId,
-            fromClientDate,
-            onSaveExternal,
-            onSaveSuccessActionType,
-            onSaveErrorActionType,
-        }));
-    }, [
-        dispatch,
-        program.id,
-        orgUnit,
-        teiId,
-        enrollmentId,
-        fromClientDate,
-        onSaveExternal,
-        onSaveSuccessActionType,
-        onSaveErrorActionType,
-    ]);
+        const {
+            clientRequestEvent,
+            linkedEvent,
+            relationship,
+            linkMode,
+            formHasError,
+        } = buildNewEventPayload(
+            saveType,
+            relatedStageRef,
+        );
 
-    const handleCreateNew = useCallback((isCreateNew?: boolean) => {
-        dispatch(requestSaveEvent({
-            eventId: itemId,
-            dataEntryId,
-            formFoundation,
-            completed: true,
-            programId: program.id,
-            orgUnitId: orgUnit.id,
-            orgUnitName: orgUnit.name || '',
-            teiId,
-            enrollmentId,
-            fromClientDate,
-            onSaveExternal,
-            onSaveSuccessActionType,
-            onSaveErrorActionType,
-        }));
-        dispatch(startCreateNewAfterCompleting({
-            enrollmentId, isCreateNew, orgUnitId: orgUnit.id, programId: program.id, teiId, availableProgramStages,
-        }));
-    }, [dispatch,
-        program.id,
-        orgUnit,
-        teiId,
-        enrollmentId,
-        fromClientDate,
-        onSaveExternal,
-        onSaveSuccessActionType,
-        onSaveErrorActionType,
-        formFoundation,
-        availableProgramStages,
-    ]);
+        if (formHasError) {
+            reject(new Error('Form has error'));
+            return;
+        }
+
+        const serverData = createServerData({
+            clientRequestEvent,
+            linkedEvent,
+            relationship,
+            enrollment,
+        });
+
+        dispatch(batchActions([
+            requestSaveEvent({
+                requestEvent: clientRequestEvent,
+                linkedEvent,
+                relationship,
+                serverData,
+                linkMode,
+                onSaveExternal,
+                onSaveSuccessActionType: enrollment ? onSaveAndCompleteEnrollmentSuccessActionType : onSaveSuccessActionType,
+                onSaveErrorActionType: enrollment ? onSaveAndCompleteEnrollmentErrorActionType : onSaveErrorActionType,
+            }),
+
+            // stores meta in redux to be used when navigating after save
+            setSaveEnrollmentEventInProgress({
+                requestEventId: clientRequestEvent?.event,
+                linkedEventId: linkedEvent?.event,
+                linkedOrgUnitId: linkedEvent?.orgUnit,
+                linkMode,
+            }),
+        ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS),
+        );
+
+        resolve();
+    }), [buildNewEventPayload, dispatch, onSaveExternal, onSaveAndCompleteEnrollmentSuccessActionType, onSaveSuccessActionType, onSaveAndCompleteEnrollmentErrorActionType, onSaveErrorActionType]);
+
+    const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
+        try {
+            await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
+
+            dispatch(startCreateNewAfterCompleting({
+                enrollmentId,
+                isCreateNew,
+                orgUnitId: orgUnit.id,
+                programId: program.id,
+                teiId,
+                availableProgramStages,
+            }));
+        } catch (error) {
+            // Related stages has displayed an error message. No need to do anything here.
+        }
+    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
+
 
     const handleSaveAndCompleteEnrollment = useCallback(
         (
-            eventId: string,
+            dataEntryItemId: string,
             dataEntryIdArgument: string,
             formFoundationArgument: RenderFoundation,
-            enrollment: string,
+            enrollment: Object,
         ) => {
-            dispatch(requestSaveAndCompleteEnrollment({
-                eventId,
-                dataEntryId: dataEntryIdArgument,
-                formFoundation: formFoundationArgument,
-                completed: true,
-                programId: program.id,
-                orgUnitId: orgUnit.id,
-                orgUnitName: orgUnit.name || '',
-                teiId,
-                enrollmentId,
+            handleSave(
+                dataEntryItemId,
+                dataEntryIdArgument,
+                formFoundationArgument,
+                addEventSaveTypes.COMPLETE,
                 enrollment,
-                fromClientDate,
-                onSaveAndCompleteEnrollmentExternal,
-                onSaveAndCompleteEnrollmentSuccessActionType,
-                onSaveAndCompleteEnrollmentErrorActionType,
-            }));
+            );
         },
-        [
-            dispatch,
-            program.id,
-            orgUnit,
-            teiId,
-            enrollmentId,
-            fromClientDate,
-            onSaveAndCompleteEnrollmentExternal,
-            onSaveAndCompleteEnrollmentSuccessActionType,
-            onSaveAndCompleteEnrollmentErrorActionType,
-        ],
+        [handleSave],
     );
+
+    // Clean up data entry on unmount in case the user navigates away, stopping delayed navigation
+    useEffect(() => () => {
+        dispatch(cleanUpEventSaveInProgress());
+    }, [dispatch]);
 
     return (
         <DataEntry
@@ -166,13 +178,18 @@ export const Validated = ({
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
             availableProgramStages={availableProgramStages}
+            eventSaveInProgress={eventSaveInProgress}
             ready={ready}
             id={dataEntryId}
             itemId={itemId}
+            enrollmentId={enrollmentId}
             formFoundation={formFoundation}
+            relatedStageRef={relatedStageRef}
+            // $FlowFixMe - Promise should be ignored downstream
             onSave={handleSave}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}
+            programId={program.id}
             onSaveAndCompleteEnrollment={handleSaveAndCompleteEnrollment}
             programName={program.name}
             orgUnit={orgUnit}

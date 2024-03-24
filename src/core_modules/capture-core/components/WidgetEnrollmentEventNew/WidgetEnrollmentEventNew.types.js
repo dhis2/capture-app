@@ -11,7 +11,6 @@ export type WidgetProps = {|
     onSave?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
-    onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
     onSaveAndCompleteEnrollmentSuccessActionType?: string,
     onSaveAndCompleteEnrollmentErrorActionType?: string,
     onCancel?: () => void,

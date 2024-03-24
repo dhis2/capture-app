@@ -1,7 +1,9 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import moment from 'moment';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
 import { NoticeBox } from '@dhis2/ui';
@@ -9,24 +11,24 @@ import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
+import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
 
 import { useWidgetDataFromStore } from '../hooks';
 import {
     useHideWidgetByRuleLocations,
 } from '../../Enrollment/EnrollmentPageDefault/hooks';
 import {
-    updateEnrollmentEventWithoutId,
+    updateOrAddEnrollmentEvents,
     showEnrollmentError,
     updateEnrollmentAndEvents,
-    commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
-    setExternalEnrollmentStatus,
+    setExternalEnrollmentStatus, commitEnrollmentAndEvents,
 } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
-import { statusTypes } from '../../../../enrollment';
 import { WidgetsForEnrollmentEventNew } from '../PageLayout/DefaultPageLayout.constants';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
+import { convertEventAttributeOptions } from '../../../../events/convertEventAttributeOptions';
 
 export const EnrollmentAddEventPageDefault = ({
     pageLayout,
@@ -38,6 +40,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const { fromClientDate } = useTimeZoneConversion();
 
     const handleCancel = useCallback(() => {
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -62,20 +65,28 @@ export const EnrollmentAddEventPageDefault = ({
     }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
-        (data, uid) => {
-            dispatch(updateEnrollmentEventWithoutId(uid, data.events[0]));
-            history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-        },
-        [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
-    );
+        ({ enrollments, events, linkMode }) => {
+            if (linkMode && linkMode === RelatedStageModes.ENTER_DATA) return;
 
-    const handleSaveAndCompleteEnrollment = useCallback(
-        (enrollmentToUpdate) => {
-            dispatch(setExternalEnrollmentStatus(statusTypes.COMPLETED));
-            dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
+            const nowClient = fromClientDate(new Date());
+            const nowServer = new Date(nowClient.getServerZonedISOString());
+            const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+
+            const eventsWithUpdatedDate = events.map(event => ({
+                ...convertEventAttributeOptions(event),
+                updatedAt,
+            }));
+
+            if (enrollments) {
+                dispatch(setExternalEnrollmentStatus(enrollments[0].status));
+                dispatch(updateEnrollmentAndEvents(enrollments[0]));
+            } else if (events) {
+                dispatch(updateOrAddEnrollmentEvents({ events: eventsWithUpdatedDate }));
+            }
+
             history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [dispatch, history, programId, orgUnitId, teiId, enrollmentId],
+        [fromClientDate, dispatch, history, programId, orgUnitId, teiId, enrollmentId],
     );
 
     const handleAddNew = useCallback(() => {
@@ -170,7 +181,6 @@ export const EnrollmentAddEventPageDefault = ({
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 onSave={handleSave}
-                onSaveAndCompleteEnrollment={handleSaveAndCompleteEnrollment}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
                 onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
@@ -185,8 +195,8 @@ export const EnrollmentAddEventPageDefault = ({
                 onEnrollmentError={onEnrollmentError}
                 onEnrollmentSuccess={onEnrollmentSuccess}
                 events={enrollment?.events}
-                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                 onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+                onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
                 onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                 onAccessLostFromTransfer={onAccessLostFromTransfer}
             />
