@@ -1,6 +1,5 @@
 // @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { UserFormField } from '../../../FormFields/UserField';
 
 export const actionTypes = {
@@ -16,7 +15,6 @@ export const actionTypes = {
     NO_WORKING_LIST_UPDATE_NEEDED_ON_BACK_TO_MAIN_PAGE: 'NoWorkingListUpdateNeededOnBackToMainPageForViewEvent',
     START_GO_BACK_TO_MAIN_PAGE: 'StartGoBackToMainPageForViewEvent',
     VIEW_EVENT_OPEN_NEW_RELATIONSHIP: 'ViewEventOpenAddRelationship',
-    UPDATE_EVENT_CONTAINER: 'UpdateEventContainerForViewEvent',
     UPDATE_WORKING_LIST_PENDING_ON_BACK_TO_MAIN_PAGE: 'UpdateWorkingListPendingOnBackToMainPageForViewEvent',
     OPEN_VIEW_EVENT_PAGE_FAILED: 'OpenViewEventPageFailed',
     INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE: 'InitializeWorkingListsOnBackToMainPage',
@@ -71,9 +69,6 @@ export const updateWorkingListPendingOnBackToMainPage = () =>
 
 export const openAddRelationship = () =>
     actionCreator(actionTypes.VIEW_EVENT_OPEN_NEW_RELATIONSHIP)();
-
-export const updateEventContainer = (eventContainer: Object, orgUnit: OrgUnit) =>
-    actionCreator(actionTypes.UPDATE_EVENT_CONTAINER)({ eventContainer, orgUnit });
 
 export const openViewEventPageFailed = (error: string) =>
     actionCreator(actionTypes.OPEN_VIEW_EVENT_PAGE_FAILED)({ error });

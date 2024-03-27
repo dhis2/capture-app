@@ -45,21 +45,18 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
             viewEventPageActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
             viewEventPageActionTypes.START_OPEN_EVENT_FOR_VIEW,
-            viewEventPageActionTypes.UPDATE_EVENT_CONTAINER,
             editEventDataEntryBatchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH,
         ),
         filter(action =>
             filterByInnerAction(
                 action,
                 editEventDataEntryBatchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH,
-                viewEventPageActionTypes.UPDATE_EVENT_CONTAINER,
             ),
         ),
         map(action =>
             mapToInnerAction(
                 action,
                 editEventDataEntryBatchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH,
-                viewEventPageActionTypes.UPDATE_EVENT_CONTAINER,
             ),
         ),
         filter((action) => {

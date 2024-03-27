@@ -144,10 +144,6 @@ export const viewEventPageDesc = createReducerDescription({
     [editEventDataEntryActionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         saveInProgress: true,
-        eventDetailsSection: {
-            ...state.eventDetailsSection,
-            showEditEvent: false,
-        },
     }),
     [editEventDataEntryActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: (state, action) => {
         if (action.meta.eventId !== state.eventId) {
