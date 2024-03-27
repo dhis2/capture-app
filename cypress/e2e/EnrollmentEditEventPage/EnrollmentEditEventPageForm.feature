@@ -58,11 +58,15 @@ And the user see the following text: 11
 When the user clicks on the edit button
 And the user set the apgar score to 5
 And the user clicks on the save button
+Then you are redirected to the enrollment dashboard
+And you open the Birth stage event
 Then the user see the following text: Enrollment: View Event
 And the user see the following text: 5
 When the user clicks on the edit button
 And the user set the apgar score to 11
 And the user clicks on the save button
+Then you are redirected to the enrollment dashboard
+And you open the Birth stage event
 Then the user see the following text: Enrollment: View Event
 And the user see the following text: 11
 
