@@ -2,15 +2,16 @@
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Oscar Mesones Lapouble <oscar.lapouble@gmail.com>, 2021
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2022
+# Thiago Rocha, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-23T13:21:06.685Z\n"
+"POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
+"Last-Translator: Thiago Rocha, 2024\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -89,7 +90,7 @@ msgstr ""
 msgid "Please provide a valid time"
 msgstr ""
 
-msgid "Please provide a valid percentage"
+msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
@@ -123,10 +124,10 @@ msgid "Area"
 msgstr ""
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coordenada"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Inscrição"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -144,7 +145,7 @@ msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Usuário atribuído"
 
 msgid "Search for user"
 msgstr ""
@@ -162,7 +163,7 @@ msgid "Comments"
 msgstr ""
 
 msgid "Relationships"
-msgstr ""
+msgstr "Relacionamentos"
 
 msgid "Assignee"
 msgstr ""
@@ -190,7 +191,7 @@ msgid "Active"
 msgstr "Activo"
 
 msgid "Completed"
-msgstr ""
+msgstr "Concluído"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -252,7 +253,7 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "New event"
-msgstr ""
+msgstr "Novo evento"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -373,10 +374,10 @@ msgid "to"
 msgstr "para"
 
 msgid "From"
-msgstr ""
+msgstr "A partir de"
 
 msgid "To"
-msgstr ""
+msgstr "Até"
 
 msgid "This week"
 msgstr ""
@@ -421,13 +422,13 @@ msgid "Months"
 msgstr "Meses"
 
 msgid "Days"
-msgstr ""
+msgstr "Dias"
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "selecionado"
 
 msgid "Delete"
 msgstr "Apagar"
@@ -553,10 +554,10 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Mostrar tudo"
 
 msgid "Selected program"
-msgstr ""
+msgstr "Programa selecionado"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -725,7 +726,7 @@ msgid "Organisation Unit"
 msgstr "Unidade organizacional"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registo"
 
 msgid "Search results"
 msgstr ""
@@ -746,7 +747,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "Registro"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -768,14 +769,14 @@ msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
-msgstr ""
+msgstr "Procurar"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "Nenhum resultado encontrado"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -875,7 +876,7 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Adicionar relacionamento"
 
 msgid "Results found"
 msgstr ""
@@ -911,7 +912,7 @@ msgid "Mark incomplete"
 msgstr ""
 
 msgid "Delete enrollment"
-msgstr ""
+msgstr "Excluir inscrição"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -919,7 +920,7 @@ msgid ""
 msgstr ""
 
 msgid "No, cancel"
-msgstr ""
+msgstr "Não, cancelar"
 
 msgid "Yes, delete enrollment."
 msgstr ""
@@ -928,13 +929,13 @@ msgid "Remove mark for follow-up"
 msgstr ""
 
 msgid "Mark for follow-up"
-msgstr ""
+msgstr "Marcar para acompanhamento"
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Data de inscrição"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Data do incidente"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
@@ -952,7 +953,7 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 msgid "Comments about this enrollment"
 msgstr ""
@@ -1021,7 +1022,7 @@ msgid "Report date"
 msgstr "Data do relatório"
 
 msgid "Registering unit"
-msgstr ""
+msgstr "Unidade de registro"
 
 msgid "Due date"
 msgstr "Data de vencimento"
@@ -1063,7 +1064,7 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Status da inscrição"
 
 msgid "Assigned to"
 msgstr "Atribuido a"
@@ -1072,7 +1073,7 @@ msgid "Registration Date"
 msgstr "Data do Registo"
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inativo"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -1117,16 +1118,16 @@ msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Scheduled"
-msgstr ""
+msgstr "Agendado"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Overdue"
-msgstr ""
+msgstr "Atrasado"
 
 msgid "Skipped"
-msgstr ""
+msgstr "Ignorado"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
@@ -1174,7 +1175,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Definir coordenada"
 
 msgid "Page {{currentPage}}"
 msgstr ""
@@ -1183,7 +1184,7 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Time"
-msgstr ""
+msgstr "Tempo"
 
 msgid "From date"
 msgstr "Data de inicio"

@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
-# Philip Larsen Donnelly, 2022
 # 晓东 林 <13981924470@126.com>, 2022
 # easylin <lin_xd@126.com>, 2023
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1010,7 +1010,7 @@ msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
 
 msgid "Show {{ rest }} more"
-msgstr "显示 {{ rest}} 更多"
+msgstr "显示 {{ rest }} 更多"
 
 msgid "Reset list"
 msgstr "重置列表"
@@ -1037,7 +1037,7 @@ msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} 逾期"
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr "{{ ScheduledEvents }} 已安排"
+msgstr "{{ scheduledEvents }} 已安排"
 
 msgid "Stages and Events"
 msgstr "阶段和事件"
@@ -1118,13 +1118,13 @@ msgid "An error has occured. See log for details"
 msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr "调度{{escape }}到期{{ time }}"
+msgstr "调度{{ escape }}到期{{ time }}"
 
 msgid "Scheduled"
 msgstr "已经调度"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr "逾期{{escape }}到期{{time }}"
+msgstr "逾期{{ escape }}到期{{ time }}"
 
 msgid "Overdue"
 msgstr "逾期"
