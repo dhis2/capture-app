@@ -163,6 +163,15 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED),
+        filter((action) => {
+            const {
+                meta: { triggerAction },
+            } = action;
+            return (
+                triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT ||
+                triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS
+            );
+        }),
         map((action) => {
             const meta = action.meta;
             if (meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT) {
