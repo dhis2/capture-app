@@ -182,7 +182,7 @@ import {
 } from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
 import {
     completeSavingNewTrackedEntityInstanceEpic,
-    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic, failedSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     startSavingNewTrackedEntityInstanceEpic,
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
@@ -341,6 +341,7 @@ export const epics = combineEpics(
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     completeSavingNewTrackedEntityInstanceEpic,
     completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    failedSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     changedEnrollmentIdEpic,
     fetchEnrollmentIdEpic,
     verifyEnrollmentIdSuccessEpic,
