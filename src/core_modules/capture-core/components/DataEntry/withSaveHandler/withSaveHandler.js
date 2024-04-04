@@ -235,7 +235,7 @@ const getSaveHandler = (
             } = this.props;
 
             const filteredProps = onFilterProps ? onFilterProps(passOnProps) : passOnProps;
-            this.isCompleting = Boolean(onIsCompleting && onIsCompleting(this.props) === 'true');
+            this.isCompleting = !!(onIsCompleting && onIsCompleting(this.props));
 
             return (
                 <div>
