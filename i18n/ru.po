@@ -3,14 +3,14 @@
 # Wanda <wanda@frontlineaids.org>, 2021
 # Ulanbek Abakirov <ulans@mail.ru>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2022
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -913,8 +913,7 @@ msgid "Search {{uniqueAttrName}}"
 msgstr "Поиск {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
-"Заполните хотя бы {{minAttributesRequiredToSearch}} атрибутов для поиска"
+msgstr "Заполните хотя бы {{minAttributesRequired}} атрибутов для поиска"
 
 msgid "To work with the selected program,"
 msgstr "Работать с выбранной программой"
