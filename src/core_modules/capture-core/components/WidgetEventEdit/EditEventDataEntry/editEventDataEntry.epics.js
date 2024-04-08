@@ -167,13 +167,10 @@ export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
         }),
         map((action) => {
             const meta = action.meta;
-            if (meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT) {
-                return commitEnrollmentEvent(meta.eventId);
-            }
             if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS) {
                 return commitEnrollmentAndEvents();
             }
-            return EMPTY;
+            return commitEnrollmentEvent(meta.eventId);
         }));
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
