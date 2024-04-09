@@ -195,10 +195,10 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             let actions = [];
 
             if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {
-                actions = [...actions, rollbackEnrollmentEvent(eventContainer.event.eventId)];
+                actions = [rollbackEnrollmentEvent(eventContainer.event.eventId)];
             }
             if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR) {
-                actions = [...actions, rollbackEnrollmentAndEvents()];
+                actions = [rollbackEnrollmentAndEvents()];
             }
             return batchActions(actions, batchActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED);
         }));
