@@ -28,3 +28,36 @@ Cypress.Commands.add('forceVisit', (url) => {
     cy.visit(url);
     cy.window().then((win) => { win.location.href = url; });
 });
+
+// overrides loginByApi from @dhis2/cypress-commands
+// temporary solution: should use solution from @dhis2/cypres-commands when available
+Cypress.Commands.add('loginByApi', ({ username, password, baseUrl }) => {
+    const currentInstanceVersion = Number(/[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion'))[1]);
+
+    if (currentInstanceVersion >= 41) {
+        cy.request({
+            url: `${baseUrl}/api/auth/login`,
+            method: 'POST',
+            followRedirect: true,
+            body: {
+                username,
+                password,
+            },
+        });
+    } else {
+        cy.request({
+            url: `${baseUrl}/dhis-web-commons-security/login.action`,
+            method: 'POST',
+            form: true,
+            followRedirect: true,
+            body: {
+                j_username: username,
+                j_password: password,
+                '2fa_code': '',
+            },
+        });
+    }
+
+    // Set base url for the app platform
+    window.localStorage.setItem('DHIS2_BASE_URL', baseUrl);
+});
