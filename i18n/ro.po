@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-02-14T10:01:26.732Z\n"
+"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -322,6 +322,31 @@ msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr "S-a produs o eroare. Consultați jurnalul pentru detalii"
+
+msgid "{{programStageName}} completed"
+msgstr ""
+
+msgid ""
+"Would you like to complete the enrollment and all active events as well?"
+msgstr ""
+
+msgid "{{count}} event in {{programStageName}}"
+msgid_plural "{{count}} event in {{programStageName}}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Yes, complete enrollment and events"
+msgstr ""
+
+msgid "Complete enrollment only"
+msgstr ""
+
+msgid "Would you like to complete the enrollment?"
+msgstr ""
+
+msgid "Complete enrollment"
+msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -883,6 +908,9 @@ msgstr ""
 msgid "Edit event"
 msgstr "Editare eveniment"
 
+msgid "View changelog"
+msgstr ""
+
 msgid "Event details"
 msgstr "Detaliile evenimentului"
 
@@ -926,6 +954,12 @@ msgstr "Căutare {{uniqueAttrName}}"
 
 msgid "Search by attributes"
 msgstr "Căutare după atribute"
+
+msgid "Fill in at least {{count}} attribute to search"
+msgid_plural "Fill in at least {{count}} attribute to search"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
@@ -1063,8 +1097,11 @@ msgstr ""
 msgid "Create saved list"
 msgstr ""
 
-msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr "{{trackedEntityName}} nou în {{programName}}"
+msgid "Create new in another program"
+msgstr ""
+
+msgid "Create new event"
+msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Căutare un {{trackedEntityName}} în {{programName}}"
@@ -1147,6 +1184,12 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
+msgid "Transfer"
+msgstr ""
+
+msgid "An error occurred while transferring ownership"
+msgstr ""
+
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
 
@@ -1172,6 +1215,24 @@ msgid "Finish drawing before saving"
 msgstr ""
 
 msgid "Set area"
+msgstr ""
+
+msgid ""
+"Transferring enrollment ownership from {{ownerOrgUnit}} to "
+"{{newOrgUnit}}{{escape}}"
+msgstr ""
+
+msgid ""
+"You will lose access to the enrollment when transferring ownership to "
+"{{organisationUnit}}."
+msgstr ""
+
+msgid "Transfer Ownership"
+msgstr ""
+
+msgid ""
+"Choose the organisation unit to which enrollment ownership should be "
+"transferred."
 msgstr ""
 
 msgid "Enrollment date"
@@ -1268,11 +1329,25 @@ msgid ""
 "The scheduled date matches the suggested date, but can be changed if needed."
 msgstr ""
 
+msgid "The scheduled date is {{count}} days {{position}} the suggested date."
+msgid_plural ""
+"The scheduled date is {{count}} days {{position}} the suggested date."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "after"
 msgstr "după"
 
 msgid "before"
 msgstr "pînă la"
+
+msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid_plural ""
+"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1321,10 +1396,28 @@ msgstr ""
 msgid "Fix errors in the form to continue."
 msgstr "Corectați erorile din formular pentru a continua."
 
+msgid "You do not have access to delete this {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Delete {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
+"permanently remove the {{trackedEntityTypeName}} and all its associated "
+"enrollments and events in all programs."
+msgstr ""
+
+msgid "There was a problem deleting the {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Yes, delete {{trackedEntityTypeName}}"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "{{TETName}} profile"
+msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
 msgid "tracked entity instance"
@@ -1363,6 +1456,30 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Etape și Evenimente"
 
+msgid "Changelog"
+msgstr ""
+
+msgid "No changes to display"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Date"
+msgstr "Data"
+
+msgid "User"
+msgstr ""
+
+msgid "Data item"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
 
@@ -1386,6 +1503,20 @@ msgid ""
 msgstr ""
 
 msgid "{{trackedEntityTypeName}} relationships"
+msgstr ""
+
+msgid "Delete relationship"
+msgstr ""
+
+msgid ""
+"Deleting the relationship is permanent and cannot be undone. Are you sure "
+"you want to delete this relationship?"
+msgstr ""
+
+msgid "Yes, delete relationship"
+msgstr ""
+
+msgid "An error occurred while deleting the relationship."
 msgstr ""
 
 msgid "To open this relationship, please wait until saving is complete"
@@ -1426,6 +1557,9 @@ msgstr "Inactiv"
 
 msgid "Enrollment status"
 msgstr "Starea înrolării"
+
+msgid "Follow up"
+msgstr ""
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
@@ -1552,9 +1686,6 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Setarea coordonatelor"
-
-msgid "Date"
-msgstr "Data"
 
 msgid "Time"
 msgstr ""

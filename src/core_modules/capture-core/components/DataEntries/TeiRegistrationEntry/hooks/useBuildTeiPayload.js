@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
-import { capitalizeFirstLetter } from '../../../../../capture-core-utils/string';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type {
     TeiPayload,
 } from '../../../Pages/common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 
 type Props = {
     trackedEntityTypeId: string,
@@ -21,22 +21,10 @@ function getClientValuesForFormData(formValues: Object, formFoundation: RenderFo
     return formFoundation.convertValues(formValues, convertFormToClient);
 }
 
-function getPossibleTetFeatureTypeKey(serverValues: Object) {
-    return Object
-        .keys(serverValues)
-        .find(key => key.startsWith('FEATURETYPE_'));
-}
-
-function buildGeometryProp(key: string, serverValues: Object) {
-    if (!serverValues[key]) {
-        return undefined;
-    }
-    const type = capitalizeFirstLetter(key.replace('FEATURETYPE_', '').toLocaleLowerCase());
-    return {
-        type,
-        coordinates: serverValues[key],
-    };
-}
+const deriveAttributesFromFormValues = (formValues = {}) =>
+    Object.keys(formValues)
+        .filter(key => !geometryType(key))
+        .map(key => ({ attribute: key, value: formValues[key] }));
 
 export const useBuildTeiPayload = ({
     trackedEntityTypeId,
@@ -53,26 +41,19 @@ export const useBuildTeiPayload = ({
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
         const serverValuesForFormValues = formFoundation.convertValues(clientValues, convertClientToServer);
 
-        // $FlowFixMe
-        const attributes = Object.keys(serverValuesForFormValues)
-            .map(key => ({
-                attribute: key,
-                value: serverValuesForFormValues[key],
-            }));
+        const attributes = deriveAttributesFromFormValues(serverValuesForFormValues);
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(serverValuesForFormValues);
-        let geometry;
-        if (tetFeatureTypeKey) {
-            geometry = buildGeometryProp(tetFeatureTypeKey, serverValuesForFormValues);
-            delete serverValuesForFormValues[tetFeatureTypeKey];
-        }
+        const tetGeometry = tetFeatureTypeKey
+            ? buildGeometryProp(tetFeatureTypeKey, formValues)
+            : undefined;
 
         return {
             attributes,
             trackedEntity: generateUID(),
             orgUnit: orgUnitId,
             trackedEntityType: trackedEntityTypeId,
-            geometry,
+            geometry: tetGeometry,
             enrollments: [],
         };
     };

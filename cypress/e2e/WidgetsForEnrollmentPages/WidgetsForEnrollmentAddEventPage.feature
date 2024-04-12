@@ -38,6 +38,15 @@ Feature: The user interacts with the widgets on the enrollment add event page
     And the user sees the owner organisation unit
     And the user sees the last update date
 
+  Scenario: You can delete a tracked entity from the profile widget
+    Given you add a new tracked entity in the Malaria focus investigation program
+    When the user clicks the "Back to all stages and events" button
+    When the user clicks the "New Event" button 
+    When you open the overflow menu and click the "Delete Focus area" button
+    Then you see the delete tracked entity confirmation modal
+    When you confirm by clicking the "Yes, delete Focus area" button
+    Then you are redirected to the home page
+
   # TODO DHIS2-11482 - The test cases related with enrollment status edit are flaky. Move them to unit tests.
   # Scenario: User can modify the enrollment from Active to Complete
   #   Given you land on the enrollment add event page by having typed #/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
@@ -104,3 +113,15 @@ Feature: The user interacts with the widgets on the enrollment add event page
   Given you land on the enrollment edit event page by having typed /#/enrollmentEventNew?enrollmentId=zRfAPUpjoG3&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=uvMKOn1oWvd&teiId=S3JjTA4QMNe
   When you click switch tab to Schedule
   Then you can assign a user when scheduling the event
+
+  Scenario: User can complete the enrollment and the active events
+    Given you land on the enrollment edit event page by having typed #/enrollmentEventNew?enrollmentId=qyx7tscVpVB&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=osF4RF4EiqP
+    And the enrollment widget should be opened
+    And the user sees the enrollment status and the Baby Postnatal event status is active
+    And the user opens the enrollment actions menu
+    When the user completes the enrollment and the active events
+    Then the user sees the enrollment status and the Baby Postnatal event status is completed
+
+  Scenario: User can see the enrollment minimap
+    Given you land on the enrollment dashboard page by having typed #/enrollmentEventNew?enrollmentId=LltDWGFdwTX&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=lmcLfONF8rY&stageId=A03MvHHogjR
+    Then you see the enrollment minimap

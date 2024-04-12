@@ -18,7 +18,7 @@ When('you click the "New" button to add a new event', () => {
 });
 
 When('you click the first option from the "New" button to add a new event', () => {
-    cy.get('[data-test="new-button"]')
+    cy.get('[data-test="new-button-toggle"]')
         .click();
     cy.get('[data-test="new-menuitem-one"]')
         .click();

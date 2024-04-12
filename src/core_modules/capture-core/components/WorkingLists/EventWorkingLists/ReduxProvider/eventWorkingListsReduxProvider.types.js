@@ -55,7 +55,7 @@ export type EventWorkingListsReduxOutputProps = {|
     customColumnOrder?: CustomColumnOrder,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
-    downloadRequest: Object,
+    downloadRequest: { url: string, queryParams: ?Object },
     records?: EventRecords,
     filters?: FiltersData,
     initialViewConfig?: InitialViewConfig,

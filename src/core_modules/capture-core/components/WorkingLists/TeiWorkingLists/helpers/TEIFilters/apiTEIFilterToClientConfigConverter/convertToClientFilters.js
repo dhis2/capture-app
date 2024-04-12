@@ -4,7 +4,6 @@ import type { QuerySingleResource } from 'capture-core/utils/api';
 import { getOptionSetFilter } from './optionSet';
 import {
     filterTypesObject,
-    type BooleanFilterData,
     type TrueOnlyFilterData,
     type TextFilterData,
     type NumericFilterData,
@@ -39,7 +38,11 @@ const getNumericFilter = (filter: ApiDataFilterNumeric): ?NumericFilterData => {
     return undefined;
 };
 
-const getBooleanFilter = (filter: ApiDataFilterBoolean): ?BooleanFilterData => {
+// Api returns a boolean as an object if we filter attributes, but it returns a boolean if it's a main filter
+const getBooleanFilter = (filter: ApiDataFilterBoolean): any => {
+    if (typeof filter === 'boolean') {
+        return { values: [filter] };
+    }
     if (filter.in) {
         return { values: filter.in.map(value => value === 'true') };
     }
@@ -137,6 +140,7 @@ const mainFiltersTable = {
     [MAIN_FILTERS.PROGRAM_STATUS]: getMainFilterOptionSet,
     [MAIN_FILTERS.ENROLLED_AT]: getDateFilterContent,
     [MAIN_FILTERS.OCCURED_AT]: getDateFilterContent,
+    [MAIN_FILTERS.FOLLOW_UP]: getBooleanFilter,
     [ADDITIONAL_FILTERS.programStage]: getMainFilterOptionSet,
     [ADDITIONAL_FILTERS.status]: getMainFilterOptionSet,
     [ADDITIONAL_FILTERS.occurredAt]: getDateFilterContent,
@@ -188,7 +192,7 @@ const convertAttributeFilters = (
 const convertToClientMainFilters = TEIQueryCriteria =>
     Object.entries(TEIQueryCriteria).reduce((acc, [key, value]) => {
         // $FlowFixMe I accept that not every filter type is listed, thats why I'm doing this test
-        if (!mainFiltersTable[key] || !value) {
+        if (!mainFiltersTable[key] || value === undefined) {
             return acc;
         }
 

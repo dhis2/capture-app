@@ -5,12 +5,14 @@ export type MetadataBasedColumn = $ReadOnly<{|
     id: string,
     displayName: string,
     type: $Keys<typeof dataElementTypes>,
+    options?: Array<{ code: string, name: string }>,
 |}>;
 
 export type ManualColumn = $ReadOnly<{|
     id: string,
     displayName: string,
     convertValue: (value: any) => any,
+    options?: Array<{ code: string, name: string }>,
 |}>;
 
 export type TableColumn = MetadataBasedColumn | ManualColumn;
@@ -26,6 +28,7 @@ export type LinkedEntityData = $ReadOnly<{|
     values: $ReadOnly<{| [id: string]: ?string |}>,
     baseValues?: {
         relationshipCreatedAt?: string,
+        relationshipId: string,
         pendingApiResponse?: boolean,
     },
     navigation?: {

@@ -6,7 +6,7 @@ import type { CustomMenuContents } from '../../WorkingListsBase';
 type ExtractedProps = $ReadOnly<{|
     downloadRequest: { url: string, queryParams: ?Object },
     program: Program,
-    programStageId: string
+    programStageId: string,
 |}>;
 
 type RestProps = $Rest<EventWorkingListsTemplateSetupOutputProps, ExtractedProps>;

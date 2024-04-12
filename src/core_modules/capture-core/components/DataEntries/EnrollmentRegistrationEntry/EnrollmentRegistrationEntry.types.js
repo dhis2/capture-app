@@ -30,6 +30,7 @@ export type EnrollmentPayload = {|
                 orgUnit: string,
             }>,
             attributes: TrackedEntityAttributes,
+            geometry: any,
         |}
     ]
 |}

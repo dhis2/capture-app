@@ -10,13 +10,13 @@ In the Capture app you register events that occurred at a particular time and pl
 
 2. Select an organisation unit.
 
-3. Select a program.
+3. Select an event program.
 
     You will only see programs associated with the selected organisation unit and programs you have access to, and that are shared with your user group through data level sharing.
 
 4. If the program has a category combination set the category option will have to be selected.
 
-5. Click **New**.
+5. Click **Create new event**.
 
     ![create new event](resources/images/create_new_event.png)
 
@@ -71,7 +71,7 @@ The second option, is to register a tracked entity instance with program and enr
 
 2. Select an organisation unit.
 
-3. Click the "New" button.
+3. Click **Create new**.
 
     ![image](resources/images/register-without-enrollment-new-button.png)
 
@@ -106,7 +106,7 @@ The second option, is to register a tracked entity instance with program and enr
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. Click the **Save new** button to register the tracked entity instance.
+7. Click the **Save person** button to register the tracked entity instance. 
     
 8. You will now be prompted to the tracked entity instance dashboard. 
 
@@ -118,17 +118,11 @@ The second option, is to register a tracked entity instance with program and enr
 
 2. Select an organisation unit.
 
-3. Select a tracker program of your choice similar to the image below.
+3. Select a tracker program of your choice.
+
+4. Click **Create new person**. Please note that the label of this button corresponds to the tracked entity type of the program, which could vary, such as "Building," "Person," etc.
 
     ![create new event](resources/images/register-and-enroll-program-selection.png)
-
-4. Click the "New" dropdown button and then click the first option. 
-
-    The first option will look something similar to the image below. 
-    The text in our example is "New person in Child programme". 
-    Clicking this option will prompt you to the registration and enrollment 
-    page of the program you selected. 
-    ![create new event](resources/images/register-and-enroll-dropdown-button-new-person-in-program.png)
  
 5. Now, you will be able to see a form similar to the image below. 
 
@@ -152,7 +146,7 @@ The second option, is to register a tracked entity instance with program and enr
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. Click **Save new** to register the tracked entity instance. 
+7. Click **Save person** to register the tracked entity instance. 
     The **Save** button shows a loading spinner and the **Cancel** button is disabled while the request is processing.
     
 8. You will now be prompted to the tracked entity instance dashboard. 
@@ -266,17 +260,17 @@ Let us explain this with an example that demonstrates the detection of possible 
 2. Select your organisation unit and program from the menu on the top.
 ![](resources/images/duplicates-on-creation-01.png)
 
-3. Click "New" -> "New person in Child Programme"
+3. Click **Create new person**
 ![](resources/images/duplicates-on-creation-02.png)
 
 4. Fill in the first name in the form. **Remember, the first name we have checked as "Searchable" in the maintenance app.** 
-Click **Save new**. The system will start looking for possible duplicates that match the name Sarah.
+Click **Save person**. The system will start looking for possible duplicates that match the name Sarah.
 ![](resources/images/duplicates-on-creation-03.png)
 
 5. The system will automatically show a list of possible duplicates if there are any. 
 ![](resources/images/duplicates-on-creation-04.png)
 
-6. You can choose to make a new enrollement by clicking **Save new** or if you see the right person in the list - you can view the dashboard.
+6. You can choose to make a new enrollement by clicking **Save as new** or if you see the right person in the list - you can view the dashboard.
 ![](resources/images/duplicates-on-creation-05.png)
 
 > **Tip**
@@ -490,7 +484,7 @@ assigned to a program stage.
 
 > **Note**
 >
-> You can download an event list in JSON, XML or CSV formats.
+> You can download an event list in JSON or CSV formats.
 
 ## Predefined list views { #capture_views } 
 
@@ -790,6 +784,18 @@ You will find the predefined list views above the filters for the list. Click to
 
 ![](resources/images/tei_list_predefined_views.png)
 
+### Download the tracked entities list
+
+1. Open the **Capture** app.
+2. Select an organisation unit.
+3. Select a tracker program with "Display front page list" set to true.
+4. Click the **three dots** icon on the top right of the tracked entities list.
+5. Click **Download data**.
+6. Select the format you want to download.
+    ![download tracked entities list](resources/images/download_tracked_entities_list.png)
+> **Note**
+> You can download the tracked entities list in JSON or CSV formats.
+
 ## Tracker program stage working list
 
 You can show data elements from a single stage in a working list. Select the "Program stage" option from the "More filters" dropdown, then choose a program stage.
@@ -972,11 +978,21 @@ If the program only allows one enrollment per tracked entity instance, the **Add
 
 ![](resources/images/enrollment-dash-enrollment-widget-add-new.png)
 
+In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
+
+![](resources/images/enrollment-dash-enrollment-widget-transfer.png)
+
 #### Delete the enrollment
 
 You can delete the enrollment by clicking the delete button and confirming the action in the modal. 
 
 ![](resources/images/enrollment-dash-enrollment-widget-3.png)
+
+#### Complete the enrollment
+
+You can complete the enrollment by clicking the complete button. When there are active events, you can choose to complete the enrollment along with the events from the confirmation modal.
+
+![](resources/images/enrollment-dash-enrollment-widget-4.png)
 
 #### Enrollment comment widget
 
@@ -1028,6 +1044,10 @@ On the enrollment dashboard, you can view the tracked entity instance profile wi
 Click the **Edit** button to make changes to the tracked entity instance profile. Editing the profile opens a dialog where the profile attributes can be changed.
 
 ![](resources/images/enrollment-dash-tei-profile-widget-edit.png)
+
+Click the **Delete ${tracked entity type}** button to delete the tracked entity. You can confirm the action from the dialog. Once confirmed, tracked entity and all its associated enrollment and events across all programs will be deleted. To delete a tracked entity that has any enrollments, the user needs the authority **Delete tracked entity instance and associated enrollments and events**.
+
+![](resources/images/enrollment-dash-tei-profile-widget-delete.png)
 
 ### Feedback widget
 
@@ -1114,10 +1134,6 @@ To go to Enrollment Overview page you can:
 
 ![](resources/images/enrollment-event-new-navigation.png) 
 
-### New event widget form
-This is the form where you can modify the event details before saving. In the header you can see the stage name and icon.
-![](resources/images/new-event-widget-form-header.png)
-
 
 ### Scheduled date in edit event form
 If an event has the status Scheduled or Overdue, you will be able to see the **Report** and **Schedule** tab. 
@@ -1140,6 +1156,10 @@ If the flag “Hide due date” in the Maintenance configuration is enabled, sch
 However, you can still schedule an event, but it automatically chooses the date based on "Scheduled days from start" that has been configured in Maintenance, and this can not be changed. 
 In the **Schedule** tab, there will be “Schedule info” saying “Scheduled automatically for xx/xx/xx”, and the user can click  **Schedule** button.
 
+### Ask user to complete program when stage is complete
+If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user checks the **Complete** event checkbox and clicks save.
+
+![](resources/images/ask-user-to-complete-enrollment-edit-event.png)
 
 #### View mode
 
@@ -1163,9 +1183,24 @@ In this form you can also delete the event by clicking `Delete` button, a modal 
 
 The widgets seen in the right-hand column will display and function the same way as mentioned in the [enrollment dashboard](#enrollment-dashboard).
 
+##### Widget assignee
+1. In View/Edit enrollment event page
+
+2. In the right column you will find the assignee widget.
+
+    ![](resources/images/user_assignment_edit_enrollment.png)
+
+3. Click the **Edit** button, or the **Assign** button if the event is not currently assigned to anyone.
+
+    ![](resources/images/user_assignment_edit_button.png)
+
+    ![](resources/images/user_assignment_edit_add.png)
+
+4. Search for and select the user you would like to reassign the event to. Click the **Save** button.
+
 ![](resources/images/enrollment-event-view-edit-widgets.png)
 
-## Add event in enrollment page
+## Enrollment event new page
 
 You can reach this page add event page by clicking in the **New {stage event name}** button in the overview page. 
 In this page you can switch between different tabs: **Report** to add new event, **Schedule** to schedule an event and **Refer** to refer event.
@@ -1185,13 +1220,14 @@ To navigate back to the enrollment overview, click the **Cancel without saving**
 
 ![](resources/images/enrollment-event-new-stage-selection-list.png)
 
+### Ask user to complete program when stage is complete
+If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button.
+
+![](resources/images/ask-user-to-complete-enrollment-new-event.png)
+
 ### Ask user to create new event when stage is complete
 If this flag has been enabled for the stage in Stage details in Maintenance, a modal will show up after the user clicks the **Complete** button or checks the **Complete** event checkbox and clicks save. The user can choose the button **Yes, create new event** to navigate to the New Event page or **No, cancel** to navigate back to the enrollment dashboard. If there is only one possible stage available, the user will be taken directly to the New event workspace for that stage.
 
-### Schedule event widget form
-Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
-
-The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
 
 ### Assigning user to new events
 When reporting or scheduling an event, you can assign a user to it. This feature must be enabled per program stage in a tracker program by clicking the "Allow user assignment of events" check box.
@@ -1202,21 +1238,10 @@ You will find the assignee section near the bottom of the data entry page. Searc
 
 ![](resources/images/user_assignment_schedule_new_filled.png)
 
-### Change assignee
-1. In View/Edit enrollment event page
+### Schedule event widget form
+Instead of reporting an event the user can select to schedule an event for later. The form will open with a suggested scheduled date. This date is determined by a set of rules as explained below.
 
-2. In the right column you will find the assignee widget.
-
-    ![](resources/images/user_assignment_edit_enrollment.png)
-
-3. Click the **Edit** button, or the **Assign** button if the event is not currently assigned to anyone.
-
-    ![](resources/images/user_assignment_edit_button.png)
-
-    ![](resources/images/user_assignment_edit_add.png)
-
-4. Search for and select the user you would like to reassign the event to. Click the **Save** button.
-
+The suggested date for the first event of a program stage in an enrollment is always based on the enrollment date or the incident date (depending on the program configuration). The program stage configuration setting "scheduled days from start" will be added to the base date to cumpute the suggested date.
 
 #### 1. **Default next scheduled date**
 If a program stage has a default next scheduled date configured, the suggested date is the most recent next scheduled date. Below is an example of how this can work.

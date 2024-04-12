@@ -1,6 +1,6 @@
 // @flow
-import type { CustomColumnOrder } from '../../../WorkingListsCommon';
-import type { TeiColumnsMetaForDataFetching } from '../../types';
+import type { CustomColumnOrder } from '../../../../WorkingListsCommon';
+import type { TeiColumnsMetaForDataFetching } from '../../../types';
 
 const buildCustomColumnsConfiguration = (
     customApiOrder: Array<string>,

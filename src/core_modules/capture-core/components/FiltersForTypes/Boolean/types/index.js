@@ -1,2 +1,2 @@
 // @flow
-export { BooleanFilterData } from './boolean.types';
+export { BooleanFilterData, BooleanFilterStringified } from './boolean.types';

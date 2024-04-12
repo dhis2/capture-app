@@ -22,6 +22,7 @@ export type Props = {|
     itemId: string,
     onSave: (saveType: $Keys<addEventSaveTypes>) => void,
     onCancel: () => void,
+    onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
     formRef: (formInstance: any) => void,
     dataEntryFieldRef: (instance: any, id: string) => void,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,

@@ -22,6 +22,7 @@ import {
     cancelEditEventDataEntry,
     requestDeleteEventDataEntry,
     startCreateNewAfterCompleting,
+    requestSaveAndCompleteEnrollment,
 } from './editEventDataEntry.actions';
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
@@ -31,7 +32,7 @@ const mapStateToProps = (state: ReduxState, props) => {
     const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
 
     const dataEntryKey = `${props.dataEntryId}-${itemId}`;
-    const isCompleted = !!state.dataEntriesFieldsValue[dataEntryKey]?.complete;
+    const isCompleted = state.dataEntriesFieldsValue[dataEntryKey]?.complete === 'true';
 
     return {
         ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
@@ -91,8 +92,34 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         dispatch(startAsyncUpdateFieldForEditEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        const { onSaveExternal } = props;
         window.scrollTo(0, 0);
+        onSaveExternal && onSaveExternal();
         dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
+    },
+    onSaveAndCompleteEnrollment: (orgUnit: OrgUnit) => (
+        eventId: string,
+        dataEntryId: string,
+        formFoundation: RenderFoundation,
+        enrollment: Object,
+    ) => {
+        const {
+            onSaveAndCompleteEnrollmentExternal,
+            onSaveAndCompleteEnrollmentSuccessActionType,
+            onSaveAndCompleteEnrollmentErrorActionType,
+        } = props;
+        dispatch(
+            requestSaveAndCompleteEnrollment({
+                itemId: eventId,
+                dataEntryId,
+                formFoundation,
+                orgUnit,
+                onSaveAndCompleteEnrollmentExternal,
+                onSaveAndCompleteEnrollmentSuccessActionType,
+                onSaveAndCompleteEnrollmentErrorActionType,
+                enrollment,
+            }),
+        );
     },
     onCancel: () => {
         const { eventStatus, onCancelEditEvent } = props;

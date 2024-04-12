@@ -6,7 +6,7 @@ const DEFAULT_SORT = {
     sortByDirection: 'desc',
 };
 
-export const convertValue = (order: ?string, columnsMetaForDataFetching?: TeiColumnsMetaForDataFetching) => {
+export const convertSortOrder = (order: ?string, columnsMetaForDataFetching?: TeiColumnsMetaForDataFetching) => {
     const sortOrderParts = order && order.split(':');
     if (!sortOrderParts || sortOrderParts.length < 2) {
         return DEFAULT_SORT;
