@@ -1,5 +1,6 @@
 // @flow
 import React, { useMemo, type ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
     SingleSelectField,
@@ -8,8 +9,7 @@ import {
 } from '@dhis2/ui';
 import type { Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
-import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
-import { useCurrentTrackedEntityTypeId } from '../../hooks/useCurrentTrackedEntityTypeId';
+import { useTrackedEntityTypesWithCorrelatedPrograms, useCurrentTrackedEntityTypeId } from '../../hooks';
 import { InfoIconText } from '../InfoIconText';
 
 const styles = ({ typography }) => ({
@@ -51,7 +51,11 @@ export const TrackedEntityTypeSelectorPlain =
                       label={headerText}
                       onChange={handleSelectionChange}
                       selected={selectedSearchScopeId}
-                      empty={<div className={classes.customEmpty}>Custom empty component</div>}
+                      empty={
+                          <div className={classes.customEmpty}>
+                              {i18n.t('No tracked entity types available')}
+                          </div>
+                      }
                   >
                       {
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
