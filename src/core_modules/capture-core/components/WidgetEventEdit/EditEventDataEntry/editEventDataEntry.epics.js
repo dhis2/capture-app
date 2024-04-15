@@ -196,8 +196,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
 
             if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {
                 actions = [rollbackEnrollmentEvent(eventContainer.event.eventId)];
-            }
-            if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR) {
+            } else if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR) {
                 actions = [rollbackEnrollmentAndEvents()];
             }
             return batchActions(actions, batchActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED);
