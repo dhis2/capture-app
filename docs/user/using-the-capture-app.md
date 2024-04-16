@@ -1088,6 +1088,12 @@ Colored legend circles are only shown for indicator values that have them set up
 On the enrollment dashboard, the warning widget displays warnings related to the current dashboard. The widget shows warnings that are not associated with any specific data item.
 If there aren't any warnings to show for the current dashboard then the widget is hidden.
 
+### Error Widget
+
+![](resources/images/enrollment-dash-error-widget-1.png)
+
+On the enrollment dashboard, the errors widget displays errors related to the current dashboard. The widget shows errors that are not associated with any specific data item.
+If there aren't any errors to show for the current dashboard then the widget is hidden.
 
 ## Enrollment event view and edit page
 
@@ -1105,14 +1111,6 @@ To go to Enrollment Overview page you can:
 - deselect the event from the top bar.
 
 ![](resources/images/enrollment-event-view-edit-navigation.png)
-
-
-### Error Widget
-
-![](resources/images/enrollment-dash-error-widget-1.png)
-
-On the enrollment dashboard, the errors widget displays errors related to the current dashboard. The widget shows errors that are not associated with any specific data item.
-If there aren't any errors to show for the current dashboard then the widget is hidden.
 
 ### View/Edit event form 
 
