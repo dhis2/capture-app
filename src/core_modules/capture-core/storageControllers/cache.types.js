@@ -200,6 +200,8 @@ export type CachedProgram = {
     trackedEntityTypeId: ?string,
     incidentDateLabel: ?string,
     enrollmentDateLabel: ?string,
+    displayEnrollmentDateLabel: string,
+    displayIncidentDateLabel: string,
     dataEntryForm: ?CachedDataEntryForm,
     featureType: ?string,
     selectEnrollmentDatesInFuture: boolean,
