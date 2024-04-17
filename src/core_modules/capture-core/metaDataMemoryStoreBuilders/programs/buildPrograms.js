@@ -190,10 +190,10 @@ function getBuiltPrograms(
                 return false;
             }
 
-            const { read, write } =
+            const { read } =
                 trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId)?.access?.data || {};
 
-            return (read && write);
+            return read;
         })
         .map(cachedProgram => programFactory.build(cachedProgram));
 

@@ -16,7 +16,7 @@ const styles = () => ({
 });
 
 type Props = {|
-    title: string,
+    title?: string,
     message: string,
     ...CssClasses
 |}
