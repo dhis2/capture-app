@@ -98,6 +98,15 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
 
         return newState;
     },
+    [formAsyncActionTypes.FIELD_VALIDATED]: (state, action) => {
+        const newState = { ...state };
+        const { formId, fieldUI } = action.payload;
+        const { fieldId, ...restPayload } = fieldUI;
+        const newValues = { ...newState[formId][fieldId], ...restPayload, validatingMessage: null };
+
+        newState[formId] = { ...newState[formId], [fieldId]: newValues };
+        return newState;
+    },
     [formAsyncActionTypes.FIELDS_VALIDATED]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
@@ -216,13 +225,11 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         const updatedFields = Object.keys(assignEffects).reduce((acc, id) => {
             if (formSectionFields[id]) {
                 acc[id] = {
-                    valid: true,
-                    errorData: undefined,
-                    errorMessage: undefined,
-                    errorType: undefined,
+                    ...state[formId][id],
                     modified: true,
                     touched: true,
                     validatingMessage: null,
+                    pendingValidation: true,
                 };
             }
             return acc;
