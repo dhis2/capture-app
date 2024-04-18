@@ -2832,6 +2832,14 @@
     workbox-routing "^6.1.5"
     workbox-strategies "^6.1.5"
 
+"@dhis2/rule-engine@^3.0.0-beta.6":
+  version "3.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.0.0-beta.6.tgz#a8a33ec6d57f90b0b42ef89249bb1bf2c9439356"
+  integrity sha512-hwHuwEAEv1zcVz2ndvKMdrSxW6UKdW7b+HxbIiSHs3h1A90ygcggYS3BZlHx4xaFZXTHLOXdt+clbM50u4W+2g==
+  dependencies:
+    "@js-joda/core" "3.2.0"
+    format-util "^1.0.5"
+
 "@dhis2/ui-constants@10.0.3":
   version "10.0.3"
   resolved "https://registry.yarnpkg.com/@dhis2/ui-constants/-/ui-constants-10.0.3.tgz#c2703847dc94d727a0e7d7bb03f4f3de29f1d543"
@@ -3561,7 +3569,12 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@js-temporal/polyfill@0.4.3":
+"@js-joda/core@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@js-joda/core/-/core-3.2.0.tgz#3e61e21b7b2b8a6be746df1335cf91d70db2a273"
+  integrity sha512-PMqgJ0sw5B7FKb2d5bWYIoxjri+QlW/Pys7+Rw82jSH0QN3rB05jZ/VrrsUdh1w4+i2kw9JOejXGq/KhDOX7Kg==
+
+"@js-temporal/polyfill@0.4.3", "@js-temporal/polyfill@^0.4.2":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@js-temporal/polyfill/-/polyfill-0.4.3.tgz#e8f8cf86745eb5050679c46a5ebedb9a9cc1f09b"
   integrity sha512-6Fmjo/HlkyVCmJzAPnvtEWlcbQUSRhi8qlN9EtJA/wP7FqXsevLLrlojR44kzNzrRkpf7eDJ+z7b4xQD/Ycypw==
@@ -9468,6 +9481,11 @@ form-data@~2.3.2:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
+
+format-util@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/format-util/-/format-util-1.0.5.tgz#1ffb450c8a03e7bccffe40643180918cc297d271"
+  integrity sha512-varLbTj0e0yVyRpqQhuWV+8hlePAgaoFRhNFj50BNjEIrw1/DphHSObtqwskVCPWNgzwPoQrZAbfa/SBiicNeg==
 
 forwarded@0.2.0:
   version "0.2.0"

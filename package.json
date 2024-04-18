@@ -10,6 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
+        "@dhis2/rule-engine": "^3.0.0-beta.6",
         "@dhis2/rules-engine-javascript": "101.24.2",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
