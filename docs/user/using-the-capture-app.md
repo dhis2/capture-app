@@ -994,7 +994,7 @@ You can complete the enrollment by clicking the complete button. When there are 
 
 ![](resources/images/enrollment-dash-enrollment-widget-4.png)
 
-#### Enrollment comment widget
+### Enrollment comment widget
 
 ![](resources/images/enrollment-widget-comment.png)
 
