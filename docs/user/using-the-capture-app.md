@@ -998,7 +998,7 @@ You can complete the enrollment by clicking the complete button. When there are 
 
 ![](resources/images/enrollment-widget-comment.png)
 
-The enrollment comment widget displays comments and allows addition of comments, associated with the current enrollment. 
+The enrollment comment widget (equivalent of the Notes widget in Tracker Capture app) displays comments and allows addition of comments, associated with the current enrollment.
 
 By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**. Note that Enrollment comments are attributed to a user and cannot be deleted. 
 
