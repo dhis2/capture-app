@@ -1,6 +1,8 @@
 // @flow
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { convertServerToClient } from '../../../../../../../converters';
 import type { ApiTeis, ApiTeiAttributes, TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
+import { dataElementTypes } from '../../../../../../../metaData';
 
 const getValuesById = (attributeValues?: ApiTeiAttributes = []) =>
     attributeValues
@@ -26,15 +28,29 @@ export const convertToClientTeis = (
                         value = attributeValuesById[id];
                     }
 
+                    const urls = (type === dataElementTypes.IMAGE) ?
+                        (() => (featureAvailable(FEATURES.trackerImageEndpoint) ?
+                            {
+                                imageUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}`,
+                                previewUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
+                            } : {
+                                imageUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
+                                previewUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
+                            }
+                        ))() : {};
+
                     return {
                         id,
                         value: convertServerToClient(value, type),
-                        urlPath: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
+                        ...urls,
                     };
                 })
                 .filter(({ value }) => value != null)
-                .reduce((acc, { id, value, urlPath }) => {
-                    acc[id] = { convertedValue: value, urlPath };
+                .reduce((acc, { id, value, imageUrl, previewUrl }: any) => {
+                    acc[id] = {
+                        convertedValue: value,
+                        ...(imageUrl ? { imageUrl, previewUrl } : {}),
+                    };
                     return acc;
                 }, {});
 

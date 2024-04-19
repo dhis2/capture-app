@@ -35,10 +35,10 @@ import {
     VirtualizedSelectField,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
-import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 import { withDeleteButton } from '../DataEntry/withDeleteButton';
 import { withAskToCreateNew } from '../../DataEntry/withAskToCreateNew';
+import { withAskToCompleteEnrollment } from '../../DataEntries';
 import { actionTypes } from './editEventDataEntry.actions';
 import {
     AOCsectionKey,
@@ -253,6 +253,7 @@ const buildGeometrySettingsFn = () => ({
                 label: i18n.t('Area'),
                 dialogLabel: i18n.t('Area'),
                 required: false,
+                orgUnit: props.orgUnit,
             });
         }
         return createComponentProps(props, {
@@ -260,6 +261,7 @@ const buildGeometrySettingsFn = () => ({
             label: i18n.t('Coordinate'),
             dialogLabel: i18n.t('Coordinate'),
             required: false,
+            orgUnit: props.orgUnit,
         });
     },
     getPropName: () => 'geometry',
@@ -372,7 +374,8 @@ const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 const DeletableDataEntry = withDeleteButton()(CompletableDataEntry);
 const AskToCreateNewDataEntry = withAskToCreateNew()(DeletableDataEntry);
-const DataEntryWrapper = withBrowserBackWarning()(AskToCreateNewDataEntry);
+const AskToCompleteEnrollment = withAskToCompleteEnrollment()(AskToCreateNewDataEntry);
+const DataEntryWrapper = withBrowserBackWarning()(AskToCompleteEnrollment);
 
 type Props = {
     formFoundation: ?RenderFoundation,
@@ -384,6 +387,9 @@ type Props = {
     onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
     onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSaveAndCompleteEnrollment: (
+        orgUnit: OrgUnit,
+    ) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onHandleScheduleSave: (eventData: Object) => void,
     onDelete: () => void,
     onCancel: () => void,
@@ -439,10 +445,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
         this.dataEntrySections = dataEntrySectionDefinitions;
         this.state = { mode: tabMode.REPORT };
         this.onHandleSwitchTab = this.onHandleSwitchTab.bind(this);
-    }
-
-    componentWillUnmount() {
-        inMemoryFileStore.clear();
     }
 
     onHandleSwitchTab = newMode => this.setState({ mode: newMode })
@@ -504,6 +506,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             onUpdateField,
             onStartAsyncUpdateField,
             onSave,
+            onSaveAndCompleteEnrollment,
             classes,
             ...passOnProps
         } = this.props;
@@ -515,8 +518,10 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onUpdateFormField={onUpdateField(orgUnit, programId)}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit, programId)}
                 onSave={onSave(orgUnit)}
+                onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
+                orgUnit={orgUnit}
                 programId={programId}
                 selectedOrgUnitId={orgUnit?.id}
                 {...passOnProps}

@@ -48,12 +48,10 @@ export const useProgramMetadata = (programId: string) => {
         () => (optionSets ? optionSets.reduce(
             (acc, optionSet) => {
                 acc[optionSet.id] = {
-                    optionSet: {
-                        options: optionSet.options.map(option => ({
-                            name: option.displayName,
-                            code: option.code,
-                        })),
-                    },
+                    options: optionSet.options.map(option => ({
+                        name: option.displayName,
+                        code: option.code,
+                    })),
                 };
                 return acc;
             }, {}) : undefined),

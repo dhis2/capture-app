@@ -17,7 +17,9 @@ import {
     groupRecordsByType,
 } from './helpers';
 import { SORT_DIRECTION, MULIT_TEXT_WITH_NO_OPTIONS_SET } from './constants';
-import { isNotValidOptionSet } from '../../../../../../utils/isNotValidOptionSet';
+import {
+    isMultiTextWithoutOptionset,
+} from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName';
 
 const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
@@ -47,22 +49,11 @@ const getAllFieldsWithValue = (
     dataElements: Array<StageDataElement>,
     dataElementsByType: Array<{type: string, eventId: string, ids: Object}>,
 ) => dataElements
-    .reduce((acc, { id, type, options }) => {
+    .reduce((acc, { id, type }) => {
         const value = dataElementsByType
             .find(item => item.type === type && item.eventId === eventId)?.ids?.[id];
         if (type && value) {
-            if (options) {
-                if (options[value]) {
-                    acc[id] = options[value];
-                } else {
-                    log.error(
-                        errorCreator('Missing value in options')({ id, value, options }),
-                    );
-                    acc[id] = convertServerToClient(value, type);
-                }
-            } else {
-                acc[id] = convertServerToClient(value, type);
-            }
+            acc[id] = convertServerToClient(value, type);
         } else {
             acc[id] = undefined;
         }
@@ -125,7 +116,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
             if (!acc.find(item => item.id === id)) {
-                if (isNotValidOptionSet(type, optionSet)) {
+                if (isMultiTextWithoutOptionset(type, optionSet)) {
                     log.error(errorCreator(MULIT_TEXT_WITH_NO_OPTIONS_SET)({ currDataElement }));
                     return acc;
                 }

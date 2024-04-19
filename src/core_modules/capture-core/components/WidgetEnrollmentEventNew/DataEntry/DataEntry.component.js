@@ -223,6 +223,7 @@ const buildGeometrySettingsFn = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
+                orgUnit: props.orgUnit,
             });
         }
 
@@ -233,6 +234,7 @@ const buildGeometrySettingsFn = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
+            orgUnit: props.orgUnit,
         });
     },
     getPropName: () => 'geometry',

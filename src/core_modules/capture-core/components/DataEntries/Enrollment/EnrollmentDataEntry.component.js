@@ -239,6 +239,7 @@ const getGeometrySettings = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
+                orgUnit: props.orgUnit,
             });
         }
 
@@ -249,6 +250,7 @@ const getGeometrySettings = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
+            orgUnit: props.orgUnit,
         });
     },
     getPropName: () => 'geometry',
@@ -371,7 +373,6 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-
 const AOCFieldBuilderHOC = withAOCFieldBuilder(getAOCSettingsFn())(
     withDataEntryFields(
         getCategoryOptionsSettingsFn(),
@@ -431,7 +432,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
 
     render() {
         const {
-            orgUnit,
             onUpdateField,
             onUpdateDataEntryField,
             onStartAsyncUpdateField,

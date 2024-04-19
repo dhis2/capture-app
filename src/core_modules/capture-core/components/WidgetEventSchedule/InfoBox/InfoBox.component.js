@@ -48,7 +48,7 @@ const InfoBoxPlain = ({
                     defaultValue: 'There are {{count}} scheduled event in {{orgUnitName}} on this day.',
                     defaultValue_plural: 'There are {{count}} scheduled events in {{orgUnitName}} on this day.',
                     interpolation: {
-                        escape: false,
+                        escapeValue: false,
                     },
                 })}</>}
         </NoticeBox>

@@ -9,12 +9,17 @@ export type Props = {|
     onGoBack: () => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) =>void,
+    onSaveExternal: () => void,
     orgUnitId: string,
     programId: string,
     enrollmentId: string,
+    eventId: string,
     teiId: string,
     initialScheduleDate?: string,
     assignee?: UserFormField | null,
+    onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
+    onSaveAndCompleteEnrollmentSuccessActionType?: string,
+    onSaveAndCompleteEnrollmentErrorActionType?: string,
 |};
 
 export type PlainProps = {|

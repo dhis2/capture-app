@@ -54,6 +54,7 @@ import {
     saveEditedEventSucceededEpic,
     requestDeleteEventDataEntryEpic,
     startCreateNewAfterCompletingEpic,
+    saveEventAndCompleteEnrollmentEpic as saveEditEventAndCompleteEnrollmentEpic,
 } from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
@@ -187,15 +188,28 @@ import {
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 
 import {
-    fetchEnrollmentPageInformationFromUrlEpic,
-    startFetchingTeiFromEnrollmentIdEpic,
-    startFetchingTeiFromTeiIdEpic,
+    changedEnrollmentIdEpic,
+    fetchEnrollmentIdEpic,
+    verifyEnrollmentIdSuccessEpic,
+    enrollmentIdErrorEpic,
+    changedTeiIdEpic,
+    resetTeiIdEpic,
+    fetchTeiIdEpic,
+    verifyTeiFetchSuccessEpic,
+    fetchTeiErrorEpic,
+    changedProgramIdEpic,
+    programIdErrorEpic,
+    teiOrProgramChangeEpic,
     fetchEnrollmentsEpic,
-    openEnrollmentPageEpic,
+    verifyFetchedEnrollmentsEpic,
+    autoSwitchOrgUnitEpic,
+    clearErrorViewEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
+    saveEventAndCompleteEnrollmentSucceededEpic,
+    saveEventAndCompleteEnrollmentFailedEpic,
 } from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent/EnrollmentAddEventPage.epics';
 import {
     updateEventSucceededEpic,
@@ -205,6 +219,7 @@ import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
+    saveEventAndCompleteEnrollmentEpic,
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
 import {
@@ -326,11 +341,22 @@ export const epics = combineEpics(
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     completeSavingNewTrackedEntityInstanceEpic,
     completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
-    fetchEnrollmentPageInformationFromUrlEpic,
-    startFetchingTeiFromEnrollmentIdEpic,
-    startFetchingTeiFromTeiIdEpic,
+    changedEnrollmentIdEpic,
+    fetchEnrollmentIdEpic,
+    verifyEnrollmentIdSuccessEpic,
+    enrollmentIdErrorEpic,
+    changedTeiIdEpic,
+    resetTeiIdEpic,
+    fetchTeiIdEpic,
+    verifyTeiFetchSuccessEpic,
+    fetchTeiErrorEpic,
+    changedProgramIdEpic,
+    programIdErrorEpic,
+    teiOrProgramChangeEpic,
     fetchEnrollmentsEpic,
-    openEnrollmentPageEpic,
+    verifyFetchedEnrollmentsEpic,
+    autoSwitchOrgUnitEpic,
+    clearErrorViewEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
     saveNewEventInStageLocationChangeEpic,
@@ -339,6 +365,9 @@ export const epics = combineEpics(
     saveNewEnrollmentEventEpic,
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
+    saveEventAndCompleteEnrollmentEpic,
+    saveEventAndCompleteEnrollmentSucceededEpic,
+    saveEventAndCompleteEnrollmentFailedEpic,
     updateEventSucceededEpic,
     updateEventFailedEpic,
     addNoteForNewEnrollmentEventEpic,
@@ -353,4 +382,5 @@ export const epics = combineEpics(
     navigateToNewTrackedEntityPageEpic,
     requestDeleteEventDataEntryEpic,
     startCreateNewAfterCompletingEpic,
+    saveEditEventAndCompleteEnrollmentEpic,
 );

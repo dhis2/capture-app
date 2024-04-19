@@ -80,5 +80,5 @@ export type LoadTeiView = (
         columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
         filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     |},
-) => void;
+) => Promise<void> | void;
 

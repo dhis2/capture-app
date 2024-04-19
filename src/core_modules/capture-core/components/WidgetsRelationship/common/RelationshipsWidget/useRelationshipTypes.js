@@ -8,12 +8,19 @@ type Element = {|
     id: string,
     displayName: string,
     valueType: string,
+    optionSet?: {|
+        options: Array<{
+            code: string,
+            name: string,
+        }>,
+    |},
 |};
 
 const relationshipTypesQuery = {
     resource: 'relationshipTypes',
     params: {
-        fields: 'id,displayName,fromToName,toFromName,fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
+        filter: 'access.data.read:eq:true',
+        fields: 'id,displayName,fromToName,toFromName,access[data[read,write],read,write],fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
     },
 };
 
@@ -34,7 +41,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         const filteredAttributeQuery = {
             resource: 'trackedEntityAttributes',
             params: {
-                fields: 'id,displayName,valueType',
+                fields: 'id,displayName,valueType,optionSet[id,options[code,name]]',
                 filter: `id:in:[${Object.keys(attributeIds).join(',')}]`,
                 paging: false,
             },
@@ -43,7 +50,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         const filteredDataElementQuery = {
             resource: 'dataElements',
             params: {
-                fields: 'id,displayName,valueType',
+                fields: 'id,displayName,valueType,optionSet[id,options[code,name]]',
                 filter: `id:in:[${Object.keys(dataElementIds).join(',')}]`,
                 paging: false,
             },

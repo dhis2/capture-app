@@ -13,6 +13,7 @@ type Props = {|
     cachedTrackedEntityType: CachedTrackedEntityType,
     dataEntryFormConfig: ?DataEntryFormConfig,
     locale: string,
+    minorServerVersion: number,
 |}
 
 export const buildTrackedEntityTypeCollection = async ({
@@ -21,13 +22,14 @@ export const buildTrackedEntityTypeCollection = async ({
     cachedTrackedEntityType,
     dataEntryFormConfig,
     locale,
+    minorServerVersion,
 }: Props) => {
-    const trackedEntityTypeFactory = new TrackedEntityTypeFactory(
+    const trackedEntityTypeFactory = new TrackedEntityTypeFactory({
         cachedTrackedEntityAttributes,
         cachedOptionSets,
         locale,
         dataEntryFormConfig,
-    );
-
+        minorServerVersion,
+    });
     return trackedEntityTypeFactory.build(cachedTrackedEntityType);
 };

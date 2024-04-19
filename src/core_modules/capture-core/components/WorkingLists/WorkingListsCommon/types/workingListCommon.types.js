@@ -35,7 +35,7 @@ export type LoadView = (
         columnsMetaForDataFetching: any,
         filtersOnlyMetaForDataFetching: any,
     },
-) => void;
+) => Promise<void> | void;
 
 export type InitialViewConfig = {|
     filters?: FiltersData,
