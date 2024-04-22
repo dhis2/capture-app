@@ -1,3 +1,11 @@
+## [100.67.12](https://github.com/dhis2/capture-app/compare/v100.67.11...v100.67.12) (2024-04-22)
+
+
+### Bug Fixes
+
+* [DHIS2-14938] trigger error on complete ([#3594](https://github.com/dhis2/capture-app/issues/3594)) ([005877c](https://github.com/dhis2/capture-app/commit/005877ce88a2d28dfc053b39869090cd9573bfdd))
+* [DHIS2-16999] filter assign rule effects in the view event page ([#3597](https://github.com/dhis2/capture-app/issues/3597)) ([f2007e3](https://github.com/dhis2/capture-app/commit/f2007e368b0844730ed36c654e1e01323fb92ed2))
+
 ## [100.67.11](https://github.com/dhis2/capture-app/compare/v100.67.10...v100.67.11) (2024-04-14)
 
 
