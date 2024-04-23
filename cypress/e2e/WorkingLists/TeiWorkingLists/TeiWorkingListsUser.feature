@@ -257,7 +257,7 @@ Then the Custom Program stage list is deleted
 
 @v>=40
 Scenario: The user can download the tracked entity working list
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 And you open the menu and click the "Download data..." button
 Then the download dialog opens
 Then the CSV button exists
@@ -265,7 +265,14 @@ Then the JSON button exists
 
 @v<40
 Scenario: The user can download the tracked entity working list
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 And you open the menu and click the "Download data..." button
 Then the download dialog opens
 Then the JSON button exists
+
+Scenario: The user cannot download the tracked entity working list when no orgUnit is selected
+Given you open the main page with child programe context
+And the user clicks the element containing the text: Or see all records accessible to you in Child Programme 
+And you open the menu
+Then the "Download data..." button is hidden
+

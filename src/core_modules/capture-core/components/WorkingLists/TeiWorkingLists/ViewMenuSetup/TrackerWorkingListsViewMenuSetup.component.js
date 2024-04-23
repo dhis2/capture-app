@@ -17,6 +17,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
     onUpdateList,
     storeId,
     programStageId,
+    orgUnitId,
     ...passOnProps
 }: Props) => {
     const hasCSVSupport = useFeature(FEATURES.trackedEntitiesCSV);
@@ -26,7 +27,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
     const dataEngine = useDataEngine();
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
     const customListViewMenuContents: CustomMenuContents = useMemo(() => {
-        if (programStageId) {
+        if (programStageId || !orgUnitId) {
             return [];
         }
 
@@ -37,7 +38,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 element: i18n.t('Download data...'),
             },
         ];
-    }, [setDownloadDialogOpenStatus, programStageId]);
+    }, [setDownloadDialogOpenStatus, programStageId, orgUnitId]);
 
     const handleCloseDialog = useCallback(() => {
         setDownloadDialogOpenStatus(false);
@@ -90,6 +91,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
         <>
             <TeiWorkingListsSetup
                 {...passOnProps}
+                orgUnitId={orgUnitId}
                 programStageId={programStageId}
                 customListViewMenuContents={customListViewMenuContents}
                 onLoadView={injectDownloadRequestToLoadView}
