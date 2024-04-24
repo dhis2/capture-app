@@ -83,6 +83,8 @@ jobs:
             matrix:
                 versions: ${{ fromJSON(needs.prerequisites.outputs.versions) }}
                 containers: ${{ fromJSON(needs.prerequisites.outputs.matrix-containers) }}
+        env:
+            SHOULD_RECORD: ${{ contains(github.event.head_commit.message, '[e2e record]') || contains(join(github.event.pull_request.labels.*.name), 'e2e record') }}
         steps:
             - uses: actions/checkout@v3
 
@@ -99,16 +101,17 @@ jobs:
             - name: Cypress run
               uses: cypress-io/github-action@v6
               with:
-                  record: true
-                  parallel: true
-                  group: e2e-chrome-parallel-${{ matrix.versions }}
+                  record: ${{ env.SHOULD_RECORD }}
+                  parallel: ${{ env.SHOULD_RECORD }}
+                  group: ${{ env.SHOULD_RECORD && format('e2e-chrome-parallel-{0}', matrix.versions) }}
+                  ci-build-id: ${{ env.SHOULD_RECORD && github.run_id }}
                   browser: chrome
                   start: yarn start:forCypress
                   wait-on: http://localhost:3000
                   wait-on-timeout: 300
               env:
                   CI: true
-                  CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   CYPRESS_dhis2BaseUrl: ${{ steps.instance-url.outputs.url }}
                   CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}

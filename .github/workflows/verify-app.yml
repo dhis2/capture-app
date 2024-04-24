@@ -117,6 +117,8 @@ jobs:
       fail-fast: false
       matrix:
         containers: [1, 2, 3, 4, 5]
+    env:
+      SHOULD_RECORD: ${{ contains(github.event.head_commit.message, '[e2e record]') || contains(join(github.event.pull_request.labels.*.name), 'e2e record') }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -126,16 +128,17 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          record: true
-          parallel: true
-          group: e2e-chrome-parallel-dev
+          record: ${{ env.SHOULD_RECORD }}
+          parallel: ${{ env.SHOULD_RECORD }}
+          group: ${{ env.SHOULD_RECORD && 'e2e-chrome-parallel-dev' }}
+          ci-build-id: ${{ env.SHOULD_RECORD && github.run_id }}
           browser: chrome
           start: yarn start:forCypress
           wait-on: http://localhost:3000
           wait-on-timeout: 300
         env:
           CI: true
-          CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_dhis2BaseUrl: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}/ca-test-dev
           CYPRESS_dhis2InstanceVersion: ${{ needs.instance-version.outputs.version }}

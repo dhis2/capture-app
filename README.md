@@ -76,6 +76,15 @@ REACT_APP_DHIS2_BASE_URL="http://localhost:8080"
 
 To run Cypress tests locally on your own machine, follow the instructions [here](https://github.com/dhis2/capture-app/wiki/Cypress#run-cypress-tests-locally).
 
+## Conditional E2E Test Recording
+
+To record tests in Cypress Cloud, you can use one of the following methods based on your needs:
+
+-   **Commit Message**: Include `[e2e record]` in your commit messages to activate recording.
+-   **GitHub Labels**: Apply the `e2e record` label to your pull request to trigger recording.
+
+This setup helps in managing Cypress Cloud credits more efficiently, ensuring recordings are only made when explicitly required.
+
 ## Built With
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
