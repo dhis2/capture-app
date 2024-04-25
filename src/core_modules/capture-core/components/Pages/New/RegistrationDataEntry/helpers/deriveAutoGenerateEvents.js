@@ -62,9 +62,11 @@ export const deriveAutoGenerateEvents = ({
                     : {
                         status: 'SCHEDULE',
                         // for schedule type of events we want to add the standard interval days to the date
-                        scheduledAt: moment(convertFn(dateToUseInScheduleStatus, dataElementTypes.DATE))
+                        scheduledAt: convertFn(moment(dateToUseInScheduleStatus)
                             .add(minDaysFromStart, 'days')
                             .format('YYYY-MM-DD'),
+                        dataElementTypes.DATE,
+                        ),
                     };
 
                 return {
