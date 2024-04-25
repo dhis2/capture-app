@@ -1,3 +1,10 @@
+# [100.68.0](https://github.com/dhis2/capture-app/compare/v100.67.12...v100.68.0) (2024-04-25)
+
+
+### Features
+
+* [DHIS2-13299][DHIS2-16291] Related Stages ([#3488](https://github.com/dhis2/capture-app/issues/3488)) ([85f38be](https://github.com/dhis2/capture-app/commit/85f38bedd60c307788cf17237338765bf9fed7f0))
+
 ## [100.67.12](https://github.com/dhis2/capture-app/compare/v100.67.11...v100.67.12) (2024-04-22)
 
 
