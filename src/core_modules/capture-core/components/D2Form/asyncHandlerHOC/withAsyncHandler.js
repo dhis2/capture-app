@@ -2,13 +2,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuid } from 'uuid';
-import { fieldIsValidating, fieldsValidated, fieldValidated, startUpdateFieldAsync } from './actions';
+import { fieldIsValidating, fieldsValidated, startUpdateFieldAsync } from './actions';
 
 type Props = {
     id: string,
     onIsValidating: Function,
     onFieldsValidated: Function,
-    onFieldValidated: Function,
     onUpdateFieldAsyncInner: Function,
     onUpdateFieldAsync: ?Function,
 };
@@ -29,12 +28,6 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
         }
 
         // $FlowFixMe[missing-annot] automated comment
-        handleFieldValidated = (...args) => {
-            const { id } = this.props;
-            this.props.onFieldValidated(...args, id);
-        }
-
-        // $FlowFixMe[missing-annot] automated comment
         handleUpdateFieldAsyncInner = (...args) => {
             const { onUpdateFieldAsyncInner, onUpdateFieldAsync } = this.props;
             onUpdateFieldAsyncInner(...args, onUpdateFieldAsync);
@@ -44,7 +37,6 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
             const {
                 onIsValidating,
                 onFieldsValidated,
-                onFieldValidated,
                 onUpdateFieldAsyncInner,
                 onUpdateFieldAsync,
                 ...passOnProps } = this.props;
@@ -53,7 +45,6 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
                 <InnerComponent
                     onIsValidating={this.handleIsValidating}
                     onFieldsValidated={this.handleFieldsValidated}
-                    onFieldValidated={this.handleFieldValidated}
                     onUpdateFieldAsync={this.handleUpdateFieldAsyncInner}
                     {...passOnProps}
                 />
@@ -82,15 +73,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         formId: string,
     ) => {
         const action = fieldsValidated(fieldsUI, formBuilderId, formId, validatingUids);
-        dispatch(action);
-    },
-    onFieldValidated: (
-        fieldUI: Object,
-        formBuilderId: string,
-        validatingUid: string,
-        formId: string,
-    ) => {
-        const action = fieldValidated(fieldUI, formBuilderId, formId, validatingUid);
         dispatch(action);
     },
     onUpdateFieldAsyncInner: (

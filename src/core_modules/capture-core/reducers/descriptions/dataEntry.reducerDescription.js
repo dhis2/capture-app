@@ -291,14 +291,6 @@ export const dataEntriesInProgressListDesc = createReducerDescription({
             [formId]: updatedList,
         };
     },
-    [formAsyncActionTypes.FIELD_VALIDATED]: (state, action) => {
-        const { formId, validatingUid } = action.payload;
-        const updatedList = (state[formId] || []).filter(item => item !== validatingUid);
-        return {
-            ...state,
-            [formId]: updatedList,
-        };
-    },
     [actionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const { formId, updateCompleteUid } = action.payload;
         const updatedList = (state[formId] || []).filter(item => item !== updateCompleteUid);

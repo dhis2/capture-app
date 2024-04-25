@@ -3,7 +3,6 @@ import i18n from '@dhis2/d2-i18n';
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const actionTypes = {
-    FIELD_VALIDATED: 'FieldValidated',
     FIELDS_VALIDATED: 'FieldsValidated',
     FIELD_IS_VALIDATING: 'FieldIsValidating',
     START_UPDATE_FIELD_ASYNC: 'StartUpdateFieldAsync',
@@ -38,13 +37,6 @@ export const fieldsValidated = (
 ) =>
     actionCreator(actionTypes.FIELDS_VALIDATED)(
         { fieldsUI, formBuilderId, formId, validatingUids });
-
-export const fieldValidated = (
-    fieldUI: Object,
-    formBuilderId: string,
-    formId: string,
-    validatingUid: string,
-) => actionCreator(actionTypes.FIELD_VALIDATED)({ fieldUI, formBuilderId, formId, validatingUid });
 
 export const startUpdateFieldAsync = (
     elementId: string,

@@ -98,15 +98,6 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
 
         return newState;
     },
-    [formAsyncActionTypes.FIELD_VALIDATED]: (state, action) => {
-        const newState = { ...state };
-        const { formId, fieldUI } = action.payload;
-        const { fieldId, ...restPayload } = fieldUI;
-        const newValues = { ...newState[formId][fieldId], ...restPayload, validatingMessage: null };
-
-        newState[formId] = { ...newState[formId], [fieldId]: newValues };
-        return newState;
-    },
     [formAsyncActionTypes.FIELDS_VALIDATED]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
