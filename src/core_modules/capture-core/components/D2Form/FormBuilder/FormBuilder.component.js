@@ -265,7 +265,6 @@ export class FormBuilder extends React.Component<Props> {
             );
     }
 
-
     fieldInstances: Map<string, any>;
     asyncUIState: { [id: string]: FieldUI };
     fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
@@ -299,12 +298,13 @@ export class FormBuilder extends React.Component<Props> {
 
     componentDidUpdate(prevProps: Props) {
         const { fieldsUI, fields } = this.props;
+
         if (!isEqual(prevProps.fieldsUI, fieldsUI)) {
             const pendingValidationFields = Object.keys(fieldsUI).filter(key => fieldsUI[key].pendingValidation);
 
             if (pendingValidationFields.length !== 0 && !this.validateAllCancelablePromise) {
-                const customFields = fields.filter(field => pendingValidationFields.includes(field.id));
-                this.validateFields(this.props, customFields);
+                const fieldsToValidate = fields.filter(field => pendingValidationFields.includes(field.id));
+                this.validateFields(this.props, fieldsToValidate);
             }
         }
     }
