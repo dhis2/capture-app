@@ -14,6 +14,7 @@ export type Entity = {
 export type Relationship = {
     clientId: string,
     id?: ?string,
+    referral?: boolean,
     from: Entity,
     to: Entity,
     relationshipType: RelationshipType,
