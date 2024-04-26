@@ -34,7 +34,7 @@ Cypress.Commands.add('forceVisit', (url) => {
 Cypress.Commands.add('loginByApi', ({ username, password, baseUrl }) => {
     const currentInstanceVersion = Number(/[.](\d+)/.exec(Cypress.env('dhis2InstanceVersion'))[1]);
 
-    if (currentInstanceVersion >= 41) {
+    if (currentInstanceVersion >= 42) {
         cy.request({
             url: `${baseUrl}/api/auth/login`,
             method: 'POST',
