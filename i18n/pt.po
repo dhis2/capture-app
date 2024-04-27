@@ -3,17 +3,17 @@
 # David Júnior <davidjr.mondlane@gmail.com>, 2021
 # Fernando Jorge Bade, 2023
 # Philip Larsen Donnelly, 2024
-# Ge Joao <gsimango@saudigitus.org>, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Sheila André <sandre@saudigitus.org>, 2024
+# Ge Joao <gsimango@saudigitus.org>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Sheila André <sandre@saudigitus.org>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -718,6 +718,12 @@ msgid ""
 msgstr ""
 "Ocorreu um erro ao buscar as inscrições. Por favor, insira um URL válido."
 
+msgid "No feedback for this enrollment yet"
+msgstr "Nenhum feedback para esta inscrição ainda"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Ainda não há saída de indicador para esta inscrição"
+
 msgid "Quick actions"
 msgstr "Ações rápidas"
 
@@ -807,6 +813,12 @@ msgstr "Ocorreu um erro ao carregar a página"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Escolha uma unidade de registro para começar a relatar"
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr "O estagio do programa é inválida"
@@ -974,12 +986,6 @@ msgstr ""
 msgid "View Event"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr "Nenhum feedback para esta inscrição ainda"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Ainda não há saída de indicador para esta inscrição"
-
 msgid "Selected program"
 msgstr "Programa selecionado"
 
@@ -1144,7 +1150,7 @@ msgid "Create new in another program"
 msgstr ""
 
 msgid "Create new event"
-msgstr ""
+msgstr "Criar um novo evento"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Procure por um {{trackedEntityName}} em {{programName}}"
@@ -1387,9 +1393,9 @@ msgstr ""
 msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "A data agendada é {{count}} dia {{position}} da data sugerida."
+msgstr[1] "A data agendada é de {{count}} dias {{position}} da data sugerida."
+msgstr[2] "A data agendada é de {{count}} dias {{position}} da data sugerida."
 
 msgid "after"
 msgstr "Depois "
@@ -1485,6 +1491,35 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "instância de entidade rastreada"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Data agendada"
+
+msgid "Report date"
+msgstr "Data do relatório"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr "Novo evento de {{ eventName }}"
 
@@ -1531,7 +1566,7 @@ msgid "Created"
 msgstr "Criado"
 
 msgid "Deleted"
-msgstr ""
+msgstr "Apagado"
 
 msgid "Date"
 msgstr "Encontro"
@@ -1598,15 +1633,6 @@ msgstr "Nome do estágio do programa"
 
 msgid "Working list could not be loaded"
 msgstr "A lista de trabalho não pôde ser carregada"
-
-msgid "Download as JSON"
-msgstr "Baixar como JSON"
-
-msgid "Download as CSV"
-msgstr "Baixar como CSV"
-
-msgid "Download with current filters"
-msgstr "Baixar com filtros atuais"
 
 msgid "Download data..."
 msgstr "Baixar dados ..."
@@ -1680,6 +1706,15 @@ msgstr "Mostre menos"
 
 msgid "Show All"
 msgstr "Mostre tudo"
+
+msgid "Download as JSON"
+msgstr "Baixar como JSON"
+
+msgid "Download as CSV"
+msgstr "Baixar como CSV"
+
+msgid "Download with current filters"
+msgstr "Baixar com filtros atuais"
 
 msgid "An error has occured. See log for details"
 msgstr "Ocorreu um erro. Veja o log para detalhes"
