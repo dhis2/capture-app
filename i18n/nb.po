@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -709,6 +709,12 @@ msgstr ""
 "Det oppsto en feil under henting av registreringer. Vennligst skriv inn en "
 "gyldig url."
 
+msgid "No feedback for this enrollment yet"
+msgstr "Ingen tilbakemeldinger for denne registreringen enda"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Ingen indikatorresultat for denne registreringen enda"
+
 msgid "Quick actions"
 msgstr "Snarveier"
 
@@ -797,6 +803,12 @@ msgstr "Det oppsto en feil under lasting av siden"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Velg en registreringsenhet for å starte rapportering"
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr "Programfase er ugyldig"
@@ -963,12 +975,6 @@ msgstr "Endre hendelse"
 msgid "View Event"
 msgstr "Se hendelse"
 
-msgid "No feedback for this enrollment yet"
-msgstr "Ingen tilbakemeldinger for denne registreringen enda"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Ingen indikatorresultat for denne registreringen enda"
-
 msgid "Selected program"
 msgstr "Valgt program"
 
@@ -1126,7 +1132,7 @@ msgid "Create new in another program"
 msgstr ""
 
 msgid "Create new event"
-msgstr ""
+msgstr "Opprett ny hendelse"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
@@ -1368,7 +1374,9 @@ msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
+"Den planlagte datoen er {{count}} dag {{posisjon}} den foreslåtte datoen."
 msgstr[1] ""
+"Den planlagte datoen er {{count}} dager {{posisjon}} den foreslåtte datoen."
 
 msgid "after"
 msgstr "etter"
@@ -1460,6 +1468,35 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Planlagt dato"
+
+msgid "Report date"
+msgstr "Rapporteringsdato"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
 
@@ -1503,7 +1540,7 @@ msgid "Created"
 msgstr "Opprettet"
 
 msgid "Deleted"
-msgstr ""
+msgstr "Slettet"
 
 msgid "Date"
 msgstr "Dato"
@@ -1570,15 +1607,6 @@ msgstr "Programfase navn"
 
 msgid "Working list could not be loaded"
 msgstr "Arbeidslisten kunne ikke lastes inn"
-
-msgid "Download as JSON"
-msgstr "Last ned i JSON format"
-
-msgid "Download as CSV"
-msgstr "Last ned i CSV format"
-
-msgid "Download with current filters"
-msgstr "Last ned med gjeldende filtre"
 
 msgid "Download data..."
 msgstr "Last ned data..."
@@ -1651,6 +1679,15 @@ msgstr "Vis mindre"
 
 msgid "Show All"
 msgstr "Vis alle"
+
+msgid "Download as JSON"
+msgstr "Last ned i JSON format"
+
+msgid "Download as CSV"
+msgstr "Last ned i CSV format"
+
+msgid "Download with current filters"
+msgstr "Last ned med gjeldende filtre"
 
 msgid "An error has occured. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
