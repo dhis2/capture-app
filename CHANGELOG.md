@@ -1,3 +1,14 @@
+## [100.68.3](https://github.com/dhis2/capture-app/compare/v100.68.2...v100.68.3) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-16931] Working list hides delete button ([#3603](https://github.com/dhis2/capture-app/issues/3603)) ([21d9d6e](https://github.com/dhis2/capture-app/commit/21d9d6e985fb17548745c065f8415866fdb19394))
+* [DHIS2-17044] missing singular translation ([#3598](https://github.com/dhis2/capture-app/issues/3598)) ([9a7261c](https://github.com/dhis2/capture-app/commit/9a7261c6d43f3667edb162882d841025fb08fff0))
+* [DHIS2-17096] show/hide option groups in profile widget ([#3593](https://github.com/dhis2/capture-app/issues/3593)) ([8aa8695](https://github.com/dhis2/capture-app/commit/8aa86956d8df15518a536b0dc51fa908cb9cb6db))
+* [DHIS2-17161] Do not update attribute values from enrollment Widget ([#3601](https://github.com/dhis2/capture-app/issues/3601)) ([7750761](https://github.com/dhis2/capture-app/commit/7750761b3e20a7ed36ff96831c5bbd3cb0e78263))
+* [DHIS2-17177] Registration page stuck after failed save ([#3595](https://github.com/dhis2/capture-app/issues/3595)) ([83e0399](https://github.com/dhis2/capture-app/commit/83e039951ab7d3188f75cb059f79dd5292f346fd))
+
 ## [100.68.2](https://github.com/dhis2/capture-app/compare/v100.68.1...v100.68.2) (2024-04-29)
 
 
