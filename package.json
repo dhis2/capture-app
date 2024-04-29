@@ -51,7 +51,7 @@
         "react-popper": "^2.2.4",
         "react-query": "3",
         "react-redux": "^7.2.8",
-        "react-router-dom": "^5.3.0",
+        "react-router-dom": "^6.23.0",
         "react-rte": "^0.16.5",
         "react-select": "^1.2.1",
         "react-transform-tree": "^1.0.35",
