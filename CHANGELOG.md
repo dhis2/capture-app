@@ -1,3 +1,10 @@
+## [100.68.4](https://github.com/dhis2/capture-app/compare/v100.68.3...v100.68.4) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17225] cannot add TET with polygon or coordiante ([#3618](https://github.com/dhis2/capture-app/issues/3618)) ([6a0bb73](https://github.com/dhis2/capture-app/commit/6a0bb73b2c9cfba5361e5bbb9b1f4218b3200cd3))
+
 ## [100.68.3](https://github.com/dhis2/capture-app/compare/v100.68.2...v100.68.3) (2024-04-29)
 
 
