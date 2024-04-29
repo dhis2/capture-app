@@ -1,3 +1,10 @@
+## [100.68.2](https://github.com/dhis2/capture-app/compare/v100.68.1...v100.68.2) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17131] schedule dates with format DD-MM-YYYY ([#3584](https://github.com/dhis2/capture-app/issues/3584)) ([3237698](https://github.com/dhis2/capture-app/commit/3237698f77b62cf0b5c690b9a1db74d627bea5dc))
+
 ## [100.68.1](https://github.com/dhis2/capture-app/compare/v100.68.0...v100.68.1) (2024-04-28)
 
 
