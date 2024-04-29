@@ -1,6 +1,7 @@
 // @flow
 import moment from 'moment';
-import { ProgramStage } from '../../../../../metaData';
+import { dataElementTypes, ProgramStage } from '../../../../../metaData';
+import { convertClientToServer } from '../../../../../converters';
 import { convertCategoryOptionsToServer } from '../../../../../converters/clientToServer';
 
 const ignoreAutoGenerateIfApplicable = (stage, firstStageDuringRegistrationEvent) =>
@@ -58,9 +59,11 @@ export const deriveAutoGenerateEvents = ({
                     : {
                         status: 'SCHEDULE',
                         // for schedule type of events we want to add the standard interval days to the date
-                        scheduledAt: moment(dateToUseInScheduleStatus)
-                            .add(minDaysFromStart, 'days')
-                            .format('YYYY-MM-DD'),
+                        scheduledAt: convertClientToServer(
+                            moment(dateToUseInScheduleStatus)
+                                .add(minDaysFromStart, 'days')
+                                .format('YYYY-MM-DD'),
+                            dataElementTypes.DATE),
                     };
 
                 return {
