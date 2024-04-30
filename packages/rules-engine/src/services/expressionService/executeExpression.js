@@ -189,6 +189,7 @@ export const executeExpression = ({
             .replace(/'[^']*'|"[^"]*"/g, match => ' '.repeat(match.length));
         const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
         answer = internalExecuteExpression(
+            // $FlowExpectedError
             { dhisFunctionsObject: dhisFunctions, applicableDhisFunctions },
             removeNewLinesFromNonStrings(expressionWithInjectedVariableValues, expressionModuloStrings),
             onError,
