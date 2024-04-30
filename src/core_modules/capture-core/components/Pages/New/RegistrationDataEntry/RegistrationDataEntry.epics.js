@@ -17,6 +17,7 @@ import {
     getStageWithOpenAfterEnrollment,
     PAGES,
 } from './helpers';
+import { cleanUpUid } from '../NewPage.actions';
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable) =>
     action$.pipe(
@@ -139,4 +140,12 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 programId,
             }));
         }),
+    );
+
+export const failedSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
+    action$: InputObservable,
+) =>
+    action$.pipe(
+        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED),
+        map(() => cleanUpUid()),
     );

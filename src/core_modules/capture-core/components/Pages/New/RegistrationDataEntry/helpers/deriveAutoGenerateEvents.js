@@ -1,11 +1,8 @@
 // @flow
-import { pipe } from 'capture-core-utils';
 import moment from 'moment';
 import { dataElementTypes, ProgramStage } from '../../../../../metaData';
-import { convertFormToClient, convertClientToServer } from '../../../../../converters';
+import { convertClientToServer } from '../../../../../converters';
 import { convertCategoryOptionsToServer } from '../../../../../converters/clientToServer';
-
-const convertFn = pipe(convertFormToClient, convertClientToServer);
 
 const ignoreAutoGenerateIfApplicable = (stage, firstStageDuringRegistrationEvent) =>
     !firstStageDuringRegistrationEvent || firstStageDuringRegistrationEvent.id !== stage.id;
@@ -56,8 +53,8 @@ export const deriveAutoGenerateEvents = ({
                 const eventInfo = openAfterEnrollment
                     ? {
                         status: 'ACTIVE',
-                        occurredAt: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
-                        scheduledAt: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
+                        occurredAt: dateToUseInActiveStatus,
+                        scheduledAt: dateToUseInActiveStatus,
                     }
                     : {
                         status: 'SCHEDULE',
