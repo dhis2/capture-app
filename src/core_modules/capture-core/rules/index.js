@@ -9,3 +9,4 @@ export { updateRulesEffects, rulesEffectsActionTypes } from './rulesEngine.actio
 export type { FieldData } from './inputHelpers';
 export { postProcessRulesEffects } from './postProcessRulesEffects';
 export { buildEffectsHierarchy } from './buildEffectsHierarchy';
+export { filterApplicableRuleEffects } from './filterApplicableRuleEffects';

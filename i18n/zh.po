@@ -773,10 +773,10 @@ msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
 
 msgid "No feedback for this event yet"
-msgstr ""
+msgstr "此事件尚未有任何反馈"
 
 msgid "No indicator output for this event yet"
-msgstr ""
+msgstr "此事件尚无指标输出"
 
 msgid "Program stage is invalid"
 msgstr "项目阶段无效"

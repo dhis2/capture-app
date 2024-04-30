@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { type OrgUnit } from '@dhis2/rules-engine-javascript';
+import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
@@ -10,6 +10,7 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     getApplicableRuleEffectsForEventProgram,
     updateRulesEffects,
+    filterApplicableRuleEffects,
 } from '../../../rules';
 import { dataElementTypes } from '../../../metaData';
 import { convertClientToForm } from '../../../converters';
@@ -145,10 +146,11 @@ export const loadViewEventDataEntry =
                 currentEvent,
             });
         }
+        const filteredEffects = filterApplicableRuleEffects(effects, effectActions.ASSIGN_VALUE);
 
         return [
             ...dataEntryActions,
-            updateRulesEffects(effects, formId),
+            updateRulesEffects(filteredEffects, formId),
             actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({
                 loadedValues: { dataEntryValues, formValues, eventContainer, orgUnit },
                 // $FlowFixMe[prop-missing] automated comment

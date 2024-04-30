@@ -10,16 +10,16 @@
 # Alison Andrade <aandrade@ippfwhr.org>, 2024
 # Philip Larsen Donnelly, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Janeth Cruz, 2024
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -729,6 +729,12 @@ msgstr ""
 "Se produjo un error al obtener las inscripciones. Por favor introduzca un "
 "URL válido."
 
+msgid "No feedback for this enrollment yet"
+msgstr "Aún no hay comentarios para esta inscripción"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Aún no hay resultados de indicadores para esta inscripción"
+
 msgid "Quick actions"
 msgstr "Acciones rápidas"
 
@@ -819,6 +825,12 @@ msgstr "Hubo un error al cargar la página"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Seleccione una unidad de registro para comenzar a informar"
+
+msgid "No feedback for this event yet"
+msgstr "Aún no hay retroalimentación para este evento."
+
+msgid "No indicator output for this event yet"
+msgstr "Aún no hay resultados de indicador para este evento"
 
 msgid "Program stage is invalid"
 msgstr "La etapa del programa no es válida"
@@ -985,12 +997,6 @@ msgstr "Editar evento"
 
 msgid "View Event"
 msgstr "Ver evento"
-
-msgid "No feedback for this enrollment yet"
-msgstr "Aún no hay comentarios para esta inscripción"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Aún no hay resultados de indicadores para esta inscripción"
 
 msgid "Selected program"
 msgstr "Programa seleccionado"
@@ -1515,6 +1521,35 @@ msgstr " Perfil de {{trackedEntityTypeName}}"
 msgid "tracked entity instance"
 msgstr "instancia de entidad rastreada"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Fecha planificada"
+
+msgid "Report date"
+msgstr "Fecha de reporte"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
@@ -1634,15 +1669,6 @@ msgstr "Nombre de la etapa del programa"
 msgid "Working list could not be loaded"
 msgstr "No se pudo cargar la lista de trabajo"
 
-msgid "Download as JSON"
-msgstr "Descargar como JSON"
-
-msgid "Download as CSV"
-msgstr "Descargar como CSV"
-
-msgid "Download with current filters"
-msgstr "Descargar con filtros actuales"
-
 msgid "Download data..."
 msgstr "Descargar datos"
 
@@ -1716,6 +1742,15 @@ msgstr "Mostrar menos"
 
 msgid "Show All"
 msgstr "Mostrar todo"
+
+msgid "Download as JSON"
+msgstr "Descargar como JSON"
+
+msgid "Download as CSV"
+msgstr "Descargar como CSV"
+
+msgid "Download with current filters"
+msgstr "Descargar con filtros actuales"
 
 msgid "An error has occured. See log for details"
 msgstr "Se ha producido un error. Ver registro para más detalles"
