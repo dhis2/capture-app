@@ -1,3 +1,50 @@
+## [100.68.4](https://github.com/dhis2/capture-app/compare/v100.68.3...v100.68.4) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17225] cannot add TET with polygon or coordiante ([#3618](https://github.com/dhis2/capture-app/issues/3618)) ([6a0bb73](https://github.com/dhis2/capture-app/commit/6a0bb73b2c9cfba5361e5bbb9b1f4218b3200cd3))
+
+## [100.68.3](https://github.com/dhis2/capture-app/compare/v100.68.2...v100.68.3) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-16931] Working list hides delete button ([#3603](https://github.com/dhis2/capture-app/issues/3603)) ([21d9d6e](https://github.com/dhis2/capture-app/commit/21d9d6e985fb17548745c065f8415866fdb19394))
+* [DHIS2-17044] missing singular translation ([#3598](https://github.com/dhis2/capture-app/issues/3598)) ([9a7261c](https://github.com/dhis2/capture-app/commit/9a7261c6d43f3667edb162882d841025fb08fff0))
+* [DHIS2-17096] show/hide option groups in profile widget ([#3593](https://github.com/dhis2/capture-app/issues/3593)) ([8aa8695](https://github.com/dhis2/capture-app/commit/8aa86956d8df15518a536b0dc51fa908cb9cb6db))
+* [DHIS2-17161] Do not update attribute values from enrollment Widget ([#3601](https://github.com/dhis2/capture-app/issues/3601)) ([7750761](https://github.com/dhis2/capture-app/commit/7750761b3e20a7ed36ff96831c5bbd3cb0e78263))
+* [DHIS2-17177] Registration page stuck after failed save ([#3595](https://github.com/dhis2/capture-app/issues/3595)) ([83e0399](https://github.com/dhis2/capture-app/commit/83e039951ab7d3188f75cb059f79dd5292f346fd))
+
+## [100.68.2](https://github.com/dhis2/capture-app/compare/v100.68.1...v100.68.2) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17131] schedule dates with format DD-MM-YYYY ([#3584](https://github.com/dhis2/capture-app/issues/3584)) ([3237698](https://github.com/dhis2/capture-app/commit/3237698f77b62cf0b5c690b9a1db74d627bea5dc))
+
+## [100.68.1](https://github.com/dhis2/capture-app/compare/v100.68.0...v100.68.1) (2024-04-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([2dc29b8](https://github.com/dhis2/capture-app/commit/2dc29b8e3b1e97b9a9f6304359387a7fe8980685))
+
+# [100.68.0](https://github.com/dhis2/capture-app/compare/v100.67.12...v100.68.0) (2024-04-25)
+
+
+### Features
+
+* [DHIS2-13299][DHIS2-16291] Related Stages ([#3488](https://github.com/dhis2/capture-app/issues/3488)) ([85f38be](https://github.com/dhis2/capture-app/commit/85f38bedd60c307788cf17237338765bf9fed7f0))
+
+## [100.67.12](https://github.com/dhis2/capture-app/compare/v100.67.11...v100.67.12) (2024-04-22)
+
+
+### Bug Fixes
+
+* [DHIS2-14938] trigger error on complete ([#3594](https://github.com/dhis2/capture-app/issues/3594)) ([005877c](https://github.com/dhis2/capture-app/commit/005877ce88a2d28dfc053b39869090cd9573bfdd))
+* [DHIS2-16999] filter assign rule effects in the view event page ([#3597](https://github.com/dhis2/capture-app/issues/3597)) ([f2007e3](https://github.com/dhis2/capture-app/commit/f2007e368b0844730ed36c654e1e01323fb92ed2))
+
 ## [100.67.11](https://github.com/dhis2/capture-app/compare/v100.67.10...v100.67.11) (2024-04-14)
 
 

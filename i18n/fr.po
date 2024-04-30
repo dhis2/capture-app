@@ -1,19 +1,19 @@
 # 
 # Translators:
-# Edem Kossi <ekossi@hispwca.org>, 2022
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2022
 # Bram Piot <bram.piot@gmail.com>, 2022
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2023
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2023
-# Yayra Gomado <ygomado@hispwca.org>, 2024
 # Philip Larsen Donnelly, 2024
+# Edem Kossi <ekossi@hispwca.org>, 2024
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2024
+# Yayra Gomado <ygomado@hispwca.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -363,7 +363,7 @@ msgid "Would you like to complete the enrollment?"
 msgstr ""
 
 msgid "Complete enrollment"
-msgstr ""
+msgstr "Terminer l'enrôlement"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -718,6 +718,12 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "No feedback for this enrollment yet"
+msgstr "Aucun commentaire pour cet enrôlement pour le moment"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Aucune sortie d'indicateur pour cet enrôlement pour le moment"
+
 msgid "Quick actions"
 msgstr "Actions rapides"
 
@@ -808,6 +814,12 @@ msgstr "Une erreur s'est produite lors du chargement de la page"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr "Le stade de programme n'est pas valide"
@@ -975,12 +987,6 @@ msgstr ""
 msgid "View Event"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr "Aucun commentaire pour cet enrôlement pour le moment"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Aucune sortie d'indicateur pour cet enrôlement pour le moment"
-
 msgid "Selected program"
 msgstr "Programme choisi"
 
@@ -1146,7 +1152,7 @@ msgid "Create new in another program"
 msgstr ""
 
 msgid "Create new event"
-msgstr ""
+msgstr "Créer un nouvel évènement"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
@@ -1386,9 +1392,9 @@ msgstr ""
 msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "La date prévue est {{count}} jour {{position}} la date suggérée."
+msgstr[1] "xx"
+msgstr[2] "La date prévue est {{count}} jour {{position}} la date suggérée."
 
 msgid "after"
 msgstr "après"
@@ -1484,6 +1490,35 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Date programmée"
+
+msgid "Report date"
+msgstr "Date du rapport"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr "Nouvel événement {{ eventName }}"
 
@@ -1525,10 +1560,10 @@ msgid "No changes to display"
 msgstr ""
 
 msgid "Created"
-msgstr ""
+msgstr "Créé"
 
 msgid "Deleted"
-msgstr ""
+msgstr "Supprimé"
 
 msgid "Date"
 msgstr "Date"
@@ -1537,7 +1572,7 @@ msgid "User"
 msgstr "Utilisateur"
 
 msgid "Data item"
-msgstr ""
+msgstr "Item de données"
 
 msgid "Change"
 msgstr ""
@@ -1568,7 +1603,7 @@ msgid "{{trackedEntityTypeName}} relationships"
 msgstr ""
 
 msgid "Delete relationship"
-msgstr ""
+msgstr "Supprimer la relation"
 
 msgid ""
 "Deleting the relationship is permanent and cannot be undone. Are you sure "
@@ -1596,15 +1631,6 @@ msgstr "Nom de l'étape du programme"
 msgid "Working list could not be loaded"
 msgstr "La liste des tâches n'a pas pu être chargée"
 
-msgid "Download as JSON"
-msgstr "Télécharger en JSON"
-
-msgid "Download as CSV"
-msgstr "Télécharger en CSV"
-
-msgid "Download with current filters"
-msgstr "Télécharger avec les filtres actuels"
-
 msgid "Download data..."
 msgstr "Télécharger des données..."
 
@@ -1621,7 +1647,7 @@ msgid "Enrollment status"
 msgstr "Statut de l'enrôlement"
 
 msgid "Follow up"
-msgstr ""
+msgstr "Suivi"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choisir un stade de programme pour filtrer par {{label}}"
@@ -1678,6 +1704,15 @@ msgstr "Afficher moins"
 
 msgid "Show All"
 msgstr "Afficher tout"
+
+msgid "Download as JSON"
+msgstr "Télécharger en JSON"
+
+msgid "Download as CSV"
+msgstr "Télécharger en CSV"
+
+msgid "Download with current filters"
+msgstr "Télécharger avec les filtres actuels"
 
 msgid "An error has occured. See log for details"
 msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
