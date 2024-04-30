@@ -1,3 +1,10 @@
+## [100.68.5](https://github.com/dhis2/capture-app/compare/v100.68.4...v100.68.5) (2024-04-30)
+
+
+### Bug Fixes
+
+* [BETA-102] handle Arabic dates when registering with auto-generate events ([#3621](https://github.com/dhis2/capture-app/issues/3621)) ([50480e4](https://github.com/dhis2/capture-app/commit/50480e4460572547320e610c749963bd68b7eb80))
+
 ## [100.68.4](https://github.com/dhis2/capture-app/compare/v100.68.3...v100.68.4) (2024-04-29)
 
 
