@@ -11,7 +11,6 @@ export type Props = {|
     widgetReducerName: string,
     rulesExecutionDependencies: Object,
     onSave: ExternalSaveHandler,
-    onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
     onCancel: () => void,
 |};
 

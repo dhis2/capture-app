@@ -7,6 +7,7 @@ import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 
 type Props = {
     dataEntryHasChanges: boolean,
+    disabled: boolean,
     onCancel: () => void,
 }
 
@@ -36,6 +37,7 @@ export class CancelButtonComponent extends React.Component<Props, State> {
             <div>
                 <Button
                     onClick={this.handleCancel}
+                    disabled={this.props.disabled}
                     secondary
                 >
                     { i18n.t('Cancel') }

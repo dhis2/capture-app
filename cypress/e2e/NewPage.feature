@@ -224,3 +224,15 @@ Feature: User creates a new entries from the registration page
   Scenario: First stage appears on registration page
     Given you are in Child programme registration page
     Then the first stage appears on registration page
+
+  Scenario: New malaria entity without enrollment
+  Given you are in the registration page with Ngelehun CHC org unit selected
+  And you select Malaria Entity from the available tracked entity types
+  And you click the location button
+  Then the map opens
+
+  Scenario: New focus area without enrollment 
+  Given you are in the registration page with Ngelehun CHC org unit selected
+  And you select Focus area from the available tracked entity types
+  And the user clicks the element containing the text: Choose area on map
+  Then the map opens

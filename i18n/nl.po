@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -722,6 +722,12 @@ msgstr ""
 "Er is een fout opgetreden bij het ophalen van inschrijvingen. Voer een "
 "geldige URL in."
 
+msgid "No feedback for this enrollment yet"
+msgstr "Nog geen feedback voor deze inschrijving"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Nog geen indicatoroutput voor deze inschrijving"
+
 msgid "Quick actions"
 msgstr "Snelle acties"
 
@@ -813,6 +819,12 @@ msgstr "Er is een fout opgetreden bij het laden van de pagina"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Kies een registratie-eenheid om rapportage te starten"
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr "Programmafase is ongeldig"
@@ -981,12 +993,6 @@ msgstr ""
 msgid "View Event"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr "Nog geen feedback voor deze inschrijving"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Nog geen indicatoroutput voor deze inschrijving"
-
 msgid "Selected program"
 msgstr "Geselecteerd programma"
 
@@ -1150,7 +1156,7 @@ msgid "Create new in another program"
 msgstr ""
 
 msgid "Create new event"
-msgstr ""
+msgstr "Nieuw evenement maken"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Zoek naar een {{trackedEntityName}} in {{programName}}"
@@ -1394,7 +1400,9 @@ msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
+"De geplande datum is {{count}} dag {{position}} de voorgestelde datum."
 msgstr[1] ""
+"De geplande datum is {{getelde}} dagen {{positie}} de voorgestelde datum."
 
 msgid "after"
 msgstr "na"
@@ -1489,6 +1497,35 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "gevolgd entiteitsexemplaar"
+
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Geplande datum"
+
+msgid "Report date"
+msgstr "Rapporteer datum"
+
+msgid "Please select a valid event"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr "Nieuwe {{ eventName }} evenement"
@@ -1602,15 +1639,6 @@ msgstr ""
 msgid "Working list could not be loaded"
 msgstr "Werklijst kon niet worden geladen"
 
-msgid "Download as JSON"
-msgstr "Downloaden als JSON"
-
-msgid "Download as CSV"
-msgstr "Downloaden als CSV"
-
-msgid "Download with current filters"
-msgstr "Downloaden met huidige filters"
-
 msgid "Download data..."
 msgstr "Gegevens downloaden..."
 
@@ -1684,6 +1712,15 @@ msgstr "Laat minder zien"
 
 msgid "Show All"
 msgstr "Toon alles"
+
+msgid "Download as JSON"
+msgstr "Downloaden als JSON"
+
+msgid "Download as CSV"
+msgstr "Downloaden als CSV"
+
+msgid "Download with current filters"
+msgstr "Downloaden met huidige filters"
 
 msgid "An error has occured. See log for details"
 msgstr "Er is een fout opgetreden. Zie logboek voor details"

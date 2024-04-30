@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -343,7 +343,7 @@ msgid "Would you like to complete the enrollment?"
 msgstr ""
 
 msgid "Complete enrollment"
-msgstr ""
+msgstr "Dokončit zápis"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -707,6 +707,12 @@ msgid ""
 msgstr ""
 "Při načítání registrací došlo k chybě. Zadejte prosím platnou adresu URL."
 
+msgid "No feedback for this enrollment yet"
+msgstr "K tomuto zápisu zatím není žádná zpětná vazba"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
+
 msgid "Quick actions"
 msgstr "Rychlé akce"
 
@@ -795,6 +801,12 @@ msgstr "Při načítání stránky došlo k chybě"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Vyberte registraci jednotky a začněte hlásit"
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr "Fáze programu je neplatná"
@@ -960,12 +972,6 @@ msgstr ""
 msgid "View Event"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr "K tomuto zápisu zatím není žádná zpětná vazba"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
-
 msgid "Selected program"
 msgstr "Vybraný program"
 
@@ -1128,7 +1134,7 @@ msgid "Create new in another program"
 msgstr ""
 
 msgid "Create new event"
-msgstr ""
+msgstr "Vytvořit novou událost"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
@@ -1380,10 +1386,13 @@ msgstr "před"
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
+msgstr[0] "Na tento den je v {{orgUnitName}} naplánovaná {{count}} událost."
 msgstr[1] ""
+"Na tento den jsou v {{orgUnitName}} naplánované {{count}} události."
 msgstr[2] ""
+"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
 msgstr[3] ""
+"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
@@ -1462,6 +1471,35 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Plánované datum"
+
+msgid "Report date"
+msgstr "Datum zprávy"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
 
@@ -1502,10 +1540,10 @@ msgid "No changes to display"
 msgstr ""
 
 msgid "Created"
-msgstr ""
+msgstr "Vytvořeno"
 
 msgid "Deleted"
-msgstr ""
+msgstr "Smazáno"
 
 msgid "Date"
 msgstr "datum"
@@ -1514,7 +1552,7 @@ msgid "User"
 msgstr "Uživatel"
 
 msgid "Data item"
-msgstr ""
+msgstr "Datová položka"
 
 msgid "Change"
 msgstr ""
@@ -1545,7 +1583,7 @@ msgid "{{trackedEntityTypeName}} relationships"
 msgstr "{{trackedEntityTypeName}} vztahy"
 
 msgid "Delete relationship"
-msgstr ""
+msgstr "Smazat vztah"
 
 msgid ""
 "Deleting the relationship is permanent and cannot be undone. Are you sure "
@@ -1573,15 +1611,6 @@ msgstr "Název fáze programu"
 msgid "Working list could not be loaded"
 msgstr "Pracovní seznam nelze načíst"
 
-msgid "Download as JSON"
-msgstr "Stáhnout jako JSON"
-
-msgid "Download as CSV"
-msgstr "Stáhnout jako CSV"
-
-msgid "Download with current filters"
-msgstr "Stáhnout s aktuálními filtry"
-
 msgid "Download data..."
 msgstr "Stáhnout data ..."
 
@@ -1598,7 +1627,7 @@ msgid "Enrollment status"
 msgstr "Stav zápisu"
 
 msgid "Follow up"
-msgstr ""
+msgstr "Následovat"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Vyberte fázi programu, kterou chcete filtrovat podle {{label}}"
@@ -1653,6 +1682,15 @@ msgstr "Ukázat méně"
 
 msgid "Show All"
 msgstr "Ukázat vše"
+
+msgid "Download as JSON"
+msgstr "Stáhnout jako JSON"
+
+msgid "Download as CSV"
+msgstr "Stáhnout jako CSV"
+
+msgid "Download with current filters"
+msgstr "Stáhnout s aktuálními filtry"
 
 msgid "An error has occured. See log for details"
 msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
