@@ -1,3 +1,10 @@
+## [100.68.6](https://github.com/dhis2/capture-app/compare/v100.68.5...v100.68.6) (2024-04-30)
+
+
+### Bug Fixes
+
+* [DHIS2-17195] implement d2:condition ([#3615](https://github.com/dhis2/capture-app/issues/3615)) ([535d430](https://github.com/dhis2/capture-app/commit/535d43018eeb1c70b8756abc65bde974916d5e2a))
+
 ## [100.68.5](https://github.com/dhis2/capture-app/compare/v100.68.4...v100.68.5) (2024-04-30)
 
 
