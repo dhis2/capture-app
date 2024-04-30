@@ -102,7 +102,13 @@ class D2ImagePlain extends Component<Props, State> {
                     const fileResource = response && response.response && response.response.fileResource;
                     if (fileResource) {
                         inMemoryFileStore.set(fileResource.id, image);
-                        return { name: fileResource.name, value: fileResource.id };
+                        const imageUrl = inMemoryFileStore.get(fileResource.id);
+                        return {
+                            name: fileResource.name,
+                            value: fileResource.id,
+                            url: imageUrl,
+                            previewUrl: imageUrl,
+                        };
                     }
                     return null;
                 }));

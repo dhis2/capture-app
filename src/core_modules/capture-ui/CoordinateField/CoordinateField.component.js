@@ -20,8 +20,9 @@ type Coordinate = {
 
 type Props = {
   onBlur: (value: any) => void,
+  onOpenMap: (hasValue: boolean) => void,
   orientation: $Values<typeof orientations>,
-  mapCenter: Array<number>,
+  center?: ?Array<number>,
   onChange?: ?(value: any) => void,
   value?: ?Coordinate,
   shrinkDisabled?: ?boolean,
@@ -42,10 +43,6 @@ const coordinateKeys = {
 
 export class CoordinateField extends React.Component<Props, State> {
     mapInstance: ?any;
-
-    static defaultProps = {
-        mapCenter: [51.505, -0.09],
-    };
 
     constructor(props: Props) {
         super(props);
@@ -96,6 +93,7 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     openMap = () => {
+        this.props.onOpenMap(Boolean(this.props.value));
         this.setState({ showMap: true, position: this.getPosition() });
     }
 
@@ -131,6 +129,7 @@ export class CoordinateField extends React.Component<Props, State> {
             <div className={mapIconContainerClass}>
                 <IconButton
                     disabled={!!disabled}
+                    dataTest="mapIconButton"
                     style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }}
                     className={classNames(defaultClasses.mapIcon, mapIconCustomClass)}
                     onClick={this.openMap}
@@ -171,7 +170,7 @@ export class CoordinateField extends React.Component<Props, State> {
 
     renderMap = () => {
         const { position, zoom } = this.state;
-        const center = position || this.props.mapCenter;
+        const center = position || this.props.center;
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map
@@ -211,7 +210,7 @@ export class CoordinateField extends React.Component<Props, State> {
     );
 
     renderLatitude = () => {
-        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
+        const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -230,7 +229,7 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     renderLongitude = () => {
-        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
+        const { center, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment

@@ -61,7 +61,7 @@ const PolygonPlain = ({
     onSetCoordinates,
 }: PolygonProps) => {
     const [polygonArea, setPolygonArea] = useState(defaultValues);
-    const [center, setCenter] = useState(initialCenter);
+    const [center, setCenter] = useState();
     const [drawingState, setDrawingState] = useState(undefined);
     const prevDrawingState = useRef(undefined);
 
@@ -91,7 +91,7 @@ const PolygonPlain = ({
 
     const renderMap = () => (
         <Map
-            center={center}
+            center={center ?? initialCenter}
             zoom={13}
             ref={(ref) => {
                 if (ref?.leafletElement) {

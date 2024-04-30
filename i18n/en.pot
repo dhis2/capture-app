@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-21T11:51:13.396Z\n"
-"PO-Revision-Date: 2024-03-21T11:51:13.396Z\n"
+"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
+"PO-Revision-Date: 2024-04-05T13:37:32.910Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1445,6 +1445,37 @@ msgstr "{{trackedEntityTypeName}} profile"
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr "Link to an existing {{linkableStageLabel}}"
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr "Choose a {{linkableStageLabel}}"
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr "Ambiguous relationships, contact system administrator"
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+
+msgid "Enter details now"
+msgstr "Enter details now"
+
+msgid "Link to an existing"
+msgstr "Link to an existing"
+
+msgid "Scheduled date"
+msgstr "Scheduled date"
+
+msgid "Report date"
+msgstr "Report date"
+
+msgid "Please select a valid event"
+msgstr "Please select a valid event"
+
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
 
@@ -1466,8 +1497,10 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
-msgid "{{ totalEvents }} events"
-msgstr "{{ totalEvents }} events"
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] "{{ count }} event"
+msgstr[1] "{{count}} events"
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} overdue"

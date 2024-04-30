@@ -40,7 +40,7 @@ When('you move to the next page', () => {
         .click();
 });
 
-Then('the table footer should display page 2', () => {
+Then(/^the table footer should display page (.*)$/, (number) => {
     cy.get('[data-test="changelog-pagination-summary"]')
-        .contains('Page 2');
+        .contains(`Page ${number}`);
 });

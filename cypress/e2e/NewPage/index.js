@@ -7,6 +7,10 @@ And('you are on the default registration page', () => {
     cy.visit('/#/new');
 });
 
+Given('you are in the registration page with Ngelehun CHC org unit selected', () => {
+    cy.visit('/#/new?orgUnitId=DiszpKrYNg8');
+});
+
 And('there should be informative message explaining you need to select an organisation unit', () => {
     cy.get('[data-test="informative-paper"]')
         .contains('Choose an organisation unit to start reporting')
@@ -638,3 +642,20 @@ And('you delete the recently added tracked entity', () => {
     });
     cy.url().should('include', 'selectedTemplateId=IpHINAT79UW');
 });
+
+And(/^you select (.*) from the available tracked entity types/, (selection) => {
+    cy.get('[data-test="dhis2-uicore-select-input"]')
+        .click();
+    cy.contains(selection)
+        .click();
+});
+
+And('you click the location button', () => {
+    cy.get('[data-test="mapIconButton"]')
+        .click();
+});
+
+Then('the map opens', () => {
+    cy.get('.leaflet-container').should('exist');
+});
+

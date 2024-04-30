@@ -44,7 +44,6 @@ const styles = theme => ({
     verticalFormContainer: {
         flexGrow: 10,
         maxWidth: '100%',
-        marginBottom: spacers.dp12,
     },
     verticalFormInnerContainer: {
         maxWidth: theme.typography.pxToRem(892),

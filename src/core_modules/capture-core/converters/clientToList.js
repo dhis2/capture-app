@@ -92,6 +92,10 @@ function convertStatusForDisplay(clientValue: Object) {
     );
 }
 
+function convertOrgUnitForDisplay(rawValue: string | Object) {
+    return (typeof rawValue === 'string' ? rawValue : rawValue.name);
+}
+
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.INTEGER]: stringifyNumber,
@@ -115,7 +119,7 @@ const valueConvertersForType = {
     [dataElementTypes.AGE]: convertDateForListDisplay,
     [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,
-    [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
+    [dataElementTypes.ORGANISATION_UNIT]: convertOrgUnitForDisplay,
     [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
     [dataElementTypes.STATUS]: convertStatusForDisplay,

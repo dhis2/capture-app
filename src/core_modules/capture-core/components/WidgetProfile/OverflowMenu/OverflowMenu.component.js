@@ -32,17 +32,18 @@ export const OverflowMenuComponent = ({
                 dataTest="widget-profile-overflow-menu"
                 component={
                     <FlyoutMenu dense>
-                        {
-                            displayChangelog && (
+                        {displayChangelog && (
+                            <>
                                 <MenuItem
                                     label={i18n.t('View changelog')}
                                     onClick={() => {
                                         setChangelogIsOpen(true);
                                         setActionsIsOpen(false);
                                     }}
-                                />)
-                        }
-                        <MenuDivider dense />
+                                />
+                                <MenuDivider dense />
+                            </>
+                        )}
                         <DeleteMenuItem
                             trackedEntityTypeName={trackedEntityTypeName}
                             canWriteData={canWriteData}
