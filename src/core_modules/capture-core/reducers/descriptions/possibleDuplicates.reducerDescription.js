@@ -23,6 +23,12 @@ export const possibleDuplicatesDesc = createReducerDescription({
         loadError: false,
         currentPage: action.payload.currentPage,
     }),
+    [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_SKIPPED]: state => ({
+        ...state,
+        isLoading: false,
+        isUpdating: false,
+        loadError: false,
+    }),
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_RETRIEVAL_FAILED]: state => ({
         ...state,
         isLoading: false,

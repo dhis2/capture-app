@@ -49,6 +49,7 @@ const RelationshipTrackedEntityInstancePlain =
                 renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                 renderDuplicatesCardActions={renderDuplicatesCardActions}
                 ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                orgUnit={{ id: orgUnitId }}
             />
         );
     };

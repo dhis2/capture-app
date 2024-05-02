@@ -6,6 +6,7 @@ export const actionTypes = {
     DUPLICATES_REVIEW: 'PossibleDuplicatesReview',
     DUPLICATES_REVIEW_RETRIEVAL_SUCCESS: 'PossibleDuplicatesReviewRetrievalSuccess',
     DUPLICATES_REVIEW_RETRIEVAL_FAILED: 'PossibleDuplicatesReviewRetrievalFailed',
+    DUPLICATES_REVIEW_SKIPPED: 'PossibleDuplicatesReview.Skipped',
     DUPLICATES_REVIEW_CHANGE_PAGE: 'PossibleDuplicatesChangePage',
     DUPLICATES_RESET: 'PossibleDuplicatesReset',
 };
@@ -29,6 +30,9 @@ export const reviewDuplicates = ({
 
 export const duplicatesForReviewRetrievalSuccess = (teis: Array<Object>, currentPage: number) =>
     actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS)({ teis, currentPage });
+
+export const duplicatesReviewSkipped = () =>
+    actionCreator(actionTypes.DUPLICATES_REVIEW_SKIPPED)();
 
 export const duplicatesForReviewRetrievalFailed = () =>
     actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_FAILED)();

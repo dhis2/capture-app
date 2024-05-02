@@ -14,7 +14,7 @@ const standardGeoJson = (geometry: Array<number> | { longitude: number, latitude
 export const geometryType = (formValuesKey: Object) =>
     Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
 
-export const getPossibleTetFeatureTypeKey = (serverValues: Object) =>
+export const getPossibleTetFeatureTypeKey = (serverValues: Object = {}) =>
     Object.keys(serverValues).find(key => key.startsWith('FEATURETYPE_'));
 
 export const buildGeometryProp = (key: string, serverValues: Object) => {
