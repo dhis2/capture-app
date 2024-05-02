@@ -1,3 +1,49 @@
+## [100.68.6](https://github.com/dhis2/capture-app/compare/v100.68.5...v100.68.6) (2024-04-30)
+
+
+### Bug Fixes
+
+* [DHIS2-17195] implement d2:condition ([#3615](https://github.com/dhis2/capture-app/issues/3615)) ([535d430](https://github.com/dhis2/capture-app/commit/535d43018eeb1c70b8756abc65bde974916d5e2a))
+
+## [100.68.5](https://github.com/dhis2/capture-app/compare/v100.68.4...v100.68.5) (2024-04-30)
+
+
+### Bug Fixes
+
+* [BETA-102] handle Arabic dates when registering with auto-generate events ([#3621](https://github.com/dhis2/capture-app/issues/3621)) ([50480e4](https://github.com/dhis2/capture-app/commit/50480e4460572547320e610c749963bd68b7eb80))
+
+## [100.68.4](https://github.com/dhis2/capture-app/compare/v100.68.3...v100.68.4) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17225] cannot add TET with polygon or coordiante ([#3618](https://github.com/dhis2/capture-app/issues/3618)) ([6a0bb73](https://github.com/dhis2/capture-app/commit/6a0bb73b2c9cfba5361e5bbb9b1f4218b3200cd3))
+
+## [100.68.3](https://github.com/dhis2/capture-app/compare/v100.68.2...v100.68.3) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-16931] Working list hides delete button ([#3603](https://github.com/dhis2/capture-app/issues/3603)) ([21d9d6e](https://github.com/dhis2/capture-app/commit/21d9d6e985fb17548745c065f8415866fdb19394))
+* [DHIS2-17044] missing singular translation ([#3598](https://github.com/dhis2/capture-app/issues/3598)) ([9a7261c](https://github.com/dhis2/capture-app/commit/9a7261c6d43f3667edb162882d841025fb08fff0))
+* [DHIS2-17096] show/hide option groups in profile widget ([#3593](https://github.com/dhis2/capture-app/issues/3593)) ([8aa8695](https://github.com/dhis2/capture-app/commit/8aa86956d8df15518a536b0dc51fa908cb9cb6db))
+* [DHIS2-17161] Do not update attribute values from enrollment Widget ([#3601](https://github.com/dhis2/capture-app/issues/3601)) ([7750761](https://github.com/dhis2/capture-app/commit/7750761b3e20a7ed36ff96831c5bbd3cb0e78263))
+* [DHIS2-17177] Registration page stuck after failed save ([#3595](https://github.com/dhis2/capture-app/issues/3595)) ([83e0399](https://github.com/dhis2/capture-app/commit/83e039951ab7d3188f75cb059f79dd5292f346fd))
+
+## [100.68.2](https://github.com/dhis2/capture-app/compare/v100.68.1...v100.68.2) (2024-04-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17131] schedule dates with format DD-MM-YYYY ([#3584](https://github.com/dhis2/capture-app/issues/3584)) ([3237698](https://github.com/dhis2/capture-app/commit/3237698f77b62cf0b5c690b9a1db74d627bea5dc))
+
+## [100.68.1](https://github.com/dhis2/capture-app/compare/v100.68.0...v100.68.1) (2024-04-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([2dc29b8](https://github.com/dhis2/capture-app/commit/2dc29b8e3b1e97b9a9f6304359387a7fe8980685))
+
 # [100.68.0](https://github.com/dhis2/capture-app/compare/v100.67.12...v100.68.0) (2024-04-25)
 
 

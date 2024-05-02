@@ -95,7 +95,7 @@ Given('you land on the enrollment page by having typed only the enrollmentId in 
         .contains('Enrollment Dashboard');
     cy.contains('[data-test="scope-selector"]', 'Carlos Cruz');
     cy.contains('[data-test="scope-selector"]', 'Taninahun (Malen) CHP');
-    cy.contains('1 events');
+    cy.contains('1 event');
 });
 
 When('you reset the tei selection', () => {
