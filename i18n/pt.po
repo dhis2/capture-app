@@ -4,15 +4,15 @@
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # David Júnior <davidjr.mondlane@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
-"Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -810,7 +810,7 @@ msgid "Search {{name}}"
 msgstr "Pesquisar {{name}}"
 
 msgid "Search by {{name}}"
-msgstr "Procura por nome}}"
+msgstr "Procura por {{name}}"
 
 msgid "Search by attributes"
 msgstr "Pesquisar por atributos"
