@@ -25,7 +25,7 @@ const createGroups = (files, numberOfGroups = 10) => {
         groups[index % numberOfGroups].push(file);
     });
 
-    return groups;
+    return groups.map((group, index) => ({ id: index + 1, tests: group }));
 };
 
 const cypressSpecsPath = './cypress/e2e';
