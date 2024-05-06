@@ -806,3 +806,19 @@ Then('the JSON button exists', () => {
                 .should('have.attr', 'href').and('include', `/trackedEntities.json?${params}`);
         });
 });
+
+When('you set the event visit date to Today', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Date of visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Today')
+        .click();
+});
+
+Then('the working list is empty', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('No items to display')
+        .click();
+});

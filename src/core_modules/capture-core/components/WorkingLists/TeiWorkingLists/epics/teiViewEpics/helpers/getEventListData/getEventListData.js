@@ -70,6 +70,16 @@ export const getEventListData = async (
     });
     const apiEvents = handleAPIResponse(REQUESTED_ENTITIES.events, apiEventsResponse);
 
+    if (apiEvents.length === 0) {
+        return {
+            recordContainers: [],
+            request: {
+                url: urlEvents,
+                queryParams: queryParamsEvents,
+            },
+        };
+    }
+
     const trackedEntityIds = apiEvents
         .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])
         .join(';');
