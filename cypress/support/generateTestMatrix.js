@@ -7,10 +7,8 @@ const getAllFiles = (dirPath, arrayOfFiles = []) => {
     files.forEach((file) => {
         if (fs.statSync(path.join(dirPath, file)).isDirectory()) {
             arrayOfFiles = getAllFiles(path.join(dirPath, file), arrayOfFiles);
-        } else {
-            if (path.extname(file) === '.feature') {
-                arrayOfFiles.push(path.join(dirPath, file));
-            }
+        } else if (path.extname(file) === '.feature') {
+            arrayOfFiles.push(path.join(dirPath, file));
         }
     });
 
