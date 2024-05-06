@@ -136,8 +136,8 @@ jobs:
         with:
           record: ${{ env.SHOULD_RECORD }}
           parallel: ${{ env.SHOULD_RECORD }}
-          group: ${{ env.SHOULD_RECORD == 'true' && format('e2e-chrome-parallel-dev{0}', matrix.spec) }}
-          ci-build-id: ${{ env.SHOULD_RECORD == 'true' && github.run_id }}
+          group: ${{ env.SHOULD_RECORD == 'true' && format('e2e-chrome-parallel-dev{0}', matrix.spec) || '' }}
+          ci-build-id: ${{ env.SHOULD_RECORD == 'true' && github.run_id || '' }}
           spec: ${{ matrix.spec }}
           browser: chrome
           start: yarn start:forCypress
