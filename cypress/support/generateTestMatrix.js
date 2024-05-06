@@ -15,7 +15,21 @@ const getAllFiles = (dirPath, arrayOfFiles = []) => {
     return arrayOfFiles;
 };
 
+const createGroups = (files, numberOfGroups = 10) => {
+    const groups = [];
+    for (let i = 0; i < numberOfGroups; i++) {
+        groups.push([]);
+    }
+
+    files.forEach((file, index) => {
+        groups[index % numberOfGroups].push(file);
+    });
+
+    return groups;
+};
+
 const cypressSpecsPath = './cypress/e2e';
 const specs = getAllFiles(cypressSpecsPath);
+const groupedSpecs = createGroups(specs);
 
-console.log(JSON.stringify(specs));
+console.log(JSON.stringify(groupedSpecs));
