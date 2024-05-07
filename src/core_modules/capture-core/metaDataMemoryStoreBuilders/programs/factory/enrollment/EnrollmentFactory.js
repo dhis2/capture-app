@@ -286,9 +286,20 @@ export class EnrollmentFactory {
                             return acc;
                         }, []);
 
+                        const sectionMetadata = cachedProgramSections
+                            ?.find(cachedSection => cachedSection.id === formConfigSection.id);
+
+                        if (!sectionMetadata && cachedProgramSections.length > 0) {
+                            log.error(
+                                errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                                    { sectionId: formConfigSection.id },
+                                ),
+                            );
+                        }
+
                         section = await this._buildSection(
                             attributes,
-                            formConfigSection.name,
+                            sectionMetadata?.displayFormName ?? i18n.t('Profile'),
                             formConfigSection.id,
                         );
                         section && enrollmentForm.addSection(section);
