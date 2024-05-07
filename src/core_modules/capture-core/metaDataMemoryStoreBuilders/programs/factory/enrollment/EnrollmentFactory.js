@@ -289,7 +289,7 @@ export class EnrollmentFactory {
                         const sectionMetadata = cachedProgramSections
                             ?.find(cachedSection => cachedSection.id === formConfigSection.id);
 
-                        if (!sectionMetadata && cachedProgramSections.length > 0) {
+                        if (!sectionMetadata && cachedProgramSections && cachedProgramSections.length > 0) {
                             log.error(
                                 errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
                                     { sectionId: formConfigSection.id },
