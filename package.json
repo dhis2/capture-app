@@ -18,7 +18,7 @@
         "@dhis2/d2-ui-org-unit-tree": "^7.3.3",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/d2-ui-sharing-dialog": "^7.3.3",
-        "@dhis2/ui": "^9.1.1",
+        "@dhis2/ui": "^9.4.6",
         "@joakim_sm/react-infinite-calendar": "^2.4.2",
         "@material-ui/core": "3.9.4",
         "@material-ui/icons": "3",
@@ -94,7 +94,7 @@
         "@babel/preset-react": "^7.16.7",
         "@badeball/cypress-cucumber-preprocessor": "17.2.1",
         "@cypress/webpack-preprocessor": "^6.0.0",
-        "@dhis2/cli-app-scripts": "^10.4.0",
+        "@dhis2/cli-app-scripts": "^11.2.2",
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.4.1",
         "@dhis2/cli-utils-cypress": "^9.0.2",
@@ -131,11 +131,11 @@
         "wait-on": "^6.0.1"
     },
     "resolutions": {
-        "@dhis2/cli-app-scripts": "^10.4.0",
+        "@dhis2/cli-app-scripts": "11.2.2",
         "@dhis2/app-runtime": "^3.10.2",
         "react-scripts": "4.0.3",
         "@babel/preset-react": "7.16.7",
-        "@dhis2/ui": "^9.1.1",
+        "@dhis2/ui": "9.4.6",
         "@js-temporal/polyfill": "0.4.3",
         "core-js": "2.5.7",
         "i18next": "^20.5.0"
