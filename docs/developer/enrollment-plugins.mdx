@@ -1,0 +1,294 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+# Enrollment Plugins
+
+---
+:::warning[Experimental feature]
+The plugin framework is currently an experimental feature and is subject to change.
+We are working on improving both the technology and the way you use it. We will provide more documentation and examples as we progress.
+:::
+
+## Introduction
+
+The Capture app offers a way to extend the enrollment pages with custom layouts or plugins. This allows you to customize the layout of the enrollment pages to fit your needs.
+
+To start using this feature, you need to provide a configuration object that describes the layout of the page. This configuration object is stored in the data store and is used to render the page.
+Each enrollment page has a separate key and config in the data store.
+When booting the capture application, we will look in the dataStore for these keys, each mapping to a page in the Enrollment Pages (Dashboard, Add Event and Edit Event):
+
+We're assuming that you have read through the [prerequisites](./getting-started.md#prerequisites) page, and that you have already set up the data store in your DHIS2 instance.
+If you haven't done this yet, please go back and complete the steps before moving on.
+
+| Page | Key |
+| --- | --- |
+| Enrollment Dashboard | `enrollmentOverviewLayout` |
+| Enrollment Add Event | `enrollmentEventNewLayout` |
+| Enrollment Edit Event | `enrollmentEventEditLayout` |
+
+## Default configuration
+
+This is the default configuration that we use in the Capture app. You can use this as a starting point to customize the layout of the enrollment pages.
+
+Each configuration object is prefixed with the id of the Tracker program that it belongs to. This way you can have different configurations for different programs.
+You can also have different layouts for the three different enrollment pages.
+
+<Tabs>
+    <TabItem
+        value={'ENROLLMENT_OVERVIEW'}
+        label={'Enrollment Dashboard'}
+        default
+    >
+        <CodeBlock
+            language={'json'}
+        >
+            {`{
+    "IpHINAT79UW": {
+        "title": "Child Programme dashboard",
+        "leftColumn": [
+            {
+                "type": "component",
+                "name": "QuickActions"
+            },
+            {
+                "type": "component",
+                "name": "StagesAndEvents"
+            }
+        ],
+        "rightColumn": [
+            {
+                "type": "component",
+                "name": "TrackedEntityRelationship"
+            },
+            {
+                "type": "component",
+                "name": "ErrorWidget"
+            },
+            {
+                "type": "component",
+                "name": "WarningWidget"
+            },
+            {
+                "type": "component",
+                "name": "FeedbackWidget"
+            },
+            {
+                "type": "component",
+                "name": "IndicatorWidget"
+            },
+            {
+                "type": "component",
+                "name": "EnrollmentComment"
+            },
+            {
+                "type": "component",
+                "name": "ProfileWidget",
+                "settings": {
+                    "readOnlyMode": false
+                }
+            },
+            {
+                "type": "component",
+                "name": "EnrollmentWidget",
+                "settings": {
+                    "readOnlyMode": false
+                }
+            }
+        ]
+    }
+}`}
+        </CodeBlock>
+    </TabItem>
+
+    <TabItem
+        value={'ENROLLMENT_EVENT_NEW'}
+        label={'Add Event'}
+    >
+        <CodeBlock
+            language={'json'}
+        >
+            {`{
+    "IpHINAT79UW": {
+        "title": "Child Programme: Add Event",
+        "leftColumn": [
+            {
+                "type": "component",
+                "name": "NewEventWorkspace"
+            }
+        ],
+        "rightColumn": [
+            {
+                "type": "component",
+                "name": "ErrorWidget"
+            },
+            {
+                "type": "component",
+                "name": "WarningWidget"
+            },
+            {
+                "type": "component",
+                "name": "FeedbackWidget"
+            },
+            {
+                "type": "component",
+                "name": "IndicatorWidget"
+            },
+            {
+                "type": "component",
+                "name": "TrackedEntityRelationship"
+            },
+            {
+                "type": "component",
+                "name": "ProfileWidget",
+                "settings": {
+                    "readOnlyMode": true
+                }
+            },
+            {
+                "type": "component",
+                "name": "EnrollmentWidget",
+                "settings": {
+                    "readOnlyMode": true
+                }
+            }
+        ]
+    }
+}`}
+        </CodeBlock>
+    </TabItem>
+
+    <TabItem
+        value={'ENROLLMENT_EVENT_EDIT'}
+        label={'Edit Event'}
+    >
+        <CodeBlock
+            language={'json'}
+        >
+            {`{
+    "IpHINAT79UW": {
+        "title": "Child Programme: Edit Event",
+        "leftColumn": [
+            {
+                "type": "component",
+                "name": "EditEventWorkspace"
+            }
+        ],
+        "rightColumn": [
+            {
+                "type": "component",
+                "name": "ErrorWidget"
+            },
+            {
+                "type": "component",
+                "name": "WarningWidget"
+            },
+            {
+                "type": "component",
+                "name": "FeedbackWidget"
+            },
+            {
+                "type": "component",
+                "name": "IndicatorWidget"
+            },
+            {
+                "type": "component",
+                "name": "EventComment"
+            },
+            {
+                "type": "component",
+                "name": "WidgetAssignee"
+            },
+            {
+                "type": "component",
+                "name": "TrackedEntityRelationship"
+            },
+            {
+                "type": "component",
+                "name": "ProfileWidget",
+                "settings": {
+                    "readOnlyMode": true
+                }
+            },
+            {
+                "type": "component",
+                "name": "EnrollmentWidget",
+                "settings": {
+                    "readOnlyMode": true
+                }
+            }
+        ]
+    }
+}`}
+        </CodeBlock>
+    </TabItem>
+</Tabs>
+
+## Supported components
+
+These are the components that we natively support in the Capture app. Use these key in the config to render the corresponding widget in the app.
+
+```ts
+type DefaultComponents = 'QuickActions'
+    | 'StagesAndEvents'
+    | 'AssigneeWidget'
+    | 'NewEventWorkspace'
+    | 'EditEventWorkspace'
+    | 'EnrollmentComment'
+    | 'EventComment'
+    | 'TrackedEntityRelationship'
+    | 'ErrorWidget'
+    | 'WarningWidget'
+    | 'FeedbackWidget'
+    | 'IndicatorWidget'
+    | 'ProfileWidget'
+    | 'EnrollmentWidget';
+```
+
+## Additional settings
+
+Some components will also have additional settings that can be overridden by the config.
+```ts
+// ProfileWidget
+type settings = {
+    readOnlyMode: boolean
+}
+
+// EnrollmentWidget
+type settings = {
+    readOnlyMode: boolean
+}
+```
+
+## Enrollment plugins
+
+You can also extend the configurations to render your own custom plugins. You can do this by adding a new component to the configuration object and providing the source URL of the plugin.
+
+```json
+{
+  "type": "plugin",
+  "source": "http://localhost:3001/plugin.html"
+}
+```
+
+You would place this inside either the `leftColumn` or `rightColumn` array.
+
+<CodeBlock
+    language={'json'}
+    title={'capture/enrollmentEventEditLayout'}
+>
+{`"leftColumn": [
+    {
+        "type": "component",
+        "name": "EditEventWorkspace"
+    },
+    // highlight-start
+    {
+      "type": "plugin",
+      "source": "http://localhost:3001/plugin.html"
+    }
+    // highlight-end
+],
+`}
+</CodeBlock>
+
