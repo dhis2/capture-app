@@ -78,6 +78,7 @@ jobs:
                   password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
     cypress:
+        if: contains(fromJson(needs.prerequisites.outputs.json-labels), github.event.label.name)
         needs: [prerequisites, setup-matrix]
         runs-on: ubuntu-latest
         strategy:
