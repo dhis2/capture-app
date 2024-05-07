@@ -105,9 +105,9 @@ jobs:
               with:
                   record: ${{ env.SHOULD_RECORD }}
                   parallel: ${{ env.SHOULD_RECORD }}
-                  group: ${{ env.SHOULD_RECORD == 'true' && format('e2e-chrome-parallel-{0}-{1}-{2}', matrix.versions, github.run_number, matrix.spec-group.id) || '' }}
+                  group: ${{ env.SHOULD_RECORD == 'true' && format('e2e-chrome-parallel-{0}-{1}-{2}', matrix.versions, github.run_number, matrix.spec-group) || '' }}
                   ci-build-id: ${{ env.SHOULD_RECORD == 'true' && github.run_id || '' }}
-                  spec: ${{ matrix.spec_group.tests }}
+                  spec: ${{ join(matrix.spec-group, ',') }}
                   browser: chrome
                   start: yarn start:forCypress
                   wait-on: http://localhost:3000
