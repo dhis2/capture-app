@@ -24,12 +24,8 @@ const styles = {
         marginTop: 0,
     },
     listItem: {
-        marginBottom: spacersNum.dp8,
         '&::marker': {
             color: colors.grey500,
-        },
-        '& + &': {
-            marginBottom: 0,
         },
     },
 };
