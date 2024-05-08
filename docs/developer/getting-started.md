@@ -1,6 +1,6 @@
 # Getting started
 
-:::warning[Experimental feature]
+:::warning Experimental feature
 The plugin framework is currently an experimental feature and is subject to change.
 We are working on improving both the technology and the way you use it. We will provide more documentation and examples as we progress.
 :::
@@ -26,19 +26,19 @@ the following steps before moving on to the plugin-specific documentation:
 
 1. Log in to your DHIS2 system and open the data store management app. It should look something like this.
 
-<img src={require("./attachments/data-store-management-app.png").default} alt="Data store management app" />
+<img src={require("./resources/data-store-management-app.png").default} alt="Data store management app" />
 
 2. Look at the panel to your left and check if there already exists a key called `capture`. If it does, you are ready to move on to the next page. If not, please continue.
 3. If the `capture` key does not exist, click the blue `New` button above the list of keys.
 4. Fill out the two required fields in the modal that pops up. The `namespace` field should be `capture`, and the `key` field should be `dataEntryForms`.
-<img src={require("./attachments/data-store-new-key.png").default} alt="Data store new key" />
+<img src={require("./resources/data-store-new-key.png").default} alt="Data store new key" />
 
 5. Click the `Create` button to create the key.
 
 
 **Great!** Now you're ready to start customizing your Capture app with plugins.
 
-:::tip[Enrollment Plugins]
+:::tip Enrollment Plugins
 To be able to use the enrollment plugins, you need to create three more keys in the same namespace.
 <br/>Click the three vertical dots to the right of the `capture` namespace and select `New key`.
 
@@ -49,4 +49,4 @@ Create the following keys:
 :::
 
 After you have created the keys, your data store should look something like this:
-<img src={require("./attachments/data-store-after-keys-are-created.png").default} alt="Data store after keys are created" />
+<img src={require("./resources/data-store-after-keys-are-created.png").default} alt="Data store after keys are created" />

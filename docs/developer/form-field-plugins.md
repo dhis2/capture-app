@@ -3,10 +3,7 @@ id: form-field-plugins
 title: Form Field Plugins
 ---
 
-[//]: # (Insert a horizontal line from docasaurus)
----
-
-:::warning[Experimental feature]
+:::warning Experimental feature
 The plugin framework is currently an experimental feature and is subject to change.
 We are working on improving both the technology and the way you use it. We will provide more documentation and examples as we progress.
 :::
@@ -27,7 +24,7 @@ They are injected directly into the form and can be used for a variety of purpos
 3. Custom validations
 4. Whatever you can imagine!
 
-:::info[Limitations]
+:::info Limitations
 Plugins are just React code. This means there are very few limitations to what you can build. In general; anything you can build in a React app, you can build as a plugin.
 :::
 
@@ -58,7 +55,7 @@ The form configuration is a JSON object that defines the structure of the form. 
     ]
 }
 ```
-:::info[What does this ID mean?] 
+:::info What does this ID mean?
 This is the ID of the context that the form is being used in. In this case, it is the ID of the program that the form is being used for, and you can find this ID by looking at the URL of the Capture app.
 - **Program ID ->** *Registration form* (the form that shows up when enrolling a new tracked entity instance)
 - **Program Stage ID ->** *New event in program stage*
@@ -224,7 +221,7 @@ It also has a `fieldMap` property. This is very important, as it tells the plugi
 }
 ```
 
-:::info[What does this mean?]
+:::info What does this mean?
 We have now defined three fields that the plugin should have access to, but what does this object mean?
 - `IdFromApp` is the ID of the field in your DHIS2 system
 - `IdFromPlugin` is the ID of the field in the plugin
