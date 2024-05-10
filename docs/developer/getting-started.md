@@ -1,5 +1,6 @@
 # Getting started
 
+---
 :::warning Experimental feature
 The plugin framework is currently an experimental feature and is subject to change.
 We are working on improving both the technology and the way you use it. We will provide more documentation and examples as we progress.
