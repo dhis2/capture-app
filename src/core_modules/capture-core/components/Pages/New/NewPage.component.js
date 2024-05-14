@@ -74,6 +74,7 @@ const NewPagePlain = ({
             teiId={teiId}
             trackedEntityName={trackedEntityName}
             teiDisplayName={teiDisplayName}
+            formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
         />
         <div data-test="registration-page-content" className={classes.container} >
             {

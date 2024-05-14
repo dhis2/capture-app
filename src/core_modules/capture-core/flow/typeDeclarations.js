@@ -52,7 +52,7 @@ declare type CaptureClientEvent = {
     occurredAt: string,
     scheduledAt: string,
     completedAt: string,
-    attributeCategoryOptions?: ?string,
+    attributeCategoryOptions?: string,
 };
 
 // ClientValues

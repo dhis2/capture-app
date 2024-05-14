@@ -1,7 +1,7 @@
 // @flow
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { compose } from 'redux';
 import { batchActions } from 'redux-batched-actions';
 import { SingleEventRegistrationEntryComponent } from './SingleEventRegistrationEntry.component';
@@ -12,6 +12,7 @@ import { withLoadingIndicator } from '../../../HOC';
 import { defaultDialogProps as dialogConfig } from '../../Dialogs/DiscardDialog.constants';
 import { getOpenDataEntryActions } from './DataEntryWrapper/DataEntry';
 import type { ContainerProps, StateProps, MapStateToProps } from './SingleEventRegistrationEntry.types';
+import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
 
@@ -30,13 +31,22 @@ const mergeProps = (stateProps: StateProps): StateProps => (stateProps);
 
 const openSingleEventDataEntry = (InnerComponent: React.ComponentType<ContainerProps>) => (
     (props: ContainerProps) => {
+        const hasRun = useRef<boolean>(false);
+        const { selectedScopeId } = props;
         const dispatch = useDispatch();
+        const selectedCategories = useSelector((state: ReduxState) => state.currentSelections.categories);
+        const { isLoading, programCategory } = useCategoryCombinations(selectedScopeId);
 
         useEffect(() => {
-            dispatch(batchActions([
-                ...getOpenDataEntryActions(),
-            ]));
-        }, [dispatch]);
+            if (!isLoading && !hasRun.current) {
+                dispatch(
+                    batchActions([
+                        ...getOpenDataEntryActions(programCategory, selectedCategories),
+                    ]),
+                );
+                hasRun.current = true;
+            }
+        }, [selectedCategories, dispatch, isLoading, programCategory]);
 
         return (
             <InnerComponent

@@ -19,6 +19,7 @@ export const QuickSelector = ({
     onResetProgramId,
     onResetCategoryOption,
     onResetAllCategoryOptions,
+    formIsOpen,
     children,
     onStartAgain,
 }: Props) => (
@@ -37,6 +38,7 @@ export const QuickSelector = ({
             onResetProgramId={onResetProgramId}
             onResetCategoryOption={onResetCategoryOption}
             onResetOrgUnit={onResetOrgUnitId}
+            formIsOpen={formIsOpen}
         />
         <OrgUnitSelector
             previousOrgUnitId={previousOrgUnitId}

@@ -5,6 +5,8 @@ import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 import { dataEntryId, itemId, formId } from './constants';
 import { addFormData } from '../../../../../D2Form/actions/form.actions';
+import { getCategoryOptionsValidatorContainers } from '../../../../Enrollment/fieldValidators';
+import type { ProgramCategory } from '../../../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 
 type DataEntryPropsToInclude = Array<Object>;
 
@@ -41,7 +43,25 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
 ];
 
-export const getOpenDataEntryActions = () => [
-    ...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude),
-    addFormData(formId, {}),
-];
+export const getOpenDataEntryActions = (programCategory: ?ProgramCategory, selectedCategories: ?{ [key: string]: string }) => {
+    let defaultDataEntryValues;
+    if (programCategory && programCategory.categories) {
+        dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
+            id: `attributeCategoryOptions-${category.id}`,
+            type: 'TEXT',
+            validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
+        })));
+    }
+
+    if (selectedCategories) {
+        defaultDataEntryValues = Object.keys(selectedCategories).reduce((accValues, key) => {
+            accValues[`attributeCategoryOptions-${key}`] = selectedCategories[key];
+            return accValues;
+        }, {});
+    }
+
+    return [
+        ...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude, defaultDataEntryValues),
+        addFormData(formId, {}),
+    ];
+};

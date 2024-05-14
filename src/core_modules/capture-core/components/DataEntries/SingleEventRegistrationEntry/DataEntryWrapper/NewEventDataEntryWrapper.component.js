@@ -98,6 +98,7 @@ const NewEventDataEntryWrapperPlain = ({
             </div>
             <div>
                 <DataEntry
+                    programId={programId}
                     stage={stage}
                     orgUnit={orgUnit}
                     formFoundation={formFoundation}

@@ -83,6 +83,10 @@ export function getCurrentClientMainData(
     const dataEntryReduxKey = `${dataEntryId}-${itemId}`;
 
     const dataEntryFieldsUI = state.dataEntriesFieldsUI[dataEntryReduxKey];
+    if (!dataEntryFieldsUI) {
+        // dataEntryFieldsUI might not be available if the dataEntry is not loaded yet
+        return null;
+    }
     const dataEntryValidations = getDataEntryValidatons(dataEntryFieldsUI);
     const dataEntryValues = state.dataEntriesFieldsValue[dataEntryReduxKey];
     const validDataEntryValues = getValidDataEntryValues(dataEntryValues, dataEntryValidations);

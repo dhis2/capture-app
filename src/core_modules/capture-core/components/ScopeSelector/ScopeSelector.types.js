@@ -16,6 +16,7 @@ export type OwnProps = $ReadOnly<{|
   onResetAllCategoryOptions?: () => void,
   onResetCategoryOption?: (categoryId: string) => void,
   onStartAgain: () => void,
+  formIsOpen?: boolean,
   children: Node,
 |}>
 
@@ -29,6 +30,7 @@ export type Props = {|
   ...PropsFromRedux,
   selectedOrgUnit: Object,
   onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
+  formIsOpen: boolean,
 |}
 
 export type State = {|

@@ -26,6 +26,7 @@ import type {
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import { getCachedSingleResourceFromKeyAsync } from '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
 import { userStores } from '../../../storageControllers/stores';
+import { FEATURES, hasAPISupportForFeature } from '../../../../capture-core-utils';
 
 
 export const actionTypes = {
@@ -47,6 +48,7 @@ export const loadViewEventDataEntry =
         attributeValues,
         dataEntryId,
         dataEntryKey,
+        serverMinorVersion,
     }: {
         eventContainer: ClientEventContainer,
         orgUnit: OrgUnit,
@@ -56,7 +58,8 @@ export const loadViewEventDataEntry =
         dataEntryKey: string,
         enrollment?: EnrollmentData,
         attributeValues?: Array<AttributeValue>,
-        onCategoriesQuery?: ?Promise<Object>
+        onCategoriesQuery?: ?Promise<Object>,
+        serverMinorVersion: number
     }) => {
         const dataEntryPropsToInclude = [
             {
@@ -86,8 +89,10 @@ export const loadViewEventDataEntry =
         const attributeCategoryId = 'attributeCategoryOptions';
         let attributeCategoryOptions;
 
-        if (eventContainer.event?.attributeCategoryOptions) {
-            const optionIds = eventContainer.event?.attributeCategoryOptions.split(';');
+        if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
+            const useNewAocApiSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator);
+            // $FlowFixMe - this should work
+            const optionIds = eventContainer.event?.attributeCategoryOptions.split(useNewAocApiSeparator ? ',' : ';');
             const categoryOptionsFromIndexedDB = await Promise.all(
                 optionIds
                     .map(optionId =>
