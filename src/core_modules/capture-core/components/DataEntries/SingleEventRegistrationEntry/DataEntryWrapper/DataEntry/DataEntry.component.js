@@ -48,6 +48,7 @@ import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 import { withTransformPropName } from '../../../../../HOC';
 import { InfoIconText } from '../../../../InfoIconText';
 import {
+    AOCsectionKey,
     attributeOptionsKey,
     getCategoryOptionsValidatorContainers, withAOCFieldBuilder, withDataEntryFields,
 } from '../../../../DataEntryDhis2Helpers';
@@ -88,7 +89,6 @@ const dataEntrySectionNames = {
     COMMENTS: 'COMMENTS',
     RELATIONSHIPS: 'RELATIONSHIPS',
     ASSIGNEE: 'ASSIGNEE',
-    CATEGORY_COMBO: 'CATEGORY_COMBO',
 };
 
 const overrideMessagePropNames = {
@@ -331,7 +331,7 @@ const buildCategoryOptionsFieldSettingsFn = () => {
         getMeta: (props: Object) => {
             const { programCategory } = props;
             return {
-                section: dataEntrySectionNames.CATEGORY_COMBO,
+                section: AOCsectionKey,
                 placement: placements.TOP,
                 sectionName: programCategory?.displayName,
             };
@@ -512,7 +512,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
     },
-    [dataEntrySectionNames.CATEGORY_COMBO]: {
+    [AOCsectionKey]: {
         placement: placements.TOP,
     },
     [dataEntrySectionNames.STATUS]: {
