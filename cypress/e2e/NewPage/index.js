@@ -659,3 +659,24 @@ Then('the map opens', () => {
     cy.get('.leaflet-container').should('exist');
 });
 
+Given('you are in the Contreceptive Voucher Program registration page', () => {
+    cy.visit('/#/new?programId=kla3mAPgvCH&orgUnitId=DiszpKrYNg8');
+});
+
+When('the form is prefilled with the selected category combination', () => {
+    cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
+        .contains('AIDSRelief Consortium')
+        .should('exist');
+});
+
+When('you deselect the category from the form', () => {
+    cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
+        .find('span.Select-clear-zone')
+        .click();
+});
+
+Then('you see a validation error on category combination', () => {
+    cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
+        .contains('Please select')
+        .should('exist');
+});
