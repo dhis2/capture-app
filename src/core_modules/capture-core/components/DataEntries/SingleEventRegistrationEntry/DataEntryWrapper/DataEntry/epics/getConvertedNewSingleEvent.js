@@ -6,24 +6,25 @@ import { convertValue as convertToServerValue } from '../../../../../../converte
 import { convertMainEventClientToServer } from '../../../../../../events/mainConverters';
 import { type RenderFoundation } from '../../../../../../metaData';
 import { getLocationQuery } from '../../../../../../utils/routing';
+import { FEATURES, hasAPISupportForFeature } from '../../../../../../../capture-core-utils';
 
-const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
+const getApiCategoriesArgument = (categories: ?{ [id: string]: string}, serverMinorVersion: number) => {
     if (!categories) {
         return null;
     }
+    const useNewSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator);
 
     return {
         attributeCategoryOptions: Object
             .keys(categories)
-
             .map(key => categories[key])
-            .join(';'),
+            .join(useNewSeparator ? ',' : ';'),
     };
 };
 
-export const getNewEventServerData = (state: ReduxState, formFoundation: RenderFoundation, formClientValues: Object, mainDataClientValues: Object) => {
+export const getNewEventServerData = (state: ReduxState, formFoundation: RenderFoundation, formClientValues: Object, mainDataClientValues: Object, serverMinorVersion: number) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, serverMinorVersion);
 
     if (mainDataServerValues.status === 'COMPLETED') {
         mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
@@ -35,7 +36,6 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
             program: state.currentSelections.programId,
             programStage: formFoundation.id,
             orgUnit: state.currentSelections.orgUnitId,
-            ...getApiCategoriesArgument(state.currentSelections.categories),
             dataValues: Object
                 .keys(formServerValues)
                 .map(key => ({
@@ -53,9 +53,10 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
     mainDataClientValues: Object,
     history: Object,
     completed?: boolean,
+    serverMinorVersion: number,
 ) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, serverMinorVersion);
     const { teiId, enrollmentId, programId, orgUnitId } = getLocationQuery();
 
     if (!mainDataServerValues.status) {
@@ -74,7 +75,7 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
                 orgUnit: orgUnitId,
                 trackedEntity: teiId,
                 enrollment: enrollmentId,
-                ...getApiCategoriesArgument(state.currentSelections.categories),
+                ...getApiCategoriesArgument(state.currentSelections.categories, serverMinorVersion),
                 dataValues: Object
                     .keys(formServerValues)
                     .map(key => ({

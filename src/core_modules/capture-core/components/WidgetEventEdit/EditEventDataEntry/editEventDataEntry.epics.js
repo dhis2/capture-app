@@ -82,7 +82,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             ]);
         }));
 
-export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
         map((action) => {
@@ -109,7 +109,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
 
             if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedAt) {
                 mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
@@ -246,7 +246,7 @@ export const startCreateNewAfterCompletingEpic = (
             return EMPTY;
         }));
 
-export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST),
         map((action) => {
@@ -277,7 +277,7 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, sto
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
 
             if (!prevEventMainData.completedAt) {
                 mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
