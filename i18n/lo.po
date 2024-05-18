@@ -4,13 +4,14 @@
 # Philip Larsen Donnelly, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # Saysamone Sibounma, 2023
+# Namwan Chanthavisouk, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Saysamone Sibounma, 2023\n"
+"Last-Translator: Namwan Chanthavisouk, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,10 +20,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "ເລືອກວັນທີໜຶ່ງ ຫຼື ຫຼາຍກວ່ານັ້ນ..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "ເລືອກວັນທີ..."
 
 msgid "Today"
 msgstr "ມື້ນີ້"
@@ -49,13 +50,13 @@ msgid "Last updated"
 msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "ລົງທະບຽນ"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "ລົງທະບຽນກ່ອນໜ້າ"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "ຄ່ານີ້ກຳລັງກວດສອບຢູ່"
 
 msgid "Async field update failed"
 msgstr ""
@@ -64,13 +65,13 @@ msgid "A value is required"
 msgstr ""
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "ກະລຸນາລະບຸເບີໂທທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "ກະລຸນາລະບຸຈຳນວນເຕັມໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນບວກ"
 
 msgid "Please provide zero or a positive integer"
 msgstr ""
@@ -94,19 +95,19 @@ msgid "Please provide a valid percentage"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນ URL ທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນອາຍຸໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນເບີໂທໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນໜ່ວຍງານຈັດຕັ້ງໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide valid coordinates"
 msgstr ""
@@ -121,7 +122,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "ພື້ນທີ່"
 
 msgid "Coordinate"
 msgstr "ເສັ້ນສະແດງ"
@@ -359,7 +360,7 @@ msgid "Me"
 msgstr ""
 
 msgid "Anyone"
-msgstr ""
+msgstr "ທຸກຄົນ"
 
 msgid "None"
 msgstr "ບໍ່ແມນ"
@@ -518,7 +519,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
 msgid "Clear selections"
-msgstr ""
+msgstr "ລົບຕົວເລືອກ"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -725,7 +726,7 @@ msgid "Save as new"
 msgstr ""
 
 msgid "View dashboard"
-msgstr ""
+msgstr "ເບິ່ງກະດານຂ່າວ"
 
 msgid "Create for"
 msgstr ""
@@ -800,7 +801,7 @@ msgid ""
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "ບໍ່ພົບຜົນການຊອກຫາ"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -830,10 +831,10 @@ msgid "Choose a type to start searching"
 msgstr ""
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "ເບິ່ງການລົງທະບຽນທີ່ຍັງເຄື່ອນໄຫວ"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "ລົງທະບຽນໃໝ່"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -984,10 +985,10 @@ msgid "To time"
 msgstr ""
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນລະຫວ່າງການກວດສອບ"
 
 msgid "error"
-msgstr ""
+msgstr "ຂໍ້ຜິດພາດ"
 
 msgid "Delete polygon"
 msgstr ""
