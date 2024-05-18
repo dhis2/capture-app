@@ -5,13 +5,14 @@
 # Somkhit Bouavong <bouavongk@gmail.com>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Philip Larsen Donnelly, 2024
+# Namwan Chanthavisouk, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
+"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Last-Translator: Namwan Chanthavisouk, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,10 +21,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "ເລືອກວັນທີໜຶ່ງ ຫຼື ຫຼາຍກວ່ານັ້ນ..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "ເລືອກວັນທີ..."
 
 msgid "Today"
 msgstr "ມື້ນີ້"
@@ -41,43 +42,43 @@ msgid ""
 msgstr ""
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr " ເບິ່ງ {{programName}} ກະດານຂ່າວ"
 
 msgid "View dashboard"
-msgstr ""
+msgstr "ເບິ່ງກະດານຂ່າວ"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "ເບິ່ງການລົງທະບຽນທີ່ຍັງເຄື່ອນໄຫວ"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "ລົງທະບຽນອີກຄັ້ງ"
 
 msgid "in"
-msgstr "in"
+msgstr "ໃນ"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "ລົງທະບຽນ"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "ລົງທະບຽນກ່ອນໜ້າ"
 
 msgid "Organisation unit"
 msgstr "​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ"
 
 msgid "Date of enrollment"
-msgstr "Date of enrollment"
+msgstr "ວັນທີ່ລົງທະບຽນ"
 
 msgid "Last updated"
 msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "ເກີດຂໍ້ຜິດພາດໃນລະຫວ່າງການກວດສອບ"
 
 msgid "error"
-msgstr ""
+msgstr "ຂໍ້ຜິດພາດ"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "ຄ່ານີ້ກຳລັງກວດສອບຢູ່"
 
 msgid "Async field update failed"
 msgstr ""
@@ -86,13 +87,13 @@ msgid "A value is required"
 msgstr ""
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "ກະລຸນາລະບຸເບີໂທທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "ກະລຸນາລະບຸຈຳນວນເຕັມໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນບວກ"
 
 msgid "Please provide zero or a positive integer"
 msgstr ""
@@ -116,19 +117,19 @@ msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນ URL ທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນອາຍຸໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນເບີໂທໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນໜ່ວຍງານຈັດຕັ້ງໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide valid coordinates"
 msgstr ""
@@ -143,7 +144,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "ພື້ນທີ່"
 
 msgid "Coordinate"
 msgstr "ເສັ້ນສະແດງ"
@@ -424,7 +425,7 @@ msgid "Me"
 msgstr ""
 
 msgid "Anyone"
-msgstr ""
+msgstr "ທຸກຄົນ"
 
 msgid "None"
 msgstr "ບໍ່ແມນ"
@@ -517,7 +518,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Type to filter options"
-msgstr ""
+msgstr "ປະເພດຕົວເລືອກການກອງ"
 
 msgid "No match found"
 msgstr ""
@@ -547,7 +548,7 @@ msgid "suggestions could not be retrieved"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "ບໍ່ພົບຜົນການຊອກຫາ"
 
 msgid "No items to display"
 msgstr ""
@@ -1452,8 +1453,9 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "{{ totalEvents }} events"
-msgstr ""
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr ""
