@@ -290,7 +290,7 @@ export class EnrollmentFactory {
                             ?.find(cachedSection => cachedSection.id === formConfigSection.id);
 
                         if (!sectionMetadata && cachedProgramSections && cachedProgramSections.length > 0) {
-                            log.error(
+                            log.warn(
                                 errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
                                     { sectionId: formConfigSection.id },
                                 ),
@@ -299,7 +299,7 @@ export class EnrollmentFactory {
 
                         section = await this._buildSection(
                             attributes,
-                            sectionMetadata?.displayFormName ?? i18n.t('Profile'),
+                            sectionMetadata?.displayFormName ?? formConfigSection.name ?? i18n.t('Profile'),
                             formConfigSection.id,
                         );
                         section && enrollmentForm.addSection(section);
