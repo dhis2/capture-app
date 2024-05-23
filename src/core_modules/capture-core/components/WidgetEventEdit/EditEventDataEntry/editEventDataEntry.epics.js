@@ -180,7 +180,7 @@ export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
             return commitEnrollmentEvent(meta.eventId);
         }));
 
-export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED),
         filter((action) => {
@@ -198,7 +198,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
             if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
                 eventContainer.event.attributeCategoryOptions =
-                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions);
+                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions, minor);
             }
             let actions = [updateEventContainer(eventContainer, orgUnit)];
 
