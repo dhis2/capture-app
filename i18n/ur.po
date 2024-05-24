@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Urdu (https://app.transifex.com/hisp-uio/teams/100509/ur/)\n"
@@ -677,6 +677,12 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "Quick actions"
 msgstr ""
 
@@ -758,6 +764,12 @@ msgid "There was an error loading the page"
 msgstr ""
 
 msgid "Choose a registering unit to start reporting"
+msgstr ""
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
 msgstr ""
 
 msgid "Program stage is invalid"
@@ -920,12 +932,6 @@ msgid "Edit Event"
 msgstr ""
 
 msgid "View Event"
-msgstr ""
-
-msgid "No feedback for this enrollment yet"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid "Selected program"
@@ -1397,6 +1403,35 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr ""
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "شیڈول کی تاریخ"
+
+msgid "Report date"
+msgstr "رپورٹ کی تاریخ"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
@@ -1508,15 +1543,6 @@ msgstr "پروگرام مرحلے کا نام"
 msgid "Working list could not be loaded"
 msgstr ""
 
-msgid "Download as JSON"
-msgstr "JSON کے طور پر ڈاؤن لوڈ کریں"
-
-msgid "Download as CSV"
-msgstr "CSV کے طور پر ڈاؤن لوڈ کریں"
-
-msgid "Download with current filters"
-msgstr ""
-
 msgid "Download data..."
 msgstr ""
 
@@ -1587,6 +1613,15 @@ msgid "Show Less"
 msgstr ""
 
 msgid "Show All"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr "JSON کے طور پر ڈاؤن لوڈ کریں"
+
+msgid "Download as CSV"
+msgstr "CSV کے طور پر ڈاؤن لوڈ کریں"
+
+msgid "Download with current filters"
 msgstr ""
 
 msgid "An error has occured. See log for details"

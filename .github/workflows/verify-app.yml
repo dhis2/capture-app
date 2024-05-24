@@ -193,7 +193,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
-      - uses: dhis2/action-semantic-release@ignore-app-hub-lib
+      - uses: dhis2/action-semantic-release@use-yarn-version-prepare
         with:
           publish-apphub: true
           publish-github: true

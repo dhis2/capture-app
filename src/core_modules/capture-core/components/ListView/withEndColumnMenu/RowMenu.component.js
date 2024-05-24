@@ -127,6 +127,7 @@ class Index extends React.Component<Props, State> {
                 {this.state.menuOpen &&
                 <Popper
                     placement="bottom-end"
+                    strategy={'fixed'}
                 >
                     {
                         ({ ref, style, placement }) => (

@@ -6,6 +6,7 @@ import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
 import { SavingText } from '../SavingText';
+import { WidgetRelatedStages } from '../../WidgetRelatedStages';
 import type { Props } from './validated.types';
 
 const styles = () => ({
@@ -18,8 +19,12 @@ const ValidatedPlain = ({
     ready,
     stage,
     programName,
+    programId,
+    enrollmentId,
+    eventSaveInProgress,
     formFoundation,
     classes,
+    relatedStageRef,
     onSave,
     onCancel,
     orgUnit,
@@ -42,9 +47,18 @@ const ValidatedPlain = ({
                     id={id}
                     orgUnit={orgUnit}
                 />
+                <WidgetRelatedStages
+                    ref={relatedStageRef}
+                    enrollmentId={enrollmentId}
+                    programId={programId}
+                    programStageId={stage?.id}
+                    currentStageLabel={stage.name}
+                />
                 <FinishButtons
                     onSave={onSave}
                     onCancel={onCancel}
+                    isLoading={eventSaveInProgress}
+                    cancelButtonIsDisabled={eventSaveInProgress}
                     id={id}
                 />
                 <SavingText programName={programName} stageName={stage.name} orgUnitName={orgUnit.name} />

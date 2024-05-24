@@ -1,11 +1,8 @@
 // @flow
-import { pipe } from 'capture-core-utils';
 import moment from 'moment';
 import { dataElementTypes, ProgramStage } from '../../../../../metaData';
-import { convertFormToClient, convertClientToServer } from '../../../../../converters';
+import { convertClientToServer } from '../../../../../converters';
 import { convertCategoryOptionsToServer } from '../../../../../converters/clientToServer';
-
-const convertFn = pipe(convertFormToClient, convertClientToServer);
 
 const ignoreAutoGenerateIfApplicable = (stage, firstStageDuringRegistrationEvent) =>
     !firstStageDuringRegistrationEvent || firstStageDuringRegistrationEvent.id !== stage.id;
@@ -18,6 +15,7 @@ export const deriveAutoGenerateEvents = ({
     orgUnitId,
     firstStageMetadata,
     attributeCategoryOptions,
+    serverMinorVersion,
 }: {
     stages: Map<string, ProgramStage>,
     enrolledAt: string,
@@ -26,6 +24,7 @@ export const deriveAutoGenerateEvents = ({
     orgUnitId: string,
     firstStageMetadata: ?ProgramStage,
     attributeCategoryOptions: { [categoryId: string]: string } | string,
+    serverMinorVersion: number,
 }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
@@ -51,20 +50,22 @@ export const deriveAutoGenerateEvents = ({
                 const eventAttributeCategoryOptions = {};
                 if (attributeCategoryOptions) {
                     eventAttributeCategoryOptions.attributeCategoryOptions =
-                        convertCategoryOptionsToServer(attributeCategoryOptions);
+                        convertCategoryOptionsToServer(attributeCategoryOptions, serverMinorVersion);
                 }
                 const eventInfo = openAfterEnrollment
                     ? {
                         status: 'ACTIVE',
-                        occurredAt: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
-                        scheduledAt: convertFn(dateToUseInActiveStatus, dataElementTypes.DATE),
+                        occurredAt: dateToUseInActiveStatus,
+                        scheduledAt: dateToUseInActiveStatus,
                     }
                     : {
                         status: 'SCHEDULE',
                         // for schedule type of events we want to add the standard interval days to the date
-                        scheduledAt: moment(convertFn(dateToUseInScheduleStatus, dataElementTypes.DATE))
+                        scheduledAt: convertClientToServer(moment(dateToUseInScheduleStatus)
                             .add(minDaysFromStart, 'days')
                             .format('YYYY-MM-DD'),
+                        dataElementTypes.DATE,
+                        ),
                     };
 
                 return {
