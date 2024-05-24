@@ -1,3 +1,10 @@
+## [100.68.10](https://github.com/dhis2/capture-app/compare/v100.68.9...v100.68.10) (2024-05-24)
+
+
+### Bug Fixes
+
+* [DHIS2-17399] use server version to send correct aoc payload ([#3643](https://github.com/dhis2/capture-app/issues/3643)) ([205ff1b](https://github.com/dhis2/capture-app/commit/205ff1bd9700562bbfdfd4fbf0352c91780356e5))
+
 ## [100.68.9](https://github.com/dhis2/capture-app/compare/v100.68.8...v100.68.9) (2024-05-19)
 
 
