@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -692,6 +692,12 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "Quick actions"
 msgstr ""
 
@@ -774,6 +780,12 @@ msgstr ""
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Chọn một đơn vị đăng ký để bắt đầu báo cáo"
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr ""
@@ -937,12 +949,6 @@ msgid "Edit Event"
 msgstr ""
 
 msgid "View Event"
-msgstr ""
-
-msgid "No feedback for this enrollment yet"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid "Selected program"
@@ -1417,6 +1423,35 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "thực thể được theo dõi"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Ngày đã hẹn"
+
+msgid "Report date"
+msgstr "Ngày báo cáo"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
@@ -1438,8 +1473,9 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "{{ totalEvents }} events"
-msgstr ""
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr ""
@@ -1528,15 +1564,6 @@ msgstr "Tên giai đoạn chương trình"
 msgid "Working list could not be loaded"
 msgstr "Không thể tải danh sách làm việc"
 
-msgid "Download as JSON"
-msgstr "Tải về dạng JSON"
-
-msgid "Download as CSV"
-msgstr "Tải xuống với CSV"
-
-msgid "Download with current filters"
-msgstr "Tải xuống với các bộ lọc hiện tại"
-
 msgid "Download data..."
 msgstr "Tải xuống dữ liệu ..."
 
@@ -1608,6 +1635,15 @@ msgstr "Hiện ít hơn"
 
 msgid "Show All"
 msgstr "Hiển thị tất cả"
+
+msgid "Download as JSON"
+msgstr "Tải về dạng JSON"
+
+msgid "Download as CSV"
+msgstr "Tải xuống với CSV"
+
+msgid "Download with current filters"
+msgstr "Tải xuống với các bộ lọc hiện tại"
 
 msgid "An error has occured. See log for details"
 msgstr "Có lỗi. Xem log để biết thêm chi tiết."

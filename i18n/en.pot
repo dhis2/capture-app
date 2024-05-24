@@ -1500,8 +1500,10 @@ msgstr "This stage can only have one event"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
-msgid "{{ totalEvents }} events"
-msgstr "{{ totalEvents }} events"
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] "{{ count }} event"
+msgstr[1] "{{count}} events"
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} overdue"
