@@ -2,6 +2,7 @@
 import moment from 'moment';
 import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
+import { FEATURES, hasAPISupportForFeature } from '../../capture-core-utils';
 
 type RangeValue = {
     from: number,
@@ -73,7 +74,10 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }
 
-export function convertCategoryOptionsToServer(value: {[categoryId: string]: string} | string) {
+export function convertCategoryOptionsToServer(
+    value: {[categoryId: string]: string} | string,
+    serverMinorVersion: number,
+) {
     if (typeof value === 'object') {
         const categoryObject: Object = value;
         return Object.keys(categoryObject).reduce((acc, categoryId) => {
@@ -81,7 +85,7 @@ export function convertCategoryOptionsToServer(value: {[categoryId: string]: str
                 acc.push(value[categoryId]);
             }
             return acc;
-        }, []).join(';');
+        }, []).join(hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator) ? ',' : ';');
     }
     return value;
 }
