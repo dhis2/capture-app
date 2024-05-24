@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -696,6 +696,12 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "No feedback for this enrollment yet"
+msgstr "Ушбу қайд этишда қайта алоқа ахбороти мавжуд эмас"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Ушбу қайд этишда индикатор ахбороти мавжуд эмас"
+
 msgid "Quick actions"
 msgstr "Тезкор харакатлар"
 
@@ -784,6 +790,12 @@ msgstr ""
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr ""
@@ -950,12 +962,6 @@ msgstr ""
 
 msgid "View Event"
 msgstr ""
-
-msgid "No feedback for this enrollment yet"
-msgstr "Ушбу қайд этишда қайта алоқа ахбороти мавжуд эмас"
-
-msgid "No indicator output for this enrollment yet"
-msgstr "Ушбу қайд этишда индикатор ахбороти мавжуд эмас"
 
 msgid "Selected program"
 msgstr "Танланган дастур"
@@ -1431,6 +1437,35 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "кузатилаётган объект намунаси"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Режалаштирилган сана"
+
+msgid "Report date"
+msgstr "Ҳисобот санаси"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
@@ -1452,8 +1487,9 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "{{ totalEvents }} events"
-msgstr ""
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr ""
@@ -1542,15 +1578,6 @@ msgstr "Дастур босқичи номи"
 msgid "Working list could not be loaded"
 msgstr "Ишчи рўйхатни юклаб бўлмади"
 
-msgid "Download as JSON"
-msgstr "JSON сифатида юклаш"
-
-msgid "Download as CSV"
-msgstr "CSV сифатида юкланг"
-
-msgid "Download with current filters"
-msgstr "Жорий фильтрлар асосида юклаш"
-
 msgid "Download data..."
 msgstr "Маълумотларни юклаб олиш ..."
 
@@ -1622,6 +1649,15 @@ msgstr "Камроқ кўрсатиш"
 
 msgid "Show All"
 msgstr "Барчасини кўрсатиш"
+
+msgid "Download as JSON"
+msgstr "JSON сифатида юклаш"
+
+msgid "Download as CSV"
+msgstr "CSV сифатида юкланг"
+
+msgid "Download with current filters"
+msgstr "Жорий фильтрлар асосида юклаш"
 
 msgid "An error has occured. See log for details"
 msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
