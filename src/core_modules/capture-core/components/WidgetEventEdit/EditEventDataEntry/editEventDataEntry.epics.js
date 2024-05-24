@@ -82,7 +82,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             ]);
         }));
 
-export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
         map((action) => {
@@ -109,7 +109,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
 
             if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedAt) {
                 mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
@@ -163,18 +163,24 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED),
+        filter((action) => {
+            const {
+                meta: { triggerAction },
+            } = action;
+            return (
+                triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT ||
+                triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS
+            );
+        }),
         map((action) => {
             const meta = action.meta;
-            if (meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT) {
-                return commitEnrollmentEvent(meta.eventId);
-            }
             if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS) {
                 return commitEnrollmentAndEvents();
             }
-            return EMPTY;
+            return commitEnrollmentEvent(meta.eventId);
         }));
 
-export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED),
         filter((action) => {
@@ -192,7 +198,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
             if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
                 eventContainer.event.attributeCategoryOptions =
-                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions);
+                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions, minor);
             }
             let actions = [updateEventContainer(eventContainer, orgUnit)];
 
@@ -240,7 +246,7 @@ export const startCreateNewAfterCompletingEpic = (
             return EMPTY;
         }));
 
-export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST),
         map((action) => {
@@ -271,7 +277,7 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, sto
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
 
             if (!prevEventMainData.completedAt) {
                 mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());

@@ -9,8 +9,9 @@ import {
 } from './WidgetEventSchedule.actions';
 import { statusTypes } from '../../events/statusTypes';
 import { convertCategoryOptionsToServer } from '../../converters/clientToServer';
+import { generateUID } from '../../utils/uid/generateUID';
 
-export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST),
         map((action) => {
@@ -23,7 +24,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
                 stageId,
                 teiId,
                 enrollmentId,
-                eventId,
+                eventId = generateUID(),
                 categoryOptions,
                 onSaveExternal,
                 onSaveSuccessActionType,
@@ -34,7 +35,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
             const { events } = store.value;
             const existingEnrollment = events[eventId]
             && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
-            const attributeCategoryOptions = categoryOptions && convertCategoryOptionsToServer(categoryOptions);
+            const attributeCategoryOptions = categoryOptions && convertCategoryOptionsToServer(categoryOptions, minor);
 
             let serverData = { events: [{
                 scheduledAt: scheduleDate,

@@ -23,7 +23,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
                     id: ({ variables: { teiId: updatedTeiId } }) => updatedTeiId,
                     params: ({ variables: { programId: updatedProgramId } }) => ({
                         program: updatedProgramId,
-                        fields: ['enrollments[*],attributes'],
+                        fields: ['enrollments[*,!attributes],attributes'],
                     }),
                 },
             }),

@@ -9,7 +9,6 @@ export const WidgetEnrollmentEventNew = ({
     programId,
     stageId,
     onSave,
-    onSaveAndCompleteEnrollment,
     ...passOnProps
 }: WidgetProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -31,7 +30,6 @@ export const WidgetEnrollmentEventNew = ({
             formFoundation={formFoundation}
             program={program}
             onSaveExternal={onSave}
-            onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
         />
     );
 };

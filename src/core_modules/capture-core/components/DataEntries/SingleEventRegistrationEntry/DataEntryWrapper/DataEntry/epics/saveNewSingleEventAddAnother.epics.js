@@ -23,33 +23,42 @@ import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
-export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER),
-        map((action) => {
-            const state = store.value;
-            const payload = action.payload;
-            const formFoundation = payload.formFoundation;
-            const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
+export const saveNewEventAddAnotherEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { serverVersion: { minor } }: ApiUtils,
+) => action$.pipe(
+    ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER),
+    map((action) => {
+        const state = store.value;
+        const payload = action.payload;
+        const formFoundation = payload.formFoundation;
+        const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
 
-            const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
+        const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
-            const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
-            const clientEvent = {
-                ...mainDataClientValues,
-                eventId: uuid(),
-                programId: state.currentSelections.programId,
-                programStageId: formFoundation.id,
-                orgUnitId: state.currentSelections.orgUnitId,
-            };
-            const clientEventValues = { ...formClientValues, created: moment().toISOString() };
-            const relationshipData = state.dataEntriesRelationships[dataEntryKey];
-            return batchActions([
-                startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId),
-                newRecentlyAddedEvent(clientEvent, clientEventValues),
-                prependListItem(listId, clientEvent.eventId),
-            ], newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH);
-        }));
+        const serverData = getNewEventServerData(
+            state,
+            formFoundation,
+            formClientValues,
+            mainDataClientValues,
+            minor,
+        );
+        const clientEvent = {
+            ...mainDataClientValues,
+            eventId: uuid(),
+            programId: state.currentSelections.programId,
+            programStageId: formFoundation.id,
+            orgUnitId: state.currentSelections.orgUnitId,
+        };
+        const clientEventValues = { ...formClientValues, created: moment().toISOString() };
+        const relationshipData = state.dataEntriesRelationships[dataEntryKey];
+        return batchActions([
+            startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId),
+            newRecentlyAddedEvent(clientEvent, clientEventValues),
+            prependListItem(listId, clientEvent.eventId),
+        ], newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH);
+    }));
 
 export const saveNewEventAddAnotherFailedEpic = (action$: InputObservable) =>
     action$.pipe(
