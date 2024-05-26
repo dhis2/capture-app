@@ -20,6 +20,7 @@ import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
+import { TooltipOrgUnit } from '../Tooltips/TooltipOrgUnit';
 
 const styles = {
     enrollment: {
@@ -129,19 +130,20 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Started at {{orgUnitName}}', {
-                                orgUnitName,
-                                interpolation: { escapeValue: false },
-                            })}
+                            <span>
+                                {i18n.t('Started at ')}
+                                <TooltipOrgUnit orgUnitPath={orgUnitName} />
+                            </span>
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-owner-orgunit">
                             <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Owned by {{ownerOrgUnit}}', {
-                                ownerOrgUnit: ownerOrgUnit.displayName,
-                            })}
+                            <span>
+                                {i18n.t('Owned by ')}
+                                <TooltipOrgUnit orgUnitPath={ownerOrgUnit.displayName} />
+                            </span>
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">

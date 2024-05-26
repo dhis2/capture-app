@@ -4,6 +4,7 @@ import cx from 'classnames';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import type { Props } from './flatList.types';
+import { TooltipOrgUnit } from '../../capture-core/components/Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';    // eslint-disable-line
 
 
 const styles = {
@@ -31,7 +32,13 @@ const FlatListPlain = ({ list, classes, dataTest }: Props) => {
             className={cx(classes.itemRow, { isLastItem: item.reactKey === lastItemKey })}
         >
             <div className={classes.itemKey}>{item.key}</div>
-            <div>{item.value}</div>
+            <div>
+                {item.valueType === 'ORGANISATION_UNIT' ? (
+                    <TooltipOrgUnit orgUnitPath={item.value} />
+                ) : (
+                    item.value
+                )}
+            </div>
         </div>
     );
 
