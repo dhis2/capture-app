@@ -1,144 +1,34 @@
 // @flow
-import React, { createRef } from 'react';
-import { DatePopup } from './DatePopup.component';
-import { DateCalendar } from './DateCalendar.component';
-import { lowerCaseFirstLetter } from '../../internal/utils/string/lowerCaseFirstLetter';
-import { DateInput } from '../../internal/DateInput/DateInput.component';
+import React from 'react';
+import { CalendarInput } from '@dhis2/ui';
 
 type Props = {
     value: ?string,
-    width: number,
+    width: string,
     maxWidth?: ?number,
     calendarWidth?: ?number,
-    calendarHeight?: ?number,
     inputWidth?: ?number,
     disabled?: ?boolean,
     onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-};
-
-type State = {
-    popoverOpen: boolean,
+    calendar: string,
 };
 
 export class DateField extends React.Component<Props, State> {
-    static splitPassOnProps(passOnProps: ?Object) {
-        const splittedProps = {
-            input: {},
-            popup: {},
-            calendar: {},
-        };
-
-        if (!passOnProps) {
-            return splittedProps;
-        }
-
-        return Object
-            .keys(passOnProps)
-            .reduce((accSplittedProps, propKey) => {
-                let propContainer;
-                if (propKey.startsWith(DateField.propContainers.CALENDAR)) {
-                    propContainer = DateField.propContainers.CALENDAR;
-                } else if (propKey.startsWith(DateField.propContainers.POPUP)) {
-                    propContainer = DateField.propContainers.POPUP;
-                } else {
-                    propContainer = DateField.propContainers.INPUT;
-                }
-
-                const outputKey = lowerCaseFirstLetter(propKey.replace(propContainer, ''));
-                accSplittedProps[propContainer][outputKey] = passOnProps[propKey];
-                return accSplittedProps;
-            }, splittedProps);
-    }
-
     containerInstance: ?HTMLElement;
-    handleTextFieldFocus: () => void;
     handleDateSelected: (value: string) => void;
-    handleTextFieldBlur: (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    hidePopover: () => void;
-    handleDocumentClick: (event: MouseEvent) => void;
-    calendarWrapperDOMElementRef: { current: ?HTMLDivElement };
 
     constructor(props: Props) {
         super(props);
 
-        this.state = {
-            popoverOpen: false,
-        };
-
-        this.handleTextFieldFocus = this.handleTextFieldFocus.bind(this);
         this.handleDateSelected = this.handleDateSelected.bind(this);
-        this.handleTextFieldBlur = this.handleTextFieldBlur.bind(this);
-        this.hidePopover = this.hidePopover.bind(this);
-        this.handleDocumentClick = this.handleDocumentClick.bind(this);
-
-        this.calendarWrapperDOMElementRef = createRef();
     }
 
-    componentWillUnmount() {
-        document.removeEventListener('click', this.handleDocumentClick);
-    }
-
-    static propContainers = {
-        CALENDAR: 'calendar',
-        POPUP: 'popup',
-        INPUT: 'input',
-    };
-
-    handleTextFieldFocus() {
-        document.removeEventListener('click', this.handleDocumentClick);
-
-        this.setState({
-            popoverOpen: true,
-        });
-
-        this.props.onFocus && this.props.onFocus();
-    }
-
-    handleDateSelected(value: string) {
-        this.props.onBlur(value);
-        this.hidePopover();
+    handleDateSelected(value) {
+        const date = value?.calendarDateString;
+        this.props.onBlur(date);
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
-        document.removeEventListener('click', this.handleDocumentClick);
-    }
-
-    handleDocumentClick({ target }: MouseEvent) {
-        const calendarWrapperDOMElement = this.calendarWrapperDOMElementRef.current;
-
-        if (!calendarWrapperDOMElement) {
-            throw Error('calendar wrapper DOM element not found');
-        }
-
-        if (target === calendarWrapperDOMElement ||
-            (target instanceof Node && calendarWrapperDOMElement.contains(target))) {
-            return;
-        }
-
-        this.hidePopover();
-        document.removeEventListener('click', this.handleDocumentClick);
-    }
-
-    handleTextFieldBlur({ relatedTarget, currentTarget }: SyntheticFocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        const calendarWrapperDOMElement = this.calendarWrapperDOMElementRef.current;
-
-        if (!calendarWrapperDOMElement) {
-            throw Error('calendar wrapper DOM element not found');
-        }
-
-        if (relatedTarget === calendarWrapperDOMElement ||
-            (relatedTarget instanceof Node && calendarWrapperDOMElement.contains(relatedTarget))) {
-            document.addEventListener('click', this.handleDocumentClick);
-        } else {
-            this.props.onBlur(currentTarget.value);
-            this.hidePopover();
-        }
-    }
-
-    hidePopover() {
-        this.setState({
-            popoverOpen: false,
-        });
     }
 
     render() {
@@ -146,19 +36,16 @@ export class DateField extends React.Component<Props, State> {
             width,
             maxWidth,
             calendarWidth,
-            calendarHeight,
             inputWidth,
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
+            calendar,
             ...passOnProps
         } = this.props;
-        const { popoverOpen } = this.state;
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
-        const splittedPassOnProps = DateField.splitPassOnProps(passOnProps);
-        const calculatedCalendarHeight = calendarHeight || 350;
-
+        const calendarType = calendar || 'gregory';
         return (
             <div
                 ref={(containerInstance) => { this.containerInstance = containerInstance; }}
@@ -166,41 +53,18 @@ export class DateField extends React.Component<Props, State> {
                     width,
                     maxWidth,
                 }}
+                disabled={this.props.disabled}
             >
-                { /* // $FlowFixMe */}
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <DateInput
-                    onFocus={this.handleTextFieldFocus}
-                    onBlur={this.handleTextFieldBlur}
-                    width={calculatedInputWidth}
-                    {...splittedPassOnProps.input}
+                <CalendarInput
+                    onDateSelect={this.handleDateSelected}
+                    calendar={calendarType}
+                    date={this.props.value}
+                    width={String(calculatedCalendarWidth)}
+                    inputWidth={String(calculatedInputWidth)}
+                    onFocus={this.props.onFocus}
+                    editable
+                    {...passOnProps}
                 />
-                <div
-                    data-test="date-calendar-wrapper"
-                    ref={this.calendarWrapperDOMElementRef}
-                >
-                    { /* // $FlowFixMe */}
-                    {/* $FlowFixMe[prop-missing] automated comment */}
-                    <DatePopup
-                        open={popoverOpen}
-                        onClose={this.hidePopover}
-                        width={calculatedCalendarWidth}
-                        height={calculatedCalendarHeight}
-                        inputWidth={calculatedInputWidth}
-                        inputUsesFloatingLabel={!!splittedPassOnProps.input.label}
-                        {...splittedPassOnProps.popup}
-                    >
-                        { /* // $FlowFixMe */}
-                        {/* $FlowFixMe[prop-missing] automated comment */}
-                        <DateCalendar
-                            onDateSelected={this.handleDateSelected}
-                            value={this.props.value}
-                            currentWidth={calculatedCalendarWidth}
-                            height={calculatedCalendarHeight}
-                            {...splittedPassOnProps.calendar}
-                        />
-                    </DatePopup>
-                </div>
             </div>
         );
     }
