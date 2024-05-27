@@ -239,9 +239,7 @@ export function getRulesEffectsProcessor(
     }
 
     function processDisplayKeyValuePair(effect: ProgramRuleEffect): any {
-        const { data } = effect;
-        const dataToString = value => (typeof value == 'number' ? numberToString(value) : String(value));
-        const value = data !== undefined ? dataToString(data) : '';
+        const data = effect.data !== undefined ? effect.data : '';
 
         return {
             type: effectActions.DISPLAY_KEY_VALUE_PAIR,
