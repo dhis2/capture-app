@@ -247,7 +247,7 @@ export function getRulesEffectsProcessor(
             displayKeyValuePair: {
                 id: effect.id,
                 key: effect.displayContent,
-                value,
+                value: typeof data === 'number' ? numberToString(data) : String(data),
                 ...effect.style,
             },
         };
