@@ -1,3 +1,11 @@
+## [100.68.14](https://github.com/dhis2/capture-app/compare/v100.68.13...v100.68.14) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15920] skip duplicates reviews ([#3629](https://github.com/dhis2/capture-app/issues/3629)) ([3a93911](https://github.com/dhis2/capture-app/commit/3a93911c5a8dac5ae4c6444b61b4bce5d106dacb))
+* [DHIS2-17102] edit event navigation ([#3592](https://github.com/dhis2/capture-app/issues/3592)) ([85a6f62](https://github.com/dhis2/capture-app/commit/85a6f628b754e31bfa7853f8746ac97523c12c25))
+
 ## [100.68.13](https://github.com/dhis2/capture-app/compare/v100.68.12...v100.68.13) (2024-05-29)
 
 
