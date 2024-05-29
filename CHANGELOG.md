@@ -1,3 +1,10 @@
+## [100.68.13](https://github.com/dhis2/capture-app/compare/v100.68.12...v100.68.13) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17291][DHIS2-16597] skip trackedEntites request when no events match the WL filters ([#3633](https://github.com/dhis2/capture-app/issues/3633)) ([4f4b086](https://github.com/dhis2/capture-app/commit/4f4b086af4287ac3a66175e5583910ad4cc8a626))
+
 ## [100.68.12](https://github.com/dhis2/capture-app/compare/v100.68.11...v100.68.12) (2024-05-29)
 
 
