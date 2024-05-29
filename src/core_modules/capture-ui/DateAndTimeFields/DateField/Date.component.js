@@ -53,7 +53,6 @@ export class DateField extends React.Component<Props, State> {
                     width,
                     maxWidth,
                 }}
-                disabled={this.props.disabled}
             >
                 <CalendarInput
                     onDateSelect={this.handleDateSelected}
@@ -63,6 +62,7 @@ export class DateField extends React.Component<Props, State> {
                     inputWidth={String(calculatedInputWidth)}
                     onFocus={this.props.onFocus}
                     editable
+                    disabled={this.props.disabled}
                     {...passOnProps}
                 />
             </div>
