@@ -1,3 +1,10 @@
+## [100.68.12](https://github.com/dhis2/capture-app/compare/v100.68.11...v100.68.12) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17089] replace "Registering unit" text with "Organisation unit" text ([#3583](https://github.com/dhis2/capture-app/issues/3583)) ([7a0c380](https://github.com/dhis2/capture-app/commit/7a0c3805c3f5f5a62190a1ec483709d704fe484d))
+
 ## [100.68.11](https://github.com/dhis2/capture-app/compare/v100.68.10...v100.68.11) (2024-05-26)
 
 
