@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Radio, colors, spacers, spacersNum, IconInfo16, Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
+// import { useRelatedStageEligibility } from '../hooks/useRelatedStageEligibility';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
@@ -68,6 +69,8 @@ export const RelatedStagesActionsPlain = ({
             linkMode: action,
         }));
     };
+
+    // const isRelatedStageEligible = useRelatedStageEligibility(programStage, linkableEvents);
 
     if (!programStage) {
         return null;
