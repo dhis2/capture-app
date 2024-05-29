@@ -750,8 +750,31 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and co
         .click();
 });
 
+Given('you open the main page with all accesible records in the WHO RMNCH Tracker context and configure a program stage working list', () => {
+    cy.visit('#/?programId=WSGAb5XwJ3Y&all');
+
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+            cy.contains('Program stage')
+                .click();
+        });
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Postpartum care visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
+Then('the tracker event URL contains the orgUnitId', () => {
+    cy.url().should('include', '/enrollmentEventEdit?eventId=cxQ44Gz8yEr&orgUnitId=yMCshbaVExv');
+});
+
 When('you open an enrollment event from the working list', () => {
-    cy.contains('Linda')
+    cy.contains('Sara')
         .click();
 });
 

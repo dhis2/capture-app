@@ -64,10 +64,12 @@ export const TeiWorkingListsReduxProvider = ({
 
     const onSelectListRow = useCallback(({ id }) => {
         const record = records[id];
-        const orgUnitIdParameter = orgUnitId || record.programOwner;
+        const orgUnitIdParameter = orgUnitId || record.orgUnit?.id || record.programOwner;
 
         return programStage
-            ? history.push(`/enrollmentEventEdit?${buildUrlQueryString({ eventId: id, orgUnitId })}`)
+            ? history.push(
+                `/enrollmentEventEdit?${buildUrlQueryString({ eventId: id, orgUnitId: orgUnitIdParameter })}`,
+            )
             : dispatch(navigateToEnrollmentOverview({
                 teiId: id,
                 programId,
