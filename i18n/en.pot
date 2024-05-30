@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
-"PO-Revision-Date: 2024-04-05T13:37:32.910Z\n"
+"POT-Creation-Date: 2024-05-30T12:39:03.102Z\n"
+"PO-Revision-Date: 2024-05-30T12:39:03.103Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1450,6 +1450,9 @@ msgstr "Link to an existing {{linkableStageLabel}}"
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Choose a {{linkableStageLabel}}"
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr "{{ linkableStageLabel }} is not repeatable"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"

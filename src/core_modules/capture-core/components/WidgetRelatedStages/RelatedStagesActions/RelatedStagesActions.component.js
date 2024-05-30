@@ -3,8 +3,9 @@ import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Radio, colors, spacers, spacersNum, IconInfo16, Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
-// import { useRelatedStageEligibility } from '../hooks/useRelatedStageEligibility';
+import { useRelatedStageEligibility } from '../hooks/useRelatedStageEligibility';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
@@ -70,7 +71,7 @@ export const RelatedStagesActionsPlain = ({
         }));
     };
 
-    // const isRelatedStageEligible = useRelatedStageEligibility(programStage, linkableEvents);
+    const isRelatedStageEligible = useRelatedStageEligibility(programStage, linkableEvents);
 
     if (!programStage) {
         return null;
@@ -83,15 +84,27 @@ export const RelatedStagesActionsPlain = ({
         >
             <div className={classes.wrapper}>
                 {type === relatedStageStatus.LINKABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
-                    <Radio
-                        key={key}
-                        name={`related-stage-action-${key}`}
-                        checked={key === selectedAction}
-                        disabled={key === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && !linkableEvents.length}
-                        label={mainOptionTranslatedTexts[key]}
-                        onChange={(e: Object) => updateSelectedAction(e.value)}
-                        value={key}
-                    />
+                    <div className={classes.fieldWrapper} key={key}>
+                        <ConditionalTooltip
+                            content={i18n.t('{{ linkableStageLabel }} is not repeatable', {
+                                linkableStageLabel: programStage.stageForm.name,
+                                interpolation: { escapeValue: false },
+                            })}
+                            enabled={!isRelatedStageEligible}
+                        >
+                            <Radio
+                                name={`related-stage-action-${key}`}
+                                checked={key === selectedAction}
+                                disabled={(key === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE
+                                    && !linkableEvents.length)
+                                    || !isRelatedStageEligible}
+                                label={mainOptionTranslatedTexts[key]}
+                                onChange={(e: Object) => updateSelectedAction(e.value)}
+                                value={key}
+                            />
+                        </ConditionalTooltip>
+                    </div>
+
                 )) : null}
                 {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS ?
                     <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
