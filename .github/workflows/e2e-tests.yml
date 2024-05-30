@@ -42,10 +42,12 @@ jobs:
         outputs:
             matrix: ${{ steps.set-matrix.outputs.specs }}
         steps:
-        - uses: actions/checkout@v3
-        - name: Generate test matrix
-          id: set-matrix
-          run: echo "::set-output name=specs::$(node cypress/support/generateTestMatrix.js)"
+            - uses: actions/checkout@v3
+            - name: Generate test matrix
+              id: set-matrix
+              run: |
+                  node cypress/support/generateTestMatrix.js > matrix.json
+                  echo "::set-output name=specs::$(cat matrix.json)"
 
     prerequisites:
         runs-on: ubuntu-latest
@@ -101,13 +103,28 @@ jobs:
               env:
                   version: ${{ matrix.versions }}
 
+            - name: Set Cypress Environment Variables
+              run: |
+                echo "CYPRESS_GROUP=e2e-${{ matrix.versions }}-${{ matrix.spec-group.id }}" >> $GITHUB_ENV
+                echo "CYPRESS_TAG=${{ github.event_name }}" >> $GITHUB_ENV
+                echo "CYPRESS_CI_BUILD_ID=${{ github.run_id }}" >> $GITHUB_ENV
+                echo "CI_BUILD_ID=${{ github.run_id }}" >> $GITHUB_ENV
+
+            - name: Debug Environment Variables
+              run: |
+                echo "SHOULD_RECORD=${{ env.SHOULD_RECORD }}"
+                echo "CI Build ID=${{ env.CI_BUILD_ID }}"
+                echo "Computed Group=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}"
+                echo "Computed Tag=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}"
+                echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
+                echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
             - name: Cypress run
               uses: cypress-io/github-action@v6
               with:
                   record: ${{ env.SHOULD_RECORD }}
                   parallel: ${{ env.SHOULD_RECORD }}
-                  group: ${{ env.SHOULD_RECORD == 'true' && format('e2e-chrome-parallel-{0}-{1}', matrix.versions, matrix.spec-group.id) || '' }}
-                  ci-build-id: ${{ env.SHOULD_RECORD == 'true' && github.run_id || '' }}
+                  group: ${{ env.CYPRESS_GROUP }}
+                  ci-build-id: ${{ env.CYPRESS_CI_BUILD_ID }}
                   spec: ${{ join(matrix.spec-group.tests, ',') }}
                   browser: chrome
                   start: yarn start:forCypress
@@ -118,7 +135,7 @@ jobs:
                   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   CYPRESS_dhis2BaseUrl: ${{ steps.instance-url.outputs.url }}
-                  CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
+                  CYPRESS_dhis2InstanceVersion: ${{ matrix.versions }}
                   CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
                   CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
                   NODE_OPTIONS: "--openssl-legacy-provider"
