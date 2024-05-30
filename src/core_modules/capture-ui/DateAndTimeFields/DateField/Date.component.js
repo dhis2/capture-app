@@ -16,7 +16,6 @@ type Props = {
 };
 
 export class DateField extends React.Component<Props, State> {
-    containerInstance: ?HTMLElement;
     handleDateSelected: (value: string) => void;
 
     constructor(props: Props) {
@@ -48,7 +47,6 @@ export class DateField extends React.Component<Props, State> {
         const calendarType = calendar || 'gregory';
         return (
             <div
-                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
                 style={{
                     width,
                     maxWidth,
