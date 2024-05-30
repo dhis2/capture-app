@@ -1117,6 +1117,9 @@ msgstr "Create new event"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
 
+msgid "No tracked entity types available"
+msgstr "No tracked entity types available"
+
 msgid "Assigned to"
 msgstr "Assigned to"
 

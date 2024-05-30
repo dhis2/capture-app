@@ -1,3 +1,10 @@
+## [100.68.15](https://github.com/dhis2/capture-app/compare/v100.68.14...v100.68.15) (2024-05-30)
+
+
+### Bug Fixes
+
+* [DHIS2-17052] Unrelated error message on no TETs ([#3605](https://github.com/dhis2/capture-app/issues/3605)) ([6a38ae3](https://github.com/dhis2/capture-app/commit/6a38ae35da26cc3b5d48540d4867c8fdac6e65a3))
+
 ## [100.68.14](https://github.com/dhis2/capture-app/compare/v100.68.13...v100.68.14) (2024-05-29)
 
 
