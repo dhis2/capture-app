@@ -154,8 +154,9 @@ jobs:
         with:
           record: ${{ env.SHOULD_RECORD }}
           parallel: ${{ env.SHOULD_RECORD }}
-          group: ${{ env.CYPRESS_GROUP }}
-          ci-build-id: ${{ env.CYPRESS_CI_BUILD_ID }}
+          group: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}
+          tag: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}
+          ci-build-id: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}
           spec: ${{ join(matrix.spec-group.tests, ',') }}
           browser: chrome
           start: yarn start:forCypress
