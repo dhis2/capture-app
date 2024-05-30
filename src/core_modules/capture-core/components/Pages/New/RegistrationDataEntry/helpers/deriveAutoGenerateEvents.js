@@ -15,6 +15,7 @@ export const deriveAutoGenerateEvents = ({
     orgUnitId,
     firstStageMetadata,
     attributeCategoryOptions,
+    serverMinorVersion,
 }: {
     stages: Map<string, ProgramStage>,
     enrolledAt: string,
@@ -23,6 +24,7 @@ export const deriveAutoGenerateEvents = ({
     orgUnitId: string,
     firstStageMetadata: ?ProgramStage,
     attributeCategoryOptions: { [categoryId: string]: string } | string,
+    serverMinorVersion: number,
 }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
@@ -48,7 +50,7 @@ export const deriveAutoGenerateEvents = ({
                 const eventAttributeCategoryOptions = {};
                 if (attributeCategoryOptions) {
                     eventAttributeCategoryOptions.attributeCategoryOptions =
-                        convertCategoryOptionsToServer(attributeCategoryOptions);
+                        convertCategoryOptionsToServer(attributeCategoryOptions, serverMinorVersion);
                 }
                 const eventInfo = openAfterEnrollment
                     ? {
@@ -59,11 +61,11 @@ export const deriveAutoGenerateEvents = ({
                     : {
                         status: 'SCHEDULE',
                         // for schedule type of events we want to add the standard interval days to the date
-                        scheduledAt: convertClientToServer(
-                            moment(dateToUseInScheduleStatus)
-                                .add(minDaysFromStart, 'days')
-                                .format('YYYY-MM-DD'),
-                            dataElementTypes.DATE),
+                        scheduledAt: convertClientToServer(moment(dateToUseInScheduleStatus)
+                            .add(minDaysFromStart, 'days')
+                            .format('YYYY-MM-DD'),
+                        dataElementTypes.DATE,
+                        ),
                     };
 
                 return {

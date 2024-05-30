@@ -1,3 +1,74 @@
+## [100.68.14](https://github.com/dhis2/capture-app/compare/v100.68.13...v100.68.14) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15920] skip duplicates reviews ([#3629](https://github.com/dhis2/capture-app/issues/3629)) ([3a93911](https://github.com/dhis2/capture-app/commit/3a93911c5a8dac5ae4c6444b61b4bce5d106dacb))
+* [DHIS2-17102] edit event navigation ([#3592](https://github.com/dhis2/capture-app/issues/3592)) ([85a6f62](https://github.com/dhis2/capture-app/commit/85a6f628b754e31bfa7853f8746ac97523c12c25))
+
+## [100.68.13](https://github.com/dhis2/capture-app/compare/v100.68.12...v100.68.13) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17291][DHIS2-16597] skip trackedEntites request when no events match the WL filters ([#3633](https://github.com/dhis2/capture-app/issues/3633)) ([4f4b086](https://github.com/dhis2/capture-app/commit/4f4b086af4287ac3a66175e5583910ad4cc8a626))
+
+## [100.68.12](https://github.com/dhis2/capture-app/compare/v100.68.11...v100.68.12) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17089] replace "Registering unit" text with "Organisation unit" text ([#3583](https://github.com/dhis2/capture-app/issues/3583)) ([7a0c380](https://github.com/dhis2/capture-app/commit/7a0c3805c3f5f5a62190a1ec483709d704fe484d))
+
+## [100.68.11](https://github.com/dhis2/capture-app/compare/v100.68.10...v100.68.11) (2024-05-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ef29fbd](https://github.com/dhis2/capture-app/commit/ef29fbd1ff1c375734aec3895c322fd95629326c))
+
+## [100.68.10](https://github.com/dhis2/capture-app/compare/v100.68.9...v100.68.10) (2024-05-24)
+
+
+### Bug Fixes
+
+* [DHIS2-17399] use server version to send correct aoc payload ([#3643](https://github.com/dhis2/capture-app/issues/3643)) ([205ff1b](https://github.com/dhis2/capture-app/commit/205ff1bd9700562bbfdfd4fbf0352c91780356e5))
+
+## [100.68.9](https://github.com/dhis2/capture-app/compare/v100.68.8...v100.68.9) (2024-05-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b1d12cd](https://github.com/dhis2/capture-app/commit/b1d12cd95fecf3a9144409a4c17f574c5ef085a2))
+
+## [100.68.8](https://github.com/dhis2/capture-app/compare/v100.68.7...v100.68.8) (2024-05-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([88aa7c6](https://github.com/dhis2/capture-app/commit/88aa7c6e9bf56194dfcf61ed82406d9c552563e1))
+
+## [100.68.7](https://github.com/dhis2/capture-app/compare/v100.68.6...v100.68.7) (2024-05-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6aaf273](https://github.com/dhis2/capture-app/commit/6aaf273d910e32c862a571fed8c4cb11c44b35a7))
+
+## [100.68.6](https://github.com/dhis2/capture-app/compare/v100.68.5...v100.68.6) (2024-04-30)
+
+
+### Bug Fixes
+
+* [DHIS2-17195] implement d2:condition ([#3615](https://github.com/dhis2/capture-app/issues/3615)) ([535d430](https://github.com/dhis2/capture-app/commit/535d43018eeb1c70b8756abc65bde974916d5e2a))
+
+## [100.68.5](https://github.com/dhis2/capture-app/compare/v100.68.4...v100.68.5) (2024-04-30)
+
+
+### Bug Fixes
+
+* [BETA-102] handle Arabic dates when registering with auto-generate events ([#3621](https://github.com/dhis2/capture-app/issues/3621)) ([50480e4](https://github.com/dhis2/capture-app/commit/50480e4460572547320e610c749963bd68b7eb80))
+
 ## [100.68.4](https://github.com/dhis2/capture-app/compare/v100.68.3...v100.68.4) (2024-04-29)
 
 

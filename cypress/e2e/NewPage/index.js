@@ -13,7 +13,7 @@ Given('you are in the registration page with Ngelehun CHC org unit selected', ()
 
 And('there should be informative message explaining you need to select an organisation unit', () => {
     cy.get('[data-test="informative-paper"]')
-        .contains('Choose a registering unit to start reporting')
+        .contains('Choose an organisation unit to start reporting')
         .should('exist');
 });
 

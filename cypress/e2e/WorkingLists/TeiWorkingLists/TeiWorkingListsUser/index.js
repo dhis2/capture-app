@@ -249,9 +249,9 @@ When('you open the column selector', () => {
         .click();
 });
 
-When('you select the registering unit and save from the column selector', () => {
+When('you select the organisation unit and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
-        .contains('Registering unit')
+        .contains('Organisation unit')
         .find('input')
         .click();
 
@@ -260,9 +260,9 @@ When('you select the registering unit and save from the column selector', () => 
         .click();
 });
 
-Then('the registering unit should display in the list', () => {
+Then('the organisation unit should display in the list', () => {
     cy.get('[data-test="online-list-table"]')
-        .contains('Registering unit')
+        .contains('Organisation unit')
         .should('exist');
 });
 
@@ -819,4 +819,20 @@ Then('the JSON button exists', () => {
                 .eq(0)
                 .should('have.attr', 'href').and('include', `/trackedEntities.json?${params}`);
         });
+});
+
+When('you set the event visit date to Today', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Date of visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Today')
+        .click();
+});
+
+Then('the working list is empty', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('No items to display')
+        .click();
 });
