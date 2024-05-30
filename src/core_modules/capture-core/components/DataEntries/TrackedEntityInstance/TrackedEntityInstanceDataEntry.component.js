@@ -10,6 +10,7 @@ import {
 import type { TeiRegistration } from '../../../metaData';
 
 type FinalTeiDataEntryProps = {
+    orgUnitId: string,
     teiRegistrationMetadata: TeiRegistration,
 };
 // final step before the generic dataEntry is inserted
@@ -19,10 +20,11 @@ class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 
     render() {
-        const { teiRegistrationMetadata, ...passOnProps } = this.props;
+        const { teiRegistrationMetadata, orgUnitId, ...passOnProps } = this.props;
         return (
             <DataEntry
                 {...passOnProps}
+                orgUnit={{ id: orgUnitId }}
                 formFoundation={teiRegistrationMetadata.form}
             />
         );
@@ -62,7 +64,6 @@ export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
 
     render() {
         const {
-            orgUnitId,
             trackedEntityTypeId,
             onUpdateField,
             onStartAsyncUpdateField,

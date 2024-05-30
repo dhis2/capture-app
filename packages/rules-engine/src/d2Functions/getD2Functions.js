@@ -1,8 +1,8 @@
 // @flow
-
 import log from 'loglevel';
 import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
 import { extractDataMatrixValue } from './gs1DataMatrixFuntions';
+import { executeExpression } from '../services/expressionService';
 import type { D2FunctionsInput, D2Functions } from './getD2Functions.types';
 
 
@@ -301,6 +301,27 @@ export const getD2Functions = ({
         execute: (params: any) => {
             log.warn('multiTextContains not implemented yet');
             return params[0];
+        },
+    },
+    condition: {
+        parameters: 3,
+        execute: (params: any) => {
+            // The expression in params[0] was wrapped in quotation marks,
+            // so we need to evaluate it using executeExpression.
+            const dhisFunctions: D2Functions = getD2Functions({
+                dateUtils,
+                variablesHash,
+                selectedOrgUnit,
+                selectedUserRoles,
+            });
+            const result = executeExpression({
+                expression: params[0],
+                dhisFunctions,
+                variablesHash,
+                onError: () => log.error(`Evaluation of d2:condition expression ${params[0]} failed`),
+                onVerboseLog: () => {},
+            });
+            return result ? params[1] : params[2];
         },
     },
 });

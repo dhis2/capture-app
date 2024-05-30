@@ -1,51 +1,33 @@
 // @flow
 import { useMemo } from 'react';
-import { useDataQuery } from '@dhis2/app-runtime';
-
-const fields =
-    'id,version,displayName,displayShortName,description,programType,style,minAttributesRequiredToSearch,enrollmentDateLabel,incidentDateLabel,featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
-    'access[*],' +
-    'dataEntryForm[id,htmlCode],' +
-    'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
-    'programIndicators[id,displayName,code,shortName,style,displayInForm,expression,displayDescription,description,filter,program[id]],' +
-    'programSections[id, displayFormName, sortOrder, trackedEntityAttributes],' +
-    'programRuleVariables[id,displayName,programRuleVariableSourceType,valueType,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet],' +
-    'programStages[id,access,autoGenerateEvent,openAfterEnrollment,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,displayName,description,executionDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,' +
-        'dataEntryForm[id,htmlCode],' +
-        'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +
-        'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,optionSetValue,style,optionSet[id,displayName,version,valueType,options[id,displayName,code,style, translations]]]]' +
-    '],' +
-    'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,displayShortName,displayFormName,description,valueType,optionSetValue,unique,orgunitScope,pattern,translations[property,locale,value],optionSet[id,displayName,version,valueType,options[id,displayName,name,code,style,translations]]],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate],' +
-    'trackedEntityType[id,access,displayName,allowAuditLog,minAttributesRequiredToSearch,featureType,trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],translations[property,locale,value]],' +
-    'userRoles[id,displayName]';
+import { useApiProgram } from './useApiProgram';
+import { useOptionGroups } from './useOptionGroups';
 
 export const useProgram = (programId: string) => {
-    const { error, loading, data } = useDataQuery(
-        useMemo(
-            () => ({
-                programs: {
-                    resource: 'programs',
-                    id: programId,
-                    params: {
-                        fields,
-                    },
-                },
-            }),
-            [programId],
-        ),
-    );
+    const { error: programError, loading: programLoading, program } = useApiProgram(programId);
+    const { error: optionGroupsError, loading: optionGroupsLoading, optionGroups } = useOptionGroups(program);
 
     const programMetadata = useMemo(() => {
-        if (data?.programs) {
-            const program = data.programs;
+        if (program && optionGroups) {
             if (program.trackedEntityType) {
                 program.trackedEntityType.changelogEnabled = program.trackedEntityType.allowAuditLog;
                 delete program.trackedEntityType.allowAuditLog;
             }
+            program.programTrackedEntityAttributes = program.programTrackedEntityAttributes.map((attribute) => {
+                const tea = attribute.trackedEntityAttribute;
+                if (tea.optionSet) {
+                    tea.optionSet.optionGroups = optionGroups[tea.optionSet.id];
+                }
+                return attribute;
+            });
             return program;
         }
         return null;
-    }, [data]);
+    }, [program, optionGroups]);
 
-    return { error, loading, program: !loading && programMetadata };
+    return {
+        program: programMetadata,
+        loading: programLoading || optionGroupsLoading,
+        error: programError || optionGroupsError,
+    };
 };

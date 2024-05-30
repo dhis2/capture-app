@@ -7,6 +7,7 @@ import {
     actionTypes,
     duplicatesForReviewRetrievalSuccess,
     duplicatesForReviewRetrievalFailed,
+    duplicatesReviewSkipped,
 } from './possibleDuplicatesDialog.actions';
 import {
     scopeTypes, getScopeFromScopeId, EventProgram, TrackerProgram, TrackedEntityType, dataElementTypes,
@@ -69,6 +70,10 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                         return `${element.id}:${hasOptionSet ? 'eq' : 'like'}:${escapeString(serverValue)}`;
                     })
                     .filter(f => f);
+
+                if (filters.length === 0) {
+                    return Promise.resolve(duplicatesReviewSkipped());
+                }
 
                 const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ? { program: selectedScopeId } : { trackedEntityType: selectedScopeId };
                 const queryArgs = {

@@ -53,11 +53,11 @@ And the list should display teis with John as the first name
 And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
-Scenario: Show the registering unit column
+Scenario: Show the organisation unitt column
 Given you open the main page with Ngelehun and child programme context
 When you open the column selector
-And you select the registering unit and save from the column selector
-Then the registering unit should display in the list
+And you select the organisation unit and save from the column selector
+Then the organisation unit should display in the list
 
 Scenario: Show next page
 Given you open the main page with Ngelehun and child programme context
@@ -194,6 +194,13 @@ Given you open the main page with Ngelehun and WHO RMNCH Tracker context and con
 When you open an enrollment event from the working list
 And you go back using the browser button
 Then the program stage working list is loaded
+
+@v>=39
+Scenario: The user can open a program stage list without events
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list
+And you set the event visit date to Today
+And you apply the current filter
+Then the working list is empty
 
 @v>=40
 Scenario: The user creates, updates and deletes a Program stage custom working list
