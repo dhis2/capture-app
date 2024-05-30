@@ -15,8 +15,8 @@ type Props = {
     calendar: string,
 };
 
-export class DateField extends React.Component<Props, State> {
-    handleDateSelected: (value: string) => void;
+export class DateField extends React.Component<Props> {
+    handleDateSelected: (value: {calendarDateString: string}) => void;
 
     constructor(props: Props) {
         super(props);
@@ -24,7 +24,7 @@ export class DateField extends React.Component<Props, State> {
         this.handleDateSelected = this.handleDateSelected.bind(this);
     }
 
-    handleDateSelected(value) {
+    handleDateSelected(value: {calendarDateString: string}) {
         const date = value?.calendarDateString;
         this.props.onBlur(date);
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
@@ -53,6 +53,7 @@ export class DateField extends React.Component<Props, State> {
                 }}
             >
                 <CalendarInput
+                    {...passOnProps}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
                     date={this.props.value}
@@ -61,7 +62,6 @@ export class DateField extends React.Component<Props, State> {
                     onFocus={this.props.onFocus}
                     editable
                     disabled={this.props.disabled}
-                    {...passOnProps}
                 />
             </div>
         );
