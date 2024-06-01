@@ -356,7 +356,7 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "ບາງໂປແກຼມກໍາລັງຖືກກັ່ນຕອງ."
 
 msgid "Show all"
 msgstr "ສະແດງທັງໝົດ"
@@ -368,7 +368,7 @@ msgid "Select program"
 msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
 
 msgid "No programs available."
-msgstr ""
+msgstr "ບໍ່ພົບໂປແກຼມນີ້"
 
 msgid "Online"
 msgstr "ມີການເຊື່ອມຕໍ່"
@@ -410,19 +410,19 @@ msgid "Save"
 msgstr "ບັນທຶກ"
 
 msgid "Show all events"
-msgstr ""
+msgstr "ສະແດງເຫດການທັງໝົດ"
 
 msgid "Edit event"
-msgstr ""
+msgstr "ແກ້ໄຂເຫດການ"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "ບໍ່ສາມາດໂຫຼດເຫດການໄດ້. ທ່ານແນ່ໃຈບໍ່ວ່າມັນມີຢູ່?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "ບໍ່ສາມາດໂຫຼດເຫດການໄດ້"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "ບໍ່ສາມາດໂຫຼດຫົວໜ່ວຍການຈັດຕັ້ງໄດ້"
 
 msgid "View event info"
 msgstr ""
@@ -467,7 +467,7 @@ msgid "Download with current filters"
 msgstr ""
 
 msgid "Download data..."
-msgstr ""
+msgstr "ໂຫຼດຂໍ້ມູນ..."
 
 msgid "Rows per page"
 msgstr "ແຖວຕໍ່ຫນ້າເຈ້ຍ"
@@ -506,10 +506,10 @@ msgid "Show All"
 msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "ບໍ່ສາມາດໂຫຼດລາຍການໄດ້"
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫຼດລາຍການ"
 
 msgid "Registered events"
 msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
@@ -645,7 +645,7 @@ msgid "Registered person"
 msgstr "ຄົນທີ່ລົງທະບຽນ"
 
 msgid "Link"
-msgstr ""
+msgstr "ເຊື່ອມ"
 
 msgid "Metadata error. see log for details"
 msgstr "ຂໍ້ມູນເມຕ້າແມ່ນຜິດພາດ. ເບິ່ງບັນທຶກສໍາລັບລາຍລະອຽດ"
@@ -657,7 +657,7 @@ msgid "Create {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "ພົບການຊໍ້າກັນທີ່ເປັນໄປໄດ້"
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
@@ -678,25 +678,25 @@ msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
+msgstr "ຜົນການຄົ້ນຫາ"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "ບໍ່ພົບ {{trackedEntityTypeName}} ."
 
 msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
-msgstr ""
+msgstr "ຄົ້ນຫາໃໝ່"
 
 msgid "Edit search"
-msgstr ""
+msgstr "ແກ້ໄຂການຄົ້ນຫາ"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "ເຊື່ອມກັບໂຕທີ່ມີຢູ່ {{trackedEntityType}}"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "ສ້າງໃໝ່ {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "ລົົງທະບຽນ"
@@ -713,10 +713,10 @@ msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "ການອອກຈາກໜ້ານີ້ແມ່ນຈະຖືກຍົກເລີກການເລືອກຕ່າງໆທີ່ທ່ານສ້າງຂຶ້ນ"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "ບໍ່ມີໃຜຖືກມອບໝາຍໃຫ້ກັບເຫດການນີ້"
 
 msgid "Assign"
 msgstr "Assign"
@@ -752,10 +752,10 @@ msgid "Selected program"
 msgstr "ເລືອກສາຍງານ"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "ຄົ້ນຫາ {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "ຄົ້ນຫາໂດຍຄຸນລັກສະນະ"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
@@ -836,7 +836,7 @@ msgid "Delete polygon"
 msgstr ""
 
 msgid "Set area"
-msgstr ""
+msgstr "ກຳນົດພື້ນທີ່"
 
 msgid "Compatibility mode"
 msgstr ""
