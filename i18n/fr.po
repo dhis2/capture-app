@@ -5,17 +5,17 @@
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Yayra Gomado <ygomado@hispwca.org>, 2021
-# phil_dhis2, 2022
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2022
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2022\n"
-"Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -197,8 +197,8 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"La relation entre le type {{nom du type de relation}} et {{Nom d'entité}} "
-"existe déjà"
+"La relation entre le type {{relationshipTypeName}} et {{entityName}} existe "
+"déjà"
 
 msgid "Active"
 msgstr "Actif"
@@ -227,7 +227,7 @@ msgid "No write access"
 msgstr "Aucun accès en écriture"
 
 msgid "New {{titleText}}"
-msgstr "Nouveau {{texte du titre}}"
+msgstr "Nouveau {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Passer à la vue du formulaire"
@@ -307,21 +307,20 @@ msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
-"Un élément est déjà enregistré avec ce {{nom d'attribut}}, mais vous n'y "
-"avez pas accès"
+"Un élément est déjà enregistré avec ce {{attributeName}}, mais vous n'y avez"
+" pas accès"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "Vous avez déjà enregistré ce {{nom d'attribut}}"
+msgstr "Vous avez déjà enregistré ce {{attributeName}}"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"Un {{Nom de type d'entité suivie}} ayant ce {{Nom d'attribut}} est déjà "
-"enregistré"
+"Un {{trackedEntityTypeName}} ayant ce {{attributeName}} est déjà enregistré"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Afficher le {{Nom de type d'entité suivie}} enregistré"
+msgstr "Afficher le {{trackedEntityTypeName}} enregistré"
 
 msgid "Registered person"
 msgstr "Personne inscrite"
@@ -510,7 +509,7 @@ msgid "Apply"
 msgstr "Appliquer"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{de}} à {{à}}"
+msgstr "{{fromDate}} à {{toDate}}"
 
 msgid "after or equal to {{date}}"
 msgstr "après ou égal à {{date}}"
@@ -743,7 +742,7 @@ msgid "Share view..."
 msgstr "Partager la vue..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Souhaitez-vous vraiment supprimer la vue '{{nom du modèle}}' ?"
+msgstr "Souhaitez-vous vraiment supprimer la vue '{{templateName}}' ?"
 
 msgid "Confirm"
 msgstr "Confirmer"
@@ -803,7 +802,7 @@ msgid "Search results"
 msgstr "Résultats de la recherche"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr "Aucun {{Nom de type d'entité suivie}} trouvé."
+msgstr "Aucun {{trackedEntityTypeName}} trouvé."
 
 msgid "New search"
 msgstr "Nouvelle recherche"
@@ -812,10 +811,10 @@ msgid "Edit search"
 msgstr "Modifier la recherche"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr "Lier à un {{Type d'entité suivie}} existant"
+msgstr "Lier à un {{trackedEntityType}} existant"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr "Créer un nouveau {{Type d'entité suivie}}"
+msgstr "Créer un nouveau {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Enregistrer"
@@ -823,11 +822,11 @@ msgstr "Enregistrer"
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
-"Renseigner au moins les attributs {{Nombre minimal d'attributs requis pour "
-"la recherche}} pour la recherche"
+"Renseigner au moins les attributs {{minAttributesRequiredToSearch}} pour la "
+"recherche"
 
 msgid "Search {{name}}"
-msgstr "Rechercher {{nom}}"
+msgstr "Rechercher {{name}}"
 
 msgid "Search by {{name}}"
 msgstr "Rechercher par {{name}}"
@@ -839,7 +838,7 @@ msgid "Back"
 msgstr "Précédent"
 
 msgid "Search for {{titleText}}"
-msgstr "Rechercher {{texte du titre}}"
+msgstr "Rechercher {{titleText}}"
 
 msgid "Search for"
 msgstr "Rechercher"
@@ -926,7 +925,7 @@ msgid "Assign"
 msgstr "Assigner"
 
 msgid "Event assigned to {{name}}"
-msgstr "Événement attribué à {{nom}}"
+msgstr "Événement attribué à {{name}}"
 
 msgid "Feedbacks"
 msgstr "Feedbacks"
@@ -963,8 +962,8 @@ msgstr "Chercher {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
-"Renseigner au moins les attributs {{Nombre minimal d'attributs requis}} pour"
-" la recherche"
+"Renseigner au moins les attributs {{minAttributesRequired}} pour la "
+"recherche"
 
 msgid "To work with the selected program,"
 msgstr "Pour utiliser le programme sélectionné,"
@@ -1027,7 +1026,7 @@ msgid "Longitude"
 msgstr "Longitude"
 
 msgid "Page {{currentPage}}"
-msgstr "Page {{page en cours}}"
+msgstr "Page {{currentPage}}"
 
 msgid "Date"
 msgstr "Date"
