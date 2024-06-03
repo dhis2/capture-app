@@ -6,16 +6,16 @@
 # Philip Larsen Donnelly, 2024
 # Edem Kossi <ekossi@hispwca.org>, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2024
 # Yayra Gomado <ygomado@hispwca.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2024\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -634,10 +634,8 @@ msgstr "Impossible de trouver l'unité d'organisation"
 msgid "Program doesn't exist"
 msgstr "Le programme n'existe pas"
 
-msgid "Selected program is invalid for selected registering unit"
+msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-"Le programme sélectionné est invalide pour l'unité d'enregistrement "
-"sélectionnée"
 
 msgid "Online"
 msgstr "En ligne"
@@ -812,8 +810,8 @@ msgstr "Une erreur s'est produite lors de l'ouverture de la page"
 msgid "There was an error loading the page"
 msgstr "Une erreur s'est produite lors du chargement de la page"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
 
 msgid "No feedback for this event yet"
 msgstr ""
@@ -1026,11 +1024,8 @@ msgstr "Ajouetr relation"
 msgid "No results found for "
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Unité qui enregistre"
-
-msgid "Choose a registering unit"
-msgstr ""
+msgid "Choose an organisation unit"
+msgstr "Choisissez une unité d'organisation"
 
 msgid "Clear selection"
 msgstr ""
@@ -1041,7 +1036,7 @@ msgstr "Aucun programme disponible"
 msgid "Search for a program"
 msgstr ""
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
 
 msgid "Show all programs"
@@ -1156,6 +1151,9 @@ msgstr "Créer un nouvel évènement"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
+
+msgid "No tracked entity types available"
+msgstr ""
 
 msgid "Assigned to"
 msgstr "Attribue"

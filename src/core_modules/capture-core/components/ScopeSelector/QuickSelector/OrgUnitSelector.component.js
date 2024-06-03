@@ -52,8 +52,8 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
 
         return (
             <SelectorBarItem
-                label={i18n.t('Registering unit')}
-                noValueMessage={i18n.t('Choose a registering unit')}
+                label={i18n.t('Organisation unit')}
+                noValueMessage={i18n.t('Choose an organisation unit')}
                 value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
                 open={this.state.open}
                 setOpen={open => this.setState({ open })}

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -622,9 +622,8 @@ msgstr "Не возможно получить Орг.единицу"
 msgid "Program doesn't exist"
 msgstr "Программа не существует"
 
-msgid "Selected program is invalid for selected registering unit"
+msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-"Выбранная программа не действительна для выбранной организации-регистратора"
 
 msgid "Online"
 msgstr "Онлайн"
@@ -788,7 +787,7 @@ msgstr ""
 msgid "There was an error loading the page"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
+msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
 msgid "No feedback for this event yet"
@@ -1001,10 +1000,7 @@ msgstr "Добавить связь"
 msgid "No results found for "
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Регистрирующая единица"
-
-msgid "Choose a registering unit"
+msgid "Choose an organisation unit"
 msgstr ""
 
 msgid "Clear selection"
@@ -1016,7 +1012,7 @@ msgstr "Нет доступных программ"
 msgid "Search for a program"
 msgstr ""
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
 
 msgid "Show all programs"
@@ -1116,6 +1112,9 @@ msgid "Create new event"
 msgstr "Создать новое событие"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "No tracked entity types available"
 msgstr ""
 
 msgid "Assigned to"
