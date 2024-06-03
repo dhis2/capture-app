@@ -1,15 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
-export const useRelatedStageEligibility = (programStage, existingRelatedEvents) => {
-    const [isRelatedStageEligible, setIsRelatedStageEligible] = useState(false);
-
-    useEffect(() => {
-        if (programStage && existingRelatedEvents) {
-            const eligible = programStage.repeatable ||
-                (!programStage.repeatable && existingRelatedEvents.length === 0);
-            setIsRelatedStageEligible(eligible);
-        }
-    }, [programStage, existingRelatedEvents]);
-
-    return isRelatedStageEligible;
-};
+export const useRelatedStageEligibility = (programStage, existingRelatedEvents) => useMemo(() =>
+    (programStage && existingRelatedEvents
+        ? programStage.repeatable || (!programStage.repeatable && existingRelatedEvents.length === 0)
+        : false),
+[programStage, existingRelatedEvents],
+);

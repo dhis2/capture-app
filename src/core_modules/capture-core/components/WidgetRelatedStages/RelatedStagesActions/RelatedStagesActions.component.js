@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -14,13 +15,13 @@ import { LinkToExisting } from '../LinkToExisting';
 
 const styles = () => ({
     wrapper: {
-        padding: `${spacers.dp8}`,
+        padding: spacers.dp8,
     },
     fieldWrapper: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        padding: `${spacers.dp8}  ${spacers.dp16}`,
+        padding: `${spacers.dp8} ${spacers.dp16}`,
     },
     fieldLabel: {
         color: colors.grey900,
@@ -44,6 +45,9 @@ const styles = () => ({
         background: colors.grey100,
         padding: '12px 8px',
         border: `1px solid ${colors.grey600}`,
+    },
+    customRadio: {
+        width: 'fit-content',
     },
 });
 
@@ -83,33 +87,45 @@ export const RelatedStagesActionsPlain = ({
             sectionName={i18n.t('Actions: {{relationshipName}}', { relationshipName })}
         >
             <div className={classes.wrapper}>
-                {type === relatedStageStatus.LINKABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
-                    <div className={classes.fieldWrapper} key={key}>
+                {type === relatedStageStatus.LINKABLE && Object.keys(mainOptionTranslatedTexts).map((key) => {
+                    const isDisabled = (
+                        (!isRelatedStageEligible && (key === RelatedStagesActionTypes.ENTER_DATA
+                            || key === RelatedStagesActionTypes.SCHEDULE_IN_ORG))
+                        || (!linkableEvents.length && key === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE)
+                    );
+
+                    const tooltipContent = key === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE
+                        ? i18n.t('{{ linkableStageLabel }} has no existing events', {
+                            linkableStageLabel: programStage.stageForm.name,
+                            interpolation: { escapeValue: false },
+                        })
+                        : i18n.t('{{ linkableStageLabel }} is not repeatable', {
+                            linkableStageLabel: programStage.stageForm.name,
+                            interpolation: { escapeValue: false },
+                        });
+
+                    return (
                         <ConditionalTooltip
-                            content={i18n.t('{{ linkableStageLabel }} is not repeatable', {
-                                linkableStageLabel: programStage.stageForm.name,
-                                interpolation: { escapeValue: false },
-                            })}
-                            enabled={!isRelatedStageEligible}
+                            key={key}
+                            content={tooltipContent}
+                            closeDelay={50}
+                            enabled={isDisabled}
                         >
                             <Radio
                                 name={`related-stage-action-${key}`}
                                 checked={key === selectedAction}
-                                disabled={(key === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE
-                                    && !linkableEvents.length)
-                                    || !isRelatedStageEligible}
+                                className={classes.customRadio}
+                                disabled={isDisabled}
                                 label={mainOptionTranslatedTexts[key]}
                                 onChange={(e: Object) => updateSelectedAction(e.value)}
                                 value={key}
                             />
                         </ConditionalTooltip>
-                    </div>
-
-                )) : null}
-                {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS ?
+                    );
+                })}
+                {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS && (
                     <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
-                    : null
-                }
+                )}
                 {!!selectedAction && (
                     <div className={classes.clearSelections}>
                         <Button
@@ -134,12 +150,11 @@ export const RelatedStagesActionsPlain = ({
             )}
 
             {selectedAction === RelatedStagesActionTypes.ENTER_DATA && (
-                <div
-                    className={classes.infoBox}
-                >
+                <div className={classes.infoBox}>
                     <IconInfo16 />
                     {i18n.t(
-                        'Enter {{linkableStageLabel}} details in the next step after completing this {{currentStageLabel}}.',
+                        `Enter {{linkableStageLabel}} details in the 
+                        next step after completing this {{currentStageLabel}}.`,
                         {
                             linkableStageLabel: programStage.stageForm.name,
                             currentStageLabel,
@@ -147,7 +162,6 @@ export const RelatedStagesActionsPlain = ({
                     )}
                 </div>
             )}
-
             {selectedAction === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && linkableEvents.length > 0 && (
                 <LinkToExisting
                     relatedStagesDataValues={relatedStagesDataValues}
@@ -158,8 +172,8 @@ export const RelatedStagesActionsPlain = ({
                     saveAttempted={saveAttempted}
                 />
             )}
-
-        </DataSection>);
+        </DataSection>
+    );
 };
 
 export const RelatedStagesActions: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);
