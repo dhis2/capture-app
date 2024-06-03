@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -621,8 +621,8 @@ msgstr "Tidak bisa mendapatkan unit organisasi"
 msgid "Program doesn't exist"
 msgstr "Program tidak ada"
 
-msgid "Selected program is invalid for selected registering unit"
-msgstr "Program yang dipilih tidak valid untuk unit pendaftaran yang dipilih"
+msgid "Selected program is invalid for selected organisation unit"
+msgstr ""
 
 msgid "Online"
 msgstr "Online"
@@ -791,8 +791,8 @@ msgstr "Telah terjadi sebuah kesalahan saat membuka Halaman"
 msgid "There was an error loading the page"
 msgstr "Telah terjadi sebuah kesalahan saat memuat halaman"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Pilih unit pendaftaran untuk memulai pelaporan"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
 
 msgid "No feedback for this event yet"
 msgstr ""
@@ -1002,10 +1002,7 @@ msgstr "Tambahkan hubungan"
 msgid "No results found for "
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Unit pendaftaran"
-
-msgid "Choose a registering unit"
+msgid "Choose an organisation unit"
 msgstr ""
 
 msgid "Clear selection"
@@ -1017,7 +1014,7 @@ msgstr "Tidak ada program yang tersedia."
 msgid "Search for a program"
 msgstr ""
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
 
 msgid "Show all programs"
@@ -1124,6 +1121,9 @@ msgstr "Buat event baru"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Telusuri {{trackedEntityName}} di {{programName}}"
+
+msgid "No tracked entity types available"
+msgstr ""
 
 msgid "Assigned to"
 msgstr "Ditugaskan pada"
