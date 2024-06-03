@@ -16,8 +16,12 @@ const cleanUpIfApplicable = (programId) => {
                 .then(workingListUrl => cy.request('DELETE', workingListUrl));
         });
 };
-Given('you open the main page with Ngelehun and child programme context', () => {
+Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with child programe context', () => {
+    cy.visit('#/?programId=IpHINAT79UW');
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
@@ -774,6 +778,16 @@ And('you open the menu and click the "Download data..." button', () => {
         .click();
     cy.contains('Download data...')
         .click();
+});
+
+And('you open the menu', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+});
+
+Then('the "Download data..." button is hidden', () => {
+    cy.contains('Download data...')
+        .should('not.exist');
 });
 
 Then('the download dialog opens', () => {
