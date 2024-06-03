@@ -1,3 +1,46 @@
+## [100.68.16](https://github.com/dhis2/capture-app/compare/v100.68.15...v100.68.16) (2024-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b356d47](https://github.com/dhis2/capture-app/commit/b356d47790a18ce0cd31e00b83ca116513a1ab8c))
+
+## [100.68.15](https://github.com/dhis2/capture-app/compare/v100.68.14...v100.68.15) (2024-05-30)
+
+
+### Bug Fixes
+
+* [DHIS2-17052] Unrelated error message on no TETs ([#3605](https://github.com/dhis2/capture-app/issues/3605)) ([6a38ae3](https://github.com/dhis2/capture-app/commit/6a38ae35da26cc3b5d48540d4867c8fdac6e65a3))
+
+## [100.68.14](https://github.com/dhis2/capture-app/compare/v100.68.13...v100.68.14) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15920] skip duplicates reviews ([#3629](https://github.com/dhis2/capture-app/issues/3629)) ([3a93911](https://github.com/dhis2/capture-app/commit/3a93911c5a8dac5ae4c6444b61b4bce5d106dacb))
+* [DHIS2-17102] edit event navigation ([#3592](https://github.com/dhis2/capture-app/issues/3592)) ([85a6f62](https://github.com/dhis2/capture-app/commit/85a6f628b754e31bfa7853f8746ac97523c12c25))
+
+## [100.68.13](https://github.com/dhis2/capture-app/compare/v100.68.12...v100.68.13) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17291][DHIS2-16597] skip trackedEntites request when no events match the WL filters ([#3633](https://github.com/dhis2/capture-app/issues/3633)) ([4f4b086](https://github.com/dhis2/capture-app/commit/4f4b086af4287ac3a66175e5583910ad4cc8a626))
+
+## [100.68.12](https://github.com/dhis2/capture-app/compare/v100.68.11...v100.68.12) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17089] replace "Registering unit" text with "Organisation unit" text ([#3583](https://github.com/dhis2/capture-app/issues/3583)) ([7a0c380](https://github.com/dhis2/capture-app/commit/7a0c3805c3f5f5a62190a1ec483709d704fe484d))
+
+## [100.68.11](https://github.com/dhis2/capture-app/compare/v100.68.10...v100.68.11) (2024-05-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ef29fbd](https://github.com/dhis2/capture-app/commit/ef29fbd1ff1c375734aec3895c322fd95629326c))
+
 ## [100.68.10](https://github.com/dhis2/capture-app/compare/v100.68.9...v100.68.10) (2024-05-24)
 
 

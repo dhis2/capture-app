@@ -189,6 +189,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const onSaveExternal = () => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
         queryClient.removeQueries(queryKey);
+        history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);

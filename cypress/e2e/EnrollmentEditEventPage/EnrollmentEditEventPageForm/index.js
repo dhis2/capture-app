@@ -168,3 +168,17 @@ Then('the user sees the enrollment status and recently edited event in Case outc
     changeEnrollmentAndEventsStatus();
 });
 
+Then('you are redirected to the enrollment dashboard', () => {
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/enrollment?`);
+});
+
+And('you open the Birth stage event', () => {
+    cy.get('[data-test="stage-content"]')
+        .eq(0)
+        .within(() => {
+            cy.get('[data-test="dhis2-uicore-datatablerow"]')
+                .eq(1)
+                .click();
+        });
+});
+
