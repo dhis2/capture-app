@@ -1,11 +1,10 @@
 // @flow
-
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 
 export const batchActionTypes = {
     START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH: 'StartSaveEditEventDataEntryBatchForViewSingleEvent',
+    SAVE_EDIT_EVENT_DATA_ENTRY_FAILED: 'SaveEditEventDataEntryBatchFailed',
 };
 
 
@@ -29,9 +28,11 @@ export const actionTypes = {
 export const cancelEditEventDataEntry = () =>
     actionCreator(actionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY)();
 
-export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object, orgUnit: OrgUnit) =>
-    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation, orgUnit }, { skipLogging: ['formFoundation'] });
-
+export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)(
+        { itemId, dataEntryId, formFoundation },
+        { skipLogging: ['formFoundation'] },
+    );
 
 export const startSaveEditEventDataEntry = (
     eventId: string,
@@ -92,7 +93,6 @@ export const requestSaveAndCompleteEnrollment = ({
     itemId,
     dataEntryId,
     formFoundation,
-    orgUnit,
     onSaveAndCompleteEnrollmentExternal,
     onSaveAndCompleteEnrollmentSuccessActionType,
     onSaveAndCompleteEnrollmentErrorActionType,
@@ -101,7 +101,6 @@ export const requestSaveAndCompleteEnrollment = ({
     itemId: string,
     dataEntryId: string,
     formFoundation: Object,
-    orgUnit: OrgUnit,
     onSaveAndCompleteEnrollmentExternal?: (enrollmnet: ApiEnrollment) => void,
     onSaveAndCompleteEnrollmentSuccessActionType?: string,
     onSaveAndCompleteEnrollmentErrorActionType?: string,
@@ -112,7 +111,6 @@ export const requestSaveAndCompleteEnrollment = ({
             itemId,
             dataEntryId,
             formFoundation,
-            orgUnit,
             onSaveAndCompleteEnrollmentExternal,
             onSaveAndCompleteEnrollmentSuccessActionType,
             onSaveAndCompleteEnrollmentErrorActionType,

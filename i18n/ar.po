@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -614,8 +614,8 @@ msgstr "تعذر جلب الوحدة التنظيمية"
 msgid "Program doesn't exist"
 msgstr "البرنامج غير موجود"
 
-msgid "Selected program is invalid for selected registering unit"
-msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
+msgid "Selected program is invalid for selected organisation unit"
+msgstr ""
 
 msgid "Online"
 msgstr "متصل"
@@ -779,8 +779,8 @@ msgstr ""
 msgid "There was an error loading the page"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
-msgstr "اختر وحدة تسجيل لبدء الإبلاغ"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
 
 msgid "No feedback for this event yet"
 msgstr ""
@@ -992,10 +992,7 @@ msgstr "اضف علاقة"
 msgid "No results found for "
 msgstr ""
 
-msgid "Registering unit"
-msgstr "وحدة التسجيل"
-
-msgid "Choose a registering unit"
+msgid "Choose an organisation unit"
 msgstr ""
 
 msgid "Clear selection"
@@ -1007,7 +1004,7 @@ msgstr "لا توجد برامج متاحة"
 msgid "Search for a program"
 msgstr ""
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
 
 msgid "Show all programs"
@@ -1109,6 +1106,9 @@ msgid "Create new event"
 msgstr "انشئ حدثاً جديداً"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "No tracked entity types available"
 msgstr ""
 
 msgid "Assigned to"
@@ -1483,8 +1483,14 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "{{ totalEvents }} events"
-msgstr ""
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr ""

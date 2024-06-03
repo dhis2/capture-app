@@ -58,6 +58,7 @@ type Props = {
     onOpenEditEvent: (orgUnit: Object, programCategory: ?ProgramCategory) => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
+    onBackToAllEvents: () => {},
     classes: {
         container: string,
         headerContainer: string,
@@ -77,6 +78,7 @@ const EventDetailsSectionPlain = (props: Props) => {
         showEditEvent,
         programStage,
         eventAccess,
+        onBackToAllEvents,
         ...passOnProps
     } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
@@ -90,6 +92,7 @@ const EventDetailsSectionPlain = (props: Props) => {
     const onSaveExternal = () => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
         queryClient.removeQueries(queryKey);
+        onBackToAllEvents();
     };
 
     if (error) {
