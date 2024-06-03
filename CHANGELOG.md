@@ -1,3 +1,10 @@
+## [100.68.17](https://github.com/dhis2/capture-app/compare/v100.68.16...v100.68.17) (2024-06-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17249] remove the option to download TEIs when no orgUnit is selected ([#3619](https://github.com/dhis2/capture-app/issues/3619)) ([da43a70](https://github.com/dhis2/capture-app/commit/da43a703e84e5c7419a92f17ba98b6e2226c9093))
+
 ## [100.68.16](https://github.com/dhis2/capture-app/compare/v100.68.15...v100.68.16) (2024-06-02)
 
 
