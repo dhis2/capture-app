@@ -19,9 +19,9 @@ const changeEnrollmentAndEventsStatus = () => (
                 .then(enrollmentUrl => cy.request('POST', enrollmentUrl, { enrollments: [enrollmentToUpdate] }))
                 .then(() => {
                     if (eventToDelete) {
-                        cy.buildApiUrl('events', eventToDelete.event)
+                        cy.buildApiUrl('tracker?async=false&importStrategy=DELETE')
                             .then((eventUrl) => {
-                                cy.request('DELETE', eventUrl);
+                                cy.request('POST', eventUrl, { events: [{ event: eventToDelete.event }] });
                             }).then(() => {
                                 cy.reload();
                                 cy.get('[data-test="widget-enrollment"]').within(() => {
