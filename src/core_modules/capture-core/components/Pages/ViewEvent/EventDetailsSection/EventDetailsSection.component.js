@@ -58,6 +58,7 @@ type Props = {
     onOpenEditEvent: (orgUnit: Object, programCategory: ?ProgramCategory) => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
+    programId: string,
     onBackToAllEvents: () => {},
     classes: {
         container: string,
@@ -78,12 +79,13 @@ const EventDetailsSectionPlain = (props: Props) => {
         showEditEvent,
         programStage,
         eventAccess,
+        programId,
         onBackToAllEvents,
         ...passOnProps
     } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
-    const { programCategory, isLoading } = useCategoryCombinations('kla3mAPgvCH');
+    const { programCategory, isLoading } = useCategoryCombinations(programId);
     const queryClient = useQueryClient();
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
@@ -110,12 +112,14 @@ const EventDetailsSectionPlain = (props: Props) => {
                         formFoundation={formFoundation}
                         orgUnit={orgUnit}
                         onSaveExternal={onSaveExternal}
+                        programId={programId}
                         {...passOnProps}
                     /> :
                     // $FlowFixMe[cannot-spread-inexact] automated comment
                     <ViewEventDataEntry
                         dataEntryId={dataEntryIds.SINGLE_EVENT}
                         formFoundation={formFoundation}
+                        programId={programId}
                         {...passOnProps}
                     />
                 }
