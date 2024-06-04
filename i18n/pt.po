@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -625,9 +625,8 @@ msgstr "Não foi possível obter unidade organizacional"
 msgid "Program doesn't exist"
 msgstr "Programa não existe"
 
-msgid "Selected program is invalid for selected registering unit"
+msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-"O programa selecionado é inválido para a unidade de registro selecionada"
 
 msgid "Online"
 msgstr "Ligado"
@@ -811,8 +810,8 @@ msgstr "Ocorreu um erro ao abrir a Página"
 msgid "There was an error loading the page"
 msgstr "Ocorreu um erro ao carregar a página"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Escolha uma unidade de registro para começar a relatar"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
 
 msgid "No feedback for this event yet"
 msgstr ""
@@ -1025,11 +1024,8 @@ msgstr "Adicionar relacionamento"
 msgid "No results found for "
 msgstr "Nenhum resultado encontrado para"
 
-msgid "Registering unit"
-msgstr "Registrando unidade"
-
-msgid "Choose a registering unit"
-msgstr "Escolha uma unidade de registro"
+msgid "Choose an organisation unit"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Limpar seleção"
@@ -1040,9 +1036,8 @@ msgstr "Nenhum programa disponível."
 msgid "Search for a program"
 msgstr "Procurar um programa"
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
-"Alguns programas estão sendo filtrados pela unidade de registro escolhida"
 
 msgid "Show all programs"
 msgstr "Mostrar todos os programas"
@@ -1154,6 +1149,9 @@ msgstr "Criar um novo evento"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Procure por um {{trackedEntityName}} em {{programName}}"
+
+msgid "No tracked entity types available"
+msgstr ""
 
 msgid "Assigned to"
 msgstr "Atribuído a"
