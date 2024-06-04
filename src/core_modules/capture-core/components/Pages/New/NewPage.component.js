@@ -98,7 +98,7 @@ const NewPagePlain = ({
                             newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                             <>
                                 <IncompleteSelectionsMessage>
-                                    {i18n.t('Choose a registering unit to start reporting')}
+                                    {i18n.t('Choose an organisation unit to start reporting')}
                                 </IncompleteSelectionsMessage>
                                 <Button
                                     dataTest="new-page-cancel-button"

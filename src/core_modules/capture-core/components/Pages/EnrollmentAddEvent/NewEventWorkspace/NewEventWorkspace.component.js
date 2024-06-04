@@ -31,7 +31,6 @@ const NewEventWorkspacePlain = ({
     dataEntryHasChanges,
     onCancel,
     onSave,
-    onSaveAndCompleteEnrollment,
     classes,
     ...passOnProps
 }: PlainProps) => {
@@ -88,7 +87,6 @@ const NewEventWorkspacePlain = ({
                         enrollmentId={enrollmentId}
                         onSaveSuccessActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS}
                         onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR}
-                        onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
                         onSaveAndCompleteEnrollmentSuccessActionType={
                             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS
                         }

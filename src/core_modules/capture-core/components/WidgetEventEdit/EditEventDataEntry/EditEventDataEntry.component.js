@@ -357,7 +357,7 @@ const AOCSettings = {
 };
 
 const saveHandlerConfig = {
-    onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
+    onIsCompleting: (props: Object) => props.completeDataEntryFieldValue === 'true',
     onFilterProps: (props: Object) => {
         const { completeDataEntryFieldValue, ...passOnProps } = props;
         return passOnProps;

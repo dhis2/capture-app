@@ -2,16 +2,16 @@
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
-# Valeriu Plesca <vplesca@gmail.com>, 2022
-# Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Philip Larsen Donnelly, 2024
+# Yury Rogachev <yury@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -120,7 +120,7 @@ msgid "Please provide a valid time"
 msgstr "Введите правильное время"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr ""
+msgstr "Введите целое число от 0 до 100"
 
 msgid "Please provide a valid url"
 msgstr "Введите правильную url"
@@ -210,7 +210,7 @@ msgid "Comments"
 msgstr "Комментарии"
 
 msgid "Relationships"
-msgstr "Зависимости"
+msgstr "Связи"
 
 msgid "Assignee"
 msgstr "Уполномоченный"
@@ -237,7 +237,7 @@ msgid "Active"
 msgstr "Действующий"
 
 msgid "Completed"
-msgstr "Завершенный"
+msgstr "Завершено"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -254,7 +254,7 @@ msgid "Finish"
 msgstr "Завершить"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "Сохранить без завершения"
 
 msgid "Complete"
 msgstr "Завершенный"
@@ -263,7 +263,7 @@ msgid "No write access"
 msgstr "Отсутствует право на запись "
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Новый/ая/ое {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Переключиь вид на Формы"
@@ -297,28 +297,28 @@ msgstr ""
 "отшения"
 
 msgid "Yes, discard changes"
-msgstr ""
+msgstr "Да, не сохранять изменения"
 
 msgid "No, cancel"
-msgstr ""
+msgstr "Нет, отменить"
 
 msgid "New event"
 msgstr "Новое событие"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr ""
+msgstr "Не достаточно прав для создания события с текущим выбором"
 
 msgid "Save"
 msgstr "Сохранить"
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "Сохранение {{trackedEntityName}}"
 
 msgid "without"
-msgstr ""
+msgstr "без"
 
 msgid "enrollment"
-msgstr ""
+msgstr "регистрация"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -443,10 +443,10 @@ msgid "Please select the user"
 msgstr "Пожалуйста, выберите пользователя"
 
 msgid "Me"
-msgstr "Я"
+msgstr "Мне"
 
 msgid "Anyone"
-msgstr "Любой"
+msgstr "Другим"
 
 msgid "None"
 msgstr "Не известное значение"
@@ -587,10 +587,10 @@ msgid "Update"
 msgstr "Обновить"
 
 msgid "Reset filter"
-msgstr ""
+msgstr "Сбросить фильтр"
 
 msgid "Remove filter"
-msgstr ""
+msgstr "Удалить фильтр"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} по {{toDate}}"
@@ -622,9 +622,8 @@ msgstr "Не возможно получить Орг.единицу"
 msgid "Program doesn't exist"
 msgstr "Программа не существует"
 
-msgid "Selected program is invalid for selected registering unit"
+msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-"Выбранная программа не действительна для выбранной организации-регистратора"
 
 msgid "Online"
 msgstr "Онлайн"
@@ -645,7 +644,7 @@ msgid "Write comment"
 msgstr "Написать комментарий"
 
 msgid "was blanked out and hidden by your last action"
-msgstr ""
+msgstr "было удалено и скрыто вашим последним действием"
 
 msgid "Notice"
 msgstr ""
@@ -702,14 +701,20 @@ msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "Quick actions"
 msgstr ""
 
 msgid "New Event"
-msgstr ""
+msgstr "Новое событие"
 
 msgid "Schedule an event"
-msgstr ""
+msgstr "Запланировать событие"
 
 msgid "Make referral"
 msgstr "Выписать направление"
@@ -782,7 +787,13 @@ msgstr ""
 msgid "There was an error loading the page"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
 msgstr ""
 
 msgid "Program stage is invalid"
@@ -949,12 +960,6 @@ msgstr ""
 msgid "View Event"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
-msgstr ""
-
 msgid "Selected program"
 msgstr "Выбранная программа"
 
@@ -990,15 +995,12 @@ msgid "You don't have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "Добавить зависимость"
+msgstr "Добавить связь"
 
 msgid "No results found for "
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Регистрирующая единица"
-
-msgid "Choose a registering unit"
+msgid "Choose an organisation unit"
 msgstr ""
 
 msgid "Clear selection"
@@ -1010,14 +1012,14 @@ msgstr "Нет доступных программ"
 msgid "Search for a program"
 msgstr ""
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
 
 msgid "Show all programs"
-msgstr ""
+msgstr "Показать все программы"
 
 msgid "Choose a program"
-msgstr ""
+msgstr "Выбрать программу"
 
 msgid "Search for {{titleText}}"
 msgstr ""
@@ -1053,7 +1055,7 @@ msgid "If none of search results match, you can create a new "
 msgstr ""
 
 msgid "Create new"
-msgstr "Создать новый"
+msgstr "Создать новый/ую/ое"
 
 msgid "Fill in these fields to search{{escape}} {{ searchableAttributes }}"
 msgstr ""
@@ -1112,6 +1114,9 @@ msgstr "Создать новое событие"
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
+msgid "No tracked entity types available"
+msgstr ""
+
 msgid "Assigned to"
 msgstr "закреплено за"
 
@@ -1168,10 +1173,10 @@ msgid "Reactivate"
 msgstr ""
 
 msgid "Mark as cancelled"
-msgstr ""
+msgstr "Пометить отмененным"
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "Пометить незавершенным"
 
 msgid "Delete enrollment"
 msgstr "Удалить регистрацию"
@@ -1215,7 +1220,7 @@ msgid "Delete polygon"
 msgstr "Удалить полигон"
 
 msgid "Close without saving"
-msgstr ""
+msgstr "Закрыть без сохранения"
 
 msgid "Finish drawing before saving"
 msgstr ""
@@ -1242,7 +1247,7 @@ msgid ""
 msgstr ""
 
 msgid "Enrollment date"
-msgstr "Дата зачисления"
+msgstr "Дата регистрации"
 
 msgid "Incident date"
 msgstr "Дата происшествия"
@@ -1263,7 +1268,7 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
-msgstr "Отмененный"
+msgstr "Отменено"
 
 msgid "Add coordinates"
 msgstr ""
@@ -1311,7 +1316,7 @@ msgid "Delete event"
 msgstr "Удалить событие"
 
 msgid "Yes, delete event"
-msgstr ""
+msgstr "Да, удалить событие"
 
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
@@ -1323,7 +1328,7 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
-msgstr ""
+msgstr "Обратно ко всем этапам и событиям"
 
 msgid "Schedule date info"
 msgstr ""
@@ -1380,7 +1385,7 @@ msgid ""
 msgstr ""
 
 msgid " Loading..."
-msgstr ""
+msgstr "Загрузка..."
 
 msgid "Save changes"
 msgstr "Сохранить изменения"
@@ -1428,7 +1433,36 @@ msgid "{{trackedEntityTypeName}} profile"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr "Элемент отслеживаемого объекта"
+msgstr "Экземпляр отслеживаемого объекта"
+
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Запланированная дата"
+
+msgid "Report date"
+msgstr "Дата отчета"
+
+msgid "Please select a valid event"
+msgstr ""
 
 msgid "New {{ eventName }} event"
 msgstr ""
@@ -1451,8 +1485,12 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "{{ totalEvents }} events"
-msgstr ""
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr ""
@@ -1541,15 +1579,6 @@ msgstr "Название стадии программы"
 msgid "Working list could not be loaded"
 msgstr "Не могу загрузить Рабочий список "
 
-msgid "Download as JSON"
-msgstr "Скачать как JSON"
-
-msgid "Download as CSV"
-msgstr "Загрузить в формате CSV"
-
-msgid "Download with current filters"
-msgstr "Загрузить с текущими фильрами"
-
 msgid "Download data..."
 msgstr "Загрузка данных..."
 
@@ -1621,6 +1650,15 @@ msgstr "Покажи поменьше"
 
 msgid "Show All"
 msgstr "Показать все"
+
+msgid "Download as JSON"
+msgstr "Скачать как JSON"
+
+msgid "Download as CSV"
+msgstr "Загрузить в формате CSV"
+
+msgid "Download with current filters"
+msgstr "Загрузить с текущими фильрами"
 
 msgid "An error has occured. See log for details"
 msgstr "Произошла ошибка. Смотрите подробности в лог-файле"

@@ -129,6 +129,7 @@ export class CoordinateField extends React.Component<Props, State> {
             <div className={mapIconContainerClass}>
                 <IconButton
                     disabled={!!disabled}
+                    dataTest="mapIconButton"
                     style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }}
                     className={classNames(defaultClasses.mapIcon, mapIconCustomClass)}
                     onClick={this.openMap}

@@ -20,14 +20,14 @@ export const makeEventAccessSelector = () => createSelector(
     categoriesMetaSelector,
     (programId: string, categoriesMeta: ?Object) => getEventProgramEventAccess(programId, categoriesMeta));
 
-export const makeAssignedUserContextSelector = () =>
+export const makeAssignedUserContextSelector = (serverMinorVersion: number) =>
     // $FlowFixMe[missing-annot]
     createSelector(eventContainerSelector, (eventContainer) => {
         const { event: clientMainValues, values: clientValues } = eventContainer;
         const program = getEventProgramThrowIfNotFound(clientMainValues.programId);
         const formFoundation = program.stage.stageForm;
         const formServerValues = formFoundation.convertValues(clientValues, convertToServerValue);
-        const mainDataServerValues: Object = convertMainEventClientToServer(clientMainValues);
+        const mainDataServerValues: Object = convertMainEventClientToServer(clientMainValues, serverMinorVersion);
 
         const event =
             {
