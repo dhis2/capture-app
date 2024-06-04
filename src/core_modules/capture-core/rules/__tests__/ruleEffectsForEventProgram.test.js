@@ -1659,6 +1659,7 @@ describe('Event rules engine effects with functions and effects', () => {
                     id: 'isP0uvT24jf',
                     displayContent: "d2:yearsBetween( '2010-01-28', V{event_date}) =",
                     data: "d2:yearsBetween( '2010-01-28', V{event_date})",
+                    location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
@@ -1829,6 +1830,20 @@ describe('Event rules engine effects with functions and effects', () => {
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
+                {
+                    id: 'enZhulwjMED',
+                    displayContent: "d2:condition('1 == 2', 'equal', 'not equal') = ",
+                    data: "d2:condition('1 == 2', 'equal', 'not equal')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
+                {
+                    id: 'i2UOFxZJo4a',
+                    displayContent: "d2:condition('2 == 2', 'equal', 'not equal') = ",
+                    data: "d2:condition('2 == 2', 'equal', 'not equal')",
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
             ],
         },
     ];
@@ -1893,6 +1908,7 @@ describe('Event rules engine effects with functions and effects', () => {
             [
                 {
                     type: 'DISPLAYTEXT',
+                    id: 'feedback',
                     displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = " },
                 },
                 {
@@ -2017,6 +2033,16 @@ describe('Event rules engine effects with functions and effects', () => {
                     id: 'feedback',
                     displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  ' },
                 },
+                {
+                    type: 'DISPLAYTEXT',
+                    id: 'feedback',
+                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
+                },
+                {
+                    type: 'DISPLAYTEXT',
+                    id: 'feedback',
+                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
+                },
             ],
         ],
         [
@@ -2028,6 +2054,7 @@ describe('Event rules engine effects with functions and effects', () => {
             [
                 {
                     type: 'DISPLAYTEXT',
+                    id: 'feedback',
                     displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" },
                 },
                 {
@@ -2156,6 +2183,16 @@ describe('Event rules engine effects with functions and effects', () => {
                     id: 'feedback',
                     displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  true' },
                 },
+                {
+                    type: 'DISPLAYTEXT',
+                    id: 'feedback',
+                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
+                },
+                {
+                    type: 'DISPLAYTEXT',
+                    id: 'feedback',
+                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
+                },
             ],
         ],
         [
@@ -2167,6 +2204,7 @@ describe('Event rules engine effects with functions and effects', () => {
             [
                 {
                     type: 'DISPLAYTEXT',
+                    id: 'feedback',
                     displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" },
                 },
                 {
@@ -2294,6 +2332,16 @@ describe('Event rules engine effects with functions and effects', () => {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
                     displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  true' },
+                },
+                {
+                    type: 'DISPLAYTEXT',
+                    id: 'feedback',
+                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
+                },
+                {
+                    type: 'DISPLAYTEXT',
+                    id: 'feedback',
+                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
                 },
             ],
         ],
