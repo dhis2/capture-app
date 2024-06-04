@@ -6,7 +6,7 @@ import { Radio, colors, spacers, spacersNum, IconInfo16, Button } from '@dhis2/u
 import { withStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
-import { useRelatedStageEligibility } from '../hooks/useRelatedStageEligibility';
+import { useCanAddNewEventToStage } from '../hooks/useCanAddNewEventToStage';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
@@ -75,7 +75,7 @@ export const RelatedStagesActionsPlain = ({
         }));
     };
 
-    const isRelatedStageEligible = useRelatedStageEligibility(programStage, linkableEvents);
+    const canAddNewEventToStage = useCanAddNewEventToStage(programStage, linkableEvents);
 
     if (!programStage) {
         return null;
@@ -96,13 +96,13 @@ export const RelatedStagesActionsPlain = ({
                                 interpolation: { escapeValue: false },
                             })}
                             closeDelay={50}
-                            enabled={!isRelatedStageEligible}
+                            enabled={!canAddNewEventToStage}
                         >
                             <Radio
                                 name={`related-stage-action-${RelatedStagesActionTypes.ENTER_DATA}`}
                                 checked={RelatedStagesActionTypes.ENTER_DATA === selectedAction}
                                 className={classes.customRadio}
-                                disabled={!isRelatedStageEligible}
+                                disabled={!canAddNewEventToStage}
                                 label={mainOptionTranslatedTexts[RelatedStagesActionTypes.ENTER_DATA]}
                                 onChange={(e: Object) => updateSelectedAction(e.value)}
                                 value={RelatedStagesActionTypes.ENTER_DATA}
@@ -116,13 +116,13 @@ export const RelatedStagesActionsPlain = ({
                                 interpolation: { escapeValue: false },
                             })}
                             closeDelay={50}
-                            enabled={!isRelatedStageEligible}
+                            enabled={!canAddNewEventToStage}
                         >
                             <Radio
                                 name={`related-stage-action-${RelatedStagesActionTypes.SCHEDULE_IN_ORG}`}
                                 checked={RelatedStagesActionTypes.SCHEDULE_IN_ORG === selectedAction}
                                 className={classes.customRadio}
-                                disabled={!isRelatedStageEligible}
+                                disabled={!canAddNewEventToStage}
                                 label={mainOptionTranslatedTexts[RelatedStagesActionTypes.SCHEDULE_IN_ORG]}
                                 onChange={(e: Object) => updateSelectedAction(e.value)}
                                 value={RelatedStagesActionTypes.SCHEDULE_IN_ORG}
