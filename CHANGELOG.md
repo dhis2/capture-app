@@ -1,3 +1,10 @@
+## [100.68.19](https://github.com/dhis2/capture-app/compare/v100.68.18...v100.68.19) (2024-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17000] Display translated date labels ([#3611](https://github.com/dhis2/capture-app/issues/3611)) ([a4c4b58](https://github.com/dhis2/capture-app/commit/a4c4b582b77504184f07df4635292e8b66b298f2))
+
 ## [100.68.18](https://github.com/dhis2/capture-app/compare/v100.68.17...v100.68.18) (2024-06-04)
 
 
