@@ -1,3 +1,10 @@
+## [100.68.18](https://github.com/dhis2/capture-app/compare/v100.68.17...v100.68.18) (2024-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-16487] Auto-select program and org-unit ([#3604](https://github.com/dhis2/capture-app/issues/3604)) ([2bef69b](https://github.com/dhis2/capture-app/commit/2bef69b2c8ca575e6291c8c6b32a54fa1e4ecc3d))
+
 ## [100.68.17](https://github.com/dhis2/capture-app/compare/v100.68.16...v100.68.17) (2024-06-03)
 
 
