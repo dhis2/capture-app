@@ -1,3 +1,24 @@
+## [100.68.17](https://github.com/dhis2/capture-app/compare/v100.68.16...v100.68.17) (2024-06-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17249] remove the option to download TEIs when no orgUnit is selected ([#3619](https://github.com/dhis2/capture-app/issues/3619)) ([da43a70](https://github.com/dhis2/capture-app/commit/da43a703e84e5c7419a92f17ba98b6e2226c9093))
+
+## [100.68.16](https://github.com/dhis2/capture-app/compare/v100.68.15...v100.68.16) (2024-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b356d47](https://github.com/dhis2/capture-app/commit/b356d47790a18ce0cd31e00b83ca116513a1ab8c))
+
+## [100.68.15](https://github.com/dhis2/capture-app/compare/v100.68.14...v100.68.15) (2024-05-30)
+
+
+### Bug Fixes
+
+* [DHIS2-17052] Unrelated error message on no TETs ([#3605](https://github.com/dhis2/capture-app/issues/3605)) ([6a38ae3](https://github.com/dhis2/capture-app/commit/6a38ae35da26cc3b5d48540d4867c8fdac6e65a3))
+
 ## [100.68.14](https://github.com/dhis2/capture-app/compare/v100.68.13...v100.68.14) (2024-05-29)
 
 
