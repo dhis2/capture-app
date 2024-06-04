@@ -30,11 +30,12 @@ export class EnrollmentFactory {
     };
 
     static _addLabels(enrollment: Enrollment, cachedProgram: CachedProgram) {
-        if (cachedProgram.enrollmentDateLabel) {
-            enrollment.enrollmentDateLabel = cachedProgram.enrollmentDateLabel;
+        if (cachedProgram.displayEnrollmentDateLabel) {
+            enrollment.enrollmentDateLabel =
+                cachedProgram.displayEnrollmentDateLabel;
         }
-        if (cachedProgram.incidentDateLabel) {
-            enrollment.incidentDateLabel = cachedProgram.incidentDateLabel;
+        if (cachedProgram.displayIncidentDateLabel) {
+            enrollment.incidentDateLabel = cachedProgram.displayIncidentDateLabel;
         }
     }
 
