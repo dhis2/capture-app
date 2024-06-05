@@ -39,27 +39,24 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
             viewEventPageActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
             viewEventPageActionTypes.START_OPEN_EVENT_FOR_VIEW,
-            viewEventPageActionTypes.UPDATE_EVENT_CONTAINER,
             editEventDataEntryBatchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH,
         ),
         filter(action =>
             filterByInnerAction(
                 action,
                 editEventDataEntryBatchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH,
-                viewEventPageActionTypes.UPDATE_EVENT_CONTAINER,
             ),
         ),
         map(action =>
             mapToInnerAction(
                 action,
                 editEventDataEntryBatchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH,
-                viewEventPageActionTypes.UPDATE_EVENT_CONTAINER,
             ),
         ),
         filter((action) => {
@@ -91,8 +88,9 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
                 onCategoriesQuery: null,
+                serverMinorVersion: minor,
             };
-            eventContainer.event = convertEventAttributeOptions(eventContainer.event);
+            eventContainer.event = convertEventAttributeOptions(eventContainer.event, minor);
 
             if (!enrollment && program instanceof TrackerProgram) {
                 // Wait for enrollment data
