@@ -1,3 +1,10 @@
+## [100.68.20](https://github.com/dhis2/capture-app/compare/v100.68.19...v100.68.20) (2024-06-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15379] Misaligned Data elements in TET profile ([#3550](https://github.com/dhis2/capture-app/issues/3550)) ([7445ffb](https://github.com/dhis2/capture-app/commit/7445ffb99ee096d352df068b1d7f1420c035e8ba))
+
 ## [100.68.19](https://github.com/dhis2/capture-app/compare/v100.68.18...v100.68.19) (2024-06-04)
 
 
