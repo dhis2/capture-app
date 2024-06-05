@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -16,6 +15,7 @@ import { LinkToExisting } from '../LinkToExisting';
 const styles = () => ({
     wrapper: {
         padding: spacers.dp8,
+        width: 'fit-content',
     },
     fieldWrapper: {
         display: 'flex',
@@ -35,7 +35,7 @@ const styles = () => ({
         flexShrink: 0,
     },
     clearSelections: {
-        marginTop: spacers.dp8,
+        padding: spacers.dp8,
     },
     infoBox: {
         margin: '8px 8px',
@@ -45,9 +45,6 @@ const styles = () => ({
         background: colors.grey100,
         padding: '12px 8px',
         border: `1px solid ${colors.grey600}`,
-    },
-    customRadio: {
-        width: 'fit-content',
     },
 });
 
@@ -101,7 +98,6 @@ export const RelatedStagesActionsPlain = ({
                             <Radio
                                 name={`related-stage-action-${RelatedStagesActionTypes.ENTER_DATA}`}
                                 checked={RelatedStagesActionTypes.ENTER_DATA === selectedAction}
-                                className={classes.customRadio}
                                 disabled={!canAddNewEventToStage}
                                 label={mainOptionTranslatedTexts[RelatedStagesActionTypes.ENTER_DATA]}
                                 onChange={(e: Object) => updateSelectedAction(e.value)}
@@ -121,7 +117,6 @@ export const RelatedStagesActionsPlain = ({
                             <Radio
                                 name={`related-stage-action-${RelatedStagesActionTypes.SCHEDULE_IN_ORG}`}
                                 checked={RelatedStagesActionTypes.SCHEDULE_IN_ORG === selectedAction}
-                                className={classes.customRadio}
                                 disabled={!canAddNewEventToStage}
                                 label={mainOptionTranslatedTexts[RelatedStagesActionTypes.SCHEDULE_IN_ORG]}
                                 onChange={(e: Object) => updateSelectedAction(e.value)}
@@ -141,7 +136,6 @@ export const RelatedStagesActionsPlain = ({
                             <Radio
                                 name={`related-stage-action-${RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}`}
                                 checked={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE === selectedAction}
-                                className={classes.customRadio}
                                 disabled={!linkableEvents.length}
                                 label={mainOptionTranslatedTexts[RelatedStagesActionTypes.LINK_EXISTING_RESPONSE]}
                                 onChange={(e: Object) => updateSelectedAction(e.value)}
@@ -154,19 +148,19 @@ export const RelatedStagesActionsPlain = ({
                 {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS && (
                     <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
                 )}
-
-                {!!selectedAction && (
-                    <div className={classes.clearSelections}>
-                        <Button
-                            secondary
-                            small
-                            onClick={() => updateSelectedAction(undefined)}
-                        >
-                            {i18n.t('Clear selection')}
-                        </Button>
-                    </div>
-                )}
             </div>
+
+            {!!selectedAction && (
+                <div className={classes.clearSelections}>
+                    <Button
+                        secondary
+                        small
+                        onClick={() => updateSelectedAction(undefined)}
+                    >
+                        {i18n.t('Clear selection')}
+                    </Button>
+                </div>
+            )}
 
             {selectedAction === RelatedStagesActionTypes.SCHEDULE_IN_ORG && (
                 <ScheduleInOrgUnit
@@ -191,7 +185,7 @@ export const RelatedStagesActionsPlain = ({
                 </div>
             )}
 
-            {selectedAction === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && linkableEvents.length > 0 && (
+            {selectedAction === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && (
                 <LinkToExisting
                     relatedStagesDataValues={relatedStagesDataValues}
                     setRelatedStagesDataValues={setRelatedStagesDataValues}
