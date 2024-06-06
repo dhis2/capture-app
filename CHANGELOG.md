@@ -1,3 +1,10 @@
+## [100.68.21](https://github.com/dhis2/capture-app/compare/v100.68.20...v100.68.21) (2024-06-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17421] Profile Widget Image link navigates to wrong endpoint ([#3648](https://github.com/dhis2/capture-app/issues/3648)) ([bd99432](https://github.com/dhis2/capture-app/commit/bd994323f538ee96f5f34eb4e32df0201ed3098a))
+
 ## [100.68.20](https://github.com/dhis2/capture-app/compare/v100.68.19...v100.68.20) (2024-06-05)
 
 
