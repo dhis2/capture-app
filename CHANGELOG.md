@@ -1,3 +1,10 @@
+## [100.68.22](https://github.com/dhis2/capture-app/compare/v100.68.21...v100.68.22) (2024-06-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17054] handle empty expression value ([#3635](https://github.com/dhis2/capture-app/issues/3635)) ([08291fa](https://github.com/dhis2/capture-app/commit/08291fa83f7d230bdfd3143832deeda08cf30a0c))
+
 ## [100.68.21](https://github.com/dhis2/capture-app/compare/v100.68.20...v100.68.21) (2024-06-06)
 
 
