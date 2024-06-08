@@ -1,13 +1,14 @@
 # 
 # Translators:
 # Saroj Dhakal <lotusnagarkot@gmail.com>, 2024
+# Prabesh Guragain, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-11-29T10:05:06.420Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: Saroj Dhakal <lotusnagarkot@gmail.com>, 2024\n"
+"Last-Translator: Prabesh Guragain, 2024\n"
 "Language-Team: Nepali (https://app.transifex.com/hisp-uio/teams/100509/ne/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "आज"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -340,7 +341,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "स्वीकार"
 
 msgid "Registering Organisation Unit"
 msgstr ""
