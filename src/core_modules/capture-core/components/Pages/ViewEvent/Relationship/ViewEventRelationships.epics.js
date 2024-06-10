@@ -61,10 +61,11 @@ export const deleteRelationshipForViewEventEpic = (action$: InputObservable, sto
             const clientId = action.payload.clientId;
             const state = store.value;
             const relationship = state.relationships.viewEvent.find(r => r.clientId === clientId);
+            const serverData = { relationships: [{ relationship: relationship.id }] };
 
             return batchActions([
                 removeRelationship(relationshipKey, clientId),
-                startDeleteEventRelationship(relationship.id, clientId, state.currentSelections),
+                startDeleteEventRelationship(serverData, clientId, state.currentSelections),
             ], viewEventRelationshipsBatchActionTypes.DELETE_EVENT_RELATIONSHIP_BATCH);
         }));
 
