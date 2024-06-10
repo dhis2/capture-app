@@ -11,7 +11,7 @@ import { getNewEventServerData, getNewEventClientValues } from './getConvertedNe
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map((action) => {
@@ -21,7 +21,13 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             const formFoundation = payload.formFoundation;
             const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
-            const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
+            const serverData = getNewEventServerData(
+                state,
+                formFoundation,
+                formClientValues,
+                mainDataClientValues,
+                minor,
+            );
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
         }));

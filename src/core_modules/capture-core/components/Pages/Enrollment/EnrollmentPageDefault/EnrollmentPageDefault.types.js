@@ -31,10 +31,16 @@ export type Props = {|
     onLinkedRecordClick: LinkedRecordClick,
     onUpdateEnrollmentDate: (enrollmentDate: string) => void,
     onUpdateIncidentDate: (incidentDate: string) => void,
+    onAccessLostFromTransfer: () => void,
     onEnrollmentError: (message: string) => void,
+    onUpdateEnrollmentStatus: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError: (message: string) => void,
     ruleEffects?: Array<{id: string, type: $Values<effectActions>}>;
+    widgetEnrollmentStatus: ?string,
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
+    onDeleteTrackedEntitySuccess: () => void,
 |};
 
 export type PlainProps = {|

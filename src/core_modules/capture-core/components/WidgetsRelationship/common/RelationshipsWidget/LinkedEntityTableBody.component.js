@@ -8,7 +8,8 @@ import {
     Tooltip,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { convertServerToClient, convertClientToList } from '../../../../converters';
+import { convertServerToClient } from '../../../../converters';
+import { convert as convertClientToList } from '../../../../converters/clientToList';
 import type { Props, StyledProps } from './linkedEntityTableBody.types';
 import { DeleteRelationship } from './DeleteRelationship';
 
@@ -43,9 +44,9 @@ const LinkedEntityTableBodyPlain = ({
                         >
                             {
                                 // $FlowFixMe flow doesn't like destructering
-                                columns.map(({ id, type, convertValue }) => {
+                                columns.map(({ id, type, options, convertValue }) => {
                                     const value = type ?
-                                        convertClientToList(convertServerToClient(values[id], type), type) :
+                                        convertClientToList(convertServerToClient(values[id], type), type, options) :
                                         convertValue(baseValues?.[id] ?? context.display[id]);
 
                                     return (

@@ -1,8 +1,9 @@
 // @flow
 import React, { useCallback, useEffect } from 'react';
+import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { TeiWorkingListsSetup } from '../Setup';
+import { TrackerWorkingListsViewMenuSetup } from '../ViewMenuSetup';
 import { useWorkingListsCommonStateManagement, fetchTemplates, TEMPLATE_SHARING_TYPE } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { TEI_WORKING_LISTS_TYPE } from '../constants';
@@ -43,6 +44,8 @@ export const TeiWorkingListsReduxProvider = ({
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();
+    const forceUpdateOnMount = moment().diff(moment(listDataRefreshTimestamp || 0), 'minutes') > 5 ||
+        lastTransaction !== lastTransactionOnListDataRefresh;
 
     const onLoadTemplates = useCallback(() => {
         dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE, selectedTemplateId));
@@ -98,8 +101,9 @@ export const TeiWorkingListsReduxProvider = ({
         : TEMPLATE_SHARING_TYPE[storeId]?.tei;
 
     return (
-        <TeiWorkingListsSetup
+        <TrackerWorkingListsViewMenuSetup
             {...commonStateManagementProps}
+            forceUpdateOnMount={forceUpdateOnMount}
             currentTemplateId={currentTemplateId}
             viewPreloaded={viewPreloaded}
             templateSharingType={templateSharingType}
@@ -114,6 +118,7 @@ export const TeiWorkingListsReduxProvider = ({
             onPreserveCurrentViewState={handlePreserveCurrentViewState}
             onAddTemplate={injectCallbacksForAddTemplate}
             onDeleteTemplate={injectCallbacksForDeleteTemplate}
+            storeId={storeId}
         />
     );
 };

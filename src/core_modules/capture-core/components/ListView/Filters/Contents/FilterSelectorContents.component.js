@@ -68,6 +68,7 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, is
             {...passOnProps}
             filter={filterValue}
             type={type}
+            singleSelect={!multiValueFilter}
             handleCommitValue={() => setUpdateDisabled(false)}
             disabledUpdate={disabledUpdate}
             disabledReset={filterValue === undefined}

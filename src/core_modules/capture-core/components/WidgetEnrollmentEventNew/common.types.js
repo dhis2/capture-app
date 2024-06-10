@@ -58,6 +58,8 @@ export type CommonValidatedProps = {|
     onSaveExternal?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
+    onSaveAndCompleteEnrollmentSuccessActionType?: string,
+    onSaveAndCompleteEnrollmentErrorActionType?: string,
     widgetReducerName: string,
     onCancel?: () => void,
 |};

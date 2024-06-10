@@ -15,7 +15,7 @@ export const NotEnoughAttributesMessage = ({
             escape: ':',
             searchableAttributes: searchableFieldsDisplayname,
             interpolation: {
-                escape: false,
+                escapeValue: false,
             },
         });
     }
@@ -27,7 +27,7 @@ export const NotEnoughAttributesMessage = ({
                 minAttributesRequiredToSearch,
                 searchableAttributes: searchableFieldsDisplayname,
                 interpolation: {
-                    escape: false,
+                    escapeValue: false,
                 },
             },
         );
@@ -36,7 +36,7 @@ export const NotEnoughAttributesMessage = ({
         escape: ':',
         searchableAttributes: searchableFieldsDisplayname,
         interpolation: {
-            escape: false,
+            escapeValue: false,
         },
     });
 };

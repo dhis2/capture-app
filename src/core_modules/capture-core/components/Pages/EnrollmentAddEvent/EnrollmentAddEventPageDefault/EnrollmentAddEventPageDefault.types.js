@@ -18,6 +18,7 @@ export type Props = {|
     onDelete: () => void,
     onAddNew: () => void,
     onEnrollmentError: (message: string) => void,
+    onAccessLostFromTransfer?: () => void,
     onEnrollmentSuccess: () => void,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
@@ -25,8 +26,13 @@ export type Props = {|
     pageFailure: boolean,
     ready: boolean,
     widgetReducerName: string,
+    events?: Array<ApiEnrollmentEvent>,
+    onUpdateEnrollmentStatus: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError: (message: string) => void,
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
+    onDeleteTrackedEntitySuccess: () => void,
     ...CssClasses,
 |};
 

@@ -16,8 +16,12 @@ const cleanUpIfApplicable = (programId) => {
                 .then(workingListUrl => cy.request('DELETE', workingListUrl));
         });
 };
-Given('you open the main page with Ngelehun and child programme context', () => {
+Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with child programe context', () => {
+    cy.visit('#/?programId=IpHINAT79UW');
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
@@ -245,9 +249,9 @@ When('you open the column selector', () => {
         .click();
 });
 
-When('you select the registering unit and save from the column selector', () => {
+When('you select the organisation unit and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
-        .contains('Registering unit')
+        .contains('Organisation unit')
         .find('input')
         .click();
 
@@ -256,9 +260,9 @@ When('you select the registering unit and save from the column selector', () => 
         .click();
 });
 
-Then('the registering unit should display in the list', () => {
+Then('the organisation unit should display in the list', () => {
     cy.get('[data-test="online-list-table"]')
-        .contains('Registering unit')
+        .contains('Organisation unit')
         .should('exist');
 });
 
@@ -767,4 +771,68 @@ Then('the program stage working list is loaded', () => {
     cy.get('[data-test="tei-working-lists"]')
         .contains('WHOMCH Hemoglobin value')
         .should('exist');
+});
+
+And('you open the menu and click the "Download data..." button', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+    cy.contains('Download data...')
+        .click();
+});
+
+And('you open the menu', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+});
+
+Then('the "Download data..." button is hidden', () => {
+    cy.contains('Download data...')
+        .should('not.exist');
+});
+
+Then('the download dialog opens', () => {
+    cy.get('[data-test="working-lists-download-dialog"]')
+        .within(() => {
+            cy.contains('Download with current filters');
+        });
+});
+
+Then('the CSV button exists', () => {
+    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    cy.get('[data-test="working-lists-download-dialog"]')
+        .within(() => {
+            cy.contains('Download as CSV');
+
+            cy.get('a')
+                .eq(1)
+                .should('have.attr', 'href').and('include', `/trackedEntities.csv?${params}`);
+        });
+});
+
+Then('the JSON button exists', () => {
+    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    cy.get('[data-test="working-lists-download-dialog"]')
+        .within(() => {
+            cy.contains('Download as JSON');
+
+            cy.get('a')
+                .eq(0)
+                .should('have.attr', 'href').and('include', `/trackedEntities.json?${params}`);
+        });
+});
+
+When('you set the event visit date to Today', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Date of visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Today')
+        .click();
+});
+
+Then('the working list is empty', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('No items to display')
+        .click();
 });

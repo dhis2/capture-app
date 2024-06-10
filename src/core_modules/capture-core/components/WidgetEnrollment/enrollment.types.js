@@ -1,21 +1,34 @@
 // @flow
 import type { FetchError, QueryRefetchFunction } from '@dhis2/app-runtime';
 
+export type EventReducerProps = {|
+    enrollments?: ?Array<Object>,
+    events: Array<{
+        event: string,
+    }>
+|}
+
 export type Props = {|
     teiId: string,
     enrollmentId: string,
     programId: string,
     readOnlyMode?: boolean,
+    externalData: { status: { value: ?string }, events?: ?Array<Object> },
     onDelete: () => void,
     onAddNew: () => void,
     onUpdateEnrollmentDate?: (enrollmentDate: string) => void,
     onUpdateIncidentDate?: (enrollmentDate: string) => void,
     onError?: (message: string) => void,
     onSuccess?: () => void,
+    onUpdateEnrollmentStatus?: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError?: (message: string) => void,
+    onAccessLostFromTransfer?: () => void,
 |};
 
 export type PlainProps = {|
     enrollment: Object,
+    events: Array<{ status: string, event: string, programStage: string }>,
     program: Object,
     ownerOrgUnit: Object,
     locale: string,
@@ -32,5 +45,9 @@ export type PlainProps = {|
     onAddNew: () => void,
     onError?: (message: string) => void,
     onSuccess?: () => void,
+    onUpdateEnrollmentStatus?: (enrollment: Object) => void,
+    onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentStatusError?: (message: string) => void,
+    onAccessLostFromTransfer?: () => void,
     ...CssClasses,
 |};

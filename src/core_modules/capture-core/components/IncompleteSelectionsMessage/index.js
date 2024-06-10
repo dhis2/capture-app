@@ -9,7 +9,7 @@ const StyledPaper = withStyles({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: colors.grey300,
+        background: colors.grey200,
         color: colors.grey700,
         padding: '12px 16px',
     },

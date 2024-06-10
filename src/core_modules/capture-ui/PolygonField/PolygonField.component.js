@@ -14,8 +14,9 @@ const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 type Props = {
   onBlur: (value: any) => void,
+  onOpenMap: (hasValue: boolean) => void,
   value?: ?any,
-  mapCenter: Array<number>,
+  center?: ?Array<number>,
   mapDialog?: ?React.Element<any>,
 };
 
@@ -64,10 +65,6 @@ function coordsToFeatureCollection(coordinates): ?FeatureCollection {
 export class PolygonField extends React.Component<Props, State> {
     mapInstance: ?any;
 
-    static defaultProps = {
-        mapCenter: [51.505, -0.09],
-    }
-
     constructor(props: Props) {
         super(props);
 
@@ -107,7 +104,7 @@ export class PolygonField extends React.Component<Props, State> {
 
     getCenter = (featureCollection: ?FeatureCollection) => {
         if (!featureCollection) {
-            return this.props.mapCenter;
+            return this.props.center;
         }
         const coordinates = featureCollection.features[0].geometry.coordinates[0];
         const { lat, lng } = L.latLngBounds(coordinates.map(c => ([c[0], c[1]]))).getCenter();
@@ -122,6 +119,7 @@ export class PolygonField extends React.Component<Props, State> {
     }
 
     openMap = () => {
+        this.props.onOpenMap(Boolean(this.props.value));
         this.setState({ showMap: true, mapCoordinates: this.props.value });
     }
 

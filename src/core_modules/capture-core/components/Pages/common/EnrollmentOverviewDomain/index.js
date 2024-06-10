@@ -2,14 +2,19 @@
 export type { HideWidgets, WidgetEffects } from './enrollmentOverviewDomain.types';
 export {
     enrollmentSiteActionTypes,
+    updateEnrollmentEvent,
     updateEnrollmentDate,
     updateIncidentDate,
-    updateEnrollmentEvents,
     commitEnrollmentEvent,
     rollbackEnrollmentEvent,
-    updateEnrollmentEventsWithoutId,
+    updateOrAddEnrollmentEvents,
+    updateEnrollmentEventWithoutId,
     updateEnrollmentAttributeValues,
     showEnrollmentError,
+    updateEnrollmentAndEvents,
+    commitEnrollmentAndEvents,
+    rollbackEnrollmentAndEvents,
+    setExternalEnrollmentStatus,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
 export { useRuleEffects } from './useRuleEffects';

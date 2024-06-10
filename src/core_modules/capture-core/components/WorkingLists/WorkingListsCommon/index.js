@@ -22,3 +22,4 @@ export type {
     Callbacks,
 } from './types';
 export { TEMPLATE_SHARING_TYPE } from './constants';
+export { DownloadDialog } from './DownloadDialog';

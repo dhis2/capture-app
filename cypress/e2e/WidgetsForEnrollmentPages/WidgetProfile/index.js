@@ -1,4 +1,4 @@
-import { Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Then, Given, When } from '@badeball/cypress-cucumber-preprocessor';
 import '../../sharedSteps';
 
 Then('the profile details should be displayed', () => {
@@ -31,3 +31,47 @@ Then(/^the user sees the edit profile modal/, () =>
         cy.contains('Cancel without saving').should('exist');
     }),
 );
+
+Given('you add a new tracked entity in the Malaria focus investigation program', () => {
+    cy.visit('/#/new?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type(`Local id-${Math.round((new Date()).getTime() / 1000)}`)
+        .blur();
+    cy.contains('Save focus area')
+        .click();
+    cy.url().should('include', 'enrollmentEventEdit?');
+});
+
+When('you open the overflow menu and click the "Delete Focus area" button', () => {
+    cy.get('[data-test="widget-profile-overflow-menu"]')
+        .click();
+    cy.contains('Delete Focus area')
+        .click();
+});
+
+Then('you see the delete tracked entity confirmation modal', () => {
+    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
+        cy.contains(
+            'Are you sure you want to delete this Focus area? This will permanently remove the Focus area and all its associated enrollments and events in all programs.',
+        ).should('exist');
+    });
+});
+
+When('you confirm by clicking the "Yes, delete Focus area" button', () => {
+    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
+        cy.contains('Yes, delete Focus area')
+            .click();
+    });
+});
+
+Then('you are redirected to the home page', () => {
+    cy.url().should('include', 'selectedTemplateId=M3xtLkYBlKI');
+});
+
+Then('the user sees the tracked entity type polygon geometry', () => {
+    cy.get('[data-test="modal-edit-profile"]').within(() => {
+        cy.contains('Area on map saved').should('exist');
+        cy.contains('Edit area on map').should('exist');
+    });
+});

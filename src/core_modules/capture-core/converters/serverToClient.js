@@ -59,7 +59,7 @@ const valueConvertersForType = {
         const arr = typeof d2Value === 'string' ? JSON.parse(d2Value) : d2Value;
         return { latitude: arr[1], longitude: arr[0] };
     },
-    [dataElementTypes.POLYGON]: () => 'Polygon',
+    [dataElementTypes.POLYGON]: (d2Value: Array<number>) => d2Value,
     [dataElementTypes.ASSIGNEE]: convertAssignedUserToClient,
 };
 

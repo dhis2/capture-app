@@ -53,7 +53,7 @@ const getColumns = ({ relationshipEntity, trackerDataView }) => {
 };
 
 // $FlowFixMe destructering
-const getContext = ({ relationshipEntity, program, programStage, trackedEntityType }) => {
+const getContext = ({ relationshipEntity, program, programStage, trackedEntityType }, access) => {
     if (relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE) {
         return {
             navigation: {
@@ -61,7 +61,7 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
             },
             display: {
                 trackedEntityTypeName: trackedEntityType.name,
-                showDeleteButton: true,
+                showDeleteButton: access.data.write,
             },
         };
     }
@@ -71,7 +71,7 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
             navigation: {},
             display: {
                 programStageName: programStage.name,
-                showDeleteButton: false,
+                showDeleteButton: access.data.write && false,
             },
         };
     }
@@ -215,7 +215,7 @@ export const useGroupedLinkedEntities = (
                     { constraint: relationshipType.toConstraint, name: relationshipType.fromToName };
 
                 const columns = getColumns(constraint);
-                const context = getContext(constraint);
+                const context = getContext(constraint, relationshipType.access);
 
                 accGroupedLinkedEntities.push({
                     id: groupId,

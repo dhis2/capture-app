@@ -54,6 +54,7 @@ import {
     saveEditedEventSucceededEpic,
     requestDeleteEventDataEntryEpic,
     startCreateNewAfterCompletingEpic,
+    saveEventAndCompleteEnrollmentEpic as saveEditEventAndCompleteEnrollmentEpic,
 } from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
@@ -181,7 +182,7 @@ import {
 } from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
 import {
     completeSavingNewTrackedEntityInstanceEpic,
-    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic, failedSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     startSavingNewTrackedEntityInstanceEpic,
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
@@ -337,6 +338,7 @@ export const epics = combineEpics(
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     completeSavingNewTrackedEntityInstanceEpic,
     completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    failedSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     changedEnrollmentIdEpic,
     fetchEnrollmentIdEpic,
     verifyEnrollmentIdSuccessEpic,
@@ -375,4 +377,5 @@ export const epics = combineEpics(
     navigateToNewTrackedEntityPageEpic,
     requestDeleteEventDataEntryEpic,
     startCreateNewAfterCompletingEpic,
+    saveEditEventAndCompleteEnrollmentEpic,
 );

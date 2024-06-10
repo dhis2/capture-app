@@ -1,12 +1,12 @@
 // @flow
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesObject } from './filters.const';
-import type { Column, StickyFilters, FiltersOnly, AdditionalFilters } from '../types';
+import type { Column, StickyFilters, FiltersOnly, AdditionalFilters, FilterOnly } from '../types';
 
 const getStyles = (theme: Theme) => ({
     filterButtonContainer: {
@@ -54,8 +54,10 @@ const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
             .map(container => [container.element.id, container.element]),
     );
 
+const getValidFilterConfigs = (filtersOnly: FiltersOnly) => new Map(filtersOnly.map(filter => [filter.id, filter]));
+
 const splitBasedOnHasValueOnInit =
-    (elementConfigs: Map<string, Column>, filtersWithValueOnInit: ?Object) => {
+    (elementConfigs: Map<string, Column | FilterOnly>, filtersWithValueOnInit: ?Object) => {
         const filtersNotEmpty = filtersWithValueOnInit || {};
         return Object
             .keys(filtersNotEmpty)
@@ -82,7 +84,7 @@ const splitBasedOnHasValueOnInit =
     };
 
 const fillUpIndividualElements = (
-    elementConfigs: Map<string, Column>,
+    elementConfigs: Map<string, Column | FilterOnly>,
     occupiedSpots: number,
 ) => {
     const INDIVIDUAL_DISPLAY_COUNT_BASE = 4;
@@ -104,7 +106,7 @@ const fillUpIndividualElements = (
 };
 
 const getUserSelectedElements = (
-    elementConfigs: Map<string, Column>,
+    elementConfigs: Map<string, Column | FilterOnly>,
     userSelectedFilters: ?Object,
 ) => {
     const userSelectedFiltersNonEmpty = userSelectedFilters || {};
@@ -131,7 +133,7 @@ const getUserSelectedElements = (
 };
 
 const addAdditionalFiltersElements = (
-    elementConfigs: Map<string, Column>,
+    elementConfigs: Map<string, Column | FilterOnly>,
     additionalFilters?: AdditionalFilters,
     filtersWithValueOnInit: Object = {},
     userSelectedFilters: Object = {},
@@ -152,12 +154,34 @@ const addAdditionalFiltersElements = (
     return { remainingElements: elementConfigs };
 };
 
+const addShowInMoreFilters = (
+    elementConfigs: Map<string, Column | FilterOnly>,
+    filtersOnlyForShowInMoreFilters: FiltersOnly,
+    filtersWithValueOnInit: Object = {},
+    userSelectedFilters: Object = {},
+) => {
+    const remainingElements: Map<string, Column | FilterOnly> =
+        new Map([...elementConfigs]);
+    if (filtersOnlyForShowInMoreFilters.length > 0) {
+        filtersOnlyForShowInMoreFilters.forEach((filter) => {
+            const addToRemainingElements =
+                !filtersWithValueOnInit[filter.id] && !userSelectedFilters[filter.id];
+
+            if (addToRemainingElements) {
+                remainingElements.set(filter.id, filter);
+            }
+        });
+        return { remainingElements };
+    }
+    return { remainingElements: elementConfigs };
+};
+
 const getIndividualElementsArray = (
-    validElementConfigs: Map<string, Column>,
-    initValueElements: Map<string, Column>,
-    fillUpElements: Map<string, Column>,
-    userSelectedElements: Map<string, Column>,
-): Array<Column> => [...validElementConfigs.entries()]
+    validElementConfigs: Map<string, Column | FilterOnly>,
+    initValueElements: Map<string, Column | FilterOnly>,
+    fillUpElements: Map<string, Column | FilterOnly>,
+    userSelectedElements: Map<string, Column | FilterOnly>,
+): Array<Column | FilterOnly> => [...validElementConfigs.entries()]
     .map(entry => entry[1])
     .map((element) => {
         if (initValueElements.has(element.id) ||
@@ -180,7 +204,7 @@ const renderIndividualFilterButtons = ({
     onRemoveFilter,
     classes,
 }: {
-    individualElementsArray: Array<Column>,
+    individualElementsArray: Array<Column | FilterOnly>,
     filtersOnly?: FiltersOnly,
     visibleSelectorId: ?string,
     onSetVisibleSelector: Function,
@@ -217,7 +241,7 @@ const renderIndividualFilterButtons = ({
     );
 
 const renderRestButton = (
-    restElementsArray: Array<Column>,
+    restElementsArray: Array<Column | FilterOnly>,
     onSelectRestMenuItem: Function,
 ) => (restElementsArray.length > 0 ? (
     <FilterRestMenu
@@ -243,11 +267,24 @@ const FiltersPlain = memo<Props>((props: Props) => {
     } = props;
 
     const [visibleSelectorId, setVisibleSelector] = React.useState(props.visibleSelectorId);
-    const filtersOnlyCount = filtersOnly ? filtersOnly.length : 0;
+    const defaultFiltersOnly = useMemo(() =>
+        (filtersOnly || []).filter(filter => !filter.showInMoreFilters), [filtersOnly]);
+    const defaultFiltersOnlyCount = defaultFiltersOnly.length;
+
 
     const elementsContainer = React.useMemo(() => {
         const notEmptyColumns = columns || [];
-        const validElementConfigs = getValidElementConfigsVisiblePrioritized(notEmptyColumns);
+        const filtersOnlyForShowInMoreFilters: FiltersOnly = (filtersOnly || [])
+            .filter(filter => filter.showInMoreFilters);
+
+        const validColumnElementConfigs = getValidElementConfigsVisiblePrioritized(notEmptyColumns);
+        const validFilterConfigs = getValidFilterConfigs(filtersOnlyForShowInMoreFilters);
+
+        const validElementConfigs: Map<string, Column | FilterOnly> = new Map([
+            ...validColumnElementConfigs,
+            ...validFilterConfigs,
+        ]);
+
         const { filtersWithValueOnInit, userSelectedFilters } = stickyFilters;
 
         const { initValueElements, remainingElements: remainingElementsAfterInitSplit } =
@@ -256,12 +293,19 @@ const FiltersPlain = memo<Props>((props: Props) => {
         const { fillUpElements, remainingElements: remainingElementsAfterFillUp } =
         fillUpIndividualElements(
             remainingElementsAfterInitSplit,
-            initValueElements.size + filtersOnlyCount,
+            initValueElements.size + defaultFiltersOnlyCount,
+        );
+
+        const { remainingElements: remainingElementsWithShowInMoreFilters } = addShowInMoreFilters(
+            remainingElementsAfterFillUp,
+            filtersOnlyForShowInMoreFilters,
+            filtersWithValueOnInit,
+            userSelectedFilters,
         );
 
         const { remainingElements: remainingElementsWithAdditionalFilters } =
             addAdditionalFiltersElements(
-                remainingElementsAfterFillUp, additionalFilters, filtersWithValueOnInit, userSelectedFilters);
+                remainingElementsWithShowInMoreFilters, additionalFilters, filtersWithValueOnInit, userSelectedFilters);
 
         const { userSelectedElements, remainingElements } =
         getUserSelectedElements(remainingElementsWithAdditionalFilters, userSelectedFilters);
@@ -283,7 +327,8 @@ const FiltersPlain = memo<Props>((props: Props) => {
     }, [
         columns,
         stickyFilters,
-        filtersOnlyCount,
+        filtersOnly,
+        defaultFiltersOnlyCount,
         additionalFilters,
     ]);
 
@@ -304,7 +349,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
             onUpdateFilter,
             onClearFilter,
             onRemoveFilter,
-            filtersOnly,
+            filtersOnly: defaultFiltersOnly,
             classes,
         });
 
@@ -326,7 +371,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         onUpdateFilter,
         onClearFilter,
         onRemoveFilter,
-        filtersOnly,
+        defaultFiltersOnly,
     ]);
 
     return (

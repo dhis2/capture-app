@@ -49,3 +49,11 @@ Then(/^the scope selector list contains the text (.*)$/, (name) => {
         cy.contains(name).should('exist');
     });
 });
+
+When(/^the user clicks the "Back to all stages and events" button/, () =>
+    cy
+        .get('[data-test="widget-enrollment-event"]')
+        .contains('Back to all stages and events')
+        .click(),
+);
+

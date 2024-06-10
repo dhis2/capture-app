@@ -51,6 +51,7 @@ export type TrackerDataViewEntity = $ReadOnly<{|
     id: string,
     type: $Keys<typeof dataElementTypes>,
     displayName: string,
+    options?: Array<{ code: string, name: string }>,
 |}>;
 
 export type TrackerDataView = $ReadOnly<{|

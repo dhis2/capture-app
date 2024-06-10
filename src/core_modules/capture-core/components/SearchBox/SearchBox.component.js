@@ -24,11 +24,10 @@ const getStyles = () => ({
     },
     title: {
         fontWeight: 500,
-        marginBottom: spacers.dp24,
+        marginBottom: spacers.dp16,
     },
     container: {
         color: colors.grey900,
-        padding: '8px 24px 24px 24px',
     },
     innerContainer: {
         display: 'flex',
@@ -36,12 +35,7 @@ const getStyles = () => ({
         gap: spacers.dp16,
     },
     searchFormContainer: {
-        padding: spacers.dp16,
         flex: 1,
-        background: colors.white,
-        border: '1px solid',
-        borderColor: colors.grey400,
-        borderRadius: 3,
     },
     emptySelectionPaperContent: {
         display: 'flex',

@@ -16,6 +16,8 @@ export type PlainProps = {|
     modalState: string,
     errorsMessages: Array<{ id: string, message: string }>,
     warningsMessages: Array<{ id: string, message: string }>,
+    center?: ?Array<number>,
+    orgUnit: { id: string },
 |};
 
 export type Props = {|

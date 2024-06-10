@@ -17,7 +17,7 @@ export type DhisFunctionsInfo = $ReadOnly<{|
     applicableDhisFunctions: Array<InternalD2FunctionConfig>,
 |}>;
 
-export type ErrorHandler = (error: string, expressionWithInjectedVariableValues: string) => void;
+export type ErrorHandler = (error: string, expressionWithInjectedVariableValues: string, evaluationResult: any) => void;
 
 export type ExecuteExpressionInput = $ReadOnly<{|
     expression: string,
@@ -25,5 +25,5 @@ export type ExecuteExpressionInput = $ReadOnly<{|
     variablesHash: RuleVariables,
     flags?: Flag,
     onError: ErrorHandler,
-    onVerboseLog: (expressionWithInjectedVariableValues: string) => void,
+    onVerboseLog: (expressionWithInjectedVariableValues: string, evaluationResult: any) => void,
 |}>;

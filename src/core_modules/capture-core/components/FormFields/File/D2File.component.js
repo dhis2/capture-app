@@ -176,6 +176,7 @@ class D2FilePlain extends Component<Props, State> {
                                             target="_blank"
                                             href={fileUrl}
                                             rel="noopener noreferrer"
+                                            onBlur={(event) => { event.stopPropagation(); }}
                                         >
                                             {value.name}
                                         </a>

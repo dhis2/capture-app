@@ -16,8 +16,8 @@ export class D2TrueFalse extends Component<Props> {
         const falseText = i18n.t('No');
 
         const optionSet = new OptionSet();
-        optionSet.addOption(new Option((o) => { o.text = trueText; o.value = 'true'; }));
-        optionSet.addOption(new Option((o) => { o.text = falseText; o.value = 'false'; }));
+        optionSet.addOption(new Option((o) => { o.text = trueText; o.value = true; }));
+        optionSet.addOption(new Option((o) => { o.text = falseText; o.value = false; }));
         return optionSet;
     }
 

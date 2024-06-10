@@ -1,17 +1,13 @@
 // @flow
 import React, { useState, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useConfig } from '@dhis2/app-runtime';
-import { buildUrl } from 'capture-core-utils';
 import { EventWorkingListsRowMenuSetup } from '../RowMenuSetup';
-import { DownloadDialog } from './DownloadDialog';
+import { DownloadDialog } from '../../WorkingListsCommon';
 import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Props } from './EventWorkingListsViewMenuSetup.types';
 
 export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, ...passOnProps }: Props) => {
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
-    const { baseUrl, apiVersion } = useConfig();
-    const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
     const customListViewMenuContents: CustomMenuContents = useMemo(() => [{
         key: 'downloadData',
         clickHandler: () => setDownloadDialogOpenStatus(true),
@@ -33,7 +29,6 @@ export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, ...pa
                 open={downloadDialogOpen}
                 onClose={handleCloseDialog}
                 request={downloadRequest}
-                absoluteApiPath={absoluteApiPath}
             />
         </React.Fragment>
     );

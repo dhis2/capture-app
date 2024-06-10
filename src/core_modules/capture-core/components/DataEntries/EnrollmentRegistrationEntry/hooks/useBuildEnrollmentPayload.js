@@ -1,5 +1,6 @@
 // @flow
 import { useSelector } from 'react-redux';
+import { useConfig } from '@dhis2/app-runtime';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -10,7 +11,6 @@ import { convertClientToServer, convertFormToClient } from '../../../../converte
 import {
     convertDataEntryValuesToClientValues,
 } from '../../../DataEntry/common/convertDataEntryValuesToClientValues';
-import { capitalizeFirstLetter } from '../../../../../capture-core-utils/string';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import {
     useBuildFirstStageRegistration,
@@ -25,8 +25,8 @@ import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
 } from '../../../Pages/New/RegistrationDataEntry/helpers';
-import { FEATURETYPE } from '../../../../constants';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
+import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -66,25 +66,6 @@ function getServerValuesForMainValues(
     return serverValues;
 }
 
-function getPossibleTetFeatureTypeKey(serverValues: Object) {
-    return Object
-        .keys(serverValues)
-        .find(key => key.startsWith('FEATURETYPE_'));
-}
-
-function buildGeometryProp(key: string, serverValues: Object) {
-    if (!serverValues[key]) {
-        return undefined;
-    }
-    const type = capitalizeFirstLetter(key.replace('FEATURETYPE_', '').toLocaleLowerCase());
-    return {
-        type,
-        coordinates: serverValues[key],
-    };
-}
-
-const geometryType = formValuesKey => Object.values(FEATURETYPE).find(geometryKey => geometryKey === formValuesKey);
-
 const deriveAttributesFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
         .filter(key => !geometryType(key))
@@ -99,6 +80,7 @@ export const useBuildEnrollmentPayload = ({
     trackedEntityTypeId,
 }: DataEntryReduxConverterProps) => {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+    const { serverVersion: { minor } } = useConfig();
     const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
     const dataEntryFieldValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
     const dataEntryFieldsMeta = useSelector(({ dataEntriesFieldsMeta }) => dataEntriesFieldsMeta[dataEntryKey]);
@@ -116,7 +98,7 @@ export const useBuildEnrollmentPayload = ({
             dataEntryFieldsMeta,
             formFoundation,
         );
-        const { enrolledAt, occurredAt, assignee } = serverValuesForMainValues;
+        const { enrolledAt, occurredAt, assignee, geometry: enrollmentGeometry } = serverValuesForMainValues;
 
         const { stages } = getTrackerProgramThrowIfNotFound(programId);
 
@@ -141,6 +123,7 @@ export const useBuildEnrollmentPayload = ({
             fieldsValue: dataEntryFieldValues,
             attributeCategoryOptions,
             assignee,
+            serverMinorVersion: minor,
         });
 
         const autoGenerateEvents = deriveAutoGenerateEvents({
@@ -151,6 +134,7 @@ export const useBuildEnrollmentPayload = ({
             programId,
             orgUnitId,
             attributeCategoryOptions,
+            serverMinorVersion: minor,
         });
 
         const allEventsToBeCreated = firstStageDuringRegistrationEvent
@@ -167,21 +151,20 @@ export const useBuildEnrollmentPayload = ({
             enrolledAt,
             attributes,
             events: allEventsToBeCreated,
+            geometry: enrollmentGeometry,
         };
 
-        const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(serverValuesForFormValues);
-        let geometry;
-        if (tetFeatureTypeKey) {
-            geometry = buildGeometryProp(tetFeatureTypeKey, serverValuesForFormValues);
-            delete serverValuesForFormValues[tetFeatureTypeKey];
-        }
+        const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
+        const tetGeometry = tetFeatureTypeKey ?
+            buildGeometryProp(tetFeatureTypeKey, formValues)
+            : undefined;
 
         return {
             trackedEntity: teiId || generateUID(),
             orgUnit: orgUnitId,
             trackedEntityType: trackedEntityTypeId,
             attributes,
-            geometry,
+            geometry: tetGeometry,
             enrollments: [enrollment],
         };
     };

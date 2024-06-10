@@ -11,7 +11,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumn
             id: 'orgUnit',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: i18n.t('Registering unit'),
+            header: i18n.t('Organisation unit'),
         },
         {
             id: 'createdAt',
@@ -78,7 +78,7 @@ const getTEIMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string
         type,
         header: formName || name,
         options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
-        multiValueFilter: !!optionSet,
+        multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
         filterHidden: !(orgUnitId || searchable || unique),
     }));
 

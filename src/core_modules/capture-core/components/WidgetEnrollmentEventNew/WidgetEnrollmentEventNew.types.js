@@ -11,6 +11,8 @@ export type WidgetProps = {|
     onSave?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
+    onSaveAndCompleteEnrollmentSuccessActionType?: string,
+    onSaveAndCompleteEnrollmentErrorActionType?: string,
     onCancel?: () => void,
     widgetReducerName: string,
 |};

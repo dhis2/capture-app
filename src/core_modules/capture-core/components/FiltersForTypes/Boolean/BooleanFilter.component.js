@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes'; // TODO: Refactor
-import { getBooleanFilterData } from './booleanFilterDataGetter';
+import {
+    getMultiSelectBooleanFilterData,
+    getSingleSelectBooleanFilterData,
+} from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
 const getStyles = (theme: Theme) => ({
@@ -12,11 +15,12 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Value = ?Array<any>;
+type Value = ?Array<any> | string;
 
 type Props = {
     value: Value,
     onCommitValue: (value: Value) => void,
+    allowMultiple: boolean,
     classes: {
         selectBoxesContainer: string,
     },
@@ -27,13 +31,17 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
     booleanFieldInstance: ?D2TrueFalse;
 
     onGetUpdateData() {
-        const value = this.props.value;
+        const { value, allowMultiple } = this.props;
 
-        if (!value) {
+        if (!value && value !== false) {
             return null;
         }
 
-        return getBooleanFilterData(value);
+        if (!allowMultiple) {
+            return getSingleSelectBooleanFilterData(value);
+        }
+
+        return getMultiSelectBooleanFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line
@@ -53,7 +61,7 @@ class BooleanFilterPlain extends Component<Props> implements UpdatableFilterCont
             >
                 <D2TrueFalse
                     ref={this.setBooleanFieldInstance}
-                    allowMultiple
+                    allowMultiple={this.props.allowMultiple}
                     value={value}
                     onBlur={onCommitValue}
                     orientation={orientations.VERTICAL}

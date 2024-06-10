@@ -58,11 +58,15 @@ And the user see the following text: 11
 When the user clicks on the edit button
 And the user set the apgar score to 5
 And the user clicks on the save button
+Then you are redirected to the enrollment dashboard
+And you open the Birth stage event
 Then the user see the following text: Enrollment: View Event
 And the user see the following text: 5
 When the user clicks on the edit button
 And the user set the apgar score to 11
 And the user clicks on the save button
+Then you are redirected to the enrollment dashboard
+And you open the Birth stage event
 Then the user see the following text: Enrollment: View Event
 And the user see the following text: 11
 
@@ -97,3 +101,10 @@ Scenario: User can see disabled scheduled date for active event
     Then the user see the following text: Enrollment: Edit Event
     Then the user see the schedule date field with tooltip: Scheduled date cannot be changed for Active events
     
+Scenario: User can edit the event and complete the enrollment
+    Given you land on the enrollment event page with selected Malaria Entity by having typed #/enrollmentEventEdit?eventId=MHR4Zj6KLz0&orgUnitId=DiszpKrYNg8
+    And the enrollment status is active
+    And the user clicks on the edit button
+    And the user completes the event
+    And the user completes the enrollment
+    Then the user sees the enrollment status and recently edited event in Case outcome event status is completed

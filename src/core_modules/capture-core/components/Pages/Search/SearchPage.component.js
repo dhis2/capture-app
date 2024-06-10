@@ -11,36 +11,39 @@ import { TemplateSelector } from '../../TemplateSelector';
 
 const getStyles = () => ({
     backButton: {
-        margin: `${spacers.dp12} 0 0 ${spacers.dp24}`,
+        margin: spacers.dp16,
+        padding: '0',
     },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
+        margin: `0 ${spacers.dp16} 0`,
         gap: spacers.dp16,
     },
     half: {
         flex: 1,
+    },
+    quarter: {
+        flex: 0.4,
+    },
+    searchBoxWrapper: {
+        padding: spacers.dp16,
         background: colors.white,
         border: '1px solid',
         borderColor: colors.grey400,
         borderRadius: 3,
-    },
-    quarter: {
-        flex: 0.4,
-        padding: `${spacers.dp12} ${spacers.dp24} ${spacers.dp24} 0`,
     },
 });
 
 const SearchPagePlain = ({ programId, orgUnitId, onNavigateToMainPage, classes }: PlainProps) => (
     <>
         <TopBar programId={programId} orgUnitId={orgUnitId} />
-        <Button dataTest="back-button" className={classes.backButton} onClick={onNavigateToMainPage}>
-            <IconChevronLeft24 />
+        <Button icon={<IconChevronLeft24 />} dataTest="back-button" className={classes.backButton} onClick={onNavigateToMainPage}>
             {i18n.t('Back')}
         </Button>
 
         <div className={classes.container}>
-            <div className={classes.half}>
+            <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
                 <SearchBox programId={programId} />
             </div>
             <div className={classes.quarter}>

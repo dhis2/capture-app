@@ -16,9 +16,9 @@ const cleanUpIfApplicable = () => {
             if (!event) {
                 return null;
             }
-            return cy.buildApiUrl('events', event.event)
+            return cy.buildApiUrl('tracker?async=false&importStrategy=DELETE')
                 .then(eventUrl =>
-                    cy.request('DELETE', eventUrl));
+                    cy.request('POST', eventUrl, { events: [{ event: event.event }] }));
         });
 };
 

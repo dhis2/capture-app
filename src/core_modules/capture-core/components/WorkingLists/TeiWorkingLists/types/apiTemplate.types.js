@@ -10,7 +10,7 @@ export type ApiDataFilterNumeric = {|
 
 export type ApiDataFilterBoolean = {|
     in: Array<string>,
-|};
+|} | boolean;
 
 export type ApiDataFilterTrueOnly = {|
     eq: string,
@@ -47,6 +47,7 @@ export type ApiTrackerQueryCriteria = {|
     scheduledAt?: ?ApiDataFilterDateContents,
     occurredAt?: ?ApiDataFilterDateContents,
     enrolledAt?: ?ApiDataFilterDateContents,
+    followUp?: ?boolean,
     order?: ?string,
     displayColumnOrder?: ?Array<string>,
     assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',

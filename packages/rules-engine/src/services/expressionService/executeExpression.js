@@ -189,16 +189,17 @@ export const executeExpression = ({
             .replace(/'[^']*'|"[^"]*"/g, match => ' '.repeat(match.length));
         const applicableDhisFunctions = Object.entries(dhisFunctions).map(([key, value]) => ({ ...value, name: key }));
         answer = internalExecuteExpression(
+            // $FlowExpectedError
             { dhisFunctionsObject: dhisFunctions, applicableDhisFunctions },
             removeNewLinesFromNonStrings(expressionWithInjectedVariableValues, expressionModuloStrings),
             onError,
         );
 
         if (flags.verbose) {
-            onVerboseLog(expressionWithInjectedVariableValues);
+            onVerboseLog(expressionWithInjectedVariableValues, answer);
         }
     } catch (error) {
-        onError(error.message, expressionWithInjectedVariableValues);
+        onError(error.message, expressionWithInjectedVariableValues, answer);
     }
     return answer;
 };

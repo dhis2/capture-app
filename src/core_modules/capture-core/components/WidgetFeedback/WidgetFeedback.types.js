@@ -21,6 +21,11 @@ export type ContentType = {|
     ...CssClasses
 |}
 
+export type InputFeedbackProps = {|
+    widgetEffects?: Object,
+    feedbackEmptyText: string,
+|}
+
 export type Props = {|
     feedback?: ?Array<string | FilteredText | FilteredKeyValue>,
     emptyText: string,
@@ -34,4 +39,9 @@ export type PlainProps = {|
 export type IndicatorProps = {|
     indicators?: ?Array<string | FilteredText | FilteredKeyValue>,
     emptyText: string,
+|}
+
+export type InputIndicatorProps = {|
+    widgetEffects?: Object,
+    indicatorEmptyText: string,
 |}

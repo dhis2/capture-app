@@ -11,8 +11,10 @@ import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.red
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
 const getStyles = () => ({
-    searchDomainSelectorSection: {
-        marginBottom: spacers.dp8,
+    searchDomainsContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
     },
     searchRow: {
         display: 'flex',
@@ -208,6 +210,7 @@ const SearchFormIndex = ({
             tabIndex={-1}
             onKeyPress={handleKeyPress}
             role={'none'}
+            className={classes.searchDomainsContainer}
         >
             {
                 searchGroupsForSelectedScope
@@ -220,7 +223,6 @@ const SearchFormIndex = ({
                             <div key={formId} data-test="form-unique">
                                 <Section
                                     isCollapsed={isSearchSectionCollapsed}
-                                    className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ alignItems: 'center' }}
@@ -282,7 +284,6 @@ const SearchFormIndex = ({
                             <div key={formId} data-test="form-attributes">
                                 <Section
                                     isCollapsed={isSearchSectionCollapsed}
-                                    className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ alignItems: 'center' }}
@@ -336,7 +337,7 @@ const SearchFormIndex = ({
     },
     [
         classes.searchButtonContainer,
-        classes.searchDomainSelectorSection,
+        classes.searchDomainsContainer,
         classes.searchRowSelectElement,
         classes.searchRow,
         classes.textInfo,

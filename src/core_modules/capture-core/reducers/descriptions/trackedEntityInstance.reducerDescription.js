@@ -9,7 +9,7 @@ export const trackedEntityInstanceDesc = createReducerDescription(
             return { ...state, hasError };
         },
         [dataEntryActionTypes.SET_TEI_VALUES]: (state, action) => {
-            const { attributeValues, geometry } = action.payload;
+            const { attributeValues, geometry = null } = action.payload;
             return { ...state, attributeValues, geometry };
         },
         [dataEntryActionTypes.CLEAN_TEI_MODAL]: state => ({

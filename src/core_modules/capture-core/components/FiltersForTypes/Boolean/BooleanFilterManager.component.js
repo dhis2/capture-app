@@ -1,33 +1,35 @@
 // @flow
 import * as React from 'react';
 import { BooleanFilter } from './BooleanFilter.component';
-import type { BooleanFilterData } from './types';
+import type { BooleanFilterStringified } from './types';
 
 type Props = {
-    filter: ?BooleanFilterData,
+    filter: ?BooleanFilterStringified,
     filterTypeRef: Function,
     handleCommitValue: () => void,
+    singleSelect: boolean,
 };
 
 type State = {
-    value: ?Array<string>,
+    value: ?Array<string> | string,
 };
 
 export class BooleanFilterManager extends React.Component<Props, State> {
-    static calculateDefaultValueState(filter: ?BooleanFilterData): ?Array<string> {
+    static calculateDefaultValueState(
+        filter: ?BooleanFilterStringified,
+        singleSelect: boolean,
+    ): ?(Array<string> | string) {
         if (!filter) {
             return undefined;
         }
 
-        return filter
-            .values
-            .map(value => (value ? 'true' : 'false'));
+        return singleSelect ? filter.values[0] : filter.values;
     }
 
     constructor(props: Props) {
         super(props);
         this.state = {
-            value: BooleanFilterManager.calculateDefaultValueState(this.props.filter),
+            value: BooleanFilterManager.calculateDefaultValueState(this.props.filter, this.props.singleSelect),
         };
     }
 
@@ -39,7 +41,7 @@ export class BooleanFilterManager extends React.Component<Props, State> {
     }
 
     render() {
-        const { filter, filterTypeRef, ...passOnProps } = this.props;
+        const { filter, filterTypeRef, singleSelect, ...passOnProps } = this.props;
 
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -47,6 +49,7 @@ export class BooleanFilterManager extends React.Component<Props, State> {
                 value={this.state.value}
                 innerRef={filterTypeRef}
                 onCommitValue={this.handleCommitValue}
+                allowMultiple={!singleSelect}
                 {...passOnProps}
             />
         );

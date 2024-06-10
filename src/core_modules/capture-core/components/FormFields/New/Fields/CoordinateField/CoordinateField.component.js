@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
 import { Modal, ModalTitle } from '@dhis2/ui';
 import { typeof orientations } from '../../../New';
+import { withCenterPoint } from '../../HOC';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -93,4 +94,4 @@ class CoordinateFieldPlain extends React.Component<Props> {
     }
 }
 
-export const CoordinateField = withStyles(getStyles)(CoordinateFieldPlain);
+export const CoordinateField = withStyles(getStyles)(withCenterPoint()(CoordinateFieldPlain));

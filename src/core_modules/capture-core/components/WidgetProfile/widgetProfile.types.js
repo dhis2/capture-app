@@ -6,6 +6,7 @@ export type Props = {|
     orgUnitId: string,
     readOnlyMode?: ?boolean,
     onUpdateTeiAttributeValues?: ?(attributes: Array<{ [key: string]: string }>, teiDisplayName: string) => void,
+    onDeleteSuccess?: () => void,
 |};
 
 export type PlainProps = {|
