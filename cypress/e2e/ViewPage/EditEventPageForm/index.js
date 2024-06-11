@@ -53,7 +53,7 @@ When('you search for an existing unique id and link to the person', () => {
     cy.get('[data-test="form-field-lZGmxYbs97q"]')
         .find('input')
         .type('9191132445122')
-        .blur(); // TODO: Look into why the click below is failing if the field is not blurred first
+        .blur();
 
     cy.get('[data-test="relationship-tei-search-button-relationshipTeiSearch-nEenWmSyUEp-0"]')
         .click();
