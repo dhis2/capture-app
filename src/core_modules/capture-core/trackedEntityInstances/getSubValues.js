@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
@@ -14,20 +14,35 @@ const subValueGetterByElementType = {
         attributeId,
         absoluteApiPath,
         querySingleResource,
+        programId,
     }: {
         value: any,
         teiId: string,
         attributeId: string,
         absoluteApiPath: string,
         querySingleResource: QuerySingleResource,
+        programId: ?string,
     }) =>
         querySingleResource({ resource: `fileResources/${value}` })
-            .then(res =>
-                ({
+            .then((res) => {
+                const buildUrl = () => {
+                    if (featureAvailable(FEATURES.trackerImageEndpoint)) {
+                        if (programId) {
+                            return `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}&dimension=small`;
+                        }
+                        return `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?dimension=small`;
+                    }
+                    return `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/image`;
+                };
+                const previewUrl = buildUrl();
+
+                return {
                     name: res.name,
                     value: res.id,
-                    url: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/image`,
-                }))
+                    previewUrl,
+                    url: previewUrl,
+                };
+            })
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, teiId, attributeId, error }));
                 return null;
@@ -40,12 +55,14 @@ export async function getSubValues({
     values,
     absoluteApiPath,
     querySingleResource,
+    programId,
 }: {
     teiId: string,
     attributes: Array<DataElement>,
     values?: ?Object,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
+    programId: ?string,
 }) {
     if (!values) {
         return null;
@@ -67,6 +84,7 @@ export async function getSubValues({
                     attributeId,
                     absoluteApiPath,
                     querySingleResource,
+                    programId,
                 });
                 accValues[attributeId] = subValue;
             }
