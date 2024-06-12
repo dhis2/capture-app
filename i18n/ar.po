@@ -2,15 +2,15 @@
 # Translators:
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # Philip Larsen Donnelly, 2023
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Hamza Assada <7amza.it@gmail.com>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-07T14:47:33.932Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -614,8 +614,8 @@ msgstr "تعذر جلب الوحدة التنظيمية"
 msgid "Program doesn't exist"
 msgstr "البرنامج غير موجود"
 
-msgid "Selected program is invalid for selected registering unit"
-msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
+msgid "Selected program is invalid for selected organisation unit"
+msgstr ""
 
 msgid "Online"
 msgstr "متصل"
@@ -691,6 +691,12 @@ msgstr ""
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid "Quick actions"
@@ -773,8 +779,14 @@ msgstr ""
 msgid "There was an error loading the page"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
-msgstr "اختر وحدة تسجيل لبدء الإبلاغ"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr ""
@@ -938,12 +950,6 @@ msgstr ""
 msgid "View Event"
 msgstr ""
 
-msgid "No feedback for this enrollment yet"
-msgstr ""
-
-msgid "No indicator output for this enrollment yet"
-msgstr ""
-
 msgid "Selected program"
 msgstr "البرنامج المحدد"
 
@@ -986,10 +992,7 @@ msgstr "اضف علاقة"
 msgid "No results found for "
 msgstr ""
 
-msgid "Registering unit"
-msgstr "وحدة التسجيل"
-
-msgid "Choose a registering unit"
+msgid "Choose an organisation unit"
 msgstr ""
 
 msgid "Clear selection"
@@ -1001,7 +1004,7 @@ msgstr "لا توجد برامج متاحة"
 msgid "Search for a program"
 msgstr ""
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
 
 msgid "Show all programs"
@@ -1103,6 +1106,9 @@ msgid "Create new event"
 msgstr "انشئ حدثاً جديداً"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "No tracked entity types available"
 msgstr ""
 
 msgid "Assigned to"
@@ -1427,6 +1433,35 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "التاريخ المقرر"
+
+msgid "Report date"
+msgstr "تاريخ التقرير"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
@@ -1448,8 +1483,14 @@ msgstr ""
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
 
-msgid "{{ totalEvents }} events"
-msgstr ""
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr ""
@@ -1538,15 +1579,6 @@ msgstr "اسم مرحلة البرنامج"
 msgid "Working list could not be loaded"
 msgstr "تعذر تحميل قائمة العمل"
 
-msgid "Download as JSON"
-msgstr "تنزيل كملف JSON"
-
-msgid "Download as CSV"
-msgstr "تنزيل كملف CSV"
-
-msgid "Download with current filters"
-msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
-
 msgid "Download data..."
 msgstr "تنزيل البيانات"
 
@@ -1618,6 +1650,15 @@ msgstr "إظهار أقل"
 
 msgid "Show All"
 msgstr "إظهار الكل"
+
+msgid "Download as JSON"
+msgstr "تنزيل كملف JSON"
+
+msgid "Download as CSV"
+msgstr "تنزيل كملف CSV"
+
+msgid "Download with current filters"
+msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
 
 msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"

@@ -91,13 +91,13 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
 
         dispatch(startAsyncUpdateFieldForEditEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
-    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+    onSave: () => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         const { onSaveExternal } = props;
         window.scrollTo(0, 0);
         onSaveExternal && onSaveExternal();
-        dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation, orgUnit));
+        dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation));
     },
-    onSaveAndCompleteEnrollment: (orgUnit: OrgUnit) => (
+    onSaveAndCompleteEnrollment: () => (
         eventId: string,
         dataEntryId: string,
         formFoundation: RenderFoundation,
@@ -113,7 +113,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
                 itemId: eventId,
                 dataEntryId,
                 formFoundation,
-                orgUnit,
                 onSaveAndCompleteEnrollmentExternal,
                 onSaveAndCompleteEnrollmentSuccessActionType,
                 onSaveAndCompleteEnrollmentErrorActionType,
@@ -139,14 +138,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
     },
     onCancelCreateNew: (itemId: string) => {
         const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, availableProgramStages } = props;
-        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
+        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation));
         dispatch(startCreateNewAfterCompleting({
             enrollmentId, isCreateNew: false, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
         }));
     },
     onConfirmCreateNew: (itemId: string) => {
         const { dataEntryId, formFoundation, orgUnit, enrollmentId, programId, teiId, availableProgramStages } = props;
-        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation, orgUnit));
+        dispatch(requestSaveEditEventDataEntry(itemId, dataEntryId, formFoundation));
         dispatch(startCreateNewAfterCompleting({
             enrollmentId, isCreateNew: true, orgUnitId: orgUnit.id, programId, teiId, availableProgramStages,
         }));

@@ -8,6 +8,9 @@ import { AppContents } from './AppContents.component';
 import {
     RulesEngineVerboseInitializer,
 } from '../../core_modules/capture-core/components/RulesEngineVerboseInitializer';
+import {
+    MetadataAutoSelectInitializer,
+} from '../../core_modules/capture-core/components/MetadataAutoSelectInitializer';
 
 
 type Props = {
@@ -20,9 +23,11 @@ export const App = ({ store }: Props) => (
             store={store}
         >
             <D2UIApp>
-                <RulesEngineVerboseInitializer>
-                    <AppContents />
-                </RulesEngineVerboseInitializer>
+                <MetadataAutoSelectInitializer>
+                    <RulesEngineVerboseInitializer>
+                        <AppContents />
+                    </RulesEngineVerboseInitializer>
+                </MetadataAutoSelectInitializer>
             </D2UIApp>
         </Provider>
     </React.Fragment>

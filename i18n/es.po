@@ -10,16 +10,16 @@
 # Alison Andrade <aandrade@ippfwhr.org>, 2024
 # Philip Larsen Donnelly, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Janeth Cruz, 2024
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -634,10 +634,8 @@ msgstr "No se pudo obtener la unidad organizativa"
 msgid "Program doesn't exist"
 msgstr "El programa no existe"
 
-msgid "Selected program is invalid for selected registering unit"
+msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-"El programa seleccionado no es válido para la unidad de registro "
-"seleccionada"
 
 msgid "Online"
 msgstr "Conectado"
@@ -823,8 +821,8 @@ msgstr "Hubo un error al abrir la página"
 msgid "There was an error loading the page"
 msgstr "Hubo un error al cargar la página"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Seleccione una unidad de registro para comenzar a informar"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
 
 msgid "No feedback for this event yet"
 msgstr "Aún no hay retroalimentación para este evento."
@@ -1038,11 +1036,8 @@ msgstr "Añadir relación"
 msgid "No results found for "
 msgstr "No se encontraron resultados para"
 
-msgid "Registering unit"
-msgstr "Unidad de registro"
-
-msgid "Choose a registering unit"
-msgstr "Elija una unidad de registro"
+msgid "Choose an organisation unit"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Despejar selecciones"
@@ -1053,9 +1048,8 @@ msgstr "No hay programas disponibles."
 msgid "Search for a program"
 msgstr "Buscar un programa"
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
-"Algunos programas están siendo filtrados por la unidad de registro elegida"
 
 msgid "Show all programs"
 msgstr "Mostrar todos los programas"
@@ -1169,6 +1163,9 @@ msgstr "Crear un nuevo evento"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Buscar un(a) {{trackedEntityName}} en {{programName}}"
+
+msgid "No tracked entity types available"
+msgstr ""
 
 msgid "Assigned to"
 msgstr "Asignado a"
@@ -1521,6 +1518,35 @@ msgstr " Perfil de {{trackedEntityTypeName}}"
 msgid "tracked entity instance"
 msgstr "instancia de entidad rastreada"
 
+msgid "Link to an existing {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+
+msgid "Enter details now"
+msgstr ""
+
+msgid "Link to an existing"
+msgstr ""
+
+msgid "Scheduled date"
+msgstr "Fecha planificada"
+
+msgid "Report date"
+msgstr "Fecha de reporte"
+
+msgid "Please select a valid event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
@@ -1544,8 +1570,11 @@ msgstr ""
 "No se pudieron recuperar los eventos. Por favor, inténtelo de nuevo más "
 "tarde."
 
-msgid "{{ totalEvents }} events"
-msgstr "{{ totalEvents }} evento(s)"
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} atrasado(s)"

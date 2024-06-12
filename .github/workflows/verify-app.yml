@@ -106,36 +106,65 @@ jobs:
           username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
 
+  setup-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.specs }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate test matrix
+        id: set-matrix
+        run: |
+            node cypress/support/generateTestMatrix.js > matrix.json
+            echo "::set-output name=specs::$(cat matrix.json)"
+
   cypress-dev:
     runs-on: ubuntu-latest
-    needs: instance-version
+    needs: [instance-version, setup-matrix]
     strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving the Dashboard hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4, 5]
+        spec-group: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+    env:
+      SHOULD_RECORD: ${{ contains(github.event.head_commit.message, '[e2e record]') || contains(join(github.event.pull_request.labels.*.name), 'e2e record') }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
 
+      - name: Set Cypress Environment Variables
+        run: |
+          echo "CYPRESS_GROUP=e2e-chrome-parallel-dev-${{ matrix.spec-group.id }}" >> $GITHUB_ENV
+          echo "CYPRESS_TAG=${{ github.event_name }}" >> $GITHUB_ENV
+          echo "CYPRESS_CI_BUILD_ID=${{ github.run_id }}" >> $GITHUB_ENV
+          echo "CI_BUILD_ID=${{ github.run_id }}" >> $GITHUB_ENV
+
+      - name: Debug Environment Variables
+        run: |
+          echo "SHOULD_RECORD=${{ env.SHOULD_RECORD }}"
+          echo "CI Build ID=${{ env.CI_BUILD_ID }}"
+          echo "Computed Group=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}"
+          echo "Computed Tag=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}"
+          echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
+          echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          record: true
-          parallel: true
-          group: e2e-chrome-parallel-dev
+          record: ${{ env.SHOULD_RECORD }}
+          parallel: ${{ env.SHOULD_RECORD }}
+          group: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}
+          tag: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}
+          ci-build-id: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}
+          spec: ${{ join(matrix.spec-group.tests, ',') }}
           browser: chrome
           start: yarn start:forCypress
           wait-on: http://localhost:3000
           wait-on-timeout: 300
         env:
           CI: true
-          CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_dhis2BaseUrl: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}/ca-test-dev
           CYPRESS_dhis2InstanceVersion: ${{ needs.instance-version.outputs.version }}
@@ -193,7 +222,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
-      - uses: dhis2/action-semantic-release@ignore-app-hub-lib
+      - uses: dhis2/action-semantic-release@use-yarn-version-prepare
         with:
           publish-apphub: true
           publish-github: true
