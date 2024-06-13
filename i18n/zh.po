@@ -602,7 +602,7 @@ msgid "Program doesn't exist"
 msgstr "项目不存在"
 
 msgid "Selected program is invalid for selected organisation unit"
-msgstr ""
+msgstr "所选项目对所选组织机构无效"
 
 msgid "Online"
 msgstr "在线"
@@ -770,7 +770,7 @@ msgid "There was an error loading the page"
 msgstr "加载页面时出错"
 
 msgid "Choose an organisation unit to start reporting"
-msgstr ""
+msgstr "选择一个组织机构开始报告"
 
 msgid "No feedback for this event yet"
 msgstr "此事件尚未有任何反馈"
@@ -990,7 +990,7 @@ msgid "Search for a program"
 msgstr "搜索项目"
 
 msgid "Some programs are being filtered by the chosen organisation unit"
-msgstr ""
+msgstr "某些项目正在被所选组织单位过滤"
 
 msgid "Show all programs"
 msgstr "显示所有项目"
@@ -1094,7 +1094,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "在{{programName}}中搜索{{trackedEntityName}}"
 
 msgid "No tracked entity types available"
-msgstr ""
+msgstr "没有可跟踪的实体类型"
 
 msgid "Assigned to"
 msgstr "指派到"
