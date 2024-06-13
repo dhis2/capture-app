@@ -1,3 +1,45 @@
+## [100.68.23](https://github.com/dhis2/capture-app/compare/v100.68.22...v100.68.23) (2024-06-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1b973f7](https://github.com/dhis2/capture-app/commit/1b973f719c3af5621624614faab8f9aa15146190))
+
+## [100.68.22](https://github.com/dhis2/capture-app/compare/v100.68.21...v100.68.22) (2024-06-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17054] handle empty expression value ([#3635](https://github.com/dhis2/capture-app/issues/3635)) ([08291fa](https://github.com/dhis2/capture-app/commit/08291fa83f7d230bdfd3143832deeda08cf30a0c))
+
+## [100.68.21](https://github.com/dhis2/capture-app/compare/v100.68.20...v100.68.21) (2024-06-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17421] Profile Widget Image link navigates to wrong endpoint ([#3648](https://github.com/dhis2/capture-app/issues/3648)) ([bd99432](https://github.com/dhis2/capture-app/commit/bd994323f538ee96f5f34eb4e32df0201ed3098a))
+
+## [100.68.20](https://github.com/dhis2/capture-app/compare/v100.68.19...v100.68.20) (2024-06-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15379] Misaligned Data elements in TET profile ([#3550](https://github.com/dhis2/capture-app/issues/3550)) ([7445ffb](https://github.com/dhis2/capture-app/commit/7445ffb99ee096d352df068b1d7f1420c035e8ba))
+
+## [100.68.19](https://github.com/dhis2/capture-app/compare/v100.68.18...v100.68.19) (2024-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17000] Display translated date labels ([#3611](https://github.com/dhis2/capture-app/issues/3611)) ([a4c4b58](https://github.com/dhis2/capture-app/commit/a4c4b582b77504184f07df4635292e8b66b298f2))
+
+## [100.68.18](https://github.com/dhis2/capture-app/compare/v100.68.17...v100.68.18) (2024-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-16487] Auto-select program and org-unit ([#3604](https://github.com/dhis2/capture-app/issues/3604)) ([2bef69b](https://github.com/dhis2/capture-app/commit/2bef69b2c8ca575e6291c8c6b32a54fa1e4ecc3d))
+
 ## [100.68.17](https://github.com/dhis2/capture-app/compare/v100.68.16...v100.68.17) (2024-06-03)
 
 
