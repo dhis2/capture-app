@@ -1,3 +1,10 @@
+## [100.68.25](https://github.com/dhis2/capture-app/compare/v100.68.24...v100.68.25) (2024-06-14)
+
+
+### Bug Fixes
+
+* [DHIS2-16488] Allow programs with no TET write access ([#3610](https://github.com/dhis2/capture-app/issues/3610)) ([5a1c423](https://github.com/dhis2/capture-app/commit/5a1c42305bbbf4a7603c88afdd7dd25b034e7b03))
+
 ## [100.68.24](https://github.com/dhis2/capture-app/compare/v100.68.23...v100.68.24) (2024-06-14)
 
 
