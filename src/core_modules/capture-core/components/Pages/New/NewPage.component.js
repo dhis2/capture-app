@@ -79,8 +79,13 @@ const NewPagePlain = ({
             {
                 !writeAccess ?
                     <NoWriteAccessMessage
-                        title={i18n.t('New')}
-                        message={i18n.t("You don't have access to create an event in the current selections")}
+                        message={
+                            i18n.t("You don't have access to create a {{trackedEntityName}} in the current selections",
+                                {
+                                    trackedEntityName,
+                                    interpolation: { escapeValue: false },
+                                },
+                            )}
                     />
                     :
                     <OrgUnitFetcher orgUnitId={orgUnitId}>
