@@ -8,7 +8,7 @@ import {
 import '../sharedSteps';
 
 After({ tags: '@with-event-coc-clean-up' }, () => {
-    cy.visit('/#/viewEvent?viewEventId=pFm7eAXCthw');
+    cy.visit('/#/viewEvent?viewEventId=rgWr86qs0sI');
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Edit event')
@@ -19,7 +19,7 @@ After({ tags: '@with-event-coc-clean-up' }, () => {
             cy.get('[data-test="virtualized-select"]')
                 .eq(0)
                 .click()
-                .contains('AIDSRelief Consortium')
+                .contains('CARE International')
                 .click({ force: true });
         });
 
@@ -34,7 +34,7 @@ Given(/^you land on the view event page with event id: (.*)$/, (eventId) => {
 
 Then('the event details page displays the category combination', () => {
     cy.get('[data-test="dataEntrySection-categorycombo"]')
-        .contains('AIDSRelief Consortium');
+        .contains('CARE International');
 });
 
 And('you enable edit mode', () => {
@@ -49,7 +49,7 @@ When('you change the category combination and save', () => {
             cy.get('[data-test="virtualized-select"]')
                 .eq(0)
                 .click()
-                .contains('CARE International')
+                .contains('APHIAplus')
                 .click({ force: true });
         });
 
