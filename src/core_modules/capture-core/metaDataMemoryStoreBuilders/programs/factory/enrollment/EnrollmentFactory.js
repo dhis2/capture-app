@@ -18,7 +18,7 @@ import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './enrollmentFactory.types';
 import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
-import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
+import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment';
 import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
 import {
     FieldElementObjectTypes,

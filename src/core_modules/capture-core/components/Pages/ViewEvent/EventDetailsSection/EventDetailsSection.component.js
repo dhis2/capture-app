@@ -19,6 +19,9 @@ import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWr
 import { OverflowButton } from '../../../Buttons';
 import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
+import {
+    useMetadataForSingleEventForm,
+} from '../../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/hooks/useMetadataForSingleEventForm';
 
 const getStyles = () => ({
     container: {
@@ -77,8 +80,10 @@ const EventDetailsSectionPlain = (props: Props) => {
         programStage,
         eventAccess,
         onBackToAllEvents,
+        programId,
         ...passOnProps } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
+    const { formFoundation } = useMetadataForSingleEventForm({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const queryClient = useQueryClient();
     const supportsChangelog = useFeature(FEATURES.changelogs);
@@ -95,29 +100,28 @@ const EventDetailsSectionPlain = (props: Props) => {
         return error.errorComponent;
     }
 
-    const renderDataEntryContainer = () => {
-        const formFoundation = programStage.stageForm;
-        return (
-            <div className={classes.dataEntryContainer}>
-                {showEditEvent ?
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
-                    <EditEventDataEntry
-                        dataEntryId={dataEntryIds.SINGLE_EVENT}
-                        formFoundation={formFoundation}
-                        orgUnit={orgUnit}
-                        onSaveExternal={onSaveExternal}
-                        {...passOnProps}
-                    /> :
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
-                    <ViewEventDataEntry
-                        dataEntryId={dataEntryIds.SINGLE_EVENT}
-                        formFoundation={formFoundation}
-                        {...passOnProps}
-                    />
-                }
-            </div>
-        );
-    };
+    const renderDataEntryContainer = () => (
+        <div className={classes.dataEntryContainer}>
+            {showEditEvent ?
+            // $FlowFixMe[cannot-spread-inexact] automated comment
+                <EditEventDataEntry
+                    dataEntryId={dataEntryIds.SINGLE_EVENT}
+                    formFoundation={formFoundation}
+                    orgUnit={orgUnit}
+                    onSaveExternal={onSaveExternal}
+                    programId={programId}
+                    {...passOnProps}
+                /> :
+            // $FlowFixMe[cannot-spread-inexact] automated comment
+                <ViewEventDataEntry
+                    dataEntryId={dataEntryIds.SINGLE_EVENT}
+                    formFoundation={formFoundation}
+                    programId={programId}
+                    {...passOnProps}
+                />
+            }
+        </div>
+    );
 
     const renderActionsContainer = () => {
         const canEdit = eventAccess.write;
@@ -167,7 +171,7 @@ const EventDetailsSectionPlain = (props: Props) => {
     };
 
 
-    return orgUnit ? (
+    return orgUnit && !!formFoundation ? (
         <div className={classes.container}>
             <ViewEventSection
                 header={(
