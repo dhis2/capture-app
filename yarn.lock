@@ -2216,7 +2216,15 @@
     "@dhis2/pwa" "10.4.0"
     moment "^2.24.0"
 
-"@dhis2/app-runtime@^3.10.0-alpha.2", "@dhis2/app-runtime@^3.10.2", "@dhis2/app-runtime@^3.9.3":
+"@dhis2/app-adapter@11.4.1":
+  version "11.4.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-adapter/-/app-adapter-11.4.1.tgz#271c5b1b584044712927c74115d1b93674db9384"
+  integrity sha512-l/cHGthfUsaoguUB6L1tEUvjluFr8AlQ7ZRGbBn9LwKuw1mSN5DhtQ5w7qQBM/YW3f/lhCPqVlNmIx7t5sWb3A==
+  dependencies:
+    "@dhis2/pwa" "11.4.1"
+    moment "^2.24.0"
+
+"@dhis2/app-runtime@^3.10.0-alpha.2", "@dhis2/app-runtime@^3.10.2", "@dhis2/app-runtime@^3.10.4", "@dhis2/app-runtime@^3.9.3":
   version "3.10.2"
   resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-3.10.2.tgz#e82639bd68234bdeaf2f6d3c256dcdfcdd267da2"
   integrity sha512-GiftKk8ZTXlPElXAgVJn41Vj6E1vEGTPGrjrqU7j41ZTYsg+tUcCkISNt1woe5l7E+8+y+9Fy4bgqSsBOAEUvg==
@@ -2280,7 +2288,29 @@
     typeface-roboto "^0.0.75"
     typescript "^3.6.3"
 
-"@dhis2/cli-app-scripts@^10.4.0":
+"@dhis2/app-shell@11.4.1":
+  version "11.4.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-shell/-/app-shell-11.4.1.tgz#565bba07c59c97c14358d4becf0b6133ffc9b19e"
+  integrity sha512-hYaCEeeog0u0WLFBhX3cKYhAewxhcUwoBYoc4h8cdg4Si9XpU6KDQzA4DtS2q6padqutlFcqTa6x4ZdDN9HCxw==
+  dependencies:
+    "@dhis2/app-adapter" "11.4.1"
+    "@dhis2/app-runtime" "^3.10.4"
+    "@dhis2/d2-i18n" "^1.1.1"
+    "@dhis2/pwa" "11.4.1"
+    "@dhis2/ui" "^9.4.4"
+    classnames "^2.2.6"
+    moment "^2.29.1"
+    post-robot "^10.0.46"
+    prop-types "^15.7.2"
+    react "^16.8.6"
+    react-dom "^16.8.6"
+    react-scripts "^5.0.1"
+    source-map-explorer "^2.1.0"
+    styled-jsx "^4.0.1"
+    typeface-roboto "^0.0.75"
+    typescript "^3.6.3"
+
+"@dhis2/cli-app-scripts@^10.4.0", "@dhis2/cli-app-scripts@^11.4.1":
   version "10.4.0"
   resolved "https://registry.yarnpkg.com/@dhis2/cli-app-scripts/-/cli-app-scripts-10.4.0.tgz#3a80ccc7c10b0804e8d76f7df40ece48d30d5f17"
   integrity sha512-QMx+5UEEEb0AELzeZ5oZcxb8dv0hpzHS3/ily67oRchVdGB1K1stl0MwQF7CdbCS4ejGtU+2c5ODWFoBD0cWFA==
@@ -2511,6 +2541,17 @@
     workbox-routing "^6.1.5"
     workbox-strategies "^6.1.5"
 
+"@dhis2/pwa@11.4.1":
+  version "11.4.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/pwa/-/pwa-11.4.1.tgz#90a151bc599c7e879b0a774469f540ee1b805e32"
+  integrity sha512-+OiYoKzyAKSBZtSfSPHBsJ1LY/i9Aj/4MwdCNoTLDSGK03H8Fq/TIbu/itY0vzSzXnXMSomoHCH3S8kgS24ysQ==
+  dependencies:
+    idb "^6.0.0"
+    workbox-core "^6.1.5"
+    workbox-precaching "^6.1.5"
+    workbox-routing "^6.1.5"
+    workbox-strategies "^6.1.5"
+
 "@dhis2/ui-constants@9.2.0":
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/@dhis2/ui-constants/-/ui-constants-9.2.0.tgz#47506acaec5e4ce28630519a630a05657d2d29f6"
@@ -2543,7 +2584,7 @@
   resolved "https://registry.yarnpkg.com/@dhis2/ui-icons/-/ui-icons-9.2.0.tgz#bddf5223cabec93c9499281b2181eb165346b639"
   integrity sha512-g9993UGWVLwDcbV+wp3HqrK8AXFu49aped0GpZsQUlGbHIzEl1EgmjiII44N40VbXwVUnqIDmu99wBxpH5Gd+g==
 
-"@dhis2/ui@^8.12.3", "@dhis2/ui@^9.1.1":
+"@dhis2/ui@^8.12.3", "@dhis2/ui@^9.1.1", "@dhis2/ui@^9.4.4":
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/@dhis2/ui/-/ui-9.2.0.tgz#33d474cbc7cd95f8a714e019d6c69e144f77f86b"
   integrity sha512-nhKwW5bmIfQvt3L16PffFO2NsDk9BgYb91vHx06fPgM56UdwGYSejpax8eU29vE9urmHSkijSpnBqY4buZy6Ow==
