@@ -4622,6 +4622,14 @@
   resolved "https://registry.yarnpkg.com/@vercel/ncc/-/ncc-0.34.0.tgz#d0139528320e46670d949c82967044a8f66db054"
   integrity sha512-G9h5ZLBJ/V57Ou9vz5hI8pda/YQX5HQszCs3AmIus3XzsmRn/0Ptic5otD3xVST8QLKk7AMk7AqpsyQGN7MZ9A==
 
+"@vgarciabnz/rule-engine@3.0.0-beta.9":
+  version "3.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@vgarciabnz/rule-engine/-/rule-engine-3.0.0-beta.9.tgz#5dd971ab4b3b97aa927dc1fec8d2b26fa0717f43"
+  integrity sha512-IQ3Snl8otuSAFq7WAQnlpwBSNgJ8y7H+h/Rule9s6UIJLEFOW3iAvKUmcZ6+5yZEpyyUqSEp2bsgjfCUGTtcbg==
+  dependencies:
+    "@js-joda/core" "3.2.0"
+    format-util "^1.0.5"
+
 "@webassemblyjs/ast@1.12.1", "@webassemblyjs/ast@^1.12.1":
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.12.1.tgz#bb16a0e8b1914f979f45864c23819cc3e3f0d4bb"
