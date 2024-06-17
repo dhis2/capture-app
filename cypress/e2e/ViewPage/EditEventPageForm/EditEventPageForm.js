@@ -1,5 +1,4 @@
 import { Given, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
-import '../../sharedSteps';
 
 Given('you open the main page with Ngelehun and antenatal care context', () => {
     cy.visit('#/?programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8');

@@ -2,16 +2,9 @@ import {
     Given,
     When,
     Then,
-    defineStep as And, Before,
+    defineStep as And,
 } from '@badeball/cypress-cucumber-preprocessor';
-import { filterInstanceVersion, shouldClearCookies } from '../support/tagUtils';
 
-Before(function callback() {
-    filterInstanceVersion(() => this.skip());
-    if (shouldClearCookies()) {
-        cy.clearAllCookies();
-    }
-});
 
 Given('you are in the main page with no selections made', () => {
     cy.visit('/#/');

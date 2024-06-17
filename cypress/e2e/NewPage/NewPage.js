@@ -1,7 +1,6 @@
 import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import moment from 'moment';
 import { getCurrentYear } from '../../support/date';
-import '../sharedSteps';
 
 And('you are on the default registration page', () => {
     cy.visit('/#/new');

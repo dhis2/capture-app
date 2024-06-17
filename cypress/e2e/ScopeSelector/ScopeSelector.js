@@ -1,6 +1,5 @@
 import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../support/date';
-import '../sharedSteps';
 
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);

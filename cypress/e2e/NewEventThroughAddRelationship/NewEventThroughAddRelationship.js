@@ -1,6 +1,5 @@
 import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
-import '../sharedSteps';
 
 When('you add data to the form', () => {
     cy.get('[data-test="dataentry-field-occurredAt"]')

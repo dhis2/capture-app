@@ -1,5 +1,4 @@
 import { Given, Then, When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
-import '../sharedSteps';
 
 Given('you are on the default search page', () => {
     cy.visit('/#/search');

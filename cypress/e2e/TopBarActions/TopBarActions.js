@@ -1,5 +1,4 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import '../sharedSteps';
 
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);

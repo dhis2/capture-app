@@ -1,5 +1,4 @@
 import { When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
-import '../sharedSteps';
 
 And('you fill in the first name with values that have duplicates', () => {
     cy.get('[data-test="d2-section"]')
