@@ -92,5 +92,5 @@ When('you change the category combination and save', () => {
 
 Then('the event details page displays the updated category combination', () => {
     cy.get('[data-test="dataEntrySection-categorycombo"]')
-        .contains('CARE International');
+        .contains('APHIAplus');
 });
