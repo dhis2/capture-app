@@ -10,6 +10,7 @@ Feature: User interacts with a single event page view/edit form
     Then you are redirected to the main page and the event status Active is displayed in the list
 
   # Interacting with category combination programs
+  @with-event-coc-clean-up
   Scenario: User views the event details page
     Given you land on the view event page with event id: rgWr86qs0sI
     Then the event details page displays the category combination

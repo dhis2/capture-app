@@ -1,5 +1,30 @@
-import { Given, Then, defineStep as And, After, When } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, Then, defineStep as And, After, When, Before } from '@badeball/cypress-cucumber-preprocessor';
 import '../../sharedSteps';
+
+const cleanUpEvent = () => {
+    cy.visit('/#/viewEvent?viewEventId=rgWr86qs0sI');
+
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Edit event')
+        .click();
+
+    cy.get('[data-test="dataEntrySection-categorycombo"]')
+        .within(() => {
+            cy.get('[data-test="virtualized-select"]')
+                .eq(0)
+                .click()
+                .contains('CARE International')
+                .click({ force: true });
+        });
+
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Save')
+        .click();
+};
+
+After({ tags: '@with-event-coc-clean-up' }, cleanUpEvent);
+
+Before({ tags: '@with-event-coc-clean-up' }, cleanUpEvent);
 
 Given('you open the main page with Ngelehun and antenatal care context', () => {
     cy.visit('#/?programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8');
@@ -39,26 +64,6 @@ Then(/^you are redirected to the main page and the event status (.*) is displaye
     });
 });
 
-After({ tags: '@with-event-coc-clean-up' }, () => {
-    cy.visit('/#/viewEvent?viewEventId=rgWr86qs0sI');
-
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Edit event')
-        .click();
-
-    cy.get('[data-test="dataEntrySection-categorycombo"]')
-        .within(() => {
-            cy.get('[data-test="virtualized-select"]')
-                .eq(0)
-                .click()
-                .contains('CARE International')
-                .click({ force: true });
-        });
-
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Save')
-        .click();
-});
 
 Given(/^you land on the view event page with event id: (.*)$/, (eventId) => {
     cy.visit(`/#/viewEvent?viewEventId=${eventId}`);
