@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
-"PO-Revision-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-18T22:47:46.585Z\n"
+"PO-Revision-Date: 2024-06-18T22:47:46.585Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -984,6 +984,9 @@ msgstr "Could not retrieve metadata. Please try again later."
 
 msgid "The enrollment event data could not be found"
 msgstr "The enrollment event data could not be found"
+
+msgid "Loading"
+msgstr "Loading"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"

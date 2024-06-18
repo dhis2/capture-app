@@ -1,10 +1,11 @@
 // @flow
-import { useIndexedDBQuery } from '../../../../../utils/reactQueryHelpers';
-import { getUserStorageController, userStores } from '../../../../../storageControllers';
+import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
+import { getUserStorageController, userStores } from '../../../../storageControllers';
 
 type Props = {|
     programId: string,
     dataElementIds: Array<string>,
+    stageId?: string,
 |}
 
 const getDataElementsForStage = async ({
@@ -20,9 +21,11 @@ const getDataElementsForStage = async ({
 export const useDataElementsForStage = ({
     programId,
     dataElementIds,
+    stageId,
 }: Props) => {
     const { data, isLoading } = useIndexedDBQuery(
-        ['eventProgram', programId, 'dataElements'],
+        // $FlowFixMe
+        ['eventProgram', programId, 'dataElements', stageId],
         () => getDataElementsForStage({
             dataElementIds,
         }),
