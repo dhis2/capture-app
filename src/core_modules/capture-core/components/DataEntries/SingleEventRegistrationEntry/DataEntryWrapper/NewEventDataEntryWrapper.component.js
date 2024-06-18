@@ -47,7 +47,7 @@ const NewEventDataEntryWrapperPlain = ({
 }: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
     const orgUnitId = useLocationQuery().orgUnitId;
-    const { formFoundation, stage, isLoading } = useMetadataForSingleEventForm({ programId });
+    const { formFoundation, stage } = useMetadataForSingleEventForm({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
     const titleText = useScopeTitleText(programId);
@@ -103,7 +103,6 @@ const NewEventDataEntryWrapperPlain = ({
                     orgUnit={orgUnit}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
-                    isReady={!isLoading}
                 />
                 <EventsList />
             </div>

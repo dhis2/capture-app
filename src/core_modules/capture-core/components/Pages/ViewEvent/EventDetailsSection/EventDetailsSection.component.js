@@ -175,8 +175,11 @@ const EventDetailsSectionPlain = (props: Props) => {
         );
     };
 
+    if (!orgUnit || !formFoundation || isLoading) {
+        return null;
+    }
 
-    return orgUnit && !!formFoundation && !isLoading ? (
+    return (
         <div className={classes.container}>
             <ViewEventSection
                 header={(
@@ -189,7 +192,11 @@ const EventDetailsSectionPlain = (props: Props) => {
                 <div className={classes.dataEntryContainer}>
                     {renderDataEntryContainer()}
                 </div>
-                {showEditEvent && <NoticeBox formId={`${dataEntryIds.SINGLE_EVENT}-${dataEntryKeys.EDIT}`} /> }
+                {showEditEvent && (
+                    <NoticeBox
+                        formId={`${dataEntryIds.SINGLE_EVENT}-${dataEntryKeys.EDIT}`}
+                    />
+                )}
             </ViewEventSection>
             {supportsChangelog && changeLogIsOpen && (
                 <EventChangelogWrapper
@@ -200,7 +207,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                 />
             )}
         </div>
-    ) : null;
+    );
 };
 
 

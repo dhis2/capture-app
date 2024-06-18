@@ -9,7 +9,7 @@ type Props = {|
 
 const getDataElementsForStage = async ({
     dataElementIds,
-}: Props) => {
+}) => {
     const storageController = getUserStorageController();
 
     return storageController.getAll(userStores.DATA_ELEMENTS, {

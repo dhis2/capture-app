@@ -6,7 +6,7 @@ import type
 } from '../../../../storageControllers/cache.types';
 import type {
     DataEntryFormConfig,
-} from '../../../../components/DataEntries';
+} from '../../../../components/DataEntries/common/TeiAndEnrollment';
 
 export type ConstructorInput = {|
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,

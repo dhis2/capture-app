@@ -6,12 +6,12 @@ import type {
 } from '../../../../storageControllers/cache.types';
 import type {
     DataEntryFormConfig,
-} from '../../../../components/DataEntries';
+} from '../../../../components/DataEntries/common/TeiAndEnrollment';
 
 export type ConstructorInput = {|
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
-    dataEntryFormConfig: ?DataEntryFormConfig,
+    dataEntryFormConfig?: ?DataEntryFormConfig,
     locale: ?string,
     minorServerVersion: number,
 |};

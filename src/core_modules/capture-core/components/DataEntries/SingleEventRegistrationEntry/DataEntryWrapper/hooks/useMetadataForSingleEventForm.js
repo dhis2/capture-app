@@ -69,11 +69,10 @@ export const useMetadataForSingleEventForm = ({
     const { locale } = useUserLocale();
     const { serverVersion: { minor } } = useConfig();
 
-    const cachedDataElementIds = useMemo(() => program && program
+    const cachedDataElementIds = useMemo(() => (program && program
         .programStages[0]
         .programStageDataElements
-        .map(dataElement => dataElement.dataElementId)
-    , [program]);
+        .map(dataElement => dataElement.dataElementId)) || [], [program]);
 
     const { dataElements } = useDataElementsForStage({
         programId,
@@ -85,11 +84,15 @@ export const useMetadataForSingleEventForm = ({
         selectedScopeId: programId,
     });
 
-    const { data: programStage, isLoading } = useIndexedDBQuery(
+    const { data: programStage } = useIndexedDBQuery(
+        // $FlowFixMe
         ['formFoundation', program?.id],
+        // $FlowFixMe
         () => buildProgramStage({
+            // $FlowFixMe
             cachedProgramStage: program.programStages[0],
             programId,
+            // $FlowFixMe
             cachedOptionSets: optionSets,
             locale,
             minorServerVersion: minor,
@@ -99,7 +102,7 @@ export const useMetadataForSingleEventForm = ({
             cacheTime: Infinity,
             staleTime: Infinity,
             enabled: !!program
-                && programId
+                && !!programId
                 && !!optionSets
                 && !!locale
                 && !!minor
@@ -110,6 +113,5 @@ export const useMetadataForSingleEventForm = ({
     return {
         formFoundation: programStage?.stageForm,
         stage: programStage,
-        isLoading,
     };
 };

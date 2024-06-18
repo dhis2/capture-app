@@ -7,7 +7,6 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirst
 import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import type {
     CachedProgramStageDataElement,
-    CachedSectionDataElements,
     CachedProgramStageSection,
     CachedProgramStage,
     CachedProgramStageDataElementsAsObject,
@@ -67,7 +66,7 @@ export class ProgramStageFactory {
 
         if (sectionSpecs.dataElements) {
             // $FlowFixMe
-            await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement: CachedSectionDataElements) => {
+            await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement) => {
                 if (sectionDataElement.type === FormFieldTypes.PLUGIN) {
                     const attributes = sectionDataElement.fieldMap
                         .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
@@ -217,6 +216,7 @@ export class ProgramStageFactory {
                 return acc;
             }, {});
 
+            // $FlowFixMe
             await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                 const formElements = formConfigSection.elements.reduce((acc, element) => {
                     if (element.type === FormFieldTypes.PLUGIN) {
@@ -259,7 +259,7 @@ export class ProgramStageFactory {
                         {
                             id: formConfigSection.id,
                             displayName: metadataSection?.displayName || formConfigSection.name,
-                            displayDescription: metadataSection?.displayDescription,
+                            displayDescription: metadataSection?.displayDescription || '',
                             dataElements: formElements,
                         },
                     );
