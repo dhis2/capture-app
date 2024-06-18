@@ -1,3 +1,31 @@
+## [100.68.26](https://github.com/dhis2/capture-app/compare/v100.68.25...v100.68.26) (2024-06-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([97714a4](https://github.com/dhis2/capture-app/commit/97714a4992f886412f68386ecb35826d89486db9))
+
+## [100.68.25](https://github.com/dhis2/capture-app/compare/v100.68.24...v100.68.25) (2024-06-14)
+
+
+### Bug Fixes
+
+* [DHIS2-16488] Allow programs with no TET write access ([#3610](https://github.com/dhis2/capture-app/issues/3610)) ([5a1c423](https://github.com/dhis2/capture-app/commit/5a1c42305bbbf4a7603c88afdd7dd25b034e7b03))
+
+## [100.68.24](https://github.com/dhis2/capture-app/compare/v100.68.23...v100.68.24) (2024-06-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([197d91f](https://github.com/dhis2/capture-app/commit/197d91faff1f3c68c163e0e42d60139286e9af4c))
+
+## [100.68.23](https://github.com/dhis2/capture-app/compare/v100.68.22...v100.68.23) (2024-06-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1b973f7](https://github.com/dhis2/capture-app/commit/1b973f719c3af5621624614faab8f9aa15146190))
+
 ## [100.68.22](https://github.com/dhis2/capture-app/compare/v100.68.21...v100.68.22) (2024-06-06)
 
 

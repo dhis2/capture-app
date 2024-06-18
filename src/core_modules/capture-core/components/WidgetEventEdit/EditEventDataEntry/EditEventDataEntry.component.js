@@ -47,7 +47,6 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers/';
-import { getProgramThrowIfNotFound, EventProgram } from '../../../metaData';
 import type { UserFormField } from '../../FormFields/UserField';
 
 const tabMode = Object.freeze({
@@ -349,13 +348,6 @@ const getCategoryOptionsSettingsFn = () => {
     return categoryOptionsSettings;
 };
 
-const AOCSettings = {
-    hideAOC: ({ programId }) => {
-        const program = getProgramThrowIfNotFound(programId);
-        return program instanceof EventProgram;
-    },
-};
-
 const saveHandlerConfig = {
     onIsCompleting: (props: Object) => props.completeDataEntryFieldValue === 'true',
     onFilterProps: (props: Object) => {
@@ -364,7 +356,7 @@ const saveHandlerConfig = {
     },
 };
 
-const AOCFieldBuilderHOC = withAOCFieldBuilder(AOCSettings)(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
+const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
@@ -411,7 +403,7 @@ type Props = {
 
 type DataEntrySection = {
     placement: $Values<typeof placements>,
-    name: string,
+    name?: string,
 };
 
 type State = {
@@ -423,13 +415,12 @@ const dataEntrySectionDefinitions = {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
     },
+    [AOCsectionKey]: {
+        placement: placements.TOP,
+    },
     [dataEntrySectionNames.STATUS]: {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
-    },
-    [AOCsectionKey]: {
-        placement: placements.TOP,
-        name: '',
     },
 };
 

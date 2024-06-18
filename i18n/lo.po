@@ -789,7 +789,7 @@ msgid "Program stage is invalid"
 msgstr "ຂັ້ນຕອນໂປແກຼມບໍ່ຖືກຕ້ອງ"
 
 msgid "Report"
-msgstr "ລາຍງານ"
+msgstr "ການລາຍງານ"
 
 msgid "Schedule"
 msgstr "ກຳນົດເວລາ"
