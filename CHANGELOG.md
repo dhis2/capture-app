@@ -1,3 +1,22 @@
+# [100.69.0](https://github.com/dhis2/capture-app/compare/v100.68.26...v100.69.0) (2024-06-18)
+
+
+### Bug Fixes
+
+* [DHIS2-17115] Translatable plugin titles ([#3634](https://github.com/dhis2/capture-app/issues/3634)) ([9902ff0](https://github.com/dhis2/capture-app/commit/9902ff0cf5c3157596cdbd26542a53c5319ee2a2))
+
+
+### Features
+
+* [DHIS2-16293][DHIS2-16294] Category combination in event program forms ([#3642](https://github.com/dhis2/capture-app/issues/3642)) ([8b0d63d](https://github.com/dhis2/capture-app/commit/8b0d63d50eb33675f300ef50271b1b202c7f6387))
+
+## [100.68.26](https://github.com/dhis2/capture-app/compare/v100.68.25...v100.68.26) (2024-06-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([97714a4](https://github.com/dhis2/capture-app/commit/97714a4992f886412f68386ecb35826d89486db9))
+
 ## [100.68.25](https://github.com/dhis2/capture-app/compare/v100.68.24...v100.68.25) (2024-06-14)
 
 

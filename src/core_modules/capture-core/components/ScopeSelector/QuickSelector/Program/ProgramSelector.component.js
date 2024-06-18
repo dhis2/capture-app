@@ -30,6 +30,7 @@ type Props = {
     selectedProgramId?: string,
     selectedOrgUnitId?: string,
     selectedCategories: Object,
+    formIsOpen: boolean,
     classes: Object,
 };
 
@@ -42,6 +43,7 @@ const ProgramSelectorPlain = ({
     selectedProgramId,
     selectedOrgUnitId,
     selectedCategories,
+    formIsOpen,
     classes,
 }: Props) => {
     const [open, setOpen] = useState(false);
@@ -57,6 +59,7 @@ const ProgramSelectorPlain = ({
         if (selectedProgram?.categoryCombination) {
             return Array.from(selectedProgram.categoryCombination.categories.values()).map(category => (
                 <CategorySelector
+                    key={category.id}
                     category={category}
                     selectedCategoryName={
                         selectedCategories && selectedCategories[category.id]
@@ -66,6 +69,7 @@ const ProgramSelectorPlain = ({
                     onSelect={option => handleSetCatergoryCombo && handleSetCatergoryCombo(option, category.id)}
                     onClearSelectionClick={() => onResetCategoryOption(category.id)}
                     selectedOrgUnitId={selectedOrgUnitId}
+                    displayOnly={formIsOpen}
                 />
             ));
         }

@@ -17,6 +17,7 @@ const getApiCategoriesArgument = (categories: ?{ [id: string]: string}, serverMi
     return {
         attributeCategoryOptions: Object
             .keys(categories)
+
             .map(key => categories[key])
             .join(useNewSeparator ? ',' : ';'),
     };

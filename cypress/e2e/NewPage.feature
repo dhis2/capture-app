@@ -1,6 +1,5 @@
 Feature: User creates a new entries from the registration page
 
-
   Scenario: Viewing the registration page without any selections
     Given you are on the default registration page
     Then there should be informative message explaining you need to select an organisation unit
@@ -14,14 +13,6 @@ Feature: User creates a new entries from the registration page
     And you fill the WHO RMNCH program registration form with its required unique values
     And you click the save person submit button
     Then you see the enrollment event Edit page
-
-  Scenario: Viewing the registration page with incomplete program categories selection
-    Given you are in the main page with no selections made
-    And you select org unit
-    And you select the Contraceptives Voucher Program
-    When you click the Create new button
-    Then you are navigated to the Contraceptives Voucher Program registration page with program selected
-    And there should be informative message explaining you need to complete your selections
 
   Scenario: Viewing the registration page with organisation unit selected
     Given you are on the default registration page
@@ -69,16 +60,6 @@ Feature: User creates a new entries from the registration page
     Then you are navigated to the Child Programme registration page with program selected
     And you see a registration form for the Child Programme
     And you have Child Programme selected
-
-  Scenario: Navigating to registration page after selecting program category
-    Given you are in the main page with no selections made
-    And you select org unit
-    And you select the Contraceptives Voucher Program
-    When you click the Create new button
-    Then you are navigated to the Contraceptives Voucher Program registration page with program selected
-    And there should be informative message explaining you need to complete your selections
-    When you select the first category
-    Then you see the registration form for the specific category
 
   Scenario: Navigating to registration page from view single event page
     Given you are in the main page with no selections made
@@ -231,8 +212,39 @@ Feature: User creates a new entries from the registration page
   And you click the location button
   Then the map opens
 
-  Scenario: New focus area without enrollment 
+  Scenario: New focus area without enrollment
   Given you are in the registration page with Ngelehun CHC org unit selected
   And you select Focus area from the available tracked entity types
   And the user clicks the element containing the text: Choose area on map
   Then the map opens
+
+## New event in program with category combination
+
+  Scenario: Viewing the registration page with incomplete program categories selection
+    Given you are in the main page with no selections made
+    And you select org unit
+    And you select the Contraceptives Voucher Program
+    When you click the Create new button
+    Then you are navigated to the Contraceptives Voucher Program registration page with program selected
+    And there should be informative message explaining you need to complete your selections
+
+  Scenario: Navigating to registration page after selecting program category
+    Given you are in the main page with no selections made
+    And you select org unit
+    And you select the Contraceptives Voucher Program
+    When you click the Create new button
+    Then you are navigated to the Contraceptives Voucher Program registration page with program selected
+    And there should be informative message explaining you need to complete your selections
+    When you select the first category
+    Then you see the registration form for the specific category
+
+  Scenario: New event in program with category combination > The form is prefilled with the selected category combination
+    Given you are in the Contreceptive Voucher Program registration page
+    When you select the first category
+    Then the form is prefilled with the selected category combination
+
+  Scenario: New event in program with category combination > Submitting the form with empty category combination throws validation error
+    Given you are in the Contreceptive Voucher Program registration page
+    And you select the first category
+    When you deselect the category from the form
+    Then you see a validation error on category combination

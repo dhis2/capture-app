@@ -19,9 +19,16 @@ type TopBarProps = {
     programId?: string,
     orgUnitId?: string,
     selectedCategories?: any,
+    formIsOpen: boolean,
 };
 
-export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInteractionInProgress }: TopBarProps) => {
+export const TopBar = ({
+    programId,
+    orgUnitId,
+    selectedCategories,
+    isUserInteractionInProgress,
+    formIsOpen,
+}: TopBarProps) => {
     const dispatch = useDispatch();
     const { resetViewEventId } = useResetViewEventId();
     const { reset } = useReset();
@@ -54,6 +61,7 @@ export const TopBar = ({ programId, orgUnitId, selectedCategories, isUserInterac
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}
             isUserInteractionInProgress={isUserInteractionInProgress}
+            formIsOpen={formIsOpen}
             onStartAgain={() => reset()}
         >
             <TopBarActions

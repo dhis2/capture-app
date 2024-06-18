@@ -25,6 +25,7 @@ type TopBarProps = {
     trackedEntityName?: string,
     teiDisplayName?: string,
     isUserInteractionInProgress: boolean,
+    formIsOpen: boolean,
 };
 
 export const TopBar = ({
@@ -34,6 +35,7 @@ export const TopBar = ({
     isUserInteractionInProgress,
     trackedEntityName = '',
     teiDisplayName = '',
+    formIsOpen,
 }: TopBarProps) => {
     const dispatch = useDispatch();
     const { setProgramId } = useSetProgramId();
@@ -78,6 +80,7 @@ export const TopBar = ({
             onResetOrgUnitId={() => resetOrgUnitId()}
             isUserInteractionInProgress={isUserInteractionInProgress}
             onStartAgain={() => reset()}
+            formIsOpen={formIsOpen}
         >
             {teiId && (
                 <SingleLockedSelect

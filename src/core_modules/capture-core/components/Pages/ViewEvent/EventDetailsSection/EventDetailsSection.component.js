@@ -22,6 +22,8 @@ import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import {
     useMetadataForSingleEventForm,
 } from '../../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/hooks/useMetadataForSingleEventForm';
+import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 
 const getStyles = () => ({
     container: {
@@ -56,9 +58,10 @@ const getStyles = () => ({
 type Props = {
     showEditEvent: ?boolean,
     eventId: string,
-    onOpenEditEvent: (orgUnit: Object) => void,
+    onOpenEditEvent: (orgUnit: Object, programCategory: ?ProgramCategory) => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
+    programId: string,
     onBackToAllEvents: () => {},
     classes: {
         container: string,
@@ -81,10 +84,12 @@ const EventDetailsSectionPlain = (props: Props) => {
         eventAccess,
         onBackToAllEvents,
         programId,
-        ...passOnProps } = props;
+        ...passOnProps
+    } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
     const { formFoundation } = useMetadataForSingleEventForm({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const { programCategory, isLoading } = useCategoryCombinations(programId);
     const queryClient = useQueryClient();
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
@@ -127,7 +132,7 @@ const EventDetailsSectionPlain = (props: Props) => {
         const canEdit = eventAccess.write;
         return (
             <div className={classes.actionsContainer}>
-                {!showEditEvent &&
+                {!showEditEvent && !isLoading &&
                 <div
                     className={classes.editButtonContainer}
                 >
@@ -137,7 +142,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                     >
                         <Button
                             className={classes.button}
-                            onClick={() => onOpenEditEvent(orgUnit)}
+                            onClick={() => onOpenEditEvent(orgUnit, programCategory)}
                             disabled={!canEdit}
                             secondary
                             small
@@ -171,7 +176,7 @@ const EventDetailsSectionPlain = (props: Props) => {
     };
 
 
-    return orgUnit && !!formFoundation ? (
+    return orgUnit && !!formFoundation && !isLoading ? (
         <div className={classes.container}>
             <ViewEventSection
                 header={(

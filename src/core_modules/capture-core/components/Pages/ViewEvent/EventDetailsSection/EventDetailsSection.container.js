@@ -5,6 +5,7 @@ import { EventDetailsSection } from './EventDetailsSection.component';
 import {
     startShowEditEventDataEntry,
 } from './eventDetails.actions';
+import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 
 const mapStateToProps = (state: ReduxState) => ({
     showEditEvent: state.viewEventPage.eventDetailsSection && state.viewEventPage.eventDetailsSection.showEditEvent,
@@ -13,8 +14,8 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
-    onOpenEditEvent: (orgUnit: OrgUnit) => {
-        dispatch(startShowEditEventDataEntry(orgUnit));
+    onOpenEditEvent: (orgUnit: OrgUnit, programCategory: ?ProgramCategory) => {
+        dispatch(startShowEditEventDataEntry(orgUnit, programCategory));
     },
 });
 
