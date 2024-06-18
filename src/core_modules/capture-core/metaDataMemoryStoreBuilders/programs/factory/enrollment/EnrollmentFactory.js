@@ -300,7 +300,7 @@ export class EnrollmentFactory {
 
                         section = await this._buildSection(
                             attributes,
-                            sectionMetadata?.displayFormName ?? formConfigSection.name ?? i18n.t('Profile'),
+                            formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
                             formConfigSection.id,
                         );
                         section && enrollmentForm.addSection(section);
