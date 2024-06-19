@@ -2,29 +2,26 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-# Enrollment Plugins
+# Manual setup (Advanced)
 
 ---
 :::warning Experimental feature
-The plugin framework is currently an experimental feature and is subject to change.
-We are working on improving both the technology and the way you use it. We will provide more documentation and examples as we progress.
+We discourage setting up plugins manually, as it is a complex process that can lead to errors.
+We recommend using the Tracker Configurator App to set up plugins. This will ensure that the plugins are correctly configured and that they work as expected.
 :::
 
 ## Introduction
-
-The Capture app offers a way to extend the enrollment pages with custom layouts or plugins. This allows you to customize the layout of the enrollment pages to fit your needs.
 
 To start using this feature, you need to provide a configuration object that describes the layout of the page. This configuration object is stored in the data store and is used to render the page.
 Each enrollment page has a separate key and config in the data store.
 When booting the capture application, we will look in the dataStore for these keys, each mapping to a page in the Enrollment Pages (Dashboard, Add Event and Edit Event):
 
-We're assuming that you have read through the [prerequisites](./getting-started.md#prerequisites) page, and that you have already set up the data store in your DHIS2 instance.
-If you haven't done this yet, please go back and complete the steps before moving on.
+We assume that you will already have these three keys under the `capture` namespace in the datastore. If you do not have them, please create them before proceeding.
 
-| Page | Key |
-| --- | --- |
-| Enrollment Dashboard | `enrollmentOverviewLayout` |
-| Enrollment Add Event | `enrollmentEventNewLayout` |
+| Page                  | Key                         |
+|-----------------------|-----------------------------|
+| Enrollment Dashboard  | `enrollmentOverviewLayout`  |
+| Enrollment Add Event  | `enrollmentEventNewLayout`  |
 | Enrollment Edit Event | `enrollmentEventEditLayout` |
 
 ## Default configuration

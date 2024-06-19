@@ -1,46 +1,19 @@
 ---
-id: form-field-plugins
-title: Form Field Plugins
+id: manual-setup
+title: Manual setup (Advanced)
 ---
 
 ---
 :::warning Experimental feature
-The plugin framework is currently an experimental feature and is subject to change.
-We are working on improving both the technology and the way you use it. We will provide more documentation and examples as we progress.
-:::
-
-[//]: # (A form field plugin is a type of plugin that gets injected into the form shown in the Capture app.)
-[//]: # (It is used as a way to extend the form with custom fields or functionality.)
-[//]: # (This can be used to add custom fields, or to add custom validation or custom behavior to the form.)
-[//]: # (Everything in the form is sandboxed so that the plugin can only interact with the fields that are configured in the data store.)
-[//]: # (We provide both metadata and data for these configured fields, and the plugin can interact with these fields in a way that is similar to how the app interacts with the fields.)
-[//]: # (This means that the plugin can read and write data to the fields, and it can also listen to changes in the fields and react to these changes.)
-[//]: # (To define a Form Field Plugin, you need to define a plugin in the data store and download the plugin from the App Management app.)
-
-## Introduction
-Form Field Plugins are a type of plugin in the Capture app that are designed to extend the functionality of our native forms.
-They are injected directly into the form and can be used for a variety of purposes, such as: 
-1. Adding custom fields
-2. Fetching data from external sources
-3. Custom validations
-4. Whatever you can imagine!
-
-:::info Limitations
-Plugins are just React code. This means there are very few limitations to what you can build. In general; anything you can build in a React app, you can build as a plugin.
+We discourage setting up plugins manually, as it is a complex process that can lead to errors.
+We recommend using the Tracker Configurator App to set up plugins. This will ensure that the plugins are correctly configured and that they work as expected.
 :::
 
 ## Configuring the data store
 
-The plugin is running inside a sandboxed environment, meaning that the plugin can only interact with the fields and values that it is given access to.
-It does not have access to the entire form, and it cannot interact with any other part of the app or the system, unless you explicitly allow it to do so.
-Because of this security measure, you will have to define a configuration file that explains which fields and data it should have access to.
-
-We're assuming that you have read through the [prerequisites](./getting-started.md#prerequisites) page, and that you have already set up the data store in your DHIS2 instance.
-If you haven't done this yet, please go back and complete the steps before moving on.
-
 Make sure you have a key called `dataEntryForms` in your capture namespace. Your data store management app will look something like this:
 
-![Data store management app](./resources/data-store-management-data-entry-forms-empty.png)
+![Data store management app](../resources/data-store-management-data-entry-forms-empty.png)
 
 
 ## Defining a form configuration
@@ -131,7 +104,7 @@ This is the ID of the context that the form is being used in. In this case, it i
 :::info
 If you have followed the steps correctly, your Capture app form should look something like this:
 
-![Capture form without plugins](./resources/capture-form-without-plugins.png)
+![Capture form without plugins](../resources/capture-form-without-plugins.png)
 :::
 
 ## Adding a plugin to the form
@@ -233,7 +206,7 @@ There is no limit to how many fields you can map, and you can currently use to t
 :::
 
 4. **Great!** Now you have added a plugin to your form. If you have followed the steps correctly, your Capture app form should look something like this:
-![Capture form with plugins](./resources/capture-form-with-plugin.png)
+![Capture form with plugins](../resources/capture-form-with-plugin.png)
 
 ## Examples
 
