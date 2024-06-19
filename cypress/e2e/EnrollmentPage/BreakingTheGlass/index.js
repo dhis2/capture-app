@@ -9,8 +9,8 @@ Given('the tei created by this test is cleared from the database', () => {
             const apiTrackedEntities = body.trackedEntities || body.instances || [];
             return apiTrackedEntities.forEach(({ trackedEntity }) =>
                 cy
-                    .buildApiUrl('trackedEntityInstances', trackedEntity)
-                    .then(trackedEntityUrl => cy.request('DELETE', trackedEntityUrl)),
+                    .buildApiUrl('tracker?async=false&importStrategy=DELETE')
+                    .then(trackedEntityUrl => cy.request('POST', trackedEntityUrl, { trackedEntities: [{ trackedEntity }] })),
             );
         });
 });

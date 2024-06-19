@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2024\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
@@ -626,10 +626,8 @@ msgstr "No se pudo obtener la unidad organizativa"
 msgid "Program doesn't exist"
 msgstr "El programa no existe"
 
-msgid "Selected program is invalid for selected registering unit"
+msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-"El programa seleccionado no es válido para la unidad de registro "
-"seleccionada"
 
 msgid "Online"
 msgstr "En línea"
@@ -815,8 +813,8 @@ msgstr "Hubo un error al abrir la página"
 msgid "There was an error loading the page"
 msgstr "Hubo un error al cargar la página"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Elija una unidad de registro para comenzar a informar"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
 
 msgid "No feedback for this event yet"
 msgstr ""
@@ -1030,10 +1028,7 @@ msgstr "Añadir relación"
 msgid "No results found for "
 msgstr "No se encontraron resultados para"
 
-msgid "Registering unit"
-msgstr "Unidad de registro"
-
-msgid "Choose a registering unit"
+msgid "Choose an organisation unit"
 msgstr ""
 
 msgid "Clear selection"
@@ -1045,10 +1040,8 @@ msgstr ""
 msgid "Search for a program"
 msgstr ""
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
-"Algunos programas están siendo filtrados por la unidad de registro "
-"seleccionada."
 
 msgid "Show all programs"
 msgstr "Mostrar todos los programas"
@@ -1150,6 +1143,9 @@ msgid "Create new event"
 msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "No tracked entity types available"
 msgstr ""
 
 msgid "Assigned to"

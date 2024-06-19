@@ -19,6 +19,8 @@ import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWr
 import { OverflowButton } from '../../../Buttons';
 import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
+import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 
 const getStyles = () => ({
     container: {
@@ -53,9 +55,10 @@ const getStyles = () => ({
 type Props = {
     showEditEvent: ?boolean,
     eventId: string,
-    onOpenEditEvent: (orgUnit: Object) => void,
+    onOpenEditEvent: (orgUnit: Object, programCategory: ?ProgramCategory) => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
+    programId: string,
     onBackToAllEvents: () => {},
     classes: {
         container: string,
@@ -76,10 +79,13 @@ const EventDetailsSectionPlain = (props: Props) => {
         showEditEvent,
         programStage,
         eventAccess,
+        programId,
         onBackToAllEvents,
-        ...passOnProps } = props;
+        ...passOnProps
+    } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const { programCategory, isLoading } = useCategoryCombinations(programId);
     const queryClient = useQueryClient();
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
@@ -106,12 +112,14 @@ const EventDetailsSectionPlain = (props: Props) => {
                         formFoundation={formFoundation}
                         orgUnit={orgUnit}
                         onSaveExternal={onSaveExternal}
+                        programId={programId}
                         {...passOnProps}
                     /> :
                     // $FlowFixMe[cannot-spread-inexact] automated comment
                     <ViewEventDataEntry
                         dataEntryId={dataEntryIds.SINGLE_EVENT}
                         formFoundation={formFoundation}
+                        programId={programId}
                         {...passOnProps}
                     />
                 }
@@ -123,7 +131,7 @@ const EventDetailsSectionPlain = (props: Props) => {
         const canEdit = eventAccess.write;
         return (
             <div className={classes.actionsContainer}>
-                {!showEditEvent &&
+                {!showEditEvent && !isLoading &&
                 <div
                     className={classes.editButtonContainer}
                 >
@@ -133,7 +141,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                     >
                         <Button
                             className={classes.button}
-                            onClick={() => onOpenEditEvent(orgUnit)}
+                            onClick={() => onOpenEditEvent(orgUnit, programCategory)}
                             disabled={!canEdit}
                             secondary
                             small
@@ -167,7 +175,7 @@ const EventDetailsSectionPlain = (props: Props) => {
     };
 
 
-    return orgUnit ? (
+    return orgUnit && !isLoading ? (
         <div className={classes.container}>
             <ViewEventSection
                 header={(
