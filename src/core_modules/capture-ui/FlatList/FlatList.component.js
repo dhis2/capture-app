@@ -5,10 +5,16 @@ import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import type { Props } from './flatList.types';
 
+const itemStyles = {
+    overflow: 'hidden',
+    wordWrap: 'break-word',
+    textOverflow: 'ellipsis',
+    hyphens: 'auto',
+};
 
 const styles = {
     itemRow: {
-        borderBottom: `1px solid${colors.grey300}`,
+        borderBottom: `1px solid ${colors.grey300}`,
         display: 'flex',
         fontSize: '14px',
         lineHeight: '19px',
@@ -18,8 +24,15 @@ const styles = {
         },
     },
     itemKey: {
-        width: 128,
+        flex: '0 0 auto',
+        width: '128px',
         color: colors.grey600,
+        marginRight: '20px',
+        ...itemStyles,
+    },
+    itemValue: {
+        flex: 1,
+        ...itemStyles,
     },
 };
 
@@ -30,19 +43,16 @@ const FlatListPlain = ({ list, classes, dataTest }: Props) => {
             key={item.reactKey}
             className={cx(classes.itemRow, { isLastItem: item.reactKey === lastItemKey })}
         >
-            <div className={classes.itemKey}>{item.key}</div>
-            <div>{item.value}</div>
+            <div className={classes.itemKey}>{item.key}:</div>
+            <div className={classes.itemValue}>{item.value}</div>
         </div>
     );
 
     return (
-        <div
-            data-test={dataTest}
-        >
+        <div data-test={dataTest}>
             {list.map(item => renderItem(item))}
         </div>
     );
 };
-
 
 export const FlatList: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(FlatListPlain);

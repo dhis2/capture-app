@@ -27,9 +27,9 @@ Then('the event should be sent to the server successfully', () => {
             expect(result.response.statusCode).to.equal(200);
             // clean up
             const id = result.response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
-            cy.buildApiUrl('events', id)
+            cy.buildApiUrl('tracker?async=false&importStrategy=DELETE')
                 .then((eventUrl) => {
-                    cy.request('DELETE', eventUrl);
+                    cy.request('POST', eventUrl, { events: [{ event: id }] });
                 });
         });
 });
@@ -87,9 +87,9 @@ Then('the data should be sent to the server successfully', () => {
         .then(({ response }) => {
             expect(response.statusCode).to.equal(200);
             const relationshipId = response.body.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
-            cy.buildApiUrl('relationships', relationshipId)
+            cy.buildApiUrl('tracker?async=false&importStrategy=DELETE')
                 .then((relationshipUrl) => {
-                    cy.request('DELETE', relationshipUrl);
+                    cy.request('POST', relationshipUrl, { relationships: [{ relationship: relationshipId }] });
                 });
         })
         .then(() => {
@@ -97,9 +97,9 @@ Then('the data should be sent to the server successfully', () => {
                 .then(({ response }) => {
                     expect(response.statusCode).to.equal(200);
                     const trackedEntityId = response.body.bundleReport.typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
-                    cy.buildApiUrl('trackedEntityInstances', trackedEntityId)
+                    cy.buildApiUrl('tracker?async=false&importStrategy=DELETE')
                         .then((trackedEntityUrl) => {
-                            cy.request('DELETE', trackedEntityUrl);
+                            cy.request('POST', trackedEntityUrl, { trackedEntities: [{ trackedEntity: trackedEntityId }] });
                         });
                 });
 
@@ -107,9 +107,9 @@ Then('the data should be sent to the server successfully', () => {
                 .then(({ response }) => {
                     expect(response.statusCode).to.equal(200);
                     const eventId = response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
-                    cy.buildApiUrl('events', eventId)
+                    cy.buildApiUrl('tracker?async=false&importStrategy=DELETE')
                         .then((eventUrl) => {
-                            cy.request('DELETE', eventUrl);
+                            cy.request('POST', eventUrl, { events: [{ event: eventId }] });
                         });
                 });
         });
@@ -151,9 +151,9 @@ Then('the event and relationship should be sent to the server successfully', () 
         .then(({ response }) => {
             expect(response.statusCode).to.equal(200);
             const relationshipId = response.body.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
-            cy.buildApiUrl('relationships', relationshipId)
+            cy.buildApiUrl('tracker?async=false&importStrategy=DELETE')
                 .then((relationshipUrl) => {
-                    cy.request('DELETE', relationshipUrl);
+                    cy.request('POST', relationshipUrl, { relationships: [{ relationship: relationshipId }] });
                 });
         })
         .then(() => {
@@ -161,9 +161,9 @@ Then('the event and relationship should be sent to the server successfully', () 
                 .then(({ response }) => {
                     expect(response.statusCode).to.equal(200);
                     const eventId = response.body.bundleReport.typeReportMap.EVENT.objectReports[0].uid;
-                    cy.buildApiUrl('events', eventId)
+                    cy.buildApiUrl('tracker?async=false&importStrategy=DELETE')
                         .then((eventUrl) => {
-                            cy.request('DELETE', eventUrl);
+                            cy.request('POST', eventUrl, { events: [{ event: eventId }] });
                         });
                 });
         });

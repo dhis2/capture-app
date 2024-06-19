@@ -81,7 +81,7 @@ const convert = (() => {
 })();
 
 const fieldsParam = 'id,displayName,displayShortName,description,programType,style,displayFrontPageList,useFirstStageDuringRegistration,onlyEnrollOnce,' +
-'minAttributesRequiredToSearch,enrollmentDateLabel,incidentDateLabel,' +
+'displayIncidentDateLabel,displayEnrollmentDateLabel,minAttributesRequiredToSearch,' +
 'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
 'dataEntryForm[id,htmlCode],' +
 'access[*],' +
