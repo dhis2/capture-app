@@ -3,6 +3,9 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import {
     actionTypes as teiSearchActionTypes,
 } from '../../components/TeiSearch/actions/teiSearch.actions';
+import {
+    actionTypes as teiSearchActionTypesRelationshipsWidget,
+} from '../../components/Pages/common/TEIRelationshipsWidget/TeiSearch/actions/teiSearch.actions';
 
 import {
     actionTypes as teiSearchOrgUnitActionTypes,
@@ -50,6 +53,59 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.SEARCH_TEI_FAILED]: (state, action) => {
+        const searchId = action.payload.searchId;
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                searchResults: {
+                    ...state[searchId].searchResults,
+                    resultsLoading: false,
+                    teis: [],
+                    currentPage: null,
+                },
+            },
+        };
+    },
+    [teiSearchActionTypesRelationshipsWidget.INITIALIZE_TEI_SEARCH]: (state, action) => ({
+        ...state,
+        [action.payload.searchId]: {
+            selectedOrgUnitScope: 'ACCESSIBLE',
+            openSearchGroupSection: '0',
+            selectedProgramId: action.payload.programId,
+            selectedTrackedEntityTypeId: action.payload.trackedEntityTypeId,
+        },
+    }),
+
+    [teiSearchActionTypesRelationshipsWidget.REQUEST_SEARCH_TEI]: (state, action) => ({
+        ...state,
+        [action.payload.searchId]: {
+            ...state[action.payload.searchId],
+            searchResults: {
+                formId: action.payload.formId,
+                searchGroupId: action.payload.searchGroupId,
+                resultsLoading: true,
+            },
+        },
+    }),
+    [teiSearchActionTypesRelationshipsWidget.SEARCH_TEI_RESULT_RETRIEVED]: (state, action) => {
+        const data = action.payload.data;
+        const searchId = action.payload.searchId;
+        const teis = data.trackedEntityInstanceContainers ? data.trackedEntityInstanceContainers : [];
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                searchResults: {
+                    ...state[searchId].searchResults,
+                    resultsLoading: false,
+                    teis,
+                    currentPage: data.currentPage,
+                },
+            },
+        };
+    },
+    [teiSearchActionTypesRelationshipsWidget.SEARCH_TEI_FAILED]: (state, action) => {
         const searchId = action.payload.searchId;
         return {
             ...state,
@@ -193,6 +249,75 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION]: (state, action) => {
+        const searchId = action.payload.searchId;
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                openSearchGroupSection: action.payload.searchGroupId,
+            },
+        };
+    },
+    [teiSearchActionTypesRelationshipsWidget.SET_TEI_SEARCH_PROGRAM_AND_TET]: (state, action) => {
+        const searchId = action.payload.searchId;
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                selectedProgramId: action.payload.programId,
+                selectedTrackedEntityTypeId: action.payload.trackedEntityTypeId,
+                openSearchGroupSection: '0',
+            },
+        };
+    },
+    [teiSearchActionTypesRelationshipsWidget.SEARCH_FORM_VALIDATION_FAILED]: (state, action) => {
+        const searchId = action.payload.searchId;
+        const formId = action.payload.formId;
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                [formId]: {
+                    ...(state[searchId] ? state[searchId][formId] : {}),
+                    validationFailed: true,
+                },
+            },
+        };
+    },
+    [teiSearchActionTypesRelationshipsWidget.TEI_NEW_SEARCH]: (state, action) => {
+        const searchId = action.payload.searchId;
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                searchResults: null,
+            },
+        };
+    },
+    [teiSearchActionTypesRelationshipsWidget.TEI_EDIT_SEARCH]: (state, action) => {
+        const searchId = action.payload.searchId;
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                searchResults: null,
+            },
+        };
+    },
+    [teiSearchActionTypesRelationshipsWidget.TEI_SEARCH_RESULTS_CHANGE_PAGE]: (state, action) => {
+        const searchId = action.payload.searchId;
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                searchResults: {
+                    ...state[searchId].searchResults,
+                    resultsLoading: true,
+                },
+            },
+        };
+    },
+    [teiSearchActionTypesRelationshipsWidget.TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION]: (state, action) => {
         const searchId = action.payload.searchId;
         return {
             ...state,
