@@ -40,7 +40,7 @@ export const useMetadataForEnrollmentEventForm = ({
             programStage: stage,
             dataElementIds: stage
                 .programStageDataElements
-                .map(dataElement => dataElement.id),
+                .map(dataElement => dataElement.dataElementId),
         };
     }, [program, stageId]);
 
