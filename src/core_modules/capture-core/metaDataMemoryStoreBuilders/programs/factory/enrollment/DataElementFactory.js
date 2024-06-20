@@ -72,14 +72,15 @@ export class DataElementFactory {
         return requestPromise
             .then((result) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-                const trackedEntityInstance = apiTrackedEntities[0] || {};
+                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
                 const data = {
                     id: trackedEntityInstance.trackedEntity,
                     tetId: trackedEntityInstance.trackedEntityType,
                 };
 
                 return {
-                    valid: apiTrackedEntities.length === 0,
+                    valid: otherTrackedEntityInstances.length === 0,
                     data,
                 };
             });
