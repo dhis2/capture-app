@@ -62,7 +62,7 @@ const searchViaUniqueIdStream = ({
             }
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId, enrollments } } = searchResults[0];
-                const programToNavigateTo = enrollments.length === 1 && !programId
+                const programToNavigateTo = enrollments?.length === 1 && !programId
                     ? enrollments[0].program
                     : programId;
 
