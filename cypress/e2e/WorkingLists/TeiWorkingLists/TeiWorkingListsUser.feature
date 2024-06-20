@@ -201,6 +201,7 @@ Given you open the main page with all accesible records in the WHO RMNCH Tracker
 When you open an enrollment event from the working list
 Then the tracker event URL contains the orgUnitId
 
+@v>=39
 Scenario: The user can open a program stage list without events
 Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list
 And you set the event visit date to Today
