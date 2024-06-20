@@ -1,3 +1,10 @@
+## [100.69.1](https://github.com/dhis2/capture-app/compare/v100.69.0...v100.69.1) (2024-06-20)
+
+
+### Bug Fixes
+
+* [DHIS2-16919] navigation to tracker event without org unit id ([#3656](https://github.com/dhis2/capture-app/issues/3656)) ([acc566d](https://github.com/dhis2/capture-app/commit/acc566dae86e8eae853e49eb32b463d723cc0d6d))
+
 # [100.69.0](https://github.com/dhis2/capture-app/compare/v100.68.26...v100.69.0) (2024-06-18)
 
 
