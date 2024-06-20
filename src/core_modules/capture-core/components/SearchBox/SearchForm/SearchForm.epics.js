@@ -12,6 +12,7 @@ import {
     addSuccessResultsViewOnSearchBox,
     showTooManyResultsViewOnSearchBox,
     showFallbackNotEnoughAttributesOnSearchBox,
+    searchViaUniqueIdOnScopeTrackedEntityType,
 } from '../SearchBox.actions';
 import {
     getTrackedEntityInstances,
@@ -42,23 +43,33 @@ const searchViaUniqueIdStream = ({
     programId,
     absoluteApiPath,
     querySingleResource,
+    formId,
+    programTETId,
 }: {
     queryArgs: any,
     attributes: any,
     programId?: string,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
+    formId?: string,
+    programTETId?: string,
 }) =>
     from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
+            if (searchResults.length === 0 && queryArgs.program) {
+                return of(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: programTETId, formId }));
+            }
             if (searchResults.length > 0) {
-                const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
+                const { id, tei: { orgUnit: orgUnitId, enrollments } } = searchResults[0];
+                const programToNavigateTo = enrollments.length === 1 && !programId
+                    ? enrollments[0].program
+                    : programId;
 
                 return of(navigateToEnrollmentOverview({
                     teiId: id,
                     orgUnitId,
-                    programId,
+                    programId: programToNavigateTo,
                 }));
             }
             return of(showEmptyResultsViewOnSearchBox());
@@ -136,7 +147,7 @@ export const searchViaUniqueIdOnScopeProgramEpic = (
                 ouMode: 'ACCESSIBLE',
             };
 
-            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
+            const { attributes, trackedEntityType } = getTrackerProgramThrowIfNotFound(programId);
 
             return searchViaUniqueIdStream({
                 queryArgs,
@@ -144,6 +155,8 @@ export const searchViaUniqueIdOnScopeProgramEpic = (
                 programId,
                 absoluteApiPath,
                 querySingleResource,
+                formId,
+                programTETId: trackedEntityType.id,
             });
         }),
     );
@@ -165,6 +178,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
+                fields: 'trackedEntity,trackedEntityType,orgUnit,attributes,enrollments',
             };
 
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
