@@ -1,3 +1,10 @@
+## [100.69.2](https://github.com/dhis2/capture-app/compare/v100.69.1...v100.69.2) (2024-06-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17536] remove delete relationship deprecated endpoint ([#3672](https://github.com/dhis2/capture-app/issues/3672)) ([ce40ef0](https://github.com/dhis2/capture-app/commit/ce40ef03933d98a841a9ecf3560f94a84a04ca06))
+
 ## [100.69.1](https://github.com/dhis2/capture-app/compare/v100.69.0...v100.69.1) (2024-06-20)
 
 
