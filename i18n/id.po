@@ -1,6 +1,5 @@
 # 
 # Translators:
-# phil_dhis2, 2021
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2022
@@ -8,14 +7,15 @@
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2022
 # Raja Fathurrahim, 2022
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2022
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2022-06-23T13:21:06.685Z\n"
+"POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2022\n"
-"Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -101,7 +101,7 @@ msgstr ""
 msgid "Please provide a valid time"
 msgstr ""
 
-msgid "Please provide a valid percentage"
+msgid "Please provide an integer between 0 and 100"
 msgstr ""
 
 msgid "Please provide a valid url"
@@ -772,10 +772,10 @@ msgstr ""
 "Isi setidaknya atribut {{minAttributesRequiredToSearch}} untuk mencari"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Telusuri {{name}}"
 
 msgid "Search by {{name}}"
-msgstr "Cari berdasarkan {{nama}}"
+msgstr "Cari berdasarkan {{name}}"
 
 msgid "Search by attributes"
 msgstr ""
@@ -1202,7 +1202,7 @@ msgid "Set coordinate"
 msgstr "Tentukan koordinat"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "Halaman {{currentPage}}"
 
 msgid "Date"
 msgstr "Tanggal"

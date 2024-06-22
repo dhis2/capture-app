@@ -2,13 +2,14 @@
 # Translators:
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2022
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -226,7 +227,7 @@ msgid "No write access"
 msgstr "Sin acceso de escritura"
 
 msgid "New {{titleText}}"
-msgstr "Nuevo {{texto de título}}"
+msgstr "Nuevo {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Cambiar a vista de formulario"
@@ -482,7 +483,7 @@ msgid "URL"
 msgstr "URL"
 
 msgid "Icon for {{field}}"
-msgstr "Icono para {{campo}}"
+msgstr "Icono para {{field}}"
 
 msgid "start typing to search"
 msgstr "empieza a escribir para buscar"
@@ -512,10 +513,10 @@ msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} a {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr "después o igual a {{fecha}}"
+msgstr "después o igual a {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr "antes o igual a {{fecha}}"
+msgstr "antes o igual a {{date}}"
 
 msgid "greater than or equal to"
 msgstr "Mayor qué o igual a"
@@ -571,19 +572,19 @@ msgid "Select"
 msgstr ""
 
 msgid "Program"
-msgstr ""
+msgstr "Programa"
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "Mostrar todo"
 
 msgid "Selected program"
-msgstr ""
+msgstr "Programa seleccionado"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Se están filtrando algunos programas."
 
 msgid "Select program"
 msgstr ""
@@ -711,7 +712,7 @@ msgid "Registered events"
 msgstr "Eventos registrados"
 
 msgid "Please select {{category}}."
-msgstr "Seleccione {{categoría}}."
+msgstr "Seleccione {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "O vea todos los registros accesibles para su usuario en {{program}}"
@@ -753,63 +754,65 @@ msgid "Link"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Guardar como nuevo {{trackedEntityName}}"
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Unidad Organizativa"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registro"
 
 msgid "Search results"
-msgstr ""
+msgstr "Resultados de la búsqueda"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "No se encontró {{trackedEntityTypeName}}."
 
 msgid "New search"
-msgstr ""
+msgstr "Nueva búsqueda"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Editar búsqueda"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Enlace a un {{trackedEntityType}} existente"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Crear nuevo {{trackedEntityType}}"
 
 msgid "Register"
-msgstr ""
+msgstr "Registrar"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Buscar {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Buscar por {{name}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Buscar por atributos"
 
 msgid "Back"
 msgstr "Atrás"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Buscar por {{titleText}}"
 
 msgid "Search for"
-msgstr ""
+msgstr "Buscar por"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
+"También puede elegir un programa de la barra superior y buscar en ese "
+"programa"
 
 msgid "No results found"
-msgstr ""
+msgstr "No se han encontrado resultados"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -836,18 +839,19 @@ msgid ""
 msgstr ""
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Elija un tipo para comenzar a buscar"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "Ver inscripción activa"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "Volver a inscribir"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
+"¿No encuentra los resultados que buscaba? Intente buscar todos los programas"
 
 msgid "Search in all programs"
 msgstr ""
@@ -856,51 +860,53 @@ msgid "events"
 msgstr "Eventos"
 
 msgid "event"
-msgstr ""
+msgstr "evento"
 
 msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Edit event"
-msgstr ""
+msgstr "Editar evento"
 
 msgid "Event details"
-msgstr ""
+msgstr "Detalles del evento"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"Al salir de esta página, se descartarán las selecciones que haya realizado "
+"para una nueva relación."
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "Nadie está asignado a este evento."
 
 msgid "Assign"
-msgstr ""
+msgstr "Asignar"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Evento asignado a {{name}}"
 
 msgid "Feedbacks"
 msgstr "Comentarios"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Mostrar todos los eventos"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "No se pudo cargar el evento"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "No se pudo cargar la unidad organizativa"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Posibles duplicados encontrados."
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "Se produjo un error al cargar posibles duplicados"
 
 msgid "You dont have access to delete this relationship"
 msgstr ""
@@ -909,13 +915,13 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Añadir relación"
 
 msgid "Results found"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Buscar {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
@@ -1055,7 +1061,7 @@ msgid "Report date"
 msgstr "Fecha de reporte"
 
 msgid "Registering unit"
-msgstr ""
+msgstr "Unidad de registro"
 
 msgid "Due date"
 msgstr "Fecha de vencimiento"
@@ -1232,10 +1238,10 @@ msgid "To time"
 msgstr ""
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "error encontrado durante la validación del campo"
 
 msgid "error"
-msgstr ""
+msgstr "Error"
 
 msgid "Delete polygon"
 msgstr ""
