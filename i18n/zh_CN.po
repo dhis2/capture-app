@@ -2,13 +2,14 @@
 # Translators:
 # 晓东 林 <13981924470@126.com>, 2022
 # easylin <lin_xd@126.com>, 2023
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -290,7 +291,7 @@ msgid ""
 msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "显示登记的 {{attributeName}} "
+msgstr "显示登记的 {{trackedEntityTypeName}} "
 
 msgid "Registered person"
 msgstr "注册的人"

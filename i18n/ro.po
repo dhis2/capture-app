@@ -1,14 +1,15 @@
 # 
 # Translators:
 # Valeriu Plesca <vplesca@gmail.com>, 2022
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2022\n"
-"Language-Team: Romanian (https://www.transifex.com/hisp-uio/teams/100509/ro/)\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -495,7 +496,7 @@ msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
 
 msgid "after or equal to {{date}}"
-msgstr "după sau egal cu {{data}}"
+msgstr "după sau egal cu {{date}}"
 
 msgid "before or equal to {{date}}"
 msgstr "înainte sau egal cu {{date}}"
