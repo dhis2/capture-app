@@ -969,7 +969,13 @@ On the enrollment page you can see the enrollment widget
 
 #### Enrollment actions
 
-When you click on the enrollment actions button, a menu with all the available actions will open. You can change the enrollment status to Active, Canceled or Completed using the buttons in the menu. You can mark or remove the enrollment for a follow-up.
+When you click on the enrollment actions button, a menu with all the available actions will open. You can:
+
+- Change the enrollment status to Active, Canceled or Completed using the buttons in the menu.
+- Mark or remove the enrollment for a follow-up.
+- Transfer the enrollment to another organisation unit
+- Delete the enrollment
+- Add coordinates to the enrollment
 
 ![](resources/images/enrollment-dash-enrollment-widget-2.png)
 
@@ -977,6 +983,8 @@ There can only be one active enrollment at a time. If there are no active enroll
 If the program only allows one enrollment per tracked entity instance, the **Add new** button will be disabled with a tooltip saying `Only one enrollment per {TET} is allowed in this program`.
 
 ![](resources/images/enrollment-dash-enrollment-widget-add-new.png)
+
+#### Transfer the enrollment to another organisation unit
 
 In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
 
