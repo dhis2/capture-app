@@ -837,8 +837,12 @@ msgstr "Or see all events accessible to you in {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Please select an organisation unit."
 
-msgid "New"
-msgstr "New"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
@@ -848,6 +852,9 @@ msgstr "Save as new"
 
 msgid "View enrollment"
 msgstr "View enrollment"
+
+msgid "New"
+msgstr "New"
 
 msgid "Create for"
 msgstr "Create for"

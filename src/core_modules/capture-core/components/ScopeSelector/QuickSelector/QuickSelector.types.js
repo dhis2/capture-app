@@ -15,5 +15,6 @@ export type Props = {
     onResetCategoryOption?: (categoryId: string) => void,
     onResetAllCategoryOptions?: () => void,
     onStartAgain: () => void,
+    formIsOpen: boolean,
     children: Node,
 };

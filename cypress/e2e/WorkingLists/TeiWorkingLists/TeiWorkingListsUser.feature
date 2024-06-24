@@ -196,6 +196,12 @@ And you go back using the browser button
 Then the program stage working list is loaded
 
 @v>=39
+Scenario: The program stage working list without a orgUnit selected redirects to a tracker event
+Given you open the main page with all accesible records in the WHO RMNCH Tracker context and configure a program stage working list
+When you open an enrollment event from the working list
+Then the tracker event URL contains the orgUnitId
+
+@v>=39
 Scenario: The user can open a program stage list without events
 Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list
 And you set the event visit date to Today
