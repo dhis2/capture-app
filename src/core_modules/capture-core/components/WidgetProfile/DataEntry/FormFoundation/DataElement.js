@@ -136,7 +136,6 @@ const buildDataElementUnique = (
             return requestPromise.then((result) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
                 const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
-                console.log(otherTrackedEntityInstances);
                 if (otherTrackedEntityInstances.length === 0) {
                     return onValidateOnScopeTrackedEntityType(
                         dataEntry,
