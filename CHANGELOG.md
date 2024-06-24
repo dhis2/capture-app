@@ -1,3 +1,50 @@
+## [100.69.2](https://github.com/dhis2/capture-app/compare/v100.69.1...v100.69.2) (2024-06-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17536] remove delete relationship deprecated endpoint ([#3672](https://github.com/dhis2/capture-app/issues/3672)) ([ce40ef0](https://github.com/dhis2/capture-app/commit/ce40ef03933d98a841a9ecf3560f94a84a04ca06))
+
+## [100.69.1](https://github.com/dhis2/capture-app/compare/v100.69.0...v100.69.1) (2024-06-20)
+
+
+### Bug Fixes
+
+* [DHIS2-16919] navigation to tracker event without org unit id ([#3656](https://github.com/dhis2/capture-app/issues/3656)) ([acc566d](https://github.com/dhis2/capture-app/commit/acc566dae86e8eae853e49eb32b463d723cc0d6d))
+
+# [100.69.0](https://github.com/dhis2/capture-app/compare/v100.68.26...v100.69.0) (2024-06-18)
+
+
+### Bug Fixes
+
+* [DHIS2-17115] Translatable plugin titles ([#3634](https://github.com/dhis2/capture-app/issues/3634)) ([9902ff0](https://github.com/dhis2/capture-app/commit/9902ff0cf5c3157596cdbd26542a53c5319ee2a2))
+
+
+### Features
+
+* [DHIS2-16293][DHIS2-16294] Category combination in event program forms ([#3642](https://github.com/dhis2/capture-app/issues/3642)) ([8b0d63d](https://github.com/dhis2/capture-app/commit/8b0d63d50eb33675f300ef50271b1b202c7f6387))
+
+## [100.68.26](https://github.com/dhis2/capture-app/compare/v100.68.25...v100.68.26) (2024-06-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([97714a4](https://github.com/dhis2/capture-app/commit/97714a4992f886412f68386ecb35826d89486db9))
+
+## [100.68.25](https://github.com/dhis2/capture-app/compare/v100.68.24...v100.68.25) (2024-06-14)
+
+
+### Bug Fixes
+
+* [DHIS2-16488] Allow programs with no TET write access ([#3610](https://github.com/dhis2/capture-app/issues/3610)) ([5a1c423](https://github.com/dhis2/capture-app/commit/5a1c42305bbbf4a7603c88afdd7dd25b034e7b03))
+
+## [100.68.24](https://github.com/dhis2/capture-app/compare/v100.68.23...v100.68.24) (2024-06-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([197d91f](https://github.com/dhis2/capture-app/commit/197d91faff1f3c68c163e0e42d60139286e9af4c))
+
 ## [100.68.23](https://github.com/dhis2/capture-app/compare/v100.68.22...v100.68.23) (2024-06-08)
 
 

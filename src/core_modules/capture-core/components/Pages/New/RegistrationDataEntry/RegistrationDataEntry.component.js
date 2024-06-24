@@ -274,10 +274,12 @@ const RegistrationDataEntryPlain = ({
             }
 
             {
-                scopeType === scopeTypes.EVENT_PROGRAM &&
-                <SingleEventRegistrationEntry
-                    id="singleEvent"
-                />
+                scopeType === scopeTypes.EVENT_PROGRAM && (
+                    <SingleEventRegistrationEntry
+                        id="singleEvent"
+                        selectedScopeId={selectedScopeId}
+                    />
+                )
             }
 
         </>
