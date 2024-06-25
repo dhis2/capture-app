@@ -99,12 +99,16 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the user clicks on the delete action
     Then the user sees the delete enrollment modal
 
+  # DHIS2-17635
+  @v<=41
   Scenario: User can add note on edit event page view mode
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be loaded
     When you fill in the comment: new test comment
     Then list should contain the new comment: new test comment
 
+  # DHIS2-17635
+  @v<=41
   Scenario: User can see note on edit event page edit mode
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be loaded
