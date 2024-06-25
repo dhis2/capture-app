@@ -16,7 +16,7 @@ import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.co
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { history, serverVersion: { minor } }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map((action) => {
@@ -27,7 +27,15 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
             const { formClientValues, mainDataClientValues }
                 = getNewEventClientValues(state, dataEntryKey, formFoundation);
             const serverData =
-                getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues, history, completed);
+                getAddEventEnrollmentServerData(
+                    state,
+                    formFoundation,
+                    formClientValues,
+                    mainDataClientValues,
+                    history,
+                    completed,
+                    minor,
+                );
 
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);

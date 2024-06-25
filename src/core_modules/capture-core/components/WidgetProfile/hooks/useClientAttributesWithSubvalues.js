@@ -41,7 +41,7 @@ const MULIT_TEXT_WITH_NO_OPTIONS_SET =
 
 export const useClientAttributesWithSubvalues = (teiId: string, program: InputProgramData, trackedEntityInstanceAttributes: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
-    const { baseUrl, apiVersion } = useConfig();
+    const { baseUrl, apiVersion, serverVersion: { minor } } = useConfig();
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
 
     const [listAttributes, setListAttributes] = useState([]);
@@ -60,12 +60,16 @@ export const useClientAttributesWithSubvalues = (teiId: string, program: InputPr
                 if (foundAttribute) {
                     if (subValueGetterByElementType[valueType]) {
                         value = await subValueGetterByElementType[valueType]({
-                            value: foundAttribute.value,
-                            id,
-                            teiId,
-                            programId: program.id,
-                            absoluteApiPath,
-                        }, querySingleResource);
+                            attribute: {
+                                value: foundAttribute.value,
+                                id,
+                                teiId,
+                                programId: program.id,
+                                absoluteApiPath,
+                            },
+                            querySingleResource,
+                            minorServerVersion: minor,
+                        });
                     } else {
                         // $FlowFixMe dataElementTypes flow error
                         value = convertServerToClient(foundAttribute.value, valueType);
@@ -94,7 +98,7 @@ export const useClientAttributesWithSubvalues = (teiId: string, program: InputPr
 
             setListAttributes(computedAttributes);
         }
-    }, [program, trackedEntityInstanceAttributes, teiId, absoluteApiPath, dataEngine]);
+    }, [program, trackedEntityInstanceAttributes, dataEngine, teiId, absoluteApiPath, minor]);
 
     useEffect(() => {
         getListAttributes();

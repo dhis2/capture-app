@@ -1,3 +1,163 @@
+## [100.69.2](https://github.com/dhis2/capture-app/compare/v100.69.1...v100.69.2) (2024-06-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17536] remove delete relationship deprecated endpoint ([#3672](https://github.com/dhis2/capture-app/issues/3672)) ([ce40ef0](https://github.com/dhis2/capture-app/commit/ce40ef03933d98a841a9ecf3560f94a84a04ca06))
+
+## [100.69.1](https://github.com/dhis2/capture-app/compare/v100.69.0...v100.69.1) (2024-06-20)
+
+
+### Bug Fixes
+
+* [DHIS2-16919] navigation to tracker event without org unit id ([#3656](https://github.com/dhis2/capture-app/issues/3656)) ([acc566d](https://github.com/dhis2/capture-app/commit/acc566dae86e8eae853e49eb32b463d723cc0d6d))
+
+# [100.69.0](https://github.com/dhis2/capture-app/compare/v100.68.26...v100.69.0) (2024-06-18)
+
+
+### Bug Fixes
+
+* [DHIS2-17115] Translatable plugin titles ([#3634](https://github.com/dhis2/capture-app/issues/3634)) ([9902ff0](https://github.com/dhis2/capture-app/commit/9902ff0cf5c3157596cdbd26542a53c5319ee2a2))
+
+
+### Features
+
+* [DHIS2-16293][DHIS2-16294] Category combination in event program forms ([#3642](https://github.com/dhis2/capture-app/issues/3642)) ([8b0d63d](https://github.com/dhis2/capture-app/commit/8b0d63d50eb33675f300ef50271b1b202c7f6387))
+
+## [100.68.26](https://github.com/dhis2/capture-app/compare/v100.68.25...v100.68.26) (2024-06-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([97714a4](https://github.com/dhis2/capture-app/commit/97714a4992f886412f68386ecb35826d89486db9))
+
+## [100.68.25](https://github.com/dhis2/capture-app/compare/v100.68.24...v100.68.25) (2024-06-14)
+
+
+### Bug Fixes
+
+* [DHIS2-16488] Allow programs with no TET write access ([#3610](https://github.com/dhis2/capture-app/issues/3610)) ([5a1c423](https://github.com/dhis2/capture-app/commit/5a1c42305bbbf4a7603c88afdd7dd25b034e7b03))
+
+## [100.68.24](https://github.com/dhis2/capture-app/compare/v100.68.23...v100.68.24) (2024-06-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([197d91f](https://github.com/dhis2/capture-app/commit/197d91faff1f3c68c163e0e42d60139286e9af4c))
+
+## [100.68.23](https://github.com/dhis2/capture-app/compare/v100.68.22...v100.68.23) (2024-06-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1b973f7](https://github.com/dhis2/capture-app/commit/1b973f719c3af5621624614faab8f9aa15146190))
+
+## [100.68.22](https://github.com/dhis2/capture-app/compare/v100.68.21...v100.68.22) (2024-06-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17054] handle empty expression value ([#3635](https://github.com/dhis2/capture-app/issues/3635)) ([08291fa](https://github.com/dhis2/capture-app/commit/08291fa83f7d230bdfd3143832deeda08cf30a0c))
+
+## [100.68.21](https://github.com/dhis2/capture-app/compare/v100.68.20...v100.68.21) (2024-06-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17421] Profile Widget Image link navigates to wrong endpoint ([#3648](https://github.com/dhis2/capture-app/issues/3648)) ([bd99432](https://github.com/dhis2/capture-app/commit/bd994323f538ee96f5f34eb4e32df0201ed3098a))
+
+## [100.68.20](https://github.com/dhis2/capture-app/compare/v100.68.19...v100.68.20) (2024-06-05)
+
+
+### Bug Fixes
+
+* [DHIS2-15379] Misaligned Data elements in TET profile ([#3550](https://github.com/dhis2/capture-app/issues/3550)) ([7445ffb](https://github.com/dhis2/capture-app/commit/7445ffb99ee096d352df068b1d7f1420c035e8ba))
+
+## [100.68.19](https://github.com/dhis2/capture-app/compare/v100.68.18...v100.68.19) (2024-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17000] Display translated date labels ([#3611](https://github.com/dhis2/capture-app/issues/3611)) ([a4c4b58](https://github.com/dhis2/capture-app/commit/a4c4b582b77504184f07df4635292e8b66b298f2))
+
+## [100.68.18](https://github.com/dhis2/capture-app/compare/v100.68.17...v100.68.18) (2024-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-16487] Auto-select program and org-unit ([#3604](https://github.com/dhis2/capture-app/issues/3604)) ([2bef69b](https://github.com/dhis2/capture-app/commit/2bef69b2c8ca575e6291c8c6b32a54fa1e4ecc3d))
+
+## [100.68.17](https://github.com/dhis2/capture-app/compare/v100.68.16...v100.68.17) (2024-06-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17249] remove the option to download TEIs when no orgUnit is selected ([#3619](https://github.com/dhis2/capture-app/issues/3619)) ([da43a70](https://github.com/dhis2/capture-app/commit/da43a703e84e5c7419a92f17ba98b6e2226c9093))
+
+## [100.68.16](https://github.com/dhis2/capture-app/compare/v100.68.15...v100.68.16) (2024-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b356d47](https://github.com/dhis2/capture-app/commit/b356d47790a18ce0cd31e00b83ca116513a1ab8c))
+
+## [100.68.15](https://github.com/dhis2/capture-app/compare/v100.68.14...v100.68.15) (2024-05-30)
+
+
+### Bug Fixes
+
+* [DHIS2-17052] Unrelated error message on no TETs ([#3605](https://github.com/dhis2/capture-app/issues/3605)) ([6a38ae3](https://github.com/dhis2/capture-app/commit/6a38ae35da26cc3b5d48540d4867c8fdac6e65a3))
+
+## [100.68.14](https://github.com/dhis2/capture-app/compare/v100.68.13...v100.68.14) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-15920] skip duplicates reviews ([#3629](https://github.com/dhis2/capture-app/issues/3629)) ([3a93911](https://github.com/dhis2/capture-app/commit/3a93911c5a8dac5ae4c6444b61b4bce5d106dacb))
+* [DHIS2-17102] edit event navigation ([#3592](https://github.com/dhis2/capture-app/issues/3592)) ([85a6f62](https://github.com/dhis2/capture-app/commit/85a6f628b754e31bfa7853f8746ac97523c12c25))
+
+## [100.68.13](https://github.com/dhis2/capture-app/compare/v100.68.12...v100.68.13) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17291][DHIS2-16597] skip trackedEntites request when no events match the WL filters ([#3633](https://github.com/dhis2/capture-app/issues/3633)) ([4f4b086](https://github.com/dhis2/capture-app/commit/4f4b086af4287ac3a66175e5583910ad4cc8a626))
+
+## [100.68.12](https://github.com/dhis2/capture-app/compare/v100.68.11...v100.68.12) (2024-05-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17089] replace "Registering unit" text with "Organisation unit" text ([#3583](https://github.com/dhis2/capture-app/issues/3583)) ([7a0c380](https://github.com/dhis2/capture-app/commit/7a0c3805c3f5f5a62190a1ec483709d704fe484d))
+
+## [100.68.11](https://github.com/dhis2/capture-app/compare/v100.68.10...v100.68.11) (2024-05-26)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ef29fbd](https://github.com/dhis2/capture-app/commit/ef29fbd1ff1c375734aec3895c322fd95629326c))
+
+## [100.68.10](https://github.com/dhis2/capture-app/compare/v100.68.9...v100.68.10) (2024-05-24)
+
+
+### Bug Fixes
+
+* [DHIS2-17399] use server version to send correct aoc payload ([#3643](https://github.com/dhis2/capture-app/issues/3643)) ([205ff1b](https://github.com/dhis2/capture-app/commit/205ff1bd9700562bbfdfd4fbf0352c91780356e5))
+
+## [100.68.9](https://github.com/dhis2/capture-app/compare/v100.68.8...v100.68.9) (2024-05-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b1d12cd](https://github.com/dhis2/capture-app/commit/b1d12cd95fecf3a9144409a4c17f574c5ef085a2))
+
+## [100.68.8](https://github.com/dhis2/capture-app/compare/v100.68.7...v100.68.8) (2024-05-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([88aa7c6](https://github.com/dhis2/capture-app/commit/88aa7c6e9bf56194dfcf61ed82406d9c552563e1))
+
 ## [100.68.7](https://github.com/dhis2/capture-app/compare/v100.68.6...v100.68.7) (2024-05-05)
 
 

@@ -16,8 +16,12 @@ const cleanUpIfApplicable = (programId) => {
                 .then(workingListUrl => cy.request('DELETE', workingListUrl));
         });
 };
-Given('you open the main page with Ngelehun and child programme context', () => {
+Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with child programe context', () => {
+    cy.visit('#/?programId=IpHINAT79UW');
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
@@ -245,9 +249,9 @@ When('you open the column selector', () => {
         .click();
 });
 
-When('you select the registering unit and save from the column selector', () => {
+When('you select the organisation unit and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
-        .contains('Registering unit')
+        .contains('Organisation unit')
         .find('input')
         .click();
 
@@ -256,9 +260,9 @@ When('you select the registering unit and save from the column selector', () => 
         .click();
 });
 
-Then('the registering unit should display in the list', () => {
+Then('the organisation unit should display in the list', () => {
     cy.get('[data-test="online-list-table"]')
-        .contains('Registering unit')
+        .contains('Organisation unit')
         .should('exist');
 });
 
@@ -750,8 +754,31 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and co
         .click();
 });
 
+Given('you open the main page with all accesible records in the WHO RMNCH Tracker context and configure a program stage working list', () => {
+    cy.visit('#/?programId=WSGAb5XwJ3Y&all');
+
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+            cy.contains('Program stage')
+                .click();
+        });
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Postpartum care visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
+Then('the tracker event URL contains the orgUnitId', () => {
+    cy.url().should('include', '/enrollmentEventEdit?eventId=cxQ44Gz8yEr&orgUnitId=yMCshbaVExv');
+});
+
 When('you open an enrollment event from the working list', () => {
-    cy.contains('Linda')
+    cy.contains('Sara')
         .click();
 });
 
@@ -774,6 +801,16 @@ And('you open the menu and click the "Download data..." button', () => {
         .click();
     cy.contains('Download data...')
         .click();
+});
+
+And('you open the menu', () => {
+    cy.get('[data-test="list-view-menu-button"]')
+        .click();
+});
+
+Then('the "Download data..." button is hidden', () => {
+    cy.contains('Download data...')
+        .should('not.exist');
 });
 
 Then('the download dialog opens', () => {
@@ -805,4 +842,20 @@ Then('the JSON button exists', () => {
                 .eq(0)
                 .should('have.attr', 'href').and('include', `/trackedEntities.json?${params}`);
         });
+});
+
+When('you set the event visit date to Today', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Date of visit')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Today')
+        .click();
+});
+
+Then('the working list is empty', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('No items to display')
+        .click();
 });

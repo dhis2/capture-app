@@ -9,13 +9,13 @@ Feature: User interacts with tei working lists
     Then you see the new sharing settings
 
 Scenario: User opens the default working list for a tracker program
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 Then the default working list should be displayed
 And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show only teis with completed enrollments using the predefined working list
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you select the working list called completed enrollments
 Then the enrollment status filter button should show that the completed filter is in effect
 And the list should display teis with a completed enrollment
@@ -23,7 +23,7 @@ And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show only teis with completed enrollments using the filter
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you set the enrollment status filter to completed
 And you apply the current filter
 Then the enrollment status filter button should show that the completed filter is in effect
@@ -45,7 +45,7 @@ And for a tracker program the page navigation should show that you are on the fi
 # And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show only teis with first name containig John using the filter
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you set the first name filter to John
 And you apply the current filter
 Then the first name filter button should show that the filter is in effect
@@ -54,19 +54,19 @@ And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show the registering unit column
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you open the column selector
-And you select the registering unit and save from the column selector
-Then the registering unit should display in the list
+And you select the organisation unit and save from the column selector
+Then the organisation unit should display in the list
 
 Scenario: Show next page
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you click the next page button
 Then the list should display data for the second page
 And the pagination for the tei working list should show the second page
 
 Scenario: Show next page then previous page
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you click the next page button
 Then the list should display data for the second page
 And the pagination for the tei working list should show the second page
@@ -75,7 +75,7 @@ Then the default working list should be displayed
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show next page then first page
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you click the next page button
 Then the list should display data for the second page
 And the pagination for the tei working list should show the second page
@@ -84,13 +84,13 @@ Then the default working list should be displayed
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show 10 rows per page
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you change rows per page to 10
 Then the list should display 10 rows of data
 And for a tracker program the page navigation should show that you are on the first page
 
 Scenario: Show teis ordered ascendingly by first name
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 When you click the first name column header
 Then the sort arrow should indicate ascending order
 And the list should display data ordered ascendingly by first name
@@ -195,6 +195,19 @@ When you open an enrollment event from the working list
 And you go back using the browser button
 Then the program stage working list is loaded
 
+@v>=39
+Scenario: The program stage working list without a orgUnit selected redirects to a tracker event
+Given you open the main page with all accesible records in the WHO RMNCH Tracker context and configure a program stage working list
+When you open an enrollment event from the working list
+Then the tracker event URL contains the orgUnitId
+
+@v>=39
+Scenario: The user can open a program stage list without events
+Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list
+And you set the event visit date to Today
+And you apply the current filter
+Then the working list is empty
+
 @v>=40
 Scenario: The user creates, updates and deletes a Program stage custom working list
 Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
@@ -257,7 +270,7 @@ Then the Custom Program stage list is deleted
 
 @v>=40
 Scenario: The user can download the tracked entity working list
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 And you open the menu and click the "Download data..." button
 Then the download dialog opens
 Then the CSV button exists
@@ -265,7 +278,14 @@ Then the JSON button exists
 
 @v<40
 Scenario: The user can download the tracked entity working list
-Given you open the main page with Ngelehun and child programme context
+Given you open the main page with Ngelehun and child programe context
 And you open the menu and click the "Download data..." button
 Then the download dialog opens
 Then the JSON button exists
+
+Scenario: The user cannot download the tracked entity working list when no orgUnit is selected
+Given you open the main page with child programe context
+And the user clicks the element containing the text: Or see all records accessible to you in Child Programme 
+And you open the menu
+Then the "Download data..." button is hidden
+

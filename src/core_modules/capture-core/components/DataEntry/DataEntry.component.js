@@ -203,6 +203,7 @@ class DataEntryPlain extends React.Component<Props> {
                         accSections.push(
                             <div
                                 key={sectionKey}
+                                data-test={`dataEntrySection-${sectionKey}`}
                                 className={this.props.classes.dataEntrySectionContainer}
                             >
                                 <Section

@@ -1,6 +1,7 @@
 // @flow
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { dataElementTypes } from '../../../metaData';
+import { FEATURES, hasAPISupportForFeature } from '../../../../capture-core-utils';
 
 type Attribute = {
     id: string,
@@ -10,7 +11,13 @@ type Attribute = {
     absoluteApiPath: string,
 };
 
-const getFileResourceSubvalue = async (attribute: Attribute, querySingleResource: QuerySingleResource) => {
+type SubValueFunctionParams = {
+    attribute: Attribute,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+};
+
+const getFileResourceSubvalue = async ({ attribute, querySingleResource }: SubValueFunctionParams) => {
     if (!attribute.value) return null;
 
     const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: attribute.value });
@@ -21,20 +28,28 @@ const getFileResourceSubvalue = async (attribute: Attribute, querySingleResource
     };
 };
 
-const getImageResourceSubvalue = async (attribute: Attribute, querySingleResource: QuerySingleResource) => {
+const getImageResourceSubvalue = async ({ attribute, querySingleResource, minorServerVersion }: SubValueFunctionParams) => {
     const { id, value, teiId, programId, absoluteApiPath } = attribute;
     if (!value) return null;
 
     const { displayName } = await querySingleResource({ resource: 'fileResources', id: value });
+
+    const urls = hasAPISupportForFeature(minorServerVersion, FEATURES.trackerImageEndpoint) ? {
+        url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}`,
+        previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}&dimension=small`,
+    } : {
+        url: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/image`,
+        previewUrl: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/image`,
+    };
+
     return {
         name: displayName,
         value,
-        url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}`,
-        previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}&dimension=small`,
+        ...urls,
     };
 };
 
-const getOrganisationUnitSubvalue = async (attribute: Attribute, querySingleResource: QuerySingleResource) => {
+const getOrganisationUnitSubvalue = async ({ attribute, querySingleResource }: SubValueFunctionParams) => {
     const organisationUnit = await querySingleResource({
         resource: 'organisationUnits',
         id: attribute.value,
