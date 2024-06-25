@@ -21,33 +21,30 @@ export const QuickSelector = ({
     onResetAllCategoryOptions,
     children,
     onStartAgain,
-}: Props) => {
-    console.log('QuickSelector', children);
-    return (
-        <SelectorBar
-            disableClearSelections={!selectedProgramId && !selectedOrgUnitId}
-            onClearSelectionClick={() => onStartAgain()}
-        >
-            <ProgramSelector
-                selectedProgramId={selectedProgramId}
-                selectedOrgUnitId={selectedOrgUnitId}
-                selectedCategories={selectedCategories}
-                handleClickProgram={onSetProgramId}
-                handleSetCatergoryCombo={onSetCategoryOption}
-                handleResetCategorySelections={onResetAllCategoryOptions}
-                buttonModeMaxLength={5}
-                onResetProgramId={onResetProgramId}
-                onResetCategoryOption={onResetCategoryOption}
-                onResetOrgUnit={onResetOrgUnitId}
-            />
-            <OrgUnitSelector
-                previousOrgUnitId={previousOrgUnitId}
-                selectedOrgUnitId={selectedOrgUnitId}
-                handleClickOrgUnit={onSetOrgUnit}
-                selectedOrgUnit={selectedOrgUnit}
-                onReset={onResetOrgUnitId}
-            />
-            {children}
-        </SelectorBar>
-    );
-};
+}: Props) => (
+    <SelectorBar
+        disableClearSelections={!selectedProgramId && !selectedOrgUnitId}
+        onClearSelectionClick={() => onStartAgain()}
+    >
+        <ProgramSelector
+            selectedProgramId={selectedProgramId}
+            selectedOrgUnitId={selectedOrgUnitId}
+            selectedCategories={selectedCategories}
+            handleClickProgram={onSetProgramId}
+            handleSetCatergoryCombo={onSetCategoryOption}
+            handleResetCategorySelections={onResetAllCategoryOptions}
+            buttonModeMaxLength={5}
+            onResetProgramId={onResetProgramId}
+            onResetCategoryOption={onResetCategoryOption}
+            onResetOrgUnit={onResetOrgUnitId}
+        />
+        <OrgUnitSelector
+            previousOrgUnitId={previousOrgUnitId}
+            selectedOrgUnitId={selectedOrgUnitId}
+            handleClickOrgUnit={onSetOrgUnit}
+            selectedOrgUnit={selectedOrgUnit}
+            onReset={onResetOrgUnitId}
+        />
+        {children}
+    </SelectorBar>
+);
