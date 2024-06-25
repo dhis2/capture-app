@@ -45,53 +45,6 @@ Feature: The user interacts with the widgets on the enrollment edit event
     When you confirm by clicking the "Yes, delete Focus area" button
     Then you are redirected to the home page
 
-  # TODO DHIS2-11482 - The test cases related with enrollment status edit are flaky. Move them to unit tests.
-  # Scenario: User can modify the enrollment from Active to Complete
-  #   Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
-  #   And the enrollment widget should be opened
-  #   And the user sees the enrollment status is Active
-  #   And the user opens the enrollment actions menu
-  #   When the user changes the enrollment status to complete
-  #   Then the user sees the enrollment status is Complete
-
-  # Scenario: User can modify the enrollment from Complete to Active
-  #   Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
-  #   And the enrollment widget should be opened
-  #   And the user sees the enrollment status is Complete
-  #   And the user opens the enrollment actions menu
-  #   When the user changes the enrollment status to incomplete
-  #   Then the user sees the enrollment status is Active
-
-  # Scenario: User can modify the enrollment from Active to Cancelled
-  #   Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
-  #   And the enrollment widget should be opened
-  #   And the user sees the enrollment status is Active
-  #   And the user opens the enrollment actions menu
-  #   When the user changes the enrollment status to cancel
-  #   Then the user sees the enrollment status is Cancelled
-
-  # Scenario: User can modify the enrollment from Cancelled to Active
-  #   Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
-  #   And the enrollment widget should be opened
-  #   And the user sees the enrollment status is Cancelled
-  #   And the user opens the enrollment actions menu
-  #   When the user changes the enrollment status to reactivate
-  #   Then the user sees the enrollment status is Active
-
-  # Scenario: User can mark the enrollment for followup
-  #   Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
-  #   And the enrollment widget should be opened
-  #   And the user opens the enrollment actions menu
-  #   When the user mark the enrollment for followup
-  #   Then the user can see the enrollment is marked for follow up
-
-  # Scenario: User can remove the enrollment for followup
-  #   Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
-  #   And the enrollment widget should be opened
-  #   And the user opens the enrollment actions menu
-  #   When the user remove the enrollment for followup
-  #   Then the user can see the enrollment is not marked for follow up
-
   Scenario: User can open the delete modal
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be opened

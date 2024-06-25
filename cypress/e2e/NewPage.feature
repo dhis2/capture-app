@@ -138,7 +138,7 @@ Feature: User creates a new entries from the registration page
 
 ### New person in Tracker Program
 
-  #DHIS2-14837
+  # DHIS2-14837
   @skip
   Scenario: New person in Tracker Program > Submitting the form with empty visit date throws validation error
     Given you are in the WHO RMNCH program registration page

@@ -1,6 +1,6 @@
 Feature: Breaking the glass page
 
-  # TODO - Flaky tests should be fixed by TECH-1662
+  # TECH-1662 - Flaky test
   @skip
   Scenario: User with search scope access tries to access an enrollment in a protected program
     Given the tei created by this test is cleared from the database
