@@ -16,5 +16,5 @@ There are currently two types of plugins supported in the Capture app:
 - [Enrollment Plugins](/docs/capture-plugins/developer/enrollment-plugins/introduction)
 
 :::tip
-Want to learn more about what plugins are and how they work under the hood? [Read more about the core plugin technology](/docs/app-runtime/components/plugin/)
+Want to learn more about what plugins are and how they work under the hood? [Read more about the core plugin technology](/docs/app-runtime/components/Plugin.md)
 :::
