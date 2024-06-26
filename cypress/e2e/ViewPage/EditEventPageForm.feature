@@ -22,3 +22,10 @@ Feature: User interacts with a single event page view/edit form
     When you change the category combination and save
     And you land on the view event page with event id: rgWr86qs0sI
     Then the event details page displays the updated category combination
+
+  Scenario: The user can add and then delete a relationship to a tracked entity
+    Given you open an event in Ngelehun and malaria case context
+    And you navigate to find a person relationship
+    And you search for an existing unique id and link to the person
+    And you click the delete relationship button
+    Then the relationship is deleted
