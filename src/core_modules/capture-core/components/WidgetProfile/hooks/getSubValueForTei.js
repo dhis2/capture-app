@@ -28,11 +28,9 @@ const getFileResourceSubvalue = async ({ attribute, querySingleResource }: SubVa
     };
 };
 
-const getImageResourceSubvalue = async ({ attribute, querySingleResource, minorServerVersion }: SubValueFunctionParams) => {
+const getImageResourceSubvalue = async ({ attribute, minorServerVersion }: SubValueFunctionParams) => {
     const { id, value, teiId, programId, absoluteApiPath } = attribute;
     if (!value) return null;
-
-    const { displayName } = await querySingleResource({ resource: 'fileResources', id: value });
 
     const urls = hasAPISupportForFeature(minorServerVersion, FEATURES.trackerImageEndpoint) ? {
         url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}`,
@@ -43,7 +41,6 @@ const getImageResourceSubvalue = async ({ attribute, querySingleResource, minorS
     };
 
     return {
-        name: displayName,
         value,
         ...urls,
     };
