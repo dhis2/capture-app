@@ -1,53 +1,38 @@
 // @flow
-import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
-import { errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
-const GET_SUBVALUE_ERROR = 'Could not get subvalue';
-
 const subValueGetterByElementType = {
     [dataElementTypes.IMAGE]: ({
-        value,
         teiId,
         attributeId,
         absoluteApiPath,
-        querySingleResource,
         programId,
     }: {
-        value: any,
         teiId: string,
         attributeId: string,
         absoluteApiPath: string,
-        querySingleResource: QuerySingleResource,
         programId: ?string,
-    }) =>
-        querySingleResource({ resource: `fileResources/${value}` })
-            .then((res) => {
-                const buildUrl = () => {
-                    if (featureAvailable(FEATURES.trackerImageEndpoint)) {
-                        if (programId) {
-                            return `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}&dimension=small`;
-                        }
-                        return `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?dimension=small`;
-                    }
-                    return `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/image`;
-                };
-                const previewUrl = buildUrl();
+    }) => {
+        const buildUrl = () => {
+            if (featureAvailable(FEATURES.trackerImageEndpoint)) {
+                if (programId) {
+                    return `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}&dimension=small`;
+                }
+                return `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?dimension=small`;
+            }
+            return `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/image`;
+        };
+        const previewUrl = buildUrl();
 
-                return {
-                    name: res.name,
-                    value: res.id,
-                    previewUrl,
-                    url: previewUrl,
-                };
-            })
-            .catch((error) => {
-                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, teiId, attributeId, error }));
-                return null;
-            }) };
-
+        return {
+            previewUrl,
+            url: previewUrl,
+        };
+    },
+};
 
 export async function getSubValues({
     teiId,
