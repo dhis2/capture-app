@@ -1,3 +1,10 @@
+## [100.69.3](https://github.com/dhis2/capture-app/compare/v100.69.2...v100.69.3) (2024-06-28)
+
+
+### Bug Fixes
+
+* [DHIS2-17488] hide program stage if no data read access ([#3683](https://github.com/dhis2/capture-app/issues/3683)) ([6331b29](https://github.com/dhis2/capture-app/commit/6331b299de9749b03213970001a9690b5e960196))
+
 ## [100.69.2](https://github.com/dhis2/capture-app/compare/v100.69.1...v100.69.2) (2024-06-21)
 
 
