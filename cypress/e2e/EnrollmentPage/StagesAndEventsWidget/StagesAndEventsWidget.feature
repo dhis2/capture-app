@@ -59,7 +59,7 @@ Feature: User interacts with Stages and Events Widget
         Then you should see the disabled button New Birth event
 
     # Waiting for pipline to update DB/DB update for 39 and 41
-    @user:trackerAutoTestRestricted @v=40 @v=42
+    @user:trackerAutoTestRestricted @v=38 @v=40 @v=42
     Scenario: Program stage is hidden if no data read access
         And you open the enrollment page by typing #enrollment?enrollmentId=iNEq9d22Nyp&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=k4ODejBytgv
         Then the Care at birth program stage should be hidden
