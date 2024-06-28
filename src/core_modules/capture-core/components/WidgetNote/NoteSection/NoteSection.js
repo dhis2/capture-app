@@ -12,10 +12,10 @@ import { TextField } from '../../FormFields/New';
 const FocusTextField = withFocusSaver()(TextField);
 
 type Props = {
-    comments: Array<Object>,
-    handleAddComment: (text: string) => void,
+    notes: Array<Object>,
+    handleAddNote: (text: string) => void,
     placeholder: string,
-    emptyCommentMessage: string,
+    emptyNoteMessage: string,
     ...CssClasses
 }
 
@@ -37,14 +37,14 @@ const styles = {
         padding: `0 ${spacersNum.dp16}px`,
         marginBottom: spacersNum.dp16,
     },
-    commentsWrapper: {
+    notesWrapper: {
         maxHeight: 400,
         overflowY: 'auto',
     },
     editor: {
         paddingTop: spacersNum.dp16,
     },
-    emptyComments: {
+    emptyNotes: {
         fontSize: 14,
         color: colors.grey600,
     },
@@ -62,41 +62,41 @@ const styles = {
             margin: `${spacersNum.dp8}px 0 0 0`,
         },
     },
-    newCommentButtonContainer: {
+    newNoteButtonContainer: {
         paddingTop: spacersNum.dp4,
         display: 'flex',
         gap: '4px',
     },
 };
 
-const CommentSectionPlain = ({
+const NoteSectionPlain = ({
     placeholder,
-    emptyCommentMessage,
-    comments,
-    handleAddComment,
+    emptyNoteMessage,
+    notes,
+    handleAddNote,
     classes,
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
-    const [newCommentValue, setNewCommentValue] = useState('');
+    const [newNoteValue, setNewNoteValue] = useState('');
 
     const handleChange = useCallback((value) => {
         setEditing(true);
-        setNewCommentValue(value);
+        setNewNoteValue(value);
     }, []);
 
     const onCancel = useCallback(() => {
-        setNewCommentValue('');
+        setNewNoteValue('');
         setEditing(false);
     }, []);
 
-    const onAddComment = useCallback(() => {
-        handleAddComment(newCommentValue);
-        setNewCommentValue('');
+    const onAddNote = useCallback(() => {
+        handleAddNote(newNoteValue);
+        setNewNoteValue('');
         setEditing(false);
-    }, [handleAddComment, newCommentValue]);
+    }, [handleAddNote, newNoteValue]);
 
-    const CommentItem = ({ value, storedAt, createdBy }) => (
-        <div data-test="comment-item" className={cx(classes.item)}>
+    const NoteItem = ({ value, storedAt, createdBy }) => (
+        <div data-test="note-item" className={cx(classes.item)}>
             {/* TODO: add avatar */}
             <div className={classes.rightColumn}>
                 <div className={classes.header}>
@@ -117,14 +117,14 @@ const CommentSectionPlain = ({
 
     return (
         <div className={classes.wrapper}>
-            <div className={classes.commentsWrapper}>
-                {comments
+            <div className={classes.notesWrapper}>
+                {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map(comment => <CommentItem key={`comment-item-${comment.note}-`} {...comment} />)
+                    .map(note => <NoteItem key={`note-item-${note.note}-`} {...note} />)
                 }
-                {comments.length === 0 &&
-                <div className={classes.emptyComments}>
-                    {emptyCommentMessage}
+                {notes.length === 0 &&
+                <div className={classes.emptyNotes}>
+                    {emptyNoteMessage}
                 </div>}
             </div>
 
@@ -133,22 +133,22 @@ const CommentSectionPlain = ({
                     <FocusTextField
                         placeholder={placeholder}
                         onChange={handleChange}
-                        value={newCommentValue}
+                        value={newNoteValue}
                         data-test="note-textfield"
                     />
                 </Editor>
             </div>
 
-            {isEditing && <div className={classes.newCommentButtonContainer} data-test="note-buttons-container">
+            {isEditing && <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
                 <Button
                     dataTest="add-note-btn"
-                    onClick={onAddComment}
+                    onClick={onAddNote}
                     primary
                 >
                     {i18n.t('Save note')}
                 </Button>
                 <Button
-                    dataTest="cancel-comment-btn"
+                    dataTest="cancel-note-btn"
                     onClick={onCancel}
                 >
                     {i18n.t('Cancel')}
@@ -157,4 +157,4 @@ const CommentSectionPlain = ({
         </div>);
 };
 
-export const CommentSection: ComponentType<Props> = withStyles(styles)(CommentSectionPlain);
+export const NoteSection: ComponentType<Props> = withStyles(styles)(NoteSectionPlain);

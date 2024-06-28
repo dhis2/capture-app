@@ -76,7 +76,7 @@ const getStyles = theme => ({
 const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
-    COMMENTS: 'COMMENTS',
+    NOTES: 'NOTES',
     RELATIONSHIPS: 'RELATIONSHIPS',
     ASSIGNEE: 'ASSIGNEE',
 };
@@ -265,14 +265,14 @@ const buildNotesSettingsFn = () => {
         getComponentProps: (props: Object) => createComponentProps(props, {
             label: i18n.t('Notes'),
             onAddNote: props.onAddNote,
-            id: 'comments',
+            id: 'notes',
             dataEntryId: props.id,
         }),
         getPropName: () => 'note',
         getValidatorContainers: () => getNoteValidatorContainers(),
         getMeta: () => ({
             placement: placements.BOTTOM,
-            section: dataEntrySectionNames.COMMENTS,
+            section: dataEntrySectionNames.NOTES,
         }),
     };
 
@@ -403,7 +403,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
     },
-    [dataEntrySectionNames.COMMENTS]: {
+    [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
         name: i18n.t('Notes'),
     },

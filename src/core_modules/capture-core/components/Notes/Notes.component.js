@@ -35,7 +35,7 @@ const styles = theme => ({
     borderBoxContent: {
         margin: theme.typography.pxToRem(10),
     },
-    newCommentButtonContainer: {
+    newNoteButtonContainer: {
         marginTop: spacersNum.dp4,
     },
     noteItemHeader: {
@@ -55,7 +55,7 @@ const styles = theme => ({
     newNoteButtonContainer: {
         display: 'inline-block',
     },
-    addCommentContainer: {
+    addNoteContainer: {
         marginRight: 5,
         marginLeft: 2,
     },
@@ -72,7 +72,7 @@ type Props = {
         noteItem: string,
         inputContainer: string,
         borderBoxContent: string,
-        newCommentButtonContainer: string,
+        newNoteButtonContainer: string,
         newNoteContainer: string,
         newNoteFormContainer: string,
         textEditorContainer: string,
@@ -81,7 +81,7 @@ type Props = {
         noteItemUser: string,
         noteItemDate: string,
         notesList: string,
-        addCommentContainer: string,
+        addNoteContainer: string,
         newNoteButtonContainer: string,
     },
 };
@@ -153,10 +153,10 @@ class NotesPlain extends React.Component<Props, State> {
                         data-test="note-textfield"
                     />
                 </Editor>
-                <div className={classes.newCommentButtonContainer} data-test="note-buttons-container">
+                <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
                     <Button
                         onClick={this.handleAddNote}
-                        className={classes.addCommentContainer}
+                        className={classes.addNoteContainer}
                         primary
                         small
                     >
@@ -175,7 +175,7 @@ class NotesPlain extends React.Component<Props, State> {
         );
     }
 
-    renderButton = (canAddComment: boolean) => {
+    renderButton = (canAddNote: boolean) => {
         const { smallMainButton, classes } = this.props;
         return (
             <div
@@ -184,11 +184,11 @@ class NotesPlain extends React.Component<Props, State> {
             >
                 <ConditionalTooltip
                     content={i18n.t('You don\'t have access to write notes')}
-                    enabled={!canAddComment}
+                    enabled={!canAddNote}
                 >
                     <Button
                         onClick={this.toggleIsOpen}
-                        disabled={!canAddComment}
+                        disabled={!canAddNote}
                         small={smallMainButton}
                     >
                         {i18n.t('Write note')}
@@ -202,7 +202,7 @@ class NotesPlain extends React.Component<Props, State> {
         const { notes, classes, entityAccess } = this.props;
         return (
             <div className={classes.notesContainer}>
-                <Menu dense className={classes.notesList} data-test="comments-list">
+                <Menu dense className={classes.notesList} data-test="notes-list">
                     {notes.map(n => (
                         <MenuItem
                             className={classes.noteItem}

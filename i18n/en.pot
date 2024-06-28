@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
-"PO-Revision-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"PO-Revision-Date: 2024-06-28T11:23:02.970Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1168,9 +1168,6 @@ msgstr ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
 
-msgid "Save note"
-msgstr "Save note"
-
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
 
@@ -1298,15 +1295,6 @@ msgstr "Add coordinates"
 msgid "Add area"
 msgstr "Add area"
 
-msgid "Notes about this enrollment"
-msgstr "Notes about this enrollment"
-
-msgid "Write a note about this enrollment"
-msgstr "Write a note about this enrollment"
-
-msgid "This enrollment doesn't have any notes"
-msgstr "This enrollment doesn't have any notes"
-
 msgid "Please add or cancel the note before saving the event"
 msgstr "Please add or cancel the note before saving the event"
 
@@ -1319,20 +1307,20 @@ msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgid "program or stage is invalid"
 msgstr "program or stage is invalid"
 
+msgid "Notes about this enrollment"
+msgstr "Notes about this enrollment"
+
+msgid "Write a note about this enrollment"
+msgstr "Write a note about this enrollment"
+
+msgid "This enrollment doesn't have any notes"
+msgstr "This enrollment doesn't have any notes"
+
 msgid "Error"
 msgstr "Error"
 
 msgid "Warning"
 msgstr "Warning"
-
-msgid "Notes about this event"
-msgstr "Notes about this event"
-
-msgid "Write a note about this event"
-msgstr "Write a note about this event"
-
-msgid "This event doesn't have any notes"
-msgstr "This event doesn't have any notes"
 
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
@@ -1354,6 +1342,15 @@ msgstr "Event completed"
 
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"
+
+msgid "Notes about this event"
+msgstr "Notes about this event"
+
+msgid "Write a note about this event"
+msgstr "Write a note about this event"
+
+msgid "This event doesn't have any notes"
+msgstr "This event doesn't have any notes"
 
 msgid "Schedule date info"
 msgstr "Schedule date info"
@@ -1394,6 +1391,9 @@ msgstr "Event notes"
 
 msgid "Write a note about this scheduled event"
 msgstr "Write a note about this scheduled event"
+
+msgid "Save note"
+msgstr "Save note"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "

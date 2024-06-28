@@ -71,7 +71,7 @@ const getStyles = (theme: Theme) => ({
 const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
-    COMMENTS: 'COMMENTS',
+    NOTES: 'NOTES',
 };
 
 const baseComponentStyles = {
@@ -278,7 +278,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
     },
-    [dataEntrySectionNames.COMMENTS]: {
+    [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
         name: i18n.t('Notes'),
     },

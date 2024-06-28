@@ -36,7 +36,7 @@ export type Props = {|
    scheduleDate?: ?string,
    suggestedScheduleDate?: ?string,
    eventCountInOrgUnit: number,
-   comments: Array<{value: string}>,
+   notes: Array<{value: string}>,
    hideDueDate?: boolean,
    selectedCategories?: ?{ [categoryId: string]: CategoryOption },
    programCategory?: ProgramCategory,
@@ -47,7 +47,7 @@ export type Props = {|
    assignee?: UserFormField | null,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,
-   onAddComment: (comment: string) => void,
+   onAddNote: (note: string) => void,
    onResetCategoryOption: (categoryId: string) => void,
    onClickCategoryOption: (optionId: string, categoryId: string) => void,
    ...CssClasses

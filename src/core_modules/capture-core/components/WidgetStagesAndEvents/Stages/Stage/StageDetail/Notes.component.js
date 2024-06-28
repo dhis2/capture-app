@@ -17,15 +17,15 @@ const styles = {
         paddingLeft: '2px',
     },
 };
-export const CommentsPlain = ({ event, classes }: Props) => {
-    const commentsCount = event.notes?.length;
+export const NotessPlain = ({ event, classes }: Props) => {
+    const notesCount = event.notes?.length;
 
     return (
-        commentsCount ? <div className={classes.wrapper}>
+        notesCount ? <div className={classes.wrapper}>
             <IconMessages16 />
-            <span className={classes.text}>{commentsCount}</span>
+            <span className={classes.text}>{notesCount}</span>
         </div> : null
     );
 };
 
-export const Comments: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(CommentsPlain);
+export const Notes: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(NotessPlain);

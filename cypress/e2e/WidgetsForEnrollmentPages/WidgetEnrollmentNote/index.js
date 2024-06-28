@@ -16,6 +16,6 @@ When(/^you fill in the note: (.*)$/, (note) => {
 
 Then(/^list should contain the new note: (.*)$/, (note) => {
     cy.get('[data-test="enrollment-note-widget"]').within(() => {
-        cy.get('[data-test="comment-item"]').contains(note).should('exist');
+        cy.get('[data-test="note-item"]').contains(note).should('exist');
     });
 });
