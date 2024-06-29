@@ -87,25 +87,6 @@ export const RelatedStagesActionsPlain = ({
                 {type === relatedStageStatus.LINKABLE && (
                     <>
                         <ConditionalTooltip
-                            key={RelatedStagesActionTypes.ENTER_DATA}
-                            content={i18n.t('{{ linkableStageLabel }} is not repeatable', {
-                                linkableStageLabel: programStage.stageForm.name,
-                                interpolation: { escapeValue: false },
-                            })}
-                            closeDelay={50}
-                            enabled={!canAddNewEventToStage}
-                        >
-                            <Radio
-                                name={`related-stage-action-${RelatedStagesActionTypes.ENTER_DATA}`}
-                                checked={RelatedStagesActionTypes.ENTER_DATA === selectedAction}
-                                disabled={!canAddNewEventToStage}
-                                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.ENTER_DATA]}
-                                onChange={(e: Object) => updateSelectedAction(e.value)}
-                                value={RelatedStagesActionTypes.ENTER_DATA}
-                            />
-                        </ConditionalTooltip>
-
-                        <ConditionalTooltip
                             key={RelatedStagesActionTypes.SCHEDULE_IN_ORG}
                             content={i18n.t('{{ linkableStageLabel }} is not repeatable', {
                                 linkableStageLabel: programStage.stageForm.name,
@@ -123,7 +104,24 @@ export const RelatedStagesActionsPlain = ({
                                 value={RelatedStagesActionTypes.SCHEDULE_IN_ORG}
                             />
                         </ConditionalTooltip>
-
+                        <ConditionalTooltip
+                            key={RelatedStagesActionTypes.ENTER_DATA}
+                            content={i18n.t('{{ linkableStageLabel }} is not repeatable', {
+                                linkableStageLabel: programStage.stageForm.name,
+                                interpolation: { escapeValue: false },
+                            })}
+                            closeDelay={50}
+                            enabled={!canAddNewEventToStage}
+                        >
+                            <Radio
+                                name={`related-stage-action-${RelatedStagesActionTypes.ENTER_DATA}`}
+                                checked={RelatedStagesActionTypes.ENTER_DATA === selectedAction}
+                                disabled={!canAddNewEventToStage}
+                                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.ENTER_DATA]}
+                                onChange={(e: Object) => updateSelectedAction(e.value)}
+                                value={RelatedStagesActionTypes.ENTER_DATA}
+                            />
+                        </ConditionalTooltip>
                         <ConditionalTooltip
                             key={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
                             content={i18n.t('{{ linkableStageLabel }} has no existing events', {
