@@ -5,9 +5,7 @@ import { pageStatuses } from '../../EnrollmentEditEvent/EnrollmentEditEventPage.
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { WidgetEventEdit } from '../../../WidgetEventEdit';
 import type { Props } from '../../../WidgetEventEdit/widgetEventEdit.types';
-import {
-    useMetadataForEnrollmentEventForm,
-} from '../../../WidgetEnrollmentEventNew/DataEntry/hooks/useMetadataForEnrollmentEventForm';
+import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 
 type WidgetProps = {|
     pageStatus: string,
@@ -20,7 +18,7 @@ export const WidgetEventEditWrapper = ({ pageStatus, programId, stageId, ...pass
         stage,
         isLoading,
         isError,
-    } = useMetadataForEnrollmentEventForm({ programId, stageId });
+    } = useMetadataForProgramStage({ programId, stageId });
 
     if (pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED) {
         return (

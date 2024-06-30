@@ -22,7 +22,6 @@ export const buildProgramStageMetadata = async ({
 }) => {
     const storageController = getUserStorageController();
 
-    // Not sure how to better filter related types
     const cachedRelationshipTypes = await storageController.getAll(userStores.RELATIONSHIP_TYPES);
 
     const programStageFactory = new ProgramStageFactory({

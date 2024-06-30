@@ -19,11 +19,9 @@ import { EventChangelogWrapper } from '../../../WidgetEventEdit/EventChangelogWr
 import { OverflowButton } from '../../../Buttons';
 import { ReactQueryAppNamespace } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
-import {
-    useMetadataForSingleEventForm,
-} from '../../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/hooks/useMetadataForSingleEventForm';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
+import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 
 const getStyles = () => ({
     container: {
@@ -87,7 +85,7 @@ const EventDetailsSectionPlain = (props: Props) => {
         ...passOnProps
     } = props;
     const orgUnitId = useSelector(({ viewEventPage }) => viewEventPage.loadedValues?.orgUnit?.id);
-    const { formFoundation } = useMetadataForSingleEventForm({ programId });
+    const { formFoundation } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { programCategory, isLoading } = useCategoryCombinations(programId);
     const queryClient = useQueryClient();

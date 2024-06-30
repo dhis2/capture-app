@@ -19,13 +19,13 @@ const getDataElementsForStage = async ({
 };
 
 export const useDataElementsForStage = ({
-    programId,
     dataElementIds,
+    programId,
     stageId,
 }: Props) => {
     const { data, isLoading } = useIndexedDBQuery(
         // $FlowFixMe
-        ['eventProgram', programId, 'dataElements', stageId],
+        [programId, 'dataElements', stageId, { dataElementIds }],
         () => getDataElementsForStage({
             dataElementIds,
         }),

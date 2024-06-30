@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { AccessVerification } from './AccessVerification';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
-import { useMetadataForEnrollmentEventForm } from './DataEntry/hooks/useMetadataForEnrollmentEventForm';
+import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 
 export const WidgetEnrollmentEventNew = ({
     programId,
@@ -18,7 +18,7 @@ export const WidgetEnrollmentEventNew = ({
         formFoundation,
         isLoading,
         isError,
-    } = useMetadataForEnrollmentEventForm({ programId, stageId });
+    } = useMetadataForProgramStage({ programId, stageId });
 
     if (isLoading) {
         return (

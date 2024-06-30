@@ -1,19 +1,17 @@
 // @flow
 import { useMemo } from 'react';
 import { useConfig } from '@dhis2/app-runtime';
-import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
-import {
-    useDataEntryFormConfig,
-    useOptionSetsForAttributes,
-} from '../../../DataEntries/common/TEIAndEnrollment';
-import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
-import { useDataElementsForStage, buildProgramStageMetadata } from '../../../DataEntries/common/ProgramStage';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
+import { useDataEntryFormConfig, useOptionSetsForAttributes } from '../TEIAndEnrollment';
+import { useDataElementsForStage } from './useDataElementsForStage';
+import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
+import { buildProgramStageMetadata } from './buildProgramStageMetadata';
 
 type Props = {|
     programId: string,
-    stageId: string,
+    stageId?: string,
 |}
 
 type ReturnType = {|
@@ -23,26 +21,31 @@ type ReturnType = {|
     isError: boolean,
 |}
 
-export const useMetadataForEnrollmentEventForm = ({
+export const useMetadataForProgramStage = ({
     programId,
     stageId,
 }: Props): ReturnType => {
+    const scopeId = stageId || programId;
     const { program } = useProgramFromIndexedDB(programId, { enabled: !!programId });
-    const { dataEntryFormConfig, configIsFetched } = useDataEntryFormConfig({ selectedScopeId: stageId });
     const { locale } = useUserLocale();
     const { serverVersion: { minor } } = useConfig();
+    const { dataEntryFormConfig, configIsFetched } = useDataEntryFormConfig({ selectedScopeId: scopeId });
 
-    const { programStage, dataElementIds } = useMemo(() => {
-        const stage = program?.programStages.find(ps => ps.id === stageId);
-        if (!stage) return {};
+    const programStage = useMemo(() => {
+        if (!stageId) {
+            return program?.programStages[0];
+        }
 
-        return {
-            programStage: stage,
-            dataElementIds: stage
-                .programStageDataElements
-                .map(dataElement => dataElement.dataElementId),
-        };
-    }, [program, stageId]);
+        return program?.programStages.find(ps => ps.id === stageId);
+    }, [program?.programStages, stageId]);
+
+    const dataElementIds = useMemo(() => {
+        if (!programStage) return [];
+
+        return programStage
+            .programStageDataElements
+            .map(dataElement => dataElement.dataElementId);
+    }, [programStage]);
 
     const { dataElements } = useDataElementsForStage({
         programId,
@@ -52,12 +55,12 @@ export const useMetadataForEnrollmentEventForm = ({
 
     const { optionSets } = useOptionSetsForAttributes({
         attributes: dataElements,
-        selectedScopeId: stageId,
+        selectedScopeId: scopeId,
     });
 
     const { data: programStageMetadata, isIdle, isLoading, isError } = useIndexedDBQuery(
         // $FlowFixMe
-        ['formFoundation', programId, stageId],
+        ['programStageMetadata', programId, stageId],
         // $FlowFixMe
         () => buildProgramStageMetadata({
             // $FlowFixMe
