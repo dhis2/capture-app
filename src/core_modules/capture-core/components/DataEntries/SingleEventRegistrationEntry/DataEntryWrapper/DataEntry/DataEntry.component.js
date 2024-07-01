@@ -86,7 +86,7 @@ const getStyles = theme => ({
 const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
-    COMMENTS: 'COMMENTS',
+    NOTES: 'NOTES',
     RELATIONSHIPS: 'RELATIONSHIPS',
     ASSIGNEE: 'ASSIGNEE',
 };
@@ -242,8 +242,8 @@ const buildGeometrySettingsFn = () => ({
 
         return createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: 'Coordinate',
-            dialogLabel: 'Coordinate',
+            label: i18n.t('Coordinate'),
+            dialogLabel: i18n.t('Coordinate'),
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
@@ -359,16 +359,16 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Comments',
+            label: i18n.t('Notes'),
             onAddNote: props.onAddNote,
-            id: 'comments',
+            id: 'notes',
             dataEntryId: props.id,
         }),
         getPropName: () => 'note',
         getValidatorContainers: () => getNoteValidatorContainers(),
         getMeta: () => ({
             placement: placements.BOTTOM,
-            section: dataEntrySectionNames.COMMENTS,
+            section: dataEntrySectionNames.NOTES,
         }),
     };
 
@@ -462,8 +462,8 @@ const AOCField = withAOCFieldBuilder({})(
     withDataEntryFields(buildCategoryOptionsFieldSettingsFn())(AssigneeField),
 );
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AOCField);
-const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
-const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
+const NoteField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
+const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(NoteField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const FeedbackOutput = withFeedbackOutput()(ReportDateField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
@@ -519,9 +519,9 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
     },
-    [dataEntrySectionNames.COMMENTS]: {
+    [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Comments'),
+        name: i18n.t('Notes'),
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
@@ -553,7 +553,7 @@ class NewEventDataEntry extends Component<Props> {
     componentDidMount() {
         if (this.relationshipsInstance && this.props.recentlyAddedRelationshipId) {
             this.relationshipsInstance.scrollIntoView();
-            // $FlowFixMe[prop-missing] automated comment
+            // $FlowFixMe[prop-missing] automated note
             this.props.onScrollToRelationships();
         }
     }
@@ -625,7 +625,7 @@ class NewEventDataEntry extends Component<Props> {
         return (
             <div>
                 <div data-test="data-entry-container">
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                    {/* $FlowFixMe[cannot-spread-inexact] automated note */}
                     <WrappedDataEntry
                         id={'singleEvent'}
                         onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}

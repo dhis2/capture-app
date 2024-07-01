@@ -10,7 +10,7 @@ import { WidgetWarning } from '../../../../../WidgetErrorAndWarning/WidgetWarnin
 import type { Props as WidgetWarningProps } from '../../../../../WidgetErrorAndWarning/WidgetWarning/WidgetWarning.types';
 import { WidgetFeedback } from '../../../../../WidgetFeedback';
 import { WidgetIndicator } from '../../../../../WidgetIndicator';
-import { WidgetEnrollmentComment } from '../../../../../WidgetEnrollmentComment';
+import { WidgetEnrollmentNote } from '../../../../../WidgetEnrollmentNote';
 import { WidgetProfile } from '../../../../../WidgetProfile';
 import type { Props as WidgetProfileProps } from '../../../../../WidgetProfile/widgetProfile.types';
 import { WidgetEnrollment } from '../../../../../WidgetEnrollment';
@@ -20,7 +20,7 @@ import type { Props as WidgetEventEditProps } from '../../../../../WidgetEventEd
 import type { WidgetConfig } from '../DefaultEnrollmentLayout.types';
 import { NewEventWorkspaceWrapper } from '../../../NewEventWorkspaceWrapper';
 import { WidgetEventEditWrapper } from '../../../WidgetEventEditWrapper';
-import { WidgetEventComment } from '../../../../../WidgetEventComment';
+import { WidgetEventNote } from '../../../../../WidgetEventNote';
 import { WidgetAssignee } from '../../../../../WidgetAssignee';
 import type {
     IndicatorProps,
@@ -113,8 +113,8 @@ export const IndicatorWidget: WidgetConfig = {
     }),
 };
 
-export const EnrollmentComment: WidgetConfig = {
-    Component: WidgetEnrollmentComment,
+export const EnrollmentNote: WidgetConfig = {
+    Component: WidgetEnrollmentNote,
     getProps: (): void => {},
 };
 
@@ -261,8 +261,8 @@ export const AssigneeWidget: WidgetConfig = {
     }),
 };
 
-export const EventComment: WidgetConfig = {
-    Component: WidgetEventComment,
+export const EventNote: WidgetConfig = {
+    Component: WidgetEventNote,
     getProps: ({ dataEntryKey, dataEntryId }) => ({
         dataEntryKey,
         dataEntryId,

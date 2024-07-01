@@ -13,7 +13,7 @@ import {
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
-    useCommentDetails,
+    useNoteDetails,
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
@@ -43,9 +43,9 @@ export const WidgetEventSchedule = ({
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
     });
-    const { currentUser, noteId } = useCommentDetails();
+    const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
-    const [comments, setComments] = useState([]);
+    const [notes, setNotes] = useState([]);
     const [assignee, setAssignee] = useState(storedAssignee);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
     const { eventId } = useLocationQuery();
@@ -77,7 +77,7 @@ export const WidgetEventSchedule = ({
         }
         dispatch(requestScheduleEvent({
             scheduleDate,
-            comments,
+            notes,
             programId,
             orgUnitId,
             stageId,
@@ -94,7 +94,7 @@ export const WidgetEventSchedule = ({
     }, [
         dispatch,
         scheduleDate,
-        comments,
+        notes,
         programId,
         orgUnitId,
         stageId,
@@ -116,18 +116,18 @@ export const WidgetEventSchedule = ({
     }, [scheduleDate, suggestedScheduleDate]);
 
 
-    const onAddComment = (comment) => {
-        const newComment = {
+    const onAddNote = (note) => {
+        const newNote = {
             storedBy: currentUser.userName,
             storedAt: moment().toISOString(),
-            value: comment,
+            value: note,
             createdBy: {
                 firstName: currentUser.firstName,
                 surname: currentUser.surname,
             },
             note: noteId,
         };
-        setComments([...comments, newComment]);
+        setNotes([...notes, newNote]);
     };
 
     const onSetAssignee = useCallback(user => setAssignee(user), []);
@@ -184,10 +184,10 @@ export const WidgetEventSchedule = ({
             onCancel={onCancel}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
-            onAddComment={onAddComment}
+            onAddNote={onAddNote}
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
-            comments={comments}
+            notes={notes}
             selectedCategories={selectedCategories}
             categoryOptionsError={categoryOptionsError}
             onClickCategoryOption={onClickCategoryOption}

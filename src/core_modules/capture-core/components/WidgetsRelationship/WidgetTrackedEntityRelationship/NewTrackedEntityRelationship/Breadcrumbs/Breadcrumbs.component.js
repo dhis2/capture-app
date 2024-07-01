@@ -17,7 +17,7 @@ const Slash = withStyles({ slash: { padding: 5 } })(({ classes }) => <span class
 
 const LinkedEntityMetadataSelectorStep = ({ currentStep, trackedEntityTypeName, onNavigate }) => {
     const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {
-        trackedEntityTypeName: trackedEntityTypeName?.toLowerCase(),
+        trackedEntityTypeName: trackedEntityTypeName && trackedEntityTypeName.toLowerCase(),
     });
     return (currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.value ?
         <LinkButton onClick={onNavigate}>{initialText}</LinkButton> :

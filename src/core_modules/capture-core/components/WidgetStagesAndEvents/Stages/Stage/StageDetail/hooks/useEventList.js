@@ -12,7 +12,7 @@ import { convertValue as convertServerToClient } from '../../../../../../convert
 import {
     convertStatusForView,
     convertOrgUnitForView,
-    convertCommentForView,
+    convertNoteForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
 } from './helpers';
@@ -22,14 +22,14 @@ import {
 } from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName';
 
-const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'comments' }];
+const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'notes' }];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
     { type: 'ASSIGNEE' },
     { type: dataElementTypes.TEXT, resolveValue: convertOrgUnitForView },
     { type: dataElementTypes.DATE },
-    { type: dataElementTypes.UNKNOWN, resolveValue: convertCommentForView },
+    { type: dataElementTypes.UNKNOWN, resolveValue: convertNoteForView },
 ];
 const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },

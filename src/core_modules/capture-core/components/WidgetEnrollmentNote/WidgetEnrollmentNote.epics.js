@@ -5,7 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
-    from './WidgetEnrollmentComment.actions';
+    from './WidgetEnrollmentNote.actions';
 
 export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(

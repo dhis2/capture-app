@@ -3,7 +3,7 @@ import moment from 'moment';
 import '../sharedSteps';
 import '../WidgetEnrollment';
 import '../WidgetProfile';
-import '../WidgetEnrollmentComment';
+import '../WidgetEnrollmentNote';
 
 When('the user sets the birthday date to the current date', () => {
     cy.get('[data-test="modal-edit-profile"]').find('[data-test="capture-ui-input"]').eq(8).clear()

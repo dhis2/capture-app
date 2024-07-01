@@ -31,7 +31,7 @@ In the Capture app you register events that occurred at a particular time and pl
     the field. This will open a map where you can search for a location and capture
     a polygon (button in the upper right corner of the map).
 
-7. If desired you can add a comment by clicking the **Write comment** button at the bottom of the form. Note that Event comments are attributed to a user and cannot be deleted. 
+7. If desired, you can add a note by clicking the **Write note** button at the bottom of the form. Be aware that Event notes are attributed to a user and cannot be deleted. 
 
 8. If desired you can add a relationship by clicking the **Add relationship** button at the bottom of the form.
    See the section about **Adding a relationship** for more information.
@@ -120,7 +120,7 @@ The second option, is to register a tracked entity instance with program and enr
 
 3. Select a tracker program of your choice.
 
-4. Click **Create new person**. Please note that the label of this button corresponds to the tracked entity type of the program, which could vary, such as "Building," "Person," etc.
+4. Click **Create new person**. Note that the label of this button corresponds to the tracked entity type of the program, which could vary, such as "Building," "Person," etc.
 
     ![create new event](resources/images/register-and-enroll-program-selection.png)
  
@@ -233,7 +233,7 @@ When the "Scheduled days from start" does not contain a number or contains 0 the
 ### Possible duplicates detection
 
 In both cases of registering a tracked entity instance, (with enrollment or without enrollment) the system will start looking for possible duplicates.
-Note that, programs need to be correctly configured through the maintenance app for the system to start detecting duplicates when enrolling a new person in a program. 
+Note that programs need to be correctly configured through the maintenance app for the system to start detecting duplicates when enrolling a new person in a program. 
 
 To configure a program through the maintenance app you will have to: 
 
@@ -280,8 +280,8 @@ Click **Save person**. The system will start looking for possible duplicates tha
 
 ### Program rules execution
 
-In both cases of registering a tracked entity instance, (with enrollment or without enrollment) the system will run program rules you have configured.
-Note that, rules can be configured in the maintenance app.
+In both cases of registering a tracked entity instance (with enrollment or without enrollment), the system will run program rules you have configured.
+Note that rules can be configured in the maintenance app.
 
 To see a rule being executed while enrolling a tracked entity instance you will have to take the following steps. 
 
@@ -1002,13 +1002,14 @@ You can complete the enrollment by clicking the complete button. When there are 
 
 ![](resources/images/enrollment-dash-enrollment-widget-4.png)
 
-### Enrollment comment widget
+### Enrollment note widget
 
-![](resources/images/enrollment-widget-comment.png)
+The enrollment note widget displays notes and allows addition of notes, associated with the current enrollment. 
 
-The enrollment comment widget displays comments and allows addition of comments, associated with the current enrollment. 
+![](resources/images/enrollment-widget-note.png)
 
-By clicking in the text field, you will be able to enter new text and see action buttons **Save comment** and **Cancel**. Note that Enrollment comments are attributed to a user and cannot be deleted. 
+By clicking in the text field, you will be able to enter new text and see action buttons **Save note** and **Cancel**. Be aware that Enrollment notes are attributed to a user and cannot be deleted. 
+
 
 ### Relationship widget
 
@@ -1268,7 +1269,7 @@ If a program stage has a default next scheduled date configured, the suggested d
 
 User can also find more information about how many events that scheduled on the same selected date or the interval of selected date and the suggested date from the information box.
 
-Below the schedule date entry, user can choose to add a comment to the scheduled event.
+Below the schedule date entry, user can choose to add a note to the scheduled event.
 
 After clicking **Schedule** button, user will be navigated back to enrollment overview page.
 

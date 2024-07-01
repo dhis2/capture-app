@@ -2,7 +2,7 @@
 import {
     QuickActions,
     StagesAndEvents,
-    EnrollmentComment,
+    EnrollmentNote,
     DefaultWidgetsForEnrollmentOverview,
     WidgetTypes,
 } from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
@@ -14,7 +14,7 @@ import type {
 export const WidgetsForEnrollmentPageDefault: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     QuickActions,
     StagesAndEvents,
-    EnrollmentComment,
+    EnrollmentNote,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
@@ -40,7 +40,7 @@ export const DefaultPageLayout: PageLayoutConfig = Object.freeze({
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'EnrollmentComment',
+            name: 'EnrollmentNote',
         },
         {
             type: WidgetTypes.COMPONENT,
