@@ -11,6 +11,7 @@ import type {
     CachedProgramStage,
     CachedProgramStageDataElementsAsObject,
     CachedOptionSet,
+    CachedDataElement,
 } from '../../../../storageControllers/cache.types';
 import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
@@ -32,12 +33,14 @@ export class ProgramStageFactory {
     cachedOptionSets: Map<string, CachedOptionSet>;
     locale: ?string;
     dataElementFactory: DataElementFactory;
+    cachedDataElements: ?Map<string, CachedDataElement>;
     relationshipTypesFactory: RelationshipTypesFactory;
     dataEntryFormConfig: ?DataEntryFormConfig;
 
     constructor({
         cachedOptionSets,
         cachedRelationshipTypes,
+        cachedDataElements,
         locale,
         minorServerVersion,
         dataEntryFormConfig,
@@ -47,6 +50,7 @@ export class ProgramStageFactory {
         this.relationshipTypesFactory = new RelationshipTypesFactory(
             cachedRelationshipTypes,
         );
+        this.cachedDataElements = cachedDataElements;
         this.dataElementFactory = new DataElementFactory(
             cachedOptionSets,
             locale,
@@ -103,13 +107,22 @@ export class ProgramStageFactory {
                 } else {
                     const id = sectionDataElement.id;
                     const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
+                    const cachedDataElementDefinition = this
+                        .cachedDataElements
+                        ?.get(cachedProgramStageDataElement.dataElementId);
+
                     if (!cachedProgramStageDataElement) {
                         log.error(
                             errorCreator('could not find programStageDataElement')(
                                 { sectionDataElement }));
                         return;
                     }
-                    const element = await this.dataElementFactory.build(cachedProgramStageDataElement, section);
+
+                    const element = await this.dataElementFactory.build(
+                        cachedProgramStageDataElement,
+                        section,
+                        cachedDataElementDefinition,
+                    );
                     element && section.addElement(element);
                 }
             });
@@ -126,7 +139,15 @@ export class ProgramStageFactory {
         if (cachedProgramStageDataElements) {
             // $FlowFixMe
             await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
-                const element = await this.dataElementFactory.build(cachedProgramStageDataElement, section);
+                const cachedDataElementDefinition = this
+                    .cachedDataElements
+                    ?.get(cachedProgramStageDataElement.dataElementId);
+
+                const element = await this.dataElementFactory.build(
+                    cachedProgramStageDataElement,
+                    section,
+                    cachedDataElementDefinition,
+                );
                 element && section.addElement(element);
             }));
         }

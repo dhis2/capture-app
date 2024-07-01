@@ -1,5 +1,9 @@
 // @flow
-import type { CachedOptionSet, CachedProgramStage, CachedRelationshipType } from '../../../../storageControllers';
+import type {
+    CachedDataElement,
+    CachedOptionSet,
+    CachedProgramStage,
+} from '../../../../storageControllers';
 import type { DataEntryFormConfig } from '../TEIAndEnrollment';
 import { getUserStorageController, userStores } from '../../../../storageControllers';
 import { ProgramStageFactory } from '../../../../metaDataMemoryStoreBuilders/programs/factory/programStage';
@@ -7,6 +11,7 @@ import { ProgramStageFactory } from '../../../../metaDataMemoryStoreBuilders/pro
 export const buildProgramStageMetadata = async ({
     cachedProgramStage,
     programId,
+    cachedDataElements,
     cachedOptionSets,
     locale,
     minorServerVersion,
@@ -15,7 +20,7 @@ export const buildProgramStageMetadata = async ({
     cachedProgramStage: CachedProgramStage,
     programId: string,
     cachedOptionSets: Array<CachedOptionSet>,
-    cachedRelationshipTypes: Array<CachedRelationshipType>,
+    cachedDataElements: Array<CachedDataElement>,
     dataEntryFormConfig: ?DataEntryFormConfig,
     locale: string,
     minorServerVersion: number,
@@ -27,6 +32,7 @@ export const buildProgramStageMetadata = async ({
     const programStageFactory = new ProgramStageFactory({
         cachedOptionSets: new Map<string, CachedOptionSet>(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),
         cachedRelationshipTypes,
+        cachedDataElements: new Map<string, CachedDataElement>(cachedDataElements.map(dataElement => [dataElement.id, dataElement])),
         locale,
         minorServerVersion,
         dataEntryFormConfig,

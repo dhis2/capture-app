@@ -65,6 +65,8 @@ export const useMetadataForProgramStage = ({
         () => buildProgramStageMetadata({
             // $FlowFixMe
             cachedProgramStage: programStage,
+            // $FlowFixMe
+            cachedDataElements: dataElements,
             programId,
             // $FlowFixMe
             cachedOptionSets: optionSets,
@@ -77,6 +79,7 @@ export const useMetadataForProgramStage = ({
             staleTime: Infinity,
             enabled: !!program
                 && !!programId
+                && !!dataElements
                 && !!optionSets
                 && !!locale
                 && !!minor

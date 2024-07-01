@@ -1,5 +1,6 @@
 // @flow
 import type {
+    CachedDataElement,
     CachedOptionSet,
     CachedRelationshipType,
     CachedSectionDataElements,
@@ -10,6 +11,7 @@ import type {
 
 export type ConstructorInput = {|
     cachedOptionSets: Map<string, CachedOptionSet>,
+    cachedDataElements?: Map<string, CachedDataElement>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
     dataEntryFormConfig?: ?DataEntryFormConfig,
     locale: ?string,
