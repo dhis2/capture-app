@@ -53,11 +53,13 @@ Feature: User interacts with Stages and Events Widget
         When you click New First antenatal care visit event
         Then you should navigate to Add new page #/enrollmentEventNew?enrollmentId=ek4WWAgXX5i&orgUnitId=DwpbWkiqjMy&programId=WSGAb5XwJ3Y&stageId=WZbXY0S00lP&teiId=yFcOhsM1Yoa
 
+
     Scenario: User can not go to Add new page if stage is not repeatable and there is event in the stage
         Given you open the enrollment page by typing #enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8
         Then you should see the disabled button New Birth event
 
-    # @user:TrackerAutoTest
-    # Scenario: Program stage is hidden if no data read access
-    #    And you open the enrollment page by typing #enrollment?enrollmentId=iNEq9d22Nyp&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=k4ODejBytgv
-    #    Then the Care at birth program stage should be hidden
+    # Waiting for pipline to update DB/DB update for 39 and 41
+    @user:trackerAutoTestRestricted @v=38 @v=40 @v=42
+    Scenario: Program stage is hidden if no data read access
+        And you open the enrollment page by typing #enrollment?enrollmentId=iNEq9d22Nyp&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=k4ODejBytgv
+        Then the Care at birth program stage should be hidden

@@ -1,7 +1,5 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
-import '../sharedSteps';
-
 Given('the user is on the the main page', () => {
     cy.visit('/#/');
 });

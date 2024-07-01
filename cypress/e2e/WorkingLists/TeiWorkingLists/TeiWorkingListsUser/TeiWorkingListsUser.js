@@ -1,7 +1,6 @@
 import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
 import '../../sharedSteps';
-import '../../../sharedSteps';
 
 const cleanUpIfApplicable = (programId) => {
     cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)

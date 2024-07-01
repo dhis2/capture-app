@@ -1,5 +1,4 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import '../sharedSteps';
 
 Then('you should see the app main selections', () => {
     cy.get('[data-test="org-unit-selector-container"]');

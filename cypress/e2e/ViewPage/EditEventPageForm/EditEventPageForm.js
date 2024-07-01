@@ -1,5 +1,4 @@
 import { Given, Then, defineStep as And, After, When, Before } from '@badeball/cypress-cucumber-preprocessor';
-import '../../sharedSteps';
 
 const cleanUpEvent = () => {
     cy.visit('/#/viewEvent?viewEventId=rgWr86qs0sI');

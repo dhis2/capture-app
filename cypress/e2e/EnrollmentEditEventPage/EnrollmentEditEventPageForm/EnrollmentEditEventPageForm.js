@@ -1,6 +1,5 @@
 import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
-import '../../sharedSteps';
 
 const changeEnrollmentAndEventsStatus = () => (
     cy.buildApiUrl(

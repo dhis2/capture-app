@@ -1,5 +1,4 @@
 import { When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
-import '../sharedSteps';
 
 And('you select search scope TB program', () => {
     cy.get('[data-test="virtualized-select"]')
