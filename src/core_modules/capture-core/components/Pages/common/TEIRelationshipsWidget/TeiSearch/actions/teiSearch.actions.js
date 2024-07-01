@@ -18,7 +18,7 @@ export const actionTypes = {
     TEI_EDIT_SEARCH: 'RelationshipsWidget.TeiEditSearch',
     TEI_SEARCH_RESULTS_CHANGE_PAGE: 'RelationshipsWidget.TeiSearchResultsChangePage',
     TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION: 'RelationshipsWidget.TeiSearchSetOpenSearchGroupSection',
-    SEARCH_TEI_BY_TET_ID: 'RelationshipsWidget.SearchTeiByTETId',
+    SEARCH_TE_IN_TET_SCOPE: 'RelationshipsWidget.SearchTrackedEntityInTETScope',
 };
 
 
@@ -46,7 +46,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityType = ({
     selectedProgramId: string,
     programQueryArgs: any,
 }) =>
-    actionCreator(actionTypes.SEARCH_TEI_BY_TET_ID)({
+    actionCreator(actionTypes.SEARCH_TE_IN_TET_SCOPE)({
         formId,
         searchGroupId,
         searchId,

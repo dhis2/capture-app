@@ -50,7 +50,7 @@ export const searchTeiByTETIdEpic = (
     { absoluteApiPath, querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
-        ofType(actionTypes.SEARCH_TEI_BY_TET_ID),
+        ofType(actionTypes.SEARCH_TE_IN_TET_SCOPE),
         switchMap((action) => {
             const { selectedProgramId, searchId, formId, searchGroupId, programQueryArgs } = action.payload;
             const { attributes, trackedEntityType } = getTrackerProgram(selectedProgramId);
