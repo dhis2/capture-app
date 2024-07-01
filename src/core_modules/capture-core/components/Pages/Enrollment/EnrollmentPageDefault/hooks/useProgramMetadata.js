@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useProgramFromIndexedDB } from '../../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useDataElementsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useDataElementsFromIndexedDB';
 import { useOptionSetsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useOptionSetsFromIndexedDB';
+import type { Program } from '../EnrollmentPageDefault.types';
 
 const queryKey = 'useProgramMetadata';
 
@@ -58,7 +59,7 @@ export const useProgramMetadata = (programId: string) => {
         [optionSets],
     );
 
-    const programMetadata = useMemo(() => {
+    const programMetadata: Program | void = useMemo(() => {
         if (!program || !derivedDataElementValues || !optionSetDictionary) {
             return undefined;
         }
@@ -68,6 +69,10 @@ export const useProgramMetadata = (programId: string) => {
         return {
             programStages: program.programStages.map(stage => ({
                 id: stage.id,
+                dataAccess: {
+                    read: stage.access.data.read,
+                    write: stage.access.data.write,
+                },
                 repeatable: stage.repeatable,
                 hideDueDate: stage.hideDueDate,
                 enableUserAssignment: stage.enableUserAssignment,
