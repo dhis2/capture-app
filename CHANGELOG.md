@@ -1,3 +1,10 @@
+# [100.70.0](https://github.com/dhis2/capture-app/compare/v100.69.3...v100.70.0) (2024-07-01)
+
+
+### Features
+
+* [DHIS2-17068] Check Related Stage Eligibility for Storing Events ([#3657](https://github.com/dhis2/capture-app/issues/3657)) ([8c4d92c](https://github.com/dhis2/capture-app/commit/8c4d92c0e46b8f06f9e2d28a81e04cc9fe28bf0d))
+
 ## [100.69.3](https://github.com/dhis2/capture-app/compare/v100.69.2...v100.69.3) (2024-06-28)
 
 
