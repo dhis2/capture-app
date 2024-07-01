@@ -17,7 +17,7 @@ const styles = {
         paddingLeft: '2px',
     },
 };
-export const NotessPlain = ({ event, classes }: Props) => {
+export const NotesPlain = ({ event, classes }: Props) => {
     const notesCount = event.notes?.length;
 
     return (
@@ -28,4 +28,4 @@ export const NotessPlain = ({ event, classes }: Props) => {
     );
 };
 
-export const Notes: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(NotessPlain);
+export const Notes: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(NotesPlain);
