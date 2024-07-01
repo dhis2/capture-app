@@ -54,15 +54,10 @@ When('edits and save the form', () => {
         .click();
 });
 
-When('navigates back to the main page', () => {
-    cy.contains('Show all events')
-        .click();
-});
-
 Then('the working list should be updated', () => {
     cy.get('.app-shell-app').scrollTo('bottom');
 
-    cy.get('button[title="Select columns"]')
+    cy.get('[data-test="select-columns-reference"]')
         .click();
 
     cy.contains('WHOMCH Hemoglobin value')

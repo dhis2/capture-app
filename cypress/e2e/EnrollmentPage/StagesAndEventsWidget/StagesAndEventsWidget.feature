@@ -38,10 +38,12 @@ Feature: User interacts with Stages and Events Widget
         When you sort list asc by Date of visit
         Then the sorted list by Date of visit asc should be displayed
 
-    # Scenario: User can go to Program Stage list by clicking Go to full
-    #     Given you open the enrollment page which has multiples events and stages
-    #     When you click button Go to full Antenatal care visit
-    #     Then you should navigate to Program Stage list page
+    # DHIS2-11733
+    @skip
+    Scenario: User can go to Program Stage list by clicking Go to full
+        Given you open the enrollment page which has multiples events and stages
+        When you click button Go to full Antenatal care visit
+        Then you should navigate to Program Stage list page
 
     Scenario: User can go to Add new page by clicking New event in stage
         Given you open the enrollment page which has multiples events and stages
