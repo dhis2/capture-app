@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
-"PO-Revision-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-07-01T05:16:53.049Z\n"
+"PO-Revision-Date: 2024-07-01T05:16:53.049Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1285,9 +1285,6 @@ msgstr "Started at {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Owned by {{ownerOrgUnit}}"
-
-msgid "Last updated {{date}}"
-msgstr "Last updated {{date}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
