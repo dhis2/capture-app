@@ -1,2 +1,2 @@
 export { filterInstanceVersion, hasVersionSupport } from './filterInstanceVersion';
-export { shouldClearCookies } from './shouldClearCookies';
+export { login } from './login';
