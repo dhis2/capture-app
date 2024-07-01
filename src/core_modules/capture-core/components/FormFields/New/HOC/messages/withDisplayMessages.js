@@ -8,6 +8,8 @@ import isObject from 'd2-utilizr/lib/isObject';
 const styles = (theme: Theme) => ({
     base: {
         paddingTop: 10,
+        marginLeft: 0,
+        paddingLeft: 0,
     },
     error: {
         color: colors.red600,
@@ -35,6 +37,9 @@ const styles = (theme: Theme) => ({
         marginTop: 1,
         marginRight: 4,
     },
+    listItem: {
+        listStylePosition: 'inside',
+    },
 });
 
 const messageTypes = {
@@ -57,6 +62,7 @@ type Props = {
         validating: string,
         validatingContainer: string,
         validatingIndicator: string,
+        listItem: string
     }
 };
 
@@ -67,7 +73,7 @@ type MessageContainer = {
 
 const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
     class DisplayMessagesHOC extends React.Component<Props> {
-        static createMessageElement(text, baseClass, messageClass, validatorClasses, type) {
+        static createMessageElement(text, baseClass, messageClass, validatorClasses, listItemClass, type) {
             if (type === messageTypes.validating) {
                 return (
                     <div
@@ -92,16 +98,16 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             }
 
             return (
-                <div
+                <ul
                     data-test="error-message"
                     className={classNames(baseClass, messageClass)}
                 >
                     {Array.isArray(text) ? text?.map(message => (
-                        <span>
+                        <li className={listItemClass}>
                             {message}<br />
-                        </span>
+                        </li>
                     )) : text}
-                </div>
+                </ul>
             );
         }
 
@@ -113,6 +119,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             }
 
             const { classes } = this.props;
+
             return {
                 element: DisplayMessagesHOC.createMessageElement(
                     message,
@@ -122,6 +129,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                         container: classes.validatingContainer,
                         indicator: classes.validatingIndicator,
                     },
+                    classes.listItem,
                     messageType,
                 ),
             };
