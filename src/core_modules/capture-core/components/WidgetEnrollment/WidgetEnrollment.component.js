@@ -7,6 +7,7 @@ import {
     colors,
     Tag,
     spacersNum,
+    Tooltip,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
@@ -148,9 +149,10 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-clock">
                                 <IconClock16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Last updated {{date}}', {
-                                date: moment(fromServerDate(enrollment.updatedAt)).fromNow(),
-                            })}
+                            {i18n.t('Last updated')}
+                            <Tooltip content={(fromServerDate(enrollment.updatedAt).toLocaleString())}>
+                                {moment(fromServerDate(enrollment.updatedAt)).fromNow()}
+                            </Tooltip>
                         </div>
 
                         {enrollment.geometry && (

@@ -56,7 +56,14 @@ const getLastUpdatedAt = (events, fromServerDate) => {
     if (lastEventUpdated) {
         const { updatedAt } = lastEventUpdated;
         return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
-            ? i18n.t('Last updated {{date}}', { date: moment(fromServerDate(updatedAt)).fromNow() })
+            ? (
+                <>
+                    {i18n.t('Last updated')}&nbsp;
+                    <Tooltip content={fromServerDate(updatedAt).toLocaleString()}>
+                        { moment(fromServerDate(updatedAt)).fromNow()}
+                    </Tooltip>
+                </>
+            )
             : null;
     }
     return null;
