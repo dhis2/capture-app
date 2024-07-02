@@ -14,7 +14,7 @@ import type { TeiColumnMetaForDataFetching } from '../../../../types';
 import type { QuerySingleResource } from '../../../../../../../utils/api';
 
 const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApiPath: string) => {
-    const getImageOrFileResourceSubvalue = async (keys: Array<string>) => {
+    const getFileResourceSubvalue = async (keys: Array<string>) => {
         const promises = keys
             .map(async (key) => {
                 const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: key });
@@ -31,6 +31,12 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
             }, {});
     };
 
+    const getImageResourceSubvalue = (keys: Array<string>) =>
+        keys.reduce((acc, key) => {
+            acc[key] = key;
+            return acc;
+        }, {});
+
     const getOrganisationUnitSubvalue = async (keys: Array<string>) =>
         getOrgUnitNames(keys, querySingleResource);
 
@@ -38,8 +44,8 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
         [string]: any,
     |} = {
         [dataElementTypes.ORGANISATION_UNIT]: getOrganisationUnitSubvalue,
-        [dataElementTypes.IMAGE]: getImageOrFileResourceSubvalue,
-        [dataElementTypes.FILE_RESOURCE]: getImageOrFileResourceSubvalue,
+        [dataElementTypes.IMAGE]: getImageResourceSubvalue,
+        [dataElementTypes.FILE_RESOURCE]: getFileResourceSubvalue,
     };
 
     const subvaluePostProcessorByType: {|
@@ -47,11 +53,9 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
     |} = {
         [dataElementTypes.IMAGE]: ({
             subvalueKey: value,
-            subvalue: name,
             imageUrl,
             previewUrl,
         }) => ({
-            name,
             value,
             url: `${absoluteApiPath}${imageUrl}`,
             previewUrl: `${absoluteApiPath}${previewUrl}`,

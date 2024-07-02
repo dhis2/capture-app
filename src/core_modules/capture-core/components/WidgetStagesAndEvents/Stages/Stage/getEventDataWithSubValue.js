@@ -27,15 +27,13 @@ const getFileResourceSubvalue = async (keys: Object, querySingleResource: QueryS
         }, {});
 };
 
-const getImageSubvalue = async (keys: Object, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => {
-    const promises = Object.keys(keys)
-        .map(async (key) => {
+const getImageSubvalue = (keys: Object, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => (
+    Object.keys(keys)
+        .map((key) => {
             const value = keys[key];
             if (value) {
-                const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
                 return {
-                    id,
-                    name,
+                    value,
                     ...(featureAvailable(FEATURES.trackerImageEndpoint) ?
                         {
                             url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/image`,
@@ -48,17 +46,13 @@ const getImageSubvalue = async (keys: Object, querySingleResource: QuerySingleRe
                 };
             }
             return {};
-        });
-
-    return (await Promise.all(promises))
-        .reduce((acc, { id, name, url, previewUrl }) => {
-            if (id) {
-                acc[id] = { value: id, name, url, previewUrl };
+        }).reduce((acc, { value, url, previewUrl }) => {
+            if (value) {
+                acc[value] = { value, url, previewUrl };
             }
             return acc;
-        }, {});
-};
-
+        }, {})
+);
 
 const getOrganisationUnitSubvalue = async (keys: Object, querySingleResource: QuerySingleResource) => {
     const ids = Object.values(keys)
