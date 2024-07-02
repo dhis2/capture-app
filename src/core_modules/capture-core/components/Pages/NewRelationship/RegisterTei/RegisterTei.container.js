@@ -22,7 +22,7 @@ export const RegisterTei = ({ onLink, onSave, onCancel, onGetUnsavedAttributeVal
     const itemId = useSelector(({ dataEntries }) => dataEntries[dataEntryId]?.itemId);
     const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
     const newRelationshipProgramId = useNewRelationshipScopeId();
-    const { trackedEntityName } = useScopeInfo(newRelationshipProgramId);
+    const { trackedEntityName, tetId: trackedEntityTypeId } = useScopeInfo(newRelationshipProgramId);
 
     return (
         <RegisterTeiComponent
@@ -33,6 +33,7 @@ export const RegisterTei = ({ onLink, onSave, onCancel, onGetUnsavedAttributeVal
             onCancel={onCancel}
             onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
             trackedEntityName={trackedEntityName}
+            trackedEntityTypeId={trackedEntityTypeId}
             newRelationshipProgramId={newRelationshipProgramId}
             error={error}
         />

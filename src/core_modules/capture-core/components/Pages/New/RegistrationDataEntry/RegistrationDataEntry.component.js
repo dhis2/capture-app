@@ -143,7 +143,7 @@ const RegistrationDataEntryPlain = ({
                     programId,
                 }))}
             >
-                {programId ? i18n.t('View enrollment') : i18n.t('View dashboard')}
+                {i18n.t('View dashboard')}
             </Button>
         );
     }, []);

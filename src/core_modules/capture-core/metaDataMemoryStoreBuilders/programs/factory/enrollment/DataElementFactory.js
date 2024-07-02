@@ -41,6 +41,51 @@ export class DataElementFactory {
             'could not create the metadata because a MULIT_TEXT without associated option sets was found',
     };
 
+    static onValidateOnScopeTrackedEntityType(
+        dataElementUnique: DataElementUnique,
+        dataElement: DataElement,
+        serverValue: any,
+        contextProps: Object = {},
+        querySingleResource: QuerySingleResource,
+    ) {
+        let requestPromise;
+        if (dataElementUnique.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
+            const orgUnitId = contextProps.orgUnitId;
+            requestPromise = querySingleResource({
+                resource: 'tracker/trackedEntities',
+                params: {
+                    trackedEntityType: contextProps.trackedEntityTypeId,
+                    orgUnit: orgUnitId,
+                    filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
+                },
+            });
+        } else {
+            requestPromise = querySingleResource({
+                resource: 'tracker/trackedEntities',
+                params: {
+                    trackedEntityType: contextProps.trackedEntityTypeId,
+                    ouMode: 'ACCESSIBLE',
+                    filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
+                },
+            });
+        }
+        return requestPromise
+            .then((result) => {
+                const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+                const data = {
+                    id: trackedEntityInstance.trackedEntity,
+                    tetId: trackedEntityInstance.trackedEntityType,
+                };
+
+                return {
+                    valid: otherTrackedEntityInstances.length === 0,
+                    data,
+                };
+            });
+    }
+
     static buildtetFeatureType(featureType: 'POINT' | 'POLYGON', section: Section) {
         const dataElement = new DataElement((o) => {
             o.section = section;
@@ -111,6 +156,15 @@ export class DataElementFactory {
                     .then((result) => {
                         const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
                         const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                        if (otherTrackedEntityInstances.length === 0) {
+                            return this.onValidateOnScopeTrackedEntityType(
+                                o,
+                                dataElement,
+                                serverValue,
+                                contextProps,
+                                querySingleResource,
+                            );
+                        }
                         const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 
                         const data = {

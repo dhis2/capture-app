@@ -36,6 +36,51 @@ const OPTION_SET_NOT_FOUND = 'Optionset not found';
 const TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND =
     'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found';
 
+const onValidateOnScopeTrackedEntityType = (
+    dataElementUnique: DataElementUnique,
+    dataElement: DataElement,
+    serverValue: any,
+    contextProps: Object = {},
+    querySingleResource: QuerySingleResource,
+) => {
+    let requestPromise;
+    if (dataElementUnique.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
+        const orgUnitId = contextProps.orgUnitId;
+        requestPromise = querySingleResource({
+            resource: 'tracker/trackedEntities',
+            params: {
+                trackedEntityType: contextProps.trackedEntityTypeId,
+                orgUnit: orgUnitId,
+                filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
+            },
+        });
+    } else {
+        requestPromise = querySingleResource({
+            resource: 'tracker/trackedEntities',
+            params: {
+                trackedEntityType: contextProps.trackedEntityTypeId,
+                ouMode: 'ACCESSIBLE',
+                filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
+            },
+        });
+    }
+    return requestPromise
+        .then((result) => {
+            const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
+            const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+            const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+            const data = {
+                id: trackedEntityInstance.trackedEntity,
+                tetId: trackedEntityInstance.trackedEntityType,
+            };
+
+            return {
+                valid: otherTrackedEntityInstances.length === 0,
+                data,
+            };
+        });
+};
+
 const buildDataElementUnique = (
     dataElement: DataElement,
     trackedEntityAttribute: TrackedEntityAttribute,
@@ -91,6 +136,15 @@ const buildDataElementUnique = (
             return requestPromise.then((result) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
                 const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                if (otherTrackedEntityInstances.length === 0) {
+                    return onValidateOnScopeTrackedEntityType(
+                        dataEntry,
+                        dataElement,
+                        serverValue,
+                        contextProps,
+                        querySingleResource,
+                    );
+                }
                 const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 
                 const data = {
