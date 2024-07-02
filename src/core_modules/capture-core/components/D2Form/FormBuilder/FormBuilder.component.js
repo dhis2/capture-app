@@ -543,6 +543,7 @@ export class FormBuilder extends React.Component<Props> {
             customAttributes,
             name,
             formId,
+            viewMode,
         } = field.props;
 
         return (
@@ -553,6 +554,7 @@ export class FormBuilder extends React.Component<Props> {
                 pluginSource={pluginSource}
                 fieldsMetadata={fieldsMetadata}
                 formId={formId}
+                viewMode={viewMode}
                 onUpdateField={this.commitFieldUpdateFromPlugin.bind(this)}
                 pluginContext={pluginContext}
             />

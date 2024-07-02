@@ -88,6 +88,7 @@ export class D2SectionFieldsComponent extends Component<Props> {
                             fieldsMetadata: metaDataElement.fields,
                             customAttributes: metaDataElement.customAttributes,
                             formId: props.formId,
+                            viewMode: props.viewMode,
                         },
                     });
                 }

@@ -28,7 +28,16 @@ export const usePluginCallbacks = ({
     }, [configuredPluginIds, metadataByPluginId, onUpdateField]);
 
     const setContextFieldValue = useCallback(({ fieldId, value }: SetFieldValueProps) => {
-        pluginContext[fieldId]?.setDataEntryFieldValue(value);
+        const contextField = pluginContext[fieldId];
+
+        if (!contextField) {
+            log.error(errorCreator(
+                PluginErrorMessages.SET_CONTEXT_FIELD_VALUE_MISSING_ID,
+            )({ fieldId, value }));
+            return;
+        }
+
+        contextField?.setDataEntryFieldValue(value);
     }, [pluginContext]);
 
     return {

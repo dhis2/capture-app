@@ -14,7 +14,7 @@ export const useRulesEngine = ({
 }: {
     programId: string,
     orgUnit: ?OrgUnit,
-    formFoundation: RenderFoundation,
+    formFoundation: ?RenderFoundation,
 }) => {
     const dispatch = useDispatch();
     const program = useMemo(() => programId && getEventProgramThrowIfNotFound(programId), [programId]);
@@ -25,7 +25,7 @@ export const useRulesEngine = ({
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
-        if (orgUnit && program) {
+        if (orgUnit && program && !!formFoundation) {
             dispatch(batchActions([
                 getRulesActions({
                     state,
@@ -42,6 +42,7 @@ export const useRulesEngine = ({
         dispatch,
         program,
         orgUnit,
+        formFoundation,
     ]);
 
     return !!orgUnit && orgUnitRef.current === orgUnit;

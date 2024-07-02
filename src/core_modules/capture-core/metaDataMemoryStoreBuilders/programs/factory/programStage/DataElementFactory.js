@@ -128,8 +128,9 @@ export class DataElementFactory {
     async build(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
         section: ?Section,
+        cachedDataElementDefinition?: CachedDataElement,
     ): Promise<?DataElement> {
-        const cachedDataElement =
+        const cachedDataElement = cachedDataElementDefinition ||
             await getUserStorageController().get(userStores.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
 
         if (!cachedDataElement) {

@@ -18,7 +18,7 @@ import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
 import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
-import type { PlainProps, Props } from './widgetEventEdit.types';
+import type { PlainProps, ComponentProps } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -69,8 +69,8 @@ const styles = {
 export const WidgetEventEditPlain = ({
     eventStatus,
     initialScheduleDate,
-    programStage,
-    programStage: { name, icon },
+    stage,
+    formFoundation,
     onGoBack,
     onCancelEditEvent,
     onHandleScheduleSave,
@@ -79,6 +79,7 @@ export const WidgetEventEditPlain = ({
     orgUnitId,
     enrollmentId,
     eventId,
+    stageId,
     teiId,
     assignee,
     onSaveAndCompleteEnrollment,
@@ -96,12 +97,13 @@ export const WidgetEventEditPlain = ({
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
 
-    const eventAccess = getProgramEventAccess(programId, programStage.id);
-    const availableProgramStages = useAvailableProgramStages(programStage, teiId, enrollmentId, programId);
+    const eventAccess = getProgramEventAccess(programId, stageId);
+    const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     const { programCategory } = useCategoryCombinations(programId);
     if (error) {
         return error.errorComponent;
     }
+    const { icon, name } = stage;
 
     return orgUnit && loadedValues ? (
         <div data-test="widget-enrollment-event">
@@ -177,17 +179,17 @@ export const WidgetEventEditPlain = ({
                     {currentPageMode === dataEntryKeys.VIEW ? (
                         <ViewEventDataEntry
                             programId={programId}
-                            formFoundation={programStage.stageForm}
+                            formFoundation={formFoundation}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
-                            hideDueDate={programStage.hideDueDate}
+                            hideDueDate={stage.hideDueDate}
                         />
                     ) : (
                         <EditEventDataEntry
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
-                            formFoundation={programStage.stageForm}
+                            formFoundation={formFoundation}
                             orgUnit={orgUnit}
                             programId={programId}
-                            stageId={programStage.id}
+                            stageId={stageId}
                             teiId={teiId}
                             enrollmentId={enrollmentId}
                             eventId={eventId}
@@ -197,10 +199,10 @@ export const WidgetEventEditPlain = ({
                             onHandleScheduleSave={onHandleScheduleSave}
                             onSaveExternal={onSaveExternal}
                             initialScheduleDate={initialScheduleDate}
-                            allowGenerateNextVisit={programStage.allowGenerateNextVisit}
-                            askCompleteEnrollmentOnEventComplete={programStage.askCompleteEnrollmentOnEventComplete}
+                            allowGenerateNextVisit={stage.allowGenerateNextVisit}
+                            askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
                             availableProgramStages={availableProgramStages}
-                            hideDueDate={programStage.hideDueDate}
+                            hideDueDate={stage.hideDueDate}
                             assignee={assignee}
                             onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
                             onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
@@ -215,10 +217,10 @@ export const WidgetEventEditPlain = ({
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
                     eventId={loadedValues.eventContainer.id}
-                    formFoundation={programStage.stageForm}
+                    formFoundation={formFoundation}
                 />
             )}
         </div>
     ) : <LoadingMaskElementCenter />;
 };
-export const WidgetEventEdit: ComponentType<Props> = withStyles(styles)(WidgetEventEditPlain);
+export const WidgetEventEdit: ComponentType<ComponentProps> = withStyles(styles)(WidgetEventEditPlain);
