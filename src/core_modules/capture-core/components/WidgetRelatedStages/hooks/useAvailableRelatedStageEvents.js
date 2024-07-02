@@ -14,7 +14,6 @@ type Props = {
     enabled?: boolean,
 }
 
-
 type ReturnType = {
     linkableEvents: Array<LinkableEvent>,
     isLoading: boolean,
@@ -49,18 +48,9 @@ export const useAvailableRelatedStageEvents = ({
 
                 if (events.length === 0) return [];
 
-                return events.reduce((acc, event) => {
-                    if (!event.relationships) return acc;
-
-                    if (event.relationships.length === 0) acc.push(event);
-
-                    const hasRelationship = !event
-                        .relationships
-                        .some(relationship => relationship.relationshipType === relationshipTypeId);
-                    if (!hasRelationship) acc.push(event);
-
-                    return acc;
-                }, [])
+                return events
+                    .filter(event => !event.relationships ||
+                        !event.relationships.some(relationship => relationship.relationshipType === relationshipTypeId))
                     .map((event) => {
                         const label = event.occurredAt
                             ? `${occurredLabel}: ${convertDateObjectToDateFormatString(new Date(event.occurredAt))}`
