@@ -10,6 +10,7 @@ import type {
 export type Props = {|
     theme: Theme,
     programId: string,
+    orgUnitId: string,
     enrollmentMetadata?: Enrollment,
     onSave: SaveForEnrollmentAndTeiRegistration,
     onCancel: () => void,

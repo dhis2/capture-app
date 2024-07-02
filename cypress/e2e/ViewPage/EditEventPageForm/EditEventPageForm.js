@@ -140,3 +140,14 @@ Then('the relationship is deleted', () => {
             expect(result.response.statusCode).to.equal(200);
         });
 });
+
+And('you select the TB Program', () => {
+    cy.get('[data-test="relationship-register-tei-program-selector"]')
+        .find('input')
+        .type('TB', { force: true });
+    cy.contains('TB program').click();
+});
+
+Then('the TB program enroll form is loaded', () => {
+    cy.contains('TB identifier').should('exist');
+});
