@@ -12,7 +12,7 @@ env:
   GIT_AUTHOR_EMAIL: 'apps@dhis2.org'
   GIT_COMMITTER_NAME: '@dhis2-bot'
   GIT_COMMITTER_EMAIL: 'apps@dhis2.org'
-  GH_TOKEN: ${{ secrets.DHIS2_BOT_GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CI: true
 
 jobs:
@@ -34,149 +34,9 @@ jobs:
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
-
-  lint:
-    runs-on: ubuntu-latest
-    needs: install
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Lint
-        run: yarn linter:check
-
-  flow:
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    needs: install
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Flow
-        run: yarn flow:check
-
-  unit-tests:
-    runs-on: ubuntu-latest
-    needs: install
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Unit tests
-        run: yarn test
-
-  instance-version:
-    runs-on: ubuntu-latest
-    needs: [lint, flow, unit-tests]
-    if: "!(startsWith(github.event.head_commit.message, 'fix(translations)') && github.actor == 'dhis2-bot') && !contains(github.event.head_commit.message, '[skip ci]')"
-    outputs:
-      version: ${{ steps.instance-version.outputs.version }}
-    steps:
-      - uses: dhis2/action-instance-version@v1
-        id: instance-version
-        with:
-          instance-url: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}/ca-test-dev
-          username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
-          password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
-
-  setup-matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.specs }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Generate test matrix
-        id: set-matrix
-        run: |
-            node cypress/support/generateTestMatrix.js > matrix.json
-            echo "::set-output name=specs::$(cat matrix.json)"
-
-  cypress-dev:
-    runs-on: ubuntu-latest
-    needs: [instance-version, setup-matrix]
-    strategy:
-      fail-fast: false
-      matrix:
-        spec-group: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
-    env:
-      SHOULD_RECORD: ${{ contains(github.event.head_commit.message, '[e2e record]') || contains(join(github.event.pull_request.labels.*.name), 'e2e record') }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - name: Set Cypress Environment Variables
-        run: |
-          echo "CYPRESS_GROUP=e2e-chrome-parallel-dev-${{ matrix.spec-group.id }}" >> $GITHUB_ENV
-          echo "CYPRESS_TAG=${{ github.event_name }}" >> $GITHUB_ENV
-          echo "CYPRESS_CI_BUILD_ID=${{ github.run_id }}" >> $GITHUB_ENV
-          echo "CI_BUILD_ID=${{ github.run_id }}" >> $GITHUB_ENV
-
-      - name: Debug Environment Variables
-        run: |
-          echo "SHOULD_RECORD=${{ env.SHOULD_RECORD }}"
-          echo "CI Build ID=${{ env.CI_BUILD_ID }}"
-          echo "Computed Group=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}"
-          echo "Computed Tag=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}"
-          echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
-          echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          record: ${{ env.SHOULD_RECORD }}
-          parallel: ${{ env.SHOULD_RECORD }}
-          group: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}
-          tag: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}
-          ci-build-id: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}
-          spec: ${{ join(matrix.spec-group.tests, ',') }}
-          browser: chrome
-          start: yarn start:forCypress
-          wait-on: http://localhost:3000
-          wait-on-timeout: 300
-        env:
-          CI: true
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_dhis2BaseUrl: ${{ secrets.CYPRESS_DHIS2_INSTANCES_BASE_URL }}/ca-test-dev
-          CYPRESS_dhis2InstanceVersion: ${{ needs.instance-version.outputs.version }}
-          CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
-          CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
-          CYPRESS_dhis2Username_trackerAutoTestRestricted: ${{ secrets.CYPRESS_DHIS2_USERNAME_TRACKER_AUTO_TEST_RESTRICTED }}
-          CYPRESS_dhis2Password_trackerAutoTestRestricted: ${{ secrets.CYPRESS_DHIS2_PASSWORD_TRACKER_AUTO_TEST_RESTRICTED }}
-          NODE_OPTIONS: "--openssl-legacy-provider"
-
   build:
     runs-on: ubuntu-latest
-    needs: [lint, flow, unit-tests]
+    needs: [install]
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v3
@@ -227,12 +87,8 @@ jobs:
       - uses: dhis2/action-semantic-release@use-yarn-version-prepare
         with:
           publish-apphub: true
-          publish-github: true
-          github-token: ${{ env.GH_TOKEN }}
+          # publish-github: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           apphub-token: ${{ secrets.DHIS2_BOT_APPHUB_TOKEN }}
+          apphub-baseurl: 'https://staging.apps.dhis2.org'
 
-      - uses: dhis2/deploy-build@specify-packages
-        with:
-          build-dir: build/app
-          github-token: ${{ env.GH_TOKEN }}
-          packages: capture-app

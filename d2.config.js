@@ -1,11 +1,11 @@
 const config = {
-    name: 'capture',
-    title: 'Capture',
+    name: 'joakim-test-app',
+    title: 'JoakimsTestApp',
     type: 'app',
 
-    id: '92b75fd0-34cc-451c-942f-3dd0f283bcbd',
-    minDHIS2Version: '2.38',
-    coreApp: true,
+    id: '860d6c94-64ef-448f-bbb1-668774c33e79',
+    minDHIS2Version: '2.41',
+    coreApp: false,
 
     entryPoints: {
         app: './src/index',
