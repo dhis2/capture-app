@@ -1,3 +1,17 @@
+## [100.70.2](https://github.com/dhis2/capture-app/compare/v100.70.1...v100.70.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17422] Can Not Delete Program Stage Events ([#3695](https://github.com/dhis2/capture-app/issues/3695)) ([1742083](https://github.com/dhis2/capture-app/commit/17420837280b25e72204b9278b3a28700c36b66e))
+
+## [100.70.1](https://github.com/dhis2/capture-app/compare/v100.70.0...v100.70.1) (2024-07-02)
+
+
+### Bug Fixes
+
+* [DHIS2-17608] enroll a tracked entity from a single event relationship ([#3685](https://github.com/dhis2/capture-app/issues/3685)) ([9e1dc26](https://github.com/dhis2/capture-app/commit/9e1dc26292569ae9d714266051e08a963e0a6e84))
+
 # [100.70.0](https://github.com/dhis2/capture-app/compare/v100.69.3...v100.70.0) (2024-07-01)
 
 

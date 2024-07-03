@@ -100,6 +100,12 @@ import {
     teiSearchChangePageEpic,
 } from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
 import {
+    teiSearchEpic as teiSearchEpicRelationshipsWidget,
+    teiSearchSetProgramEpic as teiSearchSetProgramEpicRelationshipsWidget,
+    teiNewSearchEpic as teiNewSearchEpicRelationshipsWidget,
+    teiSearchChangePageEpic as teiSearchChangePageEpicRelationshipsWidget,
+} from 'capture-core/components/Pages/common/TEIRelationshipsWidget/TeiSearch/epics/teiSearch.epics';
+import {
     asyncUpdateFieldEpic,
 } from 'capture-core/components/D2Form';
 import {
@@ -285,6 +291,10 @@ export const epics = combineEpics(
     TeiRelationshipNewOrEditSearchEpic,
     teiSearchEpic,
     teiSearchChangePageEpic,
+    teiSearchEpicRelationshipsWidget,
+    teiSearchSetProgramEpicRelationshipsWidget,
+    teiNewSearchEpicRelationshipsWidget,
+    teiSearchChangePageEpicRelationshipsWidget,
     teiSearchSetProgramEpic,
     teiNewSearchEpic,
     openRelationshipForNewSingleEventEpic,
