@@ -26,7 +26,7 @@ const useCanAddNew = (enrollments, programId, tetAccess) =>
             enrollments
                 .filter(item => item.program === programId)
                 .every(item => item.status !== plainStatus.ACTIVE),
-        [enrollments, programId, tetAccess?.data?.write],
+        [enrollments, programId, tetAccess],
     );
 
 const useEnrollmentEvents = externalData => useMemo(() => externalData.events || [], [externalData]);
