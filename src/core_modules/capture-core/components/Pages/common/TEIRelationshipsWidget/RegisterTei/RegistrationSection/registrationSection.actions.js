@@ -3,10 +3,10 @@
 import { actionCreator } from '../../../../../../actions/actions.utils';
 
 export const actionTypes = {
-    PROGRAM_CHANGE: 'NewRelationshipSingleEventRegisterTeiProgramChange',
-    ORG_UNIT_CHANGE: 'NewRelationshipSingleEventRegisterTeiOrgUnitChange',
-    ORG_UNIT_SEARCH_FAILED: 'NewRelationshipSingleEventRegisterTeiOrgUnitSearchFailed',
-    PROGRAM_FILTER_CLEAR: 'NewRelationshipSingleEventRegisterTeiProgramFilterClear',
+    PROGRAM_CHANGE: 'RelationshipsWidget.NewRelationshipSingleEventRegisterTeiProgramChange',
+    ORG_UNIT_CHANGE: 'RelationshipsWidget.NewRelationshipSingleEventRegisterTeiOrgUnitChange',
+    ORG_UNIT_SEARCH_FAILED: 'RelationshipsWidget.NewRelationshipSingleEventRegisterTeiOrgUnitSearchFailed',
+    PROGRAM_FILTER_CLEAR: 'RelationshipsWidget.NewRelationshipSingleEventRegisterTeiProgramFilterClear',
 };
 
 export const changeProgram = (programId: string) =>
