@@ -1,10 +1,11 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { pageStatuses } from '../../EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { WidgetEventEdit } from '../../../WidgetEventEdit';
 import type { Props } from '../../../WidgetEventEdit/widgetEventEdit.types';
+import { TwoEventWorkspace } from '../../../WidgetEventEdit/TwoEventWorkspace';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 
 type WidgetProps = {|
@@ -12,7 +13,18 @@ type WidgetProps = {|
     ...Props,
 |}
 
-export const WidgetEventEditWrapper = ({ pageStatus, programId, stageId, ...passOnProps }: WidgetProps) => {
+export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetProps) => {
+    const {
+        programId,
+        stageId,
+        eventId,
+        relationships,
+    } = passOnProps;
+
+    const linkedEventRelationships = useMemo(() => relationships && relationships
+        .filter(relationship => !!(relationship.to.event && relationship.from.event)), [relationships]);
+    console.log('linkedEventRelationships: ', linkedEventRelationships);
+
     const {
         formFoundation,
         stage,
@@ -34,7 +46,7 @@ export const WidgetEventEditWrapper = ({ pageStatus, programId, stageId, ...pass
         );
     }
 
-    if (isLoading || !formFoundation || !stage || isError) {
+    if (isLoading) {
         return (
             <div>
                 {i18n.t('Loading')}
@@ -42,13 +54,32 @@ export const WidgetEventEditWrapper = ({ pageStatus, programId, stageId, ...pass
         );
     }
 
+    if (!formFoundation || !stage || isError) {
+        return (
+            <div>
+                {i18n.t('An error occurred while loading the form')}
+            </div>
+        );
+    }
+
     return (
-        <WidgetEventEdit
-            {...passOnProps}
-            stage={stage}
-            formFoundation={formFoundation}
-            programId={programId}
-            stageId={stageId}
-        />
+        <>
+            {relationships && relationships.length > 0 ? (
+                <TwoEventWorkspace
+                    programId={programId}
+                    eventId={eventId}
+                    stageId={stageId}
+                    relationships={relationships}
+                />
+            ) : null}
+
+            <WidgetEventEdit
+                {...passOnProps}
+                stage={stage}
+                formFoundation={formFoundation}
+                programId={programId}
+                stageId={stageId}
+            />
+        </>
     );
 };

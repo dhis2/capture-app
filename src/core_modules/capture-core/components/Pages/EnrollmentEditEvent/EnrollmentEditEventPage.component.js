@@ -36,6 +36,7 @@ export const EnrollmentEditEventPageComponent = ({
     eventDate,
     scheduleDate,
     eventStatus,
+    relationships,
     eventAccess,
     assignee,
     pageStatus,
@@ -99,6 +100,7 @@ export const EnrollmentEditEventPageComponent = ({
             onSaveAndCompleteEnrollmentSuccessActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS}
             onSaveAndCompleteEnrollmentErrorActionType={actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_ERROR}
             events={events}
+            relationships={relationships}
             pageStatus={pageStatus}
             widgetEffects={widgetEffects}
             hideWidgets={hideWidgets}
