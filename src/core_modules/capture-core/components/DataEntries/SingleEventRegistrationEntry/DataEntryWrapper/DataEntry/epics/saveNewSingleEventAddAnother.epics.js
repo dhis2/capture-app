@@ -12,9 +12,6 @@ import {
 
 import {
     newRecentlyAddedEvent,
-} from '../../RecentlyAddedEventsList/recentlyAddedEventsList.actions';
-
-import {
     prependListItem,
     removeListItem,
 } from '../../RecentlyAddedEventsList';

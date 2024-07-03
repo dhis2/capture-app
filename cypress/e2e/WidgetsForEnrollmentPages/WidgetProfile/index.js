@@ -1,5 +1,4 @@
 import { Then, Given, When } from '@badeball/cypress-cucumber-preprocessor';
-import '../../sharedSteps';
 
 Then('the profile details should be displayed', () => {
     cy.get('[data-test="profile-widget"]')

@@ -67,8 +67,8 @@ export const startSaveEventRelationship = (serverData: Object, selections: Objec
 
 const handleDequeueUpdate = (deleteAction, saveAction, responseAction) => {
     if (responseAction.type === 'SaveFailedForEventRelationship') return null;
-    const relationshipId = responseAction.payload.response.importSummaries[0].reference;
-    deleteAction.meta.offline.effect.url = `relationships/${relationshipId}`;
+
+    deleteAction.meta.offline.effect.url = 'tracker?importStrategy=DELETE&async=false';
     return deleteAction;
 };
 
@@ -76,12 +76,13 @@ const handleDequeueUpdate = (deleteAction, saveAction, responseAction) => {
 export const requestDeleteEventRelationship = (clientId: string) =>
     actionCreator(actionTypes.REQUEST_DELETE_EVENT_RELATIONSHIP)({ clientId });
 
-export const startDeleteEventRelationship = (relationshipId: ?string, clientId: string, selections: Object) =>
+export const startDeleteEventRelationship = (serverData: Object, clientId: string, selections: Object) =>
     actionCreator(actionTypes.START_DELETE_EVENT_RELATIONSHIP)({ selections }, {
         offline: {
             effect: {
-                url: relationshipId ? `relationships/${relationshipId}` : null,
-                method: effectMethods.DELETE,
+                url: 'tracker?importStrategy=DELETE&async=false',
+                method: effectMethods.POST,
+                data: serverData,
                 clientId,
                 updateOnDequeueCallback: handleDequeueUpdate.toString(),
             },

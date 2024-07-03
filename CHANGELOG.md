@@ -1,3 +1,64 @@
+## [100.70.3](https://github.com/dhis2/capture-app/compare/v100.70.2...v100.70.3) (2024-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17531] use new image endpoint in search tracked entity results ([#3673](https://github.com/dhis2/capture-app/issues/3673)) ([184ce8d](https://github.com/dhis2/capture-app/commit/184ce8dfee8788e20e2c357e4bf1eaf371a496f6))
+
+## [100.70.2](https://github.com/dhis2/capture-app/compare/v100.70.1...v100.70.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17422] Can Not Delete Program Stage Events ([#3695](https://github.com/dhis2/capture-app/issues/3695)) ([1742083](https://github.com/dhis2/capture-app/commit/17420837280b25e72204b9278b3a28700c36b66e))
+
+## [100.70.1](https://github.com/dhis2/capture-app/compare/v100.70.0...v100.70.1) (2024-07-02)
+
+
+### Bug Fixes
+
+* [DHIS2-17608] enroll a tracked entity from a single event relationship ([#3685](https://github.com/dhis2/capture-app/issues/3685)) ([9e1dc26](https://github.com/dhis2/capture-app/commit/9e1dc26292569ae9d714266051e08a963e0a6e84))
+
+# [100.70.0](https://github.com/dhis2/capture-app/compare/v100.69.3...v100.70.0) (2024-07-01)
+
+
+### Features
+
+* [DHIS2-17068] Check Related Stage Eligibility for Storing Events ([#3657](https://github.com/dhis2/capture-app/issues/3657)) ([8c4d92c](https://github.com/dhis2/capture-app/commit/8c4d92c0e46b8f06f9e2d28a81e04cc9fe28bf0d))
+
+## [100.69.3](https://github.com/dhis2/capture-app/compare/v100.69.2...v100.69.3) (2024-06-28)
+
+
+### Bug Fixes
+
+* [DHIS2-17488] hide program stage if no data read access ([#3683](https://github.com/dhis2/capture-app/issues/3683)) ([6331b29](https://github.com/dhis2/capture-app/commit/6331b299de9749b03213970001a9690b5e960196))
+
+## [100.69.2](https://github.com/dhis2/capture-app/compare/v100.69.1...v100.69.2) (2024-06-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17536] remove delete relationship deprecated endpoint ([#3672](https://github.com/dhis2/capture-app/issues/3672)) ([ce40ef0](https://github.com/dhis2/capture-app/commit/ce40ef03933d98a841a9ecf3560f94a84a04ca06))
+
+## [100.69.1](https://github.com/dhis2/capture-app/compare/v100.69.0...v100.69.1) (2024-06-20)
+
+
+### Bug Fixes
+
+* [DHIS2-16919] navigation to tracker event without org unit id ([#3656](https://github.com/dhis2/capture-app/issues/3656)) ([acc566d](https://github.com/dhis2/capture-app/commit/acc566dae86e8eae853e49eb32b463d723cc0d6d))
+
+# [100.69.0](https://github.com/dhis2/capture-app/compare/v100.68.26...v100.69.0) (2024-06-18)
+
+
+### Bug Fixes
+
+* [DHIS2-17115] Translatable plugin titles ([#3634](https://github.com/dhis2/capture-app/issues/3634)) ([9902ff0](https://github.com/dhis2/capture-app/commit/9902ff0cf5c3157596cdbd26542a53c5319ee2a2))
+
+
+### Features
+
+* [DHIS2-16293][DHIS2-16294] Category combination in event program forms ([#3642](https://github.com/dhis2/capture-app/issues/3642)) ([8b0d63d](https://github.com/dhis2/capture-app/commit/8b0d63d50eb33675f300ef50271b1b202c7f6387))
+
 ## [100.68.26](https://github.com/dhis2/capture-app/compare/v100.68.25...v100.68.26) (2024-06-16)
 
 
