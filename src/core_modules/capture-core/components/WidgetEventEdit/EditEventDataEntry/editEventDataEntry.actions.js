@@ -67,12 +67,13 @@ export const prerequisitesErrorLoadingEditEventDataEntry = (message: string) =>
 export const requestDeleteEventDataEntry = ({ eventId, enrollmentId }: { eventId: string, enrollmentId: string}) =>
     actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)({ eventId, enrollmentId });
 
-export const startDeleteEventDataEntry = (eventId: string, params: Object) =>
+export const startDeleteEventDataEntry = (serverData: Object, eventId: string, params: Object) =>
     actionCreator(actionTypes.START_DELETE_EVENT_DATA_ENTRY)({ eventId }, {
         offline: {
             effect: {
-                url: `events/${eventId}`,
-                method: effectMethods.DELETE,
+                url: 'tracker?async=false&importStrategy=delete',
+                method: effectMethods.POST,
+                data: serverData,
             },
             commit: {
                 type: actionTypes.DELETE_EVENT_DATA_ENTRY_SUCCEEDED,

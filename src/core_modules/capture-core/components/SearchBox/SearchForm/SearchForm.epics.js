@@ -54,7 +54,7 @@ const searchViaUniqueIdStream = ({
     formId?: string,
     programTETId?: string,
 }) =>
-    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
+    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId)).pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length === 0 && queryArgs.program) {
@@ -103,8 +103,22 @@ const handleErrors = ({ httpStatusCode, message }) => {
     return of(showErrorViewOnSearchBox());
 };
 
-const searchViaAttributesStream = ({ queryArgs, attributes, triggeredFrom, absoluteApiPath, querySingleResource }) =>
-    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
+const searchViaAttributesStream = ({
+    queryArgs,
+    attributes,
+    triggeredFrom,
+    absoluteApiPath,
+    querySingleResource,
+    programId,
+}: {
+    queryArgs: any,
+    attributes: any,
+    triggeredFrom: string,
+    absoluteApiPath: string,
+    querySingleResource: QuerySingleResource,
+    programId?: string,
+}) =>
+    from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId)).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
                 return showSuccessResultsViewOnSearchBox(
@@ -218,6 +232,7 @@ export const searchViaAttributesOnScopeProgramEpic = (
                 triggeredFrom,
                 absoluteApiPath,
                 querySingleResource,
+                programId,
             });
         }),
     );

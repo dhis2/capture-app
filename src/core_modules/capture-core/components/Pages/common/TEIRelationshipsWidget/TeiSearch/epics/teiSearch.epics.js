@@ -127,7 +127,7 @@ const searchTei = ({
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
-    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
+    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId)).pipe(
         map(({ trackedEntityInstanceContainers, pagingData }) => {
             if (searchGroup.unique && trackedEntityInstanceContainers.length === 0 && queryArgs.program) {
                 return searchViaUniqueIdOnScopeTrackedEntityType({
