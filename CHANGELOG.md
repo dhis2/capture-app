@@ -1,3 +1,10 @@
+## [100.70.3](https://github.com/dhis2/capture-app/compare/v100.70.2...v100.70.3) (2024-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17531] use new image endpoint in search tracked entity results ([#3673](https://github.com/dhis2/capture-app/issues/3673)) ([184ce8d](https://github.com/dhis2/capture-app/commit/184ce8dfee8788e20e2c357e4bf1eaf371a496f6))
+
 ## [100.70.2](https://github.com/dhis2/capture-app/compare/v100.70.1...v100.70.2) (2024-07-03)
 
 
