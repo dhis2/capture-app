@@ -1,3 +1,31 @@
+## [100.70.3](https://github.com/dhis2/capture-app/compare/v100.70.2...v100.70.3) (2024-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17531] use new image endpoint in search tracked entity results ([#3673](https://github.com/dhis2/capture-app/issues/3673)) ([184ce8d](https://github.com/dhis2/capture-app/commit/184ce8dfee8788e20e2c357e4bf1eaf371a496f6))
+
+## [100.70.2](https://github.com/dhis2/capture-app/compare/v100.70.1...v100.70.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17422] Can Not Delete Program Stage Events ([#3695](https://github.com/dhis2/capture-app/issues/3695)) ([1742083](https://github.com/dhis2/capture-app/commit/17420837280b25e72204b9278b3a28700c36b66e))
+
+## [100.70.1](https://github.com/dhis2/capture-app/compare/v100.70.0...v100.70.1) (2024-07-02)
+
+
+### Bug Fixes
+
+* [DHIS2-17608] enroll a tracked entity from a single event relationship ([#3685](https://github.com/dhis2/capture-app/issues/3685)) ([9e1dc26](https://github.com/dhis2/capture-app/commit/9e1dc26292569ae9d714266051e08a963e0a6e84))
+
+# [100.70.0](https://github.com/dhis2/capture-app/compare/v100.69.3...v100.70.0) (2024-07-01)
+
+
+### Features
+
+* [DHIS2-17068] Check Related Stage Eligibility for Storing Events ([#3657](https://github.com/dhis2/capture-app/issues/3657)) ([8c4d92c](https://github.com/dhis2/capture-app/commit/8c4d92c0e46b8f06f9e2d28a81e04cc9fe28bf0d))
+
 ## [100.69.3](https://github.com/dhis2/capture-app/compare/v100.69.2...v100.69.3) (2024-06-28)
 
 
