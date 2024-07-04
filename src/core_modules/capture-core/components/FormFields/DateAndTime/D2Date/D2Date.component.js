@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { lowerCaseFirstLetter } from 'capture-core-utils/string/lowerCaseFirstLetter';
+import { Calendar, CalendarInput } from '@dhis2/ui';
 import { D2TextField } from '../../Generic/D2TextField.component';
 import { D2DatePopup } from './D2DatePopup.component';
 import { D2DateCalendar } from './D2DateCalendar.component';
@@ -99,6 +100,7 @@ class D2DatePlain extends React.Component<Props, State> {
 
         this.setState({
             popoverOpen: true,
+            date: '',
         });
 
         this.props.onFocus && this.props.onFocus();
@@ -158,7 +160,7 @@ class D2DatePlain extends React.Component<Props, State> {
             textFieldRef,
             ...passOnProps
         } = this.props;
-        const { popoverOpen } = this.state;
+        const { popoverOpen, date } = this.state;
 
         const textFieldRefPropObject = textFieldRef ? { ref: textFieldRef } : null;
         const calculatedInputWidth = inputWidth || width;
@@ -173,7 +175,19 @@ class D2DatePlain extends React.Component<Props, State> {
                     width,
                 }}
             >
-                {/* $FlowFixMe[incompatible-type] automated comment */}
+                <CalendarInput
+                    date={date}
+                    calendar="gregory"
+                    onDateSelect={this.handleDateSelect}
+                    label="pick a date"
+                />
+            </div>
+        /*  <div
+                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
+                style={{
+                    width,
+                }}
+            >
                 <D2TextField
                     {...textFieldRefPropObject}
                     onFocus={this.handleTextFieldFocus}
@@ -191,7 +205,7 @@ class D2DatePlain extends React.Component<Props, State> {
                     inputUsesFloatingLabel={!!splittedPassOnProps.input.label}
                     {...splittedPassOnProps.popup}
                 >
-                    <D2DateCalendar
+                    <Calendar
                         onDateSelected={this.handleDateSelected}
                         value={this.props.value}
                         currentWidth={calculatedCalendarWidth}
@@ -199,7 +213,7 @@ class D2DatePlain extends React.Component<Props, State> {
                         {...splittedPassOnProps.calendar}
                     />
                 </D2DatePopup>
-            </div>
+            </div>  */
         );
     }
 }
