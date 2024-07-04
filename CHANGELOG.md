@@ -1,3 +1,17 @@
+## [100.70.5](https://github.com/dhis2/capture-app/compare/v100.70.4...v100.70.5) (2024-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17694] Edit button not showing on profile widget ([#3704](https://github.com/dhis2/capture-app/issues/3704)) ([d354da8](https://github.com/dhis2/capture-app/commit/d354da808f8a118ae95122bf2b20839fe1403931))
+
+## [100.70.4](https://github.com/dhis2/capture-app/compare/v100.70.3...v100.70.4) (2024-07-03)
+
+
+### Bug Fixes
+
+* chrome crashes when opening applications-tab ([#3698](https://github.com/dhis2/capture-app/issues/3698)) ([da2fa7b](https://github.com/dhis2/capture-app/commit/da2fa7bba8fd5cac4a29237e0adad248340af9b2))
+
 ## [100.70.3](https://github.com/dhis2/capture-app/compare/v100.70.2...v100.70.3) (2024-07-03)
 
 

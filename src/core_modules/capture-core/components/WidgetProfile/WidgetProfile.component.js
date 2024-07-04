@@ -81,7 +81,7 @@ const WidgetProfilePlain = ({
     } = useUserRoles();
 
     const isEditable = useMemo(() =>
-        trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess.write && !readOnlyMode,
+        trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
     [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
