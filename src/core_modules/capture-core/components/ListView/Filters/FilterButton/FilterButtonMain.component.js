@@ -1,8 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Popover from '@material-ui/core/Popover';
-import { IconChevronDown16, IconChevronUp16, Button } from '@dhis2/ui';
+import { IconChevronDown16, IconChevronUp16, Button, Layer, Popper } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
@@ -19,6 +18,11 @@ const getStyles = (theme: Theme) => ({
     },
     inactiveFilterButtonLabel: {
         textTransform: 'none',
+    },
+    popper: {
+        zIndex: '1',
+        backgroundColor: 'white',
+        boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
     },
 });
 
@@ -41,6 +45,7 @@ type Props = {
         icon: string,
         inactiveFilterButton: string,
         inactiveFilterButtonLabel: string,
+        popper: string,
     },
     onUpdateFilter: UpdateFilter,
     onClearFilter: ClearFilter,
@@ -186,8 +191,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     render() {
-        const { filterValue, selectorVisible } = this.props;
-        const { isMounted } = this.state;
+        const { filterValue, selectorVisible, classes } = this.props;
 
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
 
@@ -199,22 +203,24 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {button}
                 </div>
-                <Popover
-                    open={selectorVisible && isMounted}
-                    anchorEl={this.anchorRef.current}
-                    onClose={this.closeFilterSelector}
-                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
-                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
-                >
-                    {
-                        (() => {
-                            if (selectorVisible) {
-                                return this.renderSelectorContents();
-                            }
-                            return null;
-                        })()
-                    }
-                </Popover>
+                {/* TODO - Some things to follow up with
+                1. This change affects all the working list filters, please check the Popper works poperly for all of the supported ones from capture-core/components/ListView/Filters/filters.const.js
+                2. Cypress tests may be affected, please adapt the data-test selectors
+                3. When selecting a date form the calendar, the selected value should appear in the input filed. What is happening in the onDateSelect callback from CalendarInput?
+                4. Is "bottom-start" a const exported for the UI library that can be used?
+                */}
+
+                {selectorVisible && (
+                    <Layer onBackdropClick={this.closeFilterSelector}>
+                        <Popper
+                            reference={this.anchorRef}
+                            className={classes.popper}
+                            placement="bottom-start"
+                        >
+                            {this.renderSelectorContents()}
+                        </Popper>
+                    </Layer>
+                )}
             </React.Fragment>
         );
     }
