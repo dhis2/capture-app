@@ -1,3 +1,11 @@
+## [100.70.6](https://github.com/dhis2/capture-app/compare/v100.70.5...v100.70.6) (2024-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-16196] set MaxHeight to "more filters" in working lists ([#3696](https://github.com/dhis2/capture-app/issues/3696)) ([f3fdbd4](https://github.com/dhis2/capture-app/commit/f3fdbd483c54b88ff9f38f513ad6bc80b1e91a17))
+* [DHIS2-16852] confusing-ui-when-there-is-more-than-one-warning ([#3702](https://github.com/dhis2/capture-app/issues/3702)) ([4920c04](https://github.com/dhis2/capture-app/commit/4920c041100465bfc51a8d121888e44c8bb27c82))
+
 ## [100.70.5](https://github.com/dhis2/capture-app/compare/v100.70.4...v100.70.5) (2024-07-04)
 
 
