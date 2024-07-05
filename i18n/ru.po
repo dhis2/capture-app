@@ -1,11 +1,11 @@
-# 
+#
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2023
 # Philip Larsen Donnelly, 2024
 # Yury Rogachev <yury@dhis2.org>, 2024
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
@@ -21,6 +21,9 @@ msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Выбрать одну или несколько дат..."
+
+msgid "Clear selections"
+msgstr "Очистить выбор"
 
 msgid "Choose a date..."
 msgstr "Выбрать дату..."
