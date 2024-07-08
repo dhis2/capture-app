@@ -1,3 +1,67 @@
+## [100.70.6](https://github.com/dhis2/capture-app/compare/v100.70.5...v100.70.6) (2024-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-16196] set MaxHeight to "more filters" in working lists ([#3696](https://github.com/dhis2/capture-app/issues/3696)) ([f3fdbd4](https://github.com/dhis2/capture-app/commit/f3fdbd483c54b88ff9f38f513ad6bc80b1e91a17))
+* [DHIS2-16852] confusing-ui-when-there-is-more-than-one-warning ([#3702](https://github.com/dhis2/capture-app/issues/3702)) ([4920c04](https://github.com/dhis2/capture-app/commit/4920c041100465bfc51a8d121888e44c8bb27c82))
+
+## [100.70.5](https://github.com/dhis2/capture-app/compare/v100.70.4...v100.70.5) (2024-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17694] Edit button not showing on profile widget ([#3704](https://github.com/dhis2/capture-app/issues/3704)) ([d354da8](https://github.com/dhis2/capture-app/commit/d354da808f8a118ae95122bf2b20839fe1403931))
+
+## [100.70.4](https://github.com/dhis2/capture-app/compare/v100.70.3...v100.70.4) (2024-07-03)
+
+
+### Bug Fixes
+
+* chrome crashes when opening applications-tab ([#3698](https://github.com/dhis2/capture-app/issues/3698)) ([da2fa7b](https://github.com/dhis2/capture-app/commit/da2fa7bba8fd5cac4a29237e0adad248340af9b2))
+
+## [100.70.3](https://github.com/dhis2/capture-app/compare/v100.70.2...v100.70.3) (2024-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17531] use new image endpoint in search tracked entity results ([#3673](https://github.com/dhis2/capture-app/issues/3673)) ([184ce8d](https://github.com/dhis2/capture-app/commit/184ce8dfee8788e20e2c357e4bf1eaf371a496f6))
+
+## [100.70.2](https://github.com/dhis2/capture-app/compare/v100.70.1...v100.70.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* [DHIS2-17422] Can Not Delete Program Stage Events ([#3695](https://github.com/dhis2/capture-app/issues/3695)) ([1742083](https://github.com/dhis2/capture-app/commit/17420837280b25e72204b9278b3a28700c36b66e))
+
+## [100.70.1](https://github.com/dhis2/capture-app/compare/v100.70.0...v100.70.1) (2024-07-02)
+
+
+### Bug Fixes
+
+* [DHIS2-17608] enroll a tracked entity from a single event relationship ([#3685](https://github.com/dhis2/capture-app/issues/3685)) ([9e1dc26](https://github.com/dhis2/capture-app/commit/9e1dc26292569ae9d714266051e08a963e0a6e84))
+
+# [100.70.0](https://github.com/dhis2/capture-app/compare/v100.69.3...v100.70.0) (2024-07-01)
+
+
+### Features
+
+* [DHIS2-17068] Check Related Stage Eligibility for Storing Events ([#3657](https://github.com/dhis2/capture-app/issues/3657)) ([8c4d92c](https://github.com/dhis2/capture-app/commit/8c4d92c0e46b8f06f9e2d28a81e04cc9fe28bf0d))
+
+## [100.69.3](https://github.com/dhis2/capture-app/compare/v100.69.2...v100.69.3) (2024-06-28)
+
+
+### Bug Fixes
+
+* [DHIS2-17488] hide program stage if no data read access ([#3683](https://github.com/dhis2/capture-app/issues/3683)) ([6331b29](https://github.com/dhis2/capture-app/commit/6331b299de9749b03213970001a9690b5e960196))
+
+## [100.69.2](https://github.com/dhis2/capture-app/compare/v100.69.1...v100.69.2) (2024-06-21)
+
+
+### Bug Fixes
+
+* [DHIS2-17536] remove delete relationship deprecated endpoint ([#3672](https://github.com/dhis2/capture-app/issues/3672)) ([ce40ef0](https://github.com/dhis2/capture-app/commit/ce40ef03933d98a841a9ecf3560f94a84a04ca06))
+
 ## [100.69.1](https://github.com/dhis2/capture-app/compare/v100.69.0...v100.69.1) (2024-06-20)
 
 

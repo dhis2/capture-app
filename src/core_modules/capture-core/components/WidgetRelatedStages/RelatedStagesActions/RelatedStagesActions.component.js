@@ -3,7 +3,9 @@ import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Radio, colors, spacers, spacersNum, IconInfo16, Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
+import { useCanAddNewEventToStage } from '../hooks/useCanAddNewEventToStage';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
@@ -12,13 +14,14 @@ import { LinkToExisting } from '../LinkToExisting';
 
 const styles = () => ({
     wrapper: {
-        padding: `${spacers.dp8}`,
+        padding: spacers.dp8,
+        width: 'fit-content',
     },
     fieldWrapper: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        padding: `${spacers.dp8}  ${spacers.dp16}`,
+        padding: `${spacers.dp8} ${spacers.dp16}`,
     },
     fieldLabel: {
         color: colors.grey900,
@@ -32,7 +35,7 @@ const styles = () => ({
         flexShrink: 0,
     },
     clearSelections: {
-        marginTop: spacers.dp8,
+        padding: spacers.dp8,
     },
     infoBox: {
         margin: '8px 8px',
@@ -69,6 +72,8 @@ export const RelatedStagesActionsPlain = ({
         }));
     };
 
+    const canAddNewEventToStage = useCanAddNewEventToStage(programStage, linkableEvents);
+
     if (!programStage) {
         return null;
     }
@@ -79,33 +84,81 @@ export const RelatedStagesActionsPlain = ({
             sectionName={i18n.t('Actions: {{relationshipName}}', { relationshipName })}
         >
             <div className={classes.wrapper}>
-                {type === relatedStageStatus.LINKABLE ? Object.keys(mainOptionTranslatedTexts).map(key => (
-                    <Radio
-                        key={key}
-                        name={`related-stage-action-${key}`}
-                        checked={key === selectedAction}
-                        disabled={key === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && !linkableEvents.length}
-                        label={mainOptionTranslatedTexts[key]}
-                        onChange={(e: Object) => updateSelectedAction(e.value)}
-                        value={key}
-                    />
-                )) : null}
-                {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS ?
-                    <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
-                    : null
-                }
-                {!!selectedAction && (
-                    <div className={classes.clearSelections}>
-                        <Button
-                            secondary
-                            small
-                            onClick={() => updateSelectedAction(undefined)}
+                {type === relatedStageStatus.LINKABLE && (
+                    <>
+                        <ConditionalTooltip
+                            key={RelatedStagesActionTypes.SCHEDULE_IN_ORG}
+                            content={i18n.t('{{ linkableStageLabel }} is not repeatable', {
+                                linkableStageLabel: programStage.stageForm.name,
+                                interpolation: { escapeValue: false },
+                            })}
+                            closeDelay={50}
+                            enabled={!canAddNewEventToStage}
                         >
-                            {i18n.t('Clear selection')}
-                        </Button>
-                    </div>
+                            <Radio
+                                name={`related-stage-action-${RelatedStagesActionTypes.SCHEDULE_IN_ORG}`}
+                                checked={RelatedStagesActionTypes.SCHEDULE_IN_ORG === selectedAction}
+                                disabled={!canAddNewEventToStage}
+                                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.SCHEDULE_IN_ORG]}
+                                onChange={(e: Object) => updateSelectedAction(e.value)}
+                                value={RelatedStagesActionTypes.SCHEDULE_IN_ORG}
+                            />
+                        </ConditionalTooltip>
+                        <ConditionalTooltip
+                            key={RelatedStagesActionTypes.ENTER_DATA}
+                            content={i18n.t('{{ linkableStageLabel }} is not repeatable', {
+                                linkableStageLabel: programStage.stageForm.name,
+                                interpolation: { escapeValue: false },
+                            })}
+                            closeDelay={50}
+                            enabled={!canAddNewEventToStage}
+                        >
+                            <Radio
+                                name={`related-stage-action-${RelatedStagesActionTypes.ENTER_DATA}`}
+                                checked={RelatedStagesActionTypes.ENTER_DATA === selectedAction}
+                                disabled={!canAddNewEventToStage}
+                                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.ENTER_DATA]}
+                                onChange={(e: Object) => updateSelectedAction(e.value)}
+                                value={RelatedStagesActionTypes.ENTER_DATA}
+                            />
+                        </ConditionalTooltip>
+                        <ConditionalTooltip
+                            key={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
+                            content={i18n.t('{{ linkableStageLabel }} has no existing events', {
+                                linkableStageLabel: programStage.stageForm.name,
+                                interpolation: { escapeValue: false },
+                            })}
+                            closeDelay={50}
+                            enabled={!linkableEvents.length}
+                        >
+                            <Radio
+                                name={`related-stage-action-${RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}`}
+                                checked={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE === selectedAction}
+                                disabled={!linkableEvents.length}
+                                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.LINK_EXISTING_RESPONSE]}
+                                onChange={(e: Object) => updateSelectedAction(e.value)}
+                                value={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
+                            />
+                        </ConditionalTooltip>
+                    </>
+                )}
+
+                {type === relatedStageStatus.AMBIGUOUS_RELATIONSHIPS && (
+                    <div>{i18n.t('Ambiguous relationships, contact system administrator')}</div>
                 )}
             </div>
+
+            {!!selectedAction && (
+                <div className={classes.clearSelections}>
+                    <Button
+                        secondary
+                        small
+                        onClick={() => updateSelectedAction(undefined)}
+                    >
+                        {i18n.t('Clear selection')}
+                    </Button>
+                </div>
+            )}
 
             {selectedAction === RelatedStagesActionTypes.SCHEDULE_IN_ORG && (
                 <ScheduleInOrgUnit
@@ -118,9 +171,7 @@ export const RelatedStagesActionsPlain = ({
             )}
 
             {selectedAction === RelatedStagesActionTypes.ENTER_DATA && (
-                <div
-                    className={classes.infoBox}
-                >
+                <div className={classes.infoBox}>
                     <IconInfo16 />
                     {i18n.t(
                         'Enter {{linkableStageLabel}} details in the next step after completing this {{currentStageLabel}}.',
@@ -132,7 +183,7 @@ export const RelatedStagesActionsPlain = ({
                 </div>
             )}
 
-            {selectedAction === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && linkableEvents.length > 0 && (
+            {selectedAction === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && (
                 <LinkToExisting
                     relatedStagesDataValues={relatedStagesDataValues}
                     setRelatedStagesDataValues={setRelatedStagesDataValues}
@@ -142,8 +193,8 @@ export const RelatedStagesActionsPlain = ({
                     saveAttempted={saveAttempted}
                 />
             )}
-
-        </DataSection>);
+        </DataSection>
+    );
 };
 
 export const RelatedStagesActions: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);

@@ -170,6 +170,8 @@ jobs:
           CYPRESS_dhis2InstanceVersion: ${{ needs.instance-version.outputs.version }}
           CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
           CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
+          CYPRESS_dhis2Username_trackerAutoTestRestricted: ${{ secrets.CYPRESS_DHIS2_USERNAME_TRACKER_AUTO_TEST_RESTRICTED }}
+          CYPRESS_dhis2Password_trackerAutoTestRestricted: ${{ secrets.CYPRESS_DHIS2_PASSWORD_TRACKER_AUTO_TEST_RESTRICTED }}
           NODE_OPTIONS: "--openssl-legacy-provider"
 
   build:

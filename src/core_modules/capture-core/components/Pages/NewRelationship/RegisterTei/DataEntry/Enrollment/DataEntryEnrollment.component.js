@@ -6,7 +6,6 @@ import { DATA_ENTRY_ID } from '../../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 import type { Props } from './dataEntryEnrollment.types';
-import { useLocationQuery } from '../../../../../../utils/routing';
 
 const NewEnrollmentRelationshipPlain =
     ({
@@ -14,12 +13,12 @@ const NewEnrollmentRelationshipPlain =
         onSave,
         onCancel,
         programId,
+        orgUnitId,
         duplicatesReviewPageSize,
         renderDuplicatesDialogActions,
         renderDuplicatesCardActions,
         ExistingUniqueValueDialogActions,
     }: Props) => {
-        const { orgUnitId, teiId } = useLocationQuery();
         const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
 
         return (
@@ -27,7 +26,6 @@ const NewEnrollmentRelationshipPlain =
                 id={DATA_ENTRY_ID}
                 selectedScopeId={programId}
                 orgUnitId={orgUnitId}
-                teiId={teiId}
                 fieldOptions={fieldOptions}
                 saveButtonText={(trackedEntityTypeName: string) => i18n.t('Save new {{trackedEntityTypeName}} and link', {
                     trackedEntityTypeName,
