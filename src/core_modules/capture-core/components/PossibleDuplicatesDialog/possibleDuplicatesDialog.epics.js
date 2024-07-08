@@ -7,6 +7,7 @@ import {
     actionTypes,
     duplicatesForReviewRetrievalSuccess,
     duplicatesForReviewRetrievalFailed,
+    duplicatesReviewSkipped,
 } from './possibleDuplicatesDialog.actions';
 import {
     scopeTypes, getScopeFromScopeId, EventProgram, TrackerProgram, TrackedEntityType, dataElementTypes,
@@ -70,6 +71,10 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                     })
                     .filter(f => f);
 
+                if (filters.length === 0) {
+                    return Promise.resolve(duplicatesReviewSkipped());
+                }
+
                 const contextParam = scopeType === scopeTypes.TRACKER_PROGRAM ? { program: selectedScopeId } : { trackedEntityType: selectedScopeId };
                 const queryArgs = {
                     ouMode: 'ACCESSIBLE',
@@ -79,9 +84,10 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                     ...contextParam,
                 };
                 const attributes = getAttributesFromScopeId(selectedScopeId);
+                const programId = scopeType === scopeTypes.TRACKER_PROGRAM ? selectedScopeId : null;
 
                 const stream$: Stream = from(
-                    getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource),
+                    getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId),
                 );
                 return stream$.pipe(
                     map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>

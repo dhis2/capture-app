@@ -239,13 +239,15 @@ export function getRulesEffectsProcessor(
     }
 
     function processDisplayKeyValuePair(effect: ProgramRuleEffect): any {
+        const data = effect.data !== undefined ? effect.data : '';
+
         return {
             type: effectActions.DISPLAY_KEY_VALUE_PAIR,
             id: effect.location,
             displayKeyValuePair: {
                 id: effect.id,
                 key: effect.displayContent,
-                value: typeof effect.data == 'number' ? numberToString(effect.data) : String(effect.data),
+                value: typeof data === 'number' ? numberToString(data) : String(data),
                 ...effect.style,
             },
         };

@@ -34,6 +34,7 @@ async function convertToClientTei(
     attributes: Array<DataElement>,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
+    programId: ?string,
 ) {
     const attributeValuesById = getValuesById(apiTei.attributes);
     const convertedAttributeValues = convertDataElementsValues(attributeValuesById, attributes, convertValue);
@@ -44,6 +45,7 @@ async function convertToClientTei(
         values: convertedAttributeValues,
         absoluteApiPath,
         querySingleResource,
+        programId,
     });
 
     return {
@@ -63,6 +65,7 @@ export async function getTrackedEntityInstances(
     attributes: Array<DataElement>,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
+    selectedProgramId: ?string,
 ): TrackedEntityInstancesPromise {
     const apiResponse = await querySingleResource({
         resource: 'tracker/trackedEntities',
@@ -72,7 +75,13 @@ export async function getTrackedEntityInstances(
 
     const trackedEntityInstanceContainers = await apiTrackedEntities.reduce(async (accTeiPromise, apiTei) => {
         const accTeis = await accTeiPromise;
-        const teiContainer = await convertToClientTei(apiTei, attributes, absoluteApiPath, querySingleResource);
+        const teiContainer = await convertToClientTei(
+            apiTei,
+            attributes,
+            absoluteApiPath,
+            querySingleResource,
+            selectedProgramId,
+        );
         if (teiContainer) {
             accTeis.push(teiContainer);
         }

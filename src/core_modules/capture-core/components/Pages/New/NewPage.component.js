@@ -74,13 +74,19 @@ const NewPagePlain = ({
             teiId={teiId}
             trackedEntityName={trackedEntityName}
             teiDisplayName={teiDisplayName}
+            formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
         />
         <div data-test="registration-page-content" className={classes.container} >
             {
                 !writeAccess ?
                     <NoWriteAccessMessage
-                        title={i18n.t('New')}
-                        message={i18n.t("You don't have access to create an event in the current selections")}
+                        message={
+                            i18n.t("You don't have access to create a {{trackedEntityName}} in the current selections",
+                                {
+                                    trackedEntityName,
+                                    interpolation: { escapeValue: false },
+                                },
+                            )}
                     />
                     :
                     <OrgUnitFetcher orgUnitId={orgUnitId}>
@@ -98,7 +104,7 @@ const NewPagePlain = ({
                             newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                             <>
                                 <IncompleteSelectionsMessage>
-                                    {i18n.t('Choose a registering unit to start reporting')}
+                                    {i18n.t('Choose an organisation unit to start reporting')}
                                 </IncompleteSelectionsMessage>
                                 <Button
                                     dataTest="new-page-cancel-button"

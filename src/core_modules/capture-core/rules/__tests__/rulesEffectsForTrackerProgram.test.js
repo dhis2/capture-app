@@ -356,6 +356,13 @@ test('expressions with d2Functions in tracker program', () => {
                     programRuleActionType: 'DISPLAYKEYVALUEPAIR',
                 },
                 {
+                    id: 'jhflkgjh45',
+                    displayContent: 'key with undefined value',
+                    data: undefined,
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYKEYVALUEPAIR',
+                },
+                {
                     id: 'Tx4gHcLselM',
                     displayContent: 'd2:oizp( 10000000 ) = ',
                     data: 'd2:oizp( 10000000 )',
@@ -776,6 +783,15 @@ test('expressions with d2Functions in tracker program', () => {
                 id: 'qSe8GmlwpgZ',
                 key: "d2:weeksBetween('2020-01-28', V{enrollment_date} ) = ",
                 value: '15',
+            },
+        },
+        {
+            type: 'DISPLAYKEYVALUEPAIR',
+            id: 'feedback',
+            displayKeyValuePair: {
+                id: 'jhflkgjh45',
+                key: 'key with undefined value',
+                value: '',
             },
         },
         {

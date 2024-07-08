@@ -19,10 +19,10 @@ type D2ParameterRange = {|
 
 export type D2Parameters = number | D2ParameterRange;
 
-export type D2FunctionConfig = {
+export type D2FunctionConfig = {|
     parameters?: D2Parameters,
-    execute: Function,
-}
+    execute: (params: Array<any>) => any,
+|}
 export type D2Functions = $ReadOnly<{|
     ceil: D2FunctionConfig,
     floor: D2FunctionConfig,
@@ -56,4 +56,5 @@ export type D2Functions = $ReadOnly<{|
     addControlDigits: D2FunctionConfig,
     checkControlDigits: D2FunctionConfig,
     multiTextContains: D2FunctionConfig,
+    condition: D2FunctionConfig,
 |}>;

@@ -1,5 +1,6 @@
 // @flow
 import { useSelector } from 'react-redux';
+import { useConfig } from '@dhis2/app-runtime';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -79,6 +80,7 @@ export const useBuildEnrollmentPayload = ({
     trackedEntityTypeId,
 }: DataEntryReduxConverterProps) => {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+    const { serverVersion: { minor } } = useConfig();
     const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
     const dataEntryFieldValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
     const dataEntryFieldsMeta = useSelector(({ dataEntriesFieldsMeta }) => dataEntriesFieldsMeta[dataEntryKey]);
@@ -121,6 +123,7 @@ export const useBuildEnrollmentPayload = ({
             fieldsValue: dataEntryFieldValues,
             attributeCategoryOptions,
             assignee,
+            serverMinorVersion: minor,
         });
 
         const autoGenerateEvents = deriveAutoGenerateEvents({
@@ -131,6 +134,7 @@ export const useBuildEnrollmentPayload = ({
             programId,
             orgUnitId,
             attributeCategoryOptions,
+            serverMinorVersion: minor,
         });
 
         const allEventsToBeCreated = firstStageDuringRegistrationEvent

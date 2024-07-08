@@ -30,11 +30,12 @@ export class EnrollmentFactory {
     };
 
     static _addLabels(enrollment: Enrollment, cachedProgram: CachedProgram) {
-        if (cachedProgram.enrollmentDateLabel) {
-            enrollment.enrollmentDateLabel = cachedProgram.enrollmentDateLabel;
+        if (cachedProgram.displayEnrollmentDateLabel) {
+            enrollment.enrollmentDateLabel =
+                cachedProgram.displayEnrollmentDateLabel;
         }
-        if (cachedProgram.incidentDateLabel) {
-            enrollment.incidentDateLabel = cachedProgram.incidentDateLabel;
+        if (cachedProgram.displayIncidentDateLabel) {
+            enrollment.incidentDateLabel = cachedProgram.displayIncidentDateLabel;
         }
     }
 
@@ -286,9 +287,20 @@ export class EnrollmentFactory {
                             return acc;
                         }, []);
 
+                        const sectionMetadata = cachedProgramSections
+                            ?.find(cachedSection => cachedSection.id === formConfigSection.id);
+
+                        if (!sectionMetadata && cachedProgramSections && cachedProgramSections.length > 0) {
+                            log.warn(
+                                errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                                    { sectionId: formConfigSection.id },
+                                ),
+                            );
+                        }
+
                         section = await this._buildSection(
                             attributes,
-                            formConfigSection.name,
+                            formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
                             formConfigSection.id,
                         );
                         section && enrollmentForm.addSection(section);

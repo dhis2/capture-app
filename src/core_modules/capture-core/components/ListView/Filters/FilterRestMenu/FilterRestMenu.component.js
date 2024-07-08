@@ -25,7 +25,8 @@ const getStyles = (theme: Theme) => ({
         textTransform: 'none',
     },
     menuPaper: {
-        maxHeight: 30,
+        maxHeight: 280,
+        overflowY: 'auto',
     },
     menuItemRoot: {
         padding: 6,
@@ -184,7 +185,7 @@ class FilterRestMenuPlain extends React.Component<Props, State> {
                                         style={{ transformOrigin: '0 0 0' }}
                                         timeout={{ exit: 0, enter: 200 }}
                                     >
-                                        <Paper>
+                                        <Paper className={classes.menuPaper}>
                                             <MenuList role="menu">
                                                 {this.renderMenuItems()}
                                             </MenuList>

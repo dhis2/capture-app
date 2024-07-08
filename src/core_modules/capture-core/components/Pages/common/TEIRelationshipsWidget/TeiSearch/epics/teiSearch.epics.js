@@ -100,7 +100,9 @@ const searchTei = ({
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
-    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
+    return from(
+        getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId),
+    ).pipe(
         map(({ trackedEntityInstanceContainers, pagingData }) =>
             searchTeiResultRetrieved(
                 { trackedEntityInstanceContainers, currentPage: pagingData.currentPage },

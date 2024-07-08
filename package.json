@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "100.68.4",
+    "version": "100.70.6",
     "cacheVersion": "7",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
@@ -10,7 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/rules-engine-javascript": "100.68.4",
+        "@dhis2/rules-engine-javascript": "100.70.6",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
@@ -18,7 +18,7 @@
         "@dhis2/d2-ui-org-unit-tree": "^7.3.3",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/d2-ui-sharing-dialog": "^7.3.3",
-        "@dhis2/ui": "^9.1.1",
+        "@dhis2/ui": "^9.10.1",
         "@joakim_sm/react-infinite-calendar": "^2.4.2",
         "@material-ui/core": "3.9.4",
         "@material-ui/icons": "3",
@@ -118,7 +118,7 @@
         "eslint-plugin-import": "2.29.1",
         "eslint-plugin-jsx-a11y": "^5.1.1",
         "eslint-plugin-react": "^7.31.10",
-        "eslint-plugin-react-hooks": "4.6.0",
+        "eslint-plugin-react-hooks": "4.6.2",
         "fake-indexeddb": "^4.0.1",
         "flow-bin": "^0.132.0",
         "gen-flow-files": "^0.5.0",
@@ -128,14 +128,14 @@
         "jsdoc-export-default-interop": "^0.3.1",
         "node-fetch": "2",
         "redux-devtools-extension": "^2.13.9",
-        "wait-on": "^6.0.1"
+        "wait-on": "^7.2.0"
     },
     "resolutions": {
         "@dhis2/cli-app-scripts": "^10.4.0",
         "@dhis2/app-runtime": "^3.10.2",
         "react-scripts": "4.0.3",
         "@babel/preset-react": "7.16.7",
-        "@dhis2/ui": "^9.1.1",
+        "@dhis2/ui": "^9.10.1",
         "@js-temporal/polyfill": "0.4.3",
         "core-js": "2.5.7",
         "i18next": "^20.5.0"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-03-16T14:40:27.542Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -616,8 +616,8 @@ msgstr "Kunne ikke få tak i organisasjonsenhet"
 msgid "Program doesn't exist"
 msgstr "Programmet finnes ikke"
 
-msgid "Selected program is invalid for selected registering unit"
-msgstr "Valgt program er ugyldig for registreringsenhet"
+msgid "Selected program is invalid for selected organisation unit"
+msgstr ""
 
 msgid "Online"
 msgstr "Påkoblet"
@@ -801,8 +801,8 @@ msgstr "Det oppsto en feil ved åpning av siden"
 msgid "There was an error loading the page"
 msgstr "Det oppsto en feil under lasting av siden"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Velg en registreringsenhet for å starte rapportering"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
 
 msgid "No feedback for this event yet"
 msgstr ""
@@ -1013,11 +1013,8 @@ msgstr "Legg til relasjon"
 msgid "No results found for "
 msgstr "Ingen resultater funnet for"
 
-msgid "Registering unit"
-msgstr "Registreringsenhet"
-
-msgid "Choose a registering unit"
-msgstr "Velg en registreringsenhet"
+msgid "Choose an organisation unit"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Fjern valg"
@@ -1028,8 +1025,8 @@ msgstr "Ingen programmer tilgjengelig."
 msgid "Search for a program"
 msgstr "Søk for et program"
 
-msgid "Some programs are being filtered by the chosen registering unit"
-msgstr "Noen programmer blir filtrert av den valgte registreringsenheten"
+msgid "Some programs are being filtered by the chosen organisation unit"
+msgstr ""
 
 msgid "Show all programs"
 msgstr "Vis alle programmer"
@@ -1136,6 +1133,9 @@ msgstr "Opprett ny hendelse"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
+
+msgid "No tracked entity types available"
+msgstr ""
 
 msgid "Assigned to"
 msgstr "Tildelt til"
@@ -1518,8 +1518,10 @@ msgstr "Denne fasen kan bare ha en hendelse"
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Hendelser kunne ikke hentes. Prøv igjen senere."
 
-msgid "{{ totalEvents }} events"
-msgstr "{{ totalEvents }} hendelser"
+msgid "{{ count }} event"
+msgid_plural "{{ count }} event"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} forfalt"

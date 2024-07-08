@@ -936,7 +936,7 @@ Depending on the status of events, there can be additional information regarding
 
 ![](resources/images/enrollment-dash-stages-events-03.png)
 
-When you expand the list, you will see the table contains the data of events in the stage. This includes mandatory columns: `Status`, `Report date` and `Registering unit`, the following columns depend on the data elements that have been selected as `Display in list`  of event.
+When you expand the list, you will see the table contains the data of events in the stage. This includes mandatory columns: `Status`, `Report date` and `Organization unit`, the following columns depend on the data elements that have been selected as `Display in list`  of event.
 
 Events are sorted with most recent on top and other columns are also sortable.
 
@@ -969,7 +969,13 @@ On the enrollment page you can see the enrollment widget
 
 #### Enrollment actions
 
-When you click on the enrollment actions button, a menu with all the available actions will open. You can change the enrollment status to Active, Canceled or Completed using the buttons in the menu. You can mark or remove the enrollment for a follow-up.
+When you click on the enrollment actions button, a menu with all the available actions will open. You can:
+
+- Change the enrollment status to Active, Canceled or Completed using the buttons in the menu.
+- Mark or remove the enrollment for a follow-up.
+- Transfer the enrollment to another organisation unit
+- Delete the enrollment
+- Add coordinates to the enrollment
 
 ![](resources/images/enrollment-dash-enrollment-widget-2.png)
 
@@ -977,6 +983,8 @@ There can only be one active enrollment at a time. If there are no active enroll
 If the program only allows one enrollment per tracked entity instance, the **Add new** button will be disabled with a tooltip saying `Only one enrollment per {TET} is allowed in this program`.
 
 ![](resources/images/enrollment-dash-enrollment-widget-add-new.png)
+
+#### Transfer the enrollment to another organisation unit
 
 In the enrollment actions, you could also choose to transfer the enrollment to another organisation unit. Click the transfer button and select the organisation unit you want to transfer the enrollment to.
 
@@ -994,7 +1002,7 @@ You can complete the enrollment by clicking the complete button. When there are 
 
 ![](resources/images/enrollment-dash-enrollment-widget-4.png)
 
-#### Enrollment comment widget
+### Enrollment comment widget
 
 ![](resources/images/enrollment-widget-comment.png)
 
@@ -1088,6 +1096,12 @@ Colored legend circles are only shown for indicator values that have them set up
 On the enrollment dashboard, the warning widget displays warnings related to the current dashboard. The widget shows warnings that are not associated with any specific data item.
 If there aren't any warnings to show for the current dashboard then the widget is hidden.
 
+### Error Widget
+
+![](resources/images/enrollment-dash-error-widget-1.png)
+
+On the enrollment dashboard, the errors widget displays errors related to the current dashboard. The widget shows errors that are not associated with any specific data item.
+If there aren't any errors to show for the current dashboard then the widget is hidden.
 
 ## Enrollment event view and edit page
 
@@ -1105,14 +1119,6 @@ To go to Enrollment Overview page you can:
 - deselect the event from the top bar.
 
 ![](resources/images/enrollment-event-view-edit-navigation.png)
-
-
-### Error Widget
-
-![](resources/images/enrollment-dash-error-widget-1.png)
-
-On the enrollment dashboard, the errors widget displays errors related to the current dashboard. The widget shows errors that are not associated with any specific data item.
-If there aren't any errors to show for the current dashboard then the widget is hidden.
 
 ### View/Edit event form 
 
