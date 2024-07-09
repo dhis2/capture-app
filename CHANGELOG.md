@@ -1,3 +1,10 @@
+## [100.70.8](https://github.com/dhis2/capture-app/compare/v100.70.7...v100.70.8) (2024-07-09)
+
+
+### Bug Fixes
+
+* [DHIS2-17398] improve unique ID search ([#3688](https://github.com/dhis2/capture-app/issues/3688)) ([183e419](https://github.com/dhis2/capture-app/commit/183e419000245173a5020a965e4d681ab0cfdf7f))
+
 ## [100.70.7](https://github.com/dhis2/capture-app/compare/v100.70.6...v100.70.7) (2024-07-09)
 
 
