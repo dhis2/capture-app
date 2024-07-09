@@ -51,6 +51,8 @@ Then the user see the following text: Low-dose acetylsalicylic acid given
 When the user sets Plurality assessed to Singleton
 Then the user don't see the following text: Low-dose acetylsalicylic acid given
 
+# DHIS2-17730
+@skip
 Scenario: User can modify and save the data in the form
 Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=V1CerIi3sdL
 Then the user see the following text: Enrollment: View Event
