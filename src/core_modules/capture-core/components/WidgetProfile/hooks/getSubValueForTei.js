@@ -36,8 +36,8 @@ const getImageResourceSubvalue = async ({ attribute, minorServerVersion }: SubVa
         url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}`,
         previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}&dimension=small`,
     } : {
-        url: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/image`,
-        previewUrl: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/image`,
+        url: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/image?program=${programId}`,
+        previewUrl: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/image?program=${programId}&dimension=SMALL`,
     };
 
     return {

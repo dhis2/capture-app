@@ -49,7 +49,7 @@ const subValueGetterByElementType = {
                 previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`,
             } : {
                 url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}&dimension=SMALL`,
             }
         ),
     [dataElementTypes.ORGANISATION_UNIT]: ({
