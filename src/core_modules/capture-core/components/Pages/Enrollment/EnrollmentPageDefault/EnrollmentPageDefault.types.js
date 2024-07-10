@@ -47,3 +47,31 @@ export type PlainProps = {|
     ...Props,
     ...CssClasses,
 |};
+
+type DataElement = $ReadOnly<{|
+    id: string,
+    valueType: string,
+    displayName: string,
+    displayFormName: string,
+    optionSet: $ReadOnly<{ options: ?$ReadOnlyArray<{name: string, code: string}> }>,
+|}>;
+
+type ProgramStageDataElement = $ReadOnly<{|
+    displayInReports: boolean,
+    dataElement: DataElement,
+|}>;
+
+type ProgramStage = $ReadOnly<{|
+    id: string,
+    dataAccess: { read: boolean, write: boolean },
+    repeatable: boolean,
+    hideDueDate: ?boolean,
+    enableUserAssignment: ?boolean,
+    programStageDataElements: $ReadOnlyArray<ProgramStageDataElement>,
+|}>;
+
+export type ProgramStages = $ReadOnlyArray<ProgramStage>;
+
+export type Program = {|
+    programStages: ProgramStages,
+|};

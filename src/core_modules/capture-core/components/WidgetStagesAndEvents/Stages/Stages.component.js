@@ -33,6 +33,7 @@ export const StagesPlain = ({ stages, events, classes, ...passOnProps }: PlainPr
     return (<>
         {
             stages
+                .filter(stage => stage.dataAccess.read)
                 .map(stage => (
                     <Stage
                         events={eventsByStage[stage.id]}

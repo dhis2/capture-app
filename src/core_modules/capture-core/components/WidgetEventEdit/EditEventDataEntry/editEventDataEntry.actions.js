@@ -1,11 +1,10 @@
 // @flow
-
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 
 export const batchActionTypes = {
     START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH: 'StartSaveEditEventDataEntryBatchForViewSingleEvent',
+    SAVE_EDIT_EVENT_DATA_ENTRY_FAILED: 'SaveEditEventDataEntryBatchFailed',
 };
 
 
@@ -29,9 +28,11 @@ export const actionTypes = {
 export const cancelEditEventDataEntry = () =>
     actionCreator(actionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY)();
 
-export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object, orgUnit: OrgUnit) =>
-    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation, orgUnit }, { skipLogging: ['formFoundation'] });
-
+export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)(
+        { itemId, dataEntryId, formFoundation },
+        { skipLogging: ['formFoundation'] },
+    );
 
 export const startSaveEditEventDataEntry = (
     eventId: string,
@@ -66,12 +67,13 @@ export const prerequisitesErrorLoadingEditEventDataEntry = (message: string) =>
 export const requestDeleteEventDataEntry = ({ eventId, enrollmentId }: { eventId: string, enrollmentId: string}) =>
     actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)({ eventId, enrollmentId });
 
-export const startDeleteEventDataEntry = (eventId: string, params: Object) =>
+export const startDeleteEventDataEntry = (serverData: Object, eventId: string, params: Object) =>
     actionCreator(actionTypes.START_DELETE_EVENT_DATA_ENTRY)({ eventId }, {
         offline: {
             effect: {
-                url: `events/${eventId}`,
-                method: effectMethods.DELETE,
+                url: 'tracker?async=false&importStrategy=delete',
+                method: effectMethods.POST,
+                data: serverData,
             },
             commit: {
                 type: actionTypes.DELETE_EVENT_DATA_ENTRY_SUCCEEDED,
@@ -92,7 +94,6 @@ export const requestSaveAndCompleteEnrollment = ({
     itemId,
     dataEntryId,
     formFoundation,
-    orgUnit,
     onSaveAndCompleteEnrollmentExternal,
     onSaveAndCompleteEnrollmentSuccessActionType,
     onSaveAndCompleteEnrollmentErrorActionType,
@@ -101,7 +102,6 @@ export const requestSaveAndCompleteEnrollment = ({
     itemId: string,
     dataEntryId: string,
     formFoundation: Object,
-    orgUnit: OrgUnit,
     onSaveAndCompleteEnrollmentExternal?: (enrollmnet: ApiEnrollment) => void,
     onSaveAndCompleteEnrollmentSuccessActionType?: string,
     onSaveAndCompleteEnrollmentErrorActionType?: string,
@@ -112,7 +112,6 @@ export const requestSaveAndCompleteEnrollment = ({
             itemId,
             dataEntryId,
             formFoundation,
-            orgUnit,
             onSaveAndCompleteEnrollmentExternal,
             onSaveAndCompleteEnrollmentSuccessActionType,
             onSaveAndCompleteEnrollmentErrorActionType,

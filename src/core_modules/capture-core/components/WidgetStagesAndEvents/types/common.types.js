@@ -23,7 +23,8 @@ export type Stage = {
     dataElements: Array<StageDataElement>,
     enableUserAssignment: boolean,
     hideDueDate?: boolean,
-    repeatable?: boolean
+    repeatable?: boolean,
+    dataAccess: { read: boolean, write: boolean },
 }
 
 export type StageCommonProps = {|

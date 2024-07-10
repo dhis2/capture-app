@@ -142,6 +142,7 @@ export const openEventForEditInDataEntry = ({
             eventContainer.event,
             {
                 eventId: eventContainer.event.eventId,
+                programCategory,
             },
         );
     const currentEvent = { ...eventContainer.event, ...eventContainer.values };

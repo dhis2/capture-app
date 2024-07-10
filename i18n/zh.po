@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -601,8 +601,8 @@ msgstr "不能获取机构"
 msgid "Program doesn't exist"
 msgstr "项目不存在"
 
-msgid "Selected program is invalid for selected registering unit"
-msgstr "选择的项目对选择的机构无效"
+msgid "Selected program is invalid for selected organisation unit"
+msgstr "所选项目对所选组织机构无效"
 
 msgid "Online"
 msgstr "在线"
@@ -769,8 +769,8 @@ msgstr "打开页面时出错"
 msgid "There was an error loading the page"
 msgstr "加载页面时出错"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "选择一个注册机构开始填报"
+msgid "Choose an organisation unit to start reporting"
+msgstr "选择一个组织机构开始报告"
 
 msgid "No feedback for this event yet"
 msgstr "此事件尚未有任何反馈"
@@ -977,11 +977,8 @@ msgstr "添加关系"
 msgid "No results found for "
 msgstr "没有找到结果"
 
-msgid "Registering unit"
-msgstr "注册机构"
-
-msgid "Choose a registering unit"
-msgstr "选择报名单位"
+msgid "Choose an organisation unit"
+msgstr "选择组织单位"
 
 msgid "Clear selection"
 msgstr "清空选项"
@@ -992,8 +989,8 @@ msgstr "无可用项目"
 msgid "Search for a program"
 msgstr "搜索项目"
 
-msgid "Some programs are being filtered by the chosen registering unit"
-msgstr "部分节目正在被选定的注册单位过滤"
+msgid "Some programs are being filtered by the chosen organisation unit"
+msgstr "某些项目正在被所选组织单位过滤"
 
 msgid "Show all programs"
 msgstr "显示所有项目"
@@ -1095,6 +1092,9 @@ msgstr "创建新事件"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "在{{programName}}中搜索{{trackedEntityName}}"
+
+msgid "No tracked entity types available"
+msgstr "没有可跟踪的实体类型"
 
 msgid "Assigned to"
 msgstr "指派到"

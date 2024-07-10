@@ -37,11 +37,23 @@ defaults:
         shell: bash
 
 jobs:
-    prerequisites:
+    setup-matrix:
         runs-on: ubuntu-latest
         outputs:
+            matrix: ${{ steps.set-matrix.outputs.specs }}
+        steps:
+            - uses: actions/checkout@v3
+            - name: Generate test matrix
+              id: set-matrix
+              run: |
+                  node cypress/support/generateTestMatrix.js > matrix.json
+                  echo "::set-output name=specs::$(cat matrix.json)"
+
+    prerequisites:
+        runs-on: ubuntu-latest
+        needs: setup-matrix
+        outputs:
             json-labels: ${{ steps.json-labels.outputs.labels }}
-            matrix-containers: ${{ steps.matrix-containers.outputs.containers }}
             versions: ${{ steps.legacy-versions.outputs.versions }}
         steps:
             - name: compute-json-labels
@@ -50,13 +62,6 @@ jobs:
                   arrLabels=(${TRIGGER_LABELS//,/ })
                   for item in ${arrLabels[@]}; do labels+=\"$item\",; done
                   echo "::set-output name=labels::[ ${labels%,} ]"
-
-            - name: compute-matrix-containers
-              id: matrix-containers
-              if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
-              run: |
-                  for (( cnt = 1; cnt <= $CYPRESS_CONTAINERS; cnt++)); do containers+=$cnt,; done
-                  echo "::set-output name=containers::[ ${containers%,} ]"
 
             - if: contains(fromJson(steps.json-labels.outputs.labels), github.event.label.name)
               uses: actions/checkout@v2
@@ -75,14 +80,16 @@ jobs:
                   password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }} # can be removed if maxDHIS2Version has been specified
 
     cypress:
-        needs: prerequisites
+        needs: [prerequisites, setup-matrix]
         if: contains(fromJson(needs.prerequisites.outputs.json-labels), github.event.label.name)
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
                 versions: ${{ fromJSON(needs.prerequisites.outputs.versions) }}
-                containers: ${{ fromJSON(needs.prerequisites.outputs.matrix-containers) }}
+                spec-group: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+        env:
+            SHOULD_RECORD: ${{ contains(github.event.head_commit.message, '[e2e record]') || contains(join(github.event.pull_request.labels.*.name), 'e2e record') }}
         steps:
             - uses: actions/checkout@v3
 
@@ -96,24 +103,44 @@ jobs:
               env:
                   version: ${{ matrix.versions }}
 
+            - name: Set Cypress Environment Variables
+              run: |
+                echo "CYPRESS_GROUP=e2e-${{ matrix.versions }}-${{ matrix.spec-group.id }}" >> $GITHUB_ENV
+                echo "CYPRESS_TAG=${{ github.event_name }}" >> $GITHUB_ENV
+                echo "CYPRESS_CI_BUILD_ID=${{ github.run_id }}" >> $GITHUB_ENV
+                echo "CI_BUILD_ID=${{ github.run_id }}" >> $GITHUB_ENV
+
+            - name: Debug Environment Variables
+              run: |
+                echo "SHOULD_RECORD=${{ env.SHOULD_RECORD }}"
+                echo "CI Build ID=${{ env.CI_BUILD_ID }}"
+                echo "Computed Group=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}"
+                echo "Computed Tag=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}"
+                echo "Computed CI Build ID=${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}"
+                echo "Spec=${{ join(matrix.spec-group.tests, ',') }}"
             - name: Cypress run
               uses: cypress-io/github-action@v6
               with:
-                  record: true
-                  parallel: true
-                  group: e2e-chrome-parallel-${{ matrix.versions }}
+                  record: ${{ env.SHOULD_RECORD }}
+                  parallel: ${{ env.SHOULD_RECORD }}
+                  group: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_GROUP || '' }}
+                  tag: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_TAG || '' }}
+                  ci-build-id: ${{ env.SHOULD_RECORD == 'true' && env.CYPRESS_CI_BUILD_ID || '' }}
+                  spec: ${{ join(matrix.spec-group.tests, ',') }}
                   browser: chrome
                   start: yarn start:forCypress
                   wait-on: http://localhost:3000
                   wait-on-timeout: 300
               env:
                   CI: true
-                  CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   CYPRESS_dhis2BaseUrl: ${{ steps.instance-url.outputs.url }}
-                  CYPRESS_dhis2InstanceVersion: ${{matrix.versions}}
+                  CYPRESS_dhis2InstanceVersion: ${{ matrix.versions }}
                   CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
                   CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
+                  CYPRESS_dhis2Username_trackerAutoTestRestricted: ${{ secrets.CYPRESS_DHIS2_USERNAME_TRACKER_AUTO_TEST_RESTRICTED }}
+                  CYPRESS_dhis2Password_trackerAutoTestRestricted: ${{ secrets.CYPRESS_DHIS2_PASSWORD_TRACKER_AUTO_TEST_RESTRICTED }}
                   NODE_OPTIONS: "--openssl-legacy-provider"
 
     call-e2e-tests-result:

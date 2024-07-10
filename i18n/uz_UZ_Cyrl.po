@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-05T13:37:32.910Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -616,8 +616,8 @@ msgstr "Ташкилий бўлимни олиб бўлмади"
 msgid "Program doesn't exist"
 msgstr "Дастур мавжуд эмас"
 
-msgid "Selected program is invalid for selected registering unit"
-msgstr "Танланган дастур танланган рўйхатдан олинадиган бўлим учун яроқсиз"
+msgid "Selected program is invalid for selected organisation unit"
+msgstr ""
 
 msgid "Online"
 msgstr "Онлайн"
@@ -788,8 +788,8 @@ msgstr "Саҳифани очишда хатолик мавжуд"
 msgid "There was an error loading the page"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
+msgid "Choose an organisation unit to start reporting"
+msgstr ""
 
 msgid "No feedback for this event yet"
 msgstr ""
@@ -1000,11 +1000,8 @@ msgstr "Ўзаро алоқа киритиш"
 msgid "No results found for "
 msgstr ""
 
-msgid "Registering unit"
-msgstr "Рўйхатга олиш муассасаси"
-
-msgid "Choose a registering unit"
-msgstr ""
+msgid "Choose an organisation unit"
+msgstr "Ташкилий бирликни танланг"
 
 msgid "Clear selection"
 msgstr ""
@@ -1015,7 +1012,7 @@ msgstr "Ҳеч қандай дастур мавжуд эмас."
 msgid "Search for a program"
 msgstr ""
 
-msgid "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
 
 msgid "Show all programs"
@@ -1122,6 +1119,9 @@ msgstr "Янги тадбир яратинг"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
+
+msgid "No tracked entity types available"
+msgstr ""
 
 msgid "Assigned to"
 msgstr "Тайинланган"

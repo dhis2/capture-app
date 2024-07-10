@@ -32,7 +32,7 @@ import {
     withFilterProps,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
-    orientations,
+    orientations, VirtualizedSelectField,
 } from '../../../../FormFields/New';
 import { Assignee } from './Assignee';
 
@@ -47,6 +47,11 @@ import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryF
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 import { withTransformPropName } from '../../../../../HOC';
 import { InfoIconText } from '../../../../InfoIconText';
+import {
+    AOCsectionKey,
+    attributeOptionsKey,
+    getCategoryOptionsValidatorContainers, withAOCFieldBuilder, withDataEntryFields,
+} from '../../../../DataEntryDhis2Helpers';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -293,6 +298,49 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
+const buildCategoryOptionsFieldSettingsFn = () => {
+    const categoryOptionsComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const categoryOptionsSettings = {
+        getComponent: () => categoryOptionsComponent,
+        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
+            ...props.categories?.find(category => category.id === fieldId) ?? {},
+            required: true,
+        }),
+        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
+        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
+        getMeta: (props: Object) => {
+            const { programCategory } = props;
+            return {
+                section: AOCsectionKey,
+                placement: placements.TOP,
+                sectionName: programCategory?.displayName,
+            };
+        },
+    };
+
+    return categoryOptionsSettings;
+};
+
 const buildNotesSettingsFn = () => {
     const noteComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -410,7 +458,10 @@ const dataEntryFilterProps = (props: Object) => {
 
 const CleanUpHOC = withCleanUp()(withFilterProps(dataEntryFilterProps)(DataEntryContainer));
 const AssigneeField = withDataEntryFieldIfApplicable(buildAssigneeSettingsFn())(CleanUpHOC);
-const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AssigneeField);
+const AOCField = withAOCFieldBuilder({})(
+    withDataEntryFields(buildCategoryOptionsFieldSettingsFn())(AssigneeField),
+);
+const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AOCField);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
@@ -453,13 +504,16 @@ type Props = {
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,
-    name: string,
+    name?: string,
 };
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
+    },
+    [AOCsectionKey]: {
+        placement: placements.TOP,
     },
     [dataEntrySectionNames.STATUS]: {
         placement: placements.BOTTOM,

@@ -7,8 +7,8 @@ export const batchActionTypes = {
 };
 
 export const actionTypes = {
-    TEI_SEARCH_SET_PROGRAM: 'TeiSearchSetProgram',
-    TEI_SEARCH_START_SET_PROGRAM: 'TeiSearchStartSetProgram',
+    TEI_SEARCH_SET_PROGRAM: 'RelationshipsWidget.TeiSearchSetProgram',
+    TEI_SEARCH_START_SET_PROGRAM: 'RelationshipsWidget.TeiSearchStartSetProgram',
 };
 
 export const startSetProgram = (searchId: string, programId: ?string) =>

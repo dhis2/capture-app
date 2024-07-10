@@ -80,9 +80,10 @@ const WidgetProfilePlain = ({
         userRoles,
     } = useUserRoles();
 
-    const isEditable = useMemo(() => trackedEntityInstanceAttributes.length > 0 && !readOnlyMode,
-        [trackedEntityInstanceAttributes, readOnlyMode]);
-
+    const isEditable = useMemo(() =>
+        trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
+    [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
+    
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(

@@ -83,6 +83,7 @@ class ViewEventPlain extends Component<Props, State> {
             getAssignedUserSaveContext,
             onSaveAssignee,
             onSaveAssigneeError,
+            onBackToAllEvents,
         } = this.props;
 
         return (
@@ -98,6 +99,7 @@ class ViewEventPlain extends Component<Props, State> {
                     <EventDetails
                         eventAccess={eventAccess}
                         programStage={programStage}
+                        onBackToAllEvents={onBackToAllEvents}
                     />
                     <RightColumnWrapper
                         eventAccess={eventAccess}

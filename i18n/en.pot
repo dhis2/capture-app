@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-26T17:02:42.850Z\n"
-"PO-Revision-Date: 2024-04-26T17:02:42.850Z\n"
+"POT-Creation-Date: 2024-06-04T12:49:55.581Z\n"
+"PO-Revision-Date: 2024-06-04T12:49:55.581Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -607,8 +607,8 @@ msgstr "Could not get organisation unit"
 msgid "Program doesn't exist"
 msgstr "Program doesn't exist"
 
-msgid "Selected program is invalid for selected registering unit"
-msgstr "Selected program is invalid for selected registering unit"
+msgid "Selected program is invalid for selected organisation unit"
+msgstr "Selected program is invalid for selected organisation unit"
 
 msgid "Online"
 msgstr "Online"
@@ -786,8 +786,8 @@ msgstr "There was an error opening the Page"
 msgid "There was an error loading the page"
 msgstr "There was an error loading the page"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Choose a registering unit to start reporting"
+msgid "Choose an organisation unit to start reporting"
+msgstr "Choose an organisation unit to start reporting"
 
 msgid "No feedback for this event yet"
 msgstr "No feedback for this event yet"
@@ -837,8 +837,12 @@ msgstr "Or see all events accessible to you in {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Please select an organisation unit."
 
-msgid "New"
-msgstr "New"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
@@ -846,8 +850,8 @@ msgstr "Choose the {{missingCategories}} to start reporting"
 msgid "Save as new"
 msgstr "Save as new"
 
-msgid "View enrollment"
-msgstr "View enrollment"
+msgid "New"
+msgstr "New"
 
 msgid "Create for"
 msgstr "Create for"
@@ -996,11 +1000,8 @@ msgstr "Add relationship"
 msgid "No results found for "
 msgstr "No results found for "
 
-msgid "Registering unit"
-msgstr "Registering unit"
-
-msgid "Choose a registering unit"
-msgstr "Choose a registering unit"
+msgid "Choose an organisation unit"
+msgstr "Choose an organisation unit"
 
 msgid "Clear selection"
 msgstr "Clear selection"
@@ -1011,8 +1012,8 @@ msgstr "No programs available."
 msgid "Search for a program"
 msgstr "Search for a program"
 
-msgid "Some programs are being filtered by the chosen registering unit"
-msgstr "Some programs are being filtered by the chosen registering unit"
+msgid "Some programs are being filtered by the chosen organisation unit"
+msgstr "Some programs are being filtered by the chosen organisation unit"
 
 msgid "Show all programs"
 msgstr "Show all programs"
@@ -1119,6 +1120,9 @@ msgstr "Create new event"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
+
+msgid "No tracked entity types available"
+msgstr "No tracked entity types available"
 
 msgid "Assigned to"
 msgstr "Assigned to"
@@ -1453,6 +1457,12 @@ msgstr "Link to an existing {{linkableStageLabel}}"
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Choose a {{linkableStageLabel}}"
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr "{{ linkableStageLabel }} is not repeatable"
+
+msgid "{{ linkableStageLabel }} has no existing events"
+msgstr "{{ linkableStageLabel }} has no existing events"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"

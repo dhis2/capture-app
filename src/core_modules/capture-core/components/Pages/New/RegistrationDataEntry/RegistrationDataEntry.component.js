@@ -143,7 +143,7 @@ const RegistrationDataEntryPlain = ({
                     programId,
                 }))}
             >
-                {programId ? i18n.t('View enrollment') : i18n.t('View dashboard')}
+                {i18n.t('View dashboard')}
             </Button>
         );
     }, []);
@@ -274,10 +274,12 @@ const RegistrationDataEntryPlain = ({
             }
 
             {
-                scopeType === scopeTypes.EVENT_PROGRAM &&
-                <SingleEventRegistrationEntry
-                    id="singleEvent"
-                />
+                scopeType === scopeTypes.EVENT_PROGRAM && (
+                    <SingleEventRegistrationEntry
+                        id="singleEvent"
+                        selectedScopeId={selectedScopeId}
+                    />
+                )
             }
 
         </>

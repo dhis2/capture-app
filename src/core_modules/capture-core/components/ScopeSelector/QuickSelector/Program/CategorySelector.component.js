@@ -21,6 +21,8 @@ type Props = {
     onSelect: (option: SelectOption) => void,
     selectedCategoryName: ?string,
     onClearSelectionClick: () => void,
+    disabled?: boolean,
+    displayOnly?: boolean,
     classes: Object,
 };
 
@@ -166,6 +168,8 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             onClearSelectionClick,
             selectedCategoryName,
             classes,
+            displayOnly,
+            disabled,
             ...passOnProps
         } = this.props;
         const { options } = this.state;
@@ -177,9 +181,14 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                 value={selectedCategoryName}
                 noValueMessage={i18n.t(`Choose a ${passOnProps.category.name}`)}
                 open={this.state.open}
-                setOpen={open => this.setState({ open })}
-                onClearSelectionClick={onClearSelectionClick}
+                setOpen={(open) => {
+                    if (displayOnly) return;
+                    this.setState({ open });
+                }}
+                onClearSelectionClick={!displayOnly && onClearSelectionClick}
                 dataTest="category-selector-container"
+                disabled={disabled}
+                displayOnly={displayOnly}
             >
                 {options && (
                     <div className={classes.selectBarMenu}>
