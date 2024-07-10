@@ -35,7 +35,7 @@ const styles = theme => ({
     borderBoxContent: {
         margin: theme.typography.pxToRem(10),
     },
-    newNoteButtonContainer: {
+    newNoteButtonsContainer: {
         marginTop: spacersNum.dp4,
     },
     noteItemHeader: {
@@ -51,9 +51,6 @@ const styles = theme => ({
     },
     notesList: {
         padding: 0,
-    },
-    newNoteButtonContainer: {
-        display: 'inline-block',
     },
     addNoteContainer: {
         marginRight: 5,
@@ -72,7 +69,7 @@ type Props = {
         noteItem: string,
         inputContainer: string,
         borderBoxContent: string,
-        newNoteButtonContainer: string,
+        newNoteButtonsContainer: string,
         newNoteContainer: string,
         newNoteFormContainer: string,
         textEditorContainer: string,
@@ -82,7 +79,6 @@ type Props = {
         noteItemDate: string,
         notesList: string,
         addNoteContainer: string,
-        newNoteButtonContainer: string,
     },
 };
 
@@ -153,7 +149,7 @@ class NotesPlain extends React.Component<Props, State> {
                         data-test="note-textfield"
                     />
                 </Editor>
-                <div className={classes.newNoteButtonContainer} data-test="note-buttons-container">
+                <div className={classes.newNoteButtonsContainer} data-test="note-buttons-container">
                     <Button
                         onClick={this.handleAddNote}
                         className={classes.addNoteContainer}
@@ -179,7 +175,6 @@ class NotesPlain extends React.Component<Props, State> {
         const { smallMainButton, classes } = this.props;
         return (
             <div
-                className={classes.newNoteButtonContainer}
                 data-test="new-note-button"
             >
                 <ConditionalTooltip
