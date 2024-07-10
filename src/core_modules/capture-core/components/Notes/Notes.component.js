@@ -172,7 +172,7 @@ class NotesPlain extends React.Component<Props, State> {
     }
 
     renderButton = (canAddNote: boolean) => {
-        const { smallMainButton, classes } = this.props;
+        const { smallMainButton } = this.props;
         return (
             <div
                 data-test="new-note-button"
