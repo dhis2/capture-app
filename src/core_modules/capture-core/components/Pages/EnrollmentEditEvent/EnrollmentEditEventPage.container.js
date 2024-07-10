@@ -268,7 +268,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
             onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
             eventStatus={event?.status}
             eventAccess={eventAccess}
-            relationships={event?.relationships}
             scheduleDate={scheduleDate}
             onCancelEditEvent={onCancelEditEvent}
             onHandleScheduleSave={onHandleScheduleSave}

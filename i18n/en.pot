@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-07-03T10:53:23.083Z\n"
-"PO-Revision-Date: 2024-07-03T10:53:23.083Z\n"
+"POT-Creation-Date: 2024-07-10T10:57:05.586Z\n"
+"PO-Revision-Date: 2024-07-10T10:57:05.586Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1533,6 +1533,15 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "An error occurred while loading the widget."
+msgstr "An error occurred while loading the widget."
+
+msgid "View linked event"
+msgstr "View linked event"
+
+msgid "Scheduled"
+msgstr "Scheduled"
+
 msgid "Changelog"
 msgstr "Changelog"
 
@@ -1698,9 +1707,6 @@ msgstr "An error has occured. See log for details"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Scheduled{{ escape }} due {{ time }}"
-
-msgid "Scheduled"
-msgstr "Scheduled"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "Overdue{{ escape }} due {{ time }}"

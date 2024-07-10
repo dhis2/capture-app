@@ -5,7 +5,6 @@ import { pageStatuses } from '../../EnrollmentEditEvent/EnrollmentEditEventPage.
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { WidgetEventEdit } from '../../../WidgetEventEdit';
 import type { Props } from '../../../WidgetEventEdit/widgetEventEdit.types';
-import { TwoEventWorkspace } from '../../../WidgetEventEdit/TwoEventWorkspace';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 
 type WidgetProps = {|
@@ -17,13 +16,7 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     const {
         programId,
         stageId,
-        eventId,
-        relationships,
     } = passOnProps;
-
-    const linkedEventRelationships = useMemo(() => relationships && relationships
-        .filter(relationship => !!(relationship.to.event && relationship.from.event)), [relationships]);
-    console.log('linkedEventRelationships: ', linkedEventRelationships);
 
     const {
         formFoundation,
@@ -64,15 +57,6 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
 
     return (
         <>
-            {relationships && relationships.length > 0 ? (
-                <TwoEventWorkspace
-                    programId={programId}
-                    eventId={eventId}
-                    stageId={stageId}
-                    relationships={relationships}
-                />
-            ) : null}
-
             <WidgetEventEdit
                 {...passOnProps}
                 stage={stage}
