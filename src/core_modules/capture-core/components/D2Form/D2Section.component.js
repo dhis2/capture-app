@@ -15,6 +15,7 @@ const getStyles = theme => ({
     containerCustomForm: {
         paddingTop: 10,
         paddingBottom: 10,
+        overflowX: 'scroll',
     },
 });
 
@@ -112,7 +113,6 @@ class D2SectionPlain extends React.PureComponent<Props> {
 
         return (<div
             data-test="d2-section"
-            style={{ overflowX: 'scroll' }}
             className={applyCustomFormClass ? this.props.classes.containerCustomForm : ''}
         >
             {
