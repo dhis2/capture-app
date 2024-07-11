@@ -1,8 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Checkbox, Switch, spacersNum } from '@dhis2/ui';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import { Checkbox, Switch, spacersNum, FieldSet, Label } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -65,9 +63,7 @@ class D2TrueOnlyPlain extends Component<Props> {
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
                 style={style}
             >
-                <FormControl
-                    component="fieldset"
-                >
+                <FieldSet>
                     {
                         (() => {
                             if (!label || useValueLabel) {
@@ -75,14 +71,12 @@ class D2TrueOnlyPlain extends Component<Props> {
                             }
 
                             return (
-                                <FormLabel
-                                    component="label"
+                                <Label
                                     required={!!required}
                                     classes={this.labelClasses}
-                                    focused={false}
                                 >
                                     {label}
-                                </FormLabel>
+                                </Label>
                             );
                         })()
                     }
@@ -90,7 +84,7 @@ class D2TrueOnlyPlain extends Component<Props> {
                         <Switch checked={!!value} label={useValueLabel ? label : ''} onChange={this.handleChange} value={value} dense className={classes.checkbox} /> :
                         <Checkbox checked={!!value} label={useValueLabel ? label : ''} onChange={this.handleChange} value={value} dense className={classes.checkbox} />
                     }
-                </FormControl>
+                </FieldSet>
             </div>
         );
     }
