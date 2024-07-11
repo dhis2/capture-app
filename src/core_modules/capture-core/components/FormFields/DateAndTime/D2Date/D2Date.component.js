@@ -18,7 +18,7 @@ type Props = {
 };
 
 export class D2Date extends React.Component<Props, State> {
-    handleDateSelected: (value: {calendarDateString: string}) => void; 
+    handleDateSelected: (value: {calendarDateString: string}) => void;
 
     constructor(props: Props) {
         super(props);
