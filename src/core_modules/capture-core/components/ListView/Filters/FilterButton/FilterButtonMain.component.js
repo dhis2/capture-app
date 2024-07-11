@@ -26,15 +26,6 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const POPOVER_ANCHOR_ORIGIN = {
-    vertical: 'bottom',
-    horizontal: 'left',
-};
-const POPOVER_TRANSFORM_ORIGIN = {
-    vertical: 'top',
-    horizontal: 'left',
-};
-
 type Props = {
     itemId: string,
     type: string,
@@ -192,6 +183,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
 
     render() {
         const { filterValue, selectorVisible, classes } = this.props;
+        const { isMounted } = this.state;
 
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
 
@@ -203,15 +195,9 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {button}
                 </div>
-                {/* TODO - Some things to follow up with
-                1. This change affects all the working list filters, please check the Popper works poperly for all of the supported ones from capture-core/components/ListView/Filters/filters.const.js
-                2. Cypress tests may be affected, please adapt the data-test selectors
-                3. When selecting a date form the calendar, the selected value should appear in the input filed. What is happening in the onDateSelect callback from CalendarInput?
-                4. Is "bottom-start" a const exported for the UI library that can be used?
-                */}
 
-                {selectorVisible && (
-                    <Layer onBackdropClick={this.closeFilterSelector}>
+                {selectorVisible && isMounted && (
+                    <Layer onBackdropClick={this.closeFilterSelector} >
                         <Popper
                             reference={this.anchorRef}
                             className={classes.popper}
