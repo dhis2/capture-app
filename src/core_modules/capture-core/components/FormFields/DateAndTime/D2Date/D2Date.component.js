@@ -3,21 +3,21 @@ import * as React from 'react';
 import { CalendarInput } from '@dhis2/ui';
 
 type Props = {
-    label: string,
+    label?: string,
     value: ?string,
     width: number,
-    calendar: string,
+    calendar?: string,
     calendarWidth?: ?number,
     calendarHeight?: ?number,
     inputWidth?: ?number,
     onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-    classes: Object,
-    textFieldRef?: (instance: D2TextField) => void,
+    classes?: Object,
+    disabled?: boolean,
 };
 
-export class D2Date extends React.Component<Props, State> {
+export class D2Date extends React.Component<Props> {
     handleDateSelected: (value: {calendarDateString: string}) => void;
 
     constructor(props: Props) {
@@ -42,7 +42,6 @@ export class D2Date extends React.Component<Props, State> {
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
-            textFieldRef,
             ...passOnProps
         } = this.props;
 
@@ -52,13 +51,13 @@ export class D2Date extends React.Component<Props, State> {
 
         return (
             <div
-                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
                 style={{
                     width,
                 }}
             >
                 <CalendarInput
                     label=""
+                    {...passOnProps}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
                     date={this.props.value}
@@ -67,7 +66,6 @@ export class D2Date extends React.Component<Props, State> {
                     onFocus={this.props.onFocus}
                     editable
                     disabled={this.props.disabled}
-                    {...passOnProps}
                 />
             </div>
         );
