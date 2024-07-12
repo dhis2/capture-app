@@ -3,6 +3,7 @@ type PropsFromRedux = {|
     dataEntryId: string,
     itemId: string,
     trackedEntityName: ?string,
+    trackedEntityTypeId: ?string,
     newRelationshipProgramId: string,
     error: string,
 |};
