@@ -15,7 +15,6 @@ const getStyles = theme => ({
     containerCustomForm: {
         paddingTop: 10,
         paddingBottom: 10,
-        overflowX: 'auto',
     },
 });
 
