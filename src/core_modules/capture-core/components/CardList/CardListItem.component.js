@@ -13,7 +13,7 @@ import { searchScopes } from '../SearchBox';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
 import { dataElementTypes, getTrackerProgramThrowIfNotFound } from '../../metaData';
-import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 
@@ -139,7 +139,7 @@ const CardListItemIndex = ({
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitId, enrolledAt } = deriveEnrollmentOrgUnitIdAndDate(enrollments, enrollmentType, currentProgramId);
-    const { displayName: orgUnitName } = useOrgUnitName(orgUnitId);
+    const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
     const program = enrollments && enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
