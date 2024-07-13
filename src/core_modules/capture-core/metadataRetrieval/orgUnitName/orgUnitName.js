@@ -72,7 +72,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
 
     const onComplete = useCallback(({ organisationUnits }) => {
         for (const { id, displayName } of organisationUnits.organisationUnits) {
-            displayNameCache[id] = displayName;
+            displayNameCache[id].displayName = displayName;
         }
         const completeCount = completedBatches + 1;
         setCompletedBatches(completeCount);
@@ -139,35 +139,60 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
         .map(batch => querySingleResource(displayNamesQuery.organisationUnits, { filter: batch.join(',') })
             .then(({ organisationUnits }) => {
                 for (const { id, displayName } of organisationUnits) {
-                    displayNameCache[id] = displayName;
+                    displayNameCache[id].displayName = displayName;
                 }
             })));
 
     return orgUnitIds.reduce((acc, orgUnitId) => {
         acc[orgUnitId] = {
             id: orgUnitId,
-            name: displayNameCache[orgUnitId],
+            name: displayNameCache[orgUnitId].displayName,
         };
         return acc;
     }, {});
 }
 
-export const useOrgUnitName = (orgUnitId: ?string): {
+export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     displayName?: string,
-    error?: any,
+    ancestors?: Array<{| displayName: string, level: number |}>,
+        error ?: any,
 } => {
-    const cachedOrgUnitName = orgUnitId && displayNameCache[orgUnitId];
-    const fetchId = cachedOrgUnitName ? undefined : orgUnitId;
-    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName');
-    if (cachedOrgUnitName) {
-        return { displayName: cachedOrgUnitName };
+    const cachedOrgUnitNameAndAncestor = orgUnitId && displayNameCache[orgUnitId];
+    const fetchId = cachedOrgUnitNameAndAncestor ? undefined : orgUnitId;
+    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[displayName,level]');
+
+    if (cachedOrgUnitNameAndAncestor) {
+        return {
+            displayName: cachedOrgUnitNameAndAncestor.displayName,
+            ancestors: cachedOrgUnitNameAndAncestor.ancestors,
+            error,
+        };
     } else if (orgUnit && fetchId) {
-        displayNameCache[orgUnit.id] = orgUnit.displayName;
+        displayNameCache[orgUnit.id] = {
+            displayName: orgUnit.displayName,
+            ancestors: orgUnit.ancestors,
+        };
         if (orgUnit.id === fetchId) {
-            return { displayName: orgUnit.displayName, error };
+            return { displayName: orgUnit.displayName, ancestors: orgUnit.ancestors, error };
         }
+        return { error };
     }
+
     return { error };
 };
 
-export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId];
+export const useFormatOrgUnitNameFullPath = (orgUnitName: ?string, ancestors?: Array<{| displayName: string, level: number |}>,
+): ?string => {
+    const [path, setPath] = useState(null);
+    useEffect(() => {
+        if (orgUnitName && ancestors) {
+            const ancestorNames = ancestors.map(ancestor => ancestor.displayName);
+            ancestorNames.push(orgUnitName);
+            const computedPath = ancestorNames.join(' / ');
+            setPath(computedPath);
+        }
+    }, [orgUnitName, ancestors]);
+    return path;
+};
+
+export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId].displayName;
