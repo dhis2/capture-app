@@ -1,10 +1,10 @@
 import React from 'react';
 import { Tooltip } from '@dhis2/ui';
 
-export const TooltipOrgUnit = ({ orgUnitPath }) => (
-    <Tooltip content={orgUnitPath}>
+export const TooltipOrgUnit = ({ orgUnitName, orgUnitNameFullPath }) => (
+    <Tooltip content={orgUnitNameFullPath} openDelay={400}>
         <span style={{ textDecoration: 'underline dotted' }}>
-            {orgUnitPath}
+            {orgUnitName}
         </span>
     </Tooltip>
 );
