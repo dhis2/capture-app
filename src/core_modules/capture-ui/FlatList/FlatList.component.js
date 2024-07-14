@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { TooltipOrgUnit } from '../../capture-core/components/Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
-import { useOrgUnitNameWithAncestors, useFormatOrgUnitNameFullPath } from '../../capture-core/metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../capture-core/metadataRetrieval/orgUnitName';
 
 const itemStyles = {
     overflow: 'hidden',
@@ -37,7 +37,7 @@ const styles = {
 };
 
 const FlatListItem = ({ item, classes, lastItemKey }) => {
-    const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(item.value.id);
+    const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(item.value?.id);
 
     return (
         <div
@@ -49,7 +49,7 @@ const FlatListItem = ({ item, classes, lastItemKey }) => {
                 {item.valueType === 'ORGANISATION_UNIT' ? (
                     <TooltipOrgUnit orgUnitName={orgUnitName} ancestors={ancestors} />
                 ) : (
-                    item.value.name
+                    item.value?.name
                 )}
             </div>
         </div>

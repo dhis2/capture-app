@@ -11,5 +11,5 @@ export const TooltipOrgUnit = ({ orgUnitName, ancestors }) => {
             </span>
         </Tooltip>
     );
-}
+};
 
