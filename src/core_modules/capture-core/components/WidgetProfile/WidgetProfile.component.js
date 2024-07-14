@@ -21,7 +21,7 @@ import {
     useUserRoles,
     useTeiDisplayName,
 } from './hooks';
-import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE } from './DataEntry';
 import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
 import { OverflowMenu } from './OverflowMenu';
@@ -94,15 +94,15 @@ const WidgetProfilePlain = ({
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
-    const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
-        .filter(item => item.displayInList)
-        .map((clientAttribute) => {
-            const { attribute, key, valueType } = clientAttribute;
-            const value = convertClientToView(clientAttribute);
-            return {
+    const displayInListAttributes = useMemo(() =>
+        clientAttributesWithSubvalues
+            .filter(({ displayInList }) => displayInList)
+            .map(({ attribute, key, value, valueType }) => ({
                 attribute, key, value, valueType, reactKey: attribute,
-            };
-        }), [clientAttributesWithSubvalues]);
+            })),
+    [clientAttributesWithSubvalues],
+    );
+
 
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
