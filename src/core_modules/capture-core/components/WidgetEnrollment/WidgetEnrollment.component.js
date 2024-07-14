@@ -74,7 +74,8 @@ export const WidgetEnrollmentPlain = ({
     const { fromServerDate } = useTimeZoneConversion();
     const geometryType = getGeometryType(enrollment?.geometry?.type);
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
-    const orgUnitNameFullPathFormatted = useFormatOrgUnitNameFullPath(orgUnitName, ancestors);
+    const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
+
 
     return (
         <div data-test="widget-enrollment">
@@ -133,7 +134,7 @@ export const WidgetEnrollmentPlain = ({
                             </span>
                             <span>
                                 {i18n.t('Started at ')}
-                                <TooltipOrgUnit orgUnitName={orgUnitName} orgUnitNameFullPath={orgUnitNameFullPathFormatted} />
+                                <TooltipOrgUnit orgUnitName={orgUnitName} ancestors={ancestors} />
                             </span>
                         </div>
 
@@ -143,7 +144,7 @@ export const WidgetEnrollmentPlain = ({
                             </span>
                             <span>
                                 {i18n.t('Owned by ')}
-                                <TooltipOrgUnit orgUnitName={orgUnitName} orgUnitNameFullPath={orgUnitNameFullPathFormatted} />
+                                <TooltipOrgUnit orgUnitName={ownerOrgUnitName} ancestors={ownerAncestors} />
                             </span>
                         </div>
 

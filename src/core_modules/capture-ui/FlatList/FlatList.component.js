@@ -38,7 +38,6 @@ const styles = {
 
 const FlatListItem = ({ item, classes, lastItemKey }) => {
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(item.value.id);
-    const orgUnitNameFullPath = useFormatOrgUnitNameFullPath(orgUnitName, ancestors);
 
     return (
         <div
@@ -48,7 +47,7 @@ const FlatListItem = ({ item, classes, lastItemKey }) => {
             <div className={classes.itemKey}>{item.key}:</div>
             <div className={classes.itemValue}>
                 {item.valueType === 'ORGANISATION_UNIT' ? (
-                    <TooltipOrgUnit orgUnitName={orgUnitName} orgUnitNameFullPath={orgUnitNameFullPath} />
+                    <TooltipOrgUnit orgUnitName={orgUnitName} ancestors={ancestors} />
                 ) : (
                     item.value.name
                 )}
