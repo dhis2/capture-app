@@ -16,7 +16,7 @@ import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
-import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors, useFormatOrgUnitNameFullPath } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
@@ -73,7 +73,8 @@ export const WidgetEnrollmentPlain = ({
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const geometryType = getGeometryType(enrollment?.geometry?.type);
-    const { displayName: orgUnitName } = useOrgUnitName(enrollment?.orgUnit);
+    const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
+    const orgUnitNameFullPathFormatted = useFormatOrgUnitNameFullPath(orgUnitName, ancestors);
 
     return (
         <div data-test="widget-enrollment">
@@ -132,7 +133,7 @@ export const WidgetEnrollmentPlain = ({
                             </span>
                             <span>
                                 {i18n.t('Started at ')}
-                                <TooltipOrgUnit orgUnitPath={orgUnitName} />
+                                <TooltipOrgUnit orgUnitName={orgUnitName} orgUnitNameFullPath={orgUnitNameFullPathFormatted} />
                             </span>
                         </div>
 
@@ -142,7 +143,7 @@ export const WidgetEnrollmentPlain = ({
                             </span>
                             <span>
                                 {i18n.t('Owned by ')}
-                                <TooltipOrgUnit orgUnitPath={ownerOrgUnit.displayName} />
+                                <TooltipOrgUnit orgUnitName={orgUnitName} orgUnitNameFullPath={orgUnitNameFullPathFormatted} />
                             </span>
                         </div>
 
