@@ -35,7 +35,7 @@ const styles = theme => ({
     borderBoxContent: {
         margin: theme.typography.pxToRem(10),
     },
-    newCommentButtonContainer: {
+    newNoteButtonsContainer: {
         marginTop: spacersNum.dp4,
     },
     noteItemHeader: {
@@ -52,10 +52,7 @@ const styles = theme => ({
     notesList: {
         padding: 0,
     },
-    newNoteButtonContainer: {
-        display: 'inline-block',
-    },
-    addCommentContainer: {
+    addNoteContainer: {
         marginRight: 5,
         marginLeft: 2,
     },
@@ -72,7 +69,7 @@ type Props = {
         noteItem: string,
         inputContainer: string,
         borderBoxContent: string,
-        newCommentButtonContainer: string,
+        newNoteButtonsContainer: string,
         newNoteContainer: string,
         newNoteFormContainer: string,
         textEditorContainer: string,
@@ -81,8 +78,7 @@ type Props = {
         noteItemUser: string,
         noteItemDate: string,
         notesList: string,
-        addCommentContainer: string,
-        newNoteButtonContainer: string,
+        addNoteContainer: string,
     },
 };
 
@@ -150,17 +146,17 @@ class NotesPlain extends React.Component<Props, State> {
                         onChange={this.handleChange}
                         value={this.state.value}
                         multiLine
-                        data-test="comment-textfield"
+                        data-test="note-textfield"
                     />
                 </Editor>
-                <div className={classes.newCommentButtonContainer} data-test="comment-buttons-container">
+                <div className={classes.newNoteButtonsContainer} data-test="note-buttons-container">
                     <Button
                         onClick={this.handleAddNote}
-                        className={classes.addCommentContainer}
+                        className={classes.addNoteContainer}
                         primary
                         small
                     >
-                        {i18n.t('Add comment')}
+                        {i18n.t('Add note')}
                     </Button>
                     <Button
                         onClick={this.onCancel}
@@ -175,23 +171,22 @@ class NotesPlain extends React.Component<Props, State> {
         );
     }
 
-    renderButton = (canAddComment: boolean) => {
-        const { smallMainButton, classes } = this.props;
+    renderButton = (canAddNote: boolean) => {
+        const { smallMainButton } = this.props;
         return (
             <div
-                className={classes.newNoteButtonContainer}
-                data-test="new-comment-button"
+                data-test="new-note-button"
             >
                 <ConditionalTooltip
-                    content={i18n.t('You don\'t have access to write comments')}
-                    enabled={!canAddComment}
+                    content={i18n.t('You don\'t have access to write notes')}
+                    enabled={!canAddNote}
                 >
                     <Button
                         onClick={this.toggleIsOpen}
-                        disabled={!canAddComment}
+                        disabled={!canAddNote}
                         small={smallMainButton}
                     >
-                        {i18n.t('Write comment')}
+                        {i18n.t('Write note')}
                     </Button>
                 </ConditionalTooltip>
             </div>
@@ -202,22 +197,22 @@ class NotesPlain extends React.Component<Props, State> {
         const { notes, classes, entityAccess } = this.props;
         return (
             <div className={classes.notesContainer}>
-                <Menu dense className={classes.notesList} data-test="comments-list">
+                <Menu dense className={classes.notesList} data-test="notes-list">
                     {notes.map(n => (
                         <MenuItem
                             className={classes.noteItem}
                             key={n.clientId}
-                            data-test="comment"
+                            data-test="note"
                             label={<>
                                 <div className={classes.noteItemHeader}>
-                                    <div className={classes.noteItemUser} data-test="comment-user">
+                                    <div className={classes.noteItemUser} data-test="note-user">
                                         {n.createdBy ? `${n.createdBy.firstName} ${n.createdBy.surname}` : `${n.storedBy}` }
                                     </div>
-                                    <div className={classes.noteItemDate} data-test="comment-date">
+                                    <div className={classes.noteItemDate} data-test="note-date">
                                         {n.storedDate}
                                     </div>
                                 </div>
-                                <div data-test="comment-text">
+                                <div data-test="note-text">
                                     <Parser>{n.value}</Parser>
                                 </div>
                             </>}
@@ -225,7 +220,7 @@ class NotesPlain extends React.Component<Props, State> {
                     ))}
                 </Menu>
                 {
-                    <div className={classes.newNoteContainer} data-test="new-comment-container">
+                    <div className={classes.newNoteContainer} data-test="new-note-container">
                         { this.state.addIsOpen ? this.renderInput() : this.renderButton(entityAccess.write) }
                     </div>
                 }

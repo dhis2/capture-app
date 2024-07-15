@@ -79,7 +79,7 @@ Feature: User interacts with the Enrollment New Event Workspace
     Given you land on the enrollment new event page by having typed /#/enrollmentEventNew?enrollmentId=qcFFRp7DpcX&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&stageId=edqlbukwRfQ&teiId=erqa3phUfpI
     And you see the following Enrollment: New Event
     And you select the schedule tab
-    When you add a comment to the event
+    When you add a note to the event
     And the events saves successfully
 
   Scenario: User can add a new event and complete the enrollment

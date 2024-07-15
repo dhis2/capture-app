@@ -76,7 +76,7 @@ const getStyles = theme => ({
 const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
-    COMMENTS: 'COMMENTS',
+    NOTES: 'NOTES',
     RELATIONSHIPS: 'RELATIONSHIPS',
     ASSIGNEE: 'ASSIGNEE',
 };
@@ -229,8 +229,8 @@ const buildGeometrySettingsFn = () => ({
 
         return createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: 'Coordinate',
-            dialogLabel: 'Coordinate',
+            label: i18n.t('Coordinate'),
+            dialogLabel: i18n.t('Coordinate'),
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
@@ -263,16 +263,16 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Comments',
+            label: i18n.t('Notes'),
             onAddNote: props.onAddNote,
-            id: 'comments',
+            id: 'notes',
             dataEntryId: props.id,
         }),
         getPropName: () => 'note',
         getValidatorContainers: () => getNoteValidatorContainers(),
         getMeta: () => ({
             placement: placements.BOTTOM,
-            section: dataEntrySectionNames.COMMENTS,
+            section: dataEntrySectionNames.NOTES,
         }),
     };
 
@@ -403,9 +403,9 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
     },
-    [dataEntrySectionNames.COMMENTS]: {
+    [dataEntrySectionNames.NOTES]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Comments'),
+        name: i18n.t('Notes'),
     },
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
