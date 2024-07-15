@@ -1,3 +1,10 @@
+## [100.70.10](https://github.com/dhis2/capture-app/compare/v100.70.9...v100.70.10) (2024-07-15)
+
+
+### Bug Fixes
+
+* [DHIS2-17736] Dropdown Regression in Registration Form ([#3710](https://github.com/dhis2/capture-app/issues/3710)) ([4c46276](https://github.com/dhis2/capture-app/commit/4c462760547b796fe145a61a073cdf5987fe7e3f))
+
 ## [100.70.9](https://github.com/dhis2/capture-app/compare/v100.70.8...v100.70.9) (2024-07-10)
 
 
