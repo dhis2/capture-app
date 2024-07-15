@@ -1,3 +1,31 @@
+## [100.70.10](https://github.com/dhis2/capture-app/compare/v100.70.9...v100.70.10) (2024-07-15)
+
+
+### Bug Fixes
+
+* [DHIS2-17736] Dropdown Regression in Registration Form ([#3710](https://github.com/dhis2/capture-app/issues/3710)) ([4c46276](https://github.com/dhis2/capture-app/commit/4c462760547b796fe145a61a073cdf5987fe7e3f))
+
+## [100.70.9](https://github.com/dhis2/capture-app/compare/v100.70.8...v100.70.9) (2024-07-10)
+
+
+### Bug Fixes
+
+* [DHIS2-8814] Table in custom form overflows container with no scrollbar ([#3655](https://github.com/dhis2/capture-app/issues/3655)) ([c39c397](https://github.com/dhis2/capture-app/commit/c39c397ec078b7a8e765a3847d48881ebd720005))
+
+## [100.70.8](https://github.com/dhis2/capture-app/compare/v100.70.7...v100.70.8) (2024-07-09)
+
+
+### Bug Fixes
+
+* [DHIS2-17398] improve unique ID search ([#3688](https://github.com/dhis2/capture-app/issues/3688)) ([183e419](https://github.com/dhis2/capture-app/commit/183e419000245173a5020a965e4d681ab0cfdf7f))
+
+## [100.70.7](https://github.com/dhis2/capture-app/compare/v100.70.6...v100.70.7) (2024-07-09)
+
+
+### Bug Fixes
+
+* [BETA-116][DHIS2-15896] validate values assigned from the rules engine ([#3612](https://github.com/dhis2/capture-app/issues/3612)) ([459ab9a](https://github.com/dhis2/capture-app/commit/459ab9a7fc0b0f3c3ce98e19a7acf213b35eb6e8))
+
 ## [100.70.6](https://github.com/dhis2/capture-app/compare/v100.70.5...v100.70.6) (2024-07-05)
 
 
