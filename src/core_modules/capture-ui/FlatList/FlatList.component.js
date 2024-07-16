@@ -49,7 +49,7 @@ const FlatListItem = ({ item, classes, lastItemKey }) => {
                 {item.valueType === 'ORGANISATION_UNIT' ? (
                     <TooltipOrgUnit orgUnitName={orgUnitName} ancestors={ancestors} />
                 ) : (
-                    item.value?.name
+                    item.value
                 )}
             </div>
         </div>

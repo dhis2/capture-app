@@ -103,7 +103,6 @@ const WidgetProfilePlain = ({
     [clientAttributesWithSubvalues],
     );
 
-
     const onSaveExternal = useCallback(() => {
         queryClient.removeQueries([ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY, teiId]);
     }, [queryClient, teiId]);
