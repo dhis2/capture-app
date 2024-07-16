@@ -65,7 +65,7 @@ export const TopBar = ({
                 title={trackedEntityName}
                 displayOnly
             />
-            {enrollmentsAsOptions?.length > 0 && (
+            {enrollmentsAsOptions?.length > 0 ? (
                 <SingleLockedSelect
                     ready
                     onClear={() => resetEnrollmentId()}
@@ -74,7 +74,7 @@ export const TopBar = ({
                     selectedValue={enrollmentId}
                     title={i18n.t('Enrollment')}
                 />
-            )}
+            ) : <></>}
             <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />
         </ScopeSelector>
     );

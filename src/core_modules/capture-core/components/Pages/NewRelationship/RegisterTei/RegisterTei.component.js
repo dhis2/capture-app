@@ -63,6 +63,7 @@ const RegisterTeiPlain = ({
     onCancel,
     onGetUnsavedAttributeValues,
     trackedEntityName,
+    trackedEntityTypeId,
     newRelationshipProgramId,
     classes,
 }: Props) => {
@@ -111,6 +112,7 @@ const RegisterTeiPlain = ({
                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
                     renderDuplicatesCardActions={renderDuplicatesCardActions}
                     ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                    trackedEntityTypeId={trackedEntityTypeId}
                 />
             </div>
             <DataEntryWidgetOutput

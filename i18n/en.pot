@@ -850,9 +850,6 @@ msgstr "Choose the {{missingCategories}} to start reporting"
 msgid "Save as new"
 msgstr "Save as new"
 
-msgid "View enrollment"
-msgstr "View enrollment"
-
 msgid "New"
 msgstr "New"
 

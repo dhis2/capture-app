@@ -184,21 +184,21 @@ When(/^the user selects the org unit (.*)$/, (orgUnit) => {
 
 When(/^you opt in to use the new enrollment Dashboard for (.*)$/, (program) => {
     cy.get('[data-test="main-page-working-list"]').then(($wrapper) => {
-        if ($wrapper.find('[data-test="opt-in"]').length > 0) {
+        if ($wrapper.find('[data-test="dhis2-uicore-button"]').length > 0) {
             cy.contains('[data-test="dhis2-uicore-button"]', `Opt in for ${program}`).click();
-            cy.contains('[data-test="dhis2-uicore-button"]', 'Yes, opt in').click();
-            cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+            cy.contains('[data-test="opt-in-button"]', 'Yes, opt in').click();
+            cy.contains('[data-test="opt-out-button"]', `Opt out for ${program}`);
         }
     });
 });
 
 Then(/^you see the opt out component for (.*)$/, (program) => {
-    cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`);
+    cy.contains('[data-test="opt-out-button"]', `Opt out for ${program}`);
 });
 
 When(/^you opt out to use the new enrollment Dashboard for (.*)$/, (program) => {
     cy.intercept('PUT', '**/dataStore/capture/useNewDashboard').as('optOutEnrollmentDashboard');
-    cy.contains('[data-test="dhis2-uicore-button"]', `Opt out for ${program}`).click();
+    cy.contains('[data-test="opt-out-button"]', `Opt out for ${program}`).click();
     cy.wait('@optOutEnrollmentDashboard', { timeout: 30000 });
 });
 

@@ -1,3 +1,39 @@
+## [100.70.9](https://github.com/dhis2/capture-app/compare/v100.70.8...v100.70.9) (2024-07-10)
+
+
+### Bug Fixes
+
+* [DHIS2-8814] Table in custom form overflows container with no scrollbar ([#3655](https://github.com/dhis2/capture-app/issues/3655)) ([c39c397](https://github.com/dhis2/capture-app/commit/c39c397ec078b7a8e765a3847d48881ebd720005))
+
+## [100.70.8](https://github.com/dhis2/capture-app/compare/v100.70.7...v100.70.8) (2024-07-09)
+
+
+### Bug Fixes
+
+* [DHIS2-17398] improve unique ID search ([#3688](https://github.com/dhis2/capture-app/issues/3688)) ([183e419](https://github.com/dhis2/capture-app/commit/183e419000245173a5020a965e4d681ab0cfdf7f))
+
+## [100.70.7](https://github.com/dhis2/capture-app/compare/v100.70.6...v100.70.7) (2024-07-09)
+
+
+### Bug Fixes
+
+* [BETA-116][DHIS2-15896] validate values assigned from the rules engine ([#3612](https://github.com/dhis2/capture-app/issues/3612)) ([459ab9a](https://github.com/dhis2/capture-app/commit/459ab9a7fc0b0f3c3ce98e19a7acf213b35eb6e8))
+
+## [100.70.6](https://github.com/dhis2/capture-app/compare/v100.70.5...v100.70.6) (2024-07-05)
+
+
+### Bug Fixes
+
+* [DHIS2-16196] set MaxHeight to "more filters" in working lists ([#3696](https://github.com/dhis2/capture-app/issues/3696)) ([f3fdbd4](https://github.com/dhis2/capture-app/commit/f3fdbd483c54b88ff9f38f513ad6bc80b1e91a17))
+* [DHIS2-16852] confusing-ui-when-there-is-more-than-one-warning ([#3702](https://github.com/dhis2/capture-app/issues/3702)) ([4920c04](https://github.com/dhis2/capture-app/commit/4920c041100465bfc51a8d121888e44c8bb27c82))
+
+## [100.70.5](https://github.com/dhis2/capture-app/compare/v100.70.4...v100.70.5) (2024-07-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17694] Edit button not showing on profile widget ([#3704](https://github.com/dhis2/capture-app/issues/3704)) ([d354da8](https://github.com/dhis2/capture-app/commit/d354da808f8a118ae95122bf2b20839fe1403931))
+
 ## [100.70.4](https://github.com/dhis2/capture-app/compare/v100.70.3...v100.70.4) (2024-07-03)
 
 
