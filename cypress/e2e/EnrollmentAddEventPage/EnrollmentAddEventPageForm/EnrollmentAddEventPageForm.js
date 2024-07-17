@@ -61,12 +61,12 @@ Given('you select the schedule tab', () => {
         .click();
 });
 
-When('you add a comment to the event', () => {
-    cy.get('[data-test="comment-textfield"]')
-        .type('This is a comment')
+When('you add a note to the event', () => {
+    cy.get('[data-test="note-textfield"]')
+        .type('This is a note')
         .blur();
 
-    cy.get('[data-test="add-comment-btn"]')
+    cy.get('[data-test="add-note-btn"]')
         .click();
 });
 

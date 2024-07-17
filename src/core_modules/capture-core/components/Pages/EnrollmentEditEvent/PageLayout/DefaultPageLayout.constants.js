@@ -6,14 +6,14 @@ import type {
 import {
     DefaultWidgetsForEnrollmentOverview,
     EditEventWorkspace,
-    EventComment,
+    EventNote,
     AssigneeWidget,
     WidgetTypes,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
 export const WidgetsForEnrollmentEventEdit: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     EditEventWorkspace,
-    EventComment,
+    EventNote,
     AssigneeWidget,
     ...DefaultWidgetsForEnrollmentOverview,
 });
@@ -40,7 +40,7 @@ export const DefaultPageLayout: PageLayoutConfig = {
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'EventComment',
+            name: 'EventNote',
         },
         {
             type: WidgetTypes.COMPONENT,
