@@ -1,3 +1,10 @@
+## [100.70.12](https://github.com/dhis2/capture-app/compare/v100.70.11...v100.70.12) (2024-07-18)
+
+
+### Bug Fixes
+
+* [DHIS2-17653] Exclude Linked Events from Dropdown List in Actions Widget ([#3697](https://github.com/dhis2/capture-app/issues/3697)) ([305623e](https://github.com/dhis2/capture-app/commit/305623ef19b512b0ffc9f97d5824129b3b4484c0))
+
 ## [100.70.11](https://github.com/dhis2/capture-app/compare/v100.70.10...v100.70.11) (2024-07-15)
 
 
