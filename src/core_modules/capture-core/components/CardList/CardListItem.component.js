@@ -3,8 +3,8 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
 import type { ComponentType } from 'react';
-import { Avatar, Grid, withStyles } from '@material-ui/core';
-import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
+import { Grid, withStyles } from '@material-ui/core';
+import { colors, Tag, IconCheckmark16, UserAvatar } from '@dhis2/ui';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
@@ -149,7 +149,8 @@ const CardListItemIndex = ({
         const imageValue = item.values[imageElement.id];
         return (
             <div>
-                {imageValue && <Avatar src={imageValue.url} alt={imageValue.name} className={classes.image} />}
+                {imageValue && <UserAvatar src={imageValue.url} alt={imageValue.name} className={classes.image} />}
+
             </div>
         );
     };
@@ -207,7 +208,7 @@ const CardListItemIndex = ({
     };
 
     return (
-        <div data-test="card-list-item" className={classes.itemContainer}>
+        <div data-test="" className={classes.itemContainer}>
             <div className={classes.itemDataContainer}>
 
                 <div className={classes.itemValuesContainer}>
