@@ -16,10 +16,11 @@ import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
-import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
+import { TooltipOrgUnit } from '../Tooltips/TooltipOrgUnit';
 
 const styles = {
     enrollment: {
@@ -72,7 +73,9 @@ export const WidgetEnrollmentPlain = ({
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const geometryType = getGeometryType(enrollment?.geometry?.type);
-    const { displayName: orgUnitName } = useOrgUnitName(enrollment?.orgUnit);
+    const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
+    const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
+
 
     return (
         <div data-test="widget-enrollment">
@@ -129,19 +132,20 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Started at {{orgUnitName}}', {
-                                orgUnitName,
-                                interpolation: { escapeValue: false },
-                            })}
+                            <span>
+                                {i18n.t('Started at ')}
+                                <TooltipOrgUnit orgUnitName={orgUnitName} ancestors={ancestors} />
+                            </span>
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-owner-orgunit">
                             <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Owned by {{ownerOrgUnit}}', {
-                                ownerOrgUnit: ownerOrgUnit.displayName,
-                            })}
+                            <span>
+                                {i18n.t('Owned by ')}
+                                <TooltipOrgUnit orgUnitName={ownerOrgUnitName} ancestors={ownerAncestors} />
+                            </span>
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">

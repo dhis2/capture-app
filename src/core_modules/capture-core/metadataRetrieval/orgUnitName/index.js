@@ -1,6 +1,7 @@
 // @flow
 export {
-    useOrgUnitName,
+    useOrgUnitNameWithAncestors,
+    useFormatOrgUnitNameFullPath,
     useOrgUnitNames,
     getOrgUnitNames,
     getCachedOrgUnitName,
