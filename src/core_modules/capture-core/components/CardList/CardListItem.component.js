@@ -208,7 +208,7 @@ const CardListItemIndex = ({
     };
 
     return (
-        <div data-test="" className={classes.itemContainer}>
+        <div data-test="card-list-item" className={classes.itemContainer}>
             <div className={classes.itemDataContainer}>
 
                 <div className={classes.itemValuesContainer}>
