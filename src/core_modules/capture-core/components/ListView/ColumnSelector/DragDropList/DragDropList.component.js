@@ -4,12 +4,7 @@ import React, { Component } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'react-addons-update';
-
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import { DataTable, TableHead, TableBody, DataTableRow, DataTableColumnHeader } from '@dhis2/ui';
 
 import i18n from '@dhis2/d2-i18n';
 
@@ -47,11 +42,13 @@ export class DragDropList extends Component<Props> {
 
         return (
             <DndProvider backend={HTML5Backend}>
-                <Table>
+                <DataTable>
                     <TableHead>
-                        <TableRow>
-                            <TableCell colSpan={12}>{i18n.t('Column')}</TableCell>
-                        </TableRow>
+                        <DataTableRow>
+                            <DataTableColumnHeader>
+                                {i18n.t('Column')}
+                            </DataTableColumnHeader>
+                        </DataTableRow>
                     </TableHead>
                     <TableBody>
                         {listItems.map((item, i) => (
@@ -66,7 +63,7 @@ export class DragDropList extends Component<Props> {
                             />
                         ))}
                     </TableBody>
-                </Table>
+                </DataTable>
             </DndProvider>
         );
     }

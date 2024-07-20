@@ -1,14 +1,20 @@
 // @flow
 import React, { Component } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
-import { Checkbox, IconReorder24, spacersNum } from '@dhis2/ui';
-import TableCell from '@material-ui/core/TableCell';
+import { Checkbox, DataTableRow, DataTableCell } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
-    checkbox: {
-        marginTop: spacersNum.dp12,
-        marginBottom: spacersNum.dp12,
+    container: {
+        cursor: 'move',
+        width: '100%',
+    },
+    row: {
+        display: 'flex',
+    },
+    checkboxContainer: {
+        flex: 1,
+        display: 'flex',
     },
 });
 
@@ -21,13 +27,10 @@ type Props = {
     connectDragSource: (any) => void,
     connectDropTarget: (any) => void,
     classes: {
-        checkbox: string,
+        container: string,
+        row: string,
+        checkboxContainer: string,
     }
-};
-
-const style = {
-    cursor: 'move',
-    outline: 'none',
 };
 
 const ItemTypes = {
@@ -71,24 +74,19 @@ class Index extends Component<Props> {
 
         // $FlowFixMe[incompatible-extend] automated comment
         return connectDropTarget(connectDragSource(
-            <tr key={this.props.id} tabIndex={-1} style={{ ...style, opacity }}>
-                <TableCell component="th" scope="row">
-                    <Checkbox
-                        checked={this.props.visible}
-                        tabIndex={-1}
-                        onChange={this.props.handleToggle(this.props.id)}
-                        label={text}
-                        className={this.props.classes.checkbox}
-                        valid
-                        dense
-                    />
-                </TableCell>
-                <TableCell>
-                    <span style={{ float: 'right' }}>
-                        <IconReorder24 />
-                    </span>
-                </TableCell>
-            </tr>,
+            <div className={this.props.classes.container} style={{ opacity }}>
+                <DataTableRow className={this.props.classes.row} draggable>
+                    <DataTableCell className={this.props.classes.checkboxContainer}>
+                        <Checkbox
+                            checked={this.props.visible}
+                            onChange={this.props.handleToggle(this.props.id)}
+                            label={text}
+                            valid
+                            dense
+                        />
+                    </DataTableCell>
+                </DataTableRow>
+            </div>,
         ));
     }
 }
