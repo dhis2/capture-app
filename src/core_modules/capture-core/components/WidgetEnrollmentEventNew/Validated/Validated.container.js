@@ -187,8 +187,8 @@ export const Validated = ({
             relatedStageRef={relatedStageRef}
             // $FlowFixMe - Promise should be ignored downstream
             onSave={handleSave}
-            onCancelCreateNew={() => handleCreateNew()}
-            onConfirmCreateNew={() => handleCreateNew(true)}
+            onCancelCreateNew={handleCreateNew}
+            onConfirmCreateNew={handleCreateNew}
             programId={program.id}
             onSaveAndCompleteEnrollment={handleSaveAndCompleteEnrollment}
             programName={program.name}
