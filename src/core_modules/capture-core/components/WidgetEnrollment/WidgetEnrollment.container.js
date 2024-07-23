@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
-import { WidgetEnrollment as WidgetEnrollmentComponent } from './WidgetEnrollment.component';
+import { WidgetEnrollment as WidgetEnrollmentNote } from './WidgetEnrollment.component';
 import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
 import { useEnrollment } from './hooks/useEnrollment';
@@ -82,7 +82,7 @@ export const WidgetEnrollment = ({
     }
 
     return (
-        <WidgetEnrollmentComponent
+        <WidgetEnrollmentNote
             enrollment={enrollment}
             events={events}
             canAddNew={canAddNew}

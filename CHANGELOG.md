@@ -1,3 +1,10 @@
+## [100.70.11](https://github.com/dhis2/capture-app/compare/v100.70.10...v100.70.11) (2024-07-15)
+
+
+### Bug Fixes
+
+* [DHIS2-15633] Change comment to note ([#3549](https://github.com/dhis2/capture-app/issues/3549)) ([56ea017](https://github.com/dhis2/capture-app/commit/56ea0174d1c18a008141ad7c9016353bdd01b9bc))
+
 ## [100.70.10](https://github.com/dhis2/capture-app/compare/v100.70.9...v100.70.10) (2024-07-15)
 
 

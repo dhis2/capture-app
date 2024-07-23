@@ -7,7 +7,7 @@ import { DataSection } from '../DataSection';
 import { ScheduleButtons } from './ScheduleButtons';
 import { ScheduleDate } from './ScheduleDate';
 import { ScheduleText } from './ScheduleText';
-import { CommentSection } from '../WidgetComment';
+import { NoteSection } from '../WidgetNote';
 import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
@@ -60,11 +60,11 @@ const WidgetEventSchedulePlain = ({
     orgUnit,
     onCancel,
     onSchedule,
-    onAddComment,
+    onAddNote,
     classes,
     scheduleDate,
     suggestedScheduleDate,
-    comments,
+    notes,
     programCategory,
     enableUserAssignment,
     selectedCategories,
@@ -113,13 +113,13 @@ const WidgetEventSchedulePlain = ({
             />
         </DataSection>}
         <DataSection
-            dataTest="comment-section"
-            sectionName={i18n.t('Event comments')}
+            dataTest="note-section"
+            sectionName={i18n.t('Event notes')}
         >
-            <CommentSection
-                comments={comments}
-                placeholder={i18n.t('Write a comment about this scheduled event')}
-                handleAddComment={onAddComment}
+            <NoteSection
+                notes={notes}
+                placeholder={i18n.t('Write a note about this scheduled event')}
+                handleAddNote={onAddNote}
             />
         </DataSection>
         {enableUserAssignment && (

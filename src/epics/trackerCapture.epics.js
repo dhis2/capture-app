@@ -72,7 +72,7 @@ import {
 import {
     addNoteForEventEpic,
     removeNoteForEventEpic,
-} from 'capture-core/components/WidgetEventComment/WidgetEventComment.epics';
+} from 'capture-core/components/WidgetEventNote/WidgetEventNote.epics';
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
@@ -134,7 +134,7 @@ import {
     saveNoteForViewEventFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
-import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentComment/WidgetEnrollmentComment.epics';
+import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentNote/WidgetEnrollmentNote.epics';
 import {
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
