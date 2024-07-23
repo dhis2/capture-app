@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2024\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -198,14 +198,14 @@ msgstr "Utilizatorul atribuit"
 msgid "Search for user"
 msgstr "Căutare utilizator"
 
+msgid "Notes"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Informații de bază"
 
 msgid "Status"
 msgstr "Stare"
-
-msgid "Comments"
-msgstr "Comentarii"
 
 msgid "Relationships"
 msgstr "Relații"
@@ -238,10 +238,8 @@ msgstr "Activ"
 msgid "Completed"
 msgstr "Complet"
 
-msgid "Please add or cancel comment before saving the event"
+msgid "Please add or cancel note before saving the event"
 msgstr ""
-"Vă rugăm să adăugați sau să anulați comentariul înainte de a salva "
-"evenimentul"
 
 msgid "Save and add another"
 msgstr "Salvare și adăugarea altuia"
@@ -626,14 +624,14 @@ msgstr "Offline"
 msgid "Syncing"
 msgstr "Sincronizare"
 
-msgid "Add comment"
-msgstr "Adăugare comentariu"
-
-msgid "You don't have access to write comments"
+msgid "Add note"
 msgstr ""
 
-msgid "Write comment"
-msgstr "Scrieți comentariu"
+msgid "You don't have access to write notes"
+msgstr ""
+
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -830,8 +828,10 @@ msgstr "Sau vedeți toate evenimentele accesibile dvs. în {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Selectați o unitate organizațională."
 
-msgid "New"
-msgstr "Nou"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
@@ -839,8 +839,8 @@ msgstr ""
 msgid "Save as new"
 msgstr "Salvare ca nou"
 
-msgid "View enrollment"
-msgstr "Vizualizare înrolare"
+msgid "New"
+msgstr "Nou"
 
 msgid "Create for"
 msgstr "Creare pentru"
@@ -1149,9 +1149,6 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
-msgid "Save comment"
-msgstr "Salvare comentariu"
-
 msgid "Enrollment actions"
 msgstr "Acțiuni de înrolare"
 
@@ -1271,14 +1268,8 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Comments about this enrollment"
-msgstr "Comentarii despre această înrolare"
-
-msgid "Write a comment about this enrollment"
-msgstr "Scrierea unui comentariu despre această înrolare"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "Această înrolare nu are niciun comentariu"
+msgid "Please add or cancel the note before saving the event"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1289,20 +1280,20 @@ msgstr ""
 msgid "program or stage is invalid"
 msgstr "programul sau etapa este nevalidă"
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "Eroare"
 
 msgid "Warning"
 msgstr "Avertizare"
-
-msgid "Comments about this event"
-msgstr "Comentarii despre acest eveniment"
-
-msgid "Write a comment about this event"
-msgstr "Scrierea unui comentariu despre acest eveniment"
-
-msgid "This event doesn't have any comments"
-msgstr "Acest eveniment nu are comentarii"
 
 msgid "stage not found in rules execution"
 msgstr ""
@@ -1324,6 +1315,15 @@ msgstr "Eveniment finalizat"
 
 msgid "Back to all stages and events"
 msgstr "Înapoi la toate etapele și evenimentele"
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr ""
@@ -1365,10 +1365,13 @@ msgstr ""
 msgid "Schedule date / Due date"
 msgstr ""
 
-msgid "Event comments"
-msgstr "Comentarii la eveniment"
+msgid "Event notes"
+msgstr ""
 
-msgid "Write a comment about this scheduled event"
+msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Save note"
 msgstr ""
 
 msgid ""
@@ -1433,6 +1436,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"
