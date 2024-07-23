@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { pageStatuses } from '../../EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
