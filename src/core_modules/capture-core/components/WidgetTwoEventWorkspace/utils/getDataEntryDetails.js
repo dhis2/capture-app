@@ -1,22 +1,23 @@
 // @flow
 import { pipe } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import { dataElementTypes } from '../../../metaData';
+import { dataElementTypes, type RenderFoundation } from '../../../metaData';
 import { convertClientToView, convertServerToClient } from '../../../converters';
+import type { LinkedEvent } from '../WidgetTwoEventWorkspace.types';
 
 const convertFn = pipe(convertServerToClient, convertClientToView);
 
 export const Placements = {
     TOP: 'TOP',
     BOTTOM: 'BOTTOM',
-}
+};
 
 const StatusLabels = {
     ACTIVE: i18n.t('Active'),
     COMPLETED: i18n.t('Completed'),
     CANCELLED: i18n.t('Cancelled'),
     SCHEDULE: i18n.t('Scheduled'),
-}
+};
 
 const DataEntryFieldsToInclude = {
     occurredAt: {
@@ -34,18 +35,20 @@ const DataEntryFieldsToInclude = {
         type: dataElementTypes.ORGANISATION_UNIT,
         placement: Placements.TOP,
         label: i18n.t('Organisation unit'),
+        // TODO - This issue will be fixed in DHIS2-17792
+        convertFn: value => value,
     },
     status: {
         apiKey: 'status',
         type: dataElementTypes.TEXT,
         placement: Placements.BOTTOM,
         label: i18n.t('Status'),
-        convertFn: (value) => StatusLabels[value],
-    }
-}
+        convertFn: value => StatusLabels[value],
+    },
+};
 
-export const getDataEntryDetails = (linkedEvent, formFoundation) => {
-    const dataEntryValues = Object.values(DataEntryFieldsToInclude).map((entry) => {
+export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: RenderFoundation) => {
+    const dataEntryValues = Object.values(DataEntryFieldsToInclude).map((entry: any) => {
         const value = linkedEvent[entry.apiKey];
         if (!value) return null;
 
@@ -67,4 +70,4 @@ export const getDataEntryDetails = (linkedEvent, formFoundation) => {
         [Placements.TOP]: [],
         [Placements.BOTTOM]: [],
     });
-}
+};

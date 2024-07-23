@@ -245,7 +245,8 @@ export const EditEventWorkspace: WidgetConfig = {
 
 export const TwoEventWorkspace: WidgetConfig = {
     Component: WidgetTwoEventWorkspace,
-    getProps: ({ eventId, program, stageId, orgUnitId }) => ({
+    getProps: ({ currentPage, eventId, program, stageId, orgUnitId }) => ({
+        currentPage,
         eventId,
         programId: program.id,
         orgUnitId,

@@ -15,29 +15,29 @@ const formatDataValues = (dataValues: Array<{ dataElement: string, value: any }>
         acc[dataElement] = value;
         return acc;
     }, {});
-}
+};
 
 const calculateRelatedStageRelationships = (event) => {
     if (!event || !event.relationships || event.relationships.length === 0) {
-        return false;
+        return null;
     }
 
     const stageToStageRelationships = event.relationships.filter(({ to, from }) => {
         if (!to.event || !from.event) {
-            return false;
+            return null;
         }
         return to.event.program === from.event.program;
     });
 
     if (stageToStageRelationships.length !== 1) {
-        return false;
+        return null;
     }
 
     const stageToStageRelationship = stageToStageRelationships[0];
     const eventIsOrigin = stageToStageRelationship.from.event.event === event.event;
 
     if (eventIsOrigin && !stageToStageRelationship.bidirectional) {
-        return false;
+        return null;
     }
 
     const linkedEvent = eventIsOrigin ? stageToStageRelationship.to.event : stageToStageRelationship.from.event;
@@ -45,8 +45,8 @@ const calculateRelatedStageRelationships = (event) => {
     return {
         relationshipType: stageToStageRelationship.relationshipType,
         linkedEvent,
-    }
-}
+    };
+};
 
 export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
     const eventByIdQuery = useMemo(() => ({
@@ -56,8 +56,8 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
             fields: 'event,relationships[relationshipType,relationshipName,bidirectional,' +
                         'from[event[event,dataValues,occurredAt,scheduledAt,status,orgUnit,programStage,program]],' +
                         'to[event[event,dataValues,*,occurredAt,scheduledAt,status,orgUnit,programStage,program]]' +
-                    ']'
-        }
+                    ']',
+        },
     }), [originEventId]);
 
     const { data, isLoading, isError, error } = useApiDataQuery(
@@ -67,10 +67,14 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
             enabled: !!originEventId,
             cacheTime: 0,
             staleTime: 4000,
-        }
+        },
     );
 
-    const { linkedEvent, relationshipType, dataValues } = useMemo(() => {
+    const {
+        linkedEvent,
+        relationshipType,
+        dataValues,
+    } = useMemo(() => {
         if (!data) {
             return {};
         }
@@ -79,12 +83,11 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         if (!relatedStageRelationship) {
             return {};
         }
-        const { linkedEvent, relationshipType } = relatedStageRelationship;
 
         return {
-            linkedEvent,
-            relationshipType,
-            dataValues: formatDataValues(linkedEvent.dataValues),
+            linkedEvent: relatedStageRelationship.linkedEvent,
+            relationshipType: relatedStageRelationship.relationshipType,
+            dataValues: formatDataValues(relatedStageRelationship.linkedEvent.dataValues),
         };
     }, [data]);
 
@@ -94,6 +97,6 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         dataValues,
         isLoading,
         isError,
-        error
-    }
-}
+        error,
+    };
+};
