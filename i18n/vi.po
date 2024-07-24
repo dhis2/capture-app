@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2023
 # Philip Larsen Donnelly, 2024
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2024
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -198,14 +198,14 @@ msgstr "Người dùng được chỉ định"
 msgid "Search for user"
 msgstr "Tìm kiếm người dùng"
 
+msgid "Notes"
+msgstr "Ghi Chú"
+
 msgid "Basic info"
 msgstr "Thông tin cơ bản"
 
 msgid "Status"
 msgstr "Tình trạng"
-
-msgid "Comments"
-msgstr "Bình luận"
 
 msgid "Relationships"
 msgstr "Mối quan hệ"
@@ -237,8 +237,8 @@ msgstr "Hoạt động"
 msgid "Completed"
 msgstr "Hoàn tất"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "Xin vui lòng thêm hoặc xóa bình luận trước khi lưu sự kiện"
+msgid "Please add or cancel note before saving the event"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "Lưu và thêm sự kiện khác"
@@ -625,14 +625,14 @@ msgstr "Ngoại tuyến"
 msgid "Syncing"
 msgstr "Đang đồng bộ"
 
-msgid "Add comment"
-msgstr "Thêm bình luận"
+msgid "Add note"
+msgstr "Thêm ghi chú"
 
-msgid "You don't have access to write comments"
+msgid "You don't have access to write notes"
 msgstr ""
 
-msgid "Write comment"
-msgstr "Viết bình luận"
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -829,8 +829,10 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
-msgid "New"
-msgstr "Mới"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chọn {{missingCategories}} để bắt đầu báo cáo"
@@ -838,8 +840,8 @@ msgstr "Chọn {{missingCategories}} để bắt đầu báo cáo"
 msgid "Save as new"
 msgstr ""
 
-msgid "View enrollment"
-msgstr ""
+msgid "New"
+msgstr "Mới"
 
 msgid "Create for"
 msgstr ""
@@ -1148,9 +1150,6 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
-msgid "Save comment"
-msgstr "Lưu chú thích"
-
 msgid "Enrollment actions"
 msgstr ""
 
@@ -1270,13 +1269,7 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Comments about this enrollment"
-msgstr ""
-
-msgid "Write a comment about this enrollment"
-msgstr ""
-
-msgid "This enrollment doesn't have any comments"
+msgid "Please add or cancel the note before saving the event"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
@@ -1288,20 +1281,20 @@ msgstr ""
 msgid "program or stage is invalid"
 msgstr ""
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "Lỗi"
 
 msgid "Warning"
 msgstr "Cảnh báo"
-
-msgid "Comments about this event"
-msgstr ""
-
-msgid "Write a comment about this event"
-msgstr ""
-
-msgid "This event doesn't have any comments"
-msgstr ""
 
 msgid "stage not found in rules execution"
 msgstr ""
@@ -1322,6 +1315,15 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1360,11 +1362,14 @@ msgstr ""
 msgid "Schedule date / Due date"
 msgstr ""
 
-msgid "Event comments"
+msgid "Event notes"
 msgstr ""
 
-msgid "Write a comment about this scheduled event"
+msgid "Write a note about this scheduled event"
 msgstr ""
+
+msgid "Save note"
+msgstr "Lưu ghi chú"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1427,6 +1432,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"
