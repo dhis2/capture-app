@@ -3,13 +3,13 @@
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Philip Larsen Donnelly, 2024
-# Rica Zamora Duchateau, 2024
+# Rica, 2024
 # Charel van den Elsen, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -202,14 +202,14 @@ msgstr "Toegewezen gebruiker"
 msgid "Search for user"
 msgstr "Zoek naar gebruiker"
 
+msgid "Notes"
+msgstr "Notities"
+
 msgid "Basic info"
 msgstr "Basis informatie"
 
 msgid "Status"
 msgstr "status"
-
-msgid "Comments"
-msgstr "Opmerkingen"
 
 msgid "Relationships"
 msgstr "Relaties"
@@ -242,9 +242,8 @@ msgstr "Actief"
 msgid "Completed"
 msgstr "Voltooid"
 
-msgid "Please add or cancel comment before saving the event"
+msgid "Please add or cancel note before saving the event"
 msgstr ""
-"Voeg een opmerking toe of annuleer deze voordat u het evenement opslaat"
 
 msgid "Save and add another"
 msgstr "Sla op en voeg er nog een toe"
@@ -636,14 +635,14 @@ msgstr "offline"
 msgid "Syncing"
 msgstr "synchroniseren"
 
-msgid "Add comment"
-msgstr "Voeg opmerking toe"
+msgid "Add note"
+msgstr "Notitie toevoegen"
 
-msgid "You don't have access to write comments"
-msgstr "U heeft geen toegang om opmerkingen te schrijven"
+msgid "You don't have access to write notes"
+msgstr ""
 
-msgid "Write comment"
-msgstr "Schrijf commentaar"
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -867,8 +866,10 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr "Selecteer een organisatie-eenheid."
 
-msgid "New"
-msgstr "Nieuw"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Kies de {{missingCategories}} om te beginnen met rapporteren"
@@ -876,8 +877,8 @@ msgstr "Kies de {{missingCategories}} om te beginnen met rapporteren"
 msgid "Save as new"
 msgstr "Opslaan als nieuw"
 
-msgid "View enrollment"
-msgstr "Inschrijving bekijken"
+msgid "New"
+msgstr "Nieuw"
 
 msgid "Create for"
 msgstr "Creëer voor"
@@ -1199,9 +1200,6 @@ msgstr ""
 "U moet een reden opgeven om te controleren op inschrijvingen voor dit "
 "beschermde programma. Alle activiteiten worden geregistreerd."
 
-msgid "Save comment"
-msgstr "Opmerking opslaan"
-
 msgid "Enrollment actions"
 msgstr "Inschrijving acties"
 
@@ -1325,14 +1323,8 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Comments about this enrollment"
-msgstr "Opmerkingen over deze inschrijving"
-
-msgid "Write a comment about this enrollment"
-msgstr "Schrijf een opmerking over deze inschrijving"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "Deze inschrijving heeft geen opmerkingen"
+msgid "Please add or cancel the note before saving the event"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1344,20 +1336,20 @@ msgstr "Opslaan in {{stageName}} voor {{programName}} in {{orgUnitName}}"
 msgid "program or stage is invalid"
 msgstr "programma of fase is ongeldig"
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "Fout"
 
 msgid "Warning"
 msgstr "Waarschuwing"
-
-msgid "Comments about this event"
-msgstr "Opmerkingen over dit evenement"
-
-msgid "Write a comment about this event"
-msgstr "Schrijf een reactie over dit evenement"
-
-msgid "This event doesn't have any comments"
-msgstr "Dit evenement heeft geen opmerkingen"
 
 msgid "stage not found in rules execution"
 msgstr "stadium niet gevonden in uitvoering van regels"
@@ -1380,6 +1372,15 @@ msgstr "Evenement voltooid"
 
 msgid "Back to all stages and events"
 msgstr "Terug naar alle stadium en evenementen"
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "Plan datum info"
@@ -1427,11 +1428,14 @@ msgstr "Schema info"
 msgid "Schedule date / Due date"
 msgstr "Schemadatum / Vervaldatum"
 
-msgid "Event comments"
-msgstr "Evenement opmerkingen"
+msgid "Event notes"
+msgstr ""
 
-msgid "Write a comment about this scheduled event"
-msgstr "Schrijf een opmerking over dit geplande evenement"
+msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Save note"
+msgstr "Notitie opslaan"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1499,6 +1503,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"

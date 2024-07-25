@@ -7,16 +7,16 @@
 # Edem Kossi <ekossi@hispwca.org>, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Yayra Gomado <ygomado@hispwca.org>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2024
 # Elise Desailly, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Elise Desailly, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -210,14 +210,14 @@ msgstr "Utilisateur affecté"
 msgid "Search for user"
 msgstr "Rechercher un utilisateur"
 
+msgid "Notes"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Infos de base"
 
 msgid "Status"
 msgstr "Statut"
-
-msgid "Comments"
-msgstr "Commentaires"
 
 msgid "Relationships"
 msgstr "Relations"
@@ -251,10 +251,8 @@ msgstr "Actif"
 msgid "Completed"
 msgstr "Terminé"
 
-msgid "Please add or cancel comment before saving the event"
+msgid "Please add or cancel note before saving the event"
 msgstr ""
-"Veuillez ajouter ou annuler un commentaire avant avant d'enregistrer "
-"l'événement"
 
 msgid "Save and add another"
 msgstr "Sauvegarder et ajouter nouveau"
@@ -649,14 +647,14 @@ msgstr "Hors ligne"
 msgid "Syncing"
 msgstr "Synchronisation"
 
-msgid "Add comment"
-msgstr "Ajouter commentaire"
+msgid "Add note"
+msgstr "Ajouter une note"
 
-msgid "You don't have access to write comments"
-msgstr "Vous n'êtes pas autorisé à écrire des commentaires"
+msgid "You don't have access to write notes"
+msgstr ""
 
-msgid "Write comment"
-msgstr "Ecrire commentaire"
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -875,9 +873,6 @@ msgstr "Choisir le {{missingCategories}} pour commencer à rapporter"
 
 msgid "Save as new"
 msgstr "Enregistrer comme nouveau"
-
-msgid "View enrollment"
-msgstr "Afficher l'inscription"
 
 msgid "New"
 msgstr "Nouveau"
@@ -1200,9 +1195,6 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
-msgid "Save comment"
-msgstr "Enregistrer commentaires "
-
 msgid "Enrollment actions"
 msgstr "Actions d'enrôlement"
 
@@ -1325,14 +1317,8 @@ msgstr "Ajouter des coordonnées"
 msgid "Add area"
 msgstr "Ajouter une zone"
 
-msgid "Comments about this enrollment"
-msgstr "Commentaires sur cette inscription"
-
-msgid "Write a comment about this enrollment"
-msgstr "Écrire un commentaire sur cette inscription"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "Cette inscription n'a pas de commentaires"
+msgid "Please add or cancel the note before saving the event"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1345,20 +1331,20 @@ msgstr "Sauvegarde à {{stageName}} pour {{programName}} dans {{orgUnitName}}"
 msgid "program or stage is invalid"
 msgstr "programme ou stade invalide"
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "Erreur"
 
 msgid "Warning"
 msgstr "Attention"
-
-msgid "Comments about this event"
-msgstr "Commentaires sur cet événement"
-
-msgid "Write a comment about this event"
-msgstr "Écrire un commentaire sur cet événement"
-
-msgid "This event doesn't have any comments"
-msgstr "Cet événement n'a pas de commentaires"
 
 msgid "stage not found in rules execution"
 msgstr "stade non trouvé lors de l'exécution des règles"
@@ -1382,6 +1368,15 @@ msgstr "Événement terminé"
 
 msgid "Back to all stages and events"
 msgstr "Retour à tous les stades et événements"
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "Info sur la date prévue"
@@ -1427,11 +1422,14 @@ msgstr "Informations sur la programmation"
 msgid "Schedule date / Due date"
 msgstr "Date prévue / Date d'échéance"
 
-msgid "Event comments"
-msgstr "Commentaires sur l'événement"
+msgid "Event notes"
+msgstr ""
 
-msgid "Write a comment about this scheduled event"
-msgstr "Écrire un commentaire sur cet événement planifié"
+msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Save note"
+msgstr "Enregistrer note"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1505,6 +1503,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"
