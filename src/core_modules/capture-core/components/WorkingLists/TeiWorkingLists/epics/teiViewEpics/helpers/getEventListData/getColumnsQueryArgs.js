@@ -18,6 +18,3 @@ export const getColumnsQueryArgs = (
         return acc;
     }, []);
 };
-
-export const getOrderQueryArgs = (sortById: string, sortByDirection: string) =>
-    `${getFilterApiName(sortById)}:${sortByDirection}`;
