@@ -11,15 +11,15 @@
 # Philip Larsen Donnelly, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Janeth Cruz, 2024
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -211,7 +211,7 @@ msgid "Search for user"
 msgstr "Buscar usuario"
 
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 msgid "Basic info"
 msgstr "Información básica"
@@ -251,7 +251,7 @@ msgid "Completed"
 msgstr "Completado"
 
 msgid "Please add or cancel note before saving the event"
-msgstr ""
+msgstr "Por favor, añada o cancele la nota antes de guardar el evento"
 
 msgid "Save and add another"
 msgstr "Guardar y agregar otro"
@@ -652,10 +652,10 @@ msgid "Add note"
 msgstr "Añadir nota"
 
 msgid "You don't have access to write notes"
-msgstr ""
+msgstr "No tienes acceso a escribir notas"
 
 msgid "Write note"
-msgstr ""
+msgstr "Escribir nota"
 
 msgid "was blanked out and hidden by your last action"
 msgstr "fue borrado y oculto por tu última acción"
@@ -1344,7 +1344,7 @@ msgid "Add area"
 msgstr "Agregar área"
 
 msgid "Please add or cancel the note before saving the event"
-msgstr ""
+msgstr "Por favor, añada o cancele la nota antes de guardar el evento"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1358,13 +1358,13 @@ msgid "program or stage is invalid"
 msgstr "el programa o la etapa no es válido"
 
 msgid "Notes about this enrollment"
-msgstr ""
+msgstr "Notas sobre esta inscripción"
 
 msgid "Write a note about this enrollment"
-msgstr ""
+msgstr "Escriba una nota sobre esta inscripción"
 
 msgid "This enrollment doesn't have any notes"
-msgstr ""
+msgstr "Esta inscripción no tiene notas"
 
 msgid "Error"
 msgstr "Error"
@@ -1395,13 +1395,13 @@ msgid "Back to all stages and events"
 msgstr "Volver a todas las etapas y eventos"
 
 msgid "Notes about this event"
-msgstr ""
+msgstr "Notas sobre este acto"
 
 msgid "Write a note about this event"
-msgstr ""
+msgstr "Escriba una nota sobre este evento"
 
 msgid "This event doesn't have any notes"
-msgstr ""
+msgstr "Este evento no tiene notas"
 
 msgid "Schedule date info"
 msgstr "Programar información de fecha"
@@ -1453,10 +1453,10 @@ msgid "Schedule date / Due date"
 msgstr "Fecha de programación/fecha de vencimiento"
 
 msgid "Event notes"
-msgstr ""
+msgstr "Notas del evento"
 
 msgid "Write a note about this scheduled event"
-msgstr ""
+msgstr "Escriba una nota sobre este evento programado"
 
 msgid "Save note"
 msgstr "Guardar Nota"
@@ -1535,10 +1535,10 @@ msgid "Choose a {{linkableStageLabel}}"
 msgstr "Elija una {{linkableStageLabel}}"
 
 msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr ""
+msgstr "{{ linkableStageLabel }} no es repetible"
 
 msgid "{{ linkableStageLabel }} has no linkable events"
-msgstr ""
+msgstr "{{ linkableStageLabel }} no tiene eventos enlazables"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
