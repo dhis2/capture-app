@@ -24,14 +24,18 @@ const styles = {
         alignItems: 'center',
     },
 };
-const hideProgramStage = (ruleEffects, stageId) => (
+const rulesEffectHideProgramStage = (ruleEffects, stageId) => (
     Boolean(ruleEffects?.find(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === stageId))
 );
 
 export const StagePlain = ({ stage, events, classes, className, onCreateNew, ruleEffects, ...passOnProps }: Props) => {
+    console.log('ruleEffects', ruleEffects)
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
-    const hiddenProgramStage = hideProgramStage(ruleEffects, id);
+    const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
+    const hideProgramStage = preventAddingNewEvents && events.length === 0;
+
+    if (hideProgramStage) return null;
 
     return (
         <div
@@ -59,20 +63,14 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                     repeatable={repeatable}
                     enableUserAssignment={enableUserAssignment}
                     onCreateNew={onCreateNew}
-                    hiddenProgramStage={hiddenProgramStage}
+                    hiddenProgramStage={preventAddingNewEvents}
                     {...passOnProps}
                 /> : (
-                    <ConditionalTooltip
-                        content={i18n.t("You can't add any more {{ programStageName }} events", {
-                            programStageName: name,
-                            interpolation: { escapeValue: false },
-                        })}
-                        enabled={hiddenProgramStage}
-                    >
+                    
                         <Button
                             small
                             secondary
-                            disabled={hiddenProgramStage}
+                            disabled={preventAddingNewEvents}
                             icon={<IconAdd16 />}
                             className={classes.button}
                             dataTest="create-new-button"
@@ -83,7 +81,6 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                                 interpolation: { escapeValue: false },
                             })}
                         </Button>
-                    </ConditionalTooltip>
                 )}
             </Widget>
         </div>
