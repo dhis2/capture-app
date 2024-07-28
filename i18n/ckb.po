@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -198,14 +198,14 @@ msgstr "بەکارهێنەری دەستنیشانکراو"
 msgid "Search for user"
 msgstr "بۆ بەکاربەرەکە بگەرێ"
 
+msgid "Notes"
+msgstr ""
+
 msgid "Basic info"
 msgstr "زانیاریە سەرەتاییەکان"
 
 msgid "Status"
 msgstr "پێگە"
-
-msgid "Comments"
-msgstr "کۆمێنتەکان"
 
 msgid "Relationships"
 msgstr "پەیوەندیەکان"
@@ -237,8 +237,8 @@ msgstr "چاڵاک"
 msgid "Completed"
 msgstr "تەواوبوو"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "تکایە کۆمێنت زیاد بکە یاخود لاییببە پێش تۆمارکردن"
+msgid "Please add or cancel note before saving the event"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "تۆمار بکە و دانەیەکی دیکە زیاد بکە"
@@ -628,14 +628,14 @@ msgstr "ئۆفڵاین"
 msgid "Syncing"
 msgstr "هاوتاکردن"
 
-msgid "Add comment"
-msgstr "کۆمێنت زیادبکە"
-
-msgid "You don't have access to write comments"
+msgid "Add note"
 msgstr ""
 
-msgid "Write comment"
-msgstr "کۆمێنت بنووسە"
+msgid "You don't have access to write notes"
+msgstr ""
+
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -832,8 +832,10 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
-msgid "New"
-msgstr "نوێ"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
@@ -841,8 +843,8 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
-msgid "View enrollment"
-msgstr ""
+msgid "New"
+msgstr "نوێ"
 
 msgid "Create for"
 msgstr ""
@@ -1146,9 +1148,6 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
-msgid "Save comment"
-msgstr ""
-
 msgid "Enrollment actions"
 msgstr ""
 
@@ -1268,13 +1267,7 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Comments about this enrollment"
-msgstr ""
-
-msgid "Write a comment about this enrollment"
-msgstr ""
-
-msgid "This enrollment doesn't have any comments"
+msgid "Please add or cancel the note before saving the event"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
@@ -1286,19 +1279,19 @@ msgstr ""
 msgid "program or stage is invalid"
 msgstr ""
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "هەڵە"
 
 msgid "Warning"
-msgstr ""
-
-msgid "Comments about this event"
-msgstr ""
-
-msgid "Write a comment about this event"
-msgstr ""
-
-msgid "This event doesn't have any comments"
 msgstr ""
 
 msgid "stage not found in rules execution"
@@ -1320,6 +1313,15 @@ msgid "Event completed"
 msgstr ""
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1360,10 +1362,13 @@ msgstr ""
 msgid "Schedule date / Due date"
 msgstr ""
 
-msgid "Event comments"
+msgid "Event notes"
 msgstr ""
 
-msgid "Write a comment about this scheduled event"
+msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Save note"
 msgstr ""
 
 msgid ""
@@ -1427,6 +1432,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"

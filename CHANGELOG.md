@@ -1,3 +1,24 @@
+## [100.70.15](https://github.com/dhis2/capture-app/compare/v100.70.14...v100.70.15) (2024-07-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f04c0f8](https://github.com/dhis2/capture-app/commit/f04c0f8d6a0c17df74bab6dad493c41b46620799))
+
+## [100.70.14](https://github.com/dhis2/capture-app/compare/v100.70.13...v100.70.14) (2024-07-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([2af3de0](https://github.com/dhis2/capture-app/commit/2af3de039dd7e330c34810c398ecb0df23c5a4b1))
+
+## [100.70.13](https://github.com/dhis2/capture-app/compare/v100.70.12...v100.70.13) (2024-07-23)
+
+
+### Bug Fixes
+
+* [DHIS2-15687] display translated options in profile widget ([#3717](https://github.com/dhis2/capture-app/issues/3717)) ([54e5582](https://github.com/dhis2/capture-app/commit/54e5582bfcf3dbaf67c1e18ac2cf48953fedb22c))
+
 ## [100.70.12](https://github.com/dhis2/capture-app/compare/v100.70.11...v100.70.12) (2024-07-18)
 
 
