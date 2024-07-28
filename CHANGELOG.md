@@ -1,3 +1,10 @@
+## [100.70.15](https://github.com/dhis2/capture-app/compare/v100.70.14...v100.70.15) (2024-07-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f04c0f8](https://github.com/dhis2/capture-app/commit/f04c0f8d6a0c17df74bab6dad493c41b46620799))
+
 ## [100.70.14](https://github.com/dhis2/capture-app/compare/v100.70.13...v100.70.14) (2024-07-24)
 
 
