@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -197,14 +197,14 @@ msgstr "Тавсия этилган фойдаланувчи"
 msgid "Search for user"
 msgstr "Фойдаланувчини излаш"
 
+msgid "Notes"
+msgstr "Изоҳлар"
+
 msgid "Basic info"
 msgstr "Асосий маълумот"
 
 msgid "Status"
 msgstr "Статус"
-
-msgid "Comments"
-msgstr "Изоҳлар"
 
 msgid "Relationships"
 msgstr "Ўзаро алоқалар"
@@ -238,8 +238,8 @@ msgstr "Фаол"
 msgid "Completed"
 msgstr "Тўлдирилди"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "Илтимос, ҳодиса/тадбирни сақлашдан олдин шарҳ ёзинг ёки бекор қилинг"
+msgid "Please add or cancel note before saving the event"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "Сақлаш ва бошқасини қўшиш"
@@ -628,14 +628,14 @@ msgstr "Оффлайн"
 msgid "Syncing"
 msgstr "Синхронлашмоқда"
 
-msgid "Add comment"
-msgstr "Изоҳ қўшиш"
+msgid "Add note"
+msgstr "Изоҳ қолдириш"
 
-msgid "You don't have access to write comments"
+msgid "You don't have access to write notes"
 msgstr ""
 
-msgid "Write comment"
-msgstr "Фикр ёзинг"
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -839,8 +839,10 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
-msgid "New"
-msgstr "Янги"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Ҳисоботни бошлаш учун {{missingCategories}} ни танланг"
@@ -848,8 +850,8 @@ msgstr "Ҳисоботни бошлаш учун {{missingCategories}} ни та
 msgid "Save as new"
 msgstr "Янги сифатида сақлаш"
 
-msgid "View enrollment"
-msgstr ""
+msgid "New"
+msgstr "Янги"
 
 msgid "Create for"
 msgstr "Учун яратиш"
@@ -1160,9 +1162,6 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
-msgid "Save comment"
-msgstr "Фикр/изоҳни сақланг"
-
 msgid "Enrollment actions"
 msgstr ""
 
@@ -1283,13 +1282,7 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Comments about this enrollment"
-msgstr ""
-
-msgid "Write a comment about this enrollment"
-msgstr ""
-
-msgid "This enrollment doesn't have any comments"
+msgid "Please add or cancel the note before saving the event"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
@@ -1301,20 +1294,20 @@ msgstr ""
 msgid "program or stage is invalid"
 msgstr ""
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "Хатолик"
 
 msgid "Warning"
 msgstr "Огоҳлантириш"
-
-msgid "Comments about this event"
-msgstr ""
-
-msgid "Write a comment about this event"
-msgstr ""
-
-msgid "This event doesn't have any comments"
-msgstr ""
 
 msgid "stage not found in rules execution"
 msgstr ""
@@ -1335,6 +1328,15 @@ msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1373,11 +1375,14 @@ msgstr ""
 msgid "Schedule date / Due date"
 msgstr ""
 
-msgid "Event comments"
+msgid "Event notes"
 msgstr ""
 
-msgid "Write a comment about this scheduled event"
+msgid "Write a note about this scheduled event"
 msgstr ""
+
+msgid "Save note"
+msgstr "Изоҳни сақлаш"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1441,6 +1446,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"

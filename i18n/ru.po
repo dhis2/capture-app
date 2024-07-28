@@ -1,17 +1,17 @@
-#
+# 
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2023
-# Philip Larsen Donnelly, 2024
 # Yury Rogachev <yury@dhis2.org>, 2024
-#
+# Philip Larsen Donnelly, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2024\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,9 +21,6 @@ msgstr ""
 
 msgid "Choose one or more dates..."
 msgstr "Выбрать одну или несколько дат..."
-
-msgid "Clear selections"
-msgstr "Очистить выбор"
 
 msgid "Choose a date..."
 msgstr "Выбрать дату..."
@@ -203,14 +200,14 @@ msgstr "Назначенный пользователь"
 msgid "Search for user"
 msgstr "Поиск пользователя"
 
+msgid "Notes"
+msgstr "Заметки"
+
 msgid "Basic info"
 msgstr "Основные данные"
 
 msgid "Status"
 msgstr "Статус"
-
-msgid "Comments"
-msgstr "Комментарии"
 
 msgid "Relationships"
 msgstr "Связи"
@@ -244,8 +241,8 @@ msgstr "Активный/ая/ое"
 msgid "Completed"
 msgstr "Завершен/а/о"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "Добавьте или отмените комментарии перед сохранением события"
+msgid "Please add or cancel note before saving the event"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "Сохранить и добавить другую запись"
@@ -639,14 +636,14 @@ msgstr "Оффлайн"
 msgid "Syncing"
 msgstr "Синхронизация"
 
-msgid "Add comment"
-msgstr "Добавить комментарий"
+msgid "Add note"
+msgstr "Добавить заметку"
 
-msgid "You don't have access to write comments"
-msgstr "У вас нет доступа к написанию комментариев"
+msgid "You don't have access to write notes"
+msgstr ""
 
-msgid "Write comment"
-msgstr "Написать комментарий"
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr "- удалено и скрыто вашим последним действием"
@@ -871,8 +868,10 @@ msgstr "Или посмотреть все события, доступные в
 msgid "Please select an organisation unit."
 msgstr "Выберите организационную единицу."
 
-msgid "New"
-msgstr "Новый/ая/ое"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Выберите {{missingCategories}}, чтобы начать ввод данных."
@@ -880,8 +879,8 @@ msgstr "Выберите {{missingCategories}}, чтобы начать ввод
 msgid "Save as new"
 msgstr "Сохранить как новый/ую/ое"
 
-msgid "View enrollment"
-msgstr "Посмотреть регистрационную запись"
+msgid "New"
+msgstr "Новый/ая/ое"
 
 msgid "Create for"
 msgstr "Создать для"
@@ -1201,9 +1200,6 @@ msgstr ""
 "Вы должны указать причину проверки регистрационных записей в данной "
 "защищенной программе. Все действия будут регистрироваться."
 
-msgid "Save comment"
-msgstr "Сохранить комментарий"
-
 msgid "Enrollment actions"
 msgstr "Действия с регистрационной записью"
 
@@ -1337,14 +1333,8 @@ msgstr "Добавить координаты"
 msgid "Add area"
 msgstr "Добавить участок"
 
-msgid "Comments about this enrollment"
-msgstr "Комментарии о данной регистрационной записи"
-
-msgid "Write a comment about this enrollment"
-msgstr "Добавить комментарий о данной регистрационной записи"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "У данной регистрационной записи нет комментариев"
+msgid "Please add or cancel the note before saving the event"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1358,20 +1348,20 @@ msgstr ""
 msgid "program or stage is invalid"
 msgstr "программа или этап недействительны"
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "Ошибка"
 
 msgid "Warning"
 msgstr "Предупреждение"
-
-msgid "Comments about this event"
-msgstr "Комментарии о данном событии"
-
-msgid "Write a comment about this event"
-msgstr "Добавить комментарий о данном событии"
-
-msgid "This event doesn't have any comments"
-msgstr "У данного события нет комментариев"
 
 msgid "stage not found in rules execution"
 msgstr "этап не найден при выполнении правил"
@@ -1395,6 +1385,15 @@ msgstr "Событие завершено"
 
 msgid "Back to all stages and events"
 msgstr "Обратно ко всем этапам и событиям"
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "Информация о запланированной дате"
@@ -1454,11 +1453,14 @@ msgstr "Информация о расписании"
 msgid "Schedule date / Due date"
 msgstr "Запланированная дата / Дата выполнения"
 
-msgid "Event comments"
-msgstr "Комментарии к событию"
+msgid "Event notes"
+msgstr ""
 
-msgid "Write a comment about this scheduled event"
-msgstr "Добавить комментарий о данном запланированном событии"
+msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Save note"
+msgstr "Сохранить заметку"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1530,6 +1532,12 @@ msgstr "Создать связку с существующим этапом {{l
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Выбрать этап {{linkableStageLabel}}"
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
+msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Неопределенные связи, обратитесь к системному администратору"
