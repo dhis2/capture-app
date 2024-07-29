@@ -5,7 +5,6 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'react-addons-update';
 import { DataTable, TableHead, TableBody, DataTableRow, DataTableColumnHeader } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-
 import { DragDropListItem } from './DragDropListItem.component';
 
 type Props = {
@@ -15,13 +14,14 @@ type Props = {
 };
 
 export class DragDropList extends Component<Props> {
-    moveListItem: (dragIndex: any, hoverIndex: any) => void;
+    moveListItem: (dragIndex: number, hoverIndex: number) => void;
+
     constructor(props: Props) {
         super(props);
         this.moveListItem = this.moveListItem.bind(this);
     }
 
-    moveListItem(dragIndex: any, hoverIndex: any) {
+    moveListItem(dragIndex: number, hoverIndex: number) {
         const { listItems } = this.props;
         const dragListItem = listItems[dragIndex];
         let sortedList = [];
@@ -36,7 +36,7 @@ export class DragDropList extends Component<Props> {
     }
 
     render() {
-        const { listItems, handleToggle } = this.props;
+        const { listItems } = this.props;
 
         return (
             <DndProvider backend={HTML5Backend}>
@@ -56,7 +56,7 @@ export class DragDropList extends Component<Props> {
                                 id={item.id}
                                 text={item.header}
                                 moveListItem={this.moveListItem}
-                                handleToggle={handleToggle}
+                                handleToggle={this.props.handleToggle}
                                 visible={item.visible}
                             />
                         ))}
