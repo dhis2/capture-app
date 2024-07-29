@@ -15,10 +15,10 @@ export const getOrderQueryArgs = ({
     sortByDirection: string,
     withAPINameConverter?: boolean,
 }) => {
-    const orderId = withAPINameConverter ? getFilterApiName(sortById) : sortById;
-
     if (sortByDirection === 'default') {
         return `${DEFAULT_SORT.sortById}:${DEFAULT_SORT.sortByDirection}`;
     }
+
+    const orderId = withAPINameConverter ? getFilterApiName(sortById) : sortById;
     return `${orderId}:${sortByDirection}`;
 };
