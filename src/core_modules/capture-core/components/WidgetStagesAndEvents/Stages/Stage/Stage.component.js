@@ -28,7 +28,6 @@ const rulesEffectHideProgramStage = (ruleEffects, stageId) => (
 );
 
 export const StagePlain = ({ stage, events, classes, className, onCreateNew, ruleEffects, ...passOnProps }: Props) => {
-    console.log('ruleEffects', ruleEffects);
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
@@ -71,7 +70,6 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                     <Button
                         small
                         secondary
-                        disabled={preventAddingNewEvents}
                         icon={<IconAdd16 />}
                         className={classes.button}
                         dataTest="create-new-button"
