@@ -12,7 +12,7 @@ type Props = {
     visible: boolean,
     text: string,
     index: number,
-    handleToggle: (id: string) => void,
+    handleToggle: (id: string) => any,
     moveListItem: (dragIndex: number, hoverIndex: number) => void,
 };
 
