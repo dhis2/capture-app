@@ -4,7 +4,8 @@ import React from 'react';
 import moment from 'moment';
 import type { ComponentType } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
-import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
+import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
@@ -143,6 +144,7 @@ const CardListItemIndex = ({
     const program = enrollments && enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
+    const { fromServerDate } = useTimeZoneConversion();
 
     const renderImageDataElement = (imageElement?: ?CardProfileImageElementInformation) => {
         if (!imageElement) { return null; }
@@ -231,9 +233,12 @@ const CardListItemIndex = ({
                             </Grid>
                             <Grid item>
                                 {
-                                    item.tei && item.tei.lastUpdated &&
+                                    item.tei && item.tei.updatedAt &&
                                     <div className={classes.smallerLetters}>
-                                        { i18n.t('Last updated') } {item.tei && moment(item.tei.lastUpdated).fromNow()}
+                                        { i18n.t('Last updated') } {' '}
+                                        { item.tei && <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
+                                            { moment(fromServerDate(item.tei.updatedAt)).fromNow() }
+                                        </Tooltip>}
                                     </div>
                                 }
 
