@@ -10,7 +10,7 @@ import { DragDropListItem } from './DragDropListItem.component';
 type Props = {
     listItems: Array<Object>,
     handleUpdateListOrder: (sortedList: Array<Object>) => void,
-    handleToggle: (id: string) => () => void,
+    handleToggle: (id: string) => () => any,
 };
 
 export class DragDropList extends Component<Props> {
