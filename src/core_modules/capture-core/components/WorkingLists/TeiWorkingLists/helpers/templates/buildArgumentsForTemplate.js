@@ -60,7 +60,7 @@ export const buildArgumentsForTemplate = ({
         scheduledAt,
         attributeValueFilters,
         dataFilters,
-        order: getOrderQueryArgs(sortById, sortByDirection),
+        order: getOrderQueryArgs({ sortById, sortByDirection }),
         displayColumnOrder: visibleColumnIds,
         programStage: programStageId,
     };

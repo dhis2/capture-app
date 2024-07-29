@@ -35,7 +35,7 @@ const createApiEventQueryArgs = (
         ...getApiFilterQueryArgs(rawSplitFilters.filters, filtersOnlyMetaForDataFetching),
         ...getApiFilterAttributesQueryArgs(rawSplitFilters.filterAttributes, filtersOnlyMetaForDataFetching),
         ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-        order: getOrderQueryArgs(sortById, sortByDirection, true),
+        order: getOrderQueryArgs({ sortById, sortByDirection, withAPINameConverter: true }),
         page,
         pageSize,
         orgUnit,

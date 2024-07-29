@@ -25,7 +25,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
 ): { [string]: any } => ({
     ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
     ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-    order: getOrderQueryArgs(sortById, sortByDirection, true),
+    order: getOrderQueryArgs({ sortById, sortByDirection, withAPINameConverter: true }),
     page,
     pageSize,
     orgUnit,

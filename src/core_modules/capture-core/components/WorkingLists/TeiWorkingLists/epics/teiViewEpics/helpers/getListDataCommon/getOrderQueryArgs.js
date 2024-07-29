@@ -6,7 +6,15 @@ export const DEFAULT_SORT = {
     sortByDirection: 'desc',
 };
 
-export const getOrderQueryArgs = (sortById: string, sortByDirection: string, withAPINameConverter?: boolean) => {
+export const getOrderQueryArgs = ({
+    sortById,
+    sortByDirection,
+    withAPINameConverter,
+}: {
+    sortById: string,
+    sortByDirection: string,
+    withAPINameConverter?: boolean,
+}) => {
     const orderId = withAPINameConverter ? getFilterApiName(sortById) : sortById;
 
     if (sortByDirection === 'default') {
