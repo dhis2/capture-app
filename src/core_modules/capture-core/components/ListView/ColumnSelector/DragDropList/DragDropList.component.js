@@ -1,11 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'react-addons-update';
 import { DataTable, TableHead, TableBody, DataTableRow, DataTableColumnHeader } from '@dhis2/ui';
-
 import i18n from '@dhis2/d2-i18n';
 
 import { DragDropListItem } from './DragDropListItem.component';
@@ -38,16 +36,16 @@ export class DragDropList extends Component<Props> {
     }
 
     render() {
-        const { listItems } = this.props;
+        const { listItems, handleToggle } = this.props;
 
         return (
             <DndProvider backend={HTML5Backend}>
                 <DataTable>
                     <TableHead>
                         <DataTableRow>
-                            <DataTableColumnHeader>
-                                {i18n.t('Column')}
-                            </DataTableColumnHeader>
+                            <DataTableColumnHeader />
+                            <DataTableColumnHeader>{i18n.t('Column')}</DataTableColumnHeader>
+                            <DataTableColumnHeader>{i18n.t('Visible')}</DataTableColumnHeader>
                         </DataTableRow>
                     </TableHead>
                     <TableBody>
@@ -58,7 +56,7 @@ export class DragDropList extends Component<Props> {
                                 id={item.id}
                                 text={item.header}
                                 moveListItem={this.moveListItem}
-                                handleToggle={this.props.handleToggle}
+                                handleToggle={handleToggle}
                                 visible={item.visible}
                             />
                         ))}
