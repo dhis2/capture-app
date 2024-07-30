@@ -4,7 +4,8 @@ import React from 'react';
 import moment from 'moment';
 import type { ComponentType } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
-import { colors, Tag, IconCheckmark16, UserAvatar } from '@dhis2/ui';
+import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
+import { UserAvatarImage } from '../../../capture-ui/UserAvatarImage/UserAvatarImage.component';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
@@ -62,8 +63,8 @@ const getStyles = (theme: Theme) => ({
         flexGrow: 1,
     },
     image: {
-        width: theme.typography.pxToRem(44),
-        height: theme.typography.pxToRem(44),
+        width: theme.typography.pxToRem(54),
+        height: theme.typography.pxToRem(54),
         marginRight: theme.typography.pxToRem(8),
     },
     buttonMargin: {
@@ -149,7 +150,7 @@ const CardListItemIndex = ({
         const imageValue = item.values[imageElement.id];
         return (
             <div>
-                {imageValue && <UserAvatar src={imageValue.url} alt={imageValue.name} className={classes.image} />}
+                {imageValue && <UserAvatarImage imageUrl={imageValue.url} className={classes.image} size="medium" />}
 
             </div>
         );
