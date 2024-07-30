@@ -7,27 +7,23 @@ const packageDesc = require('../package');
 
 function verifyMajorCacheVersion(serverVersionAsString) {
     if (!serverVersionAsString) {
-        console.log('Version not specified');
-        process.exit(1);
+        throw Error('Version not specified');
     }
 
     const serverVersion = Number(serverVersionAsString);
     if (Number.isNaN(serverVersion) || !Number.isSafeInteger(serverVersion) || serverVersion <= 30) {
-        console.log('Invalid app version');
-        process.exit(1);
+        throw Error('Invalid app version');
     }
 }
 
 function verifyMinorCacheVersion(appCacheVersionAsString) {
     if (!appCacheVersionAsString) {
-        console.log('Cache version not specified');
-        process.exit(1);
+        throw Error('Cache version not specified');
     }
 
     const appCacheVersion = Number(appCacheVersionAsString);
     if (Number.isNaN(appCacheVersion) || !Number.isSafeInteger(appCacheVersion) || appCacheVersion >= 1000) {
-        console.log('Invalid cache version');
-        process.exit(1);
+        throw Error('Invalid cache version');
     }
 }
 
