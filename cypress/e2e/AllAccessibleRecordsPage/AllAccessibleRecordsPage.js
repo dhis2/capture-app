@@ -45,8 +45,7 @@ When('edits and save the form', () => {
 
 
     cy.contains('[data-test="form-field"]', 'WHOMCH Hemoglobin value')
-        .parents('tr')
-        .find('input[type="checkbox"]')
+        .find('input')
         .clear()
         .type('99')
         .blur();
