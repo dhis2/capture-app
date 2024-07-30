@@ -41,18 +41,16 @@ type Props = {
     size: 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge',
 };
 
-const UserAvatarImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props) => {
-    return (
-        <div className={className}>
-            <img
-                src={imageUrl}
-                alt="user avatar"
-                data-test={dataTest}
-                className={`${classes.img} ${classes[size]} className`}
-            />
-        </div>
-    );
-};
+const UserAvatarImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props) => (
+    <div className={className}>
+        <img
+            src={imageUrl}
+            alt="user avatar"
+            data-test={dataTest}
+            className={`${classes.img} ${classes[size]} className`}
+        />
+    </div>
+);
 
 
 export const UserAvatarImage = withStyles(styles)(UserAvatarImagePlain);
