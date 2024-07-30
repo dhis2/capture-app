@@ -25,7 +25,15 @@ const getIndicatorOutput = () =>
 
         render = () => {
             const indicators = this.getItems();
-            return <WidgetIndicator indicators={indicators} emptyText={i18n.t('No indicator output')} />;
+            const hasItems = indicators.length > 0;
+            return (
+                <div>
+                    {hasItems &&
+                        <WidgetIndicator indicators={indicators} emptyText={i18n.t('No indicator output for this event yet')} />
+                    }
+                </div>
+
+            );
         }
     };
 

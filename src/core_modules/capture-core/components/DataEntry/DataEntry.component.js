@@ -62,10 +62,15 @@ const styles = theme => ({
         position: 'relative',
         flexGrow: 1,
         width: theme.typography.pxToRem(300),
-        margin: theme.typography.pxToRem(10),
+        '& > div > div > *:not(:first-child)': {
+            marginTop: '10px',
+        },
         marginRight: 0,
     },
     verticalOutputsContainer: {
+        '& > *': {
+            marginTop: '10px',
+        },
         marginBottom: theme.typography.pxToRem(10),
     },
     dataEntrySectionContainer: {

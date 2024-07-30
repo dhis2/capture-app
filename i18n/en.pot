@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-07-18T08:06:52.377Z\n"
-"PO-Revision-Date: 2024-07-18T08:06:52.377Z\n"
+"POT-Creation-Date: 2024-07-30T08:56:19.469Z\n"
+"PO-Revision-Date: 2024-07-30T08:56:19.469Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -366,11 +366,11 @@ msgstr "Registered person"
 msgid "validation failed"
 msgstr "validation failed"
 
-msgid "No feedback"
-msgstr "No feedback"
+msgid "No feedback for this event yet"
+msgstr "No feedback for this event yet"
 
-msgid "No indicator output"
-msgstr "No indicator output"
+msgid "No indicator output for this event yet"
+msgstr "No indicator output for this event yet"
 
 msgid "Generate new event"
 msgstr "Generate new event"
@@ -782,12 +782,6 @@ msgstr "There was an error loading the page"
 
 msgid "Choose an organisation unit to start reporting"
 msgstr "Choose an organisation unit to start reporting"
-
-msgid "No feedback for this event yet"
-msgstr "No feedback for this event yet"
-
-msgid "No indicator output for this event yet"
-msgstr "No indicator output for this event yet"
 
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
