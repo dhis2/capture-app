@@ -1,3 +1,10 @@
+# [100.71.0](https://github.com/dhis2/capture-app/compare/v100.70.15...v100.71.0) (2024-07-29)
+
+
+### Features
+
+* [DHIS2-17589] show absolute date when hovering over relative dates ([#3699](https://github.com/dhis2/capture-app/issues/3699)) ([1396394](https://github.com/dhis2/capture-app/commit/139639404ebf5fe429f4ea59e125c77dc554ecdd))
+
 ## [100.70.15](https://github.com/dhis2/capture-app/compare/v100.70.14...v100.70.15) (2024-07-28)
 
 
