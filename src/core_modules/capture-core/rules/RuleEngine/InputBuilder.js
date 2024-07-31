@@ -22,7 +22,7 @@ import type {
     KotlinOption,
     KotlinOptionSets,
 } from './kotlinRuleEngine.types';
-const {
+import {
     RuleActionJs,
     RuleDataValueJs,
     RuleEngineContextJs,
@@ -31,12 +31,13 @@ const {
     RuleJs,
     RuleVariableJs,
     RuleVariableType,
-    models,
-} = require('@vgarciabnz/rule-engine').org.hisp.dhis.rules;
-const {
     RuleAttributeValue,
     RuleEnrollmentStatus,
-} = models;
+} from '@dhis2/rule-engine';
+// const {
+//     RuleAttributeValue,
+//     RuleEnrollmentStatus,
+// } = models;
 //const imp = require('@vgarciabnz/rule-engine').org.hisp.dhis.rules;
 
 const programRuleVariableSourceIdExtractor = {

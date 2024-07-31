@@ -7,7 +7,7 @@ import type {
     IConvertOutputRulesEffectsValue,
     Flag,
 } from './rulesEngine.types';
-const { RuleEngineJs } = require('@vgarciabnz/rule-engine').org.hisp.dhis.rules;
+import { RuleEngineJs } from '@dhis2/rule-engine';
 
 export class RuleEngine {
     inputConverter: IConvertInputRulesValue;

@@ -32,6 +32,7 @@
         "d2-manifest": "^1.0.0",
         "d2-utilizr": "^0.2.15",
         "date-fns": "^1.29.0",
+        "eslint-import-resolver-exports": "^1.0.0-beta.5",
         "history": "^5.3.0",
         "leaflet": "^1.7.1",
         "leaflet-draw": "^1.0.4",
