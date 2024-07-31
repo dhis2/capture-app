@@ -7,6 +7,7 @@ export type Tei = $ReadOnly<{
   orgUnit: string,
   trackedEntityInstance: string,
   lastUpdated: string,
+  updatedAt: string,
   trackedEntityType: string,
   deleted: boolean,
   featureType: string,
