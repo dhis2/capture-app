@@ -16,6 +16,7 @@ import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
+import { convertValue } from '../../converters/clientToView';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
 import { Actions } from './Actions';
@@ -69,12 +70,31 @@ export const WidgetEnrollmentPlain = ({
     onUpdateEnrollmentStatusError,
     onUpdateEnrollmentStatusSuccess,
     onAccessLostFromTransfer,
+    type = dataElementTypes.ORGANISATION_UNIT,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const geometryType = getGeometryType(enrollment?.geometry?.type);
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
+
+    const orgUnitClientValue = {
+        orgUnitName: orgUnitName,
+        ancestors: ancestors || [],
+        tooltip: i18n.t('Started at {{orgUnitName}}', {
+            orgUnitName: orgUnitName,
+            interpolation: { escapeValue: false },
+        }),
+    };
+
+    const ownerOrgUnitClientValue = {
+        orgUnitName: ownerOrgUnitName,
+        ancestors: ownerAncestors || [],
+        tooltip: i18n.t('Owned by {{ownerOrgUnit}}', {
+            ownerOrgUnit: ownerOrgUnitName,
+        }),
+    };
+
 
 
     return (
@@ -133,8 +153,7 @@ export const WidgetEnrollmentPlain = ({
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             <span>
-                                {i18n.t('Started at ')}
-                                <TooltipOrgUnit orgUnitName={orgUnitName} ancestors={ancestors} />
+                                {convertValue(orgUnitClientValue, type)}
                             </span>
                         </div>
 
@@ -143,8 +162,7 @@ export const WidgetEnrollmentPlain = ({
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             <span>
-                                {i18n.t('Owned by ')}
-                                <TooltipOrgUnit orgUnitName={ownerOrgUnitName} ancestors={ownerAncestors} />
+                                {convertValue(ownerOrgUnitClientValue, type)}
                             </span>
                         </div>
 
