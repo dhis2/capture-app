@@ -825,6 +825,13 @@ msgstr "Stage"
 msgid "Registered events"
 msgstr "Registered events"
 
+msgid ""
+"The category is not valid for the selected organisation unit. Please select "
+"a valid combination."
+msgstr ""
+"The category is not valid for the selected organisation unit. Please select "
+"a valid combination."
+
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
 
