@@ -13,15 +13,16 @@ type Props = {
     handleToggle: (id: string) => () => any,
 };
 
-export class DragDropList extends Component<Props> {
-    moveListItem: (dragIndex: number, hoverIndex: number) => void;
+type State = {
+    isDraggingAny: boolean,
+};
 
-    constructor(props: Props) {
-        super(props);
-        this.moveListItem = this.moveListItem.bind(this);
-    }
+export class DragDropList extends Component<Props, State> {
+    state = {
+        isDraggingAny: false,
+    };
 
-    moveListItem(dragIndex: number, hoverIndex: number) {
+    moveListItem = (dragIndex: number, hoverIndex: number) => {
         const { listItems } = this.props;
         const dragListItem = listItems[dragIndex];
         let sortedList = [];
@@ -33,10 +34,19 @@ export class DragDropList extends Component<Props> {
         });
 
         this.props.handleUpdateListOrder(sortedList);
-    }
+    };
+
+    handleDragStart = () => {
+        this.setState({ isDraggingAny: true });
+    };
+
+    handleDragEnd = () => {
+        this.setState({ isDraggingAny: false });
+    };
 
     render() {
         const { listItems } = this.props;
+        const { isDraggingAny } = this.state;
 
         return (
             <DndProvider backend={HTML5Backend}>
@@ -58,6 +68,9 @@ export class DragDropList extends Component<Props> {
                                 moveListItem={this.moveListItem}
                                 handleToggle={this.props.handleToggle}
                                 visible={item.visible}
+                                isDraggingAny={isDraggingAny}
+                                onDragStart={this.handleDragStart}
+                                onDragEnd={this.handleDragEnd}
                             />
                         ))}
                     </TableBody>

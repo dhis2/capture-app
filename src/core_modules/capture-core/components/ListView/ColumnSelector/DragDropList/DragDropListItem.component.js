@@ -2,9 +2,18 @@
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { DataTableRow, DataTableCell, Checkbox } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
 
 const ItemTypes = {
     LISTITEM: 'listItem',
+};
+
+const styles = {
+    rowWithoutHover: {
+        '&:hover > td': {
+            backgroundColor: 'transparent !important',
+        },
+    },
 };
 
 type Props = {
@@ -14,9 +23,24 @@ type Props = {
     index: number,
     handleToggle: (id: string) => any,
     moveListItem: (dragIndex: number, hoverIndex: number) => void,
+    isDraggingAny: boolean,
+    onDragStart: () => void,
+    onDragEnd: () => void,
+    classes: any,
 };
 
-export const DragDropListItem = ({ id, index, text, visible, handleToggle, moveListItem }: Props) => {
+const DragDropListItemPlain = ({
+    id,
+    index,
+    text,
+    visible,
+    handleToggle,
+    moveListItem,
+    isDraggingAny,
+    onDragStart,
+    onDragEnd,
+    classes,
+}: Props) => {
     const ref = useRef(null);
 
     const [, drop] = useDrop({
@@ -54,7 +78,14 @@ export const DragDropListItem = ({ id, index, text, visible, handleToggle, moveL
     const opacity = isDragging ? 0 : 1;
 
     return (
-        <DataTableRow ref={ref} style={{ opacity }} draggable>
+        <DataTableRow
+            ref={ref}
+            style={{ opacity }}
+            className={isDraggingAny ? classes.rowWithoutHover : null}
+            draggable
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+        >
             <DataTableCell>{text}</DataTableCell>
             <DataTableCell>
                 <Checkbox
@@ -67,3 +98,5 @@ export const DragDropListItem = ({ id, index, text, visible, handleToggle, moveL
         </DataTableRow>
     );
 };
+
+export const DragDropListItem = withStyles(styles)(DragDropListItemPlain);
