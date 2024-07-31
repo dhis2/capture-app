@@ -4,6 +4,7 @@ import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { TooltipOrgUnit } from '../../capture-core/components/Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 import { useOrgUnitNameWithAncestors } from '../../capture-core/metadataRetrieval/orgUnitName';
+import { convertValue } from '../../capture-core/converters/clientToView';
 
 const itemStyles = {
     overflow: 'hidden',
@@ -39,6 +40,11 @@ const styles = {
 const FlatListItem = ({ item, classes, lastItemKey }) => {
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(item.value?.id);
 
+    const orgUnitClientValue = {
+        orgUnitName,
+        ancestors,
+    };
+
     return (
         <div
             key={item.reactKey}
@@ -47,7 +53,7 @@ const FlatListItem = ({ item, classes, lastItemKey }) => {
             <div className={classes.itemKey}>{item.key}:</div>
             <div className={classes.itemValue}>
                 {item.valueType === 'ORGANISATION_UNIT' ? (
-                    <TooltipOrgUnit orgUnitName={orgUnitName} ancestors={ancestors} />
+                    convertValue(orgUnitClientValue, item.valueType)
                 ) : (
                     item.value
                 )}

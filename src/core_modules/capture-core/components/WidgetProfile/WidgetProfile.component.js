@@ -82,7 +82,7 @@ const WidgetProfilePlain = ({
 
     const isEditable = useMemo(() =>
         trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
-    [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
+        [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
@@ -97,10 +97,13 @@ const WidgetProfilePlain = ({
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
         .map((clientAttribute) => {
-            const { attribute, key } = clientAttribute;
-            const value = convertClientToView(clientAttribute);
+            const { attribute, key, valueType } = clientAttribute;
+            const value = valueType === 'ORGANISATION_UNIT' ? (
+                clientAttribute.value) : (
+                convertClientToView(clientAttribute)
+            );
             return {
-                attribute, key, value, reactKey: attribute,
+                attribute, key, value, valueType, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues]);
 
