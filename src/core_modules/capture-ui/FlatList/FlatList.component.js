@@ -2,7 +2,6 @@ import React from 'react';
 import cx from 'classnames';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { TooltipOrgUnit } from '../../capture-core/components/Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 import { useOrgUnitNameWithAncestors } from '../../capture-core/metadataRetrieval/orgUnitName';
 import { convertValue } from '../../capture-core/converters/clientToView';
 
