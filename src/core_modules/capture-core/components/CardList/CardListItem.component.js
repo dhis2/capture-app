@@ -6,7 +6,7 @@ import type { ComponentType } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { CardImage } from '../../../capture-ui/UserAvatarImage/UserAvatarImage.component';
+import { CardImage } from '../../../capture-ui/CardImage/CardImage.component';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
