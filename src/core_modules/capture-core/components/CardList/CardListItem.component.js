@@ -6,7 +6,7 @@ import type { ComponentType } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { UserAvatarImage } from '../../../capture-ui/UserAvatarImage/UserAvatarImage.component';
+import { CardImage } from '../../../capture-ui/UserAvatarImage/UserAvatarImage.component';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
@@ -152,7 +152,7 @@ const CardListItemIndex = ({
         const imageValue = item.values[imageElement.id];
         return (
             <div>
-                {imageValue && <UserAvatarImage imageUrl={imageValue.url} className={classes.image} size="medium" />}
+                {imageValue && <CardImage imageUrl={imageValue.url} className={classes.image} size="medium" />}
 
             </div>
         );

@@ -41,7 +41,7 @@ type Props = {
     size: 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge',
 };
 
-const UserAvatarImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props) => (
+const CardImagePlain = ({ imageUrl, dataTest, classes, className, size }: Props) => (
     <div className={className}>
         <img
             src={imageUrl}
@@ -53,4 +53,4 @@ const UserAvatarImagePlain = ({ imageUrl, dataTest, classes, className, size }: 
 );
 
 
-export const UserAvatarImage = withStyles(styles)(UserAvatarImagePlain);
+export const CardImage = withStyles(styles)(CardImagePlain);
