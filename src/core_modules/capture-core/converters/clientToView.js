@@ -76,7 +76,6 @@ function convertOrgUnitForDisplay(clientValue: OrgUnitClientValue) {
             tooltip={clientValue.tooltip}
         />
     );
-    
 }
 
 

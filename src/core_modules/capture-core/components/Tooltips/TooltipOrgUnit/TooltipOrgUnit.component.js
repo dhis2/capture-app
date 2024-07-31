@@ -1,4 +1,4 @@
-//@flow
+// @flow
 import React from 'react';
 import { Tooltip } from '@dhis2/ui';
 import { useFormatOrgUnitNameFullPath } from '../../../metadataRetrieval/orgUnitName';
@@ -11,7 +11,6 @@ type Props = {
 
 export const TooltipOrgUnit = ({ orgUnitName, ancestors, tooltip }: Props) => {
     const orgUnitNameFullPath = useFormatOrgUnitNameFullPath(orgUnitName, ancestors);
-    console.log('tooltip', tooltip);
 
     const tooltipParts = tooltip ? tooltip.split(orgUnitName) : [orgUnitName];
 

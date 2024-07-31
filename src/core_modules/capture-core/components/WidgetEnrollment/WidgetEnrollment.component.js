@@ -21,7 +21,6 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
-import { TooltipOrgUnit } from '../Tooltips/TooltipOrgUnit';
 
 const styles = {
     enrollment: {
@@ -79,10 +78,10 @@ export const WidgetEnrollmentPlain = ({
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
 
     const orgUnitClientValue = {
-        orgUnitName: orgUnitName,
+        orgUnitName,
         ancestors: ancestors || [],
         tooltip: i18n.t('Started at {{orgUnitName}}', {
-            orgUnitName: orgUnitName,
+            orgUnitName,
             interpolation: { escapeValue: false },
         }),
     };
@@ -94,7 +93,6 @@ export const WidgetEnrollmentPlain = ({
             ownerOrgUnit: ownerOrgUnitName,
         }),
     };
-
 
 
     return (
