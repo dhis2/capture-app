@@ -5,8 +5,9 @@ import { withStyles } from '@material-ui/core';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import cx from 'classnames';
-import { colors, spacersNum, Button } from '@dhis2/ui';
+import { colors, spacersNum, Button, Tooltip } from '@dhis2/ui';
 import moment from 'moment';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -78,6 +79,7 @@ const NoteSectionPlain = ({
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
     const [newNoteValue, setNewNoteValue] = useState('');
+    const { fromServerDate } = useTimeZoneConversion();
 
     const handleChange = useCallback((value) => {
         setEditing(true);
@@ -104,7 +106,9 @@ const NoteSectionPlain = ({
                         {createdBy.firstName} {' '} {createdBy.surname}
                     </span>}
                     <span className={cx(classes.headerText, classes.lastUpdated)}>
-                        {moment(storedAt).fromNow()}
+                        <Tooltip content={fromServerDate(storedAt).toLocaleString()}>
+                            {moment(fromServerDate(storedAt)).fromNow()}
+                        </Tooltip>
                     </span>
                 </div>
                 <div className={classes.body}>

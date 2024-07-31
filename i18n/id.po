@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -205,14 +205,14 @@ msgstr "Pengguna yang ditetapkan"
 msgid "Search for user"
 msgstr "Cari pengguna"
 
+msgid "Notes"
+msgstr "Catatan"
+
 msgid "Basic info"
 msgstr "Info dasar"
 
 msgid "Status"
 msgstr "Status"
-
-msgid "Comments"
-msgstr "Komentar"
 
 msgid "Relationships"
 msgstr "Hubungan"
@@ -245,8 +245,8 @@ msgstr "Aktif"
 msgid "Completed"
 msgstr "Selesai"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan even"
+msgid "Please add or cancel note before saving the event"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "Simpan dan tambahkan yang lain"
@@ -633,14 +633,14 @@ msgstr "Offline"
 msgid "Syncing"
 msgstr "Menyinkronkan"
 
-msgid "Add comment"
-msgstr "Tambahkan komentar"
+msgid "Add note"
+msgstr "Tambah catatan"
 
-msgid "You don't have access to write comments"
+msgid "You don't have access to write notes"
 msgstr ""
 
-msgid "Write comment"
-msgstr "Tulis komentar"
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr ""
@@ -842,8 +842,10 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
-msgid "New"
-msgstr "Baru"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Pilih {{missingCategories}} untuk mulai melaporkan"
@@ -851,8 +853,8 @@ msgstr "Pilih {{missingCategories}} untuk mulai melaporkan"
 msgid "Save as new"
 msgstr "Simpan sebagai baru"
 
-msgid "View enrollment"
-msgstr "Lihat pendaftaran"
+msgid "New"
+msgstr "Baru"
 
 msgid "Create for"
 msgstr "Buat untuk"
@@ -1162,9 +1164,6 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
-msgid "Save comment"
-msgstr "Simpan komentar"
-
 msgid "Enrollment actions"
 msgstr "Tindakan pendaftaran"
 
@@ -1286,14 +1285,8 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Comments about this enrollment"
-msgstr "Komentar tentang pendaftaran ini"
-
-msgid "Write a comment about this enrollment"
-msgstr "Tulis sebuah komentar tentang pendaftaran ini"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "Pendaftaran ini tidak memiliki komentar"
+msgid "Please add or cancel the note before saving the event"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1304,20 +1297,20 @@ msgstr ""
 msgid "program or stage is invalid"
 msgstr ""
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "Error"
 
 msgid "Warning"
 msgstr "Peringatan"
-
-msgid "Comments about this event"
-msgstr ""
-
-msgid "Write a comment about this event"
-msgstr ""
-
-msgid "This event doesn't have any comments"
-msgstr ""
 
 msgid "stage not found in rules execution"
 msgstr ""
@@ -1338,6 +1331,15 @@ msgid "Event completed"
 msgstr "Even selesai"
 
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1376,10 +1378,13 @@ msgstr "Info jadwal"
 msgid "Schedule date / Due date"
 msgstr ""
 
-msgid "Event comments"
+msgid "Event notes"
 msgstr ""
 
-msgid "Write a comment about this scheduled event"
+msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Save note"
 msgstr ""
 
 msgid ""
@@ -1443,6 +1448,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"

@@ -1289,9 +1289,6 @@ msgstr "Started at {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Owned by {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Last updated {{date}}"
-
 msgid "Cancelled"
 msgstr "Cancelled"
 
@@ -1473,8 +1470,8 @@ msgstr "Choose a {{linkableStageLabel}}"
 msgid "{{ linkableStageLabel }} is not repeatable"
 msgstr "{{ linkableStageLabel }} is not repeatable"
 
-msgid "{{ linkableStageLabel }} has no existing events"
-msgstr "{{ linkableStageLabel }} has no existing events"
+msgid "{{ linkableStageLabel }} has no linkable events"
+msgstr "{{ linkableStageLabel }} has no linkable events"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"

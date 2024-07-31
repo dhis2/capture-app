@@ -28,6 +28,29 @@ const changeEnrollmentAndEventsStatus = () => (
         })
 );
 
+And('the apgar score is 11', () => {
+    cy.buildApiUrl('tracker', 'events/V1CerIi3sdL')
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const { dataValues, ...rest } = body;
+            const dataValuesToUpdate = dataValues.map(dataValue => (
+                dataValue.dataElement === 'a3kGcGDCuk6' ? { ...dataValue, value: 11 } : dataValue
+            ));
+            const eventToUpdate = { ...rest, dataValues: dataValuesToUpdate };
+
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
+                .then(url => cy.request('POST', url, { events: [eventToUpdate] }))
+                .then(() => {
+                    cy.reload();
+                    cy.get('[data-test="widget-enrollment-event"]')
+                        .find('[data-test="form-field"]')
+                        .contains('11')
+                        .should('exist');
+                });
+        });
+});
+
 Given(/^you land on the enrollment event page with selected (.*) by having typed (.*)$/, (tet, url) => {
     cy.visit(url);
     cy.get('[data-test="scope-selector"]').contains(`${tet}`);
