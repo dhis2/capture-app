@@ -51,7 +51,7 @@ export const DragDropListItem = ({ id, index, text, visible, handleToggle, moveL
 
     drag(drop(ref));
 
-    const opacity = isDragging ? 0.5 : 1;
+    const opacity = isDragging ? 0 : 1;
 
     return (
         <DataTableRow ref={ref} style={{ opacity }} draggable>
