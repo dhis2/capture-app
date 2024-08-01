@@ -167,7 +167,7 @@ class FilterRestMenuPlain extends React.Component<Props, State> {
                     }
                 </Reference>
                 {this.state.filterSelectorOpen &&
-                <Layer onBackdropClick={this.handleClickAway} >
+                <Layer onBackdropClick={this.handleClickAway} dataTest="more-filters-menu">
                     <Popper
                         placement="bottom-start"
                     >

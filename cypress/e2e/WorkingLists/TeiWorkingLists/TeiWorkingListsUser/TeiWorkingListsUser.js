@@ -42,9 +42,10 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenat
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('First antenatal care visit')
@@ -66,9 +67,10 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Household investigation')
@@ -580,9 +582,9 @@ When('you open the program stage filters from the more filters dropdown menu', (
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 });
 
 Then('you see the program stages and the default events filters', () => {
@@ -741,9 +743,10 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and co
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Postpartum care visit')
@@ -760,9 +763,10 @@ Given('you open the main page with all accesible records in the WHO RMNCH Tracke
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Postpartum care visit')
