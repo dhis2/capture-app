@@ -64,7 +64,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
     );
     const result = useMemo(
         () => (ready ? orgUnitIds.reduce((acc, id) => {
-            acc[id] = displayNameCache[id];
+            acc[id] = displayNameCache[id] ? displayNameCache[id].displayName : null;
             return acc;
         }, {}) : null),
         [ready, orgUnitIds],
@@ -72,7 +72,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
 
     const onComplete = useCallback(({ organisationUnits }) => {
         for (const { id, displayName } of organisationUnits.organisationUnits) {
-            displayNameCache[id] = displayName;
+            displayNameCache[id] = { displayName, ancestors: displayNameCache[id] ? displayNameCache[id].ancestors : [] };
         }
         const completeCount = completedBatches + 1;
         setCompletedBatches(completeCount);
@@ -139,14 +139,14 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
         .map(batch => querySingleResource(displayNamesQuery.organisationUnits, { filter: batch.join(',') })
             .then(({ organisationUnits }) => {
                 for (const { id, displayName } of organisationUnits) {
-                    displayNameCache[id] = displayName;
+                    displayNameCache[id] = { displayName, ancestors: displayNameCache[id] ? displayNameCache[id].ancestors : [] };
                 }
             })));
 
     return orgUnitIds.reduce((acc, orgUnitId) => {
         acc[orgUnitId] = {
             id: orgUnitId,
-            name: displayNameCache[orgUnitId],
+            name: displayNameCache[orgUnitId] ? displayNameCache[orgUnitId].displayName : null,
         };
         return acc;
     }, {});
@@ -155,7 +155,7 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
 export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     displayName?: string,
     ancestors?: Array<{| displayName: string, level: number |}>,
-        error ?: any,
+    error?: any,
 } => {
     const cachedOrgUnitNameAndAncestor = orgUnitId && displayNameCache[orgUnitId];
     const fetchId = cachedOrgUnitNameAndAncestor ? undefined : orgUnitId;
