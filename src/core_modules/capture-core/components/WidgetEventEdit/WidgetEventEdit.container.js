@@ -99,6 +99,13 @@ export const WidgetEventEditPlain = ({
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
 
     const eventAccess = getProgramEventAccess(programId, stageId);
+    const blockEntryForm = stage.blockEntryForm;
+    const disableEdit = !eventAccess?.write || blockEntryForm;
+
+    const tooltipContent = blockEntryForm ?
+        i18n.t('You can\'t edit this event due to program settings') :
+        i18n.t('You don\'t have access to edit this event');
+
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     const { programCategory } = useCategoryCombinations(programId);
     if (error) {
@@ -117,14 +124,14 @@ export const WidgetEventEditPlain = ({
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
                         <ConditionalTooltip
-                            content={i18n.t('You don\'t have access to edit this event')}
-                            enabled={!eventAccess?.write}
+                            content={tooltipContent}
+                            enabled={disableEdit}
                             wrapperClassName={classes.tooltip}
                         >
                             <Button
                                 small
                                 secondary
-                                disabled={!eventAccess?.write}
+                                disabled={disableEdit}
                                 icon={<IconEdit24 />}
                                 onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                             >
