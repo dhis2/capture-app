@@ -72,7 +72,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
 
     const onComplete = useCallback(({ organisationUnits }) => {
         for (const { id, displayName } of organisationUnits.organisationUnits) {
-            displayNameCache[id].displayName = displayName;
+            displayNameCache[id] = displayName;
         }
         const completeCount = completedBatches + 1;
         setCompletedBatches(completeCount);
@@ -139,14 +139,14 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
         .map(batch => querySingleResource(displayNamesQuery.organisationUnits, { filter: batch.join(',') })
             .then(({ organisationUnits }) => {
                 for (const { id, displayName } of organisationUnits) {
-                    displayNameCache[id].displayName = displayName;
+                    displayNameCache[id] = displayName;
                 }
             })));
 
     return orgUnitIds.reduce((acc, orgUnitId) => {
         acc[orgUnitId] = {
             id: orgUnitId,
-            name: displayNameCache[orgUnitId].displayName,
+            name: displayNameCache[orgUnitId],
         };
         return acc;
     }, {});
