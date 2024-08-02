@@ -92,13 +92,19 @@ export const loadViewEventDataEntry =
         if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
             const useNewAocApiSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator);
             // $FlowFixMe - this should work
-            const optionIds = eventContainer.event?.attributeCategoryOptions.split(useNewAocApiSeparator ? ',' : ';');
-            const categoryOptionsFromIndexedDB = await Promise.all(
-                optionIds
-                    .map(optionId =>
-                        getCachedSingleResourceFromKeyAsync(userStores.CATEGORY_OPTIONS, optionId),
-                    ),
-            );
+            const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(useNewAocApiSeparator ? ',' : ';');
+            const getCategoryOptionsFromIndexedDB = async (optionIds) => {
+                const categoryOptionsPromises = optionIds.map(async (optionId) => {
+                    const cachedCategoryOption = await getCachedSingleResourceFromKeyAsync(userStores.CATEGORY_OPTIONS, optionId);
+                    if (cachedCategoryOption.displayName === 'default') {
+                        return null;
+                    }
+                    return cachedCategoryOption;
+                });
+                const categoryOptions = await Promise.all(categoryOptionsPromises);
+                return categoryOptions.filter(Boolean);
+            };
+            const categoryOptionsFromIndexedDB = await getCategoryOptionsFromIndexedDB(attributeCategoryOptionIds);
             attributeCategoryOptions = categoryOptionsFromIndexedDB.reduce((acc, categoryOption) => {
                 acc[`${attributeCategoryId}-${categoryOption.categories[0]}`] = categoryOption.id;
                 return acc;
