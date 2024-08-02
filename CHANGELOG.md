@@ -1,3 +1,10 @@
+## [100.71.1](https://github.com/dhis2/capture-app/compare/v100.71.0...v100.71.1) (2024-08-02)
+
+
+### Bug Fixes
+
+* [DHIS2-16373] cannot change AOC on existing events in Tracker program ([#3731](https://github.com/dhis2/capture-app/issues/3731)) ([f61c925](https://github.com/dhis2/capture-app/commit/f61c9253e028c3b683a2d5b153751c05ddb9c6f8))
+
 # [100.71.0](https://github.com/dhis2/capture-app/compare/v100.70.15...v100.71.0) (2024-07-29)
 
 
