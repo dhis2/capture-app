@@ -88,6 +88,7 @@ export const WidgetEventEditPlain = ({
 }: PlainProps) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
+
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
