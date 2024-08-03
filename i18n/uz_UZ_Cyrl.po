@@ -1270,9 +1270,6 @@ msgstr " {{orgUnitName}} да бошланган"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr " {{ownerOrgUnit}} эгалиги асосида"
 
-msgid "Last updated {{date}}"
-msgstr " {{date}}да охирги марта янгиланган"
-
 msgid "Cancelled"
 msgstr "Бекор қилинди"
 

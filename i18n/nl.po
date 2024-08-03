@@ -1311,9 +1311,6 @@ msgstr "Gestart bij {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Eigendom van {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Laatst bijgewerkt {{date}}"
-
 msgid "Cancelled"
 msgstr "Geannuleerd"
 
