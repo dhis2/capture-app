@@ -130,8 +130,8 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
 };
 
 export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleResource: QuerySingleResource): Promise<{|
-    [orgUnitId: string]: {|
-        id: string,
+[orgUnitId: string]: {|
+    id: string,
         displayName: string,
     |}
 |}> {
@@ -142,7 +142,6 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
                     displayNameCache[id] = { displayName, ancestors: displayNameCache[id] ? displayNameCache[id].ancestors : [] };
                 }
             })));
-
     return orgUnitIds.reduce((acc, orgUnitId) => {
         acc[orgUnitId] = {
             id: orgUnitId,
@@ -155,7 +154,7 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
 export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     displayName?: string,
     ancestors?: Array<{| displayName: string, level: number |}>,
-    error?: any,
+        error ?: any,
 } => {
     const cachedOrgUnitNameAndAncestor = orgUnitId && displayNameCache[orgUnitId];
     const fetchId = cachedOrgUnitNameAndAncestor ? undefined : orgUnitId;
@@ -195,4 +194,4 @@ export const useFormatOrgUnitNameFullPath = (orgUnitName: ?string, ancestors?: A
     return path;
 };
 
-export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId].displayName;
+export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId]?.displayName;
