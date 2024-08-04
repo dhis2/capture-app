@@ -1273,9 +1273,6 @@ msgstr "Dimulai di {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Dimiliki oleh {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Terakhir diperbarui {{date}}"
-
 msgid "Cancelled"
 msgstr "Dibatalkan"
 

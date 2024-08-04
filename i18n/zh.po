@@ -232,7 +232,7 @@ msgid "Completed"
 msgstr "已完成"
 
 msgid "Please add or cancel note before saving the event"
-msgstr ""
+msgstr "请在保存事件前添加或取消备注"
 
 msgid "Save and add another"
 msgstr "保存并另外添加"
@@ -617,10 +617,10 @@ msgid "Add note"
 msgstr "添加笔记"
 
 msgid "You don't have access to write notes"
-msgstr ""
+msgstr "您无法写笔记"
 
 msgid "Write note"
-msgstr ""
+msgstr "编写说明"
 
 msgid "was blanked out and hidden by your last action"
 msgstr "被你的最后一个动作清空并隐藏"
@@ -1242,9 +1242,6 @@ msgstr "始于{{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "由{{ownerOrgUnit}}拥有"
 
-msgid "Last updated {{date}}"
-msgstr "最近更新的{{date}}"
-
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -1255,7 +1252,7 @@ msgid "Add area"
 msgstr "添加区域"
 
 msgid "Please add or cancel the note before saving the event"
-msgstr ""
+msgstr "请在保存事件前添加或取消备注"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索组织机构。请稍后再试。"
@@ -1267,13 +1264,13 @@ msgid "program or stage is invalid"
 msgstr "项目或阶段无效"
 
 msgid "Notes about this enrollment"
-msgstr ""
+msgstr "入学须知"
 
 msgid "Write a note about this enrollment"
-msgstr ""
+msgstr "撰写有关此次入学的说明"
 
 msgid "This enrollment doesn't have any notes"
-msgstr ""
+msgstr "本次招生没有任何说明"
 
 msgid "Error"
 msgstr "错误"
@@ -1303,13 +1300,13 @@ msgid "Back to all stages and events"
 msgstr "回到所有阶段和事件"
 
 msgid "Notes about this event"
-msgstr ""
+msgstr "事件注意事项"
 
 msgid "Write a note about this event"
-msgstr ""
+msgstr "撰写关于此次事件的说明"
 
 msgid "This event doesn't have any notes"
-msgstr ""
+msgstr "该事件没有任何说明"
 
 msgid "Schedule date info"
 msgstr "预定日期信息"
@@ -1348,10 +1345,10 @@ msgid "Schedule date / Due date"
 msgstr "计划日期/截止日期"
 
 msgid "Event notes"
-msgstr ""
+msgstr "事件说明"
 
 msgid "Write a note about this scheduled event"
-msgstr ""
+msgstr "撰写关于此预定活动的说明"
 
 msgid "Save note"
 msgstr "保存笔记"
@@ -1422,10 +1419,10 @@ msgid "Choose a {{linkableStageLabel}}"
 msgstr "选择 {{linkableStageLabel}}"
 
 msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr ""
+msgstr "{{ linkableStageLabel }} 不可重复"
 
 msgid "{{ linkableStageLabel }} has no linkable events"
-msgstr ""
+msgstr "{{ linkableStageLabel }} 没有可链接的事件"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "关系不明确，请联系系统管理员"

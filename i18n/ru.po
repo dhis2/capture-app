@@ -1321,9 +1321,6 @@ msgstr "Первоначальная регистрация в {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Принадлежит {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Последнее обновление: {{date}}"
-
 msgid "Cancelled"
 msgstr "Отменен/а/о"
 
