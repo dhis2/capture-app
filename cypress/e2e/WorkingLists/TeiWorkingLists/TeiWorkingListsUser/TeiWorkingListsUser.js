@@ -188,9 +188,10 @@ When('you set the WHOMCH Smoking filter to No', () => {
         .within(() => {
             cy.get('[data-test="more-filters"]').eq(1)
                 .click();
-            cy.contains('WHOMCH Smoking')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('WHOMCH Smoking').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('No')
