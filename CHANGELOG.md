@@ -1,3 +1,10 @@
+## [100.71.3](https://github.com/dhis2/capture-app/compare/v100.71.2...v100.71.3) (2024-08-06)
+
+
+### Bug Fixes
+
+* [DHIS2-17516] bad request when sorting in the working lists ([#3737](https://github.com/dhis2/capture-app/issues/3737)) ([69af6ec](https://github.com/dhis2/capture-app/commit/69af6ecdff0bdb6ca67b051aae8c26d519d27d55))
+
 ## [100.71.2](https://github.com/dhis2/capture-app/compare/v100.71.1...v100.71.2) (2024-08-04)
 
 
