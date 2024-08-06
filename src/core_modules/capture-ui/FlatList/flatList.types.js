@@ -1,8 +1,6 @@
 // @flow
-import { type Node } from 'react';
-
 export type Props = {|
-    list: { reactKey: string, key: string, value: Node }[],
+    list: { reactKey: string, key: string, value: { id: string, name: string }, valueType?: string }[],
     dataTest?: string,
     ...CssClasses,
 |};

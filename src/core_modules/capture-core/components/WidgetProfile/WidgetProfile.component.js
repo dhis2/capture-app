@@ -86,17 +86,24 @@ const WidgetProfilePlain = ({
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program, trackedEntityInstanceAttributes);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
+        teiId,
+        program,
+        trackedEntityInstanceAttributes,
+    );
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
         .map((clientAttribute) => {
-            const { attribute, key } = clientAttribute;
-            const value = convertClientToView(clientAttribute);
+            const { attribute, key, valueType } = clientAttribute;
+            const value = valueType === 'ORGANISATION_UNIT' ? (
+                clientAttribute.value) : (
+                convertClientToView(clientAttribute)
+            );
             return {
-                attribute, key, value, reactKey: attribute,
+                attribute, key, value, valueType, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues]);
 
@@ -132,7 +139,10 @@ const WidgetProfilePlain = ({
 
         return (
             <div className={classes.container}>
-                <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
+                <FlatList
+                    dataTest="profile-widget-flatlist"
+                    list={displayInListAttributes}
+                />
             </div>
         );
     };

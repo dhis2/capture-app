@@ -17,7 +17,8 @@ import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
-import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { convertValue } from '../../converters/clientToView';
+import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
@@ -69,11 +70,31 @@ export const WidgetEnrollmentPlain = ({
     onUpdateEnrollmentStatusError,
     onUpdateEnrollmentStatusSuccess,
     onAccessLostFromTransfer,
+    type = dataElementTypes.ORGANISATION_UNIT,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const geometryType = getGeometryType(enrollment?.geometry?.type);
-    const { displayName: orgUnitName } = useOrgUnitName(enrollment?.orgUnit);
+    const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
+    const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
+
+    const orgUnitClientValue = {
+        orgUnitName,
+        ancestors: ancestors || [],
+        tooltip: i18n.t('Started at {{orgUnitName}}', {
+            orgUnitName,
+            interpolation: { escapeValue: false },
+        }),
+    };
+
+    const ownerOrgUnitClientValue = {
+        orgUnitName: ownerOrgUnitName,
+        ancestors: ownerAncestors || [],
+        tooltip: i18n.t('Owned by {{ownerOrgUnit}}', {
+            ownerOrgUnit: ownerOrgUnitName,
+        }),
+    };
+
 
     return (
         <div data-test="widget-enrollment">
@@ -130,19 +151,18 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Started at {{orgUnitName}}', {
-                                orgUnitName,
-                                interpolation: { escapeValue: false },
-                            })}
+                            <span>
+                                {convertValue(orgUnitClientValue, type)}
+                            </span>
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-owner-orgunit">
                             <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Owned by {{ownerOrgUnit}}', {
-                                ownerOrgUnit: ownerOrgUnit.displayName,
-                            })}
+                            <span>
+                                {convertValue(ownerOrgUnitClientValue, type)}
+                            </span>
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">

@@ -8,7 +8,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitId } from '../../../hooks/useCurrentOrgUnitId';
-import { useOrgUnitName } from '../../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
 import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { withSaveHandler } from '../../DataEntry';
@@ -54,7 +54,7 @@ const TeiRegistrationEntryPlain =
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
       const orgUnitId = useCurrentOrgUnitId();
-      const { displayName: orgUnitName } = useOrgUnitName(orgUnitId);
+      const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
 
       const handleOnCancel = () => {
           if (!isUserInteractionInProgress) {
