@@ -21,6 +21,7 @@ export class ProgramStage {
     _allowGenerateNextVisit: boolean;
     _askCompleteEnrollmentOnEventComplete: boolean;
     _generatedByEnrollmentDate: boolean;
+    _blockEntryForm: boolean;
     _repeatable: boolean;
     _hideDueDate: boolean;
     _reportDateToUse: string;
@@ -173,6 +174,14 @@ export class ProgramStage {
     }
     get programRules(): Array<ProgramRule> {
         return this._programRules;
+    }
+
+    get blockEntryForm(): boolean {
+        return this._blockEntryForm;
+    }
+
+    set blockEntryForm(blockEntryForm: boolean) {
+        this._blockEntryForm = blockEntryForm;
     }
 
     set repeatable(repeatable: boolean) {
