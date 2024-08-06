@@ -1,3 +1,10 @@
+# [100.72.0](https://github.com/dhis2/capture-app/compare/v100.71.3...v100.72.0) (2024-08-06)
+
+
+### Features
+
+* [DHIS2-17648] Replace Material UI FormGroup, FormLabel and FormControl ([#3713](https://github.com/dhis2/capture-app/issues/3713)) ([f4af266](https://github.com/dhis2/capture-app/commit/f4af266142c95a6d8e899d0bc5b8d3ae90f38f85))
+
 ## [100.71.3](https://github.com/dhis2/capture-app/compare/v100.71.2...v100.71.3) (2024-08-06)
 
 
