@@ -149,7 +149,8 @@ When('you open the column selector', () => {
 When('you select Household location and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
         .contains('Household location')
-        .find('input')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.get('aside[role="dialog"]')

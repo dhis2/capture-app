@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
-"PO-Revision-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-07-29T16:38:48.947Z\n"
+"PO-Revision-Date: 2024-07-29T16:38:48.947Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -567,6 +567,9 @@ msgstr "Columns to show in table"
 
 msgid "Column"
 msgstr "Column"
+
+msgid "Visible"
+msgstr "Visible"
 
 msgid "Update"
 msgstr "Update"
