@@ -7,4 +7,4 @@ export {
     updateProgramStageTemplateEpic,
 } from './programStageTemplates.epics';
 export { retrieveAllTemplatesEpic, retrieveTEITemplatesEpic } from './retrieveTemplates.epics';
-export { createApiTrackedEntitiesQueryArgs } from './helpers';
+export { createApiTrackedEntitiesQueryArgs, getOrderQueryArgs, DEFAULT_SORT } from './helpers';

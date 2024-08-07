@@ -72,7 +72,7 @@ import {
 import {
     addNoteForEventEpic,
     removeNoteForEventEpic,
-} from 'capture-core/components/WidgetEventComment/WidgetEventComment.epics';
+} from 'capture-core/components/WidgetEventNote/WidgetEventNote.epics';
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
@@ -98,7 +98,15 @@ import {
     teiSearchSetProgramEpic,
     teiNewSearchEpic,
     teiSearchChangePageEpic,
+    searchTeiByTETIdEpic,
 } from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
+import {
+    teiSearchEpic as teiSearchEpicRelationshipsWidget,
+    teiSearchSetProgramEpic as teiSearchSetProgramEpicRelationshipsWidget,
+    teiNewSearchEpic as teiNewSearchEpicRelationshipsWidget,
+    teiSearchChangePageEpic as teiSearchChangePageEpicRelationshipsWidget,
+    searchTeiByTETIdEpic as searchTeiByTETIdEpicRelationshipsWidget,
+} from 'capture-core/components/Pages/common/TEIRelationshipsWidget/TeiSearch/epics/teiSearch.epics';
 import {
     asyncUpdateFieldEpic,
 } from 'capture-core/components/D2Form';
@@ -126,7 +134,7 @@ import {
     saveNoteForViewEventFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
-import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentComment/WidgetEnrollmentComment.epics';
+import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentNote/WidgetEnrollmentNote.epics';
 import {
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
@@ -285,6 +293,12 @@ export const epics = combineEpics(
     TeiRelationshipNewOrEditSearchEpic,
     teiSearchEpic,
     teiSearchChangePageEpic,
+    searchTeiByTETIdEpic,
+    teiSearchEpicRelationshipsWidget,
+    teiSearchSetProgramEpicRelationshipsWidget,
+    teiNewSearchEpicRelationshipsWidget,
+    teiSearchChangePageEpicRelationshipsWidget,
+    searchTeiByTETIdEpicRelationshipsWidget,
     teiSearchSetProgramEpic,
     teiNewSearchEpic,
     openRelationshipForNewSingleEventEpic,

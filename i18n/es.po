@@ -11,15 +11,15 @@
 # Philip Larsen Donnelly, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Janeth Cruz, 2024
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -210,14 +210,14 @@ msgstr "Usuario asignado"
 msgid "Search for user"
 msgstr "Buscar usuario"
 
+msgid "Notes"
+msgstr "Notas"
+
 msgid "Basic info"
 msgstr "Información básica"
 
 msgid "Status"
 msgstr "Estado"
-
-msgid "Comments"
-msgstr "Comentarios"
 
 msgid "Relationships"
 msgstr "Relaciones"
@@ -250,8 +250,8 @@ msgstr "Activo"
 msgid "Completed"
 msgstr "Completado"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "Agregue o cancele el comentario antes de guardar el evento"
+msgid "Please add or cancel note before saving the event"
+msgstr "Por favor, añada o cancele la nota antes de guardar el evento"
 
 msgid "Save and add another"
 msgstr "Guardar y agregar otro"
@@ -636,6 +636,8 @@ msgstr "El programa no existe"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
+"El programa seleccionado no es válido para la unidad organizativa "
+"seleccionada"
 
 msgid "Online"
 msgstr "Conectado"
@@ -646,14 +648,14 @@ msgstr "Desconectado"
 msgid "Syncing"
 msgstr "Sincronizando"
 
-msgid "Add comment"
-msgstr "Agregar comentario"
+msgid "Add note"
+msgstr "Añadir nota"
 
-msgid "You don't have access to write comments"
-msgstr "No tiene acceso para escribir comentarios."
+msgid "You don't have access to write notes"
+msgstr "No tienes acceso a escribir notas"
 
-msgid "Write comment"
-msgstr "Escribir comentario"
+msgid "Write note"
+msgstr "Escribir nota"
 
 msgid "was blanked out and hidden by your last action"
 msgstr "fue borrado y oculto por tu última acción"
@@ -822,7 +824,7 @@ msgid "There was an error loading the page"
 msgstr "Hubo un error al cargar la página"
 
 msgid "Choose an organisation unit to start reporting"
-msgstr ""
+msgstr "Elija una unidad organizativa para empezar a informar"
 
 msgid "No feedback for this event yet"
 msgstr "Aún no hay retroalimentación para este evento."
@@ -872,8 +874,12 @@ msgstr "O vea todos los eventos a los que puede acceder en {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Seleccione una unidad organizativa."
 
-msgid "New"
-msgstr "Nuevo"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
+"Usted no tiene acceso para crear un {{trackedEntityName}} en las selecciones"
+" actuales"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Elija los {{missingCategories}} para comenzar a informar"
@@ -881,8 +887,8 @@ msgstr "Elija los {{missingCategories}} para comenzar a informar"
 msgid "Save as new"
 msgstr "Guardar como nuevo"
 
-msgid "View enrollment"
-msgstr "Ver inscripción"
+msgid "New"
+msgstr "Nuevo"
 
 msgid "Create for"
 msgstr "Crear"
@@ -1037,7 +1043,7 @@ msgid "No results found for "
 msgstr "No se encontraron resultados para"
 
 msgid "Choose an organisation unit"
-msgstr ""
+msgstr "Elija una unidad organizativa"
 
 msgid "Clear selection"
 msgstr "Despejar selecciones"
@@ -1050,6 +1056,7 @@ msgstr "Buscar un programa"
 
 msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
+"Algunos programas están siendo filtrados por la unidad organizativa elegida"
 
 msgid "Show all programs"
 msgstr "Mostrar todos los programas"
@@ -1165,7 +1172,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Buscar un(a) {{trackedEntityName}} en {{programName}}"
 
 msgid "No tracked entity types available"
-msgstr ""
+msgstr "No hay tipos de entidades rastreadas disponibles"
 
 msgid "Assigned to"
 msgstr "Asignado a"
@@ -1207,9 +1214,6 @@ msgid ""
 msgstr ""
 "Debe proporcionar una razón para ver inscripciones en este programa "
 "protegido. Toda actividad será registrada en el log."
-
-msgid "Save comment"
-msgstr "Guardar comentario"
 
 msgid "Enrollment actions"
 msgstr "Acciones de inscripción"
@@ -1327,9 +1331,6 @@ msgstr "Comenzó en {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Propiedad de {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Última actualización {{date}}"
-
 msgid "Cancelled"
 msgstr "Cancelar"
 
@@ -1339,14 +1340,8 @@ msgstr "Establecer coordenadas"
 msgid "Add area"
 msgstr "Agregar área"
 
-msgid "Comments about this enrollment"
-msgstr "Comentarios sobre esta inscripción"
-
-msgid "Write a comment about this enrollment"
-msgstr "Escribe un comentario sobre esta inscripción"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "Esta inscripción no tiene comentarios"
+msgid "Please add or cancel the note before saving the event"
+msgstr "Por favor, añada o cancele la nota antes de guardar el evento"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1359,20 +1354,20 @@ msgstr "Guardando en {{stageName}} para {{programName}} en {{orgUnitName}}"
 msgid "program or stage is invalid"
 msgstr "el programa o la etapa no es válido"
 
+msgid "Notes about this enrollment"
+msgstr "Notas sobre esta inscripción"
+
+msgid "Write a note about this enrollment"
+msgstr "Escriba una nota sobre esta inscripción"
+
+msgid "This enrollment doesn't have any notes"
+msgstr "Esta inscripción no tiene notas"
+
 msgid "Error"
 msgstr "Error"
 
 msgid "Warning"
 msgstr "Advertencia"
-
-msgid "Comments about this event"
-msgstr "Comentarios sobre este evento"
-
-msgid "Write a comment about this event"
-msgstr "Escriba un comentario sobre este evento"
-
-msgid "This event doesn't have any comments"
-msgstr "Este evento no tiene comentarios."
 
 msgid "stage not found in rules execution"
 msgstr "etapa no encontrada en la ejecución de reglas"
@@ -1395,6 +1390,15 @@ msgstr "Evento completado"
 
 msgid "Back to all stages and events"
 msgstr "Volver a todas las etapas y eventos"
+
+msgid "Notes about this event"
+msgstr "Notas sobre este acto"
+
+msgid "Write a note about this event"
+msgstr "Escriba una nota sobre este evento"
+
+msgid "This event doesn't have any notes"
+msgstr "Este evento no tiene notas"
 
 msgid "Schedule date info"
 msgstr "Programar información de fecha"
@@ -1445,11 +1449,14 @@ msgstr "Programar información"
 msgid "Schedule date / Due date"
 msgstr "Fecha de programación/fecha de vencimiento"
 
-msgid "Event comments"
-msgstr "Comentarios del evento"
+msgid "Event notes"
+msgstr "Notas del evento"
 
-msgid "Write a comment about this scheduled event"
-msgstr "Escriba un comentario sobre este evento programado"
+msgid "Write a note about this scheduled event"
+msgstr "Escriba una nota sobre este evento programado"
+
+msgid "Save note"
+msgstr "Guardar Nota"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1519,21 +1526,30 @@ msgid "tracked entity instance"
 msgstr "instancia de entidad rastreada"
 
 msgid "Link to an existing {{linkableStageLabel}}"
-msgstr ""
+msgstr "Enlace a un {{linkableStageLabel}}"
 
 msgid "Choose a {{linkableStageLabel}}"
-msgstr ""
+msgstr "Elija una {{linkableStageLabel}}"
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr "{{ linkableStageLabel }} no es repetible"
+
+msgid "{{ linkableStageLabel }} has no linkable events"
+msgstr "{{ linkableStageLabel }} no tiene eventos enlazables"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
+"Relaciones ambiguas, póngase en contacto con el administrador del sistema"
 
 msgid ""
 "Enter {{linkableStageLabel}} details in the next step after completing this "
 "{{currentStageLabel}}."
 msgstr ""
+"Introduzca los detalles de {{linkableStageLabel}} en el siguiente paso "
+"después de completar este {{currentStageLabel}}."
 
 msgid "Enter details now"
-msgstr ""
+msgstr "Introducir datos ahora"
 
 msgid "Link to an existing"
 msgstr ""
@@ -1545,7 +1561,7 @@ msgid "Report date"
 msgstr "Fecha de reporte"
 
 msgid "Please select a valid event"
-msgstr ""
+msgstr "Seleccione un evento válido"
 
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
@@ -1572,9 +1588,9 @@ msgstr ""
 
 msgid "{{ count }} event"
 msgid_plural "{{ count }} event"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{{ count }} evento"
+msgstr[1] "{{count}} eventos"
+msgstr[2] "{{count}} eventos"
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} atrasado(s)"

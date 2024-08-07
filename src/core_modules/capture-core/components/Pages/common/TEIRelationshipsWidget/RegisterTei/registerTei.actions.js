@@ -2,8 +2,8 @@
 import { actionCreator } from '../../../../../actions/actions.utils';
 
 export const actionTypes = {
-    REGISTER_TEI_INITIALIZE: 'InitializeRegisterTei',
-    REGISTER_TEI_INITIALIZE_FAILED: 'InitializeRegisterTeiFailed',
+    REGISTER_TEI_INITIALIZE: 'RelationshipsWidget.InitializeRegisterTei',
+    REGISTER_TEI_INITIALIZE_FAILED: 'RelationshipsWidget.InitializeRegisterTeiFailed',
 };
 
 export const initializeRegisterTei = (

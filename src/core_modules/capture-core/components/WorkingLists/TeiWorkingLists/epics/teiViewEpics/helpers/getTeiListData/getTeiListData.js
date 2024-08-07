@@ -1,7 +1,12 @@
 // @flow
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { convertToClientTeis } from './convertToClientTeis';
-import { getSubvalues, getApiFilterQueryArgs, getMainApiFilterQueryArgs } from '../getListDataCommon';
+import {
+    getSubvalues,
+    getApiFilterQueryArgs,
+    getMainApiFilterQueryArgs,
+    getOrderQueryArgs,
+} from '../getListDataCommon';
 import type { RawQueryArgs } from './types';
 import type { InputMeta } from './getTeiListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
@@ -20,7 +25,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
 ): { [string]: any } => ({
     ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
     ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-    order: `${sortById}:${sortByDirection}`,
+    order: getOrderQueryArgs({ sortById, sortByDirection, withAPINameConverter: true }),
     page,
     pageSize,
     orgUnit,

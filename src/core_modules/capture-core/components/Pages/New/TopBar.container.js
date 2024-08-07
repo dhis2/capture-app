@@ -82,7 +82,7 @@ export const TopBar = ({
             onStartAgain={() => reset()}
             formIsOpen={formIsOpen}
         >
-            {teiId && (
+            {teiId ? (
                 <SingleLockedSelect
                     displayOnly
                     ready={Boolean(trackedEntityName && teiDisplayName)}
@@ -97,7 +97,7 @@ export const TopBar = ({
                     title={trackedEntityName}
                     isUserInteractionInProgress={isUserInteractionInProgress}
                 />
-            )}
+            ) : <></>}
             <TopBarActions
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}

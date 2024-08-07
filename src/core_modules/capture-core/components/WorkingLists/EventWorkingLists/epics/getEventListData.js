@@ -139,6 +139,8 @@ export const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categ
         ...getMainApiFilterQueryArguments(queryArgs.filters, mainColumns),
         ...getApiCategoriesQueryArgument(queryArgs.categories, categoryCombinationId),
     };
+
+    apiQueryArgs.order.includes('default') && delete apiQueryArgs.order;
     apiQueryArgs.hasOwnProperty('categories') && delete apiQueryArgs.categories;
     apiQueryArgs.hasOwnProperty('sortById') && delete apiQueryArgs.sortById;
     apiQueryArgs.hasOwnProperty('sortByDirection') && delete apiQueryArgs.sortByDirection;

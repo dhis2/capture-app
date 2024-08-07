@@ -16,6 +16,7 @@ import {
     searchTeiResultRetrieved,
     searchTeiFailed,
     setProgramAndTrackedEntityType,
+    searchViaUniqueIdOnScopeTrackedEntityType,
 } from '../actions/teiSearch.actions';
 import {
     actionTypes as programSelectorActionTypes,
@@ -43,6 +44,32 @@ const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
 
 const getPagingQueryArgs = (pageNumber: ?number = 1) => ({ page: pageNumber, pageSize: 5 });
 
+export const searchTeiByTETIdEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { absoluteApiPath, querySingleResource }: ApiUtils,
+) =>
+    action$.pipe(
+        ofType(actionTypes.SEARCH_TE_IN_TET_SCOPE),
+        switchMap((action) => {
+            const { selectedProgramId, searchId, formId, searchGroupId, programQueryArgs } = action.payload;
+            const { attributes, trackedEntityType } = getTrackerProgram(selectedProgramId);
+            const { program, ...restQueryArgs } = programQueryArgs;
+            const queryArgs = { ...restQueryArgs, trackedEntityType: trackedEntityType.id };
+            return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
+                map(
+                    ({ trackedEntityInstanceContainers, pagingData }) =>
+                        searchTeiResultRetrieved(
+                            { trackedEntityInstanceContainers, currentPage: pagingData.currentPage },
+                            formId,
+                            searchGroupId,
+                            searchId,
+                        ),
+                    catchError(() => of(searchTeiFailed(formId, searchGroupId, searchId))),
+                ),
+            );
+        }),
+    );
 
 const searchTei = ({
     state,
@@ -100,14 +127,25 @@ const searchTei = ({
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
-    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource)).pipe(
-        map(({ trackedEntityInstanceContainers, pagingData }) =>
-            searchTeiResultRetrieved(
+    return from(getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, selectedProgramId)).pipe(
+        map(({ trackedEntityInstanceContainers, pagingData }) => {
+            if (searchGroup.unique && trackedEntityInstanceContainers.length === 0 && queryArgs.program) {
+                return searchViaUniqueIdOnScopeTrackedEntityType({
+                    selectedProgramId,
+                    searchId,
+                    formId,
+                    searchGroupId,
+                    programQueryArgs: queryArgs,
+                });
+            }
+
+            return searchTeiResultRetrieved(
                 { trackedEntityInstanceContainers, currentPage: pagingData.currentPage },
                 formId,
                 searchGroupId,
                 searchId,
-            )),
+            );
+        }),
         catchError(() => of(searchTeiFailed(formId, searchGroupId, searchId))),
     );
 };

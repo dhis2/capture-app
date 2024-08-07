@@ -29,3 +29,9 @@ Feature: User interacts with a single event page view/edit form
     And you search for an existing unique id and link to the person
     And you click the delete relationship button
     Then the relationship is deleted
+
+  Scenario: The user can see the enroll form for a tracked entity by adding a relationship
+    Given you land on the view event page with event id: a2d8c7cdd2d
+    And you navigate to register a person relationship
+    And you select the TB Program
+    Then the TB program enroll form is loaded

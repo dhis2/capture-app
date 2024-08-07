@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# 晓东 林 <13981924470@126.com>, 2024
 # easylin <lin_xd@126.com>, 2024
+# 晓东 林 <13981924470@126.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2024\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -193,14 +193,14 @@ msgstr "分配的用户"
 msgid "Search for user"
 msgstr "搜索用户 "
 
+msgid "Notes"
+msgstr "笔记"
+
 msgid "Basic info"
 msgstr "基本信息"
 
 msgid "Status"
 msgstr "状态"
-
-msgid "Comments"
-msgstr "评论"
 
 msgid "Relationships"
 msgstr "关系"
@@ -230,8 +230,8 @@ msgstr "活动的"
 msgid "Completed"
 msgstr "已完成"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "保存事件前请添加或取消被或许"
+msgid "Please add or cancel note before saving the event"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "保存并另外添加"
@@ -612,14 +612,14 @@ msgstr "离线"
 msgid "Syncing"
 msgstr "同步"
 
-msgid "Add comment"
-msgstr "添加备注"
+msgid "Add note"
+msgstr "添加笔记"
 
-msgid "You don't have access to write comments"
-msgstr "您无权发表评论"
+msgid "You don't have access to write notes"
+msgstr ""
 
-msgid "Write comment"
-msgstr "写备注"
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr "被你的最后一个动作清空并隐藏"
@@ -819,8 +819,10 @@ msgstr "或者在{{program}}中查看您可以访问的所有事件"
 msgid "Please select an organisation unit."
 msgstr "请选择一个组织单位。"
 
-msgid "New"
-msgstr "新建"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
@@ -828,8 +830,8 @@ msgstr "选择{{missingCategories}}开始报告"
 msgid "Save as new"
 msgstr "另存为新"
 
-msgid "View enrollment"
-msgstr "查看报名"
+msgid "New"
+msgstr "新建"
 
 msgid "Create for"
 msgstr "为创建"
@@ -1132,9 +1134,6 @@ msgid ""
 "program. All activity will be logged."
 msgstr "您必须提供一个理由来检查此受保护计划的注册情况。所有活动都将被记录。"
 
-msgid "Save comment"
-msgstr "保存注释"
-
 msgid "Enrollment actions"
 msgstr "报名操作"
 
@@ -1242,9 +1241,6 @@ msgstr "始于{{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "由{{ownerOrgUnit}}拥有"
 
-msgid "Last updated {{date}}"
-msgstr "最近更新的{{date}}"
-
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -1254,14 +1250,8 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Comments about this enrollment"
-msgstr "关于本次报名的评论"
-
-msgid "Write a comment about this enrollment"
-msgstr "写一篇关于这个报名的评论"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "本次报名没有任何评论"
+msgid "Please add or cancel the note before saving the event"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索组织机构。请稍后再试。"
@@ -1272,20 +1262,20 @@ msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
 msgid "program or stage is invalid"
 msgstr "项目或阶段无效"
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "错误"
 
 msgid "Warning"
 msgstr "警告"
-
-msgid "Comments about this event"
-msgstr "对本次事件的评论"
-
-msgid "Write a comment about this event"
-msgstr "写一篇关于该事件的评论"
-
-msgid "This event doesn't have any comments"
-msgstr "此事件没有任何评论"
 
 msgid "stage not found in rules execution"
 msgstr "在规则执行中找不到阶段"
@@ -1307,6 +1297,15 @@ msgstr "事件完成"
 
 msgid "Back to all stages and events"
 msgstr "回到所有阶段和事件"
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "预定日期信息"
@@ -1344,11 +1343,14 @@ msgstr "日程信息"
 msgid "Schedule date / Due date"
 msgstr "计划日期/截止日期"
 
-msgid "Event comments"
-msgstr "事件评论、注释"
+msgid "Event notes"
+msgstr ""
 
-msgid "Write a comment about this scheduled event"
-msgstr "写一篇关于这个预定事件的评论"
+msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Save note"
+msgstr "保存笔记"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1411,6 +1413,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"

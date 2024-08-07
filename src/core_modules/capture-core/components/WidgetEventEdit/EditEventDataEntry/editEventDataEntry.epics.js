@@ -208,8 +208,9 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
         map((action) => {
             const { eventId, enrollmentId } = action.payload;
             const params = { enrollmentId };
+            const serverData = { events: [{ event: eventId }] };
             dependencies.history.push(`/enrollment?${buildUrlQueryString(params)}`);
-            return startDeleteEventDataEntry(eventId, params);
+            return startDeleteEventDataEntry(serverData, eventId, params);
         }));
 
 export const startCreateNewAfterCompletingEpic = (

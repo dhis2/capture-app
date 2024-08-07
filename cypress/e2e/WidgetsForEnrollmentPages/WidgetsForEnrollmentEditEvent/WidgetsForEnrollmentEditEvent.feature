@@ -57,8 +57,8 @@ Feature: The user interacts with the widgets on the enrollment edit event
   Scenario: User can add note on edit event page view mode
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be loaded
-    When you fill in the comment: new test comment
-    Then list should contain the new comment: new test comment
+    When you fill in the note: new test note
+    Then list should contain the new note: new test note
 
   # DHIS2-17635
   @v<=41
@@ -66,7 +66,7 @@ Feature: The user interacts with the widgets on the enrollment edit event
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be loaded
     When you click edit mode
-    Then list should contain the new comment: new test comment
+    Then list should contain the new note: new test note
 
   Scenario: You can assign a user to a event
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=veuwiLC2x0e&orgUnitId=g8upMTyEZGZ

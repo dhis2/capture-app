@@ -1,13 +1,12 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
 import React, { Component, type ComponentType } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import { Radio, colors, spacersNum } from '@dhis2/ui';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+import { Radio, colors, spacersNum, FieldSet, Label } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { singleOrientations } from './singleSelectBoxes.const';
 import type { Props } from './singleSelectBoxes.types';
+import { FormGroup } from '../FormGroup.component';
+
 
 const styles = ({ typography, palette }) => ({
     label: typography.formFieldTitle,
@@ -17,7 +16,7 @@ const styles = ({ typography, palette }) => ({
     iconDeselected: {
         fill: colors.grey700,
     },
-    checkbox: {
+    radio: {
         marginTop: spacersNum.dp8,
         marginBottom: spacersNum.dp16,
     },
@@ -52,7 +51,7 @@ class SingleSelectBoxesPlain extends Component<Props> {
                 name={`singleSelectBoxes-${index}`}
                 onChange={(e: Object) => { this.handleOptionChange(e, value); }}
                 value={value}
-                className={classes.checkbox}
+                className={classes.radio}
                 dense
             />
         ));
@@ -112,7 +111,7 @@ class SingleSelectBoxesPlain extends Component<Props> {
 
         return (
             <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
-                <FormControl component="fieldset">
+                <FieldSet>
                     {
                         (() => {
                             if (!label) {
@@ -120,19 +119,17 @@ class SingleSelectBoxesPlain extends Component<Props> {
                             }
 
                             return (
-                                <FormLabel
-                                    component="label"
+                                <Label
                                     required={!!required}
-                                    classes={this.labelClasses}
-                                    focused={false}
+                                    className={this.labelClasses}
                                 >
                                     {label}
-                                </FormLabel>
+                                </Label>
                             );
                         })()
                     }
-                    {this.renderBoxes()}
-                </FormControl>
+                    { this.renderBoxes() }
+                </FieldSet>
             </div>
         );
     }

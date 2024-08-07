@@ -28,7 +28,7 @@ const loadingIndicatorStyle = {
     width: 36,
 };
 
-const headerText = i18n.t('Comments');
+const headerText = i18n.t('Notes');
 
 const getStyles = (theme: Theme) => ({
     badge: {
