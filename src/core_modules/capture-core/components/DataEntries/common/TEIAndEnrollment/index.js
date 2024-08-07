@@ -10,4 +10,5 @@ export {
 } from './useMetadataForRegistrationForm/hooks/useDataEntryFormConfig';
 export {
     useOptionSetsForAttributes,
+    FieldElementObjectTypes,
 } from './useMetadataForRegistrationForm';
