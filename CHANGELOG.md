@@ -1,3 +1,10 @@
+# [100.75.0](https://github.com/dhis2/capture-app/compare/v100.74.0...v100.75.0) (2024-08-07)
+
+
+### Features
+
+* [DHIS2-17726] Plugins in Profile Widget ([#3709](https://github.com/dhis2/capture-app/issues/3709)) ([d783ade](https://github.com/dhis2/capture-app/commit/d783ade253e27badf03d267d8a3935186b170fd8))
+
 # [100.74.0](https://github.com/dhis2/capture-app/compare/v100.73.0...v100.74.0) (2024-08-07)
 
 
