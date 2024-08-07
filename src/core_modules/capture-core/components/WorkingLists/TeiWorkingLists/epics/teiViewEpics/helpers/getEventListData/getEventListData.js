@@ -7,12 +7,13 @@ import {
     getMainApiFilterQueryArgs,
     getApiFilterAttributesQueryArgs,
     splitFilters,
+    getOrderQueryArgs,
 } from '../getListDataCommon';
 import type { RawQueryArgs } from './types';
 import type { InputMeta } from './getEventListData.types';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
 import { addTEIsData } from './addTEIsData';
-import { getColumnsQueryArgs, getOrderQueryArgs } from './getColumnsQueryArgs';
+import { getColumnsQueryArgs } from './getColumnsQueryArgs';
 import { getScheduledDateQueryArgs } from './getScheduledDateQueryArgs';
 
 const createApiEventQueryArgs = (
@@ -34,7 +35,7 @@ const createApiEventQueryArgs = (
         ...getApiFilterQueryArgs(rawSplitFilters.filters, filtersOnlyMetaForDataFetching),
         ...getApiFilterAttributesQueryArgs(rawSplitFilters.filterAttributes, filtersOnlyMetaForDataFetching),
         ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
-        order: getOrderQueryArgs(sortById, sortByDirection),
+        order: getOrderQueryArgs({ sortById, sortByDirection, withAPINameConverter: true }),
         page,
         pageSize,
         orgUnit,
@@ -82,6 +83,7 @@ export const getEventListData = async (
 
     const trackedEntityIds = apiEvents
         .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])
+        .filter(trackedEntityId => trackedEntityId)
         .join(';');
 
     const { url: urlTEIs, queryParams: queryParamsTEIs } = {

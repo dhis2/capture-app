@@ -7,6 +7,7 @@ import {
 } from '../TEIFilters/clientConfigToApiTEIFilterQueryConverter';
 import type { TeiWorkingListsColumnConfigs, ApiTrackerQueryCriteria } from '../../types';
 import type { FiltersData } from '../../../WorkingListsBase';
+import { getOrderQueryArgs } from '../../epics';
 
 export const buildArgumentsForTemplate = ({
     filters,
@@ -59,7 +60,7 @@ export const buildArgumentsForTemplate = ({
         scheduledAt,
         attributeValueFilters,
         dataFilters,
-        order: `${sortById}:${sortByDirection}`,
+        order: getOrderQueryArgs({ sortById, sortByDirection }),
         displayColumnOrder: visibleColumnIds,
         programStage: programStageId,
     };

@@ -1,7 +1,5 @@
 Feature: User interacts with the Enrollment New Event Workspace
 
-  # DHIS2-17657
-  @skip
   Scenario: User can complete a Lab monitoring Event
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
@@ -12,9 +10,8 @@ Feature: User interacts with the Enrollment New Event Workspace
     And you click the Complete button
     Then all events should be displayed
     And the newest event in datatable nr 0 should contain Completed
+    And the events in Lab monitoring are deleted
 
-  # DHIS2-17657
-  @skip
   Scenario: User can save a Sputum smear microscopy test without completing
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
     And the enrollment overview is finished loading
@@ -24,9 +21,10 @@ Feature: User interacts with the Enrollment New Event Workspace
     And the user selects Positive
     And you click the Save without completing button
     Then all events should be displayed
-    And the newest event in datatable nr 2 should contain Active
-    And the newest event in datatable nr 2 should contain 13
-    And the newest event in datatable nr 2 should contain Positive
+    And the newest event in datatable nr 1 should contain Active
+    And the newest event in datatable nr 1 should contain 13
+    And the newest event in datatable nr 1 should contain Positive
+    And the events in Sputum smear microscopy are deleted
 
   Scenario: Required fields should display an error when saving without data
     Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
@@ -87,6 +85,6 @@ Feature: User interacts with the Enrollment New Event Workspace
     And the enrollment status is active
     And you type 2021-10-15 in the input number 0
     And you select Died in the select number 0
-    And the user completes the event
+    And you click the Complete button
     And the user completes the enrollment
     Then the user sees the enrollment status and recently added event in Case outcome event status is completed
