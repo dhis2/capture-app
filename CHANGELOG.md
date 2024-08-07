@@ -1,3 +1,10 @@
+# [100.74.0](https://github.com/dhis2/capture-app/compare/v100.73.0...v100.74.0) (2024-08-07)
+
+
+### Features
+
+* [DHIS2-17591][DHIS2-17607] Plugins in event forms ([#3684](https://github.com/dhis2/capture-app/issues/3684)) ([205b9f5](https://github.com/dhis2/capture-app/commit/205b9f5746f3d9b3d0d28035fd99e40b5649003c))
+
 # [100.73.0](https://github.com/dhis2/capture-app/compare/v100.72.0...v100.73.0) (2024-08-07)
 
 
