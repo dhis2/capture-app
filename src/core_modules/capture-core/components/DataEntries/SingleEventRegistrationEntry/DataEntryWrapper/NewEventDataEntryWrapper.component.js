@@ -11,6 +11,7 @@ import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { useLocationQuery } from '../../../../utils/routing';
 import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
+import { useMetadataForProgramStage } from '../../common/ProgramStage/useMetadataForProgramStage';
 
 const getStyles = () => ({
     flexContainer: {
@@ -41,13 +42,12 @@ const getStyles = () => ({
 
 const NewEventDataEntryWrapperPlain = ({
     classes,
-    formFoundation,
     formHorizontal,
-    stage,
     onFormLayoutDirectionChange,
 }: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
     const orgUnitId = useLocationQuery().orgUnitId;
+    const { formFoundation, stage } = useMetadataForProgramStage({ programId });
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
     const titleText = useScopeTitleText(programId);
