@@ -18,7 +18,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
             const uid = uuid();
             const {
                 scheduleDate,
-                comments,
+                notes,
                 programId,
                 orgUnitId,
                 stageId,
@@ -47,7 +47,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
                 program: programId,
                 programStage: stageId,
                 status: 'SCHEDULE',
-                notes: comments ?? [],
+                notes: notes ?? [],
                 assignedUser,
             }] };
 

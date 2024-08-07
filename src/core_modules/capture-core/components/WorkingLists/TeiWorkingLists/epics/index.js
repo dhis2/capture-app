@@ -11,4 +11,6 @@ export {
     deleteProgramStageTemplateEpic,
     updateProgramStageTemplateEpic,
     createApiTrackedEntitiesQueryArgs,
+    getOrderQueryArgs,
+    DEFAULT_SORT,
 } from './teiViewEpics';

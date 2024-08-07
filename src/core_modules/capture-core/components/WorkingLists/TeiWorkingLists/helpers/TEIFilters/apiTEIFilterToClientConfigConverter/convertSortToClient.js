@@ -1,10 +1,7 @@
 // @flow
 import type { TeiColumnsMetaForDataFetching } from '../../../types';
+import { DEFAULT_SORT } from '../../../epics';
 
-const DEFAULT_SORT = {
-    sortById: 'createdAt',
-    sortByDirection: 'desc',
-};
 
 export const convertSortOrder = (order: ?string, columnsMetaForDataFetching?: TeiColumnsMetaForDataFetching) => {
     const sortOrderParts = order && order.split(':');

@@ -6,7 +6,7 @@ type Attribute = {
     attribute: string,
     value: string,
     valueType: $Keys<typeof dataElementTypes>,
-    optionSet: { options: Array<{ name: string, code: string }> },
+    optionSet: { options: Array<{ name: string, code: string, displayName: string }> },
 }
 
 export const convertClientToView = (clientAttribute: Attribute) => {
@@ -20,7 +20,7 @@ export const convertClientToView = (clientAttribute: Attribute) => {
         const options = optionSet.options.map(
             option =>
                 new Option((o) => {
-                    o.text = option.name;
+                    o.text = option.displayName;
                     o.value = option.code;
                 }),
         );

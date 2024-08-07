@@ -134,9 +134,7 @@ function wrapReducers(reducer: Reducer<any, Action>, reducerWrappers: ReducerWra
 }
 
 function buildReducer(reducerDescription: ReducerDescription) {
-    const currentEnvironment = process && process.env && process.env.NODE_ENV && process.env.NODE_ENV;
-
-    let reducer = currentEnvironment === environments.prod
+    let reducer = process.env.NODE_ENV === environments.prod
         ? getProductionReducer(reducerDescription)
         : getDevelopmentReducer(reducerDescription);
 

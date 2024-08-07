@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
+"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -202,14 +202,14 @@ msgstr "Utilizador atribuído"
 msgid "Search for user"
 msgstr "Pesquisar por utilizador"
 
+msgid "Notes"
+msgstr "Notas"
+
 msgid "Basic info"
 msgstr "Informação básica"
 
 msgid "Status"
 msgstr "Status"
-
-msgid "Comments"
-msgstr "Comentários"
 
 msgid "Relationships"
 msgstr "Relacionamentos"
@@ -242,8 +242,8 @@ msgstr "Ativo"
 msgid "Completed"
 msgstr "Concluído"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "Adicione ou cancele o comentário antes de salvar o evento"
+msgid "Please add or cancel note before saving the event"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "Gravar e adicionar outro"
@@ -637,14 +637,14 @@ msgstr "Desligado"
 msgid "Syncing"
 msgstr "Sincronizando"
 
-msgid "Add comment"
-msgstr "Adicionar comentário"
+msgid "Add note"
+msgstr "Adicionar uma nota"
 
-msgid "You don't have access to write comments"
-msgstr "Não tem acesso para escrever comentários"
+msgid "You don't have access to write notes"
+msgstr ""
 
-msgid "Write comment"
-msgstr "Escreva um comentário"
+msgid "Write note"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr "foi apagado e escondido pela sua última ação"
@@ -861,8 +861,10 @@ msgstr "Ou veja todos os eventos acessíveis a você no {{program}}"
 msgid "Please select an organisation unit."
 msgstr "Selecione uma unidade organizacional."
 
-msgid "New"
-msgstr "Novo"
+msgid ""
+"You don't have access to create a {{trackedEntityName}} in the current "
+"selections"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Escolha as {{missingCategories}} para começar a relatar"
@@ -870,8 +872,8 @@ msgstr "Escolha as {{missingCategories}} para começar a relatar"
 msgid "Save as new"
 msgstr "Gravar como novo"
 
-msgid "View enrollment"
-msgstr "Ver inscrição"
+msgid "New"
+msgstr "Novo"
 
 msgid "Create for"
 msgstr "Criar para"
@@ -1194,9 +1196,6 @@ msgstr ""
 "Deve fornecer um motivo para verificar as inscrições neste programa "
 "protegido. Todas as atividades serão registradas."
 
-msgid "Save comment"
-msgstr "Gravar comentário"
-
 msgid "Enrollment actions"
 msgstr "Ações de inscrição"
 
@@ -1308,9 +1307,6 @@ msgstr "Iniciado em {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Propriedade de {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Última atualização em {{date}}"
-
 msgid "Cancelled"
 msgstr "Cancelado"
 
@@ -1320,14 +1316,8 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Comments about this enrollment"
-msgstr "Comentários sobre esta inscrição"
-
-msgid "Write a comment about this enrollment"
-msgstr "Escreva um comentário sobre esta inscrição"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "Esta inscrição não possui comentários"
+msgid "Please add or cancel the note before saving the event"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1340,20 +1330,20 @@ msgstr "Gravar em {{stageName}} para {{programName}} em {{orgUnitName}}"
 msgid "program or stage is invalid"
 msgstr "programa ou estágio é inválido"
 
+msgid "Notes about this enrollment"
+msgstr ""
+
+msgid "Write a note about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any notes"
+msgstr ""
+
 msgid "Error"
 msgstr "Erro"
 
 msgid "Warning"
 msgstr "Aviso"
-
-msgid "Comments about this event"
-msgstr "Comentários sobre este evento"
-
-msgid "Write a comment about this event"
-msgstr "Escreva um comentário sobre este evento"
-
-msgid "This event doesn't have any comments"
-msgstr "Este evento não possui comentários"
 
 msgid "stage not found in rules execution"
 msgstr "estágio não encontrado na execução das regras"
@@ -1375,6 +1365,15 @@ msgstr "Evento concluído"
 
 msgid "Back to all stages and events"
 msgstr "Voltar para todos os palcos e eventos"
+
+msgid "Notes about this event"
+msgstr ""
+
+msgid "Write a note about this event"
+msgstr ""
+
+msgid "This event doesn't have any notes"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "Informação da data da programação"
@@ -1419,11 +1418,14 @@ msgstr "Informação de programação"
 msgid "Schedule date / Due date"
 msgstr "Data de programação / Data de vencimento"
 
-msgid "Event comments"
-msgstr "Comentários do evento"
+msgid "Event notes"
+msgstr ""
 
-msgid "Write a comment about this scheduled event"
-msgstr "Escreva um comentário sobre este evento agendado"
+msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Save note"
+msgstr "Gravar notas"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1493,6 +1495,12 @@ msgid "Link to an existing {{linkableStageLabel}}"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} is not repeatable"
+msgstr ""
+
+msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"

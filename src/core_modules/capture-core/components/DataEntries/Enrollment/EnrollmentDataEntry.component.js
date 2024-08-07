@@ -392,6 +392,7 @@ type PreEnrollmentDataEntryProps = {
     teiId?: ?string,
     firstStageMetaData?: ?{ stage: ProgramStage },
     formFoundation: RenderFoundation,
+    enrollmentMetadata: Enrollment,
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
@@ -411,6 +412,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             programId,
             orgUnitId: orgUnit.id,
             trackedEntityInstanceId: teiId,
+            trackedEntityTypeId: this.props.enrollmentMetadata.trackedEntityType.id,
             onGetUnsavedAttributeValues,
         };
     }

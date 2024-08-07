@@ -55,6 +55,7 @@ export const DataEntry = ({
             programId: programAPI.id,
             orgUnitId,
             trackedEntityInstanceId,
+            trackedEntityTypeId: programAPI.trackedEntityType.id,
         }),
         [programAPI, orgUnitId, trackedEntityInstanceId],
     );
