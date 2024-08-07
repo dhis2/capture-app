@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { useRef, useState } from 'react';
 import { Button, Layer, Popper } from '@dhis2/ui';
 
@@ -42,6 +43,7 @@ export const OverflowButton = ({
     return (
         <div ref={anchorRef}>
             <Button
+                aria-label={label ?? i18n.t('More')}
                 primary={primary}
                 secondary={secondary}
                 dataTest={dataTest}

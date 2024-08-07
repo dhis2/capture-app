@@ -298,15 +298,23 @@ export class FormBuilder extends React.Component<Props> {
 
     componentDidUpdate(prevProps: Props) {
         const { fieldsUI, fields } = this.props;
+        console.log(`Form "${this.props.formBuilderId}" updated`);
+        console.time(`Time measurement for ${this.props.formBuilderId}`);
 
-        if (!isEqual(prevProps.fieldsUI, fieldsUI)) {
-            const pendingValidationFields = Object.keys(fieldsUI).filter(key => fieldsUI[key].pendingValidation);
+        if (!isEqual(fieldsUI, prevProps.fieldsUI)) {
+            const fieldsToValidate = fields.reduce((acc, field) => {
+                const fieldUI = fieldsUI[field.id];
+                if (fieldUI && fieldUI.pendingValidation) {
+                    acc.push(field);
+                }
+                return acc;
+            }, []);
 
-            if (pendingValidationFields.length !== 0 && !this.validateAllCancelablePromise) {
-                const fieldsToValidate = fields.filter(field => pendingValidationFields.includes(field.id));
+            if (fieldsToValidate.length !== 0 && !this.validateAllCancelablePromise) {
                 this.validateFields(this.props, fieldsToValidate);
             }
         }
+        console.timeEnd(`Time measurement for ${this.props.formBuilderId}`);
     }
 
     getCleanUpData() {

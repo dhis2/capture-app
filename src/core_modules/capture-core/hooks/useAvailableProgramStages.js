@@ -20,19 +20,21 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
             programError,
         }));
     }
-    const availableProgramStages = useMemo(
+    return useMemo(
         () =>
             programStage.allowGenerateNextVisit &&
             !programLoading &&
-            program?.programStages?.map((currentStage) => {
-                const eventCount = enrollment?.events
-                    ?.filter(event => event.programStage === currentStage.id)
-                    ?.length;
-                const isAvailableStage = currentStage.repeatable ||
+            (program?.programStages
+                ?.map((currentStage) => {
+                    const eventCount = enrollment?.events
+                        ?.filter(event => event.programStage === currentStage.id)
+                        ?.length;
+                    const isAvailableStage = currentStage.repeatable ||
                     (programStage.id !== currentStage.id && eventCount === 0);
 
-                return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
-            }),
+                    return { id: currentStage.id, isAvailableStage, eventCount, currentStage };
+                })
+                .filter(stage => stage.isAvailableStage) ?? []),
         [
             enrollment?.events,
             program?.programStages,
@@ -41,6 +43,4 @@ export const useAvailableProgramStages = (programStage: ProgramStage, teiId: str
             programStage.id,
         ],
     );
-
-    return availableProgramStages ? availableProgramStages.filter(stage => stage.isAvailableStage) : [];
 };

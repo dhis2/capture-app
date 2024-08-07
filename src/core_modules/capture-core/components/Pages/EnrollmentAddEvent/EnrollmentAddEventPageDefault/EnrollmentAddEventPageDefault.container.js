@@ -98,12 +98,12 @@ export const EnrollmentAddEventPageDefault = ({
         dispatch(deleteEnrollment({ enrollmentId }));
         history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
-    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
-    const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
+    const onEnrollmentError = useCallback(message => dispatch(showEnrollmentError({ message })), [dispatch]);
+    const onEnrollmentSuccess = useCallback(() => dispatch(fetchEnrollments()), [dispatch]);
 
-    const onAccessLostFromTransfer = () => {
+    const onAccessLostFromTransfer = useCallback(() => {
         history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
-    };
+    }, [history, orgUnitId, programId]);
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
@@ -111,7 +111,8 @@ export const EnrollmentAddEventPageDefault = ({
     const { program } = useProgramInfo(programId);
     const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(selectedProgramStage?.programRules ?? []));
+    const programRules = useMemo(() => program.programRules.concat(selectedProgramStage?.programRules ?? []), [program, selectedProgramStage]);
+    const hideWidgets = useHideWidgetByRuleLocations(programRules);
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
 
