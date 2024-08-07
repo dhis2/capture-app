@@ -7,8 +7,8 @@ export { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '.
 export type { DataEntryFormConfig } from './useMetadataForRegistrationForm/types';
 export {
     useDataEntryFormConfig,
-    FieldElementObjectTypes,
 } from './useMetadataForRegistrationForm/hooks/useDataEntryFormConfig';
 export {
     useOptionSetsForAttributes,
+    FieldElementObjectTypes,
 } from './useMetadataForRegistrationForm';
