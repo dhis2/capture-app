@@ -61,11 +61,13 @@ const renderComponent = (
     );
 };
 
-const getPropsForPlugin = ({ program, enrollmentId, teiId, orgUnitId }) => ({
+const getPropsForPlugin = ({ program, enrollmentId, teiId, orgUnitId, programStage, eventId }) => ({
     programId: program.id,
     enrollmentId,
     teiId,
     orgUnitId,
+    programStageId: programStage?.id,
+    eventId,
 });
 
 const renderPlugin = (
