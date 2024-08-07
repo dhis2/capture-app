@@ -1,3 +1,10 @@
+# [100.73.0](https://github.com/dhis2/capture-app/compare/v100.72.0...v100.73.0) (2024-08-07)
+
+
+### Features
+
+* [DHIS2-16125] hide program stage under certain circumstances ([#3735](https://github.com/dhis2/capture-app/issues/3735)) ([c6b6dc0](https://github.com/dhis2/capture-app/commit/c6b6dc0330d8c92d8334fb1f0b34a5524ebb2967))
+
 # [100.72.0](https://github.com/dhis2/capture-app/compare/v100.71.3...v100.72.0) (2024-08-06)
 
 
