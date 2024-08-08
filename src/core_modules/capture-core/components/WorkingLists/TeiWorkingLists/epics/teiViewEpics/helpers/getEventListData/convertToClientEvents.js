@@ -53,8 +53,8 @@ const buildTEIRecord = ({
                     imageUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}`,
                     previewUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
                 } : {
-                    imageUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
-                    previewUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image`,
+                    imageUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image?program=${programId}`,
+                    previewUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image?program=${programId}&dimension=SMALL`,
                 }
             ))() : {};
 
@@ -94,7 +94,7 @@ const buildEventRecord = ({
                     previewUrl: `/tracker/events/${apiEvent.event}/dataValues/${id}/image?dimension=small`,
                 } : {
                     imageUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
-                    previewUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
+                    previewUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}&dimension=SMALL`,
                 }
             ))() : {};
 
