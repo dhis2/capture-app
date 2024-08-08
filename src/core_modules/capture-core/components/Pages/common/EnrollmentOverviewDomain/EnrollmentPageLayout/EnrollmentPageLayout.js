@@ -69,9 +69,10 @@ const EnrollmentPageLayoutPlain = ({
 
     const allProps = useMemo(() => ({
         ...passOnProps,
+        currentPage,
         toggleVisibility,
         addRelationShipContainerElement,
-    }), [addRelationShipContainerElement, passOnProps, toggleVisibility]);
+    }), [addRelationShipContainerElement, currentPage, passOnProps, toggleVisibility]);
 
     const {
         leftColumnWidgets,
