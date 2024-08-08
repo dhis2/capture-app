@@ -11,7 +11,7 @@ export class FormFieldPluginConfig {
     _name: string;
     _pluginSource: string;
     _fields: Map<string, DataElement>;
-    _customAttributes: Map<string, { IdFromPlugin: string, IdFromApp: string }>;
+    _customAttributes: { [string]: { IdFromPlugin: string, IdFromApp: string } };
 
     constructor(initFn: ?(_this: FormFieldPluginConfig) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -45,11 +45,11 @@ export class FormFieldPluginConfig {
         return this._pluginSource;
     }
 
-    get customAttributes(): Map<string, { IdFromPlugin: string, IdFromApp: string }> {
+    get customAttributes(): { [string]: { IdFromPlugin: string, IdFromApp: string } } {
         return this._customAttributes;
     }
 
-    set customAttributes(value: Map<string, { IdFromPlugin: string, IdFromApp: string }>) {
+    set customAttributes(value: { [string]: { IdFromPlugin: string, IdFromApp: string } }) {
         this._customAttributes = value;
     }
 
