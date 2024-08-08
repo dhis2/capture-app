@@ -1,3 +1,10 @@
+# [100.76.0](https://github.com/dhis2/capture-app/compare/v100.75.1...v100.76.0) (2024-08-08)
+
+
+### Features
+
+* [DHIS2-17171] preview images in versions prior to 41 ([#3694](https://github.com/dhis2/capture-app/issues/3694)) ([2f51805](https://github.com/dhis2/capture-app/commit/2f51805b469d74b57bff7c927a9aa76420913ea1))
+
 ## [100.75.1](https://github.com/dhis2/capture-app/compare/v100.75.0...v100.75.1) (2024-08-08)
 
 
