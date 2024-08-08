@@ -22,13 +22,18 @@ export class D2Date extends React.Component<Props> {
 
     constructor(props: Props) {
         super(props);
-
+        this.state = {
+            date: this.props.date,
+        };
         this.handleDateSelected = this.handleDateSelected.bind(this);
     }
 
     handleDateSelected(value: {calendarDateString: string}) {
         const date = value?.calendarDateString;
-        this.props.onBlur(date);
+        this.setState({ date });
+        if (date) {
+            this.props.onBlur(date);
+        }
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
     }
 
@@ -60,7 +65,7 @@ export class D2Date extends React.Component<Props> {
                     {...passOnProps}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
-                    date={this.props.value}
+                    date={this.state.date}
                     width={String(calculatedCalendarWidth)}
                     inputWidth={String(calculatedInputWidth)}
                     onFocus={this.props.onFocus}
