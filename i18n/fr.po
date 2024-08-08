@@ -2,7 +2,6 @@
 # Translators:
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2022
-# Bram Piot <bram.piot@gmail.com>, 2022
 # Philip Larsen Donnelly, 2024
 # Edem Kossi <ekossi@hispwca.org>, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
@@ -10,13 +9,14 @@
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2024
 # Elise Desailly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Bram Piot <bram.piot@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Bram Piot <bram.piot@gmail.com>, 2024\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -211,7 +211,7 @@ msgid "Search for user"
 msgstr "Rechercher un utilisateur"
 
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 msgid "Basic info"
 msgstr "Infos de base"
@@ -1304,9 +1304,6 @@ msgstr "Commencé à {{orgUnitName}}"
 
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Propriété de {{ownerOrgUnit}}"
-
-msgid "Last updated {{date}}"
-msgstr "Dernière mise à jour {{date}}"
 
 msgid "Cancelled"
 msgstr "Annulé"

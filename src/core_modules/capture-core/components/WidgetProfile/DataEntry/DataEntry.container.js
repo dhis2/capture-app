@@ -20,6 +20,7 @@ export const DataEntry = ({
     onSaveExternal,
     geometry,
     trackedEntityName,
+    dataEntryFormConfig,
 }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
@@ -34,6 +35,7 @@ export const DataEntry = ({
         dataEntryId,
         itemId,
         geometry,
+        dataEntryFormConfig,
     });
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);

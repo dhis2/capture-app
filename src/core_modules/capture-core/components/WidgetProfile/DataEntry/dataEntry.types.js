@@ -1,6 +1,9 @@
 // @flow
 
 import type { Geometry } from './helpers/types';
+import type {
+    DataEntryFormConfig,
+} from '../../DataEntries/common/TEIAndEnrollment';
 
 export type PlainProps = {|
     dataEntryId: string,
@@ -23,6 +26,7 @@ export type PlainProps = {|
 export type Props = {|
     programAPI: any,
     orgUnitId: string,
+    dataEntryFormConfig: ?DataEntryFormConfig,
     onCancel: () => void,
     onDisable: () => void,
     clientAttributesWithSubvalues: Array<any>,

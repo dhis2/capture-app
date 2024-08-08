@@ -56,14 +56,12 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     }
 
     return (
-        <>
-            <WidgetEventEdit
-                {...passOnProps}
-                stage={stage}
-                formFoundation={formFoundation}
-                programId={programId}
-                stageId={stageId}
-            />
-        </>
+        <WidgetEventEdit
+            {...passOnProps}
+            stage={stage}
+            formFoundation={formFoundation}
+            programId={programId}
+            stageId={stageId}
+        />
     );
 };

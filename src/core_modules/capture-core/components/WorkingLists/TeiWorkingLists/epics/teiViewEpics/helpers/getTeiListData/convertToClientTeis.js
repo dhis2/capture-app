@@ -34,8 +34,8 @@ export const convertToClientTeis = (
                                 imageUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}`,
                                 previewUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
                             } : {
-                                imageUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
-                                previewUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image`,
+                                imageUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image?program=${programId}`,
+                                previewUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image?program=${programId}&dimension=SMALL`,
                             }
                         ))() : {};
 
