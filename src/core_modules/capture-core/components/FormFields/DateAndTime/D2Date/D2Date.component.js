@@ -17,22 +17,26 @@ type Props = {
     disabled?: boolean,
 };
 
-export class D2Date extends React.Component<Props> {
+type State = {
+    date: ?string,
+};
+
+export class D2Date extends React.Component<Props, State> {
     handleDateSelected: (value: {calendarDateString: string}) => void;
 
     constructor(props: Props) {
         super(props);
         this.state = {
-            date: this.props.date,
+            date: props.value,
         };
         this.handleDateSelected = this.handleDateSelected.bind(this);
     }
 
     handleDateSelected(value: {calendarDateString: string}) {
-        const date = value?.calendarDateString;
-        this.setState({ date });
-        if (date) {
-            this.props.onBlur(date);
+        const selectedDate = value?.calendarDateString;
+        this.setState({ date: selectedDate });
+        if (selectedDate) {
+            this.props.onBlur(selectedDate);
         }
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
     }
