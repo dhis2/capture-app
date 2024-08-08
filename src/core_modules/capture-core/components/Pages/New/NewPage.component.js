@@ -33,7 +33,7 @@ const NewPagePlain = ({
     newPageStatus,
     writeAccess,
     programCategorySelectionIncomplete,
-    categoryComboIsInvalid,
+    categoryOptionIsInvalidForOrgUnit,
     missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
     isUserInteractionInProgress,
@@ -55,7 +55,7 @@ const NewPagePlain = ({
             showMessageToSelectOrgUnitOnNewPage();
         } else if (programCategorySelectionIncomplete) {
             showMessageToSelectProgramCategoryOnNewPage();
-        } else if (categoryComboIsInvalid) {
+        } else if (categoryOptionIsInvalidForOrgUnit) {
             showMessageThatCategoryOptionIsInvalidForOrgUnit();
         } else {
             showDefaultViewOnNewPage();
@@ -67,7 +67,7 @@ const NewPagePlain = ({
         showMessageToSelectOrgUnitOnNewPage,
         showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
-        categoryComboIsInvalid,
+        categoryOptionIsInvalidForOrgUnit,
         showMessageThatCategoryOptionIsInvalidForOrgUnit,
     ]);
     const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
@@ -142,10 +142,10 @@ const NewPagePlain = ({
                         }
 
                         {
-                            newPageStatus === newPageStatuses.INVALID_CATEGORY_OPTION_SELECTED && (
+                            newPageStatus === newPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
                                 <IncompleteSelectionsMessage>
                                     {i18n.t(
-                                        'The category is not valid for the selected organisation unit. Please select a valid combination.',
+                                        'The category option is not valid for the selected organisation unit. Please select a valid combination.',
                                     )}
                                 </IncompleteSelectionsMessage>
                             )

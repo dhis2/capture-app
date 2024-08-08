@@ -34,7 +34,7 @@ export const useCategoryOptionIsValidForOrgUnit = ({
         },
     );
 
-    const isInvalid = useMemo(() => {
+    const categoryOptionIsInvalidForOrgUnit = useMemo(() => {
         if (!data || !data.length) {
             return false;
         }
@@ -43,7 +43,7 @@ export const useCategoryOptionIsValidForOrgUnit = ({
     }, [data, selectedOrgUnitId]);
 
     return {
-        isInvalid,
+        categoryOptionIsInvalidForOrgUnit,
         isLoading,
         isError,
     };

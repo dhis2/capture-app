@@ -30,7 +30,14 @@ const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, sho
     }
 };
 
-const useMainPageStatus = ({ programId, selectedProgram, categories, orgUnitId, showAllAccessible, isInvalid }) => {
+const useMainPageStatus = ({
+    programId,
+    selectedProgram,
+    categories,
+    orgUnitId,
+    showAllAccessible,
+    categoryOptionIsInvalidForOrgUnit,
+}) => {
     const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
 
     return useMemo(() => {
@@ -45,7 +52,7 @@ const useMainPageStatus = ({ programId, selectedProgram, categories, orgUnitId, 
             if (withoutOrgUnit) {
                 return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
             }
-            if (programCategories && isInvalid) {
+            if (programCategories && categoryOptionIsInvalidForOrgUnit) {
                 return MainPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT;
             }
             return MainPageStatuses.SHOW_WORKING_LIST;
@@ -56,7 +63,7 @@ const useMainPageStatus = ({ programId, selectedProgram, categories, orgUnitId, 
         }
 
         return MainPageStatuses.SHOW_WORKING_LIST;
-    }, [programId, selectedProgram, withoutOrgUnit, categories, isInvalid]);
+    }, [programId, selectedProgram, withoutOrgUnit, categories, categoryOptionIsInvalidForOrgUnit]);
 };
 
 const useSelectorMainPage = () =>
@@ -99,7 +106,7 @@ const MainPageContainer = () => {
         error,
         ready,
     } = useSelectorMainPage();
-    const { isInvalid } = useCategoryOptionIsValidForOrgUnit({ selectedOrgUnitId: orgUnitId });
+    const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({ selectedOrgUnitId: orgUnitId });
 
     const selectedProgram = programCollection.get(programId);
     // $FlowFixMe[prop-missing]
@@ -111,7 +118,7 @@ const MainPageContainer = () => {
         categories,
         orgUnitId,
         showAllAccessible,
-        isInvalid,
+        categoryOptionIsInvalidForOrgUnit,
     });
 
     const {

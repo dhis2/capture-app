@@ -18,7 +18,7 @@ export type ContainerProps = $ReadOnly<{|
   showMessageToSelectOrgUnitOnNewPage: ()=>void,
   showMessageToSelectProgramCategoryOnNewPage: ()=>void,
   showMessageThatCategoryOptionIsInvalidForOrgUnit: ()=>void,
-  categoryComboIsInvalid: boolean,
+  categoryOptionIsInvalidForOrgUnit: boolean,
   showDefaultViewOnNewPage: ()=>void,
   handleMainPageNavigation: ()=>void,
   currentScopeId: string,

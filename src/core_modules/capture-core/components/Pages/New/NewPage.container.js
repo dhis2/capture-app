@@ -46,7 +46,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const history = useHistory();
     const { orgUnitId, programId, teiId } = useLocationQuery();
     const program = programId && programCollection.get(programId);
-    const { isInvalid: categoryComboIsInvalid } = useCategoryOptionIsValidForOrgUnit({
+    const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
         selectedOrgUnitId: orgUnitId,
     });
     const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
@@ -118,7 +118,7 @@ export const NewPage: ComponentType<{||}> = () => {
             orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
             programCategorySelectionIncomplete={programSelectionIsIncomplete}
             missingCategoriesInProgramSelection={missingCategories}
-            categoryComboIsInvalid={categoryComboIsInvalid}
+            categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
             writeAccess={writeAccess}
             newPageStatus={newPageStatus}
             error={error}

@@ -14,7 +14,7 @@ export const InvalidCategoryCombinationForOrgUnitMessagePlain = ({ classes }: {|
     <div className={classes.incompleteMessageContainer}>
         <IncompleteSelectionsMessage>
             {i18n.t(
-                'The category is not valid for the selected organisation unit. Please select a valid combination.',
+                'The category option is not valid for the selected organisation unit. Please select a valid combination.',
             )}
         </IncompleteSelectionsMessage>
     </div>
