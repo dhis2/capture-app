@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Card, IconChevronDown16, IconChevronUp16, Button } from '@dhis2/ui';
+import { Card, IconChevronDown16, IconChevronUp16, Button, Layer } from '@dhis2/ui';
 
 import { Manager, Popper, Reference } from 'react-popper';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -167,17 +166,17 @@ class FilterRestMenuPlain extends React.Component<Props, State> {
                     }
                 </Reference>
                 {this.state.filterSelectorOpen &&
-                <Popper
-                    placement="bottom-start"
-                >
-                    {
-                        ({ ref, style, placement }) => (
-                            <div
-                                ref={ref}
-                                style={{ ...style, zIndex: 1 }}
-                                data-placement={placement}
-                            >
-                                <ClickAwayListener onClickAway={this.handleClickAway}>
+                <Layer onBackdropClick={this.handleClickAway} dataTest="more-filters-menu">
+                    <Popper
+                        placement="bottom-start"
+                    >
+                        {
+                            ({ ref, style, placement }) => (
+                                <div
+                                    ref={ref}
+                                    style={{ ...style, zIndex: 1 }}
+                                    data-placement={placement}
+                                >
                                     <Grow
                                         in={!!this.state.filterSelectorOpen}
                                         id="menu-list-grow"
@@ -190,11 +189,12 @@ class FilterRestMenuPlain extends React.Component<Props, State> {
                                             </MenuList>
                                         </Card>
                                     </Grow>
-                                </ClickAwayListener>
-                            </div>
-                        )
-                    }
-                </Popper>}
+                                </div>
+                            )
+                        }
+                    </Popper>
+                </Layer>
+                }
             </Manager>
         );
     }
