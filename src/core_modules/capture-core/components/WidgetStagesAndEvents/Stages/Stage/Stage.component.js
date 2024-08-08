@@ -4,7 +4,6 @@ import cx from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { spacersNum, colors, IconAdd16, Button } from '@dhis2/ui';
-import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
@@ -24,14 +23,20 @@ const styles = {
         alignItems: 'center',
     },
 };
-const hideProgramStage = (ruleEffects, stageId) => (
+const rulesEffectHideProgramStage = (ruleEffects, stageId) => (
     Boolean(ruleEffects?.find(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === stageId))
 );
 
 export const StagePlain = ({ stage, events, classes, className, onCreateNew, ruleEffects, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
-    const hiddenProgramStage = hideProgramStage(ruleEffects, id);
+    const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
+    const hideProgramStage = preventAddingNewEvents && events.length === 0;
+
+    const handleOpen = useCallback(() => setOpenStatus(true), [setOpenStatus]);
+    const handleClose = useCallback(() => setOpenStatus(false), [setOpenStatus]);
+
+    if (hideProgramStage) return null;
 
     return (
         <div
@@ -46,8 +51,8 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                     events={events}
                 />}
                 borderless
-                onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
-                onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
+                onOpen={handleOpen}
+                onClose={handleClose}
                 open={open}
             >
                 {events.length > 0 ? <StageDetail
@@ -59,31 +64,22 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                     repeatable={repeatable}
                     enableUserAssignment={enableUserAssignment}
                     onCreateNew={onCreateNew}
-                    hiddenProgramStage={hiddenProgramStage}
+                    hiddenProgramStage={preventAddingNewEvents}
                     {...passOnProps}
                 /> : (
-                    <ConditionalTooltip
-                        content={i18n.t("You can't add any more {{ programStageName }} events", {
-                            programStageName: name,
+                    <Button
+                        small
+                        secondary
+                        icon={<IconAdd16 />}
+                        className={classes.button}
+                        dataTest="create-new-button"
+                        onClick={() => onCreateNew(id)}
+                    >
+                        {i18n.t('New {{ eventName }} event', {
+                            eventName: name,
                             interpolation: { escapeValue: false },
                         })}
-                        enabled={hiddenProgramStage}
-                    >
-                        <Button
-                            small
-                            secondary
-                            disabled={hiddenProgramStage}
-                            icon={<IconAdd16 />}
-                            className={classes.button}
-                            dataTest="create-new-button"
-                            onClick={() => onCreateNew(id)}
-                        >
-                            {i18n.t('New {{ eventName }} event', {
-                                eventName: name,
-                                interpolation: { escapeValue: false },
-                            })}
-                        </Button>
-                    </ConditionalTooltip>
+                    </Button>
                 )}
             </Widget>
         </div>

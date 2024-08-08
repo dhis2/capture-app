@@ -18,7 +18,7 @@ module.exports = async function cucumberPreprocessor(on, config) {
                             test: /\.feature$/,
                             use: [
                                 {
-                                    loader: '@badeball/cypress-cucumber-preprocessor/dist/bundler-utils/webpack',
+                                    loader: '@badeball/cypress-cucumber-preprocessor/webpack',
                                     options: config,
                                 },
                             ],

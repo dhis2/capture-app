@@ -1,9 +1,8 @@
 // @flow
 import * as React from 'react';
 import { Manager, Popper, Reference } from 'react-popper';
-import { spacers, IconMore24, colors, Layer } from '@dhis2/ui';
+import { Card, spacers, IconMore24, colors, Layer } from '@dhis2/ui';
 import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -143,9 +142,9 @@ class Index extends React.Component<Props, State> {
                                         style={{ transformOrigin: '0 0 0' }}
                                         timeout={{ exit: 0, enter: 200 }}
                                     >
-                                        <Paper>
+                                        <Card>
                                             {this.renderMenuItems()}
-                                        </Paper>
+                                        </Card>
                                     </Grow>
                                 </div>
                             )

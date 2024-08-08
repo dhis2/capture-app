@@ -1291,9 +1291,6 @@ msgstr "Begynt på {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Eid av {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Sist oppdatert {{date}}"
-
 msgid "Cancelled"
 msgstr "Kansellert"
 

@@ -5,26 +5,13 @@ import { NewEventDataEntryWrapperComponent } from './NewEventDataEntryWrapper.co
 import {
     setNewEventFormLayoutDirection,
 } from './newEventDataEntryWrapper.actions';
-import {
-    makeStageSelector,
-} from './newEventDataEntryWrapper.selectors';
 import { getDataEntryHasChanges } from '../getNewEventDataEntryHasChanges';
 import type { Props, ContainerProps, StateProps, MapStateToProps } from './NewEventDataEntryWrapper.types';
 
-const makeMapStateToProps = (): MapStateToProps => {
-    const stageSelector = makeStageSelector();
-
-    return (state: ReduxState): StateProps => {
-        const stage = stageSelector(state);
-        const formFoundation = stage && stage.stageForm ? stage.stageForm : null;
-        return ({
-            stage,
-            formFoundation,
-            dataEntryHasChanges: getDataEntryHasChanges(state),
-            formHorizontal: (formFoundation && formFoundation.customForm ? false : !!state.newEventPage.formHorizontal),
-        });
-    };
-};
+const makeMapStateToProps = (): MapStateToProps => (state: ReduxState): StateProps => ({
+    dataEntryHasChanges: getDataEntryHasChanges(state),
+    formHorizontal: !!state.newEventPage.formHorizontal,
+});
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onFormLayoutDirectionChange: (formHorizontal: boolean) => {

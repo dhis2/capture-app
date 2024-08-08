@@ -16,6 +16,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         onUpdateField,
         customAttributes,
         pluginContext,
+        viewMode = false,
     } = props;
     const metadataByPluginId = useMemo(() => Object.fromEntries(fieldsMetadata), [fieldsMetadata]);
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
@@ -55,6 +56,7 @@ export const FormFieldPlugin = (props: ContainerProps) => {
             setContextFieldValue={setContextFieldValue}
             errors={errors}
             warnings={warnings}
+            viewMode={viewMode}
         />
     );
 };

@@ -2,8 +2,8 @@
 import React, { useCallback, memo, type ComponentType } from 'react';
 import { IconButton } from 'capture-ui';
 import { withStyles } from '@material-ui/core/styles';
-import { Divider, IconMore24 } from '@dhis2/ui';
-import { Paper, MenuList, MenuItem } from '@material-ui/core';
+import { Divider, IconMore24, Card } from '@dhis2/ui';
+import { MenuList, MenuItem } from '@material-ui/core';
 
 import { MenuPopper } from '../../Popper/Popper.component';
 import type { Props } from './listViewMenu.types';
@@ -86,11 +86,11 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
             .flat(1), [customMenuContents, classes]);
 
     const renderPopperContent = useCallback((togglePopper: Function) => (
-        <Paper>
+        <Card>
             <MenuList role="menu">
                 {renderMenuItems(togglePopper)}
             </MenuList>
-        </Paper>
+        </Card>
     ), [renderMenuItems]);
 
     if (!customMenuContents.length) {

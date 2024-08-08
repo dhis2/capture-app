@@ -1,10 +1,8 @@
 // @flow
-
-import type { ProgramStage } from '../../metaData';
 import type { UserFormField } from '../FormFields/UserField';
+import { ProgramStage, RenderFoundation } from '../../metaData';
 
 export type Props = {|
-    programStage: ProgramStage,
     eventStatus?: string,
     onGoBack: () => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
@@ -14,6 +12,7 @@ export type Props = {|
     programId: string,
     enrollmentId: string,
     eventId: string,
+    stageId: string,
     teiId: string,
     initialScheduleDate?: string,
     assignee?: UserFormField | null,
@@ -22,7 +21,13 @@ export type Props = {|
     onSaveAndCompleteEnrollmentErrorActionType?: string,
 |};
 
-export type PlainProps = {|
+export type ComponentProps = {|
     ...Props,
+    formFoundation: RenderFoundation,
+    stage: ProgramStage,
+|};
+
+export type PlainProps = {|
+    ...ComponentProps,
     ...CssClasses,
 |}

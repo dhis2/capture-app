@@ -1241,9 +1241,6 @@ msgstr "始于{{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "由{{ownerOrgUnit}}拥有"
 
-msgid "Last updated {{date}}"
-msgstr "最近更新的{{date}}"
-
 msgid "Cancelled"
 msgstr "已取消"
 

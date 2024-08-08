@@ -2,8 +2,8 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-
-import { Chip, withStyles } from '@material-ui/core';
+import { Chip, colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 
 
 const getStyles = (theme: Theme) => ({
@@ -17,9 +17,10 @@ const getStyles = (theme: Theme) => ({
         paddingLeft: theme.typography.pxToRem(5),
     },
     badge: {
-        height: theme.typography.pxToRem(20),
-        width: theme.typography.pxToRem(20),
-        fontWeight: 700,
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'default !important',
+        backgroundColor: `${colors.grey300} !important`,
     },
 });
 
@@ -45,7 +46,9 @@ class ViewEventSectionHeaderPlain extends React.Component<Props> {
                 </div>
                 {shouldRenderBadge &&
                     <div className={classes.headerItemContainer}>
-                        <Chip className={classNames(classes.badge, badgeClass)} label={badgeCount} />
+                        <Chip dense className={classNames(classes.badge), badgeClass}>
+                            {badgeCount}
+                        </Chip>
                     </div>
                 }
             </div>
