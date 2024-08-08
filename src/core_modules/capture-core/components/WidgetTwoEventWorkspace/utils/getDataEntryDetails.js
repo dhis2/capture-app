@@ -1,9 +1,11 @@
 // @flow
+import React from 'react';
 import { pipe } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes, type RenderFoundation } from '../../../metaData';
 import { convertClientToView, convertServerToClient } from '../../../converters';
 import type { LinkedEvent } from '../WidgetTwoEventWorkspace.types';
+import { FlatListOrgUnitField } from '../FlatListOrgUnitField';
 
 const convertFn = pipe(convertServerToClient, convertClientToView);
 
@@ -35,8 +37,7 @@ const DataEntryFieldsToInclude = {
         type: dataElementTypes.ORGANISATION_UNIT,
         placement: Placements.TOP,
         label: i18n.t('Organisation unit'),
-        // TODO - This issue will be fixed in DHIS2-17792
-        convertFn: value => value,
+        convertFn: orgUnitId => <FlatListOrgUnitField orgUnitId={orgUnitId} />,
     },
     status: {
         apiKey: 'status',

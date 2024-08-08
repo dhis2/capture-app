@@ -2,9 +2,7 @@
 import React, { useMemo } from 'react';
 import { spacers } from '@dhis2/ui';
 import { FlatList } from 'capture-ui';
-import { pipe } from 'capture-core-utils';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { convertClientToView, convertServerToClient } from '../../converters';
 import type { RenderFoundation } from '../../metaData';
 import { getDataEntryDetails, Placements } from './utils/getDataEntryDetails';
 
@@ -26,8 +24,6 @@ const styles = {
     },
 };
 
-const convertFn = pipe(convertServerToClient, convertClientToView);
-
 const WidgetTwoEventWorkspacePlain = ({ linkedEvent, dataValues, formFoundation, classes }: Props) => {
     const dataEntryValues = useMemo(() => getDataEntryDetails(
         linkedEvent,
@@ -36,10 +32,9 @@ const WidgetTwoEventWorkspacePlain = ({ linkedEvent, dataValues, formFoundation,
 
     const listValues = useMemo(() => {
         const elements = formFoundation.getElements();
-        const convertedValues = formFoundation.convertAndGroupBySection(dataValues, convertFn);
 
         return elements.map((dataElement) => {
-            const value = convertedValues[dataElement.id];
+            const value = dataValues[dataElement.id];
             return {
                 key: dataElement.formName,
                 value: value ?? '',

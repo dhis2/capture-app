@@ -15,6 +15,7 @@ import {
     EnrollmentPageKeys,
 } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { useClientDataValues } from './hooks/useClientDataValues';
 
 const styles = {
     menu: {
@@ -66,11 +67,21 @@ const WidgetTwoEventWorkspacePlain = ({
         stageId: linkedEvent?.programStage,
     });
 
-    if (isLinkedEventLoading || isLoadingMetadata) {
+    const {
+        clientValuesWithSubValues,
+        isLoading: isLoadingClientValues,
+        isError: isClientValuesError,
+    } = useClientDataValues({
+        linkedEventId: linkedEvent?.event,
+        dataValues,
+        formFoundation,
+    });
+
+    if (isLinkedEventLoading || isLoadingMetadata || isLoadingClientValues) {
         return null;
     }
 
-    if (isLinkedEventError || isMetadataError) {
+    if (isLinkedEventError || isMetadataError || isClientValuesError) {
         return (
             <div>
                 {i18n.t('An error occurred while loading the widget.')}
@@ -134,7 +145,7 @@ const WidgetTwoEventWorkspacePlain = ({
                 <WidgetTwoEventWorkspaceComponent
                     linkedEvent={linkedEvent}
                     formFoundation={formFoundation}
-                    dataValues={dataValues}
+                    dataValues={clientValuesWithSubValues}
                 />
             </Widget>
         </div>

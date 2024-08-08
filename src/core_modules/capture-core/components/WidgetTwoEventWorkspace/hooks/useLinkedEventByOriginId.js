@@ -6,17 +6,6 @@ type Props = {|
     originEventId: string,
 |}
 
-const formatDataValues = (dataValues: Array<{ dataElement: string, value: any }>) => {
-    if (!dataValues || dataValues.length === 0) {
-        return {};
-    }
-
-    return dataValues.reduce((acc, { dataElement, value }) => {
-        acc[dataElement] = value;
-        return acc;
-    }, {});
-};
-
 const calculateRelatedStageRelationships = (event) => {
     if (!event || !event.relationships || event.relationships.length === 0) {
         return null;
@@ -87,7 +76,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         return {
             linkedEvent: relatedStageRelationship.linkedEvent,
             relationshipType: relatedStageRelationship.relationshipType,
-            dataValues: formatDataValues(relatedStageRelationship.linkedEvent.dataValues),
+            dataValues: relatedStageRelationship.linkedEvent.dataValues,
         };
     }, [data]);
 
