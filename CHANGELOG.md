@@ -1,3 +1,10 @@
+## [100.75.1](https://github.com/dhis2/capture-app/compare/v100.75.0...v100.75.1) (2024-08-08)
+
+
+### Bug Fixes
+
+* [DHIS2-17859] Add missing ids to Enrollment plugin ([#3748](https://github.com/dhis2/capture-app/issues/3748)) ([19c77ec](https://github.com/dhis2/capture-app/commit/19c77ec50c2fff0deef948abd516726b51f95418))
+
 # [100.75.0](https://github.com/dhis2/capture-app/compare/v100.74.0...v100.75.0) (2024-08-07)
 
 
