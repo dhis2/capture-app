@@ -366,17 +366,11 @@ msgstr "Registered person"
 msgid "validation failed"
 msgstr "validation failed"
 
-msgid "Errors"
-msgstr "Errors"
+msgid "No feedback for this event yet"
+msgstr "No feedback for this event yet"
 
-msgid "Feedback"
-msgstr "Feedback"
-
-msgid "Indicators"
-msgstr "Indicators"
-
-msgid "Warnings"
-msgstr "Warnings"
+msgid "No indicator output for this event yet"
+msgstr "No indicator output for this event yet"
 
 msgid "Generate new event"
 msgstr "Generate new event"
@@ -789,12 +783,6 @@ msgstr "There was an error loading the page"
 msgid "Choose an organisation unit to start reporting"
 msgstr "Choose an organisation unit to start reporting"
 
-msgid "No feedback for this event yet"
-msgstr "No feedback for this event yet"
-
-msgid "No indicator output for this event yet"
-msgstr "No indicator output for this event yet"
-
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
 
@@ -940,6 +928,18 @@ msgid ""
 msgstr ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
+
+msgid "Errors"
+msgstr "Errors"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Warnings"
+msgstr "Warnings"
 
 msgid "Show all events"
 msgstr "Show all events"
