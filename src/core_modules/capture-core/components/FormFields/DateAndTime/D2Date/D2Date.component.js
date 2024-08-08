@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { CalendarInput } from '@dhis2/ui';
+import { systemSettingsStore } from '../../../../../capture-core/metaDataMemoryStores';
 
 type Props = {
     label?: string,
@@ -57,7 +58,7 @@ export class D2Date extends React.Component<Props, State> {
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
         const calendarType = calendar || 'gregory';
-
+        const format = systemSettingsStore.get().dateFormat;
         return (
             <div
                 style={{
@@ -67,6 +68,7 @@ export class D2Date extends React.Component<Props, State> {
                 <CalendarInput
                     label=""
                     {...passOnProps}
+                    format={format}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
                     date={this.state.date}
