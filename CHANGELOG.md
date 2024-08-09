@@ -1,3 +1,10 @@
+## [100.76.1](https://github.com/dhis2/capture-app/compare/v100.76.0...v100.76.1) (2024-08-09)
+
+
+### Bug Fixes
+
+* [DHIS2-17632][DHIS2-17633] restrict invalid category combo for orgUnit ([#3738](https://github.com/dhis2/capture-app/issues/3738)) ([bfffe06](https://github.com/dhis2/capture-app/commit/bfffe069e3c16387dc0da6c08ed25b91f3f55bf1))
+
 # [100.76.0](https://github.com/dhis2/capture-app/compare/v100.75.1...v100.76.0) (2024-08-08)
 
 
