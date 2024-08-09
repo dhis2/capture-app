@@ -12,6 +12,9 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
+import {
+    InvalidCategoryCombinationForOrgUnitMessage,
+} from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
 
 const getStyles = () => ({
     listContainer: {
@@ -56,6 +59,9 @@ const MainPageBody = compose(
             <>
                 {MainPageStatus === MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
                     <WithoutOrgUnitSelectedMessage programId={programId} setShowAccessible={setShowAccessible} />
+                )}
+                {MainPageStatus === MainPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
+                    <InvalidCategoryCombinationForOrgUnitMessage />
                 )}
                 {MainPageStatus === MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED && (
                     <WithoutCategorySelectedMessage programId={programId} />

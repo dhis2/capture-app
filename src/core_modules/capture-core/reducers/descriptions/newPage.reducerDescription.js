@@ -25,6 +25,10 @@ export const newPageDesc = createReducerDescription(
             ...state,
             newPageStatus: newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED,
         }),
+        [newPageActionTypes.NEW_PAGE_CATEGORY_OPTION_INVALID_FOR_ORG_UNIT_VIEW]: state => ({
+            ...state,
+            newPageStatus: newPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT,
+        }),
         [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START]: (state, action) => {
             const { uid } = action.payload;
 
