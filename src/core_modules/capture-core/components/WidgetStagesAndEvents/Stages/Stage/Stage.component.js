@@ -1,13 +1,13 @@
 // @flow
 import React, { type ComponentType, useState, useCallback } from 'react';
 import cx from 'classnames';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { spacersNum, colors, IconAdd16, Button } from '@dhis2/ui';
+import { spacersNum, colors } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
 import { StageDetail } from './StageDetail/StageDetail.component';
+import { StageCreateNewButton } from './StageCreateNewButton';
 
 const styles = {
     overview: {
@@ -15,7 +15,7 @@ const styles = {
         marginRight: spacersNum.dp16,
         borderTop: `1px solid ${colors.grey300}`,
     },
-    button: {
+    buttonContainer: {
         margin: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
     },
     buttonRow: {
@@ -67,19 +67,16 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                     hiddenProgramStage={preventAddingNewEvents}
                     {...passOnProps}
                 /> : (
-                    <Button
-                        small
-                        secondary
-                        icon={<IconAdd16 />}
-                        className={classes.button}
-                        dataTest="create-new-button"
-                        onClick={() => onCreateNew(id)}
-                    >
-                        {i18n.t('New {{ eventName }} event', {
-                            eventName: name,
-                            interpolation: { escapeValue: false },
-                        })}
-                    </Button>
+                    <div className={classes.buttonContainer}>
+                        <StageCreateNewButton
+                            onCreateNew={onCreateNew}
+                            stageWriteAccess={stage.dataAccess.write}
+                            eventCount={events.length}
+                            repeatable={repeatable}
+                            preventAddingEventActionInEffect={preventAddingNewEvents}
+                            eventName={name}
+                        />
+                    </div>
                 )}
             </Widget>
         </div>
