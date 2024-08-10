@@ -27,7 +27,7 @@ const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStag
     <div className={classes.container}>
         {programStages.map((programStage) => {
             const disableStage =
-                (!programStage.repeatable && programStage.eventCount > 0) || programStage.hiddenProgramStage;
+                !programStage.dataAccess.write || (!programStage.repeatable && programStage.eventCount > 0) || programStage.hiddenProgramStage;
             return (
                 <div
                     key={programStage.id}
