@@ -1256,9 +1256,6 @@ msgstr ""
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Deținut de {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Ultima actualizare {{date}}"
-
 msgid "Cancelled"
 msgstr "Anulat"
 

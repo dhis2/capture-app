@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-07-29T16:38:48.947Z\n"
-"PO-Revision-Date: 2024-07-29T16:38:48.947Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"PO-Revision-Date: 2024-08-08T11:49:13.423Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -366,17 +366,11 @@ msgstr "Registered person"
 msgid "validation failed"
 msgstr "validation failed"
 
-msgid "Errors"
-msgstr "Errors"
+msgid "No feedback for this event yet"
+msgstr "No feedback for this event yet"
 
-msgid "Feedback"
-msgstr "Feedback"
-
-msgid "Indicators"
-msgstr "Indicators"
-
-msgid "Warnings"
-msgstr "Warnings"
+msgid "No indicator output for this event yet"
+msgstr "No indicator output for this event yet"
 
 msgid "Generate new event"
 msgstr "Generate new event"
@@ -792,12 +786,6 @@ msgstr "There was an error loading the page"
 msgid "Choose an organisation unit to start reporting"
 msgstr "Choose an organisation unit to start reporting"
 
-msgid "No feedback for this event yet"
-msgstr "No feedback for this event yet"
-
-msgid "No indicator output for this event yet"
-msgstr "No indicator output for this event yet"
-
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
 
@@ -827,6 +815,13 @@ msgstr "Stage"
 
 msgid "Registered events"
 msgstr "Registered events"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
 
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
@@ -944,6 +939,18 @@ msgstr ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 
+msgid "Errors"
+msgstr "Errors"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Warnings"
+msgstr "Warnings"
+
 msgid "Show all events"
 msgstr "Show all events"
 
@@ -984,6 +991,9 @@ msgstr "Could not retrieve metadata. Please try again later."
 
 msgid "The enrollment event data could not be found"
 msgstr "The enrollment event data could not be found"
+
+msgid "Loading"
+msgstr "Loading"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"

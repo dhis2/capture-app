@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import Paper from '@material-ui/core/Paper';
+import { Card } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { NewRelationship } from '../../NewRelationship/NewRelationship.container';
 import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
@@ -98,14 +98,14 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
                         {i18n.t('Go back to event without saving relationship')}
                     </LinkButton>
                 </div>
-                <Paper className={classes.newRelationshipPaper}>
+                <Card className={classes.newRelationshipPaper}>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <NewRelationship
                         header={i18n.t('New event relationship')}
                         onCancel={onCancel}
                         {...passOnProps}
                     />
-                </Paper>
+                </Card>
                 <DiscardDialog
                     header={i18n.t('Discard unsaved changes?')}
                     text={i18n.t('Leaving this page will discard any selections you made for a new relationship')}
