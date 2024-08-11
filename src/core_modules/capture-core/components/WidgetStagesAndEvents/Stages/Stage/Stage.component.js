@@ -69,7 +69,7 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                 /> : (
                     <div className={classes.buttonContainer}>
                         <StageCreateNewButton
-                            onCreateNew={onCreateNew}
+                            onCreateNew={() => onCreateNew(id)}
                             stageWriteAccess={stage.dataAccess.write}
                             eventCount={events.length}
                             repeatable={repeatable}
