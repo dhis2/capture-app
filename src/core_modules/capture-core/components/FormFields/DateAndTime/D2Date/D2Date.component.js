@@ -4,7 +4,7 @@ import { CalendarInput } from '@dhis2/ui';
 import { systemSettingsStore } from '../../../../../capture-core/metaDataMemoryStores';
 
 type Props = {
-    label?: string,
+    label: ?string,
     value: ?string,
     width: number,
     calendar?: string,
