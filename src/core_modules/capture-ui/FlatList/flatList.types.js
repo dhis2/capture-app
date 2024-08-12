@@ -1,6 +1,6 @@
 // @flow
 export type Props = {|
-    list: { reactKey: string, key: string, value: { id: string, name: string }, valueType?: string }[],
+    list: { reactKey: string, key: string, value: Object, valueType?: string }[],
     dataTest?: string,
     ...CssClasses,
 |};

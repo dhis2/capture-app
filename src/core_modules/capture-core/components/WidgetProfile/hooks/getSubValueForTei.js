@@ -51,10 +51,20 @@ const getOrganisationUnitSubvalue = async ({ attribute, querySingleResource }: S
         resource: 'organisationUnits',
         id: attribute.value,
         params: {
-            fields: 'id,name',
+            fields: 'id,name,ancestors[displayName,level]',
         },
     });
-    return { ...organisationUnit };
+
+    const orgUnitClientValue = {
+        id: organisationUnit.id,
+        orgUnitName: organisationUnit.name,
+        ancestors: organisationUnit.ancestors.map(ancestor => ({
+            displayName: ancestor.displayName,
+            level: ancestor.level,
+        })),
+    };
+
+    return orgUnitClientValue;
 };
 
 export const subValueGetterByElementType = {

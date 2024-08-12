@@ -102,10 +102,7 @@ const WidgetProfilePlain = ({
         .filter(item => item.displayInList)
         .map((clientAttribute) => {
             const { attribute, key, valueType } = clientAttribute;
-            const value = valueType === 'ORGANISATION_UNIT' ? (
-                clientAttribute.value) : (
-                convertClientToView(clientAttribute)
-            );
+            const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, valueType, reactKey: attribute,
             };

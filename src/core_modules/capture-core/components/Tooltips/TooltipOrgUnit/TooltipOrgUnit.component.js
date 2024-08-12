@@ -15,7 +15,7 @@ export const TooltipOrgUnit = ({ orgUnitName, ancestors, tooltip }: Props) => {
     const tooltipParts = tooltip ? tooltip.split(orgUnitName) : [orgUnitName];
 
     return (
-        <Tooltip content={orgUnitNameFullPath} openDelay={400}>
+        <Tooltip content={orgUnitNameFullPath} openDelay={400} maxWidth={900}>
             <span>
                 {tooltip ? (
                     <>
