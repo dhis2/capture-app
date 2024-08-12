@@ -37,7 +37,7 @@ class StartRangeFilterPlain extends Component<Props> {
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Days in the past')}
                     fullWidth
-                    data-test="date-range-filter-start"
+                    dataTest="date-range-filter-start"
                     {...passOnProps}
                 />
                 <div className={errorClass}>{error}</div>
