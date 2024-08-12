@@ -61,7 +61,7 @@ export class DateField extends React.Component<Props> {
             >
                 <CalendarInput
                     {...passOnProps}
-                    label={label}
+                    label=""
                     format={format}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}

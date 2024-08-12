@@ -329,7 +329,7 @@ Then('you see validation error on visit date', () => {
 
 And('you fill in 200 in the hemoglobin', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(1)
+        .eq(0)
         .type('200');
 });
 
@@ -340,14 +340,14 @@ And('you see validation error on hemoglobin', () => {
 });
 
 And('you fill in the visit date', () => {
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[type="text"]')
         .eq(0)
-        .type(`${getCurrentYear()}-01-01`);
+        .type(`${getCurrentYear()}-01-01`).blur();
 });
 
 And('you fill in the hemoglobin', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(1)
+        .eq(0)
         .type('50');
 });
 
@@ -427,8 +427,8 @@ Then('you submit the form again from the duplicates modal', () => {
 // New person in WHO RMNCH Tracker
 And('you are in the WHO RMNCH program registration page', () => {
     cy.visit('/#/new?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(1)
+    cy.get('input[type="text"]')
+        .eq(0)
         .invoke('val').should('not.be.empty');
 });
 
@@ -441,8 +441,8 @@ And('you are in Child programme and Buma MCHP organization unit registration pag
 });
 
 And('you fill the form with age 0', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(9)
+    cy.get('input[type="text"]')
+        .eq(1)
         .type(moment().format('YYYY-MM-DD'))
         .blur();
 });
@@ -455,30 +455,30 @@ And('you see validation warning on birth date', () => {
 
 And('you fill the WHO RMNCH program registration form with its required unique values', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(2)
+        .eq(1)
         .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
 
     cy.get('[data-test="capture-ui-input"]')
-        .eq(3)
+        .eq(2)
         .type('Gonzales');
 
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(9)
+    cy.get('input[type="text"]')
+        .eq(1)
         .type('1992-01-01')
         .blur();
 });
 
 And('you fill the WHO RMNCH program registration form with its required values', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(2)
+        .eq(1)
         .type('Ava');
 
     cy.get('[data-test="capture-ui-input"]')
-        .eq(3)
+        .eq(2)
         .type('Didriksson');
 
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(9)
+    cy.get('input[type="text"]')
+        .eq(1)
         .type('1985-10-01')
         .blur();
 });
@@ -614,11 +614,11 @@ And('you fill the Child Program program registration form with unique values', (
         .type(30)
         .blur();
     cy.get('[data-test="capture-ui-input"]')
-        .eq(4)
+        .eq(2)
         .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
     cy.get('[data-test="capture-ui-input"]')
-        .eq(5)
+        .eq(3)
         .type(`Beth-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
     cy.get('[data-test="capture-ui-input"]')

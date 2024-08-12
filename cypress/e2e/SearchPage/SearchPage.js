@@ -245,13 +245,13 @@ Given('you are in the search page with the Adult Woman being preselected from th
 
 When('you fill in the date of birth', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(2)
+        .find('input[type=text]')
+        .eq(0)
         .type('1999-09-01')
         .blur();
     cy.get('[data-test="form-attributes"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(3)
+        .find('input[type=text]')
+        .eq(1)
         .type('2020-01-01')
         .blur();
 });
