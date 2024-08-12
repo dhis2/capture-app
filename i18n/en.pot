@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
-"PO-Revision-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-08-12T22:17:50.440Z\n"
+"PO-Revision-Date: 2024-08-12T22:17:50.440Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -34,6 +34,9 @@ msgstr ""
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
+
+msgid "More"
+msgstr "More"
 
 msgid "View {{programName}} dashboard"
 msgstr "View {{programName}} dashboard"
@@ -1501,6 +1504,25 @@ msgstr "Please select a valid event"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
+
+msgid "An error occurred while deleting the event"
+msgstr "An error occurred while deleting the event"
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+
+msgid "An error occurred when updating event status"
+msgstr "An error occurred when updating event status"
+
+msgid "Unskip"
+msgstr "Unskip"
+
+msgid "Skip"
+msgstr "Skip"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr "To open this event, please wait until saving is complete"

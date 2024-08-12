@@ -3,7 +3,8 @@ import React, { type ComponentType, useState, useCallback } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 // $FlowFixMe
-import { colors,
+import {
+    colors,
     spacersNum,
     DataTableBody,
     DataTableHead,
@@ -16,12 +17,15 @@ import { colors,
     IconAdd16,
     Tooltip,
 } from '@dhis2/ui';
+import log from 'loglevel';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { sortDataFromEvent } from './hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
+import { EventRow } from './EventRow';
+import { errorCreator } from '../../../../../../capture-core-utils';
 
 
 const styles = {
@@ -29,10 +33,6 @@ const styles = {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
         cursor: 'pointer',
-    },
-    rowDisabled: {
-        cursor: 'not-allowed',
-        opacity: 0.5,
     },
     container: {
         display: 'flex',
@@ -68,10 +68,14 @@ const StageDetailPlain = (props: Props) => {
         repeatable = false,
         enableUserAssignment = false,
         onEventClick,
+        onDeleteEvent,
+        onUpdateEventStatus,
+        onRollbackDeleteEvent,
         onViewAll,
         onCreateNew,
         hiddenProgramStage,
-        classes } = props;
+        classes,
+    } = props;
     const defaultSortState = {
         columnName: 'status',
         sortDirection: SORT_DIRECTION.DESC,
@@ -126,6 +130,8 @@ const StageDetailPlain = (props: Props) => {
                 className={classes.row}
             >
                 {headerCells}
+
+                <DataTableColumnHeader />
             </DataTableRow>
         );
     }
@@ -173,15 +179,27 @@ const StageDetailPlain = (props: Props) => {
                         )}
                     </Tooltip>
                 ));
+                const eventDetails = events.find(event => event.event === row.id);
 
+                if (!eventDetails) {
+                    log.error(errorCreator('Event details not found')({ row }));
+                    return null;
+                }
 
                 return (
-                    <DataTableRow
-                        className={!row.pendingApiResponse ? classes.row : classes.rowDisabled}
-                        key={row.id}
-                    >
-                        {cells}
-                    </DataTableRow>
+                    <EventRow
+                        id={row.id}
+                        pendingApiResponse={row.pendingApiResponse}
+                        eventDetails={eventDetails}
+                        teiId={eventDetails.trackedEntity}
+                        programId={programId}
+                        enrollmentId={eventDetails.enrollment}
+                        cells={cells}
+                        onEventClick={onEventClick}
+                        onDeleteEvent={onDeleteEvent}
+                        onRollbackDeleteEvent={onRollbackDeleteEvent}
+                        onUpdateEventStatus={onUpdateEventStatus}
+                    />
                 );
             });
     }
@@ -252,7 +270,7 @@ const StageDetailPlain = (props: Props) => {
 
         return (
             <DataTableRow>
-                <DataTableCell staticStyle colSpan={`${headerColumns.length}`}>
+                <DataTableCell staticStyle colSpan={`${headerColumns.length + 1}`}>
                     {renderShowMoreButton()}
                     {renderViewAllButton()}
                     {renderCreateNewButton()}

@@ -41,6 +41,11 @@ import { LoadingMaskForPage } from '../../../LoadingMasks';
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
+import {
+    addPersistedEnrollmentEvents,
+    deleteEnrollmentEvent,
+    updateEnrollmentEventStatus,
+} from '../../common/EnrollmentOverviewDomain/enrollment.actions';
 
 
 export const EnrollmentPageDefault = () => {
@@ -133,6 +138,18 @@ export const EnrollmentPageDefault = () => {
         dispatch(updateIncidentDate(incidentDate));
     }, [dispatch]);
 
+    const onDeleteEvent = useCallback((eventId: string) => {
+        dispatch(deleteEnrollmentEvent(eventId));
+    }, [dispatch]);
+
+    const onRollbackDeleteEvent = useCallback((eventDetails: ApiEnrollmentEvent) => {
+        dispatch(addPersistedEnrollmentEvents({ events: [eventDetails] }));
+    }, [dispatch]);
+
+    const onUpdateEventStatus = useCallback((eventId: string, status: string) => {
+        dispatch(updateEnrollmentEventStatus(eventId, status));
+    }, [dispatch]);
+
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
@@ -188,6 +205,9 @@ export const EnrollmentPageDefault = () => {
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}
+            onDeleteEvent={onDeleteEvent}
+            onUpdateEventStatus={onUpdateEventStatus}
+            onRollbackDeleteEvent={onRollbackDeleteEvent}
             onLinkedRecordClick={onLinkedRecordClick}
             onUpdateTeiAttributeValues={onUpdateTeiAttributeValues}
             onUpdateEnrollmentDate={onUpdateEnrollmentDate}

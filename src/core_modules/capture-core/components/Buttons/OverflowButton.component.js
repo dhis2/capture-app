@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useRef, useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { Button, Layer, Popper } from '@dhis2/ui';
 
 type Props = {
@@ -42,6 +43,7 @@ export const OverflowButton = ({
     return (
         <div ref={anchorRef}>
             <Button
+                title={label ?? i18n.t('More')}
                 primary={primary}
                 secondary={secondary}
                 dataTest={dataTest}
