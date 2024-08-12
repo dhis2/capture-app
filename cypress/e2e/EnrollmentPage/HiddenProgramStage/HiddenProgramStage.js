@@ -28,7 +28,7 @@ Given('you add an enrollment event that will result in a rule effect to hide a p
         '/#/enrollmentEventNew?enrollmentId=fmhIsWXVDmS&orgUnitId=s7SLtx8wmRA&programId=WSGAb5XwJ3Y&stageId=PFDfvmGpsR3&teiId=uW8Y7AIcRKA',
     );
 
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[placeholder=yyyy-mm-dd]')
         .eq(0)
         .type(moment().format('YYYY-MM-DD'))
         .blur();

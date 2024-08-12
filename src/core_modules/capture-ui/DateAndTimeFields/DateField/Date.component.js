@@ -1,10 +1,12 @@
 // @flow
 import React from 'react';
 import { CalendarInput } from '@dhis2/ui';
+import { systemSettingsStore } from '../../../capture-core/metaDataMemoryStores';
 
 type Props = {
     value: ?string,
-    width: string,
+    label: ?String,
+    width: number,
     maxWidth?: ?number,
     calendarWidth?: ?number,
     inputWidth?: ?number,
@@ -12,7 +14,7 @@ type Props = {
     onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-    calendar: string,
+    calendar?: string,
 };
 
 export class DateField extends React.Component<Props> {
@@ -40,11 +42,16 @@ export class DateField extends React.Component<Props> {
             onFocus,
             onDateSelectedFromCalendar,
             calendar,
+            label,
+            value,
             ...passOnProps
         } = this.props;
+
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
         const calendarType = calendar || 'gregory';
+        const format = systemSettingsStore.get().dateFormat;
+
         return (
             <div
                 style={{
@@ -54,13 +61,14 @@ export class DateField extends React.Component<Props> {
             >
                 <CalendarInput
                     {...passOnProps}
+                    label={label}
+                    format={format}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
-                    date={this.props.value}
+                    date={value}
                     width={String(calculatedCalendarWidth)}
                     inputWidth={String(calculatedInputWidth)}
                     onFocus={this.props.onFocus}
-                    editable
                     disabled={this.props.disabled}
                 />
             </div>

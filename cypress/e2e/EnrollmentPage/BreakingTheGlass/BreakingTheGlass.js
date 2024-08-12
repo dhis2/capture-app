@@ -16,7 +16,7 @@ Given('the tei created by this test is cleared from the database', () => {
 
 And('you create a new tei in Child programme from Ngelehun CHC', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW');
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('[input[placeholder=yyyy-mm-dd]')
         .eq(1)
         .type('1999-09-01')
         .blur();
@@ -30,7 +30,7 @@ And('you create a new tei in Child programme from Ngelehun CHC', () => {
         .eq(1)
         .type('TheGlass')
         .blur();
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('[input[placeholder=yyyy-mm-dd]')
         .eq(7)
         .type('2023-09-01')
         .blur();

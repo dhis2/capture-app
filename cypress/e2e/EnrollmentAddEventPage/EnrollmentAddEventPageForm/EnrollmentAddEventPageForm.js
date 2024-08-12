@@ -89,7 +89,7 @@ When(/^you click the create new button number (.*)$/, (eq) => {
 });
 
 When(/^you type (.*) in the input number (.*)$/, (value, eq) => {
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[placeholder=yyyy-mm-dd], [data-test="capture-ui-input"]')
         .eq(eq)
         .type(value)
         .blur();
@@ -160,7 +160,7 @@ When(/^the user selects (.*)$/, (value) => {
 });
 
 When(/^you focus and blur a required field/, () => {
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[placeholder=yyyy-mm-dd], [data-test="capture-ui-input"]')
         .eq(1)
         .focus()
         .blur();
