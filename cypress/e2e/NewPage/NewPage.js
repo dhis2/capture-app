@@ -555,15 +555,15 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis, treatmen
 
 And('you fill the Malaria case diagnosis registration form with values', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(3)
+        .eq(2)
         .type(`Ana-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
     cy.get('[data-test="capture-ui-input"]')
-        .eq(4)
+        .eq(3)
         .type(`Maria-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(5)
+    cy.get('input[type="text"]')
+        .eq(1)
         .type(moment().add(-1, 'day').format('YYYY-MM-DD'))
         .blur();
 });
