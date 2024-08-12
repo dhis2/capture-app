@@ -4,7 +4,7 @@ import { CalendarInput } from '@dhis2/ui';
 import { systemSettingsStore } from '../../../../../capture-core/metaDataMemoryStores';
 
 type Props = {
-    label: ?string,
+    label?: ?string,
     value: ?string,
     width: number,
     calendar?: string,
@@ -52,7 +52,6 @@ export class D2Date extends React.Component<Props, State> {
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
-            label,
             value,
             disabled,
             ...passOnProps
@@ -69,8 +68,8 @@ export class D2Date extends React.Component<Props, State> {
                 }}
             >
                 <CalendarInput
-                    label={label}
                     {...passOnProps}
+                    label={this.props.label}
                     format={format}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
