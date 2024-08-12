@@ -52,6 +52,9 @@ export class D2Date extends React.Component<Props, State> {
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
+            label,
+            value,
+            disabled,
             ...passOnProps
         } = this.props;
 
@@ -66,7 +69,7 @@ export class D2Date extends React.Component<Props, State> {
                 }}
             >
                 <CalendarInput
-                    label=""
+                    label={label}
                     {...passOnProps}
                     format={format}
                     onDateSelect={this.handleDateSelected}
@@ -74,9 +77,8 @@ export class D2Date extends React.Component<Props, State> {
                     date={this.state.date}
                     width={String(calculatedCalendarWidth)}
                     inputWidth={String(calculatedInputWidth)}
-                    onFocus={this.props.onFocus}
-                    editable
-                    disabled={this.props.disabled}
+                    onFocus={onFocus}
+                    disabled={disabled}
                 />
             </div>
         );
