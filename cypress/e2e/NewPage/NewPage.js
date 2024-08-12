@@ -485,26 +485,26 @@ And('you fill the WHO RMNCH program registration form with its required values',
 
 And('you fill in child programme first name with value that has duplicates', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(4)
+        .eq(2)
         .type('Sarah')
         .blur();
 });
 
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[type="text"]')
         .eq(1)
         .type('2021-01-01')
         .blur();
     cy.get('[data-test="capture-ui-input"]')
-        .eq(4)
+        .eq(2)
         .type('Sarah')
         .blur();
 });
 
 And('you fill in the birth report date', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(7)
+    cy.get('input[type="text"]')
+        .eq(2)
         .type('2023-01-01')
         .blur();
 });
@@ -530,9 +530,9 @@ And('you see the form prefield with existing TEI attributes values', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
         cy.contains('New Enrollment in program: Child Programme').should('exist');
         cy.contains('First name').should('exist');
-        cy.get('[data-test="capture-ui-input"]').eq(4).should('have.value', 'Anna');
+        cy.get('[data-test="capture-ui-input"]').eq(2).should('have.value', 'Anna');
         cy.contains('Last name').should('exist');
-        cy.get('[data-test="capture-ui-input"]').eq(5).should('have.value', 'Jones');
+        cy.get('[data-test="capture-ui-input"]').eq(3).should('have.value', 'Jones');
         cy.contains('Gender').should('exist');
         cy.contains('Female').should('exist');
     });
@@ -602,15 +602,15 @@ Then('the first stage appears on registration page', () => {
 });
 
 And('you fill the Child Program program registration form with unique values', () => {
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[type="text"]')
         .eq(1)
         .type('2021-01-01')
         .blur();
     cy.get('[data-test="capture-ui-input"]')
-        .eq(2)
+        .eq(0)
         .type(20);
     cy.get('[data-test="capture-ui-input"]')
-        .eq(3)
+        .eq(1)
         .type(30)
         .blur();
     cy.get('[data-test="capture-ui-input"]')
@@ -621,8 +621,8 @@ And('you fill the Child Program program registration form with unique values', (
         .eq(3)
         .type(`Beth-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(7)
+    cy.get('input[type="text"]')
+        .eq(2)
         .type('2021-01-01')
         .blur();
 });
