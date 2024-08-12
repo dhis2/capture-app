@@ -1,12 +1,10 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
 import React, { Component, type ComponentType } from 'react';
-import { Checkbox, spacersNum } from '@dhis2/ui';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+import { Checkbox, spacersNum, FieldSet, Label } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { multiOrientations } from './multiSelectBoxes.const';
+import { FormGroup } from '../FormGroup.component';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,
@@ -137,7 +135,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
 
         return (
             <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
-                <FormControl component="fieldset">
+                <FieldSet>
                     {
                         (() => {
                             if (!label) {
@@ -145,19 +143,17 @@ class MultiSelectBoxesPlain extends Component<Props> {
                             }
 
                             return (
-                                <FormLabel
-                                    component="label"
+                                <Label
                                     required={!!required}
-                                    classes={this.labelClasses}
-                                    focused={false}
+                                    className={this.labelClasses}
                                 >
                                     {label}
-                                </FormLabel>
+                                </Label>
                             );
                         })()
                     }
                     {this.renderCheckboxes()}
-                </FormControl>
+                </FieldSet>
             </div>
         );
     }

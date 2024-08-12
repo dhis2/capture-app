@@ -631,6 +631,7 @@ class NewEventDataEntry extends Component<Props> {
                         onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
                         onUpdateFormField={onUpdateField(orgUnit)}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
+                        selectedOrgUnitId={orgUnit.id}
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={this.dataEntrySections}

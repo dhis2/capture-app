@@ -21,7 +21,7 @@ const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: Re
             return dataEntryOutputs ? [...dataEntryOutputs, output] : [output];
         };
         getOutput = (key: any) => (
-            <div style={{ marginTop: 10 }} key={key}>
+            <div key={key}>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Output
                     key={key}

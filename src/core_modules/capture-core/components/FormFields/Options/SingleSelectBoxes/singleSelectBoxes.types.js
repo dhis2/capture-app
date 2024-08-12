@@ -13,7 +13,7 @@ export type Props = {
         label: string,
         iconSelected: string,
         iconDeselected: string,
-        checkbox: string,
+        radio: string,
     },
     style?: ?Object,
 };

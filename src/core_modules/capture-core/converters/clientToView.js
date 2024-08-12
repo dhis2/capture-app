@@ -3,7 +3,6 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { PreviewImage } from 'capture-ui';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
@@ -59,13 +58,7 @@ function convertFileForDisplay(clientValue: FileClientValue) {
 }
 
 function convertImageForDisplay(clientValue: ImageClientValue) {
-    return featureAvailable(FEATURES.trackerImageEndpoint) ? (
-        <PreviewImage
-            url={clientValue.url}
-            previewUrl={clientValue.previewUrl}
-            alignLeft
-        />
-    ) : convertFileForDisplay(clientValue);
+    return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} alignLeft />;
 }
 
 function convertOrgUnitForDisplay(clientValue: OrgUnitClientValue) {
@@ -77,7 +70,6 @@ function convertOrgUnitForDisplay(clientValue: OrgUnitClientValue) {
         />
     );
 }
-
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,

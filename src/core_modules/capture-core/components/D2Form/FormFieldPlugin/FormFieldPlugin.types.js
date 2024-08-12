@@ -72,4 +72,5 @@ export type ComponentProps = {|
     errors: { [id: string]: Array<string> },
     warnings: { [id: string]: Array<string> },
     setContextFieldValue: (SetFieldValueProps) => void,
+    viewMode: boolean,
 |}

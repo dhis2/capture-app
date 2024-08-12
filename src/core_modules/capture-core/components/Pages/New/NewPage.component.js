@@ -25,6 +25,7 @@ const getStyles = () => ({
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage,
+    showMessageThatCategoryOptionIsInvalidForOrgUnit,
     showDefaultViewOnNewPage,
     handleMainPageNavigation,
     classes,
@@ -32,6 +33,7 @@ const NewPagePlain = ({
     newPageStatus,
     writeAccess,
     programCategorySelectionIncomplete,
+    categoryOptionIsInvalidForOrgUnit,
     missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
     isUserInteractionInProgress,
@@ -53,6 +55,8 @@ const NewPagePlain = ({
             showMessageToSelectOrgUnitOnNewPage();
         } else if (programCategorySelectionIncomplete) {
             showMessageToSelectProgramCategoryOnNewPage();
+        } else if (categoryOptionIsInvalidForOrgUnit) {
+            showMessageThatCategoryOptionIsInvalidForOrgUnit();
         } else {
             showDefaultViewOnNewPage();
         }
@@ -63,6 +67,8 @@ const NewPagePlain = ({
         showMessageToSelectOrgUnitOnNewPage,
         showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
+        categoryOptionIsInvalidForOrgUnit,
+        showMessageThatCategoryOptionIsInvalidForOrgUnit,
     ]);
     const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
 
@@ -135,6 +141,16 @@ const NewPagePlain = ({
                             })()
                         }
 
+                        {
+                            newPageStatus === newPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT && (
+                                <IncompleteSelectionsMessage>
+                                    {i18n.t(
+                                        'The category option is not valid for the selected organisation unit. Please select a valid combination.',
+                                    )}
+                                </IncompleteSelectionsMessage>
+                            )
+                        }
+
                     </OrgUnitFetcher>
             }
         </div>
@@ -142,8 +158,8 @@ const NewPagePlain = ({
 };
 
 export const NewPageComponent: ComponentType<ContainerProps> =
-  compose(
-      withLoadingIndicator(),
-      withErrorMessageHandler(),
-      withStyles(getStyles),
-  )(NewPagePlain);
+    compose(
+        withLoadingIndicator(),
+        withErrorMessageHandler(),
+        withStyles(getStyles),
+    )(NewPagePlain);

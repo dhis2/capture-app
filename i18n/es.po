@@ -1331,9 +1331,6 @@ msgstr "Comenzó en {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Propiedad de {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Última actualización {{date}}"
-
 msgid "Cancelled"
 msgstr "Cancelar"
 

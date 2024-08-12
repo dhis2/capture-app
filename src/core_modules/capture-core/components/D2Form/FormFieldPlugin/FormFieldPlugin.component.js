@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect, useRef, useState } from 'react';
-import { Plugin } from '@dhis2/app-runtime/build/es/experimental';
+import { Plugin } from '@dhis2/app-runtime/experimental';
 import type { ComponentProps } from './FormFieldPlugin.types';
 
 export const FormFieldPluginComponent = (props: ComponentProps) => {

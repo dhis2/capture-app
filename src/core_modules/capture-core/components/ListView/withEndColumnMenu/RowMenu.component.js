@@ -1,10 +1,8 @@
 // @flow
 import * as React from 'react';
 import { Manager, Popper, Reference } from 'react-popper';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { spacers, IconMore24, colors } from '@dhis2/ui';
+import { Card, spacers, IconMore24, colors, Layer } from '@dhis2/ui';
 import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -125,34 +123,35 @@ class Index extends React.Component<Props, State> {
                     }
                 </Reference>
                 {this.state.menuOpen &&
-                <Popper
-                    placement="bottom-end"
-                    strategy={'fixed'}
-                >
-                    {
-                        ({ ref, style, placement }) => (
-                            <div
-                                ref={ref}
-                                style={style}
-                                className={classes.popperContainer}
-                                data-placement={placement}
-                            >
-                                <ClickAwayListener onClickAway={this.handleClickAway}>
+                <Layer onBackdropClick={this.handleClickAway} >
+                    <Popper
+                        placement="bottom-end"
+                        strategy={'fixed'}
+                    >
+                        {
+                            ({ ref, style, placement }) => (
+                                <div
+                                    ref={ref}
+                                    style={style}
+                                    className={classes.popperContainer}
+                                    data-placement={placement}
+                                >
                                     <Grow
                                         in={!!this.state.menuOpen}
                                         id="menu-list-grow"
                                         style={{ transformOrigin: '0 0 0' }}
                                         timeout={{ exit: 0, enter: 200 }}
                                     >
-                                        <Paper>
+                                        <Card>
                                             {this.renderMenuItems()}
-                                        </Paper>
+                                        </Card>
                                     </Grow>
-                                </ClickAwayListener>
-                            </div>
-                        )
-                    }
-                </Popper>}
+                                </div>
+                            )
+                        }
+                    </Popper>
+                </Layer>
+                }
             </Manager>
         );
     }

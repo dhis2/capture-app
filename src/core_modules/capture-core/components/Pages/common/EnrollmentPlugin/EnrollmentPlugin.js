@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect, useRef, useState } from 'react';
-import { Plugin } from '@dhis2/app-runtime/build/es/experimental';
+import { Plugin } from '@dhis2/app-runtime/experimental';
 import { useHistory } from 'react-router-dom';
 
 type EnrollmentPluginProps = {|
@@ -9,6 +9,8 @@ type EnrollmentPluginProps = {|
     teiId: string,
     orgUnitId: string,
     pluginSource: string,
+    programStageId?: string,
+    eventId?: string,
 |};
 
 export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPluginProps) => {
