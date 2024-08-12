@@ -6,7 +6,7 @@ import '../WidgetProfile';
 import '../WidgetEnrollmentNote';
 
 When('the user sets the birthday date to the current date', () => {
-    cy.get('[data-test="modal-edit-profile"]').find('[data-test="capture-ui-input"]').eq(8).clear()
+    cy.get('[data-test="modal-edit-profile"]').find('input[type="text"]').eq(0).clear()
         .blur()
         .type(moment().format('YYYY-MM-DD'))
         .blur();
