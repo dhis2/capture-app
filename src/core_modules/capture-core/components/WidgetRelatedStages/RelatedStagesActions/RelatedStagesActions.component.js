@@ -71,7 +71,6 @@ export const RelatedStagesActionsPlain = ({
             linkMode: action,
         }));
     };
-
     const canAddNewEventToStage = useCanAddNewEventToStage(programStage, linkableEvents);
 
     if (!programStage) {
