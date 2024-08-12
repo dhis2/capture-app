@@ -254,7 +254,8 @@ When('you open the column selector', () => {
 When('you select the organisation unit and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
         .contains('Organisation unit')
-        .find('input')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.get('aside[role="dialog"]')
@@ -616,7 +617,8 @@ When('you select the Foci response program stage', () => {
 When('you select a data element columns and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
         .contains('People included')
-        .find('input')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.get('aside[role="dialog"]')
@@ -677,7 +679,8 @@ Then('you see scheduledAt filter', () => {
 When('you select a scheduledAt column and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
         .contains('Appointment date')
-        .find('input')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.get('aside[role="dialog"]')
