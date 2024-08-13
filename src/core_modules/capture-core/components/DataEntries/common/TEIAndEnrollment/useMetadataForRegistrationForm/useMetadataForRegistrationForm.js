@@ -16,6 +16,7 @@ type Props = {|
 |}
 
 export const FieldElementObjectTypes = Object.freeze({
+    // TODO [DHIS2-17605] - Unify TEA and DataElement to a common key
     TRACKED_ENTITY_ATTRIBUTE: 'TrackedEntityAttribute',
     ATTRIBUTE: 'Attribute',
 });

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { Card } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { OfflineEventsList } from '../../../../EventsList/OfflineEventsList/OfflineEventsList.component';
 import { listId } from './RecentlyAddedEventsList.const';
@@ -30,7 +30,7 @@ const NewEventsListPlain = (props: Props) => {
         return null;
     }
     return (
-        <Paper className={classes.container}>
+        <Card className={classes.container}>
             <div
                 className={classes.header}
             >
@@ -43,7 +43,7 @@ const NewEventsListPlain = (props: Props) => {
                 emptyListText={i18n.t('No events added')}
                 {...passOnProps}
             />
-        </Paper>
+        </Card>
     );
 };
 

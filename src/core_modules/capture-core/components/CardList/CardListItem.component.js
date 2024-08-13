@@ -3,9 +3,10 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
 import type { ComponentType } from 'react';
-import { Avatar, Grid, withStyles } from '@material-ui/core';
+import { Grid, withStyles } from '@material-ui/core';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import { CardImage } from '../../../capture-ui/CardImage/CardImage.component';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
@@ -63,8 +64,8 @@ const getStyles = (theme: Theme) => ({
         flexGrow: 1,
     },
     image: {
-        width: theme.typography.pxToRem(44),
-        height: theme.typography.pxToRem(44),
+        width: theme.typography.pxToRem(54),
+        height: theme.typography.pxToRem(54),
         marginRight: theme.typography.pxToRem(8),
     },
     buttonMargin: {
@@ -151,7 +152,8 @@ const CardListItemIndex = ({
         const imageValue = item.values[imageElement.id];
         return (
             <div>
-                {imageValue && <Avatar src={imageValue.url} alt={imageValue.name} className={classes.image} />}
+                {imageValue && <CardImage imageUrl={imageValue.url} className={classes.image} size="medium" />}
+
             </div>
         );
     };

@@ -1,3 +1,38 @@
+## [100.76.1](https://github.com/dhis2/capture-app/compare/v100.76.0...v100.76.1) (2024-08-09)
+
+
+### Bug Fixes
+
+* [DHIS2-17632][DHIS2-17633] restrict invalid category combo for orgUnit ([#3738](https://github.com/dhis2/capture-app/issues/3738)) ([bfffe06](https://github.com/dhis2/capture-app/commit/bfffe069e3c16387dc0da6c08ed25b91f3f55bf1))
+
+# [100.76.0](https://github.com/dhis2/capture-app/compare/v100.75.1...v100.76.0) (2024-08-08)
+
+
+### Features
+
+* [DHIS2-17171] preview images in versions prior to 41 ([#3694](https://github.com/dhis2/capture-app/issues/3694)) ([2f51805](https://github.com/dhis2/capture-app/commit/2f51805b469d74b57bff7c927a9aa76420913ea1))
+
+## [100.75.1](https://github.com/dhis2/capture-app/compare/v100.75.0...v100.75.1) (2024-08-08)
+
+
+### Bug Fixes
+
+* [DHIS2-17859] Add missing ids to Enrollment plugin ([#3748](https://github.com/dhis2/capture-app/issues/3748)) ([19c77ec](https://github.com/dhis2/capture-app/commit/19c77ec50c2fff0deef948abd516726b51f95418))
+
+# [100.75.0](https://github.com/dhis2/capture-app/compare/v100.74.0...v100.75.0) (2024-08-07)
+
+
+### Features
+
+* [DHIS2-17726] Plugins in Profile Widget ([#3709](https://github.com/dhis2/capture-app/issues/3709)) ([d783ade](https://github.com/dhis2/capture-app/commit/d783ade253e27badf03d267d8a3935186b170fd8))
+
+# [100.74.0](https://github.com/dhis2/capture-app/compare/v100.73.0...v100.74.0) (2024-08-07)
+
+
+### Features
+
+* [DHIS2-17591][DHIS2-17607] Plugins in event forms ([#3684](https://github.com/dhis2/capture-app/issues/3684)) ([205b9f5](https://github.com/dhis2/capture-app/commit/205b9f5746f3d9b3d0d28035fd99e40b5649003c))
+
 # [100.73.0](https://github.com/dhis2/capture-app/compare/v100.72.0...v100.73.0) (2024-08-07)
 
 

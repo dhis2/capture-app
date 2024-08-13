@@ -16,6 +16,7 @@ export type PlainProps = {|
     teiId: string,
     enrollmentId: string,
     eventId: string,
+    stageId: string,
     program: Program,
     trackedEntityTypeId: string,
     mode: string,
