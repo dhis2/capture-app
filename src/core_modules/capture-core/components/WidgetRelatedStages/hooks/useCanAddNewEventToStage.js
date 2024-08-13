@@ -5,8 +5,6 @@ import { ProgramStage } from '../../../metaData';
 import type { LinkableEvent } from '../RelatedStagesActions/RelatedStagesActions.types';
 
 export const useCanAddNewEventToStage = (programStage: ?ProgramStage, existingRelatedEvents: LinkableEvent[]) => {
-    console.log('programStage', programStage);
-    console.log('existingRelatedEvents', existingRelatedEvents);
     const hiddenProgramStages = useSelector(({ rulesEffectsHiddenProgramStageDesc }) =>
         rulesEffectsHiddenProgramStageDesc?.['enrollmentEvent-newEvent'],
     );
