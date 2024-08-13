@@ -31,11 +31,6 @@ export type Props = {|
     emptyText: string,
 |}
 
-export type PlainProps = {|
-    ...PlainProps,
-    ...CssClasses
-|}
-
 export type IndicatorProps = {|
     indicators?: ?Array<string | FilteredText | FilteredKeyValue>,
     emptyText: string,

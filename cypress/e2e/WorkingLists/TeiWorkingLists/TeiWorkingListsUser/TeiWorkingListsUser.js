@@ -42,9 +42,10 @@ Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenat
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('First antenatal care visit')
@@ -66,9 +67,10 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Household investigation')
@@ -186,9 +188,10 @@ When('you set the WHOMCH Smoking filter to No', () => {
         .within(() => {
             cy.get('[data-test="more-filters"]').eq(1)
                 .click();
-            cy.contains('WHOMCH Smoking')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('WHOMCH Smoking').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('No')
@@ -251,7 +254,8 @@ When('you open the column selector', () => {
 When('you select the organisation unit and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
         .contains('Organisation unit')
-        .find('input')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.get('aside[role="dialog"]')
@@ -580,9 +584,9 @@ When('you open the program stage filters from the more filters dropdown menu', (
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 });
 
 Then('you see the program stages and the default events filters', () => {
@@ -613,7 +617,8 @@ When('you select the Foci response program stage', () => {
 When('you select a data element columns and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
         .contains('People included')
-        .find('input')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.get('aside[role="dialog"]')
@@ -674,7 +679,8 @@ Then('you see scheduledAt filter', () => {
 When('you select a scheduledAt column and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
         .contains('Appointment date')
-        .find('input')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.get('aside[role="dialog"]')
@@ -741,9 +747,10 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and co
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Postpartum care visit')
@@ -760,9 +767,10 @@ Given('you open the main page with all accesible records in the WHO RMNCH Tracke
         .within(() => {
             cy.contains('More filters')
                 .click();
-            cy.contains('Program stage')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Postpartum care visit')

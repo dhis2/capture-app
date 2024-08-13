@@ -17,6 +17,8 @@ type InputAttribute = {
 export type ContainerProps = $ReadOnly<{|
   showMessageToSelectOrgUnitOnNewPage: ()=>void,
   showMessageToSelectProgramCategoryOnNewPage: ()=>void,
+  showMessageThatCategoryOptionIsInvalidForOrgUnit: ()=>void,
+  categoryOptionIsInvalidForOrgUnit: boolean,
   showDefaultViewOnNewPage: ()=>void,
   handleMainPageNavigation: ()=>void,
   currentScopeId: string,

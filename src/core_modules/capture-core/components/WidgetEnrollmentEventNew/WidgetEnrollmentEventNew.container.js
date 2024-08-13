@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { AccessVerification } from './AccessVerification';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
+import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 
 export const WidgetEnrollmentEventNew = ({
     programId,
@@ -11,17 +12,29 @@ export const WidgetEnrollmentEventNew = ({
     onSave,
     ...passOnProps
 }: WidgetProps) => {
-    const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+    const { program } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+    const {
+        stage,
+        formFoundation,
+        isLoading,
+        isError,
+    } = useMetadataForProgramStage({ programId, stageId });
 
-    if (!program || !stage || !(program instanceof TrackerProgram)) {
+    if (isLoading) {
+        return (
+            <div>
+                {i18n.t('Loading')}
+            </div>
+        );
+    }
+
+    if (!program || !stage || !(program instanceof TrackerProgram) || isError || !formFoundation) {
         return (
             <div>
                 {i18n.t('program or stage is invalid')};
             </div>
         );
     }
-
-    const formFoundation = stage.stageForm;
 
     return (
         <AccessVerification

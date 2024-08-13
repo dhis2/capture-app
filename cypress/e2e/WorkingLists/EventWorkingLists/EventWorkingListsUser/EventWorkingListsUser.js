@@ -149,7 +149,8 @@ When('you open the column selector', () => {
 When('you select Household location and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
         .contains('Household location')
-        .find('input')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.get('aside[role="dialog"]')
@@ -388,10 +389,10 @@ When('you set the date of admission filter', () => {
         .within(() => {
             cy.contains('More filters')
                 .click();
-
-            cy.contains('Date of admission')
-                .click();
         });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Date of admission').click());
 
     cy.get('[data-test="list-view-filter-contents"]')
         .within(() => {

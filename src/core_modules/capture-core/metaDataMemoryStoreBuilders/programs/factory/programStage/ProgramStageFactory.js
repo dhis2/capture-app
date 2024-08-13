@@ -7,11 +7,11 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirst
 import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import type {
     CachedProgramStageDataElement,
-    CachedSectionDataElements,
     CachedProgramStageSection,
     CachedProgramStage,
     CachedProgramStageDataElementsAsObject,
     CachedOptionSet,
+    CachedDataElement,
 } from '../../../../storageControllers/cache.types';
 import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
@@ -20,6 +20,12 @@ import { DataElementFactory } from './DataElementFactory';
 import { RelationshipTypesFactory } from './RelationshipTypesFactory';
 import type { ConstructorInput, SectionSpecs } from './programStageFactory.types';
 import { transformEventNode } from '../transformNodeFuntions/transformNodeFunctions';
+import type { DataEntryFormConfig } from '../../../../components/DataEntries/common/TEIAndEnrollment';
+import { FormFieldTypes } from '../../../../components/D2Form/FormFieldPlugin/FormFieldPlugin.const';
+import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
+import {
+    FieldElementObjectTypes,
+} from '../../../../components/DataEntries/common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
 export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
@@ -27,24 +33,30 @@ export class ProgramStageFactory {
     cachedOptionSets: Map<string, CachedOptionSet>;
     locale: ?string;
     dataElementFactory: DataElementFactory;
+    cachedDataElements: ?Map<string, CachedDataElement>;
     relationshipTypesFactory: RelationshipTypesFactory;
+    dataEntryFormConfig: ?DataEntryFormConfig;
 
     constructor({
         cachedOptionSets,
         cachedRelationshipTypes,
+        cachedDataElements,
         locale,
         minorServerVersion,
+        dataEntryFormConfig,
     }: ConstructorInput) {
         this.cachedOptionSets = cachedOptionSets;
         this.locale = locale;
         this.relationshipTypesFactory = new RelationshipTypesFactory(
             cachedRelationshipTypes,
         );
+        this.cachedDataElements = cachedDataElements;
         this.dataElementFactory = new DataElementFactory(
             cachedOptionSets,
             locale,
             minorServerVersion,
         );
+        this.dataEntryFormConfig = dataEntryFormConfig;
     }
 
     async _buildSection(
@@ -58,17 +70,61 @@ export class ProgramStageFactory {
 
         if (sectionSpecs.dataElements) {
             // $FlowFixMe
-            await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement: CachedSectionDataElements) => {
-                const id = sectionDataElement.id;
-                const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
-                if (!cachedProgramStageDataElement) {
-                    log.error(
-                        errorCreator('could not find programStageDataElement')(
-                            { sectionDataElement }));
-                    return;
+            await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement) => {
+                if (sectionDataElement.type === FormFieldTypes.PLUGIN) {
+                    const attributes = sectionDataElement.fieldMap
+                        .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
+                        .reduce((acc, attribute) => {
+                            acc[attribute.IdFromApp] = attribute;
+                            return acc;
+                        }, {});
+
+                    const element = new FormFieldPluginConfig((o) => {
+                        o.id = sectionDataElement.id;
+                        o.name = sectionDataElement.name;
+                        o.pluginSource = sectionDataElement.pluginSource;
+                        o.fields = new Map();
+                        o.customAttributes = attributes;
+                    });
+
+                    await sectionDataElement.fieldMap.asyncForEach(async (field) => {
+                        if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                            const id = field.dataElementId;
+                            const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
+                            if (!cachedProgramStageDataElement) {
+                                log.error(
+                                    errorCreator('could not find programStageDataElement')(
+                                        { sectionDataElement }));
+                                return;
+                            }
+                            const currentField = await this.dataElementFactory
+                                .build(cachedProgramStageDataElement, section);
+                            currentField && element.addField(field.IdFromPlugin, currentField);
+                        }
+                    });
+
+                    element && section.addElement(element);
+                } else {
+                    const id = sectionDataElement.id;
+                    const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
+                    const cachedDataElementDefinition = this
+                        .cachedDataElements
+                        ?.get(cachedProgramStageDataElement.dataElementId);
+
+                    if (!cachedProgramStageDataElement) {
+                        log.error(
+                            errorCreator('could not find programStageDataElement')(
+                                { sectionDataElement }));
+                        return;
+                    }
+
+                    const element = await this.dataElementFactory.build(
+                        cachedProgramStageDataElement,
+                        section,
+                        cachedDataElementDefinition,
+                    );
+                    element && section.addElement(element);
                 }
-                const element = await this.dataElementFactory.build(cachedProgramStageDataElement, section);
-                element && section.addElement(element);
             });
         }
 
@@ -83,7 +139,15 @@ export class ProgramStageFactory {
         if (cachedProgramStageDataElements) {
             // $FlowFixMe
             await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
-                const element = await this.dataElementFactory.build(cachedProgramStageDataElement, section);
+                const cachedDataElementDefinition = this
+                    .cachedDataElements
+                    ?.get(cachedProgramStageDataElement.dataElementId);
+
+                const element = await this.dataElementFactory.build(
+                    cachedProgramStageDataElement,
+                    section,
+                    cachedDataElementDefinition,
+                );
                 element && section.addElement(element);
             }));
         }
@@ -168,6 +232,63 @@ export class ProgramStageFactory {
                     // $FlowFixMe
                     { template: dataEntryForm.htmlCode, error }));
             }
+        } else if (this.dataEntryFormConfig) {
+            const dataElementDictionary = cachedProgramStage.programStageDataElements.reduce((acc, dataElement) => {
+                acc[dataElement.dataElementId] = dataElement;
+                return acc;
+            }, {});
+
+            // $FlowFixMe
+            await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+                const formElements = formConfigSection.elements.reduce((acc, element) => {
+                    if (element.type === FormFieldTypes.PLUGIN) {
+                        const fieldMap = element
+                            .fieldMap
+                            ?.map(field => ({
+                                ...field,
+                                ...dataElementDictionary[field.IdFromApp],
+                            }));
+
+                        acc.push({
+                            ...element,
+                            fieldMap,
+                        });
+                        return acc;
+                    }
+
+                    const dataElement = dataElementDictionary[element.id];
+                    if (dataElement) {
+                        acc.push({
+                            ...dataElement,
+                            id: element.id,
+                        });
+                    }
+                    return acc;
+                }, []);
+
+                if (isNonEmptyArray(formElements)) {
+                    const cachedProgramStageDataElementsAsObject =
+                        ProgramStageFactory._convertProgramStageDataElementsToObject(
+                            cachedProgramStage.programStageDataElements,
+                        );
+
+                    const metadataSection = cachedProgramStage.programStageSections?.find(
+                        section => section.id === formConfigSection.id,
+                    );
+
+                    const section = await this._buildSection(
+                        cachedProgramStageDataElementsAsObject,
+                        {
+                            id: formConfigSection.id,
+                            displayName: metadataSection?.displayName || formConfigSection.name,
+                            displayDescription: metadataSection?.displayDescription || '',
+                            dataElements: formElements,
+                        },
+                    );
+
+                    stageForm.addSection(section);
+                }
+            });
         } else if (isNonEmptyArray(cachedProgramStage.programStageSections)) {
             const cachedProgramStageDataElementsAsObject =
                 ProgramStageFactory._convertProgramStageDataElementsToObject(

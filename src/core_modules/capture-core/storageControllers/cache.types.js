@@ -172,7 +172,8 @@ export type CachedProgramSection = {
     id: string,
     displayFormName: string,
     sortOrder: number,
-    trackedEntityAttributes: Array<string>
+    trackedEntityAttributes: Array<string>,
+    displayDescription: string
 }
 
 export type CachedTrackedEntityType = {

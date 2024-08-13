@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Manager, Popper, Reference } from 'react-popper';
 import type { Placement } from '@popperjs/core/lib';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { Layer } from '@dhis2/ui';
 import Grow from '@material-ui/core/Grow';
 
 type Props = {
@@ -74,18 +74,18 @@ export class MenuPopper extends React.Component<Props, State> {
                     }
                 </Reference>
                 {this.state.popperOpen &&
-                <Popper
-                    placement={this.props.placement}
-                >
-                    {
-                        ({ ref, style, placement }) => (
-                            <div
-                                ref={ref}
-                                style={{ ...style, zIndex: 1 }}
-                                className={classes ? classes.popperContainer : ''}
-                                data-placement={placement}
-                            >
-                                <ClickAwayListener onClickAway={this.handleClickAway}>
+                <Layer onBackdropClick={this.handleClickAway} >
+                    <Popper
+                        placement={this.props.placement}
+                    >
+                        {
+                            ({ ref, style, placement }) => (
+                                <div
+                                    ref={ref}
+                                    style={{ ...style, zIndex: 1 }}
+                                    className={classes ? classes.popperContainer : ''}
+                                    data-placement={placement}
+                                >
                                     <Grow
                                         in={!!this.state.popperOpen}
                                         id="menu-list-grow"
@@ -96,11 +96,11 @@ export class MenuPopper extends React.Component<Props, State> {
                                             {getPopperContent(this.toggleMenu)}
                                         </React.Fragment>
                                     </Grow>
-                                </ClickAwayListener>
-                            </div>
-                        )
-                    }
-                </Popper>}
+                                </div>
+                            )
+                        }
+                    </Popper>
+                </Layer>}
             </Manager>
         );
     }

@@ -1,94 +1,35 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Card from '@material-ui/core/Card';
-import { Menu, MenuItem } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
-
+import { WidgetIndicator } from '../../WidgetIndicator';
+import type { FilteredText, FilteredKeyValue } from '../../WidgetFeedback';
 
 type Props = {
     indicatorItems: {
-        displayTexts: [{ key: string, value: string}],
-        displayKeyValuePairs: [{ key: string, value: string}],
-    },
-    classes: {
-        listItem: string,
-        card: string,
+        displayTexts: Array<FilteredText>,
+        displayKeyValuePairs: Array<FilteredKeyValue>,
     },
 };
 
-const styles = (theme: Theme) => ({
-    listItem: {
-        display: 'flex',
-        backgroundColor: '#f5f5f5 !important',
-        paddingLeft: theme.typography.pxToRem(10),
-        marginTop: theme.typography.pxToRem(8),
-    },
-    keyValuePairKey: {
-        flexGrow: 1,
-        margin: 0,
-    },
-    keyValue: {
-        margin: 0,
-        fontSize: '0.875rem',
-    },
-    card: {
-        padding: theme.typography.pxToRem(10),
-        borderRadius: theme.typography.pxToRem(5),
-    },
-    labelContainer: {
-        display: 'flex',
-    },
-});
-
 const getIndicatorOutput = () =>
     class IndicatorkOutputBuilder extends React.Component<Props> {
-        renderIndicatorItems = (indicatorItems: any, classes: any) =>
-            (<div>
-                {indicatorItems.displayTexts &&
-                    indicatorItems.displayTexts.map(item => (
-                        <MenuItem
-                            key={item.id}
-                            className={classes.listItem}
-                            button={false}
-                            dense
-                            label={<p className={classes.keyValuePairKey}>{item.message}</p>}
-                        />
-                    ),
-                    )}
-                {indicatorItems.displayKeyValuePairs &&
-                    indicatorItems.displayKeyValuePairs.map(item => (
-                        <MenuItem
-                            key={item.id}
-                            className={classes.listItem}
-                            button={false}
-                            dense
-                            label={
-                                <div className={classes.labelContainer}>
-                                    <p className={classes.keyValuePairKey}> {item.key} </p>
-                                    <p className={classes.keyValue}> {item.value} </p>
-                                </div>
-                            }
-                        />
-                    ),
-                    )}
-            </div>)
+        getItems = () => {
+            const { indicatorItems } = this.props;
+            const displayTexts = indicatorItems?.displayTexts || [];
+            const displayKeyValuePairs = indicatorItems?.displayKeyValuePairs || [];
+            return [...displayTexts, ...displayKeyValuePairs];
+        }
 
         render = () => {
-            const { indicatorItems, classes } = this.props;
-            const hasItems = indicatorItems && (indicatorItems.displayTexts || indicatorItems.displayKeyValuePairs);
+            const indicators = this.getItems();
+            const hasItems = indicators.length > 0;
             return (
                 <div>
                     {hasItems &&
-                        <Card className={classes.card}>
-                            {i18n.t('Indicators')}
-                            <Menu dense>
-                                {indicatorItems && this.renderIndicatorItems(indicatorItems, classes)}
-                            </Menu>
-                        </Card>
+                        <WidgetIndicator indicators={indicators} emptyText={i18n.t('No indicator output for this event yet')} />
                     }
                 </div>
 
@@ -113,4 +54,4 @@ export const withIndicatorOutput = () =>
 
         withDataEntryOutput()(
             InnerComponent,
-            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(getIndicatorOutput())));
+            connect(mapStateToProps, mapDispatchToProps)(getIndicatorOutput()));

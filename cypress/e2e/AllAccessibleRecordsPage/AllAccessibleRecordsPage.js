@@ -61,6 +61,8 @@ Then('the working list should be updated', () => {
         .click();
 
     cy.contains('WHOMCH Hemoglobin value')
+        .parents('tr')
+        .find('input[type="checkbox"]')
         .click();
 
     cy.contains('Save')
