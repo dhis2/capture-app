@@ -31,3 +31,9 @@ Then('the buttons should be disabled', () => {
                 .should('be.disabled');
         });
 });
+
+Then('the quick action buttons should be disabled', () => {
+    cy.get('[data-test="quick-action-button-container"]')
+        .find('button')
+        .should('be.disabled');
+});

@@ -21,32 +21,35 @@ export const StageCreateNewButton = ({
     preventAddingEventActionInEffect,
     eventName,
 }: Props) => {
-    const isDisabled = useMemo(() => {
+    const { isDisabled, tooltipContent } = useMemo(() => {
         if (!stageWriteAccess) {
-            return true;
-        }
-        if (!repeatable && eventCount > 0) {
-            return true;
-        }
-        return !!preventAddingEventActionInEffect;
-    }, [eventCount, preventAddingEventActionInEffect, repeatable, stageWriteAccess]);
-    const tooltipContent = useMemo(() => {
-        if (!stageWriteAccess) {
-            return i18n.t('You do not have access to create events in this stage', {
-                programStageName: eventName,
-                interpolation: { escapeValue: false },
+            return ({
+                isDisabled: true,
+                tooltipContent: i18n.t('You do not have access to create events in this stage', {
+                    programStageName: eventName,
+                    interpolation: { escapeValue: false },
+                }),
             });
         }
         if (preventAddingEventActionInEffect) {
-            return i18n.t("You can't add any more {{ programStageName }} events", {
-                programStageName: eventName,
-                interpolation: { escapeValue: false },
-            });
+            return {
+                isDisabled: true,
+                tooltipContent: i18n.t("You can't add any more {{ programStageName }} events", {
+                    programStageName: eventName,
+                    interpolation: { escapeValue: false },
+                }),
+            };
         }
         if (!repeatable && eventCount > 0) {
-            return i18n.t('This stage can only have one event');
+            return {
+                isDisabled: true,
+                tooltipContent: i18n.t('This stage can only have one event'),
+            };
         }
-        return '';
+        return {
+            isDisabled: false,
+            tooltipContent: '',
+        };
     }, [eventCount, eventName, preventAddingEventActionInEffect, repeatable, stageWriteAccess]);
 
     return (
