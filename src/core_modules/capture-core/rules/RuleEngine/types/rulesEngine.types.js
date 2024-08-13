@@ -3,7 +3,7 @@ import {
     typeof effectActions,
     typeof eventStatuses,
     typeof rulesEngineEffectTargetDataTypes,
-} from './constants';
+} from '../constants';
 
 export type ProgramRuleVariable = {
     id: string,
@@ -134,21 +134,25 @@ export type CompulsoryEffect = OutputEffect & {
 
 };
 
-export type ProgramRuleEffect = {
-    id: string,
+type ProgramRuleData = {
+    name: string,
     location: ?string,
-    action: string,
     dataElementId: ?string,
     trackedEntityAttributeId: ?string,
     programStageId: ?string,
     programStageSectionId: ?string,
     optionGroupId: ?string,
     optionId: ?string,
+    style?: ?Object,
+};
+
+export type ProgramRuleEffect = {
+    id: string,
+    action: string,
     content: ?string,
     displayContent: ?string,
     data: any,
-    style?: ?Object,
-    name: string,
+    ...ProgramRuleData,
 };
 
 export type ProgramRuleAction = {
@@ -156,16 +160,8 @@ export type ProgramRuleAction = {
     content: string,
     displayContent: string,
     data: ?string,
-    location: ?string,
     programRuleActionType: string,
-    dataElementId?: ?string,
-    programStageId?: ?string,
-    programStageSectionId?: ?string,
-    trackedEntityAttributeId?: ?string,
-    optionGroupId: ?string,
-    optionId: ?string,
-    style?: ?Object,
-    name: string,
+    ...ProgramRuleData,
 };
 
 export type ProgramRule = {

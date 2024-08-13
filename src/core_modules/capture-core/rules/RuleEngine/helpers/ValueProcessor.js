@@ -1,8 +1,8 @@
 // @flow
 import log from 'loglevel';
 // TODO: add some kind of errorcreator to d2 before moving
-import { mapTypeToInterfaceFnName, typeKeys } from './constants';
-import type { IConvertInputRulesValue } from './rulesEngine.types';
+import { mapTypeToInterfaceFnName, typeKeys } from '../constants';
+import type { IConvertInputRulesValue } from '../types/rulesEngine.types';
 
 const errorCreator = (message: string) => (details?: ?Object) => ({
     ...details,

@@ -1,17 +1,22 @@
 // @flow
-import { InputBuilder } from './InputBuilder';
+import { RuleEngineJs } from '@dhis2/rule-engine';
+import {
+    InputBuilder,
+    ValueProcessor,
+    getRulesEffectsProcessor,
+} from './helpers';
 import type {
     OutputEffects,
     RulesEngineInput,
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
     Flag,
-} from './rulesEngine.types';
-import { RuleEngineJs } from '@dhis2/rule-engine';
+} from './types/rulesEngine.types';
 
 export class RuleEngine {
     inputConverter: IConvertInputRulesValue;
     outputConverter: IConvertOutputRulesEffectsValue;
+    valueProcessor: ValueProcessor;
     userRoles: Array<string>;
     flags: Flag;
 
@@ -22,6 +27,7 @@ export class RuleEngine {
     ) {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
+        this.valueProcessor = new ValueProcessor(inputConverter);
         this.flags = flags ?? {};
     }
 
@@ -54,7 +60,7 @@ export class RuleEngine {
             otherEvents.map(inputBuilder.convertEvent) :
             [];
 
-        const rawEffects = currentEvent ?
+        const effects = (currentEvent ?
             new RuleEngineJs().evaluateEvent(
                 inputBuilder.convertEvent(currentEvent),
                 enrollment,
@@ -65,9 +71,23 @@ export class RuleEngine {
                 enrollment,
                 events,
                 executionContext,
-            );
-
-        return [];
+            ))
+            .map(effect => effect.ruleAction)
+            .map(effect => ({
+                ...Object.fromEntries(effect.values),
+                action: effect.type,
+                data: effect.data,
+            }));
+        
+            const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
+            return processRulesEffects({
+                effects,
+                dataElements,
+                trackedEntityAttributes,
+                // $FlowFixMe[exponential-spread]
+                formValues: { ...selectedEntity, ...currentEvent },
+                onProcessValue: this.valueProcessor.processValue,
+            });
     }
 
     setSelectedUserRoles(userRoles: Array<string>) {

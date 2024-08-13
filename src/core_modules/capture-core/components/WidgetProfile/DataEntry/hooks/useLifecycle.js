@@ -1,7 +1,7 @@
 // @flow
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUnit';
+import { useCoreOrgUnit, type CoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type {
     OrgUnit,
     TrackedEntityAttributes,
@@ -53,7 +53,7 @@ export const useLifecycle = ({
     const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const dataElements: DataElements = useDataElements(programAPI);
     const otherEvents = useEvents(enrollment, dataElements);
-    const orgUnit: ?OrgUnit = useOrganisationUnit(orgUnitId).orgUnit;
+    const orgUnit: ?CoreOrgUnit = useCoreOrgUnit(orgUnitId).orgUnit;
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
     const formFoundation: RenderFoundation = useFormFoundation(programAPI, dataEntryFormConfig);
     const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, orgUnit });
