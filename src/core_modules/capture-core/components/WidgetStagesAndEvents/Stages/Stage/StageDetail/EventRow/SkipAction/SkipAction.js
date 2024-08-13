@@ -67,7 +67,7 @@ export const SkipAction = ({
         !pendingApiResponse && updateEventStatus({ status });
     };
 
-    if (eventDetails.status === 'SKIPPED') {
+    if (eventDetails.status === EventStatuses.SKIPPED) {
         return (
             <MenuItem
                 dense
