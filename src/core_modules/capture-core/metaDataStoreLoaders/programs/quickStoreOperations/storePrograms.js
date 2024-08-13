@@ -24,8 +24,6 @@ const convert = (() => {
         (apiProgramSections || [])
             .map(apiProgramSection => ({
                 ...apiProgramSection,
-                description: undefined,
-                displayDescription: apiProgramSection.description || '',
                 trackedEntityAttributes: apiProgramSection.trackedEntityAttributes.map(te => te.id),
             }))
             .sort((a, b) => a.sortOrder - b.sortOrder);
@@ -95,7 +93,7 @@ const fieldsParam = 'id,displayName,displayShortName,description,programType,sty
 'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],' +
 // eslint-disable-next-line max-len
 'programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],dataElement[id]]]' +
-'programSections[id, description, displayFormName, sortOrder, trackedEntityAttributes],' +
+'programSections[id, displayDescription, displayFormName, sortOrder, trackedEntityAttributes],' +
 // eslint-disable-next-line max-len
 'programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate]';
 
