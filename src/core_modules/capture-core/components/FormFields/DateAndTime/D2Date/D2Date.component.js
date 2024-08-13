@@ -36,7 +36,7 @@ export class D2Date extends React.Component<Props, State> {
     handleDateSelected(value: {calendarDateString: string}) {
         const selectedDate = value?.calendarDateString;
         this.setState({ date: selectedDate });
-        if (selectedDate) {
+        if (selectedDate !== undefined) {
             this.props.onBlur(selectedDate);
         }
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
