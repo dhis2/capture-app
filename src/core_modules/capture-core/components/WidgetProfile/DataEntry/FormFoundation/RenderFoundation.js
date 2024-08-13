@@ -177,6 +177,7 @@ const buildSection = async ({
     optionSets,
     sectionCustomLabel,
     sectionCustomId,
+    sectionDisplayDescription,
     querySingleResource,
     minorServerVersion,
 }: {
@@ -185,6 +186,7 @@ const buildSection = async ({
     optionSets: Array<OptionSet>,
     sectionCustomLabel: string,
     sectionCustomId: string,
+    sectionDisplayDescription: string,
     querySingleResource: QuerySingleResource,
     minorServerVersion: number,
 }) => {
@@ -195,6 +197,7 @@ const buildSection = async ({
     const section = new Section((o) => {
         o.id = sectionCustomId;
         o.name = sectionCustomLabel;
+        o.displayDescription = sectionDisplayDescription;
     });
 
     await buildElementsForSection({
@@ -281,6 +284,7 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
                         programTrackedEntityAttributes: attributes,
                         sectionCustomLabel: formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
                         sectionCustomId: formConfigSection.id,
+                        sectionDisplayDescription: sectionMetadata?.displayDescription ?? '',
                         minorServerVersion,
                         trackedEntityAttributes,
                         optionSets,
@@ -299,6 +303,7 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
                         optionSets,
                         sectionCustomLabel: programSection.displayFormName,
                         sectionCustomId: programSection.id,
+                        sectionDisplayDescription: programSection.displayDescription,
                         querySingleResource,
                         minorServerVersion,
                     });
