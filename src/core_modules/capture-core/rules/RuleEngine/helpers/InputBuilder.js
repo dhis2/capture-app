@@ -1,7 +1,19 @@
 // @flow
 import { Instant, LocalDate } from '@js-joda/core';
+import {
+    RuleActionJs,
+    RuleDataValueJs,
+    RuleEngineContextJs,
+    RuleEnrollmentJs,
+    RuleEventJs,
+    RuleJs,
+    RuleVariableJs,
+    RuleVariableType,
+    RuleAttributeValue,
+    RuleEnrollmentStatus,
+} from '@dhis2/rule-engine';
 import { ValueProcessor } from './ValueProcessor';
-import { typeKeys } from './constants';
+import { typeKeys } from '../constants';
 import type {
     ProgramRule,
     ProgramRuleAction,
@@ -17,28 +29,11 @@ import type {
     DataElements,
     TrackedEntityAttributes,
     IConvertInputRulesValue,
-} from './rulesEngine.types';
+} from '../types/rulesEngine.types';
 import type {
     KotlinOption,
     KotlinOptionSets,
-} from './kotlinRuleEngine.types';
-import {
-    RuleActionJs,
-    RuleDataValueJs,
-    RuleEngineContextJs,
-    RuleEnrollmentJs,
-    RuleEventJs,
-    RuleJs,
-    RuleVariableJs,
-    RuleVariableType,
-    RuleAttributeValue,
-    RuleEnrollmentStatus,
-} from '@dhis2/rule-engine';
-// const {
-//     RuleAttributeValue,
-//     RuleEnrollmentStatus,
-// } = models;
-//const imp = require('@vgarciabnz/rule-engine').org.hisp.dhis.rules;
+} from '../types/kotlinRuleEngine.types';
 
 const programRuleVariableSourceIdExtractor = {
     DATAELEMENT_CURRENT_EVENT: variable => variable.dataElementId,
@@ -241,11 +236,15 @@ export class InputBuilder {
         // but since Capture supports program indicators, these should be added as part
         // of `Enrollment`.
 
+        // JUST FOR DEBUGGING!!!
+        const appendZ = (date: ?string) =>
+            (date && date[date.length - 1] != 'Z') ? date + 'Z' : date;
+
         return new RuleEnrollmentJs(
             enrollment,
             '',                  // programName placeholder value
-            LocalDate.ofInstant(Instant.parse(incidentDate)),
-            LocalDate.ofInstant(Instant.parse(enrollmentDate)),
+            LocalDate.ofInstant(Instant.parse(appendZ(incidentDate))),
+            LocalDate.ofInstant(Instant.parse(appendZ(enrollmentDate))),
             RuleEnrollmentStatus.ACTIVE,            // enrollmentStatus placeholder value
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
