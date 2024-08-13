@@ -61,12 +61,12 @@ Given('you select the schedule tab', () => {
         .click();
 });
 
-When('you add a comment to the event', () => {
-    cy.get('[data-test="comment-textfield"]')
-        .type('This is a comment')
+When('you add a note to the event', () => {
+    cy.get('[data-test="note-textfield"]')
+        .type('This is a note')
         .blur();
 
-    cy.get('[data-test="add-comment-btn"]')
+    cy.get('[data-test="add-note-btn"]')
         .click();
 });
 
@@ -197,9 +197,15 @@ And('the enrollment status is active', () => {
     changeEnrollmentAndEventsStatus();
 });
 
-And('the user completes the event', () => {
+And('you click the Complete button', () => {
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Complete')
+        .click();
+});
+
+And('you click the Save without completing button', () => {
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Save without completing')
         .click();
 });
 
@@ -229,4 +235,24 @@ Then('the user sees the enrollment status and recently added event in Case outco
             cy.get('[data-test="dhis2-uicore-tag-text"]').contains('Completed').should('exist');
         });
     changeEnrollmentAndEventsStatus();
+});
+
+And(/^the events in (.*) are deleted$/, (name) => {
+    const programStages = [
+        { name: 'Lab monitoring', id: 'EPEcjy3FWmI' },
+        { name: 'Sputum smear microscopy', id: 'jdRD35YwbRH' },
+    ];
+    const programStage = programStages.find(e => e.name === name);
+
+    cy.buildApiUrl('tracker', 'enrollments/Pm0VlgHBgRm?fields=events[programStage,event]')
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const eventsToDelete = body.events.filter(e => e.programStage === programStage.id);
+
+            if (eventsToDelete) {
+                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((eventUrl) => {
+                    cy.request('POST', eventUrl, { events: eventsToDelete });
+                });
+            }
+        });
 });

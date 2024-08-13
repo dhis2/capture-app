@@ -7,7 +7,7 @@ export const getNoteValidatorContainers = () => {
     const validatorContainers = [
         {
             validator: validateNote,
-            message: i18n.t('Please add or cancel comment before saving the event'),
+            message: i18n.t('Please add or cancel the note before saving the event'),
         },
     ];
     return validatorContainers;

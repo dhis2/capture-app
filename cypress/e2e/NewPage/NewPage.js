@@ -118,10 +118,10 @@ And('you see the registration form for the Malaria case registration', () => {
         .contains('Complete event')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Comments')
+        .contains('Notes')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Write comment')
+        .contains('Write note')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
         .contains('Relationships')
@@ -291,10 +291,10 @@ And('you see the registration form for the specific category', () => {
         .contains('Complete event')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Comments')
+        .contains('Notes')
         .should('exist');
     cy.get('[data-test="registration-page-content"]')
-        .contains('Write comment')
+        .contains('Write note')
         .should('exist');
 
     cy.get('[data-test="dhis2-uicore-splitbutton"]')
@@ -427,6 +427,9 @@ Then('you submit the form again from the duplicates modal', () => {
 // New person in WHO RMNCH Tracker
 And('you are in the WHO RMNCH program registration page', () => {
     cy.visit('/#/new?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(1)
+        .invoke('val').should('not.be.empty');
 });
 
 And('you are in Child programme registration page', () => {

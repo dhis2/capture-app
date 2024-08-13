@@ -123,7 +123,7 @@ export const RelatedStagesActionsPlain = ({
                         </ConditionalTooltip>
                         <ConditionalTooltip
                             key={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
-                            content={i18n.t('{{ linkableStageLabel }} has no existing events', {
+                            content={i18n.t('{{ linkableStageLabel }} has no linkable events', {
                                 linkableStageLabel: programStage.stageForm.name,
                                 interpolation: { escapeValue: false },
                             })}

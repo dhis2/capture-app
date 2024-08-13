@@ -177,6 +177,7 @@ export const Validated = ({
             stage={stage}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
+            selectedOrgUnitId={orgUnit.id}
             availableProgramStages={availableProgramStages}
             eventSaveInProgress={eventSaveInProgress}
             ready={ready}

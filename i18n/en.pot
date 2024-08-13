@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-06-04T12:49:55.581Z\n"
-"PO-Revision-Date: 2024-06-04T12:49:55.581Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"PO-Revision-Date: 2024-08-08T11:49:13.423Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -188,14 +188,14 @@ msgstr "Assigned user"
 msgid "Search for user"
 msgstr "Search for user"
 
+msgid "Notes"
+msgstr "Notes"
+
 msgid "Basic info"
 msgstr "Basic info"
 
 msgid "Status"
 msgstr "Status"
-
-msgid "Comments"
-msgstr "Comments"
 
 msgid "Relationships"
 msgstr "Relationships"
@@ -229,8 +229,8 @@ msgstr "Active"
 msgid "Completed"
 msgstr "Completed"
 
-msgid "Please add or cancel comment before saving the event"
-msgstr "Please add or cancel comment before saving the event"
+msgid "Please add or cancel note before saving the event"
+msgstr "Please add or cancel note before saving the event"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -366,17 +366,11 @@ msgstr "Registered person"
 msgid "validation failed"
 msgstr "validation failed"
 
-msgid "Errors"
-msgstr "Errors"
+msgid "No feedback for this event yet"
+msgstr "No feedback for this event yet"
 
-msgid "Feedback"
-msgstr "Feedback"
-
-msgid "Indicators"
-msgstr "Indicators"
-
-msgid "Warnings"
-msgstr "Warnings"
+msgid "No indicator output for this event yet"
+msgstr "No indicator output for this event yet"
 
 msgid "Generate new event"
 msgstr "Generate new event"
@@ -619,14 +613,14 @@ msgstr "Offline"
 msgid "Syncing"
 msgstr "Syncing"
 
-msgid "Add comment"
-msgstr "Add comment"
+msgid "Add note"
+msgstr "Add note"
 
-msgid "You don't have access to write comments"
-msgstr "You don't have access to write comments"
+msgid "You don't have access to write notes"
+msgstr "You don't have access to write notes"
 
-msgid "Write comment"
-msgstr "Write comment"
+msgid "Write note"
+msgstr "Write note"
 
 msgid "was blanked out and hidden by your last action"
 msgstr "was blanked out and hidden by your last action"
@@ -789,12 +783,6 @@ msgstr "There was an error loading the page"
 msgid "Choose an organisation unit to start reporting"
 msgstr "Choose an organisation unit to start reporting"
 
-msgid "No feedback for this event yet"
-msgstr "No feedback for this event yet"
-
-msgid "No indicator output for this event yet"
-msgstr "No indicator output for this event yet"
-
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
 
@@ -824,6 +812,13 @@ msgstr "Stage"
 
 msgid "Registered events"
 msgstr "Registered events"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
 
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
@@ -941,6 +936,18 @@ msgstr ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 
+msgid "Errors"
+msgstr "Errors"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Warnings"
+msgstr "Warnings"
+
 msgid "Show all events"
 msgstr "Show all events"
 
@@ -981,6 +988,9 @@ msgstr "Could not retrieve metadata. Please try again later."
 
 msgid "The enrollment event data could not be found"
 msgstr "The enrollment event data could not be found"
+
+msgid "Loading"
+msgstr "Loading"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
@@ -1165,9 +1175,6 @@ msgstr ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
 
-msgid "Save comment"
-msgstr "Save comment"
-
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
 
@@ -1283,9 +1290,6 @@ msgstr "Started at {{orgUnitName}}"
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr "Owned by {{ownerOrgUnit}}"
 
-msgid "Last updated {{date}}"
-msgstr "Last updated {{date}}"
-
 msgid "Cancelled"
 msgstr "Cancelled"
 
@@ -1295,14 +1299,8 @@ msgstr "Add coordinates"
 msgid "Add area"
 msgstr "Add area"
 
-msgid "Comments about this enrollment"
-msgstr "Comments about this enrollment"
-
-msgid "Write a comment about this enrollment"
-msgstr "Write a comment about this enrollment"
-
-msgid "This enrollment doesn't have any comments"
-msgstr "This enrollment doesn't have any comments"
+msgid "Please add or cancel the note before saving the event"
+msgstr "Please add or cancel the note before saving the event"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
@@ -1313,20 +1311,20 @@ msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgid "program or stage is invalid"
 msgstr "program or stage is invalid"
 
+msgid "Notes about this enrollment"
+msgstr "Notes about this enrollment"
+
+msgid "Write a note about this enrollment"
+msgstr "Write a note about this enrollment"
+
+msgid "This enrollment doesn't have any notes"
+msgstr "This enrollment doesn't have any notes"
+
 msgid "Error"
 msgstr "Error"
 
 msgid "Warning"
 msgstr "Warning"
-
-msgid "Comments about this event"
-msgstr "Comments about this event"
-
-msgid "Write a comment about this event"
-msgstr "Write a comment about this event"
-
-msgid "This event doesn't have any comments"
-msgstr "This event doesn't have any comments"
 
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
@@ -1348,6 +1346,15 @@ msgstr "Event completed"
 
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"
+
+msgid "Notes about this event"
+msgstr "Notes about this event"
+
+msgid "Write a note about this event"
+msgstr "Write a note about this event"
+
+msgid "This event doesn't have any notes"
+msgstr "This event doesn't have any notes"
 
 msgid "Schedule date info"
 msgstr "Schedule date info"
@@ -1383,11 +1390,14 @@ msgstr "Schedule info"
 msgid "Schedule date / Due date"
 msgstr "Schedule date / Due date"
 
-msgid "Event comments"
-msgstr "Event comments"
+msgid "Event notes"
+msgstr "Event notes"
 
-msgid "Write a comment about this scheduled event"
-msgstr "Write a comment about this scheduled event"
+msgid "Write a note about this scheduled event"
+msgstr "Write a note about this scheduled event"
+
+msgid "Save note"
+msgstr "Save note"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
@@ -1461,8 +1471,8 @@ msgstr "Choose a {{linkableStageLabel}}"
 msgid "{{ linkableStageLabel }} is not repeatable"
 msgstr "{{ linkableStageLabel }} is not repeatable"
 
-msgid "{{ linkableStageLabel }} has no existing events"
-msgstr "{{ linkableStageLabel }} has no existing events"
+msgid "{{ linkableStageLabel }} has no linkable events"
+msgstr "{{ linkableStageLabel }} has no linkable events"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"

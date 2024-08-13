@@ -24,6 +24,7 @@ import {
 } from './index';
 import type { Geometry } from '../helpers/types';
 import { getRulesActionsForTEI } from '../ProgramRules';
+import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
 
 export const useLifecycle = ({
     programAPI,
@@ -33,6 +34,7 @@ export const useLifecycle = ({
     dataEntryId,
     itemId,
     geometry,
+    dataEntryFormConfig,
 }: {
     programAPI: any,
     orgUnitId: string,
@@ -41,6 +43,7 @@ export const useLifecycle = ({
     dataEntryId: string,
     itemId: string,
     geometry: ?Geometry,
+    dataEntryFormConfig: ?DataEntryFormConfig,
 }) => {
     const dispatch = useDispatch();
     // TODO: Getting the entire state object is bad and this needs to be refactored.
@@ -52,7 +55,7 @@ export const useLifecycle = ({
     const otherEvents = useEvents(enrollment, dataElements);
     const orgUnit: ?OrgUnit = useOrganisationUnit(orgUnitId).orgUnit;
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
-    const formFoundation: RenderFoundation = useFormFoundation(programAPI);
+    const formFoundation: RenderFoundation = useFormFoundation(programAPI, dataEntryFormConfig);
     const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, orgUnit });
     const { formGeometryValues, clientGeometryValues } = useGeometryValues({
         geometry,

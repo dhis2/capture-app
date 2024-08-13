@@ -16,16 +16,10 @@ const subValueGetterByElementType = {
         absoluteApiPath: string,
         programId: ?string,
     }) => {
-        const buildUrl = () => {
-            if (featureAvailable(FEATURES.trackerImageEndpoint)) {
-                if (programId) {
-                    return `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}&dimension=small`;
-                }
-                return `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?dimension=small`;
-            }
-            return `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/image`;
-        };
-        const previewUrl = buildUrl();
+        const url = featureAvailable(FEATURES.trackerImageEndpoint)
+            ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?dimension=small`
+            : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/image?dimension=SMALL`;
+        const previewUrl = programId ? `${url}&program=${programId}` : url;
 
         return {
             previewUrl,

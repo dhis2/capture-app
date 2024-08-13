@@ -3,8 +3,10 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
 import type { ComponentType } from 'react';
-import { Avatar, Grid, withStyles } from '@material-ui/core';
-import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
+import { Grid, withStyles } from '@material-ui/core';
+import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import { CardImage } from '../../../capture-ui/CardImage/CardImage.component';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
@@ -62,8 +64,8 @@ const getStyles = (theme: Theme) => ({
         flexGrow: 1,
     },
     image: {
-        width: theme.typography.pxToRem(44),
-        height: theme.typography.pxToRem(44),
+        width: theme.typography.pxToRem(54),
+        height: theme.typography.pxToRem(54),
         marginRight: theme.typography.pxToRem(8),
     },
     buttonMargin: {
@@ -143,13 +145,15 @@ const CardListItemIndex = ({
     const program = enrollments && enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
+    const { fromServerDate } = useTimeZoneConversion();
 
     const renderImageDataElement = (imageElement?: ?CardProfileImageElementInformation) => {
         if (!imageElement) { return null; }
         const imageValue = item.values[imageElement.id];
         return (
             <div>
-                {imageValue && <Avatar src={imageValue.url} alt={imageValue.name} className={classes.image} />}
+                {imageValue && <CardImage imageUrl={imageValue.url} className={classes.image} size="medium" />}
+
             </div>
         );
     };
@@ -231,9 +235,12 @@ const CardListItemIndex = ({
                             </Grid>
                             <Grid item>
                                 {
-                                    item.tei && item.tei.lastUpdated &&
+                                    item.tei && item.tei.updatedAt &&
                                     <div className={classes.smallerLetters}>
-                                        { i18n.t('Last updated') } {item.tei && moment(item.tei.lastUpdated).fromNow()}
+                                        { i18n.t('Last updated') } {' '}
+                                        { item.tei && <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
+                                            { moment(fromServerDate(item.tei.updatedAt)).fromNow() }
+                                        </Tooltip>}
                                     </div>
                                 }
 

@@ -118,8 +118,8 @@ Feature: The user interacts with the widgets on the enrollment dashboard
   Scenario: User can add note on enrollment dashboard page
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the stages and events should be loaded
-    When you fill in the comment: new test enrollment comment
-    Then list should contain the new comment: new test enrollment comment
+    When you fill in the note: new test enrollment note
+    Then list should contain the new note: new test enrollment note
 
   Scenario: The program rules are triggered and the effects are displayed in the sidebar widgets
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
