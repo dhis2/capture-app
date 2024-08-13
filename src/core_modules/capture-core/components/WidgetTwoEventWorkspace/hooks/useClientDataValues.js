@@ -8,7 +8,7 @@ import { subValueGetterByElementType } from '../utils/getSubValueForDataValue';
 import { makeQuerySingleResource } from '../../../utils/api';
 
 type Props = {|
-    linkedEventId: string,
+    linkedEventId: ?string,
     dataValues: Array<{| dataElement: string, value: any |}>,
     formFoundation: ?RenderFoundation,
 |}
@@ -75,6 +75,7 @@ export const useClientDataValues = ({
             // $FlowFixMe
             formFoundation,
             querySingleResource,
+            // $FlowFixMe
             linkedEventId,
             buildUrl(baseUrl, `api/${apiVersion}`),
         ),

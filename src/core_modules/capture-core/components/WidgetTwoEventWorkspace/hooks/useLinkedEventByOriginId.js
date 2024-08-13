@@ -80,12 +80,31 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         };
     }, [data]);
 
+    // Add fallback query if relationship is missing eventData
+    const {
+        data: fallbackDataValues,
+        isLoading: isLoadingFallback,
+        isError: isErrorFallback,
+    } = useApiDataQuery(
+        ['linkedEventDataValuesFallback', linkedEvent?.event],
+        {
+            resource: 'tracker/events',
+            id: linkedEvent?.event,
+            params: {
+                fields: 'event,dataValues,occurredAt,scheduledAt,status,orgUnit,programStage,program',
+            },
+        },
+        {
+            enabled: !!linkedEvent?.event && !dataValues,
+        },
+    );
+
     return {
-        linkedEvent,
+        linkedEvent: dataValues ? linkedEvent : fallbackDataValues,
         relationshipType,
-        dataValues,
-        isLoading,
-        isError,
+        dataValues: dataValues || fallbackDataValues?.dataValues,
+        isLoading: isLoading || isLoadingFallback,
+        isError: isError || isErrorFallback,
         error,
     };
 };
