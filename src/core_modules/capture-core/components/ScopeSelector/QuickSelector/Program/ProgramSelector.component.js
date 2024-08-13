@@ -50,6 +50,7 @@ const ProgramSelectorPlain = ({
     const [programsArray, setProgramsArray] = useState<Array<Program>>([]);
     const selectedProgram = selectedProgramId ? programCollection.get(selectedProgramId) : null;
     const programOptions = getOptions(selectedOrgUnitId, programsArray);
+    const isMenuDisabled = !handleClickProgram;
 
     useEffect(() => {
         setProgramsArray(Array.from(programCollection.values()));
@@ -83,7 +84,8 @@ const ProgramSelectorPlain = ({
                 noValueMessage={i18n.t('Choose a program')}
                 value={selectedProgram && <OptionLabel icon={selectedProgram.icon} label={selectedProgram.name} />}
                 open={open}
-                setOpen={openSelectorBarItem => setOpen(openSelectorBarItem)}
+                setOpen={openSelectorBarItem => (isMenuDisabled ? null : setOpen(openSelectorBarItem))}
+                displayOnly={isMenuDisabled}
                 onClearSelectionClick={() => onResetProgramId(resetProgramIdBase())}
                 dataTest="program-selector-container"
             >
