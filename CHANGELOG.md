@@ -1,3 +1,15 @@
+# [100.77.0](https://github.com/dhis2/capture-app/compare/v100.76.1...v100.77.0) (2024-08-13)
+
+
+### Bug Fixes
+
+* [DHIS2-17352] Changing program in event workspace does nothing ([#3754](https://github.com/dhis2/capture-app/issues/3754)) ([c3ce444](https://github.com/dhis2/capture-app/commit/c3ce444db56cbb089c3023aa4c1866cc7f158c1f))
+
+
+### Features
+
+* [DHIS2-12288] add enrollment section description ([#3750](https://github.com/dhis2/capture-app/issues/3750)) ([1b4be20](https://github.com/dhis2/capture-app/commit/1b4be20b474f2f5b6c4eb66c37b0c509291b5bf6))
+
 ## [100.76.1](https://github.com/dhis2/capture-app/compare/v100.76.0...v100.76.1) (2024-08-09)
 
 
