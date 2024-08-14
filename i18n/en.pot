@@ -35,6 +35,9 @@ msgstr ""
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
 
+msgid "More"
+msgstr "More"
+
 msgid "View {{programName}} dashboard"
 msgstr "View {{programName}} dashboard"
 
@@ -995,6 +998,9 @@ msgstr "The enrollment event data could not be found"
 msgid "Loading"
 msgstr "Loading"
 
+msgid "An error occurred while loading the form"
+msgstr "An error occurred while loading the form"
+
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
 
@@ -1537,6 +1543,15 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "An error occurred while loading the widget."
+msgstr "An error occurred while loading the widget."
+
+msgid "View linked event"
+msgstr "View linked event"
+
+msgid "Scheduled"
+msgstr "Scheduled"
+
 msgid "Changelog"
 msgstr "Changelog"
 
@@ -1702,9 +1717,6 @@ msgstr "An error has occured. See log for details"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Scheduled{{ escape }} due {{ time }}"
-
-msgid "Scheduled"
-msgstr "Scheduled"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "Overdue{{ escape }} due {{ time }}"
