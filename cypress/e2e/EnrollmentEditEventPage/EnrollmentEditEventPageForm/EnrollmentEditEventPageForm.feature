@@ -24,16 +24,16 @@ And the user see the following text: Event completed
 And the user see the following text: Yes
 
 Scenario: The user can enter and exit the edit mode.
-Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=V1CerIi3sdL
+Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?eventId=O7IACPx40nQ&orgUnitId=DiszpKrYNg8
 And the user see the following text: Enrollment: View Event
-And the user see the following text: Apgar Score
+And the user see the following text: Infant Weight (g)
 When the user clicks on the edit button
 Then the user see the following text: Enrollment: Edit Event
 When the user clicks on the cancel button
 And the user see the following text: Enrollment: View Event
 
 Scenario: The tracker program rules are triggered correctly for the Child Program.
-Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=V1CerIi3sdL
+Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=O7IACPx40nQ
 And the user see the following text: Apgar Score
 When the user clicks on the edit button
 And the user set the apgar score to 3
