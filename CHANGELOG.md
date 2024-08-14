@@ -1,3 +1,15 @@
+# [101.0.0](https://github.com/dhis2/capture-app/compare/v100.77.0...v101.0.0) (2024-08-14)
+
+
+### chore
+
+* **release:** stop support for 2.38 ([#3755](https://github.com/dhis2/capture-app/issues/3755)) ([2bbc649](https://github.com/dhis2/capture-app/commit/2bbc649b2cb638ac7c311bde16b79e1c39b2a65f))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 101.0.0 to facilitate potential fixes for 2.38
+
 # [100.77.0](https://github.com/dhis2/capture-app/compare/v100.76.1...v100.77.0) (2024-08-13)
 
 
