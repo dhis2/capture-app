@@ -1,3 +1,10 @@
+## [101.1.1](https://github.com/dhis2/capture-app/compare/v101.1.0...v101.1.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* [DHIS2-17883] revert validate values assigned from the rules engine ([#3758](https://github.com/dhis2/capture-app/issues/3758)) ([ea0e675](https://github.com/dhis2/capture-app/commit/ea0e67572d3edf5bee4adc19a3a845260cfa2abd))
+
 # [101.1.0](https://github.com/dhis2/capture-app/compare/v101.0.0...v101.1.0) (2024-08-14)
 
 
