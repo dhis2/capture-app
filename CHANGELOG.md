@@ -1,3 +1,10 @@
+# [101.1.0](https://github.com/dhis2/capture-app/compare/v101.0.0...v101.1.0) (2024-08-14)
+
+
+### Features
+
+* [DHIS2-17655] Two event workspace ([#3726](https://github.com/dhis2/capture-app/issues/3726)) ([bad5312](https://github.com/dhis2/capture-app/commit/bad53124de25367fd633c0cfdd50efacb6eb022a))
+
 # [101.0.0](https://github.com/dhis2/capture-app/compare/v100.77.0...v101.0.0) (2024-08-14)
 
 
