@@ -8,7 +8,6 @@ import type { QuerySingleResource } from '../../utils/api';
 // Avoid exporting displayNameCache to keep it truly private.
 // As a consequence all functions using it must be in this file.
 const displayNameCache = {};
-const testingCache = {};
 const maxBatchSize = 50;
 
 const displayNamesQuery = {
@@ -26,7 +25,7 @@ const createBatches = (orgUnitIds: Array<string>): Array<Array<string>> => {
     const reducedOrgUnitIds = Array.from(orgUnitIds
         .filter(id => id)
         .reduce((acc, id) => {
-            if (!testingCache[id]) {
+            if (!displayNameCache[id]) {
                 acc.add(id);
             }
             return acc;
@@ -65,7 +64,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
     );
     const result = useMemo(
         () => (ready ? orgUnitIds.reduce((acc, id) => {
-            acc[id] = testingCache[id] ? testingCache[id].displayName : null;
+            acc[id] = displayNameCache[id] ? displayNameCache[id].displayName : null;
             return acc;
         }, {}) : null),
         [ready, orgUnitIds],
@@ -73,7 +72,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
 
     const onComplete = useCallback(({ organisationUnits }) => {
         for (const { id, displayName } of organisationUnits.organisationUnits) {
-            testingCache[id] = { displayName, ancestors: testingCache[id] ? testingCache[id].ancestors : [] };
+            displayNameCache[id] = { displayName, ancestors: displayNameCache[id] ? displayNameCache[id].ancestors : [] };
         }
         const completeCount = completedBatches + 1;
         setCompletedBatches(completeCount);
@@ -139,13 +138,13 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
         .map(batch => querySingleResource(displayNamesQuery.organisationUnits, { filter: batch.join(',') })
             .then(({ organisationUnits }) => {
                 for (const { id, displayName } of organisationUnits) {
-                    testingCache[id] = { displayName, ancestors: testingCache[id] ? testingCache[id].ancestors : [] };
+                    displayNameCache[id] = { displayName, ancestors: displayNameCache[id] ? displayNameCache[id].ancestors : [] };
                 }
             })));
     return orgUnitIds.reduce((acc, orgUnitId) => {
         acc[orgUnitId] = {
             id: orgUnitId,
-            name: testingCache[orgUnitId] ? testingCache[orgUnitId].displayName : null,
+            name: displayNameCache[orgUnitId] ? displayNameCache[orgUnitId].displayName : null,
         };
         return acc;
     }, {});
