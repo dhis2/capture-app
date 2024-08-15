@@ -1,3 +1,10 @@
+## [101.1.2](https://github.com/dhis2/capture-app/compare/v101.1.1...v101.1.2) (2024-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-17101] Consider prevent adding events to stage program rule ([#3706](https://github.com/dhis2/capture-app/issues/3706)) ([47ed42c](https://github.com/dhis2/capture-app/commit/47ed42c4c0d1a23ce93ce4ccbd02461ae22d2a18))
+
 ## [101.1.1](https://github.com/dhis2/capture-app/compare/v101.1.0...v101.1.1) (2024-08-14)
 
 
