@@ -78,16 +78,16 @@ export class RuleEngine {
                 action: effect.type,
                 data: effect.data,
             }));
-        
-            const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
-            return processRulesEffects({
-                effects,
-                dataElements,
-                trackedEntityAttributes,
-                // $FlowFixMe[exponential-spread]
-                formValues: { ...selectedEntity, ...currentEvent },
-                onProcessValue: this.valueProcessor.processValue,
-            });
+
+        const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
+        return processRulesEffects({
+            effects,
+            dataElements,
+            trackedEntityAttributes,
+            // $FlowFixMe[exponential-spread]
+            formValues: { ...selectedEntity, ...currentEvent },
+            onProcessValue: this.valueProcessor.processValue,
+        });
     }
 
     setSelectedUserRoles(userRoles: Array<string>) {

@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCoreOrgUnit, type CoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type {
-    OrgUnit,
     TrackedEntityAttributes,
     OptionSets,
     ProgramRulesContainer,
