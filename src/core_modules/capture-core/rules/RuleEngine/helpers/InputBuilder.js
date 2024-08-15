@@ -263,6 +263,20 @@ export class InputBuilder {
     }) => {
         const { programRules, programRuleVariables, constants } = programRulesContainer;
 
+        const filteredProgramRuleVariables = ((variables) => {
+            if (!variables) {
+                return [];
+            }
+            const ids = new Set;
+            return variables.filter((variable) => {
+                if (ids.has(variable.id)) {
+                    return false;
+                }
+                ids.add(variable.id);
+                return true;
+            });
+        })(programRuleVariables);
+
         const kotlinOptionSets = Object.keys(optionSets).reduce((acc, key) => {
             acc[key] = optionSets[key].options.map(convertOption);
             return acc;
@@ -270,7 +284,7 @@ export class InputBuilder {
 
         return new RuleEngineContextJs(
             programRules && programRules.map(convertProgramRule),
-            programRuleVariables && programRuleVariables.map(variable => convertRuleVariable(variable, kotlinOptionSets)),
+            filteredProgramRuleVariables.map(variable => convertRuleVariable(variable, kotlinOptionSets)),
             buildSupplementaryData({ selectedOrgUnit: this.selectedOrgUnit, selectedUserRoles }),
             constants && convertConstants(constants),
         );
