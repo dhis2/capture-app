@@ -8,13 +8,14 @@ import type { QuerySingleResource } from '../../utils/api';
 // Avoid exporting displayNameCache to keep it truly private.
 // As a consequence all functions using it must be in this file.
 const displayNameCache = {};
+console.log('displayNameCache', displayNameCache);
 const maxBatchSize = 50;
 
 const displayNamesQuery = {
     organisationUnits: {
         resource: 'organisationUnits',
         params: ({ filter }) => ({
-            fields: 'id,displayName',
+            fields: 'id,displayName,ancestors[id,displayName]',
             filter: `id:in:[${filter}]`,
             pageSize: maxBatchSize,
         }),
@@ -69,13 +70,27 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
         }, {}) : null),
         [ready, orgUnitIds],
     );
-
     const onComplete = useCallback(({ organisationUnits }) => {
-        for (const { id, displayName } of organisationUnits.organisationUnits) {
-            displayNameCache[id] = { displayName, ancestors: displayNameCache[id] ? displayNameCache[id].ancestors : [] };
+        for (const orgUnit of organisationUnits.organisationUnits) {
+            displayNameCache[orgUnit.id] = {
+                displayName: orgUnit.displayName,
+                ancestor: orgUnit.ancestors[orgUnit.ancestors.length - 1]?.id,
+            };
+
+            orgUnit.ancestors.forEach((ancestor, index) => {
+                if (!displayNameCache[ancestor.id]) {
+                    const parentAncestorId = orgUnit.ancestors[index - 1]?.id;
+                    displayNameCache[ancestor.id] = {
+                        displayName: ancestor.displayName,
+                        ancestor: parentAncestorId,
+                    };
+                }
+            });
         }
+
         const completeCount = completedBatches + 1;
         setCompletedBatches(completeCount);
+
         if (completeCount === currentBatches.length) {
             setFetching(false);
         } else {
