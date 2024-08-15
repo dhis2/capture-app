@@ -27,8 +27,11 @@ export class DateField extends React.Component<Props> {
     }
 
     handleDateSelected(value: {calendarDateString: string}) {
-        const date = value?.calendarDateString;
-        this.props.onBlur(date);
+        const selectedDate = value?.calendarDateString;
+        if (selectedDate !== undefined) {
+            this.props.onBlur(selectedDate);
+        }
+
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
     }
 
@@ -38,13 +41,7 @@ export class DateField extends React.Component<Props> {
             maxWidth,
             calendarWidth,
             inputWidth,
-            onBlur,
-            onFocus,
-            onDateSelectedFromCalendar,
             calendar,
-            label,
-            value,
-            ...passOnProps
         } = this.props;
 
         const calculatedInputWidth = inputWidth || width;
@@ -60,15 +57,16 @@ export class DateField extends React.Component<Props> {
                 }}
             >
                 <CalendarInput
-                    {...passOnProps}
                     label=""
+                    placeholder={this.props.placeholder}
                     format={format}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
-                    date={value}
+                    date={this.props.value}
                     width={String(calculatedCalendarWidth)}
                     inputWidth={String(calculatedInputWidth)}
                     onFocus={this.props.onFocus}
+                    onBlur={this.props.onBlur}
                     disabled={this.props.disabled}
                 />
             </div>

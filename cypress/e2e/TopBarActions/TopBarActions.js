@@ -20,7 +20,7 @@ Then('the user sees the warning popup', () => {
 });
 
 When(/^the user set the WHOMCH Diastolic blood pressure to (.*)/, score =>
-    cy.get('[data-test="new-enrollment-event-form"]').find('[data-test="capture-ui-input"]').eq(6).clear()
+    cy.get('[data-test="new-enrollment-event-form"]').find('input[type="text"]').eq(6).clear()
         .type(score)
         .blur(),
 );

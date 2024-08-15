@@ -33,8 +33,8 @@ Then(/^the user sees the edit profile modal/, () =>
 
 Given('you add a new tracked entity in the Malaria focus investigation program', () => {
     cy.visit('/#/new?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(1)
+    cy.get('input[type="text"]')
+        .eq(2)
         .type(`Local id-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
     cy.contains('Save focus area')

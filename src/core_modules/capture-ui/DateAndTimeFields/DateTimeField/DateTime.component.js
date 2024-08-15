@@ -21,11 +21,6 @@ type Props = {
     dateWidth: any,
     calendarWidth?: ?number,
     orientation: $Values<typeof orientations>,
-    calendarTheme: Object,
-    calendarLocale: Object,
-    calendarOnConvertValueIn: Function,
-    calendarOnConvertValueOut: Function,
-    popupAnchorPosition?: ?any,
     classes: Object,
     dateLabel: string,
     timeLabel: string,
@@ -106,11 +101,6 @@ export class DateTimeField extends Component<Props> {
             dateMaxWidth,
             dateWidth,
             calendarWidth,
-            popupAnchorPosition,
-            calendarTheme,
-            calendarLocale,
-            calendarOnConvertValueIn,
-            calendarOnConvertValueOut,
             classes,
             orientation,
             onBlur,
@@ -144,11 +134,6 @@ export class DateTimeField extends Component<Props> {
                             onChange={this.handleDateChange}
                             onBlur={this.handleDateBlur}
                             label={dateLabel}
-                            calendarTheme={calendarTheme}
-                            popupAnchorPosition={popupAnchorPosition}
-                            calendarLocale={calendarLocale}
-                            calendarOnConvertValueIn={calendarOnConvertValueIn}
-                            calendarOnConvertValueOut={calendarOnConvertValueOut}
                             classes={classes}
                             {...passOnProps}
                         />

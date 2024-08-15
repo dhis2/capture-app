@@ -24,6 +24,6 @@ Then('you should see Schedule tab', () => {
 
 And(/you should see suggested date: (.*)/, (date) => {
     cy.get('[data-test="schedule-section"]').within(() => {
-        cy.get('input[placeholder=yyyy-mm-dd]').should('have.value', `${getCurrentYear()}-${date}`);
+        cy.get('input[type="text"]').should('have.value', `${getCurrentYear()}-${date}`);
     });
 });
