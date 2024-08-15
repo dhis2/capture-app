@@ -238,7 +238,7 @@ export class InputBuilder {
 
         // JUST FOR DEBUGGING!!!
         const appendZ = (date: ?string) =>
-            (date && date[date.length - 1] != 'Z') ? date + 'Z' : date;
+            ((date && date[date.length - 1] != 'Z') ? date + 'Z' : date);
 
         return new RuleEnrollmentJs(
             enrollment,
