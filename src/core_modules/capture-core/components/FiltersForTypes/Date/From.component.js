@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
-import { modes, absoluteDirections } from '../../FormFields/DateAndTime/D2Date/d2DatePopup.const';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
@@ -45,13 +44,8 @@ class FromDateFilterPlain extends Component<Props> {
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('From')}
-                    popupMode={modes.ABSOLUTE}
-                    popupAbsoluteDirection={absoluteDirections.UP}
                     width={150}
                     calendarWidth={330}
-                    calendarHeight={170}
-                    calendarRowHeight={45}
-                    calendarDisplayOptions={this.displayOptions}
                     {...passOnProps}
                 />
                 <div className={errorClass}>

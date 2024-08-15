@@ -189,7 +189,6 @@ export class AgeField extends Component<Props> {
                           onBlur={this.handleCalendarBlur}
                           placeholder={i18n.t('mm/dd/yyyy')}
                           width={350}
-                          calendarMaxMoment={moment()}
                       />
                   </div>
                   <TextField
