@@ -92,6 +92,7 @@ export const WidgetEnrollmentPlain = ({
         ancestors: ownerAncestors || [],
         tooltip: i18n.t('Owned by {{ownerOrgUnit}}', {
             ownerOrgUnit: ownerOrgUnitName,
+            interpolation: { escapeValue: false },
         }),
     };
 
