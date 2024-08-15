@@ -5,7 +5,6 @@ import { systemSettingsStore } from '../../../capture-core/metaDataMemoryStores'
 
 type Props = {
     value: ?string,
-    label: ?String,
     width: number,
     maxWidth?: ?number,
     calendarWidth?: ?number,
@@ -15,6 +14,7 @@ type Props = {
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
     calendar?: string,
+    placeholder?: string
 };
 
 export class DateField extends React.Component<Props> {
