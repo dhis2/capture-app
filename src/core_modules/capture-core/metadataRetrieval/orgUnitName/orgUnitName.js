@@ -159,12 +159,12 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
 
 export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     displayName?: string,
-    ancestors?: Array<{| displayName: string, id: string |}>,
+    ancestors?: Array<{| id: string, displayName: string |}>,
     error?: any,
 } => {
     const cachedOrgUnit = orgUnitId && displayNameCache[orgUnitId];
     const fetchId = cachedOrgUnit ? undefined : orgUnitId;
-    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName]');
+    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName,level]');
 
     if (orgUnitId && cachedOrgUnit) {
         const getOrgUnitFromCache = parentOrgUnitId => displayNameCache[parentOrgUnitId];
@@ -172,7 +172,12 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
         const getFullAncestor = (currentOrgUnitId) => {
             const ancestors = [];
             let currentOrgUnit = getOrgUnitFromCache(currentOrgUnitId);
-            let previousAncestorId = currentOrgUnit?.ancestor;
+
+            if (currentOrgUnit) {
+                currentOrgUnit = getOrgUnitFromCache(currentOrgUnit?.ancestor);
+            }
+
+            let previousAncestorId = currentOrgUnit.ancestor;
 
             while (currentOrgUnit) {
                 ancestors.push({
@@ -205,23 +210,6 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     }
 
     return { error };
-};
-
-export const useFormatOrgUnitNameFullPath = (
-    orgUnitName: ?string,
-    ancestors?: Array<{| displayName: string, level: number |}>,
-): ?string => {
-    const [path, setPath] = useState(null);
-
-    useEffect(() => {
-        if (orgUnitName && ancestors) {
-            const ancestorNames = ancestors.map(ancestor => ancestor.displayName);
-            ancestorNames.push(orgUnitName);
-            setPath(ancestorNames.join(' / '));
-        }
-    }, [orgUnitName, ancestors]);
-
-    return path;
 };
 
 export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId]?.displayName;

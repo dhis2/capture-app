@@ -48,7 +48,6 @@ const FlatListPlain = ({ list, classes, dataTest }: Props) => {
         </div>
     );
 
-
     return (
         <div data-test={dataTest}>
             {list.map(item => renderItem(item))}
