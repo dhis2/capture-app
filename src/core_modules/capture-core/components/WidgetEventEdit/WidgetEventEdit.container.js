@@ -31,6 +31,7 @@ import { OverflowButton } from '../Buttons';
 import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
+import { eventStatuses } from './constants/status.const';
 
 const styles = {
     header: {
@@ -99,7 +100,7 @@ export const WidgetEventEditPlain = ({
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
 
     const eventAccess = getProgramEventAccess(programId, stageId);
-    const blockEntryForm = stage.blockEntryForm;
+    const blockEntryForm = stage.blockEntryForm && eventStatus === eventStatuses.COMPLETED;
     const disableEdit = !eventAccess?.write || blockEntryForm;
 
     const tooltipContent = blockEntryForm ?
