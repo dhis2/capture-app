@@ -5,9 +5,9 @@ import { useOrganisationUnit } from '../../dataQueries';
 import type { OrgUnitNames } from './orgUnitName.types';
 import type { QuerySingleResource } from '../../utils/api';
 
-// Avoid exporting displayNameCache to keep it truly private.
+// Avoid exporting orgUnitCache to keep it truly private.
 // As a consequence all functions using it must be in this file.
-const displayNameCache = {};
+const orgUnitCache = {};
 const maxBatchSize = 50;
 
 const displayNamesQuery = {
@@ -23,15 +23,15 @@ const displayNamesQuery = {
 
 const updateCacheWithOrgUnits = (organisationUnits) => {
     for (const { id, displayName, ancestors } of organisationUnits) {
-        displayNameCache[id] = {
+        orgUnitCache[id] = {
             displayName,
             ancestor: ancestors[ancestors.length - 1]?.id,
         };
 
         ancestors.forEach((ancestor, index) => {
-            if (!displayNameCache[ancestor.id]) {
+            if (!orgUnitCache[ancestor.id]) {
                 const parentAncestorId = ancestors[index - 1]?.id;
-                displayNameCache[ancestor.id] = {
+                orgUnitCache[ancestor.id] = {
                     displayName: ancestor.displayName,
                     ancestor: parentAncestorId,
                 };
@@ -44,7 +44,7 @@ const createBatches = (orgUnitIds: Array<string>): Array<Array<string>> => {
     const reducedOrgUnitIds = Array.from(orgUnitIds
         .filter(id => id)
         .reduce((acc, id) => {
-            if (!displayNameCache[id]) {
+            if (!orgUnitCache[id]) {
                 acc.add(id);
             }
             return acc;
@@ -76,7 +76,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
     const batches = useMemo(() => createBatches(orgUnitIds), [orgUnitIds]);
     const filter = useMemo(() => (fetching ? currentBatches[completedBatches].join(',') : ''), [fetching, currentBatches, completedBatches]);
     const result = useMemo(() => (ready ? orgUnitIds.reduce((acc, id) => {
-        acc[id] = displayNameCache[id] ? displayNameCache[id].displayName : null;
+        acc[id] = orgUnitCache[id] ? orgUnitCache[id].displayName : null;
         return acc;
     }, {}) : null), [ready, orgUnitIds]);
 
@@ -151,7 +151,7 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
     return orgUnitIds.reduce((acc, orgUnitId) => {
         acc[orgUnitId] = {
             id: orgUnitId,
-            name: displayNameCache[orgUnitId].displayName,
+            name: orgUnitCache[orgUnitId].displayName,
         };
         return acc;
     }, {});
@@ -162,12 +162,12 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     ancestors?: Array<{| id: string, displayName: string |}>,
     error?: any,
 } => {
-    const cachedOrgUnit = orgUnitId && displayNameCache[orgUnitId];
+    const cachedOrgUnit = orgUnitId && orgUnitCache[orgUnitId];
     const fetchId = cachedOrgUnit ? undefined : orgUnitId;
     const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName,level]');
 
     if (orgUnitId && cachedOrgUnit) {
-        const getOrgUnitFromCache = parentOrgUnitId => displayNameCache[parentOrgUnitId];
+        const getOrgUnitFromCache = parentOrgUnitId => orgUnitCache[parentOrgUnitId];
 
         const getFullAncestor = (currentOrgUnitId) => {
             const ancestors = [];
@@ -212,4 +212,4 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     return { error };
 };
 
-export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId]?.displayName;
+export const getCachedOrgUnitName = (orgUnitId: string): ?string => orgUnitCache[orgUnitId]?.displayName;
