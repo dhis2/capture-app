@@ -151,7 +151,7 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
     return orgUnitIds.reduce((acc, orgUnitId) => {
         acc[orgUnitId] = {
             id: orgUnitId,
-            name: orgUnitCache[orgUnitId].displayName,
+            name: orgUnitCache[orgUnitId]?.displayName,
         };
         return acc;
     }, {});
@@ -177,15 +177,15 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
                 currentOrgUnit = getOrgUnitFromCache(currentOrgUnit?.ancestor);
             }
 
-            let previousAncestorId = currentOrgUnit.ancestor;
+            let previousAncestorId = currentOrgUnit?.ancestor;
 
             while (currentOrgUnit) {
                 ancestors.push({
-                    displayName: currentOrgUnit.displayName,
+                    displayName: currentOrgUnit?.displayName,
                     id: previousAncestorId,
                 });
 
-                previousAncestorId = currentOrgUnit.ancestor;
+                previousAncestorId = currentOrgUnit?.ancestor;
                 currentOrgUnit = getOrgUnitFromCache(currentOrgUnit?.ancestor);
             }
 
