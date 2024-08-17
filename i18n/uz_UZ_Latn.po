@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2024\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -43,6 +43,9 @@ msgstr ""
 "ddomendagi) ishlashini qoʼllab quvvatlaydi. Ushbu versiyani qayta "
 "ishlatmoqchi boʼlsangiz, Iltimos, sahifani yangilang, ammo boshqa versiyalar"
 " yopilishini unutmang."
+
+msgid "More"
+msgstr "Koʼproq"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -377,17 +380,11 @@ msgstr "Roʼyxatdan oʼtgan shaxs"
 msgid "validation failed"
 msgstr "Tasdiqlash amalga oshmadi"
 
-msgid "Errors"
-msgstr "Xatoliklar"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Qayta aloqa"
-
-msgid "Indicators"
-msgstr "Indikatorlar"
-
-msgid "Warnings"
-msgstr "Ogohlantirishlar"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Yangi hodisa/tadbir yaratish"
@@ -576,6 +573,9 @@ msgstr "Jadvalda koʼrsatiladigan ustunlar"
 
 msgid "Column"
 msgstr "Ustun"
+
+msgid "Visible"
+msgstr ""
 
 msgid "Update"
 msgstr "Янгилаш"
@@ -784,12 +784,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -819,6 +813,11 @@ msgstr "Босқич"
 
 msgid "Registered events"
 msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -935,6 +934,18 @@ msgstr ""
 "Ushbu sahifani tark etsangiz, yangi aloqa-munosabatlar uchun qilingan barcha"
 " tanlovlar bekor qilinadi"
 
+msgid "Errors"
+msgstr "Xatoliklar"
+
+msgid "Feedback"
+msgstr "Qayta aloqa"
+
+msgid "Indicators"
+msgstr "Indikatorlar"
+
+msgid "Warnings"
+msgstr "Ogohlantirishlar"
+
 msgid "Show all events"
 msgstr "Barcha hodisa/tadbirlarni koʼrsatish"
 
@@ -974,6 +985,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "Yuklanmoqda"
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1259,9 +1276,6 @@ msgstr ""
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "Bekor qilindi"
 
@@ -1499,6 +1513,15 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Reja boʼyicha"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1664,9 +1687,6 @@ msgstr "Xatolik yuz berdi. Tafsilotlarni jurnaldan koʼring."
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "Reja boʼyicha"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
