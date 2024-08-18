@@ -32,6 +32,7 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from './constants/status.const';
+import { useAuthorities } from './hooks';
 
 const styles = {
     header: {
@@ -100,13 +101,9 @@ export const WidgetEventEditPlain = ({
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
 
     const eventAccess = getProgramEventAccess(programId, stageId);
-    console.log('stage', stage);
-    const blockEntryForm = stage.blockEntryForm && eventStatus === eventStatuses.COMPLETED;
+    const { canEditCompletedEvent } = useAuthorities();
+    const blockEntryForm = stage.blockEntryForm && !canEditCompletedEvent && eventStatus === eventStatuses.COMPLETED;
     const disableEdit = !eventAccess?.write || blockEntryForm;
-
-    const tooltipContent = blockEntryForm ?
-        i18n.t('You can\'t edit this event due to program settings') :
-        i18n.t('You don\'t have access to edit this event');
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     const { programCategory } = useCategoryCombinations(programId);
@@ -126,7 +123,7 @@ export const WidgetEventEditPlain = ({
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
                         <ConditionalTooltip
-                            content={tooltipContent}
+                            content={i18n.t('You don\'t have access to edit this event')}
                             enabled={disableEdit}
                             wrapperClassName={classes.tooltip}
                         >
