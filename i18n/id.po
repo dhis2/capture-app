@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -51,6 +51,9 @@ msgstr ""
 "(dalam domain yang sama). Harap segarkan halaman ini jika Anda ingin "
 "menggunakan versi ini lagi, tetapi perlu diketahui bahwa ini akan menutup "
 "versi lain."
+
+msgid "More"
+msgstr "Lagi"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -382,17 +385,11 @@ msgstr "Orang yang terdaftar"
 msgid "validation failed"
 msgstr "validasi gagal"
 
-msgid "Errors"
-msgstr "Kesalahan"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Umpan balik"
-
-msgid "Indicators"
-msgstr "Indikator"
-
-msgid "Warnings"
-msgstr "Peringatan"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Buat even baru"
@@ -581,6 +578,9 @@ msgstr "Kolom untuk ditampilkan di tabel"
 
 msgid "Column"
 msgstr "Kolom"
+
+msgid "Visible"
+msgstr ""
 
 msgid "Update"
 msgstr "Perbarui"
@@ -794,12 +794,6 @@ msgstr "Telah terjadi sebuah kesalahan saat memuat halaman"
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr "Tahapan program tidak valid"
 
@@ -829,6 +823,11 @@ msgstr "Stage"
 
 msgid "Registered events"
 msgstr "Even terdaftar"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -946,6 +945,18 @@ msgstr ""
 "Meninggalkan halaman ini akan membuang semua pilihan yang Anda buat untuk "
 "hubungan baru"
 
+msgid "Errors"
+msgstr "Kesalahan"
+
+msgid "Feedback"
+msgstr "Umpan balik"
+
+msgid "Indicators"
+msgstr "Indikator"
+
+msgid "Warnings"
+msgstr "Peringatan"
+
 msgid "Show all events"
 msgstr "Tampilkan semua even"
 
@@ -984,6 +995,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1510,6 +1527,15 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Tahapan dan Even"
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Terjadwal"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1674,9 +1700,6 @@ msgstr "Terjadi kesalahan. Lihat log untuk detailnya"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "Terjadwal"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""

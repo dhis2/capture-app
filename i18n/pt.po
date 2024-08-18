@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -47,6 +47,9 @@ msgstr ""
 "aplicativo Captura suporta apenas a execução de uma versão simultaneamente "
 "(no mesmo domínio). Actualize esta página se desejar usar esta versão "
 "novamente, mas esteja ciente de que isso fechará outras versões."
+
+msgid "More"
+msgstr "Mais"
 
 msgid "View {{programName}} dashboard"
 msgstr "Veja o painel do {{programName}}"
@@ -383,17 +386,11 @@ msgstr "Pessoa registrada"
 msgid "validation failed"
 msgstr "falha na validação"
 
-msgid "Errors"
-msgstr "Erros"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Comentários"
-
-msgid "Indicators"
-msgstr "Indicadores"
-
-msgid "Warnings"
-msgstr "Avisos"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Gerar novo evento"
@@ -585,6 +582,9 @@ msgstr "Colunas para mostrar na tabela"
 
 msgid "Column"
 msgstr "Coluna"
+
+msgid "Visible"
+msgstr "Visível"
 
 msgid "Update"
 msgstr "Atualizar"
@@ -813,12 +813,6 @@ msgstr "Ocorreu um erro ao carregar a página"
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr "O estagio do programa é inválida"
 
@@ -848,6 +842,11 @@ msgstr "Estagio"
 
 msgid "Registered events"
 msgstr "Eventos registrados"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr "Selecione {{category}}."
@@ -966,6 +965,18 @@ msgstr ""
 "Sair desta página descartará todas as seleções feitas para um novo "
 "relacionamento"
 
+msgid "Errors"
+msgstr "Erros"
+
+msgid "Feedback"
+msgstr "Comentários"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
+msgid "Warnings"
+msgstr "Avisos"
+
 msgid "Show all events"
 msgstr "Mostrar todos os eventos"
 
@@ -1007,6 +1018,12 @@ msgstr ""
 
 msgid "The enrollment event data could not be found"
 msgstr "Os dados do evento de inscrição não foram encontrados"
+
+msgid "Loading"
+msgstr "Carregando.."
+
+msgid "An error occurred while loading the form"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Possíveis duplicatas encontradas"
@@ -1565,6 +1582,15 @@ msgstr "{{ scheduledEvents }} agendado"
 msgid "Stages and Events"
 msgstr "Fases e Eventos"
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Agendado"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1730,9 +1756,6 @@ msgstr "Ocorreu um erro. Veja o log para detalhes"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Programado para {{ escape }} com prazo para {{ time }}"
-
-msgid "Scheduled"
-msgstr "Agendado"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "Vencido {{ escape }} devido {{ time }}"
