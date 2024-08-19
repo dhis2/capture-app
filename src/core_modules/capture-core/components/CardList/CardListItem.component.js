@@ -81,28 +81,28 @@ const getStyles = (theme: Theme) => ({
 });
 
 const deriveEnrollmentType =
-    (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
-        if (!currentProgramId) {
-            return enrollmentTypes.DONT_SHOW_TAG;
-        }
+  (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
+      if (!currentProgramId) {
+          return enrollmentTypes.DONT_SHOW_TAG;
+      }
 
-        const enrollmentsInCurrentProgram = enrollments
-            .filter(({ program }) => program === currentProgramId)
-            .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
+      const enrollmentsInCurrentProgram = enrollments
+          .filter(({ program }) => program === currentProgramId)
+          .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
 
 
-        const { ACTIVE, CANCELLED, COMPLETED } = enrollmentTypes;
-        if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
-            return ACTIVE;
-        } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
-            return COMPLETED;
-        } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
-            return CANCELLED;
-        }
-        return enrollmentTypes.DONT_SHOW_TAG;
-    };
+      const { ACTIVE, CANCELLED, COMPLETED } = enrollmentTypes;
+      if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
+          return ACTIVE;
+      } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
+          return COMPLETED;
+      } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
+          return CANCELLED;
+      }
+      return enrollmentTypes.DONT_SHOW_TAG;
+  };
 
-const deriveEnrollmentOrgUnitIdAndDate = (enrollments, enrollmentType, currentProgramId): { orgUnitId?: string, enrolledAt?: string } => {
+const deriveEnrollmentOrgUnitIdAndDate = (enrollments, enrollmentType, currentProgramId): {orgUnitId?: string, enrolledAt?: string} => {
     if (!enrollments?.length) { return {}; }
     if (!currentProgramId && enrollments.length) {
         const { orgUnit: orgUnitId, enrolledAt } = enrollments[0];
@@ -201,19 +201,16 @@ const CardListItemIndex = ({
         if (currentSearchScopeType === searchScopes.ALL_PROGRAMS) {
             return null;
         }
-        return (
-            <>
-                <ListEntry
-                    name={i18n.t('Organisation unit')}
-                    value={orgUnitName}
-                />
-                <ListEntry
-                    name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
-                    value={enrolledAt}
-                    type={dataElementTypes.DATE}
-                />
-            </>
-        );
+        return (<>
+            <ListEntry
+                name={i18n.t('Organisation unit')}
+                value={orgUnitName}
+            />  <ListEntry
+                name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
+                value={enrolledAt}
+                type={dataElementTypes.DATE}
+            />
+        </>);
     };
 
     return (
