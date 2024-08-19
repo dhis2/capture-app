@@ -72,10 +72,9 @@ export class RuleEngine {
                 events,
                 executionContext,
             ))
-            .map(effect => effect.ruleAction)
             .map(effect => ({
-                ...Object.fromEntries(effect.values),
-                action: effect.type,
+                ...Object.fromEntries(effect.ruleAction.values),
+                action: effect.ruleAction.type,
                 data: effect.data,
             }));
 
