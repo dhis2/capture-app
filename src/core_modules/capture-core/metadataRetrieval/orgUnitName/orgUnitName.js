@@ -197,7 +197,6 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
         };
 
         const ancestors = getAncestors(orgUnitId);
-        console.log(ancestors);
 
         return {
             displayName: cachedOrgUnit.displayName,
