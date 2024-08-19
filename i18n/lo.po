@@ -4,15 +4,15 @@
 # Saysamone Sibounma, 2023
 # Somkhit Bouavong <bouavongk@gmail.com>, 2024
 # Namwan Chanthavisouk, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,6 +40,9 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+
+msgid "More"
+msgstr "ເພີ່ມເຕີມ"
 
 msgid "View {{programName}} dashboard"
 msgstr " ເບິ່ງ {{programName}} ກະດານຂ່າວ"
@@ -366,17 +369,11 @@ msgstr "ຄົນທີ່ລົງທະບຽນ"
 msgid "validation failed"
 msgstr "ການກວດສອບລົ້ມເຫຼວ"
 
-msgid "Errors"
-msgstr "ຜິດພາດ"
+msgid "No feedback for this event yet"
+msgstr "ບໍ່ມີຄຳເຫັນຈາກເຫດການນີ້ເທື່ອ"
 
-msgid "Feedback"
-msgstr "ຜົນຕອບຮັບ"
-
-msgid "Indicators"
-msgstr "ຕົວຊີ້ວັດ"
-
-msgid "Warnings"
-msgstr "ແຈ້ງເຕືອນ"
+msgid "No indicator output for this event yet"
+msgstr "ບໍ່ມີຕົວຊີ້ວັດຜົນໄດ້ຮັບສໍາລັບເຫດການນີ້ເທື່ອ"
 
 msgid "Generate new event"
 msgstr "ປ້ອນເຫດການໃໝ່"
@@ -568,6 +565,9 @@ msgstr "ຖັນທີ່ຈະສະແດງຢູ່ໃນຕາຕະລາ
 
 msgid "Column"
 msgstr "ຖັນ"
+
+msgid "Visible"
+msgstr "ສະແດງ"
 
 msgid "Update"
 msgstr "ປັບປຸງ"
@@ -779,12 +779,6 @@ msgstr "ພົບຂໍ້ຜິດພາດໃນການໂຫຼດໜ້າ
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr "ບໍ່ມີຄຳເຫັນຈາກເຫດການນີ້ເທື່ອ"
-
-msgid "No indicator output for this event yet"
-msgstr "ບໍ່ມີຕົວຊີ້ວັດຜົນໄດ້ຮັບສໍາລັບເຫດການນີ້ເທື່ອ"
-
 msgid "Program stage is invalid"
 msgstr "ຂັ້ນຕອນໂປແກຼມບໍ່ຖືກຕ້ອງ"
 
@@ -814,6 +808,11 @@ msgstr "ຂັ້ນຕອນ"
 
 msgid "Registered events"
 msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr "ກະລຸນາເລືອກ {{category}} ."
@@ -928,6 +927,18 @@ msgid ""
 "relationship"
 msgstr "ການອອກຈາກໜ້ານີ້ແມ່ນຈະຖືກຍົກເລີກການເລືອກຕ່າງໆທີ່ທ່ານສ້າງຂຶ້ນ"
 
+msgid "Errors"
+msgstr "ຜິດພາດ"
+
+msgid "Feedback"
+msgstr "ຜົນຕອບຮັບ"
+
+msgid "Indicators"
+msgstr "ຕົວຊີ້ວັດ"
+
+msgid "Warnings"
+msgstr "ແຈ້ງເຕືອນ"
+
 msgid "Show all events"
 msgstr "ສະແດງເຫດການທັງໝົດ"
 
@@ -967,6 +978,12 @@ msgstr "ບໍ່ສາມາດດຶງຂໍ້ມູນ metadata ໄດ້. 
 
 msgid "The enrollment event data could not be found"
 msgstr "ບໍ່ພົບຂໍ້ມູນເຫດການການລົງທະບຽນ"
+
+msgid "Loading"
+msgstr "ກໍາລັງໂຫຼດ"
+
+msgid "An error occurred while loading the form"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "ພົບການຊໍ້າກັນທີ່ເປັນໄປໄດ້"
@@ -1492,6 +1509,15 @@ msgstr "{{ scheduledEvents }} ກຳນົດເວລາ"
 msgid "Stages and Events"
 msgstr "ຂັ້ນຕອນ ແລະ ເຫດການ"
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "ຕາມເວລາທີ່ກໍານົດ"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1658,9 +1684,6 @@ msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "ຕາມເວລາທີ່ກໍານົດ"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""

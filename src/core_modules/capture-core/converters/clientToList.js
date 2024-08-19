@@ -4,7 +4,6 @@ import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { Tag } from '@dhis2/ui';
 import { PreviewImage } from 'capture-ui';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
@@ -60,12 +59,7 @@ function convertImageForDisplay(clientValue: ImageClientValue) {
     if (typeof clientValue === 'string' || clientValue instanceof String) {
         return clientValue;
     }
-    return featureAvailable(FEATURES.trackerImageEndpoint) ? (
-        <PreviewImage
-            url={clientValue.url}
-            previewUrl={clientValue.previewUrl}
-        />
-    ) : convertFileForDisplay(clientValue);
+    return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} />;
 }
 
 function convertRangeForDisplay(parser: any, clientValue: any) {

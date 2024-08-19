@@ -1,3 +1,97 @@
+## [101.1.3](https://github.com/dhis2/capture-app/compare/v101.1.2...v101.1.3) (2024-08-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4164273](https://github.com/dhis2/capture-app/commit/4164273a380c24f57369f4f7c56dea4f0f6211a1))
+
+## [101.1.2](https://github.com/dhis2/capture-app/compare/v101.1.1...v101.1.2) (2024-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-17101] Consider prevent adding events to stage program rule ([#3706](https://github.com/dhis2/capture-app/issues/3706)) ([47ed42c](https://github.com/dhis2/capture-app/commit/47ed42c4c0d1a23ce93ce4ccbd02461ae22d2a18))
+
+## [101.1.1](https://github.com/dhis2/capture-app/compare/v101.1.0...v101.1.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* [DHIS2-17883] revert validate values assigned from the rules engine ([#3758](https://github.com/dhis2/capture-app/issues/3758)) ([ea0e675](https://github.com/dhis2/capture-app/commit/ea0e67572d3edf5bee4adc19a3a845260cfa2abd))
+
+# [101.1.0](https://github.com/dhis2/capture-app/compare/v101.0.0...v101.1.0) (2024-08-14)
+
+
+### Features
+
+* [DHIS2-17655] Two event workspace ([#3726](https://github.com/dhis2/capture-app/issues/3726)) ([bad5312](https://github.com/dhis2/capture-app/commit/bad53124de25367fd633c0cfdd50efacb6eb022a))
+
+# [101.0.0](https://github.com/dhis2/capture-app/compare/v100.77.0...v101.0.0) (2024-08-14)
+
+
+### chore
+
+* **release:** stop support for 2.38 ([#3755](https://github.com/dhis2/capture-app/issues/3755)) ([2bbc649](https://github.com/dhis2/capture-app/commit/2bbc649b2cb638ac7c311bde16b79e1c39b2a65f))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 101.0.0 to facilitate potential fixes for 2.38
+
+# [100.77.0](https://github.com/dhis2/capture-app/compare/v100.76.1...v100.77.0) (2024-08-13)
+
+
+### Bug Fixes
+
+* [DHIS2-17352] Changing program in event workspace does nothing ([#3754](https://github.com/dhis2/capture-app/issues/3754)) ([c3ce444](https://github.com/dhis2/capture-app/commit/c3ce444db56cbb089c3023aa4c1866cc7f158c1f))
+
+
+### Features
+
+* [DHIS2-12288] add enrollment section description ([#3750](https://github.com/dhis2/capture-app/issues/3750)) ([1b4be20](https://github.com/dhis2/capture-app/commit/1b4be20b474f2f5b6c4eb66c37b0c509291b5bf6))
+
+## [100.76.1](https://github.com/dhis2/capture-app/compare/v100.76.0...v100.76.1) (2024-08-09)
+
+
+### Bug Fixes
+
+* [DHIS2-17632][DHIS2-17633] restrict invalid category combo for orgUnit ([#3738](https://github.com/dhis2/capture-app/issues/3738)) ([bfffe06](https://github.com/dhis2/capture-app/commit/bfffe069e3c16387dc0da6c08ed25b91f3f55bf1))
+
+# [100.76.0](https://github.com/dhis2/capture-app/compare/v100.75.1...v100.76.0) (2024-08-08)
+
+
+### Features
+
+* [DHIS2-17171] preview images in versions prior to 41 ([#3694](https://github.com/dhis2/capture-app/issues/3694)) ([2f51805](https://github.com/dhis2/capture-app/commit/2f51805b469d74b57bff7c927a9aa76420913ea1))
+
+## [100.75.1](https://github.com/dhis2/capture-app/compare/v100.75.0...v100.75.1) (2024-08-08)
+
+
+### Bug Fixes
+
+* [DHIS2-17859] Add missing ids to Enrollment plugin ([#3748](https://github.com/dhis2/capture-app/issues/3748)) ([19c77ec](https://github.com/dhis2/capture-app/commit/19c77ec50c2fff0deef948abd516726b51f95418))
+
+# [100.75.0](https://github.com/dhis2/capture-app/compare/v100.74.0...v100.75.0) (2024-08-07)
+
+
+### Features
+
+* [DHIS2-17726] Plugins in Profile Widget ([#3709](https://github.com/dhis2/capture-app/issues/3709)) ([d783ade](https://github.com/dhis2/capture-app/commit/d783ade253e27badf03d267d8a3935186b170fd8))
+
+# [100.74.0](https://github.com/dhis2/capture-app/compare/v100.73.0...v100.74.0) (2024-08-07)
+
+
+### Features
+
+* [DHIS2-17591][DHIS2-17607] Plugins in event forms ([#3684](https://github.com/dhis2/capture-app/issues/3684)) ([205b9f5](https://github.com/dhis2/capture-app/commit/205b9f5746f3d9b3d0d28035fd99e40b5649003c))
+
+# [100.73.0](https://github.com/dhis2/capture-app/compare/v100.72.0...v100.73.0) (2024-08-07)
+
+
+### Features
+
+* [DHIS2-16125] hide program stage under certain circumstances ([#3735](https://github.com/dhis2/capture-app/issues/3735)) ([c6b6dc0](https://github.com/dhis2/capture-app/commit/c6b6dc0330d8c92d8334fb1f0b34a5524ebb2967))
+
 # [100.72.0](https://github.com/dhis2/capture-app/compare/v100.71.3...v100.72.0) (2024-08-06)
 
 

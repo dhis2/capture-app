@@ -66,6 +66,14 @@ export type ProgramTrackedEntityAttribute = {
     allowFutureDate?: ?boolean,
 };
 
+export type PluginElement = {
+    id: string,
+    name: string,
+    type: string,
+    pluginSource: string,
+    fieldMap: Array<{ objectType: string, IdFromApp: string, IdFromPlugin: string }>,
+};
+
 export type TrackedEntityType = {
     id: string,
     displayName: string,

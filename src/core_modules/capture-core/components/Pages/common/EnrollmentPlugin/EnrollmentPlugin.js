@@ -9,6 +9,8 @@ type EnrollmentPluginProps = {|
     teiId: string,
     orgUnitId: string,
     pluginSource: string,
+    programStageId?: string,
+    eventId?: string,
 |};
 
 export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPluginProps) => {

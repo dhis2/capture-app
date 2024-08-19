@@ -7,7 +7,7 @@ import { NewPageComponent } from './NewPage.component';
 import {
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
-    showMessageToSelectProgramCategoryOnNewPage,
+    showMessageToSelectProgramCategoryOnNewPage, showMessageThatCategoryOptionIsInvalidForOrgUnit,
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
@@ -17,6 +17,7 @@ import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges'
 import { useTrackedEntityInstances } from './hooks';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { programCollection } from '../../../metaDataMemoryStores/programCollection/programCollection';
+import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -45,6 +46,9 @@ export const NewPage: ComponentType<{||}> = () => {
     const history = useHistory();
     const { orgUnitId, programId, teiId } = useLocationQuery();
     const program = programId && programCollection.get(programId);
+    const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
+        selectedOrgUnitId: orgUnitId,
+    });
     const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
     // $FlowFixMe
     const trackedEntityType = program?.trackedEntityType;
@@ -54,6 +58,10 @@ export const NewPage: ComponentType<{||}> = () => {
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
+        [dispatch]);
+
+    const dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit = useCallback(
+        () => { dispatch(showMessageThatCategoryOptionIsInvalidForOrgUnit()); },
         [dispatch]);
 
     const dispatchShowMessageToSelectProgramCategoryOnNewPage = useCallback(
@@ -104,11 +112,13 @@ export const NewPage: ComponentType<{||}> = () => {
             showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
             showMessageToSelectProgramCategoryOnNewPage={dispatchShowMessageToSelectProgramCategoryOnNewPage}
             showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
+            showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
             handleMainPageNavigation={handleMainPageNavigation}
             currentScopeId={currentScopeId}
             orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
             programCategorySelectionIncomplete={programSelectionIsIncomplete}
             missingCategoriesInProgramSelection={missingCategories}
+            categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
             writeAccess={writeAccess}
             newPageStatus={newPageStatus}
             error={error}

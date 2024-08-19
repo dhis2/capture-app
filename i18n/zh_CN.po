@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -39,6 +39,9 @@ msgid ""
 msgstr ""
 "您在同一域中打开了另一个版本的Capture App。当前，Capture "
 "App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
+
+msgid "More"
+msgstr "更多"
 
 msgid "View {{programName}} dashboard"
 msgstr "查看 {{programName}} 仪表板"
@@ -361,17 +364,11 @@ msgstr "登记的人"
 msgid "validation failed"
 msgstr "验证失败"
 
-msgid "Errors"
-msgstr "错误"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "反馈"
-
-msgid "Indicators"
-msgstr "指标"
-
-msgid "Warnings"
-msgstr "错误"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "生成新事件"
@@ -560,6 +557,9 @@ msgstr "表中显示的列"
 
 msgid "Column"
 msgstr "列"
+
+msgid "Visible"
+msgstr ""
 
 msgid "Update"
 msgstr "更新"
@@ -771,12 +771,6 @@ msgstr "加载页面时出错"
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr "项目阶段无效"
 
@@ -806,6 +800,11 @@ msgstr "阶段"
 
 msgid "Registered events"
 msgstr "注册的事件"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr "请选择 {{category}}."
@@ -920,6 +919,18 @@ msgid ""
 "relationship"
 msgstr "离开该页将丢失你创建新关系的所有选择"
 
+msgid "Errors"
+msgstr "错误"
+
+msgid "Feedback"
+msgstr "反馈"
+
+msgid "Indicators"
+msgstr "指标"
+
+msgid "Warnings"
+msgstr "错误"
+
 msgid "Show all events"
 msgstr "显示所有事件"
 
@@ -959,6 +970,12 @@ msgstr "无法检索元数据。请稍后再试。"
 
 msgid "The enrollment event data could not be found"
 msgstr "找不到报名事件数据"
+
+msgid "Loading"
+msgstr "载入"
+
+msgid "An error occurred while loading the form"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -1478,6 +1495,15 @@ msgstr "{{ scheduledEvents }} 已调度"
 msgid "Stages and Events"
 msgstr "阶段与活动"
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "已经调度"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1642,9 +1668,6 @@ msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "调度{{ escape }}到期{{ time }}"
-
-msgid "Scheduled"
-msgstr "已经调度"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "逾期{{ escape }}到期{{ time }}"

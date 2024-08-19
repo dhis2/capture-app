@@ -10,6 +10,7 @@ import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
+import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -29,7 +30,14 @@ const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, sho
     }
 };
 
-const useMainPageStatus = ({ programId, selectedProgram, categories, orgUnitId, showAllAccessible }) => {
+const useMainPageStatus = ({
+    programId,
+    selectedProgram,
+    categories,
+    orgUnitId,
+    showAllAccessible,
+    categoryOptionIsInvalidForOrgUnit,
+}) => {
     const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
 
     return useMemo(() => {
@@ -44,6 +52,9 @@ const useMainPageStatus = ({ programId, selectedProgram, categories, orgUnitId, 
             if (withoutOrgUnit) {
                 return MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED;
             }
+            if (programCategories && categoryOptionIsInvalidForOrgUnit) {
+                return MainPageStatuses.CATEGORY_OPTION_INVALID_FOR_ORG_UNIT;
+            }
             return MainPageStatuses.SHOW_WORKING_LIST;
         }
 
@@ -52,7 +63,7 @@ const useMainPageStatus = ({ programId, selectedProgram, categories, orgUnitId, 
         }
 
         return MainPageStatuses.SHOW_WORKING_LIST;
-    }, [categories, programId, withoutOrgUnit, selectedProgram]);
+    }, [programId, selectedProgram, withoutOrgUnit, categories, categoryOptionIsInvalidForOrgUnit]);
 };
 
 const useSelectorMainPage = () =>
@@ -95,12 +106,20 @@ const MainPageContainer = () => {
         error,
         ready,
     } = useSelectorMainPage();
+    const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({ selectedOrgUnitId: orgUnitId });
 
     const selectedProgram = programCollection.get(programId);
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
-    const MainPageStatus = useMainPageStatus({ programId, selectedProgram, categories, orgUnitId, showAllAccessible });
+    const MainPageStatus = useMainPageStatus({
+        programId,
+        selectedProgram,
+        categories,
+        orgUnitId,
+        showAllAccessible,
+        categoryOptionIsInvalidForOrgUnit,
+    });
 
     const {
         onChangeTemplate,

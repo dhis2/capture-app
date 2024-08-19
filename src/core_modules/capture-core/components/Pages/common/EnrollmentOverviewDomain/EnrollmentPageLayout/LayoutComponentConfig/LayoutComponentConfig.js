@@ -28,6 +28,7 @@ import type {
     InputFeedbackProps,
     InputIndicatorProps,
 } from '../../../../../WidgetFeedback/WidgetFeedback.types';
+import { WidgetTwoEventWorkspace } from '../../../../../WidgetTwoEventWorkspace';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
@@ -206,13 +207,13 @@ export const EnrollmentWidget: WidgetConfig = {
 export const EditEventWorkspace: WidgetConfig = {
     Component: WidgetEventEditWrapper,
     getProps: ({
-        programStage,
         onGoBack,
         program,
         orgUnitId,
         teiId,
         enrollmentId,
         eventId,
+        stageId,
         eventStatus,
         onCancelEditEvent,
         onHandleScheduleSave,
@@ -223,9 +224,9 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
     }): WidgetEventEditProps => ({
-        programStage,
         onGoBack,
         programId: program.id,
+        stageId,
         orgUnitId,
         teiId,
         enrollmentId,
@@ -239,6 +240,17 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
+    }),
+};
+
+export const TwoEventWorkspace: WidgetConfig = {
+    Component: WidgetTwoEventWorkspace,
+    getProps: ({ currentPage, eventId, program, stageId, orgUnitId }) => ({
+        currentPage,
+        eventId,
+        programId: program.id,
+        orgUnitId,
+        stageId,
     }),
 };
 

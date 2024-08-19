@@ -1,5 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import type {
@@ -7,14 +9,25 @@ import type {
     TrackedEntityAttribute,
     TrackedEntityType,
     OptionSet,
+    PluginElement,
 } from './types';
 import { RenderFoundation, Section } from '../../../../metaData';
 import { buildDataElement, buildTetFeatureType } from './DataElement';
 import { getProgramTrackedEntityAttributes, getTrackedEntityTypeId } from '../helpers';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { FieldElementObjectTypes, type DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
+import { FormFieldTypes } from '../../../D2Form/FormFieldPlugin/FormFieldPlugin.const';
+import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';
 
 const getFeatureType = (featureType: ?string) =>
     (featureType ? capitalizeFirstLetter(featureType.toLowerCase()) : 'None');
+
+const isPluginElement =
+    (attribute: ProgramTrackedEntityAttribute | PluginElement): boolean %checks => attribute
+        .type === FormFieldTypes.PLUGIN;
+
+const isProgramTrackedEntityAttribute =
+    (attribute: ProgramTrackedEntityAttribute | PluginElement): boolean %checks => !isPluginElement(attribute);
 
 const buildProgramSection = programSection => programSection.trackedEntityAttributes.map(({ id }) => id);
 
@@ -62,7 +75,7 @@ const buildMainSection = async ({
     trackedEntityType: TrackedEntityType,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSet>,
-    programTrackedEntityAttributes?: ?Array<ProgramTrackedEntityAttribute>,
+    programTrackedEntityAttributes?: ?Array<ProgramTrackedEntityAttribute | PluginElement>,
     querySingleResource: QuerySingleResource,
     minorServerVersion: number,
 }) => {
@@ -97,7 +110,7 @@ const buildElementsForSection = async ({
     querySingleResource,
     minorServerVersion,
 }: {
-    programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
+    programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute | PluginElement>,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSet>,
     section: Section,
@@ -105,15 +118,55 @@ const buildElementsForSection = async ({
     minorServerVersion: number,
 }) => {
     for (const trackedEntityAttribute of programTrackedEntityAttributes) {
-        // eslint-disable-next-line no-await-in-loop
-        const element = await buildDataElement(
-            trackedEntityAttribute,
-            trackedEntityAttributes,
-            optionSets,
-            querySingleResource,
-            minorServerVersion,
-        );
-        element && section.addElement(element);
+        if (isPluginElement(trackedEntityAttribute)) {
+            const pluginElement = ((trackedEntityAttribute: any): PluginElement);
+
+            const attributes = pluginElement.fieldMap
+                .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
+                .reduce((acc, attribute) => {
+                    acc[attribute.IdFromApp] = attribute;
+                    return acc;
+                }, {});
+
+            const element = new FormFieldPluginConfig((o) => {
+                o.id = pluginElement.id;
+                o.name = pluginElement.name;
+                o.pluginSource = pluginElement.pluginSource;
+                o.fields = new Map();
+                o.customAttributes = attributes;
+            });
+
+            /* eslint-disable no-await-in-loop */
+            // $FlowFixMe
+            await pluginElement.fieldMap.asyncForEach(async (field) => {
+                if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+                    const fieldElement = await buildDataElement(
+                        field,
+                        trackedEntityAttributes,
+                        optionSets,
+                        querySingleResource,
+                        minorServerVersion,
+                    );
+                    if (!fieldElement) return;
+
+                    element.addField(field.IdFromPlugin, fieldElement);
+                }
+            });
+            /* eslint-enable no-await-in-loop */
+
+            element && section.addElement(element);
+        } else if (isProgramTrackedEntityAttribute(trackedEntityAttribute)) {
+            const programTrackedEntityAttribute = ((trackedEntityAttribute: any): ProgramTrackedEntityAttribute);
+            // eslint-disable-next-line no-await-in-loop
+            const element = await buildDataElement(
+                programTrackedEntityAttribute,
+                trackedEntityAttributes,
+                optionSets,
+                querySingleResource,
+                minorServerVersion,
+            );
+            element && section.addElement(element);
+        }
     }
     return section;
 };
@@ -124,14 +177,16 @@ const buildSection = async ({
     optionSets,
     sectionCustomLabel,
     sectionCustomId,
+    sectionDisplayDescription,
     querySingleResource,
     minorServerVersion,
 }: {
-    programTrackedEntityAttributes?: Array<ProgramTrackedEntityAttribute>,
+    programTrackedEntityAttributes?: Array<ProgramTrackedEntityAttribute | PluginElement>,
     trackedEntityAttributes: Array<TrackedEntityAttribute>,
     optionSets: Array<OptionSet>,
     sectionCustomLabel: string,
     sectionCustomId: string,
+    sectionDisplayDescription: string,
     querySingleResource: QuerySingleResource,
     minorServerVersion: number,
 }) => {
@@ -142,6 +197,7 @@ const buildSection = async ({
     const section = new Section((o) => {
         o.id = sectionCustomId;
         o.name = sectionCustomLabel;
+        o.displayDescription = sectionDisplayDescription;
     });
 
     await buildElementsForSection({
@@ -155,7 +211,7 @@ const buildSection = async ({
     return section;
 };
 
-export const buildFormFoundation = async (program: any, querySingleResource: QuerySingleResource, minorServerVersion: number) => {
+export const buildFormFoundation = async (program: any, querySingleResource: QuerySingleResource, minorServerVersion: number, dataEntryFormConfig: ?DataEntryFormConfig) => {
     const { programSections, trackedEntityType } = program;
     const programTrackedEntityAttributes = getProgramTrackedEntityAttributes(program.programTrackedEntityAttributes);
     const trackedEntityTypeId: string = getTrackedEntityTypeId(program);
@@ -173,7 +229,7 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
     });
 
     let section;
-    if (programSections?.length) {
+    if (programSections?.length || dataEntryFormConfig) {
         if (trackedEntityTypeId) {
             section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
             section && renderFoundation.addSection(section);
@@ -187,20 +243,72 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
                     return acc;
                 }, {});
 
-            for (const programSection of programSections) {
-                const builtProgramSection = buildProgramSection(programSection);
 
-                // eslint-disable-next-line no-await-in-loop
-                section = await buildSection({
-                    programTrackedEntityAttributes: builtProgramSection.map(id => trackedEntityAttributeDictionary[id]),
-                    trackedEntityAttributes,
-                    optionSets,
-                    sectionCustomLabel: programSection.displayFormName,
-                    sectionCustomId: programSection.id,
-                    querySingleResource,
-                    minorServerVersion,
+            if (dataEntryFormConfig) {
+                // $FlowFixMe
+                await dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+                    const attributes = formConfigSection.elements.reduce((acc, element) => {
+                        if (element.type === FormFieldTypes.PLUGIN) {
+                            const fieldMap = element
+                                .fieldMap
+                                ?.map(field => ({
+                                    ...field,
+                                    ...trackedEntityAttributeDictionary[field.IdFromApp],
+                                }));
+
+                            acc.push({
+                                ...element,
+                                fieldMap,
+                            });
+                            return acc;
+                        }
+                        const attribute = trackedEntityAttributeDictionary[element.id];
+                        if (attribute) {
+                            acc.push(attribute);
+                        }
+                        return acc;
+                    }, []);
+
+                    const sectionMetadata = programSections
+                        ?.find(cachedSection => cachedSection.id === formConfigSection.id);
+
+                    if (!sectionMetadata && programSections && programSections.length > 0) {
+                        log.warn(
+                            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                                { sectionId: formConfigSection.id },
+                            ),
+                        );
+                    }
+
+                    section = await buildSection({
+                        programTrackedEntityAttributes: attributes,
+                        sectionCustomLabel: formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
+                        sectionCustomId: formConfigSection.id,
+                        sectionDisplayDescription: sectionMetadata?.displayDescription ?? '',
+                        minorServerVersion,
+                        trackedEntityAttributes,
+                        optionSets,
+                        querySingleResource,
+                    });
+                    section && renderFoundation.addSection(section);
                 });
-                section && renderFoundation.addSection(section);
+            } else {
+                for (const programSection of programSections) {
+                    const builtProgramSection = buildProgramSection(programSection);
+
+                    // eslint-disable-next-line no-await-in-loop
+                    section = await buildSection({
+                        programTrackedEntityAttributes: builtProgramSection.map(id => trackedEntityAttributeDictionary[id]),
+                        trackedEntityAttributes,
+                        optionSets,
+                        sectionCustomLabel: programSection.displayFormName,
+                        sectionCustomId: programSection.id,
+                        sectionDisplayDescription: programSection.displayDescription,
+                        querySingleResource,
+                        minorServerVersion,
+                    });
+                    section && renderFoundation.addSection(section);
+                }
             }
         }
     } else {
@@ -222,7 +330,8 @@ export const build = async (
     setFormFoundation?: (formFoundation: RenderFoundation) => void,
     querySingleResource: QuerySingleResource,
     minorServerVersion: number,
+    dataEntryFormConfig: ?DataEntryFormConfig,
 ) => {
-    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion)) || {};
+    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) || {};
     setFormFoundation && setFormFoundation(formFoundation);
 };

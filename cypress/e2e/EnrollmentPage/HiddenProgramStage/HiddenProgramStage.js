@@ -43,9 +43,8 @@ Given('you add an enrollment event that will result in a rule effect to hide a p
     cy.contains('[data-test="dhis2-uicore-button"]', 'Save without completing').click();
 });
 
-Then('the New Postpartum care visit event button is disabled in the stages and events widget', () => {
-    cy.contains('[data-test="create-new-button"]', 'New Postpartum care visit event')
-        .should('be.disabled');
+Then('the Postpartum care visit stage should not be displayed in the Stages and Events widget', () => {
+    cy.get('[data-test="stages-and-events-widget"]').should('not.contain', 'Postpartum care visit');
 });
 
 Then('the Postpartum care visit button is disabled in the enrollmentEventNew page', () => {

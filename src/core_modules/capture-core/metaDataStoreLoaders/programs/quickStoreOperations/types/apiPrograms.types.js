@@ -63,7 +63,8 @@ type apiProgramSections = {
     id: string,
     sortOrder: number,
     displayFormName: string,
-    trackedEntityAttributes: Array<{ id: string }>
+    trackedEntityAttributes: Array<{ id: string }>,
+    description: ?string
 }
 
 type apiOption = {

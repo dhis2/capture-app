@@ -25,6 +25,9 @@ import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView }
 import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
 import { OverflowMenu } from './OverflowMenu';
+import {
+    useDataEntryFormConfig,
+} from '../DataEntries/common/TEIAndEnrollment';
 
 const styles = {
     header: {
@@ -65,6 +68,7 @@ const WidgetProfilePlain = ({
         storedGeometry: trackedEntityInstance?.geometry,
         hasError: trackedEntityInstance?.hasError,
     }));
+    const { configIsFetched, dataEntryFormConfig } = useDataEntryFormConfig({ selectedScopeId: programId });
     const {
         loading: trackedEntityInstancesLoading,
         error: trackedEntityInstancesError,
@@ -84,7 +88,7 @@ const WidgetProfilePlain = ({
         trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
     [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
-    const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading;
+    const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program, trackedEntityInstanceAttributes);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
@@ -176,6 +180,7 @@ const WidgetProfilePlain = ({
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
                         onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
                         programAPI={program}
+                        dataEntryFormConfig={dataEntryFormConfig}
                         orgUnitId={orgUnitId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
                         userRoles={userRoles}
