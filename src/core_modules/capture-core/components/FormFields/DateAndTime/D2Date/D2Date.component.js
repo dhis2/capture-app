@@ -13,6 +13,7 @@ type Props = {
     inputWidth?: ?number,
     onBlur: (value: string) => void,
     onFocus?: ?() => void,
+    onKeyDown?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
     classes?: Object,
     disabled?: boolean,

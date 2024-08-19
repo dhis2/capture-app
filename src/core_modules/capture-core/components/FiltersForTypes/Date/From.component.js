@@ -29,7 +29,7 @@ class FromDateFilterPlain extends Component<Props> {
         this.props.onBlur(FromDateFilterPlain.getValueObject(value));
     }
 
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             this.props.onEnterKey();
         }
@@ -41,7 +41,7 @@ class FromDateFilterPlain extends Component<Props> {
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2Date
-                    onKeyPress={this.handleKeyPress}
+                    onKeyDown={this.handleKeyDown}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('From')}
                     width={150}
