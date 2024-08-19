@@ -51,15 +51,10 @@ const getStyles = ({ typography }) => ({
     },
     flexItem: {
         flex: 1,
-        minWidth: '300px',
+        minWidth: '500px',
     },
     dataEntryReadyItem: {
         minWidth: '300px',
-    },
-    '@media (max-width: 960px)': {
-        flexContainer: {
-            flexDirection: 'column',
-        },
     },
 });
 
