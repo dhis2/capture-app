@@ -164,7 +164,7 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
 } => {
     const cachedOrgUnit = orgUnitId && orgUnitCache[orgUnitId];
     const fetchId = cachedOrgUnit ? undefined : orgUnitId;
-    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName,level]');
+    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName]');
 
     if (orgUnitId && cachedOrgUnit) {
         const getOrgUnitFromCache = parentOrgUnitId => orgUnitCache[parentOrgUnitId];
