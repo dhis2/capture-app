@@ -135,8 +135,8 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
 };
 
 export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleResource: QuerySingleResource): Promise<{|
-    [orgUnitId: string]: {|
-        id: string,
+[orgUnitId: string]: {|
+    id: string,
         displayName: string,
     |}
 |}> {
@@ -160,51 +160,56 @@ export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleReso
 export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     displayName?: string,
     ancestors?: Array<{| id: string, displayName: string |}>,
-    error?: any,
+    error ?: any,
 } => {
     const cachedOrgUnit = orgUnitId && orgUnitCache[orgUnitId];
     const fetchId = cachedOrgUnit ? undefined : orgUnitId;
-    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName]');
+    const { orgUnit: fetchedOrgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName]');
 
     if (orgUnitId && cachedOrgUnit) {
         const getOrgUnitFromCache = parentOrgUnitId => orgUnitCache[parentOrgUnitId];
 
-        const getFullAncestor = (currentOrgUnitId) => {
+        const getAncestors = (initialOrgUnitId) => {
             const ancestors = [];
-            let currentOrgUnit = getOrgUnitFromCache(currentOrgUnitId);
 
-            if (currentOrgUnit) {
-                currentOrgUnit = getOrgUnitFromCache(currentOrgUnit?.ancestor);
-            }
+            const initialOrgUnit = getOrgUnitFromCache(initialOrgUnitId);
 
-            let previousAncestorId = currentOrgUnit?.ancestor;
+            const addAncestor = (currentOrgUnitId) => {
+                const orgUnit = getOrgUnitFromCache(currentOrgUnitId);
 
-            while (currentOrgUnit) {
-                ancestors.push({
-                    displayName: currentOrgUnit?.displayName,
-                    id: previousAncestorId,
+                if (!orgUnit) return;
+
+                ancestors.unshift({
+                    displayName: orgUnit.displayName,
+                    id: currentOrgUnitId,
                 });
 
-                previousAncestorId = currentOrgUnit?.ancestor;
-                currentOrgUnit = getOrgUnitFromCache(currentOrgUnit?.ancestor);
+                if (orgUnit.ancestor !== undefined) {
+                    addAncestor(orgUnit.ancestor);
+                }
+            };
+
+            if (initialOrgUnit && initialOrgUnit.ancestor !== undefined) {
+                addAncestor(initialOrgUnit.ancestor);
             }
 
-            return ancestors.reverse();
+            return ancestors;
         };
 
-        const ancestors = getFullAncestor(orgUnitId);
+        const ancestors = getAncestors(orgUnitId);
+        console.log(ancestors);
 
         return {
             displayName: cachedOrgUnit.displayName,
             ancestors,
             error,
         };
-    } else if (orgUnit && fetchId) {
-        updateCacheWithOrgUnits([orgUnit]);
+    } else if (fetchedOrgUnit && fetchId) {
+        updateCacheWithOrgUnits([fetchedOrgUnit]);
 
         return {
-            displayName: orgUnit.displayName,
-            ancestors: orgUnit.ancestors,
+            displayName: fetchedOrgUnit.displayName,
+            ancestors: fetchedOrgUnit.ancestors,
             error,
         };
     }
