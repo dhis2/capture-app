@@ -26,14 +26,14 @@ export const missingStatuses = {
     MISSING_ENROLLMENT_SELECTION_ADD_NEW: 'MISSING_ENROLLMENT_SELECTION_ADD_NEW',
     MISSING_PROGRAM_CATEGORIES_SELECTION: 'MISSING_PROGRAM_CATEGORIES_SELECTION',
     MISSING_PROGRAM_SELECTION: 'MISSING_PROGRAM_SELECTION',
+    INVALID_PROGRAM_ID: 'INVALID_PROGRAM_ID',
 };
 
 const useMissingStatus = () => {
     const [missingStatus, setStatus] = useState(null);
 
     const { programId, enrollmentId, teiId } = useLocationQuery();
-
-    const { scopeType, tetId: scopeTetId } = useScopeInfo(programId);
+    const { scopeType, tetId: scopeTetId, programName } = useScopeInfo(programId);
     const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
     const {
         programHasEnrollments,
@@ -47,8 +47,9 @@ const useMissingStatus = () => {
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
-
-        if (enrollmentAccessLevel === enrollmentAccessLevels.LIMITED_ACCESS) {
+        if (programId && !programName) {
+            setStatus(missingStatuses.INVALID_PROGRAM_ID);
+        } else if (enrollmentAccessLevel === enrollmentAccessLevels.LIMITED_ACCESS) {
             setStatus(missingStatuses.PROTECTED_PROGRAM_WITH_BREAKING_THE_GLASS);
         } else if (enrollmentAccessLevel === enrollmentAccessLevels.NO_ACCESS) {
             setStatus(missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS);
@@ -71,6 +72,7 @@ const useMissingStatus = () => {
         }
     }, [
         programId,
+        programName,
         programSelectionIsIncomplete,
         programHasEnrollments,
         programHasActiveEnrollments,
@@ -132,6 +134,15 @@ export const MissingMessage = withStyles(getStyles)(({
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);
 
     return (<>
+        {
+            missingStatus === missingStatuses.INVALID_PROGRAM_ID &&
+            <IncompleteSelectionsMessage>
+                {i18n.t('Program with id "{{programId}}" does not exist', {
+                    programId,
+                    interpolation: { escapeValue: false },
+                })}
+            </IncompleteSelectionsMessage>
+        }
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>

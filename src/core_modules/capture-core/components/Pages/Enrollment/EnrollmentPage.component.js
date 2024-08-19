@@ -6,7 +6,6 @@ import { compose } from 'redux';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks/LoadingMaskForPage.component';
-import { withErrorMessageHandler } from '../../../HOC';
 import { MissingMessage } from './MissingMessage.component';
 import { EnrollmentPageDefault } from './EnrollmentPageDefault';
 import { TopBar } from './TopBar.container';
@@ -55,6 +54,5 @@ const EnrollmentPagePlain = ({
 );
 
 export const EnrollmentPageComponent: ComponentType<$Diff<Props, CssClasses>> = compose(
-    withErrorMessageHandler(),
     withStyles(getStyles),
 )(EnrollmentPagePlain);
