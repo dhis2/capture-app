@@ -7,6 +7,7 @@ import {
     RuleEnrollmentJs,
     RuleEventJs,
     RuleJs,
+    RuleValueType,
     RuleVariableJs,
     RuleVariableType,
     RuleAttributeValue,
@@ -88,6 +89,20 @@ const convertProgramRule = (rule: ProgramRule) => {
     );
 };
 
+const ruleValueTypeMap = {
+    [typeKeys.BOOLEAN]: RuleValueType['BOOLEAN'],
+    [typeKeys.TRUE_ONLY]: RuleValueType['BOOLEAN'],
+    [typeKeys.DATE]: RuleValueType['DATE'],
+    [typeKeys.DATETIME]: RuleValueType['DATE'],
+    [typeKeys.AGE]: RuleValueType['DATE'],
+    [typeKeys.INTEGER]: RuleValueType['NUMERIC'],
+    [typeKeys.INTEGER_POSITIVE]: RuleValueType['NUMERIC'],
+    [typeKeys.INTEGER_NEGATIVE]: RuleValueType['NUMERIC'],
+    [typeKeys.INTEGER_ZERO_OR_POSITIVE]: RuleValueType['NUMERIC'],
+    [typeKeys.NUMBER]: RuleValueType['NUMERIC'],
+    [typeKeys.PERCENTAGE]: RuleValueType['NUMERIC'],
+};
+
 const convertRuleVariable = (variable: ProgramRuleVariable, optionSets: KotlinOptionSets) => {
     const {
         programRuleVariableSourceType: type,
@@ -105,7 +120,7 @@ const convertRuleVariable = (variable: ProgramRuleVariable, optionSets: KotlinOp
         !useNameForOptionSet,
         optionSets[field] || [],
         field,
-        fieldType,
+        ruleValueTypeMap[fieldType] || RuleValueType['TEXT'],
         programStage,
     );
 };
@@ -263,20 +278,6 @@ export class InputBuilder {
     }) => {
         const { programRules, programRuleVariables, constants } = programRulesContainer;
 
-        const filteredProgramRuleVariables = ((variables) => {
-            if (!variables) {
-                return [];
-            }
-            const ids = new Set;
-            return variables.filter((variable) => {
-                if (ids.has(variable.id)) {
-                    return false;
-                }
-                ids.add(variable.id);
-                return true;
-            });
-        })(programRuleVariables);
-
         const kotlinOptionSets = Object.keys(optionSets).reduce((acc, key) => {
             acc[key] = optionSets[key].options.map(convertOption);
             return acc;
@@ -284,7 +285,7 @@ export class InputBuilder {
 
         return new RuleEngineContextJs(
             programRules && programRules.map(convertProgramRule),
-            filteredProgramRuleVariables.map(variable => convertRuleVariable(variable, kotlinOptionSets)),
+            programRuleVariables && programRuleVariables.map(variable => convertRuleVariable(variable, kotlinOptionSets)),
             buildSupplementaryData({ selectedOrgUnit: this.selectedOrgUnit, selectedUserRoles }),
             constants && convertConstants(constants),
         );
