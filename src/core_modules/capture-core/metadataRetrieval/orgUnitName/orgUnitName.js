@@ -169,34 +169,34 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     if (orgUnitId && cachedOrgUnit) {
         const getOrgUnitFromCache = parentOrgUnitId => orgUnitCache[parentOrgUnitId];
 
-        const getAncestors = (initialOrgUnitId) => {
+        const getAncestors = (currentOrgUnitId) => {
             const ancestors = [];
 
-            const initialOrgUnit = getOrgUnitFromCache(initialOrgUnitId);
-
-            const addAncestor = (currentOrgUnitId) => {
-                const orgUnit = getOrgUnitFromCache(currentOrgUnitId);
+            const addAncestor = (id) => {
+                const orgUnit = getOrgUnitFromCache(id);
 
                 if (!orgUnit) return;
-
-                ancestors.unshift({
-                    displayName: orgUnit.displayName,
-                    id: currentOrgUnitId,
-                });
 
                 if (orgUnit.ancestor !== undefined) {
                     addAncestor(orgUnit.ancestor);
                 }
+
+                ancestors.push({
+                    displayName: orgUnit.displayName,
+                    id,
+                });
             };
 
-            if (initialOrgUnit && initialOrgUnit.ancestor !== undefined) {
-                addAncestor(initialOrgUnit.ancestor);
-            }
+            addAncestor(currentOrgUnitId);
+
+            ancestors.pop();
 
             return ancestors;
         };
 
         const ancestors = getAncestors(orgUnitId);
+        console.log(ancestors);
+
 
         return {
             displayName: cachedOrgUnit.displayName,
