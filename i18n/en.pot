@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-18T18:19:51.651Z\n"
-"PO-Revision-Date: 2024-08-18T18:19:51.651Z\n"
+"POT-Creation-Date: 2024-08-21T19:20:51.149Z\n"
+"PO-Revision-Date: 2024-08-21T19:20:51.149Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1352,6 +1352,9 @@ msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
 
 msgid "Event completed"
 msgstr "Event completed"
+
+msgid "The event cannot be edited after it has been completed"
+msgstr "The event cannot be edited after it has been completed"
 
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"

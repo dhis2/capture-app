@@ -105,6 +105,10 @@ export const WidgetEventEditPlain = ({
     const blockEntryForm = stage.blockEntryForm && !canEditCompletedEvent && eventStatus === eventStatuses.COMPLETED;
     const disableEdit = !eventAccess?.write || blockEntryForm;
 
+    const tooltipContent = blockEntryForm ?
+        i18n.t('The event cannot be edited after it has been completed') :
+        i18n.t('You don\'t have access to edit this event');
+
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     const { programCategory } = useCategoryCombinations(programId);
     if (error) {
@@ -123,7 +127,7 @@ export const WidgetEventEditPlain = ({
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
                         <ConditionalTooltip
-                            content={i18n.t('You don\'t have access to edit this event')}
+                            content={tooltipContent}
                             enabled={disableEdit}
                             wrapperClassName={classes.tooltip}
                         >
