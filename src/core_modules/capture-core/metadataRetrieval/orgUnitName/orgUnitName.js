@@ -167,36 +167,23 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     const { orgUnit: fetchedOrgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName]');
 
     if (orgUnitId && cachedOrgUnit) {
-        const getOrgUnitFromCache = parentOrgUnitId => orgUnitCache[parentOrgUnitId];
+        const getAncestors = (parentOrgUnitId) => {
+            const orgUnit = orgUnitCache[parentOrgUnitId];
 
-        const getAncestors = (currentOrgUnitId) => {
-            const ancestors = [];
+            if (!orgUnit) return [];
 
-            const addAncestor = (id) => {
-                const orgUnit = getOrgUnitFromCache(id);
+            const ancestors = orgUnit.ancestor !== undefined ? getAncestors(orgUnit.ancestor) : [];
 
-                if (!orgUnit) return;
-
-                if (orgUnit.ancestor !== undefined) {
-                    addAncestor(orgUnit.ancestor);
-                }
-
-                ancestors.push({
-                    displayName: orgUnit.displayName,
-                    id,
-                });
-            };
-
-            addAncestor(currentOrgUnitId);
-
-            ancestors.pop();
+            ancestors.push({
+                displayName: orgUnit.displayName,
+                id: orgUnitId,
+            });
 
             return ancestors;
         };
 
         const ancestors = getAncestors(orgUnitId);
-        console.log(ancestors);
-
+        ancestors.pop();
 
         return {
             displayName: cachedOrgUnit.displayName,
