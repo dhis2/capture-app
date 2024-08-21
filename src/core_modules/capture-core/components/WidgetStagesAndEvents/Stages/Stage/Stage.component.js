@@ -3,7 +3,7 @@ import React, { type ComponentType, useState, useCallback } from 'react';
 import cx from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { spacersNum, colors, IconAdd16, Button } from '@dhis2/ui';
+import { spacersNum, IconAdd16, Button } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
@@ -13,10 +13,10 @@ const styles = {
     overview: {
         marginLeft: spacersNum.dp16,
         marginRight: spacersNum.dp16,
-        borderTop: `1px solid ${colors.grey300}`,
+        marginBottom: spacersNum.dp24,
     },
     button: {
-        margin: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        margin: `0 ${spacersNum.dp12}px ${spacersNum.dp8}px ${spacersNum.dp12}px`,
     },
     buttonRow: {
         display: 'flex',
@@ -50,7 +50,6 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                     description={description}
                     events={events}
                 />}
-                borderless
                 onOpen={handleOpen}
                 onClose={handleClose}
                 open={open}
@@ -69,7 +68,6 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
                 /> : (
                     <Button
                         small
-                        secondary
                         icon={<IconAdd16 />}
                         className={classes.button}
                         dataTest="create-new-button"
