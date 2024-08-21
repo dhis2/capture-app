@@ -38,7 +38,7 @@ const changeEnrollmentAndEventsStatus = () => (
 );
 
 const showAllEventsInProgramStage = () => {
-    cy.get('[data-test="dhis2-uicore-tablefoot"]')
+    cy.get('[data-test="dhis2-uicore-tabletoolbar"]')
         .then(($footer) => {
             if ($footer.find('[data-test="show-more-button"]').length > 0) {
                 $footer.find('[data-test="show-more-button"]')
