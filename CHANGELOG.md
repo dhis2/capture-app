@@ -1,3 +1,17 @@
+# [101.2.0](https://github.com/dhis2/capture-app/compare/v101.1.3...v101.2.0) (2024-08-22)
+
+
+### Features
+
+* [DHIS2-17575] disable create new buttons if no data write access ([#3751](https://github.com/dhis2/capture-app/issues/3751)) ([5b3cd1c](https://github.com/dhis2/capture-app/commit/5b3cd1c6150d9b6cc47be274d50bffad05b6da73))
+
+## [101.1.3](https://github.com/dhis2/capture-app/compare/v101.1.2...v101.1.3) (2024-08-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4164273](https://github.com/dhis2/capture-app/commit/4164273a380c24f57369f4f7c56dea4f0f6211a1))
+
 ## [101.1.2](https://github.com/dhis2/capture-app/compare/v101.1.1...v101.1.2) (2024-08-15)
 
 

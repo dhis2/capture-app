@@ -1,5 +1,9 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
+Given(/^you open the enrollment page by typing (.*)$/, url =>
+    cy.visit(url),
+);
+
 Given('you are on an enrollment page with stage available', () => {
     cy.visit('/#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=UgYg0YW7ZIh&teiId=zmgVvEZ91Kg&enrollmentId=xRnBV5aJDeF');
     cy.get('[data-test="enrollment-page-content"]')
@@ -30,4 +34,10 @@ Then('the buttons should be disabled', () => {
             cy.wrap($button)
                 .should('be.disabled');
         });
+});
+
+Then('the quick action buttons should be disabled', () => {
+    cy.get('[data-test="quick-action-button-container"]')
+        .find('button')
+        .should('be.disabled');
 });

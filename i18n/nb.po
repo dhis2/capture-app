@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -42,6 +42,9 @@ msgstr ""
 " Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
 "denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
 "at dette vil lukke andre versjoner."
+
+msgid "More"
+msgstr "Mer"
 
 msgid "View {{programName}} dashboard"
 msgstr "Vis {{programName}} dashbord"
@@ -374,17 +377,11 @@ msgstr "Registrert person"
 msgid "validation failed"
 msgstr "validering mislyktes"
 
-msgid "Errors"
-msgstr "Feil"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Tilbakemelding"
-
-msgid "Indicators"
-msgstr "Indikatorer"
-
-msgid "Warnings"
-msgstr "Advarsler"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Generer en ny hendelse"
@@ -576,6 +573,9 @@ msgstr "Kolonner som skal vises i tabellen"
 
 msgid "Column"
 msgstr "Kolonne"
+
+msgid "Visible"
+msgstr ""
 
 msgid "Update"
 msgstr "Oppdater"
@@ -804,12 +804,6 @@ msgstr "Det oppsto en feil under lasting av siden"
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr "Programfase er ugyldig"
 
@@ -839,6 +833,11 @@ msgstr "Fase"
 
 msgid "Registered events"
 msgstr "Registrerte hendelser"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr "Velg {{category}}."
@@ -956,6 +955,18 @@ msgstr ""
 "Hvis du forlater denne siden, vil valgene du har satt bli forkastet for "
 "denne relasjonen"
 
+msgid "Errors"
+msgstr "Feil"
+
+msgid "Feedback"
+msgstr "Tilbakemelding"
+
+msgid "Indicators"
+msgstr "Indikatorer"
+
+msgid "Warnings"
+msgstr "Advarsler"
+
 msgid "Show all events"
 msgstr "Vis alle hendelser"
 
@@ -996,6 +1007,12 @@ msgstr "Kunne ikke hente metadata. Prøv igjen senere."
 
 msgid "The enrollment event data could not be found"
 msgstr "Hendelsessdataene ble ikke funnet"
+
+msgid "Loading"
+msgstr "Laster"
+
+msgid "An error occurred while loading the form"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
@@ -1540,6 +1557,15 @@ msgstr "{{ scheduledEvents }} planlagt"
 msgid "Stages and Events"
 msgstr "Faser og hendelser"
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Planlagt"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1704,9 +1730,6 @@ msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Planlagt{{ escape }} forfaller {{ time }}"
-
-msgid "Scheduled"
-msgstr "Planlagt"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "Forfalt {{ escape }} forfalt {{ time }}"
