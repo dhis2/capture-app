@@ -56,7 +56,7 @@ type ExtractedProps = $ReadOnly<{|
     onDeleteTemplate?: DeleteTemplate,
     onLoadView: LoadView,
     onUpdateFilter: UpdateFilter,
-    onSelectListRow: SelectRow,
+    onClickListRow: SelectRow,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,

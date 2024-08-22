@@ -39,7 +39,9 @@ const getStyles = (theme: Theme) => ({
 
 class ListViewMainPlain extends React.PureComponent<Props> {
     renderTopBar = () => {
-        const { classes, filters, columns, customMenuContents, onSetColumnOrder } = this.props;
+        const { classes, filters, columns, customMenuContents, onSetColumnOrder, isSelectionInProgress } = this.props;
+
+        if (isSelectionInProgress) return null;
         return (
             <div
                 className={classes.topBarContainer}
@@ -49,9 +51,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
                 >
                     {filters}
                 </div>
-                <div
-                    className={classes.topBarButtonContainer}
-                >
+                <div className={classes.topBarButtonContainer}>
                     <ColumnSelector
                         onSave={onSetColumnOrder}
                         columns={columns}
@@ -65,12 +65,14 @@ class ListViewMainPlain extends React.PureComponent<Props> {
     }
 
     renderPager = () => {
-        const classes = this.props.classes;
+        const { classes, isSelectionInProgress } = this.props;
         return (
             <div
                 className={classes.paginationContainer}
             >
-                <ListPagination />
+                <ListPagination
+                    disabled={isSelectionInProgress}
+                />
             </div>
         );
     }
@@ -80,8 +82,11 @@ class ListViewMainPlain extends React.PureComponent<Props> {
             classes,
             filters,
             updatingWithDialog,
-            onSelectRow,
+            onClickListRow,
+            onRowSelect,
+            onSelectAll,
             customRowMenuContents,
+            isSelectionInProgress,
             ...passOnProps
         } = this.props;
 
@@ -92,8 +97,12 @@ class ListViewMainPlain extends React.PureComponent<Props> {
         return (
             <ListComponent
                 {...passOnProps}
+                showSelectCheckBox
+                isSelectionInProgress={isSelectionInProgress}
                 customRowMenuContents={customRowMenuContents}
-                onRowClick={onSelectRow}  // TODO: Fix row click naming for the online and offline list
+                onRowClick={onClickListRow}  // TODO: Fix row click naming for the online and offline list
+                onRowSelect={onRowSelect}
+                onSelectAll={onSelectAll}
             />
         );
     }

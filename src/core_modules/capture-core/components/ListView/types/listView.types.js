@@ -102,7 +102,7 @@ export type InterfaceProps = $ReadOnly<{|
     onClearFilter: ClearFilter,
     onRemoveFilter: RemoveFilter,
     onSelectRestMenuItem: SelectRestMenuItem,
-    onSelectRow: SelectRow,
+    onClickListRow: SelectRow,
     onSetColumnOrder: SetColumnOrder,
     onSort: Sort,
     onUpdateFilter: UpdateFilter,
@@ -113,7 +113,12 @@ export type InterfaceProps = $ReadOnly<{|
     stickyFilters: StickyFilters,
     updating: boolean,
     updatingWithDialog: boolean,
-    programStageId?: string
+    onRowSelect: (id: string) => void,
+    programStageId?: string,
+    selectedRows: { [key: string]: boolean },
+    onSelectAll: (rows: Array<string>) => void,
+    allRowsAreSelected: ?boolean,
+    selectionInProgress: ?boolean,
 |}>;
 
 export type ListViewPassOnProps = $ReadOnly<{|

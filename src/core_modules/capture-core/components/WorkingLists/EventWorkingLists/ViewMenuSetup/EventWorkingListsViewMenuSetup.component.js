@@ -1,13 +1,32 @@
 // @flow
 import React, { useState, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { v4 as uuid } from 'uuid';
 import { EventWorkingListsRowMenuSetup } from '../RowMenuSetup';
 import { DownloadDialog } from '../../WorkingListsCommon';
 import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Props } from './EventWorkingListsViewMenuSetup.types';
+import { useSelectedRowsController } from '../../WorkingListsBase/BulkActionBar';
+import { EventBulkActions } from '../../EventWorkingListsCommon/EventBulkActions';
 
-export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, ...passOnProps }: Props) => {
+export const EventWorkingListsViewMenuSetup = ({
+    downloadRequest,
+    program,
+    dataSource,
+    ...passOnProps
+}: Props) => {
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
+    const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
+
+    const {
+        selectedRows,
+        clearSelection,
+        selectAllRows,
+        selectionInProgress,
+        toggleRowSelected,
+        allRowsAreSelected,
+    } = useSelectedRowsController({ recordIds: dataSource?.map(data => data.id) });
+
     const customListViewMenuContents: CustomMenuContents = useMemo(() => [{
         key: 'downloadData',
         clickHandler: () => setDownloadDialogOpenStatus(true),
@@ -18,12 +37,32 @@ export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, ...pa
         setDownloadDialogOpenStatus(false);
     }, [setDownloadDialogOpenStatus]);
 
+
+    const onUpdateList = useCallback(() => {
+        const id = uuid();
+        setCustomUpdateTrigger(id);
+        clearSelection();
+    }, [clearSelection]);
+
     return (
         <React.Fragment>
+            <EventBulkActions
+                selectedRows={selectedRows}
+                onClearSelection={clearSelection}
+                programId={program.id}
+                onUpdateList={onUpdateList}
+            />
             <EventWorkingListsRowMenuSetup
                 {...passOnProps}
+                customUpdateTrigger={customUpdateTrigger}
+                dataSource={dataSource}
                 programId={program.id}
                 customListViewMenuContents={customListViewMenuContents}
+                selectedRows={selectedRows}
+                onSelectAll={selectAllRows}
+                selectionInProgress={selectionInProgress}
+                onRowSelect={toggleRowSelected}
+                allRowsAreSelected={allRowsAreSelected}
             />
             <DownloadDialog
                 open={downloadDialogOpen}

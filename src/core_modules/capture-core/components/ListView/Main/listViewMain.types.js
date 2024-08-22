@@ -14,7 +14,10 @@ type ComponentProps = {|
     rowIdKey: string,
     customMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
-    onSelectRow: Function,
+    onClickListRow: Function,
+    onRowSelect: Function,
+    onSelectAll: Function,
+    isSelectionInProgress: ?boolean,
     ...CssClasses,
 |};
 

@@ -15,6 +15,9 @@ export const WorkingListsContextBuilder = (props: Props) => {
     const {
         templates: allTemplates,
         currentTemplate,
+        selectedRows,
+        selectionInProgress,
+        allRowsAreSelected,
         onSelectTemplate,
         onLoadView,
         loadViewError,
@@ -33,7 +36,9 @@ export const WorkingListsContextBuilder = (props: Props) => {
         categories,
         loadedContext,
         dataSource,
-        onSelectListRow,
+        onClickListRow,
+        onRowSelect,
+        onSelectAll,
         sortById,
         sortByDirection,
         onSortList,
@@ -125,10 +130,15 @@ export const WorkingListsContextBuilder = (props: Props) => {
                         loadedOrgUnitId={loadedContextDefined.orgUnitId}
                     >
                         <WorkingListsListViewBuilderContextProvider
+                            selectedRows={selectedRows}
+                            allRowsAreSelected={allRowsAreSelected}
+                            selectionInProgress={selectionInProgress}
                             updating={updating}
                             updatingWithDialog={updatingWithDialog}
                             dataSource={dataSource}
-                            onSelectListRow={onSelectListRow}
+                            onClickListRow={onClickListRow}
+                            onRowSelect={onRowSelect}
+                            onSelectAll={onSelectAll}
                             onSortList={onSortList}
                             onSetListColumnOrder={onSetListColumnOrder}
                             customRowMenuContents={customRowMenuContents}
@@ -147,6 +157,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
                                 dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
                                 loadedProgramIdForTemplates={loadedProgramIdForTemplates}
                                 programStageId={programStageId}
+                                selectionInProgress={selectionInProgress}
                             />
                         </WorkingListsListViewBuilderContextProvider>
                     </WorkingListsListViewUpdaterContextProvider>

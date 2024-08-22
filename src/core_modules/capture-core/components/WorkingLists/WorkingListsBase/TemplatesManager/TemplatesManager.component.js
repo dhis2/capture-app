@@ -12,7 +12,7 @@ import type {
 import type { Props } from './templatesManager.types';
 
 const TemplatesManagerPlain = (props: Props) => {
-    const { templates, ...passOnProps } = props;
+    const { templates, selectionInProgress, ...passOnProps } = props;
     const {
         currentTemplate,
         onSelectTemplate,
@@ -42,10 +42,11 @@ const TemplatesManagerPlain = (props: Props) => {
     return (
         <ListViewConfig
             {...passOnProps}
+            selectionInProgress={selectionInProgress}
             currentTemplate={currentTemplate}
         >
             {
-                currentListIsModified => (
+                currentListIsModified => !selectionInProgress && (
                     <TemplateSelector
                         templates={templates}
                         currentTemplateId={currentTemplate.id}
