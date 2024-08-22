@@ -13,7 +13,7 @@ const getStyles = () => ({
 
 type OrgUnitValue = {
     id: string,
-    displayName: string,
+    orgUnitName: string,
     ancestors: Array<{| displayName: string, id: string |}>,
 }
 
@@ -44,7 +44,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, State> {
         const { classes } = this.props;
         return (
             <div className={classes.selectedOrgUnitContainer}>
-                <Chip onRemove={this.onDeselectOrgUnit}>{selectedOrgUnit.displayName}</Chip>
+                <Chip onRemove={this.onDeselectOrgUnit}>{selectedOrgUnit.orgUnitName}</Chip>
             </div>
         );
     }
