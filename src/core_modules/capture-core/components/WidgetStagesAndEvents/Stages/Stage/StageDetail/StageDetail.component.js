@@ -13,11 +13,10 @@ import { colors,
     DataTableCell,
     DataTableColumnHeader,
     Button,
-    IconAdd16,
     Tooltip,
 } from '@dhis2/ui';
-import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { sortDataFromEvent } from './hooks/sortFuntions';
+import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
@@ -218,37 +217,16 @@ const StageDetailPlain = (props: Props) => {
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
-        const renderCreateNewButton = () => {
-            const shouldDisableCreateNew = (!repeatable && events.length > 0) || hiddenProgramStage;
-
-            const tooltipContent = hiddenProgramStage
-                ? i18n.t("You can't add any more {{ programStageName }} events", {
-                    programStageName: eventName,
-                    interpolation: { escapeValue: false },
-                })
-                : i18n.t('This stage can only have one event');
-
-            return (
-                <ConditionalTooltip
-                    content={tooltipContent}
-                    enabled={shouldDisableCreateNew}
-                    closeDelay={50}
-                >
-                    <Button
-                        small
-                        secondary
-                        icon={<IconAdd16 />}
-                        disabled={shouldDisableCreateNew}
-                        dataTest="create-new-button"
-                        onClick={handleCreateNew}
-                    >
-                        {i18n.t('New {{ eventName }} event', {
-                            eventName, interpolation: { escapeValue: false },
-                        })}
-                    </Button>
-                </ConditionalTooltip>
-            );
-        };
+        const renderCreateNewButton = () => (
+            <StageCreateNewButton
+                eventCount={events.length}
+                onCreateNew={handleCreateNew}
+                preventAddingEventActionInEffect={hiddenProgramStage}
+                repeatable={repeatable}
+                stageWriteAccess={stage?.access?.data?.write}
+                eventName={eventName}
+            />
+        );
 
         return (
             <DataTableRow>
