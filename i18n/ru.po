@@ -2,16 +2,16 @@
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2023
 # Yury Rogachev <yury@dhis2.org>, 2024
 # Philip Larsen Donnelly, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,6 +45,9 @@ msgstr ""
 "время приложение Capture поддерживает одновременную работу только одной "
 "версии в том же самом домене. Обновите эту страницу, если вы хотите "
 "использовать эту версию, но имейте в виду, что другие версии будут закрыты."
+
+msgid "More"
+msgstr "Более"
 
 msgid "View {{programName}} dashboard"
 msgstr "Смотреть панель программы{{programName}} "
@@ -381,17 +384,11 @@ msgstr "Зарегистрированное лицо"
 msgid "validation failed"
 msgstr "ошибка проверки"
 
-msgid "Errors"
-msgstr "Ошибки"
+msgid "No feedback for this event yet"
+msgstr "Комментариев для данного события нет"
 
-msgid "Feedback"
-msgstr "Обратная связь"
-
-msgid "Indicators"
-msgstr "Индикаторы"
-
-msgid "Warnings"
-msgstr "Предупреждения"
+msgid "No indicator output for this event yet"
+msgstr "Индикаторов для данного события нет"
 
 msgid "Generate new event"
 msgstr "Создать новое событие"
@@ -583,6 +580,9 @@ msgstr "Столбцы, для отображения в таблице"
 
 msgid "Column"
 msgstr "Столбец"
+
+msgid "Visible"
+msgstr "Видимый"
 
 msgid "Update"
 msgstr "Обновить"
@@ -820,12 +820,6 @@ msgstr "Произошла ошибка при загрузке страницы
 msgid "Choose an organisation unit to start reporting"
 msgstr "Выберите организационную единицу, чтобы начать ввод данных"
 
-msgid "No feedback for this event yet"
-msgstr "Комментариев для данного события нет"
-
-msgid "No indicator output for this event yet"
-msgstr "Индикаторов для данного события нет"
-
 msgid "Program stage is invalid"
 msgstr "Этап программы недействителен"
 
@@ -855,6 +849,11 @@ msgstr "Этап"
 
 msgid "Registered events"
 msgstr "Зарегистрированные события"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr "Выберите {{category}}."
@@ -970,6 +969,18 @@ msgid ""
 msgstr ""
 "Если покинуть данную страницу, все настройки новой связи будут утеряны"
 
+msgid "Errors"
+msgstr "Ошибки"
+
+msgid "Feedback"
+msgstr "Обратная связь"
+
+msgid "Indicators"
+msgstr "Индикаторы"
+
+msgid "Warnings"
+msgstr "Предупреждения"
+
 msgid "Show all events"
 msgstr "Показать все события"
 
@@ -1012,6 +1023,12 @@ msgstr "Не удалось получить метаданные. Повтор�
 
 msgid "The enrollment event data could not be found"
 msgstr "Данные событий для регистрационной записи - не найдены"
+
+msgid "Loading"
+msgstr "Загрузка"
+
+msgid "An error occurred while loading the form"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты "
@@ -1598,6 +1615,15 @@ msgstr " Событий запланировано: {{ scheduledEvents }}"
 msgid "Stages and Events"
 msgstr "Этапы и события"
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Запланировано"
+
 msgid "Changelog"
 msgstr "Лог изменений"
 
@@ -1764,9 +1790,6 @@ msgstr "Произошла ошибка. Подробности в лог-фай
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Запланировано{{ escape }} на {{ time }}"
-
-msgid "Scheduled"
-msgstr "Запланировано"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "Просрочено {{ escape }} Срок {{ time }}"

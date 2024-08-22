@@ -487,18 +487,6 @@ msgstr "Contains text"
 msgid "Yes"
 msgstr "Yes"
 
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
-
-msgid "Years"
-msgstr "Years"
-
-msgid "Months"
-msgstr "Months"
-
-msgid "Days"
-msgstr "Days"
-
 msgid "Uploading file"
 msgstr "Uploading file"
 

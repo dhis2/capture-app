@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Urdu (https://app.transifex.com/hisp-uio/teams/100509/ur/)\n"
@@ -36,6 +36,9 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+
+msgid "More"
+msgstr "مزید"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -359,16 +362,10 @@ msgstr ""
 msgid "validation failed"
 msgstr ""
 
-msgid "Errors"
-msgstr "غلطیاں"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "رائے"
-
-msgid "Indicators"
-msgstr "اشارے"
-
-msgid "Warnings"
+msgid "No indicator output for this event yet"
 msgstr ""
 
 msgid "Generate new event"
@@ -558,6 +555,9 @@ msgstr ""
 
 msgid "Column"
 msgstr "کالم"
+
+msgid "Visible"
+msgstr ""
 
 msgid "Update"
 msgstr "اپڈیٹ"
@@ -766,12 +766,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -801,6 +795,11 @@ msgstr "اسٹیج"
 
 msgid "Registered events"
 msgstr "رجسٹرڈ واقعات"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -915,6 +914,18 @@ msgid ""
 "relationship"
 msgstr ""
 
+msgid "Errors"
+msgstr "غلطیاں"
+
+msgid "Feedback"
+msgstr "رائے"
+
+msgid "Indicators"
+msgstr "اشارے"
+
+msgid "Warnings"
+msgstr ""
+
 msgid "Show all events"
 msgstr ""
 
@@ -954,6 +965,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "لوڈ کر رہا ہے"
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1235,9 +1252,6 @@ msgstr ""
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "منسوخ"
 
@@ -1478,6 +1492,15 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "شیڈول کردہ"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1642,9 +1665,6 @@ msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "شیڈول کردہ"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
