@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-12T22:17:50.440Z\n"
-"PO-Revision-Date: 2024-08-12T22:17:50.440Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"PO-Revision-Date: 2024-08-10T10:42:21.141Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -487,18 +487,6 @@ msgstr "Contains text"
 msgid "Yes"
 msgstr "Yes"
 
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
-
-msgid "Years"
-msgstr "Years"
-
-msgid "Months"
-msgstr "Months"
-
-msgid "Days"
-msgstr "Days"
-
 msgid "Uploading file"
 msgstr "Uploading file"
 
@@ -564,6 +552,9 @@ msgstr "Columns to show in table"
 
 msgid "Column"
 msgstr "Column"
+
+msgid "Visible"
+msgstr "Visible"
 
 msgid "Update"
 msgstr "Update"
@@ -994,6 +985,9 @@ msgstr "The enrollment event data could not be found"
 
 msgid "Loading"
 msgstr "Loading"
+
+msgid "An error occurred while loading the form"
+msgstr "An error occurred while loading the form"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
@@ -1502,6 +1496,12 @@ msgstr "Report date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
+msgid "You do not have access to create events in this stage"
+msgstr "You do not have access to create events in this stage"
+
+msgid "This stage can only have one event"
+msgstr "This stage can only have one event"
+
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
 
@@ -1536,9 +1536,6 @@ msgstr "Reset list"
 msgid "Go to full {{ eventName }}"
 msgstr "Go to full {{ eventName }}"
 
-msgid "This stage can only have one event"
-msgstr "This stage can only have one event"
-
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
 
@@ -1555,6 +1552,15 @@ msgstr "{{ scheduledEvents }} scheduled"
 
 msgid "Stages and Events"
 msgstr "Stages and Events"
+
+msgid "An error occurred while loading the widget."
+msgstr "An error occurred while loading the widget."
+
+msgid "View linked event"
+msgstr "View linked event"
+
+msgid "Scheduled"
+msgstr "Scheduled"
 
 msgid "Changelog"
 msgstr "Changelog"
@@ -1721,9 +1727,6 @@ msgstr "An error has occured. See log for details"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Scheduled{{ escape }} due {{ time }}"
-
-msgid "Scheduled"
-msgstr "Scheduled"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "Overdue{{ escape }} due {{ time }}"

@@ -131,7 +131,6 @@ Then the new My custom list is created
 When you delete the name My custom list
 Then the My custom list is deleted
 
-@v>=39
 Scenario: The user can open and select a program stage filter
 Given you open the main page with Ngelehun and Malaria focus investigation context
 When you open the program stage filters from the more filters dropdown menu
@@ -141,7 +140,6 @@ And you open the column selector
 And you select a data element columns and save from the column selector
 Then you see data elements specific filters and columns
 
-@v>=39
 Scenario: While in a program stage working list, the user can filter by both TEA and data elements
 Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
 When you set the enrollment status filter to active
@@ -154,7 +152,6 @@ And you set the WHOMCH Smoking filter to No
 And you apply the current filter
 Then the list should display 1 row of data
 
-@v>=39
 Scenario: While in a program stage working list, the user can sort by both TEA and data elements
 Given you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context
 And you set the first name filter to u
@@ -166,7 +163,6 @@ When you click the WHOMCH Hemoglobin value column header
 Then the sort arrow should indicate descending order
 And the list should display data ordered descending by WHOMCH Hemoglobin
 
-@v>=39
 Scenario: The user can remove the program stage filter
 Given you open the main page with Ngelehun and WHO RMNCH Tracker context
 When you open the program stage filters from the more filters dropdown menu
@@ -176,7 +172,6 @@ Then you see program stage working list events
 When you remove the program stage filter
 Then you don't see program stage working list events
 
-@v>=39
 Scenario: The user can filter the events by scheduledAt date
 Given you open the main page with Ngelehun and WHO RMNCH Tracker context
 When you open the program stage filters from the more filters dropdown menu
@@ -189,20 +184,17 @@ And you select the events scheduled today
 And you apply the current filter
 Then you see the selected option in the scheduledAt filter
 
-@v>=39
 Scenario: The program stage working list configureation is kept when navigating
 Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list
 When you open an enrollment event from the working list
 And you go back using the browser button
 Then the program stage working list is loaded
 
-@v>=39
 Scenario: The program stage working list without a orgUnit selected redirects to a tracker event
 Given you open the main page with all accesible records in the WHO RMNCH Tracker context and configure a program stage working list
 When you open an enrollment event from the working list
 Then the tracker event URL contains the orgUnitId
 
-@v>=39
 Scenario: The user can open a program stage list without events
 Given you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list
 And you set the event visit date to Today

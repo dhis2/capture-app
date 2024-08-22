@@ -1,14 +1,14 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Ibatov <ibatovk@who.int>, 2024
+# Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Ibatov <ibatovk@who.int>, 2024\n"
+"Last-Translator: Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,6 +42,9 @@ msgstr ""
 "Назорат Иловаси фақат битта версияни бир вақтда (бир хил ддомендаги) "
 "ишлашини қўллаб қувватлайди. Ушбу версияни қайта ишлатмоқчи бўлсангиз, "
 "Илтимос, саҳифани янгиланг, аммо бошқа версиялар ёпилишини унутманг."
+
+msgid "More"
+msgstr "Кўпроқ"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -377,17 +380,11 @@ msgstr "Рўйхатдан ўтган шахс"
 msgid "validation failed"
 msgstr "Тасдиқлаш амалга ошмади"
 
-msgid "Errors"
-msgstr "Хатоликлар"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Қайта алоқа"
-
-msgid "Indicators"
-msgstr "Индикаторлар"
-
-msgid "Warnings"
-msgstr "Огоҳлантиришлар"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Янги ҳодиса/тадбир яратиш"
@@ -576,6 +573,9 @@ msgstr "Жадвалда кўрсатиладиган устунлар"
 
 msgid "Column"
 msgstr "Устун"
+
+msgid "Visible"
+msgstr "Кўринадиган"
 
 msgid "Update"
 msgstr "Янгилаш"
@@ -791,12 +791,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -826,6 +820,11 @@ msgstr "Босқич"
 
 msgid "Registered events"
 msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -944,6 +943,18 @@ msgstr ""
 "Ушбу саҳифани тарк этсангиз, янги алоқа-муносабатлар учун қилинган барча "
 "танловлар бекор қилинади "
 
+msgid "Errors"
+msgstr "Хатоликлар"
+
+msgid "Feedback"
+msgstr "Қайта алоқа"
+
+msgid "Indicators"
+msgstr "Индикаторлар"
+
+msgid "Warnings"
+msgstr "Огоҳлантиришлар"
+
 msgid "Show all events"
 msgstr "Барча ҳодиса/тадбирларни кўрсатиш"
 
@@ -982,6 +993,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "Юкланмоқда"
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1508,6 +1525,15 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Режа бўйича"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1672,9 +1698,6 @@ msgstr "Хатолик юз берди. Тафсилотларни журнал�
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "Режа бўйича"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""

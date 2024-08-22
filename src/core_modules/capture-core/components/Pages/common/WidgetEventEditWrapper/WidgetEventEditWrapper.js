@@ -12,7 +12,12 @@ type WidgetProps = {|
     ...Props,
 |}
 
-export const WidgetEventEditWrapper = ({ pageStatus, programId, stageId, ...passOnProps }: WidgetProps) => {
+export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetProps) => {
+    const {
+        programId,
+        stageId,
+    } = passOnProps;
+
     const {
         formFoundation,
         stage,
@@ -34,10 +39,18 @@ export const WidgetEventEditWrapper = ({ pageStatus, programId, stageId, ...pass
         );
     }
 
-    if (isLoading || !formFoundation || !stage || isError) {
+    if (isLoading) {
         return (
             <div>
                 {i18n.t('Loading')}
+            </div>
+        );
+    }
+
+    if (!formFoundation || !stage || isError) {
+        return (
+            <div>
+                {i18n.t('An error occurred while loading the form')}
             </div>
         );
     }
