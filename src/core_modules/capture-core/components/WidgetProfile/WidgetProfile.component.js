@@ -21,7 +21,7 @@ import {
     useUserRoles,
     useTeiDisplayName,
 } from './hooks';
-import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToList } from './DataEntry';
 import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
 import { OverflowMenu } from './OverflowMenu';
@@ -102,7 +102,7 @@ const WidgetProfilePlain = ({
         .filter(item => item.displayInList)
         .map((clientAttribute) => {
             const { attribute, key, valueType } = clientAttribute;
-            const value = convertClientToView(clientAttribute);
+            const value = convertClientToList(clientAttribute);
             return {
                 attribute, key, value, valueType, reactKey: attribute,
             };
