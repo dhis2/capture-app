@@ -7,7 +7,6 @@ import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
-import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 
 function convertDateForView(rawValue: string): string {
@@ -38,12 +37,6 @@ type ImageClientValue = {
     previewUrl: string,
 };
 
-type OrgUnitClientValue = {
-    orgUnitName: string,
-    ancestors: Array<{| displayName: string, level: number |}>,
-    tooltip?: string,
-};
-
 function convertFileForDisplay(clientValue: FileClientValue) {
     return (
         <a
@@ -59,16 +52,6 @@ function convertFileForDisplay(clientValue: FileClientValue) {
 
 function convertImageForDisplay(clientValue: ImageClientValue) {
     return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} alignLeft />;
-}
-
-function convertOrgUnitForDisplay(clientValue: OrgUnitClientValue) {
-    return (
-        <TooltipOrgUnit
-            orgUnitName={clientValue.orgUnitName}
-            ancestors={clientValue.ancestors}
-            tooltip={clientValue.tooltip}
-        />
-    );
 }
 
 const valueConvertersForType = {
@@ -87,7 +70,7 @@ const valueConvertersForType = {
     [dataElementTypes.AGE]: convertDateForView,
     [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,
-    [dataElementTypes.ORGANISATION_UNIT]: convertOrgUnitForDisplay,
+    [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
     [dataElementTypes.POLYGON]: () => 'Polygon',
 };
 
