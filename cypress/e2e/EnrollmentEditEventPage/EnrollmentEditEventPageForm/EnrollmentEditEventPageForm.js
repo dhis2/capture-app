@@ -204,3 +204,23 @@ And('you open the Birth stage event', () => {
         });
 });
 
+Then('the edit button should be disabled', () => {
+    cy.get('[data-test="widget-enrollment-event"]')
+        .find('[data-test="dhis2-uicore-button"]')
+        .eq(1)
+        .should('be.disabled');
+});
+
+When('the user hovers over the disabled edit button', () => {
+    cy.get('[data-test="widget-enrollment-event"]')
+        .find('[data-test="dhis2-uicore-button"]')
+        .eq(1)
+        .trigger('mouseover');
+});
+
+Then(/^the user should see the tooltip: (.*)$/, (tooltipContent) => {
+    cy.get('[data-test="dhis2-uicore-tooltip-content"]')
+        .contains(tooltipContent)
+        .should('exist');
+});
+
