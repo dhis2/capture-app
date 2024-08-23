@@ -23,20 +23,28 @@ const displayNamesQuery = {
 
 const updateCacheWithOrgUnits = (organisationUnits) => {
     for (const { id, displayName, ancestors } of organisationUnits) {
-        orgUnitCache[id] = {
-            displayName,
-            ancestor: ancestors[ancestors.length - 1]?.id,
-        };
+        if (ancestors.length > 0) {
+            orgUnitCache[id] = {
+                displayName,
+                ancestor: ancestors[ancestors.length - 1].id,
+            };
 
-        ancestors.forEach((ancestor, index) => {
-            if (!orgUnitCache[ancestor.id]) {
-                const parentAncestorId = ancestors[index - 1]?.id;
-                orgUnitCache[ancestor.id] = {
-                    displayName: ancestor.displayName,
-                    ancestor: parentAncestorId,
-                };
-            }
-        });
+            ancestors.findLast((ancestor, index) => {
+                if (orgUnitCache[ancestor.id]) {
+                    return true;
+                } else if (index > 0) {
+                    orgUnitCache[ancestor.id] = {
+                        displayName: ancestor.displayName,
+                        ancestor: ancestors[index - 1].id,
+                    };
+                    return false;
+                }
+                orgUnitCache[ancestor.id] = { displayName: ancestor.displayName };
+                return true;
+            });
+        } else {
+            orgUnitCache[id] = { displayName };
+        }
     }
 };
 
@@ -172,8 +180,7 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
 
             if (!orgUnit) return [];
 
-            const ancestors = orgUnit.ancestor !== undefined ? getAncestors(orgUnit.ancestor) : [];
-
+            const ancestors = getAncestors(orgUnit.ancestor);
             ancestors.push({
                 displayName: orgUnit.displayName,
                 id: orgUnitId,
