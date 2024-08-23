@@ -9,8 +9,9 @@ import {
 } from '@dhis2/ui';
 import { OverflowButton } from '../../../../../Buttons';
 import type { EventRowProps } from './EventRow.types';
-import { DeleteAction } from './DeleteAction';
+import { DeleteActionButton } from './DeleteActionButton';
 import { SkipAction } from './SkipAction';
+import { DeleteActionModal } from './DeleteActionModal';
 
 const styles = {
     row: {
@@ -36,6 +37,7 @@ const EventRowPlain = ({
     pendingApiResponse,
     eventDetails,
     cells,
+    stageWriteAccess,
     onDeleteEvent,
     onRollbackDeleteEvent,
     onUpdateEventStatus,
@@ -45,6 +47,7 @@ const EventRowPlain = ({
     classes,
 }: EventRowProps) => {
     const [actionsOpen, setActionsOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     return (
         <DataTableRow
@@ -54,36 +57,48 @@ const EventRowPlain = ({
             {cells}
 
             <DataTableCell>
-                <OverflowButton
-                    open={actionsOpen}
-                    onClick={() => setActionsOpen(prev => !prev)}
-                    secondary
-                    small
-                    icon={<IconMore16 />}
-                    component={(
-                        <FlyoutMenu dense>
-                            {(eventDetails.status === EventStatuses.SCHEDULE || eventDetails.status === EventStatuses.SKIPPED) && (
-                                <SkipAction
-                                    eventId={id}
-                                    eventDetails={eventDetails}
-                                    setActionsOpen={setActionsOpen}
-                                    pendingApiResponse={pendingApiResponse}
-                                    onUpdateEventStatus={onUpdateEventStatus}
-                                />
-                            )}
+                <>
+                    <OverflowButton
+                        open={actionsOpen}
+                        onClick={() => setActionsOpen(prev => !prev)}
+                        secondary
+                        small
+                        icon={<IconMore16 />}
+                        disabled={pendingApiResponse || !stageWriteAccess}
+                        component={(
+                            <FlyoutMenu dense>
+                                {(eventDetails.status === EventStatuses.SCHEDULE || eventDetails.status === EventStatuses.SKIPPED) && (
+                                    <SkipAction
+                                        eventId={id}
+                                        eventDetails={eventDetails}
+                                        setActionsOpen={setActionsOpen}
+                                        pendingApiResponse={pendingApiResponse}
+                                        onUpdateEventStatus={onUpdateEventStatus}
+                                    />
+                                )}
 
-                            <DeleteAction
-                                eventId={id}
-                                pendingApiResponse={pendingApiResponse}
-                                teiId={teiId}
-                                programId={programId}
-                                enrollmentId={enrollmentId}
-                                onDeleteEvent={onDeleteEvent}
-                                onRollbackDeleteEvent={onRollbackDeleteEvent}
-                            />
-                        </FlyoutMenu>
+                                <DeleteActionButton
+                                    setActionsOpen={setActionsOpen}
+                                    setDeleteModalOpen={setDeleteModalOpen}
+                                />
+                            </FlyoutMenu>
+                        )}
+                    />
+
+                    {deleteModalOpen && (
+                        <DeleteActionModal
+                            eventId={id}
+                            pendingApiResponse={pendingApiResponse}
+                            teiId={teiId}
+                            programId={programId}
+                            enrollmentId={enrollmentId}
+                            onDeleteEvent={onDeleteEvent}
+                            onRollbackDeleteEvent={onRollbackDeleteEvent}
+                            setActionsOpen={setActionsOpen}
+                            setDeleteModalOpen={setDeleteModalOpen}
+                        />
                     )}
-                />
+                </>
             </DataTableCell>
         </DataTableRow>
     );

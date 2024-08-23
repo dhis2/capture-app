@@ -191,6 +191,7 @@ const StageDetailPlain = (props: Props) => {
                         pendingApiResponse={row.pendingApiResponse}
                         eventDetails={eventDetails}
                         teiId={eventDetails.trackedEntity}
+                        stageWriteAccess={stage?.access?.data?.write}
                         programId={programId}
                         enrollmentId={eventDetails.enrollment}
                         cells={cells}

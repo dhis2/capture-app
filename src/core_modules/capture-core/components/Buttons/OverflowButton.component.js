@@ -15,6 +15,7 @@ type Props = {
     dataTest?: string,
     small?: boolean,
     large?: boolean,
+    disabled?: boolean,
 };
 
 export const OverflowButton = ({
@@ -23,6 +24,7 @@ export const OverflowButton = ({
     secondary,
     small,
     large,
+    disabled,
     onClick: handleClick,
     open: propsOpen,
     icon,
@@ -47,6 +49,7 @@ export const OverflowButton = ({
                 primary={primary}
                 secondary={secondary}
                 dataTest={dataTest}
+                disabled={disabled}
                 small={small}
                 large={large}
                 onClick={toggle}

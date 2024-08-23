@@ -60,10 +60,11 @@ export const updateOrAddEnrollmentEvents = ({ events }: EventReducerProps) =>
 export const deleteEnrollmentEvent = (eventId: string) =>
     actionCreator(enrollmentSiteActionTypes.DELETE_ENROLLMENT_EVENT)({ eventId });
 
-export const updateEnrollmentEventStatus = (eventId: string, status: string) =>
+export const updateEnrollmentEventStatus = (eventId: string, status: string, updatedAt: string) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT_STATUS)({
         eventId,
         status,
+        updatedAt,
     });
 
 export const rollbackEnrollmentEvents = ({ events }: EventReducerProps) =>

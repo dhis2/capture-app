@@ -1,11 +1,13 @@
 // @flow
 import React, { useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
     useCommonEnrollmentDomainData,
     useRuleEffects,
@@ -51,6 +53,7 @@ import {
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
@@ -147,8 +150,12 @@ export const EnrollmentPageDefault = () => {
     }, [dispatch]);
 
     const onUpdateEventStatus = useCallback((eventId: string, status: string) => {
-        dispatch(updateEnrollmentEventStatus(eventId, status));
-    }, [dispatch]);
+        const nowClient = fromClientDate(new Date());
+        const nowServer = new Date(nowClient.getServerZonedISOString());
+        const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+
+        dispatch(updateEnrollmentEventStatus(eventId, status, updatedAt));
+    }, [dispatch, fromClientDate]);
 
     const onAddNew = () => {
         history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);

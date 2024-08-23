@@ -9,6 +9,7 @@ export type EventRowProps = {|
     onDeleteEvent: (id: string) => void,
     onUpdateEventStatus: (id: string, status: string) => void,
     onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void,
+    stageWriteAccess: boolean,
     teiId: string,
     programId: string,
     enrollmentId: string,

@@ -104,10 +104,10 @@ export const enrollmentDomainDesc = createReducerDescription(
             const events = state.enrollment.events?.filter(event => event.event !== eventId);
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
-        [UPDATE_ENROLLMENT_EVENT_STATUS]: (state, { payload: { eventId, status } }) => {
+        [UPDATE_ENROLLMENT_EVENT_STATUS]: (state, { payload: { eventId, status, updatedAt } }) => {
             const events = state.enrollment.events?.map(event =>
                 (event.event === eventId
-                    ? { ...event, status }
+                    ? { ...event, status, updatedAt }
                     : event),
             );
 
