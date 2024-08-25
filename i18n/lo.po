@@ -32,6 +32,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"ເຫດຜົນທີ່ເປັນໄປໄດ້ແມ່ນຍ້ອນບຣາວເຊີ ຫຼື ຮູບແບບ (ເຊັ່ນ: ຮູບແບບຄວາມເປັນສ່ວນຕົວ) "
+"ບໍ່ໄດ້ຖືກຮອງຮັບ. ເບິ່ງລາຍລະອຽດເພີ່ມເຕີມ."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -39,6 +41,10 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"ທ່ານໄດ້ເປີດໃຊ້ເວີຊັນອື່ນຂອງແອັບ Capture ໃນໂດເມນດຽວກັນ. ໃນປັດຈຸບັນ, ແອັບ "
+"Capture ພຽງແຕ່ຮອງຮັບການໃຊ້ງານໃນເວີຊັນດຽວກັນ (ໃນໂດເມນດຽວກັນ). "
+"ກະ​ລຸ​ນາ​ໂຫຼດ​ຫນ້າ​ນີ້​ຄືນ​ໃຫມ່​ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ຕ້ອງ​ການ​ທີ່​ຈະ​ນໍາ​ໃຊ້​ເວີຊັນນີ້​ອີກ​ເທື່ອ​ຫນຶ່ງ​,"
+" ແຕ່​ລະວັງໄວ້ວ່າມັນຈະ​ປິດ​ເວີຊັນ​ອື່ນ​."
 
 msgid "Columns to show in table"
 msgstr "ຖັນທີ່ຈະສະແດງຢູ່ໃນຕາຕະລາງ"
@@ -50,10 +56,10 @@ msgid "This value is validating"
 msgstr "ຄ່ານີ້ກຳລັງກວດສອບຢູ່"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "ການອັບເດດຊ່ອງການເຊື່ອມຂໍ້ມູນແມ່ນລົ້ມເຫລວ"
 
 msgid "A value is required"
-msgstr ""
+msgstr "ຕ້ອງຕື່ມຄ່າ"
 
 msgid "Please provide a valid number"
 msgstr "ກະລຸນາລະບຸເບີໂທທີ່ຖືກຕ້ອງ"
@@ -74,7 +80,7 @@ msgid "Please provide a valid date"
 msgstr "ກະລຸນາລະບຸວັນທີໃຫ້ຖືກຕ້ອງ"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "ບໍ່ອະນຸຍາດໃຫ້ຕື່ມວັນທີໃນອະນາຄົດ"
 
 msgid "Please provide a valid date and time"
 msgstr "ກະລຸນາລະບຸວັນທີ ແລະ ເວລາໃຫ້ຖືກຕ້ອງ"
@@ -122,7 +128,7 @@ msgid "Enrollment"
 msgstr "ການລົງທະບຽນ"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "ບໍ່ອະນຸຍາດໃຫ້ມີວັນທີໃນອະນາຄົດ"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -464,7 +470,7 @@ msgid "Download as CSV"
 msgstr "ດາວໂຫຼດເປັນ CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "ດາວໂຫຼດດ້ວຍຕົວກອງປັດຈຸບັນ"
 
 msgid "Download data..."
 msgstr "ໂຫຼດຂໍ້ມູນ..."
@@ -473,37 +479,37 @@ msgid "Rows per page"
 msgstr "ແຖວຕໍ່ຫນ້າເຈ້ຍ"
 
 msgid "Update view"
-msgstr ""
+msgstr "ອັບເດດມຸມມອງ"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "ບັນທຶກມຸມມອງປັດຈຸບັນ..."
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "ບັນທຶກມຸມມອງປັດຈຸບັນເປັນ..."
 
 msgid "Delete view"
-msgstr ""
+msgstr "ລົບມຸມມອງ"
 
 msgid "Share view..."
-msgstr ""
+msgstr "ແບ່ງປັນມຸມມອງ..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "ທ່ານຕ້ອງການລົບມຸມມອງ '{{templateName}}' ແທ້ບໍ່?"
 
 msgid "Confirm"
 msgstr "Confirm"
 
 msgid "Save As view"
-msgstr ""
+msgstr "ບັນທຶກເປັນເບິ່ງ"
 
 msgid "View name"
-msgstr ""
+msgstr "ເບິ່ງຊື່"
 
 msgid "Show Less"
-msgstr ""
+msgstr "ສະແດງໜ້ອຍ"
 
 msgid "Show All"
-msgstr ""
+msgstr "ສະແດງທັງໝົດ"
 
 msgid "Working list could not be loaded"
 msgstr "ບໍ່ສາມາດໂຫຼດລາຍການໄດ້"
@@ -567,7 +573,7 @@ msgstr "in"
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
-msgstr ""
+msgstr "ນີ້ບໍ່ແມ່ນໂປແກຣມເຫດການ ຫຼື ຂໍ້ມູນເມຕາເສຍຫາຍ. ເບິ່ງລາຍລະອຽດເພີ່ມເຕີມ."
 
 msgid "This event"
 msgstr "ເຫດການນີ້"
@@ -797,7 +803,7 @@ msgid "Organisation unit search failed. See log for details"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "ຕິດຕາມຕົວຢ່າງລາຍບຸກຄົນ"
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
@@ -833,7 +839,7 @@ msgid "error"
 msgstr "ຂໍ້ຜິດພາດ"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "ລົບຮູບຫຼາຍຫຼ່ຽມ"
 
 msgid "Set area"
 msgstr "ກຳນົດພື້ນທີ່"
