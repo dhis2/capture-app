@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -44,6 +44,9 @@ msgstr ""
 "حالياً تشغيل نسخة واحدة فقط بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
 "الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
 "النسخ الأخرى."
+
+msgid "More"
+msgstr "مزيد"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -199,7 +202,7 @@ msgid "Search for user"
 msgstr "البحث عن مستخدم"
 
 msgid "Notes"
-msgstr ""
+msgstr "الملاحظات"
 
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
@@ -375,17 +378,11 @@ msgstr "الشخص المسجل"
 msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
 
-msgid "Errors"
-msgstr "اخطاء"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "التغذية الراجعة"
-
-msgid "Indicators"
-msgstr "المؤشرات"
-
-msgid "Warnings"
-msgstr "تحذيرات"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "توليد حدث جديد"
@@ -497,18 +494,6 @@ msgstr "يحتوي على نص"
 msgid "Yes"
 msgstr "نعم"
 
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
-
-msgid "Years"
-msgstr "السنوات"
-
-msgid "Months"
-msgstr "الأشهر"
-
-msgid "Days"
-msgstr "‏‏الأيام"
-
 msgid "Uploading file"
 msgstr "تحميل ملف"
 
@@ -574,6 +559,9 @@ msgstr "الأعمدة التي سيتم عرضها في الجدول"
 
 msgid "Column"
 msgstr "العمود"
+
+msgid "Visible"
+msgstr "مرئي"
 
 msgid "Update"
 msgstr "تحديث"
@@ -782,12 +770,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -817,6 +799,11 @@ msgstr "المرحلة"
 
 msgid "Registered events"
 msgstr "الأحداث المسجلة"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -931,6 +918,18 @@ msgid ""
 "relationship"
 msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
+msgid "Errors"
+msgstr "اخطاء"
+
+msgid "Feedback"
+msgstr "التغذية الراجعة"
+
+msgid "Indicators"
+msgstr "المؤشرات"
+
+msgid "Warnings"
+msgstr "تحذيرات"
+
 msgid "Show all events"
 msgstr "عرض جميع الأحداث"
 
@@ -974,6 +973,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "جار التحميل"
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1257,9 +1262,6 @@ msgstr ""
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "الملغية"
 
@@ -1473,6 +1475,12 @@ msgstr "تاريخ التقرير"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
@@ -1486,9 +1494,6 @@ msgid "Reset list"
 msgstr ""
 
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
@@ -1511,6 +1516,15 @@ msgstr ""
 
 msgid "Stages and Events"
 msgstr ""
+
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "تمت جدولته"
 
 msgid "Changelog"
 msgstr ""
@@ -1676,9 +1690,6 @@ msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "تمت جدولته"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""

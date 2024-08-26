@@ -42,6 +42,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
         () =>
             stagesWithEventCount.every(
                 programStage =>
+                    (!programStage.dataAccess.write) ||
                     (!programStage.repeatable && programStage.eventCount > 0) ||
                     hiddenProgramStageRuleEffects?.find(ruleEffect => ruleEffect.id === programStage.id),
             ),
@@ -61,27 +62,28 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
-            {ready && <div
-                className={classes.contentContainer}
-                data-test={'quick-action-button-container'}
-            >
-                <QuickActionButton
-                    icon={<IconAdd24 color={colors.grey700} />}
-                    label={i18n.t('New Event')}
-                    onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
-                    dataTest={'quick-action-button-report'}
-                    disable={noStageAvailable}
-                />
+            {ready && (
+                <div
+                    className={classes.contentContainer}
+                    data-test={'quick-action-button-container'}
+                >
+                    <QuickActionButton
+                        icon={<IconAdd24 color={colors.grey700} />}
+                        label={i18n.t('New Event')}
+                        onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
+                        dataTest={'quick-action-button-report'}
+                        disable={noStageAvailable}
+                    />
 
-                <QuickActionButton
-                    icon={<IconCalendar24 color={colors.grey700} />}
-                    label={i18n.t('Schedule an event')}
-                    onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
-                    dataTest={'quick-action-button-schedule'}
-                    disable={noStageAvailable}
-                />
+                    <QuickActionButton
+                        icon={<IconCalendar24 color={colors.grey700} />}
+                        label={i18n.t('Schedule an event')}
+                        onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
+                        dataTest={'quick-action-button-schedule'}
+                        disable={noStageAvailable}
+                    />
 
-                {/* DHIS2-13016: Should hide Make referral until the feature is developped
+                    {/* DHIS2-13016: Should hide Make referral until the feature is developped
                     <QuickActionButton
                     icon={<IconArrowRightMulti24 />}
                     label={i18n.t('Make referral')}
@@ -89,7 +91,8 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
                     dataTest={'quick-action-button-refer'}
                     disable={noStageAvailable}
                 /> */}
-            </div>}
+                </div>
+            )}
         </Widget>
     );
 };

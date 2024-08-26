@@ -1,3 +1,57 @@
+## [101.2.1](https://github.com/dhis2/capture-app/compare/v101.2.0...v101.2.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7971aa4](https://github.com/dhis2/capture-app/commit/7971aa4d5975aa6976912c0fdeb45957955477dc))
+
+# [101.2.0](https://github.com/dhis2/capture-app/compare/v101.1.3...v101.2.0) (2024-08-22)
+
+
+### Features
+
+* [DHIS2-17575] disable create new buttons if no data write access ([#3751](https://github.com/dhis2/capture-app/issues/3751)) ([5b3cd1c](https://github.com/dhis2/capture-app/commit/5b3cd1c6150d9b6cc47be274d50bffad05b6da73))
+
+## [101.1.3](https://github.com/dhis2/capture-app/compare/v101.1.2...v101.1.3) (2024-08-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4164273](https://github.com/dhis2/capture-app/commit/4164273a380c24f57369f4f7c56dea4f0f6211a1))
+
+## [101.1.2](https://github.com/dhis2/capture-app/compare/v101.1.1...v101.1.2) (2024-08-15)
+
+
+### Bug Fixes
+
+* [DHIS2-17101] Consider prevent adding events to stage program rule ([#3706](https://github.com/dhis2/capture-app/issues/3706)) ([47ed42c](https://github.com/dhis2/capture-app/commit/47ed42c4c0d1a23ce93ce4ccbd02461ae22d2a18))
+
+## [101.1.1](https://github.com/dhis2/capture-app/compare/v101.1.0...v101.1.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* [DHIS2-17883] revert validate values assigned from the rules engine ([#3758](https://github.com/dhis2/capture-app/issues/3758)) ([ea0e675](https://github.com/dhis2/capture-app/commit/ea0e67572d3edf5bee4adc19a3a845260cfa2abd))
+
+# [101.1.0](https://github.com/dhis2/capture-app/compare/v101.0.0...v101.1.0) (2024-08-14)
+
+
+### Features
+
+* [DHIS2-17655] Two event workspace ([#3726](https://github.com/dhis2/capture-app/issues/3726)) ([bad5312](https://github.com/dhis2/capture-app/commit/bad53124de25367fd633c0cfdd50efacb6eb022a))
+
+# [101.0.0](https://github.com/dhis2/capture-app/compare/v100.77.0...v101.0.0) (2024-08-14)
+
+
+### chore
+
+* **release:** stop support for 2.38 ([#3755](https://github.com/dhis2/capture-app/issues/3755)) ([2bbc649](https://github.com/dhis2/capture-app/commit/2bbc649b2cb638ac7c311bde16b79e1c39b2a65f))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 101.0.0 to facilitate potential fixes for 2.38
+
 # [100.77.0](https://github.com/dhis2/capture-app/compare/v100.76.1...v100.77.0) (2024-08-13)
 
 

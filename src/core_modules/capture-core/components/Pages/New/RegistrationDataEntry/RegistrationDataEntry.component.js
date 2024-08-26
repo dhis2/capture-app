@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers } from '@dhis2/ui';
-import { Grid, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import type { Props } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
@@ -41,6 +41,20 @@ const getStyles = ({ typography }) => ({
     },
     marginBottom: {
         marginBottom: spacers.dp16,
+    },
+    flexContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        flexWrap: 'wrap',
+    },
+    flexItem: {
+        flex: 1,
+        minWidth: '500px',
+    },
+    dataEntryReadyItem: {
+        minWidth: '300px',
     },
 });
 
@@ -167,8 +181,7 @@ const RegistrationDataEntryPlain = ({
                 </div>
             }
 
-            {
-                scopeType === scopeTypes.TRACKER_PROGRAM &&
+            {scopeType === scopeTypes.TRACKER_PROGRAM && (
                 <div className={classes.container}>
                     <div className={classes.title} >
                         {
@@ -183,45 +196,40 @@ const RegistrationDataEntryPlain = ({
                         }
                     </div>
 
-                    <div className={classes.registrationContainer}>
-                        <Grid container justify="space-between">
-                            <Grid item md sm={9} xs={9} >
-                                <EnrollmentRegistrationEntryWrapper
-                                    id={dataEntryId}
-                                    orgUnitId={currentOrgUnitId}
-                                    teiId={teiId}
-                                    selectedScopeId={selectedScopeId}
-                                    onSave={onSaveWithEnrollment}
-                                    onCancel={onCancel}
-                                    saveButtonText={(trackedEntityTypeNameLC: string) => i18n.t('Save {{trackedEntityTypeName}}', {
+                    <div className={classes.flexContainer}>
+                        <div className={classes.flexItem}>
+                            <EnrollmentRegistrationEntryWrapper
+                                id={dataEntryId}
+                                orgUnitId={currentOrgUnitId}
+                                teiId={teiId}
+                                selectedScopeId={selectedScopeId}
+                                onSave={onSaveWithEnrollment}
+                                onCancel={onCancel}
+                                saveButtonText={(trackedEntityTypeNameLC: string) =>
+                                    i18n.t('Save {{trackedEntityTypeName}}', {
                                         trackedEntityTypeName: trackedEntityTypeNameLC,
                                         interpolation: { escapeValue: false },
-                                    })}
-                                    duplicatesReviewPageSize={resultsPageSize}
-                                    renderDuplicatesDialogActions={renderDuplicatesDialogActions}
-                                    renderDuplicatesCardActions={renderDuplicatesCardActions}
-                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
-                                    trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
+                                    })
+                                }
+                                duplicatesReviewPageSize={resultsPageSize}
+                                renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+                                renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                                trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
+                            />
+                        </div>
+                        {dataEntryIsReady && (
+                            <div className={classes.dataEntryReadyItem}>
+                                <DataEntryWidgetOutput
+                                    selectedScopeId={selectedScopeId}
+                                    dataEntryId={dataEntryId}
                                 />
-                            </Grid>
-                            {
-                                dataEntryIsReady &&
-                                <Grid item>
-                                    <div className={classes.marginTop}>
-                                        <DataEntryWidgetOutput
-                                            selectedScopeId={selectedScopeId}
-                                            dataEntryId={dataEntryId}
-                                        />
-                                    </div>
-                                </Grid>
-                            }
-                        </Grid>
+                            </div>
+                        )}
                     </div>
                 </div>
-            }
-
-            {
-                scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
+            )}
+            {scopeType === scopeTypes.TRACKED_ENTITY_TYPE && (
                 <div className={classes.container}>
                     <div className={classes.title} >
                         {i18n.t('New {{titleText}}', {
@@ -238,40 +246,35 @@ const RegistrationDataEntryPlain = ({
                             accessNeeded="write"
                         />
                     </div>
-                    <div className={classes.registrationContainer}>
-                        <Grid container justify="space-between">
-                            <Grid item md sm={9} xs={9} >
-                                <TeiRegistrationEntry
-                                    id={dataEntryId}
+                    <div className={classes.flexContainer}>
+                        <div className={classes.flexItem}>
+                            <TeiRegistrationEntry
+                                id={dataEntryId}
+                                selectedScopeId={selectedScopeId}
+                                orgUnitId={currentOrgUnitId}
+                                onCancel={onCancel}
+                                saveButtonText={i18n.t('Save {{trackedEntityName}}', {
+                                    trackedEntityName,
+                                    interpolation: { escapeValue: false },
+                                })}
+                                onSave={onSaveWithoutEnrollment}
+                                duplicatesReviewPageSize={resultsPageSize}
+                                renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+                                renderDuplicatesCardActions={renderDuplicatesCardActions}
+                                ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                            />
+                        </div>
+                        {dataEntryIsReady && (
+                            <div className={classes.dataEntryReadyItem}>
+                                <DataEntryWidgetOutput
                                     selectedScopeId={selectedScopeId}
-                                    orgUnitId={currentOrgUnitId}
-                                    onCancel={onCancel}
-                                    saveButtonText={i18n.t('Save {{trackedEntityName}}', {
-                                        trackedEntityName,
-                                        interpolation: { escapeValue: false },
-                                    })}
-                                    onSave={onSaveWithoutEnrollment}
-                                    duplicatesReviewPageSize={resultsPageSize}
-                                    renderDuplicatesDialogActions={renderDuplicatesDialogActions}
-                                    renderDuplicatesCardActions={renderDuplicatesCardActions}
-                                    ExistingUniqueValueDialogActions={ExistingUniqueValueDialogActions}
+                                    dataEntryId={dataEntryId}
                                 />
-                            </Grid>
-                            {
-                                dataEntryIsReady &&
-                                <Grid item>
-                                    <div className={classes.marginBottom}>
-                                        <DataEntryWidgetOutput
-                                            selectedScopeId={selectedScopeId}
-                                            dataEntryId={dataEntryId}
-                                        />
-                                    </div>
-                                </Grid>
-                            }
-                        </Grid>
+                            </div>
+                        )}
                     </div>
                 </div>
-            }
+            )}
 
             {
                 scopeType === scopeTypes.EVENT_PROGRAM && (

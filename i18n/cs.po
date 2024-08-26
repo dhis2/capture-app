@@ -1,14 +1,14 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# Jiří Podhorecký, 2024
+# Jiří Podhorecký <jirka.p@volny.cz>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Jiří Podhorecký, 2024\n"
+"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,6 +42,9 @@ msgstr ""
 " aplikace Capture podporuje pouze běh jedné verze současně (ve stejné "
 "doméně). Chcete-li tuto verzi znovu použít, obnovte prosím tuto stránku, "
 "mějte však na paměti, že se tím zavřou další verze."
+
+msgid "More"
+msgstr "Více"
 
 msgid "View {{programName}} dashboard"
 msgstr "Zobrazit {{programName}} ovládací panel"
@@ -375,17 +378,11 @@ msgstr "Registrovaná osoba"
 msgid "validation failed"
 msgstr "ověření selhalo"
 
-msgid "Errors"
-msgstr "Chyby"
+msgid "No feedback for this event yet"
+msgstr "Žádné ohlasy na tuto událost"
 
-msgid "Feedback"
-msgstr "Zpětná vazba"
-
-msgid "Indicators"
-msgstr "Indikátory"
-
-msgid "Warnings"
-msgstr "Varování"
+msgid "No indicator output for this event yet"
+msgstr "Pro tuto událost zatím není k dispozici žádný výstupní indikátor"
 
 msgid "Generate new event"
 msgstr "Generovat novou událost"
@@ -499,18 +496,6 @@ msgstr "Obsahuje text"
 msgid "Yes"
 msgstr "Ano"
 
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
-
-msgid "Years"
-msgstr "Let"
-
-msgid "Months"
-msgstr "Měsíce"
-
-msgid "Days"
-msgstr "Dnů"
-
 msgid "Uploading file"
 msgstr "Nahrávání souboru"
 
@@ -576,6 +561,9 @@ msgstr "Sloupce k zobrazení v tabulce"
 
 msgid "Column"
 msgstr "Sloupec"
+
+msgid "Visible"
+msgstr "Viditelné"
 
 msgid "Update"
 msgstr "Aktualizovat"
@@ -802,12 +790,6 @@ msgstr "Při načítání stránky došlo k chybě"
 msgid "Choose an organisation unit to start reporting"
 msgstr "Zvolte organizační jednotku pro zahájení vykazování"
 
-msgid "No feedback for this event yet"
-msgstr "Žádné ohlasy na tuto událost"
-
-msgid "No indicator output for this event yet"
-msgstr "Pro tuto událost zatím není k dispozici žádný výstupní indikátor"
-
 msgid "Program stage is invalid"
 msgstr "Fáze programu je neplatná"
 
@@ -837,6 +819,11 @@ msgstr "Fáze"
 
 msgid "Registered events"
 msgstr "Registrované události"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr "Vyberte prosím {{category}}."
@@ -955,6 +942,18 @@ msgstr ""
 "Opuštěním této stránky zrušíte všechny výběry, které jste provedli pro nový "
 "vztah"
 
+msgid "Errors"
+msgstr "Chyby"
+
+msgid "Feedback"
+msgstr "Zpětná vazba"
+
+msgid "Indicators"
+msgstr "Indikátory"
+
+msgid "Warnings"
+msgstr "Varování"
+
 msgid "Show all events"
 msgstr "Zobrazit všechny události"
 
@@ -997,6 +996,12 @@ msgstr "Nepodařilo se načíst metadata. Prosím zkuste to znovu později."
 
 msgid "The enrollment event data could not be found"
 msgstr "Data zápisu události nebyla nalezena"
+
+msgid "Loading"
+msgstr "načítání"
+
+msgid "An error occurred while loading the form"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
@@ -1518,6 +1523,12 @@ msgstr "Datum zprávy"
 msgid "Please select a valid event"
 msgstr "Vyberte prosím platnou událost"
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr "Tato fáze může mít pouze jednu událost"
+
 msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
 
@@ -1532,9 +1543,6 @@ msgstr "Resetovat seznam"
 
 msgid "Go to full {{ eventName }}"
 msgstr "Přejít na celou {{ eventName }}"
-
-msgid "This stage can only have one event"
-msgstr "Tato fáze může mít pouze jednu událost"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Události se nepodařilo načíst. Prosím zkuste to znovu později."
@@ -1554,6 +1562,15 @@ msgstr "{{ scheduledEvents }} naplánováno"
 
 msgid "Stages and Events"
 msgstr "Fáze a události"
+
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Naplánováno"
 
 msgid "Changelog"
 msgstr "Seznam změn"
@@ -1719,9 +1736,6 @@ msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Naplánováno na {{ escape }} kvůli {{ time }}"
-
-msgid "Scheduled"
-msgstr "Naplánováno"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "Po termínu {{ escape }} kvůli {{ time }}"

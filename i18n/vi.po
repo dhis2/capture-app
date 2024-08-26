@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -44,6 +44,9 @@ msgstr ""
 " Ứng dụng Ghi chỉ hỗ trợ chạy đồng thời một phiên bản (trong cùng một miền)."
 " Vui lòng làm mới trang này nếu bạn muốn sử dụng lại phiên bản này, nhưng "
 "lưu ý rằng điều này sẽ đóng các phiên bản khác."
+
+msgid "More"
+msgstr "Thêm"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -374,17 +377,11 @@ msgstr "Người đã đăng ký"
 msgid "validation failed"
 msgstr "xác thực không thành công"
 
-msgid "Errors"
-msgstr "Lỗi"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Phản hồi"
-
-msgid "Indicators"
-msgstr "Các chỉ số"
-
-msgid "Warnings"
-msgstr "Cảnh báo"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Tạo sự kiện mới"
@@ -573,6 +570,9 @@ msgstr "Cột hiển thị trong bảng"
 
 msgid "Column"
 msgstr "Cột"
+
+msgid "Visible"
+msgstr "Hiển thị"
 
 msgid "Update"
 msgstr "Cập nhật"
@@ -781,12 +781,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -816,6 +810,11 @@ msgstr "Giai Đoạn Chương Trình"
 
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -932,6 +931,18 @@ msgstr ""
 "Rời khỏi trang này sẽ hủy mọi lựa chọn bạn đã thực hiện cho một mối quan hệ "
 "mới"
 
+msgid "Errors"
+msgstr "Lỗi"
+
+msgid "Feedback"
+msgstr "Phản hồi"
+
+msgid "Indicators"
+msgstr "Các chỉ số"
+
+msgid "Warnings"
+msgstr "Cảnh báo"
+
 msgid "Show all events"
 msgstr "Hiện tất cả sự kiện"
 
@@ -970,6 +981,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "Đang tải"
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1257,9 +1274,6 @@ msgstr ""
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "Đã hủy"
 
@@ -1497,6 +1511,15 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Đã xếp lịch"
+
 msgid "Changelog"
 msgstr ""
 
@@ -1661,9 +1684,6 @@ msgstr "Có lỗi. Xem log để biết thêm chi tiết."
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "Đã xếp lịch"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
