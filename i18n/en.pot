@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
-"PO-Revision-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-08-26T17:35:42.543Z\n"
+"PO-Revision-Date: 2024-08-26T17:35:42.543Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1685,6 +1685,21 @@ msgstr "No active enrollments to complete"
 msgid "An error occurred while completing the enrollments"
 msgstr "An error occurred while completing the enrollments"
 
+msgid "You do not have the required authority to delete enrollments"
+msgstr "You do not have the required authority to delete enrollments"
+
+msgid "Delete enrollments"
+msgstr "Delete enrollments"
+
+msgid "Are you sure you want to delete all enrollments in the selected program?"
+msgstr "Are you sure you want to delete all enrollments in the selected program?"
+
+msgid "Total enrollments to be deleted"
+msgstr "Total enrollments to be deleted"
+
+msgid "An error occurred when deleting enrollments"
+msgstr "An error occurred when deleting enrollments"
+
 msgid "You do not have the required authority to delete tracked entities"
 msgstr "You do not have the required authority to delete tracked entities"
 
@@ -1703,8 +1718,8 @@ msgstr ""
 "Deleting records will also delete any associated enrollments and events. "
 "This cannot be undone. Are you sure you want to delete?"
 
-msgid "An error occurred while deleting the tracked entities"
-msgstr "An error occurred while deleting the tracked entities"
+msgid "An error occurred while deleting the records"
+msgstr "An error occurred while deleting the records"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
@@ -1720,11 +1735,11 @@ msgid_plural "{{count}} record selected"
 msgstr[0] "{{count}} record selected"
 msgstr[1] "{{count}} records selected"
 
-msgid "Count"
-msgstr "Count"
-
 msgid "Total records to be completed"
 msgstr "Total records to be completed"
+
+msgid "Count"
+msgstr "Count"
 
 msgid "Update view"
 msgstr "Update view"

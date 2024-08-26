@@ -14,7 +14,7 @@ type Props = {
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
 
-export const DeleteAction = ({
+export const DeleteTeiAction = ({
     selectedRows,
     selectedRowsCount,
     onUpdateList,

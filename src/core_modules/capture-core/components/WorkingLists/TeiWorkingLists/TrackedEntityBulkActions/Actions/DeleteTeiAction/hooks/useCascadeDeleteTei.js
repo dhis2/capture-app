@@ -35,7 +35,7 @@ export const useCascadeDeleteTei = ({
         {
             onError: (error) => {
                 log.error(errorCreator('An error occurred while deleting the tracked entities')({ error }));
-                showAlert({ message: i18n.t('An error occurred while deleting the tracked entities') });
+                showAlert({ message: i18n.t('An error occurred while deleting the records') });
             },
             onSuccess: () => {
                 onUpdateList();

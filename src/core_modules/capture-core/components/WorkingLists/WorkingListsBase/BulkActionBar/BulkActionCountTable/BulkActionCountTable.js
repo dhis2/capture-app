@@ -16,6 +16,7 @@ import { withStyles } from '@material-ui/core/';
 type Props = {
     total: ?number,
     isLoading: boolean,
+    totalLabel?: string,
     children: React$Node,
     classes: {
         container: string,
@@ -33,7 +34,13 @@ const styles = {
     },
 };
 
-export const EnrollmentTablePlain = ({ total, isLoading, children, classes }: Props) => (
+export const EnrollmentTablePlain = ({
+    total,
+    isLoading,
+    totalLabel = i18n.t('Total records to be completed'),
+    children,
+    classes,
+}: Props) => (
     <div className={classes.container}>
         <DataTable>
             <DataTableHead>
@@ -52,7 +59,7 @@ export const EnrollmentTablePlain = ({ total, isLoading, children, classes }: Pr
                     <DataTableCell
                         style={{ background: colors.grey050, borderTop: `2px solid ${colors.grey300}` }}
                     >
-                        {i18n.t('Total records to be completed')}
+                        {totalLabel}
                     </DataTableCell>
                     <DataTableCell
                         style={{ background: colors.grey050, borderTop: `2px solid ${colors.grey300}` }}
