@@ -66,6 +66,20 @@ const createBatches = (orgUnitIds: Array<string>): Array<Array<string>> => {
     return batches;
 };
 
+const getAncestors = (orgUnitId) => {
+    const orgUnit = orgUnitCache[orgUnitId];
+
+    if (!orgUnit) return [];
+
+    const ancestors = getAncestors(orgUnit.ancestor);
+    ancestors.push({
+        displayName: orgUnit.displayName,
+        id: orgUnitId,
+    });
+
+    return ancestors;
+};
+
 // Works best with memoized input arrays.
 export const useOrgUnitNames = (orgUnitIds: Array<string>): {
     loading: boolean,
@@ -175,22 +189,7 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     const { orgUnit: fetchedOrgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName]');
 
     if (orgUnitId && cachedOrgUnit) {
-        const getAncestors = (parentOrgUnitId) => {
-            const orgUnit = orgUnitCache[parentOrgUnitId];
-
-            if (!orgUnit) return [];
-
-            const ancestors = getAncestors(orgUnit.ancestor);
-            ancestors.push({
-                displayName: orgUnit.displayName,
-                id: orgUnitId,
-            });
-
-            return ancestors;
-        };
-
-        const ancestors = getAncestors(orgUnitId);
-        ancestors.pop();
+        const ancestors = getAncestors(cachedOrgUnit.ancestor);
 
         return {
             displayName: cachedOrgUnit.displayName,
