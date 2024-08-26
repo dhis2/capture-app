@@ -80,7 +80,7 @@ export const WidgetEnrollmentPlain = ({
 
     const orgUnitClientValue = {
         name: orgUnitName,
-        ancestors: ancestors || [],
+        ancestors,
         tooltip: i18n.t('Started at {{orgUnitName}}', {
             orgUnitName,
             interpolation: { escapeValue: false },
@@ -89,7 +89,7 @@ export const WidgetEnrollmentPlain = ({
 
     const ownerOrgUnitClientValue = {
         name: ownerOrgUnitName,
-        ancestors: ownerAncestors || [],
+        ancestors: ownerAncestors,
         tooltip: i18n.t('Owned by {{ownerOrgUnit}}', {
             ownerOrgUnit: ownerOrgUnitName,
             interpolation: { escapeValue: false },

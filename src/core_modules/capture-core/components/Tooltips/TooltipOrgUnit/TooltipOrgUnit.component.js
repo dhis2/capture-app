@@ -9,25 +9,22 @@ type Props = {
 };
 
 export const TooltipOrgUnit = ({ orgUnitName, ancestors = [], tooltip }: Props) => {
-    ancestors.push(orgUnitName);
-    const orgUnitNameFullPath = ancestors.join(' / ');
-    const tooltipParts = tooltip ? tooltip.split(orgUnitName) : [orgUnitName];
+    const orgUnitNameFullPath = [...ancestors, orgUnitName].join(' / ');
+
+    const renderTooltipContent = () => (tooltip ? tooltip.split(orgUnitName) : [orgUnitName]);
+    const [before, after] = renderTooltipContent();
 
     return (
         <Tooltip content={orgUnitNameFullPath} openDelay={400} maxWidth={900}>
             <span>
                 {tooltip ? (
                     <>
-                        {tooltipParts[0]}
-                        <span style={{ textDecoration: 'underline dotted' }}>
-                            {orgUnitName}
-                        </span>
-                        {tooltipParts[1]}
+                        {before}
+                        <span style={{ textDecoration: 'underline dotted' }}>{orgUnitName}</span>
+                        {after}
                     </>
                 ) : (
-                    <span style={{ textDecoration: 'underline dotted' }}>
-                        {orgUnitName}
-                    </span>
+                    <span style={{ textDecoration: 'underline dotted' }}>{orgUnitName}</span>
                 )}
             </span>
         </Tooltip>
