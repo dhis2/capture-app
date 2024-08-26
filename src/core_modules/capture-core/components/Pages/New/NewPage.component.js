@@ -6,7 +6,7 @@ import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
-import { Button , NoticeBox} from '@dhis2/ui';
+import { Button, NoticeBox } from '@dhis2/ui';
 import { TopBar } from './TopBar.container';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withLoadingIndicator } from '../../../HOC';
