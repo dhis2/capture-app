@@ -21,7 +21,7 @@ import {
     useUserRoles,
     useTeiDisplayName,
 } from './hooks';
-import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToList } from './DataEntry';
+import { DataEntry, dataEntryActionTypes, TEI_MODAL_STATE, convertClientToView } from './DataEntry';
 import { ReactQueryAppNamespace } from '../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES } from '../WidgetsChangelog';
 import { OverflowMenu } from './OverflowMenu';
@@ -90,11 +90,7 @@ const WidgetProfilePlain = ({
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(
-        teiId,
-        program,
-        trackedEntityInstanceAttributes,
-    );
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program, trackedEntityInstanceAttributes);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
@@ -102,7 +98,7 @@ const WidgetProfilePlain = ({
         .filter(item => item.displayInList)
         .map((clientAttribute) => {
             const { attribute, key, valueType } = clientAttribute;
-            const value = convertClientToList(clientAttribute);
+            const value = convertClientToView(clientAttribute);
             return {
                 attribute, key, value, valueType, reactKey: attribute,
             };
@@ -140,10 +136,7 @@ const WidgetProfilePlain = ({
 
         return (
             <div className={classes.container}>
-                <FlatList
-                    dataTest="profile-widget-flatlist"
-                    list={displayInListAttributes}
-                />
+                <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
             </div>
         );
     };

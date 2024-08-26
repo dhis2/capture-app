@@ -14,6 +14,5 @@ export {
 } from './convertors';
 export { GEOMETRY, getFeatureType, getDataElement, getLabel } from './geometry';
 export { convertClientToView } from './convertClientToView';
-export { convertClientToList } from './convertClientToList';
 export { escapeString } from './escapeString';
 export { handleAPIResponse, REQUESTED_ENTITIES } from './handleAPIResponse';
