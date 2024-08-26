@@ -35,8 +35,8 @@ type ImageClientValue = {
 };
 
 type OrgUnitClientValue = {
-    orgUnitName: string,
-    ancestors: Array<{| displayName: string, level: number |}>,
+    name: string,
+    ancestors?: Array<string>,
     tooltip?: string,
 };
 
@@ -59,7 +59,7 @@ function convertImageForDisplay(clientValue: ImageClientValue) {
 function convertOrgUnitForDisplay(clientValue: OrgUnitClientValue) {
     return (
         <TooltipOrgUnit
-            orgUnitName={clientValue.orgUnitName}
+            orgUnitName={clientValue.name}
             ancestors={clientValue.ancestors}
             tooltip={clientValue.tooltip}
         />

@@ -4,14 +4,13 @@ import { Tooltip } from '@dhis2/ui';
 
 type Props = {
     orgUnitName: string,
-    ancestors?: Array<{| displayName: string, id: number |}>,
+    ancestors?: Array<string>,
     tooltip?: string,
 };
 
 export const TooltipOrgUnit = ({ orgUnitName, ancestors = [], tooltip }: Props) => {
-    const ancestorNames = ancestors.map(ancestor => ancestor.displayName);
-    ancestorNames.push(orgUnitName);
-    const orgUnitNameFullPath = ancestorNames.join(' / ');
+    ancestors.push(orgUnitName);
+    const orgUnitNameFullPath = ancestors.join(' / ');
     const tooltipParts = tooltip ? tooltip.split(orgUnitName) : [orgUnitName];
 
     return (
