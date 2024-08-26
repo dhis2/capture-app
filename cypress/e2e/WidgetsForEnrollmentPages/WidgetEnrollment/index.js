@@ -232,8 +232,14 @@ Then(/^the user successfully transfers the enrollment/, () => {
 
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains('Owned by Sierra Leone')
+            .contains('Owned by Njandama MCHP')
             .should('exist');
+    });
+});
+
+Then(/^the user types in (.*)/, (orgunit) => {
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="capture-ui-input"]').type(orgunit);
     });
 });
 

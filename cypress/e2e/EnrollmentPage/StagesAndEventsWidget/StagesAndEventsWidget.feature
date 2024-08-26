@@ -1,5 +1,10 @@
 Feature: User interacts with Stages and Events Widget
 
+    @user:trackerAutoTestRestricted
+    Scenario: Create new event button is disabled if no data write access
+        Given you open the enrollment page by typing #enrollment?enrollmentId=WKPoiZxZxNG&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=PgmUFEQYZdt
+        Then you should see the disabled button New Previous deliveries event
+
     Scenario: User can view program stages
         Given you open the enrollment page
         Then the program stages should be displayed
@@ -60,8 +65,8 @@ Feature: User interacts with Stages and Events Widget
         Given you open the enrollment page by typing #enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8
         Then you should see the disabled button New Birth event
 
-    # Waiting for pipline to update DB/DB update for 39 and 41
-    @user:trackerAutoTestRestricted @v=38 @v=40 @v=42
+    @user:trackerAutoTestRestricted
     Scenario: Program stage is hidden if no data read access
         And you open the enrollment page by typing #enrollment?enrollmentId=iNEq9d22Nyp&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=k4ODejBytgv
         Then the Care at birth program stage should be hidden
+

@@ -181,6 +181,7 @@ export class EnrollmentFactory {
         cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
         cachedSectionCustomLabel: string,
         cachedSectionCustomId: string,
+        description: string,
     ) {
         if (!cachedProgramTrackedEntityAttributes?.length) {
             return null;
@@ -189,6 +190,7 @@ export class EnrollmentFactory {
         const section = new Section((o) => {
             o.id = cachedSectionCustomId;
             o.name = cachedSectionCustomLabel;
+            o.displayDescription = description;
             o.group = Section.groups.ENROLLMENT;
         });
 
@@ -302,6 +304,7 @@ export class EnrollmentFactory {
                             attributes,
                             formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
                             formConfigSection.id,
+                            sectionMetadata?.displayDescription ?? '',
                         );
                         section && enrollmentForm.addSection(section);
                     });
@@ -312,6 +315,7 @@ export class EnrollmentFactory {
                             programSection.trackedEntityAttributes.map(id => trackedEntityAttributeDictionary[id]),
                             programSection.displayFormName,
                             programSection.id,
+                            programSection.displayDescription,
                         );
                         section && enrollmentForm.addSection(section);
                     });

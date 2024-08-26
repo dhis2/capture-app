@@ -2,8 +2,6 @@
 import React, { type ComponentType, type Node } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { IconInfo16, colors } from '@dhis2/ui';
-import Grid from '@material-ui/core/Grid';
-
 
 type OwnProps = {| children: string | Node |}
 
@@ -15,6 +13,8 @@ const styles = () => ({
     container: {
         marginTop: 12,
         marginBottom: 12,
+        display: 'flex',
+        alignItems: 'center',
     },
     text: {
         fontSize: 14,
@@ -24,18 +24,15 @@ const styles = () => ({
     },
 });
 
-
 const InfoIconTextPlain = ({ classes, children }) => (
-    <Grid container direction="row" alignItems="center" className={classes.container}>
-        <Grid item>
-            <span className={classes.icon}>
-                <IconInfo16 color={colors.grey800} />
-            </span>
-        </Grid>
-        <Grid item className={classes.text}>
+    <div className={classes.container}>
+        <span className={classes.icon}>
+            <IconInfo16 color={colors.grey800} />
+        </span>
+        <span className={classes.text}>
             {children}
-        </Grid>
-    </Grid>
+        </span>
+    </div>
 );
 
 export const InfoIconText: ComponentType<OwnProps> = withStyles(styles)(InfoIconTextPlain);
