@@ -251,15 +251,14 @@ export class InputBuilder {
         // but since Capture supports program indicators, these should be added as part
         // of `Enrollment`.
 
-        // JUST FOR DEBUGGING!!!
-        const appendZ = (date: ?string) =>
-            ((date && date[date.length - 1] != 'Z') ? date + 'Z' : date);
+        const toLocalDate = (dateString: ?string) =>
+            LocalDate.parse(this.processValue(dateString, typeKeys.DATE));
 
         return new RuleEnrollmentJs(
             enrollment,
             '',                  // programName placeholder value
-            LocalDate.ofInstant(Instant.parse(appendZ(incidentDate))),
-            LocalDate.ofInstant(Instant.parse(appendZ(enrollmentDate))),
+            toLocalDate(incidentDate),
+            toLocalDate(enrollmentDate),
             RuleEnrollmentStatus.ACTIVE,            // enrollmentStatus placeholder value
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
