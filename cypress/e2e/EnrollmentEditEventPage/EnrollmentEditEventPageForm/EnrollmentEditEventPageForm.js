@@ -210,17 +210,3 @@ Then('the edit button should be disabled', () => {
         .eq(1)
         .should('be.disabled');
 });
-
-When('the user hovers over the disabled edit button', () => {
-    cy.get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="dhis2-uicore-button"]')
-        .eq(1)
-        .parent()
-        .trigger('mouseover');
-});
-
-Then(/^the user should see the tooltip: (.*)$/, (tooltipContent) => {
-    cy.get('[data-test="dhis2-uicore-tooltip-content"]')
-        .should('be.visible')
-        .and('contain', tooltipContent);
-});
