@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-21T19:20:51.149Z\n"
-"PO-Revision-Date: 2024-08-21T19:20:51.149Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"PO-Revision-Date: 2024-08-10T10:42:21.141Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1499,6 +1499,12 @@ msgstr "Report date"
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
+msgid "You do not have access to create events in this stage"
+msgstr "You do not have access to create events in this stage"
+
+msgid "This stage can only have one event"
+msgstr "This stage can only have one event"
+
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
 
@@ -1513,9 +1519,6 @@ msgstr "Reset list"
 
 msgid "Go to full {{ eventName }}"
 msgstr "Go to full {{ eventName }}"
-
-msgid "This stage can only have one event"
-msgstr "This stage can only have one event"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Events could not be retrieved. Please try again later."
