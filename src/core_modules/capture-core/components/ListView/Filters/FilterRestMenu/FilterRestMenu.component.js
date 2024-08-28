@@ -1,12 +1,9 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Card, IconChevronDown16, IconChevronUp16, Button, Layer } from '@dhis2/ui';
+import { Card, IconChevronDown16, IconChevronUp16, Button, Layer, FlyoutMenu, MenuItem } from '@dhis2/ui';
 
 import { Manager, Popper, Reference } from 'react-popper';
-import Grow from '@material-ui/core/Grow';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
 import i18n from '@dhis2/d2-i18n';
 
 import type { Column } from '../../types';
@@ -115,10 +112,9 @@ class FilterRestMenuPlain extends React.Component<Props, State> {
                 <MenuItem
                     key={column.id}
                     onClick={() => { this.handleItemSelected(column.id); }}
-                    classes={this.menuItemClasses}
-                >
-                    {column.header}
-                </MenuItem>
+                    label={column.header}
+                />
+
             ));
     }
 
@@ -177,18 +173,11 @@ class FilterRestMenuPlain extends React.Component<Props, State> {
                                     style={{ ...style, zIndex: 1 }}
                                     data-placement={placement}
                                 >
-                                    <Grow
-                                        in={!!this.state.filterSelectorOpen}
-                                        id="menu-list-grow"
-                                        style={{ transformOrigin: '0 0 0' }}
-                                        timeout={{ exit: 0, enter: 200 }}
-                                    >
-                                        <Card className={classes.menuPaper}>
-                                            <MenuList role="menu">
-                                                {this.renderMenuItems()}
-                                            </MenuList>
-                                        </Card>
-                                    </Grow>
+                                    <Card className={classes.menuPaper}>
+                                        <FlyoutMenu role="menu">
+                                            {this.renderMenuItems()}
+                                        </FlyoutMenu>
+                                    </Card>
                                 </div>
                             )
                         }
