@@ -14,7 +14,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/';
 
 type Props = {
-    total: ?number,
+    total?: ?number,
     isLoading: boolean,
     totalLabel?: string,
     children: React$Node,

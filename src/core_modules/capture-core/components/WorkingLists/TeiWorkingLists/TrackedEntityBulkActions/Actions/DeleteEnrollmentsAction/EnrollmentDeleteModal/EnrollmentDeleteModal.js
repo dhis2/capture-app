@@ -13,6 +13,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { BulkActionCountTable } from '../../../../../WorkingListsBase/BulkActionBar';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
+import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
 
 type Props = {
     selectedRows: { [id: string]: boolean },
@@ -41,7 +42,6 @@ export const EnrollmentDeleteModal = ({
 
     return (
         <Modal
-            small
             onClose={() => setIsDeleteDialogOpen(false)}
         >
             <ModalTitle>
@@ -52,9 +52,9 @@ export const EnrollmentDeleteModal = ({
                 {i18n.t('Are you sure you want to delete all enrollments in the selected program?')}
 
                 <BulkActionCountTable
-                    total={enrollmentCounts?.total}
                     isLoading={isLoadingEnrollments}
-                    totalLabel={i18n.t('Total enrollments to be deleted')}
+                    total={enrollmentCounts?.total}
+                    totalLabel={i18n.t('Total')}
                 >
                     <DataTableRow>
                         <DataTableCell>
@@ -84,13 +84,34 @@ export const EnrollmentDeleteModal = ({
                     >
                         {i18n.t('Cancel')}
                     </Button>
-                    <Button
-                        destructive
-                        loading={isDeletingEnrollments}
-                        onClick={deleteEnrollments}
+
+                    <ConditionalTooltip
+                        enabled={!enrollmentCounts?.active}
+                        content={i18n.t('No active enrollments to delete')}
                     >
-                        {i18n.t('Delete')}
-                    </Button>
+                        <Button
+                            destructive
+                            loading={isDeletingEnrollments}
+                            onClick={() => deleteEnrollments({ activeOnly: true })}
+                            disabled={!enrollmentCounts?.active}
+                        >
+                            {i18n.t('Delete active enrollments')}
+                        </Button>
+                    </ConditionalTooltip>
+
+                    <ConditionalTooltip
+                        enabled={!enrollmentCounts?.total}
+                        content={i18n.t('No enrollments to delete')}
+                    >
+                        <Button
+                            destructive
+                            loading={isDeletingEnrollments}
+                            onClick={() => deleteEnrollments({ activeOnly: false })}
+                            disabled={!enrollmentCounts?.total}
+                        >
+                            {i18n.t('Delete all enrollments')}
+                        </Button>
+                    </ConditionalTooltip>
                 </ButtonStrip>
             </ModalActions>
         </Modal>

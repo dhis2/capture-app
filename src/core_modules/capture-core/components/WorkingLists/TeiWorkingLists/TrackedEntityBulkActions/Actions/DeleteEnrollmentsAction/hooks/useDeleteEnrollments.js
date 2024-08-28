@@ -52,12 +52,14 @@ export const useDeleteEnrollments = ({
     );
 
     const { mutate: deleteEnrollments, isLoading: isDeletingEnrollments } = useMutation<any>(
-        () => dataEngine.mutate({
+        ({ activeOnly }: any) => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
-                // $FlowFixMe - business logic dictates that enrollments is not undefined at this point
-                enrollments: enrollments.map(({ enrollment }) => ({ enrollment })),
+                enrollments: enrollments
+                    // $FlowFixMe - business logic dictates that enrollments is not undefined at this point
+                    .filter(({ status }) => !activeOnly || status === 'ACTIVE')
+                    .map(({ enrollment }) => ({ enrollment })),
             },
         }),
         {

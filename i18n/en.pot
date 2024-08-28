@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-26T17:35:42.543Z\n"
-"PO-Revision-Date: 2024-08-26T17:35:42.543Z\n"
+"POT-Creation-Date: 2024-08-28T06:51:14.983Z\n"
+"PO-Revision-Date: 2024-08-28T06:51:14.983Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1685,23 +1685,29 @@ msgstr "No active enrollments to complete"
 msgid "An error occurred while completing the enrollments"
 msgstr "An error occurred while completing the enrollments"
 
-msgid "You do not have the required authority to delete enrollments"
-msgstr "You do not have the required authority to delete enrollments"
-
 msgid "Delete enrollments"
 msgstr "Delete enrollments"
 
 msgid "Are you sure you want to delete all enrollments in the selected program?"
 msgstr "Are you sure you want to delete all enrollments in the selected program?"
 
-msgid "Total enrollments to be deleted"
-msgstr "Total enrollments to be deleted"
+msgid "Total"
+msgstr "Total"
+
+msgid "No active enrollments to delete"
+msgstr "No active enrollments to delete"
+
+msgid "Delete active enrollments"
+msgstr "Delete active enrollments"
+
+msgid "No enrollments to delete"
+msgstr "No enrollments to delete"
+
+msgid "Delete all enrollments"
+msgstr "Delete all enrollments"
 
 msgid "An error occurred when deleting enrollments"
 msgstr "An error occurred when deleting enrollments"
-
-msgid "You do not have the required authority to delete tracked entities"
-msgstr "You do not have the required authority to delete tracked entities"
 
 msgid "Delete {{ trackedEntityName }} with all enrollments"
 msgstr "Delete {{ trackedEntityName }} with all enrollments"

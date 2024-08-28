@@ -5,7 +5,6 @@ import {
     Button,
 } from '@dhis2/ui';
 import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
-import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
 
 type Props = {
@@ -24,20 +23,18 @@ export const DeleteEnrollmentsAction = ({
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
 
+    if (!hasAuthority) {
+        return null;
+    }
+
     return (
         <>
-            <ConditionalTooltip
-                enabled={!hasAuthority}
-                content={i18n.t('You do not have the required authority to delete enrollments')}
+            <Button
+                small
+                onClick={() => setIsDeleteDialogOpen(true)}
             >
-                <Button
-                    small
-                    onClick={() => setIsDeleteDialogOpen(true)}
-                    disabled={!hasAuthority}
-                >
-                    {i18n.t('Delete enrollments')}
-                </Button>
-            </ConditionalTooltip>
+                {i18n.t('Delete enrollments')}
+            </Button>
 
             {isDeleteDialogOpen && (
                 <EnrollmentDeleteModal
