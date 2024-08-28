@@ -90,7 +90,7 @@ export const NewPage: ComponentType<{||}> = () => {
         ({ currentSelections }) => !currentSelections.orgUnitId && !currentSelections.complete,
     );
 
-    const newPageStatus: $Keys<newPageStatuses> =
+    const newPageStatus: $Keys<typeof newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
 
     const handleMainPageNavigation = () => {

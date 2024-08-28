@@ -165,7 +165,6 @@ const MainPageContainer = () => {
                 error={error}
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
-                selectedCategories={selectedCategories}
             />
         </OrgUnitFetcher>
     );

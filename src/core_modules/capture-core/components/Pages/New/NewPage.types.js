@@ -29,7 +29,6 @@ export type ContainerProps = $ReadOnly<{|
   writeAccess: boolean,
   error: boolean,
   ready: boolean,
-  isUserInteractionInProgress: boolean,
   programId?: string,
   teiId?: string,
   trackedEntityName?: string,

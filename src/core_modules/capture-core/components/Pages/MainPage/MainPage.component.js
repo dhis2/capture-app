@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import type { ComponentType } from 'react';
-import type { Props } from './mainPage.types';
+import type { Props, ContainerProps } from './mainPage.types';
 import { WorkingListsType } from './WorkingListsType';
 import { MainPageStatuses } from './MainPage.constants';
 import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
@@ -47,11 +47,10 @@ const MainPagePlain = ({
     trackedEntityTypeId,
     displayFrontPageList,
     selectedTemplateId,
-    selectedCategories,
     MainPageStatus,
     setShowAccessible,
     classes,
-    ...passOnProps
+    onChangeTemplate,
 }: Props) => {
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
@@ -75,7 +74,12 @@ const MainPagePlain = ({
                     )}
                     {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (
                         <div className={classes.listContainer} data-test={'main-page-working-list'}>
-                            <WorkingListsType programId={programId} {...passOnProps} />
+                            <WorkingListsType
+                                programId={programId}
+                                orgUnitId={orgUnitId}
+                                selectedTemplateId={selectedTemplateId}
+                                onChangeTemplate={onChangeTemplate}
+                            />
                         </div>
                     )}
                 </>
