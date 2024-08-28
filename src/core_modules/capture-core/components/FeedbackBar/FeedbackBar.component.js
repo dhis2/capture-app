@@ -1,9 +1,8 @@
 // @flow
 import * as React from 'react';
-import SnackBar from '@material-ui/core/Snackbar';
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
-import { IconCross24, Button, Modal, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
+import { IconCross24, Button, Modal, ModalTitle, ModalContent, ModalActions, AlertStack, AlertBar } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import isDefined from 'd2-utilizr/lib/isDefined';
 
@@ -17,7 +16,7 @@ const styles = () => ({
 });
 
 type Feedback = {
-    message: string | { title: string, content: string},
+    message: string | { title: string, content: string },
     action?: ?React.Node,
     displayType?: ?string,
 };
@@ -83,19 +82,21 @@ class Index extends React.Component<Props> {
     render() {
         const { feedback } = this.props;
         const { message, displayType } = feedback;
+        console.log('message', message);
         const isSnackBarOpen = isDefined(message) && !displayType;
         const isDialogOpen = isDefined(message) && displayType === 'dialog';
         return (
             <React.Fragment>
-                <SnackBar
-                    open={isSnackBarOpen}
-                    anchorOrigin={Index.ANCHOR_ORIGIN}
-                    autoHideDuration={5000}
-                    onClose={this.handleClose}
-                    // $FlowFixMe[incompatible-type] automated comment
-                    message={<span>{message}</span>}
-                    action={this.getAction()}
-                />
+                <AlertStack>
+                    {isSnackBarOpen && (
+                        <AlertBar
+                            duration={5000}
+                            onHidden={this.handleClose}
+                        >
+                            {message}
+                        </AlertBar>
+                    )}
+                </AlertStack>
                 {isDialogOpen && (
                     <Modal
                         hide={!isDialogOpen}
