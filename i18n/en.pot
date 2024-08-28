@@ -1341,6 +1341,9 @@ msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgid "Event completed"
 msgstr "Event completed"
 
+msgid "The event cannot be edited after it has been completed"
+msgstr "The event cannot be edited after it has been completed"
+
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"
 
