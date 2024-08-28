@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-22T21:46:48.644Z\n"
-"PO-Revision-Date: 2024-08-22T21:46:48.644Z\n"
+"POT-Creation-Date: 2024-08-28T07:21:55.353Z\n"
+"PO-Revision-Date: 2024-08-28T07:21:55.354Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -761,9 +761,6 @@ msgstr "View working list in this program."
 
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
-
-msgid "Program is not valid"
-msgstr "Program is not valid"
 
 msgid "Org unit is not valid with current program"
 msgstr "Org unit is not valid with current program"
