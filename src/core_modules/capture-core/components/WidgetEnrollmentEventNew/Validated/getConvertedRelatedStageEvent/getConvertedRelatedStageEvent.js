@@ -3,8 +3,12 @@ import log from 'loglevel';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
 import type { ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
-import { errorCreator } from '../../../../../capture-core-utils';
+import { errorCreator, pipe } from '../../../../../capture-core-utils';
 import { type LinkedRequestEvent } from '../validated.types';
+import { convertClientToServer, convertFormToClient } from '../../../../converters';
+import { dataElementTypes } from '../../../../metaData';
+
+const convertFn = pipe(convertFormToClient, convertClientToServer);
 
 const getEventDetailsByLinkMode = ({
     relatedStageDataValues,
@@ -47,8 +51,8 @@ const getEventDetailsByLinkMode = ({
         return ({
             linkedEvent: {
                 ...baseEventDetails,
-                scheduledAt: linkedEventScheduledAt,
-                orgUnit: linkedEventOrgUnit.id,
+                scheduledAt: convertFn(linkedEventScheduledAt, dataElementTypes.DATE),
+                orgUnit: convertFn(linkedEventOrgUnit, dataElementTypes.ORGANISATION_UNIT),
             },
             linkedEventId: baseEventDetails.event,
         });
@@ -56,8 +60,8 @@ const getEventDetailsByLinkMode = ({
         return ({
             linkedEvent: {
                 ...baseEventDetails,
-                scheduledAt: clientRequestEvent.occurredAt,
-                orgUnit: clientRequestEvent.orgUnit,
+                scheduledAt: convertFn(clientRequestEvent.scheduledAt, dataElementTypes.DATE),
+                orgUnit: convertFn(clientRequestEvent.orgUnit, dataElementTypes.ORGANISATION_UNIT),
             },
             linkedEventId: baseEventDetails.event,
         });

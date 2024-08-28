@@ -1,3 +1,17 @@
+## [101.2.2](https://github.com/dhis2/capture-app/compare/v101.2.1...v101.2.2) (2024-08-28)
+
+
+### Bug Fixes
+
+* [DHIS2-17953] Invalid dateFormat conversion in related stages ([#3774](https://github.com/dhis2/capture-app/issues/3774)) ([334297c](https://github.com/dhis2/capture-app/commit/334297c91fca8ef427729a6454f5a8f8dd550453))
+
+## [101.2.1](https://github.com/dhis2/capture-app/compare/v101.2.0...v101.2.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7971aa4](https://github.com/dhis2/capture-app/commit/7971aa4d5975aa6976912c0fdeb45957955477dc))
+
 # [101.2.0](https://github.com/dhis2/capture-app/compare/v101.1.3...v101.2.0) (2024-08-22)
 
 

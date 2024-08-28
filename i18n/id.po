@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -500,18 +500,6 @@ msgstr "Berisi teks"
 
 msgid "Yes"
 msgstr "Iya"
-
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
-
-msgid "Years"
-msgstr "Tahun"
-
-msgid "Months"
-msgstr "Bulan"
-
-msgid "Days"
-msgstr "Hari"
 
 msgid "Uploading file"
 msgstr "Mengunggah file"
@@ -1493,6 +1481,12 @@ msgstr "Tanggal pelaporan"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
@@ -1506,9 +1500,6 @@ msgid "Reset list"
 msgstr "Mengatur ulang daftar"
 
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
