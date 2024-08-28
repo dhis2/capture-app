@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { BulkActionBar } from '../../WorkingListsBase/BulkActionBar';
-import { CompleteAction } from './Actions';
+import { CompleteAction, DeleteTeiAction } from './Actions';
 import type { Props } from './TrackedEntityBulkActions.types';
 import { DeleteEnrollmentsAction } from './Actions/DeleteEnrollmentsAction';
 
@@ -34,11 +34,11 @@ export const TrackedEntityBulkActionsComponent = ({
                 onUpdateList={onUpdateList}
             />
 
-            {/* <DeleteTeiAction */}
-            {/*     selectedRows={selectedRows} */}
-            {/*     selectedRowsCount={selectedRowsCount} */}
-            {/*     onUpdateList={onUpdateList} */}
-            {/* /> */}
+            <DeleteTeiAction
+                selectedRows={selectedRows}
+                selectedRowsCount={selectedRowsCount}
+                onUpdateList={onUpdateList}
+            />
         </BulkActionBar>
     );
 };
