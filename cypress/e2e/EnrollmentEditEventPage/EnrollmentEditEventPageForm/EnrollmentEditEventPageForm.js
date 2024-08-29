@@ -204,3 +204,9 @@ And('you open the Birth stage event', () => {
         });
 });
 
+Then('the edit button should be disabled', () => {
+    cy.get('[data-test="widget-enrollment-event"]')
+        .find('[data-test="dhis2-uicore-button"]')
+        .eq(1)
+        .should('be.disabled');
+});

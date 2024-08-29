@@ -3,21 +3,23 @@ import React, { type ComponentType, useState, useCallback } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 // $FlowFixMe
-import { colors,
+import {
+    colors,
+    spacers,
     spacersNum,
+    theme,
+    DataTableToolbar,
     DataTableBody,
     DataTableHead,
-    DataTableFoot,
     DataTable,
     DataTableRow,
     DataTableCell,
     DataTableColumnHeader,
     Button,
-    IconAdd16,
     Tooltip,
 } from '@dhis2/ui';
-import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { sortDataFromEvent } from './hooks/sortFuntions';
+import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
@@ -36,15 +38,11 @@ const styles = {
     },
     container: {
         display: 'flex',
-        marginRight: spacersNum.dp16,
-        marginLeft: spacersNum.dp16,
-        marginBottom: spacersNum.dp16,
-        backgroundColor: colors.grey200,
-        alignItems: 'center',
-        overflowX: 'auto',
+        flexDirection: 'column',
     },
-    button: {
-        marginRight: spacersNum.dp8,
+    scrollBox: {
+        overflowX: 'auto',
+        overflow: 'hidden',
     },
     hidenButton: { display: 'none !important' },
     icon: {
@@ -54,6 +52,40 @@ const styles = {
     },
     label: {
         paddingLeft: spacersNum.dp32,
+    },
+    table: {
+        border: 'none !important',
+    },
+    tableToolbar: {
+        borderLeft: 'none !important',
+        borderBottom: 'none !important',
+        borderRight: 'none !important',
+        borderTop: `1px solid ${colors.grey300} !important`,
+        width: '100%',
+        padding: '0 !important',
+    },
+    toolbarContent: {
+        width: '100%',
+    },
+    showMoreButton: {
+        width: '100%',
+        border: 'none',
+        background: colors.grey100,
+        color: colors.grey800,
+        fontSize: '13px',
+        height: '24px',
+        borderBottom: `1px solid ${colors.grey300}`,
+        '&:hover': {
+            background: colors.grey200,
+            color: colors.grey900,
+            cursor: 'pointer',
+        },
+        '&:focus': {
+            outline: `3px solid ${theme.focus}`,
+        },
+    },
+    newButton: {
+        margin: `${spacers.dp8} ${spacers.dp12}`,
     },
 };
 
@@ -189,26 +221,16 @@ const StageDetailPlain = (props: Props) => {
     function renderFooter() {
         const renderShowMoreButton = () => (dataSource && !loading
             && events.length > DEFAULT_NUMBER_OF_ROW
-            && displayedRowNumber < events.length ? <Button
-                small
-                secondary
-                dataTest="show-more-button"
-                className={classes.button}
+            && displayedRowNumber < events.length ? <button
+                data-test="show-more-button"
+                className={classes.showMoreButton}
                 onClick={handleShowMore}
             >
                 {i18n.t('Show {{ rest }} more', {
                     rest: Math.min(events.length - displayedRowNumber, DEFAULT_NUMBER_OF_ROW),
                 })}
-            </Button>
+            </button>
             : null);
-
-        const renderResetButton = () => (displayedRowNumber > DEFAULT_NUMBER_OF_ROW ? <Button
-            small
-            secondary
-            dataTest="reset-button"
-            className={classes.button}
-            onClick={() => { setDisplayedRowNumber(DEFAULT_NUMBER_OF_ROW); }}
-        >{i18n.t('Reset list')}</Button> : null);
 
         const renderViewAllButton = () => (events.length > 1 ? <Button
             small
@@ -218,47 +240,26 @@ const StageDetailPlain = (props: Props) => {
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
-        const renderCreateNewButton = () => {
-            const shouldDisableCreateNew = (!repeatable && events.length > 0) || hiddenProgramStage;
-
-            const tooltipContent = hiddenProgramStage
-                ? i18n.t("You can't add any more {{ programStageName }} events", {
-                    programStageName: eventName,
-                    interpolation: { escapeValue: false },
-                })
-                : i18n.t('This stage can only have one event');
-
-            return (
-                <ConditionalTooltip
-                    content={tooltipContent}
-                    enabled={shouldDisableCreateNew}
-                    closeDelay={50}
-                >
-                    <Button
-                        small
-                        secondary
-                        icon={<IconAdd16 />}
-                        disabled={shouldDisableCreateNew}
-                        dataTest="create-new-button"
-                        onClick={handleCreateNew}
-                    >
-                        {i18n.t('New {{ eventName }} event', {
-                            eventName, interpolation: { escapeValue: false },
-                        })}
-                    </Button>
-                </ConditionalTooltip>
-            );
-        };
+        const renderCreateNewButton = () => (
+            <div className={classes.newButton}>
+                <StageCreateNewButton
+                    eventCount={events.length}
+                    onCreateNew={handleCreateNew}
+                    preventAddingEventActionInEffect={hiddenProgramStage}
+                    repeatable={repeatable}
+                    stageWriteAccess={stage?.access?.data?.write}
+                    eventName={eventName}
+                />
+            </div>
+        );
 
         return (
-            <DataTableRow>
-                <DataTableCell staticStyle colSpan={`${headerColumns.length}`}>
-                    {renderShowMoreButton()}
-                    {renderViewAllButton()}
-                    {renderCreateNewButton()}
-                    {renderResetButton()}
-                </DataTableCell>
-            </DataTableRow>
+            <div className={classes.footerToolbar}>
+                {renderShowMoreButton()}
+                {renderViewAllButton()}
+                {renderCreateNewButton()}
+            </div>
+
         );
     }
 
@@ -271,19 +272,23 @@ const StageDetailPlain = (props: Props) => {
     }
     return (
         <div className={classes.container}>
-            <DataTable
-                className={classes.table}
-            >
-                <DataTableHead>
-                    {renderHeader()}
-                </DataTableHead>
-                <DataTableBody>
-                    {renderRows()}
-                </DataTableBody>
-                <DataTableFoot>
+            <div className={classes.scrollBox}>
+                <DataTable
+                    className={classes.table}
+                >
+                    <DataTableHead>
+                        {renderHeader()}
+                    </DataTableHead>
+                    <DataTableBody>
+                        {renderRows()}
+                    </DataTableBody>
+                </DataTable>
+            </div>
+            <DataTableToolbar className={classes.tableToolbar} position="bottom">
+                <div className={classes.toolbarContent}>
                     {renderFooter()}
-                </DataTableFoot>
-            </DataTable>
+                </div>
+            </DataTableToolbar>
         </div>
     );
 };

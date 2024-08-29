@@ -1,3 +1,38 @@
+## [101.3.1](https://github.com/dhis2/capture-app/compare/v101.3.0...v101.3.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17651] enrollment dashboard UI changes ([#3767](https://github.com/dhis2/capture-app/issues/3767)) ([012b60d](https://github.com/dhis2/capture-app/commit/012b60d3c297eea1bc3bfb62d9329ba37a9c0f94))
+
+# [101.3.0](https://github.com/dhis2/capture-app/compare/v101.2.2...v101.3.0) (2024-08-28)
+
+
+### Features
+
+* [DHIS2-11836] respect block entry form ([#3759](https://github.com/dhis2/capture-app/issues/3759)) ([ed3ed5a](https://github.com/dhis2/capture-app/commit/ed3ed5a58f602ea487b90bb5997aad9f3b6e22cb))
+
+## [101.2.2](https://github.com/dhis2/capture-app/compare/v101.2.1...v101.2.2) (2024-08-28)
+
+
+### Bug Fixes
+
+* [DHIS2-17953] Invalid dateFormat conversion in related stages ([#3774](https://github.com/dhis2/capture-app/issues/3774)) ([334297c](https://github.com/dhis2/capture-app/commit/334297c91fca8ef427729a6454f5a8f8dd550453))
+
+## [101.2.1](https://github.com/dhis2/capture-app/compare/v101.2.0...v101.2.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7971aa4](https://github.com/dhis2/capture-app/commit/7971aa4d5975aa6976912c0fdeb45957955477dc))
+
+# [101.2.0](https://github.com/dhis2/capture-app/compare/v101.1.3...v101.2.0) (2024-08-22)
+
+
+### Features
+
+* [DHIS2-17575] disable create new buttons if no data write access ([#3751](https://github.com/dhis2/capture-app/issues/3751)) ([5b3cd1c](https://github.com/dhis2/capture-app/commit/5b3cd1c6150d9b6cc47be274d50bffad05b6da73))
+
 ## [101.1.3](https://github.com/dhis2/capture-app/compare/v101.1.2...v101.1.3) (2024-08-18)
 
 
