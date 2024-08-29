@@ -28,7 +28,9 @@ export const buildProgramStageMetadata = async ({
     const storageController = getUserStorageController();
 
     const cachedRelationshipTypes = await storageController.getAll(userStores.RELATIONSHIP_TYPES);
-    const cachedProgramRules = await storageController.getAll(userStores.PROGRAM_RULES);
+    const cachedProgramRules = await storageController.getAll(userStores.PROGRAM_RULES, {
+        predicate: rule => rule.programStageId === cachedProgramStage.id,
+    });
 
     const programStageFactory = new ProgramStageFactory({
         cachedOptionSets: new Map<string, CachedOptionSet>(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),
@@ -43,7 +45,7 @@ export const buildProgramStageMetadata = async ({
         cachedProgramStage,
         programId,
     ).then((stage) => {
-        stage.programRules = cachedProgramRules.filter(rule => rule.programStageId === cachedProgramStage.id);
+        stage.programRules = cachedProgramRules;
         return stage;
     });
 };
