@@ -1514,9 +1514,6 @@ msgstr "To open this event, please wait until saving is complete"
 msgid "Show {{ rest }} more"
 msgstr "Show {{ rest }} more"
 
-msgid "Reset list"
-msgstr "Reset list"
-
 msgid "Go to full {{ eventName }}"
 msgstr "Go to full {{ eventName }}"
 
