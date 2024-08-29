@@ -1,3 +1,10 @@
+## [101.3.1](https://github.com/dhis2/capture-app/compare/v101.3.0...v101.3.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17651] enrollment dashboard UI changes ([#3767](https://github.com/dhis2/capture-app/issues/3767)) ([012b60d](https://github.com/dhis2/capture-app/commit/012b60d3c297eea1bc3bfb62d9329ba37a9c0f94))
+
 # [101.3.0](https://github.com/dhis2/capture-app/compare/v101.2.2...v101.3.0) (2024-08-28)
 
 
