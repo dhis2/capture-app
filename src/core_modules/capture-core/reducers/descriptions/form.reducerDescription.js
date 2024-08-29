@@ -1,6 +1,6 @@
 // @flow
 import { effectActions } from '@dhis2/rules-engine-javascript';
-import type { AssignOutputEffect } from '@dhis2/rules-engine-javascript';
+import type { AssignOutputEffectWithValidations } from '../../components/D2Form';
 import { createReducerDescription } from '../../trackerRedux';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
@@ -63,7 +63,7 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
-        const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
+        const assignEffects: { [id: string]: Array<AssignOutputEffectWithValidations> } =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
         if (!assignEffects) {
             return state;
@@ -205,26 +205,25 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const { formId, rulesEffects } = action.payload;
-        const formSectionFields = state[formId];
-        const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
+        const assignEffects: { [id: string]: Array<AssignOutputEffectWithValidations> } =
             rulesEffects && rulesEffects[effectActions.ASSIGN_VALUE];
 
-        if (!assignEffects || !formSectionFields) {
+        if (!assignEffects) {
             return state;
         }
 
         const updatedFields = Object.keys(assignEffects).reduce((acc, id) => {
-            if (formSectionFields[id]) {
-                acc[id] = {
-                    valid: true,
-                    errorData: undefined,
-                    errorMessage: undefined,
-                    errorType: undefined,
-                    modified: true,
-                    touched: true,
-                    validatingMessage: null,
-                };
-            }
+            const effectsForId = assignEffects[id];
+            const effect = effectsForId[effectsForId.length - 1];
+            acc[id] = {
+                valid: effect.valid,
+                errorData: effect.errorData,
+                errorMessage: effect.errorMessage,
+                errorType: effect.errorType,
+                modified: true,
+                touched: true,
+                validatingMessage: null,
+            };
             return acc;
         }, {});
 

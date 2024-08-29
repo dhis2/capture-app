@@ -9,8 +9,10 @@ import {
 } from '../../../../rules';
 import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
 import type { EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
+import { validateAssignEffects } from '../../../D2Form';
+import type { QuerySingleResource } from '../../../../utils/api';
 
-export const getRulesActions = ({
+export const getRulesActions = async ({
     state, // temporary
     program,
     stage,
@@ -21,6 +23,7 @@ export const getRulesActions = ({
     eventsRulesDependency,
     attributesValuesRulesDependency,
     enrollmentDataRulesDependency,
+    querySingleResource,
 }: {
     state: ReduxState,
     program: TrackerProgram,
@@ -32,6 +35,7 @@ export const getRulesActions = ({
     eventsRulesDependency: EnrollmentEvents,
     attributesValuesRulesDependency: AttributeValuesClientFormatted,
     enrollmentDataRulesDependency: EnrollmentData,
+    querySingleResource: QuerySingleResource,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
 
@@ -49,5 +53,11 @@ export const getRulesActions = ({
         enrollmentData: enrollmentDataRulesDependency,
     });
 
-    return updateRulesEffects(effects, formId);
+    const effectsWithValidations = await validateAssignEffects({
+        dataElements: formFoundation.getElements(),
+        effects,
+        querySingleResource,
+    });
+
+    return updateRulesEffects(effectsWithValidations, formId);
 };

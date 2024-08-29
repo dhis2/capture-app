@@ -22,6 +22,7 @@ import { startRunRulesPostUpdateField } from '../../DataEntry';
 import { getRulesActionsForTEI } from './ProgramRules';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import type { Geometry } from './helpers/types';
+import type { QuerySingleResource } from '../../../utils/api';
 
 export const TEI_MODAL_STATE = {
     OPEN: 'Open',
@@ -65,7 +66,12 @@ type Context = {
     state: ReduxState,
 };
 
-export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction<any, any>) => {
+export const getUpdateFieldActions = async (
+    context: Context,
+    querySingleResource: QuerySingleResource,
+    onGetValidationContext: () => Object,
+    innerAction: ReduxAction<any, any>,
+) => {
     const uid = uuid();
     const {
         orgUnit,
@@ -87,7 +93,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
     };
     const formId = `${dataEntryId}-${itemId}`;
     const currentTEIValues = getCurrentClientValues(state, formFoundation, formId, fieldData);
-    const rulesActions = getRulesActionsForTEI({
+    const rulesActions = await getRulesActionsForTEI({
         foundation: formFoundation,
         formId,
         orgUnit,
@@ -99,12 +105,14 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
         otherEvents,
         dataElements,
         userRoles,
+        querySingleResource,
+        onGetValidationContext,
     });
 
     return batchActions(
         [
             innerAction,
-            ...rulesActions,
+            rulesActions,
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
         ],

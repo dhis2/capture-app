@@ -1,6 +1,7 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { map, filter, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
@@ -37,6 +38,8 @@ import { actionTypes as crossPageActionTypes } from '../../../../../Pages/action
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
 import { newPageActionTypes } from '../../../../../Pages/New/NewPage.actions';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
+import { validateAssignEffects } from '../../../../../D2Form';
+import type { QuerySingleResource } from '../../../../../../utils/api';
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>
     action$.pipe(
@@ -121,14 +124,23 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         }));
 
 
-const runRulesForNewSingleEvent = (
+const runRulesForNewSingleEvent = async ({
+    store,
+    dataEntryId,
+    itemId,
+    uid,
+    orgUnit,
+    fieldData,
+    querySingleResource,
+}: {
     store: ReduxStore,
     dataEntryId: string,
     itemId: string,
     uid: string,
     orgUnit: OrgUnit,
     fieldData?: ?FieldData,
-) => {
+    querySingleResource: QuerySingleResource,
+}) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
 
@@ -147,35 +159,66 @@ const runRulesForNewSingleEvent = (
         currentEvent,
     });
 
+    const effectsWithValidations = await validateAssignEffects({
+        dataElements: foundation.getElements(),
+        effects,
+        querySingleResource,
+    });
+
     return batchActions([
-        updateRulesEffects(effects, formId),
+        updateRulesEffects(effectsWithValidations, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
     );
 };
 
-export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
-        map((action) => {
+        switchMap((action) => {
             const { dataEntryId, itemId, uid, orgUnit } = action.payload;
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit);
+            const runRulesForNewSingleEventPromise = runRulesForNewSingleEvent({
+                store,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                querySingleResource,
+            });
+            return from(runRulesForNewSingleEventPromise);
         }));
 
-export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnUpdateFieldForSingleEventEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
-        map((action) => {
+        switchMap((action) => {
             const { dataEntryId, itemId, uid, orgUnit, elementId, value, uiState } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, orgUnit, fieldData);
+            const runRulesForNewSingleEventPromise = runRulesForNewSingleEvent({
+                store,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                fieldData,
+                querySingleResource,
+            });
+            return from(runRulesForNewSingleEventPromise);
         }));

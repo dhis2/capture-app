@@ -419,17 +419,38 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
 
     handleUpdateField = (...args: Array<any>) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
-        this.props.onUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
-    }
+        this.props.onUpdateField(
+            ...args,
+            programId,
+            orgUnit,
+            firstStageMetaData?.stage,
+            formFoundation,
+            this.getValidationContext,
+        );
+    };
 
     handleUpdateDataEntryField = (...args: Array<any>) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
-        this.props.onUpdateDataEntryField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
+        this.props.onUpdateDataEntryField(
+            ...args,
+            programId,
+            orgUnit,
+            firstStageMetaData?.stage,
+            formFoundation,
+            this.getValidationContext,
+        );
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
-        this.props.onStartAsyncUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
+        this.props.onStartAsyncUpdateField(
+            ...args,
+            programId,
+            orgUnit,
+            firstStageMetaData?.stage,
+            formFoundation,
+            this.getValidationContext,
+        );
     }
 
     render() {

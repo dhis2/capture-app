@@ -16,6 +16,8 @@ import { convertDateObjectToDateFormatString } from '../../../../utils/converter
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
+import { validateAssignEffects } from '../../../D2Form';
+import type { QuerySingleResource } from '../../../../utils/api';
 
 const itemId = 'newEnrollment';
 
@@ -56,6 +58,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     firstStage,
     programCategory,
     formFoundation,
+    querySingleResource,
 }: {
     program: TrackerProgram,
     orgUnit: OrgUnit,
@@ -67,6 +70,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     firstStage?: ProgramStage,
     programCategory?: ProgramCategory,
     formFoundation: RenderFoundation,
+    querySingleResource: QuerySingleResource,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
@@ -101,13 +105,19 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         formFoundation,
     });
 
+    const effectsWithValidations = await validateAssignEffects({
+        dataElements: formFoundation.getElements(),
+        effects,
+        querySingleResource,
+    });
+
     return batchActions([
         openDataEntryForNewEnrollment(
             dataEntryId,
         ),
         ...dataEntryActions,
         addFormDataActions,
-        updateRulesEffects(effects, formId),
+        updateRulesEffects(effectsWithValidations, formId),
         ...extraActions,
     ], batchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH);
 };

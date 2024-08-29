@@ -14,9 +14,10 @@ export const startRunRulesOnUpdateForNewEnrollment = (
     orgUnit: OrgUnit,
     stage?: ProgramStage,
     formFoundation: RenderFoundation,
+    onGetValidationContext: () => Object,
 ) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(
-        { innerPayload: payload, uid, programId, orgUnit, stage, formFoundation });
+        { innerPayload: payload, uid, programId, orgUnit, stage, formFoundation, onGetValidationContext });
 
 export const startAsyncUpdateFieldForNewEnrollment = (
     innerAction: ReduxAction<any, any>,

@@ -1,6 +1,8 @@
 // @flow
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useDataEngine } from '@dhis2/app-runtime';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
 import type { Props } from './dataEntry.types';
 import { DataEntryComponent } from './DataEntry.component';
 import { useLifecycle, useFormValidations } from './hooks';
@@ -24,8 +26,20 @@ export const DataEntry = ({
 }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
+    const dataEngine = useDataEngine();
+    const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
     const dispatch = useDispatch();
     const [saveAttempted, setSaveAttempted] = useState(false);
+
+    const onGetValidationContext = useCallback(
+        () => ({
+            programId: programAPI.id,
+            orgUnitId,
+            trackedEntityInstanceId,
+            trackedEntityTypeId: programAPI.trackedEntityType.id,
+        }),
+        [programAPI, orgUnitId, trackedEntityInstanceId],
+    );
 
     const context = useLifecycle({
         programAPI,
@@ -36,28 +50,24 @@ export const DataEntry = ({
         itemId,
         geometry,
         dataEntryFormConfig,
+        onGetValidationContext,
     });
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const onUpdateFormField = useCallback(
-        (...args: Array<any>) => dispatch(getUpdateFieldActions(context, ...args)),
-        [dispatch, context],
+        (...args: Array<any>) => {
+            getUpdateFieldActions(context, querySingleResource, onGetValidationContext, ...args).then(actions =>
+                dispatch(actions),
+            );
+        },
+        [dispatch, querySingleResource, context, onGetValidationContext],
     );
     const onUpdateFormFieldAsync = useCallback(
         (innerAction: ReduxAction<any, any>) => {
             dispatch(innerAction);
         },
         [dispatch],
-    );
-    const getValidationContext = useCallback(
-        () => ({
-            programId: programAPI.id,
-            orgUnitId,
-            trackedEntityInstanceId,
-            trackedEntityTypeId: programAPI.trackedEntityType.id,
-        }),
-        [programAPI, orgUnitId, trackedEntityInstanceId],
     );
 
     const onSave = useCallback(() => {
@@ -107,7 +117,7 @@ export const DataEntry = ({
                 onUpdateFormField={onUpdateFormField}
                 onUpdateFormFieldAsync={onUpdateFormFieldAsync}
                 modalState={modalState}
-                onGetValidationContext={getValidationContext}
+                onGetValidationContext={onGetValidationContext}
                 errorsMessages={errorsMessages}
                 warningsMessages={warningsMessages}
                 orgUnit={{ id: orgUnitId }}

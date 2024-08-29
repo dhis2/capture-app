@@ -30,7 +30,10 @@ import { dataElementTypes, type DateDataElement, type DataElement } from '../../
 import { validatorTypes } from './constants';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
-type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};
+type Validator = (
+    value: any,
+    contextProps: ?Object,
+) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any, data?: any };
 
 export type ValidatorContainer = {
     validator: Validator,
