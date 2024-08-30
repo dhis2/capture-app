@@ -1,6 +1,5 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper/Paper';
-import Grid from '@material-ui/core/Grid/Grid';
 import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui';
 
@@ -15,15 +14,16 @@ const StyledPaper = withStyles({
     },
 })(Paper);
 
-export const IncompleteSelectionsMessage = ({ children, dataTest = 'informative-paper' }) => (
-    <Grid container justify="center">
-        <Grid item>
-            <StyledPaper
-                data-test={dataTest}
-                elevation={0}
-            >
-                {children}
-            </StyledPaper>
-        </Grid>
-    </Grid>);
+const containerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+};
 
+export const IncompleteSelectionsMessage = ({ children, dataTest = 'informative-paper' }) => (
+    <div style={containerStyle}>
+        <StyledPaper data-test={dataTest} elevation={0}>
+            {children}
+        </StyledPaper>
+    </div>
+);

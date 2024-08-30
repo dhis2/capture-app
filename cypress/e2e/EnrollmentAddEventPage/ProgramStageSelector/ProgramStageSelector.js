@@ -1,5 +1,9 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
+Given(/^you open the enrollment page by typing (.*)$/, url =>
+    cy.visit(url),
+);
+
 Given('you land on the EnrollmentEventNew-page without a stageId', () => {
     cy.visit('/#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=x2kJgpb0XQC&enrollmentId=RiNIt1yJoge');
 });
