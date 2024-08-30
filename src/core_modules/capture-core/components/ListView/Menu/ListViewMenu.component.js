@@ -58,6 +58,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                         </>
                     );
                 }
+                console.log('content', content);
 
                 return (
                     <MenuItem
@@ -73,11 +74,9 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                         }}
                         // $FlowFixMe Using exact types, in my book this should work. Please tell me what I'm missing.
                         disabled={!content.clickHandler}
-                    >
-                        {
-                            // $FlowFixMe Using exact types, in my book this should work. Please tell me what I'm missing.
-                            content.element}
-                    </MenuItem>
+                        // $FlowFixMe Using exact types, in my book this should work. Please tell me what I'm missing.
+                        label={content.element}
+                    />
                 );
             })
             .flat(1), [customMenuContents, classes]);
@@ -108,4 +107,4 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
 };
 
 export const ListViewMenu: ComponentType<$Diff<Props, CssClasses>> =
-    memo<$Diff<Props, CssClasses>>(withStyles(getStyles)(ListViewMenuPlain));
+    memo < $Diff < Props, CssClasses>> (withStyles(getStyles)(ListViewMenuPlain));
