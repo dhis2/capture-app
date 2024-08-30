@@ -96,7 +96,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
         { description &&
             <Tooltip
                 content={description}
-                openDelay="100"
+                openDelay={100}
             >
                 <div className={classes.descriptionIcon}>
                     <IconInfo16 />

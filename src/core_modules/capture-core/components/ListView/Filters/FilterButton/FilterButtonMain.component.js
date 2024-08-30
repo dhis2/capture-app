@@ -1,8 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Popover from '@material-ui/core/Popover';
-import { IconChevronDown16, IconChevronUp16, Button } from '@dhis2/ui';
+import { DropdownButton, FlyoutMenu } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
@@ -22,15 +21,6 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const POPOVER_ANCHOR_ORIGIN = {
-    vertical: 'bottom',
-    horizontal: 'left',
-};
-const POPOVER_TRANSFORM_ORIGIN = {
-    vertical: 'top',
-    horizontal: 'left',
-};
-
 type Props = {
     itemId: string,
     type: string,
@@ -47,7 +37,6 @@ type Props = {
     onRemoveFilter: RemoveFilter,
     isRemovable?: boolean,
     onSetVisibleSelector: Function,
-    selectorVisible: boolean,
     filterValue?: FilterData,
     buttonText?: string,
     disabled?: boolean,
@@ -119,17 +108,19 @@ class FilterButtonMainPlain extends Component<Props, State> {
         const { itemId: id, type, options, multiValueFilter, filterValue, isRemovable } = this.props;
 
         return (
-            <FilterSelectorContents
-                type={type}
-                options={options}
-                multiValueFilter={multiValueFilter}
-                id={id}
-                onUpdate={this.handleFilterUpdate}
-                onClose={this.onClose}
-                filterValue={filterValue}
-                onRemove={this.onRemove}
-                isRemovable={isRemovable}
-            />
+            <FlyoutMenu role="menu">
+                <FilterSelectorContents
+                    type={type}
+                    options={options}
+                    multiValueFilter={multiValueFilter}
+                    id={id}
+                    onUpdate={this.handleFilterUpdate}
+                    onClose={this.onClose}
+                    filterValue={filterValue}
+                    onRemove={this.onRemove}
+                    isRemovable={isRemovable}
+                />
+            </FlyoutMenu>
         );
     }
 
@@ -138,17 +129,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderWithAppliedFilter() {
-        const { selectorVisible, classes, title, buttonText } = this.props;
-
-        const arrowIconElement = selectorVisible ? (
-            <span className={classes.icon}>
-                <IconChevronUp16 />
-            </span>
-        ) : (
-            <span className={classes.icon}>
-                <IconChevronDown16 />
-            </span>
-        );
+        const { classes, title, buttonText } = this.props;
 
         return (
             <ActiveFilterButton
@@ -157,14 +138,14 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 onClear={this.handleClearFilter}
                 iconClass={classes.icon}
                 title={title}
-                arrowIconElement={arrowIconElement}
+                content={this.renderSelectorContents()}
                 buttonText={buttonText}
             />
         );
     }
 
     renderWithoutAppliedFilter() {
-        const { selectorVisible, classes, title, disabled, tooltipContent } = this.props;
+        const { title, disabled, tooltipContent } = this.props;
 
         return (
             <ConditionalTooltip
@@ -172,22 +153,19 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 enabled={disabled}
                 closeDelay={50}
             >
-                <Button
+                <DropdownButton
                     disabled={disabled}
                     onClick={this.openFilterSelector}
+                    component={this.renderSelectorContents()}
                 >
                     {title}
-                    <span className={classes.icon}>
-                        {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
-                    </span>
-                </Button>
+                </DropdownButton>
             </ConditionalTooltip>
         );
     }
 
     render() {
-        const { filterValue, selectorVisible } = this.props;
-        const { isMounted } = this.state;
+        const { filterValue } = this.props;
 
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
 
@@ -199,22 +177,6 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {button}
                 </div>
-                <Popover
-                    open={selectorVisible && isMounted}
-                    anchorEl={this.anchorRef.current}
-                    onClose={this.closeFilterSelector}
-                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
-                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
-                >
-                    {
-                        (() => {
-                            if (selectorVisible) {
-                                return this.renderSelectorContents();
-                            }
-                            return null;
-                        })()
-                    }
-                </Popover>
             </React.Fragment>
         );
     }

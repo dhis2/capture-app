@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import createSvgIcon from '@material-ui/icons/utils/createSvgIcon';
-import { Tooltip, Button } from '@dhis2/ui';
+import { Tooltip, DropdownButton } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 
@@ -44,7 +44,7 @@ type Props = {
     },
     iconClass: string,
     title: string,
-    arrowIconElement: React.Node,
+    content: React.Node,
     buttonText?: string,
 };
 
@@ -89,7 +89,7 @@ class ActiveFilterButtonPlain extends React.Component<Props, State> {
     }
 
     render() {
-        const { onChange, classes, iconClass, title, arrowIconElement, buttonText } = this.props;
+        const { onChange, classes, iconClass, title, content, buttonText } = this.props;
         const isHovered = this.state.isHovered;
         const buttonClasses = classNames(classes.button, { [classes.hovered]: isHovered });
 
@@ -98,13 +98,13 @@ class ActiveFilterButtonPlain extends React.Component<Props, State> {
                 onMouseEnter={this.setIsHovered}
                 onMouseLeave={this.clearIsHovered}
             >
-                <Button
+                <DropdownButton
                     className={buttonClasses}
                     onClick={onChange}
+                    component={content}
                 >
                     {title}
                     {ActiveFilterButton.getViewValueForFilter(buttonText)}
-                    {arrowIconElement}
                     <Tooltip
                         content={i18n.t('Clear')}
                         placement={'bottom'}
@@ -124,7 +124,7 @@ class ActiveFilterButtonPlain extends React.Component<Props, State> {
                             onKeyUp={ActiveFilterButton.stopClearPropagation}
                         />
                     </Tooltip>
-                </Button>
+                </DropdownButton>
             </div>
         );
     }
