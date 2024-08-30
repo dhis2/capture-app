@@ -58,7 +58,6 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                         </>
                     );
                 }
-                console.log('content', content);
 
                 return (
                     <MenuItem
@@ -107,4 +106,4 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
 };
 
 export const ListViewMenu: ComponentType<$Diff<Props, CssClasses>> =
-    memo < $Diff < Props, CssClasses>> (withStyles(getStyles)(ListViewMenuPlain));
+    memo < $Diff<Props, CssClasses>>(withStyles(getStyles)(ListViewMenuPlain));
