@@ -82,12 +82,12 @@ class Index extends React.Component<Props> {
     render() {
         const { feedback } = this.props;
         const { message, displayType } = feedback;
-        const isSnackBarOpen = isDefined(message) && !displayType;
+        const isAlertBarOpen = isDefined(message) && !displayType;
         const isDialogOpen = isDefined(message) && displayType === 'dialog';
         return (
             <React.Fragment>
                 <AlertStack>
-                    {isSnackBarOpen && (
+                    {isAlertBarOpen && (
                         <AlertBar
                             duration={5000}
                             onHidden={this.handleClose}
