@@ -1,5 +1,4 @@
 // @flow
-
 import { typeof dataElementTypes } from '../../../metaData';
 import type {
     FilterData,
@@ -60,7 +59,8 @@ export type CustomMenuContents = Array<CustomMenuContent>;
 export type CustomRowMenuContent = {|
     key: string,
     clickHandler?: ?(rowData: DataSourceItem) => any,
-    element: React$Node,
+    icon: React$Node,
+    label: string,
 |};
 export type CustomRowMenuContents = Array<CustomRowMenuContent>;
 

@@ -1,192 +1,44 @@
 // @flow
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Card, IconChevronDown16, IconChevronUp16, Button, Layer, FlyoutMenu, MenuItem } from '@dhis2/ui';
-
-import { Manager, Popper, Reference } from 'react-popper';
+import React, { useState, useCallback } from 'react';
+import { FlyoutMenu, MenuItem, DropdownButton } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-
-import type { Column } from '../../types';
-
-const getStyles = (theme: Theme) => ({
-    icon: {
-        fontSize: theme.typography.pxToRem(20),
-        paddingLeft: theme.typography.pxToRem(5),
-    },
-    restMenuButton: {
-        backgroundColor: '#f5f5f5',
-    },
-    restMenuButtonLabel: {
-        textTransform: 'none',
-    },
-    menuPaper: {
-        maxHeight: 280,
-        overflowY: 'auto',
-    },
-    menuItemRoot: {
-        padding: 6,
-        paddingLeft: 24,
-        paddingRight: 24,
-        fontSize: theme.typography.pxToRem(14),
-    },
-    popperContainerHidden: {
-        display: 'none',
-    },
-    popper: {
-        zIndex: 1,
-    },
-});
+import type { Column, FilterOnly } from '../../types';
 
 type Props = {
-    columns: Array<Column>,
+    columns: Array<Column | FilterOnly>,
     onItemSelected: (id: string) => void,
-    classes: {
-        icon: string,
-        restMenuButton: string,
-        restMenuButtonLabel: string,
-        menuPaper: string,
-        menuItemRoot: string,
-        popperContainerHidden: string,
-    },
 };
 
-type State = {
-    filterSelectorOpen: boolean,
+export const FilterRestMenu = ({ columns, onItemSelected }: Props) => {
+    const [filterSelectorOpen, setFilterSelectorOpen] = useState(false);
+
+    const toggleMenu = useCallback(() => {
+        setFilterSelectorOpen(prevState => !prevState);
+    }, []);
+
+    const handleItemSelected = useCallback((id: string) => {
+        setFilterSelectorOpen(false);
+        onItemSelected(id);
+    }, [onItemSelected]);
+
+    const renderMenuItems = useCallback(() => (
+        columns.map(column => (
+            <MenuItem
+                key={column.id}
+                onClick={() => handleItemSelected(column.id)}
+                label={column.header}
+            />
+        ))
+    ), [columns, handleItemSelected]);
+
+    return (
+        <DropdownButton
+            dataTest="more-filters"
+            onClick={toggleMenu}
+            open={filterSelectorOpen}
+            component={<FlyoutMenu role="menu">{renderMenuItems()}</FlyoutMenu>}
+        >
+            {i18n.t('More filters')}
+        </DropdownButton>
+    );
 };
-
-class FilterRestMenuPlain extends React.Component<Props, State> {
-    menuClasses: Object;
-    menuItemClasses: Object;
-    managerRef: any;
-    menuReferenceInstance: ?HTMLDivElement;
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            filterSelectorOpen: false,
-        };
-        this.setClassesOnMount();
-    }
-
-    setClassesOnMount() {
-        const classes = this.props.classes;
-        this.menuClasses = {
-            paper: classes.menuPaper,
-        };
-
-        this.menuItemClasses = {
-            root: classes.menuItemRoot,
-        };
-    }
-    closeMenu() {
-        this.setState({
-            filterSelectorOpen: false,
-        });
-    }
-
-    toggleMenu() {
-        this.setState({
-            filterSelectorOpen: !this.state.filterSelectorOpen,
-        });
-    }
-
-    handleMenuButtonClick = () => {
-        this.toggleMenu();
-    }
-
-    handleClickAway = (event: any) => {
-        if (this.menuReferenceInstance && this.menuReferenceInstance.contains(event.target)) {
-            return;
-        }
-        this.closeMenu();
-    }
-
-    handleItemSelected = (id: string) => {
-        this.closeMenu();
-        this.props.onItemSelected(id);
-    }
-
-    renderMenuItems() {
-        const columns = this.props.columns;
-        return columns
-            .map(column => (
-                <MenuItem
-                    key={column.id}
-                    onClick={() => { this.handleItemSelected(column.id); }}
-                    label={column.header}
-                />
-
-            ));
-    }
-
-    handleReferenceInstanceRetrieved = (instance) => {
-        this.managerRef(instance);
-        this.menuReferenceInstance = instance;
-    }
-
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <Manager>
-                <Reference>
-                    {
-                        ({ ref }) => {
-                            this.managerRef = ref;
-                            return (
-                                <div
-                                    ref={this.handleReferenceInstanceRetrieved}
-                                >
-                                    <Button
-                                        dataTest="more-filters"
-                                        variant="outlined"
-                                        color="default"
-                                        size="small"
-                                        classes={{ button: classes.restMenuButton }}
-                                        muiClasses={{ label: classes.restMenuButtonLabel }}
-                                        onClick={this.handleMenuButtonClick}
-                                    >
-                                        {i18n.t('More filters')}
-                                        {this.state.filterSelectorOpen ? (
-                                            <span className={classes.icon}>
-                                                <IconChevronUp16 />
-                                            </span>
-                                        ) : (
-                                            <span className={classes.icon}>
-                                                <IconChevronDown16 />
-                                            </span>
-                                        )}
-                                    </Button>
-                                </div>
-                            );
-                        }
-                    }
-                </Reference>
-                {this.state.filterSelectorOpen &&
-                <Layer onBackdropClick={this.handleClickAway} dataTest="more-filters-menu">
-                    <Popper
-                        placement="bottom-start"
-                    >
-                        {
-                            ({ ref, style, placement }) => (
-                                <div
-                                    ref={ref}
-                                    style={{ ...style, zIndex: 1 }}
-                                    data-placement={placement}
-                                >
-                                    <Card className={classes.menuPaper}>
-                                        <FlyoutMenu role="menu">
-                                            {this.renderMenuItems()}
-                                        </FlyoutMenu>
-                                    </Card>
-                                </div>
-                            )
-                        }
-                    </Popper>
-                </Layer>
-                }
-            </Manager>
-        );
-    }
-}
-
-export const FilterRestMenu = withStyles(getStyles)(FilterRestMenuPlain);
