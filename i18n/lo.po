@@ -89,7 +89,7 @@ msgid "Please provide a valid time"
 msgstr "ກະລຸນາລະບຸເວລາໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "ກະລຸນາໃຫ້ອັດຕາສ່ວນທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid url"
 msgstr "ກະລຸນາປ້ອນ URL ທີ່ຖືກຕ້ອງ"
@@ -131,22 +131,22 @@ msgid "A future date is not allowed"
 msgstr "ບໍ່ອະນຸຍາດໃຫ້ມີວັນທີໃນອະນາຄົດ"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດຂຶ້ນ. ເບິ່ງລາຍລະອຽດ"
 
 msgid "Cancel"
 msgstr "Cancel"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "ການປ່ຽນແປງທີ່ບໍ່ໄດ້ບັນທຶກໄວ້"
 
 msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
+msgstr "ການອອກຈາກໜ້ານີ້ຈະໄດ້ຍົກເລີກການປ່ຽນແປງທີ່ທ່ານໄດ້ສ້າງຕໍ່ກັບເຫດການນີ້."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "ຕົກລົງ, ຍົກເລີກ"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "ບໍ່, ຢູ່ໜ້ານີ້"
 
 msgid "validation failed"
 msgstr "ການກວດສອບລົ້ມເຫຼວ"
@@ -170,10 +170,10 @@ msgid "Complete"
 msgstr "ສຳເລັດແລ້ວ"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "ພົບຄຳເຕືອນ"
 
 msgid "Abort"
-msgstr ""
+msgstr "ຫຼົ້ມເຫຼວ"
 
 msgid "Back to form"
 msgstr "ກັບຄືນໄປຫາຟອມ"
@@ -254,7 +254,7 @@ msgid "Last 3 months"
 msgstr "3 ເດືອນຍ້ອນຫຼັງ"
 
 msgid "Custom range"
-msgstr ""
+msgstr "ຊ່ວງກຳນົດເອງ"
 
 msgid "Max"
 msgstr "ຄ່າສູງສຸດ"
@@ -341,19 +341,19 @@ msgid "Find"
 msgstr "ຊອກ"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "ໜ່ວຍ​ງານ​ການ​ລົງ​ທະ​ບຽນ​ທີ່​ເລືອກ​ໄວ້"
 
 msgid "Start Again"
-msgstr ""
+msgstr "ເລີ່ມໃໝ່"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "ເຈົ້າແນ່ໃຈບໍ່? ຂໍ້ມູນທັງຫມົດທີ່ບໍ່ໄດ້ບັນທຶກໄວ້ຈະສູນເສຍໄປ."
 
 msgid "Accept"
 msgstr "​ການ​ຮັບ​ຮອງ"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "ລົງທະບຽນຫົວໜ່ວຍການຈັດຕັ້ງ"
 
 msgid "Select"
 msgstr "ເລືອກ"
@@ -389,7 +389,7 @@ msgid "Add comment"
 msgstr "ເພີ່ມຄວາມເຫັນ"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃນການຂຽນຄຳເຫັນ"
 
 msgid "Write comment"
 msgstr "ຂຽນຄວາມເຫັນ"
@@ -565,7 +565,7 @@ msgid "Assignee"
 msgstr "ຜູ້ມອບໝາຍ"
 
 msgid "Saving to"
-msgstr ""
+msgstr "ກຳລັງບັນທຶກໃສ່"
 
 msgid "in"
 msgstr "in"
@@ -773,31 +773,31 @@ msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "Program not found"
-msgstr ""
+msgstr "ບໍ່ພົບໂປຣແກຣມ"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "ໂປແກຣມນີ້ບໍ່ແມ່ນໂປແກຣມຕິດຕາມ"
 
 msgid "Profile"
 msgstr "ລາຍລະອຽດສ່ວນຕົົວ"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກເຫດການ"
 
 msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "ບໍ່ສາມາດລົບເຫດການໄດ້"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດບັນທຶກລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດເພີ່ມລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດລົບລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr ""
@@ -818,19 +818,19 @@ msgid "Date"
 msgstr "ວັນທີ່"
 
 msgid "Time"
-msgstr ""
+msgstr "ເວລາ"
 
 msgid "From date"
 msgstr "From date"
 
 msgid "From time"
-msgstr ""
+msgstr "ຈາກເວລາ"
 
 msgid "To date"
 msgstr "ເຖີງວັນທີ່"
 
 msgid "To time"
-msgstr ""
+msgstr "ເຖິງເວລາ"
 
 msgid "error encountered during field validation"
 msgstr "ເກີດຄວາມຜິດພາດໃນລະຫວ່າງການກວດສອບ"
@@ -845,4 +845,4 @@ msgid "Set area"
 msgstr "ກຳນົດພື້ນທີ່"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "ຮູບແບບຄວາມເຂົ້າກັນໄດ້"
