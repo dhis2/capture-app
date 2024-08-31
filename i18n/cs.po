@@ -1354,6 +1354,9 @@ msgstr "Naplánované datum nelze změnit pro události {{ eventStatus }}"
 msgid "Event completed"
 msgstr "Událost dokončena"
 
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
+
 msgid "Back to all stages and events"
 msgstr "Zpět ke všem fázím a událostem"
 
@@ -1537,9 +1540,6 @@ msgstr "Chcete-li otevřít tuto událost, počkejte na dokončení ukládání"
 
 msgid "Show {{ rest }} more"
 msgstr "Zobrazit {{ rest }} více"
-
-msgid "Reset list"
-msgstr "Resetovat seznam"
 
 msgid "Go to full {{ eventName }}"
 msgstr "Přejít na celou {{ eventName }}"
