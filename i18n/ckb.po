@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -44,6 +44,9 @@ msgstr ""
 "پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
 "تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
 "ئەم کردارە وەشانەکانیتر دادەخات"
+
+msgid "More"
+msgstr ""
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -375,17 +378,11 @@ msgstr "کەسی تۆمارکراو"
 msgid "validation failed"
 msgstr "سەلماندنەکە سەرکەوتوونەبوو"
 
-msgid "Errors"
-msgstr "هەڵەکان"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "ڕاووبۆچون"
-
-msgid "Indicators"
-msgstr "نیشاندەر"
-
-msgid "Warnings"
-msgstr "ئاگادارکردنەوەکان"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr ""
@@ -499,18 +496,6 @@ msgstr "نووسینی تێدایە"
 msgid "Yes"
 msgstr "بەڵێ"
 
-msgid "mm/dd/yyyy"
-msgstr "مانگ/رۆژ/ساڵ"
-
-msgid "Years"
-msgstr "ساڵەکان"
-
-msgid "Months"
-msgstr "مانگەکان"
-
-msgid "Days"
-msgstr "رۆژەکان"
-
 msgid "Uploading file"
 msgstr "سەرخستنی فایل"
 
@@ -576,6 +561,9 @@ msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
 
 msgid "Column"
 msgstr "ستوون"
+
+msgid "Visible"
+msgstr ""
 
 msgid "Update"
 msgstr "نوێ کردنەوە"
@@ -784,12 +772,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -819,6 +801,11 @@ msgstr ""
 
 msgid "Registered events"
 msgstr "حالەتە تۆمارکراوەکان"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -935,6 +922,18 @@ msgstr ""
 "بەجێهێشتنی ئەم پەڕەیە هەڵبژاردنەکانت هەڵدەسپێری کە بۆ پەیوەندیە نوێیەکان "
 "کردووتە"
 
+msgid "Errors"
+msgstr "هەڵەکان"
+
+msgid "Feedback"
+msgstr "ڕاووبۆچون"
+
+msgid "Indicators"
+msgstr "نیشاندەر"
+
+msgid "Warnings"
+msgstr "ئاگادارکردنەوەکان"
+
 msgid "Show all events"
 msgstr "هەموو حاڵەتەکان پیشان بدە"
 
@@ -974,6 +973,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr ""
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1255,9 +1260,6 @@ msgstr ""
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr ""
 
@@ -1310,6 +1312,9 @@ msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
 msgid "Event completed"
+msgstr ""
+
+msgid "The event cannot be edited after it has been completed"
 msgstr ""
 
 msgid "Back to all stages and events"
@@ -1463,6 +1468,12 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
@@ -1472,13 +1483,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset list"
-msgstr ""
-
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
@@ -1496,6 +1501,15 @@ msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
 msgid "Stages and Events"
+msgstr ""
+
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
 msgstr ""
 
 msgid "Changelog"
@@ -1661,9 +1675,6 @@ msgid "An error has occured. See log for details"
 msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
-
-msgid "Scheduled"
 msgstr ""
 
 msgid "Overdue{{ escape }} due {{ time }}"
