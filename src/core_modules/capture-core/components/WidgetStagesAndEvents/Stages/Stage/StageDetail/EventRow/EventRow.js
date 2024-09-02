@@ -61,12 +61,16 @@ const EventRowPlain = ({
                     <OverflowButton
                         open={actionsOpen}
                         onClick={() => setActionsOpen(prev => !prev)}
+                        dataTest={'overflow-button'}
                         secondary
                         small
                         icon={<IconMore16 />}
                         disabled={pendingApiResponse || !stageWriteAccess}
                         component={(
-                            <FlyoutMenu dense>
+                            <FlyoutMenu
+                                dense
+                                dataTest={'overflow-menu'}
+                            >
                                 {(eventDetails.status === EventStatuses.SCHEDULE || eventDetails.status === EventStatuses.SKIPPED) && (
                                     <SkipAction
                                         eventId={id}

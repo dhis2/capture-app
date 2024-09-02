@@ -84,6 +84,7 @@ export const DeleteActionModal = ({
     return (
         <Modal
             onClose={() => setDeleteModalOpen(false)}
+            small
         >
             <ModalTitle>
                 {i18n.t('Delete event')}
