@@ -11,7 +11,7 @@ import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selector
 import { withLoadingIndicator } from '../../../HOC';
 import { defaultDialogProps as dialogConfig } from '../../Dialogs/DiscardDialog.constants';
 import { getOpenDataEntryActions } from './DataEntryWrapper/DataEntry';
-import type { ContainerProps, StateProps, MapStateToProps } from './SingleEventRegistrationEntry.types';
+import type { ContainerProps, StateProps, MapStateToProps, Props, MapDispatchToProps } from './SingleEventRegistrationEntry.types';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 
 const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
@@ -25,9 +25,12 @@ const makeMapStateToProps = (): MapStateToProps => {
     });
 };
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps: MapDispatchToProps = () => ({});
 
-const mergeProps = (stateProps: StateProps): StateProps => (stateProps);
+const mergeProps = (stateProps: StateProps, dispatchProps: {||}, ownProps: ContainerProps): Props => ({
+    ...stateProps,
+    ...ownProps,
+});
 
 const openSingleEventDataEntry = (InnerComponent: React.ComponentType<ContainerProps>) => (
     (props: ContainerProps) => {
@@ -59,13 +62,13 @@ export const SingleEventRegistrationEntry: React.ComponentType<ContainerProps> =
     compose(
         openSingleEventDataEntry,
         connect<
-            StateProps,
-            ContainerProps,
-            StateProps,
-            *,
-            ReduxState,
-            *,
-        >(makeMapStateToProps, mapDispatchToProps, mergeProps),
+        Props,
+        ContainerProps,
+        StateProps,
+        {||},
+        ReduxState,
+        *
+    >(makeMapStateToProps, mapDispatchToProps, mergeProps),
         withLoadingIndicator(),
         withBrowserBackWarning(dialogConfig, inEffect),
     )(SingleEventRegistrationEntryComponent);
