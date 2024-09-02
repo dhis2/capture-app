@@ -52,6 +52,7 @@ function convertFileForDisplay(clientValue: FileClientValue) {
         </a>
     );
 }
+
 function convertImageForDisplay(clientValue: ImageClientValue) {
     return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} alignLeft />;
 }

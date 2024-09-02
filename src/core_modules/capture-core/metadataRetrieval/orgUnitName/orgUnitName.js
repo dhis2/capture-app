@@ -22,7 +22,7 @@ const displayNamesQuery = {
 };
 
 const updateCacheWithOrgUnits = (organisationUnits) => {
-    for (const { id, displayName, ancestors } of organisationUnits) {
+    organisationUnits.forEach(({ id, displayName, ancestors }) => {
         if (ancestors.length > 0) {
             displayNameCache[id] = {
                 displayName,
@@ -31,21 +31,24 @@ const updateCacheWithOrgUnits = (organisationUnits) => {
 
             ancestors.findLast((ancestor, index) => {
                 if (displayNameCache[ancestor.id]) {
+                    // Ancestors already cached
                     return true;
                 } else if (index > 0) {
+                    // Add orgunit WITH ancestor to cache
                     displayNameCache[ancestor.id] = {
                         displayName: ancestor.displayName,
                         ancestor: ancestors[index - 1].id,
                     };
                     return false;
                 }
+                // Add orgunit WITHOUT ancestor to cache
                 displayNameCache[ancestor.id] = { displayName: ancestor.displayName };
                 return true;
             });
         } else {
             displayNameCache[id] = { displayName };
         }
-    }
+    });
 };
 
 const createBatches = (orgUnitIds: Array<string>): Array<Array<string>> => {

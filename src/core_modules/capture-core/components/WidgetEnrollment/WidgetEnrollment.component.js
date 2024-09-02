@@ -78,24 +78,8 @@ export const WidgetEnrollmentPlain = ({
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
 
-    const orgUnitClientValue = {
-        name: orgUnitName,
-        ancestors,
-        tooltip: i18n.t('Started at {{orgUnitName}}', {
-            orgUnitName,
-            interpolation: { escapeValue: false },
-        }),
-    };
-
-    const ownerOrgUnitClientValue = {
-        name: ownerOrgUnitName,
-        ancestors: ownerAncestors,
-        tooltip: i18n.t('Owned by {{ownerOrgUnit}}', {
-            ownerOrgUnit: ownerOrgUnitName,
-            interpolation: { escapeValue: false },
-        }),
-    };
-
+    const orgUnitClientValue = { name: orgUnitName, ancestors };
+    const ownerOrgUnitClientValue = { name: ownerOrgUnitName, ancestors: ownerAncestors };
 
     return (
         <div data-test="widget-enrollment">
@@ -152,18 +136,16 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            <span>
-                                {convertValue(orgUnitClientValue, type)}
-                            </span>
+                            {i18n.t('Started at: ')}
+                            {convertValue(orgUnitClientValue, type)}
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-owner-orgunit">
                             <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            <span>
-                                {convertValue(ownerOrgUnitClientValue, type)}
-                            </span>
+                            {i18n.t('Owned by: ')}
+                            {convertValue(ownerOrgUnitClientValue, type)}
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">
