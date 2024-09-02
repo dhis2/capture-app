@@ -36,7 +36,11 @@ export const FilterRestMenu = ({ columns, onItemSelected }: Props) => {
             dataTest="more-filters"
             onClick={toggleMenu}
             open={filterSelectorOpen}
-            component={<FlyoutMenu role="menu">{renderMenuItems()}</FlyoutMenu>}
+            component={
+                <FlyoutMenu role="menu" dataTest="more-filters-menu">
+                    {renderMenuItems()}
+                </FlyoutMenu>
+            }
         >
             {i18n.t('More filters')}
         </DropdownButton>
