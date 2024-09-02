@@ -220,7 +220,6 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
                 errorData: effect.errorData,
                 errorMessage: effect.errorMessage,
                 errorType: effect.errorType,
-                modified: true,
                 touched: true,
                 validatingMessage: null,
             };
