@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -495,18 +495,6 @@ msgstr "Inneholder tekst"
 
 msgid "Yes"
 msgstr "Ja"
-
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
-
-msgid "Years"
-msgstr "År"
-
-msgid "Months"
-msgstr "Måneder"
-
-msgid "Days"
-msgstr "Dager"
 
 msgid "Uploading file"
 msgstr "Laster opp fil"
@@ -1362,6 +1350,9 @@ msgstr "Planlagt dato kan ikke endres for {{ eventStatus }} hendelser"
 msgid "Event completed"
 msgstr "Hendelse fullført"
 
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
+
 msgid "Back to all stages and events"
 msgstr "Tilbake til alle faser og hendelser"
 
@@ -1522,6 +1513,12 @@ msgstr "Rapporteringsdato"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr "Denne fasen kan bare ha en hendelse"
+
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
 
@@ -1531,14 +1528,8 @@ msgstr "For å åpne denne hendelsen, vennligst vent til lagringen er fullført"
 msgid "Show {{ rest }} more"
 msgstr "Vis {{ rest }} flere"
 
-msgid "Reset list"
-msgstr "Nullstill liste"
-
 msgid "Go to full {{ eventName }}"
 msgstr "Gå til hele {{ eventName }}"
-
-msgid "This stage can only have one event"
-msgstr "Denne fasen kan bare ha en hendelse"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr "Hendelser kunne ikke hentes. Prøv igjen senere."

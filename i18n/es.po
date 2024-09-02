@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -513,18 +513,6 @@ msgstr "Contiene texto"
 
 msgid "Yes"
 msgstr "Si"
-
-msgid "mm/dd/yyyy"
-msgstr "mm / dd / aaaa"
-
-msgid "Years"
-msgstr "Años"
-
-msgid "Months"
-msgstr "Meses"
-
-msgid "Days"
-msgstr "Días"
 
 msgid "Uploading file"
 msgstr "Subiendo archivo"
@@ -1405,6 +1393,9 @@ msgstr ""
 msgid "Event completed"
 msgstr "Evento completado"
 
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
+
 msgid "Back to all stages and events"
 msgstr "Volver a todas las etapas y eventos"
 
@@ -1580,6 +1571,12 @@ msgstr "Fecha de reporte"
 msgid "Please select a valid event"
 msgstr "Seleccione un evento válido"
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr "Esta etapa solo puede tener un evento"
+
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
@@ -1589,14 +1586,8 @@ msgstr "Para abrir este evento, espere hasta que se complete el guardado."
 msgid "Show {{ rest }} more"
 msgstr "Mostrar más {{ rest }} "
 
-msgid "Reset list"
-msgstr "Resetear lista"
-
 msgid "Go to full {{ eventName }}"
 msgstr "Ir a {{ eventName }} completado"
-
-msgid "This stage can only have one event"
-msgstr "Esta etapa solo puede tener un evento"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""

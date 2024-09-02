@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -46,6 +46,9 @@ msgstr ""
 "hetzelfde domein). Vernieuw deze pagina als u deze versie opnieuw wilt "
 "gebruiken, maar houd er rekening mee dat hierdoor andere versies worden "
 "gesloten."
+
+msgid "More"
+msgstr "Meer"
 
 msgid "View {{programName}} dashboard"
 msgstr "Bekijk het {{programName}}-dashboard"
@@ -384,17 +387,11 @@ msgstr "Geregistreerde persoon"
 msgid "validation failed"
 msgstr "validatie mislukt"
 
-msgid "Errors"
-msgstr "Fouten"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Feedback"
-
-msgid "Indicators"
-msgstr "Indicatoren"
-
-msgid "Warnings"
-msgstr "Waarschuwingen"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Nieuw evenement genereren"
@@ -506,18 +503,6 @@ msgstr "Bevat tekst"
 msgid "Yes"
 msgstr "Ja"
 
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/jjjj"
-
-msgid "Years"
-msgstr "Jaren"
-
-msgid "Months"
-msgstr "Maanden"
-
-msgid "Days"
-msgstr "Dagen"
-
 msgid "Uploading file"
 msgstr "Bestand uploaden"
 
@@ -583,6 +568,9 @@ msgstr "Kolommen om in tabel weer te geven"
 
 msgid "Column"
 msgstr "Kolom"
+
+msgid "Visible"
+msgstr ""
 
 msgid "Update"
 msgstr "Bijwerken"
@@ -817,12 +805,6 @@ msgstr "Er is een fout opgetreden bij het laden van de pagina"
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr "Programmafase is ongeldig"
 
@@ -852,6 +834,11 @@ msgstr "Stadium"
 
 msgid "Registered events"
 msgstr "Geregistreerde evenementen"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr "Selecteer {{category}}."
@@ -971,6 +958,18 @@ msgstr ""
 "Als u deze pagina verlaat, worden alle selecties die u voor een nieuwe "
 "relatie hebt gemaakt, verwijderd"
 
+msgid "Errors"
+msgstr "Fouten"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicatoren"
+
+msgid "Warnings"
+msgstr "Waarschuwingen"
+
 msgid "Show all events"
 msgstr "Toon alle evenementen"
 
@@ -1012,6 +1011,12 @@ msgstr ""
 msgid "The enrollment event data could not be found"
 msgstr ""
 "De gegevens van de inschrijvingsgebeurtenis konden niet worden gevonden"
+
+msgid "Loading"
+msgstr ""
+
+msgid "An error occurred while loading the form"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Mogelijke duplicaten gevonden"
@@ -1367,6 +1372,9 @@ msgstr ""
 msgid "Event completed"
 msgstr "Evenement voltooid"
 
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
+
 msgid "Back to all stages and events"
 msgstr "Terug naar alle stadium en evenementen"
 
@@ -1531,6 +1539,12 @@ msgstr "Rapporteer datum"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr "Deze fase kan maar één evenement hebben"
+
 msgid "New {{ eventName }} event"
 msgstr "Nieuwe {{ eventName }} evenement"
 
@@ -1540,14 +1554,8 @@ msgstr "Wacht tot het opslaan is voltooid om dit evenement te openen"
 msgid "Show {{ rest }} more"
 msgstr "Toon {{ rest }} meer"
 
-msgid "Reset list"
-msgstr "Lijst resetten"
-
 msgid "Go to full {{ eventName }}"
 msgstr "Ga naar volledige {{ eventName }}"
-
-msgid "This stage can only have one event"
-msgstr "Deze fase kan maar één evenement hebben"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
@@ -1566,6 +1574,15 @@ msgstr "{{ scheduledEvents }} gepland"
 
 msgid "Stages and Events"
 msgstr "stadiums en evenementen"
+
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Gepland"
 
 msgid "Changelog"
 msgstr ""
@@ -1733,9 +1750,6 @@ msgstr "Er is een fout opgetreden. Zie logboek voor details"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr "Gepland{{ escape }} vanwege {{ time }}"
-
-msgid "Scheduled"
-msgstr "Gepland"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr "Te laat{{ escape }} vanwege {{ time }}"

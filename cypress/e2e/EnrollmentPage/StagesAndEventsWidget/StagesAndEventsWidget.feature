@@ -1,5 +1,10 @@
 Feature: User interacts with Stages and Events Widget
 
+    @user:trackerAutoTestRestricted
+    Scenario: Create new event button is disabled if no data write access
+        Given you open the enrollment page by typing #enrollment?enrollmentId=WKPoiZxZxNG&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=PgmUFEQYZdt
+        Then you should see the disabled button New Previous deliveries event
+
     Scenario: User can view program stages
         Given you open the enrollment page
         Then the program stages should be displayed
@@ -24,13 +29,10 @@ Feature: User interacts with Stages and Events Widget
         And you see the first 5 events in the table
         And you see buttons in the footer list
 
-    Scenario: User can view more events and then view less
+    Scenario: User can view more events
         Given you open the enrollment page which has multiples events and stages
         When you click show more button in stages&event list
-        Then more events should be displayed
-        And reset button should be displayed
-        And you click reset button
-        Then there should be 5 rows in the table
+        Then there should be 10 rows in the table
 
     Scenario: User can sort the list of events
         Given you open the enrollment page which has multiples events and stages
@@ -64,3 +66,4 @@ Feature: User interacts with Stages and Events Widget
     Scenario: Program stage is hidden if no data read access
         And you open the enrollment page by typing #enrollment?enrollmentId=iNEq9d22Nyp&orgUnitId=DiszpKrYNg8&programId=WSGAb5XwJ3Y&teiId=k4ODejBytgv
         Then the Care at birth program stage should be hidden
+
