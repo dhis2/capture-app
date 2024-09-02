@@ -1,10 +1,8 @@
 // @flow
-import * as React from 'react';
+import React, { useState, type Node } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { IconButton } from 'capture-ui';
-import { IconCross24, Button, Modal, ModalTitle, ModalContent, ModalActions, AlertStack, AlertBar } from '@dhis2/ui';
+import { Button, Modal, ModalTitle, ModalContent, ModalActions, AlertStack, AlertBar } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import isDefined from 'd2-utilizr/lib/isDefined';
 
 const styles = () => ({
     closeButton: {
@@ -17,110 +15,48 @@ const styles = () => ({
 
 type Feedback = {
     message: string | { title: string, content: string },
-    action?: ?React.Node,
-    displayType?: ?string,
+    action?: Node,
+    displayType?: 'alert' | 'dialog',
 };
 
 type Props = {
     feedback: Feedback,
     onClose: () => void,
-    classes: Object,
 };
 
-class Index extends React.Component<Props> {
-    static defaultProps = {
-        feedback: {},
+const FeedbackBarComponentPlain = ({ feedback = {}, onClose }: Props) => {
+    const [hide, setHide] = useState(false);
+    const { message, displayType } = feedback;
+    const isAlertBarOpen = typeof message === 'string' && !displayType;
+    const isDialogOpen = typeof message === 'object' && displayType === 'dialog';
+
+    const handleClose = () => {
+        setHide(true);
+        onClose();
     };
 
-    constructor(props: Props) {
-        super(props);
-        this.handleClose = this.handleClose.bind(this);
-    }
-    static CLICKAWAY_KEY = 'clickaway';
-
-    static ANCHOR_ORIGIN = {
-        vertical: 'bottom',
-        horizontal: 'center',
-    };
-
-    handleClose = (event?: ?Object, reason?: ?string) => {
-        if (reason !== Index.CLICKAWAY_KEY) {
-            this.props.onClose();
-        }
-    }
-
-    getAction() {
-        const { feedback, classes } = this.props;
-
-        return (
-            <>
-                {
-                    (() => {
-                        if (!feedback.action) {
-                            return null;
-                        }
-
-                        return (
-                            <span
-                                className={classes.actionContainer}
-                            >
-                                {feedback.action}
-                            </span>
-                        );
-                    })()
-                }
-                <IconButton
-                    className={classes.closeButton}
-                    onClick={this.handleClose}
-                >
-                    <IconCross24 />
-                </IconButton>
-            </>
-        );
-    }
-
-    render() {
-        const { feedback } = this.props;
-        const { message, displayType } = feedback;
-        const isAlertBarOpen = isDefined(message) && !displayType;
-        const isDialogOpen = isDefined(message) && displayType === 'dialog';
-        return (
-            <React.Fragment>
-                <AlertStack>
-                    {isAlertBarOpen && (
-                        <AlertBar
-                            duration={5000}
-                            onHidden={this.handleClose}
-                        >
-                            {message}
-                        </AlertBar>
-                    )}
-                </AlertStack>
-                {isDialogOpen && (
-                    <Modal
-                        hide={!isDialogOpen}
-                    >
-                        <ModalTitle>
-                            {
-                            // $FlowFixMe[prop-missing] automated comment
-                                isDialogOpen ? message && message.title : ''}
-                        </ModalTitle>
-                        <ModalContent>
-                            {
-                            // $FlowFixMe[prop-missing] automated comment
-                                isDialogOpen ? message && message.content : ''}
-                        </ModalContent>
-                        <ModalActions>
-                            <Button onClick={this.handleClose} primary>
-                                {i18n.t('Close')}
-                            </Button>
-                        </ModalActions>
-                    </Modal>
+    return (
+        <>
+            <AlertStack>
+                {isAlertBarOpen && (
+                    <AlertBar duration={5000}>
+                        {message}
+                    </AlertBar>
                 )}
-            </React.Fragment>
-        );
-    }
-}
-Index.displayName = 'FeedbackBar';
+            </AlertStack>
+            {isDialogOpen && (
+                <Modal hide={hide}>
+                    <ModalTitle>{message.title || ''}</ModalTitle>
+                    <ModalContent>{message.content || ''}</ModalContent>
+                    <ModalActions>
+                        <Button onClick={handleClose} primary>
+                            {i18n.t('Close')}
+                        </Button>
+                    </ModalActions>
+                </Modal>
+            )}
+        </>
+    );
+};
 
-export const FeedbackBarComponent = withStyles(styles)(Index);
+export const FeedbackBarComponent = withStyles(styles)(FeedbackBarComponentPlain);
