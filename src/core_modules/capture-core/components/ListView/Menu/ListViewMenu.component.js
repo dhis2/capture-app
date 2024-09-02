@@ -84,7 +84,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
         <div ref={anchorRef} style={{ display: 'inline-block', position: 'relative' }}>
             <IconButton
                 onClick={toggle}
-                data-test="row-menu-toggle"
+                dataTest="list-view-menu-button"
             >
                 <IconMore24 />
             </IconButton>
@@ -93,7 +93,6 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                     <Popper
                         placement="bottom-end"
                         reference={anchorRef}
-                        data-test="row-menu-popper"
                     >
                         <FlyoutMenu role="menu">
                             {renderMenuItems()}
