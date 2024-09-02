@@ -1,3 +1,10 @@
+## [101.3.3](https://github.com/dhis2/capture-app/compare/v101.3.2...v101.3.3) (2024-09-02)
+
+
+### Bug Fixes
+
+* [DHIS2-17971] trigger program stage specific rules on opening new event page ([#3776](https://github.com/dhis2/capture-app/issues/3776)) ([cd06e41](https://github.com/dhis2/capture-app/commit/cd06e414fc2162397f3844887e1b3f902d18a874))
+
 ## [101.3.2](https://github.com/dhis2/capture-app/compare/v101.3.1...v101.3.2) (2024-09-01)
 
 
