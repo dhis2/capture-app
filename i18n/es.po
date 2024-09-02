@@ -1393,6 +1393,9 @@ msgstr ""
 msgid "Event completed"
 msgstr "Evento completado"
 
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
+
 msgid "Back to all stages and events"
 msgstr "Volver a todas las etapas y eventos"
 
@@ -1582,9 +1585,6 @@ msgstr "Para abrir este evento, espere hasta que se complete el guardado."
 
 msgid "Show {{ rest }} more"
 msgstr "Mostrar más {{ rest }} "
-
-msgid "Reset list"
-msgstr "Resetear lista"
 
 msgid "Go to full {{ eventName }}"
 msgstr "Ir a {{ eventName }} completado"

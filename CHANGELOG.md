@@ -1,3 +1,38 @@
+## [101.3.3](https://github.com/dhis2/capture-app/compare/v101.3.2...v101.3.3) (2024-09-02)
+
+
+### Bug Fixes
+
+* [DHIS2-17971] trigger program stage specific rules on opening new event page ([#3776](https://github.com/dhis2/capture-app/issues/3776)) ([cd06e41](https://github.com/dhis2/capture-app/commit/cd06e414fc2162397f3844887e1b3f902d18a874))
+
+## [101.3.2](https://github.com/dhis2/capture-app/compare/v101.3.1...v101.3.2) (2024-09-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3dfd424](https://github.com/dhis2/capture-app/commit/3dfd4240ad9d5ef4512b283dc222eb54891aa896))
+
+## [101.3.1](https://github.com/dhis2/capture-app/compare/v101.3.0...v101.3.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17651] enrollment dashboard UI changes ([#3767](https://github.com/dhis2/capture-app/issues/3767)) ([012b60d](https://github.com/dhis2/capture-app/commit/012b60d3c297eea1bc3bfb62d9329ba37a9c0f94))
+
+# [101.3.0](https://github.com/dhis2/capture-app/compare/v101.2.2...v101.3.0) (2024-08-28)
+
+
+### Features
+
+* [DHIS2-11836] respect block entry form ([#3759](https://github.com/dhis2/capture-app/issues/3759)) ([ed3ed5a](https://github.com/dhis2/capture-app/commit/ed3ed5a58f602ea487b90bb5997aad9f3b6e22cb))
+
+## [101.2.2](https://github.com/dhis2/capture-app/compare/v101.2.1...v101.2.2) (2024-08-28)
+
+
+### Bug Fixes
+
+* [DHIS2-17953] Invalid dateFormat conversion in related stages ([#3774](https://github.com/dhis2/capture-app/issues/3774)) ([334297c](https://github.com/dhis2/capture-app/commit/334297c91fca8ef427729a6454f5a8f8dd550453))
+
 ## [101.2.1](https://github.com/dhis2/capture-app/compare/v101.2.0...v101.2.1) (2024-08-25)
 
 

@@ -3,7 +3,9 @@ import React, { type ComponentType } from 'react';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip } from '@dhis2/ui';
+import {
+    colors, spacers, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip,
+} from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { statusTypes } from 'capture-core/events/statusTypes';
@@ -15,6 +17,10 @@ const styles = {
     container: {
         display: 'flex',
         alignItems: 'center',
+        padding: '0',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginLeft: '-4px',
     },
     icon: {
         paddingRight: spacersNum.dp8,
@@ -24,22 +30,32 @@ const styles = {
         marginRight: spacersNum.dp8,
         height: '16px',
     },
+    infoTitles: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    infoItems: {
+        display: 'flex',
+        gap: spacers.dp12,
+    },
     indicatorIcon: {
         paddingRight: spacersNum.dp4,
         height: '16px',
     },
     title: {
-        fontSize: '14px',
+        fontSize: '18px',
         lineHeight: '19px',
         fontWeight: 500,
         color: colors.grey900,
         display: 'flex',
+        marginInlineEnd: spacers.dp4,
     },
     indicator: {
-        padding: spacersNum.dp8,
         color: colors.grey800,
-        fontSize: '14px',
+        fontSize: '12px',
+        lineHeight: '16px',
         fontWeight: 400,
+        height: '100%',
         display: 'flex',
         alignItems: 'center',
     },
@@ -76,24 +92,26 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
 
     return (<div className={classes.container}>
-        {
-            icon && (
-                <div className={classes.icon}>
-                    <NonBundledDhis2Icon
-                        name={icon.name}
-                        color={icon.color}
-                        width={32}
-                        height={32}
-                        cornerRadius={5}
-                    />
-                </div>
-            )
-        }
+        <div className={classes.infoTitles}>
+            {
+                icon && (
+                    <div className={classes.icon}>
+                        <NonBundledDhis2Icon
+                            name={icon.name}
+                            color={icon.color}
+                            width={32}
+                            height={32}
+                            cornerRadius={5}
+                        />
+                    </div>
+                )
+            }
+            <div />
 
-        <div className={classes.title}>
-            {title}
-        </div>
-        { description &&
+            <div className={classes.title}>
+                {title}
+            </div>
+            { description &&
             <Tooltip
                 content={description}
                 openDelay={100}
@@ -102,32 +120,35 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
                     <IconInfo16 />
                 </div>
             </Tooltip>
-        }
-        <div className={classes.indicator}>
-            {i18n.t('{{ count }} event', {
-                count: totalEvents,
-                defaultValue: '{{ count }} event',
-                defaultValue_plural: '{{count}} events',
-            })}
+            }
         </div>
-        {overdueEvents > 0 ? <div className={cx(classes.indicator, classes.warningIndicator)}>
-            <div className={classes.indicatorIcon}>
-                <IconWarning16 />
+        <div className={classes.infoItems}>
+            <div className={classes.indicator}>
+                {i18n.t('{{ count }} event', {
+                    count: totalEvents,
+                    defaultValue: '{{ count }} event',
+                    defaultValue_plural: '{{count}} events',
+                })}
             </div>
-            {i18n.t('{{ overdueEvents }} overdue', { overdueEvents })}
-        </div> : null}
-        {scheduledEvents > 0 ? <div className={classes.indicator}>
-            <div className={classes.indicatorIcon}>
-                <IconCalendar16 />
-            </div>
-            {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
-        </div> : null }
-        {totalEvents > 0 && <div className={cx(classes.indicator)}>
-            <div className={classes.indicatorIcon}>
-                <IconClockHistory16 />
-            </div>
-            {getLastUpdatedAt(events, fromServerDate)}
-        </div>}
+            {overdueEvents > 0 ? <div className={cx(classes.indicator, classes.warningIndicator)}>
+                <div className={classes.indicatorIcon}>
+                    <IconWarning16 />
+                </div>
+                {i18n.t('{{ overdueEvents }} overdue', { overdueEvents })}
+            </div> : null}
+            {scheduledEvents > 0 ? <div className={classes.indicator}>
+                <div className={classes.indicatorIcon}>
+                    <IconCalendar16 />
+                </div>
+                {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
+            </div> : null }
+            {totalEvents > 0 && <div className={cx(classes.indicator)}>
+                <div className={classes.indicatorIcon}>
+                    <IconClockHistory16 />
+                </div>
+                {getLastUpdatedAt(events, fromServerDate)}
+            </div>}
+        </div>
     </div>);
 };
 

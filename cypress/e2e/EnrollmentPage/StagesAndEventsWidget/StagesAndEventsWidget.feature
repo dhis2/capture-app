@@ -29,13 +29,10 @@ Feature: User interacts with Stages and Events Widget
         And you see the first 5 events in the table
         And you see buttons in the footer list
 
-    Scenario: User can view more events and then view less
+    Scenario: User can view more events
         Given you open the enrollment page which has multiples events and stages
         When you click show more button in stages&event list
-        Then more events should be displayed
-        And reset button should be displayed
-        And you click reset button
-        Then there should be 5 rows in the table
+        Then there should be 10 rows in the table
 
     Scenario: User can sort the list of events
         Given you open the enrollment page which has multiples events and stages
