@@ -37,7 +37,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
     };
 
 
-    const renderMenuItems = useCallback((togglePopper: Function) =>
+    const renderMenuItems = useCallback(() =>
         customMenuContents
             .map((content) => {
                 if (content.subHeader) {
@@ -67,7 +67,6 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                             if (!content.clickHandler) {
                                 return;
                             }
-                            togglePopper();
                             // $FlowFixMe Using exact types, in my book this should work. Please tell me what I'm missing.
                             content.clickHandler();
                         }}
