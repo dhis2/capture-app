@@ -31,6 +31,8 @@ import { OverflowButton } from '../Buttons';
 import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
+import { eventStatuses } from './constants/status.const';
+import { useAuthorities } from './hooks';
 
 const styles = {
     header: {
@@ -99,6 +101,14 @@ export const WidgetEventEditPlain = ({
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
 
     const eventAccess = getProgramEventAccess(programId, stageId);
+    const { canEditCompletedEvent } = useAuthorities();
+    const blockEntryForm = stage.blockEntryForm && !canEditCompletedEvent && eventStatus === eventStatuses.COMPLETED;
+    const disableEdit = !eventAccess?.write || blockEntryForm;
+
+    const tooltipContent = blockEntryForm ?
+        i18n.t('The event cannot be edited after it has been completed') :
+        i18n.t('You don\'t have access to edit this event');
+
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     const { programCategory } = useCategoryCombinations(programId);
     if (error) {
@@ -117,14 +127,14 @@ export const WidgetEventEditPlain = ({
                 {currentPageMode === dataEntryKeys.VIEW && (
                     <div className={classes.menuActions}>
                         <ConditionalTooltip
-                            content={i18n.t('You don\'t have access to edit this event')}
-                            enabled={!eventAccess?.write}
+                            content={tooltipContent}
+                            enabled={disableEdit}
                             wrapperClassName={classes.tooltip}
                         >
                             <Button
                                 small
                                 secondary
-                                disabled={!eventAccess?.write}
+                                disabled={disableEdit}
                                 icon={<IconEdit24 />}
                                 onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                             >
@@ -225,3 +235,4 @@ export const WidgetEventEditPlain = ({
     ) : <LoadingMaskElementCenter />;
 };
 export const WidgetEventEdit: ComponentType<ComponentProps> = withStyles(styles)(WidgetEventEditPlain);
+

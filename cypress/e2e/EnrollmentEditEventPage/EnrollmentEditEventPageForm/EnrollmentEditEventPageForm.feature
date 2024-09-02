@@ -101,6 +101,12 @@ Scenario: User can see disabled scheduled date for active event
     Then the user see the following text: Enrollment: Edit Event
     Then the user see the schedule date field with tooltip: Scheduled date cannot be changed for Active events
     
+@user:trackerAutoTestRestricted
+Scenario: The user cannot enter edit mode for completed events
+    Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?eventId=nUVwTLuQ6FT&orgUnitId=DiszpKrYNg8
+    And the user see the following text: Enrollment: View Event
+    Then the edit button should be disabled
+
 Scenario: User can edit the event and complete the enrollment
     Given you land on the enrollment event page with selected Malaria Entity by having typed #/enrollmentEventEdit?eventId=MHR4Zj6KLz0&orgUnitId=DiszpKrYNg8
     And the enrollment status is active
