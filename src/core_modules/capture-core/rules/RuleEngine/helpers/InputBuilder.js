@@ -30,7 +30,7 @@ import type {
     DataElements,
     TrackedEntityAttributes,
     IConvertInputRulesValue,
-} from '../types/rulesEngine.types';
+} from '../types/ruleEngine.types';
 import type {
     KotlinOption,
     KotlinOptionSets,

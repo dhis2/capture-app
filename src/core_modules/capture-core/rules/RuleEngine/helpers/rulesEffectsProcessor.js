@@ -23,7 +23,7 @@ import type {
     GeneralWarningEffect,
     CompulsoryEffect,
     OutputEffects,
-} from '../types/rulesEngine.types';
+} from '../types/ruleEngine.types';
 import { normalizeRuleVariable } from './normalizeRuleVariable';
 import { getOutputEffectsWithPreviousValueCheck } from './previousValueCheck';
 
