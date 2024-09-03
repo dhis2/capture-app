@@ -1,6 +1,6 @@
 // @flow
 import { rulesEngineEffectTargetDataTypes, typeKeys } from '../constants';
-import type { DataElements, TrackedEntityAttributes, HideOutputEffect } from '../types/rulesEngine.types';
+import type { DataElements, TrackedEntityAttributes, HideOutputEffect } from '../types/ruleEngine.types';
 
 const processDataElementValue = ({
     dataElementId,

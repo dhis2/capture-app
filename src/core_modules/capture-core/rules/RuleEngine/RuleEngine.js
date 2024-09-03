@@ -11,7 +11,7 @@ import type {
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
     Flag,
-} from './types/rulesEngine.types';
+} from './types/ruleEngine.types';
 
 export class RuleEngine {
     inputConverter: IConvertInputRulesValue;

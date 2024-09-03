@@ -2,7 +2,7 @@
 import log from 'loglevel';
 // TODO: add some kind of errorcreator to d2 before moving
 import { mapTypeToInterfaceFnName, typeKeys } from '../constants';
-import type { IConvertInputRulesValue } from '../types/rulesEngine.types';
+import type { IConvertInputRulesValue } from '../types/ruleEngine.types';
 
 const errorCreator = (message: string) => (details?: ?Object) => ({
     ...details,
