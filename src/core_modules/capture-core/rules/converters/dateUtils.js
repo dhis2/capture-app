@@ -51,16 +51,10 @@ export const dateUtils: IDateUtils = {
         return momentToRulesDate(newDateMoment);
     },
     compareDates: (firstRulesDate: ?string, secondRulesDate: ?string): number => {
-        const diff = dateUtils.daysBetween(secondRulesDate, firstRulesDate);
-        if (!diff) {
-            return 0;
-        }
-        if (diff < 0) {
-            return -1;
-        }
-        if (diff > 0) {
-            return 1;
-        }
-        return 0;
+        // Empty input dates will be replaced by "MAX_SAFE_INTEGER" when creating the timestamp.
+        // This ensures empty input will be bigger than any actual date
+        const firstDateTimestamp = firstRulesDate ? moment(firstRulesDate).valueOf() : Number.MAX_SAFE_INTEGER;
+        const secondDateTimestamp = secondRulesDate ? moment(secondRulesDate).valueOf() : Number.MAX_SAFE_INTEGER;
+        return firstDateTimestamp - secondDateTimestamp;
     },
 };
