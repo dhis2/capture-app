@@ -67,6 +67,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                             if (!content.clickHandler) {
                                 return;
                             }
+                            setActionsIsOpen(false);
                             // $FlowFixMe Using exact types, in my book this should work. Please tell me what I'm missing.
                             content.clickHandler();
                         }}
