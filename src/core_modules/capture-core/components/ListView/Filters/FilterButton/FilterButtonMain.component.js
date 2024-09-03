@@ -37,6 +37,7 @@ type Props = {
     onRemoveFilter: RemoveFilter,
     isRemovable?: boolean,
     onSetVisibleSelector: Function,
+    selectorVisible: boolean,
     filterValue?: FilterData,
     buttonText?: string,
     disabled?: boolean,
@@ -145,7 +146,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderWithoutAppliedFilter() {
-        const { title, disabled, tooltipContent } = this.props;
+        const { title, disabled, tooltipContent, selectorVisible } = this.props;
 
         return (
             <ConditionalTooltip
@@ -154,6 +155,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 closeDelay={50}
             >
                 <DropdownButton
+                    open={selectorVisible}
                     disabled={disabled}
                     onClick={this.openFilterSelector}
                     component={this.renderSelectorContents()}
