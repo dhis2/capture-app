@@ -66,12 +66,17 @@ type Context = {
     state: ReduxState,
 };
 
-export const getUpdateFieldActions = async (
+export const getUpdateFieldActions = async ({
+    context,
+    querySingleResource,
+    onGetValidationContext,
+    innerAction,
+}: {
     context: Context,
     querySingleResource: QuerySingleResource,
     onGetValidationContext: () => Object,
     innerAction: ReduxAction<any, any>,
-) => {
+}) => {
     const uid = uuid();
     const {
         orgUnit,

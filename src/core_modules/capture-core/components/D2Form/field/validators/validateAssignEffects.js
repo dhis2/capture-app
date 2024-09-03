@@ -7,8 +7,10 @@ import { type DataElement } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api';
 import { getValidators } from './getValidators';
 
+type Validations = { valid: boolean, errorMessage?: string, errorType?: string, errorData?: string };
+
 export type AssignOutputEffectWithValidations = {
-    [metaDataId: string]: Array<AssignOutputEffect & { valid: boolean, errorMessage?: string, errorType?: string, errorData?: string }>,
+    [metaDataId: string]: Array<AssignOutputEffect & Validations>,
 };
 
 const getValidatorsResult = async (validators, value, validationContext) =>
@@ -50,16 +52,20 @@ export const validateAssignEffects = async ({
 
     const assignEffectsWithValidations = await dataElements.reduce(async (passPromise, metaData: DataElement) => {
         const acc = await passPromise;
-        if (assignEffects[metaData.id]) {
-            const effectsForId = assignEffects[metaData.id];
-            const lastEffect = effectsForId.length - 1;
-            const value = effectsForId[lastEffect].value;
-            const validators = getValidators(metaData, querySingleResource);
-            const validationContext = onGetValidationContext && onGetValidationContext();
+        if (!assignEffects[metaData.id]) {
+            return acc;
+        }
 
-            try {
-                const validatorResult = await getValidatorsResult(validators, value, validationContext);
-                const effectWithValidation = validatorResult === true
+        const effectsForId = assignEffects[metaData.id];
+        const lastEffect = effectsForId.length - 1;
+        const value = effectsForId[lastEffect].value;
+        const validators = getValidators(metaData, querySingleResource);
+        const validationContext = onGetValidationContext && onGetValidationContext();
+
+        try {
+            const validatorResult = await getValidatorsResult(validators, value, validationContext);
+            const effectWithValidation =
+                validatorResult === true
                     ? {
                         ...effectsForId[lastEffect],
                         valid: true,
@@ -72,20 +78,18 @@ export const validateAssignEffects = async ({
                         errorData: validatorResult.data,
                     };
 
-                acc[metaData.id] = [...effectsForId.slice(0, lastEffect - 1), effectWithValidation];
-                return acc;
-            } catch (error) {
-                log.error(
-                    errorCreator('an error occured while validating the assigned program rule effect')({
-                        metaData,
-                        lastEffect,
-                        error,
-                    }),
-                );
-                return acc;
-            }
+            acc[metaData.id] = [...effectsForId.slice(0, lastEffect - 1), effectWithValidation];
+            return acc;
+        } catch (error) {
+            log.error(
+                errorCreator('an error occured while validating the assigned program rule effect')({
+                    metaData,
+                    lastEffect,
+                    error,
+                }),
+            );
+            return acc;
         }
-        return acc;
     }, Promise.resolve({}));
 
     return { ...effects, [effectActions.ASSIGN_VALUE]: assignEffectsWithValidations };

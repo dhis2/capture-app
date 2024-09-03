@@ -10,6 +10,7 @@ import { getCurrentClientMainData, type FieldData } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertFormToClient } from '../../../../converters';
 import { stageMainDataIds, convertToRulesEngineIds } from '../EnrollmentWithFirstStageDataEntry';
+import type { QuerySingleResource } from '../../../../utils/api';
 
 type Context = {
     dataEntryId: string,
@@ -49,7 +50,7 @@ const runRulesOnEnrollmentUpdate = ({
     store: ReduxStore,
     context: Context,
     searchActions?: any,
-    querySingleResource: any,
+    querySingleResource: QuerySingleResource,
     onGetValidationContext: () => Object,
 }) => {
     const state = store.value;

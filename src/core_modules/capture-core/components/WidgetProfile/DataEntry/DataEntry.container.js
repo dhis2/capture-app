@@ -56,8 +56,8 @@ export const DataEntry = ({
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const onUpdateFormField = useCallback(
-        (...args: Array<any>) => {
-            getUpdateFieldActions(context, querySingleResource, onGetValidationContext, ...args).then(actions =>
+        (innerAction: ReduxAction<any, any>) => {
+            getUpdateFieldActions({ context, querySingleResource, onGetValidationContext, innerAction }).then(actions =>
                 dispatch(actions),
             );
         },
