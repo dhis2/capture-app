@@ -90,15 +90,15 @@ export const updateDataEntryFieldBatch = (
         [
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForNewEnrollment(
-                innerAction.payload,
+            startRunRulesOnUpdateForNewEnrollment({
+                payload: innerAction.payload,
                 uid,
                 programId,
                 orgUnit,
                 stage,
                 formFoundation,
                 onGetValidationContext,
-            ),
+            }),
         ],
         batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH,
     );
@@ -119,15 +119,15 @@ export const updateFieldBatch = (
         [
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForNewEnrollment(
-                innerAction.payload,
+            startRunRulesOnUpdateForNewEnrollment({
+                payload: innerAction.payload,
                 uid,
                 programId,
                 orgUnit,
                 stage,
                 formFoundation,
                 onGetValidationContext,
-            ),
+            }),
         ],
         batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH,
     );
@@ -149,15 +149,15 @@ export const asyncUpdateSuccessBatch = (
         [
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForNewEnrollment(
-                { ...innerAction.payload, dataEntryId, itemId },
+            startRunRulesOnUpdateForNewEnrollment({
+                payload: { ...innerAction.payload, dataEntryId, itemId },
                 uid,
                 programId,
                 orgUnit,
                 stage,
                 formFoundation,
                 onGetValidationContext,
-            ),
+            }),
         ],
         batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH,
     );
