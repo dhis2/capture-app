@@ -10,7 +10,7 @@ import './enrollmentPageLayout.css';
 const getEnrollmentPageStyles: Readonly<any> = () => ({
     container: {
         minHeight: '90vh',
-        padding: '16px 24px 16px 24px',
+        padding: spacersNum.dp16,
     },
     contentContainer: {
         position: 'relative',
@@ -25,13 +25,13 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
         containerType: 'inline-size',
     },
     leftColumn: {
-        flexGrow: 3,
+        flexGrow: 10,
         flexShrink: 1,
         flexBasis: 700,
         minWidth: 700,
         display: 'flex',
         flexDirection: 'column',
-        gap: spacers.dp16,
+        gap: spacers.dp12,
     },
     rightColumn: {
         flexGrow: 1,
@@ -41,7 +41,7 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
         maxWidth: 400,
         display: 'flex',
         flexDirection: 'column',
-        gap: spacers.dp16,
+        gap: spacers.dp12,
     },
     title: {
         fontSize: '1.25rem',
