@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import {
     mapTypeToInterfaceFnName,
+    attributeTypes,
     effectActions,
     idNames,
     rulesEngineEffectTargetDataTypes,
@@ -130,11 +131,11 @@ export function getRulesEffectsProcessor(
     }
 
     function createAssignValueEffect(
-        effect: ProgramRuleEffect,
+        data: any,
         element: DataElement | TrackedEntityAttribute,
         targetDataType: $Values<typeof rulesEngineEffectTargetDataTypes>,
     ): AssignOutputEffect {
-        const normalizedValue = normalizeRuleVariable(effect.data, element.valueType);
+        const normalizedValue = normalizeRuleVariable(data, element.valueType);
         const outputValue = convertNormalizedValueToOutputValue(normalizedValue, element.valueType);
 
         return {
@@ -148,25 +149,21 @@ export function getRulesEffectsProcessor(
     function processAssignValue(
         effect: ProgramRuleEffect,
         dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes): Array<AssignOutputEffect> {
-        const effects = [];
-        if (dataElements && effect.dataElementId && dataElements[effect.dataElementId]) {
-            effects.push(createAssignValueEffect(
-                effect,
-                dataElements[effect.dataElementId],
-                rulesEngineEffectTargetDataTypes.DATA_ELEMENT),
+        trackedEntityAttributes: ?TrackedEntityAttributes): AssignOutputEffect | Array<AssignOutputEffect> {
+        if (effect.attributeType === attributeTypes.DATA_ELEMENT && dataElements) {
+            return createAssignValueEffect(
+                effect.data,
+                dataElements[effect.field],
+                rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+            );
+        } else if (effect.attributeType == attributeTypes.TRACKED_ENTITY_ATTRIBUTE && trackedEntityAttributes) {
+            return createAssignValueEffect(
+                effect.data,
+                trackedEntityAttributes[effect.field],
+                rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE,
             );
         }
-        if (trackedEntityAttributes &&
-            effect.trackedEntityAttributeId &&
-            trackedEntityAttributes[effect.trackedEntityAttributeId]) {
-            effects.push(createAssignValueEffect(
-                effect,
-                trackedEntityAttributes[effect.trackedEntityAttributeId],
-                rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE),
-            );
-        }
-        return effects;
+        return [];
     }
 
     function processHideField(

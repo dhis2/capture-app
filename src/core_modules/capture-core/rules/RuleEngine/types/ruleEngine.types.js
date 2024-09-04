@@ -152,6 +152,7 @@ export type ProgramRuleEffect = {
     content: ?string,
     displayContent: ?string,
     data: any,
+    field: ?string,
     ...ProgramRuleData,
 };
 

@@ -14,7 +14,11 @@ import {
     RuleEnrollmentStatus,
 } from '@dhis2/rule-engine';
 import { ValueProcessor } from './ValueProcessor';
-import { typeKeys } from '../constants';
+import {
+    attributeTypes,
+    effectActions,
+    typeKeys,
+} from '../constants';
 import type {
     ProgramRule,
     ProgramRuleAction,
@@ -60,8 +64,54 @@ const eventMainKeys = new Set([
     'completedAt',
 ]);
 
+const convertAssignAction = (action: ProgramRuleAction) => {
+    const {
+        data,
+        programRuleActionType: type,
+        dataElementId,
+        trackedEntityAttributeId,
+        content,
+    } = action;
+
+    const actions = [];
+
+    const pushAction = values => {
+        actions.push(new RuleActionJs(data, type, values));
+    };
+
+    if (dataElementId) {
+        pushAction(new Map([
+            [ 'field', dataElementId ],
+            [ 'attributeType', attributeTypes.DATA_ELEMENT ],
+        ]));
+    }
+    if (trackedEntityAttributeId) {
+        pushAction(new Map([
+            [ 'field', trackedEntityAttributeId ],
+            [ 'attributeType', attributeTypes.TRACKED_ENTITY_ATTRIBUTE ],
+        ]));
+    }
+    if (content) {
+        pushAction(new Map([
+            [ 'content', content ],
+            [ 'attributeType', attributeTypes.UNKNOWN ],
+        ]));
+    }
+
+    return actions;
+}
+
 const convertProgramRuleAction = (action: ProgramRuleAction) => {
-    const { data, programRuleActionType: type, ...rest } = action;
+    if (action.programRuleActionType === effectActions.ASSIGN_VALUE) {
+        return convertAssignAction(action);
+    }
+
+    const {
+        data,
+        programRuleActionType: type,
+        ...rest
+    } = action;
+
     return new RuleActionJs(
         data,
         type,
@@ -81,7 +131,7 @@ const convertProgramRule = (rule: ProgramRule) => {
 
     return new RuleJs(
         condition,
-        programRuleActions.map(convertProgramRuleAction),
+        programRuleActions.flatMap(convertProgramRuleAction),
         uid,
         name,
         programStage,
