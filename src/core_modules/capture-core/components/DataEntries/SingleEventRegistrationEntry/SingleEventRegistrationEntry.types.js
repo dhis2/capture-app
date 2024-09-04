@@ -18,7 +18,7 @@ export type Props = {|
     ...StateProps,
 |};
 
-export type DispatchProps = () => {||};
+export type DispatchProps = {||};
 
 export type MapDispatchToProps = () => {||};
 
