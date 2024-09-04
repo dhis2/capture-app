@@ -75,31 +75,31 @@ const convertAssignAction = (action: ProgramRuleAction) => {
 
     const actions = [];
 
-    const pushAction = values => {
+    const pushAction = (values) => {
         actions.push(new RuleActionJs(data, type, values));
     };
 
     if (dataElementId) {
         pushAction(new Map([
-            [ 'field', dataElementId ],
-            [ 'attributeType', attributeTypes.DATA_ELEMENT ],
+            ['field', dataElementId],
+            ['attributeType', attributeTypes.DATA_ELEMENT],
         ]));
     }
     if (trackedEntityAttributeId) {
         pushAction(new Map([
-            [ 'field', trackedEntityAttributeId ],
-            [ 'attributeType', attributeTypes.TRACKED_ENTITY_ATTRIBUTE ],
+            ['field', trackedEntityAttributeId],
+            ['attributeType', attributeTypes.TRACKED_ENTITY_ATTRIBUTE],
         ]));
     }
     if (content) {
         pushAction(new Map([
-            [ 'content', content ],
-            [ 'attributeType', attributeTypes.UNKNOWN ],
+            ['content', content],
+            ['attributeType', attributeTypes.UNKNOWN],
         ]));
     }
 
     return actions;
-}
+};
 
 const convertProgramRuleAction = (action: ProgramRuleAction) => {
     if (action.programRuleActionType === effectActions.ASSIGN_VALUE) {
@@ -140,17 +140,17 @@ const convertProgramRule = (rule: ProgramRule) => {
 };
 
 const ruleValueTypeMap = {
-    [typeKeys.BOOLEAN]: RuleValueType['BOOLEAN'],
-    [typeKeys.TRUE_ONLY]: RuleValueType['BOOLEAN'],
-    [typeKeys.DATE]: RuleValueType['DATE'],
-    [typeKeys.DATETIME]: RuleValueType['DATE'],
-    [typeKeys.AGE]: RuleValueType['DATE'],
-    [typeKeys.INTEGER]: RuleValueType['NUMERIC'],
-    [typeKeys.INTEGER_POSITIVE]: RuleValueType['NUMERIC'],
-    [typeKeys.INTEGER_NEGATIVE]: RuleValueType['NUMERIC'],
-    [typeKeys.INTEGER_ZERO_OR_POSITIVE]: RuleValueType['NUMERIC'],
-    [typeKeys.NUMBER]: RuleValueType['NUMERIC'],
-    [typeKeys.PERCENTAGE]: RuleValueType['NUMERIC'],
+    [typeKeys.BOOLEAN]: RuleValueType.BOOLEAN,
+    [typeKeys.TRUE_ONLY]: RuleValueType.BOOLEAN,
+    [typeKeys.DATE]: RuleValueType.DATE,
+    [typeKeys.DATETIME]: RuleValueType.DATE,
+    [typeKeys.AGE]: RuleValueType.DATE,
+    [typeKeys.INTEGER]: RuleValueType.NUMERIC,
+    [typeKeys.INTEGER_POSITIVE]: RuleValueType.NUMERIC,
+    [typeKeys.INTEGER_NEGATIVE]: RuleValueType.NUMERIC,
+    [typeKeys.INTEGER_ZERO_OR_POSITIVE]: RuleValueType.NUMERIC,
+    [typeKeys.NUMBER]: RuleValueType.NUMERIC,
+    [typeKeys.PERCENTAGE]: RuleValueType.NUMERIC,
 };
 
 const convertRuleVariable = (variable: ProgramRuleVariable, optionSets: KotlinOptionSets) => {
@@ -170,7 +170,7 @@ const convertRuleVariable = (variable: ProgramRuleVariable, optionSets: KotlinOp
         !useNameForOptionSet,
         optionSets[field] || [],
         field,
-        ruleValueTypeMap[fieldType] || RuleValueType['TEXT'],
+        ruleValueTypeMap[fieldType] || RuleValueType.TEXT,
         programStage,
     );
 };
