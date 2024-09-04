@@ -11,26 +11,24 @@ import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selector
 import { withLoadingIndicator } from '../../../HOC';
 import { defaultDialogProps as dialogConfig } from '../../Dialogs/DiscardDialog.constants';
 import { getOpenDataEntryActions } from './DataEntryWrapper/DataEntry';
-import type { ContainerProps, StateProps, MapStateToProps, Props, MapDispatchToProps, DispatchProps } from './SingleEventRegistrationEntry.types';
+import type { ContainerProps, StateProps, MapStateToProps } from './SingleEventRegistrationEntry.types';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import { itemId } from './DataEntryWrapper/DataEntry/helpers/constants';
 
 const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
 
 const makeMapStateToProps = (): MapStateToProps => {
     const eventAccessSelector = makeEventAccessSelector();
     return (state: ReduxState, { id }: ContainerProps): StateProps => ({
-        ready: state.dataEntries[id],
+        ready: state.dataEntries[id]?.itemId === itemId,
         showAddRelationship: !!state.newEventPage.showAddRelationship,
         eventAccess: eventAccessSelector(state),
     });
 };
 
-const mapDispatchToProps: MapDispatchToProps = () => ({});
+const mapDispatchToProps = () => ({});
 
-const mergeProps = (stateProps: StateProps, dispatchProps: DispatchProps, ownProps: ContainerProps): Props => ({
-    ...stateProps,
-    ...ownProps,
-});
+const mergeProps = (stateProps: StateProps): StateProps => (stateProps);
 
 const openSingleEventDataEntry = (InnerComponent: React.ComponentType<ContainerProps>) => (
     (props: ContainerProps) => {
@@ -62,13 +60,13 @@ export const SingleEventRegistrationEntry: React.ComponentType<ContainerProps> =
     compose(
         openSingleEventDataEntry,
         connect<
-        Props,
-        ContainerProps,
-        StateProps,
-        DispatchProps,
-        ReduxState,
-        *
-    >(makeMapStateToProps, mapDispatchToProps, mergeProps),
+            StateProps,
+            ContainerProps,
+            StateProps,
+            *,
+            ReduxState,
+            *,
+        >(makeMapStateToProps, mapDispatchToProps, mergeProps),
         withLoadingIndicator(),
         withBrowserBackWarning(dialogConfig, inEffect),
     )(SingleEventRegistrationEntryComponent);

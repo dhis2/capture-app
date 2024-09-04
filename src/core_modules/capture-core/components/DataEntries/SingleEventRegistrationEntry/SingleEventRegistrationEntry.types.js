@@ -1,11 +1,15 @@
 // @flow
-export type StateProps = {|
-    ready: boolean,
+export type Props = {|
     showAddRelationship: boolean,
     eventAccess: {|
         read: boolean,
         write: boolean,
     |},
+|};
+
+export type StateProps = {|
+    ready: boolean,
+    ...Props,
 |}
 
 export type ContainerProps = {|
@@ -13,14 +17,8 @@ export type ContainerProps = {|
     selectedScopeId: string,
 |};
 
-export type Props = {|
-    ...ContainerProps,
-    ...StateProps,
+export type DispatchProps = {|
+    onCancel: () => void,
 |};
 
-export type DispatchProps = {||};
-
-export type MapDispatchToProps = () => {||};
-
 export type MapStateToProps = (ReduxState, ContainerProps) => StateProps;
-
