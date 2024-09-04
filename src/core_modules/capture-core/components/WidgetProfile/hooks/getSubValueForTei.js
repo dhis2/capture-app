@@ -17,6 +17,11 @@ type SubValueFunctionParams = {
     minorServerVersion: number,
 };
 
+const buildTEAFileUrl = (attribute) => {
+    const { absoluteApiPath, teiId, id } = attribute;
+    return `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/file`;
+};
+
 const getFileResourceSubvalue = async ({ attribute, querySingleResource }: SubValueFunctionParams) => {
     if (!attribute.value) return null;
 
@@ -25,6 +30,7 @@ const getFileResourceSubvalue = async ({ attribute, querySingleResource }: SubVa
         id,
         name,
         value: id,
+        url: buildTEAFileUrl(attribute),
     };
 };
 
