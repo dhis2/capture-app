@@ -12,13 +12,14 @@ import { TemplateSelector } from '../../TemplateSelector';
 const getStyles = () => ({
     backButton: {
         margin: spacers.dp16,
+        marginBottom: spacers.dp12,
         padding: '0',
     },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
         margin: `0 ${spacers.dp16} 0`,
-        gap: spacers.dp16,
+        gap: spacers.dp12,
     },
     half: {
         flex: 1,
@@ -27,7 +28,7 @@ const getStyles = () => ({
         flex: 0.4,
     },
     searchBoxWrapper: {
-        padding: spacers.dp16,
+        padding: spacers.dp12,
         background: colors.white,
         border: '1px solid',
         borderColor: colors.grey400,
@@ -38,7 +39,7 @@ const getStyles = () => ({
 const SearchPagePlain = ({ programId, orgUnitId, onNavigateToMainPage, classes }: PlainProps) => (
     <>
         <TopBar programId={programId} orgUnitId={orgUnitId} />
-        <Button icon={<IconChevronLeft24 />} dataTest="back-button" className={classes.backButton} onClick={onNavigateToMainPage}>
+        <Button icon={<IconChevronLeft24 />} dataTest="back-button" className={classes.backButton} onClick={onNavigateToMainPage} small>
             {i18n.t('Back')}
         </Button>
 
