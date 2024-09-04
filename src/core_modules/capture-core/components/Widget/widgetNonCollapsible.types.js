@@ -2,7 +2,7 @@
 import type { Node } from 'react';
 
 export type WidgetNonCollapsibleProps = {|
-    header: Node,
+    header?: Node,
     children: Node,
     color?: string,
     borderless?: boolean,
