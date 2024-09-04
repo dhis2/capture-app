@@ -25,10 +25,11 @@ const getStyles = (theme: Theme) => ({
     },
     topBarButtonContainer: {
         display: 'flex',
-        gap: '6px',
+        gap: '4px',
         alignItems: 'center',
     },
     paginationContainer: {
+        padding: theme.typography.pxToRem(8),
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
