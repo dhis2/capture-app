@@ -14,7 +14,7 @@ const getBorder = (theme: any) => {
     return `${theme.typography.pxToRem(1)} solid ${color}`;
 };
 
-const maxHeight = 110;
+const maxHeight = 120;
 
 const getStyles = (theme: any) => ({
     container: {
@@ -23,25 +23,25 @@ const getStyles = (theme: any) => ({
     configsContainer: {
         display: 'flex',
         flexWrap: 'wrap',
-        padding: `${theme.typography.pxToRem(3)} 0rem`,
+        padding: '8px',
+        gap: '6px',
         maxHeight,
         overflow: 'hidden',
     },
     configsContainerExpanded: {
         display: 'flex',
         flexWrap: 'wrap',
-        padding: `${theme.typography.pxToRem(3)} 0rem`,
-    },
-    chipContainer: {
-        padding: `${theme.typography.pxToRem(5)} ${theme.typography.pxToRem(8)}`,
+        padding: '8px',
+        gap: '6px',
     },
     linkButtonContainer: {
-        marginBottom: 5,
         display: 'flex',
         justifyContent: 'center',
     },
     linkButton: {
-        fontSize: 10,
+        marginTop: 2,
+        marginBottom: 2,
+        fontSize: 12,
         backgroundColor: 'transparent',
         '&:focus': {
             outline: 'none',
