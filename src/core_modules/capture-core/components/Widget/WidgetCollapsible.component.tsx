@@ -2,7 +2,7 @@
 import React, { type ComponentType, useEffect, useRef, useState } from 'react';
 import { WithStyles, withStyles } from 'capture-core-utils/styles';
 import { cx } from '@emotion/css';
-import { colors, IconChevronUp24, spacersNum } from '@dhis2/ui';
+import { colors, spacers, IconChevronUp24, spacersNum } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import type { WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
 
@@ -25,9 +25,9 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: spacersNum.dp16,
+        padding: `${spacers.dp8} ${spacers.dp8} ${spacers.dp8} ${spacers.dp12}`,
         fontWeight: 500,
-        fontSize: 16,
+        fontSize: 15,
         color: colors.grey800,
     },
     children: {
@@ -53,7 +53,7 @@ const styles = {
     },
     toggleButton: {
         margin: `0 0 0 ${spacersNum.dp4}px`,
-        height: '24px',
+        height: '28px',
         borderRadius: '3px',
         color: colors.grey600,
         '&:hover': {
