@@ -1,9 +1,8 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { spacers } from '@dhis2/ui';
+import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { LinkButton } from '../../../../Buttons/LinkButton.component';
 import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS } from '../wizardSteps.const';
 import type { PlainProps, Props } from './breadcrumbs.types';
 
@@ -13,14 +12,31 @@ const styles = {
     },
 };
 
+const Breadcrumblink = withStyles({
+    link: {
+        color: colors.grey800,
+        padding: 0,
+        fontSize: '14px',
+        border: 'none',
+        background: 'transparent',
+        '&:hover': {
+            color: colors.grey900,
+            textDecoration: 'underline',
+            cursor: 'pointer',
+        },
+
+    },
+})(({ classes, onClick, children }) => <button className={classes.link} onClick={onClick}>{children}</button>);
+
 const Slash = withStyles({ slash: { padding: 5 } })(({ classes }) => <span className={classes.slash}>/</span>);
+
 
 const LinkedEntityMetadataSelectorStep = ({ currentStep, trackedEntityTypeName, onNavigate }) => {
     const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {
         trackedEntityTypeName: trackedEntityTypeName && trackedEntityTypeName.toLowerCase(),
     });
     return (currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.value ?
-        <LinkButton onClick={onNavigate}>{initialText}</LinkButton> :
+        <Breadcrumblink onClick={onNavigate}>{initialText}</Breadcrumblink> :
         <span>{initialText}</span>);
 };
 
@@ -33,7 +49,7 @@ const RetrieverModeStep = ({ currentStep, onNavigate, linkedEntityMetadataName }
         <>
             <Slash />
             {currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_RETRIEVER_MODE.value ?
-                <LinkButton onClick={onNavigate}>{linkedEntityMetadataName}</LinkButton> :
+                <Breadcrumblink onClick={onNavigate}>{linkedEntityMetadataName}</Breadcrumblink> :
                 <span>{linkedEntityMetadataName}</span>}
         </>
     );

@@ -4,7 +4,7 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
-import { Button } from '@dhis2/ui';
+import { Button, colors } from '@dhis2/ui';
 import { withNavigation } from '../../../../Pagination/withDefaultNavigation';
 import { makeAttributesSelector } from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
@@ -33,7 +33,7 @@ type Props = {|
 
 const getStyles = (theme: Theme) => ({
     itemActionsContainer: {
-        paddingTop: theme.typography.pxToRem(10),
+        paddingTop: 0,
     },
     pagination: {
         display: 'flex',
@@ -44,19 +44,22 @@ const getStyles = (theme: Theme) => ({
     topSection: {
         display: 'flex',
         flexDirection: 'column',
-        margin: theme.typography.pxToRem(8),
+        marginTop: 0,
         marginRight: 0,
-        backgroundColor: theme.palette.grey.lighter,
+        marginBottom: theme.typography.pxToRem(16),
+        marginLeft: theme.typography.pxToRem(12),
         maxWidth: theme.typography.pxToRem(600),
+        fontSize: 14,
+        color: colors.grey900,
+        fontWeight: 500,
     },
     topSectionValuesContainer: {
-        padding: theme.typography.pxToRem(10),
+        padding: 0,
     },
-    actionButton: {
-        margin: theme.typography.pxToRem(10),
-        color: theme.palette.primary.dark,
-        borderRadius: 0,
-        border: `1px solid ${theme.palette.primary.dark}`,
+    searchTopButtons: {
+        display: 'flex',
+        gap: '4px',
+        marginTop: theme.typography.pxToRem(8),
     },
 });
 
@@ -122,11 +125,11 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
         return (
             <div className={classes.topSection}>
                 <SearchResultsHeader currentSearchTerms={this.getSearchValues()} />
-                <div>
-                    <Button className={classes.actionButton} onClick={onNewSearch}>
+                <div className={classes.searchTopButtons}>
+                    <Button secondary small onClick={onNewSearch}>
                         {i18n.t('New search')}
                     </Button>
-                    <Button className={classes.actionButton} onClick={onEditSearch}>
+                    <Button secondary small onClick={onEditSearch}>
                         {i18n.t('Edit search')}
                     </Button>
                 </div>
