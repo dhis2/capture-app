@@ -34,6 +34,7 @@ const getStyles: Readonly<any> = (theme: any) => ({
         gap: spacers.dp4,
     },
     paginationContainer: {
+        padding: theme.typography.pxToRem(8),
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
