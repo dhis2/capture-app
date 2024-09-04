@@ -1,6 +1,5 @@
 // @flow
 import React, { memo, type ComponentType } from 'react';
-import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
@@ -11,7 +10,7 @@ import type { Props } from './validated.types';
 
 const styles = () => ({
     wrapper: {
-        paddingLeft: spacersNum.dp16,
+        paddingLeft: 0,
     },
 });
 
@@ -34,9 +33,6 @@ const ValidatedPlain = ({
     <Widget
         noncollapsible
         borderless
-        header={
-            <></>
-        }
     >
         {ready && (
             <div className={classes.wrapper}>
