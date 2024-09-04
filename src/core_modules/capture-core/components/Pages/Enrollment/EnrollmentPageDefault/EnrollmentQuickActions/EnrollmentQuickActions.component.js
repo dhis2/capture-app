@@ -12,7 +12,7 @@ import { buildUrlQueryString, useLocationQuery } from '../../../../../utils/rout
 
 const styles = {
     contentContainer: {
-        padding: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp12} ${spacers.dp12} ${spacers.dp12}`,
         display: 'flex',
         gap: spacers.dp8,
     },

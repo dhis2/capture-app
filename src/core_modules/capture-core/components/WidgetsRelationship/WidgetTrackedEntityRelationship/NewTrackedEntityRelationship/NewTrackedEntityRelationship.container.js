@@ -8,7 +8,7 @@ import type { ContainerProps, StyledContainerProps } from './NewTrackedEntityRel
 
 const styles = {
     container: {
-        padding: `0 ${spacers.dp16} ${spacers.dp24} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp12} ${spacers.dp12} ${spacers.dp12}`,
     },
 };
 
