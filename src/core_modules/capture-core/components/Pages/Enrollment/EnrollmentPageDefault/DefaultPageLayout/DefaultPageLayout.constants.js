@@ -22,14 +22,14 @@ export const DefaultPageLayout: PageLayoutConfig = Object.freeze({
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'QuickActions',
-        },
-        {
-            type: WidgetTypes.COMPONENT,
             name: 'StagesAndEvents',
         },
     ],
     rightColumn: [
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'QuickActions',
+        },
         {
             type: WidgetTypes.COMPONENT,
             name: 'ErrorWidget',
