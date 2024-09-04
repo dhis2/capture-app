@@ -37,7 +37,11 @@ export const FilterRestMenu = ({ columns, onItemSelected }: Props) => {
             onClick={toggleMenu}
             open={filterSelectorOpen}
             component={
-                <FlyoutMenu role="menu" dataTest="more-filters-menu">
+                <FlyoutMenu
+                    role="menu"
+                    dataTest="more-filters-menu"
+                    maxHeight="300px"
+                >
                     {renderMenuItems()}
                 </FlyoutMenu>
             }
