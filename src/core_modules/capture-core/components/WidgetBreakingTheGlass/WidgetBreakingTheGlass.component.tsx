@@ -19,7 +19,7 @@ const styles: Readonly<any> = ({ typography }: any) => ({
         maxWidth: '1000px',
     },
     wrapper: {
-        padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        padding: `0 ${spacersNum.dp12}px ${spacersNum.dp16}px ${spacersNum.dp12}px`,
     },
 });
 
