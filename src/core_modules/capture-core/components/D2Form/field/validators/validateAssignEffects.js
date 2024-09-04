@@ -6,33 +6,12 @@ import type { AssignOutputEffect } from '@dhis2/rules-engine-javascript';
 import { type DataElement } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api';
 import { getValidators } from './getValidators';
-
-type Validations = { valid: boolean, errorMessage?: string, errorType?: string, errorData?: string };
+import type { Validations } from './validateField';
+import { validateField } from './validateField';
 
 export type AssignOutputEffectWithValidations = {
     [metaDataId: string]: Array<AssignOutputEffect & Validations>,
 };
-
-const getValidatorsResult = async (validators, value, validationContext) =>
-    validators.reduce(async (passPromise, currentValidator) => {
-        const pass = await passPromise;
-        if (pass === true) {
-            if (!currentValidator) {
-                return true;
-            }
-            const result: Object = currentValidator.validator(value, validationContext);
-
-            if (result === true || (result && result.valid)) {
-                return true;
-            }
-            return {
-                message: result.errorMessage || currentValidator.message,
-                type: currentValidator.type,
-                data: result.data,
-            };
-        }
-        return pass;
-    }, Promise.resolve(true));
 
 export const validateAssignEffects = async ({
     dataElements,
@@ -45,7 +24,7 @@ export const validateAssignEffects = async ({
     querySingleResource: QuerySingleResource,
     onGetValidationContext?: () => Object,
 }): Promise<?AssignOutputEffectWithValidations> => {
-    const assignEffects: { [metaDataId: string]: Array<AssignOutputEffect> } = effects[effectActions.ASSIGN_VALUE];
+    const assignEffects: {| [metaDataId: string]: Array<AssignOutputEffect> |} = effects[effectActions.ASSIGN_VALUE];
     if (!assignEffects) {
         return effects;
     }
@@ -63,20 +42,8 @@ export const validateAssignEffects = async ({
         const validationContext = onGetValidationContext && onGetValidationContext();
 
         try {
-            const validatorResult = await getValidatorsResult(validators, value, validationContext);
-            const effectWithValidation =
-                validatorResult === true
-                    ? {
-                        ...effectsForId[lastEffect],
-                        valid: true,
-                    }
-                    : {
-                        ...effectsForId[lastEffect],
-                        valid: false,
-                        errorMessage: validatorResult.message,
-                        errorType: validatorResult.type,
-                        errorData: validatorResult.data,
-                    };
+            const validatorResult = await validateField({ validators }, value, validationContext);
+            const effectWithValidation = Object.assign({}, effectsForId[lastEffect], validatorResult);
 
             acc[metaData.id] = [...effectsForId.slice(0, lastEffect - 1), effectWithValidation];
             return acc;

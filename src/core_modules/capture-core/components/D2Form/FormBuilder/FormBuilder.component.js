@@ -11,24 +11,18 @@ import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 import type { PluginContext } from '../FormFieldPlugin/FormFieldPlugin.types';
-import { getValidators } from '../field/validators';
+import { getValidators, validateField } from '../field/validators';
+import type { ValidatorContainer } from '../field/validators';
 import type { DataElement } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
 
-export type ValidatorContainer = {
-    validator: (value: any, validationContext: ?Object) => boolean | Promise<boolean>,
-    message: string,
-    validatingMessage?: ?string,
-    type?: ?string,
-    async?: ?boolean,
-};
 
 export type FieldConfig = {
     id: string,
     component: React.ComponentType<any>,
     plugin?: boolean,
     props: Object,
-    validators?: ?Array<ValidatorContainer>,
+    validators?: ?Array<?ValidatorContainer>,
     commitEvent?: ?string,
     onIsEqual?: ?(newValue: any, oldValue: any) => boolean,
 };
@@ -47,7 +41,7 @@ type GetContainerPropsFn = (index: number, fieldsCount: number, field: FieldConf
 
 type FieldCommitConfig = {|
     fieldId: string,
-    validators?: ?Array<ValidatorContainer>,
+    validators?: ?Array<?ValidatorContainer>,
     onIsEqual?: ?(newValue: any, oldValue: any) => boolean,
 |}
 
@@ -99,54 +93,6 @@ type FieldCommitOptions = {
 type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompleteUid: string } };
 
 export class FormBuilder extends React.Component<Props> {
-    static async validateField(
-        { validators }: { validators?: ?Array<ValidatorContainer> },
-        value: any,
-        validationContext: ?Object,
-        onIsValidatingInternal: ?Function,
-    ): Promise<{ valid: boolean, errorMessage?: ?string, errorType?: ?string }> {
-        if (!validators || validators.length === 0) {
-            return {
-                valid: true,
-            };
-        }
-
-        const validatorResult = await validators
-            .reduce(async (passPromise, currentValidator) => {
-                const pass = await passPromise;
-                if (pass === true) {
-                    let result = currentValidator.validator(value, validationContext);
-                    if (result instanceof Promise) {
-                        result = onIsValidatingInternal ? onIsValidatingInternal(currentValidator.validatingMessage, result) : result;
-                        result = await result;
-                    }
-
-                    if (result === true || (result && result.valid)) {
-                        return true;
-                    }
-                    return {
-                        message: (result && result.errorMessage) || currentValidator.message,
-                        type: currentValidator.type,
-                        data: result && result.data,
-                    };
-                }
-                return pass;
-            }, Promise.resolve(true));
-
-        if (validatorResult !== true) {
-            return {
-                valid: false,
-                errorMessage: validatorResult.message,
-                errorType: validatorResult.type,
-                errorData: validatorResult.data,
-            };
-        }
-
-        return {
-            valid: true,
-        };
-    }
-
     static getAsyncUIState(fieldsUI: { [id: string]: FieldUI }) {
         return Object.keys(fieldsUI).reduce((accAsyncUIState, fieldId) => {
             const fieldUI = fieldsUI[fieldId];
@@ -219,7 +165,7 @@ export class FormBuilder extends React.Component<Props> {
 
                 let validationData;
                 try {
-                    validationData = await FormBuilder.validateField(
+                    validationData = await validateField(
                         field,
                         values[field.id],
                         validationContext,
@@ -429,7 +375,7 @@ export class FormBuilder extends React.Component<Props> {
         };
 
         this.commitUpdateTriggeredForFields[fieldId] = true;
-        const updatePromise = FormBuilder.validateField(
+        const updatePromise = validateField(
             { validators },
             value,
             onGetValidationContext && onGetValidationContext(),
