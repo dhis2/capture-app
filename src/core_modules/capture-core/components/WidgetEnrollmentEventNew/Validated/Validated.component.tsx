@@ -10,7 +10,7 @@ import type { Props } from './validated.types';
 
 const styles: Readonly<any> = {
     wrapper: {
-        paddingInlineStart: spacersNum.dp16,
+        paddingInlineStart: 0,
     },
 };
 
@@ -35,9 +35,6 @@ const ValidatedPlain = ({
         <Widget
             noncollapsible
             borderless
-            header={
-                <></>
-            }
         >
             <div className={classes.wrapper}>
                 {ready && (
