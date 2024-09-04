@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
-import { colors, spacersNum, IconChevronUp24 } from '@dhis2/ui';
+import { colors, spacers, spacersNum, IconChevronUp24 } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import type { WidgetCollapsibleProps, WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
 
@@ -25,9 +25,9 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: spacersNum.dp16,
+        padding: `${spacers.dp8} ${spacers.dp8} ${spacers.dp8} ${spacers.dp12}`,
         fontWeight: 500,
-        fontSize: 16,
+        fontSize: 15,
         color: colors.grey800,
     },
     children: {
@@ -53,7 +53,7 @@ const styles = {
     },
     toggleButton: {
         margin: `0 0 0 ${spacersNum.dp4}px`,
-        height: '24px',
+        height: '28px',
         borderRadius: '3px',
         color: colors.grey600,
         '&:hover': {
