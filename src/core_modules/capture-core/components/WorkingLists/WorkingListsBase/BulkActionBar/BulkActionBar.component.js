@@ -8,8 +8,8 @@ import type { ComponentProps } from './BulkActionBar.types';
 const styles = {
     container: {
         marginTop: '65px',
-        background: colors.green100,
-        border: `1px solid ${colors.green400}`,
+        background: colors.teal100,
+        border: `1px solid ${colors.teal400}`,
         width: '100%',
         padding: '10px',
         display: 'flex',
@@ -40,7 +40,7 @@ export const BulkActionBarComponentPlain = ({
             secondary
             onClick={onClearSelection}
         >
-            {i18n.t('Cancel')}
+            {i18n.t('Deselect all')}
         </Button>
     </div>
 );
