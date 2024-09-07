@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Tooltip, Button, spacers } from '@dhis2/ui';
+import { Tooltip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 
@@ -26,7 +26,6 @@ const getStyles = (theme: Theme) => ({
     },
     clearIcon: {
         color: theme.palette.text.secondary,
-        marginTop: spacers.dp4,
         '&:hover': {
             color: theme.palette.text.primary,
         },

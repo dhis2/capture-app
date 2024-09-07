@@ -25,15 +25,9 @@ type Props = {
 };
 
 const FeedbackBarComponentPlain = ({ feedback = {}, onClose }: Props) => {
-    const [hide, setHide] = useState(false);
     const { message, displayType } = feedback;
     const isAlertBarOpen = typeof message === 'string' && !displayType;
     const isDialogOpen = typeof message === 'object' && displayType === 'dialog';
-
-    const handleClose = () => {
-        setHide(true);
-        onClose();
-    };
 
     return (
         <>
@@ -45,11 +39,11 @@ const FeedbackBarComponentPlain = ({ feedback = {}, onClose }: Props) => {
                 )}
             </AlertStack>
             {isDialogOpen && (
-                <Modal hide={hide}>
-                    <ModalTitle>{message.title || ''}</ModalTitle>
-                    <ModalContent>{message.content || ''}</ModalContent>
+                <Modal hide={!isDialogOpen}>
+                    <ModalTitle>{message?.title || ''}</ModalTitle>
+                    <ModalContent>{message?.content || ''}</ModalContent>
                     <ModalActions>
-                        <Button onClick={handleClose} primary>
+                        <Button onClick={onClose} primary>
                             {i18n.t('Close')}
                         </Button>
                     </ModalActions>

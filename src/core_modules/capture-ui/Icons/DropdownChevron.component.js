@@ -1,7 +1,11 @@
-import PropTypes from 'prop-types';
+// @flow
 import React from 'react';
 
-export function ChevronDown({ className }) {
+type Props = {
+  className?: string,
+};
+
+export function ChevronDown({ className }: Props) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -14,11 +18,7 @@ export function ChevronDown({ className }) {
     );
 }
 
-ChevronDown.propTypes = {
-    className: PropTypes.string,
-};
-
-export function ChevronUp({ className }) {
+export function ChevronUp({ className }: Props) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,3 @@ export function ChevronUp({ className }) {
         </svg>
     );
 }
-
-ChevronUp.propTypes = {
-    className: PropTypes.string,
-};
