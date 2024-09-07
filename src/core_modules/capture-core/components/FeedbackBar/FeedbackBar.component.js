@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, type Node } from 'react';
+import React, { type Node } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions, AlertStack, AlertBar } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
