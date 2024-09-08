@@ -708,7 +708,7 @@ msgid "Register"
 msgstr "ລົົງທະບຽນ"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດໃນການແກ້ໄຂເຫດການນີ້"
 
 msgid "Event details"
 msgstr "ລາຍລະອຽດເຫດການ"
@@ -728,16 +728,16 @@ msgid "Assign"
 msgstr "Assign"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "ເຫດການໄດ້ຖືກມອບໝາຍໃຫ້ {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "ຄຳຕິຊົມ"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດໃນການລົບຄວາມສໍາພັນນີ້"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດໃນການສ້າງຄວາມສຳພັນໃດໆ"
 
 msgid "Add relationship"
 msgstr "ເພີ່ມຄວາມສໍາພັນ"
@@ -752,7 +752,7 @@ msgid "Selected"
 msgstr "ເລືອກ"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "ຂອບເຂດຂອງໜ່ວຍງານ"
 
 msgid "Selected program"
 msgstr "ເລືອກສາຍງານ"
