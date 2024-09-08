@@ -1,8 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Popover from '@material-ui/core/Popover';
-import { Button } from '@dhis2/ui';
+import { Button, Popover } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
@@ -23,15 +22,6 @@ const getStyles = (theme: Theme) => ({
         textTransform: 'none',
     },
 });
-
-const POPOVER_ANCHOR_ORIGIN = {
-    vertical: 'bottom',
-    horizontal: 'left',
-};
-const POPOVER_TRANSFORM_ORIGIN = {
-    vertical: 'top',
-    horizontal: 'left',
-};
 
 type Props = {
     itemId: string,
@@ -201,22 +191,23 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {button}
                 </div>
-                <Popover
-                    open={selectorVisible && isMounted}
-                    anchorEl={this.anchorRef.current}
-                    onClose={this.closeFilterSelector}
-                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
-                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
-                >
-                    {
-                        (() => {
-                            if (selectorVisible) {
-                                return this.renderSelectorContents();
-                            }
-                            return null;
-                        })()
-                    }
-                </Popover>
+                {(selectorVisible && isMounted) && (
+                    <Popover
+                        reference={this.anchorRef.current}
+                        arrow={false}
+                        placement="bottom-start"
+                        onClickOutside={this.closeFilterSelector}
+                    >
+                        {
+                            (() => {
+                                if (selectorVisible) {
+                                    return this.renderSelectorContents();
+                                }
+                                return null;
+                            })()
+                        }
+                    </Popover>
+                )}
             </React.Fragment>
         );
     }
