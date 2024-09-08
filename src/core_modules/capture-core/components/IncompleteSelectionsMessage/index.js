@@ -14,7 +14,7 @@ const messageBoxStyle = {
     borderRadius: '4px',
 };
 
-export const IncompleteSelectionsMessage = ({ children, dataTest = 'informative-message' }) => (
+export const IncompleteSelectionsMessage = ({ children, dataTest = 'informative-paper' }) => (
     <div style={containerStyle}>
         <div style={messageBoxStyle} data-test={dataTest}>
             {children}
