@@ -3,8 +3,8 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import { IconButton, withStyles } from '@material-ui/core';
-import { IconArrowRight16, IconCross24, Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { IconArrowRight16, IconCross24, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
@@ -23,7 +23,7 @@ const getStyles = (theme: Theme) => ({
     relationshipTypeName: {
         fontSize: 14,
         fontWeight: 600,
-        color: 'rgba(0,0,0,0.7)',
+        color: colors.grey700,
     },
     relationshipsContainer: {
     },
@@ -44,6 +44,10 @@ const getStyles = (theme: Theme) => ({
     },
     relationshipActions: {
         padding: 7,
+    },
+    deleteButton: {
+        border: 'none !important',
+        borderRadius: '50% !important',
     },
     addButtonContainer: {
         display: 'inline-block',
@@ -84,6 +88,7 @@ type Props = {
         relationshipActions: string,
         relationshipHighlight: string,
         tooltip: string,
+        deleteButton: string,
         addButtonContainer: string,
     },
     relationships: Array<Relationship>,
@@ -144,13 +149,14 @@ class RelationshipsPlain extends React.Component<Props> {
                         enabled={!canDelete}
                         wrapperClassName={classes.tooltip}
                     >
-                        <IconButton
+                        <Button
                             data-test="delete-relationship-button"
                             onClick={() => { onRemoveRelationship(relationship.clientId); }}
                             disabled={!canDelete}
-                        >
-                            <IconCross24 />
-                        </IconButton>
+                            icon={<IconCross24 />}
+                            secondary
+                            className={classes.deleteButton}
+                        />
                     </ConditionalTooltip>
                 </div>
             </div>
@@ -203,6 +209,7 @@ class RelationshipsPlain extends React.Component<Props> {
                                 disabled={!canCreate}
                                 small={smallMainButton}
                                 dataTest="add-relationship-button"
+                                secondary
                             >
                                 {i18n.t('Add relationship')}
                             </Button>

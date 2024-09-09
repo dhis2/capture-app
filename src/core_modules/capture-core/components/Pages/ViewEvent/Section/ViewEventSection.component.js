@@ -1,8 +1,8 @@
 // @flow
 
 import * as React from 'react';
-import { withStyles, IconButton } from '@material-ui/core';
-import { IconChevronDown24, IconChevronUp24, colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { IconChevronDown24, IconChevronUp24, colors, Button } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -21,6 +21,10 @@ const getStyles = (theme: Theme) => ({
     },
     toggleCollapseButton: {
         padding: 4,
+        border: 'none !important',
+        borderRadius: '50% !important',
+        width: theme.typography.pxToRem(28),
+        marginLeft: theme.typography.pxToRem(2),
     },
     contentContainer: {
         padding: theme.typography.pxToRem(10),
@@ -64,15 +68,16 @@ class ViewEventSectionPlain extends React.Component<Props, State> {
 
     renderCollapsable = () => {
         const classes = this.props.classes;
+        const icon = this.state.collapsed ? <IconChevronDown24 /> : <IconChevronUp24 />;
 
         return (
-            <IconButton className={classes.toggleCollapseButton} onClick={this.toggleCollapse}>
-                {this.state.collapsed ?
-                    <IconChevronDown24 /> :
-                    <IconChevronUp24 />
-                }
-            </IconButton>
-
+            <Button
+                icon={icon}
+                onClick={this.toggleCollapse}
+                className={classes.toggleCollapseButton}
+                small
+                secondary
+            />
         );
     }
 
