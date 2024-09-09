@@ -20,6 +20,8 @@ export type ErrorMessagesForRelatedStages = {|
 export type LinkableEvent = {
     id: string,
     label: string,
+    isLinkable: boolean,
+    status: string,
 }
 
 export type Props = {|

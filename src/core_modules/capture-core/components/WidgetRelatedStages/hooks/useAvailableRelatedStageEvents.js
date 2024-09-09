@@ -45,19 +45,20 @@ export const useAvailableRelatedStageEvents = ({
             staleTime: 0,
             select: (response: any) => {
                 const events = handleAPIResponse(REQUESTED_ENTITIES.events, response);
-
                 if (events.length === 0) return [];
 
                 return events
-                    .filter(event => !event.relationships ||
-                        !event.relationships.some(relationship => relationship.relationshipType === relationshipTypeId))
                     .map((event) => {
+                        const isLinkable = !event.relationships
+                            ?.some(relationship => relationship.relationshipType === relationshipTypeId);
                         const label = event.occurredAt
                             ? `${occurredLabel}: ${convertDateObjectToDateFormatString(new Date(event.occurredAt))}`
                             : `${scheduledLabel}: ${convertDateObjectToDateFormatString(new Date(event.scheduledAt))}`;
 
                         return ({
                             id: event.event,
+                            status: event.status,
+                            isLinkable,
                             label,
                         });
                     });
