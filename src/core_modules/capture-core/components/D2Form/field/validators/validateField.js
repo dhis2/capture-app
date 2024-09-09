@@ -9,7 +9,7 @@ export type Validations = {
 };
 
 export const validateField = async (
-    { validators }: { validators?: ?Array<?ValidatorContainer> },
+    { validators }: { validators?: Array<ValidatorContainer> },
     value: any,
     validationContext: ?Object,
     onIsValidatingInternal: ?Function,
@@ -22,9 +22,6 @@ export const validateField = async (
 
     const validatorResult = await validators.reduce(async (passPromise, currentValidator) => {
         const pass = await passPromise;
-        if (!currentValidator) {
-            return pass;
-        }
         if (pass === true) {
             let result = currentValidator.validator(value, validationContext);
             if (result instanceof Promise) {

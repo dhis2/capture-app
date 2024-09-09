@@ -22,7 +22,7 @@ export type FieldConfig = {
     component: React.ComponentType<any>,
     plugin?: boolean,
     props: Object,
-    validators?: ?Array<?ValidatorContainer>,
+    validators?: Array<ValidatorContainer>,
     commitEvent?: ?string,
     onIsEqual?: ?(newValue: any, oldValue: any) => boolean,
 };
@@ -41,7 +41,7 @@ type GetContainerPropsFn = (index: number, fieldsCount: number, field: FieldConf
 
 type FieldCommitConfig = {|
     fieldId: string,
-    validators?: ?Array<?ValidatorContainer>,
+    validators?: Array<ValidatorContainer>,
     onIsEqual?: ?(newValue: any, oldValue: any) => boolean,
 |}
 
