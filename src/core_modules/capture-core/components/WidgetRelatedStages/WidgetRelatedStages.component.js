@@ -2,12 +2,12 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { useRelatedStages } from './useRelatedStages';
 import type { Props, RelatedStageDataValueStates } from './WidgetRelatedStages.types';
+import type { ErrorMessagesForRelatedStages } from './RelatedStagesActions';
 import { RelatedStagesActions } from './RelatedStagesActions';
 import { relatedStageStatus } from './constants';
 import { useStageLabels } from './hooks/useStageLabels';
-import type { ErrorMessagesForRelatedStages } from './RelatedStagesActions';
 import { relatedStageWidgetIsValid } from './relatedStageEventIsValid/relatedStageEventIsValid';
-import { useAvailableRelatedStageEvents } from './hooks/useAvailableRelatedStageEvents';
+import { useRelatedStageEvents } from './hooks/useRelatedStageEvents';
 
 const WidgetRelatedStagesPlain = ({
     programId,
@@ -21,7 +21,7 @@ const WidgetRelatedStagesPlain = ({
         programId,
     });
     const { scheduledLabel, occurredLabel } = useStageLabels(programId, constraint?.programStage?.id);
-    const { linkableEvents, isLoading: isLoadingEvents } = useAvailableRelatedStageEvents({
+    const { events, linkableEvents, isLoading: isLoadingEvents } = useRelatedStageEvents({
         stageId: constraint?.programStage?.id,
         relationshipTypeId: selectedRelationshipType?.id,
         scheduledLabel,
@@ -90,6 +90,7 @@ const WidgetRelatedStagesPlain = ({
             relationshipName={selectedRelationshipType.displayName}
             scheduledLabel={scheduledLabel}
             type={currentRelatedStagesStatus}
+            events={events}
             linkableEvents={linkableEvents}
             relatedStagesDataValues={relatedStageDataValues}
             setRelatedStagesDataValues={setRelatedStageDataValues}

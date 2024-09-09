@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import { convertDateObjectToDateFormatString } from '../../../utils/converters/date';
-import type { LinkableEvent } from '../RelatedStagesActions/RelatedStagesActions.types';
+import type { RelatedStagesEvents } from '../RelatedStagesActions/RelatedStagesActions.types';
 import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../utils/api';
 
@@ -15,12 +15,13 @@ type Props = {
 }
 
 type ReturnType = {
-    linkableEvents: Array<LinkableEvent>,
+    events: Array<RelatedStagesEvents>,
+    linkableEvents: Array<RelatedStagesEvents>,
     isLoading: boolean,
     isError: boolean,
 }
 
-export const useAvailableRelatedStageEvents = ({
+export const useRelatedStageEvents = ({
     stageId,
     enrollmentId,
     relationshipTypeId,
@@ -36,7 +37,7 @@ export const useAvailableRelatedStageEvents = ({
             fields: 'event,occurredAt,scheduledAt,status,relationships',
         },
     }), [stageId, enrollmentId]);
-    const { data, isLoading, isError } = useApiDataQuery<Array<LinkableEvent>>(
+    const { data, isLoading, isError } = useApiDataQuery<Array<RelatedStagesEvents>>(
         ['availableRelatedStageEvents', stageId, enrollmentId, relationshipTypeId],
         query,
         {
@@ -67,7 +68,8 @@ export const useAvailableRelatedStageEvents = ({
     );
 
     return {
-        linkableEvents: data ?? [],
+        events: data ?? [],
+        linkableEvents: data?.filter(event => event.isLinkable) ?? [],
         isLoading,
         isError,
     };
