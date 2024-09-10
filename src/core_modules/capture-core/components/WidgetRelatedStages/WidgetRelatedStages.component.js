@@ -1,5 +1,6 @@
 // @flow
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
+import { useDataQuery } from '@dhis2/app-runtime';
 import { useRelatedStages } from './useRelatedStages';
 import type { Props, RelatedStageDataValueStates } from './WidgetRelatedStages.types';
 import { RelatedStagesActions } from './RelatedStagesActions';
@@ -28,6 +29,16 @@ const WidgetRelatedStagesPlain = ({
         occurredLabel,
         enrollmentId,
     });
+
+    const { loading: orgUnitLoading, data: orgUnitData } = useDataQuery({
+        orgUnits: {
+            resource: 'me',
+            params: {
+                fields: ['organisationUnits[id,path,displayName,children::isNotEmpty]'],
+            },
+        },
+    });
+
     const [saveAttempted, setSaveAttempted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
     const [relatedStageDataValues, setRelatedStageDataValues] = useState<RelatedStageDataValueStates>({
@@ -36,6 +47,17 @@ const WidgetRelatedStagesPlain = ({
         orgUnit: undefined,
         linkedEventId: undefined,
     });
+
+    useEffect(() => {
+        const orgUnits = orgUnitData?.orgUnits?.organisationUnits || [];
+        if (orgUnits.length === 1 && !orgUnits[0]?.children) {
+            const { displayName, ...rest } = orgUnits[0];
+            setRelatedStageDataValues(prev => ({
+                ...prev,
+                orgUnit: { ...rest, name: displayName },
+            }));
+        }
+    }, [orgUnitData]);
 
     const addErrorMessage = (message: ErrorMessagesForRelatedStages) => {
         setErrorMessages((prevMessages: Object) => ({
@@ -81,7 +103,7 @@ const WidgetRelatedStagesPlain = ({
         }
     }, [formIsValid, relatedStageDataValues]);
 
-    if (!currentRelatedStagesStatus || !selectedRelationshipType || isLoadingEvents) {
+    if (!currentRelatedStagesStatus || !selectedRelationshipType || isLoadingEvents || orgUnitLoading) {
         return null;
     }
 
@@ -103,8 +125,8 @@ const WidgetRelatedStagesPlain = ({
     );
 };
 
-export const WidgetRelatedStages = forwardRef<Props, {|
+export const WidgetRelatedStages = forwardRef < Props, {|
     eventHasLinkableStageRelationship: Function,
-    formIsValidOnSave: Function,
-    getLinkedStageValues: Function
-|}>(WidgetRelatedStagesPlain);
+        formIsValidOnSave: Function,
+            getLinkedStageValues: Function
+                |}>(WidgetRelatedStagesPlain);
