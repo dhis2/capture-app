@@ -1,3 +1,10 @@
+# [101.4.0](https://github.com/dhis2/capture-app/compare/v101.3.3...v101.4.0) (2024-09-09)
+
+
+### Features
+
+* [DHIS2-17878][DHIS2-17048] Add overflow menu with actions to stages&events ([#3756](https://github.com/dhis2/capture-app/issues/3756)) ([12af138](https://github.com/dhis2/capture-app/commit/12af1384f4ab4e9c6eeef2460bee7d53bfb6b8cc))
+
 ## [101.3.3](https://github.com/dhis2/capture-app/compare/v101.3.2...v101.3.3) (2024-09-02)
 
 
