@@ -55,7 +55,6 @@ export const LinkToExistingPlain = ({
                 validationText={saveAttempted && errorMessages.linkedEventId}
             >
                 {linkableEvents
-                    .filter(event => event.isLinkable)
                     .map(event => (
                         <SingleSelectOption
                             key={event.id}
