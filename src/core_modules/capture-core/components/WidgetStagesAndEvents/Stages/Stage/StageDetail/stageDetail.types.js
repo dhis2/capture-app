@@ -1,7 +1,7 @@
 // @flow
 import type { StageDataElement, StageCommonProps } from '../../../types/common.types';
 
- type ExtractedProps = {|
+type ExtractedProps = {|
     events: Array<ApiEnrollmentEvent>,
     dataElements: Array<StageDataElement>,
     eventName: string,
@@ -9,6 +9,10 @@ import type { StageDataElement, StageCommonProps } from '../../../types/common.t
     repeatable?: boolean,
     enableUserAssignment?: boolean,
     stageId: string,
+    onCreateNew: (stageId: string) => void,
+    onDeleteEvent: (eventId: string) => void,
+    onUpdateEventStatus: (eventId: string, status: string) => void,
+    onRollbackDeleteEvent: (eventId: ApiEnrollmentEvent) => void,
     hiddenProgramStage?: boolean,
     ...CssClasses,
 |};
