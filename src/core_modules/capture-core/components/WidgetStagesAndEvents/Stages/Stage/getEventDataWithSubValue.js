@@ -12,7 +12,9 @@ const getFileResourceSubvalue = async (keys: Object, querySingleResource: QueryS
                 return {
                     id,
                     name,
-                    url: `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}`,
+                    url: featureAvailable(FEATURES.trackerFileEndpoint)
+                        ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${key}/file`
+                        : `${absoluteApiPath}/events/files?dataElementUid=${key}&eventUid=${eventId}`,
                 };
             }
             return {};
