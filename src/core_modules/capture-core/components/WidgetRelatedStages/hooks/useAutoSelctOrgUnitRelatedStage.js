@@ -7,19 +7,18 @@ export const useOrgUnitAutoSelect = (setRelatedStageDataValues: any) => {
     const queryFn = {
         resource: 'organisationUnits',
         params: {
-            fields: 'id,path,displayName,children::isNotEmpty',
+            fields: 'id,path,displayName',
             withinUserSearchHierarchy: true,
-            paging: 2,
+            page: 2,
         },
     };
     const { data, isLoading } = useApiMetadataQuery(queryKey, queryFn);
 
     useEffect(() => {
-        const orgUnits = data?.organisationUnits;
-        if (isLoading || !orgUnits || orgUnits.length !== 1) return;
-
-        const [orgUnit] = orgUnits;
-        if (orgUnit && !orgUnit.children) {
+        if (!isLoading && data) {
+            const orgUnits = data.organisationUnits;
+            if (!orgUnits || orgUnits.length !== 1) return;
+            const [orgUnit] = orgUnits;
             const { displayName, ...rest } = orgUnit;
             setRelatedStageDataValues(prev => ({
                 ...prev,
@@ -27,7 +26,6 @@ export const useOrgUnitAutoSelect = (setRelatedStageDataValues: any) => {
             }));
         }
     }, [data, isLoading, setRelatedStageDataValues]);
-
 
     return {
         isLoading,
