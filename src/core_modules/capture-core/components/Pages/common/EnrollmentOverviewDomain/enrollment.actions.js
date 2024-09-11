@@ -12,6 +12,8 @@ export const enrollmentSiteActionTypes = {
     UPDATE_ENROLLMENT_ATTRIBUTE_VALUES: 'Enrollment.UpdateEnrollmentAttributeValues',
     ROLLBACK_ENROLLMENT_EVENT: 'Enrollment.RollbackEnrollmentEvent',
     ROLLBACK_ENROLLMENT_EVENTS: 'Enrollment.RollbackEnrollmentEvents',
+    DELETE_ENROLLMENT_EVENT: 'Enrollment.DeleteEnrollmentEvent',
+    UPDATE_ENROLLMENT_EVENT_STATUS: 'Enrollment.UpdateEnrollmentEventStatus',
     COMMIT_ENROLLMENT_EVENT: 'Enrollment.CommitEnrollmentEvent',
     COMMIT_ENROLLMENT_EVENTS: 'Enrollment.CommitEnrollmentEvents',
     SAVE_FAILED: 'Enrollment.SaveFailed',
@@ -54,6 +56,16 @@ export const commitEnrollmentEvent = (eventId: string) =>
 
 export const updateOrAddEnrollmentEvents = ({ events }: EventReducerProps) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_OR_ADD_ENROLLMENT_EVENTS)({ events });
+
+export const deleteEnrollmentEvent = (eventId: string) =>
+    actionCreator(enrollmentSiteActionTypes.DELETE_ENROLLMENT_EVENT)({ eventId });
+
+export const updateEnrollmentEventStatus = (eventId: string, status: string, updatedAt: string) =>
+    actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT_STATUS)({
+        eventId,
+        status,
+        updatedAt,
+    });
 
 export const rollbackEnrollmentEvents = ({ events }: EventReducerProps) =>
     actionCreator(enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENTS)({ events });
