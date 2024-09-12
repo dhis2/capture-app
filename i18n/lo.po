@@ -1335,6 +1335,9 @@ msgstr "ວັນທີທີ່ກຳນົດໄວ້ບໍ່ສາມາດ
 msgid "Event completed"
 msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
+
 msgid "Back to all stages and events"
 msgstr "ກັບໄປທຸກຂັ້ນຕອນ ແລະ ເຫດການ"
 
@@ -1507,9 +1510,6 @@ msgstr "ເພື່ອເປີດເຫດການນີ້, ກະລຸນ�
 
 msgid "Show {{ rest }} more"
 msgstr "ສະແດງ {{ rest }} ເພີ່ມເຕີມ"
-
-msgid "Reset list"
-msgstr "ເຮັດລາຍຊື່ຄືນໃໝ່"
 
 msgid "Go to full {{ eventName }}"
 msgstr "ໄປທີ່ {{ eventName }} ແບບເຕັມ"
@@ -1701,13 +1701,13 @@ msgid "Download with current filters"
 msgstr "ດາວໂຫຼດດ້ວຍຕົວກອງປັດຈຸບັນ"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດຂຶ້ນ. ເບິ່ງລາຍລະອຽດ"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "ກຳນົດເວລາ {{ escape }} ຈົນເຖິງ {{ time }}"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "ເກີນກຳນົດ {{ escape }} ຈົນເຖິງ {{ time }}"
 
 msgid "Overdue"
 msgstr "ກາຍເວລາທີ່ກໍານົດ"
@@ -1719,76 +1719,76 @@ msgid "Visited"
 msgstr "ເຂົ້າຊົມ"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}} ໃນໂປຣແກຣມ {{escape}} {{programName}}"
 
 msgid "Program not found"
-msgstr ""
+msgstr "ບໍ່ພົບໂປຣແກຣມ"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "ໂປແກຣມນີ້ບໍ່ແມ່ນໂປແກຣມຕິດຕາມ"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກເຫດການ"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "ບໍ່ສາມາດບັນທຶກເຫດການໄດ້"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "ບໍ່ສາມາດລົບເຫດການໄດ້"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດບັນທຶກລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດເພີ່ມລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດລົບລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການຄົ້ນຫາຫົວໜ່ວຍການຈັດຕັ້ງ"
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກການຕິດຕາມລາຍບຸກຄົນ"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກການລົງທະບຽນ"
 
 msgid "Error saving the enrollment event"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກການລົງທະບຽນເຫດການ"
 
 msgid "Error deleting the enrollment event"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການລົບການລົງທະບຽນເຫດການ"
 
 msgid "Error editing the event, the changes made were not saved"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການແກ້ໄຂເຫດການ, ການປ່ຽນແປງທີ່ເຮັດບໍ່ໄດ້ມີການບັນທຶກ"
 
 msgid "Error updating the Assignee"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການອັບເດດຜູ້ຮັບຜິດຊອບ"
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
 
 msgid "Time"
-msgstr ""
+msgstr "ເວລາ"
 
 msgid "From date"
 msgstr "From date"
 
 msgid "From time"
-msgstr ""
+msgstr "ຈາກເວລາ"
 
 msgid "To date"
 msgstr "ເຖີງວັນທີ່"
 
 msgid "To time"
-msgstr ""
+msgstr "ເຖິງເວລາ"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "ໜ້າ {{currentPage}}"
 
 msgid "Area on map saved"
-msgstr ""
+msgstr "ບັນທຶກພື້ນທີ່ໃນແຜນທີ່ແລ້ວ"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "ຮູບແບບຄວາມເຂົ້າກັນໄດ້"

@@ -102,6 +102,7 @@ export type CachedDataEntryForm = {
 export type CachedProgramStage = {
     id: string,
     access: Object,
+    blockEntryForm: boolean,
     name: string,
     displayName: string,
     description: ?string,
