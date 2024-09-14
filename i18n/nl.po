@@ -1548,6 +1548,23 @@ msgstr "Deze fase kan maar één evenement hebben"
 msgid "New {{ eventName }} event"
 msgstr "Nieuwe {{ eventName }} evenement"
 
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "Overslaan"
+
 msgid "To open this event, please wait until saving is complete"
 msgstr "Wacht tot het opslaan is voltooid om dit evenement te openen"
 
