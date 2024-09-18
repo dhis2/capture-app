@@ -1,15 +1,15 @@
 # 
 # Translators:
+# Karoline Tufte Lien <karoline@dhis2.org>, 2024
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2024
 # Merethe Wollan Blisten, 2024
-# Karoline Tufte Lien <karoline@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
+"Last-Translator: Merethe Wollan Blisten, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +48,7 @@ msgid "More"
 msgstr "Mer"
 
 msgid "View {{programName}} dashboard"
-msgstr "Vis {{programName}} dashbord"
+msgstr "Vis  {{programName}}  dashbord"
 
 msgid "View dashboard"
 msgstr "Vis dashbord"
@@ -335,7 +335,7 @@ msgstr "Ønsker du å fullføre registreringen og alle aktive hendelser?"
 msgid "{{count}} event in {{programStageName}}"
 msgid_plural "{{count}} event in {{programStageName}}"
 msgstr[0] "{{count}}hendelse i {{programStageName}}"
-msgstr[1] "{{count}}hendelser i {{programStageName}}"
+msgstr[1] "{{count}} hendelser i {{programStageName}}"
 
 msgid "Yes, complete enrollment and events"
 msgstr "Ja, fullfør registreringen og hendelsen. "
@@ -806,7 +806,7 @@ msgid "Refer"
 msgstr "Henvis"
 
 msgid "You can't add any more {{ programStageName }} events"
-msgstr "Du kan ikke legge til flere {{ programStageName }}-hendelser"
+msgstr "Du kan ikke legge til flere {{ programStageName }} hendelser"
 
 msgid "Cancel without saving"
 msgstr "Avbryt uten å lagre"
@@ -845,7 +845,7 @@ msgstr "Vennligst velg en organisasjonsenhet"
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
-msgstr "Du har ikke tilgang til å lage en {{trackedEntityName}}her"
+msgstr "Du har ikke tilgang til å lage en {{trackedEntityName}} her"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Velg {{missingCategories}} for å starte rapportering"
@@ -991,7 +991,7 @@ msgstr "Søk etter attributter"
 msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Fyll inn minst {{count}}attributt for å søke"
-msgstr[1] "Fyll inn minst {{count}}attributter for å søke"
+msgstr[1] "Fyll inn minst {{count}} attributter for å søke"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Kunne ikke hente metadata. Prøv igjen senere."
@@ -1089,8 +1089,8 @@ msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}} of these fields to "
 "search{{escape}} {{searchableAttributes}}"
 msgstr ""
-"Fyll ut minst {{minAttributesRequiredToSearch}} av disse feltene for å "
-"søke{{escape}} {{searchableAttributes}}"
+"Fyll ut minst {{minAttributesRequiredToSearch}} av disse feltene for å søke "
+"{{escape}} {{searchableAttributes}}"
 
 msgid "Fill in this field to search{{escape}} {{searchableAttributes}}"
 msgstr "Fyll ut dette feltet for å søke {{escape}} {{searchableAttributes}}"
@@ -1268,7 +1268,7 @@ msgid ""
 "{{newOrgUnit}}{{escape}}"
 msgstr ""
 "Overfør eierskapet til registreringen fra {{ownerOrgUnit}} til "
-"{{newOrgUnit}}{{escape}}"
+"{{newOrgUnit}} {{escape}}"
 
 msgid ""
 "You will lose access to the enrollment when transferring ownership to "
@@ -1487,7 +1487,7 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
 
 msgid "{{trackedEntityTypeName}} profile"
-msgstr "{{trackedEntityTypeName}}profil"
+msgstr "{{trackedEntityTypeName}} profil"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
@@ -1499,10 +1499,10 @@ msgid "Choose a {{linkableStageLabel}}"
 msgstr "Velg en {{linkableStageLabel}}"
 
 msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }}er ikke repiterbar"
+msgstr "{{ linkableStageLabel }} er ikke repiterbar"
 
 msgid "{{ linkableStageLabel }} has no linkable events"
-msgstr "{{ linkableStageLabel }}har ingen hendelser som kan kobles til"
+msgstr "{{ linkableStageLabel }} har ingen hendelser som kan kobles til"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Uklare relasjoner, kontakt din systemadministrator"
@@ -1573,7 +1573,7 @@ msgstr "Hendelser kunne ikke hentes. Prøv igjen senere."
 msgid "{{ count }} event"
 msgid_plural "{{ count }} event"
 msgstr[0] "{{ count }} hendelse"
-msgstr[1] "{{count}}hendelse"
+msgstr[1] "{{count}} hendelse"
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} forfalt"
@@ -1618,7 +1618,7 @@ msgid "Change"
 msgstr "Endre"
 
 msgid "New {{trackedEntityTypeName}} relationship"
-msgstr "Ny {{trackedEntityTypeName}}relasjon"
+msgstr "Ny {{trackedEntityTypeName}} relasjon"
 
 msgid "Missing implementation step"
 msgstr "Manglende implementeringstrinn"
@@ -1640,7 +1640,7 @@ msgid ""
 msgstr "Noe gikk galt under innlasting av relasjoner. Prøv igjen senere."
 
 msgid "{{trackedEntityTypeName}} relationships"
-msgstr "{{trackedEntityTypeName}}-relasjoner"
+msgstr "{{trackedEntityTypeName}} relasjoner"
 
 msgid "Delete relationship"
 msgstr "Slett relasjon"
