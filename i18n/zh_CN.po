@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -479,18 +479,6 @@ msgstr "包含文本"
 
 msgid "Yes"
 msgstr "是"
-
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
-
-msgid "Years"
-msgstr "年"
-
-msgid "Months"
-msgstr "月"
-
-msgid "Days"
-msgstr "天"
 
 msgid "Uploading file"
 msgstr "上传文件"
@@ -1312,6 +1300,9 @@ msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
 msgid "Event completed"
 msgstr "事件完成"
 
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
+
 msgid "Back to all stages and events"
 msgstr "回到所有阶段和事件"
 
@@ -1461,8 +1452,31 @@ msgstr "报告日期"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr "这个阶段只能有一个事件"
+
 msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "跳过"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr "要打开此活动，请等待保存完成"
@@ -1470,14 +1484,8 @@ msgstr "要打开此活动，请等待保存完成"
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest }} 更多"
 
-msgid "Reset list"
-msgstr "重置列表"
-
 msgid "Go to full {{ eventName }}"
 msgstr "转到完整的{{ eventName }}"
-
-msgid "This stage can only have one event"
-msgstr "这个阶段只能有一个事件"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr "无法检索事件。请稍后再试。"
