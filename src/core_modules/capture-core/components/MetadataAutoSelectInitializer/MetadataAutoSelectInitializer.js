@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useMetadataAutoSelect } from './hooks/useMetadataAutoSelect';
+import { useOrgUnitsForAutoSelect } from '../../dataQueries';
 import { LoadingMaskForPage } from '../LoadingMasks';
 
 type Props = {|
@@ -8,9 +8,9 @@ type Props = {|
 |}
 
 export const MetadataAutoSelectInitializer = ({ children }: Props) => {
-    const { isReady } = useMetadataAutoSelect();
+    const { isLoading } = useOrgUnitsForAutoSelect();
 
-    if (!isReady) {
+    if (isLoading) {
         return (
             <LoadingMaskForPage />
         );
