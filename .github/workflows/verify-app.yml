@@ -193,7 +193,7 @@ jobs:
       - name: Build
         run: yarn build
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: app-build
           path: |
@@ -214,7 +214,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: app-build
 
