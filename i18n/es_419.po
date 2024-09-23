@@ -1518,6 +1518,23 @@ msgstr ""
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
 
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "Omitir"
+
 msgid "To open this event, please wait until saving is complete"
 msgstr ""
 
