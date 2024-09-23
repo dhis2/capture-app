@@ -147,7 +147,7 @@ class RelationshipsPlain extends React.Component<Props> {
                         wrapperClassName={classes.tooltip}
                     >
                         <IconButton
-                            data-test="delete-relationship-button"
+                            dataTest="delete-relationship-button"
                             onClick={() => { onRemoveRelationship(relationship.clientId); }}
                             disabled={!canDelete}
                             secondary
