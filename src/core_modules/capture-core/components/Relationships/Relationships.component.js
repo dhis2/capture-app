@@ -4,6 +4,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
+import { IconButton } from 'capture-ui';
 import { IconArrowRight16, IconDelete16, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { RelationshipType } from '../../metaData';
@@ -44,11 +45,6 @@ const getStyles = (theme: Theme) => ({
     },
     relationshipActions: {
         padding: 7,
-    },
-    deleteButton: {
-        border: 'none !important',
-        borderRadius: '50% !important',
-        width: 36,
     },
     addButtonContainer: {
         display: 'inline-block',
@@ -150,14 +146,15 @@ class RelationshipsPlain extends React.Component<Props> {
                         enabled={!canDelete}
                         wrapperClassName={classes.tooltip}
                     >
-                        <Button
+                        <IconButton
                             data-test="delete-relationship-button"
                             onClick={() => { onRemoveRelationship(relationship.clientId); }}
                             disabled={!canDelete}
-                            icon={<IconDelete16 />}
                             secondary
-                            className={classes.deleteButton}
-                        />
+                        >
+                            <IconDelete16 />
+                        </IconButton>
+
                     </ConditionalTooltip>
                 </div>
             </div>
