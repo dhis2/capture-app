@@ -37,7 +37,7 @@ const styles = {
         width: '100%',
     },
     container: {
-        padding: `0 ${spacers.dp16}`,
+        padding: `0 ${spacers.dp12}`,
         marginBottom: spacers.dp8,
     },
     actions: {

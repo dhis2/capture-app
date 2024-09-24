@@ -10,22 +10,22 @@ import { DefaultPageTitle, EnrollmentPageKeys } from './DefaultEnrollmentLayout.
 
 const getEnrollmentPageStyles = () => ({
     container: {
-        padding: '16px 24px 16px 24px',
+        padding: spacersNum.dp16,
     },
     contentContainer: {
         position: 'relative',
     },
     columns: {
         display: 'flex',
-        gap: spacers.dp16,
+        gap: spacers.dp12,
     },
     leftColumn: {
-        flexGrow: 3,
+        flexGrow: 10,
         flexShrink: 1,
         width: 872,
         display: 'flex',
         flexDirection: 'column',
-        gap: spacers.dp16,
+        gap: spacers.dp12,
     },
     rightColumn: {
         flexGrow: 1,
@@ -33,13 +33,12 @@ const getEnrollmentPageStyles = () => ({
         width: 360,
         display: 'flex',
         flexDirection: 'column',
-        gap: spacers.dp16,
+        gap: spacers.dp12,
     },
     title: {
         fontSize: '1.25rem',
         color: colors.grey900,
         fontWeight: 500,
-        paddingTop: spacersNum.dp8,
         paddingBottom: spacersNum.dp16,
     },
 });

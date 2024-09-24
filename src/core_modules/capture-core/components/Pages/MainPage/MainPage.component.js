@@ -18,12 +18,12 @@ import {
 
 const getStyles = () => ({
     listContainer: {
-        padding: 24,
+        padding: 16,
     },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-        gap: spacers.dp16,
+        gap: spacers.dp12,
         padding: spacers.dp16,
     },
     half: {
@@ -33,7 +33,7 @@ const getStyles = () => ({
         flex: 0.4,
     },
     searchBoxWrapper: {
-        padding: spacers.dp16,
+        padding: spacers.dp12,
         background: colors.white,
         border: '1px solid',
         borderColor: colors.grey400,

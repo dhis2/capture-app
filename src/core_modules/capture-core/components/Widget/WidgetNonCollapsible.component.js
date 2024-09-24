@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
-import { colors, spacersNum } from '@dhis2/ui';
+import { colors, spacers } from '@dhis2/ui';
 import cx from 'classnames';
 import type { WidgetNonCollapsibleProps, WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
 
@@ -18,11 +18,13 @@ const styles = {
     header: {
         display: 'flex',
         alignItems: 'center',
-        padding: spacersNum.dp16,
+        minHeight: '44px', // match the height of the collapsible version
+        padding: `${spacers.dp8} ${spacers.dp8} ${spacers.dp8} ${spacers.dp12}`,
         fontWeight: 500,
-        fontSize: 16,
+        fontSize: 15,
         color: colors.grey800,
     },
+
 };
 
 const WidgetNonCollapsiblePlain = ({
@@ -36,12 +38,14 @@ const WidgetNonCollapsiblePlain = ({
         className={cx(classes.container, { borderless })}
         style={{ backgroundColor: color }}
     >
-        <div
-            className={classes.header}
-            data-test="widget-header"
-        >
-            {header}
-        </div>
+        {header && (
+            <div
+                className={classes.header}
+                data-test="widget-header"
+            >
+                {header}
+            </div>
+        )}
         <div
             data-test="widget-contents"
         >

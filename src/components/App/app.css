@@ -1,6 +1,8 @@
 body {
     overflow-x: hidden;
     font-family: Roboto, Helvetica, Arial, sans-serif;
+    /* background color is being beyond app scope, so we need to override it here until this is fixed. below color is grey100 */
+    background-color: #F8F9FA !important; 
 }
 
 textarea, input, button {

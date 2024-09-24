@@ -153,7 +153,6 @@ class NotesPlain extends React.Component<Props, State> {
                     <Button
                         onClick={this.handleAddNote}
                         className={classes.addNoteContainer}
-                        primary
                         small
                     >
                         {i18n.t('Add note')}

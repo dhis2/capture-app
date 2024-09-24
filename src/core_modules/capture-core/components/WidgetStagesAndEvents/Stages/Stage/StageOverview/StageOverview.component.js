@@ -17,10 +17,9 @@ const styles = {
     container: {
         display: 'flex',
         alignItems: 'center',
-        padding: '0',
+        padding: `${spacers.dp8} ${spacers.dp8} ${spacers.dp8} 0`,
         justifyContent: 'space-between',
         width: '100%',
-        marginLeft: '-4px',
     },
     icon: {
         paddingRight: spacersNum.dp8,

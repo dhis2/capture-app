@@ -14,7 +14,6 @@ import { Assignee } from './Assignee';
 
 const styles = () => ({
     wrapper: {
-        padding: `${spacers.dp16} 0`,
         maxWidth: '55.75rem',
     },
     fieldWrapper: {
@@ -25,6 +24,7 @@ const styles = () => ({
     },
     fieldLabel: {
         color: colors.grey900,
+        fontSize: 14,
         paddingTop: spacersNum.dp16,
         paddingRight: spacersNum.dp16,
     },

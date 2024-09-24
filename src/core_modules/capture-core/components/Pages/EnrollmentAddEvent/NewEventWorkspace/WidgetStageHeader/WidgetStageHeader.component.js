@@ -1,21 +1,24 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import { spacersNum } from '@dhis2/ui';
+import { spacers, spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './widgetStageHeader.types';
 
 const styles = () => ({
     wrapper: {
-        paddingLeft: spacersNum.dp16,
+        paddingLeft: spacersNum.dp12,
     },
     header: {
         display: 'flex',
         alignItems: 'center',
-        padding: spacersNum.dp8,
+        minHeight: '24px',
     },
     icon: {
-        paddingRight: spacersNum.dp8,
+        paddingRight: spacersNum.dp4,
+    },
+    prefix: {
+        marginInlineEnd: spacers.dp4,
     },
 });
 
@@ -24,18 +27,19 @@ const WidgetStageHeaderPlain = ({
     classes,
 }: Props) => (
     <div className={classes.header}>
+        <span className={classes.prefix}>New event in</span>
         {stage?.icon && (
             <div className={classes.icon}>
                 <NonBundledDhis2Icon
                     name={stage?.icon?.name}
                     color={stage?.icon?.color}
-                    width={30}
-                    height={30}
-                    cornerRadius={2}
+                    width={24}
+                    height={24}
+                    cornerRadius={3}
                 />
             </div>
         )}
-        <span>{stage?.name}</span>
+        <span className={classes.stageName}>{stage?.name}</span>
     </div>
 );
 
