@@ -14,11 +14,41 @@ const displayNamesQuery = {
     organisationUnits: {
         resource: 'organisationUnits',
         params: ({ filter }) => ({
-            fields: 'id,displayName',
+            fields: 'id,displayName,ancestors[id,displayName]',
             filter: `id:in:[${filter}]`,
             pageSize: maxBatchSize,
         }),
     },
+};
+
+const updateCacheWithOrgUnits = (organisationUnits) => {
+    organisationUnits.forEach(({ id, displayName, ancestors }) => {
+        if (ancestors.length > 0) {
+            displayNameCache[id] = {
+                displayName,
+                ancestor: ancestors[ancestors.length - 1].id,
+            };
+
+            ancestors.findLast((ancestor, index) => {
+                if (displayNameCache[ancestor.id]) {
+                    // Ancestors already cached
+                    return true;
+                } else if (index > 0) {
+                    // Add orgunit WITH ancestor to cache
+                    displayNameCache[ancestor.id] = {
+                        displayName: ancestor.displayName,
+                        ancestor: ancestors[index - 1].id,
+                    };
+                    return false;
+                }
+                // Add orgunit WITHOUT ancestor to cache
+                displayNameCache[ancestor.id] = { displayName: ancestor.displayName };
+                return true;
+            });
+        } else {
+            displayNameCache[id] = { displayName };
+        }
+    });
 };
 
 const createBatches = (orgUnitIds: Array<string>): Array<Array<string>> => {
@@ -39,6 +69,17 @@ const createBatches = (orgUnitIds: Array<string>): Array<Array<string>> => {
     return batches;
 };
 
+const getAncestors = (orgUnitId) => {
+    const orgUnit = displayNameCache[orgUnitId];
+
+    if (!orgUnit) return [];
+
+    const ancestors = getAncestors(orgUnit.ancestor);
+    ancestors.push(orgUnit.displayName);
+
+    return ancestors;
+};
+
 // Works best with memoized input arrays.
 export const useOrgUnitNames = (orgUnitIds: Array<string>): {
     loading: boolean,
@@ -54,28 +95,19 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
 
     const ready = !fetching && orgUnitIds === requestedArray;
 
-    const batches = useMemo(
-        () => createBatches(orgUnitIds),
-        [orgUnitIds],
-    );
-    const filter = useMemo(
-        () => (fetching ? currentBatches[completedBatches].join(',') : ''),
-        [fetching, currentBatches, completedBatches],
-    );
-    const result = useMemo(
-        () => (ready ? orgUnitIds.reduce((acc, id) => {
-            acc[id] = displayNameCache[id];
-            return acc;
-        }, {}) : null),
-        [ready, orgUnitIds],
-    );
+    const batches = useMemo(() => createBatches(orgUnitIds), [orgUnitIds]);
+    const filter = useMemo(() => (fetching ? currentBatches[completedBatches].join(',') : ''), [fetching, currentBatches, completedBatches]);
+    const result = useMemo(() => (ready ? orgUnitIds.reduce((acc, id) => {
+        acc[id] = displayNameCache[id] ? displayNameCache[id].displayName : null;
+        return acc;
+    }, {}) : null), [ready, orgUnitIds]);
 
     const onComplete = useCallback(({ organisationUnits }) => {
-        for (const { id, displayName } of organisationUnits.organisationUnits) {
-            displayNameCache[id] = displayName;
-        }
+        updateCacheWithOrgUnits(organisationUnits.organisationUnits);
+
         const completeCount = completedBatches + 1;
         setCompletedBatches(completeCount);
+
         if (completeCount === currentBatches.length) {
             setFetching(false);
         } else {
@@ -83,22 +115,17 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
         }
     }, [completedBatches, setCompletedBatches, currentBatches, setFetching, setFetchNextBatch]);
 
-    const onError = useCallback(
-        (fetchError) => {
-            setFetching(false);
-            setError(fetchError);
-        },
-        [setFetching, setError],
-    );
+    const onError = useCallback((fetchError) => {
+        setFetching(false);
+        setError(fetchError);
+    }, [setFetching, setError]);
 
-    const { refetch } = useDataQuery(
-        displayNamesQuery, {
-            variables: { filter },
-            onComplete,
-            onError,
-            lazy: true,
-        },
-    );
+    const { refetch } = useDataQuery(displayNamesQuery, {
+        variables: { filter },
+        onComplete,
+        onError,
+        lazy: true,
+    });
 
     useEffect(() => {
         if (!fetching && orgUnitIds !== requestedArray) {
@@ -111,7 +138,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
                 setCompletedBatches(0);
             }
         }
-    }, [fetching, orgUnitIds, requestedArray, batches, setRequestedArray, setCurrentBatches, setCompletedBatches, setFetching, setError]);
+    }, [fetching, orgUnitIds, requestedArray, batches]);
 
     useEffect(() => {
         if (fetchNextBatch) {
@@ -120,7 +147,7 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
                 refetch({ filter });
             }
         }
-    }, [fetchNextBatch, setFetchNextBatch, completedBatches, currentBatches, refetch, filter]);
+    }, [fetchNextBatch, completedBatches, currentBatches, refetch, filter]);
 
     return {
         loading: !ready && !error,
@@ -130,44 +157,57 @@ export const useOrgUnitNames = (orgUnitIds: Array<string>): {
 };
 
 export async function getOrgUnitNames(orgUnitIds: Array<string>, querySingleResource: QuerySingleResource): Promise<{|
-    [orgUnitId: string]: {|
-        id: string,
+[orgUnitId: string]: {|
+    id: string,
         displayName: string,
     |}
 |}> {
     await Promise.all(createBatches(orgUnitIds)
         .map(batch => querySingleResource(displayNamesQuery.organisationUnits, { filter: batch.join(',') })
             .then(({ organisationUnits }) => {
-                for (const { id, displayName } of organisationUnits) {
-                    displayNameCache[id] = displayName;
-                }
-            })));
+                updateCacheWithOrgUnits(organisationUnits);
+            }),
+        ),
+    );
 
     return orgUnitIds.reduce((acc, orgUnitId) => {
         acc[orgUnitId] = {
             id: orgUnitId,
-            name: displayNameCache[orgUnitId],
+            name: displayNameCache[orgUnitId]?.displayName,
         };
         return acc;
     }, {});
 }
 
-export const useOrgUnitName = (orgUnitId: ?string): {
+export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     displayName?: string,
-    error?: any,
+    ancestors?: Array<string>,
+    error: any,
 } => {
-    const cachedOrgUnitName = orgUnitId && displayNameCache[orgUnitId];
-    const fetchId = cachedOrgUnitName ? undefined : orgUnitId;
-    const { orgUnit, error } = useOrganisationUnit(fetchId, 'displayName');
-    if (cachedOrgUnitName) {
-        return { displayName: cachedOrgUnitName };
-    } else if (orgUnit && fetchId) {
-        displayNameCache[orgUnit.id] = orgUnit.displayName;
-        if (orgUnit.id === fetchId) {
-            return { displayName: orgUnit.displayName, error };
-        }
+    const cachedOrgUnit = orgUnitId && displayNameCache[orgUnitId];
+    const fetchId = cachedOrgUnit ? undefined : orgUnitId;
+    const { orgUnit: fetchedOrgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName]');
+
+    if (orgUnitId && cachedOrgUnit) {
+        const ancestors = getAncestors(cachedOrgUnit.ancestor);
+
+        return {
+            displayName: cachedOrgUnit.displayName,
+            ancestors,
+            error,
+        };
+    } else if (fetchedOrgUnit && fetchId) {
+        updateCacheWithOrgUnits([fetchedOrgUnit]);
+        const ancestors = fetchedOrgUnit.ancestors.map(ancestor => ancestor.displayName);
+
+        return {
+            displayName: fetchedOrgUnit.displayName,
+            ancestors,
+            error,
+        };
     }
+
     return { error };
 };
 
-export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId];
+export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId]?.displayName;
