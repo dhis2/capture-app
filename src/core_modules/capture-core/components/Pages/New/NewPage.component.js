@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import type { ComponentType } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import cx from 'classnames';
+// import withStyles from '@material-ui/core/styles/withStyles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
@@ -15,12 +16,15 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+// import { ThemeContext } from '../../../../../components/AppStart/AppStart.component';
+import { theme } from '../../../../../styles/styledJSXTheme';
 
-const getStyles = () => ({
+/* const getStyles = () => ({
     container: {
         padding: '24px 24px 16px 24px',
+        backgroundColor: 'red',
     },
-});
+}); */
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
@@ -28,7 +32,7 @@ const NewPagePlain = ({
     showMessageThatCategoryOptionIsInvalidForOrgUnit,
     showDefaultViewOnNewPage,
     handleMainPageNavigation,
-    classes,
+    // classes,
     currentScopeId,
     newPageStatus,
     writeAccess,
@@ -82,7 +86,7 @@ const NewPagePlain = ({
             teiDisplayName={teiDisplayName}
             formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
         />
-        <div data-test="registration-page-content" className={classes.container} >
+        <div data-test="registration-page-content" className={cx('container')} >
             {
                 !writeAccess ?
                     <NoWriteAccessMessage
@@ -154,6 +158,15 @@ const NewPagePlain = ({
                     </OrgUnitFetcher>
             }
         </div>
+        <style jsx>{`
+            .container {
+                padding: 24px 24px 16px 24px;
+                background-color: ${theme.palette.error.red200};
+            }
+            .no-write-access {
+                opacity: 0.5;
+            }
+        `}</style>
     </>);
 };
 
@@ -161,5 +174,5 @@ export const NewPageComponent: ComponentType<ContainerProps> =
     compose(
         withLoadingIndicator(),
         withErrorMessageHandler(),
-        withStyles(getStyles),
+        // withStyles(getStyles),
     )(NewPagePlain);
