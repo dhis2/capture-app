@@ -302,7 +302,7 @@ export class InputBuilder {
         // of `Enrollment`.
 
         const toLocalDate = (dateString: ?string) =>
-            LocalDate.parse(this.processValue(dateString, typeKeys.DATE));
+            (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : LocalDate.now());
 
         return new RuleEnrollmentJs(
             enrollment,
