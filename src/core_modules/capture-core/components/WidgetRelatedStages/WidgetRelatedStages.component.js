@@ -1,7 +1,7 @@
 // @flow
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { useRelatedStages } from './useRelatedStages';
-import { useOrgUnitAutoSelect } from './hooks/useAutoSelctOrgUnitRelatedStage';
+import { useOrgUnitAutoSelect } from '../../dataQueries';
 import type { Props, RelatedStageDataValueStates } from './WidgetRelatedStages.types';
 import { RelatedStagesActions } from './RelatedStagesActions';
 import { relatedStageStatus } from './constants';
@@ -37,7 +37,15 @@ const WidgetRelatedStagesPlain = ({
         orgUnit: undefined,
         linkedEventId: undefined,
     });
-    const { isLoading: orgUnitLoading } = useOrgUnitAutoSelect(setRelatedStageDataValues);
+    const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
+    useEffect(() => {
+        if (!orgUnitLoading && data?.length === 1) {
+            setRelatedStageDataValues(prev => ({
+                ...prev,
+                orgUnit: data[0],
+            }));
+        }
+    }, [data, orgUnitLoading, setRelatedStageDataValues]);
 
     const addErrorMessage = (message: ErrorMessagesForRelatedStages) => {
         setErrorMessages((prevMessages: Object) => ({
