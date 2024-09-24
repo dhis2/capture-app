@@ -1,7 +1,7 @@
 // @flow
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { useRelatedStages } from './useRelatedStages';
-import { useOrgUnitsForAutoSelect } from '../../dataQueries';
+import { useOrgUnitAutoSelect } from './hooks/useAutoSelctOrgUnitRelatedStage';
 import type { Props, RelatedStageDataValueStates } from './WidgetRelatedStages.types';
 import { RelatedStagesActions } from './RelatedStagesActions';
 import { relatedStageStatus } from './constants';
@@ -37,7 +37,7 @@ const WidgetRelatedStagesPlain = ({
         orgUnit: undefined,
         linkedEventId: undefined,
     });
-    const { isLoading: orgUnitLoading, orgUnits } = useOrgUnitsForAutoSelect(setRelatedStageDataValues);
+    const { isLoading: orgUnitLoading } = useOrgUnitAutoSelect(setRelatedStageDataValues);
 
     const addErrorMessage = (message: ErrorMessagesForRelatedStages) => {
         setErrorMessages((prevMessages: Object) => ({
@@ -45,15 +45,6 @@ const WidgetRelatedStagesPlain = ({
             ...message,
         }));
     };
-
-    useEffect(() => {
-        if (!orgUnitLoading && orgUnits?.length === 1) {
-            setRelatedStageDataValues(prev => ({
-                ...prev,
-                orgUnit: orgUnits[0],
-            }));
-        }
-    }, [orgUnits, orgUnitLoading, setRelatedStageDataValues]);
 
     const eventHasLinkableStageRelationship = () => currentRelatedStagesStatus === relatedStageStatus.LINKABLE;
 

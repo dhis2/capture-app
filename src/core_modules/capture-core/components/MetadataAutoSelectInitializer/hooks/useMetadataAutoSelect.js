@@ -1,9 +1,9 @@
 // @flow
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useApiMetadataQuery, useIndexedDBQuery } from '../utils/reactQueryHelpers';
-import { getUserStorageController, userStores } from '../storageControllers';
-import { buildUrlQueryString, useLocationQuery } from '../utils/routing';
+import { useApiMetadataQuery, useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
+import { getUserStorageController, userStores } from '../../../storageControllers';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 
 const getAllPrograms = () => {
     const userStorageController = getUserStorageController();
@@ -13,7 +13,7 @@ const getAllPrograms = () => {
     });
 };
 
-export const useOrgUnitsForAutoSelect = () => {
+export const useMetadataAutoSelect = () => {
     const [mounted, setMounted] = useState(false);
     const history = useHistory();
     const urlParams = useLocationQuery();
@@ -28,21 +28,21 @@ export const useOrgUnitsForAutoSelect = () => {
         },
     );
 
-    const queryKey = ['orgUnitsForAutoSelect'];
-    const queryFn = {
-        resource: 'organisationUnits',
-        params: {
-            fields: ['id, displayName~rename(name), path'],
-            withinUserHierarchy: true,
-            pageSize: 2,
+    const { data: searchOrgUnits, isLoading: loadingOrgUnits } = useApiMetadataQuery(
+        ['searchOrgUnitsForAutoSelect'],
+        {
+            resource: 'organisationUnits',
+            params: {
+                fields: 'id',
+                withinUserSearchHierarchy: true,
+                pageSize: 2,
+            },
         },
-    };
-    const queryOptions = {
-        enabled: !mounted,
-        select: ({ organisationUnits }) => organisationUnits,
-    };
-
-    const { data: orgUnits, isLoading: loadingOrgUnits } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
+        {
+            enabled: Object.keys(urlParams).length === 0 && !mounted,
+            select: ({ organisationUnits }) => organisationUnits,
+        },
+    );
 
     const updateUrlIfApplicable = useCallback(() => {
         const paramsToAdd = {
@@ -52,14 +52,14 @@ export const useOrgUnitsForAutoSelect = () => {
         if (programs && programs.length === 1) {
             paramsToAdd.programId = programs[0].id;
         }
-        if (orgUnits && orgUnits.length === 1) {
-            paramsToAdd.orgUnitId = orgUnits[0].id;
+        if (searchOrgUnits && searchOrgUnits.length === 1) {
+            paramsToAdd.orgUnitId = searchOrgUnits[0].id;
         }
 
         if (Object.keys(paramsToAdd).length) {
             history.push(`?${buildUrlQueryString({ ...paramsToAdd })}`);
         }
-    }, [history, programs, orgUnits]);
+    }, [history, programs, searchOrgUnits]);
 
     useEffect(() => {
         if (mounted) return;
@@ -79,14 +79,11 @@ export const useOrgUnitsForAutoSelect = () => {
         mounted,
         urlParams,
         loadingOrgUnits,
-        orgUnits,
+        searchOrgUnits,
         updateUrlIfApplicable,
     ]);
 
-    const isLoading = loadingPrograms || loadingOrgUnits;
-
     return {
-        isLoading,
-        orgUnits,
+        isReady: mounted,
     };
 };
