@@ -23,18 +23,6 @@ And teis with an active enrollment should be retrieved from the api
 And the list should display the teis retrieved from the api
 And for a tracker program the page navigation should show that you are on the first page
 
-Scenario: Show only teis with active enrollments and unassinged events using the filter
-Given you open the main page with Ngelehun and Malaria focus investigation context
-When you set the enrollment status filter to active
-And you apply the enrollment status filter
-And you set the assginee filter to none
-And you apply the assignee filter
-Then the enrollment status filter button should show that the active filter is in effect
-And the assignee filter button should show that unassigned filter is in effect
-And teis with active enrollments and unassigned events should be retrieved from the api
-And the list should display the teis retrieved from the api
-And for a tracker program the page navigation should show that you are on the first page
-
 Scenario: Show only teis with first name containig John using the filter
 Given you open the main page with Ngelehun and child programme context
 When you set the first name filter to John

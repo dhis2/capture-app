@@ -198,39 +198,24 @@ When('you set the WHOMCH Smoking filter to No', () => {
         .click();
 });
 
-When('you set the assginee filter to none', () => {
+When('you set the assignee filter to anyone', () => {
+    cy.intercept('GET', '**/tracker/events**').as('getEventsAssignedToAnyone');
+
     cy.get('[data-test="tei-working-lists"]')
         .contains('Assigned to')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
-        .contains('None')
+        .contains('Anyone')
         .click();
 });
 
-Then('the assignee filter button should show that unassigned filter is in effect', () => {
+Then('the assignee filter button should show that the anyone filter is in effect', () => {
     cy.get('[data-test="tei-working-lists"]')
-        .contains('Assigned to: None')
+        .contains('Assigned to: Anyone')
         .should('exist');
 });
 
-Then('the list should display teis with an active enrollment and unassinged events', () => {
-    const ids = [
-        'ZDA984904',
-        'FSL05494',
-    ];
-
-    cy.get('[data-test="tei-working-lists"]')
-        .find('tr')
-        .should('have.length', 3)
-        .each(($teiRow, index) => {
-            if (index) {
-                cy.wrap($teiRow)
-                    .contains(ids[index - 1])
-                    .should('exist');
-            }
-        });
-});
 
 Then('the list should display teis with John as the first name', () => {
     cy.get('[data-test="tei-working-lists"]')
@@ -627,7 +612,7 @@ When('you select a data element columns and save from the column selector', () =
 });
 
 Then('you see data elements specific filters and columns', () => {
-    cy.get('[data-test="filter-button-container-DX4LVYeP7bw"]')
+    cy.get('[data-test="filter-button-container-assignedUser"]')
         .should('exist');
     cy.get('[data-test="tei-working-lists"]')
         .should('exist');
@@ -867,25 +852,7 @@ Then('the working list is empty', () => {
         .click();
 });
 
-When('you set the assignee filter to anyone', () => {
-    cy.intercept('GET', '**/tracker/events**').as('getEventsAssignedToAnyone');
-
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Assigned to')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Anyone')
-        .click();
-});
-
-Then('the assigned to filter button should show that the anyone filter is in effect', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Assigned to: Anyone')
-        .should('exist');
-});
-
-Then('the assigned column is displayed', () => {
+Then('the assignee column is displayed', () => {
     cy.get('[data-test="dhis2-uicore-tablehead"]')
         .contains('Assigned to')
         .should('exist');
@@ -893,9 +860,13 @@ Then('the assigned column is displayed', () => {
     cy.get('[data-test="dhis2-uicore-tablebody"]')
         .contains('Tracker demo User (tracker)')
         .should('exist');
+
+    cy.get('[data-test="tei-working-lists"]')
+        .find('tr')
+        .should('have.length', 2);
 });
 
-Then('active events that are assigned to anyone should be retrieved from the api', () => {
+Then('events that are assigned to anyone should be retrieved from the api', () => {
     cy.wait('@getEventsAssignedToAnyone', { timeout: 40000 }).as('result');
 
     cy.get('@result')

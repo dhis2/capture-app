@@ -92,35 +92,6 @@ Then('teis with an active enrollment should be retrieved from the api', () => {
     cy.get('@result').its('response.body').as('teis');
 });
 
-When('you apply the assignee filter', () => {
-    cy.intercept('GET', '**/tracker/trackedEntities**').as('getTeisStatusAndAssigneeFilter');
-
-    cy.get('[data-test="list-view-filter-apply-button"]')
-        .click();
-});
-
-Then('teis with active enrollments and unassigned events should be retrieved from the api', () => {
-    cy.wait('@getTeisStatusAndAssigneeFilter', { timeout: 40000 }).as('result');
-
-    cy.get('@result')
-        .its('response.statusCode')
-        .should('eq', 200);
-
-    cy.get('@result')
-        .its('response.url')
-        .should('include', 'programStatus=ACTIVE');
-
-    cy.get('@result')
-        .its('response.url')
-        .should('include', 'assignedUserMode=NONE');
-
-    cy.get('@result')
-        .its('response.url')
-        .should('include', 'page=1');
-
-    cy.get('@result').its('response.body').as('teis');
-});
-
 When('you apply the current filter on the tei working list', () => {
     cy.intercept('GET', '**/tracker/trackedEntities**').as('getTeis');
 

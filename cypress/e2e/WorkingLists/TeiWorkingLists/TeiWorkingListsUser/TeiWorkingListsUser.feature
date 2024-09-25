@@ -208,9 +208,9 @@ And you select the Foci response program stage
 And you apply the current filter
 And you set the assignee filter to anyone
 And you apply the current filter
-Then the assigned to filter button should show that the anyone filter is in effect
-And the assigned column is displayed
-And active events that are assigned to anyone should be retrieved from the api
+Then the assignee filter button should show that the anyone filter is in effect
+And the assignee column is displayed
+And events that are assigned to anyone should be retrieved from the api
 
 @v>=40
 Scenario: The user can create and delete a program stage working list for Foci investigation & classification assigned events
