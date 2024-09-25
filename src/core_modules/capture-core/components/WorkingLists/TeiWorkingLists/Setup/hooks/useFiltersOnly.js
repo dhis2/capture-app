@@ -6,11 +6,9 @@ import { MAIN_FILTERS } from '../../constants';
 
 export const useFiltersOnly = ({
     enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate },
-    stages,
 }: TrackerProgram) =>
-    useMemo(() => {
-        const enableUserAssignment = Array.from(stages.values()).find(stage => stage.enableUserAssignment);
-        return [
+    useMemo(
+        () => [
             {
                 id: MAIN_FILTERS.PROGRAM_STATUS,
                 type: dataElementTypes.TEXT,
@@ -74,15 +72,6 @@ export const useFiltersOnly = ({
                     followUp: rawFilter.split(':')[1],
                 }),
             },
-            ...(enableUserAssignment
-                ? [
-                    {
-                        id: MAIN_FILTERS.ASSIGNEE,
-                        type: dataElementTypes.ASSIGNEE,
-                        header: i18n.t('Assigned to'),
-                        transformRecordsFilter: (rawFilter: Object) => rawFilter,
-                    },
-                ]
-                : []),
-        ];
-    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
+        ],
+        [enrollmentDateLabel, incidentDateLabel, showIncidentDate],
+    );

@@ -213,7 +213,7 @@ export const convertToClientFilters = async (
     const assignee = await getAssignee(assignedUserMode, assignedUsers, querySingleResource);
 
     return {
-        assignee,
+        [ADDITIONAL_FILTERS.assignedUser]: assignee,
         ...convertToClientMainFilters(restTEIQueryCriteria),
         ...convertAttributeFilters(attributeValueFilters, columnsMetaForDataFetching),
         ...convertDataElementFilters(dataFilters, columnsMetaForDataFetching),

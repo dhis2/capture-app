@@ -866,3 +866,78 @@ Then('the working list is empty', () => {
         .contains('No items to display')
         .click();
 });
+
+When('you set the assignee filter to anyone', () => {
+    cy.intercept('GET', '**/tracker/events**').as('getEventsAssignedToAnyone');
+
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Assigned to')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Anyone')
+        .click();
+});
+
+Then('the assigned to filter button should show that the anyone filter is in effect', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Assigned to: Anyone')
+        .should('exist');
+});
+
+Then('the assigned column is displayed', () => {
+    cy.get('[data-test="dhis2-uicore-tablehead"]')
+        .contains('Assigned to')
+        .should('exist');
+
+    cy.get('[data-test="dhis2-uicore-tablebody"]')
+        .contains('Tracker demo User (tracker)')
+        .should('exist');
+});
+
+Then('active events that are assigned to anyone should be retrieved from the api', () => {
+    cy.wait('@getEventsAssignedToAnyone', { timeout: 40000 }).as('result');
+
+    cy.get('@result')
+        .its('response.statusCode')
+        .should('equal', 200);
+
+    cy.get('@result')
+        .its('response.url')
+        .should('include', 'assignedUserMode=ANY');
+
+    cy.get('@result')
+        .its('response.url')
+        .should('include', 'page=1');
+
+    cy.get('@result').its('response.body').as('events');
+});
+
+And('you filter by assigned Foci investigation & classification events', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+        });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Foci investigation & classification')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Assigned to')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Anyone')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});

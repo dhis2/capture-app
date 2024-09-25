@@ -77,7 +77,7 @@ const mainFiltersTable = {
     [MAIN_FILTERS.ENROLLED_AT]: filter => getDateFilter(filter)?.dateFilter,
     [MAIN_FILTERS.OCCURED_AT]: filter => getDateFilter(filter)?.dateFilter,
     [MAIN_FILTERS.FOLLOW_UP]: filter => Boolean(filter.values[0]),
-    [MAIN_FILTERS.ASSIGNEE]: getAssigneeFilter,
+    [ADDITIONAL_FILTERS.assignedUser]: getAssigneeFilter,
     [ADDITIONAL_FILTERS.status]: filter => filter.values[0],
     [ADDITIONAL_FILTERS.occurredAt]: filter => getDateFilter(filter)?.dateFilter,
     [ADDITIONAL_FILTERS.scheduledAt]: filter => getDateFilter(filter)?.dateFilter,
@@ -109,7 +109,7 @@ export const convertMainFilters = ({
 
         const mainValue = mainFiltersTable[key](filter);
         if (mainValue) {
-            if (key === MAIN_FILTERS.ASSIGNEE) {
+            if (key === ADDITIONAL_FILTERS.assignedUser) {
                 return { ...acc, ...mainValue };
             }
             return { ...acc, [key]: mainValue };

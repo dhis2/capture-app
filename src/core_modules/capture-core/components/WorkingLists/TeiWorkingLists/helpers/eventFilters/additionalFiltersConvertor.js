@@ -4,6 +4,7 @@ export const ADDITIONAL_FILTERS = {
     occurredAt: 'eventOccurredAt',
     scheduledAt: 'scheduledAt',
     status: 'status',
+    assignedUser: 'assignedUser',
 };
 
 export const ADDITIONAL_FILTERS_LABELS = {
@@ -11,6 +12,7 @@ export const ADDITIONAL_FILTERS_LABELS = {
     occurredAt: 'Report date',
     scheduledAt: 'Scheduled date',
     status: 'Event status',
+    assignedUser: 'Assigned to',
 };
 
 export const ADDITIONAL_FILTERS_API_NAME = {

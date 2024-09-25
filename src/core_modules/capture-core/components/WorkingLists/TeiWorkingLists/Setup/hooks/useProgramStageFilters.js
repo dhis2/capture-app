@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
-import { type TrackerProgram, type ProgramStage } from '../../../../../metaData';
+import { type TrackerProgram, type ProgramStage, dataElementTypes } from '../../../../../metaData';
 import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 
 const useProgramStageData = (programStageId, stages) =>
@@ -13,12 +13,14 @@ const useProgramStageData = (programStageId, stages) =>
                 hideDueDate: programStage.hideDueDate,
                 occurredAtLabel: programStage.stageForm.getLabel('occurredAt'),
                 scheduledAtLabel: programStage.stageForm.getLabel('scheduledAt'),
+                enableUserAssignment: programStage.enableUserAssignment,
             };
         }
         return {
             occurredAtLabel: i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
             scheduledAtLabel: i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
             hideDueDate: undefined,
+            enableUserAssignment: false,
         };
     }, [programStageId, stages]);
 
@@ -33,7 +35,10 @@ const useProgramStageDropdowOptions = stages =>
     );
 
 export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageId?: string) => {
-    const { hideDueDate, occurredAtLabel, scheduledAtLabel } = useProgramStageData(programStageId, stages);
+    const { hideDueDate, occurredAtLabel, scheduledAtLabel, enableUserAssignment } = useProgramStageData(
+        programStageId,
+        stages,
+    );
     const options: Array<{ text: string, value: string }> = useProgramStageDropdowOptions(stages);
 
     return useMemo(() => {
@@ -117,6 +122,16 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
                     },
                 ]
                 : []),
+            ...(enableUserAssignment
+                ? [
+                    {
+                        id: ADDITIONAL_FILTERS.assignedUser,
+                        type: dataElementTypes.ASSIGNEE,
+                        header: ADDITIONAL_FILTERS_LABELS.assignedUser,
+                        transformRecordsFilter: (rawFilter: Object) => rawFilter,
+                    },
+                ]
+                : []),
         ];
-    }, [programStageId, occurredAtLabel, scheduledAtLabel, hideDueDate, options]);
+    }, [programStageId, occurredAtLabel, scheduledAtLabel, hideDueDate, options, enableUserAssignment]);
 };

@@ -201,6 +201,26 @@ And you set the event visit date to Today
 And you apply the current filter
 Then the working list is empty
 
+Scenario: The user can filter the Foci response assigned events
+Given you open the main page with Ngelehun and Malaria focus investigation context
+When you open the program stage filters from the more filters dropdown menu
+And you select the Foci response program stage
+And you apply the current filter
+And you set the assignee filter to anyone
+And you apply the current filter
+Then the assigned to filter button should show that the anyone filter is in effect
+And the assigned column is displayed
+And active events that are assigned to anyone should be retrieved from the api
+
+@v>=40
+Scenario: The user can create and delete a program stage working list for Foci investigation & classification assigned events
+Given you open the main page with Ngelehun and Malaria focus investigation context
+And you filter by assigned Foci investigation & classification events
+When you save the list with the name Custom Program stage list
+Then the new Custom Program stage list is created
+And you delete the name Custom Program stage list
+Then the Custom Program stage list is deleted
+
 @v>=40
 Scenario: The user creates, updates and deletes a Program stage custom working list
 Given you open the main page with Ngelehun and Malaria case diagnosis and Household investigation context
