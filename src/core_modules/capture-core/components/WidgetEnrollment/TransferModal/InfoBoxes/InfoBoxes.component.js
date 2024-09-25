@@ -4,7 +4,7 @@ import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { useOrgUnitName } from '../../../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
 import { OrgUnitScopes } from '../hooks/useTransferValidation';
 import { ProgramAccessLevels } from '../hooks/useProgramAccessLevel';
 
@@ -48,8 +48,8 @@ const InfoBoxesPlain = ({
     orgUnitScopes,
     classes,
 }: Props) => {
-    const { displayName: ownerOrgUnitName } = useOrgUnitName(ownerOrgUnitId);
-    const { displayName: newOrgUnitName } = useOrgUnitName(validOrgUnitId);
+    const { displayName: ownerOrgUnitName } = useOrgUnitNameWithAncestors(ownerOrgUnitId);
+    const { displayName: newOrgUnitName } = useOrgUnitNameWithAncestors(validOrgUnitId);
 
     const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.CLOSED].includes(programAccessLevel)
         && orgUnitScopes.destination === OrgUnitScopes.SEARCH;

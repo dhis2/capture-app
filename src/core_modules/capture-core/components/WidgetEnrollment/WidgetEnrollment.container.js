@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { WidgetEnrollment as WidgetEnrollmentNote } from './WidgetEnrollment.component';
-import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
@@ -68,7 +68,7 @@ export const WidgetEnrollment = ({
         enrollments,
         refetch: refetchTEI,
     } = useTrackedEntityInstances(teiId, programId);
-    const { error: errorOrgUnit, displayName } = useOrgUnitName(
+    const { error: errorOrgUnit, displayName } = useOrgUnitNameWithAncestors(
         typeof ownerOrgUnit === 'string' ? ownerOrgUnit : undefined,
     );
     const { error: errorLocale, locale } = useUserLocale();
