@@ -8,6 +8,7 @@ import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
+import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
@@ -35,6 +36,11 @@ type FileClientValue = {
 type ImageClientValue = {
     ...FileClientValue,
     previewUrl: string,
+};
+
+type OrgUnitClientValue = {
+    name: string,
+    ancestors?: Array<string>,
 };
 
 function convertFileForDisplay(clientValue: FileClientValue) {
@@ -86,8 +92,13 @@ function convertStatusForDisplay(clientValue: Object) {
     );
 }
 
-function convertOrgUnitForDisplay(rawValue: string | Object) {
-    return (typeof rawValue === 'string' ? rawValue : rawValue.name);
+function convertOrgUnitForDisplay(clientValue: OrgUnitClientValue) {
+    return (
+        <TooltipOrgUnit
+            orgUnitName={clientValue.name}
+            ancestors={clientValue.ancestors}
+        />
+    );
 }
 
 const valueConvertersForType = {
@@ -120,6 +131,7 @@ const valueConvertersForType = {
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
+    console.log('convertValue', value);
     if (!value && value !== 0 && value !== false) {
         return value;
     }
