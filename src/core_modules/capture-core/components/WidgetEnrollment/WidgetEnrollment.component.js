@@ -78,8 +78,8 @@ export const WidgetEnrollmentPlain = ({
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
 
-    const orgUnitClientValue = { name: orgUnitName, ancestors };
-    const ownerOrgUnitClientValue = { name: ownerOrgUnitName, ancestors: ownerAncestors };
+    const orgUnitClientValue = { id: enrollment?.orgUnit, name: orgUnitName, ancestors };
+    const ownerOrgUnitClientValue = { id: ownerOrgUnit?.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
 
     return (
         <div data-test="widget-enrollment">

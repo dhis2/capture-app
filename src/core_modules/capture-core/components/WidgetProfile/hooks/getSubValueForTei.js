@@ -2,6 +2,7 @@
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { dataElementTypes } from '../../../metaData';
 import { FEATURES, hasAPISupportForFeature } from '../../../../capture-core-utils';
+import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
 
 type Attribute = {
     id: string,
@@ -46,22 +47,10 @@ const getImageResourceSubvalue = async ({ attribute, minorServerVersion }: SubVa
     };
 };
 
-const getOrganisationUnitSubvalue = async ({ attribute, querySingleResource }: SubValueFunctionParams) => {
-    const organisationUnit = await querySingleResource({
-        resource: 'organisationUnits',
-        id: attribute.value,
-        params: {
-            fields: 'id,name,ancestors[displayName]',
-        },
-    });
+const getOrganisationUnitSubvalue = async ({ attribute: { value }, querySingleResource }: SubValueFunctionParams) => {
+    const orgUnits = await getOrgUnitNames([value], querySingleResource);
 
-    const orgUnitClientValue = {
-        id: organisationUnit.id,
-        name: organisationUnit.name,
-        ancestors: organisationUnit.ancestors.map(ancestor => ancestor.displayName),
-    };
-
-    return orgUnitClientValue;
+    return orgUnits[value];
 };
 
 export const subValueGetterByElementType = {

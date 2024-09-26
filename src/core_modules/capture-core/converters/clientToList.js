@@ -38,10 +38,6 @@ type ImageClientValue = {
     previewUrl: string,
 };
 
-type OrgUnitClientValue = {
-    name: string,
-    ancestors?: Array<string>,
-};
 
 function convertFileForDisplay(clientValue: FileClientValue) {
     // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
@@ -92,14 +88,12 @@ function convertStatusForDisplay(clientValue: Object) {
     );
 }
 
-function convertOrgUnitForDisplay(clientValue: OrgUnitClientValue) {
+function convertOrgUnitForDisplay(clientValue: { id: string }) {
     return (
-        <TooltipOrgUnit
-            orgUnitName={clientValue.name}
-            ancestors={clientValue.ancestors}
-        />
+        <TooltipOrgUnit orgUnitId={clientValue.id} />
     );
 }
+
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
@@ -131,7 +125,6 @@ const valueConvertersForType = {
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
-    console.log('convertValue', value);
     if (!value && value !== 0 && value !== false) {
         return value;
     }
