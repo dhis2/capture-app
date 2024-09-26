@@ -1,3 +1,17 @@
+# [101.5.0](https://github.com/dhis2/capture-app/compare/v101.4.1...v101.5.0) (2024-09-24)
+
+
+### Features
+
+* [DHIS2-17770] Org unit contextualization in self contained widgets ([#3720](https://github.com/dhis2/capture-app/issues/3720)) ([562b03a](https://github.com/dhis2/capture-app/commit/562b03a1cf2cb5cff5382bd433943f289c860095))
+
+## [101.4.1](https://github.com/dhis2/capture-app/compare/v101.4.0...v101.4.1) (2024-09-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#3805](https://github.com/dhis2/capture-app/issues/3805)) ([a4464f4](https://github.com/dhis2/capture-app/commit/a4464f431618200853772cc2546ea9adff515840))
+
 # [101.4.0](https://github.com/dhis2/capture-app/compare/v101.3.3...v101.4.0) (2024-09-09)
 
 
