@@ -7,13 +7,15 @@ import type { ComponentProps } from './BulkActionBar.types';
 
 const styles = {
     container: {
-        marginTop: '65px',
+        // marginTop: '65px',
         background: colors.teal100,
-        border: `1px solid ${colors.teal400}`,
+        height: '60px',
+        border: `2px solid ${colors.teal400}`,
         width: '100%',
-        padding: '10px',
+        padding: '8px',
+        fontSize: '14px',
+        gap: '8px',
         display: 'flex',
-        gap: '10px',
         alignItems: 'center',
     },
 };

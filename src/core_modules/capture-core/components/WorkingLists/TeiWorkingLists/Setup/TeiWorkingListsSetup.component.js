@@ -1,14 +1,14 @@
 // @flow
-import React, { useCallback, useMemo, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import type { Props } from './teiWorkingListsSetup.types';
 import { WorkingListsBase } from '../../WorkingListsBase';
 import {
     useDefaultColumnConfig,
-    useStaticTemplates,
     useFiltersOnly,
-    useProgramStageFilters,
     useInjectDataFetchingMetaToLoadList,
     useInjectDataFetchingMetaToUpdateList,
+    useProgramStageFilters,
+    useStaticTemplates,
 } from './hooks';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs } from '../types';
@@ -56,6 +56,7 @@ export const TeiWorkingListsSetup = ({
     onDeleteTemplate,
     forceUpdateOnMount,
     customUpdateTrigger,
+    bulkActionBarComponent,
     ...passOnProps
 }: Props) => {
     const prevProgramStageId = useRef(programStageId);
@@ -219,6 +220,7 @@ export const TeiWorkingListsSetup = ({
             filters={filters}
             sortById={sortById}
             sortByDirection={sortByDirection}
+            bulkActionBarComponent={bulkActionBarComponent}
         />
     );
 };

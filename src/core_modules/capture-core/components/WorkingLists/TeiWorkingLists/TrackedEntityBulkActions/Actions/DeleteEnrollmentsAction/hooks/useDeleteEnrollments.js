@@ -1,5 +1,5 @@
 // @flow
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from 'react-query';
@@ -21,11 +21,23 @@ export const useDeleteEnrollments = ({
     onUpdateList,
     setIsDeleteDialogOpen,
 }: Props) => {
+    const [statusToDelete, setStatusToDelete] = useState({
+        active: true,
+        completed: true,
+        cancelled: true,
+    });
     const dataEngine = useDataEngine();
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
     );
+
+    const updateStatusToDelete = useCallback((status) => {
+        setStatusToDelete(prevStatus => ({
+            ...prevStatus,
+            [status]: !prevStatus[status],
+        }));
+    }, []);
 
     const { data: enrollments, isLoading: isLoadingEnrollments } = useApiDataQuery(
         ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 'trackedEntities', selectedRows],
@@ -44,21 +56,19 @@ export const useDeleteEnrollments = ({
                 if (!apiTrackedEntities) return [];
 
                 return apiTrackedEntities
-                    .flatMap(apiTrackedEntity => apiTrackedEntity.enrollments)
-                    // fallback in case the api returns an enrollment in another program
-                    .filter(enrollment => enrollment.program === programId);
+                    .flatMap(apiTrackedEntity => apiTrackedEntity.enrollments);
             },
         },
     );
 
     const { mutate: deleteEnrollments, isLoading: isDeletingEnrollments } = useMutation<any>(
-        ({ activeOnly }: any) => dataEngine.mutate({
-            resource: 'tracker?async=false&importStrategy=DELETE',
+        () => dataEngine.mutate({
+            resource: 'tracker?async=false&importStrategy=DELETE&importMode=VALIDATE',
             type: 'create',
             data: {
                 enrollments: enrollments
                     // $FlowFixMe - business logic dictates that enrollments is not undefined at this point
-                    .filter(({ status }) => !activeOnly || status === 'ACTIVE')
+                    .filter(({ status }) => statusToDelete[status])
                     .map(({ enrollment }) => ({ enrollment })),
             },
         }),
@@ -79,27 +89,56 @@ export const useDeleteEnrollments = ({
             return null;
         }
 
-        const { activeEnrollments, completedEnrollments } = enrollments.reduce((acc, enrollment) => {
+        const {
+            activeEnrollments,
+            completedEnrollments,
+            cancelledEnrollments,
+        } = enrollments.reduce((acc, enrollment) => {
             if (enrollment.status === 'ACTIVE') {
                 acc.activeEnrollments += 1;
+            } else if (enrollment.status === 'CANCELLED') {
+                acc.cancelledEnrollments += 1;
             } else {
                 acc.completedEnrollments += 1;
             }
 
             return acc;
-        }, { activeEnrollments: 0, completedEnrollments: 0 });
+        }, { activeEnrollments: 0, completedEnrollments: 0, cancelledEnrollments: 0 });
 
         return {
             active: activeEnrollments,
             completed: completedEnrollments,
+            cancelled: cancelledEnrollments,
             total: enrollments.length,
         };
     }, [enrollments]);
+
+    const numberOfEnrollmentsToDelete = useMemo(() => {
+        if (!enrollments) {
+            return 0;
+        }
+
+        let total = 0;
+        if (statusToDelete.active) {
+            total += enrollmentCounts.active;
+        }
+        if (statusToDelete.completed) {
+            total += enrollmentCounts.completed;
+        }
+        if (statusToDelete.cancelled) {
+            total += enrollmentCounts.cancelled;
+        }
+
+        return total;
+    }, [enrollments, enrollmentCounts, statusToDelete]);
 
     return {
         deleteEnrollments,
         isDeletingEnrollments,
         isLoadingEnrollments,
         enrollmentCounts,
+        statusToDelete,
+        updateStatusToDelete,
+        numberOfEnrollmentsToDelete,
     };
 };

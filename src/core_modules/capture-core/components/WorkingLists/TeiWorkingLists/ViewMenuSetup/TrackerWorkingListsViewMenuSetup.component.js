@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
@@ -107,8 +107,8 @@ export const TrackerWorkingListsViewMenuSetup = ({
         clearSelection();
     }, [clearSelection]);
 
-    return (
-        <>
+    const TrackedEntityBulkActionsComponent = useMemo(() => {
+        return (
             <TrackedEntityBulkActions
                 programId={program.id}
                 programStageId={programStageId}
@@ -116,6 +116,11 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 onClearSelection={clearSelection}
                 onUpdateList={handleCustomUpdateTrigger}
             />
+        );
+    }, [program.id, programStageId, selectedRows, clearSelection, handleCustomUpdateTrigger]);
+
+    return (
+        <>
             <TeiWorkingListsSetup
                 {...passOnProps}
                 customUpdateTrigger={customUpdateTrigger}
@@ -131,6 +136,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 selectionInProgress={selectionInProgress}
                 onSelectAll={selectAllRows}
                 onRowSelect={toggleRowSelected}
+                bulkActionBarComponent={TrackedEntityBulkActionsComponent}
             />
             <DownloadDialog
                 open={downloadDialogOpen}

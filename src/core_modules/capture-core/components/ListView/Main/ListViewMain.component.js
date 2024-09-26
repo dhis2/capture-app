@@ -39,9 +39,20 @@ const getStyles = (theme: Theme) => ({
 
 class ListViewMainPlain extends React.PureComponent<Props> {
     renderTopBar = () => {
-        const { classes, filters, columns, customMenuContents, onSetColumnOrder, isSelectionInProgress } = this.props;
+        const {
+            classes,
+            filters,
+            columns,
+            customMenuContents,
+            onSetColumnOrder,
+            isSelectionInProgress,
+            bulkActionBarComponent,
+        } = this.props;
 
-        if (isSelectionInProgress) return null;
+        if (isSelectionInProgress) {
+            return bulkActionBarComponent;
+        }
+
         return (
             <div
                 className={classes.topBarContainer}

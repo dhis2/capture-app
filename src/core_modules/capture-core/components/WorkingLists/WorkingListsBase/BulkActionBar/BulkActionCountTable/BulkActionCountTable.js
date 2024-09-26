@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import {
+    colors,
     DataTable,
     DataTableBody,
     DataTableCell,
@@ -8,7 +9,6 @@ import {
     DataTableFoot,
     DataTableHead,
     DataTableRow,
-    colors,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/';
@@ -34,6 +34,7 @@ const styles = {
     },
 };
 
+// TODO - Delete this component
 export const EnrollmentTablePlain = ({
     total,
     isLoading,

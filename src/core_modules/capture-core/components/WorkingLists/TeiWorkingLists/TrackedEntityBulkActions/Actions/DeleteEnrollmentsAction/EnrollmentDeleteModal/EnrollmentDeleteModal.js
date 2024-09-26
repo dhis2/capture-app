@@ -1,38 +1,43 @@
 // @flow
 import React from 'react';
-import {
-    Button,
-    ButtonStrip,
-    DataTableCell,
-    DataTableRow,
-    Modal,
-    ModalActions,
-    ModalContent,
-    ModalTitle,
-} from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle, } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { BulkActionCountTable } from '../../../../../WorkingListsBase/BulkActionBar';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
-import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
+import { CustomCheckbox } from './CustomCheckbox';
 
 type Props = {
     selectedRows: { [id: string]: boolean },
     programId: string,
     onUpdateList: () => void,
     setIsDeleteDialogOpen: (open: boolean) => void,
+    classes: Object,
 }
 
-export const EnrollmentDeleteModal = ({
+const styles = {
+    modalContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
+        fontSize: '16px',
+    },
+};
+
+const EnrollmentDeleteModalPlain = ({
     selectedRows,
     programId,
     onUpdateList,
     setIsDeleteDialogOpen,
+    classes,
 }: Props) => {
     const {
         deleteEnrollments,
         isDeletingEnrollments,
         enrollmentCounts,
         isLoadingEnrollments,
+        statusToDelete,
+        updateStatusToDelete,
+        numberOfEnrollmentsToDelete,
     } = useDeleteEnrollments({
         selectedRows,
         programId,
@@ -40,40 +45,79 @@ export const EnrollmentDeleteModal = ({
         setIsDeleteDialogOpen,
     });
 
+    if (isLoadingEnrollments) {
+        return (
+            <Modal
+                onClose={() => setIsDeleteDialogOpen(false)}
+            >
+                <ModalTitle>
+                    {i18n.t('Delete selected enrollments')}
+                </ModalTitle>
+
+                <ModalContent>
+                    <span style={{ display: 'flex', justifyContent: 'center' }}>
+                        <CircularLoader />
+                    </span>
+                </ModalContent>
+
+                <ModalActions>
+                    <ButtonStrip>
+                        <Button
+                            secondary
+                            onClick={() => setIsDeleteDialogOpen(false)}
+                        >
+                            {i18n.t('Cancel')}
+                        </Button>
+                    </ButtonStrip>
+                </ModalActions>
+            </Modal>
+        );
+    }
+
     return (
         <Modal
             onClose={() => setIsDeleteDialogOpen(false)}
         >
             <ModalTitle>
-                {i18n.t('Delete enrollments')}
+                {i18n.t('Delete selected enrollments')}
             </ModalTitle>
 
             <ModalContent>
-                {i18n.t('Are you sure you want to delete all enrollments in the selected program?')}
+                <div className={classes.modalContent}>
+                    <div>
+                        {i18n.t('This action will permanently delete the selected enrollments, including all associated data and events.')}
+                    </div>
 
-                <BulkActionCountTable
-                    isLoading={isLoadingEnrollments}
-                    total={enrollmentCounts?.total}
-                    totalLabel={i18n.t('Total')}
-                >
-                    <DataTableRow>
-                        <DataTableCell>
-                            {i18n.t('Active')}
-                        </DataTableCell>
-                        <DataTableCell align={'center'}>
-                            {enrollmentCounts?.active}
-                        </DataTableCell>
-                    </DataTableRow>
+                    <div>
+                        {i18n.t('Please select which enrollment statuses you want to delete:')}
+                    </div>
 
-                    <DataTableRow>
-                        <DataTableCell>
-                            {i18n.t('Completed')}
-                        </DataTableCell>
-                        <DataTableCell align={'center'}>
-                            {enrollmentCounts?.completed}
-                        </DataTableCell>
-                    </DataTableRow>
-                </BulkActionCountTable>
+                    <div>
+                        <CustomCheckbox
+                            disabled={enrollmentCounts.active === 0}
+                            label={i18n.t('Active enrollments ({{count}})', { count: enrollmentCounts.active })}
+                            id="active"
+                            checked={statusToDelete.active}
+                            onChange={updateStatusToDelete}
+                        />
+
+                        <CustomCheckbox
+                            disabled={enrollmentCounts.completed === 0}
+                            label={i18n.t('Completed enrollments ({{count}})', { count: enrollmentCounts.completed })}
+                            id="completed"
+                            checked={statusToDelete.completed}
+                            onChange={updateStatusToDelete}
+                        />
+
+                        <CustomCheckbox
+                            disabled={enrollmentCounts.cancelled === 0}
+                            label={i18n.t('Cancelled enrollments ({{count}})', { count: enrollmentCounts.cancelled })}
+                            id="cancelled"
+                            checked={statusToDelete.cancelled}
+                            onChange={updateStatusToDelete}
+                        />
+                    </div>
+                </div>
             </ModalContent>
 
             <ModalActions>
@@ -85,35 +129,21 @@ export const EnrollmentDeleteModal = ({
                         {i18n.t('Cancel')}
                     </Button>
 
-                    <ConditionalTooltip
-                        enabled={!enrollmentCounts?.active}
-                        content={i18n.t('No active enrollments to delete')}
+                    <Button
+                        destructive
+                        onClick={deleteEnrollments}
+                        disabled={isDeletingEnrollments || numberOfEnrollmentsToDelete === 0}
                     >
-                        <Button
-                            destructive
-                            loading={isDeletingEnrollments}
-                            onClick={() => deleteEnrollments({ activeOnly: true })}
-                            disabled={!enrollmentCounts?.active}
-                        >
-                            {i18n.t('Delete active enrollments')}
-                        </Button>
-                    </ConditionalTooltip>
-
-                    <ConditionalTooltip
-                        enabled={!enrollmentCounts?.total}
-                        content={i18n.t('No enrollments to delete')}
-                    >
-                        <Button
-                            destructive
-                            loading={isDeletingEnrollments}
-                            onClick={() => deleteEnrollments({ activeOnly: false })}
-                            disabled={!enrollmentCounts?.total}
-                        >
-                            {i18n.t('Delete all enrollments')}
-                        </Button>
-                    </ConditionalTooltip>
+                        {i18n.t('Delete {{count}} enrollment', {
+                            count: numberOfEnrollmentsToDelete,
+                            defaultValue: 'Delete {{count}} enrollment',
+                            defaultValue_plural: 'Delete {{count}} enrollments',
+                        })}
+                    </Button>
                 </ButtonStrip>
             </ModalActions>
         </Modal>
     );
 };
+
+export const EnrollmentDeleteModal = withStyles(styles)(EnrollmentDeleteModalPlain);
