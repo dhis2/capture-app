@@ -12,7 +12,7 @@ export const TooltipOrgUnit = ({ orgUnitId }: Props) => {
     const fullPath = [...ancestors, displayName].join(' / ');
 
     return (
-        <Tooltip content={fullPath} openDelay={400} maxWidth={900}>
+        <Tooltip content={fullPath} openDelay={600} maxWidth={900}>
             <span style={{ textDecoration: 'underline dotted' }}>{displayName}</span>
         </Tooltip>
     );

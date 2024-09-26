@@ -22,7 +22,7 @@ import {
 } from '../../../../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
 import { useOrgUnitNames } from '../../../../../../metadataRetrieval/orgUnitName';
 
-const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, { id: 'orgUnitName' }, { id: 'scheduledAt' }, { id: 'notes' }];
+const baseKeys = [{ id: 'status' }, { id: 'occurredAt' }, { id: 'assignedUser' }, { id: 'orgUnit' }, { id: 'scheduledAt' }, { id: 'notes' }];
 const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
@@ -82,7 +82,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
                     acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
                     return acc;
                 }, {});
-
+                
                 const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
                 eventsData.push({
                     id: eventId,

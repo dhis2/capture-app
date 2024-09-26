@@ -8,7 +8,7 @@ import type { StageDataElement } from '../../../../types/common.types';
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
-import { getCachedOrgUnitName } from '../../../../../../metadataRetrieval/orgUnitName';
+import { TooltipOrgUnit } from '../../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
@@ -58,8 +58,8 @@ const convertStatusForView = (event: ApiEnrollmentEvent) => {
     };
 };
 
-const convertOrgUnitForView = (event: ApiEnrollmentEvent) => getCachedOrgUnitName(event.orgUnit);
-
+const convertOrgUnitForView = (event: ApiEnrollmentEvent) => <TooltipOrgUnit orgUnitId={event.orgUnit} />;
+    
 const convertNoteForView = (event: ApiEnrollmentEvent) => <Notes event={event} />;
 
 const groupRecordsByType = async (
