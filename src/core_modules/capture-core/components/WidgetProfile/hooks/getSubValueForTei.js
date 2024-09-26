@@ -48,9 +48,9 @@ const getImageResourceSubvalue = async ({ attribute, minorServerVersion }: SubVa
 };
 
 const getOrganisationUnitSubvalue = async ({ attribute: { value }, querySingleResource }: SubValueFunctionParams) => {
-    const orgUnits = await getOrgUnitNames([value], querySingleResource);
+    const organisationUnit = await getOrgUnitNames([value], querySingleResource);
 
-    return orgUnits[value];
+    return organisationUnit[value];
 };
 
 export const subValueGetterByElementType = {

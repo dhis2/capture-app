@@ -59,7 +59,7 @@ const convertStatusForView = (event: ApiEnrollmentEvent) => {
 };
 
 const convertOrgUnitForView = (event: ApiEnrollmentEvent) => <TooltipOrgUnit orgUnitId={event.orgUnit} />;
-    
+
 const convertNoteForView = (event: ApiEnrollmentEvent) => <Notes event={event} />;
 
 const groupRecordsByType = async (

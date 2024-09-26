@@ -82,7 +82,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
                     acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
                     return acc;
                 }, {});
-                
+
                 const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
                 eventsData.push({
                     id: eventId,
