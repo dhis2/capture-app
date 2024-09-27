@@ -1,3 +1,10 @@
+# [101.6.0](https://github.com/dhis2/capture-app/compare/v101.5.0...v101.6.0) (2024-09-27)
+
+
+### Features
+
+* support custom background color ([#3814](https://github.com/dhis2/capture-app/issues/3814)) ([22cfe58](https://github.com/dhis2/capture-app/commit/22cfe585b6b044c7d6b146c1449ccddb85d8abb4))
+
 # [101.5.0](https://github.com/dhis2/capture-app/compare/v101.4.1...v101.5.0) (2024-09-24)
 
 
