@@ -7,11 +7,12 @@ import {
     RuleEnrollmentJs,
     RuleEventJs,
     RuleJs,
-    RuleValueType,
     RuleVariableJs,
-    RuleVariableType,
     RuleAttributeValue,
     RuleEnrollmentStatus,
+    RuleEventStatus,
+    RuleValueType,
+    RuleVariableType,
 } from '@dhis2/rule-engine';
 import { ValueProcessor } from './ValueProcessor';
 import {
@@ -244,11 +245,12 @@ export class InputBuilder {
             programStageName,
             status,
             occurredAt,
-            scheduledAt,
-            completedAt,
+            scheduledAt: dueDate,
+            completedAt: completedDate,
         } = eventData;
 
         const eventDate = occurredAt ? Instant.parse(occurredAt) : Instant.now();
+
         const dataValues = Object
             .keys(eventData)
             .filter(key => !eventMainKeys.has(key))
@@ -260,16 +262,17 @@ export class InputBuilder {
                     this.convertDataElementValue(key, eventData[key]),
                 ));
 
-        const dueDate = scheduledAt ? LocalDate.ofInstant(Instant.parse(scheduledAt)) : null;
-        const completedDate = completedAt ? LocalDate.ofInstant(Instant.parse(completedAt)) : null;
+        const toLocalDate = (dateString: ?string) =>
+            (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : null);
+
         return new RuleEventJs(
             event,
             programStage,
             programStageName,
-            status,
+            status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
             eventDate,
-            dueDate,
-            completedDate,
+            toLocalDate(dueDate),
+            toLocalDate(completedDate),
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
             dataValues,
