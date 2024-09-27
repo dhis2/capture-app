@@ -228,6 +228,9 @@ export class InputBuilder {
         this.selectedOrgUnit = selectedOrgUnit;
     }
 
+    toLocalDate = (dateString: ?string, defaultValue: any = null) =>
+        (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : defaultValue);
+
     convertDataElementValue = (id: string, rawValue: any) =>
         String(this.dataElements[id]
             ? this.processValue(rawValue, this.dataElements[id].valueType)
@@ -262,17 +265,14 @@ export class InputBuilder {
                     this.convertDataElementValue(key, eventData[key]),
                 ));
 
-        const toLocalDate = (dateString: ?string) =>
-            (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : null);
-
         return new RuleEventJs(
             event,
             programStage,
             programStageName,
             status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
             eventDate,
-            toLocalDate(dueDate),
-            toLocalDate(completedDate),
+            this.toLocalDate(dueDate),
+            this.toLocalDate(completedDate),
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
             dataValues,
@@ -304,14 +304,13 @@ export class InputBuilder {
         // but since Capture supports program indicators, these should be added as part
         // of `Enrollment`.
 
-        const toLocalDate = (dateString: ?string) =>
-            (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : LocalDate.now());
+        const convertDate = (dateString: ?string) => this.toLocalDate(dateString, LocalDate.now());
 
         return new RuleEnrollmentJs(
             enrollment,
             '',                  // programName placeholder value
-            toLocalDate(incidentDate),
-            toLocalDate(enrollmentDate),
+            convertDate(incidentDate),
+            convertDate(enrollmentDate),
             RuleEnrollmentStatus.ACTIVE,            // enrollmentStatus placeholder value
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
