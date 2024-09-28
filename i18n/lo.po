@@ -4,13 +4,14 @@
 # Philip Larsen Donnelly, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2022
 # Saysamone Sibounma, 2023
+# Namwan Chanthavisouk, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Saysamone Sibounma, 2023\n"
+"Last-Translator: Namwan Chanthavisouk, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,10 +20,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "ເລືອກວັນທີໜຶ່ງ ຫຼື ຫຼາຍກວ່ານັ້ນ..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "ເລືອກວັນທີ..."
 
 msgid "Today"
 msgstr "ມື້ນີ້"
@@ -31,6 +32,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"ເຫດຜົນທີ່ເປັນໄປໄດ້ແມ່ນຍ້ອນບຣາວເຊີ ຫຼື ຮູບແບບ (ເຊັ່ນ: ຮູບແບບຄວາມເປັນສ່ວນຕົວ) "
+"ບໍ່ໄດ້ຖືກຮອງຮັບ. ເບິ່ງລາຍລະອຽດເພີ່ມເຕີມ."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -38,6 +41,10 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"ທ່ານໄດ້ເປີດໃຊ້ເວີຊັນອື່ນຂອງແອັບ Capture ໃນໂດເມນດຽວກັນ. ໃນປັດຈຸບັນ, ແອັບ "
+"Capture ພຽງແຕ່ຮອງຮັບການໃຊ້ງານໃນເວີຊັນດຽວກັນ (ໃນໂດເມນດຽວກັນ). "
+"ກະ​ລຸ​ນາ​ໂຫຼດ​ຫນ້າ​ນີ້​ຄືນ​ໃຫມ່​ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ຕ້ອງ​ການ​ທີ່​ຈະ​ນໍາ​ໃຊ້​ເວີຊັນນີ້​ອີກ​ເທື່ອ​ຫນຶ່ງ​,"
+" ແຕ່​ລະວັງໄວ້ວ່າມັນຈະ​ປິດ​ເວີຊັນ​ອື່ນ​."
 
 msgid "Organisation unit"
 msgstr "​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ"
@@ -49,79 +56,79 @@ msgid "Last updated"
 msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "ລົງທະບຽນ"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "ລົງທະບຽນກ່ອນໜ້າ"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "ຄ່ານີ້ກຳລັງກວດສອບຢູ່"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "ການອັບເດດຊ່ອງການເຊື່ອມຂໍ້ມູນແມ່ນລົ້ມເຫລວ"
 
 msgid "A value is required"
-msgstr ""
+msgstr "ຕ້ອງຕື່ມຄ່າ"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "ກະລຸນາລະບຸເບີໂທທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "ກະລຸນາລະບຸຈຳນວນເຕັມໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນບວກ"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນຈຳນວນທີ່ເປັນສູນ ຫຼື ເປັນບວກ"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນລົບ"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "ກະລຸນາລະບຸວັນທີໃຫ້ຖືກຕ້ອງ"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "ບໍ່ອະນຸຍາດໃຫ້ຕື່ມວັນທີໃນອະນາຄົດ"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "ກະລຸນາລະບຸວັນທີ ແລະ ເວລາໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "ກະລຸນາລະບຸເວລາໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "ກະລຸນາໃຫ້ອັດຕາສ່ວນທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນ URL ທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງ"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນອາຍຸໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນເບີໂທໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "ກະລຸນາປ້ອນໜ່ວຍງານຈັດຕັ້ງໃຫ້ຖືກຕ້ອງ"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "ກະລຸນາລະບຸຈຸດປະສານງານໃຫ້ຖືກຕ້ອງ"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "ຈຳນວນນີ້ແມ່ນມີຢູ່ແລ້ວ"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "\"ຈາກ\" ບໍ່ສາມາດໃຫຍ່ກວ່າ \"ເຖິງ\""
 
 msgid "Checking..."
-msgstr ""
+msgstr "ກຳລັງກວດສອບ..."
 
 msgid "Area"
-msgstr ""
+msgstr "ພື້ນທີ່"
 
 msgid "Coordinate"
 msgstr "ເສັ້ນສະແດງ"
@@ -130,10 +137,10 @@ msgid "Enrollment"
 msgstr "ການລົງທະບຽນ"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "ບໍ່ອະນຸຍາດໃຫ້ມີວັນທີໃນອະນາຄົດ"
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "ກຳລັງບັນທຶກ {{trackedEntityName}} ໃນ"
 
 msgid "in"
 msgstr "in"
@@ -142,19 +149,19 @@ msgid "Cancel"
 msgstr "ຍົກເລີກ"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "ຂໍ້ມູນເມຕ້າແມ່ນຜິດພາດ. ເບິ່ງບັນທຶກສໍາລັບລາຍລະອຽດ"
 
 msgid "Assigned user"
-msgstr ""
+msgstr "ຜູ້ໃຊ້ທີ່ຖືກມອບຫມາຍ"
 
 msgid "Search for user"
-msgstr ""
+msgstr "ຄົ້ນຫາຜູ້ໃຊ້"
 
 msgid "Complete event"
 msgstr "Complete event"
 
 msgid "Basic info"
-msgstr ""
+msgstr "ຂໍ້ມູນທົ່ວໄປ"
 
 msgid "Status"
 msgstr "ສະຖານະ"
@@ -166,23 +173,25 @@ msgid "Relationships"
 msgstr "ສາຍພົວພັນ"
 
 msgid "Assignee"
-msgstr ""
+msgstr "ຜູ້ມອບໝາຍ"
 
 msgid "Saving to"
-msgstr ""
+msgstr "ກຳລັງບັນທຶກໃສ່"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
-msgstr ""
+msgstr "ນີ້ບໍ່ແມ່ນໂປແກຣມເຫດການ ຫຼື ຂໍ້ມູນເມຕາເສຍຫາຍ. ເບິ່ງລາຍລະອຽດເພີ່ມເຕີມ."
 
 msgid "This event"
-msgstr ""
+msgstr "ເຫດການນີ້"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
+"ຄວາມສໍາພັນຂອງປະເພດ {{relationshipTypeName}} ໃສ່ {{entityName}} "
+"ແມ່ນມີໃນລະບົບແລ້ວ"
 
 msgid "Active"
 msgstr "ທີ່ຍັງນໍາໃຊ້ຢູ່"
@@ -194,109 +203,111 @@ msgid "Assigned to"
 msgstr "Assigned to"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "ກະລຸນາເພີ່ມ ຫຼື ຍົກເລີກຄຳເຫັນກ່ອນບັນທຶກເຫດການ"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "ບັນທຶກ ແລະ ເພີ່ມອີກ"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "ບັນທຶກ ແລະ ອອກ"
 
 msgid "Finish"
 msgstr "ສີ້ນສຸດ"
 
 msgid "No write access"
-msgstr ""
+msgstr "ບໍ່ມີການເຂົ້າເຖິງການຂຽນ"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "ໃໝ່ {{titleText}}"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "ປ່ຽນເປັນການເບິ່ງຟອມ"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "ສະຫຼັບໄປເບິ່ງແຖວ"
 
 msgid "events added"
-msgstr ""
+msgstr "ເຫດການແມ່ນໄດ້ເພີ່ມແລ້ວ"
 
 msgid "No events added"
-msgstr ""
+msgstr "ບໍ່ມີການເພີ່ມເຫດການ"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "ຄວາມສຳພັນຂອງເຫດການໃໝ່"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "ເພີ່ມຄວາມສຳພັນໃຫ້ເຫດການ"
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "ກັບຄືນໄປຫາເຫດການໂດຍບໍ່ມີການບັນທຶກຄວາມສໍາພັນ"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "ການປ່ຽນແປງທີ່ບໍ່ໄດ້ບັນທຶກໄວ້"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "ການອອກຈາກໜ້ານີ້ຈະເປັນການຍົກເລີກສິ່ງທີ່ທ່ານໄດ້ເລືອກ"
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "ຕົກລົງ, ຍົກເລີກ"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "ບໍ່, ຢູ່ໜ້ານີ້"
 
 msgid "New event"
 msgstr "ກໍລະນີໃໝ່"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr ""
+msgstr "ທ່ານບໍ່ໄດ້ອະນຸຍາດໃຫ້ສ້າງເຫດການໃນຕົວເລືອກນີ້"
 
 msgid "Save"
 msgstr "ບັນທຶກ"
 
 msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
+msgstr "ການອອກຈາກໜ້ານີ້ຈະໄດ້ຍົກເລີກການປ່ຽນແປງທີ່ທ່ານໄດ້ສ້າງຕໍ່ກັບເຫດການນີ້."
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "ບັນທຶກ {{trackedEntityName}} "
 
 msgid "without"
-msgstr ""
+msgstr "ໂດຍບໍ່ມີການ"
 
 msgid "enrollment"
-msgstr ""
+msgstr "ການລົງທະບຽນ"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
+msgstr "ລົງທະບຽນໂປແກຼມໂດຍການເລືອກໂປແກຼມຈາກແຖບດ້ານເທິງ."
 
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "ພົບຂໍ້​ຜິດ​ພາດ​. ເບິ່ງບັນທຶກສໍາລັບລາຍລະອຽດ"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
+msgstr "ມີຂໍ້ມູນຊໍ້າກັນ (ພົບຂໍ້ຜິດພາດ, ເບິ່ງບັນທຶກສໍາລັບລາຍລະອຽດ)"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"ລາຍການທີ່ມີ {{attributeName}} ນີ້ໄດ້ຖືກລົງທະບຽນແລ້ວ, "
+"ແຕ່ທ່ານບໍ່ໄດ້ຮັບການອະນຸຍາດເຂົ້າເຖິງ"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "ທ່ານໄດ້ລົງທະບຽນ {{attributeName}} ນີ້ແລ້ວ"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr ""
+msgstr "{{trackedEntityTypeName}} ທີ່ມີ {{attributeName}} ນີ້ລົງທະບຽນແລ້ວ"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "ສະແດງ {{trackedEntityTypeName}} ທີ່ລົງທະບຽນ"
 
 msgid "Registered person"
-msgstr ""
+msgstr "ຄົນທີ່ລົງທະບຽນ"
 
 msgid "validation failed"
-msgstr ""
+msgstr "ການກວດສອບລົ້ມເຫຼວ"
 
 msgid "Errors"
 msgstr "ຜິດພາດ"
@@ -308,64 +319,64 @@ msgid "Indicators"
 msgstr "ຕົວຊີ້ວັດ"
 
 msgid "Warnings"
-msgstr ""
+msgstr "ແຈ້ງເຕືອນ"
 
 msgid "Complete"
 msgstr "ສຳເລັດແລ້ວ"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "ພົບຄຳເຕືອນ"
 
 msgid "Abort"
-msgstr ""
+msgstr "ຫຼົ້ມເຫຼວ"
 
 msgid "Back to form"
-msgstr ""
+msgstr "ກັບຄືນໄປຫາຟອມ"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "ບັນທຶກ"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "ຂໍ້ຜິດພາດໃນການກວດສອບ ແລະ ແຈ້ງເຕືອນ"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "ການກວດສອບຜິດພາດ"
 
 msgid "Validation warnings"
 msgstr "ຄ່າເຕືອນ"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "ການປະຕິບັດຍັງດໍາເນີນຢູ່. ກະ​ລຸ​ນາ​ລໍ​ຖ້າ.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "ກຳລັງດຳເນີນງານ"
 
 msgid "Sort"
 msgstr "Sort"
 
 msgid "No events to display"
-msgstr ""
+msgstr "ບໍ່ມີເຫດການທີ່ຈະສະແດງ"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "ບໍ່ມີຂໍ້ມູນສຳລັບລາຍຊື່ອອບລາຍ"
 
 msgid "Close"
 msgstr "ປິດ"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "ກະລຸນາເລືອກຜູ້ໃຊ້"
 
 msgid "Me"
-msgstr ""
+msgstr "ຂ້ອຍ"
 
 msgid "Anyone"
-msgstr ""
+msgstr "ທຸກຄົນ"
 
 msgid "None"
 msgstr "ບໍ່ແມນ"
 
 msgid "Select user"
-msgstr ""
+msgstr "ເລືອກຜູ້ໃຊ້"
 
 msgid "to"
 msgstr "ຫາ"
@@ -395,7 +406,7 @@ msgid "Last 3 months"
 msgstr "3 ເດືອນຍ້ອນຫຼັງ"
 
 msgid "Custom range"
-msgstr ""
+msgstr "ຊ່ວງກຳນົດເອງ"
 
 msgid "Max"
 msgstr "ຄ່າໃຫ່ຍສຸດ"
@@ -404,13 +415,13 @@ msgid "Min"
 msgstr "ຄ່າຕໍ່າສຸດ"
 
 msgid "Contains text"
-msgstr ""
+msgstr "ໃສ່ຂໍ້ຄວາມ"
 
 msgid "Yes"
 msgstr "ແມ່ນ"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "ເດືອນ/ວັນ/ປີ"
 
 msgid "Years"
 msgstr "ປີ"
@@ -422,7 +433,7 @@ msgid "Days"
 msgstr "ມື້"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "ກຳລັງອັບໂຫຼດເອກະສານ"
 
 msgid "selected"
 msgstr "ເລືອກແລ້ວ"
@@ -437,10 +448,10 @@ msgid "No"
 msgstr "ບໍ່ແມນ"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "ກຳລັງອັບໂຫຼດຮູບພາບ"
 
 msgid "Select image"
-msgstr ""
+msgstr "ເລືອກຮູບພາບ"
 
 msgid "Search"
 msgstr "ຄົນຫາ"
@@ -449,7 +460,7 @@ msgid "Clear"
 msgstr "ລຶບ"
 
 msgid "No results"
-msgstr ""
+msgstr "ບໍ່ມີຜົນຮັບ"
 
 msgid "Description"
 msgstr "ລາຍລະອຽດ"
@@ -458,19 +469,19 @@ msgid "URL"
 msgstr "URL"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "ພິມເພື່ອຄົ້ນຫາ"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "ບໍ່ສາມາດເອົາຂໍ້ມູນຄຳແນະນຳໄດ້"
 
 msgid "No items to display"
-msgstr ""
+msgstr "ບໍ່ມີລາຍການໃຫ້ສະແດງ"
 
 msgid "Select columns"
-msgstr ""
+msgstr "ເລືອກຖັນ"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "ຖັນທີ່ຈະສະແດງຢູ່ໃນຕາຕະລາງ"
 
 msgid "Column"
 msgstr "ຖັນ"
@@ -479,61 +490,61 @@ msgid "Apply"
 msgstr "ນຳໃຊ້"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
+msgstr "{{fromDate}} ຫາ {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "ຫຼັງຈາກ ຫຼື ເທົ່າກັບ {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "ກ່ອນ ຫຼື ເທົ່າກັບ {{date}}"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "ໃຫຍ່ກວ່າ ຫຼື ເທົ່າກັບ"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "ຫນ້ອຍກວ່າ ຫຼື ເທົ່າກັບ"
 
 msgid "More filters"
-msgstr ""
+msgstr "ຕົວກອງເພີ່ມເຕີມ"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "ແຖວຕໍ່ຫນ້າເຈ້ຍ"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "ບໍ່ສາມາດຮັບຫົວໜ່ວຍອົງການຈັດຕັ້ງໄດ້"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "ບໍ່ມີໂປແກຼມ"
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "ບໍ່ສາມາດເລືອກໂປແກຼມສໍາລັບການລົງທະບຽນ"
 
 msgid "New"
 msgstr "ສ້າງໃຫມ່"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "ໃໝ່ {{trackedEntityName}} ໃນ {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "ຊອກຫາ {{trackedEntityName}} ໃນ {{programName}}"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "ລົບຕົວເລືອກ"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "ໜ່ວຍ​ງານ​ການ​ລົງ​ທະ​ບຽນ​ທີ່​ເລືອກ​ໄວ້"
 
 msgid "Start Again"
-msgstr ""
+msgstr "ເລີ່ມໃໝ່"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "ເຈົ້າແນ່ໃຈບໍ່? ຂໍ້ມູນທັງຫມົດທີ່ບໍ່ໄດ້ບັນທຶກໄວ້ຈະສູນເສຍໄປ."
 
 msgid "Accept"
 msgstr "​ການ​ຮັບ​ຮອງ"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "ລົງທະບຽນຫົວໜ່ວຍການຈັດຕັ້ງ"
 
 msgid "Select"
 msgstr "ເລືອກ"
@@ -542,7 +553,7 @@ msgid "Program"
 msgstr "ສາຍງານ"
 
 msgid "No programs available."
-msgstr ""
+msgstr "ບໍ່ພົບໂປແກຼມນີ້"
 
 msgid "Show all"
 msgstr "ສະແດງທັງໝົດ"
@@ -551,7 +562,7 @@ msgid "Selected program"
 msgstr "ເລືອກສາຍງານ"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "ບາງໂປແກຼມກໍາລັງຖືກກັ່ນຕອງ."
 
 msgid "Select program"
 msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
@@ -569,73 +580,77 @@ msgid "Syncing"
 msgstr "ກຳລັງອັບເດດຂໍ້ມູນໃຫ້ຄືກັນ"
 
 msgid "Add comment"
-msgstr ""
+msgstr "ເພີ່ມຄວາມເຫັນ"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃນການຂຽນຄຳເຫັນ"
 
 msgid "Write comment"
-msgstr ""
+msgstr "ຂຽນຄວາມເຫັນ"
 
 msgid "Show all events"
-msgstr ""
+msgstr "ສະແດງເຫດການທັງໝົດ"
 
 msgid "Edit event"
-msgstr ""
+msgstr "ແກ້ໄຂເຫດການ"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "ບໍ່ສາມາດໂຫຼດເຫດການໄດ້. ທ່ານແນ່ໃຈບໍ່ວ່າມັນມີຢູ່?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "ບໍ່ສາມາດໂຫຼດເຫດການໄດ້"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "ບໍ່ສາມາດໂຫຼດຫົວໜ່ວຍການຈັດຕັ້ງໄດ້"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
+msgstr "ຕິດຕາມກໍລະນີແບບບຸກຄົນດ້ວຍໄອດີ \" {{teiId}} \" ແມ່ນບໍ່ພົບ"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
-msgstr ""
+msgstr "ພົບຂໍ້ຜິດພາດໃນຂະນະທີ່ເປີດການລົງທະບຽນນີ້. ກະລຸນາໃສ່ URL ທີ່ຖືກຕ້ອງ."
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
+msgstr "ລົງທະບຽນດ້ວຍໄອດີ \" {{enrollmentId}} \" ແມ່ນບໍ່ພົບ"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
+"{{teiDisplayName}} ແມ່ນໄດ້ຖືກລົງທະບຽນຢູ່ໃນຫຼາຍໂປແກຣມ. ກະລຸນາເລືອກໂປແກຣມ."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
-msgstr ""
+msgstr "{{programName}} ມີໝວດໝູ່. ເລືອກທຸກໝວດໝູ່ເພື່ອເບິ່ງກະດານຂ່າວ."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
 "view the dashboard."
 msgstr ""
+"ມີການລົງທະບຽນຊ້ຳກັນໃນໂປແກຣມນີ້. ກະລຸນາເລືອກການລົງທະບຽນເພື່ອເບິ່ງກະດານຂ່າວ."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} ບໍ່ໄດ້ລົງທະບຽນຢູ່ໃນໂປແກຼມນີ້."
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "ລົງທະບຽນ {{teiDisplayName}} ໃນໂປແກຼມນີ້."
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayName}} ເປັນ {{tetName}} ແລະ ບໍ່ສາມາດລົງທະບຽນໃນ {{programName}} "
+"ໄດ້. ເລືອກໂປແກຼມອື່ນທີ່ອະນຸຍາດໃຫ້ລົງທະບຽນ {{tetName}}."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "ລົງທະບຽນ {{selectedTetName}} ໃໝ່ໃນໂປແກຼມນີ້."
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr ""
+msgstr "{{programName}} ແມ່ນໂປແກຼມເຫດການ ແລະ ບໍ່ມີການລົງທະບຽນ."
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "ສ້າງເຫດການໃຫມ່ໃນໂປແກູມນີ້."
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "ເບິ່ງລາຍຊື່ເຮັດວຽກຢູ່ໃນໂປແກຼມນີ້."
 
 msgid "Delete event"
 msgstr "ລືບກໍລະນີອອກ"
@@ -650,16 +665,16 @@ msgid "Download as CSV"
 msgstr "ດາວໂຫຼດເປັນ CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "ດາວໂຫຼດດ້ວຍຕົວກອງປັດຈຸບັນ"
 
 msgid "Download data..."
-msgstr ""
+msgstr "ໂຫຼດຂໍ້ມູນ..."
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "ບໍ່ສາມາດໂຫຼດລາຍການໄດ້"
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫຼດລາຍການ"
 
 msgid "Registered events"
 msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
@@ -674,77 +689,77 @@ msgid "Registering unit"
 msgstr "ສະຖານທີ່ລົງທະບຽນ"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "ວັນທີລົງທະບຽນ"
 
 msgid "Inactive"
 msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "ລາຍຊື່ເຮັດວຽກບໍ່ສາມາດອັບເດດໄດ້"
 
 msgid "Update view"
-msgstr ""
+msgstr "ອັບເດດມຸມມອງ"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "ບັນທຶກມຸມມອງປັດຈຸບັນ..."
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "ບັນທຶກມຸມມອງປັດຈຸບັນເປັນ..."
 
 msgid "Delete view"
-msgstr ""
+msgstr "ລົບມຸມມອງ"
 
 msgid "Share view..."
-msgstr ""
+msgstr "ແບ່ງປັນມຸມມອງ..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "ທ່ານຕ້ອງການລົບມຸມມອງ '{{templateName}}' ແທ້ບໍ່?"
 
 msgid "Confirm"
 msgstr "Confirm"
 
 msgid "Save As view"
-msgstr ""
+msgstr "ບັນທຶກເປັນເບິ່ງ"
 
 msgid "View name"
-msgstr ""
+msgstr "ເບິ່ງຊື່"
 
 msgid "Show Less"
-msgstr ""
+msgstr "ສະແດງໜ້ອຍ"
 
 msgid "Show All"
-msgstr ""
+msgstr "ສະແດງທັງໝົດ"
 
 msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "ເລືອກຫົວໜ່ວຍການລົງທະບຽນເພື່ອລາຍງານ"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
+msgstr "ເລືອກ {{missingCategories}} ເພື່ອເລີ່ມການລາຍງານ"
 
 msgid "Save as new"
-msgstr ""
+msgstr "ບັນທຶກເປັນອັນໃໝ່"
 
 msgid "View dashboard"
-msgstr ""
+msgstr "ເບິ່ງກະດານຂ່າວ"
 
 msgid "Create for"
-msgstr ""
+msgstr "ສ້າງສໍາລັບ"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
-msgstr ""
+msgstr "ນອກນັ້ນທ່ານຍັງສາມາດເລືອກໂປແກຼມຈາກແຖບເທິງ ແລະ ສ້າງໃນໂປແກຼມນັ້ນ"
 
 msgid "Save new"
-msgstr ""
+msgstr "ບັນທຶກໃໝ່"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "ບັນທຶກໃໝ່ {{trackedEntityTypeName}} ແລະ ເຊື່ອມ"
 
 msgid "Link"
-msgstr ""
+msgstr "ເຊື່ອມ"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "ບັນທຶກເປັນອັນໃໝ່ {{trackedEntityName}}"
 
 msgid "Organisation Unit"
 msgstr "ຫົວໜ່ວຍ ການຈັດຕັ້ງ"
@@ -753,22 +768,22 @@ msgid "Registration"
 msgstr "ລົງທະບຽນ"
 
 msgid "Search results"
-msgstr ""
+msgstr "ຜົນການຄົ້ນຫາ"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "ບໍ່ພົບ {{trackedEntityTypeName}} ."
 
 msgid "New search"
-msgstr ""
+msgstr "ຄົ້ນຫາໃໝ່"
 
 msgid "Edit search"
-msgstr ""
+msgstr "ແກ້ໄຂການຄົ້ນຫາ"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "ເຊື່ອມກັບໂຕທີ່ມີຢູ່ {{trackedEntityType}}"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "ສ້າງໃໝ່ {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "ລົົງທະບຽນ"
@@ -776,47 +791,51 @@ msgstr "ລົົງທະບຽນ"
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
+"ຕື່ມຂໍ້ມູນໃສ່ຢ່າງໜ້ອຍ {{minAttributesRequiredToSearch}} "
+"ຄຸນລັກສະນະເພື່ອຄົ້ນຫາ"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "ຄົ້ນຫາ {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "ຄົ້ນຫາໂດຍ {{name}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "ຄົ້ນຫາໂດຍຄຸນລັກສະນະ"
 
 msgid "Back"
 msgstr "​ກັບ​ຄືນ"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "ຄົ້ນຫາ {{titleText}}"
 
 msgid "Search for"
 msgstr "ຄົ້ນຫາສໍາລັບ"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
-msgstr ""
+msgstr "ນອກນັ້ນທ່ານຍັງສາມາດເລືອກໂປແກຼມຈາກແຖບເທິງ ແລະ ຄົ້ນຫາໃນໂປແກຼມນັ້ນ"
 
 msgid "No results found"
-msgstr ""
+msgstr "ບໍ່ພົບຜົນການຊອກຫາ"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
-msgstr ""
+msgstr "ທ່ານສາມາດປ່ຽນຄໍາຄົ້ນຫາ ແລະ ຄົ້ນຫາອີກເທື່ອຫນຶ່ງ"
 
 msgid "Back to search"
-msgstr ""
+msgstr "ກັບໄປຫາການຄົ້ນຫາ"
 
 msgid "An error has occurred"
-msgstr ""
+msgstr "ພົບຂໍ້ຜິດພາດ"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
+"ພົບບັນຫາໃນການຄົ້ນຫາ, ກະລຸນາປ່ຽນຄໍາຄົ້ນຫາ ຫຼື ລອງໃໝ່ພາຍຫຼັງ. "
+"ສໍາລັບລາຍລະອຽດເພີ່ມເຕີມເປີດແຖບແຜງຄວບຄຸມ"
 
 msgid "Too many results"
 msgstr "ຜົນໄດ້ຮັບຫຼາຍເກີນໄປ"
@@ -825,26 +844,28 @@ msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 msgstr ""
+"ການຄົ້ນຫານີ້ມີຜົນໄດ້ຮັບຫຼາຍເກີນໄປທີ່ຈະສະແດງ. ລອງປ່ຽນຄຳຄົ້ນຫາ ຫຼື "
+"ຄົ້ນຫາໂດຍຄຸນສົມບັດເພີ່ມເຕີມເພື່ອຈຳກັດຜົນໄດ້ຮັບ."
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "ເລືອກປະເພດສຳລັບຄົ້ນຫາ"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "ເບິ່ງການລົງທະບຽນທີ່ຍັງເຄື່ອນໄຫວ"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "ລົງທະບຽນໃໝ່"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
-msgstr ""
+msgstr "ບໍ່ພົບສິ່ງທີ່ທ່ານກໍາລັງຊອກຫາບໍ່? ລອງຄົ້ນຫາໂປແກຼມທັງຫມົດໂດຍເລືອກປະເພດ"
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "ຄົ້ນຫາໃນທຸກໂປແກຼມ"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດໃນການແກ້ໄຂເຫດການນີ້"
 
 msgid "Event details"
 msgstr "ລາຍລະອຽດເຫດການ"
@@ -855,37 +876,37 @@ msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "ການອອກຈາກໜ້ານີ້ແມ່ນຈະຖືກຍົກເລີກການເລືອກຕ່າງໆທີ່ທ່ານສ້າງຂຶ້ນ"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "ບໍ່ມີໃຜຖືກມອບໝາຍໃຫ້ກັບເຫດການນີ້"
 
 msgid "Assign"
 msgstr "Assign"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "ເຫດການໄດ້ຖືກມອບໝາຍໃຫ້ {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "ຄຳຕິຊົມ"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "ພົບການຊໍ້າກັນທີ່ເປັນໄປໄດ້"
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫຼດຂໍ້ມູນຊໍ້າກັນ"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດໃນການລົບຄວາມສໍາພັນນີ້"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດໃນການສ້າງຄວາມສຳພັນໃດໆ"
 
 msgid "Add relationship"
 msgstr "ເພີ່ມຄວາມສໍາພັນ"
 
 msgid "Results found"
-msgstr ""
+msgstr "ພົບຜົນໄດ້ຮັບ"
 
 msgid "Open"
 msgstr "ເປີດ"
@@ -894,64 +915,64 @@ msgid "All accessible"
 msgstr "ເຂົ້າເຖິງໄດ້ໝົດ"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "ຂອບເຂດຂອງໜ່ວຍງານ"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "ຄົ້ນຫາ {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "ຕື່ມຂໍ້ມູນໃສ່ຢ່າງໜ້ອຍ {{minAttributesRequired}} ຄຸນລັກສະນະເພື່ອຄົ້ນຫາ"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "ເພື່ອເຮັດວຽກກັບໂປແກລມທີ່ເລືອກ,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "ເປີດແອັບ Tracker Capture"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດຂຶ້ນ. ເບິ່ງລາຍລະອຽດ"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}} ໃນໂປຣແກຣມ {{escape}} {{programName}}"
 
 msgid "Program not found"
-msgstr ""
+msgstr "ບໍ່ພົບໂປຣແກຣມ"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "ໂປແກຣມນີ້ບໍ່ແມ່ນໂປແກຣມຕິດຕາມ"
 
 msgid "Profile"
 msgstr "ລາຍລະອຽດສ່ວນຕົົວ"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກເຫດການ"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "ບໍ່ສາມາດບັນທຶກເຫດການໄດ້"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "ບໍ່ສາມາດລົບເຫດການໄດ້"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດບັນທຶກລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດເພີ່ມລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດລົບລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການຄົ້ນຫາຫົວໜ່ວຍການຈັດຕັ້ງ"
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກການຕິດຕາມລາຍບຸກຄົນ"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກການລົງທະບຽນ"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "ຕິດຕາມຕົວຢ່າງລາຍບຸກຄົນ"
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
@@ -963,37 +984,37 @@ msgid "Longitude"
 msgstr "ເສັ້ນຂະໜານ"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "ໜ້າ {{currentPage}}"
 
 msgid "Date"
 msgstr "ວັນທີ່"
 
 msgid "Time"
-msgstr ""
+msgstr "ເວລາ"
 
 msgid "From date"
 msgstr "From date"
 
 msgid "From time"
-msgstr ""
+msgstr "ຈາກເວລາ"
 
 msgid "To date"
 msgstr "ເຖີງວັນທີ່"
 
 msgid "To time"
-msgstr ""
+msgstr "ເຖິງເວລາ"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນລະຫວ່າງການກວດສອບ"
 
 msgid "error"
-msgstr ""
+msgstr "ຂໍ້ຜິດພາດ"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "ລົບຮູບຫຼາຍຫຼ່ຽມ"
 
 msgid "Set area"
-msgstr ""
+msgstr "ກຳນົດພື້ນທີ່"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "ຮູບແບບຄວາມເຂົ້າກັນໄດ້"

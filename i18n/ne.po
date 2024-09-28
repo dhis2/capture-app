@@ -1,22 +1,20 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2021
-# Oscar Mesones Lapouble <oscar.lapouble@gmail.com>, 2021
-# Philip Larsen Donnelly, 2022
-# Thiago Rocha, 2024
+# Saroj Dhakal <lotusnagarkot@gmail.com>, 2024
+# Prabesh Guragain, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Thiago Rocha, 2024\n"
-"Language-Team: Portuguese (Brazil) (https://app.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
+"Last-Translator: Prabesh Guragain, 2024\n"
+"Language-Team: Nepali (https://app.transifex.com/hisp-uio/teams/100509/ne/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Language: ne\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -25,7 +23,7 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "Hoje"
+msgstr "आज"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -40,13 +38,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr "Unidade organizacional"
+msgstr ""
 
 msgid "Date of enrollment"
-msgstr "Data de Inscrição"
+msgstr ""
 
 msgid "Last updated"
-msgstr "Última actualização"
+msgstr ""
 
 msgid "Enrolled"
 msgstr ""
@@ -124,10 +122,10 @@ msgid "Area"
 msgstr ""
 
 msgid "Coordinate"
-msgstr "Coordenada"
+msgstr ""
 
 msgid "Enrollment"
-msgstr "Inscrição"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -139,13 +137,13 @@ msgid "in"
 msgstr ""
 
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "रद्द गर्नुहोस्"
 
 msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "Assigned user"
-msgstr "Usuário atribuído"
+msgstr ""
 
 msgid "Search for user"
 msgstr ""
@@ -157,16 +155,16 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "Estado"
+msgstr "स्थिती"
 
 msgid "Comments"
 msgstr ""
 
 msgid "Relationships"
-msgstr "Relacionamentos"
+msgstr ""
 
 msgid "Assignee"
-msgstr ""
+msgstr "निर्दिष्ट व्यक्ति"
 
 msgid "Saving to"
 msgstr ""
@@ -185,13 +183,13 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr "Activo"
+msgstr ""
 
 msgid "Completed"
-msgstr "Concluído"
+msgstr ""
 
 msgid "Assigned to"
-msgstr "Atribuido a"
+msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -247,13 +245,13 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "New event"
-msgstr "Novo evento"
+msgstr ""
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr "Salvar"
+msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -299,19 +297,19 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr "Erros"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Retroinformacão"
+msgstr ""
 
 msgid "Indicators"
-msgstr "Indicadores"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
 
 msgid "Complete"
-msgstr "Completo"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -341,7 +339,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr "Ordenar"
+msgstr ""
 
 msgid "No events to display"
 msgstr ""
@@ -350,7 +348,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "Fechar"
+msgstr ""
 
 msgid "Please select the user"
 msgstr ""
@@ -362,19 +360,19 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr "Nenhum"
+msgstr ""
 
 msgid "Select user"
 msgstr ""
 
 msgid "to"
-msgstr "para"
+msgstr ""
 
 msgid "From"
-msgstr "A partir de"
+msgstr ""
 
 msgid "To"
-msgstr "Até"
+msgstr "प्रापक"
 
 msgid "This week"
 msgstr ""
@@ -386,55 +384,55 @@ msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "Última semana"
+msgstr ""
 
 msgid "Last month"
-msgstr "Mês passado"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "Últimos 3 meses"
+msgstr ""
 
 msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "Máx"
+msgstr ""
 
 msgid "Min"
-msgstr "Min"
+msgstr ""
 
 msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "Sim"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "Anos"
+msgstr ""
 
 msgid "Months"
-msgstr "Meses"
+msgstr ""
 
 msgid "Days"
-msgstr "Dias"
+msgstr ""
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr "selecionado"
+msgstr "चयन गरिएको"
 
 msgid "Delete"
-msgstr "Apagar"
+msgstr ""
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "nenhum"
+msgstr ""
 
 msgid "Uploading image"
 msgstr ""
@@ -443,19 +441,19 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr "Pesquisar"
+msgstr "खोज"
 
 msgid "Clear"
-msgstr "Limpar"
+msgstr ""
 
 msgid "No results"
 msgstr ""
 
 msgid "Description"
-msgstr "Descrição"
+msgstr ""
 
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 msgid "start typing to search"
 msgstr ""
@@ -473,10 +471,10 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "Coluna"
+msgstr ""
 
 msgid "Apply"
-msgstr "Aplicar"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -509,7 +507,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
-msgstr "Novo"
+msgstr ""
 
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
@@ -530,40 +528,40 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "स्वीकार"
 
 msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "Seleccione"
+msgstr ""
 
 msgid "Program"
-msgstr "Programa"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr "Mostrar tudo"
+msgstr ""
 
 msgid "Selected program"
-msgstr "Programa selecionado"
+msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr "Seleccione Programa"
+msgstr ""
 
 msgid "Selected"
-msgstr "Seleccionado"
+msgstr ""
 
 msgid "Online"
-msgstr "Ligado"
+msgstr ""
 
 msgid "Offline"
-msgstr "Desligado"
+msgstr ""
 
 msgid "Syncing"
 msgstr ""
@@ -647,7 +645,7 @@ msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"
-msgstr "Baixar como CSV"
+msgstr ""
 
 msgid "Download with current filters"
 msgstr ""
@@ -665,19 +663,19 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Enrollment status"
-msgstr "Status da inscrição"
+msgstr ""
 
 msgid "Cancelled"
-msgstr "Cancelado"
+msgstr ""
 
 msgid "Registering unit"
-msgstr "Unidade de registro"
+msgstr ""
 
 msgid "Registration Date"
-msgstr "Data do Registo"
+msgstr ""
 
 msgid "Inactive"
-msgstr "Inativo"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -701,7 +699,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr ""
 
 msgid "Save As view"
 msgstr ""
@@ -747,10 +745,10 @@ msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr "Unidade organizacional"
+msgstr ""
 
 msgid "Registration"
-msgstr "Registo"
+msgstr ""
 
 msgid "Search results"
 msgstr ""
@@ -771,7 +769,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr "Registro"
+msgstr ""
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -787,20 +785,20 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr "Voltar"
+msgstr ""
 
 msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
-msgstr "Procurar"
+msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "No results found"
-msgstr "Nenhum resultado encontrado"
+msgstr "कुनै पनि नतिजा भेटिएन"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -861,7 +859,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr "Atribuir"
+msgstr ""
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -882,19 +880,19 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "Adicionar relacionamento"
+msgstr ""
 
 msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr "Abrir"
+msgstr "खोल्नुहोस्"
 
 msgid "All accessible"
-msgstr "Tudo acessível"
+msgstr ""
 
 msgid "Organisation unit scope"
-msgstr "Escopo da unidade organizacional"
+msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -921,7 +919,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "Perfil"
+msgstr ""
 
 msgid "Error saving event"
 msgstr ""
@@ -954,31 +952,31 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Definir coordenada"
+msgstr ""
 
 msgid "Latitude"
-msgstr "Latitude"
+msgstr ""
 
 msgid "Longitude"
-msgstr "Longitude"
+msgstr ""
 
 msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr "Data"
+msgstr "मिति"
 
 msgid "Time"
-msgstr "Tempo"
+msgstr ""
 
 msgid "From date"
-msgstr "Data de inicio"
+msgstr ""
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr "Até à data"
+msgstr ""
 
 msgid "To time"
 msgstr ""
