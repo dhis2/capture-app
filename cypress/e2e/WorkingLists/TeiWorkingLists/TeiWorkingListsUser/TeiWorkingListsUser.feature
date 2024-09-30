@@ -211,7 +211,7 @@ And you apply the current filter
 Then the assignee filter button should show that Anyone filter is in effect
 And the assignee column is displayed
 
-Scenario: The assigned user data is keep when swiching between working lists types
+Scenario: The assigned user data is kept when switching between working list types
 Given you open the main page with Ngelehun and Malaria focus investigation context
 And you filter by assigned Foci investigation & classification events
 And the assignee filter button should show that Anyone filter is in effect
