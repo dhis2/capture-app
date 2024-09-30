@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -1240,12 +1240,6 @@ msgstr "无法加载报名的小部件。请稍后再试"
 
 msgid "Follow-up"
 msgstr "后续"
-
-msgid "Started at {{orgUnitName}}"
-msgstr "始于{{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "由{{ownerOrgUnit}}拥有"
 
 msgid "Cancelled"
 msgstr "已取消"

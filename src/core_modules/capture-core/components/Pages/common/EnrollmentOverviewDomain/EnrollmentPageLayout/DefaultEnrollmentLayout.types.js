@@ -34,6 +34,7 @@ export type ColumnConfig = DefaultWidgetColumnConfig | PluginWidgetColumnConfig;
 
 export type PageLayoutConfig = {
     title?: ?string,
+    backgroundColor?: ?string,
     leftColumn: ?Array<ColumnConfig>,
     rightColumn: ?Array<ColumnConfig>,
 }
