@@ -54,7 +54,7 @@ const tabMode = Object.freeze({
     SCHEDULE: 'SCHEDULE',
 });
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {

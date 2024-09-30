@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { ComposedProgramSelector } from './ComposedProgramSelector.component';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     programLabel: {
         paddingTop: '100px',
         '@media (max-width: 523px)': {
