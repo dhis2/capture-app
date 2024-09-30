@@ -10,7 +10,7 @@ type Props = {
     checked: boolean,
     disabled?: boolean,
     id: string,
-    onChange: (value: boolean) => void,
+    onChange: (status: string) => void,
 }
 
 const styles = {
@@ -54,7 +54,7 @@ const CustomCheckboxPlain = ({
     label,
     disabled,
     classes,
-}: Props) => (
+}) => (
     <button
         type="button"
         onClick={() => onChange(id)}

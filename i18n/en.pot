@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-26T11:57:15.171Z\n"
-"PO-Revision-Date: 2024-09-26T11:57:15.171Z\n"
+"POT-Creation-Date: 2024-09-30T21:09:24.448Z\n"
+"PO-Revision-Date: 2024-09-30T21:09:24.448Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1653,6 +1653,9 @@ msgstr "Complete events"
 msgid "Are you sure you want to complete all active events?"
 msgstr "Are you sure you want to complete all active events?"
 
+msgid "There are no active events to complete in the current selection."
+msgstr "There are no active events to complete in the current selection."
+
 msgid "An error occurred while completing events"
 msgstr "An error occurred while completing events"
 
@@ -1689,17 +1692,45 @@ msgstr "Completed enrollments"
 msgid "Cancelled enrollments"
 msgstr "Cancelled enrollments"
 
+msgid "An error occurred while completing the enrollments."
+msgstr "An error occurred while completing the enrollments."
+
+msgid "Advanced information"
+msgstr "Advanced information"
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+
+msgid "This action will complete {{count}} active enrollment in your selection."
+msgid_plural "This action will complete {{count}} active enrollment in your selection."
+msgstr[0] "This action will complete {{count}} active enrollment in your selection."
+msgstr[1] "This action will complete {{count}} active enrollments in your selection."
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural "{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] "{{count}} enrollment already marked as completed will not be changed."
+msgstr[1] "{{count}} enrollments already marked as completed will not be changed."
+
+msgid "Mark all events within enrollments as complete"
+msgstr "Mark all events within enrollments as complete"
+
 msgid "Complete enrollments"
 msgstr "Complete enrollments"
 
-msgid "Are you sure you want to complete all active enrollments?"
-msgstr "Are you sure you want to complete all active enrollments?"
-
-msgid "Already completed"
-msgstr "Already completed"
+msgid "Complete selected enrollments"
+msgstr "Complete selected enrollments"
 
 msgid "No active enrollments to complete"
 msgstr "No active enrollments to complete"
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] "Complete {{count}} enrollment"
+msgstr[1] "Complete {{count}} enrollments"
 
 msgid "An error occurred while completing the enrollments"
 msgstr "An error occurred while completing the enrollments"
@@ -1767,19 +1798,13 @@ msgstr "an error occurred loading the working lists"
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "an error occurred loading Tracked entity instance lists"
 
-msgid "{{count}} record selected"
-msgid_plural "{{count}} record selected"
-msgstr[0] "{{count}} record selected"
-msgstr[1] "{{count}} records selected"
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} selected"
+msgstr[1] "{{count}} selected"
 
 msgid "Deselect all"
 msgstr "Deselect all"
-
-msgid "Total records to be completed"
-msgstr "Total records to be completed"
-
-msgid "Count"
-msgstr "Count"
 
 msgid "Update view"
 msgstr "Update view"

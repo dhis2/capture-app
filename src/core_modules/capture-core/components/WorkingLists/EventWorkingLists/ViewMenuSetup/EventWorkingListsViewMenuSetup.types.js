@@ -27,4 +27,5 @@ export type EventWorkingListsViewMenuSetupOutputProps = {|
     onSelectAll: (rows: Array<string>) => void,
     selectionInProgress: ?boolean,
     selectedRows: { [key: string]: boolean },
+    bulkActionBarComponent: React$Node,
 |};

@@ -1,15 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import {
-    Button, ButtonStrip,
-    DataTableCell,
-    DataTableRow,
-    Modal, ModalActions,
-    ModalContent,
-    ModalTitle,
-} from '@dhis2/ui';
-import { BulkActionCountTable } from '../../../../WorkingListsBase/BulkActionBar';
+import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle, } from '@dhis2/ui';
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 
 type Props = {|
@@ -43,7 +35,7 @@ export const CompleteAction = ({
                 {i18n.t('Complete')}
             </Button>
 
-            {isCompleteDialogOpen && (
+            {isCompleteDialogOpen && eventCounts && (
                 <Modal
                     small
                     onClose={() => setIsCompleteDialogOpen(false)}
@@ -53,29 +45,11 @@ export const CompleteAction = ({
                     </ModalTitle>
 
                     <ModalContent>
-                        {i18n.t('Are you sure you want to complete all active events?')}
-
-                        <BulkActionCountTable
-                            total={eventCounts?.active}
-                            isLoading={isLoading}
-                        >
-                            <DataTableRow>
-                                <DataTableCell>
-                                    {i18n.t('Active')}
-                                </DataTableCell>
-                                <DataTableCell align={'center'}>
-                                    {eventCounts?.active}
-                                </DataTableCell>
-                            </DataTableRow>
-                            <DataTableRow>
-                                <DataTableCell>
-                                    {i18n.t('Completed')}
-                                </DataTableCell>
-                                <DataTableCell align={'center'}>
-                                    {eventCounts?.completed}
-                                </DataTableCell>
-                            </DataTableRow>
-                        </BulkActionCountTable>
+                        {eventCounts.active > 0 ?
+                            i18n.t('Are you sure you want to complete all active events?')
+                            :
+                            i18n.t('There are no active events to complete in the current selection.')
+                        }
                     </ModalContent>
 
                     <ModalActions>

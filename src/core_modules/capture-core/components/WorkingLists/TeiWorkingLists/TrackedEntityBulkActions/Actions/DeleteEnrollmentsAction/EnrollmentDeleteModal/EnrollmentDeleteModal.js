@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle, } from '@dhis2/ui';
+import { Button, ButtonStrip, CircularLoader, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useDeleteEnrollments } from '../hooks/useDeleteEnrollments';
 import { CustomCheckbox } from './CustomCheckbox';
@@ -20,6 +20,10 @@ const styles = {
         flexDirection: 'column',
         gap: '10px',
         fontSize: '16px',
+    },
+    loadingContainer: {
+        display: 'flex',
+        justifyContent: 'center',
     },
 };
 
@@ -45,7 +49,7 @@ const EnrollmentDeleteModalPlain = ({
         setIsDeleteDialogOpen,
     });
 
-    if (isLoadingEnrollments) {
+    if (isLoadingEnrollments || !enrollmentCounts) {
         return (
             <Modal
                 onClose={() => setIsDeleteDialogOpen(false)}
@@ -55,7 +59,7 @@ const EnrollmentDeleteModalPlain = ({
                 </ModalTitle>
 
                 <ModalContent>
-                    <span style={{ display: 'flex', justifyContent: 'center' }}>
+                    <span className={classes.loadingContainer}>
                         <CircularLoader />
                     </span>
                 </ModalContent>
@@ -97,7 +101,7 @@ const EnrollmentDeleteModalPlain = ({
                             disabled={enrollmentCounts.active === 0}
                             label={i18n.t('Active enrollments ({{count}})', { count: enrollmentCounts.active })}
                             id="active"
-                            checked={statusToDelete.active}
+                            checked={enrollmentCounts.active === 0 ? false : statusToDelete.active}
                             onChange={updateStatusToDelete}
                         />
 
@@ -105,7 +109,7 @@ const EnrollmentDeleteModalPlain = ({
                             disabled={enrollmentCounts.completed === 0}
                             label={i18n.t('Completed enrollments ({{count}})', { count: enrollmentCounts.completed })}
                             id="completed"
-                            checked={statusToDelete.completed}
+                            checked={enrollmentCounts.completed === 0 ? false : statusToDelete.completed}
                             onChange={updateStatusToDelete}
                         />
 
@@ -113,8 +117,8 @@ const EnrollmentDeleteModalPlain = ({
                             disabled={enrollmentCounts.cancelled === 0}
                             label={i18n.t('Cancelled enrollments ({{count}})', { count: enrollmentCounts.cancelled })}
                             id="cancelled"
-                            checked={statusToDelete.cancelled}
                             onChange={updateStatusToDelete}
+                            checked={enrollmentCounts.cancelled === 0 ? false : statusToDelete.cancelled}
                         />
                     </div>
                 </div>

@@ -2,10 +2,10 @@
 import { useCallback, useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
+import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { errorCreator } from '../../../../../../../../capture-core-utils';
 
 type Props = {
@@ -15,12 +15,15 @@ type Props = {
     setIsDeleteDialogOpen: (open: boolean) => void,
 }
 
+const QueryKey = ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 'trackedEntities'];
+
 export const useDeleteEnrollments = ({
     selectedRows,
     programId,
     onUpdateList,
     setIsDeleteDialogOpen,
 }: Props) => {
+    const queryClient = useQueryClient();
     const [statusToDelete, setStatusToDelete] = useState({
         active: true,
         completed: true,
@@ -32,7 +35,7 @@ export const useDeleteEnrollments = ({
         { critical: true },
     );
 
-    const updateStatusToDelete = useCallback((status) => {
+    const updateStatusToDelete = useCallback((status: string) => {
         setStatusToDelete(prevStatus => ({
             ...prevStatus,
             [status]: !prevStatus[status],
@@ -40,7 +43,7 @@ export const useDeleteEnrollments = ({
     }, []);
 
     const { data: enrollments, isLoading: isLoadingEnrollments } = useApiDataQuery(
-        ['WorkingLists', 'BulkActionBar', 'DeleteEnrollmentsAction', 'trackedEntities', selectedRows],
+        [...QueryKey, selectedRows],
         {
             resource: 'tracker/trackedEntities',
             params: {
@@ -63,12 +66,12 @@ export const useDeleteEnrollments = ({
 
     const { mutate: deleteEnrollments, isLoading: isDeletingEnrollments } = useMutation<any>(
         () => dataEngine.mutate({
-            resource: 'tracker?async=false&importStrategy=DELETE&importMode=VALIDATE',
+            resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: {
                 enrollments: enrollments
                     // $FlowFixMe - business logic dictates that enrollments is not undefined at this point
-                    .filter(({ status }) => statusToDelete[status])
+                    .filter(({ status }) => status && statusToDelete[status.toLowerCase()])
                     .map(({ enrollment }) => ({ enrollment })),
             },
         }),
@@ -78,6 +81,7 @@ export const useDeleteEnrollments = ({
                 showAlert({ message: i18n.t('An error occurred when deleting enrollments') });
             },
             onSuccess: () => {
+                queryClient.removeQueries([ReactQueryAppNamespace, ...QueryKey]);
                 onUpdateList();
                 setIsDeleteDialogOpen(false);
             },
@@ -114,7 +118,7 @@ export const useDeleteEnrollments = ({
     }, [enrollments]);
 
     const numberOfEnrollmentsToDelete = useMemo(() => {
-        if (!enrollments) {
+        if (!enrollments || !enrollmentCounts) {
             return 0;
         }
 

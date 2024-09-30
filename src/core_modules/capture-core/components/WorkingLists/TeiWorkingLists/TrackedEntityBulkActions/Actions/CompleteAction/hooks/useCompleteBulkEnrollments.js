@@ -1,6 +1,6 @@
 // @flow
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation } from 'react-query';
 import i18n from '@dhis2/d2-i18n';
@@ -36,7 +36,7 @@ export const useCompleteBulkEnrollments = ({
             resource: 'tracker/trackedEntities',
             params: {
                 program: programId,
-                fields: 'trackedEntity,enrollments[enrollment,program,trackedEntity,orgUnit,status,occurredAt,enrolledAt]',
+                fields: 'trackedEntity,enrollments[enrollment,program,trackedEntity,orgUnit,status,occurredAt,enrolledAt,events[status,orgUnit,program,programStage,trackedEntity,occurredAt,event,scheduledAt]]',
                 trackedEntities: Object.keys(selectedRows).join(','),
             },
         },
@@ -69,15 +69,42 @@ export const useCompleteBulkEnrollments = ({
     const {
         mutate: completeEnrollments,
         isLoading: isCompletingEnrollments,
+        error,
+        reset: resetCompleteEnrollments,
     } = useMutation<any>(
-        () => dataEngine.mutate({
-            resource: 'tracker?async=false&importStrategy=UPDATE',
+        ({ completeEvents }: any) => dataEngine.mutate({
+            resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=object',
             type: 'create',
-            data: {
-                enrollments: trackedEntities?.activeEnrollments?.map(enrollment => ({
+            data: () => {
+                const enrollments = trackedEntities?.activeEnrollments ?? [];
+                let updatedEnrollments = enrollments.map(enrollment => ({
                     ...enrollment,
                     status: 'COMPLETED',
-                })),
+                }));
+
+                if (completeEvents) {
+                    updatedEnrollments = updatedEnrollments.map((enrollment) => {
+                        const filteredEvents = enrollment.events.filter(event => event.status === 'ACTIVE');
+
+                        if (filteredEvents.length === 0) {
+                            return enrollment;
+                        }
+
+                        const updatedEvents = filteredEvents.map(event => ({
+                            ...event,
+                            status: 'COMPLETED',
+                        }));
+
+                        return {
+                            ...enrollment,
+                            events: updatedEvents,
+                        };
+                    });
+                }
+
+                return {
+                    enrollments: updatedEnrollments,
+                };
             },
         }),
         {
@@ -85,9 +112,9 @@ export const useCompleteBulkEnrollments = ({
                 setModalIsOpen(false);
                 onUpdateList();
             },
-            onError: (error) => {
+            onError: (serverError) => {
                 showAlert({ message: i18n.t('An error occurred while completing the enrollments') });
-                log.error(errorCreator('An error occurred while completing the enrollments')({ error }));
+                log.error(errorCreator('An error occurred while completing the enrollments')({ error: serverError }));
             },
         },
     );
@@ -97,11 +124,18 @@ export const useCompleteBulkEnrollments = ({
         completed: trackedEntities?.completedEnrollments?.length ?? 0,
     }), [trackedEntities]);
 
+    useEffect(() => {
+        if (!modalIsOpen) {
+            resetCompleteEnrollments();
+        }
+    }, [modalIsOpen, resetCompleteEnrollments]);
+
     return {
         completeEnrollments,
         enrollmentCounts,
         isLoading,
         isError,
+        error,
         isCompletingEnrollments,
     };
 };

@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { v4 as uuid } from 'uuid';
 import { EventWorkingListsRowMenuSetup } from '../RowMenuSetup';
@@ -44,14 +44,17 @@ export const EventWorkingListsViewMenuSetup = ({
         clearSelection();
     }, [clearSelection]);
 
+    const eventBulkActions = (
+        <EventBulkActions
+            selectedRows={selectedRows}
+            onClearSelection={clearSelection}
+            programId={program.id}
+            onUpdateList={onUpdateList}
+        />
+    );
+
     return (
         <React.Fragment>
-            <EventBulkActions
-                selectedRows={selectedRows}
-                onClearSelection={clearSelection}
-                programId={program.id}
-                onUpdateList={onUpdateList}
-            />
             <EventWorkingListsRowMenuSetup
                 {...passOnProps}
                 customUpdateTrigger={customUpdateTrigger}
@@ -63,6 +66,7 @@ export const EventWorkingListsViewMenuSetup = ({
                 selectionInProgress={selectionInProgress}
                 onRowSelect={toggleRowSelected}
                 allRowsAreSelected={allRowsAreSelected}
+                bulkActionBarComponent={eventBulkActions}
             />
             <DownloadDialog
                 open={downloadDialogOpen}

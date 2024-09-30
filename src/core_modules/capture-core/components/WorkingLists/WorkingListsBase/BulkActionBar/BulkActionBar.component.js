@@ -28,11 +28,7 @@ export const BulkActionBarComponentPlain = ({
 }: ComponentProps) => (
     <div className={classes.container}>
         <span>
-            {i18n.t('{{count}} record selected', {
-                count: selectedRowsCount,
-                defaultValue: '{{count}} record selected',
-                defaultValue_plural: '{{count}} records selected',
-            })}
+            {i18n.t('{{count}} selected', { count: selectedRowsCount })}
         </span>
 
         {children}
