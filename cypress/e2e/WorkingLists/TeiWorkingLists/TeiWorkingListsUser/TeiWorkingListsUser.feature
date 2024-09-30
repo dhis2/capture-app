@@ -224,7 +224,7 @@ Then the assignee filter button should show that None filter is in effect
 When you open the program stage filters from the more filters dropdown menu
 And you select the Foci response program stage
 And you apply the current filter
-And the assignee filter button should show that None filter is in effect
+Then the assignee filter button should show that None filter is in effect
 
 @v>=40
 Scenario: The user can create and delete a program stage working list for Foci investigation & classification assigned events
