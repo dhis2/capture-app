@@ -21,7 +21,7 @@ export const theme = {
             dark: '#004BA0',
             light: colors.blue600,
             lightest: '#EAF4FF',
-            50: dhis2Theme.primary050,
+            /*   50: dhis2Theme.primary050,
             100: dhis2Theme.primary100,
             200: dhis2Theme.primary200,
             300: dhis2Theme.primary300,
@@ -30,7 +30,7 @@ export const theme = {
             600: dhis2Theme.primary600,
             700: dhis2Theme.primary700,
             800: dhis2Theme.primary800,
-            900: dhis2Theme.primary900,
+            900: dhis2Theme.primary900, */
             contrastText: '#fff',
         },
         secondary: {
@@ -38,7 +38,7 @@ export const theme = {
             dark: '#004C40',
             light: '#48A999',
             lightest: colors.teal200,
-            50: dhis2Theme.secondary050,
+            /*    50: dhis2Theme.secondary050,
             100: dhis2Theme.secondary100,
             200: dhis2Theme.secondary200,
             300: dhis2Theme.secondary300,
@@ -47,7 +47,7 @@ export const theme = {
             600: dhis2Theme.secondary600,
             700: dhis2Theme.secondary700,
             800: dhis2Theme.secondary800,
-            900: dhis2Theme.secondary900,
+            900: dhis2Theme.secondary900, */
             contrastText: '#fff',
         },
         success: {
@@ -66,9 +66,10 @@ export const theme = {
             main: '#E53935',
             dark: colors.red500,
             contrastText: '#fff',
+            red200: colors.red200,
         },
         red: {
-            50: colors.red050,
+            /*   50: colors.red050,
             100: colors.red100,
             200: colors.red200,
             300: colors.red300,
@@ -77,10 +78,10 @@ export const theme = {
             600: colors.red600,
             700: colors.red700,
             800: colors.red800,
-            900: colors.red900,
+            900: colors.red900, */
         },
         grey: {
-            50: colors.grey050,
+            /*  50: colors.grey050,
             100: colors.grey100,
             200: colors.grey200,
             300: colors.grey300,
@@ -89,7 +90,7 @@ export const theme = {
             600: colors.grey600,
             700: colors.grey700,
             800: colors.grey800,
-            900: colors.grey900,
+            900: colors.grey900, */
             A100: '#d5d5d5',
             A200: '#aaaaaa',
             A400: '#303030',
@@ -147,7 +148,7 @@ export const theme = {
         fontWeightLight: 300,
         fontWeightRegular: 400,
         fontWeightMedium: 500,
-        pxToRem(size) {
+        pxToRem(size: number) {
             const coef = this.fontSize / 14;
             return `${(size / HTMLFONTSIZE) * coef}rem`;
         },
