@@ -58,7 +58,7 @@ const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

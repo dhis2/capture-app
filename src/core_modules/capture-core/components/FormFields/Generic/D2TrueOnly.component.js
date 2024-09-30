@@ -2,9 +2,12 @@
 import React, { Component } from 'react';
 import { Checkbox, Switch, spacersNum, FieldSet, Label } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
+import { theme } from '../../../../../styles/theme';
 
-const styles = theme => ({
-    label: theme.typography.formFieldTitle,
+const styles = () => ({
+    label: {
+        fontSize: theme.typography.pxToRem(12),
+    },
     checkbox: {
         marginTop: spacersNum.dp12,
         marginBottom: spacersNum.dp12,
@@ -73,7 +76,7 @@ class D2TrueOnlyPlain extends Component<Props> {
                             return (
                                 <Label
                                     required={!!required}
-                                    classes={this.labelClasses}
+                                    className={this.props.classes.label}
                                 >
                                     {label}
                                 </Label>

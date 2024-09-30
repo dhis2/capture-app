@@ -9,7 +9,7 @@ import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../met
 const getStyles = (theme: Theme) => ({
     label: {
         paddingTop: '10px',
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

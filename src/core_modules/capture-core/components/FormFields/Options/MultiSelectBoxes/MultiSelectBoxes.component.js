@@ -5,9 +5,12 @@ import { Checkbox, spacersNum, FieldSet, Label } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { multiOrientations } from './multiSelectBoxes.const';
 import { FormGroup } from '../FormGroup.component';
+import { theme } from '../../../../../../styles/theme';
 
-const styles = theme => ({
-    label: theme.typography.formFieldTitle,
+const styles = () => ({
+    label: {
+        size: theme.typography.pxToRem(12),
+    },
     checkbox: {
         marginTop: spacersNum.dp8,
         marginBottom: spacersNum.dp16,

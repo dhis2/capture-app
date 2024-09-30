@@ -16,8 +16,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-// import { ThemeContext } from '../../../../../components/AppStart/AppStart.component';
-import { theme } from '../../../../../styles/styledJSXTheme';
+import { theme } from '../../../../../styles/theme';
 
 /* const getStyles = () => ({
     container: {

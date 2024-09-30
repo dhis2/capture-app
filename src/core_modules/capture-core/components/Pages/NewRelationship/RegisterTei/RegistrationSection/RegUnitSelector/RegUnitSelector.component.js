@@ -9,11 +9,10 @@ import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaDa
 const getStyles = (theme: Theme) => ({
     label: {
         paddingTop: '10px',
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
-    },
-});
+    } });
 
 type Props = {
     selectedProgramId: ?string,
@@ -56,7 +55,7 @@ class RegUnitSelectorPlain extends React.Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedRegUnitSelector
                 labelClass={classes.label}
-                label={i18n.t('Organisation Unit')}
+                label={i18n.t('Organisation Unittt')}
                 styles={RegUnitSelectorPlain.baseComponentStyles}
                 onUpdateSelectedOrgUnit={this.handleUpdateSelectedOrgUnit}
                 {...passOnProps}

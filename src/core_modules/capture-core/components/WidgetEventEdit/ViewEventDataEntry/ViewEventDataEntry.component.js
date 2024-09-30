@@ -62,7 +62,7 @@ const getStyles = (theme: Theme) => ({
         whiteSpace: 'nowrap',
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

@@ -6,9 +6,9 @@ import { ComposedProgramSelector } from './ComposedProgramSelector.component';
 
 const getStyles = (theme: Theme) => ({
     programLabel: {
-        paddingTop: '10px',
-        [theme.breakpoints.down(523)]: {
-            paddingTop: '0px !important',
+        paddingTop: '100px',
+        '@media (max-width: 523px)': {
+            paddingTop: '600px !important',
         },
     },
 });
