@@ -44,9 +44,8 @@ const getImageSubvalue = async ({ dataElement, querySingleResource, eventId, abs
 };
 
 const getOrganisationUnitSubvalue = async ({ dataElement: { value }, querySingleResource }: SubValueFunctionProps) => {
-    const organisationUnit = await getOrgUnitNames([value], querySingleResource);
-
-    return organisationUnit[value];
+    const organisationUnits = await getOrgUnitNames([value], querySingleResource);
+    return organisationUnits[value];
 };
 
 export const subValueGetterByElementType = {
