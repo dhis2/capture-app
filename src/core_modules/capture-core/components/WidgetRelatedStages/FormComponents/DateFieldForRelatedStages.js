@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { convertStringToDateFormat } from '../../../utils/converters/date';
+import { convertStringToServerFormat } from '../../../utils/converters/date';
 import {
     DateField,
     withDefaultFieldContainer,
@@ -52,7 +52,7 @@ export const DateFieldForRelatedStages = ({
     return (
         <DateFieldForForm
             label={scheduledLabel}
-            value={relatedStagesDataValues.scheduledAt ? convertStringToDateFormat(relatedStagesDataValues.scheduledAt) : ''}
+            value={relatedStagesDataValues.scheduledAt ? convertStringToServerFormat(relatedStagesDataValues.scheduledAt) : ''}
             required
             onSetFocus={() => {}}
             onFocus={() => {}}
