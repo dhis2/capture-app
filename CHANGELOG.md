@@ -1,3 +1,10 @@
+## [101.6.2](https://github.com/dhis2/capture-app/compare/v101.6.1...v101.6.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* [DHIS2-18004] sort events in rules engine by occurredAt and createdAt ([#3788](https://github.com/dhis2/capture-app/issues/3788)) ([2bb485e](https://github.com/dhis2/capture-app/commit/2bb485e0927e9137874131a982fe690b9f6c5361))
+
 ## [101.6.1](https://github.com/dhis2/capture-app/compare/v101.6.0...v101.6.1) (2024-09-29)
 
 
