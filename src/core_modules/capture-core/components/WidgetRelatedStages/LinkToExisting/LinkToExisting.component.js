@@ -70,5 +70,4 @@ export const LinkToExistingPlain = ({
     );
 };
 
-export const LinkToExisting =
-    withStyles(styles)(LinkToExistingPlain);
+export const LinkToExisting = withStyles(styles)(LinkToExistingPlain);

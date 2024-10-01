@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
-"PO-Revision-Date: 2024-09-02T11:08:16.281Z\n"
+"POT-Creation-Date: 2024-10-01T08:07:34.506Z\n"
+"PO-Revision-Date: 2024-10-01T08:07:34.506Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1456,6 +1456,13 @@ msgstr "{{trackedEntityTypeName}} profile"
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+msgstr ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
+
 msgid "Link to an existing {{linkableStageLabel}}"
 msgstr "Link to an existing {{linkableStageLabel}}"
 
@@ -1470,13 +1477,6 @@ msgstr "{{ linkableStageLabel }} has no linkable events"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
-
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
 
 msgid "Enter details now"
 msgstr "Enter details now"
