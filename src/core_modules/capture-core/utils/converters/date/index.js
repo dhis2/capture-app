@@ -2,4 +2,4 @@
 export { parseDate } from './parser';
 export { convertDateObjectToDateFormatString } from './dateObjectToDateFormatString';
 export { convertMomentToDateFormatString } from './momentToDateFormatString';
-export { convertStringToServerFormat } from './convertStringToServerFormat';
+export { convertStringToDateFormat } from './stringToMomentDateFormat';

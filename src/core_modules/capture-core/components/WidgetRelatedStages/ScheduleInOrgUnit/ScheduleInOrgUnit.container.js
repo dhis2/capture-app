@@ -3,7 +3,7 @@ import React from 'react';
 import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
-import { convertStringToServerFormat } from '../../../utils/converters/date';
+import { convertStringToDateFormat } from '../../../utils/converters/date';
 import { DateFieldForRelatedStages, OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
@@ -55,7 +55,7 @@ export const ScheduleInOrgUnitPlain = ({
     const onBlurDateField = (e) => {
         setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
-            scheduledAt: convertStringToServerFormat(e),
+            scheduledAt: convertStringToDateFormat(e),
         }));
     };
 
