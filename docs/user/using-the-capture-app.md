@@ -804,7 +804,7 @@ You can show data elements from a single stage in a working list. Select the "Pr
 
 ![](resources/images/program_stage_working_list.png)
 
-The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists. Additionally, the program stage list can be [filter by assignee](#assignee_in_the_event_list), just like an event program list.
+The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists. Additionally, the program stage list can be [filter by assignee](#assignee-in-the-event-list), just like an event program list.
 
 ## Implementer / administrator info { #implementer_info } 
 
