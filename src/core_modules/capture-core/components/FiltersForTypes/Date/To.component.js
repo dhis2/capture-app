@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
-import { anchorPositions, modes, absoluteDirections } from '../../FormFields/DateAndTime/D2Date/d2DatePopup.const';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
@@ -33,7 +32,7 @@ class ToDateFilterPlain extends Component<Props> {
         this.props.onBlur(ToDateFilterPlain.getValueObject(value));
     }
 
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             this.props.onEnterKey(ToDateFilterPlain.getValueObject(this.props.value || ''));
         }
@@ -49,18 +48,12 @@ class ToDateFilterPlain extends Component<Props> {
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2Date
-                    onKeyPress={this.handleKeyPress}
+                    onKeyDown={this.handleKeyDown}
                     onBlur={this.handleBlur}
                     onDateSelectedFromCalendar={this.handleDateSelectedFromCalendar}
                     placeholder={i18n.t('To')}
-                    popupAnchorPosition={anchorPositions.RIGHT}
-                    popupMode={modes.ABSOLUTE}
-                    popupAbsoluteDirection={absoluteDirections.UP}
                     width={150}
                     calendarWidth={330}
-                    calendarHeight={170}
-                    calendarRowHeight={45}
-                    calendarDisplayOptions={this.displayOptions}
                     {...passOnProps}
                 />
                 <div className={errorClass}>

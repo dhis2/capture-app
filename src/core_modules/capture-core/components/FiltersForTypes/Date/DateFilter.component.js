@@ -302,11 +302,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 
     handleEnterKeyInFrom = () => {
-        this.toD2DateTextFieldInstance.focus();
+        this.toD2DateTextFieldInstance && this.toD2DateTextFieldInstance.focus();
     };
 
     handleDateSelectedFromCalendarInFrom = () => {
-        this.toD2DateTextFieldInstance.focus();
+        this.toD2DateTextFieldInstance && this.toD2DateTextFieldInstance.focus();
     };
 
     handleEnterKeyInTo = (value: { [key: string]: string }) => {
