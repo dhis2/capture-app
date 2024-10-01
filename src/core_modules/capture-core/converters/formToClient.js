@@ -30,8 +30,9 @@ function convertDateTime(formValue: DateTimeValue): string {
 }
 
 function convertDate(dateValue: string) {
+    const parsedDate = parseDate(dateValue);
     // $FlowFixMe[incompatible-use] automated comment
-    return parseDate(dateValue).momentDate.toISOString();
+    return parsedDate.isValid ? parsedDate.momentDate.toISOString() : null;
 }
 
 function convertTime(timeValue: string) {
