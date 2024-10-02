@@ -197,6 +197,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                         arrow={false}
                         placement="bottom-start"
                         onClickOutside={this.closeFilterSelector}
+                        maxWidth={400}
                     >
                         {
                             (() => {
