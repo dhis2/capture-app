@@ -23,6 +23,8 @@ const {
     COMMIT_ENROLLMENT_EVENTS,
     ADD_PERSISTED_ENROLLMENT_EVENTS,
     COMMIT_ENROLLMENT_AND_EVENTS,
+    DELETE_ENROLLMENT_EVENT,
+    UPDATE_ENROLLMENT_EVENT_STATUS,
 } = enrollmentSiteActionTypes;
 
 const setAssignee = (state, action) => {
@@ -95,6 +97,19 @@ export const enrollmentDomainDesc = createReducerDescription(
                 }
                 return event;
             });
+
+            return { ...state, enrollment: { ...state.enrollment, events } };
+        },
+        [DELETE_ENROLLMENT_EVENT]: (state, { payload: { eventId } }) => {
+            const events = state.enrollment.events?.filter(event => event.event !== eventId);
+            return { ...state, enrollment: { ...state.enrollment, events } };
+        },
+        [UPDATE_ENROLLMENT_EVENT_STATUS]: (state, { payload: { eventId, status, updatedAt } }) => {
+            const events = state.enrollment.events?.map(event =>
+                (event.event === eventId
+                    ? { ...event, status, updatedAt }
+                    : event),
+            );
 
             return { ...state, enrollment: { ...state.enrollment, events } };
         },

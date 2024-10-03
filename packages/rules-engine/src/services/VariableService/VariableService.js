@@ -85,7 +85,7 @@ export class VariableService {
 
         this.defaultValues = defaultValues;
 
-        this.structureEvents = getStructureEvents(dateUtils.compareDates);
+        this.structureEvents = getStructureEvents(dateUtils.compareDates, onProcessValue);
     }
 
     getVariables({

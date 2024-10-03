@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2024\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
@@ -45,6 +45,9 @@ msgstr ""
 "al mismo tiempo (en el mismo dominio). Actualice esta página si desea volver"
 " a utilizar esta versión, pero tenga en cuenta que esto cerrará otras "
 "versiones."
+
+msgid "More"
+msgstr ""
 
 msgid "View {{programName}} dashboard"
 msgstr "Ver panel de {{programName}}"
@@ -384,17 +387,11 @@ msgstr "persona registrada"
 msgid "validation failed"
 msgstr "La validación ha fallado"
 
-msgid "Errors"
-msgstr "Errores"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Retroalimentación"
-
-msgid "Indicators"
-msgstr "Indicadores"
-
-msgid "Warnings"
-msgstr "Advertencias"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Generar nuevo evento"
@@ -509,18 +506,6 @@ msgstr "Contiene texto"
 msgid "Yes"
 msgstr "Sí"
 
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/aaaa"
-
-msgid "Years"
-msgstr "Años"
-
-msgid "Months"
-msgstr "Meses"
-
-msgid "Days"
-msgstr "Días"
-
 msgid "Uploading file"
 msgstr "Subiendo archivo"
 
@@ -586,6 +571,9 @@ msgstr "Columns to show in table"
 
 msgid "Column"
 msgstr "Columna"
+
+msgid "Visible"
+msgstr ""
 
 msgid "Update"
 msgstr "Actualizar"
@@ -816,12 +804,6 @@ msgstr "Hubo un error al cargar la página"
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr "La etapa del programa no es válida"
 
@@ -851,6 +833,11 @@ msgstr "Etapa"
 
 msgid "Registered events"
 msgstr "Eventos registrados"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr "Seleccione {{category}}."
@@ -969,6 +956,18 @@ msgstr ""
 "Al salir de esta página, se descartarán las selecciones que haya realizado "
 "para una nueva relación."
 
+msgid "Errors"
+msgstr "Errores"
+
+msgid "Feedback"
+msgstr "Retroalimentación"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
+msgid "Warnings"
+msgstr "Advertencias"
+
 msgid "Show all events"
 msgstr "Mostrar todos los eventos"
 
@@ -1011,6 +1010,12 @@ msgstr ""
 
 msgid "The enrollment event data could not be found"
 msgstr "No se pudieron encontrar los datos del evento de inscripción"
+
+msgid "Loading"
+msgstr ""
+
+msgid "An error occurred while loading the form"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados."
@@ -1294,9 +1299,6 @@ msgstr ""
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "Cancelar"
 
@@ -1350,6 +1352,9 @@ msgstr ""
 
 msgid "Event completed"
 msgstr "Evento completado"
+
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr "Volver a todas las etapas y eventos"
@@ -1504,8 +1509,31 @@ msgstr "Fecha de reporte"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "Omitir"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr ""
@@ -1513,13 +1541,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset list"
-msgstr ""
-
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
@@ -1538,6 +1560,15 @@ msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
 msgid "Stages and Events"
+msgstr ""
+
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
 msgstr ""
 
 msgid "Changelog"
@@ -1703,9 +1734,6 @@ msgid "An error has occured. See log for details"
 msgstr " Ha ocurrido un error. Ver el registro para más detalles."
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
-
-msgid "Scheduled"
 msgstr ""
 
 msgid "Overdue{{ escape }} due {{ time }}"

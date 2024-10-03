@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Namwan Chanthavisouk, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -1275,12 +1275,6 @@ msgstr "ບໍ່ສາມາດໂຫຼດລາຍການການລົງ
 msgid "Follow-up"
 msgstr "ຕິດຕາມ"
 
-msgid "Started at {{orgUnitName}}"
-msgstr "ເລີ່ມຈາກ {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "ເປັນເຈົ້າຂອງໂດຍ {{ownerOrgUnit}}"
-
 msgid "Cancelled"
 msgstr "ຍົກເລີກແລ້ວ"
 
@@ -1334,6 +1328,9 @@ msgstr "ວັນທີທີ່ກຳນົດໄວ້ບໍ່ສາມາດ
 
 msgid "Event completed"
 msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
+
+msgid "The event cannot be edited after it has been completed"
+msgstr "ເຫດການດັ່ງກ່າວບໍ່ສາມາດແກ້ໄຂໄດ້ຫຼັງຈາກສໍາເລັດແລ້ວ"
 
 msgid "Back to all stages and events"
 msgstr "ກັບໄປທຸກຂັ້ນຕອນ ແລະ ເຫດການ"
@@ -1494,7 +1491,7 @@ msgid "Please select a valid event"
 msgstr "ກະລຸນາເລືອກເຫດການທີ່ຖືກຕ້ອງ"
 
 msgid "You do not have access to create events in this stage"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດເຂົ້າເຖິງເພື່ອສ້າງເຫດການໃນຂັ້ນຕອນນີ້"
 
 msgid "This stage can only have one event"
 msgstr "ຂັ້ນຕອນນີ້ສາມາດມີເຫດການດຽວເທົ່ານັ້ນ"
@@ -1502,14 +1499,30 @@ msgstr "ຂັ້ນຕອນນີ້ສາມາດມີເຫດການດ
 msgid "New {{ eventName }} event"
 msgstr "ເຫດການໃໝ່ {{ eventName }}"
 
+msgid "An error occurred while deleting the event"
+msgstr "ພົບຂໍ້ຜິດພາດໃນລະຫວ່າງລົບເຫດການ"
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+"ການລົບເຫດການແມ່ນຖາວອນ ແລະ ບໍ່ສາມາດຍົກເລີກໄດ້. "
+"ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລົບເຫດການນີ້?"
+
+msgid "An error occurred when updating event status"
+msgstr "ພົບຂໍ້ຜິດພາດໃນລະຫວ່າງອັບເດດສະຖານະເຫດການ"
+
+msgid "Unskip"
+msgstr "ຍົກເລີກ"
+
+msgid "Skip"
+msgstr "ຂ້າມ"
+
 msgid "To open this event, please wait until saving is complete"
 msgstr "ເພື່ອເປີດເຫດການນີ້, ກະລຸນາລໍຖ້າຈົນກວ່າການບັນທຶກຈະສຳເລັດ"
 
 msgid "Show {{ rest }} more"
 msgstr "ສະແດງ {{ rest }} ເພີ່ມເຕີມ"
-
-msgid "Reset list"
-msgstr "ເຮັດລາຍຊື່ຄືນໃໝ່"
 
 msgid "Go to full {{ eventName }}"
 msgstr "ໄປທີ່ {{ eventName }} ແບບເຕັມ"
@@ -1701,13 +1714,13 @@ msgid "Download with current filters"
 msgstr "ດາວໂຫຼດດ້ວຍຕົວກອງປັດຈຸບັນ"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດຂຶ້ນ. ເບິ່ງລາຍລະອຽດ"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "ກຳນົດເວລາ {{ escape }} ຈົນເຖິງ {{ time }}"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "ເກີນກຳນົດ {{ escape }} ຈົນເຖິງ {{ time }}"
 
 msgid "Overdue"
 msgstr "ກາຍເວລາທີ່ກໍານົດ"
@@ -1719,76 +1732,76 @@ msgid "Visited"
 msgstr "ເຂົ້າຊົມ"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}} ໃນໂປຣແກຣມ {{escape}} {{programName}}"
 
 msgid "Program not found"
-msgstr ""
+msgstr "ບໍ່ພົບໂປຣແກຣມ"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "ໂປແກຣມນີ້ບໍ່ແມ່ນໂປແກຣມຕິດຕາມ"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກເຫດການ"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "ບໍ່ສາມາດບັນທຶກເຫດການໄດ້"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "ບໍ່ສາມາດລົບເຫດການໄດ້"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດບັນທຶກລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດເພີ່ມລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "ບໍ່ສາມາດລົບລາຍຊື່ການເຮັດວຽກໄດ້"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການຄົ້ນຫາຫົວໜ່ວຍການຈັດຕັ້ງ"
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກການຕິດຕາມລາຍບຸກຄົນ"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກການລົງທະບຽນ"
 
 msgid "Error saving the enrollment event"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການບັນທຶກການລົງທະບຽນເຫດການ"
 
 msgid "Error deleting the enrollment event"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການລົບການລົງທະບຽນເຫດການ"
 
 msgid "Error editing the event, the changes made were not saved"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການແກ້ໄຂເຫດການ, ການປ່ຽນແປງທີ່ເຮັດບໍ່ໄດ້ມີການບັນທຶກ"
 
 msgid "Error updating the Assignee"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການອັບເດດຜູ້ຮັບຜິດຊອບ"
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
 
 msgid "Time"
-msgstr ""
+msgstr "ເວລາ"
 
 msgid "From date"
 msgstr "From date"
 
 msgid "From time"
-msgstr ""
+msgstr "ຈາກເວລາ"
 
 msgid "To date"
 msgstr "ເຖີງວັນທີ່"
 
 msgid "To time"
-msgstr ""
+msgstr "ເຖິງເວລາ"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "ໜ້າ {{currentPage}}"
 
 msgid "Area on map saved"
-msgstr ""
+msgstr "ບັນທຶກພື້ນທີ່ໃນແຜນທີ່ແລ້ວ"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "ຮູບແບບຄວາມເຂົ້າກັນໄດ້"

@@ -1,3 +1,59 @@
+## [101.6.2](https://github.com/dhis2/capture-app/compare/v101.6.1...v101.6.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* [DHIS2-18004] sort events in rules engine by occurredAt and createdAt ([#3788](https://github.com/dhis2/capture-app/issues/3788)) ([2bb485e](https://github.com/dhis2/capture-app/commit/2bb485e0927e9137874131a982fe690b9f6c5361))
+
+## [101.6.1](https://github.com/dhis2/capture-app/compare/v101.6.0...v101.6.1) (2024-09-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([cbeb102](https://github.com/dhis2/capture-app/commit/cbeb1022bf45b241a91dcfb8c3e49956b28b1c44))
+
+# [101.6.0](https://github.com/dhis2/capture-app/compare/v101.5.0...v101.6.0) (2024-09-27)
+
+
+### Features
+
+* support custom background color ([#3814](https://github.com/dhis2/capture-app/issues/3814)) ([22cfe58](https://github.com/dhis2/capture-app/commit/22cfe585b6b044c7d6b146c1449ccddb85d8abb4))
+
+# [101.5.0](https://github.com/dhis2/capture-app/compare/v101.4.1...v101.5.0) (2024-09-24)
+
+
+### Features
+
+* [DHIS2-17770] Org unit contextualization in self contained widgets ([#3720](https://github.com/dhis2/capture-app/issues/3720)) ([562b03a](https://github.com/dhis2/capture-app/commit/562b03a1cf2cb5cff5382bd433943f289c860095))
+
+## [101.4.1](https://github.com/dhis2/capture-app/compare/v101.4.0...v101.4.1) (2024-09-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#3805](https://github.com/dhis2/capture-app/issues/3805)) ([a4464f4](https://github.com/dhis2/capture-app/commit/a4464f431618200853772cc2546ea9adff515840))
+
+# [101.4.0](https://github.com/dhis2/capture-app/compare/v101.3.3...v101.4.0) (2024-09-09)
+
+
+### Features
+
+* [DHIS2-17878][DHIS2-17048] Add overflow menu with actions to stages&events ([#3756](https://github.com/dhis2/capture-app/issues/3756)) ([12af138](https://github.com/dhis2/capture-app/commit/12af1384f4ab4e9c6eeef2460bee7d53bfb6b8cc))
+
+## [101.3.3](https://github.com/dhis2/capture-app/compare/v101.3.2...v101.3.3) (2024-09-02)
+
+
+### Bug Fixes
+
+* [DHIS2-17971] trigger program stage specific rules on opening new event page ([#3776](https://github.com/dhis2/capture-app/issues/3776)) ([cd06e41](https://github.com/dhis2/capture-app/commit/cd06e414fc2162397f3844887e1b3f902d18a874))
+
+## [101.3.2](https://github.com/dhis2/capture-app/compare/v101.3.1...v101.3.2) (2024-09-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3dfd424](https://github.com/dhis2/capture-app/commit/3dfd4240ad9d5ef4512b283dc222eb54891aa896))
+
 ## [101.3.1](https://github.com/dhis2/capture-app/compare/v101.3.0...v101.3.1) (2024-08-29)
 
 
