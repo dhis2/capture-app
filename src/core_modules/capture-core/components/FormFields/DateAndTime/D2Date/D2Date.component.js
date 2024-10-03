@@ -2,18 +2,16 @@
 import * as React from 'react';
 import { CalendarInput } from '@dhis2/ui';
 import { systemSettingsStore } from '../../../../../capture-core/metaDataMemoryStores';
+import { type DateValue } from '../../../FiltersForTypes/Date/types/date.types';
 
 type Props = {
     label?: ?string,
     value: ?string,
-    width: number,
     calendar?: string,
     calendarWidth?: ?number,
-    calendarHeight?: ?number,
     inputWidth?: ?number,
-    onBlur: (value: string) => void,
+    onBlur: (value: DateValue) => void,
     onFocus?: ?() => void,
-    onKeyDown?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
     classes?: Object,
     disabled?: boolean,
@@ -28,24 +26,19 @@ export class D2Date extends React.Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {
-            date: props.value,
-        };
         this.handleDateSelected = this.handleDateSelected.bind(this);
     }
 
-    handleDateSelected(value: {calendarDateString: string}) {
+    handleDateSelected(value: {calendarDateString: string; isValid: boolean}) {
         const selectedDate = value?.calendarDateString;
-        this.setState({ date: selectedDate });
         if (selectedDate !== undefined) {
-            this.props.onBlur(selectedDate);
+            this.props.onBlur({ dateString: selectedDate, isValid: value.isValid });
         }
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
     }
 
     render() {
         const {
-            width,
             calendar,
             calendarWidth,
             inputWidth,
@@ -58,25 +51,20 @@ export class D2Date extends React.Component<Props, State> {
             ...passOnProps
         } = this.props;
 
-        const calculatedInputWidth = inputWidth || width;
-        const calculatedCalendarWidth = calendarWidth || width;
         const calendarType = calendar || 'gregory';
         const format = systemSettingsStore.get().dateFormat;
+
         return (
-            <div
-                style={{
-                    width,
-                }}
-            >
+            <div>
                 <CalendarInput
                     {...passOnProps}
                     label={this.props.label}
                     format={format}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
-                    date={this.state.date}
-                    width={String(calculatedCalendarWidth)}
-                    inputWidth={String(calculatedInputWidth)}
+                    date={this.props.value}
+                    width={String(calendarWidth)}
+                    inputWidth={String(inputWidth)}
                     onFocus={onFocus}
                     disabled={disabled}
                 />

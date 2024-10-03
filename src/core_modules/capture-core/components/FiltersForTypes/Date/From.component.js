@@ -3,54 +3,34 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
+import { type DateValue } from './types/date.types';
 
 type Props = {
     value: ?string,
-    error: ?string,
-    onBlur: ({ from: string }) => void,
-    onEnterKey: () => void,
-    errorClass: string,
+    onBlur: ({ from: DateValue }) => void,
 };
 
 class FromDateFilterPlain extends Component<Props> {
-    static getValueObject(value: string) {
-        return { from: value.trim() };
-    }
-    displayOptions: Object;
-    constructor(props: Props) {
-        super(props);
-        this.displayOptions = {
-            showWeekdays: true,
-            showHeader: false,
-        };
+    static getValueObject(value: DateValue) {
+        return { from: { ...value } };
     }
 
-    handleBlur = (value: string) => {
+    handleBlur = (value: DateValue) => {
         this.props.onBlur(FromDateFilterPlain.getValueObject(value));
     }
 
-    handleKeyDown = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            this.props.onEnterKey();
-        }
-    }
-
     render() {
-        const { error, errorClass, onBlur, onEnterKey, ...passOnProps } = this.props;
+        const { onBlur, ...passOnProps } = this.props;
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2Date
-                    onKeyDown={this.handleKeyDown}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('From')}
-                    width={150}
+                    inputWidth={150}
                     calendarWidth={330}
                     {...passOnProps}
                 />
-                <div className={errorClass}>
-                    {error}
-                </div>
             </div>
         );
     }

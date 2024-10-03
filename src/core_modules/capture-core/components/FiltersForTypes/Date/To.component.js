@@ -3,39 +3,22 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
+import { type DateValue } from './types/date.types';
 
 type Props = {
     value: ?string,
-    error: ?string,
-    onBlur: ({ to: string }) => void,
-    onEnterKey: ({ to: string }) => void,
+    onBlur: ({ to: DateValue }) => void,
     textFieldRef: (instance: any) => void,
-    errorClass: string,
     onFocusUpdateButton: () => void,
 };
 
 class ToDateFilterPlain extends Component<Props> {
-    static getValueObject(value: string) {
-        return { to: value.trim() };
+    static getValueObject(value: DateValue) {
+        return { to: { ...value } };
     }
 
-    displayOptions: Object;
-    constructor(props: Props) {
-        super(props);
-        this.displayOptions = {
-            showWeekdays: true,
-            showHeader: false,
-        };
-    }
-
-    handleBlur = (value: string) => {
+    handleBlur = (value: DateValue) => {
         this.props.onBlur(ToDateFilterPlain.getValueObject(value));
-    }
-
-    handleKeyDown = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            this.props.onEnterKey(ToDateFilterPlain.getValueObject(this.props.value || ''));
-        }
     }
 
     handleDateSelectedFromCalendar = () => {
@@ -43,22 +26,18 @@ class ToDateFilterPlain extends Component<Props> {
     }
 
     render() {
-        const { error, onBlur, onEnterKey, errorClass, onFocusUpdateButton, ...passOnProps } = this.props;
+        const { onBlur, onFocusUpdateButton, ...passOnProps } = this.props;
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2Date
-                    onKeyDown={this.handleKeyDown}
                     onBlur={this.handleBlur}
                     onDateSelectedFromCalendar={this.handleDateSelectedFromCalendar}
                     placeholder={i18n.t('To')}
-                    width={150}
+                    inputWidth={50}
                     calendarWidth={330}
                     {...passOnProps}
                 />
-                <div className={errorClass}>
-                    {error}
-                </div>
             </div>
         );
     }

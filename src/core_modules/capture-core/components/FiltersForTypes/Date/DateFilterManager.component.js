@@ -28,8 +28,14 @@ export class DateFilterManager extends React.Component<Props, State> {
     static calculateAbsoluteRangeValueState(filter: DateFilterData) {
         return {
             main: mainOptionKeys.ABSOLUTE_RANGE,
-            from: filter.ge && DateFilterManager.convertDateForEdit(filter.ge),
-            to: filter.le && DateFilterManager.convertDateForEdit(filter.le),
+            from: filter.ge ? {
+                dateString: DateFilterManager.convertDateForEdit(filter.ge),
+                isValid: true,
+            } : undefined,
+            to: filter.le ? {
+                dateString: DateFilterManager.convertDateForEdit(filter.le),
+                isValid: true,
+            } : undefined,
         };
     }
     static calculateRelativeRangeValueState(filter: DateFilterData) {
@@ -74,7 +80,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: ?Object) => {
+    handleCommitValue = (value: ?Value) => {
         this.setState({ value });
         this.props.handleCommitValue && this.props.handleCommitValue();
     };

@@ -13,4 +13,9 @@ export type RelativeDateFilterData = {|
     endBuffer?: number,
 |};
 
+export type DateValue = {
+    dateString: string,
+    isValid: boolean
+};
+
 export type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData;
