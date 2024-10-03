@@ -76,7 +76,7 @@ export const formsValuesDesc = createReducerDescription({
                 ...state[payload.formId],
                 ...Object.keys(assignEffects).reduce((acc, id) => {
                     const effectsForId = assignEffects[id];
-                    const value = effectsForId[effectsForId.length - 1].value;
+                    const value = effectsForId[0].value;
                     acc[id] = value;
                     return acc;
                 }, {}),
@@ -216,7 +216,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         const updatedFields = Object.keys(assignEffects).reduce((acc, id) => {
             if (formSectionFields[id]) {
                 const effectsForId = assignEffects[id];
-                const effect = effectsForId[effectsForId.length - 1];
+                const effect = effectsForId[0];
                 acc[id] = {
                     valid: effect.valid,
                     errorData: effect.errorData,

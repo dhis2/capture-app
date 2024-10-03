@@ -36,22 +36,22 @@ export const validateAssignEffects = async ({
         }
 
         const effectsForId = assignEffects[metaData.id];
-        const lastEffect = effectsForId.length - 1;
-        const value = effectsForId[lastEffect].value;
+        const lastIndex = effectsForId.length - 1;
+        const value = effectsForId[lastIndex].value;
         const validators = getValidators(metaData, querySingleResource);
         const validationContext = onGetValidationContext && onGetValidationContext();
 
         try {
             const validatorResult = await validateField({ validators }, value, validationContext);
-            const effectWithValidation = Object.assign({}, effectsForId[lastEffect], validatorResult);
+            const effectWithValidation = Object.assign({}, effectsForId[lastIndex], validatorResult);
 
-            acc[metaData.id] = [...effectsForId.slice(0, lastEffect - 1), effectWithValidation];
+            acc[metaData.id] = [effectWithValidation];
             return acc;
         } catch (error) {
             log.error(
                 errorCreator('an error occured while validating the assigned program rule effect')({
                     metaData,
-                    lastEffect,
+                    lastIndex,
                     error,
                 }),
             );
