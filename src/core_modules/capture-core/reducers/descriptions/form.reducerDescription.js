@@ -215,8 +215,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
 
         const updatedFields = Object.keys(assignEffects).reduce((acc, id) => {
             if (formSectionFields[id]) {
-                const effectsForId = assignEffects[id];
-                const effect = effectsForId[0];
+                const effect = assignEffects[id][0];
                 acc[id] = {
                     valid: effect.valid,
                     errorData: effect.errorData,
