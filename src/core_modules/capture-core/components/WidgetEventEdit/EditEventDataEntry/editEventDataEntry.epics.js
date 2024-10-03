@@ -4,7 +4,7 @@ import { map, filter, flatMap, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -54,8 +54,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             const eventContainer = loadedValues.eventContainer;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
-                prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
-                return EMPTY;
+                return of(prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error));
             }
 
             const program = metadataContainer.program;
