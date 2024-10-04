@@ -22,7 +22,10 @@ const styles = {
     container: {
         display: 'flex',
         alignItems: 'center',
-        gap: spacers.dp4,
+        gap: spacers.dp8,
+        wordWrap: 'break-word',
+        hyphens: 'auto',
+        textAlign: 'justify',
     },
     previousValue: {
         color: colors.grey700,
@@ -35,7 +38,7 @@ const styles = {
 const Updated = ({ previousValue, currentValue, classes }) => (
     <div className={classes.container}>
         <span className={classes.previousValue}>{previousValue}</span>
-        <IconArrowRight16 />
+        <span><IconArrowRight16 /></span>
         <span className={classes.currentValue}>{currentValue}</span>
     </div>
 );
@@ -50,7 +53,7 @@ const Created = ({ currentValue, classes }) => (
 const Deleted = ({ previousValue, classes }) => (
     <div className={classes.container}>
         <span className={classes.previousValue}>{previousValue}</span>
-        <IconArrowRight16 />
+        <span><IconArrowRight16 /></span>
         <Tag negative>{i18n.t('Deleted')}</Tag>
     </div>
 );
