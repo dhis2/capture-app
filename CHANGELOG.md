@@ -1,3 +1,10 @@
+## [101.7.1](https://github.com/dhis2/capture-app/compare/v101.7.0...v101.7.1) (2024-10-04)
+
+
+### Bug Fixes
+
+* [DHIS2-18116] check return value of `parseDate` ([#3823](https://github.com/dhis2/capture-app/issues/3823)) ([a1626e0](https://github.com/dhis2/capture-app/commit/a1626e02991501c09df6d52d177374dff5fe75fe))
+
 # [101.7.0](https://github.com/dhis2/capture-app/compare/v101.6.2...v101.7.0) (2024-10-03)
 
 
