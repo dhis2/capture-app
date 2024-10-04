@@ -1,3 +1,10 @@
+# [101.7.0](https://github.com/dhis2/capture-app/compare/v101.6.2...v101.7.0) (2024-10-03)
+
+
+### Features
+
+* [DHIS2-17874] replace remaining Material UI components ([#3794](https://github.com/dhis2/capture-app/issues/3794)) ([7194e54](https://github.com/dhis2/capture-app/commit/7194e54a56bbfbcab5b3d39d597fabfa4d49daf7))
+
 ## [101.6.2](https://github.com/dhis2/capture-app/compare/v101.6.1...v101.6.2) (2024-10-01)
 
 
