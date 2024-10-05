@@ -604,15 +604,6 @@ msgstr "Chương trình không tồn tại"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "Trực tuyến"
-
-msgid "Offline"
-msgstr "Ngoại tuyến"
-
-msgid "Syncing"
-msgstr "Đang đồng bộ"
-
 msgid "Add note"
 msgstr "Thêm ghi chú"
 
@@ -898,7 +889,7 @@ msgid "events"
 msgstr "sự kiện"
 
 msgid "event"
-msgstr ""
+msgstr "sự kiện"
 
 msgid "You don't have access to edit this event"
 msgstr ""
@@ -1194,7 +1185,7 @@ msgid "Mark for follow-up"
 msgstr "Đánh dấu để theo-dõi"
 
 msgid "Transfer"
-msgstr ""
+msgstr "Chuyển"
 
 msgid "An error occurred while transferring ownership"
 msgstr ""
