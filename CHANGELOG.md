@@ -1,3 +1,10 @@
+## [101.7.4](https://github.com/dhis2/capture-app/compare/v101.7.3...v101.7.4) (2024-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-17537] use new endpoints for FILE ([#3799](https://github.com/dhis2/capture-app/issues/3799)) ([9906692](https://github.com/dhis2/capture-app/commit/99066925df7011f64c5c2b290182df2b3e540ffe))
+
 ## [101.7.3](https://github.com/dhis2/capture-app/compare/v101.7.2...v101.7.3) (2024-10-07)
 
 
