@@ -18,8 +18,9 @@ import {
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
-import { convertClientToServer } from '../../converters';
-import { systemSettingsStore } from '../../metaDataMemoryStores';
+import { convertFormToClient, convertClientToServer } from '../../converters';
+import { pipe } from '../../../capture-core-utils';
+
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -46,15 +47,15 @@ export const WidgetEventSchedule = ({
     });
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
-    const dateFormat = systemSettingsStore.get().dateFormat;
-    const formatDateForServer = date => moment(date, dateFormat).format('YYYY-MM-DD');
-    const formattedScheduleDate = formatDateForServer(scheduleDate);
+    const convertFn = pipe(convertFormToClient, convertClientToServer);
+    const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
+    const serverSuggestedScheduleDate = convertFn(suggestedScheduleDate, dataElementTypes.DATE);
     const [notes, setNotes] = useState([]);
     const [assignee, setAssignee] = useState(storedAssignee);
-    const { events } = useEventsInOrgUnit(orgUnitId, formattedScheduleDate);
+    const { events } = useEventsInOrgUnit(orgUnitId, serverScheduleDate);
     const { eventId } = useLocationQuery();
     const eventCountInOrgUnit = events
-        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === formattedScheduleDate).length;
+        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === serverScheduleDate).length;
     const [selectedCategories, setSelectedCategories] = useState({});
     const [categoryOptionsError, setCategoryOptionsError] = useState();
     const { programCategory } = useCategoryCombinations(programId);
@@ -79,7 +80,7 @@ export const WidgetEventSchedule = ({
             return;
         }
         dispatch(requestScheduleEvent({
-            scheduleDate: formattedScheduleDate,
+            scheduleDate: serverScheduleDate,
             notes,
             programId,
             orgUnitId,
@@ -96,7 +97,7 @@ export const WidgetEventSchedule = ({
         }));
     }, [
         dispatch,
-        formattedScheduleDate,
+        serverScheduleDate,
         notes,
         programId,
         orgUnitId,
@@ -181,9 +182,11 @@ export const WidgetEventSchedule = ({
             programCategory={programCategory}
             programName={program.name}
             enableUserAssignment={enableUserAssignment && stage?.enableUserAssignment}
-            scheduleDate={formattedScheduleDate}
+            scheduleDate={scheduleDate}
+            serverScheduleDate={serverScheduleDate}
             displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
             suggestedScheduleDate={suggestedScheduleDate}
+            serverSuggestedScheduleDate={serverSuggestedScheduleDate}
             onCancel={onCancel}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
