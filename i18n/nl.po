@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -613,15 +613,6 @@ msgstr "Programma bestaat niet"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "offline"
-
-msgid "Syncing"
-msgstr "synchroniseren"
 
 msgid "Add note"
 msgstr "Notitie toevoegen"
@@ -1309,12 +1300,6 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Opvolgen"
-
-msgid "Started at {{orgUnitName}}"
-msgstr "Gestart bij {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Eigendom van {{ownerOrgUnit}}"
 
 msgid "Cancelled"
 msgstr "Geannuleerd"

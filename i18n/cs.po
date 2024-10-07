@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -606,15 +606,6 @@ msgstr "Program neexistuje"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "Vybraný program je pro vybranou organizační jednotku neplatný"
-
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "Offline"
-
-msgid "Syncing"
-msgstr "Probíhá synchronizace"
 
 msgid "Add note"
 msgstr "Přidat poznámku"
@@ -1293,12 +1284,6 @@ msgstr "Widget pro zápis nelze načíst. Prosím zkuste to znovu později"
 
 msgid "Follow-up"
 msgstr "Následovat"
-
-msgid "Started at {{orgUnitName}}"
-msgstr "Zahájeno v {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Vlastník: {{ownerOrgUnit}}"
 
 msgid "Cancelled"
 msgstr "Zrušeno"

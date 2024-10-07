@@ -1,9 +1,11 @@
 // @flow
+import { typeKeys } from '../../../constants';
 import { eventStatuses } from '../constants';
 import type {
     EventData,
     EventsData,
     CompareDates,
+    ProcessValue,
 } from '../variableService.types';
 
 const createEventsContainer = (events: EventsData) => {
@@ -16,20 +18,16 @@ const createEventsContainer = (events: EventsData) => {
     return { all: events, byStage: eventsDataByStage };
 };
 
-export const getStructureEvents = (compareDates: CompareDates) => {
-    const compareEvents = (first: EventData, second: EventData): number => {
-        let result;
-        if (!first.occurredAt && !second.occurredAt) {
-            result = 0;
-        } else if (!first.occurredAt) {
-            result = 1;
-        } else if (!second.occurredAt) {
-            result = -1;
-        } else {
-            result = compareDates(first.occurredAt, second.occurredAt);
-        }
-        return result;
-    };
+export const getStructureEvents = (compareDates: CompareDates, processValue: ProcessValue) => {
+    const compareEvents = (first: EventData, second: EventData): number =>
+        compareDates(
+            processValue(first.occurredAt, typeKeys.DATE),
+            processValue(second.occurredAt, typeKeys.DATE),
+        ) ||
+        compareDates(
+            processValue(first.createdAt, typeKeys.DATETIME),
+            processValue(second.createdAt, typeKeys.DATETIME),
+        );
 
     return (currentEvent: EventData = {}, otherEvents: EventsData = []) => {
         const otherEventsFiltered = otherEvents
@@ -37,8 +35,8 @@ export const getStructureEvents = (compareDates: CompareDates) => {
                     [eventStatuses.COMPLETED, eventStatuses.ACTIVE, eventStatuses.VISITED].includes(event.status) &&
                     event.eventId !== currentEvent.eventId,
             );
-
-        const events = Object.keys(currentEvent).length !== 0 ? otherEventsFiltered.concat(currentEvent) : otherEventsFiltered;
+        const events = Object.keys(currentEvent).length ?
+            otherEventsFiltered.concat(currentEvent) : otherEventsFiltered;
         const sortedEvents = events.sort(compareEvents);
 
         return createEventsContainer(sortedEvents);
