@@ -1,3 +1,10 @@
+## [101.7.3](https://github.com/dhis2/capture-app/compare/v101.7.2...v101.7.3) (2024-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-17530] show missing FILE url  ([#3787](https://github.com/dhis2/capture-app/issues/3787)) ([205bb82](https://github.com/dhis2/capture-app/commit/205bb82bd2289313859c697aa6a6106b270dce0a))
+
 ## [101.7.2](https://github.com/dhis2/capture-app/compare/v101.7.1...v101.7.2) (2024-10-06)
 
 
