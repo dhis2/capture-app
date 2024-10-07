@@ -22,10 +22,7 @@ const styles = {
     container: {
         display: 'flex',
         alignItems: 'center',
-        gap: spacers.dp8,
-        wordWrap: 'break-word',
-        hyphens: 'auto',
-        textAlign: 'justify',
+        gap: spacers.dp4,
     },
     previousValue: {
         color: colors.grey700,
