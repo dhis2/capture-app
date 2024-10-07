@@ -76,7 +76,7 @@ const getLastUpdatedAt = (events, fromServerDate) => {
                 <>
                     {i18n.t('Last updated')}&nbsp;
                     <Tooltip content={fromServerDate(updatedAt).toLocaleString()}>
-                        { moment(fromServerDate(updatedAt)).fromNow()}
+                        {moment(fromServerDate(updatedAt)).fromNow()}
                     </Tooltip>
                 </>
             )
@@ -111,15 +111,15 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             <div className={classes.title}>
                 {title}
             </div>
-            { description &&
-            <Tooltip
-                content={description}
-                openDelay="100"
-            >
-                <div className={classes.descriptionIcon}>
-                    <IconInfo16 />
-                </div>
-            </Tooltip>
+            {description &&
+                <Tooltip
+                    content={description}
+                    openDelay={100}
+                >
+                    <div className={classes.descriptionIcon}>
+                        <IconInfo16 />
+                    </div>
+                </Tooltip>
             }
         </div>
         <div className={classes.infoItems}>
@@ -141,7 +141,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
                     <IconCalendar16 />
                 </div>
                 {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
-            </div> : null }
+            </div> : null}
             {totalEvents > 0 && <div className={cx(classes.indicator)}>
                 <div className={classes.indicatorIcon}>
                     <IconClockHistory16 />

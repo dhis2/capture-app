@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -627,15 +627,6 @@ msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 "El programa seleccionado no es válido para la unidad organizativa "
 "seleccionada"
-
-msgid "Online"
-msgstr "Conectado"
-
-msgid "Offline"
-msgstr "Desconectado"
-
-msgid "Syncing"
-msgstr "Sincronizando"
 
 msgid "Add note"
 msgstr "Añadir nota"
@@ -1332,12 +1323,6 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Seguimiento"
-
-msgid "Started at {{orgUnitName}}"
-msgstr "Comenzó en {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Propiedad de {{ownerOrgUnit}}"
 
 msgid "Cancelled"
 msgstr "Cancelar"
