@@ -186,9 +186,7 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
             .filter(({ type }) => subvalueGetterByType[type]);
         const subvalueKeysByType = getSubvalueKeysByType(clientData, columnsWithSubvalues);
         const subvaluesByType = await getSubvaluesByType(subvalueKeysByType);
-        console.log(subvaluesByType);
         const clientDataWithSubValues = addSubvalues(clientData, subvaluesByType, columnsWithSubvalues);
-        console.log(clientDataWithSubValues);
         return cleanClientData(clientDataWithSubValues);
     };
 };
