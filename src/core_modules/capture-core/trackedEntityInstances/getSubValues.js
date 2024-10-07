@@ -33,18 +33,27 @@ const subValueGetterByElementType = {
         attributeId,
         absoluteApiPath,
         querySingleResource,
+        programId,
     }: {
         value: string,
         teiId: string,
         attributeId: string,
         absoluteApiPath: string,
         querySingleResource: QuerySingleResource,
+        programId: ?string,
     }) =>
         querySingleResource({ resource: `fileResources/${value}` })
-            .then(res => ({
-                name: res.name,
-                url: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/file`,
-            }))
+            .then((res) => {
+                const fileUrl = featureAvailable(FEATURES.trackerFileEndpoint)
+                    ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file`
+                    : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/file`;
+                const url = programId ? `${fileUrl}?program=${programId}` : fileUrl;
+
+                return {
+                    name: res.name,
+                    url,
+                };
+            })
             .catch((error) => {
                 log.warn(errorCreator('Could not get subvalue')({ value, teiId, attributeId, error }));
                 return null;

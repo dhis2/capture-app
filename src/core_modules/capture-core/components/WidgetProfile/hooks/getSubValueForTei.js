@@ -17,12 +17,19 @@ type SubValueFunctionParams = {
     minorServerVersion: number,
 };
 
-const buildTEAFileUrl = (attribute) => {
-    const { absoluteApiPath, teiId, id } = attribute;
-    return `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/file`;
+const buildTEAFileUrl = (attribute, minorServerVersion) => {
+    const { absoluteApiPath, teiId, programId, id } = attribute;
+
+    return hasAPISupportForFeature(minorServerVersion, FEATURES.trackerFileEndpoint)
+        ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/file?program=${programId}`
+        : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/file`;
 };
 
-const getFileResourceSubvalue = async ({ attribute, querySingleResource }: SubValueFunctionParams) => {
+const getFileResourceSubvalue = async ({
+    attribute,
+    querySingleResource,
+    minorServerVersion,
+}: SubValueFunctionParams) => {
     if (!attribute.value) return null;
 
     const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: attribute.value });
@@ -30,7 +37,7 @@ const getFileResourceSubvalue = async ({ attribute, querySingleResource }: SubVa
         id,
         name,
         value: id,
-        url: buildTEAFileUrl(attribute),
+        url: buildTEAFileUrl(attribute, minorServerVersion),
     };
 };
 
