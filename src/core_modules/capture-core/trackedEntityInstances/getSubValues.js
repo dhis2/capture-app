@@ -1,6 +1,7 @@
 // @flow
 import isDefined from 'd2-utilizr/lib/isDefined';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
+import log from 'loglevel';
+import { featureAvailable, FEATURES, errorCreator } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
@@ -26,6 +27,28 @@ const subValueGetterByElementType = {
             url: previewUrl,
         };
     },
+    [dataElementTypes.FILE_RESOURCE]: ({
+        value,
+        teiId,
+        attributeId,
+        absoluteApiPath,
+        querySingleResource,
+    }: {
+        value: string,
+        teiId: string,
+        attributeId: string,
+        absoluteApiPath: string,
+        querySingleResource: QuerySingleResource,
+    }) =>
+        querySingleResource({ resource: `fileResources/${value}` })
+            .then(res => ({
+                name: res.name,
+                url: `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/file`,
+            }))
+            .catch((error) => {
+                log.warn(errorCreator('Could not get subvalue')({ value, teiId, attributeId, error }));
+                return null;
+            }),
 };
 
 export async function getSubValues({

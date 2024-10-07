@@ -1,3 +1,24 @@
+## [101.7.3](https://github.com/dhis2/capture-app/compare/v101.7.2...v101.7.3) (2024-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-17530] show missing FILE url  ([#3787](https://github.com/dhis2/capture-app/issues/3787)) ([205bb82](https://github.com/dhis2/capture-app/commit/205bb82bd2289313859c697aa6a6106b270dce0a))
+
+## [101.7.2](https://github.com/dhis2/capture-app/compare/v101.7.1...v101.7.2) (2024-10-06)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a0e306c](https://github.com/dhis2/capture-app/commit/a0e306c6d15d1c180e81ddbc162091ba554cd40f))
+
+## [101.7.1](https://github.com/dhis2/capture-app/compare/v101.7.0...v101.7.1) (2024-10-04)
+
+
+### Bug Fixes
+
+* [DHIS2-18116] check return value of `parseDate` ([#3823](https://github.com/dhis2/capture-app/issues/3823)) ([a1626e0](https://github.com/dhis2/capture-app/commit/a1626e02991501c09df6d52d177374dff5fe75fe))
+
 # [101.7.0](https://github.com/dhis2/capture-app/compare/v101.6.2...v101.7.0) (2024-10-03)
 
 

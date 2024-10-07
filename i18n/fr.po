@@ -626,15 +626,6 @@ msgstr ""
 "Le programme sélectionné n'est pas valide pour l'unité d'organisation "
 "sélectionnée"
 
-msgid "Online"
-msgstr "En ligne"
-
-msgid "Offline"
-msgstr "Hors ligne"
-
-msgid "Syncing"
-msgstr "Synchronisation"
-
 msgid "Add note"
 msgstr "Ajouter une note"
 

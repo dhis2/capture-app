@@ -607,15 +607,6 @@ msgstr "Program neexistuje"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "Vybraný program je pro vybranou organizační jednotku neplatný"
 
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "Offline"
-
-msgid "Syncing"
-msgstr "Probíhá synchronizace"
-
 msgid "Add note"
 msgstr "Přidat poznámku"
 
