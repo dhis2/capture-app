@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { useOrgUnitName } from '../../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
 
 type Props = {
     orgUnitId: string,
@@ -9,7 +9,7 @@ type Props = {
 export const FlatListOrgUnitField = ({
     orgUnitId,
 }: Props) => {
-    const { displayName } = useOrgUnitName(orgUnitId);
+    const { displayName } = useOrgUnitNameWithAncestors(orgUnitId);
 
     return (
         <span>

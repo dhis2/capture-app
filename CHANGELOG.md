@@ -1,3 +1,73 @@
+# [101.8.0](https://github.com/dhis2/capture-app/compare/v101.7.4...v101.8.0) (2024-10-08)
+
+
+### Features
+
+* [DHIS2-18081] Problem with date format when scheduling an event ([#3816](https://github.com/dhis2/capture-app/issues/3816)) ([e12e561](https://github.com/dhis2/capture-app/commit/e12e561008ff181ad28b7d2fea215017467df22c))
+
+## [101.7.4](https://github.com/dhis2/capture-app/compare/v101.7.3...v101.7.4) (2024-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-17537] use new endpoints for FILE ([#3799](https://github.com/dhis2/capture-app/issues/3799)) ([9906692](https://github.com/dhis2/capture-app/commit/99066925df7011f64c5c2b290182df2b3e540ffe))
+
+## [101.7.3](https://github.com/dhis2/capture-app/compare/v101.7.2...v101.7.3) (2024-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-17530] show missing FILE url  ([#3787](https://github.com/dhis2/capture-app/issues/3787)) ([205bb82](https://github.com/dhis2/capture-app/commit/205bb82bd2289313859c697aa6a6106b270dce0a))
+
+## [101.7.2](https://github.com/dhis2/capture-app/compare/v101.7.1...v101.7.2) (2024-10-06)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a0e306c](https://github.com/dhis2/capture-app/commit/a0e306c6d15d1c180e81ddbc162091ba554cd40f))
+
+## [101.7.1](https://github.com/dhis2/capture-app/compare/v101.7.0...v101.7.1) (2024-10-04)
+
+
+### Bug Fixes
+
+* [DHIS2-18116] check return value of `parseDate` ([#3823](https://github.com/dhis2/capture-app/issues/3823)) ([a1626e0](https://github.com/dhis2/capture-app/commit/a1626e02991501c09df6d52d177374dff5fe75fe))
+
+# [101.7.0](https://github.com/dhis2/capture-app/compare/v101.6.2...v101.7.0) (2024-10-03)
+
+
+### Features
+
+* [DHIS2-17874] replace remaining Material UI components ([#3794](https://github.com/dhis2/capture-app/issues/3794)) ([7194e54](https://github.com/dhis2/capture-app/commit/7194e54a56bbfbcab5b3d39d597fabfa4d49daf7))
+
+## [101.6.2](https://github.com/dhis2/capture-app/compare/v101.6.1...v101.6.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* [DHIS2-18004] sort events in rules engine by occurredAt and createdAt ([#3788](https://github.com/dhis2/capture-app/issues/3788)) ([2bb485e](https://github.com/dhis2/capture-app/commit/2bb485e0927e9137874131a982fe690b9f6c5361))
+
+## [101.6.1](https://github.com/dhis2/capture-app/compare/v101.6.0...v101.6.1) (2024-09-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([cbeb102](https://github.com/dhis2/capture-app/commit/cbeb1022bf45b241a91dcfb8c3e49956b28b1c44))
+
+# [101.6.0](https://github.com/dhis2/capture-app/compare/v101.5.0...v101.6.0) (2024-09-27)
+
+
+### Features
+
+* support custom background color ([#3814](https://github.com/dhis2/capture-app/issues/3814)) ([22cfe58](https://github.com/dhis2/capture-app/commit/22cfe585b6b044c7d6b146c1449ccddb85d8abb4))
+
+# [101.5.0](https://github.com/dhis2/capture-app/compare/v101.4.1...v101.5.0) (2024-09-24)
+
+
+### Features
+
+* [DHIS2-17770] Org unit contextualization in self contained widgets ([#3720](https://github.com/dhis2/capture-app/issues/3720)) ([562b03a](https://github.com/dhis2/capture-app/commit/562b03a1cf2cb5cff5382bd433943f289c860095))
+
 ## [101.4.1](https://github.com/dhis2/capture-app/compare/v101.4.0...v101.4.1) (2024-09-19)
 
 

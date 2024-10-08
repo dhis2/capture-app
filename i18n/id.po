@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -611,15 +611,6 @@ msgstr "Program tidak ada"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "Offline"
-
-msgid "Syncing"
-msgstr "Menyinkronkan"
 
 msgid "Add note"
 msgstr "Tambah catatan"
@@ -1271,12 +1262,6 @@ msgstr "Widget pendaftaran tidak dapat dimuat. Silakan coba lagi nanti"
 
 msgid "Follow-up"
 msgstr "Mengikuti"
-
-msgid "Started at {{orgUnitName}}"
-msgstr "Dimulai di {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Dimiliki oleh {{ownerOrgUnit}}"
 
 msgid "Cancelled"
 msgstr "Dibatalkan"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -1305,12 +1305,6 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Acompanhamento"
-
-msgid "Started at {{orgUnitName}}"
-msgstr "Iniciado em {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Propriedade de {{ownerOrgUnit}}"
 
 msgid "Cancelled"
 msgstr "Cancelado"

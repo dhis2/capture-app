@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Popover from '@material-ui/core/Popover';
-import { IconChevronDown16, IconChevronUp16, Button } from '@dhis2/ui';
+import { Button, Popover } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
+import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
@@ -11,8 +11,9 @@ import type { FilterData, Options } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
     icon: {
-        fontSize: theme.typography.pxToRem(20),
-        paddingLeft: theme.typography.pxToRem(5),
+        paddingLeft: theme.typography.pxToRem(12),
+        display: 'flex',
+        alignItems: 'center',
     },
     inactiveFilterButton: {
         backgroundColor: '#f5f5f5',
@@ -21,15 +22,6 @@ const getStyles = (theme: Theme) => ({
         textTransform: 'none',
     },
 });
-
-const POPOVER_ANCHOR_ORIGIN = {
-    vertical: 'bottom',
-    horizontal: 'left',
-};
-const POPOVER_TRANSFORM_ORIGIN = {
-    vertical: 'top',
-    horizontal: 'left',
-};
 
 type Props = {
     itemId: string,
@@ -142,11 +134,11 @@ class FilterButtonMainPlain extends Component<Props, State> {
 
         const arrowIconElement = selectorVisible ? (
             <span className={classes.icon}>
-                <IconChevronUp16 />
+                <ChevronUp />
             </span>
         ) : (
             <span className={classes.icon}>
-                <IconChevronDown16 />
+                <ChevronDown />
             </span>
         );
 
@@ -178,7 +170,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {title}
                     <span className={classes.icon}>
-                        {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
+                        {selectorVisible ? <ChevronUp /> : <ChevronDown />}
                     </span>
                 </Button>
             </ConditionalTooltip>
@@ -199,22 +191,24 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {button}
                 </div>
-                <Popover
-                    open={selectorVisible && isMounted}
-                    anchorEl={this.anchorRef.current}
-                    onClose={this.closeFilterSelector}
-                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
-                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
-                >
-                    {
-                        (() => {
-                            if (selectorVisible) {
-                                return this.renderSelectorContents();
-                            }
-                            return null;
-                        })()
-                    }
-                </Popover>
+                {(selectorVisible && isMounted) && (
+                    <Popover
+                        reference={this.anchorRef.current}
+                        arrow={false}
+                        placement="bottom-start"
+                        onClickOutside={this.closeFilterSelector}
+                        maxWidth={400}
+                    >
+                        {
+                            (() => {
+                                if (selectorVisible) {
+                                    return this.renderSelectorContents();
+                                }
+                                return null;
+                            })()
+                        }
+                    </Popover>
+                )}
             </React.Fragment>
         );
     }
