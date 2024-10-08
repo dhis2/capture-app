@@ -1,3 +1,10 @@
+# [101.8.0](https://github.com/dhis2/capture-app/compare/v101.7.4...v101.8.0) (2024-10-08)
+
+
+### Features
+
+* [DHIS2-18081] Problem with date format when scheduling an event ([#3816](https://github.com/dhis2/capture-app/issues/3816)) ([e12e561](https://github.com/dhis2/capture-app/commit/e12e561008ff181ad28b7d2fea215017467df22c))
+
 ## [101.7.4](https://github.com/dhis2/capture-app/compare/v101.7.3...v101.7.4) (2024-10-07)
 
 
