@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { DataTableCell, DataTableRow } from '@dhis2/ui';
-import { ChangelogChangeCell } from './ChangelogChangeCell';
+import { ChangelogChangeCell, ChangelogValueCell } from './ChangelogCells';
 import type { ChangelogRecord } from '../Changelog/Changelog.types';
 
 type Props = {|
@@ -19,11 +19,16 @@ export const ChangelogTableRow = ({ record }: Props) => (
         <DataTableCell>
             {record.dataItemLabel}
         </DataTableCell>
-
         <DataTableCell>
             <ChangelogChangeCell
                 {...record}
             />
         </DataTableCell>
+        <DataTableCell>
+            <ChangelogValueCell
+                {...record}
+            />
+        </DataTableCell>
+
     </DataTableRow>
 );

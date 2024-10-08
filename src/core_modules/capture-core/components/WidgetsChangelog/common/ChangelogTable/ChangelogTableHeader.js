@@ -9,27 +9,22 @@ type Props = {
     setSortDirection: SetSortDirection,
 };
 
-export const ChangelogTableHeader = ({
-    sortDirection,
-    setSortDirection,
-}: Props) => (
+export const ChangelogTableHeader = ({ sortDirection, setSortDirection }: Props) => (
     <DataTableHead>
         <DataTableRow>
             <DataTableColumnHeader
+                fixed
+                top="0"
                 onSortIconClick={({ direction }) => setSortDirection(direction)}
                 sortDirection={sortDirection}
             >
                 {i18n.t('Date')}
             </DataTableColumnHeader>
-            <DataTableColumnHeader>
-                {i18n.t('User')}
-            </DataTableColumnHeader>
-            <DataTableColumnHeader>
-                {i18n.t('Data item')}
-            </DataTableColumnHeader>
-            <DataTableColumnHeader>
-                {i18n.t('Change')}
-            </DataTableColumnHeader>
+            {['User', 'Data item', 'Change', 'Value'].map(header => (
+                <DataTableColumnHeader key={header} fixed top="0">
+                    {i18n.t(header)}
+                </DataTableColumnHeader>
+            ))}
         </DataTableRow>
     </DataTableHead>
 );

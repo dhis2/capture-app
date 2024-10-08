@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
-"PO-Revision-Date: 2024-09-02T11:08:16.281Z\n"
+"POT-Creation-Date: 2024-10-07T15:45:15.578Z\n"
+"PO-Revision-Date: 2024-10-07T15:45:15.578Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1553,6 +1553,9 @@ msgstr "Changelog"
 msgid "No changes to display"
 msgstr "No changes to display"
 
+msgid "Updated"
+msgstr "Updated"
+
 msgid "Created"
 msgstr "Created"
 
@@ -1561,15 +1564,6 @@ msgstr "Deleted"
 
 msgid "Date"
 msgstr "Date"
-
-msgid "User"
-msgstr "User"
-
-msgid "Data item"
-msgstr "Data item"
-
-msgid "Change"
-msgstr "Change"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
