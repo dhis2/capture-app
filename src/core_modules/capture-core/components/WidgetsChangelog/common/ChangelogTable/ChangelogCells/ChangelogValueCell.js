@@ -25,9 +25,11 @@ const styles = {
     },
     previousValue: {
         color: colors.grey700,
+        maxWidth: '50%',
     },
     currentValue: {
         color: colors.grey900,
+        maxWidth: '50%',
     },
 };
 

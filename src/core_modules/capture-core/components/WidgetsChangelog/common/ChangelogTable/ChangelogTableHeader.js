@@ -13,18 +13,26 @@ export const ChangelogTableHeader = ({ sortDirection, setSortDirection }: Props)
     <DataTableHead>
         <DataTableRow>
             <DataTableColumnHeader
-                fixed
-                top="0"
                 onSortIconClick={({ direction }) => setSortDirection(direction)}
                 sortDirection={sortDirection}
+                fixed
+                top="0"
+                width="140px"
             >
                 {i18n.t('Date')}
             </DataTableColumnHeader>
-            {['User', 'Data item', 'Change', 'Value'].map(header => (
-                <DataTableColumnHeader key={header} fixed top="0">
-                    {i18n.t(header)}
-                </DataTableColumnHeader>
-            ))}
+            <DataTableColumnHeader fixed top="0" width="125px">
+                {i18n.t('User')}
+            </DataTableColumnHeader>
+            <DataTableColumnHeader fixed top="0" width="125px">
+                {i18n.t('Data item')}
+            </DataTableColumnHeader>
+            <DataTableColumnHeader fixed top="0" width="85px">
+                {i18n.t('Change')}
+            </DataTableColumnHeader>
+            <DataTableColumnHeader fixed top="0">
+                {i18n.t('Value')}
+            </DataTableColumnHeader>
         </DataTableRow>
     </DataTableHead>
 );

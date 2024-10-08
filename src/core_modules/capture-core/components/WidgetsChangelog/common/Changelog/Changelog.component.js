@@ -34,7 +34,9 @@ export const ChangelogComponent = ({
 
         <ModalContent>
             <DataTable
+                fixed
                 dataTest={'changelog-data-table'}
+                width="750px"
             >
                 <ChangelogTableHeader
                     sortDirection={sortDirection}
@@ -64,7 +66,7 @@ export const ChangelogComponent = ({
                 {pager && (
                     <DataTableFoot>
                         <DataTableRow>
-                            <DataTableCell colSpan="4">
+                            <DataTableCell colSpan="5">
                                 <Pagination
                                     page={pager.page}
                                     pageSize={pager.pageSize}
