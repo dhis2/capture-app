@@ -1,7 +1,7 @@
 // @flow
 
 import { typeof dataElementTypes } from '../../../metaData';
-import type { FilterData, Options, } from '../../FiltersForTypes';
+import type { FilterData, Options } from '../../FiltersForTypes';
 
 export type Column = {
     id: string,
