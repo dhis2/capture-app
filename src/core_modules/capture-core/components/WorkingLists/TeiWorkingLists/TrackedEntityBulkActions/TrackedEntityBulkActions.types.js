@@ -5,6 +5,7 @@ export type Props = {
     programId: string,
     onClearSelection: () => void,
     onUpdateList: () => void,
+    removeRowsFromSelection: (rows: Array<string>) => void,
 }
 
 export type ContainerProps = {

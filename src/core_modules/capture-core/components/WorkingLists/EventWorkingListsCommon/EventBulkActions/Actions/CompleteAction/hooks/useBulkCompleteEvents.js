@@ -10,7 +10,7 @@ type Props = {|
     selectedRows: { [key: string]: boolean },
     isCompleteDialogOpen: boolean,
     setIsCompleteDialogOpen: (isCompleteDialogOpen: boolean) => void,
-    onUpdateList: () => void,
+    onUpdateList: (disableClearSelection?: boolean) => void,
 |}
 
 export const useBulkCompleteEvents = ({

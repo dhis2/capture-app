@@ -43,7 +43,7 @@ const styles = {
             borderColor: '#E2E8F0',
             backgroundColor: '#F7FAFC',
             cursor: 'not-allowed',
-        }
+        },
     },
 };
 

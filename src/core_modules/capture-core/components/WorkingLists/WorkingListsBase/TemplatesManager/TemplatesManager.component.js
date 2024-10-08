@@ -6,7 +6,7 @@ import { ListViewConfig } from '../ListViewConfig';
 import { TemplateSelector } from '../TemplateSelector.component';
 import { ManagerContext } from '../workingListsBase.context';
 import { withBorder } from '../borderHOC';
-import type { WorkingListTemplate, } from '../workingListsBase.types';
+import type { WorkingListTemplate } from '../workingListsBase.types';
 import type { Props } from './templatesManager.types';
 
 const TemplatesManagerPlain = (props: Props) => {

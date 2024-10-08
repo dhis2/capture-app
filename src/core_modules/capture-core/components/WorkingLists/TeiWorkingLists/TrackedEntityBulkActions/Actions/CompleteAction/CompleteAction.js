@@ -21,7 +21,8 @@ import { Widget } from '../../../../../Widget';
 type Props = {
     selectedRows: { [id: string]: any },
     programId: string,
-    onUpdateList: () => void,
+    onUpdateList: (disableClearSelections?: boolean) => void,
+    removeRowsFromSelection: (rows: Array<string>) => void,
 };
 
 const styles = {
@@ -38,24 +39,34 @@ const styles = {
         justifyContent: 'center',
         margin: '20px 0',
     },
+    errorContainer: {
+        padding: '0px 20px',
+    },
 };
 
-const CompleteActionPlain = ({ selectedRows, programId, onUpdateList, classes }) => {
+const CompleteActionPlain = ({
+    selectedRows,
+    programId,
+    onUpdateList,
+    removeRowsFromSelection,
+    classes,
+}) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
     const {
-        enrollmentCounts,
         completeEnrollments,
+        enrollmentCounts,
         isLoading,
-        error,
-        isCompletingEnrollments,
+        validationError,
+        isCompleting,
+        hasPartiallyUploadedEnrollments,
     } = useCompleteBulkEnrollments({
         selectedRows,
         programId,
         modalIsOpen,
-        setModalIsOpen,
         onUpdateList,
+        removeRowsFromSelection,
     });
 
     const ModalTextContent = () => {
@@ -69,11 +80,15 @@ const CompleteActionPlain = ({ selectedRows, programId, onUpdateList, classes })
         }
 
         // If there was an error importing the data, show an error message
-        if (error) {
+        if (validationError) {
+            const errors = (validationError: any)?.details?.validationReport?.errorReports;
             return (
                 <div className={classes.container}>
                     <span>
-                        {i18n.t('An error occurred while completing the enrollments.')}
+                        {hasPartiallyUploadedEnrollments ?
+                            i18n.t('Some enrollments were completed successfully, but there was an error while completing the rest. Please see the details below.') :
+                            i18n.t('There was an error while completing the enrollments. Please see the details below.')
+                        }
                     </span>
 
                     <Widget
@@ -81,15 +96,19 @@ const CompleteActionPlain = ({ selectedRows, programId, onUpdateList, classes })
                         onOpen={() => setOpenAccordion(true)}
                         onClose={() => setOpenAccordion(false)}
                         borderless
-                        header={i18n.t('Advanced information')}
+                        header={i18n.t('Details (Advanced)')}
                     >
-                        <span style={{ padding: '0px 20px' }}>
+                        <span className={classes.errorContainer}>
                             <ul>
-                                {error.details.validationReport.errorReports.map((errorReport, index) => (
-                                    <li key={index}>
-                                        {errorReport.message}
+                                {errors ? errors.map(errorReport => (
+                                    <li key={`${errorReport.uid}-${errorReport.errorCode}`}>
+                                        {errorReport?.message}
                                     </li>
-                                ))}
+                                )) : (
+                                    <li>
+                                        {i18n.t('An unknown error occurred.')}
+                                    </li>
+                                )}
                             </ul>
                         </span>
                     </Widget>
@@ -102,8 +121,6 @@ const CompleteActionPlain = ({ selectedRows, programId, onUpdateList, classes })
             return (
                 <div className={classes.container}>
                     {i18n.t('There are currently no active enrollments in the selection. All enrollments are already completed or cancelled.')}
-                    {' '}
-                    {enrollmentCounts?.completed > 0}
                 </div>
             );
         }
@@ -154,7 +171,8 @@ const CompleteActionPlain = ({ selectedRows, programId, onUpdateList, classes })
                     loading={isLoading}
                 >
                     <ModalTitle>
-                        {i18n.t('Complete selected enrollments')}
+                        {validationError ? i18n.t('Error completing enrollments')
+                            : i18n.t('Complete selected enrollments')}
                     </ModalTitle>
                     <ModalContent>
                         <ModalTextContent />
@@ -169,7 +187,7 @@ const CompleteActionPlain = ({ selectedRows, programId, onUpdateList, classes })
                                 {i18n.t('Cancel')}
                             </Button>
 
-                            {!error && (
+                            {!validationError && (
                                 <ConditionalTooltip
                                     enabled={enrollmentCounts?.active === 0}
                                     content={i18n.t('No active enrollments to complete')}
@@ -178,7 +196,7 @@ const CompleteActionPlain = ({ selectedRows, programId, onUpdateList, classes })
                                         primary
                                         onClick={() => completeEnrollments({ completeEvents })}
                                         disabled={isLoading || enrollmentCounts?.active === 0}
-                                        loading={isCompletingEnrollments}
+                                        loading={isCompleting}
                                     >
                                         {i18n.t('Complete {{count}} enrollment', {
                                             count: enrollmentCounts.active,

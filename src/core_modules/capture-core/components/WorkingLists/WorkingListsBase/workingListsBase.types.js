@@ -1,22 +1,22 @@
 // @flow
 import { typeof dataElementTypes } from '../../../metaData';
 import type {
+    AdditionalFilters,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
     CustomMenuContents,
     CustomRowMenuContents,
     DataSource,
     FiltersData,
     FiltersOnly,
-    AdditionalFilters,
-    StickyFilters,
-    ChangePage,
-    ChangeRowsPerPage,
-    ClearFilter,
     RemoveFilter,
-    UpdateFilter,
     SelectRestMenuItem,
-    SetColumnOrder,
     SelectRow,
+    SetColumnOrder,
     Sort,
+    StickyFilters,
+    UpdateFilter,
 } from '../../ListView';
 
 export type WorkingListTemplate = {
@@ -158,6 +158,7 @@ export type ListViewBuilderContextData = {|
     selectedRows: { [key: string]: boolean },
     selectionInProgress: ?boolean,
     allRowsAreSelected: ?boolean,
+    bulkActionBarComponent: React$Element<any>,
 |};
 
 export type SharingSettings = {|
@@ -234,6 +235,7 @@ export type InterfaceProps = $ReadOnly<{|
     onSelectAll: (rows: Array<string>) => void,
     selectionInProgress: ?boolean,
     selectedRows: { [key: string]: boolean },
+    bulkActionBarComponent: React$Element<any>,
 |}>;
 
 export type WorkingListsOutputProps = InterfaceProps;

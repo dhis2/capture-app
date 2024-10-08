@@ -10,6 +10,7 @@ export const TrackedEntityBulkActionsComponent = ({
     programId,
     onClearSelection,
     onUpdateList,
+    removeRowsFromSelection,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
 
@@ -26,6 +27,7 @@ export const TrackedEntityBulkActionsComponent = ({
                 programId={programId}
                 selectedRows={selectedRows}
                 onUpdateList={onUpdateList}
+                removeRowsFromSelection={removeRowsFromSelection}
             />
 
             <DeleteEnrollmentsAction

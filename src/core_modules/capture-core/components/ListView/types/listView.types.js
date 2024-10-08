@@ -1,10 +1,7 @@
 // @flow
 
 import { typeof dataElementTypes } from '../../../metaData';
-import type {
-    FilterData,
-    Options,
-} from '../../FiltersForTypes';
+import type { FilterData, Options, } from '../../FiltersForTypes';
 
 export type Column = {
     id: string,
@@ -119,6 +116,7 @@ export type InterfaceProps = $ReadOnly<{|
     onSelectAll: (rows: Array<string>) => void,
     allRowsAreSelected: ?boolean,
     selectionInProgress: ?boolean,
+    bulkActionBarComponent: React$Element<any>,
 |}>;
 
 export type ListViewPassOnProps = $ReadOnly<{|

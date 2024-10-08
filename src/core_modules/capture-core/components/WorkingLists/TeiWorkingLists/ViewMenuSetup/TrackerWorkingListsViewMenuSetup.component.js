@@ -33,6 +33,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
         selectionInProgress,
         toggleRowSelected,
         allRowsAreSelected,
+        removeRowsFromSelection,
     } = useSelectedRowsController({ recordIds: recordsOrder });
     const hasCSVSupport = useFeature(FEATURES.trackedEntitiesCSV);
     const downloadRequest = useSelector(
@@ -101,23 +102,22 @@ export const TrackerWorkingListsViewMenuSetup = ({
         [onUpdateList, storeId],
     );
 
-    const handleCustomUpdateTrigger = useCallback(() => {
+    const handleCustomUpdateTrigger = useCallback((disableClearSelection?: boolean) => {
         const id = uuid();
         setCustomUpdateTrigger(id);
-        clearSelection();
+        !disableClearSelection && clearSelection();
     }, [clearSelection]);
 
-    const TrackedEntityBulkActionsComponent = useMemo(() => {
-        return (
-            <TrackedEntityBulkActions
-                programId={program.id}
-                programStageId={programStageId}
-                selectedRows={selectedRows}
-                onClearSelection={clearSelection}
-                onUpdateList={handleCustomUpdateTrigger}
-            />
-        );
-    }, [program.id, programStageId, selectedRows, clearSelection, handleCustomUpdateTrigger]);
+    const TrackedEntityBulkActionsComponent = useMemo(() => (
+        <TrackedEntityBulkActions
+            programId={program.id}
+            programStageId={programStageId}
+            selectedRows={selectedRows}
+            onClearSelection={clearSelection}
+            onUpdateList={handleCustomUpdateTrigger}
+            removeRowsFromSelection={removeRowsFromSelection}
+        />
+    ), [program.id, programStageId, selectedRows, clearSelection, handleCustomUpdateTrigger, removeRowsFromSelection]);
 
     return (
         <>

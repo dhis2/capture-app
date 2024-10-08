@@ -24,4 +24,5 @@ export type TrackerWorkingListsViewMenuSetupOutputProps = {|
     onRowSelect: (id: string) => void,
     onSelectAll: (rows: Array<string>) => void,
     selectionInProgress: ?boolean,
+    bulkActionBarComponent: React$Element<any>,
 |};

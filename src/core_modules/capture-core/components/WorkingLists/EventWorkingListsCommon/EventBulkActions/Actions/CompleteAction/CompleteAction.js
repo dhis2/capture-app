@@ -1,7 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle, } from '@dhis2/ui';
+import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 
 type Props = {|

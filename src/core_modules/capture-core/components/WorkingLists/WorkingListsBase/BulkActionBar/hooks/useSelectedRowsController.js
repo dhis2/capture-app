@@ -44,6 +44,16 @@ export const useSelectedRowsController = ({ recordIds }: Props) => {
         () => Object.keys(selectedRows).length > 0,
         [selectedRows]);
 
+    const removeRowsFromSelection = useCallback((rows: Array<string>) => {
+        setSelectedRows((prevSelectedRows) => {
+            const newSelectedRows = { ...prevSelectedRows };
+            rows.forEach((rowId) => {
+                delete newSelectedRows[rowId];
+            });
+            return newSelectedRows;
+        });
+    }, []);
+
     return {
         selectedRows,
         toggleRowSelected,
@@ -51,5 +61,6 @@ export const useSelectedRowsController = ({ recordIds }: Props) => {
         selectAllRows,
         selectionInProgress,
         clearSelection,
+        removeRowsFromSelection,
     };
 };

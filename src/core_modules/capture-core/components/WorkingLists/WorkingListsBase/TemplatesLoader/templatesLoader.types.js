@@ -19,6 +19,7 @@ type OptionalExtractedProps = {
     loadedProgramIdForTemplates: string,
     onRowSelect: Function,
     onSelectAll: Function,
+    bulkActionBarComponent: React$Element<any>,
 };
 
 type RestProps = $Rest<ContextBuilderOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;

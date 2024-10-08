@@ -1,17 +1,17 @@
 // @flow
 import type {
-    DataSource,
-    SelectRow,
-    Sort,
-    SetColumnOrder,
-    CustomRowMenuContents,
-    UpdateFilter,
-    ClearFilter,
-    RemoveFilter,
-    SelectRestMenuItem,
     ChangePage,
     ChangeRowsPerPage,
+    ClearFilter,
+    CustomRowMenuContents,
+    DataSource,
+    RemoveFilter,
+    SelectRestMenuItem,
+    SelectRow,
+    SetColumnOrder,
+    Sort,
     StickyFilters,
+    UpdateFilter,
 } from '../../../../ListView';
 
 export type Props = $ReadOnly<{|
@@ -35,5 +35,6 @@ export type Props = $ReadOnly<{|
     selectedRows: { [key: string]: boolean },
     allRowsAreSelected: ?boolean,
     selectionInProgress: ?boolean,
+    bulkActionBarComponent: React$Element<any>,
     children: React$Node,
 |}>;
