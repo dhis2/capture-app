@@ -6,8 +6,8 @@ import type { AssignOutputEffect } from '@dhis2/rules-engine-javascript';
 import { type DataElement } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api';
 import { getValidators } from './getValidators';
-import type { Validations } from './validateField';
-import { validateField } from './validateField';
+import type { Validations } from './validateValue';
+import { validateValue } from './validateValue';
 
 export type AssignOutputEffectWithValidations = {
     [metaDataId: string]: Array<AssignOutputEffect & Validations>,
@@ -42,7 +42,7 @@ export const validateAssignEffects = async ({
         const validationContext = onGetValidationContext && onGetValidationContext();
 
         try {
-            const validatorResult = await validateField({ validators }, value, validationContext);
+            const validatorResult = await validateValue({ validators }, value, validationContext);
             const effectWithValidation = Object.assign({}, effectsForId[lastIndex], validatorResult);
 
             acc[metaData.id] = [effectWithValidation];

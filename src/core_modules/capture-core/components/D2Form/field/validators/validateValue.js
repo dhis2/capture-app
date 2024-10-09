@@ -8,7 +8,7 @@ export type Validations = {
     errorData?: Object,
 };
 
-export const validateField = async (
+export const validateValue = async (
     { validators }: { validators?: Array<ValidatorContainer> },
     value: any,
     validationContext: ?Object,

@@ -11,7 +11,7 @@ import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 import type { PluginContext } from '../FormFieldPlugin/FormFieldPlugin.types';
-import { getValidators, validateField } from '../field/validators';
+import { getValidators, validateValue } from '../field/validators';
 import type { ValidatorContainer } from '../field/validators';
 import type { DataElement } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
@@ -165,7 +165,7 @@ export class FormBuilder extends React.Component<Props> {
 
                 let validationData;
                 try {
-                    validationData = await validateField(
+                    validationData = await validateValue(
                         field,
                         values[field.id],
                         validationContext,
@@ -375,7 +375,7 @@ export class FormBuilder extends React.Component<Props> {
         };
 
         this.commitUpdateTriggeredForFields[fieldId] = true;
-        const updatePromise = validateField(
+        const updatePromise = validateValue(
             { validators },
             value,
             onGetValidationContext && onGetValidationContext(),
