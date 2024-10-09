@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import '../../sharedSteps';
+import '../sharedSteps';
 
 beforeEach(() => {
     // Disable cache for chromium browsers to force the api to be called

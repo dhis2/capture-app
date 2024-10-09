@@ -40,7 +40,6 @@ import {
     workingListsListRecordsDesc,
 } from 'capture-core/reducers/descriptions/workingLists';
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
-import { useNewDashboardDesc } from 'capture-core/reducers/descriptions/useNewDashboard.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
 import { viewEventPageDesc } from 'capture-core/reducers/descriptions/viewEvent.reducerDescription';
@@ -129,7 +128,6 @@ export const reducerDescriptions = [
     searchDomainDesc,
     teiSearchDesc,
     trackedEntityInstanceDesc,
-    useNewDashboardDesc,
     viewEventPageDesc,
     workingListsDesc,
     workingListsMetaDesc,

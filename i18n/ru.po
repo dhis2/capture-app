@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
+"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -615,15 +615,6 @@ msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 "Выбранная программа недействительна для выбранной организационной единицы"
 
-msgid "Online"
-msgstr "Онлайн"
-
-msgid "Offline"
-msgstr "Оффлайн"
-
-msgid "Syncing"
-msgstr "Синхронизация"
-
 msgid "Add note"
 msgstr "Добавить заметку"
 
@@ -641,55 +632,6 @@ msgstr "Заметка"
 
 msgid "Close the notice"
 msgstr "Закрыть заметку"
-
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr ""
-"Использовать новую регистрационную панель для программы{{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "Применить для программы {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is certain"
-" functionality from Tracker Capture that has not yet been added, including "
-"relationship and referral functionality. The work on including this Tracker "
-"functionality in Capture is ongoing and will be added in upcoming app "
-"releases."
-msgstr ""
-"Нажав \"применить\" ниже, вы получите доступ к новой панель регистрации в "
-"приложении Capture для данной программы. На данный момент некоторые функции "
-"из приложения Tracker Capture еще не добавлены, в том числе функции "
-"\"Связи\" и \"Направления\". Эти функции будут включены в приложение Capture"
-" в ближайших релизах."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"Команда DHIS2 будет признательна за любые отзывы касательно данного "
-"функционала, проходящего в данный момент бета-тестирование. Пожалуйста, "
-"сообщайте о любых проблемах и делитесь отзывами в проекте DHIS2 JIRA."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"Нажмите на кнопку ниже, чтобы дать доступ всем пользователям данной "
-"программы к новой панели регистрации в приложении Capture (бета-версия)."
-
-msgid "Yes, opt in"
-msgstr "Да, получить доступ"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr ""
-"Перестать использовать новую панель регистрации для программы "
-"{{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "Отменить доступ для программы {{programName}}"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""

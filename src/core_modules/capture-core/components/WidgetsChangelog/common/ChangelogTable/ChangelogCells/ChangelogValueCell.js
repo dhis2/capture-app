@@ -1,11 +1,10 @@
 // @flow
 import React from 'react';
 import log from 'loglevel';
-import { colors, IconArrowRight16, spacers, Tag } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
+import { colors, IconArrowRight16, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import { CHANGE_TYPES } from '../Changelog/Changelog.constants';
-import { errorCreator } from '../../../../../capture-core-utils';
+import { CHANGE_TYPES } from '../../Changelog/Changelog.constants';
+import { errorCreator } from '../../../../../../capture-core-utils';
 
 type Props = {
     changeType: $Values<typeof CHANGE_TYPES>,
@@ -15,14 +14,16 @@ type Props = {
         container: string,
         previousValue: string,
         currentValue: string,
+        updatePreviousValue: string,
+        updateCurrentValue: string,
+        updateArrow: string,
     }
 }
 
 const styles = {
     container: {
-        display: 'flex',
         alignItems: 'center',
-        gap: spacers.dp4,
+        display: 'flex',
     },
     previousValue: {
         color: colors.grey700,
@@ -30,19 +31,31 @@ const styles = {
     currentValue: {
         color: colors.grey900,
     },
+    updatePreviousValue: {
+        color: colors.grey700,
+        maxWidth: '45%',
+    },
+    updateCurrentValue: {
+        color: colors.grey900,
+        maxWidth: '45%',
+    },
+    updateArrow: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        margin: `${spacers.dp4}`,
+    },
 };
 
 const Updated = ({ previousValue, currentValue, classes }) => (
     <div className={classes.container}>
-        <span className={classes.previousValue}>{previousValue}</span>
-        <IconArrowRight16 />
-        <span className={classes.currentValue}>{currentValue}</span>
+        <span className={classes.updatePreviousValue}>{previousValue}</span>
+        <span className={classes.updateArrow}><IconArrowRight16 /></span>
+        <span className={classes.updateCurrentValue}>{currentValue}</span>
     </div>
 );
 
 const Created = ({ currentValue, classes }) => (
     <div className={classes.container}>
-        <Tag>{i18n.t('Created')}</Tag>
         <span className={classes.currentValue}>{currentValue}</span>
     </div>
 );
@@ -50,8 +63,6 @@ const Created = ({ currentValue, classes }) => (
 const Deleted = ({ previousValue, classes }) => (
     <div className={classes.container}>
         <span className={classes.previousValue}>{previousValue}</span>
-        <IconArrowRight16 />
-        <Tag negative>{i18n.t('Deleted')}</Tag>
     </div>
 );
 
@@ -61,7 +72,7 @@ const ChangelogComponentsByType = {
     [CHANGE_TYPES.DELETED]: Deleted,
 };
 
-const ChangelogChangeCellPlain = ({ changeType, currentValue, previousValue, classes }: Props) => {
+const ChangelogValueCellPlain = ({ changeType, currentValue, previousValue, classes }: Props) => {
     const ChangelogComponent = ChangelogComponentsByType[changeType];
 
     if (!ChangelogComponent) {
@@ -78,4 +89,4 @@ const ChangelogChangeCellPlain = ({ changeType, currentValue, previousValue, cla
     );
 };
 
-export const ChangelogChangeCell = withStyles(styles)(ChangelogChangeCellPlain);
+export const ChangelogValueCell = withStyles(styles)(ChangelogValueCellPlain);
