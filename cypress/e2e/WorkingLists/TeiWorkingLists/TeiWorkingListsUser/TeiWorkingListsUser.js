@@ -1,6 +1,6 @@
 import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
-import '../../sharedSteps';
+import '../sharedSteps';
 
 const cleanUpIfApplicable = (programId) => {
     cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
@@ -196,22 +196,6 @@ When('you set the WHOMCH Smoking filter to No', () => {
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('No')
         .click();
-});
-
-When('you set the assginee filter to none', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Assigned to')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('None')
-        .click();
-});
-
-Then('the assignee filter button should show that unassigned filter is in effect', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Assigned to: None')
-        .should('exist');
 });
 
 Then('the list should display teis with an active enrollment and unassinged events', () => {
@@ -627,7 +611,7 @@ When('you select a data element columns and save from the column selector', () =
 });
 
 Then('you see data elements specific filters and columns', () => {
-    cy.get('[data-test="filter-button-container-DX4LVYeP7bw"]')
+    cy.get('[data-test="filter-button-container-assignee"]')
         .should('exist');
     cy.get('[data-test="tei-working-lists"]')
         .should('exist');
@@ -864,5 +848,48 @@ When('you set the event visit date to Today', () => {
 Then('the working list is empty', () => {
     cy.get('[data-test="tei-working-lists"]')
         .contains('No items to display')
+        .click();
+});
+
+Then('the assignee column is displayed', () => {
+    cy.get('[data-test="dhis2-uicore-tablehead"]')
+        .contains('Assigned to')
+        .should('exist');
+
+    cy.get('[data-test="dhis2-uicore-tablebody"]')
+        .contains('Tracker demo User (tracker)')
+        .should('exist');
+
+    cy.get('[data-test="tei-working-lists"]')
+        .find('tr')
+        .should('have.length', 2);
+});
+
+And('you filter by assigned Foci investigation & classification events', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+        });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Foci investigation & classification')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Assigned to')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Anyone')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
 });
