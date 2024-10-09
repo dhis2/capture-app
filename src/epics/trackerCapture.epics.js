@@ -36,11 +36,6 @@ import {
 } from 'capture-core/components/WorkingLists/EventWorkingLists';
 
 import {
-    fetchDataStoreEpic,
-    fetchUserDataStoreEpic,
-} from 'capture-core/components/DataStore/DataStore.epics';
-
-import {
     getEventFromUrlEpic,
 } from 'capture-core/components/Pages/ViewEvent/epics/editEvent.epics';
 import {
@@ -245,8 +240,6 @@ export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
     triggerLoadCoreEpic,
-    fetchDataStoreEpic,
-    fetchUserDataStoreEpic,
     loadAppEpic,
     initEventListEpic,
     initTeiViewEpic,
