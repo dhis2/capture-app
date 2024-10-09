@@ -8,36 +8,46 @@ const buildTEAUrlByElementType: {|
         trackedEntity,
         id,
         programId,
+        absoluteApiPath,
     }: {
         trackedEntity: string,
         id: string,
         programId: string,
+        absoluteApiPath: string,
     }) => ({
-        url: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/file?program=${programId}`,
+        id,
+        name: 'test.file',
+        value: id,
+        url: `${absoluteApiPath}/tracker/trackedEntities/${trackedEntity}/attributes/${id}/file?program=${programId}`,
     }),
     [dataElementTypes.IMAGE]: ({
         trackedEntity,
         id,
         programId,
+        absoluteApiPath,
     }: {
         trackedEntity: string,
         id: string,
         programId: string,
+        absoluteApiPath: string,
     }) => ({
-        imageUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}`,
-        previewUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
+        imageUrl: `${absoluteApiPath}/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}`,
+        previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
     }),
 };
 
 const buildDataElementUrlByElementType: {|
     [string]: Function,
 |} = {
-    [dataElementTypes.FILE_RESOURCE]: ({ event, id }: { event: string, id: string }) => ({
-        url: `/tracker/events/${event}/dataValues/${id}/file`,
+    [dataElementTypes.FILE_RESOURCE]: ({ event, id, absoluteApiPath }: { event: string, id: string, absoluteApiPath: string }) => ({
+        id,
+        name: 'test.file',
+        value: id,
+        url: `${absoluteApiPath}/tracker/events/${event}/dataValues/${id}/file`,
     }),
-    [dataElementTypes.IMAGE]: ({ event, id }: { event: string, id: string }) => ({
-        imageUrl: `/tracker/events/${event}/dataValues/${id}/image`,
-        previewUrl: `/tracker/events/${event}/dataValues/${id}/image?dimension=small`,
+    [dataElementTypes.IMAGE]: ({ event, id, absoluteApiPath }: { event: string, id: string, absoluteApiPath: string }) => ({
+        imageUrl: `${absoluteApiPath}/tracker/events/${event}/dataValues/${id}/image`,
+        previewUrl: `${absoluteApiPath}/tracker/events/${event}/dataValues/${id}/image?dimension=small`,
     }),
 };
 
