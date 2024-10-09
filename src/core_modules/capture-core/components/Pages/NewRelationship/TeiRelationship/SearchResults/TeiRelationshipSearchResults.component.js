@@ -10,7 +10,11 @@ import { makeAttributesSelector } from './teiRelationshipSearchResults.selectors
 import { CardList } from '../../../../CardList';
 import type { CurrentSearchTerms } from '../../../../SearchBox';
 import { SearchResultsHeader } from '../../../../SearchResultsHeader';
-import { type SearchGroup } from '../../../../../metaData';
+import {
+    type SearchGroup,
+    getTrackerProgramThrowIfNotFound,
+    getTrackedEntityTypeThrowIfNotFound,
+} from '../../../../../metaData';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 import type { ListItem } from '../../../../CardList/CardList.types';
 import { convertClientValuesToServer } from '../../../../../converters/helpers/clientToServer';
@@ -25,7 +29,8 @@ type Props = {|
     currentPage: number,
     searchGroup: SearchGroup,
     searchValues: any,
-    selectedProgramId: string,
+    selectedProgramId?: string,
+    selectedTrackedEntityTypeId: string,
     teis: Array<ListItem>,
     trackedEntityTypeName: string,
     ...CssClasses
@@ -60,6 +65,15 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+const getLinkedEntityFormFoundation = (selectedProgramId, selectedTrackedEntityTypeId) => {
+    if (selectedProgramId) {
+        const program = getTrackerProgramThrowIfNotFound(selectedProgramId);
+        return program.enrollment.enrollmentForm;
+    }
+    const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(selectedTrackedEntityTypeId);
+    return trackedEntityType.teiRegistration.form;
+};
+
 const CardListButton = ({ handleOnClick, teiId }) => (
     <Button
         small
@@ -78,7 +92,11 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
     }
 
     onAddRelationship = (item) => {
-        const serverValues = convertClientValuesToServer(item.values, this.props.searchGroup.searchForm);
+        const linkedEntityFormFoundation = getLinkedEntityFormFoundation(
+            this.props.selectedProgramId,
+            this.props.selectedTrackedEntityTypeId,
+        );
+        const serverValues = convertClientValuesToServer(item.values, linkedEntityFormFoundation);
         this.props.onAddRelationship(item.id, serverValues);
     }
 
