@@ -133,6 +133,15 @@ export const useCompleteBulkEnrollments = ({
             onSuccess: () => {
                 onUpdateList();
             },
+            onError: (serverResponse, variables) => {
+                showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
+                log.error(
+                    errorCreator('An error occurred when completing enrollments')({
+                        serverResponse,
+                        variables,
+                    }),
+                );
+            },
         },
     );
 
@@ -147,6 +156,15 @@ export const useCompleteBulkEnrollments = ({
                 const enrollmentIds = enrollments.map(enrollment => enrollment.trackedEntity);
                 removeRowsFromSelection(enrollmentIds);
                 onUpdateList(true);
+            },
+            onError: (serverResponse, variables) => {
+                showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
+                log.error(
+                    errorCreator('An error occurred when completing enrollments')({
+                        serverResponse,
+                        variables,
+                    }),
+                );
             },
         },
     );
