@@ -17,16 +17,19 @@ export type ErrorMessagesForRelatedStages = {|
     linkedEventId?: ?string,
 |}
 
-export type LinkableEvent = {
+export type RelatedStagesEvents = {
     id: string,
     label: string,
+    isLinkable: boolean,
+    status: string,
 }
 
 export type Props = {|
     type: string,
     relationshipName: string,
     relatedStagesDataValues: RelatedStageDataValueStates,
-    linkableEvents: Array<LinkableEvent>,
+    events: Array<RelatedStagesEvents>,
+    linkableEvents: Array<RelatedStagesEvents>,
     scheduledLabel: string,
     saveAttempted: boolean,
     errorMessages: ErrorMessagesForRelatedStages,
