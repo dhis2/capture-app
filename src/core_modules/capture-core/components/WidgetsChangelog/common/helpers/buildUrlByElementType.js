@@ -13,7 +13,7 @@ const buildTEAUrlByElementType: {|
         id: string,
         programId: string,
     }) => ({
-        fileUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/file?program=${programId}`,
+        url: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/file?program=${programId}`,
     }),
     [dataElementTypes.IMAGE]: ({
         trackedEntity,
@@ -33,7 +33,7 @@ const buildDataElementUrlByElementType: {|
     [string]: Function,
 |} = {
     [dataElementTypes.FILE_RESOURCE]: ({ event, id }: { event: string, id: string }) => ({
-        fileUrl: `/tracker/events/${event}/dataValues/${id}/file`,
+        url: `/tracker/events/${event}/dataValues/${id}/file`,
     }),
     [dataElementTypes.IMAGE]: ({ event, id }: { event: string, id: string }) => ({
         imageUrl: `/tracker/events/${event}/dataValues/${id}/image`,
