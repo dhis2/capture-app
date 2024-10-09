@@ -88,8 +88,8 @@ export const useChangelogData = ({
                 }));
                 return null;
             }
-            let previousValue; let
-                currentValue;
+            let previousValue; 
+            let currentValue;
             const urls = buildUrlByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
 
             let params = { id: fieldId };

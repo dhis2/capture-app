@@ -13,12 +13,14 @@ function convertDateForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
     return convertMomentToDateFormatString(momentDate);
 }
+
 function convertDateTimeForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
     const dateString = convertMomentToDateFormatString(momentDate);
     const timeString = momentDate.format('HH:mm');
     return `${dateString} ${timeString}`;
 }
+
 function convertTimeForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue, 'HH:mm', true);
     return momentDate.format('HH:mm');
@@ -34,6 +36,7 @@ type ImageClientValue = {
     ...FileClientValue,
     previewUrl: string,
 };
+
 function convertFileForDisplay(clientValue: FileClientValue) {
     // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
     if (typeof clientValue === 'string' || clientValue instanceof String) {
@@ -50,6 +53,7 @@ function convertFileForDisplay(clientValue: FileClientValue) {
         </a>
     );
 }
+
 function convertImageForDisplay(clientValue: ImageClientValue) {
     // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
     if (typeof clientValue === 'string' || clientValue instanceof String) {
@@ -72,6 +76,7 @@ function convertNumberRangeForDisplay(clientValue) {
         </span>
     );
 }
+
 function convertStatusForDisplay(clientValue: Object) {
     const { isNegative, isPositive, text } = clientValue;
     return (
@@ -80,9 +85,11 @@ function convertStatusForDisplay(clientValue: Object) {
         </Tag>
     );
 }
+
 function convertOrgUnitForDisplay(rawValue: string | Object) {
     return (typeof rawValue === 'string' ? rawValue : rawValue.name);
 }
+
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.INTEGER]: stringifyNumber,
@@ -111,19 +118,24 @@ const valueConvertersForType = {
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
     [dataElementTypes.STATUS]: convertStatusForDisplay,
 };
+
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
+
     if (dataElement && dataElement.optionSet) {
         if (dataElement.type === dataElementTypes.MULTI_TEXT) {
             return dataElement.optionSet.getMultiOptionsText(value);
         }
         return dataElement.optionSet.getOptionText(value);
     }
+
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
+
+
 // This function will replace the convertValue function in the future (as it should not require a dataElement class to use optionSet)
 export function convert(
     value: any,
@@ -133,6 +145,7 @@ export function convert(
     if (!value && value !== 0 && value !== false) {
         return value;
     }
+
     if (options) {
         if (type === dataElementTypes.MULTI_TEXT) {
             return options
@@ -144,6 +157,7 @@ export function convert(
             .find(option => option.code === value)
             ?.name ?? value;
     }
+
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
