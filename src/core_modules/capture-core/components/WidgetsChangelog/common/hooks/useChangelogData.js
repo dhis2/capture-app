@@ -10,6 +10,7 @@ import { CHANGELOG_ENTITY_TYPES, QUERY_KEYS_BY_ENTITY_TYPE } from '../Changelog/
 import type { Change, ChangelogRecord, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
 import { convertServerToClient } from '../../../../converters';
 import { convert } from '../../../../converters/clientToList';
+import { RECORD_TYPE, buildUrlByElementType } from '../helpers';
 
 type Props = {
     entityId: string,
@@ -87,21 +88,32 @@ export const useChangelogData = ({
                 }));
                 return null;
             }
+            let previousValue; let
+                currentValue;
+            const urls = buildUrlByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
+
+            let params = { id: fieldId };
+
+            if (entityType === RECORD_TYPE.trackedEntity) {
+                params = { ...params, trackedEntity: entityId, programId };
+            } else if (entityType === RECORD_TYPE.event) {
+                params = { ...params, event: entityId };
+            }
+
+            if (urls) {
+                previousValue = urls(params);
+                currentValue = urls(params);
+            } else {
+                previousValue = convertServerToClient(change.previousValue, metadataElement.type);
+                currentValue = convertServerToClient(change.currentValue, metadataElement.type);
+            }
 
             const { firstName, surname, username } = createdBy;
             const { options } = metadataElement;
 
-            const previousValue = convert(
-                convertServerToClient(change.previousValue, metadataElement.type),
-                metadataElement.type,
-                options,
-            );
+            previousValue = convert(previousValue, metadataElement.type, options);
+            currentValue = convert(currentValue, metadataElement.type, options);
 
-            const currentValue = convert(
-                convertServerToClient(change.currentValue, metadataElement.type),
-                metadataElement.type,
-                options,
-            );
 
             return {
                 reactKey: uuid(),
@@ -114,7 +126,7 @@ export const useChangelogData = ({
                 currentValue,
             };
         }).filter(Boolean);
-    }, [data, dataItemDefinitions, fromServerDate]);
+    }, [data, dataItemDefinitions, fromServerDate, entityId, entityType, programId]);
 
     return {
         records,

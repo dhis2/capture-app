@@ -28,7 +28,7 @@ function convertTimeForListDisplay(rawValue: string): string {
 
 type FileClientValue = {
     name: string,
-    url: string,
+    fileUrl: string,
     value: string,
 };
 
@@ -44,12 +44,12 @@ function convertFileForDisplay(clientValue: FileClientValue) {
     }
     return (
         <a
-            href={clientValue.url}
+            href={clientValue.fileUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(event) => { event.stopPropagation(); }}
         >
-            {clientValue.name}
+            {clientValue.fileUrl}
         </a>
     );
 }
@@ -59,7 +59,7 @@ function convertImageForDisplay(clientValue: ImageClientValue) {
     if (typeof clientValue === 'string' || clientValue instanceof String) {
         return clientValue;
     }
-    return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} />;
+    return <PreviewImage url={clientValue.fileUrl} previewUrl={clientValue.previewUrl} />;
 }
 
 function convertRangeForDisplay(parser: any, clientValue: any) {
