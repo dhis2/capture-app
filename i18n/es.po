@@ -3,7 +3,6 @@
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # ericbp <ericbarredap@gmail.com>, 2021
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
-# Marta Vila <marta@dhis2.org>, 2022
 # Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2022
 # Prabhjot Singh, 2023
 # Christian Atavillos, 2023
@@ -13,13 +12,15 @@
 # Janeth Cruz, 2024
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Marta Vila <marta@dhis2.org>, 2024
+# Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -627,15 +628,6 @@ msgstr ""
 "El programa seleccionado no es válido para la unidad organizativa "
 "seleccionada"
 
-msgid "Online"
-msgstr "Conectado"
-
-msgid "Offline"
-msgstr "Desconectado"
-
-msgid "Syncing"
-msgstr "Sincronizando"
-
 msgid "Add note"
 msgstr "Añadir nota"
 
@@ -848,6 +840,8 @@ msgid ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
 msgstr ""
+"La opción de categoría no es válida para la unidad organizativa "
+"seleccionada. Seleccione una combinación válida."
 
 msgid "Please select {{category}}."
 msgstr "Seleccione {{category}}."
@@ -1027,7 +1021,7 @@ msgid "Loading"
 msgstr "Cargando"
 
 msgid "An error occurred while loading the form"
-msgstr ""
+msgstr "Ocurrió un error al cargar el formulario"
 
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"
@@ -1330,12 +1324,6 @@ msgstr ""
 msgid "Follow-up"
 msgstr "Seguimiento"
 
-msgid "Started at {{orgUnitName}}"
-msgstr "Comenzó en {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Propiedad de {{ownerOrgUnit}}"
-
 msgid "Cancelled"
 msgstr "Cancelar"
 
@@ -1394,7 +1382,7 @@ msgid "Event completed"
 msgstr "Evento completado"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
+msgstr "El evento no admite cambios después de haber sido completado"
 
 msgid "Back to all stages and events"
 msgstr "Volver a todas las etapas y eventos"
@@ -1560,7 +1548,7 @@ msgid "Enter details now"
 msgstr "Introducir datos ahora"
 
 msgid "Link to an existing"
-msgstr ""
+msgstr "Relacionar con ..."
 
 msgid "Scheduled date"
 msgstr "Fecha planificada"
@@ -1572,13 +1560,32 @@ msgid "Please select a valid event"
 msgstr "Seleccione un evento válido"
 
 msgid "You do not have access to create events in this stage"
-msgstr ""
+msgstr "No cuenta con acceso para crear eventos en esta etapa"
 
 msgid "This stage can only have one event"
 msgstr "Esta etapa solo puede tener un evento"
 
 msgid "New {{ eventName }} event"
 msgstr "Nuevo evento {{ eventName }}"
+
+msgid "An error occurred while deleting the event"
+msgstr "Se produjo un error eliminando el evento"
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+"La eliminación de un evento es permanente y no se puede deshacer. ¿Está "
+"seguro de que desea eliminar este evento?"
+
+msgid "An error occurred when updating event status"
+msgstr "Ocurrió un error al actualizar el estado del evento"
+
+msgid "Unskip"
+msgstr "des omitir"
+
+msgid "Skip"
+msgstr "Omitir"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr "Para abrir este evento, espere hasta que se complete el guardado."
@@ -1610,10 +1617,10 @@ msgid "Stages and Events"
 msgstr "Etapas y eventos"
 
 msgid "An error occurred while loading the widget."
-msgstr ""
+msgstr "Ha ocurrido un error al cargar el componente"
 
 msgid "View linked event"
-msgstr ""
+msgstr "Ver eventos relacionados"
 
 msgid "Scheduled"
 msgstr "Planificado"

@@ -594,7 +594,7 @@ Events can be assigned to users. This feature must be enabled per program.
 
 5. Search for and select the user you would like to reassign the event to. Click the **Save** button.
 
-### Assignee in the event list { #capture_user_assignment_event_list } 
+### Assignee in the event list
 
 In the event list you will be able to view the assignee per event. Moreover, you can sort and filter the list by the assignee.
 
@@ -804,7 +804,7 @@ You can show data elements from a single stage in a working list. Select the "Pr
 
 ![](resources/images/program_stage_working_list.png)
 
-The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists.
+The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists. Additionally, the program stage list can be [filtered by assignee](#assignee-in-the-event-list), just like an event program list.
 
 ## Implementer / administrator info { #implementer_info } 
 

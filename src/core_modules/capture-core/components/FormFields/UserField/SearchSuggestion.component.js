@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import parse from 'autosuggest-highlight/parse';
-import MenuItem from '@material-ui/core/MenuItem';
+import { MenuItem } from '@dhis2/ui';
 import classNames from 'classnames';
 import { SearchContext } from './Search.context';
 import defaultClasses from './searchSuggestion.module.css';
@@ -96,7 +96,6 @@ export const SearchSuggestion = (props: Props) => {
             onExitSearch();
         }
     }, [onExitSearch, suggestionName, inputName]);
-
     return (
         <div
             name={suggestionName}
@@ -109,23 +108,24 @@ export const SearchSuggestion = (props: Props) => {
             onBlur={handleBlur}
         >
             <MenuItem
-                selected={isHighlighted}
-                component="div"
-            >
-                <div>
-                    {parts.map((part, index) => (part.highlight ? (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <span key={String(index)} style={{ fontWeight: 500 }}>
-                            {part.text}
-                        </span>
-                    ) : (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <strong key={String(index)} style={{ fontWeight: 300 }}>
-                            {part.text}
-                        </strong>
-                    )))}
-                </div>
-            </MenuItem>
+                active={isHighlighted}
+                label={(
+                    <div>
+                        {parts.map((part, index) => (part.highlight ? (
+                            // eslint-disable-next-line react/no-array-index-key
+                            <span key={String(index)} style={{ fontWeight: 500 }}>
+                                {part.text}
+                            </span>
+                        ) : (
+                            // eslint-disable-next-line react/no-array-index-key
+                            <strong key={String(index)} style={{ fontWeight: 300 }}>
+                                {part.text}
+                            </strong>
+                        )))}
+                    </div>
+                )}
+            />
+
         </div>
     );
 };

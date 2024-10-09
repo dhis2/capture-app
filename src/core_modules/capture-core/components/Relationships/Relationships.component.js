@@ -3,8 +3,9 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import { IconButton, withStyles } from '@material-ui/core';
-import { IconArrowRight16, IconCross24, Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { IconButton } from 'capture-ui';
+import { IconArrowRight16, IconDelete16, Button, colors } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
@@ -23,7 +24,7 @@ const getStyles = (theme: Theme) => ({
     relationshipTypeName: {
         fontSize: 14,
         fontWeight: 600,
-        color: 'rgba(0,0,0,0.7)',
+        color: colors.grey700,
     },
     relationshipsContainer: {
     },
@@ -84,6 +85,7 @@ type Props = {
         relationshipActions: string,
         relationshipHighlight: string,
         tooltip: string,
+        deleteButton: string,
         addButtonContainer: string,
     },
     relationships: Array<Relationship>,
@@ -145,12 +147,14 @@ class RelationshipsPlain extends React.Component<Props> {
                         wrapperClassName={classes.tooltip}
                     >
                         <IconButton
-                            data-test="delete-relationship-button"
+                            dataTest="delete-relationship-button"
                             onClick={() => { onRemoveRelationship(relationship.clientId); }}
                             disabled={!canDelete}
+                            secondary
                         >
-                            <IconCross24 />
+                            <IconDelete16 />
                         </IconButton>
+
                     </ConditionalTooltip>
                 </div>
             </div>
@@ -203,6 +207,7 @@ class RelationshipsPlain extends React.Component<Props> {
                                 disabled={!canCreate}
                                 small={smallMainButton}
                                 dataTest="add-relationship-button"
+                                secondary
                             >
                                 {i18n.t('Add relationship')}
                             </Button>

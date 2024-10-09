@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Namwan Chanthavisouk, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -604,15 +604,6 @@ msgstr "ບໍ່ມີໂປແກຼມ"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "ໂປແກຣມທີ່ເລືອກໄວ້ບໍ່ຖືກຕ້ອງກັບຫົວໜ່ວຍອົງການຈັດຕັ້ງ"
-
-msgid "Online"
-msgstr "ມີການເຊື່ອມຕໍ່"
-
-msgid "Offline"
-msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
-
-msgid "Syncing"
-msgstr "ກຳລັງອັບເດດຂໍ້ມູນໃຫ້ຄືກັນ"
 
 msgid "Add note"
 msgstr "ຂຽນບັນທຶກລົງ"
@@ -1275,12 +1266,6 @@ msgstr "ບໍ່ສາມາດໂຫຼດລາຍການການລົງ
 msgid "Follow-up"
 msgstr "ຕິດຕາມ"
 
-msgid "Started at {{orgUnitName}}"
-msgstr "ເລີ່ມຈາກ {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "ເປັນເຈົ້າຂອງໂດຍ {{ownerOrgUnit}}"
-
 msgid "Cancelled"
 msgstr "ຍົກເລີກແລ້ວ"
 
@@ -1336,7 +1321,7 @@ msgid "Event completed"
 msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
+msgstr "ເຫດການດັ່ງກ່າວບໍ່ສາມາດແກ້ໄຂໄດ້ຫຼັງຈາກສໍາເລັດແລ້ວ"
 
 msgid "Back to all stages and events"
 msgstr "ກັບໄປທຸກຂັ້ນຕອນ ແລະ ເຫດການ"
@@ -1497,13 +1482,32 @@ msgid "Please select a valid event"
 msgstr "ກະລຸນາເລືອກເຫດການທີ່ຖືກຕ້ອງ"
 
 msgid "You do not have access to create events in this stage"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດເຂົ້າເຖິງເພື່ອສ້າງເຫດການໃນຂັ້ນຕອນນີ້"
 
 msgid "This stage can only have one event"
 msgstr "ຂັ້ນຕອນນີ້ສາມາດມີເຫດການດຽວເທົ່ານັ້ນ"
 
 msgid "New {{ eventName }} event"
 msgstr "ເຫດການໃໝ່ {{ eventName }}"
+
+msgid "An error occurred while deleting the event"
+msgstr "ພົບຂໍ້ຜິດພາດໃນລະຫວ່າງລົບເຫດການ"
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+"ການລົບເຫດການແມ່ນຖາວອນ ແລະ ບໍ່ສາມາດຍົກເລີກໄດ້. "
+"ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລົບເຫດການນີ້?"
+
+msgid "An error occurred when updating event status"
+msgstr "ພົບຂໍ້ຜິດພາດໃນລະຫວ່າງອັບເດດສະຖານະເຫດການ"
+
+msgid "Unskip"
+msgstr "ຍົກເລີກ"
+
+msgid "Skip"
+msgstr "ຂ້າມ"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr "ເພື່ອເປີດເຫດການນີ້, ກະລຸນາລໍຖ້າຈົນກວ່າການບັນທຶກຈະສຳເລັດ"

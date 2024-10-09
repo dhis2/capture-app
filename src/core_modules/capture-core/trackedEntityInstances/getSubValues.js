@@ -1,6 +1,7 @@
 // @flow
 import isDefined from 'd2-utilizr/lib/isDefined';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
+import log from 'loglevel';
+import { featureAvailable, FEATURES, errorCreator } from 'capture-core-utils';
 import { type DataElement, dataElementTypes } from '../metaData';
 import type { QuerySingleResource } from '../utils/api/api.types';
 
@@ -26,6 +27,37 @@ const subValueGetterByElementType = {
             url: previewUrl,
         };
     },
+    [dataElementTypes.FILE_RESOURCE]: ({
+        value,
+        teiId,
+        attributeId,
+        absoluteApiPath,
+        querySingleResource,
+        programId,
+    }: {
+        value: string,
+        teiId: string,
+        attributeId: string,
+        absoluteApiPath: string,
+        querySingleResource: QuerySingleResource,
+        programId: ?string,
+    }) =>
+        querySingleResource({ resource: `fileResources/${value}` })
+            .then((res) => {
+                const fileUrl = featureAvailable(FEATURES.trackerFileEndpoint)
+                    ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file`
+                    : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${attributeId}/file`;
+                const url = programId ? `${fileUrl}?program=${programId}` : fileUrl;
+
+                return {
+                    name: res.name,
+                    url,
+                };
+            })
+            .catch((error) => {
+                log.warn(errorCreator('Could not get subvalue')({ value, teiId, attributeId, error }));
+                return null;
+            }),
 };
 
 export async function getSubValues({

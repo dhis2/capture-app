@@ -5,7 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { DateField } from 'capture-core/components/FormFields/New';
 import { InfoBox } from '../InfoBox';
 import type { Props } from './scheduleDate.types';
-import { convertDateObjectToDateFormatString, convertStringToDateFormat } from '../../../utils/converters/date';
+import { convertStringToDateFormat } from '../../../utils/converters/date';
 
 
 const styles = {
@@ -20,16 +20,17 @@ const styles = {
 
 const ScheduleDatePlain = ({
     scheduleDate,
+    serverScheduleDate,
     setScheduleDate,
     orgUnit,
-    suggestedScheduleDate,
+    serverSuggestedScheduleDate,
     eventCountInOrgUnit,
     classes,
     hideDueDate,
 }: Props) => (<>
     {!hideDueDate && <div className={classes.container}>
         <DateField
-            value={scheduleDate ? convertDateObjectToDateFormatString(new Date(scheduleDate)) : ''}
+            value={scheduleDate}
             width="100%"
             calendarWidth={350}
             onSetFocus={() => {}}
@@ -39,8 +40,8 @@ const ScheduleDatePlain = ({
         />
     </div>}
     <InfoBox
-        scheduleDate={scheduleDate}
-        suggestedScheduleDate={suggestedScheduleDate}
+        scheduleDate={serverScheduleDate}
+        suggestedScheduleDate={serverSuggestedScheduleDate}
         eventCountInOrgUnit={eventCountInOrgUnit}
         orgUnitName={orgUnit?.name}
         hideDueDate={hideDueDate}
