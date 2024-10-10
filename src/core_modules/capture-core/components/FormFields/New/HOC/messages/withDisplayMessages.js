@@ -172,7 +172,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                         {...calculatedMessageProps}
                         {...passOnProps}
                     />
-                    {messages.element}
+                    {/* {messages.element} */}
                 </div>
             );
         }

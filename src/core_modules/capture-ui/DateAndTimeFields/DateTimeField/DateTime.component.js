@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
+import { isValidTime } from 'capture-core-utils/validators/form';
 import defaultClasses from './dateTime.module.css';
-
 import { orientations } from '../../constants/orientations.const';
 import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
 import { DateTimeTime } from '../../internal/DateTimeInput/DateTimeTime.component';
@@ -26,7 +26,15 @@ type Props = {
     timeLabel: string,
 };
 
-export class DateTimeField extends Component<Props> {
+type State = {
+    timeError: ?{ validationText: string },
+};
+
+const CUSTOM_TIME_VALIDATION_MESSAGES = {
+    INVALID_TIME: i18n.t('Please enter a valid time'),
+};
+
+export class DateTimeField extends Component<Props, State> {
     handleTimeChange: (timeValue: string) => void;
     handleDateChange: (dateValue: string) => void;
     handleTimeBlur: (timeValue: string) => void;
@@ -40,6 +48,9 @@ export class DateTimeField extends Component<Props> {
 
     constructor(props: Props) {
         super(props);
+        this.state = {
+            timeError: null,
+        };
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTimeBlur = this.handleTimeBlur.bind(this);
@@ -63,10 +74,11 @@ export class DateTimeField extends Component<Props> {
 
     handleTimeBlur(timeValue: string) {
         this.touchedFields.add('timeTouched');
+        this.validateTime(timeValue);
         const currentValue = this.getValue();
         this.handleBlur({
             time: timeValue,
-            date: currentValue.date,
+            date: currentValue.date || '',
         }, !!currentValue.date);
     }
 
@@ -91,6 +103,15 @@ export class DateTimeField extends Component<Props> {
         onBlur(value, {
             touched: touched || otherFieldHasValue,
         });
+    }
+
+    validateTime = (timeValue: string) => {
+        const isValid = isValidTime(timeValue);
+
+        this.setState({
+            timeError: isValid ? null : { validationText: CUSTOM_TIME_VALIDATION_MESSAGES.INVALID_TIME },
+        });
+        return isValid;
     }
 
     getValue = () => this.props.value || {};
@@ -147,6 +168,7 @@ export class DateTimeField extends Component<Props> {
                         label={timeLabel}
                         classes={classes}
                         {...passOnProps}
+                        {...this.state.timeError}
                     />
                 </div>
             </div>
