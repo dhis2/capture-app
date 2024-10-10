@@ -68,9 +68,11 @@ const useMainPageStatus = ({
 
 const useSelectorMainPage = () =>
     useSelector(
-        ({ currentSelections, activePage }) => ({
+        ({ currentSelections, activePage, workingListsTemplates, workingListsContext }) => ({
             categories: currentSelections.categories,
             selectedCategories: currentSelections.categoriesMeta,
+            reduxSelectedTemplateId: workingListsTemplates.teiList?.selectedTemplateId,
+            workingListProgramId: workingListsContext.teiList?.programIdView,
             ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
             error: activePage.selectionsError && activePage.selectionsError.error,
         }),
@@ -103,6 +105,8 @@ const MainPageContainer = () => {
     const {
         categories,
         selectedCategories,
+        reduxSelectedTemplateId,
+        workingListProgramId,
         error,
         ready,
     } = useSelectorMainPage();
@@ -120,14 +124,6 @@ const MainPageContainer = () => {
         showAllAccessible,
         categoryOptionIsInvalidForOrgUnit,
     });
-    const reduxSelectedTemplateId
-        = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList?.selectedTemplateId);
-    const workingListProgramId = useSelector(({ workingLists }) => workingLists
-        .teiList
-        ?.currentRequest
-        ?.queryParams
-        ?.program,
-    );
 
     const {
         onChangeTemplate,
