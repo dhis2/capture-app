@@ -1,7 +1,7 @@
 // @flow
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 // $FlowFixMe
-import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { MainPageComponent } from './MainPage.component';
@@ -120,6 +120,14 @@ const MainPageContainer = () => {
         showAllAccessible,
         categoryOptionIsInvalidForOrgUnit,
     });
+    const reduxSelectedTemplateId
+        = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList?.selectedTemplateId);
+    const workingListProgramId = useSelector(({ workingLists }) => workingLists
+        .teiList
+        ?.currentRequest
+        ?.queryParams
+        ?.program,
+    );
 
     const {
         onChangeTemplate,
@@ -132,6 +140,16 @@ const MainPageContainer = () => {
 
     useEffect(() => {
         if (programId && trackedEntityTypeId && displayFrontPageList && selectedTemplateId === undefined) {
+            if (reduxSelectedTemplateId && workingListProgramId === programId) {
+                handleChangeTemplateUrl({
+                    programId,
+                    orgUnitId,
+                    selectedTemplateId: reduxSelectedTemplateId,
+                    showAllAccessible,
+                    history,
+                });
+                return;
+            }
             handleChangeTemplateUrl({
                 programId,
                 orgUnitId,
@@ -148,6 +166,8 @@ const MainPageContainer = () => {
         trackedEntityTypeId,
         displayFrontPageList,
         history,
+        reduxSelectedTemplateId,
+        workingListProgramId,
     ]);
 
     return (
