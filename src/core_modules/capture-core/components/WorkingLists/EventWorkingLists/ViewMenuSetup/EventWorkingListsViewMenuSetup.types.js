@@ -21,4 +21,11 @@ export type EventWorkingListsViewMenuSetupOutputProps = {|
     programId: string,
     programStageId: string,
     customListViewMenuContents: CustomMenuContents,
+    allRowsAreSelected: ?boolean,
+    customUpdateTrigger: ?string,
+    onRowSelect: (id: string) => void,
+    onSelectAll: (rows: Array<string>) => void,
+    selectionInProgress: ?boolean,
+    selectedRows: { [key: string]: boolean },
+    bulkActionBarComponent: React$Element<any>,
 |};
