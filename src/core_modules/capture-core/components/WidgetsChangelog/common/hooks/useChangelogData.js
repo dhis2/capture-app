@@ -2,14 +2,15 @@
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, buildUrl } from 'capture-core-utils';
 import { useMemo, useState } from 'react';
-import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import { useTimeZoneConversion, useConfig } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import { CHANGELOG_ENTITY_TYPES, QUERY_KEYS_BY_ENTITY_TYPE } from '../Changelog/Changelog.constants';
 import type { Change, ChangelogRecord, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
 import { convertServerToClient } from '../../../../converters';
 import { convert } from '../../../../converters/clientToList';
+import { RECORD_TYPE, buildUrlByElementType } from '../helpers';
 
 type Props = {
     entityId: string,
@@ -67,6 +68,8 @@ export const useChangelogData = ({
         },
     );
 
+    const { baseUrl, apiVersion } = useConfig();
+    const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
     const records: ?Array<ChangelogRecord> = useMemo(() => {
         if (!data) return undefined;
 
@@ -88,17 +91,57 @@ export const useChangelogData = ({
                 return null;
             }
 
+
+            let previousValueRaw;
+            let currentValueRaw;
+
+            const urls = buildUrlByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
+
+            if (urls) {
+                const commonParams = {
+                    id: fieldId,
+                    absoluteApiPath,
+                };
+
+                if (entityType === RECORD_TYPE.trackedEntity) {
+                    previousValueRaw = urls({
+                        trackedEntity: entityId,
+                        programId,
+                        ...commonParams,
+                    });
+                    currentValueRaw = urls({
+                        trackedEntity: entityId,
+                        programId,
+                        name: metadataElement.name,
+                        ...commonParams,
+                    });
+                }
+                if (entityType === RECORD_TYPE.event) {
+                    previousValueRaw = urls({
+                        event: entityId,
+                        ...commonParams,
+                    });
+                    currentValueRaw = urls({
+                        event: entityId,
+                        ...commonParams,
+                    });
+                }
+            } else {
+                previousValueRaw = convertServerToClient(change.previousValue, metadataElement.type);
+                currentValueRaw = convertServerToClient(change.currentValue, metadataElement.type);
+            }
+
             const { firstName, surname, username } = createdBy;
             const { options } = metadataElement;
 
             const previousValue = convert(
-                convertServerToClient(change.previousValue, metadataElement.type),
+                previousValueRaw,
                 metadataElement.type,
                 options,
             );
 
             const currentValue = convert(
-                convertServerToClient(change.currentValue, metadataElement.type),
+                currentValueRaw,
                 metadataElement.type,
                 options,
             );
@@ -114,7 +157,7 @@ export const useChangelogData = ({
                 currentValue,
             };
         }).filter(Boolean);
-    }, [data, dataItemDefinitions, fromServerDate]);
+    }, [data, dataItemDefinitions, fromServerDate, entityId, entityType, programId, absoluteApiPath]);
 
     return {
         records,
