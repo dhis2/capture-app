@@ -47,7 +47,6 @@ const getEventDetailsByLinkMode = ({
                 }),
             );
         }
-
         return ({
             linkedEvent: {
                 ...baseEventDetails,
@@ -56,23 +55,34 @@ const getEventDetailsByLinkMode = ({
             },
             linkedEventId: baseEventDetails.event,
         });
-    } else if (linkMode === RelatedStageModes.ENTER_DATA) {
+    }
+
+    if (linkMode === RelatedStageModes.ENTER_DATA) {
+        const { orgUnit: linkedEventOrgUnit } = relatedStageDataValues;
+        if (!linkedEventOrgUnit) {
+            throw new Error(
+                errorCreator('Missing required data for creating related stage event')({
+                    linkedEventOrgUnit,
+                }),
+            );
+        }
         return ({
             linkedEvent: {
                 ...baseEventDetails,
                 scheduledAt: convertFn(clientRequestEvent.scheduledAt, dataElementTypes.DATE),
-                orgUnit: convertFn(clientRequestEvent.orgUnit, dataElementTypes.ORGANISATION_UNIT),
+                orgUnit: convertFn(linkedEventOrgUnit, dataElementTypes.ORGANISATION_UNIT),
             },
             linkedEventId: baseEventDetails.event,
         });
-    } else if (linkMode === RelatedStageModes.LINK_EXISTING_RESPONSE) {
+    }
+
+    if (linkMode === RelatedStageModes.LINK_EXISTING_RESPONSE) {
         const { linkedEventId } = relatedStageDataValues;
         return {
             linkedEvent: null,
             linkedEventId,
         };
     }
-
     log.error(errorCreator(`Referral mode ${linkMode} is not supported`)());
     return {
         linkedEvent: null,
