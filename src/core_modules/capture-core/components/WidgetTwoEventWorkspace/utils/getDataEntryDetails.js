@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes, type RenderFoundation } from '../../../metaData';
 import { convertClientToView, convertServerToClient } from '../../../converters';
 import type { LinkedEvent } from '../WidgetTwoEventWorkspace.types';
-import { FlatListOrgUnitField } from '../FlatListOrgUnitField';
+import { TooltipOrgUnit } from '../../Tooltips/TooltipOrgUnit';
 
 const convertFn = pipe(convertServerToClient, convertClientToView);
 
@@ -37,7 +37,7 @@ const DataEntryFieldsToInclude = {
         type: dataElementTypes.ORGANISATION_UNIT,
         placement: Placements.TOP,
         label: i18n.t('Organisation unit'),
-        convertFn: orgUnitId => <FlatListOrgUnitField orgUnitId={orgUnitId} />,
+        convertFn: orgUnitId => <TooltipOrgUnit orgUnitId={orgUnitId} />,
     },
     status: {
         apiKey: 'status',

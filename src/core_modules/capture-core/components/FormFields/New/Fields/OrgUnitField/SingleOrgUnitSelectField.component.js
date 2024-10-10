@@ -1,13 +1,20 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core';
-import { Chip } from '@dhis2/ui';
+import { Chip, colors } from '@dhis2/ui';
 import { OrgUnitField } from './OrgUnitField.component';
+import { TooltipOrgUnit } from '../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 
 const getStyles = () => ({
     selectedOrgUnitContainer: {
         display: 'flex',
         alignItems: 'center',
+    },
+    chip: {
+        cursor: 'text !important',
+        '&:hover': {
+            backgroundColor: `${colors.grey200} !important`,
+        },
     },
 });
 
@@ -27,9 +34,7 @@ type Props = {
     disabled?: ?boolean,
     classes: {
         selectedOrgUnitContainer: string,
-        clearSelectedOrgUnitButton: string,
-        clearSelectedOrgUnitButtonDisabled: string,
-        selectedOrgUnitText: string,
+        chip: string,
     }
 }
 
@@ -44,7 +49,12 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props, State> {
         const { classes } = this.props;
         return (
             <div className={classes.selectedOrgUnitContainer}>
-                <Chip onRemove={this.onDeselectOrgUnit}>{selectedOrgUnit.name}</Chip>
+                <Chip
+                    onRemove={this.onDeselectOrgUnit}
+                    className={classes.chip}
+                >
+                    <TooltipOrgUnit orgUnitId={selectedOrgUnit.id} />
+                </Chip>
             </div>
         );
     }
