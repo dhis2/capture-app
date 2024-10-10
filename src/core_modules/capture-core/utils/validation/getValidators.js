@@ -25,10 +25,10 @@ import {
     getDateRangeValidator,
     getDateTimeRangeValidator,
     getTimeRangeValidator,
-} from '../../../../utils/validators/form';
-import { dataElementTypes, type DateDataElement, type DataElement } from '../../../../metaData';
+} from './validators/form';
+import { dataElementTypes, type DateDataElement, type DataElement } from '../../metaData';
 import { validatorTypes } from './constants';
-import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import type { QuerySingleResource } from '../../utils/api/api.types';
 
 type Validator = (
     value: any,

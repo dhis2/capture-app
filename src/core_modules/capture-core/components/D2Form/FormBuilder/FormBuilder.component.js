@@ -11,8 +11,8 @@ import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 import type { PluginContext } from '../FormFieldPlugin/FormFieldPlugin.types';
-import { getValidators, validateValue } from '../field/validators';
-import type { ValidatorContainer } from '../field/validators';
+import { getValidators, validateValue } from '../../../utils/validation';
+import type { ValidatorContainer } from '../../../utils/validation';
 import type { DataElement } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
 

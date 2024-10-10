@@ -1,6 +1,6 @@
 // @flow
 import { effectActions } from '@dhis2/rules-engine-javascript';
-import type { AssignOutputEffectWithValidations } from '../../components/D2Form';
+import type { AssignOutputEffectWithValidations } from '../../rules';
 import { createReducerDescription } from '../../trackerRedux';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';

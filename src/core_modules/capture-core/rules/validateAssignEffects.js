@@ -3,11 +3,11 @@ import { errorCreator } from 'capture-core-utils';
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import log from 'loglevel';
 import type { AssignOutputEffect } from '@dhis2/rules-engine-javascript';
-import { type DataElement } from '../../../../metaData';
-import type { QuerySingleResource } from '../../../../utils/api';
-import { getValidators } from './getValidators';
-import type { Validations } from './validateValue';
-import { validateValue } from './validateValue';
+import { type DataElement } from '../metaData';
+import type { QuerySingleResource } from '../utils/api';
+import { getValidators } from '../utils/validation/getValidators';
+import type { Validations } from '../utils/validation/validateValue';
+import { validateValue } from '../utils/validation/validateValue';
 
 export type AssignOutputEffectWithValidations = {
     [metaDataId: string]: Array<AssignOutputEffect & Validations>,

@@ -7,6 +7,7 @@ import {
     getApplicableRuleEffectsForEventProgram,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    validateAssignEffects,
 } from '../../../rules';
 import { RenderFoundation, Program } from '../../../metaData';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
@@ -28,7 +29,6 @@ import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '.
 import type { EnrollmentData, AttributeValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type { ProgramCategory } from '../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
-import { validateAssignEffects } from '../../D2Form';
 import type { QuerySingleResource } from '../../../utils/api';
 
 export const batchActionTypes = {

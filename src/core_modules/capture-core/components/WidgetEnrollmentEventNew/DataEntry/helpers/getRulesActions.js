@@ -6,10 +6,10 @@ import {
     getCurrentClientMainData,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    validateAssignEffects,
 } from '../../../../rules';
 import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
 import type { EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
-import { validateAssignEffects } from '../../../D2Form';
 import type { QuerySingleResource } from '../../../../utils/api';
 
 export const getRulesActions = async ({

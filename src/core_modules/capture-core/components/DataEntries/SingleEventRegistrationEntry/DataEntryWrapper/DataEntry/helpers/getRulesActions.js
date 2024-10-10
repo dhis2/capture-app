@@ -5,10 +5,10 @@ import {
     getCurrentClientMainData,
     getApplicableRuleEffectsForEventProgram,
     updateRulesEffects,
+    validateAssignEffects,
 } from '../../../../../../rules';
 import type { RenderFoundation, EventProgram } from '../../../../../../metaData';
 import { dataEntryId, itemId, formId } from './constants';
-import { validateAssignEffects } from '../../../../../D2Form';
 import type { QuerySingleResource } from '../../../../../../utils/api';
 
 export const getRulesActions = async ({

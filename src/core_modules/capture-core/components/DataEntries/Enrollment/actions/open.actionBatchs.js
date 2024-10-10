@@ -1,7 +1,11 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
-import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
+import {
+    getApplicableRuleEffectsForTrackerProgram,
+    updateRulesEffects,
+    validateAssignEffects,
+} from '../../../../rules';
 import type { ProgramStage, TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
@@ -16,7 +20,6 @@ import { convertDateObjectToDateFormatString } from '../../../../utils/converter
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
-import { validateAssignEffects } from '../../../D2Form';
 import type { QuerySingleResource } from '../../../../utils/api';
 
 const itemId = 'newEnrollment';

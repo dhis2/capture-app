@@ -12,9 +12,13 @@ import type {
 } from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from '../../../../rules/rulesEngine';
 import type { RenderFoundation } from '../../../../metaData';
-import { updateRulesEffects, postProcessRulesEffects, buildEffectsHierarchy } from '../../../../rules';
+import {
+    updateRulesEffects,
+    postProcessRulesEffects,
+    buildEffectsHierarchy,
+    validateAssignEffects,
+} from '../../../../rules';
 import type { QuerySingleResource } from '../../../../utils/api';
-import { validateAssignEffects } from '../../../D2Form';
 
 const getEnrollmentForRulesExecution = enrollment =>
     enrollment && {

@@ -16,12 +16,12 @@ import {
     getCurrentClientMainData,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    validateAssignEffects,
     type FieldData,
 } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type { RulesExecutionDependenciesClientFormatted } from '../../common.types';
 import { getLocationQuery } from '../../../../utils/routing';
-import { validateAssignEffects } from '../../../D2Form';
 import type { QuerySingleResource } from '../../../../utils/api';
 
 const runRulesForNewEvent = async ({

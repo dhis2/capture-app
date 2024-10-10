@@ -10,7 +10,7 @@ import { Option } from '../../../metaData/OptionSet/Option';
 
 import { FromDateFilter } from './From.component';
 import { ToDateFilter } from './To.component';
-import { isValidDate } from '../../../utils/validators/form';
+import { isValidDate } from '../../../utils/validation/validators/form';
 import { parseDate } from '../../../utils/converters/date';
 import { dataElementTypes } from '../../../metaData';
 import type { UpdatableFilterContent } from '../types';

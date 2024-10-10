@@ -38,7 +38,7 @@ import { actionTypes as crossPageActionTypes } from '../../../../../Pages/action
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
 import { newPageActionTypes } from '../../../../../Pages/New/NewPage.actions';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
-import { validateAssignEffects } from '../../../../../D2Form';
+import { validateAssignEffects } from '../../../../../../rules';
 import type { QuerySingleResource } from '../../../../../../utils/api';
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>

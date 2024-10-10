@@ -17,6 +17,7 @@ import {
     getApplicableRuleEffectsForEventProgram,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    validateAssignEffects,
     type FieldData,
 } from '../../../../rules';
 import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
@@ -24,7 +25,6 @@ import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/prepareEnrollmentEvents';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../../helpers';
-import { validateAssignEffects } from '../../../D2Form';
 import type { QuerySingleResource } from '../../../../utils/api';
 
 const runRulesForEditSingleEvent = async ({

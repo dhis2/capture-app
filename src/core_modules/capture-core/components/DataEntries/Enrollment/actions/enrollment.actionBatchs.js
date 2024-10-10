@@ -6,12 +6,15 @@ import type {
     TEIValues,
     OrgUnit,
 } from '@dhis2/rules-engine-javascript';
-import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
+import {
+    getApplicableRuleEffectsForTrackerProgram,
+    updateRulesEffects,
+    validateAssignEffects,
+} from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import { TrackerProgram, RenderFoundation, ProgramStage } from '../../../../metaData';
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
-import { validateAssignEffects } from '../../../D2Form';
 import type { QuerySingleResource } from '../../../../utils/api';
 
 export const batchActionTypes = {
