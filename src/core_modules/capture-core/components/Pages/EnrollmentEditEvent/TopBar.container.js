@@ -21,7 +21,7 @@ import { TopBarActions } from '../../TopBarActions';
 type Props = {|
     programStage: ?ProgramStage,
     enrollmentId: string,
-    programId: string,
+    programId: ?string,
     mode: string,
     orgUnitId: string,
     trackedEntityName: string,

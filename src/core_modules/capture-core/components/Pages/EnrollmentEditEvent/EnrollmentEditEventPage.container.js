@@ -132,8 +132,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch]);
 
     const { program } = useProgramInfo(programId);
-    const programStage = [...program.stages?.values()].find(item => item.id === stageId);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(programStage?.programRules));
+    const programStage = [...program?.stages?.values() ?? []].find(item => item.id === stageId);
+    const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules));
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
         history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);

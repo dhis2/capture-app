@@ -39,16 +39,15 @@ type Props = {|
 |}
 
 const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, classes }: Props) => {
-    // TODO - this hook breaks the app when the program is not found
     const { program, programType } = useProgramInfo(programId);
     const IncompleteSelectionMessage = useMemo(() => (programType === programTypes.TRACKER_PROGRAM ? (
         i18n.t('Or see all records accessible to you in {{program}} ', {
-            program: program.name,
+            program: program?.name,
             interpolation: { escapeValue: false },
         })
     ) : i18n.t('Or see all events accessible to you in {{program}}',
-        { program: program.name, interpolation: { escapeValue: false } })),
-    [program.name, programType]);
+        { program: program?.name, interpolation: { escapeValue: false } })),
+    [program?.name, programType]);
 
     return (
         <div
