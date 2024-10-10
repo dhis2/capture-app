@@ -115,7 +115,8 @@ export const useChangelogData = ({
                         name: metadataElement.name,
                         ...commonParams,
                     });
-                } else if (entityType === RECORD_TYPE.event) {
+                }
+                if (entityType === RECORD_TYPE.event) {
                     previousValueRaw = urls({
                         event: entityId,
                         ...commonParams,
@@ -124,14 +125,12 @@ export const useChangelogData = ({
                         event: entityId,
                         ...commonParams,
                     });
-                } else {
-                    previousValueRaw = urls({ ...commonParams });
-                    currentValueRaw = urls({ ...commonParams });
                 }
             } else {
                 previousValueRaw = convertServerToClient(change.previousValue, metadataElement.type);
                 currentValueRaw = convertServerToClient(change.currentValue, metadataElement.type);
             }
+
             const { firstName, surname, username } = createdBy;
             const { options } = metadataElement;
 
