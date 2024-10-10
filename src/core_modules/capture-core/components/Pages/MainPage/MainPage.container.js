@@ -139,7 +139,7 @@ const MainPageContainer = () => {
     }, [showAllAccessible, dispatch]);
 
     useEffect(() => {
-        if (programId && trackedEntityTypeId && displayFrontPageList && selectedTemplateId === undefined) {
+        if (programId && trackedEntityTypeId && selectedTemplateId === undefined) {
             if (reduxSelectedTemplateId && workingListProgramId === programId) {
                 handleChangeTemplateUrl({
                     programId,
@@ -150,6 +150,7 @@ const MainPageContainer = () => {
                 });
                 return;
             }
+            if (!displayFrontPageList) return;
             handleChangeTemplateUrl({
                 programId,
                 orgUnitId,
