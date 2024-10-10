@@ -12,7 +12,7 @@ export const validateValue = async (
     { validators }: { validators?: Array<ValidatorContainer> },
     value: any,
     validationContext: ?Object,
-    onIsValidatingInternal: ?Function,
+    postProcessAsyncValidatonInitiation: ?Function,
 ): Promise<Validations> => {
     if (!validators || validators.length === 0) {
         return {
@@ -25,8 +25,8 @@ export const validateValue = async (
         if (pass === true) {
             let result = currentValidator.validator(value, validationContext);
             if (result instanceof Promise) {
-                result = onIsValidatingInternal
-                    ? onIsValidatingInternal(currentValidator.validatingMessage, result)
+                result = postProcessAsyncValidatonInitiation
+                    ? postProcessAsyncValidatonInitiation(currentValidator.validatingMessage, result)
                     : result;
                 result = await result;
             }
