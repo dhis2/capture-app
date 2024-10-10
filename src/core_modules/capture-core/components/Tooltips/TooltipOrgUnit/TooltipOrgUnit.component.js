@@ -1,18 +1,19 @@
 // @flow
 import React from 'react';
 import { Tooltip } from '@dhis2/ui';
+import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
 
 type Props = {
-    orgUnitName: string,
-    ancestors?: Array<string>,
+    orgUnitId: string,
 };
 
-export const TooltipOrgUnit = ({ orgUnitName, ancestors = [] }: Props) => {
-    const fullPath = [...ancestors, orgUnitName].join(' / ');
+export const TooltipOrgUnit = ({ orgUnitId }: Props) => {
+    const { displayName, ancestors = [] } = useOrgUnitNameWithAncestors(orgUnitId);
+    const fullPath = [...ancestors, displayName].join(' / ');
 
     return (
-        <Tooltip content={fullPath} openDelay={400} maxWidth={900}>
-            <span style={{ textDecoration: 'underline dotted' }}>{orgUnitName}</span>
+        <Tooltip content={fullPath} openDelay={600} maxWidth={900}>
+            <span style={{ textDecoration: 'underline dotted' }}>{displayName}</span>
         </Tooltip>
     );
 };

@@ -2,6 +2,7 @@
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 
 const getFileResourceSubvalue = async (keys: Object, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => {
     const promises = Object.keys(keys)
@@ -57,19 +58,9 @@ const getImageSubvalue = (keys: Object, querySingleResource: QuerySingleResource
 );
 
 const getOrganisationUnitSubvalue = async (keys: Object, querySingleResource: QuerySingleResource) => {
-    const ids = Object.values(keys)
-        .join(',');
-
-    const { organisationUnits = [] } = await querySingleResource({
-        resource: 'organisationUnits',
-        params: { filter: `id:in:[${ids}]` },
-    });
-
-    return organisationUnits
-        .reduce((acc, { id, displayName: name }) => {
-            acc[id] = { id, name };
-            return acc;
-        }, {});
+    const ids = Object.values(keys).map(value => String(value));
+    const orgUnitNames = await getOrgUnitNames(ids, querySingleResource);
+    return orgUnitNames;
 };
 
 const subValueGetterByElementType = {

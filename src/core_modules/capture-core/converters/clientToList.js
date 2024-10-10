@@ -8,6 +8,7 @@ import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
+import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
@@ -36,6 +37,7 @@ type ImageClientValue = {
     ...FileClientValue,
     previewUrl: string,
 };
+
 
 function convertFileForDisplay(clientValue: FileClientValue) {
     // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
@@ -86,9 +88,13 @@ function convertStatusForDisplay(clientValue: Object) {
     );
 }
 
-function convertOrgUnitForDisplay(rawValue: string | Object) {
-    return (typeof rawValue === 'string' ? rawValue : rawValue.name);
+function convertOrgUnitForDisplay(clientValue: string | Object) {
+    const orgUnitId = typeof clientValue === 'string' ? clientValue : clientValue.id;
+    return (
+        <TooltipOrgUnit orgUnitId={orgUnitId} />
+    );
 }
+
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
