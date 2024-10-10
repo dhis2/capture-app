@@ -165,8 +165,9 @@ export class FormBuilder extends React.Component<Props> {
 
                 let validationData;
                 try {
+                    const { validators } = field;
                     validationData = await validateValue(
-                        field,
+                        validators,
                         values[field.id],
                         validationContext,
                         handleIsValidatingInternal,
@@ -376,7 +377,7 @@ export class FormBuilder extends React.Component<Props> {
 
         this.commitUpdateTriggeredForFields[fieldId] = true;
         const updatePromise = validateValue(
-            { validators },
+            validators,
             value,
             onGetValidationContext && onGetValidationContext(),
             handleIsValidatingInternal,

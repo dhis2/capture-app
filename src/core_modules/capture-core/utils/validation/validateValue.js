@@ -9,7 +9,7 @@ export type Validations = {
 };
 
 export const validateValue = async (
-    { validators }: { validators?: Array<ValidatorContainer> },
+    validators?: Array<ValidatorContainer>,
     value: any,
     validationContext: ?Object,
     postProcessAsyncValidatonInitiation: ?Function,
