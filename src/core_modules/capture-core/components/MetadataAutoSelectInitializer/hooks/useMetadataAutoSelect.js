@@ -1,9 +1,10 @@
 // @flow
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useApiMetadataQuery, useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
+import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { getUserStorageController, userStores } from '../../../storageControllers';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useOrgUnitAutoSelect } from '../../../dataQueries';
 
 const getAllPrograms = () => {
     const userStorageController = getUserStorageController();
@@ -28,21 +29,8 @@ export const useMetadataAutoSelect = () => {
         },
     );
 
-    const { data: searchOrgUnits, isLoading: loadingOrgUnits } = useApiMetadataQuery(
-        ['searchOrgUnitsForAutoSelect'],
-        {
-            resource: 'organisationUnits',
-            params: {
-                fields: 'id',
-                withinUserSearchHierarchy: true,
-                pageSize: 2,
-            },
-        },
-        {
-            enabled: Object.keys(urlParams).length === 0 && !mounted,
-            select: ({ organisationUnits }) => organisationUnits,
-        },
-    );
+    const queryOptions = { enabled: Object.keys(urlParams).length === 0 && !mounted };
+    const { isLoading: loadingOrgUnits, data: searchOrgUnits } = useOrgUnitAutoSelect(queryOptions);
 
     const updateUrlIfApplicable = useCallback(() => {
         const paramsToAdd = {
