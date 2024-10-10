@@ -1,3 +1,10 @@
+# [101.9.0](https://github.com/dhis2/capture-app/compare/v101.8.0...v101.9.0) (2024-10-09)
+
+
+### Features
+
+* [DHIS2-15238] show and filter on assigned user in program stage WL ([#3821](https://github.com/dhis2/capture-app/issues/3821)) ([e032d50](https://github.com/dhis2/capture-app/commit/e032d5004de91ee30fff89a53e273faf52bea234))
+
 # [101.8.0](https://github.com/dhis2/capture-app/compare/v101.7.4...v101.8.0) (2024-10-08)
 
 
