@@ -3,18 +3,18 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
-    DataTableHead,
+    CheckboxField,
     DataTable,
     DataTableBody,
-    DataTableRow,
     DataTableCell,
     DataTableColumnHeader,
-    CheckboxField,
+    DataTableHead,
+    DataTableRow,
 } from '@dhis2/ui';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 
 const getStyles = () => ({
     tableContainer: {
@@ -116,7 +116,9 @@ class Index extends React.Component<Props> {
         ));
 
         const checkboxCell = this.props.showSelectCheckBox ? (
-            <DataTableColumnHeader>
+            <DataTableColumnHeader
+                dataTest={'select-all-rows-checkbox'}
+            >
                 <CheckboxField
                     checked={allRowsAreSelected}
                     onChange={() => onSelectAll(dataSource.map(({ id }) => id))}
@@ -185,6 +187,7 @@ class Index extends React.Component<Props> {
                             width={'40px'}
                         >
                             <CheckboxField
+                                dataTest={'select-row-checkbox'}
                                 checked={selectedRows[rowId]}
                                 onChange={() => onRowSelect(rowId)}
                             />

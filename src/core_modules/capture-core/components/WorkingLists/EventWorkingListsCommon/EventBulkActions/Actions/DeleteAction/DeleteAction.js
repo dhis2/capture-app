@@ -3,10 +3,7 @@
 import React, { useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import {
-    Button, ButtonStrip,
-    Modal, ModalActions, ModalContent, ModalTitle,
-} from '@dhis2/ui';
+import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useMutation } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from '../../../../../../../capture-core-utils';
@@ -62,6 +59,7 @@ export const DeleteAction = ({
                 <Modal
                     small
                     onClose={() => setIsModalOpen(false)}
+                    dataTest={'bulk-delete-events-dialog'}
                 >
                     <ModalTitle>
                         {i18n.t('Delete events')}

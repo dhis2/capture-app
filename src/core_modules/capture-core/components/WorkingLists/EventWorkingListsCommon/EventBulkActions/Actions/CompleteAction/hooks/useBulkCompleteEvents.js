@@ -30,7 +30,7 @@ export const useBulkCompleteEvents = ({
         {
             resource: 'tracker/events',
             params: {
-                fields: 'event,program,orgUnit,status,programStage,occurredAt,enrollment',
+                fields: '*,!dataValues,!relationships',
                 events: Object.keys(selectedRows).join(','),
             },
         },

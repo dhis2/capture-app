@@ -94,7 +94,7 @@ export const useCompleteBulkEnrollments = ({
             resource: 'tracker/trackedEntities',
             params: {
                 program: programId,
-                fields: 'trackedEntity,enrollments[enrollment,program,trackedEntity,orgUnit,status,occurredAt,enrolledAt,events[status,orgUnit,program,programStage,trackedEntity,occurredAt,event,scheduledAt]]',
+                fields: 'trackedEntity,enrollments[*,!attributes,!relationships,events[*,!dataValues,!relationships]]',
                 trackedEntities: Object.keys(selectedRows).join(','),
             },
         },

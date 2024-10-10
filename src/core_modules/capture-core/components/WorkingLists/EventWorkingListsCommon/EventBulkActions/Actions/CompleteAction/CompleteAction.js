@@ -39,6 +39,7 @@ export const CompleteAction = ({
                 <Modal
                     small
                     onClose={() => setIsCompleteDialogOpen(false)}
+                    dataTest={'bulk-complete-events-dialog'}
                 >
                     <ModalTitle>
                         {i18n.t('Complete events')}
