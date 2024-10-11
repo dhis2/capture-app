@@ -29,7 +29,7 @@ export const OverflowMenuComponent = ({
                 icon={<IconMore16 />}
                 small
                 secondary
-                dataTest="widget-profile-overflow-menu"
+                dataTest="widget-profile-overflow-men"
                 component={
                     <FlyoutMenu dense>
                         {displayChangelog && (
