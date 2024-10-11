@@ -248,6 +248,7 @@ export class InputBuilder {
             programStageName,
             status,
             occurredAt,
+            createdAt: createdDate,
             scheduledAt: dueDate,
             completedAt: completedDate,
         } = eventData;
@@ -259,8 +260,6 @@ export class InputBuilder {
             .filter(key => !eventMainKeys.has(key))
             .map(key =>
                 new RuleDataValueJs(
-                    eventDate,
-                    programStage,
                     key,
                     this.convertDataElementValue(key, eventData[key]),
                 ));
@@ -271,6 +270,7 @@ export class InputBuilder {
             programStageName,
             status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
             eventDate,
+            Instant.parse(createdDate),
             this.toLocalDate(dueDate),
             this.toLocalDate(completedDate),
             this.selectedOrgUnit.id,
