@@ -164,7 +164,7 @@ msgid "Warnings"
 msgstr "ແຈ້ງເຕືອນ"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "ບໍ່ສາມາດດຶງຂໍ້ມູນໄດ້ຈາກຜົນຂອງກຸ່ມຄົ້ນຫາ"
 
 msgid "Complete"
 msgstr "ສຳເລັດແລ້ວ"
@@ -329,13 +329,13 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr "ບໍ່ສາມາດເລືອກໂປແກຼມສໍາລັບການລົງທະບຽນ"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "ໃໝ່ {{typeName}}"
 
 msgid "New"
 msgstr "ສ້າງໃຫມ່"
 
 msgid "Start again"
-msgstr ""
+msgstr "ເລີ່ມໃໝ່ອີກຄັງ"
 
 msgid "Find"
 msgstr "ຊອກ"
@@ -359,7 +359,7 @@ msgid "Select"
 msgstr "ເລືອກ"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "ໂປແກລມທີ່ເລືອກ"
 
 msgid "Some programs are being filtered."
 msgstr "ບາງໂປແກຼມກໍາລັງຖືກກັ່ນຕອງ."
@@ -431,7 +431,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "ບໍ່ສາມາດໂຫຼດຫົວໜ່ວຍການຈັດຕັ້ງໄດ້"
 
 msgid "View event info"
-msgstr ""
+msgstr "ເບິ່ງຂໍ້ມູນເຫດການ"
 
 msgid "Delete event"
 msgstr "ລືບກໍລະນີອອກ"
@@ -527,7 +527,7 @@ msgid "Completed"
 msgstr "ສໍາເລັດແລ້ວ"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "ສ້າງ {{TET}} ໃໝ່ໃນ {{program}} ໃນ {{orgUnit}}"
 
 msgid "Save and add another"
 msgstr "ບັນທຶກ ແລະ ເພີ່ມອີກ"
@@ -545,15 +545,17 @@ msgid "Switch to row view"
 msgstr "ສະຫຼັບໄປເບິ່ງແຖວ"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "ໃໝ່ {{TET}}"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "ລາຍຊື່ວຽກ"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"ໂປຣແກຣມທີ່ມີໂປຣແກຣມ {{programId}} ບໍ່ແມ່ນໂປຣແກຣມຕິດຕາມ. "
+"ການລົງທະບຽນສາມາດເຮັດໄດ້ພຽງແຕ່ຢູ່ໃນໂປແກຣມຕິດຕາມ."
 
 msgid "Assigned user"
 msgstr "ຜູ້ໃຊ້ທີ່ຖືກມອບຫມາຍ"
@@ -612,19 +614,19 @@ msgid "No events added"
 msgstr "ບໍ່ມີການເພີ່ມເຫດການ"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "ເລືອກຫົວໜ່ວຍລົງທະບຽນ ແລະ ໂປແກລມຂ້າງເທິງເພື່ອເລີ່ມ"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "ເລືອກໂປແກລມເພື່ອເລີ່ມລາຍງານ"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "ເລືອກຫົວໜ່ວຍການລົງທະບຽນເພື່ອເລີ່ມລາຍງານ"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "ເລືອກໝວດໝູ່ເພື່ອເລີ່ມລາຍງານ"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີການເຂົ້າເຖິງເພື່ອສ້າງເຫດການໃນຕົວເລືອກປັດຈຸບັນ"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "ມີຂໍ້ມູນຊໍ້າກັນ (ພົບຂໍ້ຜິດພາດ, ເບິ່ງບັນທຶກສໍາລັບລາຍລະອຽດ)"
@@ -657,22 +659,22 @@ msgid "Metadata error. see log for details"
 msgstr "ຂໍ້ມູນເມຕ້າແມ່ນຜິດພາດ. ເບິ່ງບັນທຶກສໍາລັບລາຍລະອຽດ"
 
 msgid "Review duplicates"
-msgstr ""
+msgstr "ກວດເບິ່ງຂໍ້ມູນຊໍ້າກັນ"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "ສ້າງ {{trackedEntityTypeName}} ແລະ ເຊື່ອມກັນ"
 
 msgid "Possible duplicates found"
 msgstr "ພົບການຊໍ້າກັນທີ່ເປັນໄປໄດ້"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫຼດຂໍ້ມູນຊໍ້າກັນ"
 
 msgid "Hide"
 msgstr "ເຊື່ອງ"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "ບັນທຶກເປັນ {{tetName}} ໃໝ່"
 
 msgid "Organisation Unit"
 msgstr "ຫົວໜ່ວຍ ການຈັດຕັ້ງ"
@@ -681,7 +683,7 @@ msgid "Registration"
 msgstr "ລົງທະບຽນ"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "ກວດສອບການຊໍ້າກັນ"
 
 msgid "Search results"
 msgstr "ຜົນການຄົ້ນຫາ"
@@ -764,13 +766,13 @@ msgid "Search by attributes"
 msgstr "ຄົ້ນຫາໂດຍຄຸນລັກສະນະ"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "ຕື່ມຂໍ້ມູນໃສ່ຢ່າງໜ້ອຍ {{minAttributesRequired}} ຄຸນລັກສະນະເພື່ອຄົ້ນຫາ"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "ເພື່ອເຮັດວຽກກັບໂປແກລມທີ່ເລືອກ,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "ເປີດແອັບ Tracker Capture"
 
 msgid "Program not found"
 msgstr "ບໍ່ພົບໂປຣແກຣມ"
