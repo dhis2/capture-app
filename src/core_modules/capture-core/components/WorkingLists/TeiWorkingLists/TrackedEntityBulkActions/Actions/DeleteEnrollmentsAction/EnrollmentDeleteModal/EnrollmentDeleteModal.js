@@ -42,12 +42,43 @@ const EnrollmentDeleteModalPlain = ({
         statusToDelete,
         updateStatusToDelete,
         numberOfEnrollmentsToDelete,
+        isEnrollmentsError,
     } = useDeleteEnrollments({
         selectedRows,
         programId,
         onUpdateList,
         setIsDeleteDialogOpen,
     });
+
+    if (isEnrollmentsError) {
+        return (
+            <Modal
+                onClose={() => setIsDeleteDialogOpen(false)}
+                small
+            >
+                <ModalTitle>
+                    {i18n.t('Delete selected enrollments')}
+                </ModalTitle>
+
+                <ModalContent>
+                    <div className={classes.modalContent}>
+                        {i18n.t('An error occurred while loading the selected enrollments. Please try again.')}
+                    </div>
+                </ModalContent>
+
+                <ModalActions>
+                    <ButtonStrip>
+                        <Button
+                            secondary
+                            onClick={() => setIsDeleteDialogOpen(false)}
+                        >
+                            {i18n.t('Cancel')}
+                        </Button>
+                    </ButtonStrip>
+                </ModalActions>
+            </Modal>
+        );
+    }
 
     if (isLoadingEnrollments || !enrollmentCounts) {
         return (

@@ -1,13 +1,13 @@
 // @flow
 
 import { useEffect, useMemo } from 'react';
-import { useAlert, useDataEngine } from '@dhis2/app-runtime';
+import { useAlert, useConfig, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation } from 'react-query';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { errorCreator } from '../../../../../../../../capture-core-utils';
+import { errorCreator, FEATURES, hasAPISupportForFeature } from '../../../../../../../../capture-core-utils';
 
 type Props = {
     selectedRows: { [id: string]: any },
@@ -78,6 +78,7 @@ export const useCompleteBulkEnrollments = ({
     removeRowsFromSelection,
     onUpdateList,
 }: Props) => {
+    const { serverVersion: { minor } } = useConfig();
     const dataEngine = useDataEngine();
     const { show: showAlert } = useAlert(
         ({ message }) => message,
@@ -92,10 +93,15 @@ export const useCompleteBulkEnrollments = ({
         ['WorkingLists', 'BulkActionBar', 'CompleteAction', 'trackedEntities', selectedRows],
         {
             resource: 'tracker/trackedEntities',
-            params: {
-                program: programId,
-                fields: 'trackedEntity,enrollments[*,!attributes,!relationships,events[*,!dataValues,!relationships]]',
-                trackedEntities: Object.keys(selectedRows).join(','),
+            params: () => {
+                const supportForFeature = hasAPISupportForFeature(minor, FEATURES.newEntityFilterQueryParam);
+                const filterQueryParam: string = supportForFeature ? 'trackedEntities' : 'trackedEntity';
+
+                return ({
+                    program: programId,
+                    fields: 'trackedEntity,enrollments[*,!attributes,!relationships,events[*,!dataValues,!relationships]]',
+                    [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
+                });
             },
         },
         {

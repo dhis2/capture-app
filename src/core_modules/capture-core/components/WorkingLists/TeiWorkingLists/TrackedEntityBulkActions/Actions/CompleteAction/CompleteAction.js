@@ -61,6 +61,7 @@ const CompleteActionPlain = ({
         validationError,
         isCompleting,
         hasPartiallyUploadedEnrollments,
+        isError: errorFetchingTrackedEntities,
     } = useCompleteBulkEnrollments({
         selectedRows,
         programId,
@@ -112,6 +113,14 @@ const CompleteActionPlain = ({
                             </ul>
                         </span>
                     </Widget>
+                </div>
+            );
+        }
+
+        if (errorFetchingTrackedEntities) {
+            return (
+                <div className={classes.container}>
+                    {i18n.t('An unexpected error occurred while fetching the enrollments. Please try again.')}
                 </div>
             );
         }

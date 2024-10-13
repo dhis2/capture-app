@@ -3,10 +3,10 @@ import { useCallback, useMemo, useState } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation, useQueryClient } from 'react-query';
-import { useAlert, useDataEngine } from '@dhis2/app-runtime';
+import { useAlert, useConfig, useDataEngine } from '@dhis2/app-runtime';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { errorCreator } from '../../../../../../../../capture-core-utils';
+import { errorCreator, FEATURES, hasAPISupportForFeature } from '../../../../../../../../capture-core-utils';
 
 type Props = {
     selectedRows: { [id: string]: boolean },
@@ -23,6 +23,7 @@ export const useDeleteEnrollments = ({
     onUpdateList,
     setIsDeleteDialogOpen,
 }: Props) => {
+    const { serverVersion: { minor } } = useConfig();
     const queryClient = useQueryClient();
     const [statusToDelete, setStatusToDelete] = useState({
         active: true,
@@ -42,14 +43,23 @@ export const useDeleteEnrollments = ({
         }));
     }, []);
 
-    const { data: enrollments, isLoading: isLoadingEnrollments } = useApiDataQuery(
+    const {
+        data: enrollments,
+        isLoading: isLoadingEnrollments,
+        isError: isEnrollmentsError,
+    } = useApiDataQuery(
         [...QueryKey, selectedRows],
         {
             resource: 'tracker/trackedEntities',
-            params: {
-                fields: 'trackedEntity,enrollments[enrollment,program,status]',
-                trackedEntities: Object.keys(selectedRows).join(','),
-                program: programId,
+            params: () => {
+                const supportForFeature = hasAPISupportForFeature(minor, FEATURES.newEntityFilterQueryParam);
+                const filterQueryParam: string = supportForFeature ? 'trackedEntities' : 'trackedEntity';
+
+                return ({
+                    fields: 'trackedEntity,enrollments[enrollment,program,status]',
+                    [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
+                    program: programId,
+                });
             },
         },
         {
@@ -140,6 +150,7 @@ export const useDeleteEnrollments = ({
         deleteEnrollments,
         isDeletingEnrollments,
         isLoadingEnrollments,
+        isEnrollmentsError,
         enrollmentCounts,
         statusToDelete,
         updateStatusToDelete,
