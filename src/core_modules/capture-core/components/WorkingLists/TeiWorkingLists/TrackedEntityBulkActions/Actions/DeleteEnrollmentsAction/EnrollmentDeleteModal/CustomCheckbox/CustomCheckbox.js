@@ -11,6 +11,7 @@ type Props = {
     disabled?: boolean,
     id: string,
     onChange: (status: string) => void,
+    dataTest?: string,
 }
 
 const styles = {
@@ -53,12 +54,14 @@ const CustomCheckboxPlain = ({
     onChange,
     label,
     disabled,
+    dataTest,
     classes,
 }) => (
     <button
         type="button"
         onClick={() => onChange(id)}
         disabled={disabled}
+        data-test={dataTest}
         className={cx(classes.checkboxButton, {
             checked,
             disabled,

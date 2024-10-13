@@ -125,7 +125,6 @@ const CompleteActionPlain = ({
             );
         }
 
-        // If there are active enrollments, show a message with the number of active enrollments
         return (
             <div className={classes.container}>
                 {i18n.t('This action will complete {{count}} active enrollment in your selection.',
@@ -169,6 +168,7 @@ const CompleteActionPlain = ({
                 <Modal
                     onClose={() => setModalIsOpen(false)}
                     loading={isLoading}
+                    dataTest={'bulk-complete-enrollments-dialog'}
                 >
                     <ModalTitle>
                         {validationError ? i18n.t('Error completing enrollments')
@@ -197,6 +197,7 @@ const CompleteActionPlain = ({
                                         onClick={() => completeEnrollments({ completeEvents })}
                                         disabled={isLoading || enrollmentCounts?.active === 0}
                                         loading={isCompleting}
+                                        dataTest={'bulk-complete-enrollments-confirm-button'}
                                     >
                                         {i18n.t('Complete {{count}} enrollment', {
                                             count: enrollmentCounts.active,

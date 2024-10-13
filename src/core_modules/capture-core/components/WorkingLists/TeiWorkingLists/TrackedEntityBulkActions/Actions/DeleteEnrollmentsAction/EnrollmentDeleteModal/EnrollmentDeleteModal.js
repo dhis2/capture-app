@@ -81,6 +81,7 @@ const EnrollmentDeleteModalPlain = ({
     return (
         <Modal
             onClose={() => setIsDeleteDialogOpen(false)}
+            dataTest={'bulk-delete-enrollments-dialog'}
         >
             <ModalTitle>
                 {i18n.t('Delete selected enrollments')}
@@ -103,6 +104,7 @@ const EnrollmentDeleteModalPlain = ({
                             id="active"
                             checked={enrollmentCounts.active === 0 ? false : statusToDelete.active}
                             onChange={updateStatusToDelete}
+                            dataTest={'bulk-delete-enrollments-active-checkbox'}
                         />
 
                         <CustomCheckbox
@@ -111,6 +113,7 @@ const EnrollmentDeleteModalPlain = ({
                             id="completed"
                             checked={enrollmentCounts.completed === 0 ? false : statusToDelete.completed}
                             onChange={updateStatusToDelete}
+                            dataTest={'bulk-delete-enrollments-completed-checkbox'}
                         />
 
                         <CustomCheckbox
@@ -119,6 +122,7 @@ const EnrollmentDeleteModalPlain = ({
                             id="cancelled"
                             onChange={updateStatusToDelete}
                             checked={enrollmentCounts.cancelled === 0 ? false : statusToDelete.cancelled}
+                            dataTest={'bulk-delete-enrollments-cancelled-checkbox'}
                         />
                     </div>
                 </div>
