@@ -80,7 +80,9 @@ export const useChangelogData = ({
                 page,
                 pageSize,
                 program: programId,
-                order: sortDirection === DEFAULT_SORT_DIRECTION ? undefined : `createdAt:${sortDirection}`,
+                ...{
+                    order: sortDirection === DEFAULT_SORT_DIRECTION ? undefined : `createdAt:${sortDirection}`,
+                },
             },
         },
         {
