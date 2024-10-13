@@ -1,4 +1,4 @@
-import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import moment from 'moment';
 import { getCurrentYear } from '../../support/date';
 
@@ -17,7 +17,7 @@ And('there should be informative message explaining you need to select an organi
 });
 
 And('you select tracked entity type person', () => {
-    cy.get('[data-test="dhis2-uicore-select"')
+    cy.get('[data-test="dhis2-uicore-select"]')
         .click();
     cy.get('[data-test="dhis2-uicore-singleselectoption"]')
         .contains('Person')
@@ -643,6 +643,17 @@ And('you delete the recently added tracked entity', () => {
             .click();
     });
     cy.url().should('include', 'selectedTemplateId=IpHINAT79UW');
+});
+
+And('you delete the recently added malaria entity', () => {
+    cy.get('[data-test="widget-profile-overflow-menu"]')
+        .click();
+    cy.contains('Delete Malaria Entity')
+        .click();
+    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
+        cy.contains('Yes, delete Malaria Entity')
+            .click();
+    });
 });
 
 And(/^you select (.*) from the available tracked entity types/, (selection) => {

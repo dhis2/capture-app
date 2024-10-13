@@ -47,7 +47,7 @@ export const CompleteAction = ({
 
                     <ModalContent>
                         {eventCounts.active > 0 ?
-                            i18n.t('Are you sure you want to complete all active events?')
+                            i18n.t('Are you sure you want to complete all active events in selection?')
                             :
                             i18n.t('There are no active events to complete in the current selection.')
                         }
