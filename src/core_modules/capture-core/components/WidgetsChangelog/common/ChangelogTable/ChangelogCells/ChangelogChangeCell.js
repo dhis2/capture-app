@@ -30,7 +30,6 @@ const ChangelogChangeComponent = ({ label, variant }: Config) => (
 
 export const ChangelogChangeCell = ({ changeType }: Object) => {
     const config = changeTypeConfigs[changeType];
-    console.log('ChangelogChangeComponent', typeof changeType);
 
     if (!config) {
         log.error(errorCreator('Changelog component not found')({ changeType }));
