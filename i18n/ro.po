@@ -603,15 +603,6 @@ msgstr "Programul nu există"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "Offline"
-
-msgid "Syncing"
-msgstr "Sincronizare"
-
 msgid "Add note"
 msgstr ""
 
