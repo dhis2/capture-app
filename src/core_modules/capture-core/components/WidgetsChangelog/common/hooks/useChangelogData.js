@@ -44,10 +44,8 @@ export const useChangelogData = ({
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
 
-    // Memoize the bound query function
     const query = useMemo(() => dataEngine.query.bind(dataEngine), [dataEngine]);
 
-    // Create querySingleResource using the memoized query
     const querySingleResource = useMemo(() => makeQuerySingleResource(query), [query]);
 
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);

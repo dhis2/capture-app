@@ -32,7 +32,7 @@ const buildTEAUrlByElementType: {|
         querySingleResource,
         isPreviousValue,
     }: subValueTEAProps) => {
-        const { id: teiId, value } = trackedEntity;
+        const { teiId, value } = trackedEntity;
         if (!value) return null;
         const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
@@ -54,7 +54,7 @@ const buildTEAUrlByElementType: {|
         isPreviousValue,
         querySingleResource,
     }: subValueTEAProps) => {
-        const { id: teiId, value } = trackedEntity;
+        const { teiId, value } = trackedEntity;
         if (!value) return null;
         const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
@@ -65,7 +65,7 @@ const buildTEAUrlByElementType: {|
         return {
             id,
             name,
-            imageUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}`,
+            url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}`,
             previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}&dimension=small`,
         };
     },
@@ -104,7 +104,7 @@ const buildDataElementUrlByElementType: {|
         return {
             id,
             name,
-            imageUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image`,
+            url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image`,
             previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image?dimension=small`,
         };
     },
