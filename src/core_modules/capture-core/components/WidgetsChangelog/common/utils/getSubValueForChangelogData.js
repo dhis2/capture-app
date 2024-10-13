@@ -2,14 +2,13 @@
 import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api';
 
-
-type subValueTEAProps = {
+type SubValueTEAProps = {
     trackedEntity: Object,
     attributeId: string,
     programId: string,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
-    isPreviousValue?: boolean,
+    latestValue?: boolean,
 };
 
 type SubValuesDataElementProps = {
@@ -17,9 +16,8 @@ type SubValuesDataElementProps = {
     querySingleResource: QuerySingleResource,
     eventId: string,
     absoluteApiPath: string,
-    isPreviousValue?: boolean,
+    latestValue?: boolean,
 };
-
 
 const buildTEAUrlByElementType: {|
 [string]: Function,
@@ -30,13 +28,13 @@ const buildTEAUrlByElementType: {|
         programId,
         absoluteApiPath,
         querySingleResource,
-        isPreviousValue,
-    }: subValueTEAProps) => {
+        latestValue,
+    }: SubValueTEAProps) => {
         const { teiId, value } = trackedEntity;
         if (!value) return null;
         const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-        if (isPreviousValue) {
+        if (!latestValue) {
             return name;
         }
 
@@ -51,14 +49,14 @@ const buildTEAUrlByElementType: {|
         attributeId,
         programId,
         absoluteApiPath,
-        isPreviousValue,
+        latestValue,
         querySingleResource,
-    }: subValueTEAProps) => {
+    }: SubValueTEAProps) => {
         const { teiId, value } = trackedEntity;
         if (!value) return null;
         const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-        if (isPreviousValue) {
+        if (!latestValue) {
             return name;
         }
 
@@ -75,13 +73,13 @@ const buildTEAUrlByElementType: {|
 const buildDataElementUrlByElementType: {|
 [string]: Function,
 |} = {
-    [dataElementTypes.FILE_RESOURCE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, isPreviousValue }: SubValuesDataElementProps) => {
+    [dataElementTypes.FILE_RESOURCE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 
         const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-        if (isPreviousValue) {
+        if (!latestValue) {
             return name;
         }
 
@@ -91,13 +89,13 @@ const buildDataElementUrlByElementType: {|
             url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/file`,
         };
     },
-    [dataElementTypes.IMAGE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, isPreviousValue }: SubValuesDataElementProps) => {
+    [dataElementTypes.IMAGE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 
         const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-        if (isPreviousValue) {
+        if (!latestValue) {
             return name;
         }
 

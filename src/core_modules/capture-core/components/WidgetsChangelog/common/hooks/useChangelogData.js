@@ -1,16 +1,27 @@
 // @flow
+import { useState, useEffect, useMemo } from 'react';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import log from 'loglevel';
-import { errorCreator, buildUrl } from 'capture-core-utils';
-import { useState, useEffect, useMemo } from 'react';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
+import { errorCreator, buildUrl } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
-import { CHANGELOG_ENTITY_TYPES, QUERY_KEYS_BY_ENTITY_TYPE } from '../Changelog/Changelog.constants';
-import type { Change, ChangelogRecord, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
+import {
+    CHANGELOG_ENTITY_TYPES,
+    QUERY_KEYS_BY_ENTITY_TYPE,
+} from '../Changelog/Changelog.constants';
+import type {
+    Change,
+    ChangelogRecord,
+    ItemDefinitions,
+    SortDirection,
+} from '../Changelog/Changelog.types';
 import { convertServerToClient } from '../../../../converters';
 import { convert } from '../../../../converters/clientToList';
-import { RECORD_TYPE, subValueGetterByElementType } from '../utils/getSubValueForChangelogData';
+import {
+    RECORD_TYPE,
+    subValueGetterByElementType,
+} from '../utils/getSubValueForChangelogData';
 import { makeQuerySingleResource } from '../../../../utils/api';
 
 type Props = {
@@ -43,16 +54,18 @@ export const useChangelogData = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
-
-    const query = useMemo(() => dataEngine.query.bind(dataEngine), [dataEngine]);
-
-    const querySingleResource = useMemo(() => makeQuerySingleResource(query), [query]);
-
+    const { fromServerDate } = useTimeZoneConversion();
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
+
     const [page, setPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(DEFAULT_PAGE_SIZE);
     const [sortDirection, setSortDirection] = useState<SortDirection>(DEFAULT_SORT_DIRECTION);
-    const { fromServerDate } = useTimeZoneConversion();
+    const [records, setRecords] = useState<?Array<ChangelogRecord>>(undefined);
+
+    const querySingleResource = useMemo(
+        () => makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
+        [dataEngine],
+    );
 
     const handleChangePageSize = (newPageSize: number) => {
         setPage(1);
@@ -75,129 +88,90 @@ export const useChangelogData = ({
         },
     );
 
-    const [records, setRecords] = useState<?Array<ChangelogRecord>>(undefined);
-
     useEffect(() => {
         const fetchRecords = async () => {
             if (!data) return;
 
-            const fetchedRecords = await Promise.all(
-                data.changeLogs
-                    .map(async (changelog) => {
-                        const { change: apiChange, createdAt, createdBy } = changelog;
-                        const elementKey = Object.keys(apiChange)[0];
-                        const change = apiChange[elementKey];
-
-                        const { metadataElement, fieldId } = getMetadataItemDefinition(
-                            elementKey,
-                            change,
-                            dataItemDefinitions,
-                        );
-
-                        if (!metadataElement) {
-                            log.error(
-                                errorCreator('Could not find metadata for element')({
-                                    ...changelog,
-                                }),
-                            );
-                            return null;
-                        }
-
-                        let previousValueRaw;
-                        let currentValueRaw;
-
-                        const urls =
-                            subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
-
-                        if (urls) {
-                            if (entityType === RECORD_TYPE.trackedEntity) {
-                                previousValueRaw = change.previousValue
-                                    ? await urls({
-                                        trackedEntity: {
-                                            teiId: entityId,
-                                            value: change.previousValue,
-                                        },
-                                        programId,
-                                        attributeId: fieldId,
-                                        absoluteApiPath,
-                                        querySingleResource,
-                                        isPreviousValue: true,
-                                    })
-                                    : null;
-                                currentValueRaw = await urls({
-                                    trackedEntity: {
-                                        teiId: entityId,
-                                        value: change.currentValue,
-                                    },
-                                    programId,
-                                    attributeId: fieldId,
-                                    absoluteApiPath,
-                                    querySingleResource,
-                                });
-                            } else if (entityType === RECORD_TYPE.event) {
-                                previousValueRaw = change.previousValue
-                                    ? await urls({
-                                        dataElement: {
-                                            id: fieldId,
-                                            value: change.previousValue,
-                                        },
-                                        eventId: entityId,
-                                        absoluteApiPath,
-                                        querySingleResource,
-                                        isPreviousValue: true,
-                                    })
-                                    : null;
-                                currentValueRaw = await urls({
-                                    dataElement: {
-                                        id: fieldId,
-                                        value: change.currentValue,
-                                    },
-                                    eventId: entityId,
-                                    absoluteApiPath,
-                                    querySingleResource,
-                                });
-                            }
-                        } else {
-                            previousValueRaw = convertServerToClient(
-                                change.previousValue,
-                                metadataElement.type,
-                            );
-                            currentValueRaw = convertServerToClient(
-                                change.currentValue,
-                                metadataElement.type,
-                            );
-                        }
-
-                        const { firstName, surname, username } = createdBy;
-                        const { options } = metadataElement;
-
-                        const previousValue = convert(
-                            previousValueRaw,
-                            metadataElement.type,
-                            options,
-                        );
-
-                        const currentValue = convert(
-                            currentValueRaw,
-                            metadataElement.type,
-                            options,
-                        );
-
-                        return {
-                            reactKey: uuid(),
-                            date: moment(fromServerDate(createdAt)).format('YYYY-MM-DD HH:mm'),
-                            user: `${firstName} ${surname} (${username})`,
-                            dataItemId: fieldId,
-                            changeType: changelog.type,
-                            dataItemLabel: metadataElement.name,
-                            previousValue,
-                            currentValue,
-                        };
-                    })
-                    .filter(Boolean),
+            const mostRecentCreatedAt = data.changeLogs.reduce(
+                (latest, record) => (moment(record.createdAt).isAfter(latest) ? record.createdAt : latest),
+                data.changeLogs[0]?.createdAt,
             );
 
-            setRecords(fetchedRecords);
+            const fetchedRecords = await Promise.all(
+                data.changeLogs.map(async (changelog) => {
+                    const { change: apiChange, createdAt, createdBy, type } = changelog;
+                    const elementKey = Object.keys(apiChange)[0];
+                    const change = apiChange[elementKey];
+
+                    const { metadataElement, fieldId } = getMetadataItemDefinition(
+                        elementKey,
+                        change,
+                        dataItemDefinitions,
+                    );
+
+                    if (!metadataElement) {
+                        log.error(
+                            errorCreator('Could not find metadata for element')({ ...changelog }),
+                        );
+                        return null;
+                    }
+
+                    const getSubValue =
+                subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
+
+                    const isLatestValue = moment(createdAt).isSameOrAfter(mostRecentCreatedAt);
+
+                    const getValue = async (value, latestValue) => {
+                        if (!getSubValue) {
+                            return convertServerToClient(value, metadataElement.type);
+                        }
+                        if (entityType === RECORD_TYPE.trackedEntity) {
+                            return getSubValue({
+                                trackedEntity: { teiId: entityId, value },
+                                programId,
+                                attributeId: fieldId,
+                                absoluteApiPath,
+                                querySingleResource,
+                                latestValue,
+                            });
+                        }
+                        if (entityType === RECORD_TYPE.event) {
+                            return getSubValue({
+                                dataElement: { id: fieldId, value },
+                                eventId: entityId,
+                                absoluteApiPath,
+                                querySingleResource,
+                                latestValue,
+                            });
+                        }
+                        return null;
+                    };
+
+                    const [previousValueRaw, currentValueRaw] = await Promise.all([
+                        change.previousValue ? getValue(change.previousValue, false) : null,
+                        getValue(change.currentValue, isLatestValue),
+                    ]);
+
+                    const { firstName, surname, username } = createdBy;
+                    const { options } = metadataElement;
+
+                    const previousValue = convert(previousValueRaw, metadataElement.type, options);
+                    const currentValue = convert(currentValueRaw, metadataElement.type, options);
+
+                    return {
+                        reactKey: uuid(),
+                        date: moment(fromServerDate(createdAt)).format('YYYY-MM-DD HH:mm'),
+                        user: `${firstName} ${surname} (${username})`,
+                        dataItemId: fieldId,
+                        changeType: type,
+                        dataItemLabel: metadataElement.name,
+                        previousValue,
+                        currentValue,
+                    };
+                }),
+            );
+
+            setRecords(fetchedRecords.filter(Boolean));
         };
 
         fetchRecords();
@@ -211,8 +185,6 @@ export const useChangelogData = ({
         absoluteApiPath,
         querySingleResource,
     ]);
-
-    console.log('records', records);
 
     return {
         records,
