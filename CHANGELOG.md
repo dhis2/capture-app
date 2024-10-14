@@ -1,3 +1,10 @@
+# [101.11.0](https://github.com/dhis2/capture-app/compare/v101.10.2...v101.11.0) (2024-10-14)
+
+
+### Features
+
+* [DHIS2-17970] Auto-select orgUnit if there is only one available ([#3798](https://github.com/dhis2/capture-app/issues/3798)) ([de06f8b](https://github.com/dhis2/capture-app/commit/de06f8b1b5480ba7315ca648784ef414f8473e06))
+
 ## [101.10.2](https://github.com/dhis2/capture-app/compare/v101.10.1...v101.10.2) (2024-10-14)
 
 
