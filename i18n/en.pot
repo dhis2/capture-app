@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
-"PO-Revision-Date: 2024-09-02T11:08:16.281Z\n"
+"POT-Creation-Date: 2024-10-14T14:08:33.622Z\n"
+"PO-Revision-Date: 2024-10-14T14:08:33.622Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1538,11 +1538,39 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
-msgid "An error occurred while loading the widget."
-msgstr "An error occurred while loading the widget."
+msgid ""
+"Are you sure you want to unlink and delete the event? This will permanently "
+"remove the event and all related data."
+msgstr ""
+"Are you sure you want to unlink and delete the event? This will permanently "
+"remove the event and all related data."
+
+msgid "There was a problem unliking and deletiung the event"
+msgstr "There was a problem unliking and deletiung the event"
+
+msgid "Yes, unlink and delete event"
+msgstr "Yes, unlink and delete event"
+
+msgid "Are you sure you want to unlink the event?"
+msgstr "Are you sure you want to unlink the event?"
+
+msgid "There was a problem unliking the event"
+msgstr "There was a problem unliking the event"
+
+msgid "Yes, unlink event"
+msgstr "Yes, unlink event"
 
 msgid "View linked event"
 msgstr "View linked event"
+
+msgid "Unlink event"
+msgstr "Unlink event"
+
+msgid "Unlink and delete event"
+msgstr "Unlink and delete event"
+
+msgid "An error occurred while loading the widget."
+msgstr "An error occurred while loading the widget."
 
 msgid "Scheduled"
 msgstr "Scheduled"

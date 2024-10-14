@@ -1,7 +1,6 @@
 // @flow
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { colors, FlyoutMenu, IconMore16, MenuItem, spacersNum } from '@dhis2/ui';
+import React from 'react';
+import { colors, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/';
 import type { Props } from './WidgetTwoEventWorkspace.types';
@@ -9,8 +8,7 @@ import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/u
 import { Widget } from '../Widget';
 import { useLinkedEventByOriginId } from './hooks/useLinkedEventByOriginId';
 import { WidgetTwoEventWorkspaceComponent } from './WidgetTwoEventWorkspace.component';
-import { OverflowButton } from '../Buttons';
-import { buildUrlQueryString } from '../../utils/routing';
+import { OverflowMenuComponent } from './OverflowMenu';
 import {
     EnrollmentPageKeys,
 } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
@@ -48,8 +46,6 @@ const WidgetTwoEventWorkspacePlain = ({
     currentPage,
     classes,
 }: Props) => {
-    const [actionsIsOpen, setActionsIsOpen] = useState(false);
-    const { push } = useHistory();
     const {
         linkedEvent,
         dataValues,
@@ -97,28 +93,11 @@ const WidgetTwoEventWorkspacePlain = ({
         <div>
             {currentPage === EnrollmentPageKeys.VIEW_EVENT && (
                 <div className={classes.menu}>
-                    <OverflowButton
-                        open={actionsIsOpen}
-                        onClick={() => setActionsIsOpen(prev => !prev)}
-                        icon={<IconMore16 />}
-                        small
-                        secondary
-                        dataTest={'widget-event-navigate-to-linked-event'}
-                        component={(
-                            <FlyoutMenu dense maxWidth="250px">
-                                <MenuItem
-                                    label={i18n.t('View linked event')}
-                                    dataTest={'event-overflow-view-linked-event'}
-                                    onClick={() => {
-                                        push(`/enrollmentEventEdit?${buildUrlQueryString({
-                                            eventId: linkedEvent.event,
-                                            orgUnitId,
-                                        })}`);
-                                        setActionsIsOpen(false);
-                                    }}
-                                />
-                            </FlyoutMenu>
-                        )}
+                    <OverflowMenuComponent
+                        linkedEvent={linkedEvent}
+                        orgUnitId={orgUnitId}
+                        programId={programId}
+                        eventId={eventId}
                     />
                 </div>
             )}
