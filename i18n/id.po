@@ -612,15 +612,6 @@ msgstr "Program tidak ada"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "Offline"
-
-msgid "Syncing"
-msgstr "Menyinkronkan"
-
 msgid "Add note"
 msgstr "Tambah catatan"
 
