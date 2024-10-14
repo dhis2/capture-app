@@ -1,7 +1,6 @@
 // @flow
 
-import { colors, spacers } from '@dhis2/ui';
-import { WarningRounded } from '@material-ui/icons';
+import { colors, spacers, IconWarningFilled24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { withStyles } from '@material-ui/core';
@@ -20,7 +19,7 @@ const styles = {
 
 const WidgetWarningHeaderPlain = ({ classes }) => (
     <span className={classes.container}>
-        <WarningRounded />
+        <IconWarningFilled24 />
         <p className={classes.label}>{i18n.t('Warning')}</p>
     </span>
 );

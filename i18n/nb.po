@@ -608,15 +608,6 @@ msgstr "Programmet finnes ikke"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "Valgt program er ugyldig for valgt organisajonsenhet"
 
-msgid "Online"
-msgstr "Påkoblet"
-
-msgid "Offline"
-msgstr "Frakoblet"
-
-msgid "Syncing"
-msgstr "Synkroniserer"
-
 msgid "Add note"
 msgstr "Legg til notat"
 

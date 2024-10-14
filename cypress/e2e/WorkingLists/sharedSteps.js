@@ -12,22 +12,6 @@ Then('for a tracker program the page navigation should show that you are on the 
         .should('exist');
 });
 
-Then('the assigned to filter button should show that the anyone filter is in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Assigned to: Anyone')
-        .should('exist');
-});
-
-When('you set the assignee filter to anyone', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Assigned to')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Anyone')
-        .click();
-});
-
 When('you set the status filter to active', () => {
     cy.get('[data-test="event-working-lists"]')
         .contains('Status')
@@ -98,16 +82,6 @@ When('you set the enrollment status filter to active', () => {
         .click();
 });
 
-When('you set the assginee filter to none', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Assigned to')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('None')
-        .click();
-});
-
 When(/^you set the first name filter to (.*)$/, (name) => {
     cy.get('[data-test="tei-working-lists"]')
         .contains('First name')
@@ -144,12 +118,6 @@ Then('the sort arrow should indicate descending order', () => {
 Then('rows per page should be set to 15', () => {
     cy.get('div[data-test="rows-per-page-selector"]')
         .contains('15')
-        .should('exist');
-});
-
-Then('the assignee filter button should show that unassigned filter is in effect', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Assigned to: None')
         .should('exist');
 });
 

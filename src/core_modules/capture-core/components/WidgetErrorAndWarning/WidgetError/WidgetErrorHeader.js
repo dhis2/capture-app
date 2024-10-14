@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import { ErrorRounded } from '@material-ui/icons';
-import { spacers, colors } from '@dhis2/ui';
+import { spacers, colors, IconErrorFilled24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 
 const styles = {
@@ -20,7 +19,7 @@ const styles = {
 
 const WidgetErrorHeaderPlain = ({ classes }) => (
     <span className={classes.container}>
-        <ErrorRounded />
+        <IconErrorFilled24 />
         <p className={classes.label}>{i18n.t('Error')}</p>
     </span>
 );
