@@ -196,6 +196,9 @@ Feature: User creates a new entries from the registration page
     And you fill the Malaria case diagnosis registration form with values
     And you click the save malaria entity submit button
     Then you see the enrollment event Edit page
+    # Cleanup
+    And you delete the recently added malaria entity
+
 
 ## New enrollment of existing TEI
 
