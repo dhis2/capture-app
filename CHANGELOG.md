@@ -1,3 +1,17 @@
+# [101.11.0](https://github.com/dhis2/capture-app/compare/v101.10.2...v101.11.0) (2024-10-14)
+
+
+### Features
+
+* [DHIS2-17970] Auto-select orgUnit if there is only one available ([#3798](https://github.com/dhis2/capture-app/issues/3798)) ([de06f8b](https://github.com/dhis2/capture-app/commit/de06f8b1b5480ba7315ca648784ef414f8473e06))
+
+## [101.10.2](https://github.com/dhis2/capture-app/compare/v101.10.1...v101.10.2) (2024-10-14)
+
+
+### Bug Fixes
+
+* [DHIS2-18215] selected working list not persisted on navigate ([#3838](https://github.com/dhis2/capture-app/issues/3838)) ([599b2c1](https://github.com/dhis2/capture-app/commit/599b2c1e29c94fd0258844aadb7eef20e03024eb))
+
 ## [101.10.1](https://github.com/dhis2/capture-app/compare/v101.10.0...v101.10.1) (2024-10-14)
 
 
