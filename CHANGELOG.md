@@ -1,3 +1,10 @@
+## [101.10.2](https://github.com/dhis2/capture-app/compare/v101.10.1...v101.10.2) (2024-10-14)
+
+
+### Bug Fixes
+
+* [DHIS2-18215] selected working list not persisted on navigate ([#3838](https://github.com/dhis2/capture-app/issues/3838)) ([599b2c1](https://github.com/dhis2/capture-app/commit/599b2c1e29c94fd0258844aadb7eef20e03024eb))
+
 ## [101.10.1](https://github.com/dhis2/capture-app/compare/v101.10.0...v101.10.1) (2024-10-14)
 
 
