@@ -94,10 +94,15 @@ export const useChangelogData = ({
         const fetchRecords = async () => {
             if (!data) return;
 
-            const mostRecentCreatedAt = data.changeLogs.reduce(
-                (latest, record) => (moment(record.createdAt).isAfter(latest) ? record.createdAt : latest),
-                data.changeLogs[0]?.createdAt,
-            );
+            const mostRecentCreatedAtByFieldId = data.changeLogs.reduce((acc, record) => {
+                const elementKey = Object.keys(record.change)[0];
+                const fieldId = record.change[elementKey]?.dataElement ?? record.change[elementKey]?.attribute;
+
+                if (!acc[fieldId] || moment(record.createdAt).isAfter(acc[fieldId])) {
+                    acc[fieldId] = record.createdAt;
+                }
+                return acc;
+            }, {});
 
             const fetchedRecords = await Promise.all(
                 data.changeLogs.map(async (changelog) => {
@@ -119,9 +124,10 @@ export const useChangelogData = ({
                     }
 
                     const getSubValue =
-                subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
+                        subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
 
-                    const isLatestValue = moment(createdAt).isSameOrAfter(mostRecentCreatedAt);
+                    const isLatestValue =
+                        moment(createdAt).isSameOrAfter(mostRecentCreatedAtByFieldId[fieldId]);
 
                     const getValue = async (value, latestValue) => {
                         if (!getSubValue) {
