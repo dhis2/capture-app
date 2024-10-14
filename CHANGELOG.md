@@ -1,3 +1,10 @@
+## [101.10.1](https://github.com/dhis2/capture-app/compare/v101.10.0...v101.10.1) (2024-10-14)
+
+
+### Bug Fixes
+
+* [DHIS2-18028] User is able to add invalid related stages event ([#3795](https://github.com/dhis2/capture-app/issues/3795)) ([301585e](https://github.com/dhis2/capture-app/commit/301585ed17379900db642a05e0157d52107f96a2))
+
 # [101.10.0](https://github.com/dhis2/capture-app/compare/v101.9.1...v101.10.0) (2024-10-14)
 
 

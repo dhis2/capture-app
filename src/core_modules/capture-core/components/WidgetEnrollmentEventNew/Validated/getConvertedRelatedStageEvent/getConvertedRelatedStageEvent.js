@@ -61,7 +61,7 @@ const getEventDetailsByLinkMode = ({
             linkedEvent: {
                 ...baseEventDetails,
                 scheduledAt: convertFn(clientRequestEvent.scheduledAt, dataElementTypes.DATE),
-                orgUnit: convertFn(clientRequestEvent.orgUnit, dataElementTypes.ORGANISATION_UNIT),
+                orgUnit: clientRequestEvent.orgUnit,
             },
             linkedEventId: baseEventDetails.event,
         });
