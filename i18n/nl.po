@@ -614,15 +614,6 @@ msgstr "Programma bestaat niet"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "offline"
-
-msgid "Syncing"
-msgstr "synchroniseren"
-
 msgid "Add note"
 msgstr "Notitie toevoegen"
 

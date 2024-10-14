@@ -606,15 +606,6 @@ msgstr "Дастур мавжуд эмас"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "Онлайн"
-
-msgid "Offline"
-msgstr "Оффлайн"
-
-msgid "Syncing"
-msgstr "Синхронлашмоқда"
-
 msgid "Add note"
 msgstr "Изоҳ қолдириш"
 

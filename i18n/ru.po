@@ -615,15 +615,6 @@ msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 "Выбранная программа недействительна для выбранной организационной единицы"
 
-msgid "Online"
-msgstr "Онлайн"
-
-msgid "Offline"
-msgstr "Оффлайн"
-
-msgid "Syncing"
-msgstr "Синхронизация"
-
 msgid "Add note"
 msgstr "Добавить заметку"
 

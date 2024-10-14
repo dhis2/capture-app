@@ -37,10 +37,10 @@ Scenario: Show only teis with active enrollments and unassinged events using the
 Given you open the main page with Ngelehun and Malaria focus investigation context
 When you set the enrollment status filter to active
 And you apply the current filter
-And you set the assginee filter to none
+And you set the assginee filter to None
 And you apply the current filter
 Then the enrollment status filter button should show that the active filter is in effect
-And the assignee filter button should show that unassigned filter is in effect
+And the assignee filter button should show that None filter is in effect
 And the list should display teis with an active enrollment and unassinged events
 And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
@@ -200,6 +200,40 @@ Given you open the main page with Ngelehun and WHO RMNCH Tracker context and con
 And you set the event visit date to Today
 And you apply the current filter
 Then the working list is empty
+
+Scenario: The user can filter the Foci response assigned events
+Given you open the main page with Ngelehun and Malaria focus investigation context
+When you open the program stage filters from the more filters dropdown menu
+And you select the Foci response program stage
+And you apply the current filter
+And you set the assginee filter to Anyone
+And you apply the current filter
+Then the assignee filter button should show that Anyone filter is in effect
+And the assignee column is displayed
+
+Scenario: The assigned user data is kept when switching between working list types
+Given you open the main page with Ngelehun and Malaria focus investigation context
+And you filter by assigned Foci investigation & classification events
+And the assignee filter button should show that Anyone filter is in effect
+When you remove the program stage filter
+Then you don't see program stage working list events
+And the assignee filter button should show that Anyone filter is in effect
+When you set the assginee filter to None
+And you apply the current filter
+Then the assignee filter button should show that None filter is in effect
+When you open the program stage filters from the more filters dropdown menu
+And you select the Foci response program stage
+And you apply the current filter
+Then the assignee filter button should show that None filter is in effect
+
+@v>=40
+Scenario: The user can create and delete a program stage working list for Foci investigation & classification assigned events
+Given you open the main page with Ngelehun and Malaria focus investigation context
+And you filter by assigned Foci investigation & classification events
+When you save the list with the name Custom Program stage list
+Then the new Custom Program stage list is created
+And you delete the name Custom Program stage list
+Then the Custom Program stage list is deleted
 
 @v>=40
 Scenario: The user creates, updates and deletes a Program stage custom working list

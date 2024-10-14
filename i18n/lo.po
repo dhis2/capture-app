@@ -605,15 +605,6 @@ msgstr "ບໍ່ມີໂປແກຼມ"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "ໂປແກຣມທີ່ເລືອກໄວ້ບໍ່ຖືກຕ້ອງກັບຫົວໜ່ວຍອົງການຈັດຕັ້ງ"
 
-msgid "Online"
-msgstr "ມີການເຊື່ອມຕໍ່"
-
-msgid "Offline"
-msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
-
-msgid "Syncing"
-msgstr "ກຳລັງອັບເດດຂໍ້ມູນໃຫ້ຄືກັນ"
-
 msgid "Add note"
 msgstr "ຂຽນບັນທຶກລົງ"
 

@@ -7,6 +7,7 @@ export const FEATURES = Object.freeze({
     exportablePayload: 'exportablePayload',
     changelogs: 'changelogs',
     trackerImageEndpoint: 'trackerImageEndpoint',
+    trackerFileEndpoint: 'trackerFileEndpoint',
     trackedEntitiesCSV: 'trackedEntitiesCSV',
     newAocApiSeparator: 'newAocApiSeparator',
 });
@@ -18,6 +19,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.customIcons]: 41,
     [FEATURES.exportablePayload]: 41,
     [FEATURES.trackerImageEndpoint]: 41,
+    [FEATURES.trackerFileEndpoint]: 41,
     [FEATURES.newTransferQueryParam]: 41,
     [FEATURES.changelogs]: 41,
     [FEATURES.trackedEntitiesCSV]: 40,

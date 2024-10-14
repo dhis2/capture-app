@@ -598,15 +598,6 @@ msgstr "Program doesn't exist"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "Selected program is invalid for selected organisation unit"
 
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "Offline"
-
-msgid "Syncing"
-msgstr "Syncing"
-
 msgid "Add note"
 msgstr "Add note"
 
