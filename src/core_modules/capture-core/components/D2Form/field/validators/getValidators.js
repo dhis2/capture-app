@@ -39,7 +39,7 @@ export type ValidatorContainer = {
     validatingMessage?: string,
 }
 
-export const errorMessages = {
+const errorMessages = {
     COMPULSORY: i18n.t('A value is required'),
     NUMBER: i18n.t('Please provide a valid number'),
     INTEGER: i18n.t('Please provide a valid integer'),

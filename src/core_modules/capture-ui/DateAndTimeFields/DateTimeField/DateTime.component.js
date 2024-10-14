@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import defaultClasses from './dateTime.module.css';
+
 import { orientations } from '../../constants/orientations.const';
 import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
 import { DateTimeTime } from '../../internal/DateTimeInput/DateTimeTime.component';
@@ -40,7 +41,6 @@ export class DateTimeField extends Component<Props> {
 
     constructor(props: Props) {
         super(props);
-
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTimeBlur = this.handleTimeBlur.bind(this);
@@ -67,7 +67,7 @@ export class DateTimeField extends Component<Props> {
         const currentValue = this.getValue();
         this.handleBlur({
             time: timeValue,
-            date: currentValue.date || '',
+            date: currentValue.date,
         }, !!currentValue.date);
     }
 

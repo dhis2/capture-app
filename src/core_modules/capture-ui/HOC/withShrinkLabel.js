@@ -22,7 +22,6 @@ export const withShrinkLabel = () =>
 
             render() {
                 const { shrinkDisabled, ...passOnProps } = this.props;
-
                 const shrink = !!this.props.inFocus || !!this.props.value;
 
                 if (shrinkDisabled) {
