@@ -1,3 +1,17 @@
+## [101.10.1](https://github.com/dhis2/capture-app/compare/v101.10.0...v101.10.1) (2024-10-14)
+
+
+### Bug Fixes
+
+* [DHIS2-18028] User is able to add invalid related stages event ([#3795](https://github.com/dhis2/capture-app/issues/3795)) ([301585e](https://github.com/dhis2/capture-app/commit/301585ed17379900db642a05e0157d52107f96a2))
+
+# [101.10.0](https://github.com/dhis2/capture-app/compare/v101.9.1...v101.10.0) (2024-10-14)
+
+
+### Features
+
+* [DHIS2-17771] Org unit context in tables and lists ([#3813](https://github.com/dhis2/capture-app/issues/3813)) ([b1a720a](https://github.com/dhis2/capture-app/commit/b1a720afc58b281ec7fc50e5af39ac19f4ec0cf4))
+
 ## [101.9.1](https://github.com/dhis2/capture-app/compare/v101.9.0...v101.9.1) (2024-10-13)
 
 

@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Radio, colors, spacers, spacersNum, Button } from '@dhis2/ui';
+import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
@@ -45,6 +45,7 @@ export const RelatedStagesActionsPlain = ({
     type,
     relationshipName,
     scheduledLabel,
+    events,
     linkableEvents,
     relatedStagesDataValues,
     setRelatedStagesDataValues,
@@ -63,7 +64,7 @@ export const RelatedStagesActionsPlain = ({
             linkMode: action,
         }));
     };
-    const canAddNewEventToStage = useCanAddNewEventToStage(programStage, linkableEvents);
+    const canAddNewEventToStage = useCanAddNewEventToStage(programStage, events);
 
     if (!programStage) {
         return null;
