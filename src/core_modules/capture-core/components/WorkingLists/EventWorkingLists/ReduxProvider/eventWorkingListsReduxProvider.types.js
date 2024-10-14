@@ -79,7 +79,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onDeleteTemplate: DeleteTemplate,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
-    onSelectListRow: SelectRow,
+    onClickListRow: SelectRow,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,

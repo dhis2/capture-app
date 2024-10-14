@@ -13,3 +13,16 @@ export type Props = {|
     ...TrackerWorkingListsSetupOutputProps,
     ...ExtractedProps,
 |};
+
+export type TrackerWorkingListsViewMenuSetupOutputProps = {|
+    ...TrackerWorkingListsSetupOutputProps,
+    onLoadView: LoadTeiView,
+    onUpdateList: UpdateList,
+    customUpdateTrigger: ?string,
+    allRowsAreSelected: ?boolean,
+    selectedRows: { [key: string]: boolean },
+    onRowSelect: (id: string) => void,
+    onSelectAll: (rows: Array<string>) => void,
+    selectionInProgress: ?boolean,
+    bulkActionBarComponent: React$Element<any>,
+|};
