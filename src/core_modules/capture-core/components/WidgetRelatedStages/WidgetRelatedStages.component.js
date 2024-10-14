@@ -1,6 +1,7 @@
 // @flow
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { useRelatedStages } from './useRelatedStages';
+import { useOrgUnitAutoSelect } from '../../dataQueries';
 import type { Props, RelatedStageDataValueStates } from './WidgetRelatedStages.types';
 import type { ErrorMessagesForRelatedStages } from './RelatedStagesActions';
 import { RelatedStagesActions } from './RelatedStagesActions';
@@ -36,6 +37,15 @@ const WidgetRelatedStagesPlain = ({
         orgUnit: undefined,
         linkedEventId: undefined,
     });
+    const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
+    useEffect(() => {
+        if (!orgUnitLoading && data?.length === 1) {
+            setRelatedStageDataValues(prev => ({
+                ...prev,
+                orgUnit: data[0],
+            }));
+        }
+    }, [data, orgUnitLoading, setRelatedStageDataValues]);
 
     const addErrorMessage = (message: ErrorMessagesForRelatedStages) => {
         setErrorMessages((prevMessages: Object) => ({
@@ -81,7 +91,7 @@ const WidgetRelatedStagesPlain = ({
         }
     }, [formIsValid, relatedStageDataValues]);
 
-    if (!currentRelatedStagesStatus || !selectedRelationshipType || isLoadingEvents) {
+    if (!currentRelatedStagesStatus || !selectedRelationshipType || isLoadingEvents || orgUnitLoading) {
         return null;
     }
 
@@ -104,8 +114,8 @@ const WidgetRelatedStagesPlain = ({
     );
 };
 
-export const WidgetRelatedStages = forwardRef<Props, {|
+export const WidgetRelatedStages = forwardRef < Props, {|
     eventHasLinkableStageRelationship: Function,
-    formIsValidOnSave: Function,
-    getLinkedStageValues: Function
-|}>(WidgetRelatedStagesPlain);
+        formIsValidOnSave: Function,
+            getLinkedStageValues: Function
+                |}>(WidgetRelatedStagesPlain);
