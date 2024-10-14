@@ -19,7 +19,7 @@ import {
 import {
     isValidAge,
     isValidDate,
-    isValidNonFutureDate,
+    // isValidNonFutureDate,
     isValidDateTime,
     getNumberRangeValidator,
     getDateRangeValidator,
@@ -48,7 +48,7 @@ export const errorMessages = {
     NEGATIVE_INTEGER: i18n.t('Please provide a negative integer'),
     DATE: i18n.t('Please provide a valid date'),
     DATE_FUTURE_NOT_ALLOWED: i18n.t('A date in the future is not allowed'),
-    DATETIME: i18n.t('Please provide a valid date and time'),
+    DATETIME: i18n.t('Please provide both date and time'),
     TIME: i18n.t('Please provide a valid time'),
     PERCENTAGE: i18n.t('Please provide an integer between 0 and 100'),
     URL: i18n.t('Please provide a valid url'),
@@ -111,17 +111,11 @@ const validatorsForTypes = {
         message: errorMessages.TIME,
         type: validatorTypes.TYPE_BASE,
     }],
-    [dataElementTypes.DATE]: [
-        {
-            validator: isValidDate,
-            message: errorMessages.DATE,
-            type: validatorTypes.TYPE_BASE,
-        },
-        {
-            validator: (value: string, allowFutureDate) => (allowFutureDate ? true : isValidNonFutureDate(value)),
-            type: validatorTypes.TYPE_EXTENDED,
-            message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
-        }],
+    [dataElementTypes.DATE]: [{
+        validator: isValidDate,
+        message: errorMessages.DATE,
+        type: validatorTypes.INTERNAL,
+    }],
     [dataElementTypes.DATETIME]: [{
         validator: isValidDateTime,
         message: errorMessages.DATETIME,

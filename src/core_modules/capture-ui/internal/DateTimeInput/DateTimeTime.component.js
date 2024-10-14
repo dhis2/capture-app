@@ -21,7 +21,13 @@ class DateTimeTimePlain extends React.Component<Props> {
 
     render() {
         // $FlowFixMe[prop-missing] automated comment
-        const { onBlur, onChange, value, validationText, ...passOnProps } = this.props;
+        const { onBlur, onChange, value, validationText, innerMessage, ...passOnProps } = this.props;
+
+        const errorProps = innerMessage && innerMessage.messageType === 'error'
+            ? { error: !!innerMessage.message?.timeInnerErrorMessage,
+                validationText: innerMessage.message?.timeInnerErrorMessage }
+            : {};
+
         return (
             <InputField
                 {...passOnProps}
@@ -29,8 +35,7 @@ class DateTimeTimePlain extends React.Component<Props> {
                 label=""
                 onBlur={this.handleBlur}
                 onChange={this.handleChange}
-                error={!!validationText}
-                validationText={validationText}
+                {...errorProps}
             />
         );
     }

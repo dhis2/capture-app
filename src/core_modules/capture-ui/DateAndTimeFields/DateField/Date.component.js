@@ -2,22 +2,23 @@
 import React from 'react';
 import { CalendarInput } from '@dhis2/ui';
 import { systemSettingsStore } from '../../../capture-core/metaDataMemoryStores';
-import { errorMessages } from '../../../capture-core/components/D2Form/field/validators/getValidators';
+
 
 type Props = {
-    value: ?string,
+    value: ?Object,
     width: number,
     maxWidth?: ?number,
     calendarWidth?: ?number,
     inputWidth?: ?number,
     disabled?: ?boolean,
-    onBlur: (value: string) => void,
+    onBlur: (value: Object) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
     calendar?: string,
     placeholder?: string,
     label?: string,
     calendarMaxMoment?: any,
+    innerMessage?: any
 };
 
 type Validation = {|
@@ -30,43 +31,28 @@ type State = {
     calendarError: ?Validation,
 };
 
-const CUSTOM_VALIDATION_MESSAGES = {
-    WRONG_FORMAT: errorMessages.DATE,
-    // INVALID_DATE_MORE_THAN_MAX: errorMessages.DATE_FUTURE_NOT_ALLOWED,
-};
-
 const formatDate = (date: any, dateFormat: string): ?string =>
     (dateFormat === 'dd-MM-yyyy' ? date?.format('DD-MM-YYYY') : date?.format('YYYY-MM-DD'));
-
-const getErrorMessage = (validation: ?Validation): ?string => {
-    if (!validation) return undefined;
-
-    const { validationCode, validationText } = validation;
-    return CUSTOM_VALIDATION_MESSAGES[validationCode] || validationText || undefined;
-};
 
 export class DateField extends React.Component<Props, State> {
     handleDateSelected: (value: {calendarDateString: string}) => void;
 
     constructor(props: Props) {
         super(props);
-        this.state = {
-            calendarError: undefined,
-        };
+
         this.handleDateSelected = this.handleDateSelected.bind(this);
     }
 
     // eslint-disable-next-line max-len
     handleDateSelected(value: { calendarDateString: string, validation: Validation}) {
-        const { calendarDateString: selectedDate, validation } = value || {};
+        const { calendarDateString: date, validation } = value || {};
 
-        if (selectedDate !== undefined) {
-            const errorMessage = getErrorMessage(validation);
-            this.setState({
-                calendarError: errorMessage ? { ...validation, validationText: errorMessage } : null,
+        if (date !== undefined) {
+            this.props.onBlur({
+                date,
+                innerError: validation.validationText,
+                innerErrorCode: validation.validationCode,
             });
-
-            this.props.onBlur(selectedDate);
         }
 
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
@@ -80,14 +66,17 @@ export class DateField extends React.Component<Props, State> {
             inputWidth,
             calendar,
             calendarMaxMoment,
+            value,
+            innerMessage,
         } = this.props;
 
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
         const calendarType = calendar || 'gregory';
         const format = systemSettingsStore.get().dateFormat;
-        const errorProps = this.state.calendarError
-            ? { error: this.state.calendarError.error, validationText: this.state.calendarError.validationText }
+        const errorProps = innerMessage && innerMessage.messageType === 'error'
+            ? { error: !!innerMessage.message?.dateInnerErrorMessage,
+                validationText: innerMessage.message?.dateInnerErrorMessage }
             : {};
 
         return (
@@ -103,7 +92,7 @@ export class DateField extends React.Component<Props, State> {
                     format={format}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
-                    date={this.props.value}
+                    date={value?.date}
                     width={String(calculatedCalendarWidth)}
                     inputWidth={String(calculatedInputWidth)}
                     onFocus={this.props.onFocus}
