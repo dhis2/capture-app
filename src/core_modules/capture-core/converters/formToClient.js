@@ -15,13 +15,12 @@ type RangeValue = {
 }
 
 function convertDateTime(formValue: DateTimeValue): string {
-    const editedDate = formValue.date?.date;
-    const editedTime = formValue.time?.time;
+    const editedDate = formValue.date;
+    const editedTime = formValue.time;
 
     const momentTime = parseTime(editedTime).momentTime;
     const hours = momentTime.hour();
     const minutes = momentTime.minute();
-
     // $FlowFixMe[incompatible-type] automated comment
     const momentDateTime: moment$Moment = parseDate(editedDate).momentDate;
     momentDateTime.hour(hours);
@@ -29,10 +28,9 @@ function convertDateTime(formValue: DateTimeValue): string {
     return momentDateTime.toISOString();
 }
 
-function convertDate(dateValue: Object) {
+function convertDate(dateValue: string) {
     // $FlowFixMe[incompatible-use] automated comment
-    const { date } = dateValue;
-    return parseDate(date).momentDate.toISOString();
+    return parseDate(dateValue).momentDate.toISOString();
 }
 
 function convertTime(timeValue: string) {

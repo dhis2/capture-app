@@ -89,6 +89,7 @@ type Props = {
     pluginContext?: PluginContext,
     loadNr: number,
     onPostProcessErrorMessage?: PostProcessErrorMessage,
+    internalError: ?Object
 };
 
 type FieldCommitOptions = {
@@ -106,10 +107,25 @@ export class FormBuilder extends React.Component<Props> {
         value: any,
         validationContext: ?Object,
         onIsValidatingInternal: ?Function,
-    ): Promise<{ valid: boolean, errorMessage?: ?string, errorType?: ?string }> {
-        if (!validators || validators.length === 0) {
+        internalError: ?Object,
+    ): Promise<{ valid: boolean, errorMessage?: ?string | ?Object, errorType?: ?string }> {
+        const hasTruthyValue = internalError &&
+        typeof internalError === 'object' &&
+         Object.values(internalError).some(property => !!property);
+
+        if (!hasTruthyValue && (!validators || validators.length === 0)) {
             return {
                 valid: true,
+                pendingValidation: false,
+            };
+        }
+
+        if (hasTruthyValue) {
+            return {
+                valid: false,
+                errorMessage: { errorMessage: internalError },
+                errorType: 'internal',
+                errorData: internalError,
                 pendingValidation: false,
             };
         }
@@ -400,22 +416,22 @@ export class FormBuilder extends React.Component<Props> {
         return valueChanged;
     }
 
-    commitFieldUpdateFromDataElement(fieldId: string, value: any, options?: ?FieldCommitOptions) {
+    commitFieldUpdateFromDataElement(fieldId: string, value: any, options?: ?FieldCommitOptions, internalFieldError?: Object) {
         const { validators, onIsEqual } = this.getFieldProp(fieldId);
 
-        this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options);
+        this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options, internalFieldError);
     }
 
-    commitFieldUpdateFromPlugin(fieldMetadata: DataElement, value: any, options?: ?FieldCommitOptions) {
+    commitFieldUpdateFromPlugin(fieldMetadata: DataElement, value: any, options?: ?FieldCommitOptions, internalFieldError?: Object) {
         const { id: fieldId } = fieldMetadata;
         const { querySingleResource } = this.props;
         const validators = getValidators(fieldMetadata, querySingleResource);
 
         // $FlowFixMe - Async handled in business logic
-        this.commitFieldUpdate({ fieldId, validators }, value, options);
+        this.commitFieldUpdate({ fieldId, validators }, value, options, internalFieldError);
     }
 
-    async commitFieldUpdate({ fieldId, validators, onIsEqual }: FieldCommitConfig, value: any, options?: ?FieldCommitOptions) {
+    async commitFieldUpdate({ fieldId, validators, onIsEqual }: FieldCommitConfig, value: any, options?: ?FieldCommitOptions, internalFieldError?: ?Object) {
         const {
             onUpdateFieldUIOnly,
             onUpdateField,
@@ -459,6 +475,7 @@ export class FormBuilder extends React.Component<Props> {
             value,
             onGetValidationContext && onGetValidationContext(),
             handleIsValidatingInternal,
+            internalFieldError,
         )
             // $FlowFixMe[prop-missing] automated comment
             .then(({ valid, errorMessage, errorType, errorData }) => {

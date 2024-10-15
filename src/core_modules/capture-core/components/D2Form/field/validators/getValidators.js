@@ -18,9 +18,6 @@ import {
 } from 'capture-core-utils/validators/form';
 import {
     isValidAge,
-    isValidDate,
-    // isValidNonFutureDate,
-    isValidDateTime,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,
@@ -39,7 +36,7 @@ export type ValidatorContainer = {
     validatingMessage?: string,
 }
 
-const errorMessages = {
+export const errorMessages = {
     COMPULSORY: i18n.t('A value is required'),
     NUMBER: i18n.t('Please provide a valid number'),
     INTEGER: i18n.t('Please provide a valid integer'),
@@ -48,7 +45,7 @@ const errorMessages = {
     NEGATIVE_INTEGER: i18n.t('Please provide a negative integer'),
     DATE: i18n.t('Please provide a valid date'),
     DATE_FUTURE_NOT_ALLOWED: i18n.t('A date in the future is not allowed'),
-    DATETIME: i18n.t('Please provide both date and time'),
+    DATETIME: i18n.t('Please provide a valid date and time'),
     TIME: i18n.t('Please provide a valid time'),
     PERCENTAGE: i18n.t('Please provide an integer between 0 and 100'),
     URL: i18n.t('Please provide a valid url'),
@@ -109,16 +106,6 @@ const validatorsForTypes = {
     [dataElementTypes.TIME]: [{
         validator: isValidTime,
         message: errorMessages.TIME,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.DATE]: [{
-        validator: isValidDate,
-        message: errorMessages.DATE,
-        type: validatorTypes.INTERNAL,
-    }],
-    [dataElementTypes.DATETIME]: [{
-        validator: isValidDateTime,
-        message: errorMessages.DATETIME,
         type: validatorTypes.TYPE_BASE,
     }],
     [dataElementTypes.EMAIL]: [{

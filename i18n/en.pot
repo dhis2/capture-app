@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
-"PO-Revision-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-10-15T00:20:44.143Z\n"
+"PO-Revision-Date: 2024-10-15T00:20:44.144Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -101,8 +101,8 @@ msgstr "Please provide a valid date"
 msgid "A date in the future is not allowed"
 msgstr "A date in the future is not allowed"
 
-msgid "Please provide both date and time"
-msgstr "Please provide both date and time"
+msgid "Please provide a valid date and time"
+msgstr "Please provide a valid date and time"
 
 msgid "Please provide a valid time"
 msgstr "Please provide a valid time"
@@ -1765,6 +1765,9 @@ msgstr "Error updating the Assignee"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
+
+msgid "Please enter a valid time"
+msgstr "Please enter a valid time"
 
 msgid "Time"
 msgstr "Time"

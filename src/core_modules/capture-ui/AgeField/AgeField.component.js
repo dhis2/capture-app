@@ -206,6 +206,7 @@ class D2AgeFieldPlain extends Component<Props> {
             onParseDate,
             ...passOnProps
         } = this.props;
+
         const dateInputContainerClass = classNames(
             { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
         );
