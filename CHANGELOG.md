@@ -1,3 +1,10 @@
+## [101.11.2](https://github.com/dhis2/capture-app/compare/v101.11.1...v101.11.2) (2024-10-15)
+
+
+### Bug Fixes
+
+* [DHIS2-18056] use linkedEntityFormFoundation instead of the searchFormFoundation ([#3835](https://github.com/dhis2/capture-app/issues/3835)) ([cbfe70b](https://github.com/dhis2/capture-app/commit/cbfe70b850554678c7a8bad40e0874ea227fe65c))
+
 ## [101.11.1](https://github.com/dhis2/capture-app/compare/v101.11.0...v101.11.1) (2024-10-15)
 
 
