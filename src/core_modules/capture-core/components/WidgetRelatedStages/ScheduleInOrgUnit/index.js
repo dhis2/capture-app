@@ -1,2 +1,2 @@
 // @flow
-export { ScheduleInOrgUnit } from './ScheduleInOrgUnit.container';
+export { ScheduleInOrgUnit } from './ScheduleInOrgUnit.component';
