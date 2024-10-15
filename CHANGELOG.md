@@ -1,3 +1,10 @@
+## [101.11.1](https://github.com/dhis2/capture-app/compare/v101.11.0...v101.11.1) (2024-10-15)
+
+
+### Bug Fixes
+
+* [DHIS2-16993] Text and long text DEs are missing arrows in changelog when deleted ([#3827](https://github.com/dhis2/capture-app/issues/3827)) ([5e6dfa6](https://github.com/dhis2/capture-app/commit/5e6dfa6bb4b82a68305741bd4bb672a5a1af8f5f))
+
 # [101.11.0](https://github.com/dhis2/capture-app/compare/v101.10.2...v101.11.0) (2024-10-14)
 
 
