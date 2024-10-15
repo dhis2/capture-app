@@ -1,3 +1,10 @@
+# [101.12.0](https://github.com/dhis2/capture-app/compare/v101.11.2...v101.12.0) (2024-10-15)
+
+
+### Features
+
+* [DHIS2-17956] Display name for org unit in changelog ([#3826](https://github.com/dhis2/capture-app/issues/3826)) ([5299f37](https://github.com/dhis2/capture-app/commit/5299f37d33448616c0074ec6568a82c9c96f65cb))
+
 ## [101.11.2](https://github.com/dhis2/capture-app/compare/v101.11.1...v101.11.2) (2024-10-15)
 
 
