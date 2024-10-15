@@ -87,7 +87,7 @@ function convertStatusForDisplay(clientValue: Object) {
     );
 }
 
-function convertOrgUnitForDisplay(clientValue: string | Object) {
+function convertOrgUnitForDisplay(clientValue: string | {id: string}) {
     const orgUnitId = typeof clientValue === 'string' ? clientValue : clientValue.id;
     return (
         <TooltipOrgUnit orgUnitId={orgUnitId} />
