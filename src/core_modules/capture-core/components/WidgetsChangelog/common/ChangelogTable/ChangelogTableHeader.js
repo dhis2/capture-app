@@ -30,7 +30,7 @@ export const ChangelogTableHeader = ({ sortDirection, setSortDirection }: Props)
             <DataTableColumnHeader fixed top="0" width="85px">
                 {i18n.t('Change')}
             </DataTableColumnHeader>
-            <DataTableColumnHeader fixed top="0">
+            <DataTableColumnHeader fixed top="0" width="275px">
                 {i18n.t('Value')}
             </DataTableColumnHeader>
         </DataTableRow>

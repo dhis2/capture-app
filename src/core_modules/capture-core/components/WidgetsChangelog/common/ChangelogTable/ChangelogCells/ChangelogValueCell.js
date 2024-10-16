@@ -14,30 +14,43 @@ type Props = {
         container: string,
         previousValue: string,
         currentValue: string,
+        updatePreviousValue: string,
+        updateCurrentValue: string,
+        updateArrow: string,
     }
 }
 
 const styles = {
     container: {
-        display: 'flex',
         alignItems: 'center',
-        gap: spacers.dp4,
+        display: 'flex',
     },
     previousValue: {
         color: colors.grey700,
-        maxWidth: '50%',
     },
     currentValue: {
         color: colors.grey900,
-        maxWidth: '50%',
+    },
+    updatePreviousValue: {
+        color: colors.grey700,
+        maxWidth: '45%',
+    },
+    updateCurrentValue: {
+        color: colors.grey900,
+        maxWidth: '45%',
+    },
+    updateArrow: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        margin: `${spacers.dp4}`,
     },
 };
 
 const Updated = ({ previousValue, currentValue, classes }) => (
     <div className={classes.container}>
-        <span className={classes.previousValue}>{previousValue}</span>
-        <span><IconArrowRight16 /></span>
-        <span className={classes.currentValue}>{currentValue}</span>
+        <span className={classes.updatePreviousValue}>{previousValue}</span>
+        <span className={classes.updateArrow}><IconArrowRight16 /></span>
+        <span className={classes.updateCurrentValue}>{currentValue}</span>
     </div>
 );
 

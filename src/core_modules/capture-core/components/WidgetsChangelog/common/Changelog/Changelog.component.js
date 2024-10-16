@@ -36,7 +36,7 @@ export const ChangelogComponent = ({
             <DataTable
                 fixed
                 dataTest={'changelog-data-table'}
-                width="750px"
+                layout="fixed"
             >
                 <ChangelogTableHeader
                     sortDirection={sortDirection}
