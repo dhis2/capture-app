@@ -1,7 +1,7 @@
 // @flow
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 // $FlowFixMe
-import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { MainPageComponent } from './MainPage.component';
@@ -68,9 +68,11 @@ const useMainPageStatus = ({
 
 const useSelectorMainPage = () =>
     useSelector(
-        ({ currentSelections, activePage }) => ({
+        ({ currentSelections, activePage, workingListsTemplates, workingListsContext }) => ({
             categories: currentSelections.categories,
             selectedCategories: currentSelections.categoriesMeta,
+            reduxSelectedTemplateId: workingListsTemplates.teiList?.selectedTemplateId,
+            workingListProgramId: workingListsContext.teiList?.programIdView,
             ready: !activePage.isLoading && !activePage.lockedSelectorLoads,
             error: activePage.selectionsError && activePage.selectionsError.error,
         }),
@@ -103,6 +105,8 @@ const MainPageContainer = () => {
     const {
         categories,
         selectedCategories,
+        reduxSelectedTemplateId,
+        workingListProgramId,
         error,
         ready,
     } = useSelectorMainPage();
@@ -131,7 +135,18 @@ const MainPageContainer = () => {
     }, [showAllAccessible, dispatch]);
 
     useEffect(() => {
-        if (programId && trackedEntityTypeId && displayFrontPageList && selectedTemplateId === undefined) {
+        if (programId && trackedEntityTypeId && selectedTemplateId === undefined) {
+            if (reduxSelectedTemplateId && workingListProgramId === programId) {
+                handleChangeTemplateUrl({
+                    programId,
+                    orgUnitId,
+                    selectedTemplateId: reduxSelectedTemplateId,
+                    showAllAccessible,
+                    history,
+                });
+                return;
+            }
+            if (!displayFrontPageList) return;
             handleChangeTemplateUrl({
                 programId,
                 orgUnitId,
@@ -148,6 +163,8 @@ const MainPageContainer = () => {
         trackedEntityTypeId,
         displayFrontPageList,
         history,
+        reduxSelectedTemplateId,
+        workingListProgramId,
     ]);
 
     return (
