@@ -3,7 +3,6 @@ import React from 'react';
 import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingListsInit } from '../EventWorkingListsInit';
 import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
-import { OptIn, OptOut } from '../../../OptInOut';
 import type { Props } from './workingListsType.types';
 
 export const WorkingListsType = ({ programId, orgUnitId, selectedTemplateId, onChangeTemplate }: Props) => {
@@ -15,14 +14,12 @@ export const WorkingListsType = ({ programId, orgUnitId, selectedTemplateId, onC
     if (programType === programTypes.TRACKER_PROGRAM) {
         return (
             <>
-                <OptIn programId={programId} />
                 <TeiWorkingLists
                     programId={programId}
                     orgUnitId={orgUnitId}
                     selectedTemplateId={selectedTemplateId}
                     onChangeTemplate={onChangeTemplate}
                 />
-                <OptOut programId={programId} />
             </>
         );
     }

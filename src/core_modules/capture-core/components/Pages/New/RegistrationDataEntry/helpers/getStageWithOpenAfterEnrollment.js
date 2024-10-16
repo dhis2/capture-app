@@ -13,13 +13,12 @@ export const PAGES = {
 export const getStageWithOpenAfterEnrollment = (
     stages: Map<string, ProgramStage>,
     useFirstStageDuringRegistration: boolean,
-    shouldRedirect: boolean,
 ) => {
     const stagesArray = [...stages.values()];
     const [firstStageWithOpenAfterEnrollment] = stagesArray.filter(({ openAfterEnrollment }) => openAfterEnrollment);
 
     const redirectTo = (() => {
-        if (shouldRedirect && firstStageWithOpenAfterEnrollment) {
+        if (firstStageWithOpenAfterEnrollment) {
             // event will be created during first stage registration
             if (
                 useFirstStageDuringRegistration
