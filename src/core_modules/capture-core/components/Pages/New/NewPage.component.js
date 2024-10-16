@@ -7,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { TopBar } from './TopBar.container';
+
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { NEW_TEI_DATA_ENTRY_ID, newPageStatuses } from './NewPage.constants';
@@ -36,11 +36,7 @@ const NewPagePlain = ({
     categoryOptionIsInvalidForOrgUnit,
     missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
-    isUserInteractionInProgress,
-    programId,
-    teiId,
     trackedEntityName,
-    teiDisplayName,
     trackedEntityInstanceAttributes,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
@@ -72,16 +68,7 @@ const NewPagePlain = ({
     ]);
     const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
 
-    return (<>
-        <TopBar
-            orgUnitId={orgUnitId}
-            programId={programId}
-            isUserInteractionInProgress={isUserInteractionInProgress}
-            teiId={teiId}
-            trackedEntityName={trackedEntityName}
-            teiDisplayName={teiDisplayName}
-            formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
-        />
+    return (
         <div data-test="registration-page-content" className={classes.container} >
             {
                 !writeAccess ?
@@ -154,7 +141,7 @@ const NewPagePlain = ({
                     </OrgUnitFetcher>
             }
         </div>
-    </>);
+    );
 };
 
 export const NewPageComponent: ComponentType<ContainerProps> =

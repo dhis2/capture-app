@@ -11,6 +11,7 @@ import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
+import { TopBar } from './TopBar.container';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -169,6 +170,7 @@ const MainPageContainer = () => {
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId} error={error}>
+            <TopBar programId={programId} orgUnitId={orgUnitId} selectedCategories={selectedCategories} />
             <MainPageComponent
                 MainPageStatus={MainPageStatus}
                 programId={programId}
@@ -180,7 +182,6 @@ const MainPageContainer = () => {
                 error={error}
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
-                selectedCategories={selectedCategories}
             />
         </OrgUnitFetcher>
     );

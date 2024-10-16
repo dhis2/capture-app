@@ -1,27 +1,21 @@
 // @flow
 
-type PassOnProps = $ReadOnly<{|
+export type ContainerProps = $ReadOnly<{|
     programId: string,
     orgUnitId: string,
     selectedTemplateId?: string,
+    trackedEntityTypeId?: string,
+    displayFrontPageList?: boolean,
     onChangeTemplate?: (selectedTemplateId?: string) => void,
-|}>;
-
-export type PlainProps = $ReadOnly<{|
-    ...PassOnProps,
     setShowAccessible: () => void,
     MainPageStatus: boolean,
     selectedTemplateId: string,
-    showMainPage: boolean,
-    ...CssClasses,
-|}>;
-
-export type Props = $ReadOnly<{|
-    ...PassOnProps,
-    ...PlainProps,
     error: boolean,
     ready: boolean,
-    trackedEntityTypeId?: string,
-    displayFrontPageList?: boolean,
-    selectedCategories: ?{ [categoryId: string]: { writeAccess: boolean } },
+|}
+>;
+
+export type Props = $ReadOnly<{|
+    ...ContainerProps,
+    ...CssClasses
 |}>;

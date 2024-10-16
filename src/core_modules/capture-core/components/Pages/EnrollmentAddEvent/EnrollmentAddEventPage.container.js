@@ -1,10 +1,11 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
-import { useLocationQuery } from '../../../utils/routing';
+import { useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
 import {
     IdTypes,
     useValidatedIDsFromCache,
@@ -27,6 +28,7 @@ const styles = {
     },
 };
 const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
+    const history = useHistory();
     const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
     const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });
     const {
@@ -63,6 +65,12 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
         return EnrollmentAddEventPageStatuses.DEFAULT;
     }, [enrollmentId, isLoading, loading, pageIsInvalid, programId, teiId, validIds]);
 
+    useEffect(() => {
+        if (pageStatus === EnrollmentAddEventPageStatuses.PROGRAM_INVALID) {
+            history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, teiId, enrollmentId })}`);
+        }
+    }, [pageStatus, orgUnitId, teiId, enrollmentId, history]);
+
     if (pageStatus === EnrollmentAddEventPageStatuses.LOADING) {
         return <LoadingMaskForPage />;
     }
@@ -87,10 +95,6 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
             >
                 {pageStatus === EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES && (
                     i18n.t('Page is missing required values from URL')
-                )}
-
-                {pageStatus === EnrollmentAddEventPageStatuses.PROGRAM_INVALID && (
-                    i18n.t('Program is not valid')
                 )}
 
                 {pageStatus === EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID && (

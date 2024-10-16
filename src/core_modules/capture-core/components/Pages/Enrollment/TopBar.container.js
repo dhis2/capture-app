@@ -52,19 +52,21 @@ export const TopBar = ({
             onResetOrgUnitId={() => resetOrgUnitId()}
             onStartAgain={() => reset()}
         >
-            <SingleLockedSelect
-                ready={Boolean(trackedEntityName && teiDisplayName)}
-                onClear={() => resetTeiId('/')}
-                options={[
-                    {
-                        label: teiDisplayName,
-                        value: 'alwaysPreselected',
-                    },
-                ]}
-                selectedValue="alwaysPreselected"
-                title={trackedEntityName}
-                displayOnly
-            />
+            {trackedEntityName ? (
+                <SingleLockedSelect
+                    ready={Boolean(trackedEntityName && teiDisplayName)}
+                    onClear={() => resetTeiId('/')}
+                    options={[
+                        {
+                            label: teiDisplayName,
+                            value: 'alwaysPreselected',
+                        },
+                    ]}
+                    selectedValue="alwaysPreselected"
+                    title={trackedEntityName}
+                    displayOnly
+                />
+            ) : <></>}
             {enrollmentsAsOptions?.length > 0 ? (
                 <SingleLockedSelect
                     ready

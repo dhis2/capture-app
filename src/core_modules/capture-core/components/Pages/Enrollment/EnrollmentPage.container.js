@@ -24,6 +24,7 @@ import {
     useSetEnrollmentId,
 } from '../../ScopeSelector';
 import { useLocationQuery } from '../../../utils/routing';
+import { TopBar } from './TopBar.container';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
@@ -114,15 +115,26 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     return (
-        <EnrollmentPageComponent
-            error={error}
-            programId={programId}
-            orgUnitId={orgUnitId}
-            enrollmentId={enrollmentId}
-            teiDisplayName={teiDisplayName}
-            trackedEntityName={trackedEntityName}
-            enrollmentsAsOptions={enrollmentsAsOptions}
-            enrollmentPageStatus={useComputedEnrollmentPageStatus()}
-        />
+        <>
+            <TopBar
+                orgUnitId={orgUnitId}
+                programId={programId}
+                trackedEntityName={trackedEntityName}
+                teiDisplayName={teiDisplayName}
+                enrollmentsAsOptions={enrollmentsAsOptions}
+                enrollmentId={enrollmentId}
+            />
+            <EnrollmentPageComponent
+                error={error}
+                programId={programId}
+                orgUnitId={orgUnitId}
+                enrollmentId={enrollmentId}
+                teiDisplayName={teiDisplayName}
+                trackedEntityName={trackedEntityName}
+                enrollmentsAsOptions={enrollmentsAsOptions}
+                enrollmentPageStatus={useComputedEnrollmentPageStatus()}
+            />
+        </>
+
     );
 };
