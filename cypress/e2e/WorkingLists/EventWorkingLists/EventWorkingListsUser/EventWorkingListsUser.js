@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
-import '../../sharedSteps';
+import '../sharedSteps';
 import { getCurrentYear, combineDataAndYear } from '../../../../support/date';
 
 Given('you open the main page with Ngelehun and malaria case context', () => {

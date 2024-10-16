@@ -591,15 +591,6 @@ msgstr "项目不存在"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "在线"
-
-msgid "Offline"
-msgstr "离线"
-
-msgid "Syncing"
-msgstr "同步"
-
 msgid "Add note"
 msgstr "添加笔记"
 

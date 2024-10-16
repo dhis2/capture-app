@@ -2,6 +2,7 @@
 import { dataElementTypes } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
 import { featureAvailable, FEATURES } from '../../../../capture-core-utils';
+import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
 
 type SubValueFunctionProps = {
     dataElement: Object,
@@ -18,7 +19,9 @@ const getFileResourceSubvalue = async ({ dataElement, querySingleResource, event
     return {
         id,
         name,
-        url: `${absoluteApiPath}/events/files?dataElementUid=${dataElement.id}&eventUid=${eventId}`,
+        url: featureAvailable(FEATURES.trackerFileEndpoint)
+            ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElement.id}/file`
+            : `${absoluteApiPath}/events/files?dataElementUid=${dataElement.id}&eventUid=${eventId}`,
     };
 };
 
@@ -42,15 +45,9 @@ const getImageSubvalue = async ({ dataElement, querySingleResource, eventId, abs
     };
 };
 
-const getOrganisationUnitSubvalue = async ({ dataElement, querySingleResource }: SubValueFunctionProps) => {
-    const organisationUnit = await querySingleResource({
-        resource: 'organisationUnits',
-        id: dataElement.value,
-        params: {
-            fields: 'id,name',
-        },
-    });
-    return { ...organisationUnit };
+const getOrganisationUnitSubvalue = async ({ dataElement: { value }, querySingleResource }: SubValueFunctionProps) => {
+    const organisationUnits = await getOrgUnitNames([value], querySingleResource);
+    return organisationUnits[value];
 };
 
 export const subValueGetterByElementType = {

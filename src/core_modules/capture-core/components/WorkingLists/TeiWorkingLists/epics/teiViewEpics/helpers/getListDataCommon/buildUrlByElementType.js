@@ -5,9 +5,19 @@ import { dataElementTypes } from '../../../../../../../metaData';
 const buildTEAUrlByElementType: {|
     [string]: Function,
 |} = {
-    [dataElementTypes.FILE_RESOURCE]: ({ trackedEntity, id }: { trackedEntity: string, id: string }) => ({
-        fileUrl: `/trackedEntityInstances/${trackedEntity}/${id}/file`,
-    }),
+    [dataElementTypes.FILE_RESOURCE]: ({
+        trackedEntity,
+        id,
+        programId,
+    }: {
+        trackedEntity: string,
+        id: string,
+        programId: string,
+    }) =>
+        (featureAvailable(FEATURES.trackerFileEndpoint)
+            ? { fileUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/file?program=${programId}` }
+            : { fileUrl: `/trackedEntityInstances/${trackedEntity}/${id}/file` }
+        ),
     [dataElementTypes.IMAGE]: ({
         trackedEntity,
         id,
@@ -31,9 +41,11 @@ const buildTEAUrlByElementType: {|
 const buildDataElementUrlByElementType: {|
     [string]: Function,
 |} = {
-    [dataElementTypes.FILE_RESOURCE]: ({ event, id }: { event: string, id: string }) => ({
-        fileUrl: `/events/files?dataElementUid=${id}&eventUid=${event}`,
-    }),
+    [dataElementTypes.FILE_RESOURCE]: ({ event, id }: { event: string, id: string }) =>
+        (featureAvailable(FEATURES.trackerFileEndpoint)
+            ? { fileUrl: `/tracker/events/${event}/dataValues/${id}/file` }
+            : { fileUrl: `/events/files?dataElementUid=${id}&eventUid=${event}` }
+        ),
     [dataElementTypes.IMAGE]: ({ event, id }: { event: string, id: string }) =>
         (featureAvailable(FEATURES.trackerImageEndpoint)
             ? {

@@ -17,16 +17,26 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
     const getFileResourceSubvalue = async (keys: Array<string>) => {
         const promises = keys
             .map(async (key) => {
-                const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: key });
-                return {
-                    id,
-                    name,
-                };
+                try {
+                    const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: key });
+                    return {
+                        id,
+                        name,
+                    };
+                } catch (error) {
+                    log.error(
+                        errorCreator('subValue not found')({ key }),
+                    );
+                    return null;
+                }
             });
 
         return (await Promise.all(promises))
-            .reduce((acc, { id, name }) => {
-                acc[id] = name;
+            .reduce((acc, file) => {
+                if (file) {
+                    const { id, name } = file;
+                    acc[id] = name;
+                }
                 return acc;
             }, {});
     };
