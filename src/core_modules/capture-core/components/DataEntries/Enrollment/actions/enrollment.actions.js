@@ -7,16 +7,32 @@ export const actionTypes = {
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForNewEnrollment',
 };
 
-export const startRunRulesOnUpdateForNewEnrollment = (
+export const startRunRulesOnUpdateForNewEnrollment = ({
+    payload,
+    uid,
+    programId,
+    orgUnit,
+    stage,
+    formFoundation,
+    onGetValidationContext,
+}: {
     payload: Object,
     uid: string,
     programId: string,
     orgUnit: OrgUnit,
     stage?: ProgramStage,
     formFoundation: RenderFoundation,
-) =>
-    actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(
-        { innerPayload: payload, uid, programId, orgUnit, stage, formFoundation });
+    onGetValidationContext: () => Object,
+}) =>
+    actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)({
+        innerPayload: payload,
+        uid,
+        programId,
+        orgUnit,
+        stage,
+        formFoundation,
+        onGetValidationContext,
+    });
 
 export const startAsyncUpdateFieldForNewEnrollment = (
     innerAction: ReduxAction<any, any>,

@@ -13,6 +13,8 @@ import type {
 import { rulesEngine } from '../../../../rules/rulesEngine';
 import type { RenderFoundation } from '../../../../metaData';
 import { updateRulesEffects, postProcessRulesEffects, buildEffectsHierarchy } from '../../../../rules';
+import type { QuerySingleResource } from '../../../../utils/api';
+import { validateAssignEffects } from '../../../D2Form';
 
 const getEnrollmentForRulesExecution = enrollment =>
     enrollment && {
@@ -36,12 +38,30 @@ const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
         {},
     );
 
-const getRulesActions = (rulesEffects: OutputEffects, foundation: RenderFoundation, formId: string) => {
-    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(rulesEffects, foundation));
-    return [updateRulesEffects(effectsHierarchy, formId)];
+const getRulesActions = async ({
+    effects,
+    foundation,
+    formId,
+    querySingleResource,
+    onGetValidationContext,
+}: {
+    effects: OutputEffects,
+    foundation: RenderFoundation,
+    formId: string,
+    querySingleResource: QuerySingleResource,
+    onGetValidationContext: () => Object,
+}) => {
+    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
+    const effectsWithValidations = await validateAssignEffects({
+        dataElements: foundation.getElements(),
+        effects: effectsHierarchy,
+        querySingleResource,
+        onGetValidationContext,
+    });
+    return updateRulesEffects(effectsWithValidations, formId);
 };
 
-export const getRulesActionsForTEI = ({
+export const getRulesActionsForTEI = async ({
     foundation,
     formId,
     orgUnit,
@@ -53,6 +73,8 @@ export const getRulesActionsForTEI = ({
     otherEvents,
     dataElements,
     userRoles,
+    querySingleResource,
+    onGetValidationContext,
 }: {
     foundation: RenderFoundation,
     formId: string,
@@ -65,6 +87,8 @@ export const getRulesActionsForTEI = ({
     otherEvents?: ?EventsData,
     dataElements: ?DataElements,
     userRoles: Array<string>,
+    querySingleResource: QuerySingleResource,
+    onGetValidationContext: () => Object,
 }) => {
     const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: rulesContainer,
@@ -78,5 +102,5 @@ export const getRulesActionsForTEI = ({
         selectedUserRoles: userRoles,
         optionSets,
     });
-    return getRulesActions(effects, foundation, formId);
+    return getRulesActions({ effects, foundation, formId, querySingleResource, onGetValidationContext });
 };

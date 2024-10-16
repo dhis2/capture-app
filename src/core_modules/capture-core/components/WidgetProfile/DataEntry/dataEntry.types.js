@@ -13,7 +13,7 @@ export type PlainProps = {|
     formFoundation: any,
     onCancel: () => void,
     onSave: () => void,
-    onUpdateFormField: () => void,
+    onUpdateFormField: (innerAction: ReduxAction<any, any>) => void,
     onUpdateFormFieldAsync: (innerAction: ReduxAction<any, any>) => void,
     onGetValidationContext: () => Object,
     modalState: string,

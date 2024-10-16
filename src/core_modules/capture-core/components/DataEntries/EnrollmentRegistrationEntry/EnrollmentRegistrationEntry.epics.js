@@ -11,7 +11,11 @@ import { getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 import type { TrackerProgram } from '../../../metaData/Program';
 
-export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: InputObservable) =>
+export const startNewEnrollmentDataEntrySelfInitialisationEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
@@ -45,6 +49,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: Input
                     firstStage,
                     programCategory,
                     formFoundation,
+                    querySingleResource,
                 });
 
                 return from(openEnrollmentPromise);
