@@ -1,12 +1,11 @@
 // @flow
 import React, { useCallback, useMemo, useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { PlainProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
-import { DefaultPageTitle, EnrollmentPageKeys } from './DefaultEnrollmentLayout.constants';
+import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
 
 const getEnrollmentPageStyles = () => ({
     container: {
@@ -15,6 +14,9 @@ const getEnrollmentPageStyles = () => ({
     },
     contentContainer: {
         position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp12,
     },
     columns: {
         display: 'flex',
@@ -41,28 +43,23 @@ const getEnrollmentPageStyles = () => ({
         color: colors.grey900,
         fontWeight: 500,
         paddingTop: spacersNum.dp8,
-        paddingBottom: spacersNum.dp16,
     },
 });
 
 // Function to validate hex color
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
-const getTitle = (inputTitle, page) => {
-    const title = inputTitle || i18n.t('Enrollment');
-    const titles = {
-        [EnrollmentPageKeys.OVERVIEW]: !inputTitle ? `${title} ${DefaultPageTitle.OVERVIEW}` : title,
-        [EnrollmentPageKeys.NEW_EVENT]: `${title}: ${DefaultPageTitle.NEW_EVENT}`,
-        [EnrollmentPageKeys.EDIT_EVENT]: `${title}: ${DefaultPageTitle.EDIT_EVENT}`,
-        [EnrollmentPageKeys.VIEW_EVENT]: `${title}: ${DefaultPageTitle.VIEW_EVENT}`,
-    };
-    return titles[page] || title;
-};
-
 const EnrollmentPageLayoutPlain = ({
     pageLayout,
     availableWidgets,
+    program,
+    trackedEntityName,
+    userInteractionInProgress,
+    eventStatus,
     currentPage,
+    onBackToMainPage,
+    onBackToDashboard,
+    onBackToViewEvent,
     classes,
     ...passOnProps
 }: PlainProps) => {
@@ -73,10 +70,19 @@ const EnrollmentPageLayoutPlain = ({
 
     const allProps = useMemo(() => ({
         ...passOnProps,
+        program,
         currentPage,
+        eventStatus,
         toggleVisibility,
         addRelationShipContainerElement,
-    }), [addRelationShipContainerElement, currentPage, passOnProps, toggleVisibility]);
+    }), [
+        addRelationShipContainerElement,
+        currentPage,
+        eventStatus,
+        passOnProps,
+        program,
+        toggleVisibility,
+    ]);
 
     const {
         leftColumnWidgets,
@@ -99,7 +105,19 @@ const EnrollmentPageLayoutPlain = ({
                 className={classes.contentContainer}
                 style={!mainContentVisible ? { display: 'none' } : undefined}
             >
-                <div className={classes.title}>{getTitle(pageLayout.title, currentPage)}</div>
+                <div>
+                    <EnrollmentBreadcrumb
+                        page={currentPage}
+                        onBackToMainPage={onBackToMainPage}
+                        onBackToDashboard={onBackToDashboard}
+                        onBackToViewEvent={onBackToViewEvent}
+                        programId={program.id}
+                        trackedEntityName={trackedEntityName}
+                        displayFrontPageList={program.displayFrontPageList}
+                        userInteractionInProgress={userInteractionInProgress}
+                        eventStatus={eventStatus}
+                    />
+                </div>
                 <div className={classes.columns}>
                     {pageLayout.leftColumn && !!leftColumnWidgets?.length && (
                         <div className={classes.leftColumn}>

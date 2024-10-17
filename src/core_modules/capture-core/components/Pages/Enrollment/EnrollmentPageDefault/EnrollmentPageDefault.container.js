@@ -9,29 +9,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
-    useCommonEnrollmentDomainData,
-    useRuleEffects,
+    commitEnrollmentAndEvents,
+    rollbackEnrollmentAndEvents,
+    showEnrollmentError,
+    updateEnrollmentAndEvents,
     updateEnrollmentAttributeValues,
     updateEnrollmentDate,
     updateIncidentDate,
-    showEnrollmentError,
-    updateEnrollmentAndEvents,
-    commitEnrollmentAndEvents,
-    rollbackEnrollmentAndEvents,
+    useCommonEnrollmentDomainData,
+    useRuleEffects,
 } from '../../common/EnrollmentOverviewDomain';
 import {
-    updateEnrollmentDate as updateTopBarEnrollmentDate,
     deleteEnrollment,
+    updateEnrollmentDate as updateTopBarEnrollmentDate,
     updateTeiDisplayName,
 } from '../EnrollmentPage.actions';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
-import { EnrollmentPageLayout, DataStoreKeyByPage } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
-import {
-    useProgramMetadata,
-    useHideWidgetByRuleLocations,
-    useProgramStages,
-} from './hooks';
+import { DataStoreKeyByPage, EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import { useHideWidgetByRuleLocations, useProgramMetadata, useProgramStages } from './hooks';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
@@ -181,6 +177,10 @@ export const EnrollmentPageDefault = () => {
         dispatch(commitEnrollmentAndEvents());
     }, [dispatch]);
 
+    const onBackToMainPage = useCallback(() => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [history, orgUnitId, programId]);
+
     if (isLoading) {
         return (
             <LoadingMaskForPage />
@@ -208,6 +208,8 @@ export const EnrollmentPageDefault = () => {
             onDelete={onDelete}
             onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
             onViewAll={onViewAll}
+            onBackToMainPage={onBackToMainPage}
+            trackedEntityName={program.trackedEntityType.name}
             onCreateNew={onCreateNew}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
