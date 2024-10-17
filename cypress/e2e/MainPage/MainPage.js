@@ -1,4 +1,4 @@
-import { Given, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { defineStep as And, Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Given('you are in the search page with Ngelehun and MNCH PNC context', () => {
     cy.visit('/#/search?orgUnitId=DiszpKrYNg8&programId=uy2gU8kT1jF');
@@ -20,13 +20,13 @@ And('you can load the view with the name Events assigned to me', () => {
 });
 
 Then('the icon is rendered as a custom icon', () => {
-    cy.get('[alt="child_program_positive"]')
+    cy.get('[title="child_program_positive"]')
         .invoke('attr', 'src')
         .should('match', /\/icons\/child_program_positive\/icon$/);
 });
 
 Then('the icon is rendered as an svg', () => {
-    cy.get('[alt="child_program_positive"]')
+    cy.get('[title="child_program_positive"]')
         .invoke('attr', 'src')
         .should('match', /\/icons\/child_program_positive\/icon.svg$/);
 });
