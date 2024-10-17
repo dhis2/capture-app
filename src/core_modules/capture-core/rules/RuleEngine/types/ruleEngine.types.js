@@ -30,6 +30,7 @@ type EventMain = {
     +occurredAt?: string,
     +scheduledAt?: string,
     +completedAt?: string,
+    +createdAt?: string,
 };
 
 export type EventValues = {

@@ -2,7 +2,7 @@
 import { Instant, LocalDate } from '@js-joda/core';
 import {
     RuleActionJs,
-    RuleDataValueJs,
+    RuleDataValue,
     RuleEngineContextJs,
     RuleEnrollmentJs,
     RuleEventJs,
@@ -61,6 +61,7 @@ const eventMainKeys = new Set([
     'enrollmentStatus',
     'status',
     'occurredAt',
+    'createdAt',
     'scheduledAt',
     'completedAt',
 ]);
@@ -248,18 +249,18 @@ export class InputBuilder {
             programStageName,
             status,
             occurredAt,
-            createdAt: createdDate,
+            createdAt,
             scheduledAt: dueDate,
             completedAt: completedDate,
         } = eventData;
 
         const eventDate = occurredAt ? Instant.parse(occurredAt) : Instant.now();
-
+        const createdDate = createdAt ? Instant.parse(createdAt) : Instant.now();
         const dataValues = Object
             .keys(eventData)
             .filter(key => !eventMainKeys.has(key))
             .map(key =>
-                new RuleDataValueJs(
+                new RuleDataValue(
                     key,
                     this.convertDataElementValue(key, eventData[key]),
                 ));
@@ -267,10 +268,10 @@ export class InputBuilder {
         return new RuleEventJs(
             event,
             programStage,
-            programStageName,
+            programStageName || '',
             status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
             eventDate,
-            Instant.parse(createdDate),
+            createdDate,
             this.toLocalDate(dueDate),
             this.toLocalDate(completedDate),
             this.selectedOrgUnit.id,
