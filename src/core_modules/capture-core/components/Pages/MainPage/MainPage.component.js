@@ -19,10 +19,6 @@ import {
 const getStyles = () => ({
     listContainer: {
         padding: 24,
-        paddingTop: 10,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: spacers.dp12,
     },
     container: {
         display: 'flex',
