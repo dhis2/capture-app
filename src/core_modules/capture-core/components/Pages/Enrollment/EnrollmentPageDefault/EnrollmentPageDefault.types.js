@@ -2,11 +2,12 @@
 import { typeof effectActions } from '@dhis2/rules-engine-javascript';
 import type { TrackerProgram } from 'capture-core/metaData';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
-import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
+import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
 import type { Event } from '../../common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import type { LinkedRecordClick } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import type {
-    PageLayoutConfig, WidgetConfig,
+    PageLayoutConfig,
+    WidgetConfig,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 import {
     EnrollmentPageKeys,
@@ -22,6 +23,11 @@ export type Props = {|
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     orgUnitId: string,
+    onBackToMainPage: () => void,
+    onBackToDashboard?: () => void,
+    onBackToViewEvent?: () => void,
+    userInteractionInProgress?: boolean,
+    eventStatus?: string,
     onDelete: () => void,
     onAddNew: () =>void,
     onViewAll: (stageId: string) => void,
@@ -41,6 +47,7 @@ export type Props = {|
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
     onDeleteTrackedEntitySuccess: () => void,
+    trackedEntityName: string,
 |};
 
 export type PlainProps = {|

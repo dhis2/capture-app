@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { WorkingListsType } from './WorkingListsType';
-import type { Props, PlainProps } from './mainPage.types';
+import type { PlainProps, Props } from './mainPage.types';
 import { MainPageStatuses } from './MainPage.constants';
 import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
 import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage/WithoutCategorySelectedMessage';
@@ -19,6 +19,10 @@ import {
 const getStyles = () => ({
     listContainer: {
         padding: 24,
+        paddingTop: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp12,
     },
     container: {
         display: 'flex',

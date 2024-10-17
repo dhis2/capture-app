@@ -1,15 +1,15 @@
 // @flow
 import { connect } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
-import { startGoBackToMainPage, setAssignee, rollbackAssignee } from './viewEvent.actions';
+import { rollbackAssignee, setAssignee, startGoBackToMainPage } from './viewEvent.actions';
 import { ViewEventComponent } from './ViewEvent.component';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 
 import { withErrorMessageHandler } from '../../../../HOC/withErrorMessageHandler';
 import {
-    makeProgramStageSelector,
-    makeEventAccessSelector,
     makeAssignedUserContextSelector,
+    makeEventAccessSelector,
+    makeProgramStageSelector,
 } from './viewEvent.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 
@@ -34,6 +34,7 @@ const makeMapStateToProps = (_, ownProps) => {
             assignee: state.viewEventPage.loadedValues?.eventContainer.event.assignee,
             getAssignedUserSaveContext: () => assignedUserContextSelector(state),
             eventId: state.viewEventPage.eventId,
+            showEditEvent: eventDetailsSection.showEditEvent,
         };
     };
 };

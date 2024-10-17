@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-10T14:29:59.249Z\n"
-"PO-Revision-Date: 2024-10-10T14:29:59.249Z\n"
+"POT-Creation-Date: 2024-10-16T14:15:58.172Z\n"
+"PO-Revision-Date: 2024-10-16T14:15:58.172Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -34,6 +34,39 @@ msgstr ""
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
+
+msgid "Enrollment dashboard"
+msgstr "Enrollment dashboard"
+
+msgid "View event"
+msgstr "View event"
+
+msgid "Edit event"
+msgstr "Edit event"
+
+msgid "New event"
+msgstr "New event"
+
+msgid "Active enrollments"
+msgstr "Active enrollments"
+
+msgid "Completed enrollments"
+msgstr "Completed enrollments"
+
+msgid "Cancelled enrollments"
+msgstr "Cancelled enrollments"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "{{trackedEntityName}} list"
+msgstr "{{trackedEntityName}} list"
+
+msgid "Working List"
+msgstr "Working List"
+
+msgid "Event list"
+msgstr "Event list"
 
 msgid "More"
 msgstr "More"
@@ -293,9 +326,6 @@ msgstr "Yes, discard changes"
 msgid "No, cancel"
 msgstr "No, cancel"
 
-msgid "New event"
-msgstr "New event"
-
 msgid "You don't have access to create an event in the current selections"
 msgstr "You don't have access to create an event in the current selections"
 
@@ -513,9 +543,6 @@ msgstr "Type to filter options"
 
 msgid "No match found"
 msgstr "No match found"
-
-msgid "Search"
-msgstr "Search"
 
 msgid "Clear"
 msgstr "Clear"
@@ -747,9 +774,6 @@ msgstr "Program Stages could not be loaded"
 msgid "Stage"
 msgstr "Stage"
 
-msgid "Registered events"
-msgstr "Registered events"
-
 msgid ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
@@ -857,9 +881,6 @@ msgstr "event"
 msgid "You don't have access to edit this event"
 msgstr "You don't have access to edit this event"
 
-msgid "Edit event"
-msgstr "Edit event"
-
 msgid "View changelog"
 msgstr "View changelog"
 
@@ -885,9 +906,6 @@ msgstr "Indicators"
 msgid "Warnings"
 msgstr "Warnings"
 
-msgid "Show all events"
-msgstr "Show all events"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Event could not be loaded. Are you sure it exists?"
 
@@ -896,15 +914,6 @@ msgstr "Event could not be loaded"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
-
-msgid "Dashboard"
-msgstr "Dashboard"
-
-msgid "Edit Event"
-msgstr "Edit Event"
-
-msgid "View Event"
-msgstr "View Event"
 
 msgid "Selected program"
 msgstr "Selected program"
@@ -1070,9 +1079,6 @@ msgstr "Create new event"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Search for a {{trackedEntityName}} in {{programName}}"
-
-msgid "Back to list"
-msgstr "Back to list"
 
 msgid "No tracked entity types available"
 msgstr "No tracked entity types available"
@@ -1601,15 +1607,6 @@ msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
