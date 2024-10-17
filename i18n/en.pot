@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
-"PO-Revision-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-17T17:11:55.065Z\n"
+"PO-Revision-Date: 2024-10-17T17:11:55.065Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -773,6 +773,9 @@ msgstr "Program Stages could not be loaded"
 
 msgid "Stage"
 msgstr "Stage"
+
+msgid "Registered events"
+msgstr "Registered events"
 
 msgid ""
 "The category option is not valid for the selected organisation unit. Please "
