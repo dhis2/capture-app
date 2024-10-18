@@ -18,6 +18,9 @@ import {
 } from 'capture-core-utils/validators/form';
 import {
     isValidAge,
+    isValidDate,
+    isValidNonFutureDate,
+    isValidDateTime,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,
@@ -36,7 +39,7 @@ export type ValidatorContainer = {
     validatingMessage?: string,
 }
 
-export const errorMessages = {
+const errorMessages = {
     COMPULSORY: i18n.t('A value is required'),
     NUMBER: i18n.t('Please provide a valid number'),
     INTEGER: i18n.t('Please provide a valid integer'),
@@ -106,6 +109,22 @@ const validatorsForTypes = {
     [dataElementTypes.TIME]: [{
         validator: isValidTime,
         message: errorMessages.TIME,
+        type: validatorTypes.TYPE_BASE,
+    }],
+    [dataElementTypes.DATE]: [
+        {
+            validator: isValidDate,
+            message: errorMessages.DATE,
+            type: validatorTypes.INTERNAL,
+        },
+        {
+            validator: (value: string, allowFutureDate) => (allowFutureDate ? true : isValidNonFutureDate(value)),
+            type: validatorTypes.TYPE_EXTENDED,
+            message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
+        }],
+    [dataElementTypes.DATETIME]: [{
+        validator: isValidDateTime,
+        message: errorMessages.DATETIME,
         type: validatorTypes.TYPE_BASE,
     }],
     [dataElementTypes.EMAIL]: [{
@@ -193,14 +212,14 @@ function buildTypeValidators(metaData: DataElement | DateDataElement): ?Array<Va
 
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
-        validator: (value: any) => {
+        validator: (value: any, validationContext: ?Object, internalError: ?Object) => {
             if (!value && value !== 0 && value !== false) {
                 return true;
             }
 
             const toValidateValue = isString(value) ? value.trim() : value;
             // $FlowFixMe dataElementTypes flow error
-            return validatorContainer.validator(toValidateValue, metaData.allowFutureDate);
+            return validatorContainer.validator(toValidateValue, metaData.allowFutureDate, internalError);
         },
     }));
 
