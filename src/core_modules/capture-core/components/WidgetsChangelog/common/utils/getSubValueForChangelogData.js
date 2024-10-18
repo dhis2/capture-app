@@ -1,4 +1,6 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api';
 
@@ -32,17 +34,24 @@ const buildTEAUrlByElementType: {|
     }: SubValueTEAProps) => {
         const { teiId, value } = trackedEntity;
         if (!value) return null;
-        const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
+        try {
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-        if (!latestValue) {
-            return name;
+            if (!latestValue) {
+                return name;
+            }
+
+            return {
+                id,
+                name,
+                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file?program=${programId}`,
+            };
+        } catch (error) {
+            log.error(
+                errorCreator('Error fetching file resource')({ error }),
+            );
+            return null;
         }
-
-        return {
-            id,
-            name,
-            url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/file?program=${programId}`,
-        };
     },
     [dataElementTypes.IMAGE]: async ({
         trackedEntity,

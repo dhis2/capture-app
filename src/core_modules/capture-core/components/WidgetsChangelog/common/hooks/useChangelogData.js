@@ -4,8 +4,9 @@ import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import log from 'loglevel';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
-import { errorCreator, buildUrl } from 'capture-core-utils';
+import { errorCreator, buildUrl, pipe } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
+import { dataElementTypes } from '../../../../metaData';
 import {
     CHANGELOG_ENTITY_TYPES,
     QUERY_KEYS_BY_ENTITY_TYPE,
@@ -16,13 +17,15 @@ import type {
     ItemDefinitions,
     SortDirection,
 } from '../Changelog/Changelog.types';
-import { convertServerToClient } from '../../../../converters';
+import { convertServerToClient, convertClientToView } from '../../../../converters';
 import { convert } from '../../../../converters/clientToList';
 import {
     RECORD_TYPE,
     subValueGetterByElementType,
 } from '../utils/getSubValueForChangelogData';
 import { makeQuerySingleResource } from '../../../../utils/api';
+
+const convertFn = pipe(convertServerToClient, convertClientToView);
 
 type Props = {
     entityId: string,
@@ -168,7 +171,7 @@ export const useChangelogData = ({
 
                     return {
                         reactKey: uuid(),
-                        date: moment(fromServerDate(createdAt)).format('YYYY-MM-DD HH:mm'),
+                        date: convertFn(fromServerDate(createdAt), dataElementTypes.DATETIME),
                         user: `${firstName} ${surname} (${username})`,
                         dataItemId: fieldId,
                         changeType: type,
