@@ -136,7 +136,9 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Started at: ')}
+                            {i18n.t('Started at{{escape}}', {
+                                escape: ':',
+                            })}
                             {convertValue(orgUnitClientValue, type)}
                         </div>
 
@@ -144,7 +146,9 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Owned by: ')}
+                            {i18n.t('Owned by{{escape}}', {
+                                escape: ':',
+                            })}
                             {convertValue(ownerOrgUnitClientValue, type)}
                         </div>
 
