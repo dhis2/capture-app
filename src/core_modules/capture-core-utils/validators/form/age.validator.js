@@ -72,5 +72,6 @@ export function isValidAge(value: AgeValues, dateFormat: string) {
     );
 
     if (!numberResult.valid) return numberResult;
+
     return validateDate(value.date, dateFormat);
 }

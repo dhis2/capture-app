@@ -4,4 +4,5 @@ export const validatorTypes = {
     TYPE_BASE: 'typeBase',
     TYPE_EXTENDED: 'typeExtended',
     UNIQUE: 'unique',
+    INTERNAL: 'internal',
 };

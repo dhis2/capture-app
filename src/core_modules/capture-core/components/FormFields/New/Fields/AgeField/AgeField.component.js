@@ -3,7 +3,6 @@ import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { AgeField as UIAgeField } from 'capture-ui';
 import moment from 'moment';
-import { withCalendarProps } from '../../HOC/withCalendarProps';
 import { parseDate, convertMomentToDateFormatString } from '../../../../../utils/converters/date';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 
@@ -41,18 +40,10 @@ type Props = {
         innerInputInfo: string,
         innerInputValidating: string,
     },
-    calendarTheme: Object,
-    calendarLocale: Object,
-    calendarOnConvertValueIn: Function,
-    calendarOnConvertValueOut: Function,
 }
 
 const AgeFieldPlain = (props: Props) => {
     const {
-        calendarTheme,
-        calendarLocale,
-        calendarOnConvertValueIn,
-        calendarOnConvertValueOut,
         ...passOnProps
     } = props;
 
@@ -62,14 +53,10 @@ const AgeFieldPlain = (props: Props) => {
             onParseDate={parseDate}
             onGetFormattedDateStringFromMoment={convertMomentToDateFormatString}
             moment={moment}
-            dateCalendarTheme={calendarTheme}
-            dateCalendarLocale={calendarLocale}
-            dateCalendarOnConvertValueIn={calendarOnConvertValueIn}
-            dateCalendarOnConvertValueOut={calendarOnConvertValueOut}
             datePlaceholder={systemSettingsStore.get().dateFormat.toLowerCase()}
             {...passOnProps}
         />
     );
 };
 
-export const AgeField = withTheme()(withCalendarProps()(withStyles(getStyles)(AgeFieldPlain)));
+export const AgeField = withTheme()(withStyles(getStyles)(AgeFieldPlain));
