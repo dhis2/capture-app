@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
-"PO-Revision-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-18T08:53:26.831Z\n"
+"PO-Revision-Date: 2024-10-18T08:53:26.831Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1490,11 +1490,48 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
-msgid "An error occurred while loading the widget."
-msgstr "An error occurred while loading the widget."
+msgid ""
+"Are you sure you want to unlink and delete the event? This will permanently "
+"remove the event and all related data."
+msgstr ""
+"Are you sure you want to unlink and delete the event? This will permanently "
+"remove the event and all related data."
+
+msgid "There was a problem unlinking and deleting the event"
+msgstr "There was a problem unlinking and deleting the event"
+
+msgid "Yes, unlink and delete event"
+msgstr "Yes, unlink and delete event"
+
+msgid "An error occurred while unlinking the relationship."
+msgstr "An error occurred while unlinking the relationship."
+
+msgid "Unlink relationship"
+msgstr "Unlink relationship"
+
+msgid "Are you sure you want to unlink this relationship?"
+msgstr "Are you sure you want to unlink this relationship?"
+
+msgid "There was a problem unlinking the relationship"
+msgstr "There was a problem unlinking the relationship"
+
+msgid "Yes, unlink relationship"
+msgstr "Yes, unlink relationship"
+
+msgid "An error occurred while deleting the relationship."
+msgstr "An error occurred while deleting the relationship."
 
 msgid "View linked event"
 msgstr "View linked event"
+
+msgid "Unlink event"
+msgstr "Unlink event"
+
+msgid "Unlink and delete event"
+msgstr "Unlink and delete event"
+
+msgid "An error occurred while loading the widget."
+msgstr "An error occurred while loading the widget."
 
 msgid "Scheduled"
 msgstr "Scheduled"
@@ -1559,9 +1596,6 @@ msgstr ""
 
 msgid "Yes, delete relationship"
 msgstr "Yes, delete relationship"
-
-msgid "An error occurred while deleting the relationship."
-msgstr "An error occurred while deleting the relationship."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"

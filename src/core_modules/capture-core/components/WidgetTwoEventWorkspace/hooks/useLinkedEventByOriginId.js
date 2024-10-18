@@ -1,5 +1,5 @@
 // @flow
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
 type Props = {|
@@ -33,16 +33,19 @@ const calculateRelatedStageRelationships = (event) => {
 
     return {
         relationshipType: stageToStageRelationship.relationshipType,
+        relationship: stageToStageRelationship.relationship,
         linkedEvent,
     };
 };
 
 export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
+    const [updateData, setUpdateData] = useState<boolean>(false);
+
     const eventByIdQuery = useMemo(() => ({
         resource: 'tracker/events',
         id: originEventId,
         params: {
-            fields: 'event,relationships[relationshipType,relationshipName,bidirectional,' +
+            fields: 'event,relationships[relationship,relationshipType,relationshipName,bidirectional,' +
                         'from[event[event,dataValues,occurredAt,scheduledAt,status,orgUnit,programStage,program]],' +
                         'to[event[event,dataValues,*,occurredAt,scheduledAt,status,orgUnit,programStage,program]]' +
                     ']',
@@ -50,7 +53,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
     }), [originEventId]);
 
     const { data, isLoading, isError, error } = useApiDataQuery(
-        ['linkedEventByOriginEvent', originEventId],
+        ['linkedEventByOriginEvent', originEventId, updateData],
         eventByIdQuery,
         {
             enabled: !!originEventId,
@@ -61,6 +64,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
 
     const {
         linkedEvent,
+        relationship,
         relationshipType,
         dataValues,
     } = useMemo(() => {
@@ -75,12 +79,12 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
 
         return {
             linkedEvent: relatedStageRelationship.linkedEvent,
+            relationship: relatedStageRelationship.relationship,
             relationshipType: relatedStageRelationship.relationshipType,
             dataValues: relatedStageRelationship.linkedEvent.dataValues,
         };
     }, [data]);
 
-    // Add fallback query if relationship is missing eventData
     const {
         data: fallbackDataValues,
         isLoading: isLoadingFallback,
@@ -101,7 +105,9 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
 
     return {
         linkedEvent: dataValues ? linkedEvent : fallbackDataValues,
+        relationship,
         relationshipType,
+        setUpdateData,
         dataValues: dataValues || fallbackDataValues?.dataValues,
         isLoading: isLoading || isLoadingFallback,
         isError: isError || isErrorFallback,
