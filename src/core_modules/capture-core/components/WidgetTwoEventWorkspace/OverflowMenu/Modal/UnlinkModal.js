@@ -1,50 +1,67 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import type { Props } from './UnlinkAndDeleteModal.types';
+import {
+    Modal,
+    ModalContent,
+    ModalTitle,
+    ModalActions,
+    ButtonStrip,
+    Button,
+    NoticeBox,
+} from '@dhis2/ui';
+import { useDeleteRelationship } from './useDeleteRelationship';
+import type { Props } from './UnlinkModal.types';
 
-export const UnlinkModal = ({ trackedEntityTypeName, setOpenModal }: Props) =>
-// const [errorReports, setErrorReports] = useState([]);
+export const UnlinkModal = ({ setOpenModal, relationshipId, onUnlinkSuccess }: Props) => {
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
 
+    const { onDeleteRelationship } = useDeleteRelationship({ sourceId: relationshipId });
 
-    (
-        <Modal dataTest="event-unlink--modal">
+    const handleUnlink = async () => {
+        setLoading(true);
+        setErrorMessage(null);
+
+        try {
+            await onDeleteRelationship({ relationshipId });
+
+            if (onUnlinkSuccess) {
+                onUnlinkSuccess();
+            }
+            setOpenModal(false);
+        } catch (error) {
+            setErrorMessage(i18n.t('An error occurred while unlinking the relationship.'));
+            setLoading(false);
+        }
+    };
+
+    return (
+        <Modal dataTest="event-unlink-modal">
             <ModalTitle>
-                {i18n.t('Delete event', {
-                    trackedEntityTypeName,
-                    interpolation: { escapeValue: false },
-                })}
+                {i18n.t('Unlink relationship')}
             </ModalTitle>
             <ModalContent>
-                <p>
-                    {i18n.t(
-                        'Are you sure you want to unlink the event?',
-                    )}
-                </p>
-                {/* {errorReports.length > 0 && (
+                <p>{i18n.t('Are you sure you want to unlink this relationship?')}</p>
+                {errorMessage && (
                     <NoticeBox
-                        title={i18n.t('There was a problem unliking the event')}
+                        title={i18n.t('There was a problem unlinking the relationship')}
                         error
                     >
-                        <ul>
-                            {errorReports.map(content => (
-                                <li key={content.uid}>{content.message}</li>
-                            ))}
-                        </ul>
+                        {errorMessage}
                     </NoticeBox>
-                )} */}
+                )}
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={() => setOpenModal(false)} secondary>
                         {i18n.t('No, cancel')}
                     </Button>
-                    <Button destructive>
-                        {i18n.t('Yes, unlink event')}
+                    <Button destructive onClick={handleUnlink} disabled={loading}>
+                        {i18n.t('Yes, unlink relationship')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
         </Modal>
-    )
-;
+    );
+};

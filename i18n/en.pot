@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-14T14:08:33.622Z\n"
-"PO-Revision-Date: 2024-10-14T14:08:33.622Z\n"
+"POT-Creation-Date: 2024-10-17T16:06:48.023Z\n"
+"PO-Revision-Date: 2024-10-17T16:06:48.023Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1545,20 +1545,32 @@ msgstr ""
 "Are you sure you want to unlink and delete the event? This will permanently "
 "remove the event and all related data."
 
-msgid "There was a problem unliking and deletiung the event"
-msgstr "There was a problem unliking and deletiung the event"
+msgid "There was a problem unlinking and deleting the event"
+msgstr "There was a problem unlinking and deleting the event"
+
+msgid "Deleting..."
+msgstr "Deleting..."
 
 msgid "Yes, unlink and delete event"
 msgstr "Yes, unlink and delete event"
 
-msgid "Are you sure you want to unlink the event?"
-msgstr "Are you sure you want to unlink the event?"
+msgid "An error occurred while unlinking the relationship."
+msgstr "An error occurred while unlinking the relationship."
 
-msgid "There was a problem unliking the event"
-msgstr "There was a problem unliking the event"
+msgid "Unlink relationship"
+msgstr "Unlink relationship"
 
-msgid "Yes, unlink event"
-msgstr "Yes, unlink event"
+msgid "Are you sure you want to unlink this relationship?"
+msgstr "Are you sure you want to unlink this relationship?"
+
+msgid "There was a problem unlinking the relationship"
+msgstr "There was a problem unlinking the relationship"
+
+msgid "Yes, unlink relationship"
+msgstr "Yes, unlink relationship"
+
+msgid "An error occurred while deleting the relationship."
+msgstr "An error occurred while deleting the relationship."
 
 msgid "View linked event"
 msgstr "View linked event"
@@ -1635,9 +1647,6 @@ msgstr ""
 
 msgid "Yes, delete relationship"
 msgstr "Yes, delete relationship"
-
-msgid "An error occurred while deleting the relationship."
-msgstr "An error occurred while deleting the relationship."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"

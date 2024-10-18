@@ -48,6 +48,7 @@ const WidgetTwoEventWorkspacePlain = ({
 }: Props) => {
     const {
         linkedEvent,
+        relationship,
         dataValues,
         isError: isLinkedEventError,
         isLoading: isLinkedEventLoading,
@@ -95,9 +96,8 @@ const WidgetTwoEventWorkspacePlain = ({
                 <div className={classes.menu}>
                     <OverflowMenuComponent
                         linkedEvent={linkedEvent}
+                        relationshipId={relationship}
                         orgUnitId={orgUnitId}
-                        programId={programId}
-                        eventId={eventId}
                     />
                 </div>
             )}

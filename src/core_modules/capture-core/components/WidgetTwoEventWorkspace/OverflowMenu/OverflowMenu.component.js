@@ -1,27 +1,36 @@
 // @flow
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FlyoutMenu, IconDelete16, IconLink16, IconMore16, IconView16, Divider, MenuItem } from '@dhis2/ui';
+import {
+    FlyoutMenu,
+    IconDelete16,
+    IconLink16,
+    IconMore16,
+    IconView16,
+    Divider,
+    MenuItem,
+} from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { OverflowButton } from '../../Buttons';
 import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';
 import { buildUrlQueryString } from '../../../utils/routing';
 
-
 type Props = {
     linkedEvent: any,
+    relationshipId: string,
     orgUnitId: string,
 };
 
 export const OverflowMenuComponent = ({
     linkedEvent,
+    relationshipId,
     orgUnitId,
 }: Props) => {
-    const [actionsIsOpen, setActionsIsOpen] = useState(false);
-    const [unlikModalIsOpen, setUnlinkModalIsOpen] = useState(false);
-    const [UnlinkAndDeleteModalIsOpen, setUnlinkAndDeleteModalIsOpen] = useState(false);
-
     const { push } = useHistory();
+
+    const [actionsIsOpen, setActionsIsOpen] = useState(false);
+    const [unlinkModalIsOpen, setUnlinkModalIsOpen] = useState(false);
+    const [unlinkAndDeleteModalIsOpen, setUnlinkAndDeleteModalIsOpen] = useState(false);
 
     return (
         <>
@@ -31,18 +40,20 @@ export const OverflowMenuComponent = ({
                 icon={<IconMore16 />}
                 small
                 secondary
-                dataTest={'widget-event-navigate-to-linked-event'}
-                component={(
+                dataTest={'widget-linked-event-overflow-menu'}
+                component={
                     <FlyoutMenu dense maxWidth="250px">
                         <MenuItem
                             label={i18n.t('View linked event')}
                             icon={<IconView16 />}
                             dataTest={'event-overflow-view-linked-event'}
                             onClick={() => {
-                                push(`/enrollmentEventEdit?${buildUrlQueryString({
-                                    eventId: linkedEvent.event,
-                                    orgUnitId,
-                                })}`);
+                                push(
+                                    `/enrollmentEventEdit?${buildUrlQueryString({
+                                        eventId: linkedEvent.event,
+                                        orgUnitId,
+                                    })}`,
+                                );
                                 setActionsIsOpen(false);
                             }}
                         />
@@ -53,29 +64,32 @@ export const OverflowMenuComponent = ({
                             dataTest={'event-overflow-unlink-event'}
                             onClick={() => {
                                 setUnlinkModalIsOpen(true);
+                                setActionsIsOpen(false);
                             }}
                         />
                         <MenuItem
-                            destructive
-                            dense
-                            icon={<IconDelete16 />}
                             label={i18n.t('Unlink and delete event')}
+                            icon={<IconDelete16 />}
+                            dataTest={'event-overflow-unlink-and-delete-event'}
+                            destructive
                             onClick={() => {
                                 setUnlinkAndDeleteModalIsOpen(true);
+                                setActionsIsOpen(false);
                             }}
                         />
-
                     </FlyoutMenu>
-                )}
+                }
             />
-            {unlikModalIsOpen && (
+            {unlinkModalIsOpen && (
                 <UnlinkModal
                     setOpenModal={setUnlinkModalIsOpen}
+                    relationshipId={relationshipId}
                 />
             )}
-            {UnlinkAndDeleteModalIsOpen && (
+            {unlinkAndDeleteModalIsOpen && (
                 <UnlinkAndDeleteModal
                     setOpenModal={setUnlinkAndDeleteModalIsOpen}
+                    eventId={linkedEvent.event}
                 />
             )}
         </>
