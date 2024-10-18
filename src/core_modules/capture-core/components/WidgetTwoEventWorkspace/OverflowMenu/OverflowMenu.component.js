@@ -2,29 +2,25 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
+    Divider,
     FlyoutMenu,
     IconDelete16,
     IconLink16,
     IconMore16,
     IconView16,
-    Divider,
     MenuItem,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { OverflowButton } from '../../Buttons';
 import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';
 import { buildUrlQueryString } from '../../../utils/routing';
-
-type Props = {
-    linkedEvent: any,
-    relationshipId: string,
-    orgUnitId: string,
-};
+import type { Props } from './OverflowMenu.types';
 
 export const OverflowMenuComponent = ({
     linkedEvent,
     relationshipId,
     orgUnitId,
+    setUpdateData,
 }: Props) => {
     const { push } = useHistory();
 
@@ -84,12 +80,14 @@ export const OverflowMenuComponent = ({
                 <UnlinkModal
                     setOpenModal={setUnlinkModalIsOpen}
                     relationshipId={relationshipId}
+                    setUpdateData={setUpdateData}
                 />
             )}
             {unlinkAndDeleteModalIsOpen && (
                 <UnlinkAndDeleteModal
                     setOpenModal={setUnlinkAndDeleteModalIsOpen}
                     eventId={linkedEvent.event}
+                    setUpdateData={setUpdateData}
                 />
             )}
         </>

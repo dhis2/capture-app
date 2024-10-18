@@ -50,6 +50,7 @@ const WidgetTwoEventWorkspacePlain = ({
         linkedEvent,
         relationship,
         dataValues,
+        setUpdateData,
         isError: isLinkedEventError,
         isLoading: isLinkedEventLoading,
     } = useLinkedEventByOriginId({ originEventId: eventId });
@@ -86,6 +87,8 @@ const WidgetTwoEventWorkspacePlain = ({
         );
     }
 
+    console.log('linkedEvent', !!linkedEvent);
+
     if (!linkedEvent || !formFoundation || !stage) {
         return null;
     }
@@ -98,6 +101,7 @@ const WidgetTwoEventWorkspacePlain = ({
                         linkedEvent={linkedEvent}
                         relationshipId={relationship}
                         orgUnitId={orgUnitId}
+                        setUpdateData={setUpdateData}
                     />
                 </div>
             )}

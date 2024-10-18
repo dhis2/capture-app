@@ -2,14 +2,13 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
+    Button,
+    ButtonStrip,
     Modal,
+    ModalActions,
     ModalContent,
     ModalTitle,
-    ModalActions,
-    ButtonStrip,
-    Button,
     NoticeBox,
-    CircularLoader,
 } from '@dhis2/ui';
 import { useDataEngine } from '@dhis2/app-runtime';
 import type { Props } from './UnlinkAndDeleteModal.types';
@@ -17,7 +16,7 @@ import type { Props } from './UnlinkAndDeleteModal.types';
 export const UnlinkAndDeleteModal = ({
     setOpenModal,
     eventId,
-    onDeleteSuccess,
+    setUpdateData,
 }: Props) => {
     const [errorReports, setErrorReports] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -26,30 +25,16 @@ export const UnlinkAndDeleteModal = ({
     const handleDelete = async () => {
         setLoading(true);
         setErrorReports([]);
+        setUpdateData(true);
 
         try {
             const mutation = {
-                resource: 'tracker',
+                resource: '/tracker?async=false&importStrategy=DELETE',
                 type: 'create',
-                params: {
-                    async: 'false',
-                    importStrategy: 'DELETE',
-                },
-                data: {
-                    events: [
-                        {
-                            event: eventId,
-                        },
-                    ],
-                },
+                data: { events: [{ event: eventId }] },
             };
 
             await dataEngine.mutate(mutation);
-
-            if (onDeleteSuccess) {
-                onDeleteSuccess();
-            }
-
             setOpenModal(false);
         } catch (error) {
             const messages = error.details?.response?.errorReports?.map(report => report.message) || [
@@ -58,6 +43,7 @@ export const UnlinkAndDeleteModal = ({
             setErrorReports(messages);
         } finally {
             setLoading(false);
+            setUpdateData(false);
         }
     };
 
@@ -90,14 +76,7 @@ export const UnlinkAndDeleteModal = ({
                         {i18n.t('No, cancel')}
                     </Button>
                     <Button destructive onClick={handleDelete} disabled={loading}>
-                        {loading ? (
-                            <>
-                                <CircularLoader small />
-                                {i18n.t('Deleting...')}
-                            </>
-                        ) : (
-                            i18n.t('Yes, unlink and delete event')
-                        )}
+                        {i18n.t('Yes, unlink and delete event')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

@@ -13,7 +13,11 @@ import {
 import { useDeleteRelationship } from './useDeleteRelationship';
 import type { Props } from './UnlinkModal.types';
 
-export const UnlinkModal = ({ setOpenModal, relationshipId, onUnlinkSuccess }: Props) => {
+export const UnlinkModal = ({
+    setOpenModal,
+    relationshipId,
+    setUpdateData,
+}: Props) => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -22,17 +26,17 @@ export const UnlinkModal = ({ setOpenModal, relationshipId, onUnlinkSuccess }: P
     const handleUnlink = async () => {
         setLoading(true);
         setErrorMessage(null);
+        setUpdateData(true);
 
         try {
             await onDeleteRelationship({ relationshipId });
-
-            if (onUnlinkSuccess) {
-                onUnlinkSuccess();
-            }
             setOpenModal(false);
         } catch (error) {
             setErrorMessage(i18n.t('An error occurred while unlinking the relationship.'));
             setLoading(false);
+        } finally {
+            setLoading(false);
+            setUpdateData(false);
         }
     };
 

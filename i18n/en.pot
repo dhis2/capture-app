@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
-"PO-Revision-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-18T08:53:26.831Z\n"
+"PO-Revision-Date: 2024-10-18T08:53:26.831Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1499,9 +1499,6 @@ msgstr ""
 
 msgid "There was a problem unlinking and deleting the event"
 msgstr "There was a problem unlinking and deleting the event"
-
-msgid "Deleting..."
-msgstr "Deleting..."
 
 msgid "Yes, unlink and delete event"
 msgstr "Yes, unlink and delete event"

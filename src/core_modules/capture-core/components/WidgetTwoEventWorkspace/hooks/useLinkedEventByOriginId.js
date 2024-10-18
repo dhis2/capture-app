@@ -1,5 +1,5 @@
 // @flow
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
 type Props = {|
@@ -39,6 +39,8 @@ const calculateRelatedStageRelationships = (event) => {
 };
 
 export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
+    const [updateData, setUpdateData] = useState<boolean>(false);
+
     const eventByIdQuery = useMemo(() => ({
         resource: 'tracker/events',
         id: originEventId,
@@ -51,7 +53,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
     }), [originEventId]);
 
     const { data, isLoading, isError, error } = useApiDataQuery(
-        ['linkedEventByOriginEvent', originEventId],
+        ['linkedEventByOriginEvent', originEventId, updateData],
         eventByIdQuery,
         {
             enabled: !!originEventId,
@@ -105,6 +107,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         linkedEvent: dataValues ? linkedEvent : fallbackDataValues,
         relationship,
         relationshipType,
+        setUpdateData,
         dataValues: dataValues || fallbackDataValues?.dataValues,
         isLoading: isLoading || isLoadingFallback,
         isError: isError || isErrorFallback,

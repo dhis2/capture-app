@@ -2,5 +2,5 @@
 export type Props = {|
     setOpenModal: (open: boolean) => void,
     relationshipId: string,
-    onUnlinkSuccess?: () => void,
+    setUpdateData: Function,
 |};
