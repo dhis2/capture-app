@@ -1,3 +1,31 @@
+## [101.12.1](https://github.com/dhis2/capture-app/compare/v101.12.0...v101.12.1) (2024-10-16)
+
+
+### Bug Fixes
+
+* [DHIS2-17978] use title instead of alt on missing icons ([#3847](https://github.com/dhis2/capture-app/issues/3847)) ([b5940f2](https://github.com/dhis2/capture-app/commit/b5940f21204cf26afce6c28ba88b50c09728265f))
+
+# [101.12.0](https://github.com/dhis2/capture-app/compare/v101.11.2...v101.12.0) (2024-10-15)
+
+
+### Features
+
+* [DHIS2-17956] Display name for org unit in changelog ([#3826](https://github.com/dhis2/capture-app/issues/3826)) ([5299f37](https://github.com/dhis2/capture-app/commit/5299f37d33448616c0074ec6568a82c9c96f65cb))
+
+## [101.11.2](https://github.com/dhis2/capture-app/compare/v101.11.1...v101.11.2) (2024-10-15)
+
+
+### Bug Fixes
+
+* [DHIS2-18056] use linkedEntityFormFoundation instead of the searchFormFoundation ([#3835](https://github.com/dhis2/capture-app/issues/3835)) ([cbfe70b](https://github.com/dhis2/capture-app/commit/cbfe70b850554678c7a8bad40e0874ea227fe65c))
+
+## [101.11.1](https://github.com/dhis2/capture-app/compare/v101.11.0...v101.11.1) (2024-10-15)
+
+
+### Bug Fixes
+
+* [DHIS2-16993] Text and long text DEs are missing arrows in changelog when deleted ([#3827](https://github.com/dhis2/capture-app/issues/3827)) ([5e6dfa6](https://github.com/dhis2/capture-app/commit/5e6dfa6bb4b82a68305741bd4bb672a5a1af8f5f))
+
 # [101.11.0](https://github.com/dhis2/capture-app/compare/v101.10.2...v101.11.0) (2024-10-14)
 
 
