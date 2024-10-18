@@ -1,6 +1,8 @@
 // @flow
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { dataElementTypes } from '../../../../metaData';
+import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
+
 
 const getImageOrFileResourceSubvalue = async (key: string, querySingleResource: QuerySingleResource) => {
     const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: key });
@@ -11,14 +13,8 @@ const getImageOrFileResourceSubvalue = async (key: string, querySingleResource: 
 };
 
 const getOrganisationUnitSubvalue = async (key: string, querySingleResource: QuerySingleResource) => {
-    const organisationUnit = await querySingleResource({
-        resource: 'organisationUnits',
-        id: key,
-        params: {
-            fields: 'id,name',
-        },
-    });
-    return { ...organisationUnit };
+    const organisationUnit = await getOrgUnitNames([key], querySingleResource);
+    return organisationUnit[key];
 };
 
 export const subValueGetterByElementType = {

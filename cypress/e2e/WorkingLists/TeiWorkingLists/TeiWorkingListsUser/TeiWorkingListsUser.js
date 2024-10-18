@@ -1,4 +1,4 @@
-import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
 
@@ -652,6 +652,25 @@ When('you remove the program stage filter', () => {
     cy.get('[data-test="list-view-filter-contents"]')
         .contains('Remove filter')
         .click();
+});
+
+When('you open a tei from the working list', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Filona')
+        .click();
+});
+
+When('you deselect the tracked entity from the context selector', () => {
+    cy.get('[data-test="person-selector-container-clear-icon"]')
+        .click();
+});
+
+// the working list called completed enrollments should be selected
+Then('the working list called completed enrollments should be selected', () => {
+    cy.get('[data-test="workinglist-template-selector-chip"]')
+        .contains('Completed enrollments')
+        .parent()
+        .should('have.class', 'selected');
 });
 
 Then('you see scheduledAt filter', () => {

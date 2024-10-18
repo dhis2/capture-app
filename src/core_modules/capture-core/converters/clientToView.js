@@ -34,11 +34,6 @@ type ImageClientValue = {
     previewUrl: string,
 };
 
-type OrgUnitClientValue = {
-    name: string,
-    ancestors?: Array<string>,
-    tooltip?: string,
-};
 
 function convertFileForDisplay(clientValue: FileClientValue) {
     return (
@@ -57,15 +52,12 @@ function convertImageForDisplay(clientValue: ImageClientValue) {
     return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} alignLeft />;
 }
 
-function convertOrgUnitForDisplay(clientValue: OrgUnitClientValue) {
+function convertOrgUnitForDisplay(clientValue: { id: string }) {
     return (
-        <TooltipOrgUnit
-            orgUnitName={clientValue.name}
-            ancestors={clientValue.ancestors}
-            tooltip={clientValue.tooltip}
-        />
+        <TooltipOrgUnit orgUnitId={clientValue.id} />
     );
 }
+
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
