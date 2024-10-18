@@ -102,6 +102,7 @@ export type CachedDataEntryForm = {
 export type CachedProgramStage = {
     id: string,
     access: Object,
+    blockEntryForm: boolean,
     name: string,
     displayName: string,
     description: ?string,
@@ -171,7 +172,8 @@ export type CachedProgramSection = {
     id: string,
     displayFormName: string,
     sortOrder: number,
-    trackedEntityAttributes: Array<string>
+    trackedEntityAttributes: Array<string>,
+    displayDescription: string
 }
 
 export type CachedTrackedEntityType = {

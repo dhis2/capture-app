@@ -36,13 +36,13 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
     [
         {
             id: ADDITIONAL_FILTERS.status,
-            visible: false,
+            visible: true,
             type: dataElementTypes.TEXT,
             header: i18n.t(ADDITIONAL_FILTERS_LABELS.status),
         },
         {
             id: ADDITIONAL_FILTERS.occurredAt,
-            visible: false,
+            visible: true,
             type: dataElementTypes.DATE,
             header: programStage.stageForm.getLabel('occurredAt') || i18n.t(ADDITIONAL_FILTERS_LABELS.occurredAt),
         },
@@ -50,11 +50,21 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
             ? [
                 {
                     id: ADDITIONAL_FILTERS.scheduledAt,
-                    visible: false,
+                    visible: true,
                     type: dataElementTypes.DATE,
                     header:
                           programStage.stageForm.getLabel('scheduledAt') ||
                           i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
+                },
+            ]
+            : []),
+        ...(programStage.enableUserAssignment
+            ? [
+                {
+                    id: ADDITIONAL_FILTERS.assignedUser,
+                    visible: true,
+                    type: dataElementTypes.ASSIGNEE,
+                    header: i18n.t(ADDITIONAL_FILTERS_LABELS.assignee),
                 },
             ]
             : []),

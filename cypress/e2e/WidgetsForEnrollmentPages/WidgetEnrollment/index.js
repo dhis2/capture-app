@@ -66,7 +66,7 @@ Then('the user sees the enrollment organisation unit', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-icon-orgunit"]').should('exist');
         cy.get('[data-test="widget-enrollment-orgunit"]')
-            .contains('Started at Ngelehun CHC')
+            .contains('Started at: Ngelehun CHC')
             .should('exist');
     });
 });
@@ -77,7 +77,7 @@ Then('the user sees the owner organisation unit', () => {
             'exist',
         );
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains('Owned by Ngelehun CHC')
+            .contains('Owned by: Ngelehun CHC')
             .should('exist');
     });
 });
@@ -232,15 +232,21 @@ Then(/^the user successfully transfers the enrollment/, () => {
 
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains('Owned by Sierra Leone')
+            .contains('Owned by: Njandama MCHP')
             .should('exist');
+    });
+});
+
+Then(/^the user types in (.*)/, (orgunit) => {
+    cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
+        cy.get('[data-test="capture-ui-input"]').type(orgunit);
     });
 });
 
 Given(/^the enrollment owner organisation unit is (.*)/, (orgunit) => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains(`Owned by ${orgunit}`)
+            .contains(`Owned by: ${orgunit}`)
             .should('exist');
     });
 });

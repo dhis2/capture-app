@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Thiago Rocha, 2024\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
@@ -38,6 +38,9 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+
+msgid "More"
+msgstr "Mais"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -362,16 +365,10 @@ msgstr ""
 msgid "validation failed"
 msgstr ""
 
-msgid "Errors"
-msgstr "Erros"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Retroinformacão"
-
-msgid "Indicators"
-msgstr "Indicadores"
-
-msgid "Warnings"
+msgid "No indicator output for this event yet"
 msgstr ""
 
 msgid "Generate new event"
@@ -484,18 +481,6 @@ msgstr ""
 msgid "Yes"
 msgstr "Sim"
 
-msgid "mm/dd/yyyy"
-msgstr ""
-
-msgid "Years"
-msgstr "Anos"
-
-msgid "Months"
-msgstr "Meses"
-
-msgid "Days"
-msgstr "Dias"
-
 msgid "Uploading file"
 msgstr ""
 
@@ -562,6 +547,9 @@ msgstr ""
 msgid "Column"
 msgstr "Coluna"
 
+msgid "Visible"
+msgstr "Visível"
+
 msgid "Update"
 msgstr "Actualizar"
 
@@ -602,15 +590,6 @@ msgid "Program doesn't exist"
 msgstr ""
 
 msgid "Selected program is invalid for selected organisation unit"
-msgstr ""
-
-msgid "Online"
-msgstr "Ligado"
-
-msgid "Offline"
-msgstr "Desligado"
-
-msgid "Syncing"
 msgstr ""
 
 msgid "Add note"
@@ -769,12 +748,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -803,6 +776,11 @@ msgid "Stage"
 msgstr ""
 
 msgid "Registered events"
+msgstr ""
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
 msgstr ""
 
 msgid "Please select {{category}}."
@@ -918,6 +896,18 @@ msgid ""
 "relationship"
 msgstr ""
 
+msgid "Errors"
+msgstr "Erros"
+
+msgid "Feedback"
+msgstr "Retroinformacão"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
+msgid "Warnings"
+msgstr ""
+
 msgid "Show all events"
 msgstr ""
 
@@ -958,6 +948,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "Carregando.."
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1233,15 +1229,6 @@ msgstr ""
 msgid "Follow-up"
 msgstr "Seguimento"
 
-msgid "Started at {{orgUnitName}}"
-msgstr ""
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "Cancelado"
 
@@ -1294,6 +1281,9 @@ msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
 msgid "Event completed"
+msgstr ""
+
+msgid "The event cannot be edited after it has been completed"
 msgstr ""
 
 msgid "Back to all stages and events"
@@ -1449,8 +1439,31 @@ msgstr "Data do relatório"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "Pular"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr ""
@@ -1458,13 +1471,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset list"
-msgstr ""
-
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
@@ -1484,6 +1491,15 @@ msgstr ""
 
 msgid "Stages and Events"
 msgstr ""
+
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Agendado"
 
 msgid "Changelog"
 msgstr ""
@@ -1649,9 +1665,6 @@ msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "Agendado"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""

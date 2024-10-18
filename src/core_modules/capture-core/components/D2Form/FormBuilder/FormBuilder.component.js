@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable complexity */
 import i18n from '@dhis2/d2-i18n';
-import { isEqual } from 'lodash';
 import log from 'loglevel';
 import { v4 as uuid } from 'uuid';
 import * as React from 'react';
@@ -41,7 +40,6 @@ type FieldUI = {
     errorType?: ?string,
     errorData?: ErrorData,
     validatingMessage?: ?string,
-    pendingValidation?: ?boolean,
 };
 
 type RenderDividerFn = (index: number, fieldsCount: number, field: FieldConfig) => React.Node;
@@ -116,7 +114,6 @@ export class FormBuilder extends React.Component<Props> {
         if (!hasTruthyValue && (!validators || validators.length === 0)) {
             return {
                 valid: true,
-                pendingValidation: false,
             };
         }
 
@@ -158,16 +155,11 @@ export class FormBuilder extends React.Component<Props> {
                 errorMessage: validatorResult.message,
                 errorType: validatorResult.type,
                 errorData: validatorResult.data,
-                pendingValidation: false,
             };
         }
 
         return {
             valid: true,
-            errorMessage: null,
-            errorType: null,
-            errorData: null,
-            pendingValidation: false,
         };
     }
 
@@ -204,19 +196,17 @@ export class FormBuilder extends React.Component<Props> {
         }, asyncUIState);
     }
 
-    static executeValidateFields(
+    static executeValidateAllFields(
         props: Props,
         fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer,
-        customFields?: Array<FieldConfig>,
     ) {
         const {
             id,
-            fields: allFields,
+            fields,
             values,
             onGetValidationContext,
             onIsValidating,
         } = props;
-        const fields = customFields || allFields || [];
         const validationContext = onGetValidationContext && onGetValidationContext();
         const validationPromises = fields
             .map(async (field) => {
@@ -259,7 +249,6 @@ export class FormBuilder extends React.Component<Props> {
                             valid: false,
                             errorMessage: [i18n.t('error encountered during field validation')],
                             errorType: i18n.t('error'),
-                            pendingValidation: false,
                         };
                         log.error({ reason, field });
                     }
@@ -295,7 +284,7 @@ export class FormBuilder extends React.Component<Props> {
         this.commitUpdateTriggeredForFields = {};
 
         if (this.props.validateIfNoUIData) {
-            this.validateFields(this.props);
+            this.validateAllFields(this.props);
         }
     }
 
@@ -304,24 +293,11 @@ export class FormBuilder extends React.Component<Props> {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
             this.commitUpdateTriggeredForFields = {};
             if (this.props.validateIfNoUIData) {
-                this.validateFields(newProps);
+                this.validateAllFields(newProps);
             }
         } else {
             this.asyncUIState =
                 FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
-        }
-    }
-
-    componentDidUpdate(prevProps: Props) {
-        const { fieldsUI, fields } = this.props;
-
-        if (!isEqual(prevProps.fieldsUI, fieldsUI)) {
-            const pendingValidationFields = Object.keys(fieldsUI).filter(key => fieldsUI[key].pendingValidation);
-
-            if (pendingValidationFields.length !== 0 && !this.validateAllCancelablePromise) {
-                const fieldsToValidate = fields.filter(field => pendingValidationFields.includes(field.id));
-                this.validateFields(this.props, fieldsToValidate);
-            }
         }
     }
 
@@ -340,13 +316,12 @@ export class FormBuilder extends React.Component<Props> {
         return remainingCompleteUids;
     }
 
-    validateFields(
+    validateAllFields(
         props: Props,
-        customFields?: Array<FieldConfig>,
     ) {
         this.validateAllCancelablePromise && this.validateAllCancelablePromise.cancel();
         this.validateAllCancelablePromise = makeCancelablePromise(
-            FormBuilder.executeValidateFields(props, this.fieldsValidatingPromiseContainer, customFields),
+            FormBuilder.executeValidateAllFields(props, this.fieldsValidatingPromiseContainer),
         );
 
         this.validateAllCancelablePromise

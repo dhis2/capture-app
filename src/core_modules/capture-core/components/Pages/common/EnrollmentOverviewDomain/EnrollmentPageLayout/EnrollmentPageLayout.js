@@ -10,6 +10,7 @@ import { DefaultPageTitle, EnrollmentPageKeys } from './DefaultEnrollmentLayout.
 
 const getEnrollmentPageStyles = () => ({
     container: {
+        minHeight: '90vh',
         padding: '16px 24px 16px 24px',
     },
     contentContainer: {
@@ -44,6 +45,9 @@ const getEnrollmentPageStyles = () => ({
     },
 });
 
+// Function to validate hex color
+const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
+
 const getTitle = (inputTitle, page) => {
     const title = inputTitle || i18n.t('Enrollment');
     const titles = {
@@ -69,9 +73,10 @@ const EnrollmentPageLayoutPlain = ({
 
     const allProps = useMemo(() => ({
         ...passOnProps,
+        currentPage,
         toggleVisibility,
         addRelationShipContainerElement,
-    }), [addRelationShipContainerElement, passOnProps, toggleVisibility]);
+    }), [addRelationShipContainerElement, currentPage, passOnProps, toggleVisibility]);
 
     const {
         leftColumnWidgets,
@@ -82,8 +87,13 @@ const EnrollmentPageLayoutPlain = ({
         props: allProps,
     });
 
+    const containerStyle = useMemo(() => {
+        if (!pageLayout.backgroundColor || !isValidHex(pageLayout.backgroundColor)) return undefined;
+        return { backgroundColor: pageLayout.backgroundColor };
+    }, [pageLayout.backgroundColor]);
+
     return (
-        <div className={classes.container}>
+        <div className={classes.container} style={containerStyle}>
             <AddRelationshipRefWrapper setRelationshipRef={setAddRelationshipContainerElement} />
             <div
                 className={classes.contentContainer}

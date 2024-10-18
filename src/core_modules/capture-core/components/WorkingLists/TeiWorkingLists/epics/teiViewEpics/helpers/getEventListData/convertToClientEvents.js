@@ -1,6 +1,5 @@
 // @flow
 import { translatedStatusTypes } from 'capture-core/events/statusTypes';
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { convertServerToClient } from '../../../../../../../converters';
 import type {
     ApiEvents,
@@ -13,7 +12,7 @@ import type {
 } from './types';
 import { getFilterClientName, ADDITIONAL_FILTERS } from '../../../../helpers';
 import { isEventOverdue } from '../../../../../../../utils/isEventOverdue';
-import { dataElementTypes } from '../../../../../../../metaData';
+import { RECORD_TYPE, buildUrlByElementType } from '../getListDataCommon';
 
 const convertServerStatusToClient = (
     status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
@@ -47,16 +46,9 @@ const buildTEIRecord = ({
 }) =>
     columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
         const value = mainProperty ? apiTEI[id] : attributeValuesById[id];
-        const urls = (type === dataElementTypes.IMAGE) ?
-            (() => (featureAvailable(FEATURES.trackerImageEndpoint) ?
-                {
-                    imageUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}`,
-                    previewUrl: `/tracker/trackedEntities/${trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
-                } : {
-                    imageUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image?program=${programId}`,
-                    previewUrl: `/trackedEntityInstances/${trackedEntity}/${id}/image?program=${programId}&dimension=SMALL`,
-                }
-            ))() : {};
+        const urls = buildUrlByElementType[RECORD_TYPE.trackedEntity][type]
+            ? buildUrlByElementType[RECORD_TYPE.trackedEntity][type]({ trackedEntity, id, programId })
+            : {};
 
         return {
             id,
@@ -86,17 +78,9 @@ const buildEventRecord = ({
         const clientValue = isStatus
             ? convertServerStatusToClient(value, apiEvent.scheduledAt)
             : convertServerToClient(value, type);
-
-        const urls = (type === dataElementTypes.IMAGE) ?
-            (() => (featureAvailable(FEATURES.trackerImageEndpoint) ?
-                {
-                    imageUrl: `/tracker/events/${apiEvent.event}/dataValues/${id}/image`,
-                    previewUrl: `/tracker/events/${apiEvent.event}/dataValues/${id}/image?dimension=small`,
-                } : {
-                    imageUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}`,
-                    previewUrl: `/events/files?dataElementUid=${id}&eventUid=${apiEvent.event}&dimension=SMALL`,
-                }
-            ))() : {};
+        const urls = buildUrlByElementType[RECORD_TYPE.event][type]
+            ? buildUrlByElementType[RECORD_TYPE.event][type]({ event: apiEvent.event, id })
+            : {};
 
         return {
             id: getFilterClientName(id),
@@ -133,9 +117,10 @@ export const convertToClientEvents = (
             ...TEIRecord,
         ]
             .filter(({ value }) => value != null)
-            .reduce((acc, { id, value, imageUrl, previewUrl }: any) => {
+            .reduce((acc, { id, value, imageUrl, previewUrl, fileUrl }: any) => {
                 acc[id] = {
                     convertedValue: value,
+                    fileUrl,
                     ...(imageUrl ? { imageUrl, previewUrl } : {}),
                 };
                 return acc;

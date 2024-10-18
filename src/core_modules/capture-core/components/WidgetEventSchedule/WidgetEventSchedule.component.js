@@ -64,6 +64,7 @@ const WidgetEventSchedulePlain = ({
     classes,
     scheduleDate,
     suggestedScheduleDate,
+    serverSuggestedScheduleDate,
     notes,
     programCategory,
     enableUserAssignment,
@@ -92,7 +93,7 @@ const WidgetEventSchedulePlain = ({
                         stageId={stageId}
                         orgUnit={orgUnit}
                         scheduleDate={scheduleDate}
-                        suggestedScheduleDate={suggestedScheduleDate}
+                        serverSuggestedScheduleDate={serverSuggestedScheduleDate}
                         {...passOnProps}
                     />
                 </div>

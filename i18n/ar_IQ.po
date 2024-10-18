@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2024\n"
 "Language-Team: Arabic (Iraq) (https://app.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -41,6 +41,9 @@ msgstr ""
 "الإلتقاط فقط تشغيل نسخة واحدة بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
 "الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
 "النسخ الأخرى."
+
+msgid "More"
+msgstr ""
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -372,17 +375,11 @@ msgstr "الشخص المسجل"
 msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
 
-msgid "Errors"
-msgstr "اخطاء"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "التغذية الراجعة"
-
-msgid "Indicators"
-msgstr "المؤشرات"
-
-msgid "Warnings"
-msgstr "تحذيرات"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr ""
@@ -494,18 +491,6 @@ msgstr "يحتوي على نص"
 msgid "Yes"
 msgstr "نعم"
 
-msgid "mm/dd/yyyy"
-msgstr "شهر / يوم / سنة"
-
-msgid "Years"
-msgstr "السنوات"
-
-msgid "Months"
-msgstr "الأشهر"
-
-msgid "Days"
-msgstr "‏‏الأيام"
-
 msgid "Uploading file"
 msgstr "تحميل ملف"
 
@@ -572,6 +557,9 @@ msgstr "الأعمدة التي سيتم عرضها في الجدول"
 msgid "Column"
 msgstr "العمود"
 
+msgid "Visible"
+msgstr ""
+
 msgid "Update"
 msgstr "تحديث"
 
@@ -613,15 +601,6 @@ msgstr "البرنامج غير موجود"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-
-msgid "Online"
-msgstr "متصل"
-
-msgid "Offline"
-msgstr "غير متصل"
-
-msgid "Syncing"
-msgstr "تزامن"
 
 msgid "Add note"
 msgstr ""
@@ -779,12 +758,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -814,6 +787,11 @@ msgstr ""
 
 msgid "Registered events"
 msgstr "الأحداث المسجلة"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -928,6 +906,18 @@ msgid ""
 "relationship"
 msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
+msgid "Errors"
+msgstr "اخطاء"
+
+msgid "Feedback"
+msgstr "التغذية الراجعة"
+
+msgid "Indicators"
+msgstr "المؤشرات"
+
+msgid "Warnings"
+msgstr "تحذيرات"
+
 msgid "Show all events"
 msgstr "عرض جميع الأحداث"
 
@@ -971,6 +961,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "جار التحميل"
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1246,15 +1242,6 @@ msgstr ""
 msgid "Follow-up"
 msgstr ""
 
-msgid "Started at {{orgUnitName}}"
-msgstr ""
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "تم الإلغاء"
 
@@ -1307,6 +1294,9 @@ msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
 msgid "Event completed"
+msgstr ""
+
+msgid "The event cannot be edited after it has been completed"
 msgstr ""
 
 msgid "Back to all stages and events"
@@ -1468,7 +1458,30 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
 msgstr ""
 
 msgid "To open this event, please wait until saving is complete"
@@ -1477,13 +1490,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset list"
-msgstr ""
-
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
@@ -1506,6 +1513,15 @@ msgstr ""
 
 msgid "Stages and Events"
 msgstr ""
+
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "تمت جدولته"
 
 msgid "Changelog"
 msgstr ""
@@ -1671,9 +1687,6 @@ msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "تمت جدولته"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""

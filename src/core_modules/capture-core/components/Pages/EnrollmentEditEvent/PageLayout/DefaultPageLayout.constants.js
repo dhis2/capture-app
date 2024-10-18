@@ -9,10 +9,12 @@ import {
     EventNote,
     AssigneeWidget,
     WidgetTypes,
+    TwoEventWorkspace,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
 export const WidgetsForEnrollmentEventEdit: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
     EditEventWorkspace,
+    TwoEventWorkspace,
     EventNote,
     AssigneeWidget,
     ...DefaultWidgetsForEnrollmentOverview,
@@ -20,6 +22,10 @@ export const WidgetsForEnrollmentEventEdit: $ReadOnly<{ [key: string]: WidgetCon
 
 export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'TwoEventWorkspace',
+        },
         {
             type: WidgetTypes.COMPONENT,
             name: 'EditEventWorkspace',

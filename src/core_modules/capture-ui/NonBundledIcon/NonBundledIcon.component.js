@@ -27,7 +27,9 @@ export const NonBundledIcon = ({
                     <img
                         className={classes.image}
                         src={source}
-                        alt={alternativeText}
+                        title={alternativeText}
+                        // add empty alt to avoid screen readers reading the url
+                        alt={''}
                     />
                 )
             }

@@ -2,15 +2,15 @@
 # Translators:
 # Philip Larsen Donnelly, 2024
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2024
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-06-28T11:23:02.970Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,6 +44,9 @@ msgstr ""
 " Ứng dụng Ghi chỉ hỗ trợ chạy đồng thời một phiên bản (trong cùng một miền)."
 " Vui lòng làm mới trang này nếu bạn muốn sử dụng lại phiên bản này, nhưng "
 "lưu ý rằng điều này sẽ đóng các phiên bản khác."
+
+msgid "More"
+msgstr "Thêm"
 
 msgid "View {{programName}} dashboard"
 msgstr ""
@@ -374,17 +377,11 @@ msgstr "Người đã đăng ký"
 msgid "validation failed"
 msgstr "xác thực không thành công"
 
-msgid "Errors"
-msgstr "Lỗi"
+msgid "No feedback for this event yet"
+msgstr ""
 
-msgid "Feedback"
-msgstr "Phản hồi"
-
-msgid "Indicators"
-msgstr "Các chỉ số"
-
-msgid "Warnings"
-msgstr "Cảnh báo"
+msgid "No indicator output for this event yet"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Tạo sự kiện mới"
@@ -496,18 +493,6 @@ msgstr "Chứa văn bản"
 msgid "Yes"
 msgstr "Có"
 
-msgid "mm/dd/yyyy"
-msgstr "mm / dd / yyyy"
-
-msgid "Years"
-msgstr "Năm"
-
-msgid "Months"
-msgstr "Tháng"
-
-msgid "Days"
-msgstr "Ngày"
-
 msgid "Uploading file"
 msgstr "Đang tải tập tin lên"
 
@@ -574,6 +559,9 @@ msgstr "Cột hiển thị trong bảng"
 msgid "Column"
 msgstr "Cột"
 
+msgid "Visible"
+msgstr "Hiển thị"
+
 msgid "Update"
 msgstr "Cập nhật"
 
@@ -615,15 +603,6 @@ msgstr "Chương trình không tồn tại"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-
-msgid "Online"
-msgstr "Trực tuyến"
-
-msgid "Offline"
-msgstr "Ngoại tuyến"
-
-msgid "Syncing"
-msgstr "Đang đồng bộ"
 
 msgid "Add note"
 msgstr "Thêm ghi chú"
@@ -781,12 +760,6 @@ msgstr ""
 msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
-msgid "No feedback for this event yet"
-msgstr ""
-
-msgid "No indicator output for this event yet"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -816,6 +789,11 @@ msgstr "Giai Đoạn Chương Trình"
 
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
+
+msgid ""
+"The category option is not valid for the selected organisation unit. Please "
+"select a valid combination."
+msgstr ""
 
 msgid "Please select {{category}}."
 msgstr ""
@@ -911,7 +889,7 @@ msgid "events"
 msgstr "sự kiện"
 
 msgid "event"
-msgstr ""
+msgstr "sự kiện"
 
 msgid "You don't have access to edit this event"
 msgstr ""
@@ -931,6 +909,18 @@ msgid ""
 msgstr ""
 "Rời khỏi trang này sẽ hủy mọi lựa chọn bạn đã thực hiện cho một mối quan hệ "
 "mới"
+
+msgid "Errors"
+msgstr "Lỗi"
+
+msgid "Feedback"
+msgstr "Phản hồi"
+
+msgid "Indicators"
+msgstr "Các chỉ số"
+
+msgid "Warnings"
+msgstr "Cảnh báo"
 
 msgid "Show all events"
 msgstr "Hiện tất cả sự kiện"
@@ -970,6 +960,12 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Loading"
+msgstr "Đang tải"
+
+msgid "An error occurred while loading the form"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1189,7 +1185,7 @@ msgid "Mark for follow-up"
 msgstr "Đánh dấu để theo-dõi"
 
 msgid "Transfer"
-msgstr ""
+msgstr "Chuyển"
 
 msgid "An error occurred while transferring ownership"
 msgstr ""
@@ -1251,15 +1247,6 @@ msgstr ""
 msgid "Follow-up"
 msgstr "Theo dõi sau"
 
-msgid "Started at {{orgUnitName}}"
-msgstr ""
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
-msgid "Last updated {{date}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "Đã hủy"
 
@@ -1312,6 +1299,9 @@ msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
 msgid "Event completed"
+msgstr "Sự kiện đã hoàn tất"
+
+msgid "The event cannot be edited after it has been completed"
 msgstr ""
 
 msgid "Back to all stages and events"
@@ -1463,8 +1453,31 @@ msgstr "Ngày báo cáo"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "Bỏ qua"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr ""
@@ -1472,13 +1485,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset list"
-msgstr ""
-
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
@@ -1496,6 +1503,15 @@ msgstr ""
 
 msgid "Stages and Events"
 msgstr ""
+
+msgid "An error occurred while loading the widget."
+msgstr ""
+
+msgid "View linked event"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Đã xếp lịch"
 
 msgid "Changelog"
 msgstr ""
@@ -1661,9 +1677,6 @@ msgstr "Có lỗi. Xem log để biết thêm chi tiết."
 
 msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
-
-msgid "Scheduled"
-msgstr "Đã xếp lịch"
 
 msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""

@@ -14,27 +14,35 @@ type RangeValue = {
     to: string,
 }
 
-function convertDateTime(formValue: DateTimeValue): string {
+function convertDateTime(formValue: DateTimeValue): ?string {
     const editedDate = formValue.date;
     const editedTime = formValue.time;
 
-    const momentTime = parseTime(editedTime).momentTime;
+    const parsedTime = parseTime(editedTime);
+    if (!parsedTime.isValid) return null;
+    const momentTime = parsedTime.momentTime;
     const hours = momentTime.hour();
     const minutes = momentTime.minute();
+
+    const parsedDate = parseDate(editedDate);
+    if (!parsedDate.isValid) return null;
     // $FlowFixMe[incompatible-type] automated comment
-    const momentDateTime: moment$Moment = parseDate(editedDate).momentDate;
+    const momentDateTime: moment$Moment = parsedDate.momentDate;
     momentDateTime.hour(hours);
     momentDateTime.minute(minutes);
     return momentDateTime.toISOString();
 }
 
 function convertDate(dateValue: string) {
+    const parsedDate = parseDate(dateValue);
     // $FlowFixMe[incompatible-use] automated comment
-    return parseDate(dateValue).momentDate.toISOString();
+    return parsedDate.isValid ? parsedDate.momentDate.toISOString() : null;
 }
 
 function convertTime(timeValue: string) {
-    const momentTime = parseTime(timeValue).momentTime;
+    const parsedTime = parseTime(timeValue);
+    if (!parsedTime.isValid) return null;
+    const momentTime = parsedTime.momentTime;
     momentTime.locale('en');
     return momentTime.format('HH:mm');
 }

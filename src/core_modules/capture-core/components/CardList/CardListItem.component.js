@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
 import type { ComponentType } from 'react';
-import { Grid, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { CardImage } from '../../../capture-ui/CardImage/CardImage.component';
@@ -15,24 +15,23 @@ import { searchScopes } from '../SearchBox';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
 import { dataElementTypes, getTrackerProgramThrowIfNotFound } from '../../metaData';
-import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
-
 
 type OwnProps = $ReadOnly<{|
     item: ListItem,
-    currentSearchScopeName?: string,
-    currentProgramId?: string,
-    currentSearchScopeType?: string,
-    renderCustomCardActions?: RenderCustomCardActions,
-    profileImageDataElement: ?CardProfileImageElementInformation,
-    dataElements: CardDataElementsInformation,
+        currentSearchScopeName ?: string,
+        currentProgramId ?: string,
+        currentSearchScopeType ?: string,
+        renderCustomCardActions ?: RenderCustomCardActions,
+        profileImageDataElement: ?CardProfileImageElementInformation,
+            dataElements: CardDataElementsInformation,
 |}>;
 
 type Props = $ReadOnly<{|
     ...OwnProps,
     ...CssClasses
-|}>;
+    |}>;
 
 const getStyles = (theme: Theme) => ({
     itemContainer: {
@@ -44,6 +43,7 @@ const getStyles = (theme: Theme) => ({
         borderRadius: theme.typography.pxToRem(5),
         border: `1px solid ${colors.grey400}`,
         backgroundColor: colors.grey050,
+        position: 'relative',
     },
     itemDataContainer: {
         display: 'flex',
@@ -52,6 +52,9 @@ const getStyles = (theme: Theme) => ({
         fontSize: theme.typography.pxToRem(12),
         color: colors.grey700,
         paddingBottom: theme.typography.pxToRem(8),
+        position: 'absolute',
+        top: theme.typography.pxToRem(8),
+        right: theme.typography.pxToRem(8),
     },
     enrolled: {
         display: 'flex',
@@ -141,7 +144,7 @@ const CardListItemIndex = ({
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitId, enrolledAt } = deriveEnrollmentOrgUnitIdAndDate(enrollments, enrollmentType, currentProgramId);
-    const { displayName: orgUnitName } = useOrgUnitName(orgUnitId);
+    const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
     const program = enrollments && enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
@@ -213,49 +216,39 @@ const CardListItemIndex = ({
     return (
         <div data-test="card-list-item" className={classes.itemContainer}>
             <div className={classes.itemDataContainer}>
-
                 <div className={classes.itemValuesContainer}>
-                    <Grid container >
-                        <Grid item>
-                            {renderImageDataElement(profileImageDataElement)}
-                        </Grid>
-                        <Grid item sm container>
-                            <Grid item xs container direction="column" >
-                                {dataElements
-                                    .map(({ id, name, type }) => (
-                                        <ListEntry
-                                            key={id}
-                                            name={name}
-                                            value={item.values[id]}
-                                            type={type}
-                                        />))
-                                }
-
-                                {renderEnrollmentDetails()}
-                            </Grid>
-                            <Grid item>
-                                {
-                                    item.tei && item.tei.updatedAt &&
-                                    <div className={classes.smallerLetters}>
-                                        { i18n.t('Last updated') } {' '}
-                                        { item.tei && <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
-                                            { moment(fromServerDate(item.tei.updatedAt)).fromNow() }
-                                        </Tooltip>}
-                                    </div>
-                                }
-
-                                <div className={classes.enrolled}>
-                                    {renderTag()}
-                                </div>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                    {renderImageDataElement(profileImageDataElement)}
+                    <div>
+                        {dataElements
+                            .map(({ id, name, type }) => (
+                                <ListEntry
+                                    key={id}
+                                    name={name}
+                                    value={item.values[id]}
+                                    type={type}
+                                />
+                            ))
+                        }
+                        {renderEnrollmentDetails()}
+                    </div>
+                    <div>
+                        <div className={classes.enrolled}>
+                            {renderTag()}
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            {
-                renderCustomCardActions
-                &&
+            {item.tei && item.tei.updatedAt && (
+                <div className={classes.smallerLetters}>
+                    {i18n.t('Last updated')}{' '}
+                    {item.tei && (
+                        <Tooltip content={fromServerDate(item.tei.updatedAt).toLocaleString()}>
+                            {moment(fromServerDate(item.tei.updatedAt)).fromNow()}
+                        </Tooltip>
+                    )}
+                </div>
+            )}
+            {renderCustomCardActions && (
                 <div className={classes.buttonMargin}>
                     {
                         renderCustomCardActions({
@@ -270,7 +263,7 @@ const CardListItemIndex = ({
                         })
                     }
                 </div>
-            }
+            )}
         </div>
     );
 };

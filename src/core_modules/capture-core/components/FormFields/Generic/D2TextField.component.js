@@ -1,10 +1,10 @@
 // @flow
+import { Input } from '@dhis2/ui';
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
 
 type Props = {
-    onChange?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
-    onBlur?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
+    onChange?: ?(value: string, event: HTMLInputElement) => void,
+    onBlur?: ?(value: string, event: HTMLInputElement) => void,
     value: ?string,
 };
 
@@ -21,12 +21,12 @@ export class D2TextField extends Component<Props> {
         this.handleBlur = this.handleBlur.bind(this);
     }
 
-    handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
-        this.props.onChange && this.props.onChange(event.currentTarget.value, event);
+    handleChange = (event: HTMLInputElement) => {
+        this.props.onChange && this.props.onChange(event.value, event);
     }
 
-    handleBlur = (event: SyntheticEvent<HTMLInputElement>) => {
-        this.props.onBlur && this.props.onBlur(event.currentTarget.value, event);
+    handleBlur = (event: HTMLInputElement) => {
+        this.props.onBlur && this.props.onBlur(event.value, event);
     }
 
     focus() {
@@ -39,7 +39,7 @@ export class D2TextField extends Component<Props> {
         return (
             <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <TextField
+                <Input
                     inputRef={(inst) => { this.materialUIInstance = inst; }}
                     value={value || ''}
                     onChange={this.handleChange}

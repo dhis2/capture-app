@@ -4,7 +4,6 @@ import type { CustomRowMenuContents } from '../../WorkingListsBase';
 
 type ExtractedProps = $ReadOnly<{|
     onDeleteEvent: Function,
-    classes: Object,
 |}>;
 
 type RestProps = $Rest<EventWorkingListsViewMenuSetupOutputProps, ExtractedProps>;

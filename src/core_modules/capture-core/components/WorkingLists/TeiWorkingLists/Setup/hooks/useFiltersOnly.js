@@ -4,12 +4,13 @@ import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
 import { MAIN_FILTERS } from '../../constants';
 
-export const useFiltersOnly = ({
-    enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate },
-    stages,
-}: TrackerProgram) =>
+export const useFiltersOnly = (
+    { enrollment: { enrollmentDateLabel, incidentDateLabel, showIncidentDate }, stages }: TrackerProgram,
+    programStageId?: string,
+) =>
     useMemo(() => {
-        const enableUserAssignment = Array.from(stages.values()).find(stage => stage.enableUserAssignment);
+        const enableUserAssignment =
+            !programStageId && Array.from(stages.values()).find(stage => stage.enableUserAssignment);
         return [
             {
                 id: MAIN_FILTERS.PROGRAM_STATUS,
@@ -80,9 +81,15 @@ export const useFiltersOnly = ({
                         id: MAIN_FILTERS.ASSIGNEE,
                         type: dataElementTypes.ASSIGNEE,
                         header: i18n.t('Assigned to'),
-                        transformRecordsFilter: (rawFilter: Object) => rawFilter,
+                        transformRecordsFilter: (rawFilter: Object) => {
+                            const { assignedUser, assignedUserMode } = rawFilter;
+                            return {
+                                assignedUserMode,
+                                ...(assignedUser && { assignedUser }),
+                            };
+                        },
                     },
                 ]
                 : []),
         ];
-    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages]);
+    }, [enrollmentDateLabel, incidentDateLabel, showIncidentDate, stages, programStageId]);

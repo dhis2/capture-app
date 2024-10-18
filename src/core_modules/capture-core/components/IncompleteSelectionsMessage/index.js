@@ -1,29 +1,23 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper/Paper';
-import Grid from '@material-ui/core/Grid/Grid';
-import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui';
 
-const StyledPaper = withStyles({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        background: colors.grey200,
-        color: colors.grey700,
-        padding: '12px 16px',
-    },
-})(Paper);
+const containerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+};
+
+const messageBoxStyle = {
+    alignItems: 'center',
+    background: colors.grey200,
+    color: colors.grey700,
+    padding: '12px 16px',
+    borderRadius: '4px',
+};
 
 export const IncompleteSelectionsMessage = ({ children, dataTest = 'informative-paper' }) => (
-    <Grid container justify="center">
-        <Grid item>
-            <StyledPaper
-                data-test={dataTest}
-                elevation={0}
-            >
-                {children}
-            </StyledPaper>
-        </Grid>
-    </Grid>);
-
+    <div style={containerStyle}>
+        <div style={messageBoxStyle} data-test={dataTest}>
+            {children}
+        </div>
+    </div>
+);
