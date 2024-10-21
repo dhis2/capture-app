@@ -1224,6 +1224,12 @@ msgstr "Enrollment widget could not be loaded. Please try again later"
 msgid "Follow-up"
 msgstr "Follow-up"
 
+msgid "Started at{{escape}}"
+msgstr "Started at{{escape}}"
+
+msgid "Owned by{{escape}}"
+msgstr "Owned by{{escape}}"
+
 msgid "Cancelled"
 msgstr "Cancelled"
 
