@@ -1,3 +1,11 @@
+# [101.13.0](https://github.com/dhis2/capture-app/compare/v101.12.2...v101.13.0) (2024-10-21)
+
+
+### Features
+
+* [DHIS2-16992] Fixed size for changelog modal and columns ([#3834](https://github.com/dhis2/capture-app/issues/3834)) ([3b021cf](https://github.com/dhis2/capture-app/commit/3b021cf5569338db5038d8ed231a810a0fa909f3))
+* [DHIS2-17991] Show orgUnit selector in Enter details now ([#3824](https://github.com/dhis2/capture-app/issues/3824)) ([bf2f1ca](https://github.com/dhis2/capture-app/commit/bf2f1cabebe4ddf100cb8054be0a4af2fbec3965))
+
 ## [101.12.2](https://github.com/dhis2/capture-app/compare/v101.12.1...v101.12.2) (2024-10-20)
 
 
