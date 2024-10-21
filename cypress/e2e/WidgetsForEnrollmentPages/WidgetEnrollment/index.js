@@ -232,7 +232,7 @@ Then(/^the user successfully transfers the enrollment/, () => {
 
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains('Owned by: Njandama MCHP')
+            .contains('Owned by:Njandama MCHP')
             .should('exist');
     });
 });
@@ -246,7 +246,7 @@ Then(/^the user types in (.*)/, (orgunit) => {
 Given(/^the enrollment owner organisation unit is (.*)/, (orgunit) => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains(`Owned by: ${orgunit}`)
+            .contains(`Owned by:${orgunit}`)
             .should('exist');
     });
 });
