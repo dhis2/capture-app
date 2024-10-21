@@ -27,11 +27,11 @@ const getErrorMessage = (errorCode: string, errorMessage: string): ?string => {
 };
 
 export function isValidDate(value: string, internalError) {
-    if (internalError.innerError) {
+    if (internalError?.innerError) {
         return {
             valid: false,
             errorMessage: {
-                dateInnerErrorMessage: getErrorMessage(internalError.innerErrorCode, internalError.innerError) 
+                dateInnerErrorMessage: getErrorMessage(internalError.innerErrorCode, internalError.innerError)
             } };
     }
 
