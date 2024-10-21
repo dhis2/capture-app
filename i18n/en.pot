@@ -1414,13 +1414,6 @@ msgstr "{{ linkableStageLabel }} has no linkable events"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Enter details now"
 
