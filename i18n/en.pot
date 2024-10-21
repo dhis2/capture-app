@@ -1414,13 +1414,6 @@ msgstr "{{ linkableStageLabel }} has no linkable events"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Enter details now"
 
@@ -1542,6 +1535,9 @@ msgstr "Changelog"
 msgid "No changes to display"
 msgstr "No changes to display"
 
+msgid "Updated"
+msgstr "Updated"
+
 msgid "Created"
 msgstr "Created"
 
@@ -1559,6 +1555,9 @@ msgstr "Data item"
 
 msgid "Change"
 msgstr "Change"
+
+msgid "Value"
+msgstr "Value"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
