@@ -1,3 +1,10 @@
+# [101.14.0](https://github.com/dhis2/capture-app/compare/v101.13.0...v101.14.0) (2024-10-21)
+
+
+### Features
+
+* [DHIS2-17792] Org unit context in forms ([#3828](https://github.com/dhis2/capture-app/issues/3828)) ([c8ccf63](https://github.com/dhis2/capture-app/commit/c8ccf63e0cde97a190cec6248dc25a4a4d747646))
+
 # [101.13.0](https://github.com/dhis2/capture-app/compare/v101.12.2...v101.13.0) (2024-10-21)
 
 
