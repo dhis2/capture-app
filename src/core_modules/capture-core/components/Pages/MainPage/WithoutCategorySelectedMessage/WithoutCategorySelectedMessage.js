@@ -32,7 +32,7 @@ const WithoutCategorySelectedMessagePlain = ({ programId, classes }) => {
         categories: currentSelections.categories,
     }), shallowEqual);
 
-    if (!program.categoryCombination) {
+    if (!program?.categoryCombination) {
         log.error(errorCreator(errorMessages.MISSING_CATEGORY)({ programId }));
         throw Error(i18n.t(errorMessages.GENERIC_ERROR));
     }

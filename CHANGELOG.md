@@ -1,3 +1,39 @@
+## [101.14.1](https://github.com/dhis2/capture-app/compare/v101.14.0...v101.14.1) (2024-10-22)
+
+
+### Bug Fixes
+
+* [DHIS2-16010] app crashes on invalid programid ([#3765](https://github.com/dhis2/capture-app/issues/3765)) ([9133a63](https://github.com/dhis2/capture-app/commit/9133a63e138517c633a192b5d51f39a43c57e327))
+
+# [101.14.0](https://github.com/dhis2/capture-app/compare/v101.13.0...v101.14.0) (2024-10-21)
+
+
+### Features
+
+* [DHIS2-17792] Org unit context in forms ([#3828](https://github.com/dhis2/capture-app/issues/3828)) ([c8ccf63](https://github.com/dhis2/capture-app/commit/c8ccf63e0cde97a190cec6248dc25a4a4d747646))
+
+# [101.13.0](https://github.com/dhis2/capture-app/compare/v101.12.2...v101.13.0) (2024-10-21)
+
+
+### Features
+
+* [DHIS2-16992] Fixed size for changelog modal and columns ([#3834](https://github.com/dhis2/capture-app/issues/3834)) ([3b021cf](https://github.com/dhis2/capture-app/commit/3b021cf5569338db5038d8ed231a810a0fa909f3))
+* [DHIS2-17991] Show orgUnit selector in Enter details now ([#3824](https://github.com/dhis2/capture-app/issues/3824)) ([bf2f1ca](https://github.com/dhis2/capture-app/commit/bf2f1cabebe4ddf100cb8054be0a4af2fbec3965))
+
+## [101.12.2](https://github.com/dhis2/capture-app/compare/v101.12.1...v101.12.2) (2024-10-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9bf7696](https://github.com/dhis2/capture-app/commit/9bf7696de59baf42dd8f8ee1869f4696f83c007a))
+
+## [101.12.1](https://github.com/dhis2/capture-app/compare/v101.12.0...v101.12.1) (2024-10-16)
+
+
+### Bug Fixes
+
+* [DHIS2-17978] use title instead of alt on missing icons ([#3847](https://github.com/dhis2/capture-app/issues/3847)) ([b5940f2](https://github.com/dhis2/capture-app/commit/b5940f21204cf26afce6c28ba88b50c09728265f))
+
 # [101.12.0](https://github.com/dhis2/capture-app/compare/v101.11.2...v101.12.0) (2024-10-15)
 
 
