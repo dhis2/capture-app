@@ -705,9 +705,6 @@ msgstr "View working list in this program."
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
 
-msgid "Program is not valid"
-msgstr "Program is not valid"
-
 msgid "Org unit is not valid with current program"
 msgstr "Org unit is not valid with current program"
 
