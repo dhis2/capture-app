@@ -1,3 +1,10 @@
+## [101.14.1](https://github.com/dhis2/capture-app/compare/v101.14.0...v101.14.1) (2024-10-22)
+
+
+### Bug Fixes
+
+* [DHIS2-16010] app crashes on invalid programid ([#3765](https://github.com/dhis2/capture-app/issues/3765)) ([9133a63](https://github.com/dhis2/capture-app/commit/9133a63e138517c633a192b5d51f39a43c57e327))
+
 # [101.14.0](https://github.com/dhis2/capture-app/compare/v101.13.0...v101.14.0) (2024-10-21)
 
 
