@@ -17,10 +17,12 @@ import {
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
 import { Widget } from '../../../../../Widget';
+import type { ProgramStage } from '../../../../../../metaData';
 
 type Props = {
     selectedRows: { [id: string]: any },
     programId: string,
+    stages: Map<string, ProgramStage>,
     onUpdateList: (disableClearSelections?: boolean) => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
 };
@@ -47,6 +49,7 @@ const styles = {
 const CompleteActionPlain = ({
     selectedRows,
     programId,
+    stages,
     onUpdateList,
     removeRowsFromSelection,
     classes,
@@ -66,6 +69,7 @@ const CompleteActionPlain = ({
         selectedRows,
         programId,
         modalIsOpen,
+        stages,
         onUpdateList,
         removeRowsFromSelection,
     });
@@ -181,7 +185,7 @@ const CompleteActionPlain = ({
                 >
                     <ModalTitle>
                         {validationError ? i18n.t('Error completing enrollments')
-                            : i18n.t('Complete selected enrollments')}
+                            : i18n.t('Complete enrollments')}
                     </ModalTitle>
                     <ModalContent>
                         <ModalTextContent />

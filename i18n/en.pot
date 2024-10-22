@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-13T18:40:14.112Z\n"
-"PO-Revision-Date: 2024-10-13T18:40:14.112Z\n"
+"POT-Creation-Date: 2024-10-22T14:40:35.028Z\n"
+"PO-Revision-Date: 2024-10-22T14:40:35.028Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1632,6 +1632,9 @@ msgstr "Download data..."
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
 
+msgid "You do not have access to complete events"
+msgstr "You do not have access to complete events"
+
 msgid "Complete events"
 msgstr "Complete events"
 
@@ -1641,11 +1644,26 @@ msgstr "Are you sure you want to complete all active events in selection?"
 msgid "There are no active events to complete in the current selection."
 msgstr "There are no active events to complete in the current selection."
 
+msgid "Error completing events"
+msgstr "Error completing events"
+
+msgid "There was an error completing the events."
+msgstr "There was an error completing the events."
+
+msgid "Details (Advanced)"
+msgstr "Details (Advanced)"
+
+msgid "An unknown error occurred."
+msgstr "An unknown error occurred."
+
 msgid "An error occurred while completing events"
 msgstr "An error occurred while completing events"
 
 msgid "An error occurred while deleting the events"
 msgstr "An error occurred while deleting the events"
+
+msgid "You do not have access to delete events"
+msgstr "You do not have access to delete events"
 
 msgid "Delete events"
 msgstr "Delete events"
@@ -1691,12 +1709,6 @@ msgstr ""
 "There was an error while completing the enrollments. Please see the details "
 "below."
 
-msgid "Details (Advanced)"
-msgstr "Details (Advanced)"
-
-msgid "An unknown error occurred."
-msgstr "An unknown error occurred."
-
 msgid ""
 "An unexpected error occurred while fetching the enrollments. Please try "
 "again."
@@ -1729,9 +1741,6 @@ msgstr "Complete enrollments"
 
 msgid "Error completing enrollments"
 msgstr "Error completing enrollments"
-
-msgid "Complete selected enrollments"
-msgstr "Complete selected enrollments"
 
 msgid "No active enrollments to complete"
 msgstr "No active enrollments to complete"

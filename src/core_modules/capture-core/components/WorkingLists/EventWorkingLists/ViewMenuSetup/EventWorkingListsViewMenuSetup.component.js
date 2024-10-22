@@ -25,6 +25,7 @@ export const EventWorkingListsViewMenuSetup = ({
         selectionInProgress,
         toggleRowSelected,
         allRowsAreSelected,
+        removeRowsFromSelection,
     } = useSelectedRowsController({ recordIds: dataSource?.map(data => data.id) });
 
     const customListViewMenuContents: CustomMenuContents = useMemo(() => [{
@@ -38,18 +39,20 @@ export const EventWorkingListsViewMenuSetup = ({
     }, [setDownloadDialogOpenStatus]);
 
 
-    const onUpdateList = useCallback(() => {
+    const onUpdateList = useCallback((disableClearSelection?: boolean) => {
         const id = uuid();
         setCustomUpdateTrigger(id);
-        clearSelection();
+        !disableClearSelection && clearSelection();
     }, [clearSelection]);
 
     const eventBulkActions = (
         <EventBulkActions
             selectedRows={selectedRows}
+            // $FlowFixMe - program.stage should be available on EventPrograms
+            stage={program.stage}
             onClearSelection={clearSelection}
-            programId={program.id}
             onUpdateList={onUpdateList}
+            removeRowsFromSelection={removeRowsFromSelection}
         />
     );
 

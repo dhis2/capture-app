@@ -1,41 +1,64 @@
 // @flow
-import React, { useState } from 'react';
+import React, { type ComponentType, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
+import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
+import { Widget } from '../../../../../Widget';
 
 type Props = {|
     selectedRows: { [key: string]: boolean },
-    onUpdateList: () => void,
+    disabled?: boolean,
+    onUpdateList: (disableClearSelections?: boolean) => void,
+    removeRowsFromSelection: (rows: Array<string>) => void,
 |}
 
-export const CompleteAction = ({
+const styles = {
+    errorContainer: {
+        padding: '0px 20px',
+    },
+};
+
+const CompleteActionPlain = ({
     selectedRows,
+    disabled,
+    removeRowsFromSelection,
     onUpdateList,
-}: Props) => {
+    classes,
+}) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
+    const [openAccordion, setOpenAccordion] = useState(false);
     const {
         eventCounts,
         isLoading,
         isCompletingEvents,
-        completeEvents,
+        onCompleteEvents,
+        validationError,
     } = useBulkCompleteEvents({
         selectedRows,
         isCompleteDialogOpen,
         setIsCompleteDialogOpen,
+        removeRowsFromSelection,
         onUpdateList,
     });
 
     return (
         <>
-            <Button
-                small
-                onClick={() => setIsCompleteDialogOpen(true)}
+            <ConditionalTooltip
+                enabled={disabled}
+                content={i18n.t('You do not have access to complete events')}
             >
-                {i18n.t('Complete')}
-            </Button>
+                <Button
+                    small
+                    onClick={() => setIsCompleteDialogOpen(true)}
+                    disabled={disabled}
+                >
+                    {i18n.t('Complete')}
+                </Button>
+            </ConditionalTooltip>
 
-            {isCompleteDialogOpen && eventCounts && (
+            {isCompleteDialogOpen && eventCounts && !validationError && (
                 <Modal
                     small
                     onClose={() => setIsCompleteDialogOpen(false)}
@@ -64,7 +87,7 @@ export const CompleteAction = ({
 
                             <Button
                                 primary
-                                onClick={completeEvents}
+                                onClick={onCompleteEvents}
                                 disabled={isLoading || eventCounts?.active === 0 || !eventCounts}
                                 loading={isCompletingEvents}
                             >
@@ -75,6 +98,62 @@ export const CompleteAction = ({
 
                 </Modal>
             )}
+
+            {isCompleteDialogOpen && validationError && (
+                <Modal
+                    small
+                    onClose={() => setIsCompleteDialogOpen(false)}
+                    dataTest={'bulk-complete-events-dialog'}
+                >
+                    <ModalTitle>
+                        {i18n.t('Error completing events')}
+                    </ModalTitle>
+
+                    <ModalContent>
+                        <span>
+                            {i18n.t('There was an error completing the events.')}
+
+                            <Widget
+                                open={openAccordion}
+                                onOpen={() => setOpenAccordion(true)}
+                                onClose={() => setOpenAccordion(false)}
+                                borderless
+                                header={i18n.t('Details (Advanced)')}
+                            >
+                                <span className={classes.errorContainer}>
+                                    <ul>
+                                        {validationError?.validationReport?.errorReports ?
+                                            validationError.validationReport.errorReports.map(errorReport => (
+                                                <li key={`${errorReport.uid}-${errorReport.errorCode}`}>
+                                                    {errorReport?.message}
+                                                </li>
+                                            )) : (
+                                                <li>
+                                                    {i18n.t('An unknown error occurred.')}
+                                                </li>
+                                            )
+                                        }
+                                    </ul>
+                                </span>
+                            </Widget>
+                        </span>
+                    </ModalContent>
+
+
+                    <ModalActions>
+                        <ButtonStrip>
+                            <Button
+                                secondary
+                                onClick={() => setIsCompleteDialogOpen(false)}
+                            >
+                                {i18n.t('Close')}
+                            </Button>
+                        </ButtonStrip>
+                    </ModalActions>
+                </Modal>
+            )}
         </>
     );
 };
+
+export const CompleteAction: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(CompleteActionPlain);

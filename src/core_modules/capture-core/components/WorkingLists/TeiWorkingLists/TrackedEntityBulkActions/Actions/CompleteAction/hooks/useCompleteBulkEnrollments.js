@@ -8,10 +8,12 @@ import log from 'loglevel';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { errorCreator, FEATURES, hasAPISupportForFeature } from '../../../../../../../../capture-core-utils';
+import type { ProgramStage } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: { [id: string]: any },
     programId: string,
+    stages: Map<string, ProgramStage>,
     modalIsOpen: boolean,
     onUpdateList: (disableClearSelections?: boolean) => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
@@ -29,10 +31,11 @@ const importValidEnrollments = async ({ dataEngine, enrollments }) => dataEngine
     data: () => ({ enrollments }),
 });
 
-const formatServerPayload = (trackedEntities, completeEvents) => {
+const formatServerPayload = (trackedEntities, completeEvents, stages) => {
     const enrollments = trackedEntities?.activeEnrollments ?? [];
     let updatedEnrollments = enrollments.map(enrollment => ({
         ...enrollment,
+        events: [],
         status: 'COMPLETED',
     }));
 
@@ -40,7 +43,7 @@ const formatServerPayload = (trackedEntities, completeEvents) => {
         updatedEnrollments = updatedEnrollments.map(enrollment => ({
             ...enrollment,
             events: enrollment.events
-                .filter(event => event.status === 'ACTIVE')
+                .filter(event => event.status === 'ACTIVE' && stages.get(event.programStage)?.access?.data?.write)
                 .map(event => ({ ...event, status: 'COMPLETED' })),
         }));
     }
@@ -74,6 +77,7 @@ const filterValidEnrollments = (enrollments, errors) => {
 export const useCompleteBulkEnrollments = ({
     selectedRows,
     programId,
+    stages,
     modalIsOpen,
     removeRowsFromSelection,
     onUpdateList,
@@ -224,7 +228,7 @@ export const useCompleteBulkEnrollments = ({
     }, [modalIsOpen, resetCompleteEnrollments]);
 
     const onStartCompleteEnrollments = ({ completeEvents }: { completeEvents: boolean }) => {
-        const enrollments = formatServerPayload(trackedEntities, completeEvents);
+        const enrollments = formatServerPayload(trackedEntities, completeEvents, stages);
         onValidateEnrollments({ completeEvents, enrollments });
     };
 

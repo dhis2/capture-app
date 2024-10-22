@@ -49,7 +49,29 @@ export const WorkingListsListViewBuilderContextProvider = ({
         stickyFilters,
         programStageId,
         bulkActionBarComponent,
-    }), [updating, updatingWithDialog, dataSource, selectedRows, allRowsAreSelected, selectionInProgress, onClickListRow, onRowSelect, onSelectAll, onSortList, onSetListColumnOrder, customRowMenuContents, onUpdateFilter, onClearFilter, onRemoveFilter, onSelectRestMenuItem, onChangePage, onChangeRowsPerPage, stickyFilters, programStageId, bulkActionBarComponent]);
+    }), [
+        updating,
+        updatingWithDialog,
+        dataSource,
+        selectedRows,
+        allRowsAreSelected,
+        selectionInProgress,
+        onClickListRow,
+        onRowSelect,
+        onSelectAll,
+        onSortList,
+        onSetListColumnOrder,
+        customRowMenuContents,
+        onUpdateFilter,
+        onClearFilter,
+        onRemoveFilter,
+        onSelectRestMenuItem,
+        onChangePage,
+        onChangeRowsPerPage,
+        stickyFilters,
+        programStageId,
+        bulkActionBarComponent,
+    ]);
 
     return (
         <ListViewBuilderContext.Provider

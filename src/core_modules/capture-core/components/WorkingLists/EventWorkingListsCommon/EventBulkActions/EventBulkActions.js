@@ -2,16 +2,21 @@
 import React from 'react';
 import { BulkActionBar } from '../../WorkingListsBase/BulkActionBar';
 import { CompleteAction, DeleteAction } from './Actions';
+import type { ProgramStage } from '../../../../metaData';
 
-type Props = {
+type Props = {|
     selectedRows: { [key: string]: boolean },
     onClearSelection: () => void,
-    onUpdateList: () => void,
-}
+    stage: ProgramStage,
+    onUpdateList: (disableClearSelection?: boolean) => void,
+    removeRowsFromSelection: (rows: Array<string>) => void,
+|}
 
 export const EventBulkActions = ({
     selectedRows,
+    stage,
     onClearSelection,
+    removeRowsFromSelection,
     onUpdateList,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
@@ -27,11 +32,14 @@ export const EventBulkActions = ({
         >
             <CompleteAction
                 selectedRows={selectedRows}
+                disabled={!stage.access.data.write}
                 onUpdateList={onUpdateList}
+                removeRowsFromSelection={removeRowsFromSelection}
             />
 
             <DeleteAction
                 selectedRows={selectedRows}
+                disabled={!stage.access.data.write}
                 onUpdateList={onUpdateList}
             />
         </BulkActionBar>

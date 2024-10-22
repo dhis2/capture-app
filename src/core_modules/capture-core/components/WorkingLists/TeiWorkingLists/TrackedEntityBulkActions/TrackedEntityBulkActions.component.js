@@ -8,6 +8,7 @@ import { DeleteEnrollmentsAction } from './Actions/DeleteEnrollmentsAction';
 export const TrackedEntityBulkActionsComponent = ({
     selectedRows,
     programId,
+    stages,
     onClearSelection,
     onUpdateList,
     removeRowsFromSelection,
@@ -26,6 +27,7 @@ export const TrackedEntityBulkActionsComponent = ({
             <CompleteAction
                 programId={programId}
                 selectedRows={selectedRows}
+                stages={stages}
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
             />

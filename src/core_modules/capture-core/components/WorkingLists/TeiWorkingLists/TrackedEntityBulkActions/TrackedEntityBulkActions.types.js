@@ -1,14 +1,16 @@
 // @flow
+import type { ProgramStage } from '../../../../metaData';
 
-export type Props = {
+export type Props = {|
     selectedRows: { [key: string]: boolean },
     programId: string,
+    stages: Map<string, ProgramStage>,
     onClearSelection: () => void,
     onUpdateList: () => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
-}
+|}
 
-export type ContainerProps = {
+export type ContainerProps = {|
     ...Props,
     programStageId: ?string,
-}
+|}

@@ -1,5 +1,5 @@
 // @flow
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from 'react-query';
 import { useAlert, useConfig, useDataEngine } from '@dhis2/app-runtime';
@@ -12,12 +12,14 @@ type Props = {|
     isCompleteDialogOpen: boolean,
     setIsCompleteDialogOpen: (isCompleteDialogOpen: boolean) => void,
     onUpdateList: (disableClearSelection?: boolean) => void,
+    removeRowsFromSelection: (rows: Array<string>) => void,
 |}
 
 export const useBulkCompleteEvents = ({
     selectedRows,
     isCompleteDialogOpen,
     setIsCompleteDialogOpen,
+    removeRowsFromSelection,
     onUpdateList,
 }: Props) => {
     const { serverVersion: { minor } } = useConfig();
@@ -59,28 +61,54 @@ export const useBulkCompleteEvents = ({
         },
     );
 
-    const { mutate: completeEvents, isLoading: isCompletingEvents } = useMutation<any>(
-        () => dataEngine.mutate({
-            resource: 'tracker?async=false&importStrategy=UPDATE',
+    const {
+        mutate: completeEvents,
+        isLoading: isCompletingEvents,
+        data: validationError,
+        error,
+    } = useMutation<any>(
+        ({ payload }: any) => dataEngine.mutate({
+            resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=OBJECT',
             type: 'create',
             data: {
-                // $FlowFixMe - business logic dictates that events are not undefined
-                events: events.activeEvents.map(event => ({
-                    ...event,
-                    status: 'COMPLETED',
-                })),
+                events: payload,
             },
         }),
         {
             onError: () => {
                 showAlert({ message: i18n.t('An error occurred while completing events') });
             },
-            onSuccess: () => {
-                onUpdateList();
-                setIsCompleteDialogOpen(false);
+            onSuccess: (response, { payload }: any) => {
+                const errorReports = response?.validationReport.errorReports;
+                if (errorReports && errorReports.length) {
+                    const eventIds = payload.map(event => event.event);
+                    const validEventIds = eventIds
+                        .filter(eventId => !errorReports
+                            .find(errorReport => errorReport.uid === eventId),
+                        );
+
+                    removeRowsFromSelection(validEventIds);
+                    onUpdateList(true);
+                } else {
+                    onUpdateList();
+                    setIsCompleteDialogOpen(false);
+                }
             },
         },
     );
+
+    const onCompleteEvents = useCallback(() => {
+        if (!events) {
+            return;
+        }
+
+        const serverPayload = events.activeEvents.map(event => ({
+            ...event,
+            status: 'COMPLETED',
+        }));
+
+        completeEvents({ payload: serverPayload });
+    }, [completeEvents, events]);
 
     const eventCounts = useMemo(() => {
         if (!events) {
@@ -95,7 +123,9 @@ export const useBulkCompleteEvents = ({
 
     return {
         eventCounts,
-        completeEvents,
+        error,
+        validationError,
+        onCompleteEvents,
         isCompletingEvents,
         isLoading,
     };

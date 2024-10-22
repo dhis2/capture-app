@@ -7,7 +7,6 @@ import type { ComponentProps } from './BulkActionBar.types';
 
 const styles = {
     container: {
-        // marginTop: '65px',
         background: colors.teal100,
         height: '60px',
         border: `2px solid ${colors.teal400}`,

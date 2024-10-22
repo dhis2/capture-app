@@ -8,6 +8,7 @@ import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 type Props = {
     selectedRows: { [id: string]: boolean },
     selectedRowsCount: number,
+    trackedEntityName: string,
     onUpdateList: () => void,
 }
 
@@ -16,6 +17,7 @@ const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
 export const DeleteTeiAction = ({
     selectedRows,
     selectedRowsCount,
+    trackedEntityName,
     onUpdateList,
 }: Props) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -37,7 +39,7 @@ export const DeleteTeiAction = ({
                 onClick={() => setIsDeleteDialogOpen(true)}
             >
                 {i18n.t('Delete {{ trackedEntityName }} with all enrollments', {
-                    trackedEntityName: 'Person'.toLowerCase(),
+                    trackedEntityName: trackedEntityName.toLowerCase(),
                 })}
             </Button>
 
@@ -49,7 +51,7 @@ export const DeleteTeiAction = ({
                     <ModalTitle>
                         {i18n.t('Delete {{count}} {{ trackedEntityName }}', {
                             count: selectedRowsCount,
-                            trackedEntityName: 'Person'.toLowerCase(),
+                            trackedEntityName: trackedEntityName.toLowerCase(),
                             defaultValue: 'Delete {{count}} {{ trackedEntityName }}',
                             defaultValue_plural: 'Delete {{count}} {{ trackedEntityName }}',
                         })}

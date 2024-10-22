@@ -112,12 +112,13 @@ export const TrackerWorkingListsViewMenuSetup = ({
         <TrackedEntityBulkActions
             programId={program.id}
             programStageId={programStageId}
+            stages={program.stages}
             selectedRows={selectedRows}
             onClearSelection={clearSelection}
             onUpdateList={handleCustomUpdateTrigger}
             removeRowsFromSelection={removeRowsFromSelection}
         />
-    ), [program.id, programStageId, selectedRows, clearSelection, handleCustomUpdateTrigger, removeRowsFromSelection]);
+    ), [program, programStageId, selectedRows, clearSelection, handleCustomUpdateTrigger, removeRowsFromSelection]);
 
     return (
         <>

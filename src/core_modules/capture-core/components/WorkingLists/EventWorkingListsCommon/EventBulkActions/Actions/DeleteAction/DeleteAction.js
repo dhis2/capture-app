@@ -7,14 +7,17 @@ import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } fr
 import { useMutation } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { errorCreator } from '../../../../../../../capture-core-utils';
+import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 
 type Props = {
     selectedRows: { [id: string]: boolean },
+    disabled?: boolean,
     onUpdateList: () => void,
 }
 
 export const DeleteAction = ({
     selectedRows,
+    disabled,
     onUpdateList,
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,12 +51,18 @@ export const DeleteAction = ({
 
     return (
         <>
-            <Button
-                small
-                onClick={() => setIsModalOpen(true)}
+            <ConditionalTooltip
+                enabled={disabled}
+                content={i18n.t('You do not have access to delete events')}
             >
-                {i18n.t('Delete')}
-            </Button>
+                <Button
+                    small
+                    onClick={() => setIsModalOpen(true)}
+                    disabled={disabled}
+                >
+                    {i18n.t('Delete')}
+                </Button>
+            </ConditionalTooltip>
 
             {isModalOpen && (
                 <Modal
