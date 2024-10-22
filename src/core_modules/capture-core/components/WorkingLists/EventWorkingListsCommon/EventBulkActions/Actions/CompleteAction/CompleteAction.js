@@ -2,7 +2,7 @@
 import React, { type ComponentType, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
+import { Button, ButtonStrip, colors, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { useBulkCompleteEvents } from './hooks/useBulkCompleteEvents';
 import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 import { Widget } from '../../../../../Widget';
@@ -15,6 +15,14 @@ type Props = {|
 |}
 
 const styles = {
+    container: {
+        fontSize: '14px',
+        lineHeight: '19px',
+        color: colors.grey900,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+    },
     errorContainer: {
         padding: '0px 20px',
     },
@@ -69,11 +77,13 @@ const CompleteActionPlain = ({
                     </ModalTitle>
 
                     <ModalContent>
-                        {eventCounts.active > 0 ?
-                            i18n.t('Are you sure you want to complete all active events in selection?')
-                            :
-                            i18n.t('There are no active events to complete in the current selection.')
-                        }
+                        <span className={classes.container}>
+                            {eventCounts.active > 0 ?
+                                i18n.t('Are you sure you want to complete all active events in selection?')
+                                :
+                                i18n.t('There are no active events to complete in the current selection.')
+                            }
+                        </span>
                     </ModalContent>
 
                     <ModalActions>
@@ -110,7 +120,7 @@ const CompleteActionPlain = ({
                     </ModalTitle>
 
                     <ModalContent>
-                        <span>
+                        <span className={classes.container}>
                             {i18n.t('There was an error completing the events.')}
 
                             <Widget
