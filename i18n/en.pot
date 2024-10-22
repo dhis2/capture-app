@@ -1730,6 +1730,9 @@ msgstr "Error updating the Assignee"
 msgid "Set coordinate"
 msgstr "Set coordinate"
 
+msgid "Please enter a valid time"
+msgstr "Please enter a valid time"
+
 msgid "Time"
 msgstr "Time"
 

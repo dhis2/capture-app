@@ -200,17 +200,13 @@ class D2AgeFieldPlain extends Component<Props> {
             value,
             onBlur,
             shrinkDisabled,
-            dateCalendarOnConvertValueIn,
-            dateCalendarOnConvertValueOut,
             dateCalendarWidth,
-            datePopupAnchorPosition,
-            dateCalendarTheme,
-            dateCalendarLocale,
             datePlaceholder,
             moment,
             onParseDate,
             ...passOnProps
         } = this.props;
+
         const dateInputContainerClass = classNames(
             { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
         );
@@ -222,11 +218,6 @@ class D2AgeFieldPlain extends Component<Props> {
                     value={currentValues.date}
                     onChange={date => onChange({ ...currentValues, date })}
                     calendarWidth={dateCalendarWidth}
-                    popupAnchorPosition={datePopupAnchorPosition}
-                    calendarTheme={dateCalendarTheme}
-                    calendarLocale={dateCalendarLocale}
-                    calendarOnConvertValueIn={dateCalendarOnConvertValueIn}
-                    calendarOnConvertValueOut={dateCalendarOnConvertValueOut}
                     placeholder={datePlaceholder}
                     {...passOnProps}
                 />

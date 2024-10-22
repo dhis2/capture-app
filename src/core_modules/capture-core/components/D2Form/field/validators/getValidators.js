@@ -115,7 +115,7 @@ const validatorsForTypes = {
         {
             validator: isValidDate,
             message: errorMessages.DATE,
-            type: validatorTypes.TYPE_BASE,
+            type: validatorTypes.INTERNAL,
         },
         {
             validator: (value: string, allowFutureDate) => (allowFutureDate ? true : isValidNonFutureDate(value)),
@@ -212,14 +212,14 @@ function buildTypeValidators(metaData: DataElement | DateDataElement): ?Array<Va
 
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
-        validator: (value: any) => {
+        validator: (value: any, validationContext: ?Object, internalError: ?Object) => {
             if (!value && value !== 0 && value !== false) {
                 return true;
             }
 
             const toValidateValue = isString(value) ? value.trim() : value;
             // $FlowFixMe dataElementTypes flow error
-            return validatorContainer.validator(toValidateValue, metaData.allowFutureDate);
+            return validatorContainer.validator(toValidateValue, metaData.allowFutureDate, internalError);
         },
     }));
 

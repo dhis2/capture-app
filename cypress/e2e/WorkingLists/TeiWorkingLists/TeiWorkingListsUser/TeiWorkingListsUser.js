@@ -723,7 +723,7 @@ Then('the TEI working list initial configuration was kept', () => {
 And('you change the org unit', () => {
     cy.get('[data-test="org-unit-selector-container"]')
         .click();
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[type="text"]')
         .type('Njandama MCHP');
     cy.contains('Njandama MCHP')
         .click();

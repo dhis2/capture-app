@@ -8,7 +8,7 @@ export type ValidatorContainer = {
     message: string,
 };
 
-export function getValidationError(value: any, validatorContainers: ?Array<ValidatorContainer>) {
+export function getValidationError(value: any, validatorContainers: ?Array<ValidatorContainer>, internalError?: ?Object) {
     if (!validatorContainers) {
         return null;
     }
@@ -16,13 +16,13 @@ export function getValidationError(value: any, validatorContainers: ?Array<Valid
     let message;
     const errorEncountered = validatorContainers.some((validatorContainer) => {
         const validator = validatorContainer.validator;
-        const result = validator(value);
+        const result = validator(value, internalError);
 
         if (result === true || (result && result.valid)) {
             return false;
         }
 
-        message = (result && result.message) || validatorContainer.message;
+        message = (result && result.errorMessage) || validatorContainer.message;
         return true;
     });
 

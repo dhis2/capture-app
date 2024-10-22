@@ -69,10 +69,10 @@ class DataEntryFieldPlain extends React.Component<Props> {
         }
     }
 
-    handleSet = (value: any, options?: ?Options) => {
+    handleSet = (value: any, options?: ?Options, internalError?: ?Object) => {
         const { validatorContainers, onUpdateFieldInner, onUpdateField } = this.props;
         const validationError =
-            getValidationError(value, validatorContainers);
+            getValidationError(value, validatorContainers, internalError);
         onUpdateFieldInner(value, {
             isValid: !validationError,
             validationError,

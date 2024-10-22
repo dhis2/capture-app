@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { DateTimeRangeField as UIDateTimeRangeField } from 'capture-ui';
-import { withCalendarProps } from '../../../HOC/withCalendarProps';
 
 const getStyles = (theme: Theme) => ({
     innerInputError: {
@@ -42,4 +41,4 @@ class DateTimeRangeFieldPlain extends React.Component<Props> {
     }
 }
 
-export const DateTimeRangeField = withTheme()(withCalendarProps()(withStyles(getStyles)(DateTimeRangeFieldPlain)));
+export const DateTimeRangeField = withTheme()(withStyles(getStyles)(DateTimeRangeFieldPlain));

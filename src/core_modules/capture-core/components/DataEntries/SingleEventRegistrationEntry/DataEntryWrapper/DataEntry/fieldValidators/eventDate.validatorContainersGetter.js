@@ -3,12 +3,12 @@ import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import { isValidDate } from '../../../../../../utils/validators/form';
 
-const preValidateDate = (value?: ?string) => {
+const preValidateDate = (value?: ?string, internalError?: ?Object) => {
     if (!value) {
         return true;
     }
 
-    return isValidDate(value);
+    return isValidDate(value, null, internalError);
 };
 
 export const getEventDateValidatorContainers = () => {
