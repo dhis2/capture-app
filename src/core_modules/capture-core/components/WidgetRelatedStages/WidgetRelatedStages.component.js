@@ -1,13 +1,14 @@
 // @flow
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { useRelatedStages } from './useRelatedStages';
+import { useOrgUnitAutoSelect } from '../../dataQueries';
 import type { Props, RelatedStageDataValueStates } from './WidgetRelatedStages.types';
+import type { ErrorMessagesForRelatedStages } from './RelatedStagesActions';
 import { RelatedStagesActions } from './RelatedStagesActions';
 import { relatedStageStatus } from './constants';
 import { useStageLabels } from './hooks/useStageLabels';
-import type { ErrorMessagesForRelatedStages } from './RelatedStagesActions';
 import { relatedStageWidgetIsValid } from './relatedStageEventIsValid/relatedStageEventIsValid';
-import { useAvailableRelatedStageEvents } from './hooks/useAvailableRelatedStageEvents';
+import { useRelatedStageEvents } from './hooks/useRelatedStageEvents';
 
 const WidgetRelatedStagesPlain = ({
     programId,
@@ -21,7 +22,7 @@ const WidgetRelatedStagesPlain = ({
         programId,
     });
     const { scheduledLabel, occurredLabel } = useStageLabels(programId, constraint?.programStage?.id);
-    const { linkableEvents, isLoading: isLoadingEvents } = useAvailableRelatedStageEvents({
+    const { events, linkableEvents, isLoading: isLoadingEvents } = useRelatedStageEvents({
         stageId: constraint?.programStage?.id,
         relationshipTypeId: selectedRelationshipType?.id,
         scheduledLabel,
@@ -36,6 +37,15 @@ const WidgetRelatedStagesPlain = ({
         orgUnit: undefined,
         linkedEventId: undefined,
     });
+    const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
+    useEffect(() => {
+        if (!orgUnitLoading && data?.length === 1) {
+            setRelatedStageDataValues(prev => ({
+                ...prev,
+                orgUnit: data[0],
+            }));
+        }
+    }, [data, orgUnitLoading, setRelatedStageDataValues]);
 
     const addErrorMessage = (message: ErrorMessagesForRelatedStages) => {
         setErrorMessages((prevMessages: Object) => ({
@@ -81,7 +91,7 @@ const WidgetRelatedStagesPlain = ({
         }
     }, [formIsValid, relatedStageDataValues]);
 
-    if (!currentRelatedStagesStatus || !selectedRelationshipType || isLoadingEvents) {
+    if (!currentRelatedStagesStatus || !selectedRelationshipType || isLoadingEvents || orgUnitLoading) {
         return null;
     }
 
@@ -90,6 +100,7 @@ const WidgetRelatedStagesPlain = ({
             relationshipName={selectedRelationshipType.displayName}
             scheduledLabel={scheduledLabel}
             type={currentRelatedStagesStatus}
+            events={events}
             linkableEvents={linkableEvents}
             relatedStagesDataValues={relatedStageDataValues}
             setRelatedStagesDataValues={setRelatedStageDataValues}
@@ -103,8 +114,8 @@ const WidgetRelatedStagesPlain = ({
     );
 };
 
-export const WidgetRelatedStages = forwardRef<Props, {|
+export const WidgetRelatedStages = forwardRef < Props, {|
     eventHasLinkableStageRelationship: Function,
-    formIsValidOnSave: Function,
-    getLinkedStageValues: Function
-|}>(WidgetRelatedStagesPlain);
+        formIsValidOnSave: Function,
+            getLinkedStageValues: Function
+                |}>(WidgetRelatedStagesPlain);

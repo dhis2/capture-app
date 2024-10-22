@@ -1,11 +1,7 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import {
-    SingleSelectField,
-    SingleSelectOption,
-    spacers,
-} from '@dhis2/ui';
+import { SingleSelectField, SingleSelectOption, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 
@@ -58,17 +54,18 @@ export const LinkToExistingPlain = ({
                 error={saveAttempted && !!errorMessages.linkedEventId}
                 validationText={saveAttempted && errorMessages.linkedEventId}
             >
-                {linkableEvents.map(event => (
-                    <SingleSelectOption
-                        key={event.id}
-                        value={event.id}
-                        label={event.label}
-                    />
-                ))}
+                {linkableEvents
+                    .map(event => (
+                        <SingleSelectOption
+                            key={event.id}
+                            value={event.id}
+                            label={event.label}
+                        />
+                    ))
+                }
             </SingleSelectField>
         </div>
     );
 };
 
-export const LinkToExisting =
-    withStyles(styles)(LinkToExistingPlain);
+export const LinkToExisting = withStyles(styles)(LinkToExistingPlain);
