@@ -1,5 +1,5 @@
 // @flow
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from 'react-query';
 import { useAlert, useConfig, useDataEngine } from '@dhis2/app-runtime';
@@ -66,6 +66,7 @@ export const useBulkCompleteEvents = ({
         isLoading: isCompletingEvents,
         data: validationError,
         error,
+        reset: resetCompleteEvents,
     } = useMutation<any>(
         ({ payload }: any) => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=UPDATE&atomicMode=OBJECT',
@@ -120,6 +121,12 @@ export const useBulkCompleteEvents = ({
             completed: events.completedEvents.length,
         };
     }, [events]);
+
+    useEffect(() => {
+        if (!isCompleteDialogOpen) {
+            resetCompleteEvents();
+        }
+    }, [isCompleteDialogOpen, resetCompleteEvents]);
 
     return {
         eventCounts,
