@@ -33,18 +33,25 @@ const importValidEnrollments = async ({ dataEngine, enrollments }) => dataEngine
 
 const formatServerPayload = (trackedEntities, completeEvents, stages) => {
     const enrollments = trackedEntities?.activeEnrollments ?? [];
-    let updatedEnrollments = enrollments.map(enrollment => ({
-        ...enrollment,
-        events: [],
-        status: 'COMPLETED',
-    }));
+    let updatedEnrollments;
 
     if (completeEvents) {
-        updatedEnrollments = updatedEnrollments.map(enrollment => ({
+        updatedEnrollments = enrollments.map(enrollment => ({
             ...enrollment,
+            status: 'COMPLETED',
             events: enrollment.events
-                .filter(event => event.status === 'ACTIVE' && stages.get(event.programStage)?.access?.data?.write)
+                .filter((event) => {
+                    const access = stages.get(event.programStage)?.access?.data?.write;
+                    const isEventActive = event.status === 'ACTIVE';
+                    return access && isEventActive;
+                })
                 .map(event => ({ ...event, status: 'COMPLETED' })),
+        }));
+    } else {
+        updatedEnrollments = enrollments.map(enrollment => ({
+            ...enrollment,
+            status: 'COMPLETED',
+            events: [],
         }));
     }
 

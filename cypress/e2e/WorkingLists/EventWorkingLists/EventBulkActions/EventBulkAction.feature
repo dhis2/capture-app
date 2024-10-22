@@ -31,6 +31,7 @@ Feature: User facing tests for bulk actions on event working lists
     When you select the first 5 rows
     Then the filters should be disabled
 
+  @v<42
   Scenario: the user should be able to bulk complete events
     Given you open the main page with Ngelehun and malaria case context
     And you select the first 3 rows

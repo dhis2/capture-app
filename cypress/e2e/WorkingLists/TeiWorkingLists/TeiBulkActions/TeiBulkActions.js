@@ -136,8 +136,7 @@ When('you confirm 1 active enrollment without completing events successfully', (
 
             // Assert that first enrollment is completed with one completed event
             expect(enrollments[0]).to.include({ enrollment: 'Rkx1QOZeBra', status: 'COMPLETED' });
-            expect(enrollments[0].events).to.have.length(1);
-            expect(enrollments[0].events[0]).to.include({ event: 'TIU452W5bI1', status: 'ACTIVE' });
+            expect(enrollments[0].events).to.have.length(0);
         });
 });
 

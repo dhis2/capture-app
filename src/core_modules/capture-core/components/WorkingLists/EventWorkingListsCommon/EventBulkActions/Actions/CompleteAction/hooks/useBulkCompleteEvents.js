@@ -80,7 +80,7 @@ export const useBulkCompleteEvents = ({
                 showAlert({ message: i18n.t('An error occurred while completing events') });
             },
             onSuccess: (response, { payload }: any) => {
-                const errorReports = response?.validationReport.errorReports;
+                const errorReports = response?.validationReport?.errorReports;
                 if (errorReports && errorReports.length) {
                     const eventIds = payload.map(event => event.event);
                     const validEventIds = eventIds
