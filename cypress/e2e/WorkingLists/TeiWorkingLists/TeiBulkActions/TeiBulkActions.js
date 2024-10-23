@@ -170,7 +170,7 @@ When('you confirm 2 active enrollments with errors', () => {
         .its('response.statusCode')
         .should('eq', 409);
 
-    cy.get('@completeEnrollments')
+    cy.wait('@completeEnrollments')
         .its('request.body')
         .should(({ enrollments }) => {
             // The bad data should be filtered out and not sent to the server
