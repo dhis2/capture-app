@@ -2,6 +2,7 @@
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { dataElementTypes } from '../../../metaData';
 import { FEATURES, hasAPISupportForFeature } from '../../../../capture-core-utils';
+import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
 
 type Attribute = {
     id: string,
@@ -17,7 +18,19 @@ type SubValueFunctionParams = {
     minorServerVersion: number,
 };
 
-const getFileResourceSubvalue = async ({ attribute, querySingleResource }: SubValueFunctionParams) => {
+const buildTEAFileUrl = (attribute, minorServerVersion) => {
+    const { absoluteApiPath, teiId, programId, id } = attribute;
+
+    return hasAPISupportForFeature(minorServerVersion, FEATURES.trackerFileEndpoint)
+        ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/file?program=${programId}`
+        : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/file`;
+};
+
+const getFileResourceSubvalue = async ({
+    attribute,
+    querySingleResource,
+    minorServerVersion,
+}: SubValueFunctionParams) => {
     if (!attribute.value) return null;
 
     const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: attribute.value });
@@ -25,6 +38,7 @@ const getFileResourceSubvalue = async ({ attribute, querySingleResource }: SubVa
         id,
         name,
         value: id,
+        url: buildTEAFileUrl(attribute, minorServerVersion),
     };
 };
 
@@ -46,22 +60,9 @@ const getImageResourceSubvalue = async ({ attribute, minorServerVersion }: SubVa
     };
 };
 
-const getOrganisationUnitSubvalue = async ({ attribute, querySingleResource }: SubValueFunctionParams) => {
-    const organisationUnit = await querySingleResource({
-        resource: 'organisationUnits',
-        id: attribute.value,
-        params: {
-            fields: 'id,name,ancestors[displayName]',
-        },
-    });
-
-    const orgUnitClientValue = {
-        id: organisationUnit.id,
-        name: organisationUnit.name,
-        ancestors: organisationUnit.ancestors.map(ancestor => ancestor.displayName),
-    };
-
-    return orgUnitClientValue;
+const getOrganisationUnitSubvalue = async ({ attribute: { value }, querySingleResource }: SubValueFunctionParams) => {
+    const organisationUnits = await getOrgUnitNames([value], querySingleResource);
+    return organisationUnits[value];
 };
 
 export const subValueGetterByElementType = {

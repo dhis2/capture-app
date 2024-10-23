@@ -14,7 +14,7 @@ export function getProgramEventAccess(
     if (program instanceof EventProgram) {
         stage = program.stage;
     } else if (programStageId) {
-        stage = program.getStage(programStageId);
+        stage = program?.getStage(programStageId);
     }
     if (!stage) {
         log.error(errorCreator('stage not found')({ programId, programStageId }));

@@ -1,8 +1,7 @@
 // @flow
-import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { convertServerToClient } from '../../../../../../../converters';
 import type { ApiTeis, ApiTeiAttributes, TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
-import { dataElementTypes } from '../../../../../../../metaData';
+import { RECORD_TYPE, buildUrlByElementType } from '../getListDataCommon';
 
 const getValuesById = (attributeValues?: ApiTeiAttributes = []) =>
     attributeValues
@@ -27,17 +26,9 @@ export const convertToClientTeis = (
                     } else {
                         value = attributeValuesById[id];
                     }
-
-                    const urls = (type === dataElementTypes.IMAGE) ?
-                        (() => (featureAvailable(FEATURES.trackerImageEndpoint) ?
-                            {
-                                imageUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}`,
-                                previewUrl: `/tracker/trackedEntities/${tei.trackedEntity}/attributes/${id}/image?program=${programId}&dimension=small`,
-                            } : {
-                                imageUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image?program=${programId}`,
-                                previewUrl: `/trackedEntityInstances/${tei.trackedEntity}/${id}/image?program=${programId}&dimension=SMALL`,
-                            }
-                        ))() : {};
+                    const urls = buildUrlByElementType[RECORD_TYPE.trackedEntity][type]
+                        ? buildUrlByElementType[RECORD_TYPE.trackedEntity][type]({ trackedEntity: tei.trackedEntity, id, programId })
+                        : {};
 
                     return {
                         id,
@@ -46,9 +37,10 @@ export const convertToClientTeis = (
                     };
                 })
                 .filter(({ value }) => value != null)
-                .reduce((acc, { id, value, imageUrl, previewUrl }: any) => {
+                .reduce((acc, { id, value, imageUrl, previewUrl, fileUrl }: any) => {
                     acc[id] = {
                         convertedValue: value,
+                        fileUrl,
                         ...(imageUrl ? { imageUrl, previewUrl } : {}),
                     };
                     return acc;

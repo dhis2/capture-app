@@ -44,6 +44,23 @@ const scheduleInOrgUnit = (props) => {
     return scheduledAtIsValid && orgUnitIsValid;
 };
 
+const enterData = (props) => {
+    const { orgUnit, setErrorMessages } = props ?? {};
+    const orgUnitIsValid = isValidOrgUnit(orgUnit);
+
+    if (!orgUnitIsValid) {
+        setErrorMessages({
+            orgUnit: i18n.t('Please provide a valid organisation unit'),
+        });
+    } else {
+        setErrorMessages({
+            orgUnit: null,
+        });
+    }
+
+    return orgUnitIsValid;
+};
+
 const linkToExistingResponse = (props) => {
     const { linkedEventId, setErrorMessages } = props ?? {};
     const linkedEventIdIsValid = !!linkedEventId;
@@ -64,7 +81,7 @@ const linkToExistingResponse = (props) => {
 
 export const ValidationFunctionsByLinkMode: { [key: string]: (props: ?Props) => boolean } = {
     [RelatedStageModes.SCHEDULE_IN_ORG]: props => scheduleInOrgUnit(props),
-    [RelatedStageModes.ENTER_DATA]: () => true,
+    [RelatedStageModes.ENTER_DATA]: props => enterData(props),
     [RelatedStageModes.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
 };
 

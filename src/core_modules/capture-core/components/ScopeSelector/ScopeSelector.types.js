@@ -5,7 +5,7 @@ export type OwnProps = $ReadOnly<{|
   isUserInteractionInProgress?: boolean,
   pageToPush?: string,
   selectedOrgUnitId?: string,
-  selectedProgramId?: string,
+  selectedProgramId?: ?string,
   previousOrgUnitId?: string,
   selectedCategories?: { [categoryId: string]: { writeAccess: boolean } },
   onSetProgramId?: (id: string) => void,

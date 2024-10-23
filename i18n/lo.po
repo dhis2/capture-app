@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
+"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Namwan Chanthavisouk, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -605,15 +605,6 @@ msgstr "ບໍ່ມີໂປແກຼມ"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "ໂປແກຣມທີ່ເລືອກໄວ້ບໍ່ຖືກຕ້ອງກັບຫົວໜ່ວຍອົງການຈັດຕັ້ງ"
 
-msgid "Online"
-msgstr "ມີການເຊື່ອມຕໍ່"
-
-msgid "Offline"
-msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
-
-msgid "Syncing"
-msgstr "ກຳລັງອັບເດດຂໍ້ມູນໃຫ້ຄືກັນ"
-
 msgid "Add note"
 msgstr "ຂຽນບັນທຶກລົງ"
 
@@ -631,51 +622,6 @@ msgstr "ການແຈ້ງເຕືອນ"
 
 msgid "Close the notice"
 msgstr "ປິດການແຈ້ງເຕືອນ"
-
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "ໃຊ້ກະດານຂ່າວລົງທະບຽນໃໝ່ເພື່ອ {{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "ຕົວເລືອກໃນ {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is certain"
-" functionality from Tracker Capture that has not yet been added, including "
-"relationship and referral functionality. The work on including this Tracker "
-"functionality in Capture is ongoing and will be added in upcoming app "
-"releases."
-msgstr ""
-"ໂດຍການຄລິກເລືອກເຂົ້າທາງລຸ່ມນີ້, ທ່ານຈະເລີ່ມໃຊ້ກະດານຂ່າວລົງທະບຽນໃໝ່ໃນແອັບ "
-"Capture ສຳລັບໂປແກຣມຕິດຕາມນີ້. ເຊິ່ງໃນປັດຈຸບັນໜ້າທີ່ຫຼັກຈາກການຕິດຕາມ Capture "
-"ແມ່ນຍັງບໍ່ໄດ້ເພີ່ມເຂົ້າເທື່ອ, ລວມທັງເຊື່ອມໂຍງ ແລະ ການສົ່ງຕໍ່. "
-"ການເຮັດວຽກກ່ຽວກັບໜ້າທີ່ຫຼັກຈາກການຕິດຕາມນີ້ໃນ Capture ແມ່ນກໍາລັງດໍາເນີນຢູ່ "
-"ແລະ ຈະຖືກເພີ່ມເຂົ້າໃນແອັບໃໝ່."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"ທີມງານເຮົາຂໍຂອບໃຈສຳລັບຄໍາຕິຊົມກ່ຽວກັບຫນ້າທີ່ໃຫມ່ນີ້ທີ່ກໍາລັງຖືກທົດສອບຢູ່ໃນເບຕ້າ,"
-" ກະລຸນາລາຍງານບັນຫາ ແລະ ຄໍາຕິຊົມໃນໂຄງການ DHIS2 JIRA."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"ຄລິກທີ່ປຸ່ມຂ້າງລຸ່ມເພື່ອເລືອກເຂົ້າໃຊ້ໜ້າທີ່ການລົງທະບຽນໃໝ່ຂອງກະດານຂ່າວໃນແອັບ "
-"Capture (ເບຕ້າ) ສຳລັບໂປແກຣມການຕິດຕາມນີ້ສຳລັບຜູ້ໃຊ້ທັງໝົດ."
-
-msgid "Yes, opt in"
-msgstr "ຕົກລົງ, ເລືອກເຂົ້າ"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "ຢຸດໃຊ້ກະດານຂ່າວການລົງທະບຽນໃໝ່ໃນ {{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "ເລືອກອອກສຳລັບ {{programName}}"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "ລົງທະບຽນດ້ວຍໄອດີ \" {{enrollmentId}} \" ແມ່ນບໍ່ພົບ"
