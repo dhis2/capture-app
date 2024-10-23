@@ -1,4 +1,5 @@
 // @flow
+import { v4 as uuid } from 'uuid';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
@@ -11,7 +12,7 @@ import type {
     ProgramRulesContainer,
     DataElements,
 } from '@dhis2/rules-engine-javascript';
-import { cleanUpDataEntry } from '../../../DataEntry';
+import { cleanUpDataEntry, startLoadDataEntry } from '../../../DataEntry';
 import { RenderFoundation } from '../../../../metaData';
 import { getOpenDataEntryActions, cleanTeiModal } from '../dataEntry.actions';
 import {
@@ -38,6 +39,8 @@ export const useLifecycle = ({
     geometry,
     dataEntryFormConfig,
     onGetValidationContext,
+    onEnable,
+    onDisable,
 }: {
     programAPI: any,
     orgUnitId: string,
@@ -48,6 +51,8 @@ export const useLifecycle = ({
     geometry: ?Geometry,
     dataEntryFormConfig: ?DataEntryFormConfig,
     onGetValidationContext: () => Object,
+    onEnable: () => void,
+    onDisable: () => void,
 }) => {
     const dataEngine = useDataEngine();
     const dispatch = useDispatch();
@@ -71,6 +76,8 @@ export const useLifecycle = ({
 
     useEffect(() => {
         if (Object.entries(formValues).length > 0) {
+            const uid = uuid();
+            dispatch(startLoadDataEntry(dataEntryId, itemId, uid));
             dispatch(
                 getOpenDataEntryActions({
                     dataEntryId,
@@ -93,6 +100,7 @@ export const useLifecycle = ({
             Object.entries(clientValues).length > 0 &&
             Object.entries(rulesContainer).length > 0
         ) {
+            onDisable();
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             getRulesActionsForTEI({
                 foundation: formFoundation,
@@ -108,7 +116,10 @@ export const useLifecycle = ({
                 userRoles,
                 querySingleResource,
                 onGetValidationContext,
-            }).then(rulesActions => dispatch(rulesActions));
+            }).then((rulesActions) => {
+                onEnable();
+                return dispatch(rulesActions);
+            });
         }
     }, [
         dispatch,
@@ -128,6 +139,8 @@ export const useLifecycle = ({
         userRoles,
         dataEngine,
         onGetValidationContext,
+        onDisable,
+        onEnable,
     ]);
 
     return {

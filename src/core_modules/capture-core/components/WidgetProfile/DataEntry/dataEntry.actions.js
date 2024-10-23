@@ -1,5 +1,4 @@
 // @flow
-import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
 import type {
     OrgUnit,
@@ -18,7 +17,6 @@ import type { FieldData } from '../../../rules';
 import { getCurrentClientValues } from '../../../rules';
 import { loadNewDataEntry } from '../../DataEntry/actions/dataEntryLoadNew.actions';
 import { rulesExecutedPostUpdateField } from '../../DataEntry/actions/dataEntry.actions';
-import { startRunRulesPostUpdateField } from '../../DataEntry';
 import { getRulesActionsForTEI } from './ProgramRules';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import type { Geometry } from './helpers/types';
@@ -71,13 +69,14 @@ export const getUpdateFieldActions = async ({
     querySingleResource,
     onGetValidationContext,
     innerAction,
+    uid,
 }: {
     context: Context,
     querySingleResource: QuerySingleResource,
     onGetValidationContext: () => Object,
     innerAction: ReduxAction<any, any>,
+    uid: string
 }) => {
-    const uid = uuid();
     const {
         orgUnit,
         trackedEntityAttributes,
@@ -119,7 +118,6 @@ export const getUpdateFieldActions = async ({
             innerAction,
             rulesActions,
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
         ],
         dataEntryActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
     );

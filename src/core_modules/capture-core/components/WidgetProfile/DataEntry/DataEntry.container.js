@@ -1,4 +1,5 @@
 // @flow
+import { v4 as uuid } from 'uuid';
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
@@ -7,12 +8,14 @@ import type { Props } from './dataEntry.types';
 import { DataEntryComponent } from './DataEntry.component';
 import { useLifecycle, useFormValidations } from './hooks';
 import { getUpdateFieldActions, updateTeiRequest, setTeiModalError } from './dataEntry.actions';
+import { startRunRulesPostUpdateField } from '../../DataEntry';
 
 export const DataEntry = ({
     programAPI,
     orgUnitId,
     onCancel,
     onDisable,
+    onEnable,
     clientAttributesWithSubvalues,
     userRoles,
     modalState,
@@ -51,17 +54,26 @@ export const DataEntry = ({
         geometry,
         dataEntryFormConfig,
         onGetValidationContext,
+        onDisable,
+        onEnable,
     });
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const onUpdateFormField = useCallback(
         (innerAction: ReduxAction<any, any>) => {
-            getUpdateFieldActions({ context, querySingleResource, onGetValidationContext, innerAction }).then(actions =>
-                dispatch(actions),
+            const uid = uuid();
+            onDisable();
+            dispatch(startRunRulesPostUpdateField(dataEntryId, itemId, uid));
+
+            getUpdateFieldActions({ context, querySingleResource, onGetValidationContext, innerAction, uid }).then(
+                (actions) => {
+                    onEnable();
+                    return dispatch(actions);
+                },
             );
         },
-        [dispatch, querySingleResource, context, onGetValidationContext],
+        [dispatch, querySingleResource, context, onGetValidationContext, onDisable, onEnable],
     );
     const onUpdateFormFieldAsync = useCallback(
         (innerAction: ReduxAction<any, any>) => {

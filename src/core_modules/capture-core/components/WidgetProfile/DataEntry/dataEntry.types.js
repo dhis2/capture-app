@@ -29,6 +29,7 @@ export type Props = {|
     dataEntryFormConfig: ?DataEntryFormConfig,
     onCancel: () => void,
     onDisable: () => void,
+    onEnable: () => void,
     clientAttributesWithSubvalues: Array<any>,
     trackedEntityInstanceId: string,
     onSaveSuccessActionType?: string,
