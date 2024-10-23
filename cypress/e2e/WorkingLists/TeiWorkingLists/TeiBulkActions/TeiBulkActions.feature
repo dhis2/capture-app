@@ -44,9 +44,9 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   Scenario: the user should be able to bulk complete enrollments and events
     Given you open the main page with Ngelehun and Malaria Case diagnosis context
-    And you select row number 1
-    And you select row number 4
-    And you select row number 14
+    And you select row number 7
+    And you select row number 8
+    And you select row number 9
     And you click the bulk complete enrollments button
     And the bulk complete enrollments modal should open
     And the modal content should say: This action will complete 3 active enrollments in your selection.

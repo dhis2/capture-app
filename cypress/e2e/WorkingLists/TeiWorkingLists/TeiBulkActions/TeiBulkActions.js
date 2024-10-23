@@ -64,17 +64,21 @@ Then('you confirm 3 active enrollments successfully', () => {
             // Should be 3 enrollments
             expect(enrollments).to.have.length(3);
 
-            // The enrollment with id 'Rkx1QOZeBra' should be completed with one completed event
-            const enrollment = enrollments.find(e => e.enrollment === 'Rkx1QOZeBra');
-            expect(enrollment).to.include({ enrollment: 'Rkx1QOZeBra', status: 'COMPLETED' });
-            expect(enrollment.events).to.have.length(1);
-            expect(enrollment.events[0]).to.include({ event: 'TIU452W5bI1', status: 'COMPLETED' });
+            // The enrollment with id 'xlLV3hNvsIb' should be completed with no events
+            const enrollment = enrollments.find(e => e.enrollment === 'xlLV3hNvsIb');
+            expect(enrollment).to.include({ enrollment: 'xlLV3hNvsIb', status: 'COMPLETED' });
+            expect(enrollment.events).to.have.length(0);
 
-            // The enrollment with id 'E12K2kaTlWa' should be completed with one completed event
-            const enrollment2 = enrollments.find(e => e.enrollment === 'E12K2kaTlWa');
-            expect(enrollment2).to.include({ enrollment: 'E12K2kaTlWa', status: 'COMPLETED' });
+            // The enrollment with id 'h4W0ax873Zq' should be completed with one completed event
+            const enrollment2 = enrollments.find(e => e.enrollment === 'h4W0ax873Zq');
+            expect(enrollment2).to.include({ enrollment: 'h4W0ax873Zq', status: 'COMPLETED' });
             expect(enrollment2.events).to.have.length(1);
-            expect(enrollment2.events[0]).to.include({ event: 'Gjla4fJlFZ6', status: 'COMPLETED' });
+            expect(enrollment2.events[0]).to.include({ event: 'WSBZ189OfQd', status: 'COMPLETED' });
+
+            // The enrollment with id 'YBXMrojc2Wn' should be completed with no events
+            const enrollment3 = enrollments.find(e => e.enrollment === 'YBXMrojc2Wn');
+            expect(enrollment3).to.include({ enrollment: 'YBXMrojc2Wn', status: 'COMPLETED' });
+            expect(enrollment3.events).to.have.length(0);
         });
 });
 
