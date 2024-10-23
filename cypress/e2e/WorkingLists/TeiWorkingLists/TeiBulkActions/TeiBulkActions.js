@@ -64,15 +64,17 @@ Then('you confirm 3 active enrollments successfully', () => {
             // Should be 3 enrollments
             expect(enrollments).to.have.length(3);
 
-            // Assert that first enrollment is completed with one completed event
-            expect(enrollments[0]).to.include({ enrollment: 'Rkx1QOZeBra', status: 'COMPLETED' });
-            expect(enrollments[0].events).to.have.length(1);
-            expect(enrollments[0].events[0]).to.include({ event: 'TIU452W5bI1', status: 'COMPLETED' });
+            // The enrollment with id 'Rkx1QOZeBra' should be completed with one completed event
+            const enrollment = enrollments.find(e => e.enrollment === 'Rkx1QOZeBra');
+            expect(enrollment).to.include({ enrollment: 'Rkx1QOZeBra', status: 'COMPLETED' });
+            expect(enrollment.events).to.have.length(1);
+            expect(enrollment.events[0]).to.include({ event: 'TIU452W5bI1', status: 'COMPLETED' });
 
-            // Assert that third enrollment is completed with one completed event
-            expect(enrollments[2]).to.include({ enrollment: 'E12K2kaTlWa', status: 'COMPLETED' });
-            expect(enrollments[2].events).to.have.length(1);
-            expect(enrollments[2].events[0]).to.include({ event: 'Gjla4fJlFZ6', status: 'COMPLETED' });
+            // The enrollment with id 'E12K2kaTlWa' should be completed with one completed event
+            const enrollment2 = enrollments.find(e => e.enrollment === 'E12K2kaTlWa');
+            expect(enrollment2).to.include({ enrollment: 'E12K2kaTlWa', status: 'COMPLETED' });
+            expect(enrollment2.events).to.have.length(1);
+            expect(enrollment2.events[0]).to.include({ event: 'Gjla4fJlFZ6', status: 'COMPLETED' });
         });
 });
 
@@ -198,7 +200,6 @@ Then('an error dialog will be displayed to the user', () => {
 
     cy.get('[data-test="bulk-complete-enrollments-dialog"]')
         .find('li')
-        .eq(0)
         .contains('Mandatory DataElement `f9xYwUwrHq9` is not present');
 });
 

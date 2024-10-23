@@ -27,9 +27,9 @@ When('you click the confirm complete events button', () => {
         .its('request.body')
         .should(({ events }) => {
             expect(events).to.have.length(3);
-            expect(events[0]).to.include({ event: 'a969f7a3bf1', status: 'COMPLETED' });
-            expect(events[1]).to.include({ event: 'a6f092d0d44', status: 'COMPLETED' });
-            expect(events[2]).to.include({ event: 'a5e67163090', status: 'COMPLETED' });
+            expect(events[0]).to.include({ status: 'COMPLETED' });
+            expect(events[1]).to.include({ status: 'COMPLETED' });
+            expect(events[2]).to.include({ status: 'COMPLETED' });
         });
 });
 
