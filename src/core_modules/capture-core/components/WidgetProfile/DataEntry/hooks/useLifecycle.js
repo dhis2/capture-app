@@ -1,6 +1,9 @@
 // @flow
+import { v4 as uuid } from 'uuid';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useDataEngine } from '@dhis2/app-runtime';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { useOrganisationUnit } from 'capture-core/dataQueries/useOrganisationUnit';
 import type {
     OrgUnit,
@@ -9,7 +12,7 @@ import type {
     ProgramRulesContainer,
     DataElements,
 } from '@dhis2/rules-engine-javascript';
-import { cleanUpDataEntry } from '../../../DataEntry';
+import { cleanUpDataEntry, startLoadDataEntry } from '../../../DataEntry';
 import { RenderFoundation } from '../../../../metaData';
 import { getOpenDataEntryActions, cleanTeiModal } from '../dataEntry.actions';
 import {
@@ -35,6 +38,9 @@ export const useLifecycle = ({
     itemId,
     geometry,
     dataEntryFormConfig,
+    onGetValidationContext,
+    onEnable,
+    onDisable,
 }: {
     programAPI: any,
     orgUnitId: string,
@@ -44,7 +50,11 @@ export const useLifecycle = ({
     itemId: string,
     geometry: ?Geometry,
     dataEntryFormConfig: ?DataEntryFormConfig,
+    onGetValidationContext: () => Object,
+    onEnable: () => void,
+    onDisable: () => void,
 }) => {
+    const dataEngine = useDataEngine();
     const dispatch = useDispatch();
     // TODO: Getting the entire state object is bad and this needs to be refactored.
     // The problem is the helper methods that take the entire state object.
@@ -66,6 +76,8 @@ export const useLifecycle = ({
 
     useEffect(() => {
         if (Object.entries(formValues).length > 0) {
+            const uid = uuid();
+            dispatch(startLoadDataEntry(dataEntryId, itemId, uid));
             dispatch(
                 getOpenDataEntryActions({
                     dataEntryId,
@@ -88,21 +100,26 @@ export const useLifecycle = ({
             Object.entries(clientValues).length > 0 &&
             Object.entries(rulesContainer).length > 0
         ) {
-            dispatch(
-                ...getRulesActionsForTEI({
-                    foundation: formFoundation,
-                    formId: `${dataEntryId}-${itemId}`,
-                    orgUnit,
-                    trackedEntityAttributes: programTrackedEntityAttributes,
-                    teiValues: { ...clientValues, ...clientGeometryValues },
-                    optionSets,
-                    rulesContainer,
-                    otherEvents,
-                    dataElements,
-                    enrollmentData: enrollment,
-                    userRoles,
-                }),
-            );
+            onDisable();
+            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+            getRulesActionsForTEI({
+                foundation: formFoundation,
+                formId: `${dataEntryId}-${itemId}`,
+                orgUnit,
+                trackedEntityAttributes: programTrackedEntityAttributes,
+                teiValues: { ...clientValues, ...clientGeometryValues },
+                optionSets,
+                rulesContainer,
+                otherEvents,
+                dataElements,
+                enrollmentData: enrollment,
+                userRoles,
+                querySingleResource,
+                onGetValidationContext,
+            }).then((rulesActions) => {
+                onEnable();
+                return dispatch(rulesActions);
+            });
         }
     }, [
         dispatch,
@@ -120,6 +137,10 @@ export const useLifecycle = ({
         enrollment,
         clientGeometryValues,
         userRoles,
+        dataEngine,
+        onGetValidationContext,
+        onDisable,
+        onEnable,
     ]);
 
     return {

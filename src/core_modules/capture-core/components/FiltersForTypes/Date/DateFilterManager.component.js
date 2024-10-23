@@ -8,7 +8,7 @@ import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import type { DateFilterData } from './types';
 import type { Value } from './DateFilter.component';
-import { areRelativeRangeValuesSupported } from '../../../utils/validators/areRelativeRangeValuesSupported';
+import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
 type Props = {
     filter: ?DateFilterData,

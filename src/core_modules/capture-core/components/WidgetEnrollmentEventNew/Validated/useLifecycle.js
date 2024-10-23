@@ -1,12 +1,16 @@
 // @flow
 import { useEffect, useRef, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
+import { useDataEngine } from '@dhis2/app-runtime';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 import type { TrackerProgram, ProgramStage, RenderFoundation } from '../../../metaData';
 import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import { startRunRulesPostLoadDataEntry } from '../../DataEntry';
 
 export const useLifecycle = ({
     program,
@@ -29,6 +33,7 @@ export const useLifecycle = ({
     itemId: string,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
 }) => {
+    const dataEngine = useDataEngine();
     const dispatch = useDispatch();
     const [rulesExecutionTrigger, setRulesExecutionTrigger] = useState(1);
 
@@ -62,20 +67,24 @@ export const useLifecycle = ({
             delayRulesExecutionRef.current = false;
             setRulesExecutionTrigger(-rulesExecutionTrigger);
         } else {
-            dispatch(batchActions([
-                getRulesActions({
-                    state,
-                    program,
-                    stage,
-                    formFoundation,
-                    dataEntryId,
-                    itemId,
-                    orgUnit,
-                    eventsRulesDependency,
-                    attributesValuesRulesDependency,
-                    enrollmentDataRulesDependency,
-                }),
-            ]));
+            const uid = uuid();
+            dispatch(startRunRulesPostLoadDataEntry(dataEntryId, itemId, uid));
+            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
+
+            getRulesActions({
+                state,
+                program,
+                stage,
+                formFoundation,
+                dataEntryId,
+                itemId,
+                orgUnit,
+                eventsRulesDependency,
+                attributesValuesRulesDependency,
+                enrollmentDataRulesDependency,
+                querySingleResource,
+                uid,
+            }).then(rulesActions => dispatch(batchActions(rulesActions)));
             eventsRef.current = eventsRulesDependency;
             attributesRef.current = attributesValuesRulesDependency;
             enrollmentDataRef.current = enrollmentDataRulesDependency;

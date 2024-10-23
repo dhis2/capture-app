@@ -1,6 +1,6 @@
 // @flow
 import { isValidDate } from './dateValidator';
-import { parseDate } from '../../converters/date';
+import { parseDate } from '../../../converters/date';
 /**
  *
  * @export

@@ -19,7 +19,8 @@ import type {
     ApiTrackerQueryCriteria,
     TeiColumnsMetaForDataFetching,
 } from '../../../types';
-import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
+import { areRelativeRangeValuesSupported }
+    from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../../helpers';
 

@@ -1,10 +1,10 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, filter, flatMap } from 'rxjs/operators';
+import { map, filter, flatMap, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
 import moment from 'moment';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
@@ -45,16 +45,16 @@ const getDataEntryId = (event): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
-        map((action) => {
+        switchMap((action) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
-                return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
+                return of(prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error));
             }
 
             const program = metadataContainer.program;
@@ -62,20 +62,18 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             const { orgUnit, programCategory } = action.payload;
             const { enrollment, attributeValues } = state.enrollmentDomain;
 
-            return batchActions([
-                showEditEventDataEntry(),
-                ...openEventForEditInDataEntry({
-                    loadedValues,
-                    orgUnit,
-                    foundation,
-                    program,
-                    enrollment,
-                    attributeValues,
-                    dataEntryId: getDataEntryId(eventContainer.event),
-                    dataEntryKey: dataEntryKeys.EDIT,
-                    programCategory,
-                }),
-            ]);
+            return openEventForEditInDataEntry({
+                loadedValues,
+                orgUnit,
+                foundation,
+                program,
+                enrollment,
+                attributeValues,
+                dataEntryId: getDataEntryId(eventContainer.event),
+                dataEntryKey: dataEntryKeys.EDIT,
+                programCategory,
+                querySingleResource,
+            }).then(actions => batchActions([showEditEventDataEntry(), ...actions]));
         }));
 
 export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>

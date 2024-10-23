@@ -6,11 +6,14 @@ import {
     getCurrentClientMainData,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    validateAssignEffects,
 } from '../../../../rules';
 import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
 import type { EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
+import type { QuerySingleResource } from '../../../../utils/api';
+import { rulesExecutedPostLoadDataEntry } from '../../../DataEntry';
 
-export const getRulesActions = ({
+export const getRulesActions = async ({
     state, // temporary
     program,
     stage,
@@ -21,6 +24,8 @@ export const getRulesActions = ({
     eventsRulesDependency,
     attributesValuesRulesDependency,
     enrollmentDataRulesDependency,
+    querySingleResource,
+    uid,
 }: {
     state: ReduxState,
     program: TrackerProgram,
@@ -32,6 +37,8 @@ export const getRulesActions = ({
     eventsRulesDependency: EnrollmentEvents,
     attributesValuesRulesDependency: AttributeValuesClientFormatted,
     enrollmentDataRulesDependency: EnrollmentData,
+    querySingleResource: QuerySingleResource,
+    uid: string,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
 
@@ -49,5 +56,14 @@ export const getRulesActions = ({
         enrollmentData: enrollmentDataRulesDependency,
     });
 
-    return updateRulesEffects(effects, formId);
+    const effectsWithValidations = await validateAssignEffects({
+        dataElements: formFoundation.getElements(),
+        effects,
+        querySingleResource,
+    });
+
+    return [
+        updateRulesEffects(effectsWithValidations, formId),
+        rulesExecutedPostLoadDataEntry(dataEntryId, itemId, uid),
+    ];
 };

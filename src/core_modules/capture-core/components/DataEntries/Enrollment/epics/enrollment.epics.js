@@ -1,7 +1,8 @@
 // @flow
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
 import { getTrackerProgramThrowIfNotFound, ProgramStage, RenderFoundation, Section } from '../../../../metaData';
@@ -9,6 +10,7 @@ import { getCurrentClientMainData, type FieldData } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertFormToClient } from '../../../../converters';
 import { stageMainDataIds, convertToRulesEngineIds } from '../EnrollmentWithFirstStageDataEntry';
+import type { QuerySingleResource } from '../../../../utils/api';
 
 type Context = {
     dataEntryId: string,
@@ -16,7 +18,7 @@ type Context = {
     uid: string,
     programId: string,
     orgUnit: OrgUnit,
-    stage?: ProgramStage,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
 }
 
@@ -38,46 +40,62 @@ const splitCurrentClientMainData = (stage, currentClientMainData) => {
     }, { currentEnrollmentValues: {}, currentEventMainData: {} });
 };
 
-const runRulesOnEnrollmentUpdate =
-    (store: ReduxStore, context: Context, fieldData?: ?FieldData, searchActions?: any = []) => {
-        const state = store.value;
-        const { programId, dataEntryId, itemId, orgUnit, uid, stage, formFoundation } = context;
-        const formId = getDataEntryKey(dataEntryId, itemId);
-        const program = getTrackerProgramThrowIfNotFound(programId);
-        const currentFormData = state.formsValues[formId] || {};
-        const convertedValues = formFoundation.convertAndGroupBySection(currentFormData, convertFormToClient);
-        const attributeValues = convertedValues[Section.groups.ENROLLMENT];
-        const currentEventValues = convertedValues[Section.groups.EVENT] || {};
-        const currentClientMainData =
-            getCurrentClientMainData(state, itemId, dataEntryId, formFoundation) || {};
-        const { currentEnrollmentValues, currentEventMainData }
-            = splitCurrentClientMainData(state, currentClientMainData);
-        const currentEvent = stage
-            ? { ...currentEventValues, ...currentEventMainData, programStageId: stage.id } : undefined;
+const runRulesOnEnrollmentUpdate = ({
+    store,
+    context,
+    searchActions = [],
+    querySingleResource,
+    onGetValidationContext,
+}: {
+    store: ReduxStore,
+    context: Context,
+    searchActions?: any,
+    querySingleResource: QuerySingleResource,
+    onGetValidationContext: () => Object,
+}) => {
+    const state = store.value;
+    const { programId, dataEntryId, itemId, orgUnit, uid, stage, formFoundation } = context;
+    const formId = getDataEntryKey(dataEntryId, itemId);
+    const program = getTrackerProgramThrowIfNotFound(programId);
+    const currentFormData = state.formsValues[formId] || {};
+    const convertedValues = formFoundation.convertAndGroupBySection(currentFormData, convertFormToClient);
+    const attributeValues = convertedValues[Section.groups.ENROLLMENT];
+    const currentEventValues = convertedValues[Section.groups.EVENT] || {};
+    const currentClientMainData = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation) || {};
+    const { currentEnrollmentValues, currentEventMainData } = splitCurrentClientMainData(state, currentClientMainData);
+    const currentEvent = stage
+        ? { ...currentEventValues, ...currentEventMainData, programStageId: stage.id }
+        : undefined;
 
-        return runRulesOnUpdateFieldBatch({
-            program,
-            formId,
-            dataEntryId,
-            itemId,
-            orgUnit,
-            enrollmentData: currentEnrollmentValues,
-            attributeValues,
-            currentEvent,
-            extraActions: searchActions,
-            uid,
-            stage,
-            formFoundation: stage ? formFoundation : undefined,
-        });
-    };
+    const runRulesOnUpdateFieldBatchPromise = runRulesOnUpdateFieldBatch({
+        program,
+        formId,
+        dataEntryId,
+        itemId,
+        orgUnit,
+        enrollmentData: currentEnrollmentValues,
+        attributeValues,
+        currentEvent,
+        extraActions: searchActions,
+        uid,
+        stage,
+        formFoundation: stage ? formFoundation : undefined,
+        querySingleResource,
+        onGetValidationContext,
+    });
+    return from(runRulesOnUpdateFieldBatchPromise);
+};
 
-
-export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
-        map((action) => {
+        switchMap((action) => {
             const {
                 uid,
                 programId,
@@ -85,6 +103,7 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
                 innerPayload,
                 stage,
                 formFoundation,
+                onGetValidationContext,
             } = action.payload;
 
             const {
@@ -92,24 +111,42 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
                 itemId,
             } = innerPayload;
 
-            return runRulesOnEnrollmentUpdate(store, {
-                dataEntryId,
-                itemId,
+            return runRulesOnEnrollmentUpdate({
+                store,
+                context: {
+                    dataEntryId,
+                    itemId,
+                    uid,
+                    programId,
+                    orgUnit,
+                    stage,
+                    formFoundation,
+                },
+                querySingleResource,
+                onGetValidationContext,
+            });
+        }));
+
+export const runRulesOnEnrollmentFieldUpdateEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
+    action$.pipe(
+        ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
+        map(actionBatch =>
+            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
+        switchMap((action) => {
+            const {
+                innerPayload: payload,
+                searchActions,
                 uid,
                 programId,
                 orgUnit,
                 stage,
                 formFoundation,
-            });
-        }));
-
-export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
-        map(actionBatch =>
-            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
-        map((action) => {
-            const { innerPayload: payload, searchActions, uid, programId, orgUnit, stage, formFoundation } = action.payload;
+                onGetValidationContext,
+            } = action.payload;
             const { dataEntryId, itemId, elementId, value, uiState } = payload;
 
             const fieldData: FieldData = {
@@ -118,14 +155,21 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, st
                 valid: uiState.valid,
             };
 
-            return runRulesOnEnrollmentUpdate(store, {
-                programId,
-                orgUnit,
-                dataEntryId,
-                itemId,
-                uid,
-                stage,
-                formFoundation,
-            }, fieldData, searchActions);
+            return runRulesOnEnrollmentUpdate({
+                store,
+                context: {
+                    programId,
+                    orgUnit,
+                    dataEntryId,
+                    itemId,
+                    uid,
+                    stage,
+                    formFoundation,
+                },
+                fieldData,
+                searchActions,
+                querySingleResource,
+                onGetValidationContext,
+            });
         }),
     );
