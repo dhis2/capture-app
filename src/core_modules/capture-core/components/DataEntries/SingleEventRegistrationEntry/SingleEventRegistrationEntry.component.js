@@ -22,4 +22,3 @@ export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eve
         </>
     );
 };
-
