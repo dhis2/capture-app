@@ -25,8 +25,12 @@ const getEventStatus = (event: ApiEnrollmentEvent) => {
     }
 
     if (event.status === statusTypes.SCHEDULE) {
-        if (!event.scheduledAt || !daysUntilDueDate) {
+        if (!event.scheduledAt) {
             return { status: statusTypes.SCHEDULE, options: undefined };
+        }
+
+        if (daysUntilDueDate === 0) {
+            return { status: statusTypes.SCHEDULE, options: 'today' };
         }
 
         if (daysUntilDueDate < 14) {
