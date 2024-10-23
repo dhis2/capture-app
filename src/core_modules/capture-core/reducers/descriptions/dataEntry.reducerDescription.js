@@ -273,6 +273,17 @@ export const dataEntriesInProgressListDesc = createReducerDescription({
             [key]: null,
         };
     },
+    [actionTypes.START_LOAD_DATA_ENTRY]: (state, action) => {
+        const { dataEntryId, itemId, uid } = action.payload;
+        const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+        return {
+            ...state,
+            [dataEntryKey]: [
+                ...(state[dataEntryKey] || []),
+                uid,
+            ],
+        };
+    },
     [formAsyncActionTypes.FIELD_IS_VALIDATING]: (state, action) => {
         const { formId, validatingUid } = action.payload;
         const listWithPotentialDupes = [...(state[formId] || []), validatingUid];
@@ -336,7 +347,27 @@ export const dataEntriesInProgressListDesc = createReducerDescription({
             ],
         };
     },
+    [actionTypes.START_RUN_RULES_POST_LOAD_DATA_ENTRY]: (state, action) => {
+        const { dataEntryId, itemId, uid } = action.payload;
+        const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+        return {
+            ...state,
+            [dataEntryKey]: [
+                ...(state[dataEntryKey] || []),
+                uid,
+            ],
+        };
+    },
     [actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD]: (state, action) => {
+        const { dataEntryId, itemId, uid } = action.payload;
+        const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+        const updatedList = (state[dataEntryKey] || []).filter(item => item !== uid);
+        return {
+            ...state,
+            [dataEntryKey]: updatedList,
+        };
+    },
+    [actionTypes.RULES_EXECUTED_POST_LOAD_DATA_ENTRY]: (state, action) => {
         const { dataEntryId, itemId, uid } = action.payload;
         const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
         const updatedList = (state[dataEntryKey] || []).filter(item => item !== uid);

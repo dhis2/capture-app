@@ -1,5 +1,6 @@
 // @flow
 import { useEffect, useRef, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
@@ -9,6 +10,7 @@ import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 import type { TrackerProgram, ProgramStage, RenderFoundation } from '../../../metaData';
 import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
+import { startRunRulesPostLoadDataEntry } from '../../DataEntry';
 
 export const useLifecycle = ({
     program,
@@ -65,6 +67,8 @@ export const useLifecycle = ({
             delayRulesExecutionRef.current = false;
             setRulesExecutionTrigger(-rulesExecutionTrigger);
         } else {
+            const uid = uuid();
+            dispatch(startRunRulesPostLoadDataEntry(dataEntryId, itemId, uid));
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
 
             getRulesActions({
@@ -79,7 +83,8 @@ export const useLifecycle = ({
                 attributesValuesRulesDependency,
                 enrollmentDataRulesDependency,
                 querySingleResource,
-            }).then(rulesActions => dispatch(batchActions([rulesActions])));
+                uid,
+            }).then(rulesActions => dispatch(batchActions(rulesActions)));
             eventsRef.current = eventsRulesDependency;
             attributesRef.current = attributesValuesRulesDependency;
             enrollmentDataRef.current = enrollmentDataRulesDependency;

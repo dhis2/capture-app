@@ -1,4 +1,5 @@
 // @flow
+import { v4 as uuid } from 'uuid';
 import { useEffect, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
@@ -6,8 +7,9 @@ import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getEventProgramThrowIfNotFound } from '../../../../metaData';
-import { getRulesActions } from './DataEntry';
+import { getRulesActions, dataEntryId, itemId } from './DataEntry';
 import type { RenderFoundation } from '../../../../metaData';
+import { startRunRulesPostLoadDataEntry } from '../../../DataEntry';
 
 export const useRulesEngine = ({
     programId,
@@ -29,6 +31,8 @@ export const useRulesEngine = ({
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
         if (orgUnit && program && !!formFoundation) {
+            const uid = uuid();
+            dispatch(startRunRulesPostLoadDataEntry(dataEntryId, itemId, uid));
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             getRulesActions({
                 state,
@@ -36,7 +40,8 @@ export const useRulesEngine = ({
                 orgUnit,
                 formFoundation,
                 querySingleResource,
-            }).then(rulesActions => dispatch(batchActions([rulesActions])));
+                uid,
+            }).then(rulesActions => dispatch(batchActions(rulesActions)));
             orgUnitRef.current = orgUnit;
         }
     // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)

@@ -22,7 +22,7 @@ import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptio
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
 import type { QuerySingleResource } from '../../../../utils/api';
 
-const itemId = 'newEnrollment';
+export const itemId = 'newEnrollment';
 
 type DataEntryPropsToInclude = Array<Object>;
 

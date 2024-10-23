@@ -1,4 +1,5 @@
 // @flow
+import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
@@ -11,6 +12,8 @@ import { useBuildFirstStageRegistration } from './useBuildFirstStageRegistration
 import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { useMergeFormFoundationsIfApplicable } from './useMergeFormFoundationsIfApplicable';
+import { startLoadDataEntry } from '../../../DataEntry';
+import { itemId } from '../../Enrollment';
 
 export const useLifecycle = (
     selectedScopeId: string,
@@ -56,6 +59,8 @@ export const useLifecycle = (
             formFoundation
         ) {
             dataEntryReadyRef.current = true;
+            const uid = uuid();
+            dispatch(startLoadDataEntry(dataEntryId, itemId, uid));
             dispatch(
                 startNewEnrollmentDataEntryInitialisation({
                     selectedOrgUnit: orgUnit,
