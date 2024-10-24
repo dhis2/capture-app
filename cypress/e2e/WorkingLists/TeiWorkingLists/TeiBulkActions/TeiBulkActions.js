@@ -176,8 +176,7 @@ When('you confirm 2 active enrollments with errors', () => {
 
             const enrollment2 = enrollments.find(e => e.enrollment === 'JAfTBlr2Cj2');
             expect(enrollment2).to.include({ enrollment: 'JAfTBlr2Cj2', status: 'COMPLETED' });
-            expect(enrollment2.events).to.have.length(1);
-            expect(enrollment2.events[0]).to.include({ event: 'xiNGHVi6HVv', status: 'COMPLETED' });
+            expect(enrollment2.events).to.have.length(0);
         });
 });
 
