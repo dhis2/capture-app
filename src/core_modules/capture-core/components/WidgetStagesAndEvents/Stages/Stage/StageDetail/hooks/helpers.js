@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
+import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
@@ -25,8 +26,12 @@ const getEventStatus = (event: ApiEnrollmentEvent) => {
     }
 
     if (event.status === statusTypes.SCHEDULE) {
-        if (!event.scheduledAt || !daysUntilDueDate) {
+        if (!event.scheduledAt) {
             return { status: statusTypes.SCHEDULE, options: undefined };
+        }
+
+        if (daysUntilDueDate === 0) {
+            return { status: statusTypes.SCHEDULE, options: i18n.t('Today') };
         }
 
         if (daysUntilDueDate < 14) {
