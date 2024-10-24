@@ -38,7 +38,7 @@ Then('you confirm 3 active enrollments successfully', () => {
 
     cy.intercept({
         method: 'POST',
-        url: '**/tracker?async=false&importStrategy=UPDATE',
+        url: '**/tracker?async=false&importStrategy=UPDATE&importMode=COMMIT',
     }, {
         statusCode: 200,
         body: {},
@@ -111,7 +111,7 @@ When('you confirm 1 active enrollment without completing events successfully', (
 
     cy.intercept({
         method: 'POST',
-        url: '**/tracker?async=false&importStrategy=UPDATE',
+        url: '**/tracker?async=false&importStrategy=UPDATE&importMode=COMMIT',
     }, {
         statusCode: 200,
         body: {},
@@ -147,7 +147,7 @@ When('you confirm 2 active enrollments with errors', () => {
 
     cy.intercept({
         method: 'POST',
-        url: '**/tracker?async=false&importStrategy=UPDATE',
+        url: '**/tracker?async=false&importStrategy=UPDATE&importMode=COMMIT',
     }, {
         statusCode: 200,
         body: {},

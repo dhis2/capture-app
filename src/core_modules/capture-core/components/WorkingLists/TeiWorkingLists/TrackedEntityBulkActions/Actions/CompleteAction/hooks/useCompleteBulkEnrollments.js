@@ -26,7 +26,7 @@ const validateEnrollments = async ({ dataEngine, enrollments }) => dataEngine.mu
 });
 
 const importValidEnrollments = async ({ dataEngine, enrollments }) => dataEngine.mutate({
-    resource: 'tracker?async=false&importStrategy=UPDATE',
+    resource: 'tracker?async=false&importStrategy=UPDATE&importMode=COMMIT',
     type: 'create',
     data: () => ({ enrollments }),
 });
