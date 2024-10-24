@@ -49,14 +49,10 @@ Then('you confirm 3 active enrollments successfully', () => {
         .click();
 
     cy.wait('@completeEnrollmentsDryRun')
-        .its('request.body')
-        .should(({ enrollments }) => {
-            expect(enrollments).to.have.length(3);
+        .then((interception) => {
+            expect(interception.response.statusCode).to.eq(200);
+            expect(interception.request.body.enrollments).to.have.length(3);
         });
-
-    cy.get('@completeEnrollmentsDryRun')
-        .its('response.statusCode')
-        .should('eq', 200);
 
     cy.wait('@completeEnrollments')
         .its('request.body')
@@ -125,14 +121,10 @@ When('you confirm 1 active enrollment without completing events successfully', (
         .click();
 
     cy.wait('@completeEnrollmentsDryRun')
-        .its('request.body')
-        .should(({ enrollments }) => {
-            expect(enrollments).to.have.length(1);
+        .then((interception) => {
+            expect(interception.response.statusCode).to.eq(200);
+            expect(interception.request.body.enrollments).to.have.length(1);
         });
-
-    cy.get('@completeEnrollmentsDryRun')
-        .its('response.statusCode')
-        .should('eq', 200);
 
     cy.wait('@completeEnrollments')
         .its('request.body')
@@ -165,14 +157,10 @@ When('you confirm 2 active enrollments with errors', () => {
         .click();
 
     cy.wait('@completeEnrollmentsDryRun')
-        .its('request.body')
-        .should(({ enrollments }) => {
-            expect(enrollments).to.have.length(2);
+        .then((interception) => {
+            expect(interception.response.statusCode).to.eq(409);
+            expect(interception.request.body.enrollments).to.have.length(2);
         });
-
-    cy.get('@completeEnrollmentsDryRun')
-        .its('response.statusCode')
-        .should('eq', 409);
 
     cy.wait('@completeEnrollments')
         .its('request.body')
