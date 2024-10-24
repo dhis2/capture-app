@@ -71,10 +71,11 @@ Then('you confirm 3 active enrollments successfully', () => {
             expect(enrollment2.events).to.have.length(1);
             expect(enrollment2.events[0]).to.include({ event: 'WSBZ189OfQd', status: 'COMPLETED' });
 
-            // The enrollment with id 'YBXMrojc2Wn' should be completed with no events
-            const enrollment3 = enrollments.find(e => e.enrollment === 'YBXMrojc2Wn');
-            expect(enrollment3).to.include({ enrollment: 'YBXMrojc2Wn', status: 'COMPLETED' });
-            expect(enrollment3.events).to.have.length(0);
+            // The enrollment with id 'YBXMrojc2Wn' should be completed with one completed event
+            const enrollment3 = enrollments.find(e => e.enrollment === 'vky6UDe2QEG');
+            expect(enrollment3).to.include({ enrollment: 'vky6UDe2QEG', status: 'COMPLETED' });
+            expect(enrollment3.events).to.have.length(1);
+            expect(enrollment3.events[0]).to.include({ event: 'gIuo0V0CTj5', status: 'COMPLETED' });
         });
 });
 
