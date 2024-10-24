@@ -160,19 +160,24 @@ When('you confirm 2 active enrollments with errors', () => {
     cy.wait('@completeEnrollmentsDryRun')
         .then((interception) => {
             expect(interception.response.statusCode).to.eq(409);
-            expect(interception.request.body.enrollments).to.have.length(2);
+            expect(interception.request.body.enrollments).to.have.length(4);
         });
 
     cy.wait('@completeEnrollments')
         .its('request.body')
         .should(({ enrollments }) => {
             // The bad data should be filtered out and not sent to the server
-            expect(enrollments).to.have.length(1);
+            expect(enrollments).to.have.length(2);
 
-            // Assert that first enrollment is completed with one completed event
-            expect(enrollments[0]).to.include({ enrollment: 'Rkx1QOZeBra', status: 'COMPLETED' });
-            expect(enrollments[0].events).to.have.length(1);
-            expect(enrollments[0].events[0]).to.include({ event: 'TIU452W5bI1', status: 'COMPLETED' });
+            const enrollment1 = enrollments.find(e => e.enrollment === 'Rkx1QOZeBra');
+            expect(enrollment1).to.include({ enrollment: 'Rkx1QOZeBra', status: 'COMPLETED' });
+            expect(enrollment1.events).to.have.length(1);
+            expect(enrollment1.events[0]).to.include({ event: 'TIU452W5bI1', status: 'COMPLETED' });
+
+            const enrollment2 = enrollments.find(e => e.enrollment === 'JAfTBlr2Cj2');
+            expect(enrollment2).to.include({ enrollment: 'JAfTBlr2Cj2', status: 'COMPLETED' });
+            expect(enrollment2.events).to.have.length(1);
+            expect(enrollment2.events[0]).to.include({ event: 'xiNGHVi6HVv', status: 'COMPLETED' });
         });
 });
 
@@ -189,7 +194,7 @@ Then('an error dialog will be displayed to the user', () => {
 
     cy.get('[data-test="bulk-complete-enrollments-dialog"]')
         .find('li')
-        .should('have.length', 3);
+        .should('have.length', 5);
 
     cy.get('[data-test="bulk-complete-enrollments-dialog"]')
         .find('li')

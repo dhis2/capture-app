@@ -110,7 +110,9 @@ export const useCompleteBulkEnrollments = ({
 
                 return ({
                     program: programId,
-                    fields: 'trackedEntity,enrollments[*,!attributes,!relationships,events[*,!dataValues,!relationships]]',
+                    // Ideally we should not fetch event dataValues here, but doing it to bypass
+                    // some limitations in the API
+                    fields: 'trackedEntity,enrollments[*,!attributes,!relationships,events[*,!relationships]]',
                     [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
                 });
             },

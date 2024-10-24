@@ -33,10 +33,10 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   Scenario: The user should see an error message when trying to bulk complete enrollments with errors
     Given you open the main page with Ngelehun and Malaria Case diagnosis context
-    And you select the first 3 rows
+    And you select the first 5 rows
     And you click the bulk complete enrollments button
     And the bulk complete enrollments modal should open
-    And the modal content should say: This action will complete 2 active enrollments in your selection. 1 enrollment already marked as completed will not be changed.
+    And the modal content should say: This action will complete 4 active enrollments in your selection. 1 enrollment already marked as completed will not be changed.
     When you confirm 2 active enrollments with errors
     Then an error dialog will be displayed to the user
     And you close the error dialog
