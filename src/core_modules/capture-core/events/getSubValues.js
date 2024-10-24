@@ -37,23 +37,33 @@ const subValueGetterByElementType = {
                 return null;
             }),
     [dataElementTypes.IMAGE]: ({
+        value,
         eventId,
         metaElementId,
         absoluteApiPath,
+        querySingleResource,
     }: {
+        value: any,
         eventId: string,
         metaElementId: string,
         absoluteApiPath: string,
+        querySingleResource: QuerySingleResource,
     }) =>
-        (featureAvailable(FEATURES.trackerImageEndpoint) ?
-            {
-                url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image`,
-                previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`,
-            } : {
-                url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}&dimension=SMALL`,
-            }
-        ),
+        querySingleResource({ resource: `fileResources/${value}` })
+            .then(res => ({
+                name: res.name,
+                value: res.id,
+                url: featureAvailable(FEATURES.trackerImageEndpoint)
+                    ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image`
+                    : `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                previewUrl: featureAvailable(FEATURES.trackerImageEndpoint)
+                    ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`
+                    : `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}&dimension=SMALL`,
+            }))
+            .catch((error) => {
+                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
+                return null;
+            }),
     [dataElementTypes.ORGANISATION_UNIT]: ({
         value,
         eventId,
