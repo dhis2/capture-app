@@ -28,8 +28,6 @@ Feature: User uses the ScopeSelector to navigate
     When you select both org unit and program Malaria case registration
     Then you should see the table
 
-  # DHIS2-16010 - App crashes on invalid program id
-  @skip
   Scenario: Main page > Url with invalid program id
     Given you land on a main page with an invalid program id
     Then you should see error message
