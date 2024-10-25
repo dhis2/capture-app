@@ -39,7 +39,6 @@ export const ActionsPlain = ({
     onUpdate,
     onDelete,
     onUpdateOwnership,
-    canCascadeDeleteEnrollment,
     isTransferLoading,
     onAddNew,
     loading,
@@ -116,7 +115,6 @@ export const ActionsPlain = ({
                                 onUpdate={handleOnUpdateStatus}
                             />
                             <Delete
-                                canCascadeDeleteEnrollment={canCascadeDeleteEnrollment}
                                 enrollment={enrollment}
                                 onDelete={handleOnDelete}
                             />
