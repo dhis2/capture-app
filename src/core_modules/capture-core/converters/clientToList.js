@@ -38,7 +38,6 @@ type ImageClientValue = {
     previewUrl: string,
 };
 
-
 function convertFileForDisplay(clientValue: FileClientValue) {
     // Fallback until https://dhis2.atlassian.net/browse/DHIS2-16994 is implemented
     if (typeof clientValue === 'string' || clientValue instanceof String) {
@@ -88,9 +87,10 @@ function convertStatusForDisplay(clientValue: Object) {
     );
 }
 
-function convertOrgUnitForDisplay(clientValue: { id: string }) {
+function convertOrgUnitForDisplay(clientValue: string | {id: string}) {
+    const orgUnitId = typeof clientValue === 'string' ? clientValue : clientValue.id;
     return (
-        <TooltipOrgUnit orgUnitId={clientValue.id} />
+        <TooltipOrgUnit orgUnitId={orgUnitId} />
     );
 }
 

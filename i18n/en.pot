@@ -705,9 +705,6 @@ msgstr "View working list in this program."
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
 
-msgid "Program is not valid"
-msgstr "Program is not valid"
-
 msgid "Org unit is not valid with current program"
 msgstr "Org unit is not valid with current program"
 
@@ -1227,6 +1224,12 @@ msgstr "Enrollment widget could not be loaded. Please try again later"
 msgid "Follow-up"
 msgstr "Follow-up"
 
+msgid "Started at{{escape}}"
+msgstr "Started at{{escape}}"
+
+msgid "Owned by{{escape}}"
+msgstr "Owned by{{escape}}"
+
 msgid "Cancelled"
 msgstr "Cancelled"
 
@@ -1417,13 +1420,6 @@ msgstr "{{ linkableStageLabel }} has no linkable events"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Enter details now"
 
@@ -1508,6 +1504,9 @@ msgstr "Changelog"
 msgid "No changes to display"
 msgstr "No changes to display"
 
+msgid "Updated"
+msgstr "Updated"
+
 msgid "Created"
 msgstr "Created"
 
@@ -1525,6 +1524,9 @@ msgstr "Data item"
 
 msgid "Change"
 msgstr "Change"
+
+msgid "Value"
+msgstr "Value"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
