@@ -63,7 +63,7 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
         <div className={classes.wrapper}>
             {i18n.t('No one is assigned to this event')}
             <ConditionalTooltip
-                content={i18n.t("You don't have access to assign a user to this event")}
+                content={i18n.t("You don't have access to assign an assignee")}
                 enabled={!writeAccess}
             >
                 <Button
