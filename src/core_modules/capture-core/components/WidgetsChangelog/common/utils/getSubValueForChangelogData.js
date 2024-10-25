@@ -63,21 +63,27 @@ const buildTEAUrlByElementType: {|
     }: SubValueTEAProps) => {
         const { teiId, value } = trackedEntity;
         if (!value) return null;
-        const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
+        try {
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-        if (!latestValue) {
-            return name;
+            if (!latestValue) {
+                return name;
+            }
+
+            return {
+                id,
+                name,
+                url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}`,
+                previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}&dimension=small`,
+            };
+        } catch (error) {
+            log.error(
+                errorCreator('Error fetching image resource')({ error }),
+            );
+            return null;
         }
-
-        return {
-            id,
-            name,
-            url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}`,
-            previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${attributeId}/image?program=${programId}&dimension=small`,
-        };
     },
 };
-
 
 const buildDataElementUrlByElementType: {|
 [string]: Function,
@@ -86,34 +92,48 @@ const buildDataElementUrlByElementType: {|
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 
-        const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
+        try {
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-        if (!latestValue) {
-            return name;
+            if (!latestValue) {
+                return name;
+            }
+
+            return {
+                id,
+                name,
+                url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/file`,
+            };
+        } catch (error) {
+            log.error(
+                errorCreator('Error fetching file resource')({ error }),
+            );
+            return null;
         }
-
-        return {
-            id,
-            name,
-            url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/file`,
-        };
     },
     [dataElementTypes.IMAGE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 
-        const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
+        try {
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-        if (!latestValue) {
-            return name;
+            if (!latestValue) {
+                return name;
+            }
+
+            return {
+                id,
+                name,
+                url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image`,
+                previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image?dimension=small`,
+            };
+        } catch (error) {
+            log.error(
+                errorCreator('Error fetching image resource')({ error }),
+            );
+            return null;
         }
-
-        return {
-            id,
-            name,
-            url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image`,
-            previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${dataElementId}/image?dimension=small`,
-        };
     },
 };
 
