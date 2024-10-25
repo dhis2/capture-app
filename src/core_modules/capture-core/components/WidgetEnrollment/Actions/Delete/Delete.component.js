@@ -1,4 +1,5 @@
 // @flow
+import React, { useState, useMemo } from 'react';
 import {
     IconDelete16,
     MenuItem,
@@ -9,18 +10,21 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui';
-import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
+import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip/';
 
-export const Delete = ({ enrollment, onDelete }: Props) => {
+export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);
+    const disabled = useMemo(() => !canCascadeDeleteEnrollment, [canCascadeDeleteEnrollment]);
+    const tooltipContent = i18n.t('You do not have access to delete this enrollment');
 
     return (
-        <div>
+        <ConditionalTooltip content={tooltipContent} enabled={disabled}>
             <MenuItem
                 dense
                 dataTest="widget-enrollment-actions-delete"
+                disabled={disabled}
                 icon={<IconDelete16 />}
                 destructive
                 label={i18n.t('Delete')}
@@ -54,6 +58,6 @@ export const Delete = ({ enrollment, onDelete }: Props) => {
                     </ModalActions>
                 </Modal>
             )}
-        </div>
+        </ConditionalTooltip>
     );
 };
