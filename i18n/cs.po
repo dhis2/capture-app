@@ -719,9 +719,6 @@ msgstr "Zobrazit pracovní seznam v tomto programu."
 msgid "Page is missing required values from URL"
 msgstr "Na stránce chybí požadované hodnoty z adresy URL"
 
-msgid "Program is not valid"
-msgstr "Program není platný"
-
 msgid "Org unit is not valid with current program"
 msgstr "Organizační jednotka není platná pro aktuální program"
 
@@ -1238,6 +1235,12 @@ msgstr "Widget pro zápis nelze načíst. Prosím zkuste to znovu později"
 msgid "Follow-up"
 msgstr "Následovat"
 
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
+
 msgid "Cancelled"
 msgstr "Zrušeno"
 
@@ -1442,13 +1445,6 @@ msgstr "{{ linkableStageLabel }} nemá žádné propojitelné události"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Nejednoznačné vztahy, kontaktujte správce systému"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"V dalším kroku po vyplnění této stránky {{currentStageLabel}} zadejte údaje "
-"{{linkableStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Zadejte nyní podrobnosti"
 
@@ -1533,6 +1529,9 @@ msgstr "Seznam změn"
 msgid "No changes to display"
 msgstr ""
 
+msgid "Updated"
+msgstr "Aktualizováno"
+
 msgid "Created"
 msgstr "Vytvořeno"
 
@@ -1549,6 +1548,9 @@ msgid "Data item"
 msgstr "Datová položka"
 
 msgid "Change"
+msgstr ""
+
+msgid "Value"
 msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
