@@ -87,8 +87,6 @@ const WidgetTwoEventWorkspacePlain = ({
         );
     }
 
-    console.log('linkedEvent', !!linkedEvent);
-
     if (!linkedEvent || !formFoundation || !stage) {
         return null;
     }

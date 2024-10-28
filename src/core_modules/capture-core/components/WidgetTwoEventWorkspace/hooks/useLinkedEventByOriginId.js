@@ -33,7 +33,7 @@ const calculateRelatedStageRelationships = (event) => {
 
     return {
         relationshipType: stageToStageRelationship.relationshipType,
-        relationship: stageToStageRelationship.relationship,
+        relationshipId: stageToStageRelationship.relationship,
         linkedEvent,
     };
 };
@@ -79,7 +79,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
 
         return {
             linkedEvent: relatedStageRelationship.linkedEvent,
-            relationship: relatedStageRelationship.relationship,
+            relationship: relatedStageRelationship.relationshipId,
             relationshipType: relatedStageRelationship.relationshipType,
             dataValues: relatedStageRelationship.linkedEvent.dataValues,
         };

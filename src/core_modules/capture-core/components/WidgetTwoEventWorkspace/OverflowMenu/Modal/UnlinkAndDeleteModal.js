@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
     Button,
@@ -11,6 +11,7 @@ import {
     NoticeBox,
 } from '@dhis2/ui';
 import { useDataEngine } from '@dhis2/app-runtime';
+import { useMutation } from 'react-query';
 import type { Props } from './UnlinkAndDeleteModal.types';
 
 export const UnlinkAndDeleteModal = ({
@@ -18,34 +19,38 @@ export const UnlinkAndDeleteModal = ({
     eventId,
     setUpdateData,
 }: Props) => {
-    const [errorReports, setErrorReports] = useState([]);
-    const [loading, setLoading] = useState(false);
     const dataEngine = useDataEngine();
 
-    const handleDelete = async () => {
-        setLoading(true);
-        setErrorReports([]);
-        setUpdateData(true);
+    const deleteEvent = async () => {
+        const mutation = {
+            resource: '/tracker?async=false&importStrategy=DELETE',
+            type: 'create',
+            data: { events: [{ event: eventId }] },
+        };
 
-        try {
-            const mutation = {
-                resource: '/tracker?async=false&importStrategy=DELETE',
-                type: 'create',
-                data: { events: [{ event: eventId }] },
-            };
-
-            await dataEngine.mutate(mutation);
-            setOpenModal(false);
-        } catch (error) {
-            const messages = error.details?.response?.errorReports?.map(report => report.message) || [
-                error.message,
-            ];
-            setErrorReports(messages);
-        } finally {
-            setLoading(false);
-            setUpdateData(false);
-        }
+        return dataEngine.mutate(mutation);
     };
+
+    const mutation = useMutation(deleteEvent, {
+        onMutate: () => {
+            setUpdateData(true);
+        },
+        onSuccess: () => {
+            setOpenModal(false);
+            setUpdateData(false);
+        },
+        onError: () => {
+            setUpdateData(false);
+        },
+    });
+
+    const handleDelete = () => {
+        mutation.mutate();
+    };
+
+    const errorReports =
+        mutation.error?.details?.response?.errorReports?.map(report => report.message) ||
+        (mutation.error ? [mutation.error.message] : []);
 
     return (
         <Modal dataTest="event-unlink-and-delete-modal" position="middle">
@@ -56,7 +61,7 @@ export const UnlinkAndDeleteModal = ({
                         'Are you sure you want to unlink and delete the event? This will permanently remove the event and all related data.',
                     )}
                 </p>
-                {errorReports.length > 0 && (
+                {mutation.isError && (
                     <NoticeBox
                         title={i18n.t('There was a problem unlinking and deleting the event')}
                         error
@@ -72,10 +77,18 @@ export const UnlinkAndDeleteModal = ({
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
-                    <Button onClick={() => setOpenModal(false)} secondary disabled={loading}>
+                    <Button
+                        onClick={() => setOpenModal(false)}
+                        secondary
+                        disabled={mutation.isLoading}
+                    >
                         {i18n.t('No, cancel')}
                     </Button>
-                    <Button destructive onClick={handleDelete} disabled={loading}>
+                    <Button
+                        destructive
+                        onClick={handleDelete}
+                        disabled={mutation.isLoading}
+                    >
                         {i18n.t('Yes, unlink and delete event')}
                     </Button>
                 </ButtonStrip>

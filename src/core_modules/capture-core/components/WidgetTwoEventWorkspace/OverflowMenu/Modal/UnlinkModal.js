@@ -21,7 +21,7 @@ export const UnlinkModal = ({
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
 
-    const { onDeleteRelationship } = useDeleteRelationship({ sourceId: relationshipId });
+    const { onDeleteRelationship } = useDeleteRelationship();
 
     const handleUnlink = async () => {
         setLoading(true);
