@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
+import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import type { Props } from './OverflowMenu.types';
 import { OverflowMenuComponent } from './OverflowMenu.component';
-import { useAuthorities } from './hooks';
 
 export const OverflowMenu = ({
     trackedEntityTypeName,
@@ -13,13 +13,13 @@ export const OverflowMenu = ({
     teiId,
     programAPI,
 }: Props) => {
-    const { canCascadeDeleteTei } = useAuthorities();
+    const { hasAuthority } = useAuthorities({ authorities: ['F_TEI_CASCADE_DELETE'] });
 
     return (
         <OverflowMenuComponent
             trackedEntityTypeName={trackedEntityTypeName}
             canWriteData={canWriteData}
-            canCascadeDeleteTei={canCascadeDeleteTei}
+            canCascadeDeleteTei={hasAuthority}
             trackedEntity={trackedEntity}
             onDeleteSuccess={onDeleteSuccess}
             displayChangelog={displayChangelog}

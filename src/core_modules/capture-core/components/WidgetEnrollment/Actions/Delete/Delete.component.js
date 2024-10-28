@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import {
     IconDelete16,
     MenuItem,
@@ -16,7 +16,7 @@ import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip/';
 
 export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);
-    const disabled = useMemo(() => !canCascadeDeleteEnrollment, [canCascadeDeleteEnrollment]);
+    const disabled = !canCascadeDeleteEnrollment;
     const tooltipContent = i18n.t('You do not have access to delete this enrollment');
 
     return (
