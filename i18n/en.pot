@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-22T14:40:35.028Z\n"
-"PO-Revision-Date: 2024-10-22T14:40:35.028Z\n"
+"POT-Creation-Date: 2024-10-28T13:13:50.133Z\n"
+"PO-Revision-Date: 2024-10-28T13:13:50.133Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1690,6 +1690,9 @@ msgstr[1] "{{count}} enrollments already marked as completed will not be changed
 msgid "Mark all events within enrollments as complete"
 msgstr "Mark all events within enrollments as complete"
 
+msgid "You do not have access to bulk complete enrollments"
+msgstr "You do not have access to bulk complete enrollments"
+
 msgid "Complete enrollments"
 msgstr "Complete enrollments"
 
@@ -1709,6 +1712,9 @@ msgstr "An error occurred when completing the enrollments"
 
 msgid "An unknown error occurred when completing enrollments"
 msgstr "An unknown error occurred when completing enrollments"
+
+msgid "You do not have access to delete enrollments"
+msgstr "You do not have access to delete enrollments"
 
 msgid "Delete enrollments"
 msgstr "Delete enrollments"

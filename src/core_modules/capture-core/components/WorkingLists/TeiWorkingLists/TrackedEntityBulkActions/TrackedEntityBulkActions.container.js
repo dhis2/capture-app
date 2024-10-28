@@ -6,7 +6,13 @@ import { TrackedEntityBulkActionsComponent } from './TrackedEntityBulkActions.co
 import type { ContainerProps } from './TrackedEntityBulkActions.types';
 import { errorCreator } from '../../../../../capture-core-utils';
 
-export const TrackedEntityBulkActions = ({ programStageId, stages, programId, ...passOnProps }: ContainerProps) => {
+export const TrackedEntityBulkActions = ({
+    programStageId,
+    stages,
+    programDataWriteAccess,
+    programId,
+    ...passOnProps
+}: ContainerProps) => {
     if (programStageId) {
         const stage = stages.get(programStageId);
 
@@ -27,6 +33,7 @@ export const TrackedEntityBulkActions = ({ programStageId, stages, programId, ..
         <TrackedEntityBulkActionsComponent
             programId={programId}
             stages={stages}
+            programDataWriteAccess={programDataWriteAccess}
             {...passOnProps}
         />
     );

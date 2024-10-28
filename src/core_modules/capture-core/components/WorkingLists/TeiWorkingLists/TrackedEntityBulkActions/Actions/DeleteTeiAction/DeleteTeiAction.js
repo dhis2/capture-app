@@ -14,6 +14,8 @@ type Props = {
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_TEI_CASCADE_DELETE';
 
+
+// TODO - Add program and TEType access checks before adding action to prod
 export const DeleteTeiAction = ({
     selectedRows,
     selectedRowsCount,

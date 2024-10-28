@@ -6,6 +6,7 @@ export type Props = {|
     programId: string,
     stages: Map<string, ProgramStage>,
     onClearSelection: () => void,
+    programDataWriteAccess: boolean,
     onUpdateList: () => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
 |}

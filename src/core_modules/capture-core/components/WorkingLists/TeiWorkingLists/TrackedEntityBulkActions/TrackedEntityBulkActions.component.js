@@ -9,6 +9,7 @@ export const TrackedEntityBulkActionsComponent = ({
     selectedRows,
     programId,
     stages,
+    programDataWriteAccess,
     onClearSelection,
     onUpdateList,
     removeRowsFromSelection,
@@ -26,6 +27,7 @@ export const TrackedEntityBulkActionsComponent = ({
         >
             <CompleteAction
                 programId={programId}
+                programDataWriteAccess={programDataWriteAccess}
                 selectedRows={selectedRows}
                 stages={stages}
                 onUpdateList={onUpdateList}
@@ -34,6 +36,7 @@ export const TrackedEntityBulkActionsComponent = ({
 
             <DeleteEnrollmentsAction
                 selectedRows={selectedRows}
+                programDataWriteAccess={programDataWriteAccess}
                 programId={programId}
                 onUpdateList={onUpdateList}
             />

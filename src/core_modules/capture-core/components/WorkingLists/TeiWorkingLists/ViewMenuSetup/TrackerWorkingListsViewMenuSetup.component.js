@@ -111,6 +111,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
     const TrackedEntityBulkActionsComponent = useMemo(() => (
         <TrackedEntityBulkActions
             programId={program.id}
+            programDataWriteAccess={program.access.data.write}
             programStageId={programStageId}
             stages={program.stages}
             selectedRows={selectedRows}

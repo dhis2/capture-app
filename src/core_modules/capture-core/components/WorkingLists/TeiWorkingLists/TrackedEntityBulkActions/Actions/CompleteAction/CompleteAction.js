@@ -23,6 +23,7 @@ type Props = {
     selectedRows: { [id: string]: any },
     programId: string,
     stages: Map<string, ProgramStage>,
+    programDataWriteAccess: boolean,
     onUpdateList: (disableClearSelections?: boolean) => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
 };
@@ -50,6 +51,7 @@ const CompleteActionPlain = ({
     selectedRows,
     programId,
     stages,
+    programDataWriteAccess,
     onUpdateList,
     removeRowsFromSelection,
     classes,
@@ -170,12 +172,18 @@ const CompleteActionPlain = ({
 
     return (
         <>
-            <Button
-                small
-                onClick={() => setModalIsOpen(true)}
+            <ConditionalTooltip
+                enabled={!programDataWriteAccess}
+                content={i18n.t('You do not have access to bulk complete enrollments')}
             >
-                {i18n.t('Complete enrollments')}
-            </Button>
+                <Button
+                    small
+                    disabled={!programDataWriteAccess}
+                    onClick={() => setModalIsOpen(true)}
+                >
+                    {i18n.t('Complete enrollments')}
+                </Button>
+            </ConditionalTooltip>
 
             {modalIsOpen && (
                 <Modal
