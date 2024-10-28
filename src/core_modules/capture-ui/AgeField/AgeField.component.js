@@ -141,7 +141,7 @@ class D2AgeFieldPlain extends Component<Props> {
         this.props.onBlur(calculatedValues);
     }
 
-    handleDateBlur = (date: ?string) => {
+    handleDateBlur = (date: ?string, options:?Object) => {
         const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
         onRemoveFocus && onRemoveFocus();
         const calculatedValues = date ? getCalculatedValues(
@@ -149,7 +149,7 @@ class D2AgeFieldPlain extends Component<Props> {
             onParseDate,
             onGetFormattedDateStringFromMoment,
             moment) : null;
-        this.props.onBlur(calculatedValues);
+        this.props.onBlur(calculatedValues, options);
     }
 
     renderMessage = (key: string) => {

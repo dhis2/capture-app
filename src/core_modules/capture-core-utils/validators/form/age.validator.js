@@ -1,4 +1,5 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import { isValidZeroOrPositiveInteger } from './integerZeroOrPositive.validator';
 import { isValidDate } from './date.validator';
 /**
@@ -16,10 +17,10 @@ type AgeValues = {
 }
 
 const errorMessages = {
-    date: 'Please provide a valid date',
-    years: 'Please provide a valid positive integer',
-    months: 'Please provide a valid positive integer',
-    days: 'Please provide a valid positive integer',
+    date: i18n.t('Please provide a valid date'),
+    years: i18n.t('Please provide a valid positive integer'),
+    months: i18n.t('Please provide a valid positive integer'),
+    days: i18n.t('Please provide a valid positive integer'),
 
 };
 
@@ -50,17 +51,18 @@ function validateNumbers(years: ?string, months: ?string, days: ?string) {
     return { valid: true };
 }
 
-function validateDate(date: ?string, dateFormat: string) {
-    return (!date || isValidDate(date, dateFormat)) ?
+function validateDate(date: ?string, internalComponentError?: ?Object) {
+    const { valid } = isValidDate(date, internalComponentError)
+    return valid ?
         { valid: true } :
-        { valid: false, errorMessage: { date: errorMessages.date } };
+        { valid: false, errorMessage: { date: errorMessages.date} };
 }
 
 function isAllEmpty(value: AgeValues) {
     return (!value.date && !value.years && !value.months && !value.days);
 }
 
-export function isValidAge(value: AgeValues, dateFormat: string) {
+export function isValidAge(value: AgeValues, internalComponentError?: ?Object) {
     if (isAllEmpty(value)) {
         return false;
     }
@@ -73,5 +75,5 @@ export function isValidAge(value: AgeValues, dateFormat: string) {
 
     if (!numberResult.valid) return numberResult;
 
-    return validateDate(value.date, dateFormat);
+    return validateDate(value.date, internalComponentError);
 }

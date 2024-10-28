@@ -15,24 +15,21 @@ import i18n from '@dhis2/d2-i18n';
  * @param {string} value
  * @returns {boolean}
  */
-const CUSTOM_VALIDATION_MESSAGES = {
-    // WRONG_FORMAT: i18n.t('Please provide a valid date'),
-    INVALID_DATE_MORE_THAN_MAX: i18n.t('A date in the future is not allowed'),
-};
 
-const getErrorMessage = (errorCode: string, errorMessage: string): ?string => {
-    if (!errorMessage) return undefined;
+export function isValidDate(value: string, internalComponentError) {
+    if (!value) {
+        return false;
+    }
 
-    return CUSTOM_VALIDATION_MESSAGES[errorCode] || errorMessage || undefined;
-};
+    if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
+        return true;
+    }
 
-export function isValidDate(value: string, internalError) {
-    if (internalError?.innerError) {
+    if (internalComponentError?.error) {
         return {
             valid: false,
-            errorMessage: {
-                dateInnerErrorMessage: getErrorMessage(internalError.innerErrorCode, internalError.innerError)
-            } };
+            errorMessage: internalComponentError?.error,
+        };
     }
 
     return { valid: true };

@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import { withFocusSaver } from '../../HOC/withFocusSaver';
+import { withTextFieldFocusHandler } from '../TextInput/withFocusHandler';
+import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 import { DateField } from '../../DateAndTimeFields/DateField/Date.component';
 
 function DateTimeDatePlain(props) {
@@ -14,4 +16,4 @@ function DateTimeDatePlain(props) {
     );
 }
 
-export const DateTimeDate = withFocusSaver()(DateTimeDatePlain);
+export const DateTimeDate = withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(DateTimeDatePlain)));

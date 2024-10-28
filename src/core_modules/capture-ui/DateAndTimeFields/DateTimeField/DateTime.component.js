@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import { isValidTime } from 'capture-core-utils/validators/form';
 import defaultClasses from './dateTime.module.css';
 import { orientations } from '../../constants/orientations.const';
 import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
@@ -32,9 +31,6 @@ type State = {
     dateError: ?string,
 };
 
-const CUSTOM_TIME_VALIDATION_MESSAGES = {
-    INVALID_TIME: i18n.t('Please enter a valid time'),
-};
 
 export class DateTimeField extends Component<Props, State> {
     handleTimeChange: (timeValue: string) => void;
@@ -51,8 +47,7 @@ export class DateTimeField extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            timeError: null,
-            dateError: null,
+            dateError: { error: null, errorCode: null },
         };
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
@@ -77,31 +72,27 @@ export class DateTimeField extends Component<Props, State> {
 
     handleTimeBlur(timeValue: string) {
         this.touchedFields.add('timeTouched');
-        const isValid = this.validateTime(timeValue);
-        this.setState(() => ({
-            timeError: isValid ? null : CUSTOM_TIME_VALIDATION_MESSAGES.INVALID_TIME }), () => {
-            const currentValue = this.getValue();
-            this.handleBlur({
-                time: timeValue,
-                date: this.props.value?.date,
-            }, !!currentValue.date, { dateError: this.state.dateError, timeError: this.state.timeError });
-        });
+        const currentValue = this.getValue();
+        this.handleBlur({
+            time: timeValue,
+            date: this.props.value?.date,
+        }, { touched: !!currentValue.date, ...this.state.dateError });
     }
 
-    handleDateBlur(dateValue: string, options: ?Object, internalError: ?Object) {
+    handleDateBlur(dateValue: string, options: ?Object) {
         this.touchedFields.add('dateTouched');
         this.setState(() => ({
-            dateError: internalError?.dateError,
+            dateError: { error: options?.error, errorCode: options?.errorCode },
         }), () => {
             const currentValue = this.getValue();
             this.handleBlur({
                 time: currentValue.time,
                 date: dateValue,
-            }, !!currentValue.time, { dateError: this.state.dateError, timeError: this.state.timeError });
+            }, { touched: !!currentValue.date, ...this.state.dateError });
         });
     }
 
-    handleBlur(value: Value, otherFieldHasValue: boolean, internalError?: Object) {
+    handleBlur(value: Value, otherFieldHasValue: Object) {
         const onBlur = this.props.onBlur;
         const touched = this.touchedFields.size === 2;
         if (!value.date && !value.time) {
@@ -110,13 +101,7 @@ export class DateTimeField extends Component<Props, State> {
             });
             return;
         }
-        onBlur(value, { touched: touched || otherFieldHasValue }, internalError);
-    }
-
-    validateTime = (timeValue: string) => {
-        const isValid = isValidTime(timeValue);
-
-        return isValid;
+        onBlur(value, { touched: touched || otherFieldHasValue.touched, error: otherFieldHasValue?.error, errorCode: otherFieldHasValue?.errorCode });
     }
 
     getValue = () => this.props.value || {};
@@ -166,18 +151,22 @@ export class DateTimeField extends Component<Props, State> {
                             innerMessage={innerMessage}
                             {...passOnProps}
                         />
+                        <div className={classes?.innerInputError}>{innerMessage?.message?.dateError}</div>
                     </div>
 
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                    <DateTimeTime
-                        value={timeValue}
-                        onChange={this.handleTimeChange}
-                        onBlur={this.handleTimeBlur}
-                        label={timeLabel}
-                        classes={classes}
-                        innerMessage={innerMessage}
-                        {...passOnProps}
-                    />
+                    <div>
+                        <DateTimeTime
+                            value={timeValue}
+                            onChange={this.handleTimeChange}
+                            onBlur={this.handleTimeBlur}
+                            label={timeLabel}
+                            classes={classes}
+                            innerMessage={innerMessage}
+                            {...passOnProps}
+                        />
+                        <div className={classes?.innerInputError}>{innerMessage?.message?.timeError}</div>
+                    </div>
                 </div>
             </div>
         );

@@ -46,9 +46,9 @@ export class DateField extends React.Component<Props, State> {
     handleDateSelected(value: { calendarDateString: string, validation: Validation}) {
         const { calendarDateString: date, validation } = value || {};
         this.props.onBlur(
-            date, null, {
-                innerError: validation.validationText,
-                innerErrorCode: validation.validationCode,
+            date, {
+                error: validation.validationText,
+                errorCode: validation.validationCode,
             });
 
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
@@ -84,7 +84,7 @@ export class DateField extends React.Component<Props, State> {
             >
                 <CalendarInput
                     label=""
-                    placeholder={this.props.placeholder || this.props.label}
+                    placeholder={this.props.placeholder}
                     format={format}
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
