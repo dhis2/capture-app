@@ -5,7 +5,7 @@ description: Learn how to develop a plugin for the DHIS2 Capture app.
 id: develop-a-capture-plugin
 ---
 
-To develop your own capture plugin, you need to follow these steps:
+Developing a capture plugin is almost the same as developing a regular DHIS2 custom app. However, there are some differences in how you structure your plugin and how you configure it to work with the DHIS2 Capture app. These are outlined in the few steps below.
 
 ## Step 1: Create a new DHIS2 custom app
 
@@ -52,6 +52,6 @@ To build your plugin, you can use the provided build script from `d2-app-scripts
 Run `yarn build` or (`d2-app-scripts build`) to build a production version of your plugin.
 
 After building your plugin, you can deploy it to your DHIS2 instance.
-You can do this by uploading the ZIP file to the _App management_ app in your DHIS2 instance, or publishing it to the app hub.
+You can do this by uploading the ZIP file to the _App management_ app in your DHIS2 instance, or publishing it to the App Hub.
 
-See [Configuring a Capture plugin](/docs/capture-plugins/developer/configure-a-capture-plugin) for more information on how to configure your plugin in the DHIS2 Capture app.
+See [Configuring a Capture plugin](configure-a-capture-plugin) for more information on how to configure your plugin in the DHIS2 Capture app.
