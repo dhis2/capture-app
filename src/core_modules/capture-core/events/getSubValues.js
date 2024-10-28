@@ -41,29 +41,23 @@ const subValueGetterByElementType = {
         eventId,
         metaElementId,
         absoluteApiPath,
-        querySingleResource,
     }: {
         value: any,
         eventId: string,
         metaElementId: string,
         absoluteApiPath: string,
-        querySingleResource: QuerySingleResource,
     }) =>
-        querySingleResource({ resource: `fileResources/${value}` })
-            .then(res => ({
-                name: res.name,
-                value: res.id,
-                url: featureAvailable(FEATURES.trackerImageEndpoint)
-                    ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image`
-                    : `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                previewUrl: featureAvailable(FEATURES.trackerImageEndpoint)
-                    ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`
-                    : `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}&dimension=SMALL`,
-            }))
-            .catch((error) => {
-                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
-                return null;
-            }),
+        (featureAvailable(FEATURES.trackerImageEndpoint) ?
+            {
+                value,
+                url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image`,
+                previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`,
+            } : {
+                value,
+                url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}&dimension=SMALL`,
+            }
+        ),
     [dataElementTypes.ORGANISATION_UNIT]: ({
         value,
         eventId,
@@ -77,11 +71,13 @@ const subValueGetterByElementType = {
     }) => {
         const ouIds = value.split('/');
         const id = ouIds[ouIds.length - 1];
-        return querySingleResource({ resource: 'organisationUnits',
+        return querySingleResource({
+            resource: 'organisationUnits',
             id,
             params: {
                 fields: 'id,code,displayName,path',
-            } })
+            },
+        })
             .then(res => ({
                 id: res.id,
                 code: res.code,
