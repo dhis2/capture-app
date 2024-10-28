@@ -2,5 +2,4 @@
 export type Props = {|
     setOpenModal: (open: boolean) => void,
     relationshipId: string,
-    setUpdateData: Function,
 |};

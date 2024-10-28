@@ -20,7 +20,6 @@ export const OverflowMenuComponent = ({
     linkedEvent,
     relationshipId,
     orgUnitId,
-    setUpdateData,
 }: Props) => {
     const { push } = useHistory();
 
@@ -80,14 +79,12 @@ export const OverflowMenuComponent = ({
                 <UnlinkModal
                     setOpenModal={setUnlinkModalIsOpen}
                     relationshipId={relationshipId}
-                    setUpdateData={setUpdateData}
                 />
             )}
             {unlinkAndDeleteModalIsOpen && (
                 <UnlinkAndDeleteModal
                     setOpenModal={setUnlinkAndDeleteModalIsOpen}
                     eventId={linkedEvent.event}
-                    setUpdateData={setUpdateData}
                 />
             )}
         </>

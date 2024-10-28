@@ -1,10 +1,10 @@
 // @flow
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
 type Props = {|
     originEventId: string,
-|}
+|};
 
 const calculateRelatedStageRelationships = (event) => {
     if (!event || !event.relationships || event.relationships.length === 0) {
@@ -39,8 +39,6 @@ const calculateRelatedStageRelationships = (event) => {
 };
 
 export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
-    const [updateData, setUpdateData] = useState<boolean>(false);
-
     const eventByIdQuery = useMemo(() => ({
         resource: 'tracker/events',
         id: originEventId,
@@ -53,7 +51,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
     }), [originEventId]);
 
     const { data, isLoading, isError, error } = useApiDataQuery(
-        ['linkedEventByOriginEvent', originEventId, updateData],
+        ['linkedEventByOriginEvent', originEventId],
         eventByIdQuery,
         {
             enabled: !!originEventId,
@@ -62,20 +60,11 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         },
     );
 
-    const {
-        linkedEvent,
-        relationship,
-        relationshipType,
-        dataValues,
-    } = useMemo(() => {
-        if (!data) {
-            return {};
-        }
+    const { linkedEvent, relationship, relationshipType, dataValues } = useMemo(() => {
+        if (!data) return {};
 
         const relatedStageRelationship = calculateRelatedStageRelationships(data);
-        if (!relatedStageRelationship) {
-            return {};
-        }
+        if (!relatedStageRelationship) return {};
 
         return {
             linkedEvent: relatedStageRelationship.linkedEvent,
@@ -85,11 +74,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         };
     }, [data]);
 
-    const {
-        data: fallbackDataValues,
-        isLoading: isLoadingFallback,
-        isError: isErrorFallback,
-    } = useApiDataQuery(
+    const { data: fallbackDataValues, isLoading: isLoadingFallback } = useApiDataQuery(
         ['linkedEventDataValuesFallback', linkedEvent?.event],
         {
             resource: 'tracker/events',
@@ -98,19 +83,16 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
                 fields: 'event,dataValues,occurredAt,scheduledAt,status,orgUnit,programStage,program',
             },
         },
-        {
-            enabled: !!linkedEvent?.event && !dataValues,
-        },
+        { enabled: !!linkedEvent?.event && !dataValues },
     );
 
     return {
         linkedEvent: dataValues ? linkedEvent : fallbackDataValues,
         relationship,
         relationshipType,
-        setUpdateData,
         dataValues: dataValues || fallbackDataValues?.dataValues,
         isLoading: isLoading || isLoadingFallback,
-        isError: isError || isErrorFallback,
+        isError,
         error,
     };
 };

@@ -16,7 +16,6 @@ import type { Props } from './UnlinkModal.types';
 export const UnlinkModal = ({
     setOpenModal,
     relationshipId,
-    setUpdateData,
 }: Props) => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -26,7 +25,6 @@ export const UnlinkModal = ({
     const handleUnlink = async () => {
         setLoading(true);
         setErrorMessage(null);
-        setUpdateData(true);
 
         try {
             await onDeleteRelationship({ relationshipId });
@@ -36,7 +34,6 @@ export const UnlinkModal = ({
             setLoading(false);
         } finally {
             setLoading(false);
-            setUpdateData(false);
         }
     };
 

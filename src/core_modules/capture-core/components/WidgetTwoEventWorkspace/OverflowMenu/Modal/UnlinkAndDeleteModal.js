@@ -17,7 +17,6 @@ import type { Props } from './UnlinkAndDeleteModal.types';
 export const UnlinkAndDeleteModal = ({
     setOpenModal,
     eventId,
-    setUpdateData,
 }: Props) => {
     const dataEngine = useDataEngine();
 
@@ -32,15 +31,8 @@ export const UnlinkAndDeleteModal = ({
     };
 
     const mutation = useMutation(deleteEvent, {
-        onMutate: () => {
-            setUpdateData(true);
-        },
         onSuccess: () => {
             setOpenModal(false);
-            setUpdateData(false);
-        },
-        onError: () => {
-            setUpdateData(false);
         },
     });
 
@@ -48,8 +40,7 @@ export const UnlinkAndDeleteModal = ({
         mutation.mutate();
     };
 
-    const errorReports =
-        mutation.error?.details?.response?.errorReports?.map(report => report.message) ||
+    const errorReports = mutation.error?.details?.response?.errorReports?.map(report => report.message) ||
         (mutation.error ? [mutation.error.message] : []);
 
     return (
