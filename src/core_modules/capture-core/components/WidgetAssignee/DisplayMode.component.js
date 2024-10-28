@@ -44,7 +44,7 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
                 {assignee.name}
             </div>
             <ConditionalTooltip
-                content={i18n.t("You don't have access to edit the assigned user")}
+                content={i18n.t("You don't have access to edit this assignee")}
                 enabled={!writeAccess}
             >
                 <Button
