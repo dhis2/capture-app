@@ -1133,6 +1133,9 @@ msgstr "Mark as cancelled"
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
 
+msgid "You do not have access to delete this enrollment"
+msgstr "You do not have access to delete this enrollment"
+
 msgid "Delete enrollment"
 msgstr "Delete enrollment"
 
