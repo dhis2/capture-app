@@ -112,9 +112,9 @@ export const EnrollmentAddEventPageDefault = ({
 
     const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
     const { program } = useProgramInfo(programId);
-    const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
+    const selectedProgramStage = [...program?.stages.values() ?? []].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(selectedProgramStage?.programRules ?? []));
+    const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
     // $FlowFixMe
     const trackedEntityName = program?.trackedEntityType?.name;
 
