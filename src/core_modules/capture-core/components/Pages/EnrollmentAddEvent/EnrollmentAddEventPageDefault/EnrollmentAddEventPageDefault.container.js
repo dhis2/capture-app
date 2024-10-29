@@ -116,7 +116,7 @@ export const EnrollmentAddEventPageDefault = ({
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
     // $FlowFixMe
-    const trackedEntityName = program?.trackedEntityType?.name;
+    const trackedEntityName = program?.trackedEntityType?.name ?? '';
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
