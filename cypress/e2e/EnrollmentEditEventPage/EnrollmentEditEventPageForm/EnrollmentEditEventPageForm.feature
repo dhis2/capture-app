@@ -25,12 +25,12 @@ And the user see the following text: Yes
 
 Scenario: The user can enter and exit the edit mode.
 Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=V1CerIi3sdL
-And the user see the following text: Enrollment: View Event
+And the view enrollment event form is in view mode
 And the user see the following text: Apgar Score
 When the user clicks on the edit button
-Then the user see the following text: Enrollment: Edit Event
+Then the view enrollment event form is in edit mode
 When the user clicks on the cancel button
-And the user see the following text: Enrollment: View Event
+And the view enrollment event form is in view mode
 
 Scenario: The tracker program rules are triggered correctly for the Child Program.
 Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=V1CerIi3sdL
@@ -53,58 +53,58 @@ Then the user don't see the following text: Low-dose acetylsalicylic acid given
 
 Scenario: User can modify and save the data in the form
 Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?orgUnitId=DiszpKrYNg8&eventId=V1CerIi3sdL
-Then the user see the following text: Enrollment: View Event
+Then the view enrollment event form is in view mode
 And the apgar score is 11
 When the user clicks on the edit button
 And the user set the apgar score to 5
 And the user clicks on the save button
 Then you are redirected to the enrollment dashboard
 And you open the Birth stage event
-Then the user see the following text: Enrollment: View Event
+Then the view enrollment event form is in view mode
 And the user see the following text: 5
 When the user clicks on the edit button
 And the user set the apgar score to 11
 And the user clicks on the save button
 Then you are redirected to the enrollment dashboard
 And you open the Birth stage event
-Then the user see the following text: Enrollment: View Event
+Then the view enrollment event form is in view mode
 And the user see the following text: 11
 
  Scenario: User goes directly to Edit mode for scheduled events
     Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?eventId=RIrfCcEP8Uu&orgUnitId=DiszpKrYNg8
-    Then the user see the following text: Enrollment: Edit Event
+    Then the view enrollment event form is in edit mode
     And the user see the following text: Infant Feeding
     When the user clicks on the cancel button
-    Then the user see the following text: Enrollment Dashboard
+    Then the user is navigated to the enrollment dashboard
 
-Scenario: User can update schedule date for a scheduled event 
+Scenario: User can update schedule date for a scheduled event
     Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?eventId=RIrfCcEP8Uu&orgUnitId=DiszpKrYNg8
-    Then the user see the following text: Enrollment: Edit Event
+    Then the view enrollment event form is in edit mode
     And the user see the following text: Infant Feeding
     When the user clicks switch tab to Schedule
     And the user selects another schedule date
     And the user clicks on the schedule button on widget-enrollment-event
-    Then the user see the following text: Enrollment Dashboard
+    Then the user is navigated to the enrollment dashboard
 
 Scenario: User can update schedule date if Hide due date is enabled
     Given you land on the enrollment event page with selected Focus area by having typed /#/enrollmentEventNew?enrollmentId=V8uPJuhvlL7&orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&stageId=uvMKOn1oWvd&tab=SCHEDULE&teiId=dNpxRu1mWG5
-    Then the user see the following text: Enrollment: New Event
+    Then the add event form is displayed
     And the user see the following text: Foci response
     And the user see the schedule date and info box
     And the user clicks on the schedule button on add-event-enrollment-page-content
-    Then the user see the following text: Enrollment Dashboard
+    Then the user is navigated to the enrollment dashboard
 
 Scenario: User can see disabled scheduled date for active event
     Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?eventId=FV4JCI73wO2&orgUnitId=DiszpKrYNg8
-    Then the user see the following text: Enrollment: View Event 
+    Then the view enrollment event form is in view mode
     When the user clicks on the edit button
-    Then the user see the following text: Enrollment: Edit Event
+    Then the view enrollment event form is in edit mode
     Then the user see the schedule date field with tooltip: Scheduled date cannot be changed for Active events
-    
+
 @user:trackerAutoTestRestricted
 Scenario: The user cannot enter edit mode for completed events
     Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?eventId=nUVwTLuQ6FT&orgUnitId=DiszpKrYNg8
-    And the user see the following text: Enrollment: View Event
+    And the view enrollment event form is in view mode
     Then the edit button should be disabled
 
 Scenario: User can edit the event and complete the enrollment

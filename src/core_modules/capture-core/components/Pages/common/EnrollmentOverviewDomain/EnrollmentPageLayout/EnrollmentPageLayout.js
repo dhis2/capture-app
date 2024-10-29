@@ -99,7 +99,11 @@ const EnrollmentPageLayoutPlain = ({
     }, [pageLayout.backgroundColor]);
 
     return (
-        <div className={classes.container} style={containerStyle}>
+        <div
+            className={classes.container}
+            style={containerStyle}
+            data-test={`enrollment-${currentPage}-page`}
+        >
             <AddRelationshipRefWrapper setRelationshipRef={setAddRelationshipContainerElement} />
             <div
                 className={classes.contentContainer}

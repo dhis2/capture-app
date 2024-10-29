@@ -81,8 +81,7 @@ export const useWorkingListLabel = ({
         if (teiListLabel) {
             return teiListLabel.displayName;
         }
-
-        if (!displayFrontPageList) {
+        if (!displayFrontPageList && (!isSameProgram || !selectedTemplateId)) {
             return i18n.t('Search');
         }
         if (trackedEntityName) {
