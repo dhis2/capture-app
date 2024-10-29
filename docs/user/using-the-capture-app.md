@@ -825,7 +825,7 @@ You can perform bulk actions on tracked entities and their enrollments in the tr
 
 ![](resources/images/tracked-entity-bulk-actions-complete-enrollments.png)
 
-### Deleting tracked entities
+### Deleting enrollments
 
 1. Select the tracked entities you want to perform the action on by clicking the checkbox to the left of the tracked entity.
 
