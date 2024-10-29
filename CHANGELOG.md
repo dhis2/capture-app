@@ -1,3 +1,10 @@
+## [101.14.3](https://github.com/dhis2/capture-app/compare/v101.14.2...v101.14.3) (2024-10-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17843] Disable delete enrollment button when user does not have authority ([#3859](https://github.com/dhis2/capture-app/issues/3859)) ([edee6d3](https://github.com/dhis2/capture-app/commit/edee6d350fb2672a3470ef4c282460b34fa726eb))
+
 ## [101.14.2](https://github.com/dhis2/capture-app/compare/v101.14.1...v101.14.2) (2024-10-27)
 
 
