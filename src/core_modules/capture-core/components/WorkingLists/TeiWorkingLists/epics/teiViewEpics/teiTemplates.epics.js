@@ -6,14 +6,14 @@ import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import {
-    workingListsCommonActionTypes,
-    addTemplateSuccess,
     addTemplateError,
-    deleteTemplateSuccess,
+    addTemplateSuccess,
     deleteTemplateError,
-    updateTemplateSuccess,
-    updateTemplateError,
+    deleteTemplateSuccess,
     updateDefaultTemplate,
+    updateTemplateError,
+    updateTemplateSuccess,
+    workingListsCommonActionTypes,
     workingListsCommonActionTypesBatchActionTypes,
 } from '../../../WorkingListsCommon';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
@@ -55,7 +55,7 @@ export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, 
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
                     ...(programStatus && { enrollmentStatus: programStatus }),
-                    ...(!!followUp && { followUp }),
+                    ...(followUp !== undefined && { followUp: JSON.stringify(followUp) }),
                     ...(enrolledAt && { enrollmentCreatedDate: enrolledAt }),
                     ...(occurredAt && { enrollmentIncidentDate: occurredAt }),
                     ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
