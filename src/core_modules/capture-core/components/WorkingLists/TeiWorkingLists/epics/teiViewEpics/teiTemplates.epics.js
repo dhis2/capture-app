@@ -173,10 +173,10 @@ export const updateTEITemplateEpic = (action$: InputObservable, store: ReduxStor
                     order,
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
+                    ...(followUp !== undefined && { followUp: JSON.stringify(followUp) }),
                     ...(programStatus && { enrollmentStatus: programStatus }),
                     ...(enrolledAt && { enrollmentCreatedDate: enrolledAt }),
                     ...(occurredAt && { enrollmentIncidentDate: occurredAt }),
-                    ...(followUp && { followUp }),
                     ...(attributeValueFilters?.length > 0 && { attributeValueFilters }),
                 },
             };
