@@ -1,3 +1,46 @@
+## [101.14.4](https://github.com/dhis2/capture-app/compare/v101.14.3...v101.14.4) (2024-10-29)
+
+
+### Bug Fixes
+
+* [DHIS2-18228] Image Deleted on Update ([#3857](https://github.com/dhis2/capture-app/issues/3857)) ([4656864](https://github.com/dhis2/capture-app/commit/46568640482a3d6a610533573b1132c160329296))
+
+## [101.14.3](https://github.com/dhis2/capture-app/compare/v101.14.2...v101.14.3) (2024-10-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17843] Disable delete enrollment button when user does not have authority ([#3859](https://github.com/dhis2/capture-app/issues/3859)) ([edee6d3](https://github.com/dhis2/capture-app/commit/edee6d350fb2672a3470ef4c282460b34fa726eb))
+
+## [101.14.2](https://github.com/dhis2/capture-app/compare/v101.14.1...v101.14.2) (2024-10-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([57a7b83](https://github.com/dhis2/capture-app/commit/57a7b8300c841d043da84735ed32dfce0b64e25b))
+
+## [101.14.1](https://github.com/dhis2/capture-app/compare/v101.14.0...v101.14.1) (2024-10-22)
+
+
+### Bug Fixes
+
+* [DHIS2-16010] app crashes on invalid programid ([#3765](https://github.com/dhis2/capture-app/issues/3765)) ([9133a63](https://github.com/dhis2/capture-app/commit/9133a63e138517c633a192b5d51f39a43c57e327))
+
+# [101.14.0](https://github.com/dhis2/capture-app/compare/v101.13.0...v101.14.0) (2024-10-21)
+
+
+### Features
+
+* [DHIS2-17792] Org unit context in forms ([#3828](https://github.com/dhis2/capture-app/issues/3828)) ([c8ccf63](https://github.com/dhis2/capture-app/commit/c8ccf63e0cde97a190cec6248dc25a4a4d747646))
+
+# [101.13.0](https://github.com/dhis2/capture-app/compare/v101.12.2...v101.13.0) (2024-10-21)
+
+
+### Features
+
+* [DHIS2-16992] Fixed size for changelog modal and columns ([#3834](https://github.com/dhis2/capture-app/issues/3834)) ([3b021cf](https://github.com/dhis2/capture-app/commit/3b021cf5569338db5038d8ed231a810a0fa909f3))
+* [DHIS2-17991] Show orgUnit selector in Enter details now ([#3824](https://github.com/dhis2/capture-app/issues/3824)) ([bf2f1ca](https://github.com/dhis2/capture-app/commit/bf2f1cabebe4ddf100cb8054be0a4af2fbec3965))
+
 ## [101.12.2](https://github.com/dhis2/capture-app/compare/v101.12.1...v101.12.2) (2024-10-20)
 
 

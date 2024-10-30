@@ -7,7 +7,7 @@ import type {
 import { Program } from '../../../../metaData';
 
 export type Props = {|
-    program: Program,
+    program: ?Program,
     stageId: string,
     orgUnitId: string,
     teiId: string,

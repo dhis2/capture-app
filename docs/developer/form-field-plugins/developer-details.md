@@ -4,11 +4,9 @@ sidebar_label: Developer details
 id: developer-details
 ---
 
-Here are some details for developers who want to develop a form field plugin for the DHIS2 Capture app.
-
 A form field plugin runs in a sandboxed environment, meaning it can only read and write data that it's been configured to have access to.
-If the plugin is given access to a field, we provide any relevant values, metadata, and rules engine output for that field.
-We also provide some context about the application state, mainly if the plugin is in view or edit mode, or if the form has been attempted submitted.
+If the plugin is given access to a field, all relevant values, metadata, and rules engine output for that field is provided.
+Also the context about the application state is provided, mainly if the plugin is in view or edit mode, or if the form has been attempted to be submitted.
 
 If a plugin tries to update a field that it has not been given access to, an appropriate error message will be displayed in the console.
 

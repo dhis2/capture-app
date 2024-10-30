@@ -705,9 +705,6 @@ msgstr "View working list in this program."
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
 
-msgid "Program is not valid"
-msgstr "Program is not valid"
-
 msgid "Org unit is not valid with current program"
 msgstr "Org unit is not valid with current program"
 
@@ -1136,6 +1133,9 @@ msgstr "Mark as cancelled"
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
 
+msgid "You do not have access to delete this enrollment"
+msgstr "You do not have access to delete this enrollment"
+
 msgid "Delete enrollment"
 msgstr "Delete enrollment"
 
@@ -1223,6 +1223,12 @@ msgstr "Enrollment widget could not be loaded. Please try again later"
 
 msgid "Follow-up"
 msgstr "Follow-up"
+
+msgid "Started at{{escape}}"
+msgstr "Started at{{escape}}"
+
+msgid "Owned by{{escape}}"
+msgstr "Owned by{{escape}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
