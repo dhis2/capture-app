@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-30T11:27:59.565Z\n"
-"PO-Revision-Date: 2024-10-30T11:27:59.565Z\n"
+"POT-Creation-Date: 2024-10-30T12:38:53.423Z\n"
+"PO-Revision-Date: 2024-10-30T12:38:53.423Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1489,15 +1489,15 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "An error occurred while unlinking and deleting the event."
+msgstr "An error occurred while unlinking and deleting the event."
+
 msgid ""
 "Are you sure you want to unlink and delete the event? This will permanently "
 "remove the event and all related data."
 msgstr ""
 "Are you sure you want to unlink and delete the event? This will permanently "
 "remove the event and all related data."
-
-msgid "There was a problem unlinking and deleting the event"
-msgstr "There was a problem unlinking and deleting the event"
 
 msgid "Yes, unlink and delete event"
 msgstr "Yes, unlink and delete event"
@@ -1507,9 +1507,6 @@ msgstr "Unlink relationship"
 
 msgid "Are you sure you want to unlink this relationship?"
 msgstr "Are you sure you want to unlink this relationship?"
-
-msgid "There was a problem unlinking the relationship"
-msgstr "There was a problem unlinking the relationship"
 
 msgid "Yes, unlink relationship"
 msgstr "Yes, unlink relationship"

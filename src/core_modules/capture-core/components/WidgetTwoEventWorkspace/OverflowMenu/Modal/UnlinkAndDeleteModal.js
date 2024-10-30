@@ -8,9 +8,9 @@ import {
     ModalActions,
     ModalContent,
     ModalTitle,
-    NoticeBox,
 } from '@dhis2/ui';
-import { useDataEngine } from '@dhis2/app-runtime';
+import log from 'loglevel';
+import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkAndDeleteModal.types';
@@ -22,6 +22,10 @@ export const UnlinkAndDeleteModal = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const { show: showErrorAlert } = useAlert(
+        i18n.t('An error occurred while unlinking and deleting the event.'),
+        { critical: true },
+    );
 
     const deleteEvent = async () => {
         const mutation = {
@@ -42,6 +46,13 @@ export const UnlinkAndDeleteModal = ({
             ]);
             setOpenModal(false);
         },
+        onError: (error) => {
+            showErrorAlert();
+            log.error(
+                `Failed to unlink and delete event with ID: ${eventId}`,
+                error,
+            );
+        },
     });
 
     return (
@@ -53,14 +64,6 @@ export const UnlinkAndDeleteModal = ({
                         'Are you sure you want to unlink and delete the event? This will permanently remove the event and all related data.',
                     )}
                 </p>
-                {mutation.isError && (
-                    <NoticeBox
-                        title={i18n.t('There was a problem unlinking and deleting the event')}
-                        error
-                    >
-                        {mutation.error?.message}
-                    </NoticeBox>
-                )}
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>

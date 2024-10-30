@@ -8,9 +8,9 @@ import {
     ModalActions,
     ButtonStrip,
     Button,
-    NoticeBox,
 } from '@dhis2/ui';
-import { useDataEngine } from '@dhis2/app-runtime';
+import log from 'loglevel';
+import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkModal.types';
@@ -22,6 +22,10 @@ export const UnlinkModal = ({
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const { show: showErrorAlert } = useAlert(
+        i18n.t('An error occurred while unlinking and deleting the event.'),
+        { critical: true },
+    );
 
     const deleteRelationship = async () => {
         const mutation = {
@@ -42,6 +46,13 @@ export const UnlinkModal = ({
             ]);
             setOpenModal(false);
         },
+        onError: (error) => {
+            showErrorAlert();
+            log.error(
+                `Failed to remove relationship with id ${relationshipId}`,
+                error,
+            );
+        },
     });
 
     return (
@@ -51,14 +62,6 @@ export const UnlinkModal = ({
             </ModalTitle>
             <ModalContent>
                 <p>{i18n.t('Are you sure you want to unlink this relationship?')}</p>
-                {mutation.isError && (
-                    <NoticeBox
-                        title={i18n.t('There was a problem unlinking the relationship')}
-                        error
-                    >
-                        {mutation.error?.message}
-                    </NoticeBox>
-                )}
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
