@@ -67,8 +67,8 @@ type State = {
 
 // eslint-disable-next-line complexity
 const getAbsoluteRangeErrors = (fromValue, toValue, submitAttempted) => {
-    const fromValueString = fromValue?.dateString;
-    const toValueString = toValue?.dateString;
+    const fromValueString = fromValue?.value;
+    const toValueString = toValue?.value;
     const isFromValueValid = fromValue?.isValid;
     const isToValueValid = toValue?.isValid;
 
@@ -125,7 +125,7 @@ const isAbsoluteRangeFilterValid = (fromValue, toValue) => {
         return false;
     }
 
-    return !DateFilter.isFromAfterTo(fromValue?.dateString, toValue?.dateString);
+    return !DateFilter.isFromAfterTo(fromValue?.value, toValue?.value);
 };
 
 const isRelativeRangeFilterValid = (startValue, endValue) => {
@@ -193,7 +193,6 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         ABSOLUTE_RANGE_WITHOUT_VALUES: 'Please specify a range',
         RELATIVE_RANGE_WITHOUT_VALUES: 'Please specify the number of days',
         FROM_GREATER_THAN_TO: "The From date can't be after the To date",
-        MIN_GREATER_THAN_MAX: 'Days in the past cannot be greater than days in the future',
         [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
     };
 
@@ -333,6 +332,8 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     render() {
         const { value, classes, onFocusUpdateButton } = this.props;
+        const fromValue = value?.from;
+        const toValue = value?.to;
         const { startValueError, endValueError, dateLogicError, bufferLogicError } =
             this.getErrors();
 
@@ -354,10 +355,12 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <FromDateFilter
-                            value={value && value.from && value.from.dateString}
+                            value={fromValue?.value}
                             onBlur={this.handleFieldBlur}
                             onEnterKey={this.handleEnterKeyInFrom}
                             onDateSelectedFromCalendar={this.handleDateSelectedFromCalendarInFrom}
+                            error={fromValue?.error}
+                            errorClass={classes.error}
                         />
                     </div>
                     <div className={classes.toLabelContainer}>{i18n.t('to')}</div>
@@ -365,10 +368,12 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <ToDateFilter
-                            value={value && value.to && value.to.dateString}
+                            value={toValue?.value}
                             onBlur={this.handleFieldBlur}
                             textFieldRef={this.setToD2DateTextFieldInstance}
                             onFocusUpdateButton={onFocusUpdateButton}
+                            error={toValue?.error}
+                            errorClass={classes.error}
                         />
                     </div>
                 </div>

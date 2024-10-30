@@ -6,7 +6,9 @@ import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHa
 import { type DateValue } from './types/date.types';
 
 type Props = {
-    value: ?string,
+    value: ?DateValue,
+    error: ?string,
+    errorClass: ?string,
     onBlur: ({ from: DateValue }) => void,
 };
 
@@ -20,7 +22,7 @@ class FromDateFilterPlain extends Component<Props> {
     }
 
     render() {
-        const { onBlur, ...passOnProps } = this.props;
+        const { error, errorClass, onBlur, ...passOnProps } = this.props;
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
@@ -31,6 +33,9 @@ class FromDateFilterPlain extends Component<Props> {
                     calendarWidth={330}
                     {...passOnProps}
                 />
+                <div className={errorClass}>
+                    {error ? i18n.t('Please provide a valid date') : error}
+                </div>
             </div>
         );
     }

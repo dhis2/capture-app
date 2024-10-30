@@ -29,11 +29,11 @@ export class DateFilterManager extends React.Component<Props, State> {
         return {
             main: mainOptionKeys.ABSOLUTE_RANGE,
             from: filter.ge ? {
-                dateString: DateFilterManager.convertDateForEdit(filter.ge),
+                value: filter.ge && DateFilterManager.convertDateForEdit(filter.ge),
                 isValid: true,
             } : undefined,
             to: filter.le ? {
-                dateString: DateFilterManager.convertDateForEdit(filter.le),
+                value: filter.le && DateFilterManager.convertDateForEdit(filter.le),
                 isValid: true,
             } : undefined,
         };

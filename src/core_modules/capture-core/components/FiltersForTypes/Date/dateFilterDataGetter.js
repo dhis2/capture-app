@@ -53,7 +53,7 @@ function convertRelativeRange(value: Value) {
 
 function convertSelections(value: Value) {
     if (value.main === mainOptionKeys.ABSOLUTE_RANGE) {
-        return convertAbsoluteDate(value?.from?.dateString, value?.to?.dateString);
+        return convertAbsoluteDate(value?.from?.value, value?.to?.value);
     }
     if (value.main === mainOptionKeys.RELATIVE_RANGE) {
         return convertRelativeRange(value);
