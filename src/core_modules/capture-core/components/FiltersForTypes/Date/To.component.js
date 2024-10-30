@@ -35,8 +35,8 @@ class ToDateFilterPlain extends Component<Props> {
                     onBlur={this.handleBlur}
                     onDateSelectedFromCalendar={this.handleDateSelectedFromCalendar}
                     placeholder={i18n.t('To')}
-                    inputWidth={50}
-                    calendarWidth={330}
+                    inputWidth="150px"
+                    calendarWidth="330px"
                     {...passOnProps}
                 />
                 <div className={errorClass}>

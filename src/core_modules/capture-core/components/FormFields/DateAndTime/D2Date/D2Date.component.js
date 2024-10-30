@@ -74,8 +74,8 @@ export class D2Date extends React.Component<Props, State> {
                     onDateSelect={this.handleDateSelected}
                     calendar={calendarType}
                     date={this.props.value}
-                    width={String(calendarWidth)}
-                    inputWidth={String(inputWidth)}
+                    width={calendarWidth}
+                    inputWidth={inputWidth}
                     onFocus={onFocus}
                     disabled={disabled}
                 />

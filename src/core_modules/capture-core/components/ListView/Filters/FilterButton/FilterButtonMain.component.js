@@ -21,11 +21,6 @@ const getStyles = (theme: Theme) => ({
     inactiveFilterButtonLabel: {
         textTransform: 'none',
     },
-    popper: {
-        zIndex: '1',
-        backgroundColor: 'white',
-        boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
-    },
 });
 
 type Props = {
@@ -38,7 +33,6 @@ type Props = {
         icon: string,
         inactiveFilterButton: string,
         inactiveFilterButtonLabel: string,
-        popper: string,
     },
     onUpdateFilter: UpdateFilter,
     onClearFilter: ClearFilter,
@@ -184,7 +178,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     render() {
-        const { filterValue, selectorVisible, classes } = this.props;
+        const { filterValue, selectorVisible } = this.props;
         const { isMounted } = this.state;
 
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();

@@ -29,8 +29,8 @@ class FromDateFilterPlain extends Component<Props> {
                 <D2Date
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('From')}
-                    inputWidth={150}
-                    calendarWidth={330}
+                    inputWidth="150px"
+                    calendarWidth="330px"
                     {...passOnProps}
                 />
                 <div className={errorClass}>
