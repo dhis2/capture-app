@@ -98,6 +98,7 @@ const WidgetTwoEventWorkspacePlain = ({
                         linkedEvent={linkedEvent}
                         relationshipId={relationship}
                         orgUnitId={orgUnitId}
+                        originEventId={eventId}
                     />
                 </div>
             )}

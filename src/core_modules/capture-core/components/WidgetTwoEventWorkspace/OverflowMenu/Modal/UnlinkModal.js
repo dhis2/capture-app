@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
     Modal,
@@ -10,32 +10,39 @@ import {
     Button,
     NoticeBox,
 } from '@dhis2/ui';
-import { useDeleteRelationship } from './useDeleteRelationship';
+import { useDataEngine } from '@dhis2/app-runtime';
+import { useMutation, useQueryClient } from 'react-query';
+import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkModal.types';
 
 export const UnlinkModal = ({
     setOpenModal,
     relationshipId,
+    originEventId,
 }: Props) => {
-    const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
+    const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
 
-    const { onDeleteRelationship } = useDeleteRelationship();
+    const deleteRelationship = async () => {
+        const mutation = {
+            resource: 'tracker?importStrategy=DELETE&async=false',
+            type: 'create',
+            data: { relationships: [{ relationship: relationshipId }] },
+        };
 
-    const handleUnlink = async () => {
-        setLoading(true);
-        setErrorMessage(null);
-
-        try {
-            await onDeleteRelationship({ relationshipId });
-            setOpenModal(false);
-        } catch (error) {
-            setErrorMessage(i18n.t('An error occurred while unlinking the relationship.'));
-            setLoading(false);
-        } finally {
-            setLoading(false);
-        }
+        return dataEngine.mutate(mutation);
     };
+
+    const mutation = useMutation(deleteRelationship, {
+        onSuccess: () => {
+            queryClient.invalidateQueries([
+                ReactQueryAppNamespace,
+                'linkedEventByOriginEvent',
+                originEventId,
+            ]);
+            setOpenModal(false);
+        },
+    });
 
     return (
         <Modal dataTest="event-unlink-modal">
@@ -44,12 +51,12 @@ export const UnlinkModal = ({
             </ModalTitle>
             <ModalContent>
                 <p>{i18n.t('Are you sure you want to unlink this relationship?')}</p>
-                {errorMessage && (
+                {mutation.isError && (
                     <NoticeBox
                         title={i18n.t('There was a problem unlinking the relationship')}
                         error
                     >
-                        {errorMessage}
+                        {mutation.error?.message}
                     </NoticeBox>
                 )}
             </ModalContent>
@@ -58,7 +65,11 @@ export const UnlinkModal = ({
                     <Button onClick={() => setOpenModal(false)} secondary>
                         {i18n.t('No, cancel')}
                     </Button>
-                    <Button destructive onClick={handleUnlink} disabled={loading}>
+                    <Button
+                        destructive
+                        onClick={() => mutation.mutate()}
+                        disabled={mutation.isLoading}
+                    >
                         {i18n.t('Yes, unlink relationship')}
                     </Button>
                 </ButtonStrip>

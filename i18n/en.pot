@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-18T08:53:26.831Z\n"
-"PO-Revision-Date: 2024-10-18T08:53:26.831Z\n"
+"POT-Creation-Date: 2024-10-30T11:27:59.565Z\n"
+"PO-Revision-Date: 2024-10-30T11:27:59.565Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1496,9 +1496,6 @@ msgstr "There was a problem unlinking and deleting the event"
 msgid "Yes, unlink and delete event"
 msgstr "Yes, unlink and delete event"
 
-msgid "An error occurred while unlinking the relationship."
-msgstr "An error occurred while unlinking the relationship."
-
 msgid "Unlink relationship"
 msgstr "Unlink relationship"
 
@@ -1510,9 +1507,6 @@ msgstr "There was a problem unlinking the relationship"
 
 msgid "Yes, unlink relationship"
 msgstr "Yes, unlink relationship"
-
-msgid "An error occurred while deleting the relationship."
-msgstr "An error occurred while deleting the relationship."
 
 msgid "View linked event"
 msgstr "View linked event"
@@ -1595,6 +1589,9 @@ msgstr ""
 
 msgid "Yes, delete relationship"
 msgstr "Yes, delete relationship"
+
+msgid "An error occurred while deleting the relationship."
+msgstr "An error occurred while deleting the relationship."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "To open this relationship, please wait until saving is complete"

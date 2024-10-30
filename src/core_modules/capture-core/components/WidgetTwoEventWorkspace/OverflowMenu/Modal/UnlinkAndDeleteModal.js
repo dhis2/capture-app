@@ -11,18 +11,21 @@ import {
     NoticeBox,
 } from '@dhis2/ui';
 import { useDataEngine } from '@dhis2/app-runtime';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './UnlinkAndDeleteModal.types';
 
 export const UnlinkAndDeleteModal = ({
     setOpenModal,
     eventId,
+    originEventId,
 }: Props) => {
     const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
 
     const deleteEvent = async () => {
         const mutation = {
-            resource: '/tracker?async=false&importStrategy=DELETE',
+            resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
             data: { events: [{ event: eventId }] },
         };
@@ -32,16 +35,14 @@ export const UnlinkAndDeleteModal = ({
 
     const mutation = useMutation(deleteEvent, {
         onSuccess: () => {
+            queryClient.invalidateQueries([
+                ReactQueryAppNamespace,
+                'linkedEventByOriginEvent',
+                originEventId,
+            ]);
             setOpenModal(false);
         },
     });
-
-    const handleDelete = () => {
-        mutation.mutate();
-    };
-
-    const errorReports = mutation.error?.details?.response?.errorReports?.map(report => report.message) ||
-        (mutation.error ? [mutation.error.message] : []);
 
     return (
         <Modal dataTest="event-unlink-and-delete-modal" position="middle">
@@ -57,12 +58,7 @@ export const UnlinkAndDeleteModal = ({
                         title={i18n.t('There was a problem unlinking and deleting the event')}
                         error
                     >
-                        <ul>
-                            {errorReports.map((message, index) => (
-                                // eslint-disable-next-line react/no-array-index-key
-                                <li key={index}>{message}</li>
-                            ))}
-                        </ul>
+                        {mutation.error?.message}
                     </NoticeBox>
                 )}
             </ModalContent>
@@ -71,13 +67,12 @@ export const UnlinkAndDeleteModal = ({
                     <Button
                         onClick={() => setOpenModal(false)}
                         secondary
-                        disabled={mutation.isLoading}
                     >
                         {i18n.t('No, cancel')}
                     </Button>
                     <Button
                         destructive
-                        onClick={handleDelete}
+                        onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
                     >
                         {i18n.t('Yes, unlink and delete event')}
