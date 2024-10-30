@@ -23,7 +23,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     const queryClient = useQueryClient();
     const queryKey: string = useFeature(FEATURES.exportablePayload) ? 'relationships' : 'instances';
     const dataEngine = useDataEngine();
-    const { show: showSnackbar } = useAlert(
+    const { show: showAlert } = useAlert(
         i18n.t('An error occurred while adding the relationship'),
         { critical: true },
     );
@@ -37,7 +37,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
         }),
         {
             onError: (_, requestData) => {
-                showSnackbar();
+                showAlert();
                 const apiRelationshipId = requestData.clientRelationship.relationship;
                 const apiResponse = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
                 const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);

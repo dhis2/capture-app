@@ -12,6 +12,7 @@ export class ProgramStage {
     _id: string;
     _name: string;
     _access: { data: { write: boolean } };
+    _blockEntryForm: boolean;
     _untranslatedName: string;
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
@@ -39,6 +40,14 @@ export class ProgramStage {
 
     set stageForm(stageForm: RenderFoundation) {
         this._stageForm = stageForm;
+    }
+
+    get blockEntryForm(): boolean {
+        return this._blockEntryForm;
+    }
+
+    set blockEntryForm(blockEntryForm: boolean) {
+        this._blockEntryForm = blockEntryForm;
     }
 
     get id(): string {

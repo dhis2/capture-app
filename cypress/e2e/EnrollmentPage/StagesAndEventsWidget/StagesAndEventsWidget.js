@@ -1,6 +1,37 @@
-import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, defineStep as And, After } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
 import '../sharedSteps';
+
+After({ tags: '@with-restore-deleted-event' }, () => {
+    cy.visit('#/enrollment?enrollmentId=ikYMpSKXik1&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=Trc1H9T5C6f');
+
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .contains('[data-test="stage-content"]', 'TB visit')
+        .find('[data-test="create-new-button"]')
+        .click();
+
+    cy.get('[data-test="capture-ui-input"]')
+        .first()
+        .type('2023-01-26')
+        .blur();
+
+    cy.get('[data-test="virtualized-select"]')
+        .eq(0)
+        .click()
+        .contains('P+')
+        .click();
+
+    cy.get('[data-test="virtualized-select"]')
+        .eq(1)
+        .click()
+        .contains('New')
+        .click();
+
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Save without completing')
+        .click();
+});
 
 Then('the program stages should be displayed', () => {
     cy.get('[data-test="stages-and-events-widget"]')
@@ -49,7 +80,7 @@ When('you click show more button in stages&event list', () => {
     });
 });
 
-Then('more events should be displayed', () => {
+Then('there should be 10 rows in the table', () => {
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')
         .find('[data-test="stage-content"]')
@@ -58,34 +89,6 @@ Then('more events should be displayed', () => {
             cy.get('[data-test="dhis2-uicore-datatable"]').should('exist');
             cy.get('[data-test="dhis2-uicore-tablebody"]')
                 .find('[data-test="dhis2-uicore-datatablerow"]').should('have.length', 10);
-        });
-});
-
-Then('reset button should be displayed', () => {
-    cy.get('[data-test="stages-and-events-widget"]').within(() => {
-        cy.get('[data-test="view-all-button"]').should('exist');
-        cy.get('[data-test="show-more-button"]').should('exist');
-        cy.get('[data-test="reset-button"]').should('exist');
-        cy.get('[data-test="create-new-button"]').should('exist');
-    });
-});
-
-And('you click reset button', () => {
-    cy.get('[data-test="stages-and-events-widget"]').within(() => {
-        cy.get('[data-test="reset-button"]').click();
-        cy.wait(100);
-    });
-});
-
-Then('there should be 5 rows in the table', () => {
-    cy.get('[data-test="stages-and-events-widget"]')
-        .find('[data-test="widget-contents"]')
-        .find('[data-test="stage-content"]')
-        .eq(2)
-        .within(() => {
-            cy.get('[data-test="dhis2-uicore-datatable"]').should('exist');
-            cy.get('[data-test="dhis2-uicore-tablebody"]')
-                .find('[data-test="dhis2-uicore-datatablerow"]').should('have.length', 5);
         });
 });
 
@@ -190,3 +193,58 @@ Then('the Care at birth program stage should be hidden', () => {
     cy.contains('[data-test="stages-and-events-widget"]', 'Postpartum care visit').should('exist');
     cy.contains('[data-test="stages-and-events-widget"]', 'Care at birth').should('not.exist');
 });
+
+Given(/there is an (.*) event in the TB visit stage$/, (eventStatus) => {
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .contains('[data-test="stage-content"]', 'TB visit')
+        .within(() => {
+            cy.get('[data-test="dhis2-uicore-datatablerow"]')
+                .contains(eventStatus);
+        });
+});
+
+When(/you click the (.*) event overflow button on the (.*) event$/, (buttonName, eventStatus) => {
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .contains('[data-test="stage-content"]', 'TB visit')
+        .find('[data-test="dhis2-uicore-tablebody"]')
+        .contains('tr', eventStatus)
+        .find('[data-test="overflow-button"]')
+        .click({ force: true });
+
+    cy.get('[data-test="overflow-menu"]')
+        .contains(buttonName)
+        .click();
+});
+
+Then('the event should be skipped', () => {
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .contains('[data-test="stage-content"]', 'TB visit')
+        .find('[data-test="dhis2-uicore-datatablerow"]')
+        .contains('Skipped');
+});
+
+Then('the TB visit stage should be empty', () => {
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .contains('[data-test="stage-content"]', 'TB visit')
+        .find('[data-test="dhis2-uicore-datatablerow"]')
+        .should('not.exist');
+});
+
+When('you confirm you want to delete the event', () => {
+    cy.intercept('POST', '**/tracker?async=false&importStrategy=DELETE')
+        .as('deleteEvent');
+
+    cy.get('[data-test="dhis2-uicore-modal"]').within(() => {
+        cy.contains('button', 'Yes, delete event')
+            .click();
+    });
+
+    cy.wait('@deleteEvent')
+        .its('response.statusCode')
+        .should('eq', 200);
+});
+

@@ -3,7 +3,7 @@ import React, { type ComponentType, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
-import { useOrgUnitName } from '../../metadataRetrieval/orgUnitName';
+import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
 
@@ -34,7 +34,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
 }) => {
     const dispatch = useDispatch();
     const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: undefined, id: selectedOrgUnitId });
-    const { displayName, error: ouNameError } = useOrgUnitName(selectedOrgUnit.id);
+    const { displayName, error: ouNameError } = useOrgUnitNameWithAncestors(selectedOrgUnit.id);
 
     useEffect(() => {
         if (displayName && selectedOrgUnit.name !== displayName) {

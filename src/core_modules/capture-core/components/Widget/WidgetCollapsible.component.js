@@ -1,8 +1,8 @@
 // @flow
-import React, { useState, useEffect, useRef, type ComponentType } from 'react';
+import React, { type ComponentType, useEffect, useRef, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
-import { colors, spacersNum, IconChevronUp24 } from '@dhis2/ui';
+import { colors, IconChevronUp24, spacersNum } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
 import type { WidgetCollapsibleProps, WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
 
@@ -127,7 +127,7 @@ const WidgetCollapsiblePlain = ({
     }, [open, animationsReady]);
 
     return (
-        <div style={{ backgroundColor: color }}>
+        <div style={{ backgroundColor: color, borderRadius: 3 }}>
             <div
                 className={cx(classes.headerContainer, {
                     childrenVisible,

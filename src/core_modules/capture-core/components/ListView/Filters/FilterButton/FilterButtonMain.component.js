@@ -1,8 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { IconChevronDown16, IconChevronUp16, Button, Layer, Popper } from '@dhis2/ui';
+import { Button, Popover } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
+import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
@@ -10,8 +11,9 @@ import type { FilterData, Options } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
     icon: {
-        fontSize: theme.typography.pxToRem(20),
-        paddingLeft: theme.typography.pxToRem(5),
+        paddingLeft: theme.typography.pxToRem(12),
+        display: 'flex',
+        alignItems: 'center',
     },
     inactiveFilterButton: {
         backgroundColor: '#f5f5f5',
@@ -138,11 +140,11 @@ class FilterButtonMainPlain extends Component<Props, State> {
 
         const arrowIconElement = selectorVisible ? (
             <span className={classes.icon}>
-                <IconChevronUp16 />
+                <ChevronUp />
             </span>
         ) : (
             <span className={classes.icon}>
-                <IconChevronDown16 />
+                <ChevronDown />
             </span>
         );
 
@@ -174,7 +176,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {title}
                     <span className={classes.icon}>
-                        {selectorVisible ? <IconChevronUp16 /> : <IconChevronDown16 />}
+                        {selectorVisible ? <ChevronUp /> : <ChevronDown />}
                     </span>
                 </Button>
             </ConditionalTooltip>
@@ -195,17 +197,23 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {button}
                 </div>
-
-                {selectorVisible && isMounted && (
-                    <Layer onBackdropClick={this.closeFilterSelector} >
-                        <Popper
-                            reference={this.anchorRef}
-                            className={classes.popper}
-                            placement="bottom-start"
-                        >
-                            {this.renderSelectorContents()}
-                        </Popper>
-                    </Layer>
+                {(selectorVisible && isMounted) && (
+                    <Popover
+                        reference={this.anchorRef.current}
+                        arrow={false}
+                        placement="bottom-start"
+                        onClickOutside={this.closeFilterSelector}
+                        maxWidth={400}
+                    >
+                        {
+                            (() => {
+                                if (selectorVisible) {
+                                    return this.renderSelectorContents();
+                                }
+                                return null;
+                            })()
+                        }
+                    </Popover>
                 )}
             </React.Fragment>
         );

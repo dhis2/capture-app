@@ -7,35 +7,33 @@ import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
+import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 
 function convertDateForView(rawValue: string): string {
     const momentDate = moment(rawValue);
     return convertMomentToDateFormatString(momentDate);
 }
-
 function convertDateTimeForView(rawValue: string): string {
     const momentDate = moment(rawValue);
     const dateString = convertMomentToDateFormatString(momentDate);
     const timeString = momentDate.format('HH:mm');
     return `${dateString} ${timeString}`;
 }
-
 function convertTimeForView(rawValue: string): string {
     const momentDate = moment(rawValue, 'HH:mm', true);
     return momentDate.format('HH:mm');
 }
-
 type FileClientValue = {
     name: string,
     url: string,
     value: string,
 };
-
 type ImageClientValue = {
     ...FileClientValue,
     previewUrl: string,
 };
+
 
 function convertFileForDisplay(clientValue: FileClientValue) {
     return (
@@ -54,6 +52,13 @@ function convertImageForDisplay(clientValue: ImageClientValue) {
     return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} alignLeft />;
 }
 
+function convertOrgUnitForDisplay(clientValue: { id: string }) {
+    return (
+        <TooltipOrgUnit orgUnitId={clientValue.id} />
+    );
+}
+
+
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.INTEGER]: stringifyNumber,
@@ -70,7 +75,7 @@ const valueConvertersForType = {
     [dataElementTypes.AGE]: convertDateForView,
     [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,
-    [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
+    [dataElementTypes.ORGANISATION_UNIT]: convertOrgUnitForDisplay,
     [dataElementTypes.POLYGON]: () => 'Polygon',
 };
 
@@ -78,18 +83,15 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, d
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-
     if (dataElement && dataElement.optionSet) {
         if (dataElement.type === dataElementTypes.MULTI_TEXT) {
             return dataElement.optionSet.getMultiOptionsText(value);
         }
         return dataElement.optionSet.getOptionText(value);
     }
-
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }
-
 export function convertDateWithTimeForView(rawValue?: ?string): string {
     if (!rawValue) { return ''; }
     if (!moment(rawValue).hours() && !moment(rawValue).minutes()) {

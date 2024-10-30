@@ -1,12 +1,11 @@
 # 
 # Translators:
-# Philip Larsen Donnelly, 2024
 # Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -496,18 +495,6 @@ msgstr "Матнни ўз ичига олади"
 msgid "Yes"
 msgstr "Ҳа"
 
-msgid "mm/dd/yyyy"
-msgstr "кун/ой/йил"
-
-msgid "Years"
-msgstr "Йиллар"
-
-msgid "Months"
-msgstr "Ойлар"
-
-msgid "Days"
-msgstr "Кунлар"
-
 msgid "Uploading file"
 msgstr "Файл юкланмоқда"
 
@@ -618,15 +605,6 @@ msgstr "Дастур мавжуд эмас"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-
-msgid "Online"
-msgstr "Онлайн"
-
-msgid "Offline"
-msgstr "Оффлайн"
-
-msgid "Syncing"
-msgstr "Синхронлашмоқда"
 
 msgid "Add note"
 msgstr "Изоҳ қолдириш"
@@ -1281,12 +1259,6 @@ msgstr ""
 msgid "Follow-up"
 msgstr "Кузатиш"
 
-msgid "Started at {{orgUnitName}}"
-msgstr " {{orgUnitName}} да бошланган"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr " {{ownerOrgUnit}} эгалиги асосида"
-
 msgid "Cancelled"
 msgstr "Бекор қилинди"
 
@@ -1340,6 +1312,9 @@ msgstr ""
 
 msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
+
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr ""
@@ -1491,8 +1466,31 @@ msgstr "Ҳисобот санаси"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "Ўтказиб юбориш"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr ""
@@ -1500,13 +1498,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset list"
-msgstr ""
-
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."

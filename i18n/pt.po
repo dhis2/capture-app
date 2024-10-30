@@ -7,13 +7,14 @@
 # Sheila André <sandre@saudigitus.org>, 2024
 # Ge Joao <gsimango@saudigitus.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -505,18 +506,6 @@ msgstr "Contém texto"
 msgid "Yes"
 msgstr "sim"
 
-msgid "mm/dd/yyyy"
-msgstr "mm/dd/aaaa"
-
-msgid "Years"
-msgstr "Anos"
-
-msgid "Months"
-msgstr "Meses"
-
-msgid "Days"
-msgstr "Dias"
-
 msgid "Uploading file"
 msgstr "Carregando arquivo"
 
@@ -628,15 +617,6 @@ msgstr "Programa não existe"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "Ligado"
-
-msgid "Offline"
-msgstr "Desligado"
-
-msgid "Syncing"
-msgstr "Sincronizando"
-
 msgid "Add note"
 msgstr "Adicionar uma nota"
 
@@ -654,54 +634,6 @@ msgstr "Aviso"
 
 msgid "Close the notice"
 msgstr "Fechar o aviso"
-
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "Use o novo painel de inscrição para {{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "Opte por {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is certain"
-" functionality from Tracker Capture that has not yet been added, including "
-"relationship and referral functionality. The work on including this Tracker "
-"functionality in Capture is ongoing and will be added in upcoming app "
-"releases."
-msgstr ""
-"Ao clicar em aceitar abaixo, começará a usar o novo painel de registro no "
-"aplicativo Capture para este programa Rastreador. No momento, há certas "
-"funcionalidades do Tracker Capture que ainda não foram adicionadas, "
-"incluindo funcionalidade de relacionamento e referência. O trabalho para "
-"incluir essa funcionalidade do Rastreador no Capture está em andamento e "
-"será adicionado nas próximas versões do aplicativo."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"A equipe principal agradece qualquer feedback sobre esta nova funcionalidade"
-" que está sendo testada na versão beta. Relate quaisquer problemas e "
-"comentários no projeto DHIS2 JIRA."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"Clique no botão abaixo para aceitar a nova funcionalidade do painel de "
-"registro no aplicativo Capture (beta) para este programa Rastreador para "
-"todos os utilizadores."
-
-msgid "Yes, opt in"
-msgstr "Sim, aceite"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "Pare de usar o novo painel de inscrição para {{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "Desativar {{programName}}"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
@@ -1318,12 +1250,6 @@ msgstr ""
 msgid "Follow-up"
 msgstr "Acompanhamento"
 
-msgid "Started at {{orgUnitName}}"
-msgstr "Iniciado em {{orgUnitName}}"
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Propriedade de {{ownerOrgUnit}}"
-
 msgid "Cancelled"
 msgstr "Cancelado"
 
@@ -1379,6 +1305,9 @@ msgstr "A data agendada não pode ser alterada para eventos {{ eventStatus }}"
 
 msgid "Event completed"
 msgstr "Evento concluído"
+
+msgid "The event cannot be edited after it has been completed"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr "Voltar para todos os palcos e eventos"
@@ -1543,8 +1472,31 @@ msgstr "Data do relatório"
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr "Esta etapa só pode ter um evento"
+
 msgid "New {{ eventName }} event"
 msgstr "Novo evento de {{ eventName }}"
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "Saltar"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr ""
@@ -1553,14 +1505,8 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr "Mostrar mais {{ rest }}"
 
-msgid "Reset list"
-msgstr "Reiniciar lista"
-
 msgid "Go to full {{ eventName }}"
 msgstr "Vá para o {{ eventName }} completo"
-
-msgid "This stage can only have one event"
-msgstr "Esta etapa só pode ter um evento"
 
 msgid "Events could not be retrieved. Please try again later."
 msgstr ""
@@ -1592,7 +1538,7 @@ msgid "Scheduled"
 msgstr "Agendado"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Registo de mudanças"
 
 msgid "No changes to display"
 msgstr ""

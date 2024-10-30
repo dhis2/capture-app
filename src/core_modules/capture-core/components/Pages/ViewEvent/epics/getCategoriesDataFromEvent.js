@@ -25,7 +25,7 @@ export async function getCategoriesDataFromEventAsync(
 
     const program = getProgramFromProgramIdThrowIfNotFound(event.programId);
 
-    const categoryCombination = program.categoryCombination;
+    const categoryCombination = program?.categoryCombination;
     if (!categoryCombination) {
         return null;
     }

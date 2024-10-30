@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-08T11:49:13.423Z\n"
+"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2024\n"
 "Language-Team: Arabic (Iraq) (https://app.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -491,18 +491,6 @@ msgstr "يحتوي على نص"
 msgid "Yes"
 msgstr "نعم"
 
-msgid "mm/dd/yyyy"
-msgstr "شهر / يوم / سنة"
-
-msgid "Years"
-msgstr "السنوات"
-
-msgid "Months"
-msgstr "الأشهر"
-
-msgid "Days"
-msgstr "‏‏الأيام"
-
 msgid "Uploading file"
 msgstr "تحميل ملف"
 
@@ -613,15 +601,6 @@ msgstr "البرنامج غير موجود"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-
-msgid "Online"
-msgstr "متصل"
-
-msgid "Offline"
-msgstr "غير متصل"
-
-msgid "Syncing"
-msgstr "تزامن"
 
 msgid "Add note"
 msgstr ""
@@ -1263,12 +1242,6 @@ msgstr ""
 msgid "Follow-up"
 msgstr ""
 
-msgid "Started at {{orgUnitName}}"
-msgstr ""
-
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
-
 msgid "Cancelled"
 msgstr "تم الإلغاء"
 
@@ -1321,6 +1294,9 @@ msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
 msgid "Event completed"
+msgstr ""
+
+msgid "The event cannot be edited after it has been completed"
 msgstr ""
 
 msgid "Back to all stages and events"
@@ -1482,7 +1458,30 @@ msgstr ""
 msgid "Please select a valid event"
 msgstr ""
 
+msgid "You do not have access to create events in this stage"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
 msgstr ""
 
 msgid "To open this event, please wait until saving is complete"
@@ -1491,13 +1490,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset list"
-msgstr ""
-
 msgid "Go to full {{ eventName }}"
-msgstr ""
-
-msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."

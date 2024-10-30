@@ -196,6 +196,7 @@ export class ProgramStageFactory {
             _stage.generatedByEnrollmentDate = !!cachedProgramStage.generatedByEnrollmentDate;
             _stage.reportDateToUse = cachedProgramStage.reportDateToUse;
             _stage.minDaysFromStart = cachedProgramStage.minDaysFromStart;
+            _stage.blockEntryForm = !!cachedProgramStage.blockEntryForm;
             _stage.repeatable = cachedProgramStage.repeatable;
             _stage.stageForm = new RenderFoundation((_form) => {
                 _form.id = cachedProgramStage.id;

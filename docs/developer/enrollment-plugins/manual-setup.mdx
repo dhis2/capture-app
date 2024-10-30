@@ -19,7 +19,7 @@ When booting the capture application, we will look in the dataStore for these ke
 We assume that you will already have these three keys under the `capture` namespace in the datastore. If you do not have them, please create them before proceeding.
 
 | Page                  | Key                         |
-|-----------------------|-----------------------------|
+| --------------------- | --------------------------- |
 | Enrollment Dashboard  | `enrollmentOverviewLayout`  |
 | Enrollment Add Event  | `enrollmentEventNewLayout`  |
 | Enrollment Edit Event | `enrollmentEventEditLayout` |
@@ -37,10 +37,8 @@ You can also have different layouts for the three different enrollment pages.
         label={'Enrollment Dashboard'}
         default
     >
-        <CodeBlock
-            language={'json'}
-        >
-            {`{
+```json
+{
     "IpHINAT79UW": {
         "title": "Child Programme dashboard",
         "leftColumn": [
@@ -76,7 +74,7 @@ You can also have different layouts for the three different enrollment pages.
             },
             {
                 "type": "component",
-                "name": "EnrollmentComment"
+                "name": "EnrollmentNote"
             },
             {
                 "type": "component",
@@ -94,17 +92,15 @@ You can also have different layouts for the three different enrollment pages.
             }
         ]
     }
-}`}
-        </CodeBlock>
+}
+```
     </TabItem>
     <TabItem
         value={'ENROLLMENT_EVENT_NEW'}
         label={'Add Event'}
     >
-        <CodeBlock
-            language={'json'}
-        >
-            {`{
+```json
+{
     "IpHINAT79UW": {
         "title": "Child Programme: Add Event",
         "leftColumn": [
@@ -150,17 +146,15 @@ You can also have different layouts for the three different enrollment pages.
             }
         ]
     }
-}`}
-        </CodeBlock>
+}
+```
     </TabItem>
     <TabItem
         value={'ENROLLMENT_EVENT_EDIT'}
         label={'Edit Event'}
     >
-        <CodeBlock
-            language={'json'}
-        >
-            {`{
+```json
+{
     "IpHINAT79UW": {
         "title": "Child Programme: Edit Event",
         "leftColumn": [
@@ -188,7 +182,7 @@ You can also have different layouts for the three different enrollment pages.
             },
             {
                 "type": "component",
-                "name": "EventComment"
+                "name": "EventNote"
             },
             {
                 "type": "component",
@@ -215,7 +209,7 @@ You can also have different layouts for the three different enrollment pages.
         ]
     }
 }`}
-        </CodeBlock>
+```
     </TabItem>
 </Tabs>
 
@@ -229,8 +223,8 @@ type DefaultComponents = 'QuickActions'
     | 'AssigneeWidget'
     | 'NewEventWorkspace'
     | 'EditEventWorkspace'
-    | 'EnrollmentComment'
-    | 'EventComment'
+    | 'EnrollmentNote'
+    | 'EventNote'
     | 'TrackedEntityRelationship'
     | 'ErrorWidget'
     | 'WarningWidget'
@@ -268,11 +262,8 @@ You can also extend the configurations to render your own custom plugins. You ca
 
 You would place this inside either the `leftColumn` or `rightColumn` array.
 
-<CodeBlock
-    language={'json'}
-    title={'capture/enrollmentEventEditLayout'}
->
-{`"leftColumn": [
+```json title="capture/enrollmentEventEditLayout"
+"leftColumn": [
     {
         "type": "component",
         "name": "EditEventWorkspace"
@@ -284,6 +275,5 @@ You would place this inside either the `leftColumn` or `rightColumn` array.
     }
     // highlight-end
 ],
-`}
-</CodeBlock>
+```
 

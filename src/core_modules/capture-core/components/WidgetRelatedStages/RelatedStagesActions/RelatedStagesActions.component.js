@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Radio, colors, spacers, spacersNum, IconInfo16, Button } from '@dhis2/ui';
+import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
@@ -11,6 +11,7 @@ import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
 import type { Props } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
+import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 
 const styles = () => ({
     wrapper: {
@@ -37,15 +38,6 @@ const styles = () => ({
     clearSelections: {
         padding: spacers.dp8,
     },
-    infoBox: {
-        margin: '8px 8px',
-        display: 'flex',
-        fontSize: '14px',
-        gap: '5px',
-        background: colors.grey100,
-        padding: '12px 8px',
-        border: `1px solid ${colors.grey600}`,
-    },
 });
 
 export const RelatedStagesActionsPlain = ({
@@ -53,6 +45,7 @@ export const RelatedStagesActionsPlain = ({
     type,
     relationshipName,
     scheduledLabel,
+    events,
     linkableEvents,
     relatedStagesDataValues,
     setRelatedStagesDataValues,
@@ -71,7 +64,7 @@ export const RelatedStagesActionsPlain = ({
             linkMode: action,
         }));
     };
-    const canAddNewEventToStage = useCanAddNewEventToStage(programStage, linkableEvents);
+    const canAddNewEventToStage = useCanAddNewEventToStage(programStage, events);
 
     if (!programStage) {
         return null;
@@ -170,16 +163,14 @@ export const RelatedStagesActionsPlain = ({
             )}
 
             {selectedAction === RelatedStagesActionTypes.ENTER_DATA && (
-                <div className={classes.infoBox}>
-                    <IconInfo16 />
-                    {i18n.t(
-                        'Enter {{linkableStageLabel}} details in the next step after completing this {{currentStageLabel}}.',
-                        {
-                            linkableStageLabel: programStage.stageForm.name,
-                            currentStageLabel,
-                        },
-                    )}
-                </div>
+                <EnterDataInOrgUnit
+                    linkableStageLabel={programStage.stageForm.name}
+                    relatedStagesDataValues={relatedStagesDataValues}
+                    setRelatedStagesDataValues={setRelatedStagesDataValues}
+                    currentStageLabel={currentStageLabel}
+                    saveAttempted={saveAttempted}
+                    errorMessages={errorMessages}
+                />
             )}
 
             {selectedAction === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && (
