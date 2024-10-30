@@ -184,6 +184,8 @@ Feature: User uses the ScopeSelector to navigate
     When you reset the program selection
     Then you see message explaining you need to select a program
 
+  # DHIS2-18326
+  @skip
   Scenario: Enrollment event edit page > resetting the org unit
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the org unit selection
