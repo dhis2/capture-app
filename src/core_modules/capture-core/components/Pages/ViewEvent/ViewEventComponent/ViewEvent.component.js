@@ -1,10 +1,13 @@
 // @flow
 import React, { Component } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { spacers } from '@dhis2/ui';
+import { Button, IconChevronLeft24, spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
+import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
+import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
@@ -69,6 +72,14 @@ class ViewEventPlain extends Component<Props, State> {
             warningOpen: false,
         };
     }
+    handleGoBackToAllEvents = () => {
+        const { isUserInteractionInProgress, onBackToAllEvents } = this.props;
+        if (!isUserInteractionInProgress) {
+            onBackToAllEvents();
+        } else {
+            this.setState({ warningOpen: true });
+        }
+    }
 
     render() {
         const {
@@ -96,22 +107,38 @@ class ViewEventPlain extends Component<Props, State> {
                     onBackToViewEvent={onBackToViewEvent}
                     onBackToMainPage={onBackToAllEvents}
                 />
-                <div className={classes.contentContainer}>
-                    <EventDetails
-                        eventAccess={eventAccess}
-                        programStage={programStage}
-                        onBackToAllEvents={onBackToAllEvents}
-                    />
-                    <RightColumnWrapper
-                        eventAccess={eventAccess}
-                        programStage={programStage}
-                        dataEntryKey={currentDataEntryKey}
-                        assignee={assignee}
-                        getAssignedUserSaveContext={getAssignedUserSaveContext}
-                        onSaveAssignee={onSaveAssignee}
-                        onSaveAssigneeError={onSaveAssigneeError}
-                    />
+                <div>
+                    <Button
+                        className={classes.showAllEvents}
+                        onClick={this.handleGoBackToAllEvents}
+                        small
+                        icon={<IconChevronLeft24 />}
+                    >
+                        {i18n.t('Show all events')}
+                    </Button>
+                    <div className={classes.contentContainer}>
+                        <EventDetails
+                            eventAccess={eventAccess}
+                            programStage={programStage}
+                            onBackToAllEvents={onBackToAllEvents}
+                        />
+                        <RightColumnWrapper
+                            eventAccess={eventAccess}
+                            programStage={programStage}
+                            dataEntryKey={currentDataEntryKey}
+                            assignee={assignee}
+                            getAssignedUserSaveContext={getAssignedUserSaveContext}
+                            onSaveAssignee={onSaveAssignee}
+                            onSaveAssigneeError={onSaveAssigneeError}
+                        />
+                    </div>
                 </div>
+                <DiscardDialog
+                    {...defaultDialogProps}
+                    onCancel={() => { this.setState({ warningOpen: false }); }}
+                    onDestroy={() => this.props.onBackToAllEvents()}
+                    open={this.state.warningOpen}
+                />
             </div>
 
         );
