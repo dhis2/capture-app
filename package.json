@@ -94,7 +94,7 @@
         "@babel/preset-react": "^7.16.7",
         "@badeball/cypress-cucumber-preprocessor": "17.2.1",
         "@cypress/webpack-preprocessor": "^6.0.0",
-        "@dhis2/cli-app-scripts": "^10.4.0",
+        "@dhis2/cli-app-scripts": "^11.7.2",
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.4.1",
         "@dhis2/cli-utils-cypress": "^9.0.2",
@@ -132,7 +132,6 @@
         "wait-on": "^7.2.0"
     },
     "resolutions": {
-        "@dhis2/cli-app-scripts": "^10.4.0",
         "@dhis2/app-runtime": "^3.10.2",
         "@babel/preset-react": "7.16.7",
         "@dhis2/ui": "^9.10.1",
