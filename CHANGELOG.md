@@ -1,3 +1,11 @@
+## [101.14.5](https://github.com/dhis2/capture-app/compare/v101.14.4...v101.14.5) (2024-11-01)
+
+
+### Bug Fixes
+
+* [DHIS2-18238] incorrect criteria when saving list with follow up false ([#3868](https://github.com/dhis2/capture-app/issues/3868)) ([53c21f0](https://github.com/dhis2/capture-app/commit/53c21f0a4942d09ae4bf88253b576de8ca94b9b6))
+* [DHIS2-18248] pass on createdAt to rules engine when editing ([#3848](https://github.com/dhis2/capture-app/issues/3848)) ([31cb56c](https://github.com/dhis2/capture-app/commit/31cb56c4f05727eb84fcc36e39f897cccc5627b3))
+
 ## [101.14.4](https://github.com/dhis2/capture-app/compare/v101.14.3...v101.14.4) (2024-10-29)
 
 
