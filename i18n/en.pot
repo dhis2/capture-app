@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-03T22:25:35.307Z\n"
-"PO-Revision-Date: 2024-11-03T22:25:35.308Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"PO-Revision-Date: 2024-10-25T18:18:11.518Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -705,9 +705,6 @@ msgstr "View working list in this program."
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
 
-msgid "Program is not valid"
-msgstr "Program is not valid"
-
 msgid "Org unit is not valid with current program"
 msgstr "Org unit is not valid with current program"
 
@@ -1136,6 +1133,9 @@ msgstr "Mark as cancelled"
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
 
+msgid "You do not have access to delete this enrollment"
+msgstr "You do not have access to delete this enrollment"
+
 msgid "Delete enrollment"
 msgstr "Delete enrollment"
 
@@ -1223,6 +1223,12 @@ msgstr "Enrollment widget could not be loaded. Please try again later"
 
 msgid "Follow-up"
 msgstr "Follow-up"
+
+msgid "Started at{{escape}}"
+msgstr "Started at{{escape}}"
+
+msgid "Owned by{{escape}}"
+msgstr "Owned by{{escape}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
@@ -1414,13 +1420,6 @@ msgstr "{{ linkableStageLabel }} has no linkable events"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Enter details now"
 
@@ -1505,6 +1504,9 @@ msgstr "Changelog"
 msgid "No changes to display"
 msgstr "No changes to display"
 
+msgid "Updated"
+msgstr "Updated"
+
 msgid "Created"
 msgstr "Created"
 
@@ -1522,6 +1524,9 @@ msgstr "Data item"
 
 msgid "Change"
 msgstr "Change"
+
+msgid "Value"
+msgstr "Value"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"

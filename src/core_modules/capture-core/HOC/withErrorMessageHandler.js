@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { NoticeBox } from '@dhis2/ui';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     errorContainer: {
         margin: 20,
-        color: theme.palette.error.main,
     },
 });
 
@@ -23,12 +23,13 @@ export const withErrorMessageHandler = () =>
 
             if (error) {
                 return (
-                    <div
-                        data-test="error-message-handler"
+                    <NoticeBox
+                        error
+                        dataTest="error-message-handler"
                         className={classes.errorContainer}
                     >
-                        {error}
-                    </div>
+                        <div>{error}</div>
+                    </NoticeBox>
                 );
             }
 

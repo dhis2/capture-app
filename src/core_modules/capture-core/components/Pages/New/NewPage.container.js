@@ -9,7 +9,7 @@ import {
     showDefaultViewOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage, showMessageThatCategoryOptionIsInvalidForOrgUnit,
 } from './NewPage.actions';
-import { typeof newPageStatuses } from './NewPage.constants';
+import { newPageStatuses } from './NewPage.constants';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
@@ -18,6 +18,7 @@ import { useTrackedEntityInstances } from './hooks';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { programCollection } from '../../../metaDataMemoryStores/programCollection/programCollection';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
+import { TopBar } from './TopBar.container';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -89,7 +90,7 @@ export const NewPage: ComponentType<{||}> = () => {
         ({ currentSelections }) => !currentSelections.orgUnitId && !currentSelections.complete,
     );
 
-    const newPageStatus: $Keys<newPageStatuses> =
+    const newPageStatus: $Keys<typeof newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
 
     const handleMainPageNavigation = () => {
@@ -108,26 +109,34 @@ export const NewPage: ComponentType<{||}> = () => {
     );
 
     return (
-        <NewPageComponent
-            showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
-            showMessageToSelectProgramCategoryOnNewPage={dispatchShowMessageToSelectProgramCategoryOnNewPage}
-            showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
-            showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
-            handleMainPageNavigation={handleMainPageNavigation}
-            currentScopeId={currentScopeId}
-            orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
-            programCategorySelectionIncomplete={programSelectionIsIncomplete}
-            missingCategoriesInProgramSelection={missingCategories}
-            categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
-            writeAccess={writeAccess}
-            newPageStatus={newPageStatus}
-            error={error}
-            ready={ready}
-            isUserInteractionInProgress={isUserInteractionInProgress}
-            programId={programId}
-            teiId={teiId}
-            trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
-            trackedEntityName={trackedEntityType?.name}
-            teiDisplayName={teiDisplayName}
-        />);
+        <>
+            <TopBar
+                orgUnitId={orgUnitId}
+                programId={programId}
+                isUserInteractionInProgress={isUserInteractionInProgress}
+                teiId={teiId}
+                trackedEntityName={trackedEntityType?.name}
+                teiDisplayName={teiDisplayName}
+                formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
+            />
+            <NewPageComponent
+                showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
+                showMessageToSelectProgramCategoryOnNewPage={dispatchShowMessageToSelectProgramCategoryOnNewPage}
+                showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
+                showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
+                handleMainPageNavigation={handleMainPageNavigation}
+                currentScopeId={currentScopeId}
+                orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
+                programCategorySelectionIncomplete={programSelectionIsIncomplete}
+                missingCategoriesInProgramSelection={missingCategories}
+                categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}
+                writeAccess={writeAccess}
+                newPageStatus={newPageStatus}
+                error={error}
+                ready={ready}
+                trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
+                trackedEntityName={trackedEntityType?.name}
+            />
+        </>
+    );
 };
