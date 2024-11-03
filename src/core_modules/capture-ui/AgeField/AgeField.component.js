@@ -26,11 +26,17 @@ type InputMessageClasses = {
 }
 
 type DateParser = (value: string) => { isValid: boolean, momentDate: any };
+
 type DateStringFromMomentFormatter = (momentValue: Object) => string;
+
+type ValidationOptions = {
+    error?: ?string,
+    errorCode?: ?string,
+};
 
 type Props = {
     value: ?AgeValues,
-    onBlur: (value: ?AgeValues) => void,
+    onBlur: (value: ?AgeValues, options: ?ValidationOptions) => void,
     onChange: (value: ?AgeValues) => void,
     onRemoveFocus: () => void,
     orientation: $Values<typeof orientations>,
@@ -141,7 +147,7 @@ class D2AgeFieldPlain extends Component<Props> {
         this.props.onBlur(calculatedValues);
     }
 
-    handleDateBlur = (date: ?string, options:?Object) => {
+    handleDateBlur = (date: ?string, options: ?ValidationOptions) => {
         const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
         onRemoveFocus && onRemoveFocus();
         const calculatedValues = date ? getCalculatedValues(

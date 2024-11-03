@@ -4,25 +4,26 @@
  *
  * @export
  * @param {string} value
- * @param {string} format
- * @returns {boolean}
+ * @returns {ValidationResult}
  */
 
-import i18n from '@dhis2/d2-i18n';
-/**
- *
- * @export
- * @param {string} value
- * @returns {boolean}
- */
+type ValidationResult = {|
+    valid: boolean,
+    errorMessage?: string,
+|};
 
-export function isValidDate(value: string, internalComponentError) {
+type InternalComponentError = ?{
+    error?: ?string,
+    errorCode?: ?string,
+};
+
+export function isValidDate(value: ?string, internalComponentError?: InternalComponentError): ValidationResult {
     if (!value) {
-        return false;
+        return { valid: false };
     }
 
     if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
-        return true;
+        return { valid: true };
     }
 
     if (internalComponentError?.error) {

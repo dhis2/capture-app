@@ -36,6 +36,8 @@ type Props = {
 
 type Options = {
     touched?: ?boolean,
+    error?: ?string,
+    errorCode?: ?string,
 };
 
 type ContainerProps = {
@@ -72,7 +74,7 @@ class DataEntryFieldPlain extends React.Component<Props> {
     handleSet = (value: any, options?: ?Options) => {
         const { validatorContainers, onUpdateFieldInner, onUpdateField } = this.props;
         const validationError =
-            getValidationError(value, validatorContainers, { error: options.error, errorCode: options.errorCode });
+            getValidationError(value, validatorContainers, { error: options?.error, errorCode: options?.errorCode });
         onUpdateFieldInner(value, {
             isValid: !validationError,
             validationError,

@@ -3,6 +3,10 @@ import React from 'react';
 import { CalendarInput } from '@dhis2/ui';
 import { systemSettingsStore } from '../../../capture-core/metaDataMemoryStores';
 
+type ValidationOptions = {
+    error?: ?string,
+    errorCode?: ?string,
+};
 
 type Props = {
     value: ?Object,
@@ -11,7 +15,7 @@ type Props = {
     calendarWidth?: ?number,
     inputWidth?: ?number,
     disabled?: ?boolean,
-    onBlur: (value: Object) => void,
+    onBlur: (value: Object, options: ValidationOptions) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
     calendar?: string,
@@ -22,9 +26,10 @@ type Props = {
 };
 
 type Validation = {|
-    validationCode: string,
-    validationText: string,
-    error: boolean,
+    validationCode: ?string,
+    validationText: ?string,
+    error?: boolean,
+    valid: boolean,
 |};
 
 type State = {

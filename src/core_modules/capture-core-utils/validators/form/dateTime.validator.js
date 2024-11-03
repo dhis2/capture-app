@@ -1,7 +1,8 @@
 // @flow
+
+import i18n from '@dhis2/d2-i18n';
 import { isValidDate } from './date.validator';
 import { isValidTime } from './time.validator';
-import i18n from '@dhis2/d2-i18n';
 
 type DateTimeValue = {
     date?: ?string,
@@ -10,9 +11,9 @@ type DateTimeValue = {
 
 type ValidationResult = {
     valid: boolean,
-    errorMessage: {
-        timeError: string,
-        dateError: string
+    errorMessage?: {
+        timeError?: ?string,
+        dateError?: ?string
     }
 };
 
@@ -22,57 +23,43 @@ const CUSTOM_VALIDATION_MESSAGES = {
     MISSING_DATE: i18n.t('Please enter a date'),
 };
 
-const validateDate = (
-    date: ?string, 
-    validation: ValidationResult, 
-    internalComponentError?: ?Object
-): void => {
-    if (!date) {
-        validation.valid = false;
-        validation.errorMessage.dateError = CUSTOM_VALIDATION_MESSAGES.MISSING_DATE;
-        return;
-    }
-
-    const { valid, errorMessage } = isValidDate(date, internalComponentError);
-    if (!valid) {
-        validation.valid = false;
-        validation.errorMessage.dateError = errorMessage;
-    }
-};
-
-const validateTime = (time: ?string, validation: ValidationResult): void => {
-    if (!time) {
-        validation.valid = false;
-        validation.errorMessage.timeError = CUSTOM_VALIDATION_MESSAGES.MISSING_TIME;
-        return;
-    }
-
-    if (!isValidTime(time)) {
-        validation.valid = false;
-        validation.errorMessage.timeError = CUSTOM_VALIDATION_MESSAGES.INVALID_TIME;
-    }
-};
-
 export function isValidDateTime(
-    value: DateTimeValue, 
-    internalComponentError?: ?Object
+    value: DateTimeValue,
+    internalComponentError: ?Object,
 ): ValidationResult {
     if (!value) {
-        return createValidationResult(false);
+        return { valid: true };
     }
 
-    const validation = {
-        valid: true,
+    const { date, time } = value;
+    let dateError = '';
+    let timeError = '';
+    let isValid = true;
+
+    if (!date) {
+        dateError = CUSTOM_VALIDATION_MESSAGES.MISSING_DATE;
+        isValid = false;
+    } else {
+        const dateValidation = isValidDate(date, internalComponentError);
+        if (!dateValidation.valid) {
+            dateError = dateValidation?.errorMessage;
+            isValid = false;
+        }
+    }
+
+    if (!time) {
+        timeError = CUSTOM_VALIDATION_MESSAGES.MISSING_TIME;
+        isValid = false;
+    } else if (!isValidTime(time)) {
+        timeError = CUSTOM_VALIDATION_MESSAGES.INVALID_TIME;
+        isValid = false;
+    }
+
+    return {
+        valid: isValid,
         errorMessage: {
-            timeError: '',
-            dateError: '',
+            timeError,
+            dateError,
         },
     };
-
-    const { date, time } = value;
-
-    validateDate(date, validation, internalComponentError);
-    validateTime(time, validation);
-
-    return validation;
 }

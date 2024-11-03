@@ -27,8 +27,10 @@ type Props = {
 };
 
 type State = {
-    timeError: ?string,
-    dateError: ?string,
+    dateError: ?{
+        error?: ?string,
+        errorCode?: ?string
+    },
 };
 
 
@@ -76,7 +78,11 @@ export class DateTimeField extends Component<Props, State> {
         this.handleBlur({
             time: timeValue,
             date: this.props.value?.date,
-        }, { touched: !!currentValue.date, ...this.state.dateError });
+        }, {
+            touched: !!currentValue.date,
+            error: this.state.dateError?.error,
+            errorCode: this.state.dateError?.errorCode,
+        });
     }
 
     handleDateBlur(dateValue: string, options: ?Object) {
@@ -88,7 +94,11 @@ export class DateTimeField extends Component<Props, State> {
             this.handleBlur({
                 time: currentValue.time,
                 date: dateValue,
-            }, { touched: !!currentValue.date, ...this.state.dateError });
+            }, {
+                touched: !!currentValue.date,
+                error: this.state.dateError?.error,
+                errorCode: this.state.dateError?.errorCode,
+            });
         });
     }
 
@@ -101,7 +111,11 @@ export class DateTimeField extends Component<Props, State> {
             });
             return;
         }
-        onBlur(value, { touched: touched || otherFieldHasValue.touched, error: otherFieldHasValue?.error, errorCode: otherFieldHasValue?.errorCode });
+        onBlur(value, {
+            touched: touched || otherFieldHasValue.touched,
+            error: otherFieldHasValue?.error,
+            errorCode: otherFieldHasValue?.errorCode,
+        });
     }
 
     getValue = () => this.props.value || {};
@@ -154,8 +168,8 @@ export class DateTimeField extends Component<Props, State> {
                         <div className={classes?.innerInputError}>{innerMessage?.message?.dateError}</div>
                     </div>
 
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <div>
+                        {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                         <DateTimeTime
                             value={timeValue}
                             onChange={this.handleTimeChange}

@@ -17,6 +17,6 @@ export const isValidNonFutureDate = (value: string) => {
     return {
         // $FlowFixMe -> if parseDate returns isValid true, there should always be a momentDate
         valid: momentDate.isSameOrBefore(moment()),
-        errorMessage: CUSTOM_VALIDATION_MESSAGES.INVALID_DATE_MORE_THAN_MAX
+        errorMessage: CUSTOM_VALIDATION_MESSAGES.INVALID_DATE_MORE_THAN_MAX,
     };
 };

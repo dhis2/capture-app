@@ -1,7 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 
-type Validator = (value: any) => boolean | { valid: boolean, message: ?string };
+type Validator = (value: any, internalComponentError?: ?Object) => boolean | { valid: boolean, errorMessage?: string };
 
 export type ValidatorContainer = {
     validator: Validator,

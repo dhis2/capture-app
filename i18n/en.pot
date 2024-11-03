@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-28T18:20:26.716Z\n"
-"PO-Revision-Date: 2024-10-28T18:20:26.717Z\n"
+"POT-Creation-Date: 2024-11-03T22:25:35.307Z\n"
+"PO-Revision-Date: 2024-11-03T22:25:35.308Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1725,8 +1725,14 @@ msgstr "Error editing the event, the changes made were not saved"
 msgid "Error updating the Assignee"
 msgstr "Error updating the Assignee"
 
+msgid "Please provide a valid positive integer"
+msgstr "Please provide a valid positive integer"
+
 msgid "Please enter a valid time"
 msgstr "Please enter a valid time"
+
+msgid "Please enter a time"
+msgstr "Please enter a time"
 
 msgid "Please enter a date"
 msgstr "Please enter a date"

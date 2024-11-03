@@ -52,10 +52,10 @@ function validateNumbers(years: ?string, months: ?string, days: ?string) {
 }
 
 function validateDate(date: ?string, internalComponentError?: ?Object) {
-    const { valid } = isValidDate(date, internalComponentError)
+    const { valid } = isValidDate(date, internalComponentError);
     return valid ?
         { valid: true } :
-        { valid: false, errorMessage: { date: errorMessages.date} };
+        { valid: false, errorMessage: { date: errorMessages.date } };
 }
 
 function isAllEmpty(value: AgeValues) {

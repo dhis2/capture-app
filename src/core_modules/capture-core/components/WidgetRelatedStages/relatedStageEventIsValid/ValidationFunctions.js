@@ -1,6 +1,5 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { isValidDate, isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
 import { actions as RelatedStageModes } from '../constants';
 
@@ -11,10 +10,7 @@ type Props = {
     setErrorMessages: (messages: Object) => void,
 };
 
-export const isScheduledDateValid = (scheduledDate: string) => {
-    const dateFormat = systemSettingsStore.get().dateFormat;
-    return isValidDate(scheduledDate, dateFormat);
-};
+export const isScheduledDateValid = (scheduledDate: string) => isValidDate(scheduledDate);
 
 const scheduleInOrgUnit = (props) => {
     const { scheduledAt, orgUnit, setErrorMessages } = props ?? {};

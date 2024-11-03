@@ -34,7 +34,7 @@ type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, 
 
 export type ValidatorContainer = {
     validator: Validator,
-    message: string,
+    message: string | Object,
     type?: string,
     validatingMessage?: string,
 }

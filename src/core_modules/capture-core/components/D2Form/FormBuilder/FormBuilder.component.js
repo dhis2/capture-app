@@ -17,7 +17,10 @@ import type { DataElement } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
 
 export type ValidatorContainer = {
-    validator: (value: any, validationContext: ?Object) => boolean | Promise<boolean>,
+    validator: (value: any, validationContext: ?Object, internalError?: ?{
+        error?: ?string,
+        errorCode?: ?string,
+    }) => boolean | Promise<boolean>,
     message: string,
     validatingMessage?: ?string,
     type?: ?string,
@@ -37,7 +40,7 @@ export type FieldConfig = {
 type FieldUI = {
     touched?: ?boolean,
     valid?: ?boolean,
-    errorMessage?: ?string | Array<string> | Array<{[key: string]: string}>,
+    errorMessage?: ?string | Array<string>,
     errorType?: ?string,
     errorData?: ErrorData,
     validatingMessage?: ?string,
@@ -93,7 +96,7 @@ type Props = {
 export type FieldCommitOptions = {|
     touched?: boolean,
     valid?: boolean,
-    error?: string | Array<string> | Array<{[key: string]: string}>,
+    error?: string,
     errorCode?: string,
 |};
 
@@ -458,9 +461,11 @@ export class FormBuilder extends React.Component<Props> {
         this.commitUpdateTriggeredForFields[fieldId] = true;
 
         options?.plugin && (options.error || options.valid === false) ?
-            // plugin with internal error skips app validations
-            updateField({ valid: false, errorMessage: options.error, errorType: validatorTypes.TYPE_BASE }) :
-            // not plugin or no error from plugin, validate using our app validators
+            updateField({
+                valid: false,
+                errorMessage: options.error,
+                errorType: validatorTypes.TYPE_BASE,
+                errorData: undefined }) :
             (await FormBuilder.validateField(
                 { validators },
                 value,
