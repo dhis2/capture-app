@@ -1,3 +1,10 @@
+## [101.14.7](https://github.com/dhis2/capture-app/compare/v101.14.6...v101.14.7) (2024-11-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17135][DHIS2-17018] Adjust strings for error messages ([#3858](https://github.com/dhis2/capture-app/issues/3858)) ([1d9ae57](https://github.com/dhis2/capture-app/commit/1d9ae5731331d3f19a0980cf09ebdd9cc46e4583))
+
 ## [101.14.6](https://github.com/dhis2/capture-app/compare/v101.14.5...v101.14.6) (2024-11-03)
 
 
