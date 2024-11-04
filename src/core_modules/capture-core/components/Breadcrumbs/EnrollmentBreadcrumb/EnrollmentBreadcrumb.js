@@ -8,6 +8,9 @@ import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
+import {
+    EnrollmentPageKeys,
+} from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
 type Props = {
     onBackToMainPage: () => void,
@@ -34,12 +37,9 @@ const styles = {
     },
 };
 
-export const EnrollmentPageKeys = Object.freeze({
+const pageKeys = Object.freeze({
     MAIN_PAGE: 'mainPage',
-    OVERVIEW: 'overview',
-    NEW_EVENT: 'newEvent',
-    EDIT_EVENT: 'editEvent',
-    VIEW_EVENT: 'viewEvent',
+    ...EnrollmentPageKeys,
 });
 
 const eventIsScheduled = eventStatus => [EventStatuses.SCHEDULE, EventStatuses.OVERDUE, EventStatuses.SKIPPED]
@@ -75,44 +75,42 @@ const BreadcrumbsPlain = ({
 
     const breadcrumbItems = useMemo(() => ([
         {
-            key: 'mainPage',
-            onClick: () => handleNavigation(onBackToMainPage, 'mainPage'),
+            key: pageKeys.MAIN_PAGE,
+            onClick: () => handleNavigation(onBackToMainPage, pageKeys.MAIN_PAGE),
             label,
-            selected: page === EnrollmentPageKeys.MAIN_PAGE,
+            selected: false,
             condition: true,
         },
         {
-            key: 'dashboard',
-            onClick: () => handleNavigation(onBackToDashboard, 'dashboard'),
+            key: pageKeys.OVERVIEW,
+            onClick: () => handleNavigation(onBackToDashboard, pageKeys.OVERVIEW),
             label: i18n.t('Enrollment dashboard'),
-            selected: page === EnrollmentPageKeys.OVERVIEW,
-            condition: page !== EnrollmentPageKeys.MAIN_PAGE,
+            selected: page === pageKeys.OVERVIEW,
+            condition: true,
         },
         {
-            key: 'viewEvent',
-            onClick: () => {
-                handleNavigation(onBackToViewEvent, 'viewEvent');
-            },
+            key: pageKeys.VIEW_EVENT,
+            onClick: () => handleNavigation(onBackToViewEvent, pageKeys.VIEW_EVENT),
             label: i18n.t('View event'),
-            selected: page === EnrollmentPageKeys.VIEW_EVENT,
-            condition: page === EnrollmentPageKeys.VIEW_EVENT ||
-                (page === EnrollmentPageKeys.EDIT_EVENT && !eventIsScheduled(eventStatus)),
+            selected: page === pageKeys.VIEW_EVENT,
+            condition: page === pageKeys.VIEW_EVENT ||
+                (page === pageKeys.EDIT_EVENT && !eventIsScheduled(eventStatus)),
         },
         {
-            key: 'editEvent',
+            key: pageKeys.EDIT_EVENT,
             onClick: () => {},
             label: i18n.t('Edit event'),
-            selected: page === EnrollmentPageKeys.EDIT_EVENT,
-            condition: page === EnrollmentPageKeys.EDIT_EVENT,
+            selected: page === pageKeys.EDIT_EVENT,
+            condition: page === pageKeys.EDIT_EVENT,
         },
         {
-            key: 'newEvent',
+            key: pageKeys.NEW_EVENT,
             onClick: () => {},
             label: i18n.t('New event'),
-            selected: page === EnrollmentPageKeys.NEW_EVENT,
-            condition: page === EnrollmentPageKeys.NEW_EVENT,
+            selected: page === pageKeys.NEW_EVENT,
+            condition: page === pageKeys.NEW_EVENT,
         },
-    ].filter(item => item.condition !== false)), [
+    ].filter(item => item.condition)), [
         label,
         page,
         eventStatus,
@@ -138,7 +136,7 @@ const BreadcrumbsPlain = ({
             ))}
 
             <DiscardDialog
-                open={openWarning === 'mainPage'}
+                open={openWarning === pageKeys.MAIN_PAGE}
                 onDestroy={() => {
                     setOpenWarning(null);
                     onBackToMainPage && onBackToMainPage();
@@ -148,7 +146,7 @@ const BreadcrumbsPlain = ({
             />
 
             <DiscardDialog
-                open={openWarning === 'dashboard'}
+                open={openWarning === pageKeys.OVERVIEW}
                 onDestroy={() => {
                     setOpenWarning(null);
                     onBackToDashboard && onBackToDashboard();
@@ -158,7 +156,7 @@ const BreadcrumbsPlain = ({
             />
 
             <DiscardDialog
-                open={openWarning === 'viewEvent'}
+                open={openWarning === pageKeys.VIEW_EVENT}
                 onDestroy={() => {
                     setOpenWarning(null);
                     onBackToViewEvent && onBackToViewEvent();

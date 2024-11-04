@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-30T11:37:11.048Z\n"
-"PO-Revision-Date: 2024-10-30T11:37:11.048Z\n"
+"POT-Creation-Date: 2024-11-04T18:45:47.626Z\n"
+"PO-Revision-Date: 2024-11-04T18:45:47.626Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -56,11 +56,11 @@ msgstr "Completed enrollments"
 msgid "Cancelled enrollments"
 msgstr "Cancelled enrollments"
 
-msgid "Search"
-msgstr "Search"
-
 msgid "{{trackedEntityName}} list"
 msgstr "{{trackedEntityName}} list"
+
+msgid "Search"
+msgstr "Search"
 
 msgid "Working List"
 msgstr "Working List"

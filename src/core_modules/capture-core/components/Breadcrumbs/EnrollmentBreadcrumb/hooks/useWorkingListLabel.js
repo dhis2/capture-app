@@ -1,8 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
 
 type Props = {
     programId: string,
@@ -21,80 +20,37 @@ export const useWorkingListLabel = ({
     trackedEntityName,
     displayFrontPageList,
 }: Props) => {
-    const [shouldFetchPSFilter, setShouldFetchPSFilter] = useState(false);
-    const workingListTemplates = useSelector(({ workingListsTemplates }) => workingListsTemplates.teiList);
+    const workingListTemplates = useSelector(({ workingListsTemplates }) => workingListsTemplates?.teiList);
     const workingListProgramId = useSelector(({ workingListsContext }) => workingListsContext?.teiList?.programIdView);
-    const { selectedTemplateId, loading: isLoadingTemplates } = workingListTemplates ?? {};
-    const isDefaultTemplate = selectedTemplateId === `${programId}-default`;
+    const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
+    const selectedTemplate = templates?.find(({ id }) => id === selectedTemplateId);
     const isSameProgram = workingListProgramId === programId;
 
-    const {
-        data: psListTemplate,
-        isLoading: psFilterLoading,
-    } = useApiMetadataQuery(
-        ['BreadCrumbs', 'workingListLabel', 'programStageFilter', programId, selectedTemplateId],
-        {
-            resource: 'programStageWorkingLists',
-            id: selectedTemplateId,
-            params: {
-                fields: 'id,displayName',
-            },
-        }, {
-            enabled: shouldFetchPSFilter && isSameProgram,
-        },
-    );
-
-    const {
-        data: teiListLabel,
-        isLoading: teiListLoading,
-    } = useApiMetadataQuery(
-        ['BreadCrumbs', 'workingListLabel', 'trackedEntityInstanceFilter', programId, selectedTemplateId],
-        {
-            resource: 'trackedEntityInstanceFilters',
-            id: selectedTemplateId,
-            params: {
-                fields: 'id,displayName',
-            },
-        }, {
-            enabled: !!selectedTemplateId &&
-                !DefaultFilterLabels[selectedTemplateId] &&
-                !isDefaultTemplate &&
-                isSameProgram,
-            onError: () => {
-                setShouldFetchPSFilter(true);
-            },
-        },
-    );
-
-    const isLoading = psFilterLoading || teiListLoading || isLoadingTemplates;
-
     const label = useMemo(() => {
-        if (isLoading) return '...';
+        if (isLoadingTemplates) return '...';
 
-        if (isSameProgram && DefaultFilterLabels[selectedTemplateId]) {
-            return DefaultFilterLabels[selectedTemplateId];
+        if (isSameProgram) {
+            if (selectedTemplate && !selectedTemplate.isDefault) {
+                return selectedTemplate.name;
+            }
+
+            if (selectedTemplateId && !selectedTemplate) {
+                return DefaultFilterLabels[selectedTemplateId];
+            }
+
+            if (selectedTemplate.name === 'default') {
+                return i18n.t('{{trackedEntityName}} list', { trackedEntityName });
+            }
         }
 
-        if (psListTemplate) {
-            return psListTemplate.displayName;
-        }
-        if (teiListLabel) {
-            return teiListLabel.displayName;
-        }
-        if (!displayFrontPageList && (!isSameProgram || !selectedTemplateId)) {
-            return i18n.t('Search');
-        }
-        if (trackedEntityName) {
-            return i18n.t('{{trackedEntityName}} list', { trackedEntityName });
-        }
-        return i18n.t('Working List');
+        if (!displayFrontPageList) return i18n.t('Search');
+        return trackedEntityName ? i18n.t('{{trackedEntityName}} list', { trackedEntityName }) : i18n.t('Working List');
     }, [
         displayFrontPageList,
-        isLoading,
+        isLoadingTemplates,
         isSameProgram,
-        psListTemplate,
+        selectedTemplate,
         selectedTemplateId,
-        teiListLabel,
         trackedEntityName,
     ]);
 

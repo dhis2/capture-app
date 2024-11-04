@@ -1,5 +1,6 @@
 // @flow
 import React, { type ComponentType, useCallback, useMemo, useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { colors, IconChevronRight16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
@@ -48,23 +49,23 @@ const EventBreadcrumbPlain = ({
 
     const breadcrumbItems = useMemo(() => ([
         {
-            key: 'mainPage',
-            onClick: () => handleNavigation(onBackToMainPage, 'mainPage'),
+            key: pageKeys.MAIN_PAGE,
+            onClick: () => handleNavigation(onBackToMainPage, pageKeys.MAIN_PAGE),
             label,
             selected: page === pageKeys.MAIN_PAGE,
             condition: true,
         },
         {
-            key: 'viewEvent',
-            onClick: () => handleNavigation(null, 'viewEvent'),
-            label: 'View event',
+            key: pageKeys.VIEW_EVENT,
+            onClick: () => handleNavigation(null, pageKeys.VIEW_EVENT),
+            label: i18n.t('View event'),
             selected: page === pageKeys.VIEW_EVENT,
             condition: page === pageKeys.VIEW_EVENT || page === pageKeys.EDIT_EVENT,
         },
         {
-            key: 'editEvent',
+            key: pageKeys.EDIT_EVENT,
             onClick: () => {},
-            label: 'Edit event',
+            label: i18n.t('Edit event'),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },
@@ -92,7 +93,7 @@ const EventBreadcrumbPlain = ({
             ))}
 
             <DiscardDialog
-                open={openWarning === 'mainPage'}
+                open={openWarning === pageKeys.MAIN_PAGE}
                 onCancel={() => setOpenWarning(null)}
                 onDestroy={onBackToMainPage}
                 {...defaultDialogProps}

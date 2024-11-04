@@ -2,7 +2,6 @@
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
-import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
 
 type Props = {
     programId: string,
@@ -15,33 +14,25 @@ export const useWorkingListLabel = ({ programId }: Props) => {
         ?.programIdView,
     );
 
-    const { selectedTemplateId, loading } = workingListTemplate ?? {};
-    const isDefaultTemplate = selectedTemplateId === `${programId}-default`;
+
+    const {
+        selectedTemplateId,
+        templates,
+        loading: loadingTemplates,
+    } = workingListTemplate ?? {};
+    const selectedTemplete = templates?.find(({ id }) => id === selectedTemplateId);
+    const isDefaultTemplate = selectedTemplete?.isDefault;
     const isSameProgram = workingListProgramId === programId;
 
-    const { data: eventFilterLabel, isLoading } = useApiMetadataQuery(
-        ['BreadCrumbs', 'workingListLabel', 'eventList', programId, selectedTemplateId],
-        {
-            resource: 'eventFilters',
-            id: selectedTemplateId,
-            params: {
-                fields: 'id,displayName',
-            },
-        },
-        {
-            enabled: !loading && !!selectedTemplateId && !isDefaultTemplate && isSameProgram,
-        },
-    );
-    const loadingTemplate = loading || isLoading;
-
     const computedLabel = useMemo(() => {
-        if (loadingTemplate) return '...';
-        if (eventFilterLabel) {
-            return eventFilterLabel.displayName;
+        if (loadingTemplates) return '...';
+
+        if (isSameProgram && !isDefaultTemplate && selectedTemplete) {
+            return selectedTemplete.name;
         }
 
         return i18n.t('Event list');
-    }, [eventFilterLabel, loadingTemplate]);
+    }, [isDefaultTemplate, isSameProgram, loadingTemplates, selectedTemplete]);
 
     return {
         label: computedLabel,
