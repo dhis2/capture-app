@@ -11,9 +11,9 @@ type ValidationOptions = {
 type Props = {
     value: ?Object,
     width: number,
-    maxWidth?: ?number,
-    calendarWidth?: ?number,
-    inputWidth?: ?number,
+    maxWidth?: ?string,
+    calendarWidth?: ?string,
+    inputWidth?: ?string,
     disabled?: ?boolean,
     onBlur: (value: Object, options: ValidationOptions) => void,
     onFocus?: ?() => void,

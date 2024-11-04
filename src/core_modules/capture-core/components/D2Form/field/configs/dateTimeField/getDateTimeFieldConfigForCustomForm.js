@@ -8,8 +8,8 @@ import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 export const getDateTimeFieldConfigForCustomForm = (metaData: MetaDataElement, options: Object, querySingleResource: QuerySingleResource) => {
     const props = createProps({
         dateWidth: '100%',
-        dateMaxWidth: 350,
-        calendarWidth: 350,
+        dateMaxWidth: '350px',
+        calendarWidth: '350px',
         orientation: orientations.HORIZONTAL,
         shrinkDisabled: false,
     }, metaData);

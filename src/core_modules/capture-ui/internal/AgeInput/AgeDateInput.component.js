@@ -18,8 +18,8 @@ class AgeDateInputPlain extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DateField
                 value={value || ''}
-                width={150}
-                calendarWidth={350}
+                width="150px"
+                calendarWidth="350px"
                 {...passOnProps}
             />
 
