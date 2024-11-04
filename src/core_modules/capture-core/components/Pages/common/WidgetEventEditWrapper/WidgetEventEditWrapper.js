@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { IconArrowLeft24, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { pageStatuses } from '../../EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
@@ -16,6 +17,7 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     const {
         programId,
         stageId,
+        onGoBack,
     } = passOnProps;
 
     const {
@@ -56,12 +58,20 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     }
 
     return (
-        <WidgetEventEdit
-            {...passOnProps}
-            stage={stage}
-            formFoundation={formFoundation}
-            programId={programId}
-            stageId={stageId}
-        />
+        <>
+            <div>
+                <Button secondary onClick={onGoBack}>
+                    <IconArrowLeft24 />
+                    {i18n.t('Back to all stages and events')}
+                </Button>
+            </div>
+            <WidgetEventEdit
+                {...passOnProps}
+                stage={stage}
+                formFoundation={formFoundation}
+                programId={programId}
+                stageId={stageId}
+            />
+        </>
     );
 };
