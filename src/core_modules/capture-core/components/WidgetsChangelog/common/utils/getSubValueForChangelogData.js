@@ -10,6 +10,7 @@ type SubValueTEAProps = {
     programId: string,
     absoluteApiPath: string,
     querySingleResource: QuerySingleResource,
+    latestValue?: boolean,
 };
 
 type SubValuesDataElementProps = {
@@ -17,6 +18,7 @@ type SubValuesDataElementProps = {
     querySingleResource: QuerySingleResource,
     eventId: string,
     absoluteApiPath: string,
+    latestValue?: boolean,
 };
 
 const buildTEAUrlByElementType: {|
@@ -28,13 +30,16 @@ const buildTEAUrlByElementType: {|
         programId,
         absoluteApiPath,
         querySingleResource,
+        latestValue,
     }: SubValueTEAProps) => {
         const { teiId, value } = trackedEntity;
         if (!value) return null;
         try {
-            const { id, displayName: name, storageStatus } = await querySingleResource({ resource: `fileResources/${value}?fields=id,name,storageStatus` });
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-            if (storageStatus === 'NONE') { return 'File'; }
+            if (!latestValue) {
+                return name;
+            }
 
             return {
                 id,
@@ -53,14 +58,17 @@ const buildTEAUrlByElementType: {|
         attributeId,
         programId,
         absoluteApiPath,
+        latestValue,
         querySingleResource,
     }: SubValueTEAProps) => {
         const { teiId, value } = trackedEntity;
         if (!value) return null;
         try {
-            const { id, displayName: name, storageStatus } = await querySingleResource({ resource: `fileResources/${value}?fields=id,name,storageStatus` });
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-            if (storageStatus === 'NONE') { return 'Image'; }
+            if (!latestValue) {
+                return name;
+            }
 
             return {
                 id,
@@ -80,14 +88,16 @@ const buildTEAUrlByElementType: {|
 const buildDataElementUrlByElementType: {|
 [string]: Function,
 |} = {
-    [dataElementTypes.FILE_RESOURCE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath }: SubValuesDataElementProps) => {
+    [dataElementTypes.FILE_RESOURCE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 
         try {
-            const { id, displayName: name, storageStatus } = await querySingleResource({ resource: `fileResources/${value}?fields=id,name,storageStatus` });
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
-            if (storageStatus === 'NONE') { return 'File'; }
+            if (!latestValue) {
+                return name;
+            }
 
             return {
                 id,
@@ -101,13 +111,16 @@ const buildDataElementUrlByElementType: {|
             return null;
         }
     },
-    [dataElementTypes.IMAGE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath }: SubValuesDataElementProps) => {
+    [dataElementTypes.IMAGE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;
 
         try {
-            const { id, displayName: name, storageStatus } = await querySingleResource({ resource: `fileResources/${value}?fields=id,name,storageStatus` });
-            if (storageStatus === 'NONE') { return 'Image'; }
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
+
+            if (!latestValue) {
+                return name;
+            }
 
             return {
                 id,
