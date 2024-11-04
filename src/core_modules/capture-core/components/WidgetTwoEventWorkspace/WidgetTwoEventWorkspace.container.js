@@ -6,14 +6,13 @@ import { withStyles } from '@material-ui/core/';
 import type { Props } from './WidgetTwoEventWorkspace.types';
 import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { Widget } from '../Widget';
-import { useLinkedEventByOriginId } from './hooks/useLinkedEventByOriginId';
+import { useLinkedEventByOriginId, useClientDataValues } from './hooks';
 import { WidgetTwoEventWorkspaceComponent } from './WidgetTwoEventWorkspace.component';
 import { OverflowMenuComponent } from './OverflowMenu';
 import {
     EnrollmentPageKeys,
 } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
-import { useClientDataValues } from './hooks/useClientDataValues';
 
 const styles = {
     menu: {
@@ -50,6 +49,7 @@ const WidgetTwoEventWorkspacePlain = ({
         linkedEvent,
         relationship,
         dataValues,
+        relationshipType,
         isError: isLinkedEventError,
         isLoading: isLinkedEventLoading,
     } = useLinkedEventByOriginId({ originEventId: eventId });
@@ -97,8 +97,10 @@ const WidgetTwoEventWorkspacePlain = ({
                     <OverflowMenuComponent
                         linkedEvent={linkedEvent}
                         relationshipId={relationship}
+                        relationshipType={relationshipType}
                         orgUnitId={orgUnitId}
                         originEventId={eventId}
+                        stageWriteAccess={stage?.access?.data?.write}
                     />
                 </div>
             )}

@@ -4,4 +4,6 @@ export type Props = {
     relationshipId: string,
     orgUnitId: string,
     originEventId: string,
+    stageWriteAccess: boolean,
+    relationshipType: string,
 };

@@ -61,7 +61,7 @@ export const UnlinkAndDeleteModal = ({
             <ModalContent>
                 <p>
                     {i18n.t(
-                        'Are you sure you want to unlink and delete the event? This will permanently remove the event and all related data.',
+                        'Are you sure you want delete the relationsship and the related event? This will permanently remove the event and all related data.',
                     )}
                 </p>
             </ModalContent>

@@ -61,7 +61,7 @@ export const UnlinkModal = ({
                 {i18n.t('Unlink relationship')}
             </ModalTitle>
             <ModalContent>
-                <p>{i18n.t('Are you sure you want to unlink this relationship?')}</p>
+                <p>{i18n.t('Are you sure you want to delete the relationship between these two events? This will only delete the relationship, not the other event')}</p>
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
