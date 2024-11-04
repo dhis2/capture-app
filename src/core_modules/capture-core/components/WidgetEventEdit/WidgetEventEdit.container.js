@@ -33,7 +33,7 @@ import { EventChangelogWrapper } from './EventChangelogWrapper';
 import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from './constants/status.const';
-import { useAuthorities } from './hooks';
+import { useAuthorities } from '../../utils/authority/useAuthorities';
 import { startLoadDataEntry } from '../DataEntry';
 
 const styles = {
@@ -103,8 +103,8 @@ export const WidgetEventEditPlain = ({
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
 
     const eventAccess = getProgramEventAccess(programId, stageId);
-    const { canEditCompletedEvent } = useAuthorities();
-    const blockEntryForm = stage.blockEntryForm && !canEditCompletedEvent && eventStatus === eventStatuses.COMPLETED;
+    const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
     const disableEdit = !eventAccess?.write || blockEntryForm;
 
     const tooltipContent = blockEntryForm ?

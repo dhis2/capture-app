@@ -70,14 +70,21 @@ const runRulesForEditSingleEvent = async ({
     if (program instanceof TrackerProgram) {
         const { enrollment, attributeValues } = state.enrollmentDomain;
 
+        const { apiOtherEvents, apiCurrentEventOriginal } = enrollment.events.reduce((acc, apiEvent) => {
+            if (apiEvent.event === currentEvent.eventId) {
+                acc.apiCurrentEventOriginal = apiEvent;
+            } else {
+                acc.apiOtherEvents.push(apiEvent);
+            }
+            return acc;
+        }, { apiOtherEvents: [] });
+
         effects = getApplicableRuleEffectsForTrackerProgram({
             program,
             stage,
             orgUnit,
-            currentEvent,
-            otherEvents: prepareEnrollmentEventsForRulesEngine(
-                enrollment?.events.filter(enrollmentEvent => enrollmentEvent.event !== currentEvent.eventId),
-            ),
+            currentEvent: { ...currentEvent, createdAt: apiCurrentEventOriginal.createdAt },
+            otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
         });

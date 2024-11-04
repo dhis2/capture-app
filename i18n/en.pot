@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
-"PO-Revision-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"PO-Revision-Date: 2024-10-25T18:18:11.518Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1078,6 +1078,9 @@ msgstr "Mark as cancelled"
 
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
+
+msgid "You do not have access to delete this enrollment"
+msgstr "You do not have access to delete this enrollment"
 
 msgid "Delete enrollment"
 msgstr "Delete enrollment"

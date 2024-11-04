@@ -6,6 +6,10 @@ The plugin framework is currently an experimental feature and is subject to chan
 We are working on improving both the technology and the way you use it. We will provide more documentation and examples as we progress.
 :::
 
+:::info Supported versions
+The plugin framework is supported in **DHIS2 version 40.5 and later**.
+:::
+
 ## What are plugins?
 Plugins are a way to extend the functionality of our core applications within the DHIS2 ecosystem.
 These plugins will act and feel like native widgets / components, and allow you to write custom code that will be injected into the core applications,
