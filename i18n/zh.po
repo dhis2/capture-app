@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
+"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -610,44 +610,6 @@ msgstr "注意"
 msgid "Close the notice"
 msgstr "关闭通知"
 
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "为 {{programName}} 使用新的注册仪表板"
-
-msgid "Opt in for {{programName}}"
-msgstr "选择加入 {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is certain"
-" functionality from Tracker Capture that has not yet been added, including "
-"relationship and referral functionality. The work on including this Tracker "
-"functionality in Capture is ongoing and will be added in upcoming app "
-"releases."
-msgstr ""
-"通过单击下面的选择加入，您将开始使用 Capture 应用程序中的新注册仪表板来执行此跟踪项目。目前，Tracker Capture "
-"的某些功能尚未添加，包括关系和推荐功能。在 Capture 中包含此 Tracker 功能的工作正在进行中，并将添加到即将发布的应用程序中。"
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr "核心团队感谢对目前正在 Beta 测试的这个新功能的任何反馈，请报告 DHIS2 JIRA 项目中的任何问题和反馈。"
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr "单击下面的按钮，为所有用户选择加入此 Tracker 程序的 Capture 应用程序（测试版）中的新注册仪表板功能。"
-
-msgid "Yes, opt in"
-msgstr "是的，选择加入"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "停止为 {{programName}} 使用新的注册信息中心"
-
-msgid "Opt out for {{programName}}"
-msgstr "选择退出 {{programName}}"
-
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "ID为“ {{enrollmentId}}”的报名不存在"
 
@@ -735,9 +697,6 @@ msgstr "查看此项目中的工作清单。"
 
 msgid "Page is missing required values from URL"
 msgstr "页面缺少 URL 中的必需值"
-
-msgid "Program is not valid"
-msgstr "项目无效"
 
 msgid "Org unit is not valid with current program"
 msgstr "机构对当前项目无效"
@@ -1232,6 +1191,12 @@ msgstr "无法加载报名的小部件。请稍后再试"
 msgid "Follow-up"
 msgstr "后续"
 
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
+
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -1420,11 +1385,6 @@ msgstr "{{ linkableStageLabel }} 没有可链接的事件"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "关系不明确，请联系系统管理员"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr "完成此{{currentStageLabel}}后，在下一步中输入{{linkableStageLabel}}详细信息。"
-
 msgid "Enter details now"
 msgstr "立即输入详细信息"
 
@@ -1506,6 +1466,9 @@ msgstr "变更日志"
 msgid "No changes to display"
 msgstr "没有显示任何变化"
 
+msgid "Updated"
+msgstr "更新"
+
 msgid "Created"
 msgstr "已创建"
 
@@ -1523,6 +1486,9 @@ msgstr "数据条目"
 
 msgid "Change"
 msgstr "改变"
+
+msgid "Value"
+msgstr "价值"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "新的 {{trackedEntityTypeName}} 关系"

@@ -78,8 +78,8 @@ export const WidgetEnrollmentPlain = ({
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
 
-    const orgUnitClientValue = { name: orgUnitName, ancestors };
-    const ownerOrgUnitClientValue = { name: ownerOrgUnitName, ancestors: ownerAncestors };
+    const orgUnitClientValue = { id: enrollment?.orgUnit, name: orgUnitName, ancestors };
+    const ownerOrgUnitClientValue = { id: ownerOrgUnit?.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
 
     return (
         <div data-test="widget-enrollment">
@@ -136,7 +136,9 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Started at: ')}
+                            {i18n.t('Started at{{escape}}', {
+                                escape: ':',
+                            })}
                             {convertValue(orgUnitClientValue, type)}
                         </div>
 
@@ -144,7 +146,9 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Owned by: ')}
+                            {i18n.t('Owned by{{escape}}', {
+                                escape: ':',
+                            })}
                             {convertValue(ownerOrgUnitClientValue, type)}
                         </div>
 

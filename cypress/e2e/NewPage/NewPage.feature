@@ -7,7 +7,6 @@ Feature: User creates a new entries from the registration page
   @v>=41
   Scenario: New person in Tracker Program > Filling the Allergies with multiple options
     Given you are in the WHO RMNCH program registration page
-    And the data store is clean
     When you fill in multiple Allergies options
     Then you can see the multiple selections in the form
     And you fill the WHO RMNCH program registration form with its required unique values
@@ -103,14 +102,12 @@ Feature: User creates a new entries from the registration page
 
   Scenario: New person > Submitting the form with unique name navigates you to the user dashboard
     Given you are in the Person registration page
-    And the data store is clean
     When you fill in a unique first name
     And you click the save person submit button
     Then you are navigated to the enrollment dashboard page without enrollment
 
   Scenario: New person > Submitting the form from the duplicates modal navigates you to the user dashboard
     Given you are in the Person registration page
-    And the data store is clean
     When you fill in the first name with value that has duplicates
     And you click the save person submit button
     And you see the possible duplicates modal
@@ -152,7 +149,6 @@ Feature: User creates a new entries from the registration page
 
   Scenario: New person in Tracker Program > Submitting the form with unique values navigates you to the user dashboard
     Given you are in the WHO RMNCH program registration page
-    And the data store is clean
     When you fill the WHO RMNCH program registration form with its required unique values
     And you click the save person submit button
     Then you see the enrollment event Edit page
@@ -166,7 +162,6 @@ Feature: User creates a new entries from the registration page
 
   Scenario: New person in Tracker Program > Submitting the form from the duplicates modal navigates you to the user dashboard
     Given you are in the WHO RMNCH program registration page
-    And the data store is clean
     When you fill the WHO RMNCH program registration form with its required values
     And you click the save person submit button
     And you see the possible duplicates modal
@@ -192,10 +187,12 @@ Feature: User creates a new entries from the registration page
 
   Scenario: Go to enrollment event when Open data entry form after enrollment is checked
     Given you are in the Malaria case diagnosis, treatment and investigation program registration page
-    And the data store is clean
     And you fill the Malaria case diagnosis registration form with values
     And you click the save malaria entity submit button
     Then you see the enrollment event Edit page
+    # Cleanup
+    And you delete the recently added malaria entity
+
 
 ## New enrollment of existing TEI
 

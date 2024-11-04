@@ -27,6 +27,7 @@ type EventMain = {
     +status?: $Values<eventStatuses>,
     +occurredAt?: string,
     +scheduledAt?: string,
+    +createdAt?: string,
 };
 
 export type EventValues = {

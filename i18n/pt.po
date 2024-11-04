@@ -4,16 +4,20 @@
 # Fernando Jorge Bade, 2023
 # Philip Larsen Donnelly, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
-# Sheila André <sandre@saudigitus.org>, 2024
 # Ge Joao <gsimango@saudigitus.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
+# Sheila André <sandre@saudigitus.org>, 2024
+# Jason Pickering <jason@dhis2.org>, 2024
+# Helton Dias, 2024
+# Shelsea Chumaio, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Shelsea Chumaio, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -530,7 +534,7 @@ msgid "Type to filter options"
 msgstr ""
 
 msgid "No match found"
-msgstr ""
+msgstr "Nenhuma correspondência encontrada"
 
 msgid "Search"
 msgstr "Pesquisar"
@@ -616,15 +620,6 @@ msgstr "Programa não existe"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "Ligado"
-
-msgid "Offline"
-msgstr "Desligado"
-
-msgid "Syncing"
-msgstr "Sincronizando"
-
 msgid "Add note"
 msgstr "Adicionar uma nota"
 
@@ -642,54 +637,6 @@ msgstr "Aviso"
 
 msgid "Close the notice"
 msgstr "Fechar o aviso"
-
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "Use o novo painel de inscrição para {{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "Opte por {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is certain"
-" functionality from Tracker Capture that has not yet been added, including "
-"relationship and referral functionality. The work on including this Tracker "
-"functionality in Capture is ongoing and will be added in upcoming app "
-"releases."
-msgstr ""
-"Ao clicar em aceitar abaixo, começará a usar o novo painel de registro no "
-"aplicativo Capture para este programa Rastreador. No momento, há certas "
-"funcionalidades do Tracker Capture que ainda não foram adicionadas, "
-"incluindo funcionalidade de relacionamento e referência. O trabalho para "
-"incluir essa funcionalidade do Rastreador no Capture está em andamento e "
-"será adicionado nas próximas versões do aplicativo."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"A equipe principal agradece qualquer feedback sobre esta nova funcionalidade"
-" que está sendo testada na versão beta. Relate quaisquer problemas e "
-"comentários no projeto DHIS2 JIRA."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"Clique no botão abaixo para aceitar a nova funcionalidade do painel de "
-"registro no aplicativo Capture (beta) para este programa Rastreador para "
-"todos os utilizadores."
-
-msgid "Yes, opt in"
-msgstr "Sim, aceite"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "Pare de usar o novo painel de inscrição para {{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "Desativar {{programName}}"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
@@ -785,9 +732,6 @@ msgstr "Veja a lista de trabalho neste programa."
 
 msgid "Page is missing required values from URL"
 msgstr "A página tem em falta os valores obrigatórios do URL"
-
-msgid "Program is not valid"
-msgstr "O programa não é válido"
 
 msgid "Org unit is not valid with current program"
 msgstr "A unidade organizacional não é válida com o programa atual"
@@ -1222,6 +1166,9 @@ msgstr "Marcar como cancelado"
 msgid "Mark incomplete"
 msgstr "Marca incompleta"
 
+msgid "You do not have access to delete this enrollment"
+msgstr ""
+
 msgid "Delete enrollment"
 msgstr "Excluir inscrição"
 
@@ -1242,7 +1189,7 @@ msgid "Mark for follow-up"
 msgstr "Marcar para acompanhamento"
 
 msgid "Transfer"
-msgstr ""
+msgstr "Transferir"
 
 msgid "An error occurred while transferring ownership"
 msgstr ""
@@ -1305,6 +1252,12 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Acompanhamento"
+
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "Cancelado"
@@ -1508,11 +1461,6 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-
 msgid "Enter details now"
 msgstr ""
 
@@ -1594,10 +1542,13 @@ msgid "Scheduled"
 msgstr "Agendado"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Registo de mudanças"
 
 msgid "No changes to display"
 msgstr ""
+
+msgid "Updated"
+msgstr "Actualizado"
 
 msgid "Created"
 msgstr "Criado"
@@ -1616,6 +1567,9 @@ msgstr "Item de dados"
 
 msgid "Change"
 msgstr ""
+
+msgid "Value"
+msgstr "Valor"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""

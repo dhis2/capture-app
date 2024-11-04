@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-04T07:46:23.442Z\n"
-"PO-Revision-Date: 2024-11-04T07:46:23.442Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"PO-Revision-Date: 2024-10-25T18:18:11.518Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -616,54 +616,6 @@ msgstr "Notice"
 msgid "Close the notice"
 msgstr "Close the notice"
 
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "Use new Enrollment dashboard for {{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "Opt in for {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is "
-"certain functionality from Tracker Capture that has not yet been added, "
-"including relationship and referral functionality. The work on including "
-"this Tracker functionality in Capture is ongoing and will be added in "
-"upcoming app releases."
-msgstr ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is "
-"certain functionality from Tracker Capture that has not yet been added, "
-"including relationship and referral functionality. The work on including "
-"this Tracker functionality in Capture is ongoing and will be added in "
-"upcoming app releases."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-
-msgid "Yes, opt in"
-msgstr "Yes, opt in"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "Stop using new Enrollment dashboard for {{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "Opt out for {{programName}}"
-
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
 
@@ -722,8 +674,12 @@ msgstr "There are no active enrollments."
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "Add new enrollment for {{teiDisplayName}} in this program."
 
-msgid "No access to program owner."
-msgstr "No access to program owner."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -752,9 +708,6 @@ msgstr "View working list in this program."
 
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
-
-msgid "Program is not valid"
-msgstr "Program is not valid"
 
 msgid "Org unit is not valid with current program"
 msgstr "Org unit is not valid with current program"
@@ -1128,8 +1081,8 @@ msgstr "No tracked entity types available"
 msgid "Assigned to"
 msgstr "Assigned to"
 
-msgid "You don't have access to edit this assignee"
-msgstr "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
+msgstr "You don't have access to edit the assigned user"
 
 msgid "Edit"
 msgstr "Edit"
@@ -1137,8 +1090,8 @@ msgstr "Edit"
 msgid "No one is assigned to this event"
 msgstr "No one is assigned to this event"
 
-msgid "You don't have access to assign an assignee"
-msgstr "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
+msgstr "You don't have access to assign a user to this event"
 
 msgid "Assign"
 msgstr "Assign"
@@ -1186,6 +1139,9 @@ msgstr "Mark as cancelled"
 
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
+
+msgid "You do not have access to delete this enrollment"
+msgstr "You do not have access to delete this enrollment"
 
 msgid "Delete enrollment"
 msgstr "Delete enrollment"
@@ -1274,6 +1230,12 @@ msgstr "Enrollment widget could not be loaded. Please try again later"
 
 msgid "Follow-up"
 msgstr "Follow-up"
+
+msgid "Started at{{escape}}"
+msgstr "Started at{{escape}}"
+
+msgid "Owned by{{escape}}"
+msgstr "Owned by{{escape}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
@@ -1462,13 +1424,6 @@ msgstr "{{ linkableStageLabel }} has no linkable events"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Enter details now"
 
@@ -1569,6 +1524,9 @@ msgstr "Changelog"
 msgid "No changes to display"
 msgstr "No changes to display"
 
+msgid "Updated"
+msgstr "Updated"
+
 msgid "Created"
 msgstr "Created"
 
@@ -1586,6 +1544,9 @@ msgstr "Data item"
 
 msgid "Change"
 msgstr "Change"
+
+msgid "Value"
+msgstr "Value"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"

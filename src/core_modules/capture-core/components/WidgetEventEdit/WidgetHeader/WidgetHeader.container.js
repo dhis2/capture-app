@@ -6,6 +6,7 @@ import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, space
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
+import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
@@ -15,7 +16,6 @@ import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCate
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from '../constants/status.const';
-import { useAuthorities } from '../hooks';
 import type { PlainProps, Props } from './WidgetHeader.types';
 
 const styles = {
@@ -51,8 +51,8 @@ export const WidgetHeaderPlain = ({
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const eventAccess = getProgramEventAccess(programId, stage.id);
-    const { canEditCompletedEvent } = useAuthorities();
-    const blockEntryForm = stage.blockEntryForm && !canEditCompletedEvent && eventStatus === eventStatuses.COMPLETED;
+    const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
+    const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
     const disableEdit = !eventAccess?.write || blockEntryForm;
 
     const tooltipContent = blockEntryForm

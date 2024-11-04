@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-09-02T11:08:16.281Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -615,15 +615,6 @@ msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 "Выбранная программа недействительна для выбранной организационной единицы"
 
-msgid "Online"
-msgstr "Онлайн"
-
-msgid "Offline"
-msgstr "Оффлайн"
-
-msgid "Syncing"
-msgstr "Синхронизация"
-
 msgid "Add note"
 msgstr "Добавить заметку"
 
@@ -641,55 +632,6 @@ msgstr "Заметка"
 
 msgid "Close the notice"
 msgstr "Закрыть заметку"
-
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr ""
-"Использовать новую регистрационную панель для программы{{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "Применить для программы {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is certain"
-" functionality from Tracker Capture that has not yet been added, including "
-"relationship and referral functionality. The work on including this Tracker "
-"functionality in Capture is ongoing and will be added in upcoming app "
-"releases."
-msgstr ""
-"Нажав \"применить\" ниже, вы получите доступ к новой панель регистрации в "
-"приложении Capture для данной программы. На данный момент некоторые функции "
-"из приложения Tracker Capture еще не добавлены, в том числе функции "
-"\"Связи\" и \"Направления\". Эти функции будут включены в приложение Capture"
-" в ближайших релизах."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"Команда DHIS2 будет признательна за любые отзывы касательно данного "
-"функционала, проходящего в данный момент бета-тестирование. Пожалуйста, "
-"сообщайте о любых проблемах и делитесь отзывами в проекте DHIS2 JIRA."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"Нажмите на кнопку ниже, чтобы дать доступ всем пользователям данной "
-"программы к новой панели регистрации в приложении Capture (бета-версия)."
-
-msgid "Yes, opt in"
-msgstr "Да, получить доступ"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr ""
-"Перестать использовать новую панель регистрации для программы "
-"{{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "Отменить доступ для программы {{programName}}"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
@@ -792,9 +734,6 @@ msgstr "Просмотреть рабочий список в данной пр�
 
 msgid "Page is missing required values from URL"
 msgstr "Страница не содержит необходимых данных в URL адресе"
-
-msgid "Program is not valid"
-msgstr "Программа недействительна"
 
 msgid "Org unit is not valid with current program"
 msgstr "Организационная единица не действительна для данной программы"
@@ -1228,6 +1167,9 @@ msgstr "Присвоить метку \"Отменено\""
 msgid "Mark incomplete"
 msgstr " Присвоить метку \"Незавершено\""
 
+msgid "You do not have access to delete this enrollment"
+msgstr ""
+
 msgid "Delete enrollment"
 msgstr "Удалить регистрационную запись"
 
@@ -1319,6 +1261,12 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Наблюдать"
+
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "Отменен/а/о"
@@ -1541,13 +1489,6 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Неопределенные связи, обратитесь к системному администратору"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Ввести данные этапа {{linkableStageLabel}} на следующем шаге после "
-"заполнения данных данного этапа {{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Ввести данные сейчас"
 
@@ -1632,6 +1573,9 @@ msgstr "Лог изменений"
 msgid "No changes to display"
 msgstr "Нет изменений для отображения"
 
+msgid "Updated"
+msgstr "Обновлено"
+
 msgid "Created"
 msgstr "Создан/а/о"
 
@@ -1649,6 +1593,9 @@ msgstr "Переменная"
 
 msgid "Change"
 msgstr "Изменить"
+
+msgid "Value"
+msgstr "Значение"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Новая связь для объекта {{trackedEntityTypeName}} "
