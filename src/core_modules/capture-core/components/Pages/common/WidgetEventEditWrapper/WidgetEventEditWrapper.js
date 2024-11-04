@@ -60,7 +60,7 @@ export const WidgetEventEditWrapper = ({ pageStatus, ...passOnProps }: WidgetPro
     return (
         <>
             <div>
-                <Button secondary onClick={onGoBack}>
+                <Button secondary onClick={onGoBack} dataTest="enrollment-edit-event-back-button">
                     <IconArrowLeft24 />
                     {i18n.t('Back to all stages and events')}
                 </Button>

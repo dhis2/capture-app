@@ -91,6 +91,7 @@ export const WidgetHeaderPlain = ({
                                 disabled={disableEdit}
                                 icon={<IconEdit24 />}
                                 onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
+                                data-test="widget-enrollment-event-edit-button"
                             >
                                 {i18n.t('Edit event')}
                             </Button>
