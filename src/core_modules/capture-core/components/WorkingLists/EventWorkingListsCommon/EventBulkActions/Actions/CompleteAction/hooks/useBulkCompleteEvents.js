@@ -45,6 +45,8 @@ export const useBulkCompleteEvents = ({
         },
         {
             enabled: Object.keys(selectedRows).length > 0 && isCompleteDialogOpen,
+            staleTime: 0,
+            cacheTime: 0,
             select: (data: any) => {
                 const apiEvents = handleAPIResponse(REQUESTED_ENTITIES.events, data);
 

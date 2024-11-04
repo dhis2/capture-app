@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo } from 'react';
 import { useAlert, useConfig, useDataEngine } from '@dhis2/app-runtime';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
+import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
 import { errorCreator, FEATURES, hasAPISupportForFeature } from '../../../../../../../../capture-core-utils';
 import type { ProgramStage } from '../../../../../../../metaData';
@@ -91,10 +91,23 @@ export const useCompleteBulkEnrollments = ({
 }: Props) => {
     const { serverVersion: { minor } } = useConfig();
     const dataEngine = useDataEngine();
+    const queryClient = useQueryClient();
     const { show: showAlert } = useAlert(
         ({ message }) => message,
         { critical: true },
     );
+
+    const removeQueries = () => {
+        queryClient.removeQueries(
+            [
+                ReactQueryAppNamespace,
+                'WorkingLists',
+                'BulkActionBar',
+                'CompleteAction',
+                'trackedEntities',
+            ],
+        );
+    };
 
     const {
         data: trackedEntities,
@@ -149,8 +162,10 @@ export const useCompleteBulkEnrollments = ({
         {
             onSuccess: () => {
                 onUpdateList();
+                removeQueries();
             },
             onError: (serverResponse, variables) => {
+                removeQueries();
                 showAlert({ message: i18n.t('An error occurred when completing the enrollments') });
                 log.error(
                     errorCreator('An error occurred when completing enrollments')({
@@ -172,6 +187,7 @@ export const useCompleteBulkEnrollments = ({
             onSuccess: (serverResponse, { enrollments }) => {
                 const enrollmentIds = enrollments.map(enrollment => enrollment.trackedEntity);
                 removeRowsFromSelection(enrollmentIds);
+                removeQueries();
                 onUpdateList(true);
             },
             onError: (serverResponse, variables) => {
