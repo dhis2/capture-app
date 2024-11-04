@@ -11,7 +11,7 @@ const changeEnrollmentAndEventsStatus = () => (
             const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'FZAa7j0muDj');
             const eventToDelete = enrollment.events.find(e => e.programStage === 'eHvTba5ijAh');
             const { events, ...rest } = enrollment;
-            const enrollmentToUpdate = { ...rest, status: 'ACTIVE' };
+            const enrollmentToUpdate = { ...rest, status: 'ACTIVE', completedAt: null, completedBy: null };
 
             return cy
                 .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
