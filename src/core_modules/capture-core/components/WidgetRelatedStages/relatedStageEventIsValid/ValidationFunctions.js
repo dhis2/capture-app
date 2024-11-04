@@ -5,21 +5,31 @@ import { actions as RelatedStageModes } from '../constants';
 
 type Props = {
     scheduledAt: ?string,
+    scheduledAtFormatError: ?{error: ?string, errorCode: ?string},
     orgUnit: ?Object,
     linkedEventId: ?string,
     setErrorMessages: (messages: Object) => void,
 };
 
-export const isScheduledDateValid = (scheduledDate: string) => isValidDate(scheduledDate);
+export const isScheduledDateValid = (scheduledDate: ?string, scheduledAtFormatError: ?{error: ?string, errorCode: ?string}) => {
+    if (!scheduledDate) {
+        return { valid: false, errorMessage: i18n.t('Please enter a date') };
+    }
+    const { valid, errorMessage } = isValidDate(scheduledDate, scheduledAtFormatError);
+    return {
+        valid,
+        errorMessage,
+    };
+};
 
 const scheduleInOrgUnit = (props) => {
-    const { scheduledAt, orgUnit, setErrorMessages } = props ?? {};
-    const scheduledAtIsValid = !!scheduledAt && isScheduledDateValid(scheduledAt);
+    const { scheduledAt, scheduledAtFormatError, orgUnit, setErrorMessages } = props ?? {};
+    const { valid: scheduledAtIsValid, errorMessage } = isScheduledDateValid(scheduledAt, scheduledAtFormatError);
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
     if (!scheduledAtIsValid) {
         setErrorMessages({
-            scheduledAt: i18n.t('Please provide a valid date'),
+            scheduledAt: errorMessage,
         });
     } else {
         setErrorMessages({
