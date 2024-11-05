@@ -1,12 +1,12 @@
 // @flow
 import moment from 'moment';
 import {
-    filterTypesObject,
-    dateFilterTypes,
     type BooleanFilterData,
-    type TextFilterData,
-    type NumericFilterData,
     type DateFilterData,
+    dateFilterTypes,
+    filterTypesObject,
+    type NumericFilterData,
+    type TextFilterData,
 } from '../../../../WorkingListsBase';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
 import { ADDITIONAL_FILTERS } from '../../../helpers';
@@ -108,7 +108,7 @@ export const convertMainFilters = ({
         }
 
         const mainValue = mainFiltersTable[key](filter);
-        if (mainValue) {
+        if (mainValue !== undefined) {
             if (key === MAIN_FILTERS.ASSIGNEE) {
                 return { ...acc, ...mainValue };
             }

@@ -10,13 +10,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Yayra Gomado <ygomado@hispwca.org>, 2024
 # Bram Piot <bram.piot@gmail.com>, 2024
+# Jason Pickering <jason@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Bram Piot <bram.piot@gmail.com>, 2024\n"
+"Last-Translator: Jason Pickering <jason@dhis2.org>, 2024\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -739,9 +740,6 @@ msgstr "Afficher la liste de travail dans ce programme."
 msgid "Page is missing required values from URL"
 msgstr "Des valeurs obligatoires ne figurent pas dans l'URL de la page"
 
-msgid "Program is not valid"
-msgstr "Le programme n'est pas valide"
-
 msgid "Org unit is not valid with current program"
 msgstr "L'unité d'organisation n'est pas valide avec le programme actuel"
 
@@ -1256,6 +1254,12 @@ msgstr ""
 msgid "Follow-up"
 msgstr "Suivi"
 
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
+
 msgid "Cancelled"
 msgstr "Annulé"
 
@@ -1465,11 +1469,6 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-
 msgid "Enter details now"
 msgstr "Saisir les détails maintenant"
 
@@ -1554,6 +1553,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Updated"
+msgstr "Mis-à-jour"
+
 msgid "Created"
 msgstr "Créé"
 
@@ -1571,6 +1573,9 @@ msgstr "Item de données"
 
 msgid "Change"
 msgstr "Modifier"
+
+msgid "Value"
+msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
