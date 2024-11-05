@@ -3,9 +3,7 @@ import { ofType } from 'redux-observable';
 import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
-import moment from 'moment';
 import { EMPTY } from 'rxjs';
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
@@ -38,7 +36,6 @@ import {
 import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString';
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
 import { enrollmentEditEventActionTypes } from '../../Pages/EnrollmentEditEvent';
-import { statusTypes } from '../../../events/statusTypes';
 
 const getDataEntryId = (event): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -107,13 +104,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore,
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
 
-            if (mainDataServerValues.status === statusTypes.COMPLETED && !prevEventMainData.completedAt) {
-                mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
-            }
-            if (mainDataServerValues.status === statusTypes.ACTIVE) {
-                mainDataServerValues.completedAt = null;
-                mainDataServerValues.completedBy = null;
-            }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
 
@@ -274,10 +264,6 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, sto
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
-
-            if (!prevEventMainData.completedAt) {
-                mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
-            }
 
             const editEvent = {
                 ...mainDataServerValues,
