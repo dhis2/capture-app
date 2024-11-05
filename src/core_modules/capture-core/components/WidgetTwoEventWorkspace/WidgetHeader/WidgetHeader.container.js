@@ -10,7 +10,6 @@ import { EnrollmentPageKeys }
     from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import type { PlainProps, Props } from './WidgetHeader.types';
-import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
 
 const styles = {
     menu: {
@@ -21,20 +20,11 @@ const styles = {
     },
 };
 
-const getTitle = ({ type, stage }) => {
-    if (type === WidgetTwoEventWorkspaceWrapperTypes.EDIT_EVENT) {
-        return i18n.t('Referral details');
-    }
 
-    return stage.name;
-};
-
-const WidgetHeaderPlain = ({ stage, linkedEvent, orgUnitId, currentPage, type, classes }: Props) => {
+const WidgetHeaderPlain = ({ linkedStage, linkedEvent, orgUnitId, currentPage, classes }: Props) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const { push } = useHistory();
-    const { icon } = stage;
-    const title = getTitle({ type, stage });
-
+    const { icon } = linkedStage;
     return (
         <>
             {icon && (
@@ -48,7 +38,7 @@ const WidgetHeaderPlain = ({ stage, linkedEvent, orgUnitId, currentPage, type, c
                     />
                 </div>
             )}
-            <span> {title} </span>
+            <span> {linkedStage.name} </span>
             {currentPage === EnrollmentPageKeys.VIEW_EVENT && (
                 <div className={classes.menu}>
                     <OverflowButton

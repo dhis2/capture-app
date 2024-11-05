@@ -39,11 +39,11 @@ const styles = {
     },
 };
 
-const WidgetWrapperPlain = ({ widget, type, classes }: Props) => {
+const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Props) => {
     if (type === WidgetTwoEventWorkspaceWrapperTypes.EDIT_EVENT) {
         return (
             <div className={classes.container}>
-                <div className={classes.header}> {i18n.t('Refferal response')} </div>
+                <div className={classes.header}> {stage?.name} </div>
                 <div className={classes.referalResponse}>
                     <div className={classes.linkedEvent}>
                         <span className={classes.icon}>
@@ -53,7 +53,12 @@ const WidgetWrapperPlain = ({ widget, type, classes }: Props) => {
                     </div>
                     <div className={classes.decription}>
                         {i18n.t(
-                            'This refferal response event is linked to a Refferal details event. Review the linked event details before entering data below',
+                            'This {{stageName}} event is linked to a {{linkedStageName}} event. Review the linked event details before entering data below',
+                            {
+                                linkedStageName: linkedStage?.name,
+                                stageName: stage?.name,
+                                interpolation: { escapeValue: false },
+                            },
                         )}
                     </div>
                     {widget}

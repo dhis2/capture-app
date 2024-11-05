@@ -15,6 +15,7 @@ export const WidgetTwoEventWorkspace = ({
     programId,
     orgUnitId,
     currentPage,
+    stage,
     type,
 }: Props) => {
     const {
@@ -26,7 +27,7 @@ export const WidgetTwoEventWorkspace = ({
 
     const {
         formFoundation,
-        stage,
+        stage: linkedStage,
         isLoading: isLoadingMetadata,
         isError: isMetadataError,
     } = useMetadataForProgramStage({
@@ -56,22 +57,23 @@ export const WidgetTwoEventWorkspace = ({
         );
     }
 
-    if (!linkedEvent || !formFoundation || !stage) {
+    if (!linkedEvent || !formFoundation || !linkedStage) {
         return null;
     }
 
     return (
         <WidgetWrapper
             type={type}
+            stage={stage}
+            linkedStage={linkedStage}
             widget={
                 <Widget
                     header={
                         <WidgetHeader
-                            stage={stage}
+                            linkedStage={linkedStage}
                             linkedEvent={linkedEvent}
                             orgUnitId={orgUnitId}
                             currentPage={currentPage}
-                            type={type}
                         />
                     }
                     noncollapsible

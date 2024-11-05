@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
-"PO-Revision-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-11-05T09:50:50.070Z\n"
+"PO-Revision-Date: 2024-11-05T09:50:50.070Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1493,26 +1493,20 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
-msgid "Referral details"
-msgstr "Referral details"
-
 msgid "View linked event"
 msgstr "View linked event"
 
 msgid "An error occurred while loading the widget."
 msgstr "An error occurred while loading the widget."
 
-msgid "Refferal response"
-msgstr "Refferal response"
-
 msgid "Linked event"
 msgstr "Linked event"
 
 msgid ""
-"This refferal response event is linked to a Refferal details event. Review "
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
 msgstr ""
-"This refferal response event is linked to a Refferal details event. Review "
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
 
 msgid "Scheduled"

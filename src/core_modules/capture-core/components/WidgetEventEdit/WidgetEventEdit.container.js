@@ -112,6 +112,7 @@ export const WidgetEventEditPlain = ({
                 programId={programId}
                 orgUnitId={orgUnitId}
                 stageId={stageId}
+                stage={stage}
             />
             <div data-test="widget-enrollment-event">
                 <Widget
