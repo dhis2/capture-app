@@ -1,3 +1,10 @@
+## [101.14.8](https://github.com/dhis2/capture-app/compare/v101.14.7...v101.14.8) (2024-11-05)
+
+
+### Bug Fixes
+
+* [DHIS2-18278] remove completedAt and completedBy from the payload send to the API ([#3873](https://github.com/dhis2/capture-app/issues/3873)) ([156369a](https://github.com/dhis2/capture-app/commit/156369abe3dced63c773900acbc3f11f82d57723))
+
 ## [101.14.7](https://github.com/dhis2/capture-app/compare/v101.14.6...v101.14.7) (2024-11-04)
 
 
