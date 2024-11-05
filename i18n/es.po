@@ -14,13 +14,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Marta Vila <marta@dhis2.org>, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
+# Manuel Silva <manuel@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024\n"
+"Last-Translator: Manuel Silva <manuel@dhis2.org>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -743,9 +744,6 @@ msgstr "Ver lista de trabajo en este programa."
 msgid "Page is missing required values from URL"
 msgstr "A la página le faltan los valores obligatorios de la URL"
 
-msgid "Program is not valid"
-msgstr "El programa no es válido"
-
 msgid "Org unit is not valid with current program"
 msgstr "La unidad organizativa no es válida con el programa actual"
 
@@ -1276,6 +1274,12 @@ msgstr ""
 msgid "Follow-up"
 msgstr "Seguimiento"
 
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
+
 msgid "Cancelled"
 msgstr "Cancelar"
 
@@ -1489,13 +1493,6 @@ msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 "Relaciones ambiguas, póngase en contacto con el administrador del sistema"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Introduzca los detalles de {{linkableStageLabel}} en el siguiente paso "
-"después de completar este {{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Introducir datos ahora"
 
@@ -1583,6 +1580,9 @@ msgstr "Registro de cambios"
 msgid "No changes to display"
 msgstr "No hay cambios para mostrar"
 
+msgid "Updated"
+msgstr "Actualizado"
+
 msgid "Created"
 msgstr "Creado"
 
@@ -1600,6 +1600,9 @@ msgstr "Elemento de datos"
 
 msgid "Change"
 msgstr "Cambio"
+
+msgid "Value"
+msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Nueva relación de {{trackedEntityTypeName}}"
