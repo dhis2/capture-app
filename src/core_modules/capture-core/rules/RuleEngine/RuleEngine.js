@@ -60,14 +60,15 @@ export class RuleEngine {
             otherEvents.map(inputBuilder.convertEvent) :
             [];
 
+        const ruleEngine = new RuleEngineJs(this.flags.verbose || false);
         const effects = (currentEvent ?
-            new RuleEngineJs().evaluateEvent(
+            ruleEngine.evaluateEvent(
                 inputBuilder.convertEvent(currentEvent),
                 enrollment,
                 events,
                 executionContext,
             ) :
-            new RuleEngineJs().evaluateEnrollment(
+            ruleEngine.evaluateEnrollment(
                 enrollment,
                 events,
                 executionContext,

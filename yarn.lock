@@ -2832,10 +2832,10 @@
     workbox-routing "^6.1.5"
     workbox-strategies "^6.1.5"
 
-"@dhis2/rule-engine@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.1.0.tgz#472f3cb2566c05ab3b69fe744c7679294f2485b0"
-  integrity sha512-CXEDP6GVM4cYb5GMPi3IaIQzJzVgOn1XqFCm3Ltp3vx3aM68FsUoMcM2UUExCkyNPDzyvVnXPP5bU7PGqW3P0A==
+"@dhis2/rule-engine@3.2.0-beta.0":
+  version "3.2.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.2.0-beta.0.tgz#bd105de54394a3b9d143675e46adfa75d6553742"
+  integrity sha512-DGYusZoHCAU0DJSrD+cKBSSey7RqmbRetVR23fTda5O2g5SaqUOklC9oVbgv6gENTaFQWR8K2ZafA/QXge8SWA==
   dependencies:
     "@js-joda/core" "3.2.0"
     format-util "^1.0.5"
