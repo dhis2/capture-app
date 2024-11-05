@@ -255,7 +255,7 @@ export class InputBuilder {
         } = eventData;
 
         const eventDate = occurredAt ? Instant.parse(occurredAt) : Instant.now();
-        const createdDate = createdAt ? Instant.parse(createdAt) : Instant.now();
+        const createdDate = createdAt ? Instant.parse(createdAt + 'Z') : Instant.now();
         const dataValues = Object
             .keys(eventData)
             .filter(key => !eventMainKeys.has(key))
@@ -266,7 +266,7 @@ export class InputBuilder {
                 ));
 
         return new RuleEventJs(
-            event,
+            event || '',
             programStage,
             programStageName || '',
             status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
