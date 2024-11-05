@@ -1,6 +1,5 @@
 // @flow
 import { useMemo } from 'react';
-import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import log from 'loglevel';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
@@ -42,16 +41,6 @@ const fetchFormattedValues = async ({
 }) => {
     if (!rawRecords) return [];
 
-    const mostRecentCreatedAtByFieldId = rawRecords.changeLogs.reduce((acc, record) => {
-        const elementKey = Object.keys(record.change)[0];
-        const fieldId = record.change[elementKey]?.dataElement ?? record.change[elementKey]?.attribute;
-
-        if (!acc[fieldId] || moment(record.createdAt).isAfter(acc[fieldId])) {
-            acc[fieldId] = record.createdAt;
-        }
-        return acc;
-    }, {});
-
     const getMetadataItemDefinition = (
         elementKey: string,
         change: Change,
@@ -82,14 +71,9 @@ const fetchFormattedValues = async ({
                 return null;
             }
 
-            console.log('change', change);
-            console.log('entityData', entityData);
+            const getSubValue = subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
 
-            const getSubValue =
-                subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
-
-            const isLatestValue =
-                moment(createdAt).isSameOrAfter(mostRecentCreatedAtByFieldId[fieldId]);
+            const isLatestValue = entityData?.[change.dataElement]?.value === change.currentValue;
 
             const getValue = async (value, latestValue) => {
                 if (!getSubValue) {

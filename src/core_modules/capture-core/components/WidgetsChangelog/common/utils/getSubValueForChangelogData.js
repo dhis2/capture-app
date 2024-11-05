@@ -38,7 +38,7 @@ const buildTEAUrlByElementType: {|
             const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             if (!latestValue) {
-                return name;
+                return 'name';
             }
 
             return {
@@ -67,7 +67,7 @@ const buildTEAUrlByElementType: {|
             const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             if (!latestValue) {
-                return name;
+                return 'Image';
             }
 
             return {
@@ -96,7 +96,7 @@ const buildDataElementUrlByElementType: {|
             const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             if (!latestValue) {
-                return name;
+                return 'File';
             }
 
             return {
@@ -119,7 +119,7 @@ const buildDataElementUrlByElementType: {|
             const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             if (!latestValue) {
-                return name;
+                return 'Image';
             }
 
             return {
