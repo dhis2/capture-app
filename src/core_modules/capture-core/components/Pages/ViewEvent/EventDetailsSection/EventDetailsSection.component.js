@@ -200,6 +200,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
+                    eventData={{}}
                     eventId={eventId}
                     formFoundation={programStage.stageForm}
                 />

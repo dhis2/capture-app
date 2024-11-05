@@ -9,6 +9,7 @@ import type { ItemDefinitions } from './Changelog.types';
 
 type Props = {
     entityId: string,
+    entityData: Object,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
     isOpen: boolean,
     close: () => void,
@@ -18,6 +19,7 @@ type Props = {
 
 export const Changelog = ({
     entityId,
+    entityData,
     entityType,
     programId,
     isOpen,
@@ -47,6 +49,7 @@ export const Changelog = ({
         rawRecords,
         dataItemDefinitions,
         entityId,
+        entityData,
         entityType,
         programId,
         sortDirection,

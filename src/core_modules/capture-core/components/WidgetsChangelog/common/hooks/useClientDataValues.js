@@ -21,6 +21,7 @@ type Props = {
     rawRecords: Object,
     dataItemDefinitions: ItemDefinitions,
     entityId: string,
+    entityData: Object,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
     programId?: string,
     sortDirection: SortDirection,
@@ -32,6 +33,7 @@ const fetchFormattedValues = async ({
     rawRecords,
     dataItemDefinitions,
     entityId,
+    entityData,
     entityType,
     programId,
     absoluteApiPath,
@@ -79,6 +81,9 @@ const fetchFormattedValues = async ({
                 );
                 return null;
             }
+
+            console.log('change', change);
+            console.log('entityData', entityData);
 
             const getSubValue =
                 subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
@@ -143,6 +148,7 @@ export const useClientDataValues = ({
     rawRecords,
     dataItemDefinitions,
     entityId,
+    entityData,
     entityType,
     programId,
     sortDirection,
@@ -167,6 +173,7 @@ export const useClientDataValues = ({
             rawRecords,
             dataItemDefinitions,
             entityId,
+            entityData,
             entityType,
             programId,
             absoluteApiPath,
