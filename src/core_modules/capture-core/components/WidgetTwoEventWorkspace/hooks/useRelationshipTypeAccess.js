@@ -12,7 +12,7 @@ export const useRelationshipTypeAccess = (relationshipTypeId: string) => {
         () =>
             storageController.get(userStores.RELATIONSHIP_TYPES, relationshipTypeId, {
                 project: ({ access }) => ({
-                    hasWriteAccess: access?.write ?? false,
+                    hasWriteAccess: access?.data?.write ?? false,
                 }),
             }),
         {
