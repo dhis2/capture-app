@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-// $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
