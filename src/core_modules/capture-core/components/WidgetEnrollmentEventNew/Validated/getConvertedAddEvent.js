@@ -1,6 +1,5 @@
 // @flow
 import moment from 'moment';
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
@@ -43,9 +42,6 @@ export const getAddEventEnrollmentServerData = ({
 
     if (!mainDataServerValues.status) {
         mainDataServerValues.status = completed ? 'COMPLETED' : 'ACTIVE';
-    }
-    if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {

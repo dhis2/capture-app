@@ -3,9 +3,7 @@ import { ofType } from 'redux-observable';
 import { map, filter, flatMap, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys, dataEntryIds } from 'capture-core/constants';
-import moment from 'moment';
 import { EMPTY, of } from 'rxjs';
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertCategoryOptionsToServer, convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
@@ -104,9 +102,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore,
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
 
-            if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedAt) {
-                mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
-            }
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
 
@@ -267,10 +262,6 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, sto
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
-
-            if (!prevEventMainData.completedAt) {
-                mainDataServerValues.completedAt = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
-            }
 
             const editEvent = {
                 ...mainDataServerValues,
