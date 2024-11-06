@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { colors, Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
+import { Button, ButtonStrip, colors, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { NewTemplateTextField } from './NewTemplateTextField.component';
@@ -64,15 +64,15 @@ const NewTemplateContentsPlain = (props: Props) => {
                     {error}
                 </div>
             </ModalContent>
-            <ModalActions
-                className={classes.buttonContainer}
-            >
-                <Button onClick={onClose}>
-                    {i18n.t('Cancel')}
-                </Button>
-                <Button onClick={handleSave} primary>
-                    {i18n.t('Save')}
-                </Button>
+            <ModalActions>
+                <ButtonStrip>
+                    <Button onClick={onClose}>
+                        {i18n.t('Cancel')}
+                    </Button>
+                    <Button onClick={handleSave} primary>
+                        {i18n.t('Save')}
+                    </Button>
+                </ButtonStrip>
             </ModalActions>
         </React.Fragment>
     );

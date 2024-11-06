@@ -13,7 +13,9 @@ const changeEnrollmentAndEventsStatus = () => (
             const enrollmentToUpdate = {
                 ...enrollment,
                 status: 'ACTIVE',
-                events: [{ ...eventToUpdate, status: 'ACTIVE' }],
+                completedAt: null,
+                completedBy: null,
+                events: [{ ...eventToUpdate, status: 'ACTIVE', completedAt: null, completedBy: null }],
             };
 
             return cy
