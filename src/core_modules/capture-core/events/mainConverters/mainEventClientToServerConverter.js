@@ -4,6 +4,11 @@ import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
 import { convertEventAttributeOptions } from '../convertEventAttributeOptions';
 
+const keysToSkip = {
+    completedAt: 'completedAt',
+    completedBy: 'completedBy',
+};
+
 export function convertMainEventClientToServer(event: Object, serverMinorVersion: number) {
     const mapClientKeyToServerKey = {
         eventId: 'event',
@@ -22,7 +27,6 @@ export function convertMainEventClientToServer(event: Object, serverMinorVersion
         switch (key) {
         case 'occurredAt':
         case 'scheduledAt':
-        case 'completedAt':
             convertedValue = convertClientToServer(value, dataElementTypes.DATE);
             break;
         case 'assignee':
@@ -34,5 +38,5 @@ export function convertMainEventClientToServer(event: Object, serverMinorVersion
         }
 
         return convertedValue;
-    });
+    }, keysToSkip);
 }

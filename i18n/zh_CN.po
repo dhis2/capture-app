@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -697,9 +697,6 @@ msgstr "查看此项目中的工作清单。"
 msgid "Page is missing required values from URL"
 msgstr "页面缺少 URL 中的必需值"
 
-msgid "Program is not valid"
-msgstr "项目无效"
-
 msgid "Org unit is not valid with current program"
 msgstr "机构对当前项目无效"
 
@@ -1113,6 +1110,9 @@ msgstr "标记为已取消"
 msgid "Mark incomplete"
 msgstr "标记不完整"
 
+msgid "You do not have access to delete this enrollment"
+msgstr ""
+
 msgid "Delete enrollment"
 msgstr "删除报名"
 
@@ -1192,6 +1192,12 @@ msgstr "无法加载报名的小部件。请稍后再试"
 
 msgid "Follow-up"
 msgstr "后续"
+
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "已取消"
@@ -1379,11 +1385,6 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-
 msgid "Enter details now"
 msgstr ""
 
@@ -1465,6 +1466,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Updated"
+msgstr "更新的"
+
 msgid "Created"
 msgstr "已创建"
 
@@ -1482,6 +1486,9 @@ msgstr ""
 
 msgid "Change"
 msgstr ""
+
+msgid "Value"
+msgstr "值"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""

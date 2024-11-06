@@ -13,8 +13,19 @@ const changeEnrollmentAndEventsStatus = () => (
         .then(url => cy.request(url))
         .then(({ body }) => {
             const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'qyx7tscVpVB');
-            const eventsToUpdate = enrollment.events.map(e => ({ ...e, status: 'ACTIVE' }));
-            const enrollmentToUpdate = { ...enrollment, status: 'ACTIVE', events: eventsToUpdate };
+            const eventsToUpdate = enrollment.events.map(e => ({
+                ...e,
+                status: 'ACTIVE',
+                completedAt: null,
+                completedBy: null,
+            }));
+            const enrollmentToUpdate = {
+                ...enrollment,
+                status: 'ACTIVE',
+                completedAt: null,
+                completedBy: null,
+                events: eventsToUpdate,
+            };
 
             return cy
                 .buildApiUrl('tracker?async=false&importStrategy=UPDATE')

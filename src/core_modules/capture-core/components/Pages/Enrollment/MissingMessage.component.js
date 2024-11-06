@@ -194,7 +194,7 @@ export const MissingMessage = withStyles(getStyles)(({
         {
             missingStatus === missingStatuses.RESTRICTED_PROGRAM_NO_ACCESS &&
             <IncompleteSelectionsMessage>
-                {i18n.t('No access to program owner.')}
+                {i18n.t('You do not have permissions to access to this program, registering unit or record, contact your administrator for more information.')}
             </IncompleteSelectionsMessage>
         }
 
