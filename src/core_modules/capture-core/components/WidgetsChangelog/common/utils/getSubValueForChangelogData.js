@@ -38,7 +38,7 @@ const buildTEAUrlByElementType: {|
             const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             if (!latestValue) {
-                return 'name';
+                return 'File';
             }
 
             return {
