@@ -73,7 +73,7 @@ const fetchFormattedValues = async ({
 
             const getSubValue = subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
 
-            const isLatestValue = entityType === RECORD_TYPE.event
+            const isLatestValue = getSubValue && entityType === RECORD_TYPE.event
                 ? entityData?.[change.dataElement]?.value === change.currentValue
                 : entityData?.[change.attribute] === change.currentValue;
 
