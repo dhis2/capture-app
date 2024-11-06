@@ -5,7 +5,6 @@ import { userStores } from '../../../storageControllers/stores';
 
 export const useRelationshipTypeAccess = (relationshipTypeId: string) => {
     const storageController = getUserStorageController();
-    console.log('relationshipTypeId', relationshipTypeId);
 
     const { data, error, isLoading } = useIndexedDBQuery(
         ['relationshipTypeAccess', relationshipTypeId],
