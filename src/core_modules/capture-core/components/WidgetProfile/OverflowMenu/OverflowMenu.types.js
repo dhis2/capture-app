@@ -5,7 +5,6 @@ export type Props = {|
     trackedEntityTypeName: string,
     trackedEntityData: Object,
     canWriteData: boolean,
-    trackedEntityData: Object,
     onDeleteSuccess?: () => void,
     displayChangelog: boolean,
     teiId: string,

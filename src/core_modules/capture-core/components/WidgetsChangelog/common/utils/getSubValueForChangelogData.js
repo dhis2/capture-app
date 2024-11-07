@@ -1,5 +1,6 @@
 // @flow
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api';
@@ -35,11 +36,11 @@ const buildTEAUrlByElementType: {|
         const { teiId, value } = trackedEntity;
         if (!value) return null;
         try {
-            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
-
             if (!latestValue) {
-                return 'File';
+                return i18n.t('File');
             }
+
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             return {
                 id,
@@ -64,11 +65,10 @@ const buildTEAUrlByElementType: {|
         const { teiId, value } = trackedEntity;
         if (!value) return null;
         try {
-            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
-
             if (!latestValue) {
-                return 'Image';
+                return i18n.t('Image');
             }
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             return {
                 id,
@@ -93,11 +93,11 @@ const buildDataElementUrlByElementType: {|
         if (!value) return null;
 
         try {
-            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
-
             if (!latestValue) {
-                return 'File';
+                return i18n.t('File');
             }
+
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             return {
                 id,
@@ -116,11 +116,11 @@ const buildDataElementUrlByElementType: {|
         if (!value) return null;
 
         try {
-            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
-
             if (!latestValue) {
-                return 'Image';
+                return i18n.t('Image');
             }
+
+            const { id, displayName: name } = await querySingleResource({ resource: `fileResources/${value}` });
 
             return {
                 id,
