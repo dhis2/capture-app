@@ -1,6 +1,6 @@
 // @flow
 import { isValidDate as isValidDateCore } from 'capture-core-utils/validators/form';
 
-export function isValidDate(value: string, currentContext?: Object, internalComponentError?: Object) {
+export function isValidDate(value: string, internalComponentError?: Object) {
     return isValidDateCore(value, internalComponentError);
 }

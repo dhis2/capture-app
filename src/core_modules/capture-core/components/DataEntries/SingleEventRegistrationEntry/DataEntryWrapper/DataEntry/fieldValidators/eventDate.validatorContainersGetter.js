@@ -8,7 +8,7 @@ const preValidateDate = (value?: ?string, internalError?: ?Object) => {
         return true;
     }
 
-    return isValidDate(value, null, internalError);
+    return isValidDate(value, internalError);
 };
 
 export const getEventDateValidatorContainers = () => {

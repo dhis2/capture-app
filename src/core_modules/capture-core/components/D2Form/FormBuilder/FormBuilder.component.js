@@ -126,7 +126,7 @@ export class FormBuilder extends React.Component<Props> {
             .reduce(async (passPromise, currentValidator) => {
                 const pass = await passPromise;
                 if (pass === true) {
-                    let result = currentValidator.validator(value, validationContext,
+                    let result = currentValidator.validator(value,
                         { error: commitOptions?.error, errorCode: commitOptions?.errorCode });
                     if (result instanceof Promise) {
                         result = onIsValidatingInternal ?

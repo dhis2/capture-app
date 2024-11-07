@@ -22,7 +22,7 @@ export function getValidationError(value: any, validatorContainers: ?Array<Valid
             return false;
         }
 
-        message = (result && result.errorMessage) || validatorContainer.message;
+        message = (result && result.errorMessage) || (result && result.message) || validatorContainer.message;
         return true;
     });
 
