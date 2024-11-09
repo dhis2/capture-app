@@ -4,15 +4,15 @@
 # Ge Joao <gsimango@saudigitus.org>, 2021
 # David Júnior <davidjr.mondlane@gmail.com>, 2022
 # Viktor Varland <viktor@dhis2.org>, 2022
-# phil_dhis2, 2022
 # Sheila André <sandre@saudigitus.org>, 2023
+# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Sheila André <sandre@saudigitus.org>, 2023\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -706,7 +706,7 @@ msgid "Registered events"
 msgstr "Eventos registrados"
 
 msgid "Please select {{category}}."
-msgstr "Selecione {{categoria}}."
+msgstr "Selecione {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr "Ou veja todos os registros acessíveis a si em {{program}}"
@@ -786,7 +786,7 @@ msgid "Search {{name}}"
 msgstr "Pesquisar {{name}}"
 
 msgid "Search by {{name}}"
-msgstr "Procura por nome}}"
+msgstr "Procura por {{name}}"
 
 msgid "Search by attributes"
 msgstr "Pesquisar por atributos"
@@ -1086,7 +1086,7 @@ msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} em atraso"
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr "{{ scheduleEvents }} agendado"
+msgstr "{{ scheduledEvents }} agendado"
 
 msgid "Stages and Events"
 msgstr "Palcos e Eventos"
