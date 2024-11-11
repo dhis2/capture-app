@@ -1,6 +1,5 @@
 // @flow
 import { useMemo } from 'react';
-import { v4 as uuid } from 'uuid';
 import log from 'loglevel';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
 import { useQuery } from 'react-query';
@@ -9,12 +8,12 @@ import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import { dataElementTypes } from '../../../../metaData';
 import { CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
 import type { Change, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
-import { convertServerToClient, convertClientToView } from '../../../../converters';
-import { convert } from '../../../../converters/clientToList';
+import { convertServerToClient } from '../../../../converters';
+import { convert as convertClientToList } from '../../../../converters/clientToList';
 import { RECORD_TYPE, subValueGetterByElementType } from '../utils/getSubValueForChangelogData';
 import { makeQuerySingleResource } from '../../../../utils/api';
+import { attributeOptionsKey } from '../../../DataEntryDhis2Helpers';
 
-const convertFn = pipe(convertServerToClient, convertClientToView);
 
 type Props = {
     rawRecords: Object,
@@ -44,13 +43,16 @@ const fetchFormattedValues = async ({
     const getMetadataItemDefinition = (
         elementKey: string,
         change: Change,
-        dataItem: ItemDefinitions,
     ) => {
-        const { dataElement, attribute } = change;
-        const fieldId = dataElement ?? attribute;
-        const metadataElement = fieldId ? dataItem[fieldId] : dataItem[elementKey];
+        const fieldId = change.dataElement || change.attribute;
+        if (!fieldId) {
+            log.error('Could not find fieldId in change:', change);
+            return { metadataElement: null, fieldId: null };
+        }
+        const metadataElement = dataItemDefinitions[fieldId];
         return { metadataElement, fieldId };
     };
+
 
     const fetchedRecords = await Promise.all(
         rawRecords.changeLogs.map(async (changelog) => {
@@ -61,7 +63,6 @@ const fetchFormattedValues = async ({
             const { metadataElement, fieldId } = getMetadataItemDefinition(
                 elementKey,
                 change,
-                dataItemDefinitions,
             );
 
             if (!metadataElement) {
@@ -72,10 +73,6 @@ const fetchFormattedValues = async ({
             }
 
             const getSubValue = subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
-
-            const isLatestValue = getSubValue && entityType === RECORD_TYPE.event
-                ? entityData?.[change.dataElement]?.value === change.currentValue
-                : entityData?.[change.attribute] === change.currentValue;
 
             const getValue = async (value, latestValue) => {
                 if (!getSubValue) {
@@ -103,22 +100,21 @@ const fetchFormattedValues = async ({
                 return null;
             };
 
-            const [previousValueRaw, currentValueRaw] = await Promise.all([
+            const [previousValueClient, currentValueClient] = await Promise.all([
                 change.previousValue ? getValue(change.previousValue, false) : null,
-                getValue(change.currentValue, isLatestValue),
+                getValue(change.currentValue, entityData?.[change.attribute ?? change.dataelement] === change.currentValue),
             ]);
 
             const { firstName, surname, username } = createdBy;
             const { options } = metadataElement;
 
-            const previousValue = convert(previousValueRaw, metadataElement.type, options);
-            const currentValue = convert(currentValueRaw, metadataElement.type, options);
+            const previousValue = convertClientToList(previousValueClient, metadataElement.type, options);
+            const currentValue = convertClientToList(currentValueClient, metadataElement.type, options);
 
             return {
-                reactKey: uuid(),
-                date: convertFn(fromServerDate(createdAt), dataElementTypes.DATETIME),
+                reactKey: fieldId ? `${createdAt}-${fieldId}` : attributeOptionsKey,
+                date: pipe(convertServerToClient, convertClientToList)(fromServerDate(createdAt), dataElementTypes.DATETIME),
                 user: `${firstName} ${surname} (${username})`,
-                dataItemId: fieldId,
                 changeType: type,
                 dataItemLabel: metadataElement.name,
                 previousValue,
@@ -130,7 +126,7 @@ const fetchFormattedValues = async ({
     return fetchedRecords.filter(Boolean);
 };
 
-export const useClientDataValues = ({
+export const useListDataValues = ({
     rawRecords,
     dataItemDefinitions,
     entityId,

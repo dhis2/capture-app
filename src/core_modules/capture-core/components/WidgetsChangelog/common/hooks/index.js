@@ -1,4 +1,4 @@
 // @flow
 
 export { useChangelogData } from './useChangelogData';
-export { useClientDataValues } from './useClientDataValues';
+export { useListDataValues } from './useListDataValues';

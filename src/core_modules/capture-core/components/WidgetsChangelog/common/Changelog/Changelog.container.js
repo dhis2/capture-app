@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal } from '@dhis2/ui';
-import { useChangelogData, useClientDataValues } from '../hooks';
+import { useChangelogData, useListDataValues } from '../hooks';
 import { ChangelogComponent } from './Changelog.component';
 import { CHANGELOG_ENTITY_TYPES } from './index';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
@@ -45,7 +45,7 @@ export const Changelog = ({
     const {
         processedRecords,
         isLoading: isProcessingLoading,
-    } = useClientDataValues({
+    } = useListDataValues({
         rawRecords,
         dataItemDefinitions,
         entityId,
