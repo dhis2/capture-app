@@ -6,11 +6,16 @@ const CUSTOM_VALIDATION_MESSAGES = {
 };
 
 export const isValidNonFutureDate = (value: string, internalComponentError) => {
+    if (!value) {
+        return true;
+    }
+
     if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
         return {
-            valid: !internalComponentError.error,
+            valid: false,
             errorMessage: CUSTOM_VALIDATION_MESSAGES.INVALID_DATE_MORE_THAN_MAX,
         };
     }
+
     return true;
 };

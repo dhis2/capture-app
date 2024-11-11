@@ -1,6 +1,20 @@
 // @flow
-import { isValidDate as isValidDateCore } from 'capture-core-utils/validators/form';
 
 export function isValidDate(value: string, internalComponentError?: Object) {
-    return isValidDateCore(value, internalComponentError);
+    if (!value) {
+        return { valid: false };
+    }
+
+    if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
+        return { valid: true };
+    }
+
+    if (internalComponentError?.error) {
+        return {
+            valid: false,
+            errorMessage: internalComponentError?.error,
+        };
+    }
+
+    return { valid: true };
 }

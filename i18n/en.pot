@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-07T20:29:15.378Z\n"
-"PO-Revision-Date: 2024-11-07T20:29:15.379Z\n"
+"POT-Creation-Date: 2024-11-11T01:17:03.829Z\n"
+"PO-Revision-Date: 2024-11-11T01:17:03.830Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -163,9 +163,6 @@ msgstr "{{ stageName }} - Status"
 
 msgid "Please select {{categoryName}}"
 msgstr "Please select {{categoryName}}"
-
-msgid "A future date is not allowed"
-msgstr "A future date is not allowed"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a new enrollment in {{programName}} in {{orgUnitName}}."

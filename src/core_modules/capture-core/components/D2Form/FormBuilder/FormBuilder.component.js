@@ -131,7 +131,8 @@ export class FormBuilder extends React.Component<Props> {
                     if (result instanceof Promise) {
                         result = onIsValidatingInternal ?
                             onIsValidatingInternal(currentValidator.validatingMessage, result) :
-                            result = await result;
+                            result;
+                        result = await result;
                     }
 
                     if (result === true || (result && result.valid)) {

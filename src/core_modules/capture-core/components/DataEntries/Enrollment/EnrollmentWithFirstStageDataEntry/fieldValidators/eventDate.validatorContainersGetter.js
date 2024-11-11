@@ -1,14 +1,14 @@
 // @flow
-import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
+import { hasValue } from 'capture-core-utils/validators/form';
 import { isValidDate } from '../../../../../utils/validators/form';
 
-const preValidateDate = (value?: ?string) => {
+const preValidateDate = (value?: ?string, internalComponentError: ?{error?: ?string, errorCode?: ?string}) => {
     if (!value) {
         return true;
     }
 
-    return isValidDate(value);
+    return isValidDate(value, internalComponentError);
 };
 
 export const getEventDateValidatorContainers = () => {

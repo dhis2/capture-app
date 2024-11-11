@@ -3,7 +3,7 @@ import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import { isValidDate } from '../../../../utils/validators/form';
 
-const preValidateDate = (value?: ?string) => {
+const preValidateDate = (value?: ?string, x) => {
     if (!value) {
         return true;
     }

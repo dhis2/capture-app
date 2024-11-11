@@ -1,6 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { isValidDate, isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
+import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
+import { isValidDate } from '../../../../capture-core/utils/validators/form';
 import { actions as RelatedStageModes } from '../constants';
 
 type Props = {

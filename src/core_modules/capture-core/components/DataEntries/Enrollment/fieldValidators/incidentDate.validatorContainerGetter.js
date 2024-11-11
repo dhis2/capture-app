@@ -1,31 +1,30 @@
 // @flow
 import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import moment from 'moment';
-import { parseDate } from '../../../../utils/converters/date';
 
-const isValidIncidentDate = (value: string, isFutureDateAllowed: boolean) => {
-    const dateContainer = parseDate(value);
-    if (!dateContainer.isValid) {
-        return false;
+const CUSTOM_VALIDATION_MESSAGES = {
+    INVALID_DATE_MORE_THAN_MAX: i18n.t('A date in the future is not allowed'),
+};
+
+const isValidIncidentDate = (value: string, internalComponentError) => {
+    if (!internalComponentError || !internalComponentError?.error) {
+        return { valid: true };
     }
 
-    if (isFutureDateAllowed) {
-        return true;
+    if (internalComponentError?.error) {
+        return {
+            valid: false,
+            errorMessage: internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX' ?
+                CUSTOM_VALIDATION_MESSAGES.INVALID_DATE_MORE_THAN_MAX :
+                internalComponentError?.error,
+        };
     }
 
-    const momentDate = dateContainer.momentDate;
-    const momentToday = moment();
-    // $FlowFixMe -> if parseDate returns isValid true, there should always be a momentDate
-    const isNotFutureDate = momentDate.isSameOrBefore(momentToday);
-    return {
-        valid: isNotFutureDate,
-        message: i18n.t('A future date is not allowed'),
-    };
+    return true;
 };
 
 
-export const getIncidentDateValidatorContainer = (isFutureIncidentDateAllowed: boolean) => {
+export const getIncidentDateValidatorContainer = () => {
     const validatorContainers = [
         {
             validator: hasValue,
@@ -33,7 +32,7 @@ export const getIncidentDateValidatorContainer = (isFutureIncidentDateAllowed: b
                 i18n.t('A value is required'),
         },
         {
-            validator: (value: string) => isValidIncidentDate(value, isFutureIncidentDateAllowed),
+            validator: (value: string, internalComponentError) => isValidIncidentDate(value, internalComponentError),
             message: i18n.t('Please provide a valid date'),
         },
     ];
