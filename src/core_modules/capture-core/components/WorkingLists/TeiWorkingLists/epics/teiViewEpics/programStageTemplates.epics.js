@@ -6,14 +6,14 @@ import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import {
-    workingListsCommonActionTypes,
-    addTemplateSuccess,
     addTemplateError,
-    deleteTemplateSuccess,
+    addTemplateSuccess,
     deleteTemplateError,
-    updateTemplateSuccess,
-    updateTemplateError,
+    deleteTemplateSuccess,
     updateDefaultTemplate,
+    updateTemplateError,
+    updateTemplateSuccess,
+    workingListsCommonActionTypes,
     workingListsCommonActionTypesBatchActionTypes,
 } from '../../../WorkingListsCommon';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
@@ -63,7 +63,7 @@ export const addProgramStageTemplateEpic = (action$: InputObservable, store: Red
                     eventStatus: status,
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
-                    ...(followUp && { followUp }),
+                    ...(followUp !== undefined && { followUp: JSON.stringify(followUp) }),
                     ...(programStatus && { enrollmentStatus: programStatus }),
                     ...(occurredAt && { enrollmentOccurredAt: occurredAt }),
                     ...(eventOccurredAt && { eventOccurredAt }),
@@ -212,7 +212,7 @@ export const updateProgramStageTemplateEpic = (action$: InputObservable, store: 
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
                     ...(programStatus && { enrollmentStatus: programStatus }),
                     ...(occurredAt && { enrollmentOccurredAt: occurredAt }),
-                    ...(followUp && { followUp }),
+                    ...(followUp !== undefined && { followUp: JSON.stringify(followUp) }),
                     ...(eventOccurredAt && { eventOccurredAt }),
                     ...(scheduledAt && { eventScheduledAt: scheduledAt }),
                     attributeValueFilters,

@@ -1,3 +1,46 @@
+## [101.14.9](https://github.com/dhis2/capture-app/compare/v101.14.8...v101.14.9) (2024-11-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([00403fb](https://github.com/dhis2/capture-app/commit/00403fb596e08eba233fd4103c66c66f286a0881))
+
+## [101.14.8](https://github.com/dhis2/capture-app/compare/v101.14.7...v101.14.8) (2024-11-05)
+
+
+### Bug Fixes
+
+* [DHIS2-18278] remove completedAt and completedBy from the payload send to the API ([#3873](https://github.com/dhis2/capture-app/issues/3873)) ([156369a](https://github.com/dhis2/capture-app/commit/156369abe3dced63c773900acbc3f11f82d57723))
+
+## [101.14.7](https://github.com/dhis2/capture-app/compare/v101.14.6...v101.14.7) (2024-11-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17135][DHIS2-17018] Adjust strings for error messages ([#3858](https://github.com/dhis2/capture-app/issues/3858)) ([1d9ae57](https://github.com/dhis2/capture-app/commit/1d9ae5731331d3f19a0980cf09ebdd9cc46e4583))
+
+## [101.14.6](https://github.com/dhis2/capture-app/compare/v101.14.5...v101.14.6) (2024-11-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([facbee1](https://github.com/dhis2/capture-app/commit/facbee13d009d11e955a1a9b277e27ba41b63867))
+
+## [101.14.5](https://github.com/dhis2/capture-app/compare/v101.14.4...v101.14.5) (2024-11-01)
+
+
+### Bug Fixes
+
+* [DHIS2-18238] incorrect criteria when saving list with follow up false ([#3868](https://github.com/dhis2/capture-app/issues/3868)) ([53c21f0](https://github.com/dhis2/capture-app/commit/53c21f0a4942d09ae4bf88253b576de8ca94b9b6))
+* [DHIS2-18248] pass on createdAt to rules engine when editing ([#3848](https://github.com/dhis2/capture-app/issues/3848)) ([31cb56c](https://github.com/dhis2/capture-app/commit/31cb56c4f05727eb84fcc36e39f897cccc5627b3))
+
+## [101.14.4](https://github.com/dhis2/capture-app/compare/v101.14.3...v101.14.4) (2024-10-29)
+
+
+### Bug Fixes
+
+* [DHIS2-18228] Image Deleted on Update ([#3857](https://github.com/dhis2/capture-app/issues/3857)) ([4656864](https://github.com/dhis2/capture-app/commit/46568640482a3d6a610533573b1132c160329296))
+
 ## [101.14.3](https://github.com/dhis2/capture-app/compare/v101.14.2...v101.14.3) (2024-10-29)
 
 
