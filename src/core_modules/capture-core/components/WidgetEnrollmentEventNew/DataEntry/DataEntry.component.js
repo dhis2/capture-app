@@ -7,9 +7,12 @@ import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.conta
 import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
 import { Notes } from '../../Notes/Notes.component';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import {
+    getEventDateValidatorContainers,
+    getOrgUnitValidatorContainers,
+    getNoteValidatorContainers,
+} from './fieldValidators';
 import { type RenderFoundation, type ProgramStage } from '../../../metaData';
-import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
     placements,
     withCleanUp,
@@ -28,6 +31,7 @@ import {
     withDefaultShouldUpdateInterface,
     orientations,
     VirtualizedSelectField,
+    SingleOrgUnitSelectField,
 } from '../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
@@ -102,7 +106,6 @@ const baseComponentStylesVertical = {
     },
 };
 
-
 function defaultFilterProps(props: Object) {
     const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
     return passOnProps;
@@ -160,6 +163,46 @@ const buildReportDateSettingsFn = () => {
 
     return reportDateSettings;
 };
+
+const buildOrgUnitSettingsFn = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+    const orgUnitSettings = {
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: i18n.t('Organisation unit'),
+            required: true,
+        }),
+        getPropName: () => 'orgUnit',
+        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return orgUnitSettings;
+};
+
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
@@ -284,8 +327,8 @@ const buildAssigneeSettingsFn = () => {
         withTransformPropName(['onBlur', 'onSet'])(
             withFocusSaver()(
                 withFilterProps((props: Object) => {
-                    const defaultFiltred = defaultFilterProps(props);
-                    const { validationAttempted, touched, ...passOnProps } = defaultFiltred;
+                    const defaultfiltered = defaultFilterProps(props);
+                    const { validationAttempted, touched, ...passOnProps } = defaultfiltered;
                     return passOnProps;
                 })(Assignee),
             ),
@@ -358,6 +401,7 @@ const WrappedDataEntry = compose(
     withAOCFieldBuilder({}),
     withDataEntryFields(getCategoryOptionsSettingsFn()),
     withDataEntryField(buildReportDateSettingsFn()),
+    withDataEntryField(buildOrgUnitSettingsFn()),
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withDataEntryField(buildNotesSettingsFn()),
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
