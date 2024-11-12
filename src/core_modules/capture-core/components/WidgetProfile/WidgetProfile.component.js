@@ -162,7 +162,7 @@ const WidgetProfilePlain = ({
                                 trackedEntity={trackedEntity}
                                 onDeleteSuccess={onDeleteSuccess}
                                 displayChangelog={displayChangelog}
-                                trackedEntityData={trackedEntityInstanceAttributes}
+                                trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}
                                 programAPI={program}
                             />
