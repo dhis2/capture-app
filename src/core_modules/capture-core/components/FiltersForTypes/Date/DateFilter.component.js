@@ -16,6 +16,7 @@ import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
+import { parseDate } from '../../../utils/converters/date';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
@@ -177,9 +178,10 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 
     static isFromAfterTo(valueFrom: string, valueTo: string) {
-        const dateFrom = new Date(valueFrom);
-        const dateTo = new Date(valueTo);
-        return dateFrom > dateTo;
+        const momentFrom = parseDate(valueFrom).momentDate;
+        const momentTo = parseDate(valueTo).momentDate;
+        // $FlowFixMe[incompatible-use] automated comment
+        return momentFrom.isAfter(momentTo);
     }
 
     toD2DateTextFieldInstance: any;
