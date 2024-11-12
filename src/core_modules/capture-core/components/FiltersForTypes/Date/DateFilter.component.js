@@ -181,6 +181,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         const momentFrom = parseDate(valueFrom).momentDate;
         const momentTo = parseDate(valueTo).momentDate;
         // $FlowFixMe[incompatible-use] automated comment
+        // $FlowFixMe[incompatible-call] automated comment
         return momentFrom.isAfter(momentTo);
     }
 
