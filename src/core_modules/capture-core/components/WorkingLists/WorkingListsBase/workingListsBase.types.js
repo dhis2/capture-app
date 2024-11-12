@@ -1,22 +1,22 @@
 // @flow
 import { typeof dataElementTypes } from '../../../metaData';
 import type {
+    AdditionalFilters,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
     CustomMenuContents,
     CustomRowMenuContents,
     DataSource,
     FiltersData,
     FiltersOnly,
-    AdditionalFilters,
-    StickyFilters,
-    ChangePage,
-    ChangeRowsPerPage,
-    ClearFilter,
     RemoveFilter,
-    UpdateFilter,
     SelectRestMenuItem,
-    SetColumnOrder,
     SelectRow,
+    SetColumnOrder,
     Sort,
+    StickyFilters,
+    UpdateFilter,
 } from '../../ListView';
 
 export type WorkingListTemplate = {
@@ -141,7 +141,7 @@ export type ListViewBuilderContextData = {|
     updating: boolean,
     updatingWithDialog: boolean,
     dataSource?: DataSource,
-    onSelectListRow: SelectRow,
+    onClickListRow: SelectRow,
     onSortList: Sort,
     onSetListColumnOrder: SetColumnOrder,
     customRowMenuContents?: CustomRowMenuContents,
@@ -153,6 +153,12 @@ export type ListViewBuilderContextData = {|
     onChangeRowsPerPage: ChangeRowsPerPage,
     stickyFilters?: StickyFilters,
     programStageId?: string,
+    onRowSelect: (id: string) => void,
+    onSelectAll: (rows: Array<string>) => void,
+    selectedRows: { [key: string]: boolean },
+    selectionInProgress: ?boolean,
+    allRowsAreSelected: ?boolean,
+    bulkActionBarComponent: React$Element<any>,
 |};
 
 export type SharingSettings = {|
@@ -200,7 +206,7 @@ export type InterfaceProps = $ReadOnly<{|
     onDeleteTemplate?: DeleteTemplate,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
-    onSelectListRow: SelectRow,
+    onClickListRow: SelectRow,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,
@@ -224,6 +230,12 @@ export type InterfaceProps = $ReadOnly<{|
     viewPreloaded?: boolean,
     programStageId?: string,
     templateSharingType: string,
+    allRowsAreSelected: ?boolean,
+    onRowSelect: (id: string) => void,
+    onSelectAll: (rows: Array<string>) => void,
+    selectionInProgress: ?boolean,
+    selectedRows: { [key: string]: boolean },
+    bulkActionBarComponent: React$Element<any>,
 |}>;
 
 export type WorkingListsOutputProps = InterfaceProps;
