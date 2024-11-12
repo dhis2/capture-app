@@ -1,3 +1,17 @@
+# [101.15.0](https://github.com/dhis2/capture-app/compare/v101.14.9...v101.15.0) (2024-11-12)
+
+
+### Features
+
+* [DHIS2-15187][DHIS2-15190] Working list bulk actions ([#3773](https://github.com/dhis2/capture-app/issues/3773)) ([5a12722](https://github.com/dhis2/capture-app/commit/5a127229e984b744fa3ea486d9b5a2632603bcd4))
+
+## [101.14.9](https://github.com/dhis2/capture-app/compare/v101.14.8...v101.14.9) (2024-11-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([00403fb](https://github.com/dhis2/capture-app/commit/00403fb596e08eba233fd4103c66c66f286a0881))
+
 ## [101.14.8](https://github.com/dhis2/capture-app/compare/v101.14.7...v101.14.8) (2024-11-05)
 
 

@@ -12,9 +12,14 @@ type ExtractedProps = {|
 |};
 
 type OptionalExtractedProps = {
+    allRowsAreSelected: boolean,
+    selectedRows: { [key: string]: boolean },
     loadTemplatesError: string,
     onCancelLoadTemplates: Function,
     loadedProgramIdForTemplates: string,
+    onRowSelect: Function,
+    onSelectAll: Function,
+    bulkActionBarComponent: React$Element<any>,
 };
 
 type RestProps = $Rest<ContextBuilderOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
