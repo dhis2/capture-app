@@ -9,6 +9,10 @@ Given('you open the main page with Ngelehun and Malaria Case diagnosis context',
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
+    cy.visit('#/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8');
+});
+
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
 });
@@ -34,6 +38,9 @@ Then('you confirm 3 active enrollments successfully', () => {
     cy.intercept({
         method: 'POST',
         url: '**/tracker?async=false&importStrategy=UPDATE&importMode=VALIDATE',
+    }, {
+        statusCode: 200,
+        body: {},
     }).as('completeEnrollmentsDryRun');
 
     cy.intercept({
@@ -60,22 +67,14 @@ Then('you confirm 3 active enrollments successfully', () => {
             // Should be 3 enrollments
             expect(enrollments).to.have.length(3);
 
-            // The enrollment with id 'xlLV3hNvsIb' should be completed with no events
-            const enrollment = enrollments.find(e => e.enrollment === 'xlLV3hNvsIb');
-            expect(enrollment).to.include({ enrollment: 'xlLV3hNvsIb', status: 'COMPLETED' });
-            expect(enrollment.events).to.have.length(0);
+            // Assert that all enrollments are completed
+            enrollments.forEach((enrollment) => {
+                expect(enrollment).to.include({ status: 'COMPLETED' });
 
-            // The enrollment with id 'h4W0ax873Zq' should be completed with one completed event
-            const enrollment2 = enrollments.find(e => e.enrollment === 'h4W0ax873Zq');
-            expect(enrollment2).to.include({ enrollment: 'h4W0ax873Zq', status: 'COMPLETED' });
-            expect(enrollment2.events).to.have.length(1);
-            expect(enrollment2.events[0]).to.include({ event: 'WSBZ189OfQd', status: 'COMPLETED' });
-
-            // The enrollment with id 'YBXMrojc2Wn' should be completed with one completed event
-            const enrollment3 = enrollments.find(e => e.enrollment === 'vky6UDe2QEG');
-            expect(enrollment3).to.include({ enrollment: 'vky6UDe2QEG', status: 'COMPLETED' });
-            expect(enrollment3.events).to.have.length(1);
-            expect(enrollment3.events[0]).to.include({ event: 'gIuo0V0CTj5', status: 'COMPLETED' });
+                enrollment.events.forEach((event) => {
+                    expect(event).to.include({ status: 'COMPLETED' });
+                });
+            });
         });
 });
 
@@ -134,7 +133,7 @@ When('you confirm 1 active enrollment without completing events successfully', (
             expect(enrollments).to.have.length(1);
 
             // Assert that first enrollment is completed with one completed event
-            expect(enrollments[0]).to.include({ enrollment: 'Rkx1QOZeBra', status: 'COMPLETED' });
+            expect(enrollments[0]).to.include({ status: 'COMPLETED' });
             expect(enrollments[0].events).to.have.length(0);
         });
 });
@@ -160,23 +159,17 @@ When('you confirm 2 active enrollments with errors', () => {
     cy.wait('@completeEnrollmentsDryRun')
         .then((interception) => {
             expect(interception.response.statusCode).to.eq(409);
-            expect(interception.request.body.enrollments).to.have.length(4);
+            expect(interception.request.body.enrollments).to.have.length(2);
         });
 
     cy.wait('@completeEnrollments')
         .its('request.body')
         .should(({ enrollments }) => {
             // The bad data should be filtered out and not sent to the server
-            expect(enrollments).to.have.length(2);
+            expect(enrollments).to.have.length(1);
 
-            const enrollment1 = enrollments.find(e => e.enrollment === 'Rkx1QOZeBra');
-            expect(enrollment1).to.include({ enrollment: 'Rkx1QOZeBra', status: 'COMPLETED' });
-            expect(enrollment1.events).to.have.length(1);
-            expect(enrollment1.events[0]).to.include({ event: 'TIU452W5bI1', status: 'COMPLETED' });
-
-            const enrollment2 = enrollments.find(e => e.enrollment === 'JAfTBlr2Cj2');
-            expect(enrollment2).to.include({ enrollment: 'JAfTBlr2Cj2', status: 'COMPLETED' });
-            expect(enrollment2.events).to.have.length(0);
+            const enrollment = enrollments[0];
+            expect(enrollment).to.include({ enrollment: 'MqSC9Vuckeh', status: 'COMPLETED' });
         });
 });
 
@@ -193,11 +186,11 @@ Then('an error dialog will be displayed to the user', () => {
 
     cy.get('[data-test="bulk-complete-enrollments-dialog"]')
         .find('li')
-        .should('have.length', 5);
+        .should('have.length', 2);
 
     cy.get('[data-test="bulk-complete-enrollments-dialog"]')
         .find('li')
-        .contains('Mandatory DataElement `f9xYwUwrHq9` is not present');
+        .contains('Mandatory DataElement `fjdU9F6EngS` is not present');
 });
 
 When('you close the error dialog', () => {

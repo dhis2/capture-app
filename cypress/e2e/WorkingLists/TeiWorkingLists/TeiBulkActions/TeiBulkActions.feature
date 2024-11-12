@@ -32,24 +32,22 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
     Then the filters should be disabled
 
   Scenario: The user should see an error message when trying to bulk complete enrollments with errors
-    Given you open the main page with Ngelehun and Malaria Case diagnosis context
-    And you select the first 5 rows
+    Given you open the main page with Ngelehun and Malaria focus investigation context
+    And you select the first 3 rows
     And you click the bulk complete enrollments button
     And the bulk complete enrollments modal should open
-    And the modal content should say: This action will complete 4 active enrollments in your selection. 1 enrollment already marked as completed will not be changed.
+    And the modal content should say: This action will complete 2 active enrollments in your selection. 1 enrollment already marked as completed will not be changed.
     When you confirm 2 active enrollments with errors
     Then an error dialog will be displayed to the user
     And you close the error dialog
     And the unsuccessful enrollments should still be selected
 
   Scenario: the user should be able to bulk complete enrollments and events
-    Given you open the main page with Ngelehun and Malaria Case diagnosis context
-    And you select row number 7
-    And you select row number 8
-    And you select row number 10
+    Given you open the main page with Ngelehun and Malaria focus investigation context
+    And you select the first 4 rows
     And you click the bulk complete enrollments button
     And the bulk complete enrollments modal should open
-    And the modal content should say: This action will complete 3 active enrollments in your selection.
+    And the modal content should say: This action will complete 3 active enrollments in your selection. 1 enrollment already marked as completed will not be changed.
     When you confirm 3 active enrollments successfully
     Then the bulk complete enrollments modal should close
 

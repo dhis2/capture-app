@@ -38,7 +38,7 @@ export const useBulkCompleteEvents = ({
                 const filterQueryParam: string = supportForFeature ? 'events' : 'event';
 
                 return ({
-                    fields: '*,!dataValues,!relationships',
+                    fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
                     [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
                 });
             },
