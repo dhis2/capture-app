@@ -23,7 +23,7 @@ export const OrgUnitFetcher = ({
         return (
             <Validated
                 {...passOnProps}
-                orgUnit={orgUnit}
+                orgUnitCore={orgUnit}
             />
         );
     }

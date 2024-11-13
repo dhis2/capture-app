@@ -31,7 +31,7 @@ export const Validated = ({
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
-    orgUnit,
+    orgUnitCore,
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
@@ -42,6 +42,10 @@ export const Validated = ({
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
     const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
+    const dataEntryKey = `${dataEntryId}-${itemId}`;
+    const dataEntryValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
+    const orgUnitSelected = dataEntryValues?.orgUnit;
+    const orgUnit = orgUnitSelected || orgUnitCore;
     const eventSaveInProgress = useSelector(
         ({ enrollmentDomain }) => !!enrollmentDomain.eventSaveInProgress?.requestEventId,
     );
@@ -49,11 +53,12 @@ export const Validated = ({
         dataEntryId,
         itemId,
         programId: program.id,
-        orgUnitId: orgUnit.id,
-        orgUnitName: orgUnit.name,
         teiId,
         enrollmentId,
         formFoundation,
+        dataEntryKey,
+        dataEntryValues,
+        orgUnit,
     });
 
     const rulesExecutionDependenciesClientFormatted =

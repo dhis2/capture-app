@@ -10,14 +10,13 @@ import { getConvertedRelatedStageEvent } from './getConvertedRelatedStageEvent';
 import type { LinkedRequestEvent, RelatedStageRefPayload, RequestEvent } from './validated.types';
 
 type Props = {
-    dataEntryId: string,
-    itemId: string,
-    orgUnitId: string,
     programId: string,
     formFoundation: RenderFoundation,
     enrollmentId: string,
-    orgUnitName: string,
     teiId: string,
+    dataEntryKey: string,
+    dataEntryValues: Object,
+    orgUnit: Object,
 };
 
 export const createServerData = ({
@@ -49,19 +48,16 @@ export const createServerData = ({
 };
 
 export const useBuildNewEventPayload = ({
-    dataEntryId,
-    itemId,
-    orgUnitId,
     programId,
     teiId,
     enrollmentId,
-    orgUnitName,
     formFoundation,
+    dataEntryKey,
+    dataEntryValues,
+    orgUnit,
 }: Props) => {
     const { serverVersion: { minor } } = useConfig();
-    const dataEntryKey = `${dataEntryId}-${itemId}`;
     const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
-    const dataEntryValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
     const dataEntryValuesMeta = useSelector(({ dataEntriesFieldsMeta }) => dataEntriesFieldsMeta[dataEntryKey]);
     const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[dataEntryKey]);
     const { fromClientDate } = useTimeZoneConversion();
@@ -139,10 +135,10 @@ export const useBuildNewEventPayload = ({
             eventId: requestEventId,
             mainDataClientValues: { ...dataEntryClientValues, notes: notesValues },
             programId,
-            orgUnitId,
+            orgUnitId: orgUnit.id,
             enrollmentId,
             teiId,
-            orgUnitName,
+            orgUnitName: orgUnit.name,
             completed: saveType === addEventSaveTypes.COMPLETE,
             fromClientDate,
             serverMinorVersion: minor,
