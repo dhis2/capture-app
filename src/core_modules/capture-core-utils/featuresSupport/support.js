@@ -10,6 +10,7 @@ export const FEATURES = Object.freeze({
     trackerFileEndpoint: 'trackerFileEndpoint',
     trackedEntitiesCSV: 'trackedEntitiesCSV',
     newAocApiSeparator: 'newAocApiSeparator',
+    newEntityFilterQueryParam: 'newEntityFilterQueryParam',
 });
 
 // The first minor version that supports the feature
@@ -24,6 +25,7 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.changelogs]: 41,
     [FEATURES.trackedEntitiesCSV]: 40,
     [FEATURES.newAocApiSeparator]: 41,
+    [FEATURES.newEntityFilterQueryParam]: 41,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>
