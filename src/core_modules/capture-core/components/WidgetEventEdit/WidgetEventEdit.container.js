@@ -4,22 +4,22 @@ import React, { type ComponentType, useState, useEffect } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    spacersNum,
     Button,
     colors,
-    IconEdit24,
-    IconArrowLeft24,
-    IconMore16,
     FlyoutMenu,
+    IconArrowLeft24,
+    IconEdit24,
+    IconMore16,
     MenuItem,
     spacers,
+    spacersNum,
 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
+import { useAvailableProgramStages, useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
-import type { PlainProps, ComponentProps } from './widgetEventEdit.types';
+import type { ComponentProps, PlainProps } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -192,15 +192,23 @@ export const WidgetEventEditPlain = ({
                 }
                 noncollapsible
             >
-                <div className={classes.form}>
-                    {currentPageMode === dataEntryKeys.VIEW ? (
+                {currentPageMode === dataEntryKeys.VIEW ? (
+                    <div
+                        className={classes.form}
+                        data-test={'widget-enrollment-event-view'}
+                    >
                         <ViewEventDataEntry
                             programId={programId}
                             formFoundation={formFoundation}
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             hideDueDate={stage.hideDueDate}
                         />
-                    ) : (
+                    </div>
+                ) : (
+                    <div
+                        className={classes.form}
+                        data-test={'widget-enrollment-event-edit'}
+                    >
                         <EditEventDataEntry
                             dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
                             formFoundation={formFoundation}
@@ -225,8 +233,8 @@ export const WidgetEventEditPlain = ({
                             onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
                             onSaveAndCompleteEnrollmentSuccessActionType={onSaveAndCompleteEnrollmentSuccessActionType}
                         />
-                    )}
-                </div>
+                    </div>
+                )}
             </Widget>
 
             {supportsChangelog && changeLogIsOpen && (

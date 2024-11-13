@@ -1,12 +1,12 @@
 // @flow
 import type { ProgramStage } from '../../../metaData';
-import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
+import { Program } from '../../../metaData';
+import type { HideWidgets, WidgetEffects } from '../common/EnrollmentOverviewDomain';
 import type { UserFormField } from '../../FormFields/UserField';
 import type { LinkedRecordClick } from '../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import type {
     PageLayoutConfig,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
-import { Program } from '../../../metaData';
 
 export type PlainProps = {|
     pageLayout: ?PageLayoutConfig,
@@ -29,6 +29,9 @@ export type PlainProps = {|
     onDelete: () => void,
     onAddNew: () => void,
     onGoBack: () => void,
+    onBackToMainPage: () => void,
+    onBackToDashboard: () => void,
+    onBackToViewEvent: () => void,
     onLinkedRecordClick: LinkedRecordClick,
     onEnrollmentError: (message: string) => void,
     onEnrollmentSuccess: () => void,
