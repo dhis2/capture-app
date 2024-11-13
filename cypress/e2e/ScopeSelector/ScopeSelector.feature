@@ -144,14 +144,14 @@ Feature: User uses the ScopeSelector to navigate
 
     Examples:
         | url | state | message |
-      | /#/enrollment?enrollmentId=gPDueU02tn8                                                                | all                  | Enrollment Dashboard |
-      | /#/enrollment?teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                                              | all                  | Enrollment Dashboard |
-      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment Dashboard |
-      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | all                  | Enrollment Dashboard |
-      | /#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment Dashboard |
-      | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | all                  | Enrollment Dashboard |
-      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                    | all                  | Enrollment Dashboard |
-      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8  | all                  | Enrollment Dashboard |
+      | /#/enrollment?enrollmentId=gPDueU02tn8                                                                | all                  | Enrollment dashboard |
+      | /#/enrollment?teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                                              | all                  | Enrollment dashboard |
+      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment dashboard |
+      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | all                  | Enrollment dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | all                  | Enrollment dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                    | all                  | Enrollment dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8  | all                  | Enrollment dashboard |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ                                                 | teiAndOrgUnit        | Choose a program to add new or see existing enrollments for Carlos Cruz |
       | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ                                                 | teiAndChildProgram   | Choose an enrollment to view the dashboard. |
       | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndMalariaProgram | Carlos Cruz is a person and cannot be enrolled in the Malaria case diagnosis, treatment and investigation. Choose another program that allows person enrollment. Enroll a new malaria entity in this program.|
@@ -184,6 +184,8 @@ Feature: User uses the ScopeSelector to navigate
     When you reset the program selection
     Then you see message explaining you need to select a program
 
+  # DHIS2-18326
+  @skip
   Scenario: Enrollment event edit page > resetting the org unit
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=UgYg0YW7ZIh&eventId=lQQyjR73hHk
     When you reset the org unit selection

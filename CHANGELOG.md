@@ -1,3 +1,10 @@
+# [101.16.0](https://github.com/dhis2/capture-app/compare/v101.15.0...v101.16.0) (2024-11-13)
+
+
+### Features
+
+* [DHIS2-18250] Breadcrumb for event & enrollment pages ([#3849](https://github.com/dhis2/capture-app/issues/3849)) ([d65882e](https://github.com/dhis2/capture-app/commit/d65882eacb711865d9f6a860c65d56a0f4d68157))
+
 # [101.15.0](https://github.com/dhis2/capture-app/compare/v101.14.9...v101.15.0) (2024-11-12)
 
 

@@ -37,6 +37,7 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRel
                     showAddRelationship ?
                         <ViewEventNewRelationshipWrapper /> :
                         <ViewEvent
+                            programId={programId}
                             serverMinorVersion={minor}
                         />
                 }

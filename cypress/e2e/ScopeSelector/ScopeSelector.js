@@ -1,4 +1,4 @@
-import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../support/date';
 
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
@@ -263,8 +263,7 @@ Then(/^you see the following (.*)$/, (message) => {
 
 And('you land on the enrollment page by having typed only the enrollmentId on the url', () => {
     cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
-    cy.get('[data-test="enrollment-page-content"]')
-        .contains('Enrollment Dashboard');
+    cy.get('[data-test="enrollment-overview-page"]');
 });
 
 And('you reset the tei selection', () => {
@@ -288,7 +287,7 @@ And('you reset the org unit selection', () => {
 
 And('you see the enrollment event Edit page but there is no org unit id in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?eventId=lQQyjR73hHk`);
-    cy.contains('Enrollment: View Event');
+    cy.get('[data-test="widget-enrollment-event-view"]').should('exist');
 });
 
 And('you see the enrollment event New page but there is no org unit id in the url', () => {
@@ -298,13 +297,12 @@ And('you see the enrollment event New page but there is no org unit id in the ur
 
 And('you see the enrollment event New page but there is no stage id in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
-    cy.contains('Enrollment: New Event');
+    cy.contains('Choose a stage for a new event');
 });
 
 And('you see the enrollment page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
-    cy.get('[data-test="enrollment-page-content"]')
-        .contains('Enrollment Dashboard');
+    cy.get('[data-test="enrollment-overview-page"]');
 });
 
 And('you reset the enrollment selection', () => {
