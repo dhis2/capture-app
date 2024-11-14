@@ -7,6 +7,7 @@ import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/Duplicate
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
 import type { InputAttribute } from './hooks/useFormValues';
 import { RenderFoundation, ProgramStage } from '../../../metaData';
+import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 type TrackedEntityAttributes = Array<{
     attribute: string,
@@ -32,6 +33,21 @@ export type EnrollmentPayload = {|
             attributes: TrackedEntityAttributes,
             geometry: any,
         |}
+    ],
+    relationships?: [
+        {
+            relationshipType: string,
+            from: {
+                event: {
+                    event: string,
+                },
+            },
+            to: {
+                event: {
+                    event: string,
+                },
+            },
+        }
     ]
 |}
 
@@ -51,6 +67,7 @@ export type OwnProps = $ReadOnly<{|
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
     saveButtonText: (trackedEntityName: string) => string,
     firstStageMetaData?: ?{ stage: ?ProgramStage },
+    relatedStageRef?: { current: ?RelatedStageRefPayload },
 |}>;
 
 type ContainerProps = {|

@@ -4,4 +4,5 @@ import type { TeiPayload } from '../../../../../Pages/common/TEIRelationshipsWid
 
 export type SaveForDuplicateCheck = (
     teiWithEnrollment: EnrollmentPayload | TeiPayload,
+    programStageIdLinkedEventToRedirectTo?: string,
 ) => void;

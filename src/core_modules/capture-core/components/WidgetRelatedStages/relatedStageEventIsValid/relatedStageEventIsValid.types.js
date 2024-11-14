@@ -1,9 +1,9 @@
 // @flow
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
-import { actions as LinkModes } from '../constants';
+import { RelatedStageModes } from '../index';
 
 export type RelatedStageIsValidProps = {|
-    linkMode: ?$Keys<typeof LinkModes>,
+    linkMode: ?$Keys<typeof RelatedStageModes>,
     scheduledAt: ?string,
     orgUnit: ?{
         id: string,

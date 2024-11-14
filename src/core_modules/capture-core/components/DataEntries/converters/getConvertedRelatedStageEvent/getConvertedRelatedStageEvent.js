@@ -1,10 +1,9 @@
 // @flow
 import log from 'loglevel';
 import { generateUID } from '../../../../utils/uid/generateUID';
-import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
-import type { ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
+import { RelatedStageModes } from '../../../WidgetRelatedStages';
+import type { LinkedRequestEvent, ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
 import { errorCreator, pipe } from '../../../../../capture-core-utils';
-import { type LinkedRequestEvent } from '../validated.types';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 
@@ -69,7 +68,7 @@ const getEventDetailsByLinkMode = ({
         return ({
             linkedEvent: {
                 ...baseEventDetails,
-                scheduledAt: convertFn(clientRequestEvent.scheduledAt, dataElementTypes.DATE),
+                scheduledAt: clientRequestEvent.scheduledAt,
                 orgUnit: convertFn(linkedEventOrgUnit, dataElementTypes.ORGANISATION_UNIT),
             },
             linkedEventId: baseEventDetails.event,
@@ -100,7 +99,8 @@ export const getConvertedRelatedStageEvent = ({
     enrollmentId,
     relatedStageType,
 }: ConvertedRelatedStageEventProps) => {
-    const requestEventIsFromConstraint = relatedStageType.fromConstraint.programStage.id === currentProgramStageId;
+    const requestEventIsFromConstraint =
+    relatedStageType.fromConstraint.programStage.id === currentProgramStageId;
 
     const { linkedEvent, linkedEventId } = getEventDetailsByLinkMode({
         relatedStageDataValues,

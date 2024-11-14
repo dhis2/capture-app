@@ -6,8 +6,9 @@ import { getAddEventEnrollmentServerData } from './getConvertedAddEvent';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { generateUID } from '../../../utils/uid/generateUID';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
-import { getConvertedRelatedStageEvent } from './getConvertedRelatedStageEvent';
-import type { LinkedRequestEvent, RelatedStageRefPayload, RequestEvent } from './validated.types';
+import { getConvertedRelatedStageEvent } from '../../DataEntries';
+import type { LinkedRequestEvent, RequestEvent } from '../../DataEntries';
+import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 type Props = {
     dataEntryId: string,
@@ -68,7 +69,7 @@ export const useBuildNewEventPayload = ({
 
     const buildRelatedStageEventPayload = (clientRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
         if (
-            relatedStageRef.current
+            relatedStageRef?.current
             && relatedStageRef.current.eventHasLinkableStageRelationship()
         ) {
             const isValid = relatedStageRef.current.formIsValidOnSave();
@@ -121,7 +122,7 @@ export const useBuildNewEventPayload = ({
 
     const buildNewEventPayload = (
         saveType: ?$Values<typeof addEventSaveTypes>,
-        relatedStageRef: {| current: (?RelatedStageRefPayload) |},
+        relatedStageRef?: {| current: (?RelatedStageRefPayload) |},
     ) => {
         const requestEventId = generateUID();
 

@@ -42,6 +42,7 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
+import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -335,6 +336,7 @@ type FinalTeiDataEntryProps = {
     onUpdateFormFieldAsync: Function,
     onUpdateFormField: Function,
     firstStageMetaData?: ?{ stage: ProgramStage },
+    relatedStageRef?: { current: ?RelatedStageRefPayload },
     formFoundation: RenderFoundation,
 };
 // final step before the generic dataEntry is inserted

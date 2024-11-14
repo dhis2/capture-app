@@ -14,7 +14,7 @@ import {
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
 import {
-    getStageWithOpenAfterEnrollment,
+    getPageToRedirectTo,
     PAGES,
 } from './helpers';
 import { cleanUpUid } from '../NewPage.actions';
@@ -54,15 +54,16 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
             const { currentSelections: { programId } } = store.value;
-            const { enrollmentPayload, uid } = action.payload;
+            const { enrollmentPayload, uid, programStageIdLinkedEventToRedirectTo } = action.payload;
             const { stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
-            const { stageWithOpenAfterEnrollment, redirectTo } = getStageWithOpenAfterEnrollment(
+            const { programStageIdToRedirectTo, pageToRedirectTo } = getPageToRedirectTo(
                 stages,
                 useFirstStageDuringRegistration,
+                programStageIdLinkedEventToRedirectTo,
             );
 
             const eventIndex = enrollmentPayload.enrollments[0]?.events.findIndex(
-                eventsToBeCreated => eventsToBeCreated.programStage === stageWithOpenAfterEnrollment?.id,
+                eventsToBeCreated => eventsToBeCreated.programStage === programStageIdToRedirectTo,
             );
 
             return saveNewTrackedEntityInstanceWithEnrollment({
@@ -71,9 +72,9 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                         enrollmentPayload,
                     ],
                 },
-                redirectTo,
+                pageToRedirectTo,
                 eventIndex,
-                stageId: stageWithOpenAfterEnrollment?.id,
+                stageId: programStageIdToRedirectTo,
                 uid,
             });
         }),
@@ -91,7 +92,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 payload: {
                     bundleReport: { typeReportMap },
                 },
-                meta: { uid, redirectTo, stageId, eventIndex },
+                meta: { uid, pageToRedirectTo, stageId, eventIndex },
             } = action;
             const {
                 currentSelections: { orgUnitId, programId },
@@ -106,9 +107,9 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 return EMPTY;
             }
 
-            if (redirectTo === PAGES.enrollmentEventNew) {
+            if (pageToRedirectTo === PAGES.enrollmentEventNew) {
                 history.push(
-                    `/${redirectTo}?${buildUrlQueryString({
+                    `/${pageToRedirectTo}?${buildUrlQueryString({
                         programId,
                         orgUnitId,
                         teiId,
@@ -119,9 +120,9 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 return EMPTY;
             }
 
-            if (redirectTo === PAGES.enrollmentEventEdit) {
+            if (pageToRedirectTo === PAGES.enrollmentEventEdit) {
                 history.push(
-                    `/${redirectTo}?${buildUrlQueryString({
+                    `/${pageToRedirectTo}?${buildUrlQueryString({
                         eventId,
                         orgUnitId,
                         initMode: dataEntryKeys.EDIT,

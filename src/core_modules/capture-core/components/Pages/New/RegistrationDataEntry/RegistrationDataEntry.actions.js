@@ -46,21 +46,26 @@ export const saveNewTrackedEntityInstance = (candidateForRegistration: any) =>
     );
 
 // with enrollment
-export const startSavingNewTrackedEntityInstanceWithEnrollment = (enrollmentPayload: EnrollmentPayload, uid: string) =>
+export const startSavingNewTrackedEntityInstanceWithEnrollment = (
+    enrollmentPayload: EnrollmentPayload,
+    uid: string,
+    programStageIdLinkedEventToRedirectTo?: string,
+) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)({
         enrollmentPayload,
         uid,
+        programStageIdLinkedEventToRedirectTo,
     });
 
 export const saveNewTrackedEntityInstanceWithEnrollment = ({
     candidateForRegistration,
-    redirectTo,
+    pageToRedirectTo,
     uid,
     stageId,
     eventIndex,
 }: {
     candidateForRegistration: any,
-    redirectTo: string,
+    pageToRedirectTo: string,
     uid: string,
     stageId?: string,
     eventIndex: number,
@@ -76,7 +81,7 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
                 },
                 commit: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED,
-                    meta: { redirectTo, stageId, uid, eventIndex },
+                    meta: { pageToRedirectTo, stageId, uid, eventIndex },
                 },
                 rollback: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED,

@@ -11,7 +11,7 @@ import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
-import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
+import { RelatedStageModes } from '../../../WidgetRelatedStages';
 
 import { useWidgetDataFromStore } from '../hooks';
 import {
