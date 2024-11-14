@@ -8,6 +8,7 @@ import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
 
 const styles = {
     container: {
+        width: 'fit-content',
         marginBottom: '16px',
         margin: '16px',
     },

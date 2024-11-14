@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState, useEffect } from 'react';
+import React, { type ComponentType, useEffect, useState } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useSelector } from 'react-redux';
 import {
@@ -130,50 +130,60 @@ export const WidgetEventEditPlain = ({
                 >
                     <div className={classes.form}>
                         {currentPageMode === dataEntryKeys.VIEW ? (
-                            <ViewEventDataEntry
-                                programId={programId}
-                                formFoundation={formFoundation}
-                                dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
-                                hideDueDate={stage.hideDueDate}
-                            />
+                            <div
+                                className={classes.form}
+                                data-test={'widget-enrollment-event-view'}
+                            >
+                                <ViewEventDataEntry
+                                    programId={programId}
+                                    formFoundation={formFoundation}
+                                    dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
+                                    hideDueDate={stage.hideDueDate}
+                                />
+                            </div>
                         ) : (
-                            <EditEventDataEntry
-                                dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
-                                formFoundation={formFoundation}
-                                orgUnit={orgUnit}
-                                programId={programId}
-                                stageId={stageId}
-                                teiId={teiId}
-                                enrollmentId={enrollmentId}
-                                eventId={eventId}
-                                eventStatus={eventStatus}
-                                onCancelEditEvent={onCancelEditEvent}
-                                hasDeleteButton
-                                onHandleScheduleSave={onHandleScheduleSave}
-                                onSaveExternal={onSaveExternal}
-                                initialScheduleDate={initialScheduleDate}
-                                allowGenerateNextVisit={stage.allowGenerateNextVisit}
-                                askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
-                                availableProgramStages={availableProgramStages}
-                                hideDueDate={stage.hideDueDate}
-                                assignee={assignee}
-                                onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
-                                onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
-                                onSaveAndCompleteEnrollmentSuccessActionType={onSaveAndCompleteEnrollmentSuccessActionType}
-                            />
+                            <div
+                                className={classes.form}
+                                data-test={'widget-enrollment-event-edit'}
+                            >
+                                <EditEventDataEntry
+                                    dataEntryId={dataEntryIds.ENROLLMENT_EVENT}
+                                    formFoundation={formFoundation}
+                                    orgUnit={orgUnit}
+                                    programId={programId}
+                                    stageId={stageId}
+                                    teiId={teiId}
+                                    enrollmentId={enrollmentId}
+                                    eventId={eventId}
+                                    eventStatus={eventStatus}
+                                    onCancelEditEvent={onCancelEditEvent}
+                                    hasDeleteButton
+                                    onHandleScheduleSave={onHandleScheduleSave}
+                                    onSaveExternal={onSaveExternal}
+                                    initialScheduleDate={initialScheduleDate}
+                                    allowGenerateNextVisit={stage.allowGenerateNextVisit}
+                                    askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
+                                    availableProgramStages={availableProgramStages}
+                                    hideDueDate={stage.hideDueDate}
+                                    assignee={assignee}
+                                    onSaveAndCompleteEnrollmentExternal={onSaveAndCompleteEnrollment}
+                                    onSaveAndCompleteEnrollmentErrorActionType={onSaveAndCompleteEnrollmentErrorActionType}
+                                    onSaveAndCompleteEnrollmentSuccessActionType={onSaveAndCompleteEnrollmentSuccessActionType}
+                                />
+                            </div>
                         )}
                     </div>
                 </Widget>
-
-                {supportsChangelog && changeLogIsOpen && (
-                    <EventChangelogWrapper
-                        isOpen
-                        setIsOpen={setChangeLogIsOpen}
-                        eventId={loadedValues.eventContainer.id}
-                        formFoundation={formFoundation}
-                    />
-                )}
             </div>
+
+            {supportsChangelog && changeLogIsOpen && (
+                <EventChangelogWrapper
+                    isOpen
+                    setIsOpen={setChangeLogIsOpen}
+                    eventId={loadedValues.eventContainer.id}
+                    formFoundation={formFoundation}
+                />
+            )}
         </div>
     ) : <LoadingMaskElementCenter />;
 };

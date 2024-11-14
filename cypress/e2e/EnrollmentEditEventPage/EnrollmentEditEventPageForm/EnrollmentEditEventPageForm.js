@@ -1,4 +1,4 @@
-import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
+import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
 
 const changeEnrollmentAndEventsStatus = () => (
@@ -209,4 +209,16 @@ Then('the edit button should be disabled', () => {
     cy.get('[data-test="widget-enrollment-event"]')
         .find('[data-test="widget-enrollment-event-edit-button"]')
         .should('be.disabled');
+});
+
+And('the add event form is displayed', () => {
+    cy.get('[data-test="add-event-enrollment-page-content"]').should('exist');
+});
+
+And('the user is navigated to the enrollment dashboard', () => {
+    cy.get('[data-test="enrollment-overview-page"]').should('exist');
+});
+
+And(/^the view enrollment event form is in (.*) mode$/, (mode) => {
+    cy.get(`[data-test="widget-enrollment-event-${mode}"]`).should('exist');
 });
