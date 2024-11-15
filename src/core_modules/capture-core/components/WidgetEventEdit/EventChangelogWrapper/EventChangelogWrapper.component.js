@@ -42,9 +42,34 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps 
             return acc;
         }, {});
 
+        const basicFields = {
+            occurredAt: {
+                id: 'occurredAt',
+                name: 'Occurred at',
+                type: dataElementTypes.DATETIME,
+                optionSet: undefined,
+                options: undefined,
+            },
+            scheduledAt: {
+                id: 'scheduledAt',
+                name: 'Scheduled at',
+                type: dataElementTypes.DATETIME,
+                optionSet: undefined,
+                options: undefined,
+            },
+            geometry: {
+                id: 'geometry',
+                name: 'Geometry',
+                type: dataElementTypes.COORDINATE,
+                optionSet: undefined,
+                options: undefined,
+            },
+        };
+
         return {
             ...fieldElementsById,
             ...fieldElementsContext,
+            ...basicFields,
         };
     }, [formFoundation]);
 

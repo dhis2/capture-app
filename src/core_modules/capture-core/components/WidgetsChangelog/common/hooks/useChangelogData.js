@@ -26,8 +26,8 @@ const getMetadataItemDefinition = (
     change: Change,
     dataItemDefinitions: ItemDefinitions,
 ) => {
-    const { dataElement, attribute } = change;
-    const fieldId = dataElement ?? attribute;
+    const { dataElement, attribute, property } = change;
+    const fieldId = dataElement ?? attribute ?? property;
     const metadataElement = fieldId ? dataItemDefinitions[fieldId] : dataItemDefinitions[elementKey];
 
     return { metadataElement, fieldId };
@@ -39,9 +39,9 @@ export const useChangelogData = ({
     programId,
     dataItemDefinitions,
 }: Props) => {
-    const [page, setPage] = useState<number>(1);
-    const [pageSize, setPageSize] = useState<number>(DEFAULT_PAGE_SIZE);
-    const [sortDirection, setSortDirection] = useState<SortDirection>(DEFAULT_SORT_DIRECTION);
+    const [page, setPage] = useState < number >(1);
+    const [pageSize, setPageSize] = useState < number >(DEFAULT_PAGE_SIZE);
+    const [sortDirection, setSortDirection] = useState < SortDirection >(DEFAULT_SORT_DIRECTION);
     const { fromServerDate } = useTimeZoneConversion();
 
     const handleChangePageSize = (newPageSize: number) => {
@@ -67,10 +67,112 @@ export const useChangelogData = ({
         },
     );
 
+    const mockData: any = useMemo(() => [
+        {
+            createdAt: '2024-11-14T11:03:08.269',
+            createdBy: {
+                uid: 'xE7jOejl9FI',
+                username: 'admin',
+                firstName: 'John',
+                surname: 'Traore',
+            },
+            type: 'UPDATE',
+            change: {
+                eventProperty: {
+                    property: 'geometry',
+                    previousValue: [-11.420051, 8.101209],
+                    currentValue: [-11.450123, 8.125678],
+                },
+            },
+        },
+        {
+            createdAt: '2024-11-14T11:05:47.437',
+            createdBy: {
+                uid: 'xE7jOejl9FI',
+                username: 'admin',
+                firstName: 'John',
+                surname: 'Traore',
+            },
+            type: 'UPDATE',
+            change: {
+                eventProperty: {
+                    property: 'geometry',
+                    previousValue: [
+                        [-11.437732, 8.110726],
+                        [-11.396705, 8.109876],
+                        [-11.398421, 8.089143],
+                        [-11.414729, 8.084894],
+                        [-11.436873, 8.088803],
+                        [-11.437732, 8.110726],
+                    ],
+                    currentValue: [
+                        [-11.440000, 8.120000],
+                        [-11.400000, 8.115000],
+                        [-11.402000, 8.095000],
+                        [-11.418000, 8.090000],
+                        [-11.440000, 8.120000],
+                    ],
+                },
+            },
+        },
+        {
+            createdAt: '2024-11-14T11:09:47.437',
+            createdBy: {
+                uid: 'xE7jOejl9FI',
+                username: 'admin',
+                firstName: 'John',
+                surname: 'Traore',
+            },
+            type: 'UPDATE',
+            change: {
+                eventProperty: {
+                    property: 'occurredAt',
+                    previousValue: '2024-01-30T00:00:00.000',
+                    currentValue: '2024-01-31T00:00:00.000',
+                },
+            },
+        },
+        {
+            createdAt: '2024-11-14T11:15:00.000',
+            createdBy: {
+                uid: 'xE7jOejl9FI',
+                username: 'admin',
+                firstName: 'John',
+                surname: 'Traore',
+            },
+            type: 'UPDATE',
+            change: {
+                eventProperty: {
+                    property: 'scheduledAt',
+                    previousValue: '2024-01-29T00:00:00.000',
+                    currentValue: '2024-01-30T00:00:00.000',
+                },
+            },
+        },
+        {
+            createdAt: '2019-09-27T00:02:11.604',
+            createdBy: {
+                uid: 'AIK2aQOJIbj',
+                username: 'tracker',
+                firstName: 'Tracker name',
+                surname: 'Tracker surname',
+            },
+            type: 'UPDATE',
+            change: {
+                dataValue: {
+                    dataElement: 'X8zyunlgUfM',
+                    previousValue: 'Replacement',
+                    currentValue: 'Fresh',
+                },
+            },
+        },
+    ], []);
+
+
     const records: ?Array<ChangelogRecord> = useMemo(() => {
         if (!data) return undefined;
 
-        return data.changeLogs.map((changelog) => {
+        return mockData.map((changelog) => {
             const { change: apiChange, createdAt, createdBy } = changelog;
             const elementKey = Object.keys(apiChange)[0];
             const change = apiChange[elementKey];
@@ -114,7 +216,7 @@ export const useChangelogData = ({
                 currentValue,
             };
         }).filter(Boolean);
-    }, [data, dataItemDefinitions, fromServerDate]);
+    }, [data, dataItemDefinitions, fromServerDate, mockData]);
 
     return {
         records,
