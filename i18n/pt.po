@@ -11,13 +11,14 @@
 # Jason Pickering <jason@dhis2.org>, 2024
 # Helton Dias, 2024
 # Shelsea Chumaio, 2024
+# Laurência Luís, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Shelsea Chumaio, 2024\n"
+"Last-Translator: Laurência Luís, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -340,7 +341,7 @@ msgstr ""
 
 msgid ""
 "Would you like to complete the enrollment and all active events as well?"
-msgstr ""
+msgstr "Gostaria de completar a inscrição e todos os eventos activos?"
 
 msgid "{{count}} event in {{programStageName}}"
 msgid_plural "{{count}} event in {{programStageName}}"
@@ -349,13 +350,13 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Yes, complete enrollment and events"
-msgstr ""
+msgstr "Sim, completar a inscrição e os eventos"
 
 msgid "Complete enrollment only"
-msgstr ""
+msgstr "Completar apenas a inscrição"
 
 msgid "Would you like to complete the enrollment?"
-msgstr ""
+msgstr "Gostaria de completar a inscrição?"
 
 msgid "Complete enrollment"
 msgstr "Completar inscrição"
@@ -391,7 +392,7 @@ msgid "validation failed"
 msgstr "falha na validação"
 
 msgid "No feedback for this event yet"
-msgstr ""
+msgstr "Ainda não há feedback para este evento"
 
 msgid "No indicator output for this event yet"
 msgstr ""
@@ -701,8 +702,10 @@ msgstr "Não há inscrições ativas."
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "Adicione uma nova inscrição para {{teiDisplayName}} neste programa."
 
-msgid "No access to program owner."
-msgstr "Sem acesso ao proprietário do programa."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} não está inscrito neste programa."
@@ -1107,7 +1110,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr "Atribuído a"
 
-msgid "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
 msgstr ""
 
 msgid "Edit"
@@ -1116,7 +1119,7 @@ msgstr "Editar"
 msgid "No one is assigned to this event"
 msgstr "Ninguém está atribuído a este evento"
 
-msgid "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
