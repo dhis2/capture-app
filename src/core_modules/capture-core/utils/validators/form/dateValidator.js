@@ -1,12 +1,12 @@
 // @flow
 
-export function isValidDate(value: string, internalComponentError?: Object) {
+export function isValidDate(value: ?string, internalComponentError?: Object) {
     if (!value) {
-        return { valid: false };
+        return { valid: false, errorMessage: null };
     }
 
     if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
-        return { valid: true };
+        return { valid: true, errorMessage: null };
     }
 
     if (internalComponentError?.error) {
@@ -16,5 +16,5 @@ export function isValidDate(value: string, internalComponentError?: Object) {
         };
     }
 
-    return { valid: true };
+    return { valid: true, errorMessage: null };
 }

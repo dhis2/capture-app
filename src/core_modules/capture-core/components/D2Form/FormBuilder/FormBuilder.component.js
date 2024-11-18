@@ -40,7 +40,7 @@ export type FieldConfig = {
 type FieldUI = {
     touched?: ?boolean,
     valid?: ?boolean,
-    errorMessage?: ?string | Array<string>,
+    errorMessage?: ?string | Array<string> | Array<{[key: string]: string}>,
     errorType?: ?string,
     errorData?: ErrorData,
     validatingMessage?: ?string,

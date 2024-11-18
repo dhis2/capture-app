@@ -5,7 +5,7 @@ const CUSTOM_VALIDATION_MESSAGES = {
     INVALID_DATE_MORE_THAN_MAX: i18n.t('A date in the future is not allowed'),
 };
 
-export const isValidNonFutureDate = (value: string, internalComponentError) => {
+export const isValidNonFutureDate = (value: string, internalComponentError?: ?{error: ?string, errorCode: ?string}) => {
     if (!value) {
         return true;
     }
