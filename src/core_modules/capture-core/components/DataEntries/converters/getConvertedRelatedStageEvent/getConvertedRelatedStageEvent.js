@@ -99,8 +99,7 @@ export const getConvertedRelatedStageEvent = ({
     enrollmentId,
     relatedStageType,
 }: ConvertedRelatedStageEventProps) => {
-    const requestEventIsFromConstraint =
-    relatedStageType.fromConstraint.programStage.id === currentProgramStageId;
+    const requestEventIsFromConstraint = relatedStageType.fromConstraint.programStage.id === currentProgramStageId;
 
     const { linkedEvent, linkedEventId } = getEventDetailsByLinkMode({
         relatedStageDataValues,

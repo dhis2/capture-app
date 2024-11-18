@@ -53,6 +53,7 @@ const ValidatedPlain = ({
                     programId={programId}
                     programStageId={stage?.id}
                     currentStageLabel={stage.name}
+                    enableLinkExistingEvent
                 />
                 <FinishButtons
                     onSave={onSave}

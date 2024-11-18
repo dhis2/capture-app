@@ -20,6 +20,7 @@ export type Props = {|
     enrollmentId?: string,
     programStageId: string,
     currentStageLabel: string,
+    enableLinkExistingEvent?: boolean,
 |}
 export type RelatedStageDataValueStates = {|
     linkMode: ?$Keys<typeof RelatedStageModes>,

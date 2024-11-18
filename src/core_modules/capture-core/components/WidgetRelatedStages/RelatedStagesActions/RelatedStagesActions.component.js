@@ -53,6 +53,7 @@ export const RelatedStagesActionsPlain = ({
     currentStageLabel,
     errorMessages,
     saveAttempted,
+    enableLinkExistingEvent,
 }: Props) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
@@ -73,7 +74,7 @@ export const RelatedStagesActionsPlain = ({
     return (
         <DataSection
             dataTest="related-stages-section"
-            sectionName={i18n.t('Actions: {{relationshipName}}', { relationshipName })}
+            sectionName={i18n.t('Actions - {{relationshipName}}', { relationshipName })}
         >
             <div className={classes.wrapper}>
                 {type === relatedStageStatus.LINKABLE && (
@@ -114,24 +115,26 @@ export const RelatedStagesActionsPlain = ({
                                 value={RelatedStagesActionTypes.ENTER_DATA}
                             />
                         </ConditionalTooltip>
-                        <ConditionalTooltip
-                            key={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
-                            content={i18n.t('{{ linkableStageLabel }} has no linkable events', {
-                                linkableStageLabel: programStage.stageForm.name,
-                                interpolation: { escapeValue: false },
-                            })}
-                            closeDelay={50}
-                            enabled={!linkableEvents.length}
-                        >
-                            <Radio
-                                name={`related-stage-action-${RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}`}
-                                checked={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE === selectedAction}
-                                disabled={!linkableEvents.length}
-                                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.LINK_EXISTING_RESPONSE]}
-                                onChange={(e: Object) => updateSelectedAction(e.value)}
-                                value={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
-                            />
-                        </ConditionalTooltip>
+                        {enableLinkExistingEvent && (
+                            <ConditionalTooltip
+                                key={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
+                                content={i18n.t('{{ linkableStageLabel }} has no linkable events', {
+                                    linkableStageLabel: programStage.stageForm.name,
+                                    interpolation: { escapeValue: false },
+                                })}
+                                closeDelay={50}
+                                enabled={!linkableEvents.length}
+                            >
+                                <Radio
+                                    name={`related-stage-action-${RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}`}
+                                    checked={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE === selectedAction}
+                                    disabled={!linkableEvents.length}
+                                    label={mainOptionTranslatedTexts[RelatedStagesActionTypes.LINK_EXISTING_RESPONSE]}
+                                    onChange={(e: Object) => updateSelectedAction(e.value)}
+                                    value={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
+                                />
+                            </ConditionalTooltip>
+                        )}
                     </>
                 )}
 
