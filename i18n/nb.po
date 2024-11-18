@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -689,8 +689,10 @@ msgstr "Det er ingen aktive registreringer."
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "Legg til ny registrering for {{teiDisplayName}} i dette programmet."
 
-msgid "No access to program owner."
-msgstr "Ingen tilgang til programeier."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
@@ -1090,8 +1092,8 @@ msgstr "Det er ingen sporbare enhetstyper tilgjengelig"
 msgid "Assigned to"
 msgstr "Tildelt til"
 
-msgid "You don't have access to edit this assignee"
-msgstr "Du har ikke tilgang til å redigere denne tildelte brukeren"
+msgid "You don't have access to edit the assigned user"
+msgstr ""
 
 msgid "Edit"
 msgstr "Rediger"
@@ -1099,8 +1101,8 @@ msgstr "Rediger"
 msgid "No one is assigned to this event"
 msgstr "Ingen er tildelt denne hendelsen"
 
-msgid "You don't have access to assign an assignee"
-msgstr "Du har ikke tilgang til å tildele bruker"
+msgid "You don't have access to assign a user to this event"
+msgstr ""
 
 msgid "Assign"
 msgstr "Tildel"
@@ -1148,6 +1150,9 @@ msgstr "Merk som kansellert"
 
 msgid "Mark incomplete"
 msgstr "Merk som ufullstendig"
+
+msgid "You do not have access to delete this enrollment"
+msgstr ""
 
 msgid "Delete enrollment"
 msgstr "Slett registrering"
