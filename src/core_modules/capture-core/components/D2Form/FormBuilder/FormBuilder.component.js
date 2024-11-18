@@ -96,7 +96,7 @@ type Props = {
 export type FieldCommitOptions = {|
     touched?: boolean,
     valid?: boolean,
-    error?: string,
+    error?: string | Array<string> | Array<{[key: string]: string}>,
     errorCode?: string,
 |};
 
