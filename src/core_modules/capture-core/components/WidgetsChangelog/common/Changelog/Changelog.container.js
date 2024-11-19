@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal } from '@dhis2/ui';
-import { useChangelogData } from '../hooks';
+import { useChangelogData, useListDataValues } from '../hooks';
 import { ChangelogComponent } from './Changelog.component';
 import { CHANGELOG_ENTITY_TYPES } from './index';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
@@ -9,15 +9,17 @@ import type { ItemDefinitions } from './Changelog.types';
 
 type Props = {
     entityId: string,
+    entityData: Object,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
     isOpen: boolean,
     close: () => void,
     dataItemDefinitions: ItemDefinitions,
     programId?: string,
-}
+};
 
 export const Changelog = ({
     entityId,
+    entityData,
     entityType,
     programId,
     isOpen,
@@ -25,9 +27,11 @@ export const Changelog = ({
     dataItemDefinitions,
 }: Props) => {
     const {
-        records,
+        rawRecords,
         pager,
-        isLoading,
+        isLoading: isChangelogLoading,
+        page,
+        pageSize,
         setPage,
         setPageSize,
         sortDirection,
@@ -36,10 +40,24 @@ export const Changelog = ({
         entityId,
         entityType,
         programId,
-        dataItemDefinitions,
     });
 
-    if (isLoading) {
+    const {
+        processedRecords,
+        isLoading: isProcessingLoading,
+    } = useListDataValues({
+        rawRecords,
+        dataItemDefinitions,
+        entityId,
+        entityData,
+        entityType,
+        programId,
+        sortDirection,
+        page,
+        pageSize,
+    });
+
+    if (isChangelogLoading || isProcessingLoading) {
         return (
             <Modal onClose={close}>
                 <LoadingMaskElementCenter />
@@ -51,7 +69,7 @@ export const Changelog = ({
         <ChangelogComponent
             isOpen={isOpen}
             close={close}
-            records={records}
+            records={processedRecords}
             pager={pager}
             setPage={setPage}
             setPageSize={setPageSize}
