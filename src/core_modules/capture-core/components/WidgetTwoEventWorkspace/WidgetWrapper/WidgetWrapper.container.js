@@ -48,7 +48,7 @@ const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Props
                 <div className={classes.referalResponse}>
                     <div className={classes.linkedEvent}>
                         <span className={classes.icon}>
-                            <IconLink16 />
+                            <IconLink16 color={colors.blue800} />
                         </span>
                         <div>{i18n.t('Linked event')}</div>
                     </div>
