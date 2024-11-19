@@ -10,8 +10,6 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps 
         const elements = formFoundation.getElements();
         const contextLabels = formFoundation.getLabels();
 
-        console.log('formFoundation: ', formFoundation);
-
         const fieldElementsById = elements.reduce((acc, element: DataElement) => {
             const { optionSet } = element;
             const metadata = {

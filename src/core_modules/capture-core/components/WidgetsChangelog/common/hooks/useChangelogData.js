@@ -26,7 +26,6 @@ const getMetadataItemDefinition = (
     change: Change,
     dataItemDefinitions: ItemDefinitions,
 ) => {
-    console.log('dataItemDefinitions: ', dataItemDefinitions);
     const { dataElement, attribute, property } = change;
     const fieldId = dataElement ?? attribute ?? property;
     const metadataElement = fieldId ? dataItemDefinitions[fieldId] : dataItemDefinitions[elementKey];
@@ -116,7 +115,7 @@ export const useChangelogData = ({
                 },
             },
         },
-        /* {
+        {
             createdAt: '2024-11-14T11:09:47.437',
             createdBy: {
                 uid: 'xE7jOejl9FI',
@@ -166,7 +165,7 @@ export const useChangelogData = ({
                     currentValue: 'Fresh',
                 },
             },
-        }, */
+        },
     ], []);
 
 
@@ -190,8 +189,6 @@ export const useChangelogData = ({
                 }));
                 return null;
             }
-
-            console.log('metadataElement: ', metadataElement);
 
             const { firstName, surname, username } = createdBy;
             const { options } = metadataElement;
