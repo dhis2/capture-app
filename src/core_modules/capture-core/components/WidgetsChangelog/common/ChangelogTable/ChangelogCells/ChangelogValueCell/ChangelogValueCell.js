@@ -80,7 +80,8 @@ export const ChangelogValueCellPlain = ({
     previousValue,
     classes,
 }: Props) => {
-    const isPolygon = dataItemId === 'geometry';
+    if (!currentValue) { return null; }
+    const isPolygon = dataItemId === 'geometry' && currentValue.length > 2;
     const ComponentsByChangeType = isPolygon
         ? PlygonChangelogComponentsByChangeType
         : DefaultChangelogComponentsByChangeType;
