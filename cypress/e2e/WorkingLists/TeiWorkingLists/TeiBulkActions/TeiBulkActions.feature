@@ -51,6 +51,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
     When you confirm 3 active enrollments successfully
     Then the bulk complete enrollments modal should close
 
+#DHIS2-18447
 @skip
   Scenario: the user should be able to bulk complete enrollments without completing events
     Given you open the main page with Ngelehun and Malaria Case diagnosis context
@@ -62,6 +63,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
     When you confirm 1 active enrollment without completing events successfully
     Then the bulk complete enrollments modal should close
 
+#DHIS2-18447
 @skip
   Scenario: the user should be able to bulk delete enrollments
     Given you open the main page with Ngelehun and Malaria Case diagnosis context
@@ -71,6 +73,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
     When you confirm deleting 3 enrollments
     Then the bulk delete enrollments modal should close
 
+#DHIS2-18447
 @skip
   Scenario: the user should be able to bulk delete only active enrollments
     Given you open the main page with Ngelehun and Malaria Case diagnosis context
