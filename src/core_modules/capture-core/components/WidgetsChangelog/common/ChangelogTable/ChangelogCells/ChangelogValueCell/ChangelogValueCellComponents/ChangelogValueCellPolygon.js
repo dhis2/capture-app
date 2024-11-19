@@ -20,11 +20,11 @@ const Updated = ({ previousValue, currentValue, classes }: ChangelogValueCellPro
 
     return (
         <>
-            <div className={classes.valueContainer}>
+            <div className={classes.container}>
                 <ValueDisplay
                     value={previousValue}
                     showMore={showMore}
-                    className={classes.updatePreviousValue}
+                    className={classes.previousValue}
                 />
                 <span className={classes.updateArrow}>
                     <IconArrowRight16 />
@@ -32,7 +32,7 @@ const Updated = ({ previousValue, currentValue, classes }: ChangelogValueCellPro
                 <ValueDisplay
                     value={currentValue}
                     showMore={showMore}
-                    className={classes.updateCurrentValue}
+                    className={classes.currentValue}
                 />
             </div>
             <div className={classes.buttonContainer}>

@@ -28,12 +28,11 @@ type Props = {
 
 const styles = {
     container: {
-        alignItems: 'center',
         display: 'flex',
-    },
-    valueContainer: {
-        display: 'flex',
+        flexDirection: 'row',
         alignItems: 'center',
+        whiteSpace: 'normal',
+        height: '100%',
     },
     buttonContainer: {
         display: 'flex',
@@ -42,17 +41,11 @@ const styles = {
     },
     previousValue: {
         color: colors.grey700,
+        wordBreak: 'break-word',
     },
     currentValue: {
         color: colors.grey900,
-    },
-    updatePreviousValue: {
-        color: colors.grey700,
-        maxWidth: '45%',
-    },
-    updateCurrentValue: {
-        color: colors.grey900,
-        maxWidth: '45%',
+        wordBreak: 'break-word',
     },
     updateArrow: {
         display: 'inline-flex',

@@ -6,11 +6,11 @@ import type { ChangelogValueCellProps } from './ChangelogValueCellComponents.typ
 
 const Updated = ({ previousValue, currentValue, classes }: ChangelogValueCellProps) => (
     <div className={classes.container}>
-        <span className={classes.updatePreviousValue}>{previousValue}</span>
+        <span className={classes.previousValue}>{previousValue}</span>
         <span className={classes.updateArrow}>
             <IconArrowRight16 />
         </span>
-        <span className={classes.updateCurrentValue}>{currentValue}</span>
+        <span className={classes.currentValue}>{currentValue}</span>
     </div>
 );
 
