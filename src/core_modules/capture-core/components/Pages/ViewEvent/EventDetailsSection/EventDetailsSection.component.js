@@ -56,6 +56,7 @@ const getStyles = () => ({
 type Props = {
     showEditEvent: ?boolean,
     eventId: string,
+    eventData: Object,
     onOpenEditEvent: (orgUnit: Object, programCategory: ?ProgramCategory) => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
@@ -76,6 +77,7 @@ const EventDetailsSectionPlain = (props: Props) => {
     const {
         classes,
         eventId,
+        eventData,
         onOpenEditEvent,
         showEditEvent,
         programStage,
@@ -200,6 +202,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
+                    eventData={eventData}
                     eventId={eventId}
                     formFoundation={programStage.stageForm}
                 />

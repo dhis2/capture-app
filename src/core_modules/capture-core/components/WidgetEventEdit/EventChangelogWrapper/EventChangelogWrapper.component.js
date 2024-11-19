@@ -5,7 +5,7 @@ import { dataElementTypes } from '../../../metaData';
 import type { Props } from './EventChangelogWrapper.types';
 import { WidgetEventChangelog } from '../../WidgetsChangelog';
 
-export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps }: Props) => {
+export const EventChangelogWrapper = ({ formFoundation, eventId, eventData, ...passOnProps }: Props) => {
     const dataItemDefinitions = useMemo(() => {
         const elements = formFoundation.getElements();
         const contextLabels = formFoundation.getLabels();
@@ -52,6 +52,7 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps 
         <WidgetEventChangelog
             {...passOnProps}
             eventId={eventId}
+            eventData={eventData}
             dataItemDefinitions={dataItemDefinitions}
         />
     );

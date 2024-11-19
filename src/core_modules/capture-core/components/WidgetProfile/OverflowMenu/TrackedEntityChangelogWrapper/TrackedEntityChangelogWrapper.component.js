@@ -5,8 +5,13 @@ import { useFormFoundation } from '../../DataEntry/hooks';
 import { WidgetTrackedEntityChangelog } from '../../../WidgetsChangelog';
 import type { Props } from './TrackedEntityChangelogWrapper.types';
 
-export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, ...passOnProps }: Props) => {
+export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, trackedEntityData, ...passOnProps }: Props) => {
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);
+
+    const transformedTrackedEntityData = trackedEntityData.reduce((acc, item) => {
+        acc[item.attribute] = item.value;
+        return acc;
+    }, {});
 
     const dataItemDefinitions = useMemo(() => {
         if (!Object.keys(formFoundation)?.length) return {};
@@ -58,6 +63,7 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, ..
             close={() => setIsOpen(false)}
             programId={programAPI.id}
             dataItemDefinitions={dataItemDefinitions}
+            trackedEntityData={transformedTrackedEntityData}
         />
     );
 };
