@@ -26,7 +26,7 @@ const styles = {
         borderRadius: '3px',
     },
     linkedEvent: {
-        color: colors.blue600,
+        color: colors.blue900,
         verticalAlign: 'middle',
         display: 'flex',
         fontSize: '16px',
