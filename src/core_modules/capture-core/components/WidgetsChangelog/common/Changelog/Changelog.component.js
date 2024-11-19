@@ -47,6 +47,7 @@ export const ChangelogComponent = ({
                     <DataTableBody
                         dataTest={'changelog-data-table-body'}
                     >
+                        {console.log('record: ', records)}
                         {records?.map(record => (
                             <ChangelogTableRow
                                 key={record.reactKey}

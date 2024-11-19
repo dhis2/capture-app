@@ -10,6 +10,8 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps 
         const elements = formFoundation.getElements();
         const contextLabels = formFoundation.getLabels();
 
+        console.log('formFoundation: ', formFoundation);
+
         const fieldElementsById = elements.reduce((acc, element: DataElement) => {
             const { optionSet } = element;
             const metadata = {
@@ -42,34 +44,19 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, ...passOnProps 
             return acc;
         }, {});
 
-        const basicFields = {
-            occurredAt: {
-                id: 'occurredAt',
-                name: 'Occurred at',
-                type: dataElementTypes.DATETIME,
-                optionSet: undefined,
-                options: undefined,
-            },
-            scheduledAt: {
-                id: 'scheduledAt',
-                name: 'Scheduled at',
-                type: dataElementTypes.DATETIME,
-                optionSet: undefined,
-                options: undefined,
-            },
+        const additionalFields = {
             geometry: {
                 id: 'geometry',
-                name: 'Geometry',
-                type: dataElementTypes.COORDINATE,
-                optionSet: undefined,
-                options: undefined,
+                name: formFoundation.featureType,
+                type: formFoundation.featureType === 'Polygon' ?
+                    dataElementTypes.POLYGON : dataElementTypes.COORDINATE,
             },
         };
 
         return {
             ...fieldElementsById,
             ...fieldElementsContext,
-            ...basicFields,
+            ...additionalFields,
         };
     }, [formFoundation]);
 

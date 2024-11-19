@@ -26,6 +26,7 @@ const getMetadataItemDefinition = (
     change: Change,
     dataItemDefinitions: ItemDefinitions,
 ) => {
+    console.log('dataItemDefinitions: ', dataItemDefinitions);
     const { dataElement, attribute, property } = change;
     const fieldId = dataElement ?? attribute ?? property;
     const metadataElement = fieldId ? dataItemDefinitions[fieldId] : dataItemDefinitions[elementKey];
@@ -68,7 +69,7 @@ export const useChangelogData = ({
     );
 
     const mockData: any = useMemo(() => [
-        {
+        /* {
             createdAt: '2024-11-14T11:03:08.269',
             createdBy: {
                 uid: 'xE7jOejl9FI',
@@ -84,7 +85,7 @@ export const useChangelogData = ({
                     currentValue: [-11.450123, 8.125678],
                 },
             },
-        },
+        }, */
         {
             createdAt: '2024-11-14T11:05:47.437',
             createdBy: {
@@ -115,7 +116,7 @@ export const useChangelogData = ({
                 },
             },
         },
-        {
+        /* {
             createdAt: '2024-11-14T11:09:47.437',
             createdBy: {
                 uid: 'xE7jOejl9FI',
@@ -165,7 +166,7 @@ export const useChangelogData = ({
                     currentValue: 'Fresh',
                 },
             },
-        },
+        }, */
     ], []);
 
 
@@ -189,6 +190,8 @@ export const useChangelogData = ({
                 }));
                 return null;
             }
+
+            console.log('metadataElement: ', metadataElement);
 
             const { firstName, surname, username } = createdBy;
             const { options } = metadataElement;
