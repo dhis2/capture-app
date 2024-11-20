@@ -21,10 +21,7 @@ When('the user clicks the first second antenatal care visit event', () => {
 });
 
 When(/^the user clicks the "Back to all stages and events" button/, () =>
-    cy
-        .get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="dhis2-uicore-button"]')
-        .eq(0)
+    cy.get('[data-test="enrollment-edit-event-back-button"]')
         .click(),
 );
 

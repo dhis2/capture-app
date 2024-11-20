@@ -5,7 +5,9 @@ Then('the enrollment widget should be loaded', () => {
 });
 
 When('you click edit mode', () => {
-    cy.contains('[data-test="dhis2-uicore-button"]', 'Edit event')
+    cy
+        .get('[data-test="widget-enrollment-event"]')
+        .find('[data-test="widget-enrollment-event-edit-button"]')
         .click();
     cy.get('[data-test="widget-enrollment-event-edit"]').should('exist');
 });
