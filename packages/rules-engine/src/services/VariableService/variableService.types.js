@@ -1,4 +1,5 @@
 // @flow
+import { typeof typeKeys } from '../../constants';
 import { typeof eventStatuses } from './constants';
 import type { DataElements, TrackedEntityAttributes, OrgUnit } from '../../rulesEngine.types';
 
@@ -26,6 +27,7 @@ type EventMain = {
     +status?: $Values<eventStatuses>,
     +occurredAt?: string,
     +scheduledAt?: string,
+    +createdAt?: string,
 };
 
 export type EventValues = {
@@ -89,3 +91,5 @@ export type VariableServiceInput = {|
 |};
 
 export type CompareDates = (firstRulesDate: ?string, secondRulesDate: ?string) => number;
+
+export type ProcessValue = (value: any, type: $Values<typeKeys>) => any;

@@ -97,10 +97,10 @@ const WidgetProfilePlain = ({
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
         .map((clientAttribute) => {
-            const { attribute, key } = clientAttribute;
+            const { attribute, key, valueType } = clientAttribute;
             const value = convertClientToView(clientAttribute);
             return {
-                attribute, key, value, reactKey: attribute,
+                attribute, key, value, valueType, reactKey: attribute,
             };
         }), [clientAttributesWithSubvalues]);
 
@@ -162,6 +162,7 @@ const WidgetProfilePlain = ({
                                 trackedEntity={trackedEntity}
                                 onDeleteSuccess={onDeleteSuccess}
                                 displayChangelog={displayChangelog}
+                                trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}
                                 programAPI={program}
                             />

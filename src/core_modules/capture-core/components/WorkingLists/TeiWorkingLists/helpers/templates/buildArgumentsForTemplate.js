@@ -9,6 +9,51 @@ import type { TeiWorkingListsColumnConfigs, ApiTrackerQueryCriteria } from '../.
 import type { FiltersData } from '../../../WorkingListsBase';
 import { getOrderQueryArgs } from '../../epics';
 
+const buildArguments = ({
+    filters,
+    programStageFiltersOnly,
+    columns,
+    programStageId,
+    mainFiltersConverted,
+}: {
+    filters?: FiltersData,
+    programStageFiltersOnly: Array<{ id: string, type: string }>,
+    columns: TeiWorkingListsColumnConfigs,
+    programStageId?: string,
+    mainFiltersConverted: Object,
+}) => {
+    if (!programStageId) {
+        return {
+            assignedUserMode: mainFiltersConverted.assignedUserMode,
+            assignedUsers: mainFiltersConverted.assignedUsers,
+            attributesColumns: columns,
+            dataFilters: [],
+            status: undefined,
+            eventOccurredAt: undefined,
+            scheduledAt: undefined,
+        };
+    }
+
+    const additionalFiltersConverted = convertMainFilters({
+        filters,
+        mainFilters: programStageFiltersOnly,
+    });
+    const { status, eventOccurredAt, scheduledAt } = additionalFiltersConverted;
+    return {
+        status,
+        eventOccurredAt,
+        scheduledAt,
+        assignedUserMode: additionalFiltersConverted.assignedUserMode,
+        assignedUsers: additionalFiltersConverted.assignedUsers,
+        attributesColumns: columns.filter(column => !column.additionalColumn),
+        dataFilters: convertToEventFilterQuery({
+            filters,
+            mainFilters: programStageFiltersOnly,
+            dataElementsValueFilters: columns.filter(column => column.additionalColumn),
+        }),
+    };
+};
+
 export const buildArgumentsForTemplate = ({
     filters,
     filtersOnly,
@@ -28,25 +73,20 @@ export const buildArgumentsForTemplate = ({
     programId: string,
     programStageId?: string,
 }) => {
-    const { programStatus, occurredAt, enrolledAt, assignedUserMode, assignedUsers, followUp } = convertMainFilters({
+    const mainFiltersConverted = convertMainFilters({
         filters,
         mainFilters: filtersOnly,
     });
-    const { status, eventOccurredAt, scheduledAt } = convertMainFilters({
-        filters,
-        mainFilters: programStageFiltersOnly,
-    });
-    const attributeValueFilters = convertToTEIFilterAttributes({
-        filters,
-        attributeValueFilters: programStageId ? columns.filter(column => !column.additionalColumn) : columns,
-    });
-    const dataFilters = programStageId
-        ? convertToEventFilterQuery({
+    const { programStatus, occurredAt, enrolledAt, followUp } = mainFiltersConverted;
+    const { assignedUserMode, assignedUsers, attributesColumns, dataFilters, status, eventOccurredAt, scheduledAt } =
+        buildArguments({
             filters,
-            mainFilters: programStageFiltersOnly,
-            dataElementsValueFilters: columns.filter(column => column.additionalColumn),
-        })
-        : [];
+            programStageFiltersOnly,
+            columns,
+            programStageId,
+            mainFiltersConverted,
+        });
+    const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: attributesColumns });
     const visibleColumnIds: Array<string> = columns.filter(({ visible }) => visible).map(({ id }) => id);
     const criteria: ApiTrackerQueryCriteria = {
         programStatus,

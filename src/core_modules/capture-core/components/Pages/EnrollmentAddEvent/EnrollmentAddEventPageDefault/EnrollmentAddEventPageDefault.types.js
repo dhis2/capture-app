@@ -1,19 +1,24 @@
 // @flow
-import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
+import type { HideWidgets, WidgetEffects } from '../../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
 import type {
-    PageLayoutConfig, WidgetConfig,
+    PageLayoutConfig,
+    WidgetConfig,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 import { Program } from '../../../../metaData';
 
 export type Props = {|
-    program: Program,
+    program: ?Program,
     stageId: string,
     orgUnitId: string,
     teiId: string,
     enrollmentId: string,
     onSave: ExternalSaveHandler,
     dataEntryHasChanges: boolean,
+    userInteractionInProgress: boolean,
+    trackedEntityName: string,
+    onBackToMainPage: () => void,
+    onBackToDashboard: () => void,
     onCancel: () => void,
     onDelete: () => void,
     onAddNew: () => void,

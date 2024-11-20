@@ -13,8 +13,19 @@ const changeEnrollmentAndEventsStatus = () => (
         .then(url => cy.request(url))
         .then(({ body }) => {
             const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'qyx7tscVpVB');
-            const eventsToUpdate = enrollment.events.map(e => ({ ...e, status: 'ACTIVE' }));
-            const enrollmentToUpdate = { ...enrollment, status: 'ACTIVE', events: eventsToUpdate };
+            const eventsToUpdate = enrollment.events.map(e => ({
+                ...e,
+                status: 'ACTIVE',
+                completedAt: null,
+                completedBy: null,
+            }));
+            const enrollmentToUpdate = {
+                ...enrollment,
+                status: 'ACTIVE',
+                completedAt: null,
+                completedBy: null,
+                events: eventsToUpdate,
+            };
 
             return cy
                 .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
@@ -66,7 +77,7 @@ Then('the user sees the enrollment organisation unit', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-icon-orgunit"]').should('exist');
         cy.get('[data-test="widget-enrollment-orgunit"]')
-            .contains('Started at Ngelehun CHC')
+            .contains('Started at:Ngelehun CHC')
             .should('exist');
     });
 });
@@ -77,7 +88,7 @@ Then('the user sees the owner organisation unit', () => {
             'exist',
         );
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains('Owned by Ngelehun CHC')
+            .contains('Owned by:Ngelehun CHC')
             .should('exist');
     });
 });
@@ -232,7 +243,7 @@ Then(/^the user successfully transfers the enrollment/, () => {
 
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains('Owned by Njandama MCHP')
+            .contains('Owned by:Njandama MCHP')
             .should('exist');
     });
 });
@@ -246,7 +257,7 @@ Then(/^the user types in (.*)/, (orgunit) => {
 Given(/^the enrollment owner organisation unit is (.*)/, (orgunit) => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-owner-orgunit"]')
-            .contains(`Owned by ${orgunit}`)
+            .contains(`Owned by:${orgunit}`)
             .should('exist');
     });
 });

@@ -3,7 +3,7 @@ import type { Node } from 'react';
 
 export type Props = {
     selectedOrgUnitId?: string,
-    selectedProgramId?: string,
+    selectedProgramId?: ?string,
     selectedCategories: Object,
     selectedOrgUnit: Object,
     previousOrgUnitId?: string,

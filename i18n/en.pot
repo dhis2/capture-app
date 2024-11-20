@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
-"PO-Revision-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"PO-Revision-Date: 2024-11-07T11:57:59.094Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -34,6 +34,39 @@ msgstr ""
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
+
+msgid "Enrollment dashboard"
+msgstr "Enrollment dashboard"
+
+msgid "View event"
+msgstr "View event"
+
+msgid "Edit event"
+msgstr "Edit event"
+
+msgid "New event"
+msgstr "New event"
+
+msgid "Active enrollments"
+msgstr "Active enrollments"
+
+msgid "Completed enrollments"
+msgstr "Completed enrollments"
+
+msgid "Cancelled enrollments"
+msgstr "Cancelled enrollments"
+
+msgid "{{trackedEntityName}} list"
+msgstr "{{trackedEntityName}} list"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Working List"
+msgstr "Working List"
+
+msgid "Event list"
+msgstr "Event list"
 
 msgid "More"
 msgstr "More"
@@ -293,9 +326,6 @@ msgstr "Yes, discard changes"
 msgid "No, cancel"
 msgstr "No, cancel"
 
-msgid "New event"
-msgstr "New event"
-
 msgid "You don't have access to create an event in the current selections"
 msgstr "You don't have access to create an event in the current selections"
 
@@ -514,9 +544,6 @@ msgstr "Type to filter options"
 msgid "No match found"
 msgstr "No match found"
 
-msgid "Search"
-msgstr "Search"
-
 msgid "Clear"
 msgstr "Clear"
 
@@ -598,15 +625,6 @@ msgstr "Program doesn't exist"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "Selected program is invalid for selected organisation unit"
 
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "Offline"
-
-msgid "Syncing"
-msgstr "Syncing"
-
 msgid "Add note"
 msgstr "Add note"
 
@@ -624,54 +642,6 @@ msgstr "Notice"
 
 msgid "Close the notice"
 msgstr "Close the notice"
-
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "Use new Enrollment dashboard for {{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "Opt in for {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is "
-"certain functionality from Tracker Capture that has not yet been added, "
-"including relationship and referral functionality. The work on including "
-"this Tracker functionality in Capture is ongoing and will be added in "
-"upcoming app releases."
-msgstr ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is "
-"certain functionality from Tracker Capture that has not yet been added, "
-"including relationship and referral functionality. The work on including "
-"this Tracker functionality in Capture is ongoing and will be added in "
-"upcoming app releases."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-
-msgid "Yes, opt in"
-msgstr "Yes, opt in"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "Stop using new Enrollment dashboard for {{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "Opt out for {{programName}}"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
@@ -731,8 +701,12 @@ msgstr "There are no active enrollments."
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "Add new enrollment for {{teiDisplayName}} in this program."
 
-msgid "No access to program owner."
-msgstr "No access to program owner."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is not enrolled in this program."
@@ -761,9 +735,6 @@ msgstr "View working list in this program."
 
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
-
-msgid "Program is not valid"
-msgstr "Program is not valid"
 
 msgid "Org unit is not valid with current program"
 msgstr "Org unit is not valid with current program"
@@ -914,9 +885,6 @@ msgstr "event"
 msgid "You don't have access to edit this event"
 msgstr "You don't have access to edit this event"
 
-msgid "Edit event"
-msgstr "Edit event"
-
 msgid "View changelog"
 msgstr "View changelog"
 
@@ -954,15 +922,6 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
-msgid "Dashboard"
-msgstr "Dashboard"
-
-msgid "Edit Event"
-msgstr "Edit Event"
-
-msgid "View Event"
-msgstr "View Event"
-
 msgid "Selected program"
 msgstr "Selected program"
 
@@ -988,6 +947,9 @@ msgstr "Loading"
 
 msgid "An error occurred while loading the form"
 msgstr "An error occurred while loading the form"
+
+msgid "Back to all stages and events"
+msgstr "Back to all stages and events"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
@@ -1134,8 +1096,8 @@ msgstr "No tracked entity types available"
 msgid "Assigned to"
 msgstr "Assigned to"
 
-msgid "You don't have access to edit this assignee"
-msgstr "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
+msgstr "You don't have access to edit the assigned user"
 
 msgid "Edit"
 msgstr "Edit"
@@ -1143,8 +1105,8 @@ msgstr "Edit"
 msgid "No one is assigned to this event"
 msgstr "No one is assigned to this event"
 
-msgid "You don't have access to assign an assignee"
-msgstr "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
+msgstr "You don't have access to assign a user to this event"
 
 msgid "Assign"
 msgstr "Assign"
@@ -1192,6 +1154,9 @@ msgstr "Mark as cancelled"
 
 msgid "Mark incomplete"
 msgstr "Mark incomplete"
+
+msgid "You do not have access to delete this enrollment"
+msgstr "You do not have access to delete this enrollment"
 
 msgid "Delete enrollment"
 msgstr "Delete enrollment"
@@ -1281,11 +1246,11 @@ msgstr "Enrollment widget could not be loaded. Please try again later"
 msgid "Follow-up"
 msgstr "Follow-up"
 
-msgid "Started at {{orgUnitName}}"
-msgstr "Started at {{orgUnitName}}"
+msgid "Started at{{escape}}"
+msgstr "Started at{{escape}}"
 
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Owned by {{ownerOrgUnit}}"
+msgid "Owned by{{escape}}"
+msgstr "Owned by{{escape}}"
 
 msgid "Cancelled"
 msgstr "Cancelled"
@@ -1343,9 +1308,6 @@ msgstr "Event completed"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr "The event cannot be edited after it has been completed"
-
-msgid "Back to all stages and events"
-msgstr "Back to all stages and events"
 
 msgid "Notes about this event"
 msgstr "Notes about this event"
@@ -1477,13 +1439,6 @@ msgstr "{{ linkableStageLabel }} has no linkable events"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Enter details now"
 
@@ -1507,6 +1462,25 @@ msgstr "This stage can only have one event"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
+
+msgid "An error occurred while deleting the event"
+msgstr "An error occurred while deleting the event"
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+
+msgid "An error occurred when updating event status"
+msgstr "An error occurred when updating event status"
+
+msgid "Unskip"
+msgstr "Unskip"
+
+msgid "Skip"
+msgstr "Skip"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr "To open this event, please wait until saving is complete"
@@ -1534,11 +1508,21 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "View linked event"
+msgstr "View linked event"
+
 msgid "An error occurred while loading the widget."
 msgstr "An error occurred while loading the widget."
 
-msgid "View linked event"
-msgstr "View linked event"
+msgid "Linked event"
+msgstr "Linked event"
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
+msgstr ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
 
 msgid "Scheduled"
 msgstr "Scheduled"
@@ -1548,6 +1532,9 @@ msgstr "Changelog"
 
 msgid "No changes to display"
 msgstr "No changes to display"
+
+msgid "Updated"
+msgstr "Updated"
 
 msgid "Created"
 msgstr "Created"
@@ -1566,6 +1553,15 @@ msgstr "Data item"
 
 msgid "Change"
 msgstr "Change"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "File"
+msgstr "File"
+
+msgid "Image"
+msgstr "Image"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
@@ -1628,6 +1624,45 @@ msgstr "Download data..."
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
 
+msgid "You do not have access to complete events"
+msgstr "You do not have access to complete events"
+
+msgid "Complete events"
+msgstr "Complete events"
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr "Are you sure you want to complete all active events in selection?"
+
+msgid "There are no active events to complete in the current selection."
+msgstr "There are no active events to complete in the current selection."
+
+msgid "Error completing events"
+msgstr "Error completing events"
+
+msgid "There was an error completing the events."
+msgstr "There was an error completing the events."
+
+msgid "Details (Advanced)"
+msgstr "Details (Advanced)"
+
+msgid "An unknown error occurred."
+msgstr "An unknown error occurred."
+
+msgid "An error occurred while completing events"
+msgstr "An error occurred while completing events"
+
+msgid "An error occurred while deleting the events"
+msgstr "An error occurred while deleting the events"
+
+msgid "You do not have access to delete events"
+msgstr "You do not have access to delete events"
+
+msgid "Delete events"
+msgstr "Delete events"
+
+msgid "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr "This cannot be undone. Are you sure you want to delete the selected events?"
+
 msgid "Registration Date"
 msgstr "Registration Date"
 
@@ -1652,6 +1687,130 @@ msgstr "Completed enrollments"
 msgid "Cancelled enrollments"
 msgstr "Cancelled enrollments"
 
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+msgstr ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+msgstr ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+
+msgid "This action will complete {{count}} active enrollment in your selection."
+msgid_plural "This action will complete {{count}} active enrollment in your selection."
+msgstr[0] "This action will complete {{count}} active enrollment in your selection."
+msgstr[1] "This action will complete {{count}} active enrollments in your selection."
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural "{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] "{{count}} enrollment already marked as completed will not be changed."
+msgstr[1] "{{count}} enrollments already marked as completed will not be changed."
+
+msgid "Mark all events within enrollments as complete"
+msgstr "Mark all events within enrollments as complete"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr "You do not have access to bulk complete enrollments"
+
+msgid "Complete enrollments"
+msgstr "Complete enrollments"
+
+msgid "Error completing enrollments"
+msgstr "Error completing enrollments"
+
+msgid "No active enrollments to complete"
+msgstr "No active enrollments to complete"
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] "Complete {{count}} enrollment"
+msgstr[1] "Complete {{count}} enrollments"
+
+msgid "An error occurred when completing the enrollments"
+msgstr "An error occurred when completing the enrollments"
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr "An unknown error occurred when completing enrollments"
+
+msgid "You do not have access to delete enrollments"
+msgstr "You do not have access to delete enrollments"
+
+msgid "Delete enrollments"
+msgstr "Delete enrollments"
+
+msgid "Delete selected enrollments"
+msgstr "Delete selected enrollments"
+
+msgid "An error occurred while loading the selected enrollments. Please try again."
+msgstr "An error occurred while loading the selected enrollments. Please try again."
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] "Active enrollments ({{count}})"
+msgstr[1] "Active enrollments ({{count}})"
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] "Completed enrollments ({{count}})"
+msgstr[1] "Completed enrollments ({{count}})"
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] "Cancelled enrollments ({{count}})"
+msgstr[1] "Cancelled enrollments ({{count}})"
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] "Delete {{count}} enrollment"
+msgstr[1] "Delete {{count}} enrollments"
+
+msgid "An error occurred when deleting enrollments"
+msgstr "An error occurred when deleting enrollments"
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr "Delete {{ trackedEntityName }} with all enrollments"
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] "Delete {{count}} {{ trackedEntityName }}"
+msgstr[1] "Delete {{count}} {{ trackedEntityName }}"
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+
+msgid "An error occurred while deleting the records"
+msgstr "An error occurred while deleting the records"
+
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
 
@@ -1660,6 +1819,14 @@ msgstr "an error occurred loading the working lists"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "an error occurred loading Tracked entity instance lists"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} selected"
+msgstr[1] "{{count}} selected"
+
+msgid "Deselect all"
+msgstr "Deselect all"
 
 msgid "Update view"
 msgstr "Update view"

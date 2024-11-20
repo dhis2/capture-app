@@ -560,6 +560,17 @@ You can set up your own views and save them for later use. The views can also be
 
     ![](resources/images/view_delete.png)
 
+
+## Event bulk actions
+
+You can perform bulk actions on events in the event list. 
+
+1. Select the events you want to perform the action on by clicking the checkbox to the left of the event.
+
+2. You can choose between quickly completing the selected events or deleting them.
+
+![](resources/images/event-bulk-actions-selected-rows.png)
+
 ## User assignment in events programs { #capture_user_assignment } 
 
 Events can be assigned to users. This feature must be enabled per program.
@@ -594,7 +605,7 @@ Events can be assigned to users. This feature must be enabled per program.
 
 5. Search for and select the user you would like to reassign the event to. Click the **Save** button.
 
-### Assignee in the event list { #capture_user_assignment_event_list } 
+### Assignee in the event list
 
 In the event list you will be able to view the assignee per event. Moreover, you can sort and filter the list by the assignee.
 
@@ -796,6 +807,37 @@ You will find the predefined list views above the filters for the list. Click to
 > **Note**
 > You can download the tracked entities list in JSON or CSV formats.
 
+
+## Tracked entity bulk actions
+
+You can perform bulk actions on tracked entities and their enrollments in the tracked entity list.
+
+![](resources/images/tracked-entity-bulk-actions-selected-rows.png)
+
+### Completing active enrollments
+
+1. Select the tracked entities you want to perform the action on by clicking the checkbox to the left of the tracked entity.
+
+2. Click the **Complete enrollments** button.
+    1. You can also choose if you want to complete all active events within the selected enrollments.
+
+3. Confirm the action in the dialog that appears.
+
+![](resources/images/tracked-entity-bulk-actions-complete-enrollments.png)
+
+### Deleting enrollments
+
+1. Select the tracked entities you want to perform the action on by clicking the checkbox to the left of the tracked entity.
+
+2. Click the **Delete enrollments** button.
+
+3. In the dialog that appears, select what enrollment statuses you want to delete and confirm the action.
+   1. You can choose any combination of enrollment statuses to delete. 
+
+4. Confirm the action in the dialog that appears.
+
+![](resources/images/tracked-entity-bulk-actions-delete-enrollments.png)
+
 ## Tracker program stage working list
 
 You can show data elements from a single stage in a working list. Select the "Program stage" option from the "More filters" dropdown, then choose a program stage.
@@ -804,7 +846,7 @@ You can show data elements from a single stage in a working list. Select the "Pr
 
 ![](resources/images/program_stage_working_list.png)
 
-The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists.
+The tracker program stage list can be [filtered](#filter-the-list), [sorted](#sort-the-list), [modified](#modify-the-list-layout), [saved](#capture_view_save), [updated](#capture_view_update), [deleted](#capture_view_delete) and [shared](#capture_view_share) in the same way as other working lists. Additionally, the program stage list can be [filtered by assignee](#assignee-in-the-event-list), just like an event program list.
 
 ## Implementer / administrator info { #implementer_info } 
 
@@ -820,20 +862,6 @@ For performance reasons the Capture app caches metadata in the client browser. W
 
 
 ## Enrollment dashboard
-
-### Enabling the enrollment dashboard
-
-#### Opt in
-
-Enable the enrollment dashboard for a Tracker program for all the users. The dialog is visible for users with program write access. 
-
-![](resources/images/enrollment-dash-opt-in.png)
-
-#### Opt out
-
-Disable the enrollment dashboard for a Tracker program for all the users.
-
-![](resources/images/enrollment-dash-opt-out.png)
 
 ### Reaching the enrollment dashboard via url
 

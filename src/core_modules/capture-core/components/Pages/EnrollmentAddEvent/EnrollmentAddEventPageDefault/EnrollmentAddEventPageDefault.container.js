@@ -9,20 +9,19 @@ import { useHistory } from 'react-router-dom';
 import { NoticeBox } from '@dhis2/ui';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
-import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
+import { EnrollmentAddEventTopBar, useEnrollmentAddEventTopBar } from '../TopBar';
 import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
 import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
 
 import { useWidgetDataFromStore } from '../hooks';
+import { useHideWidgetByRuleLocations } from '../../Enrollment/EnrollmentPageDefault/hooks';
 import {
-    useHideWidgetByRuleLocations,
-} from '../../Enrollment/EnrollmentPageDefault/hooks';
-import {
-    updateOrAddEnrollmentEvents,
+    commitEnrollmentAndEvents,
+    rollbackEnrollmentAndEvents,
+    setExternalEnrollmentStatus,
     showEnrollmentError,
     updateEnrollmentAndEvents,
-    rollbackEnrollmentAndEvents,
-    setExternalEnrollmentStatus, commitEnrollmentAndEvents,
+    updateOrAddEnrollmentEvents,
 } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
@@ -48,6 +47,10 @@ export const EnrollmentAddEventPageDefault = ({
     }, [history, programId, orgUnitId, teiId, enrollmentId]);
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [history, orgUnitId, programId]);
+
+    const onBackToMainPage = useCallback(() => {
         history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [history, orgUnitId, programId]);
 
@@ -109,11 +112,11 @@ export const EnrollmentAddEventPageDefault = ({
 
     const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
     const { program } = useProgramInfo(programId);
-    const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
+    const selectedProgramStage = [...program?.stages.values() ?? []].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
-    const hideWidgets = useHideWidgetByRuleLocations(program.programRules.concat(selectedProgramStage?.programRules ?? []));
+    const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(selectedProgramStage?.programRules ?? []));
     // $FlowFixMe
-    const trackedEntityName = program?.trackedEntityType?.name;
+    const trackedEntityName = program?.trackedEntityType?.name ?? '';
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
@@ -181,6 +184,10 @@ export const EnrollmentAddEventPageDefault = ({
                 orgUnitId={orgUnitId}
                 teiId={teiId}
                 enrollmentId={enrollmentId}
+                onBackToMainPage={onBackToMainPage}
+                onBackToDashboard={handleCancel}
+                trackedEntityName={trackedEntityName}
+                userInteractionInProgress={userInteractionInProgress}
                 onSave={handleSave}
                 onCancel={handleCancel}
                 onDelete={handleDelete}

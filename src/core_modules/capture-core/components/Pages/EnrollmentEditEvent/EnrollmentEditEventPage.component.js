@@ -40,6 +40,9 @@ export const EnrollmentEditEventPageComponent = ({
     assignee,
     pageStatus,
     events,
+    onBackToDashboard,
+    onBackToMainPage,
+    onBackToViewEvent,
     onEnrollmentError,
     onEnrollmentSuccess,
     onUpdateEnrollmentStatus,
@@ -60,7 +63,7 @@ export const EnrollmentEditEventPageComponent = ({
             mode={mode}
             programStage={programStage}
             enrollmentId={enrollmentId}
-            programId={program.id}
+            programId={program?.id}
             enrollmentsAsOptions={enrollmentsAsOptions}
             trackedEntityName={trackedEntityName}
             teiDisplayName={teiDisplayName}
@@ -73,6 +76,11 @@ export const EnrollmentEditEventPageComponent = ({
             pageLayout={pageLayout}
             currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
+            userInteractionInProgress={mode === EnrollmentPageKeys.EDIT_EVENT}
+            trackedEntityName={trackedEntityName}
+            onBackToMainPage={onBackToMainPage}
+            onBackToDashboard={onBackToDashboard}
+            onBackToViewEvent={onBackToViewEvent}
             onSaveExternal={onSaveExternal}
             trackedEntityTypeId={trackedEntityTypeId}
             programStage={programStage}

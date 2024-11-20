@@ -3,15 +3,15 @@
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Philip Larsen Donnelly, 2024
-# Rica, 2024
 # Charel van den Elsen, 2024
+# Rica, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Charel van den Elsen, 2024\n"
+"Last-Translator: Rica, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -614,15 +614,6 @@ msgstr "Programma bestaat niet"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Online"
-msgstr "Online"
-
-msgid "Offline"
-msgstr "offline"
-
-msgid "Syncing"
-msgstr "synchroniseren"
-
 msgid "Add note"
 msgstr "Notitie toevoegen"
 
@@ -640,57 +631,6 @@ msgstr ""
 
 msgid "Close the notice"
 msgstr ""
-
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "Gebruik nieuw inschrijvingsdashboard voor {{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "Aanmelden voor {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is certain"
-" functionality from Tracker Capture that has not yet been added, including "
-"relationship and referral functionality. The work on including this Tracker "
-"functionality in Capture is ongoing and will be added in upcoming app "
-"releases."
-msgstr ""
-"Door hieronder op opt-in te klikken, gaat u het nieuwe "
-"inschrijvingsdashboard in de Capture-app voor dit Tracker-programma "
-"gebruiken. Op dit moment is er bepaalde functionaliteit van Tracker Capture "
-"die nog niet is toegevoegd, waaronder relatie- en "
-"verwijzingsfunctionaliteit. Het werk om deze Tracker-functionaliteit in "
-"Capture op te nemen is aan de gang en zal worden toegevoegd in aankomende "
-"app-releases."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"Het kernteam stelt alle feedback op prijs over deze nieuwe functionaliteit "
-"die momenteel in bèta wordt getest. Meld eventuele problemen en feedback in "
-"het DHIS2 JIRA-project."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"Klik op de onderstaande knop om u aan te melden voor de nieuwe "
-"functionaliteit van het inschrijvingsdashboard in de Capture-app (bèta) voor"
-" dit Tracker-programma voor alle gebruikers."
-
-msgid "Yes, opt in"
-msgstr "Ja, opt-in"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr ""
-"Stop met het gebruik van het nieuwe inschrijvingsdashboard voor "
-"{{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "Afmelden voor {{programName}}"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
@@ -757,8 +697,10 @@ msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 "Voeg een nieuwe inschrijving toe voor {{teiDisplayName}} in dit programma."
 
-msgid "No access to program owner."
-msgstr "Geen toegang tot programma-eigenaar."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is niet ingeschreven voor dit programma."
@@ -789,9 +731,6 @@ msgstr "Bekijk werklijst in dit programma."
 
 msgid "Page is missing required values from URL"
 msgstr "Pagina mist vereiste waarden van URL"
-
-msgid "Program is not valid"
-msgstr "Programma is niet geldig"
 
 msgid "Org unit is not valid with current program"
 msgstr "Organisatie-eenheid is niet geldig met het huidige programma"
@@ -1167,7 +1106,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr "Toegewezen aan"
 
-msgid "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
 msgstr ""
 
 msgid "Edit"
@@ -1176,7 +1115,7 @@ msgstr "Bewerk"
 msgid "No one is assigned to this event"
 msgstr "Er is niemand toegewezen aan dit evenement"
 
-msgid "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1226,6 +1165,9 @@ msgstr "Markeren als geannuleerd"
 
 msgid "Mark incomplete"
 msgstr "Markering onvolledig"
+
+msgid "You do not have access to delete this enrollment"
+msgstr ""
 
 msgid "Delete enrollment"
 msgstr "Inschrijving verwijderen"
@@ -1310,11 +1252,11 @@ msgstr ""
 msgid "Follow-up"
 msgstr "Opvolgen"
 
-msgid "Started at {{orgUnitName}}"
-msgstr "Gestart bij {{orgUnitName}}"
+msgid "Started at{{escape}}"
+msgstr ""
 
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "Eigendom van {{ownerOrgUnit}}"
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "Geannuleerd"
@@ -1519,11 +1461,6 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-
 msgid "Enter details now"
 msgstr ""
 
@@ -1547,6 +1484,23 @@ msgstr "Deze fase kan maar één evenement hebben"
 
 msgid "New {{ eventName }} event"
 msgstr "Nieuwe {{ eventName }} evenement"
+
+msgid "An error occurred while deleting the event"
+msgstr ""
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+
+msgid "An error occurred when updating event status"
+msgstr ""
+
+msgid "Unskip"
+msgstr ""
+
+msgid "Skip"
+msgstr "Overslaan"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr "Wacht tot het opslaan is voltooid om dit evenement te openen"
@@ -1590,6 +1544,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Updated"
+msgstr ""
+
 msgid "Created"
 msgstr "Gemaakt"
 
@@ -1607,6 +1564,9 @@ msgstr "Gegevensitem"
 
 msgid "Change"
 msgstr ""
+
+msgid "Value"
+msgstr "Waarde"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""

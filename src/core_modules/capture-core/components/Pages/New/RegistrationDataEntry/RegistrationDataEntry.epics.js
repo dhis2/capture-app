@@ -12,7 +12,7 @@ import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString, shouldUseNewDashboard } from '../../../../utils/routing';
+import { buildUrlQueryString } from '../../../../utils/routing';
 import {
     getStageWithOpenAfterEnrollment,
     PAGES,
@@ -54,15 +54,11 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
             const { currentSelections: { programId } } = store.value;
-            const { dataStore, userDataStore } = store.value.useNewDashboard;
             const { enrollmentPayload, uid } = action.payload;
             const { stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
-
-            const shouldRedirect = shouldUseNewDashboard({ userDataStore, dataStore, programId });
             const { stageWithOpenAfterEnrollment, redirectTo } = getStageWithOpenAfterEnrollment(
                 stages,
                 useFirstStageDuringRegistration,
-                shouldRedirect,
             );
 
             const eventIndex = enrollmentPayload.enrollments[0]?.events.findIndex(

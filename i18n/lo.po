@@ -1,18 +1,18 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2022
-# Saysamone Sibounma, 2023
 # Somkhit Bouavong <bouavongk@gmail.com>, 2024
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Namwan Chanthavisouk, 2024
+# Saysamone Sibounma, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-08-10T10:42:21.141Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Namwan Chanthavisouk, 2024\n"
+"Last-Translator: Saysamone Sibounma, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -605,15 +605,6 @@ msgstr "ບໍ່ມີໂປແກຼມ"
 msgid "Selected program is invalid for selected organisation unit"
 msgstr "ໂປແກຣມທີ່ເລືອກໄວ້ບໍ່ຖືກຕ້ອງກັບຫົວໜ່ວຍອົງການຈັດຕັ້ງ"
 
-msgid "Online"
-msgstr "ມີການເຊື່ອມຕໍ່"
-
-msgid "Offline"
-msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
-
-msgid "Syncing"
-msgstr "ກຳລັງອັບເດດຂໍ້ມູນໃຫ້ຄືກັນ"
-
 msgid "Add note"
 msgstr "ຂຽນບັນທຶກລົງ"
 
@@ -631,51 +622,6 @@ msgstr "ການແຈ້ງເຕືອນ"
 
 msgid "Close the notice"
 msgstr "ປິດການແຈ້ງເຕືອນ"
-
-msgid "Use new Enrollment dashboard for {{programName}}"
-msgstr "ໃຊ້ກະດານຂ່າວລົງທະບຽນໃໝ່ເພື່ອ {{programName}}"
-
-msgid "Opt in for {{programName}}"
-msgstr "ຕົວເລືອກໃນ {{programName}}"
-
-msgid ""
-"By clicking opt-in below, you will start using the new enrollment dashboard "
-"in the Capture app for this Tracker program. At the moment, there is certain"
-" functionality from Tracker Capture that has not yet been added, including "
-"relationship and referral functionality. The work on including this Tracker "
-"functionality in Capture is ongoing and will be added in upcoming app "
-"releases."
-msgstr ""
-"ໂດຍການຄລິກເລືອກເຂົ້າທາງລຸ່ມນີ້, ທ່ານຈະເລີ່ມໃຊ້ກະດານຂ່າວລົງທະບຽນໃໝ່ໃນແອັບ "
-"Capture ສຳລັບໂປແກຣມຕິດຕາມນີ້. ເຊິ່ງໃນປັດຈຸບັນໜ້າທີ່ຫຼັກຈາກການຕິດຕາມ Capture "
-"ແມ່ນຍັງບໍ່ໄດ້ເພີ່ມເຂົ້າເທື່ອ, ລວມທັງເຊື່ອມໂຍງ ແລະ ການສົ່ງຕໍ່. "
-"ການເຮັດວຽກກ່ຽວກັບໜ້າທີ່ຫຼັກຈາກການຕິດຕາມນີ້ໃນ Capture ແມ່ນກໍາລັງດໍາເນີນຢູ່ "
-"ແລະ ຈະຖືກເພີ່ມເຂົ້າໃນແອັບໃໝ່."
-
-msgid ""
-"The core team appreciates any feedback on this new functionality which is "
-"currently being beta tested, please report any issues and feedback in the "
-"DHIS2 JIRA project."
-msgstr ""
-"ທີມງານເຮົາຂໍຂອບໃຈສຳລັບຄໍາຕິຊົມກ່ຽວກັບຫນ້າທີ່ໃຫມ່ນີ້ທີ່ກໍາລັງຖືກທົດສອບຢູ່ໃນເບຕ້າ,"
-" ກະລຸນາລາຍງານບັນຫາ ແລະ ຄໍາຕິຊົມໃນໂຄງການ DHIS2 JIRA."
-
-msgid ""
-"Click the button below to opt-in to the new enrollment dashboard "
-"functionality in the Capture app (beta) for this Tracker program for all "
-"users."
-msgstr ""
-"ຄລິກທີ່ປຸ່ມຂ້າງລຸ່ມເພື່ອເລືອກເຂົ້າໃຊ້ໜ້າທີ່ການລົງທະບຽນໃໝ່ຂອງກະດານຂ່າວໃນແອັບ "
-"Capture (ເບຕ້າ) ສຳລັບໂປແກຣມການຕິດຕາມນີ້ສຳລັບຜູ້ໃຊ້ທັງໝົດ."
-
-msgid "Yes, opt in"
-msgstr "ຕົກລົງ, ເລືອກເຂົ້າ"
-
-msgid "Stop using new Enrollment dashboard for {{programName}}"
-msgstr "ຢຸດໃຊ້ກະດານຂ່າວການລົງທະບຽນໃໝ່ໃນ {{programName}}"
-
-msgid "Opt out for {{programName}}"
-msgstr "ເລືອກອອກສຳລັບ {{programName}}"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "ລົງທະບຽນດ້ວຍໄອດີ \" {{enrollmentId}} \" ແມ່ນບໍ່ພົບ"
@@ -736,8 +682,10 @@ msgstr "ບໍ່ມີການລົງທະບຽນທີ່ເຄື່ອ
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "ເພີ່ມການລົງທະບຽນໃໝ່ສຳລັບ {{teiDisplayName}} ໃນໂປແກຼມນີ້."
 
-msgid "No access to program owner."
-msgstr "ບໍ່ສາມາດເຂົ້າເຖິງເຈົ້າຂອງໂປແກຼມ."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} ບໍ່ໄດ້ລົງທະບຽນຢູ່ໃນໂປແກຼມນີ້."
@@ -766,9 +714,6 @@ msgstr "ເບິ່ງລາຍຊື່ເຮັດວຽກຢູ່ໃນໂ
 
 msgid "Page is missing required values from URL"
 msgstr "ບໍ່ພົບໜ້ານີ້ ຕ້ອງການຄ່າຈາກ URL"
-
-msgid "Program is not valid"
-msgstr "ໂປຣແກຼມບໍ່ຖືກຕ້ອງ"
 
 msgid "Org unit is not valid with current program"
 msgstr "ຫົວໜ່ວຍການຈັດຕັ້ງບໍ່ຖືກຕ້ອງກັບໂປແກຼມນີ້"
@@ -1134,8 +1079,8 @@ msgstr "ບໍ່ມີປະເພດບາຍບຸກຄົນທີ່ສາ
 msgid "Assigned to"
 msgstr "ມອບໝາຍໃຫ້"
 
-msgid "You don't have access to edit this assignee"
-msgstr "ທ່ານບໍ່ມີສິດໃນການແກ້ໄຂຂໍ້ມູນຜູ້ມອບໝາຍ"
+msgid "You don't have access to edit the assigned user"
+msgstr ""
 
 msgid "Edit"
 msgstr "ແກ້ໄຂ"
@@ -1143,8 +1088,8 @@ msgstr "ແກ້ໄຂ"
 msgid "No one is assigned to this event"
 msgstr "ບໍ່ມີຜູ້ຖືກມອບໝາຍໃຫ້ກັບເຫດການນີ້"
 
-msgid "You don't have access to assign an assignee"
-msgstr "ທ່ານບໍ່ມີສິດໃນການມອບໝາຍ"
+msgid "You don't have access to assign a user to this event"
+msgstr ""
 
 msgid "Assign"
 msgstr "ມອບໝາຍ"
@@ -1190,6 +1135,9 @@ msgstr "ໝາຍວ່າຖືກຍົກເລີກ"
 
 msgid "Mark incomplete"
 msgstr "ໝາຍວ່າບໍ່ຄົບຖ້ວນ"
+
+msgid "You do not have access to delete this enrollment"
+msgstr ""
 
 msgid "Delete enrollment"
 msgstr "ລົບການລົງທະບຽນ"
@@ -1275,11 +1223,11 @@ msgstr "ບໍ່ສາມາດໂຫຼດລາຍການການລົງ
 msgid "Follow-up"
 msgstr "ຕິດຕາມ"
 
-msgid "Started at {{orgUnitName}}"
-msgstr "ເລີ່ມຈາກ {{orgUnitName}}"
+msgid "Started at{{escape}}"
+msgstr ""
 
-msgid "Owned by {{ownerOrgUnit}}"
-msgstr "ເປັນເຈົ້າຂອງໂດຍ {{ownerOrgUnit}}"
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "ຍົກເລີກແລ້ວ"
@@ -1336,7 +1284,7 @@ msgid "Event completed"
 msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
+msgstr "ເຫດການດັ່ງກ່າວບໍ່ສາມາດແກ້ໄຂໄດ້ຫຼັງຈາກສໍາເລັດແລ້ວ"
 
 msgid "Back to all stages and events"
 msgstr "ກັບໄປທຸກຂັ້ນຕອນ ແລະ ເຫດການ"
@@ -1474,13 +1422,6 @@ msgstr "{{ linkableStageLabel }} ບໍ່ມີເຫດການທີ່ສ�
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "ການເຊື່ອມໂຍງບໍ່ຊັດເຈນ, ຕິດຕໍ່ຜູ້ດູແລລະບົບ"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"ໃສ່ລາຍລະອຽດ {{linkableStageLabel}} ໃນຂັ້ນຕອນຕໍ່ໄປຫຼັງຈາກເຮັດສໍາເລັດ "
-"{{currentStageLabel}} ນີ້."
-
 msgid "Enter details now"
 msgstr "ປ້ອນລາຍລະອຽດ"
 
@@ -1497,13 +1438,32 @@ msgid "Please select a valid event"
 msgstr "ກະລຸນາເລືອກເຫດການທີ່ຖືກຕ້ອງ"
 
 msgid "You do not have access to create events in this stage"
-msgstr ""
+msgstr "ທ່ານບໍ່ມີສິດເຂົ້າເຖິງເພື່ອສ້າງເຫດການໃນຂັ້ນຕອນນີ້"
 
 msgid "This stage can only have one event"
 msgstr "ຂັ້ນຕອນນີ້ສາມາດມີເຫດການດຽວເທົ່ານັ້ນ"
 
 msgid "New {{ eventName }} event"
 msgstr "ເຫດການໃໝ່ {{ eventName }}"
+
+msgid "An error occurred while deleting the event"
+msgstr "ພົບຂໍ້ຜິດພາດໃນລະຫວ່າງລົບເຫດການ"
+
+msgid ""
+"Deleting an event is permanent and cannot be undone. Are you sure you want "
+"to delete this event?"
+msgstr ""
+"ການລົບເຫດການແມ່ນຖາວອນ ແລະ ບໍ່ສາມາດຍົກເລີກໄດ້. "
+"ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລົບເຫດການນີ້?"
+
+msgid "An error occurred when updating event status"
+msgstr "ພົບຂໍ້ຜິດພາດໃນລະຫວ່າງອັບເດດສະຖານະເຫດການ"
+
+msgid "Unskip"
+msgstr "ຍົກເລີກ"
+
+msgid "Skip"
+msgstr "ຂ້າມ"
 
 msgid "To open this event, please wait until saving is complete"
 msgstr "ເພື່ອເປີດເຫດການນີ້, ກະລຸນາລໍຖ້າຈົນກວ່າການບັນທຶກຈະສຳເລັດ"
@@ -1545,6 +1505,9 @@ msgstr "ບັນທຶກການປ່ຽນແປງ"
 msgid "No changes to display"
 msgstr "ບໍ່ມີການປ່ຽນແປງທີ່ຈະສະແດງ"
 
+msgid "Updated"
+msgstr ""
+
 msgid "Created"
 msgstr "ສ້າງແລ້ວ"
 
@@ -1562,6 +1525,9 @@ msgstr "ລາຍການຂໍ້ມູນ"
 
 msgid "Change"
 msgstr "ປ່ຽນ"
+
+msgid "Value"
+msgstr "ຄ່າ"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "ຄວາມສໍາພັນໃໝ່ {{trackedEntityTypeName}} "

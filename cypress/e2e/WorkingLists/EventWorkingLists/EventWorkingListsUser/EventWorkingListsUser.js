@@ -1,7 +1,7 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
-import '../../sharedSteps';
-import { getCurrentYear, combineDataAndYear } from '../../../../support/date';
+import '../sharedSteps';
+import { combineDataAndYear, getCurrentYear } from '../../../../support/date';
 
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
@@ -29,7 +29,7 @@ Then('the default working list should be displayed', () => {
         .should('have.length', 16)
         .each(($row, index) => {
             if (index) {
-                cy.wrap($row).find('td').first().invoke('text')
+                cy.wrap($row).find('td').eq(1).invoke('text')
                     .then((date) => {
                         const firstArgs = rows[date].length > 1 ?
                             new RegExp(`${rows[date].map(item => item.split(' ')[0]).join('|')}`, 'g')
@@ -185,7 +185,7 @@ Then('the list should display data for the second page', () => {
         .should('have.length', 16)
         .each(($row, index) => {
             if (index) {
-                cy.wrap($row).find('td').first().invoke('text')
+                cy.wrap($row).find('td').eq(1).invoke('text')
                     .then((date) => {
                         const firstArgs = rows[date].length > 1 ?
                             new RegExp(`${rows[date].map(item => item.split(' ')[0]).join('|')}`, 'g')
@@ -219,7 +219,7 @@ Then('the list should display 10 rows of data', () => {
         .should('have.length', 11)
         .each(($row, index) => {
             if (index) {
-                cy.wrap($row).find('td').first().invoke('text')
+                cy.wrap($row).find('td').eq(1).invoke('text')
                     .then((date) => {
                         const firstArgs = rows[date].length > 1 ?
                             new RegExp(`${rows[date].map(item => item.split(' ')[0]).join('|')}`, 'g')
@@ -278,7 +278,7 @@ Then('the list should display data ordered descendingly by report date', () => {
         .should('have.length', 16)
         .each(($row, index) => {
             if (index) {
-                cy.wrap($row).find('td').first().invoke('text')
+                cy.wrap($row).find('td').eq(1).invoke('text')
                     .then((date) => {
                         const firstArgs = rows[date].length > 1 ?
                             new RegExp(`${rows[date].map(item => item.split(' ')[0]).join('|')}`, 'g')

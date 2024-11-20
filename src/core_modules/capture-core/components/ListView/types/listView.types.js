@@ -1,10 +1,7 @@
 // @flow
 
 import { typeof dataElementTypes } from '../../../metaData';
-import type {
-    FilterData,
-    Options,
-} from '../../FiltersForTypes';
+import type { FilterData, Options } from '../../FiltersForTypes';
 
 export type Column = {
     id: string,
@@ -60,7 +57,8 @@ export type CustomMenuContents = Array<CustomMenuContent>;
 export type CustomRowMenuContent = {|
     key: string,
     clickHandler?: ?(rowData: DataSourceItem) => any,
-    element: React$Node,
+    icon: React$Node,
+    label: string,
 |};
 export type CustomRowMenuContents = Array<CustomRowMenuContent>;
 
@@ -102,7 +100,7 @@ export type InterfaceProps = $ReadOnly<{|
     onClearFilter: ClearFilter,
     onRemoveFilter: RemoveFilter,
     onSelectRestMenuItem: SelectRestMenuItem,
-    onSelectRow: SelectRow,
+    onClickListRow: SelectRow,
     onSetColumnOrder: SetColumnOrder,
     onSort: Sort,
     onUpdateFilter: UpdateFilter,
@@ -113,7 +111,13 @@ export type InterfaceProps = $ReadOnly<{|
     stickyFilters: StickyFilters,
     updating: boolean,
     updatingWithDialog: boolean,
-    programStageId?: string
+    onRowSelect: (id: string) => void,
+    programStageId?: string,
+    selectedRows: { [key: string]: boolean },
+    onSelectAll: (rows: Array<string>) => void,
+    allRowsAreSelected: ?boolean,
+    selectionInProgress: ?boolean,
+    bulkActionBarComponent: React$Element<any>,
 |}>;
 
 export type ListViewPassOnProps = $ReadOnly<{|

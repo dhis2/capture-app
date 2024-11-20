@@ -8,7 +8,6 @@ type DefaultComponents = 'QuickActions'
     | 'AssigneeWidget'
     | 'NewEventWorkspace'
     | 'EditEventWorkspace'
-    | 'TwoEventWorkspace'
     | 'EnrollmentNote'
     | 'EventNote'
     | 'TrackedEntityRelationship'
@@ -34,6 +33,7 @@ export type ColumnConfig = DefaultWidgetColumnConfig | PluginWidgetColumnConfig;
 
 export type PageLayoutConfig = {
     title?: ?string,
+    backgroundColor?: ?string,
     leftColumn: ?Array<ColumnConfig>,
     rightColumn: ?Array<ColumnConfig>,
 }

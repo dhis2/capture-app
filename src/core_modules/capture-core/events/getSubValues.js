@@ -28,26 +28,32 @@ const subValueGetterByElementType = {
                 ({
                     name: res.name,
                     value: res.id,
-                    url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+                    url: featureAvailable(FEATURES.trackerFileEndpoint)
+                        ? `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/file`
+                        : `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
                 }))
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
                 return null;
             }),
     [dataElementTypes.IMAGE]: ({
+        value,
         eventId,
         metaElementId,
         absoluteApiPath,
     }: {
+        value: any,
         eventId: string,
         metaElementId: string,
         absoluteApiPath: string,
     }) =>
         (featureAvailable(FEATURES.trackerImageEndpoint) ?
             {
+                value,
                 url: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image`,
                 previewUrl: `${absoluteApiPath}/tracker/events/${eventId}/dataValues/${metaElementId}/image?dimension=small`,
             } : {
+                value,
                 url: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
                 previewUrl: `${absoluteApiPath}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}&dimension=SMALL`,
             }
@@ -65,11 +71,13 @@ const subValueGetterByElementType = {
     }) => {
         const ouIds = value.split('/');
         const id = ouIds[ouIds.length - 1];
-        return querySingleResource({ resource: 'organisationUnits',
+        return querySingleResource({
+            resource: 'organisationUnits',
             id,
             params: {
                 fields: 'id,code,displayName,path',
-            } })
+            },
+        })
             .then(res => ({
                 id: res.id,
                 code: res.code,
