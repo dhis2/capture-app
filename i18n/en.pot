@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-04T18:45:47.626Z\n"
-"PO-Revision-Date: 2024-11-04T18:45:47.626Z\n"
+"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"PO-Revision-Date: 2024-11-07T11:57:59.094Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -948,6 +948,9 @@ msgstr "Loading"
 msgid "An error occurred while loading the form"
 msgstr "An error occurred while loading the form"
 
+msgid "Back to all stages and events"
+msgstr "Back to all stages and events"
+
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
 
@@ -1306,9 +1309,6 @@ msgstr "Event completed"
 msgid "The event cannot be edited after it has been completed"
 msgstr "The event cannot be edited after it has been completed"
 
-msgid "Back to all stages and events"
-msgstr "Back to all stages and events"
-
 msgid "Notes about this event"
 msgstr "Notes about this event"
 
@@ -1511,11 +1511,21 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "View linked event"
+msgstr "View linked event"
+
 msgid "An error occurred while loading the widget."
 msgstr "An error occurred while loading the widget."
 
-msgid "View linked event"
-msgstr "View linked event"
+msgid "Linked event"
+msgstr "Linked event"
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
+msgstr ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
 
 msgid "Scheduled"
 msgstr "Scheduled"
@@ -1549,6 +1559,12 @@ msgstr "Change"
 
 msgid "Value"
 msgstr "Value"
+
+msgid "File"
+msgstr "File"
+
+msgid "Image"
+msgstr "Image"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
