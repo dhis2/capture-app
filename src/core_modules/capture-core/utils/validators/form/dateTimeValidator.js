@@ -23,7 +23,7 @@ const CUSTOM_VALIDATION_MESSAGES = {
 };
 
 export function isValidDateTime(value: DateTimeValue,
-    internalComponentError: ?Object): ValidationResult {
+    internalComponentError?: ?{error: ?string, errorCode: ?string}): ValidationResult {
     if (!value) {
         return { valid: true };
     }

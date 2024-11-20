@@ -212,7 +212,7 @@ function buildTypeValidators(metaData: DataElement | DateDataElement): ?Array<Va
 
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
-        validator: (value: any, internalComponentError: ?Object) => {
+        validator: (value: any, internalComponentError?: ?{error: ?string, errorCode: ?string}) => {
             if (!value && value !== 0 && value !== false) {
                 return true;
             }

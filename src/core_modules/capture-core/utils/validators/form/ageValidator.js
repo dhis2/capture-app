@@ -45,7 +45,7 @@ function validateNumbers(years: ?string, months: ?string, days: ?string) {
     return { valid: true };
 }
 
-function validateDate(date: ?string, internalComponentError?: ?Object) {
+function validateDate(date: ?string, internalComponentError?: ?{error: ?string, errorCode: ?string}) {
     const { valid } = isValidDate(date, internalComponentError);
     return valid ?
         { valid: true } :
