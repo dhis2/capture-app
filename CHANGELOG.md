@@ -1,3 +1,10 @@
+## [101.16.4](https://github.com/dhis2/capture-app/compare/v101.16.3...v101.16.4) (2024-11-20)
+
+
+### Bug Fixes
+
+* [DHIS2-18019] related stages UI tweaks ([#3872](https://github.com/dhis2/capture-app/issues/3872)) ([7ea2240](https://github.com/dhis2/capture-app/commit/7ea2240b68408a0c4e8db624093c058f2b416584))
+
 ## [101.16.3](https://github.com/dhis2/capture-app/compare/v101.16.2...v101.16.3) (2024-11-20)
 
 
