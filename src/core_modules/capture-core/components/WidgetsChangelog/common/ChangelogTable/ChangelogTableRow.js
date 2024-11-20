@@ -13,13 +13,11 @@ type Props = {
     },
     classes: {
         dataItemColumn: string,
-        valueColumn: string,
     },
 };
 
 const styles = {
     dataItemColumn: { wordWrap: 'break-word', hyphens: 'auto' },
-    valueColumn: { wordWrap: 'break-word' },
 };
 
 const ChangelogTableRowPlain = ({ record, classes }: Props) => (
@@ -28,7 +26,7 @@ const ChangelogTableRowPlain = ({ record, classes }: Props) => (
         <DataTableCell>{record.user}</DataTableCell>
         <DataTableCell className={classes.dataItemColumn}>{record.dataItemLabel}</DataTableCell>
         <DataTableCell><ChangelogChangeCell changeType={record.changeType} /></DataTableCell>
-        <DataTableCell className={classes.valueColumn}><ChangelogValueCell {...record} /></DataTableCell>
+        <DataTableCell><ChangelogValueCell {...record} /></DataTableCell>
     </DataTableRow>
 );
 

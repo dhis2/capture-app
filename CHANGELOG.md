@@ -1,3 +1,38 @@
+## [101.16.2](https://github.com/dhis2/capture-app/compare/v101.16.1...v101.16.2) (2024-11-19)
+
+
+### Bug Fixes
+
+* [DHIS2-16994] Image and File DE and TEA not Displayed in Changelog ([#3837](https://github.com/dhis2/capture-app/issues/3837)) ([9327210](https://github.com/dhis2/capture-app/commit/932721045126e02379f56a85af4f6586b836b4c0))
+
+## [101.16.1](https://github.com/dhis2/capture-app/compare/v101.16.0...v101.16.1) (2024-11-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([37c32df](https://github.com/dhis2/capture-app/commit/37c32df3e7839e30b493ff8e8185de769c3e2fd4))
+
+# [101.16.0](https://github.com/dhis2/capture-app/compare/v101.15.0...v101.16.0) (2024-11-13)
+
+
+### Features
+
+* [DHIS2-18250] Breadcrumb for event & enrollment pages ([#3849](https://github.com/dhis2/capture-app/issues/3849)) ([d65882e](https://github.com/dhis2/capture-app/commit/d65882eacb711865d9f6a860c65d56a0f4d68157))
+
+# [101.15.0](https://github.com/dhis2/capture-app/compare/v101.14.9...v101.15.0) (2024-11-12)
+
+
+### Features
+
+* [DHIS2-15187][DHIS2-15190] Working list bulk actions ([#3773](https://github.com/dhis2/capture-app/issues/3773)) ([5a12722](https://github.com/dhis2/capture-app/commit/5a127229e984b744fa3ea486d9b5a2632603bcd4))
+
+## [101.14.9](https://github.com/dhis2/capture-app/compare/v101.14.8...v101.14.9) (2024-11-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([00403fb](https://github.com/dhis2/capture-app/commit/00403fb596e08eba233fd4103c66c66f286a0881))
+
 ## [101.14.8](https://github.com/dhis2/capture-app/compare/v101.14.7...v101.14.8) (2024-11-05)
 
 
