@@ -1,3 +1,102 @@
+## [101.16.4](https://github.com/dhis2/capture-app/compare/v101.16.3...v101.16.4) (2024-11-20)
+
+
+### Bug Fixes
+
+* [DHIS2-18019] related stages UI tweaks ([#3872](https://github.com/dhis2/capture-app/issues/3872)) ([7ea2240](https://github.com/dhis2/capture-app/commit/7ea2240b68408a0c4e8db624093c058f2b416584))
+
+## [101.16.3](https://github.com/dhis2/capture-app/compare/v101.16.2...v101.16.3) (2024-11-20)
+
+
+### Bug Fixes
+
+* [DHIS2-18444] stabilize possible duplicate modal cypress test ([#3886](https://github.com/dhis2/capture-app/issues/3886)) ([5b5b477](https://github.com/dhis2/capture-app/commit/5b5b477ed3a26c7eb04c4966802769fe973e1631))
+
+## [101.16.2](https://github.com/dhis2/capture-app/compare/v101.16.1...v101.16.2) (2024-11-19)
+
+
+### Bug Fixes
+
+* [DHIS2-16994] Image and File DE and TEA not Displayed in Changelog ([#3837](https://github.com/dhis2/capture-app/issues/3837)) ([9327210](https://github.com/dhis2/capture-app/commit/932721045126e02379f56a85af4f6586b836b4c0))
+
+## [101.16.1](https://github.com/dhis2/capture-app/compare/v101.16.0...v101.16.1) (2024-11-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([37c32df](https://github.com/dhis2/capture-app/commit/37c32df3e7839e30b493ff8e8185de769c3e2fd4))
+
+# [101.16.0](https://github.com/dhis2/capture-app/compare/v101.15.0...v101.16.0) (2024-11-13)
+
+
+### Features
+
+* [DHIS2-18250] Breadcrumb for event & enrollment pages ([#3849](https://github.com/dhis2/capture-app/issues/3849)) ([d65882e](https://github.com/dhis2/capture-app/commit/d65882eacb711865d9f6a860c65d56a0f4d68157))
+
+# [101.15.0](https://github.com/dhis2/capture-app/compare/v101.14.9...v101.15.0) (2024-11-12)
+
+
+### Features
+
+* [DHIS2-15187][DHIS2-15190] Working list bulk actions ([#3773](https://github.com/dhis2/capture-app/issues/3773)) ([5a12722](https://github.com/dhis2/capture-app/commit/5a127229e984b744fa3ea486d9b5a2632603bcd4))
+
+## [101.14.9](https://github.com/dhis2/capture-app/compare/v101.14.8...v101.14.9) (2024-11-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([00403fb](https://github.com/dhis2/capture-app/commit/00403fb596e08eba233fd4103c66c66f286a0881))
+
+## [101.14.8](https://github.com/dhis2/capture-app/compare/v101.14.7...v101.14.8) (2024-11-05)
+
+
+### Bug Fixes
+
+* [DHIS2-18278] remove completedAt and completedBy from the payload send to the API ([#3873](https://github.com/dhis2/capture-app/issues/3873)) ([156369a](https://github.com/dhis2/capture-app/commit/156369abe3dced63c773900acbc3f11f82d57723))
+
+## [101.14.7](https://github.com/dhis2/capture-app/compare/v101.14.6...v101.14.7) (2024-11-04)
+
+
+### Bug Fixes
+
+* [DHIS2-17135][DHIS2-17018] Adjust strings for error messages ([#3858](https://github.com/dhis2/capture-app/issues/3858)) ([1d9ae57](https://github.com/dhis2/capture-app/commit/1d9ae5731331d3f19a0980cf09ebdd9cc46e4583))
+
+## [101.14.6](https://github.com/dhis2/capture-app/compare/v101.14.5...v101.14.6) (2024-11-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([facbee1](https://github.com/dhis2/capture-app/commit/facbee13d009d11e955a1a9b277e27ba41b63867))
+
+## [101.14.5](https://github.com/dhis2/capture-app/compare/v101.14.4...v101.14.5) (2024-11-01)
+
+
+### Bug Fixes
+
+* [DHIS2-18238] incorrect criteria when saving list with follow up false ([#3868](https://github.com/dhis2/capture-app/issues/3868)) ([53c21f0](https://github.com/dhis2/capture-app/commit/53c21f0a4942d09ae4bf88253b576de8ca94b9b6))
+* [DHIS2-18248] pass on createdAt to rules engine when editing ([#3848](https://github.com/dhis2/capture-app/issues/3848)) ([31cb56c](https://github.com/dhis2/capture-app/commit/31cb56c4f05727eb84fcc36e39f897cccc5627b3))
+
+## [101.14.4](https://github.com/dhis2/capture-app/compare/v101.14.3...v101.14.4) (2024-10-29)
+
+
+### Bug Fixes
+
+* [DHIS2-18228] Image Deleted on Update ([#3857](https://github.com/dhis2/capture-app/issues/3857)) ([4656864](https://github.com/dhis2/capture-app/commit/46568640482a3d6a610533573b1132c160329296))
+
+## [101.14.3](https://github.com/dhis2/capture-app/compare/v101.14.2...v101.14.3) (2024-10-29)
+
+
+### Bug Fixes
+
+* [DHIS2-17843] Disable delete enrollment button when user does not have authority ([#3859](https://github.com/dhis2/capture-app/issues/3859)) ([edee6d3](https://github.com/dhis2/capture-app/commit/edee6d350fb2672a3470ef4c282460b34fa726eb))
+
+## [101.14.2](https://github.com/dhis2/capture-app/compare/v101.14.1...v101.14.2) (2024-10-27)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([57a7b83](https://github.com/dhis2/capture-app/commit/57a7b8300c841d043da84735ed32dfce0b64e25b))
+
 ## [101.14.1](https://github.com/dhis2/capture-app/compare/v101.14.0...v101.14.1) (2024-10-22)
 
 

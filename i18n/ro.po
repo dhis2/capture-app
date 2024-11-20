@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2024\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -708,9 +708,6 @@ msgstr ""
 msgid "Page is missing required values from URL"
 msgstr "În pagină lipsesc valorile obligatorii din URL"
 
-msgid "Program is not valid"
-msgstr "Programul nu este valid"
-
 msgid "Org unit is not valid with current program"
 msgstr "Unitatea organizațională nu este validă cu programul curent"
 
@@ -1130,6 +1127,9 @@ msgstr "Marcare ca anulat"
 msgid "Mark incomplete"
 msgstr "Marcare ca incomplet"
 
+msgid "You do not have access to delete this enrollment"
+msgstr ""
+
 msgid "Delete enrollment"
 msgstr "Lichidare înrolare"
 
@@ -1208,6 +1208,12 @@ msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
+msgstr ""
+
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1401,11 +1407,6 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-
 msgid "Enter details now"
 msgstr ""
 
@@ -1489,6 +1490,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Updated"
+msgstr ""
+
 msgid "Created"
 msgstr ""
 
@@ -1505,6 +1509,9 @@ msgid "Data item"
 msgstr ""
 
 msgid "Change"
+msgstr ""
+
+msgid "Value"
 msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"

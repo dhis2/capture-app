@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -688,8 +688,10 @@ msgstr "Nejsou žádné aktivní zápisy."
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "Přidejte nový zápis pro {{teiDisplayName}} v tomto programu."
 
-msgid "No access to program owner."
-msgstr "Žádný přístup k vlastníkovi programu."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} není v tomto programu zapsán."
@@ -718,9 +720,6 @@ msgstr "Zobrazit pracovní seznam v tomto programu."
 
 msgid "Page is missing required values from URL"
 msgstr "Na stránce chybí požadované hodnoty z adresy URL"
-
-msgid "Program is not valid"
-msgstr "Program není platný"
 
 msgid "Org unit is not valid with current program"
 msgstr "Organizační jednotka není platná pro aktuální program"
@@ -768,6 +767,8 @@ msgid ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
 msgstr ""
+"Možnost kategorie není pro vybranou organizační jednotku platná. Vyberte "
+"prosím platnou kombinaci."
 
 msgid "Please select {{category}}."
 msgstr "Vyberte prosím {{category}}."
@@ -945,7 +946,7 @@ msgid "Loading"
 msgstr "načítání"
 
 msgid "An error occurred while loading the form"
-msgstr ""
+msgstr "Při načítání formuláře došlo k chybě"
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
@@ -1095,8 +1096,8 @@ msgstr "Nejsou k dispozici žádné typy trasované entity"
 msgid "Assigned to"
 msgstr "Přiřazen k"
 
-msgid "You don't have access to edit this assignee"
-msgstr "Nemáte přístup k úpravám tohoto příjemce"
+msgid "You don't have access to edit the assigned user"
+msgstr ""
 
 msgid "Edit"
 msgstr "Upravit"
@@ -1104,8 +1105,8 @@ msgstr "Upravit"
 msgid "No one is assigned to this event"
 msgstr "K této události není nikdo přiřazen"
 
-msgid "You don't have access to assign an assignee"
-msgstr "Nemáte přístup k přiřazení příjemce"
+msgid "You don't have access to assign a user to this event"
+msgstr ""
 
 msgid "Assign"
 msgstr "Přiřadit"
@@ -1151,6 +1152,9 @@ msgstr "Označit jako zrušené"
 
 msgid "Mark incomplete"
 msgstr "Označit jako neúplné"
+
+msgid "You do not have access to delete this enrollment"
+msgstr "Nemáte přístup ke smazání tohoto zápisu."
 
 msgid "Delete enrollment"
 msgstr "Smazat zápis"
@@ -1238,6 +1242,12 @@ msgstr "Widget pro zápis nelze načíst. Prosím zkuste to znovu později"
 msgid "Follow-up"
 msgstr "Následovat"
 
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr "Ve vlastnictví{{escape}}"
+
 msgid "Cancelled"
 msgstr "Zrušeno"
 
@@ -1293,7 +1303,7 @@ msgid "Event completed"
 msgstr "Událost dokončena"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
+msgstr "Událost nelze upravovat po jejím dokončení."
 
 msgid "Back to all stages and events"
 msgstr "Zpět ke všem fázím a událostem"
@@ -1356,7 +1366,7 @@ msgid "Schedule date / Due date"
 msgstr "Datum plánu / Datum konce platnosti"
 
 msgid "Event notes"
-msgstr ""
+msgstr "Poznámky k události"
 
 msgid "Write a note about this scheduled event"
 msgstr "Napište poznámku o této plánované události"
@@ -1442,13 +1452,6 @@ msgstr "{{ linkableStageLabel }} nemá žádné propojitelné události"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Nejednoznačné vztahy, kontaktujte správce systému"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"V dalším kroku po vyplnění této stránky {{currentStageLabel}} zadejte údaje "
-"{{linkableStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Zadejte nyní podrobnosti"
 
@@ -1465,7 +1468,7 @@ msgid "Please select a valid event"
 msgstr "Vyberte prosím platnou událost"
 
 msgid "You do not have access to create events in this stage"
-msgstr ""
+msgstr "V této fázi nemáte přístup k vytváření událostí."
 
 msgid "This stage can only have one event"
 msgstr "Tato fáze může mít pouze jednu událost"
@@ -1474,15 +1477,17 @@ msgid "New {{ eventName }} event"
 msgstr "Nová událost {{ eventName }}"
 
 msgid "An error occurred while deleting the event"
-msgstr ""
+msgstr "Při mazání události došlo k chybě"
 
 msgid ""
 "Deleting an event is permanent and cannot be undone. Are you sure you want "
 "to delete this event?"
 msgstr ""
+"Odstranění události je trvalé a nelze jej vrátit zpět. Opravdu chcete tuto "
+"událost odstranit?"
 
 msgid "An error occurred when updating event status"
-msgstr ""
+msgstr "Při aktualizaci stavu události došlo k chybě"
 
 msgid "Unskip"
 msgstr ""
@@ -1519,10 +1524,10 @@ msgid "Stages and Events"
 msgstr "Fáze a události"
 
 msgid "An error occurred while loading the widget."
-msgstr ""
+msgstr "Při načítání widgetu došlo k chybě."
 
 msgid "View linked event"
-msgstr ""
+msgstr "Zobrazit propojenou událost"
 
 msgid "Scheduled"
 msgstr "Naplánováno"
@@ -1531,7 +1536,10 @@ msgid "Changelog"
 msgstr "Seznam změn"
 
 msgid "No changes to display"
-msgstr ""
+msgstr "Žádné změny k zobrazení"
+
+msgid "Updated"
+msgstr "Aktualizováno"
 
 msgid "Created"
 msgstr "Vytvořeno"
@@ -1549,10 +1557,13 @@ msgid "Data item"
 msgstr "Datová položka"
 
 msgid "Change"
-msgstr ""
+msgstr "Změna"
+
+msgid "Value"
+msgstr "Hodnota"
 
 msgid "New {{trackedEntityTypeName}} relationship"
-msgstr ""
+msgstr "Nový vztah {{trackedEntityTypeName}} "
 
 msgid "Missing implementation step"
 msgstr "Chybí krok implementace"
@@ -1583,12 +1594,14 @@ msgid ""
 "Deleting the relationship is permanent and cannot be undone. Are you sure "
 "you want to delete this relationship?"
 msgstr ""
+"Odstranění vztahu je trvalé a nelze jej vrátit zpět. Opravdu chcete tento "
+"vztah odstranit?"
 
 msgid "Yes, delete relationship"
-msgstr ""
+msgstr "Ano, vymazat vztah"
 
 msgid "An error occurred while deleting the relationship."
-msgstr ""
+msgstr "Při odstraňování vztahu došlo k chybě."
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr "Chcete-li otevřít tento vztah, počkejte na dokončení ukládání"
@@ -1750,7 +1763,7 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
 
 msgid "Error updating the Assignee"
-msgstr ""
+msgstr "Chyba při aktualizaci Příjemce"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

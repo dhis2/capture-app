@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Karoline Tufte Lien <karoline@dhis2.org>, 2024
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2024
 # Merethe Wollan Blisten, 2024
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Merethe Wollan Blisten, 2024\n"
+"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -689,8 +689,10 @@ msgstr "Det er ingen aktive registreringer."
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "Legg til ny registrering for {{teiDisplayName}} i dette programmet."
 
-msgid "No access to program owner."
-msgstr "Ingen tilgang til programeier."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
@@ -720,9 +722,6 @@ msgstr "Se arbeidsliste i dette programmet."
 
 msgid "Page is missing required values from URL"
 msgstr "Siden mangler nødvendige verdier fra URL"
-
-msgid "Program is not valid"
-msgstr "Programmet er ikke gyldig"
 
 msgid "Org unit is not valid with current program"
 msgstr "Organisasjonsenheten er ikke gyldig med gjeldende program"
@@ -1093,8 +1092,8 @@ msgstr "Det er ingen sporbare enhetstyper tilgjengelig"
 msgid "Assigned to"
 msgstr "Tildelt til"
 
-msgid "You don't have access to edit this assignee"
-msgstr "Du har ikke tilgang til å redigere denne tildelte brukeren"
+msgid "You don't have access to edit the assigned user"
+msgstr ""
 
 msgid "Edit"
 msgstr "Rediger"
@@ -1102,8 +1101,8 @@ msgstr "Rediger"
 msgid "No one is assigned to this event"
 msgstr "Ingen er tildelt denne hendelsen"
 
-msgid "You don't have access to assign an assignee"
-msgstr "Du har ikke tilgang til å tildele bruker"
+msgid "You don't have access to assign a user to this event"
+msgstr ""
 
 msgid "Assign"
 msgstr "Tildel"
@@ -1151,6 +1150,9 @@ msgstr "Merk som kansellert"
 
 msgid "Mark incomplete"
 msgstr "Merk som ufullstendig"
+
+msgid "You do not have access to delete this enrollment"
+msgstr ""
 
 msgid "Delete enrollment"
 msgstr "Slett registrering"
@@ -1241,6 +1243,12 @@ msgstr "Registreringsmodulen kunne ikke lastes inn. Prøv igjen senere"
 
 msgid "Follow-up"
 msgstr "Oppfølging"
+
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "Kansellert"
@@ -1444,13 +1452,6 @@ msgstr "{{ linkableStageLabel }} har ingen hendelser som kan kobles til"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Uklare relasjoner, kontakt din systemadministrator"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Skriv inn {{linkableStageLabel}}detaljer i neste trinn etter du har fullført"
-" dette {{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Skriv inn detaljer "
 
@@ -1536,6 +1537,9 @@ msgstr "Endringslogg"
 msgid "No changes to display"
 msgstr "Ingen endringer å vise"
 
+msgid "Updated"
+msgstr "Oppdatert"
+
 msgid "Created"
 msgstr "Opprettet"
 
@@ -1553,6 +1557,9 @@ msgstr "Datapunkt"
 
 msgid "Change"
 msgstr "Endre"
+
+msgid "Value"
+msgstr "Verdi"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Ny {{trackedEntityTypeName}} relasjon"

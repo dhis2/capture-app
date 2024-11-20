@@ -1,12 +1,12 @@
 // @flow
-import { useApiMetadataQuery } from 'capture-core/utils/reactQueryHelpers';
 
-const auth = Object.freeze({
-    F_TEI_CASCADE_DELETE: 'F_TEI_CASCADE_DELETE',
-    ALL: 'ALL',
-});
+import { useApiMetadataQuery } from '../reactQueryHelpers';
 
-export const useAuthorities = () => {
+type Props = {
+    authority: string,
+}
+
+export const useAuthority = ({ authority }: Props) => {
     const queryKey = ['authorities'];
     const queryFn = {
         resource: 'me.json',
@@ -17,11 +17,11 @@ export const useAuthorities = () => {
     const queryOptions = {
         select: ({ authorities }) =>
             authorities &&
-            authorities.some(authority => authority === auth.ALL || authority === auth.F_TEI_CASCADE_DELETE),
+            authorities.some(apiAuthority => apiAuthority === 'ALL' || apiAuthority === authority),
     };
     const { data } = useApiMetadataQuery<any>(queryKey, queryFn, queryOptions);
 
     return {
-        canCascadeDeleteTei: Boolean(data),
+        hasAuthority: Boolean(data),
     };
 };

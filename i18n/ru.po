@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -701,8 +701,10 @@ msgstr ""
 "Создать новую регистрационную запись для объекта {{teiDisplayName}} в данной"
 " программе."
 
-msgid "No access to program owner."
-msgstr "Нет доступа к владельцу программы."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "Объект {{teiDisplayName}} не зарегистрирован в данной программе."
@@ -734,9 +736,6 @@ msgstr "Просмотреть рабочий список в данной пр�
 
 msgid "Page is missing required values from URL"
 msgstr "Страница не содержит необходимых данных в URL адресе"
-
-msgid "Program is not valid"
-msgstr "Программа недействительна"
 
 msgid "Org unit is not valid with current program"
 msgstr "Организационная единица не действительна для данной программы"
@@ -1109,8 +1108,8 @@ msgstr "Нет доступных отслеживаемых типов объе
 msgid "Assigned to"
 msgstr "Назначено пользователю"
 
-msgid "You don't have access to edit this assignee"
-msgstr "У вас нет доступа к редактированию данного назначенного пользователя"
+msgid "You don't have access to edit the assigned user"
+msgstr ""
 
 msgid "Edit"
 msgstr "Редактировать"
@@ -1118,8 +1117,8 @@ msgstr "Редактировать"
 msgid "No one is assigned to this event"
 msgstr "Никто не назначен для данного события"
 
-msgid "You don't have access to assign an assignee"
-msgstr "У вас нет доступа к назначению пользователя"
+msgid "You don't have access to assign a user to this event"
+msgstr ""
 
 msgid "Assign"
 msgstr "Назначить"
@@ -1169,6 +1168,9 @@ msgstr "Присвоить метку \"Отменено\""
 
 msgid "Mark incomplete"
 msgstr " Присвоить метку \"Незавершено\""
+
+msgid "You do not have access to delete this enrollment"
+msgstr ""
 
 msgid "Delete enrollment"
 msgstr "Удалить регистрационную запись"
@@ -1261,6 +1263,12 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Наблюдать"
+
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "Отменен/а/о"
@@ -1483,13 +1491,6 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Неопределенные связи, обратитесь к системному администратору"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"Ввести данные этапа {{linkableStageLabel}} на следующем шаге после "
-"заполнения данных данного этапа {{currentStageLabel}}."
-
 msgid "Enter details now"
 msgstr "Ввести данные сейчас"
 
@@ -1574,6 +1575,9 @@ msgstr "Лог изменений"
 msgid "No changes to display"
 msgstr "Нет изменений для отображения"
 
+msgid "Updated"
+msgstr "Обновлено"
+
 msgid "Created"
 msgstr "Создан/а/о"
 
@@ -1591,6 +1595,9 @@ msgstr "Переменная"
 
 msgid "Change"
 msgstr "Изменить"
+
+msgid "Value"
+msgstr "Значение"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Новая связь для объекта {{trackedEntityTypeName}} "

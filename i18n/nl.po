@@ -3,15 +3,15 @@
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Philip Larsen Donnelly, 2024
-# Rica, 2024
 # Charel van den Elsen, 2024
+# Rica, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Charel van den Elsen, 2024\n"
+"Last-Translator: Rica, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -697,8 +697,10 @@ msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 "Voeg een nieuwe inschrijving toe voor {{teiDisplayName}} in dit programma."
 
-msgid "No access to program owner."
-msgstr "Geen toegang tot programma-eigenaar."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} is niet ingeschreven voor dit programma."
@@ -729,9 +731,6 @@ msgstr "Bekijk werklijst in dit programma."
 
 msgid "Page is missing required values from URL"
 msgstr "Pagina mist vereiste waarden van URL"
-
-msgid "Program is not valid"
-msgstr "Programma is niet geldig"
 
 msgid "Org unit is not valid with current program"
 msgstr "Organisatie-eenheid is niet geldig met het huidige programma"
@@ -1107,7 +1106,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr "Toegewezen aan"
 
-msgid "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
 msgstr ""
 
 msgid "Edit"
@@ -1116,7 +1115,7 @@ msgstr "Bewerk"
 msgid "No one is assigned to this event"
 msgstr "Er is niemand toegewezen aan dit evenement"
 
-msgid "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1166,6 +1165,9 @@ msgstr "Markeren als geannuleerd"
 
 msgid "Mark incomplete"
 msgstr "Markering onvolledig"
+
+msgid "You do not have access to delete this enrollment"
+msgstr ""
 
 msgid "Delete enrollment"
 msgstr "Inschrijving verwijderen"
@@ -1249,6 +1251,12 @@ msgstr ""
 
 msgid "Follow-up"
 msgstr "Opvolgen"
+
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "Geannuleerd"
@@ -1453,11 +1461,6 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-
 msgid "Enter details now"
 msgstr ""
 
@@ -1541,6 +1544,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Updated"
+msgstr ""
+
 msgid "Created"
 msgstr "Gemaakt"
 
@@ -1558,6 +1564,9 @@ msgstr "Gegevensitem"
 
 msgid "Change"
 msgstr ""
+
+msgid "Value"
+msgstr "Waarde"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""

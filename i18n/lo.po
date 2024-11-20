@@ -1,18 +1,18 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2022
-# Saysamone Sibounma, 2023
 # Somkhit Bouavong <bouavongk@gmail.com>, 2024
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Namwan Chanthavisouk, 2024
+# Saysamone Sibounma, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Namwan Chanthavisouk, 2024\n"
+"Last-Translator: Saysamone Sibounma, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -682,8 +682,10 @@ msgstr "ບໍ່ມີການລົງທະບຽນທີ່ເຄື່ອ
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "ເພີ່ມການລົງທະບຽນໃໝ່ສຳລັບ {{teiDisplayName}} ໃນໂປແກຼມນີ້."
 
-msgid "No access to program owner."
-msgstr "ບໍ່ສາມາດເຂົ້າເຖິງເຈົ້າຂອງໂປແກຼມ."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} ບໍ່ໄດ້ລົງທະບຽນຢູ່ໃນໂປແກຼມນີ້."
@@ -712,9 +714,6 @@ msgstr "ເບິ່ງລາຍຊື່ເຮັດວຽກຢູ່ໃນໂ
 
 msgid "Page is missing required values from URL"
 msgstr "ບໍ່ພົບໜ້ານີ້ ຕ້ອງການຄ່າຈາກ URL"
-
-msgid "Program is not valid"
-msgstr "ໂປຣແກຼມບໍ່ຖືກຕ້ອງ"
 
 msgid "Org unit is not valid with current program"
 msgstr "ຫົວໜ່ວຍການຈັດຕັ້ງບໍ່ຖືກຕ້ອງກັບໂປແກຼມນີ້"
@@ -1080,8 +1079,8 @@ msgstr "ບໍ່ມີປະເພດບາຍບຸກຄົນທີ່ສາ
 msgid "Assigned to"
 msgstr "ມອບໝາຍໃຫ້"
 
-msgid "You don't have access to edit this assignee"
-msgstr "ທ່ານບໍ່ມີສິດໃນການແກ້ໄຂຂໍ້ມູນຜູ້ມອບໝາຍ"
+msgid "You don't have access to edit the assigned user"
+msgstr ""
 
 msgid "Edit"
 msgstr "ແກ້ໄຂ"
@@ -1089,8 +1088,8 @@ msgstr "ແກ້ໄຂ"
 msgid "No one is assigned to this event"
 msgstr "ບໍ່ມີຜູ້ຖືກມອບໝາຍໃຫ້ກັບເຫດການນີ້"
 
-msgid "You don't have access to assign an assignee"
-msgstr "ທ່ານບໍ່ມີສິດໃນການມອບໝາຍ"
+msgid "You don't have access to assign a user to this event"
+msgstr ""
 
 msgid "Assign"
 msgstr "ມອບໝາຍ"
@@ -1136,6 +1135,9 @@ msgstr "ໝາຍວ່າຖືກຍົກເລີກ"
 
 msgid "Mark incomplete"
 msgstr "ໝາຍວ່າບໍ່ຄົບຖ້ວນ"
+
+msgid "You do not have access to delete this enrollment"
+msgstr ""
 
 msgid "Delete enrollment"
 msgstr "ລົບການລົງທະບຽນ"
@@ -1220,6 +1222,12 @@ msgstr "ບໍ່ສາມາດໂຫຼດລາຍການການລົງ
 
 msgid "Follow-up"
 msgstr "ຕິດຕາມ"
+
+msgid "Started at{{escape}}"
+msgstr ""
+
+msgid "Owned by{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "ຍົກເລີກແລ້ວ"
@@ -1414,13 +1422,6 @@ msgstr "{{ linkableStageLabel }} ບໍ່ມີເຫດການທີ່ສ�
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "ການເຊື່ອມໂຍງບໍ່ຊັດເຈນ, ຕິດຕໍ່ຜູ້ດູແລລະບົບ"
 
-msgid ""
-"Enter {{linkableStageLabel}} details in the next step after completing this "
-"{{currentStageLabel}}."
-msgstr ""
-"ໃສ່ລາຍລະອຽດ {{linkableStageLabel}} ໃນຂັ້ນຕອນຕໍ່ໄປຫຼັງຈາກເຮັດສໍາເລັດ "
-"{{currentStageLabel}} ນີ້."
-
 msgid "Enter details now"
 msgstr "ປ້ອນລາຍລະອຽດ"
 
@@ -1504,6 +1505,9 @@ msgstr "ບັນທຶກການປ່ຽນແປງ"
 msgid "No changes to display"
 msgstr "ບໍ່ມີການປ່ຽນແປງທີ່ຈະສະແດງ"
 
+msgid "Updated"
+msgstr ""
+
 msgid "Created"
 msgstr "ສ້າງແລ້ວ"
 
@@ -1521,6 +1525,9 @@ msgstr "ລາຍການຂໍ້ມູນ"
 
 msgid "Change"
 msgstr "ປ່ຽນ"
+
+msgid "Value"
+msgstr "ຄ່າ"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "ຄວາມສໍາພັນໃໝ່ {{trackedEntityTypeName}} "

@@ -189,6 +189,7 @@ const useView = (
 
     const nextFilters = useSelector(({ workingListsMeta }) =>
         workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.filters);
+
     const filtersState = useMemo(() => ({ ...appliedFilters, ...nextFilters }), [
         appliedFilters,
         nextFilters,
