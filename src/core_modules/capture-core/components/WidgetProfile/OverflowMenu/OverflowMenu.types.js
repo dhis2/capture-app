@@ -3,6 +3,7 @@
 export type Props = {|
     trackedEntity: { trackedEntity: string },
     trackedEntityTypeName: string,
+    trackedEntityData: Object,
     canWriteData: boolean,
     onDeleteSuccess?: () => void,
     displayChangelog: boolean,
@@ -13,6 +14,7 @@ export type Props = {|
 export type PlainProps = {|
     trackedEntity: { trackedEntity: string },
     trackedEntityTypeName: string,
+    trackedEntityData: Object,
     canWriteData: boolean,
     canCascadeDeleteTei: boolean,
     onDeleteSuccess?: () => void,

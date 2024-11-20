@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 
 Given(/^you open the enrollment page by typing (.*)$/, url =>
     cy.visit(url),
@@ -6,14 +6,12 @@ Given(/^you open the enrollment page by typing (.*)$/, url =>
 
 Given('you are on an enrollment page with stage available', () => {
     cy.visit('/#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=UgYg0YW7ZIh&teiId=zmgVvEZ91Kg&enrollmentId=xRnBV5aJDeF');
-    cy.get('[data-test="enrollment-page-content"]')
-        .contains('Enrollment Dashboard');
+    cy.get('[data-test="enrollment-overview-page"]');
 });
 
 Given('you are on an enrollment page with no stage available', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
-    cy.get('[data-test="enrollment-page-content"]')
-        .contains('Enrollment Dashboard');
+    cy.get('[data-test="enrollment-overview-page"]');
 });
 
 When(/^you click the (.*) event-button/, (mode) => {

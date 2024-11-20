@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 
 Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
@@ -6,7 +6,7 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
 });
 
 When(/^the user clicks on the edit button/, () =>
-    cy.get('[data-test="widget-enrollment-event"]').find('[data-test="dhis2-uicore-button"]').eq(1).click(),
+    cy.get('[data-test="widget-enrollment-event"]').find('[data-test="widget-enrollment-event-edit-button"]').click(),
 );
 
 When('the user clicks the arrow button to see the dropdown', () => {
@@ -24,3 +24,7 @@ When(/^the user set the WHOMCH Diastolic blood pressure to (.*)/, score =>
         .type(score)
         .blur(),
 );
+
+And(/^the view enrollment event form is in (.*) mode$/, (mode) => {
+    cy.get(`[data-test="widget-enrollment-event-${mode}"]`).should('exist');
+});

@@ -2,11 +2,19 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { DataTableHead, DataTable, DataTableBody, DataTableRow, DataTableCell, DataTableColumnHeader } from '@dhis2/ui';
+import {
+    CheckboxField,
+    DataTable,
+    DataTableBody,
+    DataTableCell,
+    DataTableColumnHeader,
+    DataTableHead,
+    DataTableRow,
+} from '@dhis2/ui';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 
 const getStyles = () => ({
     tableContainer: {
@@ -34,7 +42,13 @@ type Props = {
     dataSource: Array<Object>,
     rowIdKey: string,
     columns: ?Array<Column>,
+    selectedRows: { [key: string]: boolean },
+    onSelectAll: (ids: Array<string>) => void,
+    onRowSelect: (id: string) => void,
+    allRowsAreSelected: boolean,
+    isSelectionInProgress: ?boolean,
     sortById: string,
+    showSelectCheckBox: ?boolean,
     sortByDirection: string,
     onSort: (id: string, direction: string) => void,
     updating?: ?boolean,
@@ -86,7 +100,7 @@ class Index extends React.Component<Props> {
     };
 
     renderHeaderRow(visibleColumns: Array<Column>) {
-        const { classes, sortById, sortByDirection } = this.props;
+        const { classes, sortById, sortByDirection, dataSource, onSelectAll, allRowsAreSelected } = this.props;
 
         const headerCells = visibleColumns.map(column => (
             <DataTableColumnHeader
@@ -101,8 +115,20 @@ class Index extends React.Component<Props> {
             </DataTableColumnHeader>
         ));
 
+        const checkboxCell = this.props.showSelectCheckBox ? (
+            <DataTableColumnHeader
+                dataTest={'select-all-rows-checkbox'}
+            >
+                <CheckboxField
+                    checked={allRowsAreSelected}
+                    onChange={() => onSelectAll(dataSource.map(({ id }) => id))}
+                />
+            </DataTableColumnHeader>
+        ) : null;
+
         return (
             <DataTableRow dataTest="table-row">
+                {checkboxCell}
                 {headerCells}
                 {this.getCustomEndCellHeader()}
             </DataTableRow>
@@ -121,7 +147,7 @@ class Index extends React.Component<Props> {
     }
 
     renderRows(visibleColumns: Array<Column>, columnsCount: number) {
-        const { dataSource, rowIdKey, ...customEndCellBodyProps } = this.props;
+        const { dataSource, rowIdKey, selectedRows, onRowSelect, ...customEndCellBodyProps } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             return (
@@ -136,13 +162,37 @@ class Index extends React.Component<Props> {
                 <DataTableCell
                     key={column.id}
                     align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
-                    onClick={() => this.props.onRowClick(row)}
+                    style={{ cursor: this.props.isSelectionInProgress ? 'pointer' : 'default' }}
+                    onClick={() => {
+                        if (this.props.isSelectionInProgress) {
+                            onRowSelect(row[rowIdKey]);
+                            return;
+                        }
+                        this.props.onRowClick(row);
+                    }}
                 >
                     {row[column.id]}
                 </DataTableCell>
             ));
+
+            const rowId = row[rowIdKey];
             return (
-                <DataTableRow key={row[rowIdKey]} dataTest={row[rowIdKey]}>
+                <DataTableRow
+                    selected={selectedRows[rowId]}
+                    key={rowId}
+                    dataTest={row[rowIdKey]}
+                >
+                    {this.props.showSelectCheckBox && (
+                        <DataTableCell
+                            width={'40px'}
+                        >
+                            <CheckboxField
+                                dataTest={'select-row-checkbox'}
+                                checked={selectedRows[rowId]}
+                                onChange={() => onRowSelect(rowId)}
+                            />
+                        </DataTableCell>
+                    )}
                     {cells}
                     {this.getCustomEndCellBody(row, customEndCellBodyProps)}
                 </DataTableRow>

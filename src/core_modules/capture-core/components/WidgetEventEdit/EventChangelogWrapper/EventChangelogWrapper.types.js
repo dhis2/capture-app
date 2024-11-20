@@ -10,4 +10,5 @@ type PassOnProps = {|
 export type Props = {
     ...PassOnProps,
     formFoundation: RenderFoundation,
+    eventData: Object,
 };

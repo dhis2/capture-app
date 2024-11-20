@@ -12,8 +12,7 @@ When('you assign the user Geetha in the view mode', () => {
 When('you assign the user Tracker demo User in the edit mode', () => {
     cy
         .get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="dhis2-uicore-button"]')
-        .eq(1)
+        .find('[data-test="widget-enrollment-event-edit-button"]')
         .click();
 
     cy.get('[data-test="widget-assignee"]').within(() => {
