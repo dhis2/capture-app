@@ -469,15 +469,15 @@ And('you fill the WHO RMNCH program registration form with its required unique v
 });
 
 And('you fill the WHO RMNCH program registration form with its required values', () => {
-    cy.get('input[type="text"]')
-        .eq(2)
-        .type('Ava');
-
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(3)
         .type('Didriksson');
 
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type('Ava');
+
+    cy.get('[data-test="capture-ui-input"]')
         .eq(9)
         .type('1985-10-01')
         .blur();
