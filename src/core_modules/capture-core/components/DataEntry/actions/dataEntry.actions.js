@@ -30,7 +30,6 @@ export const actionTypes = {
     DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS: 'DataEntryRelationshipAlreadyExists',
     LOAD_EDIT_DATA_ENTRY: 'LoadEditDataEntry',
     CLEAN_UP_DATA_ENTRY: 'CleanUpDataEntry',
-    START_LOAD_DATA_ENTRY: 'StartLoadDataEntry',
 };
 
 // COMPLETE
@@ -118,10 +117,6 @@ export const updateFormField =
             itemId,
             updateCompleteUid,
         });
-
-export const startLoadDataEntry =
-    (dataEntryId: string, itemId: string, uid: string) =>
-        actionCreator(actionTypes.START_LOAD_DATA_ENTRY)({ dataEntryId, itemId, uid });
 
 export const startRunRulesPostLoadDataEntry =
     (dataEntryId: string, itemId: string, uid: string) =>

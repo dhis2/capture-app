@@ -273,17 +273,6 @@ export const dataEntriesInProgressListDesc = createReducerDescription({
             [key]: null,
         };
     },
-    [actionTypes.START_LOAD_DATA_ENTRY]: (state, action) => {
-        const { dataEntryId, itemId, uid } = action.payload;
-        const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
-        return {
-            ...state,
-            [dataEntryKey]: [
-                ...(state[dataEntryKey] || []),
-                uid,
-            ],
-        };
-    },
     [formAsyncActionTypes.FIELD_IS_VALIDATING]: (state, action) => {
         const { formId, validatingUid } = action.payload;
         const listWithPotentialDupes = [...(state[formId] || []), validatingUid];

@@ -7,7 +7,6 @@ import {
     getApplicableRuleEffectsForEventProgram,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
-    validateAssignEffects,
 } from '../../../rules';
 import { RenderFoundation, Program } from '../../../metaData';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
@@ -29,7 +28,6 @@ import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '.
 import type { EnrollmentData, AttributeValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type { ProgramCategory } from '../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
-import type { QuerySingleResource } from '../../../utils/api';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
@@ -72,7 +70,7 @@ function getLoadActions(
     ];
 }
 
-export const openEventForEditInDataEntry = async ({
+export const openEventForEditInDataEntry = ({
     loadedValues: {
         eventContainer,
         dataEntryValues,
@@ -86,7 +84,6 @@ export const openEventForEditInDataEntry = async ({
     dataEntryId,
     dataEntryKey,
     programCategory,
-    querySingleResource,
 }: {
     loadedValues: {
         eventContainer: Object,
@@ -101,7 +98,6 @@ export const openEventForEditInDataEntry = async ({
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
     programCategory?: ProgramCategory,
-    querySingleResource: QuerySingleResource,
 }) => {
     const dataEntryPropsToInclude = [
         {
@@ -150,13 +146,12 @@ export const openEventForEditInDataEntry = async ({
             },
         );
     const currentEvent = { ...eventContainer.event, ...eventContainer.values };
-    const stage = getStageFromEvent(eventContainer.event)?.stage;
-    if (!stage) {
-        throw Error(i18n.t('stage not found in rules execution'));
-    }
-
-    let effects: Object = {};
+    let effects;
     if (program instanceof TrackerProgram) {
+        const stage = getStageFromEvent(eventContainer.event)?.stage;
+        if (!stage) {
+            throw Error(i18n.t('stage not found in rules execution'));
+        }
         // TODO: Add attributeValues & enrollmentData
         effects = getApplicableRuleEffectsForTrackerProgram({
             program,
@@ -177,15 +172,9 @@ export const openEventForEditInDataEntry = async ({
         });
     }
 
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: stage.stageForm.getElements(),
-        effects,
-        querySingleResource,
-    });
-
     return [
         ...dataEntryActions,
-        updateRulesEffects(effectsWithValidations, formId),
+        updateRulesEffects(effects, formId),
         actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
     ];
 };

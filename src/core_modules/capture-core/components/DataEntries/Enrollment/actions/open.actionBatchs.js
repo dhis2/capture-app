@@ -1,11 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
-import {
-    getApplicableRuleEffectsForTrackerProgram,
-    updateRulesEffects,
-    validateAssignEffects,
-} from '../../../../rules';
+import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import type { ProgramStage, TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
@@ -20,9 +16,8 @@ import { convertDateObjectToDateFormatString } from '../../../../utils/converter
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
-import type { QuerySingleResource } from '../../../../utils/api';
 
-export const itemId = 'newEnrollment';
+const itemId = 'newEnrollment';
 
 type DataEntryPropsToInclude = Array<Object>;
 
@@ -61,7 +56,6 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     firstStage,
     programCategory,
     formFoundation,
-    querySingleResource,
 }: {
     program: TrackerProgram,
     orgUnit: OrgUnit,
@@ -73,7 +67,6 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     firstStage?: ProgramStage,
     programCategory?: ProgramCategory,
     formFoundation: RenderFoundation,
-    querySingleResource: QuerySingleResource,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
@@ -108,19 +101,13 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         formFoundation,
     });
 
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: formFoundation.getElements(),
-        effects,
-        querySingleResource,
-    });
-
     return batchActions([
         openDataEntryForNewEnrollment(
             dataEntryId,
         ),
         ...dataEntryActions,
         addFormDataActions,
-        updateRulesEffects(effectsWithValidations, formId),
+        updateRulesEffects(effects, formId),
         ...extraActions,
     ], batchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH);
 };

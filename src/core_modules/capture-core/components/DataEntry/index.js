@@ -25,7 +25,6 @@ export { placements } from './constants/placements.const';
 // actions
 export {
     actionTypes as mainActionTypes,
-    startLoadDataEntry,
     startRunRulesPostUpdateField,
     startRunRulesPostLoadDataEntry,
     rulesExecutedPostUpdateField,

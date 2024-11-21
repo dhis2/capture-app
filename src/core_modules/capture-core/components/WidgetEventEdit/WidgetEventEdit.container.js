@@ -1,5 +1,4 @@
 // @flow
-import { v4 as uuid } from 'uuid';
 import React, { type ComponentType, useState, useEffect } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,7 +33,6 @@ import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from './constants/status.const';
 import { useAuthorities } from '../../utils/authority/useAuthorities';
-import { startLoadDataEntry } from '../DataEntry';
 
 const styles = {
     header: {
@@ -138,11 +136,7 @@ export const WidgetEventEditPlain = ({
                                 secondary
                                 disabled={disableEdit}
                                 icon={<IconEdit24 />}
-                                onClick={() => {
-                                    const uid = uuid();
-                                    dispatch(startLoadDataEntry(dataEntryIds.ENROLLMENT_EVENT, dataEntryKeys.EDIT, uid));
-                                    dispatch(startShowEditEventDataEntry(orgUnit, programCategory));
-                                }}
+                                onClick={() => dispatch(startShowEditEventDataEntry(orgUnit, programCategory))}
                             >
                                 {i18n.t('Edit event')}
                             </Button>

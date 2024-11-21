@@ -42,30 +42,48 @@ const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
         {},
     );
 
-const getRulesActions = async ({
-    effects,
+export const getRulesActionsForTEI = ({
     foundation,
     formId,
-    querySingleResource,
-    onGetValidationContext,
+    orgUnit,
+    enrollmentData,
+    teiValues,
+    trackedEntityAttributes,
+    optionSets,
+    rulesContainer,
+    otherEvents,
+    dataElements,
+    userRoles,
 }: {
-    effects: OutputEffects,
     foundation: RenderFoundation,
     formId: string,
-    querySingleResource: QuerySingleResource,
-    onGetValidationContext: () => Object,
+    orgUnit: OrgUnit,
+    enrollmentData?: ?Enrollment,
+    teiValues?: ?TEIValues,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+    optionSets: OptionSets,
+    rulesContainer: ProgramRulesContainer,
+    otherEvents?: ?EventsData,
+    dataElements: ?DataElements,
+    userRoles: Array<string>,
 }) => {
-    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: foundation.getElements(),
-        effects: effectsHierarchy,
-        querySingleResource,
-        onGetValidationContext,
+    const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
+        programRulesContainer: rulesContainer,
+        currentEvent: null,
+        otherEvents,
+        dataElements: getDataElementsForRulesExecution(dataElements),
+        trackedEntityAttributes,
+        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData),
+        selectedEntity: teiValues,
+        selectedOrgUnit: orgUnit,
+        selectedUserRoles: userRoles,
+        optionSets,
     });
-    return updateRulesEffects(effectsWithValidations, formId);
+    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
+    return updateRulesEffects(effectsHierarchy, formId);
 };
 
-export const getRulesActionsForTEI = async ({
+export const getRulesActionsForTEIAsync = async ({
     foundation,
     formId,
     orgUnit,
@@ -106,5 +124,12 @@ export const getRulesActionsForTEI = async ({
         selectedUserRoles: userRoles,
         optionSets,
     });
-    return getRulesActions({ effects, foundation, formId, querySingleResource, onGetValidationContext });
+    const effectsHierarchy = buildEffectsHierarchy(postProcessRulesEffects(effects, foundation));
+    const effectsWithValidations = await validateAssignEffects({
+        dataElements: foundation.getElements(),
+        effects: effectsHierarchy,
+        querySingleResource,
+        onGetValidationContext,
+    });
+    return updateRulesEffects(effectsWithValidations, formId);
 };

@@ -17,7 +17,7 @@ import type { FieldData } from '../../../rules';
 import { getCurrentClientValues } from '../../../rules';
 import { loadNewDataEntry } from '../../DataEntry/actions/dataEntryLoadNew.actions';
 import { rulesExecutedPostUpdateField } from '../../DataEntry/actions/dataEntry.actions';
-import { getRulesActionsForTEI } from './ProgramRules';
+import { getRulesActionsForTEIAsync } from './ProgramRules';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import type { Geometry } from './helpers/types';
 import type { QuerySingleResource } from '../../../utils/api';
@@ -97,7 +97,7 @@ export const getUpdateFieldActions = async ({
     };
     const formId = `${dataEntryId}-${itemId}`;
     const currentTEIValues = getCurrentClientValues(state, formFoundation, formId, fieldData);
-    const rulesActions = await getRulesActionsForTEI({
+    const rulesActions = await getRulesActionsForTEIAsync({
         foundation: formFoundation,
         formId,
         orgUnit,

@@ -13,8 +13,6 @@ import type { TrackerProgram } from '../../../metaData/Program';
 
 export const startNewEnrollmentDataEntrySelfInitialisationEpic = (
     action$: InputObservable,
-    store: ReduxStore,
-    { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
@@ -49,7 +47,6 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (
                     firstStage,
                     programCategory,
                     formFoundation,
-                    querySingleResource,
                 });
 
                 return from(openEnrollmentPromise);
