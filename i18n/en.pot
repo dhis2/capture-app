@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-04T18:45:47.626Z\n"
-"PO-Revision-Date: 2024-11-04T18:45:47.626Z\n"
+"POT-Creation-Date: 2024-11-21T13:04:21.389Z\n"
+"PO-Revision-Date: 2024-11-21T13:04:21.389Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1288,6 +1288,9 @@ msgstr "Warning"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
+
 msgid "Delete event"
 msgstr "Delete event"
 
@@ -1661,15 +1664,6 @@ msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "

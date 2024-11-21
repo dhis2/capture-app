@@ -23,7 +23,7 @@ import type {
     EnrollmentData,
     AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
-import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
 import { getCachedSingleResourceFromKeyAsync } from '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
 import { userStores } from '../../../storageControllers/stores';
 import { FEATURES, hasAPISupportForFeature } from '../../../../capture-core-utils';
@@ -70,7 +70,7 @@ export const loadViewEventDataEntry =
             {
                 id: 'orgUnitId',
                 type: 'ORGANISATION_UNIT',
-                validatorContainers: [],
+                validatorContainers: getOrgUnitValidatorContainers(),
             },
             {
                 id: 'scheduledAt',
