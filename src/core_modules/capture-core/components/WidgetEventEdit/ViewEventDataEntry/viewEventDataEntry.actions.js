@@ -122,8 +122,6 @@ export const loadViewEventDataEntry =
             eventId: eventContainer.event.eventId,
         };
 
-        console.log('eventContainer', eventContainer);
-
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(
             dataEntryId,
