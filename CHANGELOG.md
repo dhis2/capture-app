@@ -1,3 +1,31 @@
+## [101.16.4](https://github.com/dhis2/capture-app/compare/v101.16.3...v101.16.4) (2024-11-20)
+
+
+### Bug Fixes
+
+* [DHIS2-18019] related stages UI tweaks ([#3872](https://github.com/dhis2/capture-app/issues/3872)) ([7ea2240](https://github.com/dhis2/capture-app/commit/7ea2240b68408a0c4e8db624093c058f2b416584))
+
+## [101.16.3](https://github.com/dhis2/capture-app/compare/v101.16.2...v101.16.3) (2024-11-20)
+
+
+### Bug Fixes
+
+* [DHIS2-18444] stabilize possible duplicate modal cypress test ([#3886](https://github.com/dhis2/capture-app/issues/3886)) ([5b5b477](https://github.com/dhis2/capture-app/commit/5b5b477ed3a26c7eb04c4966802769fe973e1631))
+
+## [101.16.2](https://github.com/dhis2/capture-app/compare/v101.16.1...v101.16.2) (2024-11-19)
+
+
+### Bug Fixes
+
+* [DHIS2-16994] Image and File DE and TEA not Displayed in Changelog ([#3837](https://github.com/dhis2/capture-app/issues/3837)) ([9327210](https://github.com/dhis2/capture-app/commit/932721045126e02379f56a85af4f6586b836b4c0))
+
+## [101.16.1](https://github.com/dhis2/capture-app/compare/v101.16.0...v101.16.1) (2024-11-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([37c32df](https://github.com/dhis2/capture-app/commit/37c32df3e7839e30b493ff8e8185de769c3e2fd4))
+
 # [101.16.0](https://github.com/dhis2/capture-app/compare/v101.15.0...v101.16.0) (2024-11-13)
 
 
