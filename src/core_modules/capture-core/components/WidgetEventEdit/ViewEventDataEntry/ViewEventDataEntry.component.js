@@ -150,7 +150,7 @@ const buildOrgUnitSettingsFn = () => {
             label: `${props.formFoundation.getLabel('orgUnit')}`,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getPropName: () => 'orgUnit',
+        getPropName: () => 'orgUnitId',
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,

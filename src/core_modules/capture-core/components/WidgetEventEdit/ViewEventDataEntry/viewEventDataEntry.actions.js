@@ -68,6 +68,11 @@ export const loadViewEventDataEntry =
                 validatorContainers: getEventDateValidatorContainers(),
             },
             {
+                id: 'orgUnitId',
+                type: 'ORGANISATION_UNIT',
+                validatorContainers: [],
+            },
+            {
                 id: 'scheduledAt',
                 type: 'DATE',
             },
@@ -116,6 +121,8 @@ export const loadViewEventDataEntry =
         const extraProps = {
             eventId: eventContainer.event.eventId,
         };
+
+        console.log('eventContainer', eventContainer);
 
         const { actions: dataEntryActions, dataEntryValues, formValues } = await
         loadEditDataEntryAsync(
