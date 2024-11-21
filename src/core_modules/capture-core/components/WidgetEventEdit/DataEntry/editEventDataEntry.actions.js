@@ -97,7 +97,7 @@ export const openEventForEditInDataEntry = ({
     dataEntryKey: string,
     enrollment?: EnrollmentData,
     attributeValues?: Array<AttributeValue>,
-    programCategory?: ProgramCategory,
+    programCategory?: ProgramCategory
 }) => {
     const dataEntryPropsToInclude = [
         {
@@ -146,6 +146,7 @@ export const openEventForEditInDataEntry = ({
             },
         );
     const currentEvent = { ...eventContainer.event, ...eventContainer.values };
+
     let effects;
     if (program instanceof TrackerProgram) {
         const stage = getStageFromEvent(eventContainer.event)?.stage;

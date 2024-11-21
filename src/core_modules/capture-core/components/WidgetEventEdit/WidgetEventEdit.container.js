@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState, useEffect } from 'react';
+import React, { type ComponentType, useEffect, useState } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {

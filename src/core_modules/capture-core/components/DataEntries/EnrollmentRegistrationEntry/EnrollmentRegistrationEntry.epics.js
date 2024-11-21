@@ -11,9 +11,7 @@ import { getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 import type { TrackerProgram } from '../../../metaData/Program';
 
-export const startNewEnrollmentDataEntrySelfInitialisationEpic = (
-    action$: InputObservable,
-) =>
+export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
