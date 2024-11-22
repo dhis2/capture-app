@@ -116,6 +116,7 @@ const fetchFormattedValues = async ({
                 reactKey: fieldId ? `${createdAt}-${fieldId}` : attributeOptionsKey,
                 date: pipe(convertServerToClient, convertClientToList)(fromServerDate(createdAt), dataElementTypes.DATETIME),
                 user: `${firstName} ${surname} (${username})`,
+                dataItemId: fieldId,
                 changeType: type,
                 dataItemLabel: metadataElement.name,
                 previousValue,
