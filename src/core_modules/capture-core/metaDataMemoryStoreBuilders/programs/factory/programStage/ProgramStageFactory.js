@@ -205,7 +205,6 @@ export class ProgramStageFactory {
                 _form.featureType = ProgramStageFactory._getFeatureType(cachedProgramStage);
                 _form.access = cachedProgramStage.access;
                 _form.addLabel({ id: 'occurredAt', label: cachedProgramStage.displayExecutionDateLabel || 'Report date' });
-                _form.addLabel({ id: 'orgUnit', label: cachedProgramStage.displayOrgUnitLabel || 'Organisation unit' });
                 _form.addLabel({ id: 'scheduledAt', label: cachedProgramStage.displayDueDateLabel || 'Scheduled date' });
                 _form.validationStrategy =
                     cachedProgramStage.validationStrategy &&

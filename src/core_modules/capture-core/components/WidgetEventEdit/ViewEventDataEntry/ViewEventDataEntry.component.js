@@ -147,7 +147,7 @@ const buildOrgUnitSettingsFn = () => {
     const orgUnitSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: `${props.formFoundation.getLabel('orgUnit')}`,
+            label: i18n.t('Organisation unit'),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
         getPropName: () => 'orgUnitId',

@@ -107,7 +107,6 @@ export type CachedProgramStage = {
     displayName: string,
     description: ?string,
     displayExecutionDateLabel?: ?string,
-    displayOrgUnitLabel?: ?string,
     displayDueDateLabel?: ?string,
     programStageSections: ?Array<CachedProgramStageSection>,
     programStageDataElements: Array<CachedProgramStageDataElement>,
