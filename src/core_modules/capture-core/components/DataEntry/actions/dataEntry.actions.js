@@ -18,12 +18,10 @@ export const actionTypes = {
     SAVE_ABORT: 'SaveAbortedForDataEntry',
     UPDATE_FIELD: 'UpdateDataEntryField',
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
-    RULES_EXECUTED_POST_LOAD_DATA_ENTRY: 'RulesExecutedPostLoadDataEntry',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
     ADD_DATA_ENTRY_NOTE: 'AddDataEntryNote',
     REMOVE_DATA_ENTRY_NOTE: 'RemoveDataEntryNote',
     SET_CURRENT_DATA_ENTRY: 'SetCurrentDataEntry',
-    START_RUN_RULES_POST_LOAD_DATA_ENTRY: 'StartRunRulesPostLoadDataEntry',
     START_RUN_RULES_POST_UPDATE_FIELD: 'StartRunRulesPostUpdateFieldDataEntry',
     REMOVE_DATA_ENTRY_RELATIONSHIP: 'RemoveDataEntryRelationship',
     ADD_DATA_ENTRY_RELATIONSHIP: 'AddDataEntryRelationship',
@@ -117,14 +115,6 @@ export const updateFormField =
             itemId,
             updateCompleteUid,
         });
-
-export const startRunRulesPostLoadDataEntry =
-    (dataEntryId: string, itemId: string, uid: string) =>
-        actionCreator(actionTypes.START_RUN_RULES_POST_LOAD_DATA_ENTRY)({ dataEntryId, itemId, uid });
-
-export const rulesExecutedPostLoadDataEntry =
-    (dataEntryId: string, itemId: string, uid: string) =>
-        actionCreator(actionTypes.RULES_EXECUTED_POST_LOAD_DATA_ENTRY)({ dataEntryId, itemId, uid });
 
 export const startRunRulesPostUpdateField =
     (dataEntryId: string, itemId: string, uid: string) =>

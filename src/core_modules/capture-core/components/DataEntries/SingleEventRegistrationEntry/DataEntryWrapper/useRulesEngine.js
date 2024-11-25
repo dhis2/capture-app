@@ -1,15 +1,11 @@
 // @flow
-import { v4 as uuid } from 'uuid';
 import { useEffect, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDataEngine } from '@dhis2/app-runtime';
-import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getEventProgramThrowIfNotFound } from '../../../../metaData';
-import { getRulesActions, dataEntryId, itemId } from './DataEntry';
+import { getRulesActions } from './DataEntry';
 import type { RenderFoundation } from '../../../../metaData';
-import { startRunRulesPostLoadDataEntry } from '../../../DataEntry';
 
 export const useRulesEngine = ({
     programId,
@@ -20,7 +16,6 @@ export const useRulesEngine = ({
     orgUnit: ?OrgUnit,
     formFoundation: ?RenderFoundation,
 }) => {
-    const dataEngine = useDataEngine();
     const dispatch = useDispatch();
     const program = useMemo(() => programId && getEventProgramThrowIfNotFound(programId), [programId]);
     const orgUnitRef = useRef();
@@ -31,17 +26,14 @@ export const useRulesEngine = ({
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
         if (orgUnit && program && !!formFoundation) {
-            const uid = uuid();
-            dispatch(startRunRulesPostLoadDataEntry(dataEntryId, itemId, uid));
-            const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
-            getRulesActions({
-                state,
-                program,
-                orgUnit,
-                formFoundation,
-                querySingleResource,
-                uid,
-            }).then(rulesActions => dispatch(batchActions(rulesActions)));
+            dispatch(batchActions([
+                getRulesActions({
+                    state,
+                    program,
+                    orgUnit,
+                    formFoundation,
+                }),
+            ]));
             orgUnitRef.current = orgUnit;
         }
     // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)

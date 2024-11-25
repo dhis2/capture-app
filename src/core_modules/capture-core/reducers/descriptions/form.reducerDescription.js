@@ -205,6 +205,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const { formId, rulesEffects } = action.payload;
+        const formSectionFields = state[formId];
         const assignEffects: { [id: string]: Array<AssignOutputEffectWithValidations> } =
             rulesEffects && rulesEffects[effectActions.ASSIGN_VALUE];
 
@@ -214,14 +215,21 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
 
         const updatedFields = Object.keys(assignEffects).reduce((acc, id) => {
             const effect = assignEffects[id][0];
-            acc[id] = {
-                valid: effect.valid,
-                errorData: effect.errorData,
-                errorMessage: effect.errorMessage,
-                errorType: effect.errorType,
-                touched: true,
-                validatingMessage: null,
-            };
+            const isEffectWithValidations = effect.hasOwnProperty('valid');
+            if (formSectionFields?.[id] && isEffectWithValidations) {
+                acc[id] = {
+                    valid: effect.valid,
+                    errorData: effect.errorData,
+                    errorMessage: effect.errorMessage,
+                    errorType: effect.errorType,
+                    touched: true,
+                    validatingMessage: null,
+                };
+            } else {
+                acc[id] = {
+                    touched: true,
+                };
+            }
             return acc;
         }, {});
 
