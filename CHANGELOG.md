@@ -1,3 +1,10 @@
+# [101.17.0](https://github.com/dhis2/capture-app/compare/v101.16.7...v101.17.0) (2024-11-25)
+
+
+### Features
+
+* [DHIS2-15463] Use dhis2 ui calendarInput component in working list ([#3712](https://github.com/dhis2/capture-app/issues/3712)) ([5f27455](https://github.com/dhis2/capture-app/commit/5f27455b136d6d994adea0788bf2d0683dfe5d06))
+
 ## [101.16.7](https://github.com/dhis2/capture-app/compare/v101.16.6...v101.16.7) (2024-11-25)
 
 
