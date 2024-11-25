@@ -52,8 +52,8 @@ export class DateField extends React.Component<Props, State> {
         const { calendarDateString: date, validation } = value || {};
         this.props.onBlur(
             date, {
-                error: validation.validationText,
-                errorCode: validation.validationCode,
+                error: validation?.validationText,
+                errorCode: validation?.validationCode,
             });
 
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
