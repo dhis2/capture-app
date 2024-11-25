@@ -1,3 +1,32 @@
+## [101.16.7](https://github.com/dhis2/capture-app/compare/v101.16.6...v101.16.7) (2024-11-25)
+
+
+### Bug Fixes
+
+* [DHIS2-16801] events scheduled for today's date not showing today ([#3856](https://github.com/dhis2/capture-app/issues/3856)) ([d63e124](https://github.com/dhis2/capture-app/commit/d63e124d1c0702898b453be8cfbdd0a5f4620ba5))
+
+## [101.16.6](https://github.com/dhis2/capture-app/compare/v101.16.5...v101.16.6) (2024-11-25)
+
+
+### Bug Fixes
+
+* [DHIS2-17519] app crashing when opening new event from view event ([#3781](https://github.com/dhis2/capture-app/issues/3781)) ([93366ef](https://github.com/dhis2/capture-app/commit/93366ef504210cc9aa746f7d10a4cc7d6188586d))
+* [DHIS2-18150] user has to click out of range filter for update button to trigger ([#3855](https://github.com/dhis2/capture-app/issues/3855)) ([f70b205](https://github.com/dhis2/capture-app/commit/f70b2053f753388e994c89698677821fd8032f79))
+
+## [101.16.5](https://github.com/dhis2/capture-app/compare/v101.16.4...v101.16.5) (2024-11-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3098faf](https://github.com/dhis2/capture-app/commit/3098faf8b73dbfc0d894535cbdfd5539e80a24fe))
+
+## [101.16.4](https://github.com/dhis2/capture-app/compare/v101.16.3...v101.16.4) (2024-11-20)
+
+
+### Bug Fixes
+
+* [DHIS2-18019] related stages UI tweaks ([#3872](https://github.com/dhis2/capture-app/issues/3872)) ([7ea2240](https://github.com/dhis2/capture-app/commit/7ea2240b68408a0c4e8db624093c058f2b416584))
+
 ## [101.16.3](https://github.com/dhis2/capture-app/compare/v101.16.2...v101.16.3) (2024-11-20)
 
 
