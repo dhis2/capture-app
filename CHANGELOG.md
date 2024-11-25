@@ -1,3 +1,11 @@
+## [101.16.6](https://github.com/dhis2/capture-app/compare/v101.16.5...v101.16.6) (2024-11-25)
+
+
+### Bug Fixes
+
+* [DHIS2-17519] app crashing when opening new event from view event ([#3781](https://github.com/dhis2/capture-app/issues/3781)) ([93366ef](https://github.com/dhis2/capture-app/commit/93366ef504210cc9aa746f7d10a4cc7d6188586d))
+* [DHIS2-18150] user has to click out of range filter for update button to trigger ([#3855](https://github.com/dhis2/capture-app/issues/3855)) ([f70b205](https://github.com/dhis2/capture-app/commit/f70b2053f753388e994c89698677821fd8032f79))
+
 ## [101.16.5](https://github.com/dhis2/capture-app/compare/v101.16.4...v101.16.5) (2024-11-24)
 
 
