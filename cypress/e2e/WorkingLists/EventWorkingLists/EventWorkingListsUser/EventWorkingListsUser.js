@@ -250,9 +250,9 @@ Then('the list should display data ordered descendingly by report date', () => {
         .click();
 
     cy.get('input[placeholder="From"]')
-        .type(`${lastYear}-01-01`);
+        .type(`${lastYear}-01-01`).blur();
 
-    cy.get('input[placeholder="To"]').click();
+    cy.get('input[placeholder="To"]').click().blur();
 
     cy.contains('Update')
         .click({ force: true });
@@ -399,10 +399,10 @@ When('you set the date of admission filter', () => {
             cy.get('input[type="text"]')
                 .then(($elements) => {
                     cy.wrap($elements[0])
-                        .type('2018-01-01');
+                        .type('2018-01-01').blur();
 
                     cy.wrap($elements[1])
-                        .type('2018-12-31');
+                        .type('2018-12-31').blur();
                 });
 
             cy.contains('Update')

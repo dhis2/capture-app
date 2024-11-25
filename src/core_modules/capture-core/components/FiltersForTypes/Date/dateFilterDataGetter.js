@@ -3,12 +3,12 @@ import { parseNumber } from 'capture-core-utils/parsers';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import { parseDate } from '../../../utils/converters/date';
-import { type AbsoluteDateFilterData, type RelativeDateFilterData } from './types';
+import { type AbsoluteDateFilterData, type RelativeDateFilterData, type DateValue } from './types';
 
 type Value = {
     main: string,
-    from?: ?string,
-    to?: ?string,
+    from?: ?DateValue,
+    to?: ?DateValue,
     start?: ?string,
     end?: ?string,
 };
@@ -53,7 +53,7 @@ function convertRelativeRange(value: Value) {
 
 function convertSelections(value: Value) {
     if (value.main === mainOptionKeys.ABSOLUTE_RANGE) {
-        return convertAbsoluteDate(value.from, value.to);
+        return convertAbsoluteDate(value?.from?.value, value?.to?.value);
     }
     if (value.main === mainOptionKeys.RELATIVE_RANGE) {
         return convertRelativeRange(value);
