@@ -1,3 +1,32 @@
+# [101.17.0](https://github.com/dhis2/capture-app/compare/v101.16.7...v101.17.0) (2024-11-25)
+
+
+### Features
+
+* [DHIS2-15463] Use dhis2 ui calendarInput component in working list ([#3712](https://github.com/dhis2/capture-app/issues/3712)) ([5f27455](https://github.com/dhis2/capture-app/commit/5f27455b136d6d994adea0788bf2d0683dfe5d06))
+
+## [101.16.7](https://github.com/dhis2/capture-app/compare/v101.16.6...v101.16.7) (2024-11-25)
+
+
+### Bug Fixes
+
+* [DHIS2-16801] events scheduled for today's date not showing today ([#3856](https://github.com/dhis2/capture-app/issues/3856)) ([d63e124](https://github.com/dhis2/capture-app/commit/d63e124d1c0702898b453be8cfbdd0a5f4620ba5))
+
+## [101.16.6](https://github.com/dhis2/capture-app/compare/v101.16.5...v101.16.6) (2024-11-25)
+
+
+### Bug Fixes
+
+* [DHIS2-17519] app crashing when opening new event from view event ([#3781](https://github.com/dhis2/capture-app/issues/3781)) ([93366ef](https://github.com/dhis2/capture-app/commit/93366ef504210cc9aa746f7d10a4cc7d6188586d))
+* [DHIS2-18150] user has to click out of range filter for update button to trigger ([#3855](https://github.com/dhis2/capture-app/issues/3855)) ([f70b205](https://github.com/dhis2/capture-app/commit/f70b2053f753388e994c89698677821fd8032f79))
+
+## [101.16.5](https://github.com/dhis2/capture-app/compare/v101.16.4...v101.16.5) (2024-11-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3098faf](https://github.com/dhis2/capture-app/commit/3098faf8b73dbfc0d894535cbdfd5539e80a24fe))
+
 ## [101.16.4](https://github.com/dhis2/capture-app/compare/v101.16.3...v101.16.4) (2024-11-20)
 
 

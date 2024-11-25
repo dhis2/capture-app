@@ -2,41 +2,24 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
-import { anchorPositions, modes, absoluteDirections } from '../../FormFields/DateAndTime/D2Date/d2DatePopup.const';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
+import { type DateValue } from './types/date.types';
 
 type Props = {
-    value: ?string,
+    value: ?DateValue,
     error: ?string,
-    onBlur: ({ to: string }) => void,
-    onEnterKey: ({ to: string }) => void,
-    textFieldRef: (instance: any) => void,
-    errorClass: string,
+    errorClass: ?string,
+    onBlur: ({ to: DateValue }) => void,
     onFocusUpdateButton: () => void,
 };
 
 class ToDateFilterPlain extends Component<Props> {
-    static getValueObject(value: string) {
-        return { to: value.trim() };
+    static getValueObject(value: DateValue) {
+        return { to: { ...value } };
     }
 
-    displayOptions: Object;
-    constructor(props: Props) {
-        super(props);
-        this.displayOptions = {
-            showWeekdays: true,
-            showHeader: false,
-        };
-    }
-
-    handleBlur = (value: string) => {
+    handleBlur = (value: DateValue) => {
         this.props.onBlur(ToDateFilterPlain.getValueObject(value));
-    }
-
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            this.props.onEnterKey(ToDateFilterPlain.getValueObject(this.props.value || ''));
-        }
     }
 
     handleDateSelectedFromCalendar = () => {
@@ -44,27 +27,20 @@ class ToDateFilterPlain extends Component<Props> {
     }
 
     render() {
-        const { error, onBlur, onEnterKey, errorClass, onFocusUpdateButton, ...passOnProps } = this.props;
+        const { error, errorClass, onBlur, onFocusUpdateButton, ...passOnProps } = this.props;
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2Date
-                    onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
                     onDateSelectedFromCalendar={this.handleDateSelectedFromCalendar}
                     placeholder={i18n.t('To')}
-                    popupAnchorPosition={anchorPositions.RIGHT}
-                    popupMode={modes.ABSOLUTE}
-                    popupAbsoluteDirection={absoluteDirections.UP}
-                    width={150}
-                    calendarWidth={330}
-                    calendarHeight={170}
-                    calendarRowHeight={45}
-                    calendarDisplayOptions={this.displayOptions}
+                    inputWidth="150px"
+                    calendarWidth="330px"
                     {...passOnProps}
                 />
                 <div className={errorClass}>
-                    {error}
+                    {error ? i18n.t('Please provide a valid date') : error}
                 </div>
             </div>
         );
