@@ -1,3 +1,10 @@
+## [101.16.7](https://github.com/dhis2/capture-app/compare/v101.16.6...v101.16.7) (2024-11-25)
+
+
+### Bug Fixes
+
+* [DHIS2-16801] events scheduled for today's date not showing today ([#3856](https://github.com/dhis2/capture-app/issues/3856)) ([d63e124](https://github.com/dhis2/capture-app/commit/d63e124d1c0702898b453be8cfbdd0a5f4620ba5))
+
 ## [101.16.6](https://github.com/dhis2/capture-app/compare/v101.16.5...v101.16.6) (2024-11-25)
 
 
