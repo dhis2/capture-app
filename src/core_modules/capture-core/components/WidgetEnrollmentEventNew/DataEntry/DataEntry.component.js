@@ -192,7 +192,7 @@ const buildOrgUnitSettingsFn = () => {
             label: i18n.t('Organisation unit'),
             required: true,
         }),
-        getPropName: () => 'orgUnitId',
+        getPropName: () => 'orgUnit',
         getValidatorContainers: () => getOrgUnitValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,

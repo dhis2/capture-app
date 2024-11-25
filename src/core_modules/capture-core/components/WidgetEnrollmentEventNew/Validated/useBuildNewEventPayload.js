@@ -51,11 +51,9 @@ export const createServerData = ({
 export const useBuildNewEventPayload = ({
     dataEntryId,
     itemId,
-    orgUnitId,
     programId,
     teiId,
     enrollmentId,
-    orgUnitName,
     formFoundation,
 }: Props) => {
     const { serverVersion: { minor } } = useConfig();
@@ -139,10 +137,8 @@ export const useBuildNewEventPayload = ({
             eventId: requestEventId,
             mainDataClientValues: { ...dataEntryClientValues, notes: notesValues },
             programId,
-            orgUnitId,
             enrollmentId,
             teiId,
-            orgUnitName,
             completed: saveType === addEventSaveTypes.COMPLETE,
             fromClientDate,
             serverMinorVersion: minor,

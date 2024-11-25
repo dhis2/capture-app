@@ -16,7 +16,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         validatorContainers: getEventDateValidatorContainers(),
     },
     {
-        id: 'orgUnitId',
+        id: 'orgUnit',
         type: 'ORGANISATION_UNIT',
         validatorContainers: getOrgUnitValidatorContainers(),
     },
