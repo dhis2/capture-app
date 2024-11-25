@@ -2,7 +2,7 @@
 
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../fieldValidators';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
@@ -14,6 +14,11 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         id: 'occurredAt',
         type: 'DATE',
         validatorContainers: getEventDateValidatorContainers(),
+    },
+    {
+        id: 'orgUnitId',
+        type: 'ORGANISATION_UNIT',
+        validatorContainers: getOrgUnitValidatorContainers(),
     },
     {
         id: 'scheduledAt',
