@@ -1,6 +1,6 @@
 // @flow
 
-export function isValidDate(value: ?string, internalComponentError?: Object) {
+export function isValidDate(value: ?string, internalComponentError?: ?{error: ?string, errorCode: ?string}) {
     if (!value) {
         return { valid: false, errorMessage: null };
     }

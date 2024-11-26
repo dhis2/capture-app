@@ -57,7 +57,7 @@ function isAllEmpty(value: AgeValues) {
 }
 
 
-export function isValidAge(value: Object, internalComponentError?: Object) {
+export function isValidAge(value: Object, internalComponentError?: ?{error: ?string, errorCode: ?string}) {
     if (isAllEmpty(value)) {
         return false;
     }

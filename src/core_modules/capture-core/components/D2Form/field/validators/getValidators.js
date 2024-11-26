@@ -248,7 +248,7 @@ function buildUniqueValidator(
         ?
         [
             {
-                validator: (value: any, errorObject: ?Object, contextProps: ?Object) => {
+                validator: (value: any, internalComponentError?: ?{error: ?string, errorCode: ?string}, contextProps: ?Object) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
