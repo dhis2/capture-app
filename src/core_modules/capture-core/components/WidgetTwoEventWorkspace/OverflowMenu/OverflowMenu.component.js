@@ -66,7 +66,7 @@ export const OverflowMenuComponent = ({
                         />
                         <Divider />
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the relationship between these two events')}
+                            content={i18n.t('You do not have access to remove the link between these events')}
                             enabled={!relationshipTypeWriteAccess}
                         >
                             <MenuItem
@@ -79,11 +79,11 @@ export const OverflowMenuComponent = ({
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access remove the relationship between these two events and delete the other event')}
+                            content={i18n.t('You do not have access to remove the link and delete the linked event')}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink and delete event')}
+                                label={i18n.t('Unlink and delete linked event')}
                                 icon={<IconDelete16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense

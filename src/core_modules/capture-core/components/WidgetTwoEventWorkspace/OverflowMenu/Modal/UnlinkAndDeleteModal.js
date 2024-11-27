@@ -57,11 +57,11 @@ export const UnlinkAndDeleteModal = ({
 
     return (
         <Modal dataTest="event-unlink-and-delete-modal">
-            <ModalTitle>{i18n.t('Delete event')}</ModalTitle>
+            <ModalTitle>{i18n.t('Unlink and delete linked event')}</ModalTitle>
             <ModalContent>
                 <p>
                     {i18n.t(
-                        'Are you sure you want delete the relationship and the related event? This will permanently remove the event and all related data.',
+                        'Are you sure you want to remove the link and delete the linked event? This action permanently removes the link, linked event, and all related data.',
                     )}
                 </p>
             </ModalContent>
@@ -78,7 +78,7 @@ export const UnlinkAndDeleteModal = ({
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
                     >
-                        {i18n.t('Yes, unlink and delete event')}
+                        {i18n.t('Yes, unlink and delete linked event')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
