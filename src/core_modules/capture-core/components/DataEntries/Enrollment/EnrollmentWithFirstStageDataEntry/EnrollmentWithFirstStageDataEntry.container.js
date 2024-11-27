@@ -30,7 +30,6 @@ export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
                 ref={relatedStageRef}
                 programId={passOnProps.programId}
                 programStageId={firstStageMetaData.stage?.id}
-                currentStageLabel={firstStageMetaData.stage?.name}
             />
         </>
     );

@@ -19,7 +19,6 @@ export type Props = {|
     programId: string,
     enrollmentId?: string,
     programStageId: string,
-    currentStageLabel: string,
     enableLinkExistingEvent?: boolean,
 |}
 export type RelatedStageDataValueStates = {|

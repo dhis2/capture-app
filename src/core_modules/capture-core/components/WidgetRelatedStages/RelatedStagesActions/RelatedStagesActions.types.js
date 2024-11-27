@@ -36,7 +36,6 @@ export type Props = {|
     constraint: ?Constraint,
     addErrorMessage: (ErrorMessagesForRelatedStages) => void,
     setRelatedStagesDataValues: (() => Object) => void,
-    currentStageLabel: string,
     enableLinkExistingEvent?: boolean,
     ...CssClasses
 |}

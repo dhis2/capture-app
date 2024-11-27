@@ -14,7 +14,6 @@ const WidgetRelatedStagesPlain = ({
     programId,
     enrollmentId,
     programStageId,
-    currentStageLabel,
     ...passOnProps
 }: Props, ref) => {
     const { currentRelatedStagesStatus, selectedRelationshipType, constraint } = useRelatedStages({
@@ -108,7 +107,6 @@ const WidgetRelatedStagesPlain = ({
             saveAttempted={saveAttempted}
             errorMessages={errorMessages}
             constraint={constraint}
-            currentStageLabel={currentStageLabel}
             {...passOnProps}
         />
     );

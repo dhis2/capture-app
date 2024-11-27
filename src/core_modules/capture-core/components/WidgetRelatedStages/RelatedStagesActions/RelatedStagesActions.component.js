@@ -50,7 +50,6 @@ export const RelatedStagesActionsPlain = ({
     relatedStagesDataValues,
     setRelatedStagesDataValues,
     constraint,
-    currentStageLabel,
     errorMessages,
     saveAttempted,
     enableLinkExistingEvent,
@@ -170,7 +169,6 @@ export const RelatedStagesActionsPlain = ({
                     linkableStageLabel={programStage.stageForm.name}
                     relatedStagesDataValues={relatedStagesDataValues}
                     setRelatedStagesDataValues={setRelatedStagesDataValues}
-                    currentStageLabel={currentStageLabel}
                     saveAttempted={saveAttempted}
                     errorMessages={errorMessages}
                 />

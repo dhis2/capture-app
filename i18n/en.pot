@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
-"PO-Revision-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-11-26T11:09:35.292Z\n"
+"PO-Revision-Date: 2024-11-26T11:09:35.292Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1424,8 +1424,8 @@ msgstr "{{trackedEntityTypeName}} profile"
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
-msgid "Link to an existing {{linkableStageLabel}}"
-msgstr "Link to an existing {{linkableStageLabel}}"
+msgid "Choose a {{linkableStageLabel}} event"
+msgstr "Choose a {{linkableStageLabel}} event"
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Choose a {{linkableStageLabel}}"
@@ -1445,8 +1445,8 @@ msgstr "Ambiguous relationships, contact system administrator"
 msgid "Enter details now"
 msgstr "Enter details now"
 
-msgid "Link to an existing"
-msgstr "Link to an existing"
+msgid "Link to an existing event"
+msgstr "Link to an existing event"
 
 msgid "Scheduled date"
 msgstr "Scheduled date"
@@ -1680,15 +1680,6 @@ msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
