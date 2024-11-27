@@ -16,7 +16,7 @@ const Updated = ({ previousValue, currentValue, classes }: ChangelogValueCellPro
 
 const Created = ({ currentValue, classes }: ChangelogValueCellProps) => (
     <div className={classes.container}>
-        <span className={classes.currentValue}>{currentValue}</span>
+        <span>{currentValue}</span>
     </div>
 );
 

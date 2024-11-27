@@ -31,12 +31,10 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        whiteSpace: 'normal',
         height: '100%',
     },
     buttonContainer: {
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
     },
     previousValue: {
@@ -46,10 +44,9 @@ const styles = {
     currentValue: {
         color: colors.grey900,
         wordBreak: 'break-word',
+        maxWidth: '82%',
     },
     updateArrow: {
-        display: 'inline-flex',
-        alignItems: 'center',
         margin: spacers.dp4,
     },
     viewButton: {

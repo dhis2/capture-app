@@ -4,8 +4,8 @@ import { IconArrowRight16, IconChevronUp16, IconChevronDown16 } from '@dhis2/ui'
 import { CHANGE_TYPES } from '../../../../Changelog/Changelog.constants';
 import type { ChangelogValueCellProps } from './ChangelogValueCellComponents.types';
 
-const ValueDisplay = ({ value, showMore, className }) => (
-    <span className={className}>{showMore ? value : value?.slice(0, 1)}</span>
+const ValueDisplay = ({ value, showMore }) => (
+    <span>{showMore ? value : value?.[0]}</span>
 );
 
 const ViewMoreButton = ({ showMore, onClick, classes }) => (
@@ -52,18 +52,21 @@ const Created = ({ currentValue, classes }: ChangelogValueCellProps) => {
     const [showMore, setShowMore] = useState(false);
 
     return (
-        <div className={classes.container}>
-            <ValueDisplay
-                value={currentValue}
-                showMore={showMore}
-                className={classes.currentValue}
-            />
-            <ViewMoreButton
-                showMore={showMore}
-                onClick={() => setShowMore(!showMore)}
-                classes={classes}
-            />
-        </div>
+        <>
+            <div className={classes.container}>
+                <ValueDisplay
+                    value={currentValue}
+                    showMore={showMore}
+                />
+            </div>
+            <div className={classes.buttonContainer}>
+                <ViewMoreButton
+                    showMore={showMore}
+                    onClick={() => setShowMore(!showMore)}
+                    classes={classes}
+                />
+            </div>
+        </>
     );
 };
 
@@ -71,18 +74,23 @@ const Deleted = ({ previousValue, classes }: ChangelogValueCellProps) => {
     const [showMore, setShowMore] = useState(false);
 
     return (
-        <div className={classes.container}>
-            <ValueDisplay
-                value={previousValue}
-                showMore={showMore}
-                className={classes.previousValue}
-            />
-            <ViewMoreButton
-                showMore={showMore}
-                onClick={() => setShowMore(!showMore)}
-                classes={classes}
-            />
-        </div>
+        <>
+            <div className={classes.container}>
+                <ValueDisplay
+                    value={previousValue}
+                    showMore={showMore}
+                    className={classes.previousValue}
+                />
+            </div>
+            <div className={classes.buttonContainer}>
+                <ViewMoreButton
+                    showMore={showMore}
+                    onClick={() => setShowMore(!showMore)}
+                    classes={classes}
+                />
+            </div>
+        </>
+
     );
 };
 
