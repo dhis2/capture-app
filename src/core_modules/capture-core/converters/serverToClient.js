@@ -74,8 +74,8 @@ const valueConvertersForType = {
     [dataElementTypes.DATETIME]: (d2Value: string) => moment(d2Value).toISOString(),
     [dataElementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
-    [dataElementTypes.COORDINATE]: (d2Value: any) => convertCoordinateToClient(d2Value),
-    [dataElementTypes.POLYGON]: (d2Value: any) => convertPolygonToClient(d2Value),
+    [dataElementTypes.COORDINATE]: (d2Value: string | Array<string>) => convertCoordinateToClient(d2Value),
+    [dataElementTypes.POLYGON]: (d2Value: string | Array<Array<number>>) => convertPolygonToClient(d2Value),
     [dataElementTypes.ASSIGNEE]: convertAssignedUserToClient,
 };
 

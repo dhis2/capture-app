@@ -40,3 +40,4 @@ export const ChangelogChangeCell = ({ changeType }: Object) => {
         <ChangelogChangeComponent {...config} />
     );
 };
+

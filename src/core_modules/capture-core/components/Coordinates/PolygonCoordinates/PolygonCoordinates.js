@@ -5,7 +5,7 @@ import { IconChevronUp16, IconChevronDown16, colors, spacers } from '@dhis2/ui';
 
 type Props = $ReadOnly<{|
     coordinates: Array<Array<number>>,
-    classes: { viewButton: string },
+        classes: { viewButton: string },
 |}>;
 
 const styles = {
@@ -26,7 +26,6 @@ const styles = {
 
 const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
     const [showMore, setShowMore] = useState(false);
-
     return (
         <>
             <div>
@@ -37,12 +36,10 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
                     </div>
                 ))}
             </div>
-            {coordinates.length > 3 && (
-                <button className={classes.viewButton} onClick={() => setShowMore(!showMore)}>
-                    {showMore ? 'Show Less' : 'Show More'}
-                    {showMore ? <IconChevronUp16 /> : <IconChevronDown16 />}
-                </button>
-            )}
+            <button className={classes.viewButton} onClick={() => setShowMore(!showMore)}>
+                {showMore ? 'Show Less' : 'Show More'}
+                {showMore ? <IconChevronUp16 /> : <IconChevronDown16 />}
+            </button>
         </>
     );
 };
