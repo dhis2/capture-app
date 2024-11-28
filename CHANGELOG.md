@@ -1,3 +1,10 @@
+# [101.18.0](https://github.com/dhis2/capture-app/compare/v101.17.0...v101.18.0) (2024-11-28)
+
+
+### Features
+
+* [DHIS2-16337] Org unit in view event page ([#3882](https://github.com/dhis2/capture-app/issues/3882)) ([c605e82](https://github.com/dhis2/capture-app/commit/c605e828622aa9f9b0c10f96359ba1b037c8e0ee))
+
 # [101.17.0](https://github.com/dhis2/capture-app/compare/v101.16.7...v101.17.0) (2024-11-25)
 
 
