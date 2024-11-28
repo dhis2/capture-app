@@ -6,7 +6,7 @@ import { PreviewImage } from 'capture-ui';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
-import { MinimalCoordinates } from '../components/MinimalCoordinates';
+import { MinimalCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 
