@@ -4,8 +4,8 @@ import { IconArrowRight16, IconChevronUp16, IconChevronDown16 } from '@dhis2/ui'
 import { CHANGE_TYPES } from '../../../../Changelog/Changelog.constants';
 import type { ChangelogValueCellProps } from './ChangelogValueCellComponents.types';
 
-const ValueDisplay = ({ value, showMore }) => (
-    <span>{showMore ? value : value?.[0]}</span>
+const ValueDisplay = ({ value, showMore, className }) => (
+    <span className={className}>{showMore ? value : value?.[0]}</span>
 );
 
 const ViewMoreButton = ({ showMore, onClick, classes }) => (
@@ -57,6 +57,7 @@ const Created = ({ currentValue, classes }: ChangelogValueCellProps) => {
                 <ValueDisplay
                     value={currentValue}
                     showMore={showMore}
+                    className={classes.currentValue}
                 />
             </div>
             <div className={classes.buttonContainer}>

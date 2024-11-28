@@ -43,6 +43,25 @@ export function convertOptionSetValue(value: any, type: $Keys<typeof dataElement
     return optionSetConvertersForType[type] ? optionSetConvertersForType[type](value) : value;
 }
 
+function convertCoordinateToClient(value: any) {
+    if (typeof value === 'string') {
+        const coordinates = value.replace(/[()]/g, '').split(',').map(Number);
+        return { latitude: coordinates[1], longitude: coordinates[0] };
+    }
+    return { latitude: value[1], longitude: value[0] };
+}
+
+function convertPolygonToClient(value: any) {
+    if (typeof value === 'string') {
+        const coordinates = value.replace(/[()]/g, '').split(',').map(Number);
+        const coordinatesArray = [];
+        for (let i = 0; i < coordinates.length; i += 2) {
+            coordinatesArray.push([coordinates[i], coordinates[i + 1]]);
+        }
+        return coordinatesArray;
+    }
+    return value;
+}
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: parseNumber,
@@ -55,11 +74,8 @@ const valueConvertersForType = {
     [dataElementTypes.DATETIME]: (d2Value: string) => moment(d2Value).toISOString(),
     [dataElementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
-    [dataElementTypes.COORDINATE]: (d2Value: string | Array<string>) => {
-        const arr = typeof d2Value === 'string' ? JSON.parse(d2Value) : d2Value;
-        return { latitude: arr[1], longitude: arr[0] };
-    },
-    [dataElementTypes.POLYGON]: (d2Value: Array<number>) => d2Value,
+    [dataElementTypes.COORDINATE]: (d2Value: any) => convertCoordinateToClient(d2Value),
+    [dataElementTypes.POLYGON]: (d2Value: any) => convertPolygonToClient(d2Value),
     [dataElementTypes.ASSIGNEE]: convertAssignedUserToClient,
 };
 
