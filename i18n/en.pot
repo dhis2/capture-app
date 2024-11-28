@@ -1291,6 +1291,9 @@ msgstr "Warning"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
+
 msgid "Delete event"
 msgstr "Delete event"
 
@@ -1677,15 +1680,6 @@ msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
