@@ -38,7 +38,7 @@ const styles = {
         wordBreak: 'break-word',
         maxWidth: '82%',
     },
-    updateArrow: {
+    arrow: {
         margin: spacers.dp4,
     },
 };
