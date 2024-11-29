@@ -61,8 +61,7 @@ Given(/^you land on the enrollment event page with selected (.*) by having typed
 When(/^the user clicks on the edit button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="dhis2-uicore-button"]')
-        .eq(1)
+        .find('[data-test="widget-enrollment-event-edit-button"]')
         .click(),
 );
 
@@ -208,8 +207,7 @@ And('you open the Birth stage event', () => {
 
 Then('the edit button should be disabled', () => {
     cy.get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="dhis2-uicore-button"]')
-        .eq(1)
+        .find('[data-test="widget-enrollment-event-edit-button"]')
         .should('be.disabled');
 });
 

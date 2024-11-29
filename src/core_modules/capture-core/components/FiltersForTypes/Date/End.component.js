@@ -22,12 +22,6 @@ class EndRangeFilterPlain extends Component<Props> {
         this.props.onBlur(EndRangeFilterPlain.getValueObject(value));
     };
 
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            this.props.onEnterKey(EndRangeFilterPlain.getValueObject(this.props.value || ''));
-        }
-    };
-
     render() {
         const { error, onBlur, onEnterKey, textFieldRef, errorClass, ...passOnProps } = this.props;
         return (
@@ -35,7 +29,6 @@ class EndRangeFilterPlain extends Component<Props> {
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2TextField
                     ref={textFieldRef}
-                    onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Days in the future')}
                     fullWidth
