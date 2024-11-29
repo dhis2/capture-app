@@ -44,11 +44,10 @@ export function convertOptionSetValue(value: any, type: $Keys<typeof dataElement
 }
 
 function convertCoordinateToClient(value: any) {
-    if (typeof value === 'string') {
-        const coordinates = value.replace(/[()]/g, '').split(',').map(Number);
-        return { latitude: coordinates[1], longitude: coordinates[0] };
-    }
-    return { latitude: value[1], longitude: value[0] };
+    const coordinates = typeof value === 'string' ?
+        value.replace(/[\(\)\[\]\s]/g, '').split(',').map(Number) : value;
+
+    return { latitude: coordinates[1], longitude: coordinates[0] };
 }
 
 function convertPolygonToClient(value: any) {
