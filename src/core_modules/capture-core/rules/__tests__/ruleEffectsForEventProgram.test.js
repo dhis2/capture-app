@@ -2,6 +2,11 @@ import { rulesEngineEffectTargetDataTypes, variableSourceTypes } from '@dhis2/ru
 import { rulesEngine } from '../rulesEngine';
 import { systemSettingsStore } from '../../metaDataMemoryStores';
 
+const groups = [
+    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
+    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
+];
+
 describe('Event Event rules engine', () => {
     // these variables are shared between each test
     const constants = [
@@ -75,7 +80,7 @@ describe('Event Event rules engine', () => {
             useNameForOptionSet: true,
         },
     ];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
 
     describe.each([
@@ -256,7 +261,7 @@ describe('Event rules engine', () => {
             programId: 'eBAyeGv0exc',
         },
     ];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {
         pC3N9N77UmT: {
             id: 'pC3N9N77UmT',
@@ -781,7 +786,7 @@ describe('Event rules engine', () => {
             useNameForOptionSet: false,
         },
     ];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {
         L6eMZDJkCwX: {
             id: 'L6eMZDJkCwX',
@@ -1886,7 +1891,7 @@ describe('Event rules engine effects with functions and effects', () => {
             programId: 'eBAyeGv0exc',
         },
     ];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', code: 'OU_559' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', code: 'OU_559', groups };
     const optionSets = {
         pC3N9N77UmT: {
             id: 'pC3N9N77UmT',
@@ -2428,7 +2433,7 @@ describe('Event rules engine effects with functions and effects', () => {
         },
     ];
     const programRuleVariables = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
     const currentEvent = {};
 
@@ -2489,7 +2494,7 @@ describe('Event rules engine', () => {
         qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'NUMBER' },
     };
     const programRuleVariables = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
     const currentEvent = {};
 
@@ -2646,7 +2651,7 @@ describe('Assign effects', () => {
         hyur9Dvnyt5: { id: 'hyur9Dvnyt5', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
         ght5r9Dnyt5: { id: 'ght5r9Dnyt5', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
     };
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {
         pC3N9N77UmT: {
             id: 'pC3N9N77UmT',

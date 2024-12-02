@@ -43,6 +43,7 @@ export class RuleEngine {
         selectedUserRoles,
         optionSets,
     }: RulesEngineInput): OutputEffects {
+        if (!programRulesContainer.programRules) return [];
         const inputBuilder = new InputBuilder(this.inputConverter, dataElements, trackedEntityAttributes, selectedOrgUnit);
         const executionContext = inputBuilder.buildRuleEngineContext({
             programRulesContainer,

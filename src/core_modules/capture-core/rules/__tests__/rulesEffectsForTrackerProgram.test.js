@@ -1,6 +1,11 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from '../rulesEngine';
 
+const groups = [
+    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
+    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
+];
+
 test('expressions with d2Functions in tracker program', () => {
     // given
     const constants = [];
@@ -494,7 +499,7 @@ test('expressions with d2Functions in tracker program', () => {
         CUbZcLm9LyN: 'USERNAME',
         p8htbyJHydl: { latitude: '12.4353', longitude: '67.34534' },
     };
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const enrollmentData = { enrolledAt: '2020-05-14T10:00:00.000Z' };
     const currentEvent = {
         occurredAt: '2020-07-14T10:00:00.000Z',

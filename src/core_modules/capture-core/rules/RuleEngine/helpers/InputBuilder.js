@@ -267,7 +267,7 @@ export class InputBuilder {
 
         return new RuleEventJs(
             event || '',
-            programStage,
+            programStage || '',
             programStageName || '',
             status ? RuleEventStatus[status] : RuleEventStatus.ACTIVE,
             eventDate,

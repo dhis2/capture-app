@@ -1,11 +1,16 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from '../rulesEngine';
 
+const groups = [
+    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
+    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
+];
+
 describe('Rules engine', () => {
     const constants = [];
     const dataElementsInProgram = {};
     const programRuleVariables = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
     const currentEvent = {};
 
@@ -279,7 +284,7 @@ describe('Rules engine', () => {
 
 describe('Program Rule Variables corner cases', () => {
     const constants = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
 
     test('without currentEvent and without otherEvents', () => {
