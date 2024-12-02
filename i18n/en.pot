@@ -1294,6 +1294,9 @@ msgstr "Warning"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
+
 msgid "Delete event"
 msgstr "Delete event"
 
