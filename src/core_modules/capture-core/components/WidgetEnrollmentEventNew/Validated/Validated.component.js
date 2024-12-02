@@ -52,7 +52,6 @@ const ValidatedPlain = ({
                     enrollmentId={enrollmentId}
                     programId={programId}
                     programStageId={stage?.id}
-                    enableLinkExistingEvent
                 />
                 <FinishButtons
                     onSave={onSave}

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-26T11:09:35.292Z\n"
-"PO-Revision-Date: 2024-11-26T11:09:35.292Z\n"
+"POT-Creation-Date: 2024-12-02T11:16:49.543Z\n"
+"PO-Revision-Date: 2024-12-02T11:16:49.543Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -828,6 +828,9 @@ msgstr "Save {{trackedEntityTypeName}}"
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
 
+msgid "Enter details now is not available when creating a relationship"
+msgstr "Enter details now is not available when creating a relationship"
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Save new {{trackedEntityTypeName}} and link"
 
@@ -1430,14 +1433,14 @@ msgstr "Choose a {{linkableStageLabel}} event"
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Choose a {{linkableStageLabel}}"
 
-msgid "Actions - {{relationshipName}}"
-msgstr "Actions - {{relationshipName}}"
-
 msgid "{{ linkableStageLabel }} is not repeatable"
 msgstr "{{ linkableStageLabel }} is not repeatable"
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} has no linkable events"
+
+msgid "Actions - {{relationshipName}}"
+msgstr "Actions - {{relationshipName}}"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"

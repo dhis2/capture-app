@@ -1,5 +1,6 @@
 // @flow
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
+import { RelatedStageModes } from '../index';
 
 export type Constraint = {|
     programStage: {
@@ -36,6 +37,12 @@ export type Props = {|
     constraint: ?Constraint,
     addErrorMessage: (ErrorMessagesForRelatedStages) => void,
     setRelatedStagesDataValues: (() => Object) => void,
-    enableLinkExistingEvent?: boolean,
+    actionTypesOptions?: {
+        [key: $Keys<typeof RelatedStageModes>]: {
+            hidden?: boolean,
+            disabled?: boolean,
+            disabledMessage?: string
+        },
+    },
     ...CssClasses
 |}

@@ -8,6 +8,7 @@ import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMess
 import type { InputAttribute } from './hooks/useFormValues';
 import { RenderFoundation, ProgramStage } from '../../../metaData';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
+import { RelatedStageModes } from '../../WidgetRelatedStages';
 
 type TrackedEntityAttributes = Array<{
     attribute: string,
@@ -68,6 +69,13 @@ export type OwnProps = $ReadOnly<{|
     saveButtonText: (trackedEntityName: string) => string,
     firstStageMetaData?: ?{ stage: ?ProgramStage },
     relatedStageRef?: { current: ?RelatedStageRefPayload },
+    relatedStageModesOptions?: {
+        [key: $Keys<typeof RelatedStageModes>]: {
+            hidden?: boolean,
+            disabled?: boolean,
+            disabledMessage?: string
+        },
+    },
 |}>;
 
 type ContainerProps = {|
