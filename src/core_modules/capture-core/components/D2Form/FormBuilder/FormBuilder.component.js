@@ -170,9 +170,8 @@ export class FormBuilder extends React.Component<Props> {
 
                 let validationData;
                 try {
-                    const { validators } = field;
                     validationData = await validateValue({
-                        validators,
+                        validators: field.validators,
                         value: values[field.id],
                         validationContext,
                         postProcessAsyncValidatonInitiation: handleIsValidatingInternal,
