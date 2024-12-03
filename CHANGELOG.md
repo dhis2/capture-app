@@ -1,3 +1,10 @@
+# [101.19.0](https://github.com/dhis2/capture-app/compare/v101.18.1...v101.19.0) (2024-12-03)
+
+
+### Features
+
+* [DHIS2-15462] Use dhis2 UI calendarinput component in forms ([#3658](https://github.com/dhis2/capture-app/issues/3658)) ([f39fd47](https://github.com/dhis2/capture-app/commit/f39fd471cb2f176a417667481b17a72b2d4651dd))
+
 ## [101.18.1](https://github.com/dhis2/capture-app/compare/v101.18.0...v101.18.1) (2024-12-03)
 
 
