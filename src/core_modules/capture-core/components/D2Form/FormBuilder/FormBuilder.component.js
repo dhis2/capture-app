@@ -89,7 +89,7 @@ export type FieldCommitOptions = {|
     errorCode?: string,
 |};
 
-type FieldCommitOptionsExtended = {|
+export type FieldCommitOptionsExtended = {|
     ...FieldCommitOptions,
     plugin?: ?boolean,
 |};
@@ -171,12 +171,12 @@ export class FormBuilder extends React.Component<Props> {
                 let validationData;
                 try {
                     const { validators } = field;
-                    validationData = await validateValue(
+                    validationData = await validateValue({
                         validators,
-                        values[field.id],
+                        value: values[field.id],
                         validationContext,
-                        handleIsValidatingInternal,
-                    );
+                        postProcessAsyncValidatonInitiation: handleIsValidatingInternal,
+                    });
                 } catch (reason) {
                     if (reason && isObject(reason) && reason.isCanceled) {
                         validationData = null;
@@ -405,14 +405,13 @@ export class FormBuilder extends React.Component<Props> {
                 errorMessage: options.error,
                 errorType: validatorTypes.TYPE_BASE,
                 errorData: undefined }) :
-            (await validateValue(
+            (await validateValue({
                 validators,
                 value,
-                onGetValidationContext && onGetValidationContext(),
-                handleIsValidatingInternal,
-                // $FlowFixMe
-                options,
-            )
+                validationContext: onGetValidationContext && onGetValidationContext(),
+                postProcessAsyncValidatonInitiation: handleIsValidatingInternal,
+                commitOptions: options,
+            })
                 // $FlowFixMe[prop-missing] automated comment
                 .then(({ valid, errorMessage, errorType, errorData }) => {
                     updateField({ valid, errorMessage, errorType, errorData });

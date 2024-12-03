@@ -42,7 +42,7 @@ export const validateAssignEffects = async ({
         const validationContext = onGetValidationContext && onGetValidationContext();
 
         try {
-            const validatorResult = await validateValue(validators, value, validationContext);
+            const validatorResult = await validateValue({ validators, value, validationContext });
             const effectWithValidation = Object.assign({}, effectsForId[lastIndex], validatorResult);
 
             acc[metaData.id] = [effectWithValidation];
