@@ -12,11 +12,15 @@ import defaultClasses from './formBuilder.module.css';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 import type { PluginContext } from '../FormFieldPlugin/FormFieldPlugin.types';
 import { getValidators } from '../field/validators';
+import { validatorTypes } from '../field/validators/constants';
 import type { DataElement } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
 
 export type ValidatorContainer = {
-    validator: (value: any, validationContext: ?Object) => boolean | Promise<boolean>,
+    validator: (value: any, validationContext: ?Object, internalError?: ?{
+        error?: ?string,
+        errorCode?: ?string,
+    }) => boolean | Promise<boolean>,
     message: string,
     validatingMessage?: ?string,
     type?: ?string,
@@ -36,7 +40,7 @@ export type FieldConfig = {
 type FieldUI = {
     touched?: ?boolean,
     valid?: ?boolean,
-    errorMessage?: ?string | Array<string>,
+    errorMessage?: ?string | Array<string> | Array<{[key: string]: string}>,
     errorType?: ?string,
     errorData?: ErrorData,
     validatingMessage?: ?string,
@@ -89,11 +93,17 @@ type Props = {
     onPostProcessErrorMessage?: PostProcessErrorMessage,
 };
 
-type FieldCommitOptions = {
+export type FieldCommitOptions = {|
     touched?: boolean,
     valid?: boolean,
-    error?: string | Array<string>,
-};
+    error?: string | Array<string> | Array<{[key: string]: string}>,
+    errorCode?: string,
+|};
+
+type FieldCommitOptionsExtended = {|
+    ...FieldCommitOptions,
+    plugin?: ?boolean,
+|};
 
 // container for handling async validations
 type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompleteUid: string } };
@@ -104,6 +114,7 @@ export class FormBuilder extends React.Component<Props> {
         value: any,
         validationContext: ?Object,
         onIsValidatingInternal: ?Function,
+        commitOptions?: ?FieldCommitOptions,
     ): Promise<{ valid: boolean, errorMessage?: ?string, errorType?: ?string }> {
         if (!validators || validators.length === 0) {
             return {
@@ -115,9 +126,13 @@ export class FormBuilder extends React.Component<Props> {
             .reduce(async (passPromise, currentValidator) => {
                 const pass = await passPromise;
                 if (pass === true) {
-                    let result = currentValidator.validator(value, validationContext);
+                    let result = currentValidator.validator(value,
+                        { error: commitOptions?.error, errorCode: commitOptions?.errorCode },
+                        validationContext);
                     if (result instanceof Promise) {
-                        result = onIsValidatingInternal ? onIsValidatingInternal(currentValidator.validatingMessage, result) : result;
+                        result = onIsValidatingInternal ?
+                            onIsValidatingInternal(currentValidator.validatingMessage, result) :
+                            result;
                         result = await result;
                     }
 
@@ -377,7 +392,7 @@ export class FormBuilder extends React.Component<Props> {
 
     commitFieldUpdateFromDataElement(fieldId: string, value: any, options?: ?FieldCommitOptions) {
         const { validators, onIsEqual } = this.getFieldProp(fieldId);
-
+        // $FlowFixMe
         this.commitFieldUpdate({ fieldId, validators, onIsEqual }, value, options);
     }
 
@@ -387,10 +402,10 @@ export class FormBuilder extends React.Component<Props> {
         const validators = getValidators(fieldMetadata, querySingleResource);
 
         // $FlowFixMe - Async handled in business logic
-        this.commitFieldUpdate({ fieldId, validators }, value, options);
+        this.commitFieldUpdate({ fieldId, validators }, value, { ...options, plugin: true });
     }
 
-    async commitFieldUpdate({ fieldId, validators, onIsEqual }: FieldCommitConfig, value: any, options?: ?FieldCommitOptions) {
+    async commitFieldUpdate({ fieldId, validators, onIsEqual }: FieldCommitConfig, value: any, options?: ?FieldCommitOptionsExtended) {
         const {
             onUpdateFieldUIOnly,
             onUpdateField,
@@ -428,49 +443,61 @@ export class FormBuilder extends React.Component<Props> {
             return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
         };
 
+        const updateField = ({ valid, errorMessage, errorType, errorData }) => {
+            onUpdateField(
+                value,
+                {
+                    valid,
+                    touched,
+                    errorMessage,
+                    errorType,
+                    errorData,
+                },
+                fieldId,
+                id,
+                fieldValidatingPromiseContainer.validatingCompleteUid,
+            );
+            this.fieldsValidatingPromiseContainer[fieldId] = null;
+        };
+
         this.commitUpdateTriggeredForFields[fieldId] = true;
-        const updatePromise = FormBuilder.validateField(
-            { validators },
-            value,
-            onGetValidationContext && onGetValidationContext(),
-            handleIsValidatingInternal,
-        )
-            // $FlowFixMe[prop-missing] automated comment
-            .then(({ valid, errorMessage, errorType, errorData }) => {
-                onUpdateField(
-                    value,
-                    {
-                        valid: options?.valid ?? valid,
-                        touched,
-                        errorMessage: options?.error ?? errorMessage,
-                        errorType,
-                        errorData,
-                    },
-                    fieldId,
-                    id,
-                    fieldValidatingPromiseContainer.validatingCompleteUid,
-                );
-                this.fieldsValidatingPromiseContainer[fieldId] = null;
-            })
-            .catch((reason) => {
-                if (!reason || !isObject(reason) || !reason.isCanceled) {
-                    log.error({ reason, fieldId, value });
-                    onUpdateField(
-                        value,
-                        {
-                            valid: false,
-                            touched: true,
-                            errorMessage: i18n.t('error encountered during field validation'),
-                            errorType: i18n.t('error'),
-                        },
-                        fieldId,
-                        id,
-                        fieldValidatingPromiseContainer.validatingCompleteUid,
-                    );
-                    this.fieldsValidatingPromiseContainer[fieldId] = null;
-                }
-            });
-        await updatePromise;
+
+        options?.plugin && (options.error || options.valid === false) ?
+            updateField({
+                valid: false,
+                errorMessage: options.error,
+                errorType: validatorTypes.TYPE_BASE,
+                errorData: undefined }) :
+            (await FormBuilder.validateField(
+                { validators },
+                value,
+                onGetValidationContext && onGetValidationContext(),
+                handleIsValidatingInternal,
+                // $FlowFixMe
+                options,
+            )
+                // $FlowFixMe[prop-missing] automated comment
+                .then(({ valid, errorMessage, errorType, errorData }) => {
+                    updateField({ valid, errorMessage, errorType, errorData });
+                })
+                .catch((reason) => {
+                    if (!reason || !isObject(reason) || !reason.isCanceled) {
+                        log.error({ reason, fieldId, value });
+                        onUpdateField(
+                            value,
+                            {
+                                valid: false,
+                                touched: true,
+                                errorMessage: i18n.t('error encountered during field validation'),
+                                errorType: i18n.t('error'),
+                            },
+                            fieldId,
+                            id,
+                            fieldValidatingPromiseContainer.validatingCompleteUid,
+                        );
+                        this.fieldsValidatingPromiseContainer[fieldId] = null;
+                    }
+                }));
     }
 
     handleUpdateAsyncState = (fieldId: string, asyncStateToAdd: Object) => {

@@ -197,9 +197,6 @@ msgstr "{{ stageName }} - Status"
 msgid "Please select {{categoryName}}"
 msgstr "Please select {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "A future date is not allowed"
-
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 
@@ -1454,6 +1451,9 @@ msgstr "Scheduled date"
 msgid "Report date"
 msgstr "Report date"
 
+msgid "Please enter a date"
+msgstr "Please enter a date"
+
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
@@ -1929,6 +1929,15 @@ msgstr "Error editing the event, the changes made were not saved"
 
 msgid "Error updating the Assignee"
 msgstr "Error updating the Assignee"
+
+msgid "Please provide a valid positive integer"
+msgstr "Please provide a valid positive integer"
+
+msgid "Please enter a valid time"
+msgstr "Please enter a valid time"
+
+msgid "Please enter a time"
+msgstr "Please enter a time"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

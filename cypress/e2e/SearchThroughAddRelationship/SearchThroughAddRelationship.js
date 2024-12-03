@@ -21,7 +21,7 @@ When('you expand the third search area', () => {
 
 And('you fill in the first name with values that will return no results', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(0)
         .type('Name doesnt exist')
         .blur();
@@ -29,7 +29,7 @@ And('you fill in the first name with values that will return no results', () => 
 
 And('you fill in the first name with values that will return results', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(0)
         .type('Tesmi')
         .blur();
@@ -49,23 +49,23 @@ And('there should be a validation error message', () => {
 
 And('you fill the values with nothing but spaces', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(0)
         .type('      ');
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(1)
         .type('      ');
 });
 
 And('you fill in the the form with values', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(0)
         .type('Tesmi')
         .blur();
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(1)
         .type('Tesmi')
         .blur();
@@ -73,18 +73,18 @@ And('you fill in the the form with values', () => {
 
 And('you clear the values', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(0)
         .clear();
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(1)
         .clear();
 });
 
 And('you fill in the first name with values that will return an error', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .first()
         .type(',,,,')
         .blur();
@@ -104,12 +104,12 @@ And('the next page button is disabled', () => {
 
 And('you fill in the the form with values that will return less than 5 results', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(0)
         .type('Sara')
         .blur();
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(1)
         .type('Gonzalez')
         .blur();
@@ -117,12 +117,12 @@ And('you fill in the the form with values that will return less than 5 results',
 
 And('you fill in the the form with values that will return exactly 5 results', () => {
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(0)
         .type('Tesmi')
         .blur();
     cy.get('[data-test="d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(1)
         .type('Abel')
         .blur();

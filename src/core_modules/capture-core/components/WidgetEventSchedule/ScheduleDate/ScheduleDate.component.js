@@ -5,8 +5,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { DateField } from 'capture-core/components/FormFields/New';
 import { InfoBox } from '../InfoBox';
 import type { Props } from './scheduleDate.types';
-import { convertStringToDateFormat } from '../../../utils/converters/date';
-
 
 const styles = {
     container: {
@@ -36,7 +34,14 @@ const ScheduleDatePlain = ({
             onSetFocus={() => {}}
             onFocus={() => { }}
             onRemoveFocus={() => { }}
-            onBlur={(e) => { setScheduleDate(convertStringToDateFormat(e)); }}
+            onBlur={(e, internalComponentError) => {
+                const { error } = internalComponentError;
+                if (error) {
+                    setScheduleDate('');
+                    return;
+                }
+                setScheduleDate(e);
+            }}
         />
     </div>}
     <InfoBox
