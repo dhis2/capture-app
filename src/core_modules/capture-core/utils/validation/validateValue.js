@@ -1,5 +1,6 @@
 // @flow
 import type { ValidatorContainer } from './getValidators';
+import type { FieldCommitOptions } from '../../components/D2Form';
 
 export type Validations = {
     valid: boolean,
@@ -13,6 +14,7 @@ export const validateValue = async (
     value: any,
     validationContext: ?Object,
     postProcessAsyncValidatonInitiation: ?Function,
+    commitOptions?: ?FieldCommitOptions,
 ): Promise<Validations> => {
     if (!validators || validators.length === 0) {
         return {
@@ -23,7 +25,11 @@ export const validateValue = async (
     const validatorResult = await validators.reduce(async (passPromise, currentValidator) => {
         const pass = await passPromise;
         if (pass === true) {
-            let result = currentValidator.validator(value, validationContext);
+            let result = currentValidator.validator(
+                value,
+                { error: commitOptions?.error, errorCode: commitOptions?.errorCode },
+                validationContext,
+            );
             if (result instanceof Promise) {
                 result = postProcessAsyncValidatonInitiation
                     ? postProcessAsyncValidatonInitiation(currentValidator.validatingMessage, result)

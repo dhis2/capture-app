@@ -7,10 +7,10 @@ export type ErrorData = {
     attributeValueExistsUnsaved?: ?boolean,
 };
 export type PostProcessErrorMessage = ({
-    errorMessage: string | Array<string>,
+    errorMessage: string | Array<string> | Array<{[key: string]: string}>,
     errorType: ?string,
     errorData?: ErrorData,
     id: string,
     fieldId: string,
     fieldLabel: string,
-}) => Node;
+}) => string | Array<string> | Array<{[key: string]: string}> | Node;

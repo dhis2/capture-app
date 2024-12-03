@@ -32,12 +32,16 @@ import type { QuerySingleResource } from '../../utils/api/api.types';
 
 type Validator = (
     value: any,
-    contextProps: ?Object,
+    validationContext: ?Object,
+    internalError?: ?{
+        error?: ?string,
+        errorCode?: ?string,
+    }
 ) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any, data?: any };
 
 export type ValidatorContainer = {
     validator: Validator,
-    message: string,
+    message: string | Object,
     type?: string,
     validatingMessage?: string,
 }
@@ -121,7 +125,7 @@ const validatorsForTypes = {
             type: validatorTypes.TYPE_BASE,
         },
         {
-            validator: (value: string, allowFutureDate) => (allowFutureDate ? true : isValidNonFutureDate(value)),
+            validator: isValidNonFutureDate,
             type: validatorTypes.TYPE_EXTENDED,
             message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
         }],
@@ -215,14 +219,14 @@ function buildTypeValidators(metaData: DataElement | DateDataElement): Array<Val
 
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
-        validator: (value: any) => {
+        validator: (value: any, internalComponentError?: ?{error: ?string, errorCode: ?string}) => {
             if (!value && value !== 0 && value !== false) {
                 return true;
             }
 
             const toValidateValue = isString(value) ? value.trim() : value;
             // $FlowFixMe dataElementTypes flow error
-            return validatorContainer.validator(toValidateValue, metaData.allowFutureDate);
+            return validatorContainer.validator(toValidateValue, internalComponentError);
         },
     }));
 
@@ -251,7 +255,7 @@ function buildUniqueValidator(
         ?
         [
             {
-                validator: (value: any, contextProps: ?Object) => {
+                validator: (value: any, internalComponentError?: ?{error: ?string, errorCode: ?string}, contextProps: ?Object) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }

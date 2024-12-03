@@ -250,7 +250,7 @@ Then(/^the user successfully transfers the enrollment/, () => {
 
 Then(/^the user types in (.*)/, (orgunit) => {
     cy.get('[data-test="widget-enrollment-transfer-modal"]').within(() => {
-        cy.get('[data-test="capture-ui-input"]').type(orgunit);
+        cy.get('input[type="text"]').type(orgunit);
     });
 });
 

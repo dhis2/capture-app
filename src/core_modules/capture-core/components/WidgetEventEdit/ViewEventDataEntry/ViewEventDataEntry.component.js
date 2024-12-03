@@ -139,6 +139,27 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+const buildOrgUnitSettingsFn = () => {
+    const dataElement = new DataElement((o) => {
+        o.type = dataElementTypes.ORGANISATION_UNIT;
+    });
+
+    const orgUnitSettings = {
+        getComponent: () => viewModeComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            label: i18n.t('Organisation unit'),
+            valueConverter: value => dataElement.convertValue(value, valueConvertFn),
+        }),
+        getPropName: () => 'orgUnitId',
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return orgUnitSettings;
+};
+
 const buildScheduleDateSettingsFn = () => {
     const dataElement = new DataElement((o) => {
         o.type = dataElementTypes.DATE;
@@ -245,7 +266,8 @@ const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCatego
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
+const OrgUnitField = withDataEntryField(buildOrgUnitSettingsFn())(ScheduleDateField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(OrgUnitField);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 

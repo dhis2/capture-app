@@ -1,3 +1,17 @@
+## [101.18.1](https://github.com/dhis2/capture-app/compare/v101.18.0...v101.18.1) (2024-12-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a2d43b2](https://github.com/dhis2/capture-app/commit/a2d43b2db7b926066a438d6f5f42ad19d37987fe))
+
+# [101.18.0](https://github.com/dhis2/capture-app/compare/v101.17.0...v101.18.0) (2024-11-28)
+
+
+### Features
+
+* [DHIS2-16337] Org unit in view event page ([#3882](https://github.com/dhis2/capture-app/issues/3882)) ([c605e82](https://github.com/dhis2/capture-app/commit/c605e828622aa9f9b0c10f96359ba1b037c8e0ee))
+
 # [101.17.0](https://github.com/dhis2/capture-app/compare/v101.16.7...v101.17.0) (2024-11-25)
 
 

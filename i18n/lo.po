@@ -1,7 +1,6 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2022
-# Somkhit Bouavong <bouavongk@gmail.com>, 2024
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Namwan Chanthavisouk, 2024
@@ -10,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Saysamone Sibounma, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -46,6 +45,39 @@ msgstr ""
 "Capture ພຽງແຕ່ຮອງຮັບການໃຊ້ງານໃນເວີຊັນດຽວກັນ (ໃນໂດເມນດຽວກັນ). "
 "ກະ​ລຸ​ນາ​ໂຫຼດ​ຫນ້າ​ນີ້​ຄືນ​ໃຫມ່​ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ຕ້ອງ​ການ​ທີ່​ຈະ​ນໍາ​ໃຊ້​ເວີຊັນນີ້​ອີກ​ເທື່ອ​ຫນຶ່ງ​,"
 " ແຕ່​ລະວັງໄວ້ວ່າມັນຈະ​ປິດ​ເວີຊັນ​ອື່ນ​."
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "ແກ້ໄຂເຫດການ"
+
+msgid "New event"
+msgstr "ກໍລະນີໃໝ່"
+
+msgid "Active enrollments"
+msgstr "ການລົງທະບຽນທີ່ຍັງເຄື່ອນໄຫວ"
+
+msgid "Completed enrollments"
+msgstr "ສໍາເລັດການລົງທະບຽນ"
+
+msgid "Cancelled enrollments"
+msgstr "ຍົກເລີກການລົງທະບຽນ"
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "ຄົນຫາ"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr "ເພີ່ມເຕີມ"
@@ -301,9 +333,6 @@ msgstr "ຕົກລົງ, ຍົກເລີກການປ່ຽນແປງ"
 msgid "No, cancel"
 msgstr "ບໍ່, ຍົກເລີກ"
 
-msgid "New event"
-msgstr "ກໍລະນີໃໝ່"
-
 msgid "You don't have access to create an event in the current selections"
 msgstr "ທ່ານບໍ່ໄດ້ອະນຸຍາດໃຫ້ສ້າງເຫດການໃນຕົວເລືອກນີ້"
 
@@ -520,9 +549,6 @@ msgstr "ປະເພດຕົວເລືອກການກອງ"
 
 msgid "No match found"
 msgstr "ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ"
-
-msgid "Search"
-msgstr "ຄົນຫາ"
 
 msgid "Clear"
 msgstr "ລຶບ"
@@ -865,9 +891,6 @@ msgstr "ເຫດການ"
 msgid "You don't have access to edit this event"
 msgstr "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃນການແກ້ໄຂເຫດການນີ້"
 
-msgid "Edit event"
-msgstr "ແກ້ໄຂເຫດການ"
-
 msgid "View changelog"
 msgstr "ເບິ່ງບັນທຶກການປ່ຽນແປງ"
 
@@ -903,15 +926,6 @@ msgstr "ບໍ່ສາມາດໂຫຼດເຫດການໄດ້"
 msgid "Organisation unit could not be loaded"
 msgstr "ບໍ່ສາມາດໂຫຼດຫົວໜ່ວຍການຈັດຕັ້ງໄດ້"
 
-msgid "Dashboard"
-msgstr "ກະດານຂ່າວ"
-
-msgid "Edit Event"
-msgstr "ແກ້ໄຂເຫດການ"
-
-msgid "View Event"
-msgstr "ເບິ່ງເຫດການ"
-
 msgid "Selected program"
 msgstr "ເລືອກສາຍງານ"
 
@@ -936,6 +950,9 @@ msgstr "ກໍາລັງໂຫຼດ"
 
 msgid "An error occurred while loading the form"
 msgstr "ພົບບັນຫາໃນລະຫວ່າງການໂຫຼດຟອມ"
+
+msgid "Back to all stages and events"
+msgstr "ກັບໄປທຸກຂັ້ນຕອນ ແລະ ເຫດການ"
 
 msgid "Possible duplicates found"
 msgstr "ພົບການຊໍ້າກັນທີ່ເປັນໄປໄດ້"
@@ -1268,6 +1285,9 @@ msgstr "ແຈ້ງເຕືອນ"
 msgid "stage not found in rules execution"
 msgstr "ບໍ່ພົບຂັ້ນຕອນໃນການປະຕິບັດກົດລະບຽບ"
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "ລືບກໍລະນີອອກ"
 
@@ -1285,9 +1305,6 @@ msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr "ເຫດການດັ່ງກ່າວບໍ່ສາມາດແກ້ໄຂໄດ້ຫຼັງຈາກສໍາເລັດແລ້ວ"
-
-msgid "Back to all stages and events"
-msgstr "ກັບໄປທຸກຂັ້ນຕອນ ແລະ ເຫດການ"
 
 msgid "Notes about this event"
 msgstr "ຂໍ້ຄວາມກ່ຽວກັບເຫດການນີ້"
@@ -1490,11 +1507,19 @@ msgstr "{{ scheduledEvents }} ກຳນົດເວລາ"
 msgid "Stages and Events"
 msgstr "ຂັ້ນຕອນ ແລະ ເຫດການ"
 
+msgid "View linked event"
+msgstr "ເບິ່ງເຫດການທີ່ເຊື່ອມໂຍງ"
+
 msgid "An error occurred while loading the widget."
 msgstr "ເກີດຄວາມຜິດພາດຂຶ້ນໃນຂະນະທີ່ໂຫຼດລາຍການ."
 
-msgid "View linked event"
-msgstr "ເບິ່ງເຫດການທີ່ເຊື່ອມໂຍງ"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
+msgstr ""
 
 msgid "Scheduled"
 msgstr "ຕາມເວລາທີ່ກໍານົດ"
@@ -1528,6 +1553,12 @@ msgstr "ປ່ຽນ"
 
 msgid "Value"
 msgstr "ຄ່າ"
+
+msgid "File"
+msgstr ""
+
+msgid "Image"
+msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "ຄວາມສໍາພັນໃໝ່ {{trackedEntityTypeName}} "
@@ -1591,6 +1622,46 @@ msgstr "ໂຫຼດຂໍ້ມູນ..."
 msgid "an error occurred loading working lists"
 msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫຼດລາຍການ"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "ວັນທີລົງທະບຽນ"
 
@@ -1606,14 +1677,113 @@ msgstr "ຕິດຕາມ"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "ເລືອກຂັ້ນຕອນໂປແກຼມເພື່ອກັ່ນຕອງໂດຍ {{label}}"
 
-msgid "Active enrollments"
-msgstr "ການລົງທະບຽນທີ່ຍັງເຄື່ອນໄຫວ"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+msgstr ""
 
-msgid "Completed enrollments"
-msgstr "ສໍາເລັດການລົງທະບຽນ"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+msgstr ""
 
-msgid "Cancelled enrollments"
-msgstr "ຍົກເລີກການລົງທະບຽນ"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "ລາຍຊື່ເຮັດວຽກບໍ່ສາມາດອັບເດດໄດ້"
@@ -1623,6 +1793,13 @@ msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫຼດລ
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "ເກີດຄວາມຜິດພາດໃນການໂຫຼດລາຍການຕົວຢ່າງການຕິດຕາມລາຍບຸກຄົນ"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] ""
+
+msgid "Deselect all"
+msgstr ""
 
 msgid "Update view"
 msgstr "ອັບເດດມຸມມອງ"

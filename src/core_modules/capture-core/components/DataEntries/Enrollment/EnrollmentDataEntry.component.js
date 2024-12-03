@@ -114,8 +114,7 @@ const getEnrollmentDateSettings = () => {
             calendarMaxMoment: !props.enrollmentMetadata.allowFutureEnrollmentDate ? moment() : undefined,
         }),
         getPropName: () => 'enrolledAt',
-        getValidatorContainers: (props: Object) =>
-            getEnrollmentDateValidatorContainer(props.enrollmentMetadata.allowFutureEnrollmentDate),
+        getValidatorContainers: getEnrollmentDateValidatorContainer,
         getPassOnFieldData: () => true,
         getMeta: () => ({
             placement: placements.TOP,
@@ -164,8 +163,7 @@ const getIncidentDateSettings = () => {
         }),
         getPropName: () => 'occurredAt',
         getPassOnFieldData: () => true,
-        getValidatorContainers: (props: Object) =>
-            getIncidentDateValidatorContainer(props.enrollmentMetadata.allowFutureIncidentDate),
+        getValidatorContainers: getIncidentDateValidatorContainer,
         getMeta: () => ({
             placement: placements.TOP,
             section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,

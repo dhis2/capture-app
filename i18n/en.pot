@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
-"PO-Revision-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
+"PO-Revision-Date: 2024-12-03T10:58:18.077Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -143,8 +143,8 @@ msgstr "{{ stageName }} - Status"
 msgid "Please select {{categoryName}}"
 msgstr "Please select {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "A future date is not allowed"
+msgid "A date in the future is not allowed"
+msgstr "A date in the future is not allowed"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
@@ -1240,6 +1240,9 @@ msgstr "Warning"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
+
 msgid "Delete event"
 msgstr "Delete event"
 
@@ -1399,6 +1402,9 @@ msgstr "Scheduled date"
 
 msgid "Report date"
 msgstr "Report date"
+
+msgid "Please enter a date"
+msgstr "Please enter a date"
 
 msgid "Please provide a valid organisation unit"
 msgstr "Please provide a valid organisation unit"
@@ -1629,15 +1635,6 @@ msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1903,9 +1900,6 @@ msgstr "Please provide zero or a positive integer"
 msgid "Please provide a negative integer"
 msgstr "Please provide a negative integer"
 
-msgid "A date in the future is not allowed"
-msgstr "A date in the future is not allowed"
-
 msgid "Please provide a valid date and time"
 msgstr "Please provide a valid date and time"
 
@@ -1935,6 +1929,15 @@ msgstr "\"From\" cannot be greater than \"To\""
 
 msgid "Checking..."
 msgstr "Checking..."
+
+msgid "Please provide a valid positive integer"
+msgstr "Please provide a valid positive integer"
+
+msgid "Please enter a valid time"
+msgstr "Please enter a valid time"
+
+msgid "Please enter a time"
+msgstr "Please enter a time"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
