@@ -12,7 +12,7 @@ import { padWithZeros } from './padWithZeros';
  * @param {string} localDate - date in local calendar format
  * @returns {string}
  */
-export function convertLocalToIsoCalendar(localDate: string): string {
+export function convertLocalToIsoCalendar(localDate: ?string): string {
     if (!localDate) {
         return '';
     }
