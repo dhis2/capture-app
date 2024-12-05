@@ -39,12 +39,12 @@ export const useLifecycle = ({
     useEffect(() => {
         if (!isLoading) {
             dispatch(batchActions([
-                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory),
+                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory, orgUnit),
             ]));
             dataEntryReadyRef.current = true;
             delayRulesExecutionRef.current = true;
         }
-    }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory]);
+    }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory, orgUnit]);
 
     const eventsRef = useRef();
     const attributesRef = useRef();

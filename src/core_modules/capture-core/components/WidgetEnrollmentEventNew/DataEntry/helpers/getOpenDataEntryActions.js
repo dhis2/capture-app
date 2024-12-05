@@ -42,7 +42,11 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const getOpenDataEntryActions =
-    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory) => {
+    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory, orgUnit: Object) => {
+        const { id, name, path } = orgUnit;
+        const defaultDataEntryValues = {
+            orgUnit: { id, name, path },
+        };
         if (programCategory && programCategory.categories) {
             dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
                 id: `attributeCategoryOptions-${category.id}`,
@@ -50,6 +54,6 @@ export const getOpenDataEntryActions =
                 validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
             })));
         }
-        return loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
+        return loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude, defaultDataEntryValues);
     };
 
