@@ -3,7 +3,6 @@ import React from 'react';
 import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
-import { convertStringToDateFormat } from '../../../utils/converters/date';
 import { DateFieldForRelatedStages, OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
@@ -52,10 +51,11 @@ export const ScheduleInOrgUnitPlain = ({
     scheduledLabel,
     classes,
 }: Props) => {
-    const onBlurDateField = (e) => {
+    const onBlurDateField = (e, internalComponentError) => {
         setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
-            scheduledAt: convertStringToDateFormat(e),
+            scheduledAt: e,
+            scheduledAtFormatError: internalComponentError,
         }));
     };
 

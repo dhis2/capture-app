@@ -1,5 +1,4 @@
 // @flow
-import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
 import type {
     OrgUnit,
@@ -18,10 +17,10 @@ import type { FieldData } from '../../../rules';
 import { getCurrentClientValues } from '../../../rules';
 import { loadNewDataEntry } from '../../DataEntry/actions/dataEntryLoadNew.actions';
 import { rulesExecutedPostUpdateField } from '../../DataEntry/actions/dataEntry.actions';
-import { startRunRulesPostUpdateField } from '../../DataEntry';
-import { getRulesActionsForTEI } from './ProgramRules';
+import { getRulesActionsForTEIAsync } from './ProgramRules';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import type { Geometry } from './helpers/types';
+import type { QuerySingleResource } from '../../../utils/api';
 
 export const TEI_MODAL_STATE = {
     OPEN: 'Open',
@@ -65,8 +64,19 @@ type Context = {
     state: ReduxState,
 };
 
-export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction<any, any>) => {
-    const uid = uuid();
+export const getUpdateFieldActions = async ({
+    context,
+    querySingleResource,
+    onGetValidationContext,
+    innerAction,
+    uid,
+}: {
+    context: Context,
+    querySingleResource: QuerySingleResource,
+    onGetValidationContext: () => Object,
+    innerAction: ReduxAction<any, any>,
+    uid: string
+}) => {
     const {
         orgUnit,
         trackedEntityAttributes,
@@ -87,7 +97,7 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
     };
     const formId = `${dataEntryId}-${itemId}`;
     const currentTEIValues = getCurrentClientValues(state, formFoundation, formId, fieldData);
-    const rulesActions = getRulesActionsForTEI({
+    const rulesActions = await getRulesActionsForTEIAsync({
         foundation: formFoundation,
         formId,
         orgUnit,
@@ -99,14 +109,15 @@ export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction
         otherEvents,
         dataElements,
         userRoles,
+        querySingleResource,
+        onGetValidationContext,
     });
 
     return batchActions(
         [
             innerAction,
-            ...rulesActions,
+            rulesActions,
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
         ],
         dataEntryActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
     );

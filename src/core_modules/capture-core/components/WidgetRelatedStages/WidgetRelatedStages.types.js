@@ -30,6 +30,7 @@ export type Props = {|
 export type RelatedStageDataValueStates = {|
     linkMode: ?$Keys<typeof RelatedStageModes>,
     scheduledAt: string,
+    scheduledAtFormatError: ?{error: ?string, errorCode: ?string},
     orgUnit: ?{
         path: string,
         id: string,
