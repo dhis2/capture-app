@@ -1,3 +1,10 @@
+## [101.19.1](https://github.com/dhis2/capture-app/compare/v101.19.0...v101.19.1) (2024-12-05)
+
+
+### Bug Fixes
+
+* [DHIS2-17854] validate the assigned values from rules engine ([#3783](https://github.com/dhis2/capture-app/issues/3783)) ([db9d6b8](https://github.com/dhis2/capture-app/commit/db9d6b8f23fb29af30ef61fb3649c167073a46ff))
+
 # [101.19.0](https://github.com/dhis2/capture-app/compare/v101.18.1...v101.19.0) (2024-12-03)
 
 
