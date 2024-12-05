@@ -634,6 +634,9 @@ And('you see the enrollment minimap', () => {
 });
 
 And('you delete the recently added tracked entity', () => {
+    cy.get('[data-test="profile-widget"]')
+        .contains('Person profile')
+        .should('exist');
     cy.get('[data-test="widget-profile-overflow-menu"]')
         .click();
     cy.contains('Delete Person')
@@ -646,6 +649,9 @@ And('you delete the recently added tracked entity', () => {
 });
 
 And('you delete the recently added malaria entity', () => {
+    cy.get('[data-test="profile-widget"]')
+        .contains('Malaria Entity profile')
+        .should('exist');
     cy.get('[data-test="widget-profile-overflow-menu"]')
         .click();
     cy.contains('Delete Malaria Entity')

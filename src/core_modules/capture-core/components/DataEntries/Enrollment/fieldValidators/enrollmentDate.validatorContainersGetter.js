@@ -1,7 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { hasValue } from 'capture-core-utils/validators/form';
-import { isValidDate, isValidNonFutureDate } from '../../../../utils/validators/form';
+import { isValidDate, isValidNonFutureDate } from '../../../../utils/validation/validators/form';
 
 const isValidEnrollmentDate = (value: string, internalComponentError?: ?{error: ?string, errorCode: ?string}) => {
     if (!value) {

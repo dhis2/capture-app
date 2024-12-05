@@ -13,7 +13,8 @@ type ValidationResult = {
     errorMessage?: {
         timeError?: ?string,
         dateError?: ?string
-    }
+    },
+    data?: any,
 };
 
 const CUSTOM_VALIDATION_MESSAGES = {

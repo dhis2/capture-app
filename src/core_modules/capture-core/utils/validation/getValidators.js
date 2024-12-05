@@ -25,12 +25,19 @@ import {
     getDateRangeValidator,
     getDateTimeRangeValidator,
     getTimeRangeValidator,
-} from '../../../../utils/validators/form';
-import { dataElementTypes, type DateDataElement, type DataElement } from '../../../../metaData';
+} from './validators/form';
+import { dataElementTypes, type DateDataElement, type DataElement } from '../../metaData';
 import { validatorTypes } from './constants';
-import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import type { QuerySingleResource } from '../../utils/api/api.types';
 
-type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};
+type Validator = (
+    value: any,
+    validationContext: ?Object,
+    internalError?: ?{
+        error?: ?string,
+        errorCode?: ?string,
+    }
+) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any, data?: any };
 
 export type ValidatorContainer = {
     validator: Validator,
@@ -205,7 +212,7 @@ const validatorsForTypes = {
     }],
 };
 
-function buildTypeValidators(metaData: DataElement | DateDataElement): ?Array<ValidatorContainer> {
+function buildTypeValidators(metaData: DataElement | DateDataElement): Array<ValidatorContainer> {
     // $FlowFixMe dataElementTypes flow error
     let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
 
@@ -226,7 +233,7 @@ function buildTypeValidators(metaData: DataElement | DateDataElement): ?Array<Va
     return validatorContainersForType;
 }
 
-function buildCompulsoryValidator(metaData: DataElement): Array<?ValidatorContainer> {
+function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContainer> {
     return metaData.compulsory
         ?
         [
@@ -243,7 +250,7 @@ function buildCompulsoryValidator(metaData: DataElement): Array<?ValidatorContai
 function buildUniqueValidator(
     metaData: DataElement,
     querySingleResource: QuerySingleResource,
-): Array<?ValidatorContainer> {
+): Array<ValidatorContainer> {
     return metaData.unique
         ?
         [
@@ -265,7 +272,7 @@ function buildUniqueValidator(
 }
 
 export const getValidators =
-(metaData: DataElement, querySingleResource: QuerySingleResource): Array<?ValidatorContainer> => [
+(metaData: DataElement, querySingleResource: QuerySingleResource): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,
