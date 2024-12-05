@@ -2,13 +2,17 @@
 import {
     EnrollmentPageKeys,
 } from '../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
+import { WidgetTwoEventWorkspaceWrapperTypes } from './index';
+import type { ProgramStage } from '../../metaData';
 
-type PlainProps = {|
+export type Props = {|
     programId: string,
     eventId: string,
     orgUnitId: string,
     stageId: string,
-    currentPage: $Values<typeof EnrollmentPageKeys>,
+    currentPage: $Values<typeof EnrollmentPageKeys> | string,
+    stage?: ProgramStage,
+    type?: $Values<typeof WidgetTwoEventWorkspaceWrapperTypes>,
 |}
 
 export type LinkedEvent = {|
@@ -16,9 +20,4 @@ export type LinkedEvent = {|
     dataValues: { [string]: any },
     occurredAt: string,
     orgUnit: string,
-|}
-
-export type Props = {|
-    ...PlainProps,
-    ...CssClasses,
 |}
