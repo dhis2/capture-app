@@ -5,21 +5,23 @@ import i18n from '@dhis2/d2-i18n';
 import { Tag } from '@dhis2/ui';
 import { PreviewImage } from 'capture-ui';
 import { dataElementTypes, type DataElement } from '../metaData';
-import { convertMomentToDateFormatString } from '../utils/converters/date';
+import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
-    return convertMomentToDateFormatString(momentDate);
+    const dateString = momentDate.format('YYYY-MM-DD');
+    return convertIsoToLocalCalendar(dateString);
 }
 
 function convertDateTimeForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
-    const dateString = convertMomentToDateFormatString(momentDate);
+    const dateString = momentDate.format('YYYY-MM-DD');
     const timeString = momentDate.format('HH:mm');
-    return `${dateString} ${timeString}`;
+    const localDate = convertIsoToLocalCalendar(dateString);
+    return `${localDate} ${timeString}`;
 }
 
 function convertTimeForListDisplay(rawValue: string): string {

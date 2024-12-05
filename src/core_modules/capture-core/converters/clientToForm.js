@@ -1,6 +1,6 @@
 // @flow
 import moment from 'moment';
-import { convertMomentToDateFormatString } from '../utils/converters/date';
+import { convertMomentToDateFormatString, convertIsoToLocalCalendar } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
 import { stringifyNumber } from './common/stringifyNumber';
@@ -23,16 +23,17 @@ type RangeValue = {
 }
 
 function convertDateForEdit(rawValue: string): string {
-    const momentInstance = moment(rawValue);
-    return convertMomentToDateFormatString(momentInstance);
+    const momentDate = moment(rawValue);
+    const dateString = momentDate.format('YYYY-MM-DD');
+    return convertIsoToLocalCalendar(dateString);
 }
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     const dateTime = moment(rawValue);
-    const dateString = convertMomentToDateFormatString(dateTime);
+    const dateString = dateTime.format('YYYY-MM-DD');
     const timeString = dateTime.format('HH:mm');
     return {
-        date: dateString,
+        date: convertIsoToLocalCalendar(dateString),
         time: timeString,
     };
 }

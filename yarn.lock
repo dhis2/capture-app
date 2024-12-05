@@ -2718,7 +2718,7 @@
     recompose "^0.26.0"
     rxjs "^5.5.7"
 
-"@dhis2/multi-calendar-dates@2.0.0":
+"@dhis2/multi-calendar-dates@2.0.0", "@dhis2/multi-calendar-dates@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@dhis2/multi-calendar-dates/-/multi-calendar-dates-2.0.0.tgz#febf04f873670960804d38c9ebaa1cadf8050db3"
   integrity sha512-pxu81kkkh70tB+CyAub41ulpNJPHyxDGwH2pdcc+NUqrKu4OTQr5ScdCBL2MndShrEKj9J6qj9zKVagvvymH5w==

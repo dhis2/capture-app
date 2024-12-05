@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
@@ -16,7 +17,8 @@ import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
-import { parseDate } from '../../../utils/converters/date';
+import { parseDate, convertLocalToIsoCalendar, convertIsoToLocalCalendar } from '../../../utils/converters/date';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
@@ -257,12 +259,28 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         return !values || DateFilter.isFilterValid(values.main, values.from, values.to, values.start, values.end);
     }
 
-    getUpdatedValue(valuePart: { [key: string]: string }) {
-        // $FlowFixMe[cannot-spread-indexer] automated comment
+    // eslint-disable-next-line complexity
+    getUpdatedValue(valuePart: Object) {
         const valueObject = {
             ...this.props.value,
             ...valuePart,
         };
+        const dateFormat = systemSettingsStore.get().dateFormat;
+
+        if (valuePart.from && valueObject?.from?.value) {
+            valueObject.from = {
+                ...valueObject.from,
+                value: moment(convertLocalToIsoCalendar(valueObject.from.value)).format(dateFormat),
+            };
+        }
+
+        if (valuePart.to && valueObject?.to?.value) {
+            valueObject.to = {
+                ...valueObject.to,
+                value: moment(convertLocalToIsoCalendar(valueObject.to.value)).format(dateFormat),
+            };
+        }
+
         const isRelativeRangeValue = () => valueObject?.start || valuePart?.start || valuePart?.end;
         const isAbsoluteRangevalue = () => valueObject?.from || valuePart?.from || valuePart?.to;
 
@@ -358,7 +376,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <FromDateFilter
-                            value={fromValue?.value}
+                            value={convertIsoToLocalCalendar(fromValue?.value)}
                             onBlur={this.handleFieldBlur}
                             onEnterKey={this.handleEnterKeyInFrom}
                             onDateSelectedFromCalendar={this.handleDateSelectedFromCalendarInFrom}
@@ -371,7 +389,7 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <ToDateFilter
-                            value={toValue?.value}
+                            value={convertIsoToLocalCalendar(toValue?.value)}
                             onBlur={this.handleFieldBlur}
                             textFieldRef={this.setToD2DateTextFieldInstance}
                             onFocusUpdateButton={onFocusUpdateButton}
