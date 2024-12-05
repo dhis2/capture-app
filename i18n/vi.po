@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2024
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Philip Larsen Donnelly, 2024
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024\n"
+"Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,6 +44,39 @@ msgstr ""
 " Ứng dụng Ghi chỉ hỗ trợ chạy đồng thời một phiên bản (trong cùng một miền)."
 " Vui lòng làm mới trang này nếu bạn muốn sử dụng lại phiên bản này, nhưng "
 "lưu ý rằng điều này sẽ đóng các phiên bản khác."
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "Sửa sự kiện"
+
+msgid "New event"
+msgstr "Sự kiện mới"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr "Thêm"
@@ -301,9 +334,6 @@ msgstr ""
 msgid "No, cancel"
 msgstr "Không"
 
-msgid "New event"
-msgstr "Sự kiện mới"
-
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
@@ -520,9 +550,6 @@ msgstr ""
 msgid "No match found"
 msgstr ""
 
-msgid "Search"
-msgstr "Tìm kiếm"
-
 msgid "Clear"
 msgstr "Xóa"
 
@@ -680,7 +707,9 @@ msgstr ""
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 
-msgid "No access to program owner."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -855,9 +884,6 @@ msgstr "sự kiện"
 msgid "You don't have access to edit this event"
 msgstr ""
 
-msgid "Edit event"
-msgstr "Sửa sự kiện"
-
 msgid "View changelog"
 msgstr ""
 
@@ -895,15 +921,6 @@ msgstr "Không thể tải sự kiện"
 msgid "Organisation unit could not be loaded"
 msgstr "Không thể tải đơn vị"
 
-msgid "Dashboard"
-msgstr "Bảng điều khiển"
-
-msgid "Edit Event"
-msgstr ""
-
-msgid "View Event"
-msgstr ""
-
 msgid "Selected program"
 msgstr "Chương trình đã chọn"
 
@@ -927,6 +944,9 @@ msgid "Loading"
 msgstr "Đang tải"
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1073,7 +1093,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr "Đã gán cho"
 
-msgid "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
 msgstr ""
 
 msgid "Edit"
@@ -1082,7 +1102,7 @@ msgstr "Chỉnh sửa"
 msgid "No one is assigned to this event"
 msgstr "Không ai được chỉ định cho sự kiện này"
 
-msgid "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1256,6 +1276,9 @@ msgstr "Cảnh báo"
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Xóa sự kiện"
 
@@ -1272,9 +1295,6 @@ msgid "Event completed"
 msgstr "Sự kiện đã hoàn tất"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
-
-msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Notes about this event"
@@ -1469,10 +1489,18 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "View linked event"
+msgstr ""
+
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "View linked event"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
 msgstr ""
 
 msgid "Scheduled"
@@ -1507,6 +1535,12 @@ msgstr ""
 
 msgid "Value"
 msgstr "Giá trị"
+
+msgid "File"
+msgstr "Tập tin"
+
+msgid "Image"
+msgstr "Hình ảnh"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
@@ -1568,6 +1602,46 @@ msgstr "Tải xuống dữ liệu ..."
 msgid "an error occurred loading working lists"
 msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr "Một lỗi không xác định đã xuất hiện."
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Ngày đăng ký"
 
@@ -1583,13 +1657,112 @@ msgstr "Theo dõi"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Active enrollments"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
 msgstr ""
 
-msgid "Completed enrollments"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
 msgstr ""
 
-msgid "Cancelled enrollments"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1600,6 +1773,13 @@ msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "Đã chọn {{count}}"
+
+msgid "Deselect all"
+msgstr "Bỏ chọn tất cả"
 
 msgid "Update view"
 msgstr "Cập nhật chế độ xem"

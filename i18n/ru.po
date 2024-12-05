@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -45,6 +45,39 @@ msgstr ""
 "время приложение Capture поддерживает одновременную работу только одной "
 "версии в том же самом домене. Обновите эту страницу, если вы хотите "
 "использовать эту версию, но имейте в виду, что другие версии будут закрыты."
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "Редактировать событие"
+
+msgid "New event"
+msgstr "Новое событие"
+
+msgid "Active enrollments"
+msgstr "Активные регистрационные записи"
+
+msgid "Completed enrollments"
+msgstr "Завершенные регистрационные записи"
+
+msgid "Cancelled enrollments"
+msgstr "Отмененные регистрационные записи"
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr "Более"
@@ -304,9 +337,6 @@ msgstr "Да, не сохранять изменения"
 msgid "No, cancel"
 msgstr "Нет, отменить"
 
-msgid "New event"
-msgstr "Новое событие"
-
 msgid "You don't have access to create an event in the current selections"
 msgstr "Не достаточно прав для создания события с текущим выбором"
 
@@ -530,9 +560,6 @@ msgstr "Начать печатать для фильтрации опций"
 msgid "No match found"
 msgstr "Совпадения не найдены"
 
-msgid "Search"
-msgstr "Поиск"
-
 msgid "Clear"
 msgstr "Очистить"
 
@@ -701,8 +728,10 @@ msgstr ""
 "Создать новую регистрационную запись для объекта {{teiDisplayName}} в данной"
 " программе."
 
-msgid "No access to program owner."
-msgstr "Нет доступа к владельцу программы."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "Объект {{teiDisplayName}} не зарегистрирован в данной программе."
@@ -881,9 +910,6 @@ msgstr "событие"
 msgid "You don't have access to edit this event"
 msgstr "У вас нет доступа к редактированию этого события"
 
-msgid "Edit event"
-msgstr "Редактировать событие"
-
 msgid "View changelog"
 msgstr "Посмотреть лог изменений"
 
@@ -920,15 +946,6 @@ msgstr "Событие не удалось загрузить"
 msgid "Organisation unit could not be loaded"
 msgstr "Организационную единицу не удалось загрузить"
 
-msgid "Dashboard"
-msgstr "Информационная панель"
-
-msgid "Edit Event"
-msgstr "Редактировать событие"
-
-msgid "View Event"
-msgstr "Посмотреть событие"
-
 msgid "Selected program"
 msgstr "Выбранная программа"
 
@@ -956,6 +973,9 @@ msgstr "Загрузка"
 
 msgid "An error occurred while loading the form"
 msgstr ""
+
+msgid "Back to all stages and events"
+msgstr "Обратно ко всем этапам и событиям"
 
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты "
@@ -1106,8 +1126,8 @@ msgstr "Нет доступных отслеживаемых типов объе
 msgid "Assigned to"
 msgstr "Назначено пользователю"
 
-msgid "You don't have access to edit this assignee"
-msgstr "У вас нет доступа к редактированию данного назначенного пользователя"
+msgid "You don't have access to edit the assigned user"
+msgstr ""
 
 msgid "Edit"
 msgstr "Редактировать"
@@ -1115,8 +1135,8 @@ msgstr "Редактировать"
 msgid "No one is assigned to this event"
 msgstr "Никто не назначен для данного события"
 
-msgid "You don't have access to assign an assignee"
-msgstr "У вас нет доступа к назначению пользователя"
+msgid "You don't have access to assign a user to this event"
+msgstr ""
 
 msgid "Assign"
 msgstr "Назначить"
@@ -1310,6 +1330,9 @@ msgstr "Предупреждение"
 msgid "stage not found in rules execution"
 msgstr "этап не найден при выполнении правил"
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Удалить событие"
 
@@ -1329,9 +1352,6 @@ msgstr "Событие завершено"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr ""
-
-msgid "Back to all stages and events"
-msgstr "Обратно ко всем этапам и событиям"
 
 msgid "Notes about this event"
 msgstr ""
@@ -1558,10 +1578,18 @@ msgstr " Событий запланировано: {{ scheduledEvents }}"
 msgid "Stages and Events"
 msgstr "Этапы и события"
 
+msgid "View linked event"
+msgstr ""
+
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "View linked event"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
 msgstr ""
 
 msgid "Scheduled"
@@ -1596,6 +1624,12 @@ msgstr "Изменить"
 
 msgid "Value"
 msgstr "Значение"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Image"
+msgstr "Изображение"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Новая связь для объекта {{trackedEntityTypeName}} "
@@ -1659,6 +1693,46 @@ msgstr "Загрузка данных..."
 msgid "an error occurred loading working lists"
 msgstr "произошла ошибка во время загрузки рабочих списков"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Дата регистрации"
 
@@ -1674,14 +1748,137 @@ msgstr "Отслеживать"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Выберите этап программы для фильтрации по {{label}}"
 
-msgid "Active enrollments"
-msgstr "Активные регистрационные записи"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+msgstr ""
 
-msgid "Completed enrollments"
-msgstr "Завершенные регистрационные записи"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+msgstr ""
 
-msgid "Cancelled enrollments"
-msgstr "Отмененные регистрационные записи"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "Не удалось обновить рабочий список"
@@ -1691,6 +1888,16 @@ msgstr "произошла ошибка при загрузке рабочих �
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "произошла ошибка при загрузке списков отслеживаемых объектов"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} выбран"
+msgstr[1] "{{count}} выбрано"
+msgstr[2] "{{count}} выбрано"
+msgstr[3] "{{count}} выбрано"
+
+msgid "Deselect all"
+msgstr "Отменить выбор всего"
 
 msgid "Update view"
 msgstr "Обновить список"

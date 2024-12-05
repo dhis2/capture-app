@@ -28,6 +28,7 @@ const WidgetHeaderPlain = ({
     eventId,
     classes,
 }: Props) => {
+const WidgetHeaderPlain = ({ linkedStage, linkedEvent, orgUnitId, currentPage, classes }: Props) => {
     const { icon } = linkedStage;
     return (
         <>

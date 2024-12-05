@@ -140,6 +140,8 @@ const WidgetProfilePlain = ({
             </div>
         );
     };
+    const handleOnDisable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE), [setTeiModalState]);
+    const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
 
     return (
         <div data-test="profile-widget">
@@ -162,6 +164,7 @@ const WidgetProfilePlain = ({
                                 trackedEntity={trackedEntity}
                                 onDeleteSuccess={onDeleteSuccess}
                                 displayChangelog={displayChangelog}
+                                trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}
                                 programAPI={program}
                             />
@@ -178,7 +181,8 @@ const WidgetProfilePlain = ({
                 <>
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
-                        onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
+                        onDisable={handleOnDisable}
+                        onEnable={handleOnEnable}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
                         orgUnitId={orgUnitId}

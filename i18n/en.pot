@@ -35,6 +35,39 @@ msgstr ""
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
 
+msgid "Enrollment dashboard"
+msgstr "Enrollment dashboard"
+
+msgid "View event"
+msgstr "View event"
+
+msgid "Edit event"
+msgstr "Edit event"
+
+msgid "New event"
+msgstr "New event"
+
+msgid "Active enrollments"
+msgstr "Active enrollments"
+
+msgid "Completed enrollments"
+msgstr "Completed enrollments"
+
+msgid "Cancelled enrollments"
+msgstr "Cancelled enrollments"
+
+msgid "{{trackedEntityName}} list"
+msgstr "{{trackedEntityName}} list"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Working List"
+msgstr "Working List"
+
+msgid "Event list"
+msgstr "Event list"
+
 msgid "More"
 msgstr "More"
 
@@ -80,66 +113,6 @@ msgstr "This value is validating"
 msgid "Async field update failed"
 msgstr "Async field update failed"
 
-msgid "A value is required"
-msgstr "A value is required"
-
-msgid "Please provide a valid number"
-msgstr "Please provide a valid number"
-
-msgid "Please provide a valid integer"
-msgstr "Please provide a valid integer"
-
-msgid "Please provide a positive integer"
-msgstr "Please provide a positive integer"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Please provide zero or a positive integer"
-
-msgid "Please provide a negative integer"
-msgstr "Please provide a negative integer"
-
-msgid "Please provide a valid date"
-msgstr "Please provide a valid date"
-
-msgid "A date in the future is not allowed"
-msgstr "A date in the future is not allowed"
-
-msgid "Please provide a valid date and time"
-msgstr "Please provide a valid date and time"
-
-msgid "Please provide a valid time"
-msgstr "Please provide a valid time"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Please provide an integer between 0 and 100"
-
-msgid "Please provide a valid url"
-msgstr "Please provide a valid url"
-
-msgid "Please provide a valid email address"
-msgstr "Please provide a valid email address"
-
-msgid "Please provide a valid age"
-msgstr "Please provide a valid age"
-
-msgid "Please provide a valid phone number"
-msgstr "Please provide a valid phone number"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Please provide a valid organisation unit"
-
-msgid "Please provide valid coordinates"
-msgstr "Please provide valid coordinates"
-
-msgid "This value already exists"
-msgstr "This value already exists"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"From\" cannot be greater than \"To\""
-
-msgid "Checking..."
-msgstr "Checking..."
-
 msgid "Area"
 msgstr "Area"
 
@@ -151,6 +124,12 @@ msgstr "Enrollment"
 
 msgid "Complete event"
 msgstr "Complete event"
+
+msgid "A value is required"
+msgstr "A value is required"
+
+msgid "Please provide a valid date"
+msgstr "Please provide a valid date"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Basic info"
@@ -164,8 +143,8 @@ msgstr "{{ stageName }} - Status"
 msgid "Please select {{categoryName}}"
 msgstr "Please select {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "A future date is not allowed"
+msgid "A date in the future is not allowed"
+msgstr "A date in the future is not allowed"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
@@ -292,9 +271,6 @@ msgstr "Yes, discard changes"
 
 msgid "No, cancel"
 msgstr "No, cancel"
-
-msgid "New event"
-msgstr "New event"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "You don't have access to create an event in the current selections"
@@ -513,9 +489,6 @@ msgstr "Type to filter options"
 
 msgid "No match found"
 msgstr "No match found"
-
-msgid "Search"
-msgstr "Search"
 
 msgid "Clear"
 msgstr "Clear"
@@ -858,9 +831,6 @@ msgstr "event"
 msgid "You don't have access to edit this event"
 msgstr "You don't have access to edit this event"
 
-msgid "Edit event"
-msgstr "Edit event"
-
 msgid "View changelog"
 msgstr "View changelog"
 
@@ -898,15 +868,6 @@ msgstr "Event could not be loaded"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisation unit could not be loaded"
 
-msgid "Dashboard"
-msgstr "Dashboard"
-
-msgid "Edit Event"
-msgstr "Edit Event"
-
-msgid "View Event"
-msgstr "View Event"
-
 msgid "Selected program"
 msgstr "Selected program"
 
@@ -932,6 +893,9 @@ msgstr "Loading"
 
 msgid "An error occurred while loading the form"
 msgstr "An error occurred while loading the form"
+
+msgid "Back to all stages and events"
+msgstr "Back to all stages and events"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
@@ -1180,6 +1144,9 @@ msgstr "Set coordinates"
 msgid "Coordinates"
 msgstr "Coordinates"
 
+msgid "Please provide valid coordinates"
+msgstr "Please provide valid coordinates"
+
 msgid "Delete polygon"
 msgstr "Delete polygon"
 
@@ -1273,6 +1240,9 @@ msgstr "Warning"
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
 
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
+
 msgid "Delete event"
 msgstr "Delete event"
 
@@ -1290,9 +1260,6 @@ msgstr "Event completed"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr "The event cannot be edited after it has been completed"
-
-msgid "Back to all stages and events"
-msgstr "Back to all stages and events"
 
 msgid "Notes about this event"
 msgstr "Notes about this event"
@@ -1436,6 +1403,12 @@ msgstr "Scheduled date"
 msgid "Report date"
 msgstr "Report date"
 
+msgid "Please enter a date"
+msgstr "Please enter a date"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Please provide a valid organisation unit"
+
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
@@ -1525,6 +1498,19 @@ msgstr "Yes, unlink event"
 msgid "View linked event"
 msgstr "View linked event"
 
+msgid "An error occurred while loading the widget."
+msgstr "An error occurred while loading the widget."
+
+msgid "Linked event"
+msgstr "Linked event"
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
+msgstr ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
+
 msgid "You do not have access to remove the link between these events"
 msgstr "You do not have access to remove the link between these events"
 
@@ -1576,6 +1562,12 @@ msgstr "Change"
 
 msgid "Value"
 msgstr "Value"
+
+msgid "File"
+msgstr "File"
+
+msgid "Image"
+msgstr "Image"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "New {{trackedEntityTypeName}} relationship"
@@ -1638,6 +1630,45 @@ msgstr "Download data..."
 msgid "an error occurred loading working lists"
 msgstr "an error occurred loading working lists"
 
+msgid "You do not have access to complete events"
+msgstr "You do not have access to complete events"
+
+msgid "Complete events"
+msgstr "Complete events"
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr "Are you sure you want to complete all active events in selection?"
+
+msgid "There are no active events to complete in the current selection."
+msgstr "There are no active events to complete in the current selection."
+
+msgid "Error completing events"
+msgstr "Error completing events"
+
+msgid "There was an error completing the events."
+msgstr "There was an error completing the events."
+
+msgid "Details (Advanced)"
+msgstr "Details (Advanced)"
+
+msgid "An unknown error occurred."
+msgstr "An unknown error occurred."
+
+msgid "An error occurred while completing events"
+msgstr "An error occurred while completing events"
+
+msgid "An error occurred while deleting the events"
+msgstr "An error occurred while deleting the events"
+
+msgid "You do not have access to delete events"
+msgstr "You do not have access to delete events"
+
+msgid "Delete events"
+msgstr "Delete events"
+
+msgid "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr "This cannot be undone. Are you sure you want to delete the selected events?"
+
 msgid "Registration Date"
 msgstr "Registration Date"
 
@@ -1653,14 +1684,129 @@ msgstr "Follow up"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
 
-msgid "Active enrollments"
-msgstr "Active enrollments"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+msgstr ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
 
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+msgstr ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
 
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+
+msgid "This action will complete {{count}} active enrollment in your selection."
+msgid_plural "This action will complete {{count}} active enrollment in your selection."
+msgstr[0] "This action will complete {{count}} active enrollment in your selection."
+msgstr[1] "This action will complete {{count}} active enrollments in your selection."
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural "{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] "{{count}} enrollment already marked as completed will not be changed."
+msgstr[1] "{{count}} enrollments already marked as completed will not be changed."
+
+msgid "Mark all events within enrollments as complete"
+msgstr "Mark all events within enrollments as complete"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr "You do not have access to bulk complete enrollments"
+
+msgid "Complete enrollments"
+msgstr "Complete enrollments"
+
+msgid "Error completing enrollments"
+msgstr "Error completing enrollments"
+
+msgid "No active enrollments to complete"
+msgstr "No active enrollments to complete"
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] "Complete {{count}} enrollment"
+msgstr[1] "Complete {{count}} enrollments"
+
+msgid "An error occurred when completing the enrollments"
+msgstr "An error occurred when completing the enrollments"
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr "An unknown error occurred when completing enrollments"
+
+msgid "You do not have access to delete enrollments"
+msgstr "You do not have access to delete enrollments"
+
+msgid "Delete enrollments"
+msgstr "Delete enrollments"
+
+msgid "Delete selected enrollments"
+msgstr "Delete selected enrollments"
+
+msgid "An error occurred while loading the selected enrollments. Please try again."
+msgstr "An error occurred while loading the selected enrollments. Please try again."
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] "Active enrollments ({{count}})"
+msgstr[1] "Active enrollments ({{count}})"
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] "Completed enrollments ({{count}})"
+msgstr[1] "Completed enrollments ({{count}})"
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] "Cancelled enrollments ({{count}})"
+msgstr[1] "Cancelled enrollments ({{count}})"
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] "Delete {{count}} enrollment"
+msgstr[1] "Delete {{count}} enrollments"
+
+msgid "An error occurred when deleting enrollments"
+msgstr "An error occurred when deleting enrollments"
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr "Delete {{ trackedEntityName }} with all enrollments"
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] "Delete {{count}} {{ trackedEntityName }}"
+msgstr[1] "Delete {{count}} {{ trackedEntityName }}"
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+
+msgid "An error occurred while deleting the records"
+msgstr "An error occurred while deleting the records"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"
@@ -1670,6 +1816,14 @@ msgstr "an error occurred loading the working lists"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "an error occurred loading Tracked entity instance lists"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} selected"
+msgstr[1] "{{count}} selected"
+
+msgid "Deselect all"
+msgstr "Deselect all"
 
 msgid "Update view"
 msgstr "Update view"
@@ -1778,6 +1932,60 @@ msgstr "Error editing the event, the changes made were not saved"
 
 msgid "Error updating the Assignee"
 msgstr "Error updating the Assignee"
+
+msgid "Please provide a valid number"
+msgstr "Please provide a valid number"
+
+msgid "Please provide a valid integer"
+msgstr "Please provide a valid integer"
+
+msgid "Please provide a positive integer"
+msgstr "Please provide a positive integer"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Please provide zero or a positive integer"
+
+msgid "Please provide a negative integer"
+msgstr "Please provide a negative integer"
+
+msgid "Please provide a valid date and time"
+msgstr "Please provide a valid date and time"
+
+msgid "Please provide a valid time"
+msgstr "Please provide a valid time"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Please provide an integer between 0 and 100"
+
+msgid "Please provide a valid url"
+msgstr "Please provide a valid url"
+
+msgid "Please provide a valid email address"
+msgstr "Please provide a valid email address"
+
+msgid "Please provide a valid age"
+msgstr "Please provide a valid age"
+
+msgid "Please provide a valid phone number"
+msgstr "Please provide a valid phone number"
+
+msgid "This value already exists"
+msgstr "This value already exists"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"From\" cannot be greater than \"To\""
+
+msgid "Checking..."
+msgstr "Checking..."
+
+msgid "Please provide a valid positive integer"
+msgstr "Please provide a valid positive integer"
+
+msgid "Please enter a valid time"
+msgstr "Please enter a valid time"
+
+msgid "Please enter a time"
+msgstr "Please enter a time"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

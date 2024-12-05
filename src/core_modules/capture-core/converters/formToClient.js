@@ -24,8 +24,8 @@ function convertDateTime(formValue: DateTimeValue): ?string {
     const hours = momentTime.hour();
     const minutes = momentTime.minute();
 
-    const parsedDate = parseDate(editedDate);
-    if (!parsedDate.isValid) return null;
+    const parsedDate = editedDate ? parseDate(editedDate) : null;
+    if (!(parsedDate && parsedDate.isValid)) return null;
     // $FlowFixMe[incompatible-type] automated comment
     const momentDateTime: moment$Moment = parsedDate.momentDate;
     momentDateTime.hour(hours);
