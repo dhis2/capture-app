@@ -1,15 +1,13 @@
-import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Then('the enrollment widget should be loaded', () => {
     cy.contains('The enrollment event data could not be found').should('not.exist');
 });
 
 When('you click edit mode', () => {
-    cy
-        .get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="widget-enrollment-event-edit-button"]')
+    cy.contains('[data-test="dhis2-uicore-button"]', 'Edit event')
         .click();
-    cy.get('[data-test="widget-enrollment-event-edit"]').should('exist');
+    cy.contains('Enrollment: Edit Event').should('exist');
 });
 
 When(/^you fill in the note: (.*)$/, (note) => {

@@ -8,7 +8,6 @@ export const OverflowMenu = ({
     trackedEntityTypeName,
     canWriteData,
     trackedEntity,
-    trackedEntityData,
     onDeleteSuccess,
     displayChangelog,
     teiId,
@@ -22,7 +21,6 @@ export const OverflowMenu = ({
             canWriteData={canWriteData}
             canCascadeDeleteTei={hasAuthority}
             trackedEntity={trackedEntity}
-            trackedEntityData={trackedEntityData}
             onDeleteSuccess={onDeleteSuccess}
             displayChangelog={displayChangelog}
             teiId={teiId}

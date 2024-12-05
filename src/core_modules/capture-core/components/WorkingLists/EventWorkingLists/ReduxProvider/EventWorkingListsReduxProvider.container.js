@@ -38,7 +38,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
     const downloadRequest = useSelector(({ workingLists }) =>
         workingLists[storeId] && workingLists[storeId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
 
-    const onClickListRow = useCallback(({ id }) => {
+    const onSelectListRow = useCallback(({ id }) => {
         window.scrollTo(0, 0);
         dispatch(openViewEventPage(id));
     }, [dispatch]);
@@ -98,7 +98,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
             currentTemplate={currentTemplate}
             templates={templates}
             lastIdDeleted={lastEventIdDeleted}
-            onClickListRow={onClickListRow}
+            onSelectListRow={onSelectListRow}
             onLoadView={injectDownloadRequestToLoadView}
             onUpdateList={injectDownloadRequestToUpdateList}
             onDeleteEvent={onDeleteEvent}

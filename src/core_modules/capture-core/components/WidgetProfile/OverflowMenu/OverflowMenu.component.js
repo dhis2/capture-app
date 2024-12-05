@@ -9,7 +9,6 @@ import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
 
 export const OverflowMenuComponent = ({
     trackedEntity,
-    trackedEntityData,
     trackedEntityTypeName,
     canWriteData,
     canCascadeDeleteTei,
@@ -69,7 +68,6 @@ export const OverflowMenuComponent = ({
                     programAPI={programAPI}
                     isOpen={changelogIsOpen}
                     setIsOpen={setChangelogIsOpen}
-                    trackedEntityData={trackedEntityData}
                 />
             )}
         </>

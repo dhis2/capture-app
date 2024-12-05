@@ -1,8 +1,9 @@
-import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 
 Given('you are on an enrollment page', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
-    cy.get('[data-test="enrollment-overview-page"]');
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
 });
 
 And('you select the Inpatient morbidity program', () => {
@@ -89,7 +90,8 @@ Then(/^you should be redirect to (.*)$/, (expectedUrl) => {
 
 Given('you land on the enrollment page by having typed only the enrollmentId in the url', () => {
     cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
-    cy.get('[data-test="enrollment-overview-page"]');
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
     cy.contains('[data-test="scope-selector"]', 'Carlos Cruz');
     cy.contains('[data-test="scope-selector"]', 'Taninahun (Malen) CHP');
     cy.contains('1 event');
@@ -117,7 +119,8 @@ When('you reset the org unit selection', () => {
 
 Then('you see the enrollment page but there is no org unit id in the url', () => {
     cy.url().should('not.include', 'orgUnitId');
-    cy.get('[data-test="enrollment-overview-page"]');
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
 });
 
 When('you reset the enrollment selection', () => {

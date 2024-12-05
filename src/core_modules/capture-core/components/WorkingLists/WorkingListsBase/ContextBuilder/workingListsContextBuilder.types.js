@@ -12,18 +12,18 @@ import type {
     UnloadingContext,
     UpdateList,
     UpdateTemplate,
-    WorkingListsOutputProps,
-    WorkingListTemplate,
     WorkingListTemplates,
+    WorkingListTemplate,
+    WorkingListsOutputProps,
 } from '../workingListsBase.types';
 import type {
     ChangePage,
     ChangeRowsPerPage,
     ClearFilter,
-    CustomRowMenuContents,
-    DataSource,
-    FiltersData,
     RemoveFilter,
+    DataSource,
+    CustomRowMenuContents,
+    FiltersData,
     SelectRestMenuItem,
     SelectRow,
     SetColumnOrder,
@@ -56,7 +56,7 @@ type ExtractedProps = $ReadOnly<{|
     onDeleteTemplate?: DeleteTemplate,
     onLoadView: LoadView,
     onUpdateFilter: UpdateFilter,
-    onClickListRow: SelectRow,
+    onSelectListRow: SelectRow,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,
@@ -74,7 +74,6 @@ type ExtractedProps = $ReadOnly<{|
     updatingWithDialog: boolean,
     templates?: WorkingListTemplates,
     viewPreloaded?: boolean,
-    bulkActionBarComponent: React$Node,
 |}>;
 
 type OptionalExtractedProps = {|

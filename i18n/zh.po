@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -668,10 +668,8 @@ msgstr "没有有效的注册。"
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "在此计划中为 {{teiDisplayName}} 添加新注册。"
 
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
-msgstr ""
+msgid "No access to program owner."
+msgstr "无法访问项目所有者。"
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "该项目未报名{{teiDisplayName}} 。"
@@ -1058,8 +1056,8 @@ msgstr "没有可跟踪的实体类型"
 msgid "Assigned to"
 msgstr "指派到"
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
+msgid "You don't have access to edit this assignee"
+msgstr "您无权编辑该受让人"
 
 msgid "Edit"
 msgstr "编辑"
@@ -1067,8 +1065,8 @@ msgstr "编辑"
 msgid "No one is assigned to this event"
 msgstr "没有人被分配到的该事件"
 
-msgid "You don't have access to assign a user to this event"
-msgstr ""
+msgid "You don't have access to assign an assignee"
+msgstr "您无权指定受托人"
 
 msgid "Assign"
 msgstr "分配"
@@ -1112,9 +1110,6 @@ msgstr "标记为已取消"
 
 msgid "Mark incomplete"
 msgstr "标记不完整"
-
-msgid "You do not have access to delete this enrollment"
-msgstr "您没有删除此注册登记的权限"
 
 msgid "Delete enrollment"
 msgstr "删除报名"
@@ -1197,10 +1192,10 @@ msgid "Follow-up"
 msgstr "后续"
 
 msgid "Started at{{escape}}"
-msgstr "开始于{{escape}}"
+msgstr ""
 
 msgid "Owned by{{escape}}"
-msgstr "所有者{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "已取消"

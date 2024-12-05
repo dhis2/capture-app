@@ -16,7 +16,9 @@ Then('you can assign a user when scheduling the event', () => {
 });
 
 When(/^the user clicks the "Back to all stages and events" button/, () =>
-    cy.get('[data-test="enrollment-edit-event-back-button"]')
+    cy
+        .get('[data-test="widget-enrollment-event"]')
+        .contains('Back to all stages and events')
         .click(),
 );
 

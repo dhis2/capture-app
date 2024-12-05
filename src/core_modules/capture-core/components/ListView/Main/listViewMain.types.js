@@ -1,6 +1,6 @@
 // @flow
 import type { ListViewContextBuilderPassOnProps } from '../ContextBuilder';
-import type { Columns, CustomMenuContents, CustomRowMenuContents } from '../types';
+import type { CustomRowMenuContents, CustomMenuContents, Columns } from '../types';
 
 type WithFilterPassOnProps = {|
     ...ListViewContextBuilderPassOnProps,
@@ -14,11 +14,7 @@ type ComponentProps = {|
     rowIdKey: string,
     customMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
-    onClickListRow: Function,
-    onRowSelect: Function,
-    onSelectAll: Function,
-    isSelectionInProgress: ?boolean,
-    bulkActionBarComponent: React$Node,
+    onSelectRow: Function,
     ...CssClasses,
 |};
 

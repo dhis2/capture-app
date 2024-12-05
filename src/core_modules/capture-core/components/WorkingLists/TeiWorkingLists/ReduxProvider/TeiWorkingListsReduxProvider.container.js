@@ -62,7 +62,7 @@ export const TeiWorkingListsReduxProvider = ({
         }
     }, [selectedTemplateId, viewPreloaded, currentTemplateId, onSelectTemplate]);
 
-    const onClickListRow = useCallback(({ id }) => {
+    const onSelectListRow = useCallback(({ id }) => {
         const record = records[id];
         const orgUnitIdParameter = orgUnitId || record.orgUnit?.id || record.programOwner;
 
@@ -109,7 +109,7 @@ export const TeiWorkingListsReduxProvider = ({
             currentTemplateId={currentTemplateId}
             viewPreloaded={viewPreloaded}
             templateSharingType={templateSharingType}
-            onClickListRow={onClickListRow}
+            onSelectListRow={onSelectListRow}
             onLoadTemplates={onLoadTemplates}
             program={program}
             programStageId={programStage}

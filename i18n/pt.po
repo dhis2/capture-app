@@ -11,14 +11,13 @@
 # Jason Pickering <jason@dhis2.org>, 2024
 # Helton Dias, 2024
 # Shelsea Chumaio, 2024
-# Laurência Luís, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Laurência Luís, 2024\n"
+"Last-Translator: Shelsea Chumaio, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,13 +170,13 @@ msgid "Complete event"
 msgstr "Evento completo"
 
 msgid "{{ stageName }} - Basic info"
-msgstr "{{ stageName }} - Informações básicas"
+msgstr ""
 
 msgid "{{ stageName }} - Assignee"
-msgstr "{{ stageName }} - Atribuído"
+msgstr ""
 
 msgid "{{ stageName }} - Status"
-msgstr "{{ stageName }} - Estado"
+msgstr ""
 
 msgid "Please select {{categoryName}}"
 msgstr "Por Favor Selecione {{categoryName}}"
@@ -199,10 +198,10 @@ msgid "Metadata error. see log for details"
 msgstr "Erro de metadados. veja o log para detalhes"
 
 msgid "{{ stageName }} - Details"
-msgstr "{{ stageName }} - Detalhes"
+msgstr ""
 
 msgid "{{ stageName }} - {{ sectionName }}"
-msgstr "{{ stageName }} - {{ sectionName }}"
+msgstr ""
 
 msgid "Assigned user"
 msgstr "Utilizador atribuído"
@@ -251,7 +250,7 @@ msgid "Completed"
 msgstr "Concluído"
 
 msgid "Please add or cancel note before saving the event"
-msgstr "Adicionar ou cancelar a nota antes de guardar o evento"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "Gravar e adicionar outro"
@@ -337,26 +336,26 @@ msgid "An error has occurred. See log for details"
 msgstr "Ocorreu um erro. Veja o log para detalhes"
 
 msgid "{{programStageName}} completed"
-msgstr "{{programStageName}} Concluído"
+msgstr ""
 
 msgid ""
 "Would you like to complete the enrollment and all active events as well?"
-msgstr "Gostaria de completar a inscrição e todos os eventos activos?"
+msgstr ""
 
 msgid "{{count}} event in {{programStageName}}"
 msgid_plural "{{count}} event in {{programStageName}}"
-msgstr[0] "{{count}} evento em {{programStageName}}"
-msgstr[1] "{{count}} eventos em {{programStageName}}"
-msgstr[2] "{{count}} Eventos em {{programStageName}}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Yes, complete enrollment and events"
-msgstr "Sim, completar a inscrição e os eventos"
+msgstr ""
 
 msgid "Complete enrollment only"
-msgstr "Completar apenas a inscrição"
+msgstr ""
 
 msgid "Would you like to complete the enrollment?"
-msgstr "Gostaria de completar a inscrição?"
+msgstr ""
 
 msgid "Complete enrollment"
 msgstr "Completar inscrição"
@@ -392,10 +391,10 @@ msgid "validation failed"
 msgstr "falha na validação"
 
 msgid "No feedback for this event yet"
-msgstr "Ainda não há feedback para este evento"
+msgstr ""
 
 msgid "No indicator output for this event yet"
-msgstr "Não existe nenhum resultado do indicador para este evento"
+msgstr ""
 
 msgid "Generate new event"
 msgstr "Gerar novo evento"
@@ -532,7 +531,7 @@ msgid "Select image"
 msgstr "Selecione a imagem"
 
 msgid "Type to filter options"
-msgstr "Tipo de opções de filtros"
+msgstr ""
 
 msgid "No match found"
 msgstr "Nenhuma correspondência encontrada"
@@ -620,16 +619,15 @@ msgstr "Programa não existe"
 
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
-"O programa selecionado é inválido para a unidade organizacional selecionada"
 
 msgid "Add note"
 msgstr "Adicionar uma nota"
 
 msgid "You don't have access to write notes"
-msgstr "Não tem acesso para escrever notas"
+msgstr ""
 
 msgid "Write note"
-msgstr "Escrever nota"
+msgstr ""
 
 msgid "was blanked out and hidden by your last action"
 msgstr "foi apagado e escondido pela sua última ação"
@@ -641,13 +639,13 @@ msgid "Close the notice"
 msgstr "Fechar o aviso"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "O registo com o id \"{{enrollmentId}}\" não existe"
+msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "A instância de entidade rastreada com id \"{{teiId}}\" não existe"
 
 msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "O programa com o id \"{{programId}}\" não existe"
+msgstr ""
 
 msgid ""
 "An error occurred while fetching enrollments. Please enter a valid url."
@@ -703,12 +701,8 @@ msgstr "Não há inscrições ativas."
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "Adicione uma nova inscrição para {{teiDisplayName}} neste programa."
 
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
-msgstr ""
-"Não tem permissões para aceder a este programa, unidade de registo, contacte"
-" o seu administrador para mais informações."
+msgid "No access to program owner."
+msgstr "Sem acesso ao proprietário do programa."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} não está inscrito neste programa."
@@ -749,7 +743,7 @@ msgid "There was an error loading the page"
 msgstr "Ocorreu um erro ao carregar a página"
 
 msgid "Choose an organisation unit to start reporting"
-msgstr "Selecionar uma unidade organizacional para iniciar o preenchimento "
+msgstr ""
 
 msgid "Program stage is invalid"
 msgstr "O estagio do programa é inválida"
@@ -764,7 +758,7 @@ msgid "Refer"
 msgstr "Referir"
 
 msgid "You can't add any more {{ programStageName }} events"
-msgstr "Não é possível adicionar mais eventos {{ programStageName }} "
+msgstr ""
 
 msgid "Cancel without saving"
 msgstr "Cancelar sem gravar"
@@ -785,8 +779,6 @@ msgid ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
 msgstr ""
-"A opção de categoria não é válida para a unidade organizacional selecionada."
-" Por favor, selecione uma combinação válida."
 
 msgid "Please select {{category}}."
 msgstr "Selecione {{category}}."
@@ -804,7 +796,6 @@ msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
 msgstr ""
-"Não tem acesso para criar um {{trackedEntityName}} nas selecções actuais"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Escolha as {{missingCategories}} para começar a relatar"
@@ -828,7 +819,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nova Inscrição no programa{{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityTypeName}}"
-msgstr "Guardar {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Gravar {{trackedEntityName}}"
@@ -894,7 +885,7 @@ msgid "Edit event"
 msgstr "Editar evento"
 
 msgid "View changelog"
-msgstr "Ver registo de alterações"
+msgstr ""
 
 msgid "Event details"
 msgstr "Detalhes do evento"
@@ -934,10 +925,10 @@ msgid "Dashboard"
 msgstr "Painel de Instrumentos"
 
 msgid "Edit Event"
-msgstr "Editar evento"
+msgstr ""
 
 msgid "View Event"
-msgstr "Ver evento"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Programa selecionado"
@@ -956,8 +947,6 @@ msgstr[2] "Preencha pelo menos {{count}} atributos para pesquisar"
 
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
-"Não foi possível recuperar os metadados. Por favor, tente novamente mais "
-"tarde."
 
 msgid "The enrollment event data could not be found"
 msgstr "Os dados do evento de inscrição não foram encontrados"
@@ -966,7 +955,7 @@ msgid "Loading"
 msgstr "Carregando.."
 
 msgid "An error occurred while loading the form"
-msgstr "Ocorreu um erro ao carregar o formulário"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Possíveis duplicatas encontradas"
@@ -987,7 +976,7 @@ msgid "No results found for "
 msgstr "Nenhum resultado encontrado para"
 
 msgid "Choose an organisation unit"
-msgstr "Escolha uma unidade organizacional"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Limpar seleção"
@@ -1000,7 +989,6 @@ msgstr "Procurar um programa"
 
 msgid "Some programs are being filtered by the chosen organisation unit"
 msgstr ""
-"Alguns programas estão a ser filtrados pela unidade organizacional escolhida"
 
 msgid "Show all programs"
 msgstr "Mostrar todos os programas"
@@ -1105,7 +1093,7 @@ msgid "Create saved list"
 msgstr "Criar lista gravadas"
 
 msgid "Create new in another program"
-msgstr "Criar novo noutro programa"
+msgstr ""
 
 msgid "Create new event"
 msgstr "Criar um novo evento"
@@ -1114,13 +1102,13 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Procure por um {{trackedEntityName}} em {{programName}}"
 
 msgid "No tracked entity types available"
-msgstr "Não há tipos de entidades rastreadas disponíveis"
+msgstr ""
 
 msgid "Assigned to"
 msgstr "Atribuído a"
 
-msgid "You don't have access to edit the assigned user"
-msgstr "Não tem acesso para editar o utilizador atribuído"
+msgid "You don't have access to edit this assignee"
+msgstr ""
 
 msgid "Edit"
 msgstr "Editar"
@@ -1128,8 +1116,8 @@ msgstr "Editar"
 msgid "No one is assigned to this event"
 msgstr "Ninguém está atribuído a este evento"
 
-msgid "You don't have access to assign a user to this event"
-msgstr "Não tem acesso para atribuir um utilizador a este evento"
+msgid "You don't have access to assign an assignee"
+msgstr ""
 
 msgid "Assign"
 msgstr "Atribuir"
@@ -1179,7 +1167,7 @@ msgid "Mark incomplete"
 msgstr "Marca incompleta"
 
 msgid "You do not have access to delete this enrollment"
-msgstr "Não tem acesso para apagar este registo"
+msgstr ""
 
 msgid "Delete enrollment"
 msgstr "Excluir inscrição"
@@ -1204,12 +1192,10 @@ msgid "Transfer"
 msgstr "Transferir"
 
 msgid "An error occurred while transferring ownership"
-msgstr "Ocorreu um erro durante a transferência de propriedade"
+msgstr ""
 
 msgid "Existing dates for auto-generated events will not be updated."
 msgstr ""
-"As datas existentes para eventos gerados automaticamente não serão "
-"actualizadas."
 
 msgid "Latitude"
 msgstr "Latitude"
@@ -1218,7 +1204,7 @@ msgid "Longitude"
 msgstr "Longitude"
 
 msgid "Set coordinates"
-msgstr "Definir coordenadas"
+msgstr ""
 
 msgid "Coordinates"
 msgstr "Coordenadas"
@@ -1227,10 +1213,10 @@ msgid "Delete polygon"
 msgstr "Excluir polígono"
 
 msgid "Close without saving"
-msgstr "Fechar sem guardar"
+msgstr ""
 
 msgid "Finish drawing before saving"
-msgstr "Terminar o desenho antes de o guardar"
+msgstr ""
 
 msgid "Set area"
 msgstr "Definir área"
@@ -1239,25 +1225,19 @@ msgid ""
 "Transferring enrollment ownership from {{ownerOrgUnit}} to "
 "{{newOrgUnit}}{{escape}}"
 msgstr ""
-"Transferência da propriedade do registo de {{ownerOrgUnit}} para "
-"{{newOrgUnit}}{{escape}}"
 
 msgid ""
 "You will lose access to the enrollment when transferring ownership to "
 "{{organisationUnit}}."
 msgstr ""
-"O utilizador perderá o acesso ao registo quando transferir a propriedade "
-"para {{organisationUnit}}."
 
 msgid "Transfer Ownership"
-msgstr "Transferir a propriedade"
+msgstr ""
 
 msgid ""
 "Choose the organisation unit to which enrollment ownership should be "
 "transferred."
 msgstr ""
-"Selecionar a unidade organizacional para a qual a propriedade do registo "
-"deve ser transferida."
 
 msgid "Enrollment date"
 msgstr "Data de inscrição"
@@ -1274,22 +1254,22 @@ msgid "Follow-up"
 msgstr "Acompanhamento"
 
 msgid "Started at{{escape}}"
-msgstr "Iniciado em{{escape}}"
+msgstr ""
 
 msgid "Owned by{{escape}}"
-msgstr "Propriedade de{{escape}}"
+msgstr ""
 
 msgid "Cancelled"
 msgstr "Cancelado"
 
 msgid "Add coordinates"
-msgstr "Adicionar coordenadas"
+msgstr ""
 
 msgid "Add area"
-msgstr "Adicionar área"
+msgstr ""
 
 msgid "Please add or cancel the note before saving the event"
-msgstr "Adicione ou cancele a nota antes de guardar o evento"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1303,13 +1283,13 @@ msgid "program or stage is invalid"
 msgstr "programa ou estágio é inválido"
 
 msgid "Notes about this enrollment"
-msgstr "Notas sobre este registo"
+msgstr ""
 
 msgid "Write a note about this enrollment"
-msgstr "Escrever uma nota sobre este registo"
+msgstr ""
 
 msgid "This enrollment doesn't have any notes"
-msgstr "Este registo não tem notas"
+msgstr ""
 
 msgid "Error"
 msgstr "Erro"
@@ -1336,19 +1316,19 @@ msgid "Event completed"
 msgstr "Evento concluído"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr "O evento não pode ser editado depois de ter sido concluído"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr "Voltar para todos os palcos e eventos"
 
 msgid "Notes about this event"
-msgstr "Notas sobre este evento"
+msgstr ""
 
 msgid "Write a note about this event"
-msgstr "Escrever uma nota sobre este evento"
+msgstr ""
 
 msgid "This event doesn't have any notes"
-msgstr "Este evento não tem quaisquer notas"
+msgstr ""
 
 msgid "Schedule date info"
 msgstr "Informação da data da programação"
@@ -1394,10 +1374,10 @@ msgid "Schedule date / Due date"
 msgstr "Data de programação / Data de vencimento"
 
 msgid "Event notes"
-msgstr "Notas do evento"
+msgstr ""
 
 msgid "Write a note about this scheduled event"
-msgstr "Escrever uma nota sobre este evento programado"
+msgstr ""
 
 msgid "Save note"
 msgstr "Gravar notas"
@@ -1438,25 +1418,22 @@ msgid "Fix errors in the form to continue."
 msgstr "Corrija os erros no formulário para continuar."
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
-msgstr "Não tem acesso para apagar{{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "Delete {{trackedEntityTypeName}}"
-msgstr "Apagar{{trackedEntityTypeName}}"
+msgstr ""
 
 msgid ""
 "Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
 "permanently remove the {{trackedEntityTypeName}} and all its associated "
 "enrollments and events in all programs."
 msgstr ""
-"Tem a certeza de que pretende apagar  {{trackedEntityTypeName}}? Isto irá "
-"remover permanentemente o {{trackedEntityTypeName}} e todos os registos e "
-"eventos associados em todos os programas."
 
 msgid "There was a problem deleting the {{trackedEntityTypeName}}"
-msgstr "Houve um problema ao eliminar o ficheiro {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "Yes, delete {{trackedEntityTypeName}}"
-msgstr "Sim, apagar {{trackedEntityTypeName}}"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -1464,31 +1441,31 @@ msgstr ""
 "tarde"
 
 msgid "{{trackedEntityTypeName}} profile"
-msgstr "{{trackedEntityTypeName}} perfil"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "instância de entidade rastreada"
 
 msgid "Link to an existing {{linkableStageLabel}}"
-msgstr "Ligar a um existente {{linkableStageLabel}}"
+msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
-msgstr "Escolha um {{linkableStageLabel}}"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }} Não é repetivo"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
-msgstr "{{ linkableStageLabel }} Não tem eventos associados"
+msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"
-msgstr "Relacionamentos ambíguos, contacte o administrador do sistema"
+msgstr ""
 
 msgid "Enter details now"
-msgstr "Introduzir dados agora"
+msgstr ""
 
 msgid "Link to an existing"
-msgstr "Ligar a um existente "
+msgstr ""
 
 msgid "Scheduled date"
 msgstr "Data agendada"
@@ -1497,10 +1474,10 @@ msgid "Report date"
 msgstr "Data do relatório"
 
 msgid "Please select a valid event"
-msgstr "Selecione um evento válido"
+msgstr ""
 
 msgid "You do not have access to create events in this stage"
-msgstr "Não tem acesso para criar eventos neste estágio"
+msgstr ""
 
 msgid "This stage can only have one event"
 msgstr "Esta etapa só pode ter um evento"
@@ -1509,20 +1486,18 @@ msgid "New {{ eventName }} event"
 msgstr "Novo evento de {{ eventName }}"
 
 msgid "An error occurred while deleting the event"
-msgstr "Ocorreu um erro ao apagar o evento"
+msgstr ""
 
 msgid ""
 "Deleting an event is permanent and cannot be undone. Are you sure you want "
 "to delete this event?"
 msgstr ""
-"A eliminação de um evento é permanente e não pode ser anulada. Tem a certeza"
-" de que pretende apagar este evento?"
 
 msgid "An error occurred when updating event status"
-msgstr "Ocorreu um erro ao atualizar o estado do evento"
+msgstr ""
 
 msgid "Unskip"
-msgstr "Descompactar"
+msgstr ""
 
 msgid "Skip"
 msgstr "Saltar"
@@ -1544,9 +1519,9 @@ msgstr ""
 
 msgid "{{ count }} event"
 msgid_plural "{{ count }} event"
-msgstr[0] "{{ count }} evento"
-msgstr[1] "{{count}} eventos"
-msgstr[2] "{{count}} Eventos"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} em atraso"
@@ -1558,10 +1533,10 @@ msgid "Stages and Events"
 msgstr "Fases e Eventos"
 
 msgid "An error occurred while loading the widget."
-msgstr "Ocorreu um erro ao carregar o widget."
+msgstr ""
 
 msgid "View linked event"
-msgstr "Ver evento associado"
+msgstr ""
 
 msgid "Scheduled"
 msgstr "Agendado"
@@ -1570,7 +1545,7 @@ msgid "Changelog"
 msgstr "Registo de mudanças"
 
 msgid "No changes to display"
-msgstr "Sem alterações no ecrã"
+msgstr ""
 
 msgid "Updated"
 msgstr "Actualizado"
@@ -1591,37 +1566,35 @@ msgid "Data item"
 msgstr "Item de dados"
 
 msgid "Change"
-msgstr "Alterar"
+msgstr ""
 
 msgid "Value"
 msgstr "Valor"
 
 msgid "New {{trackedEntityTypeName}} relationship"
-msgstr "Relacionamento {{trackedEntityTypeName}} "
+msgstr ""
 
 msgid "Missing implementation step"
-msgstr "Falta etapa de implementação"
+msgstr ""
 
 msgid "Go back without saving relationship"
-msgstr "Voltar atrás sem guardar o relacionamento"
+msgstr ""
 
 msgid "New Relationship"
-msgstr "Novo relacionamento"
+msgstr ""
 
 msgid "Link to an existing {{tetName}}"
-msgstr "Associar a um existente {{tetName}}"
+msgstr ""
 
 msgid "An error occurred while adding the relationship"
-msgstr "Ocorreu um erro ao adicionar o relacionamento"
+msgstr ""
 
 msgid ""
 "Something went wrong while loading relationships. Please try again later."
 msgstr ""
-"Algo correu mal ao carregar os relacionamento. Por favor, tente novamente "
-"mais tarde."
 
 msgid "{{trackedEntityTypeName}} relationships"
-msgstr "{{trackedEntityTypeName}} Relacionamentos"
+msgstr ""
 
 msgid "Delete relationship"
 msgstr "Apagar relacionamento"
@@ -1630,24 +1603,21 @@ msgid ""
 "Deleting the relationship is permanent and cannot be undone. Are you sure "
 "you want to delete this relationship?"
 msgstr ""
-"A eliminação da relação é permanente e não pode ser anulada. Tem a certeza "
-"de que pretende eliminar este relacionamento?"
 
 msgid "Yes, delete relationship"
-msgstr "Sim, apagar relacionamento"
+msgstr ""
 
 msgid "An error occurred while deleting the relationship."
-msgstr "Ocorreu um erro ao apagar o relacionamento."
+msgstr ""
 
 msgid "To open this relationship, please wait until saving is complete"
 msgstr ""
-"Para abrir este relacionamento, aguarde até que a gravação esteja concluída"
 
 msgid "Type"
 msgstr "Tipo"
 
 msgid "Created date"
-msgstr "Data de criação"
+msgstr ""
 
 msgid "Program stage name"
 msgstr "Nome do estágio do programa"
@@ -1801,7 +1771,7 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr "Erro ao editar o evento, as alterações feitas não foram gravadas"
 
 msgid "Error updating the Assignee"
-msgstr "Erro ao atualizar o destinatário"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Definir coordenada"

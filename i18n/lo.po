@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Saysamone Sibounma, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -682,10 +682,8 @@ msgstr "ບໍ່ມີການລົງທະບຽນທີ່ເຄື່ອ
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "ເພີ່ມການລົງທະບຽນໃໝ່ສຳລັບ {{teiDisplayName}} ໃນໂປແກຼມນີ້."
 
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
-msgstr ""
+msgid "No access to program owner."
+msgstr "ບໍ່ສາມາດເຂົ້າເຖິງເຈົ້າຂອງໂປແກຼມ."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} ບໍ່ໄດ້ລົງທະບຽນຢູ່ໃນໂປແກຼມນີ້."
@@ -1079,8 +1077,8 @@ msgstr "ບໍ່ມີປະເພດບາຍບຸກຄົນທີ່ສາ
 msgid "Assigned to"
 msgstr "ມອບໝາຍໃຫ້"
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
+msgid "You don't have access to edit this assignee"
+msgstr "ທ່ານບໍ່ມີສິດໃນການແກ້ໄຂຂໍ້ມູນຜູ້ມອບໝາຍ"
 
 msgid "Edit"
 msgstr "ແກ້ໄຂ"
@@ -1088,8 +1086,8 @@ msgstr "ແກ້ໄຂ"
 msgid "No one is assigned to this event"
 msgstr "ບໍ່ມີຜູ້ຖືກມອບໝາຍໃຫ້ກັບເຫດການນີ້"
 
-msgid "You don't have access to assign a user to this event"
-msgstr ""
+msgid "You don't have access to assign an assignee"
+msgstr "ທ່ານບໍ່ມີສິດໃນການມອບໝາຍ"
 
 msgid "Assign"
 msgstr "ມອບໝາຍ"
@@ -1135,9 +1133,6 @@ msgstr "ໝາຍວ່າຖືກຍົກເລີກ"
 
 msgid "Mark incomplete"
 msgstr "ໝາຍວ່າບໍ່ຄົບຖ້ວນ"
-
-msgid "You do not have access to delete this enrollment"
-msgstr ""
 
 msgid "Delete enrollment"
 msgstr "ລົບການລົງທະບຽນ"

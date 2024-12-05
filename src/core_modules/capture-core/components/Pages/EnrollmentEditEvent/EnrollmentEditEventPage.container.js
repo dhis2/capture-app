@@ -1,18 +1,18 @@
 // @flow
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import {
+    useCommonEnrollmentDomainData,
+    showEnrollmentError,
+    updateEnrollmentEvent,
+    updateEnrollmentAndEvents,
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
     setExternalEnrollmentStatus,
-    showEnrollmentError,
-    updateEnrollmentAndEvents,
-    updateEnrollmentEvent,
-    useCommonEnrollmentDomainData,
 } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
@@ -26,7 +26,7 @@ import { changeEventFromUrl } from '../ViewEvent/ViewEventComponent/viewEvent.ac
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { convertDateWithTimeForView, convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { useAssignedUserSaveContext, useAssignee, useEvent } from './hooks';
+import { useEvent, useAssignee, useAssignedUserSaveContext } from './hooks';
 import type { Props } from './EnrollmentEditEventPage.types';
 import { LoadingMaskForPage } from '../../LoadingMasks';
 import { cleanUpDataEntry } from '../../DataEntry';
@@ -39,13 +39,11 @@ import {
 import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { getProgramEventAccess } from '../../../metaData';
-import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
+import { setAssignee, rollbackAssignee } from './EnrollmentEditEventPage.actions';
 import { convertClientToServer } from '../../../converters';
 import { CHANGELOG_ENTITY_TYPES } from '../../WidgetsChangelog';
 import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
 import { statusTypes } from '../../../enrollment';
-import { cancelEditEventDataEntry } from '../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
-import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -141,10 +139,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
         history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }, [history, orgUnitId, programId]);
 
-    const onBackToMainPage = useCallback(() => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
-    }, [history, orgUnitId, programId]);
-
     const onDelete = () => {
         history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
@@ -198,11 +192,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
-    const onBackToViewEvent = () => {
-        dispatch(cancelEditEventDataEntry());
-        dispatch(setCurrentDataEntry(dataEntryIds.ENROLLMENT_EVENT, pageKeys.VIEW_EVENT));
-    };
-
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     // $FlowFixMe
     const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
@@ -253,9 +242,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
             pageStatus={pageStatus}
             programStage={programStage}
             onGoBack={onGoBack}
-            onBackToMainPage={onBackToMainPage}
-            onBackToDashboard={onGoBack}
-            onBackToViewEvent={onBackToViewEvent}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             teiId={teiId}

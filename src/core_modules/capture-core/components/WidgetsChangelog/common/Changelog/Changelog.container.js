@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal } from '@dhis2/ui';
-import { useChangelogData, useListDataValues } from '../hooks';
+import { useChangelogData } from '../hooks';
 import { ChangelogComponent } from './Changelog.component';
 import { CHANGELOG_ENTITY_TYPES } from './index';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
@@ -9,17 +9,15 @@ import type { ItemDefinitions } from './Changelog.types';
 
 type Props = {
     entityId: string,
-    entityData: Object,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
     isOpen: boolean,
     close: () => void,
     dataItemDefinitions: ItemDefinitions,
     programId?: string,
-};
+}
 
 export const Changelog = ({
     entityId,
-    entityData,
     entityType,
     programId,
     isOpen,
@@ -27,11 +25,9 @@ export const Changelog = ({
     dataItemDefinitions,
 }: Props) => {
     const {
-        rawRecords,
+        records,
         pager,
-        isLoading: isChangelogLoading,
-        page,
-        pageSize,
+        isLoading,
         setPage,
         setPageSize,
         sortDirection,
@@ -40,24 +36,10 @@ export const Changelog = ({
         entityId,
         entityType,
         programId,
-    });
-
-    const {
-        processedRecords,
-        isLoading: isProcessingLoading,
-    } = useListDataValues({
-        rawRecords,
         dataItemDefinitions,
-        entityId,
-        entityData,
-        entityType,
-        programId,
-        sortDirection,
-        page,
-        pageSize,
     });
 
-    if (isChangelogLoading || isProcessingLoading) {
+    if (isLoading) {
         return (
             <Modal onClose={close}>
                 <LoadingMaskElementCenter />
@@ -69,7 +51,7 @@ export const Changelog = ({
         <ChangelogComponent
             isOpen={isOpen}
             close={close}
-            records={processedRecords}
+            records={records}
             pager={pager}
             setPage={setPage}
             setPageSize={setPageSize}

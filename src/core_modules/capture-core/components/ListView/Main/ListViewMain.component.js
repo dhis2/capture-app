@@ -39,20 +39,7 @@ const getStyles = (theme: Theme) => ({
 
 class ListViewMainPlain extends React.PureComponent<Props> {
     renderTopBar = () => {
-        const {
-            classes,
-            filters,
-            columns,
-            customMenuContents,
-            onSetColumnOrder,
-            isSelectionInProgress,
-            bulkActionBarComponent,
-        } = this.props;
-
-        if (isSelectionInProgress) {
-            return bulkActionBarComponent;
-        }
-
+        const { classes, filters, columns, customMenuContents, onSetColumnOrder } = this.props;
         return (
             <div
                 className={classes.topBarContainer}
@@ -62,7 +49,9 @@ class ListViewMainPlain extends React.PureComponent<Props> {
                 >
                     {filters}
                 </div>
-                <div className={classes.topBarButtonContainer}>
+                <div
+                    className={classes.topBarButtonContainer}
+                >
                     <ColumnSelector
                         onSave={onSetColumnOrder}
                         columns={columns}
@@ -76,14 +65,12 @@ class ListViewMainPlain extends React.PureComponent<Props> {
     }
 
     renderPager = () => {
-        const { classes, isSelectionInProgress } = this.props;
+        const classes = this.props.classes;
         return (
             <div
                 className={classes.paginationContainer}
             >
-                <ListPagination
-                    disabled={isSelectionInProgress}
-                />
+                <ListPagination />
             </div>
         );
     }
@@ -93,11 +80,8 @@ class ListViewMainPlain extends React.PureComponent<Props> {
             classes,
             filters,
             updatingWithDialog,
-            onClickListRow,
-            onRowSelect,
-            onSelectAll,
+            onSelectRow,
             customRowMenuContents,
-            isSelectionInProgress,
             ...passOnProps
         } = this.props;
 
@@ -108,12 +92,8 @@ class ListViewMainPlain extends React.PureComponent<Props> {
         return (
             <ListComponent
                 {...passOnProps}
-                showSelectCheckBox
-                isSelectionInProgress={isSelectionInProgress}
                 customRowMenuContents={customRowMenuContents}
-                onRowClick={onClickListRow}  // TODO: Fix row click naming for the online and offline list
-                onRowSelect={onRowSelect}
-                onSelectAll={onSelectAll}
+                onRowClick={onSelectRow}  // TODO: Fix row click naming for the online and offline list
             />
         );
     }

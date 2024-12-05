@@ -7,6 +7,7 @@
 # Prabhjot Singh, 2023
 # Christian Atavillos, 2023
 # Alison Andrade <aandrade@ippfwhr.org>, 2024
+# Philip Larsen Donnelly, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Janeth Cruz, 2024
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
@@ -14,14 +15,13 @@
 # Marta Vila <marta@dhis2.org>, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # Manuel Silva <manuel@dhis2.org>, 2024
-# Philip Larsen Donnelly, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Last-Translator: Manuel Silva <manuel@dhis2.org>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -712,10 +712,8 @@ msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 "Agregue una nueva inscripción para {{teiDisplayName}} en este programa."
 
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
-msgstr ""
+msgid "No access to program owner."
+msgstr "Sin acceso al propietario del programa."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} no está inscrito en este programa."
@@ -1128,8 +1126,8 @@ msgstr "No hay tipos de entidades rastreadas disponibles"
 msgid "Assigned to"
 msgstr "Asignado a"
 
-msgid "You don't have access to edit the assigned user"
-msgstr ""
+msgid "You don't have access to edit this assignee"
+msgstr "No tienes acceso para editar este asignado."
 
 msgid "Edit"
 msgstr "Editar"
@@ -1137,8 +1135,8 @@ msgstr "Editar"
 msgid "No one is assigned to this event"
 msgstr "Nadie está asignado a este evento"
 
-msgid "You don't have access to assign a user to this event"
-msgstr ""
+msgid "You don't have access to assign an assignee"
+msgstr "No tienes acceso para asignar un asignado."
 
 msgid "Assign"
 msgstr "Asignar"
@@ -1186,9 +1184,6 @@ msgstr "Marca como cancelado"
 
 msgid "Mark incomplete"
 msgstr "Marca como incompleto"
-
-msgid "You do not have access to delete this enrollment"
-msgstr ""
 
 msgid "Delete enrollment"
 msgstr "Borrar inscripción"
@@ -1607,7 +1602,7 @@ msgid "Change"
 msgstr "Cambio"
 
 msgid "Value"
-msgstr "Valor"
+msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Nueva relación de {{trackedEntityTypeName}}"

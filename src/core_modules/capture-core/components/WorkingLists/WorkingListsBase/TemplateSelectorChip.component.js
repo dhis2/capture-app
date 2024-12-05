@@ -15,7 +15,6 @@ type Props = {
     currentTemplateId: string,
     onSelectTemplate: Function,
     maxCharacters?: number,
-    disabled?: boolean,
 };
 
 export const TemplateSelectorChip = (props: Props) => {
@@ -23,18 +22,14 @@ export const TemplateSelectorChip = (props: Props) => {
         template,
         currentTemplateId,
         onSelectTemplate,
-        disabled,
         maxCharacters = 30,
         ...passOnProps
     } = props;
     const { name, id } = template;
 
     const selectTemplateHandler = React.useCallback(() => {
-        if (!disabled) {
-            onSelectTemplate(template);
-        }
+        onSelectTemplate(template);
     }, [
-        disabled,
         onSelectTemplate,
         template,
     ]);
@@ -54,14 +49,12 @@ export const TemplateSelectorChip = (props: Props) => {
                 marginRight={0}
                 dataTest="workinglist-template-selector-chip"
                 selected={id === currentTemplateId}
-                disabled={disabled}
             >
                 <TemplateSelectorChipContent
                     {...passOnProps}
                     text={name}
                     maxCharacters={maxCharacters}
                     isSelectedTemplate={id === currentTemplateId}
-                    disabled={disabled}
                 />
             </Chip>
         </TooltipForChip>

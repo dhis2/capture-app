@@ -66,7 +66,7 @@ export type TeiWorkingListsReduxOutputProps = {|
     onClearFilters: ClearFilters,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
-    onClickListRow: SelectRow,
+    onSelectListRow: SelectRow,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,

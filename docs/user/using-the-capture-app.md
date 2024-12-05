@@ -560,17 +560,6 @@ You can set up your own views and save them for later use. The views can also be
 
     ![](resources/images/view_delete.png)
 
-
-## Event bulk actions
-
-You can perform bulk actions on events in the event list. 
-
-1. Select the events you want to perform the action on by clicking the checkbox to the left of the event.
-
-2. You can choose between quickly completing the selected events or deleting them.
-
-![](resources/images/event-bulk-actions-selected-rows.png)
-
 ## User assignment in events programs { #capture_user_assignment } 
 
 Events can be assigned to users. This feature must be enabled per program.
@@ -806,37 +795,6 @@ You will find the predefined list views above the filters for the list. Click to
     ![download tracked entities list](resources/images/download_tracked_entities_list.png)
 > **Note**
 > You can download the tracked entities list in JSON or CSV formats.
-
-
-## Tracked entity bulk actions
-
-You can perform bulk actions on tracked entities and their enrollments in the tracked entity list.
-
-![](resources/images/tracked-entity-bulk-actions-selected-rows.png)
-
-### Completing active enrollments
-
-1. Select the tracked entities you want to perform the action on by clicking the checkbox to the left of the tracked entity.
-
-2. Click the **Complete enrollments** button.
-    1. You can also choose if you want to complete all active events within the selected enrollments.
-
-3. Confirm the action in the dialog that appears.
-
-![](resources/images/tracked-entity-bulk-actions-complete-enrollments.png)
-
-### Deleting enrollments
-
-1. Select the tracked entities you want to perform the action on by clicking the checkbox to the left of the tracked entity.
-
-2. Click the **Delete enrollments** button.
-
-3. In the dialog that appears, select what enrollment statuses you want to delete and confirm the action.
-   1. You can choose any combination of enrollment statuses to delete. 
-
-4. Confirm the action in the dialog that appears.
-
-![](resources/images/tracked-entity-bulk-actions-delete-enrollments.png)
 
 ## Tracker program stage working list
 

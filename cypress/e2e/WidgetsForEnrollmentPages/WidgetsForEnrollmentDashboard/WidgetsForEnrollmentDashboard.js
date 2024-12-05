@@ -51,7 +51,9 @@ Then(/^the scope selector list contains the text (.*)$/, (name) => {
 });
 
 When(/^the user clicks the "Back to all stages and events" button/, () =>
-    cy.get('[data-test="enrollment-edit-event-back-button"]')
+    cy
+        .get('[data-test="widget-enrollment-event"]')
+        .contains('Back to all stages and events')
         .click(),
 );
 

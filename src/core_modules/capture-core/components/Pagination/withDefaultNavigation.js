@@ -54,7 +54,6 @@ type Props = {
     nextPageButtonDisabled: boolean,
     currentPage: number,
     onChangePage: (pageNumber: number) => void,
-    disabled?: boolean,
     classes: {
         root: string,
     },
@@ -75,7 +74,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         };
 
         renderNavigationElement() {
-            const { currentPage, disabled, classes, theme, nextPageButtonDisabled } = this.props;
+            const { currentPage, classes, theme, nextPageButtonDisabled } = this.props;
 
             return (
                 <div
@@ -84,7 +83,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     <IconButton
                         dataTest={'search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
-                        disabled={disabled || currentPage <= 1}
+                        disabled={currentPage <= 1}
                         aria-label="First Page"
                     >
                         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
@@ -92,7 +91,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     <IconButton
                         dataTest={'search-pagination-previous-page'}
                         onClick={this.handleBackButtonClick}
-                        disabled={disabled || currentPage <= 1}
+                        disabled={currentPage <= 1}
                         aria-label="Previous Page"
                     >
                         {theme.direction === 'rtl' ? <IconChevronRight24 /> : <IconChevronLeft24 />}
@@ -100,7 +99,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     <IconButton
                         dataTest={'search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
-                        disabled={disabled || nextPageButtonDisabled}
+                        disabled={nextPageButtonDisabled}
                         aria-label="Next Page"
                     >
                         {theme.direction === 'rtl' ? <IconChevronLeft24 /> : <IconChevronRight24 />}

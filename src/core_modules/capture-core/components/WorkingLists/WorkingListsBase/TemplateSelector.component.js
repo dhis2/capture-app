@@ -54,7 +54,6 @@ type Props = {
     currentTemplateId: string,
     currentListIsModified: boolean,
     onSelectTemplate: Function,
-    selectionInProgress: boolean,
     classes: Object,
 };
 
@@ -64,7 +63,6 @@ const TemplateSelectorPlain = (props: Props) => {
         currentTemplateId,
         currentListIsModified,
         onSelectTemplate,
-        selectionInProgress,
         classes,
     } = props;
 
@@ -113,7 +111,6 @@ const TemplateSelectorPlain = (props: Props) => {
                     currentTemplateId={currentTemplateId}
                     onSelectTemplate={onSelectTemplate}
                     currentListIsModified={currentListIsModified}
-                    disabled={selectionInProgress}
                 />
             </div>
         );

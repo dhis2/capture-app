@@ -1,16 +1,18 @@
 // @flow
-import React, { type ComponentType, useCallback, useContext } from 'react';
+import React, { useContext, useCallback, type ComponentType } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ListViewConfig } from '../ListViewConfig';
 import { TemplateSelector } from '../TemplateSelector.component';
 import { ManagerContext } from '../workingListsBase.context';
 import { withBorder } from '../borderHOC';
-import type { WorkingListTemplate } from '../workingListsBase.types';
+import type {
+    WorkingListTemplate,
+} from '../workingListsBase.types';
 import type { Props } from './templatesManager.types';
 
 const TemplatesManagerPlain = (props: Props) => {
-    const { templates, selectionInProgress, ...passOnProps } = props;
+    const { templates, ...passOnProps } = props;
     const {
         currentTemplate,
         onSelectTemplate,
@@ -40,7 +42,6 @@ const TemplatesManagerPlain = (props: Props) => {
     return (
         <ListViewConfig
             {...passOnProps}
-            selectionInProgress={selectionInProgress}
             currentTemplate={currentTemplate}
         >
             {
@@ -50,7 +51,6 @@ const TemplatesManagerPlain = (props: Props) => {
                         currentTemplateId={currentTemplate.id}
                         currentListIsModified={currentListIsModified}
                         onSelectTemplate={handleSelectTemplate}
-                        selectionInProgress={selectionInProgress}
                     />
                 )
             }

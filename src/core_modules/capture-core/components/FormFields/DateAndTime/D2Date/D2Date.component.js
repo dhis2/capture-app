@@ -1,86 +1,207 @@
 // @flow
 import * as React from 'react';
-import { CalendarInput } from '@dhis2/ui';
-import { systemSettingsStore } from '../../../../../capture-core/metaDataMemoryStores';
-import { type DateValue } from '../../../FiltersForTypes/Date/types/date.types';
+import { withStyles } from '@material-ui/core/styles';
+import { lowerCaseFirstLetter } from 'capture-core-utils/string/lowerCaseFirstLetter';
+import { D2TextField } from '../../Generic/D2TextField.component';
+import { D2DatePopup } from './D2DatePopup.component';
+import { D2DateCalendar } from './D2DateCalendar.component';
 
 type Props = {
-    label?: ?string,
+    label: string,
     value: ?string,
-    calendar?: string,
+    width: number,
     calendarWidth?: ?number,
+    calendarHeight?: ?number,
     inputWidth?: ?number,
-    onBlur: (value: DateValue) => void,
+    onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-    classes?: Object,
-    disabled?: boolean,
+    classes: Object,
+    textFieldRef?: (instance: D2TextField) => void,
 };
 
 type State = {
-    date: ?string,
+    popoverOpen: boolean,
 };
 
-type Validation = {|
-    validationCode: string,
-    validationText: string,
-    error: boolean,
-    valid: boolean,
-|};
+const styles = () => ({
+    textField: {
+        width: '100%',
+    },
+});
 
-export class D2Date extends React.Component<Props, State> {
-    handleDateSelected: (value: {calendarDateString: string}) => void;
+class D2DatePlain extends React.Component<Props, State> {
+    static splitPassOnProps(passOnProps: ?Object) {
+        const splittedProps = {
+            input: {},
+            popup: {},
+            calendar: {},
+        };
+
+        if (!passOnProps) {
+            return splittedProps;
+        }
+
+        return Object
+            .keys(passOnProps)
+            .reduce((accSplittedProps, propKey) => {
+                let propContainer;
+                if (propKey.startsWith(D2Date.propContainers.CALENDAR)) {
+                    propContainer = D2Date.propContainers.CALENDAR;
+                } else if (propKey.startsWith(D2Date.propContainers.POPUP)) {
+                    propContainer = D2Date.propContainers.POPUP;
+                } else {
+                    propContainer = D2Date.propContainers.INPUT;
+                }
+
+                const outputKey = lowerCaseFirstLetter(propKey.replace(propContainer, ''));
+
+                accSplittedProps[propContainer][outputKey] = passOnProps[propKey];
+                return accSplittedProps;
+            }, splittedProps);
+    }
+
+    containerInstance: ?HTMLElement;
+    handleTextFieldFocus: () => void;
+    handleDateSelected: (value: string) => void;
+    handleTextFieldBlur: (value: string) => void;
+    hidePopover: () => void;
+    handleDocumentClick: (event: SyntheticEvent<any>) => void;
 
     constructor(props: Props) {
         super(props);
+
+        this.state = {
+            popoverOpen: false,
+        };
+
+        this.handleTextFieldFocus = this.handleTextFieldFocus.bind(this);
         this.handleDateSelected = this.handleDateSelected.bind(this);
+        this.handleTextFieldBlur = this.handleTextFieldBlur.bind(this);
+        this.hidePopover = this.hidePopover.bind(this);
+        this.handleDocumentClick = this.handleDocumentClick.bind(this);
     }
 
-    handleDateSelected(value: {calendarDateString: string, validation: Validation}) {
-        const { calendarDateString: selectedDate, validation } = value || {};
-        if (selectedDate !== undefined) {
-            this.props.onBlur({
-                value: selectedDate,
-                error: validation?.validationText,
-                isValid: validation?.valid,
-            });
-        }
+    componentWillUnmount() {
+        // $FlowFixMe[incompatible-call] automated comment
+        document.removeEventListener('click', this.handleDocumentClick);
+    }
+
+    static propContainers = {
+        CALENDAR: 'calendar',
+        POPUP: 'popup',
+        INPUT: 'input',
+    };
+
+    handleTextFieldFocus() {
+        // $FlowFixMe[incompatible-call] automated comment
+        document.removeEventListener('click', this.handleDocumentClick);
+
+        this.setState({
+            popoverOpen: true,
+        });
+
+        this.props.onFocus && this.props.onFocus();
+    }
+
+    handleDateSelected(value: string) {
+        this.props.onBlur(value);
+        this.hidePopover();
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
+
+        // $FlowFixMe[incompatible-call] automated comment
+        document.removeEventListener('click', this.handleDocumentClick);
+    }
+
+    handleDocumentClick(event) {
+        if ((event.target && event.target.className &&
+            event.target.className.startsWith &&
+            event.target.className.startsWith('Cal__')) ||
+            (event.target && event.target.className &&
+            event.target.className.baseVal && event.target.className.baseVal.startsWith('Cal__'))) {
+            return;
+        }
+
+        this.hidePopover();
+
+        // $FlowFixMe[incompatible-call] automated comment
+        document.removeEventListener('click', this.handleDocumentClick);
+    }
+
+    handleTextFieldBlur(value: string, event) {
+        this.props.onBlur(value);
+
+        if (!event.relatedTarget || event.relatedTarget.className !== 'Cal__Container__root') {
+            this.hidePopover();
+        } else {
+            // $FlowFixMe[incompatible-call] automated comment
+            document.addEventListener('click', this.handleDocumentClick);
+        }
+    }
+
+    hidePopover() {
+        this.setState({
+            popoverOpen: false,
+        });
     }
 
     render() {
         const {
-            calendar,
+            width,
             calendarWidth,
+            calendarHeight,
             inputWidth,
             classes,
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
-            value,
-            disabled,
+            textFieldRef,
             ...passOnProps
         } = this.props;
+        const { popoverOpen } = this.state;
 
-        const calendarType = calendar || 'gregory';
-        const format = systemSettingsStore.get().dateFormat;
+        const textFieldRefPropObject = textFieldRef ? { ref: textFieldRef } : null;
+        const calculatedInputWidth = inputWidth || width;
+        const calculatedCalendarWidth = calendarWidth || width;
+        const splittedPassOnProps = D2Date.splitPassOnProps(passOnProps);
+        const calculatedCalendarHeight = calendarHeight || 350;
 
         return (
-            <div>
-                <CalendarInput
-                    {...passOnProps}
-                    label={this.props.label}
-                    format={format}
-                    onDateSelect={this.handleDateSelected}
-                    calendar={calendarType}
-                    date={this.props.value}
-                    width={calendarWidth}
-                    inputWidth={inputWidth}
-                    onFocus={onFocus}
-                    disabled={disabled}
+            <div
+                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
+                style={{
+                    width,
+                }}
+            >
+                {/* $FlowFixMe[incompatible-type] automated comment */}
+                <D2TextField
+                    {...textFieldRefPropObject}
+                    onFocus={this.handleTextFieldFocus}
+                    onBlur={this.handleTextFieldBlur}
+                    className={classes.textField}
+                    width={calculatedInputWidth}
+                    {...splittedPassOnProps.input}
                 />
+                <D2DatePopup
+                    open={popoverOpen}
+                    onClose={this.hidePopover}
+                    width={calculatedCalendarWidth}
+                    height={calculatedCalendarHeight}
+                    inputWidth={calculatedInputWidth}
+                    inputUsesFloatingLabel={!!splittedPassOnProps.input.label}
+                    {...splittedPassOnProps.popup}
+                >
+                    <D2DateCalendar
+                        onDateSelected={this.handleDateSelected}
+                        value={this.props.value}
+                        currentWidth={calculatedCalendarWidth}
+                        height={calculatedCalendarHeight}
+                        {...splittedPassOnProps.calendar}
+                    />
+                </D2DatePopup>
             </div>
         );
     }
 }
 
+export const D2Date = withStyles(styles)(D2DatePlain);

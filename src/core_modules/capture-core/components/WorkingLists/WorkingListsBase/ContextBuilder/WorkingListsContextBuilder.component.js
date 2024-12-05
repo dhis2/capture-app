@@ -1,11 +1,11 @@
 // @flow
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import {
-    WorkingListsListViewBuilderContextProvider,
+    WorkingListsManagerContextProvider,
     WorkingListsListViewConfigContextProvider,
     WorkingListsListViewLoaderContextProvider,
     WorkingListsListViewUpdaterContextProvider,
-    WorkingListsManagerContextProvider,
+    WorkingListsListViewBuilderContextProvider,
 } from './ContextProviders';
 import { TemplatesLoader } from '../TemplatesLoader';
 import type { Props } from './workingListsContextBuilder.types';
@@ -15,9 +15,6 @@ export const WorkingListsContextBuilder = (props: Props) => {
     const {
         templates: allTemplates,
         currentTemplate,
-        selectedRows,
-        selectionInProgress,
-        allRowsAreSelected,
         onSelectTemplate,
         onLoadView,
         loadViewError,
@@ -36,9 +33,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
         categories,
         loadedContext,
         dataSource,
-        onClickListRow,
-        onRowSelect,
-        onSelectAll,
+        onSelectListRow,
         sortById,
         sortByDirection,
         onSortList,
@@ -59,7 +54,6 @@ export const WorkingListsContextBuilder = (props: Props) => {
         customUpdateTrigger,
         forceUpdateOnMount,
         programStageId,
-        bulkActionBarComponent,
         ...passOnProps
     } = props;
 
@@ -131,15 +125,10 @@ export const WorkingListsContextBuilder = (props: Props) => {
                         loadedOrgUnitId={loadedContextDefined.orgUnitId}
                     >
                         <WorkingListsListViewBuilderContextProvider
-                            selectedRows={selectedRows}
-                            allRowsAreSelected={allRowsAreSelected}
-                            selectionInProgress={selectionInProgress}
                             updating={updating}
                             updatingWithDialog={updatingWithDialog}
                             dataSource={dataSource}
-                            onClickListRow={onClickListRow}
-                            onRowSelect={onRowSelect}
-                            onSelectAll={onSelectAll}
+                            onSelectListRow={onSelectListRow}
                             onSortList={onSortList}
                             onSetListColumnOrder={onSetListColumnOrder}
                             customRowMenuContents={customRowMenuContents}
@@ -151,7 +140,6 @@ export const WorkingListsContextBuilder = (props: Props) => {
                             onChangeRowsPerPage={onChangeRowsPerPage}
                             stickyFilters={stickyFilters}
                             programStageId={programStageId}
-                            bulkActionBarComponent={bulkActionBarComponent}
                         >
                             <TemplatesLoader
                                 {...passOnProps}
@@ -159,7 +147,6 @@ export const WorkingListsContextBuilder = (props: Props) => {
                                 dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
                                 loadedProgramIdForTemplates={loadedProgramIdForTemplates}
                                 programStageId={programStageId}
-                                selectionInProgress={selectionInProgress}
                             />
                         </WorkingListsListViewBuilderContextProvider>
                     </WorkingListsListViewUpdaterContextProvider>

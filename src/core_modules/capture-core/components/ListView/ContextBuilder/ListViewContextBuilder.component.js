@@ -9,11 +9,6 @@ import type { Props } from './listViewContextBuilder.types';
 
 export const ListViewContextBuilder = ({
     filters,
-    selectedRows,
-    allRowsAreSelected,
-    onRowSelect,
-    onSelectAll,
-    selectionInProgress,
     onChangePage,
     onChangeRowsPerPage,
     rowsPerPage,
@@ -45,11 +40,6 @@ export const ListViewContextBuilder = ({
                 <ListViewMain
                     {...passOnProps}
                     dataSource={dataSource}
-                    selectedRows={selectedRows}
-                    allRowsAreSelected={allRowsAreSelected}
-                    onRowSelect={onRowSelect}
-                    onSelectAll={onSelectAll}
-                    isSelectionInProgress={selectionInProgress}
                 />
             </PaginationContext.Provider>
         </FilterValuesContext.Provider>

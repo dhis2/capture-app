@@ -40,9 +40,6 @@ export const EnrollmentEditEventPageComponent = ({
     assignee,
     pageStatus,
     events,
-    onBackToDashboard,
-    onBackToMainPage,
-    onBackToViewEvent,
     onEnrollmentError,
     onEnrollmentSuccess,
     onUpdateEnrollmentStatus,
@@ -76,11 +73,6 @@ export const EnrollmentEditEventPageComponent = ({
             pageLayout={pageLayout}
             currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
-            userInteractionInProgress={mode === EnrollmentPageKeys.EDIT_EVENT}
-            trackedEntityName={trackedEntityName}
-            onBackToMainPage={onBackToMainPage}
-            onBackToDashboard={onBackToDashboard}
-            onBackToViewEvent={onBackToViewEvent}
             onSaveExternal={onSaveExternal}
             trackedEntityTypeId={trackedEntityTypeId}
             programStage={programStage}

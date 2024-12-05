@@ -1,4 +1,4 @@
-import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 
 Given(/^you land on the enrollment event page by having typed (.*)$/, (url) => {
     cy.visit(url);
@@ -21,7 +21,10 @@ When('the user clicks the first second antenatal care visit event', () => {
 });
 
 When(/^the user clicks the "Back to all stages and events" button/, () =>
-    cy.get('[data-test="enrollment-edit-event-back-button"]')
+    cy
+        .get('[data-test="widget-enrollment-event"]')
+        .find('[data-test="dhis2-uicore-button"]')
+        .eq(0)
         .click(),
 );
 
@@ -35,12 +38,4 @@ Then('the program stages should be displayed', () => {
             cy.contains('antenatal care visit').should('exist');
             cy.contains('Care at birth').should('exist');
         });
-});
-
-And('the user is navigated to the enrollment dashboard', () => {
-    cy.get('[data-test="enrollment-overview-page"]').should('exist');
-});
-
-And(/^the view enrollment event form is in (.*) mode$/, (mode) => {
-    cy.get(`[data-test="widget-enrollment-event-${mode}"]`).should('exist');
 });

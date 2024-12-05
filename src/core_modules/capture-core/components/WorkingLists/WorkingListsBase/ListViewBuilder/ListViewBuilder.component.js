@@ -16,11 +16,7 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
 
     const {
         dataSource,
-        onClickListRow,
-        onRowSelect,
-        onSelectAll,
-        selectedRows,
-        allRowsAreSelected,
+        onSelectListRow,
         onSortList,
         onSetListColumnOrder,
         stickyFilters,
@@ -40,11 +36,7 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
             {...passOnProps}
             {...passOnContext}
             dataSource={dataSource}
-            selectedRows={selectedRows}
-            allRowsAreSelected={allRowsAreSelected}
-            onClickListRow={onClickListRow}
-            onRowSelect={onRowSelect}
-            onSelectAll={onSelectAll}
+            onSelectRow={onSelectListRow}
             onSort={onSortList}
             onSetColumnOrder={onSetListColumnOrder}
             customMenuContents={customListViewMenuContents}

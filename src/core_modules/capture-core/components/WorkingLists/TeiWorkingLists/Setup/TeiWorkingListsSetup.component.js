@@ -1,14 +1,14 @@
 // @flow
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useEffect, useRef } from 'react';
 import type { Props } from './teiWorkingListsSetup.types';
 import { WorkingListsBase } from '../../WorkingListsBase';
 import {
     useDefaultColumnConfig,
+    useStaticTemplates,
     useFiltersOnly,
+    useProgramStageFilters,
     useInjectDataFetchingMetaToLoadList,
     useInjectDataFetchingMetaToUpdateList,
-    useProgramStageFilters,
-    useStaticTemplates,
 } from './hooks';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs } from '../types';
@@ -55,8 +55,6 @@ export const TeiWorkingListsSetup = ({
     onUpdateTemplate,
     onDeleteTemplate,
     forceUpdateOnMount,
-    customUpdateTrigger,
-    bulkActionBarComponent,
     ...passOnProps
 }: Props) => {
     const prevProgramStageId = useRef(programStageId);
@@ -191,7 +189,6 @@ export const TeiWorkingListsSetup = ({
             {...passOnProps}
             forceUpdateOnMount={forceUpdateOnMount}
             currentTemplate={useCurrentTemplate(templates, currentTemplateId)}
-            customUpdateTrigger={customUpdateTrigger}
             templates={templates}
             columns={columns}
             onAddTemplate={injectArgumentsForAddTemplate}
@@ -220,7 +217,6 @@ export const TeiWorkingListsSetup = ({
             filters={filters}
             sortById={sortById}
             sortByDirection={sortByDirection}
-            bulkActionBarComponent={bulkActionBarComponent}
         />
     );
 };

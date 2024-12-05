@@ -1,6 +1,5 @@
 // @flow
-import React, { useCallback, useMemo, useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
@@ -12,29 +11,15 @@ import { DownloadDialog } from '../../WorkingListsCommon';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/TEIFilters';
 import { FEATURES, useFeature } from '../../../../../capture-core-utils';
-import { useSelectedRowsController } from '../../WorkingListsBase/BulkActionBar';
-import { TrackedEntityBulkActions } from '../TrackedEntityBulkActions';
 
 export const TrackerWorkingListsViewMenuSetup = ({
     onLoadView,
     onUpdateList,
     storeId,
-    program,
     programStageId,
     orgUnitId,
-    recordsOrder,
     ...passOnProps
 }: Props) => {
-    const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
-    const {
-        selectedRows,
-        clearSelection,
-        selectAllRows,
-        selectionInProgress,
-        toggleRowSelected,
-        allRowsAreSelected,
-        removeRowsFromSelection,
-    } = useSelectedRowsController({ recordIds: recordsOrder });
     const hasCSVSupport = useFeature(FEATURES.trackedEntitiesCSV);
     const downloadRequest = useSelector(
         ({ workingLists }) => workingLists[storeId] && workingLists[storeId].currentRequest,
@@ -102,43 +87,15 @@ export const TrackerWorkingListsViewMenuSetup = ({
         [onUpdateList, storeId],
     );
 
-    const handleCustomUpdateTrigger = useCallback((disableClearSelection?: boolean) => {
-        const id = uuid();
-        setCustomUpdateTrigger(id);
-        !disableClearSelection && clearSelection();
-    }, [clearSelection]);
-
-    const TrackedEntityBulkActionsComponent = useMemo(() => (
-        <TrackedEntityBulkActions
-            programId={program.id}
-            programDataWriteAccess={program.access.data.write}
-            programStageId={programStageId}
-            stages={program.stages}
-            selectedRows={selectedRows}
-            onClearSelection={clearSelection}
-            onUpdateList={handleCustomUpdateTrigger}
-            removeRowsFromSelection={removeRowsFromSelection}
-        />
-    ), [program, programStageId, selectedRows, clearSelection, handleCustomUpdateTrigger, removeRowsFromSelection]);
-
     return (
         <>
             <TeiWorkingListsSetup
                 {...passOnProps}
-                customUpdateTrigger={customUpdateTrigger}
-                program={program}
                 orgUnitId={orgUnitId}
-                recordsOrder={recordsOrder}
                 programStageId={programStageId}
                 customListViewMenuContents={customListViewMenuContents}
                 onLoadView={injectDownloadRequestToLoadView}
                 onUpdateList={injectDownloadRequestToUpdateList}
-                selectedRows={selectedRows}
-                allRowsAreSelected={allRowsAreSelected}
-                selectionInProgress={selectionInProgress}
-                onSelectAll={selectAllRows}
-                onRowSelect={toggleRowSelected}
-                bulkActionBarComponent={TrackedEntityBulkActionsComponent}
             />
             <DownloadDialog
                 open={downloadDialogOpen}

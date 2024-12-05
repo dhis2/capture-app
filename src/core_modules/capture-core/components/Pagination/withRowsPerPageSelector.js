@@ -12,7 +12,6 @@ const OptionsSelectWithTranslations = withTranslations()(OptionsSelectVirtualize
 type Props = {
     rowsPerPage: number,
     onChangeRowsPerPage: (rowsPerPage: number) => void,
-    disabled?: boolean,
 };
 
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
@@ -38,7 +37,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
         }
 
         renderSelectorElement = () => {
-            const { rowsPerPage, disabled } = this.props;
+            const rowsPerPage = this.props.rowsPerPage;
 
             return (
                 <div id="rows-per-page-selector" data-test="rows-per-page-selector">
@@ -47,7 +46,6 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
                         options={this.options}
                         value={rowsPerPage}
                         nullable={false}
-                        disabled={disabled}
                         withoutUnderline
                         searchable={false}
                     />
