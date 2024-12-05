@@ -61,7 +61,7 @@ Feature: User uses the TopBarActions to navigate
         Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?orgUnitId=DwpbWkiqjMy&eventId=KNbStF7YTon
         And the user see the following text: Gestational age at visit
         When the user clicks on the edit button
-        And the user see the following text: Enrollment: Edit Event
+        And the view enrollment event form is in edit mode
         When the user clicks the element containing the text: Clear selections
         Then the user sees the warning popup
 
@@ -88,7 +88,7 @@ Feature: User uses the TopBarActions to navigate
         Given you land on a enrollment page domain by having typed #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
         And the user see the following text: Clear selections
         When the user clicks the arrow button to see the dropdown
-        And the user clicks the element containing the text: Create new in another program...        
+        And the user clicks the element containing the text: Create new in another program...
         Then the current url is /#/new?orgUnitId=DwpbWkiqjMy
 
     Scenario: Enrollment Event New page > You go to the new page inside the same program

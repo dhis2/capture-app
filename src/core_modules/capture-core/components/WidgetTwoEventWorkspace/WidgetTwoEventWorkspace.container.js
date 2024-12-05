@@ -1,49 +1,21 @@
 // @flow
 import React from 'react';
-import { colors, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/';
 import type { Props } from './WidgetTwoEventWorkspace.types';
 import { useMetadataForProgramStage } from '../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { Widget } from '../Widget';
 import { useLinkedEventByOriginId, useClientDataValues } from './hooks';
 import { WidgetTwoEventWorkspaceComponent } from './WidgetTwoEventWorkspace.component';
-import { OverflowMenuComponent } from './OverflowMenu';
-import {
-    EnrollmentPageKeys,
-} from '../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
-import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { WidgetWrapper } from './WidgetWrapper';
+import { WidgetHeader } from './WidgetHeader';
 
-const styles = {
-    menu: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: spacersNum.dp8,
-        justifyContent: 'end',
-        background: colors.white,
-        borderTopLeftRadius: 3,
-        borderTopRightRadius: 3,
-        borderStyle: 'solid',
-        borderColor: colors.grey400,
-        borderWidth: 1,
-        borderBottomWidth: 0,
-    },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: spacersNum.dp8,
-    },
-    icon: {
-        marginRight: spacersNum.dp8,
-    },
-};
-
-const WidgetTwoEventWorkspacePlain = ({
+export const WidgetTwoEventWorkspace = ({
     eventId,
     programId,
     orgUnitId,
     currentPage,
-    classes,
+    stage,
+    type,
 }: Props) => {
     const {
         linkedEvent,
@@ -56,7 +28,7 @@ const WidgetTwoEventWorkspacePlain = ({
 
     const {
         formFoundation,
-        stage,
+        stage: linkedStage,
         isLoading: isLoadingMetadata,
         isError: isMetadataError,
     } = useMetadataForProgramStage({
@@ -86,54 +58,38 @@ const WidgetTwoEventWorkspacePlain = ({
         );
     }
 
-    if (!linkedEvent || !formFoundation || !stage) {
+    if (!linkedEvent || !formFoundation || !linkedStage) {
         return null;
     }
 
     return (
-        <div>
-            {currentPage === EnrollmentPageKeys.VIEW_EVENT && (
-                <div className={classes.menu}>
-                    <OverflowMenuComponent
+        <WidgetWrapper
+            type={type}
+            stage={stage}
+            linkedStage={linkedStage}
+            widget={
+                <Widget
+                    header={
+                        <WidgetHeader
+                            linkedStage={linkedStage}
+                            linkedEvent={linkedEvent}
+                            orgUnitId={orgUnitId}
+                            currentPage={currentPage}
+                            eventId={eventId}
+                            relationship={relationship}
+                            relationshipType={relationshipType}
+                            stage={linkedStage}
+                        />
+                    }
+                    noncollapsible
+                >
+                    <WidgetTwoEventWorkspaceComponent
                         linkedEvent={linkedEvent}
-                        relationshipId={relationship}
-                        relationshipType={relationshipType}
-                        orgUnitId={orgUnitId}
-                        originEventId={eventId}
-                        stageWriteAccess={stage?.access?.data?.write}
+                        formFoundation={formFoundation}
+                        dataValues={clientValuesWithSubValues}
                     />
-                </div>
-            )}
-
-            <Widget
-                header={
-                    <div className={classes.header}>
-                        {stage.icon && (
-                            <div className={classes.icon}>
-                                <NonBundledDhis2Icon
-                                    name={stage.icon?.name}
-                                    color={stage.icon?.color}
-                                    width={30}
-                                    height={30}
-                                    cornerRadius={2}
-                                />
-                            </div>
-                        )}
-                        <span> {stage.name} </span>
-                    </div>
-                }
-                noncollapsible
-            >
-                <WidgetTwoEventWorkspaceComponent
-                    linkedEvent={linkedEvent}
-                    formFoundation={formFoundation}
-                    dataValues={clientValuesWithSubValues}
-                />
-            </Widget>
-        </div>
+                </Widget>
+            }
+        />
     );
 };
-
-export const WidgetTwoEventWorkspace = withStyles(
-    styles,
-)(WidgetTwoEventWorkspacePlain);

@@ -667,8 +667,10 @@ msgstr "没有活跃的注册。"
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr "在此计划中为 {{teiDisplayName}} 添加新注册。"
 
-msgid "No access to program owner."
-msgstr "无法访问程序所有者。"
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
+msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "该项目未报名{{teiDisplayName}} 。"
@@ -1055,7 +1057,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr "指派到"
 
-msgid "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
 msgstr ""
 
 msgid "Edit"
@@ -1064,7 +1066,7 @@ msgstr "编辑"
 msgid "No one is assigned to this event"
 msgstr "没有人被分配到的该事件"
 
-msgid "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"

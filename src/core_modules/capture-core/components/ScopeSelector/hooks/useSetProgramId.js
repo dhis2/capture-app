@@ -5,7 +5,7 @@ import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 export const useSetProgramId = () => {
     const history = useHistory();
     const { pathname } = useLocation();
-    const restOfQueries = useLocationQuery();
+    const { selectedTemplateId, ...restOfQueries } = useLocationQuery();
 
 
     const setProgramId = (programId: string, pageToPush: string = pathname) => {
