@@ -24,7 +24,7 @@ export const useLifecycle = ({
     program: TrackerProgram,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
-    orgUnit: OrgUnit,
+    orgUnit?: OrgUnit,
     dataEntryId: string,
     itemId: string,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
@@ -39,12 +39,12 @@ export const useLifecycle = ({
     useEffect(() => {
         if (!isLoading) {
             dispatch(batchActions([
-                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory, orgUnit),
+                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory),
             ]));
             dataEntryReadyRef.current = true;
             delayRulesExecutionRef.current = true;
         }
-    }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory, orgUnit]);
+    }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory]);
 
     const eventsRef = useRef();
     const attributesRef = useRef();
@@ -55,7 +55,7 @@ export const useLifecycle = ({
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
-        if (isLoading) { return; }
+        if (isLoading || !orgUnit) { return; }
         if (delayRulesExecutionRef.current) {
             // getRulesActions depends on settings in the redux store that are being managed through getOpenDataEntryActions.
             // The purpose of the following lines of code is to make sure the redux store is ready before calling getRulesActions.
@@ -96,9 +96,12 @@ export const useLifecycle = ({
     ]);
 
     const rulesReady =
+    (!orgUnit) ||
+    (
         eventsRef.current === eventsRulesDependency &&
         attributesRef.current === attributesValuesRulesDependency &&
-        enrollmentDataRef.current === enrollmentDataRulesDependency;
+        enrollmentDataRef.current === enrollmentDataRulesDependency
+    );
 
     return dataEntryReadyRef.current && rulesReady;
 };

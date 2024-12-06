@@ -12,11 +12,9 @@ import type { LinkedRequestEvent, RelatedStageRefPayload, RequestEvent } from '.
 type Props = {
     dataEntryId: string,
     itemId: string,
-    orgUnitId: string,
     programId: string,
     formFoundation: RenderFoundation,
     enrollmentId: string,
-    orgUnitName: string,
     teiId: string,
 };
 

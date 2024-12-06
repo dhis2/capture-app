@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-11T07:41:42.396Z\n"
-"PO-Revision-Date: 2024-11-11T07:41:42.396Z\n"
+"POT-Creation-Date: 2024-12-06T11:29:57.874Z\n"
+"PO-Revision-Date: 2024-12-06T11:29:57.874Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -745,9 +745,6 @@ msgstr "There was an error opening the Page"
 msgid "There was an error loading the page"
 msgstr "There was an error loading the page"
 
-msgid "Choose an organisation unit to start reporting"
-msgstr "Choose an organisation unit to start reporting"
-
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
 
@@ -803,6 +800,9 @@ msgid ""
 msgstr ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
+
+msgid "Choose an organisation unit to start reporting"
+msgstr "Choose an organisation unit to start reporting"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
@@ -1670,15 +1670,6 @@ msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "

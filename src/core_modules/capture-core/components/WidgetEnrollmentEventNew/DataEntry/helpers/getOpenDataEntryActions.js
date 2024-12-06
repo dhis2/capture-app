@@ -43,10 +43,8 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 
 export const getOpenDataEntryActions =
     (dataEntryId: string, itemId: string, programCategory?: ProgramCategory, orgUnit: Object) => {
-        const { id, name, path } = orgUnit;
-        const defaultDataEntryValues = {
-            orgUnit: { id, name, path },
-        };
+        const { id, name, path } = orgUnit || {};
+        const defaultDataEntryValues = { id, name, path };
         if (programCategory && programCategory.categories) {
             dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
                 id: `attributeCategoryOptions-${category.id}`,

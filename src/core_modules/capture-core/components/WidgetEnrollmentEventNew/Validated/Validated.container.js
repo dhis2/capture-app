@@ -49,8 +49,6 @@ export const Validated = ({
         dataEntryId,
         itemId,
         programId: program.id,
-        orgUnitId: orgUnit.id,
-        orgUnitName: orgUnit.name,
         teiId,
         enrollmentId,
         formFoundation,
@@ -137,7 +135,7 @@ export const Validated = ({
             dispatch(startCreateNewAfterCompleting({
                 enrollmentId,
                 isCreateNew,
-                orgUnitId: orgUnit.id,
+                orgUnitId: orgUnit?.id,
                 programId: program.id,
                 teiId,
                 availableProgramStages,
@@ -145,7 +143,7 @@ export const Validated = ({
         } catch (error) {
             // Related stages has displayed an error message. No need to do anything here.
         }
-    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
+    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit?.id, program.id, teiId, availableProgramStages]);
 
 
     const handleSaveAndCompleteEnrollment = useCallback(
@@ -177,7 +175,7 @@ export const Validated = ({
             stage={stage}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
-            selectedOrgUnitId={orgUnit.id}
+            selectedOrgUnitId={orgUnit?.id}
             availableProgramStages={availableProgramStages}
             eventSaveInProgress={eventSaveInProgress}
             ready={ready}

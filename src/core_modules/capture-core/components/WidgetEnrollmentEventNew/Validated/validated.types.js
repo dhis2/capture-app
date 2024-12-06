@@ -40,7 +40,7 @@ export type RelatedStageRefPayload = {|
 
 export type ContainerProps = {|
     ...CommonValidatedProps,
-    orgUnit: OrgUnit,
+    orgUnit?: OrgUnit,
 |};
 
 export type Props = {|
@@ -50,7 +50,7 @@ export type Props = {|
     eventSaveInProgress: boolean,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
-    orgUnit: OrgUnit,
+    orgUnit?: OrgUnit,
     ready: boolean,
     id: string,
     itemId: string,
