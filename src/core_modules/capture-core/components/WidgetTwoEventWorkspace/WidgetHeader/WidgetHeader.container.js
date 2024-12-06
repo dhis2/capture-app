@@ -1,15 +1,12 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { FlyoutMenu, IconMore16, MenuItem, spacersNum } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
+import React, { type ComponentType } from 'react';
+import { spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/';
-import { OverflowButton } from '../../Buttons';
-import { buildUrlQueryString } from '../../../utils/routing';
 import { EnrollmentPageKeys }
     from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import type { PlainProps, Props } from './WidgetHeader.types';
+import { OverflowMenuComponent } from '../OverflowMenu';
 
 const styles = {
     menu: {
@@ -20,10 +17,17 @@ const styles = {
     },
 };
 
-
-const WidgetHeaderPlain = ({ linkedStage, linkedEvent, orgUnitId, currentPage, classes }: Props) => {
-    const [actionsIsOpen, setActionsIsOpen] = useState(false);
-    const { push } = useHistory();
+const WidgetHeaderPlain = ({
+    linkedStage,
+    linkedEvent,
+    orgUnitId,
+    currentPage,
+    relationship,
+    relationshipType,
+    stage,
+    eventId,
+    classes,
+}: Props) => {
     const { icon } = linkedStage;
     return (
         <>
@@ -41,30 +45,13 @@ const WidgetHeaderPlain = ({ linkedStage, linkedEvent, orgUnitId, currentPage, c
             <span> {linkedStage.name} </span>
             {currentPage === EnrollmentPageKeys.VIEW_EVENT && (
                 <div className={classes.menu}>
-                    <OverflowButton
-                        open={actionsIsOpen}
-                        onClick={() => setActionsIsOpen(prev => !prev)}
-                        icon={<IconMore16 />}
-                        small
-                        secondary
-                        dataTest={'widget-event-navigate-to-linked-event'}
-                        component={
-                            <FlyoutMenu dense maxWidth="250px">
-                                <MenuItem
-                                    label={i18n.t('View linked event')}
-                                    dataTest={'event-overflow-view-linked-event'}
-                                    onClick={() => {
-                                        push(
-                                            `/enrollmentEventEdit?${buildUrlQueryString({
-                                                eventId: linkedEvent.event,
-                                                orgUnitId,
-                                            })}`,
-                                        );
-                                        setActionsIsOpen(false);
-                                    }}
-                                />
-                            </FlyoutMenu>
-                        }
+                    <OverflowMenuComponent
+                        linkedEvent={linkedEvent}
+                        relationshipId={relationship}
+                        relationshipType={relationshipType}
+                        orgUnitId={orgUnitId}
+                        originEventId={eventId}
+                        stageWriteAccess={stage?.access?.data?.write}
                     />
                 </div>
             )}
@@ -73,4 +60,3 @@ const WidgetHeaderPlain = ({ linkedStage, linkedEvent, orgUnitId, currentPage, c
 };
 
 export const WidgetHeader: ComponentType<PlainProps> = withStyles(styles)(WidgetHeaderPlain);
-
