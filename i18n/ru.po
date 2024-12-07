@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -124,66 +124,6 @@ msgstr "Идет проверка значения"
 msgid "Async field update failed"
 msgstr "Сбой асинхронного обновления полей"
 
-msgid "A value is required"
-msgstr "Требуется значение"
-
-msgid "Please provide a valid number"
-msgstr "Введите правильное число"
-
-msgid "Please provide a valid integer"
-msgstr "Введите целое число"
-
-msgid "Please provide a positive integer"
-msgstr "Введите положительное целое число"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Введите ноль или положительное целое число"
-
-msgid "Please provide a negative integer"
-msgstr "Введите отрицательное целое число"
-
-msgid "Please provide a valid date"
-msgstr "Введите правильную дату"
-
-msgid "A date in the future is not allowed"
-msgstr "Дата в будущем не допускается"
-
-msgid "Please provide a valid date and time"
-msgstr "Введите правильную дату и время"
-
-msgid "Please provide a valid time"
-msgstr "Введите правильное время"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Введите целое число от 0 до 100"
-
-msgid "Please provide a valid url"
-msgstr "Введите правильный URL адрес"
-
-msgid "Please provide a valid email address"
-msgstr "Введите правильный адрес электронной почты"
-
-msgid "Please provide a valid age"
-msgstr "Введите правильный возраст"
-
-msgid "Please provide a valid phone number"
-msgstr "Введите правльный номер телефона"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Выберите правильную организационную единицу"
-
-msgid "Please provide valid coordinates"
-msgstr "Введите правильные координаты"
-
-msgid "This value already exists"
-msgstr "Данное значение уже существует"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "Значение \"От\" не может быть больше значения \"До\""
-
-msgid "Checking..."
-msgstr "Проверка..."
-
 msgid "Area"
 msgstr "Участок"
 
@@ -195,6 +135,12 @@ msgstr "Регистрация"
 
 msgid "Complete event"
 msgstr "Завершить событие"
+
+msgid "A value is required"
+msgstr "Требуется значение"
+
+msgid "Please provide a valid date"
+msgstr "Введите правильную дату"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Основные данные"
@@ -208,7 +154,7 @@ msgstr "{{ stageName }} - Статус"
 msgid "Please select {{categoryName}}"
 msgstr "Выберите {{categoryName}}"
 
-msgid "A future date is not allowed"
+msgid "A date in the future is not allowed"
 msgstr "Дата в будущем не допускается"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
@@ -1232,6 +1178,9 @@ msgstr "Установить координаты"
 msgid "Coordinates"
 msgstr "Координаты"
 
+msgid "Please provide valid coordinates"
+msgstr "Введите правильные координаты"
+
 msgid "Delete polygon"
 msgstr "Удалить полигон"
 
@@ -1520,6 +1469,12 @@ msgstr "Запланированная дата"
 
 msgid "Report date"
 msgstr "Дата отчета"
+
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Выберите правильную организационную единицу"
 
 msgid "Please select a valid event"
 msgstr "Выберите действительное событие"
@@ -2006,6 +1961,60 @@ msgstr "Ошибка редактирования события, внесенн
 
 msgid "Error updating the Assignee"
 msgstr "Ошибка при обновлении назначенного пользователя"
+
+msgid "Please provide a valid number"
+msgstr "Введите правильное число"
+
+msgid "Please provide a valid integer"
+msgstr "Введите целое число"
+
+msgid "Please provide a positive integer"
+msgstr "Введите положительное целое число"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Введите ноль или положительное целое число"
+
+msgid "Please provide a negative integer"
+msgstr "Введите отрицательное целое число"
+
+msgid "Please provide a valid date and time"
+msgstr "Введите правильную дату и время"
+
+msgid "Please provide a valid time"
+msgstr "Введите правильное время"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Введите целое число от 0 до 100"
+
+msgid "Please provide a valid url"
+msgstr "Введите правильный URL адрес"
+
+msgid "Please provide a valid email address"
+msgstr "Введите правильный адрес электронной почты"
+
+msgid "Please provide a valid age"
+msgstr "Введите правильный возраст"
+
+msgid "Please provide a valid phone number"
+msgstr "Введите правльный номер телефона"
+
+msgid "This value already exists"
+msgstr "Данное значение уже существует"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "Значение \"От\" не может быть больше значения \"До\""
+
+msgid "Checking..."
+msgstr "Проверка..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Установить координату"
