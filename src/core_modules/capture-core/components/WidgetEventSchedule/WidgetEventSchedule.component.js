@@ -98,21 +98,25 @@ const WidgetEventSchedulePlain = ({
                 dataTest="schedule-section"
                 sectionName={i18n.t('Schedule info')}
             >
+                <div className={classes.fieldWrapper}>
+                    <div className={classes.fieldContent}>
+                        <ScheduleOrgUnit
+                            orgUnit={orgUnit}
+                            onSelectOrgUnit={onSelectOrgUnit}
+                            onDeselectOrgUnit={onDeselectOrgUnit}
+                            {...passOnProps}
+                        />
+                        <ScheduleDate
+                            programId={programId}
+                            stageId={stageId}
+                            orgUnit={orgUnit}
+                            scheduleDate={scheduleDate}
+                            serverSuggestedScheduleDate={serverSuggestedScheduleDate}
+                            {...passOnProps}
+                        />
+                    </div>
+                </div>
 
-                <ScheduleDate
-                    programId={programId}
-                    stageId={stageId}
-                    scheduleDate={scheduleDate}
-                    serverSuggestedScheduleDate={serverSuggestedScheduleDate}
-                    {...passOnProps}
-                />
-
-                <ScheduleOrgUnit
-                    orgUnit={orgUnit}
-                    onSelectOrgUnit={onSelectOrgUnit}
-                    onDeselectOrgUnit={onDeselectOrgUnit}
-                    {...passOnProps}
-                />
             </DataSection>
             {programCategory && <DataSection
                 dataTest="category-options-section"
@@ -151,7 +155,7 @@ const WidgetEventSchedulePlain = ({
             <ScheduleText
                 programName={programName}
                 stageName={stageName}
-                orgUnitName={orgUnit?.name || ''}
+                orgUnitName={orgUnit?.name}
             />
         </div>
     );

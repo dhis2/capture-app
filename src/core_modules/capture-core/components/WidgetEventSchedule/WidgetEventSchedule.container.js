@@ -46,10 +46,13 @@ export const WidgetEventSchedule = ({
         initialScheduleDate,
         ...passOnProps,
     });
-    const orgUnitInitial = { id: initialOrgUnitId, name: useOrgUnitNameWithAncestors(initialOrgUnitId).displayName } || undefined;
+    const orgUnit = useOrgUnitNameWithAncestors(initialOrgUnitId);
+    const orgUnitInitial = initialOrgUnitId && orgUnit?.displayName
+        ? { id: initialOrgUnitId, name: orgUnit.displayName } : undefined;
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [scheduledOrgUnit, setScheduledOrgUnit] = useState(orgUnitInitial);
+    console.log('scheduledOrgUnit', scheduledOrgUnit);
     const convertFn = pipe(convertFormToClient, convertClientToServer);
     const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
     const serverSuggestedScheduleDate = convertFn(suggestedScheduleDate, dataElementTypes.DATE);

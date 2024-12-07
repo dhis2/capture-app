@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-07T11:18:04.373Z\n"
-"PO-Revision-Date: 2024-12-07T11:18:04.373Z\n"
+"POT-Creation-Date: 2024-12-07T12:32:56.041Z\n"
+"PO-Revision-Date: 2024-12-07T12:32:56.041Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1348,9 +1348,6 @@ msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
 msgid "Schedule date / Due date"
 msgstr "Schedule date / Due date"
-
-msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 
 msgid "Schedule info"
 msgstr "Schedule info"
