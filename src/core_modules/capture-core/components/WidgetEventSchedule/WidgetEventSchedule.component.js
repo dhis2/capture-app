@@ -11,6 +11,7 @@ import { NoteSection } from '../WidgetNote';
 import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
+import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 
 const styles = () => ({
     wrapper: {
@@ -64,6 +65,7 @@ const WidgetEventSchedulePlain = ({
     classes,
     scheduleDate,
     suggestedScheduleDate,
+    setScheduledOrgUnit,
     serverSuggestedScheduleDate,
     notes,
     programCategory,
@@ -75,70 +77,84 @@ const WidgetEventSchedulePlain = ({
     assignee,
     categoryOptionsError,
     ...passOnProps
-}: Props) => (
-    <div className={classes.wrapper}>
-        <DataSection
-            dataTest="schedule-section"
-            sectionName={i18n.t('Schedule info')}
-        >
-            <div className={classes.fieldWrapper}>
-                <div className={classes.fieldLabel}>
-                    {displayDueDateLabel ?? i18n.t('Schedule date / Due date', {
-                        interpolation: { escapeValue: false } },
-                    )}
-                </div>
-                <div className={classes.fieldContent}>
-                    <ScheduleDate
-                        programId={programId}
-                        stageId={stageId}
-                        orgUnit={orgUnit}
-                        scheduleDate={scheduleDate}
-                        serverSuggestedScheduleDate={serverSuggestedScheduleDate}
-                        {...passOnProps}
-                    />
-                </div>
-            </div>
-        </DataSection>
-        {programCategory && <DataSection
-            dataTest="category-options-section"
-            sectionName={programCategory.displayName}
-        >
-            <CategoryOptions
-                categories={programCategory.categories}
-                selectedOrgUnitId={orgUnit?.id}
-                selectedCategories={selectedCategories}
-                categoryOptionsError={categoryOptionsError}
-                onClickCategoryOption={onClickCategoryOption}
-                onResetCategoryOption={onResetCategoryOption}
-                required
-            />
-        </DataSection>}
-        <DataSection
-            dataTest="note-section"
-            sectionName={i18n.t('Event notes')}
-        >
-            <NoteSection
-                notes={notes}
-                placeholder={i18n.t('Write a note about this scheduled event')}
-                handleAddNote={onAddNote}
-            />
-        </DataSection>
-        {enableUserAssignment && (
-            <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
-                <Assignee onSet={onSetAssignee} assignee={assignee} />
+}: Props) => {
+    const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
+        setScheduledOrgUnit({
+            id: e.id,
+            name: e.displayName,
+            path: e.path,
+        });
+    };
+
+    const onDeselectOrgUnit = () => {
+        setScheduledOrgUnit(undefined);
+    };
+
+
+    return (
+
+        <div className={classes.wrapper}>
+            <DataSection
+                dataTest="schedule-section"
+                sectionName={i18n.t('Schedule info')}
+            >
+
+                <ScheduleDate
+                    programId={programId}
+                    stageId={stageId}
+                    scheduleDate={scheduleDate}
+                    serverSuggestedScheduleDate={serverSuggestedScheduleDate}
+                    {...passOnProps}
+                />
+
+                <ScheduleOrgUnit
+                    orgUnit={orgUnit}
+                    onSelectOrgUnit={onSelectOrgUnit}
+                    onDeselectOrgUnit={onDeselectOrgUnit}
+                    {...passOnProps}
+                />
             </DataSection>
-        )}
-        <ScheduleButtons
-            hasChanges={scheduleDate !== suggestedScheduleDate}
-            onCancel={onCancel}
-            onSchedule={onSchedule}
-        />
-        <ScheduleText
-            programName={programName}
-            stageName={stageName}
-            orgUnitName={orgUnit?.name || ''}
-        />
-    </div>
-);
+            {programCategory && <DataSection
+                dataTest="category-options-section"
+                sectionName={programCategory.displayName}
+            >
+                <CategoryOptions
+                    categories={programCategory.categories}
+                    selectedOrgUnitId={orgUnit?.id}
+                    selectedCategories={selectedCategories}
+                    categoryOptionsError={categoryOptionsError}
+                    onClickCategoryOption={onClickCategoryOption}
+                    onResetCategoryOption={onResetCategoryOption}
+                    required
+                />
+            </DataSection>}
+            <DataSection
+                dataTest="note-section"
+                sectionName={i18n.t('Event notes')}
+            >
+                <NoteSection
+                    notes={notes}
+                    placeholder={i18n.t('Write a note about this scheduled event')}
+                    handleAddNote={onAddNote}
+                />
+            </DataSection>
+            {enableUserAssignment && (
+                <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
+                    <Assignee onSet={onSetAssignee} assignee={assignee} />
+                </DataSection>
+            )}
+            <ScheduleButtons
+                hasChanges={scheduleDate !== suggestedScheduleDate}
+                onCancel={onCancel}
+                onSchedule={onSchedule}
+            />
+            <ScheduleText
+                programName={programName}
+                stageName={stageName}
+                orgUnitName={orgUnit?.name || ''}
+            />
+        </div>
+    );
+};
 
 export const WidgetEventScheduleComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventSchedulePlain);

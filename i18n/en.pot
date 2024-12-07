@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-06T11:29:57.874Z\n"
-"PO-Revision-Date: 2024-12-06T11:29:57.874Z\n"
+"POT-Creation-Date: 2024-12-07T11:18:04.373Z\n"
+"PO-Revision-Date: 2024-12-07T11:18:04.373Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1346,20 +1346,23 @@ msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day
 msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
+msgid "Schedule date / Due date"
+msgstr "Schedule date / Due date"
+
 msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 
 msgid "Schedule info"
 msgstr "Schedule info"
 
-msgid "Schedule date / Due date"
-msgstr "Schedule date / Due date"
-
 msgid "Event notes"
 msgstr "Event notes"
 
 msgid "Write a note about this scheduled event"
 msgstr "Write a note about this scheduled event"
+
+msgid "Program or stage is invalid"
+msgstr "Program or stage is invalid"
 
 msgid "Save note"
 msgstr "Save note"
