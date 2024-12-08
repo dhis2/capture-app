@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -119,66 +119,6 @@ msgstr "值正在被验证"
 msgid "Async field update failed"
 msgstr "异步字段更新失败"
 
-msgid "A value is required"
-msgstr "需要一个值"
-
-msgid "Please provide a valid number"
-msgstr "请提供一个有效的数字"
-
-msgid "Please provide a valid integer"
-msgstr "请提供一个整数"
-
-msgid "Please provide a positive integer"
-msgstr "提供一个正整数"
-
-msgid "Please provide zero or a positive integer"
-msgstr "0或负整数"
-
-msgid "Please provide a negative integer"
-msgstr "负整数"
-
-msgid "Please provide a valid date"
-msgstr "请提供有效的日期"
-
-msgid "A date in the future is not allowed"
-msgstr "不允许将来的日期"
-
-msgid "Please provide a valid date and time"
-msgstr "日期和时间"
-
-msgid "Please provide a valid time"
-msgstr "有效的时间"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "请提供 0 到 100 之间的整数"
-
-msgid "Please provide a valid url"
-msgstr "请提供有效的URL"
-
-msgid "Please provide a valid email address"
-msgstr "请提供有效的邮箱"
-
-msgid "Please provide a valid age"
-msgstr "请提供有效年龄"
-
-msgid "Please provide a valid phone number"
-msgstr "请提供有效的电话号码"
-
-msgid "Please provide a valid organisation unit"
-msgstr "请提供有效的机构"
-
-msgid "Please provide valid coordinates"
-msgstr "请提供有效坐标"
-
-msgid "This value already exists"
-msgstr "值已经存在"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "自不能大于至"
-
-msgid "Checking..."
-msgstr "检查"
-
 msgid "Area"
 msgstr "面积"
 
@@ -190,6 +130,12 @@ msgstr "报名"
 
 msgid "Complete event"
 msgstr "完成事件"
+
+msgid "A value is required"
+msgstr "需要一个值"
+
+msgid "Please provide a valid date"
+msgstr "请提供有效的日期"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - 基本信息"
@@ -203,8 +149,8 @@ msgstr "{{ stageName }} - 状态"
 msgid "Please select {{categoryName}}"
 msgstr "请选择{{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "将来的日期不允许"
+msgid "A date in the future is not allowed"
+msgstr "不允许将来的日期"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存新注册。"
@@ -1172,6 +1118,9 @@ msgstr "设置坐标"
 msgid "Coordinates"
 msgstr "坐标"
 
+msgid "Please provide valid coordinates"
+msgstr "请提供有效坐标"
+
 msgid "Delete polygon"
 msgstr "删除多边形"
 
@@ -1419,6 +1368,12 @@ msgstr "调度日期"
 
 msgid "Report date"
 msgstr "报告日期"
+
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "请提供有效的机构"
 
 msgid "Please select a valid event"
 msgstr "请选择一个有效的事件"
@@ -1873,6 +1828,60 @@ msgstr "编辑事件时出错，所做的更改未保存"
 
 msgid "Error updating the Assignee"
 msgstr "更新受托人时出错"
+
+msgid "Please provide a valid number"
+msgstr "请提供一个有效的数字"
+
+msgid "Please provide a valid integer"
+msgstr "请提供一个整数"
+
+msgid "Please provide a positive integer"
+msgstr "提供一个正整数"
+
+msgid "Please provide zero or a positive integer"
+msgstr "0或负整数"
+
+msgid "Please provide a negative integer"
+msgstr "负整数"
+
+msgid "Please provide a valid date and time"
+msgstr "日期和时间"
+
+msgid "Please provide a valid time"
+msgstr "有效的时间"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "请提供 0 到 100 之间的整数"
+
+msgid "Please provide a valid url"
+msgstr "请提供有效的URL"
+
+msgid "Please provide a valid email address"
+msgstr "请提供有效的邮箱"
+
+msgid "Please provide a valid age"
+msgstr "请提供有效年龄"
+
+msgid "Please provide a valid phone number"
+msgstr "请提供有效的电话号码"
+
+msgid "This value already exists"
+msgstr "值已经存在"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "自不能大于至"
+
+msgid "Checking..."
+msgstr "检查"
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "设置坐标"

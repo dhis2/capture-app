@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2024\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -122,66 +122,6 @@ msgstr "Ushbu qiymat tasdiqlanmoqda"
 msgid "Async field update failed"
 msgstr "Аsinxron maydon yangilanishi amalga oshmadi"
 
-msgid "A value is required"
-msgstr "Qiymat talab qilinadi"
-
-msgid "Please provide a valid number"
-msgstr "Iltimos, toʼgʼri raqamni koʼrsating"
-
-msgid "Please provide a valid integer"
-msgstr "Iltimos, toʼgʼri butun sonni koʼrsating"
-
-msgid "Please provide a positive integer"
-msgstr "Iltimos, butun musbat sonni koʼrsating"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Iltimos, Nol yoki butun musbat sonni koʼrsating"
-
-msgid "Please provide a negative integer"
-msgstr "Iltimos, butun manfiy sonni koʼrsating"
-
-msgid "Please provide a valid date"
-msgstr "Iltimos, toʼgʼri sanani koʼrsating"
-
-msgid "A date in the future is not allowed"
-msgstr "Kelajakdagi sana qabul qilinmaydi"
-
-msgid "Please provide a valid date and time"
-msgstr "Iltimos, tegishli sana va vaqtni koʼrsating"
-
-msgid "Please provide a valid time"
-msgstr "Iltimos, toʼgʼri vaqtni koʼrsating"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr "Iltimos, haqiqiy URL manzilni koʼrsating"
-
-msgid "Please provide a valid email address"
-msgstr "Iltimos, amaldagi ye-pochta manzilini koʼrsating"
-
-msgid "Please provide a valid age"
-msgstr "Iltimos, toʼgʼri yoshni koʼrsating"
-
-msgid "Please provide a valid phone number"
-msgstr "Iltimos, toʼgʼri telefon raqamini koʼrsating"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Iltimos, toʼgʼri tashkiliy boʼlimni koʼrsating"
-
-msgid "Please provide valid coordinates"
-msgstr "Iltimos, toʼgʼri koordinatalarni koʼrsating"
-
-msgid "This value already exists"
-msgstr "Bu qiymat allaqachon mavjud"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "Sana \"gacha\" katta boʼlishi mumkin emas sana \"dan\""
-
-msgid "Checking..."
-msgstr "Tekshirilmoqda..."
-
 msgid "Area"
 msgstr "Maydon"
 
@@ -193,6 +133,12 @@ msgstr "Roʼyxatga olish"
 
 msgid "Complete event"
 msgstr ""
+
+msgid "A value is required"
+msgstr "Qiymat talab qilinadi"
+
+msgid "Please provide a valid date"
+msgstr "Iltimos, toʼgʼri sanani koʼrsating"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -206,8 +152,8 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr ""
 
-msgid "A future date is not allowed"
-msgstr "Kelajakdagi sana tanloviga ruxsat berilmaydi"
+msgid "A date in the future is not allowed"
+msgstr "Kelajakdagi sana qabul qilinmaydi"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -1191,6 +1137,9 @@ msgstr ""
 msgid "Coordinates"
 msgstr "Координаталар"
 
+msgid "Please provide valid coordinates"
+msgstr "Iltimos, toʼgʼri koordinatalarni koʼrsating"
+
 msgid "Delete polygon"
 msgstr "Poligon (koʼpburchak) ni oʼchirib tashlash"
 
@@ -1436,6 +1385,12 @@ msgstr "Rejalashtirilgan sana"
 
 msgid "Report date"
 msgstr "Hisobot sanasi"
+
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Iltimos, toʼgʼri tashkiliy boʼlimni koʼrsating"
 
 msgid "Please select a valid event"
 msgstr ""
@@ -1890,6 +1845,60 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Iltimos, toʼgʼri raqamni koʼrsating"
+
+msgid "Please provide a valid integer"
+msgstr "Iltimos, toʼgʼri butun sonni koʼrsating"
+
+msgid "Please provide a positive integer"
+msgstr "Iltimos, butun musbat sonni koʼrsating"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Iltimos, Nol yoki butun musbat sonni koʼrsating"
+
+msgid "Please provide a negative integer"
+msgstr "Iltimos, butun manfiy sonni koʼrsating"
+
+msgid "Please provide a valid date and time"
+msgstr "Iltimos, tegishli sana va vaqtni koʼrsating"
+
+msgid "Please provide a valid time"
+msgstr "Iltimos, toʼgʼri vaqtni koʼrsating"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr "Iltimos, haqiqiy URL manzilni koʼrsating"
+
+msgid "Please provide a valid email address"
+msgstr "Iltimos, amaldagi ye-pochta manzilini koʼrsating"
+
+msgid "Please provide a valid age"
+msgstr "Iltimos, toʼgʼri yoshni koʼrsating"
+
+msgid "Please provide a valid phone number"
+msgstr "Iltimos, toʼgʼri telefon raqamini koʼrsating"
+
+msgid "This value already exists"
+msgstr "Bu qiymat allaqachon mavjud"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "Sana \"gacha\" katta boʼlishi mumkin emas sana \"dan\""
+
+msgid "Checking..."
+msgstr "Tekshirilmoqda..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

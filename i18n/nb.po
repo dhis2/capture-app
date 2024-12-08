@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -122,66 +122,6 @@ msgstr "Denne verdien validerer"
 msgid "Async field update failed"
 msgstr "Asynkront feltoppdatering mislyktes"
 
-msgid "A value is required"
-msgstr "En verdi kreves"
-
-msgid "Please provide a valid number"
-msgstr "Oppgi et gyldig nummer"
-
-msgid "Please provide a valid integer"
-msgstr "Oppgi et gyldig heltall"
-
-msgid "Please provide a positive integer"
-msgstr "Oppgi et positivt heltall"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Oppgi null eller et positivt heltall"
-
-msgid "Please provide a negative integer"
-msgstr "Oppgi et negativt heltall"
-
-msgid "Please provide a valid date"
-msgstr "Oppgi en gyldig dato"
-
-msgid "A date in the future is not allowed"
-msgstr "En dato i fremtiden er ikke tillatt"
-
-msgid "Please provide a valid date and time"
-msgstr "Oppgi en gyldig dato og tid"
-
-msgid "Please provide a valid time"
-msgstr "Oppgi en gyldig tid"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Oppgi et heltall mellom 0 og 100"
-
-msgid "Please provide a valid url"
-msgstr "Oppgi en gyldig url"
-
-msgid "Please provide a valid email address"
-msgstr "Vennligst fyll ut en gyldig e-postadresse"
-
-msgid "Please provide a valid age"
-msgstr "Oppgi en gyldig alder"
-
-msgid "Please provide a valid phone number"
-msgstr "Oppgi et gyldig telefonnummer"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Oppgi en gyldig organisasjonsenhet"
-
-msgid "Please provide valid coordinates"
-msgstr "Oppgi gyldige koordinater"
-
-msgid "This value already exists"
-msgstr "Denne verdien finnes allerede"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"Fra\" kan ikke være større enn \"Til\""
-
-msgid "Checking..."
-msgstr "Sjekker..."
-
 msgid "Area"
 msgstr "Areal"
 
@@ -193,6 +133,12 @@ msgstr "Registrering"
 
 msgid "Complete event"
 msgstr "Fullfør hendelse"
+
+msgid "A value is required"
+msgstr "En verdi kreves"
+
+msgid "Please provide a valid date"
+msgstr "Oppgi en gyldig dato"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Grunnleggende informasjon"
@@ -206,8 +152,8 @@ msgstr "{{ stageName }} - Status"
 msgid "Please select {{categoryName}}"
 msgstr "Velg {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "En fremtidig dato er ikke tillatt"
+msgid "A date in the future is not allowed"
+msgstr "En dato i fremtiden er ikke tillatt"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Lagrer en ny registrering i {{programName}} i {{orgUnitName}}."
@@ -1214,6 +1160,9 @@ msgstr "Lagre koordinater"
 msgid "Coordinates"
 msgstr "Koordinater"
 
+msgid "Please provide valid coordinates"
+msgstr "Oppgi gyldige koordinater"
+
 msgid "Delete polygon"
 msgstr "Slett polygon"
 
@@ -1482,6 +1431,12 @@ msgstr "Planlagt dato"
 msgid "Report date"
 msgstr "Rapporteringsdato"
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Oppgi en gyldig organisasjonsenhet"
+
 msgid "Please select a valid event"
 msgstr "Velg en gyldig hendelse"
 
@@ -1588,10 +1543,10 @@ msgid "Value"
 msgstr "Verdi"
 
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 msgid "Image"
-msgstr ""
+msgstr "Bilde"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Ny {{trackedEntityTypeName}} relasjon"
@@ -1950,6 +1905,60 @@ msgstr "Feil under redigering av hendelsen, endringer ble ikke lagret"
 
 msgid "Error updating the Assignee"
 msgstr "Feil under oppdatering av tildelt bruker"
+
+msgid "Please provide a valid number"
+msgstr "Oppgi et gyldig nummer"
+
+msgid "Please provide a valid integer"
+msgstr "Oppgi et gyldig heltall"
+
+msgid "Please provide a positive integer"
+msgstr "Oppgi et positivt heltall"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Oppgi null eller et positivt heltall"
+
+msgid "Please provide a negative integer"
+msgstr "Oppgi et negativt heltall"
+
+msgid "Please provide a valid date and time"
+msgstr "Oppgi en gyldig dato og tid"
+
+msgid "Please provide a valid time"
+msgstr "Oppgi en gyldig tid"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Oppgi et heltall mellom 0 og 100"
+
+msgid "Please provide a valid url"
+msgstr "Oppgi en gyldig url"
+
+msgid "Please provide a valid email address"
+msgstr "Vennligst fyll ut en gyldig e-postadresse"
+
+msgid "Please provide a valid age"
+msgstr "Oppgi en gyldig alder"
+
+msgid "Please provide a valid phone number"
+msgstr "Oppgi et gyldig telefonnummer"
+
+msgid "This value already exists"
+msgstr "Denne verdien finnes allerede"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"Fra\" kan ikke være større enn \"Til\""
+
+msgid "Checking..."
+msgstr "Sjekker..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
