@@ -14,11 +14,12 @@ import {
     setSaveEnrollmentEventInProgress,
     startCreateNewAfterCompleting,
 } from './validated.actions';
-import type { ContainerProps, RelatedStageRefPayload } from './validated.types';
+import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
 import { createServerData, useBuildNewEventPayload } from './useBuildNewEventPayload';
+import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
