@@ -42,9 +42,19 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, eventData, ...p
             return acc;
         }, {});
 
+        const additionalFields = formFoundation.featureType !== 'None' ? {
+            geometry: {
+                id: 'geometry',
+                name: formFoundation.featureType,
+                type: formFoundation.featureType === 'Polygon' ?
+                    dataElementTypes.POLYGON : dataElementTypes.COORDINATE,
+            },
+        } : null;
+
         return {
             ...fieldElementsById,
             ...fieldElementsContext,
+            ...additionalFields,
         };
     }, [formFoundation]);
 

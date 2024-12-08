@@ -8,9 +8,10 @@ type Props = $ReadOnly<{|
 
 const toSixDecimal = value => (parseFloat(value) ? parseFloat(value).toFixed(6) : null);
 
-export const MinimalCoordinates = ({ latitude, longitude }: Props) =>
-    (<div>
+export const MinimalCoordinates = ({ latitude, longitude }: Props) => (
+    <div>
         lat: {toSixDecimal(latitude)} <br />
         long: {toSixDecimal(longitude)}
-    </div>);
+    </div>
+);
 
