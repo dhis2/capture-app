@@ -2,7 +2,7 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { spacersNum } from '@dhis2/ui';
+import { spacers } from '@dhis2/ui';
 import {
     DateField,
     withDefaultFieldContainer,
@@ -15,7 +15,7 @@ import type { Props } from './scheduleDate.types';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
 import { convertStringToDateFormat } from '../../../utils/converters/date';
-
+import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 
 
 const LabelledRequiredDateField = withDefaultFieldContainer()(
@@ -31,9 +31,8 @@ const LabelledRequiredDateField = withDefaultFieldContainer()(
 );
 
 const styles = {
-    container: {
-        display: 'flex',
-        marginTop: spacersNum.dp4,
+    infoBox: {
+        padding: `0 ${spacers.dp24} ${spacers.dp24} ${spacers.dp16}`,
     },
 };
 
@@ -46,27 +45,35 @@ const ScheduleDatePlain = ({
     eventCountInOrgUnit,
     classes,
     hideDueDate,
-}: Props) => (<>
-    {!hideDueDate && <div className={classes.container}>
-        <LabelledRequiredDateField
-            label={i18n.t('Schedule date / Due date')}
-            required
-            value={scheduleDate}
-            width="100%"
-            calendarWidth={350}
-            onSetFocus={() => { }}
-            onFocus={() => { }}
-            onRemoveFocus={() => { }}
-            onBlur={(e) => { setScheduleDate(convertStringToDateFormat(e)); }}
-        />
-    </div>}
-    <InfoBox
-        scheduleDate={serverScheduleDate}
-        suggestedScheduleDate={serverSuggestedScheduleDate}
-        eventCountInOrgUnit={eventCountInOrgUnit}
-        orgUnitName={orgUnit?.name}
-        hideDueDate={hideDueDate}
-    />
-</>);
+}: Props) => (
+    <>
+        {!hideDueDate && (
+            <>
+                <LabelledRequiredDateField
+                    label={i18n.t('Schedule date / Due date')}
+                    required
+                    value={scheduleDate}
+                    width="100%"
+                    calendarWidth={350}
+                    styles={baseInputStyles}
+                    onSetFocus={() => { }}
+                    onFocus={() => { }}
+                    onRemoveFocus={() => { }}
+                    onBlur={(e) => { setScheduleDate(convertStringToDateFormat(e)); }}
+                />
+                <div className={classes.infoBox}>
+                    <InfoBox
+                        scheduleDate={serverScheduleDate}
+                        suggestedScheduleDate={serverSuggestedScheduleDate}
+                        eventCountInOrgUnit={eventCountInOrgUnit}
+                        orgUnitName={orgUnit?.name}
+                        hideDueDate={hideDueDate}
+                    />
+                </div>
+            </>
+        )}
+    </>
+);
+
 
 export const ScheduleDate: ComponentType<$Diff<Props, CssClasses>> = (withStyles(styles)(ScheduleDatePlain));

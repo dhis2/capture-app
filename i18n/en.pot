@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-07T12:32:56.041Z\n"
-"PO-Revision-Date: 2024-12-07T12:32:56.041Z\n"
+"POT-Creation-Date: 2024-12-08T13:28:49.327Z\n"
+"PO-Revision-Date: 2024-12-08T13:28:49.327Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1321,6 +1321,12 @@ msgstr "Write a note about this event"
 msgid "This event doesn't have any notes"
 msgstr "This event doesn't have any notes"
 
+msgid "after"
+msgstr "after"
+
+msgid "before"
+msgstr "before"
+
 msgid "Schedule date info"
 msgstr "Schedule date info"
 
@@ -1334,12 +1340,6 @@ msgid "The scheduled date is {{count}} days {{position}} the suggested date."
 msgid_plural "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
 msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
-
-msgid "after"
-msgstr "after"
-
-msgid "before"
-msgstr "before"
 
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
