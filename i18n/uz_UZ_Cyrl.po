@@ -1,11 +1,12 @@
 # 
 # Translators:
+# Philip Larsen Donnelly, 2024
 # Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -41,6 +42,39 @@ msgstr ""
 "Назорат Иловаси фақат битта версияни бир вақтда (бир хил ддомендаги) "
 "ишлашини қўллаб қувватлайди. Ушбу версияни қайта ишлатмоқчи бўлсангиз, "
 "Илтимос, саҳифани янгиланг, аммо бошқа версиялар ёпилишини унутманг."
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "Ҳодиса/тадбирни таҳрирланг"
+
+msgid "New event"
+msgstr "Янги ҳодиса"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "Излаш"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr "Кўпроқ"
@@ -301,9 +335,6 @@ msgstr "Ҳа, ўзгартиришлар бекор қилинсин"
 msgid "No, cancel"
 msgstr "Йўқ, бекор қилинг"
 
-msgid "New event"
-msgstr "Янги ҳодиса"
-
 msgid "You don't have access to create an event in the current selections"
 msgstr "Ҳозирги танловларда ҳодиса/тадбир яратиш ҳуқуқига эга эмассиз"
 
@@ -522,9 +553,6 @@ msgstr ""
 msgid "No match found"
 msgstr "Ҳеч нима топилмади"
 
-msgid "Search"
-msgstr "Излаш"
-
 msgid "Clear"
 msgstr "Тозалаш"
 
@@ -686,7 +714,9 @@ msgstr ""
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 
-msgid "No access to program owner."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -866,9 +896,6 @@ msgstr "ҳодиса/тадбир"
 msgid "You don't have access to edit this event"
 msgstr ""
 
-msgid "Edit event"
-msgstr "Ҳодиса/тадбирни таҳрирланг"
-
 msgid "View changelog"
 msgstr ""
 
@@ -906,15 +933,6 @@ msgstr "Ҳодиса/тадбирни юклаб бўлмади"
 msgid "Organisation unit could not be loaded"
 msgstr "Ташкилий бўлимни юклаб бўлмади"
 
-msgid "Dashboard"
-msgstr "Бошқарув панели"
-
-msgid "Edit Event"
-msgstr ""
-
-msgid "View Event"
-msgstr ""
-
 msgid "Selected program"
 msgstr "Танланган дастур"
 
@@ -938,6 +956,9 @@ msgid "Loading"
 msgstr "Юкланмоқда"
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1084,7 +1105,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr "Тайинланган"
 
-msgid "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
 msgstr ""
 
 msgid "Edit"
@@ -1093,7 +1114,7 @@ msgstr "Таҳрирлаш"
 msgid "No one is assigned to this event"
 msgstr "Ушбу ҳодиса/тадбирга ҳеч ким бириктирилмаган"
 
-msgid "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1268,6 +1289,9 @@ msgstr "Огоҳлантириш"
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
 
@@ -1284,9 +1308,6 @@ msgid "Event completed"
 msgstr "Ҳодиса/тадбир якунланди"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
-
-msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Notes about this event"
@@ -1482,10 +1503,18 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 
+msgid "View linked event"
+msgstr ""
+
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "View linked event"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
 msgstr ""
 
 msgid "Scheduled"
@@ -1520,6 +1549,12 @@ msgstr ""
 
 msgid "Value"
 msgstr "Қиймат"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Image"
+msgstr "Расм"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
@@ -1581,6 +1616,46 @@ msgstr "Маълумотларни юклаб олиш ..."
 msgid "an error occurred loading working lists"
 msgstr "ишчи рўйхатни юклашда хатолик юз берди"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Рўйхатга олинган сана"
 
@@ -1596,13 +1671,112 @@ msgstr "Кузатиб бориш"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Active enrollments"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
 msgstr ""
 
-msgid "Completed enrollments"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
 msgstr ""
 
-msgid "Cancelled enrollments"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1613,6 +1787,13 @@ msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} танланган"
+
+msgid "Deselect all"
+msgstr "Барча танланганни бекор қилиш"
 
 msgid "Update view"
 msgstr "Янгиланган кўриниш"

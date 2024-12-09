@@ -26,7 +26,8 @@ import type {
     ColumnsMetaForDataFetching,
     ClientConfig,
 } from '../../../types';
-import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
+import { areRelativeRangeValuesSupported }
+    from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;

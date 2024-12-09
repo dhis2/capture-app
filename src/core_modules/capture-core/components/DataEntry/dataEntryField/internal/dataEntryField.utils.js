@@ -1,14 +1,16 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 
-type Validator = (value: any) => boolean | { valid: boolean, message: ?string };
+type Validator = (value: any,
+    internalComponentError?: ?{error: ?string, errorCode: ?string}) =>
+        boolean | { valid: boolean, errorMessage?: ?string } | { valid: boolean, message?: ?string };
 
 export type ValidatorContainer = {
     validator: Validator,
     message: string,
 };
 
-export function getValidationError(value: any, validatorContainers: ?Array<ValidatorContainer>) {
+export function getValidationError(value: any, validatorContainers: ?Array<ValidatorContainer>, internalComponentError?: ?{error: ?string, errorCode: ?string}) {
     if (!validatorContainers) {
         return null;
     }
@@ -16,13 +18,13 @@ export function getValidationError(value: any, validatorContainers: ?Array<Valid
     let message;
     const errorEncountered = validatorContainers.some((validatorContainer) => {
         const validator = validatorContainer.validator;
-        const result = validator(value);
+        const result = validator(value, internalComponentError);
 
         if (result === true || (result && result.valid)) {
             return false;
         }
 
-        message = (result && result.message) || validatorContainer.message;
+        message = (result && result.errorMessage) || (result && result.message) || validatorContainer.message;
         return true;
     });
 

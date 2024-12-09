@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import moment from 'moment';
 import { DateField } from '../../DateAndTimeFields/DateField/Date.component';
 import typeof { orientations } from '../../constants/orientations.const';
 import { withFocusSaver } from '../../HOC/withFocusSaver';
@@ -19,9 +18,8 @@ class AgeDateInputPlain extends Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DateField
                 value={value || ''}
-                calendarMaxMoment={moment()}
-                width={150}
-                calendarWidth={350}
+                width="150px"
+                calendarWidth="350px"
                 {...passOnProps}
             />
 

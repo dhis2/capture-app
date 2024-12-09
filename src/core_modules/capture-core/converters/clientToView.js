@@ -52,12 +52,10 @@ function convertImageForDisplay(clientValue: ImageClientValue) {
     return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} alignLeft />;
 }
 
-function convertOrgUnitForDisplay(clientValue: { id: string }) {
-    return (
-        <TooltipOrgUnit orgUnitId={clientValue.id} />
-    );
+function convertOrgUnitForDisplay(clientValue: { id: string } | string) {
+    const orgUnitId = typeof clientValue === 'string' ? clientValue : clientValue.id;
+    return <TooltipOrgUnit orgUnitId={orgUnitId} />;
 }
-
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,

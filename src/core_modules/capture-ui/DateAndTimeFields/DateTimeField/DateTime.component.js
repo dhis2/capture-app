@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import defaultClasses from './dateTime.module.css';
-
 import { orientations } from '../../constants/orientations.const';
 import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
 import { DateTimeTime } from '../../internal/DateTimeInput/DateTimeTime.component';
@@ -14,24 +13,28 @@ type Value = {
 };
 
 type Props = {
-    onBlur: (value: ?Value, options: Object) => void,
+    onBlur: (value: ?Value, options: Object, internalError: Object) => void,
     onChange: (value: ?Value) => void,
     value: Value,
-    dateMaxWidth: any,
-    dateWidth: any,
+    dateMaxWidth: string,
+    dateWidth: string,
     calendarWidth?: ?number,
     orientation: $Values<typeof orientations>,
-    calendarTheme: Object,
-    calendarLocale: Object,
-    calendarOnConvertValueIn: Function,
-    calendarOnConvertValueOut: Function,
-    popupAnchorPosition?: ?any,
     classes: Object,
     dateLabel: string,
     timeLabel: string,
+    innerMessage: Object
 };
 
-export class DateTimeField extends Component<Props> {
+type State = {
+    dateError: ?{
+        error?: ?string,
+        errorCode?: ?string
+    },
+};
+
+
+export class DateTimeField extends Component<Props, State> {
     handleTimeChange: (timeValue: string) => void;
     handleDateChange: (dateValue: string) => void;
     handleTimeBlur: (timeValue: string) => void;
@@ -45,6 +48,9 @@ export class DateTimeField extends Component<Props> {
 
     constructor(props: Props) {
         super(props);
+        this.state = {
+            dateError: { error: null, errorCode: null },
+        };
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTimeBlur = this.handleTimeBlur.bind(this);
@@ -71,20 +77,32 @@ export class DateTimeField extends Component<Props> {
         const currentValue = this.getValue();
         this.handleBlur({
             time: timeValue,
-            date: currentValue.date,
-        }, !!currentValue.date);
+            date: this.props.value?.date,
+        }, {
+            touched: !!currentValue.date,
+            error: this.state.dateError?.error,
+            errorCode: this.state.dateError?.errorCode,
+        });
     }
 
-    handleDateBlur(dateValue: string) {
+    handleDateBlur(dateValue: string, options: ?Object) {
         this.touchedFields.add('dateTouched');
-        const currentValue = this.getValue();
-        this.handleBlur({
-            time: currentValue.time,
-            date: dateValue,
-        }, !!currentValue.time);
+        this.setState(() => ({
+            dateError: { error: options?.error, errorCode: options?.errorCode },
+        }), () => {
+            const currentValue = this.getValue();
+            this.handleBlur({
+                time: currentValue.time,
+                date: dateValue,
+            }, {
+                touched: !!currentValue.date,
+                error: this.state.dateError?.error,
+                errorCode: this.state.dateError?.errorCode,
+            });
+        });
     }
 
-    handleBlur(value: Value, otherFieldHasValue: boolean) {
+    handleBlur(value: Value, otherFieldHasValue: Object) {
         const onBlur = this.props.onBlur;
         const touched = this.touchedFields.size === 2;
         if (!value.date && !value.time) {
@@ -94,7 +112,9 @@ export class DateTimeField extends Component<Props> {
             return;
         }
         onBlur(value, {
-            touched: touched || otherFieldHasValue,
+            touched: touched || otherFieldHasValue.touched,
+            error: otherFieldHasValue?.error,
+            errorCode: otherFieldHasValue?.errorCode,
         });
     }
 
@@ -106,18 +126,15 @@ export class DateTimeField extends Component<Props> {
             dateMaxWidth,
             dateWidth,
             calendarWidth,
-            popupAnchorPosition,
-            calendarTheme,
-            calendarLocale,
-            calendarOnConvertValueIn,
-            calendarOnConvertValueOut,
             classes,
             orientation,
             onBlur,
             dateLabel,
             timeLabel,
             onChange,
+            innerMessage,
             ...passOnProps } = this.props;
+
         const isVertical = orientation === orientations.VERTICAL;
         const currentValue = this.getValue();
         const dateValue = currentValue.date;
@@ -144,25 +161,26 @@ export class DateTimeField extends Component<Props> {
                             onChange={this.handleDateChange}
                             onBlur={this.handleDateBlur}
                             label={dateLabel}
-                            calendarTheme={calendarTheme}
-                            popupAnchorPosition={popupAnchorPosition}
-                            calendarLocale={calendarLocale}
-                            calendarOnConvertValueIn={calendarOnConvertValueIn}
-                            calendarOnConvertValueOut={calendarOnConvertValueOut}
                             classes={classes}
+                            innerMessage={innerMessage}
                             {...passOnProps}
                         />
+                        <div className={classes?.innerInputError}>{innerMessage?.message?.dateError}</div>
                     </div>
 
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                    <DateTimeTime
-                        value={timeValue}
-                        onChange={this.handleTimeChange}
-                        onBlur={this.handleTimeBlur}
-                        label={timeLabel}
-                        classes={classes}
-                        {...passOnProps}
-                    />
+                    <div>
+                        {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                        <DateTimeTime
+                            value={timeValue}
+                            onChange={this.handleTimeChange}
+                            onBlur={this.handleTimeBlur}
+                            label={timeLabel}
+                            classes={classes}
+                            innerMessage={innerMessage}
+                            {...passOnProps}
+                        />
+                        <div className={classes?.innerInputError}>{innerMessage?.message?.timeError}</div>
+                    </div>
                 </div>
             </div>
         );
