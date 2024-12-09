@@ -52,7 +52,6 @@ export const WidgetEventSchedule = ({
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [scheduledOrgUnit, setScheduledOrgUnit] = useState(orgUnitInitial);
-    console.log('scheduledOrgUnit', scheduledOrgUnit);
     const convertFn = pipe(convertFormToClient, convertClientToServer);
     const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
     const serverSuggestedScheduleDate = convertFn(suggestedScheduleDate, dataElementTypes.DATE);

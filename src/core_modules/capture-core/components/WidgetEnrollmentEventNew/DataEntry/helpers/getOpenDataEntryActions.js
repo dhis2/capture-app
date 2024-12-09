@@ -1,5 +1,4 @@
 // @flow
-
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../fieldValidators';
@@ -43,8 +42,11 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 
 export const getOpenDataEntryActions =
     (dataEntryId: string, itemId: string, programCategory?: ProgramCategory, orgUnit: Object) => {
-        const { id, name, path } = orgUnit || {};
-        const defaultDataEntryValues = { id, name, path };
+        const defaultDataEntryValues = {
+            orgUnit: orgUnit
+                ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
+                : undefined,
+        };
         if (programCategory && programCategory.categories) {
             dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
                 id: `attributeCategoryOptions-${category.id}`,
