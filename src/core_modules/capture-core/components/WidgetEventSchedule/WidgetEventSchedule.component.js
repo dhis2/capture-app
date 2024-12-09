@@ -59,7 +59,6 @@ const WidgetEventSchedulePlain = ({
         setScheduledOrgUnit(undefined);
     };
 
-
     return (
         <Widget
             noncollapsible
@@ -73,23 +72,20 @@ const WidgetEventSchedulePlain = ({
                     dataTest="schedule-section"
                     sectionName={i18n.t('Schedule info')}
                 >
-                    <div className={classes.test}>
-                        <ScheduleOrgUnit
-                            orgUnit={orgUnit}
-                            onSelectOrgUnit={onSelectOrgUnit}
-                            onDeselectOrgUnit={onDeselectOrgUnit}
-                            {...passOnProps}
-                        />
-                        <ScheduleDate
-                            programId={programId}
-                            stageId={stageId}
-                            orgUnit={orgUnit}
-                            scheduleDate={scheduleDate}
-                            serverSuggestedScheduleDate={serverSuggestedScheduleDate}
-                            {...passOnProps}
-                        />
-                    </div>
-
+                    <ScheduleOrgUnit
+                        orgUnit={orgUnit}
+                        onSelectOrgUnit={onSelectOrgUnit}
+                        onDeselectOrgUnit={onDeselectOrgUnit}
+                        {...passOnProps}
+                    />
+                    <ScheduleDate
+                        programId={programId}
+                        stageId={stageId}
+                        orgUnit={orgUnit}
+                        scheduleDate={scheduleDate}
+                        serverSuggestedScheduleDate={serverSuggestedScheduleDate}
+                        {...passOnProps}
+                    />
                 </DataSection>
                 {programCategory && <DataSection
                     dataTest="category-options-section"

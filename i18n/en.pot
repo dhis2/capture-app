@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-08T13:28:49.327Z\n"
-"PO-Revision-Date: 2024-12-08T13:28:49.327Z\n"
+"POT-Creation-Date: 2024-12-09T14:19:09.122Z\n"
+"PO-Revision-Date: 2024-12-09T14:19:09.122Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1269,6 +1269,9 @@ msgstr "organisation unit could not be retrieved. Please try again later."
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+
+msgid "Saving to {{stageName}} for {{programName}}"
+msgstr "Saving to {{stageName}} for {{programName}}"
 
 msgid "program or stage is invalid"
 msgstr "program or stage is invalid"

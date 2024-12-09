@@ -17,7 +17,10 @@ const convertToClientCoordinates = ({ coordinates, type }: { coordinates: any[],
 
 const getCenterPoint = (InnerComponent: ComponentType<any>) => (props: Object) => {
     const { orgUnit, ...passOnProps } = props;
-    const [orgUnitKey, setOrgUnitKey] = useState(orgUnit?.id);
+    if (!orgUnit || !orgUnit.id) {
+        return <InnerComponent {...passOnProps} center={DEFAULT_CENTER} onOpenMap={() => {}} />;
+    }
+    const [orgUnitKey, setOrgUnitKey] = useState(orgUnit.id);
     const [shouldFetch, setShouldFetch] = useState(false);
     const queryKey = ['organisationUnit', 'geometry', orgUnitKey];
     const queryFn = {
@@ -28,8 +31,8 @@ const getCenterPoint = (InnerComponent: ComponentType<any>) => (props: Object) =
         },
     };
     const queryOptions = useMemo(
-        () => ({ enabled: Boolean(orgUnit?.id) && shouldFetch }),
-        [shouldFetch, orgUnit?.id],
+        () => ({ enabled: Boolean(orgUnit.id) && shouldFetch }),
+        [shouldFetch, orgUnit.id],
     );
     const { data } = useApiMetadataQuery<any>(queryKey, queryFn, queryOptions);
 

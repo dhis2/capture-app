@@ -41,17 +41,14 @@ export const WidgetEventSchedule = ({
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
-        programStageScheduleConfig,
-        programConfig,
-        initialScheduleDate,
-        ...passOnProps,
+        programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
     });
-    const orgUnit = useOrgUnitNameWithAncestors(initialOrgUnitId);
-    const orgUnitInitial = initialOrgUnitId && orgUnit?.displayName
-        ? { id: initialOrgUnitId, name: orgUnit.displayName } : undefined;
+    const orgUnitData = useOrgUnitNameWithAncestors(initialOrgUnitId);
+    const orgUnit = initialOrgUnitId && orgUnitData
+        ? { id: initialOrgUnitId, name: orgUnitData.displayName } : undefined;
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
-    const [scheduledOrgUnit, setScheduledOrgUnit] = useState(orgUnitInitial);
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState(orgUnit);
     const convertFn = pipe(convertFormToClient, convertClientToServer);
     const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
     const serverSuggestedScheduleDate = convertFn(suggestedScheduleDate, dataElementTypes.DATE);
@@ -66,9 +63,7 @@ export const WidgetEventSchedule = ({
     const [categoryOptionsError, setCategoryOptionsError] = useState();
     const { programCategory } = useCategoryCombinations(programId);
     useEffect(() => {
-        if (!scheduleDate && suggestedScheduleDate) {
-            setScheduleDate(suggestedScheduleDate);
-        }
+        if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
     }, [suggestedScheduleDate, scheduleDate]);
 
     useEffect(() => {
