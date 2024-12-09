@@ -4,7 +4,6 @@
 # Fernando Jorge Bade, 2023
 # Philip Larsen Donnelly, 2024
 # Ge Joao <gsimango@saudigitus.org>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # Sheila André <sandre@saudigitus.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
@@ -13,13 +12,14 @@
 # Helton Dias, 2024
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Shelsea Chumaio, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Shelsea Chumaio, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -132,66 +132,6 @@ msgstr "Este valor está ser validado"
 msgid "Async field update failed"
 msgstr "Falha na actualização do campo assíncrono"
 
-msgid "A value is required"
-msgstr "Um valor é obrigatório"
-
-msgid "Please provide a valid number"
-msgstr "Por favor, forneça um número válido"
-
-msgid "Please provide a valid integer"
-msgstr "Forneça um número inteiro válido"
-
-msgid "Please provide a positive integer"
-msgstr "Forneça um número inteiro positivo"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Forneça zero ou um número inteiro positivo"
-
-msgid "Please provide a negative integer"
-msgstr "Forneça um número inteiro negativo"
-
-msgid "Please provide a valid date"
-msgstr "Forneça uma data válida"
-
-msgid "A date in the future is not allowed"
-msgstr "Uma data no futuro não é permitida"
-
-msgid "Please provide a valid date and time"
-msgstr "Forneça uma data e hora válidas"
-
-msgid "Please provide a valid time"
-msgstr "Forneça um horário válido"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Forneça um número inteiro entre 0 e 100"
-
-msgid "Please provide a valid url"
-msgstr "Forneça um url válido"
-
-msgid "Please provide a valid email address"
-msgstr "Por favor, forneça um endereço de e-mail válido"
-
-msgid "Please provide a valid age"
-msgstr "Por favor, forneça uma idade válida"
-
-msgid "Please provide a valid phone number"
-msgstr "Por favor forneça um número de telefone válido"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Forneça uma unidade organizacional válida"
-
-msgid "Please provide valid coordinates"
-msgstr "Forneça coordenadas válidas"
-
-msgid "This value already exists"
-msgstr "Este valor já existe"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"De\" não pode ser maior que \"Para\""
-
-msgid "Checking..."
-msgstr "Verificando ..."
-
 msgid "Area"
 msgstr "Área"
 
@@ -203,6 +143,12 @@ msgstr "Inscrição"
 
 msgid "Complete event"
 msgstr "Evento completo"
+
+msgid "A value is required"
+msgstr "Um valor é obrigatório"
+
+msgid "Please provide a valid date"
+msgstr "Forneça uma data válida"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Informações básicas"
@@ -216,8 +162,8 @@ msgstr "{{ stageName }} - Estado"
 msgid "Please select {{categoryName}}"
 msgstr "Por Favor Selecione {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "Uma data futura não é permitida"
+msgid "A date in the future is not allowed"
+msgstr "Uma data no futuro não é permitida"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Gravar uma nova inscrição em {{programName}} em {{orgUnitName}}."
@@ -1242,6 +1188,9 @@ msgstr "Definir coordenadas"
 msgid "Coordinates"
 msgstr "Coordenadas"
 
+msgid "Please provide valid coordinates"
+msgstr "Forneça coordenadas válidas"
+
 msgid "Delete polygon"
 msgstr "Excluir polígono"
 
@@ -1515,6 +1464,12 @@ msgstr "Data agendada"
 msgid "Report date"
 msgstr "Data do relatório"
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Forneça uma unidade organizacional válida"
+
 msgid "Please select a valid event"
 msgstr "Selecione um evento válido"
 
@@ -1624,10 +1579,10 @@ msgid "Value"
 msgstr "Valor"
 
 msgid "File"
-msgstr ""
+msgstr "Arquivo"
 
 msgid "Image"
-msgstr ""
+msgstr "Imagem"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Relacionamento {{trackedEntityTypeName}} "
@@ -1999,6 +1954,60 @@ msgstr "Erro ao editar o evento, as alterações feitas não foram gravadas"
 
 msgid "Error updating the Assignee"
 msgstr "Erro ao atualizar o destinatário"
+
+msgid "Please provide a valid number"
+msgstr "Por favor, forneça um número válido"
+
+msgid "Please provide a valid integer"
+msgstr "Forneça um número inteiro válido"
+
+msgid "Please provide a positive integer"
+msgstr "Forneça um número inteiro positivo"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Forneça zero ou um número inteiro positivo"
+
+msgid "Please provide a negative integer"
+msgstr "Forneça um número inteiro negativo"
+
+msgid "Please provide a valid date and time"
+msgstr "Forneça uma data e hora válidas"
+
+msgid "Please provide a valid time"
+msgstr "Forneça um horário válido"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Forneça um número inteiro entre 0 e 100"
+
+msgid "Please provide a valid url"
+msgstr "Forneça um url válido"
+
+msgid "Please provide a valid email address"
+msgstr "Por favor, forneça um endereço de e-mail válido"
+
+msgid "Please provide a valid age"
+msgstr "Por favor, forneça uma idade válida"
+
+msgid "Please provide a valid phone number"
+msgstr "Por favor forneça um número de telefone válido"
+
+msgid "This value already exists"
+msgstr "Este valor já existe"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"De\" não pode ser maior que \"Para\""
+
+msgid "Checking..."
+msgstr "Verificando ..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Definir coordenada"
