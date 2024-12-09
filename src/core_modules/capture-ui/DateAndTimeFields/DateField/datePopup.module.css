@@ -1,0 +1,8 @@
+.containerAbsolute {
+    position: relative;
+}
+
+.calendarAbsolute {
+    position: absolute;
+    z-index: 201;
+}

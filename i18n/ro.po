@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
+"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Valeriu Plesca <vplesca@gmail.com>, 2024\n"
 "Language-Team: Romanian (https://app.transifex.com/hisp-uio/teams/100509/ro/)\n"
@@ -43,39 +43,6 @@ msgstr ""
 " (în același domeniu). Vă rugăm să reîmprospătați această pagină dacă doriți"
 " să utilizați din nou această versiune, dar rețineți că aceasta va închide "
 "alte versiuni."
-
-msgid "Enrollment dashboard"
-msgstr ""
-
-msgid "View event"
-msgstr ""
-
-msgid "Edit event"
-msgstr "Editare eveniment"
-
-msgid "New event"
-msgstr "Eveniment nou"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "Căutare"
-
-msgid "Working List"
-msgstr ""
-
-msgid "Event list"
-msgstr ""
 
 msgid "More"
 msgstr ""
@@ -122,6 +89,66 @@ msgstr "Această valoare se validează"
 msgid "Async field update failed"
 msgstr ""
 
+msgid "A value is required"
+msgstr "Este necesară o valoare"
+
+msgid "Please provide a valid number"
+msgstr "Introduceți un număr valid"
+
+msgid "Please provide a valid integer"
+msgstr "Introduceți un număr întreg valid"
+
+msgid "Please provide a positive integer"
+msgstr "Introduceți un număr întreg pozitiv"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Introduceți zero sau un număr întreg pozitiv"
+
+msgid "Please provide a negative integer"
+msgstr "Introduceți un număr întreg negativ"
+
+msgid "Please provide a valid date"
+msgstr "Introduceți o dată validă"
+
+msgid "A date in the future is not allowed"
+msgstr "Nu este permisă o dată în viitor"
+
+msgid "Please provide a valid date and time"
+msgstr "Introduceți o dată și o oră valide"
+
+msgid "Please provide a valid time"
+msgstr "Introduceți o oră valabilă"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr "Introduceți o adresă URL validă"
+
+msgid "Please provide a valid email address"
+msgstr "Introduceți o adresă de e-mail validă"
+
+msgid "Please provide a valid age"
+msgstr "Introduceți o vârstă valabilă"
+
+msgid "Please provide a valid phone number"
+msgstr "Introduceți un număr de telefon valid"
+
+msgid "Please provide a valid organisation unit"
+msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr "Introduceți coordonate valide"
+
+msgid "This value already exists"
+msgstr "Această valoare deja există"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "„De la” nu poate fi mai mare decât „Pînă la”"
+
+msgid "Checking..."
+msgstr "Verificare..."
+
 msgid "Area"
 msgstr ""
 
@@ -133,12 +160,6 @@ msgstr "Înrolare"
 
 msgid "Complete event"
 msgstr "Eveniment complet"
-
-msgid "A value is required"
-msgstr "Este necesară o valoare"
-
-msgid "Please provide a valid date"
-msgstr "Introduceți o dată validă"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -152,8 +173,8 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr ""
 
-msgid "A date in the future is not allowed"
-msgstr "Nu este permisă o dată în viitor"
+msgid "A future date is not allowed"
+msgstr "Nu este permisă o dată viitoare"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -278,6 +299,9 @@ msgstr ""
 
 msgid "No, cancel"
 msgstr "Nu, anulare"
+
+msgid "New event"
+msgstr "Eveniment nou"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -495,6 +519,9 @@ msgstr ""
 msgid "No match found"
 msgstr ""
 
+msgid "Search"
+msgstr "Căutare"
+
 msgid "Clear"
 msgstr ""
 
@@ -652,9 +679,7 @@ msgstr ""
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
+msgid "No access to program owner."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -831,6 +856,9 @@ msgstr "eveniment"
 msgid "You don't have access to edit this event"
 msgstr ""
 
+msgid "Edit event"
+msgstr "Editare eveniment"
+
 msgid "View changelog"
 msgstr ""
 
@@ -866,6 +894,15 @@ msgstr "Evenimentul nu a putut fi încărcat"
 msgid "Organisation unit could not be loaded"
 msgstr "Unitatea organizațională nu a putut fi încărcată"
 
+msgid "Dashboard"
+msgstr ""
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
+msgstr ""
+
 msgid "Selected program"
 msgstr "Programul selectat"
 
@@ -892,9 +929,6 @@ msgstr ""
 
 msgid "An error occurred while loading the form"
 msgstr ""
-
-msgid "Back to all stages and events"
-msgstr "Înapoi la toate etapele și evenimentele"
 
 msgid "Possible duplicates found"
 msgstr "S-au găsit posibile duplicate"
@@ -1038,7 +1072,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-msgid "You don't have access to edit the assigned user"
+msgid "You don't have access to edit this assignee"
 msgstr ""
 
 msgid "Edit"
@@ -1047,7 +1081,7 @@ msgstr "Editare"
 msgid "No one is assigned to this event"
 msgstr ""
 
-msgid "You don't have access to assign a user to this event"
+msgid "You don't have access to assign an assignee"
 msgstr ""
 
 msgid "Assign"
@@ -1133,9 +1167,6 @@ msgstr ""
 
 msgid "Coordinates"
 msgstr ""
-
-msgid "Please provide valid coordinates"
-msgstr "Introduceți coordonate valide"
 
 msgid "Delete polygon"
 msgstr "Lichidare poligon"
@@ -1224,9 +1255,6 @@ msgstr "Avertizare"
 msgid "stage not found in rules execution"
 msgstr ""
 
-msgid "Please provide an valid organisation unit"
-msgstr ""
-
 msgid "Delete event"
 msgstr "Lichidare eveniment"
 
@@ -1244,6 +1272,9 @@ msgstr "Eveniment finalizat"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr ""
+
+msgid "Back to all stages and events"
+msgstr "Înapoi la toate etapele și evenimentele"
 
 msgid "Notes about this event"
 msgstr ""
@@ -1388,12 +1419,6 @@ msgstr ""
 msgid "Report date"
 msgstr "Data raportului"
 
-msgid "Please enter a date"
-msgstr ""
-
-msgid "Please provide a valid organisation unit"
-msgstr ""
-
 msgid "Please select a valid event"
 msgstr ""
 
@@ -1450,18 +1475,10 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Etape și Evenimente"
 
-msgid "View linked event"
-msgstr ""
-
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "Linked event"
-msgstr ""
-
-msgid ""
-"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
-"the linked event details before entering data below"
+msgid "View linked event"
 msgstr ""
 
 msgid "Scheduled"
@@ -1495,12 +1512,6 @@ msgid "Change"
 msgstr ""
 
 msgid "Value"
-msgstr ""
-
-msgid "File"
-msgstr "Fişier"
-
-msgid "Image"
 msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
@@ -1563,46 +1574,6 @@ msgstr "Descărcare date..."
 msgid "an error occurred loading working lists"
 msgstr ""
 
-msgid "You do not have access to complete events"
-msgstr ""
-
-msgid "Complete events"
-msgstr ""
-
-msgid "Are you sure you want to complete all active events in selection?"
-msgstr ""
-
-msgid "There are no active events to complete in the current selection."
-msgstr ""
-
-msgid "Error completing events"
-msgstr ""
-
-msgid "There was an error completing the events."
-msgstr ""
-
-msgid "Details (Advanced)"
-msgstr ""
-
-msgid "An unknown error occurred."
-msgstr ""
-
-msgid "An error occurred while completing events"
-msgstr ""
-
-msgid "An error occurred while deleting the events"
-msgstr ""
-
-msgid "You do not have access to delete events"
-msgstr ""
-
-msgid "Delete events"
-msgstr ""
-
-msgid ""
-"This cannot be undone. Are you sure you want to delete the selected events?"
-msgstr ""
-
 msgid "Registration Date"
 msgstr "Data Înregistrării"
 
@@ -1618,128 +1589,13 @@ msgstr ""
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid ""
-"Some enrollments were completed successfully, but there was an error while "
-"completing the rest. Please see the details below."
+msgid "Active enrollments"
 msgstr ""
 
-msgid ""
-"There was an error while completing the enrollments. Please see the details "
-"below."
+msgid "Completed enrollments"
 msgstr ""
 
-msgid ""
-"An unexpected error occurred while fetching the enrollments. Please try "
-"again."
-msgstr ""
-
-msgid ""
-"There are currently no active enrollments in the selection. All enrollments "
-"are already completed or cancelled."
-msgstr ""
-
-msgid ""
-"This action will complete {{count}} active enrollment in your selection."
-msgid_plural ""
-"This action will complete {{count}} active enrollment in your selection."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "{{count}} enrollment already marked as completed will not be changed."
-msgid_plural ""
-"{{count}} enrollment already marked as completed will not be changed."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
-msgstr ""
-
-msgid "Complete enrollments"
-msgstr ""
-
-msgid "Error completing enrollments"
-msgstr ""
-
-msgid "No active enrollments to complete"
-msgstr ""
-
-msgid "Complete {{count}} enrollment"
-msgid_plural "Complete {{count}} enrollment"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "An error occurred when completing the enrollments"
-msgstr ""
-
-msgid "An unknown error occurred when completing enrollments"
-msgstr ""
-
-msgid "You do not have access to delete enrollments"
-msgstr ""
-
-msgid "Delete enrollments"
-msgstr ""
-
-msgid "Delete selected enrollments"
-msgstr ""
-
-msgid ""
-"An error occurred while loading the selected enrollments. Please try again."
-msgstr ""
-
-msgid ""
-"This action will permanently delete the selected enrollments, including all "
-"associated data and events."
-msgstr ""
-
-msgid "Active enrollments ({{count}})"
-msgid_plural "Active enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "Completed enrollments ({{count}})"
-msgid_plural "Completed enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "Cancelled enrollments ({{count}})"
-msgid_plural "Cancelled enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "Delete {{count}} enrollment"
-msgid_plural "Delete {{count}} enrollment"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "An error occurred when deleting enrollments"
-msgstr ""
-
-msgid "Delete {{ trackedEntityName }} with all enrollments"
-msgstr ""
-
-msgid "Delete {{count}} {{ trackedEntityName }}"
-msgid_plural "Delete {{count}} {{ trackedEntityName }}"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid ""
-"Deleting records will also delete any associated enrollments and events. "
-"This cannot be undone. Are you sure you want to delete?"
-msgstr ""
-
-msgid "An error occurred while deleting the records"
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1749,15 +1605,6 @@ msgid "an error occurred loading the working lists"
 msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-msgid "Deselect all"
 msgstr ""
 
 msgid "Update view"
@@ -1866,60 +1713,6 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
-msgstr ""
-
-msgid "Please provide a valid number"
-msgstr "Introduceți un număr valid"
-
-msgid "Please provide a valid integer"
-msgstr "Introduceți un număr întreg valid"
-
-msgid "Please provide a positive integer"
-msgstr "Introduceți un număr întreg pozitiv"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Introduceți zero sau un număr întreg pozitiv"
-
-msgid "Please provide a negative integer"
-msgstr "Introduceți un număr întreg negativ"
-
-msgid "Please provide a valid date and time"
-msgstr "Introduceți o dată și o oră valide"
-
-msgid "Please provide a valid time"
-msgstr "Introduceți o oră valabilă"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr "Introduceți o adresă URL validă"
-
-msgid "Please provide a valid email address"
-msgstr "Introduceți o adresă de e-mail validă"
-
-msgid "Please provide a valid age"
-msgstr "Introduceți o vârstă valabilă"
-
-msgid "Please provide a valid phone number"
-msgstr "Introduceți un număr de telefon valid"
-
-msgid "This value already exists"
-msgstr "Această valoare deja există"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "„De la” nu poate fi mai mare decât „Pînă la”"
-
-msgid "Checking..."
-msgstr "Verificare..."
-
-msgid "Please provide a valid positive integer"
-msgstr ""
-
-msgid "Please enter a valid time"
-msgstr ""
-
-msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

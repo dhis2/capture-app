@@ -1,2 +1,2 @@
 // @flow
-export { AbsoluteDateFilterData, RelativeDateFilterData, DateFilterData, DateValue } from './date.types';
+export { AbsoluteDateFilterData, RelativeDateFilterData, DateFilterData } from './date.types';

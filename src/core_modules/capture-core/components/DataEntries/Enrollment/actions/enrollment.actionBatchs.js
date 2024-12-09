@@ -6,16 +6,11 @@ import type {
     TEIValues,
     OrgUnit,
 } from '@dhis2/rules-engine-javascript';
-import {
-    getApplicableRuleEffectsForTrackerProgram,
-    updateRulesEffects,
-    validateAssignEffects,
-} from '../../../../rules';
+import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import { TrackerProgram, RenderFoundation, ProgramStage } from '../../../../metaData';
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
-import type { QuerySingleResource } from '../../../../utils/api';
 
 export const batchActionTypes = {
     RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT: 'RulesExecutedPostUpdateFieldForEnrollment',
@@ -23,7 +18,7 @@ export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH: 'UpdateDataEntryFieldNewEnrollmentActionBatch',
 };
 
-export const runRulesOnUpdateFieldBatch = async ({
+export const runRulesOnUpdateFieldBatch = ({
     program,
     formId,
     dataEntryId,
@@ -36,8 +31,6 @@ export const runRulesOnUpdateFieldBatch = async ({
     stage,
     formFoundation,
     currentEvent,
-    querySingleResource,
-    onGetValidationContext,
 }: {
     program: TrackerProgram,
     formId: string,
@@ -48,11 +41,9 @@ export const runRulesOnUpdateFieldBatch = async ({
     attributeValues?: TEIValues,
     extraActions: Array<ReduxAction<any, any>>,
     uid: string,
-    stage: ProgramStage,
+    stage?: ProgramStage,
     formFoundation?: RenderFoundation,
     currentEvent?: {[id: string]: any},
-    querySingleResource: QuerySingleResource,
-    onGetValidationContext: () => Object,
 }) => {
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
@@ -63,16 +54,8 @@ export const runRulesOnUpdateFieldBatch = async ({
         attributeValues,
         formFoundation,
     });
-
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: formFoundation ? formFoundation.getElements() : program.attributes,
-        effects,
-        querySingleResource,
-        onGetValidationContext,
-    });
-
     return batchActions([
-        updateRulesEffects(effectsWithValidations, formId),
+        updateRulesEffects(effects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
         ...extraActions,
     ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
@@ -84,27 +67,15 @@ export const updateDataEntryFieldBatch = (
     orgUnit: OrgUnit,
     stage?: ProgramStage,
     formFoundation: RenderFoundation,
-    onGetValidationContext: () => Object,
 ) => {
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
 
-    return batchActions(
-        [
-            innerAction,
-            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForNewEnrollment({
-                payload: innerAction.payload,
-                uid,
-                programId,
-                orgUnit,
-                stage,
-                formFoundation,
-                onGetValidationContext,
-            }),
-        ],
-        batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH,
-    );
+    return batchActions([
+        innerAction,
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, uid, programId, orgUnit, stage, formFoundation),
+    ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
 
 export const updateFieldBatch = (
@@ -113,27 +84,15 @@ export const updateFieldBatch = (
     orgUnit: OrgUnit,
     stage?: ProgramStage,
     formFoundation: RenderFoundation,
-    onGetValidationContext: () => Object,
 ) => {
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
 
-    return batchActions(
-        [
-            innerAction,
-            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForNewEnrollment({
-                payload: innerAction.payload,
-                uid,
-                programId,
-                orgUnit,
-                stage,
-                formFoundation,
-                onGetValidationContext,
-            }),
-        ],
-        batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH,
-    );
+    return batchActions([
+        innerAction,
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, uid, programId, orgUnit, stage, formFoundation),
+    ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
 
 export const asyncUpdateSuccessBatch = (
@@ -144,24 +103,12 @@ export const asyncUpdateSuccessBatch = (
     orgUnit: OrgUnit,
     stage?: ProgramStage,
     formFoundation: RenderFoundation,
-    onGetValidationContext: () => Object,
 ) => {
     const uid = uuid();
 
-    return batchActions(
-        [
-            innerAction,
-            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForNewEnrollment({
-                payload: { ...innerAction.payload, dataEntryId, itemId },
-                uid,
-                programId,
-                orgUnit,
-                stage,
-                formFoundation,
-                onGetValidationContext,
-            }),
-        ],
-        batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH,
-    );
+    return batchActions([
+        innerAction,
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, uid, programId, orgUnit, stage, formFoundation),
+    ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };

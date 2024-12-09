@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Prabesh Guragain, 2024
 # Saroj Dhakal <lotusnagarkot@gmail.com>, 2024
+# Prabesh Guragain, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
+"POT-Creation-Date: 2024-04-12T20:48:54.429Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Saroj Dhakal <lotusnagarkot@gmail.com>, 2024\n"
+"Last-Translator: Prabesh Guragain, 2024\n"
 "Language-Team: Nepali (https://app.transifex.com/hisp-uio/teams/100509/ne/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,42 +35,6 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Enrollment dashboard"
-msgstr ""
-
-msgid "View event"
-msgstr ""
-
-msgid "Edit event"
-msgstr ""
-
-msgid "New event"
-msgstr ""
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "खोज"
-
-msgid "Working List"
-msgstr ""
-
-msgid "Event list"
-msgstr ""
-
-msgid "More"
 msgstr ""
 
 msgid "View {{programName}} dashboard"
@@ -115,6 +79,66 @@ msgstr ""
 msgid "Async field update failed"
 msgstr ""
 
+msgid "A value is required"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date"
+msgstr ""
+
+msgid "A date in the future is not allowed"
+msgstr ""
+
+msgid "Please provide a valid date and time"
+msgstr ""
+
+msgid "Please provide a valid time"
+msgstr ""
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr ""
+
+msgid "Please provide a valid email address"
+msgstr ""
+
+msgid "Please provide a valid age"
+msgstr ""
+
+msgid "Please provide a valid phone number"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr ""
+
+msgid "This value already exists"
+msgstr ""
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr ""
+
+msgid "Checking..."
+msgstr ""
+
 msgid "Area"
 msgstr ""
 
@@ -125,12 +149,6 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "Complete event"
-msgstr ""
-
-msgid "A value is required"
-msgstr ""
-
-msgid "Please provide a valid date"
 msgstr ""
 
 msgid "{{ stageName }} - Basic info"
@@ -145,7 +163,7 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr ""
 
-msgid "A date in the future is not allowed"
+msgid "A future date is not allowed"
 msgstr ""
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
@@ -172,14 +190,14 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
-msgid "Notes"
-msgstr ""
-
 msgid "Basic info"
 msgstr ""
 
 msgid "Status"
 msgstr "स्थिती"
+
+msgid "Comments"
+msgstr ""
 
 msgid "Relationships"
 msgstr ""
@@ -209,7 +227,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-msgid "Please add or cancel note before saving the event"
+msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
 msgid "Save and add another"
@@ -266,6 +284,9 @@ msgid "Yes, discard changes"
 msgstr ""
 
 msgid "No, cancel"
+msgstr ""
+
+msgid "New event"
 msgstr ""
 
 msgid "You don't have access to create an event in the current selections"
@@ -338,10 +359,16 @@ msgstr ""
 msgid "validation failed"
 msgstr ""
 
-msgid "No feedback for this event yet"
+msgid "Errors"
 msgstr ""
 
-msgid "No indicator output for this event yet"
+msgid "Feedback"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "Warnings"
 msgstr ""
 
 msgid "Generate new event"
@@ -454,6 +481,18 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr ""
+
+msgid "Months"
+msgstr ""
+
+msgid "Days"
+msgstr ""
+
 msgid "Uploading file"
 msgstr ""
 
@@ -480,6 +519,9 @@ msgstr ""
 
 msgid "No match found"
 msgstr ""
+
+msgid "Search"
+msgstr "खोज"
 
 msgid "Clear"
 msgstr ""
@@ -515,9 +557,6 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
-
-msgid "Visible"
 msgstr ""
 
 msgid "Update"
@@ -562,13 +601,22 @@ msgstr ""
 msgid "Selected program is invalid for selected organisation unit"
 msgstr ""
 
-msgid "Add note"
+msgid "Online"
 msgstr ""
 
-msgid "You don't have access to write notes"
+msgid "Offline"
 msgstr ""
 
-msgid "Write note"
+msgid "Syncing"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "You don't have access to write comments"
+msgstr ""
+
+msgid "Write comment"
 msgstr ""
 
 msgid "was blanked out and hidden by your last action"
@@ -578,6 +626,42 @@ msgid "Notice"
 msgstr ""
 
 msgid "Close the notice"
+msgstr ""
+
+msgid "Use new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt in for {{programName}}"
+msgstr ""
+
+msgid ""
+"By clicking opt-in below, you will start using the new enrollment dashboard "
+"in the Capture app for this Tracker program. At the moment, there is certain"
+" functionality from Tracker Capture that has not yet been added, including "
+"relationship and referral functionality. The work on including this Tracker "
+"functionality in Capture is ongoing and will be added in upcoming app "
+"releases."
+msgstr ""
+
+msgid ""
+"The core team appreciates any feedback on this new functionality which is "
+"currently being beta tested, please report any issues and feedback in the "
+"DHIS2 JIRA project."
+msgstr ""
+
+msgid ""
+"Click the button below to opt-in to the new enrollment dashboard "
+"functionality in the Capture app (beta) for this Tracker program for all "
+"users."
+msgstr ""
+
+msgid "Yes, opt in"
+msgstr ""
+
+msgid "Stop using new Enrollment dashboard for {{programName}}"
+msgstr ""
+
+msgid "Opt out for {{programName}}"
 msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
@@ -638,9 +722,7 @@ msgstr ""
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 
-msgid ""
-"You do not have permissions to access to this program, registering unit or "
-"record, contact your administrator for more information."
+msgid "No access to program owner."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -669,6 +751,9 @@ msgstr ""
 msgid "Page is missing required values from URL"
 msgstr ""
 
+msgid "Program is not valid"
+msgstr ""
+
 msgid "Org unit is not valid with current program"
 msgstr ""
 
@@ -679,6 +764,12 @@ msgid "There was an error loading the page"
 msgstr ""
 
 msgid "Choose an organisation unit to start reporting"
+msgstr ""
+
+msgid "No feedback for this event yet"
+msgstr ""
+
+msgid "No indicator output for this event yet"
 msgstr ""
 
 msgid "Program stage is invalid"
@@ -711,11 +802,6 @@ msgstr ""
 msgid "Registered events"
 msgstr ""
 
-msgid ""
-"The category option is not valid for the selected organisation unit. Please "
-"select a valid combination."
-msgstr ""
-
 msgid "Please select {{category}}."
 msgstr ""
 
@@ -728,9 +814,7 @@ msgstr ""
 msgid "Please select an organisation unit."
 msgstr ""
 
-msgid ""
-"You don't have access to create a {{trackedEntityName}} in the current "
-"selections"
+msgid "New"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -739,7 +823,7 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
-msgid "New"
+msgid "View enrollment"
 msgstr ""
 
 msgid "Create for"
@@ -815,6 +899,9 @@ msgstr ""
 msgid "You don't have access to edit this event"
 msgstr ""
 
+msgid "Edit event"
+msgstr ""
+
 msgid "View changelog"
 msgstr ""
 
@@ -824,18 +911,6 @@ msgstr ""
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-msgstr ""
-
-msgid "Errors"
-msgstr ""
-
-msgid "Feedback"
-msgstr ""
-
-msgid "Indicators"
-msgstr ""
-
-msgid "Warnings"
 msgstr ""
 
 msgid "Show all events"
@@ -848,6 +923,15 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Edit Event"
+msgstr ""
+
+msgid "View Event"
 msgstr ""
 
 msgid "Selected program"
@@ -868,15 +952,6 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
 msgid "The enrollment event data could not be found"
-msgstr ""
-
-msgid "Loading"
-msgstr ""
-
-msgid "An error occurred while loading the form"
-msgstr ""
-
-msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1017,7 +1092,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-msgid "You don't have access to edit the assigned user"
+msgid "You don't have access to edit this assignee"
 msgstr ""
 
 msgid "Edit"
@@ -1026,7 +1101,7 @@ msgstr ""
 msgid "No one is assigned to this event"
 msgstr ""
 
-msgid "You don't have access to assign a user to this event"
+msgid "You don't have access to assign an assignee"
 msgstr ""
 
 msgid "Assign"
@@ -1051,6 +1126,9 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
+msgid "Save comment"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -1070,9 +1148,6 @@ msgid "Mark as cancelled"
 msgstr ""
 
 msgid "Mark incomplete"
-msgstr ""
-
-msgid "You do not have access to delete this enrollment"
 msgstr ""
 
 msgid "Delete enrollment"
@@ -1111,9 +1186,6 @@ msgid "Set coordinates"
 msgstr ""
 
 msgid "Coordinates"
-msgstr ""
-
-msgid "Please provide valid coordinates"
 msgstr ""
 
 msgid "Delete polygon"
@@ -1158,10 +1230,13 @@ msgstr ""
 msgid "Follow-up"
 msgstr ""
 
-msgid "Started at{{escape}}"
+msgid "Started at {{orgUnitName}}"
 msgstr ""
 
-msgid "Owned by{{escape}}"
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
@@ -1173,7 +1248,13 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Please add or cancel the note before saving the event"
+msgid "Comments about this enrollment"
+msgstr ""
+
+msgid "Write a comment about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any comments"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
@@ -1185,25 +1266,22 @@ msgstr ""
 msgid "program or stage is invalid"
 msgstr ""
 
-msgid "Notes about this enrollment"
-msgstr ""
-
-msgid "Write a note about this enrollment"
-msgstr ""
-
-msgid "This enrollment doesn't have any notes"
-msgstr ""
-
 msgid "Error"
 msgstr ""
 
 msgid "Warning"
 msgstr ""
 
-msgid "stage not found in rules execution"
+msgid "Comments about this event"
 msgstr ""
 
-msgid "Please provide an valid organisation unit"
+msgid "Write a comment about this event"
+msgstr ""
+
+msgid "This event doesn't have any comments"
+msgstr ""
+
+msgid "stage not found in rules execution"
 msgstr ""
 
 msgid "Delete event"
@@ -1221,16 +1299,7 @@ msgstr ""
 msgid "Event completed"
 msgstr ""
 
-msgid "The event cannot be edited after it has been completed"
-msgstr ""
-
-msgid "Notes about this event"
-msgstr ""
-
-msgid "Write a note about this event"
-msgstr ""
-
-msgid "This event doesn't have any notes"
+msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Schedule date info"
@@ -1271,13 +1340,10 @@ msgstr ""
 msgid "Schedule date / Due date"
 msgstr ""
 
-msgid "Event notes"
+msgid "Event comments"
 msgstr ""
 
-msgid "Write a note about this scheduled event"
-msgstr ""
-
-msgid "Save note"
+msgid "Write a comment about this scheduled event"
 msgstr ""
 
 msgid ""
@@ -1343,13 +1409,12 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr ""
 
-msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr ""
-
-msgid "{{ linkableStageLabel }} has no linkable events"
-msgstr ""
-
 msgid "Ambiguous relationships, contact system administrator"
+msgstr ""
+
+msgid ""
+"Enter {{linkableStageLabel}} details in the next step after completing this "
+"{{currentStageLabel}}."
 msgstr ""
 
 msgid "Enter details now"
@@ -1364,39 +1429,10 @@ msgstr ""
 msgid "Report date"
 msgstr ""
 
-msgid "Please enter a date"
-msgstr ""
-
-msgid "Please provide a valid organisation unit"
-msgstr ""
-
 msgid "Please select a valid event"
 msgstr ""
 
-msgid "You do not have access to create events in this stage"
-msgstr ""
-
-msgid "This stage can only have one event"
-msgstr ""
-
 msgid "New {{ eventName }} event"
-msgstr ""
-
-msgid "An error occurred while deleting the event"
-msgstr ""
-
-msgid ""
-"Deleting an event is permanent and cannot be undone. Are you sure you want "
-"to delete this event?"
-msgstr ""
-
-msgid "An error occurred when updating event status"
-msgstr ""
-
-msgid "Unskip"
-msgstr ""
-
-msgid "Skip"
 msgstr ""
 
 msgid "To open this event, please wait until saving is complete"
@@ -1405,7 +1441,13 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
+msgid "Reset list"
+msgstr ""
+
 msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Events could not be retrieved. Please try again later."
@@ -1425,30 +1467,10 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
-msgid "View linked event"
-msgstr ""
-
-msgid "An error occurred while loading the widget."
-msgstr ""
-
-msgid "Linked event"
-msgstr ""
-
-msgid ""
-"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
-"the linked event details before entering data below"
-msgstr ""
-
-msgid "Scheduled"
-msgstr ""
-
 msgid "Changelog"
 msgstr ""
 
 msgid "No changes to display"
-msgstr ""
-
-msgid "Updated"
 msgstr ""
 
 msgid "Created"
@@ -1467,15 +1489,6 @@ msgid "Data item"
 msgstr ""
 
 msgid "Change"
-msgstr ""
-
-msgid "Value"
-msgstr ""
-
-msgid "File"
-msgstr ""
-
-msgid "Image"
 msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
@@ -1538,46 +1551,6 @@ msgstr ""
 msgid "an error occurred loading working lists"
 msgstr ""
 
-msgid "You do not have access to complete events"
-msgstr ""
-
-msgid "Complete events"
-msgstr ""
-
-msgid "Are you sure you want to complete all active events in selection?"
-msgstr ""
-
-msgid "There are no active events to complete in the current selection."
-msgstr ""
-
-msgid "Error completing events"
-msgstr ""
-
-msgid "There was an error completing the events."
-msgstr ""
-
-msgid "Details (Advanced)"
-msgstr ""
-
-msgid "An unknown error occurred."
-msgstr ""
-
-msgid "An error occurred while completing events"
-msgstr ""
-
-msgid "An error occurred while deleting the events"
-msgstr ""
-
-msgid "You do not have access to delete events"
-msgstr ""
-
-msgid "Delete events"
-msgstr ""
-
-msgid ""
-"This cannot be undone. Are you sure you want to delete the selected events?"
-msgstr ""
-
 msgid "Registration Date"
 msgstr ""
 
@@ -1593,120 +1566,13 @@ msgstr ""
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid ""
-"Some enrollments were completed successfully, but there was an error while "
-"completing the rest. Please see the details below."
+msgid "Active enrollments"
 msgstr ""
 
-msgid ""
-"There was an error while completing the enrollments. Please see the details "
-"below."
+msgid "Completed enrollments"
 msgstr ""
 
-msgid ""
-"An unexpected error occurred while fetching the enrollments. Please try "
-"again."
-msgstr ""
-
-msgid ""
-"There are currently no active enrollments in the selection. All enrollments "
-"are already completed or cancelled."
-msgstr ""
-
-msgid ""
-"This action will complete {{count}} active enrollment in your selection."
-msgid_plural ""
-"This action will complete {{count}} active enrollment in your selection."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "{{count}} enrollment already marked as completed will not be changed."
-msgid_plural ""
-"{{count}} enrollment already marked as completed will not be changed."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
-msgstr ""
-
-msgid "Complete enrollments"
-msgstr ""
-
-msgid "Error completing enrollments"
-msgstr ""
-
-msgid "No active enrollments to complete"
-msgstr ""
-
-msgid "Complete {{count}} enrollment"
-msgid_plural "Complete {{count}} enrollment"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "An error occurred when completing the enrollments"
-msgstr ""
-
-msgid "An unknown error occurred when completing enrollments"
-msgstr ""
-
-msgid "You do not have access to delete enrollments"
-msgstr ""
-
-msgid "Delete enrollments"
-msgstr ""
-
-msgid "Delete selected enrollments"
-msgstr ""
-
-msgid ""
-"An error occurred while loading the selected enrollments. Please try again."
-msgstr ""
-
-msgid ""
-"This action will permanently delete the selected enrollments, including all "
-"associated data and events."
-msgstr ""
-
-msgid "Active enrollments ({{count}})"
-msgid_plural "Active enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Completed enrollments ({{count}})"
-msgid_plural "Completed enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Cancelled enrollments ({{count}})"
-msgid_plural "Cancelled enrollments ({{count}})"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Delete {{count}} enrollment"
-msgid_plural "Delete {{count}} enrollment"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "An error occurred when deleting enrollments"
-msgstr ""
-
-msgid "Delete {{ trackedEntityName }} with all enrollments"
-msgstr ""
-
-msgid "Delete {{count}} {{ trackedEntityName }}"
-msgid_plural "Delete {{count}} {{ trackedEntityName }}"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid ""
-"Deleting records will also delete any associated enrollments and events. "
-"This cannot be undone. Are you sure you want to delete?"
-msgstr ""
-
-msgid "An error occurred while deleting the records"
+msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1717,14 +1583,6 @@ msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Deselect all"
-msgstr "सबै चयन उल्टाउनुहोस्"
 
 msgid "Update view"
 msgstr ""
@@ -1772,6 +1630,9 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
 msgstr ""
 
 msgid "Overdue{{ escape }} due {{ time }}"
@@ -1832,60 +1693,6 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
-msgstr ""
-
-msgid "Please provide a valid number"
-msgstr ""
-
-msgid "Please provide a valid integer"
-msgstr ""
-
-msgid "Please provide a positive integer"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr ""
-
-msgid "Please provide a negative integer"
-msgstr ""
-
-msgid "Please provide a valid date and time"
-msgstr ""
-
-msgid "Please provide a valid time"
-msgstr ""
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr ""
-
-msgid "Please provide a valid email address"
-msgstr ""
-
-msgid "Please provide a valid age"
-msgstr ""
-
-msgid "Please provide a valid phone number"
-msgstr ""
-
-msgid "This value already exists"
-msgstr ""
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
-
-msgid "Checking..."
-msgstr ""
-
-msgid "Please provide a valid positive integer"
-msgstr ""
-
-msgid "Please enter a valid time"
-msgstr ""
-
-msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

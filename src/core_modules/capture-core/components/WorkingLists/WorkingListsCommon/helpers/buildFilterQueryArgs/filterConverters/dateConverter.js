@@ -8,8 +8,7 @@ import type {
     RelativeDateFilterData,
     AbsoluteDateFilterData,
 } from '../../../../../ListView';
-import { areRelativeRangeValuesSupported }
-    from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
+import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
 
 const periods = {
     TODAY: 'TODAY',

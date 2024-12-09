@@ -89,7 +89,7 @@ export const useLifecycle = ({
             Object.entries(rulesContainer).length > 0
         ) {
             dispatch(
-                getRulesActionsForTEI({
+                ...getRulesActionsForTEI({
                     foundation: formFoundation,
                     formId: `${dataEntryId}-${itemId}`,
                     orgUnit,

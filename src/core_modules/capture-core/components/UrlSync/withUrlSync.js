@@ -3,7 +3,7 @@
  * @namespace UrlSync
  */
 import * as React from 'react';
-import queryString, { type QueryParameters } from 'query-string';
+import { parse, type QueryParameters } from 'query-string';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 type Props = {
@@ -96,7 +96,7 @@ const getUrlSyncer = (
         isOutOfSync() {
             const syncSpecification = onGetSyncSpecification(this.props);
             const { history: { location }, statePage, urlPage } = this.props;
-            const locationParams = queryString.parse(location && location.search);
+            const locationParams = parse(location && location.search);
             const urlParamsAreOutOfSync = this.paramsNeedsUpdate(syncSpecification, locationParams);
             const urlPathnameIsOutOfSync = urlPage !== statePage;
 

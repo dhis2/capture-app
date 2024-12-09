@@ -24,6 +24,10 @@ export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
+            name: 'TwoEventWorkspace',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
             name: 'EditEventWorkspace',
         },
     ],

@@ -160,6 +160,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                 validatingMessage,
                 ...passOnProps
             } = this.props;
+
             const messages =
                 this.getMessage(errorMessage, warningMessage, infoMessage, validatingMessage);
 

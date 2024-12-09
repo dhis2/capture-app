@@ -31,8 +31,8 @@ export const TextInput = (props: Props) => {
                     /> :
                     // $FlowFixMe[cannot-spread-inexact] automated comment
                     <input
+                        data-test="capture-ui-input"
                         ref={inputRef}
-                        type="text"
                         className={classNames(defaultClasses.input, classes.input)}
                         {...passOnProps}
                     />

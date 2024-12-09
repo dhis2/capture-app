@@ -1,5 +1,6 @@
 // @flow
 import React, { useState } from 'react';
+import { convertStringToDateFormat } from '../../../utils/converters/date';
 import {
     DateField,
     withDefaultFieldContainer,
@@ -15,7 +16,7 @@ import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 type Props = {|
     scheduledLabel: string,
     relatedStagesDataValues: RelatedStageDataValueStates,
-    onBlurDateField: (value: string, internalComponentError?: {error: ?string, errorCode: ?string}) => void,
+    onBlurDateField: (value: string) => void,
     saveAttempted: boolean,
     errorMessages: ErrorMessagesForRelatedStages,
 |}
@@ -42,16 +43,16 @@ export const DateFieldForRelatedStages = ({
 }: Props) => {
     const [touched, setTouched] = useState(false);
 
-    const onBlur = (event, internalComponentError) => {
+    const onBlur = (event) => {
         setTouched(true);
-        onBlurDateField(event, internalComponentError);
+        onBlurDateField(event);
     };
 
     const shouldShowError = (touched || saveAttempted);
     return (
         <DateFieldForForm
             label={scheduledLabel}
-            value={relatedStagesDataValues.scheduledAt ? relatedStagesDataValues.scheduledAt : ''}
+            value={relatedStagesDataValues.scheduledAt ? convertStringToDateFormat(relatedStagesDataValues.scheduledAt) : ''}
             required
             onSetFocus={() => {}}
             onFocus={() => {}}

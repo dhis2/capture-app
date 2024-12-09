@@ -26,17 +26,11 @@ type InputMessageClasses = {
 }
 
 type DateParser = (value: string) => { isValid: boolean, momentDate: any };
-
 type DateStringFromMomentFormatter = (momentValue: Object) => string;
-
-type ValidationOptions = {
-    error?: ?string,
-    errorCode?: ?string,
-};
 
 type Props = {
     value: ?AgeValues,
-    onBlur: (value: ?AgeValues, options: ?ValidationOptions) => void,
+    onBlur: (value: ?AgeValues) => void,
     onChange: (value: ?AgeValues) => void,
     onRemoveFocus: () => void,
     orientation: $Values<typeof orientations>,
@@ -147,7 +141,7 @@ class D2AgeFieldPlain extends Component<Props> {
         this.props.onBlur(calculatedValues);
     }
 
-    handleDateBlur = (date: ?string, options: ?ValidationOptions) => {
+    handleDateBlur = (date: ?string) => {
         const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
         onRemoveFocus && onRemoveFocus();
         const calculatedValues = date ? getCalculatedValues(
@@ -155,7 +149,7 @@ class D2AgeFieldPlain extends Component<Props> {
             onParseDate,
             onGetFormattedDateStringFromMoment,
             moment) : null;
-        this.props.onBlur(calculatedValues, options);
+        this.props.onBlur(calculatedValues);
     }
 
     renderMessage = (key: string) => {
@@ -206,13 +200,17 @@ class D2AgeFieldPlain extends Component<Props> {
             value,
             onBlur,
             shrinkDisabled,
+            dateCalendarOnConvertValueIn,
+            dateCalendarOnConvertValueOut,
             dateCalendarWidth,
+            datePopupAnchorPosition,
+            dateCalendarTheme,
+            dateCalendarLocale,
             datePlaceholder,
             moment,
             onParseDate,
             ...passOnProps
         } = this.props;
-
         const dateInputContainerClass = classNames(
             { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
         );
@@ -224,6 +222,11 @@ class D2AgeFieldPlain extends Component<Props> {
                     value={currentValues.date}
                     onChange={date => onChange({ ...currentValues, date })}
                     calendarWidth={dateCalendarWidth}
+                    popupAnchorPosition={datePopupAnchorPosition}
+                    calendarTheme={dateCalendarTheme}
+                    calendarLocale={dateCalendarLocale}
+                    calendarOnConvertValueIn={dateCalendarOnConvertValueIn}
+                    calendarOnConvertValueOut={dateCalendarOnConvertValueOut}
                     placeholder={datePlaceholder}
                     {...passOnProps}
                 />

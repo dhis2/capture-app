@@ -8,7 +8,7 @@ import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
 import type { DateFilterData } from './types';
 import type { Value } from './DateFilter.component';
-import { areRelativeRangeValuesSupported } from '../../../utils/validation/validators/areRelativeRangeValuesSupported';
+import { areRelativeRangeValuesSupported } from '../../../utils/validators/areRelativeRangeValuesSupported';
 
 type Props = {
     filter: ?DateFilterData,
@@ -28,14 +28,8 @@ export class DateFilterManager extends React.Component<Props, State> {
     static calculateAbsoluteRangeValueState(filter: DateFilterData) {
         return {
             main: mainOptionKeys.ABSOLUTE_RANGE,
-            from: filter.ge ? {
-                value: filter.ge && DateFilterManager.convertDateForEdit(filter.ge),
-                isValid: true,
-            } : undefined,
-            to: filter.le ? {
-                value: filter.le && DateFilterManager.convertDateForEdit(filter.le),
-                isValid: true,
-            } : undefined,
+            from: filter.ge && DateFilterManager.convertDateForEdit(filter.ge),
+            to: filter.le && DateFilterManager.convertDateForEdit(filter.le),
         };
     }
     static calculateRelativeRangeValueState(filter: DateFilterData) {
@@ -80,7 +74,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         };
     }
 
-    handleCommitValue = (value: ?Value) => {
+    handleCommitValue = (value: ?Object) => {
         this.setState({ value });
         this.props.handleCommitValue && this.props.handleCommitValue();
     };

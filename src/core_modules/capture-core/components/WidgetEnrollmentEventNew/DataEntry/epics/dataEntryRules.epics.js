@@ -1,7 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, switchMap } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import i18n from '@dhis2/d2-i18n';
@@ -16,34 +15,22 @@ import {
     getCurrentClientMainData,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
-    validateAssignEffects,
     type FieldData,
 } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type { RulesExecutionDependenciesClientFormatted } from '../../common.types';
 import { getLocationQuery } from '../../../../utils/routing';
-import type { QuerySingleResource } from '../../../../utils/api';
 
-const runRulesForNewEvent = async ({
-    store,
-    dataEntryId,
-    itemId,
-    uid,
-    orgUnit,
-    rulesExecutionDependenciesClientFormatted,
-    fieldData,
-    querySingleResource,
-}: {
+const runRulesForNewEvent = (
     store: ReduxStore,
     dataEntryId: string,
     itemId: string,
     uid: string,
     orgUnit: OrgUnit,
-    rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
+    history: Object,
+    { events, attributeValues, enrollmentData }: RulesExecutionDependenciesClientFormatted,
     fieldData?: ?FieldData,
-    querySingleResource: QuerySingleResource,
-}) => {
-    const { events, attributeValues, enrollmentData } = rulesExecutionDependenciesClientFormatted;
+) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const { programId, stageId } = getLocationQuery();
@@ -60,7 +47,7 @@ const runRulesForNewEvent = async ({
     const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
     const currentEvent = { ...currentEventValues, ...currentEventMainData, programStageId };
 
-    const effects = getApplicableRuleEffectsForTrackerProgram({
+    const ruleEffects = getApplicableRuleEffectsForTrackerProgram({
         program,
         stage,
         orgUnit,
@@ -70,55 +57,40 @@ const runRulesForNewEvent = async ({
         enrollmentData,
     });
 
-    const effectsWithValidations = await validateAssignEffects({
-        dataElements: foundation.getElements(),
-        effects,
-        querySingleResource,
-    });
-
     return batchActions([
-        updateRulesEffects(effectsWithValidations, formId),
+        updateRulesEffects(ruleEffects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     newEventWidgetDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
     );
 };
 
-export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { querySingleResource }: ApiUtils,
-) =>
+export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload
                 .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
-        switchMap((action) => {
+        map((action) => {
             const { dataEntryId, itemId, uid, orgUnit, rulesExecutionDependenciesClientFormatted } = action.payload;
-            const runRulesForNewEventPromise = runRulesForNewEvent({
+            return runRulesForNewEvent(
                 store,
                 dataEntryId,
                 itemId,
                 uid,
                 orgUnit,
+                history,
                 rulesExecutionDependenciesClientFormatted,
-                querySingleResource,
-            });
-            return from(runRulesForNewEventPromise);
+            );
         }));
 
-export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { querySingleResource }: ApiUtils,
-) =>
+export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH),
         map(actionBatch =>
             actionBatch.payload
                 .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
-        switchMap((action) => {
+        map((action) => {
             const {
                 dataEntryId,
                 itemId,
@@ -135,16 +107,14 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (
                 value,
                 valid: uiState.valid,
             };
-
-            const runRulesForNewEventPromise = runRulesForNewEvent({
+            return runRulesForNewEvent(
                 store,
                 dataEntryId,
                 itemId,
                 uid,
                 orgUnit,
+                history,
                 rulesExecutionDependenciesClientFormatted,
                 fieldData,
-                querySingleResource,
-            });
-            return from(runRulesForNewEventPromise);
+            );
         }));

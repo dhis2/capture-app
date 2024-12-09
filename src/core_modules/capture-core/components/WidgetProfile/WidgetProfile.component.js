@@ -140,8 +140,6 @@ const WidgetProfilePlain = ({
             </div>
         );
     };
-    const handleOnDisable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE), [setTeiModalState]);
-    const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
 
     return (
         <div data-test="profile-widget">
@@ -181,8 +179,7 @@ const WidgetProfilePlain = ({
                 <>
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
-                        onDisable={handleOnDisable}
-                        onEnable={handleOnEnable}
+                        onDisable={() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE)}
                         programAPI={program}
                         dataEntryFormConfig={dataEntryFormConfig}
                         orgUnitId={orgUnitId}

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import queryString, { type QueryParameters } from 'query-string';
+import { parse, type QueryParameters } from 'query-string';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
@@ -81,7 +81,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
         setPageAndParams() {
             const { location } = this.props;
             this.page = location.pathname.substring(1);
-            this.params = queryString.parse(location && location.search);
+            this.params = parse(location && location.search);
         }
 
         render() {

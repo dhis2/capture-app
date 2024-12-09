@@ -49,7 +49,7 @@ Given('you are in the main page with program preselected', () => {
 Given('you select both org unit and program Malaria case registration', () => {
     cy.get('[data-test="org-unit-selector-container"]')
         .click();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .type('Ngelehun C');
     cy.contains('Ngelehun CHC')
         .click();
@@ -67,7 +67,7 @@ Given('you select both org unit and program Malaria case registration', () => {
 Given('you select both org unit and program Child Programme', () => {
     cy.get('[data-test="org-unit-selector-container"]')
         .click();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .type('Ngelehun C');
     cy.contains('Ngelehun CHC')
         .click();
@@ -359,7 +359,7 @@ And('you see message explaining this is an Event program', () => {
 When('you select org unit that is incompatible with the already selected program', () => {
     cy.get('[data-test="org-unit-selector-container"]')
         .click();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .type('Biriw');
     cy.contains('Biriwa')
         .click();

@@ -1,6 +1,6 @@
 // @flow
 import { isValidDateTime } from './dateTimeValidator';
-import { parseDate } from '../../../converters/date';
+import { parseDate } from '../../converters/date';
 
 function isValidDateTimeWithEmptyCheck(value: ?Object) {
     return value && isValidDateTime(value);

@@ -11,7 +11,7 @@ import { buildField } from './field/buildField';
 import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
 import type { CustomForm, DataElement } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
-import { validatorTypes } from '../../utils/validation/constants';
+import { validatorTypes } from './field/validators/constants';
 import type { QuerySingleResource } from '../../utils/api/api.types';
 import { FormFieldPlugin } from './FormFieldPlugin';
 import { FormFieldPluginConfig } from '../../metaData/FormFieldPluginConfig';

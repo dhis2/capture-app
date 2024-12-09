@@ -14,10 +14,11 @@ import {
 import type { Props } from './scheduleDate.types';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
+import { convertStringToDateFormat } from '../../../utils/converters/date';
 import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 
 
-const OrgUnitFieldForForm = withDefaultFieldContainer()(
+const LabelledRequiredDateField = withDefaultFieldContainer()(
     withLabel({
         onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
     })(
@@ -48,7 +49,7 @@ const ScheduleDatePlain = ({
     <>
         {!hideDueDate && (
             <>
-                <OrgUnitFieldForForm
+                <LabelledRequiredDateField
                     label={i18n.t('Schedule date / Due date')}
                     required
                     value={scheduleDate}
@@ -58,14 +59,7 @@ const ScheduleDatePlain = ({
                     onSetFocus={() => { }}
                     onFocus={() => { }}
                     onRemoveFocus={() => { }}
-                    onBlur={(e, internalComponentError) => {
-                        const { error } = internalComponentError;
-                        if (error) {
-                            setScheduleDate('');
-                            return;
-                        }
-                        setScheduleDate(e);
-                    }}
+                    onBlur={(e) => { setScheduleDate(convertStringToDateFormat(e)); }}
                 />
                 <div className={classes.infoBox}>
                     <InfoBox
