@@ -15,7 +15,7 @@ export const deriveRelatedStageEvent = ({
     relatedStageRef?: { current: ?RelatedStageRefPayload},
     firstStageMetaData: ?{ stage: ?ProgramStage},
     programId: string,
-    teiId?: ?string;
+    teiId?: ?string,
 }) => {
     if (relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship()) {
         const isValid = relatedStageRef.current.formIsValidOnSave();
@@ -50,7 +50,6 @@ export const deriveRelatedStageEvent = ({
             linkMode,
             relatedStageDataValues,
             clientRequestEvent,
-
             relatedStageType: selectedRelationshipType,
             programId,
             currentProgramStageId,
