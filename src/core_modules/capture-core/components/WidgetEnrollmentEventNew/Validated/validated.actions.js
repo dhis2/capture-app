@@ -1,8 +1,8 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
-import { actions as RelatedStageModes } from '../../WidgetRelatedStages/constants';
-import type { RequestEvent, LinkedRequestEvent } from './validated.types';
+import { RelatedStageModes } from '../../WidgetRelatedStages';
+import type { RequestEvent, LinkedRequestEvent } from '../../DataEntries';
 import type { ExternalSaveHandler } from '../common.types';
 
 export const newEventBatchActionTypes = {

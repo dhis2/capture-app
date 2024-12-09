@@ -10,6 +10,10 @@ import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryW
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import type { Props } from './RegisterTei.types';
 import { withErrorMessageHandler } from '../../../../HOC';
+import type { EnrollmentPayload } from
+    '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
+import type { TeiPayload } from
+    '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
 
 const getStyles = () => ({
     container: {
@@ -95,8 +99,8 @@ const RegisterTeiPlain = ({
         </Button>
     ), [onLink]);
 
-    const handleSave = useCallback(() => {
-        onSave(itemId, dataEntryId);
+    const handleSave = useCallback((payload: EnrollmentPayload | TeiPayload) => {
+        onSave(itemId, dataEntryId, payload);
     }, [onSave, itemId, dataEntryId]);
 
     return (
