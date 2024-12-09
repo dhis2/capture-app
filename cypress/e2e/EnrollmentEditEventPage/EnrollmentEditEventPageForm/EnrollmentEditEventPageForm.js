@@ -61,8 +61,7 @@ Given(/^you land on the enrollment event page with selected (.*) by having typed
 When(/^the user clicks on the edit button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="dhis2-uicore-button"]')
-        .eq(1)
+        .find('[data-test="widget-enrollment-event-edit-button"]')
         .click(),
 );
 
@@ -85,7 +84,7 @@ When(/^the user clicks on the cancel button/, () =>
 When(/^the user set the apgar score to (.*)/, score =>
     cy
         .get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="capture-ui-input"]')
+        .find('input[type="text"]')
         .eq(2)
         .clear()
         .type(score)
@@ -119,8 +118,8 @@ When('the user clicks switch tab to Schedule', () => {
 
 Then('the user selects another schedule date', () => {
     cy.get('[data-test="schedule-section"]').within(() => {
-        cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', `${getCurrentYear() - 15}-01-07`);
-        cy.get("[data-test='capture-ui-input']").eq(0)
+        cy.get('input[type="text"]').eq(0).should('have.value', `${getCurrentYear() - 15}-01-07`);
+        cy.get('input[type="text"]').eq(0)
             .clear()
             .type(`${getCurrentYear()}-08-01`)
             .blur();
@@ -208,8 +207,7 @@ And('you open the Birth stage event', () => {
 
 Then('the edit button should be disabled', () => {
     cy.get('[data-test="widget-enrollment-event"]')
-        .find('[data-test="dhis2-uicore-button"]')
-        .eq(1)
+        .find('[data-test="widget-enrollment-event-edit-button"]')
         .should('be.disabled');
 });
 

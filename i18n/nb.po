@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Karoline Tufte Lien <karoline@dhis2.org>, 2024
 # Merethe Wollan Blisten, 2024
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2024
+# Karoline Tufte Lien <karoline@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2024\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,6 +43,39 @@ msgstr ""
 " Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
 "denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
 "at dette vil lukke andre versjoner."
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "Rediger hendelse"
+
+msgid "New event"
+msgstr "Ny hendelse"
+
+msgid "Active enrollments"
+msgstr "Aktive registreringer"
+
+msgid "Completed enrollments"
+msgstr "Fullførte registreringer"
+
+msgid "Cancelled enrollments"
+msgstr "Avbrutte registreringer"
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "Søk"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr "Mer"
@@ -89,66 +122,6 @@ msgstr "Denne verdien validerer"
 msgid "Async field update failed"
 msgstr "Asynkront feltoppdatering mislyktes"
 
-msgid "A value is required"
-msgstr "En verdi kreves"
-
-msgid "Please provide a valid number"
-msgstr "Oppgi et gyldig nummer"
-
-msgid "Please provide a valid integer"
-msgstr "Oppgi et gyldig heltall"
-
-msgid "Please provide a positive integer"
-msgstr "Oppgi et positivt heltall"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Oppgi null eller et positivt heltall"
-
-msgid "Please provide a negative integer"
-msgstr "Oppgi et negativt heltall"
-
-msgid "Please provide a valid date"
-msgstr "Oppgi en gyldig dato"
-
-msgid "A date in the future is not allowed"
-msgstr "En dato i fremtiden er ikke tillatt"
-
-msgid "Please provide a valid date and time"
-msgstr "Oppgi en gyldig dato og tid"
-
-msgid "Please provide a valid time"
-msgstr "Oppgi en gyldig tid"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Oppgi et heltall mellom 0 og 100"
-
-msgid "Please provide a valid url"
-msgstr "Oppgi en gyldig url"
-
-msgid "Please provide a valid email address"
-msgstr "Vennligst fyll ut en gyldig e-postadresse"
-
-msgid "Please provide a valid age"
-msgstr "Oppgi en gyldig alder"
-
-msgid "Please provide a valid phone number"
-msgstr "Oppgi et gyldig telefonnummer"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Oppgi en gyldig organisasjonsenhet"
-
-msgid "Please provide valid coordinates"
-msgstr "Oppgi gyldige koordinater"
-
-msgid "This value already exists"
-msgstr "Denne verdien finnes allerede"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"Fra\" kan ikke være større enn \"Til\""
-
-msgid "Checking..."
-msgstr "Sjekker..."
-
 msgid "Area"
 msgstr "Areal"
 
@@ -160,6 +133,12 @@ msgstr "Registrering"
 
 msgid "Complete event"
 msgstr "Fullfør hendelse"
+
+msgid "A value is required"
+msgstr "En verdi kreves"
+
+msgid "Please provide a valid date"
+msgstr "Oppgi en gyldig dato"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Grunnleggende informasjon"
@@ -173,8 +152,8 @@ msgstr "{{ stageName }} - Status"
 msgid "Please select {{categoryName}}"
 msgstr "Velg {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "En fremtidig dato er ikke tillatt"
+msgid "A date in the future is not allowed"
+msgstr "En dato i fremtiden er ikke tillatt"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Lagrer en ny registrering i {{programName}} i {{orgUnitName}}."
@@ -300,9 +279,6 @@ msgstr "Ja, forkast endringer"
 
 msgid "No, cancel"
 msgstr "Nei, avbryt"
-
-msgid "New event"
-msgstr "Ny hendelse"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "Du har ikke tilgang til å lage en hendelse i gjeldende valg"
@@ -523,9 +499,6 @@ msgstr "Skriv for å filtrere alternativer"
 
 msgid "No match found"
 msgstr "Ingen treff funnet"
-
-msgid "Search"
-msgstr "Søk"
 
 msgid "Clear"
 msgstr "Fjern"
@@ -872,9 +845,6 @@ msgstr "hendelse"
 msgid "You don't have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
-msgid "Edit event"
-msgstr "Rediger hendelse"
-
 msgid "View changelog"
 msgstr "Vis endringslogg"
 
@@ -912,15 +882,6 @@ msgstr "Hendelse kunne ikke lastes inn"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
-msgid "Dashboard"
-msgstr "Dashbord"
-
-msgid "Edit Event"
-msgstr "Endre hendelse"
-
-msgid "View Event"
-msgstr "Se hendelse"
-
 msgid "Selected program"
 msgstr "Valgt program"
 
@@ -946,6 +907,9 @@ msgstr "Laster"
 
 msgid "An error occurred while loading the form"
 msgstr "Det oppsto en feil ved åpning av skjemaet"
+
+msgid "Back to all stages and events"
+msgstr "Tilbake til alle faser og hendelser"
 
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
@@ -1196,6 +1160,9 @@ msgstr "Lagre koordinater"
 msgid "Coordinates"
 msgstr "Koordinater"
 
+msgid "Please provide valid coordinates"
+msgstr "Oppgi gyldige koordinater"
+
 msgid "Delete polygon"
 msgstr "Slett polygon"
 
@@ -1291,6 +1258,9 @@ msgstr "Advarsel"
 msgid "stage not found in rules execution"
 msgstr "fase ikke funnet i regelutførelse"
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Slett hendelse"
 
@@ -1308,9 +1278,6 @@ msgstr "Hendelse fullført"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr "Hendelsen kan ikke redigeres etter at den er fullført"
-
-msgid "Back to all stages and events"
-msgstr "Tilbake til alle faser og hendelser"
 
 msgid "Notes about this event"
 msgstr "Notater om denne hendelsen"
@@ -1464,6 +1431,12 @@ msgstr "Planlagt dato"
 msgid "Report date"
 msgstr "Rapporteringsdato"
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Oppgi en gyldig organisasjonsenhet"
+
 msgid "Please select a valid event"
 msgstr "Velg en gyldig hendelse"
 
@@ -1522,11 +1495,19 @@ msgstr "{{ scheduledEvents }} planlagt"
 msgid "Stages and Events"
 msgstr "Faser og hendelser"
 
+msgid "View linked event"
+msgstr "Vis knyttede hendelser"
+
 msgid "An error occurred while loading the widget."
 msgstr "En feil oppstå ved lasting av widget. "
 
-msgid "View linked event"
-msgstr "Vis knyttede hendelser"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
+msgstr ""
 
 msgid "Scheduled"
 msgstr "Planlagt"
@@ -1560,6 +1541,12 @@ msgstr "Endre"
 
 msgid "Value"
 msgstr "Verdi"
+
+msgid "File"
+msgstr "Fil"
+
+msgid "Image"
+msgstr "Bilde"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Ny {{trackedEntityTypeName}} relasjon"
@@ -1623,6 +1610,46 @@ msgstr "Last ned data..."
 msgid "an error occurred loading working lists"
 msgstr "en feil oppstod ved lasting av arbeidslister"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Innregistreringsdato"
 
@@ -1638,14 +1665,121 @@ msgstr "Oppfølging"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Velg en programfase å filtrere etter {{label}}"
 
-msgid "Active enrollments"
-msgstr "Aktive registreringer"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+msgstr ""
 
-msgid "Completed enrollments"
-msgstr "Fullførte registreringer"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+msgstr ""
 
-msgid "Cancelled enrollments"
-msgstr "Avbrutte registreringer"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "Arbeidslisten kunne ikke oppdateres"
@@ -1655,6 +1789,14 @@ msgstr "det oppstod en feil ved lasting av arbeidslistene"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "det oppstod en feil ved lasting av lister over sporede enheter"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} valgt"
+msgstr[1] "{{count}} valgt"
+
+msgid "Deselect all"
+msgstr "Fjern valg"
 
 msgid "Update view"
 msgstr "Oppdater visning"
@@ -1763,6 +1905,60 @@ msgstr "Feil under redigering av hendelsen, endringer ble ikke lagret"
 
 msgid "Error updating the Assignee"
 msgstr "Feil under oppdatering av tildelt bruker"
+
+msgid "Please provide a valid number"
+msgstr "Oppgi et gyldig nummer"
+
+msgid "Please provide a valid integer"
+msgstr "Oppgi et gyldig heltall"
+
+msgid "Please provide a positive integer"
+msgstr "Oppgi et positivt heltall"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Oppgi null eller et positivt heltall"
+
+msgid "Please provide a negative integer"
+msgstr "Oppgi et negativt heltall"
+
+msgid "Please provide a valid date and time"
+msgstr "Oppgi en gyldig dato og tid"
+
+msgid "Please provide a valid time"
+msgstr "Oppgi en gyldig tid"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Oppgi et heltall mellom 0 og 100"
+
+msgid "Please provide a valid url"
+msgstr "Oppgi en gyldig url"
+
+msgid "Please provide a valid email address"
+msgstr "Vennligst fyll ut en gyldig e-postadresse"
+
+msgid "Please provide a valid age"
+msgstr "Oppgi en gyldig alder"
+
+msgid "Please provide a valid phone number"
+msgstr "Oppgi et gyldig telefonnummer"
+
+msgid "This value already exists"
+msgstr "Denne verdien finnes allerede"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"Fra\" kan ikke være større enn \"Til\""
+
+msgid "Checking..."
+msgstr "Sjekker..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
