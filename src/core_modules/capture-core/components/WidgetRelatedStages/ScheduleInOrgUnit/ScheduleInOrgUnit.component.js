@@ -43,7 +43,7 @@ type Props = {
     ...CssClasses,
 }
 
-export const ScheduleInOrgUnitPlain = ({
+const ScheduleInOrgUnitPlain = ({
     relatedStagesDataValues,
     setRelatedStagesDataValues,
     saveAttempted,
