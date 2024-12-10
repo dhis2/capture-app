@@ -5,8 +5,8 @@ import '../WidgetTab';
 
 Then('you choose a schedule date', () => {
     cy.get('[data-test="schedule-section"]').within(() => {
-        cy.get('input[type="text"]').eq(0).should('have.value', `${getCurrentYear()}-08-01`);
-        cy.get('input[type="text"]').eq(0)
+        cy.get("[data-test='capture-ui-input']").eq(0).should('have.value', `${getCurrentYear()}-08-01`);
+        cy.get("[data-test='capture-ui-input']").eq(0)
             .clear()
             .type(`${getCurrentYear() + 1}-08-01`)
             .blur();

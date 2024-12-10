@@ -16,21 +16,21 @@ Given('the tei created by this test is cleared from the database', () => {
 
 And('you create a new tei in Child programme from Ngelehun CHC', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW');
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('1999-09-01')
         .blur();
     cy.get('[data-test="d2-section"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Breaking')
         .blur();
     cy.get('[data-test="d2-section"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('TheGlass')
         .blur();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(7)
         .type('2023-09-01')
         .blur();
@@ -68,7 +68,7 @@ And('you enroll the tei from Njandama MCHP', () => {
         .click();
 
     cy.get('[data-test="d2-section"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(8)
         .type('1999-09-01')
         .blur();

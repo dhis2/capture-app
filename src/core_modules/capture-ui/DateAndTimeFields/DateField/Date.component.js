@@ -1,62 +1,144 @@
 // @flow
-import React from 'react';
-import { CalendarInput } from '@dhis2/ui';
-import { systemSettingsStore } from '../../../capture-core/metaDataMemoryStores';
-
-type ValidationOptions = {
-    error?: ?string,
-    errorCode?: ?string,
-};
+import React, { createRef } from 'react';
+import { DatePopup } from './DatePopup.component';
+import { DateCalendar } from './DateCalendar.component';
+import { lowerCaseFirstLetter } from '../../internal/utils/string/lowerCaseFirstLetter';
+import { DateInput } from '../../internal/DateInput/DateInput.component';
 
 type Props = {
-    value: ?Object,
+    value: ?string,
     width: number,
-    maxWidth?: ?string,
-    calendarWidth?: ?string,
-    inputWidth?: ?string,
+    maxWidth?: ?number,
+    calendarWidth?: ?number,
+    calendarHeight?: ?number,
+    inputWidth?: ?number,
     disabled?: ?boolean,
-    onBlur: (value: Object, options: ValidationOptions) => void,
+    onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-    calendar?: string,
-    placeholder?: string,
-    label?: string,
-    calendarMaxMoment?: any,
-    innerMessage?: any
 };
-
-type Validation = {|
-    validationCode: ?string,
-    validationText: ?string,
-    error?: boolean,
-    valid: boolean,
-|};
 
 type State = {
-    calendarError: ?Validation,
+    popoverOpen: boolean,
 };
 
-const formatDate = (date: any, dateFormat: string): ?string =>
-    (dateFormat === 'dd-MM-yyyy' ? date?.format('DD-MM-YYYY') : date?.format('YYYY-MM-DD'));
-
 export class DateField extends React.Component<Props, State> {
-    handleDateSelected: (value: {calendarDateString: string}) => void;
+    static splitPassOnProps(passOnProps: ?Object) {
+        const splittedProps = {
+            input: {},
+            popup: {},
+            calendar: {},
+        };
+
+        if (!passOnProps) {
+            return splittedProps;
+        }
+
+        return Object
+            .keys(passOnProps)
+            .reduce((accSplittedProps, propKey) => {
+                let propContainer;
+                if (propKey.startsWith(DateField.propContainers.CALENDAR)) {
+                    propContainer = DateField.propContainers.CALENDAR;
+                } else if (propKey.startsWith(DateField.propContainers.POPUP)) {
+                    propContainer = DateField.propContainers.POPUP;
+                } else {
+                    propContainer = DateField.propContainers.INPUT;
+                }
+
+                const outputKey = lowerCaseFirstLetter(propKey.replace(propContainer, ''));
+                accSplittedProps[propContainer][outputKey] = passOnProps[propKey];
+                return accSplittedProps;
+            }, splittedProps);
+    }
+
+    containerInstance: ?HTMLElement;
+    handleTextFieldFocus: () => void;
+    handleDateSelected: (value: string) => void;
+    handleTextFieldBlur: (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    hidePopover: () => void;
+    handleDocumentClick: (event: MouseEvent) => void;
+    calendarWrapperDOMElementRef: { current: ?HTMLDivElement };
 
     constructor(props: Props) {
         super(props);
 
+        this.state = {
+            popoverOpen: false,
+        };
+
+        this.handleTextFieldFocus = this.handleTextFieldFocus.bind(this);
         this.handleDateSelected = this.handleDateSelected.bind(this);
+        this.handleTextFieldBlur = this.handleTextFieldBlur.bind(this);
+        this.hidePopover = this.hidePopover.bind(this);
+        this.handleDocumentClick = this.handleDocumentClick.bind(this);
+
+        this.calendarWrapperDOMElementRef = createRef();
     }
 
-    handleDateSelected(value: { calendarDateString: string, validation: Validation}) {
-        const { calendarDateString: date, validation } = value || {};
-        this.props.onBlur(
-            date, {
-                error: validation?.validationText,
-                errorCode: validation?.validationCode,
-            });
+    componentWillUnmount() {
+        document.removeEventListener('click', this.handleDocumentClick);
+    }
 
+    static propContainers = {
+        CALENDAR: 'calendar',
+        POPUP: 'popup',
+        INPUT: 'input',
+    };
+
+    handleTextFieldFocus() {
+        document.removeEventListener('click', this.handleDocumentClick);
+
+        this.setState({
+            popoverOpen: true,
+        });
+
+        this.props.onFocus && this.props.onFocus();
+    }
+
+    handleDateSelected(value: string) {
+        this.props.onBlur(value);
+        this.hidePopover();
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
+        document.removeEventListener('click', this.handleDocumentClick);
+    }
+
+    handleDocumentClick({ target }: MouseEvent) {
+        const calendarWrapperDOMElement = this.calendarWrapperDOMElementRef.current;
+
+        if (!calendarWrapperDOMElement) {
+            throw Error('calendar wrapper DOM element not found');
+        }
+
+        if (target === calendarWrapperDOMElement ||
+            (target instanceof Node && calendarWrapperDOMElement.contains(target))) {
+            return;
+        }
+
+        this.hidePopover();
+        document.removeEventListener('click', this.handleDocumentClick);
+    }
+
+    handleTextFieldBlur({ relatedTarget, currentTarget }: SyntheticFocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+        const calendarWrapperDOMElement = this.calendarWrapperDOMElementRef.current;
+
+        if (!calendarWrapperDOMElement) {
+            throw Error('calendar wrapper DOM element not found');
+        }
+
+        if (relatedTarget === calendarWrapperDOMElement ||
+            (relatedTarget instanceof Node && calendarWrapperDOMElement.contains(relatedTarget))) {
+            document.addEventListener('click', this.handleDocumentClick);
+        } else {
+            this.props.onBlur(currentTarget.value);
+            this.hidePopover();
+        }
+    }
+
+    hidePopover() {
+        this.setState({
+            popoverOpen: false,
+        });
     }
 
     render() {
@@ -64,43 +146,61 @@ export class DateField extends React.Component<Props, State> {
             width,
             maxWidth,
             calendarWidth,
+            calendarHeight,
             inputWidth,
-            calendar,
-            calendarMaxMoment,
-            value,
-            innerMessage,
+            onBlur,
+            onFocus,
+            onDateSelectedFromCalendar,
+            ...passOnProps
         } = this.props;
-
+        const { popoverOpen } = this.state;
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
-        const calendarType = calendar || 'gregory';
-        const format = systemSettingsStore.get().dateFormat;
-        const errorProps = innerMessage && innerMessage.messageType === 'error'
-            ? { error: !!innerMessage.message?.dateInnerErrorMessage,
-                validationText: innerMessage.message?.dateInnerErrorMessage }
-            : {};
+        const splittedPassOnProps = DateField.splitPassOnProps(passOnProps);
+        const calculatedCalendarHeight = calendarHeight || 350;
 
         return (
             <div
+                ref={(containerInstance) => { this.containerInstance = containerInstance; }}
                 style={{
                     width,
                     maxWidth,
                 }}
             >
-                <CalendarInput
-                    label=""
-                    placeholder={this.props.placeholder}
-                    format={format}
-                    onDateSelect={this.handleDateSelected}
-                    calendar={calendarType}
-                    date={value}
-                    width={String(calculatedCalendarWidth)}
-                    inputWidth={String(calculatedInputWidth)}
-                    onFocus={this.props.onFocus}
-                    disabled={this.props.disabled}
-                    {...errorProps}
-                    maxDate={calendarMaxMoment && formatDate(calendarMaxMoment, format)}
+                { /* // $FlowFixMe */}
+                {/* $FlowFixMe[prop-missing] automated comment */}
+                <DateInput
+                    onFocus={this.handleTextFieldFocus}
+                    onBlur={this.handleTextFieldBlur}
+                    width={calculatedInputWidth}
+                    {...splittedPassOnProps.input}
                 />
+                <div
+                    data-test="date-calendar-wrapper"
+                    ref={this.calendarWrapperDOMElementRef}
+                >
+                    { /* // $FlowFixMe */}
+                    {/* $FlowFixMe[prop-missing] automated comment */}
+                    <DatePopup
+                        open={popoverOpen}
+                        onClose={this.hidePopover}
+                        width={calculatedCalendarWidth}
+                        height={calculatedCalendarHeight}
+                        inputWidth={calculatedInputWidth}
+                        inputUsesFloatingLabel={!!splittedPassOnProps.input.label}
+                        {...splittedPassOnProps.popup}
+                    >
+                        { /* // $FlowFixMe */}
+                        {/* $FlowFixMe[prop-missing] automated comment */}
+                        <DateCalendar
+                            onDateSelected={this.handleDateSelected}
+                            value={this.props.value}
+                            currentWidth={calculatedCalendarWidth}
+                            height={calculatedCalendarHeight}
+                            {...splittedPassOnProps.calendar}
+                        />
+                    </DatePopup>
+                </div>
             </div>
         );
     }

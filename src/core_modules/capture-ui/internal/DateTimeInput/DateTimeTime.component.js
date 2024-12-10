@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import { InputField } from '@dhis2-ui/input';
 import { withFocusSaver } from '../../HOC/withFocusSaver';
 import { withTextFieldFocusHandler } from '../TextInput/withFocusHandler';
+import { TextInput } from '../TextInput/TextInput.component';
 import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 
 type Props = {
@@ -12,28 +12,23 @@ type Props = {
 
 class DateTimeTimePlain extends React.Component<Props> {
     handleBlur = (event) => {
-        this.props.onBlur(event.value);
+        this.props.onBlur(event.currentTarget.value);
     }
 
     handleChange = (event) => {
-        this.props.onChange && this.props.onChange(event.value);
+        this.props.onChange && this.props.onChange(event.currentTarget.value);
     }
 
     render() {
         // $FlowFixMe[prop-missing] automated comment
-        const { onBlur, onChange, value, innerMessage, ...passOnProps } = this.props;
-        const errorProps = innerMessage
-            ? { error: !!innerMessage.message?.errorMessage?.timeError, validationText: innerMessage.message?.errorMessage?.timeError }
-            : {};
-
+        const { onBlur, onChange, value, ...passOnProps } = this.props;
         return (
-            <InputField
-                {...passOnProps}
+            // $FlowFixMe[cannot-spread-inexact] automated comment
+            <TextInput
                 value={value || ''}
-                label=""
                 onBlur={this.handleBlur}
                 onChange={this.handleChange}
-                {...errorProps}
+                {...passOnProps}
             />
         );
     }

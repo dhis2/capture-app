@@ -153,10 +153,6 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
         this.props.onCommitValue(this.getUpdatedValue(value));
     }
 
-    handleFieldChange = (value: {[key: string]: string}) => {
-        this.props.onCommitValue(this.getUpdatedValue(value));
-    }
-
     setMaxD2TextFieldInstance = (instance: any) => {
         this.maxD2TextFieldInstance = instance;
     }
@@ -199,7 +195,6 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
                             onEnterKey={this.handleEnterKeyInMin}
-                            onChange={this.handleFieldChange}
                         />
                     </div>
                     <div
@@ -219,7 +214,6 @@ class NumericFilterPlain extends Component<Props> implements UpdatableFilterCont
                             onBlur={this.handleFieldBlur}
                             onEnterKey={this.handleEnterKeyInMax}
                             textFieldRef={this.setMaxD2TextFieldInstance}
-                            onChange={this.handleFieldChange}
                         />
                     </div>
                 </div>

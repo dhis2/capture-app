@@ -21,7 +21,7 @@ When('you select the search domain Person', () => {
 
 Then('there should be Person domain forms available to search with', () => {
     cy.get('[data-test="search-page-content"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
 });
 
@@ -53,7 +53,7 @@ When('you select the search domain WHO RMNCH Tracker', () => {
 
 When('you fill in the unique identifier field with values that will not return a tracked entity instance', () => {
     cy.get('[data-test="form-unique"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .first()
         .type('123')
         .blur();
@@ -85,7 +85,7 @@ When('you can close the modal', () => {
 
 When('you fill in the unique identifier field with values that will return a tracked entity instance', () => {
     cy.get('[data-test="form-unique"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .first()
         .clear()
         .type('3131112445555')
@@ -95,7 +95,7 @@ When('you fill in the unique identifier field with values that will return a tra
 
 When('you fill in the first name with values that will return no results', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .first()
         .type('user non existing')
         .blur();
@@ -110,7 +110,7 @@ And('you expand the attributes search area', () => {
 
 When('you fill in the last name with values that will return results', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Smith')
         .blur();
@@ -118,7 +118,7 @@ When('you fill in the last name with values that will return results', () => {
 
 When('for Malaria case you fill in values that will return less than 5 results', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(2)
         .type('Sara')
         .blur();
@@ -126,12 +126,12 @@ When('for Malaria case you fill in values that will return less than 5 results',
 
 When('for Person you fill in values that will return less than 5 results', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Sara')
         .blur();
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Fis')
         .blur();
@@ -139,37 +139,37 @@ When('for Person you fill in values that will return less than 5 results', () =>
 
 When('you dont fill in any of the values', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .first()
         .clear();
 });
 
 When('you fill the values with nothing but spaces', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .first()
         .type('      ');
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('      ');
 });
 
 When('you fill in the the form with values', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Smith');
 
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Smith');
 });
 
 And(/^you fill in the the form with first name value: (.*)$/, (firstName) => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type(firstName)
         .blur();
@@ -177,14 +177,14 @@ And(/^you fill in the the form with first name value: (.*)$/, (firstName) => {
 
 When('you clear the values', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .first()
         .clear();
     cy.get('[data-test="form-attributes"]').click();
 
 
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .clear();
     cy.get('[data-test="form-attributes"]').click();
@@ -235,7 +235,7 @@ Then('there should be visible a title with Malaria case diagnosis', () => {
 
 And('there should be Malaria case diagnosis forms visible to search with', () => {
     cy.get('[data-test="search-page-content"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
 });
 
@@ -245,12 +245,12 @@ Given('you are in the search page with the Adult Woman being preselected from th
 
 When('you fill in the date of birth', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(2)
         .type('1999-09-01')
         .blur();
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(3)
         .type('2020-01-01')
         .blur();
@@ -275,7 +275,7 @@ When('you fill in the zip code range numbers', () => {
 
 When('you fill in the first name', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Lid')
         .blur();
@@ -288,13 +288,13 @@ When('you click the fallback search button', () => {
 
 When('you fill in the first and last name with values that will return results', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Go')
         .blur();
 
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Sarah')
         .blur();
@@ -302,13 +302,13 @@ When('you fill in the first and last name with values that will return results',
 
 When('you press enter after filling in the first and last name with values that will return results', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Go')
         .blur();
 
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Sarah')
         .wait(500)
@@ -317,7 +317,7 @@ When('you press enter after filling in the first and last name with values that 
 
 When('you press enter after filling in the unique identifier field with values that will return a tracked entity instance', () => {
     cy.get('[data-test="form-unique"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .first()
         .clear()
         .type('3131112445555{enter}');
@@ -325,13 +325,13 @@ When('you press enter after filling in the unique identifier field with values t
 
 When('you fill in the first name with value and last name with empty space', () => {
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Thomas')
         .blur();
 
     cy.get('[data-test="form-attributes"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('  ')
         .blur();
@@ -369,7 +369,7 @@ When('you see the attributes search area being expanded', () => {
 
 When('and you can see the unique identifier input', () => {
     cy.get('[data-test="form-unique"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .should('exist');
 });
 
@@ -404,14 +404,14 @@ Then('you should be taken to the registration page with program with prefilled v
         .contains('New person in program: Child Programme')
         .should('exist');
     cy.get('[data-test="registration-page-content"]').contains('First name').should('exist');
-    cy.get('input[type="text"]').eq(4).should('have.value', 'Sarah');
+    cy.get('[data-test="capture-ui-input"]').eq(4).should('have.value', 'Sarah');
     cy.get('[data-test="registration-page-content"]').contains('Last name').should('exist');
-    cy.get('input[type="text"]').eq(5).should('have.value', 'Go');
+    cy.get('[data-test="capture-ui-input"]').eq(5).should('have.value', 'Go');
 });
 
 Then('you should be taken to the registration page without program with prefilled values', () => {
     cy.get('[data-test="registration-page-content"]').contains('First name').should('exist');
-    cy.get('input[type="text"]').eq(1).should('have.value', 'Sara');
+    cy.get('[data-test="capture-ui-input"]').eq(1).should('have.value', 'Sara');
     cy.get('[data-test="registration-page-content"]').contains('Last name').should('exist');
-    cy.get('input[type="text"]').eq(2).should('have.value', 'Fis');
+    cy.get('[data-test="capture-ui-input"]').eq(2).should('have.value', 'Fis');
 });

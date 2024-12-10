@@ -114,7 +114,8 @@ const getEnrollmentDateSettings = () => {
             calendarMaxMoment: !props.enrollmentMetadata.allowFutureEnrollmentDate ? moment() : undefined,
         }),
         getPropName: () => 'enrolledAt',
-        getValidatorContainers: getEnrollmentDateValidatorContainer,
+        getValidatorContainers: (props: Object) =>
+            getEnrollmentDateValidatorContainer(props.enrollmentMetadata.allowFutureEnrollmentDate),
         getPassOnFieldData: () => true,
         getMeta: () => ({
             placement: placements.TOP,
@@ -163,7 +164,8 @@ const getIncidentDateSettings = () => {
         }),
         getPropName: () => 'occurredAt',
         getPassOnFieldData: () => true,
-        getValidatorContainers: getIncidentDateValidatorContainer,
+        getValidatorContainers: (props: Object) =>
+            getIncidentDateValidatorContainer(props.enrollmentMetadata.allowFutureIncidentDate),
         getMeta: () => ({
             placement: placements.TOP,
             section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
@@ -417,38 +419,17 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
 
     handleUpdateField = (...args: Array<any>) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
-        this.props.onUpdateField(
-            ...args,
-            programId,
-            orgUnit,
-            firstStageMetaData?.stage,
-            formFoundation,
-            this.getValidationContext,
-        );
-    };
+        this.props.onUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
+    }
 
     handleUpdateDataEntryField = (...args: Array<any>) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
-        this.props.onUpdateDataEntryField(
-            ...args,
-            programId,
-            orgUnit,
-            firstStageMetaData?.stage,
-            formFoundation,
-            this.getValidationContext,
-        );
+        this.props.onUpdateDataEntryField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
-        this.props.onStartAsyncUpdateField(
-            ...args,
-            programId,
-            orgUnit,
-            firstStageMetaData?.stage,
-            formFoundation,
-            this.getValidationContext,
-        );
+        this.props.onStartAsyncUpdateField(...args, programId, orgUnit, firstStageMetaData?.stage, formFoundation);
     }
 
     render() {

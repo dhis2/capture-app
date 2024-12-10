@@ -328,7 +328,7 @@ Then('you see validation error on visit date', () => {
 });
 
 And('you fill in 200 in the hemoglobin', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('200');
 });
@@ -340,13 +340,13 @@ And('you see validation error on hemoglobin', () => {
 });
 
 And('you fill in the visit date', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(0)
-        .type(`${getCurrentYear()}-01-01`).blur();
+        .type(`${getCurrentYear()}-01-01`);
 });
 
 And('you fill in the hemoglobin', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('50');
 });
@@ -389,14 +389,14 @@ And('you are in the Person registration page', () => {
 });
 
 And('you fill in the first name with value that has duplicates', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Sarah')
         .blur();
 });
 
 And('you fill in a unique first name', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
@@ -427,7 +427,7 @@ Then('you submit the form again from the duplicates modal', () => {
 // New person in WHO RMNCH Tracker
 And('you are in the WHO RMNCH program registration page', () => {
     cy.visit('/#/new?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .invoke('val').should('not.be.empty');
 });
@@ -441,7 +441,7 @@ And('you are in Child programme and Buma MCHP organization unit registration pag
 });
 
 And('you fill the form with age 0', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(9)
         .type(moment().format('YYYY-MM-DD'))
         .blur();
@@ -454,37 +454,37 @@ And('you see validation warning on birth date', () => {
 });
 
 And('you fill the WHO RMNCH program registration form with its required unique values', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
 
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(3)
         .type('Gonzales');
 
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(9)
         .type('1992-01-01')
         .blur();
 });
 
 And('you fill the WHO RMNCH program registration form with its required values', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(3)
         .type('Didriksson');
 
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type('Ava');
 
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(9)
         .type('1985-10-01')
         .blur();
 });
 
 And('you fill in child programme first name with value that has duplicates', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(4)
         .type('Sarah')
         .blur();
@@ -492,18 +492,18 @@ And('you fill in child programme first name with value that has duplicates', () 
 
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('2021-01-01')
         .blur();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(4)
         .type('Sarah')
         .blur();
 });
 
 And('you fill in the birth report date', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(7)
         .type('2023-01-01')
         .blur();
@@ -530,9 +530,9 @@ And('you see the form prefield with existing TEI attributes values', () => {
     cy.get('[data-test="registration-page-content"]').within(() => {
         cy.contains('New Enrollment in program: Child Programme').should('exist');
         cy.contains('First name').should('exist');
-        cy.get('input[type="text"]').eq(4).should('have.value', 'Anna');
+        cy.get('[data-test="capture-ui-input"]').eq(4).should('have.value', 'Anna');
         cy.contains('Last name').should('exist');
-        cy.get('input[type="text"]').eq(5).should('have.value', 'Jones');
+        cy.get('[data-test="capture-ui-input"]').eq(5).should('have.value', 'Jones');
         cy.contains('Gender').should('exist');
         cy.contains('Female').should('exist');
     });
@@ -554,15 +554,15 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis, treatmen
 });
 
 And('you fill the Malaria case diagnosis registration form with values', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(3)
         .type(`Ana-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(4)
         .type(`Maria-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(5)
         .type(moment().add(-1, 'day').format('YYYY-MM-DD'))
         .blur();
@@ -602,26 +602,26 @@ Then('the first stage appears on registration page', () => {
 });
 
 And('you fill the Child Program program registration form with unique values', () => {
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('2021-01-01')
         .blur();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type(20);
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(3)
         .type(30)
         .blur();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(4)
         .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(5)
         .type(`Beth-${Math.round((new Date()).getTime() / 1000)}`)
         .blur();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .eq(7)
         .type('2021-01-01')
         .blur();
@@ -634,9 +634,6 @@ And('you see the enrollment minimap', () => {
 });
 
 And('you delete the recently added tracked entity', () => {
-    cy.get('[data-test="profile-widget"]')
-        .contains('Person profile')
-        .should('exist');
     cy.get('[data-test="widget-profile-overflow-menu"]')
         .click();
     cy.contains('Delete Person')
@@ -649,9 +646,6 @@ And('you delete the recently added tracked entity', () => {
 });
 
 And('you delete the recently added malaria entity', () => {
-    cy.get('[data-test="profile-widget"]')
-        .contains('Malaria Entity profile')
-        .should('exist');
     cy.get('[data-test="widget-profile-overflow-menu"]')
         .click();
     cy.contains('Delete Malaria Entity')

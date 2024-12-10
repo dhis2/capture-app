@@ -8,7 +8,6 @@ import { ValidationFunctionsByLinkMode } from './ValidationFunctions';
 export const relatedStageWidgetIsValid = ({
     linkMode,
     scheduledAt,
-    scheduledAtFormatError,
     orgUnit,
     linkedEventId,
     setErrorMessages,
@@ -26,7 +25,6 @@ export const relatedStageWidgetIsValid = ({
 
     return validationFunction({
         scheduledAt,
-        scheduledAtFormatError,
         orgUnit,
         linkedEventId,
         setErrorMessages,

@@ -6,12 +6,10 @@ const styles = {
     formGroup: {
         display: 'flex',
         flexDirection: 'column',
-        width: 'fit-content',
     },
     formGroupRow: {
         display: 'flex',
         flexDirection: 'row',
-        width: 'fit-content',
     },
 };
 

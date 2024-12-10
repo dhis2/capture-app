@@ -14,11 +14,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         orgUnit: OrgUnit,
         stage?: ProgramStage,
         formFoundation: RenderFoundation,
-        onGetValidationContext: () => Object,
     ) => {
-        dispatch(
-            updateDataEntryFieldBatch(innerAction, programId, orgUnit, stage, formFoundation, onGetValidationContext),
-        );
+        dispatch(updateDataEntryFieldBatch(innerAction, programId, orgUnit, stage, formFoundation));
     },
     onUpdateField: (
         innerAction: ReduxAction<any, any>,
@@ -26,9 +23,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         orgUnit: OrgUnit,
         stage?: ProgramStage,
         formFoundation: RenderFoundation,
-        onGetValidationContext: () => Object,
     ) => {
-        dispatch(updateFieldBatch(innerAction, programId, orgUnit, stage, formFoundation, onGetValidationContext));
+        dispatch(updateFieldBatch(innerAction, programId, orgUnit, stage, formFoundation));
     },
     onStartAsyncUpdateField: (
         innerAction: ReduxAction<any, any>,
@@ -38,10 +34,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         orgUnit: OrgUnit,
         stage?: ProgramStage,
         formFoundation: RenderFoundation,
-        onGetValidationContext: () => Object,
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
-            asyncUpdateSuccessBatch(successInnerAction, dataEntryId, itemId, programId, orgUnit, stage, formFoundation, onGetValidationContext);
+            asyncUpdateSuccessBatch(successInnerAction, dataEntryId, itemId, programId, orgUnit, stage, formFoundation);
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEnrollment(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));

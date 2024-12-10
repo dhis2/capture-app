@@ -22,7 +22,7 @@ And('you see the dropdown menu for selecting tracked entity type', () => {
 And('you select org unit', () => {
     cy.get('[data-test="org-unit-selector-container"]')
         .click();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .type('Ngelehun C');
     cy.contains('Ngelehun CHC')
         .click();
@@ -36,7 +36,7 @@ Then('there should be visible a title with Child Program', () => {
 
 And('there should be Child Programme domain forms visible to search with', () => {
     cy.get('[data-test="search-page-content"]')
-        .find('input[type="text"]')
+        .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
 });
 
@@ -176,7 +176,7 @@ When(/^the user selects the program (.*)$/, (program) => {
 When(/^the user selects the org unit (.*)$/, (orgUnit) => {
     cy.get('[data-test="org-unit-selector-container"]')
         .click();
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .type(orgUnit.slice(0, -1));
     cy.contains(orgUnit)
         .click();

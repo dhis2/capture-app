@@ -11,7 +11,7 @@ After({ tags: '@with-restore-deleted-event' }, () => {
         .find('[data-test="create-new-button"]')
         .click();
 
-    cy.get('input[type="text"]')
+    cy.get('[data-test="capture-ui-input"]')
         .first()
         .type('2023-01-26')
         .blur();

@@ -16,7 +16,7 @@ const makeMapStateToProps = () => {
     const getRulesMessages = makeGetMessages();
     const getCompulsory = makeGetCompulsory();
     const getDisabled = makeGetDisabled();
-    const mapStateToProps = (state: Object, props: { formId: string, fieldsMetaData: any }) => ({
+    const mapStateToProps = (state: Object, props: { formId: string }) => ({
         values: getSectionValues(state, props),
         rulesHiddenFields: getHiddenFields(state, props),
         rulesMessages: getRulesMessages(state, props),

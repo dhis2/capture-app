@@ -1,36 +1,29 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
-import { isValidDate } from '../../../utils/validation/validators/form';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import { isValidDate, isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
 import { actions as RelatedStageModes } from '../constants';
 
 type Props = {
     scheduledAt: ?string,
-    scheduledAtFormatError: ?{error: ?string, errorCode: ?string},
     orgUnit: ?Object,
     linkedEventId: ?string,
     setErrorMessages: (messages: Object) => void,
 };
 
-export const isScheduledDateValid = (scheduledDate: ?string, scheduledAtFormatError: ?{error: ?string, errorCode: ?string}) => {
-    if (!scheduledDate) {
-        return { valid: false, errorMessage: i18n.t('Please enter a date') };
-    }
-    const { valid, errorMessage } = isValidDate(scheduledDate, scheduledAtFormatError);
-    return {
-        valid,
-        errorMessage,
-    };
+export const isScheduledDateValid = (scheduledDate: string) => {
+    const dateFormat = systemSettingsStore.get().dateFormat;
+    return isValidDate(scheduledDate, dateFormat);
 };
 
 const scheduleInOrgUnit = (props) => {
-    const { scheduledAt, scheduledAtFormatError, orgUnit, setErrorMessages } = props ?? {};
-    const { valid: scheduledAtIsValid, errorMessage } = isScheduledDateValid(scheduledAt, scheduledAtFormatError);
+    const { scheduledAt, orgUnit, setErrorMessages } = props ?? {};
+    const scheduledAtIsValid = !!scheduledAt && isScheduledDateValid(scheduledAt);
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
     if (!scheduledAtIsValid) {
         setErrorMessages({
-            scheduledAt: errorMessage,
+            scheduledAt: i18n.t('Please provide a valid date'),
         });
     } else {
         setErrorMessages({

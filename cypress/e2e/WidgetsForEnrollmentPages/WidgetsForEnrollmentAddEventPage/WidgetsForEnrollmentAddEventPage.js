@@ -6,8 +6,8 @@ import '../WidgetTab';
 
 Then('you can assign a user when scheduling the event', () => {
     cy.get('[data-test="assignee-section"]').within(() => {
-        cy.get('input[type="text"]').click();
-        cy.get('input[type="text"]').type('Tracker demo');
+        cy.get('[data-test="capture-ui-input"]').click();
+        cy.get('[data-test="capture-ui-input"]').type('Tracker demo');
         cy.contains('Tracker demo User').click();
     });
     cy.get('[data-test="assignee-section"]').within(() => {
@@ -16,7 +16,9 @@ Then('you can assign a user when scheduling the event', () => {
 });
 
 When(/^the user clicks the "Back to all stages and events" button/, () =>
-    cy.get('[data-test="enrollment-edit-event-back-button"]')
+    cy
+        .get('[data-test="widget-enrollment-event"]')
+        .contains('Back to all stages and events')
         .click(),
 );
 

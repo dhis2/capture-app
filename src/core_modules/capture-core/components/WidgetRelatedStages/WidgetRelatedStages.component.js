@@ -34,7 +34,6 @@ const WidgetRelatedStagesPlain = ({
     const [relatedStageDataValues, setRelatedStageDataValues] = useState<RelatedStageDataValueStates>({
         linkMode: undefined,
         scheduledAt: '',
-        scheduledAtFormatError: undefined,
         orgUnit: undefined,
         linkedEventId: undefined,
     });
@@ -63,11 +62,10 @@ const WidgetRelatedStagesPlain = ({
     };
 
     const formIsValid = useCallback(() => {
-        const { scheduledAt, scheduledAtFormatError, orgUnit, linkedEventId, linkMode } = relatedStageDataValues;
+        const { scheduledAt, orgUnit, linkedEventId, linkMode } = relatedStageDataValues;
         return relatedStageWidgetIsValid({
             linkMode,
             scheduledAt,
-            scheduledAtFormatError,
             orgUnit,
             linkedEventId,
             setErrorMessages: addErrorMessage,

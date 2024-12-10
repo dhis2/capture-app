@@ -2,39 +2,60 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
+import { modes, absoluteDirections } from '../../FormFields/DateAndTime/D2Date/d2DatePopup.const';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
-import { type DateValue } from './types/date.types';
 
 type Props = {
-    value: ?DateValue,
+    value: ?string,
     error: ?string,
-    errorClass: ?string,
-    onBlur: ({ from: DateValue }) => void,
+    onBlur: ({ from: string }) => void,
+    onEnterKey: () => void,
+    errorClass: string,
 };
 
 class FromDateFilterPlain extends Component<Props> {
-    static getValueObject(value: DateValue) {
-        return { from: { ...value } };
+    static getValueObject(value: string) {
+        return { from: value.trim() };
+    }
+    displayOptions: Object;
+    constructor(props: Props) {
+        super(props);
+        this.displayOptions = {
+            showWeekdays: true,
+            showHeader: false,
+        };
     }
 
-    handleBlur = (value: DateValue) => {
+    handleBlur = (value: string) => {
         this.props.onBlur(FromDateFilterPlain.getValueObject(value));
     }
 
+    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            this.props.onEnterKey();
+        }
+    }
+
     render() {
-        const { error, errorClass, onBlur, ...passOnProps } = this.props;
+        const { error, errorClass, onBlur, onEnterKey, ...passOnProps } = this.props;
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2Date
+                    onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('From')}
-                    inputWidth="150px"
-                    calendarWidth="330px"
+                    popupMode={modes.ABSOLUTE}
+                    popupAbsoluteDirection={absoluteDirections.UP}
+                    width={150}
+                    calendarWidth={330}
+                    calendarHeight={170}
+                    calendarRowHeight={45}
+                    calendarDisplayOptions={this.displayOptions}
                     {...passOnProps}
                 />
                 <div className={errorClass}>
-                    {error ? i18n.t('Please provide a valid date') : error}
+                    {error}
                 </div>
             </div>
         );
