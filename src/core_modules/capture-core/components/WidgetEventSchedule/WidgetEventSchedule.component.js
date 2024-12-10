@@ -1,8 +1,9 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useEffect } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
+import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { DataSection } from '../DataSection';
 import { Widget } from '../Widget';
 import { ScheduleButtons } from './ScheduleButtons';
@@ -36,6 +37,7 @@ const WidgetEventSchedulePlain = ({
     suggestedScheduleDate,
     setScheduledOrgUnit,
     serverSuggestedScheduleDate,
+    setIsFormValid,
     notes,
     programCategory,
     enableUserAssignment,
@@ -58,6 +60,11 @@ const WidgetEventSchedulePlain = ({
     const onDeselectOrgUnit = () => {
         setScheduledOrgUnit(undefined);
     };
+
+    useEffect(() => {
+        const formIsValid = () => Boolean(isValidOrgUnit(orgUnit) && scheduleDate);
+        setIsFormValid(formIsValid());
+    }, [orgUnit, scheduleDate, setIsFormValid]);
 
     return (
         <Widget

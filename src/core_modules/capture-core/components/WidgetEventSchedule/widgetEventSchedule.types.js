@@ -37,6 +37,7 @@ export type Props = {|
    serverScheduleDate?: ?string,
    suggestedScheduleDate?: ?string,
    setScheduledOrgUnit: (orgUnit: Object) => void,
+   setIsFormValid: (valid: boolean) => void,
    serverSuggestedScheduleDate?: ?string,
    eventCountInOrgUnit: number,
    notes: Array<{value: string}>,

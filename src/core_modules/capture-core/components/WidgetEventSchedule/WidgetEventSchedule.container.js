@@ -49,6 +49,7 @@ export const WidgetEventSchedule = ({
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [scheduledOrgUnit, setScheduledOrgUnit] = useState(orgUnit);
+    const [isFormValid, setIsFormValid] = useState(false);
     const convertFn = pipe(convertFormToClient, convertClientToServer);
     const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
     const serverSuggestedScheduleDate = convertFn(suggestedScheduleDate, dataElementTypes.DATE);
@@ -62,6 +63,7 @@ export const WidgetEventSchedule = ({
     const [selectedCategories, setSelectedCategories] = useState({});
     const [categoryOptionsError, setCategoryOptionsError] = useState();
     const { programCategory } = useCategoryCombinations(programId);
+
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
     }, [suggestedScheduleDate, scheduleDate]);
@@ -71,6 +73,7 @@ export const WidgetEventSchedule = ({
     }, [storedAssignee]);
 
     const onHandleSchedule = useCallback(() => {
+        if (!isFormValid) { return; }
         if (programCategory?.categories &&
             Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
             const errors = programCategory.categories
@@ -114,6 +117,7 @@ export const WidgetEventSchedule = ({
         onSaveErrorActionType,
         programCategory,
         assignee,
+        isFormValid,
     ]);
 
     const onAddNote = (note) => {
@@ -163,9 +167,7 @@ export const WidgetEventSchedule = ({
     const eventAccess = getProgramEventAccess(programId, stageId);
     if (!eventAccess?.write) {
         return (
-            <NoAccess
-                onCancel={onCancel}
-            />
+            <NoAccess onCancel={onCancel} />
         );
     }
 
@@ -186,6 +188,7 @@ export const WidgetEventSchedule = ({
             onCancel={onCancel}
             setScheduleDate={setScheduleDate}
             setScheduledOrgUnit={setScheduledOrgUnit}
+            setIsFormValid={setIsFormValid} // Viktig å beholde
             onSchedule={onHandleSchedule}
             onAddNote={onAddNote}
             eventCountInOrgUnit={eventCountInOrgUnit}
@@ -198,7 +201,6 @@ export const WidgetEventSchedule = ({
             onSetAssignee={onSetAssignee}
             {...passOnProps}
         />
-
     );
 };
 

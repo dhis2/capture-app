@@ -1,6 +1,9 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { isValidOrgUnit } from 'capture-core-utils/validators/form';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
+import { baseInputStyles } from './commonProps';
 import {
     SingleOrgUnitSelectField,
     withDefaultFieldContainer,
@@ -8,13 +11,12 @@ import {
     withInternalChangeHandler,
     withLabel,
 } from '../../FormFields/New';
-import labelTypeClasses from './dataEntryFieldLabels.module.css';
-import { baseInputStyles } from './commonProps';
 
 type OrgUnitValue = {|
     checked: boolean,
     id: string,
     children: number,
+    name: string,
     displayName: string,
     path: string,
     selected: string[],
@@ -43,13 +45,20 @@ export const ScheduleOrgUnit = ({
     onDeselectOrgUnit,
     orgUnit,
 }: Props) => {
+    const [touched, setTouched] = useState(false);
+
     const handleSelect = (event) => {
+        setTouched(true);
         onSelectOrgUnit(event);
     };
 
     const handleDeselect = () => {
+        setTouched(true);
         onDeselectOrgUnit();
     };
+
+    const shouldShowError = (!isValidOrgUnit(orgUnit) && touched);
+    const errorMessages = i18n.t('Please provide a valid organisation unit');
 
     return (
         <OrgUnitFieldForForm
@@ -59,6 +68,7 @@ export const ScheduleOrgUnit = ({
             onSelectClick={handleSelect}
             onBlur={handleDeselect}
             styles={baseInputStyles}
+            errorMessage={shouldShowError && errorMessages}
         />
     );
 };
