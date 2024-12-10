@@ -21,4 +21,3 @@ export type LinkedEvent = {|
     occurredAt: string,
     orgUnit: string,
 |}
-
