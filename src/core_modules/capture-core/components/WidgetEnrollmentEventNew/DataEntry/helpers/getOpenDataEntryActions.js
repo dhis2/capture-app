@@ -1,8 +1,7 @@
 // @flow
-
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../fieldValidators';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
@@ -14,6 +13,11 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         id: 'occurredAt',
         type: 'DATE',
         validatorContainers: getEventDateValidatorContainers(),
+    },
+    {
+        id: 'orgUnit',
+        type: 'ORGANISATION_UNIT',
+        validatorContainers: getOrgUnitValidatorContainers(),
     },
     {
         id: 'scheduledAt',
@@ -37,7 +41,12 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const getOpenDataEntryActions =
-    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory) => {
+    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory, orgUnit: Object) => {
+        const defaultDataEntryValues = {
+            orgUnit: orgUnit
+                ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
+                : undefined,
+        };
         if (programCategory && programCategory.categories) {
             dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
                 id: `attributeCategoryOptions-${category.id}`,
@@ -45,6 +54,6 @@ export const getOpenDataEntryActions =
                 validatorContainers: getCategoryOptionsValidatorContainers({ categories: programCategory.categories }, category.id),
             })));
         }
-        return loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
+        return loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude, defaultDataEntryValues);
     };
 
