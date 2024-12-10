@@ -6,7 +6,7 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
 });
 
 When(/^the user clicks on the edit button/, () =>
-    cy.get('[data-test="widget-enrollment-event"]').find('[data-test="dhis2-uicore-button"]').eq(1).click(),
+    cy.get('[data-test="widget-enrollment-event"]').find('[data-test="widget-enrollment-event-edit-button"]').click(),
 );
 
 When('the user clicks the arrow button to see the dropdown', () => {
@@ -20,7 +20,7 @@ Then('the user sees the warning popup', () => {
 });
 
 When(/^the user set the WHOMCH Diastolic blood pressure to (.*)/, score =>
-    cy.get('[data-test="new-enrollment-event-form"]').find('[data-test="capture-ui-input"]').eq(6).clear()
+    cy.get('[data-test="new-enrollment-event-form"]').find('input[type="text"]').eq(6).clear()
         .type(score)
         .blur(),
 );

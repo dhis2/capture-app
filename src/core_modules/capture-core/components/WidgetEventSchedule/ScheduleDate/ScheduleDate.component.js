@@ -14,7 +14,6 @@ import {
 import type { Props } from './scheduleDate.types';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
-import { convertStringToDateFormat } from '../../../utils/converters/date';
 import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 
 
@@ -59,7 +58,14 @@ const ScheduleDatePlain = ({
                     onSetFocus={() => { }}
                     onFocus={() => { }}
                     onRemoveFocus={() => { }}
-                    onBlur={(e) => { setScheduleDate(convertStringToDateFormat(e)); }}
+                    onBlur={(e, internalComponentError) => {
+                        const { error } = internalComponentError;
+                        if (error) {
+                            setScheduleDate('');
+                            return;
+                        }
+                        setScheduleDate(e);
+                    }}
                 />
                 <div className={classes.infoBox}>
                     <InfoBox

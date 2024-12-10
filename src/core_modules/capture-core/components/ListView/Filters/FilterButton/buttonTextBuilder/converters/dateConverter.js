@@ -4,7 +4,8 @@ import { pipe } from 'capture-core-utils';
 import moment from 'moment';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
-import { areRelativeRangeValuesSupported } from '../../../../../../utils/validators/areRelativeRangeValuesSupported';
+import { areRelativeRangeValuesSupported }
+    from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 
 const periods = {
     TODAY: 'TODAY',

@@ -41,7 +41,6 @@ type RangeFilterData = ?{
 
 type Props = {
     handleFieldBlur: (value: ?Value) => void,
-    handleEnterKeyInTo: (value: { [key: string]: ?string }) => void,
     value: RangeFilterData,
     startValueError?: ?string,
     endValueError?: ?string,
@@ -71,10 +70,6 @@ class RangeFilterPlain extends Component<Props> {
 
     handleEnterKeyInStart = () => {
         this.endD2TextFieldInstance.focus();
-    };
-
-    handleEnterKeyInEnd = (value: { [key: string]: ?string }) => {
-        this.props.handleEnterKeyInTo && this.props.handleEnterKeyInTo(value);
     };
 
     handleFieldBlur = (value: { [key: string]: ?string }) => {
@@ -110,7 +105,6 @@ class RangeFilterPlain extends Component<Props> {
                             error={endValueError}
                             errorClass={classes.error}
                             onBlur={this.handleFieldBlur}
-                            onEnterKey={this.handleEnterKeyInEnd}
                             textFieldRef={this.setEndD2TextFieldInstance}
                         />
                     </div>

@@ -3,15 +3,16 @@
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
 # Philip Larsen Donnelly, 2024
-# Charel van den Elsen, 2024
 # Rica, 2024
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
+# Charel van den Elsen, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Rica, 2024\n"
+"Last-Translator: Charel van den Elsen, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,6 +47,39 @@ msgstr ""
 "hetzelfde domein). Vernieuw deze pagina als u deze versie opnieuw wilt "
 "gebruiken, maar houd er rekening mee dat hierdoor andere versies worden "
 "gesloten."
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "Evenement bewerken"
+
+msgid "New event"
+msgstr "Nieuw evenement"
+
+msgid "Active enrollments"
+msgstr "Actieve inschrijvingen"
+
+msgid "Completed enrollments"
+msgstr "Voltooide inschrijvingen"
+
+msgid "Cancelled enrollments"
+msgstr "Geannuleerde inschrijvingen"
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "Zoek"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr "Meer"
@@ -92,66 +126,6 @@ msgstr "Deze waarde is validerend"
 msgid "Async field update failed"
 msgstr "Asynchrone veldupdate is mislukt"
 
-msgid "A value is required"
-msgstr "Een waarde is verplicht"
-
-msgid "Please provide a valid number"
-msgstr "Geef een geldig nummer op"
-
-msgid "Please provide a valid integer"
-msgstr "Geef een geldig geheel getal op"
-
-msgid "Please provide a positive integer"
-msgstr "Geef een positief geheel getal op"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Geef nul of een positief geheel getal op"
-
-msgid "Please provide a negative integer"
-msgstr "Geef een negatief geheel getal op"
-
-msgid "Please provide a valid date"
-msgstr "Geef een geldige datum op"
-
-msgid "A date in the future is not allowed"
-msgstr "Een datum in de toekomst is niet toegestaan"
-
-msgid "Please provide a valid date and time"
-msgstr "Geef een geldige datum en tijd op"
-
-msgid "Please provide a valid time"
-msgstr "Geef een geldige tijd op"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Geef een geheel getal tussen 0 en 100 op"
-
-msgid "Please provide a valid url"
-msgstr "Geef een geldige URL op"
-
-msgid "Please provide a valid email address"
-msgstr "geef alstublieft een geldig email adres"
-
-msgid "Please provide a valid age"
-msgstr "Geef een geldige leeftijd op"
-
-msgid "Please provide a valid phone number"
-msgstr "Gelieve een geldig telefoonnummer op te geven"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Geef een geldige organisatie-eenheid op"
-
-msgid "Please provide valid coordinates"
-msgstr "Geef geldige coördinaten op"
-
-msgid "This value already exists"
-msgstr "Deze waarde bestaat al"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"Van\" kan niet groter zijn dan \"Naar\""
-
-msgid "Checking..."
-msgstr "Controleren..."
-
 msgid "Area"
 msgstr "Oppervlakte"
 
@@ -163,6 +137,12 @@ msgstr "Inschrijving"
 
 msgid "Complete event"
 msgstr "Compleet evenement"
+
+msgid "A value is required"
+msgstr "Een waarde is verplicht"
+
+msgid "Please provide a valid date"
+msgstr "Geef een geldige datum op"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -176,7 +156,7 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr "Selecteer {{categoryName}}"
 
-msgid "A future date is not allowed"
+msgid "A date in the future is not allowed"
 msgstr "Een datum in de toekomst is niet toegestaan"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
@@ -305,9 +285,6 @@ msgstr "Ja, wijzigingen negeren"
 
 msgid "No, cancel"
 msgstr "Nee, annuleer"
-
-msgid "New event"
-msgstr "Nieuw evenement"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -529,9 +506,6 @@ msgstr "Typ om opties te filteren"
 
 msgid "No match found"
 msgstr ""
-
-msgid "Search"
-msgstr "Zoek"
 
 msgid "Clear"
 msgstr "Duidelijk"
@@ -881,9 +855,6 @@ msgstr "evenement"
 msgid "You don't have access to edit this event"
 msgstr "Je hebt geen toegangsrechten om dit evenement te bewerken"
 
-msgid "Edit event"
-msgstr "Evenement bewerken"
-
 msgid "View changelog"
 msgstr ""
 
@@ -921,15 +892,6 @@ msgstr "Evenement kan niet worden geladen"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisatie-eenheid kan niet worden geladen"
 
-msgid "Dashboard"
-msgstr "Dashboard"
-
-msgid "Edit Event"
-msgstr ""
-
-msgid "View Event"
-msgstr ""
-
 msgid "Selected program"
 msgstr "Geselecteerd programma"
 
@@ -956,6 +918,9 @@ msgstr ""
 
 msgid "An error occurred while loading the form"
 msgstr ""
+
+msgid "Back to all stages and events"
+msgstr "Terug naar alle stadium en evenementen"
 
 msgid "Possible duplicates found"
 msgstr "Mogelijke duplicaten gevonden"
@@ -1209,6 +1174,9 @@ msgstr ""
 msgid "Coordinates"
 msgstr ""
 
+msgid "Please provide valid coordinates"
+msgstr "Geef geldige coördinaten op"
+
 msgid "Delete polygon"
 msgstr "Polygoon verwijderen"
 
@@ -1298,6 +1266,9 @@ msgstr "Waarschuwing"
 msgid "stage not found in rules execution"
 msgstr "stadium niet gevonden in uitvoering van regels"
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "evenement verwijderen"
 
@@ -1316,9 +1287,6 @@ msgstr "Evenement voltooid"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr ""
-
-msgid "Back to all stages and events"
-msgstr "Terug naar alle stadium en evenementen"
 
 msgid "Notes about this event"
 msgstr ""
@@ -1473,6 +1441,12 @@ msgstr "Geplande datum"
 msgid "Report date"
 msgstr "Rapporteer datum"
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Geef een geldige organisatie-eenheid op"
+
 msgid "Please select a valid event"
 msgstr ""
 
@@ -1529,10 +1503,18 @@ msgstr "{{ scheduledEvents }} gepland"
 msgid "Stages and Events"
 msgstr "stadiums en evenementen"
 
+msgid "View linked event"
+msgstr ""
+
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "View linked event"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
 msgstr ""
 
 msgid "Scheduled"
@@ -1567,6 +1549,12 @@ msgstr ""
 
 msgid "Value"
 msgstr "Waarde"
+
+msgid "File"
+msgstr ""
+
+msgid "Image"
+msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
@@ -1628,6 +1616,46 @@ msgstr "Gegevens downloaden..."
 msgid "an error occurred loading working lists"
 msgstr "er is een fout opgetreden bij het laden van werklijsten"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "registratie datum"
 
@@ -1643,14 +1671,121 @@ msgstr "Volg op"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Kies een programmafase om op te filteren {{label}}"
 
-msgid "Active enrollments"
-msgstr "Actieve inschrijvingen"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+msgstr ""
 
-msgid "Completed enrollments"
-msgstr "Voltooide inschrijvingen"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+msgstr ""
 
-msgid "Cancelled enrollments"
-msgstr "Geannuleerde inschrijvingen"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "Werklijst kon niet worden bijgewerkt"
@@ -1662,6 +1797,14 @@ msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
 "er is een fout opgetreden bij het laden van lijsten met instanties van "
 "bijgehouden entiteiten"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} geselecteerd"
+msgstr[1] "{{count}} geselecteerd"
+
+msgid "Deselect all"
+msgstr "Deselecteer alles"
 
 msgid "Update view"
 msgstr "Weergave bijwerken"
@@ -1771,6 +1914,60 @@ msgstr ""
 "niet opgeslagen"
 
 msgid "Error updating the Assignee"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Geef een geldig nummer op"
+
+msgid "Please provide a valid integer"
+msgstr "Geef een geldig geheel getal op"
+
+msgid "Please provide a positive integer"
+msgstr "Geef een positief geheel getal op"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Geef nul of een positief geheel getal op"
+
+msgid "Please provide a negative integer"
+msgstr "Geef een negatief geheel getal op"
+
+msgid "Please provide a valid date and time"
+msgstr "Geef een geldige datum en tijd op"
+
+msgid "Please provide a valid time"
+msgstr "Geef een geldige tijd op"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Geef een geheel getal tussen 0 en 100 op"
+
+msgid "Please provide a valid url"
+msgstr "Geef een geldige URL op"
+
+msgid "Please provide a valid email address"
+msgstr "geef alstublieft een geldig email adres"
+
+msgid "Please provide a valid age"
+msgstr "Geef een geldige leeftijd op"
+
+msgid "Please provide a valid phone number"
+msgstr "Gelieve een geldig telefoonnummer op te geven"
+
+msgid "This value already exists"
+msgstr "Deze waarde bestaat al"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"Van\" kan niet groter zijn dan \"Naar\""
+
+msgid "Checking..."
+msgstr "Controleren..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

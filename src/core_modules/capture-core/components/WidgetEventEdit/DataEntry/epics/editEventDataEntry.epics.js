@@ -1,7 +1,8 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
@@ -16,6 +17,7 @@ import {
     getApplicableRuleEffectsForEventProgram,
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
+    validateAssignEffects,
     type FieldData,
 } from '../../../../rules';
 import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
@@ -23,8 +25,9 @@ import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/prepareEnrollmentEvents';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../../helpers';
+import type { QuerySingleResource } from '../../../../utils/api';
 
-const runRulesForEditSingleEvent = ({
+const runRulesForEditSingleEvent = async ({
     store,
     dataEntryId,
     itemId,
@@ -32,6 +35,7 @@ const runRulesForEditSingleEvent = ({
     orgUnit,
     fieldData,
     programId,
+    querySingleResource,
 }: {
     store: ReduxStore,
     dataEntryId: string,
@@ -40,6 +44,7 @@ const runRulesForEditSingleEvent = ({
     programId: string,
     orgUnit: OrgUnit,
     fieldData?: ?FieldData,
+    querySingleResource: QuerySingleResource
 }) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
@@ -91,33 +96,56 @@ const runRulesForEditSingleEvent = ({
         });
     }
 
+    const effectsWithValidations = await validateAssignEffects({
+        dataElements: foundation.getElements(),
+        effects,
+        querySingleResource,
+    });
+
     return batchActions([
-        updateRulesEffects(effects, formId),
+        updateRulesEffects(effectsWithValidations, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
 };
 
-export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
 // $FlowSuppress
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
-        map((action) => {
+        switchMap((action) => {
             const { dataEntryId, itemId, uid, orgUnit, programId } = action.payload;
-            return runRulesForEditSingleEvent({ store, dataEntryId, itemId, uid, orgUnit, programId });
+            const runRulesForEditSingleEventPromise = runRulesForEditSingleEvent({
+                store,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                programId,
+                querySingleResource,
+            });
+            return from(runRulesForEditSingleEventPromise);
         }));
 
-export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnUpdateFieldForEditSingleEventEpic = (
+    action$: InputObservable,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
+) =>
 // $FlowSuppress
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
-        map((action) => {
+        switchMap((action) => {
             const {
                 elementId,
                 value,
@@ -133,7 +161,7 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForEditSingleEvent({
+            const runRulesForEditSingleEventPromise = runRulesForEditSingleEvent({
                 store,
                 dataEntryId,
                 itemId,
@@ -141,6 +169,8 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
                 orgUnit,
                 fieldData,
                 programId,
+                querySingleResource,
             });
+            return from(runRulesForEditSingleEventPromise);
         }));
 
