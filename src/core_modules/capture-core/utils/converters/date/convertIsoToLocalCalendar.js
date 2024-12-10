@@ -1,4 +1,5 @@
 // @flow
+import moment from 'moment';
 import {
     convertFromIso8601,
 } from '@dhis2/multi-calendar-dates';
@@ -16,10 +17,18 @@ export function convertIsoToLocalCalendar(isoDate: ?string): string {
     if (!isoDate) {
         return '';
     }
+
+    const momentDate = moment(isoDate);
+    if (!momentDate.isValid()) {
+        return '';
+    }
+
+    const formattedIsoDate = momentDate.format('YYYY-MM-DD');
+
     const calendar = systemSettingsStore.get().calendar;
     const dateFormat = systemSettingsStore.get().dateFormat;
 
-    const { year, eraYear, month, day } = convertFromIso8601(isoDate, calendar);
+    const { year, eraYear, month, day } = convertFromIso8601(formattedIsoDate, calendar);
     const localYear = calendar === 'ethiopian' ? eraYear : year;
 
     return dateFormat === 'DD-MM-YYYY'
