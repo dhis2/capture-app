@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Charel van den Elsen, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -126,66 +126,6 @@ msgstr "Deze waarde is validerend"
 msgid "Async field update failed"
 msgstr "Asynchrone veldupdate is mislukt"
 
-msgid "A value is required"
-msgstr "Een waarde is verplicht"
-
-msgid "Please provide a valid number"
-msgstr "Geef een geldig nummer op"
-
-msgid "Please provide a valid integer"
-msgstr "Geef een geldig geheel getal op"
-
-msgid "Please provide a positive integer"
-msgstr "Geef een positief geheel getal op"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Geef nul of een positief geheel getal op"
-
-msgid "Please provide a negative integer"
-msgstr "Geef een negatief geheel getal op"
-
-msgid "Please provide a valid date"
-msgstr "Geef een geldige datum op"
-
-msgid "A date in the future is not allowed"
-msgstr "Een datum in de toekomst is niet toegestaan"
-
-msgid "Please provide a valid date and time"
-msgstr "Geef een geldige datum en tijd op"
-
-msgid "Please provide a valid time"
-msgstr "Geef een geldige tijd op"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Geef een geheel getal tussen 0 en 100 op"
-
-msgid "Please provide a valid url"
-msgstr "Geef een geldige URL op"
-
-msgid "Please provide a valid email address"
-msgstr "geef alstublieft een geldig email adres"
-
-msgid "Please provide a valid age"
-msgstr "Geef een geldige leeftijd op"
-
-msgid "Please provide a valid phone number"
-msgstr "Gelieve een geldig telefoonnummer op te geven"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Geef een geldige organisatie-eenheid op"
-
-msgid "Please provide valid coordinates"
-msgstr "Geef geldige coördinaten op"
-
-msgid "This value already exists"
-msgstr "Deze waarde bestaat al"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"Van\" kan niet groter zijn dan \"Naar\""
-
-msgid "Checking..."
-msgstr "Controleren..."
-
 msgid "Area"
 msgstr "Oppervlakte"
 
@@ -197,6 +137,12 @@ msgstr "Inschrijving"
 
 msgid "Complete event"
 msgstr "Compleet evenement"
+
+msgid "A value is required"
+msgstr "Een waarde is verplicht"
+
+msgid "Please provide a valid date"
+msgstr "Geef een geldige datum op"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -210,7 +156,7 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr "Selecteer {{categoryName}}"
 
-msgid "A future date is not allowed"
+msgid "A date in the future is not allowed"
 msgstr "Een datum in de toekomst is niet toegestaan"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
@@ -1228,6 +1174,9 @@ msgstr ""
 msgid "Coordinates"
 msgstr ""
 
+msgid "Please provide valid coordinates"
+msgstr "Geef geldige coördinaten op"
+
 msgid "Delete polygon"
 msgstr "Polygoon verwijderen"
 
@@ -1491,6 +1440,12 @@ msgstr "Geplande datum"
 
 msgid "Report date"
 msgstr "Rapporteer datum"
+
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Geef een geldige organisatie-eenheid op"
 
 msgid "Please select a valid event"
 msgstr ""
@@ -1959,6 +1914,60 @@ msgstr ""
 "niet opgeslagen"
 
 msgid "Error updating the Assignee"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Geef een geldig nummer op"
+
+msgid "Please provide a valid integer"
+msgstr "Geef een geldig geheel getal op"
+
+msgid "Please provide a positive integer"
+msgstr "Geef een positief geheel getal op"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Geef nul of een positief geheel getal op"
+
+msgid "Please provide a negative integer"
+msgstr "Geef een negatief geheel getal op"
+
+msgid "Please provide a valid date and time"
+msgstr "Geef een geldige datum en tijd op"
+
+msgid "Please provide a valid time"
+msgstr "Geef een geldige tijd op"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Geef een geheel getal tussen 0 en 100 op"
+
+msgid "Please provide a valid url"
+msgstr "Geef een geldige URL op"
+
+msgid "Please provide a valid email address"
+msgstr "geef alstublieft een geldig email adres"
+
+msgid "Please provide a valid age"
+msgstr "Geef een geldige leeftijd op"
+
+msgid "Please provide a valid phone number"
+msgstr "Gelieve een geldig telefoonnummer op te geven"
+
+msgid "This value already exists"
+msgstr "Deze waarde bestaat al"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"Van\" kan niet groter zijn dan \"Naar\""
+
+msgid "Checking..."
+msgstr "Controleren..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

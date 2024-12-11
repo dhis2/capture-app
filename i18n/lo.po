@@ -2,16 +2,17 @@
 # Translators:
 # Philip Larsen Donnelly, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Namwan Chanthavisouk, 2024
 # Saysamone Sibounma, 2024
+# Somkhit Bouavong <bouavongk@gmail.com>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Saysamone Sibounma, 2024\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,66 +125,6 @@ msgstr "ຄ່ານີ້ກຳລັງກວດສອບຢູ່"
 msgid "Async field update failed"
 msgstr "ການອັບເດດຊ່ອງການເຊື່ອມຂໍ້ມູນແມ່ນລົ້ມເຫລວ"
 
-msgid "A value is required"
-msgstr "ຕ້ອງຕື່ມຄ່າ"
-
-msgid "Please provide a valid number"
-msgstr "ກະລຸນາລະບຸເບີໂທທີ່ຖືກຕ້ອງ"
-
-msgid "Please provide a valid integer"
-msgstr "ກະລຸນາລະບຸຈຳນວນເຕັມໃຫ້ຖືກຕ້ອງ"
-
-msgid "Please provide a positive integer"
-msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນບວກ"
-
-msgid "Please provide zero or a positive integer"
-msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນສູນ ຫຼື ເປັນບວກ"
-
-msgid "Please provide a negative integer"
-msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນລົບ"
-
-msgid "Please provide a valid date"
-msgstr "ກະລຸນາລະບຸວັນທີໃຫ້ຖືກຕ້ອງ"
-
-msgid "A date in the future is not allowed"
-msgstr "ບໍ່ອະນຸຍາດໃຫ້ຕື່ມວັນທີໃນອະນາຄົດ"
-
-msgid "Please provide a valid date and time"
-msgstr "ກະລຸນາລະບຸວັນທີ ແລະ ເວລາໃຫ້ຖືກຕ້ອງ"
-
-msgid "Please provide a valid time"
-msgstr "ກະລຸນາລະບຸເວລາໃຫ້ຖືກຕ້ອງ"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "ກະລຸນາລະບຸຈຳນວນລະຫວ່າງ 0 ຫາ 100"
-
-msgid "Please provide a valid url"
-msgstr "ກະລຸນາປ້ອນ URL ທີ່ຖືກຕ້ອງ"
-
-msgid "Please provide a valid email address"
-msgstr "ກະລຸນາປ້ອນທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງ"
-
-msgid "Please provide a valid age"
-msgstr "ກະລຸນາປ້ອນອາຍຸໃຫ້ຖືກຕ້ອງ"
-
-msgid "Please provide a valid phone number"
-msgstr "ກະລຸນາປ້ອນເບີໂທໃຫ້ຖືກຕ້ອງ"
-
-msgid "Please provide a valid organisation unit"
-msgstr "ກະລຸນາປ້ອນໜ່ວຍງານຈັດຕັ້ງໃຫ້ຖືກຕ້ອງ"
-
-msgid "Please provide valid coordinates"
-msgstr "ກະລຸນາລະບຸເສັ້ນສະແດງໃຫ້ຖືກຕ້ອງ"
-
-msgid "This value already exists"
-msgstr "ຈຳນວນນີ້ແມ່ນມີຢູ່ແລ້ວ"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"ຈາກ\" ບໍ່ສາມາດໃຫຍ່ກວ່າ \"ເຖິງ\""
-
-msgid "Checking..."
-msgstr "ກຳລັງກວດສອບ..."
-
 msgid "Area"
 msgstr "ພື້ນທີ່"
 
@@ -195,6 +136,12 @@ msgstr "ການລົງທະບຽນ"
 
 msgid "Complete event"
 msgstr "Complete event"
+
+msgid "A value is required"
+msgstr "ຕ້ອງຕື່ມຄ່າ"
+
+msgid "Please provide a valid date"
+msgstr "ກະລຸນາລະບຸວັນທີໃຫ້ຖືກຕ້ອງ"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - ຂໍ້ມູນທົ່ວໄປ"
@@ -208,8 +155,8 @@ msgstr "{{ stageName }} - ສະຖານະ"
 msgid "Please select {{categoryName}}"
 msgstr "ກະລຸນາເລືອກ {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "ບໍ່ອະນຸຍາດໃຫ້ມີວັນທີໃນອະນາຄົດ"
+msgid "A date in the future is not allowed"
+msgstr "ບໍ່ອະນຸຍາດໃຫ້ຕື່ມວັນທີໃນອະນາຄົດ"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "ບັນທຶກການລົງທະບຽນໃໝ່ໃນ {{programName}} ໃນ {{orgUnitName}} ."
@@ -1196,6 +1143,9 @@ msgstr "ຕັ້ງຈຸດປະສານງານ"
 msgid "Coordinates"
 msgstr "ປະສານງານ"
 
+msgid "Please provide valid coordinates"
+msgstr "ກະລຸນາລະບຸເສັ້ນສະແດງໃຫ້ຖືກຕ້ອງ"
+
 msgid "Delete polygon"
 msgstr "ລົບຮູບຫຼາຍຫຼ່ຽມ"
 
@@ -1451,6 +1401,12 @@ msgstr "ກຳນົດວັນທີ"
 msgid "Report date"
 msgstr "ວັນທີລາຍງານ"
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "ກະລຸນາປ້ອນໜ່ວຍງານຈັດຕັ້ງໃຫ້ຖືກຕ້ອງ"
+
 msgid "Please select a valid event"
 msgstr "ກະລຸນາເລືອກເຫດການທີ່ຖືກຕ້ອງ"
 
@@ -1555,10 +1511,10 @@ msgid "Value"
 msgstr "ຄ່າ"
 
 msgid "File"
-msgstr ""
+msgstr "ເອກະສານ"
 
 msgid "Image"
-msgstr ""
+msgstr "ຮູບພາບ"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "ຄວາມສໍາພັນໃໝ່ {{trackedEntityTypeName}} "
@@ -1799,7 +1755,7 @@ msgid_plural "{{count}} selected"
 msgstr[0] ""
 
 msgid "Deselect all"
-msgstr ""
+msgstr "ຍົກເລີກການເລືອກທັງໝົດ"
 
 msgid "Update view"
 msgstr "ອັບເດດມຸມມອງ"
@@ -1908,6 +1864,60 @@ msgstr "ເກີດຄວາມຜິດພາດໃນການແກ້ໄຂ
 
 msgid "Error updating the Assignee"
 msgstr "ເກີດຄວາມຜິດພາດໃນການອັບເດດຜູ້ຮັບຜິດຊອບ"
+
+msgid "Please provide a valid number"
+msgstr "ກະລຸນາລະບຸເບີໂທທີ່ຖືກຕ້ອງ"
+
+msgid "Please provide a valid integer"
+msgstr "ກະລຸນາລະບຸຈຳນວນເຕັມໃຫ້ຖືກຕ້ອງ"
+
+msgid "Please provide a positive integer"
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນບວກ"
+
+msgid "Please provide zero or a positive integer"
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນສູນ ຫຼື ເປັນບວກ"
+
+msgid "Please provide a negative integer"
+msgstr "ກະລຸນາລະບຸຈຳນວນທີ່ເປັນລົບ"
+
+msgid "Please provide a valid date and time"
+msgstr "ກະລຸນາລະບຸວັນທີ ແລະ ເວລາໃຫ້ຖືກຕ້ອງ"
+
+msgid "Please provide a valid time"
+msgstr "ກະລຸນາລະບຸເວລາໃຫ້ຖືກຕ້ອງ"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "ກະລຸນາລະບຸຈຳນວນລະຫວ່າງ 0 ຫາ 100"
+
+msgid "Please provide a valid url"
+msgstr "ກະລຸນາປ້ອນ URL ທີ່ຖືກຕ້ອງ"
+
+msgid "Please provide a valid email address"
+msgstr "ກະລຸນາປ້ອນທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງ"
+
+msgid "Please provide a valid age"
+msgstr "ກະລຸນາປ້ອນອາຍຸໃຫ້ຖືກຕ້ອງ"
+
+msgid "Please provide a valid phone number"
+msgstr "ກະລຸນາປ້ອນເບີໂທໃຫ້ຖືກຕ້ອງ"
+
+msgid "This value already exists"
+msgstr "ຈຳນວນນີ້ແມ່ນມີຢູ່ແລ້ວ"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"ຈາກ\" ບໍ່ສາມາດໃຫຍ່ກວ່າ \"ເຖິງ\""
+
+msgid "Checking..."
+msgstr "ກຳລັງກວດສອບ..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"

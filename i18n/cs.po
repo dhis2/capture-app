@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -121,66 +121,6 @@ msgstr "Tato hodnota se ověřuje"
 msgid "Async field update failed"
 msgstr "Asynchronní aktualizace pole selhala"
 
-msgid "A value is required"
-msgstr "hodnota je vyžadována"
-
-msgid "Please provide a valid number"
-msgstr "Uveďte prosím platné číslo"
-
-msgid "Please provide a valid integer"
-msgstr "Uveďte platné celé číslo"
-
-msgid "Please provide a positive integer"
-msgstr "Zadejte kladné celé číslo"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Uveďte nulové nebo kladné celé číslo"
-
-msgid "Please provide a negative integer"
-msgstr "Uveďte záporné celé číslo"
-
-msgid "Please provide a valid date"
-msgstr "Uveďte prosím platné datum"
-
-msgid "A date in the future is not allowed"
-msgstr "Datum v budoucnosti není povoleno"
-
-msgid "Please provide a valid date and time"
-msgstr "Uveďte prosím platné datum a čas"
-
-msgid "Please provide a valid time"
-msgstr "Uveďte platný čas"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Zadejte prosím celé číslo v rozmezí 0 až 100"
-
-msgid "Please provide a valid url"
-msgstr "Uveďte platnou adresu URL"
-
-msgid "Please provide a valid email address"
-msgstr "Uveďte platnou e-mailovou adresu"
-
-msgid "Please provide a valid age"
-msgstr "Uveďte platný věk"
-
-msgid "Please provide a valid phone number"
-msgstr "Uveďte prosím platné telefonní číslo"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Uveďte platnou organizační jednotku"
-
-msgid "Please provide valid coordinates"
-msgstr "Uveďte platné souřadnice"
-
-msgid "This value already exists"
-msgstr "„Od“ nemůže být větší než „do“..."
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "„Od“ nemůže být větší než „Do“"
-
-msgid "Checking..."
-msgstr "Probíhá kontrola ..."
-
 msgid "Area"
 msgstr "Oblast"
 
@@ -192,6 +132,12 @@ msgstr "Zápis"
 
 msgid "Complete event"
 msgstr "Dokončit událost"
+
+msgid "A value is required"
+msgstr "hodnota je vyžadována"
+
+msgid "Please provide a valid date"
+msgstr "Uveďte prosím platné datum"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Základní informace"
@@ -205,8 +151,8 @@ msgstr "{{ stageName }} - Stav"
 msgid "Please select {{categoryName}}"
 msgstr "Vyberte prosím {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "Budoucí datum není povoleno"
+msgid "A date in the future is not allowed"
+msgstr "Datum v budoucnosti není povoleno"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Ukládání nového zápisu do {{programName}} v {{orgUnitName}}."
@@ -1215,6 +1161,9 @@ msgstr "Nastavit souřadnice"
 msgid "Coordinates"
 msgstr "Souřadnice"
 
+msgid "Please provide valid coordinates"
+msgstr "Uveďte platné souřadnice"
+
 msgid "Delete polygon"
 msgstr "Smazat polygon"
 
@@ -1482,6 +1431,12 @@ msgstr "Plánované datum"
 msgid "Report date"
 msgstr "Datum zprávy"
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Uveďte platnou organizační jednotku"
+
 msgid "Please select a valid event"
 msgstr "Vyberte prosím platnou událost"
 
@@ -1589,10 +1544,10 @@ msgid "Value"
 msgstr "Hodnota"
 
 msgid "File"
-msgstr ""
+msgstr "Soubor"
 
 msgid "Image"
-msgstr ""
+msgstr "Obrázek"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Nový vztah {{trackedEntityTypeName}} "
@@ -1678,7 +1633,7 @@ msgid "Details (Advanced)"
 msgstr ""
 
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Nastala neznámá chyba."
 
 msgid "An error occurred while completing events"
 msgstr ""
@@ -1854,13 +1809,13 @@ msgstr "došlo k chybě při načítání seznamů instancí trasovaných entit"
 
 msgid "{{count}} selected"
 msgid_plural "{{count}} selected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Vybrán: {{count}}"
+msgstr[1] "Vybráno: {{count}}"
+msgstr[2] "Vybráno: {{count}}"
+msgstr[3] "Vybráno: {{count}}"
 
 msgid "Deselect all"
-msgstr ""
+msgstr "Odznačit vše"
 
 msgid "Update view"
 msgstr "Aktualizovat zobrazení"
@@ -1969,6 +1924,60 @@ msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
 
 msgid "Error updating the Assignee"
 msgstr "Chyba při aktualizaci Příjemce"
+
+msgid "Please provide a valid number"
+msgstr "Uveďte prosím platné číslo"
+
+msgid "Please provide a valid integer"
+msgstr "Uveďte platné celé číslo"
+
+msgid "Please provide a positive integer"
+msgstr "Zadejte kladné celé číslo"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Uveďte nulové nebo kladné celé číslo"
+
+msgid "Please provide a negative integer"
+msgstr "Uveďte záporné celé číslo"
+
+msgid "Please provide a valid date and time"
+msgstr "Uveďte prosím platné datum a čas"
+
+msgid "Please provide a valid time"
+msgstr "Uveďte platný čas"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Zadejte prosím celé číslo v rozmezí 0 až 100"
+
+msgid "Please provide a valid url"
+msgstr "Uveďte platnou adresu URL"
+
+msgid "Please provide a valid email address"
+msgstr "Uveďte platnou e-mailovou adresu"
+
+msgid "Please provide a valid age"
+msgstr "Uveďte platný věk"
+
+msgid "Please provide a valid phone number"
+msgstr "Uveďte prosím platné telefonní číslo"
+
+msgid "This value already exists"
+msgstr "„Od“ nemůže být větší než „do“..."
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "„Od“ nemůže být větší než „Do“"
+
+msgid "Checking..."
+msgstr "Probíhá kontrola ..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
