@@ -171,7 +171,7 @@ const LinkExistingResponse = ({
     );
 };
 
-export const RelatedStagesActionsPlain = ({
+const RelatedStagesActionsPlain = ({
     classes,
     type,
     relationshipName,

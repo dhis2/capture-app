@@ -7,7 +7,7 @@ import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../utils/api';
 
 type Props = {
     stageId: ?string,
-    enrollmentId?: string,
+    enrollmentId: ?string,
     scheduledLabel: string,
     occurredLabel: string,
     relationshipTypeId: ?string,

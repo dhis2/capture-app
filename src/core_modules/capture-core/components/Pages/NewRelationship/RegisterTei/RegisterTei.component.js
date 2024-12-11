@@ -12,8 +12,7 @@ import type { Props } from './RegisterTei.types';
 import { withErrorMessageHandler } from '../../../../HOC';
 import type { EnrollmentPayload } from
     '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
-import type { TeiPayload } from
-    '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+import type { TeiPayload } from '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance';
 
 const getStyles = () => ({
     container: {
