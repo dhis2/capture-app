@@ -6,6 +6,8 @@ import { convertMomentToDateFormatString } from '../../../../../../utils/convert
 import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
+import { convertClientToView } from '../../../../../../../capture-core/converters';
+import { dataElementTypes } from '../../../../../../metaData';
 
 const periods = {
     TODAY: 'TODAY',
@@ -37,8 +39,8 @@ const convertToViewValue = (filterValue: string) => pipe(
 
 function translateAbsoluteDate(filter: AbsoluteDateFilterData) {
     let appliedText = '';
-    const fromValue = filter.ge;
-    const toValue = filter.le;
+    const fromValue = convertClientToView(filter.ge, dataElementTypes.DATE);
+    const toValue = convertClientToView(filter.le, dataElementTypes.DATE);
 
     if (fromValue && toValue) {
         const momentFrom = moment(fromValue);
