@@ -42,6 +42,7 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
+import { convertDateObjectToDateFormatString } from '../../../../capture-core/utils/converters/date';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -111,7 +112,7 @@ const getEnrollmentDateSettings = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
-            calendarMaxMoment: !props.enrollmentMetadata.allowFutureEnrollmentDate ? moment() : undefined,
+            calendarMaxMoment: !props.enrollmentMetadata.allowFutureEnrollmentDate ? convertDateObjectToDateFormatString(moment()) : undefined,
         }),
         getPropName: () => 'enrolledAt',
         getValidatorContainers: getEnrollmentDateValidatorContainer,
@@ -159,7 +160,9 @@ const getIncidentDateSettings = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
-            calendarMaxMoment: !props.enrollmentMetadata.allowFutureIncidentDate ? moment() : undefined,
+            calendarMaxMoment: !props.enrollmentMetadata.allowFutureIncidentDate ?
+                convertDateObjectToDateFormatString(moment()) :
+                undefined,
         }),
         getPropName: () => 'occurredAt',
         getPassOnFieldData: () => true,

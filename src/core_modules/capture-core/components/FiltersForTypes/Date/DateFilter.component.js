@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
@@ -16,7 +17,8 @@ import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
-import { parseDate } from '../../../utils/converters/date';
+import { parseDate, convertLocalToIsoCalendar, convertIsoToLocalCalendar } from '../../../utils/converters/date';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
@@ -117,16 +119,24 @@ const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
     return errors;
 };
 
-const isAbsoluteRangeFilterValid = (fromValue, toValue) => {
-    if (!fromValue && !toValue) {
+const isAbsoluteRangeFilterValid = (from, to) => {
+    if (!from?.value && !to?.value) {
         return false;
     }
+    const fromValue = from?.value;
+    const toValue = to?.value;
+    const parseResultFrom = fromValue ? parseDate(fromValue) : { isValid: true, moment: null };
+    const parseResultTo = toValue ? parseDate(toValue) : { isValid: true, moment: null };
 
-    if ((fromValue && !fromValue.isValid) || (toValue && !toValue.isValid)) {
+    if (!(parseResultFrom.isValid && parseResultTo.isValid)) {
         return false;
     }
+    const isValidMomentDate = () =>
+        parseResultFrom.momentDate &&
+        parseResultTo.momentDate &&
+        parseResultFrom.momentDate.isAfter(parseResultTo.momentDate);
 
-    return !DateFilter.isFromAfterTo(fromValue?.value, toValue?.value);
+    return !isValidMomentDate();
 };
 
 const isRelativeRangeFilterValid = (startValue, endValue) => {
@@ -257,12 +267,25 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         return !values || DateFilter.isFilterValid(values.main, values.from, values.to, values.start, values.end);
     }
 
-    getUpdatedValue(valuePart: { [key: string]: string }) {
-        // $FlowFixMe[cannot-spread-indexer] automated comment
+    getUpdatedValue(valuePart: Object) {
         const valueObject = {
             ...this.props.value,
             ...valuePart,
         };
+        const dateFormat = systemSettingsStore.get().dateFormat;
+
+        ['from', 'to'].forEach((key) => {
+            if (valuePart[key] && valueObject[key]?.value) {
+                const isValidDate = valuePart[key]?.isValid;
+                valueObject[key] = {
+                    ...valueObject[key],
+                    value: isValidDate ?
+                        moment(convertLocalToIsoCalendar(valueObject[key].value)).format(dateFormat) :
+                        valueObject[key].value,
+                };
+            }
+        });
+
         const isRelativeRangeValue = () => valueObject?.start || valuePart?.start || valuePart?.end;
         const isAbsoluteRangevalue = () => valueObject?.from || valuePart?.from || valuePart?.to;
 
@@ -335,10 +358,23 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     render() {
         const { value, classes, onFocusUpdateButton } = this.props;
-        const fromValue = value?.from;
-        const toValue = value?.to;
         const { startValueError, endValueError, dateLogicError, bufferLogicError } =
-            this.getErrors();
+        this.getErrors();
+
+        const dateFormat = systemSettingsStore.get().dateFormat;
+
+        const formatDate = (dateValue) => {
+            if (!dateValue) return '';
+            const momentValue = moment(dateValue, dateFormat);
+            if (!momentValue.isValid()) return dateValue;
+            const isoDate = momentValue.format('YYYY-MM-DD');
+            return convertIsoToLocalCalendar(isoDate);
+        };
+
+        const from = value?.from;
+        const to = value?.to;
+        const fromDate = formatDate(from?.value);
+        const toDate = formatDate(to?.value);
 
         return (
             <div id="dateFilter">
@@ -358,11 +394,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <FromDateFilter
-                            value={fromValue?.value}
+                            value={fromDate}
                             onBlur={this.handleFieldBlur}
                             onEnterKey={this.handleEnterKeyInFrom}
                             onDateSelectedFromCalendar={this.handleDateSelectedFromCalendarInFrom}
-                            error={fromValue?.error}
+                            error={from?.error}
                             errorClass={classes.error}
                         />
                     </div>
@@ -371,11 +407,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <ToDateFilter
-                            value={toValue?.value}
+                            value={toDate}
                             onBlur={this.handleFieldBlur}
                             textFieldRef={this.setToD2DateTextFieldInstance}
                             onFocusUpdateButton={onFocusUpdateButton}
-                            error={toValue?.error}
+                            error={to?.error}
                             errorClass={classes.error}
                         />
                     </div>

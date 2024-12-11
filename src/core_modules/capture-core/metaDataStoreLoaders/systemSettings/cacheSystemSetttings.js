@@ -10,7 +10,7 @@ function isLangRTL(code) {
 
 export async function cacheSystemSettings(
     uiLocale: string,
-    systemSettings: { dateFormat: string, serverTimeZoneId: string },
+    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, },
 ) {
     const systemSettingsArray = [
         {
@@ -24,6 +24,10 @@ export async function cacheSystemSettings(
         {
             id: 'serverTimeZoneId',
             value: systemSettings.serverTimeZoneId,
+        },
+        {
+            id: 'calendar',
+            value: systemSettings.calendar,
         },
     ];
 

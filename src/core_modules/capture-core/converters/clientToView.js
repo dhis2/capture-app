@@ -4,7 +4,7 @@ import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { PreviewImage } from 'capture-ui';
 import { dataElementTypes, type DataElement } from '../metaData';
-import { convertMomentToDateFormatString } from '../utils/converters/date';
+import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
@@ -12,14 +12,18 @@ import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForView(rawValue: string): string {
     const momentDate = moment(rawValue);
-    return convertMomentToDateFormatString(momentDate);
+    const dateString = momentDate.format('YYYY-MM-DD');
+    return convertIsoToLocalCalendar(dateString);
 }
 function convertDateTimeForView(rawValue: string): string {
     const momentDate = moment(rawValue);
-    const dateString = convertMomentToDateFormatString(momentDate);
+    const dateString = momentDate.format('YYYY-MM-DD');
     const timeString = momentDate.format('HH:mm');
-    return `${dateString} ${timeString}`;
+
+    const localDate = convertIsoToLocalCalendar(dateString);
+    return `${localDate} ${timeString}`;
 }
+
 function convertTimeForView(rawValue: string): string {
     const momentDate = moment(rawValue, 'HH:mm', true);
     return momentDate.format('HH:mm');
