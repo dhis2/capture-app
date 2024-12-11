@@ -1,11 +1,6 @@
 import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../support/date';
 
-Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
-    cy.visit(url);
-    cy.get('[data-test="person-selector-container"]').contains('Person');
-});
-
 Given(/^you land on a enrollment page domain in Malaria focus investigation by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="focus area-selector-container"]').contains('Focus area');
@@ -194,11 +189,6 @@ When('you remove the program selection', () => {
         .click();
 });
 
-When('you remove the org unit selection', () => {
-    cy.get('[data-test="org-unit-selector-container-clear-icon"]')
-        .click();
-});
-
 Then('you should be taken to the main page with only org unit selected', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
 });
@@ -288,11 +278,6 @@ And('you reset the org unit selection', () => {
 And('you see the enrollment event Edit page but there is no org unit id in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?eventId=lQQyjR73hHk`);
     cy.get('[data-test="widget-enrollment-event-view"]').should('exist');
-});
-
-And('you see the enrollment event New page but there is no org unit id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&programId=IpHINAT79UW&stageId=A03MvHHogjR&teiId=fhFQhO0xILJ`);
-    cy.contains('Choose an organisation unit to start reporting');
 });
 
 And('you see the enrollment event New page but there is no stage id in the url', () => {
