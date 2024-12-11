@@ -267,22 +267,23 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
         return !values || DateFilter.isFilterValid(values.main, values.from, values.to, values.start, values.end);
     }
 
-    // eslint-disable-next-line complexity
     getUpdatedValue(valuePart: Object) {
         const valueObject = {
             ...this.props.value,
             ...valuePart,
         };
         const dateFormat = systemSettingsStore.get().dateFormat;
+        const hasFromValue = () => valuePart.from && valueObject?.from?.value;
+        const hasToValue = () => valuePart.to && valueObject?.to?.value;
 
-        if (valuePart.from && valueObject?.from?.value) {
+        if (hasFromValue()) {
             valueObject.from = {
                 ...valueObject.from,
                 value: moment(convertLocalToIsoCalendar(valueObject.from.value)).format(dateFormat),
             };
         }
 
-        if (valuePart.to && valueObject?.to?.value) {
+        if (hasToValue()) {
             valueObject.to = {
                 ...valueObject.to,
                 value: moment(convertLocalToIsoCalendar(valueObject.to.value)).format(dateFormat),
