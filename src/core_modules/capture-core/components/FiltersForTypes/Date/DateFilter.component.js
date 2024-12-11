@@ -273,22 +273,18 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
             ...valuePart,
         };
         const dateFormat = systemSettingsStore.get().dateFormat;
-        const hasFromValue = () => valuePart.from && valueObject?.from?.value;
-        const hasToValue = () => valuePart.to && valueObject?.to?.value;
 
-        if (hasFromValue()) {
-            valueObject.from = {
-                ...valueObject.from,
-                value: moment(convertLocalToIsoCalendar(valueObject.from.value)).format(dateFormat),
-            };
-        }
-
-        if (hasToValue()) {
-            valueObject.to = {
-                ...valueObject.to,
-                value: moment(convertLocalToIsoCalendar(valueObject.to.value)).format(dateFormat),
-            };
-        }
+        ['from', 'to'].forEach((key) => {
+            if (valuePart[key] && valueObject[key]?.value) {
+                const isValidDate = valuePart[key]?.isValid;
+                valueObject[key] = {
+                    ...valueObject[key],
+                    value: isValidDate ?
+                        moment(convertLocalToIsoCalendar(valueObject[key].value)).format(dateFormat) :
+                        valueObject[key].value,
+                };
+            }
+        });
 
         const isRelativeRangeValue = () => valueObject?.start || valuePart?.start || valuePart?.end;
         const isAbsoluteRangevalue = () => valueObject?.from || valuePart?.from || valuePart?.to;
@@ -362,10 +358,23 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
 
     render() {
         const { value, classes, onFocusUpdateButton } = this.props;
-        const fromValue = value?.from;
-        const toValue = value?.to;
         const { startValueError, endValueError, dateLogicError, bufferLogicError } =
-            this.getErrors();
+        this.getErrors();
+
+        const dateFormat = systemSettingsStore.get().dateFormat;
+
+        const formatDate = (dateValue) => {
+            if (!dateValue) return '';
+            const momentValue = moment(dateValue, dateFormat);
+            if (!momentValue.isValid()) return dateValue;
+            const isoDate = momentValue.format('YYYY-MM-DD');
+            return convertIsoToLocalCalendar(isoDate);
+        };
+
+        const from = value?.from;
+        const to = value?.to;
+        const fromDate = formatDate(from?.value);
+        const toDate = formatDate(to?.value);
 
         return (
             <div id="dateFilter">
@@ -385,11 +394,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <FromDateFilter
-                            value={convertIsoToLocalCalendar(fromValue?.value)}
+                            value={fromDate}
                             onBlur={this.handleFieldBlur}
                             onEnterKey={this.handleEnterKeyInFrom}
                             onDateSelectedFromCalendar={this.handleDateSelectedFromCalendarInFrom}
-                            error={fromValue?.error}
+                            error={from?.error}
                             errorClass={classes.error}
                         />
                     </div>
@@ -398,11 +407,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
                         {/* $FlowSuppress: Flow not working 100% with HOCs */}
                         {/* $FlowFixMe[prop-missing] automated comment */}
                         <ToDateFilter
-                            value={convertIsoToLocalCalendar(toValue?.value)}
+                            value={toDate}
                             onBlur={this.handleFieldBlur}
                             textFieldRef={this.setToD2DateTextFieldInstance}
                             onFocusUpdateButton={onFocusUpdateButton}
-                            error={toValue?.error}
+                            error={to?.error}
                             errorClass={classes.error}
                         />
                     </div>
