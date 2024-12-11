@@ -10,6 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
+        "@dhis2/rules-engine-javascript": "101.19.1",
         "@dhis2-ui/calendar": "^10.0.3",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
