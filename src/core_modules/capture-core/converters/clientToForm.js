@@ -1,6 +1,6 @@
 // @flow
 import moment from 'moment';
-import { convertMomentToDateFormatString, convertIsoToLocalCalendar } from '../utils/converters/date';
+import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
 import { stringifyNumber } from './common/stringifyNumber';
@@ -56,7 +56,7 @@ function convertAgeForEdit(rawValue: string): AgeFormValue {
     const days = now.diff(age, 'days');
 
     return {
-        date: convertMomentToDateFormatString(moment(rawValue)),
+        date: convertIsoToLocalCalendar(rawValue),
         years: years.toString(),
         months: months.toString(),
         days: days.toString(),
