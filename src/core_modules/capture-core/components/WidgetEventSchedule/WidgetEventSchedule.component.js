@@ -90,6 +90,7 @@ const WidgetEventSchedulePlain = ({
                         stageId={stageId}
                         orgUnit={orgUnit}
                         scheduleDate={scheduleDate}
+                        displayDueDateLabel={displayDueDateLabel}
                         serverSuggestedScheduleDate={serverSuggestedScheduleDate}
                         {...passOnProps}
                     />

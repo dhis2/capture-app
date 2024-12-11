@@ -10,6 +10,7 @@ const styles = {
     infoBox: {
         marginTop: spacersNum.dp16,
         padding: spacersNum.dp16,
+        width: 'fit-content',
     },
 };
 
@@ -24,7 +25,7 @@ const InfoBoxPlain = ({
     orgUnitName,
     classes,
 }: Props) => {
-    if (!scheduleDate || !suggestedScheduleDate || !orgUnitName) {
+    if (!scheduleDate || !suggestedScheduleDate) {
         return null;
     }
 
