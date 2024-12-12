@@ -1,6 +1,11 @@
 import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../support/date';
 
+Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
+    cy.visit(url);
+    cy.get('[data-test="person-selector-container"]').contains('Person');
+});
+
 Given(/^you land on a enrollment page domain in Malaria focus investigation by having typed (.*)$/, (url) => {
     cy.visit(url);
     cy.get('[data-test="focus area-selector-container"]').contains('Focus area');
