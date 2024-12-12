@@ -44,8 +44,8 @@ const fetchFormattedValues = async ({
         elementKey: string,
         change: Change,
     ) => {
-        const { dataElement, attribute, property } = change;
-        const fieldId = dataElement ?? attribute ?? property;
+        const { dataElement, attribute, field } = change;
+        const fieldId = dataElement ?? attribute ?? field;
         if (!fieldId) {
             log.error('Could not find fieldId in change:', change);
             return { metadataElement: null, fieldId: null };

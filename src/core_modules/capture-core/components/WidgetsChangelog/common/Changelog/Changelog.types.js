@@ -6,7 +6,7 @@ type CreatedChange = {|
     type: typeof CHANGE_TYPES.CREATED,
     dataElement?: string,
     attribute?: string,
-    property?: string,
+    field?: string,
     currentValue: any,
 |}
 
@@ -14,7 +14,7 @@ type UpdatedChange = {|
     type: typeof CHANGE_TYPES.UPDATED,
     dataElement?: string,
     attribute?: string,
-    property?: string,
+    field?: string,
     previousValue: any,
     currentValue: any,
 |}
@@ -23,7 +23,7 @@ type DeletedChange = {|
     type: typeof CHANGE_TYPES.DELETED,
     dataElement?: string,
     attribute?: string,
-    property?: string,
+    field?: string,
     previousValue: any,
 |}
 
