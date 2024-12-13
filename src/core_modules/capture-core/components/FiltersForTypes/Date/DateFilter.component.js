@@ -117,16 +117,24 @@ const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
     return errors;
 };
 
-const isAbsoluteRangeFilterValid = (fromValue, toValue) => {
-    if (!fromValue && !toValue) {
+const isAbsoluteRangeFilterValid = (from, to) => {
+    if (!from?.value && !to?.value) {
         return false;
     }
+    const fromValue = from?.value;
+    const toValue = to?.value;
+    const parseResultFrom = fromValue ? parseDate(fromValue) : { isValid: true, moment: null };
+    const parseResultTo = toValue ? parseDate(toValue) : { isValid: true, moment: null };
 
-    if ((fromValue && !fromValue.isValid) || (toValue && !toValue.isValid)) {
+    if (!(parseResultFrom.isValid && parseResultTo.isValid)) {
         return false;
     }
+    const isValidMomentDate = () =>
+        parseResultFrom.momentDate &&
+        parseResultTo.momentDate &&
+        parseResultFrom.momentDate.isAfter(parseResultTo.momentDate);
 
-    return !DateFilter.isFromAfterTo(fromValue?.value, toValue?.value);
+    return !isValidMomentDate();
 };
 
 const isRelativeRangeFilterValid = (startValue, endValue) => {
