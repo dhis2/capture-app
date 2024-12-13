@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 
 type Props = $ReadOnly<{|
   latitude: number | string,
@@ -10,8 +11,8 @@ const toSixDecimal = value => (parseFloat(value) ? parseFloat(value).toFixed(6) 
 
 export const MinimalCoordinates = ({ latitude, longitude }: Props) => (
     <div>
-        lat: {toSixDecimal(latitude)} <br />
-        long: {toSixDecimal(longitude)}
+        {i18n.t('Lat')}: {toSixDecimal(latitude)}<br />
+        {i18n.t('Long')}: {toSixDecimal(longitude)}
     </div>
 );
 

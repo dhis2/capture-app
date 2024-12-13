@@ -1,5 +1,6 @@
 // @flow
 import React, { useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import { IconChevronUp16, IconChevronDown16, colors, spacers } from '@dhis2/ui';
 
@@ -40,14 +41,14 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
                 {coordinates.slice(0, showMore ? coordinates.length : 1).map((coordinatePair, index) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <div key={index}>
-                        {`lat: ${coordinatePair[1]}`}<br />
-                        {`long: ${coordinatePair[0]}`}
+                        {`${i18n('lat')}: ${coordinatePair[1]}`}<br />
+                        {`${i18n('long')}: ${coordinatePair[0]}`}
                     </div>
                 ))}
             </div>
             <div className={classes.buttonContainer}>
                 <button className={classes.viewButton} onClick={() => setShowMore(!showMore)}>
-                    {showMore ? 'Show Less' : 'Show More'}
+                    {showMore ? i18n.t('Show less') : i18n.t('Show more')}
                     {showMore ? <IconChevronUp16 /> : <IconChevronDown16 />}
                 </button>
             </div>

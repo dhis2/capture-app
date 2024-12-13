@@ -1,5 +1,6 @@
 // @flow
 import React, { useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import type { DataElement } from '../../../metaData';
 import { dataElementTypes } from '../../../metaData';
 import type { Props } from './EventChangelogWrapper.types';
@@ -36,7 +37,7 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, eventData, ...p
             acc[key] = {
                 id: key,
                 name: contextLabels[key],
-                type: dataElementTypes.DATE,
+                type: dataElementTypes.DATETIME,
             };
 
             return acc;
@@ -45,7 +46,7 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, eventData, ...p
         const additionalFields = formFoundation.featureType !== 'None' ? {
             geometry: {
                 id: 'geometry',
-                name: formFoundation.featureType,
+                name: formFoundation.featureType === 'Polygon' ? i18n.t('Area') : i18n.t('Coordinate'),
                 type: formFoundation.featureType === 'Polygon' ?
                     dataElementTypes.POLYGON : dataElementTypes.COORDINATE,
             },
