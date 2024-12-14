@@ -1,3 +1,10 @@
+## [101.19.3](https://github.com/dhis2/capture-app/compare/v101.19.2...v101.19.3) (2024-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18614] prevent runtime error when only one date range is selected ([#3906](https://github.com/dhis2/capture-app/issues/3906)) ([4699a84](https://github.com/dhis2/capture-app/commit/4699a84b138a17bc42fae5be6685a71b840c1a43))
+
 ## [101.19.2](https://github.com/dhis2/capture-app/compare/v101.19.1...v101.19.2) (2024-12-08)
 
 
