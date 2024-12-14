@@ -194,6 +194,11 @@ When('you remove the program selection', () => {
         .click();
 });
 
+When('you remove the org unit selection', () => {
+    cy.get('[data-test="org-unit-selector-container-clear-icon"]')
+        .click();
+});
+
 Then('you should be taken to the main page with only org unit selected', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
 });
