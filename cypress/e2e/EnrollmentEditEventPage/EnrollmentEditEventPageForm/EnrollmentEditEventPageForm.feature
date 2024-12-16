@@ -77,6 +77,7 @@ And the user see the following text: 11
     When the user clicks on the cancel button
     Then the user is navigated to the enrollment dashboard
 
+@with-restore-event-schedule-date
 Scenario: User can update schedule date for a scheduled event
     Given you land on the enrollment event page with selected Person by having typed /#/enrollmentEventEdit?eventId=RIrfCcEP8Uu&orgUnitId=DiszpKrYNg8
     Then the view enrollment event form is in edit mode
