@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
+import { convertDateObjectToDateFormatString } from 'capture-core/utils/converters/date';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { IconButton } from 'capture-ui';
@@ -72,7 +74,8 @@ function getCalculatedValues(
             days: '',
         };
     }
-    const now = moment();
+    const dateFormat = systemSettingsStore.get().dateFormat;
+    const now = moment(convertDateObjectToDateFormatString(moment()), dateFormat);
     const age = moment(parseData.momentDate);
 
     const years = now.diff(age, 'years');
@@ -133,8 +136,8 @@ class D2AgeFieldPlain extends Component<Props> {
             this.props.onBlur({ ...values, date: '' });
             return;
         }
-
-        const momentDate = moment(undefined, undefined, true);
+        const dateFormat = systemSettingsStore.get().dateFormat;
+        const momentDate = moment(convertDateObjectToDateFormatString(moment(undefined, undefined, true)), dateFormat);
         momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.years), 'years');
         momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.months), 'months');
         momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.days), 'days');
