@@ -2,13 +2,14 @@
 # Translators:
 # Philip Larsen Donnelly, 2024
 # Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024
+# Sharaf Yuldashev, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Khurshid Ibatov <Khurshid.Ibatov@tibbiysugurta.uz>, 2024\n"
+"Last-Translator: Sharaf Yuldashev, 2024\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,49 +45,49 @@ msgstr ""
 "Илтимос, саҳифани янгиланг, аммо бошқа версиялар ёпилишини унутманг."
 
 msgid "Enrollment dashboard"
-msgstr ""
+msgstr "Қайд этиш инфопанели"
 
 msgid "View event"
-msgstr ""
+msgstr "Ҳодиса/вазиятни кўриш"
 
 msgid "Edit event"
-msgstr "Ҳодиса/тадбирни таҳрирланг"
+msgstr "Ҳодиса/вазиятни таҳрирлаш"
 
 msgid "New event"
 msgstr "Янги ҳодиса"
 
 msgid "Active enrollments"
-msgstr ""
+msgstr "Фаол Қайдномалар"
 
 msgid "Completed enrollments"
-msgstr ""
+msgstr "Якунларган Қайдномалар"
 
 msgid "Cancelled enrollments"
-msgstr ""
+msgstr "Бекор қилинган Қайдномалар"
 
 msgid "{{trackedEntityName}} list"
-msgstr ""
+msgstr "{{trackedEntityName}} рўйхати"
 
 msgid "Search"
 msgstr "Излаш"
 
 msgid "Working List"
-msgstr ""
+msgstr "Ишчи рўйхат"
 
 msgid "Event list"
-msgstr ""
+msgstr "Ҳодиса/вазиятлар рўйхати "
 
 msgid "More"
 msgstr "Кўпроқ"
 
 msgid "View {{programName}} dashboard"
-msgstr ""
+msgstr "{{programName}}-инфопанелини кўриш"
 
 msgid "View dashboard"
 msgstr "Бошқарув панелини кўриш"
 
 msgid "View active enrollment"
-msgstr "Фаол рўйхатдан ўтаётганларни кўриш"
+msgstr "Фаол рўйхатдан ўтганларни кўриш"
 
 msgid "Re-enroll"
 msgstr "Қайта рўйхатдан ўтиш"
@@ -121,66 +122,6 @@ msgstr "Ушбу қиймат тасдиқланмоқда"
 msgid "Async field update failed"
 msgstr "Асинхрон майдон янгиланиши амалга ошмади"
 
-msgid "A value is required"
-msgstr "Қиймат талаб қилинади"
-
-msgid "Please provide a valid number"
-msgstr "Илтимос, тўғри рақамни кўрсатинг"
-
-msgid "Please provide a valid integer"
-msgstr "Илтимос, тўғри бутун сонни кўрсатинг"
-
-msgid "Please provide a positive integer"
-msgstr "Илтимос, бутун мусбат сонни кўрсатинг"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Илтимос, ноль ёки бутун мусбат сонни кўрсатинг"
-
-msgid "Please provide a negative integer"
-msgstr "Илтимос, бутун манфий сонни кўрсатинг"
-
-msgid "Please provide a valid date"
-msgstr "Илтимос, тўғри санани кўрсатинг"
-
-msgid "A date in the future is not allowed"
-msgstr "Келажакдаги сана қабул қилинмайди"
-
-msgid "Please provide a valid date and time"
-msgstr "Илтимос, тегишли сана ва вақтни кўрсатинг"
-
-msgid "Please provide a valid time"
-msgstr "Илтимос, тўғри вақтни кўрсатинг"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr "Илтимос, ҳақиқий URL манзилни кўрсатинг"
-
-msgid "Please provide a valid email address"
-msgstr "Илтимос, амалдаги е-почта манзилини кўрсатинг"
-
-msgid "Please provide a valid age"
-msgstr "Илтимос, тўғри ёшни кўрсатинг"
-
-msgid "Please provide a valid phone number"
-msgstr "Илтимос, тўғри телефон рақамини кўрсатинг"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Илтимос, тўғри ташкилий бўлимни кўрсатинг"
-
-msgid "Please provide valid coordinates"
-msgstr "Илтимос, тўғри координаталарни кўрсатинг"
-
-msgid "This value already exists"
-msgstr "Бу қиймат аллақачон мавжуд"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "Сана \"гача\" катта бўлиши мумкин эмас сана \"дан\" "
-
-msgid "Checking..."
-msgstr "Текширилмоқда..."
-
 msgid "Area"
 msgstr "Майдон"
 
@@ -193,20 +134,26 @@ msgstr "Рўйхатга олиш"
 msgid "Complete event"
 msgstr "Ҳодиса/тадбирни якунлаш"
 
+msgid "A value is required"
+msgstr "Қиймат талаб қилинади"
+
+msgid "Please provide a valid date"
+msgstr "Илтимос, тўғри санани кўрсатинг"
+
 msgid "{{ stageName }} - Basic info"
-msgstr ""
+msgstr "{{ stageName }} - Асосий ахборот"
 
 msgid "{{ stageName }} - Assignee"
-msgstr ""
+msgstr "{{ stageName }} - Топширилган шахс"
 
 msgid "{{ stageName }} - Status"
-msgstr ""
+msgstr "{{ stageName }} - статуси"
 
 msgid "Please select {{categoryName}}"
-msgstr ""
+msgstr "Куйидагини танланг: {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "Келажакдаги сана танловига рухсат берилмайди"
+msgid "A date in the future is not allowed"
+msgstr "Келажакдаги сана қабул қилинмайди"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -222,10 +169,10 @@ msgid "Metadata error. see log for details"
 msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
 
 msgid "{{ stageName }} - Details"
-msgstr ""
+msgstr "{{ stageName }} - хақида батафсил"
 
 msgid "{{ stageName }} - {{ sectionName }}"
-msgstr ""
+msgstr "{{ stageName }} - {{ sectionName }}"
 
 msgid "Assigned user"
 msgstr "Тавсия этилган фойдаланувчи"
@@ -275,7 +222,7 @@ msgid "Completed"
 msgstr "Тўлдирилди"
 
 msgid "Please add or cancel note before saving the event"
-msgstr ""
+msgstr "Холатни сақлашдан олдин эслатмани қўшинг ёки бекор қилинг"
 
 msgid "Save and add another"
 msgstr "Сақлаш ва бошқасини қўшиш"
@@ -357,15 +304,16 @@ msgid "An error has occurred. See log for details"
 msgstr "Хатолик юз берди. Тафсилотлар учун журналга қаранг"
 
 msgid "{{programStageName}} completed"
-msgstr ""
+msgstr "{{programStageName}} - якунланди"
 
 msgid ""
 "Would you like to complete the enrollment and all active events as well?"
 msgstr ""
+"Қайд этиш жараёнини ва барча фаол холатларни ҳам якунлашни истайсизми?"
 
 msgid "{{count}} event in {{programStageName}}"
 msgid_plural "{{count}} event in {{programStageName}}"
-msgstr[0] ""
+msgstr[0] "{{count}} кайднома(лар) {{programStageName}}-да мавжуд"
 
 msgid "Yes, complete enrollment and events"
 msgstr ""
@@ -377,7 +325,7 @@ msgid "Would you like to complete the enrollment?"
 msgstr ""
 
 msgid "Complete enrollment"
-msgstr "Қайд этишни якунлансин"
+msgstr "Қайд этишни якунлаш"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -653,7 +601,7 @@ msgid "Close the notice"
 msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "\"{{enrollmentId}}\" идентификатори билан қайд қилиш имконсиз"
+msgstr "\"{{enrollmentId}}\" - номерли қайднома мавжуд эмас"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
@@ -667,7 +615,7 @@ msgid ""
 msgstr ""
 
 msgid "No feedback for this enrollment yet"
-msgstr "Ушбу қайд этишда қайта алоқа ахбороти мавжуд эмас"
+msgstr "Ушбу қайднома бўйича мулоҳаза хали берилмади"
 
 msgid "No indicator output for this enrollment yet"
 msgstr "Ушбу қайд этишда индикатор ахбороти мавжуд эмас"
@@ -703,13 +651,13 @@ msgstr ""
 "{{programName}} тоифаларга эга. Панелни кўриш учун барча тоифаларни танланг."
 
 msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr ""
+msgstr " {{enrollmentId}}- Регистрация идентификатори хато."
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr "бошқарув панелини кўриш учун рўйхатдан ўтишни танланг."
+msgstr "Бошқарув панелини кўриш учун \"Рўйхатдан ўтиш\"ни танланг."
 
 msgid "There are no active enrollments."
-msgstr ""
+msgstr "Фаол Регистрациялар мавжуд эмас"
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
@@ -1100,7 +1048,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
 
 msgid "No tracked entity types available"
-msgstr ""
+msgstr "Кузатилаётган объект(муассаса) турлари мавжуд эмас"
 
 msgid "Assigned to"
 msgstr "Тайинланган"
@@ -1155,7 +1103,7 @@ msgid "Reactivate"
 msgstr ""
 
 msgid "Mark as cancelled"
-msgstr ""
+msgstr "\"Бекор қилинди\" деб белгилаш"
 
 msgid "Mark incomplete"
 msgstr "Тугалланмаган деб белгилансин"
@@ -1181,7 +1129,7 @@ msgid "Mark for follow-up"
 msgstr "Кузатув учун белгиланг"
 
 msgid "Transfer"
-msgstr ""
+msgstr "Ўтказиш"
 
 msgid "An error occurred while transferring ownership"
 msgstr ""
@@ -1196,10 +1144,13 @@ msgid "Longitude"
 msgstr "Узунлик"
 
 msgid "Set coordinates"
-msgstr ""
+msgstr "Координаталар ни белгилаш"
 
 msgid "Coordinates"
 msgstr "Координаталар"
+
+msgid "Please provide valid coordinates"
+msgstr "Илтимос, тўғри координаталарни кўрсатинг"
 
 msgid "Delete polygon"
 msgstr "Полигон (кўпбурчак) ни ўчириб ташлаш"
@@ -1254,7 +1205,7 @@ msgid "Cancelled"
 msgstr "Бекор қилинди"
 
 msgid "Add coordinates"
-msgstr ""
+msgstr "Координаталар ни киритиш"
 
 msgid "Add area"
 msgstr ""
@@ -1296,7 +1247,7 @@ msgid "Delete event"
 msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
 
 msgid "Yes, delete event"
-msgstr ""
+msgstr "Ҳа, холатни ўчириш"
 
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr ""
@@ -1448,6 +1399,12 @@ msgstr "Режалаштирилган сана"
 
 msgid "Report date"
 msgstr "Ҳисобот санаси"
+
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Илтимос, тўғри ташкилий бўлимни кўрсатинг"
 
 msgid "Please select a valid event"
 msgstr ""
@@ -1901,6 +1858,60 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Илтимос, тўғри рақамни кўрсатинг"
+
+msgid "Please provide a valid integer"
+msgstr "Илтимос, тўғри бутун сонни кўрсатинг"
+
+msgid "Please provide a positive integer"
+msgstr "Илтимос, бутун мусбат сонни кўрсатинг"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Илтимос, ноль ёки бутун мусбат сонни кўрсатинг"
+
+msgid "Please provide a negative integer"
+msgstr "Илтимос, бутун манфий сонни кўрсатинг"
+
+msgid "Please provide a valid date and time"
+msgstr "Илтимос, тегишли сана ва вақтни кўрсатинг"
+
+msgid "Please provide a valid time"
+msgstr "Илтимос, тўғри вақтни кўрсатинг"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr "Илтимос, ҳақиқий URL манзилни кўрсатинг"
+
+msgid "Please provide a valid email address"
+msgstr "Илтимос, амалдаги е-почта манзилини кўрсатинг"
+
+msgid "Please provide a valid age"
+msgstr "Илтимос, тўғри ёшни кўрсатинг"
+
+msgid "Please provide a valid phone number"
+msgstr "Илтимос, тўғри телефон рақамини кўрсатинг"
+
+msgid "This value already exists"
+msgstr "Бу қиймат аллақачон мавжуд"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "Сана \"гача\" катта бўлиши мумкин эмас сана \"дан\" "
+
+msgid "Checking..."
+msgstr "Текширилмоқда..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

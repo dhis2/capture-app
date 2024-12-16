@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -122,66 +122,6 @@ msgstr "ئەم نرخە دەسەلمێندرێت"
 msgid "Async field update failed"
 msgstr "ئەبدەیتکردنی خانەکە سەرکەوتوو نەبوو. "
 
-msgid "A value is required"
-msgstr "نرخێک پێویستە"
-
-msgid "Please provide a valid number"
-msgstr "تکایە ژمارەیەکی درووست بنووسە"
-
-msgid "Please provide a valid integer"
-msgstr "تکایە ژمارەیەکی درووست بنووسە"
-
-msgid "Please provide a positive integer"
-msgstr "تکایە ژمارەیەکی پۆسەتیڤ بنووسە"
-
-msgid "Please provide zero or a positive integer"
-msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنووسە"
-
-msgid "Please provide a negative integer"
-msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
-
-msgid "Please provide a valid date"
-msgstr "تکایە بەروارێکی درووست بنووسە"
-
-msgid "A date in the future is not allowed"
-msgstr ""
-
-msgid "Please provide a valid date and time"
-msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
-
-msgid "Please provide a valid time"
-msgstr "تکایە کاتێکی درووست بنووسە"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr "تکایە یو URLێکی درووست بنووسە"
-
-msgid "Please provide a valid email address"
-msgstr "تکایە ئیمەیڵێکی درووست بنووسە"
-
-msgid "Please provide a valid age"
-msgstr "تکایە تەمەنێکی درووست بنووسە"
-
-msgid "Please provide a valid phone number"
-msgstr "تکایە ژمارە مۆبایلێکی درووست بنووسە"
-
-msgid "Please provide a valid organisation unit"
-msgstr "تکایە ئۆرگانیزەیشن یونتێکی درووست بنووسە"
-
-msgid "Please provide valid coordinates"
-msgstr "تکایە کۆردینەیتی درووستی سەر نەخشە بنووسە"
-
-msgid "This value already exists"
-msgstr "ئەم نرخە پێشوتر هەبووە"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"From\"ناکرێت گەورەتربێت لە \"To\""
-
-msgid "Checking..."
-msgstr "پشکنین..."
-
 msgid "Area"
 msgstr "ناوچە"
 
@@ -193,6 +133,12 @@ msgstr "تۆمارکردن"
 
 msgid "Complete event"
 msgstr ""
+
+msgid "A value is required"
+msgstr "نرخێک پێویستە"
+
+msgid "Please provide a valid date"
+msgstr "تکایە بەروارێکی درووست بنووسە"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -206,8 +152,8 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr ""
 
-msgid "A future date is not allowed"
-msgstr "بەرواری داهاتوو ناکرێت تۆماربکرێت"
+msgid "A date in the future is not allowed"
+msgstr ""
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -1186,6 +1132,9 @@ msgstr ""
 msgid "Coordinates"
 msgstr ""
 
+msgid "Please provide valid coordinates"
+msgstr "تکایە کۆردینەیتی درووستی سەر نەخشە بنووسە"
+
 msgid "Delete polygon"
 msgstr "فرەلاکە بسڕەوە"
 
@@ -1433,6 +1382,12 @@ msgstr ""
 
 msgid "Report date"
 msgstr ""
+
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "تکایە ئۆرگانیزەیشن یونتێکی درووست بنووسە"
 
 msgid "Please select a valid event"
 msgstr ""
@@ -1896,6 +1851,60 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "تکایە ژمارەیەکی درووست بنووسە"
+
+msgid "Please provide a valid integer"
+msgstr "تکایە ژمارەیەکی درووست بنووسە"
+
+msgid "Please provide a positive integer"
+msgstr "تکایە ژمارەیەکی پۆسەتیڤ بنووسە"
+
+msgid "Please provide zero or a positive integer"
+msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنووسە"
+
+msgid "Please provide a negative integer"
+msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
+
+msgid "Please provide a valid date and time"
+msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
+
+msgid "Please provide a valid time"
+msgstr "تکایە کاتێکی درووست بنووسە"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr "تکایە یو URLێکی درووست بنووسە"
+
+msgid "Please provide a valid email address"
+msgstr "تکایە ئیمەیڵێکی درووست بنووسە"
+
+msgid "Please provide a valid age"
+msgstr "تکایە تەمەنێکی درووست بنووسە"
+
+msgid "Please provide a valid phone number"
+msgstr "تکایە ژمارە مۆبایلێکی درووست بنووسە"
+
+msgid "This value already exists"
+msgstr "ئەم نرخە پێشوتر هەبووە"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"From\"ناکرێت گەورەتربێت لە \"To\""
+
+msgid "Checking..."
+msgstr "پشکنین..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"
