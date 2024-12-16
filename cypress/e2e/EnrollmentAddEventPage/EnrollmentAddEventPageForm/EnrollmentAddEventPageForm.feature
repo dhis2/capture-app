@@ -21,9 +21,9 @@ Feature: User interacts with the Enrollment New Event Workspace
     And the user selects Positive
     And you click the Save without completing button
     Then all events should be displayed
-    And the newest event in datatable nr 1 should contain Active
-    And the newest event in datatable nr 1 should contain 13
-    And the newest event in datatable nr 1 should contain Positive
+    And the newest event in datatable nr 2 should contain Active
+    And the newest event in datatable nr 2 should contain 13
+    And the newest event in datatable nr 2 should contain Positive
     And the events in Sputum smear microscopy are deleted
 
   Scenario: Required fields should display an error when saving without data
