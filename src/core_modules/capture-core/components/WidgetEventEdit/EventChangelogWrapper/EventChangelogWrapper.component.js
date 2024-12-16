@@ -37,7 +37,7 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, eventData, ...p
             acc[key] = {
                 id: key,
                 name: contextLabels[key],
-                type: dataElementTypes.DATETIME,
+                type: dataElementTypes.DATE,
             };
 
             return acc;
