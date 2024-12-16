@@ -1,9 +1,9 @@
-import { Given, When, Then, defineStep as And, Before } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, defineStep as And, After } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
 import '../sharedSteps';
 
-Before({ tags: '@with-add-event-to-delete' }, () => {
-    cy.visit('#/enrollment?enrollmentId=hVPClvNrk9Z&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=WLecfORSpr0');
+After({ tags: '@with-restore-deleted-event' }, () => {
+    cy.visit('#/enrollment?enrollmentId=ikYMpSKXik1&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=Trc1H9T5C6f');
 
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')

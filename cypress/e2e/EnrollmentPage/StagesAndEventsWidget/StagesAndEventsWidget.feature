@@ -69,9 +69,9 @@ Feature: User interacts with Stages and Events Widget
         When you click the Unskip event overflow button on the Skipped event
         Then there is an Overdue event in the TB visit stage
 
-    @with-add-event-to-delete
+    @with-restore-deleted-event
     Scenario: User can delete an event
-        Given you open the enrollment page by typing #/enrollment?enrollmentId=hVPClvNrk9Z&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=WLecfORSpr0
+        Given you open the enrollment page by typing #/enrollment?enrollmentId=ikYMpSKXik1&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=Trc1H9T5C6f
         And there is an Active event in the TB visit stage
         When you click the Delete event overflow button on the Active event
         And you confirm you want to delete the event
