@@ -61,7 +61,7 @@ const ValidatedPlain = ({
                     cancelButtonIsDisabled={eventSaveInProgress}
                     id={id}
                 />
-                <SavingText programName={programName} stageName={stage.name} orgUnitName={orgUnit.name} />
+                <SavingText programName={programName} stageName={stage.name} orgUnitName={orgUnit?.name} />
             </div>
         )}
     </Widget>

@@ -290,11 +290,6 @@ And('you see the enrollment event Edit page but there is no org unit id in the u
     cy.get('[data-test="widget-enrollment-event-view"]').should('exist');
 });
 
-And('you see the enrollment event New page but there is no org unit id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&programId=IpHINAT79UW&stageId=A03MvHHogjR&teiId=fhFQhO0xILJ`);
-    cy.contains('Choose an organisation unit to start reporting');
-});
-
 And('you see the enrollment event New page but there is no stage id in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
     cy.contains('Choose a stage for a new event');
