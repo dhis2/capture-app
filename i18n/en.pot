@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-09T15:48:11.192Z\n"
-"PO-Revision-Date: 2024-12-09T15:48:11.192Z\n"
+"POT-Creation-Date: 2024-12-05T11:39:04.447Z\n"
+"PO-Revision-Date: 2024-12-05T11:39:04.447Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1472,8 +1472,43 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "An error occurred while unlinking and deleting the event."
+msgstr "An error occurred while unlinking and deleting the event."
+
+msgid "Unlink and delete linked event"
+msgstr "Unlink and delete linked event"
+
+msgid ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+msgstr ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+
+msgid "Yes, unlink and delete linked event"
+msgstr "Yes, unlink and delete linked event"
+
+msgid "Unlink event"
+msgstr "Unlink event"
+
+msgid ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+msgstr ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+
+msgid "Yes, unlink event"
+msgstr "Yes, unlink event"
+
 msgid "View linked event"
 msgstr "View linked event"
+
+msgid "You do not have access to remove the link between these events"
+msgstr "You do not have access to remove the link between these events"
+
+msgid "You do not have access to remove the link and delete the linked event"
+msgstr "You do not have access to remove the link and delete the linked event"
 
 msgid "An error occurred while loading the widget."
 msgstr "An error occurred while loading the widget."

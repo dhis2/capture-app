@@ -1,3 +1,24 @@
+# [101.20.0](https://github.com/dhis2/capture-app/compare/v101.19.4...v101.20.0) (2024-12-17)
+
+
+### Features
+
+* [DHIS2-18017] Ability to unlink event from edit/view event page ([#3846](https://github.com/dhis2/capture-app/issues/3846)) ([ad352f5](https://github.com/dhis2/capture-app/commit/ad352f5845a8780668ecf5659100f650c697d426))
+
+## [101.19.4](https://github.com/dhis2/capture-app/compare/v101.19.3...v101.19.4) (2024-12-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ef97375](https://github.com/dhis2/capture-app/commit/ef973753e9014541c22215ea0690fecb819c82e3))
+
+## [101.19.3](https://github.com/dhis2/capture-app/compare/v101.19.2...v101.19.3) (2024-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18614] prevent runtime error when only one date range is selected ([#3906](https://github.com/dhis2/capture-app/issues/3906)) ([4699a84](https://github.com/dhis2/capture-app/commit/4699a84b138a17bc42fae5be6685a71b840c1a43))
+
 ## [101.19.2](https://github.com/dhis2/capture-app/compare/v101.19.1...v101.19.2) (2024-12-08)
 
 
