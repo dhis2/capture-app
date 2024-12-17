@@ -18,11 +18,11 @@ export const batchActionTypes = {
 export const requestAddNoteForEnrollment = (enrollmentId: string, note: string) =>
     actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_ENROLLMENT)({ enrollmentId, note });
 
-export const startAddNoteForEnrollment = (enrollmentId: string, serverData: Object, selections: Object, context: Object) =>
+export const startAddNoteForEnrollment = (enrollmentUid: string, serverData: Object, selections: Object, context: Object) =>
     actionCreator(actionTypes.START_ADD_NOTE_FOR_ENROLLMENT)({ selections, context }, {
         offline: {
             effect: {
-                url: `enrollments/${enrollmentId}/note`,
+                url: `tracker/enrollments/${enrollmentUid}/note`,
                 method: effectMethods.POST,
                 data: serverData,
             },
@@ -31,5 +31,5 @@ export const startAddNoteForEnrollment = (enrollmentId: string, serverData: Obje
         },
     });
 
-export const addEnrollmentNote = (enrollmentId: string, note: Object) =>
-    actionCreator(actionTypes.ADD_ENROLLMENT_NOTE)({ enrollmentId, note });
+export const addEnrollmentNote = (enrollmentUid: string, note: Object) =>
+    actionCreator(actionTypes.ADD_ENROLLMENT_NOTE)({ enrollmentUid, note });

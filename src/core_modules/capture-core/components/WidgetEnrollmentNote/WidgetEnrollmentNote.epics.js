@@ -23,7 +23,7 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
                 const clientId = uuid();
 
                 const serverData = {
-                    notes: [{ value: note }],
+                    value: note,
                 };
 
                 const clientNote = {
