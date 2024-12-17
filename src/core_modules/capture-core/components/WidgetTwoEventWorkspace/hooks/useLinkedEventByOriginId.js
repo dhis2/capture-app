@@ -4,7 +4,7 @@ import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
 type Props = {|
     originEventId: string,
-|}
+|};
 
 const calculateRelatedStageRelationships = (event) => {
     if (!event || !event.relationships || event.relationships.length === 0) {
@@ -33,6 +33,7 @@ const calculateRelatedStageRelationships = (event) => {
 
     return {
         relationshipType: stageToStageRelationship.relationshipType,
+        relationshipId: stageToStageRelationship.relationship,
         linkedEvent,
     };
 };
@@ -42,7 +43,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         resource: 'tracker/events',
         id: originEventId,
         params: {
-            fields: 'event,relationships[relationshipType,relationshipName,bidirectional,' +
+            fields: 'event,relationships[relationship,relationshipType,relationshipName,bidirectional,' +
                         'from[event[event,dataValues,occurredAt,scheduledAt,status,orgUnit,programStage,program]],' +
                         'to[event[event,dataValues,*,occurredAt,scheduledAt,status,orgUnit,programStage,program]]' +
                     ']',
@@ -59,33 +60,21 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
         },
     );
 
-    const {
-        linkedEvent,
-        relationshipType,
-        dataValues,
-    } = useMemo(() => {
-        if (!data) {
-            return {};
-        }
+    const { linkedEvent, relationship, relationshipType, dataValues } = useMemo(() => {
+        if (!data) return {};
 
         const relatedStageRelationship = calculateRelatedStageRelationships(data);
-        if (!relatedStageRelationship) {
-            return {};
-        }
+        if (!relatedStageRelationship) return {};
 
         return {
             linkedEvent: relatedStageRelationship.linkedEvent,
+            relationship: relatedStageRelationship.relationshipId,
             relationshipType: relatedStageRelationship.relationshipType,
             dataValues: relatedStageRelationship.linkedEvent.dataValues,
         };
     }, [data]);
 
-    // Add fallback query if relationship is missing eventData
-    const {
-        data: fallbackDataValues,
-        isLoading: isLoadingFallback,
-        isError: isErrorFallback,
-    } = useApiDataQuery(
+    const { data: fallbackDataValues, isLoading: isLoadingFallback } = useApiDataQuery(
         ['linkedEventDataValuesFallback', linkedEvent?.event],
         {
             resource: 'tracker/events',
@@ -94,17 +83,16 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
                 fields: 'event,dataValues,occurredAt,scheduledAt,status,orgUnit,programStage,program',
             },
         },
-        {
-            enabled: !!linkedEvent?.event && !dataValues,
-        },
+        { enabled: !!linkedEvent?.event && !dataValues },
     );
 
     return {
         linkedEvent: dataValues ? linkedEvent : fallbackDataValues,
+        relationship,
         relationshipType,
         dataValues: dataValues || fallbackDataValues?.dataValues,
         isLoading: isLoading || isLoadingFallback,
-        isError: isError || isErrorFallback,
+        isError,
         error,
     };
 };
