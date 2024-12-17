@@ -64,7 +64,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
                 const clientId = uuid();
                 const serverData = {
                     event: eventId,
-                    notes: [{ value: payload.note }],
+                    value: payload.note,
                 };
 
                 const clientNote = {

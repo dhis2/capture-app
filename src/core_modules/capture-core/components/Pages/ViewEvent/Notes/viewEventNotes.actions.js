@@ -25,11 +25,11 @@ export const updateEventNoteField = (value: string) =>
 export const requestSaveEventNote = (note: string) =>
     actionCreator(actionTypes.REQUEST_SAVE_EVENT_NOTE)({ note });
 
-export const startSaveEventNote = (eventId: string, serverData: Object, selections: Object, clientId: string) =>
+export const startSaveEventNote = (eventUid: string, serverData: Object, selections: Object, clientId: string) =>
     actionCreator(actionTypes.START_SAVE_EVENT_NOTE)({ selections, clientId }, {
         offline: {
             effect: {
-                url: `events/${eventId}/note`,
+                url: `/tracker/events/${eventUid}/note`,
                 method: effectMethods.POST,
                 data: serverData,
             },
