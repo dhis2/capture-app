@@ -35,6 +35,6 @@ export type ConvertedRelatedStageEventProps = {|
     currentProgramStageId: string,
     enrollmentId?: string,
     relatedStageType: RelatedStageRelationshipType,
-    clientRequestEvent: RequestEvent,
+    serverRequestEvent: RequestEvent,
 |}
 

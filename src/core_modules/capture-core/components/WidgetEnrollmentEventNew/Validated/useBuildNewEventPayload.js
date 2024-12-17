@@ -22,18 +22,18 @@ type Props = {
 };
 
 export const createServerData = ({
-    clientRequestEvent,
+    serverRequestEvent,
     linkedEvent,
     relationship,
     enrollment,
 }: {
-    clientRequestEvent: RequestEvent,
+    serverRequestEvent: RequestEvent,
     linkedEvent: ?LinkedRequestEvent,
     relationship: ?Object,
     enrollment: ?Object,
 }) => {
     const relationships = relationship ? [relationship] : undefined;
-    const newEvents = linkedEvent ? [clientRequestEvent, linkedEvent] : [clientRequestEvent];
+    const newEvents = linkedEvent ? [serverRequestEvent, linkedEvent] : [serverRequestEvent];
 
     if (enrollment) {
         const updatedEnrollment = { ...enrollment, events: [...(enrollment.events || []), ...newEvents] };
@@ -67,7 +67,7 @@ export const useBuildNewEventPayload = ({
     const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[dataEntryKey]);
     const { fromClientDate } = useTimeZoneConversion();
 
-    const buildRelatedStageEventPayload = (clientRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
+    const buildRelatedStageEventPayload = (serverRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
         if (
             relatedStageRef?.current
             && relatedStageRef.current.eventHasLinkableStageRelationship()
@@ -97,7 +97,7 @@ export const useBuildNewEventPayload = ({
             const { linkedEvent, relationship } = getConvertedRelatedStageEvent({
                 linkMode,
                 relatedStageDataValues,
-                clientRequestEvent,
+                serverRequestEvent,
                 relatedStageType: selectedRelationshipType,
                 programId,
                 currentProgramStageId: formFoundation.id,
@@ -134,7 +134,7 @@ export const useBuildNewEventPayload = ({
         );
         const notesValues = notes ? notes.map(note => ({ value: note.value })) : [];
 
-        const clientRequestEvent = getAddEventEnrollmentServerData({
+        const serverRequestEvent = getAddEventEnrollmentServerData({
             formFoundation,
             formClientValues,
             eventId: requestEventId,
@@ -154,11 +154,11 @@ export const useBuildNewEventPayload = ({
             linkedEvent,
             relationship,
             linkMode,
-        } = buildRelatedStageEventPayload(clientRequestEvent, saveType, relatedStageRef);
+        } = buildRelatedStageEventPayload(serverRequestEvent, saveType, relatedStageRef);
 
         return {
             formHasError,
-            clientRequestEvent,
+            serverRequestEvent,
             linkedEvent,
             relationship,
             linkMode,

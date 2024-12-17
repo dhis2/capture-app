@@ -84,7 +84,7 @@ export const Validated = ({
         // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
         const {
-            clientRequestEvent,
+            serverRequestEvent,
             linkedEvent,
             relationship,
             linkMode,
@@ -100,7 +100,7 @@ export const Validated = ({
         }
 
         const serverData = createServerData({
-            clientRequestEvent,
+            serverRequestEvent,
             linkedEvent,
             relationship,
             enrollment,
@@ -108,7 +108,7 @@ export const Validated = ({
 
         dispatch(batchActions([
             requestSaveEvent({
-                requestEvent: clientRequestEvent,
+                requestEvent: serverRequestEvent,
                 linkedEvent,
                 relationship,
                 serverData,
@@ -120,7 +120,7 @@ export const Validated = ({
 
             // stores meta in redux to be used when navigating after save
             setSaveEnrollmentEventInProgress({
-                requestEventId: clientRequestEvent?.event,
+                requestEventId: serverRequestEvent?.event,
                 linkedEventId: linkedEvent?.event,
                 linkedOrgUnitId: linkedEvent?.orgUnit,
                 linkMode,

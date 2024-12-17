@@ -134,7 +134,7 @@ export const useBuildEnrollmentPayload = ({
         });
 
         const { formHasError, linkedEvent: relatedStageLinkedEvent, relationship, linkMode } = deriveRelatedStageEvent({
-            clientRequestEvent: firstStageDuringRegistrationEvent,
+            serverRequestEvent: firstStageDuringRegistrationEvent,
             relatedStageRef,
             firstStageMetaData,
             programId,

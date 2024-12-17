@@ -5,13 +5,13 @@ import type { RequestEvent } from '../../../../DataEntries';
 import type { RelatedStageRefPayload } from '../../../../WidgetRelatedStages';
 
 export const deriveRelatedStageEvent = ({
-    clientRequestEvent,
+    serverRequestEvent,
     relatedStageRef,
     firstStageMetaData,
     programId,
     teiId,
 }: {
-    clientRequestEvent: ?RequestEvent,
+    serverRequestEvent: ?RequestEvent,
     relatedStageRef?: { current: ?RelatedStageRefPayload},
     firstStageMetaData: ?{ stage: ?ProgramStage},
     programId: string,
@@ -24,7 +24,7 @@ export const deriveRelatedStageEvent = ({
             !isValid ||
             !relatedStageRef.current?.getLinkedStageValues ||
             !currentProgramStageId ||
-            !clientRequestEvent
+            !serverRequestEvent
         ) {
             return {
                 formHasError: true,
@@ -49,7 +49,7 @@ export const deriveRelatedStageEvent = ({
         const { linkedEvent, relationship } = getConvertedRelatedStageEvent({
             linkMode,
             relatedStageDataValues,
-            clientRequestEvent,
+            serverRequestEvent,
             relatedStageType: selectedRelationshipType,
             programId,
             currentProgramStageId,

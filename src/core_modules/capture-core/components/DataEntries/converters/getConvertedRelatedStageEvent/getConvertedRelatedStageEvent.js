@@ -17,7 +17,7 @@ const getEventDetailsByLinkMode = ({
     programId,
     teiId,
     enrollmentId,
-    clientRequestEvent,
+    serverRequestEvent,
 }): {
     linkedEvent: ?LinkedRequestEvent,
     linkedEventId: ?string,
@@ -68,7 +68,7 @@ const getEventDetailsByLinkMode = ({
         return ({
             linkedEvent: {
                 ...baseEventDetails,
-                scheduledAt: clientRequestEvent.scheduledAt,
+                scheduledAt: serverRequestEvent.scheduledAt,
                 orgUnit: convertFn(linkedEventOrgUnit, dataElementTypes.ORGANISATION_UNIT),
             },
             linkedEventId: baseEventDetails.event,
@@ -95,7 +95,7 @@ export const getConvertedRelatedStageEvent = ({
     programId,
     teiId,
     currentProgramStageId,
-    clientRequestEvent,
+    serverRequestEvent,
     enrollmentId,
     relatedStageType,
 }: ConvertedRelatedStageEventProps) => {
@@ -109,19 +109,19 @@ export const getConvertedRelatedStageEvent = ({
         programId,
         teiId,
         enrollmentId,
-        clientRequestEvent,
+        serverRequestEvent,
     });
 
     const relationship = linkedEventId && {
         relationshipType: relatedStageType.id,
         from: {
             event: {
-                event: requestEventIsFromConstraint ? clientRequestEvent.event : linkedEventId,
+                event: requestEventIsFromConstraint ? serverRequestEvent.event : linkedEventId,
             },
         },
         to: {
             event: {
-                event: requestEventIsFromConstraint ? linkedEventId : clientRequestEvent.event,
+                event: requestEventIsFromConstraint ? linkedEventId : serverRequestEvent.event,
             },
         },
     };
