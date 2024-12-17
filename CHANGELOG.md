@@ -1,3 +1,10 @@
+# [101.20.0](https://github.com/dhis2/capture-app/compare/v101.19.4...v101.20.0) (2024-12-17)
+
+
+### Features
+
+* [DHIS2-18017] Ability to unlink event from edit/view event page ([#3846](https://github.com/dhis2/capture-app/issues/3846)) ([ad352f5](https://github.com/dhis2/capture-app/commit/ad352f5845a8780668ecf5659100f650c697d426))
+
 ## [101.19.4](https://github.com/dhis2/capture-app/compare/v101.19.3...v101.19.4) (2024-12-15)
 
 
