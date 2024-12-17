@@ -1,7 +1,7 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
-import { RelatedStageModes } from '../../WidgetRelatedStages';
+import { relatedStageActions } from '../../WidgetRelatedStages';
 import type { RequestEvent, LinkedRequestEvent } from '../../DataEntries';
 import type { ExternalSaveHandler } from '../common.types';
 
@@ -37,7 +37,7 @@ export const requestSaveEvent = ({
     linkedEvent: ?LinkedRequestEvent,
     relationship: ?Object,
     serverData: Object,
-    linkMode: ?$Keys<typeof RelatedStageModes>,
+    linkMode: ?$Keys<typeof relatedStageActions>,
     onSaveExternal: ?ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
@@ -62,7 +62,7 @@ export const setSaveEnrollmentEventInProgress = ({
     requestEventId: string,
     linkedEventId: ?string,
     linkedOrgUnitId: ?string,
-    linkMode: ?$Keys<typeof RelatedStageModes>,
+    linkMode: ?$Keys<typeof relatedStageActions>,
 }) => actionCreator(newEventWidgetActionTypes.SET_SAVE_ENROLLMENT_EVENT_IN_PROGRESS)({
     requestEventId,
     linkedEventId,

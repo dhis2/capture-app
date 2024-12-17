@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { actions as RelatedStagesActionTypes, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
+import { relatedStageActions, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
 import { useCanAddNewEventToStage } from '../hooks/useCanAddNewEventToStage';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
@@ -41,7 +41,7 @@ const styles = () => ({
 });
 
 const Schedule = ({
-    actionTypesOptions,
+    actionsOptions,
     linkableEvents,
     selectedAction,
     updateSelectedAction,
@@ -49,7 +49,7 @@ const Schedule = ({
     canAddNewEventToStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionTypesOptions && actionTypesOptions[RelatedStagesActionTypes.SCHEDULE_IN_ORG]) || {};
+        (actionsOptions && actionsOptions[relatedStageActions.SCHEDULE_IN_ORG]) || {};
     if (hidden) {
         return null;
     }
@@ -67,25 +67,25 @@ const Schedule = ({
 
     return (
         <ConditionalTooltip
-            key={RelatedStagesActionTypes.SCHEDULE_IN_ORG}
+            key={relatedStageActions.SCHEDULE_IN_ORG}
             content={tooltipContent}
             closeDelay={50}
             enabled={tooltipEnabled}
         >
             <Radio
-                name={`related-stage-action-${RelatedStagesActionTypes.SCHEDULE_IN_ORG}`}
-                checked={RelatedStagesActionTypes.SCHEDULE_IN_ORG === selectedAction}
+                name={`related-stage-action-${relatedStageActions.SCHEDULE_IN_ORG}`}
+                checked={relatedStageActions.SCHEDULE_IN_ORG === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.SCHEDULE_IN_ORG]}
+                label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
-                value={RelatedStagesActionTypes.SCHEDULE_IN_ORG}
+                value={relatedStageActions.SCHEDULE_IN_ORG}
             />
         </ConditionalTooltip>
     );
 };
 
 const EnterData = ({
-    actionTypesOptions,
+    actionsOptions,
     linkableEvents,
     selectedAction,
     updateSelectedAction,
@@ -93,7 +93,7 @@ const EnterData = ({
     canAddNewEventToStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionTypesOptions && actionTypesOptions[RelatedStagesActionTypes.ENTER_DATA]) || {};
+        (actionsOptions && actionsOptions[relatedStageActions.ENTER_DATA]) || {};
     if (hidden) {
         return null;
     }
@@ -111,32 +111,32 @@ const EnterData = ({
 
     return (
         <ConditionalTooltip
-            key={RelatedStagesActionTypes.ENTER_DATA}
+            key={relatedStageActions.ENTER_DATA}
             content={tooltipContent}
             closeDelay={50}
             enabled={tooltipEnabled}
         >
             <Radio
-                name={`related-stage-action-${RelatedStagesActionTypes.ENTER_DATA}`}
-                checked={RelatedStagesActionTypes.ENTER_DATA === selectedAction}
+                name={`related-stage-action-${relatedStageActions.ENTER_DATA}`}
+                checked={relatedStageActions.ENTER_DATA === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.ENTER_DATA]}
+                label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
-                value={RelatedStagesActionTypes.ENTER_DATA}
+                value={relatedStageActions.ENTER_DATA}
             />
         </ConditionalTooltip>
     );
 };
 
 const LinkExistingResponse = ({
-    actionTypesOptions,
+    actionsOptions,
     linkableEvents,
     selectedAction,
     updateSelectedAction,
     programStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionTypesOptions && actionTypesOptions[RelatedStagesActionTypes.LINK_EXISTING_RESPONSE]) || {};
+        (actionsOptions && actionsOptions[relatedStageActions.LINK_EXISTING_RESPONSE]) || {};
     if (hidden) {
         return null;
     }
@@ -154,18 +154,18 @@ const LinkExistingResponse = ({
 
     return (
         <ConditionalTooltip
-            key={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
+            key={relatedStageActions.LINK_EXISTING_RESPONSE}
             content={tooltipContent}
             closeDelay={50}
             enabled={tooltipEnabled}
         >
             <Radio
-                name={`related-stage-action-${RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}`}
-                checked={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE === selectedAction}
+                name={`related-stage-action-${relatedStageActions.LINK_EXISTING_RESPONSE}`}
+                checked={relatedStageActions.LINK_EXISTING_RESPONSE === selectedAction}
                 disabled={tooltipEnabled}
-                label={mainOptionTranslatedTexts[RelatedStagesActionTypes.LINK_EXISTING_RESPONSE]}
+                label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
-                value={RelatedStagesActionTypes.LINK_EXISTING_RESPONSE}
+                value={relatedStageActions.LINK_EXISTING_RESPONSE}
             />
         </ConditionalTooltip>
     );
@@ -183,13 +183,13 @@ const RelatedStagesActionsPlain = ({
     constraint,
     errorMessages,
     saveAttempted,
-    actionTypesOptions,
+    actionsOptions,
 }: Props) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
-    const updateSelectedAction = (action: ?$Values<typeof RelatedStagesActionTypes>) => {
+    const updateSelectedAction = (action: ?$Values<typeof relatedStageActions>) => {
         setRelatedStagesDataValues(prevState => ({
             ...prevState,
             linkMode: action,
@@ -210,7 +210,7 @@ const RelatedStagesActionsPlain = ({
                 {type === relatedStageStatus.LINKABLE && (
                     <>
                         <Schedule
-                            actionTypesOptions={actionTypesOptions}
+                            actionsOptions={actionsOptions}
                             linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
@@ -218,7 +218,7 @@ const RelatedStagesActionsPlain = ({
                             canAddNewEventToStage={canAddNewEventToStage}
                         />
                         <EnterData
-                            actionTypesOptions={actionTypesOptions}
+                            actionsOptions={actionsOptions}
                             linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
@@ -226,7 +226,7 @@ const RelatedStagesActionsPlain = ({
                             canAddNewEventToStage={canAddNewEventToStage}
                         />
                         <LinkExistingResponse
-                            actionTypesOptions={actionTypesOptions}
+                            actionsOptions={actionsOptions}
                             linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
@@ -252,7 +252,7 @@ const RelatedStagesActionsPlain = ({
                 </div>
             )}
 
-            {selectedAction === RelatedStagesActionTypes.SCHEDULE_IN_ORG && (
+            {selectedAction === relatedStageActions.SCHEDULE_IN_ORG && (
                 <ScheduleInOrgUnit
                     relatedStagesDataValues={relatedStagesDataValues}
                     setRelatedStagesDataValues={setRelatedStagesDataValues}
@@ -262,7 +262,7 @@ const RelatedStagesActionsPlain = ({
                 />
             )}
 
-            {selectedAction === RelatedStagesActionTypes.ENTER_DATA && (
+            {selectedAction === relatedStageActions.ENTER_DATA && (
                 <EnterDataInOrgUnit
                     linkableStageLabel={programStage.stageForm.name}
                     relatedStagesDataValues={relatedStagesDataValues}
@@ -272,7 +272,7 @@ const RelatedStagesActionsPlain = ({
                 />
             )}
 
-            {selectedAction === RelatedStagesActionTypes.LINK_EXISTING_RESPONSE && (
+            {selectedAction === relatedStageActions.LINK_EXISTING_RESPONSE && (
                 <LinkToExisting
                     relatedStagesDataValues={relatedStagesDataValues}
                     setRelatedStagesDataValues={setRelatedStagesDataValues}

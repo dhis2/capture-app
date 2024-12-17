@@ -1,7 +1,7 @@
 // @flow
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
-import { RelatedStageModes } from '../../../WidgetRelatedStages';
+import { relatedStageActions } from '../../../WidgetRelatedStages';
 
 export type Props = {
     firstStageMetaData: {
@@ -10,8 +10,8 @@ export type Props = {
     formFoundation: RenderFoundation,
     programId: string,
     relatedStageRef?: { current: ?RelatedStageRefPayload },
-    relatedStageModesOptions?: {
-        [key: $Keys<typeof RelatedStageModes>]: {
+    relatedStageActionsOptions?: {
+        [key: $Keys<typeof relatedStageActions>]: {
             hidden?: boolean,
             disabled?: boolean,
             disabledMessage?: string

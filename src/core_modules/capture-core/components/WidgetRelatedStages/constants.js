@@ -6,14 +6,14 @@ export const relatedStageStatus = Object.freeze({
     AMBIGUOUS_RELATIONSHIPS: 'AMBIGUOUS_RELATIONSHIPS',
 });
 
-export const actions = Object.freeze({
+export const relatedStageActions = Object.freeze({
     SCHEDULE_IN_ORG: 'SCHEDULE_IN_ORG',
     LINK_EXISTING_RESPONSE: 'LINK_EXISTING_RESPONSE',
     ENTER_DATA: 'ENTER_DATA',
 });
 
 export const mainOptionTranslatedTexts = {
-    [actions.SCHEDULE_IN_ORG]: i18n.t('Schedule'),
-    [actions.ENTER_DATA]: i18n.t('Enter details now'),
-    [actions.LINK_EXISTING_RESPONSE]: i18n.t('Link to an existing event'),
+    [relatedStageActions.SCHEDULE_IN_ORG]: i18n.t('Schedule'),
+    [relatedStageActions.ENTER_DATA]: i18n.t('Enter details now'),
+    [relatedStageActions.LINK_EXISTING_RESPONSE]: i18n.t('Link to an existing event'),
 };

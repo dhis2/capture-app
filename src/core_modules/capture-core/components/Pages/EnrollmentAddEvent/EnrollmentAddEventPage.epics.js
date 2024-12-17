@@ -11,7 +11,7 @@ import {
     rollbackEnrollmentEvents,
     saveFailed,
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
-import { RelatedStageModes } from '../../WidgetRelatedStages';
+import { relatedStageActions } from '../../WidgetRelatedStages';
 import { buildUrlQueryString } from '../../../utils/routing';
 
 const shouldNavigateWithRelatedStage = ({
@@ -21,7 +21,7 @@ const shouldNavigateWithRelatedStage = ({
     history,
 }) => {
     if (linkMode && linkedEventId) {
-        if (linkMode === RelatedStageModes.ENTER_DATA) {
+        if (linkMode === relatedStageActions.ENTER_DATA) {
             const navigate = () => history.push(`/enrollmentEventEdit?${buildUrlQueryString({
                 eventId: linkedEventId,
                 orgUnitId: linkedOrgUnitId,

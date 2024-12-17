@@ -10,7 +10,7 @@ const getSectionId = sectionId =>
     (sectionId === Section.MAIN_SECTION_ID ? `${Section.MAIN_SECTION_ID}-stage` : sectionId);
 
 export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
-    const { firstStageMetaData, relatedStageRef, relatedStageModesOptions, ...passOnProps } = props;
+    const { firstStageMetaData, relatedStageRef, relatedStageActionsOptions, ...passOnProps } = props;
     const {
         stage: { stageForm: firstStageFormFoundation, name: stageName },
     } = firstStageMetaData;
@@ -30,7 +30,7 @@ export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
                 ref={relatedStageRef}
                 programId={passOnProps.programId}
                 programStageId={firstStageMetaData.stage?.id}
-                actionTypesOptions={relatedStageModesOptions}
+                actionsOptions={relatedStageActionsOptions}
             />
         </>
     );

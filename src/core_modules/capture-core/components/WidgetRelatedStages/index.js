@@ -5,5 +5,5 @@ export type {
     RelatedStageRefPayload,
     RelatedStageRelationshipType,
 } from './WidgetRelatedStages.types';
-export { actions as RelatedStageModes } from './constants';
+export { relatedStageActions } from './constants';
 export { relatedStageWidgetIsValid } from './relatedStageEventIsValid/relatedStageEventIsValid';

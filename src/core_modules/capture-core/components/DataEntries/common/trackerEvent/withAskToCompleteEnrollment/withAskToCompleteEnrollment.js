@@ -6,7 +6,7 @@ import { CompleteModal } from './CompleteModal';
 import { statusTypes as eventStatuses } from '../../../../../events/statusTypes';
 import { type RenderFoundation } from '../../../../../metaData';
 import { addEventSaveTypes } from '../../../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
-import { RelatedStageModes } from '../../../../WidgetRelatedStages';
+import { relatedStageActions } from '../../../../WidgetRelatedStages';
 import type { RelatedStageRefPayload } from '../../../../WidgetRelatedStages';
 
 type Props = {
@@ -63,7 +63,7 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         if (
             askCompleteEnrollmentOnEventComplete &&
             (isCompleted || saveType === addEventSaveTypes.COMPLETE) &&
-            linkMode !== RelatedStageModes.ENTER_DATA
+            linkMode !== relatedStageActions.ENTER_DATA
         ) {
             setOpenCompleteModal(true);
         } else {

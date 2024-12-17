@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { generateUID } from '../../../../utils/uid/generateUID';
-import { RelatedStageModes } from '../../../WidgetRelatedStages';
+import { relatedStageActions } from '../../../WidgetRelatedStages';
 import type { LinkedRequestEvent, ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
 import { errorCreator, pipe } from '../../../../../capture-core-utils';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
@@ -35,7 +35,7 @@ const getEventDetailsByLinkMode = ({
         status: 'SCHEDULE',
     };
 
-    if (linkMode === RelatedStageModes.SCHEDULE_IN_ORG) {
+    if (linkMode === relatedStageActions.SCHEDULE_IN_ORG) {
         const { scheduledAt: linkedEventScheduledAt, orgUnit: linkedEventOrgUnit } = relatedStageDataValues;
         if (!linkedEventScheduledAt || !linkedEventOrgUnit) {
             // Business logic dictates that these values will not be null here
@@ -56,7 +56,7 @@ const getEventDetailsByLinkMode = ({
         });
     }
 
-    if (linkMode === RelatedStageModes.ENTER_DATA) {
+    if (linkMode === relatedStageActions.ENTER_DATA) {
         const { orgUnit: linkedEventOrgUnit } = relatedStageDataValues;
         if (!linkedEventOrgUnit) {
             throw new Error(
@@ -75,7 +75,7 @@ const getEventDetailsByLinkMode = ({
         });
     }
 
-    if (linkMode === RelatedStageModes.LINK_EXISTING_RESPONSE) {
+    if (linkMode === relatedStageActions.LINK_EXISTING_RESPONSE) {
         const { linkedEventId } = relatedStageDataValues;
         return {
             linkedEvent: null,

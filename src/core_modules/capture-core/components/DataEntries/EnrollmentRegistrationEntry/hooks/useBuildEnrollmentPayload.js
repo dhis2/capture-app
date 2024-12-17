@@ -28,7 +28,7 @@ import {
 } from '../helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
-import { RelatedStageModes } from '../../../WidgetRelatedStages';
+import { relatedStageActions } from '../../../WidgetRelatedStages';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
 
 type DataEntryReduxConverterProps = {
@@ -184,7 +184,7 @@ export const useBuildEnrollmentPayload = ({
             },
             formHasError,
             programStageIdLinkedEventToRedirectTo:
-            relatedStageLinkedEvent && linkMode === RelatedStageModes.ENTER_DATA
+            relatedStageLinkedEvent && linkMode === relatedStageActions.ENTER_DATA
                 ? relatedStageLinkedEvent.programStage
                 : undefined,
         };

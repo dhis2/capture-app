@@ -1,6 +1,6 @@
 // @flow
 import type { RelatedStageDataValueStates, RelatedStageRelationshipType } from '../../../WidgetRelatedStages';
-import { RelatedStageModes } from '../../../WidgetRelatedStages';
+import { relatedStageActions } from '../../../WidgetRelatedStages';
 
 type CommonEventDetails = {
     event: string,
@@ -28,7 +28,7 @@ export type LinkedRequestEvent = {
 }
 
 export type ConvertedRelatedStageEventProps = {|
-    linkMode: $Keys<typeof RelatedStageModes>,
+    linkMode: $Keys<typeof relatedStageActions>,
     relatedStageDataValues: RelatedStageDataValueStates,
     programId: string,
     teiId?: ?string,
