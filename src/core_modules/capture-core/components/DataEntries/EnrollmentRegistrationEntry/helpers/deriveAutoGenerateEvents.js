@@ -1,9 +1,9 @@
 // @flow
 import moment from 'moment';
-import { dataElementTypes, ProgramStage } from '../../../../../metaData';
-import { convertClientToServer } from '../../../../../converters';
-import { convertCategoryOptionsToServer } from '../../../../../converters/clientToServer';
-import type { RequestEvent, LinkedRequestEvent } from '../../../../DataEntries';
+import { dataElementTypes, ProgramStage } from '../../../../metaData';
+import { convertClientToServer } from '../../../../converters';
+import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
+import type { RequestEvent, LinkedRequestEvent } from '../../../DataEntries';
 
 const ignoreAutoGenerateIfApplicable = (stage, stageToSkip) =>
     !stageToSkip || stageToSkip.programStage !== stage.id;

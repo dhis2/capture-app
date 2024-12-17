@@ -1,8 +1,8 @@
 // @flow
-import { ProgramStage } from '../../../../../metaData';
-import { getConvertedRelatedStageEvent } from '../../../../DataEntries';
-import type { RequestEvent } from '../../../../DataEntries';
-import type { RelatedStageRefPayload } from '../../../../WidgetRelatedStages';
+import { ProgramStage } from '../../../../metaData';
+import { getConvertedRelatedStageEvent } from '../../../DataEntries';
+import type { RequestEvent } from '../../../DataEntries';
+import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
 
 export const deriveRelatedStageEvent = ({
     serverRequestEvent,

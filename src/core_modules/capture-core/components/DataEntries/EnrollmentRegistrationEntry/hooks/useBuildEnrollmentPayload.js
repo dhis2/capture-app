@@ -25,7 +25,7 @@ import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
     deriveRelatedStageEvent,
-} from '../../../Pages/New/RegistrationDataEntry/helpers';
+} from '../helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 import { RelatedStageModes } from '../../../WidgetRelatedStages';
