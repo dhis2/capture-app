@@ -4,6 +4,7 @@ import { dataElementTypes, ProgramStage } from '../../../../metaData';
 import { convertClientToServer } from '../../../../converters';
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
 import type { RequestEvent, LinkedRequestEvent } from '../../../DataEntries';
+import { generateUID } from '../../../../utils/uid/generateUID';
 
 const ignoreAutoGenerateIfApplicable = (stage, stageToSkip) =>
     !stageToSkip || stageToSkip.programStage !== stage.id;
@@ -75,6 +76,7 @@ export const deriveAutoGenerateEvents = ({
                 return {
                     ...eventInfo,
                     ...eventAttributeCategoryOptions,
+                    event: generateUID(),
                     programStage,
                     program: programId,
                     orgUnit: orgUnitId,

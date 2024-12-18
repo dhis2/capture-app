@@ -54,17 +54,14 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
             const { currentSelections: { programId } } = store.value;
-            const { enrollmentPayload, uid, programStageIdLinkedEventToRedirectTo } = action.payload;
+            const { enrollmentPayload, uid, relatedStageLinkedEvent } = action.payload;
             const { stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
-            const { programStageIdToRedirectTo, pageToRedirectTo } = getPageToRedirectTo(
+            const { stageId, eventId, pageToRedirectTo } = getPageToRedirectTo({
                 stages,
+                events: enrollmentPayload.enrollments[0]?.events,
                 useFirstStageDuringRegistration,
-                programStageIdLinkedEventToRedirectTo,
-            );
-
-            const eventIndex = enrollmentPayload.enrollments[0]?.events.findIndex(
-                eventsToBeCreated => eventsToBeCreated.programStage === programStageIdToRedirectTo,
-            );
+                relatedStageLinkedEvent,
+            });
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
@@ -73,8 +70,8 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                     ],
                 },
                 pageToRedirectTo,
-                eventIndex,
-                stageId: programStageIdToRedirectTo,
+                eventId,
+                stageId,
                 uid,
             });
         }),
@@ -92,7 +89,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 payload: {
                     bundleReport: { typeReportMap },
                 },
-                meta: { uid, pageToRedirectTo, stageId, eventIndex },
+                meta: { uid, pageToRedirectTo, stageId, eventId },
             } = action;
             const {
                 currentSelections: { orgUnitId, programId },
@@ -101,7 +98,6 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { uid: stateUid } = newPage || {};
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
-            const eventId = typeReportMap.EVENT.objectReports?.[eventIndex]?.uid;
 
             if (stateUid !== uid) {
                 return EMPTY;

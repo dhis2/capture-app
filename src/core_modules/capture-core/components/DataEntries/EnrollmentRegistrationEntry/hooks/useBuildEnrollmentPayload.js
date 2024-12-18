@@ -94,7 +94,10 @@ export const useBuildEnrollmentPayload = ({
     const buildTeiWithEnrollment = (relatedStageRef?: {current: ?RelatedStageRefPayload}): {
         teiWithEnrollment: EnrollmentPayload,
         formHasError: boolean,
-        programStageIdLinkedEventToRedirectTo?: string,
+        relatedStageLinkedEvent?: {
+            programStageId: string,
+            eventId: string,
+        },
     } => {
         if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
@@ -183,10 +186,13 @@ export const useBuildEnrollmentPayload = ({
                 relationships: relationship ? [relationship] : undefined,
             },
             formHasError,
-            programStageIdLinkedEventToRedirectTo:
-            relatedStageLinkedEvent && linkMode === relatedStageActions.ENTER_DATA
-                ? relatedStageLinkedEvent.programStage
-                : undefined,
+            relatedStageLinkedEvent:
+                relatedStageLinkedEvent && linkMode === relatedStageActions.ENTER_DATA
+                    ? {
+                        programStageId: relatedStageLinkedEvent.programStage,
+                        eventId: relatedStageLinkedEvent.event,
+                    }
+                    : undefined,
         };
     };
 

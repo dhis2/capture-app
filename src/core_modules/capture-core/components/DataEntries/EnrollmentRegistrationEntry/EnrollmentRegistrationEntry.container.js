@@ -59,9 +59,9 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     }
 
     const onSaveWithEnrollment = () => {
-        const { teiWithEnrollment, formHasError, programStageIdLinkedEventToRedirectTo } =
+        const { teiWithEnrollment, formHasError, relatedStageLinkedEvent } =
             buildTeiWithEnrollment(relatedStageRef);
-        !formHasError && onSave(teiWithEnrollment, programStageIdLinkedEventToRedirectTo);
+        !formHasError && onSave(teiWithEnrollment, relatedStageLinkedEvent);
     };
 
     return (

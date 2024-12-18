@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
 import { isValidDate } from '../../../utils/validation/validators/form';
-import { relatedStageActions } from '../index';
+import { relatedStageActions } from '../constants';
 
 type Props = {
     scheduledAt: ?string,
