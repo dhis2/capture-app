@@ -1,10 +1,10 @@
 // @flow
 import { useMemo } from 'react';
-import { relatedStageStatus } from './constants';
-import { getUserStorageController, userStores } from '../../storageControllers';
-import { useIndexedDBQuery } from '../../utils/reactQueryHelpers';
-import { RELATIONSHIP_ENTITIES } from './WidgetRelatedStages.constants';
-import type { RelationshipType } from './WidgetRelatedStages.types';
+import { relatedStageStatus } from '../constants';
+import { getUserStorageController, userStores } from '../../../storageControllers';
+import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
+import { RELATIONSHIP_ENTITIES } from '../WidgetRelatedStages.constants';
+import type { RelationshipType } from '../WidgetRelatedStages.types';
 
 const getRelationshipTypeFromIndexedDB = () => {
     const storageController = getUserStorageController();

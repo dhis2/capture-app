@@ -187,6 +187,17 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const onGoBack = () =>
         history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
+    const onNavigateToEvent = (eventIdToRedirectTo: string) => {
+        history.push(
+            `/enrollmentEventEdit?${buildUrlQueryString({
+                eventId: eventIdToRedirectTo,
+                orgUnitId,
+                programId,
+                enrollmentId,
+            })}`,
+        );
+    };
+
     const onHandleScheduleSave = (eventData: Object) => {
         dispatch(updateEnrollmentEvent(eventId, eventData));
         history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
@@ -291,6 +302,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             onSaveAssigneeError={onSaveAssigneeError}
             events={enrollmentSite?.events}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
+            onNavigateToEvent={onNavigateToEvent}
         />
     );
 };

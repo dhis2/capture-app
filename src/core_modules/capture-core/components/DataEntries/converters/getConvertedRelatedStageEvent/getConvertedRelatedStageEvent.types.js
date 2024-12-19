@@ -11,20 +11,18 @@ type CommonEventDetails = {
     enrollment?: string,
     scheduledAt: string,
     dataValues: Array<{ dataElement: string, value: any }>,
-    status?: string,
+    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
 }
 
 export type RequestEvent = {
     ...CommonEventDetails,
     occurredAt: string,
     notes?: Array<{ value: string }>,
-    completedAt?: string,
 }
 
 export type LinkedRequestEvent = {
     ...CommonEventDetails,
     occurredAt?: string,
-    completedAt?: string,
 }
 
 export type ConvertedRelatedStageEventProps = {|
