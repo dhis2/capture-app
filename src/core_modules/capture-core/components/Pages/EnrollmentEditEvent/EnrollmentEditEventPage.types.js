@@ -29,6 +29,7 @@ export type PlainProps = {|
     onDelete: () => void,
     onAddNew: () => void,
     onGoBack: () => void,
+    onNavigateToEvent: (eventId: string) => void,
     onBackToMainPage: () => void,
     onBackToDashboard: () => void,
     onBackToViewEvent: () => void,

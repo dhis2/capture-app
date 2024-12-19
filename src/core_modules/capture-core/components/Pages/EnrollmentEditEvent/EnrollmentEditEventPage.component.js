@@ -57,6 +57,7 @@ export const EnrollmentEditEventPageComponent = ({
     onSaveAssigneeError,
     onDeleteTrackedEntitySuccess,
     onAccessLostFromTransfer,
+    onNavigateToEvent,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -121,6 +122,7 @@ export const EnrollmentEditEventPageComponent = ({
             onAccessLostFromTransfer={onAccessLostFromTransfer}
             feedbackEmptyText={i18n.t('No feedback for this event yet')}
             indicatorEmptyText={i18n.t('No indicator output for this event yet')}
+            onNavigateToEvent={onNavigateToEvent}
         />
         <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
     </OrgUnitFetcher>

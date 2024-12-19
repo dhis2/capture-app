@@ -1,19 +1,18 @@
 // @flow
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
-import { useRelatedStages } from './useRelatedStages';
-import { useOrgUnitAutoSelect } from '../../dataQueries';
-import type { Props, RelatedStageDataValueStates } from './WidgetRelatedStages.types';
-import type { ErrorMessagesForRelatedStages } from './RelatedStagesActions';
-import { RelatedStagesActions } from './RelatedStagesActions';
-import { relatedStageStatus } from './constants';
-import { useStageLabels } from './hooks/useStageLabels';
-import { relatedStageWidgetIsValid } from './relatedStageEventIsValid/relatedStageEventIsValid';
-import { useRelatedStageEvents } from './hooks/useRelatedStageEvents';
+import { useOrgUnitAutoSelect } from '../../../dataQueries';
+import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
+import type { Props, ErrorMessagesForRelatedStages } from './RelatedStagesActions.types';
+import { RelatedStagesActions as RelatedStagesActionsComponent } from './RelatedStagesActions.component';
+import { relatedStageStatus } from '../constants';
+import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
+import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
 
-const WidgetRelatedStagesPlain = ({
+const RelatedStagesActionsPlain = ({
     programId,
     enrollmentId,
     programStageId,
+    onLink,
     ...passOnProps
 }: Props, ref) => {
     const { currentRelatedStagesStatus, selectedRelationshipType, constraint } = useRelatedStages({
@@ -97,7 +96,7 @@ const WidgetRelatedStagesPlain = ({
     }
 
     return (
-        <RelatedStagesActions
+        <RelatedStagesActionsComponent
             relationshipName={selectedRelationshipType.displayName}
             scheduledLabel={scheduledLabel}
             type={currentRelatedStagesStatus}
@@ -109,13 +108,14 @@ const WidgetRelatedStagesPlain = ({
             saveAttempted={saveAttempted}
             errorMessages={errorMessages}
             constraint={constraint}
+            onLink={onLink}
             {...passOnProps}
         />
     );
 };
 
-export const WidgetRelatedStages = forwardRef < Props, {|
+export const RelatedStagesActions = forwardRef < Props, {|
     eventHasLinkableStageRelationship: Function,
         formIsValidOnSave: Function,
             getLinkedStageValues: Function
-                |}>(WidgetRelatedStagesPlain);
+                |}>(RelatedStagesActionsPlain);

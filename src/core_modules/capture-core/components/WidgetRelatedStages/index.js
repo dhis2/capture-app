@@ -1,5 +1,6 @@
 // @flow
-export { WidgetRelatedStages } from './WidgetRelatedStages.component';
+export { RelatedStagesActions } from './RelatedStagesActions';
+export { WidgetRelatedStages } from './WidgetRelatedStages.container';
 export type {
     RelatedStageDataValueStates,
     RelatedStageRefPayload,

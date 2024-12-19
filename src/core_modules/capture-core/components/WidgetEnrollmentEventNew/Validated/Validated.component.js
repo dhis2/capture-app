@@ -6,7 +6,7 @@ import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
 import { SavingText } from '../SavingText';
-import { WidgetRelatedStages } from '../../WidgetRelatedStages';
+import { RelatedStagesActions } from '../../WidgetRelatedStages';
 import type { Props } from './validated.types';
 
 const styles = () => ({
@@ -47,7 +47,7 @@ const ValidatedPlain = ({
                     id={id}
                     orgUnit={orgUnit}
                 />
-                <WidgetRelatedStages
+                <RelatedStagesActions
                     ref={relatedStageRef}
                     enrollmentId={enrollmentId}
                     programId={programId}

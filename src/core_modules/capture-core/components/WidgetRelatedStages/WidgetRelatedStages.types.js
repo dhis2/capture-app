@@ -17,8 +17,14 @@ export type RelationshipType = {|
 
 export type Props = {|
     programId: string,
-    enrollmentId?: string,
+    eventId: string,
+    teiId: string,
+    enrollmentId: string,
     programStageId: string,
+    onUpdateEnrollment: (enrollment: Object) => void,
+    onUpdateEnrollmentSuccess: ({ redirect?: boolean }) => void,
+    onUpdateEnrollmentError: (message: string) => void,
+    onNavigateToEvent: (eventId: string) => void,
     actionsOptions?: {
         [key: $Keys<typeof relatedStageActions>]: {
             hidden?: boolean,
@@ -26,7 +32,9 @@ export type Props = {|
             disabledMessage?: string
         },
     },
+    ...CssClasses,
 |}
+
 export type RelatedStageDataValueStates = {|
     linkMode: ?$Keys<typeof relatedStageActions>,
     scheduledAt: string,
@@ -41,6 +49,7 @@ export type RelatedStageDataValueStates = {|
 
 export type RelatedStageRelationshipType = {|
     id: string,
+    displayName: string,
     fromConstraint: {|
         programStage: {
             id: string,

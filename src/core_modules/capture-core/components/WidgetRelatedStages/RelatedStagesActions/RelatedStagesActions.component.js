@@ -5,11 +5,11 @@ import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { relatedStageActions, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
-import { useCanAddNewEventToStage } from '../hooks/useCanAddNewEventToStage';
+import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import type { Props } from './RelatedStagesActions.types';
+import type { PlainProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 
@@ -36,6 +36,9 @@ const styles = () => ({
         flexShrink: 0,
     },
     clearSelections: {
+        padding: spacers.dp8,
+    },
+    link: {
         padding: spacers.dp8,
     },
 });
@@ -171,6 +174,16 @@ const LinkExistingResponse = ({
     );
 };
 
+const LinkButton = withStyles(styles)(({ onLink, label, loading, classes }) => (
+    onLink ? (
+        <div className={classes.link}>
+            <Button secondary small onClick={onLink} loading={loading}>
+                {label}
+            </Button>
+        </div>
+    ) : null
+));
+
 const RelatedStagesActionsPlain = ({
     classes,
     type,
@@ -184,7 +197,8 @@ const RelatedStagesActionsPlain = ({
     errorMessages,
     saveAttempted,
     actionsOptions,
-}: Props) => {
+    onLink,
+}: PlainProps) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
@@ -253,37 +267,47 @@ const RelatedStagesActionsPlain = ({
             )}
 
             {selectedAction === relatedStageActions.SCHEDULE_IN_ORG && (
-                <ScheduleInOrgUnit
-                    relatedStagesDataValues={relatedStagesDataValues}
-                    setRelatedStagesDataValues={setRelatedStagesDataValues}
-                    scheduledLabel={scheduledLabel}
-                    saveAttempted={saveAttempted}
-                    errorMessages={errorMessages}
-                />
+                <>
+                    <ScheduleInOrgUnit
+                        relatedStagesDataValues={relatedStagesDataValues}
+                        setRelatedStagesDataValues={setRelatedStagesDataValues}
+                        scheduledLabel={scheduledLabel}
+                        saveAttempted={saveAttempted}
+                        errorMessages={errorMessages}
+                    />
+                    <LinkButton onLink={onLink} label={i18n.t('Schedule')} loading={saveAttempted} />
+                </>
             )}
 
             {selectedAction === relatedStageActions.ENTER_DATA && (
-                <EnterDataInOrgUnit
-                    linkableStageLabel={programStage.stageForm.name}
-                    relatedStagesDataValues={relatedStagesDataValues}
-                    setRelatedStagesDataValues={setRelatedStagesDataValues}
-                    saveAttempted={saveAttempted}
-                    errorMessages={errorMessages}
-                />
+                <>
+                    <EnterDataInOrgUnit
+                        linkableStageLabel={programStage.stageForm.name}
+                        relatedStagesDataValues={relatedStagesDataValues}
+                        setRelatedStagesDataValues={setRelatedStagesDataValues}
+                        saveAttempted={saveAttempted}
+                        errorMessages={errorMessages}
+                    />
+                    <LinkButton onLink={onLink} label={i18n.t('Enter details')} loading={saveAttempted} />
+                </>
             )}
 
             {selectedAction === relatedStageActions.LINK_EXISTING_RESPONSE && (
-                <LinkToExisting
-                    relatedStagesDataValues={relatedStagesDataValues}
-                    setRelatedStagesDataValues={setRelatedStagesDataValues}
-                    linkableEvents={linkableEvents}
-                    linkableStageLabel={programStage.stageForm.name}
-                    errorMessages={errorMessages}
-                    saveAttempted={saveAttempted}
-                />
+                <>
+                    <LinkToExisting
+                        relatedStagesDataValues={relatedStagesDataValues}
+                        setRelatedStagesDataValues={setRelatedStagesDataValues}
+                        linkableEvents={linkableEvents}
+                        linkableStageLabel={programStage.stageForm.name}
+                        errorMessages={errorMessages}
+                        saveAttempted={saveAttempted}
+                    />
+                    <LinkButton onLink={onLink} label={i18n.t('Link')} loading={saveAttempted} />
+                </>
             )}
+
         </DataSection>
     );
 };
 
-export const RelatedStagesActions: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);
+export const RelatedStagesActions: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);
