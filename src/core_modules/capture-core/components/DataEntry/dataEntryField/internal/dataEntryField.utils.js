@@ -7,7 +7,7 @@ type Validator = (value: any,
 
 export type ValidatorContainer = {
     validator: Validator,
-    message: string,
+    errorMessage: string,
 };
 
 export function getValidationError(value: any, validatorContainers: ?Array<ValidatorContainer>, internalComponentError?: ?{error: ?string, errorCode: ?string}) {
@@ -15,7 +15,7 @@ export function getValidationError(value: any, validatorContainers: ?Array<Valid
         return null;
     }
 
-    let message;
+    let errorMessage;
     const errorEncountered = validatorContainers.some((validatorContainer) => {
         const validator = validatorContainer.validator;
         const result = validator(value, internalComponentError);
@@ -24,10 +24,10 @@ export function getValidationError(value: any, validatorContainers: ?Array<Valid
             return false;
         }
 
-        message = (result && result.errorMessage) || (result && result.message) || validatorContainer.message;
+        errorMessage = (result && result.errorMessage) || validatorContainer.errorMessage;
         return true;
     });
 
 
-    return (errorEncountered ? (message || i18n.t('validation failed')) : null);
+    return (errorEncountered ? (errorMessage || i18n.t('validation failed')) : null);
 }

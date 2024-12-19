@@ -15,11 +15,11 @@ export const getEventDateValidatorContainers = () => {
     const validatorContainers = [
         {
             validator: hasValue,
-            message: i18n.t('A value is required'),
+            errorMessage: i18n.t('A value is required'),
         },
         {
             validator: preValidateDate,
-            message: i18n.t('Please provide a valid date'),
+            errorMessage: i18n.t('Please provide a valid date'),
         },
     ];
     return validatorContainers;

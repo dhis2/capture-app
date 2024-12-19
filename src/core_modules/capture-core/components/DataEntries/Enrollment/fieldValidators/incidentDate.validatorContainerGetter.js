@@ -16,15 +16,15 @@ export const getIncidentDateValidatorContainer = () => {
     const validatorContainers = [
         {
             validator: hasValue,
-            message:
+            errorMessage:
                 i18n.t('A value is required'),
         },
         {
             validator: isValidIncidentDate,
-            message: i18n.t('Please provide a valid date'),
+            errorMessage: i18n.t('Please provide a valid date'),
         },
         { validator: isValidNonFutureDate,
-            message: i18n.t('A date in the future is not allowed'),
+            errorMessage: i18n.t('A date in the future is not allowed'),
         },
     ];
     return validatorContainers;
