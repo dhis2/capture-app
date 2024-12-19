@@ -24,9 +24,12 @@ import {
 import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
-} from '../../../Pages/New/RegistrationDataEntry/helpers';
+    deriveRelatedStageEvent,
+} from '../helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
+import { relatedStageActions } from '../../../WidgetRelatedStages';
+import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -88,7 +91,14 @@ export const useBuildEnrollmentPayload = ({
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
 
-    const buildTeiWithEnrollment = (): EnrollmentPayload => {
+    const buildTeiWithEnrollment = (relatedStageRef?: {current: ?RelatedStageRefPayload}): {
+        teiWithEnrollment: EnrollmentPayload,
+        formHasError: boolean,
+        relatedStageLinkedEvent?: {
+            programStageId: string,
+            eventId: string,
+        },
+    } => {
         if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
@@ -126,8 +136,17 @@ export const useBuildEnrollmentPayload = ({
             serverMinorVersion: minor,
         });
 
+        const { formHasError, linkedEvent: relatedStageLinkedEvent, relationship, linkMode } = deriveRelatedStageEvent({
+            serverRequestEvent: firstStageDuringRegistrationEvent,
+            relatedStageRef,
+            firstStageMetaData,
+            programId,
+            teiId,
+        });
+
         const autoGenerateEvents = deriveAutoGenerateEvents({
-            firstStageMetadata: firstStage,
+            firstStageDuringRegistrationEvent,
+            relatedStageLinkedEvent,
             stages,
             enrolledAt,
             occurredAt,
@@ -137,9 +156,8 @@ export const useBuildEnrollmentPayload = ({
             serverMinorVersion: minor,
         });
 
-        const allEventsToBeCreated = firstStageDuringRegistrationEvent
-            ? [firstStageDuringRegistrationEvent, ...autoGenerateEvents]
-            : autoGenerateEvents;
+        const allEventsToBeCreated = [firstStageDuringRegistrationEvent, relatedStageLinkedEvent, ...autoGenerateEvents]
+            .filter(Boolean);
 
         const attributes = deriveAttributesFromFormValues(formServerValues);
 
@@ -155,17 +173,26 @@ export const useBuildEnrollmentPayload = ({
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
-        const tetGeometry = tetFeatureTypeKey ?
-            buildGeometryProp(tetFeatureTypeKey, formValues)
-            : undefined;
+        const tetGeometry = tetFeatureTypeKey ? buildGeometryProp(tetFeatureTypeKey, formValues) : undefined;
 
         return {
-            trackedEntity: teiId || generateUID(),
-            orgUnit: orgUnitId,
-            trackedEntityType: trackedEntityTypeId,
-            attributes,
-            geometry: tetGeometry,
-            enrollments: [enrollment],
+            teiWithEnrollment: {
+                trackedEntity: teiId || generateUID(),
+                orgUnit: orgUnitId,
+                trackedEntityType: trackedEntityTypeId,
+                attributes,
+                geometry: tetGeometry,
+                enrollments: [enrollment],
+                relationships: relationship ? [relationship] : undefined,
+            },
+            formHasError,
+            relatedStageLinkedEvent:
+                relatedStageLinkedEvent && linkMode === relatedStageActions.ENTER_DATA
+                    ? {
+                        programStageId: relatedStageLinkedEvent.programStage,
+                        eventId: relatedStageLinkedEvent.event,
+                    }
+                    : undefined,
         };
     };
 

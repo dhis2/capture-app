@@ -1,10 +1,9 @@
 // @flow
 import log from 'loglevel';
 import { generateUID } from '../../../../utils/uid/generateUID';
-import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
-import type { ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
+import { relatedStageActions } from '../../../WidgetRelatedStages';
+import type { LinkedRequestEvent, ConvertedRelatedStageEventProps } from './getConvertedRelatedStageEvent.types';
 import { errorCreator, pipe } from '../../../../../capture-core-utils';
-import { type LinkedRequestEvent } from '../validated.types';
 import { convertClientToServer, convertFormToClient } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 
@@ -18,7 +17,7 @@ const getEventDetailsByLinkMode = ({
     programId,
     teiId,
     enrollmentId,
-    clientRequestEvent,
+    serverRequestEvent,
 }): {
     linkedEvent: ?LinkedRequestEvent,
     linkedEventId: ?string,
@@ -36,7 +35,7 @@ const getEventDetailsByLinkMode = ({
         status: 'SCHEDULE',
     };
 
-    if (linkMode === RelatedStageModes.SCHEDULE_IN_ORG) {
+    if (linkMode === relatedStageActions.SCHEDULE_IN_ORG) {
         const { scheduledAt: linkedEventScheduledAt, orgUnit: linkedEventOrgUnit } = relatedStageDataValues;
         if (!linkedEventScheduledAt || !linkedEventOrgUnit) {
             // Business logic dictates that these values will not be null here
@@ -57,7 +56,7 @@ const getEventDetailsByLinkMode = ({
         });
     }
 
-    if (linkMode === RelatedStageModes.ENTER_DATA) {
+    if (linkMode === relatedStageActions.ENTER_DATA) {
         const { orgUnit: linkedEventOrgUnit } = relatedStageDataValues;
         if (!linkedEventOrgUnit) {
             throw new Error(
@@ -69,14 +68,14 @@ const getEventDetailsByLinkMode = ({
         return ({
             linkedEvent: {
                 ...baseEventDetails,
-                scheduledAt: convertFn(clientRequestEvent.scheduledAt, dataElementTypes.DATE),
+                scheduledAt: serverRequestEvent.scheduledAt,
                 orgUnit: convertFn(linkedEventOrgUnit, dataElementTypes.ORGANISATION_UNIT),
             },
             linkedEventId: baseEventDetails.event,
         });
     }
 
-    if (linkMode === RelatedStageModes.LINK_EXISTING_RESPONSE) {
+    if (linkMode === relatedStageActions.LINK_EXISTING_RESPONSE) {
         const { linkedEventId } = relatedStageDataValues;
         return {
             linkedEvent: null,
@@ -96,7 +95,7 @@ export const getConvertedRelatedStageEvent = ({
     programId,
     teiId,
     currentProgramStageId,
-    clientRequestEvent,
+    serverRequestEvent,
     enrollmentId,
     relatedStageType,
 }: ConvertedRelatedStageEventProps) => {
@@ -110,19 +109,19 @@ export const getConvertedRelatedStageEvent = ({
         programId,
         teiId,
         enrollmentId,
-        clientRequestEvent,
+        serverRequestEvent,
     });
 
     const relationship = linkedEventId && {
         relationshipType: relatedStageType.id,
         from: {
             event: {
-                event: requestEventIsFromConstraint ? clientRequestEvent.event : linkedEventId,
+                event: requestEventIsFromConstraint ? serverRequestEvent.event : linkedEventId,
             },
         },
         to: {
             event: {
-                event: requestEventIsFromConstraint ? linkedEventId : clientRequestEvent.event,
+                event: requestEventIsFromConstraint ? linkedEventId : serverRequestEvent.event,
             },
         },
     };

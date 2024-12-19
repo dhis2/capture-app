@@ -69,13 +69,20 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
                 });
             },
             onSuccess: async (apiResponse, requestData) => {
-                const apiRelationshipId = apiResponse.bundleReport.typeReportMap.RELATIONSHIP.objectReports[0].uid;
+                const apiRelationshipIds = apiResponse.bundleReport.typeReportMap.RELATIONSHIP.objectReports.reduce(
+                    (acc, report) => [...acc, report.uid],
+                    [],
+                );
                 const currentRelationships = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
                 const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, currentRelationships);
                 if (apiRelationships.length === 0) return;
 
                 const newRelationships = apiRelationships.map((relationship) => {
-                    if (relationship.relationship === apiRelationshipId) {
+                    if (
+                        apiRelationshipIds.find(
+                            apiRelationshipId => apiRelationshipId === relationship.relationship,
+                        )
+                    ) {
                         return {
                             ...relationship,
                             pendingApiResponse: false,
