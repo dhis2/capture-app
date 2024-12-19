@@ -1,3 +1,10 @@
+## [101.20.1](https://github.com/dhis2/capture-app/compare/v101.20.0...v101.20.1) (2024-12-19)
+
+
+### Bug Fixes
+
+* [DHIS2-118654] Use importStrategy=DELETE to support older backend ([#3914](https://github.com/dhis2/capture-app/issues/3914)) ([eb5325e](https://github.com/dhis2/capture-app/commit/eb5325e71087c0e00011878bd58f2fef3ad55eea))
+
 # [101.20.0](https://github.com/dhis2/capture-app/compare/v101.19.4...v101.20.0) (2024-12-17)
 
 
