@@ -11,7 +11,6 @@ import { convertValue as convertClientToList } from '../../../../../../converter
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
 import {
     convertStatusForView,
-    convertOrgUnitForView,
     convertNoteForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
@@ -27,7 +26,7 @@ const basedFieldTypes = [
     { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
     { type: 'ASSIGNEE' },
-    { type: dataElementTypes.TEXT, resolveValue: convertOrgUnitForView },
+    { type: dataElementTypes.ORGANISATION_UNIT },
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertNoteForView },
 ];
