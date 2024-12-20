@@ -36,7 +36,7 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore,
 
                 const serverData = {
                     event: eventId,
-                    notes: [{ value: payload.note }],
+                    value: payload.note,
                 };
 
                 const clientNote = {
