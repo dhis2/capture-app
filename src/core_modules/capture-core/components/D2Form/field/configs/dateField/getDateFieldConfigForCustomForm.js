@@ -11,7 +11,7 @@ export const getDateFieldConfigForCustomForm = (metaData: DateDataElement, optio
         width: 350,
         maxWidth: 350,
         calendarWidth: 350,
-        calendarMaxMoment: !metaData.allowFutureDate ? convertDateObjectToDateFormatString(moment()) : undefined,
+        calendarMax: !metaData.allowFutureDate ? convertDateObjectToDateFormatString(moment()) : undefined,
     }, metaData);
 
     return createFieldConfig({

@@ -16,7 +16,7 @@ export const getDateFieldConfig = (metaData: DateDataElement, options: Object, q
         maxWidth: options.formHorizontal ? 150 : 350,
         calendarWidth: options.formHorizontal ? 250 : 350,
         popupAnchorPosition: getCalendarAnchorPosition(options.formHorizontal),
-        calendarMaxMoment: !metaData.allowFutureDate ? convertDateObjectToDateFormatString(moment()) : undefined,
+        calendarMax: !metaData.allowFutureDate ? convertDateObjectToDateFormatString(moment()) : undefined,
     }, options, metaData);
 
     return createFieldConfig({

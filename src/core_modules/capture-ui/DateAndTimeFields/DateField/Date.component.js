@@ -20,7 +20,7 @@ type Props = {
     onDateSelectedFromCalendar?: () => void,
     placeholder?: string,
     label?: string,
-    calendarMaxMoment?: any,
+    calendarMax?: any,
     innerMessage?: any
 };
 
@@ -61,11 +61,11 @@ export class DateField extends React.Component<Props, State> {
             maxWidth,
             calendarWidth,
             inputWidth,
-            calendarMaxMoment,
+            calendarMax,
             value,
             innerMessage,
         } = this.props;
-
+console.log(calendarMax,"calendarMax")
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
         const calendarType = systemSettingsStore.get().calendar || 'gregory';
@@ -94,7 +94,7 @@ export class DateField extends React.Component<Props, State> {
                     onFocus={this.props.onFocus}
                     disabled={this.props.disabled}
                     {...errorProps}
-                    maxDate={calendarMaxMoment}
+                    maxDate={calendarMax}
                 />
             </div>
         );
