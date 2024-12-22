@@ -38,12 +38,8 @@ function convertDateTime(formValue: DateTimeValue): ?string {
 
 function convertDate(dateValue: string) {
     const parsedDate = parseDate(dateValue);
-    if (!parsedDate.isValid || !parsedDate.momentDate) {
-        return null;
-    }
-    const formattedDate = parsedDate.momentDate.format('YYYY-MM-DD');
-
-    return convertLocalToIsoCalendar(formattedDate);
+    // $FlowFixMe[incompatible-use] automated comment
+    return parsedDate.isValid ? convertLocalToIsoCalendar(parsedDate.momentDate.toISOString()) : null;
 }
 
 function convertTime(timeValue: string) {

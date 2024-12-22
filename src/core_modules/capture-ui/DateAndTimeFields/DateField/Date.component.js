@@ -65,7 +65,6 @@ export class DateField extends React.Component<Props, State> {
             value,
             innerMessage,
         } = this.props;
-console.log(calendarMax,"calendarMax")
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
         const calendarType = systemSettingsStore.get().calendar || 'gregory';

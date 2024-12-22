@@ -11,16 +11,13 @@ import { MinimalCoordinates } from '../components/MinimalCoordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
-    const momentDate = moment(rawValue);
-    const dateString = momentDate.format('YYYY-MM-DD');
-    return convertIsoToLocalCalendar(dateString);
+    return convertIsoToLocalCalendar(rawValue);
 }
 
 function convertDateTimeForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
-    const dateString = momentDate.format('YYYY-MM-DD');
     const timeString = momentDate.format('HH:mm');
-    const localDate = convertIsoToLocalCalendar(dateString);
+    const localDate = convertIsoToLocalCalendar(rawValue);
     return `${localDate} ${timeString}`;
 }
 
