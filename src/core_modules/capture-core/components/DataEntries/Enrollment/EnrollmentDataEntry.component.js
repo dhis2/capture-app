@@ -112,7 +112,7 @@ const getEnrollmentDateSettings = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
-            calendarMaxMoment: !props.enrollmentMetadata.allowFutureEnrollmentDate ? convertDateObjectToDateFormatString(moment()) : undefined,
+            calendarMax: !props.enrollmentMetadata.allowFutureEnrollmentDate ? convertDateObjectToDateFormatString(moment()) : undefined,
         }),
         getPropName: () => 'enrolledAt',
         getValidatorContainers: getEnrollmentDateValidatorContainer,
@@ -160,7 +160,7 @@ const getIncidentDateSettings = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
-            calendarMaxMoment: !props.enrollmentMetadata.allowFutureIncidentDate ?
+            calendarMax: !props.enrollmentMetadata.allowFutureIncidentDate ?
                 convertDateObjectToDateFormatString(moment()) :
                 undefined,
         }),
