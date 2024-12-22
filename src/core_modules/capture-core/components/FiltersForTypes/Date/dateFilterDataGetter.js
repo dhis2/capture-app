@@ -2,7 +2,7 @@
 import { parseNumber } from 'capture-core-utils/parsers';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
-import { parseDate } from '../../../utils/converters/date';
+import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 import { type AbsoluteDateFilterData, type RelativeDateFilterData, type DateValue } from './types';
 
 type Value = {
@@ -20,13 +20,13 @@ function convertAbsoluteDate(fromValue: ?string, toValue: ?string) {
 
     if (fromValue) {
         // $FlowFixMe[incompatible-type] automated comment
-        const fromClientValue: string = parseDate(fromValue).momentDate;
+        const fromClientValue: string = convertLocalToIsoCalendar(fromValue);
         rangeData.ge = fromClientValue;
     }
 
     if (toValue) {
         // $FlowFixMe[incompatible-type] automated comment
-        const toClientValue: string = parseDate(toValue).momentDate;
+        const toClientValue: string = convertLocalToIsoCalendar(toValue);
         rangeData.le = toClientValue;
     }
 

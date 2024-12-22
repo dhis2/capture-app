@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
-import moment from 'moment';
 import log from 'loglevel';
-import { convertMomentToDateFormatString } from '../../../utils/converters/date';
+import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { DateFilter } from './DateFilter.component';
 import { mainOptionKeys } from './options';
 import { dateFilterTypes } from './constants';
@@ -22,8 +21,8 @@ type State = {
 
 export class DateFilterManager extends React.Component<Props, State> {
     static convertDateForEdit(rawValue: string) {
-        const momentInstance = moment(rawValue);
-        return convertMomentToDateFormatString(momentInstance);
+        const localDate = convertIsoToLocalCalendar(rawValue);
+        return localDate;
     }
     static calculateAbsoluteRangeValueState(filter: DateFilterData) {
         return {
