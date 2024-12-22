@@ -7,7 +7,7 @@ import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../utils/api';
 
 type Props = {
     stageId: ?string,
-    enrollmentId: string,
+    enrollmentId: ?string,
     scheduledLabel: string,
     occurredLabel: string,
     relationshipTypeId: ?string,
@@ -41,7 +41,7 @@ export const useRelatedStageEvents = ({
         ['availableRelatedStageEvents', stageId, enrollmentId, relationshipTypeId],
         query,
         {
-            enabled: !!stageId && enabled,
+            enabled: !!stageId && !!enrollmentId && enabled,
             cacheTime: 0,
             staleTime: 0,
             select: (response: any) => {

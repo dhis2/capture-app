@@ -1,9 +1,10 @@
 // @flow
 import { pipe } from 'capture-core-utils';
-import { dataElementTypes, ProgramStage } from '../../../../../metaData';
-import { convertFormToClient, convertClientToServer } from '../../../../../converters';
-import { convertCategoryOptionsToServer } from '../../../../../converters/clientToServer';
-import { convertStatusOut } from '../../../../DataEntries';
+import { generateUID } from '../../../../utils/uid/generateUID';
+import { dataElementTypes, ProgramStage } from '../../../../metaData';
+import { convertFormToClient, convertClientToServer } from '../../../../converters';
+import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
+import { convertStatusOut } from '../../../DataEntries';
 import { standardGeoJson } from './standardGeoJson';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
@@ -37,6 +38,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         : {};
 
     const event: any = {
+        event: generateUID(),
         status: convertStatusOut(stageComplete),
         geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
