@@ -9,7 +9,13 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
  * @returns {(Temporal.PlainDate | null)}
  */
 
-export function convertStringToTemporal(dateString: string): Temporal.PlainDate | null {
+type PlainDate = {
+    year: number,
+    month: number,
+    day: number
+};
+
+export function convertStringToTemporal(dateString: ?string): PlainDate | null {
     if (!dateString) {
         return null;
     }
@@ -34,6 +40,6 @@ export function convertStringToTemporal(dateString: string): Temporal.PlainDate 
             calendar,
         });
     } catch (error) {
-        return '';
+        return null;
     }
 }
