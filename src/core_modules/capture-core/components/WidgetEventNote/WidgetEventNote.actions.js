@@ -1,4 +1,5 @@
 // @flow
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
 
@@ -21,7 +22,9 @@ export const startAddNoteForEvent = (eventUid: string, serverData: Object, selec
     actionCreator(actionTypes.START_ADD_NOTE_FOR_EVENT)({ selections, context }, {
         offline: {
             effect: {
-                url: `/tracker/events/${eventUid}/note`,
+                url: (featureAvailable(FEATURES.newNoteEndpoint))
+                    ? `tracker/events/${eventUid}/note`
+                    : `events/${eventUid}/note`,
                 method: effectMethods.POST,
                 data: serverData,
             },

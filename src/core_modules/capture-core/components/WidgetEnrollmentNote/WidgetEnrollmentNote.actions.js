@@ -1,4 +1,5 @@
 // @flow
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
 
@@ -22,7 +23,9 @@ export const startAddNoteForEnrollment = (enrollmentUid: string, serverData: Obj
     actionCreator(actionTypes.START_ADD_NOTE_FOR_ENROLLMENT)({ selections, context }, {
         offline: {
             effect: {
-                url: `tracker/enrollments/${enrollmentUid}/note`,
+                url: (featureAvailable(FEATURES.newNoteEndpoint))
+                    ? `tracker/enrollments/${enrollmentUid}/note`
+                    : `enrollments/${enrollmentUid}/note`,
                 method: effectMethods.POST,
                 data: serverData,
             },
