@@ -28,10 +28,6 @@ type InputMessageClasses = {
     validating?: ?string,
 }
 
-type DateParser = (value: string) => { isValid: boolean, momentDate: any };
-
-type DateStringFromMomentFormatter = (momentValue: Object) => string;
-
 type ValidationOptions = {
     error?: ?string,
     errorCode?: ?string,

@@ -1,5 +1,4 @@
 // @flow
-import { Temporal } from '@js-temporal/polyfill';
 import { padWithZeros } from './padWithZeros';
 import { systemSettingsStore } from '../../../../capture-core/metaDataMemoryStores';
 
@@ -9,7 +8,13 @@ import { systemSettingsStore } from '../../../../capture-core/metaDataMemoryStor
  * @returns {string} Formatted date string, or empty string if invalid
  */
 
-export function convertTemporalToString(temporalDate: Temporal.PlainDate | null): string {
+type PlainDate = {
+    year: number,
+    month: number,
+    day: number
+};
+
+export function convertTemporalToString(temporalDate: PlainDate | null): string {
     if (!temporalDate) {
         return '';
     }
