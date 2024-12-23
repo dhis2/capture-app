@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
+"POT-Creation-Date: 2024-12-05T11:39:04.447Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -45,10 +45,10 @@ msgstr ""
 "at dette vil lukke andre versjoner."
 
 msgid "Enrollment dashboard"
-msgstr ""
+msgstr "Registreringsdashbord"
 
 msgid "View event"
-msgstr ""
+msgstr "Vis hendelse"
 
 msgid "Edit event"
 msgstr "Rediger hendelse"
@@ -66,16 +66,16 @@ msgid "Cancelled enrollments"
 msgstr "Avbrutte registreringer"
 
 msgid "{{trackedEntityName}} list"
-msgstr ""
+msgstr "{{trackedEntityName}}-liste"
 
 msgid "Search"
 msgstr "Søk"
 
 msgid "Working List"
-msgstr ""
+msgstr "Arbeidsliste"
 
 msgid "Event list"
-msgstr ""
+msgstr "Hendelsesliste"
 
 msgid "More"
 msgstr "Mer"
@@ -1495,8 +1495,39 @@ msgstr "{{ scheduledEvents }} planlagt"
 msgid "Stages and Events"
 msgstr "Faser og hendelser"
 
+msgid "An error occurred while unlinking and deleting the event."
+msgstr ""
+
+msgid "Unlink and delete linked event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+msgstr ""
+
+msgid "Yes, unlink and delete linked event"
+msgstr ""
+
+msgid "Unlink event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+msgstr ""
+
+msgid "Yes, unlink event"
+msgstr ""
+
 msgid "View linked event"
 msgstr "Vis knyttede hendelser"
+
+msgid "You do not have access to remove the link between these events"
+msgstr ""
+
+msgid "You do not have access to remove the link and delete the linked event"
+msgstr ""
 
 msgid "An error occurred while loading the widget."
 msgstr "En feil oppstå ved lasting av widget. "

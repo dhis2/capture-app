@@ -21,6 +21,8 @@ export const WidgetTwoEventWorkspace = ({
     const {
         linkedEvent,
         dataValues,
+        relationship,
+        relationshipType,
         isError: isLinkedEventError,
         isLoading: isLinkedEventLoading,
     } = useLinkedEventByOriginId({ originEventId: eventId });
@@ -74,6 +76,10 @@ export const WidgetTwoEventWorkspace = ({
                             linkedEvent={linkedEvent}
                             orgUnitId={orgUnitId}
                             currentPage={currentPage}
+                            stage={linkedStage}
+                            eventId={eventId}
+                            relationship={relationship}
+                            relationshipType={relationshipType}
                         />
                     }
                     noncollapsible

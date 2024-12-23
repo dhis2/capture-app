@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2024\n"
 "Language-Team: Arabic (Iraq) (https://app.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -120,66 +120,6 @@ msgstr "يتم التحقق من القيمة"
 msgid "Async field update failed"
 msgstr "فشل تحديث حقل متزامن"
 
-msgid "A value is required"
-msgstr "قيمة مطلوبة"
-
-msgid "Please provide a valid number"
-msgstr "نرجوا ادخال صيغة رقمية صحيحة"
-
-msgid "Please provide a valid integer"
-msgstr "من فضلك ادخل رقم صحيح، من غير كسر"
-
-msgid "Please provide a positive integer"
-msgstr "من فضلك ادخل رقم صحيح موجب"
-
-msgid "Please provide zero or a positive integer"
-msgstr "من فضلك ادخل عدد صحيح موجب، أو صفر"
-
-msgid "Please provide a negative integer"
-msgstr "من فضلك ادخل احد الأعداد الصحيحة السالبة"
-
-msgid "Please provide a valid date"
-msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
-
-msgid "A date in the future is not allowed"
-msgstr ""
-
-msgid "Please provide a valid date and time"
-msgstr "من فضلك ادخل صيغة صحيحة للتاريخ والوقت"
-
-msgid "Please provide a valid time"
-msgstr "من فضلك ادخل صيغة صحيحة للوقت"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr "يرجى ادخال صيغة ارتباط تشعبي سليمة"
-
-msgid "Please provide a valid email address"
-msgstr "من فضلك ادخل صيغة بريد الكتروني سليمة"
-
-msgid "Please provide a valid age"
-msgstr "من فضلك ادخل صيغة عمرية سليمة"
-
-msgid "Please provide a valid phone number"
-msgstr "من فضلك ادخل صيغة رقم تلفون سليمة"
-
-msgid "Please provide a valid organisation unit"
-msgstr "من فضلك ادخل وحدة تنظيمية صالحة"
-
-msgid "Please provide valid coordinates"
-msgstr "من فضلك ادخل صيغة احداثيات سليمة"
-
-msgid "This value already exists"
-msgstr "هذه القيمة موجودة مسبقاً"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "لا يمكن ان تكون \"من\" اكبر من \"إلى\""
-
-msgid "Checking..."
-msgstr "يتم الفحص"
-
 msgid "Area"
 msgstr "مساحة"
 
@@ -191,6 +131,12 @@ msgstr "التسجيل"
 
 msgid "Complete event"
 msgstr ""
+
+msgid "A value is required"
+msgstr "قيمة مطلوبة"
+
+msgid "Please provide a valid date"
+msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -204,8 +150,8 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr ""
 
-msgid "A future date is not allowed"
-msgstr "غير مسموح تاريخ بالمستقبل"
+msgid "A date in the future is not allowed"
+msgstr ""
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -1184,6 +1130,9 @@ msgstr ""
 msgid "Coordinates"
 msgstr ""
 
+msgid "Please provide valid coordinates"
+msgstr "من فضلك ادخل صيغة احداثيات سليمة"
+
 msgid "Delete polygon"
 msgstr "حذف المضلع"
 
@@ -1439,6 +1388,12 @@ msgstr ""
 
 msgid "Report date"
 msgstr ""
+
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "من فضلك ادخل وحدة تنظيمية صالحة"
 
 msgid "Please select a valid event"
 msgstr ""
@@ -1942,6 +1897,60 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "نرجوا ادخال صيغة رقمية صحيحة"
+
+msgid "Please provide a valid integer"
+msgstr "من فضلك ادخل رقم صحيح، من غير كسر"
+
+msgid "Please provide a positive integer"
+msgstr "من فضلك ادخل رقم صحيح موجب"
+
+msgid "Please provide zero or a positive integer"
+msgstr "من فضلك ادخل عدد صحيح موجب، أو صفر"
+
+msgid "Please provide a negative integer"
+msgstr "من فضلك ادخل احد الأعداد الصحيحة السالبة"
+
+msgid "Please provide a valid date and time"
+msgstr "من فضلك ادخل صيغة صحيحة للتاريخ والوقت"
+
+msgid "Please provide a valid time"
+msgstr "من فضلك ادخل صيغة صحيحة للوقت"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr "يرجى ادخال صيغة ارتباط تشعبي سليمة"
+
+msgid "Please provide a valid email address"
+msgstr "من فضلك ادخل صيغة بريد الكتروني سليمة"
+
+msgid "Please provide a valid age"
+msgstr "من فضلك ادخل صيغة عمرية سليمة"
+
+msgid "Please provide a valid phone number"
+msgstr "من فضلك ادخل صيغة رقم تلفون سليمة"
+
+msgid "This value already exists"
+msgstr "هذه القيمة موجودة مسبقاً"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "لا يمكن ان تكون \"من\" اكبر من \"إلى\""
+
+msgid "Checking..."
+msgstr "يتم الفحص"
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

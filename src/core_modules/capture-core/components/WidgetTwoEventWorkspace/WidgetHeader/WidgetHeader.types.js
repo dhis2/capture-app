@@ -8,10 +8,13 @@ export type PlainProps = {|
     linkedEvent: { event: string },
     linkedStage: ProgramStage,
     currentPage: $Values<typeof EnrollmentPageKeys> | string,
+    relationship: string,
+    relationshipType: string,
+    stage: ProgramStage,
+    eventId: string,
 |};
 
 export type Props = {|
     ...PlainProps,
     ...CssClasses,
 |};
-

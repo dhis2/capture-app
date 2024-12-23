@@ -71,7 +71,7 @@ export const startDeleteEventDataEntry = (serverData: Object, eventId: string, p
     actionCreator(actionTypes.START_DELETE_EVENT_DATA_ENTRY)({ eventId }, {
         offline: {
             effect: {
-                url: 'tracker?async=false&importStrategy=delete',
+                url: 'tracker?async=false&importStrategy=DELETE',
                 method: effectMethods.POST,
                 data: serverData,
             },

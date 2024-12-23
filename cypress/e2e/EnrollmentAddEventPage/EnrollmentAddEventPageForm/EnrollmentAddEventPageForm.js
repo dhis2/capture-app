@@ -132,7 +132,7 @@ Then('all events should be displayed', () => {
 });
 
 Then(/^the newest event in datatable nr (.*) should contain (.*)$/, (eq, status) => {
-    cy.get('[data-test="dhis2-uicore-datatable"]')
+    cy.get('[data-test="stage-content"]')
         .eq(eq)
         .within(() => {
             cy.get('[data-test="dhis2-uicore-datatablerow"]')
