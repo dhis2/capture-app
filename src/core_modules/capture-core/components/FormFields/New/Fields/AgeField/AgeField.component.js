@@ -2,8 +2,6 @@
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { AgeField as UIAgeField } from 'capture-ui';
-import moment from 'moment';
-import { parseDate, convertMomentToDateFormatString } from '../../../../../utils/converters/date';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
@@ -50,9 +48,6 @@ const AgeFieldPlain = (props: Props) => {
     return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
         <UIAgeField
-            onParseDate={parseDate}
-            onGetFormattedDateStringFromMoment={convertMomentToDateFormatString}
-            moment={moment}
             datePlaceholder={systemSettingsStore.get().dateFormat.toLowerCase()}
             {...passOnProps}
         />
