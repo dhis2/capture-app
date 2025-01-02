@@ -1,4 +1,5 @@
 // @flow
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
 
@@ -17,11 +18,13 @@ export const batchActionTypes = {
 export const requestAddNoteForEvent = (itemId: string, dataEntryId: string, note: string) =>
     actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT)({ itemId, dataEntryId, note });
 
-export const startAddNoteForEvent = (eventId: string, serverData: Object, selections: Object, context: Object) =>
+export const startAddNoteForEvent = (eventUid: string, serverData: Object, selections: Object, context: Object) =>
     actionCreator(actionTypes.START_ADD_NOTE_FOR_EVENT)({ selections, context }, {
         offline: {
             effect: {
-                url: `events/${eventId}/note`,
+                url: (featureAvailable(FEATURES.newNoteEndpoint))
+                    ? `tracker/events/${eventUid}/note`
+                    : `events/${eventUid}/note`,
                 method: effectMethods.POST,
                 data: serverData,
             },
