@@ -69,7 +69,7 @@ const styles = {
     tooltip: { display: 'inline-flex' },
 };
 
-export const WidgetEventEditPlain = ({
+const WidgetEventEditPlain = ({
     eventStatus,
     initialScheduleDate,
     stage,
@@ -93,10 +93,12 @@ export const WidgetEventEditPlain = ({
 
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
+    
+    const { orgUnit: coreOrgUnit, error } = useCoreOrgUnit(orgUnitId);
+    const orgUnit = coreOrgUnit || loadedValues?.orgUnit;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
     if (error) {
