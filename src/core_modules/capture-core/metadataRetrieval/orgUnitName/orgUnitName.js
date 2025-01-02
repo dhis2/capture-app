@@ -209,3 +209,5 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
 
     return { error };
 };
+
+export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId]?.displayName;
