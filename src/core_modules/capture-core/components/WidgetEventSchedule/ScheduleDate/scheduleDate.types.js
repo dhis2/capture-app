@@ -5,7 +5,6 @@ export type Props = {|
     stageId: string,
     programId: string,
     enrolledAt: string,
-    displayDueDateLabel: string,
     scheduleDate?: ?string,
     serverScheduleDate?: ?string,
     setScheduleDate: (date: string) => void,
