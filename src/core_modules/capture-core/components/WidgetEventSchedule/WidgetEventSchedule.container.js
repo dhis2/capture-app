@@ -21,13 +21,12 @@ import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategor
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { pipe } from '../../../capture-core-utils';
 
-
 export const WidgetEventSchedule = ({
     enrollmentId,
     teiId,
     stageId,
     programId,
-    orgUnitId,
+    orgUnitId: initialOrgUnitId,
     onSave,
     onSaveSuccessActionType,
     onSaveErrorActionType,
@@ -39,26 +38,32 @@ export const WidgetEventSchedule = ({
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const dispatch = useDispatch();
-    const orgUnit = { id: orgUnitId, name: useOrgUnitNameWithAncestors(orgUnitId).displayName };
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
     });
+    const orgUnitData = useOrgUnitNameWithAncestors(initialOrgUnitId);
+    const orgUnit = initialOrgUnitId && orgUnitData
+        ? { id: initialOrgUnitId, name: orgUnitData.displayName } : undefined;
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState(orgUnit);
+    const [isFormValid, setIsFormValid] = useState(false);
     const convertFn = pipe(convertFormToClient, convertClientToServer);
     const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
     const serverSuggestedScheduleDate = convertFn(suggestedScheduleDate, dataElementTypes.DATE);
     const [notes, setNotes] = useState([]);
     const [assignee, setAssignee] = useState(storedAssignee);
-    const { events } = useEventsInOrgUnit(orgUnitId, serverScheduleDate);
     const { eventId } = useLocationQuery();
+    const selectedOrgUnitId = scheduledOrgUnit?.id || initialOrgUnitId;
+    const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate);
     const eventCountInOrgUnit = events
         .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === serverScheduleDate).length;
     const [selectedCategories, setSelectedCategories] = useState({});
     const [categoryOptionsError, setCategoryOptionsError] = useState();
     const { programCategory } = useCategoryCombinations(programId);
+
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
     }, [suggestedScheduleDate, scheduleDate]);
@@ -68,6 +73,7 @@ export const WidgetEventSchedule = ({
     }, [storedAssignee]);
 
     const onHandleSchedule = useCallback(() => {
+        if (!isFormValid) { return; }
         if (programCategory?.categories &&
             Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
             const errors = programCategory.categories
@@ -81,9 +87,9 @@ export const WidgetEventSchedule = ({
         }
         dispatch(requestScheduleEvent({
             scheduleDate: serverScheduleDate,
+            orgUnitId: selectedOrgUnitId,
             notes,
             programId,
-            orgUnitId,
             stageId,
             teiId,
             enrollmentId,
@@ -100,7 +106,7 @@ export const WidgetEventSchedule = ({
         serverScheduleDate,
         notes,
         programId,
-        orgUnitId,
+        selectedOrgUnitId,
         stageId,
         teiId,
         enrollmentId,
@@ -111,14 +117,8 @@ export const WidgetEventSchedule = ({
         onSaveErrorActionType,
         programCategory,
         assignee,
+        isFormValid,
     ]);
-
-    React.useEffect(() => {
-        if (suggestedScheduleDate && !scheduleDate) {
-            setScheduleDate(suggestedScheduleDate);
-        }
-    }, [scheduleDate, suggestedScheduleDate]);
-
 
     const onAddNote = (note) => {
         const newNote = {
@@ -159,7 +159,7 @@ export const WidgetEventSchedule = ({
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
             <div>
-                {i18n.t('program or stage is invalid')};
+                {i18n.t('Program or stage is invalid')};
             </div>
         );
     }
@@ -167,9 +167,7 @@ export const WidgetEventSchedule = ({
     const eventAccess = getProgramEventAccess(programId, stageId);
     if (!eventAccess?.write) {
         return (
-            <NoAccess
-                onCancel={onCancel}
-            />
+            <NoAccess onCancel={onCancel} />
         );
     }
 
@@ -189,10 +187,12 @@ export const WidgetEventSchedule = ({
             serverSuggestedScheduleDate={serverSuggestedScheduleDate}
             onCancel={onCancel}
             setScheduleDate={setScheduleDate}
+            setScheduledOrgUnit={setScheduledOrgUnit}
+            setIsFormValid={setIsFormValid} // Viktig å beholde
             onSchedule={onHandleSchedule}
             onAddNote={onAddNote}
             eventCountInOrgUnit={eventCountInOrgUnit}
-            orgUnit={orgUnit}
+            orgUnit={scheduledOrgUnit}
             notes={notes}
             selectedCategories={selectedCategories}
             categoryOptionsError={categoryOptionsError}
@@ -201,7 +201,5 @@ export const WidgetEventSchedule = ({
             onSetAssignee={onSetAssignee}
             {...passOnProps}
         />
-
     );
 };
-
