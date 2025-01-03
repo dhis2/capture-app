@@ -89,7 +89,7 @@ When(/^you click the create new button number (.*)$/, (eq) => {
 });
 
 When(/^you type (.*) in the input number (.*)$/, (value, eq) => {
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[type="text"]')
         .eq(eq)
         .type(value)
         .blur();
@@ -132,7 +132,7 @@ Then('all events should be displayed', () => {
 });
 
 Then(/^the newest event in datatable nr (.*) should contain (.*)$/, (eq, status) => {
-    cy.get('[data-test="dhis2-uicore-datatable"]')
+    cy.get('[data-test="stage-content"]')
         .eq(eq)
         .within(() => {
             cy.get('[data-test="dhis2-uicore-datatablerow"]')
@@ -155,7 +155,7 @@ When(/^the user selects (.*)$/, (value) => {
 });
 
 When(/^you focus and blur a required field/, () => {
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[type="text"]')
         .eq(1)
         .focus()
         .blur();

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -42,6 +42,39 @@ msgstr ""
 " aplikace Capture podporuje pouze běh jedné verze současně (ve stejné "
 "doméně). Chcete-li tuto verzi znovu použít, obnovte prosím tuto stránku, "
 "mějte však na paměti, že se tím zavřou další verze."
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "Upravit událost"
+
+msgid "New event"
+msgstr "Nová událost"
+
+msgid "Active enrollments"
+msgstr "Aktivní zápisy"
+
+msgid "Completed enrollments"
+msgstr "Dokončené zápisy"
+
+msgid "Cancelled enrollments"
+msgstr "Zrušené zápisy"
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr "Více"
@@ -88,66 +121,6 @@ msgstr "Tato hodnota se ověřuje"
 msgid "Async field update failed"
 msgstr "Asynchronní aktualizace pole selhala"
 
-msgid "A value is required"
-msgstr "hodnota je vyžadována"
-
-msgid "Please provide a valid number"
-msgstr "Uveďte prosím platné číslo"
-
-msgid "Please provide a valid integer"
-msgstr "Uveďte platné celé číslo"
-
-msgid "Please provide a positive integer"
-msgstr "Zadejte kladné celé číslo"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Uveďte nulové nebo kladné celé číslo"
-
-msgid "Please provide a negative integer"
-msgstr "Uveďte záporné celé číslo"
-
-msgid "Please provide a valid date"
-msgstr "Uveďte prosím platné datum"
-
-msgid "A date in the future is not allowed"
-msgstr "Datum v budoucnosti není povoleno"
-
-msgid "Please provide a valid date and time"
-msgstr "Uveďte prosím platné datum a čas"
-
-msgid "Please provide a valid time"
-msgstr "Uveďte platný čas"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Zadejte prosím celé číslo v rozmezí 0 až 100"
-
-msgid "Please provide a valid url"
-msgstr "Uveďte platnou adresu URL"
-
-msgid "Please provide a valid email address"
-msgstr "Uveďte platnou e-mailovou adresu"
-
-msgid "Please provide a valid age"
-msgstr "Uveďte platný věk"
-
-msgid "Please provide a valid phone number"
-msgstr "Uveďte prosím platné telefonní číslo"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Uveďte platnou organizační jednotku"
-
-msgid "Please provide valid coordinates"
-msgstr "Uveďte platné souřadnice"
-
-msgid "This value already exists"
-msgstr "„Od“ nemůže být větší než „do“..."
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "„Od“ nemůže být větší než „Do“"
-
-msgid "Checking..."
-msgstr "Probíhá kontrola ..."
-
 msgid "Area"
 msgstr "Oblast"
 
@@ -159,6 +132,12 @@ msgstr "Zápis"
 
 msgid "Complete event"
 msgstr "Dokončit událost"
+
+msgid "A value is required"
+msgstr "hodnota je vyžadována"
+
+msgid "Please provide a valid date"
+msgstr "Uveďte prosím platné datum"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Základní informace"
@@ -172,8 +151,8 @@ msgstr "{{ stageName }} - Stav"
 msgid "Please select {{categoryName}}"
 msgstr "Vyberte prosím {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "Budoucí datum není povoleno"
+msgid "A date in the future is not allowed"
+msgstr "Datum v budoucnosti není povoleno"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Ukládání nového zápisu do {{programName}} v {{orgUnitName}}."
@@ -297,9 +276,6 @@ msgstr "Ano, zahodit změny"
 
 msgid "No, cancel"
 msgstr "Ne, zrušit"
-
-msgid "New event"
-msgstr "Nová událost"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
@@ -522,9 +498,6 @@ msgstr "Zadáním filtrujete možnosti"
 
 msgid "No match found"
 msgstr "Žádná shoda nenalezena"
-
-msgid "Search"
-msgstr "Hledat"
 
 msgid "Clear"
 msgstr "Vyčistit"
@@ -871,9 +844,6 @@ msgstr "událost"
 msgid "You don't have access to edit this event"
 msgstr "Nemáte přístup k úpravám této události"
 
-msgid "Edit event"
-msgstr "Upravit událost"
-
 msgid "View changelog"
 msgstr "Zobrazit seznam změn"
 
@@ -911,15 +881,6 @@ msgstr "Událost se nepodařilo načíst"
 msgid "Organisation unit could not be loaded"
 msgstr "Organizační jednotku se nepodařilo načíst"
 
-msgid "Dashboard"
-msgstr "Ovládací panel"
-
-msgid "Edit Event"
-msgstr "Upravit událost"
-
-msgid "View Event"
-msgstr "Zobrazit událost"
-
 msgid "Selected program"
 msgstr "Vybraný program"
 
@@ -947,6 +908,9 @@ msgstr "načítání"
 
 msgid "An error occurred while loading the form"
 msgstr "Při načítání formuláře došlo k chybě"
+
+msgid "Back to all stages and events"
+msgstr "Zpět ke všem fázím a událostem"
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
@@ -1197,6 +1161,9 @@ msgstr "Nastavit souřadnice"
 msgid "Coordinates"
 msgstr "Souřadnice"
 
+msgid "Please provide valid coordinates"
+msgstr "Uveďte platné souřadnice"
+
 msgid "Delete polygon"
 msgstr "Smazat polygon"
 
@@ -1287,6 +1254,9 @@ msgstr "Varování"
 msgid "stage not found in rules execution"
 msgstr "fáze nebyla nalezena v provádění pravidel"
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Smazat událost"
 
@@ -1304,9 +1274,6 @@ msgstr "Událost dokončena"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr "Událost nelze upravovat po jejím dokončení."
-
-msgid "Back to all stages and events"
-msgstr "Zpět ke všem fázím a událostem"
 
 msgid "Notes about this event"
 msgstr "Poznámky k této události"
@@ -1464,6 +1431,12 @@ msgstr "Plánované datum"
 msgid "Report date"
 msgstr "Datum zprávy"
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Uveďte platnou organizační jednotku"
+
 msgid "Please select a valid event"
 msgstr "Vyberte prosím platnou událost"
 
@@ -1523,11 +1496,19 @@ msgstr "{{ scheduledEvents }} naplánováno"
 msgid "Stages and Events"
 msgstr "Fáze a události"
 
+msgid "View linked event"
+msgstr "Zobrazit propojenou událost"
+
 msgid "An error occurred while loading the widget."
 msgstr "Při načítání widgetu došlo k chybě."
 
-msgid "View linked event"
-msgstr "Zobrazit propojenou událost"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
+msgstr ""
 
 msgid "Scheduled"
 msgstr "Naplánováno"
@@ -1561,6 +1542,12 @@ msgstr "Změna"
 
 msgid "Value"
 msgstr "Hodnota"
+
+msgid "File"
+msgstr "Soubor"
+
+msgid "Image"
+msgstr "Obrázek"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "Nový vztah {{trackedEntityTypeName}} "
@@ -1624,6 +1611,46 @@ msgstr "Stáhnout data ..."
 msgid "an error occurred loading working lists"
 msgstr "při načítání pracovních seznamů došlo k chybě"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr "Nastala neznámá chyba."
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "Datum registrace"
 
@@ -1639,14 +1666,137 @@ msgstr "Následovat"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Vyberte fázi programu, kterou chcete filtrovat podle {{label}}"
 
-msgid "Active enrollments"
-msgstr "Aktivní zápisy"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+msgstr ""
 
-msgid "Completed enrollments"
-msgstr "Dokončené zápisy"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+msgstr ""
 
-msgid "Cancelled enrollments"
-msgstr "Zrušené zápisy"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
+msgstr ""
 
 msgid "Working list could not be updated"
 msgstr "Pracovní seznam nelze aktualizovat"
@@ -1656,6 +1806,16 @@ msgstr "došlo k chybě při načítání pracovních seznamů"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "došlo k chybě při načítání seznamů instancí trasovaných entit"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "Vybrán: {{count}}"
+msgstr[1] "Vybráno: {{count}}"
+msgstr[2] "Vybráno: {{count}}"
+msgstr[3] "Vybráno: {{count}}"
+
+msgid "Deselect all"
+msgstr "Odznačit vše"
 
 msgid "Update view"
 msgstr "Aktualizovat zobrazení"
@@ -1764,6 +1924,60 @@ msgstr "Chyba při úpravě události, provedené změny nebyly uloženy"
 
 msgid "Error updating the Assignee"
 msgstr "Chyba při aktualizaci Příjemce"
+
+msgid "Please provide a valid number"
+msgstr "Uveďte prosím platné číslo"
+
+msgid "Please provide a valid integer"
+msgstr "Uveďte platné celé číslo"
+
+msgid "Please provide a positive integer"
+msgstr "Zadejte kladné celé číslo"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Uveďte nulové nebo kladné celé číslo"
+
+msgid "Please provide a negative integer"
+msgstr "Uveďte záporné celé číslo"
+
+msgid "Please provide a valid date and time"
+msgstr "Uveďte prosím platné datum a čas"
+
+msgid "Please provide a valid time"
+msgstr "Uveďte platný čas"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Zadejte prosím celé číslo v rozmezí 0 až 100"
+
+msgid "Please provide a valid url"
+msgstr "Uveďte platnou adresu URL"
+
+msgid "Please provide a valid email address"
+msgstr "Uveďte platnou e-mailovou adresu"
+
+msgid "Please provide a valid age"
+msgstr "Uveďte platný věk"
+
+msgid "Please provide a valid phone number"
+msgstr "Uveďte prosím platné telefonní číslo"
+
+msgid "This value already exists"
+msgstr "„Od“ nemůže být větší než „do“..."
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "„Od“ nemůže být větší než „Do“"
+
+msgid "Checking..."
+msgstr "Probíhá kontrola ..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
