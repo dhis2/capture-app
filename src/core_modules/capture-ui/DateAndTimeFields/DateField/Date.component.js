@@ -18,10 +18,9 @@ type Props = {
     onBlur: (value: Object, options: ValidationOptions) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-    calendar?: string,
     placeholder?: string,
     label?: string,
-    calendarMaxMoment?: any,
+    calendarMax?: any,
     innerMessage?: any
 };
 
@@ -35,9 +34,6 @@ type Validation = {|
 type State = {
     calendarError: ?Validation,
 };
-
-const formatDate = (date: any, dateFormat: string): ?string =>
-    (dateFormat === 'dd-MM-yyyy' ? date?.format('DD-MM-YYYY') : date?.format('YYYY-MM-DD'));
 
 export class DateField extends React.Component<Props, State> {
     handleDateSelected: (value: {calendarDateString: string}) => void;
@@ -65,15 +61,13 @@ export class DateField extends React.Component<Props, State> {
             maxWidth,
             calendarWidth,
             inputWidth,
-            calendar,
-            calendarMaxMoment,
+            calendarMax,
             value,
             innerMessage,
         } = this.props;
-
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
-        const calendarType = calendar || 'gregory';
+        const calendarType = systemSettingsStore.get().calendar || 'gregory';
         const format = systemSettingsStore.get().dateFormat;
         const errorProps = innerMessage && innerMessage.messageType === 'error'
             ? { error: !!innerMessage.message?.dateInnerErrorMessage,
@@ -99,7 +93,7 @@ export class DateField extends React.Component<Props, State> {
                     onFocus={this.props.onFocus}
                     disabled={this.props.disabled}
                     {...errorProps}
-                    maxDate={calendarMaxMoment && formatDate(calendarMaxMoment, format)}
+                    maxDate={calendarMax}
                 />
             </div>
         );
