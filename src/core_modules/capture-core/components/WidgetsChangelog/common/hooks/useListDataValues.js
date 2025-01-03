@@ -44,7 +44,8 @@ const fetchFormattedValues = async ({
         elementKey: string,
         change: Change,
     ) => {
-        const fieldId = change.dataElement || change.attribute;
+        const { dataElement, attribute, field } = change;
+        const fieldId = dataElement ?? attribute ?? field;
         if (!fieldId) {
             log.error('Could not find fieldId in change:', change);
             return { metadataElement: null, fieldId: null };
@@ -115,6 +116,7 @@ const fetchFormattedValues = async ({
                 reactKey: fieldId ? `${createdAt}-${fieldId}` : attributeOptionsKey,
                 date: pipe(convertServerToClient, convertClientToList)(fromServerDate(createdAt), dataElementTypes.DATETIME),
                 user: `${firstName} ${surname} (${username})`,
+                dataItemId: fieldId,
                 changeType: type,
                 dataItemLabel: metadataElement.name,
                 previousValue,
