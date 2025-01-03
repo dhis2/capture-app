@@ -96,7 +96,7 @@ const WidgetEventEditPlain = ({
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
-    
+
     const { orgUnit: coreOrgUnit, error } = useCoreOrgUnit(orgUnitId);
     const orgUnit = coreOrgUnit || loadedValues?.orgUnit;
 
