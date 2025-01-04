@@ -1430,38 +1430,38 @@ msgid "Stages and Events"
 msgstr "阶段与活动"
 
 msgid "An error occurred while unlinking and deleting the event."
-msgstr ""
+msgstr "在取消链接和删除事件时发生错误。"
 
 msgid "Unlink and delete linked event"
-msgstr ""
+msgstr "解除链接和删除链接的事件"
 
 msgid ""
 "Are you sure you want to remove the link and delete the linked event? This "
 "action permanently removes the link, linked event, and all related data."
-msgstr ""
+msgstr "您确定要删除链接和链接事件吗？此操作会永久删除链接、链接事件和所有相关数据。"
 
 msgid "Yes, unlink and delete linked event"
-msgstr ""
+msgstr "是，取消链接并删除链接事件"
 
 msgid "Unlink event"
-msgstr ""
+msgstr "解除链接事件"
 
 msgid ""
 "Are you sure you want to remove the link between these events? This action "
 "removes the link itself, but the linked event will remain."
-msgstr ""
+msgstr "您确定要删除这些事件之间的链接吗？此操作会移除链接本身，但链接的事件会保留。"
 
 msgid "Yes, unlink event"
-msgstr ""
+msgstr "是，取消事件链接"
 
 msgid "View linked event"
 msgstr "查看链接事件"
 
 msgid "You do not have access to remove the link between these events"
-msgstr ""
+msgstr "您没有权限删除这些事件之间的联系"
 
 msgid "You do not have access to remove the link and delete the linked event"
-msgstr ""
+msgstr "您没有权限删除链接和已链接事件"
 
 msgid "An error occurred while loading the widget."
 msgstr "加载小部件时发生错误。"
