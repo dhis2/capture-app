@@ -142,7 +142,7 @@ export class OptionSet {
     }
 
     getOption(value: Value): ?Option {
-        const option = this.options.find(o => o.value === value);
+        const option = this.options.find(o => o.value == value);
         if (!option) {
             log.warn(
                 errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, value }),
