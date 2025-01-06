@@ -7,6 +7,7 @@ import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { IconButton } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
+import { parseDate } from 'capture-core/utils/converters/date';
 import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
 import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
@@ -55,6 +56,16 @@ type Props = {
 };
 
 function getCalculatedValues(dateValue: ?string): AgeValues {
+    const parseData = dateValue && parseDate(dateValue);
+    if (!parseData || !parseData.isValid) {
+        return {
+            date: dateValue,
+            years: '',
+            months: '',
+            days: '',
+        };
+    }
+
     const calendar = systemSettingsStore.get().calendar;
 
     const now = Temporal.Now.plainDateISO().withCalendar(calendar);
