@@ -79,7 +79,7 @@ const sortTime = (clientValueA: Object, clientValueB: Object, direction: string,
     return 0;
 };
 
-const sortOrgUnit = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: string, options: Object) => {
     const orgUnitNameA = getCachedOrgUnitName(clientValueA);
     const orgUnitNameB = getCachedOrgUnitName(clientValueB);
 
