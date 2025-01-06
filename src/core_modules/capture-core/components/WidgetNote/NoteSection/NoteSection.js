@@ -9,6 +9,8 @@ import { colors, spacersNum, Button, Tooltip } from '@dhis2/ui';
 import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
+import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
+import { dataElementTypes } from '../../../metaData';
 
 const FocusTextField = withFocusSaver()(TextField);
 
@@ -97,26 +99,29 @@ const NoteSectionPlain = ({
         setEditing(false);
     }, [handleAddNote, newNoteValue]);
 
-    const NoteItem = ({ value, storedAt, createdBy }) => (
-        <div data-test="note-item" className={cx(classes.item)}>
-            {/* TODO: add avatar */}
-            <div className={classes.rightColumn}>
-                <div className={classes.header}>
-                    {createdBy && <span className={cx(classes.headerText, classes.name)}>
-                        {createdBy.firstName} {' '} {createdBy.surname}
-                    </span>}
-                    <span className={cx(classes.headerText, classes.lastUpdated)}>
-                        <Tooltip content={fromServerDate(storedAt).toLocaleString()}>
-                            {moment(fromServerDate(storedAt)).fromNow()}
-                        </Tooltip>
-                    </span>
-                </div>
-                <div className={classes.body}>
-                    <Parser>{value}</Parser>
+    const NoteItem = ({ value, storedAt, createdBy }) => {
+        const localDateTime: string = (convertValueClientToView(storedAt, dataElementTypes.DATETIME): any);
+        return (
+            <div data-test="note-item" className={cx(classes.item)}>
+                {/* TODO: add avatar */}
+                <div className={classes.rightColumn}>
+                    <div className={classes.header}>
+                        {createdBy && <span className={cx(classes.headerText, classes.name)}>
+                            {createdBy.firstName} {' '} {createdBy.surname}
+                        </span>}
+                        <span className={cx(classes.headerText, classes.lastUpdated)}>
+                            <Tooltip content={fromServerDate(localDateTime).toLocaleString()}>
+                                {moment(fromServerDate(storedAt)).fromNow()}
+                            </Tooltip>
+                        </span>
+                    </div>
+                    <div className={classes.body}>
+                        <Parser>{value}</Parser>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    };
 
 
     return (
