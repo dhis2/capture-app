@@ -174,15 +174,21 @@ const LinkExistingResponse = ({
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, loading, classes }) => (
-    onLink ? (
+const LinkButton = withStyles(styles)(({ onLink, label, saveAttempted, errorMessages, classes }) => {
+    if (!onLink) {
+        return null;
+    }
+
+    const disabled = saveAttempted && Object.values(errorMessages).filter(Boolean).length !== 0;
+
+    return (
         <div className={classes.link}>
-            <Button secondary small onClick={onLink} loading={loading}>
+            <Button secondary small onClick={onLink} disabled={disabled}>
                 {label}
             </Button>
         </div>
-    ) : null
-));
+    );
+});
 
 const RelatedStagesActionsPlain = ({
     classes,
@@ -275,7 +281,12 @@ const RelatedStagesActionsPlain = ({
                         saveAttempted={saveAttempted}
                         errorMessages={errorMessages}
                     />
-                    <LinkButton onLink={onLink} label={i18n.t('Schedule')} loading={saveAttempted} />
+                    <LinkButton
+                        onLink={onLink}
+                        label={i18n.t('Schedule')}
+                        saveAttempted={saveAttempted}
+                        errorMessages={errorMessages}
+                    />
                 </>
             )}
 
@@ -288,7 +299,12 @@ const RelatedStagesActionsPlain = ({
                         saveAttempted={saveAttempted}
                         errorMessages={errorMessages}
                     />
-                    <LinkButton onLink={onLink} label={i18n.t('Enter details')} loading={saveAttempted} />
+                    <LinkButton
+                        onLink={onLink}
+                        label={i18n.t('Enter details')}
+                        saveAttempted={saveAttempted}
+                        errorMessages={errorMessages}
+                    />
                 </>
             )}
 
@@ -302,7 +318,12 @@ const RelatedStagesActionsPlain = ({
                         errorMessages={errorMessages}
                         saveAttempted={saveAttempted}
                     />
-                    <LinkButton onLink={onLink} label={i18n.t('Link')} loading={saveAttempted} />
+                    <LinkButton
+                        onLink={onLink}
+                        label={i18n.t('Link')}
+                        saveAttempted={saveAttempted}
+                        errorMessages={errorMessages}
+                    />
                 </>
             )}
 
