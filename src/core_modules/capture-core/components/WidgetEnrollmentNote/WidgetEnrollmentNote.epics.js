@@ -8,7 +8,7 @@ import moment from 'moment';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
     from './WidgetEnrollmentNote.actions';
 
-const createServerData = (eventId, note, useNewEndpoint) => {
+const createServerData = (note, useNewEndpoint) => {
     if (useNewEndpoint) {
         return { value: note };
     }
