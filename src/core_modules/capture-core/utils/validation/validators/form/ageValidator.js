@@ -62,13 +62,21 @@ export function isValidAge(value: Object, internalComponentError?: ?{error: ?str
         return false;
     }
 
-    const numberResult = validateNumbers(
+    if (internalComponentError && internalComponentError?.errorCode === 'INVALID_DATE_MORE_THAN_MAX') {
+        return { valid: true, errorMessage: null };
+    }
+
+    const dateValidation = value.date
+        ? validateDate(value.date, internalComponentError)
+        : { valid: true, errorMessage: null };
+
+    if (!dateValidation.valid) {
+        return dateValidation;
+    }
+
+    return validateNumbers(
         value.years,
         value.months,
         value.days,
     );
-
-    if (!numberResult.valid) return numberResult;
-
-    return validateDate(value.date, internalComponentError);
 }
