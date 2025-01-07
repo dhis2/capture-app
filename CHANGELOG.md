@@ -1,3 +1,10 @@
+# [101.21.0](https://github.com/dhis2/capture-app/compare/v101.20.3...v101.21.0) (2025-01-07)
+
+
+### Features
+
+* [DHIS2-18328] Handle log entries for occurredAt, scheduledAt and geometry ([#3887](https://github.com/dhis2/capture-app/issues/3887)) ([f670971](https://github.com/dhis2/capture-app/commit/f670971808f49b75295c1d3c7ef25a747b4888df))
+
 ## [101.20.3](https://github.com/dhis2/capture-app/compare/v101.20.2...v101.20.3) (2024-12-29)
 
 
