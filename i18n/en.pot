@@ -101,6 +101,24 @@ msgstr "Date of enrollment"
 msgid "Last updated"
 msgstr "Last updated"
 
+msgid "Lat"
+msgstr "Lat"
+
+msgid "Long"
+msgstr "Long"
+
+msgid "lat"
+msgstr "lat"
+
+msgid "long"
+msgstr "long"
+
+msgid "Show less"
+msgstr "Show less"
+
+msgid "Show more"
+msgstr "Show more"
+
 msgid "error encountered during field validation"
 msgstr "error encountered during field validation"
 
