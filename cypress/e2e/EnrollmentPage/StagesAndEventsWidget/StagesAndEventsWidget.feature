@@ -71,7 +71,7 @@ Feature: User interacts with Stages and Events Widget
 
     @with-restore-deleted-event
     Scenario: User can delete an event
-        Given you open the enrollment page by typing #/enrollment?enrollmentId=ikYMpSKXik1&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=Trc1H9T5C6f
+        Given you open the enrollment page by typing #/enrollment?enrollmentId=ITyaPVATEwc&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=wsk89u7zquT
         And there is an Active event in the TB visit stage
         When you click the Delete event overflow button on the Active event
         And you confirm you want to delete the event
