@@ -68,7 +68,7 @@ Feature: The user interacts with the widgets on the enrollment add event page
   Then you can assign a user when scheduling the event
 
   Scenario: User can complete the enrollment and the active events
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventNew?enrollmentId=qyx7tscVpVB&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=osF4RF4EiqP
+    Given you land on the enrollment edit event page by having typed #/enrollmentEventNew?enrollmentId=YqNTNLKmX4z&orgUnitId=RzgSFJ9E46G&programId=IpHINAT79UW&teiId=mPLqCVS27AD
     And the enrollment widget should be opened
     And the user sees the enrollment status and the Baby Postnatal event status is active
     And the user opens the enrollment actions menu
