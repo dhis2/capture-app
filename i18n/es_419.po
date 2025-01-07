@@ -3,13 +3,14 @@
 # Philip Larsen Donnelly, 2024
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2024
+# Pablo Del Médico, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
+"POT-Creation-Date: 2024-12-05T11:39:04.447Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Jaime Bosque <jaime.bosque@dhis2.org>, 2024\n"
+"Last-Translator: Pablo Del Médico, 2024\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,10 +48,10 @@ msgstr ""
 "versiones."
 
 msgid "Enrollment dashboard"
-msgstr ""
+msgstr "Panel de inscripción"
 
 msgid "View event"
-msgstr ""
+msgstr "Ver evento"
 
 msgid "Edit event"
 msgstr "Editar evento"
@@ -68,7 +69,7 @@ msgid "Cancelled enrollments"
 msgstr ""
 
 msgid "{{trackedEntityName}} list"
-msgstr ""
+msgstr "{{trackedEntityName}} lista"
 
 msgid "Search"
 msgstr "Buscar"
@@ -77,10 +78,10 @@ msgid "Working List"
 msgstr ""
 
 msgid "Event list"
-msgstr ""
+msgstr "Lista de eventos"
 
 msgid "More"
-msgstr ""
+msgstr "Más"
 
 msgid "View {{programName}} dashboard"
 msgstr "Ver panel de {{programName}}"
@@ -1206,10 +1207,10 @@ msgid "Follow-up"
 msgstr ""
 
 msgid "Started at{{escape}}"
-msgstr ""
+msgstr "Comenzó en {{escape}}"
 
 msgid "Owned by{{escape}}"
-msgstr ""
+msgstr "Propiedad de {{escape}}"
 
 msgid "Cancelled"
 msgstr "Cancelar"
@@ -1475,7 +1476,38 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "An error occurred while unlinking and deleting the event."
+msgstr ""
+
+msgid "Unlink and delete linked event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+msgstr ""
+
+msgid "Yes, unlink and delete linked event"
+msgstr ""
+
+msgid "Unlink event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+msgstr ""
+
+msgid "Yes, unlink event"
+msgstr ""
+
 msgid "View linked event"
+msgstr ""
+
+msgid "You do not have access to remove the link between these events"
+msgstr ""
+
+msgid "You do not have access to remove the link and delete the linked event"
 msgstr ""
 
 msgid "An error occurred while loading the widget."
