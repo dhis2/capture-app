@@ -123,7 +123,6 @@ export const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }:
     if (!type) {
         log.error(errorCreator('Type is not defined')({ dataA, dataB }));
     }
-    console.log('direction', direction);
     const clientValueA = dataA[columnName];
     const clientValueB = dataB[columnName];
     const options = {
