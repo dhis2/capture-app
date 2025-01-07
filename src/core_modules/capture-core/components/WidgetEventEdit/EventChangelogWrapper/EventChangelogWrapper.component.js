@@ -1,5 +1,6 @@
 // @flow
 import React, { useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import type { DataElement } from '../../../metaData';
 import { dataElementTypes } from '../../../metaData';
 import type { Props } from './EventChangelogWrapper.types';
@@ -42,9 +43,19 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, eventData, ...p
             return acc;
         }, {});
 
+        const additionalFields = formFoundation.featureType !== 'None' ? {
+            geometry: {
+                id: 'geometry',
+                name: formFoundation.featureType === 'Polygon' ? i18n.t('Area') : i18n.t('Coordinate'),
+                type: formFoundation.featureType === 'Polygon' ?
+                    dataElementTypes.POLYGON : dataElementTypes.COORDINATE,
+            },
+        } : null;
+
         return {
             ...fieldElementsById,
             ...fieldElementsContext,
+            ...additionalFields,
         };
     }, [formFoundation]);
 
