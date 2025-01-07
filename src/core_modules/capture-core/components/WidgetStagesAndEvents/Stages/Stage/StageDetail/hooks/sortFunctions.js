@@ -41,7 +41,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
         if (!clientValueB) return -1;
 
         if (clientValueA !== clientValueB) {
-            return clientValueA.localeCompare(clientValueB);
+            return clientValueB.localeCompare(clientValueA);
         }
 
         return moment(eventDateB).unix() - moment(eventDateA).unix();
@@ -50,7 +50,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
         if (!clientValueB) return 1;
 
         if (clientValueA !== clientValueB) {
-            return clientValueB.localeCompare(clientValueA);
+            return clientValueA.localeCompare(clientValueB);
         }
 
         return moment(eventDateB).unix() - moment(eventDateA).unix();
@@ -123,6 +123,7 @@ export const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }:
     if (!type) {
         log.error(errorCreator('Type is not defined')({ dataA, dataB }));
     }
+    console.log('direction', direction);
     const clientValueA = dataA[columnName];
     const clientValueB = dataB[columnName];
     const options = {
