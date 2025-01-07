@@ -1,5 +1,17 @@
-import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import { defineStep as And, Given, Then, When, Before } from '@badeball/cypress-cucumber-preprocessor';
 import { getCurrentYear } from '../../../support/date';
+
+Before({ tags: '@with-restore-event-schedule-date' }, () => {
+    cy.buildApiUrl('tracker', 'events/RIrfCcEP8Uu')
+        .then(url => cy.request(url))
+        .then((apiResponse) => {
+            const event = apiResponse.body;
+            const eventToUpdate = { ...event, scheduledAt: `${getCurrentYear() - 15}-01-07` };
+            return cy
+                .buildApiUrl('tracker?async=false&importStrategy=UPDATE')
+                .then(eventUrl => cy.request('POST', eventUrl, { events: [eventToUpdate] }));
+        });
+});
 
 const changeEnrollmentAndEventsStatus = () => (
     cy.buildApiUrl(

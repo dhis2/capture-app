@@ -1,3 +1,45 @@
+# [101.21.0](https://github.com/dhis2/capture-app/compare/v101.20.3...v101.21.0) (2025-01-07)
+
+
+### Features
+
+* [DHIS2-18328] Handle log entries for occurredAt, scheduledAt and geometry ([#3887](https://github.com/dhis2/capture-app/issues/3887)) ([f670971](https://github.com/dhis2/capture-app/commit/f670971808f49b75295c1d3c7ef25a747b4888df))
+
+## [101.20.3](https://github.com/dhis2/capture-app/compare/v101.20.2...v101.20.3) (2024-12-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f58bcd3](https://github.com/dhis2/capture-app/commit/f58bcd3c62d45101bbb4d5b16f504f1699cbb3d4))
+
+## [101.20.2](https://github.com/dhis2/capture-app/compare/v101.20.1...v101.20.2) (2024-12-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a463047](https://github.com/dhis2/capture-app/commit/a4630471d77804436c8803daed4bd05e5c61f2c7))
+
+## [101.20.1](https://github.com/dhis2/capture-app/compare/v101.20.0...v101.20.1) (2024-12-19)
+
+
+### Bug Fixes
+
+* [DHIS2-118654] Use importStrategy=DELETE to support older backend ([#3914](https://github.com/dhis2/capture-app/issues/3914)) ([eb5325e](https://github.com/dhis2/capture-app/commit/eb5325e71087c0e00011878bd58f2fef3ad55eea))
+
+# [101.20.0](https://github.com/dhis2/capture-app/compare/v101.19.4...v101.20.0) (2024-12-17)
+
+
+### Features
+
+* [DHIS2-18017] Ability to unlink event from edit/view event page ([#3846](https://github.com/dhis2/capture-app/issues/3846)) ([ad352f5](https://github.com/dhis2/capture-app/commit/ad352f5845a8780668ecf5659100f650c697d426))
+
+## [101.19.4](https://github.com/dhis2/capture-app/compare/v101.19.3...v101.19.4) (2024-12-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ef97375](https://github.com/dhis2/capture-app/commit/ef973753e9014541c22215ea0690fecb819c82e3))
+
 ## [101.19.3](https://github.com/dhis2/capture-app/compare/v101.19.2...v101.19.3) (2024-12-13)
 
 
