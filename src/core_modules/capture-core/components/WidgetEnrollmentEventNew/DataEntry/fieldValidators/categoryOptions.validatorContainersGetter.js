@@ -9,7 +9,7 @@ const validateCategories = (value?: ?string, props?: Object, fieldId?: string) =
 
     return {
         valid: hasValue(value),
-        errorMessage: i18n.t('Please selectoo {{categoryName}}', { categoryName }),
+        errorMessage: i18n.t('Please select {{categoryName}}', { categoryName }),
     };
 };
 

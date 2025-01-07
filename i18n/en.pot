@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-19T09:18:35.465Z\n"
-"PO-Revision-Date: 2024-12-19T09:18:35.466Z\n"
+"POT-Creation-Date: 2025-01-07T00:10:53.592Z\n"
+"PO-Revision-Date: 2025-01-07T00:10:53.593Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1209,9 +1209,6 @@ msgstr "Add coordinates"
 
 msgid "Add area"
 msgstr "Add area"
-
-msgid "Please selectoo {{categoryName}}"
-msgstr "Please selectoo {{categoryName}}"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
