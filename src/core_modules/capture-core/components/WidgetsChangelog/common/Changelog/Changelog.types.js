@@ -68,6 +68,13 @@ export type ChangelogProps = {
     records: ?Array<ChangelogRecord>,
     setPage: (number) => void,
     setPageSize: (number) => void,
+    columnToSortBy: string,
+    setColumnToSortBy: (string) => void,
     sortDirection: SortDirection,
     setSortDirection: SetSortDirection,
+    columnToFilterBy: string | null,
+    setColumnToFilterBy: (string) => void,
+    filterValue: string,
+    setFilterValue: (string) => void,
+    dataItemDefinitions: ItemDefinitions,
 }

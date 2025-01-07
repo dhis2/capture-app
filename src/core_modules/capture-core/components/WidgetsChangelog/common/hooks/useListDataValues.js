@@ -116,6 +116,7 @@ const fetchFormattedValues = async ({
                 reactKey: fieldId ? `${createdAt}-${fieldId}` : attributeOptionsKey,
                 date: pipe(convertServerToClient, convertClientToList)(fromServerDate(createdAt), dataElementTypes.DATETIME),
                 user: `${firstName} ${surname} (${username})`,
+                username,
                 dataItemId: fieldId,
                 changeType: type,
                 dataItemLabel: metadataElement.name,
@@ -149,7 +150,7 @@ export const useListDataValues = ({
         [dataEngine],
     );
 
-    const queryKey = [ReactQueryAppNamespace, 'changelog', entityType, entityId, 'formattedData', { sortDirection, page, pageSize, programId }];
+    const queryKey = [ReactQueryAppNamespace, 'changelog', entityType, entityId, 'formattedData', { sortDirection, page, pageSize, programId, rawRecords }];
 
     const { data: processedRecords, isError, isLoading } = useQuery(
         queryKey,

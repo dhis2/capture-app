@@ -34,8 +34,14 @@ export const Changelog = ({
         pageSize,
         setPage,
         setPageSize,
+        columnToSortBy,
+        setColumnToSortBy,
         sortDirection,
         setSortDirection,
+        filterValue,
+        setFilterValue,
+        columnToFilterBy,
+        setColumnToFilterBy,
     } = useChangelogData({
         entityId,
         entityType,
@@ -73,8 +79,15 @@ export const Changelog = ({
             pager={pager}
             setPage={setPage}
             setPageSize={setPageSize}
+            columnToSortBy={columnToSortBy}
+            setColumnToSortBy={setColumnToSortBy}
             sortDirection={sortDirection}
             setSortDirection={setSortDirection}
+            filterValue={filterValue}
+            setFilterValue={setFilterValue}
+            columnToFilterBy={columnToFilterBy}
+            setColumnToFilterBy={setColumnToFilterBy}
+            dataItemDefinitions={dataItemDefinitions}
         />
     );
 };

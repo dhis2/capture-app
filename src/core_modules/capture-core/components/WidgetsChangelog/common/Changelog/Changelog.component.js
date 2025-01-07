@@ -13,16 +13,24 @@ import {
 import React from 'react';
 import { ChangelogTableHeader, ChangelogTableRow } from '../ChangelogTable';
 import type { ChangelogProps } from './Changelog.types';
+import { ChangelogFilterBar } from '../ChangelogFilterBar';
 
 export const ChangelogComponent = ({
     isOpen,
     close,
     records,
     pager,
+    columnToSortBy,
+    setColumnToSortBy,
+    columnToFilterBy,
+    setColumnToFilterBy,
+    filterValue,
+    setFilterValue,
     setPage,
     setPageSize,
     sortDirection,
     setSortDirection,
+    dataItemDefinitions,
 }: ChangelogProps) => (
     <Modal
         large
@@ -33,16 +41,27 @@ export const ChangelogComponent = ({
         <ModalTitle>{i18n.t('Changelog')}</ModalTitle>
 
         <ModalContent>
+            <ChangelogFilterBar
+                key={'changelog-filter-bar'}
+                dataTest={'changelog-filter-bar'}
+                records={records}
+                columnToFilterBy={columnToFilterBy}
+                setColumnToFilterBy={setColumnToFilterBy}
+                filterValue={filterValue}
+                setFilterValue={setFilterValue}
+                dataItemDefinitions={dataItemDefinitions}
+            />
             <DataTable
                 fixed
                 dataTest={'changelog-data-table'}
                 layout="fixed"
             >
                 <ChangelogTableHeader
+                    columnToSortBy={columnToSortBy}
+                    setColumnToSortBy={setColumnToSortBy}
                     sortDirection={sortDirection}
                     setSortDirection={setSortDirection}
                 />
-
                 {records && records.length > 0 ? (
                     <DataTableBody
                         dataTest={'changelog-data-table-body'}
