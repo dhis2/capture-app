@@ -1,3 +1,10 @@
+## [101.21.1](https://github.com/dhis2/capture-app/compare/v101.21.0...v101.21.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* [DHIS2-18632] Sorting stage detail table on orgunit breaks the app ([#3917](https://github.com/dhis2/capture-app/issues/3917)) ([15414cc](https://github.com/dhis2/capture-app/commit/15414cc73f7ce74d4d057acad13bf4855d358426))
+
 # [101.21.0](https://github.com/dhis2/capture-app/compare/v101.20.3...v101.21.0) (2025-01-07)
 
 
