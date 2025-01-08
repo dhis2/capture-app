@@ -1345,3 +1345,42 @@ The attribute option combo selector will be displayed when you are adding or cha
 Example from new Tracker event:
 
 ![](resources/images/attribute-option-combo-tracker.png)
+
+# Related stages and linked events for tracker programs
+You can connect any two program stages via a relationship. To enable this feature, you can set up two program stages in the same program and link them with a stage-to-stage relationship.
+
+## Adding a new tracker event
+When opening the new event form, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
+1. Schedule a new visit in another organizational unit.
+2. Enter data directly
+3. Link to an already existing event.
+
+When clicking save, the capture app will create the request event, schedule the response event and make sure that there is a link between them in the correct context. 
+![](resources/images/releated-stages-new-event.png)
+
+## Editing a tracker event
+### When there isn't a linked event 
+If the event is eligible for related stages but isn’t linked yet, a widget called *Linked event* will appear at the bottom of the page. From this widget, users can:
+1. Schedule a new visit in another organizational unit.
+2. Enter data directly
+3. Link to an already existing event.
+
+The label of the action button will change based on the user's selections. When clicking the action button, the capture app will create the request event, schedule the response event and make sure that there is a link between them in the correct context. 
+![](resources/images/releated-stages-edit-event.png)
+
+### When there is a linked event 
+If the event is already linked, a Linked Event widget will appear at the top of the page. This widget allows users to view details of the linked event. 
+![](resources/images/releated-stages-linked-event-view.png)
+
+Additionally, by clicking the Menu in the top-right corner, users can:
+1. Unlink the linked event.
+2. Unlink and delete the linked event.
+![](resources/images/releated-stages-linked-event-actions-menu.png)
+
+## Enrolling a tracked entity
+Enable the "First stage appears on registration page" flag in the Maintenance for the tracker program. When opening the form to enroll a new trackedEntity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
+1. Schedule a new visit in another organizational unit.
+2. Enter data directly
+
+When clicking save, the capture app will enroll the requested trackedEntity, schedule the releated event and make sure that there is a link between them in the correct context. 
+![](resources/images/releated-stages-enroll-trackedEntity.png)
