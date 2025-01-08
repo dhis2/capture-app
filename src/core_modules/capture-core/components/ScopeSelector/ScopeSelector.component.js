@@ -31,10 +31,6 @@ class ScopeSelectorClass extends Component<Props, State> {
 
     dontShowWarning = () => !this.props.isUserInteractionInProgress;
 
-    handleOrgUnitReset = () => {
-        this.props.onResetOrgUnitId();
-    }
-
     handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
         if (this.dontShowWarning()) {
             this.props.onResetProgramId(baseAction);
@@ -85,7 +81,12 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     render() {
-        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+        const {
+            onSetOrgUnit,
+            onSetProgramId,
+            onSetCategoryOption,
+            onResetAllCategoryOptions,
+        } = this.props;
 
         return (
             <div
@@ -97,7 +98,7 @@ class ScopeSelectorClass extends Component<Props, State> {
                     onSetProgramId={onSetProgramId}
                     onSetCategoryOption={onSetCategoryOption}
                     onResetAllCategoryOptions={onResetAllCategoryOptions}
-                    onResetOrgUnitId={this.handleOrgUnitReset}
+                    onResetOrgUnitId={this.props.onResetOrgUnitId}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
                     onStartAgain={this.handleStartAgainWarning}
