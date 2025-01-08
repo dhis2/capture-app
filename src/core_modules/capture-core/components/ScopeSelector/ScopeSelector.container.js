@@ -1,11 +1,9 @@
 // @flow
 import React, { type ComponentType, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
-import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
-
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName, displayName, ouNameError) => {
     // because we want the orgUnit to be fetched and stored
@@ -32,7 +30,6 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     formIsOpen = false,
     children,
 }) => {
-    const dispatch = useDispatch();
     const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: undefined, id: selectedOrgUnitId });
     const { displayName, error: ouNameError } = useOrgUnitNameWithAncestors(selectedOrgUnit.id);
 
@@ -64,10 +61,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     return (
         <ScopeSelectorComponent
             onResetProgramId={onResetProgramId}
-            onResetOrgUnitId={() => {
-                selectedOrgUnit && dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id));
-                return onResetOrgUnitId();
-            }}
+            onResetOrgUnitId={onResetOrgUnitId}
             onResetAllCategoryOptions={onResetAllCategoryOptions}
             onResetCategoryOption={onResetCategoryOption}
             onSetCategoryOption={onSetCategoryOption}

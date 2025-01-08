@@ -56,7 +56,7 @@ export const TopBar = ({
             selectedOrgUnitId={orgUnitId}
             selectedCategories={selectedCategories}
             onResetProgramId={() => resetViewEventId('/', { orgUnitId })}
-            onResetOrgUnitId={() => resetViewEventId('/', { programId })}
+            onResetOrgUnitId={() => resetViewEventId('/')}
             onSetCategoryOption={dispatchOnSetCategoryOption}
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}
