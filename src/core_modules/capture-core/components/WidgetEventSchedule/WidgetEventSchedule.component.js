@@ -70,9 +70,6 @@ const WidgetEventSchedulePlain = ({
         <Widget
             noncollapsible
             borderless
-            header={
-                <></>
-            }
         >
             <div className={classes.wrapper}>
                 <DataSection

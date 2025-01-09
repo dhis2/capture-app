@@ -17,7 +17,7 @@ import { InfoBox } from '../InfoBox';
 import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 
 
-const ScheduleDataField = withDefaultFieldContainer()(
+const ScheduleDateField = withDefaultFieldContainer()(
     withLabel({
         onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
     })(
@@ -57,7 +57,7 @@ const ScheduleDatePlain = ({
 }: Props) => (
     <div className={classes.fieldWrapper}>
         {!hideDueDate ?
-            <ScheduleDataField
+            <ScheduleDateField
                 label={i18n.t('Schedule date / Due date')}
                 required
                 value={scheduleDate}
