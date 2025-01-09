@@ -1,3 +1,10 @@
+## [101.21.2](https://github.com/dhis2/capture-app/compare/v101.21.1...v101.21.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* [DHIS2-18569] Relationship widget limited to 50 entries ([#3927](https://github.com/dhis2/capture-app/issues/3927)) ([a1e493d](https://github.com/dhis2/capture-app/commit/a1e493d48179e7749d61f52504fdeb3c11dfa53e))
+
 ## [101.21.1](https://github.com/dhis2/capture-app/compare/v101.21.0...v101.21.1) (2025-01-08)
 
 
