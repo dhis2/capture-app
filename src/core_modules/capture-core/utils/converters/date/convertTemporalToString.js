@@ -1,6 +1,6 @@
 // @flow
-import { padWithZeros } from './padWithZeros';
 import { systemSettingsStore } from '../../../../capture-core/metaDataMemoryStores';
+import { temporalToString } from '../../../../capture-core-utils/date';
 
 /**
  * Converts a Temporal.PlainDate to a formatted date string (YYYY-MM-DD || DD-MM-YYYY)
@@ -19,16 +19,5 @@ export function convertTemporalToString(temporalDate: PlainDate | null): string 
         return '';
     }
     const dateFormat = systemSettingsStore.get().dateFormat;
-
-    try {
-        const year = temporalDate.year;
-        const month = temporalDate.month;
-        const day = temporalDate.day;
-
-        return dateFormat === 'YYYY-MM-DD' ?
-            `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}` :
-            `${padWithZeros(day, 2)}-${padWithZeros(month, 2)}-${padWithZeros(year, 4)}`;
-    } catch (error) {
-        return '';
-    }
+    return temporalToString(temporalDate, dateFormat);
 }

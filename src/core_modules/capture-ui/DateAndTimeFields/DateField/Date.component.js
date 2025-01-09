@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { CalendarInput } from '@dhis2/ui';
-import { systemSettingsStore } from '../../../capture-core/metaDataMemoryStores';
 
 type ValidationOptions = {
     error?: ?string,
@@ -21,7 +20,9 @@ type Props = {
     placeholder?: string,
     label?: string,
     calendarMax?: any,
-    innerMessage?: any
+    innerMessage?: any,
+    dateFormat: ?string,
+    calendarType: ?string,
 };
 
 type Validation = {|
@@ -64,11 +65,13 @@ export class DateField extends React.Component<Props, State> {
             calendarMax,
             value,
             innerMessage,
+            calendarType,
+            dateFormat,
         } = this.props;
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
-        const calendarType = systemSettingsStore.get().calendar || 'gregory';
-        const format = systemSettingsStore.get().dateFormat;
+        const calendar = calendarType || 'gregory';
+        const format = dateFormat || 'YYYY-MM-DD';
         const errorProps = innerMessage && innerMessage.messageType === 'error'
             ? { error: !!innerMessage.message?.dateInnerErrorMessage,
                 validationText: innerMessage.message?.dateInnerErrorMessage }
@@ -86,7 +89,7 @@ export class DateField extends React.Component<Props, State> {
                     placeholder={this.props.placeholder}
                     format={format}
                     onDateSelect={this.handleDateSelected}
-                    calendar={calendarType}
+                    calendar={calendar}
                     date={value}
                     width={String(calculatedCalendarWidth)}
                     inputWidth={String(calculatedInputWidth)}

@@ -2,6 +2,7 @@
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { AgeFieldForForm } from '../../Components';
+import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 import { type DataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
@@ -15,6 +16,8 @@ export const getAgeFieldConfig = (metaData: DataElement, options: Object, queryS
         shrinkDisabled: options.formHorizontal,
         dateCalendarWidth: options.formHorizontal ? 250 : 350,
         datePopupAnchorPosition: getCalendarAnchorPosition(options.formHorizontal),
+        calendarType: systemSettingsStore.get().calendar,
+        dateFormat: systemSettingsStore.get().dateFormat,
     }, options, metaData);
 
     return createFieldConfig({

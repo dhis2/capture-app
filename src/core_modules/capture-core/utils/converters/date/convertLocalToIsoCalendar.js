@@ -4,7 +4,7 @@ import {
     convertToIso8601,
 } from '@dhis2/multi-calendar-dates';
 import { systemSettingsStore } from '../../../../capture-core/metaDataMemoryStores';
-import { padWithZeros } from './padWithZeros';
+import { padWithZeros } from '../../../../capture-core-utils/date';
 
 /**
  * Converts a date from local calendar to ISO calendar

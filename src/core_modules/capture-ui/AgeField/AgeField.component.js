@@ -2,18 +2,16 @@
 import React, { Component } from 'react';
 import { Temporal } from '@js-temporal/polyfill';
 import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
-import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { IconButton } from 'capture-ui';
 import { IconCross24 } from '@dhis2/ui';
-import { parseDate } from 'capture-core/utils/converters/date';
 import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
 import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
 import { orientations } from '../constants/orientations.const';
 import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
-import { convertStringToTemporal, convertTemporalToString } from '../../capture-core/utils/converters/date';
+import { stringToTemporal, temporalToString } from '../../capture-core-utils/date';
 
 type AgeValues = {
     date?: ?string,
@@ -53,31 +51,21 @@ type Props = {
     dateCalendarOnConvertValueOut: (value: string) => string,
     datePlaceholder?: ?string,
     disabled?: ?boolean,
+    dateFormat: ?string,
+    calendarType: ?string,
 };
 
-function getCalculatedValues(dateValue: ?string): AgeValues {
-    const parseData = dateValue && parseDate(dateValue);
-    if (!parseData || !parseData.isValid) {
-        return {
-            date: dateValue,
-            years: '',
-            months: '',
-            days: '',
-        };
-    }
+function getCalculatedValues(dateValue: ?string, calendarType: ?string, dateFormat: ?string): AgeValues {
+    const now = Temporal.Now.plainDateISO().withCalendar(calendarType);
 
-    const calendar = systemSettingsStore.get().calendar;
-
-    const now = Temporal.Now.plainDateISO().withCalendar(calendar);
-
-    const age = convertStringToTemporal(dateValue);
+    const age = stringToTemporal(dateValue, calendarType, dateFormat);
 
     const diff = now.since(age, {
         largestUnit: 'years',
         smallestUnit: 'days',
     });
 
-    const date = convertTemporalToString(age);
+    const date = temporalToString(age, dateFormat);
 
     return {
         date,
@@ -117,7 +105,7 @@ class D2AgeFieldPlain extends Component<Props> {
     }
 
     handleNumberBlur = (values: AgeValues) => {
-        const { onRemoveFocus } = this.props;
+        const { onRemoveFocus, calendarType = 'gregory', dateFormat = 'YYYY-MM-DD' } = this.props;
 
         onRemoveFocus && onRemoveFocus();
         if (D2AgeFieldPlain.isEmptyNumbers(values)) {
@@ -130,24 +118,37 @@ class D2AgeFieldPlain extends Component<Props> {
             return;
         }
 
-        const calendar = systemSettingsStore.get().calendar;
-
-        const now = Temporal.Now.plainDateISO().withCalendar(calendar);
+        const now = Temporal.Now.plainDateISO().withCalendar(calendarType);
 
         const calculatedDate = now.subtract({
             years: D2AgeFieldPlain.getNumberOrZero(values.years),
             months: D2AgeFieldPlain.getNumberOrZero(values.months),
             days: D2AgeFieldPlain.getNumberOrZero(values.days),
         });
-
-        const calculatedValues = getCalculatedValues(convertTemporalToString(calculatedDate));
+        const dateString = temporalToString(calculatedDate, dateFormat);
+        const calculatedValues = getCalculatedValues(dateString, calendarType, dateFormat);
         this.props.onBlur(calculatedValues);
     }
 
     handleDateBlur = (date: ?string, options: ?ValidationOptions) => {
-        const { onRemoveFocus } = this.props;
+        const { onRemoveFocus, calendarType = 'gregory', dateFormat = 'YYYY-MM-DD' } = this.props;
         onRemoveFocus && onRemoveFocus();
-        const calculatedValues = date ? getCalculatedValues(date) : null;
+        const isDateValid = options && !options.error;
+        if (!date) {
+            this.props.onBlur(null, options);
+            return;
+        }
+        if (!isDateValid) {
+            const calculatedValues = {
+                date,
+                years: '',
+                months: '',
+                days: '',
+            };
+            this.props.onBlur(calculatedValues, options);
+            return;
+        }
+        const calculatedValues = getCalculatedValues(date, calendarType, dateFormat);
         this.props.onBlur(calculatedValues, options);
     }
 
