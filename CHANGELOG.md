@@ -1,3 +1,10 @@
+## [101.21.3](https://github.com/dhis2/capture-app/compare/v101.21.2...v101.21.3) (2025-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-17613] Use new note endpoint ([#3908](https://github.com/dhis2/capture-app/issues/3908)) ([a9fdea8](https://github.com/dhis2/capture-app/commit/a9fdea8ac8284b28ec3c0acf0551e9cd1a68a180))
+
 ## [101.21.2](https://github.com/dhis2/capture-app/compare/v101.21.1...v101.21.2) (2025-01-09)
 
 
