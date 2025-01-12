@@ -1,0 +1,80 @@
+// @flow
+import React, { useCallback } from 'react';
+import { DropdownButton, FlyoutMenu, MenuItem, Divider, colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import i18n from '@dhis2/d2-i18n';
+import type { FilterValueType } from './ChangelogFilter.types';
+
+type FilterItem = {
+    id: string,
+    name: string,
+};
+
+type Props = {
+    label: string,
+    items: Array<FilterItem>,
+    classes: Object,
+    filterColumn: string,
+    openMenuName: string | null,
+    onToggleMenu: (menuName: string) => void,
+    onItemSelected: (value: FilterValueType, filterColumn: string) => void,
+    selectedFilterValue: FilterValueType,
+};
+
+const styles = {
+    label: {
+        color: colors.grey600,
+    },
+};
+
+export const DropdownFilterPlain = ({
+    label,
+    classes,
+    items,
+    filterColumn,
+    openMenuName,
+    onToggleMenu,
+    onItemSelected,
+    selectedFilterValue,
+}: Props) => {
+    const isMenuOpen = openMenuName === filterColumn;
+
+    const handleShowAll = useCallback(() => {
+        onItemSelected('SHOW_ALL', filterColumn);
+    }, [onItemSelected, filterColumn]);
+
+    const filterValue = selectedFilterValue !== 'SHOW_ALL' && typeof selectedFilterValue === 'object'
+        ? selectedFilterValue.name
+        : i18n.t('Show all');
+
+    return (
+        <DropdownButton
+            className="filter-button"
+            open={isMenuOpen}
+            onClick={() => onToggleMenu(filterColumn)}
+            component={
+                isMenuOpen && (
+                    <FlyoutMenu role="menu" dataTest={`changelog-filter-${filterColumn}`} maxHeight="300px">
+                        <MenuItem
+                            key="all-filter"
+                            onClick={handleShowAll}
+                            label={i18n.t('Show all')}
+                        />
+                        <Divider />
+                        {items.map(item => (
+                            <MenuItem
+                                key={item.id}
+                                onClick={() => onItemSelected(item, filterColumn)}
+                                label={item.name}
+                            />
+                        ))}
+                    </FlyoutMenu>
+                )
+            }
+        >
+            <span className={classes.label}>{label}</span>&nbsp;{filterValue}
+        </DropdownButton>
+    );
+};
+
+export const DropdownFilter = withStyles(styles)(DropdownFilterPlain);

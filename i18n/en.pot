@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-07T23:08:32.621Z\n"
-"PO-Revision-Date: 2025-01-07T23:08:32.621Z\n"
+"POT-Creation-Date: 2025-01-12T19:19:47.746Z\n"
+"PO-Revision-Date: 2025-01-12T19:19:47.746Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1544,6 +1544,9 @@ msgstr "Changelog"
 msgid "No changes to display"
 msgstr "No changes to display"
 
+msgid "Data item"
+msgstr "Data item"
+
 msgid "Updated"
 msgstr "Updated"
 
@@ -1567,9 +1570,6 @@ msgstr "User"
 
 msgid "Sort by Data item"
 msgstr "Sort by Data item"
-
-msgid "Data item"
-msgstr "Data item"
 
 msgid "Change"
 msgstr "Change"
