@@ -18,11 +18,9 @@ type Props = {
 
 export const useChangelogData = ({ entityId, entityType, programId }: Props) => {
     const [columnToSortBy, setColumnToSortBy] = useState<string>(COLUMN_TO_SORT_BY.DATE);
-    console.log('columnToSortBy', columnToSortBy);
     const [sortDirection, setSortDirection] = useState<SortDirection>(SORT_DIRECTION.DEFAULT);
 
     const [attributeToFilterBy, setAttributeToFilterBy] = useState<string | null>(null);
-    console.log('attributeToFilterBy', attributeToFilterBy);
     const [filterValue, setFilterValue] = useState<Object>('Show all');
 
     const [page, setPage] = useState<number>(1);
