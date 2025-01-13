@@ -2,18 +2,20 @@
 import { useMemo } from 'react';
 import log from 'loglevel';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
-import { useQuery } from 'react-query';
-import { errorCreator, buildUrl, pipe } from 'capture-core-utils';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
-import { dataElementTypes } from '../../../../metaData';
-import { CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
-import type { Change, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
+import { useQuery } from 'react-query';
+import { buildUrl, pipe } from 'capture-core-utils';
 import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
-import { RECORD_TYPE, subValueGetterByElementType } from '../utils/getSubValueForChangelogData';
+import { dataElementTypes } from '../../../../metaData';
+import { CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
+import type {
+    Change,
+    ItemDefinitions,
+    SortDirection,
+} from '../Changelog/Changelog.types';
+import { subValueGetterByElementType, RECORD_TYPE } from '../utils/getSubValueForChangelogData';
 import { makeQuerySingleResource } from '../../../../utils/api';
-import { attributeOptionsKey } from '../../../DataEntryDhis2Helpers';
-
 
 type Props = {
     rawRecords: Object,
@@ -40,62 +42,54 @@ const fetchFormattedValues = async ({
 }) => {
     if (!rawRecords) return [];
 
-    const getMetadataItemDefinition = (
-        elementKey: string,
-        change: Change,
-    ) => {
-        const { dataElement, attribute, field } = change;
-        const fieldId = dataElement ?? attribute ?? field;
+    // Hjelpefunksjon for å hente riktig metadata
+    const getItemDefinition = (change: Change) => {
+        const fieldId = change.dataElement ?? change.attribute ?? change.field;
         if (!fieldId) {
-            log.error('Could not find fieldId in change:', change);
-            return { metadataElement: null, fieldId: null };
+            log.error('Ingen felt-id i endringen:', change);
+            return null;
         }
-        const metadataElement = dataItemDefinitions[fieldId];
-        return { metadataElement, fieldId };
+        return dataItemDefinitions[fieldId];
     };
 
-
-    const fetchedRecords = await Promise.all(
+    const results = await Promise.all(
         rawRecords.changeLogs.map(async (changelog) => {
             const { change: apiChange, createdAt, createdBy, type } = changelog;
             const elementKey = Object.keys(apiChange)[0];
             const change = apiChange[elementKey];
 
-            const { metadataElement, fieldId } = getMetadataItemDefinition(
-                elementKey,
-                change,
-            );
-
+            const metadataElement = getItemDefinition(change);
             if (!metadataElement) {
-                log.error(
-                    errorCreator('Could not find metadata for element')({ ...changelog }),
-                );
+                log.error('Fant ikke metadata for element:', changelog);
                 return null;
             }
 
             const getSubValue = subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
 
-            const getValue = async (value, latestValue) => {
+            const getValue = async (value, isLatestValue) => {
+                // Standardkonvertering hvis ingen spesialhåndtering er nødvendig
                 if (!getSubValue) {
                     return convertServerToClient(value, metadataElement.type);
                 }
+
+                // Ellers la subValueGetter hente f.eks. OptionLabel, Relationship, osv.
                 if (entityType === RECORD_TYPE.trackedEntity) {
                     return getSubValue({
                         trackedEntity: { teiId: entityId, value },
                         programId,
-                        attributeId: fieldId,
+                        attributeId: metadataElement.id,
                         absoluteApiPath,
                         querySingleResource,
-                        latestValue,
+                        latestValue: isLatestValue,
                     });
                 }
                 if (entityType === RECORD_TYPE.event) {
                     return getSubValue({
-                        dataElement: { id: fieldId, value },
+                        dataElement: { id: metadataElement.id, value },
                         eventId: entityId,
                         absoluteApiPath,
                         querySingleResource,
-                        latestValue,
+                        latestValue: isLatestValue,
                     });
                 }
                 return null;
@@ -103,7 +97,10 @@ const fetchFormattedValues = async ({
 
             const [previousValueClient, currentValueClient] = await Promise.all([
                 change.previousValue ? getValue(change.previousValue, false) : null,
-                getValue(change.currentValue, entityData?.[change.attribute ?? change.dataElement]?.value === change.currentValue),
+                getValue(
+                    change.currentValue,
+                    entityData?.[change.attribute ?? change.dataElement]?.value === change.currentValue,
+                ),
             ]);
 
             const { firstName, surname, username } = createdBy;
@@ -113,11 +110,14 @@ const fetchFormattedValues = async ({
             const currentValue = convertClientToList(currentValueClient, metadataElement.type, options);
 
             return {
-                reactKey: fieldId ? `${createdAt}-${fieldId}` : attributeOptionsKey,
-                date: pipe(convertServerToClient, convertClientToList)(fromServerDate(createdAt), dataElementTypes.DATETIME),
+                reactKey: metadataElement.id ? `${createdAt}-${metadataElement.id}` : createdAt,
+                date: pipe(convertServerToClient, convertClientToList)(
+                    fromServerDate(createdAt),
+                    dataElementTypes.DATETIME,
+                ),
                 user: `${firstName} ${surname} (${username})`,
                 username,
-                dataItemId: fieldId,
+                dataItemId: metadataElement.id,
                 changeType: type,
                 dataItemLabel: metadataElement.name,
                 previousValue,
@@ -126,7 +126,8 @@ const fetchFormattedValues = async ({
         }),
     );
 
-    return fetchedRecords.filter(Boolean);
+    // Fjern tomme/null-linjer:
+    return results.filter(Boolean);
 };
 
 export const useListDataValues = ({
@@ -143,28 +144,39 @@ export const useListDataValues = ({
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
     const { fromServerDate } = useTimeZoneConversion();
+
+    // Bygg absolutt API-path
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
 
+    // Klargjør en "Single resource"-spørring
     const querySingleResource = useMemo(
         () => makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         [dataEngine],
     );
 
-    const queryKey = [ReactQueryAppNamespace, 'changelog', entityType, entityId, 'formattedData', { sortDirection, page, pageSize, programId, rawRecords }];
+    const queryKey = [
+        ReactQueryAppNamespace,
+        'changelog',
+        entityType,
+        entityId,
+        'formattedData',
+        { sortDirection, page, pageSize, programId, rawRecords },
+    ];
 
     const { data: processedRecords, isError, isLoading } = useQuery(
         queryKey,
-        () => fetchFormattedValues({
-            rawRecords,
-            dataItemDefinitions,
-            entityId,
-            entityData,
-            entityType,
-            programId,
-            absoluteApiPath,
-            querySingleResource,
-            fromServerDate,
-        }),
+        () =>
+            fetchFormattedValues({
+                rawRecords,
+                dataItemDefinitions,
+                entityId,
+                entityData,
+                entityType,
+                programId,
+                absoluteApiPath,
+                querySingleResource,
+                fromServerDate,
+            }),
         {
             enabled: !!rawRecords && !!dataItemDefinitions && !!entityId && !!entityType,
             staleTime: Infinity,
@@ -172,9 +184,5 @@ export const useListDataValues = ({
         },
     );
 
-    return {
-        processedRecords,
-        isError,
-        isLoading,
-    };
+    return { processedRecords, isLoading, isError };
 };

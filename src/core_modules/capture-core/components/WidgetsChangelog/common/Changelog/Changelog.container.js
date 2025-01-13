@@ -3,7 +3,7 @@ import React from 'react';
 import { Modal } from '@dhis2/ui';
 import { useChangelogData, useListDataValues } from '../hooks';
 import { ChangelogComponent } from './Changelog.component';
-import { CHANGELOG_ENTITY_TYPES } from './index';
+import { CHANGELOG_ENTITY_TYPES } from './Changelog.constants';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import type { ItemDefinitions } from './Changelog.types';
 
@@ -40,13 +40,9 @@ export const Changelog = ({
         setSortDirection,
         filterValue,
         setFilterValue,
-        columnToFilterBy,
-        setColumnToFilterBy,
-    } = useChangelogData({
-        entityId,
-        entityType,
-        programId,
-    });
+        fieldToFilterBy,
+        setfieldToFilterBy,
+    } = useChangelogData({ entityId, entityType, programId });
 
     const {
         processedRecords,
@@ -85,8 +81,8 @@ export const Changelog = ({
             setSortDirection={setSortDirection}
             filterValue={filterValue}
             setFilterValue={setFilterValue}
-            columnToFilterBy={columnToFilterBy}
-            setColumnToFilterBy={setColumnToFilterBy}
+            fieldToFilterBy={fieldToFilterBy}
+            setfieldToFilterBy={setfieldToFilterBy}
             dataItemDefinitions={dataItemDefinitions}
         />
     );

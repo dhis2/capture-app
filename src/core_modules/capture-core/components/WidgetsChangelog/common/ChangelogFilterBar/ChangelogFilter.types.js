@@ -1,19 +1,5 @@
 // @flow
-export type FilterValueType =
-    | 'SHOW_ALL'
-    | { id: string, name: string };
-
-export type RecordType = {
-    reactKey: string,
-    date: string,
-    user: string,
-    username: string,
-    dataItemId: string,
-    dataItemLabel: string,
-    changeType: string,
-    currentValue: string,
-    previousValue: string,
-};
+export type FilterValueType = 'SHOW_ALL' | { id: string, name: string };
 
 export type DataItemDefinition = {
     id: string,
@@ -29,7 +15,6 @@ export type DataItemDefinitions = {
 
 export type ChangelogFilterProps = {
     classes: { container: string },
-    records: Array<RecordType>,
     filterValue: FilterValueType,
     setFilterValue: (value: FilterValueType) => void,
     columnToFilterBy: string | null,

@@ -1,19 +1,23 @@
 // @flow
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
     Button,
     ButtonStrip,
     DataTable,
-    DataTableBody, DataTableCell, DataTableFoot, DataTableRow,
+    DataTableBody,
+    DataTableCell,
+    DataTableFoot,
+    DataTableRow,
     Modal,
     ModalActions,
     ModalContent,
-    ModalTitle, Pagination,
+    ModalTitle,
+    Pagination,
 } from '@dhis2/ui';
-import React from 'react';
+import { ChangelogFilterBar } from '../ChangelogFilterBar';
 import { ChangelogTableHeader, ChangelogTableRow } from '../ChangelogTable';
 import type { ChangelogProps } from './Changelog.types';
-import { ChangelogFilterBar } from '../ChangelogFilterBar';
 
 export const ChangelogComponent = ({
     isOpen,
@@ -22,8 +26,8 @@ export const ChangelogComponent = ({
     pager,
     columnToSortBy,
     setColumnToSortBy,
-    columnToFilterBy,
-    setColumnToFilterBy,
+    fieldToFilterBy,
+    setfieldToFilterBy,
     filterValue,
     setFilterValue,
     setPage,
@@ -35,27 +39,19 @@ export const ChangelogComponent = ({
     <Modal
         large
         hide={!isOpen}
-        dataTest={'changelog-modal'}
         onClose={close}
+        dataTest="changelog-modal"
     >
         <ModalTitle>{i18n.t('Changelog')}</ModalTitle>
-
         <ModalContent>
             <ChangelogFilterBar
-                key={'changelog-filter-bar'}
-                dataTest={'changelog-filter-bar'}
-                records={records}
-                columnToFilterBy={columnToFilterBy}
-                setColumnToFilterBy={setColumnToFilterBy}
+                fieldToFilterBy={fieldToFilterBy}
+                setfieldToFilterBy={setfieldToFilterBy}
                 filterValue={filterValue}
                 setFilterValue={setFilterValue}
                 dataItemDefinitions={dataItemDefinitions}
             />
-            <DataTable
-                fixed
-                dataTest={'changelog-data-table'}
-                layout="fixed"
-            >
+            <DataTable fixed dataTest="changelog-data-table" layout="fixed">
                 <ChangelogTableHeader
                     columnToSortBy={columnToSortBy}
                     setColumnToSortBy={setColumnToSortBy}
@@ -63,20 +59,15 @@ export const ChangelogComponent = ({
                     setSortDirection={setSortDirection}
                 />
                 {records && records.length > 0 ? (
-                    <DataTableBody
-                        dataTest={'changelog-data-table-body'}
-                    >
-                        {records?.map(record => (
-                            <ChangelogTableRow
-                                key={record.reactKey}
-                                record={record}
-                            />
+                    <DataTableBody dataTest="changelog-data-table-body">
+                        {records.map(record => (
+                            <ChangelogTableRow key={record.reactKey} record={record} />
                         ))}
                     </DataTableBody>
                 ) : (
                     <DataTableBody>
                         <DataTableRow>
-                            <DataTableCell align={'center'} colSpan="4">
+                            <DataTableCell align="center" colSpan="4">
                                 {i18n.t('No changes to display')}
                             </DataTableCell>
                         </DataTableRow>
@@ -92,7 +83,7 @@ export const ChangelogComponent = ({
                                     onPageChange={setPage}
                                     onPageSizeChange={setPageSize}
                                     isLastPage={!pager.nextPage}
-                                    dataTest={'changelog-pagination'}
+                                    dataTest="changelog-pagination"
                                 />
                             </DataTableCell>
                         </DataTableRow>
@@ -103,10 +94,7 @@ export const ChangelogComponent = ({
 
         <ModalActions>
             <ButtonStrip>
-                <Button
-                    onClick={close}
-                    secondary
-                >
+                <Button onClick={close} secondary>
                     {i18n.t('Close')}
                 </Button>
             </ButtonStrip>

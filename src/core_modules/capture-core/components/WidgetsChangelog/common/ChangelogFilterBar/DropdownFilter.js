@@ -27,7 +27,7 @@ const styles = {
     },
 };
 
-export const DropdownFilterPlain = ({
+const DropdownFilterPlain = ({
     label,
     classes,
     items,
@@ -43,9 +43,10 @@ export const DropdownFilterPlain = ({
         onItemSelected('SHOW_ALL', filterColumn);
     }, [onItemSelected, filterColumn]);
 
-    const filterValue = selectedFilterValue !== 'SHOW_ALL' && typeof selectedFilterValue === 'object'
-        ? selectedFilterValue.name
-        : i18n.t('Show all');
+    const filterValue =
+        selectedFilterValue !== 'SHOW_ALL' && typeof selectedFilterValue === 'object'
+            ? selectedFilterValue.name
+            : i18n.t('Show all');
 
     return (
         <DropdownButton

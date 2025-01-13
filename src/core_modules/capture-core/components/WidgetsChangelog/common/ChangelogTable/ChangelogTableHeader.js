@@ -2,25 +2,22 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { DataTableColumnHeader, DataTableHead, DataTableRow } from '@dhis2/ui';
-import { SORT_DIRECTION, COLUMN_TO_SORT_BY } from '../../common/Changelog';
-
-type SortDirection = $Values<typeof SORT_DIRECTION>;
-type SetSortDirection = (direction: SortDirection) => void;
-type SetColumnToSortBy = (columnToSortBy: string) => void;
+import { SORT_DIRECTION, COLUMN_TO_SORT_BY } from '../Changelog/Changelog.constants';
+import type { SortDirection } from '../Changelog/Changelog.types';
 
 type Props = {
     columnToSortBy: string,
     sortDirection: SortDirection,
-    setSortDirection: SetSortDirection,
-    setColumnToSortBy: SetColumnToSortBy,
+    setSortDirection: (SortDirection) => void,
+    setColumnToSortBy: (column: string) => void,
 };
-
 
 const getCurrentSortDirection = (
     columnName: string,
     currentColumn: string,
     currentDirection: SortDirection,
-): SortDirection => (columnName === currentColumn ? currentDirection : SORT_DIRECTION.DEFAULT);
+): SortDirection =>
+    (columnName === currentColumn ? currentDirection : SORT_DIRECTION.DEFAULT);
 
 export const ChangelogTableHeader = ({
     columnToSortBy,
@@ -76,7 +73,7 @@ export const ChangelogTableHeader = ({
                         sortDirection,
                     )}
                     onSortIconClick={handleSortIconClick}
-                    sortIconTitle={i18n.t('Sort by Data item')}
+                    sortIconTitle={i18n.t('Sort by data item')}
                     fixed
                     top="0"
                     width="125px"
@@ -84,19 +81,11 @@ export const ChangelogTableHeader = ({
                     {i18n.t('Data item')}
                 </DataTableColumnHeader>
 
-                <DataTableColumnHeader
-                    fixed
-                    top="0"
-                    width="85px"
-                >
+                <DataTableColumnHeader fixed top="0" width="85px">
                     {i18n.t('Change')}
                 </DataTableColumnHeader>
 
-                <DataTableColumnHeader
-                    fixed
-                    top="0"
-                    width="275px"
-                >
+                <DataTableColumnHeader fixed top="0" width="275px">
                     {i18n.t('Value')}
                 </DataTableColumnHeader>
             </DataTableRow>

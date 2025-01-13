@@ -8,9 +8,7 @@ import {
     SORT_DIRECTION,
     COLUMN_TO_SORT_BY,
 } from '../Changelog/Changelog.constants';
-import type {
-    SortDirection,
-} from '../Changelog/Changelog.types';
+import type { SortDirection } from '../Changelog/Changelog.types';
 
 type Props = {
     entityId: string,
@@ -18,36 +16,39 @@ type Props = {
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
 };
 
-export const useChangelogData = ({
-    entityId,
-    entityType,
-    programId,
-}: Props) => {
-    const [columnToSortBy, setColumnToSortBy] = useState < string >(COLUMN_TO_SORT_BY.DATE);
-    const [sortDirection, setSortDirection] = useState < SortDirection >(SORT_DIRECTION.DEFAULT);
+export const useChangelogData = ({ entityId, entityType, programId }: Props) => {
+    const [columnToSortBy, setColumnToSortBy] = useState<string>(COLUMN_TO_SORT_BY.DATE);
+    const [sortDirection, setSortDirection] = useState<SortDirection>(SORT_DIRECTION.DEFAULT);
 
-    const [columnToFilterBy, setColumnToFilterBy] = useState<string | null>(null);
+    const [fieldToFilterBy, setfieldToFilterBy] = useState<string | null>(null);
     const [filterValue, setFilterValue] = useState<Object>('Show all');
 
-    const [page, setPage] = useState < number >(1);
-    const [pageSize, setPageSize] = useState < number >(DEFAULT_PAGE_SIZE);
+    const [page, setPage] = useState<number>(1);
+    const [pageSize, setPageSize] = useState<number>(DEFAULT_PAGE_SIZE);
 
     const handleChangePageSize = (newPageSize: number) => {
         setPage(1);
         setPageSize(newPageSize);
     };
 
-    const filterParam = (filterValue !== 'Show all' && columnToFilterBy)
-        ? `${columnToFilterBy}:eq:${filterValue.id}`
-        : undefined;
+    const filterParam =
+        filterValue !== 'Show all' && fieldToFilterBy
+            ? `${fieldToFilterBy}:eq:${filterValue.id}`
+            : undefined;
 
-    const orderParam = (sortDirection === SORT_DIRECTION.DEFAULT)
-        ? undefined
-        : `${columnToSortBy}:${sortDirection}`;
-
+    const orderParam =
+        sortDirection === SORT_DIRECTION.DEFAULT
+            ? undefined
+            : `${columnToSortBy}:${sortDirection}`;
 
     const { data, isLoading, isError } = useApiDataQuery(
-        ['changelog', entityType, entityId, 'rawData', { columnToSortBy, sortDirection, page, pageSize, programId, filterParam }],
+        [
+            'changelog',
+            entityType,
+            entityId,
+            'rawData',
+            { columnToSortBy, sortDirection, page, pageSize, programId, filterParam },
+        ],
         {
             resource: `tracker/${QUERY_KEYS_BY_ENTITY_TYPE[entityType]}/${entityId}/changeLogs`,
             params: {
@@ -58,9 +59,7 @@ export const useChangelogData = ({
                 order: orderParam,
             },
         },
-        {
-            enabled: !!entityId,
-        },
+        { enabled: !!entityId },
     );
 
     return {
@@ -72,8 +71,8 @@ export const useChangelogData = ({
         setSortDirection,
         columnToSortBy,
         setColumnToSortBy,
-        columnToFilterBy,
-        setColumnToFilterBy,
+        fieldToFilterBy,
+        setfieldToFilterBy,
         filterValue,
         setFilterValue,
         page,
