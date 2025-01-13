@@ -1,3 +1,10 @@
+## [101.21.4](https://github.com/dhis2/capture-app/compare/v101.21.3...v101.21.4) (2025-01-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18355] runtime error occurs when saving empty widget in Related stages ([#3935](https://github.com/dhis2/capture-app/issues/3935)) ([4ebef85](https://github.com/dhis2/capture-app/commit/4ebef8596d1814efb385c1817b5968405b704af7))
+
 ## [101.21.3](https://github.com/dhis2/capture-app/compare/v101.21.2...v101.21.3) (2025-01-12)
 
 
