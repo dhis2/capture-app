@@ -40,8 +40,8 @@ export const Changelog = ({
         setSortDirection,
         filterValue,
         setFilterValue,
-        fieldToFilterBy,
-        setfieldToFilterBy,
+        attributeToFilterBy,
+        setAttributeToFilterBy,
     } = useChangelogData({ entityId, entityType, programId });
 
     const {
@@ -81,8 +81,8 @@ export const Changelog = ({
             setSortDirection={setSortDirection}
             filterValue={filterValue}
             setFilterValue={setFilterValue}
-            fieldToFilterBy={fieldToFilterBy}
-            setfieldToFilterBy={setfieldToFilterBy}
+            attributeToFilterBy={attributeToFilterBy}
+            setAttributeToFilterBy={setAttributeToFilterBy}
             dataItemDefinitions={dataItemDefinitions}
         />
     );

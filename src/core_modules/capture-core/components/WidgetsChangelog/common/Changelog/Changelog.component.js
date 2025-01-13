@@ -26,8 +26,8 @@ export const ChangelogComponent = ({
     pager,
     columnToSortBy,
     setColumnToSortBy,
-    fieldToFilterBy,
-    setfieldToFilterBy,
+    attributeToFilterBy,
+    setAttributeToFilterBy,
     filterValue,
     setFilterValue,
     setPage,
@@ -45,8 +45,8 @@ export const ChangelogComponent = ({
         <ModalTitle>{i18n.t('Changelog')}</ModalTitle>
         <ModalContent>
             <ChangelogFilterBar
-                fieldToFilterBy={fieldToFilterBy}
-                setfieldToFilterBy={setfieldToFilterBy}
+                attributeToFilterBy={attributeToFilterBy}
+                setAttributeToFilterBy={setAttributeToFilterBy}
                 filterValue={filterValue}
                 setFilterValue={setFilterValue}
                 dataItemDefinitions={dataItemDefinitions}

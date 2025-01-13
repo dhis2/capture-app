@@ -21,8 +21,8 @@ const ChangelogFilterBarPlain = ({
     classes,
     filterValue,
     setFilterValue,
-    fieldToFilterBy,
-    setfieldToFilterBy,
+    attributeToFilterBy,
+    setAttributeToFilterBy,
     dataItemDefinitions,
 }: ChangelogFilterProps) => {
     const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -36,14 +36,14 @@ const ChangelogFilterBarPlain = ({
             setOpenMenu(null);
             if (value === 'SHOW_ALL') {
                 setFilterValue('SHOW_ALL');
-                setfieldToFilterBy(null);
+                setAttributeToFilterBy(null);
             } else {
                 const column = getFilterColumn(value.id);
                 setFilterValue(value);
-                setfieldToFilterBy(column);
+                setAttributeToFilterBy(column);
             }
         },
-        [setFilterValue, setfieldToFilterBy],
+        [setFilterValue, setAttributeToFilterBy],
     );
 
     const dataItems = useMemo(
@@ -55,7 +55,7 @@ const ChangelogFilterBarPlain = ({
         [dataItemDefinitions],
     );
 
-    const selectedFilterValue = fieldToFilterBy ? filterValue : 'SHOW_ALL';
+    const selectedFilterValue = attributeToFilterBy ? filterValue : 'SHOW_ALL';
 
     return (
         <div className={classes.container}>
