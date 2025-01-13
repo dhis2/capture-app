@@ -1,6 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { getCachedOrgUnitName } from 'capture-core/metadataRetrieval/orgUnitName';
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
 import { SORT_DIRECTION } from './constants';
@@ -40,7 +41,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
         if (!clientValueB) return -1;
 
         if (clientValueA !== clientValueB) {
-            return clientValueA.localeCompare(clientValueB);
+            return clientValueB.localeCompare(clientValueA);
         }
 
         return moment(eventDateB).unix() - moment(eventDateA).unix();
@@ -49,7 +50,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
         if (!clientValueB) return 1;
 
         if (clientValueA !== clientValueB) {
-            return clientValueB.localeCompare(clientValueA);
+            return clientValueA.localeCompare(clientValueB);
         }
 
         return moment(eventDateB).unix() - moment(eventDateA).unix();
@@ -78,7 +79,12 @@ const sortTime = (clientValueA: Object, clientValueB: Object, direction: string,
     return 0;
 };
 
-const sortOrgUnit = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => sortText(clientValueA.name, clientValueB.name, direction, options);
+const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: string, options: Object) => {
+    const orgUnitNameA = getCachedOrgUnitName(clientValueA);
+    const orgUnitNameB = getCachedOrgUnitName(clientValueB);
+
+    return sortText(orgUnitNameA, orgUnitNameB, direction, options);
+};
 
 // desc: Scheduled -> Active -> Completed -> Skipped
 const sortStatus = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
@@ -113,7 +119,7 @@ const sortStatus = (clientValueA: Object, clientValueB: Object, direction: strin
     return 0;
 };
 
-const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: Object) => {
+export const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: Object) => {
     if (!type) {
         log.error(errorCreator('Type is not defined')({ dataA, dataB }));
     }
@@ -127,11 +133,6 @@ const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: Object
     };
     return sortForTypes[type](clientValueA, clientValueB, direction, options);
 };
-
-export {
-    sortDataFromEvent,
-};
-
 
 const sortForTypes = {
     [dataElementTypes.EMAIL]: sortText,
