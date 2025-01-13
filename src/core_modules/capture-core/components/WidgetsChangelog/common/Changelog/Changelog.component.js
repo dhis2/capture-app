@@ -59,7 +59,7 @@ export const ChangelogComponent = ({
                     setSortDirection={setSortDirection}
                 />
                 {records && records.length > 0 ? (
-                    <DataTableBody dataTest="changelog-data-table-body">
+                    <DataTableBody dataTest={'changelog-data-table-body'}>
                         {records.map(record => (
                             <ChangelogTableRow key={record.reactKey} record={record} />
                         ))}
@@ -67,7 +67,7 @@ export const ChangelogComponent = ({
                 ) : (
                     <DataTableBody>
                         <DataTableRow>
-                            <DataTableCell align="center" colSpan="4">
+                            <DataTableCell align={'center'} colSpan="4">
                                 {i18n.t('No changes to display')}
                             </DataTableCell>
                         </DataTableRow>
@@ -83,7 +83,7 @@ export const ChangelogComponent = ({
                                     onPageChange={setPage}
                                     onPageSizeChange={setPageSize}
                                     isLastPage={!pager.nextPage}
-                                    dataTest="changelog-pagination"
+                                    dataTest={'changelog-pagination'}
                                 />
                             </DataTableCell>
                         </DataTableRow>
