@@ -4,6 +4,7 @@ import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { DateField } from 'capture-core/components/FormFields/New';
 import { InfoBox } from '../InfoBox';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { Props } from './scheduleDate.types';
 
 const styles = {
@@ -42,6 +43,8 @@ const ScheduleDatePlain = ({
                 }
                 setScheduleDate(e);
             }}
+            calendarType={systemSettingsStore.get().calendar}
+            dateFormat={systemSettingsStore.get().dateFormat}
         />
     </div>}
     <InfoBox

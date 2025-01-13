@@ -1,6 +1,7 @@
 // @flow
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateRangeFieldForForm } from '../../Components';
+import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
@@ -14,6 +15,8 @@ export const getDateRangeFieldConfig = (metaData: MetaDataElement, options: Obje
         maxWidth: options.formHorizontal ? 150 : 350,
         calendarWidth: options.formHorizontal ? 250 : 350,
         popupAnchorPosition: getCalendarAnchorPosition(options.formHorizontal),
+        calendarType: systemSettingsStore.get().calendar,
+        dateFormat: systemSettingsStore.get().dateFormat,
     }, options, metaData);
 
     return createFieldConfig({

@@ -1,5 +1,6 @@
 // @flow
 import { Temporal } from '@js-temporal/polyfill';
+import { convertStringToTemporal } from 'capture-core/utils/converters/date';
 import { isValidDateTime } from './dateTimeValidator';
 
 function isValidDateTimeWithEmptyCheck(value: ?Object) {
@@ -8,7 +9,12 @@ function isValidDateTimeWithEmptyCheck(value: ?Object) {
 const convertDateTimeToTemporal = (value: Object) => {
     const { date, time } = value;
 
-    const [year, month, day] = date.split('-').map(Number);
+    const dateInTemporal = convertStringToTemporal(date);
+
+    if (!dateInTemporal) {
+        return null;
+    }
+    const { year, month, day } = dateInTemporal;
 
     let hour;
     let minutes;
@@ -46,6 +52,8 @@ export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
 
         const fromDateTime = convertDateTimeToTemporal(value.from);
         const toDateTime = convertDateTimeToTemporal(value.to);
-
+        if (!fromDateTime || !toDateTime) {
+            return false;
+        }
         return Temporal.PlainDateTime.compare(fromDateTime, toDateTime) <= 0;
     };
