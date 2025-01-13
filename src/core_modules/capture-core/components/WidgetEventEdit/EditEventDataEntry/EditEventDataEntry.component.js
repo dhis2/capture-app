@@ -47,6 +47,7 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers/';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { UserFormField } from '../../FormFields/UserField';
 
 const tabMode = Object.freeze({
@@ -137,6 +138,8 @@ const buildReportDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
+            calendarType: systemSettingsStore.get().calendar,
+            dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => 'occurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),

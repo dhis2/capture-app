@@ -17,16 +17,9 @@ export function convertLocalToIsoCalendar(localDate: ?string): string {
         return '';
     }
 
-    const momentDate = moment(localDate);
-    if (!momentDate.isValid()) {
-        return '';
-    }
-
-    const formattedIsoDate = momentDate.format('YYYY-MM-DD');
-
     const calendar = systemSettingsStore.get().calendar;
 
-    const { year, month, day } = convertToIso8601(formattedIsoDate, calendar);
+    const { year, month, day } = convertToIso8601(localDate, calendar);
     const dateString = `${padWithZeros(year, 4)}-${padWithZeros(month, 2)}-${padWithZeros(day, 2)}`;
     const parsedMoment = moment(dateString);
 

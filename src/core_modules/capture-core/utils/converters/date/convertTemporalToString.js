@@ -14,10 +14,10 @@ type PlainDate = {
     day: number
 };
 
-export function convertTemporalToString(temporalDate: PlainDate | null): string {
+export function convertTemporalToString(temporalDate: PlainDate | null, format: ?string): string {
     if (!temporalDate) {
         return '';
     }
-    const dateFormat = systemSettingsStore.get().dateFormat;
+    const dateFormat = format || systemSettingsStore.get().dateFormat;
     return temporalToString(temporalDate, dateFormat);
 }

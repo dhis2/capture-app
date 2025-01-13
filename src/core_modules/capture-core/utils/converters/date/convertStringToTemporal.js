@@ -15,11 +15,11 @@ type PlainDate = {
     day: number
 };
 
-export function convertStringToTemporal(dateString: ?string): PlainDate | null {
+export function convertStringToTemporal(dateString: ?string, calendar: ?string, format: ?string): PlainDate | null {
     if (!dateString) {
         return null;
     }
-    const calendar = systemSettingsStore.get().calendar;
-    const dateFormat = systemSettingsStore.get().dateFormat;
-    return stringToTemporal(dateString, calendar, dateFormat);
+    const calendarType = calendar || systemSettingsStore.get().calendar;
+    const dateFormat = format || systemSettingsStore.get().dateFormat;
+    return stringToTemporal(dateString, calendarType, dateFormat);
 }

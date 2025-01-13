@@ -17,7 +17,7 @@ type PlainDate = {
 };
 
 export function stringToTemporal(dateString: ?string,
-    calendarType: ?string,
+    calendar: ?string,
     dateFormat: ?string): PlainDate | null {
     if (!dateString) {
         return null;
@@ -37,7 +37,7 @@ export function stringToTemporal(dateString: ?string,
             year,
             month,
             day,
-            calendarType,
+            calendar,
         });
     } catch (error) {
         return null;

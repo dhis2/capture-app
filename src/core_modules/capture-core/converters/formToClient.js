@@ -3,7 +3,7 @@ import moment from 'moment';
 import isString from 'd2-utilizr/lib/isString';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import { dataElementTypes } from '../metaData';
-import { parseDate, convertLocalToIsoCalendar } from '../utils/converters/date';
+import { convertLocalToIsoCalendar } from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string,
@@ -25,21 +25,18 @@ function convertDateTime(formValue: DateTimeValue): ?string {
     const hours = momentTime.hour();
     const minutes = momentTime.minute();
 
-    const parsedDate = editedDate ? parseDate(editedDate) : null;
-    if (!(parsedDate && parsedDate.isValid && parsedDate.momentDate)) return null;
+    const isoDate = convertDate(editedDate);
+    if (!isoDate) return null;
 
-    const formattedDate = parsedDate.momentDate.format('YYYY-MM-DD');
-    const isoDate = convertLocalToIsoCalendar(formattedDate);
     const momentDateTime = moment(isoDate);
+    if (!momentDateTime.isValid()) return null;
     momentDateTime.hour(hours);
     momentDateTime.minute(minutes);
     return momentDateTime.toISOString();
 }
 
 function convertDate(dateValue: string) {
-    const parsedDate = parseDate(dateValue);
-    // $FlowFixMe[incompatible-use] automated comment
-    return parsedDate.isValid ? convertLocalToIsoCalendar(parsedDate.momentDate.toISOString()) : null;
+    return convertLocalToIsoCalendar(dateValue);
 }
 
 function convertTime(timeValue: string) {
