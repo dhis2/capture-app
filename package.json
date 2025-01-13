@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "101.20.0",
+    "version": "101.21.3",
     "cacheVersion": "7",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
@@ -10,7 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/rules-engine-javascript": "101.20.0",
+        "@dhis2/rules-engine-javascript": "101.21.3",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
@@ -130,7 +130,7 @@
         "jsdoc-export-default-interop": "^0.3.1",
         "node-fetch": "2",
         "redux-devtools-extension": "^2.13.9",
-        "wait-on": "^7.2.0"
+        "wait-on": "^8.0.1"
     },
     "resolutions": {
         "@dhis2/cli-app-scripts": "^10.4.0",

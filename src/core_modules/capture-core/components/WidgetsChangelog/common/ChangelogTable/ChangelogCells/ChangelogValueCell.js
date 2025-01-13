@@ -23,8 +23,11 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        whiteSpace: 'normal',
         height: '100%',
+    },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
     },
     previousValue: {
         color: colors.grey700,
@@ -33,9 +36,10 @@ const styles = {
     currentValue: {
         color: colors.grey900,
         wordBreak: 'break-word',
+        maxWidth: '82%',
     },
     arrow: {
-        margin: `0 ${spacers.dp4}`,
+        margin: spacers.dp4,
     },
 };
 
