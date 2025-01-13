@@ -25,16 +25,23 @@ import {
     getDateRangeValidator,
     getDateTimeRangeValidator,
     getTimeRangeValidator,
-} from '../../../../utils/validators/form';
-import { dataElementTypes, type DateDataElement, type DataElement } from '../../../../metaData';
+} from './validators/form';
+import { dataElementTypes, type DateDataElement, type DataElement } from '../../metaData';
 import { validatorTypes } from './constants';
-import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import type { QuerySingleResource } from '../../utils/api/api.types';
 
-type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};
+type Validator = (
+    value: any,
+    validationContext: ?Object,
+    internalError?: ?{
+        error?: ?string,
+        errorCode?: ?string,
+    }
+) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any, data?: any };
 
 export type ValidatorContainer = {
     validator: Validator,
-    message: string,
+    message: string | Object,
     type?: string,
     validatingMessage?: string,
 }
@@ -118,7 +125,7 @@ const validatorsForTypes = {
             type: validatorTypes.TYPE_BASE,
         },
         {
-            validator: (value: string, allowFutureDate) => (allowFutureDate ? true : isValidNonFutureDate(value)),
+            validator: isValidNonFutureDate,
             type: validatorTypes.TYPE_EXTENDED,
             message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
         }],
@@ -205,28 +212,28 @@ const validatorsForTypes = {
     }],
 };
 
-function buildTypeValidators(metaData: DataElement | DateDataElement): ?Array<ValidatorContainer> {
+function buildTypeValidators(metaData: DataElement | DateDataElement): Array<ValidatorContainer> {
     // $FlowFixMe dataElementTypes flow error
     let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
 
 
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
-        validator: (value: any) => {
+        validator: (value: any, internalComponentError?: ?{error: ?string, errorCode: ?string}) => {
             if (!value && value !== 0 && value !== false) {
                 return true;
             }
 
             const toValidateValue = isString(value) ? value.trim() : value;
             // $FlowFixMe dataElementTypes flow error
-            return validatorContainer.validator(toValidateValue, metaData.allowFutureDate);
+            return validatorContainer.validator(toValidateValue, internalComponentError);
         },
     }));
 
     return validatorContainersForType;
 }
 
-function buildCompulsoryValidator(metaData: DataElement): Array<?ValidatorContainer> {
+function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContainer> {
     return metaData.compulsory
         ?
         [
@@ -243,12 +250,12 @@ function buildCompulsoryValidator(metaData: DataElement): Array<?ValidatorContai
 function buildUniqueValidator(
     metaData: DataElement,
     querySingleResource: QuerySingleResource,
-): Array<?ValidatorContainer> {
+): Array<ValidatorContainer> {
     return metaData.unique
         ?
         [
             {
-                validator: (value: any, contextProps: ?Object) => {
+                validator: (value: any, internalComponentError?: ?{error: ?string, errorCode: ?string}, contextProps: ?Object) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
@@ -265,7 +272,7 @@ function buildUniqueValidator(
 }
 
 export const getValidators =
-(metaData: DataElement, querySingleResource: QuerySingleResource): Array<?ValidatorContainer> => [
+(metaData: DataElement, querySingleResource: QuerySingleResource): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,

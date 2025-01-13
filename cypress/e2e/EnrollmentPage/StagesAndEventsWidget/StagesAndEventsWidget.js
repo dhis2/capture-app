@@ -3,7 +3,7 @@ import { getCurrentYear } from '../../../support/date';
 import '../sharedSteps';
 
 After({ tags: '@with-restore-deleted-event' }, () => {
-    cy.visit('#/enrollment?enrollmentId=ikYMpSKXik1&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=Trc1H9T5C6f');
+    cy.visit('#/enrollment?enrollmentId=ITyaPVATEwc&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=wsk89u7zquT');
 
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')
@@ -11,7 +11,7 @@ After({ tags: '@with-restore-deleted-event' }, () => {
         .find('[data-test="create-new-button"]')
         .click();
 
-    cy.get('[data-test="capture-ui-input"]')
+    cy.get('input[type="text"]')
         .first()
         .type('2023-01-26')
         .blur();
@@ -215,7 +215,7 @@ When(/you click the (.*) event overflow button on the (.*) event$/, (buttonName,
 
     cy.get('[data-test="overflow-menu"]')
         .contains(buttonName)
-        .click();
+        .click({ force: true });
 });
 
 Then('the event should be skipped', () => {

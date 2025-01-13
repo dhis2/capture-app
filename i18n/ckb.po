@@ -2,13 +2,12 @@
 # Translators:
 # Antonia Bezenchek <antonia@informa.pro>, 2021
 # KRG HIS <antonia.bezenchek@informa.pro>, 2021
-# Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -44,6 +43,39 @@ msgstr ""
 "پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
 "تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
 "ئەم کردارە وەشانەکانیتر دادەخات"
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "حاڵەتەکە دەستکاری بکە"
+
+msgid "New event"
+msgstr "رووداوي نوي"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "گەڕان"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr ""
@@ -90,66 +122,6 @@ msgstr "ئەم نرخە دەسەلمێندرێت"
 msgid "Async field update failed"
 msgstr "ئەبدەیتکردنی خانەکە سەرکەوتوو نەبوو. "
 
-msgid "A value is required"
-msgstr "نرخێک پێویستە"
-
-msgid "Please provide a valid number"
-msgstr "تکایە ژمارەیەکی درووست بنووسە"
-
-msgid "Please provide a valid integer"
-msgstr "تکایە ژمارەیەکی درووست بنووسە"
-
-msgid "Please provide a positive integer"
-msgstr "تکایە ژمارەیەکی پۆسەتیڤ بنووسە"
-
-msgid "Please provide zero or a positive integer"
-msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنووسە"
-
-msgid "Please provide a negative integer"
-msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
-
-msgid "Please provide a valid date"
-msgstr "تکایە بەروارێکی درووست بنووسە"
-
-msgid "A date in the future is not allowed"
-msgstr ""
-
-msgid "Please provide a valid date and time"
-msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
-
-msgid "Please provide a valid time"
-msgstr "تکایە کاتێکی درووست بنووسە"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr "تکایە یو URLێکی درووست بنووسە"
-
-msgid "Please provide a valid email address"
-msgstr "تکایە ئیمەیڵێکی درووست بنووسە"
-
-msgid "Please provide a valid age"
-msgstr "تکایە تەمەنێکی درووست بنووسە"
-
-msgid "Please provide a valid phone number"
-msgstr "تکایە ژمارە مۆبایلێکی درووست بنووسە"
-
-msgid "Please provide a valid organisation unit"
-msgstr "تکایە ئۆرگانیزەیشن یونتێکی درووست بنووسە"
-
-msgid "Please provide valid coordinates"
-msgstr "تکایە کۆردینەیتی درووستی سەر نەخشە بنووسە"
-
-msgid "This value already exists"
-msgstr "ئەم نرخە پێشوتر هەبووە"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"From\"ناکرێت گەورەتربێت لە \"To\""
-
-msgid "Checking..."
-msgstr "پشکنین..."
-
 msgid "Area"
 msgstr "ناوچە"
 
@@ -161,6 +133,12 @@ msgstr "تۆمارکردن"
 
 msgid "Complete event"
 msgstr ""
+
+msgid "A value is required"
+msgstr "نرخێک پێویستە"
+
+msgid "Please provide a valid date"
+msgstr "تکایە بەروارێکی درووست بنووسە"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -174,8 +152,8 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr ""
 
-msgid "A future date is not allowed"
-msgstr "بەرواری داهاتوو ناکرێت تۆماربکرێت"
+msgid "A date in the future is not allowed"
+msgstr ""
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -300,9 +278,6 @@ msgstr ""
 
 msgid "No, cancel"
 msgstr ""
-
-msgid "New event"
-msgstr "رووداوي نوي"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -523,9 +498,6 @@ msgstr ""
 msgid "No match found"
 msgstr ""
 
-msgid "Search"
-msgstr "گەڕان"
-
 msgid "Clear"
 msgstr "پاککردنەوە"
 
@@ -683,7 +655,9 @@ msgstr ""
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 
-msgid "No access to program owner."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -858,9 +832,6 @@ msgstr ""
 msgid "You don't have access to edit this event"
 msgstr ""
 
-msgid "Edit event"
-msgstr "حاڵەتەکە دەستکاری بکە"
-
 msgid "View changelog"
 msgstr ""
 
@@ -898,15 +869,6 @@ msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
 msgid "Organisation unit could not be loaded"
 msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
 
-msgid "Dashboard"
-msgstr "شيتةل كردني داتا"
-
-msgid "Edit Event"
-msgstr ""
-
-msgid "View Event"
-msgstr ""
-
 msgid "Selected program"
 msgstr "پرۆگرامە هەڵبژێردراوەکە"
 
@@ -931,6 +893,9 @@ msgid "Loading"
 msgstr ""
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1071,7 +1036,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-msgid "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
 msgstr ""
 
 msgid "Edit"
@@ -1080,7 +1045,7 @@ msgstr "دةستكاري"
 msgid "No one is assigned to this event"
 msgstr "هیچ کەسێک بۆ ئەم حاڵەتە رانەسپێردراوە"
 
-msgid "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1166,6 +1131,9 @@ msgstr ""
 
 msgid "Coordinates"
 msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr "تکایە کۆردینەیتی درووستی سەر نەخشە بنووسە"
 
 msgid "Delete polygon"
 msgstr "فرەلاکە بسڕەوە"
@@ -1254,6 +1222,9 @@ msgstr ""
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "حاڵەتەکە بسڕەوە"
 
@@ -1270,9 +1241,6 @@ msgid "Event completed"
 msgstr ""
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
-
-msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Notes about this event"
@@ -1415,6 +1383,12 @@ msgstr ""
 msgid "Report date"
 msgstr ""
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "تکایە ئۆرگانیزەیشن یونتێکی درووست بنووسە"
+
 msgid "Please select a valid event"
 msgstr ""
 
@@ -1470,10 +1444,18 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "View linked event"
+msgstr ""
+
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "View linked event"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
 msgstr ""
 
 msgid "Scheduled"
@@ -1508,6 +1490,12 @@ msgstr ""
 
 msgid "Value"
 msgstr "بةها"
+
+msgid "File"
+msgstr ""
+
+msgid "Image"
+msgstr ""
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
@@ -1569,6 +1557,46 @@ msgstr "زانیاریەکان دابەزێنە"
 msgid "an error occurred loading working lists"
 msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr ""
 
@@ -1584,13 +1612,120 @@ msgstr ""
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Active enrollments"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
 msgstr ""
 
-msgid "Completed enrollments"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
 msgstr ""
 
-msgid "Cancelled enrollments"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1600,6 +1735,14 @@ msgid "an error occurred loading the working lists"
 msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Deselect all"
 msgstr ""
 
 msgid "Update view"
@@ -1708,6 +1851,60 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "تکایە ژمارەیەکی درووست بنووسە"
+
+msgid "Please provide a valid integer"
+msgstr "تکایە ژمارەیەکی درووست بنووسە"
+
+msgid "Please provide a positive integer"
+msgstr "تکایە ژمارەیەکی پۆسەتیڤ بنووسە"
+
+msgid "Please provide zero or a positive integer"
+msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنووسە"
+
+msgid "Please provide a negative integer"
+msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
+
+msgid "Please provide a valid date and time"
+msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
+
+msgid "Please provide a valid time"
+msgstr "تکایە کاتێکی درووست بنووسە"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr "تکایە یو URLێکی درووست بنووسە"
+
+msgid "Please provide a valid email address"
+msgstr "تکایە ئیمەیڵێکی درووست بنووسە"
+
+msgid "Please provide a valid age"
+msgstr "تکایە تەمەنێکی درووست بنووسە"
+
+msgid "Please provide a valid phone number"
+msgstr "تکایە ژمارە مۆبایلێکی درووست بنووسە"
+
+msgid "This value already exists"
+msgstr "ئەم نرخە پێشوتر هەبووە"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"From\"ناکرێت گەورەتربێت لە \"To\""
+
+msgid "Checking..."
+msgstr "پشکنین..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

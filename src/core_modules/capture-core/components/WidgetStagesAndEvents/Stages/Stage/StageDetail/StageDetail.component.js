@@ -19,7 +19,7 @@ import {
     Tooltip,
 } from '@dhis2/ui';
 import log from 'loglevel';
-import { sortDataFromEvent } from './hooks/sortFuntions';
+import { sortDataFromEvent } from './hooks/sortFunctions';
 import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
@@ -114,7 +114,6 @@ const StageDetailPlain = (props: Props) => {
     const { stage } = getProgramAndStageForProgram(programId, stageId);
     const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElements, events);
-
 
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);

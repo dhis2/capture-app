@@ -4,19 +4,18 @@
 # Raja Fathurrahim, 2023
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2023
 # Philip Larsen Donnelly, 2024
-# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2024
-# ratih syabrina, 2024
-# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2024
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2024
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2024
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2024
+# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-14T14:53:34.553Z\n"
+"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2024\n"
+"Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,6 +50,39 @@ msgstr ""
 "(dalam domain yang sama). Harap segarkan halaman ini jika Anda ingin "
 "menggunakan versi ini lagi, tetapi perlu diketahui bahwa ini akan menutup "
 "versi lain."
+
+msgid "Enrollment dashboard"
+msgstr ""
+
+msgid "View event"
+msgstr ""
+
+msgid "Edit event"
+msgstr "Sunting even"
+
+msgid "New event"
+msgstr "Event baru"
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "{{trackedEntityName}} list"
+msgstr ""
+
+msgid "Search"
+msgstr "Pencarian"
+
+msgid "Working List"
+msgstr ""
+
+msgid "Event list"
+msgstr ""
 
 msgid "More"
 msgstr "Lagi"
@@ -97,66 +129,6 @@ msgstr "Nilai ini memvalidasi"
 msgid "Async field update failed"
 msgstr "Pembaruan bidang asinkron gagal"
 
-msgid "A value is required"
-msgstr "Nilai diperlukan"
-
-msgid "Please provide a valid number"
-msgstr "Harap berikan nomor yang valid"
-
-msgid "Please provide a valid integer"
-msgstr "Harap berikan bilangan bulat yang valid"
-
-msgid "Please provide a positive integer"
-msgstr "Berikan bilangan bulat positif positive"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Harap berikan nol atau bilangan bulat positif"
-
-msgid "Please provide a negative integer"
-msgstr "Harap berikan bilangan bulat negatif"
-
-msgid "Please provide a valid date"
-msgstr "Harap berikan tanggal yang valid"
-
-msgid "A date in the future is not allowed"
-msgstr "Tanggal di masa depan tidak diperbolehkan"
-
-msgid "Please provide a valid date and time"
-msgstr "Harap berikan tanggal dan waktu yang valid"
-
-msgid "Please provide a valid time"
-msgstr "Harap berikan waktu yang valid"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr "Harap berikan url yang valid"
-
-msgid "Please provide a valid email address"
-msgstr "Harap berikan alamat email yang valid"
-
-msgid "Please provide a valid age"
-msgstr "Harap berikan usia yang valid"
-
-msgid "Please provide a valid phone number"
-msgstr "Harap berikan nomor telepon yang valid"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Harap berikan unit organisasi yang valid"
-
-msgid "Please provide valid coordinates"
-msgstr "Harap berikan koordinat yang valid"
-
-msgid "This value already exists"
-msgstr "Nilai ini sudah ada"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"Dari\" tidak boleh lebih besar dari \"Ke\""
-
-msgid "Checking..."
-msgstr "Memeriksa..."
-
 msgid "Area"
 msgstr "Daerah"
 
@@ -168,6 +140,12 @@ msgstr "Pendaftaran"
 
 msgid "Complete event"
 msgstr "Even lengkap"
+
+msgid "A value is required"
+msgstr "Nilai diperlukan"
+
+msgid "Please provide a valid date"
+msgstr "Harap berikan tanggal yang valid"
 
 msgid "{{ stageName }} - Basic info"
 msgstr ""
@@ -181,8 +159,8 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr ""
 
-msgid "A future date is not allowed"
-msgstr "Tanggal yang akan datang tidak diperbolehkan"
+msgid "A date in the future is not allowed"
+msgstr "Tanggal di masa depan tidak diperbolehkan"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr ""
@@ -308,9 +286,6 @@ msgstr "Ya, hapus perubahan"
 
 msgid "No, cancel"
 msgstr "tidak, batalkan"
-
-msgid "New event"
-msgstr "Event baru"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "Anda tidak memiliki akses untuk membuat even di pilihan saat ini"
@@ -528,9 +503,6 @@ msgstr "Tipe opsi filter"
 msgid "No match found"
 msgstr "tidak ditemukan data yang sesuai"
 
-msgid "Search"
-msgstr "Pencarian"
-
 msgid "Clear"
 msgstr "Hapus"
 
@@ -690,7 +662,9 @@ msgstr ""
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
 msgstr ""
 
-msgid "No access to program owner."
+msgid ""
+"You do not have permissions to access to this program, registering unit or "
+"record, contact your administrator for more information."
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
@@ -869,9 +843,6 @@ msgstr "acara/peristiwa"
 msgid "You don't have access to edit this event"
 msgstr ""
 
-msgid "Edit event"
-msgstr "Sunting even"
-
 msgid "View changelog"
 msgstr ""
 
@@ -909,15 +880,6 @@ msgstr "Even tidak dapat dimuat"
 msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
 
-msgid "Dashboard"
-msgstr "Dasbor"
-
-msgid "Edit Event"
-msgstr ""
-
-msgid "View Event"
-msgstr ""
-
 msgid "Selected program"
 msgstr "Program yang dipilih"
 
@@ -941,6 +903,9 @@ msgid "Loading"
 msgstr "Loading"
 
 msgid "An error occurred while loading the form"
+msgstr ""
+
+msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1087,7 +1052,7 @@ msgstr ""
 msgid "Assigned to"
 msgstr "Ditugaskan pada"
 
-msgid "You don't have access to edit this assignee"
+msgid "You don't have access to edit the assigned user"
 msgstr ""
 
 msgid "Edit"
@@ -1096,7 +1061,7 @@ msgstr "Sunting"
 msgid "No one is assigned to this event"
 msgstr "Tidak ada yang ditugaskan untuk even ini"
 
-msgid "You don't have access to assign an assignee"
+msgid "You don't have access to assign a user to this event"
 msgstr ""
 
 msgid "Assign"
@@ -1142,6 +1107,9 @@ msgstr "Tandai sebagai dibatalkan"
 msgid "Mark incomplete"
 msgstr "Tandai tidak lengkap"
 
+msgid "You do not have access to delete this enrollment"
+msgstr ""
+
 msgid "Delete enrollment"
 msgstr "Hapus pendaftaran"
 
@@ -1181,6 +1149,9 @@ msgstr ""
 
 msgid "Coordinates"
 msgstr "Koordinat"
+
+msgid "Please provide valid coordinates"
+msgstr "Harap berikan koordinat yang valid"
 
 msgid "Delete polygon"
 msgstr "Hapus poligon"
@@ -1269,6 +1240,9 @@ msgstr "Peringatan"
 msgid "stage not found in rules execution"
 msgstr ""
 
+msgid "Please provide an valid organisation unit"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Hapus even"
 
@@ -1285,9 +1259,6 @@ msgid "Event completed"
 msgstr "Even selesai"
 
 msgid "The event cannot be edited after it has been completed"
-msgstr ""
-
-msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Notes about this event"
@@ -1428,6 +1399,12 @@ msgstr ""
 msgid "Report date"
 msgstr "Tanggal pelaporan"
 
+msgid "Please enter a date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr "Harap berikan unit organisasi yang valid"
+
 msgid "Please select a valid event"
 msgstr ""
 
@@ -1482,10 +1459,18 @@ msgstr ""
 msgid "Stages and Events"
 msgstr "Tahapan dan Even"
 
+msgid "View linked event"
+msgstr ""
+
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "View linked event"
+msgid "Linked event"
+msgstr ""
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
 msgstr ""
 
 msgid "Scheduled"
@@ -1520,6 +1505,12 @@ msgstr ""
 
 msgid "Value"
 msgstr "Nilai"
+
+msgid "File"
+msgstr "Berkas"
+
+msgid "Image"
+msgstr "Gambar"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr ""
@@ -1581,6 +1572,46 @@ msgstr "Unduh data..."
 msgid "an error occurred loading working lists"
 msgstr "terjadi kesalahan saat memuat daftar kerja"
 
+msgid "You do not have access to complete events"
+msgstr ""
+
+msgid "Complete events"
+msgstr ""
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr ""
+
+msgid "There are no active events to complete in the current selection."
+msgstr ""
+
+msgid "Error completing events"
+msgstr ""
+
+msgid "There was an error completing the events."
+msgstr ""
+
+msgid "Details (Advanced)"
+msgstr ""
+
+msgid "An unknown error occurred."
+msgstr ""
+
+msgid "An error occurred while completing events"
+msgstr ""
+
+msgid "An error occurred while deleting the events"
+msgstr ""
+
+msgid "You do not have access to delete events"
+msgstr ""
+
+msgid "Delete events"
+msgstr ""
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
 msgid "Registration Date"
 msgstr "tanggal registrasi"
 
@@ -1596,13 +1627,112 @@ msgstr "Tindak lanjut"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr ""
 
-msgid "Active enrollments"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
 msgstr ""
 
-msgid "Completed enrollments"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
 msgstr ""
 
-msgid "Cancelled enrollments"
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr ""
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr ""
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] ""
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] ""
+
+msgid "Mark all events within enrollments as complete"
+msgstr ""
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+
+msgid "Complete enrollments"
+msgstr ""
+
+msgid "Error completing enrollments"
+msgstr ""
+
+msgid "No active enrollments to complete"
+msgstr ""
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] ""
+
+msgid "An error occurred when completing the enrollments"
+msgstr ""
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr ""
+
+msgid "You do not have access to delete enrollments"
+msgstr ""
+
+msgid "Delete enrollments"
+msgstr ""
+
+msgid "Delete selected enrollments"
+msgstr ""
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr ""
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr ""
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] ""
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] ""
+
+msgid "An error occurred when deleting enrollments"
+msgstr ""
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr ""
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] ""
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr ""
+
+msgid "An error occurred while deleting the records"
 msgstr ""
 
 msgid "Working list could not be updated"
@@ -1613,6 +1743,13 @@ msgstr ""
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} terpilih"
+
+msgid "Deselect all"
+msgstr "Batal pilih semua"
 
 msgid "Update view"
 msgstr "Perbarui tampilan"
@@ -1720,6 +1857,60 @@ msgid "Error editing the event, the changes made were not saved"
 msgstr ""
 
 msgid "Error updating the Assignee"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr "Harap berikan nomor yang valid"
+
+msgid "Please provide a valid integer"
+msgstr "Harap berikan bilangan bulat yang valid"
+
+msgid "Please provide a positive integer"
+msgstr "Berikan bilangan bulat positif positive"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Harap berikan nol atau bilangan bulat positif"
+
+msgid "Please provide a negative integer"
+msgstr "Harap berikan bilangan bulat negatif"
+
+msgid "Please provide a valid date and time"
+msgstr "Harap berikan tanggal dan waktu yang valid"
+
+msgid "Please provide a valid time"
+msgstr "Harap berikan waktu yang valid"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr "Harap berikan url yang valid"
+
+msgid "Please provide a valid email address"
+msgstr "Harap berikan alamat email yang valid"
+
+msgid "Please provide a valid age"
+msgstr "Harap berikan usia yang valid"
+
+msgid "Please provide a valid phone number"
+msgstr "Harap berikan nomor telepon yang valid"
+
+msgid "This value already exists"
+msgstr "Nilai ini sudah ada"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"Dari\" tidak boleh lebih besar dari \"Ke\""
+
+msgid "Checking..."
+msgstr "Memeriksa..."
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
 msgstr ""
 
 msgid "Set coordinate"

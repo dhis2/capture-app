@@ -1,3 +1,101 @@
+## [101.21.3](https://github.com/dhis2/capture-app/compare/v101.21.2...v101.21.3) (2025-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-17613] Use new note endpoint ([#3908](https://github.com/dhis2/capture-app/issues/3908)) ([a9fdea8](https://github.com/dhis2/capture-app/commit/a9fdea8ac8284b28ec3c0acf0551e9cd1a68a180))
+
+## [101.21.2](https://github.com/dhis2/capture-app/compare/v101.21.1...v101.21.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* [DHIS2-18569] Relationship widget limited to 50 entries ([#3927](https://github.com/dhis2/capture-app/issues/3927)) ([a1e493d](https://github.com/dhis2/capture-app/commit/a1e493d48179e7749d61f52504fdeb3c11dfa53e))
+
+## [101.21.1](https://github.com/dhis2/capture-app/compare/v101.21.0...v101.21.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* [DHIS2-18632] Sorting stage detail table on orgunit breaks the app ([#3917](https://github.com/dhis2/capture-app/issues/3917)) ([15414cc](https://github.com/dhis2/capture-app/commit/15414cc73f7ce74d4d057acad13bf4855d358426))
+
+# [101.21.0](https://github.com/dhis2/capture-app/compare/v101.20.3...v101.21.0) (2025-01-07)
+
+
+### Features
+
+* [DHIS2-18328] Handle log entries for occurredAt, scheduledAt and geometry ([#3887](https://github.com/dhis2/capture-app/issues/3887)) ([f670971](https://github.com/dhis2/capture-app/commit/f670971808f49b75295c1d3c7ef25a747b4888df))
+
+## [101.20.3](https://github.com/dhis2/capture-app/compare/v101.20.2...v101.20.3) (2024-12-29)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f58bcd3](https://github.com/dhis2/capture-app/commit/f58bcd3c62d45101bbb4d5b16f504f1699cbb3d4))
+
+## [101.20.2](https://github.com/dhis2/capture-app/compare/v101.20.1...v101.20.2) (2024-12-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a463047](https://github.com/dhis2/capture-app/commit/a4630471d77804436c8803daed4bd05e5c61f2c7))
+
+## [101.20.1](https://github.com/dhis2/capture-app/compare/v101.20.0...v101.20.1) (2024-12-19)
+
+
+### Bug Fixes
+
+* [DHIS2-118654] Use importStrategy=DELETE to support older backend ([#3914](https://github.com/dhis2/capture-app/issues/3914)) ([eb5325e](https://github.com/dhis2/capture-app/commit/eb5325e71087c0e00011878bd58f2fef3ad55eea))
+
+# [101.20.0](https://github.com/dhis2/capture-app/compare/v101.19.4...v101.20.0) (2024-12-17)
+
+
+### Features
+
+* [DHIS2-18017] Ability to unlink event from edit/view event page ([#3846](https://github.com/dhis2/capture-app/issues/3846)) ([ad352f5](https://github.com/dhis2/capture-app/commit/ad352f5845a8780668ecf5659100f650c697d426))
+
+## [101.19.4](https://github.com/dhis2/capture-app/compare/v101.19.3...v101.19.4) (2024-12-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ef97375](https://github.com/dhis2/capture-app/commit/ef973753e9014541c22215ea0690fecb819c82e3))
+
+## [101.19.3](https://github.com/dhis2/capture-app/compare/v101.19.2...v101.19.3) (2024-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18614] prevent runtime error when only one date range is selected ([#3906](https://github.com/dhis2/capture-app/issues/3906)) ([4699a84](https://github.com/dhis2/capture-app/commit/4699a84b138a17bc42fae5be6685a71b840c1a43))
+
+## [101.19.2](https://github.com/dhis2/capture-app/compare/v101.19.1...v101.19.2) (2024-12-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0ddef74](https://github.com/dhis2/capture-app/commit/0ddef746e773ab6ede7b2e297cb169b5887ad446))
+
+## [101.19.1](https://github.com/dhis2/capture-app/compare/v101.19.0...v101.19.1) (2024-12-05)
+
+
+### Bug Fixes
+
+* [DHIS2-17854] validate the assigned values from rules engine ([#3783](https://github.com/dhis2/capture-app/issues/3783)) ([db9d6b8](https://github.com/dhis2/capture-app/commit/db9d6b8f23fb29af30ef61fb3649c167073a46ff))
+
+# [101.19.0](https://github.com/dhis2/capture-app/compare/v101.18.1...v101.19.0) (2024-12-03)
+
+
+### Features
+
+* [DHIS2-15462] Use dhis2 UI calendarinput component in forms ([#3658](https://github.com/dhis2/capture-app/issues/3658)) ([f39fd47](https://github.com/dhis2/capture-app/commit/f39fd471cb2f176a417667481b17a72b2d4651dd))
+
+## [101.18.1](https://github.com/dhis2/capture-app/compare/v101.18.0...v101.18.1) (2024-12-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a2d43b2](https://github.com/dhis2/capture-app/commit/a2d43b2db7b926066a438d6f5f42ad19d37987fe))
+
 # [101.18.0](https://github.com/dhis2/capture-app/compare/v101.17.0...v101.18.0) (2024-11-28)
 
 

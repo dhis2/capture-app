@@ -1,6 +1,6 @@
 // @flow
 import { effectActions } from '@dhis2/rules-engine-javascript';
-import type { AssignOutputEffect } from '@dhis2/rules-engine-javascript';
+import type { AssignOutputEffectWithValidations } from '../../rules';
 import { createReducerDescription } from '../../trackerRedux';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
@@ -63,7 +63,7 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
-        const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
+        const assignEffects: { [id: string]: Array<AssignOutputEffectWithValidations> } =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
         if (!assignEffects) {
             return state;
@@ -76,7 +76,7 @@ export const formsValuesDesc = createReducerDescription({
                 ...state[payload.formId],
                 ...Object.keys(assignEffects).reduce((acc, id) => {
                     const effectsForId = assignEffects[id];
-                    const value = effectsForId[effectsForId.length - 1].value;
+                    const value = effectsForId[0].value;
                     acc[id] = value;
                     return acc;
                 }, {}),
@@ -206,23 +206,28 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const { formId, rulesEffects } = action.payload;
         const formSectionFields = state[formId];
-        const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
+        const assignEffects: { [id: string]: Array<AssignOutputEffectWithValidations> } =
             rulesEffects && rulesEffects[effectActions.ASSIGN_VALUE];
 
-        if (!assignEffects || !formSectionFields) {
+        if (!assignEffects) {
             return state;
         }
 
         const updatedFields = Object.keys(assignEffects).reduce((acc, id) => {
-            if (formSectionFields[id]) {
+            const effect = assignEffects[id][0];
+            const isEffectWithValidations = effect.hasOwnProperty('valid');
+            if (formSectionFields?.[id] && isEffectWithValidations) {
                 acc[id] = {
-                    valid: true,
-                    errorData: undefined,
-                    errorMessage: undefined,
-                    errorType: undefined,
-                    modified: true,
+                    valid: effect.valid,
+                    errorData: effect.errorData,
+                    errorMessage: effect.errorMessage,
+                    errorType: effect.errorType,
                     touched: true,
                     validatingMessage: null,
+                };
+            } else {
+                acc[id] = {
+                    touched: true,
                 };
             }
             return acc;

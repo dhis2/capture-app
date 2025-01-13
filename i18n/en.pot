@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
-"PO-Revision-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2024-12-15T15:25:38.375Z\n"
+"PO-Revision-Date: 2024-12-15T15:25:38.375Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -101,6 +101,24 @@ msgstr "Date of enrollment"
 msgid "Last updated"
 msgstr "Last updated"
 
+msgid "Lat"
+msgstr "Lat"
+
+msgid "Long"
+msgstr "Long"
+
+msgid "lat"
+msgstr "lat"
+
+msgid "long"
+msgstr "long"
+
+msgid "Show less"
+msgstr "Show less"
+
+msgid "Show more"
+msgstr "Show more"
+
 msgid "error encountered during field validation"
 msgstr "error encountered during field validation"
 
@@ -112,66 +130,6 @@ msgstr "This value is validating"
 
 msgid "Async field update failed"
 msgstr "Async field update failed"
-
-msgid "A value is required"
-msgstr "A value is required"
-
-msgid "Please provide a valid number"
-msgstr "Please provide a valid number"
-
-msgid "Please provide a valid integer"
-msgstr "Please provide a valid integer"
-
-msgid "Please provide a positive integer"
-msgstr "Please provide a positive integer"
-
-msgid "Please provide zero or a positive integer"
-msgstr "Please provide zero or a positive integer"
-
-msgid "Please provide a negative integer"
-msgstr "Please provide a negative integer"
-
-msgid "Please provide a valid date"
-msgstr "Please provide a valid date"
-
-msgid "A date in the future is not allowed"
-msgstr "A date in the future is not allowed"
-
-msgid "Please provide a valid date and time"
-msgstr "Please provide a valid date and time"
-
-msgid "Please provide a valid time"
-msgstr "Please provide a valid time"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "Please provide an integer between 0 and 100"
-
-msgid "Please provide a valid url"
-msgstr "Please provide a valid url"
-
-msgid "Please provide a valid email address"
-msgstr "Please provide a valid email address"
-
-msgid "Please provide a valid age"
-msgstr "Please provide a valid age"
-
-msgid "Please provide a valid phone number"
-msgstr "Please provide a valid phone number"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Please provide a valid organisation unit"
-
-msgid "Please provide valid coordinates"
-msgstr "Please provide valid coordinates"
-
-msgid "This value already exists"
-msgstr "This value already exists"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"From\" cannot be greater than \"To\""
-
-msgid "Checking..."
-msgstr "Checking..."
 
 msgid "Area"
 msgstr "Area"
@@ -185,6 +143,12 @@ msgstr "Enrollment"
 msgid "Complete event"
 msgstr "Complete event"
 
+msgid "A value is required"
+msgstr "A value is required"
+
+msgid "Please provide a valid date"
+msgstr "Please provide a valid date"
+
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - Basic info"
 
@@ -197,8 +161,8 @@ msgstr "{{ stageName }} - Status"
 msgid "Please select {{categoryName}}"
 msgstr "Please select {{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "A future date is not allowed"
+msgid "A date in the future is not allowed"
+msgstr "A date in the future is not allowed"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
@@ -1198,6 +1162,9 @@ msgstr "Set coordinates"
 msgid "Coordinates"
 msgstr "Coordinates"
 
+msgid "Please provide valid coordinates"
+msgstr "Please provide valid coordinates"
+
 msgid "Delete polygon"
 msgstr "Delete polygon"
 
@@ -1454,6 +1421,12 @@ msgstr "Scheduled date"
 msgid "Report date"
 msgstr "Report date"
 
+msgid "Please enter a date"
+msgstr "Please enter a date"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Please provide a valid organisation unit"
+
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
 
@@ -1511,8 +1484,43 @@ msgstr "{{ scheduledEvents }} scheduled"
 msgid "Stages and Events"
 msgstr "Stages and Events"
 
+msgid "An error occurred while unlinking and deleting the event."
+msgstr "An error occurred while unlinking and deleting the event."
+
+msgid "Unlink and delete linked event"
+msgstr "Unlink and delete linked event"
+
+msgid ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+msgstr ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+
+msgid "Yes, unlink and delete linked event"
+msgstr "Yes, unlink and delete linked event"
+
+msgid "Unlink event"
+msgstr "Unlink event"
+
+msgid ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+msgstr ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+
+msgid "Yes, unlink event"
+msgstr "Yes, unlink event"
+
 msgid "View linked event"
 msgstr "View linked event"
+
+msgid "You do not have access to remove the link between these events"
+msgstr "You do not have access to remove the link between these events"
+
+msgid "You do not have access to remove the link and delete the linked event"
+msgstr "You do not have access to remove the link and delete the linked event"
 
 msgid "An error occurred while loading the widget."
 msgstr "An error occurred while loading the widget."
@@ -1929,6 +1937,60 @@ msgstr "Error editing the event, the changes made were not saved"
 
 msgid "Error updating the Assignee"
 msgstr "Error updating the Assignee"
+
+msgid "Please provide a valid number"
+msgstr "Please provide a valid number"
+
+msgid "Please provide a valid integer"
+msgstr "Please provide a valid integer"
+
+msgid "Please provide a positive integer"
+msgstr "Please provide a positive integer"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Please provide zero or a positive integer"
+
+msgid "Please provide a negative integer"
+msgstr "Please provide a negative integer"
+
+msgid "Please provide a valid date and time"
+msgstr "Please provide a valid date and time"
+
+msgid "Please provide a valid time"
+msgstr "Please provide a valid time"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "Please provide an integer between 0 and 100"
+
+msgid "Please provide a valid url"
+msgstr "Please provide a valid url"
+
+msgid "Please provide a valid email address"
+msgstr "Please provide a valid email address"
+
+msgid "Please provide a valid age"
+msgstr "Please provide a valid age"
+
+msgid "Please provide a valid phone number"
+msgstr "Please provide a valid phone number"
+
+msgid "This value already exists"
+msgstr "This value already exists"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"From\" cannot be greater than \"To\""
+
+msgid "Checking..."
+msgstr "Checking..."
+
+msgid "Please provide a valid positive integer"
+msgstr "Please provide a valid positive integer"
+
+msgid "Please enter a valid time"
+msgstr "Please enter a valid time"
+
+msgid "Please enter a time"
+msgstr "Please enter a time"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"

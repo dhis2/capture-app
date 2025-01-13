@@ -1,14 +1,14 @@
 # 
 # Translators:
 # Philip Larsen Donnelly, 2024
-# 晓东 林 <13981924470@126.com>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
+# 晓东 林 <13981924470@126.com>, 2024
 # easylin <lin_xd@126.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-10-25T18:18:11.518Z\n"
+"POT-Creation-Date: 2024-12-05T11:39:04.447Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2024\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -40,6 +40,39 @@ msgid ""
 msgstr ""
 "您在同一域中打开了另一个版本的Capture App。当前，Capture "
 "App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
+
+msgid "Enrollment dashboard"
+msgstr "注册仪表板"
+
+msgid "View event"
+msgstr "查看活动"
+
+msgid "Edit event"
+msgstr "编辑事件"
+
+msgid "New event"
+msgstr "新事件"
+
+msgid "Active enrollments"
+msgstr "活跃注册"
+
+msgid "Completed enrollments"
+msgstr "完成注册"
+
+msgid "Cancelled enrollments"
+msgstr "取消注册"
+
+msgid "{{trackedEntityName}} list"
+msgstr "{{trackedEntityName}} 清单"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Working List"
+msgstr "工作列表"
+
+msgid "Event list"
+msgstr "事件列表"
 
 msgid "More"
 msgstr "更多"
@@ -86,66 +119,6 @@ msgstr "值正在被验证"
 msgid "Async field update failed"
 msgstr "异步字段更新失败"
 
-msgid "A value is required"
-msgstr "需要一个值"
-
-msgid "Please provide a valid number"
-msgstr "请提供一个有效的数字"
-
-msgid "Please provide a valid integer"
-msgstr "请提供一个整数"
-
-msgid "Please provide a positive integer"
-msgstr "提供一个正整数"
-
-msgid "Please provide zero or a positive integer"
-msgstr "0或负整数"
-
-msgid "Please provide a negative integer"
-msgstr "负整数"
-
-msgid "Please provide a valid date"
-msgstr "请提供有效的日期"
-
-msgid "A date in the future is not allowed"
-msgstr "不允许将来的日期"
-
-msgid "Please provide a valid date and time"
-msgstr "日期和时间"
-
-msgid "Please provide a valid time"
-msgstr "有效的时间"
-
-msgid "Please provide an integer between 0 and 100"
-msgstr "请提供 0 到 100 之间的整数"
-
-msgid "Please provide a valid url"
-msgstr "请提供有效的URL"
-
-msgid "Please provide a valid email address"
-msgstr "请提供有效的邮箱"
-
-msgid "Please provide a valid age"
-msgstr "请提供有效年龄"
-
-msgid "Please provide a valid phone number"
-msgstr "请提供有效的电话号码"
-
-msgid "Please provide a valid organisation unit"
-msgstr "请提供有效的机构"
-
-msgid "Please provide valid coordinates"
-msgstr "请提供有效坐标"
-
-msgid "This value already exists"
-msgstr "值已经存在"
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr "自不能大于至"
-
-msgid "Checking..."
-msgstr "检查"
-
 msgid "Area"
 msgstr "面积"
 
@@ -157,6 +130,12 @@ msgstr "报名"
 
 msgid "Complete event"
 msgstr "完成事件"
+
+msgid "A value is required"
+msgstr "需要一个值"
+
+msgid "Please provide a valid date"
+msgstr "请提供有效的日期"
 
 msgid "{{ stageName }} - Basic info"
 msgstr "{{ stageName }} - 基本信息"
@@ -170,8 +149,8 @@ msgstr "{{ stageName }} - 状态"
 msgid "Please select {{categoryName}}"
 msgstr "请选择{{categoryName}}"
 
-msgid "A future date is not allowed"
-msgstr "将来的日期不允许"
+msgid "A date in the future is not allowed"
+msgstr "不允许将来的日期"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
 msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存新注册。"
@@ -292,9 +271,6 @@ msgstr "是的，放弃更改"
 
 msgid "No, cancel"
 msgstr "不，取消"
-
-msgid "New event"
-msgstr "新事件"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr "您无权在当前选择中创建活动"
@@ -508,9 +484,6 @@ msgstr "键入过滤选项"
 msgid "No match found"
 msgstr "未找到匹配项"
 
-msgid "Search"
-msgstr "搜索"
-
 msgid "Clear"
 msgstr "清除"
 
@@ -671,7 +644,7 @@ msgstr "在此计划中为 {{teiDisplayName}} 添加新注册。"
 msgid ""
 "You do not have permissions to access to this program, registering unit or "
 "record, contact your administrator for more information."
-msgstr ""
+msgstr "您没有访问此项目、注册单元或记录的权限，请联系您的管理员获取更多信息。"
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "该项目未报名{{teiDisplayName}} 。"
@@ -846,9 +819,6 @@ msgstr "事件"
 msgid "You don't have access to edit this event"
 msgstr "您无权编辑此事件"
 
-msgid "Edit event"
-msgstr "编辑事件"
-
 msgid "View changelog"
 msgstr "查看变更日志"
 
@@ -884,15 +854,6 @@ msgstr "事件不能载入"
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
-msgid "Dashboard"
-msgstr "仪表盘"
-
-msgid "Edit Event"
-msgstr "编辑事件"
-
-msgid "View Event"
-msgstr "查看活动"
-
 msgid "Selected program"
 msgstr "选择的项目"
 
@@ -917,6 +878,9 @@ msgstr "载入"
 
 msgid "An error occurred while loading the form"
 msgstr "加载表格时发生错误"
+
+msgid "Back to all stages and events"
+msgstr "回到所有阶段和事件"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -1059,7 +1023,7 @@ msgid "Assigned to"
 msgstr "指派到"
 
 msgid "You don't have access to edit the assigned user"
-msgstr ""
+msgstr "您没有编辑已分配用户的权限"
 
 msgid "Edit"
 msgstr "编辑"
@@ -1068,7 +1032,7 @@ msgid "No one is assigned to this event"
 msgstr "没有人被分配到的该事件"
 
 msgid "You don't have access to assign a user to this event"
-msgstr ""
+msgstr "您没有为该事件分配用户的权限"
 
 msgid "Assign"
 msgstr "分配"
@@ -1153,6 +1117,9 @@ msgstr "设置坐标"
 
 msgid "Coordinates"
 msgstr "坐标"
+
+msgid "Please provide valid coordinates"
+msgstr "请提供有效坐标"
 
 msgid "Delete polygon"
 msgstr "删除多边形"
@@ -1241,6 +1208,9 @@ msgstr "警告"
 msgid "stage not found in rules execution"
 msgstr "在规则执行中找不到阶段"
 
+msgid "Please provide an valid organisation unit"
+msgstr "请提供有效的组织单位"
+
 msgid "Delete event"
 msgstr "删除事件"
 
@@ -1258,9 +1228,6 @@ msgstr "事件完成"
 
 msgid "The event cannot be edited after it has been completed"
 msgstr "事件完成后不可编辑"
-
-msgid "Back to all stages and events"
-msgstr "回到所有阶段和事件"
 
 msgid "Notes about this event"
 msgstr "事件注意事项"
@@ -1402,6 +1369,12 @@ msgstr "调度日期"
 msgid "Report date"
 msgstr "报告日期"
 
+msgid "Please enter a date"
+msgstr "请输入日期"
+
+msgid "Please provide a valid organisation unit"
+msgstr "请提供有效的机构"
+
 msgid "Please select a valid event"
 msgstr "请选择一个有效的事件"
 
@@ -1456,11 +1429,50 @@ msgstr "{{ scheduledEvents }} 已安排"
 msgid "Stages and Events"
 msgstr "阶段与活动"
 
-msgid "An error occurred while loading the widget."
-msgstr "加载小部件时发生错误。"
+msgid "An error occurred while unlinking and deleting the event."
+msgstr ""
+
+msgid "Unlink and delete linked event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+msgstr ""
+
+msgid "Yes, unlink and delete linked event"
+msgstr ""
+
+msgid "Unlink event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+msgstr ""
+
+msgid "Yes, unlink event"
+msgstr ""
 
 msgid "View linked event"
 msgstr "查看链接事件"
+
+msgid "You do not have access to remove the link between these events"
+msgstr ""
+
+msgid "You do not have access to remove the link and delete the linked event"
+msgstr ""
+
+msgid "An error occurred while loading the widget."
+msgstr "加载小部件时发生错误。"
+
+msgid "Linked event"
+msgstr "关联事件"
+
+msgid ""
+"This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
+"the linked event details before entering data below"
+msgstr "此{{stageName}} 事件与{{linkedStageName}} 事件相关联。在输入以下数据之前，请查看链接事件的详细信息"
 
 msgid "Scheduled"
 msgstr "已经调度"
@@ -1494,6 +1506,12 @@ msgstr "改变"
 
 msgid "Value"
 msgstr "价值"
+
+msgid "File"
+msgstr "文件"
+
+msgid "Image"
+msgstr "图片(PNG)"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "新的 {{trackedEntityTypeName}} 关系"
@@ -1555,6 +1573,46 @@ msgstr "下载数据"
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
 
+msgid "You do not have access to complete events"
+msgstr "您无法访问完成的事件"
+
+msgid "Complete events"
+msgstr "完成事件"
+
+msgid "Are you sure you want to complete all active events in selection?"
+msgstr "您确定要在选择中完成所有活动事件吗？"
+
+msgid "There are no active events to complete in the current selection."
+msgstr "当前选择中没有要完成的活动。"
+
+msgid "Error completing events"
+msgstr "完成事件 错误"
+
+msgid "There was an error completing the events."
+msgstr "完成事件时出现错误。"
+
+msgid "Details (Advanced)"
+msgstr "详细信息（高级）"
+
+msgid "An unknown error occurred."
+msgstr "出现未知错误。"
+
+msgid "An error occurred while completing events"
+msgstr "完成事件时发生错误"
+
+msgid "An error occurred while deleting the events"
+msgstr "删除事件时发生错误"
+
+msgid "You do not have access to delete events"
+msgstr "您无权删除事件"
+
+msgid "Delete events"
+msgstr "删除事件"
+
+msgid ""
+"This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr "此操作无法撤销。您确定要删除所选事件吗？"
+
 msgid "Registration Date"
 msgstr "登记日期"
 
@@ -1570,14 +1628,113 @@ msgstr "后续跟踪"
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "选择要按 {{label}} 筛选的项目阶段"
 
-msgid "Active enrollments"
-msgstr "活跃注册"
+msgid ""
+"Some enrollments were completed successfully, but there was an error while "
+"completing the rest. Please see the details below."
+msgstr "部分注册已成功完成，但在完成其他注册时出现错误。详情请见下文。"
 
-msgid "Completed enrollments"
+msgid ""
+"There was an error while completing the enrollments. Please see the details "
+"below."
+msgstr "在完成注册时出现错误。请参阅下面的详细信息。"
+
+msgid ""
+"An unexpected error occurred while fetching the enrollments. Please try "
+"again."
+msgstr "在获取注册信息时发生了意外错误。请重试。"
+
+msgid ""
+"There are currently no active enrollments in the selection. All enrollments "
+"are already completed or cancelled."
+msgstr "该选项中目前没有有效注册。所有注册均已完成或取消。"
+
+msgid ""
+"This action will complete {{count}} active enrollment in your selection."
+msgid_plural ""
+"This action will complete {{count}} active enrollment in your selection."
+msgstr[0] "此操作将完成{{count}} 您选择的活动注册。"
+
+msgid "{{count}} enrollment already marked as completed will not be changed."
+msgid_plural ""
+"{{count}} enrollment already marked as completed will not be changed."
+msgstr[0] "{{count}} 已标记为完成的注册将不会更改。"
+
+msgid "Mark all events within enrollments as complete"
+msgstr "将注册中的所有事件标记为已完成"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr "您无法批量完成注册"
+
+msgid "Complete enrollments"
 msgstr "完成注册"
 
-msgid "Cancelled enrollments"
-msgstr "取消注册"
+msgid "Error completing enrollments"
+msgstr "完成注册出错"
+
+msgid "No active enrollments to complete"
+msgstr "没有待完成的有效注册"
+
+msgid "Complete {{count}} enrollment"
+msgid_plural "Complete {{count}} enrollment"
+msgstr[0] "完成{{count}} 注册"
+
+msgid "An error occurred when completing the enrollments"
+msgstr "完成注册时发生错误"
+
+msgid "An unknown error occurred when completing enrollments"
+msgstr "完成注册时出现未知错误"
+
+msgid "You do not have access to delete enrollments"
+msgstr "您没有删除注册的权限"
+
+msgid "Delete enrollments"
+msgstr "删除注册"
+
+msgid "Delete selected enrollments"
+msgstr "删除选定的注册"
+
+msgid ""
+"An error occurred while loading the selected enrollments. Please try again."
+msgstr "加载所选注册信息时发生错误。请重试。"
+
+msgid ""
+"This action will permanently delete the selected enrollments, including all "
+"associated data and events."
+msgstr "此操作将永久删除所选注册信息，包括所有相关数据和事件。"
+
+msgid "Active enrollments ({{count}})"
+msgid_plural "Active enrollments ({{count}})"
+msgstr[0] "有效注册 ({{count}})"
+
+msgid "Completed enrollments ({{count}})"
+msgid_plural "Completed enrollments ({{count}})"
+msgstr[0] "完成注册 ({{count}})"
+
+msgid "Cancelled enrollments ({{count}})"
+msgid_plural "Cancelled enrollments ({{count}})"
+msgstr[0] "取消注册 ({{count}})"
+
+msgid "Delete {{count}} enrollment"
+msgid_plural "Delete {{count}} enrollment"
+msgstr[0] "删除{{count}} 注册"
+
+msgid "An error occurred when deleting enrollments"
+msgstr "删除注册时发生错误"
+
+msgid "Delete {{ trackedEntityName }} with all enrollments"
+msgstr "删除{{ trackedEntityName }} 和所有注册信息"
+
+msgid "Delete {{count}} {{ trackedEntityName }}"
+msgid_plural "Delete {{count}} {{ trackedEntityName }}"
+msgstr[0] "删除{{count}} {{ trackedEntityName }}"
+
+msgid ""
+"Deleting records will also delete any associated enrollments and events. "
+"This cannot be undone. Are you sure you want to delete?"
+msgstr "删除记录也会删除任何相关的注册和事件。此操作无法撤销。您确定要删除吗？"
+
+msgid "An error occurred while deleting the records"
+msgstr "删除记录时发生错误"
 
 msgid "Working list could not be updated"
 msgstr "工作清单无法更新"
@@ -1587,6 +1744,13 @@ msgstr "加载工作列表时发生错误"
 
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "加载跟踪的实体实例列表时出错"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "已选择 {{count}} "
+
+msgid "Deselect all"
+msgstr "取消全选"
 
 msgid "Update view"
 msgstr "更新视图"
@@ -1695,6 +1859,60 @@ msgstr "编辑事件时出错，所做的更改未保存"
 
 msgid "Error updating the Assignee"
 msgstr "更新受托人时出错"
+
+msgid "Please provide a valid number"
+msgstr "请提供一个有效的数字"
+
+msgid "Please provide a valid integer"
+msgstr "请提供一个整数"
+
+msgid "Please provide a positive integer"
+msgstr "提供一个正整数"
+
+msgid "Please provide zero or a positive integer"
+msgstr "0或负整数"
+
+msgid "Please provide a negative integer"
+msgstr "负整数"
+
+msgid "Please provide a valid date and time"
+msgstr "日期和时间"
+
+msgid "Please provide a valid time"
+msgstr "有效的时间"
+
+msgid "Please provide an integer between 0 and 100"
+msgstr "请提供 0 到 100 之间的整数"
+
+msgid "Please provide a valid url"
+msgstr "请提供有效的URL"
+
+msgid "Please provide a valid email address"
+msgstr "请提供有效的邮箱"
+
+msgid "Please provide a valid age"
+msgstr "请提供有效年龄"
+
+msgid "Please provide a valid phone number"
+msgstr "请提供有效的电话号码"
+
+msgid "This value already exists"
+msgstr "值已经存在"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "自不能大于至"
+
+msgid "Checking..."
+msgstr "检查"
+
+msgid "Please provide a valid positive integer"
+msgstr "请提供一个有效的正整数"
+
+msgid "Please enter a valid time"
+msgstr "请输入有效时间"
+
+msgid "Please enter a time"
+msgstr "请输入时间"
 
 msgid "Set coordinate"
 msgstr "设置坐标"
