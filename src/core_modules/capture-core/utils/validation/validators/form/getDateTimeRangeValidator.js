@@ -1,34 +1,32 @@
 // @flow
+import { Temporal } from '@js-temporal/polyfill';
 import { isValidDateTime } from './dateTimeValidator';
-import { parseDate } from '../../../converters/date';
 
 function isValidDateTimeWithEmptyCheck(value: ?Object) {
     return value && isValidDateTime(value);
 }
-const convertDateTimeToMoment = (value: Object) => {
-    const date = value.date;
-    const time = value.time;
+const convertDateTimeToTemporal = (value: Object) => {
+    const { date, time } = value;
+
+    const [year, month, day] = date.split('-').map(Number);
+
     let hour;
     let minutes;
     if (/[:.]/.test(time)) {
-        [hour, minutes] = time.split(/[:.]/);
+        [hour, minutes] = time.split(/[:.]/).map(Number);
     } else if (time.length === 3) {
-        hour = time.substring(0, 1);
-        minutes = time.substring(2, 3);
+        hour = Number(time.substring(0, 1));
+        minutes = Number(time.substring(2, 3));
     } else {
-        hour = time.substring(0, 2);
-        minutes = time.substring(3, 4);
+        hour = Number(time.substring(0, 2));
+        minutes = Number(time.substring(3, 4));
     }
-    const momentDateTime = parseDate(date).momentDate;
-    // $FlowFixMe[incompatible-use] automated comment
-    momentDateTime.hour(hour);
-    // $FlowFixMe[incompatible-use] automated comment
-    momentDateTime.minute(minutes);
-    return momentDateTime;
+
+    return new Temporal.PlainDateTime(year, month, day, hour, minutes);
 };
 
 export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
-    (value: { from?: ?Object, to?: ?Object}) => {
+    (value: { from?: ?Object, to?: ?Object }) => {
         const errorResult = [];
         if (!isValidDateTimeWithEmptyCheck(value.from)) {
             errorResult.push({ from: invalidDateTimeMessage });
@@ -46,8 +44,8 @@ export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
             };
         }
 
-        const fromDateTime = convertDateTimeToMoment(value.from);
-        const toDateTime = convertDateTimeToMoment(value.to);
-        // $FlowFixMe[invalid-compare] automated comment
-        return fromDateTime <= toDateTime;
+        const fromDateTime = convertDateTimeToTemporal(value.from);
+        const toDateTime = convertDateTimeToTemporal(value.to);
+
+        return Temporal.PlainDateTime.compare(fromDateTime, toDateTime) <= 0;
     };

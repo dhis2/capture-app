@@ -1,6 +1,7 @@
 // @flow
+import { Temporal } from '@js-temporal/polyfill';
 import { isValidDate } from './dateValidator';
-import { parseDate } from '../../../converters/date';
+import { convertStringToDateFormat } from '../../../converters/date';
 /**
  *
  * @export
@@ -30,6 +31,9 @@ export const getDateRangeValidator = (invalidDateMessage: string) =>
                 errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
             };
         }
+        const { from, to } = value;
         // $FlowFixMe
-        return parseDate(value.from).momentDate <= parseDate(value.to).momentDate;
+        const formattedFrom = convertStringToDateFormat(from, 'YYYY-MM-DD');
+        const fromattedTo = convertStringToDateFormat(to, 'YYYY-MM-DD');
+        return Temporal.PlainDate.compare(formattedFrom, fromattedTo) <= 0;
     };

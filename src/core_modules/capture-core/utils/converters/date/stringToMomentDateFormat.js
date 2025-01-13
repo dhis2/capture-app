@@ -9,7 +9,7 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
  * @param {string} [format] - optional date format. If not provided, the function uses system date format
  * @returns {string}
  */
-export function convertStringToDateFormat(date: string, format?: string) {
+export function convertStringToDateFormat(date: ?string, format?: string) {
     if (!date || !date.length) { return ''; }
     const dateFormat = format || systemSettingsStore.get().dateFormat;
     const formattedDateString = moment(date, dateFormat).format(dateFormat);
