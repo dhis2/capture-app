@@ -50,7 +50,6 @@ const DropdownFilterPlain = ({
 
     return (
         <DropdownButton
-            className="filter-button"
             open={isMenuOpen}
             onClick={() => onToggleMenu(filterColumn)}
             component={

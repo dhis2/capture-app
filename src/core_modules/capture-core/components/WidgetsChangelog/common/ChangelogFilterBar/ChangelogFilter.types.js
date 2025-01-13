@@ -17,7 +17,7 @@ export type ChangelogFilterProps = {
     classes: { container: string },
     filterValue: FilterValueType,
     setFilterValue: (value: FilterValueType) => void,
-    columnToFilterBy: string | null,
-    setColumnToFilterBy: (value: string | null) => void,
+    fieldToFilterBy: string | null,
+    setfieldToFilterBy: (value: string | null) => void,
     dataItemDefinitions: DataItemDefinitions,
 };
