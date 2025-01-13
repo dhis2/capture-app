@@ -5352,10 +5352,10 @@ axios@^0.25.0:
   dependencies:
     follow-redirects "^1.14.7"
 
-axios@^1.6.1:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.3.tgz#a1125f2faf702bc8e8f2104ec3a76fab40257d85"
-  integrity sha512-Ar7ND9pU99eJ9GpoGQKhKf58GpUOgnzuaB7ueNQ5BMi0p+LZ5oaEnfF999fAArcTIBwXTCHAmGcHOZJaWPq9Nw==
+axios@^1.7.7:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.9.tgz#d7d071380c132a24accda1b2cfc1535b79ec650a"
+  integrity sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
@@ -11570,7 +11570,7 @@ jiti@^1.20.0, jiti@^1.21.0:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.6.tgz#6c7f7398dd4b3142767f9a168af2f317a428d268"
   integrity sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==
 
-joi@^17.11.0:
+joi@^17.13.3:
   version "17.13.3"
   resolved "https://registry.yarnpkg.com/joi/-/joi-17.13.3.tgz#0f5cc1169c999b30d344366d384b12d92558bcec"
   integrity sha512-otDA4ldcIx+ZXsKHWmp0YizCweVRZG96J10b0FevjfuncLO1oX59THoAmHkNubYJ+9gWsYsp5k8v4ib6oDv1fA==
@@ -17868,13 +17868,13 @@ w3c-xmlserializer@^2.0.0:
   dependencies:
     xml-name-validator "^3.0.0"
 
-wait-on@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/wait-on/-/wait-on-7.2.0.tgz#d76b20ed3fc1e2bebc051fae5c1ff93be7892928"
-  integrity sha512-wCQcHkRazgjG5XoAq9jbTMLpNIjoSlZslrJ2+N9MxDsGEv1HnFoVjOCexL0ESva7Y9cu350j+DWADdk54s4AFQ==
+wait-on@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/wait-on/-/wait-on-8.0.1.tgz#13c8ec77115517f8fbc2d670521a444201f03f53"
+  integrity sha512-1wWQOyR2LVVtaqrcIL2+OM+x7bkpmzVROa0Nf6FryXkS+er5Sa1kzFGjzZRqLnHa3n1rACFLeTwUqE1ETL9Mig==
   dependencies:
-    axios "^1.6.1"
-    joi "^17.11.0"
+    axios "^1.7.7"
+    joi "^17.13.3"
     lodash "^4.17.21"
     minimist "^1.2.8"
     rxjs "^7.8.1"
