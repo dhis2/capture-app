@@ -28,8 +28,8 @@ import {
 } from '../helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
-import { relatedStageActions } from '../../../WidgetRelatedStages';
 import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
+import { getRedirectIds } from './getRedirectIds';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -94,9 +94,9 @@ export const useBuildEnrollmentPayload = ({
     const buildTeiWithEnrollment = (relatedStageRef?: {current: ?RelatedStageRefPayload}): {
         teiWithEnrollment: EnrollmentPayload,
         formHasError: boolean,
-        relatedStageLinkedEvent?: {
-            programStageId: string,
-            eventId: string,
+        redirect: {
+            programStageId?: string,
+            eventId?: string,
         },
     } => {
         if (!formFoundation) throw Error('form foundation object not found');
@@ -156,6 +156,14 @@ export const useBuildEnrollmentPayload = ({
             serverMinorVersion: minor,
         });
 
+        const redirect = getRedirectIds({
+            stages,
+            relatedStageLinkedEvent,
+            linkMode,
+            firstStageDuringRegistrationEvent,
+            autoGenerateEvents,
+        });
+
         const allEventsToBeCreated = [firstStageDuringRegistrationEvent, relatedStageLinkedEvent, ...autoGenerateEvents]
             .filter(Boolean);
 
@@ -186,13 +194,7 @@ export const useBuildEnrollmentPayload = ({
                 relationships: relationship ? [relationship] : undefined,
             },
             formHasError,
-            relatedStageLinkedEvent:
-                relatedStageLinkedEvent && linkMode === relatedStageActions.ENTER_DATA
-                    ? {
-                        programStageId: relatedStageLinkedEvent.programStage,
-                        eventId: relatedStageLinkedEvent.event,
-                    }
-                    : undefined,
+            redirect,
         };
     };
 
