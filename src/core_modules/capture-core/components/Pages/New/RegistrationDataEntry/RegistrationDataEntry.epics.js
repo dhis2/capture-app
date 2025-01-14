@@ -8,15 +8,10 @@ import {
     saveNewTrackedEntityInstance,
     saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString } from '../../../../utils/routing';
-import {
-    getPageToRedirectTo,
-    PAGES,
-} from './helpers';
 import { cleanUpUid } from '../NewPage.actions';
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable) =>
@@ -48,20 +43,11 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
 
 export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
     action$: InputObservable,
-    store: ReduxStore,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
-            const { currentSelections: { programId } } = store.value;
-            const { enrollmentPayload, uid, relatedStageLinkedEvent } = action.payload;
-            const { stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
-            const { stageId, eventId, pageToRedirectTo } = getPageToRedirectTo({
-                stages,
-                events: enrollmentPayload.enrollments[0]?.events,
-                useFirstStageDuringRegistration,
-                relatedStageLinkedEvent,
-            });
+            const { enrollmentPayload, uid, redirect } = action.payload;
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
@@ -69,9 +55,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                         enrollmentPayload,
                     ],
                 },
-                pageToRedirectTo,
-                eventId,
-                stageId,
+                redirect,
                 uid,
             });
         }),
@@ -89,7 +73,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 payload: {
                     bundleReport: { typeReportMap },
                 },
-                meta: { uid, pageToRedirectTo, stageId, eventId },
+                meta: { uid, redirect },
             } = action;
             const {
                 currentSelections: { orgUnitId, programId },
@@ -103,23 +87,23 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 return EMPTY;
             }
 
-            if (pageToRedirectTo === PAGES.enrollmentEventNew) {
+            if (redirect.programStageId) {
                 history.push(
-                    `/${pageToRedirectTo}?${buildUrlQueryString({
+                    `/enrollmentEventNew?${buildUrlQueryString({
                         programId,
                         orgUnitId,
                         teiId,
                         enrollmentId,
-                        stageId,
+                        stageId: redirect.programStageId,
                     })}`,
                 );
                 return EMPTY;
             }
 
-            if (pageToRedirectTo === PAGES.enrollmentEventEdit) {
+            if (redirect.eventId) {
                 history.push(
-                    `/${pageToRedirectTo}?${buildUrlQueryString({
-                        eventId,
+                    `/enrollmentEventEdit?${buildUrlQueryString({
+                        eventId: redirect.eventId,
                         orgUnitId,
                         initMode: dataEntryKeys.EDIT,
                     })}`,
