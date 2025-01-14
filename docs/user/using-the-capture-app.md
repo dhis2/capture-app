@@ -1351,21 +1351,21 @@ You can connect any two program stages via a relationship. To enable this featur
 
 ## Adding a new tracker event
 When opening the new event form, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
-1. Schedule a new visit in another organizational unit.
+1. Schedule a new visit in another Organisational unit.
 2. Enter data directly.
 3. Link to an already existing event.
 
-When clicking Complete or Save without completing, the capture app will create the requested event, schedule the response event and make sure that there is a link between them in the correct context. 
+When clicking Complete or Save without completing, the Capture app will create the requested event, schedule the response event and make sure that there is a link between them in the correct context. 
 ![](resources/images/related-stages-new-event.png)
 
 ## Editing a tracker event
 ### When there isn't a linked event 
 If the event is eligible for related stages but isn’t linked yet, a widget called *Linked event* will appear at the bottom of the page. From this widget, users can:
-1. Schedule a new visit in another organizational unit.
+1. Schedule a new visit in another Organisational unit.
 2. Enter data directly.
 3. Link to an already existing event.
 
-The label of the action button will change based on the user's selections. When clicking the action button, the capture app will create the requested event, schedule the response event and make sure that there is a link between them in the correct context. 
+The label of the action button will change based on the user's selections. When clicking the action button, the Capture app will create the requested event, schedule the response event and make sure that there is a link between them in the correct context. 
 ![](resources/images/related-stages-edit-event.png)
 
 ### When there is a linked event 
@@ -1379,8 +1379,8 @@ Additionally, by clicking the Menu in the top-right corner, users can:
 
 ## Enrolling a tracked entity
 Enable the "First stage appears on registration page" flag in the Maintenance for the Tracker program. When opening the form to enroll a new tracked entity, a widget called *Actions - ${Relationship type name}* will appear at the bottom of the page. From this widget, users can:
-1. Schedule a new visit in another organizational unit.
+1. Schedule a new visit in another Organisational unit.
 2. Enter data directly.
 
-When clicking Save, the capture app will enroll the requested tracked entity, schedule the related event and make sure that there is a link between them in the correct context. 
+When clicking Save, the Capture app will enroll the requested tracked entity, schedule the related event and make sure that there is a link between them in the correct context. 
 ![](resources/images/related-stages-enroll-trackedEntity.png)
