@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
-import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
+import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
 import { useLocationQuery } from '../../utils/routing';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
@@ -43,12 +43,16 @@ export const WidgetEventSchedule = ({
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
     });
-    const orgUnitData = useOrgUnitNameWithAncestors(initialOrgUnitId);
-    const orgUnit = initialOrgUnitId && orgUnitData
-        ? { id: initialOrgUnitId, name: orgUnitData.displayName } : undefined;
+    const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
-    const [scheduledOrgUnit, setScheduledOrgUnit] = useState(orgUnit);
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState();
+    useEffect(() => {
+        if (initialOrgUnitId && orgUnitName) {
+            const orgUnit = { id: initialOrgUnitId, name: orgUnitName };
+            setScheduledOrgUnit(orgUnit);
+        }
+    }, [orgUnitName, initialOrgUnitId]);
     const [isFormValid, setIsFormValid] = useState(false);
     const convertFn = pipe(convertFormToClient, convertClientToServer);
     const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
