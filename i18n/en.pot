@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-15T15:25:38.375Z\n"
-"PO-Revision-Date: 2024-12-15T15:25:38.375Z\n"
+"POT-Creation-Date: 2025-01-15T14:47:08.321Z\n"
+"PO-Revision-Date: 2025-01-15T14:47:08.321Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -748,6 +748,24 @@ msgid ""
 msgstr ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
+
+msgid "Report data"
+msgstr "Report data"
+
+msgid "choose a registering unit and program, then click the New button"
+msgstr "choose a registering unit and program, then click the New button"
+
+msgid "Search for something"
+msgstr "Search for something"
+
+msgid "click the Search button. Choose a program to only search in that program"
+msgstr "click the Search button. Choose a program to only search in that program"
+
+msgid "See existing data"
+msgstr "See existing data"
+
+msgid "choose a registering unit and program"
+msgstr "choose a registering unit and program"
 
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
