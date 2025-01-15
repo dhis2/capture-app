@@ -1,3 +1,10 @@
+## [101.21.5](https://github.com/dhis2/capture-app/compare/v101.21.4...v101.21.5) (2025-01-15)
+
+
+### Bug Fixes
+
+* [DHIS2-18836] show 'Profile' instead of 'False' during loading ([#3938](https://github.com/dhis2/capture-app/issues/3938)) ([70aa7cc](https://github.com/dhis2/capture-app/commit/70aa7ccb5c9d6dee978175b4e639e2b3cd415a9c))
+
 ## [101.21.4](https://github.com/dhis2/capture-app/compare/v101.21.3...v101.21.4) (2025-01-13)
 
 
