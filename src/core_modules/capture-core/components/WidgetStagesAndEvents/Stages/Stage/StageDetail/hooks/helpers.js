@@ -3,13 +3,14 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
-import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
+import { convertClientToList } from '../../../../../../converters';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
 import { TooltipOrgUnit } from '../../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
+import { dataElementTypes } from '../../../../../../metaData';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
@@ -37,7 +38,7 @@ const getEventStatus = (event: ApiEnrollmentEvent) => {
         if (daysUntilDueDate < 14) {
             return { status: statusTypes.SCHEDULE, options: dueDateFromNow };
         }
-        return { status: statusTypes.SCHEDULE, options: convertMomentToDateFormatString(dueDate) };
+        return { status: statusTypes.SCHEDULE, options: convertClientToList(dueDate, dataElementTypes.DATE) };
     }
     return { status: event.status, options: undefined };
 };
