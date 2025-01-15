@@ -25,7 +25,7 @@ const InfoBoxPlain = ({
     orgUnitName,
     classes,
 }: Props) => {
-    if (!scheduleDate || !suggestedScheduleDate) {
+    if (!scheduleDate || !suggestedScheduleDate || !orgUnitName) {
         return null;
     }
 
