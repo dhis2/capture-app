@@ -46,8 +46,13 @@ export const WidgetEventSchedule = ({
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
-    const [scheduledOrgUnit, setScheduledOrgUnit] = useState(
-        initialOrgUnitId && orgUnitName ? { id: initialOrgUnitId, name: orgUnitName } : undefined);
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState();
+    useEffect(() => {
+        if (initialOrgUnitId && orgUnitName) {
+            const orgUnit = { id: initialOrgUnitId, name: orgUnitName };
+            setScheduledOrgUnit(orgUnit);
+        }
+    }, [orgUnitName, initialOrgUnitId]);
     const [isFormValid, setIsFormValid] = useState(false);
     const convertFn = pipe(convertFormToClient, convertClientToServer);
     const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
