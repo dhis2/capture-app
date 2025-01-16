@@ -46,7 +46,7 @@ const getBaseColumns = props => baseFields.map((key, index) => ({ ...key, ...get
 const getAllFieldsWithValue = (
     eventId: string,
     dataElements: Array<StageDataElementClient>,
-    dataElementsByType: Array<{ type: string, eventId: string, ids: Object }>,
+    dataElementsByType: Array<{type: string, eventId: string, ids: Object}>,
 ) => dataElements
     .reduce((acc, { id, type }) => {
         const value = dataElementsByType
@@ -132,7 +132,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
     return headerColumns;
 };
 
-function getDataElement(stageDataElement: StageDataElementClient, type) {
+function getDataElement(stageDataElement, type) {
     if (!stageDataElement) {
         return null;
     }
@@ -144,7 +144,6 @@ function getDataElement(stageDataElement: StageDataElementClient, type) {
     if (stageDataElement.options) {
         const options = stageDataElement.options.map(({ value, text }) =>
             new Option((o) => {
-                // $FlowFixMe
                 o.text = text;
                 o.value = value;
             }));
@@ -161,7 +160,7 @@ const formatRowForView = (row: Object, dataElements: Array<StageDataElementClien
     const value = row[id];
     if (predefinedType) {
         acc[id] = convertClientToList(value, predefinedType);
-    } else if (!type || !stageDataElement) {
+    } else if (!type) {
         acc[id] = value;
     } else {
         const dataElement = getDataElement(stageDataElement, type);
