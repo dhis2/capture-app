@@ -10,6 +10,7 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
 import { convertValue as convertValueFormToClient } from '../../../converters/formToClient';
 import { convertValue as convertValueClientToServer } from '../../../converters/clientToServer';
@@ -114,6 +115,8 @@ const DateComponentPlain = ({
                     label={dateLabel}
                     dense
                     locale={locale}
+                    calendarType={systemSettingsStore.get().calendar}
+                    dateFormat={systemSettingsStore.get().dateFormat}
                 />
                 <div className={classes.error}>
                     {validation && validation.error ? i18n.t('Please provide a valid date') : ''}
