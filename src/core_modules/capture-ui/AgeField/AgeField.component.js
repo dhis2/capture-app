@@ -59,7 +59,7 @@ type Props = {
     calendarType: ?string,
 };
 
-function getCalculatedValues(dateValue: ?string, calendarType: ?string, dateFormat: ?string): AgeValues {
+function getCalculatedValues(dateValue: ?string, calendarType: ?string): AgeValues {
     const nowIso = Temporal.Now.plainDateISO();
 
     const ageIso = convertToIso8601(dateValue, calendarType);
@@ -129,12 +129,12 @@ class D2AgeFieldPlain extends Component<Props> {
         });
         const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendarType);
         const dateString = temporalToString(localCalculatedDate, dateFormat);
-        const calculatedValues = getCalculatedValues(dateString, calendarType, dateFormat);
+        const calculatedValues = getCalculatedValues(dateString, calendarType);
         this.props.onBlur(calculatedValues);
     }
 
     handleDateBlur = (date: ?string, options: ?ValidationOptions) => {
-        const { onRemoveFocus, calendarType = 'gregory', dateFormat = 'YYYY-MM-DD' } = this.props;
+        const { onRemoveFocus, calendarType = 'gregory' } = this.props;
         onRemoveFocus && onRemoveFocus();
         const isDateValid = options && !options.error;
         if (!date) {
@@ -151,7 +151,7 @@ class D2AgeFieldPlain extends Component<Props> {
             this.props.onBlur(calculatedValues, options);
             return;
         }
-        const calculatedValues = getCalculatedValues(date, calendarType, dateFormat);
+        const calculatedValues = getCalculatedValues(date, calendarType);
         this.props.onBlur(calculatedValues, options);
     }
 

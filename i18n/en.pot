@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-05T11:39:04.447Z\n"
-"PO-Revision-Date: 2024-12-05T11:39:04.447Z\n"
+"POT-Creation-Date: 2024-12-15T15:25:38.375Z\n"
+"PO-Revision-Date: 2024-12-15T15:25:38.375Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -100,6 +100,24 @@ msgstr "Date of enrollment"
 
 msgid "Last updated"
 msgstr "Last updated"
+
+msgid "Lat"
+msgstr "Lat"
+
+msgid "Long"
+msgstr "Long"
+
+msgid "lat"
+msgstr "lat"
+
+msgid "long"
+msgstr "long"
+
+msgid "Show less"
+msgstr "Show less"
+
+msgid "Show more"
+msgstr "Show more"
 
 msgid "error encountered during field validation"
 msgstr "error encountered during field validation"

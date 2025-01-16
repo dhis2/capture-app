@@ -11,7 +11,8 @@ import { temporalToString } from '../../../../capture-core-utils/date';
 type PlainDate = {
     year: number,
     month: number,
-    day: number
+    day: number,
+    eraYear: number
 };
 
 export function convertTemporalToString(temporalDate: PlainDate | null, format: ?string): string {

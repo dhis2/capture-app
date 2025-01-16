@@ -1,6 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
@@ -18,6 +19,13 @@ import {
     removeNote,
 } from '../DataEntry/actions/dataEntry.actions';
 
+const createServerData = (eventId, note, useNewEndpoint) => {
+    if (useNewEndpoint) {
+        return { event: eventId, value: note };
+    }
+    return { event: eventId, notes: [{ value: note }] };
+};
+
 export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
@@ -25,6 +33,7 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore,
             const state = store.value;
             const payload = action.payload;
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
+            const useNewEndpoint = featureAvailable(FEATURES.newNoteEndpoint);
             return querySingleResource({
                 resource: 'me',
                 params: {
@@ -34,10 +43,7 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore,
                 const { firstName, surname, userName } = user;
                 const clientId = uuid();
 
-                const serverData = {
-                    event: eventId,
-                    notes: [{ value: payload.note }],
-                };
+                const serverData = createServerData(eventId, payload.note, useNewEndpoint);
 
                 const clientNote = {
                     value: payload.note,

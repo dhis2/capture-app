@@ -9,10 +9,10 @@ After({ tags: '@with-transfer-ownership-data-cleanup' }, () => {
 });
 
 const changeEnrollmentAndEventsStatus = () => (
-    cy.buildApiUrl('tracker', 'trackedEntities/osF4RF4EiqP?program=IpHINAT79UW&fields=enrollments')
+    cy.buildApiUrl('tracker', 'trackedEntities/mPLqCVS27AD?program=IpHINAT79UW&fields=enrollments')
         .then(url => cy.request(url))
         .then(({ body }) => {
-            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'qyx7tscVpVB');
+            const enrollment = body.enrollments && body.enrollments.find(e => e.enrollment === 'YqNTNLKmX4z');
             const eventsToUpdate = enrollment.events.map(e => ({
                 ...e,
                 status: 'ACTIVE',

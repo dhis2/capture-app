@@ -12,7 +12,8 @@ import { padWithZeros } from './padWithZeros';
 type PlainDate = {
     year: number,
     month: number,
-    day: number
+    day: number,
+    eraYear: number
 };
 
 export function temporalToString(temporalDate: PlainDate | null, dateFormat: ?string): string {

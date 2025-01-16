@@ -7,7 +7,7 @@ import { PreviewImage } from 'capture-ui';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
-import { MinimalCoordinates } from '../components/MinimalCoordinates';
+import { MinimalCoordinates, PolygonCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
@@ -86,41 +86,45 @@ function convertStatusForDisplay(clientValue: Object) {
     );
 }
 
-function convertOrgUnitForDisplay(clientValue: string | {id: string}) {
+function convertOrgUnitForDisplay(clientValue: string | { id: string }) {
     const orgUnitId = typeof clientValue === 'string' ? clientValue : clientValue.id;
     return (
         <TooltipOrgUnit orgUnitId={orgUnitId} />
     );
 }
 
+function convertPolygonForDisplay(clientValue: Object) {
+    return <PolygonCoordinates coordinates={clientValue} />;
+}
 
 const valueConvertersForType = {
-    [dataElementTypes.NUMBER]: stringifyNumber,
-    [dataElementTypes.INTEGER]: stringifyNumber,
-    [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
-    [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
-    [dataElementTypes.INTEGER_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
-    [dataElementTypes.INTEGER_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
-    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
-    [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
+    [dataElementTypes.AGE]: convertDateForListDisplay,
+    [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
+    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
+    [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.DATE]: convertDateForListDisplay,
     [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(undefined, value),
     [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
     [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(undefined, value),
+    [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
+    [dataElementTypes.IMAGE]: convertImageForDisplay,
+    [dataElementTypes.INTEGER]: stringifyNumber,
+    [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
+    [dataElementTypes.NUMBER]: stringifyNumber,
+    [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
+    [dataElementTypes.ORGANISATION_UNIT]: convertOrgUnitForDisplay,
+    [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
+    [dataElementTypes.POLYGON]: convertPolygonForDisplay,
+    [dataElementTypes.STATUS]: convertStatusForDisplay,
     [dataElementTypes.TIME]: convertTimeForListDisplay,
     [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(convertTimeForListDisplay, value),
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
-    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
-    [dataElementTypes.COORDINATE]: MinimalCoordinates,
-    [dataElementTypes.AGE]: convertDateForListDisplay,
-    [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
-    [dataElementTypes.IMAGE]: convertImageForDisplay,
-    [dataElementTypes.ORGANISATION_UNIT]: convertOrgUnitForDisplay,
-    [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
-    [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
-    [dataElementTypes.STATUS]: convertStatusForDisplay,
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {

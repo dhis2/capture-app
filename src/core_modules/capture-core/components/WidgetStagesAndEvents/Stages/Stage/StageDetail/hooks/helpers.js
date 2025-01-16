@@ -3,14 +3,12 @@ import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
-import { convertClientToList } from '../../../../../../converters';
+import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
-import { TooltipOrgUnit } from '../../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
-import { dataElementTypes } from '../../../../../../metaData';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
@@ -38,7 +36,7 @@ const getEventStatus = (event: ApiEnrollmentEvent) => {
         if (daysUntilDueDate < 14) {
             return { status: statusTypes.SCHEDULE, options: dueDateFromNow };
         }
-        return { status: statusTypes.SCHEDULE, options: convertClientToList(dueDate, dataElementTypes.DATE) };
+        return { status: statusTypes.SCHEDULE, options: convertIsoToLocalCalendar(event.scheduledAt) };
     }
     return { status: event.status, options: undefined };
 };
@@ -64,7 +62,6 @@ const convertStatusForView = (event: ApiEnrollmentEvent) => {
     };
 };
 
-const convertOrgUnitForView = (event: ApiEnrollmentEvent) => <TooltipOrgUnit orgUnitId={event.orgUnit} />;
 
 const convertNoteForView = (event: ApiEnrollmentEvent) => <Notes event={event} />;
 
@@ -101,7 +98,6 @@ export {
     isEventOverdue,
     getEventStatus,
     convertStatusForView,
-    convertOrgUnitForView,
     convertNoteForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
