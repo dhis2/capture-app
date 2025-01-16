@@ -62,7 +62,7 @@ function convertImageForDisplay(clientValue: ImageClientValue) {
     return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} />;
 }
 
-function convertRangeForDisplay(parser: any, clientValue: any) {
+function convertRangeForDisplay(parser: any = (value: any) => value, clientValue: any) {
     return (
         <span>
             {parser(clientValue.from)} {'->'} {parser(clientValue.to)}
@@ -106,9 +106,9 @@ const valueConvertersForType = {
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: value => convertRangeForDisplay(stringifyNumber, value),
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.DATE]: convertDateForListDisplay,
-    [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
+    [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(undefined, value),
     [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
-    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertDateTimeForListDisplay, value),
+    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(undefined, value),
     [dataElementTypes.TIME]: convertTimeForListDisplay,
     [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(convertTimeForListDisplay, value),
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
