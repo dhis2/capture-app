@@ -21,7 +21,7 @@ export const useChangelogData = ({ entityId, entityType, programId }: Props) => 
     const [sortDirection, setSortDirection] = useState<SortDirection>(SORT_DIRECTION.DEFAULT);
 
     const [attributeToFilterBy, setAttributeToFilterBy] = useState<string | null>(null);
-    const [filterValue, setFilterValue] = useState<Object>('Show all');
+    const [filterValue, setFilterValue] = useState<Object>('SHOW_ALL');
 
     const [page, setPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(DEFAULT_PAGE_SIZE);
@@ -32,7 +32,7 @@ export const useChangelogData = ({ entityId, entityType, programId }: Props) => 
     };
 
     const filterParam =
-        filterValue !== 'Show all' && attributeToFilterBy
+        filterValue !== 'SHOW_ALL' && attributeToFilterBy
             ? `${attributeToFilterBy}:eq:${filterValue.id}`
             : undefined;
 

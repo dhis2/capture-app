@@ -62,7 +62,7 @@ const ChangelogFilterBarPlain = ({
             <DropdownFilter
                 label={i18n.t('Data item')}
                 items={dataItems}
-                filterColumn="dataItem"
+                filterColumn={'dataItem'}
                 openMenuName={openMenu}
                 onToggleMenu={toggleMenu}
                 onItemSelected={handleItemSelected}

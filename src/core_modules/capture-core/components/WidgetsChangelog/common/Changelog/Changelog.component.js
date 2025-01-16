@@ -39,8 +39,8 @@ export const ChangelogComponent = ({
     <Modal
         large
         hide={!isOpen}
+        dataTest={'changelog-modal'}
         onClose={close}
-        dataTest="changelog-modal"
     >
         <ModalTitle>{i18n.t('Changelog')}</ModalTitle>
         <ModalContent>
@@ -51,7 +51,7 @@ export const ChangelogComponent = ({
                 setFilterValue={setFilterValue}
                 dataItemDefinitions={dataItemDefinitions}
             />
-            <DataTable fixed dataTest="changelog-data-table" layout="fixed">
+            <DataTable fixed dataTest={'changelog-data-table'} layout={'fixed'}>
                 <ChangelogTableHeader
                     columnToSortBy={columnToSortBy}
                     setColumnToSortBy={setColumnToSortBy}
