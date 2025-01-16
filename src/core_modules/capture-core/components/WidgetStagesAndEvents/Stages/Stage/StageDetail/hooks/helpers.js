@@ -9,7 +9,6 @@ import type { StageDataElementClient } from '../../../../types/common.types';
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
-import { TooltipOrgUnit } from '../../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
@@ -63,7 +62,6 @@ const convertStatusForView = (event: ApiEnrollmentEvent) => {
     };
 };
 
-const convertOrgUnitForView = (event: ApiEnrollmentEvent) => <TooltipOrgUnit orgUnitId={event.orgUnit} />;
 
 const convertNoteForView = (event: ApiEnrollmentEvent) => <Notes event={event} />;
 
@@ -100,7 +98,6 @@ export {
     isEventOverdue,
     getEventStatus,
     convertStatusForView,
-    convertOrgUnitForView,
     convertNoteForView,
     getValueByKeyFromEvent,
     groupRecordsByType,

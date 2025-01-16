@@ -19,7 +19,7 @@ import {
     Tooltip,
 } from '@dhis2/ui';
 import log from 'loglevel';
-import { sortDataFromEvent } from './hooks/sortFuntions';
+import { sortDataFromEvent } from './hooks/sortFunctions';
 import { StageCreateNewButton } from '../StageCreateNewButton';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
