@@ -34,6 +34,7 @@ export type Props = {|
 |}
 
 export type State = {|
+  openOrgUnitWarning: boolean;
   openProgramWarning: ?Object;
   openCatComboWarning: boolean;
   openStartAgainWarning: boolean;

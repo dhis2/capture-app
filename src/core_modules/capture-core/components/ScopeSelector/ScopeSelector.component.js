@@ -22,6 +22,7 @@ class ScopeSelectorClass extends Component<Props, State> {
         super(props);
 
         this.state = {
+            openOrgUnitWarning: false,
             openProgramWarning: null,
             openCatComboWarning: false,
             openStartAgainWarning: false,
@@ -30,6 +31,14 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     dontShowWarning = () => !this.props.isUserInteractionInProgress;
+
+    handleOpenOrgUnitWarning = () => {
+        if (this.dontShowWarning()) {
+            this.props.onResetOrgUnitId();
+            return;
+        }
+        this.setState({ openOrgUnitWarning: true });
+    }
 
     handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
         if (this.dontShowWarning()) {
@@ -57,10 +66,16 @@ class ScopeSelectorClass extends Component<Props, State> {
 
     handleClose = () => {
         this.setState({
+            openOrgUnitWarning: false,
             openProgramWarning: null,
             openCatComboWarning: false,
             openStartAgainWarning: false,
         });
+    }
+
+    handleAcceptOrgUnit = () => {
+        this.props.onResetOrgUnitId();
+        this.handleClose();
     }
 
     handleAcceptProgram = () => {
@@ -98,7 +113,7 @@ class ScopeSelectorClass extends Component<Props, State> {
                     onSetProgramId={onSetProgramId}
                     onSetCategoryOption={onSetCategoryOption}
                     onResetAllCategoryOptions={onResetAllCategoryOptions}
-                    onResetOrgUnitId={this.props.onResetOrgUnitId}
+                    onResetOrgUnitId={this.handleOpenOrgUnitWarning}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
                     onStartAgain={this.handleStartAgainWarning}
@@ -112,6 +127,12 @@ class ScopeSelectorClass extends Component<Props, State> {
                 >
                     {this.props.children}
                 </QuickSelector>
+                <DiscardDialog
+                    onDestroy={this.handleAcceptOrgUnit}
+                    open={this.state.openOrgUnitWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
                 <DiscardDialog
                     onDestroy={this.handleAcceptProgram}
                     open={!!this.state.openProgramWarning}
