@@ -166,7 +166,6 @@ const formatRowForView = (row: Object, dataElements: Array<StageDataElementClien
         acc[id] = value;
     } else {
         const dataElement = getDataElement(stageDataElement, type);
-        console.log('dataElement', dataElement);
         acc[id] = convertClientToList(value, type, dataElement);
     }
     return acc;
