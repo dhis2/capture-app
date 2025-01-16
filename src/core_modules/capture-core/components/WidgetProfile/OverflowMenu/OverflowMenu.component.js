@@ -17,10 +17,15 @@ export const OverflowMenuComponent = ({
     displayChangelog,
     teiId,
     programAPI,
+    readOnlyMode,
 }: PlainProps) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
     const [changelogIsOpen, setChangelogIsOpen] = useState(false);
+
+    if (readOnlyMode && !displayChangelog) {
+        return null;
+    }
 
     return (
         <>
@@ -45,13 +50,15 @@ export const OverflowMenuComponent = ({
                                 <MenuDivider dense />
                             </>
                         )}
-                        <DeleteMenuItem
-                            trackedEntityTypeName={trackedEntityTypeName}
-                            canWriteData={canWriteData}
-                            canCascadeDeleteTei={canCascadeDeleteTei}
-                            setActionsIsOpen={setActionsIsOpen}
-                            setDeleteModalIsOpen={setDeleteModalIsOpen}
-                        />
+                        {!readOnlyMode && (
+                            <DeleteMenuItem
+                                trackedEntityTypeName={trackedEntityTypeName}
+                                canWriteData={canWriteData}
+                                canCascadeDeleteTei={canCascadeDeleteTei}
+                                setActionsIsOpen={setActionsIsOpen}
+                                setDeleteModalIsOpen={setDeleteModalIsOpen}
+                            />
+                        )}
                     </FlyoutMenu>
                 }
             />

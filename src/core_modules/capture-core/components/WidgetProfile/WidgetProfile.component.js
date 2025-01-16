@@ -171,6 +171,7 @@ const WidgetProfilePlain = ({
                                 trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}
                                 programAPI={program}
+                                readOnlyMode={readOnlyMode || false}
                             />
                         </div>
                     </div>
