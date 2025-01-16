@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { FlyoutMenu, IconMore16, MenuItem, MenuDivider } from '@dhis2/ui';
+import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
@@ -39,16 +39,13 @@ export const OverflowMenuComponent = ({
                 component={
                     <FlyoutMenu dense>
                         {displayChangelog && (
-                            <>
-                                <MenuItem
-                                    label={i18n.t('View changelog')}
-                                    onClick={() => {
-                                        setChangelogIsOpen(true);
-                                        setActionsIsOpen(false);
-                                    }}
-                                />
-                                <MenuDivider dense />
-                            </>
+                            <MenuItem
+                                label={i18n.t('View changelog')}
+                                onClick={() => {
+                                    setChangelogIsOpen(true);
+                                    setActionsIsOpen(false);
+                                }}
+                            />
                         )}
                         {!readOnlyMode && (
                             <DeleteMenuItem
