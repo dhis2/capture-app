@@ -649,25 +649,24 @@ And('you delete the recently added tracked entity', () => {
 });
 
 And('you delete the recently added malaria entity', () => {
-    // get all url query params
-    cy.url().then((url) => {
-        const urlParams = new URLSearchParams(url);
-        urlParams.delete('stageId');
-        urlParams.delete('eventId');
+    // deselect the program stage from the context selector
+    cy.get('[data-test="stage-selector-container-clear-icon"]')
+        .click();
 
-        cy.visit(`/#/enrollment?${urlParams.toString()}`);
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Yes, discard changes')
+        .click();
 
-        cy.get('[data-test="profile-widget"]')
-            .contains('Malaria Entity profile')
-            .should('exist');
-        cy.get('[data-test="widget-profile-overflow-menu"]')
+    cy.get('[data-test="profile-widget"]')
+        .contains('Malaria Entity profile')
+        .should('exist');
+    cy.get('[data-test="widget-profile-overflow-menu"]')
+        .click();
+    cy.contains('Delete Malaria Entity')
+        .click();
+    cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
+        cy.contains('Yes, delete Malaria Entity')
             .click();
-        cy.contains('Delete Malaria Entity')
-            .click();
-        cy.get('[data-test="widget-profile-delete-modal"]').within(() => {
-            cy.contains('Yes, delete Malaria Entity')
-                .click();
-        });
     });
 });
 
