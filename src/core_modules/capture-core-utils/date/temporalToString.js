@@ -1,4 +1,5 @@
 // @flow
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { padWithZeros } from './padWithZeros';
 
 /**
@@ -20,7 +21,8 @@ export function temporalToString(temporalDate: PlainDate | null, dateFormat: ?st
     }
 
     try {
-        const year = temporalDate.year;
+        const calendar = systemSettingsStore.get().calendar;
+        const year = calendar === 'ethiopian' ? temporalDate.eraYear : temporalDate.year;
         const month = temporalDate.month;
         const day = temporalDate.day;
 

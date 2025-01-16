@@ -1,6 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import { Temporal } from '@js-temporal/polyfill';
+import {
+    convertFromIso8601,
+    convertToIso8601,
+} from '@dhis2/multi-calendar-dates';
 import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
@@ -11,7 +15,7 @@ import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
 import { orientations } from '../constants/orientations.const';
 import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
-import { stringToTemporal, temporalToString } from '../../capture-core-utils/date';
+import { temporalToString } from '../../capture-core-utils/date';
 
 type AgeValues = {
     date?: ?string,
@@ -56,19 +60,17 @@ type Props = {
 };
 
 function getCalculatedValues(dateValue: ?string, calendarType: ?string, dateFormat: ?string): AgeValues {
-    const now = Temporal.Now.plainDateISO().withCalendar(calendarType);
+    const nowIso = Temporal.Now.plainDateISO();
 
-    const age = stringToTemporal(dateValue, calendarType, dateFormat);
+    const ageIso = convertToIso8601(dateValue, calendarType);
 
-    const diff = now.since(age, {
+    const diff = nowIso.since(ageIso, {
         largestUnit: 'years',
         smallestUnit: 'days',
     });
 
-    const date = temporalToString(age, dateFormat);
-
     return {
-        date,
+        date: dateValue,
         years: diff.years.toString(),
         months: diff.months.toString(),
         days: diff.days.toString(),
@@ -118,14 +120,15 @@ class D2AgeFieldPlain extends Component<Props> {
             return;
         }
 
-        const now = Temporal.Now.plainDateISO().withCalendar(calendarType);
+        const nowIso = Temporal.Now.plainDateISO();
 
-        const calculatedDate = now.subtract({
+        const calculatedDateIso = nowIso.subtract({
             years: D2AgeFieldPlain.getNumberOrZero(values.years),
             months: D2AgeFieldPlain.getNumberOrZero(values.months),
             days: D2AgeFieldPlain.getNumberOrZero(values.days),
         });
-        const dateString = temporalToString(calculatedDate, dateFormat);
+        const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendarType);
+        const dateString = temporalToString(localCalculatedDate, dateFormat);
         const calculatedValues = getCalculatedValues(dateString, calendarType, dateFormat);
         this.props.onBlur(calculatedValues);
     }
