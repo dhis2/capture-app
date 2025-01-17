@@ -25,7 +25,7 @@ const InfoBoxPlain = ({
     orgUnitName,
     classes,
 }: Props) => {
-    if (!scheduleDate || !suggestedScheduleDate || !orgUnitName) {
+    if (!scheduleDate || !suggestedScheduleDate) {
         return null;
     }
 
@@ -54,17 +54,22 @@ const InfoBoxPlain = ({
                             },
                         )
                     }
-                    {' '}
-                    {i18n.t('There are {{count}} scheduled event in {{orgUnitName}} on this day.', {
-                        count: eventCountInOrgUnit,
-                        orgUnitName,
-                        defaultValue: 'There are {{count}} scheduled event in {{orgUnitName}} on this day.',
-                        defaultValue_plural: 'There are {{count}} scheduled events in {{orgUnitName}} on this day.',
-                        interpolation: {
-                            escapeValue: false,
-                        },
-                    })}
+                    {!!orgUnitName && (
+                        <>
+                            {' '}
+                            {i18n.t('There are {{count}} scheduled event in {{orgUnitName}} on this day.', {
+                                count: eventCountInOrgUnit,
+                                orgUnitName,
+                                defaultValue: 'There are {{count}} scheduled event in {{orgUnitName}} on this day.',
+                                defaultValue_plural: 'There are {{count}} scheduled events in {{orgUnitName}} on this day.',
+                                interpolation: {
+                                    escapeValue: false,
+                                },
+                            })}
+                        </>
+                    )}
                 </>
+
             )}
         </NoticeBox>
     );
