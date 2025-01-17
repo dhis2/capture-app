@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import type { ChangelogFilterProps, FilterValueType } from './ChangelogFilter.types';
 import { DropdownFilter } from './DropdownFilter';
+import { FIELD_TYPES, FILTER_FIELD } from '../Changelog/Changelog.constants';
 
 const styles = {
     container: {
@@ -12,10 +13,9 @@ const styles = {
     },
 };
 
-const getFilterColumn = (id: string) =>
-    (['occurredAt', 'scheduledAt', 'geometry'].includes(id)
-        ? 'field'
-        : 'dataElement');
+const getFilterField = (id: string) =>
+    (Object.values(FIELD_TYPES).includes(id) ? FILTER_FIELD.FIELD : FILTER_FIELD.DATA_ELEMENT);
+
 
 const ChangelogFilterBarPlain = ({
     classes,
@@ -25,7 +25,7 @@ const ChangelogFilterBarPlain = ({
     setAttributeToFilterBy,
     dataItemDefinitions,
 }: ChangelogFilterProps) => {
-    const [openMenu, setOpenMenu] = useState<string | null>(null);
+    const [openMenu, setOpenMenu] = useState <string | null>(null);
 
     const toggleMenu = useCallback((menuName: string) => {
         setOpenMenu(prev => (prev === menuName ? null : menuName));
@@ -33,14 +33,13 @@ const ChangelogFilterBarPlain = ({
 
     const handleItemSelected = useCallback(
         (value: FilterValueType) => {
-            setOpenMenu(null);
-            if (value === 'SHOW_ALL') {
-                setFilterValue('SHOW_ALL');
+            if (value === null) {
+                setFilterValue(null);
                 setAttributeToFilterBy(null);
             } else {
-                const column = getFilterColumn(value.id);
+                const filterField = getFilterField(value.id);
                 setFilterValue(value);
-                setAttributeToFilterBy(column);
+                setAttributeToFilterBy(filterField);
             }
         },
         [setFilterValue, setAttributeToFilterBy],
@@ -55,7 +54,7 @@ const ChangelogFilterBarPlain = ({
         [dataItemDefinitions],
     );
 
-    const selectedFilterValue = attributeToFilterBy ? filterValue : 'SHOW_ALL';
+    const selectedFilterValue = attributeToFilterBy ? filterValue : null;
 
     return (
         <div className={classes.container}>

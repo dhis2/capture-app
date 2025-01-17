@@ -40,13 +40,12 @@ const DropdownFilterPlain = ({
     const isMenuOpen = openMenuName === filterColumn;
 
     const handleShowAll = useCallback(() => {
-        onItemSelected('SHOW_ALL', filterColumn);
+        onItemSelected(null, filterColumn);
     }, [onItemSelected, filterColumn]);
 
-    const filterValue =
-        selectedFilterValue !== 'SHOW_ALL' && typeof selectedFilterValue === 'object'
-            ? selectedFilterValue.name
-            : i18n.t('Show all');
+    const filterValue = selectedFilterValue
+        ? selectedFilterValue.name
+        : i18n.t('Show all');
 
     return (
         <DropdownButton
@@ -56,7 +55,7 @@ const DropdownFilterPlain = ({
                 isMenuOpen && (
                     <FlyoutMenu role="menu" dataTest={`changelog-filter-${filterColumn}`} maxHeight="300px">
                         <MenuItem
-                            key="all-filter"
+                            key={'showAll'}
                             onClick={handleShowAll}
                             label={i18n.t('Show all')}
                         />

@@ -22,6 +22,17 @@ export const COLUMN_TO_SORT_BY = Object.freeze({
     DATA_ITEM: 'change',
 });
 
+export const FIELD_TYPES = Object.freeze({
+    OCCURRED_AT: 'occurredAt',
+    SCHEDULED_AT: 'scheduledAt',
+    GEOMETRY: 'geometry',
+});
+
+export const FILTER_FIELD = Object.freeze({
+    FIELD: 'field',
+    DATA_ELEMENT: 'dataElement',
+});
+
 export const DEFAULT_PAGE_SIZE = 10;
 
 export const QUERY_KEYS_BY_ENTITY_TYPE = Object.freeze({

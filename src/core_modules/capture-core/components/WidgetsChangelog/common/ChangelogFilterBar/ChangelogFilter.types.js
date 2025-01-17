@@ -1,5 +1,5 @@
 // @flow
-export type FilterValueType = 'SHOW_ALL' | { id: string, name: string };
+export type FilterValueType = { id: string, name: string } | null;
 
 export type DataItemDefinition = {
     id: string,
