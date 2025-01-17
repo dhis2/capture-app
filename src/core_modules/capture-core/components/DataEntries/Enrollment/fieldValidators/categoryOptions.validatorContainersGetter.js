@@ -8,7 +8,7 @@ const validateCategories = (value?: ?string, props?: Object, fieldId?: string) =
 
     return {
         valid: hasValue(value),
-        message: i18n.t('Please select {{categoryName}}', { categoryName }),
+        errorMessage: i18n.t('Please select {{categoryName}}', { categoryName }),
     };
 };
 
@@ -16,7 +16,7 @@ export const getCategoryOptionsValidatorContainers = (props?: Object, fieldId?: 
     const validatorContainers = [
         {
             validator: (value?: ?string) => validateCategories(value, props, fieldId),
-            message: '',
+            errorMessage: '',
         },
     ];
     return validatorContainers;

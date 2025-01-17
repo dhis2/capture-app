@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { FlyoutMenu, IconMore16, MenuItem, MenuDivider } from '@dhis2/ui';
+import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
@@ -17,10 +17,15 @@ export const OverflowMenuComponent = ({
     displayChangelog,
     teiId,
     programAPI,
+    readOnlyMode,
 }: PlainProps) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
     const [changelogIsOpen, setChangelogIsOpen] = useState(false);
+
+    if (readOnlyMode && !displayChangelog) {
+        return null;
+    }
 
     return (
         <>
@@ -34,24 +39,23 @@ export const OverflowMenuComponent = ({
                 component={
                     <FlyoutMenu dense>
                         {displayChangelog && (
-                            <>
-                                <MenuItem
-                                    label={i18n.t('View changelog')}
-                                    onClick={() => {
-                                        setChangelogIsOpen(true);
-                                        setActionsIsOpen(false);
-                                    }}
-                                />
-                                <MenuDivider dense />
-                            </>
+                            <MenuItem
+                                label={i18n.t('View changelog')}
+                                onClick={() => {
+                                    setChangelogIsOpen(true);
+                                    setActionsIsOpen(false);
+                                }}
+                            />
                         )}
-                        <DeleteMenuItem
-                            trackedEntityTypeName={trackedEntityTypeName}
-                            canWriteData={canWriteData}
-                            canCascadeDeleteTei={canCascadeDeleteTei}
-                            setActionsIsOpen={setActionsIsOpen}
-                            setDeleteModalIsOpen={setDeleteModalIsOpen}
-                        />
+                        {!readOnlyMode && (
+                            <DeleteMenuItem
+                                trackedEntityTypeName={trackedEntityTypeName}
+                                canWriteData={canWriteData}
+                                canCascadeDeleteTei={canCascadeDeleteTei}
+                                setActionsIsOpen={setActionsIsOpen}
+                                setDeleteModalIsOpen={setDeleteModalIsOpen}
+                            />
+                        )}
                     </FlyoutMenu>
                 }
             />

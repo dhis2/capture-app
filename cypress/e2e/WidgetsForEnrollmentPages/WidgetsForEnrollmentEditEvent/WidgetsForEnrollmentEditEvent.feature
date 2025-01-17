@@ -38,13 +38,6 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the user sees the owner organisation unit
     And the user sees the last update date
 
-  Scenario: You can delete a tracked entity from the profile widget
-    Given you add a new tracked entity in the Malaria focus investigation program
-    When you open the overflow menu and click the "Delete Focus area" button
-    Then you see the delete tracked entity confirmation modal
-    When you confirm by clicking the "Yes, delete Focus area" button
-    Then you are redirected to the home page
-
   Scenario: User can open the delete modal
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be opened
@@ -76,7 +69,7 @@ Feature: The user interacts with the widgets on the enrollment edit event
     Then the event has the user Tracker demo User assigned
     When you remove the assigned user
     Then the event has no assignd user
-  
+
   @v>=41
   Scenario: The user can view an event changelog on the enrollment edit event
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
@@ -85,7 +78,7 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the changelog modal should contain data
     # One row is filtered out as the metadata is no longer there
     And the number of changelog table rows should be 9
-  
+
   @v>=41
   Scenario: The user can change changelog page size
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
@@ -96,7 +89,7 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And you change the page size to 100
     Then the number of changelog table rows should be 37
     Then the table footer should display page 1
-  
+
   @v>=41
   Scenario: The user can move to the next page in the changelog
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8

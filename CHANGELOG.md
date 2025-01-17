@@ -1,3 +1,45 @@
+## [101.21.6](https://github.com/dhis2/capture-app/compare/v101.21.5...v101.21.6) (2025-01-16)
+
+
+### Bug Fixes
+
+* [DHIS2-18668] remove delete tei button in enrollment event pages ([#3941](https://github.com/dhis2/capture-app/issues/3941)) ([aef3400](https://github.com/dhis2/capture-app/commit/aef340023249b53de305fea55627082b443da060))
+
+## [101.21.5](https://github.com/dhis2/capture-app/compare/v101.21.4...v101.21.5) (2025-01-15)
+
+
+### Bug Fixes
+
+* [DHIS2-18836] show 'Profile' instead of 'False' during loading ([#3938](https://github.com/dhis2/capture-app/issues/3938)) ([70aa7cc](https://github.com/dhis2/capture-app/commit/70aa7ccb5c9d6dee978175b4e639e2b3cd415a9c))
+
+## [101.21.4](https://github.com/dhis2/capture-app/compare/v101.21.3...v101.21.4) (2025-01-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18355] runtime error occurs when saving empty widget in Related stages ([#3935](https://github.com/dhis2/capture-app/issues/3935)) ([4ebef85](https://github.com/dhis2/capture-app/commit/4ebef8596d1814efb385c1817b5968405b704af7))
+
+## [101.21.3](https://github.com/dhis2/capture-app/compare/v101.21.2...v101.21.3) (2025-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-17613] Use new note endpoint ([#3908](https://github.com/dhis2/capture-app/issues/3908)) ([a9fdea8](https://github.com/dhis2/capture-app/commit/a9fdea8ac8284b28ec3c0acf0551e9cd1a68a180))
+
+## [101.21.2](https://github.com/dhis2/capture-app/compare/v101.21.1...v101.21.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* [DHIS2-18569] Relationship widget limited to 50 entries ([#3927](https://github.com/dhis2/capture-app/issues/3927)) ([a1e493d](https://github.com/dhis2/capture-app/commit/a1e493d48179e7749d61f52504fdeb3c11dfa53e))
+
+## [101.21.1](https://github.com/dhis2/capture-app/compare/v101.21.0...v101.21.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* [DHIS2-18632] Sorting stage detail table on orgunit breaks the app ([#3917](https://github.com/dhis2/capture-app/issues/3917)) ([15414cc](https://github.com/dhis2/capture-app/commit/15414cc73f7ce74d4d057acad13bf4855d358426))
+
 # [101.21.0](https://github.com/dhis2/capture-app/compare/v101.20.3...v101.21.0) (2025-01-07)
 
 
