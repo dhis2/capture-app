@@ -5,8 +5,8 @@ import {
     CHANGELOG_ENTITY_TYPES,
     QUERY_KEYS_BY_ENTITY_TYPE,
     DEFAULT_PAGE_SIZE,
-    SORT_DIRECTION,
-    COLUMN_TO_SORT_BY,
+    SORT_DIRECTIONS,
+    SORT_TARGETS,
 } from '../Changelog/Changelog.constants';
 import type { SortDirection } from '../Changelog/Changelog.types';
 
@@ -17,8 +17,8 @@ type Props = {
 };
 
 export const useChangelogData = ({ entityId, entityType, programId }: Props) => {
-    const [columnToSortBy, setColumnToSortBy] = useState<string>(COLUMN_TO_SORT_BY.DATE);
-    const [sortDirection, setSortDirection] = useState<SortDirection>(SORT_DIRECTION.DEFAULT);
+    const [columnToSortBy, setColumnToSortBy] = useState<string>(SORT_TARGETS.DATE);
+    const [sortDirection, setSortDirection] = useState<SortDirection>(SORT_DIRECTIONS.DEFAULT);
 
     const [attributeToFilterBy, setAttributeToFilterBy] = useState<string | null>(null);
     const [filterValue, setFilterValue] = useState<Object>(null);
@@ -37,7 +37,7 @@ export const useChangelogData = ({ entityId, entityType, programId }: Props) => 
             : undefined;
 
     const orderParam =
-        sortDirection === SORT_DIRECTION.DEFAULT
+        sortDirection === SORT_DIRECTIONS.DEFAULT
             ? undefined
             : `${columnToSortBy}:${sortDirection}`;
 

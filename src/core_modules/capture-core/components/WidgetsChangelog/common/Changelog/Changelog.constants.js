@@ -10,27 +10,29 @@ export const CHANGELOG_ENTITY_TYPES = Object.freeze({
     TRACKED_ENTITY: 'trackedEntity',
 });
 
-export const SORT_DIRECTION = Object.freeze({
+export const SORT_DIRECTIONS = Object.freeze({
     ASC: 'asc',
     DESC: 'desc',
     DEFAULT: 'default',
 });
 
-export const COLUMN_TO_SORT_BY = Object.freeze({
+export const SORT_TARGETS = Object.freeze({
     DATE: 'createdAt',
     USERNAME: 'username',
     DATA_ITEM: 'change',
+    ATTRIBUTE: 'attribute',
+});
+
+export const FILTER_TARGETS = Object.freeze({
+    FIELD: 'field',
+    DATA_ELEMENT: 'dataElement',
+    ATTRIBUTE: 'attribute',
 });
 
 export const FIELD_TYPES = Object.freeze({
     OCCURRED_AT: 'occurredAt',
     SCHEDULED_AT: 'scheduledAt',
     GEOMETRY: 'geometry',
-});
-
-export const FILTER_FIELD = Object.freeze({
-    FIELD: 'field',
-    DATA_ELEMENT: 'dataElement',
 });
 
 export const DEFAULT_PAGE_SIZE = 10;

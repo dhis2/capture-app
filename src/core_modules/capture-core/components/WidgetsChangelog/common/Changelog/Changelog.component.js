@@ -28,6 +28,7 @@ export const ChangelogComponent = ({
     setColumnToSortBy,
     attributeToFilterBy,
     setAttributeToFilterBy,
+    entityType,
     filterValue,
     setFilterValue,
     setPage,
@@ -50,6 +51,7 @@ export const ChangelogComponent = ({
                 filterValue={filterValue}
                 setFilterValue={setFilterValue}
                 dataItemDefinitions={dataItemDefinitions}
+                entityType={entityType}
             />
             <DataTable fixed dataTest={'changelog-data-table'} layout={'fixed'}>
                 <ChangelogTableHeader
@@ -57,6 +59,7 @@ export const ChangelogComponent = ({
                     setColumnToSortBy={setColumnToSortBy}
                     sortDirection={sortDirection}
                     setSortDirection={setSortDirection}
+                    entityType={entityType}
                 />
                 {records && records.length > 0 ? (
                     <DataTableBody dataTest={'changelog-data-table-body'}>

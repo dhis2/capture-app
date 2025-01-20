@@ -53,17 +53,27 @@ const DropdownFilterPlain = ({
             onClick={() => onToggleMenu(filterColumn)}
             component={
                 isMenuOpen && (
-                    <FlyoutMenu role="menu" dataTest={`changelog-filter-${filterColumn}`} maxHeight="300px">
+                    <FlyoutMenu
+                        role="menu"
+                        dataTest={`changelog-filter-${filterColumn}`}
+                        maxHeight="300px"
+                    >
                         <MenuItem
                             key={'showAll'}
-                            onClick={handleShowAll}
+                            onClick={() => {
+                                handleShowAll();
+                                onToggleMenu(filterColumn);
+                            }}
                             label={i18n.t('Show all')}
                         />
                         <Divider />
                         {items.map(item => (
                             <MenuItem
                                 key={item.id}
-                                onClick={() => onItemSelected(item, filterColumn)}
+                                onClick={() => {
+                                    onItemSelected(item, filterColumn);
+                                    onToggleMenu(filterColumn);
+                                }}
                                 label={item.name}
                             />
                         ))}

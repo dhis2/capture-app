@@ -1,4 +1,6 @@
 // @flow
+import { CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
+
 export type FilterValueType = { id: string, name: string } | null;
 
 export type DataItemDefinition = {
@@ -20,4 +22,5 @@ export type ChangelogFilterProps = {
     attributeToFilterBy: string | null,
     setAttributeToFilterBy: (value: string | null) => void,
     dataItemDefinitions: DataItemDefinitions,
+    entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
 };

@@ -1,6 +1,6 @@
 // @flow
 import { dataElementTypes } from '../../../../metaData';
-import { CHANGE_TYPES } from './Changelog.constants';
+import { CHANGE_TYPES, CHANGELOG_ENTITY_TYPES } from './Changelog.constants';
 
 type CreatedChange = {|
     type: typeof CHANGE_TYPES.CREATED,
@@ -76,4 +76,5 @@ export type ChangelogProps = {
     filterValue: any,
     setFilterValue: (any) => void,
     dataItemDefinitions: ItemDefinitions,
+    entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
 };

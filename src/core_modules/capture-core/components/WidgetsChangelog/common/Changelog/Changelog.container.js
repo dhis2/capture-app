@@ -75,6 +75,7 @@ export const Changelog = ({
             pager={pager}
             setPage={setPage}
             setPageSize={setPageSize}
+            entityType={entityType}
             columnToSortBy={columnToSortBy}
             setColumnToSortBy={setColumnToSortBy}
             sortDirection={sortDirection}

@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import type { ChangelogFilterProps, FilterValueType } from './ChangelogFilter.types';
 import { DropdownFilter } from './DropdownFilter';
-import { FIELD_TYPES, FILTER_FIELD } from '../Changelog/Changelog.constants';
+import { FIELD_TYPES, FILTER_TARGETS, CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
 
 const styles = {
     container: {
@@ -13,9 +13,15 @@ const styles = {
     },
 };
 
-const getFilterField = (id: string) =>
-    (Object.values(FIELD_TYPES).includes(id) ? FILTER_FIELD.FIELD : FILTER_FIELD.DATA_ELEMENT);
-
+const getFilterField = (id: string, entityType: string) => {
+    if (entityType === CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY) {
+        return FILTER_TARGETS.ATTRIBUTE;
+    }
+    if (Object.values(FIELD_TYPES).includes(id)) {
+        return FILTER_TARGETS.FIELD;
+    }
+    return FILTER_TARGETS.DATA_ELEMENT;
+};
 
 const ChangelogFilterBarPlain = ({
     classes,
@@ -24,6 +30,7 @@ const ChangelogFilterBarPlain = ({
     attributeToFilterBy,
     setAttributeToFilterBy,
     dataItemDefinitions,
+    entityType,
 }: ChangelogFilterProps) => {
     const [openMenu, setOpenMenu] = useState <string | null>(null);
 
@@ -37,12 +44,12 @@ const ChangelogFilterBarPlain = ({
                 setFilterValue(null);
                 setAttributeToFilterBy(null);
             } else {
-                const filterField = getFilterField(value.id);
+                const filterField = getFilterField(value.id, entityType);
                 setFilterValue(value);
                 setAttributeToFilterBy(filterField);
             }
         },
-        [setFilterValue, setAttributeToFilterBy],
+        [setFilterValue, setAttributeToFilterBy, entityType],
     );
 
     const dataItems = useMemo(

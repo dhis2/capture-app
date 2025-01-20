@@ -2,7 +2,7 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { DataTableColumnHeader, DataTableHead, DataTableRow } from '@dhis2/ui';
-import { SORT_DIRECTION, COLUMN_TO_SORT_BY } from '../Changelog/Changelog.constants';
+import { SORT_DIRECTIONS, SORT_TARGETS, CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
 import type { SortDirection } from '../Changelog/Changelog.types';
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
     sortDirection: SortDirection,
     setSortDirection: (SortDirection) => void,
     setColumnToSortBy: (column: string) => void,
+    entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
 };
 
 const getCurrentSortDirection = (
@@ -17,26 +18,31 @@ const getCurrentSortDirection = (
     currentColumn: string,
     currentDirection: SortDirection,
 ): SortDirection =>
-    (columnName === currentColumn ? currentDirection : SORT_DIRECTION.DEFAULT);
+    (columnName === currentColumn ? currentDirection : SORT_DIRECTIONS.DEFAULT);
 
 export const ChangelogTableHeader = ({
     columnToSortBy,
     sortDirection,
     setSortDirection,
     setColumnToSortBy,
+    entityType,
 }: Props) => {
     const handleSortIconClick = ({ name, direction }) => {
         setSortDirection(direction);
         setColumnToSortBy(name);
     };
 
+    const sortTargetDataItem = entityType === CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY
+        ? SORT_TARGETS.ATTRIBUTE
+        : SORT_TARGETS.DATA_ITEM;
+
     return (
         <DataTableHead>
             <DataTableRow>
                 <DataTableColumnHeader
-                    name={COLUMN_TO_SORT_BY.DATE}
+                    name={SORT_TARGETS.DATE}
                     sortDirection={getCurrentSortDirection(
-                        COLUMN_TO_SORT_BY.DATE,
+                        SORT_TARGETS.DATE,
                         columnToSortBy,
                         sortDirection,
                     )}
@@ -50,9 +56,9 @@ export const ChangelogTableHeader = ({
                 </DataTableColumnHeader>
 
                 <DataTableColumnHeader
-                    name={COLUMN_TO_SORT_BY.USERNAME}
+                    name={SORT_TARGETS.USERNAME}
                     sortDirection={getCurrentSortDirection(
-                        COLUMN_TO_SORT_BY.USERNAME,
+                        SORT_TARGETS.USERNAME,
                         columnToSortBy,
                         sortDirection,
                     )}
@@ -66,9 +72,9 @@ export const ChangelogTableHeader = ({
                 </DataTableColumnHeader>
 
                 <DataTableColumnHeader
-                    name={COLUMN_TO_SORT_BY.DATA_ITEM}
+                    name={sortTargetDataItem}
                     sortDirection={getCurrentSortDirection(
-                        COLUMN_TO_SORT_BY.DATA_ITEM,
+                        sortTargetDataItem,
                         columnToSortBy,
                         sortDirection,
                     )}
