@@ -1,65 +1,98 @@
 Feature: Related stages
 
-    Scenario: Edit event -> Link to an existing event
+    Scenario: Edit event -> User is able to link and unlink an existing event
         Given you land on a enrollment page domain by having typed #/enrollmentEventEdit?eventId=TwoGi1mUFFw&orgUnitId=lyONqUkY1Bq
-        Then the Related stages Actions should be visible at the bottom of the page
-        # When the user selects "Schedule a new visit"
-        # And selects a different Organisational unit
-        # And fills in the required event details
-        # And clicks "Complete"
-        # Then a new event should be created
-        # And a response event should be scheduled
-        # And both events should be linked
+        And the Related stages Actions is visible at the bottom of the page
+        And the schedule and enter details actions are disabled
+        And you select the Link to an existing event action
+        When you select the first existing Baby Postnatal event in the list
+        And you click the Link button
+        Then you can see the Baby Postnatal linked event
+        And the Related stages Actions is not visible at the bottom of the page
+        When you unlink the Baby Postnatal linked event
+        And the Related stages Actions is visible at the bottom of the page
 
-    # Scenario: Adding a new tracker event with direct data entry
-    #     When the user opens the new event form
-    #     And selects "Enter data directly" from the Actions widget
-    #     And fills in the event data
-    #     And clicks "Save"
-    #     Then a new event should be created
-    #     And a linked event should be created with the entered data
-    #     And both events should be linked
+    Scenario: Edit event -> User is able to schedule an event in a different orgUnit
+        Given you land on a enrollment page domain by having typed #/enrollment?enrollmentId=VOU2Qe7T49r&orgUnitId=VFF7f43dJv4&programId=IpHINAT79UW&teiId=rBqwRgXvjk0
+        And you delete the Baby Postnatal event
+        And you open the Birth event edit page
+        And the Related stages Actions is visible at the bottom of the page
+        And the link to an existing actions is disabled
+        And you select the Schedule event action
+        When you fill in the required values for the Baby postnatal event when scheduling
+         And you click the Schedule action button
+        Then you can see the Baby Postnatal linked event
+        And the Related stages Actions is not visible at the bottom of the page
 
-    # Scenario: Linking to an existing event
-    #     When the user opens the new event form
-    #     And selects "Link to existing event" from the Actions widget
-    #     And selects an existing event
-    #     And clicks "Save"
-    #     Then the current event should be linked to the selected existing event
+    Scenario: Edit event -> User is able to enter details in a different orgUnit
+        Given you land on a enrollment page domain by having typed #/enrollment?enrollmentId=VOU2Qe7T49r&orgUnitId=VFF7f43dJv4&programId=IpHINAT79UW&teiId=rBqwRgXvjk0
+        And you delete the Baby Postnatal event
+        And you open the Birth event edit page
+        And the Related stages Actions is visible at the bottom of the page
+        And the link to an existing actions is disabled
+        And you select the Enter details now action
+        When you fill in the required values for the Baby postnatal event when entering details
+        And you click the Enter details action button
+        Then you can see the Birth linked event
+        And you can see the Baby postnatal new event form where you can enter details
 
-    # Scenario: Editing an unlinked event
-    #     Given an event eligible for related stages exists
-    #     And the event has no linked events
-    #     When the user opens the event for editing
-    #     Then the "Linked event" widget should be visible at the bottom
-    #     When the user creates a new linked event
-    #     Then both events should be properly linked
+    Scenario: New event -> User is able to link and unlink an existing event
+        Given you land on a enrollment page domain by having typed #/enrollment?enrollmentId=VOU2Qe7T49r&orgUnitId=VFF7f43dJv4&programId=IpHINAT79UW&teiId=rBqwRgXvjk0
+        And you delete the Birth event
+        And you open the Birth new event page and fill in the required data in the form
+        And the Related stages Actions is visible at the bottom of the page
+        And the schedule and enter details actions are disabled
+        And you select the Link to an existing event action
+        When you select the first existing Baby Postnatal event in the list
+        And you click the Complete button
+        Then you are redirect to the enrollment dasboard and you see the 2 linked events in different orgUnits
+        And you open the Birth event edit page
+        Then you can see the Baby Postnatal linked event
+        And the Related stages Actions is not visible at the bottom of the page
+        When you unlink the Baby Postnatal linked event
+        And the Related stages Actions is visible at the bottom of the page
+    
+    Scenario: New event -> User is able to schedule an event in a different orgUnit
+        Given you land on a enrollment page domain by having typed #/enrollment?enrollmentId=VOU2Qe7T49r&orgUnitId=VFF7f43dJv4&programId=IpHINAT79UW&teiId=rBqwRgXvjk0
+        And you delete the Baby Postnatal event
+        And you delete the Birth event
+        And you open the Birth new event page and fill in the required data in the form
+        And the Related stages Actions is visible at the bottom of the page
+        And the link to an existing actions is disabled
+        And you select the Schedule event action
+        When you fill in the required values for the Baby postnatal event when scheduling
+        And you click the Complete button
+        Then you are redirect to the enrollment dasboard and you see the 2 linked events in different orgUnits
 
-    # Scenario: Managing a linked event
-    #     Given an event with an existing linked event
-    #     When the user opens the event for editing
-    #     Then the "Linked Event" widget should be visible at the top
-    #     And the linked event details should be displayed
-    #     When the user clicks the Menu in the top-right corner
-    #     Then they should see options to:
-    #         | Unlink the event            |
-    #         | Unlink and delete the event |
+    Scenario: New event -> User is able to enter details in a different orgUnit
+        Given you land on a enrollment page domain by having typed #/enrollment?enrollmentId=VOU2Qe7T49r&orgUnitId=VFF7f43dJv4&programId=IpHINAT79UW&teiId=rBqwRgXvjk0
+        And you delete the Baby Postnatal event
+        And you delete the Birth event
+        And you open the Birth new event page and fill in the required data in the form
+        And the Related stages Actions is visible at the bottom of the page
+        And the link to an existing actions is disabled
+        And you select the Enter details now action
+        When you fill in the required values for the Baby postnatal event when entering details
+        And you click the Complete button
+        Then you can see the Birth linked event
+        And you can see the Baby postnatal new event form where you can enter details
 
-    # Scenario: Unlinking a linked event
-    #     Given an event with an existing linked event
-    #     When the user opens the event for editing
-    #     And clicks the Menu in the top-right corner
-    #     And selects "Unlink the event"
-    #     Then the events should no longer be linked
-    #     And both events should still exist
+    Scenario: Enroll trackedEntity -> User is able to schedule an event in a different orgUnit
+        Given you are in Child programme and Tombo Wallah CHP organization unit registration page
+        When you fill the Child Program program registration form with unique values
+        And you select the Schedule event action
+        And you fill in the required values for the Baby postnatal event when scheduling
+        And you click the save person submit button
+        Then you are redirect to the enrollment dasboard and you see the 2 linked events in different orgUnits
+        And you delete the recently added tracked entity
 
-    # Scenario: Enrolling a tracked entity with related stages
-    #     Given the "First stage appears on registration page" flag is enabled
-    #     When the user opens the form to enroll a new tracked entity
-    #     Then the "Actions" widget should be visible at the bottom
-    #     When the user schedules a new visit in another Organisational unit
-    #     And fills in the enrollment details
-    #     And clicks "Save"
-    #     Then the tracked entity should be enrolled
-    #     And a related event should be scheduled
-    #     And both should be properly linked
+    Scenario: Enroll trackedEntity -> User is able to enter details in a different orgUnit
+        Given you are in Child programme and Tombo Wallah CHP organization unit registration page
+        When you fill the Child Program program registration form with unique values
+        And you select the Enter details now action
+        And you fill in the required values for the Baby postnatal event when entering details
+        And you click the save person submit button
+        Then you can see the Birth linked event
+        And you can see the Baby postnatal new event form where you can enter details
+        And you click the cancel button
+        And you delete the recently added tracked entity
