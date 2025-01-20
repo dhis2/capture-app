@@ -13,6 +13,8 @@ export type ContainerProps = {|
     dataEntryFieldRef: (instance: any, id: string) => void,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
     onSaveAndCompleteEnrollment: (enrollment: Object) => void,
+    placementDomNodeForSavingText?: HTMLElement,
+    programName: string,
 |};
 
 export type Props = $Diff<ContainerProps, {| orgUnit: OrgUnit |}>;

@@ -40,7 +40,7 @@ export type RelatedStageRefPayload = {|
 
 export type ContainerProps = {|
     ...CommonValidatedProps,
-    orgUnit?: OrgUnit,
+    orgUnitContext?: OrgUnit,
 |};
 
 export type Props = {|

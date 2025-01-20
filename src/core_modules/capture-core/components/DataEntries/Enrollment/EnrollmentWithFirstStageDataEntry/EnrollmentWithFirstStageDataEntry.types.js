@@ -1,4 +1,5 @@
 // @flow
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 
 export type Props = {
@@ -6,4 +7,5 @@ export type Props = {
         stage: ProgramStage,
     },
     formFoundation: RenderFoundation,
+    orgUnit: ?OrgUnit,
 };

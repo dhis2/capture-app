@@ -3,7 +3,6 @@ import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import i18n from '@dhis2/d2-i18n';
 import { getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
@@ -22,6 +21,7 @@ import {
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type { RulesExecutionDependenciesClientFormatted } from '../../common.types';
 import { getLocationQuery } from '../../../../utils/routing';
+import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../metadataRetrieval/coreOrgUnit';
 import type { QuerySingleResource } from '../../../../utils/api';
 
 const runRulesForNewEvent = async ({
@@ -29,7 +29,6 @@ const runRulesForNewEvent = async ({
     dataEntryId,
     itemId,
     uid,
-    orgUnit,
     rulesExecutionDependenciesClientFormatted,
     fieldData,
     querySingleResource,
@@ -38,7 +37,6 @@ const runRulesForNewEvent = async ({
     dataEntryId: string,
     itemId: string,
     uid: string,
-    orgUnit: OrgUnit,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
     fieldData?: ?FieldData,
     querySingleResource: QuerySingleResource,
@@ -59,11 +57,14 @@ const runRulesForNewEvent = async ({
     const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
     const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
     const currentEvent = { ...currentEventValues, ...currentEventMainData, programStageId };
+    const { coreOrgUnit, cached } =
+        // $FlowFixMe
+        await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
 
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
         stage,
-        orgUnit,
+        orgUnit: coreOrgUnit,
         currentEvent,
         otherEvents: events,
         attributeValues,
@@ -79,6 +80,7 @@ const runRulesForNewEvent = async ({
     return batchActions([
         updateRulesEffects(effectsWithValidations, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+        ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
     ],
     newEventWidgetDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
     );
@@ -95,13 +97,12 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
             actionBatch.payload
                 .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
         switchMap((action) => {
-            const { dataEntryId, itemId, uid, orgUnit, rulesExecutionDependenciesClientFormatted } = action.payload;
+            const { dataEntryId, itemId, uid, rulesExecutionDependenciesClientFormatted } = action.payload;
             const runRulesForNewEventPromise = runRulesForNewEvent({
                 store,
                 dataEntryId,
                 itemId,
                 uid,
-                orgUnit,
                 rulesExecutionDependenciesClientFormatted,
                 querySingleResource,
             });
@@ -126,7 +127,6 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (
                 elementId,
                 value,
                 uiState,
-                orgUnit,
                 rulesExecutionDependenciesClientFormatted,
             } = action.payload;
 
@@ -141,7 +141,6 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (
                 dataEntryId,
                 itemId,
                 uid,
-                orgUnit,
                 rulesExecutionDependenciesClientFormatted,
                 fieldData,
                 querySingleResource,

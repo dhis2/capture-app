@@ -8,7 +8,7 @@ import type {
 export type D2FunctionsInput = $ReadOnly<{|
     dateUtils: IDateUtils,
     variablesHash: RuleVariables,
-    selectedOrgUnit: OrgUnit,
+    selectedOrgUnit: ?OrgUnit,
     selectedUserRoles: Array<string>,
 |}>;
 

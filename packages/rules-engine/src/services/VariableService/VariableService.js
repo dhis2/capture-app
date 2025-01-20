@@ -37,7 +37,7 @@ type SourceData = {
     selectedEntity: ?TEIValues,
     selectedEnrollment: ?Enrollment,
     optionSets: OptionSets,
-    selectedOrgUnit: OrgUnit,
+    selectedOrgUnit: ?OrgUnit,
 };
 
 const variableSourceTypesDataElementSpecific = {
@@ -516,7 +516,7 @@ export class VariableService {
         return variables;
     }
 
-    getOrganisationContextVariables(orgUnit: OrgUnit) {
+    getOrganisationContextVariables(orgUnit: ?OrgUnit) {
         const variables = {};
         variables.orgunit_code = this.buildContextVariable(orgUnit?.code, typeKeys.TEXT);
         return variables;

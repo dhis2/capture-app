@@ -12,7 +12,7 @@ export const useLifecycle = ({
     program,
     stage,
     formFoundation,
-    orgUnit,
+    orgUnitContext,
     dataEntryId,
     itemId,
     rulesExecutionDependenciesClientFormatted: {
@@ -24,7 +24,7 @@ export const useLifecycle = ({
     program: TrackerProgram,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
-    orgUnit?: OrgUnit,
+    orgUnitContext?: OrgUnit,
     dataEntryId: string,
     itemId: string,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
@@ -39,12 +39,12 @@ export const useLifecycle = ({
     useEffect(() => {
         if (!isLoading) {
             dispatch(batchActions([
-                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory, orgUnit),
+                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory, orgUnitContext),
             ]));
             dataEntryReadyRef.current = true;
             delayRulesExecutionRef.current = true;
         }
-    }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory, orgUnit]);
+    }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory, orgUnitContext]);
 
     const eventsRef = useRef();
     const attributesRef = useRef();
@@ -55,7 +55,7 @@ export const useLifecycle = ({
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
-        if (isLoading || !orgUnit) { return; }
+        if (isLoading) { return; }
         if (delayRulesExecutionRef.current) {
             // getRulesActions depends on settings in the redux store that are being managed through getOpenDataEntryActions.
             // The purpose of the following lines of code is to make sure the redux store is ready before calling getRulesActions.
@@ -70,7 +70,7 @@ export const useLifecycle = ({
                     formFoundation,
                     dataEntryId,
                     itemId,
-                    orgUnit,
+                    orgUnit: orgUnitContext,
                     eventsRulesDependency,
                     attributesValuesRulesDependency,
                     enrollmentDataRulesDependency,
@@ -84,7 +84,7 @@ export const useLifecycle = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         dispatch,
-        orgUnit,
+        orgUnitContext,
         eventsRulesDependency,
         attributesValuesRulesDependency,
         program,
@@ -96,12 +96,9 @@ export const useLifecycle = ({
     ]);
 
     const rulesReady =
-    (!orgUnit) ||
-    (
         eventsRef.current === eventsRulesDependency &&
         attributesRef.current === attributesValuesRulesDependency &&
-        enrollmentDataRef.current === enrollmentDataRulesDependency
-    );
+        enrollmentDataRef.current === enrollmentDataRulesDependency;
 
     return dataEntryReadyRef.current && rulesReady;
 };
