@@ -157,6 +157,9 @@ Then('you can see the Baby postnatal new event form where you can enter details'
         .should('contain', 'Report');
     cy.get('[data-test="edit-event-schedule-tab"]')
         .should('contain', 'Schedule');
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Cancel')
+        .should('exist');
 });
 
 And('the schedule and enter details actions are disabled', () => {
@@ -239,8 +242,10 @@ And(/^you click the save (.*) submit button$/, (TEType) => {
         .click();
 });
 
-And('you click the cancel button', () => {
-    cy.contains('Cancel')
+And('you navigate to the Enrollment dashboard', () => {
+    cy.contains('Enrollment dashboard')
+        .click();
+    cy.contains('Yes, discard changes')
         .click();
 });
 

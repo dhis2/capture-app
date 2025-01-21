@@ -94,5 +94,6 @@ Feature: Related stages
         And you click the save person submit button
         Then you can see the Birth linked event
         And you can see the Baby postnatal new event form where you can enter details
-        And you click the cancel button
+        And you navigate to the Enrollment dashboard
+        And you are redirect to the enrollment dasboard and you see the 2 linked events in different orgUnits
         And you delete the recently added tracked entity
