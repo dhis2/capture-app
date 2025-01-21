@@ -30,7 +30,7 @@ function getTrackerProgram(suggestedProgramId: string) {
         log.error(
             errorCreator('tracker program for id not found')({ suggestedProgramId, error }),
         );
-        throw Error(i18n('Metadata error. see log for details'));
+        throw Error(i18n.t('Metadata error. see log for details'));
     }
     return trackerProgram;
 }

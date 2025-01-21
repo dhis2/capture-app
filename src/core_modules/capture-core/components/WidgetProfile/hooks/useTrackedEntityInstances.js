@@ -1,5 +1,5 @@
 // @flow
-import { useMemo, useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import type { Geometry } from '../DataEntry/helpers/types';
 
@@ -93,7 +93,7 @@ export const useTrackedEntityInstances = (
         loading,
         trackedEntity: !loading && data?.trackedEntityInstance,
         trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
-        trackedEntityTypeName: !tetLoading && tetData?.trackedEntityType?.displayName,
+        trackedEntityTypeName: tetLoading ? undefined : tetData?.trackedEntityType?.displayName,
         trackedEntityTypeAccess: !tetLoading && tetData?.trackedEntityType?.access,
         geometry,
     };
