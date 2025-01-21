@@ -78,7 +78,7 @@ const getLastUpdatedAt = (events, fromServerDate) => {
             ? (
                 <>
                     {i18n.t('Last updated')}&nbsp;
-                    <Tooltip content={fromServerDate(localDateTime).toLocaleString()}>
+                    <Tooltip content={localDateTime}>
                         {moment(fromServerDate(updatedAt)).fromNow()}
                     </Tooltip>
                 </>

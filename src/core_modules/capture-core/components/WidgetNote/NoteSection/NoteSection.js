@@ -110,7 +110,7 @@ const NoteSectionPlain = ({
                             {createdBy.firstName} {' '} {createdBy.surname}
                         </span>}
                         <span className={cx(classes.headerText, classes.lastUpdated)}>
-                            <Tooltip content={fromServerDate(localDateTime).toLocaleString()}>
+                            <Tooltip content={localDateTime}>
                                 {moment(fromServerDate(storedAt)).fromNow()}
                             </Tooltip>
                         </span>

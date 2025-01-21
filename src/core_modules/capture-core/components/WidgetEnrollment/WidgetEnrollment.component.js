@@ -158,7 +158,7 @@ export const WidgetEnrollmentPlain = ({
                                 <IconClock16 color={colors.grey600} />
                             </span>
                             {i18n.t('Last updated')}
-                            <Tooltip content={(fromServerDate(localDateTime).toLocaleString())}>
+                            <Tooltip content={(localDateTime)}>
                                 {moment(fromServerDate(enrollment.updatedAt)).fromNow()}
                             </Tooltip>
                         </div>
