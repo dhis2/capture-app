@@ -80,7 +80,7 @@ export const Validated = ({
         formFoundationArgument: RenderFoundation,
         saveType: ?$Values<typeof addEventSaveTypes>,
         enrollment: ?Object,
-    ) => new Promise((resolve, reject) => {
+    ) => new Promise((resolve) => {
         // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
         const {
@@ -95,7 +95,7 @@ export const Validated = ({
         );
 
         if (formHasError) {
-            reject(new Error('Form has error'));
+            resolve({ success: false });
             return;
         }
 
@@ -128,13 +128,12 @@ export const Validated = ({
         ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS),
         );
 
-        resolve();
+        resolve({ success: true });
     }), [buildNewEventPayload, dispatch, onSaveExternal, onSaveAndCompleteEnrollmentSuccessActionType, onSaveSuccessActionType, onSaveAndCompleteEnrollmentErrorActionType, onSaveErrorActionType]);
 
     const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
-        try {
-            await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
-
+        const saveResult = await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
+        if (saveResult?.success) {
             dispatch(startCreateNewAfterCompleting({
                 enrollmentId,
                 isCreateNew,
@@ -143,8 +142,6 @@ export const Validated = ({
                 teiId,
                 availableProgramStages,
             }));
-        } catch (error) {
-            // Related stages has displayed an error message. No need to do anything here.
         }
     }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
 

@@ -1,11 +1,19 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
     from './WidgetEnrollmentNote.actions';
+
+const createServerData = (note, useNewEndpoint) => {
+    if (useNewEndpoint) {
+        return { value: note };
+    }
+    return { notes: [{ value: note }] };
+};
 
 export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
@@ -13,6 +21,7 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
         switchMap((action) => {
             const state = store.value;
             const { enrollmentId, note } = action.payload;
+            const useNewEndpoint = featureAvailable(FEATURES.newNoteEndpoint);
             return querySingleResource({
                 resource: 'me',
                 params: {
@@ -22,9 +31,7 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
                 const { firstName, surname, userName } = user;
                 const clientId = uuid();
 
-                const serverData = {
-                    notes: [{ value: note }],
-                };
+                const serverData = createServerData(note, useNewEndpoint);
 
                 const clientNote = {
                     value: note,

@@ -13,6 +13,7 @@ export const OverflowMenu = ({
     displayChangelog,
     teiId,
     programAPI,
+    readOnlyMode,
 }: Props) => {
     const { hasAuthority } = useAuthorities({ authorities: ['F_TEI_CASCADE_DELETE'] });
 
@@ -27,6 +28,7 @@ export const OverflowMenu = ({
             displayChangelog={displayChangelog}
             teiId={teiId}
             programAPI={programAPI}
+            readOnlyMode={readOnlyMode}
         />
     );
 };
