@@ -649,6 +649,14 @@ And('you delete the recently added tracked entity', () => {
 });
 
 And('you delete the recently added malaria entity', () => {
+    // deselect the program stage from the context selector
+    cy.get('[data-test="stage-selector-container-clear-icon"]')
+        .click();
+
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Yes, discard changes')
+        .click();
+
     cy.get('[data-test="profile-widget"]')
         .contains('Malaria Entity profile')
         .should('exist');
