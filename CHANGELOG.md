@@ -1,3 +1,24 @@
+## [101.21.6](https://github.com/dhis2/capture-app/compare/v101.21.5...v101.21.6) (2025-01-16)
+
+
+### Bug Fixes
+
+* [DHIS2-18668] remove delete tei button in enrollment event pages ([#3941](https://github.com/dhis2/capture-app/issues/3941)) ([aef3400](https://github.com/dhis2/capture-app/commit/aef340023249b53de305fea55627082b443da060))
+
+## [101.21.5](https://github.com/dhis2/capture-app/compare/v101.21.4...v101.21.5) (2025-01-15)
+
+
+### Bug Fixes
+
+* [DHIS2-18836] show 'Profile' instead of 'False' during loading ([#3938](https://github.com/dhis2/capture-app/issues/3938)) ([70aa7cc](https://github.com/dhis2/capture-app/commit/70aa7ccb5c9d6dee978175b4e639e2b3cd415a9c))
+
+## [101.21.4](https://github.com/dhis2/capture-app/compare/v101.21.3...v101.21.4) (2025-01-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18355] runtime error occurs when saving empty widget in Related stages ([#3935](https://github.com/dhis2/capture-app/issues/3935)) ([4ebef85](https://github.com/dhis2/capture-app/commit/4ebef8596d1814efb385c1817b5968405b704af7))
+
 ## [101.21.3](https://github.com/dhis2/capture-app/compare/v101.21.2...v101.21.3) (2025-01-12)
 
 
