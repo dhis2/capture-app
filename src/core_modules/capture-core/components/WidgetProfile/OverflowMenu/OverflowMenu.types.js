@@ -9,6 +9,7 @@ export type Props = {|
     displayChangelog: boolean,
     teiId: string,
     programAPI: any,
+    readOnlyMode: boolean,
 |};
 
 export type PlainProps = {|
@@ -21,4 +22,5 @@ export type PlainProps = {|
     displayChangelog: boolean,
     teiId: string,
     programAPI: any,
+    readOnlyMode: boolean,
 |};

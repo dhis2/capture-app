@@ -8,7 +8,7 @@ export const getOrgUnitValidatorContainers = () => {
     const validatorContainers = [
         {
             validator: validateOrgUnit,
-            message: i18n.t('Please provide an valid organisation unit'),
+            errorMessage: i18n.t('Please provide an valid organisation unit'),
         },
     ];
     return validatorContainers;
