@@ -39,6 +39,13 @@ export type ItemDefinitions = {
     [key: string]: ItemDefinition,
 };
 
+export type EntityData = {
+    [key: string]: {
+        name: string,
+        value?: mixed,
+    },
+};
+
 export type SortDirection = 'default' | 'asc' | 'desc';
 export type SetSortDirection = (SortDirection) => void;
 export type Pager = {
@@ -77,4 +84,5 @@ export type ChangelogProps = {
     setFilterValue: (any) => void,
     dataItemDefinitions: ItemDefinitions,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
+    entityData: EntityData,
 };

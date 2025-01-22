@@ -26,6 +26,7 @@ export const Changelog = ({
     close,
     dataItemDefinitions,
 }: Props) => {
+    console.log('Changelog', entityData, dataItemDefinitions);
     const {
         rawRecords,
         pager,
@@ -75,6 +76,7 @@ export const Changelog = ({
             pager={pager}
             setPage={setPage}
             setPageSize={setPageSize}
+            entityData={entityData}
             entityType={entityType}
             columnToSortBy={columnToSortBy}
             setColumnToSortBy={setColumnToSortBy}

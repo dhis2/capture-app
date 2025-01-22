@@ -29,6 +29,7 @@ export const ChangelogComponent = ({
     attributeToFilterBy,
     setAttributeToFilterBy,
     entityType,
+    entityData,
     filterValue,
     setFilterValue,
     setPage,
@@ -51,6 +52,7 @@ export const ChangelogComponent = ({
                 filterValue={filterValue}
                 setFilterValue={setFilterValue}
                 dataItemDefinitions={dataItemDefinitions}
+                entityData={entityData}
                 entityType={entityType}
             />
             <DataTable fixed dataTest={'changelog-data-table'} layout={'fixed'}>
