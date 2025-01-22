@@ -64,18 +64,6 @@ When('you unlink the Baby Postnatal linked event', () => {
         .click();
 });
 
-And('you delete the Baby Postnatal event', () => {
-    cy.get('[data-test="overflow-button"]')
-        .eq(1)
-        .click();
-    cy.get('[data-test="stages-and-events-delete"]')
-        .click();
-    cy.get('[data-test="dhis2-uicore-modal"]').within(() => {
-        cy.contains('button', 'Yes, delete event')
-            .click();
-    });
-});
-
 And('you delete the Birth event', () => {
     cy.get('[data-test="overflow-button"]')
         .eq(0)
@@ -251,5 +239,20 @@ And('you navigate to the Enrollment dashboard', () => {
 
 And('you are in Child programme and Tombo Wallah CHP organization unit registration page', () => {
     cy.visit('/#/new?programId=IpHINAT79UW&orgUnitId=VFF7f43dJv4');
+});
+
+And(/^you delete the events of the enrollmentId (.*)$/, (enrollmentId) => {
+    cy.buildApiUrl('tracker', `enrollments/${enrollmentId}?fields=events[event]`)
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const { events } = body;
+
+            if (events) {
+                cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((eventUrl) => {
+                    cy.request('POST', eventUrl, { events });
+                    cy.reload();
+                });
+            }
+        });
 });
 
