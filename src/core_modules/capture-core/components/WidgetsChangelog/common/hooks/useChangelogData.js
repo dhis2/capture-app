@@ -32,7 +32,7 @@ export const useChangelogData = ({ entityId, entityType, programId }: Props) => 
     };
 
     const filterParam =
-        filterValue === filterValue && attributeToFilterBy
+        filterValue && attributeToFilterBy
             ? `${attributeToFilterBy}:eq:${filterValue.id}`
             : undefined;
 
