@@ -31,7 +31,6 @@ const ChangelogFilterBarPlain = ({
     setAttributeToFilterBy,
     dataItemDefinitions,
     entityType,
-    entityData,
 }: ChangelogFilterProps) => {
     const [openMenu, setOpenMenu] = useState <string | null>(null);
 
@@ -53,20 +52,13 @@ const ChangelogFilterBarPlain = ({
         [setFilterValue, setAttributeToFilterBy, entityType],
     );
 
-    const filterItems = useMemo(() =>
-        (entityType === CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY
-            ? Object.keys(entityData).map((key) => {
-                const attribute = entityData[key];
-                return {
-                    id: key,
-                    name: attribute.name,
-                };
-            })
-            : Object.keys(dataItemDefinitions).map(key => ({
+    const dataItems = useMemo(
+        () =>
+            Object.keys(dataItemDefinitions).map(key => ({
                 id: key,
                 name: dataItemDefinitions[key].name,
-            }))),
-    [entityType, dataItemDefinitions, entityData],
+            })),
+        [dataItemDefinitions],
     );
 
     const selectedFilterValue = attributeToFilterBy ? filterValue : null;
@@ -75,7 +67,7 @@ const ChangelogFilterBarPlain = ({
         <div className={classes.container}>
             <DropdownFilter
                 label={i18n.t('Data item')}
-                items={filterItems}
+                items={dataItems}
                 filterColumn={'dataItem'}
                 openMenuName={openMenu}
                 onToggleMenu={toggleMenu}

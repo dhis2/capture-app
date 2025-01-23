@@ -9,10 +9,7 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, tr
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);
 
     const transformedTrackedEntityData = trackedEntityData.reduce((acc, item) => {
-        acc[item.attribute] = {
-            name: item.key,
-            value: item.value,
-        };
+        acc[item.attribute] = item.value;
         return acc;
     }, {});
 

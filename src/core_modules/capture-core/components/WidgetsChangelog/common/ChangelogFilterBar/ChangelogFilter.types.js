@@ -15,13 +15,6 @@ export type DataItemDefinitions = {
     [key: string]: DataItemDefinition,
 };
 
-export type EntityData = {
-    [key: string]: {
-        value?: any,
-        name: string,
-    },
-};
-
 export type ChangelogFilterProps = {
     classes: { container: string },
     filterValue: FilterValueType,
@@ -30,5 +23,4 @@ export type ChangelogFilterProps = {
     setAttributeToFilterBy: (value: string | null) => void,
     dataItemDefinitions: DataItemDefinitions,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
-    entityData: EntityData,
 };
