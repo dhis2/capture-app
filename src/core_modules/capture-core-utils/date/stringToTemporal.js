@@ -13,7 +13,8 @@ import { Temporal } from '@js-temporal/polyfill';
 type PlainDate = {
     year: number,
     month: number,
-    day: number
+    day: number,
+    eraYear: number,
 };
 
 export function stringToTemporal(dateString: ?string,
