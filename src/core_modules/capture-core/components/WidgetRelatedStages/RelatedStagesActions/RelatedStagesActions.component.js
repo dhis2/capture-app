@@ -174,16 +174,16 @@ const LinkExistingResponse = ({
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, saveAttempted, errorMessages, classes }) => {
+const LinkButton = withStyles(styles)(({ onLink, label, errorMessages, classes }) => {
     if (!onLink) {
         return null;
     }
 
-    const disabled = saveAttempted && Object.values(errorMessages).filter(Boolean).length !== 0;
+    const disabled = Object.values(errorMessages).some(Boolean);
 
     return (
         <div className={classes.link}>
-            <Button secondary small onClick={onLink} disabled={disabled}>
+            <Button primary small onClick={onLink} disabled={disabled}>
                 {label}
             </Button>
         </div>
@@ -284,7 +284,6 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Schedule')}
-                        saveAttempted={saveAttempted}
                         errorMessages={errorMessages}
                     />
                 </>
@@ -302,7 +301,6 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Enter details')}
-                        saveAttempted={saveAttempted}
                         errorMessages={errorMessages}
                     />
                 </>
@@ -321,7 +319,6 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Link')}
-                        saveAttempted={saveAttempted}
                         errorMessages={errorMessages}
                     />
                 </>
