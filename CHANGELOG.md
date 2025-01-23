@@ -1,3 +1,10 @@
+## [101.21.6](https://github.com/dhis2/capture-app/compare/v101.21.5...v101.21.6) (2025-01-16)
+
+
+### Bug Fixes
+
+* [DHIS2-18668] remove delete tei button in enrollment event pages ([#3941](https://github.com/dhis2/capture-app/issues/3941)) ([aef3400](https://github.com/dhis2/capture-app/commit/aef340023249b53de305fea55627082b443da060))
+
 ## [101.21.5](https://github.com/dhis2/capture-app/compare/v101.21.4...v101.21.5) (2025-01-15)
 
 
