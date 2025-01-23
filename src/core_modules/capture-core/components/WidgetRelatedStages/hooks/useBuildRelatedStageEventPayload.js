@@ -11,10 +11,9 @@ export const createServerData = ({
     relationship: ?Object,
     enrollment: Object,
 }) => {
-    const updatedEnrollment = { ...enrollment, events: [...enrollment.events, linkedEvent] };
     if (linkedEvent) {
         return {
-            enrollments: [updatedEnrollment],
+            events: [...enrollment.events, linkedEvent],
             relationships: [relationship],
         };
     }
