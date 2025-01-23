@@ -19,6 +19,10 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, tr
         const contextLabels = formFoundation.getLabels();
 
         const fieldElementsById = elements.reduce((acc, element: DataElement) => {
+            if (!transformedTrackedEntityData.hasOwnProperty(element.id)) {
+                return acc;
+            }
+
             const { optionSet } = element;
             const metadata = {
                 id: element.id,
@@ -54,7 +58,7 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, tr
             ...fieldElementsById,
             ...fieldElementsContext,
         };
-    }, [formFoundation]);
+    }, [formFoundation, transformedTrackedEntityData]);
 
     return (
         <WidgetTrackedEntityChangelog
