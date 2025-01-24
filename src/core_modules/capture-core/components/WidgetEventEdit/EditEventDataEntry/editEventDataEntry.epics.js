@@ -204,12 +204,12 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
             const { eventId, enrollmentId } = action.payload;
             const params = { enrollmentId };
             const serverData = { events: [{ event: eventId }] };
-            dependencies.navigate(`/enrollment?${buildUrlQueryString(params)}`);
+            dependencies.history.push(`/enrollment?${buildUrlQueryString(params)}`);
             return startDeleteEventDataEntry(serverData, eventId, params);
         }));
 
 export const startCreateNewAfterCompletingEpic = (
-    action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+    action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(
             actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
@@ -224,12 +224,12 @@ export const startCreateNewAfterCompletingEpic = (
                     { ...params, stageId: availableProgramStages[0].id } : params;
 
                 setTimeout(() => {
-                    navigate(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
+                    history.push(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
                 }, 0);
 
                 return EMPTY;
             }
-            navigate(`/enrollment?${buildUrlQueryString(params)}`);
+            history.push(`/enrollment?${buildUrlQueryString(params)}`);
             return EMPTY;
         }));
 

@@ -210,7 +210,6 @@ declare type ApiUtils = {|
     mutate: DataEngineMutate,
     absoluteApiPath: string,
     serverVersion: { minor: number },
-    navigate: (path: string, scrollToTop?: boolean) => void,
     history: {
         push: () => void,
         ...PassOnProps,

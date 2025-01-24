@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 
 export const useSetEnrollmentId = () => {
-    const { history } = useHistory();
+    const history = useHistory();
     const { navigate } = useNavigate();
     const { pathname } = useLocation();
     const { programId, orgUnitId, teiId } = useLocationQuery();

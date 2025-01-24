@@ -18,21 +18,21 @@ const shouldNavigateWithRelatedStage = ({
     linkMode,
     linkedEventId,
     linkedOrgUnitId,
-    navigate,
+    history,
 }) => {
     if (linkMode && linkedEventId) {
         if (linkMode === relatedStageActions.ENTER_DATA) {
-            const navigateRelatedStage = () => navigate(`/enrollmentEventEdit?${buildUrlQueryString({
+            const navigate = () => history.push(`/enrollmentEventEdit?${buildUrlQueryString({
                 eventId: linkedEventId,
                 orgUnitId: linkedOrgUnitId,
             })}`);
-            return { navigateRelatedStage };
+            return { navigate };
         }
     }
     return {};
 };
 
-export const saveNewEventSucceededEpic = (action$: InputObservable, state: ReduxStore, { navigate }: ApiUtils) =>
+export const saveNewEventSucceededEpic = (action$: InputObservable, state: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(
             addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS,
@@ -80,14 +80,14 @@ export const saveNewEventSucceededEpic = (action$: InputObservable, state: Redux
                 const requestEvent = eventsFromApi.find(event => event.uid === requestEventId);
 
                 if (requestEvent) {
-                    const { navigateRelatedStage } = shouldNavigateWithRelatedStage({
+                    const { navigate } = shouldNavigateWithRelatedStage({
                         linkMode,
                         linkedEventId,
                         linkedOrgUnitId,
-                        navigate,
+                        history,
                     });
 
-                    navigateRelatedStage && navigateRelatedStage();
+                    navigate && navigate();
                 }
             }
 

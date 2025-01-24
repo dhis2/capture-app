@@ -6,13 +6,13 @@ import { EMPTY } from 'rxjs';
 import { actionTypes as NavigateToEnrollmentOverviewActionTypes } from './navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString } from '../../utils/routing';
 
-export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW),
         switchMap((action) => {
             const { teiId, programId, orgUnitId } = action.payload;
             const enrollmentId = programId && (action.payload?.enrollmentId || 'AUTO');
-            navigate(
+            history.push(
                 `/enrollment?${buildUrlQueryString({
                     teiId,
                     programId,

@@ -5,13 +5,13 @@ import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelecto
 import { buildUrlQueryString } from '../../utils/routing';
 import { resetLocationChange } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET),
         map(({ payload: { trackedEntityTypeId } }) => {
             const { currentSelections: { orgUnitId }, app: { page: currentPage } } = store.value;
 
-            navigate(`/${currentPage}?${buildUrlQueryString({ trackedEntityTypeId, orgUnitId })}`);
+            history.push(`/${currentPage}?${buildUrlQueryString({ trackedEntityTypeId, orgUnitId })}`);
             return resetLocationChange();
         }),
     );

@@ -346,11 +346,11 @@ export const fallbackSearchEpic = (
         }),
     );
 
-export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { navigate }: ApiUtils) =>
+export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(searchBoxActionTypes.FALLBACK_SEARCH_COMPLETED),
         switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
-            navigate(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
+            history.push(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
             return EMPTY;
         }),
     );

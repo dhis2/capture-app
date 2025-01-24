@@ -118,11 +118,11 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
             });
         }));
 
-export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { navigate }: ApiUtils) =>
+export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
         map(({ payload: { eventId } }) => {
-            navigate(`/viewEvent?viewEventId=${eventId}`);
+            history.push(`/viewEvent?viewEventId=${eventId}`);
             return resetLocationChange();
         }));
 
@@ -157,7 +157,7 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             return noWorkingListUpdateNeededOnBackToMainPage();
         }));
 
-export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         switchMap(() => {
@@ -167,12 +167,12 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
             const showaccessible = state.currentSelections.showaccessible;
 
             if (showaccessible && !orgUnitId) {
-                navigate(`/?programId=${programId}&all`);
+                history.push(`/?programId=${programId}&all`);
                 return new Promise((resolve) => {
                     setTimeout(() => resolve(resetLocationChange()), 0);
                 });
             }
-            navigate(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });
