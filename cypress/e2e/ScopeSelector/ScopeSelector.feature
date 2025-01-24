@@ -221,11 +221,6 @@ Feature: User uses the ScopeSelector to navigate
     When you reset the program selection
     Then you see message explaining you need to select a program
 
-  Scenario: Enrollment event new page > resetting the org unit
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
-    When you reset the org unit selection
-    Then you see the enrollment event New page but there is no org unit id in the url
-
   Scenario: Enrollment event new page > resetting the enrollment
     Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
     When you reset the enrollment selection

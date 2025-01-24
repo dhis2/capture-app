@@ -30,4 +30,5 @@ export {
 } from './actions/dataEntry.actions';
 export { actionTypes as loadNewActionTypes } from './actions/dataEntryLoadNew.actions';
 export { actionTypes as loadEditActionTypes, cleanUpDataEntry } from './actions/dataEntry.actions';
+export { getDataEntryKey } from './common/getDataEntryKey';
 

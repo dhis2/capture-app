@@ -5,13 +5,12 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
-import { useNavigate } from 'capture-core/utils/routing';
 import { NoticeBox } from '@dhis2/ui';
-import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentAddEventTopBar, useEnrollmentAddEventTopBar } from '../TopBar';
 import { deleteEnrollment, fetchEnrollments } from '../../Enrollment/EnrollmentPage.actions';
-import { actions as RelatedStageModes } from '../../../WidgetRelatedStages/constants';
+import { relatedStageActions } from '../../../WidgetRelatedStages';
 
 import { useWidgetDataFromStore } from '../hooks';
 import { useHideWidgetByRuleLocations } from '../../Enrollment/EnrollmentPageDefault/hooks';
@@ -70,7 +69,7 @@ export const EnrollmentAddEventPageDefault = ({
 
     const handleSave = useCallback(
         ({ enrollments, events, linkMode }) => {
-            if (linkMode && linkMode === RelatedStageModes.ENTER_DATA) return;
+            if (linkMode && linkMode === relatedStageActions.ENTER_DATA) return;
 
             const nowClient = fromClientDate(new Date());
             const nowServer = new Date(nowClient.getServerZonedISOString());
