@@ -1,9 +1,8 @@
 // @flow
 import { useCallback } from 'react';
-import { useNavigate } from 'capture-core/utils/routing';
 import type { NavigationArgs } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import { EventProgram, getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
-import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
+import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 
 export const useLinkedRecordClick = () => {
     const { navigate } = useNavigate();
