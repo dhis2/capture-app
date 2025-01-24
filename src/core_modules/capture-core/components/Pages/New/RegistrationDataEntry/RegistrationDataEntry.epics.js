@@ -11,7 +11,7 @@ import {
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString } from '../../../../utils/routing';
+import { useNavigate, buildUrlQueryString } from '../../../../utils/routing';
 import { cleanUpUid } from '../NewPage.actions';
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable) =>
@@ -64,7 +64,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
 export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     action$: InputObservable,
     store: ReduxStore,
-    { history }: ApiUtils,
+    { navigate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
@@ -88,7 +88,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             }
 
             if (redirect.programStageId) {
-                history.push(
+                navigate(
                     `/enrollmentEventNew?${buildUrlQueryString({
                         programId,
                         orgUnitId,
@@ -101,7 +101,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             }
 
             if (redirect.eventId) {
-                history.push(
+                navigate(
                     `/enrollmentEventEdit?${buildUrlQueryString({
                         eventId: redirect.eventId,
                         orgUnitId,
