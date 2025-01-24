@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-02T12:54:39.984Z\n"
-"PO-Revision-Date: 2025-01-02T12:54:39.984Z\n"
+"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"PO-Revision-Date: 2025-01-24T15:26:19.128Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -709,9 +709,6 @@ msgstr "There was an error opening the Page"
 msgid "There was an error loading the page"
 msgstr "There was an error loading the page"
 
-msgid "Choose an organisation unit to start reporting"
-msgstr "Choose an organisation unit to start reporting"
-
 msgid "Program stage is invalid"
 msgstr "Program stage is invalid"
 
@@ -767,6 +764,9 @@ msgid ""
 msgstr ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
+
+msgid "Choose an organisation unit to start reporting"
+msgstr "Choose an organisation unit to start reporting"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
@@ -1231,11 +1231,17 @@ msgstr "Add coordinates"
 msgid "Add area"
 msgstr "Add area"
 
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+
+msgid "Saving to {{stageName}} for {{programName}}"
+msgstr "Saving to {{stageName}} for {{programName}}"
 
 msgid "program or stage is invalid"
 msgstr "program or stage is invalid"
@@ -1257,9 +1263,6 @@ msgstr "Warning"
 
 msgid "stage not found in rules execution"
 msgstr "stage not found in rules execution"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Please provide an valid organisation unit"
 
 msgid "Delete event"
 msgstr "Delete event"
@@ -1318,9 +1321,6 @@ msgstr "Schedule date / Due date"
 
 msgid "Please provide a valid organisation unit"
 msgstr "Please provide a valid organisation unit"
-
-msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 
 msgid "Schedule info"
 msgstr "Schedule info"
