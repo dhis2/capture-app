@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'capture-core/utils/routing';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -28,7 +28,7 @@ const styles = {
     },
 };
 const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
     const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });
     const {
@@ -67,9 +67,9 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
 
     useEffect(() => {
         if (pageStatus === EnrollmentAddEventPageStatuses.PROGRAM_INVALID) {
-            history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, teiId, enrollmentId })}`);
+            navigate(`/enrollment?${buildUrlQueryString({ orgUnitId, teiId, enrollmentId })}`);
         }
-    }, [pageStatus, orgUnitId, teiId, enrollmentId, history]);
+    }, [pageStatus, orgUnitId, teiId, enrollmentId, navigate]);
 
     if (pageStatus === EnrollmentAddEventPageStatuses.LOADING) {
         return <LoadingMaskForPage />;

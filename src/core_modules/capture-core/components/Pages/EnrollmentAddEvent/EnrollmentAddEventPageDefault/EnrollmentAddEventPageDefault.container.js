@@ -5,7 +5,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'capture-core/utils/routing';
 import { NoticeBox } from '@dhis2/ui';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
@@ -37,22 +37,22 @@ export const EnrollmentAddEventPageDefault = ({
 }: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const { fromClientDate } = useTimeZoneConversion();
     const { serverVersion: { minor } } = useConfig();
 
     const handleCancel = useCallback(() => {
-        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-    }, [history, programId, orgUnitId, teiId, enrollmentId]);
+        navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [navigate, programId, orgUnitId, teiId, enrollmentId]);
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
-    }, [history, orgUnitId, programId]);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [navigate, orgUnitId, programId]);
 
     const onBackToMainPage = useCallback(() => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
-    }, [history, orgUnitId, programId]);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [navigate, orgUnitId, programId]);
 
     const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate) => {
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
@@ -65,8 +65,8 @@ export const EnrollmentAddEventPageDefault = ({
 
     const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
         dispatch(commitEnrollmentAndEvents());
-        redirect && history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-    }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
+        redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
         ({ enrollments, events, linkMode }) => {
@@ -88,24 +88,24 @@ export const EnrollmentAddEventPageDefault = ({
                 dispatch(updateOrAddEnrollmentEvents({ events: eventsWithUpdatedDate }));
             }
 
-            history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+            navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [fromClientDate, history, programId, orgUnitId, teiId, enrollmentId, minor, dispatch],
+        [fromClientDate, navigate, programId, orgUnitId, teiId, enrollmentId, minor, dispatch],
     );
 
     const handleAddNew = useCallback(() => {
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
-    }, [history, programId, orgUnitId, teiId]);
+        navigate(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    }, [navigate, programId, orgUnitId, teiId]);
 
     const handleDelete = useCallback(() => {
         dispatch(deleteEnrollment({ enrollmentId }));
-        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
-    }, [dispatch, enrollmentId, history, programId, orgUnitId, teiId]);
+        navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+    }, [dispatch, enrollmentId, navigate, programId, orgUnitId, teiId]);
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
     const onAccessLostFromTransfer = () => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
 
     const widgetReducerName = 'enrollmentEvent-newEvent';

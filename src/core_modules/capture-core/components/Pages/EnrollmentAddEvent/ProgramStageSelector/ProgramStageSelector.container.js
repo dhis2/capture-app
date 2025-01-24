@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'capture-core/utils/routing';
 import log from 'loglevel';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
@@ -15,7 +15,7 @@ import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const {
@@ -62,7 +62,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     }, []), [enrollment?.events, program?.programStages, programLoading, ruleEffects]);
 
     const onSelectProgramStage = (newStageId: string) =>
-        history.push(`enrollmentEventNew?${buildUrlQueryString({
+        navigate(`enrollmentEventNew?${buildUrlQueryString({
             programId,
             orgUnitId,
             teiId,
@@ -72,7 +72,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         })}`);
 
     const onCancel = () =>
-        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+        navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
 
     return (
         <>
