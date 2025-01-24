@@ -10,16 +10,19 @@ import { Temporal } from '@js-temporal/polyfill';
  * @returns {(Temporal.PlainDate | null)}
  */
 
-type PlainDate = {
+type PlainDateType = {
     year: number,
     month: number,
     day: number,
     eraYear: number,
+    with: (fields: { year?: number }) => PlainDateType,
+    since: (other: PlainDateType, options: { largestUnit: string, smallestUnit: string }) =>
+        { years: number, months: number, days: number }
 };
 
 export function stringToTemporal(dateString: ?string,
     calendar: ?string,
-    dateFormat: ?string): PlainDate | null {
+    dateFormat: ?string): PlainDateType | null {
     if (!dateString) {
         return null;
     }

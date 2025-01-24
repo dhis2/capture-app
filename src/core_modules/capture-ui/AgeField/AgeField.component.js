@@ -15,7 +15,7 @@ import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
 import { orientations } from '../constants/orientations.const';
 import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
-import { stringToTemporal, temporalToString, isCalendarSupported } from '../../capture-core-utils/date';
+import { stringToTemporal, temporalToString, mapDhis2CalendarToTemporal, isCalendarSupported } from '../../capture-core-utils/date';
 
 type AgeValues = {
     date?: ?string,
@@ -59,8 +59,8 @@ type Props = {
     calendarType: ?string,
 };
 
-function getCalculatedValues(dateValue: ?string, calendarType: ?string, dateFormat: ?string): AgeValues {
-    if (!isCalendarSupported(calendarType)) {
+function getCalculatedValues(dateValue: ?string, calendarType: string, dateFormat: string): AgeValues {
+    if (!isCalendarSupported(mapDhis2CalendarToTemporal[calendarType])) {
         const nowIso = Temporal.Now.plainDateISO();
 
         const ageIso = convertToIso8601(dateValue, calendarType);
@@ -77,17 +77,41 @@ function getCalculatedValues(dateValue: ?string, calendarType: ?string, dateForm
             days: diff.days.toString(),
         };
     }
-    const age = stringToTemporal(dateValue, calendarType, dateFormat);
-    const now = Temporal.Now.plainDateISO().withCalendar(calendarType);
+    const now = Temporal.Now.plainDateISO().withCalendar(mapDhis2CalendarToTemporal[calendarType]);
+    const age = stringToTemporal(dateValue, mapDhis2CalendarToTemporal[calendarType], dateFormat);
+
+    if (calendarType === 'ethiopian') {
+        if (!age || !age.eraYear) {
+            return {
+                date: dateValue,
+                years: '',
+                months: '',
+                days: '',
+            };
+        }
+        const ethiopianNow = now.with({ year: now.eraYear });
+        const ethiopianAge = age.with({ year: age.eraYear });
+
+        const diff = ethiopianNow.since(ethiopianAge, {
+            largestUnit: 'years',
+            smallestUnit: 'days',
+        });
+
+        return {
+            date: temporalToString(ethiopianAge, dateFormat),
+            years: diff.years.toString(),
+            months: diff.months.toString(),
+            days: diff.days.toString(),
+        };
+    }
+
     const diff = now.since(age, {
         largestUnit: 'years',
         smallestUnit: 'days',
     });
 
-    const date = temporalToString(age, dateFormat);
-
     return {
-        date,
+        date: temporalToString(age, dateFormat),
         years: diff.years.toString(),
         months: diff.months.toString(),
         days: diff.days.toString(),
@@ -125,8 +149,9 @@ class D2AgeFieldPlain extends Component<Props> {
     }
 
     handleNumberBlur = (values: AgeValues) => {
-        const { onRemoveFocus, calendarType = 'gregory', dateFormat = 'YYYY-MM-DD' } = this.props;
-
+        const { onRemoveFocus, calendarType, dateFormat } = this.props;
+        const calendar = calendarType || 'iso8601';
+        const format = dateFormat || 'YYYY-MM-DD';
         onRemoveFocus && onRemoveFocus();
         if (D2AgeFieldPlain.isEmptyNumbers(values)) {
             this.props.onBlur(values.date ? { date: values.date } : null);
@@ -138,7 +163,7 @@ class D2AgeFieldPlain extends Component<Props> {
             return;
         }
 
-        if (!isCalendarSupported(calendarType)) {
+        if (!isCalendarSupported(mapDhis2CalendarToTemporal[calendar])) {
             const nowIso = Temporal.Now.plainDateISO();
             const calculatedDateIso = nowIso.subtract({
                 years: D2AgeFieldPlain.getNumberOrZero(values.years),
@@ -146,26 +171,28 @@ class D2AgeFieldPlain extends Component<Props> {
                 days: D2AgeFieldPlain.getNumberOrZero(values.days),
             });
 
-            const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendarType);
-            const dateString = temporalToString(localCalculatedDate, dateFormat);
-            const calculatedValues = getCalculatedValues(dateString, calendarType, dateFormat);
+            const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendar);
+            const dateString = temporalToString(localCalculatedDate, format);
+            const calculatedValues = getCalculatedValues(dateString, calendar, format);
             this.props.onBlur(calculatedValues);
             return;
         }
 
-        const now = Temporal.Now.plainDateISO().withCalendar(calendarType);
+        const now = Temporal.Now.plainDateISO().withCalendar(mapDhis2CalendarToTemporal[calendar]);
         const calculatedDate = now.subtract({
             years: D2AgeFieldPlain.getNumberOrZero(values.years),
             months: D2AgeFieldPlain.getNumberOrZero(values.months),
             days: D2AgeFieldPlain.getNumberOrZero(values.days),
         });
-        const dateString = temporalToString(calculatedDate, dateFormat);
-        const calculatedValues = getCalculatedValues(dateString, calendarType, dateFormat);
+        const dateString = temporalToString(calculatedDate, format);
+        const calculatedValues = getCalculatedValues(dateString, calendar, format);
         this.props.onBlur(calculatedValues);
     }
 
     handleDateBlur = (date: ?string, options: ?ValidationOptions) => {
-        const { onRemoveFocus, calendarType = 'iso8601', dateFormat = 'YYYY-MM-DD' } = this.props;
+        const { onRemoveFocus, calendarType, dateFormat } = this.props;
+        const calendar = calendarType || 'iso8601';
+        const format = dateFormat || 'YYYY-MM-DD';
         onRemoveFocus && onRemoveFocus();
         const isDateValid = options && !options.error;
         if (!date) {
@@ -182,7 +209,7 @@ class D2AgeFieldPlain extends Component<Props> {
             this.props.onBlur(calculatedValues, options);
             return;
         }
-        const calculatedValues = getCalculatedValues(date, calendarType, dateFormat);
+        const calculatedValues = getCalculatedValues(date, calendar, format);
         this.props.onBlur(calculatedValues, options);
     }
 
