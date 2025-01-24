@@ -40,12 +40,12 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
             return cancelNewEventNoWorkingListUpdateNeeded();
         }));
 
-export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
             const { programId, orgUnitId } = getLocationQuery();
 
-            navigate(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
         }));
