@@ -156,7 +156,7 @@ export type RulesEngineInput = {|
     selectedEntity?: ?TEIValues,
     trackedEntityAttributes?: ?TrackedEntityAttributes,
     selectedEnrollment?: ?Enrollment,
-    selectedOrgUnit: OrgUnit,
+    selectedOrgUnit: ?OrgUnit,
     selectedUserRoles?: ?Array<string>,
     optionSets: OptionSets,
 |}

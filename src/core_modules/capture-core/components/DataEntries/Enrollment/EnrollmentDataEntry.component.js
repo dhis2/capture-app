@@ -238,7 +238,7 @@ const getGeometrySettings = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                orgUnit: props.orgUnit,
+                orgUnitId: props.orgUnit?.id,
             });
         }
 
@@ -249,7 +249,7 @@ const getGeometrySettings = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            orgUnit: props.orgUnit,
+            orgUnitId: props.orgUnit?.id,
         });
     },
     getPropName: () => 'geometry',
@@ -330,6 +330,7 @@ type FinalTeiDataEntryProps = {
     programId: string,
     id: string,
     orgUnitId: string,
+    orgUnit: OrgUnit,
     onUpdateDataEntryField: Function,
     onUpdateFormFieldAsync: Function,
     onUpdateFormField: Function,
@@ -459,6 +460,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             onUpdateDataEntryField,
             onStartAsyncUpdateField,
             onGetUnsavedAttributeValues,
+            orgUnit,
             ...passOnProps
         } = this.props;
 
@@ -469,6 +471,8 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateFormField={this.handleUpdateField}
                 onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
+                orgUnit={orgUnit}
+                orgUnitId={orgUnit?.id}
                 {...passOnProps}
             />
         );
