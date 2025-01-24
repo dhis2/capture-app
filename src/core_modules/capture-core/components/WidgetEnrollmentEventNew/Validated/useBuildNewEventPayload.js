@@ -6,8 +6,9 @@ import { getAddEventEnrollmentServerData } from './getConvertedAddEvent';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { generateUID } from '../../../utils/uid/generateUID';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
-import { getConvertedRelatedStageEvent } from './getConvertedRelatedStageEvent';
-import type { LinkedRequestEvent, RelatedStageRefPayload, RequestEvent } from './validated.types';
+import { getConvertedRelatedStageEvent } from '../../DataEntries';
+import type { LinkedRequestEvent, RequestEvent } from '../../DataEntries';
+import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 type Props = {
     dataEntryId: string,
@@ -21,18 +22,18 @@ type Props = {
 };
 
 export const createServerData = ({
-    clientRequestEvent,
+    serverRequestEvent,
     linkedEvent,
     relationship,
     enrollment,
 }: {
-    clientRequestEvent: RequestEvent,
+    serverRequestEvent: RequestEvent,
     linkedEvent: ?LinkedRequestEvent,
     relationship: ?Object,
     enrollment: ?Object,
 }) => {
     const relationships = relationship ? [relationship] : undefined;
-    const newEvents = linkedEvent ? [clientRequestEvent, linkedEvent] : [clientRequestEvent];
+    const newEvents = linkedEvent ? [serverRequestEvent, linkedEvent] : [serverRequestEvent];
 
     if (enrollment) {
         const updatedEnrollment = { ...enrollment, events: [...(enrollment.events || []), ...newEvents] };
@@ -66,9 +67,9 @@ export const useBuildNewEventPayload = ({
     const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[dataEntryKey]);
     const { fromClientDate } = useTimeZoneConversion();
 
-    const buildRelatedStageEventPayload = (clientRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
+    const buildRelatedStageEventPayload = (serverRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
         if (
-            relatedStageRef.current
+            relatedStageRef?.current
             && relatedStageRef.current.eventHasLinkableStageRelationship()
         ) {
             const isValid = relatedStageRef.current.formIsValidOnSave();
@@ -96,7 +97,7 @@ export const useBuildNewEventPayload = ({
             const { linkedEvent, relationship } = getConvertedRelatedStageEvent({
                 linkMode,
                 relatedStageDataValues,
-                clientRequestEvent,
+                serverRequestEvent,
                 relatedStageType: selectedRelationshipType,
                 programId,
                 currentProgramStageId: formFoundation.id,
@@ -121,7 +122,7 @@ export const useBuildNewEventPayload = ({
 
     const buildNewEventPayload = (
         saveType: ?$Values<typeof addEventSaveTypes>,
-        relatedStageRef: {| current: (?RelatedStageRefPayload) |},
+        relatedStageRef?: {| current: (?RelatedStageRefPayload) |},
     ) => {
         const requestEventId = generateUID();
 
@@ -133,7 +134,7 @@ export const useBuildNewEventPayload = ({
         );
         const notesValues = notes ? notes.map(note => ({ value: note.value })) : [];
 
-        const clientRequestEvent = getAddEventEnrollmentServerData({
+        const serverRequestEvent = getAddEventEnrollmentServerData({
             formFoundation,
             formClientValues,
             eventId: requestEventId,
@@ -153,11 +154,11 @@ export const useBuildNewEventPayload = ({
             linkedEvent,
             relationship,
             linkMode,
-        } = buildRelatedStageEventPayload(clientRequestEvent, saveType, relatedStageRef);
+        } = buildRelatedStageEventPayload(serverRequestEvent, saveType, relatedStageRef);
 
         return {
             formHasError,
-            clientRequestEvent,
+            serverRequestEvent,
             linkedEvent,
             relationship,
             linkMode,

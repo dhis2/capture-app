@@ -4,12 +4,13 @@ import type { Props } from './EnrollmentWithFirstStageDataEntry.types';
 import { FirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry.component';
 import { useDataEntrySections } from './hooks';
 import { Section } from '../../../../metaData';
+import { WidgetRelatedStages } from '../../../WidgetRelatedStages';
 
 const getSectionId = sectionId =>
     (sectionId === Section.MAIN_SECTION_ID ? `${Section.MAIN_SECTION_ID}-stage` : sectionId);
 
 export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
-    const { firstStageMetaData, ...passOnProps } = props;
+    const { firstStageMetaData, relatedStageRef, relatedStageActionsOptions, ...passOnProps } = props;
     const {
         stage: { stageForm: firstStageFormFoundation, name: stageName },
     } = firstStageMetaData;
@@ -19,10 +20,18 @@ export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
     const dataEntrySections = useDataEntrySections(stageName, beforeSectionId);
 
     return (
-        <FirstStageDataEntry
-            {...passOnProps}
-            firstStageMetaData={firstStageMetaData}
-            dataEntrySections={dataEntrySections}
-        />
+        <>
+            <FirstStageDataEntry
+                {...passOnProps}
+                firstStageMetaData={firstStageMetaData}
+                dataEntrySections={dataEntrySections}
+            />
+            <WidgetRelatedStages
+                ref={relatedStageRef}
+                programId={passOnProps.programId}
+                programStageId={firstStageMetaData.stage?.id}
+                actionsOptions={relatedStageActionsOptions}
+            />
+        </>
     );
 };

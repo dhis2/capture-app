@@ -3,10 +3,10 @@ import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
     type RenderFoundation,
-} from '../../../../../metaData';
-import { convertFormToClient } from '../../../../../converters';
-import { getDisplayName } from '../../../../../trackedEntityInstances/getDisplayName';
-import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
+} from '../../../../../../metaData';
+import { convertFormToClient } from '../../../../../../converters';
+import { getDisplayName } from '../../../../../../trackedEntityInstances/getDisplayName';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 
 function getTrackerProgramMetadata(programId: string) {
     const program = getTrackerProgramThrowIfNotFound(programId);
@@ -46,5 +46,6 @@ export function getRelationshipNewTeiName(dataEntryId: string, itemId: string, s
     const clientValuesForFormData = getClientValuesForFormData(formValues, formFoundation);
     const displayName = getDisplayName(clientValuesForFormData, metaDataAttributes, tetName);
 
+    // $FlowFixM
     return displayName;
 }

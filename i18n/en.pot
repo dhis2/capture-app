@@ -792,6 +792,9 @@ msgstr "Save {{trackedEntityTypeName}}"
 msgid "Save {{trackedEntityName}}"
 msgstr "Save {{trackedEntityName}}"
 
+msgid "Enter details now is not available when creating a relationship"
+msgstr "Enter details now is not available when creating a relationship"
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Save new {{trackedEntityTypeName}} and link"
 
@@ -1397,8 +1400,8 @@ msgstr "{{trackedEntityTypeName}} profile"
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
 
-msgid "Link to an existing {{linkableStageLabel}}"
-msgstr "Link to an existing {{linkableStageLabel}}"
+msgid "Choose a {{linkableStageLabel}} event"
+msgstr "Choose a {{linkableStageLabel}} event"
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Choose a {{linkableStageLabel}}"
@@ -1409,14 +1412,17 @@ msgstr "{{ linkableStageLabel }} is not repeatable"
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} has no linkable events"
 
+msgid "Actions - {{relationshipName}}"
+msgstr "Actions - {{relationshipName}}"
+
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
 msgid "Enter details now"
 msgstr "Enter details now"
 
-msgid "Link to an existing"
-msgstr "Link to an existing"
+msgid "Link to an existing event"
+msgstr "Link to an existing event"
 
 msgid "Scheduled date"
 msgstr "Scheduled date"
