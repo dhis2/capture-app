@@ -1,12 +1,12 @@
 // @flow
 import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'capture-core/utils/routing';
 import type { NavigationArgs } from '../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
 import { EventProgram, getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
 import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 
 export const useLinkedRecordClick = () => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { orgUnitId } = useLocationQuery();
 
     const onLinkedRecordClick = useCallback((navigationArgs: NavigationArgs) => {
@@ -33,9 +33,9 @@ export const useLinkedRecordClick = () => {
         }
 
         if (url) {
-            history.push(url);
+            navigate(url);
         }
-    }, [history, orgUnitId]);
+    }, [navigate, orgUnitId]);
 
     return {
         onLinkedRecordClick,
