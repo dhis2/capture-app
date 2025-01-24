@@ -2,12 +2,11 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 // $FlowFixMe
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { MainPageComponent } from './MainPage.component';
 import { withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 import { OrgUnitFetcher } from '../../OrgUnitFetcher';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
@@ -18,16 +17,16 @@ const mapStateToProps = (state: ReduxState) => ({
     ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
 });
 
-const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, showAllAccessible, history }) => {
+const handleChangeTemplateUrl = ({ programId, orgUnitId, selectedTemplateId, showAllAccessible, navigate }) => {
     if (orgUnitId) {
         selectedTemplateId
-            ? history.push(`/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId })}`)
-            : history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+            ? navigate(`/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId })}`)
+            : navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     }
     if (showAllAccessible) {
         selectedTemplateId
-            ? history.push(`/?${buildUrlQueryString({ programId, selectedTemplateId })}&all`)
-            : history.push(`/?${buildUrlQueryString({ programId })}&all`);
+            ? navigate(`/?${buildUrlQueryString({ programId, selectedTemplateId })}&all`)
+            : navigate(`/?${buildUrlQueryString({ programId })}&all`);
     }
 };
 
@@ -80,15 +79,15 @@ const useSelectorMainPage = () =>
         shallowEqual,
     );
 
-const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, history }) => {
+const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate }) => {
     const onChangeTemplate = useCallback(
-        id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, history }),
-        [history, orgUnitId, programId, showAllAccessible],
+        id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, navigate }),
+        [navigate, orgUnitId, programId, showAllAccessible],
     );
 
     const onSetShowAccessible = useCallback(
-        () => history.push(`/?${buildUrlQueryString({ programId })}&all`),
-        [history, programId],
+        () => navigate(`/?${buildUrlQueryString({ programId })}&all`),
+        [navigate, programId],
     );
 
     return {
@@ -99,7 +98,7 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, history 
 
 const MainPageContainer = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
     const showAllAccessible = all !== undefined;
 
@@ -129,7 +128,7 @@ const MainPageContainer = () => {
     const {
         onChangeTemplate,
         onSetShowAccessible,
-    } = useCallbackMainPage({ orgUnitId, programId, showAllAccessible, history, dispatch });
+    } = useCallbackMainPage({ orgUnitId, programId, showAllAccessible, navigate, dispatch });
 
     useEffect(() => {
         dispatch(updateShowAccessibleStatus(showAllAccessible));
@@ -143,7 +142,7 @@ const MainPageContainer = () => {
                     orgUnitId,
                     selectedTemplateId: reduxSelectedTemplateId,
                     showAllAccessible,
-                    history,
+                    navigate,
                 });
                 return;
             }
@@ -153,7 +152,7 @@ const MainPageContainer = () => {
                 orgUnitId,
                 selectedTemplateId: `${programId}-default`,
                 showAllAccessible,
-                history,
+                navigate,
             });
         }
     }, [
@@ -163,7 +162,7 @@ const MainPageContainer = () => {
         showAllAccessible,
         trackedEntityTypeId,
         displayFrontPageList,
-        history,
+        navigate,
         reduxSelectedTemplateId,
         workingListProgramId,
     ]);
