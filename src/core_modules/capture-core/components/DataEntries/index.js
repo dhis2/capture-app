@@ -19,10 +19,12 @@ export {
     convertStatusIn,
     convertStatusOut,
     getConvertGeometryIn,
-} from './converters/converters';
+    getConvertedRelatedStageEvent,
+} from './converters';
 export { EnrollmentRegistrationEntry } from './EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.container';
 export { TeiRegistrationEntry } from './TeiRegistrationEntry/TeiRegistrationEntry.container';
 export { SingleEventRegistrationEntry } from './SingleEventRegistrationEntry/SingleEventRegistrationEntry.container';
 export type { SaveForDuplicateCheck as SaveForEnrollmentAndTeiRegistration } from './common/TEIAndEnrollment/DuplicateCheckOnSave';
 export type { ExistingUniqueValueDialogActionsComponent } from './withErrorMessagePostProcessor';
 export { withAskToCompleteEnrollment } from './common/trackerEvent';
+export type { RequestEvent, LinkedRequestEvent } from './converters';

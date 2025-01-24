@@ -1,3 +1,10 @@
+# [101.22.0](https://github.com/dhis2/capture-app/compare/v101.21.6...v101.22.0) (2025-01-24)
+
+
+### Features
+
+* [DHIS2-17192] show related stages widget on registration page ([#3880](https://github.com/dhis2/capture-app/issues/3880)) ([03c156a](https://github.com/dhis2/capture-app/commit/03c156a8aa19708c5fc40140aa390ef547e18d25))
+
 ## [101.21.6](https://github.com/dhis2/capture-app/compare/v101.21.5...v101.21.6) (2025-01-16)
 
 

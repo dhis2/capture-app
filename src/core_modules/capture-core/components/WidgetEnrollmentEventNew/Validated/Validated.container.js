@@ -14,11 +14,12 @@ import {
     setSaveEnrollmentEventInProgress,
     startCreateNewAfterCompleting,
 } from './validated.actions';
-import type { ContainerProps, RelatedStageRefPayload } from './validated.types';
+import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
 import { createServerData, useBuildNewEventPayload } from './useBuildNewEventPayload';
+import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
@@ -81,7 +82,7 @@ export const Validated = ({
         // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
         const {
-            clientRequestEvent,
+            serverRequestEvent,
             linkedEvent,
             relationship,
             linkMode,
@@ -97,7 +98,7 @@ export const Validated = ({
         }
 
         const serverData = createServerData({
-            clientRequestEvent,
+            serverRequestEvent,
             linkedEvent,
             relationship,
             enrollment,
@@ -105,7 +106,7 @@ export const Validated = ({
 
         dispatch(batchActions([
             requestSaveEvent({
-                requestEvent: clientRequestEvent,
+                requestEvent: serverRequestEvent,
                 linkedEvent,
                 relationship,
                 serverData,
@@ -117,7 +118,7 @@ export const Validated = ({
 
             // stores meta in redux to be used when navigating after save
             setSaveEnrollmentEventInProgress({
-                requestEventId: clientRequestEvent?.event,
+                requestEventId: serverRequestEvent?.event,
                 linkedEventId: linkedEvent?.event,
                 linkedOrgUnitId: linkedEvent?.orgUnit,
                 linkMode,

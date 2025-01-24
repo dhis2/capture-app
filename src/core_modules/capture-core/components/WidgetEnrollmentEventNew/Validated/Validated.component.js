@@ -56,8 +56,7 @@ const ValidatedPlain = ({
                             enrollmentId={enrollmentId}
                             programId={programId}
                             programStageId={stage?.id}
-                            currentStageLabel={stage.name}
-                        />
+                                />
                         <FinishButtons
                             onSave={onSave}
                             onCancel={onCancel}
