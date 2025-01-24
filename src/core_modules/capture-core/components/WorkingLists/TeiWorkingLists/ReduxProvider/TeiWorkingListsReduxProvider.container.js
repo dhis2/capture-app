@@ -2,14 +2,13 @@
 import React, { useCallback, useEffect } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { TrackerWorkingListsViewMenuSetup } from '../ViewMenuSetup';
 import { useWorkingListsCommonStateManagement, fetchTemplates, TEMPLATE_SHARING_TYPE } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { TEI_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './teiWorkingListsReduxProvider.types';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString } from '../../../../utils/routing';
+import { useNavigate, buildUrlQueryString } from '../../../../utils/routing';
 import { getDefaultTemplate } from '../helpers';
 
 const useApiTemplate = () => {
@@ -26,7 +25,7 @@ export const TeiWorkingListsReduxProvider = ({
 }: Props) => {
     const program = useTrackerProgram(programId);
     const apiTemplates = useApiTemplate();
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const defaultTemplate = getDefaultTemplate(programId);
 
     const {
@@ -67,7 +66,7 @@ export const TeiWorkingListsReduxProvider = ({
         const orgUnitIdParameter = orgUnitId || record.orgUnit?.id || record.programOwner;
 
         return programStage
-            ? history.push(
+            ? navigate(
                 `/enrollmentEventEdit?${buildUrlQueryString({ eventId: id, orgUnitId: orgUnitIdParameter })}`,
             )
             : dispatch(navigateToEnrollmentOverview({
@@ -75,7 +74,7 @@ export const TeiWorkingListsReduxProvider = ({
                 programId,
                 orgUnitId: orgUnitIdParameter,
             }));
-    }, [dispatch, orgUnitId, programId, records, programStage, history]);
+    }, [dispatch, orgUnitId, programId, records, programStage, navigate]);
 
     const handlePreserveCurrentViewState = useCallback((templateId, criteria) => {
         onUpdateDefaultTemplate({ ...defaultTemplate, criteria, isAltered: true });

@@ -1,9 +1,10 @@
 // @flow
 import { useHistory, useLocation } from 'react-router-dom';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 
 export const useSetEnrollmentId = () => {
-    const history = useHistory();
+    const { history } = useHistory();
+    const { navigate } = useNavigate();
     const { pathname } = useLocation();
     const { programId, orgUnitId, teiId } = useLocationQuery();
 
@@ -14,7 +15,7 @@ export const useSetEnrollmentId = () => {
             teiId,
             enrollmentId,
         })}`;
-        shouldReplaceHistory ? history.replace(url) : history.push(url);
+        shouldReplaceHistory ? history.replace(url) : navigate(url);
     };
 
     return { setEnrollmentId };
