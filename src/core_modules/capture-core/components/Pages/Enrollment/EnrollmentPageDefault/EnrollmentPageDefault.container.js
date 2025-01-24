@@ -5,7 +5,7 @@ import moment from 'moment';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'capture-core/utils/routing';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
     commitEnrollmentAndEvents,
@@ -46,7 +46,7 @@ import {
 
 
 export const EnrollmentPageDefault = () => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const { fromClientDate } = useTimeZoneConversion();
     const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }) => widgetEnrollment);
@@ -97,27 +97,27 @@ export const EnrollmentPageDefault = () => {
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
-    }, [history, orgUnitId, programId]);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [navigate, orgUnitId, programId]);
 
     const onDelete = () => {
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
+        navigate(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
 
     const onViewAll = (stageId) => {
-        history.push(
+        navigate(
             `/enrollment/stageEvents?${buildUrlQueryString({ orgUnitId, programId, stageId })}`);
     };
 
     const onCreateNew = (stageId) => {
-        history.push(
+        navigate(
             `/enrollmentEventNew?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId, stageId })}`,
         );
     };
 
     const onEventClick = (eventId: string) => {
-        history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
+        navigate(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
 
     const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
@@ -153,11 +153,11 @@ export const EnrollmentPageDefault = () => {
     }, [dispatch, fromClientDate]);
 
     const onAddNew = () => {
-        history.push(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
+        navigate(`/new?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
     };
 
     const onAccessLostFromTransfer = () => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
 
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
@@ -177,8 +177,8 @@ export const EnrollmentPageDefault = () => {
     }, [dispatch]);
 
     const onBackToMainPage = useCallback(() => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
-    }, [history, orgUnitId, programId]);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [navigate, orgUnitId, programId]);
 
     if (isLoading) {
         return (
