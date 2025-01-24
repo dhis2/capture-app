@@ -29,7 +29,7 @@ import {
 } from '../../../../../DataEntry/actions/dataEntry.actions';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { convertClientRelationshipToServer } from '../../../../../../relationships/convertClientToServer';
-import { getRelationshipNewTeiName } from '../../../../../Pages/NewRelationship/RegisterTei';
+import { getRelationshipNewTei } from '../../../../../Pages/NewRelationship/RegisterTei';
 
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
@@ -47,8 +47,13 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
             const state = store.value;
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
-            const toEntity = payload.entity;
+            const entity = payload.entity;
 
+            const toEntity = entity.id ? entity : getRelationshipNewTei(entity.dataEntryId, entity.itemId, state);
+            const toEntityIsNew = !entity.id;
+            const newToEntity = toEntityIsNew ? {
+                dataEntryId: entity.dataEntryId,
+            } : null;
 
             const newRelationship = {
                 clientId: uuid(),
@@ -59,7 +64,6 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
                 },
                 to: {
                     ...toEntity,
-                    name: toEntity.name || getRelationshipNewTeiName(toEntity.dataEntryId, toEntity.itemId, state),
                     type: payload.entityType,
                 },
                 relationshipType: { ...payload.relationshipType },
@@ -83,7 +87,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
 
             return batchActions([
                 recentlyAddedRelationship(newRelationship.clientId),
-                addRelationship(dataEntryId, itemId, newRelationship, toEntity),
+                addRelationship(dataEntryId, itemId, newRelationship, newToEntity),
             ], newEventNewRelationshipBatchActionTypes.ADD_RELATIONSHIP_BATCH);
         }));
 

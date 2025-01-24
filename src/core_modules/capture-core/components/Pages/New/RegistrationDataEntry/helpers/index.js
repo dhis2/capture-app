@@ -1,5 +1,5 @@
 // @flow
 export { deriveFirstStageDuringRegistrationEvent } from './deriveFirstStageDuringRegistrationEvent';
-export { deriveRelatedStageEvent } from './deriveRelatedStageEvent';
 export { deriveAutoGenerateEvents } from './deriveAutoGenerateEvents';
+export { getStageWithOpenAfterEnrollment, PAGES } from './getStageWithOpenAfterEnrollment';
 export { standardGeoJson } from './standardGeoJson';

@@ -1,5 +1,5 @@
 // @flow
-import { relatedStageActions } from './index';
+import { actions as LinkModes } from './constants';
 import type { Constraint } from './RelatedStagesActions/RelatedStagesActions.types';
 
 export type RelationshipType = {|
@@ -17,18 +17,12 @@ export type RelationshipType = {|
 
 export type Props = {|
     programId: string,
-    enrollmentId?: string,
+    enrollmentId: string,
     programStageId: string,
-    actionsOptions?: {
-        [key: $Keys<typeof relatedStageActions>]: {
-            hidden?: boolean,
-            disabled?: boolean,
-            disabledMessage?: string
-        },
-    },
+    currentStageLabel: string,
 |}
 export type RelatedStageDataValueStates = {|
-    linkMode: ?$Keys<typeof relatedStageActions>,
+    linkMode: ?$Keys<typeof LinkModes>,
     scheduledAt: string,
     scheduledAtFormatError: ?{error: ?string, errorCode: ?string},
     orgUnit: ?{
@@ -38,27 +32,3 @@ export type RelatedStageDataValueStates = {|
     },
     linkedEventId: ?string,
 |}
-
-export type RelatedStageRelationshipType = {|
-    id: string,
-    fromConstraint: {|
-        programStage: {
-            id: string,
-        },
-    |},
-    toConstraint: {
-        programStage: {
-            id: string,
-        },
-    }
-|}
-
-export type RelatedStageRefPayload = {
-    getLinkedStageValues: () => {
-        selectedRelationshipType: RelatedStageRelationshipType,
-        relatedStageDataValues: RelatedStageDataValueStates,
-        linkMode: ?$Keys<typeof relatedStageActions>,
-    },
-    eventHasLinkableStageRelationship: () => boolean,
-    formIsValidOnSave: () => boolean,
-};

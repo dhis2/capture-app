@@ -14,7 +14,7 @@ import type { ProgramStage, TrackerProgram, EventProgram, RenderFoundation } fro
 export type GetApplicableRuleEffectsForTrackerProgramInput = {|
     program: TrackerProgram,
     stage?: ProgramStage,
-    orgUnit: ?OrgUnit,
+    orgUnit: OrgUnit,
     currentEvent?: EventData,
     otherEvents?: EventsData,
     attributeValues?: TEIValues,
@@ -29,7 +29,7 @@ export type GetApplicableRuleEffectsForEventProgramInput = {|
 |};
 
 export type GetApplicableRuleEffectsInput = {|
-    orgUnit: ?OrgUnit,
+    orgUnit: OrgUnit,
     currentEvent?: EventData,
     otherEvents?: EventsData,
     attributeValues?: TEIValues,

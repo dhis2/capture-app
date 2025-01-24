@@ -27,7 +27,7 @@ import {
     convertClientRelationshipToServer,
     getRelationshipsForEvent,
 } from '../../../../relationships';
-import { getRelationshipNewTeiName } from '../../NewRelationship/RegisterTei';
+import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 
 const relationshipKey = 'viewEvent';
 
@@ -78,7 +78,9 @@ export const addRelationshipForViewEventEpic = (action$: InputObservable, store:
             const eventId = state.viewEventPage.eventId;
             const existingRelationships = state.dataEntriesRelationships[relationshipKey] || [];
             const payload = action.payload;
-            const toEntity = payload.entity;
+            const entity = payload.entity;
+
+            const toEntity = entity.id ? entity : getRelationshipNewTei(entity.dataEntryId, entity.itemId, state);
 
             const relationshipClientId = uuid();
             const clientRelationship = {
@@ -90,7 +92,6 @@ export const addRelationshipForViewEventEpic = (action$: InputObservable, store:
                 },
                 to: {
                     ...toEntity,
-                    name: toEntity.name || getRelationshipNewTeiName(toEntity.dataEntryId, toEntity.itemId, state),
                     type: payload.entityType,
                 },
                 relationshipType: { ...payload.relationshipType },

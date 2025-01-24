@@ -42,7 +42,6 @@ import {
     withAOCFieldBuilder,
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers';
-import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -238,7 +237,7 @@ const getGeometrySettings = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                orgUnitId: props.orgUnit?.id,
+                orgUnit: props.orgUnit,
             });
         }
 
@@ -249,7 +248,7 @@ const getGeometrySettings = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            orgUnitId: props.orgUnit?.id,
+            orgUnit: props.orgUnit,
         });
     },
     getPropName: () => 'geometry',
@@ -330,12 +329,10 @@ type FinalTeiDataEntryProps = {
     programId: string,
     id: string,
     orgUnitId: string,
-    orgUnit: OrgUnit,
     onUpdateDataEntryField: Function,
     onUpdateFormFieldAsync: Function,
     onUpdateFormField: Function,
     firstStageMetaData?: ?{ stage: ProgramStage },
-    relatedStageRef?: { current: ?RelatedStageRefPayload },
     formFoundation: RenderFoundation,
 };
 // final step before the generic dataEntry is inserted
@@ -460,7 +457,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
             onUpdateDataEntryField,
             onStartAsyncUpdateField,
             onGetUnsavedAttributeValues,
-            orgUnit,
             ...passOnProps
         } = this.props;
 
@@ -471,8 +467,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
                 onUpdateFormField={this.handleUpdateField}
                 onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
-                orgUnit={orgUnit}
-                orgUnitId={orgUnit?.id}
                 {...passOnProps}
             />
         );

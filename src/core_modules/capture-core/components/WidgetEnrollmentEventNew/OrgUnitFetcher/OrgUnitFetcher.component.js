@@ -19,10 +19,14 @@ export const OrgUnitFetcher = ({
         );
     }
 
-    return (
-        <Validated
-            {...passOnProps}
-            orgUnitContext={orgUnit}
-        />
-    );
+    if (orgUnit) {
+        return (
+            <Validated
+                {...passOnProps}
+                orgUnit={orgUnit}
+            />
+        );
+    }
+
+    return null;
 };

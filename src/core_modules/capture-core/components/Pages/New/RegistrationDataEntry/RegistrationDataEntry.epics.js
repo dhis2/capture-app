@@ -8,10 +8,15 @@ import {
     saveNewTrackedEntityInstance,
     saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
+import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useNavigate, buildUrlQueryString } from '../../../../utils/routing';
+import {
+    getStageWithOpenAfterEnrollment,
+    PAGES,
+} from './helpers';
 import { cleanUpUid } from '../NewPage.actions';
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable) =>
@@ -43,11 +48,22 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
 
 export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
     action$: InputObservable,
+    store: ReduxStore,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map((action) => {
-            const { enrollmentPayload, uid, redirect } = action.payload;
+            const { currentSelections: { programId } } = store.value;
+            const { enrollmentPayload, uid } = action.payload;
+            const { stages, useFirstStageDuringRegistration } = getTrackerProgramThrowIfNotFound(programId);
+            const { stageWithOpenAfterEnrollment, redirectTo } = getStageWithOpenAfterEnrollment(
+                stages,
+                useFirstStageDuringRegistration,
+            );
+
+            const eventIndex = enrollmentPayload.enrollments[0]?.events.findIndex(
+                eventsToBeCreated => eventsToBeCreated.programStage === stageWithOpenAfterEnrollment?.id,
+            );
 
             return saveNewTrackedEntityInstanceWithEnrollment({
                 candidateForRegistration: {
@@ -55,7 +71,9 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
                         enrollmentPayload,
                     ],
                 },
-                redirect,
+                redirectTo,
+                eventIndex,
+                stageId: stageWithOpenAfterEnrollment?.id,
                 uid,
             });
         }),
@@ -73,7 +91,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
                 payload: {
                     bundleReport: { typeReportMap },
                 },
-                meta: { uid, redirect },
+                meta: { uid, redirectTo, stageId, eventIndex },
             } = action;
             const {
                 currentSelections: { orgUnitId, programId },
@@ -82,28 +100,29 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
             const { uid: stateUid } = newPage || {};
             const teiId = typeReportMap.TRACKED_ENTITY.objectReports[0].uid;
             const enrollmentId = typeReportMap.ENROLLMENT.objectReports[0].uid;
+            const eventId = typeReportMap.EVENT.objectReports?.[eventIndex]?.uid;
 
             if (stateUid !== uid) {
                 return EMPTY;
             }
 
-            if (redirect.programStageId) {
+            if (redirectTo === PAGES.enrollmentEventNew) {
                 navigate(
-                    `/enrollmentEventNew?${buildUrlQueryString({
+                    `/${redirectTo}?${buildUrlQueryString({
                         programId,
                         orgUnitId,
                         teiId,
                         enrollmentId,
-                        stageId: redirect.programStageId,
+                        stageId,
                     })}`,
                 );
                 return EMPTY;
             }
 
-            if (redirect.eventId) {
+            if (redirectTo === PAGES.enrollmentEventEdit) {
                 navigate(
-                    `/enrollmentEventEdit?${buildUrlQueryString({
-                        eventId: redirect.eventId,
+                    `/${redirectTo}?${buildUrlQueryString({
+                        eventId,
                         orgUnitId,
                         initMode: dataEntryKeys.EDIT,
                     })}`,

@@ -1,13 +1,11 @@
 // @flow
 import moment from 'moment';
-import { dataElementTypes, ProgramStage } from '../../../../metaData';
-import { convertClientToServer } from '../../../../converters';
-import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
-import type { RequestEvent, LinkedRequestEvent } from '../../../DataEntries';
-import { generateUID } from '../../../../utils/uid/generateUID';
+import { dataElementTypes, ProgramStage } from '../../../../../metaData';
+import { convertClientToServer } from '../../../../../converters';
+import { convertCategoryOptionsToServer } from '../../../../../converters/clientToServer';
 
-const ignoreAutoGenerateIfApplicable = (stage, stageToSkip) =>
-    !stageToSkip || stageToSkip.programStage !== stage.id;
+const ignoreAutoGenerateIfApplicable = (stage, firstStageDuringRegistrationEvent) =>
+    !firstStageDuringRegistrationEvent || firstStageDuringRegistrationEvent.id !== stage.id;
 
 export const deriveAutoGenerateEvents = ({
     stages,
@@ -15,8 +13,7 @@ export const deriveAutoGenerateEvents = ({
     occurredAt,
     programId,
     orgUnitId,
-    firstStageDuringRegistrationEvent,
-    relatedStageLinkedEvent,
+    firstStageMetadata,
     attributeCategoryOptions,
     serverMinorVersion,
 }: {
@@ -25,8 +22,7 @@ export const deriveAutoGenerateEvents = ({
     occurredAt: string,
     programId: string,
     orgUnitId: string,
-    firstStageDuringRegistrationEvent: ?RequestEvent,
-    relatedStageLinkedEvent: ?LinkedRequestEvent,
+    firstStageMetadata: ?ProgramStage,
     attributeCategoryOptions: { [categoryId: string]: string } | string,
     serverMinorVersion: number,
 }) => {
@@ -37,8 +33,7 @@ export const deriveAutoGenerateEvents = ({
     // $FlowFixMe[missing-annot]
     return [...stages.values()]
         .filter(({ autoGenerateEvent }) => autoGenerateEvent)
-        .filter(stage => ignoreAutoGenerateIfApplicable(stage, firstStageDuringRegistrationEvent))
-        .filter(stage => ignoreAutoGenerateIfApplicable(stage, relatedStageLinkedEvent))
+        .filter(stage => ignoreAutoGenerateIfApplicable(stage, firstStageMetadata))
         .map(
             ({
                 id: programStage,
@@ -76,7 +71,6 @@ export const deriveAutoGenerateEvents = ({
                 return {
                     ...eventInfo,
                     ...eventAttributeCategoryOptions,
-                    event: generateUID(),
                     programStage,
                     program: programId,
                     orgUnit: orgUnitId,

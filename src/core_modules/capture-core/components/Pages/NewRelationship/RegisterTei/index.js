@@ -10,4 +10,4 @@ export {
 export {
     loadSearchGroupDuplicatesForReviewEpic,
 } from '../../../PossibleDuplicatesDialog/possibleDuplicatesDialog.epics';
-export { getRelationshipNewTeiName } from './exposedHelpers/getRelationshipNewTei';
+export { getRelationshipNewTei } from './exposedHelpers/getRelationshipNewTei';

@@ -20,8 +20,7 @@ type Coordinate = {
 
 type Props = {
   onBlur: (value: any) => void,
-  onOpenMap?: (hasValue: boolean) => void,
-  onCloseMap?: () => void,
+  onOpenMap: (hasValue: boolean) => void,
   orientation: $Values<typeof orientations>,
   center?: ?Array<number>,
   onChange?: ?(value: any) => void,
@@ -90,12 +89,11 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     closeMap = () => {
-        this.props.onCloseMap?.();
         this.setState({ showMap: false });
     }
 
     openMap = () => {
-        this.props.onOpenMap?.(Boolean(this.props.value));
+        this.props.onOpenMap(Boolean(this.props.value));
         this.setState({ showMap: true, position: this.getPosition() });
     }
 
@@ -171,10 +169,7 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     renderMap = () => {
-        const { position, zoom, showMap } = this.state;
-        if (!showMap || (!position && !this.props.center)) {
-            return null;
-        }
+        const { position, zoom } = this.state;
         const center = position || this.props.center;
         return (
             <div className={defaultClasses.mapContainer}>

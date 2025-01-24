@@ -24,12 +24,9 @@ import {
 import {
     deriveAutoGenerateEvents,
     deriveFirstStageDuringRegistrationEvent,
-    deriveRelatedStageEvent,
-} from '../helpers';
+} from '../../../Pages/New/RegistrationDataEntry/helpers';
 import type { EnrollmentPayload } from '../EnrollmentRegistrationEntry.types';
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
-import type { RelatedStageRefPayload } from '../../../WidgetRelatedStages';
-import { getRedirectIds } from './getRedirectIds';
 
 type DataEntryReduxConverterProps = {
     programId: string;
@@ -91,14 +88,7 @@ export const useBuildEnrollmentPayload = ({
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
 
-    const buildTeiWithEnrollment = (relatedStageRef?: {current: ?RelatedStageRefPayload}): {
-        teiWithEnrollment: EnrollmentPayload,
-        formHasError: boolean,
-        redirect: {
-            programStageId?: string,
-            eventId?: string,
-        },
-    } => {
+    const buildTeiWithEnrollment = (): EnrollmentPayload => {
         if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
@@ -136,17 +126,8 @@ export const useBuildEnrollmentPayload = ({
             serverMinorVersion: minor,
         });
 
-        const { formHasError, linkedEvent: relatedStageLinkedEvent, relationship, linkMode } = deriveRelatedStageEvent({
-            serverRequestEvent: firstStageDuringRegistrationEvent,
-            relatedStageRef,
-            firstStageMetaData,
-            programId,
-            teiId,
-        });
-
         const autoGenerateEvents = deriveAutoGenerateEvents({
-            firstStageDuringRegistrationEvent,
-            relatedStageLinkedEvent,
+            firstStageMetadata: firstStage,
             stages,
             enrolledAt,
             occurredAt,
@@ -156,16 +137,9 @@ export const useBuildEnrollmentPayload = ({
             serverMinorVersion: minor,
         });
 
-        const redirect = getRedirectIds({
-            stages,
-            relatedStageLinkedEvent,
-            linkMode,
-            firstStageDuringRegistrationEvent,
-            autoGenerateEvents,
-        });
-
-        const allEventsToBeCreated = [firstStageDuringRegistrationEvent, relatedStageLinkedEvent, ...autoGenerateEvents]
-            .filter(Boolean);
+        const allEventsToBeCreated = firstStageDuringRegistrationEvent
+            ? [firstStageDuringRegistrationEvent, ...autoGenerateEvents]
+            : autoGenerateEvents;
 
         const attributes = deriveAttributesFromFormValues(formServerValues);
 
@@ -181,20 +155,17 @@ export const useBuildEnrollmentPayload = ({
         };
 
         const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(formServerValues);
-        const tetGeometry = tetFeatureTypeKey ? buildGeometryProp(tetFeatureTypeKey, formValues) : undefined;
+        const tetGeometry = tetFeatureTypeKey ?
+            buildGeometryProp(tetFeatureTypeKey, formValues)
+            : undefined;
 
         return {
-            teiWithEnrollment: {
-                trackedEntity: teiId || generateUID(),
-                orgUnit: orgUnitId,
-                trackedEntityType: trackedEntityTypeId,
-                attributes,
-                geometry: tetGeometry,
-                enrollments: [enrollment],
-                relationships: relationship ? [relationship] : undefined,
-            },
-            formHasError,
-            redirect,
+            trackedEntity: teiId || generateUID(),
+            orgUnit: orgUnitId,
+            trackedEntityType: trackedEntityTypeId,
+            attributes,
+            geometry: tetGeometry,
+            enrollments: [enrollment],
         };
     };
 

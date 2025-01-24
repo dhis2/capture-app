@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
 import { isValidDate } from '../../../utils/validation/validators/form';
-import { relatedStageActions } from '../constants';
+import { actions as RelatedStageModes } from '../constants';
 
 type Props = {
     scheduledAt: ?string,
@@ -87,8 +87,8 @@ const linkToExistingResponse = (props) => {
 
 
 export const ValidationFunctionsByLinkMode: { [key: string]: (props: ?Props) => boolean } = {
-    [relatedStageActions.SCHEDULE_IN_ORG]: props => scheduleInOrgUnit(props),
-    [relatedStageActions.ENTER_DATA]: props => enterData(props),
-    [relatedStageActions.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
+    [RelatedStageModes.SCHEDULE_IN_ORG]: props => scheduleInOrgUnit(props),
+    [RelatedStageModes.ENTER_DATA]: props => enterData(props),
+    [RelatedStageModes.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
 };
 

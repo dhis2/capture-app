@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
+import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import {
     EnrollmentPageKeys,
@@ -61,6 +62,14 @@ const EnrollmentAddEventPagePain = ({
             <div>
                 {i18n.t('There was an error loading the page')}
             </div>
+        );
+    }
+
+    if (!orgUnitId) {
+        return (
+            <IncompleteSelectionsMessage>
+                {i18n.t('Choose an organisation unit to start reporting')}
+            </IncompleteSelectionsMessage>
         );
     }
 

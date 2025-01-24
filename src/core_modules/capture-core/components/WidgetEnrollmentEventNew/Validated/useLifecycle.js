@@ -12,7 +12,7 @@ export const useLifecycle = ({
     program,
     stage,
     formFoundation,
-    orgUnitContext,
+    orgUnit,
     dataEntryId,
     itemId,
     rulesExecutionDependenciesClientFormatted: {
@@ -24,7 +24,7 @@ export const useLifecycle = ({
     program: TrackerProgram,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
-    orgUnitContext?: OrgUnit,
+    orgUnit: OrgUnit,
     dataEntryId: string,
     itemId: string,
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
@@ -39,12 +39,12 @@ export const useLifecycle = ({
     useEffect(() => {
         if (!isLoading) {
             dispatch(batchActions([
-                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory, orgUnitContext),
+                ...getOpenDataEntryActions(dataEntryId, itemId, programCategory),
             ]));
             dataEntryReadyRef.current = true;
             delayRulesExecutionRef.current = true;
         }
-    }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory, orgUnitContext]);
+    }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory]);
 
     const eventsRef = useRef();
     const attributesRef = useRef();
@@ -70,7 +70,7 @@ export const useLifecycle = ({
                     formFoundation,
                     dataEntryId,
                     itemId,
-                    orgUnit: orgUnitContext,
+                    orgUnit,
                     eventsRulesDependency,
                     attributesValuesRulesDependency,
                     enrollmentDataRulesDependency,
@@ -84,7 +84,7 @@ export const useLifecycle = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         dispatch,
-        orgUnitContext,
+        orgUnit,
         eventsRulesDependency,
         attributesValuesRulesDependency,
         program,

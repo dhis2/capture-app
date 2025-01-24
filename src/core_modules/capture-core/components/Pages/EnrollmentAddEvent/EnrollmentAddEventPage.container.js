@@ -1,10 +1,11 @@
 // @flow
 import React, { useMemo, useEffect } from 'react';
+import { useNavigate } from 'capture-core/utils/routing';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
-import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
+import { useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
 import {
     IdTypes,
     useValidatedIDsFromCache,

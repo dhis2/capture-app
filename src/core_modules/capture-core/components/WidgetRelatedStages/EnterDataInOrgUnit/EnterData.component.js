@@ -48,6 +48,7 @@ type Props = {
     linkableStageLabel: string,
     relatedStagesDataValues: RelatedStageDataValueStates,
     setRelatedStagesDataValues: (() => Object) => void,
+    currentStageLabel: string,
     saveAttempted: boolean,
     errorMessages: ErrorMessagesForRelatedStages,
     ...CssClasses
@@ -59,6 +60,7 @@ export const EnterDataInOrgUnitPlain = ({
     setRelatedStagesDataValues,
     saveAttempted,
     errorMessages,
+    currentStageLabel,
     classes,
 }: Props) => {
     const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
@@ -96,10 +98,11 @@ export const EnterDataInOrgUnitPlain = ({
                 <IconInfo16 />
                 {i18n.t(
                     relatedStagesDataValues?.orgUnit?.name
-                        ? 'Enter {{linkableStageLabel}} details for {{orgUnitLabel}} in the next step'
-                        : 'Select organisation unit and enter {{linkableStageLabel}} details in the next step',
+                        ? 'Enter {{linkableStageLabel}} details for {{orgUnitLabel}} in the next step after completing this {{currentStageLabel}}.'
+                        : 'Select organisation unit and enter {{linkableStageLabel}} details in the next step after completing this {{currentStageLabel}}.',
                     {
                         linkableStageLabel,
+                        currentStageLabel,
                         orgUnitLabel: relatedStagesDataValues?.orgUnit?.name,
                     },
                 )}

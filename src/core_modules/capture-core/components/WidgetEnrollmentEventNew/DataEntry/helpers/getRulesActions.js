@@ -28,7 +28,7 @@ export const getRulesActions = ({
     formFoundation: RenderFoundation,
     dataEntryId: string,
     itemId: string,
-    orgUnit: ?OrgUnit,
+    orgUnit: OrgUnit,
     eventsRulesDependency: EnrollmentEvents,
     attributesValuesRulesDependency: AttributeValuesClientFormatted,
     enrollmentDataRulesDependency: EnrollmentData,

@@ -1,6 +1,7 @@
 // @flow
 import React, { useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useNavigate } from 'capture-core/utils/routing';
 import log from 'loglevel';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
@@ -8,7 +9,7 @@ import { errorCreator } from '../../../../../capture-core-utils';
 import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
-import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
+import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 

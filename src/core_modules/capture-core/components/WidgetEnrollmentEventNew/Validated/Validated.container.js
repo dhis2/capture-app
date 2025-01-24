@@ -14,16 +14,15 @@ import {
     setSaveEnrollmentEventInProgress,
     startCreateNewAfterCompleting,
 } from './validated.actions';
-import type { ContainerProps } from './validated.types';
+import type { ContainerProps, RelatedStageRefPayload } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import { useAvailableProgramStages } from '../../../hooks';
 import { createServerData, useBuildNewEventPayload } from './useBuildNewEventPayload';
-import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
-const ValidatedComponentWrapper = withAskToCompleteEnrollment()(AskToCreateNewHandlerHOC);
+const DataEntry = withAskToCompleteEnrollment()(AskToCreateNewHandlerHOC);
 
 export const Validated = ({
     program,
@@ -32,7 +31,7 @@ export const Validated = ({
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
-    orgUnitContext,
+    orgUnit,
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
@@ -50,6 +49,8 @@ export const Validated = ({
         dataEntryId,
         itemId,
         programId: program.id,
+        orgUnitId: orgUnit.id,
+        orgUnitName: orgUnit.name,
         teiId,
         enrollmentId,
         formFoundation,
@@ -62,7 +63,7 @@ export const Validated = ({
         program,
         stage,
         formFoundation,
-        orgUnitContext,
+        orgUnit,
         dataEntryId,
         itemId,
         // $FlowFixMe Investigate
@@ -82,7 +83,7 @@ export const Validated = ({
         // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
         const {
-            serverRequestEvent,
+            clientRequestEvent,
             linkedEvent,
             relationship,
             linkMode,
@@ -98,7 +99,7 @@ export const Validated = ({
         }
 
         const serverData = createServerData({
-            serverRequestEvent,
+            clientRequestEvent,
             linkedEvent,
             relationship,
             enrollment,
@@ -106,7 +107,7 @@ export const Validated = ({
 
         dispatch(batchActions([
             requestSaveEvent({
-                requestEvent: serverRequestEvent,
+                requestEvent: clientRequestEvent,
                 linkedEvent,
                 relationship,
                 serverData,
@@ -118,7 +119,7 @@ export const Validated = ({
 
             // stores meta in redux to be used when navigating after save
             setSaveEnrollmentEventInProgress({
-                requestEventId: serverRequestEvent?.event,
+                requestEventId: clientRequestEvent?.event,
                 linkedEventId: linkedEvent?.event,
                 linkedOrgUnitId: linkedEvent?.orgUnit,
                 linkMode,
@@ -135,13 +136,13 @@ export const Validated = ({
             dispatch(startCreateNewAfterCompleting({
                 enrollmentId,
                 isCreateNew,
-                orgUnitId: orgUnitContext?.id,
+                orgUnitId: orgUnit.id,
                 programId: program.id,
                 teiId,
                 availableProgramStages,
             }));
         }
-    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnitContext?.id, program.id, teiId, availableProgramStages]);
+    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
 
 
     const handleSaveAndCompleteEnrollment = useCallback(
@@ -168,11 +169,12 @@ export const Validated = ({
     }, [dispatch]);
 
     return (
-        <ValidatedComponentWrapper
+        <DataEntry
             {...passOnProps}
             stage={stage}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
+            selectedOrgUnitId={orgUnit.id}
             availableProgramStages={availableProgramStages}
             eventSaveInProgress={eventSaveInProgress}
             ready={ready}
@@ -188,6 +190,7 @@ export const Validated = ({
             programId={program.id}
             onSaveAndCompleteEnrollment={handleSaveAndCompleteEnrollment}
             programName={program.name}
+            orgUnit={orgUnit}
             rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}
         />
     );

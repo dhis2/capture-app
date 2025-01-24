@@ -21,7 +21,6 @@ type Props = {
         name: string
     },
     previousOrgUnitId?: string,
-    isReadOnly?: boolean,
     classes: Object,
 };
 
@@ -49,17 +48,16 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
     }
 
     render() {
-        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, isReadOnly, classes } = this.props;
+        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, classes } = this.props;
 
         return (
             <SelectorBarItem
                 label={i18n.t('Organisation unit')}
                 noValueMessage={i18n.t('Choose an organisation unit')}
                 value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
-                open={!isReadOnly && this.state.open}
+                open={this.state.open}
                 setOpen={open => this.setState({ open })}
-                onClearSelectionClick={!isReadOnly ? () => onReset() : undefined}
-                displayOnly={isReadOnly}
+                onClearSelectionClick={() => onReset()}
                 dataTest="org-unit-selector-container"
             >
                 <div className={classes.selectBarMenu}>

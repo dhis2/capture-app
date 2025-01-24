@@ -30,15 +30,9 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
         [dispatch]);
 
     const dispatchOnSaveWithEnrollment = useCallback(
-        (enrollmentPayload, redirect) => {
+        (enrollmentPayload) => {
             const uid = uuid();
-            dispatch(
-                startSavingNewTrackedEntityInstanceWithEnrollment(
-                    enrollmentPayload,
-                    uid,
-                    redirect,
-                ),
-            );
+            dispatch(startSavingNewTrackedEntityInstanceWithEnrollment(enrollmentPayload, uid));
         },
         [dispatch]);
 

@@ -1,8 +1,7 @@
 // @flow
 
 export type Props = {|
-    orgUnitName?: string,
+    orgUnitName: string,
     stageName: string,
     programName: string,
-    placementDomNode?: HTMLElement,
 |};

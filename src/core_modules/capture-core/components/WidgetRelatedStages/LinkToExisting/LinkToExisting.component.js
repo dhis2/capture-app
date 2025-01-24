@@ -40,7 +40,7 @@ export const LinkToExistingPlain = ({
     return (
         <div className={classes.searchRow}>
             <p className={classes.label}>
-                {i18n.t('Choose a {{linkableStageLabel}} event', {
+                {i18n.t('Link to an existing {{linkableStageLabel}}', {
                     linkableStageLabel,
                 })}
             </p>

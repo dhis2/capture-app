@@ -13,10 +13,7 @@ import type { TrackedEntityType } from '../../../../metaData';
 import { findModes } from '../findModes';
 import { getDisplayName } from '../../../../trackedEntityInstances/getDisplayName';
 import { ResultsPageSizeContext } from '../../shared-contexts';
-import type { EnrollmentPayload } from
-    '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.types';
-import type { TeiPayload } from
-    '../../common/TEIRelationshipsWidget/RegisterTei/DataEntry/TrackedEntityInstance/dataEntryTrackedEntityInstance.types';
+
 
 type Props = {
     findMode?: ?$Values<typeof findModes>,
@@ -77,16 +74,10 @@ class TeiRelationshipPlain extends React.Component<Props> {
         });
     }
 
-    handleAddRelationshipWithNewTei = (
-        itemId: string,
-        dataEntryId: string,
-        payload: EnrollmentPayload | TeiPayload,
-    ) => {
+    handleAddRelationshipWithNewTei = (itemId: string, dataEntryId: string) => {
         this.props.onAddRelationship({
             itemId,
             dataEntryId,
-            data: payload,
-            id: payload?.trackedEntity,
         });
     }
 
