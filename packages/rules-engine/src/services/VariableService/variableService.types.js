@@ -85,7 +85,7 @@ export type VariableServiceInput = {|
     selectedEntity: ?TEIValues,
     trackedEntityAttributes: ?TrackedEntityAttributes,
     selectedEnrollment: ?Enrollment,
-    selectedOrgUnit: OrgUnit,
+    selectedOrgUnit: ?OrgUnit,
     optionSets: OptionSets,
     constants: ?Constants,
 |};

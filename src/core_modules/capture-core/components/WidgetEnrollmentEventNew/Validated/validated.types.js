@@ -7,40 +7,9 @@ import type {
     RulesExecutionDependenciesClientFormatted,
 } from '../common.types';
 
-type CommonEventDetails = {
-    event: string,
-    program: string,
-    programStage: string,
-    orgUnit: string,
-    trackedEntity: string,
-    enrollment: string,
-    scheduledAt: string,
-    dataValues: Array<{ dataElement: string, value: any }>,
-    status?: string,
-}
-
-export type RequestEvent = {
-    ...CommonEventDetails,
-    occurredAt: string,
-    notes?: Array<{ value: string }>,
-    completedAt?: string,
-}
-
-export type LinkedRequestEvent = {
-    ...CommonEventDetails,
-    occurredAt?: string,
-    completedAt?: string,
-}
-
-export type RelatedStageRefPayload = {|
-    getLinkedStageValues: () => any,
-    eventHasLinkableStageRelationship: () => boolean,
-    formIsValidOnSave: () => boolean,
-|}
-
 export type ContainerProps = {|
     ...CommonValidatedProps,
-    orgUnit: OrgUnit,
+    orgUnitContext?: OrgUnit,
 |};
 
 export type Props = {|
@@ -50,7 +19,7 @@ export type Props = {|
     eventSaveInProgress: boolean,
     stage: ProgramStage,
     formFoundation: RenderFoundation,
-    orgUnit: OrgUnit,
+    orgUnit?: OrgUnit,
     ready: boolean,
     id: string,
     itemId: string,
