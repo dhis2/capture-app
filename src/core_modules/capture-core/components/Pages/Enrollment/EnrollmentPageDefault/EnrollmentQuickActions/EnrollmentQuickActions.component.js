@@ -2,13 +2,12 @@
 import React, { useState, useMemo } from 'react';
 // $FlowFixMe
 import i18n from '@dhis2/d2-i18n';
-import { useNavigate } from 'capture-core/utils/routing';
 import { colors, spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
-import { buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
 
 const styles = {
     contentContainer: {

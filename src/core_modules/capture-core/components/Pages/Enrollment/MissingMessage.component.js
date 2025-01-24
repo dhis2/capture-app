@@ -2,13 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'capture-core/utils/routing';
 import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { enrollmentAccessLevels } from './EnrollmentPage.constants';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetBreakingTheGlass } from '../../WidgetBreakingTheGlass';
 import { LinkButton } from '../../Buttons/LinkButton.component';

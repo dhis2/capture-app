@@ -5,7 +5,6 @@ import moment from 'moment';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'capture-core/utils/routing';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
     commitEnrollmentAndEvents,
@@ -27,7 +26,7 @@ import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { DataStoreKeyByPage, EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { useHideWidgetByRuleLocations, useProgramMetadata, useProgramStages } from './hooks';
-import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import { useLinkedRecordClick } from '../../common/TEIRelationshipsWidget';
 import {
