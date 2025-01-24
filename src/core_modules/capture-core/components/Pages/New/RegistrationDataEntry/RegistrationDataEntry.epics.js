@@ -12,7 +12,7 @@ import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { useNavigate, buildUrlQueryString } from '../../../../utils/routing';
+import { buildUrlQueryString } from '../../../../utils/routing';
 import {
     getStageWithOpenAfterEnrollment,
     PAGES,
