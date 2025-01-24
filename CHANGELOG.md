@@ -1,3 +1,10 @@
+# [101.23.0](https://github.com/dhis2/capture-app/compare/v101.22.0...v101.23.0) (2025-01-24)
+
+
+### Features
+
+* [DHIS2-18325] Show orgunit selector in the new event form ([#3879](https://github.com/dhis2/capture-app/issues/3879)) ([f07b4d4](https://github.com/dhis2/capture-app/commit/f07b4d47c219a21db2769cdc525135aa007ffe96))
+
 # [101.22.0](https://github.com/dhis2/capture-app/compare/v101.21.6...v101.22.0) (2025-01-24)
 
 
