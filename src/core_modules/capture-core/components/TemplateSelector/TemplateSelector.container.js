@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { TemplateSelector as TemplateSelectorComponent } from './TemplateSelector.component';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../utils/routing';
 import { useTEITemplates, useProgramStageTemplates } from './hooks';
@@ -12,8 +12,14 @@ export const TemplateSelector = () => {
 
     const onSelectTemplate = template =>
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: template.id })}`);
-    const onCreateTemplate = () =>
-        navigate(`/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: `${programId}-default` })}`);
+    const onCreateTemplate = () => {
+        const urlQueryString = buildUrlQueryString({
+            orgUnitId,
+            programId,
+            selectedTemplateId: `${programId}-default`,
+        });
+        navigate(`/?${urlQueryString}`);
+    };
 
     return programId && !loadingTEITemplates && !loadingProgramStageTemplates ? (
         <TemplateSelectorComponent
