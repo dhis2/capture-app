@@ -33,6 +33,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     VirtualizedSelectField,
+    SingleOrgUnitSelectField,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
@@ -48,6 +49,7 @@ import {
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers/';
 import type { UserFormField } from '../../FormFields/UserField';
+import { getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -148,6 +150,46 @@ const buildReportDateSettingsFn = () => {
 
     return reportDateSettings;
 };
+
+const buildOrgUnitSettingsFn = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+    const orgUnitSettings = {
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: i18n.t('Organisation unit'),
+            required: true,
+        }),
+        getPropName: () => 'orgUnit',
+        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return orgUnitSettings;
+};
+
 
 const buildScheduleDateSettingsFn = () => {
     const scheduleDateComponent = innerProps =>
@@ -360,7 +402,8 @@ const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCatego
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
+const OrgUnitField = withDataEntryField(buildOrgUnitSettingsFn())(ScheduleDateField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(OrgUnitField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
