@@ -1,4 +1,5 @@
 // @flow
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getEvents } from '../../../../events/eventRequests';
 import type { ColumnsMetaForDataFetching } from '../types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
@@ -104,13 +105,14 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, cat
         return null;
     }
 
+    const useNewSeparator = featureAvailable(FEATURES.newAocApiSeparator);
     return {
         attributeCc: categoryCombinationId,
         attributeCos: Object
             .keys(categories)
 
             .map(key => categories[key])
-            .join(';'),
+            .join(useNewSeparator ? ',' : ';'),
     };
 };
 

@@ -1,4 +1,5 @@
 // @flow
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { convertToClientEvents } from './convertToClientEvents';
 import {
@@ -81,10 +82,12 @@ export const getEventListData = async (
         };
     }
 
+    const useNewSeparator = featureAvailable(FEATURES.newAocApiSeparator);
+
     const trackedEntityIds = apiEvents
         .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])
         .filter(trackedEntityId => trackedEntityId)
-        .join(';');
+        .join(useNewSeparator ? ',' : ';');
 
     const { url: urlTEIs, queryParams: queryParamsTEIs } = {
         url: 'tracker/trackedEntities',
