@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useRef } from 'react';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
@@ -10,6 +10,7 @@ import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges'
 import {
     useBuildEnrollmentPayload,
 } from './hooks/useBuildEnrollmentPayload';
+import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     selectedScopeId,
@@ -22,6 +23,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     onCancel,
     ...passOnProps
 }) => {
+    const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const {
         ready,
@@ -57,13 +59,15 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     }
 
     const onSaveWithEnrollment = () => {
-        const teiWithEnrollment = buildTeiWithEnrollment();
-        onSave(teiWithEnrollment);
+        const { teiWithEnrollment, formHasError, redirect } =
+            buildTeiWithEnrollment(relatedStageRef);
+        !formHasError && onSave(teiWithEnrollment, redirect);
     };
 
     return (
         <EnrollmentRegistrationEntryComponent
             {...passOnProps}
+            relatedStageRef={relatedStageRef}
             firstStageMetaData={firstStageMetaData}
             selectedScopeId={selectedScopeId}
             formId={formId}
