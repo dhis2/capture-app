@@ -32,8 +32,8 @@ export const saveCurrentSearchInfo = ({
 }) => actionCreator(searchBoxActionTypes.CURRENT_SEARCH_INFO_SAVE)(
     { searchScopeType, searchScopeId, formId, currentSearchTerms });
 
-export const searchViaUniqueIdOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId }) =>
-    actionCreator(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId });
+export const searchViaUniqueIdOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId, programId }) =>
+    actionCreator(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId, programId });
 
 export const searchViaUniqueIdOnScopeProgram = ({ programId, formId }) =>
     actionCreator(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId });
