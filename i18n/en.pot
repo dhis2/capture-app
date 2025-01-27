@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-15T14:47:08.321Z\n"
-"PO-Revision-Date: 2025-01-15T14:47:08.321Z\n"
+"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
+"PO-Revision-Date: 2025-01-27T10:03:03.122Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -749,23 +749,24 @@ msgstr ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
 
+msgid "Get started with Capture app"
+msgstr "Get started with Capture app"
+
 msgid "Report data"
 msgstr "Report data"
 
-msgid "choose a registering unit and program, then click the New button"
-msgstr "choose a registering unit and program, then click the New button"
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
 
-msgid "Search for something"
-msgstr "Search for something"
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr "Click 'Search'. For program-specific results, choose a program first."
 
-msgid "click the Search button. Choose a program to only search in that program"
-msgstr "click the Search button. Choose a program to only search in that program"
-
-msgid "See existing data"
-msgstr "See existing data"
-
-msgid "choose a registering unit and program"
-msgstr "choose a registering unit and program"
+msgid "Learn more about Capture app"
+msgstr "Learn more about Capture app"
 
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
