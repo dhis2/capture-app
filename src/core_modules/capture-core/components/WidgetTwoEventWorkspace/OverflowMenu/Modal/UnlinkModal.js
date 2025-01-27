@@ -72,6 +72,7 @@ export const UnlinkModal = ({
                         destructive
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
+                        dataTest="event-overflow-unlink-event-confirm"
                     >
                         {i18n.t('Yes, unlink event')}
                     </Button>

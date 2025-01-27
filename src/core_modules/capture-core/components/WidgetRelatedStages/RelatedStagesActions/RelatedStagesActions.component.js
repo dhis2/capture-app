@@ -82,6 +82,7 @@ const Schedule = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.SCHEDULE_IN_ORG}
+                dataTest="related-stages-actions-schedule"
             />
         </ConditionalTooltip>
     );
@@ -126,6 +127,7 @@ const EnterData = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.ENTER_DATA}
+                dataTest="related-stages-actions-enter-details"
             />
         </ConditionalTooltip>
     );
@@ -169,12 +171,13 @@ const LinkExistingResponse = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
+                dataTest="related-stages-actions-link-existing-response"
             />
         </ConditionalTooltip>
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, errorMessages, classes }) => {
+const LinkButton = withStyles(styles)(({ onLink, label, errorMessages, dataTest, classes }) => {
     if (!onLink) {
         return null;
     }
@@ -183,7 +186,7 @@ const LinkButton = withStyles(styles)(({ onLink, label, errorMessages, classes }
 
     return (
         <div className={classes.link}>
-            <Button primary small onClick={onLink} disabled={disabled}>
+            <Button primary small onClick={onLink} disabled={disabled} dataTest={dataTest}>
                 {label}
             </Button>
         </div>
@@ -285,6 +288,7 @@ const RelatedStagesActionsPlain = ({
                         onLink={onLink}
                         label={i18n.t('Schedule')}
                         errorMessages={errorMessages}
+                        dataTest="related-stages-buttons-schedule"
                     />
                 </>
             )}
@@ -302,6 +306,7 @@ const RelatedStagesActionsPlain = ({
                         onLink={onLink}
                         label={i18n.t('Enter details')}
                         errorMessages={errorMessages}
+                        dataTest="related-stages-buttons-enter-details"
                     />
                 </>
             )}
@@ -320,6 +325,7 @@ const RelatedStagesActionsPlain = ({
                         onLink={onLink}
                         label={i18n.t('Link')}
                         errorMessages={errorMessages}
+                        dataTest="related-stages-buttons-link-existing-response"
                     />
                 </>
             )}
