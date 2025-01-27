@@ -1,7 +1,7 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "101.21.6",
+    "version": "101.23.0",
     "cacheVersion": "7",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
@@ -10,7 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2/rules-engine-javascript": "101.21.6",
+        "@dhis2/rules-engine-javascript": "101.23.0",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
@@ -115,7 +115,7 @@
         "eslint-config-react-app": "^6.0.0",
         "eslint-friendly-formatter": "^3.0.0",
         "eslint-import-resolver-exports": "^1.0.0-beta.5",
-        "eslint-import-resolver-webpack": "^0.13.2",
+        "eslint-import-resolver-webpack": "^0.13.10",
         "eslint-plugin-flowtype": "^5.10.0",
         "eslint-plugin-import": "2.29.1",
         "eslint-plugin-jsx-a11y": "^5.1.1",

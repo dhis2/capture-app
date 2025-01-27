@@ -201,7 +201,6 @@ export const WidgetEventSchedule = ({
             onSetAssignee={onSetAssignee}
             {...passOnProps}
         />
-
     );
 };
 
