@@ -1,3 +1,10 @@
+## [101.23.2](https://github.com/dhis2/capture-app/compare/v101.23.1...v101.23.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-18902] keep program selection on unique id fallback search ([#3950](https://github.com/dhis2/capture-app/issues/3950)) ([6326f7a](https://github.com/dhis2/capture-app/commit/6326f7a134851a80352d6cf34ea2f8dbdb5b210d))
+
 ## [101.23.1](https://github.com/dhis2/capture-app/compare/v101.23.0...v101.23.1) (2025-01-28)
 
 
