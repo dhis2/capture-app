@@ -6,33 +6,54 @@ import { isValidDateTime } from './dateTimeValidator';
 function isValidDateTimeWithEmptyCheck(value: ?Object) {
     return value && isValidDateTime(value);
 }
-const convertDateTimeToTemporal = (value: Object) => {
-    const { date, time } = value;
-
-    const dateInTemporal = convertStringToTemporal(date);
-
-    if (!dateInTemporal) {
+/* eslint-disable complexity */
+const convertDateTimeToTemporal = (value: ?Object) => {
+    if (!value || !value.date || !value.time) {
         return null;
     }
-    const { year, month, day } = dateInTemporal;
+
+    const { date, time } = value;
+
+    const dateInTemporalFormat = convertStringToTemporal(date);
+
+    if (!dateInTemporalFormat) {
+        return null;
+    }
+    const { year, month, day } = dateInTemporalFormat;
 
     let hour;
     let minutes;
-    if (/[:.]/.test(time)) {
-        [hour, minutes] = time.split(/[:.]/).map(Number);
-    } else if (time.length === 3) {
-        hour = Number(time.substring(0, 1));
-        minutes = Number(time.substring(2, 3));
-    } else {
-        hour = Number(time.substring(0, 2));
-        minutes = Number(time.substring(3, 4));
-    }
+    try {
+        if (/[:.]/.test(time)) {
+            [hour, minutes] = time.split(/[:.]/).map(Number);
+        } else if (time.length === 3) {
+            hour = Number(time.substring(0, 1));
+            minutes = Number(time.substring(1, 3));
+        } else if (time.length === 4) {
+            hour = Number(time.substring(0, 2));
+            minutes = Number(time.substring(2, 4));
+        } else {
+            return null;
+        }
 
-    return new Temporal.PlainDateTime(year, month, day, hour, minutes);
+        if (isNaN(hour) || isNaN(minutes) || hour < 0 || hour > 23 || minutes < 0 || minutes > 59) {
+            return null;
+        }
+
+        return new Temporal.PlainDateTime(year, month, day, hour, minutes);
+    } catch (error) {
+        return null;
+    }
 };
 
 export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
     (value: { from?: ?Object, to?: ?Object }) => {
+        if (!value) {
+            return {
+                valid: false,
+                errorMessage: { from: invalidDateTimeMessage, to: invalidDateTimeMessage },
+            };
+        }
         const errorResult = [];
         if (!isValidDateTimeWithEmptyCheck(value.from)) {
             errorResult.push({ from: invalidDateTimeMessage });
@@ -53,7 +74,16 @@ export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
         const fromDateTime = convertDateTimeToTemporal(value.from);
         const toDateTime = convertDateTimeToTemporal(value.to);
         if (!fromDateTime || !toDateTime) {
-            return false;
+            return {
+                valid: false,
+                errorMessage: {
+                    from: !fromDateTime ? invalidDateTimeMessage : undefined,
+                    to: !toDateTime ? invalidDateTimeMessage : undefined,
+                },
+            };
         }
-        return Temporal.PlainDateTime.compare(fromDateTime, toDateTime) <= 0;
+        return {
+            valid: Temporal.PlainDateTime.compare(fromDateTime, toDateTime) <= 0,
+            errorMessage: undefined,
+        };
     };
