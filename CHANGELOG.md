@@ -1,3 +1,10 @@
+## [101.23.1](https://github.com/dhis2/capture-app/compare/v101.23.0...v101.23.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-18673] prevent saving in profile widget when validation errors are present ([#3943](https://github.com/dhis2/capture-app/issues/3943)) ([e341070](https://github.com/dhis2/capture-app/commit/e34107075678b78773d941bc1bca5dbf93f5088e))
+
 # [101.23.0](https://github.com/dhis2/capture-app/compare/v101.22.0...v101.23.0) (2025-01-24)
 
 
