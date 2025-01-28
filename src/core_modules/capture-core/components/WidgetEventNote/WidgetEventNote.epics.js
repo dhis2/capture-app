@@ -5,8 +5,6 @@ import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
-import { convertValue as convertListValue } from '../../converters/clientToList';
-import { dataElementTypes } from '../../metaData';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventNote.actions';
 
 import {
@@ -58,7 +56,7 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore,
                 };
                 const formNote = {
                     ...clientNote,
-                    storedAt: convertListValue(clientNote.storedAt, dataElementTypes.DATETIME),
+                    storedAt: clientNote.storedAt,
                     createdBy: {
                         firstName,
                         surname,
