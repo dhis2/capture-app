@@ -15,7 +15,6 @@ import {
 } from '../SearchBox.actions';
 import { addFormData, removeFormData } from '../../D2Form/actions/form.actions';
 
-// eslint-disable-next-line complexity
 const isValueContainingCharacter = (value: any) => {
     if (!value) {
         return false;
@@ -24,21 +23,25 @@ const isValueContainingCharacter = (value: any) => {
         return Boolean(value.replace(/\s/g, '').length);
     }
 
-    if (isObject(value) && ('from' in value && 'to' in value)) {
-        const fromValid = value.from &&
-            isObject(value.from) &&
-            value.from.time &&
-            value.from.date;
-
-        const toValid = value.to &&
-            isObject(value.to) &&
-            value.to.time &&
-            value.to.date;
-
-        return fromValid && toValid;
-    }
-
     if (isObject(value)) {
+        if ('from' in value && 'to' in value) {
+            const fromValues = isObject(value.from) ?
+                [value.from.time, value.from.date] :
+                [value.from];
+
+            const toValues = isObject(value.to) ?
+                [value.to.time, value.to.date] :
+                [value.to];
+
+            const allValues = [...fromValues, ...toValues];
+            const validValues = allValues
+                .filter(v => isString(v))
+                .filter(v => Boolean(v?.replace(/\s/g, '').length))
+                .length;
+
+            return validValues === allValues.length;
+        }
+
         const numberOfValuesWithLength = Object.values(value)
             .filter(v => isString(v))
             .filter((v: any) => Boolean(v.replace(/\s/g, '').length))
