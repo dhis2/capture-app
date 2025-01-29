@@ -1,7 +1,7 @@
 // @flow
 import { Temporal } from '@js-temporal/polyfill';
 import { isValidDate } from './dateValidator';
-import { convertStringToDateFormat } from '../../../converters/date';
+import { convertStringToTemporal } from '../../../converters/date';
 /**
  *
  * @export
@@ -9,18 +9,18 @@ import { convertStringToDateFormat } from '../../../converters/date';
  * @returns {boolean}
  */
 
-function isValidDateWithEmptyCheck(value: ?string) {
-    return value && isValidDate(value);
+function isValidDateWithEmptyCheck(value: ?string, internalError?: ?{error: ?string, errorCode: ?string}) {
+    return isValidDate(value, internalError);
 }
 
 export const getDateRangeValidator = (invalidDateMessage: string) =>
-    (value: { from?: ?string, to?: ?string}) => {
+    (value: { from?: ?string, to?: ?string}, internalComponentError?: ?{fromError: ?{error: ?string, errorCode: ?string}, toError: ?{error: ?string, errorCode: ?string}}) => {
         const errorResult = [];
-        if (!isValidDateWithEmptyCheck(value.from)) {
+        if (!isValidDateWithEmptyCheck(value.from, internalComponentError?.fromError).valid) {
             errorResult.push({ from: invalidDateMessage });
         }
 
-        if (!isValidDateWithEmptyCheck(value.to)) {
+        if (!isValidDateWithEmptyCheck(value.to, internalComponentError?.toError).valid) {
             errorResult.push({ to: invalidDateMessage });
         }
 
@@ -33,7 +33,10 @@ export const getDateRangeValidator = (invalidDateMessage: string) =>
         }
         const { from, to } = value;
         // $FlowFixMe
-        const formattedFrom = convertStringToDateFormat(from, 'YYYY-MM-DD');
-        const fromattedTo = convertStringToDateFormat(to, 'YYYY-MM-DD');
-        return Temporal.PlainDate.compare(formattedFrom, fromattedTo) <= 0;
+        const formattedFrom = convertStringToTemporal(from);
+        const fromattedTo = convertStringToTemporal(to);
+        return {
+            valid: Temporal.PlainDateTime.compare(formattedFrom, fromattedTo) <= 0,
+            errorMessage: undefined,
+        };
     };
