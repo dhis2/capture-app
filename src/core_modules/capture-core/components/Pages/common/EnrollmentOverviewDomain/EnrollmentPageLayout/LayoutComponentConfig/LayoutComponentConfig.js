@@ -291,7 +291,7 @@ export const EventNote: WidgetConfig = {
     }),
 };
 
-export const WidgetRelatedStagesWorkspace: WidgetConfig = {
+export const RelatedStagesWorkspace: WidgetConfig = {
     Component: WidgetRelatedStages,
     shouldHideWidget: ({ currentPage }) => currentPage === EnrollmentPageKeys.EDIT_EVENT,
     getProps: ({

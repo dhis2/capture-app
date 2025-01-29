@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { useDataEngine } from '@dhis2/app-runtime';
+import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { relatedStageActions } from '../constants';
 
@@ -27,6 +27,7 @@ export const useAddEventWithRelationship = ({
 }) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const { show: showAlert } = useAlert(({ message }) => message, { success: true });
 
     const { mutate } = useMutation<any, Error, { serverData: Object, linkMode: string, eventIdToRedirectTo?: string }>(
         ({ serverData }: Object) =>
@@ -47,6 +48,8 @@ export const useAddEventWithRelationship = ({
 
                 if (payload.linkMode === relatedStageActions.ENTER_DATA && payload.eventIdToRedirectTo) {
                     onNavigateToEvent(payload.eventIdToRedirectTo);
+                } else {
+                    showAlert({ message: i18n.t('The event was succesfully linked') });
                 }
             },
             onError: () => {

@@ -49,7 +49,7 @@ export const WidgetRelatedStagesPlain = ({
     const {
         linkedEvent,
         isLoading: isLinkedEventLoading,
-    } = useLinkedEventByOriginId({ originEventId: eventId });
+    } = useLinkedEventByOriginId({ originEventId: eventId, skipBidirectionalChecks: true });
     const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({

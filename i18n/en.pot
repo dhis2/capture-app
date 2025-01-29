@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-02T13:08:32.303Z\n"
-"PO-Revision-Date: 2025-01-02T13:08:32.303Z\n"
+"POT-Creation-Date: 2025-01-29T14:33:36.560Z\n"
+"PO-Revision-Date: 2025-01-29T14:33:36.560Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1231,9 +1231,6 @@ msgstr "Add coordinates"
 msgid "Add area"
 msgstr "Add area"
 
-msgid "Please add or cancel the note before saving the event"
-msgstr "Please add or cancel the note before saving the event"
-
 msgid "Please provide an valid organisation unit"
 msgstr "Please provide an valid organisation unit"
 
@@ -1426,6 +1423,9 @@ msgstr "Enter details now"
 
 msgid "Link to an existing event"
 msgstr "Link to an existing event"
+
+msgid "The event was succesfully linked"
+msgstr "The event was succesfully linked"
 
 msgid "An error occurred while linking the event"
 msgstr "An error occurred while linking the event"

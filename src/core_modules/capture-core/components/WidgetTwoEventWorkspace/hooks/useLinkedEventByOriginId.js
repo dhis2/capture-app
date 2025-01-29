@@ -4,9 +4,10 @@ import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
 type Props = {|
     originEventId: string,
+    skipBidirectionalChecks?: boolean,
 |};
 
-const calculateRelatedStageRelationships = (event) => {
+const calculateRelatedStageRelationships = (event, skipBidirectionalChecks) => {
     if (!event || !event.relationships || event.relationships.length === 0) {
         return null;
     }
@@ -25,7 +26,7 @@ const calculateRelatedStageRelationships = (event) => {
     const stageToStageRelationship = stageToStageRelationships[0];
     const eventIsOrigin = stageToStageRelationship.from.event.event === event.event;
 
-    if (eventIsOrigin && !stageToStageRelationship.bidirectional) {
+    if (!skipBidirectionalChecks && eventIsOrigin && !stageToStageRelationship.bidirectional) {
         return null;
     }
 
@@ -38,7 +39,7 @@ const calculateRelatedStageRelationships = (event) => {
     };
 };
 
-export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
+export const useLinkedEventByOriginId = ({ originEventId, skipBidirectionalChecks }: Props) => {
     const eventByIdQuery = useMemo(() => ({
         resource: 'tracker/events',
         id: originEventId,
@@ -63,7 +64,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
     const { linkedEvent, relationship, relationshipType, dataValues } = useMemo(() => {
         if (!data) return {};
 
-        const relatedStageRelationship = calculateRelatedStageRelationships(data);
+        const relatedStageRelationship = calculateRelatedStageRelationships(data, skipBidirectionalChecks);
         if (!relatedStageRelationship) return {};
 
         return {
@@ -72,7 +73,7 @@ export const useLinkedEventByOriginId = ({ originEventId }: Props) => {
             relationshipType: relatedStageRelationship.relationshipType,
             dataValues: relatedStageRelationship.linkedEvent.dataValues,
         };
-    }, [data]);
+    }, [data, skipBidirectionalChecks]);
 
     const { data: fallbackDataValues, isLoading: isLoadingFallback } = useApiDataQuery(
         ['linkedEventDataValuesFallback', linkedEvent?.event],
