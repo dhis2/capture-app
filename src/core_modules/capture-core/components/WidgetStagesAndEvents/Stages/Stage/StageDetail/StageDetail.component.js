@@ -27,6 +27,7 @@ import { getProgramAndStageForProgram } from '../../../../../metaData/helpers';
 import type { Props } from './stageDetail.types';
 import { EventRow } from './EventRow';
 import { errorCreator } from '../../../../../../capture-core-utils';
+import { useClientDataElements } from './hooks/useClientDataElements';
 
 
 const styles = {
@@ -113,7 +114,8 @@ const StageDetailPlain = (props: Props) => {
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
     const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
-    const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElements, events);
+    const dataElementsClient = useClientDataElements(dataElements);
+    const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);
 
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
@@ -177,7 +179,7 @@ const StageDetailPlain = (props: Props) => {
                 return sortDataFromEvent({ dataA, dataB, type, columnName, direction: sortDirection });
             })
             .slice(0, displayedRowNumber)
-            .map(row => formatRowForView(row, dataElements))
+            .map(row => formatRowForView(row, dataElementsClient))
             .map((row: Object) => {
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
