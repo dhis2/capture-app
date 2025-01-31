@@ -1,10 +1,11 @@
 // @flow
 import { Temporal } from '@js-temporal/polyfill';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { convertStringToTemporal } from 'capture-core/utils/converters/date';
 import { isValidDateTime } from './dateTimeValidator';
 
-function isValidDateTimeWithEmptyCheck(value: ?Object) {
-    return value && isValidDateTime(value);
+function isValidDateTimeWithEmptyCheck(value: ?{date?: ?string, time?: ?string}, internalError?: ?{error: ?string, errorCode: ?string}) {
+    return isValidDateTime(value, internalError);
 }
 /* eslint-disable complexity */
 const convertDateTimeToTemporal = (value: ?Object) => {
@@ -13,7 +14,7 @@ const convertDateTimeToTemporal = (value: ?Object) => {
     }
 
     const { date, time } = value;
-
+    const calendar = systemSettingsStore.get().calendar;
     const dateInTemporalFormat = convertStringToTemporal(date);
 
     if (!dateInTemporalFormat) {
@@ -24,14 +25,15 @@ const convertDateTimeToTemporal = (value: ?Object) => {
     let hour;
     let minutes;
     try {
-        if (/[:.]/.test(time)) {
-            [hour, minutes] = time.split(/[:.]/).map(Number);
-        } else if (time.length === 3) {
-            hour = Number(time.substring(0, 1));
-            minutes = Number(time.substring(1, 3));
-        } else if (time.length === 4) {
-            hour = Number(time.substring(0, 2));
-            minutes = Number(time.substring(2, 4));
+        const timeStr = time.toString();
+        if (/[:.]/.test(timeStr)) {
+            [hour, minutes] = timeStr.split(/[:.]/).map(Number);
+        } else if (timeStr.length === 3) {
+            hour = Number(timeStr.substring(0, 1));
+            minutes = Number(timeStr.substring(1, 3));
+        } else if (timeStr.length === 4) {
+            hour = Number(timeStr.substring(0, 2));
+            minutes = Number(timeStr.substring(2, 4));
         } else {
             return null;
         }
@@ -40,26 +42,27 @@ const convertDateTimeToTemporal = (value: ?Object) => {
             return null;
         }
 
-        return new Temporal.PlainDateTime(year, month, day, hour, minutes);
+        return new Temporal.PlainDateTime(year, month, day, hour, minutes, 0, 0, 0, 0, calendar);
     } catch (error) {
         return null;
     }
 };
 
 export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
-    (value: { from?: ?Object, to?: ?Object }) => {
-        if (!value) {
+    // eslint-disable-next-line complexity
+    (value: { from?: ?Object, to?: ?Object }, internalComponentError?: ?{fromDateError: ?{error: ?string, errorCode: ?string}, toDateError: ?{error: ?string, errorCode: ?string}}) => {
+        if (!value?.from && value?.to) {
             return {
                 valid: false,
                 errorMessage: { from: invalidDateTimeMessage, to: invalidDateTimeMessage },
             };
         }
         const errorResult = [];
-        if (!isValidDateTimeWithEmptyCheck(value.from)) {
+        if (!isValidDateTimeWithEmptyCheck(value?.from, internalComponentError?.fromDateError).valid) {
             errorResult.push({ from: invalidDateTimeMessage });
         }
 
-        if (!isValidDateTimeWithEmptyCheck(value.to)) {
+        if (!isValidDateTimeWithEmptyCheck(value?.to, internalComponentError?.toDateError).valid) {
             errorResult.push({ to: invalidDateTimeMessage });
         }
 

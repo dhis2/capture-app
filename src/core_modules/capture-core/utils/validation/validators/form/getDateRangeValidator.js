@@ -36,7 +36,7 @@ export const getDateRangeValidator = (invalidDateMessage: string) =>
         const formattedFrom = convertStringToTemporal(from);
         const fromattedTo = convertStringToTemporal(to);
         return {
-            valid: Temporal.PlainDateTime.compare(formattedFrom, fromattedTo) <= 0,
+            valid: Temporal.PlainDate.compare(formattedFrom, fromattedTo) <= 0,
             errorMessage: undefined,
         };
     };
