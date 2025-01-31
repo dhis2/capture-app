@@ -1,3 +1,10 @@
+# [101.24.0](https://github.com/dhis2/capture-app/compare/v101.23.2...v101.24.0) (2025-01-31)
+
+
+### Features
+
+* [DHIS2-18329] Add org unit selector in schedule event form ([#3925](https://github.com/dhis2/capture-app/issues/3925)) ([4013d93](https://github.com/dhis2/capture-app/commit/4013d9326d17f93ff3b0ca11b7844764f92c6850))
+
 ## [101.23.2](https://github.com/dhis2/capture-app/compare/v101.23.1...v101.23.2) (2025-01-28)
 
 
