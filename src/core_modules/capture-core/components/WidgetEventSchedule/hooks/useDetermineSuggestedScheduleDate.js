@@ -2,8 +2,6 @@
 import moment from 'moment';
 import { convertServerToClient, convertClientToForm } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
-import { convertStringToDateFormat } from '../../../utils/converters/date';
-
 
 const convertDate = (date): any => convertServerToClient(date, dataElementTypes.DATE);
 
@@ -84,7 +82,7 @@ export const useDetermineSuggestedScheduleDate = ({
     initialScheduleDate,
     hideDueDate,
 }: Props) => {
-    if (initialScheduleDate && !hideDueDate) { return convertStringToDateFormat(initialScheduleDate); }
+    if (initialScheduleDate && !hideDueDate) { return initialScheduleDate; }
     if (!programStageScheduleConfig) { return undefined; }
 
     const {
@@ -127,5 +125,5 @@ export const useDetermineSuggestedScheduleDate = ({
     , undefined);
 
     // $FlowFixMe dataElementTypes flow error
-    return convertStringToDateFormat(convertClientToForm(suggestedDate, dataElementTypes.DATE));
+    return convertClientToForm(suggestedDate, dataElementTypes.DATE);
 };

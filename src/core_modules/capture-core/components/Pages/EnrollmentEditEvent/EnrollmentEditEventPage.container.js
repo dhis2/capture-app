@@ -46,6 +46,7 @@ import { ReactQueryAppNamespace } from '../../../utils/reactQueryHelpers';
 import { statusTypes } from '../../../enrollment';
 import { cancelEditEventDataEntry } from '../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
+import { convertIsoToLocalCalendar } from '../../../utils/converters/date'
 
 const getEventDate = (event) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
@@ -55,7 +56,7 @@ const getEventDate = (event) => {
 
 const getEventScheduleDate = (event) => {
     if (!event?.scheduledAt) { return undefined; }
-    const eventDataConvertValue = convertValue(event?.scheduledAt, dataElementTypes.DATETIME);
+    const eventDataConvertValue = convertIsoToLocalCalendar(event?.scheduledAt);
     return eventDataConvertValue?.toString();
 };
 

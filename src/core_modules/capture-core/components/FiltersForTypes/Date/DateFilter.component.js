@@ -17,7 +17,7 @@ import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
-import { convertStringToDateFormat } from '../../../utils/converters/date';
+import { convertStringToTemporal } from '../../../utils/converters/date';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
@@ -190,8 +190,8 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 
     static isFromAfterTo(valueFrom: string, valueTo: string) {
-        const formattedFrom = convertStringToDateFormat(valueFrom, 'YYYY-MM-DD');
-        const fromattedTo = convertStringToDateFormat(valueTo, 'YYYY-MM-DD');
+        const formattedFrom = convertStringToTemporal(valueFrom);
+        const fromattedTo = convertStringToTemporal(valueTo);
         return Temporal.PlainDate.compare(formattedFrom, fromattedTo) > 0;
     }
 
