@@ -9,7 +9,6 @@ import {
 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
-import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type { PlainProps, ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -78,7 +77,6 @@ const WidgetEventEditPlain = ({
     onHandleScheduleSave,
     onSaveExternal,
     programId,
-    orgUnitId,
     enrollmentId,
     eventId,
     stageId,
@@ -96,13 +94,9 @@ const WidgetEventEditPlain = ({
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
-    const { orgUnit: coreOrgUnit, error } = useCoreOrgUnit(orgUnitId);
-    const orgUnit = coreOrgUnit || loadedValues?.orgUnit;
+    const orgUnit = loadedValues?.orgUnit;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
-    if (error) {
-        return error.errorComponent;
-    }
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
@@ -111,7 +105,7 @@ const WidgetEventEditPlain = ({
                 currentPage={currentPageMode}
                 eventId={eventId}
                 programId={programId}
-                orgUnitId={orgUnitId}
+                orgUnitId={orgUnit.id}
                 stageId={stageId}
                 stage={stage}
             />

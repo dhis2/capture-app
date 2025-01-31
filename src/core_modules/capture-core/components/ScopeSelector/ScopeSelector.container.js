@@ -6,6 +6,7 @@ import type { OwnProps } from './ScopeSelector.types';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
+
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName, displayName, ouNameError) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
