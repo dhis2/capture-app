@@ -77,6 +77,7 @@ const WidgetEventEditPlain = ({
     onHandleScheduleSave,
     onSaveExternal,
     programId,
+    orgUnitId,
     enrollmentId,
     eventId,
     stageId,
@@ -105,7 +106,7 @@ const WidgetEventEditPlain = ({
                 currentPage={currentPageMode}
                 eventId={eventId}
                 programId={programId}
-                orgUnitId={orgUnit.id}
+                orgUnitId={orgUnitId}
                 stageId={stageId}
                 stage={stage}
             />
