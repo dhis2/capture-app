@@ -19,6 +19,7 @@ import { loadNewDataEntry } from '../../DataEntry/actions/dataEntryLoadNew.actio
 import { rulesExecutedPostUpdateField } from '../../DataEntry/actions/dataEntry.actions';
 import { getRulesActionsForTEIAsync } from './ProgramRules';
 import { addFormData } from '../../D2Form/actions/form.actions';
+import { updateFieldUIOnly } from '../../D2Form/FormBuilder/formBuilder.actions';
 import type { Geometry } from './helpers/types';
 import type { QuerySingleResource } from '../../../utils/api';
 
@@ -112,12 +113,14 @@ export const getUpdateFieldActions = async ({
         querySingleResource,
         onGetValidationContext,
     });
+    const updateFieldUIAction = updateFieldUIOnly(uiState, elementId, formId);
 
     return batchActions(
         [
             innerAction,
             rulesActions,
             rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            updateFieldUIAction,
         ],
         dataEntryActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
     );

@@ -58,7 +58,7 @@ const searchViaUniqueIdStream = ({
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length === 0 && queryArgs.program) {
-                return of(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: programTETId, formId }));
+                return of(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: programTETId, formId, programId }));
             }
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId, enrollments } } = searchResults[0];
@@ -183,7 +183,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
 ) =>
     action$.pipe(
         ofType(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
-        flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
+        flatMap(({ payload: { formId, trackedEntityTypeId, programId } }) => {
             const {
                 formsValues,
             } = store.value;
@@ -200,6 +200,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
             return searchViaUniqueIdStream({
                 queryArgs,
                 attributes,
+                programId,
                 absoluteApiPath,
                 querySingleResource,
             });

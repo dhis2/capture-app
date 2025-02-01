@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
-import type { StageDataElement } from '../../../../types/common.types';
+import type { StageDataElementClient } from '../../../../types/common.types';
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
@@ -67,7 +67,7 @@ const convertNoteForView = (event: ApiEnrollmentEvent) => <Notes event={event} /
 
 const groupRecordsByType = async (
     events: Array<ApiEnrollmentEvent>,
-    dataElements: Array<StageDataElement>,
+    dataElements: Array<StageDataElementClient>,
     querySingleResource: QuerySingleResource,
     absoluteApiPath: string,
 ) => {

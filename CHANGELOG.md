@@ -1,3 +1,31 @@
+## [101.24.1](https://github.com/dhis2/capture-app/compare/v101.24.0...v101.24.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* [DHIS2-18582] Data element with number option set are not displayed in Stages and Events widget ([#3928](https://github.com/dhis2/capture-app/issues/3928)) ([e793240](https://github.com/dhis2/capture-app/commit/e79324029194f23c945b26cdd1f09f06bd27c213))
+
+# [101.24.0](https://github.com/dhis2/capture-app/compare/v101.23.2...v101.24.0) (2025-01-31)
+
+
+### Features
+
+* [DHIS2-18329] Add org unit selector in schedule event form ([#3925](https://github.com/dhis2/capture-app/issues/3925)) ([4013d93](https://github.com/dhis2/capture-app/commit/4013d9326d17f93ff3b0ca11b7844764f92c6850))
+
+## [101.23.2](https://github.com/dhis2/capture-app/compare/v101.23.1...v101.23.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-18902] keep program selection on unique id fallback search ([#3950](https://github.com/dhis2/capture-app/issues/3950)) ([6326f7a](https://github.com/dhis2/capture-app/commit/6326f7a134851a80352d6cf34ea2f8dbdb5b210d))
+
+## [101.23.1](https://github.com/dhis2/capture-app/compare/v101.23.0...v101.23.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-18673] prevent saving in profile widget when validation errors are present ([#3943](https://github.com/dhis2/capture-app/issues/3943)) ([e341070](https://github.com/dhis2/capture-app/commit/e34107075678b78773d941bc1bca5dbf93f5088e))
+
 # [101.23.0](https://github.com/dhis2/capture-app/compare/v101.22.0...v101.23.0) (2025-01-24)
 
 

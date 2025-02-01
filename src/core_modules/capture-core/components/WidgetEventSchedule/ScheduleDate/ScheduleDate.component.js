@@ -1,18 +1,46 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import { spacersNum } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { DateField } from 'capture-core/components/FormFields/New';
-import { InfoBox } from '../InfoBox';
+import { spacers, colors } from '@dhis2/ui';
+import {
+    DateField,
+    withDefaultFieldContainer,
+    withLabel,
+    withDisplayMessages,
+    withInternalChangeHandler,
+} from 'capture-core/components/FormFields/New';
+
 import type { Props } from './scheduleDate.types';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
+import { InfoBox } from '../InfoBox';
+import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
+
+
+const ScheduleDateField = withDefaultFieldContainer()(
+    withLabel({
+        onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
+    })(
+        withDisplayMessages()(
+            withInternalChangeHandler()(
+                DateField,
+            ),
+        ),
+    ),
+);
 
 const styles = {
-    container: {
-        display: 'flex',
-        marginTop: spacersNum.dp4,
+    infoBox: {
+        padding: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
     },
-    button: {
-        paddingRight: spacersNum.dp16,
+    fieldWrapper: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    fieldLabel: {
+        color: colors.grey900,
+        padding: `${spacers.dp16} ${spacers.dp24} 0 ${spacers.dp16}`,
+        fontSize: '14px',
     },
 };
 
@@ -22,35 +50,51 @@ const ScheduleDatePlain = ({
     setScheduleDate,
     orgUnit,
     serverSuggestedScheduleDate,
+    displayDueDateLabel,
     eventCountInOrgUnit,
     classes,
     hideDueDate,
-}: Props) => (<>
-    {!hideDueDate && <div className={classes.container}>
-        <DateField
-            value={scheduleDate}
-            width="100%"
-            calendarWidth={350}
-            onSetFocus={() => {}}
-            onFocus={() => { }}
-            onRemoveFocus={() => { }}
-            onBlur={(e, internalComponentError) => {
-                const { error } = internalComponentError;
-                if (error) {
-                    setScheduleDate('');
-                    return;
-                }
-                setScheduleDate(e);
-            }}
-        />
-    </div>}
-    <InfoBox
-        scheduleDate={serverScheduleDate}
-        suggestedScheduleDate={serverSuggestedScheduleDate}
-        eventCountInOrgUnit={eventCountInOrgUnit}
-        orgUnitName={orgUnit?.name}
-        hideDueDate={hideDueDate}
-    />
-</>);
+}: Props) => (
+    <div className={classes.fieldWrapper}>
+        {!hideDueDate ?
+            <ScheduleDateField
+                label={i18n.t('Schedule date / Due date')}
+                required
+                value={scheduleDate}
+                width="100%"
+                calendarWidth={350}
+                styles={baseInputStyles}
+                onSetFocus={() => { }}
+                onFocus={() => { }}
+                onRemoveFocus={() => { }}
+                onBlur={(e, internalComponentError) => {
+                    const { error } = internalComponentError;
+                    if (error) {
+                        setScheduleDate('');
+                        return;
+                    }
+                    setScheduleDate(e);
+                }}
+            />
+            :
+            <div className={classes.fieldLabel}>
+                {displayDueDateLabel ?? i18n.t('Schedule date / Due date', {
+                    interpolation: { escapeValue: false },
+                },
+                )}
+            </div>
+        }
+        <div className={classes.infoBox}>
+            <InfoBox
+                scheduleDate={serverScheduleDate}
+                suggestedScheduleDate={serverSuggestedScheduleDate}
+                eventCountInOrgUnit={eventCountInOrgUnit}
+                orgUnitName={orgUnit?.name}
+                hideDueDate={hideDueDate}
+            />
+        </div>
+    </div>
+);
+
 
 export const ScheduleDate: ComponentType<$Diff<Props, CssClasses>> = (withStyles(styles)(ScheduleDatePlain));
