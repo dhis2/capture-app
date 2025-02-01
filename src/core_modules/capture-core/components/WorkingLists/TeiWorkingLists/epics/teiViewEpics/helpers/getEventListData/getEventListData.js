@@ -55,7 +55,7 @@ const createApiTEIsQueryArgs =
     pageSize,
     trackedEntity: trackedEntityIds,
     fields:
-    'trackedEntity,createdAt,orgUnit,attributes[attribute,value],enrollments[enrollment,status,orgUnit,enrolledAt]',
+    'trackedEntities,createdAt,orgUnits,attributes[attribute,value],enrollments[enrollment,status,orgUnit,enrolledAt]',
 });
 
 export const getEventListData = async (

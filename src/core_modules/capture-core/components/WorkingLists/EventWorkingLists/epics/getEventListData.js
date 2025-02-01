@@ -108,7 +108,7 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, cat
     const useNewSeparator = featureAvailable(FEATURES.newAocApiSeparator);
     return {
         attributeCc: categoryCombinationId,
-        attributeCos: Object
+        attributeCategoryOptions: Object
             .keys(categories)
 
             .map(key => categories[key])
