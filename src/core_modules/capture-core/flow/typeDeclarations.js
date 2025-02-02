@@ -210,5 +210,5 @@ declare type ApiUtils = {|
     mutate: DataEngineMutate,
     absoluteApiPath: string,
     serverVersion: { minor: number },
-    navigate: (path: string) => void,
+    navigate: (path: string, scrollToTop?: boolean) => void,
 |};

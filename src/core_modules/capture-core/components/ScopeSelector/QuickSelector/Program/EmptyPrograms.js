@@ -2,10 +2,10 @@
 
 import React, { useEffect } from 'react';
 import { Button, spacers, colors } from '@dhis2/ui';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 
 type Props = {
     onResetOrgUnit: () => void,
@@ -24,17 +24,17 @@ const styles = () => ({
 });
 
 const EmptyProgramsPlain = ({ onResetOrgUnit, classes }: Props) => {
-    const { push } = useHistory();
+    const { navigate } = useNavigate();
     const { pathname } = useLocation();
     const { enrollmentId, teiId, orgUnitId } = useLocationQuery();
 
     useEffect(() => {
         const navigateToEventRegistrationPage = () => {
-            push(`${pathname}?${buildUrlQueryString({ enrollmentId, teiId, orgUnitId })}`);
+            navigate(`${pathname}?${buildUrlQueryString({ enrollmentId, teiId, orgUnitId })}`);
         };
 
         navigateToEventRegistrationPage();
-    }, [push, pathname, enrollmentId, teiId, orgUnitId]);
+    }, [navigate, pathname, enrollmentId, teiId, orgUnitId]);
 
     return (
         <div className={classes.filterWarning}>

@@ -15,7 +15,7 @@ import { reducerDescriptions } from '../reducers/descriptions/trackerCapture.red
 import { epics } from '../epics/trackerCapture.epics';
 
 export function getStore(
-    navigate: (path: string) => void,
+    navigate: (path: string, scrollToTop?: boolean) => void,
     apiUtils: ApiUtilsWithoutHistory,
     onRehydrated: () => void) {
     const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
