@@ -13,4 +13,3 @@ export const useNavigate = () => {
 
     return { navigate };
 };
-

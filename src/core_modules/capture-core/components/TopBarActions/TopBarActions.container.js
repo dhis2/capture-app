@@ -30,8 +30,8 @@ export const TopBarActions = ({
         openNewRegistrationPageWithoutProgramId ||
         openSearchPage ||
         openSearchPageWithoutProgramId;
-    const { navigate } = useNavigate();
 
+    const { navigate } = useNavigate();
 
     const newRegistrationPage = () => {
         const queryArgs = {};
