@@ -7,9 +7,12 @@ import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.conta
 import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
 import { Notes } from '../../Notes/Notes.component';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import {
+    getEventDateValidatorContainers,
+    getOrgUnitValidatorContainers,
+    getNoteValidatorContainers,
+} from './fieldValidators';
 import { type RenderFoundation, type ProgramStage } from '../../../metaData';
-import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
     placements,
     withCleanUp,
@@ -28,9 +31,11 @@ import {
     withDefaultShouldUpdateInterface,
     orientations,
     VirtualizedSelectField,
+    SingleOrgUnitSelectField,
 } from '../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import { SavingText } from '../SavingText';
 import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
@@ -103,7 +108,6 @@ const baseComponentStylesVertical = {
     },
 };
 
-
 function defaultFilterProps(props: Object) {
     const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
     return passOnProps;
@@ -163,6 +167,46 @@ const buildReportDateSettingsFn = () => {
 
     return reportDateSettings;
 };
+
+const buildOrgUnitSettingsFn = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+    const orgUnitSettings = {
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: i18n.t('Organisation unit'),
+            required: true,
+        }),
+        getPropName: () => 'orgUnit',
+        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return orgUnitSettings;
+};
+
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
@@ -226,7 +270,7 @@ const buildGeometrySettingsFn = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                orgUnit: props.orgUnit,
+                orgUnitId: props.orgUnitIdFieldValue,
             });
         }
 
@@ -237,7 +281,7 @@ const buildGeometrySettingsFn = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            orgUnit: props.orgUnit,
+            orgUnitId: props.orgUnitIdFieldValue,
         });
     },
     getPropName: () => 'geometry',
@@ -287,8 +331,8 @@ const buildAssigneeSettingsFn = () => {
         withTransformPropName(['onBlur', 'onSet'])(
             withFocusSaver()(
                 withFilterProps((props: Object) => {
-                    const defaultFiltred = defaultFilterProps(props);
-                    const { validationAttempted, touched, ...passOnProps } = defaultFiltred;
+                    const defaultfiltered = defaultFilterProps(props);
+                    const { validationAttempted, touched, ...passOnProps } = defaultfiltered;
                     return passOnProps;
                 })(Assignee),
             ),
@@ -353,7 +397,14 @@ const getCategoryOptionsSettingsFn = () => {
 
 
 const dataEntryFilterProps = (props: Object) => {
-    const { stage, onScrollToRelationships, recentlyAddedRelationshipId, relationshipsRef, ...passOnProps } = props;
+    const {
+        stage,
+        onScrollToRelationships,
+        recentlyAddedRelationshipId,
+        relationshipsRef,
+        orgUnitIdFieldValue,
+        ...passOnProps
+    } = props;
     return passOnProps;
 };
 
@@ -361,12 +412,19 @@ const WrappedDataEntry = compose(
     withAOCFieldBuilder({}),
     withDataEntryFields(getCategoryOptionsSettingsFn()),
     withDataEntryField(buildReportDateSettingsFn()),
+    withDataEntryField(buildOrgUnitSettingsFn()),
     withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
     withDataEntryField(buildNotesSettingsFn()),
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
     withCleanUp(),
     withFilterProps(dataEntryFilterProps),
 )(DataEntryContainer);
+
+type OrgUnit = {|
+    id: string,
+    name: string,
+    path: string,
+|};
 
 type Props = {
     id: string,
@@ -391,6 +449,9 @@ type Props = {
     theme: Theme,
     formHorizontal: ?boolean,
     recentlyAddedRelationshipId?: ?string,
+    placementDomNodeForSavingText?: HTMLElement,
+    programName: string,
+    orgUnitFieldValue: ?OrgUnit,
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -466,10 +527,16 @@ class DataEntryPlain extends Component<Props> {
             onSetSaveTypes,
             theme,
             id,
+            placementDomNodeForSavingText,
+            programName,
+            stage,
+            orgUnitFieldValue,
             ...passOnProps
         } = this.props;
+
         return (
             <div data-test="new-enrollment-event-form">
+                {/* the props orgUnit, orgUnitId and selectedOrgUnitId should all be removed from here. See DHIS2-18869 */}
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <WrappedDataEntry
                     id={id}
@@ -478,7 +545,18 @@ class DataEntryPlain extends Component<Props> {
                     fieldOptions={this.fieldOptions}
                     dataEntrySections={this.dataEntrySections}
                     relationshipsRef={this.setRelationshipsInstance}
+                    stage={stage}
+                    orgUnitIdFieldValue={orgUnitFieldValue?.id}
+                    orgUnit={orgUnitFieldValue}
+                    orgUnitId={orgUnitFieldValue?.id}
+                    selectedOrgUnitId={orgUnitFieldValue?.id}
                     {...passOnProps}
+                />
+                <SavingText
+                    programName={programName}
+                    stageName={stage.name}
+                    orgUnitName={orgUnitFieldValue?.name}
+                    placementDomNode={placementDomNodeForSavingText}
                 />
             </div>
         );

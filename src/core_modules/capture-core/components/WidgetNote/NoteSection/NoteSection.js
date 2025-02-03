@@ -100,7 +100,7 @@ const NoteSectionPlain = ({
     }, [handleAddNote, newNoteValue]);
 
     const NoteItem = ({ value, storedAt, createdBy }) => {
-        const localDateTime: string = convertClientToList(fromServerDate(storedAt), dataElementTypes.DATETIME);
+        const localDateTime = convertClientToList(fromServerDate(storedAt), dataElementTypes.DATETIME);
         return (
             <div data-test="note-item" className={cx(classes.item)}>
                 {/* TODO: add avatar */}

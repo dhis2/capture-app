@@ -17,7 +17,7 @@ import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
-import { convertStringToTemporal } from '../../../utils/converters/date';
+import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
@@ -190,9 +190,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 
     static isFromAfterTo(valueFrom: string, valueTo: string) {
-        const formattedFrom = convertStringToTemporal(valueFrom);
-        const fromattedTo = convertStringToTemporal(valueTo);
-        return Temporal.PlainDate.compare(formattedFrom, fromattedTo) > 0;
+        const from = convertLocalToIsoCalendar(valueFrom);
+        const to = convertLocalToIsoCalendar(valueTo);
+        const fromIso = Temporal.PlainDate.from(from.split('T')[0]);
+        const toIso = Temporal.PlainDate.from(to.split('T')[0]);
+        return Temporal.PlainDate.compare(fromIso, toIso) > 0;
     }
 
     toD2DateTextFieldInstance: any;

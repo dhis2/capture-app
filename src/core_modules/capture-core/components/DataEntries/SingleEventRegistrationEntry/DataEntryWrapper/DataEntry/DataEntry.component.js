@@ -239,7 +239,7 @@ const buildGeometrySettingsFn = () => ({
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-                orgUnit: props.orgUnit,
+                orgUnitId: props.orgUnit?.id,
             });
         }
 
@@ -250,7 +250,7 @@ const buildGeometrySettingsFn = () => ({
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
-            orgUnit: props.orgUnit,
+            orgUnitId: props.orgUnit?.id,
         });
     },
     getPropName: () => 'geometry',
@@ -640,6 +640,7 @@ class NewEventDataEntry extends Component<Props> {
                         dataEntrySections={this.dataEntrySections}
                         relationshipsRef={this.setRelationshipsInstance}
                         orgUnit={orgUnit}
+                        orgUnitId={orgUnit?.id}
                         {...passOnProps}
                     />
                 </div>

@@ -1,7 +1,7 @@
 // @flow
 import { Temporal } from '@js-temporal/polyfill';
 import { isValidDate } from './dateValidator';
-import { convertStringToTemporal } from '../../../converters/date';
+import { convertLocalToIsoCalendar } from '../../../converters/date';
 /**
  *
  * @export
@@ -33,10 +33,21 @@ export const getDateRangeValidator = (invalidDateMessage: string) =>
         }
         const { from, to } = value;
         // $FlowFixMe
-        const formattedFrom = convertStringToTemporal(from);
-        const fromattedTo = convertStringToTemporal(to);
+        const isoFrom = convertLocalToIsoCalendar(from);
+        const isoTo = convertLocalToIsoCalendar(to);
+
+        if (!isoFrom || !isoTo) {
+            return {
+                valid: false,
+                errorMessage: { date: invalidDateMessage },
+            };
+        }
+
+        const fromDate = Temporal.PlainDate.from(isoFrom.split('T')[0]);
+        const toDate = Temporal.PlainDate.from(isoTo.split('T')[0]);
+
         return {
-            valid: Temporal.PlainDate.compare(formattedFrom, fromattedTo) <= 0,
+            valid: Temporal.PlainDate.compare(fromDate, toDate) <= 0,
             errorMessage: undefined,
         };
     };

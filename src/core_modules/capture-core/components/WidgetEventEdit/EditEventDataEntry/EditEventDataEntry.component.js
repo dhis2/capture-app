@@ -257,7 +257,7 @@ const buildGeometrySettingsFn = () => ({
                 label: i18n.t('Area'),
                 dialogLabel: i18n.t('Area'),
                 required: false,
-                orgUnit: props.orgUnit,
+                orgUnitId: props.orgUnit?.id,
             });
         }
         return createComponentProps(props, {
@@ -265,7 +265,7 @@ const buildGeometrySettingsFn = () => ({
             label: i18n.t('Coordinate'),
             dialogLabel: i18n.t('Coordinate'),
             required: false,
-            orgUnit: props.orgUnit,
+            orgUnitId: props.orgUnit?.id,
         });
     },
     getPropName: () => 'geometry',
@@ -518,6 +518,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
                 orgUnit={orgUnit}
+                orgUnitId={orgUnit?.id}
                 programId={programId}
                 selectedOrgUnitId={orgUnit?.id}
                 {...passOnProps}

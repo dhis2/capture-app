@@ -81,7 +81,7 @@ function getCalculatedValues(dateValue: ?string, calendarType: string, dateForma
     const age = stringToTemporal(dateValue, mapDhis2CalendarToTemporal[calendarType], dateFormat);
 
     if (calendarType === 'ethiopian') {
-        if (!age || !age.eraYear) {
+        if (!age) {
             return {
                 date: dateValue,
                 years: '',

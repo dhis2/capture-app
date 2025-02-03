@@ -22,6 +22,7 @@ export const QuickSelector = ({
     formIsOpen,
     children,
     onStartAgain,
+    isReadOnly,
 }: Props) => (
     <SelectorBar
         disableClearSelections={!selectedProgramId && !selectedOrgUnitId}
@@ -46,6 +47,7 @@ export const QuickSelector = ({
             handleClickOrgUnit={onSetOrgUnit}
             selectedOrgUnit={selectedOrgUnit}
             onReset={onResetOrgUnitId}
+            isReadOnly={isReadOnly}
         />
         {children}
     </SelectorBar>

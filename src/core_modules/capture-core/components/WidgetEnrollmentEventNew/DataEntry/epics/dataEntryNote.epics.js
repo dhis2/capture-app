@@ -3,8 +3,6 @@ import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import moment from 'moment';
-import { convertValue as convertListValue } from '../../../../converters/clientToList';
-import { dataElementTypes } from '../../../../metaData';
 import {
     newEventWidgetDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
@@ -25,7 +23,6 @@ export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store
                     fields: 'firstName,surname,username',
                 },
             }).then((user) => {
-                const storedAt = moment().toISOString();
                 const { userName, firstName, surname } = user;
                 const clientId = uuid();
                 const note = {

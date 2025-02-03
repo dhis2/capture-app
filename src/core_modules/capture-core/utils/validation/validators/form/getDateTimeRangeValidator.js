@@ -1,26 +1,23 @@
 // @flow
 import { Temporal } from '@js-temporal/polyfill';
-import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { convertStringToTemporal } from 'capture-core/utils/converters/date';
+import { convertLocalToIsoCalendar } from 'capture-core/utils/converters/date';
 import { isValidDateTime } from './dateTimeValidator';
 
 function isValidDateTimeWithEmptyCheck(value: ?{date?: ?string, time?: ?string}, internalError?: ?{error: ?string, errorCode: ?string}) {
     return isValidDateTime(value, internalError);
 }
 /* eslint-disable complexity */
-const convertDateTimeToTemporal = (value: ?Object) => {
+const convertDateTimeToIsoTemporal = (value: ?Object) => {
     if (!value || !value.date || !value.time) {
         return null;
     }
 
     const { date, time } = value;
-    const calendar = systemSettingsStore.get().calendar;
-    const dateInTemporalFormat = convertStringToTemporal(date);
-
-    if (!dateInTemporalFormat) {
+    const isoDate = convertLocalToIsoCalendar(date);
+    if (!isoDate) {
         return null;
     }
-    const { year, month, day } = dateInTemporalFormat;
+    const [year, month, day] = isoDate.split('T')[0].split('-').map(Number);
 
     let hour;
     let minutes;
@@ -42,7 +39,7 @@ const convertDateTimeToTemporal = (value: ?Object) => {
             return null;
         }
 
-        return new Temporal.PlainDateTime(year, month, day, hour, minutes, 0, 0, 0, 0, calendar);
+        return new Temporal.PlainDateTime(year, month, day, hour, minutes, 0, 0, 0, 0, 'iso8601');
     } catch (error) {
         return null;
     }
@@ -74,8 +71,8 @@ export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
             };
         }
 
-        const fromDateTime = convertDateTimeToTemporal(value.from);
-        const toDateTime = convertDateTimeToTemporal(value.to);
+        const fromDateTime = convertDateTimeToIsoTemporal(value.from);
+        const toDateTime = convertDateTimeToIsoTemporal(value.to);
         if (!fromDateTime || !toDateTime) {
             return {
                 valid: false,

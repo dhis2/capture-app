@@ -6,8 +6,8 @@ import { CompleteModal } from './CompleteModal';
 import { statusTypes as eventStatuses } from '../../../../../events/statusTypes';
 import { type RenderFoundation } from '../../../../../metaData';
 import { addEventSaveTypes } from '../../../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
-import { actions as LinkModes } from '../../../../WidgetRelatedStages/constants';
-import type { RelatedStageRefPayload } from '../../../../WidgetEnrollmentEventNew/Validated/validated.types';
+import { relatedStageActions } from '../../../../WidgetRelatedStages';
+import type { RelatedStageRefPayload } from '../../../../WidgetRelatedStages';
 
 type Props = {
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
@@ -15,7 +15,7 @@ type Props = {
     isCompleted?: boolean,
     eventId?: ?string,
     formFoundation: RenderFoundation,
-    relatedStageRef: { current?: ?RelatedStageRefPayload },
+    relatedStageRef?: { current: ?RelatedStageRefPayload },
     onSaveAndCompleteEnrollment: (
         eventId: string,
         dataEntryId: string,
@@ -60,7 +60,11 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
     ) => {
         const { linkMode } = relatedStageRef?.current?.getLinkedStageValues() ?? {};
         eventDataToSave.current = { itemId, dataEntryId, formFoundation, saveType };
-        if (askCompleteEnrollmentOnEventComplete && (isCompleted || saveType === addEventSaveTypes.COMPLETE) && linkMode !== LinkModes.ENTER_DATA) {
+        if (
+            askCompleteEnrollmentOnEventComplete &&
+            (isCompleted || saveType === addEventSaveTypes.COMPLETE) &&
+            linkMode !== relatedStageActions.ENTER_DATA
+        ) {
             setOpenCompleteModal(true);
         } else {
             onSave(itemId, dataEntryId, formFoundation, saveType);
