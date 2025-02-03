@@ -50,13 +50,19 @@ const createApiEventQueryArgs = (
 };
 
 const createApiTEIsQueryArgs =
-({ pageSize, programId: program }, trackedEntityIds): { [string]: any } => ({
-    program,
-    pageSize,
-    trackedEntity: trackedEntityIds,
-    fields:
-    'trackedEntities,createdAt,orgUnits,attributes[attribute,value],enrollments[enrollment,status,orgUnit,enrolledAt]',
-});
+({ pageSize, programId: program }, trackedEntityIds): { [string]: any } => {
+    const filterQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+        ? 'trackedEntities'
+        : 'trackedEntity';
+
+    return {
+        program,
+        pageSize,
+        [filterQueryParam]: trackedEntityIds,
+        fields:
+        'trackedEntity,createdAt,orgUnit,attributes[attribute,value],enrollments[enrollment,status,orgUnit,enrolledAt]',
+    };
+};
 
 export const getEventListData = async (
     rawQueryArgs: RawQueryArgs,

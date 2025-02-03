@@ -104,15 +104,25 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, cat
     if (!categories || !categoryCombinationId) {
         return null;
     }
+    const newUIDsSeparator = featureAvailable(FEATURES.newAocApiSeparator);
+    const { aCCQueryParam, aCOQueryParam }: { aCCQueryParam: string, aCOQueryParam: string } = featureAvailable(
+        FEATURES.newEntityFilterQueryParam,
+    )
+        ? {
+            aCCQueryParam: 'attributeCategoryCombo',
+            aCOQueryParam: 'attributeCategoryOptions',
+        }
+        : {
+            aCCQueryParam: 'attributeCc',
+            aCOQueryParam: 'attributeCos',
+        };
 
-    const useNewSeparator = featureAvailable(FEATURES.newAocApiSeparator);
     return {
-        attributeCc: categoryCombinationId,
-        attributeCategoryOptions: Object
+        [aCCQueryParam]: categoryCombinationId,
+        [aCOQueryParam]: Object
             .keys(categories)
-
             .map(key => categories[key])
-            .join(useNewSeparator ? ',' : ';'),
+            .join(newUIDsSeparator ? ',' : ';'),
     };
 };
 
