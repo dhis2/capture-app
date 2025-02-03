@@ -9,7 +9,7 @@ import { colors, spacersNum, Button, Tooltip } from '@dhis2/ui';
 import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
-import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
+import { convertClientToList } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
 
 const FocusTextField = withFocusSaver()(TextField);
@@ -100,7 +100,7 @@ const NoteSectionPlain = ({
     }, [handleAddNote, newNoteValue]);
 
     const NoteItem = ({ value, storedAt, createdBy }) => {
-        const localDateTime: string = (convertValueClientToView(storedAt, dataElementTypes.DATETIME): any);
+        const localDateTime: string = convertClientToList(fromServerDate(storedAt), dataElementTypes.DATETIME);
         return (
             <div data-test="note-item" className={cx(classes.item)}>
                 {/* TODO: add avatar */}

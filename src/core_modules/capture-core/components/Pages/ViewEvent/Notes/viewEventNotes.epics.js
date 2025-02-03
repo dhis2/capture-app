@@ -5,8 +5,6 @@ import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
-import { convertValue as convertListValue } from '../../../../converters/clientToList';
-import { dataElementTypes } from '../../../../metaData';
 import {
     actionTypes as viewEventNotesActionTypes,
     batchActionTypes as viewEventNotesBatchActionTypes,
@@ -41,15 +39,11 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
         map((action) => {
             const eventContainer = action.payload.eventContainer;
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
-            const convertedNotes = notes.map(note => ({
-                ...note,
-                storedDate: convertListValue(note.storedAt, dataElementTypes.DATETIME),
-            }));
             // Load event relationships
 
             return batchActions([
                 eventNotesLoaded(),
-                setNotes(noteKey, convertedNotes),
+                setNotes(noteKey, notes),
             ], viewEventNotesBatchActionTypes.LOAD_EVENT_NOTES_BATCH);
         }));
 
@@ -80,7 +74,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedDate: convertListValue(moment().toISOString(), dataElementTypes.DATETIME),
+                    storedAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss.SSS'),
                     clientId: uuid(),
                 };
                 return batchActions([

@@ -37,7 +37,7 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: Re
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
+                    storedAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss.SSS'),
                     clientId: uuid(),
                 };
 

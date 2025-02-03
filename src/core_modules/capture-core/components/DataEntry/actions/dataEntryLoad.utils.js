@@ -1,6 +1,6 @@
 // @flow
 import { convertValue } from '../../../converters/clientToForm';
-import { convertValue as convertListValue } from '../../../converters/clientToList';
+import { convertServerToClient } from '../../../converters';
 import { type RenderFoundation, dataElementTypes, DataElement } from '../../../metaData';
 
 import { getValidationError } from '../dataEntryField/internal/dataEntryField.utils';
@@ -88,7 +88,7 @@ export function getDataEntryNotes(
     const notes = clientValuesForDataEntry.notes || [];
     return notes.map((note, index) => ({
         ...note,
-        storedAt: convertListValue(note.storedAt, dataElementTypes.DATETIME),
+        storedAt: convertServerToClient(note.storedAt, dataElementTypes.DATETIME),
         key: index,
     }));
 }

@@ -36,7 +36,7 @@ export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
+                    storedAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss.SSS'),
                     clientId: uuid(),
                 };
 
