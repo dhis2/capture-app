@@ -1,3 +1,10 @@
+## [101.24.3](https://github.com/dhis2/capture-app/compare/v101.24.2...v101.24.3) (2025-02-04)
+
+
+### Bug Fixes
+
+* [DHIS2-15685][DHIS2-18326] View an event without selecting org unit in Tracker Programs ([#3926](https://github.com/dhis2/capture-app/issues/3926)) ([e093c71](https://github.com/dhis2/capture-app/commit/e093c714f535d26159a94f99707d4b3716b01928))
+
 ## [101.24.2](https://github.com/dhis2/capture-app/compare/v101.24.1...v101.24.2) (2025-02-04)
 
 
