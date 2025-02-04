@@ -7,6 +7,8 @@ const groups = [
     { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
 ];
 
+systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD' });
+
 describe('Event Event rules engine', () => {
     // these variables are shared between each test
     const constants = [
@@ -66,6 +68,7 @@ describe('Event Event rules engine', () => {
         {
             id: 'Z92dJO9gIje',
             dataElementId: 'sWoqcoByYmD',
+            valueType: 'BOOLEAN',
             displayName: 'womanSmoking',
             programId: 'lxAQ7Zs9VYR',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
@@ -74,6 +77,7 @@ describe('Event Event rules engine', () => {
         {
             id: 'omrL0gtPpDL',
             dataElementId: 'vANAXwtLwcT',
+            valueType: 'NUMBER',
             displayName: 'hemoglobin',
             programId: 'lxAQ7Zs9VYR',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
@@ -226,6 +230,7 @@ describe('Event rules engine', () => {
         {
             id: 'RycV5uDi66i',
             dataElementId: 'qrur9Dvnyt5',
+            valueType: 'INTEGER',
             displayName: 'age',
             programId: 'eBAyeGv0exc',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
@@ -234,6 +239,7 @@ describe('Event rules engine', () => {
         {
             id: 'zINGRka3g9N',
             dataElementId: 'oZg33kd9taw',
+            valueType: 'TEXT',
             displayName: 'gender',
             programId: 'eBAyeGv0exc',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
@@ -244,6 +250,7 @@ describe('Event rules engine', () => {
             displayName: 'Zj7UnCAulEk.vV9UWAZohSf',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'vV9UWAZohSf',
+            valueType: 'INTEGER_POSITIVE',
             programId: 'eBAyeGv0exc',
         },
         {
@@ -251,6 +258,7 @@ describe('Event rules engine', () => {
             displayName: 'Zj7UnCAulEk.GieVkTxp4HH',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'GieVkTxp4HH',
+            valueType: 'NUMBER',
             programId: 'eBAyeGv0exc',
         },
         {
@@ -258,6 +266,7 @@ describe('Event rules engine', () => {
             displayName: 'Zj7UnCAulEk.GieVkTxp4HH',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'GieVkTxp4HH',
+            valueType: 'NUMBER',
             programId: 'eBAyeGv0exc',
         },
     ];
@@ -277,7 +286,7 @@ describe('Event rules engine', () => {
             { oZg33kd9taw: 'Female', SWfdB5lX0fk: null },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -288,7 +297,7 @@ describe('Event rules engine', () => {
             [
                 { id: 'SWfdB5lX0fk', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' },
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -298,7 +307,7 @@ describe('Event rules engine', () => {
             { oZg33kd9taw: null, SWfdB5lX0fk: null },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -323,7 +332,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: null, GieVkTxp4HH: null, vV9UWAZohSf: null },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -333,7 +342,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: null, GieVkTxp4HH: null, vV9UWAZohSf: 85 },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'Infinity' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -353,7 +362,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: null, GieVkTxp4HH: 180, vV9UWAZohSf: 85 },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.234567901234566' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.23456790123457' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -363,7 +372,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: 40, GieVkTxp4HH: null, vV9UWAZohSf: null },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -373,7 +382,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: 40, GieVkTxp4HH: null, vV9UWAZohSf: 85 },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'Infinity' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -393,7 +402,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: 40, GieVkTxp4HH: 180, vV9UWAZohSf: 85 },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.234567901234566' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.23456790123457' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -956,12 +965,6 @@ describe('Event rules engine', () => {
             { JGnHr6WI3AY: 'Yes' },
             [
                 {
-                    type: 'ASSIGN',
-                    id: 'PFXeJV8d7ja',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
@@ -1020,23 +1023,17 @@ describe('Event rules engine', () => {
                 { type: 'HIDEFIELD', id: 'Z5z8vFQy0w0', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-            ],
-        ],
-        [
-            { QQLXTXVidW2: 'Yes', leqawmlPkI5: 'Yes,No' },
-            [
-                {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
                 {
                     type: 'ASSIGN',
                     id: 'PFXeJV8d7ja',
                     value: null,
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
+            ],
+        ],
+        [
+            { QQLXTXVidW2: 'Yes', leqawmlPkI5: 'Yes,No' },
+            [
                 {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
@@ -1095,23 +1092,23 @@ describe('Event rules engine', () => {
                     optionId: 'RCT079wdeKT',
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-            ],
-        ],
-        [
-            { QQLXTXVidW2: 'No', leqawmlPkI5: 'Yes,No' },
-            [
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
                 {
                     type: 'ASSIGN',
                     id: 'PFXeJV8d7ja',
                     value: null,
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
-                {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: 'Probable Case',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
+            ],
+        ],
+        [
+            { QQLXTXVidW2: 'No', leqawmlPkI5: 'Yes,No' },
+            [
                 {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
@@ -1171,11 +1168,82 @@ describe('Event rules engine', () => {
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'ASSIGN',
+                    id: 'PFXeJV8d7ja',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: 'Probable Case',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
             ],
         ],
         [
             { QQLXTXVidW2: 'Unknown' },
             [
+                {
+                    type: 'HIDEOPTION',
+                    id: 'ovY6E8BSdto',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'MkeWrqeqZXL',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'ovY6E8BSdto',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'fPV0gQ8ds6D',
+                },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'JGnHr6WI3AY',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'p8htbyJHydl',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'CUbZcLm9LyN',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'dUeRcF2cApV',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'bYt4why1tL3',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'xBoo6HyaYcd',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'RCT079wdeKT',
+                },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 {
                     type: 'ASSIGN',
                     id: 'Z5z8vFQy0w0',
@@ -1188,76 +1256,11 @@ describe('Event rules engine', () => {
                     value: null,
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'ovY6E8BSdto',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'MkeWrqeqZXL',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'ovY6E8BSdto',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'fPV0gQ8ds6D',
-                },
-                { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'JGnHr6WI3AY',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'p8htbyJHydl',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'CUbZcLm9LyN',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                { type: 'HIDEFIELD', id: 'jBBkFuPKctq', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'dUeRcF2cApV',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'bYt4why1tL3',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'xBoo6HyaYcd',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'RCT079wdeKT',
-                },
-                { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
             ],
         ],
         [
             { CUbZcLm9LyN: 'Yes' },
             [
-                {
-                    type: 'ASSIGN',
-                    id: 'PFXeJV8d7ja',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
                 {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
@@ -1317,23 +1320,17 @@ describe('Event rules engine', () => {
                 },
                 { type: 'HIDEFIELD', id: 'Z5z8vFQy0w0', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-            ],
-        ],
-        [
-            { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Inconclusive' },
-            [
                 {
                     type: 'ASSIGN',
                     id: 'PFXeJV8d7ja',
                     value: null,
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
-                {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: 'Probable Case',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
+            ],
+        ],
+        [
+            { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Inconclusive' },
+            [
                 {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
@@ -1392,11 +1389,81 @@ describe('Event rules engine', () => {
                     optionId: 'RCT079wdeKT',
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'ASSIGN',
+                    id: 'PFXeJV8d7ja',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: 'Probable Case',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
             ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Positive' },
             [
+                {
+                    type: 'HIDEOPTION',
+                    id: 'ovY6E8BSdto',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'MkeWrqeqZXL',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'ovY6E8BSdto',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'fPV0gQ8ds6D',
+                },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'JGnHr6WI3AY',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'p8htbyJHydl',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'CUbZcLm9LyN',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'dUeRcF2cApV',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'bYt4why1tL3',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'xBoo6HyaYcd',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'RCT079wdeKT',
+                },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 {
                     type: 'ASSIGN',
                     id: 'PFXeJV8d7ja',
@@ -1409,82 +1476,12 @@ describe('Event rules engine', () => {
                     value: 'Laboratory Confirmed Case',
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'ovY6E8BSdto',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'MkeWrqeqZXL',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'ovY6E8BSdto',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'fPV0gQ8ds6D',
-                },
-                { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'JGnHr6WI3AY',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'p8htbyJHydl',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'CUbZcLm9LyN',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                { type: 'HIDEFIELD', id: 'jBBkFuPKctq', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'dUeRcF2cApV',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'bYt4why1tL3',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'xBoo6HyaYcd',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'RCT079wdeKT',
-                },
-                { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
             ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Negative' },
             [
                 {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: 'Suspected Case',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
-                    type: 'ASSIGN',
-                    id: 'PFXeJV8d7ja',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
@@ -1542,24 +1539,24 @@ describe('Event rules engine', () => {
                     optionId: 'RCT079wdeKT',
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: 'Suspected Case',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
+                {
+                    type: 'ASSIGN',
+                    id: 'PFXeJV8d7ja',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
             ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Unknown' },
             [
                 {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: 'Suspected Case',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
-                    type: 'ASSIGN',
-                    id: 'PFXeJV8d7ja',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
@@ -1617,6 +1614,18 @@ describe('Event rules engine', () => {
                     optionId: 'RCT079wdeKT',
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: 'Suspected Case',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
+                {
+                    type: 'ASSIGN',
+                    id: 'PFXeJV8d7ja',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
             ],
         ],
     ])('where different fields are hidden', (currentEvent, expected) => {
@@ -1677,7 +1686,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     id: 'SYAL0GIDnxI',
                     displayContent: 'display age = ',
-                    data: 'd2:hasValue(#{age}) && #{age}',
+                    data: '#{age}',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -1691,7 +1700,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     id: 'JXssEpbJdO2',
                     displayContent: 'd2:right(#{age}, 3) = ',
-                    data: 'd2:hasValue(#{age}) && d2:right(#{age}, 3)',
+                    data: 'd2:right(#{age}, 3)',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -1705,7 +1714,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     id: 'k07KnI11Sf4',
                     displayContent: 'd2:left(#{age}, 3) = ',
-                    data: 'd2:hasValue(#{age}) && d2:left(#{age}, 3)',
+                    data: 'd2:left(#{age}, 3)',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -1835,20 +1844,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
-                {
-                    id: 'enZhulwjMED',
-                    displayContent: "d2:condition('1 == 2', 'equal', 'not equal') = ",
-                    data: "d2:condition('1 == 2', 'equal', 'not equal')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'i2UOFxZJo4a',
-                    displayContent: "d2:condition('2 == 2', 'equal', 'not equal') = ",
-                    data: "d2:condition('2 == 2', 'equal', 'not equal')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
             ],
         },
     ];
@@ -1914,11 +1909,6 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = " },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
                     displayText: { id: 'vQCRnX6w9pM', message: 'd2:oizp( -10000000 ) = 0' },
                 },
                 { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'SYAL0GIDnxI', message: 'display age =  ' } },
@@ -1931,11 +1921,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
                     displayText: { id: 'JXssEpbJdO2', message: 'd2:right(#{age}, 3) =  ' },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'o0LLNIYsliy', message: "d2:monthsBetween( '2020-01-28', V{event_date}) =  " },
                 },
                 {
                     type: 'DISPLAYTEXT',
@@ -1979,11 +1964,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
                     displayText: { id: 'QpeF2WDjwIV', message: "d2:addDays( '2020-01-12', 5 ) =  2020-01-17" },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'WJTjezLR4cJ', message: "d2:weeksBetween('2020-01-28', V{event_date} ) =  " },
                 },
                 {
                     type: 'DISPLAYTEXT',
@@ -2036,17 +2016,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  ' },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
+                    displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  false' },
                 },
             ],
         ],
@@ -2188,16 +2158,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     id: 'feedback',
                     displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  true' },
                 },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
-                },
             ],
         ],
         [
@@ -2338,16 +2298,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     id: 'feedback',
                     displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  true' },
                 },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
-                },
             ],
         ],
     ])('where functions take place', (currentEvent, expected) => {
@@ -2468,7 +2418,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'QJlZHo0GoVK', message: "d2:zScoreWFH( 100, 20, 'F' )  =  2.84" },
+                    displayText: { id: 'QJlZHo0GoVK', message: "d2:zScoreWFH( 100, 20, 'F' )  =  3" },
                 },
                 {
                     type: 'DISPLAYTEXT',
@@ -2835,7 +2785,7 @@ describe('Assign effects', () => {
             },
         ];
         const programRuleVariables = [];
-        systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD' });
+
         // when
         const rulesEffects = rulesEngine.getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
@@ -2851,12 +2801,6 @@ describe('Assign effects', () => {
             { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: '10', targetDataType: 'dataElement' },
             { type: 'ASSIGN', id: 'oZg33kd9taw', value: 'false', targetDataType: 'dataElement' },
             { type: 'ASSIGN', id: 'oZ3fhkd9taw', value: '', targetDataType: 'dataElement' },
-            {
-                id: 'hrur9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: 'false',
-            },
             {
                 id: 'g67r9Dvnyt5',
                 targetDataType: 'dataElement',
@@ -2879,13 +2823,7 @@ describe('Assign effects', () => {
                 id: 'lowr9Dvnyt5',
                 targetDataType: 'dataElement',
                 type: 'ASSIGN',
-                value: 34535353,
-            },
-            {
-                id: 'kht29Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: false,
+                value: '34535353',
             },
             {
                 id: 'hyrt9Dvnyt5',
@@ -2898,15 +2836,9 @@ describe('Assign effects', () => {
                 targetDataType: 'dataElement',
                 type: 'ASSIGN',
                 value: {
-                    date: 'Invalid date',
-                    time: 'Invalid date',
+                    date: '1985-01-01',
+                    time: '00:00',
                 },
-            },
-            {
-                id: 'sldkjfjfjfe',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: false,
             },
             {
                 id: 'kyt49Dvnyt5',
@@ -2951,12 +2883,6 @@ describe('Assign effects', () => {
                 value: 'Female,Male',
             },
             {
-                id: 'plor9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: '',
-            },
-            {
                 id: 'frg39Dvnyt5',
                 targetDataType: 'dataElement',
                 type: 'ASSIGN',
@@ -2965,84 +2891,6 @@ describe('Assign effects', () => {
                     longitude: 434,
                 },
             },
-            {
-                id: 'kjyu9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: '',
-            },
-            {
-                id: 'kjfr9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: {
-                    date: 'Invalid date',
-                    days: 'NaN',
-                    months: 'NaN',
-                    years: 'NaN',
-                },
-            },
-            {
-                id: 'lqwr9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: false,
-            },
-            {
-                id: 'mjus9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: '',
-            },
-            {
-                id: 'fgrr9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: '',
-            },
-        ]);
-    });
-
-    test('Assign effect with the program rule variable id found in the content key', () => {
-        const programRules = [
-            {
-                id: 'cq1dwUY4lVU',
-                condition: 'true',
-                displayName: 'testing assign actions',
-                programId: 'eBAyeGv0exc',
-                programRuleActions: [
-                    {
-                        id: 'lJOYxhjupx2',
-                        data: 'rowExpresion',
-                        dataElementId: 'qrur9Dvnyt5',
-                        programRuleActionType: 'ASSIGN',
-                        content: 'Hemoglobin value lower than normal RycV5uDi66i',
-                    },
-                ],
-            },
-        ];
-        const programRuleVariables = [
-            {
-                id: 'RycV5uDi66i',
-                dataElementId: 'qrur9Dvnyt5',
-                displayName: 'age',
-                programId: 'eBAyeGv0exc',
-                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
-                useNameForOptionSet: true,
-            },
-        ];
-        // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
-            programRulesContainer: { programRuleVariables, programRules, constants },
-            currentEvent,
-            dataElements: dataElementsInProgram,
-            selectedOrgUnit: orgUnit,
-            optionSets,
-        });
-
-        // then
-        expect(rulesEffects).toEqual([
-            { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: 'false', targetDataType: 'dataElement' },
         ]);
     });
 });

@@ -7,7 +7,7 @@ import type {
     OptionSets,
     ProgramRulesContainer,
     DataElements,
-} from '@dhis2/rules-engine-javascript';
+} from '../../../../rules/RuleEngine';
 import { cleanUpDataEntry } from '../../../DataEntry';
 import { RenderFoundation } from '../../../../metaData';
 import { getOpenDataEntryActions, cleanTeiModal } from '../dataEntry.actions';
@@ -24,6 +24,7 @@ import {
 import type { Geometry } from '../helpers/types';
 import { getRulesActionsForTEI } from '../ProgramRules';
 import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
+import type { EnrollmentData } from '../Types';
 
 export const useLifecycle = ({
     programAPI,
@@ -49,7 +50,7 @@ export const useLifecycle = ({
     // The problem is the helper methods that take the entire state object.
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
-    const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
+    const enrollment: EnrollmentData = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const dataElements: DataElements = useDataElements(programAPI);
     const otherEvents = useEvents(enrollment, dataElements);
     const orgUnit: ?CoreOrgUnit = useCoreOrgUnit(orgUnitId).orgUnit;
@@ -100,6 +101,7 @@ export const useLifecycle = ({
                     dataElements,
                     enrollmentData: enrollment,
                     userRoles,
+                    programName: programAPI.displayName,
                 }),
             );
         }
@@ -119,6 +121,7 @@ export const useLifecycle = ({
         enrollment,
         clientGeometryValues,
         userRoles,
+        programAPI,
     ]);
 
     return {
@@ -132,5 +135,6 @@ export const useLifecycle = ({
         dataElements,
         enrollment,
         userRoles,
+        programName: programAPI.displayName,
     };
 };

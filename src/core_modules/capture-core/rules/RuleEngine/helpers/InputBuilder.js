@@ -47,7 +47,7 @@ const programRuleVariableSourceIdExtractor = {
     DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE: variable => variable.dataElementId,
     DATAELEMENT_PREVIOUS_EVENT: variable => variable.dataElementId,
     TEI_ATTRIBUTE: variable => variable.trackedEntityAttributeId,
-    CALCULATED_VALUE: () => '',
+    CALCULATED_VALUE: variable => '', // eslint-disable-line
 };
 
 const eventMainKeys = new Set([
@@ -65,6 +65,20 @@ const eventMainKeys = new Set([
     'scheduledAt',
     'completedAt',
 ]);
+
+const ruleValueTypeMap = {
+    [typeKeys.BOOLEAN]: RuleValueType.BOOLEAN,
+    [typeKeys.TRUE_ONLY]: RuleValueType.BOOLEAN,
+    [typeKeys.DATE]: RuleValueType.DATE,
+    [typeKeys.DATETIME]: RuleValueType.DATE,
+    [typeKeys.AGE]: RuleValueType.DATE,
+    [typeKeys.INTEGER]: RuleValueType.NUMERIC,
+    [typeKeys.INTEGER_POSITIVE]: RuleValueType.NUMERIC,
+    [typeKeys.INTEGER_NEGATIVE]: RuleValueType.NUMERIC,
+    [typeKeys.INTEGER_ZERO_OR_POSITIVE]: RuleValueType.NUMERIC,
+    [typeKeys.NUMBER]: RuleValueType.NUMERIC,
+    [typeKeys.PERCENTAGE]: RuleValueType.NUMERIC,
+};
 
 const convertAssignAction = (action: ProgramRuleAction) => {
     const {
@@ -141,28 +155,17 @@ const convertProgramRule = (rule: ProgramRule) => {
     );
 };
 
-const ruleValueTypeMap = {
-    [typeKeys.BOOLEAN]: RuleValueType.BOOLEAN,
-    [typeKeys.TRUE_ONLY]: RuleValueType.BOOLEAN,
-    [typeKeys.DATE]: RuleValueType.DATE,
-    [typeKeys.DATETIME]: RuleValueType.DATE,
-    [typeKeys.AGE]: RuleValueType.DATE,
-    [typeKeys.INTEGER]: RuleValueType.NUMERIC,
-    [typeKeys.INTEGER_POSITIVE]: RuleValueType.NUMERIC,
-    [typeKeys.INTEGER_NEGATIVE]: RuleValueType.NUMERIC,
-    [typeKeys.INTEGER_ZERO_OR_POSITIVE]: RuleValueType.NUMERIC,
-    [typeKeys.NUMBER]: RuleValueType.NUMERIC,
-    [typeKeys.PERCENTAGE]: RuleValueType.NUMERIC,
-};
-
 const convertRuleVariable = (variable: ProgramRuleVariable, optionSets: KotlinOptionSets) => {
     const {
-        programRuleVariableSourceType: type,
+        programRuleVariableSourceType,
         displayName: name,
         useNameForOptionSet,
         valueType: fieldType,
         programStageId: programStage,
     } = variable;
+
+    const type = programRuleVariableSourceIdExtractor[programRuleVariableSourceType]
+        ? programRuleVariableSourceType : 'CALCULATED_VALUE';
 
     const field = programRuleVariableSourceIdExtractor[type](variable);
 
@@ -233,14 +236,13 @@ export class InputBuilder {
         (dateString ? LocalDate.parse(this.processValue(dateString, typeKeys.DATE)) : defaultValue);
 
     convertDataElementValue = (id: string, rawValue: any) =>
-        String(this.dataElements[id]
-            ? this.processValue(rawValue, this.dataElements[id].valueType)
-            : rawValue);
+        this.convertDataValue(rawValue, this.dataElements[id]?.valueType);
 
     convertTrackedEntityAttributeValue = (id: string, rawValue: any) =>
-        String(this.trackedEntityAttributes[id]
-            ? this.processValue(rawValue, this.trackedEntityAttributes[id].valueType)
-            : rawValue);
+        this.convertDataValue(rawValue, this.trackedEntityAttributes[id]?.valueType);
+
+    convertDataValue = (rawValue: any, valueType: ?string) =>
+        String(valueType ? this.processValue(rawValue, valueType) : rawValue);
 
     convertEvent = (eventData: EventData) => {
         const {
@@ -254,11 +256,12 @@ export class InputBuilder {
             completedAt: completedDate,
         } = eventData;
 
-        const eventDate = occurredAt ? Instant.parse(occurredAt) : Instant.now();
-        const createdDate = createdAt ? Instant.parse(createdAt + 'Z') : Instant.now();
+        const eventDate = occurredAt ? Instant.parse(occurredAt) : null;
+        const createdDate = createdAt ? Instant.parse(createdAt) : Instant.now();
         const dataValues = Object
             .keys(eventData)
             .filter(key => !eventMainKeys.has(key))
+            .filter(key => eventData[key] !== null)
             .map(key =>
                 new RuleDataValue(
                     key,
@@ -285,34 +288,31 @@ export class InputBuilder {
         selectedEntity,
     }: {
         selectedEnrollment: Enrollment,
-        selectedEntity: TEIValues,
+        selectedEntity: ?TEIValues,
     }) => {
         const {
             enrollmentId: enrollment,
             enrolledAt: enrollmentDate,
             occurredAt: incidentDate,
+            programName,
+            enrollmentStatus,
         } = selectedEnrollment;
 
-        const attributeValues = Object
+        const attributeValues = selectedEntity ? Object
             .keys(selectedEntity)
             .map(key => new RuleAttributeValue(
                 key,
                 this.convertTrackedEntityAttributeValue(key, selectedEntity[key]),
-            ));
-
-        // TODO:
-        // `programName` and `enrollmentStatus` are program indicator specific variables,
-        // but since Capture supports program indicators, these should be added as part
-        // of `Enrollment`.
+            )) : null;
 
         const convertDate = (dateString: ?string) => this.toLocalDate(dateString, LocalDate.now());
 
         return new RuleEnrollmentJs(
             enrollment,
-            '',                  // programName placeholder value
+            programName || '',
             convertDate(incidentDate),
             convertDate(enrollmentDate),
-            RuleEnrollmentStatus.ACTIVE,            // enrollmentStatus placeholder value
+            enrollmentStatus ? RuleEnrollmentStatus[enrollmentStatus] : RuleEnrollmentStatus.ACTIVE,
             this.selectedOrgUnit.id,
             this.selectedOrgUnit.code,
             attributeValues,
@@ -331,7 +331,7 @@ export class InputBuilder {
         const { programRules, programRuleVariables, constants } = programRulesContainer;
 
         const kotlinOptionSets = Object.keys(optionSets).reduce((acc, key) => {
-            acc[key] = optionSets[key].options.map(convertOption);
+            acc[key] = (optionSets[key].options || []).map(convertOption);
             return acc;
         }, {});
 

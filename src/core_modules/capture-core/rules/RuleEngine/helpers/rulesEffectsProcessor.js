@@ -156,7 +156,7 @@ export function getRulesEffectsProcessor(
                 dataElements[effect.field],
                 rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
             );
-        } else if (effect.attributeType == attributeTypes.TRACKED_ENTITY_ATTRIBUTE && trackedEntityAttributes) {
+        } else if (effect.attributeType === attributeTypes.TRACKED_ENTITY_ATTRIBUTE && trackedEntityAttributes) {
             return createAssignValueEffect(
                 effect.data,
                 trackedEntityAttributes[effect.field],
@@ -177,7 +177,7 @@ export function getRulesEffectsProcessor(
             effect,
             () => ({
                 type: effectActions.HIDE_FIELD,
-                content: effect.content,
+                ...(effect.content ? { content: effect.content } : {}),
             }),
         );
         return getOutputEffectsWithPreviousValueCheck({

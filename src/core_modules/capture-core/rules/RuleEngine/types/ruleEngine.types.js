@@ -54,6 +54,8 @@ export type Enrollment = {
     +enrolledAt?: string,
     +occurredAt?: string,
     +enrollmentId?: string,
+    +programName?: string,
+    +enrollmentStatus?: string,
 };
 
 export type Option = {
@@ -135,7 +137,7 @@ export type CompulsoryEffect = OutputEffect & {
 
 };
 
-type ProgramRuleData = {
+type ProgramRuleData = {|
     name: string,
     location: ?string,
     dataElementId: ?string,
@@ -145,7 +147,7 @@ type ProgramRuleData = {
     optionGroupId: ?string,
     optionId: ?string,
     style?: ?Object,
-};
+|};
 
 export type ProgramRuleEffect = {
     id: string,
@@ -154,6 +156,7 @@ export type ProgramRuleEffect = {
     displayContent: ?string,
     data: any,
     field: ?string,
+    attributeType: ?string,
     ...ProgramRuleData,
 };
 
@@ -191,7 +194,7 @@ export type DataElement = {
     name: string,
 };
 
-export type DataElements = { [elementId: string]: DataElement };
+export type DataElements = { [elementId: ?string]: DataElement };
 
 export type RuleVariable = {
     variableValue: any,
@@ -214,7 +217,7 @@ export type TrackedEntityAttribute = {
 };
 
 export type TrackedEntityAttributes = {
-    [id: string]: TrackedEntityAttribute
+    [id: ?string]: TrackedEntityAttribute
 };
 
 export type OrgUnitGroup = $ReadOnly<{|
@@ -238,7 +241,7 @@ export type RulesEngineInput = {|
     selectedEntity?: ?TEIValues,
     trackedEntityAttributes?: ?TrackedEntityAttributes,
     selectedEnrollment?: ?Enrollment,
-    selectedOrgUnit: OrgUnit,
+    selectedOrgUnit: ?OrgUnit,
     selectedUserRoles?: ?Array<string>,
     optionSets: OptionSets,
 |}

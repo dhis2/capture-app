@@ -43,7 +43,10 @@ export class RuleEngine {
         selectedUserRoles,
         optionSets,
     }: RulesEngineInput): OutputEffects {
-        if (!programRulesContainer.programRules) return [];
+        if (!programRulesContainer.programRules ||
+            !selectedOrgUnit ||
+            !currentEvent && !selectedEnrollment) return [];
+
         const inputBuilder = new InputBuilder(this.inputConverter, dataElements, trackedEntityAttributes, selectedOrgUnit);
         const executionContext = inputBuilder.buildRuleEngineContext({
             programRulesContainer,
@@ -51,12 +54,13 @@ export class RuleEngine {
             selectedOrgUnit,
             optionSets,
         });
-        const enrollment = selectedEnrollment && selectedEntity ?
+        const enrollment = selectedEnrollment ?
             inputBuilder.buildEnrollment({
                 selectedEnrollment,
                 selectedEntity,
                 selectedOrgUnit,
             }) : null;
+
         const events = otherEvents ?
             otherEvents.map(inputBuilder.convertEvent) :
             [];
