@@ -1,11 +1,9 @@
 // @flow
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, spacers, colors } from '@dhis2/ui';
-import { useLocation } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 
 type Props = {
     onResetOrgUnit: () => void,
@@ -23,27 +21,14 @@ const styles = () => ({
     },
 });
 
-const EmptyProgramsPlain = ({ onResetOrgUnit, classes }: Props) => {
-    const { navigate } = useNavigate();
-    const { pathname } = useLocation();
-    const { enrollmentId, teiId, orgUnitId } = useLocationQuery();
+const EmptyProgramsPlain = ({ onResetOrgUnit, classes }: Props) => (
+    <div className={classes.filterWarning}>
+        <span>{i18n.t('No programs available.')}</span>
+        <Button small secondary onClick={() => onResetOrgUnit()} dataTest="program-selector-no-programs">
+            {i18n.t('Show all')}
+        </Button>
+    </div>
+);
 
-    useEffect(() => {
-        const navigateToEventRegistrationPage = () => {
-            navigate(`${pathname}?${buildUrlQueryString({ enrollmentId, teiId, orgUnitId })}`);
-        };
-
-        navigateToEventRegistrationPage();
-    }, [navigate, pathname, enrollmentId, teiId, orgUnitId]);
-
-    return (
-        <div className={classes.filterWarning}>
-            <span>{i18n.t('No programs available.')}</span>
-            <Button small secondary onClick={() => onResetOrgUnit()} dataTest="program-selector-no-programs">
-                {i18n.t('Show all')}
-            </Button>
-        </div>
-    );
-};
 
 export const EmptyPrograms = withStyles(styles)(EmptyProgramsPlain);
