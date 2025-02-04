@@ -104,7 +104,7 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, cat
     if (!categories || !categoryCombinationId) {
         return null;
     }
-    const newUIDsSeparator = featureAvailable(FEATURES.newAocApiSeparator);
+    const newUIDsSeparator = featureAvailable(FEATURES.newUIDsSeparator);
     const { aCCQueryParam, aCOQueryParam }: { aCCQueryParam: string, aCOQueryParam: string } = featureAvailable(
         FEATURES.newEntityFilterQueryParam,
     )

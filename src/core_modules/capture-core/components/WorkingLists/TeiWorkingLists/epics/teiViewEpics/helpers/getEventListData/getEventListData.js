@@ -88,7 +88,7 @@ export const getEventListData = async (
         };
     }
 
-    const useNewSeparator = featureAvailable(FEATURES.newAocApiSeparator);
+    const useNewSeparator = featureAvailable(FEATURES.newUIDsSeparator);
 
     const trackedEntityIds = apiEvents
         .reduce((acc, { trackedEntity }) => (acc.includes(trackedEntity) ? acc : [...acc, trackedEntity]), [])

@@ -1,5 +1,5 @@
 // @flow
-import { pipe, FEATURES, featureAvailable } from 'capture-core-utils';
+import { pipe } from 'capture-core-utils';
 import { convertDataTypeValueToRequest } from './basicDataTypeConverters';
 import { typeof dataElementTypes } from '../../../../../../../metaData';
 import type { OptionSetFilterData } from '../../../../../../ListView';
@@ -11,7 +11,7 @@ export function convertOptionSet(
 ) {
     return pipe(
         values => values.map(filterValue => escapeString(convertDataTypeValueToRequest(filterValue, type))),
-        values => values.join(featureAvailable(FEATURES.newAocApiSeparator) ? ',' : ';'),
+        values => values.join(';'),
         valueString => `in:${valueString}`,
     )(sourceValue.values);
 }

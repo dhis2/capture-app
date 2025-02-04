@@ -1,5 +1,5 @@
 // @flow
-import { pipe, FEATURES, featureAvailable } from 'capture-core-utils';
+import { pipe } from 'capture-core-utils';
 import type { BooleanFilterData } from '../../../../../ListView';
 
 const booleanFilterValues = {
@@ -12,10 +12,7 @@ export function convertBoolean(filter: BooleanFilterData) {
         values => values.map(filterValue => booleanFilterValues[filterValue]),
         values =>
             (values.length > 1 ?
-                {
-                    valueString: values.join(featureAvailable(FEATURES.newAocApiSeparator) ? ',' : ';'),
-                    single: false,
-                } :
+                { valueString: values.join(';'), single: false } :
                 { valueString: values[0], single: true }
             ),
         ({ valueString, single }) => (single ? `eq:${valueString}` : `in:${valueString}`),
