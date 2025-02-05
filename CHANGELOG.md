@@ -1,3 +1,10 @@
+# [101.25.0](https://github.com/dhis2/capture-app/compare/v101.24.3...v101.25.0) (2025-02-05)
+
+
+### Features
+
+* [DHIS2-8087] Add empty launch page ([#3940](https://github.com/dhis2/capture-app/issues/3940)) ([66d949b](https://github.com/dhis2/capture-app/commit/66d949ba373cea3d3962a5d41f59be9fe3187638))
+
 ## [101.24.3](https://github.com/dhis2/capture-app/compare/v101.24.2...v101.24.3) (2025-02-04)
 
 
