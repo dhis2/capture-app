@@ -58,6 +58,7 @@ export const useDeleteEnrollments = ({
                 return ({
                     fields: 'trackedEntity,enrollments[enrollment,program,status]',
                     [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
+                    pageSize: 100,
                     program: programId,
                 });
             },

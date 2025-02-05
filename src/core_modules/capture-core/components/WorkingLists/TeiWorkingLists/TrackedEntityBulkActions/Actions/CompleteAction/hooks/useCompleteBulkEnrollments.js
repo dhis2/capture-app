@@ -125,6 +125,7 @@ export const useCompleteBulkEnrollments = ({
                     program: programId,
                     fields: 'trackedEntity,enrollments[*,!attributes,!completedBy,!completedAt,!relationships,events[*,!dataValues,!completedAt,!completedBy,!relationships]]',
                     [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
+                    pageSize: 100,
                 });
             },
         },
