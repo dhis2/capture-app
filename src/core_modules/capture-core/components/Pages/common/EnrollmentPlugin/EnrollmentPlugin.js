@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'capture-core/utils/routing';
 
 type EnrollmentPluginProps = {|
     enrollmentId: string,
@@ -15,7 +15,7 @@ type EnrollmentPluginProps = {|
 
 export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPluginProps) => {
     const [pluginWidth, setPluginWidth] = useState(undefined);
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const containerRef = useRef<?HTMLDivElement>();
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export const EnrollmentPlugin = ({ pluginSource, ...passOnProps }: EnrollmentPlu
             <Plugin
                 pluginSource={pluginSource}
                 width={pluginWidth}
-                navigate={history.push}
+                navigate={navigate}
                 {...passOnProps}
             />
         </div>

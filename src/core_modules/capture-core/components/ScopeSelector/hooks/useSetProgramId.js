@@ -1,19 +1,19 @@
 // @flow
-import { useHistory, useLocation } from 'react-router-dom';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useLocation } from 'react-router-dom';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 
 export const useSetProgramId = () => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { pathname } = useLocation();
     const { selectedTemplateId, ...restOfQueries } = useLocationQuery();
 
 
     const setProgramId = (programId: string, pageToPush: string = pathname) => {
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId })}`);
+        navigate(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId })}`);
     };
 
     const setProgramIdAndResetEnrollmentContext = (programId: string, pageToPush: string = pathname) => {
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, enrollmentId: 'AUTO' })}`);
+        navigate(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, enrollmentId: 'AUTO' })}`);
     };
 
     return {

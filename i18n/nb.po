@@ -2,14 +2,14 @@
 # Translators:
 # Merethe Wollan Blisten, 2024
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2024
-# Karoline Tufte Lien <karoline@dhis2.org>, 2024
+# Karoline Tufte Lien <karoline@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-12-05T11:39:04.447Z\n"
+"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2024\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,6 +109,24 @@ msgstr "Dato for registrering"
 
 msgid "Last updated"
 msgstr "Sist oppdatert"
+
+msgid "Lat"
+msgstr ""
+
+msgid "Long"
+msgstr ""
+
+msgid "lat"
+msgstr ""
+
+msgid "long"
+msgstr ""
+
+msgid "Show less"
+msgstr "Vis mindre"
+
+msgid "Show more"
+msgstr "Vis mer"
 
 msgid "error encountered during field validation"
 msgstr "En feil oppsto under feltvalidering"
@@ -219,8 +237,10 @@ msgstr "Aktiv"
 msgid "Completed"
 msgstr "Fullført"
 
-msgid "Please add or cancel note before saving the event"
-msgstr "Legg til eller avbryt notat før lagring"
+msgid "Please add or cancel the note before saving the event"
+msgstr ""
+"Du må legge til eller avbryt registreringen i notatet før hendelsen kan "
+"lagres. "
 
 msgid "Save and add another"
 msgstr "Lagre og legg til en til"
@@ -705,9 +725,6 @@ msgstr "Det oppsto en feil ved åpning av siden"
 msgid "There was an error loading the page"
 msgstr "Det oppsto en feil under lasting av siden"
 
-msgid "Choose an organisation unit to start reporting"
-msgstr "Velg en organisasjonsenhet for å starte rapportering"
-
 msgid "Program stage is invalid"
 msgstr "Programfase er ugyldig"
 
@@ -762,6 +779,9 @@ msgid ""
 "selections"
 msgstr "Du har ikke tilgang til å lage en {{trackedEntityName}} her"
 
+msgid "Choose an organisation unit to start reporting"
+msgstr "Velg en organisasjonsenhet for å starte rapportering"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Velg {{missingCategories}} for å starte rapportering"
 
@@ -787,6 +807,9 @@ msgstr "Lagre {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Lagre {{trackedEntityName}}"
+
+msgid "Enter details now is not available when creating a relationship"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
@@ -1226,16 +1249,17 @@ msgstr "Legg til koordinater"
 msgid "Add area"
 msgstr "Legg til område"
 
-msgid "Please add or cancel the note before saving the event"
+msgid "Please provide an valid organisation unit"
 msgstr ""
-"Du må legge til eller avbryt registreringen i notatet før hendelsen kan "
-"lagres. "
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisasjonsenheten kunne ikke hentes. Prøv igjen senere."
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Lagrer i {{stageName}} for {{programName}} i {{orgUnitName}}"
+
+msgid "Saving to {{stageName}} for {{programName}}"
+msgstr ""
 
 msgid "program or stage is invalid"
 msgstr "program eller fase er ugyldig"
@@ -1257,9 +1281,6 @@ msgstr "Advarsel"
 
 msgid "stage not found in rules execution"
 msgstr "fase ikke funnet i regelutførelse"
-
-msgid "Please provide an valid organisation unit"
-msgstr ""
 
 msgid "Delete event"
 msgstr "Slett hendelse"
@@ -1288,6 +1309,12 @@ msgstr "Skriv et notat om denne hendelsen"
 msgid "This event doesn't have any notes"
 msgstr "Denne hendelsen har ingen notater"
 
+msgid "after"
+msgstr "etter"
+
+msgid "before"
+msgstr "før"
+
 msgid "Schedule date info"
 msgstr "Informasjon for planlagt dato"
 
@@ -1308,12 +1335,6 @@ msgstr[0] ""
 msgstr[1] ""
 "Den planlagte datoen er {{count}} dager {{posisjon}} den foreslåtte datoen."
 
-msgid "after"
-msgstr "etter"
-
-msgid "before"
-msgstr "før"
-
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
@@ -1321,22 +1342,23 @@ msgstr[0] "Det er {{count}} planlagt hendelse i {{orgUnitName}} denne dagen."
 msgstr[1] ""
 "Det er {{count}} planlagte hendelser i {{orgUnitName}} denne dagen."
 
-msgid ""
-"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
-"Planlegger en hendelse i {{stageName}} for {{programName}} i {{orgUnitName}}"
+msgid "Schedule date / Due date"
+msgstr "Planlagt dato / Forfallsdato"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Oppgi en gyldig organisasjonsenhet"
 
 msgid "Schedule info"
 msgstr "Tidsplaninformasjon"
-
-msgid "Schedule date / Due date"
-msgstr "Planlagt dato / Forfallsdato"
 
 msgid "Event notes"
 msgstr "Hendelsesnotater"
 
 msgid "Write a note about this scheduled event"
 msgstr "Skriv et notat om denne planlagte hendelsen"
+
+msgid "Program or stage is invalid"
+msgstr ""
 
 msgid "Save note"
 msgstr "Lagre notat"
@@ -1404,8 +1426,8 @@ msgstr "{{trackedEntityTypeName}} profil"
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
 
-msgid "Link to an existing {{linkableStageLabel}}"
-msgstr "Link til eksisterende {{linkableStageLabel}}"
+msgid "Choose a {{linkableStageLabel}} event"
+msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Velg en {{linkableStageLabel}}"
@@ -1416,14 +1438,17 @@ msgstr "{{ linkableStageLabel }} er ikke repiterbar"
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} har ingen hendelser som kan kobles til"
 
+msgid "Actions - {{relationshipName}}"
+msgstr ""
+
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Uklare relasjoner, kontakt din systemadministrator"
 
 msgid "Enter details now"
 msgstr "Skriv inn detaljer "
 
-msgid "Link to an existing"
-msgstr "Koble til en eksisterende"
+msgid "Link to an existing event"
+msgstr ""
 
 msgid "Scheduled date"
 msgstr "Planlagt dato"
@@ -1433,9 +1458,6 @@ msgstr "Rapporteringsdato"
 
 msgid "Please enter a date"
 msgstr ""
-
-msgid "Please provide a valid organisation unit"
-msgstr "Oppgi en gyldig organisasjonsenhet"
 
 msgid "Please select a valid event"
 msgstr "Velg en gyldig hendelse"

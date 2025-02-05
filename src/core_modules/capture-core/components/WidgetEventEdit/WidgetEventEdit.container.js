@@ -9,7 +9,6 @@ import {
 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
-import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type { PlainProps, ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -69,7 +68,7 @@ const styles = {
     tooltip: { display: 'inline-flex' },
 };
 
-export const WidgetEventEditPlain = ({
+const WidgetEventEditPlain = ({
     eventStatus,
     initialScheduleDate,
     stage,
@@ -93,15 +92,12 @@ export const WidgetEventEditPlain = ({
 
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
-    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
+    const orgUnit = loadedValues?.orgUnit;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
-    if (error) {
-        return error.errorComponent;
-    }
 
     return orgUnit && loadedValues ? (
         <div className={classes.container}>
