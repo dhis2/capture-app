@@ -2,13 +2,12 @@
 import React, { useState, useMemo } from 'react';
 // $FlowFixMe
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router-dom';
 import { colors, spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
-import { buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
 
 const styles = {
     contentContainer: {
@@ -21,7 +20,7 @@ const styles = {
 
 const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes }) => {
     const [open, setOpen] = useState(true);
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
 
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
@@ -50,7 +49,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
     );
 
     const onNavigationFromQuickActions = (tab: string) => {
-        history.push(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
+        navigate(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
     };
 
     const ready = events !== undefined && stages !== undefined;

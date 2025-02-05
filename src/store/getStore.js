@@ -7,7 +7,6 @@ import { enableBatching } from 'redux-batched-actions';
 import { createLogger } from 'redux-logger';
 import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
 import { environments } from 'capture-core/constants/environments';
-import type { BrowserHistory, HashHistory } from 'history';
 import { createOffline } from '@redux-offline/redux-offline';
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
 import { getEffectReconciler, shouldDiscard, queueConfig } from 'capture-core/trackerOffline';
@@ -16,7 +15,7 @@ import { reducerDescriptions } from '../reducers/descriptions/trackerCapture.red
 import { epics } from '../epics/trackerCapture.epics';
 
 export function getStore(
-    history: BrowserHistory | HashHistory,
+    navigate: (path: string, scrollToTop?: boolean) => void,
     apiUtils: ApiUtilsWithoutHistory,
     onRehydrated: () => void) {
     const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
@@ -40,7 +39,7 @@ export function getStore(
     });
 
     const epicMiddleware = createEpicMiddleware({
-        dependencies: { ...apiUtils, history },
+        dependencies: { ...apiUtils, navigate },
     });
 
     const middleware = [epicMiddleware, offlineMiddleware];

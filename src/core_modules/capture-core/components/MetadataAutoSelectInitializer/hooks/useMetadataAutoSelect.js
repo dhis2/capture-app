@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { getUserStorageController, userStores } from '../../../storageControllers';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { useOrgUnitAutoSelect } from '../../../dataQueries';
 
 const getAllPrograms = () => {
@@ -17,6 +17,7 @@ const getAllPrograms = () => {
 export const useMetadataAutoSelect = () => {
     const [mounted, setMounted] = useState(false);
     const history = useHistory();
+    const { navigate } = useNavigate();
     const urlParams = useLocationQuery();
 
     const { data: programs, isLoading: loadingPrograms } = useIndexedDBQuery(
@@ -45,9 +46,9 @@ export const useMetadataAutoSelect = () => {
         }
 
         if (Object.keys(paramsToAdd).length) {
-            history.push(`?${buildUrlQueryString({ ...paramsToAdd })}`);
+            navigate(`?${buildUrlQueryString({ ...paramsToAdd })}`);
         }
-    }, [history, programs, searchOrgUnits]);
+    }, [navigate, programs, searchOrgUnits]);
 
     useEffect(() => {
         if (mounted) return;
