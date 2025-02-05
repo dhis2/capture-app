@@ -65,6 +65,7 @@ export const TopBar = ({
             onResetOrgUnitId={() => resetOrgUnitId()}
             isUserInteractionInProgress={isUserInteractionInProgress}
             onStartAgain={() => reset()}
+            isReadOnly
         >
             <SingleLockedSelect
                 displayOnly
