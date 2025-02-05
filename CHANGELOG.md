@@ -1,3 +1,10 @@
+## [101.25.1](https://github.com/dhis2/capture-app/compare/v101.25.0...v101.25.1) (2025-02-05)
+
+
+### Bug Fixes
+
+* [DHIS2-18571] add explicit pageSize=100 to fetch all enrollments ([#3942](https://github.com/dhis2/capture-app/issues/3942)) ([6f552ae](https://github.com/dhis2/capture-app/commit/6f552ae16c99bc7cf3d502f9316ffe4bad20b25c))
+
 # [101.25.0](https://github.com/dhis2/capture-app/compare/v101.24.3...v101.25.0) (2025-02-05)
 
 
