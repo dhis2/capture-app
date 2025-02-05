@@ -12,7 +12,7 @@ const like = (value: any, elementId: string) => `${elementId}:like:${escapeStrin
 
 
 const convertRange = (value: RangeValue, { id: elementId }: DataElement) => (
-    `${elementId}:ge:${value.from}:le:${value.to}`
+    `${elementId}:ge:${escapeString(String(value.from))}:le:${escapeString(String(value.to))}`
 );
 
 const convertString = (value: any, metaElement: DataElement) => {
