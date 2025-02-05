@@ -1,3 +1,10 @@
+## [101.25.2](https://github.com/dhis2/capture-app/compare/v101.25.1...v101.25.2) (2025-02-05)
+
+
+### Bug Fixes
+
+* [DHIS2-16871] Change Separator for Versions ([#3948](https://github.com/dhis2/capture-app/issues/3948)) ([eec4916](https://github.com/dhis2/capture-app/commit/eec4916ff144c7e53b235336e14b46c76b3feac4))
+
 ## [101.25.1](https://github.com/dhis2/capture-app/compare/v101.25.0...v101.25.1) (2025-02-05)
 
 
