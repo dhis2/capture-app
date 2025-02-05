@@ -1,4 +1,5 @@
 // @flow
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { getEvents } from '../../../../events/eventRequests';
 import type { ColumnsMetaForDataFetching } from '../types';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
@@ -103,14 +104,25 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, cat
     if (!categories || !categoryCombinationId) {
         return null;
     }
+    const newUIDsSeparator = featureAvailable(FEATURES.newUIDsSeparator);
+    const { aCCQueryParam, aCOQueryParam }: { aCCQueryParam: string, aCOQueryParam: string } = featureAvailable(
+        FEATURES.newEntityFilterQueryParam,
+    )
+        ? {
+            aCCQueryParam: 'attributeCategoryCombo',
+            aCOQueryParam: 'attributeCategoryOptions',
+        }
+        : {
+            aCCQueryParam: 'attributeCc',
+            aCOQueryParam: 'attributeCos',
+        };
 
     return {
-        attributeCc: categoryCombinationId,
-        attributeCos: Object
+        [aCCQueryParam]: categoryCombinationId,
+        [aCOQueryParam]: Object
             .keys(categories)
-
             .map(key => categories[key])
-            .join(';'),
+            .join(newUIDsSeparator ? ',' : ';'),
     };
 };
 

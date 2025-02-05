@@ -10,14 +10,14 @@ const getApiCategoriesArgument = (categories: ?{ [id: string]: string}, serverMi
     if (!categories) {
         return null;
     }
-    const useNewSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator);
+    const newUIDsSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newUIDsSeparator);
 
     return {
         attributeCategoryOptions: Object
             .keys(categories)
 
             .map(key => categories[key])
-            .join(useNewSeparator ? ',' : ';'),
+            .join(newUIDsSeparator ? ',' : ';'),
     };
 };
 
