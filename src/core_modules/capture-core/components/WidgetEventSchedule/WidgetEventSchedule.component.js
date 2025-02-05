@@ -2,6 +2,7 @@
 import React, { type ComponentType, useEffect } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { DividerHorizontal as Divider } from 'capture-ui';
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { DataSection } from '../DataSection';
@@ -15,10 +16,16 @@ import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 
-const styles = () => ({
+const styles = theme => ({
     wrapper: {
         paddingLeft: spacersNum.dp16,
         minWidth: '300px',
+    },
+    evenNumbersRecords: {
+        backgroundColor: theme.palette.grey.lightest,
+    },
+    divider: {
+        backgroundColor: theme.palette.dividerForm,
     },
 });
 
@@ -76,12 +83,6 @@ const WidgetEventSchedulePlain = ({
                     dataTest="schedule-section"
                     sectionName={i18n.t('Schedule info')}
                 >
-                    <ScheduleOrgUnit
-                        orgUnit={orgUnit}
-                        onSelectOrgUnit={onSelectOrgUnit}
-                        onDeselectOrgUnit={onDeselectOrgUnit}
-                        {...passOnProps}
-                    />
                     <ScheduleDate
                         programId={programId}
                         stageId={stageId}
@@ -91,21 +92,32 @@ const WidgetEventSchedulePlain = ({
                         serverSuggestedScheduleDate={serverSuggestedScheduleDate}
                         {...passOnProps}
                     />
+                    <Divider className={classes.divider} />
+                    <div className={classes.evenNumbersRecords}>
+                        <ScheduleOrgUnit
+                            orgUnit={orgUnit}
+                            onSelectOrgUnit={onSelectOrgUnit}
+                            onDeselectOrgUnit={onDeselectOrgUnit}
+                            {...passOnProps}
+                        />
+                    </div>
                 </DataSection>
-                {programCategory && <DataSection
-                    dataTest="category-options-section"
-                    sectionName={programCategory.displayName}
-                >
-                    <CategoryOptions
-                        categories={programCategory.categories}
-                        selectedOrgUnitId={orgUnit?.id}
-                        selectedCategories={selectedCategories}
-                        categoryOptionsError={categoryOptionsError}
-                        onClickCategoryOption={onClickCategoryOption}
-                        onResetCategoryOption={onResetCategoryOption}
-                        required
-                    />
-                </DataSection>}
+                {
+                    programCategory && <DataSection
+                        dataTest="category-options-section"
+                        sectionName={programCategory.displayName}
+                    >
+                        <CategoryOptions
+                            categories={programCategory.categories}
+                            selectedOrgUnitId={orgUnit?.id}
+                            selectedCategories={selectedCategories}
+                            categoryOptionsError={categoryOptionsError}
+                            onClickCategoryOption={onClickCategoryOption}
+                            onResetCategoryOption={onResetCategoryOption}
+                            required
+                        />
+                    </DataSection>
+                }
                 <DataSection
                     dataTest="note-section"
                     sectionName={i18n.t('Event notes')}
@@ -116,11 +128,13 @@ const WidgetEventSchedulePlain = ({
                         handleAddNote={onAddNote}
                     />
                 </DataSection>
-                {enableUserAssignment && (
-                    <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
-                        <Assignee onSet={onSetAssignee} assignee={assignee} />
-                    </DataSection>
-                )}
+                {
+                    enableUserAssignment && (
+                        <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
+                            <Assignee onSet={onSetAssignee} assignee={assignee} />
+                        </DataSection>
+                    )
+                }
                 <ScheduleButtons
                     hasChanges={scheduleDate !== suggestedScheduleDate}
                     onCancel={onCancel}
@@ -131,8 +145,8 @@ const WidgetEventSchedulePlain = ({
                     stageName={stageName}
                     orgUnitName={orgUnit?.name}
                 />
-            </div>
-        </Widget>
+            </div >
+        </Widget >
     );
 };
 
