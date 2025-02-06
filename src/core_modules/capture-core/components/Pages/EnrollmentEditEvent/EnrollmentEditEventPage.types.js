@@ -28,7 +28,6 @@ export type PlainProps = {|
     enrollmentsAsOptions: Array<Object>,
     onDelete: () => void,
     onAddNew: () => void,
-    onGoBack: () => void,
     onBackToMainPage: () => void,
     onBackToDashboard: () => void,
     onBackToViewEvent: () => void,

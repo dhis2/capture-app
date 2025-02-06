@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
-"PO-Revision-Date: 2025-01-27T10:03:03.122Z\n"
+"POT-Creation-Date: 2025-02-06T18:07:20.352Z\n"
+"PO-Revision-Date: 2025-02-06T18:07:20.352Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -896,9 +896,6 @@ msgstr "Indicators"
 msgid "Warnings"
 msgstr "Warnings"
 
-msgid "Show all events"
-msgstr "Show all events"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Event could not be loaded. Are you sure it exists?"
 
@@ -933,9 +930,6 @@ msgstr "Loading"
 
 msgid "An error occurred while loading the form"
 msgstr "An error occurred while loading the form"
-
-msgid "Back to all stages and events"
-msgstr "Back to all stages and events"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"

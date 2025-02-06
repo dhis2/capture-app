@@ -213,7 +213,6 @@ export const EnrollmentWidget: WidgetConfig = {
 export const EditEventWorkspace: WidgetConfig = {
     Component: WidgetEventEditWrapper,
     getProps: ({
-        onGoBack,
         program,
         orgUnitId,
         teiId,
@@ -230,7 +229,6 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
     }): WidgetEventEditProps => ({
-        onGoBack,
         programId: program.id,
         stageId,
         orgUnitId,
