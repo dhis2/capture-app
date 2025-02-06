@@ -18,12 +18,14 @@ export const useAddEventWithRelationship = ({
     onUpdateEnrollmentEventsSuccess,
     onUpdateEnrollmentEventsError,
     onNavigateToEvent,
+    setIsLinking,
 }: {
     eventId: string,
     onUpdateOrAddEnrollmentEvents: (events: Array<ApiEnrollmentEvent>) => void,
     onUpdateEnrollmentEventsSuccess: (events: Array<ApiEnrollmentEvent>) => void,
     onUpdateEnrollmentEventsError: (events: Array<ApiEnrollmentEvent>) => void,
     onNavigateToEvent: (eventId: string) => void,
+    setIsLinking: (isLinking: boolean) => void,
 }) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
@@ -53,6 +55,7 @@ export const useAddEventWithRelationship = ({
                 }
             },
             onError: (_, payload: { serverData: Object }) => {
+                setIsLinking(false);
                 showAlert({ message: i18n.t('An error occurred while linking the event') });
                 onUpdateEnrollmentEventsError && onUpdateEnrollmentEventsError(payload.serverData.events);
             },

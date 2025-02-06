@@ -12,6 +12,7 @@ const RelatedStagesActionsPlain = ({
     programId,
     enrollmentId,
     programStageId,
+    isLinking,
     onLink,
     ...passOnProps
 }: Props, ref) => {
@@ -107,6 +108,7 @@ const RelatedStagesActionsPlain = ({
             addErrorMessage={addErrorMessage}
             saveAttempted={saveAttempted}
             errorMessages={errorMessages}
+            isLinking={isLinking}
             constraint={constraint}
             onLink={onLink}
             {...passOnProps}

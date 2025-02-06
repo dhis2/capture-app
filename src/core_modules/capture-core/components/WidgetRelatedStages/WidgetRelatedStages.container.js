@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useRef, useCallback } from 'react';
+import React, { type ComponentType, useRef, useCallback, useState } from 'react';
 import { IconLink24, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
@@ -44,6 +44,7 @@ export const WidgetRelatedStagesPlain = ({
     onNavigateToEvent,
     classes,
 }: Props) => {
+    const [isLinking, setIsLinking] = useState(false);
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { currentRelatedStagesStatus } = useRelatedStages({ programStageId, programId });
     const {
@@ -58,9 +59,11 @@ export const WidgetRelatedStagesPlain = ({
         onUpdateEnrollmentEventsSuccess,
         onUpdateEnrollmentEventsError,
         onNavigateToEvent,
+        setIsLinking,
     });
 
     const onLink = useCallback(() => {
+        setIsLinking(true);
         // $FlowFixMe[incompatible-type]
         const serverRequestEvent: ?RequestEvent = enrollment?.events.find(e => e.event === eventId);
 
@@ -117,6 +120,7 @@ export const WidgetRelatedStagesPlain = ({
                     programStageId={programStageId}
                     actionsOptions={actionsOptions}
                     onLink={onLink}
+                    isLinking={isLinking}
                 />
             </div>
         </Widget>

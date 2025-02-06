@@ -177,16 +177,14 @@ const LinkExistingResponse = ({
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, errorMessages, dataTest, classes }) => {
+const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }) => {
     if (!onLink) {
         return null;
     }
 
-    const disabled = Object.values(errorMessages).some(Boolean);
-
     return (
         <div className={classes.link}>
-            <Button primary small onClick={onLink} disabled={disabled} dataTest={dataTest}>
+            <Button primary small onClick={onLink} loading={isLinking} dataTest={dataTest}>
                 {label}
             </Button>
         </div>
@@ -207,6 +205,7 @@ const RelatedStagesActionsPlain = ({
     saveAttempted,
     actionsOptions,
     onLink,
+    isLinking,
 }: PlainProps) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
@@ -287,7 +286,7 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Schedule')}
-                        errorMessages={errorMessages}
+                        isLinking={isLinking}
                         dataTest="related-stages-buttons-schedule"
                     />
                 </>
@@ -305,7 +304,7 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Enter details')}
-                        errorMessages={errorMessages}
+                        isLinking={isLinking}
                         dataTest="related-stages-buttons-enter-details"
                     />
                 </>
@@ -324,7 +323,7 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Link')}
-                        errorMessages={errorMessages}
+                        isLinking={isLinking}
                         dataTest="related-stages-buttons-link-existing-response"
                     />
                 </>

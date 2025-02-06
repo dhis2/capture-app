@@ -38,6 +38,7 @@ export type PlainProps = {|
     addErrorMessage: (ErrorMessagesForRelatedStages) => void,
     setRelatedStagesDataValues: (() => Object) => void,
     onLink?: () => void,
+    isLinking?: boolean,
     actionsOptions?: {
         [key: $Keys<typeof relatedStageActions>]: {
             hidden?: boolean,
@@ -53,6 +54,7 @@ export type Props = {|
     enrollmentId?: string,
     programStageId: string,
     onLink?: () => void,
+    isLinking?: boolean,
     actionsOptions?: {
         [key: $Keys<typeof relatedStageActions>]: {
             hidden?: boolean,
