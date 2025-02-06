@@ -38,9 +38,9 @@ export const WidgetRelatedStagesPlain = ({
     programStageId,
     teiId,
     actionsOptions,
-    onUpdateEnrollment,
-    onUpdateEnrollmentSuccess,
-    onUpdateEnrollmentError,
+    onUpdateOrAddEnrollmentEvents,
+    onUpdateEnrollmentEventsSuccess,
+    onUpdateEnrollmentEventsError,
     onNavigateToEvent,
     classes,
 }: Props) => {
@@ -54,9 +54,9 @@ export const WidgetRelatedStagesPlain = ({
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({
         eventId,
-        onUpdateEnrollment,
-        onUpdateEnrollmentSuccess,
-        onUpdateEnrollmentError,
+        onUpdateOrAddEnrollmentEvents,
+        onUpdateEnrollmentEventsSuccess,
+        onUpdateEnrollmentEventsError,
         onNavigateToEvent,
     });
 

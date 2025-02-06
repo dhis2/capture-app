@@ -21,9 +21,9 @@ export type Props = {|
     teiId: string,
     enrollmentId: string,
     programStageId: string,
-    onUpdateEnrollment: (enrollment: Object) => void,
-    onUpdateEnrollmentSuccess: ({ redirect?: boolean }) => void,
-    onUpdateEnrollmentError: (message: string) => void,
+    onUpdateOrAddEnrollmentEvents: (events: Array<ApiEnrollmentEvent>) => void,
+    onUpdateEnrollmentEventsSuccess: (events: Array<ApiEnrollmentEvent>) => void,
+    onUpdateEnrollmentEventsError: (events: Array<ApiEnrollmentEvent>) => void,
     onNavigateToEvent: (eventId: string) => void,
     actionsOptions?: {
         [key: $Keys<typeof relatedStageActions>]: {

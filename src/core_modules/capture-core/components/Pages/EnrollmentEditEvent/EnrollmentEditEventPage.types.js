@@ -56,6 +56,11 @@ export type PlainProps = {|
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
     onDeleteTrackedEntitySuccess: () => void,
     events: Array<any>,
+    onDeleteEvent?: (eventId: string) => void,
+    onDeleteEventRelationship?: (relationshipId: string) => void,
+    onUpdateOrAddEnrollmentEvents: (events: Array<ApiEnrollmentEvent>) => void,
+    onUpdateEnrollmentEventsSuccess: (events: Array<ApiEnrollmentEvent>) => void,
+    onUpdateEnrollmentEventsError: (events: Array<ApiEnrollmentEvent>) => void,
 |};
 
 export type Props = {|

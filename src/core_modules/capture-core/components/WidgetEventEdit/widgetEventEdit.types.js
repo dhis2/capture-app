@@ -19,6 +19,8 @@ export type Props = {|
     onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
     onSaveAndCompleteEnrollmentSuccessActionType?: string,
     onSaveAndCompleteEnrollmentErrorActionType?: string,
+    onDeleteEvent?: (eventId: string) => void,
+    onDeleteEventRelationship?: (relationshipId: string) => void,
 |};
 
 export type ComponentProps = {|

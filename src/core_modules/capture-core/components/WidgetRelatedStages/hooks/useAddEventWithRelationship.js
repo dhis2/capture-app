@@ -14,20 +14,21 @@ const addEventWithRelationshipMutation = {
 
 export const useAddEventWithRelationship = ({
     eventId,
-    onUpdateEnrollment,
-    onUpdateEnrollmentSuccess,
-    onUpdateEnrollmentError,
+    onUpdateOrAddEnrollmentEvents,
+    onUpdateEnrollmentEventsSuccess,
+    onUpdateEnrollmentEventsError,
     onNavigateToEvent,
 }: {
     eventId: string,
-    onUpdateEnrollment: (enrollment: Object) => void,
-    onUpdateEnrollmentSuccess: ({ redirect?: boolean }) => void,
-    onUpdateEnrollmentError: (message: string) => void,
+    onUpdateOrAddEnrollmentEvents: (events: Array<ApiEnrollmentEvent>) => void,
+    onUpdateEnrollmentEventsSuccess: (events: Array<ApiEnrollmentEvent>) => void,
+    onUpdateEnrollmentEventsError: (events: Array<ApiEnrollmentEvent>) => void,
     onNavigateToEvent: (eventId: string) => void,
 }) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const { show: showAlert } = useAlert(({ message }) => message, { success: true });
+    const { show: showSccess } = useAlert(({ message }) => message, { success: true });
+    const { show: showAlert } = useAlert(({ message }) => message, { critical: true });
 
     const { mutate } = useMutation<any, Error, { serverData: Object, linkMode: string, eventIdToRedirectTo?: string }>(
         ({ serverData }: Object) =>
@@ -38,22 +39,22 @@ export const useAddEventWithRelationship = ({
             }),
         {
             onMutate: (payload: { serverData: Object }) => {
-                const enrollmentToUpdate = payload.serverData.enrollments?.[0];
-                enrollmentToUpdate && onUpdateEnrollment(enrollmentToUpdate);
+                onUpdateOrAddEnrollmentEvents && onUpdateOrAddEnrollmentEvents(payload.serverData.events);
             },
-            onSuccess: (_, payload: { linkMode: string, eventIdToRedirectTo?: string }) => {
+            onSuccess: (_, payload: { linkMode: string, eventIdToRedirectTo?: string, serverData: Object }) => {
                 const queryKey = [ReactQueryAppNamespace, 'linkedEventByOriginEvent', eventId];
                 queryClient.refetchQueries(queryKey);
-                onUpdateEnrollmentSuccess({});
+                onUpdateEnrollmentEventsSuccess && onUpdateEnrollmentEventsSuccess(payload.serverData.events);
 
                 if (payload.linkMode === relatedStageActions.ENTER_DATA && payload.eventIdToRedirectTo) {
                     onNavigateToEvent(payload.eventIdToRedirectTo);
                 } else {
-                    showAlert({ message: i18n.t('The event was succesfully linked') });
+                    showSccess({ message: i18n.t('The event was succesfully linked') });
                 }
             },
-            onError: () => {
-                onUpdateEnrollmentError(i18n.t('An error occurred while linking the event'));
+            onError: (_, payload: { serverData: Object }) => {
+                showAlert({ message: i18n.t('An error occurred while linking the event') });
+                onUpdateEnrollmentEventsError && onUpdateEnrollmentEventsError(payload.serverData.events);
             },
         },
     );

@@ -3,9 +3,7 @@ import type { FetchError, QueryRefetchFunction } from '@dhis2/app-runtime';
 
 export type EventReducerProps = {|
     enrollments?: ?Array<Object>,
-    events: Array<{
-        event: string,
-    }>
+    events: Array<ApiEnrollmentEvent>
 |}
 
 export type Props = {|

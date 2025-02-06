@@ -87,6 +87,8 @@ export const WidgetEventEditPlain = ({
     onSaveAndCompleteEnrollment,
     onSaveAndCompleteEnrollmentSuccessActionType,
     onSaveAndCompleteEnrollmentErrorActionType,
+    onDeleteEvent,
+    onDeleteEventRelationship,
     classes,
 }: PlainProps) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -113,6 +115,8 @@ export const WidgetEventEditPlain = ({
                 orgUnitId={orgUnitId}
                 stageId={stageId}
                 stage={stage}
+                onDeleteEvent={onDeleteEvent}
+                onDeleteEventRelationship={onDeleteEventRelationship}
             />
             <div data-test="widget-enrollment-event">
                 <Widget

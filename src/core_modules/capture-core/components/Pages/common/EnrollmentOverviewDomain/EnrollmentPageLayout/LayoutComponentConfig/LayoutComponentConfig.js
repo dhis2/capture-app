@@ -233,6 +233,8 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
+        onDeleteEvent,
+        onDeleteEventRelationship,
     }): WidgetEventEditProps => ({
         onGoBack,
         programId: program.id,
@@ -250,6 +252,8 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
+        onDeleteEvent,
+        onDeleteEventRelationship,
     }),
 };
 
@@ -300,9 +304,9 @@ export const RelatedStagesWorkspace: WidgetConfig = {
         enrollmentId,
         eventId,
         teiId,
-        onUpdateEnrollmentStatus,
-        onUpdateEnrollmentStatusSuccess,
-        onUpdateEnrollmentStatusError,
+        onUpdateOrAddEnrollmentEvents,
+        onUpdateEnrollmentEventsSuccess,
+        onUpdateEnrollmentEventsError,
         onNavigateToEvent,
     }) => ({
         programId: program.id,
@@ -310,9 +314,9 @@ export const RelatedStagesWorkspace: WidgetConfig = {
         enrollmentId,
         eventId,
         teiId,
-        onUpdateEnrollment: onUpdateEnrollmentStatus,
-        onUpdateEnrollmentSuccess: onUpdateEnrollmentStatusSuccess,
-        onUpdateEnrollmentError: onUpdateEnrollmentStatusError,
+        onUpdateOrAddEnrollmentEvents,
+        onUpdateEnrollmentEventsSuccess,
+        onUpdateEnrollmentEventsError,
         onNavigateToEvent,
     }),
 };

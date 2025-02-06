@@ -25,6 +25,8 @@ export const OverflowMenuComponent = ({
     originEventId,
     stageWriteAccess,
     relationshipType,
+    onDeleteEvent,
+    onDeleteEventRelationship,
 }: Props) => {
     const { push } = useHistory();
     const [isActionsOpen, setIsActionsOpen] = useState(false);
@@ -100,6 +102,7 @@ export const OverflowMenuComponent = ({
                     setOpenModal={setIsUnlinkModalOpen}
                     relationshipId={relationshipId}
                     originEventId={originEventId}
+                    onDeleteEventRelationship={onDeleteEventRelationship}
                 />
             )}
             {isUnlinkAndDeleteModalOpen && (
@@ -107,6 +110,9 @@ export const OverflowMenuComponent = ({
                     setOpenModal={setIsUnlinkAndDeleteModalOpen}
                     eventId={linkedEvent.event}
                     originEventId={originEventId}
+                    relationshipId={relationshipId}
+                    onDeleteEvent={onDeleteEvent}
+                    onDeleteEventRelationship={onDeleteEventRelationship}
                 />
             )}
         </>

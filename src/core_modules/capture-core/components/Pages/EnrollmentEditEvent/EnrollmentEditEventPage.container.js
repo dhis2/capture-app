@@ -13,6 +13,11 @@ import {
     updateEnrollmentAndEvents,
     updateEnrollmentEvent,
     useCommonEnrollmentDomainData,
+    deleteEnrollmentEvent,
+    deleteEnrollmentEventRelationship,
+    updateOrAddEnrollmentEvents,
+    commitEnrollmentEvents,
+    rollbackEnrollmentEvents,
 } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
@@ -166,6 +171,26 @@ const EnrollmentEditEventPageWithContextPlain = ({
         redirect && history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
 
+    const onDeleteEvent = useCallback((linkedEventId: string) => {
+        dispatch(deleteEnrollmentEvent(linkedEventId));
+    }, [dispatch]);
+
+    const onDeleteEventRelationship = useCallback((relationshipId: string) => {
+        dispatch(deleteEnrollmentEventRelationship(relationshipId));
+    }, [dispatch]);
+
+    const onUpdateOrAddEnrollmentEvents = useCallback((events) => {
+        dispatch(updateOrAddEnrollmentEvents({ events }));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentEventsSuccess = useCallback((events) => {
+        dispatch(commitEnrollmentEvents({ events }));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentEventsError = useCallback((events) => {
+        dispatch(rollbackEnrollmentEvents({ events }));
+    }, [dispatch]);
+
     const onSaveAndCompleteEnrollment = useCallback((enrollmentToUpdate) => {
         dispatch(setExternalEnrollmentStatus(statusTypes.COMPLETED));
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
@@ -303,6 +328,11 @@ const EnrollmentEditEventPageWithContextPlain = ({
             events={enrollmentSite?.events}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
             onNavigateToEvent={onNavigateToEvent}
+            onDeleteEvent={onDeleteEvent}
+            onDeleteEventRelationship={onDeleteEventRelationship}
+            onUpdateOrAddEnrollmentEvents={onUpdateOrAddEnrollmentEvents}
+            onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
+            onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
         />
     );
 };
