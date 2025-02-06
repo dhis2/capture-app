@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-29T14:33:36.560Z\n"
-"PO-Revision-Date: 2025-01-29T14:33:36.560Z\n"
+"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
+"PO-Revision-Date: 2025-01-27T10:03:03.122Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -746,6 +746,25 @@ msgstr ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
 
+msgid "Get started with Capture app"
+msgstr "Get started with Capture app"
+
+msgid "Report data"
+msgstr "Report data"
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr "Click 'Search'. For program-specific results, choose a program first."
+
+msgid "Learn more about Capture app"
+msgstr "Learn more about Capture app"
+
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
 
@@ -1291,6 +1310,12 @@ msgstr "Write a note about this event"
 msgid "This event doesn't have any notes"
 msgstr "This event doesn't have any notes"
 
+msgid "after"
+msgstr "after"
+
+msgid "before"
+msgstr "before"
+
 msgid "Schedule date info"
 msgstr "Schedule date info"
 
@@ -1305,28 +1330,28 @@ msgid_plural "The scheduled date is {{count}} days {{position}} the suggested da
 msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
 msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
 
-msgid "after"
-msgstr "after"
-
-msgid "before"
-msgstr "before"
-
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
 
-msgid "Schedule info"
-msgstr "Schedule info"
-
 msgid "Schedule date / Due date"
 msgstr "Schedule date / Due date"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Please provide a valid organisation unit"
+
+msgid "Schedule info"
+msgstr "Schedule info"
 
 msgid "Event notes"
 msgstr "Event notes"
 
 msgid "Write a note about this scheduled event"
 msgstr "Write a note about this scheduled event"
+
+msgid "Program or stage is invalid"
+msgstr "Program or stage is invalid"
 
 msgid "Save note"
 msgstr "Save note"
@@ -1438,9 +1463,6 @@ msgstr "Report date"
 
 msgid "Please enter a date"
 msgstr "Please enter a date"
-
-msgid "Please provide a valid organisation unit"
-msgstr "Please provide a valid organisation unit"
 
 msgid "Please select a valid event"
 msgstr "Please select a valid event"

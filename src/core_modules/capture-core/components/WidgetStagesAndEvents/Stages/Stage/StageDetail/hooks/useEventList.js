@@ -6,7 +6,7 @@ import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
 import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../../../metaData';
-import type { StageDataElement } from '../../../../types/common.types';
+import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
 import {
@@ -45,7 +45,7 @@ const getBaseColumns = props => baseFields.map((key, index) => ({ ...key, ...get
 
 const getAllFieldsWithValue = (
     eventId: string,
-    dataElements: Array<StageDataElement>,
+    dataElements: Array<StageDataElementClient>,
     dataElementsByType: Array<{type: string, eventId: string, ids: Object}>,
 ) => dataElements
     .reduce((acc, { id, type }) => {
@@ -59,7 +59,7 @@ const getAllFieldsWithValue = (
         return acc;
     }, {});
 
-const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: Array<ApiEnrollmentEvent>) => {
+const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, events: Array<ApiEnrollmentEvent>) => {
     const [value, setValue] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -132,32 +132,28 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
     return headerColumns;
 };
 
-const getDataElement = (stageDataElement, type) => {
+function getDataElement(stageDataElement, type) {
     if (!stageDataElement) {
         return null;
     }
-
     const dataElement = new DataElement((o) => {
         o.id = stageDataElement.id;
         o.type = type;
     });
 
     if (stageDataElement.options) {
-        const options = Object.keys(stageDataElement.options).map(
-            (code: string) =>
-                new Option((o) => {
-                    // $FlowFixMe
-                    o.text = stageDataElement.options[code];
-                    o.value = code;
-                }),
-        );
+        const options = stageDataElement.options.map(({ value, text }) =>
+            new Option((o) => {
+                o.text = text;
+                o.value = value;
+            }));
         const optionSet = new OptionSet(stageDataElement.id, options);
         dataElement.optionSet = optionSet;
     }
     return dataElement;
-};
+}
 
-const formatRowForView = (row: Object, dataElements: Array<StageDataElement>) => Object.keys(row).reduce((acc, id) => {
+const formatRowForView = (row: Object, dataElements: Array<StageDataElementClient>) => Object.keys(row).reduce((acc, id) => {
     const { type: predefinedType } = baseFields.find(f => f.id === id) || {};
     const stageDataElement = dataElements.find(el => el.id === id);
     const { type } = stageDataElement || {};

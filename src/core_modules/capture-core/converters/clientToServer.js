@@ -85,7 +85,7 @@ export function convertCategoryOptionsToServer(
                 acc.push(value[categoryId]);
             }
             return acc;
-        }, []).join(hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator) ? ',' : ';');
+        }, []).join(hasAPISupportForFeature(serverMinorVersion, FEATURES.newUIDsSeparator) ? ',' : ';');
     }
     return value;
 }

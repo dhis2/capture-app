@@ -95,9 +95,9 @@ export const loadViewEventDataEntry =
         let attributeCategoryOptions;
 
         if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-            const useNewAocApiSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator);
+            const newUIDsSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newUIDsSeparator);
             // $FlowFixMe - this should work
-            const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(useNewAocApiSeparator ? ',' : ';');
+            const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(newUIDsSeparator ? ',' : ';');
             const getCategoryOptionsFromIndexedDB = async (optionIds) => {
                 const categoryOptionsPromises = optionIds.map(async (optionId) => {
                     const cachedCategoryOption = await getCachedSingleResourceFromKeyAsync(userStores.CATEGORY_OPTIONS, optionId);

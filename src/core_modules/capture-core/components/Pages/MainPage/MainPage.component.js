@@ -15,6 +15,7 @@ import { TemplateSelector } from '../../TemplateSelector';
 import {
     InvalidCategoryCombinationForOrgUnitMessage,
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
+import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
 
 const getStyles = () => ({
     listContainer: {
@@ -63,6 +64,9 @@ const MainPagePlain = ({
         <>
             {showMainPage ? (
                 <>
+                    {MainPageStatus === MainPageStatuses.DEFAULT && (
+                        <NoSelectionsInfoBox />
+                    )}
                     {MainPageStatus === MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
                         <WithoutOrgUnitSelectedMessage programId={programId} setShowAccessible={setShowAccessible} />
                     )}

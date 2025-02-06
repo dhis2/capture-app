@@ -1,3 +1,66 @@
+## [101.25.2](https://github.com/dhis2/capture-app/compare/v101.25.1...v101.25.2) (2025-02-05)
+
+
+### Bug Fixes
+
+* [DHIS2-16871] Change Separator for Versions ([#3948](https://github.com/dhis2/capture-app/issues/3948)) ([eec4916](https://github.com/dhis2/capture-app/commit/eec4916ff144c7e53b235336e14b46c76b3feac4))
+
+## [101.25.1](https://github.com/dhis2/capture-app/compare/v101.25.0...v101.25.1) (2025-02-05)
+
+
+### Bug Fixes
+
+* [DHIS2-18571] add explicit pageSize=100 to fetch all enrollments ([#3942](https://github.com/dhis2/capture-app/issues/3942)) ([6f552ae](https://github.com/dhis2/capture-app/commit/6f552ae16c99bc7cf3d502f9316ffe4bad20b25c))
+
+# [101.25.0](https://github.com/dhis2/capture-app/compare/v101.24.3...v101.25.0) (2025-02-05)
+
+
+### Features
+
+* [DHIS2-8087] Add empty launch page ([#3940](https://github.com/dhis2/capture-app/issues/3940)) ([66d949b](https://github.com/dhis2/capture-app/commit/66d949ba373cea3d3962a5d41f59be9fe3187638))
+
+## [101.24.3](https://github.com/dhis2/capture-app/compare/v101.24.2...v101.24.3) (2025-02-04)
+
+
+### Bug Fixes
+
+* [DHIS2-15685][DHIS2-18326] View an event without selecting org unit in Tracker Programs ([#3926](https://github.com/dhis2/capture-app/issues/3926)) ([e093c71](https://github.com/dhis2/capture-app/commit/e093c714f535d26159a94f99707d4b3716b01928))
+
+## [101.24.2](https://github.com/dhis2/capture-app/compare/v101.24.1...v101.24.2) (2025-02-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a52f1fc](https://github.com/dhis2/capture-app/commit/a52f1fc49db7757446d430bf12a3e91e9c5fc280))
+
+## [101.24.1](https://github.com/dhis2/capture-app/compare/v101.24.0...v101.24.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* [DHIS2-18582] Data element with number option set are not displayed in Stages and Events widget ([#3928](https://github.com/dhis2/capture-app/issues/3928)) ([e793240](https://github.com/dhis2/capture-app/commit/e79324029194f23c945b26cdd1f09f06bd27c213))
+
+# [101.24.0](https://github.com/dhis2/capture-app/compare/v101.23.2...v101.24.0) (2025-01-31)
+
+
+### Features
+
+* [DHIS2-18329] Add org unit selector in schedule event form ([#3925](https://github.com/dhis2/capture-app/issues/3925)) ([4013d93](https://github.com/dhis2/capture-app/commit/4013d9326d17f93ff3b0ca11b7844764f92c6850))
+
+## [101.23.2](https://github.com/dhis2/capture-app/compare/v101.23.1...v101.23.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-18902] keep program selection on unique id fallback search ([#3950](https://github.com/dhis2/capture-app/issues/3950)) ([6326f7a](https://github.com/dhis2/capture-app/commit/6326f7a134851a80352d6cf34ea2f8dbdb5b210d))
+
+## [101.23.1](https://github.com/dhis2/capture-app/compare/v101.23.0...v101.23.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-18673] prevent saving in profile widget when validation errors are present ([#3943](https://github.com/dhis2/capture-app/issues/3943)) ([e341070](https://github.com/dhis2/capture-app/commit/e34107075678b78773d941bc1bca5dbf93f5088e))
+
 # [101.23.0](https://github.com/dhis2/capture-app/compare/v101.22.0...v101.23.0) (2025-01-24)
 
 

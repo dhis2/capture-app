@@ -2,16 +2,16 @@
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Philip Larsen Donnelly, 2024
-# Yury Rogachev <yury@dhis2.org>, 2024
+# Viktor Varland <viktor@dhis2.org>, 2025
+# Yury Rogachev <yury@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
+"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2024\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,6 +111,24 @@ msgstr "Дата регистрации"
 
 msgid "Last updated"
 msgstr "Последнее обновление"
+
+msgid "Lat"
+msgstr ""
+
+msgid "Long"
+msgstr ""
+
+msgid "lat"
+msgstr ""
+
+msgid "long"
+msgstr ""
+
+msgid "Show less"
+msgstr "Показать меньше информации"
+
+msgid "Show more"
+msgstr "Показать больше"
 
 msgid "error encountered during field validation"
 msgstr "ошибка, возникшая при проверке поля"
@@ -223,7 +241,7 @@ msgstr "Активный/ая/ое"
 msgid "Completed"
 msgstr "Завершен/а/о"
 
-msgid "Please add or cancel note before saving the event"
+msgid "Please add or cancel the note before saving the event"
 msgstr ""
 
 msgid "Save and add another"
@@ -719,9 +737,6 @@ msgstr "Произошла ошибка при открытии страницы
 msgid "There was an error loading the page"
 msgstr "Произошла ошибка при загрузке страницы"
 
-msgid "Choose an organisation unit to start reporting"
-msgstr "Выберите организационную единицу, чтобы начать ввод данных"
-
 msgid "Program stage is invalid"
 msgstr "Этап программы недействителен"
 
@@ -774,6 +789,9 @@ msgid ""
 "selections"
 msgstr ""
 
+msgid "Choose an organisation unit to start reporting"
+msgstr "Выберите организационную единицу, чтобы начать ввод данных"
+
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Выберите {{missingCategories}}, чтобы начать ввод данных."
 
@@ -798,6 +816,9 @@ msgstr "Сохранить {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Сохранить {{trackedEntityName}}"
+
+msgid "Enter details now is not available when creating a relationship"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Сохранить новый объект {{trackedEntityTypeName}} и создать связку"
@@ -1246,7 +1267,7 @@ msgstr "Добавить координаты"
 msgid "Add area"
 msgstr "Добавить участок"
 
-msgid "Please add or cancel the note before saving the event"
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
@@ -1257,6 +1278,9 @@ msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 "Сохранение в этапе {{stageName}} программы{{programName}} в организационной "
 "единице {{orgUnitName}}"
+
+msgid "Saving to {{stageName}} for {{programName}}"
+msgstr ""
 
 msgid "program or stage is invalid"
 msgstr "программа или этап недействительны"
@@ -1278,9 +1302,6 @@ msgstr "Предупреждение"
 
 msgid "stage not found in rules execution"
 msgstr "этап не найден при выполнении правил"
-
-msgid "Please provide an valid organisation unit"
-msgstr ""
 
 msgid "Delete event"
 msgstr "Удалить событие"
@@ -1311,6 +1332,12 @@ msgstr ""
 msgid "This event doesn't have any notes"
 msgstr ""
 
+msgid "after"
+msgstr "после"
+
+msgid "before"
+msgstr "до"
+
 msgid "Schedule date info"
 msgstr "Информация о запланированной дате"
 
@@ -1335,12 +1362,6 @@ msgstr[2] ""
 msgstr[3] ""
 "Запланированная дата - {{count}} дней {{position}} предложенной даты."
 
-msgid "after"
-msgstr "после"
-
-msgid "before"
-msgstr "до"
-
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
@@ -1357,22 +1378,22 @@ msgstr[3] ""
 "В данный день - {{count}} запланированных события/й в организационной "
 "единице {{orgUnitName}}."
 
-msgid ""
-"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
-"Планирование события в этапе {{stageName}} программы{{programName}} в "
-"организационной единице {{orgUnitName}}"
+msgid "Schedule date / Due date"
+msgstr "Запланированная дата / Дата выполнения"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Выберите правильную организационную единицу"
 
 msgid "Schedule info"
 msgstr "Информация о расписании"
-
-msgid "Schedule date / Due date"
-msgstr "Запланированная дата / Дата выполнения"
 
 msgid "Event notes"
 msgstr ""
 
 msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Program or stage is invalid"
 msgstr ""
 
 msgid "Save note"
@@ -1443,8 +1464,8 @@ msgstr "Профиль объекта {{trackedEntityTypeName}}"
 msgid "tracked entity instance"
 msgstr "отслеживаемый объект"
 
-msgid "Link to an existing {{linkableStageLabel}}"
-msgstr "Создать связку с существующим этапом {{linkableStageLabel}}"
+msgid "Choose a {{linkableStageLabel}} event"
+msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Выбрать этап {{linkableStageLabel}}"
@@ -1455,14 +1476,17 @@ msgstr ""
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
+msgid "Actions - {{relationshipName}}"
+msgstr ""
+
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Неопределенные связи, обратитесь к системному администратору"
 
 msgid "Enter details now"
 msgstr "Ввести данные сейчас"
 
-msgid "Link to an existing"
-msgstr "Создать связку с существующим/ей"
+msgid "Link to an existing event"
+msgstr ""
 
 msgid "Scheduled date"
 msgstr "Запланированная дата"
@@ -1472,9 +1496,6 @@ msgstr "Дата отчета"
 
 msgid "Please enter a date"
 msgstr ""
-
-msgid "Please provide a valid organisation unit"
-msgstr "Выберите правильную организационную единицу"
 
 msgid "Please select a valid event"
 msgstr "Выберите действительное событие"
@@ -1533,7 +1554,38 @@ msgstr " Событий запланировано: {{ scheduledEvents }}"
 msgid "Stages and Events"
 msgstr "Этапы и события"
 
+msgid "An error occurred while unlinking and deleting the event."
+msgstr ""
+
+msgid "Unlink and delete linked event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+msgstr ""
+
+msgid "Yes, unlink and delete linked event"
+msgstr ""
+
+msgid "Unlink event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+msgstr ""
+
+msgid "Yes, unlink event"
+msgstr ""
+
 msgid "View linked event"
+msgstr ""
+
+msgid "You do not have access to remove the link between these events"
+msgstr ""
+
+msgid "You do not have access to remove the link and delete the linked event"
 msgstr ""
 
 msgid "An error occurred while loading the widget."

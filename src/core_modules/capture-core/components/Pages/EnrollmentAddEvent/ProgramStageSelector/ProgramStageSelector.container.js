@@ -1,7 +1,6 @@
 // @flow
 import React, { useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router-dom';
 import log from 'loglevel';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
@@ -9,13 +8,13 @@ import { errorCreator } from '../../../../../capture-core-utils';
 import { useCommonEnrollmentDomainData, useRuleEffects } from '../../common/EnrollmentOverviewDomain';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
-import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
+import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment, attributeValues } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const {
@@ -62,7 +61,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     }, []), [enrollment?.events, program?.programStages, programLoading, ruleEffects]);
 
     const onSelectProgramStage = (newStageId: string) =>
-        history.push(`enrollmentEventNew?${buildUrlQueryString({
+        navigate(`enrollmentEventNew?${buildUrlQueryString({
             programId,
             orgUnitId,
             teiId,
@@ -72,7 +71,7 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         })}`);
 
     const onCancel = () =>
-        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+        navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
 
     return (
         <>
