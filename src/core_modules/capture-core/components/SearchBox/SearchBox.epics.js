@@ -8,13 +8,13 @@ import { buildUrlQueryString } from '../../utils/routing';
 export const navigateToNewTrackedEntityPageEpic = (
     action$: InputObservable,
     store: ReduxStore,
-    { history }: ApiUtils,
+    { navigate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(searchBoxActionTypes.NAVIGATE_TO_NEW_TRACKED_ENTITY_PAGE),
         switchMap(() => {
             const { currentSelections: { programId, orgUnitId, trackedEntityTypeId } } = store.value;
-            history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId })}`);
+            navigate(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId })}`);
 
             return EMPTY;
         }),

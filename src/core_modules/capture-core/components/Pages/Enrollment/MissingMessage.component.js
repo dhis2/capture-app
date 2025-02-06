@@ -1,14 +1,13 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { enrollmentAccessLevels } from './EnrollmentPage.constants';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetBreakingTheGlass } from '../../WidgetBreakingTheGlass';
 import { LinkButton } from '../../Buttons/LinkButton.component';
@@ -85,18 +84,18 @@ const useMissingStatus = () => {
 };
 
 const useNavigations = () => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
     const { programId, orgUnitId, teiId } = useLocationQuery();
     const navigateToTrackerProgramRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+        navigate(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     const navigateToEventProgramRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
+        navigate(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToEventWorkingList = () =>
-        history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+        navigate(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
+        navigate(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
 
     return {
         navigateToTrackerProgramRegistrationPage,

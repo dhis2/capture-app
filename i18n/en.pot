@@ -746,6 +746,25 @@ msgstr ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
 
+msgid "Get started with Capture app"
+msgstr "Get started with Capture app"
+
+msgid "Report data"
+msgstr "Report data"
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr "Click 'Search'. For program-specific results, choose a program first."
+
+msgid "Learn more about Capture app"
+msgstr "Learn more about Capture app"
+
 msgid "Please select {{category}}."
 msgstr "Please select {{category}}."
 
