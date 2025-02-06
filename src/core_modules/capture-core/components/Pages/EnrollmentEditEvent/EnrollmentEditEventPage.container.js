@@ -212,7 +212,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         navigate(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
     const onNavigateToEvent = (eventIdToRedirectTo: string) => {
-        history.push(
+        navigate(
             `/enrollmentEventEdit?${buildUrlQueryString({
                 eventId: eventIdToRedirectTo,
                 orgUnitId,
