@@ -51,7 +51,7 @@ Then(/^the scope selector list contains the text (.*)$/, (name) => {
 });
 
 When(/^the user clicks the "Enrollment dashboard" breadcrumb item/, () =>
-    cy.get('[data-test="breadcrumb-overview-item"]')
+    cy.get('[data-test="enrollment-breadcrumb-overview-item"]')
         .click(),
 );
 

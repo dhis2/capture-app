@@ -21,7 +21,7 @@ When('the user clicks the first second antenatal care visit event', () => {
 });
 
 When(/^the user clicks the "Enrollment dashboard" breadcrumb item/, () =>
-    cy.get('[data-test="breadcrumb-overview-item"]')
+    cy.get('[data-test="enrollment-breadcrumb-overview-item"]')
         .click(),
 );
 
