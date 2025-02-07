@@ -15,8 +15,8 @@ Then('you can assign a user when scheduling the event', () => {
     });
 });
 
-When(/^the user clicks the "Back to all stages and events" button/, () =>
-    cy.get('[data-test="enrollment-edit-event-back-button"]')
+When(/^the user clicks the "Enrollment dashboard" breadcrumb item/, () =>
+    cy.get('[data-test="breadcrumb-overview-item"]')
         .click(),
 );
 

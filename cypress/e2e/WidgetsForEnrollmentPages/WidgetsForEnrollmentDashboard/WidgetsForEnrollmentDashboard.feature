@@ -78,7 +78,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
 
   Scenario: You can delete a tracked entity from the profile widget
     Given you add a new tracked entity in the Malaria focus investigation program
-    When the user clicks the "Back to all stages and events" button 
+    When the user clicks the "Enrollment dashboard" breadcrumb item 
     When you open the overflow menu and click the "Delete Focus area" button
     Then you see the delete tracked entity confirmation modal
     When you confirm by clicking the "Yes, delete Focus area" button
