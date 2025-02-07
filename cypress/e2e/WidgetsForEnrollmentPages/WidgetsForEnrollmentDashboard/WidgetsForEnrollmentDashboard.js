@@ -55,3 +55,13 @@ When(/^the user clicks the "Enrollment dashboard" breadcrumb item/, () =>
         .click(),
 );
 
+Then('the user should see the confirm dialog', () => {
+    cy.get('aside[role="dialog"]')
+        .find('[data-test="dhis2-uicore-modaltitle"]')
+        .contains('Discard unsaved changes?')
+        .should('exist');
+
+    cy.get('[role="dialog"]')
+        .find('[data-test="dhis2-uicore-button"]')
+        .contains('Yes, discard changes').click({ force: true });
+});
