@@ -2,9 +2,9 @@
 import { connect } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { rollbackAssignee, setAssignee, startGoBackToMainPage } from './viewEvent.actions';
+import { cancelEditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { ViewEventComponent } from './ViewEvent.component';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-
 import { withErrorMessageHandler } from '../../../../HOC/withErrorMessageHandler';
 import {
     makeAssignedUserContextSelector,
@@ -42,6 +42,9 @@ const makeMapStateToProps = (_, ownProps) => {
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onBackToAllEvents: () => {
         dispatch(startGoBackToMainPage());
+    },
+    onBackToViewEvent: () => {
+        dispatch(cancelEditEventDataEntry());
     },
     dispatch,
 });
