@@ -40,7 +40,7 @@ const BreadcrumbItemPlain = ({ label, onClick, selected, dataTest, classes }) =>
         type="button"
         className={cx(classes.button, { selected })}
         onClick={onClick}
-        dataTest={dataTest}
+        data-test={dataTest}
     >
         {label}
     </button>
