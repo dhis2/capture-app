@@ -81,7 +81,12 @@ export const WidgetRelatedStagesPlain = ({
             enrollmentId,
         });
 
-        if (!formHasError && relationship && linkMode) {
+        if (formHasError) {
+            setIsLinking(false);
+            return;
+        }
+
+        if (relationship && linkMode) {
             const serverData = createServerData({ enrollment, linkedEvent: relatedStageLinkedEvent, relationship });
             addEventWithRelationship({ serverData, linkMode, eventIdToRedirectTo: relatedStageLinkedEvent?.event });
         }

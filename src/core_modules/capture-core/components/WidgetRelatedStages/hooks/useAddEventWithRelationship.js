@@ -44,6 +44,7 @@ export const useAddEventWithRelationship = ({
                 onUpdateOrAddEnrollmentEvents && onUpdateOrAddEnrollmentEvents(payload.serverData.events);
             },
             onSuccess: (_, payload: { linkMode: string, eventIdToRedirectTo?: string, serverData: Object }) => {
+                setIsLinking(false);
                 const queryKey = [ReactQueryAppNamespace, 'linkedEventByOriginEvent', eventId];
                 queryClient.refetchQueries(queryKey);
                 onUpdateEnrollmentEventsSuccess && onUpdateEnrollmentEventsSuccess(payload.serverData.events);
