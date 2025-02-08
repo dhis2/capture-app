@@ -151,46 +151,6 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
-const buildOrgUnitSettingsFn = () => {
-    const orgUnitComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withFocusSaver()(
-                withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
-
-    const orgUnitSettings = {
-        getComponent: () => orgUnitComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            width: props && props.formHorizontal ? 150 : 350,
-            label: i18n.t('Organisation unit'),
-            required: true,
-        }),
-        getPropName: () => 'orgUnit',
-        getValidatorContainers: () => getOrgUnitValidatorContainers(),
-        getMeta: () => ({
-            placement: placements.TOP,
-            section: dataEntrySectionNames.BASICINFO,
-        }),
-    };
-
-    return orgUnitSettings;
-};
-
-
 const buildScheduleDateSettingsFn = () => {
     const scheduleDateComponent = innerProps =>
         withCalculateMessages(overrideMessagePropNames)(
@@ -238,6 +198,46 @@ const buildScheduleDateSettingsFn = () => {
 
     return scheduleDateSettings;
 };
+
+const buildOrgUnitSettingsFn = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+    const orgUnitSettings = {
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: i18n.t('Organisation unit'),
+            required: true,
+        }),
+        getPropName: () => 'orgUnit',
+        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return orgUnitSettings;
+};
+
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
@@ -401,9 +401,9 @@ const saveHandlerConfig = {
 const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
-const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
-const OrgUnitField = withDataEntryField(buildOrgUnitSettingsFn())(ScheduleDateField);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(OrgUnitField);
+const OrgUnitField = withDataEntryField(buildOrgUnitSettingsFn())(GeometryField);
+const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(OrgUnitField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);

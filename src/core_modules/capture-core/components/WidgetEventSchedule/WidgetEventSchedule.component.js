@@ -102,22 +102,20 @@ const WidgetEventSchedulePlain = ({
                         />
                     </div>
                 </DataSection>
-                {
-                    programCategory && <DataSection
-                        dataTest="category-options-section"
-                        sectionName={programCategory.displayName}
-                    >
-                        <CategoryOptions
-                            categories={programCategory.categories}
-                            selectedOrgUnitId={orgUnit?.id}
-                            selectedCategories={selectedCategories}
-                            categoryOptionsError={categoryOptionsError}
-                            onClickCategoryOption={onClickCategoryOption}
-                            onResetCategoryOption={onResetCategoryOption}
-                            required
-                        />
-                    </DataSection>
-                }
+                {programCategory && <DataSection
+                    dataTest="category-options-section"
+                    sectionName={programCategory.displayName}
+                >
+                    <CategoryOptions
+                        categories={programCategory.categories}
+                        selectedOrgUnitId={orgUnit?.id}
+                        selectedCategories={selectedCategories}
+                        categoryOptionsError={categoryOptionsError}
+                        onClickCategoryOption={onClickCategoryOption}
+                        onResetCategoryOption={onResetCategoryOption}
+                        required
+                    />
+                </DataSection>}
                 <DataSection
                     dataTest="note-section"
                     sectionName={i18n.t('Event notes')}
@@ -128,13 +126,11 @@ const WidgetEventSchedulePlain = ({
                         handleAddNote={onAddNote}
                     />
                 </DataSection>
-                {
-                    enableUserAssignment && (
-                        <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
-                            <Assignee onSet={onSetAssignee} assignee={assignee} />
-                        </DataSection>
-                    )
-                }
+                {enableUserAssignment && (
+                    <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
+                        <Assignee onSet={onSetAssignee} assignee={assignee} />
+                    </DataSection>
+                )}
                 <ScheduleButtons
                     hasChanges={scheduleDate !== suggestedScheduleDate}
                     onCancel={onCancel}
@@ -145,8 +141,8 @@ const WidgetEventSchedulePlain = ({
                     stageName={stageName}
                     orgUnitName={orgUnit?.name}
                 />
-            </div >
-        </Widget >
+            </div>
+        </Widget>
     );
 };
 
