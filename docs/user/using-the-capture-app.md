@@ -1345,3 +1345,49 @@ The attribute option combo selector will be displayed when you are adding or cha
 Example from new Tracker event:
 
 ![](resources/images/attribute-option-combo-tracker.png)
+
+
+## Changelog
+
+The **Changelog** feature provides a historical record of changes made to data for both events and Tracked Entities. Every time data is added, modified, or deleted, a record is stored in the changelog.
+
+![](resources/images/changelog.png)
+
+### Changelog Functionality
+
+**Sorting**: Clicking the sorting icon next to a column header toggles between default, ascending, and descending order. By default, records are sorted by date (newest first). Sorting by user or data item is also available, but only one sort can be applied at a time.
+
+**Filtering**: You can filter by a specific data item. Only one filter can be applied at a time.
+
+> **Note:**  
+> All data items are displayed in the filter dropdown, regardless of whether they have a changelog record.
+
+**Pagination**: Displays 10 records per page by default, with options to adjust the number of records shown, up to 100 per page.
+
+---
+
+### Event Changelog
+
+The **Event Changelog** tracks changes to data elements within a program event.
+
+#### How to Open the Event Changelog
+1. **Navigate** to an event in the Capture app.  
+2. Click **View changelog** to open the changelog.
+![](resources/images/open-event-changelog.png)
+
+---
+
+### Tracked Entity Changelog
+
+The **Tracked Entity Changelog** logs updates to tracked entity attributes within an enrollment.
+
+#### How to Open the Tracked Entity Changelog
+1. **Go to the Maintenance app** and **enable** the **Tracked Entity Instance Audit Log**.
+![](resources/images/enable-tracked-entity-instance-audit-log.png)
+
+2. **Open** the enrollment dashboard in the Capture app.  
+
+3. Click **View changelog** in the **Tracked Entity Profile** widget to open the changelog.
+![](resources/images/open-tracked-entity-changelog.png)
+
+
