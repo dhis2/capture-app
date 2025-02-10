@@ -1,8 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, IconChevronLeft24, spacers } from '@dhis2/ui';
+import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
@@ -23,9 +22,6 @@ const getStyles = (theme: Theme) => ({
     dataEntryPaper: {
         marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
-    },
-    showAllEvents: {
-        marginBottom: spacers.dp12,
     },
     header: {
         ...theme.typography.title,
@@ -72,14 +68,6 @@ class ViewEventPlain extends Component<Props, State> {
             warningOpen: false,
         };
     }
-    handleGoBackToAllEvents = () => {
-        const { isUserInteractionInProgress, onBackToAllEvents } = this.props;
-        if (!isUserInteractionInProgress) {
-            onBackToAllEvents();
-        } else {
-            this.setState({ warningOpen: true });
-        }
-    }
 
     render() {
         const {
@@ -107,32 +95,22 @@ class ViewEventPlain extends Component<Props, State> {
                     onBackToViewEvent={onBackToViewEvent}
                     onBackToMainPage={onBackToAllEvents}
                 />
-                <div>
-                    <Button
-                        className={classes.showAllEvents}
-                        onClick={this.handleGoBackToAllEvents}
-                        small
-                        icon={<IconChevronLeft24 />}
-                    >
-                        {i18n.t('Show all events')}
-                    </Button>
-                    <div className={classes.contentContainer}>
-                        <EventDetails
-                            eventAccess={eventAccess}
-                            programStage={programStage}
-                            onBackToViewEvent={onBackToViewEvent}
-                            onBackToAllEvents={onBackToAllEvents}
-                        />
-                        <RightColumnWrapper
-                            eventAccess={eventAccess}
-                            programStage={programStage}
-                            dataEntryKey={currentDataEntryKey}
-                            assignee={assignee}
-                            getAssignedUserSaveContext={getAssignedUserSaveContext}
-                            onSaveAssignee={onSaveAssignee}
-                            onSaveAssigneeError={onSaveAssigneeError}
-                        />
-                    </div>
+                <div className={classes.contentContainer}>
+                    <EventDetails
+                        eventAccess={eventAccess}
+                        programStage={programStage}
+                        onBackToViewEvent={onBackToViewEvent}
+                        onBackToAllEvents={onBackToAllEvents}
+                    />
+                    <RightColumnWrapper
+                        eventAccess={eventAccess}
+                        programStage={programStage}
+                        dataEntryKey={currentDataEntryKey}
+                        assignee={assignee}
+                        getAssignedUserSaveContext={getAssignedUserSaveContext}
+                        onSaveAssignee={onSaveAssignee}
+                        onSaveAssigneeError={onSaveAssigneeError}
+                    />
                 </div>
                 <DiscardDialog
                     {...defaultDialogProps}

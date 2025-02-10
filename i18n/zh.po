@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -111,13 +111,13 @@ msgid "Lat"
 msgstr "纬度"
 
 msgid "Long"
-msgstr "长"
+msgstr "经度"
 
 msgid "lat"
-msgstr ""
+msgstr "纬度"
 
 msgid "long"
-msgstr ""
+msgstr "经度"
 
 msgid "Show less"
 msgstr "显示较少"
@@ -735,6 +735,23 @@ msgid ""
 "select a valid combination."
 msgstr "类别选项对所选机构无效。请选择一个有效的组合。"
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "请选择 {{category}}."
 
@@ -781,7 +798,7 @@ msgid "Save {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"
 
 msgid "Enter details now is not available when creating a relationship"
-msgstr ""
+msgstr "创建关系时无法立即输入详细信息"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
@@ -1209,7 +1226,7 @@ msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
 
 msgid "Saving to {{stageName}} for {{programName}}"
-msgstr ""
+msgstr "保存到{{stageName}} ，以便{{programName}}"
 
 msgid "program or stage is invalid"
 msgstr "项目或阶段无效"
@@ -1301,7 +1318,7 @@ msgid "Write a note about this scheduled event"
 msgstr "撰写关于此预定活动的说明"
 
 msgid "Program or stage is invalid"
-msgstr ""
+msgstr "程序或阶段无效"
 
 msgid "Save note"
 msgstr "保存笔记"
@@ -1366,7 +1383,7 @@ msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
 
 msgid "Choose a {{linkableStageLabel}} event"
-msgstr ""
+msgstr "选择{{linkableStageLabel}} 活动"
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "选择 {{linkableStageLabel}}"
@@ -1378,7 +1395,7 @@ msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} 没有可链接的事件"
 
 msgid "Actions - {{relationshipName}}"
-msgstr ""
+msgstr "行动{{relationshipName}}"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "关系不明确，请联系系统管理员"
@@ -1387,7 +1404,7 @@ msgid "Enter details now"
 msgstr "立即输入详细信息"
 
 msgid "Link to an existing event"
-msgstr ""
+msgstr "链接到现有活动"
 
 msgid "Scheduled date"
 msgstr "调度日期"
@@ -1534,7 +1551,7 @@ msgid "File"
 msgstr "文件"
 
 msgid "Image"
-msgstr "图片(PNG)"
+msgstr "图片"
 
 msgid "New {{trackedEntityTypeName}} relationship"
 msgstr "新的 {{trackedEntityTypeName}} 关系"

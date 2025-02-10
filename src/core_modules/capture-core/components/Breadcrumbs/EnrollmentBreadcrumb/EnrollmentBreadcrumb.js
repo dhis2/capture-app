@@ -128,6 +128,7 @@ const BreadcrumbsPlain = ({
                         label={button.label}
                         onClick={button.onClick}
                         selected={button.selected}
+                        dataTest={`enrollment-breadcrumb-${button.key}-item`}
                     />
                     {index < (breadcrumbItems.length - 1) && (
                         <IconChevronRight16 color={colors.grey800} />

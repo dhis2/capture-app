@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -111,16 +111,16 @@ msgid "Last updated"
 msgstr "Sist oppdatert"
 
 msgid "Lat"
-msgstr ""
+msgstr "Breddegrad"
 
 msgid "Long"
-msgstr ""
+msgstr "Lengdegrad"
 
 msgid "lat"
-msgstr ""
+msgstr "Breddegrad"
 
 msgid "long"
-msgstr ""
+msgstr "Lengdegrad"
 
 msgid "Show less"
 msgstr "Vis mindre"
@@ -686,6 +686,9 @@ msgid ""
 "You do not have permissions to access to this program, registering unit or "
 "record, contact your administrator for more information."
 msgstr ""
+"Du har ikke tillatelse til å få tilgang til dette programmet, "
+"registreringsenheten eller fortegnelse, kontakt administratoren for mer "
+"informasjon."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
@@ -762,6 +765,23 @@ msgstr ""
 "Valgt kategori er ikke gyldig for valgt organisasjonsenhet. Velg en gyldig "
 "kombinasjon. "
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "Velg {{category}}."
 
@@ -810,6 +830,7 @@ msgstr "Lagre {{trackedEntityName}}"
 
 msgid "Enter details now is not available when creating a relationship"
 msgstr ""
+"Skriv inn detaljer nå er ikke tilgjengelig når du oppretter en relasjon"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
@@ -1080,7 +1101,7 @@ msgid "Assigned to"
 msgstr "Tildelt til"
 
 msgid "You don't have access to edit the assigned user"
-msgstr ""
+msgstr "Du har ikke tilgang til å redigere den tildelte programbrukeren"
 
 msgid "Edit"
 msgstr "Rediger"
@@ -1090,6 +1111,7 @@ msgstr "Ingen er tildelt denne hendelsen"
 
 msgid "You don't have access to assign a user to this event"
 msgstr ""
+"Du har ikke tilgang til å tilordne en programbruker til denne hendelsen"
 
 msgid "Assign"
 msgstr "Tildel"
@@ -1139,7 +1161,7 @@ msgid "Mark incomplete"
 msgstr "Merk som ufullstendig"
 
 msgid "You do not have access to delete this enrollment"
-msgstr ""
+msgstr "Du har ikke tilgang til å slette denne registreringen"
 
 msgid "Delete enrollment"
 msgstr "Slett registrering"
@@ -1743,7 +1765,10 @@ msgid ""
 msgid_plural ""
 "This action will complete {{count}} active enrollment in your selection."
 msgstr[0] ""
+"Denne handlingen vil fullføre {{count}}aktiv registrering i utvalget ditt."
 msgstr[1] ""
+"Denne handlingen vil fullføre {{count}}aktive registreringer i utvalget "
+"ditt."
 
 msgid "{{count}} enrollment already marked as completed will not be changed."
 msgid_plural ""
