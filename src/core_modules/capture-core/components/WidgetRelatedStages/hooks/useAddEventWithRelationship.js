@@ -29,7 +29,7 @@ export const useAddEventWithRelationship = ({
 }) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
-    const { show: showSccess } = useAlert(({ message }) => message, { success: true });
+    const { show: showSuccess } = useAlert(({ message }) => message, { success: true });
     const { show: showAlert } = useAlert(({ message }) => message, { critical: true });
 
     const { mutate } = useMutation<any, Error, { serverData: Object, linkMode: string, eventIdToRedirectTo?: string }>(
@@ -52,7 +52,7 @@ export const useAddEventWithRelationship = ({
                 if (payload.linkMode === relatedStageActions.ENTER_DATA && payload.eventIdToRedirectTo) {
                     onNavigateToEvent(payload.eventIdToRedirectTo);
                 } else {
-                    showSccess({ message: i18n.t('The event was succesfully linked') });
+                    showSuccess({ message: i18n.t('The event was successfully linked') });
                 }
             },
             onError: (_, payload: { serverData: Object }) => {
