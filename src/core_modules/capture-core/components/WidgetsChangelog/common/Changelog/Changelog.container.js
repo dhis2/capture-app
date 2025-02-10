@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal } from '@dhis2/ui';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useChangelogData, useListDataValues } from '../hooks';
 import { ChangelogComponent } from './Changelog.component';
 import { CHANGELOG_ENTITY_TYPES } from './Changelog.constants';
@@ -66,6 +67,8 @@ export const Changelog = ({
             </Modal>
         );
     }
+    
+    const supportsChangelogV2 = featureAvailable(FEATURES.changelogsV2);
 
     return (
         <ChangelogComponent
@@ -85,6 +88,7 @@ export const Changelog = ({
             attributeToFilterBy={attributeToFilterBy}
             setAttributeToFilterBy={setAttributeToFilterBy}
             dataItemDefinitions={dataItemDefinitions}
+            supportsChangelogV2={supportsChangelogV2}
         />
     );
 };

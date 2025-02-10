@@ -77,4 +77,5 @@ export type ChangelogProps = {
     setFilterValue: (any) => void,
     dataItemDefinitions: ItemDefinitions,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
+    supportsChangelogV2: boolean,
 };

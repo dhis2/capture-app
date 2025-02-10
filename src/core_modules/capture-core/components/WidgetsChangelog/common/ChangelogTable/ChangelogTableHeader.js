@@ -1,8 +1,16 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { DataTableColumnHeader, DataTableHead, DataTableRow } from '@dhis2/ui';
-import { SORT_DIRECTIONS, SORT_TARGETS, CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
+import {
+    DataTableColumnHeader,
+    DataTableHead,
+    DataTableRow,
+} from '@dhis2/ui';
+import {
+    SORT_DIRECTIONS,
+    SORT_TARGETS,
+    CHANGELOG_ENTITY_TYPES,
+} from '../Changelog/Changelog.constants';
 import type { SortDirection } from '../Changelog/Changelog.types';
 
 type Props = {
@@ -11,7 +19,16 @@ type Props = {
     setSortDirection: (SortDirection) => void,
     setColumnToSortBy: (column: string) => void,
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
+    supportsChangelogV2: boolean,
 };
+
+type ColumnConfig = {|
+    label: string,
+    width: string,
+    isSortable: boolean,
+    name?: string,
+    sortIconTitle?: string,
+|};
 
 const getCurrentSortDirection = (
     columnName: string,
@@ -26,6 +43,7 @@ export const ChangelogTableHeader = ({
     setSortDirection,
     setColumnToSortBy,
     entityType,
+    supportsChangelogV2,
 }: Props) => {
     const handleSortIconClick = ({ name, direction }) => {
         setSortDirection(direction);
@@ -36,64 +54,71 @@ export const ChangelogTableHeader = ({
         ? SORT_TARGETS.ATTRIBUTE
         : SORT_TARGETS.DATA_ITEM;
 
+        const columns: Array<ColumnConfig> = [
+            {
+            name: SORT_TARGETS.DATE,
+            label: i18n.t('Date'),
+            sortIconTitle: i18n.t('Sort by date'),
+            width: '140px',
+            isSortable: true,
+        },
+        {
+            name: SORT_TARGETS.USERNAME,
+            label: i18n.t('User'),
+            sortIconTitle: i18n.t('Sort by username'),
+            width: '125px',
+            isSortable: supportsChangelogV2,
+        },
+        {
+            name: sortTargetDataItem,
+            label: i18n.t('Data item'),
+            sortIconTitle: i18n.t('Sort by data item'),
+            width: '125px',
+            isSortable: supportsChangelogV2,
+        },
+        {
+            label: i18n.t('Change'),
+            width: '85px',
+            isSortable: false,
+        },
+        {
+            label: i18n.t('Value'),
+            width: '275px',
+            isSortable: false,
+        },
+    ];
+
     return (
         <DataTableHead>
             <DataTableRow>
-                <DataTableColumnHeader
-                    name={SORT_TARGETS.DATE}
-                    sortDirection={getCurrentSortDirection(
-                        SORT_TARGETS.DATE,
-                        columnToSortBy,
-                        sortDirection,
-                    )}
-                    onSortIconClick={handleSortIconClick}
-                    sortIconTitle={i18n.t('Sort by date')}
-                    fixed
-                    top="0"
-                    width="140px"
-                >
-                    {i18n.t('Date')}
-                </DataTableColumnHeader>
-
-                <DataTableColumnHeader
-                    name={SORT_TARGETS.USERNAME}
-                    sortDirection={getCurrentSortDirection(
-                        SORT_TARGETS.USERNAME,
-                        columnToSortBy,
-                        sortDirection,
-                    )}
-                    onSortIconClick={handleSortIconClick}
-                    sortIconTitle={i18n.t('Sort by username')}
-                    fixed
-                    top="0"
-                    width="125px"
-                >
-                    {i18n.t('User')}
-                </DataTableColumnHeader>
-
-                <DataTableColumnHeader
-                    name={sortTargetDataItem}
-                    sortDirection={getCurrentSortDirection(
-                        sortTargetDataItem,
-                        columnToSortBy,
-                        sortDirection,
-                    )}
-                    onSortIconClick={handleSortIconClick}
-                    sortIconTitle={i18n.t('Sort by data item')}
-                    fixed
-                    top="0"
-                    width="125px"
-                >
-                    {i18n.t('Data item')}
-                </DataTableColumnHeader>
-
-                <DataTableColumnHeader fixed top="0" width="85px">
-                    {i18n.t('Change')}
-                </DataTableColumnHeader>
-
-                <DataTableColumnHeader fixed top="0" width="275px">
-                    {i18n.t('Value')}
-                </DataTableColumnHeader>
+                {columns.map(({
+                    name,
+                    label,
+                    sortIconTitle,
+                    width,
+                    isSortable,
+                }) => (
+                    <DataTableColumnHeader
+                        key={label}
+                        fixed
+                        top="0"
+                        width={width}
+                        name={isSortable ? name : undefined}
+                        sortDirection={
+                            isSortable && name
+                                ? getCurrentSortDirection(name, columnToSortBy, sortDirection)
+                                : undefined
+                        }
+                        onSortIconClick={
+                            isSortable && name
+                                ? handleSortIconClick
+                                : undefined
+                        }
+                        sortIconTitle={isSortable ? sortIconTitle : undefined}
+                    >
+                        {label}
+                    </DataTableColumnHeader>
+                ))}
             </DataTableRow>
         </DataTableHead>
     );
