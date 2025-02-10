@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { rollbackAssignee, setAssignee, startGoBackToMainPage } from './viewEvent.actions';
 import { cancelEditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
@@ -12,6 +13,7 @@ import {
     makeProgramStageSelector,
 } from './viewEvent.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
+import { setCurrentDataEntry } from '../../../DataEntry/actions/dataEntry.actions'; // <-- import setCurrentDataEntry
 
 const makeMapStateToProps = (_, ownProps) => {
     const programStageSelector = makeProgramStageSelector();
@@ -44,7 +46,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(startGoBackToMainPage());
     },
     onBackToViewEvent: () => {
-        dispatch(cancelEditEventDataEntry());
+        dispatch(batchActions([
+            cancelEditEventDataEntry(),
+            setCurrentDataEntry(dataEntryIds.SINGLE_EVENT, dataEntryKeys.VIEW),
+        ]));
     },
     dispatch,
 });
