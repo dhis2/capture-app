@@ -13,7 +13,7 @@ import {
     makeProgramStageSelector,
 } from './viewEvent.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
-import { setCurrentDataEntry } from '../../../DataEntry/actions/dataEntry.actions'; // <-- import setCurrentDataEntry
+import { setCurrentDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
 
 const makeMapStateToProps = (_, ownProps) => {
     const programStageSelector = makeProgramStageSelector();
