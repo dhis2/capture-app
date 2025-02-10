@@ -834,7 +834,7 @@ Then('the download dialog opens', () => {
 Then('the CSV button exists', () => {
     const pagingParam = hasVersionSupport('@v>=41') ? 'paging=false' : 'skipPaging=true';
     const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
-    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnits';
+    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnit';
     const params = `order=createdAt%3Adesc&${orgUnitParam}=DiszpKrYNg8&${orgUnitModeParam}=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&${pagingParam}`;
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
@@ -849,7 +849,7 @@ Then('the CSV button exists', () => {
 Then('the JSON button exists', () => {
     const pagingParam = hasVersionSupport('@v>=41') ? 'paging=false' : 'skipPaging=true';
     const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
-    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnits';
+    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnit';
     const params = `order=createdAt%3Adesc&${orgUnitParam}=DiszpKrYNg8&${orgUnitModeParam}=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&${pagingParam}`;
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {

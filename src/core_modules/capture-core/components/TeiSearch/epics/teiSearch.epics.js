@@ -45,7 +45,7 @@ const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) => {
 
     return ['ACCESSIBLE', 'CAPTURE', 'ALL'].includes(orgUnitScope)
         ? { [orgUnitModeQueryParam]: orgUnitScope }
-        : { [orgUnitQueryParam]: orgUnit && orgUnit.id, [orgUnitModeQueryParam]: orgUnitScope };
+        : { [orgUnitQueryParam]: orgUnit?.id, [orgUnitModeQueryParam]: orgUnitScope };
 };
 
 const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>

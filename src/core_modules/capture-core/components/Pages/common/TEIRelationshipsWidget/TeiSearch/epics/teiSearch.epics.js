@@ -43,7 +43,7 @@ const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) => {
         ? 'orgUnits'
         : 'orgUnit';
     return orgUnitScope !== 'ACCESSIBLE' ?
-        { [orgUnitQueryParam]: orgUnit && orgUnit.id, [orgUnitModeQueryParam]: orgUnitScope } :
+        { [orgUnitQueryParam]: orgUnit?.id, [orgUnitModeQueryParam]: orgUnitScope } :
         { [orgUnitModeQueryParam]: orgUnitScope };
 };
 

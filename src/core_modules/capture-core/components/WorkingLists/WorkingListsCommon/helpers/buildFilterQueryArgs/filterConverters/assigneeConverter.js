@@ -10,6 +10,6 @@ export function convertAssignee(
         : 'assignedUser';
     return {
         assignedUserMode: sourceValue.assignedUserMode,
-        [assignedUsersQueryParam]: sourceValue.assignedUser && sourceValue.assignedUser.id,
+        [assignedUsersQueryParam]: sourceValue.assignedUser?.id,
     };
 }
