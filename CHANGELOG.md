@@ -1,3 +1,10 @@
+## [101.25.4](https://github.com/dhis2/capture-app/compare/v101.25.3...v101.25.4) (2025-02-10)
+
+
+### Bug Fixes
+
+* [DHIS2-18978] Back buttons duplicate breadcrumbs ([#3957](https://github.com/dhis2/capture-app/issues/3957)) ([7c36218](https://github.com/dhis2/capture-app/commit/7c36218aea78dca98894dbbd72d3dc5984489b62))
+
 ## [101.25.3](https://github.com/dhis2/capture-app/compare/v101.25.2...v101.25.3) (2025-02-09)
 
 
