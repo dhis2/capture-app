@@ -85,6 +85,7 @@ const EventBreadcrumbPlain = ({
                         onClick={button.onClick}
                         selected={button.selected}
                         classes={classes}
+                        dataTest={`event-breadcrumb-${button.key}-item`}
                     />
                     {index < (breadcrumbItems.length - 1) && (
                         <IconChevronRight16 color={colors.grey800} />

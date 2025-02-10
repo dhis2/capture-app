@@ -30,7 +30,6 @@ export const EnrollmentEditEventPageComponent = ({
     hideWidgets,
     onDelete,
     onAddNew,
-    onGoBack,
     onLinkedRecordClick,
     orgUnitId,
     eventDate,
@@ -90,7 +89,6 @@ export const EnrollmentEditEventPageComponent = ({
             onSaveExternal={onSaveExternal}
             trackedEntityTypeId={trackedEntityTypeId}
             programStage={programStage}
-            onGoBack={onGoBack}
             program={program}
             orgUnitId={orgUnitId}
             teiId={teiId}

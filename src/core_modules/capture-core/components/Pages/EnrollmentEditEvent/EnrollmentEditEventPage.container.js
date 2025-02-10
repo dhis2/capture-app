@@ -287,7 +287,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
             mode={currentPageMode}
             pageStatus={pageStatus}
             programStage={programStage}
-            onGoBack={onGoBack}
             onBackToMainPage={onBackToMainPage}
             onBackToDashboard={onGoBack}
             onBackToViewEvent={onBackToViewEvent}

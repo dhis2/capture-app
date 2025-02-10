@@ -4,7 +4,6 @@ import { ProgramStage, RenderFoundation } from '../../metaData';
 
 export type Props = {|
     eventStatus?: string,
-    onGoBack: () => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) =>void,
     onSaveExternal: () => void,
