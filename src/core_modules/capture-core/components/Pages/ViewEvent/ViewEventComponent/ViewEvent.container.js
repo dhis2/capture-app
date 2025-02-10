@@ -13,10 +13,10 @@ import {
 } from './viewEvent.selectors';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 
-const makeMapStateToProps = (_, ownProps) => {
+const makeMapStateToProps = () => {
     const programStageSelector = makeProgramStageSelector();
     const eventAccessSelector = makeEventAccessSelector();
-    const assignedUserContextSelector = makeAssignedUserContextSelector(ownProps.serverMinorVersion);
+    const assignedUserContextSelector = makeAssignedUserContextSelector();
 
     // $FlowFixMe[not-an-object] automated comment
     return (state: ReduxState) => {

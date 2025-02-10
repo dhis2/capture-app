@@ -26,7 +26,7 @@ import type {
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
 import { getCachedSingleResourceFromKeyAsync } from '../../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
 import { userStores } from '../../../storageControllers/stores';
-import { FEATURES, hasAPISupportForFeature } from '../../../../capture-core-utils';
+import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 
 
 export const actionTypes = {
@@ -48,7 +48,6 @@ export const loadViewEventDataEntry =
         attributeValues,
         dataEntryId,
         dataEntryKey,
-        serverMinorVersion,
     }: {
         eventContainer: ClientEventContainer,
         orgUnit: OrgUnit,
@@ -59,7 +58,6 @@ export const loadViewEventDataEntry =
         enrollment?: EnrollmentData,
         attributeValues?: Array<AttributeValue>,
         onCategoriesQuery?: ?Promise<Object>,
-        serverMinorVersion: number
     }) => {
         const dataEntryPropsToInclude = [
             {
@@ -95,7 +93,7 @@ export const loadViewEventDataEntry =
         let attributeCategoryOptions;
 
         if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
-            const newUIDsSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newUIDsSeparator);
+            const newUIDsSeparator = featureAvailable(FEATURES.newUIDsSeparator);
             // $FlowFixMe - this should work
             const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(newUIDsSeparator ? ',' : ';');
             const getCategoryOptionsFromIndexedDB = async (optionIds) => {

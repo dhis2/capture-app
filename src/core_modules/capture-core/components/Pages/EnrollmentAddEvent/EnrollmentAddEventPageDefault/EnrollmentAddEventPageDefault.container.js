@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import moment from 'moment';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
-import { useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox } from '@dhis2/ui';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
@@ -39,7 +39,6 @@ export const EnrollmentAddEventPageDefault = ({
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const { fromClientDate } = useTimeZoneConversion();
-    const { serverVersion: { minor } } = useConfig();
 
     const handleCancel = useCallback(() => {
         navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -76,7 +75,7 @@ export const EnrollmentAddEventPageDefault = ({
             const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
 
             const eventsWithUpdatedDate = events.map(event => ({
-                ...convertEventAttributeOptions(event, minor),
+                ...convertEventAttributeOptions(event),
                 updatedAt,
             }));
 
@@ -89,7 +88,7 @@ export const EnrollmentAddEventPageDefault = ({
 
             navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         },
-        [fromClientDate, navigate, programId, orgUnitId, teiId, enrollmentId, minor, dispatch],
+        [fromClientDate, navigate, programId, orgUnitId, teiId, enrollmentId, dispatch],
     );
 
     const handleAddNew = useCallback(() => {

@@ -3,7 +3,7 @@
 import log from 'loglevel';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
-import { pipe, errorCreator } from 'capture-core-utils';
+import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
 import type {
     CachedAttributeTranslation,
     CachedTrackedEntityTypeAttribute,
@@ -163,11 +163,14 @@ export class DataElementFactory {
                             },
                         });
                     } else {
+                        const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                            ? 'orgUnitMode'
+                            : 'ouMode';
                         requestPromise = querySingleResource({
                             resource: 'tracker/trackedEntities',
                             params: {
                                 trackedEntityType: contextProps.trackedEntityTypeId,
-                                ouMode: 'ACCESSIBLE',
+                                [orgUnitModeQueryParam]: 'ACCESSIBLE',
                                 filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                             },
                         });

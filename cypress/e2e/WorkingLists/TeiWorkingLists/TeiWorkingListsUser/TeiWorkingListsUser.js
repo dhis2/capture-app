@@ -1,6 +1,7 @@
 import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
+import { hasVersionSupport } from '../../../../support/tagUtils';
 
 const cleanUpIfApplicable = (programId) => {
     cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
@@ -831,7 +832,10 @@ Then('the download dialog opens', () => {
 });
 
 Then('the CSV button exists', () => {
-    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    const pagingParam = hasVersionSupport('@v>=41') ? 'paging=false' : 'skipPaging=true';
+    const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
+    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnits';
+    const params = `order=createdAt%3Adesc&${orgUnitParam}=DiszpKrYNg8&${orgUnitModeParam}=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&${pagingParam}`;
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download as CSV');
@@ -843,7 +847,10 @@ Then('the CSV button exists', () => {
 });
 
 Then('the JSON button exists', () => {
-    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    const pagingParam = hasVersionSupport('@v>=41') ? 'paging=false' : 'skipPaging=true';
+    const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
+    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnits';
+    const params = `order=createdAt%3Adesc&${orgUnitParam}=DiszpKrYNg8&${orgUnitModeParam}=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&${pagingParam}`;
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download as JSON');

@@ -18,7 +18,6 @@ export const deriveAutoGenerateEvents = ({
     firstStageDuringRegistrationEvent,
     relatedStageLinkedEvent,
     attributeCategoryOptions,
-    serverMinorVersion,
 }: {
     stages: Map<string, ProgramStage>,
     enrolledAt: string,
@@ -28,7 +27,6 @@ export const deriveAutoGenerateEvents = ({
     firstStageDuringRegistrationEvent: ?RequestEvent,
     relatedStageLinkedEvent: ?LinkedRequestEvent,
     attributeCategoryOptions: { [categoryId: string]: string } | string,
-    serverMinorVersion: number,
 }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate (enrolledAt)
@@ -55,7 +53,7 @@ export const deriveAutoGenerateEvents = ({
                 const eventAttributeCategoryOptions = {};
                 if (attributeCategoryOptions) {
                     eventAttributeCategoryOptions.attributeCategoryOptions =
-                        convertCategoryOptionsToServer(attributeCategoryOptions, serverMinorVersion);
+                        convertCategoryOptionsToServer(attributeCategoryOptions);
                 }
                 const eventInfo = openAfterEnrollment
                     ? {

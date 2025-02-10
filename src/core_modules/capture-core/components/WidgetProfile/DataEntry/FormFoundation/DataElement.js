@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { pipe, errorCreator } from 'capture-core-utils';
+import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
 
 import type { ProgramTrackedEntityAttribute, TrackedEntityAttribute, OptionSet as OptionSetType } from './types';
 import {
@@ -55,11 +55,14 @@ const onValidateOnScopeTrackedEntityType = (
             },
         });
     } else {
+        const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+            ? 'orgUnitMode'
+            : 'ouMode';
         requestPromise = querySingleResource({
             resource: 'tracker/trackedEntities',
             params: {
                 trackedEntityType: contextProps.trackedEntityTypeId,
-                ouMode: 'ACCESSIBLE',
+                [orgUnitModeQueryParam]: 'ACCESSIBLE',
                 filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
             },
         });
@@ -124,11 +127,14 @@ const buildDataElementUnique = (
                     },
                 });
             } else {
+                const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                    ? 'orgUnitMode'
+                    : 'ouMode';
                 requestPromise = querySingleResource({
                     resource: 'tracker/trackedEntities',
                     params: {
                         program: contextProps.programId,
-                        ouMode: 'ACCESSIBLE',
+                        [orgUnitModeQueryParam]: 'ACCESSIBLE',
                         filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                     },
                 });
