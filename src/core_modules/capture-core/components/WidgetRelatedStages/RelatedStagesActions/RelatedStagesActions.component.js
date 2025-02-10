@@ -45,7 +45,6 @@ const styles = () => ({
 
 const Schedule = ({
     actionsOptions,
-    linkableEvents,
     selectedAction,
     updateSelectedAction,
     programStage,
@@ -61,7 +60,7 @@ const Schedule = ({
     let tooltipContent = '';
     if (disabled) {
         tooltipContent = disabledMessage;
-    } else if (!linkableEvents.length) {
+    } else {
         tooltipContent = i18n.t('{{ linkableStageLabel }} is not repeatable', {
             linkableStageLabel: programStage.stageForm.name,
             interpolation: { escapeValue: false },
@@ -90,7 +89,6 @@ const Schedule = ({
 
 const EnterData = ({
     actionsOptions,
-    linkableEvents,
     selectedAction,
     updateSelectedAction,
     programStage,
@@ -106,7 +104,7 @@ const EnterData = ({
     let tooltipContent = '';
     if (disabled) {
         tooltipContent = disabledMessage;
-    } else if (!linkableEvents.length) {
+    } else {
         tooltipContent = i18n.t('{{ linkableStageLabel }} is not repeatable', {
             linkableStageLabel: programStage.stageForm.name,
             interpolation: { escapeValue: false },
@@ -233,7 +231,6 @@ const RelatedStagesActionsPlain = ({
                     <>
                         <Schedule
                             actionsOptions={actionsOptions}
-                            linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
@@ -241,7 +238,6 @@ const RelatedStagesActionsPlain = ({
                         />
                         <EnterData
                             actionsOptions={actionsOptions}
-                            linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
