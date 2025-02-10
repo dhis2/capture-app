@@ -61,7 +61,7 @@ const Schedule = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} is not repeatable', {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have only event', {
             linkableStageLabel: programStage.stageForm.name,
             interpolation: { escapeValue: false },
         });
@@ -105,7 +105,7 @@ const EnterData = ({
     if (disabled) {
         tooltipContent = disabledMessage;
     } else {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} is not repeatable', {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have only event', {
             linkableStageLabel: programStage.stageForm.name,
             interpolation: { escapeValue: false },
         });
