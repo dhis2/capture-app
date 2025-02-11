@@ -60,6 +60,8 @@ export const SearchResultsIndex = ({
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
     const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
+    const [isFallbackLoading, setIsFallbackLoading] = useState(false);
+
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
@@ -91,7 +93,6 @@ export const SearchResultsIndex = ({
             page: newOtherPage,
         });
     };
-    const [isFallbackLoading, setIsFallbackLoading] = useState(false);
 
     useEffect(() => {
         if (otherResults !== undefined) {
