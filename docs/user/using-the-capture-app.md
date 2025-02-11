@@ -1368,7 +1368,7 @@ The **Changelog** feature provides a historical record of changes made to data f
 
 ### Event Changelog
 
-The **Event Changelog** tracks changes to data elements within a program event.
+The **Event Changelog** tracks changes to data elements within an event.
 
 #### How to Open the Event Changelog
 1. **Navigate** to an event in the Capture app.  
@@ -1379,7 +1379,7 @@ The **Event Changelog** tracks changes to data elements within a program event.
 
 ### Tracked Entity Changelog
 
-The **Tracked Entity Changelog** logs updates to tracked entity attributes within an enrollment.
+The **Tracked Entity Changelog** tracks chnages to tracked entity attributes within an enrollment.
 
 #### How to Open the Tracked Entity Changelog
 1. **Go to the Maintenance app** and **enable** the **Tracked Entity Instance Audit Log**.
