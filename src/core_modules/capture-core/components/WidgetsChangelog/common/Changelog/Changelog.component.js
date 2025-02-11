@@ -47,16 +47,16 @@ export const ChangelogComponent = ({
         <ModalTitle>{i18n.t('Changelog')}</ModalTitle>
         <ModalContent>
             {supportsChangelogV2 && (
-            <ChangelogFilterBar
-                attributeToFilterBy={attributeToFilterBy}
-                setAttributeToFilterBy={setAttributeToFilterBy}
-                filterValue={filterValue}
-                setFilterValue={setFilterValue}
-                dataItemDefinitions={dataItemDefinitions}
-                entityType={entityType}
-            />
+                <ChangelogFilterBar
+                    attributeToFilterBy={attributeToFilterBy}
+                    setAttributeToFilterBy={setAttributeToFilterBy}
+                    filterValue={filterValue}
+                    setFilterValue={setFilterValue}
+                    dataItemDefinitions={dataItemDefinitions}
+                    entityType={entityType}
+                />
             )}
-            <DataTable fixed dataTest={'changelog-data-table'} layout={'fixed'}>
+            <DataTable dataTest={'changelog-data-table'} layout={'fixed'}>
                 <ChangelogTableHeader
                     columnToSortBy={columnToSortBy}
                     setColumnToSortBy={setColumnToSortBy}

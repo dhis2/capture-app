@@ -67,7 +67,7 @@ export const Changelog = ({
             </Modal>
         );
     }
-    
+
     const supportsChangelogV2 = featureAvailable(FEATURES.changelogsV2);
 
     return (

@@ -54,8 +54,8 @@ export const ChangelogTableHeader = ({
         ? SORT_TARGETS.ATTRIBUTE
         : SORT_TARGETS.DATA_ITEM;
 
-        const columns: Array<ColumnConfig> = [
-            {
+    const columns: Array<ColumnConfig> = [
+        {
             name: SORT_TARGETS.DATE,
             label: i18n.t('Date'),
             sortIconTitle: i18n.t('Sort by date'),
