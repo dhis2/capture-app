@@ -1,3 +1,10 @@
+## [101.25.5](https://github.com/dhis2/capture-app/compare/v101.25.4...v101.25.5) (2025-02-11)
+
+
+### Bug Fixes
+
+* [DHIS2-18677] View event breadcrumb item do not work ([#3956](https://github.com/dhis2/capture-app/issues/3956)) ([d86e538](https://github.com/dhis2/capture-app/commit/d86e5384566bfa70ee79713741da74e18eef277f))
+
 ## [101.25.4](https://github.com/dhis2/capture-app/compare/v101.25.3...v101.25.4) (2025-02-10)
 
 
