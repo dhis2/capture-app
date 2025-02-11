@@ -1,3 +1,143 @@
+## [101.25.4](https://github.com/dhis2/capture-app/compare/v101.25.3...v101.25.4) (2025-02-10)
+
+
+### Bug Fixes
+
+* [DHIS2-18978] Back buttons duplicate breadcrumbs ([#3957](https://github.com/dhis2/capture-app/issues/3957)) ([7c36218](https://github.com/dhis2/capture-app/commit/7c36218aea78dca98894dbbd72d3dc5984489b62))
+
+## [101.25.3](https://github.com/dhis2/capture-app/compare/v101.25.2...v101.25.3) (2025-02-09)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([ec18575](https://github.com/dhis2/capture-app/commit/ec18575416ee867044ba6696cc5d8956e1805d58))
+
+## [101.25.2](https://github.com/dhis2/capture-app/compare/v101.25.1...v101.25.2) (2025-02-05)
+
+
+### Bug Fixes
+
+* [DHIS2-16871] Change Separator for Versions ([#3948](https://github.com/dhis2/capture-app/issues/3948)) ([eec4916](https://github.com/dhis2/capture-app/commit/eec4916ff144c7e53b235336e14b46c76b3feac4))
+
+## [101.25.1](https://github.com/dhis2/capture-app/compare/v101.25.0...v101.25.1) (2025-02-05)
+
+
+### Bug Fixes
+
+* [DHIS2-18571] add explicit pageSize=100 to fetch all enrollments ([#3942](https://github.com/dhis2/capture-app/issues/3942)) ([6f552ae](https://github.com/dhis2/capture-app/commit/6f552ae16c99bc7cf3d502f9316ffe4bad20b25c))
+
+# [101.25.0](https://github.com/dhis2/capture-app/compare/v101.24.3...v101.25.0) (2025-02-05)
+
+
+### Features
+
+* [DHIS2-8087] Add empty launch page ([#3940](https://github.com/dhis2/capture-app/issues/3940)) ([66d949b](https://github.com/dhis2/capture-app/commit/66d949ba373cea3d3962a5d41f59be9fe3187638))
+
+## [101.24.3](https://github.com/dhis2/capture-app/compare/v101.24.2...v101.24.3) (2025-02-04)
+
+
+### Bug Fixes
+
+* [DHIS2-15685][DHIS2-18326] View an event without selecting org unit in Tracker Programs ([#3926](https://github.com/dhis2/capture-app/issues/3926)) ([e093c71](https://github.com/dhis2/capture-app/commit/e093c714f535d26159a94f99707d4b3716b01928))
+
+## [101.24.2](https://github.com/dhis2/capture-app/compare/v101.24.1...v101.24.2) (2025-02-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a52f1fc](https://github.com/dhis2/capture-app/commit/a52f1fc49db7757446d430bf12a3e91e9c5fc280))
+
+## [101.24.1](https://github.com/dhis2/capture-app/compare/v101.24.0...v101.24.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* [DHIS2-18582] Data element with number option set are not displayed in Stages and Events widget ([#3928](https://github.com/dhis2/capture-app/issues/3928)) ([e793240](https://github.com/dhis2/capture-app/commit/e79324029194f23c945b26cdd1f09f06bd27c213))
+
+# [101.24.0](https://github.com/dhis2/capture-app/compare/v101.23.2...v101.24.0) (2025-01-31)
+
+
+### Features
+
+* [DHIS2-18329] Add org unit selector in schedule event form ([#3925](https://github.com/dhis2/capture-app/issues/3925)) ([4013d93](https://github.com/dhis2/capture-app/commit/4013d9326d17f93ff3b0ca11b7844764f92c6850))
+
+## [101.23.2](https://github.com/dhis2/capture-app/compare/v101.23.1...v101.23.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-18902] keep program selection on unique id fallback search ([#3950](https://github.com/dhis2/capture-app/issues/3950)) ([6326f7a](https://github.com/dhis2/capture-app/commit/6326f7a134851a80352d6cf34ea2f8dbdb5b210d))
+
+## [101.23.1](https://github.com/dhis2/capture-app/compare/v101.23.0...v101.23.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* [DHIS2-18673] prevent saving in profile widget when validation errors are present ([#3943](https://github.com/dhis2/capture-app/issues/3943)) ([e341070](https://github.com/dhis2/capture-app/commit/e34107075678b78773d941bc1bca5dbf93f5088e))
+
+# [101.23.0](https://github.com/dhis2/capture-app/compare/v101.22.0...v101.23.0) (2025-01-24)
+
+
+### Features
+
+* [DHIS2-18325] Show orgunit selector in the new event form ([#3879](https://github.com/dhis2/capture-app/issues/3879)) ([f07b4d4](https://github.com/dhis2/capture-app/commit/f07b4d47c219a21db2769cdc525135aa007ffe96))
+
+# [101.22.0](https://github.com/dhis2/capture-app/compare/v101.21.6...v101.22.0) (2025-01-24)
+
+
+### Features
+
+* [DHIS2-17192] show related stages widget on registration page ([#3880](https://github.com/dhis2/capture-app/issues/3880)) ([03c156a](https://github.com/dhis2/capture-app/commit/03c156a8aa19708c5fc40140aa390ef547e18d25))
+
+## [101.21.6](https://github.com/dhis2/capture-app/compare/v101.21.5...v101.21.6) (2025-01-16)
+
+
+### Bug Fixes
+
+* [DHIS2-18668] remove delete tei button in enrollment event pages ([#3941](https://github.com/dhis2/capture-app/issues/3941)) ([aef3400](https://github.com/dhis2/capture-app/commit/aef340023249b53de305fea55627082b443da060))
+
+## [101.21.5](https://github.com/dhis2/capture-app/compare/v101.21.4...v101.21.5) (2025-01-15)
+
+
+### Bug Fixes
+
+* [DHIS2-18836] show 'Profile' instead of 'False' during loading ([#3938](https://github.com/dhis2/capture-app/issues/3938)) ([70aa7cc](https://github.com/dhis2/capture-app/commit/70aa7ccb5c9d6dee978175b4e639e2b3cd415a9c))
+
+## [101.21.4](https://github.com/dhis2/capture-app/compare/v101.21.3...v101.21.4) (2025-01-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18355] runtime error occurs when saving empty widget in Related stages ([#3935](https://github.com/dhis2/capture-app/issues/3935)) ([4ebef85](https://github.com/dhis2/capture-app/commit/4ebef8596d1814efb385c1817b5968405b704af7))
+
+## [101.21.3](https://github.com/dhis2/capture-app/compare/v101.21.2...v101.21.3) (2025-01-12)
+
+
+### Bug Fixes
+
+* [DHIS2-17613] Use new note endpoint ([#3908](https://github.com/dhis2/capture-app/issues/3908)) ([a9fdea8](https://github.com/dhis2/capture-app/commit/a9fdea8ac8284b28ec3c0acf0551e9cd1a68a180))
+
+## [101.21.2](https://github.com/dhis2/capture-app/compare/v101.21.1...v101.21.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* [DHIS2-18569] Relationship widget limited to 50 entries ([#3927](https://github.com/dhis2/capture-app/issues/3927)) ([a1e493d](https://github.com/dhis2/capture-app/commit/a1e493d48179e7749d61f52504fdeb3c11dfa53e))
+
+## [101.21.1](https://github.com/dhis2/capture-app/compare/v101.21.0...v101.21.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* [DHIS2-18632] Sorting stage detail table on orgunit breaks the app ([#3917](https://github.com/dhis2/capture-app/issues/3917)) ([15414cc](https://github.com/dhis2/capture-app/commit/15414cc73f7ce74d4d057acad13bf4855d358426))
+
+# [101.21.0](https://github.com/dhis2/capture-app/compare/v101.20.3...v101.21.0) (2025-01-07)
+
+
+### Features
+
+* [DHIS2-18328] Handle log entries for occurredAt, scheduledAt and geometry ([#3887](https://github.com/dhis2/capture-app/issues/3887)) ([f670971](https://github.com/dhis2/capture-app/commit/f670971808f49b75295c1d3c7ef25a747b4888df))
+
 ## [101.20.3](https://github.com/dhis2/capture-app/compare/v101.20.2...v101.20.3) (2024-12-29)
 
 

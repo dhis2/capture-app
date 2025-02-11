@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useRef, useCallback } from 'react';
+import React, { type ComponentType, useRef, useCallback, useState } from 'react';
 import { IconLink24, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
@@ -38,29 +38,32 @@ export const WidgetRelatedStagesPlain = ({
     programStageId,
     teiId,
     actionsOptions,
-    onUpdateEnrollment,
-    onUpdateEnrollmentSuccess,
-    onUpdateEnrollmentError,
+    onUpdateOrAddEnrollmentEvents,
+    onUpdateEnrollmentEventsSuccess,
+    onUpdateEnrollmentEventsError,
     onNavigateToEvent,
     classes,
 }: Props) => {
+    const [isLinking, setIsLinking] = useState(false);
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { currentRelatedStagesStatus } = useRelatedStages({ programStageId, programId });
     const {
         linkedEvent,
         isLoading: isLinkedEventLoading,
-    } = useLinkedEventByOriginId({ originEventId: eventId });
+    } = useLinkedEventByOriginId({ originEventId: eventId, skipBidirectionalChecks: true });
     const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({
         eventId,
-        onUpdateEnrollment,
-        onUpdateEnrollmentSuccess,
-        onUpdateEnrollmentError,
+        onUpdateOrAddEnrollmentEvents,
+        onUpdateEnrollmentEventsSuccess,
+        onUpdateEnrollmentEventsError,
         onNavigateToEvent,
+        setIsLinking,
     });
 
     const onLink = useCallback(() => {
+        setIsLinking(true);
         // $FlowFixMe[incompatible-type]
         const serverRequestEvent: ?RequestEvent = enrollment?.events.find(e => e.event === eventId);
 
@@ -78,7 +81,12 @@ export const WidgetRelatedStagesPlain = ({
             enrollmentId,
         });
 
-        if (!formHasError && relationship && linkMode) {
+        if (formHasError) {
+            setIsLinking(false);
+            return;
+        }
+
+        if (relationship && linkMode) {
             const serverData = createServerData({ enrollment, linkedEvent: relatedStageLinkedEvent, relationship });
             addEventWithRelationship({ serverData, linkMode, eventIdToRedirectTo: relatedStageLinkedEvent?.event });
         }
@@ -117,6 +125,7 @@ export const WidgetRelatedStagesPlain = ({
                     programStageId={programStageId}
                     actionsOptions={actionsOptions}
                     onLink={onLink}
+                    isLinking={isLinking}
                 />
             </div>
         </Widget>

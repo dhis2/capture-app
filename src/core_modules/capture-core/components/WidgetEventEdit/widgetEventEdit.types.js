@@ -4,7 +4,6 @@ import { ProgramStage, RenderFoundation } from '../../metaData';
 
 export type Props = {|
     eventStatus?: string,
-    onGoBack: () => void,
     onCancelEditEvent: (isScheduled: boolean) => void,
     onHandleScheduleSave: (eventData: Object) =>void,
     onSaveExternal: () => void,
@@ -19,6 +18,8 @@ export type Props = {|
     onSaveAndCompleteEnrollment: (enrollment: ApiEnrollment) => void,
     onSaveAndCompleteEnrollmentSuccessActionType?: string,
     onSaveAndCompleteEnrollmentErrorActionType?: string,
+    onDeleteEvent?: (eventId: string) => void,
+    onDeleteEventRelationship?: (relationshipId: string) => void,
 |};
 
 export type ComponentProps = {|

@@ -15,6 +15,10 @@ export {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
     setExternalEnrollmentStatus,
+    deleteEnrollmentEvent,
+    deleteEnrollmentEventRelationship,
+    commitEnrollmentEvents,
+    rollbackEnrollmentEvents,
 } from './enrollment.actions';
 export { useCommonEnrollmentDomainData } from './useCommonEnrollmentDomainData';
 export { useRuleEffects } from './useRuleEffects';

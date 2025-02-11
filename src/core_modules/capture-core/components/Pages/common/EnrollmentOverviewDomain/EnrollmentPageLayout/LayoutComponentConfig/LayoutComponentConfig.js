@@ -217,7 +217,6 @@ export const EnrollmentWidget: WidgetConfig = {
 export const EditEventWorkspace: WidgetConfig = {
     Component: WidgetEventEditWrapper,
     getProps: ({
-        onGoBack,
         program,
         orgUnitId,
         teiId,
@@ -233,8 +232,9 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
+        onDeleteEvent,
+        onDeleteEventRelationship,
     }): WidgetEventEditProps => ({
-        onGoBack,
         programId: program.id,
         stageId,
         orgUnitId,
@@ -250,6 +250,8 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
+        onDeleteEvent,
+        onDeleteEventRelationship,
     }),
 };
 
@@ -291,7 +293,7 @@ export const EventNote: WidgetConfig = {
     }),
 };
 
-export const WidgetRelatedStagesWorkspace: WidgetConfig = {
+export const RelatedStagesWorkspace: WidgetConfig = {
     Component: WidgetRelatedStages,
     shouldHideWidget: ({ currentPage }) => currentPage === EnrollmentPageKeys.EDIT_EVENT,
     getProps: ({
@@ -300,9 +302,9 @@ export const WidgetRelatedStagesWorkspace: WidgetConfig = {
         enrollmentId,
         eventId,
         teiId,
-        onUpdateEnrollmentStatus,
-        onUpdateEnrollmentStatusSuccess,
-        onUpdateEnrollmentStatusError,
+        onUpdateOrAddEnrollmentEvents,
+        onUpdateEnrollmentEventsSuccess,
+        onUpdateEnrollmentEventsError,
         onNavigateToEvent,
     }) => ({
         programId: program.id,
@@ -310,9 +312,9 @@ export const WidgetRelatedStagesWorkspace: WidgetConfig = {
         enrollmentId,
         eventId,
         teiId,
-        onUpdateEnrollment: onUpdateEnrollmentStatus,
-        onUpdateEnrollmentSuccess: onUpdateEnrollmentStatusSuccess,
-        onUpdateEnrollmentError: onUpdateEnrollmentStatusError,
+        onUpdateOrAddEnrollmentEvents,
+        onUpdateEnrollmentEventsSuccess,
+        onUpdateEnrollmentEventsError,
         onNavigateToEvent,
     }),
 };

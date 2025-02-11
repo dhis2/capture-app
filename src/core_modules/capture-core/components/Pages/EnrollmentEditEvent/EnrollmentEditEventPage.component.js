@@ -30,7 +30,6 @@ export const EnrollmentEditEventPageComponent = ({
     hideWidgets,
     onDelete,
     onAddNew,
-    onGoBack,
     onLinkedRecordClick,
     orgUnitId,
     eventDate,
@@ -58,6 +57,11 @@ export const EnrollmentEditEventPageComponent = ({
     onDeleteTrackedEntitySuccess,
     onAccessLostFromTransfer,
     onNavigateToEvent,
+    onDeleteEvent,
+    onDeleteEventRelationship,
+    onUpdateOrAddEnrollmentEvents,
+    onUpdateEnrollmentEventsSuccess,
+    onUpdateEnrollmentEventsError,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -85,7 +89,6 @@ export const EnrollmentEditEventPageComponent = ({
             onSaveExternal={onSaveExternal}
             trackedEntityTypeId={trackedEntityTypeId}
             programStage={programStage}
-            onGoBack={onGoBack}
             program={program}
             orgUnitId={orgUnitId}
             teiId={teiId}
@@ -123,6 +126,11 @@ export const EnrollmentEditEventPageComponent = ({
             feedbackEmptyText={i18n.t('No feedback for this event yet')}
             indicatorEmptyText={i18n.t('No indicator output for this event yet')}
             onNavigateToEvent={onNavigateToEvent}
+            onDeleteEvent={onDeleteEvent}
+            onDeleteEventRelationship={onDeleteEventRelationship}
+            onUpdateOrAddEnrollmentEvents={onUpdateOrAddEnrollmentEvents}
+            onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
+            onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
         />
         <NoticeBox formId={`${dataEntryIds.ENROLLMENT_EVENT}-${mode}`} />
     </OrgUnitFetcher>

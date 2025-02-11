@@ -51,7 +51,8 @@ type Props = {
         debounceFieldContainer: string,
         orgUnitTreeContainer: string,
     },
-    previousOrgUnitId?: string
+    previousOrgUnitId?: string,
+    dataTest?: string,
 };
 
 const OrgUnitFieldPlain = (props: Props) => {
@@ -63,6 +64,7 @@ const OrgUnitFieldPlain = (props: Props) => {
         maxTreeHeight,
         disabled,
         previousOrgUnitId,
+        dataTest,
     } = props;
     const [searchText, setSearchText] = React.useState(undefined);
     const [key, setKey] = React.useState(undefined);
@@ -156,6 +158,7 @@ const OrgUnitFieldPlain = (props: Props) => {
                     placeholder={i18n.t('Search')}
                     classes={classes}
                     disabled={disabled}
+                    dataTest={dataTest}
                 />
             </div>
             {!disabled &&

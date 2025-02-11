@@ -2,7 +2,7 @@
 import type { Node } from 'react';
 
 export type WidgetCollapsibleProps = {|
-    header: Node,
+    header?: Node,
     children: Node,
     open: boolean,
     onOpen: () => void,

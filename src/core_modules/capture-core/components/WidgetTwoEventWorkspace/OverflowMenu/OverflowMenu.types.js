@@ -6,4 +6,6 @@ export type Props = {
     originEventId: string,
     stageWriteAccess: boolean,
     relationshipType: string,
+    onDeleteEvent?: (eventId: string) => void,
+    onDeleteEventRelationship?: (relationshipId: string) => void,
 };

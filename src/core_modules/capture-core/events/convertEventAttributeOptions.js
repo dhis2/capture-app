@@ -8,7 +8,7 @@ export const convertEventAttributeOptions = (event: Object, serverMinorVersion: 
         .filter(key => key.startsWith(`${attributeCategoryKey}-`));
 
     if (editedAttributeOptions.length > 0) {
-        const useNewAocApiSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator);
+        const newUIDsSeparator = hasAPISupportForFeature(serverMinorVersion, FEATURES.newUIDsSeparator);
         const newAttributeCategoryOptions = [];
         editedAttributeOptions.forEach((key) => {
             newAttributeCategoryOptions.push(event[key]);
@@ -16,7 +16,7 @@ export const convertEventAttributeOptions = (event: Object, serverMinorVersion: 
         });
         return {
             ...event,
-            attributeCategoryOptions: newAttributeCategoryOptions.join(useNewAocApiSeparator ? ',' : ';'),
+            attributeCategoryOptions: newAttributeCategoryOptions.join(newUIDsSeparator ? ',' : ';'),
         };
     }
     return event;

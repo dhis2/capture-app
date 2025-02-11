@@ -5,11 +5,10 @@ import i18n from '@dhis2/d2-i18n';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
-import type { StageDataElement } from '../../../../types/common.types';
+import type { StageDataElementClient } from '../../../../types/common.types';
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
-import { TooltipOrgUnit } from '../../../../../Tooltips/TooltipOrgUnit/TooltipOrgUnit.component';
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
@@ -63,13 +62,12 @@ const convertStatusForView = (event: ApiEnrollmentEvent) => {
     };
 };
 
-const convertOrgUnitForView = (event: ApiEnrollmentEvent) => <TooltipOrgUnit orgUnitId={event.orgUnit} />;
 
 const convertNoteForView = (event: ApiEnrollmentEvent) => <Notes event={event} />;
 
 const groupRecordsByType = async (
     events: Array<ApiEnrollmentEvent>,
-    dataElements: Array<StageDataElement>,
+    dataElements: Array<StageDataElementClient>,
     querySingleResource: QuerySingleResource,
     absoluteApiPath: string,
 ) => {
@@ -100,7 +98,6 @@ export {
     isEventOverdue,
     getEventStatus,
     convertStatusForView,
-    convertOrgUnitForView,
     convertNoteForView,
     getValueByKeyFromEvent,
     groupRecordsByType,

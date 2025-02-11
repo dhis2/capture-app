@@ -45,7 +45,6 @@ const styles = () => ({
 
 const Schedule = ({
     actionsOptions,
-    linkableEvents,
     selectedAction,
     updateSelectedAction,
     programStage,
@@ -61,8 +60,8 @@ const Schedule = ({
     let tooltipContent = '';
     if (disabled) {
         tooltipContent = disabledMessage;
-    } else if (!linkableEvents.length) {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} is not repeatable', {
+    } else {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
             linkableStageLabel: programStage.stageForm.name,
             interpolation: { escapeValue: false },
         });
@@ -82,6 +81,7 @@ const Schedule = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.SCHEDULE_IN_ORG}
+                dataTest="related-stages-actions-schedule"
             />
         </ConditionalTooltip>
     );
@@ -89,7 +89,6 @@ const Schedule = ({
 
 const EnterData = ({
     actionsOptions,
-    linkableEvents,
     selectedAction,
     updateSelectedAction,
     programStage,
@@ -105,8 +104,8 @@ const EnterData = ({
     let tooltipContent = '';
     if (disabled) {
         tooltipContent = disabledMessage;
-    } else if (!linkableEvents.length) {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} is not repeatable', {
+    } else {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
             linkableStageLabel: programStage.stageForm.name,
             interpolation: { escapeValue: false },
         });
@@ -126,6 +125,7 @@ const EnterData = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.ENTER_DATA}
+                dataTest="related-stages-actions-enter-details"
             />
         </ConditionalTooltip>
     );
@@ -169,21 +169,20 @@ const LinkExistingResponse = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
+                dataTest="related-stages-actions-link-existing-response"
             />
         </ConditionalTooltip>
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, saveAttempted, errorMessages, classes }) => {
+const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }) => {
     if (!onLink) {
         return null;
     }
 
-    const disabled = saveAttempted && Object.values(errorMessages).filter(Boolean).length !== 0;
-
     return (
         <div className={classes.link}>
-            <Button secondary small onClick={onLink} disabled={disabled}>
+            <Button primary small onClick={onLink} loading={isLinking} dataTest={dataTest}>
                 {label}
             </Button>
         </div>
@@ -204,6 +203,7 @@ const RelatedStagesActionsPlain = ({
     saveAttempted,
     actionsOptions,
     onLink,
+    isLinking,
 }: PlainProps) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
@@ -231,7 +231,6 @@ const RelatedStagesActionsPlain = ({
                     <>
                         <Schedule
                             actionsOptions={actionsOptions}
-                            linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
@@ -239,7 +238,6 @@ const RelatedStagesActionsPlain = ({
                         />
                         <EnterData
                             actionsOptions={actionsOptions}
-                            linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
@@ -284,8 +282,8 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Schedule')}
-                        saveAttempted={saveAttempted}
-                        errorMessages={errorMessages}
+                        isLinking={isLinking}
+                        dataTest="related-stages-buttons-schedule"
                     />
                 </>
             )}
@@ -302,8 +300,8 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Enter details')}
-                        saveAttempted={saveAttempted}
-                        errorMessages={errorMessages}
+                        isLinking={isLinking}
+                        dataTest="related-stages-buttons-enter-details"
                     />
                 </>
             )}
@@ -321,8 +319,8 @@ const RelatedStagesActionsPlain = ({
                     <LinkButton
                         onLink={onLink}
                         label={i18n.t('Link')}
-                        saveAttempted={saveAttempted}
-                        errorMessages={errorMessages}
+                        isLinking={isLinking}
+                        dataTest="related-stages-buttons-link-existing-response"
                     />
                 </>
             )}

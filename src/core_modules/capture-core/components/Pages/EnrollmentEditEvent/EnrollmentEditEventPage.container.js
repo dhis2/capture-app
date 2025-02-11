@@ -2,7 +2,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
 import {
@@ -13,6 +12,11 @@ import {
     updateEnrollmentAndEvents,
     updateEnrollmentEvent,
     useCommonEnrollmentDomainData,
+    deleteEnrollmentEvent,
+    deleteEnrollmentEventRelationship,
+    updateOrAddEnrollmentEvents,
+    commitEnrollmentEvents,
+    rollbackEnrollmentEvents,
 } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
@@ -20,7 +24,7 @@ import { pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment, fetchEnrollments } from '../Enrollment/EnrollmentPage.actions';
 import { changeEventFromUrl } from '../ViewEvent/ViewEventComponent/viewEvent.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
@@ -72,7 +76,7 @@ const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntit
 };
 
 export const EnrollmentEditEventPage = () => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const dispatch = useDispatch();
 
     const eventId = useSelector(({ viewEventPage }) => viewEventPage.eventId);
@@ -86,11 +90,11 @@ export const EnrollmentEditEventPage = () => {
     useEffect(() => {
         if (!urlEventId) {
             // return to main page
-            history.push(`/?${buildUrlQueryString({ orgUnitId })}`);
+            navigate(`/?${buildUrlQueryString({ orgUnitId })}`);
         } else if (eventId !== urlEventId) {
             dispatch(changeEventFromUrl(urlEventId, pageKeys.ENROLLMENT_EVENT));
         }
-    }, [dispatch, history, eventId, urlEventId, orgUnitId]);
+    }, [dispatch, navigate, eventId, urlEventId, orgUnitId]);
 
     return ((!loading && eventId === urlEventId) || error) && storedEvent ? (
         <EnrollmentEditEventPageWithContext
@@ -117,7 +121,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     enrollmentSite,
     event,
 }: Props) => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const queryClient = useQueryClient();
     const { pageLayout, isLoading } = useEnrollmentPageLayout({
@@ -138,15 +142,15 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules));
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
-    }, [history, orgUnitId, programId]);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [navigate, orgUnitId, programId]);
 
     const onBackToMainPage = useCallback(() => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
-    }, [history, orgUnitId, programId]);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+    }, [navigate, orgUnitId, programId]);
 
     const onDelete = () => {
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
+        navigate(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
     const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
@@ -163,32 +167,52 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
         dispatch(commitEnrollmentAndEvents());
-        redirect && history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-    }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
+        redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
+
+    const onDeleteEvent = useCallback((linkedEventId: string) => {
+        dispatch(deleteEnrollmentEvent(linkedEventId));
+    }, [dispatch]);
+
+    const onDeleteEventRelationship = useCallback((relationshipId: string) => {
+        dispatch(deleteEnrollmentEventRelationship(relationshipId));
+    }, [dispatch]);
+
+    const onUpdateOrAddEnrollmentEvents = useCallback((events) => {
+        dispatch(updateOrAddEnrollmentEvents({ events }));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentEventsSuccess = useCallback((events) => {
+        dispatch(commitEnrollmentEvents({ events }));
+    }, [dispatch]);
+
+    const onUpdateEnrollmentEventsError = useCallback((events) => {
+        dispatch(rollbackEnrollmentEvents({ events }));
+    }, [dispatch]);
 
     const onSaveAndCompleteEnrollment = useCallback((enrollmentToUpdate) => {
         dispatch(setExternalEnrollmentStatus(statusTypes.COMPLETED));
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
-        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
-    }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
+        navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+    }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
 
     const onAddNew = () => {
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+        navigate(`/new?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
     const onCancelEditEvent = useCallback((isScheduled: boolean) => {
         if (isScheduled) {
-            history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+            navigate(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
         }
         if (initMode) {
-            history.push(`/enrollmentEventEdit?${buildUrlQueryString({ eventId, orgUnitId })}`);
+            navigate(`/enrollmentEventEdit?${buildUrlQueryString({ eventId, orgUnitId })}`);
         }
-    }, [initMode, enrollmentId, eventId, orgUnitId, history]);
+    }, [initMode, enrollmentId, eventId, orgUnitId, navigate]);
 
     const onGoBack = () =>
-        history.push(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
+        navigate(`/enrollment?${buildUrlQueryString({ enrollmentId })}`);
 
     const onNavigateToEvent = (eventIdToRedirectTo: string) => {
-        history.push(
+        navigate(
             `/enrollmentEventEdit?${buildUrlQueryString({
                 eventId: eventIdToRedirectTo,
                 orgUnitId,
@@ -200,13 +224,13 @@ const EnrollmentEditEventPageWithContextPlain = ({
 
     const onHandleScheduleSave = (eventData: Object) => {
         dispatch(updateEnrollmentEvent(eventId, eventData));
-        history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
+        navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
     const onSaveExternal = () => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
         queryClient.removeQueries(queryKey);
-        history.push(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
+        navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
 
     const onBackToViewEvent = () => {
@@ -243,7 +267,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(setAssignee(assignedUser, newAssignee, eventId));
     };
     const onAccessLostFromTransfer = () => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
     const onSaveAssigneeError = (prevAssignee) => {
         const assignedUser: ApiAssignedUser | typeof undefined = prevAssignee
@@ -263,7 +287,6 @@ const EnrollmentEditEventPageWithContextPlain = ({
             mode={currentPageMode}
             pageStatus={pageStatus}
             programStage={programStage}
-            onGoBack={onGoBack}
             onBackToMainPage={onBackToMainPage}
             onBackToDashboard={onGoBack}
             onBackToViewEvent={onBackToViewEvent}
@@ -303,6 +326,11 @@ const EnrollmentEditEventPageWithContextPlain = ({
             events={enrollmentSite?.events}
             onAccessLostFromTransfer={onAccessLostFromTransfer}
             onNavigateToEvent={onNavigateToEvent}
+            onDeleteEvent={onDeleteEvent}
+            onDeleteEventRelationship={onDeleteEventRelationship}
+            onUpdateOrAddEnrollmentEvents={onUpdateOrAddEnrollmentEvents}
+            onUpdateEnrollmentEventsSuccess={onUpdateEnrollmentEventsSuccess}
+            onUpdateEnrollmentEventsError={onUpdateEnrollmentEventsError}
         />
     );
 };

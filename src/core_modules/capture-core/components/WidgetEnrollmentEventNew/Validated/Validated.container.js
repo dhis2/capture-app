@@ -23,7 +23,7 @@ import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 const AskToCreateNewHandlerHOC = withAskToCreateNew()(SaveHandlerHOC);
-const DataEntry = withAskToCompleteEnrollment()(AskToCreateNewHandlerHOC);
+const ValidatedComponentWrapper = withAskToCompleteEnrollment()(AskToCreateNewHandlerHOC);
 
 export const Validated = ({
     program,
@@ -32,7 +32,7 @@ export const Validated = ({
     onSaveExternal,
     onSaveSuccessActionType,
     onSaveErrorActionType,
-    orgUnit,
+    orgUnitContext,
     teiId,
     enrollmentId,
     rulesExecutionDependencies,
@@ -50,8 +50,6 @@ export const Validated = ({
         dataEntryId,
         itemId,
         programId: program.id,
-        orgUnitId: orgUnit.id,
-        orgUnitName: orgUnit.name,
         teiId,
         enrollmentId,
         formFoundation,
@@ -64,7 +62,7 @@ export const Validated = ({
         program,
         stage,
         formFoundation,
-        orgUnit,
+        orgUnitContext,
         dataEntryId,
         itemId,
         // $FlowFixMe Investigate
@@ -80,7 +78,7 @@ export const Validated = ({
         formFoundationArgument: RenderFoundation,
         saveType: ?$Values<typeof addEventSaveTypes>,
         enrollment: ?Object,
-    ) => new Promise((resolve, reject) => {
+    ) => new Promise((resolve) => {
         // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
         const {
@@ -95,7 +93,7 @@ export const Validated = ({
         );
 
         if (formHasError) {
-            reject(new Error('Form has error'));
+            resolve({ success: false });
             return;
         }
 
@@ -128,25 +126,22 @@ export const Validated = ({
         ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS),
         );
 
-        resolve();
+        resolve({ success: true });
     }), [buildNewEventPayload, dispatch, onSaveExternal, onSaveAndCompleteEnrollmentSuccessActionType, onSaveSuccessActionType, onSaveAndCompleteEnrollmentErrorActionType, onSaveErrorActionType]);
 
     const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
-        try {
-            await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
-
+        const saveResult = await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
+        if (saveResult?.success) {
             dispatch(startCreateNewAfterCompleting({
                 enrollmentId,
                 isCreateNew,
-                orgUnitId: orgUnit.id,
+                orgUnitId: orgUnitContext?.id,
                 programId: program.id,
                 teiId,
                 availableProgramStages,
             }));
-        } catch (error) {
-            // Related stages has displayed an error message. No need to do anything here.
         }
-    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnit.id, program.id, teiId, availableProgramStages]);
+    }, [handleSave, formFoundation, dispatch, enrollmentId, orgUnitContext?.id, program.id, teiId, availableProgramStages]);
 
 
     const handleSaveAndCompleteEnrollment = useCallback(
@@ -173,12 +168,11 @@ export const Validated = ({
     }, [dispatch]);
 
     return (
-        <DataEntry
+        <ValidatedComponentWrapper
             {...passOnProps}
             stage={stage}
             allowGenerateNextVisit={stage.allowGenerateNextVisit}
             askCompleteEnrollmentOnEventComplete={stage.askCompleteEnrollmentOnEventComplete}
-            selectedOrgUnitId={orgUnit.id}
             availableProgramStages={availableProgramStages}
             eventSaveInProgress={eventSaveInProgress}
             ready={ready}
@@ -194,7 +188,6 @@ export const Validated = ({
             programId={program.id}
             onSaveAndCompleteEnrollment={handleSaveAndCompleteEnrollment}
             programName={program.name}
-            orgUnit={orgUnit}
             rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}
         />
     );

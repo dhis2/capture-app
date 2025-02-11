@@ -11,14 +11,23 @@ export const createServerData = ({
     relationship: ?Object,
     enrollment: Object,
 }) => {
-    const updatedEnrollment = { ...enrollment, events: [...enrollment.events, linkedEvent] };
+    const exisitingEvents = enrollment.events.map(event => (
+        (event.event === relationship?.from.event.event || event.event === relationship?.to.event.event)
+            ? { ...event, pendingApiResponse: true, relationships: [relationship], uid: event.event }
+            : event
+    ));
+
     if (linkedEvent) {
         return {
-            enrollments: [updatedEnrollment],
+            events: [
+                ...exisitingEvents,
+                { ...linkedEvent, pendingApiResponse: true, relationships: [relationship], uid: linkedEvent.event },
+            ],
             relationships: [relationship],
         };
     }
     return {
+        events: exisitingEvents,
         relationships: [relationship],
     };
 };

@@ -77,9 +77,9 @@ const captureScopeQuery = orgUnitId => ({
     },
 });
 
-const deselectTei = (history) => {
+const deselectTei = (navigate) => {
     const { programId, orgUnitId } = getLocationQuery();
-    history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+    navigate(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     return false;
 };
 
@@ -167,14 +167,14 @@ export const changedTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
         map(({ payload }) => fetchTei(payload)),
     );
 
-export const resetTeiIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const resetTeiIdEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.RESET_TEI_ID),
         filter(() =>
             (({ fetchStatus }) =>
                 fetchStatus.enrollmentId !== selectionStatus.LOADING &&
                 fetchStatus.teiId !== selectionStatus.LOADING &&
-                deselectTei(history)
+                deselectTei(navigate)
             )(store.value.enrollmentPage)),
     );
 
@@ -236,7 +236,7 @@ export const programIdErrorEpic = (action$: InputObservable) =>
     );
 
 // Epics for enrollments
-export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(
             enrollmentPageActionTypes.FETCH_TEI_SUCCESS,
@@ -246,7 +246,7 @@ export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxSto
         map(() => {
             // Update url
             const { teiId, programId } = store.value.enrollmentPage;
-            history.push(`/enrollment?${buildUrlQueryString({ ...getLocationQuery(), teiId, programId })}`);
+            navigate(`/enrollment?${buildUrlQueryString({ ...getLocationQuery(), teiId, programId })}`);
 
             if (teiIdReady(store) && programIdReady(store)) {
                 return fetchEnrollments();
@@ -303,7 +303,7 @@ export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: Re
     );
 
 // Auto-switch orgUnit epic
-export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
+export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, navigate }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
         map(() => (({ teiId, programId }) => ({ teiId, programId }))(store.value.enrollmentPage)),
@@ -317,7 +317,7 @@ export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStor
                             if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
                                 // Update orgUnitId in url
                                 const { orgUnitId, ...restOfQueries } = getLocationQuery();
-                                history.push(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwner.orgUnit })}`);
+                                navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwner.orgUnit })}`);
                             }
                             return EMPTY;
                         }),

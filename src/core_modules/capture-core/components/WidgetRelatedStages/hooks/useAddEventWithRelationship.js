@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { useDataEngine } from '@dhis2/app-runtime';
+import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { relatedStageActions } from '../constants';
 
@@ -14,19 +14,23 @@ const addEventWithRelationshipMutation = {
 
 export const useAddEventWithRelationship = ({
     eventId,
-    onUpdateEnrollment,
-    onUpdateEnrollmentSuccess,
-    onUpdateEnrollmentError,
+    onUpdateOrAddEnrollmentEvents,
+    onUpdateEnrollmentEventsSuccess,
+    onUpdateEnrollmentEventsError,
     onNavigateToEvent,
+    setIsLinking,
 }: {
     eventId: string,
-    onUpdateEnrollment: (enrollment: Object) => void,
-    onUpdateEnrollmentSuccess: ({ redirect?: boolean }) => void,
-    onUpdateEnrollmentError: (message: string) => void,
+    onUpdateOrAddEnrollmentEvents: (events: Array<ApiEnrollmentEvent>) => void,
+    onUpdateEnrollmentEventsSuccess: (events: Array<ApiEnrollmentEvent>) => void,
+    onUpdateEnrollmentEventsError: (events: Array<ApiEnrollmentEvent>) => void,
     onNavigateToEvent: (eventId: string) => void,
+    setIsLinking: (isLinking: boolean) => void,
 }) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
+    const { show: showSuccess } = useAlert(({ message }) => message, { success: true });
+    const { show: showAlert } = useAlert(({ message }) => message, { critical: true });
 
     const { mutate } = useMutation<any, Error, { serverData: Object, linkMode: string, eventIdToRedirectTo?: string }>(
         ({ serverData }: Object) =>
@@ -37,20 +41,24 @@ export const useAddEventWithRelationship = ({
             }),
         {
             onMutate: (payload: { serverData: Object }) => {
-                const enrollmentToUpdate = payload.serverData.enrollments?.[0];
-                enrollmentToUpdate && onUpdateEnrollment(enrollmentToUpdate);
+                onUpdateOrAddEnrollmentEvents && onUpdateOrAddEnrollmentEvents(payload.serverData.events);
             },
-            onSuccess: (_, payload: { linkMode: string, eventIdToRedirectTo?: string }) => {
+            onSuccess: (_, payload: { linkMode: string, eventIdToRedirectTo?: string, serverData: Object }) => {
+                setIsLinking(false);
                 const queryKey = [ReactQueryAppNamespace, 'linkedEventByOriginEvent', eventId];
                 queryClient.refetchQueries(queryKey);
-                onUpdateEnrollmentSuccess({});
+                onUpdateEnrollmentEventsSuccess && onUpdateEnrollmentEventsSuccess(payload.serverData.events);
 
                 if (payload.linkMode === relatedStageActions.ENTER_DATA && payload.eventIdToRedirectTo) {
                     onNavigateToEvent(payload.eventIdToRedirectTo);
+                } else {
+                    showSuccess({ message: i18n.t('The event was successfully linked') });
                 }
             },
-            onError: () => {
-                onUpdateEnrollmentError(i18n.t('An error occurred while linking the event'));
+            onError: (_, payload: { serverData: Object }) => {
+                setIsLinking(false);
+                showAlert({ message: i18n.t('An error occurred while linking the event') });
+                onUpdateEnrollmentEventsError && onUpdateEnrollmentEventsError(payload.serverData.events);
             },
         },
     );

@@ -96,7 +96,12 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 
     render() {
-        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+        const {
+            onSetOrgUnit,
+            onSetProgramId,
+            onSetCategoryOption,
+            onResetAllCategoryOptions,
+        } = this.props;
 
         return (
             <div
@@ -119,6 +124,7 @@ class ScopeSelectorClass extends Component<Props, State> {
                     selectedCategories={this.props.selectedCategories}
                     isUserInteractionInProgress={this.props.isUserInteractionInProgress}
                     formIsOpen={this.props.formIsOpen}
+                    isReadOnly={this.props.isReadOnly}
                 >
                     {this.props.children}
                 </QuickSelector>
