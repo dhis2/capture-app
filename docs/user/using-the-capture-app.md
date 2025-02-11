@@ -1353,11 +1353,11 @@ The **Changelog** feature provides a historical record of changes made to data f
 
 ![](resources/images/changelog.png)
 
-### Changelog Functionality
+### Changelog functionality
 
-**Sorting**: Clicking the sorting icon next to a column header toggles between default, ascending, and descending order. By default, records are sorted by date (newest first). Sorting by user or data item is also available, but only one sort can be applied at a time.
+**Sorting**: Clicking the sorting icon next to a column header toggles between default, ascending, and descending order. By default, records are sorted by date (newest first). Sorting by user or data item is also available, but you can only apply one sorting option at a time.
 
-**Filtering**: You can filter by a specific data item. Only one filter can be applied at a time.
+**Filtering**: You can filter by a specific data item. You can only apply one filter at a time.
 
 > **Note:**  
 > All data items are displayed in the filter dropdown, regardless of whether they have a changelog record.
@@ -1366,28 +1366,28 @@ The **Changelog** feature provides a historical record of changes made to data f
 
 ---
 
-### Event Changelog
+### Event changelog
 
-The **Event Changelog** tracks changes to data elements within an event.
+The **event changelog** tracks changes to data items within an event. These data items include data elements and event properties. Event properties refer to the attributes report date, scheduled date, and geometry.
 
-#### How to Open the Event Changelog
-1. **Navigate** to an event in the Capture app.  
-2. Click **View changelog** to open the changelog.
-![](resources/images/open-event-changelog.png)
+#### How to open the event changelog
+1. **Navigate** to the "View event" page of an event in the Capture app.  
+2. Click **View Changelog** to open the changelog.
+   ![](resources/images/open-event-changelog.png)
 
 ---
 
-### Tracked Entity Changelog
+### Tracked entity changelog
 
-The **Tracked Entity Changelog** tracks chnages to tracked entity attributes within an enrollment.
+The **tracked entity changelog** tracks changes to attributes of a tracked entity within an enrollment.
 
-#### How to Open the Tracked Entity Changelog
+#### How to open the tracked entity changelog
 1. **Go to the Maintenance app** and **enable** the **Tracked Entity Instance Audit Log**.
-![](resources/images/enable-tracked-entity-instance-audit-log.png)
+   ![](resources/images/enable-tracked-entity-instance-audit-log.png)
 
 2. **Open** the enrollment dashboard in the Capture app.  
 
-3. Click **View changelog** in the **Tracked Entity Profile** widget to open the changelog.
-![](resources/images/open-tracked-entity-changelog.png)
+3. Click **View Changelog** in the **Tracked Entity Profile** widget to open the changelog.
+   ![](resources/images/open-tracked-entity-changelog.png)
 
 
