@@ -1,5 +1,10 @@
 // @flow
-import React, { type ComponentType, useContext, useState } from 'react';
+import React, {
+    type ComponentType,
+    useContext,
+    useState,
+    useEffect,
+} from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
@@ -86,15 +91,22 @@ export const SearchResultsIndex = ({
             page: newOtherPage,
         });
     };
+    const [isFallbackLoading, setIsFallbackLoading] = useState(false);
+
+    useEffect(() => {
+        if (otherResults !== undefined) {
+            setIsFallbackLoading(false);
+        }
+    }, [otherResults]);
 
     const handleFallbackSearch = () => {
+        setIsFallbackLoading(true);
         startFallbackSearch({
             programId: currentSearchScopeId,
             formId: currentFormId,
             resultsPageSize,
         });
     };
-
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
 
     const { trackedEntityName } = useScopeInfo(currentSearchScopeId);
@@ -172,16 +184,19 @@ export const SearchResultsIndex = ({
         </Widget>}
         {
             currentSearchScopeType === searchScopes.PROGRAM && !fallbackTriggered && otherResults === undefined &&
-
-                <div className={classes.bottom}>
-                    <div className={classes.bottomText}>
-                        {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
-                    </div>
-
-                    <Button onClick={handleFallbackSearch} dataTest="fallback-search-button">
-                        {i18n.t('Search in all programs')}
-                    </Button>
+            <div className={classes.bottom}>
+                <div className={classes.bottomText}>
+                    {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
                 </div>
+
+                <Button
+                    onClick={handleFallbackSearch}
+                    dataTest="fallback-search-button"
+                    loading={isFallbackLoading}
+                >
+                    {i18n.t('Search in all programs')}
+                </Button>
+            </div>
         }
         <div className={classes.bottom}>
             <div className={classes.bottomText}>
