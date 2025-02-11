@@ -896,9 +896,6 @@ msgstr "Indicators"
 msgid "Warnings"
 msgstr "Warnings"
 
-msgid "Show all events"
-msgstr "Show all events"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Event could not be loaded. Are you sure it exists?"
 
@@ -933,9 +930,6 @@ msgstr "Loading"
 
 msgid "An error occurred while loading the form"
 msgstr "An error occurred while loading the form"
-
-msgid "Back to all stages and events"
-msgstr "Back to all stages and events"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -260,7 +260,7 @@ msgid "No write access"
 msgstr "Yozuv kiritish uchun ruxsat yoʼq"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Yangi {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Shakl koʼrinishiga oʼtish"
@@ -749,6 +749,23 @@ msgid ""
 "select a valid combination."
 msgstr ""
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr ""
 
@@ -804,7 +821,7 @@ msgid "Link"
 msgstr "Havola"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Yangi {{trackedEntityName}} sifatida saqlash"
 
 msgid "Some programs are being filtered."
 msgstr "Baʼzi dasturlar Filtrlanmoqda."
@@ -1359,7 +1376,7 @@ msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Delete {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Oʼchirib tashlash {{trackedEntityTypeName}}"
 
 msgid ""
 "Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
@@ -1566,7 +1583,7 @@ msgid "New Relationship"
 msgstr ""
 
 msgid "Link to an existing {{tetName}}"
-msgstr ""
+msgstr "Mavjud {{tetName}} ga havola"
 
 msgid "An error occurred while adding the relationship"
 msgstr ""

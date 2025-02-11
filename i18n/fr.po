@@ -8,16 +8,16 @@
 # Bram Piot <bram.piot@gmail.com>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
 # Karoline Tufte Lien <karoline@dhis2.org>, 2024
-# Philip Larsen Donnelly, 2024
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
 # Viktor Varland <viktor@dhis2.org>, 2025
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
+# Philip Larsen Donnelly, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
+"Last-Translator: Philip Larsen Donnelly, 2025\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,7 +151,7 @@ msgid "Async field update failed"
 msgstr "Echec de la mise à jour du champ asynchrone"
 
 msgid "Area"
-msgstr "Aire"
+msgstr "Zone"
 
 msgid "Coordinate"
 msgstr "Coordonnée"
@@ -169,13 +169,13 @@ msgid "Please provide a valid date"
 msgstr "Veuillez spécifier une date valide"
 
 msgid "{{ stageName }} - Basic info"
-msgstr ""
+msgstr "{{ stageName }} - Infos de base"
 
 msgid "{{ stageName }} - Assignee"
 msgstr ""
 
 msgid "{{ stageName }} - Status"
-msgstr ""
+msgstr "{{ stageName }} - Statut"
 
 msgid "Please select {{categoryName}}"
 msgstr "Veuillez sélectionner {{categoryName}}."
@@ -200,7 +200,7 @@ msgid "Metadata error. see log for details"
 msgstr "Erreur de métadonnées. Voir le journal pour plus de détails"
 
 msgid "{{ stageName }} - Details"
-msgstr ""
+msgstr "{{ stageName }} - Détails"
 
 msgid "{{ stageName }} - {{ sectionName }}"
 msgstr ""
@@ -777,6 +777,23 @@ msgid ""
 "select a valid combination."
 msgstr ""
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "Veuillez sélectionner {{category}}."
 
@@ -820,7 +837,7 @@ msgid "New Enrollment in program{{escape}} {{programName}}"
 msgstr "Nouvelle inscription au programme {{escape}} {{programName}}"
 
 msgid "Save {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Enrégistrer {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Enrégistrer {{trackedEntityName}}"
@@ -1354,9 +1371,11 @@ msgstr[2] "La date prévue est {{count}} jour {{position}} la date suggérée."
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] ""
+msgstr[0] "Ce jour-là, {{count}} est programmé événement à {{orgUnitName}}."
 msgstr[1] ""
+"Il y a {{count}} événements programmés sur {{orgUnitName}} ce jour-là."
 msgstr[2] ""
+"Il y a {{count}} événements programmés dans {{orgUnitName}} ce jour-là."
 
 msgid "Schedule date / Due date"
 msgstr "Date prévue / Date d'échéance"
@@ -1442,7 +1461,7 @@ msgstr ""
 "Le widget du profil n'a pas pu être chargé. Veuillez réessayer plus tard"
 
 msgid "{{trackedEntityTypeName}} profile"
-msgstr ""
+msgstr "Profil {{trackedEntityTypeName}}"
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
@@ -1460,7 +1479,7 @@ msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
 msgid "Actions - {{relationshipName}}"
-msgstr ""
+msgstr "Actions - {{relationshipName}}"
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
@@ -1634,7 +1653,7 @@ msgid "New Relationship"
 msgstr "Nouvelle relation"
 
 msgid "Link to an existing {{tetName}}"
-msgstr ""
+msgstr "Lier à un {{tetName}} existant"
 
 msgid "An error occurred while adding the relationship"
 msgstr "Une erreur s'est produite lors de l'ajout d'une relation"
@@ -1715,7 +1734,7 @@ msgid "You do not have access to delete events"
 msgstr ""
 
 msgid "Delete events"
-msgstr ""
+msgstr "Supprimer des événements"
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
