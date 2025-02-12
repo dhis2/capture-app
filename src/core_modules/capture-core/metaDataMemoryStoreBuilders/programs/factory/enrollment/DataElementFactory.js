@@ -51,11 +51,14 @@ export class DataElementFactory {
         let requestPromise;
         if (dataElementUnique.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
             const orgUnitId = contextProps.orgUnitId;
+            const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+                ? 'orgUnits'
+                : 'orgUnit';
             requestPromise = querySingleResource({
                 resource: 'tracker/trackedEntities',
                 params: {
                     trackedEntityType: contextProps.trackedEntityTypeId,
-                    orgUnit: orgUnitId,
+                    [orgUnitQueryParam]: orgUnitId,
                     filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                 },
             });
@@ -137,11 +140,14 @@ export class DataElementFactory {
                 let requestPromise;
                 if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                     const orgUnitId = contextProps.orgUnitId;
+                    const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+                        ? 'orgUnits'
+                        : 'orgUnit';
                     requestPromise = querySingleResource({
                         resource: 'tracker/trackedEntities',
                         params: {
                             program: contextProps.programId,
-                            orgUnit: orgUnitId,
+                            [orgUnitQueryParam]: orgUnitId,
                             filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                         },
                     });
