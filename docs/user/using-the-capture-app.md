@@ -1368,7 +1368,7 @@ The **Changelog** feature provides a historical record of changes made to data f
 
 ### Event changelog
 
-The **event changelog** tracks changes to data items within an event. These data items include data elements and event properties. Event properties refer to the attributes report date, scheduled date, and geometry.
+The **Event Changelog** tracks changes to data items within an event. These data items include event properties (e.g., report date, scheduled date, and geometry) and data elements.
 
 #### How to open the event changelog
 1. **Navigate** to the "View event" page of an event in the Capture app.  
