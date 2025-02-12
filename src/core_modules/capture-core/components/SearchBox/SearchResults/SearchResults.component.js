@@ -8,7 +8,7 @@ import React, {
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
-import { Button, colors } from '@dhis2/ui';
+import { Button, CircularLoader, colors } from '@dhis2/ui';
 import { CardList, CardListButtons } from '../../CardList';
 import { withNavigation } from '../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchBox.constants';
@@ -34,6 +34,12 @@ export const getStyles = (theme: Theme) => ({
         color: colors.grey800,
         marginTop: theme.typography.pxToRem(12),
         marginBottom: theme.typography.pxToRem(12),
+    },
+    loadingMask: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: theme.typography.pxToRem(545),
     },
 });
 
@@ -86,6 +92,7 @@ export const SearchResultsIndex = ({
     };
 
     const handleOtherPageChange = (newOtherPage) => {
+        setIsFallbackLoading(true);
         startFallbackSearch({
             programId: currentSearchScopeId,
             formId: currentFormId,
@@ -158,23 +165,29 @@ export const SearchResultsIndex = ({
             onClose={() => setOtherResultsOpen(false)}
             onOpen={() => setOtherResultsOpen(true)}
         >
-            <CardList
-                noItemsText={i18n.t('No results found')}
-                currentSearchScopeName={currentSearchScopeName}
-                currentSearchScopeType={searchScopes.ALL_PROGRAMS}
-                items={otherResults}
-                dataElements={dataElements}
-                renderCustomCardActions={({
-                    item, enrollmentType, currentSearchScopeType: searchScopeType, programName,
-                }) => (<CardListButtons
-                    programName={programName}
-                    currentSearchScopeType={searchScopeType}
-                    currentSearchScopeId={currentSearchScopeId}
-                    id={item.id}
-                    orgUnitId={orgUnitId}
-                    enrollmentType={enrollmentType}
-                />)}
-            />
+            {isFallbackLoading ? (
+                <div className={classes.loadingMask}>
+                    <CircularLoader />
+                </div>
+            ) : (
+                <CardList
+                    noItemsText={i18n.t('No results found')}
+                    currentSearchScopeName={currentSearchScopeName}
+                    currentSearchScopeType={searchScopes.ALL_PROGRAMS}
+                    items={otherResults}
+                    dataElements={dataElements}
+                    renderCustomCardActions={({
+                        item, enrollmentType, currentSearchScopeType: searchScopeType, programName,
+                    }) => (<CardListButtons
+                        programName={programName}
+                        currentSearchScopeType={searchScopeType}
+                        currentSearchScopeId={currentSearchScopeId}
+                        id={item.id}
+                        orgUnitId={orgUnitId}
+                        enrollmentType={enrollmentType}
+                    />)}
+                />
+            )}
             <div className={classes.pagination}>
                 <SearchPagination
                     nextPageButtonDisabled={otherResults.length < resultsPageSize}
