@@ -1,3 +1,10 @@
+# [101.26.0](https://github.com/dhis2/capture-app/compare/v101.25.5...v101.26.0) (2025-02-12)
+
+
+### Features
+
+* [DHIS2-18018][DHIS2-17853] show related stages widget in view event page ([#3916](https://github.com/dhis2/capture-app/issues/3916)) ([b584a0c](https://github.com/dhis2/capture-app/commit/b584a0c7e65689e9ff04970e273c6244ec4693a8))
+
 ## [101.25.5](https://github.com/dhis2/capture-app/compare/v101.25.4...v101.25.5) (2025-02-11)
 
 
