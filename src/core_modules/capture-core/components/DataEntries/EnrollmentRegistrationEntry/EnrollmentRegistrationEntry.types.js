@@ -1,12 +1,11 @@
 // @flow
 import type { Node } from 'react';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
-import type { RegistrationFormMetadata } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm/types';
 import type { RenderCustomCardActions } from '../../CardList';
 import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 import type { ExistingUniqueValueDialogActionsComponent } from '../withErrorMessagePostProcessor';
 import type { InputAttribute } from './hooks/useFormValues';
-import { RenderFoundation, ProgramStage } from '../../../metaData';
+import { RenderFoundation, ProgramStage, Enrollment } from '../../../metaData';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 import { relatedStageActions } from '../../WidgetRelatedStages';
 
@@ -67,7 +66,7 @@ export type OwnProps = $ReadOnly<{|
     skipDuplicateCheck?: ?boolean,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
     saveButtonText: (trackedEntityName: string) => string,
-    firstStageMetaData?: ?{ stage: ?ProgramStage },
+    firstStageMetaData?: ?{ stage: ProgramStage },
     relatedStageRef?: { current: ?RelatedStageRefPayload },
     relatedStageActionsOptions?: {
         [key: $Keys<typeof relatedStageActions>]: {
@@ -85,8 +84,8 @@ type ContainerProps = {|
     onCancel: () => void,
     isUserInteractionInProgress: boolean,
     isSavingInProgress: boolean,
-    enrollmentMetadata: RegistrationFormMetadata,
-    formFoundation: ?RenderFoundation,
+    enrollmentMetadata: Enrollment,
+    formFoundation: RenderFoundation,
     formId: ?string,
     saveButtonText: string,
 |};

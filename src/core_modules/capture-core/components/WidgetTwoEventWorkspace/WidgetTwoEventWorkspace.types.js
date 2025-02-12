@@ -13,6 +13,8 @@ export type Props = {|
     currentPage: $Values<typeof EnrollmentPageKeys> | string,
     stage?: ProgramStage,
     type?: $Values<typeof WidgetTwoEventWorkspaceWrapperTypes>,
+    onDeleteEvent?: (eventId: string) => void,
+    onDeleteEventRelationship?: (relationshipId: string) => void,
 |}
 
 export type LinkedEvent = {|

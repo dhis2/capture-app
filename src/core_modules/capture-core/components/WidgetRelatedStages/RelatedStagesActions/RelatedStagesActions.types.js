@@ -25,7 +25,7 @@ export type RelatedStagesEvents = {
     status: string,
 }
 
-export type Props = {|
+export type PlainProps = {|
     type: string,
     relationshipName: string,
     relatedStagesDataValues: RelatedStageDataValueStates,
@@ -37,6 +37,8 @@ export type Props = {|
     constraint: ?Constraint,
     addErrorMessage: (ErrorMessagesForRelatedStages) => void,
     setRelatedStagesDataValues: (() => Object) => void,
+    onLink?: () => void,
+    isLinking?: boolean,
     actionsOptions?: {
         [key: $Keys<typeof relatedStageActions>]: {
             hidden?: boolean,
@@ -46,3 +48,19 @@ export type Props = {|
     },
     ...CssClasses
 |}
+
+export type Props = {|
+    programId: string,
+    enrollmentId?: string,
+    programStageId: string,
+    onLink?: () => void,
+    isLinking?: boolean,
+    actionsOptions?: {
+        [key: $Keys<typeof relatedStageActions>]: {
+            hidden?: boolean,
+            disabled?: boolean,
+            disabledMessage?: string
+        },
+    },
+|}
+
