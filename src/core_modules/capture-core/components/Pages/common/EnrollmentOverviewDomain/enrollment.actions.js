@@ -13,6 +13,7 @@ export const enrollmentSiteActionTypes = {
     ROLLBACK_ENROLLMENT_EVENT: 'Enrollment.RollbackEnrollmentEvent',
     ROLLBACK_ENROLLMENT_EVENTS: 'Enrollment.RollbackEnrollmentEvents',
     DELETE_ENROLLMENT_EVENT: 'Enrollment.DeleteEnrollmentEvent',
+    DELETE_ENROLLMENT_EVENT_RELATIONSHIP: 'Enrollment.DeleteEnrollmentEventRelationship',
     UPDATE_ENROLLMENT_EVENT_STATUS: 'Enrollment.UpdateEnrollmentEventStatus',
     COMMIT_ENROLLMENT_EVENT: 'Enrollment.CommitEnrollmentEvent',
     COMMIT_ENROLLMENT_EVENTS: 'Enrollment.CommitEnrollmentEvents',
@@ -59,6 +60,9 @@ export const updateOrAddEnrollmentEvents = ({ events }: EventReducerProps) =>
 
 export const deleteEnrollmentEvent = (eventId: string) =>
     actionCreator(enrollmentSiteActionTypes.DELETE_ENROLLMENT_EVENT)({ eventId });
+
+export const deleteEnrollmentEventRelationship = (relationshipId: string) =>
+    actionCreator(enrollmentSiteActionTypes.DELETE_ENROLLMENT_EVENT_RELATIONSHIP)({ relationshipId });
 
 export const updateEnrollmentEventStatus = (eventId: string, status: string, updatedAt: string) =>
     actionCreator(enrollmentSiteActionTypes.UPDATE_ENROLLMENT_EVENT_STATUS)({

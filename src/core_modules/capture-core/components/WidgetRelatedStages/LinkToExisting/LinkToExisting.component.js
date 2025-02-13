@@ -53,6 +53,7 @@ export const LinkToExistingPlain = ({
                 className={classes.singleSelectField}
                 error={saveAttempted && !!errorMessages.linkedEventId}
                 validationText={saveAttempted && errorMessages.linkedEventId}
+                dataTest="related-stages-existing-response-list"
             >
                 {linkableEvents
                     .map(event => (

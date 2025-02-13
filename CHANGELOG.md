@@ -1,3 +1,17 @@
+# [101.26.0](https://github.com/dhis2/capture-app/compare/v101.25.5...v101.26.0) (2025-02-12)
+
+
+### Features
+
+* [DHIS2-18018][DHIS2-17853] show related stages widget in view event page ([#3916](https://github.com/dhis2/capture-app/issues/3916)) ([b584a0c](https://github.com/dhis2/capture-app/commit/b584a0c7e65689e9ff04970e273c6244ec4693a8))
+
+## [101.25.5](https://github.com/dhis2/capture-app/compare/v101.25.4...v101.25.5) (2025-02-11)
+
+
+### Bug Fixes
+
+* [DHIS2-18677] View event breadcrumb item do not work ([#3956](https://github.com/dhis2/capture-app/issues/3956)) ([d86e538](https://github.com/dhis2/capture-app/commit/d86e5384566bfa70ee79713741da74e18eef277f))
+
 ## [101.25.4](https://github.com/dhis2/capture-app/compare/v101.25.3...v101.25.4) (2025-02-10)
 
 

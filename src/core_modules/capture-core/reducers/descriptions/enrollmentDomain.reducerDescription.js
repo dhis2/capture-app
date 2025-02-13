@@ -25,6 +25,7 @@ const {
     COMMIT_ENROLLMENT_AND_EVENTS,
     DELETE_ENROLLMENT_EVENT,
     UPDATE_ENROLLMENT_EVENT_STATUS,
+    DELETE_ENROLLMENT_EVENT_RELATIONSHIP,
 } = enrollmentSiteActionTypes;
 
 const setAssignee = (state, action) => {
@@ -102,6 +103,16 @@ export const enrollmentDomainDesc = createReducerDescription(
         },
         [DELETE_ENROLLMENT_EVENT]: (state, { payload: { eventId } }) => {
             const events = state.enrollment.events?.filter(event => event.event !== eventId);
+            return { ...state, enrollment: { ...state.enrollment, events } };
+        },
+        [DELETE_ENROLLMENT_EVENT_RELATIONSHIP]: (state, { payload: { relationshipId } }) => {
+            const events = state.enrollment.events?.reduce((acc, event) => {
+                const relationships = event.relationships?.filter(
+                    relationship => relationship.relationship !== relationshipId,
+                );
+                return [...acc, { ...event, relationships }];
+            }, []);
+
             return { ...state, enrollment: { ...state.enrollment, events } };
         },
         [UPDATE_ENROLLMENT_EVENT_STATUS]: (state, { payload: { eventId, status, updatedAt } }) => {

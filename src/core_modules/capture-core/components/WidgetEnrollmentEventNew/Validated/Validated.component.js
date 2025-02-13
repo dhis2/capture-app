@@ -5,7 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
-import { WidgetRelatedStages } from '../../WidgetRelatedStages';
+import { RelatedStagesActions } from '../../WidgetRelatedStages';
 import { usePlacementDomNode } from '../../../utils/portal/usePlacementDomNode';
 import type { Props } from './validated.types';
 
@@ -51,7 +51,7 @@ const ValidatedPlain = ({
                             placementDomNodeForSavingText={savingTextDomNode}
                             programName={programName}
                         />
-                        <WidgetRelatedStages
+                        <RelatedStagesActions
                             ref={relatedStageRef}
                             enrollmentId={enrollmentId}
                             programId={programId}
