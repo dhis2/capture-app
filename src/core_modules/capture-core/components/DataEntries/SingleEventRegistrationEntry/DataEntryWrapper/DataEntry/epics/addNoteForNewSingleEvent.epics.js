@@ -33,7 +33,7 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: Re
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedAt: fromClientDate(moment().toISOString()),
+                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                     clientId: uuid(),
                 };
 

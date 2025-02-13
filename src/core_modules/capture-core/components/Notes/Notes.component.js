@@ -98,7 +98,7 @@ const NotesPlain = ({
 }: Props) => {
     const [addIsOpen, setAddIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
-    const { fromServerDate, fromClientDate } = useTimeZoneConversion();
+    const { fromServerDate } = useTimeZoneConversion();
 
     useEffect(() => {
         setAddIsOpen(!!propValue);
@@ -185,10 +185,6 @@ const NotesPlain = ({
         <div className={classes.notesContainer}>
             <Menu dense className={classes.notesList} data-test="notes-list">
                 {notes.map(n =>
-                /*                     const formattedDate = n.storedAt && n.storedAt.endsWith('Z') ?
-                        fromClientDate(n.storedAt) :
-                        fromServerDate(n.storedAt); */
-
                     (
                         <MenuItem
                             className={classes.noteItem}
@@ -203,9 +199,6 @@ const NotesPlain = ({
                                     </div>
                                     <div className={classes.noteItemDate} data-test="note-date">
                                         <span>
-                                            {/*                                             <Tooltip content={convertClientToList(formattedDate, dataElementTypes.DATETIME)}>
-                                                {moment(formattedDate).fromNow()}
-                                            </Tooltip> */}
                                             <Tooltip content={convertClientToList(fromServerDate(n.storedAt), dataElementTypes.DATETIME)}>
                                                 {moment(fromServerDate(n.storedAt)).fromNow()}
                                             </Tooltip>

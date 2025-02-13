@@ -24,7 +24,7 @@ const createServerData = (eventId, note, useNewEndpoint) => {
     return { event: eventId, notes: [{ value: note }] };
 };
 
-export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
         switchMap((action) => {
@@ -52,7 +52,7 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore,
                     },
                     lastUpdated: moment().toISOString(),
                     storedBy: userName,
-                    storedAt: moment().toISOString(),
+                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 };
                 const formNote = {
                     ...clientNote,

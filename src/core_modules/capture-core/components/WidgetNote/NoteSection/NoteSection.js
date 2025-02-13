@@ -81,7 +81,7 @@ const NoteSectionPlain = ({
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
     const [newNoteValue, setNewNoteValue] = useState('');
-    const { fromServerDate, fromClientDate } = useTimeZoneConversion();
+    const { fromServerDate } = useTimeZoneConversion();
 
     const handleChange = useCallback((value) => {
         setEditing(true);
@@ -99,31 +99,26 @@ const NoteSectionPlain = ({
         setEditing(false);
     }, [handleAddNote, newNoteValue]);
 
-    const NoteItem = ({ value, storedAt, createdBy }) => {
-        const formattedDate = storedAt && storedAt.endsWith('Z') ?
-            fromClientDate(storedAt) :
-            fromServerDate(storedAt);
-        return (
-            <div data-test="note-item" className={cx(classes.item)}>
-                {/* TODO: add avatar */}
-                <div className={classes.rightColumn}>
-                    <div className={classes.header}>
-                        {createdBy && <span className={cx(classes.headerText, classes.name)}>
-                            {createdBy.firstName} {' '} {createdBy.surname}
-                        </span>}
-                        <span className={cx(classes.headerText, classes.lastUpdated)}>
-                            <Tooltip content={convertClientToList(formattedDate, dataElementTypes.DATETIME)}>
-                                {moment(formattedDate).fromNow()}
-                            </Tooltip>
-                        </span>
-                    </div>
-                    <div className={classes.body}>
-                        <Parser>{value}</Parser>
-                    </div>
+    const NoteItem = ({ value, storedAt, createdBy }) => (
+        <div data-test="note-item" className={cx(classes.item)}>
+            {/* TODO: add avatar */}
+            <div className={classes.rightColumn}>
+                <div className={classes.header}>
+                    {createdBy && <span className={cx(classes.headerText, classes.name)}>
+                        {createdBy.firstName} {' '} {createdBy.surname}
+                    </span>}
+                    <span className={cx(classes.headerText, classes.lastUpdated)}>
+                        <Tooltip content={convertClientToList(fromServerDate(storedAt), dataElementTypes.DATETIME)}>
+                            {moment(fromServerDate(storedAt)).fromNow()}
+                        </Tooltip>
+                    </span>
+                </div>
+                <div className={classes.body}>
+                    <Parser>{value}</Parser>
                 </div>
             </div>
-        );
-    };
+        </div>
+    );
 
 
     return (

@@ -15,7 +15,7 @@ const createServerData = (note, useNewEndpoint) => {
     return { notes: [{ value: note }] };
 };
 
-export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_ENROLLMENT),
         switchMap((action) => {
@@ -42,7 +42,7 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
                     },
                     updatedAt: moment().toISOString(),
                     storedBy: userName,
-                    storedAt: moment().toISOString(),
+                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 };
 
                 const saveContext = {
