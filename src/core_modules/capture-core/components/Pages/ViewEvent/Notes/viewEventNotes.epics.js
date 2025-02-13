@@ -47,7 +47,7 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             ], viewEventNotesBatchActionTypes.LOAD_EVENT_NOTES_BATCH);
         }));
 
-export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
         switchMap((action) => {
@@ -74,7 +74,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedAt: moment().toISOString(),
+                    storedAt: fromClientDate(moment().toISOString()),
                     clientId: uuid(),
                 };
                 return batchActions([

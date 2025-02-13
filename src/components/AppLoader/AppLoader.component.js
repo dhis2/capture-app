@@ -2,7 +2,7 @@
 import React, { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
 import { useHistory } from 'react-router-dom';
-import { useDataEngine, useConfig } from '@dhis2/app-runtime';
+import { useDataEngine, useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
@@ -20,18 +20,20 @@ type Props = {
 const useApiUtils = () => {
     const dataEngine = useDataEngine();
     const { serverVersion } = useConfig();
+    const { fromClientDate } = useTimeZoneConversion();
     return useMemo(() => ({
         querySingleResource: makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         mutate: dataEngine.mutate.bind(dataEngine),
         absoluteApiPath: buildUrl(dataEngine.link.config.baseUrl, dataEngine.link.versionedApiPath),
         serverVersion,
-    }), [dataEngine, serverVersion]);
+        fromClientDate,
+    }), [dataEngine, serverVersion, fromClientDate]);
 };
 
 export const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
     const [loadError, setLoadError] = React.useState(null);
-    const { querySingleResource, mutate, absoluteApiPath, serverVersion } = useApiUtils();
+    const { querySingleResource, mutate, absoluteApiPath, serverVersion, fromClientDate } = useApiUtils();
     const history = useHistory();
 
     const logError = useCallback((error) => {
@@ -56,6 +58,7 @@ export const AppLoader = (props: Props) => {
                     mutate,
                     absoluteApiPath,
                     serverVersion,
+                    fromClientDate,
                 },
                 // $FlowFixMe[prop-missing] automated comment
                 () => onRunApp(store));
@@ -83,6 +86,7 @@ export const AppLoader = (props: Props) => {
         absoluteApiPath,
         history,
         serverVersion,
+        fromClientDate,
     ]);
 
     useEffect(() => {

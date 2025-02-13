@@ -184,12 +184,12 @@ const NotesPlain = ({
     return (
         <div className={classes.notesContainer}>
             <Menu dense className={classes.notesList} data-test="notes-list">
-                {notes.map((n) => {
-                    const formattedDate = n.storedAt && n.storedAt.endsWith('Z') ?
+                {notes.map(n =>
+                /*                     const formattedDate = n.storedAt && n.storedAt.endsWith('Z') ?
                         fromClientDate(n.storedAt) :
-                        fromServerDate(n.storedAt);
+                        fromServerDate(n.storedAt); */
 
-                    return (
+                    (
                         <MenuItem
                             className={classes.noteItem}
                             key={n.clientId}
@@ -203,8 +203,11 @@ const NotesPlain = ({
                                     </div>
                                     <div className={classes.noteItemDate} data-test="note-date">
                                         <span>
-                                            <Tooltip content={convertClientToList(formattedDate, dataElementTypes.DATETIME)}>
+                                            {/*                                             <Tooltip content={convertClientToList(formattedDate, dataElementTypes.DATETIME)}>
                                                 {moment(formattedDate).fromNow()}
+                                            </Tooltip> */}
+                                            <Tooltip content={convertClientToList(fromServerDate(n.storedAt), dataElementTypes.DATETIME)}>
+                                                {moment(fromServerDate(n.storedAt)).fromNow()}
                                             </Tooltip>
                                         </span>
 
@@ -215,8 +218,8 @@ const NotesPlain = ({
                                 </div>
                             </>}
                         />
-                    );
-                })}
+                    ),
+                )}
             </Menu>
             <div className={classes.newNoteContainer} data-test="new-note-container">
                 {addIsOpen ? renderInput() : renderButton(entityAccess.write)}

@@ -11,7 +11,7 @@ import {
     addNote,
 } from '../../../../../DataEntry/actions/dataEntry.actions';
 
-export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE),
         switchMap((action) => {
@@ -33,7 +33,7 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: Re
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedAt: moment().toISOString(),
+                    storedAt: fromClientDate(moment().toISOString()),
                     clientId: uuid(),
                 };
 
