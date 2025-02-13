@@ -98,7 +98,7 @@ const NotesPlain = ({
 }: Props) => {
     const [addIsOpen, setAddIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
-    const { fromServerDate } = useTimeZoneConversion();
+    const { fromServerDate, fromClientDate } = useTimeZoneConversion();
 
     useEffect(() => {
         setAddIsOpen(!!propValue);
@@ -184,31 +184,39 @@ const NotesPlain = ({
     return (
         <div className={classes.notesContainer}>
             <Menu dense className={classes.notesList} data-test="notes-list">
-                {notes.map(n => (
-                    <MenuItem
-                        className={classes.noteItem}
-                        key={n.clientId}
-                        data-test="note"
-                        label={<>
-                            <div className={classes.noteItemHeader}>
-                                <div className={classes.noteItemUser} data-test="note-user">
-                                    {n.createdBy ? `${n.createdBy.firstName} ${n.createdBy.surname}` : `${n.storedBy}` }
-                                </div>
-                                <div className={classes.noteItemDate} data-test="note-date">
-                                    <span>
-                                        <Tooltip content={convertClientToList(fromServerDate(n.storedAt), dataElementTypes.DATETIME)}>
-                                            {moment(fromServerDate(n.storedAt)).fromNow()}
-                                        </Tooltip>
-                                    </span>
+                {notes.map((n) => {
+                    const formattedDate = n.storedAt && n.storedAt.endsWith('Z') ?
+                        fromClientDate(n.storedAt) :
+                        fromServerDate(n.storedAt);
 
+                    return (
+                        <MenuItem
+                            className={classes.noteItem}
+                            key={n.clientId}
+                            data-test="note"
+                            label={<>
+                                <div className={classes.noteItemHeader}>
+                                    <div className={classes.noteItemUser} data-test="note-user">
+                                        {n.createdBy ?
+                                            `${n.createdBy.firstName} ${n.createdBy.surname}`
+                                            : `${n.storedBy}` }
+                                    </div>
+                                    <div className={classes.noteItemDate} data-test="note-date">
+                                        <span>
+                                            <Tooltip content={convertClientToList(formattedDate, dataElementTypes.DATETIME)}>
+                                                {moment(formattedDate).fromNow()}
+                                            </Tooltip>
+                                        </span>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div data-test="note-text">
-                                <Parser>{n.value}</Parser>
-                            </div>
-                        </>}
-                    />
-                ))}
+                                <div data-test="note-text">
+                                    <Parser>{n.value}</Parser>
+                                </div>
+                            </>}
+                        />
+                    );
+                })}
             </Menu>
             <div className={classes.newNoteContainer} data-test="new-note-container">
                 {addIsOpen ? renderInput() : renderButton(entityAccess.write)}

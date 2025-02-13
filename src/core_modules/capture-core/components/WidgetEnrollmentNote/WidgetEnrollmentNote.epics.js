@@ -42,7 +42,7 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
                     },
                     updatedAt: moment().toISOString(),
                     storedBy: userName,
-                    storedAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+                    storedAt: moment().toISOString(),
                 };
 
                 const saveContext = {

@@ -33,7 +33,7 @@ export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable, store
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+                    storedAt: moment().toISOString(),
                     clientId: uuid(),
                 };
 

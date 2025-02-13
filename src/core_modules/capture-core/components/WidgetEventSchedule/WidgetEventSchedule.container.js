@@ -127,7 +127,7 @@ export const WidgetEventSchedule = ({
     const onAddNote = (note) => {
         const newNote = {
             storedBy: currentUser.userName,
-            storedAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+            storedAt: moment().toISOString(),
             value: note,
             createdBy: {
                 firstName: currentUser.firstName,

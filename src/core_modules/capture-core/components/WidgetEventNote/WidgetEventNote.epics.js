@@ -52,7 +52,7 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore,
                     },
                     lastUpdated: moment().toISOString(),
                     storedBy: userName,
-                    storedAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+                    storedAt: moment().toISOString(),
                 };
                 const formNote = {
                     ...clientNote,

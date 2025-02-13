@@ -81,7 +81,7 @@ const NoteSectionPlain = ({
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
     const [newNoteValue, setNewNoteValue] = useState('');
-    const { fromServerDate } = useTimeZoneConversion();
+    const { fromServerDate, fromClientDate } = useTimeZoneConversion();
 
     const handleChange = useCallback((value) => {
         setEditing(true);
@@ -100,7 +100,9 @@ const NoteSectionPlain = ({
     }, [handleAddNote, newNoteValue]);
 
     const NoteItem = ({ value, storedAt, createdBy }) => {
-        const localDateTime = convertClientToList(fromServerDate(storedAt), dataElementTypes.DATETIME);
+        const formattedDate = storedAt && storedAt.endsWith('Z') ?
+            fromClientDate(storedAt) :
+            fromServerDate(storedAt);
         return (
             <div data-test="note-item" className={cx(classes.item)}>
                 {/* TODO: add avatar */}
@@ -110,8 +112,8 @@ const NoteSectionPlain = ({
                             {createdBy.firstName} {' '} {createdBy.surname}
                         </span>}
                         <span className={cx(classes.headerText, classes.lastUpdated)}>
-                            <Tooltip content={localDateTime}>
-                                {moment(fromServerDate(storedAt)).fromNow()}
+                            <Tooltip content={convertClientToList(formattedDate, dataElementTypes.DATETIME)}>
+                                {moment(formattedDate).fromNow()}
                             </Tooltip>
                         </span>
                     </div>

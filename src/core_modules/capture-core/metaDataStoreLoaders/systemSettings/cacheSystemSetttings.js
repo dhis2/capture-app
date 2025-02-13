@@ -27,7 +27,7 @@ export async function cacheSystemSettings(
         },
         {
             id: 'calendar',
-            value: systemSettings.calendar,
+            value: systemSettings.calendar !== 'julian' ? systemSettings.calendar : 'iso8601',
         },
     ];
 

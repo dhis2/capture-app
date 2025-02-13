@@ -74,7 +74,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss.SSS'),
+                    storedAt: moment().toISOString(),
                     clientId: uuid(),
                 };
                 return batchActions([
