@@ -25,6 +25,7 @@ type Props = {
     value: DateTimeRangeValue,
     onBlur: (value: ?DateTimeRangeValue, options: Object) => void,
     onChange: (value: ?DateTimeRangeValue) => void,
+    locale?: string,
 };
 
 type State = {

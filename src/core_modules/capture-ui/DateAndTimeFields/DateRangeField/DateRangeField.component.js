@@ -26,6 +26,7 @@ type Props = {
     onChange: (value: ?DateRangeValue) => void,
     classes: Object,
     innerMessage?: ?Object,
+    locale?: string,
 }
 
 const inputKeys = {

@@ -23,7 +23,8 @@ type Props = {
     classes: Object,
     dateLabel: string,
     timeLabel: string,
-    innerMessage: Object
+    innerMessage: Object,
+    locale?: string,
 };
 
 type State = {

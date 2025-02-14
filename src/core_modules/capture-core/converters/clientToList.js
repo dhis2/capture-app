@@ -15,15 +15,10 @@ function convertDateForListDisplay(rawValue: string): string {
 }
 
 function convertDateTimeForListDisplay(rawValue: string): string {
-    const momentDate = moment(rawValue);
+    const momentDate = moment(rawValue).locale('en');
     const timeString = momentDate.format('HH:mm');
     const localDate = convertIsoToLocalCalendar(rawValue);
     return `${localDate} ${timeString}`;
-}
-
-function convertTimeForListDisplay(rawValue: string): string {
-    const momentDate = moment(rawValue, 'HH:mm', true);
-    return momentDate.format('HH:mm');
 }
 
 type FileClientValue = {
@@ -122,8 +117,7 @@ const valueConvertersForType = {
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.POLYGON]: convertPolygonForDisplay,
     [dataElementTypes.STATUS]: convertStatusForDisplay,
-    [dataElementTypes.TIME]: convertTimeForListDisplay,
-    [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(convertTimeForListDisplay, value),
+    [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(undefined, value),
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
 };
 

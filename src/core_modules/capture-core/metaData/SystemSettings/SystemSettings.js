@@ -5,4 +5,5 @@ export class SystemSettings {
     dir: string;
     trackerAppRelativePath: string;
     calendar: string;
+    uiLocale: string;
 }

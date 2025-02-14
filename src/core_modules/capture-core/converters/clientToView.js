@@ -14,17 +14,13 @@ function convertDateForView(rawValue: string): string {
     return convertIsoToLocalCalendar(rawValue);
 }
 function convertDateTimeForView(rawValue: string): string {
-    const momentDate = moment(rawValue);
+    const momentDate = moment(rawValue).locale('en');
     const timeString = momentDate.format('HH:mm');
 
     const localDate = convertIsoToLocalCalendar(rawValue);
     return `${localDate} ${timeString}`;
 }
 
-function convertTimeForView(rawValue: string): string {
-    const momentDate = moment(rawValue, 'HH:mm', true);
-    return momentDate.format('HH:mm');
-}
 type FileClientValue = {
     name: string,
     url: string,
@@ -67,7 +63,6 @@ const valueConvertersForType = {
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.DATE]: convertDateForView,
     [dataElementTypes.DATETIME]: convertDateTimeForView,
-    [dataElementTypes.TIME]: convertTimeForView,
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,

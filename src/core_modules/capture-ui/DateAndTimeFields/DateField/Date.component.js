@@ -23,6 +23,7 @@ type Props = {
     innerMessage?: any,
     dateFormat: ?string,
     calendarType: ?string,
+    locale?: string,
 };
 
 type Validation = {|
@@ -67,6 +68,7 @@ export class DateField extends React.Component<Props, State> {
             innerMessage,
             calendarType,
             dateFormat,
+            locale,
         } = this.props;
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
@@ -97,6 +99,7 @@ export class DateField extends React.Component<Props, State> {
                     disabled={this.props.disabled}
                     {...errorProps}
                     maxDate={calendarMax}
+                    locale={locale}
                 />
             </div>
         );

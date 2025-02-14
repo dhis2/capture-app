@@ -57,6 +57,7 @@ type Props = {
     disabled?: ?boolean,
     dateFormat: ?string,
     calendarType: ?string,
+    locale?: string,
 };
 
 function getCalculatedValues(dateValue: ?string, calendarType: string, dateFormat: string): AgeValues {

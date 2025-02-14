@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { DateTimeField as UIDateTimeField } from 'capture-ui';
+import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
     innerInputError: {
@@ -36,6 +37,7 @@ class DateTimeFieldPlain extends React.Component<Props> {
         return (
             <UIDateTimeField
                 {...passOnProps}
+                locale={systemSettingsStore.get().uiLocale}
             />
         );
     }

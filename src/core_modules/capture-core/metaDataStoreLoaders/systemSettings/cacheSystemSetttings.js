@@ -17,6 +17,11 @@ export async function cacheSystemSettings(
             id: 'dateFormat',
             value: systemSettings.dateFormat.toUpperCase(),
         },
+        // This is a user setting, and both this and the dir property below should be placed somewhere else. Will do this in https://dhis2.atlassian.net/browse/DHIS2-19015.
+        {
+            id: 'uiLocale',
+            value: uiLocale,
+        },
         {
             id: 'dir',
             value: isLangRTL(uiLocale) ? 'rtl' : 'ltr',

@@ -18,7 +18,7 @@ export function convertIsoToLocalCalendar(isoDate: ?string): string {
         return '';
     }
 
-    const momentDate = moment(isoDate);
+    const momentDate = moment(isoDate).locale('en');
     if (!momentDate.isValid()) {
         return '';
     }

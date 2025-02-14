@@ -49,6 +49,7 @@ const AgeFieldPlain = (props: Props) => {
         // $FlowFixMe[cannot-spread-inexact] automated comment
         <UIAgeField
             datePlaceholder={systemSettingsStore.get().dateFormat.toLowerCase()}
+            locale={systemSettingsStore.get().uiLocale}
             {...passOnProps}
         />
     );
