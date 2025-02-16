@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -42,7 +42,7 @@ msgstr ""
 "App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
 
 msgid "Enrollment dashboard"
-msgstr "注册仪表板"
+msgstr "登记仪表板"
 
 msgid "View event"
 msgstr "查看活动"
@@ -54,13 +54,13 @@ msgid "New event"
 msgstr "新事件"
 
 msgid "Active enrollments"
-msgstr "活跃注册"
+msgstr "活跃的登记"
 
 msgid "Completed enrollments"
-msgstr "完成注册"
+msgstr "完成登记"
 
 msgid "Cancelled enrollments"
-msgstr "取消注册"
+msgstr "取消登记"
 
 msgid "{{trackedEntityName}} list"
 msgstr "{{trackedEntityName}} 清单"
@@ -84,25 +84,25 @@ msgid "View dashboard"
 msgstr "查看仪表盘"
 
 msgid "View active enrollment"
-msgstr "查看有效的报名"
+msgstr "查看有效的登记"
 
 msgid "Re-enroll"
-msgstr "重新报名"
+msgstr "重新登记"
 
 msgid "in"
 msgstr " 在"
 
 msgid "Enrolled"
-msgstr "已报名"
+msgstr "已登记"
 
 msgid "Previously enrolled"
-msgstr "以前报名的"
+msgstr "以前登记的"
 
 msgid "Organisation unit"
 msgstr "机构"
 
 msgid "Date of enrollment"
-msgstr "报名日期"
+msgstr "登记日期"
 
 msgid "Last updated"
 msgstr "上次更新"
@@ -144,7 +144,7 @@ msgid "Coordinate"
 msgstr "坐标"
 
 msgid "Enrollment"
-msgstr "报名"
+msgstr "报名登记"
 
 msgid "Complete event"
 msgstr "完成事件"
@@ -171,7 +171,7 @@ msgid "A date in the future is not allowed"
 msgstr "不允许将来的日期"
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
-msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存新注册。"
+msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存新登记。"
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存 {{trackedEntityName}}。"
@@ -303,10 +303,10 @@ msgid "without"
 msgstr "没有"
 
 msgid "enrollment"
-msgstr "报名"
+msgstr "登记"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr "通过从顶部栏中选择一个项目来报名"
+msgstr "通过从顶部栏中选择一个项目来登记"
 
 msgid "An error has occurred. See log for details"
 msgstr "发生了错误。查看日志以获取详细信息"
@@ -316,23 +316,23 @@ msgstr "{{programStageName}} 已完成"
 
 msgid ""
 "Would you like to complete the enrollment and all active events as well?"
-msgstr "您想同时完成注册和所有活动吗？"
+msgstr "您想同时完成登记和所有活动事件吗？"
 
 msgid "{{count}} event in {{programStageName}}"
 msgid_plural "{{count}} event in {{programStageName}}"
 msgstr[0] "{{count}} 事件位于 {{programStageName}}"
 
 msgid "Yes, complete enrollment and events"
-msgstr "是的，完成注册和活动"
+msgstr "是的，完成登记和事件"
 
 msgid "Complete enrollment only"
-msgstr "仅完成注册"
+msgstr "仅完成登记"
 
 msgid "Would you like to complete the enrollment?"
-msgstr "您想完成注册吗？"
+msgstr "您想完成登记吗？"
 
 msgid "Complete enrollment"
-msgstr "完成报名"
+msgstr "完成登记"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "存在重复，但是有错误，查看日志详情。"
@@ -340,21 +340,21 @@ msgstr "存在重复，但是有错误，查看日志详情。"
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
-msgstr " 具有 {{attributeName}}  属性的条目已经登记，但是你不能访问 "
+msgstr " 具有 {{attributeName}}  属性的条目已经注册，但是你不能访问 "
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "你已经登记了该{{attributeName}}"
+msgstr "你已经注册了该{{attributeName}}"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr "一个具有 {{attributeName}} 的 {{trackedEntityTypeName}} 实体已经登记"
+msgstr "一个具有 {{attributeName}} 的 {{trackedEntityTypeName}} 实体已经注册"
 
 msgid "Show registered {{trackedEntityTypeName}}"
 msgstr "显示已注册的{{trackedEntityTypeName}}"
 
 msgid "Registered person"
-msgstr "登记的人"
+msgstr "已注册的人"
 
 msgid "validation failed"
 msgstr "验证失败"
@@ -602,7 +602,7 @@ msgid "Close the notice"
 msgstr "关闭通知"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "ID为“ {{enrollmentId}}”的报名不存在"
+msgstr "ID为“ {{enrollmentId}}”的登记不存在"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
@@ -641,23 +641,23 @@ msgstr "未找到项目阶段"
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
-msgstr "选择一个项目以添加新的或查看 {{teiDisplayName}} 的现有注册"
+msgstr "选择一个项目以添加新的或查看 {{teiDisplayName}} 的现有登记"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}}具有类别。选择所有类别以查看仪表板。"
 
 msgid "Invalid enrollment id {{enrollmentId}}."
-msgstr "注册 ID {{enrollmentId}} 无效。"
+msgstr "登记 ID {{enrollmentId}} 无效。"
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr "选择一个报名以查看仪表板。"
+msgstr "选择一个登记以查看仪表板。"
 
 msgid "There are no active enrollments."
-msgstr "没有有效的注册。"
+msgstr "没有有效的登记。"
 
 msgid "Add new enrollment for {{teiDisplayName}} in this program."
-msgstr "在此计划中为 {{teiDisplayName}} 添加新注册。"
+msgstr "在此项目中为 {{teiDisplayName}} 添加新登记。"
 
 msgid ""
 "You do not have permissions to access to this program, registering unit or "
@@ -665,22 +665,22 @@ msgid ""
 msgstr "您没有访问此项目、注册单元或记录的权限，请联系您的管理员获取更多信息。"
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr "该项目未报名{{teiDisplayName}} 。"
+msgstr "{{teiDisplayName}} 未在该项目中登记。"
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr "在此项目中报名{{teiDisplayName}}。"
+msgstr "在此项目中登记{{teiDisplayName}}。"
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
-"{{teiDisplayName}}是一个{{tetName}}，无法报名到{{programName}}中。选择另一个允许{{tetName}}报名的项目。"
+"{{teiDisplayName}}是一个{{tetName}}，无法登记到{{programName}}中。选择另一个允许{{tetName}}登记的项目。"
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr "在此项目中报名新的{{selectedTetName}}。"
+msgstr "在此项目中登记新的{{selectedTetName}}。"
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr "{{programName}}是事件项目，不需要报名。"
+msgstr "{{programName}}是事件项目，不需要注册登记。"
 
 msgid "Create a new event in this program."
 msgstr "在此项目中创建一个新事件。"
@@ -736,21 +736,21 @@ msgid ""
 msgstr "类别选项对所选机构无效。请选择一个有效的组合。"
 
 msgid "Get started with Capture app"
-msgstr ""
+msgstr "开始使用采集应用程序"
 
 msgid "Report data"
-msgstr ""
+msgstr "报告数据"
 
 msgid ""
 "Choose a program and organisation unit to see existing data and create new "
 "records."
-msgstr ""
+msgstr "选择项目和组织机构，查看现有数据并创建新记录。"
 
 msgid "Click 'Search'. For program-specific results, choose a program first."
-msgstr ""
+msgstr "点击 \"搜索\"。如需特定项目的搜索结果，请先选择一个项目。"
 
 msgid "Learn more about Capture app"
-msgstr ""
+msgstr "了解有关采集应用程序的更多信息"
 
 msgid "Please select {{category}}."
 msgstr "请选择 {{category}}."
@@ -789,7 +789,7 @@ msgid ""
 msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 
 msgid "New Enrollment in program{{escape}} {{programName}}"
-msgstr "项目{{escape}} {{programName}}的新报名"
+msgstr "项目{{escape}} {{programName}}的新登记"
 
 msgid "Save {{trackedEntityTypeName}}"
 msgstr "保存 {{trackedEntityTypeName}}"
@@ -880,9 +880,6 @@ msgstr "指标"
 msgid "Warnings"
 msgstr "错误"
 
-msgid "Show all events"
-msgstr "显示所有事件"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "事件不能载入"
 
@@ -909,16 +906,13 @@ msgid "Could not retrieve metadata. Please try again later."
 msgstr "无法检索元数据。请稍后再试。"
 
 msgid "The enrollment event data could not be found"
-msgstr "找不到报名事件数据"
+msgstr "找不到登记事件数据"
 
 msgid "Loading"
 msgstr "载入"
 
 msgid "An error occurred while loading the form"
 msgstr "加载表格时发生错误"
-
-msgid "Back to all stages and events"
-msgstr "回到所有阶段和事件"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -1079,15 +1073,15 @@ msgid "This program is protected"
 msgstr "该项目受保护"
 
 msgid "Reason to check for enrollments"
-msgstr "检查注册的原因"
+msgstr "检查登记的原因"
 
 msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
-msgstr "描述您检查此受保护计划的注册情况的原因"
+msgstr "描述您检查此受保护项目的登记情况的原因"
 
 msgid "Check for enrollments"
-msgstr "检查注册"
+msgstr "检查登记"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
@@ -1095,13 +1089,13 @@ msgid ""
 msgstr "您必须提供一个理由来检查此受保护计划的注册情况。所有活动都将被记录。"
 
 msgid "Enrollment actions"
-msgstr "报名操作"
+msgstr "登记行动"
 
 msgid "We are processing your request."
 msgstr "我们正在处理您的请求。"
 
 msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr "此项目只允许每个 {{tetName}} 注册一次"
+msgstr "此项目只允许每个 {{tetName}} 登记一次"
 
 msgid "Add new"
 msgstr "新加"
@@ -1116,18 +1110,18 @@ msgid "Mark incomplete"
 msgstr "标记不完整"
 
 msgid "You do not have access to delete this enrollment"
-msgstr "您没有删除此注册登记的权限"
+msgstr "您没有删除此登记的权限"
 
 msgid "Delete enrollment"
-msgstr "删除报名"
+msgstr "删除报名登记"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
-msgstr "您确定要删除此报名吗？这将永久删除当前报名。"
+msgstr "您确定要删除此登记吗？这将永久删除当前登记。"
 
 msgid "Yes, delete enrollment."
-msgstr "是的，删除报名。"
+msgstr "是的，删除登记。"
 
 msgid "Remove mark for follow-up"
 msgstr "删除标记以进行后续操作"
@@ -1174,7 +1168,7 @@ msgstr "设置区域"
 msgid ""
 "Transferring enrollment ownership from {{ownerOrgUnit}} to "
 "{{newOrgUnit}}{{escape}}"
-msgstr "将注册所有权从 {{ownerOrgUnit}} 转移到 {{newOrgUnit}}{{escape}}"
+msgstr "将登记所有权从 {{ownerOrgUnit}} 转移到 {{newOrgUnit}}{{escape}}"
 
 msgid ""
 "You will lose access to the enrollment when transferring ownership to "
@@ -1187,10 +1181,10 @@ msgstr "所有权转让"
 msgid ""
 "Choose the organisation unit to which enrollment ownership should be "
 "transferred."
-msgstr "选择注册所有权应转移到的机构。"
+msgstr "选择登记所有权应转移到的机构。"
 
 msgid "Enrollment date"
-msgstr "报名日期"
+msgstr "加入日期"
 
 msgid "Incident date"
 msgstr "事件日期"
@@ -1232,13 +1226,13 @@ msgid "program or stage is invalid"
 msgstr "项目或阶段无效"
 
 msgid "Notes about this enrollment"
-msgstr "入学须知"
+msgstr "加入须知"
 
 msgid "Write a note about this enrollment"
-msgstr "撰写有关此次入学的说明"
+msgstr "撰写有关此加入的说明"
 
 msgid "This enrollment doesn't have any notes"
-msgstr "本次招生没有任何说明"
+msgstr "本次加入没有任何说明"
 
 msgid "Error"
 msgstr "错误"
@@ -1327,7 +1321,8 @@ msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
 "information about this enrollment, use the Edit button in the in the "
 "Enrollment box on this dashboard"
-msgstr "在此处更改有关此 {{trackedEntityName}} 的信息。要更改有关此报名的信息，请使用此仪表板上“报名”框中的“编辑”按钮"
+msgstr ""
+"在此处更改有关此 {{trackedEntityName}} 的信息。要更改有关此报名登记的信息，请使用此仪表板上“报名”框中的“编辑”按钮"
 
 msgid " Loading..."
 msgstr " 正在加载..."
@@ -1365,7 +1360,7 @@ msgid ""
 "enrollments and events in all programs."
 msgstr ""
 "您确定要删除此{{trackedEntityTypeName}}吗？这将永久删除所有计划中的 {{trackedEntityTypeName}} "
-"及其所有相关注册和事件。"
+"及其所有相关登记和事件。"
 
 msgid "There was a problem deleting the {{trackedEntityTypeName}}"
 msgstr "删除{{trackedEntityTypeName}}时出现问题"
@@ -1388,8 +1383,8 @@ msgstr "选择{{linkableStageLabel}} 活动"
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "选择 {{linkableStageLabel}}"
 
-msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }} 不可重复"
+msgid "{{ linkableStageLabel }} can only have one event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} 没有可链接的事件"
@@ -1400,11 +1395,23 @@ msgstr "行动{{relationshipName}}"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "关系不明确，请联系系统管理员"
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr "关联事件"
+
 msgid "Enter details now"
 msgstr "立即输入详细信息"
 
 msgid "Link to an existing event"
 msgstr "链接到现有活动"
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
+msgstr ""
 
 msgid "Scheduled date"
 msgstr "调度日期"
@@ -1506,9 +1513,6 @@ msgstr "您没有权限删除链接和已链接事件"
 msgid "An error occurred while loading the widget."
 msgstr "加载小部件时发生错误。"
 
-msgid "Linked event"
-msgstr "关联事件"
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1545,7 +1549,7 @@ msgid "Change"
 msgstr "改变"
 
 msgid "Value"
-msgstr "价值"
+msgstr "数值"
 
 msgid "File"
 msgstr "文件"
@@ -1660,7 +1664,7 @@ msgid "Inactive"
 msgstr "闲置"
 
 msgid "Enrollment status"
-msgstr "报名状态"
+msgstr "加入状态"
 
 msgid "Follow up"
 msgstr "后续跟踪"
@@ -1671,67 +1675,67 @@ msgstr "选择要按 {{label}} 筛选的项目阶段"
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
 "completing the rest. Please see the details below."
-msgstr "部分注册已成功完成，但在完成其他注册时出现错误。详情请见下文。"
+msgstr "部分加入登记已成功完成，但在完成其他加入时出现错误。详情请见下文。"
 
 msgid ""
 "There was an error while completing the enrollments. Please see the details "
 "below."
-msgstr "在完成注册时出现错误。请参阅下面的详细信息。"
+msgstr "在完成加入登记时出现错误。请参阅下面的详细信息。"
 
 msgid ""
 "An unexpected error occurred while fetching the enrollments. Please try "
 "again."
-msgstr "在获取注册信息时发生了意外错误。请重试。"
+msgstr "在获取加入信息时发生了意外错误。请重试。"
 
 msgid ""
 "There are currently no active enrollments in the selection. All enrollments "
 "are already completed or cancelled."
-msgstr "该选项中目前没有有效注册。所有注册均已完成或取消。"
+msgstr "该选项中目前没有有效加入登记。所有加入登记均已完成或取消。"
 
 msgid ""
 "This action will complete {{count}} active enrollment in your selection."
 msgid_plural ""
 "This action will complete {{count}} active enrollment in your selection."
-msgstr[0] "此操作将完成{{count}} 您选择的活动注册。"
+msgstr[0] "此操作将完成{{count}} 您选择的活动加入登记。"
 
 msgid "{{count}} enrollment already marked as completed will not be changed."
 msgid_plural ""
 "{{count}} enrollment already marked as completed will not be changed."
-msgstr[0] "{{count}} 已标记为完成的注册将不会更改。"
+msgstr[0] "{{count}} 加入登记已标记为完成将不会被更改。"
 
 msgid "Mark all events within enrollments as complete"
-msgstr "将注册中的所有事件标记为已完成"
+msgstr "将加入登记中的所有事件标记为已完成"
 
 msgid "You do not have access to bulk complete enrollments"
-msgstr "您无法批量完成注册"
+msgstr "您无法批量完成加入登记"
 
 msgid "Complete enrollments"
-msgstr "完成注册"
+msgstr "完成登记"
 
 msgid "Error completing enrollments"
-msgstr "完成注册出错"
+msgstr "完成加入登记出错"
 
 msgid "No active enrollments to complete"
-msgstr "没有待完成的有效注册"
+msgstr "没有待完成的有效加入登记"
 
 msgid "Complete {{count}} enrollment"
 msgid_plural "Complete {{count}} enrollment"
-msgstr[0] "完成{{count}} 注册"
+msgstr[0] "完成{{count}} 个加入登记"
 
 msgid "An error occurred when completing the enrollments"
-msgstr "完成注册时发生错误"
+msgstr "完成加入登记时发生错误"
 
 msgid "An unknown error occurred when completing enrollments"
-msgstr "完成注册时出现未知错误"
+msgstr "完成加入登记时出现未知错误"
 
 msgid "You do not have access to delete enrollments"
-msgstr "您没有删除注册的权限"
+msgstr "您没有删除加入登记的权限"
 
 msgid "Delete enrollments"
-msgstr "删除注册"
+msgstr "删除加入登记"
 
 msgid "Delete selected enrollments"
-msgstr "删除选定的注册"
+msgstr "删除选定的加入登记"
 
 msgid ""
 "An error occurred while loading the selected enrollments. Please try again."
@@ -1740,29 +1744,29 @@ msgstr "加载所选注册信息时发生错误。请重试。"
 msgid ""
 "This action will permanently delete the selected enrollments, including all "
 "associated data and events."
-msgstr "此操作将永久删除所选注册信息，包括所有相关数据和事件。"
+msgstr "此操作将永久删除所选加入登记信息，包括所有相关数据和事件。"
 
 msgid "Active enrollments ({{count}})"
 msgid_plural "Active enrollments ({{count}})"
-msgstr[0] "有效注册 ({{count}})"
+msgstr[0] "有效加入登记 ({{count}}) 个"
 
 msgid "Completed enrollments ({{count}})"
 msgid_plural "Completed enrollments ({{count}})"
-msgstr[0] "完成注册 ({{count}})"
+msgstr[0] "完成加入登记 ({{count}})个"
 
 msgid "Cancelled enrollments ({{count}})"
 msgid_plural "Cancelled enrollments ({{count}})"
-msgstr[0] "取消注册 ({{count}})"
+msgstr[0] "取消加入登记 ({{count}})"
 
 msgid "Delete {{count}} enrollment"
 msgid_plural "Delete {{count}} enrollment"
-msgstr[0] "删除{{count}} 注册"
+msgstr[0] "删除{{count}} 个加入登记"
 
 msgid "An error occurred when deleting enrollments"
-msgstr "删除注册时发生错误"
+msgstr "删除加入登记时发生错误"
 
 msgid "Delete {{ trackedEntityName }} with all enrollments"
-msgstr "删除{{ trackedEntityName }} 和所有注册信息"
+msgstr "删除{{ trackedEntityName }} 和所有加入登记信息"
 
 msgid "Delete {{count}} {{ trackedEntityName }}"
 msgid_plural "Delete {{count}} {{ trackedEntityName }}"
@@ -1771,7 +1775,7 @@ msgstr[0] "删除{{count}} {{ trackedEntityName }}"
 msgid ""
 "Deleting records will also delete any associated enrollments and events. "
 "This cannot be undone. Are you sure you want to delete?"
-msgstr "删除记录也会删除任何相关的注册和事件。此操作无法撤销。您确定要删除吗？"
+msgstr "删除记录也会删除任何相关的加入登记和事件。此操作无法撤销。您确定要删除吗？"
 
 msgid "An error occurred while deleting the records"
 msgstr "删除记录时发生错误"
@@ -1886,13 +1890,13 @@ msgid "Error saving tracked entity instance"
 msgstr "保存跟踪的实体实例时出错"
 
 msgid "Error saving enrollment"
-msgstr "保存报名时出错"
+msgstr "保存加入登记时出错"
 
 msgid "Error saving the enrollment event"
-msgstr "保存报名事件时出错"
+msgstr "保存加入登记事件时出错"
 
 msgid "Error deleting the enrollment event"
-msgstr "删除注册事件时出错"
+msgstr "删除加入登记事件时出错"
 
 msgid "Error editing the event, the changes made were not saved"
 msgstr "编辑事件时出错，所做的更改未保存"
