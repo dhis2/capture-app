@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
 import { Modal } from '@dhis2/ui';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useChangelogData, useListDataValues } from '../hooks';
 import { ChangelogComponent } from './Changelog.component';
-import { CHANGELOG_ENTITY_TYPES } from './index';
+import { CHANGELOG_ENTITY_TYPES } from './Changelog.constants';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import type { ItemDefinitions } from './Changelog.types';
 
@@ -34,13 +35,15 @@ export const Changelog = ({
         pageSize,
         setPage,
         setPageSize,
+        columnToSortBy,
+        setColumnToSortBy,
         sortDirection,
         setSortDirection,
-    } = useChangelogData({
-        entityId,
-        entityType,
-        programId,
-    });
+        filterValue,
+        setFilterValue,
+        attributeToFilterBy,
+        setAttributeToFilterBy,
+    } = useChangelogData({ entityId, entityType, programId });
 
     const {
         processedRecords,
@@ -65,6 +68,8 @@ export const Changelog = ({
         );
     }
 
+    const supportsChangelogV2 = featureAvailable(FEATURES.changelogsV2);
+
     return (
         <ChangelogComponent
             isOpen={isOpen}
@@ -73,8 +78,17 @@ export const Changelog = ({
             pager={pager}
             setPage={setPage}
             setPageSize={setPageSize}
+            entityType={entityType}
+            columnToSortBy={columnToSortBy}
+            setColumnToSortBy={setColumnToSortBy}
             sortDirection={sortDirection}
             setSortDirection={setSortDirection}
+            filterValue={filterValue}
+            setFilterValue={setFilterValue}
+            attributeToFilterBy={attributeToFilterBy}
+            setAttributeToFilterBy={setAttributeToFilterBy}
+            dataItemDefinitions={dataItemDefinitions}
+            supportsChangelogV2={supportsChangelogV2}
         />
     );
 };
