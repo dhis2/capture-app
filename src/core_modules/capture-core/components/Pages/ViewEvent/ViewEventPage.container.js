@@ -7,7 +7,7 @@ import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
-    const isReadOnly = eventDetailsSection.showEditEvent
+    const isReadOnly = eventDetailsSection.showEditEvent;
     const isUserInteractionInProgress =
       (state.currentSelections.complete && eventDetailsSection.showEditEvent)
           ?
