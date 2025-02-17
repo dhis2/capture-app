@@ -207,7 +207,8 @@ const buildOrgUnitSettingsFn = () => {
                     withDefaultShouldUpdateInterface()(
                         withLabel({
                             onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
