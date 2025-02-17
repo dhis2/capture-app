@@ -1,3 +1,10 @@
+## [101.27.1](https://github.com/dhis2/capture-app/compare/v101.27.0...v101.27.1) (2025-02-17)
+
+
+### Bug Fixes
+
+* [DHIS2-18958] Add loading functionality to Search in all programs button ([#3965](https://github.com/dhis2/capture-app/issues/3965)) ([6486942](https://github.com/dhis2/capture-app/commit/648694232019ba865f003d39b197c7ae416aebfb))
+
 # [101.27.0](https://github.com/dhis2/capture-app/compare/v101.26.1...v101.27.0) (2025-02-17)
 
 
