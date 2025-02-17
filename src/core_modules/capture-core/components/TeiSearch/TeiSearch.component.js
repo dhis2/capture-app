@@ -78,10 +78,12 @@ class TeiSearchPlain extends React.Component<Props, State> {
                 isCollapsed={isCollapsed}
                 header={
                     <SectionHeaderSimple
-                        containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                        containerStyle={{ alignItems: 'center' }}
+                        titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                         isCollapsed={isCollapsed}
                         onChangeCollapseState={() => { this.setState({ programSectionOpen: !!isCollapsed }); }}
                         title={i18n.t('Program')}
+                        isCollapseButtonEnabled={isCollapsed}
                     />
                 }
             >
@@ -111,10 +113,13 @@ class TeiSearchPlain extends React.Component<Props, State> {
                 className={this.props.classes.formContainerSection}
                 header={
                     <SectionHeaderSimple
-                        containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                        containerStyle={{ alignItems: 'center' }}
+                        titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                         onChangeCollapseState={() => { this.onChangeSectionCollapseState(searchGroupId); }}
                         isCollapsed={collapsed}
                         title={header}
+                        isCollapseButtonEnabled={collapsed}
+                        extendedCollapsibility
                     />}
             >
                 <TeiSearchForm

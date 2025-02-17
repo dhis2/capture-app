@@ -67,10 +67,12 @@ const TeiSearchPlain = (props) => {
                 isCollapsed={isCollapsed}
                 header={
                     <SectionHeaderSimple
-                        containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                        containerStyle={{ alignItems: 'center' }}
+                        titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                         isCollapsed={isCollapsed}
                         onChangeCollapseState={() => { setProgramSectionOpen(!isCollapsed); }}
                         title={i18n.t('Program')}
+                        isCollapseButtonEnabled={isCollapsed}
                     />
                 }
             >
@@ -104,10 +106,13 @@ const TeiSearchPlain = (props) => {
                 className={props.classes.formContainerSection}
                 header={
                     <SectionHeaderSimple
-                        containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                        containerStyle={{ alignItems: 'center' }}
+                        titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                         onChangeCollapseState={() => { onChangeSectionCollapseState(searchGroupId); }}
                         isCollapsed={collapsed}
                         title={header}
+                        isCollapseButtonEnabled={collapsed}
+                        extendedCollapsibility
                     />
                 }
             >
