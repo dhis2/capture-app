@@ -1,3 +1,10 @@
+# [101.27.0](https://github.com/dhis2/capture-app/compare/v101.26.1...v101.27.0) (2025-02-17)
+
+
+### Features
+
+* [DHIS2-16782] Changelog sorting and filtering by user and data item ([#3934](https://github.com/dhis2/capture-app/issues/3934)) ([be83934](https://github.com/dhis2/capture-app/commit/be83934b74456153e531810f3eca370064248b83))
+
 ## [101.26.1](https://github.com/dhis2/capture-app/compare/v101.26.0...v101.26.1) (2025-02-16)
 
 
