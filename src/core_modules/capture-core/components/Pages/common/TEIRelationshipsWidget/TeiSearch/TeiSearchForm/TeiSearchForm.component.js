@@ -172,8 +172,7 @@ class SearchFormPlain extends React.Component<Props, State> {
         if (!searchGroup.unique || !showMissingSearchCriteriaModal) {
             return null;
         }
-        const searchForm = searchGroup && searchGroup.searchForm;
-        const uniqueTEAName = searchForm.getElements()[0].formName;
+        const uniqueTEAName = searchGroup.searchForm.getElements()[0].formName;
 
         return (
             <Modal position="middle" onClose={() => this.setState({ showMissingSearchCriteriaModal: false })}>
