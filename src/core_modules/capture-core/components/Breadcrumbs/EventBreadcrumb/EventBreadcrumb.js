@@ -19,6 +19,7 @@ type Props = {
     programId: string,
     userInteractionInProgress?: boolean,
     onBackToMainPage?: () => void,
+    onBackToViewEvent?: () => void,
 };
 
 const styles = {
@@ -33,6 +34,7 @@ const EventBreadcrumbPlain = ({
     page,
     programId,
     userInteractionInProgress,
+    onBackToViewEvent,
     onBackToMainPage,
     classes,
 }) => {
@@ -57,7 +59,7 @@ const EventBreadcrumbPlain = ({
         },
         {
             key: pageKeys.VIEW_EVENT,
-            onClick: () => handleNavigation(null, pageKeys.VIEW_EVENT),
+            onClick: () => handleNavigation(onBackToViewEvent, pageKeys.VIEW_EVENT),
             label: i18n.t('View event'),
             selected: page === pageKeys.VIEW_EVENT,
             condition: page === pageKeys.VIEW_EVENT || page === pageKeys.EDIT_EVENT,
@@ -72,6 +74,7 @@ const EventBreadcrumbPlain = ({
     ].filter(item => item.condition !== false)), [
         label,
         handleNavigation,
+        onBackToViewEvent,
         onBackToMainPage,
         page,
     ]);
@@ -95,8 +98,20 @@ const EventBreadcrumbPlain = ({
 
             <DiscardDialog
                 open={openWarning === pageKeys.MAIN_PAGE}
+                onDestroy={() => {
+                    setOpenWarning(null);
+                    onBackToMainPage && onBackToMainPage();
+                }}
                 onCancel={() => setOpenWarning(null)}
-                onDestroy={onBackToMainPage}
+                {...defaultDialogProps}
+            />
+            <DiscardDialog
+                open={openWarning === pageKeys.VIEW_EVENT}
+                onDestroy={() => {
+                    setOpenWarning(null);
+                    onBackToViewEvent && onBackToViewEvent();
+                }}
+                onCancel={() => setOpenWarning(null)}
                 {...defaultDialogProps}
             />
         </div>

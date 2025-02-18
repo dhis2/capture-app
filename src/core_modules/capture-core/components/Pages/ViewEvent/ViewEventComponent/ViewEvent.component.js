@@ -99,6 +99,7 @@ class ViewEventPlain extends Component<Props, State> {
                     <EventDetails
                         eventAccess={eventAccess}
                         programStage={programStage}
+                        onBackToViewEvent={onBackToViewEvent}
                         onBackToAllEvents={onBackToAllEvents}
                     />
                     <RightColumnWrapper

@@ -4,10 +4,11 @@ import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import {
     CHANGELOG_ENTITY_TYPES,
     QUERY_KEYS_BY_ENTITY_TYPE,
+    DEFAULT_PAGE_SIZE,
+    SORT_DIRECTIONS,
+    SORT_TARGETS,
 } from '../Changelog/Changelog.constants';
-import type {
-    SortDirection,
-} from '../Changelog/Changelog.types';
+import type { SortDirection } from '../Changelog/Changelog.types';
 
 type Props = {
     entityId: string,
@@ -15,15 +16,13 @@ type Props = {
     entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
 };
 
-const DEFAULT_PAGE_SIZE = 10;
-const DEFAULT_SORT_DIRECTION = 'default';
+export const useChangelogData = ({ entityId, entityType, programId }: Props) => {
+    const [columnToSortBy, setColumnToSortBy] = useState<string>(SORT_TARGETS.DATE);
+    const [sortDirection, setSortDirection] = useState<SortDirection>(SORT_DIRECTIONS.DEFAULT);
 
-export const useChangelogData = ({
-    entityId,
-    entityType,
-    programId,
-}: Props) => {
-    const [sortDirection, setSortDirection] = useState<SortDirection>(DEFAULT_SORT_DIRECTION);
+    const [attributeToFilterBy, setAttributeToFilterBy] = useState<string | null>(null);
+    const [filterValue, setFilterValue] = useState<Object>(null);
+
     const [page, setPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(DEFAULT_PAGE_SIZE);
 
@@ -32,22 +31,35 @@ export const useChangelogData = ({
         setPageSize(newPageSize);
     };
 
+    const filterParam =
+        filterValue && attributeToFilterBy
+            ? `${attributeToFilterBy}:eq:${filterValue.id}`
+            : undefined;
+
+    const orderParam =
+        sortDirection === SORT_DIRECTIONS.DEFAULT
+            ? undefined
+            : `${columnToSortBy}:${sortDirection}`;
+
     const { data, isLoading, isError } = useApiDataQuery(
-        ['changelog', entityType, entityId, 'rawData', { sortDirection, page, pageSize, programId }],
+        [
+            'changelog',
+            entityType,
+            entityId,
+            'rawData',
+            { columnToSortBy, sortDirection, page, pageSize, programId, filterParam },
+        ],
         {
             resource: `tracker/${QUERY_KEYS_BY_ENTITY_TYPE[entityType]}/${entityId}/changeLogs`,
             params: {
                 page,
                 pageSize,
                 program: programId,
-                ...{
-                    order: sortDirection === DEFAULT_SORT_DIRECTION ? undefined : `createdAt:${sortDirection}`,
-                },
+                filter: filterParam,
+                order: orderParam,
             },
         },
-        {
-            enabled: !!entityId,
-        },
+        { enabled: !!entityId },
     );
 
     return {
@@ -57,6 +69,12 @@ export const useChangelogData = ({
         setPageSize: handleChangePageSize,
         sortDirection,
         setSortDirection,
+        columnToSortBy,
+        setColumnToSortBy,
+        attributeToFilterBy,
+        setAttributeToFilterBy,
+        filterValue,
+        setFilterValue,
         page,
         pageSize,
         isLoading,

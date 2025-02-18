@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -734,6 +734,23 @@ msgid ""
 "select a valid combination."
 msgstr ""
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "请选择 {{category}}."
 
@@ -862,9 +879,6 @@ msgstr "指标"
 msgid "Warnings"
 msgstr "错误"
 
-msgid "Show all events"
-msgstr "显示所有事件"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "事件不能载入"
 
@@ -898,9 +912,6 @@ msgstr "载入"
 
 msgid "An error occurred while loading the form"
 msgstr ""
-
-msgid "Back to all stages and events"
-msgstr "回到所有阶段和事件"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -1118,7 +1129,7 @@ msgid "Mark for follow-up"
 msgstr "后续标记"
 
 msgid "Transfer"
-msgstr ""
+msgstr "流转"
 
 msgid "An error occurred while transferring ownership"
 msgstr ""
@@ -1368,7 +1379,7 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr ""
 
-msgid "{{ linkableStageLabel }} is not repeatable"
+msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
@@ -1380,10 +1391,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr ""
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1486,9 +1509,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "Linked event"
-msgstr ""
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1525,7 +1545,7 @@ msgid "Change"
 msgstr ""
 
 msgid "Value"
-msgstr "值"
+msgstr "数值"
 
 msgid "File"
 msgstr "文件"

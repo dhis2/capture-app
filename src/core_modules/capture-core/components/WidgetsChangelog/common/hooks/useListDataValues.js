@@ -2,9 +2,9 @@
 import { useMemo } from 'react';
 import log from 'loglevel';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
+import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import { useQuery } from 'react-query';
 import { errorCreator, buildUrl, pipe } from 'capture-core-utils';
-import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import { dataElementTypes } from '../../../../metaData';
 import { CHANGELOG_ENTITY_TYPES } from '../Changelog/Changelog.constants';
 import type { Change, ItemDefinitions, SortDirection } from '../Changelog/Changelog.types';
@@ -12,8 +12,6 @@ import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
 import { RECORD_TYPE, subValueGetterByElementType } from '../utils/getSubValueForChangelogData';
 import { makeQuerySingleResource } from '../../../../utils/api';
-import { attributeOptionsKey } from '../../../DataEntryDhis2Helpers';
-
 
 type Props = {
     rawRecords: Object,
@@ -40,32 +38,23 @@ const fetchFormattedValues = async ({
 }) => {
     if (!rawRecords) return [];
 
-    const getMetadataItemDefinition = (
-        elementKey: string,
-        change: Change,
-    ) => {
+    const getItemDefinition = (change: Change) => {
         const { dataElement, attribute, field } = change;
         const fieldId = dataElement ?? attribute ?? field;
         if (!fieldId) {
             log.error('Could not find fieldId in change:', change);
-            return { metadataElement: null, fieldId: null };
+            return null;
         }
-        const metadataElement = dataItemDefinitions[fieldId];
-        return { metadataElement, fieldId };
+        return dataItemDefinitions[fieldId];
     };
 
-
-    const fetchedRecords = await Promise.all(
+    const results = await Promise.all(
         rawRecords.changeLogs.map(async (changelog) => {
             const { change: apiChange, createdAt, createdBy, type } = changelog;
             const elementKey = Object.keys(apiChange)[0];
             const change = apiChange[elementKey];
 
-            const { metadataElement, fieldId } = getMetadataItemDefinition(
-                elementKey,
-                change,
-            );
-
+            const metadataElement = getItemDefinition(change);
             if (!metadataElement) {
                 log.error(
                     errorCreator('Could not find metadata for element')({ ...changelog }),
@@ -75,7 +64,7 @@ const fetchFormattedValues = async ({
 
             const getSubValue = subValueGetterByElementType[RECORD_TYPE[entityType]]?.[metadataElement.type];
 
-            const getValue = async (value, latestValue) => {
+            const getValue = async (value, isLatestValue) => {
                 if (!getSubValue) {
                     return convertServerToClient(value, metadataElement.type);
                 }
@@ -83,19 +72,19 @@ const fetchFormattedValues = async ({
                     return getSubValue({
                         trackedEntity: { teiId: entityId, value },
                         programId,
-                        attributeId: fieldId,
+                        attributeId: metadataElement.id,
                         absoluteApiPath,
                         querySingleResource,
-                        latestValue,
+                        latestValue: isLatestValue,
                     });
                 }
                 if (entityType === RECORD_TYPE.event) {
                     return getSubValue({
-                        dataElement: { id: fieldId, value },
+                        dataElement: { id: metadataElement.id, value },
                         eventId: entityId,
                         absoluteApiPath,
                         querySingleResource,
-                        latestValue,
+                        latestValue: isLatestValue,
                     });
                 }
                 return null;
@@ -113,10 +102,11 @@ const fetchFormattedValues = async ({
             const currentValue = convertClientToList(currentValueClient, metadataElement.type, options);
 
             return {
-                reactKey: fieldId ? `${createdAt}-${fieldId}` : attributeOptionsKey,
+                reactKey: metadataElement.id ? `${createdAt}-${metadataElement.id}` : createdAt,
                 date: pipe(convertServerToClient, convertClientToList)(fromServerDate(createdAt), dataElementTypes.DATETIME),
                 user: `${firstName} ${surname} (${username})`,
-                dataItemId: fieldId,
+                username,
+                dataItemId: metadataElement.id,
                 changeType: type,
                 dataItemLabel: metadataElement.name,
                 previousValue,
@@ -124,8 +114,7 @@ const fetchFormattedValues = async ({
             };
         }),
     );
-
-    return fetchedRecords.filter(Boolean);
+    return results.filter(Boolean);
 };
 
 export const useListDataValues = ({
@@ -149,7 +138,14 @@ export const useListDataValues = ({
         [dataEngine],
     );
 
-    const queryKey = [ReactQueryAppNamespace, 'changelog', entityType, entityId, 'formattedData', { sortDirection, page, pageSize, programId }];
+    const queryKey = [
+        ReactQueryAppNamespace,
+        'changelog',
+        entityType,
+        entityId,
+        'formattedData',
+        { sortDirection, page, pageSize, programId, rawRecords },
+    ];
 
     const { data: processedRecords, isError, isLoading } = useQuery(
         queryKey,
@@ -171,9 +167,5 @@ export const useListDataValues = ({
         },
     );
 
-    return {
-        processedRecords,
-        isError,
-        isLoading,
-    };
+    return { processedRecords, isLoading, isError };
 };

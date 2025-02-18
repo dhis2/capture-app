@@ -1,3 +1,38 @@
+## [101.27.1](https://github.com/dhis2/capture-app/compare/v101.27.0...v101.27.1) (2025-02-17)
+
+
+### Bug Fixes
+
+* [DHIS2-18958] Add loading functionality to Search in all programs button ([#3965](https://github.com/dhis2/capture-app/issues/3965)) ([6486942](https://github.com/dhis2/capture-app/commit/648694232019ba865f003d39b197c7ae416aebfb))
+
+# [101.27.0](https://github.com/dhis2/capture-app/compare/v101.26.1...v101.27.0) (2025-02-17)
+
+
+### Features
+
+* [DHIS2-16782] Changelog sorting and filtering by user and data item ([#3934](https://github.com/dhis2/capture-app/issues/3934)) ([be83934](https://github.com/dhis2/capture-app/commit/be83934b74456153e531810f3eca370064248b83))
+
+## [101.26.1](https://github.com/dhis2/capture-app/compare/v101.26.0...v101.26.1) (2025-02-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0fb72ad](https://github.com/dhis2/capture-app/commit/0fb72add1d6d3c0621875be19488013d0fb73705))
+
+# [101.26.0](https://github.com/dhis2/capture-app/compare/v101.25.5...v101.26.0) (2025-02-12)
+
+
+### Features
+
+* [DHIS2-18018][DHIS2-17853] show related stages widget in view event page ([#3916](https://github.com/dhis2/capture-app/issues/3916)) ([b584a0c](https://github.com/dhis2/capture-app/commit/b584a0c7e65689e9ff04970e273c6244ec4693a8))
+
+## [101.25.5](https://github.com/dhis2/capture-app/compare/v101.25.4...v101.25.5) (2025-02-11)
+
+
+### Bug Fixes
+
+* [DHIS2-18677] View event breadcrumb item do not work ([#3956](https://github.com/dhis2/capture-app/issues/3956)) ([d86e538](https://github.com/dhis2/capture-app/commit/d86e5384566bfa70ee79713741da74e18eef277f))
+
 ## [101.25.4](https://github.com/dhis2/capture-app/compare/v101.25.3...v101.25.4) (2025-02-10)
 
 
