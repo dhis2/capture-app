@@ -40,7 +40,6 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
                         surname,
                         uid: clientId,
                     },
-                    updatedAt: moment().toISOString(),
                     storedBy: userName,
                     storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 };

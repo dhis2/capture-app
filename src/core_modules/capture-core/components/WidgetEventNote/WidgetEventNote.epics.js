@@ -50,7 +50,6 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore,
                         surname,
                         uid: clientId,
                     },
-                    lastUpdated: moment().toISOString(),
                     storedBy: userName,
                     storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 };
