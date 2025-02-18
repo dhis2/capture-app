@@ -5,11 +5,14 @@ import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram, type DataElement } from '../../../../../metaData';
 import type { MainColumnConfig, MetadataColumnConfig, TeiWorkingListsColumnConfigs } from '../../types';
 
-const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
+const getMainConfig = (
+    hasDisplayInReportsAttributes: boolean,
+    orgUnitVisible: boolean,
+): Array<MainColumnConfig> =>
     [
         {
             id: 'orgUnit',
-            visible: false,
+            visible: orgUnitVisible,
             type: dataElementTypes.ORGANISATION_UNIT,
             header: i18n.t('Organisation unit'),
         },
@@ -53,8 +56,8 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
                     visible: true,
                     type: dataElementTypes.DATE,
                     header:
-                          programStage.stageForm.getLabel('scheduledAt') ||
-                          i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
+                        programStage.stageForm.getLabel('scheduledAt') ||
+                        i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
                 },
             ]
             : []),
@@ -112,10 +115,11 @@ export const useDefaultColumnConfig = (
         const { attributes, stages } = program;
         const programStage = programStageId && stages.get(programStageId);
         const hasDisplayInReportsAttributes = attributes.some(attribute => attribute.displayInReports);
+        const orgUnitVisible = !!(programStageId && programStage);
 
         const defaultColumns = [
-            ...getMainConfig(hasDisplayInReportsAttributes),
             ...getTEIMetaDataConfig(attributes, orgUnitId),
+            ...getMainConfig(hasDisplayInReportsAttributes, orgUnitVisible),
         ];
 
         if (programStageId && programStage) {
