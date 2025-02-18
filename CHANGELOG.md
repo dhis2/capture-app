@@ -1,3 +1,10 @@
+## [101.27.2](https://github.com/dhis2/capture-app/compare/v101.27.1...v101.27.2) (2025-02-18)
+
+
+### Bug Fixes
+
+* [DHIS2-18704] registration form missing values ([#3966](https://github.com/dhis2/capture-app/issues/3966)) ([fc557b9](https://github.com/dhis2/capture-app/commit/fc557b908b6b47f9ac4d8d472fb8769db37ef92e))
+
 ## [101.27.1](https://github.com/dhis2/capture-app/compare/v101.27.0...v101.27.1) (2025-02-17)
 
 
