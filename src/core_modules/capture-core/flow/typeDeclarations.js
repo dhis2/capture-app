@@ -212,9 +212,6 @@ declare type ApiUtils = {|
     mutate: DataEngineMutate,
     absoluteApiPath: string,
     serverVersion: { minor: number },
-    history: {
-        push: () => void,
-        ...PassOnProps,
-    },
+    navigate: (path: string, scrollToTop?: boolean) => void,
     fromClientDate: (date?: string | Date | number | null) => DHIS2Date,
 |};

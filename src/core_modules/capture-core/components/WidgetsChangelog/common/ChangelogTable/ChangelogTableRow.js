@@ -3,18 +3,9 @@ import React from 'react';
 import { DataTableCell, DataTableRow } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { ChangelogChangeCell, ChangelogValueCell } from './ChangelogCells';
+import type { ChangelogRecord } from '../Changelog/Changelog.types';
 
-type Props = {
-    record: {
-        date: string,
-        user: string,
-        dataItemLabel: string,
-        changeType: string,
-    },
-    classes: {
-        dataItemColumn: string,
-    },
-};
+type Props = { record: ChangelogRecord, classes: Object };
 
 const styles = {
     dataItemColumn: { wordWrap: 'break-word', hyphens: 'auto' },

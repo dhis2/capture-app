@@ -1345,3 +1345,49 @@ The attribute option combo selector will be displayed when you are adding or cha
 Example from new Tracker event:
 
 ![](resources/images/attribute-option-combo-tracker.png)
+
+
+## Changelog
+
+The **Changelog** feature provides a historical record of changes made to data for both events and Tracked Entities. Every time data is added, modified, or deleted, a record is stored in the changelog.
+
+![](resources/images/changelog.png)
+
+### Changelog functionality
+
+**Sorting**: Clicking the sorting icon next to a column header toggles between default, ascending, and descending order. By default, records are sorted by date (newest first). Sorting by user or data item is also available, but you can only apply one sorting option at a time.
+
+**Filtering**: You can filter by a specific data item. You can only apply one filter at a time.
+
+> **Note:**  
+> All data items are displayed in the filter dropdown, regardless of whether they have a changelog record.
+
+**Pagination**: Displays 10 records per page by default, with options to adjust the number of records shown, up to 100 per page.
+
+---
+
+### Event changelog
+
+The **Event Changelog** tracks changes to data items within an event. These data items include event properties (e.g., report date, scheduled date, and geometry) and data elements.
+
+#### How to open the event changelog
+1. **Navigate** to the "View event" page of an event in the Capture app.  
+2. Click **View Changelog** to open the changelog.
+   ![](resources/images/open-event-changelog.png)
+
+---
+
+### Tracked entity changelog
+
+The **tracked entity changelog** tracks changes to attributes of a tracked entity within an enrollment.
+
+#### How to open the tracked entity changelog
+1. **Go to the Maintenance app** and **enable** the **Tracked Entity Instance Audit Log**.
+   ![](resources/images/enable-tracked-entity-instance-audit-log.png)
+
+2. **Open** the enrollment dashboard in the Capture app.  
+
+3. Click **View Changelog** in the **Tracked Entity Profile** widget to open the changelog.
+   ![](resources/images/open-tracked-entity-changelog.png)
+
+

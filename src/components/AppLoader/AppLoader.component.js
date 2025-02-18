@@ -1,10 +1,10 @@
 // @flow
 import React, { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
-import { useHistory } from 'react-router-dom';
 import { useDataEngine, useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
+import { useNavigate } from 'capture-core/utils/routing';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { environments } from 'capture-core/constants';
 import { buildUrl } from 'capture-core-utils';
@@ -34,7 +34,8 @@ export const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
     const [loadError, setLoadError] = React.useState(null);
     const { querySingleResource, mutate, absoluteApiPath, serverVersion, fromClientDate } = useApiUtils();
-    const history = useHistory();
+
+    const { navigate } = useNavigate();
 
     const logError = useCallback((error) => {
         if (error instanceof Error) {
@@ -53,7 +54,7 @@ export const AppLoader = (props: Props) => {
                 serverVersion.minor,
             );
             const store = getStore(
-                history, {
+                navigate, {
                     querySingleResource,
                     mutate,
                     absoluteApiPath,
@@ -84,7 +85,7 @@ export const AppLoader = (props: Props) => {
         querySingleResource,
         mutate,
         absoluteApiPath,
-        history,
+        navigate,
         serverVersion,
         fromClientDate,
     ]);

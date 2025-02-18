@@ -1,17 +1,17 @@
 # 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2024
-# Viktor Varland <viktor@dhis2.org>, 2024
 # Nadiia <semchuk@aph.org.ua>, 2024
-# Éva Tamási, 2024
 # Philip Larsen Donnelly, 2024
+# Viktor Varland <viktor@dhis2.org>, 2025
+# Éva Tamási, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-11-07T11:57:59.094Z\n"
+"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2024\n"
+"Last-Translator: Éva Tamási, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,6 +106,24 @@ msgstr ""
 msgid "Last updated"
 msgstr "Останнє оновлення"
 
+msgid "Lat"
+msgstr ""
+
+msgid "Long"
+msgstr ""
+
+msgid "lat"
+msgstr ""
+
+msgid "long"
+msgstr ""
+
+msgid "Show less"
+msgstr "Показати менше"
+
+msgid "Show more"
+msgstr "Показати більше"
+
 msgid "error encountered during field validation"
 msgstr ""
 
@@ -116,66 +134,6 @@ msgid "This value is validating"
 msgstr ""
 
 msgid "Async field update failed"
-msgstr ""
-
-msgid "A value is required"
-msgstr ""
-
-msgid "Please provide a valid number"
-msgstr ""
-
-msgid "Please provide a valid integer"
-msgstr ""
-
-msgid "Please provide a positive integer"
-msgstr ""
-
-msgid "Please provide zero or a positive integer"
-msgstr ""
-
-msgid "Please provide a negative integer"
-msgstr ""
-
-msgid "Please provide a valid date"
-msgstr ""
-
-msgid "A date in the future is not allowed"
-msgstr ""
-
-msgid "Please provide a valid date and time"
-msgstr ""
-
-msgid "Please provide a valid time"
-msgstr ""
-
-msgid "Please provide an integer between 0 and 100"
-msgstr ""
-
-msgid "Please provide a valid url"
-msgstr "Вкажіть дійсну URL-адресу"
-
-msgid "Please provide a valid email address"
-msgstr "Вкажіть дійсну адресу електронної пошти"
-
-msgid "Please provide a valid age"
-msgstr ""
-
-msgid "Please provide a valid phone number"
-msgstr ""
-
-msgid "Please provide a valid organisation unit"
-msgstr ""
-
-msgid "Please provide valid coordinates"
-msgstr ""
-
-msgid "This value already exists"
-msgstr ""
-
-msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
-
-msgid "Checking..."
 msgstr ""
 
 msgid "Area"
@@ -190,6 +148,12 @@ msgstr "Реєстрація"
 msgid "Complete event"
 msgstr ""
 
+msgid "A value is required"
+msgstr ""
+
+msgid "Please provide a valid date"
+msgstr ""
+
 msgid "{{ stageName }} - Basic info"
 msgstr ""
 
@@ -202,7 +166,7 @@ msgstr ""
 msgid "Please select {{categoryName}}"
 msgstr ""
 
-msgid "A future date is not allowed"
+msgid "A date in the future is not allowed"
 msgstr ""
 
 msgid "Saving a new enrollment in {{programName}} in {{orgUnitName}}."
@@ -266,7 +230,7 @@ msgstr "Активне"
 msgid "Completed"
 msgstr "Завершено"
 
-msgid "Please add or cancel note before saving the event"
+msgid "Please add or cancel the note before saving the event"
 msgstr ""
 
 msgid "Save and add another"
@@ -737,9 +701,6 @@ msgstr ""
 msgid "There was an error loading the page"
 msgstr ""
 
-msgid "Choose an organisation unit to start reporting"
-msgstr ""
-
 msgid "Program stage is invalid"
 msgstr ""
 
@@ -775,6 +736,23 @@ msgid ""
 "select a valid combination."
 msgstr ""
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr ""
 
@@ -790,6 +768,9 @@ msgstr ""
 msgid ""
 "You don't have access to create a {{trackedEntityName}} in the current "
 "selections"
+msgstr ""
+
+msgid "Choose an organisation unit to start reporting"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -815,6 +796,9 @@ msgid "Save {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Save {{trackedEntityName}}"
+msgstr ""
+
+msgid "Enter details now is not available when creating a relationship"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -1174,6 +1158,9 @@ msgstr ""
 msgid "Coordinates"
 msgstr ""
 
+msgid "Please provide valid coordinates"
+msgstr ""
+
 msgid "Delete polygon"
 msgstr ""
 
@@ -1231,13 +1218,16 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Please add or cancel the note before saving the event"
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
+msgid "Saving to {{stageName}} for {{programName}}"
 msgstr ""
 
 msgid "program or stage is invalid"
@@ -1259,9 +1249,6 @@ msgid "Warning"
 msgstr "Попередження"
 
 msgid "stage not found in rules execution"
-msgstr ""
-
-msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Delete event"
@@ -1291,6 +1278,12 @@ msgstr ""
 msgid "This event doesn't have any notes"
 msgstr ""
 
+msgid "after"
+msgstr ""
+
+msgid "before"
+msgstr ""
+
 msgid "Schedule date info"
 msgstr ""
 
@@ -1309,12 +1302,6 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-msgid "after"
-msgstr ""
-
-msgid "before"
-msgstr ""
-
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
@@ -1323,20 +1310,22 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-msgid ""
-"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgid "Schedule date / Due date"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
 msgstr ""
 
 msgid "Schedule info"
-msgstr ""
-
-msgid "Schedule date / Due date"
 msgstr ""
 
 msgid "Event notes"
 msgstr ""
 
 msgid "Write a note about this scheduled event"
+msgstr ""
+
+msgid "Program or stage is invalid"
 msgstr ""
 
 msgid "Save note"
@@ -1376,7 +1365,7 @@ msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Delete {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Видалити {{trackedEntityTypeName}}"
 
 msgid ""
 "Are you sure you want to delete this {{trackedEntityTypeName}}? This will "
@@ -1399,7 +1388,7 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr ""
 
-msgid "Link to an existing {{linkableStageLabel}}"
+msgid "Choose a {{linkableStageLabel}} event"
 msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
@@ -1411,13 +1400,16 @@ msgstr ""
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr ""
 
+msgid "Actions - {{relationshipName}}"
+msgstr ""
+
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
 msgid "Enter details now"
 msgstr ""
 
-msgid "Link to an existing"
+msgid "Link to an existing event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1425,6 +1417,9 @@ msgstr "Запланована дата"
 
 msgid "Report date"
 msgstr "Дата звіту"
+
+msgid "Please enter a date"
+msgstr ""
 
 msgid "Please select a valid event"
 msgstr ""
@@ -1483,7 +1478,38 @@ msgstr ""
 msgid "Stages and Events"
 msgstr ""
 
+msgid "An error occurred while unlinking and deleting the event."
+msgstr ""
+
+msgid "Unlink and delete linked event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+msgstr ""
+
+msgid "Yes, unlink and delete linked event"
+msgstr ""
+
+msgid "Unlink event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+msgstr ""
+
+msgid "Yes, unlink event"
+msgstr ""
+
 msgid "View linked event"
+msgstr ""
+
+msgid "You do not have access to remove the link between these events"
+msgstr ""
+
+msgid "You do not have access to remove the link and delete the linked event"
 msgstr ""
 
 msgid "An error occurred while loading the widget."
@@ -1910,6 +1936,60 @@ msgstr ""
 msgid "Error updating the Assignee"
 msgstr ""
 
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date and time"
+msgstr ""
+
+msgid "Please provide a valid time"
+msgstr ""
+
+msgid "Please provide an integer between 0 and 100"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr "Вкажіть дійсну URL-адресу"
+
+msgid "Please provide a valid email address"
+msgstr "Вкажіть дійсну адресу електронної пошти"
+
+msgid "Please provide a valid age"
+msgstr ""
+
+msgid "Please provide a valid phone number"
+msgstr ""
+
+msgid "This value already exists"
+msgstr ""
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr ""
+
+msgid "Checking..."
+msgstr ""
+
+msgid "Please provide a valid positive integer"
+msgstr ""
+
+msgid "Please enter a valid time"
+msgstr ""
+
+msgid "Please enter a time"
+msgstr ""
+
 msgid "Set coordinate"
 msgstr "Встановити координату"
 
@@ -1929,7 +2009,7 @@ msgid "To time"
 msgstr ""
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "Сторінка {{currentPage}}"
 
 msgid "Area on map saved"
 msgstr ""

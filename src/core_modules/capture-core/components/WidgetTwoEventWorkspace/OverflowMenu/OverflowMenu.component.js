@@ -1,6 +1,5 @@
 // @flow
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import {
     Divider,
     FlyoutMenu,
@@ -14,7 +13,7 @@ import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 import { OverflowButton } from '../../Buttons';
 import { UnlinkModal, UnlinkAndDeleteModal } from './Modal';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { Props } from './OverflowMenu.types';
 import { useRelationshipTypeAccess } from '../hooks';
 
@@ -25,15 +24,17 @@ export const OverflowMenuComponent = ({
     originEventId,
     stageWriteAccess,
     relationshipType,
+    onDeleteEvent,
+    onDeleteEventRelationship,
 }: Props) => {
-    const { push } = useHistory();
+    const { navigate } = useNavigate();
     const [isActionsOpen, setIsActionsOpen] = useState(false);
     const [isUnlinkModalOpen, setIsUnlinkModalOpen] = useState(false);
     const [isUnlinkAndDeleteModalOpen, setIsUnlinkAndDeleteModalOpen] = useState(false);
     const { relationshipTypeWriteAccess } = useRelationshipTypeAccess(relationshipType);
 
     const handleViewLinkedEvent = () => {
-        push(`/enrollmentEventEdit?${buildUrlQueryString({ eventId: linkedEvent.event, orgUnitId })}`);
+        navigate(`/enrollmentEventEdit?${buildUrlQueryString({ eventId: linkedEvent.event, orgUnitId })}`);
         setIsActionsOpen(false);
     };
 
@@ -100,6 +101,7 @@ export const OverflowMenuComponent = ({
                     setOpenModal={setIsUnlinkModalOpen}
                     relationshipId={relationshipId}
                     originEventId={originEventId}
+                    onDeleteEventRelationship={onDeleteEventRelationship}
                 />
             )}
             {isUnlinkAndDeleteModalOpen && (
@@ -107,6 +109,9 @@ export const OverflowMenuComponent = ({
                     setOpenModal={setIsUnlinkAndDeleteModalOpen}
                     eventId={linkedEvent.event}
                     originEventId={originEventId}
+                    relationshipId={relationshipId}
+                    onDeleteEvent={onDeleteEvent}
+                    onDeleteEventRelationship={onDeleteEventRelationship}
                 />
             )}
         </>

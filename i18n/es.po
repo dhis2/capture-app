@@ -16,13 +16,15 @@
 # Prabhjot Singh, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
+# Pablo Del Médico, 2025
+# Andres Miguel Rubio, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2024-12-03T10:58:18.077Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2024\n"
+"Last-Translator: Andres Miguel Rubio, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,10 +61,10 @@ msgstr ""
 "cerrará otras versiones."
 
 msgid "Enrollment dashboard"
-msgstr ""
+msgstr "Panel de inscripción"
 
 msgid "View event"
-msgstr ""
+msgstr "Ver evento"
 
 msgid "Edit event"
 msgstr "Editar evento"
@@ -80,7 +82,7 @@ msgid "Cancelled enrollments"
 msgstr "Inscripciones canceladas "
 
 msgid "{{trackedEntityName}} list"
-msgstr ""
+msgstr "{{trackedEntityName}} lista"
 
 msgid "Search"
 msgstr "Buscar"
@@ -89,7 +91,7 @@ msgid "Working List"
 msgstr ""
 
 msgid "Event list"
-msgstr ""
+msgstr "Lista de eventos"
 
 msgid "More"
 msgstr "Más"
@@ -123,6 +125,24 @@ msgstr "Fecha de inscripción"
 
 msgid "Last updated"
 msgstr "Última actualización"
+
+msgid "Lat"
+msgstr "Lat"
+
+msgid "Long"
+msgstr "Long"
+
+msgid "lat"
+msgstr ""
+
+msgid "long"
+msgstr ""
+
+msgid "Show less"
+msgstr "Mostrar menos"
+
+msgid "Show more"
+msgstr "Mostrar más"
 
 msgid "error encountered during field validation"
 msgstr "error encontrado durante la validación de campo"
@@ -235,7 +255,7 @@ msgstr "Activo"
 msgid "Completed"
 msgstr "Completado"
 
-msgid "Please add or cancel note before saving the event"
+msgid "Please add or cancel the note before saving the event"
 msgstr "Por favor, añada o cancele la nota antes de guardar el evento"
 
 msgid "Save and add another"
@@ -729,9 +749,6 @@ msgstr "Hubo un error al abrir la página"
 msgid "There was an error loading the page"
 msgstr "Hubo un error al cargar la página"
 
-msgid "Choose an organisation unit to start reporting"
-msgstr "Elija una unidad organizativa para empezar a informar"
-
 msgid "Program stage is invalid"
 msgstr "La etapa del programa no es válida"
 
@@ -769,6 +786,23 @@ msgstr ""
 "La opción de categoría no es válida para la unidad organizativa "
 "seleccionada. Seleccione una combinación válida."
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "Seleccione {{category}}."
 
@@ -787,6 +821,9 @@ msgid ""
 msgstr ""
 "Usted no tiene acceso para crear un {{trackedEntityName}} en las selecciones"
 " actuales"
+
+msgid "Choose an organisation unit to start reporting"
+msgstr "Elija una unidad organizativa para empezar a informar"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Elija los {{missingCategories}} para comenzar a informar"
@@ -814,6 +851,9 @@ msgstr "Guardar {{trackedEntityTypeName}}"
 
 msgid "Save {{trackedEntityName}}"
 msgstr "Guardar {{trackedEntityName}}"
+
+msgid "Enter details now is not available when creating a relationship"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Guardar el(la) nuevo(a) {{trackedEntityTypeName}} y enlazar"
@@ -897,9 +937,6 @@ msgstr "Indicadores"
 msgid "Warnings"
 msgstr "Advertencias"
 
-msgid "Show all events"
-msgstr "Mostrar todos los eventos"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
 
@@ -936,9 +973,6 @@ msgstr "Cargando"
 
 msgid "An error occurred while loading the form"
 msgstr "Ocurrió un error al cargar el formulario"
-
-msgid "Back to all stages and events"
-msgstr "Volver a todas las etapas y eventos"
 
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"
@@ -1248,10 +1282,10 @@ msgid "Follow-up"
 msgstr "Seguimiento"
 
 msgid "Started at{{escape}}"
-msgstr ""
+msgstr "Comenzó en {{escape}}"
 
 msgid "Owned by{{escape}}"
-msgstr ""
+msgstr "Propiedad de {{escape}}"
 
 msgid "Cancelled"
 msgstr "Cancelar"
@@ -1262,8 +1296,8 @@ msgstr "Establecer coordenadas"
 msgid "Add area"
 msgstr "Agregar área"
 
-msgid "Please add or cancel the note before saving the event"
-msgstr "Por favor, añada o cancele la nota antes de guardar el evento"
+msgid "Please provide an valid organisation unit"
+msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
@@ -1272,6 +1306,9 @@ msgstr ""
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "Guardando en {{stageName}} para {{programName}} en {{orgUnitName}}"
+
+msgid "Saving to {{stageName}} for {{programName}}"
+msgstr ""
 
 msgid "program or stage is invalid"
 msgstr "el programa o la etapa no es válido"
@@ -1293,9 +1330,6 @@ msgstr "Advertencia"
 
 msgid "stage not found in rules execution"
 msgstr "etapa no encontrada en la ejecución de reglas"
-
-msgid "Please provide an valid organisation unit"
-msgstr ""
 
 msgid "Delete event"
 msgstr "Eliminar evento"
@@ -1325,6 +1359,12 @@ msgstr "Escriba una nota sobre este evento"
 msgid "This event doesn't have any notes"
 msgstr "Este evento no tiene notas"
 
+msgid "after"
+msgstr "después"
+
+msgid "before"
+msgstr "antes"
+
 msgid "Schedule date info"
 msgstr "Programar información de fecha"
 
@@ -1347,12 +1387,6 @@ msgstr[1] ""
 msgstr[2] ""
 "La fecha programada es {{count}} días {{position}} la fecha sugerida."
 
-msgid "after"
-msgstr "después"
-
-msgid "before"
-msgstr "antes"
-
 msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
 msgid_plural ""
 "There are {{count}} scheduled event in {{orgUnitName}} on this day."
@@ -1362,23 +1396,23 @@ msgstr[1] ""
 msgstr[2] ""
 "Hay {{count}} eventos programados en {{orgUnitName}} para este día."
 
-msgid ""
-"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
-"Programando un evento en {{stageName}} para {{programName}} en "
-"{{orgUnitName}}"
+msgid "Schedule date / Due date"
+msgstr "Fecha de programación/fecha de vencimiento"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Proporcione una unidad organizativa válida"
 
 msgid "Schedule info"
 msgstr "Programar información"
-
-msgid "Schedule date / Due date"
-msgstr "Fecha de programación/fecha de vencimiento"
 
 msgid "Event notes"
 msgstr "Notas del evento"
 
 msgid "Write a note about this scheduled event"
 msgstr "Escriba una nota sobre este evento programado"
+
+msgid "Program or stage is invalid"
+msgstr ""
 
 msgid "Save note"
 msgstr "Guardar Nota"
@@ -1450,27 +1484,42 @@ msgstr " Perfil de {{trackedEntityTypeName}}"
 msgid "tracked entity instance"
 msgstr "instancia de entidad rastreada"
 
-msgid "Link to an existing {{linkableStageLabel}}"
-msgstr "Enlace a un {{linkableStageLabel}}"
+msgid "Choose a {{linkableStageLabel}} event"
+msgstr ""
 
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Elija una {{linkableStageLabel}}"
 
-msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }} no es repetible"
+msgid "{{ linkableStageLabel }} can only have one event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} no tiene eventos enlazables"
+
+msgid "Actions - {{relationshipName}}"
+msgstr ""
 
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 "Relaciones ambiguas, póngase en contacto con el administrador del sistema"
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr "Introducir datos ahora"
 
-msgid "Link to an existing"
-msgstr "Relacionar con ..."
+msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
+msgstr ""
 
 msgid "Scheduled date"
 msgstr "Fecha planificada"
@@ -1480,9 +1529,6 @@ msgstr "Fecha de reporte"
 
 msgid "Please enter a date"
 msgstr ""
-
-msgid "Please provide a valid organisation unit"
-msgstr "Proporcione una unidad organizativa válida"
 
 msgid "Please select a valid event"
 msgstr "Seleccione un evento válido"
@@ -1544,14 +1590,42 @@ msgstr "{{ scheduledEvents }} programado(s)"
 msgid "Stages and Events"
 msgstr "Etapas y eventos"
 
+msgid "An error occurred while unlinking and deleting the event."
+msgstr ""
+
+msgid "Unlink and delete linked event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link and delete the linked event? This "
+"action permanently removes the link, linked event, and all related data."
+msgstr ""
+
+msgid "Yes, unlink and delete linked event"
+msgstr ""
+
+msgid "Unlink event"
+msgstr ""
+
+msgid ""
+"Are you sure you want to remove the link between these events? This action "
+"removes the link itself, but the linked event will remain."
+msgstr ""
+
+msgid "Yes, unlink event"
+msgstr ""
+
 msgid "View linked event"
 msgstr "Ver eventos relacionados"
 
+msgid "You do not have access to remove the link between these events"
+msgstr ""
+
+msgid "You do not have access to remove the link and delete the linked event"
+msgstr ""
+
 msgid "An error occurred while loading the widget."
 msgstr "Ha ocurrido un error al cargar el componente"
-
-msgid "Linked event"
-msgstr ""
 
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
