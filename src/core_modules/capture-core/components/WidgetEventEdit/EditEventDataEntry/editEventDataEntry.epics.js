@@ -121,6 +121,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore,
             const serverData = {
                 events: [{
                     ...mainDataServerValues,
+                    orgUnit: mainDataServerValues.orgUnit.id,
                     attributeOptionCombo: undefined,
                     dataValues: formFoundation
                         .getElements()

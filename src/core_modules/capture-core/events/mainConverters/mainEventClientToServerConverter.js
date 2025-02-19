@@ -7,7 +7,6 @@ import { convertEventAttributeOptions } from '../convertEventAttributeOptions';
 const keysToSkip = {
     completedAt: 'completedAt',
     completedBy: 'completedBy',
-    orgUnitId: 'orgUnitId',
 };
 
 export function convertMainEventClientToServer(event: Object, serverMinorVersion: number) {
@@ -15,6 +14,7 @@ export function convertMainEventClientToServer(event: Object, serverMinorVersion
         eventId: 'event',
         programId: 'program',
         programStageId: 'programStage',
+        orgUnitId: 'orgUnit',
         trackedEntityId: 'trackedEntity',
         enrollmentId: 'enrollment',
         assignee: 'assignedUser',
@@ -31,9 +31,6 @@ export function convertMainEventClientToServer(event: Object, serverMinorVersion
             break;
         case 'assignee':
             convertedValue = value && convertClientToServer(value, dataElementTypes.ASSIGNEE);
-            break;
-        case 'orgUnit':
-            convertedValue = value && convertClientToServer(value, dataElementTypes.ORGANISATION_UNIT);
             break;
         default:
             convertedValue = value;
