@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
-"PO-Revision-Date: 2025-02-10T15:54:20.260Z\n"
+"POT-Creation-Date: 2025-02-19T09:36:55.016Z\n"
+"PO-Revision-Date: 2025-02-19T09:36:55.016Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1716,6 +1716,9 @@ msgstr "Delete events"
 
 msgid "This cannot be undone. Are you sure you want to delete the selected events?"
 msgstr "This cannot be undone. Are you sure you want to delete the selected events?"
+
+msgid "{{trackedEntityName}} organisation unit"
+msgstr "{{trackedEntityName}} organisation unit"
 
 msgid "Registration Date"
 msgstr "Registration Date"
