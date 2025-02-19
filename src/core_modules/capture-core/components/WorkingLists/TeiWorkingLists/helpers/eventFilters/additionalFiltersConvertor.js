@@ -5,6 +5,7 @@ export const ADDITIONAL_FILTERS = {
     scheduledAt: 'scheduledAt',
     status: 'status',
     assignedUser: 'assignee',
+    eventOrgUnit: 'eventOrgUnit',
 };
 
 export const ADDITIONAL_FILTERS_LABELS = {
@@ -13,6 +14,7 @@ export const ADDITIONAL_FILTERS_LABELS = {
     scheduledAt: 'Scheduled date',
     status: 'Event status',
     assignee: 'Assigned to',
+    eventOrgUnit: 'Event organisation unit',
 };
 
 export const ADDITIONAL_FILTERS_API_NAME = {
