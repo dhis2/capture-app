@@ -62,10 +62,10 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
             ]
             : []),
         {
-            id: ADDITIONAL_FILTERS.eventOrgUnit,
+            id: ADDITIONAL_FILTERS.orgUnit,
             visible: true,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: ADDITIONAL_FILTERS_LABELS.eventOrgUnit,
+            header: ADDITIONAL_FILTERS_LABELS.orgUnit,
         },
         ...(programStage.enableUserAssignment
             ? [
@@ -128,6 +128,7 @@ export const useDefaultColumnConfig = (
         ];
 
         if (programStageId && programStage) {
+            console.log('programStage', programStage);
             return defaultColumns.concat([
                 ...getProgramStageMainConfig(programStage),
                 ...getEventsMetaDataConfig(programStage),
