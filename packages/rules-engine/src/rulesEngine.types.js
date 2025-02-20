@@ -144,6 +144,7 @@ export type OrgUnitGroup = $ReadOnly<{|
 export type OrgUnit = $ReadOnly<{
     id: string,
     name: string,
+    path?: string,
     code: string,
     groups: Array<OrgUnitGroup>,
 }>;

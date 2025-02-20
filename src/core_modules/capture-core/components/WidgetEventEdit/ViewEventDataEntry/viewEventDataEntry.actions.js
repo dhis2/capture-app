@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { effectActions } from '@dhis2/rules-engine-javascript';
+import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../metaData';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
@@ -51,7 +51,7 @@ export const loadViewEventDataEntry =
         serverMinorVersion,
     }: {
         eventContainer: ClientEventContainer,
-        orgUnit: Object,
+        orgUnit: OrgUnit,
         foundation: RenderFoundation,
         program: Program,
         dataEntryId: string,
