@@ -20,6 +20,7 @@ export const ADDITIONAL_FILTERS_LABELS = {
 export const ADDITIONAL_FILTERS_API_NAME = {
     [ADDITIONAL_FILTERS.occurredAt]: 'occurredAt',
     [ADDITIONAL_FILTERS.assignedUser]: 'assignedUser',
+    [ADDITIONAL_FILTERS.orgUnit]: 'orgUnit',
 };
 
 export const getFilterApiName = (clientFilter: string) => ADDITIONAL_FILTERS_API_NAME[clientFilter] || clientFilter;
