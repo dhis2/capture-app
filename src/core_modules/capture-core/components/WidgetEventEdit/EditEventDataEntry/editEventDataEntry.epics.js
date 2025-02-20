@@ -268,6 +268,7 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, sto
 
             const editEvent = {
                 ...mainDataServerValues,
+                orgUnit: mainDataServerValues.orgUnit.id,
                 attributeOptionCombo: undefined,
                 dataValues: formFoundation
                     .getElements()
