@@ -27,6 +27,8 @@ const WidgetHeaderPlain = ({
     stage,
     eventId,
     classes,
+    onDeleteEvent,
+    onDeleteEventRelationship,
 }: Props) => {
     const { icon } = linkedStage;
     return (
@@ -52,6 +54,8 @@ const WidgetHeaderPlain = ({
                         orgUnitId={orgUnitId}
                         originEventId={eventId}
                         stageWriteAccess={stage?.access?.data?.write}
+                        onDeleteEvent={onDeleteEvent}
+                        onDeleteEventRelationship={onDeleteEventRelationship}
                     />
                 </div>
             )}

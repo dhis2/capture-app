@@ -29,6 +29,10 @@ import type {
     InputIndicatorProps,
 } from '../../../../../WidgetFeedback/WidgetFeedback.types';
 import { WidgetTwoEventWorkspace } from '../../../../../WidgetTwoEventWorkspace';
+import { WidgetRelatedStages } from '../../../../../WidgetRelatedStages';
+import {
+    EnrollmentPageKeys,
+} from '../DefaultEnrollmentLayout.constants';
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
@@ -213,7 +217,6 @@ export const EnrollmentWidget: WidgetConfig = {
 export const EditEventWorkspace: WidgetConfig = {
     Component: WidgetEventEditWrapper,
     getProps: ({
-        onGoBack,
         program,
         orgUnitId,
         teiId,
@@ -229,8 +232,9 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
+        onDeleteEvent,
+        onDeleteEventRelationship,
     }): WidgetEventEditProps => ({
-        onGoBack,
         programId: program.id,
         stageId,
         orgUnitId,
@@ -246,6 +250,8 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollment,
         onSaveAndCompleteEnrollmentErrorActionType,
         onSaveAndCompleteEnrollmentSuccessActionType,
+        onDeleteEvent,
+        onDeleteEventRelationship,
     }),
 };
 
@@ -284,5 +290,31 @@ export const EventNote: WidgetConfig = {
     getProps: ({ dataEntryKey, dataEntryId }) => ({
         dataEntryKey,
         dataEntryId,
+    }),
+};
+
+export const RelatedStagesWorkspace: WidgetConfig = {
+    Component: WidgetRelatedStages,
+    shouldHideWidget: ({ currentPage }) => currentPage === EnrollmentPageKeys.EDIT_EVENT,
+    getProps: ({
+        program,
+        stageId,
+        enrollmentId,
+        eventId,
+        teiId,
+        onUpdateOrAddEnrollmentEvents,
+        onUpdateEnrollmentEventsSuccess,
+        onUpdateEnrollmentEventsError,
+        onNavigateToEvent,
+    }) => ({
+        programId: program.id,
+        programStageId: stageId,
+        enrollmentId,
+        eventId,
+        teiId,
+        onUpdateOrAddEnrollmentEvents,
+        onUpdateEnrollmentEventsSuccess,
+        onUpdateEnrollmentEventsError,
+        onNavigateToEvent,
     }),
 };

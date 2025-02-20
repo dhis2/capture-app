@@ -40,13 +40,10 @@ export const deriveAutoGenerateEvents = ({
         .map(
             ({
                 id: programStage,
-                reportDateToUse: reportDateToUseInActiveStatus,
                 generatedByEnrollmentDate: generateScheduleDateByEnrollmentDate,
                 openAfterEnrollment,
                 minDaysFromStart,
             }) => {
-                const dateToUseInActiveStatus =
-                    reportDateToUseInActiveStatus === 'enrolledAt' ? enrolledAt : sanitizedOccurredAt;
                 const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate
                     ? enrolledAt
                     : sanitizedOccurredAt;
@@ -55,25 +52,17 @@ export const deriveAutoGenerateEvents = ({
                     eventAttributeCategoryOptions.attributeCategoryOptions =
                         convertCategoryOptionsToServer(attributeCategoryOptions);
                 }
-                const eventInfo = openAfterEnrollment
-                    ? {
-                        status: 'ACTIVE',
-                        occurredAt: dateToUseInActiveStatus,
-                        scheduledAt: dateToUseInActiveStatus,
-                    }
-                    : {
-                        status: 'SCHEDULE',
-                        // for schedule type of events we want to add the standard interval days to the date
-                        scheduledAt: convertClientToServer(moment(dateToUseInScheduleStatus)
-                            .add(minDaysFromStart, 'days')
-                            .format('YYYY-MM-DD'),
+                const scheduledAt = openAfterEnrollment
+                    ? dateToUseInScheduleStatus
+                    : convertClientToServer(
+                        moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
                         dataElementTypes.DATE,
-                        ),
-                    };
+                    );
 
                 return {
-                    ...eventInfo,
                     ...eventAttributeCategoryOptions,
+                    status: 'SCHEDULE',
+                    scheduledAt,
                     event: generateUID(),
                     programStage,
                     program: programId,

@@ -72,6 +72,7 @@ export const OrgUnitSelectorForRelatedStages = ({
             onBlur={handleDeselect}
             styles={baseInputStyles}
             errorMessage={shouldShowError && errorMessages?.orgUnit}
+            data-test="relates-stages-org-unit"
         />
     );
 };

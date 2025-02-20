@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
-"PO-Revision-Date: 2025-01-27T10:03:03.122Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"PO-Revision-Date: 2025-02-10T15:54:20.260Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -896,9 +896,6 @@ msgstr "Indicators"
 msgid "Warnings"
 msgstr "Warnings"
 
-msgid "Show all events"
-msgstr "Show all events"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Event could not be loaded. Are you sure it exists?"
 
@@ -933,9 +930,6 @@ msgstr "Loading"
 
 msgid "An error occurred while loading the form"
 msgstr "An error occurred while loading the form"
-
-msgid "Back to all stages and events"
-msgstr "Back to all stages and events"
 
 msgid "Possible duplicates found"
 msgstr "Possible duplicates found"
@@ -1295,6 +1289,12 @@ msgstr "Go to “Schedule” tab to reschedule this event"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
 
+msgid "Geometry (Area)"
+msgstr "Geometry (Area)"
+
+msgid "Geometry (Coordinate)"
+msgstr "Geometry (Coordinate)"
+
 msgid "Event completed"
 msgstr "Event completed"
 
@@ -1425,8 +1425,8 @@ msgstr "Choose a {{linkableStageLabel}} event"
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Choose a {{linkableStageLabel}}"
 
-msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }} is not repeatable"
+msgid "{{ linkableStageLabel }} can only have one event"
+msgstr "{{ linkableStageLabel }} can only have one event"
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} has no linkable events"
@@ -1437,11 +1437,23 @@ msgstr "Actions - {{relationshipName}}"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Ambiguous relationships, contact system administrator"
 
+msgid "Enter details"
+msgstr "Enter details"
+
+msgid "Linked event"
+msgstr "Linked event"
+
 msgid "Enter details now"
 msgstr "Enter details now"
 
 msgid "Link to an existing event"
 msgstr "Link to an existing event"
+
+msgid "The event was successfully linked"
+msgstr "The event was successfully linked"
+
+msgid "An error occurred while linking the event"
+msgstr "An error occurred while linking the event"
 
 msgid "Scheduled date"
 msgstr "Scheduled date"
@@ -1550,9 +1562,6 @@ msgstr "You do not have access to remove the link and delete the linked event"
 msgid "An error occurred while loading the widget."
 msgstr "An error occurred while loading the widget."
 
-msgid "Linked event"
-msgstr "Linked event"
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1569,6 +1578,9 @@ msgstr "Changelog"
 msgid "No changes to display"
 msgstr "No changes to display"
 
+msgid "Data item"
+msgstr "Data item"
+
 msgid "Updated"
 msgstr "Updated"
 
@@ -1581,11 +1593,17 @@ msgstr "Deleted"
 msgid "Date"
 msgstr "Date"
 
+msgid "Sort by date"
+msgstr "Sort by date"
+
 msgid "User"
 msgstr "User"
 
-msgid "Data item"
-msgstr "Data item"
+msgid "Sort by username"
+msgstr "Sort by username"
+
+msgid "Sort by data item"
+msgstr "Sort by data item"
 
 msgid "Change"
 msgstr "Change"

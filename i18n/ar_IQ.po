@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2025\n"
 "Language-Team: Arabic (Iraq) (https://app.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -257,7 +257,7 @@ msgid "No write access"
 msgstr "لا توجد صلاحية الوصول للكتابة"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "{{titleText}} جديد"
 
 msgid "Switch to form view"
 msgstr "التحويل الى العرض كنموذج"
@@ -744,6 +744,23 @@ msgid ""
 "select a valid combination."
 msgstr ""
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr ""
 
@@ -799,7 +816,7 @@ msgid "Link"
 msgstr "ربط"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "حفظ {{trackedEntityName}} كجديد"
 
 msgid "Some programs are being filtered."
 msgstr "بعض البرامج يتم تصفيتها"
@@ -970,7 +987,7 @@ msgid "Choose a type to start searching"
 msgstr ""
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "بحث {{name}}"
 
 msgid "Search by {{name}}"
 msgstr ""
@@ -1574,7 +1591,7 @@ msgid "New Relationship"
 msgstr ""
 
 msgid "Link to an existing {{tetName}}"
-msgstr ""
+msgstr "ربط بـ {{tetName}} موجود مسبقاً"
 
 msgid "An error occurred while adding the relationship"
 msgstr ""

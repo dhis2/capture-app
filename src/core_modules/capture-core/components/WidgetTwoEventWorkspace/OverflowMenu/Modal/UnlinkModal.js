@@ -19,6 +19,7 @@ export const UnlinkModal = ({
     setOpenModal,
     relationshipId,
     originEventId,
+    onDeleteEventRelationship,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
@@ -44,6 +45,7 @@ export const UnlinkModal = ({
                 'linkedEventByOriginEvent',
                 originEventId,
             ]);
+            onDeleteEventRelationship && onDeleteEventRelationship(relationshipId);
             setOpenModal(false);
         },
         onError: (error) => {
@@ -72,6 +74,7 @@ export const UnlinkModal = ({
                         destructive
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
+                        dataTest="event-overflow-unlink-event-confirm"
                     >
                         {i18n.t('Yes, unlink event')}
                     </Button>
