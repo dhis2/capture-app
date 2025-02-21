@@ -7,7 +7,7 @@ import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 const getImageOrFileResourceSubvalue = async (key: string, querySingleResource: QuerySingleResource) => {
     const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: key });
     return {
-        id,
+        value: id,
         name,
     };
 };

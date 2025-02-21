@@ -26,6 +26,7 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
     }, [refetch, teiId]);
 
     return {
-        trackedEntityInstanceAttributes: teiId ? !loading && data?.trackedEntityInstance.attributes : undefined,
+        trackedEntityInstanceAttributes: teiId ? data?.trackedEntityInstance.attributes : undefined,
+        loading,
     };
 };
