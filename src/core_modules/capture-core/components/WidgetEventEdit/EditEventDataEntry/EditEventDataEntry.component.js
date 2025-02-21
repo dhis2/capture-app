@@ -295,7 +295,7 @@ const buildGeometrySettingsFn = () => ({
                 label: i18n.t('Area'),
                 dialogLabel: i18n.t('Area'),
                 required: false,
-                orgUnitId: props.orgUnit?.id,
+                orgUnitId: props.orgUnitIdFieldValue,
             });
         }
         return createComponentProps(props, {
@@ -303,7 +303,7 @@ const buildGeometrySettingsFn = () => ({
             label: i18n.t('Coordinate'),
             dialogLabel: i18n.t('Coordinate'),
             required: false,
-            orgUnitId: props.orgUnit?.id,
+            orgUnitId: props.orgUnitIdFieldValue,
         });
     },
     getPropName: () => 'geometry',
@@ -442,6 +442,7 @@ type Props = {
     enrollmentId?: string,
     isCompleted?: boolean,
     assignee?: UserFormField | null,
+    orgUnitFieldValue: ?OrgUnit,
 };
 
 
@@ -537,6 +538,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             dataEntryId,
             orgUnit,
             programId,
+            orgUnitFieldValue,
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
@@ -556,6 +558,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
+                orgUnitIdFieldValue={orgUnitFieldValue?.id}
                 orgUnit={orgUnit}
                 orgUnitId={orgUnit?.id}
                 programId={programId}
