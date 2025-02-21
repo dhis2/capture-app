@@ -51,7 +51,7 @@ export const loadViewEventDataEntry =
         serverMinorVersion,
     }: {
         eventContainer: ClientEventContainer,
-        orgUnit: OrgUnit,
+        orgUnit: { ...OrgUnit, path: string },
         foundation: RenderFoundation,
         program: Program,
         dataEntryId: string,
