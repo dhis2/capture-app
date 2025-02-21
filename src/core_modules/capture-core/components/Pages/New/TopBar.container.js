@@ -81,6 +81,7 @@ export const TopBar = ({
             isUserInteractionInProgress={isUserInteractionInProgress}
             onStartAgain={() => reset()}
             formIsOpen={formIsOpen}
+            isReadOnly
         >
             {teiId ? (
                 <SingleLockedSelect
