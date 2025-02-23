@@ -1,11 +1,16 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
 import { rulesEngine } from '../rulesEngine';
 
+const groups = [
+    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
+    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
+];
+
 describe('Rules engine', () => {
     const constants = [];
     const dataElementsInProgram = {};
     const programRuleVariables = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
     const currentEvent = {};
 
@@ -279,7 +284,7 @@ describe('Rules engine', () => {
 
 describe('Program Rule Variables corner cases', () => {
     const constants = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
 
     test('without currentEvent and without otherEvents', () => {
@@ -348,14 +353,8 @@ describe('Program Rule Variables corner cases', () => {
             dataElements: dataElementsInProgram,
         });
 
-        // then
-        expect(rulesEffects).toEqual([
-            {
-                type: 'DISPLAYTEXT',
-                id: 'feedback',
-                displayText: { id: 'Eeb7Ixr4Pvx', message: "d2:left('dhis', 3) =  dhi" },
-            },
-        ]);
+        // then (currentEvent and selectedEnrollment not defined => empty effect array)
+        expect(rulesEffects).toEqual([]);
     });
 
     test('without currentEvent and with otherEvents', () => {
@@ -402,7 +401,7 @@ describe('Program Rule Variables corner cases', () => {
                 programStageId: 'A03MvHHogjR',
                 status: 'ACTIVE',
                 trackedEntityInstanceId: 'vCGpQAWG17I',
-                occurredAt: '2021-05-31T00:00:00.000',
+                occurredAt: '2021-05-31T00:00:00.000Z',
             },
         ];
         const programRuleVariables = [
@@ -426,14 +425,8 @@ describe('Program Rule Variables corner cases', () => {
             otherEvents,
         });
 
-        // then
-        expect(rulesEffects).toEqual([
-            {
-                type: 'DISPLAYTEXT',
-                id: 'feedback',
-                displayText: { id: 'Eeb7Ixr4Pvx', message: "d2:left('dhis', 3) =  dhi" },
-            },
-        ]);
+        // then (currentEvent and selectedEnrollment not defined => empty effect array)
+        expect(rulesEffects).toEqual([]);
     });
 
     test('with currentEvent and with otherEvents', () => {
@@ -495,7 +488,7 @@ describe('Program Rule Variables corner cases', () => {
                 programStageId: 'A03MvHHogjR',
                 status: 'ACTIVE',
                 trackedEntityInstanceId: 'vCGpQAWG17I',
-                occurredAt: '2021-05-31T00:00:00.000',
+                occurredAt: '2021-05-31T00:00:00.000Z',
             },
         ];
         const programRuleVariables = [
@@ -610,7 +603,7 @@ describe('Program Rule Variables corner cases', () => {
                 programStageId: 'A03MvHHogjR',
                 status: 'ACTIVE',
                 trackedEntityInstanceId: 'vCGpQAWG17I',
-                occurredAt: '2021-05-31T00:00:00.000',
+                occurredAt: '2021-05-31T00:00:00.000Z',
             },
         ];
         const programRuleVariables = [
