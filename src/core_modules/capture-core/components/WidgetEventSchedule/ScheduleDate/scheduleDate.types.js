@@ -15,5 +15,13 @@ export type Props = {|
     serverSuggestedScheduleDate?: ?string,
     hideDueDate?: boolean,
     orgUnit: { id: string, name: string },
+    validation?: ?{
+        error: boolean,
+        validationText: string,
+    },
+    setValidation: (validation: {
+        error: boolean,
+        validationText: string,
+    }) => void,
     ...CssClasses,
 |};
