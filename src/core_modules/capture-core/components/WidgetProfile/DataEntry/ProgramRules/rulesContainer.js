@@ -53,6 +53,7 @@ const addRulesAndVariablesFromProgramIndicators = (program, programIndicators) =
     }
 };
 
+
 export const buildRulesContainer = async ({
     programAPI,
     programRules,
