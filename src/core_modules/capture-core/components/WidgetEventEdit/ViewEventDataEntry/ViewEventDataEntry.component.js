@@ -150,7 +150,7 @@ const buildOrgUnitSettingsFn = () => {
             label: i18n.t('Organisation unit'),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getPropName: () => 'orgUnitId',
+        getPropName: () => 'orgUnit',
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
