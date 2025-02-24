@@ -83,7 +83,7 @@ class TeiSearchPlain extends React.Component<Props, State> {
                         isCollapsed={isCollapsed}
                         onChangeCollapseState={() => { this.setState({ programSectionOpen: !!isCollapsed }); }}
                         title={i18n.t('Program')}
-                        isCollapseButtonEnabled={isCollapsed}
+                        extendedCollapsibility
                     />
                 }
             >
@@ -115,7 +115,7 @@ class TeiSearchPlain extends React.Component<Props, State> {
                     <SectionHeaderSimple
                         containerStyle={{ alignItems: 'center' }}
                         titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
-                        onChangeCollapseState={() => { this.onChangeSectionCollapseState(searchGroupId); }}
+                        onChangeCollapseState={() => { collapsed && this.onChangeSectionCollapseState(searchGroupId); }}
                         isCollapsed={collapsed}
                         title={header}
                         isCollapseButtonEnabled={collapsed}

@@ -70,9 +70,9 @@ const TeiSearchPlain = (props) => {
                         containerStyle={{ alignItems: 'center' }}
                         titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
                         isCollapsed={isCollapsed}
-                        onChangeCollapseState={() => { setProgramSectionOpen(!isCollapsed); }}
+                        onChangeCollapseState={() => { setProgramSectionOpen(!!isCollapsed); }}
                         title={i18n.t('Program')}
-                        isCollapseButtonEnabled={isCollapsed}
+                        extendedCollapsibility
                     />
                 }
             >
@@ -108,7 +108,7 @@ const TeiSearchPlain = (props) => {
                     <SectionHeaderSimple
                         containerStyle={{ alignItems: 'center' }}
                         titleStyle={{ background: 'transparent', paddingTop: 8, fontSize: 16 }}
-                        onChangeCollapseState={() => { onChangeSectionCollapseState(searchGroupId); }}
+                        onChangeCollapseState={() => { collapsed && onChangeSectionCollapseState(searchGroupId); }}
                         isCollapsed={collapsed}
                         title={header}
                         isCollapseButtonEnabled={collapsed}
