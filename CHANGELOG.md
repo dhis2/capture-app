@@ -1,3 +1,10 @@
+# [101.28.0](https://github.com/dhis2/capture-app/compare/v101.27.4...v101.28.0) (2025-02-24)
+
+
+### Features
+
+* [DHIS2-18746][DHIS2-18903] Show org. unit in edit event form ([#3949](https://github.com/dhis2/capture-app/issues/3949)) ([3d0e394](https://github.com/dhis2/capture-app/commit/3d0e394a966946713e437b1d15ff7971db91edea))
+
 ## [101.27.4](https://github.com/dhis2/capture-app/compare/v101.27.3...v101.27.4) (2025-02-23)
 
 
