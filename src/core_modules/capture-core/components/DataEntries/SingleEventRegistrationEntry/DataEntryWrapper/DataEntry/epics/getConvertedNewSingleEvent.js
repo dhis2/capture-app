@@ -30,7 +30,7 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
             ...mainDataServerValues,
             program: state.currentSelections.programId,
             programStage: formFoundation.id,
-            orgUnit: state.currentSelections.orgUnitId,
+            orgUnit: mainDataServerValues.orgUnit.id,
             ...getApiCategoriesArgument(state.currentSelections.categories, serverMinorVersion),
             dataValues: Object
                 .keys(formServerValues)
