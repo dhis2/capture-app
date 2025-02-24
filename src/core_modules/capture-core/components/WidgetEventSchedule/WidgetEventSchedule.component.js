@@ -47,6 +47,8 @@ const WidgetEventSchedulePlain = ({
     onSetAssignee,
     assignee,
     categoryOptionsError,
+    validation,
+    setValidation,
     ...passOnProps
 }: Props) => {
     const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
@@ -62,9 +64,9 @@ const WidgetEventSchedulePlain = ({
     };
 
     useEffect(() => {
-        const formIsValid = () => Boolean(isValidOrgUnit(orgUnit) && scheduleDate);
+        const formIsValid = () => Boolean(isValidOrgUnit(orgUnit) && scheduleDate && !validation?.error);
         setIsFormValid(formIsValid());
-    }, [orgUnit, scheduleDate, setIsFormValid]);
+    }, [orgUnit, scheduleDate, validation, setIsFormValid]);
 
     return (
         <Widget
@@ -89,6 +91,8 @@ const WidgetEventSchedulePlain = ({
                         scheduleDate={scheduleDate}
                         displayDueDateLabel={displayDueDateLabel}
                         serverSuggestedScheduleDate={serverSuggestedScheduleDate}
+                        validation={validation}
+                        setValidation={setValidation}
                         {...passOnProps}
                     />
                 </DataSection>
@@ -125,6 +129,7 @@ const WidgetEventSchedulePlain = ({
                     hasChanges={scheduleDate !== suggestedScheduleDate}
                     onCancel={onCancel}
                     onSchedule={onSchedule}
+                    validation={validation}
                 />
                 <ScheduleText
                     programName={programName}
