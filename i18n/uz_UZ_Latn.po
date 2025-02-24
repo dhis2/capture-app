@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -896,9 +896,6 @@ msgstr "Indikatorlar"
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
-msgid "Show all events"
-msgstr "Barcha hodisa/tadbirlarni koʼrsatish"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
 "Hodisa/tadbirni yuklab boʼlmadi. Uning mavjudligiga ishonchingiz komilmi?"
@@ -932,9 +929,6 @@ msgid "Loading"
 msgstr "Yuklanmoqda"
 
 msgid "An error occurred while loading the form"
-msgstr ""
-
-msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -1280,6 +1274,12 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1405,7 +1405,7 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr ""
 
-msgid "{{ linkableStageLabel }} is not repeatable"
+msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
@@ -1417,10 +1417,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr ""
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1523,9 +1535,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "Linked event"
-msgstr ""
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1540,6 +1549,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Data item"
+msgstr "Maʼlumot elementi"
+
 msgid "Updated"
 msgstr "Yangilandi"
 
@@ -1552,11 +1564,17 @@ msgstr "Oʼchirib tashlangan"
 msgid "Date"
 msgstr "Sana"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "Foydalanuvchi"
 
-msgid "Data item"
-msgstr "Maʼlumot elementi"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr ""
