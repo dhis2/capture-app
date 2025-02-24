@@ -1,6 +1,7 @@
 // @flow
 import isString from 'd2-utilizr/lib/isString';
-
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from '@dhis2/rules-engine-javascript';
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
 
@@ -186,7 +187,23 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
 export function getRulesAndVariablesFromProgramIndicators(
     cachedProgramIndicators: Array<CachedProgramIndicator>,
     programId: string) {
-    return cachedProgramIndicators
+    // Filter out program indicators without an expression
+    const validProgramIndicators = cachedProgramIndicators.filter((indicator) => {
+        if (!indicator.expression) {
+            log.error(
+                errorCreator('Program indicator is missing an expression and will be skipped.')(
+                    {
+                        method: 'getRulesAndVariablesFromProgramIndicators',
+                        object: indicator,
+                    },
+                ),
+            );
+            return false;
+        }
+        return true;
+    });
+
+    return validProgramIndicators
         .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programId))
         .filter(container => container)
         .reduce((accOneLevelContainer, container) => {
