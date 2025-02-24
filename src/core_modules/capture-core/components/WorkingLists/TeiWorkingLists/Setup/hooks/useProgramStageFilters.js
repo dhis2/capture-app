@@ -130,10 +130,11 @@ export const useProgramStageFilters = ({ stages }: TrackerProgram, programStageI
                         type: dataElementTypes.ASSIGNEE,
                         header: ADDITIONAL_FILTERS_LABELS.assignee,
                         transformRecordsFilter: (rawFilter: Object) => {
-                            const { assignedUser, assignedUserMode } = rawFilter;
+                            const { assignedUserMode } = rawFilter;
                             const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
                                 ? 'assignedUsers'
                                 : 'assignedUser';
+                            const assignedUser = rawFilter[assignedUsersQueryParam];
                             return {
                                 assignedUserMode,
                                 ...(assignedUser && { [assignedUsersQueryParam]: assignedUser }),
