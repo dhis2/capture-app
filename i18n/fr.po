@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2025\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -926,9 +926,6 @@ msgstr "Indicateurs"
 msgid "Warnings"
 msgstr "Avertissements"
 
-msgid "Show all events"
-msgstr "Afficher tous les événements"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "L'événement n'a pas pu être chargé. Etes-vous sûr qu'il existe ?"
 
@@ -964,9 +961,6 @@ msgstr "Chargement"
 
 msgid "An error occurred while loading the form"
 msgstr ""
-
-msgid "Back to all stages and events"
-msgstr "Retour à tous les stades et événements"
 
 msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
@@ -1472,7 +1466,7 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr ""
 
-msgid "{{ linkableStageLabel }} is not repeatable"
+msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
@@ -1484,10 +1478,22 @@ msgstr "Actions - {{relationshipName}}"
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr "Saisir les détails maintenant"
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1591,9 +1597,6 @@ msgid "You do not have access to remove the link and delete the linked event"
 msgstr ""
 
 msgid "An error occurred while loading the widget."
-msgstr ""
-
-msgid "Linked event"
 msgstr ""
 
 msgid ""

@@ -33,6 +33,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     VirtualizedSelectField,
+    SingleOrgUnitSelectField,
 } from '../../FormFields/New';
 import { statusTypes, translatedStatusTypes } from '../../../events/statusTypes';
 import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
@@ -48,6 +49,7 @@ import {
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers/';
 import type { UserFormField } from '../../FormFields/UserField';
+import { getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -197,6 +199,47 @@ const buildScheduleDateSettingsFn = () => {
     return scheduleDateSettings;
 };
 
+const buildOrgUnitSettingsFn = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+    const orgUnitSettings = {
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: i18n.t('Organisation unit'),
+            required: true,
+        }),
+        getPropName: () => 'orgUnit',
+        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return orgUnitSettings;
+};
+
+
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
@@ -252,7 +295,7 @@ const buildGeometrySettingsFn = () => ({
                 label: i18n.t('Area'),
                 dialogLabel: i18n.t('Area'),
                 required: false,
-                orgUnitId: props.orgUnit?.id,
+                orgUnitId: props.orgUnitIdFieldValue,
             });
         }
         return createComponentProps(props, {
@@ -260,7 +303,7 @@ const buildGeometrySettingsFn = () => ({
             label: i18n.t('Coordinate'),
             dialogLabel: i18n.t('Coordinate'),
             required: false,
-            orgUnitId: props.orgUnit?.id,
+            orgUnitId: props.orgUnitIdFieldValue,
         });
     },
     getPropName: () => 'geometry',
@@ -359,7 +402,8 @@ const saveHandlerConfig = {
 const AOCFieldBuilderHOC = withAOCFieldBuilder({})(withDataEntryFields(getCategoryOptionsSettingsFn())(DataEntry));
 const CleanUpHOC = withCleanUp()(AOCFieldBuilderHOC);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
-const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(GeometryField);
+const OrgUnitField = withDataEntryField(buildOrgUnitSettingsFn())(GeometryField);
+const ScheduleDateField = withDataEntryField(buildScheduleDateSettingsFn())(OrgUnitField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(ScheduleDateField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
@@ -398,6 +442,7 @@ type Props = {
     enrollmentId?: string,
     isCompleted?: boolean,
     assignee?: UserFormField | null,
+    orgUnitFieldValue: ?OrgUnit,
 };
 
 
@@ -493,6 +538,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             dataEntryId,
             orgUnit,
             programId,
+            orgUnitFieldValue,
             onUpdateDataEntryField,
             onUpdateField,
             onStartAsyncUpdateField,
@@ -512,6 +558,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                 onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment(orgUnit)}
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}
+                orgUnitIdFieldValue={orgUnitFieldValue?.id}
                 orgUnit={orgUnit}
                 orgUnitId={orgUnit?.id}
                 programId={programId}

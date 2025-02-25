@@ -1,7 +1,7 @@
 // @flow
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import { dataElementTypes } from '../../../metaData';
-import { FEATURES, hasAPISupportForFeature } from '../../../../capture-core-utils';
+import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
 
 type Attribute = {
@@ -15,13 +15,12 @@ type Attribute = {
 type SubValueFunctionParams = {
     attribute: Attribute,
     querySingleResource: QuerySingleResource,
-    minorServerVersion: number,
 };
 
-const buildTEAFileUrl = (attribute, minorServerVersion) => {
+const buildTEAFileUrl = (attribute) => {
     const { absoluteApiPath, teiId, programId, id } = attribute;
 
-    return hasAPISupportForFeature(minorServerVersion, FEATURES.trackerFileEndpoint)
+    return featureAvailable(FEATURES.trackerFileEndpoint)
         ? `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/file?program=${programId}`
         : `${absoluteApiPath}/trackedEntityInstances/${teiId}/${id}/file`;
 };
@@ -29,7 +28,6 @@ const buildTEAFileUrl = (attribute, minorServerVersion) => {
 const getFileResourceSubvalue = async ({
     attribute,
     querySingleResource,
-    minorServerVersion,
 }: SubValueFunctionParams) => {
     if (!attribute.value) return null;
 
@@ -38,15 +36,15 @@ const getFileResourceSubvalue = async ({
         id,
         name,
         value: id,
-        url: buildTEAFileUrl(attribute, minorServerVersion),
+        url: buildTEAFileUrl(attribute),
     };
 };
 
-const getImageResourceSubvalue = async ({ attribute, minorServerVersion }: SubValueFunctionParams) => {
+const getImageResourceSubvalue = async ({ attribute }: SubValueFunctionParams) => {
     const { id, value, teiId, programId, absoluteApiPath } = attribute;
     if (!value) return null;
 
-    const urls = hasAPISupportForFeature(minorServerVersion, FEATURES.trackerImageEndpoint) ? {
+    const urls = featureAvailable(FEATURES.trackerImageEndpoint) ? {
         url: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}`,
         previewUrl: `${absoluteApiPath}/tracker/trackedEntities/${teiId}/attributes/${id}/image?program=${programId}&dimension=small`,
     } : {

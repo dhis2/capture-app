@@ -1289,6 +1289,12 @@ msgstr "Go to “Schedule” tab to reschedule this event"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
 
+msgid "Geometry (Area)"
+msgstr "Geometry (Area)"
+
+msgid "Geometry (Coordinate)"
+msgstr "Geometry (Coordinate)"
+
 msgid "Event completed"
 msgstr "Event completed"
 
@@ -1572,6 +1578,9 @@ msgstr "Changelog"
 msgid "No changes to display"
 msgstr "No changes to display"
 
+msgid "Data item"
+msgstr "Data item"
+
 msgid "Updated"
 msgstr "Updated"
 
@@ -1584,11 +1593,17 @@ msgstr "Deleted"
 msgid "Date"
 msgstr "Date"
 
+msgid "Sort by date"
+msgstr "Sort by date"
+
 msgid "User"
 msgstr "User"
 
-msgid "Data item"
-msgstr "Data item"
+msgid "Sort by username"
+msgstr "Sort by username"
+
+msgid "Sort by data item"
+msgstr "Sort by data item"
 
 msgid "Change"
 msgstr "Change"

@@ -9,8 +9,11 @@ import {
     updateRulesEffects,
 } from '../../../rules';
 import { RenderFoundation, Program } from '../../../metaData';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
-import { getCategoryOptionsValidatorContainers } from './fieldValidators/categoryOptions.validatorContainersGetter';
+import {
+    getEventDateValidatorContainers,
+    getOrgUnitValidatorContainers,
+    getCategoryOptionsValidatorContainers,
+} from './fieldValidators';
 import {
     getConvertGeometryIn,
     convertGeometryOut,
@@ -109,6 +112,11 @@ export const openEventForEditInDataEntry = ({
             id: 'scheduledAt',
             type: 'DATE',
             validatorContainers: getEventDateValidatorContainers(),
+        },
+        {
+            id: 'orgUnit',
+            type: 'ORGANISATION_UNIT',
+            validatorContainers: getOrgUnitValidatorContainers(),
         },
         {
             clientId: 'geometry',
