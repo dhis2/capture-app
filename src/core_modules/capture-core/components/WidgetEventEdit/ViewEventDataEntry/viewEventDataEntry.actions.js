@@ -50,7 +50,7 @@ export const loadViewEventDataEntry =
         dataEntryKey,
     }: {
         eventContainer: ClientEventContainer,
-        orgUnit: OrgUnit,
+        orgUnit: { ...OrgUnit, path: string },
         foundation: RenderFoundation,
         program: Program,
         dataEntryId: string,
@@ -66,13 +66,13 @@ export const loadViewEventDataEntry =
                 validatorContainers: getEventDateValidatorContainers(),
             },
             {
-                id: 'orgUnitId',
-                type: 'ORGANISATION_UNIT',
-                validatorContainers: getOrgUnitValidatorContainers(),
-            },
-            {
                 id: 'scheduledAt',
                 type: 'DATE',
+            },
+            {
+                id: 'orgUnit',
+                type: 'ORGANISATION_UNIT',
+                validatorContainers: getOrgUnitValidatorContainers(),
             },
             {
                 clientId: 'geometry',
@@ -116,6 +116,11 @@ export const loadViewEventDataEntry =
             dataEntryPropsToInclude.push(...Object.keys(attributeCategoryOptions).map(id => ({ id, type: 'TEXT' })));
         }
 
+        const clientValuesForDataEntry = {
+            ...eventContainer.event,
+            orgUnit: { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path },
+        };
+
         const extraProps = {
             eventId: eventContainer.event.eventId,
         };
@@ -124,7 +129,7 @@ export const loadViewEventDataEntry =
         loadEditDataEntryAsync(
             dataEntryId,
             dataEntryKey,
-            eventContainer.event,
+            clientValuesForDataEntry,
             eventContainer.values,
             dataEntryPropsToInclude,
             foundation,
@@ -161,7 +166,6 @@ export const loadViewEventDataEntry =
             });
         }
         const filteredEffects = filterApplicableRuleEffects(effects, effectActions.ASSIGN_VALUE);
-
         return [
             ...dataEntryActions,
             updateRulesEffects(filteredEffects, formId),
