@@ -15,6 +15,7 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     return {
         searchAttempted: formState.validationFailed,
         attributesWithValuesCount: getAttributesWithValuesCount(state, formId),
+        formsValues: state.formsValues[formId] || {},
     };
 };
 
