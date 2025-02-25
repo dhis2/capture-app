@@ -1,4 +1,6 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type { ProgramRulesContainer } from '@dhis2/rules-engine-javascript';
 import { getTrackedEntityAttributeId, getDataElementId, getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
@@ -22,7 +24,22 @@ const addProgramRules = (program, programRules) => {
 };
 
 const addRulesAndVariablesFromProgramIndicators = (program, programIndicators) => {
-    const indicators = programIndicators.map(programIndicator => ({
+    const validProgramIndicators = programIndicators.filter((indicator) => {
+        if (!indicator.expression) {
+            log.error(
+                errorCreator('WidgetProfile: Program indicator is missing an expression and will be skipped.')(
+                    {
+                        method: 'addRulesAndVariablesFromProgramIndicators',
+                        object: indicator,
+                    },
+                ),
+            );
+            return false;
+        }
+        return true;
+    });
+
+    const indicators = validProgramIndicators.map(programIndicator => ({
         ...programIndicator,
         programId: getProgramId(programIndicator),
     }));
@@ -35,6 +52,7 @@ const addRulesAndVariablesFromProgramIndicators = (program, programIndicators) =
         program.programRules = [...program.programRules, ...rules];
     }
 };
+
 
 export const buildRulesContainer = async ({
     programAPI,
