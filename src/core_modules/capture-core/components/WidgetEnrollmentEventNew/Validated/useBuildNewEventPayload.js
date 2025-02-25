@@ -1,6 +1,6 @@
 // @flow
 import { useSelector } from 'react-redux';
-import { useTimeZoneConversion, useConfig } from '@dhis2/app-runtime';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { RenderFoundation } from '../../../metaData';
 import { getAddEventEnrollmentServerData } from './getConvertedAddEvent';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
@@ -55,7 +55,6 @@ export const useBuildNewEventPayload = ({
     enrollmentId,
     formFoundation,
 }: Props) => {
-    const { serverVersion: { minor } } = useConfig();
     const dataEntryKey = `${dataEntryId}-${itemId}`;
     const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
     const dataEntryValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
@@ -140,7 +139,6 @@ export const useBuildNewEventPayload = ({
             teiId,
             completed: saveType === addEventSaveTypes.COMPLETE,
             fromClientDate,
-            serverMinorVersion: minor,
         });
 
         const {

@@ -32,6 +32,9 @@ const createApiEventQueryArgs = (
     filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
 ): { [string]: any } => {
     const rawSplitFilters = splitFilters(filters, columnsMetaForDataFetching);
+    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+        ? 'orgUnitMode'
+        : 'ouMode';
     const queryArgs = {
         ...getApiFilterQueryArgs(rawSplitFilters.filters, filtersOnlyMetaForDataFetching),
         ...getApiFilterAttributesQueryArgs(rawSplitFilters.filterAttributes, filtersOnlyMetaForDataFetching),
@@ -40,7 +43,7 @@ const createApiEventQueryArgs = (
         page,
         pageSize,
         orgUnit,
-        ouMode: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
+        [orgUnitModeQueryParam]: orgUnit ? 'SELECTED' : 'ACCESSIBLE',
         program,
         programStage,
         fields: '*',

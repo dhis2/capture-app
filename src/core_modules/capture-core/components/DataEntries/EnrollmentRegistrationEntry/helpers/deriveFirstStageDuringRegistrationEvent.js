@@ -17,7 +17,6 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     fieldsValue,
     attributeCategoryOptions,
     assignee,
-    serverMinorVersion,
 }: {
     firstStageMetadata: ?ProgramStage,
     programId: string,
@@ -26,7 +25,6 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     fieldsValue: { [id: string]: any },
     attributeCategoryOptions: { [categoryId: string]: string } | string,
     assignee?: ApiAssignedUser,
-    serverMinorVersion: number,
 }) => {
     if (!firstStageMetadata) {
         return null;
@@ -34,7 +32,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     const { enrolledAt, stageComplete, stageOccurredAt, stageGeometry } = fieldsValue;
 
     const eventAttributeCategoryOptions = attributeCategoryOptions
-        ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions, serverMinorVersion) }
+        ? { attributeCategoryOptions: convertCategoryOptionsToServer(attributeCategoryOptions) }
         : {};
 
     const event: any = {

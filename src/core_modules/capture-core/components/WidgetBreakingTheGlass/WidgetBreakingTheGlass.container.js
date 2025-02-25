@@ -1,14 +1,15 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDataMutation } from '@dhis2/app-runtime';
+import { FEATURES, useFeature } from 'capture-core-utils';
 import type { Props } from './WidgetBreakingTheGlass.types';
 import { WidgetBreakingTheGlassComponent } from './WidgetBreakingTheGlass.component';
 
 const glassBreakRequest = {
     resource: 'tracker/ownership/override',
     type: 'create',
-    params: ({ tei, program, reason }) => ({
-        trackedEntityInstance: tei,
+    params: ({ teiId, teiParamKey, program, reason }) => ({
+        [teiParamKey]: teiId,
         program,
         reason,
     }),
@@ -21,15 +22,17 @@ export const WidgetBreakingTheGlass = ({
     onCancel,
 }: Props) => {
     const [postGlassBreakRequest] = useDataMutation(glassBreakRequest);
+    const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
 
     const performGlassBreak = useCallback(async (reason) => {
         await postGlassBreakRequest({
-            tei: teiId,
+            teiId,
+            teiParamKey,
             program: programId,
             reason,
         });
         onBreakingTheGlass();
-    }, [onBreakingTheGlass, postGlassBreakRequest, teiId, programId]);
+    }, [onBreakingTheGlass, postGlassBreakRequest, teiId, programId, teiParamKey]);
 
     return (
         <WidgetBreakingTheGlassComponent

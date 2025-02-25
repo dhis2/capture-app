@@ -46,7 +46,7 @@ export const useUpdateOwnership = ({
     onAccessLostFromTransfer,
 }: Props): ReturnTypes => {
     const dataEngine = useDataEngine();
-    const teiParamKey = useFeature(FEATURES.newTransferQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
+    const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
     const { show: showErrorAlert } = useAlert(
         i18n.t('An error occurred while transferring ownership'),
         { critical: true },

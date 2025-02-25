@@ -23,7 +23,6 @@ import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.co
 export const saveNewEventAddAnotherEpic = (
     action$: InputObservable,
     store: ReduxStore,
-    { serverVersion: { minor } }: ApiUtils,
 ) => action$.pipe(
     ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER),
     map((action) => {
@@ -39,7 +38,6 @@ export const saveNewEventAddAnotherEpic = (
             formFoundation,
             formClientValues,
             mainDataClientValues,
-            minor,
         );
         const clientEvent = {
             ...mainDataClientValues,
