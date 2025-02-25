@@ -1,5 +1,10 @@
 // @flow
 import React, { Component } from 'react';
+import { Temporal } from '@js-temporal/polyfill';
+import {
+    convertFromIso8601,
+    convertToIso8601,
+} from '@dhis2/multi-calendar-dates';
 import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
@@ -10,6 +15,7 @@ import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
 import { orientations } from '../constants/orientations.const';
 import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
+import { stringToTemporal, temporalToString, mapDhis2CalendarToTemporal, isCalendarSupported } from '../../capture-core-utils/date';
 
 type AgeValues = {
     date?: ?string,
@@ -24,10 +30,6 @@ type InputMessageClasses = {
     info?: ?string,
     validating?: ?string,
 }
-
-type DateParser = (value: string) => { isValid: boolean, momentDate: any };
-
-type DateStringFromMomentFormatter = (momentValue: Object) => string;
 
 type ValidationOptions = {
     error?: ?string,
@@ -45,9 +47,6 @@ type Props = {
     inputMessageClasses: ?InputMessageClasses,
     inFocus?: ?boolean,
     shrinkDisabled?: ?boolean,
-    onParseDate: DateParser,
-    onGetFormattedDateStringFromMoment: DateStringFromMomentFormatter,
-    moment: any,
     dateCalendarTheme: Object,
     dateCalendarWidth?: ?any,
     datePopupAnchorPosition?: ?string,
@@ -56,40 +55,70 @@ type Props = {
     dateCalendarOnConvertValueOut: (value: string) => string,
     datePlaceholder?: ?string,
     disabled?: ?boolean,
+    dateFormat: ?string,
+    calendarType: ?string,
+    locale?: string,
 };
-function getCalculatedValues(
-    dateValue: ?string,
-    onParseDate: DateParser,
-    onGetFormattedDateStringFromMoment: DateStringFromMomentFormatter,
-    moment: any,
-): AgeValues {
-    const parseData = dateValue && onParseDate(dateValue);
-    if (!parseData || !parseData.isValid) {
+
+function getCalculatedValues(dateValue: ?string, calendarType: string, dateFormat: string): AgeValues {
+    if (!isCalendarSupported(mapDhis2CalendarToTemporal[calendarType])) {
+        const nowIso = Temporal.Now.plainDateISO();
+
+        const ageIso = convertToIso8601(dateValue, calendarType);
+
+        const diff = nowIso.since(ageIso, {
+            largestUnit: 'years',
+            smallestUnit: 'days',
+        });
+
         return {
             date: dateValue,
-            years: '',
-            months: '',
-            days: '',
+            years: diff.years.toString(),
+            months: diff.months.toString(),
+            days: diff.days.toString(),
         };
     }
-    const now = moment();
-    const age = moment(parseData.momentDate);
+    const now = Temporal.Now.plainDateISO().withCalendar(mapDhis2CalendarToTemporal[calendarType]);
+    const age = stringToTemporal(dateValue, mapDhis2CalendarToTemporal[calendarType], dateFormat);
 
-    const years = now.diff(age, 'years');
-    age.add(years, 'years');
+    if (calendarType === 'ethiopian') {
+        if (!age) {
+            return {
+                date: dateValue,
+                years: '',
+                months: '',
+                days: '',
+            };
+        }
+        const ethiopianNow = now.with({ year: now.eraYear });
+        const ethiopianAge = age.with({ year: age.eraYear });
 
-    const months = now.diff(age, 'months');
-    age.add(months, 'months');
+        const diff = ethiopianNow.since(ethiopianAge, {
+            largestUnit: 'years',
+            smallestUnit: 'days',
+        });
 
-    const days = now.diff(age, 'days');
+        return {
+            date: temporalToString(ethiopianAge, dateFormat),
+            years: diff.years.toString(),
+            months: diff.months.toString(),
+            days: diff.days.toString(),
+        };
+    }
+
+    const diff = now.since(age, {
+        largestUnit: 'years',
+        smallestUnit: 'days',
+    });
 
     return {
-        date: onGetFormattedDateStringFromMoment(parseData.momentDate),
-        years: years.toString(),
-        months: months.toString(),
-        days: days.toString(),
+        date: temporalToString(age, dateFormat),
+        years: diff.years.toString(),
+        months: diff.months.toString(),
+        days: diff.days.toString(),
     };
 }
+
 
 const messageTypeClass = {
     error: 'innerInputError',
@@ -121,8 +150,9 @@ class D2AgeFieldPlain extends Component<Props> {
     }
 
     handleNumberBlur = (values: AgeValues) => {
-        const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
-
+        const { onRemoveFocus, calendarType, dateFormat } = this.props;
+        const calendar = calendarType || 'iso8601';
+        const format = dateFormat || 'YYYY-MM-DD';
         onRemoveFocus && onRemoveFocus();
         if (D2AgeFieldPlain.isEmptyNumbers(values)) {
             this.props.onBlur(values.date ? { date: values.date } : null);
@@ -134,27 +164,53 @@ class D2AgeFieldPlain extends Component<Props> {
             return;
         }
 
-        const momentDate = moment(undefined, undefined, true);
-        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.years), 'years');
-        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.months), 'months');
-        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.days), 'days');
-        const calculatedValues = getCalculatedValues(
-            onGetFormattedDateStringFromMoment(momentDate),
-            onParseDate,
-            onGetFormattedDateStringFromMoment,
-            moment,
-        );
+        if (!isCalendarSupported(mapDhis2CalendarToTemporal[calendar])) {
+            const nowIso = Temporal.Now.plainDateISO();
+            const calculatedDateIso = nowIso.subtract({
+                years: D2AgeFieldPlain.getNumberOrZero(values.years),
+                months: D2AgeFieldPlain.getNumberOrZero(values.months),
+                days: D2AgeFieldPlain.getNumberOrZero(values.days),
+            });
+
+            const localCalculatedDate = convertFromIso8601(calculatedDateIso.toString(), calendar);
+            const dateString = temporalToString(localCalculatedDate, format);
+            const calculatedValues = getCalculatedValues(dateString, calendar, format);
+            this.props.onBlur(calculatedValues);
+            return;
+        }
+
+        const now = Temporal.Now.plainDateISO().withCalendar(mapDhis2CalendarToTemporal[calendar]);
+        const calculatedDate = now.subtract({
+            years: D2AgeFieldPlain.getNumberOrZero(values.years),
+            months: D2AgeFieldPlain.getNumberOrZero(values.months),
+            days: D2AgeFieldPlain.getNumberOrZero(values.days),
+        });
+        const dateString = temporalToString(calculatedDate, format);
+        const calculatedValues = getCalculatedValues(dateString, calendar, format);
         this.props.onBlur(calculatedValues);
     }
 
     handleDateBlur = (date: ?string, options: ?ValidationOptions) => {
-        const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
+        const { onRemoveFocus, calendarType, dateFormat } = this.props;
+        const calendar = calendarType || 'iso8601';
+        const format = dateFormat || 'YYYY-MM-DD';
         onRemoveFocus && onRemoveFocus();
-        const calculatedValues = date ? getCalculatedValues(
-            date,
-            onParseDate,
-            onGetFormattedDateStringFromMoment,
-            moment) : null;
+        const isDateValid = options && !options.error;
+        if (!date) {
+            this.props.onBlur(null, options);
+            return;
+        }
+        if (!isDateValid) {
+            const calculatedValues = {
+                date,
+                years: '',
+                months: '',
+                days: '',
+            };
+            this.props.onBlur(calculatedValues, options);
+            return;
+        }
+        const calculatedValues = getCalculatedValues(date, calendar, format);
         this.props.onBlur(calculatedValues, options);
     }
 
@@ -181,8 +237,6 @@ class D2AgeFieldPlain extends Component<Props> {
             datePopupAnchorPosition,
             dateCalendarTheme,
             dateCalendarLocale,
-            moment,
-            onParseDate,
             ...passOnProps } = this.props;
         return (
             <div className={defaultClasses.ageNumberInputContainer}>
@@ -208,8 +262,6 @@ class D2AgeFieldPlain extends Component<Props> {
             shrinkDisabled,
             dateCalendarWidth,
             datePlaceholder,
-            moment,
-            onParseDate,
             ...passOnProps
         } = this.props;
 

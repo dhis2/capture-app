@@ -2,6 +2,7 @@
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateTimeFieldForForm } from '../../Components';
+import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 
@@ -17,6 +18,8 @@ export const getDateTimeFieldConfig = (metaData: MetaDataElement, options: Objec
         shrinkDisabled: options.formHorizontal,
         calendarWidth: options.formHorizontal ? '250px' : '350px',
         popupAnchorPosition: getCalendarAnchorPosition(options.formHorizontal),
+        calendarType: systemSettingsStore.get().calendar,
+        dateFormat: systemSettingsStore.get().dateFormat,
     }, options, metaData);
 
     return createFieldConfig({

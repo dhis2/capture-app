@@ -12,7 +12,7 @@ const like = (value: any, elementId: string) => `${elementId}:like:${escapeStrin
 
 
 function convertRange(value: RangeValue, elementId: string) {
-    return `${elementId}:ge:${value.from}:le:${value.to}`;
+    return `${elementId}:ge:${escapeString(String(value.from))}:le:${escapeString(String(value.to))}`;
 }
 
 const valueConvertersForType = {

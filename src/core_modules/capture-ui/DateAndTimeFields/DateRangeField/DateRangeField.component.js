@@ -15,12 +15,18 @@ type DateRangeValue = {
     to?: ?string,
 }
 
+type State = {
+    fromError: { error: ?string, errorCode: ?string },
+    toError: { error: ?string, errorCode: ?string },
+};
+
 type Props = {
     value: DateRangeValue,
     onBlur: (value: ?DateRangeValue, opts: any) => void,
     onChange: (value: ?DateRangeValue) => void,
     classes: Object,
     innerMessage?: ?Object,
+    locale?: string,
 }
 
 const inputKeys = {
@@ -29,11 +35,15 @@ const inputKeys = {
 };
 
 
-export class DateRangeField extends React.Component<Props> {
+export class DateRangeField extends React.Component<Props, State> {
     touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
+        this.state = {
+            fromError: { error: null, errorCode: null },
+            toError: { error: null, errorCode: null },
+        };
     }
 
     getValue = () => this.props.value || {};
@@ -52,25 +62,41 @@ export class DateRangeField extends React.Component<Props> {
         });
     }
 
-    handleFromBlur = (value: string) => {
+    handleFromBlur = (value: string, options: ?Object) => {
         this.touchedFields.add('fromTouched');
-        const currentValue = this.getValue();
-        this.handleBlur({
-            from: value,
-            to: currentValue.to,
-        }, !!currentValue.to);
+        this.setState(() => ({
+            fromError: { error: options?.error, errorCode: options?.errorCode },
+        }), () => {
+            const currentValue = this.getValue();
+            this.handleBlur({
+                from: value,
+                to: currentValue.to,
+            }, {
+                touched: !!currentValue.to,
+                fromError: this.state.fromError,
+                toError: this.state.toError,
+            });
+        });
     }
 
-    handleToBlur = (value: string) => {
+    handleToBlur = (value: string, options: ?Object) => {
         this.touchedFields.add('toTouched');
-        const currentValue = this.getValue();
-        this.handleBlur({
-            from: currentValue.from,
-            to: value,
-        }, !!currentValue.from);
+        this.setState(() => ({
+            toError: { error: options?.error, errorCode: options?.errorCode },
+        }), () => {
+            const currentValue = this.getValue();
+            this.handleBlur({
+                from: currentValue.from,
+                to: value,
+            }, {
+                touched: !!currentValue.to,
+                fromError: this.state.fromError,
+                toError: this.state.toError,
+            });
+        });
     }
 
-    handleBlur = (value: DateRangeValue, otherFieldHasValue: boolean) => {
+    handleBlur = (value: DateRangeValue, options: ?Object) => {
         const touched = this.touchedFields.size === 2;
         if (!value.from && !value.to) {
             this.props.onBlur(undefined, {
@@ -79,7 +105,9 @@ export class DateRangeField extends React.Component<Props> {
             return;
         }
         this.props.onBlur(value, {
-            touched: touched || otherFieldHasValue,
+            touched: touched || options?.touched,
+            fromError: options?.fromError,
+            toError: options?.toError,
         });
     }
 

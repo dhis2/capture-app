@@ -25,6 +25,7 @@ import { withCleanUp } from './withCleanUp';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 import { stageMainDataIds } from './getDataEntryPropsToInclude';
 import { withTransformPropName } from '../../../../HOC';
+import { systemSettingsStore } from '../../../../metaDataMemoryStores';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -219,6 +220,8 @@ const getReportDateSettingsFn = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarType: systemSettingsStore.get().calendar,
+            dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => stageMainDataIds.OCCURRED_AT,
         getValidatorContainers: () => getEventDateValidatorContainers(),

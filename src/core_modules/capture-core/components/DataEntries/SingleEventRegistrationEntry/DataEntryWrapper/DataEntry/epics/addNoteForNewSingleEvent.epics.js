@@ -2,10 +2,7 @@
 import uuid from 'd2-utilizr/lib/uuid';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
-
 import moment from 'moment';
-import { convertValue as convertListValue } from '../../../../../../converters/clientToList';
-import { dataElementTypes } from '../../../../../../metaData';
 import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
@@ -14,7 +11,7 @@ import {
     addNote,
 } from '../../../../../DataEntry/actions/dataEntry.actions';
 
-export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE),
         switchMap((action) => {
@@ -28,7 +25,6 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: Re
             }).then((user) => {
                 const { userName, firstName, surname } = user;
                 const clientId = uuid();
-                const storedAt = moment().toISOString();
                 const note = {
                     value: payload.note,
                     createdBy: {
@@ -37,7 +33,7 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable, store: Re
                         uid: clientId,
                     },
                     storedBy: userName,
-                    storedAt: convertListValue(storedAt, dataElementTypes.DATETIME),
+                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                     clientId: uuid(),
                 };
 

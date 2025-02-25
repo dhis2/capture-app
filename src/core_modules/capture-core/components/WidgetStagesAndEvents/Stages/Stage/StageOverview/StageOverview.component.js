@@ -12,6 +12,8 @@ import { statusTypes } from 'capture-core/events/statusTypes';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
+import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
+import { dataElementTypes } from '../../../../../metaData';
 
 const styles = {
     container: {
@@ -71,11 +73,12 @@ const getLastUpdatedAt = (events, fromServerDate) => {
 
     if (lastEventUpdated) {
         const { updatedAt } = lastEventUpdated;
+        const localDateTime: string = (convertValueClientToView(updatedAt, dataElementTypes.DATETIME): any);
         return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
             ? (
                 <>
                     {i18n.t('Last updated')}&nbsp;
-                    <Tooltip content={fromServerDate(updatedAt).toLocaleString()}>
+                    <Tooltip content={localDateTime}>
                         {moment(fromServerDate(updatedAt)).fromNow()}
                     </Tooltip>
                 </>

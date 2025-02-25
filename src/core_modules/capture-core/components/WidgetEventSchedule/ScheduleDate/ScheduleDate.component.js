@@ -1,8 +1,8 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { spacers, colors } from '@dhis2/ui';
+import withStyles from '@material-ui/core/styles/withStyles';
 import {
     DateField,
     withDefaultFieldContainer,
@@ -10,12 +10,11 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from 'capture-core/components/FormFields/New';
-
-import type { Props } from './scheduleDate.types';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
 import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
-
+import type { Props } from './scheduleDate.types';
 
 const ScheduleDateField = withDefaultFieldContainer()(
     withLabel({
@@ -75,6 +74,8 @@ const ScheduleDatePlain = ({
                     }
                     setScheduleDate(e);
                 }}
+                calendarType={systemSettingsStore.get().calendar}
+                dateFormat={systemSettingsStore.get().dateFormat}
             />
             :
             <div className={classes.fieldLabel}>

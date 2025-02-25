@@ -7,6 +7,6 @@ export type Note = {
         firstName: string,
         surname: string,
     },
-    storedDate: string,
+    storedAt: string,
     value: string,
 };

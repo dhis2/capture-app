@@ -5,8 +5,6 @@ import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { map, switchMap } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
-import { convertValue as convertListValue } from '../../converters/clientToList';
-import { dataElementTypes } from '../../metaData';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventNote.actions';
 
 import {
@@ -26,7 +24,7 @@ const createServerData = (eventId, note, useNewEndpoint) => {
     return { event: eventId, notes: [{ value: note }] };
 };
 
-export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
         switchMap((action) => {
@@ -52,13 +50,12 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore,
                         surname,
                         uid: clientId,
                     },
-                    lastUpdated: moment().toISOString(),
                     storedBy: userName,
-                    storedAt: moment().toISOString(),
+                    storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
                 };
                 const formNote = {
                     ...clientNote,
-                    storedAt: convertListValue(clientNote.storedAt, dataElementTypes.DATETIME),
+                    storedAt: clientNote.storedAt,
                     createdBy: {
                         firstName,
                         surname,

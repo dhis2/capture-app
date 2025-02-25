@@ -37,6 +37,7 @@ class DateFieldPlain extends React.Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIDateField
                 placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
+                locale={systemSettingsStore.get().uiLocale}
                 {...passOnProps}
             />
         );

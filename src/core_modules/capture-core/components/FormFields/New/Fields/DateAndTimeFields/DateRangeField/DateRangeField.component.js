@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { DateRangeField as UIDateRangeField } from 'capture-ui';
+import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
     innerInputError: {
@@ -44,6 +45,7 @@ const DateRangeFieldPlain = (props: Props) => {
     return (
         <UIDateRangeField
             {...passOnProps}
+            locale={systemSettingsStore.get().uiLocale}
         />
     );
 };
