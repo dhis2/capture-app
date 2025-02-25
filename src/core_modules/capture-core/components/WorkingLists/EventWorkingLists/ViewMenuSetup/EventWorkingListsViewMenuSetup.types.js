@@ -7,6 +7,7 @@ type ExtractedProps = $ReadOnly<{|
     downloadRequest: { url: string, queryParams: ?Object },
     program: Program,
     programStageId: string,
+    lastIdDeleted?: string,
 |}>;
 
 type RestProps = $Rest<EventWorkingListsTemplateSetupOutputProps, ExtractedProps>;
