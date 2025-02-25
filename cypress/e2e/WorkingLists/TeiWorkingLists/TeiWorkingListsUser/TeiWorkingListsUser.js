@@ -25,9 +25,7 @@ Given('you open the main page with child programe context', () => {
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
-    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="template-selector-create-list"]')
-        .click();
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 });
 
 Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
@@ -35,9 +33,7 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
-    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="template-selector-create-list"]')
-        .click();
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tei-working-lists"]')
         .within(() => {
@@ -743,9 +739,7 @@ Then('the program stage custom working list filters are loaded', () => {
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {
-    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="template-selector-create-list"]')
-        .click();
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tei-working-lists"]')
         .within(() => {
