@@ -1,3 +1,10 @@
+# [101.29.0](https://github.com/dhis2/capture-app/compare/v101.28.2...v101.29.0) (2025-02-26)
+
+
+### Features
+
+* [DHIS2-18310] enable non-Gregorian calendars in views & lists & forms ([#3900](https://github.com/dhis2/capture-app/issues/3900)) ([baec40a](https://github.com/dhis2/capture-app/commit/baec40a5488374523f5e870f3061c4bafc2ebbf8)), closes [#3905](https://github.com/dhis2/capture-app/issues/3905)
+
 ## [101.28.2](https://github.com/dhis2/capture-app/compare/v101.28.1...v101.28.2) (2025-02-26)
 
 
