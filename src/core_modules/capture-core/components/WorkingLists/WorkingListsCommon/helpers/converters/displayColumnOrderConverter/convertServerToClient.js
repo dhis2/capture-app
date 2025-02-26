@@ -6,8 +6,8 @@ export const convertServerToClient = (
         return [];
     }
     return serverColumnOrder.map((columnId: string): string => {
-        if (columnId === 'eventDate') {
-            return 'occurredAt';
+        if (columnId === 'eventOrgUnit') {
+            return 'eventOrgUnitId';
         }
         if (columnId === 'orgUnit') {
             return 'orgUnitId';
