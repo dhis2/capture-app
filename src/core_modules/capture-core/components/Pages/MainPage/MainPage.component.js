@@ -12,10 +12,12 @@ import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
+import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
+import { EventRegistrationEntryWrapper } from '../../EventRegistrationEntryWrapper';
 import {
     InvalidCategoryCombinationForOrgUnitMessage,
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
-import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
+import { DataEntryWidgetOutput } from '../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 
 const getStyles = () => ({
     listContainer: {
@@ -107,9 +109,10 @@ const MainPagePlain = ({
                         // For event programs, show template selector
                         <div className={classes.container}>
                             <div className={classes.half}>
-                                <p>
-                                    This is a placeholder for the event program main page.
-                                </p>
+                                <EventRegistrationEntryWrapper
+                                    dataEntryId="singleEvent"
+                                    selectedScopeId={programId}
+                                />
                             </div>
                             <div className={classes.quarter}>
                                 <TemplateSelector />
