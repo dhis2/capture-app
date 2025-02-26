@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Andres Miguel Rubio, 2025\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -778,6 +778,23 @@ msgstr ""
 "A opção de categoria não é válida para a unidade organizacional selecionada."
 " Por favor, selecione uma combinação válida."
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "Selecione {{category}}."
 
@@ -911,9 +928,6 @@ msgstr "Indicadores"
 msgid "Warnings"
 msgstr "Avisos"
 
-msgid "Show all events"
-msgstr "Mostrar todos os eventos"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "O evento não pôde ser carregado. Você tem certeza que isso existe?"
 
@@ -951,9 +965,6 @@ msgstr "A carregar.."
 
 msgid "An error occurred while loading the form"
 msgstr "Ocorreu um erro ao carregar o formulário"
-
-msgid "Back to all stages and events"
-msgstr "Voltar para todos os palcos e eventos"
 
 msgid "Possible duplicates found"
 msgstr "Possíveis duplicatas encontradas"
@@ -1325,6 +1336,12 @@ msgstr "Vá para pagina “Agendar” para reagendar este evento"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "A data agendada não pode ser alterada para eventos {{ eventStatus }}"
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Evento concluído"
 
@@ -1466,8 +1483,8 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Escolha um {{linkableStageLabel}}"
 
-msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }} Não é repetivo"
+msgid "{{ linkableStageLabel }} can only have one event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} Não tem eventos associados"
@@ -1478,10 +1495,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Relacionamentos ambíguos, contacte o administrador do sistema"
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr "Evento associado"
+
 msgid "Enter details now"
 msgstr "Introduzir dados agora"
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1596,9 +1625,6 @@ msgstr "Não tem acesso para remover a ligação e eliminar o evento ligado"
 msgid "An error occurred while loading the widget."
 msgstr "Ocorreu um erro ao carregar o widget."
 
-msgid "Linked event"
-msgstr "Evento associado"
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1615,6 +1641,9 @@ msgstr "Registo de mudanças"
 msgid "No changes to display"
 msgstr "Sem alterações no ecrã"
 
+msgid "Data item"
+msgstr "Item de dados"
+
 msgid "Updated"
 msgstr "Actualizado"
 
@@ -1627,11 +1656,17 @@ msgstr "Apagado"
 msgid "Date"
 msgstr "Encontro"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "Utilizador"
 
-msgid "Data item"
-msgstr "Item de dados"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr "Alterar"

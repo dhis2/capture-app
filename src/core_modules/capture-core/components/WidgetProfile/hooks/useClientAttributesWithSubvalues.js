@@ -41,7 +41,7 @@ const MULIT_TEXT_WITH_NO_OPTIONS_SET =
 
 export const useClientAttributesWithSubvalues = (teiId: string, program: InputProgramData, trackedEntityInstanceAttributes: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
-    const { baseUrl, apiVersion, serverVersion: { minor } } = useConfig();
+    const { baseUrl, apiVersion } = useConfig();
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
 
     const [listAttributes, setListAttributes] = useState([]);
@@ -68,7 +68,6 @@ export const useClientAttributesWithSubvalues = (teiId: string, program: InputPr
                                 absoluteApiPath,
                             },
                             querySingleResource,
-                            minorServerVersion: minor,
                         });
                     } else {
                         // $FlowFixMe dataElementTypes flow error
@@ -98,7 +97,7 @@ export const useClientAttributesWithSubvalues = (teiId: string, program: InputPr
 
             setListAttributes(computedAttributes);
         }
-    }, [program, trackedEntityInstanceAttributes, dataEngine, teiId, absoluteApiPath, minor]);
+    }, [program, trackedEntityInstanceAttributes, dataEngine, teiId, absoluteApiPath]);
 
     useEffect(() => {
         getListAttributes();

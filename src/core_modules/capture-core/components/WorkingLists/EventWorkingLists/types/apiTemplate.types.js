@@ -72,4 +72,5 @@ export type CommonQueryData = {|
     categories: ?Object,
     programStageId?: ?string,
     ouMode?: ?string,
+    orgUnitMode?: ?string,
 |};

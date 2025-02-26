@@ -22,7 +22,7 @@ type ReturnData = Array<InputRelationshipData>;
 
 export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Props) => {
     const query = useMemo(() => {
-        const supportForFeature = featureAvailable(FEATURES.newRelationshipQueryParam);
+        const supportForFeature = featureAvailable(FEATURES.newPagingQueryParam);
 
         return {
             resource: 'tracker/relationships',

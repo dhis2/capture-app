@@ -49,7 +49,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
         selectedOrgUnitId: orgUnitId,
     });
-    const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
+    const { trackedEntityInstanceAttributes, loading: isTrackedEntityAttributesLoading } = useTrackedEntityInstances(teiId, programId);
     // $FlowFixMe
     const trackedEntityType = program?.trackedEntityType;
     const teiDisplayName =
@@ -76,7 +76,7 @@ export const NewPage: ComponentType<{||}> = () => {
         useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     const ready: boolean =
-        useSelector(({ activePage }) => (!activePage.isDataEntryLoading));
+        useSelector(({ activePage }) => (!activePage.isDataEntryLoading)) && !isTrackedEntityAttributesLoading;
 
     const currentScopeId: string =
         useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);

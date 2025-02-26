@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2025\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
@@ -919,9 +919,6 @@ msgstr "Indicadores"
 msgid "Warnings"
 msgstr "Advertencias"
 
-msgid "Show all events"
-msgstr "Mostrar todos los eventos"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
 
@@ -958,9 +955,6 @@ msgstr ""
 
 msgid "An error occurred while loading the form"
 msgstr ""
-
-msgid "Back to all stages and events"
-msgstr "Volver a todas las etapas y eventos"
 
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados."
@@ -1304,6 +1298,12 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Evento completado"
 
@@ -1433,7 +1433,7 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr ""
 
-msgid "{{ linkableStageLabel }} is not repeatable"
+msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
@@ -1445,10 +1445,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr ""
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1553,9 +1565,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "Linked event"
-msgstr ""
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1570,6 +1579,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Data item"
+msgstr ""
+
 msgid "Updated"
 msgstr ""
 
@@ -1582,10 +1594,16 @@ msgstr ""
 msgid "Date"
 msgstr "Fecha"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr ""
 
-msgid "Data item"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
 msgstr ""
 
 msgid "Change"

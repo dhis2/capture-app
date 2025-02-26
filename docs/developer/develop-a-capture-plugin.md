@@ -7,6 +7,8 @@ id: develop-a-capture-plugin
 
 Developing a capture plugin is almost the same as developing a regular DHIS2 custom app. However, there are some differences in how you structure your plugin and how you configure it to work with the DHIS2 Capture app. These are outlined in the few steps below.
 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/CkB0aHAuUU8?si=VByG77XN3vnPjdaN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Step 1: Create a new DHIS2 custom app
 
 To create a new DHIS2 custom app, you can use the D2 CLI.

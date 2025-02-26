@@ -2,6 +2,7 @@
 import React, { type ComponentType, useEffect } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { DividerHorizontal as Divider } from 'capture-ui';
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import { DataSection } from '../DataSection';
@@ -15,10 +16,16 @@ import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 
-const styles = () => ({
+const styles = theme => ({
     wrapper: {
         paddingLeft: spacersNum.dp16,
         minWidth: '300px',
+    },
+    evenNumbersRecords: {
+        backgroundColor: theme.palette.grey.lightest,
+    },
+    divider: {
+        backgroundColor: theme.palette.dividerForm,
     },
 });
 
@@ -76,12 +83,6 @@ const WidgetEventSchedulePlain = ({
                     dataTest="schedule-section"
                     sectionName={i18n.t('Schedule info')}
                 >
-                    <ScheduleOrgUnit
-                        orgUnit={orgUnit}
-                        onSelectOrgUnit={onSelectOrgUnit}
-                        onDeselectOrgUnit={onDeselectOrgUnit}
-                        {...passOnProps}
-                    />
                     <ScheduleDate
                         programId={programId}
                         stageId={stageId}
@@ -91,6 +92,15 @@ const WidgetEventSchedulePlain = ({
                         serverSuggestedScheduleDate={serverSuggestedScheduleDate}
                         {...passOnProps}
                     />
+                    <Divider className={classes.divider} />
+                    <div className={classes.evenNumbersRecords}>
+                        <ScheduleOrgUnit
+                            orgUnit={orgUnit}
+                            onSelectOrgUnit={onSelectOrgUnit}
+                            onDeselectOrgUnit={onDeselectOrgUnit}
+                            {...passOnProps}
+                        />
+                    </div>
                 </DataSection>
                 {programCategory && <DataSection
                     dataTest="category-options-section"

@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { from } from 'rxjs';
-import { errorCreator, FEATURES, hasAPISupportForFeature } from 'capture-core-utils';
+import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { workingListsCommonActionTypes, fetchTemplatesSuccess, fetchTemplatesError } from '../../../WorkingListsCommon';
@@ -31,14 +31,14 @@ const mergeTempletes = (APItemplates, selectedTemplateId) => {
 export const retrieveAllTemplatesEpic = (
     action$: InputObservable,
     store: ReduxStore,
-    { querySingleResource, serverVersion: { minor: minorVersion } }: ApiUtils,
+    { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(
             ({ payload: { workingListsType } }) =>
                 workingListsType === TEI_WORKING_LISTS_TYPE &&
-                hasAPISupportForFeature(minorVersion, FEATURES.storeProgramStageWorkingList),
+                featureAvailable(FEATURES.storeProgramStageWorkingList),
         ),
         concatMap(({ payload: { storeId, programId, selectedTemplateId } }) => {
             const promise = Promise.all([
@@ -69,14 +69,14 @@ export const retrieveAllTemplatesEpic = (
 export const retrieveTEITemplatesEpic = (
     action$: InputObservable,
     store: ReduxStore,
-    { querySingleResource, serverVersion: { minor: minorVersion } }: ApiUtils,
+    { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(
             ({ payload: { workingListsType } }) =>
                 workingListsType === TEI_WORKING_LISTS_TYPE &&
-                    !hasAPISupportForFeature(minorVersion, FEATURES.storeProgramStageWorkingList),
+                    !featureAvailable(FEATURES.storeProgramStageWorkingList),
         ),
         concatMap(({ payload: { storeId, programId, selectedTemplateId } }) => {
             const promise = getTEITemplates(programId, querySingleResource)
