@@ -69,6 +69,7 @@ export const updateTemplateEpic = (
             criteria: eventQueryCriteria,
             programId,
             storeId,
+            callBacks,
         } }) => {
             const eventFilterData = {
                 name,
@@ -89,6 +90,11 @@ export const updateTemplateEpic = (
             }).then(() => {
                 const isActiveTemplate =
                     store.value.workingListsTemplates[storeId].selectedTemplateId === id;
+
+                // Call the onChangeTemplate callback if provided
+                if (callBacks && callBacks.onChangeTemplate) {
+                    callBacks.onChangeTemplate(id);
+                }
 
                 return updateTemplateSuccess(
                     id,
@@ -145,6 +151,7 @@ export const addTemplateEpic = (
                 clientId,
                 programId,
                 storeId,
+                callBacks,
             } = action.payload;
 
             const eventFilterData = {
@@ -160,7 +167,14 @@ export const addTemplateEpic = (
             }).then((result) => {
                 const isActiveTemplate =
                     store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                return addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate });
+                const templateId = result.response.uid;
+
+                // Call the onChangeTemplate callback if provided
+                if (callBacks && callBacks.onChangeTemplate) {
+                    callBacks.onChangeTemplate(templateId);
+                }
+
+                return addTemplateSuccess(templateId, clientId, { storeId, isActiveTemplate });
             }).catch((error) => {
                 log.error(
                     errorCreator('could not add template')({
@@ -191,21 +205,28 @@ export const deleteTemplateEpic = (
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
-        concatMap(({ payload: { template, storeId } }) => {
+        concatMap(({ payload: { template, storeId, callBacks } }) => {
             const requestPromise = mutate({
                 resource: 'eventFilters',
                 id: template.id,
                 type: 'delete',
-            }).then(() => deleteTemplateSuccess(template, storeId))
-                .catch((error) => {
-                    log.error(
-                        errorCreator('could not delete template')({
-                            error,
-                            template,
-                        }),
-                    );
-                    return deleteTemplateError(template, storeId);
-                });
+            }).then(() => {
+                // Call onChangeTemplate when a template is deleted, passing the default template ID
+                if (callBacks && callBacks.onChangeTemplate) {
+                    const programId = template.id.split('-')[0];
+                    callBacks.onChangeTemplate(`${programId}-default`);
+                }
+
+                return deleteTemplateSuccess(template, storeId);
+            }).catch((error) => {
+                log.error(
+                    errorCreator('could not delete template')({
+                        error,
+                        template,
+                    }),
+                );
+                return deleteTemplateError(template, storeId);
+            });
 
             return from(requestPromise).pipe(
                 takeUntil(

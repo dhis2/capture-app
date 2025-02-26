@@ -26,4 +26,5 @@ export type EventWorkingListsDataSourceSetupOutputProps = {|
     columns: EventWorkingListsColumnConfigs,
     dataSource?: DataSource,
     rowIdKey: string,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
 |};

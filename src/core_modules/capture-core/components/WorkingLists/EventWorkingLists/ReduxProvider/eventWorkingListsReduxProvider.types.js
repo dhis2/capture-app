@@ -44,7 +44,9 @@ export type Props = $ReadOnly<{|
     storeId: string,
     program: Program,
     programStage: ProgramStage,
-    orgUnitId: string
+    orgUnitId: string,
+    selectedTemplateId?: string,
+    onChangeTemplate?: (selectedTemplateId?: string) => void
 |}>;
 
 export type EventWorkingListsReduxOutputProps = {|
