@@ -58,13 +58,13 @@ const NewTrackedEntityRelationshipPlain = ({
         teiId,
         onMutate: () => onSave && onSave(),
     });
-    
+
     // Add a ref to track the current mode and force remounting when switching
     const modeRef = useRef({
         currentMode: null,
         timestamp: Date.now(),
     });
-    
+
     // Update timestamp when step changes to ensure remounting
     useEffect(() => {
         if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.id) {

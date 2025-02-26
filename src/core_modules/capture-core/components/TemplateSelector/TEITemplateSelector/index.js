@@ -1,2 +1,2 @@
 // @flow
-export { TEITemplateSelector } from './TEITemplateSelector.container'; 
+export { TEITemplateSelector } from './TEITemplateSelector.container';

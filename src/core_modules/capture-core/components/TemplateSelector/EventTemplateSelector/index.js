@@ -1,2 +1,2 @@
 // @flow
-export { EventTemplateSelector } from './EventTemplateSelector.container'; 
+export { EventTemplateSelector } from './EventTemplateSelector.container';

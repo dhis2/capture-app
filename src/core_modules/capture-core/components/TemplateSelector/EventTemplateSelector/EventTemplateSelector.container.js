@@ -27,4 +27,4 @@ export const EventTemplateSelector = () => {
             onCreateTemplate={onCreateTemplate}
         />
     ) : null;
-}; 
+};
