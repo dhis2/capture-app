@@ -1,3 +1,10 @@
+## [101.28.2](https://github.com/dhis2/capture-app/compare/v101.28.1...v101.28.2) (2025-02-26)
+
+
+### Bug Fixes
+
+* [DHIS2-18714] add 'Missing search criteria' modal when adding a relationship ([#3973](https://github.com/dhis2/capture-app/issues/3973)) ([471b56e](https://github.com/dhis2/capture-app/commit/471b56ee25c63671a5900ebb1b14be43f373c8b2))
+
 ## [101.28.1](https://github.com/dhis2/capture-app/compare/v101.28.0...v101.28.1) (2025-02-25)
 
 
