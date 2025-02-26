@@ -36,7 +36,11 @@ function convertDateTime(formValue: DateTimeValue): ?string {
 }
 
 function convertDate(dateValue: string) {
-    return convertLocalToIsoCalendar(dateValue);
+    try {
+        return convertLocalToIsoCalendar(dateValue);
+    } catch (error) {
+        return '';
+    }
 }
 
 function convertTime(timeValue: string) {
