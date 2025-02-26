@@ -1,3 +1,10 @@
+## [101.29.1](https://github.com/dhis2/capture-app/compare/v101.29.0...v101.29.1) (2025-02-26)
+
+
+### Bug Fixes
+
+* [DHIS2-18855] add error logging for program indicators missing expressions ([#3981](https://github.com/dhis2/capture-app/issues/3981)) ([7f356d5](https://github.com/dhis2/capture-app/commit/7f356d53ed38dad120e1ec3d17c0987cd135a29c))
+
 # [101.29.0](https://github.com/dhis2/capture-app/compare/v101.28.2...v101.29.0) (2025-02-26)
 
 
