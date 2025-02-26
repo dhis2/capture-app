@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState, type ComponentType, useMemo } from 'react';
+import React, { useCallback, useState, type ComponentType, useMemo, useRef, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
@@ -58,7 +58,31 @@ const NewTrackedEntityRelationshipPlain = ({
         teiId,
         onMutate: () => onSave && onSave(),
     });
-
+    
+    // Add a ref to track the current mode and force remounting when switching
+    const modeRef = useRef({
+        currentMode: null,
+        timestamp: Date.now(),
+    });
+    
+    // Update timestamp when step changes to ensure remounting
+    useEffect(() => {
+        if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.id) {
+            if (modeRef.current.currentMode !== 'search') {
+                modeRef.current = {
+                    currentMode: 'search',
+                    timestamp: Date.now(),
+                };
+            }
+        } else if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.NEW_LINKED_ENTITY.id) {
+            if (modeRef.current.currentMode !== 'register') {
+                modeRef.current = {
+                    currentMode: 'register',
+                    timestamp: Date.now(),
+                };
+            }
+        }
+    }, [currentStep.id]);
 
     const onLinkToTrackedEntityFromSearch = useCallback(
         (linkedTrackedEntityId: string, attributes?: { [attributeId: string]: string }) => {
@@ -215,10 +239,15 @@ const NewTrackedEntityRelationshipPlain = ({
             }: LinkedEntityMetadata = selectedLinkedEntityMetadata;
 
             if (renderTrackedEntitySearch) {
-                return renderTrackedEntitySearch(
-                    linkedEntityTrackedEntityTypeId,
-                    linkedEntityProgramId,
-                    onLinkToTrackedEntityFromSearch,
+                // Use the timestamp from modeRef to ensure consistent remounting
+                return (
+                    <div key={`search-${modeRef.current.timestamp}`}>
+                        {renderTrackedEntitySearch(
+                            linkedEntityTrackedEntityTypeId,
+                            linkedEntityProgramId,
+                            onLinkToTrackedEntityFromSearch,
+                        )}
+                    </div>
                 );
             }
         }
@@ -231,12 +260,17 @@ const NewTrackedEntityRelationshipPlain = ({
             }: LinkedEntityMetadata = selectedLinkedEntityMetadata;
 
             if (renderTrackedEntityRegistration) {
-                return renderTrackedEntityRegistration(
-                    linkedEntityTrackedEntityTypeId,
-                    linkedEntityProgramId,
-                    onLinkToTrackedEntityFromRegistration,
-                    onLinkToTrackedEntityFromSearch,
-                    onCancel,
+                // Use the timestamp from modeRef to ensure consistent remounting
+                return (
+                    <div key={`registration-${modeRef.current.timestamp}`}>
+                        {renderTrackedEntityRegistration(
+                            linkedEntityTrackedEntityTypeId,
+                            linkedEntityProgramId,
+                            onLinkToTrackedEntityFromRegistration,
+                            onLinkToTrackedEntityFromSearch,
+                            onCancel,
+                        )}
+                    </div>
                 );
             }
         }

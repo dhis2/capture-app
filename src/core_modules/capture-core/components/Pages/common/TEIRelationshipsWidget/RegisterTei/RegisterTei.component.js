@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useContext, useCallback } from 'react';
+import React, { type ComponentType, useContext, useCallback, useEffect } from 'react';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -69,6 +69,11 @@ const RegisterTeiPlain = ({
     classes,
 }: ComponentProps) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
+
+    useEffect(() => {
+        // This empty dependency array ensures the effect runs only on mount
+        // This forces the component to reinitialize when it's remounted with a new key
+    }, []);
 
     const renderDuplicatesCardActions = useCallback(({ item }) => (
         <CardListButton

@@ -56,9 +56,13 @@ const MainPagePlain = ({
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
         const noOrgUnitSelected = !orgUnitId;
-        const isEventProgram = !trackedEntityTypeId;
-        return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
-    }, [programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId]);
+
+        // Only show the main page for event programs if displayFrontPageList is true
+        return noProgramSelected ||
+               noOrgUnitSelected ||
+               displayFrontPageList ||
+               selectedTemplateId;
+    }, [programId, orgUnitId, displayFrontPageList, selectedTemplateId]);
 
     return (
         <>
@@ -88,14 +92,31 @@ const MainPagePlain = ({
                     )}
                 </>
             ) : (
-                <div className={classes.container}>
-                    <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
-                        <SearchBox programId={programId} />
-                    </div>
-                    <div className={classes.quarter}>
-                        <TemplateSelector />
-                    </div>
-                </div>
+                <>
+                    {trackedEntityTypeId ? (
+                        // For tracker programs, show search and template selector
+                        <div className={classes.container}>
+                            <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
+                                <SearchBox programId={programId} />
+                            </div>
+                            <div className={classes.quarter}>
+                                <TemplateSelector />
+                            </div>
+                        </div>
+                    ) : (
+                        // For event programs, show template selector
+                        <div className={classes.container}>
+                            <div className={classes.half}>
+                                <p>
+                                    This is a placeholder for the event program main page.
+                                </p>
+                            </div>
+                            <div className={classes.quarter}>
+                                <TemplateSelector />
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
         </>
     );

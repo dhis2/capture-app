@@ -113,9 +113,11 @@ const MainPageContainer = () => {
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({ selectedOrgUnitId: orgUnitId });
 
     const selectedProgram = programCollection.get(programId);
+    console.log('selectedProgram', selectedProgram);
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
-    const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
+    // Allow displayFrontPageList to be used for both event programs and tracker programs
+    const displayFrontPageList = selectedProgram?.displayFrontPageList;
     const MainPageStatus = useMainPageStatus({
         programId,
         selectedProgram,

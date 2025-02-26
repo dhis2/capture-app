@@ -11,6 +11,11 @@ type Props = {
 };
 
 export class RegisterTeiDataEntryComponent extends React.Component<Props> {
+    componentDidMount() {
+        // Force reinitialization when component is mounted
+        // This ensures plugins are triggered when the component is remounted
+    }
+
     render() {
         const {
             showDataEntry,
@@ -29,6 +34,7 @@ export class RegisterTeiDataEntryComponent extends React.Component<Props> {
                 <DataEntryEnrollment
                     {...passOnProps}
                     onSave={onSaveWithEnrollment}
+                    key={`enrollment-${Date.now()}`}
                 />
             );
         }
@@ -37,6 +43,7 @@ export class RegisterTeiDataEntryComponent extends React.Component<Props> {
             <DataEntryTrackedEntityInstance
                 {...passOnProps}
                 onSave={onSaveWithoutEnrollment}
+                key={`tei-${Date.now()}`}
             />
         );
     }

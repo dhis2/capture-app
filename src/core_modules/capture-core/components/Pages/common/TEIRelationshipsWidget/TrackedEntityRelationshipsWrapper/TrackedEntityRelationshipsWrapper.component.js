@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import { selectFindMode } from './TrackedEntityRelationshipsWrapper.actions';
@@ -32,7 +32,21 @@ export const TrackedEntityRelationshipsWrapper = ({
     const { orgUnit } = useCoreOrgUnit(orgUnitId);
     const initialOrgUnit = orgUnit ? { id: orgUnitId, name: orgUnit.name, path: orgUnit.path } : null;
 
+    // Add a ref to track the current mode and timestamp
+    const modeRef = useRef({
+        currentMode: null,
+        timestamp: Date.now(),
+    });
+
     const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
+        // Update the mode ref when the find mode changes
+        if (modeRef.current.currentMode !== findMode) {
+            modeRef.current = {
+                currentMode: findMode,
+                timestamp: Date.now(),
+            };
+        }
+
         dispatch(selectFindMode({
             findMode,
             orgUnit: initialOrgUnit,
@@ -75,6 +89,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                 ) => (
                     <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
                         <RegisterTei
+                            key={`register-${modeRef.current.timestamp}`}
                             suggestedProgramId={suggestedProgramId}
                             onLink={onLinkToTrackedEntityFromSearch}
                             onSave={onLinkToTrackedEntityFromRegistration}
@@ -91,6 +106,7 @@ export const TrackedEntityRelationshipsWrapper = ({
                     onLinkToTrackedEntityFromSearch,
                 ) => (
                     <TeiSearch
+                        key={`search-${modeRef.current.timestamp}`}
                         resultsPageSize={5}
                         id="relationshipTeiSearchWidget"
                         selectedTrackedEntityTypeId={searchTrackedEntityTypeId}
