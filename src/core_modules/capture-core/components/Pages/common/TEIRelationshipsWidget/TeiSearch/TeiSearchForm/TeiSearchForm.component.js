@@ -5,7 +5,14 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { errorCreator } from 'capture-core-utils';
-import { Button } from '@dhis2/ui';
+import {
+    Modal,
+    ModalTitle,
+    ModalContent,
+    ModalActions,
+    ButtonStrip,
+    Button,
+} from '@dhis2/ui';
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import type { SearchGroup } from '../../../../../../metaData';
@@ -33,6 +40,9 @@ const getStyles = (theme: Theme) => ({
         color: theme.palette.error.main,
     },
 });
+type State = {
+    showMissingSearchCriteriaModal: boolean,
+};
 
 type Props = {
     id: string,
@@ -43,6 +53,7 @@ type Props = {
     searchId: string,
     searchGroup: SearchGroup,
     attributesWithValuesCount: number,
+    formsValues: { [formElement: string]: Object},
     classes: {
         container: string,
         searchButtonContainer: string,
@@ -52,9 +63,15 @@ type Props = {
     },
 };
 
-class SearchFormPlain extends React.Component<Props> {
+class SearchFormPlain extends React.Component<Props, State> {
     formInstance: any;
     orgUnitSelectorInstance: SearchOrgUnitSelector;
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            showMissingSearchCriteriaModal: false,
+        };
+    }
 
     static errorMessages = {
         NO_ITEM_SELECTED: 'No item selected',
@@ -65,6 +82,11 @@ class SearchFormPlain extends React.Component<Props> {
         const attributesWithValuesCount = this.props.attributesWithValuesCount;
         const minAttributesRequiredToSearch = this.props.searchGroup.minAttributesRequiredToSearch;
         return attributesWithValuesCount >= minAttributesRequiredToSearch;
+    }
+
+    isSearchViaUniqueIdValid = () => {
+        const searchTerms = this.props.formsValues;
+        return Object.values(searchTerms).some(value => value !== undefined && value !== '');
     }
 
     validateForm() {
@@ -85,6 +107,11 @@ class SearchFormPlain extends React.Component<Props> {
         if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
 
         if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
+
+        if (isValid && this.props.searchGroup.unique) {
+            isValid = this.isSearchViaUniqueIdValid();
+            this.setState({ showMissingSearchCriteriaModal: !isValid });
+        }
 
         return {
             isValid,
@@ -138,6 +165,30 @@ class SearchFormPlain extends React.Component<Props> {
         );
     }
 
+    renderMissingSearchCriteriaModal = () => {
+        const { searchGroup } = this.props;
+        const { showMissingSearchCriteriaModal } = this.state;
+
+        if (!searchGroup.unique || !showMissingSearchCriteriaModal) {
+            return null;
+        }
+        const uniqueTEAName = searchGroup.searchForm.getElements()[0].formName;
+
+        return (
+            <Modal position="middle" onClose={() => this.setState({ showMissingSearchCriteriaModal: false })}>
+                <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
+                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`)}</ModalContent>
+                <ModalActions>
+                    <ButtonStrip end>
+                        <Button onClick={() => this.setState({ showMissingSearchCriteriaModal: false })} primary>
+                            {i18n.t('Back to search')}
+                        </Button>
+                    </ButtonStrip>
+                </ModalActions>
+            </Modal>
+        );
+    }
+
     render() {
         const { searchGroup, classes, id } = this.props;
 
@@ -173,6 +224,7 @@ class SearchFormPlain extends React.Component<Props> {
                     </Button>
                     {!searchGroup.unique && this.renderMinAttributesRequired()}
                 </div>
+                {this.renderMissingSearchCriteriaModal()}
             </div>
         );
     }
