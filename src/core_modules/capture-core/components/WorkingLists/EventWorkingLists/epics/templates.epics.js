@@ -92,8 +92,7 @@ export const updateTemplateEpic = (
                 const isActiveTemplate =
                     store.value.workingListsTemplates[storeId].selectedTemplateId === id;
 
-                // Call the onChangeTemplate callback if provided
-                if (callBacks && callBacks.onChangeTemplate) {
+                if (callBacks?.onChangeTemplate) {
                     callBacks.onChangeTemplate(id);
                 }
 
@@ -170,8 +169,7 @@ export const addTemplateEpic = (
                     store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
                 const templateId = result.response.uid;
 
-                // Call the onChangeTemplate callback if provided
-                if (callBacks && callBacks.onChangeTemplate) {
+                if (callBacks?.onChangeTemplate) {
                     callBacks.onChangeTemplate(templateId);
                 }
 
@@ -214,7 +212,7 @@ export const deleteTemplateEpic = (
             }).then(() => {
                 const { programId } = getLocationQuery();
 
-                if (callBacks && callBacks.onChangeTemplate) {
+                if (callBacks?.onChangeTemplate) {
                     callBacks.onChangeTemplate(`${programId}-default`);
                 }
 
