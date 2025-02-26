@@ -36,3 +36,7 @@ src/locales/
 
 # DHIS2 Platform
 .d2
+
+# Cursor
+.cursorrules
+.cursor
