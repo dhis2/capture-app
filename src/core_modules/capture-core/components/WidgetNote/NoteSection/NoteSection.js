@@ -9,6 +9,8 @@ import { colors, spacersNum, Button, Tooltip } from '@dhis2/ui';
 import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
+import { convertClientToList } from '../../../converters';
+import { dataElementTypes } from '../../../metaData';
 
 const FocusTextField = withFocusSaver()(TextField);
 
@@ -106,7 +108,7 @@ const NoteSectionPlain = ({
                         {createdBy.firstName} {' '} {createdBy.surname}
                     </span>}
                     <span className={cx(classes.headerText, classes.lastUpdated)}>
-                        <Tooltip content={fromServerDate(storedAt).toLocaleString()}>
+                        <Tooltip content={convertClientToList(moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(), dataElementTypes.DATETIME)}>
                             {moment(fromServerDate(storedAt)).fromNow()}
                         </Tooltip>
                     </span>

@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
+import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram, getProgramEventAccess, dataElementTypes } from '../../metaData';
 import { getCachedOrgUnitName } from '../../metadataRetrieval/orgUnitName';
@@ -43,6 +44,7 @@ export const WidgetEventSchedule = ({
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
     });
+    const { fromClientDate } = useTimeZoneConversion();
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
@@ -127,7 +129,7 @@ export const WidgetEventSchedule = ({
     const onAddNote = (note) => {
         const newNote = {
             storedBy: currentUser.userName,
-            storedAt: moment().toISOString(),
+            storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
             value: note,
             createdBy: {
                 firstName: currentUser.firstName,

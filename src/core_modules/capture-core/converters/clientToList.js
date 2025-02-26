@@ -5,26 +5,20 @@ import i18n from '@dhis2/d2-i18n';
 import { Tag } from '@dhis2/ui';
 import { PreviewImage } from 'capture-ui';
 import { dataElementTypes, type DataElement } from '../metaData';
-import { convertMomentToDateFormatString } from '../utils/converters/date';
+import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates, PolygonCoordinates } from '../components/Coordinates';
 import { TooltipOrgUnit } from '../components/Tooltips/TooltipOrgUnit';
 
 function convertDateForListDisplay(rawValue: string): string {
-    const momentDate = moment(rawValue);
-    return convertMomentToDateFormatString(momentDate);
+    return convertIsoToLocalCalendar(rawValue);
 }
 
 function convertDateTimeForListDisplay(rawValue: string): string {
-    const momentDate = moment(rawValue);
-    const dateString = convertMomentToDateFormatString(momentDate);
+    const momentDate = moment(rawValue).locale('en');
     const timeString = momentDate.format('HH:mm');
-    return `${dateString} ${timeString}`;
-}
-
-function convertTimeForListDisplay(rawValue: string): string {
-    const momentDate = moment(rawValue, 'HH:mm', true);
-    return momentDate.format('HH:mm');
+    const localDate = convertIsoToLocalCalendar(rawValue);
+    return `${localDate} ${timeString}`;
 }
 
 type FileClientValue = {
@@ -63,7 +57,7 @@ function convertImageForDisplay(clientValue: ImageClientValue) {
     return <PreviewImage url={clientValue.url} previewUrl={clientValue.previewUrl} />;
 }
 
-function convertRangeForDisplay(parser: any, clientValue: any) {
+function convertRangeForDisplay(parser: any = (value: any) => value, clientValue: any) {
     return (
         <span>
             {parser(clientValue.from)} {'->'} {parser(clientValue.to)}
@@ -104,9 +98,9 @@ const valueConvertersForType = {
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.DATE]: convertDateForListDisplay,
-    [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
+    [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
     [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
-    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertDateTimeForListDisplay, value),
+    [dataElementTypes.DATETIME_RANGE]: value => convertRangeForDisplay(convertIsoToLocalCalendar, value),
     [dataElementTypes.FILE_RESOURCE]: convertFileForDisplay,
     [dataElementTypes.IMAGE]: convertImageForDisplay,
     [dataElementTypes.INTEGER]: stringifyNumber,
@@ -123,8 +117,7 @@ const valueConvertersForType = {
     [dataElementTypes.PERCENTAGE]: (value: number) => `${stringifyNumber(value)} %`,
     [dataElementTypes.POLYGON]: convertPolygonForDisplay,
     [dataElementTypes.STATUS]: convertStatusForDisplay,
-    [dataElementTypes.TIME]: convertTimeForListDisplay,
-    [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(convertTimeForListDisplay, value),
+    [dataElementTypes.TIME_RANGE]: value => convertRangeForDisplay(undefined, value),
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
 };
 

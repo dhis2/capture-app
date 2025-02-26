@@ -33,7 +33,7 @@ export const validateValue = async ({
         if (pass === true) {
             let result = currentValidator.validator(
                 value,
-                { error: commitOptions?.error, errorCode: commitOptions?.errorCode },
+                commitOptions,
                 validationContext,
             );
             if (result instanceof Promise) {
