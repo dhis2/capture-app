@@ -18,6 +18,7 @@ import {
 } from '../../WorkingListsCommon';
 import { getTemplates } from './getTemplates';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
+import { getLocationQuery } from '../../../../utils/routing';
 
 export const retrieveTemplatesEpic = (
     action$: InputObservable,
@@ -211,9 +212,9 @@ export const deleteTemplateEpic = (
                 id: template.id,
                 type: 'delete',
             }).then(() => {
-                // Call onChangeTemplate when a template is deleted, passing the default template ID
+                const { programId } = getLocationQuery();
+
                 if (callBacks && callBacks.onChangeTemplate) {
-                    const programId = template.id.split('-')[0];
                     callBacks.onChangeTemplate(`${programId}-default`);
                 }
 
