@@ -58,7 +58,6 @@ const MainPagePlain = ({
         const noProgramSelected = !programId;
         const noOrgUnitSelected = !orgUnitId;
 
-        // Only show the main page for event programs if displayFrontPageList is true
         return noProgramSelected ||
                noOrgUnitSelected ||
                displayFrontPageList ||
@@ -95,7 +94,6 @@ const MainPagePlain = ({
             ) : (
                 <>
                     {trackedEntityTypeId ? (
-                        // For tracker programs, show search and template selector
                         <div className={classes.container}>
                             <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
                                 <SearchBox programId={programId} />
@@ -105,7 +103,6 @@ const MainPagePlain = ({
                             </div>
                         </div>
                     ) : (
-                        // For event programs, show template selector
                         <div className={classes.container}>
                             <div className={classes.half}>
                                 <EventRegistrationEntryWrapper
