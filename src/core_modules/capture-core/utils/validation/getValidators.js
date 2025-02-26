@@ -18,6 +18,7 @@ import {
 } from 'capture-core-utils/validators/form';
 import {
     isValidAge,
+    isValidNonFutureAge,
     isValidDate,
     isValidNonFutureDate,
     isValidDateTime,
@@ -153,6 +154,11 @@ const validatorsForTypes = {
         validator: isValidAge,
         message: errorMessages.AGE,
         type: validatorTypes.TYPE_BASE,
+    },
+    {
+        validator: isValidNonFutureAge,
+        type: validatorTypes.TYPE_EXTENDED,
+        message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
     }],
     [dataElementTypes.PHONE_NUMBER]: [{
         validator: isValidPhoneNumber,

@@ -67,7 +67,8 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.TIME_RANGE]: getTextRangeFieldConfig,
     [dataElementTypes.PERCENTAGE]: getTextFieldConfig,
     [dataElementTypes.URL]: getTextFieldConfig,
-    [dataElementTypes.AGE]: getAgeFieldConfig,
+    [dataElementTypes.AGE]: (metaData: any, options: Object, querySingleResource: QuerySingleResource) =>
+        getAgeFieldConfig(metaData, options, querySingleResource),
     [dataElementTypes.ORGANISATION_UNIT]: getOrgUnitFieldConfig,
     [dataElementTypes.COORDINATE]: getCoordinateFieldConfig,
     [dataElementTypes.POLYGON]: getPolygonFieldConfig,
