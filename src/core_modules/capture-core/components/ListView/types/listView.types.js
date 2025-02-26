@@ -104,6 +104,7 @@ export type InterfaceProps = $ReadOnly<{|
     onSetColumnOrder: SetColumnOrder,
     onSort: Sort,
     onUpdateFilter: UpdateFilter,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
     rowIdKey: string,
     rowsPerPage: number,
     sortById: string,

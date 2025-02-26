@@ -17,7 +17,6 @@ import { EventRegistrationEntryWrapper } from '../../EventRegistrationEntryWrapp
 import {
     InvalidCategoryCombinationForOrgUnitMessage,
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
-import { DataEntryWidgetOutput } from '../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 
 const getStyles = () => ({
     listContainer: {
