@@ -128,7 +128,6 @@ export const useDefaultColumnConfig = (
         ];
 
         if (programStageId && programStage) {
-            console.log('programStage', programStage);
             return defaultColumns.concat([
                 ...getProgramStageMainConfig(programStage),
                 ...getEventsMetaDataConfig(programStage),

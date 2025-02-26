@@ -3,6 +3,7 @@ import type { QuerySingleResource } from 'capture-core/utils/api';
 import type { TeiWorkingListsTemplates } from '../../../types';
 import { TEI_WORKING_LISTS } from '../../../constants';
 import { getDefaultTemplate } from '../../../helpers';
+import { convertServerToClient } from '../../../../WorkingListsCommon/helpers/converters/displayColumnOrderConverter';
 
 type ApiConfig = {
     trackedEntityInstanceFilters: Array<Object>,
@@ -62,7 +63,7 @@ export const getTEITemplates = (
                             occurredAt: enrollmentIncidentDate,
                             followUp,
                             order,
-                            displayColumnOrder,
+                            displayColumnOrder: convertServerToClient(displayColumnOrder),
                             assignedUserMode,
                             assignedUsers,
                             attributeValueFilters,

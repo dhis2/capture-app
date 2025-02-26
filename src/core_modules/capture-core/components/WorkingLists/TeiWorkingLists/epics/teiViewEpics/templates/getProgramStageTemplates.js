@@ -3,6 +3,7 @@ import type { QuerySingleResource } from 'capture-core/utils/api';
 import type { TeiWorkingListsTemplates } from '../../../types';
 import { PROGRAM_STAGE_WORKING_LISTS } from '../../../constants';
 import { getDefaultTemplate } from '../../../helpers';
+import { convertServerToClient } from '../../../../WorkingListsCommon/helpers/converters/displayColumnOrderConverter';
 
 type ApiConfig = {
     programStageWorkingLists: Array<Object>,
@@ -70,7 +71,7 @@ export const getProgramStageTemplates = (
                             scheduledAt: eventScheduledAt,
                             dataFilters,
                             order,
-                            displayColumnOrder,
+                            displayColumnOrder: convertServerToClient(displayColumnOrder),
                             assignedUserMode,
                             assignedUsers,
                             attributeValueFilters,
