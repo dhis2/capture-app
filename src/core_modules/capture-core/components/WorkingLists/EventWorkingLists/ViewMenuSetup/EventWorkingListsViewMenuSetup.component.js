@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { v4 as uuid } from 'uuid';
 import { EventWorkingListsRowMenuSetup } from '../RowMenuSetup';
@@ -18,6 +18,7 @@ export const EventWorkingListsViewMenuSetup = ({
 }: Props) => {
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
     const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
+    const lastProcessedDeletedIdRef = useRef(null);
 
     const {
         selectedRows,
@@ -46,10 +47,10 @@ export const EventWorkingListsViewMenuSetup = ({
         !disableClearSelection && clearSelection();
     }, [clearSelection]);
 
-    // Listen for event deletion and trigger list refresh
     useEffect(() => {
-        if (lastIdDeleted) {
+        if (lastIdDeleted && lastIdDeleted !== lastProcessedDeletedIdRef.current) {
             onUpdateList();
+            lastProcessedDeletedIdRef.current = lastIdDeleted;
         }
     }, [lastIdDeleted, onUpdateList]);
 
