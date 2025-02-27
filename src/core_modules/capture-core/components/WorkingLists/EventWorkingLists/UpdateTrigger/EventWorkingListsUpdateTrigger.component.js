@@ -12,6 +12,7 @@ export const EventWorkingListsUpdateTrigger = ({
     lastTransactionOnListDataRefresh,
     onLoadView,
     onUpdateList,
+    onChangeTemplate,
     ...passOnProps
 }: Props) => {
     const forceUpdateOnMount = moment().diff(moment(listDataRefreshTimestamp || 0), 'minutes') > 5 ||
@@ -32,6 +33,7 @@ export const EventWorkingListsUpdateTrigger = ({
             forceUpdateOnMount={forceUpdateOnMount}
             onLoadView={injectCustomUpdateContextToLoadList}
             onUpdateList={injectCustomUpdateContextToUpdateList}
+            onChangeTemplate={onChangeTemplate}
         />
     );
 };

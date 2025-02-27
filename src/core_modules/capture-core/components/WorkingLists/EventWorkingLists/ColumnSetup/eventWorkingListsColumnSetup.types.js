@@ -10,6 +10,7 @@ type ExtractedProps = {|
     customColumnOrder?: CustomColumnOrder,
     onLoadView: Function,
     onUpdateList: Function,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
 |};
 
 // had to add customColumnOrder as a non optional type or else it would not be removed. Also, if customColumnOrder is
@@ -31,4 +32,5 @@ export type EventWorkingListsColumnSetupOutputProps = {|
     defaultColumns: EventWorkingListsColumnConfigs,
     onLoadView: Function,
     onUpdateList: Function,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
 |};
