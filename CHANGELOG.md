@@ -1,3 +1,10 @@
+## [101.29.2](https://github.com/dhis2/capture-app/compare/v101.29.1...v101.29.2) (2025-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-18676] display error for age in the future ([#3932](https://github.com/dhis2/capture-app/issues/3932)) ([fd9fa54](https://github.com/dhis2/capture-app/commit/fd9fa54619b17f13045d88fcd6c3cb3d998c3900))
+
 ## [101.29.1](https://github.com/dhis2/capture-app/compare/v101.29.0...v101.29.1) (2025-02-26)
 
 
