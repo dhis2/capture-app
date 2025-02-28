@@ -62,7 +62,7 @@ const ScheduleDatePlain = ({
         if (!hasValue(dateString)) {
             return {
                 error: true,
-                validationText: 'A value is required',
+                validationText: i18n.t('A value is required'),
             };
         }
 
@@ -70,7 +70,7 @@ const ScheduleDatePlain = ({
         if (!dateValidation.valid) {
             return {
                 error: true,
-                validationText: dateValidation.errorMessage || 'Please provide a valid date',
+                validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
             };
         }
 

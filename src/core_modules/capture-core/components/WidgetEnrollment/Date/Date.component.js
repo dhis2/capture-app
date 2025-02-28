@@ -94,7 +94,7 @@ const DateComponentPlain = ({
         if (!hasValue(dateString)) {
             return {
                 error: true,
-                validationText: 'A value is required',
+                validationText: i18n.t('A value is required'),
             };
         }
 
@@ -102,7 +102,7 @@ const DateComponentPlain = ({
         if (!dateValidation.valid) {
             return {
                 error: true,
-                validationText: dateValidation.errorMessage || 'Please provide a valid date',
+                validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
             };
         }
 
@@ -111,7 +111,7 @@ const DateComponentPlain = ({
             if (futureValidation !== true) {
                 return {
                     error: true,
-                    validationText: futureValidation.errorMessage || 'A date in the future is not allowed',
+                    validationText: futureValidation.errorMessage || i18n.t('A date in the future is not allowed'),
                 };
             }
         }
