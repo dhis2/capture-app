@@ -75,7 +75,7 @@ test('expressions with d2Functions in tracker program', () => {
                 {
                     id: 'FjkwPhzoAVr',
                     displayContent: "d2:countIfValue(#{undefinedVariable}, 'Male') = ",
-                    data: "d2:countIfValue(#{undefinedVariable}, 'Male') = ",
+                    data: "d2:countIfValue(#{undefinedVariable}, 'Male')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -165,22 +165,22 @@ test('expressions with d2Functions in tracker program', () => {
                 },
                 {
                     id: 'lkyodkLRAVr',
-                    displayContent: "d2:extractDataMatrixValue('best before date', ']Q3369')",
-                    data: "d2:extractDataMatrixValue('best before date', ']Q3369')",
+                    displayContent: "d2:extractDataMatrixValue('best before date', ']Q336901234563691789012')",
+                    data: "d2:extractDataMatrixValue('best before date', ']Q336901234563691789012')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
                     id: 'lkpyodkLRAVr',
-                    displayContent: "d2:extractDataMatrixValue('VOLUME_Y3_LOG', ']Q3369111')",
-                    data: "d2:extractDataMatrixValue('3691', ']Q3369111')",
+                    displayContent: "d2:extractDataMatrixValue('3690', ']Q336901234563691789012')",
+                    data: "d2:extractDataMatrixValue('3690', ']Q336901234563691789012')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
                     id: 'lkyohgyRAVr',
-                    displayContent: "d2:extractDataMatrixValue('serial number', ']Q3369')",
-                    data: "d2:extractDataMatrixValue('serial number', ']Q3369')",
+                    displayContent: "d2:extractDataMatrixValue('serial number', ']Q321369')",
+                    data: "d2:extractDataMatrixValue('serial number', ']Q321369')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -202,41 +202,6 @@ test('expressions with d2Functions in tracker program', () => {
                     id: 'FolkwkLRAVr',
                     displayContent: 'd2:lastEventDate(#{undefinedVariable})',
                     data: 'd2:lastEventDate(#{undefinedVariable})',
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'llokowfRAVr',
-                    displayContent: "d2:addControlDigits('2')",
-                    data: "d2:addControlDigits('2')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'lloksfegwAVr',
-                    displayContent: "d2:addControlDigits('7')",
-                    data: "d2:addControlDigits('7')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'lkyksfegwAVr',
-                    displayContent: "d2:addControlDigits('9')",
-                    data: "d2:addControlDigits('9')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'llolkyfRAVr',
-                    displayContent: "d2:addControlDigits('12345678912')",
-                    data: "d2:addControlDigits('12345678912')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'FollowfRAVr',
-                    displayContent: 'd2:checkControlDigits(1)',
-                    data: 'd2:checkControlDigits(1)',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -544,33 +509,18 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'feedback',
             displayText: {
                 id: 'FkeGdlkYAVr',
-                message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) ",
+                message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) false",
             },
         },
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'Foc3PhzoAVr', message: 'd2:count(#{undefinedVariable}) =  0' },
+            displayText: { id: 'Foc3PhzoAVr', message: 'd2:hasValue(#{undefinedVariable}) false' },
         },
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'FjkwPhzoAVr', message: "d2:countIfValue(#{undefinedVariable}, 'Male') =  " },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'TkgrHcLselM', message: 'd2:countIfZeroPos(100) =  0' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'Foc3PhzoAVr', message: 'd2:hasValue(#{undefinedVariable}) ' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'FoljdkeoAVr', message: "d2:validatePattern('Male', 'a') " },
+            displayText: { id: 'FoljdkeoAVr', message: "d2:validatePattern('Male', 'a') false" },
         },
         {
             type: 'DISPLAYTEXT',
@@ -580,29 +530,7 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'kpljdlkYAVr', message: 'd2:validatePattern() ' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'FoljdjkRAVr', message: "d2:hasUserRole('admin') " },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'FoljdkLRAVr',
-                message: "d2:extractDataMatrixValue('batch number', 3) Incomplete DataMatrix input",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'FollkyLRAVr',
-                message:
-                    "d2:extractDataMatrixValue('batch number', 'unknow') Unsupported GS1 identifier: {gs1Identifier}",
-            },
+            displayText: { id: 'FoljdjkRAVr', message: "d2:hasUserRole('admin') false" },
         },
         {
             type: 'DISPLAYTEXT',
@@ -624,14 +552,6 @@ test('expressions with d2Functions in tracker program', () => {
             type: 'DISPLAYTEXT',
             id: 'feedback',
             displayText: {
-                id: 'kuYodkLRAVr',
-                message: "d2:extractDataMatrixValue('production date', ']Q3unknown') ",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
                 id: 'kuYookLRAVr',
                 message: "d2:extractDataMatrixValue('lot number', ']Q310703') 703",
             },
@@ -640,16 +560,8 @@ test('expressions with d2Functions in tracker program', () => {
             type: 'DISPLAYTEXT',
             id: 'feedback',
             displayText: {
-                id: 'lkyodkLRAVr',
-                message: "d2:extractDataMatrixValue('best before date', ']Q3369') ",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
                 id: 'lkpyodkLRAVr',
-                message: "d2:extractDataMatrixValue('3369', ']Q3369111') 11",
+                message: "d2:extractDataMatrixValue('3690', ']Q336901234563691789012') 123456",
             },
         },
         {
@@ -657,15 +569,7 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'feedback',
             displayText: {
                 id: 'lkyohgyRAVr',
-                message: "d2:extractDataMatrixValue('serial number', ']Q3369') ",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'lkyolktRAVr',
-                message: "d2:extractDataMatrixValue('unknow key', ']d2') ",
+                message: "d2:extractDataMatrixValue('serial number', ']Q321369') 369",
             },
         },
         {

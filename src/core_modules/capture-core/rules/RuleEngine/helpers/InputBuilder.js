@@ -208,9 +208,7 @@ const buildSupplementaryData = ({
         new Map<string, Array<string>>(),
     );
 
-    if (selectedUserRoles) {
-        supplementaryData.set('USER', selectedUserRoles);
-    }
+    supplementaryData.set('USER', selectedUserRoles || []);
 
     return supplementaryData;
 };
