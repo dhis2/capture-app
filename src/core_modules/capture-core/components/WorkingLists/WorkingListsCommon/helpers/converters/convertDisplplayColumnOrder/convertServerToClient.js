@@ -1,11 +1,11 @@
 // @flow
-export const convertServerToClient = (
-    serverColumnOrder: ?Array<string>,
+export const convertDisplayColumnOrderToClient = (
+    serverDisplayColumnOrder: ?Array<string>,
 ): Array<string> => {
-    if (!serverColumnOrder) {
+    if (!serverDisplayColumnOrder) {
         return [];
     }
-    return serverColumnOrder.map((columnId: string): string => {
+    return serverDisplayColumnOrder.map((columnId: string): string => {
         if (columnId === 'eventOrgUnit') {
             return 'eventOrgUnitId';
         }

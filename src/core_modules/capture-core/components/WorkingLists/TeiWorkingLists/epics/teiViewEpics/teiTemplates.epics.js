@@ -19,7 +19,8 @@ import {
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
 import { getLocationQuery } from '../../../../../utils/routing';
 import { getDefaultTemplate } from '../../helpers';
-import { convertClientToServer } from '../../../WorkingListsCommon/helpers/converters/displayColumnOrderConverter';
+import { convertDisplayColumnOrderToServer } from '../../../WorkingListsCommon/helpers/converters/convertDisplplayColumnOrder';
+import { convertOrderToServer } from '../../../WorkingListsCommon/helpers/converters/orderConverter';
 
 export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, { mutate }: ApiUtils) =>
     action$.pipe(
@@ -51,8 +52,8 @@ export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 name,
                 program,
                 entityQueryCriteria: {
-                    displayColumnOrder: convertClientToServer(displayColumnOrder),
-                    order,
+                    displayColumnOrder: convertDisplayColumnOrderToServer(displayColumnOrder),
+                    order: convertOrderToServer(order),
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
                     ...(programStatus && { enrollmentStatus: programStatus }),
@@ -170,8 +171,8 @@ export const updateTEITemplateEpic = (action$: InputObservable, store: ReduxStor
                 userGroupAccesses,
                 userAccesses,
                 entityQueryCriteria: {
-                    displayColumnOrder: convertClientToServer(displayColumnOrder),
-                    order: convertClientToServer(order),
+                    displayColumnOrder: convertDisplayColumnOrderToServer(displayColumnOrder),
+                    order: convertOrderToServer(order),
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
                     ...(followUp !== undefined && { followUp: JSON.stringify(followUp) }),
