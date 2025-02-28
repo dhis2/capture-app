@@ -170,8 +170,8 @@ export const updateTEITemplateEpic = (action$: InputObservable, store: ReduxStor
                 userGroupAccesses,
                 userAccesses,
                 entityQueryCriteria: {
-                    displayColumnOrder,
-                    order,
+                    displayColumnOrder: convertClientToServer(displayColumnOrder),
+                    order: convertClientToServer(order),
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
                     ...(followUp !== undefined && { followUp: JSON.stringify(followUp) }),

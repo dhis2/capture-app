@@ -205,7 +205,7 @@ export const updateProgramStageTemplateEpic = (action$: InputObservable, store: 
                 userGroupAccesses,
                 userAccesses,
                 programStageQueryCriteria: {
-                    displayColumnOrder,
+                    displayColumnOrder: convertClientToServer(displayColumnOrder),
                     order,
                     enrolledAt,
                     eventStatus: status,

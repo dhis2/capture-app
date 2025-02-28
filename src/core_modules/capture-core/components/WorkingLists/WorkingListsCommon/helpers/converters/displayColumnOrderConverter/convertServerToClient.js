@@ -12,9 +12,6 @@ export const convertServerToClient = (
         if (columnId === 'orgUnit') {
             return 'orgUnitId';
         }
-        if (columnId === 'eventDate') {
-            return 'occurredAt';
-        }
         return columnId;
     });
 };

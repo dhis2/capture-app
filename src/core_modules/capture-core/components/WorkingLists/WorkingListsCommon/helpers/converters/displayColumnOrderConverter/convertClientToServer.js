@@ -1,21 +1,18 @@
 // @flow
 
 export const convertClientToServer = (
-    displayColumnOrder: ?Array<string>,
+    clientColumnOrder: ?Array<string>,
 ): Array<string> => {
-    if (!displayColumnOrder) {
+    if (!clientColumnOrder) {
         return [];
     }
 
-    return displayColumnOrder.map((columnId: string): string => {
+    return clientColumnOrder.map((columnId: string): string => {
         if (columnId === 'eventOrgUnitId') {
             return 'eventOrgUnit';
         }
         if (columnId === 'orgUnitId') {
             return 'orgUnit';
-        }
-        if (columnId === 'occurredAt') {
-            return 'eventDate';
         }
         return columnId;
     });

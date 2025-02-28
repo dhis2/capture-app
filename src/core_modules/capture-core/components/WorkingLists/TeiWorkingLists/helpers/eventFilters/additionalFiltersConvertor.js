@@ -5,7 +5,7 @@ export const ADDITIONAL_FILTERS = {
     scheduledAt: 'scheduledAt',
     status: 'status',
     assignedUser: 'assignee',
-    orgUnit: 'eventOrgUnit',
+    orgUnit: 'eventOrgUnitId',
 };
 
 export const ADDITIONAL_FILTERS_LABELS = {
