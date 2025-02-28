@@ -7,7 +7,6 @@ import { type DateValue } from '../../../FiltersForTypes/Date/types/date.types';
 type Props = {
     label?: ?string,
     value: ?string,
-    calendar?: string,
     calendarWidth?: ?number,
     inputWidth?: ?number,
     onBlur: (value: DateValue) => void,
@@ -50,7 +49,6 @@ export class D2Date extends React.Component<Props, State> {
 
     render() {
         const {
-            calendar,
             calendarWidth,
             inputWidth,
             classes,
@@ -62,7 +60,7 @@ export class D2Date extends React.Component<Props, State> {
             ...passOnProps
         } = this.props;
 
-        const calendarType = calendar || 'gregory';
+        const calendarType = systemSettingsStore.get().calendar || 'gregory';
         const format = systemSettingsStore.get().dateFormat;
 
         return (

@@ -17,6 +17,8 @@ export const WidgetTwoEventWorkspace = ({
     currentPage,
     stage,
     type,
+    onDeleteEvent,
+    onDeleteEventRelationship,
 }: Props) => {
     const {
         linkedEvent,
@@ -80,6 +82,8 @@ export const WidgetTwoEventWorkspace = ({
                             eventId={eventId}
                             relationship={relationship}
                             relationshipType={relationshipType}
+                            onDeleteEvent={onDeleteEvent}
+                            onDeleteEventRelationship={onDeleteEventRelationship}
                         />
                     }
                     noncollapsible

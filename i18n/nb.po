@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -111,16 +111,16 @@ msgid "Last updated"
 msgstr "Sist oppdatert"
 
 msgid "Lat"
-msgstr ""
+msgstr "Breddegrad"
 
 msgid "Long"
-msgstr ""
+msgstr "Lengdegrad"
 
 msgid "lat"
-msgstr ""
+msgstr "Breddegrad"
 
 msgid "long"
-msgstr ""
+msgstr "Lengdegrad"
 
 msgid "Show less"
 msgstr "Vis mindre"
@@ -686,6 +686,9 @@ msgid ""
 "You do not have permissions to access to this program, registering unit or "
 "record, contact your administrator for more information."
 msgstr ""
+"Du har ikke tillatelse til å få tilgang til dette programmet, "
+"registreringsenheten eller fortegnelse, kontakt administratoren for mer "
+"informasjon."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
@@ -762,6 +765,23 @@ msgstr ""
 "Valgt kategori er ikke gyldig for valgt organisasjonsenhet. Velg en gyldig "
 "kombinasjon. "
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "Velg {{category}}."
 
@@ -810,6 +830,7 @@ msgstr "Lagre {{trackedEntityName}}"
 
 msgid "Enter details now is not available when creating a relationship"
 msgstr ""
+"Skriv inn detaljer nå er ikke tilgjengelig når du oppretter en relasjon"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
@@ -893,9 +914,6 @@ msgstr "Indikatorer"
 msgid "Warnings"
 msgstr "Advarsler"
 
-msgid "Show all events"
-msgstr "Vis alle hendelser"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den finnes?"
 
@@ -930,9 +948,6 @@ msgstr "Laster"
 
 msgid "An error occurred while loading the form"
 msgstr "Det oppsto en feil ved åpning av skjemaet"
-
-msgid "Back to all stages and events"
-msgstr "Tilbake til alle faser og hendelser"
 
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
@@ -1080,7 +1095,7 @@ msgid "Assigned to"
 msgstr "Tildelt til"
 
 msgid "You don't have access to edit the assigned user"
-msgstr ""
+msgstr "Du har ikke tilgang til å redigere den tildelte programbrukeren"
 
 msgid "Edit"
 msgstr "Rediger"
@@ -1090,6 +1105,7 @@ msgstr "Ingen er tildelt denne hendelsen"
 
 msgid "You don't have access to assign a user to this event"
 msgstr ""
+"Du har ikke tilgang til å tilordne en programbruker til denne hendelsen"
 
 msgid "Assign"
 msgstr "Tildel"
@@ -1139,7 +1155,7 @@ msgid "Mark incomplete"
 msgstr "Merk som ufullstendig"
 
 msgid "You do not have access to delete this enrollment"
-msgstr ""
+msgstr "Du har ikke tilgang til å slette denne registreringen"
 
 msgid "Delete enrollment"
 msgstr "Slett registrering"
@@ -1294,6 +1310,12 @@ msgstr "Gå til \"Planlegg\"-fanen for å endre planlagt dato for denne hendelse
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Planlagt dato kan ikke endres for {{ eventStatus }} hendelser"
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Hendelse fullført"
 
@@ -1432,8 +1454,8 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Velg en {{linkableStageLabel}}"
 
-msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }} er ikke repiterbar"
+msgid "{{ linkableStageLabel }} can only have one event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} har ingen hendelser som kan kobles til"
@@ -1444,10 +1466,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Uklare relasjoner, kontakt din systemadministrator"
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr "Skriv inn detaljer "
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1554,9 +1588,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr "En feil oppstå ved lasting av widget. "
 
-msgid "Linked event"
-msgstr ""
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1571,6 +1602,9 @@ msgstr "Endringslogg"
 msgid "No changes to display"
 msgstr "Ingen endringer å vise"
 
+msgid "Data item"
+msgstr "Datapunkt"
+
 msgid "Updated"
 msgstr "Oppdatert"
 
@@ -1583,11 +1617,17 @@ msgstr "Slettet"
 msgid "Date"
 msgstr "Dato"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "Bruker"
 
-msgid "Data item"
-msgstr "Datapunkt"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr "Endre"
@@ -1743,7 +1783,10 @@ msgid ""
 msgid_plural ""
 "This action will complete {{count}} active enrollment in your selection."
 msgstr[0] ""
+"Denne handlingen vil fullføre {{count}}aktiv registrering i utvalget ditt."
 msgstr[1] ""
+"Denne handlingen vil fullføre {{count}}aktive registreringer i utvalget "
+"ditt."
 
 msgid "{{count}} enrollment already marked as completed will not be changed."
 msgid_plural ""

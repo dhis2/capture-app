@@ -16,7 +16,6 @@ export const getAddEventEnrollmentServerData = ({
     completed,
     fromClientDate,
     uid,
-    serverMinorVersion,
 }: {
     formFoundation: RenderFoundation,
     formClientValues: Object,
@@ -28,10 +27,9 @@ export const getAddEventEnrollmentServerData = ({
     completed?: boolean,
     fromClientDate: (date: Date) => { getServerZonedISOString: () => string },
     uid?: string,
-    serverMinorVersion: number,
 }) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, serverMinorVersion);
+    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
     const nowClient = fromClientDate(new Date());
     const nowServer = new Date(nowClient.getServerZonedISOString());
     const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');

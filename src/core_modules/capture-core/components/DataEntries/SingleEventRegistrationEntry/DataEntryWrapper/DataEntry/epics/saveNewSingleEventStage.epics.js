@@ -16,7 +16,7 @@ import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.co
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { history, serverVersion: { minor } }: ApiUtils) =>
+export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map((action) => {
@@ -32,21 +32,20 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
                     formFoundation,
                     formClientValues,
                     mainDataClientValues,
-                    history,
+                    navigate,
                     completed,
-                    minor,
                 );
 
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map(() => {
             const { enrollmentId, programId, orgUnitId, teiId } = getLocationQuery();
-            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+            navigate(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
             return resetLocationChange();
         }));
 

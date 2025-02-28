@@ -1,5 +1,6 @@
 // @flow
 import type { QuerySingleResource } from '../utils/api/api.types';
+import type { DHIS2Date } from '@dhis2/app-runtime';
 
 declare type D2 = {
     models: Object,
@@ -203,6 +204,7 @@ declare type ApiUtilsWithoutHistory = {|
     mutate: DataEngineMutate,
     absoluteApiPath: string,
     serverVersion: { minor: number },
+    fromClientDate: (date?: string | Date | number | null) => DHIS2Date,
 |}
 
 declare type ApiUtils = {|
@@ -210,8 +212,6 @@ declare type ApiUtils = {|
     mutate: DataEngineMutate,
     absoluteApiPath: string,
     serverVersion: { minor: number },
-    history: {
-        push: () => void,
-        ...PassOnProps,
-    },
+    navigate: (path: string, scrollToTop?: boolean) => void,
+    fromClientDate: (date?: string | Date | number | null) => DHIS2Date,
 |};

@@ -12,6 +12,8 @@ export type PlainProps = {|
     relationshipType: string,
     stage: ProgramStage,
     eventId: string,
+    onDeleteEvent?: (eventId: string) => void,
+    onDeleteEventRelationship?: (relationshipId: string) => void,
 |};
 
 export type Props = {|

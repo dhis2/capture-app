@@ -19,6 +19,9 @@ export const UnlinkAndDeleteModal = ({
     setOpenModal,
     eventId,
     originEventId,
+    relationshipId,
+    onDeleteEvent,
+    onDeleteEventRelationship,
 }: Props) => {
     const dataEngine = useDataEngine();
     const queryClient = useQueryClient();
@@ -45,6 +48,8 @@ export const UnlinkAndDeleteModal = ({
                 originEventId,
             ]);
             setOpenModal(false);
+            onDeleteEvent && onDeleteEvent(eventId);
+            onDeleteEventRelationship && onDeleteEventRelationship(relationshipId);
         },
         onError: (error) => {
             showErrorAlert();

@@ -1,6 +1,5 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import React, { useCallback } from 'react';
 import type { ComponentType } from 'react';
 import { NewPageComponent } from './NewPage.component';
@@ -10,7 +9,7 @@ import {
     showMessageToSelectProgramCategoryOnNewPage, showMessageThatCategoryOptionIsInvalidForOrgUnit,
 } from './NewPage.actions';
 import { newPageStatuses } from './NewPage.constants';
-import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
@@ -44,13 +43,13 @@ const useUserWriteAccess = (scopeId) => {
 };
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const { navigate } = useNavigate();
     const { orgUnitId, programId, teiId } = useLocationQuery();
     const program = programId && programCollection.get(programId);
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
         selectedOrgUnitId: orgUnitId,
     });
-    const { trackedEntityInstanceAttributes } = useTrackedEntityInstances(teiId, programId);
+    const { trackedEntityInstanceAttributes, loading: isTrackedEntityAttributesLoading } = useTrackedEntityInstances(teiId, programId);
     // $FlowFixMe
     const trackedEntityType = program?.trackedEntityType;
     const teiDisplayName =
@@ -77,7 +76,7 @@ export const NewPage: ComponentType<{||}> = () => {
         useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     const ready: boolean =
-        useSelector(({ activePage }) => (!activePage.isDataEntryLoading));
+        useSelector(({ activePage }) => (!activePage.isDataEntryLoading)) && !isTrackedEntityAttributesLoading;
 
     const currentScopeId: string =
         useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
@@ -94,7 +93,7 @@ export const NewPage: ComponentType<{||}> = () => {
         useSelector(({ newPage }) => newPage.newPageStatus);
 
     const handleMainPageNavigation = () => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+        navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
 
     const writeAccess = useUserWriteAccess(currentScopeId);

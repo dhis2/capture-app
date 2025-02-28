@@ -1,8 +1,10 @@
 import { Given, When, Then, defineStep as And } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
+import { hasVersionSupport } from '../../../support/tagUtils';
 
 Given('the tei created by this test is cleared from the database', () => {
-    cy.buildApiUrl('tracker', 'trackedEntities?filter=w75KJ2mc4zz:like:Breaking&filter=zDhUuAYrxNC:like:TheGlass&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&ouMode=ACCESSIBLE')
+    const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
+    cy.buildApiUrl('tracker', `trackedEntities?filter=w75KJ2mc4zz:like:Breaking&filter=zDhUuAYrxNC:like:TheGlass&trackedEntityType=nEenWmSyUEp&page=1&pageSize=5&${orgUnitModeParam}=ACCESSIBLE`)
         .then(url => cy.request(url))
         .then(({ body }) => {
             const apiTrackedEntities = body.trackedEntities || body.instances || [];

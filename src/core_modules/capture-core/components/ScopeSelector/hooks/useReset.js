@@ -1,11 +1,11 @@
 // @flow
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'capture-core/utils/routing';
 
 export const useReset = () => {
-    const history = useHistory();
+    const { navigate } = useNavigate();
 
     const reset = () => {
-        history.push('/');
+        navigate('/');
     };
 
     return { reset };

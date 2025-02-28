@@ -1,11 +1,15 @@
 // @flow
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import type { AssigneeFilterData } from '../../../../../ListView';
 
 export function convertAssignee(
     sourceValue: AssigneeFilterData,
 ) {
+    const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+        ? 'assignedUsers'
+        : 'assignedUser';
     return {
         assignedUserMode: sourceValue.assignedUserMode,
-        assignedUser: sourceValue.assignedUser && sourceValue.assignedUser.id,
+        [assignedUsersQueryParam]: sourceValue.assignedUser?.id,
     };
 }

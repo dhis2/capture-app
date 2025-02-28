@@ -1,9 +1,8 @@
 // @flow
 import React, { useState, useCallback } from 'react';
-import moment from 'moment';
+import { DateField } from 'capture-core/components/FormFields/New';
 import {
     Button,
-    CalendarInput,
     IconCalendar16,
     IconEdit16,
     colors,
@@ -11,8 +10,12 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { convertValue as convertValueClientToView } from '../../../converters/clientToView';
+import { convertValue as convertValueFormToClient } from '../../../converters/formToClient';
+import { convertValue as convertValueClientToServer } from '../../../converters/clientToServer';
 import { dataElementTypes } from '../../../metaData';
+
 
 type Props = {
     date: string,
@@ -24,7 +27,7 @@ type Props = {
     ...CssClasses,
 }
 
-const styles = {
+const styles = (theme: Theme) => ({
     editButton: {
         display: 'inline-flex',
         alignItems: 'center',
@@ -62,7 +65,11 @@ const styles = {
         fontSize: '12px',
         color: colors.grey700,
     },
-};
+    error: {
+        ...theme.typography.caption,
+        color: theme.palette.error.main,
+    },
+});
 
 const DateComponentPlain = ({
     date,
@@ -75,21 +82,23 @@ const DateComponentPlain = ({
 }: Props) => {
     const [editMode, setEditMode] = useState(false);
     const [selectedDate, setSelectedDate] = useState();
-    const dateChangeHandler = useCallback(({ calendarDateString }) => {
-        setSelectedDate(calendarDateString);
+    const [validation, setValidation] = useState();
+
+    const dateChangeHandler = useCallback((dateString, internalComponentError) => {
+        setSelectedDate(dateString);
+        setValidation(internalComponentError);
     }, [setSelectedDate]);
     const displayDate = String(convertValueClientToView(date, dataElementTypes.DATE));
 
     const onOpenEdit = () => {
-        // CalendarInput component only supports the YYYY-MM-DD format
-        setSelectedDate(moment(date).format('YYYY-MM-DD'));
+        setSelectedDate(String(convertValueClientToView(date, dataElementTypes.DATE)));
         setEditMode(true);
     };
     const saveHandler = () => {
-        // CalendarInput component only supports the YYYY-MM-DD format
         if (selectedDate) {
-            const newDate = moment.utc(selectedDate, 'YYYY-MM-DD').format('YYYY-MM-DDTHH:mm:ss.SSS');
-            if (newDate !== date) {
+            const newClientDate = convertValueFormToClient(selectedDate, dataElementTypes.DATE);
+            const newDate = convertValueClientToServer(newClientDate, dataElementTypes.DATE);
+            if (typeof newDate === 'string' && newDate !== date) {
                 onSave(newDate);
             }
         }
@@ -99,21 +108,26 @@ const DateComponentPlain = ({
     return editMode ? (
         <div data-test="widget-enrollment-date">
             <div className={classes.inputField}>
-                <CalendarInput
-                    calendar="gregory"
-                    dense
-                    className={classes.calendar}
+                <DateField
+                    width={200}
+                    value={selectedDate}
+                    onBlur={dateChangeHandler}
                     label={dateLabel}
-                    date={selectedDate}
+                    dense
                     locale={locale}
-                    onDateSelect={dateChangeHandler}
+                    calendarType={systemSettingsStore.get().calendar}
+                    dateFormat={systemSettingsStore.get().dateFormat}
                 />
+                <div className={classes.error}>
+                    {validation && validation.error ? i18n.t('Please provide a valid date') : ''}
+                </div>
             </div>
             <div className={classes.buttonStrip}>
                 <Button
                     primary
                     small
                     onClick={saveHandler}
+                    disabled={!!validation?.error}
                 >
                     {i18n.t('Save')}
                 </Button>

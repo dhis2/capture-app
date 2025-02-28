@@ -2,6 +2,7 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { empty, from, of, EMPTY } from 'rxjs';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import {
     searchBoxActionTypes,
     fallbackSearch,
@@ -154,11 +155,14 @@ export const searchViaUniqueIdOnScopeProgramEpic = (
             const {
                 formsValues,
             } = store.value;
+            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                ? 'orgUnitMode'
+                : 'ouMode';
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 program: programId,
                 pageNumber: 1,
-                ouMode: 'ACCESSIBLE',
+                [orgUnitModeQueryParam]: 'ACCESSIBLE',
             };
 
             const { attributes, trackedEntityType } = getTrackerProgramThrowIfNotFound(programId);
@@ -187,11 +191,14 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (
             const {
                 formsValues,
             } = store.value;
+            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                ? 'orgUnitMode'
+                : 'ouMode';
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
-                ouMode: 'ACCESSIBLE',
+                [orgUnitModeQueryParam]: 'ACCESSIBLE',
                 fields: 'trackedEntity,trackedEntityType,orgUnit,attributes,enrollments',
             };
 
@@ -217,14 +224,16 @@ export const searchViaAttributesOnScopeProgramEpic = (
         flatMap(({ payload: { formId, programId, page, triggeredFrom } }) => {
             const { formsValues } = store.value;
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
-
+            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                ? 'orgUnitMode'
+                : 'ouMode';
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(formsValues[formId], attributes),
                 fields: 'attributes,enrollments,trackedEntity,orgUnit',
                 program: programId,
                 page,
                 pageSize: 5,
-                ouMode: 'ACCESSIBLE',
+                [orgUnitModeQueryParam]: 'ACCESSIBLE',
             };
 
             return searchViaAttributesStream({
@@ -248,13 +257,15 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (
         flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }) => {
             const { formsValues } = store.value;
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
-
+            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                ? 'orgUnitMode'
+                : 'ouMode';
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(formsValues[formId], attributes),
                 trackedEntityType: trackedEntityTypeId,
                 page,
                 pageSize: 5,
-                ouMode: 'ACCESSIBLE',
+                [orgUnitModeQueryParam]: 'ACCESSIBLE',
             };
 
             return searchViaAttributesStream({
@@ -324,13 +335,15 @@ export const fallbackSearchEpic = (
         flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
             const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes).filter(query => query);
-
+            const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                ? 'orgUnitMode'
+                : 'ouMode';
             const queryArgs = {
                 filter,
                 trackedEntityType: trackedEntityTypeId,
                 page,
                 pageSize,
-                ouMode: 'ACCESSIBLE',
+                [orgUnitModeQueryParam]: 'ACCESSIBLE',
                 fields: 'trackedEntity,trackedEntityType,orgUnit,attributes,enrollments,',
             };
 
@@ -347,11 +360,11 @@ export const fallbackSearchEpic = (
         }),
     );
 
-export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
+export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(searchBoxActionTypes.FALLBACK_SEARCH_COMPLETED),
         switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
-            history.push(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
+            navigate(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
             return EMPTY;
         }),
     );

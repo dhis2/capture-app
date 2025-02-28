@@ -1,10 +1,9 @@
 // @flow
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { ActionButtons } from './TopBarActions.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import type { Props } from './TopBarActions.types';
-import { buildUrlQueryString } from '../../utils/routing';
+import { useNavigate, buildUrlQueryString } from '../../utils/routing';
 import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 
 const defaultContext = {
@@ -31,7 +30,8 @@ export const TopBarActions = ({
         openNewRegistrationPageWithoutProgramId ||
         openSearchPage ||
         openSearchPageWithoutProgramId;
-    const history = useHistory();
+
+    const { navigate } = useNavigate();
 
     const newRegistrationPage = () => {
         const queryArgs = {};
@@ -42,12 +42,12 @@ export const TopBarActions = ({
             queryArgs.programId = selectedProgramId;
         }
 
-        history.push(`new?${buildUrlQueryString(queryArgs)}`);
+        navigate(`new?${buildUrlQueryString(queryArgs)}`);
     };
 
     const newRegistrationPageWithoutProgramId = () => {
         const queryArgs = selectedOrgUnitId ? { orgUnitId: selectedOrgUnitId } : {};
-        history.push(`new?${buildUrlQueryString(queryArgs)}`);
+        navigate(`new?${buildUrlQueryString(queryArgs)}`);
     };
 
     const searchPage = () => {
@@ -59,12 +59,12 @@ export const TopBarActions = ({
             queryArgs.programId = selectedProgramId;
         }
 
-        history.push(`search?${buildUrlQueryString(queryArgs)}`);
+        navigate(`search?${buildUrlQueryString(queryArgs)}`);
     };
 
     const searchPageWithoutProgramId = () => {
         const queryArgs = selectedOrgUnitId ? { orgUnitId: selectedOrgUnitId } : {};
-        history.push(`search?${buildUrlQueryString(queryArgs)}`);
+        navigate(`search?${buildUrlQueryString(queryArgs)}`);
     };
 
     const handleOpenNewRegistrationPage = () => {

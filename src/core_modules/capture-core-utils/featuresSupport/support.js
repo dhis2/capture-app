@@ -3,16 +3,18 @@ export const FEATURES = Object.freeze({
     storeProgramStageWorkingList: 'storeProgramStageWorkingList',
     multiText: 'multiText',
     customIcons: 'customIcons',
-    newTransferQueryParam: 'newTransferQueryParam',
+    newTrackedEntityQueryParam: 'newTrackedEntityQueryParam',
     exportablePayload: 'exportablePayload',
     changelogs: 'changelogs',
+    changelogsV2: 'changelogsV2',
     trackerImageEndpoint: 'trackerImageEndpoint',
     trackerFileEndpoint: 'trackerFileEndpoint',
     trackedEntitiesCSV: 'trackedEntitiesCSV',
-    newAocApiSeparator: 'newAocApiSeparator',
+    newUIDsSeparator: 'newUIDsSeparator',
     newEntityFilterQueryParam: 'newEntityFilterQueryParam',
     newNoteEndpoint: 'newNoteEndpoint',
-    newRelationshipQueryParam: 'newRelationshipQueryParam',
+    newPagingQueryParam: 'newPagingQueryParam',
+    newOrgUnitModeQueryParam: 'newOrgUnitModeQueryParam',
 });
 
 // The first minor version that supports the feature
@@ -23,13 +25,15 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.exportablePayload]: 41,
     [FEATURES.trackerImageEndpoint]: 41,
     [FEATURES.trackerFileEndpoint]: 41,
-    [FEATURES.newTransferQueryParam]: 41,
+    [FEATURES.newTrackedEntityQueryParam]: 41,
     [FEATURES.changelogs]: 41,
+    [FEATURES.changelogsV2]: 42,
     [FEATURES.trackedEntitiesCSV]: 40,
-    [FEATURES.newAocApiSeparator]: 41,
+    [FEATURES.newUIDsSeparator]: 41,
     [FEATURES.newEntityFilterQueryParam]: 41,
     [FEATURES.newNoteEndpoint]: 42,
-    [FEATURES.newRelationshipQueryParam]: 41,
+    [FEATURES.newPagingQueryParam]: 41,
+    [FEATURES.newOrgUnitModeQueryParam]: 41,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>

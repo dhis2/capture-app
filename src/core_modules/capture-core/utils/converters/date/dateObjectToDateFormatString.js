@@ -1,6 +1,6 @@
 // @flow
 import moment from 'moment';
-import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import { convertIsoToLocalCalendar } from './convertIsoToLocalCalendar';
 
 /**
  * Converts a date instance to a string based on the system date format
@@ -8,8 +8,8 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
  * @param {Date} dateValue: the date instance
  * @returns {string}
  */
-export function convertDateObjectToDateFormatString(dateValue: Date) {
-    const dateFormat = systemSettingsStore.get().dateFormat;
-    const formattedDateString = moment(dateValue).format(dateFormat);
-    return formattedDateString;
+export function convertDateObjectToDateFormatString(dateValue: Date | moment$Moment) {
+    const momentDate = moment(dateValue);
+    const dateString = momentDate.format('YYYY-MM-DD');
+    return convertIsoToLocalCalendar(dateString);
 }

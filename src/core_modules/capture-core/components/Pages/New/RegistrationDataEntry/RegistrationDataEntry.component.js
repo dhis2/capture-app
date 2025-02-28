@@ -1,7 +1,6 @@
 // @flow
 import React, { type ComponentType, useContext, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -14,7 +13,7 @@ import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
 import { useCurrentOrgUnitId } from '../../../../hooks/useCurrentOrgUnitId';
 
@@ -109,7 +108,7 @@ const RegistrationDataEntryPlain = ({
     teiId,
     trackedEntityInstanceAttributes,
 }: Props) => {
-    const { push } = useHistory();
+    const { navigate } = useNavigate();
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
@@ -122,8 +121,8 @@ const RegistrationDataEntryPlain = ({
         } else {
             url = buildUrlQueryString({ orgUnitId: currentOrgUnitId });
         }
-        return push(`/?${url}`);
-    }, [currentOrgUnitId, push, scopeType, selectedScopeId]);
+        return navigate(`/?${url}`);
+    }, [currentOrgUnitId, navigate, scopeType, selectedScopeId]);
 
     const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);

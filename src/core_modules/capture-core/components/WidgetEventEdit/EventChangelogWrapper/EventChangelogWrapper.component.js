@@ -46,7 +46,7 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, eventData, ...p
         const additionalFields = formFoundation.featureType !== 'None' ? {
             geometry: {
                 id: 'geometry',
-                name: formFoundation.featureType === 'Polygon' ? i18n.t('Area') : i18n.t('Coordinate'),
+                name: formFoundation.featureType === 'Polygon' ? i18n.t('Geometry (Area)') : i18n.t('Geometry (Coordinate)'),
                 type: formFoundation.featureType === 'Polygon' ?
                     dataElementTypes.POLYGON : dataElementTypes.COORDINATE,
             },

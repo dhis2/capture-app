@@ -5,11 +5,11 @@ import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { relatedStageActions, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
-import { useCanAddNewEventToStage } from '../hooks/useCanAddNewEventToStage';
+import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import type { Props } from './RelatedStagesActions.types';
+import type { PlainProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 
@@ -38,11 +38,13 @@ const styles = () => ({
     clearSelections: {
         padding: spacers.dp8,
     },
+    link: {
+        padding: spacers.dp8,
+    },
 });
 
 const Schedule = ({
     actionsOptions,
-    linkableEvents,
     selectedAction,
     updateSelectedAction,
     programStage,
@@ -58,8 +60,8 @@ const Schedule = ({
     let tooltipContent = '';
     if (disabled) {
         tooltipContent = disabledMessage;
-    } else if (!linkableEvents.length) {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} is not repeatable', {
+    } else {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
             linkableStageLabel: programStage.stageForm.name,
             interpolation: { escapeValue: false },
         });
@@ -79,6 +81,7 @@ const Schedule = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.SCHEDULE_IN_ORG}
+                dataTest="related-stages-actions-schedule"
             />
         </ConditionalTooltip>
     );
@@ -86,7 +89,6 @@ const Schedule = ({
 
 const EnterData = ({
     actionsOptions,
-    linkableEvents,
     selectedAction,
     updateSelectedAction,
     programStage,
@@ -102,8 +104,8 @@ const EnterData = ({
     let tooltipContent = '';
     if (disabled) {
         tooltipContent = disabledMessage;
-    } else if (!linkableEvents.length) {
-        tooltipContent = i18n.t('{{ linkableStageLabel }} is not repeatable', {
+    } else {
+        tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
             linkableStageLabel: programStage.stageForm.name,
             interpolation: { escapeValue: false },
         });
@@ -123,6 +125,7 @@ const EnterData = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.ENTER_DATA}
+                dataTest="related-stages-actions-enter-details"
             />
         </ConditionalTooltip>
     );
@@ -166,10 +169,25 @@ const LinkExistingResponse = ({
                 label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
                 onChange={(e: Object) => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
+                dataTest="related-stages-actions-link-existing-response"
             />
         </ConditionalTooltip>
     );
 };
+
+const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }) => {
+    if (!onLink) {
+        return null;
+    }
+
+    return (
+        <div className={classes.link}>
+            <Button primary small onClick={onLink} loading={isLinking} dataTest={dataTest}>
+                {label}
+            </Button>
+        </div>
+    );
+});
 
 const RelatedStagesActionsPlain = ({
     classes,
@@ -184,7 +202,9 @@ const RelatedStagesActionsPlain = ({
     errorMessages,
     saveAttempted,
     actionsOptions,
-}: Props) => {
+    onLink,
+    isLinking,
+}: PlainProps) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
@@ -211,7 +231,6 @@ const RelatedStagesActionsPlain = ({
                     <>
                         <Schedule
                             actionsOptions={actionsOptions}
-                            linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
@@ -219,7 +238,6 @@ const RelatedStagesActionsPlain = ({
                         />
                         <EnterData
                             actionsOptions={actionsOptions}
-                            linkableEvents={linkableEvents}
                             selectedAction={selectedAction}
                             updateSelectedAction={updateSelectedAction}
                             programStage={programStage}
@@ -253,37 +271,62 @@ const RelatedStagesActionsPlain = ({
             )}
 
             {selectedAction === relatedStageActions.SCHEDULE_IN_ORG && (
-                <ScheduleInOrgUnit
-                    relatedStagesDataValues={relatedStagesDataValues}
-                    setRelatedStagesDataValues={setRelatedStagesDataValues}
-                    scheduledLabel={scheduledLabel}
-                    saveAttempted={saveAttempted}
-                    errorMessages={errorMessages}
-                />
+                <>
+                    <ScheduleInOrgUnit
+                        relatedStagesDataValues={relatedStagesDataValues}
+                        setRelatedStagesDataValues={setRelatedStagesDataValues}
+                        scheduledLabel={scheduledLabel}
+                        saveAttempted={saveAttempted}
+                        errorMessages={errorMessages}
+                    />
+                    <LinkButton
+                        onLink={onLink}
+                        label={i18n.t('Schedule')}
+                        isLinking={isLinking}
+                        dataTest="related-stages-buttons-schedule"
+                    />
+                </>
             )}
 
             {selectedAction === relatedStageActions.ENTER_DATA && (
-                <EnterDataInOrgUnit
-                    linkableStageLabel={programStage.stageForm.name}
-                    relatedStagesDataValues={relatedStagesDataValues}
-                    setRelatedStagesDataValues={setRelatedStagesDataValues}
-                    saveAttempted={saveAttempted}
-                    errorMessages={errorMessages}
-                />
+                <>
+                    <EnterDataInOrgUnit
+                        linkableStageLabel={programStage.stageForm.name}
+                        relatedStagesDataValues={relatedStagesDataValues}
+                        setRelatedStagesDataValues={setRelatedStagesDataValues}
+                        saveAttempted={saveAttempted}
+                        errorMessages={errorMessages}
+                    />
+                    <LinkButton
+                        onLink={onLink}
+                        label={i18n.t('Enter details')}
+                        isLinking={isLinking}
+                        dataTest="related-stages-buttons-enter-details"
+                    />
+                </>
             )}
 
             {selectedAction === relatedStageActions.LINK_EXISTING_RESPONSE && (
-                <LinkToExisting
-                    relatedStagesDataValues={relatedStagesDataValues}
-                    setRelatedStagesDataValues={setRelatedStagesDataValues}
-                    linkableEvents={linkableEvents}
-                    linkableStageLabel={programStage.stageForm.name}
-                    errorMessages={errorMessages}
-                    saveAttempted={saveAttempted}
-                />
+                <>
+                    <LinkToExisting
+                        relatedStagesDataValues={relatedStagesDataValues}
+                        setRelatedStagesDataValues={setRelatedStagesDataValues}
+                        linkableEvents={linkableEvents}
+                        linkableStageLabel={programStage.stageForm.name}
+                        errorMessages={errorMessages}
+                        saveAttempted={saveAttempted}
+                    />
+                    <LinkButton
+                        onLink={onLink}
+                        label={i18n.t('Link')}
+                        isLinking={isLinking}
+                        dataTest="related-stages-buttons-link-existing-response"
+                    />
+                </>
             )}
+
         </DataSection>
     );
 };
 
-export const RelatedStagesActions: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);
+export const RelatedStagesActions: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);

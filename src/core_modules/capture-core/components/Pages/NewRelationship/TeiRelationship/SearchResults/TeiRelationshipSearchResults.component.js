@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import { Button } from '@dhis2/ui';
+import { convertFormToClient } from 'capture-core/converters';
 import { withNavigation } from '../../../../Pagination/withDefaultNavigation';
 import { makeAttributesSelector } from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
@@ -130,7 +131,7 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
             .filter(key => searchValues[key] !== null)
             .map((key) => {
                 const element = searchForm.getElement(key);
-                const value = searchValues[key];
+                const value = convertFormToClient(searchValues[key], element.type);
                 return { name: element.formName, value, id: element.id, type: element.type };
             });
     }

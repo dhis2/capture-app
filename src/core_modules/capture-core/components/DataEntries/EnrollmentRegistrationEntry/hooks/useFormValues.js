@@ -71,17 +71,19 @@ const useClientAttributesWithSubvalues = (program: InputProgramData, attributes:
                 }
 
                 const acc = await promisedAcc;
-                return [
-                    ...acc,
-                    {
-                        attribute: id,
-                        key: formName,
-                        optionSet,
-                        value,
-                        unique,
-                        valueType: type,
-                    },
-                ];
+                return value
+                    ? [
+                        ...acc,
+                        {
+                            attribute: id,
+                            key: formName,
+                            optionSet,
+                            value,
+                            unique,
+                            valueType: type,
+                        },
+                    ]
+                    : acc;
             }, Promise.resolve([]));
             setListAttributes(computedAttributes);
         } else {

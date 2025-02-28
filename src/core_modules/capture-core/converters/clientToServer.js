@@ -2,7 +2,7 @@
 import moment from 'moment';
 import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
-import { FEATURES, hasAPISupportForFeature } from '../../capture-core-utils';
+import { FEATURES, featureAvailable } from '../../capture-core-utils';
 
 type RangeValue = {
     from: number,
@@ -76,7 +76,6 @@ export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
 
 export function convertCategoryOptionsToServer(
     value: {[categoryId: string]: string} | string,
-    serverMinorVersion: number,
 ) {
     if (typeof value === 'object') {
         const categoryObject: Object = value;
@@ -85,7 +84,7 @@ export function convertCategoryOptionsToServer(
                 acc.push(value[categoryId]);
             }
             return acc;
-        }, []).join(hasAPISupportForFeature(serverMinorVersion, FEATURES.newAocApiSeparator) ? ',' : ';');
+        }, []).join(featureAvailable(FEATURES.newUIDsSeparator) ? ',' : ';');
     }
     return value;
 }

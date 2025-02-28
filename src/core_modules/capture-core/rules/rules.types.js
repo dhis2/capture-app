@@ -24,7 +24,7 @@ export type GetApplicableRuleEffectsForTrackerProgramInput = {|
 
 export type GetApplicableRuleEffectsForEventProgramInput = {|
     program: EventProgram,
-    orgUnit: OrgUnit,
+    orgUnit: ?OrgUnit,
     currentEvent?: EventData,
 |};
 

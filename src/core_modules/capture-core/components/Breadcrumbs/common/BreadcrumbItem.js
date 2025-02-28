@@ -8,6 +8,7 @@ type Props = {
     label: string,
     onClick: () => void,
     selected: boolean,
+    dataTest: string,
 };
 
 const styles = {
@@ -34,11 +35,12 @@ const styles = {
     },
 };
 
-const BreadcrumbItemPlain = ({ label, onClick, selected, classes }) => (
+const BreadcrumbItemPlain = ({ label, onClick, selected, dataTest, classes }) => (
     <button
         type="button"
         className={cx(classes.button, { selected })}
         onClick={onClick}
+        data-test={dataTest}
     >
         {label}
     </button>

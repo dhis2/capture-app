@@ -76,7 +76,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             ]);
         }));
 
-export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
+export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
         map((action) => {
@@ -102,7 +102,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore,
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
@@ -121,6 +121,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore,
             const serverData = {
                 events: [{
                     ...mainDataServerValues,
+                    orgUnit: mainDataServerValues.orgUnit.id,
                     attributeOptionCombo: undefined,
                     dataValues: formFoundation
                         .getElements()
@@ -168,7 +169,7 @@ export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
             return commitEnrollmentEvent(meta.eventId);
         }));
 
-export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
+export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED),
         filter((action) => {
@@ -185,7 +186,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             const eventContainer = viewEventPage.loadedValues.eventContainer;
             if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
                 eventContainer.event.attributeCategoryOptions =
-                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions, minor);
+                    convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions);
             }
             let actions = [];
 
@@ -204,12 +205,12 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
             const { eventId, enrollmentId } = action.payload;
             const params = { enrollmentId };
             const serverData = { events: [{ event: eventId }] };
-            dependencies.history.push(`/enrollment?${buildUrlQueryString(params)}`);
+            dependencies.navigate(`/enrollment?${buildUrlQueryString(params)}`);
             return startDeleteEventDataEntry(serverData, eventId, params);
         }));
 
 export const startCreateNewAfterCompletingEpic = (
-    action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+    action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(
             actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
@@ -224,16 +225,16 @@ export const startCreateNewAfterCompletingEpic = (
                     { ...params, stageId: availableProgramStages[0].id } : params;
 
                 setTimeout(() => {
-                    history.push(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
+                    navigate(`/enrollmentEventNew?${buildUrlQueryString(finalParams)}`);
                 }, 0);
 
                 return EMPTY;
             }
-            history.push(`/enrollment?${buildUrlQueryString(params)}`);
+            navigate(`/enrollment?${buildUrlQueryString(params)}`);
             return EMPTY;
         }));
 
-export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, store: ReduxStore, { serverVersion: { minor } }: ApiUtils) =>
+export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST),
         map((action) => {
@@ -263,10 +264,11 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, sto
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues, minor);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
             const editEvent = {
                 ...mainDataServerValues,
+                orgUnit: mainDataServerValues.orgUnit.id,
                 attributeOptionCombo: undefined,
                 dataValues: formFoundation
                     .getElements()

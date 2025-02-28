@@ -2,10 +2,10 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from 'react-query';
-import { useAlert, useConfig, useDataEngine } from '@dhis2/app-runtime';
+import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { FEATURES, hasAPISupportForFeature } from '../../../../../../../../capture-core-utils';
+import { FEATURES, featureAvailable } from '../../../../../../../../capture-core-utils';
 
 type Props = {|
     selectedRows: { [key: string]: boolean },
@@ -22,7 +22,6 @@ export const useBulkCompleteEvents = ({
     removeRowsFromSelection,
     onUpdateList,
 }: Props) => {
-    const { serverVersion: { minor } } = useConfig();
     const dataEngine = useDataEngine();
     const { show: showAlert } = useAlert(
         ({ message }) => message,
@@ -34,11 +33,12 @@ export const useBulkCompleteEvents = ({
         {
             resource: 'tracker/events',
             params: () => {
-                const supportForFeature = hasAPISupportForFeature(minor, FEATURES.newEntityFilterQueryParam);
+                const supportForFeature = featureAvailable(FEATURES.newEntityFilterQueryParam);
                 const filterQueryParam: string = supportForFeature ? 'events' : 'event';
 
                 return ({
                     fields: '*,!completedAt,!completedBy,!dataValues,!relationships',
+                    pageSize: 100,
                     [filterQueryParam]: Object.keys(selectedRows).join(supportForFeature ? ',' : ';'),
                 });
             },
