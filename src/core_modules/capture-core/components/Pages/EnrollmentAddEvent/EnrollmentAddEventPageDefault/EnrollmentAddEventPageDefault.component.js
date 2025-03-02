@@ -1,42 +1,15 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { theme } from '../../../../../../styles/theme';
 import type { Props } from './EnrollmentAddEventPageDefault.types';
 import { EnrollmentPageLayout } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import {
     EnrollmentPageKeys,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
-const styles = ({ typography }) => ({
-    container: {
-        padding: '16px 24px 16px 24px',
-    },
-    columns: {
-        display: 'flex',
-    },
-    leftColumn: {
-        flexGrow: 3,
-        flexShrink: 1,
-        width: 872,
-    },
-    rightColumn: {
-        flexGrow: 1,
-        flexShrink: 1,
-        paddingLeft: spacersNum.dp16,
-        width: 360,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-    },
-    title: {
-        ...typography.title,
-        margin: `${spacersNum.dp16}px 0`,
-    },
-});
-
-const EnrollmentAddEventPagePain = ({
+export const EnrollmentAddEventPageDefaultComponent = ({
     pageLayout,
     availableWidgets,
     program,
@@ -53,7 +26,6 @@ const EnrollmentAddEventPagePain = ({
     pageFailure,
     ready,
     onAccessLostFromTransfer,
-    classes,
     ...passOnProps
 }: Props) => {
     if (pageFailure) {
@@ -68,7 +40,7 @@ const EnrollmentAddEventPagePain = ({
         return null;
     }
     return (
-        <div>
+        <div className="container">
             <EnrollmentPageLayout
                 {...passOnProps}
                 currentPage={EnrollmentPageKeys.NEW_EVENT}
@@ -89,9 +61,41 @@ const EnrollmentAddEventPagePain = ({
                 feedbackEmptyText={i18n.t('No feedback for this event yet')}
                 indicatorEmptyText={i18n.t('No indicator output for this event yet')}
             />
+
+            <style jsx>{`
+                .container {
+                    padding: 16px 24px 16px 24px;
+                }
+                
+                .columns {
+                    display: flex;
+                }
+                
+                .left-column {
+                    flex-grow: 3;
+                    flex-shrink: 1;
+                    width: 872px;
+                }
+                
+                .right-column {
+                    flex-grow: 1;
+                    flex-shrink: 1;
+                    padding-left: ${spacersNum.dp16}px;
+                    width: 360px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                }
+                
+                .title {
+                    font-size: ${theme.typography.title.fontSize};
+                    font-weight: ${theme.typography.title.fontWeight};
+                    line-height: ${theme.typography.title.lineHeight};
+                    color: ${theme.typography.title.color};
+                    margin: ${spacersNum.dp16}px 0;
+                }
+            `}</style>
         </div>
     );
 };
 
-export const EnrollmentAddEventPageDefaultComponent: ComponentType<$Diff<Props, CssClasses>> =
-    withStyles(styles)(EnrollmentAddEventPagePain);

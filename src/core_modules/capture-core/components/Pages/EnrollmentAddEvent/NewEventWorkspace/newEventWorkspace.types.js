@@ -16,5 +16,4 @@ export type Props = {|
 
 export type PlainProps = {|
     ...Props,
-    ...CssClasses
 |};

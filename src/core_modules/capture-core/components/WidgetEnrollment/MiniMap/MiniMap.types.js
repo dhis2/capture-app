@@ -9,5 +9,4 @@ export type MiniMapProps = {
     refetchTEI: QueryRefetchFunction,
     onError?: (message: string) => void,
     geometryType: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON,
-    ...CssClasses
 }

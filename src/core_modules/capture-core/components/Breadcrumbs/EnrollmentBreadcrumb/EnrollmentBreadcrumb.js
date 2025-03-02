@@ -1,8 +1,6 @@
 // @flow
-import type { ComponentType } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import { colors, IconChevronRight16 } from '@dhis2/ui';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
@@ -20,6 +18,8 @@ type Props = {
     programId: string,
     userInteractionInProgress?: boolean,
     trackedEntityName?: string,
+    eventStatus?: string,
+    page?: string,
 };
 
 export const EventStatuses = {
@@ -30,13 +30,6 @@ export const EventStatuses = {
     OVERDUE: 'OVERDUE',
 };
 
-const styles = {
-    container: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-};
-
 const pageKeys = Object.freeze({
     MAIN_PAGE: 'mainPage',
     ...EnrollmentPageKeys,
@@ -45,7 +38,7 @@ const pageKeys = Object.freeze({
 const eventIsScheduled = eventStatus => [EventStatuses.SCHEDULE, EventStatuses.OVERDUE, EventStatuses.SKIPPED]
     .includes(eventStatus);
 
-const BreadcrumbsPlain = ({
+export const EnrollmentBreadcrumb = ({
     onBackToMainPage,
     onBackToDashboard,
     onBackToViewEvent,
@@ -55,8 +48,7 @@ const BreadcrumbsPlain = ({
     displayFrontPageList,
     userInteractionInProgress = false,
     page,
-    classes,
-}) => {
+}: Props) => {
     const [openWarning, setOpenWarning] = useState(null);
 
     const { label } = useWorkingListLabel({
@@ -121,7 +113,7 @@ const BreadcrumbsPlain = ({
     ]);
 
     return (
-        <div className={classes.container}>
+        <div className="container">
             {breadcrumbItems.map((button, index) => (
                 <React.Fragment key={button.key}>
                     <BreadcrumbItem
@@ -165,8 +157,14 @@ const BreadcrumbsPlain = ({
                 onCancel={() => setOpenWarning(null)}
                 {...defaultDialogProps}
             />
+
+            <style jsx>{`
+                .container {
+                    display: flex;
+                    align-items: center;
+                }
+            `}</style>
         </div>
     );
 };
 
-export const EnrollmentBreadcrumb: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(BreadcrumbsPlain);

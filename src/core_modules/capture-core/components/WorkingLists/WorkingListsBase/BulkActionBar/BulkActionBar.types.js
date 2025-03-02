@@ -12,5 +12,4 @@ export type ContainerProps = {|
 
 export type ComponentProps = {|
     ...SharedProps,
-    ...CssClasses,
 |}

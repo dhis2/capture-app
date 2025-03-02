@@ -1,8 +1,7 @@
 // @flow
 import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
-import React, { type ComponentType, useState } from 'react';
+import React, { useState } from 'react';
 import { Cancel } from './Cancel';
 import { Complete, CompleteModal } from './Complete';
 import { Delete } from './Delete';
@@ -15,20 +14,7 @@ import { MapModal } from '../MapModal';
 import { Transfer } from './Transfer';
 import { TransferModal } from '../TransferModal';
 
-const styles = {
-    actions: {
-        margin: `${spacersNum.dp8}px 0 0 0`,
-    },
-    loading: {
-        display: 'flex',
-        alignItems: 'center',
-        margin: `${spacersNum.dp8}px 0 0 0`,
-        fontSize: '14px',
-        color: colors.grey900,
-    },
-};
-
-export const ActionsPlain = ({
+export const ActionsComponent = ({
     enrollment = {},
     events,
     programStages,
@@ -44,7 +30,6 @@ export const ActionsPlain = ({
     onAddNew,
     loading,
     onlyEnrollOnce,
-    classes,
 }: PlainProps) => {
     const [isOpenActions, setOpenActions] = useState(false);
     const [isOpenMap, setOpenMap] = useState(false);
@@ -71,7 +56,7 @@ export const ActionsPlain = ({
                 secondary
                 small
                 disabled={loading}
-                className={classes.actions}
+                className="actions"
                 open={isOpenActions}
                 onClick={() => setOpenActions(prev => !prev)}
                 component={
@@ -128,7 +113,7 @@ export const ActionsPlain = ({
                 {i18n.t('Enrollment actions')}
             </DropdownButton>
             {loading && (
-                <div className={classes.loading}>
+                <div className="loading">
                     <LoadingMaskForButton />
                     &nbsp;
                     {i18n.t('We are processing your request.')}
@@ -157,8 +142,18 @@ export const ActionsPlain = ({
                     onUpdateStatus={handleOnUpdateStatus}
                 />
             )}
+            <style jsx>{`
+                .actions {
+                    margin: ${spacersNum.dp8}px 0 0 0;
+                }
+                .loading {
+                    display: flex;
+                    align-items: center;
+                    margin: ${spacersNum.dp8}px 0 0 0;
+                    font-size: 14px;
+                    color: ${colors.grey900};
+                }
+            `}</style>
         </>
     );
 };
-
-export const ActionsComponent: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(ActionsPlain);

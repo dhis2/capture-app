@@ -2,7 +2,6 @@
 import React, { useMemo, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
 import { useNavigate, useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
 import {
@@ -12,21 +11,14 @@ import {
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { EnrollmentAddEventPageStatuses } from './EnrollmentAddEventPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks';
-import { type Props } from './EnrollmentAddEventPage.types';
 import {
     useEnrollmentPageLayout,
 } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout/hooks/useEnrollmentPageLayout';
 import { DataStoreKeyByPage } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 
-const styles = {
-    informativeMessage: {
-        marginLeft: spacersNum.dp16,
-        marginTop: spacersNum.dp24,
-        marginRight: spacersNum.dp16,
-    },
-};
-const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
+/* eslint-disable complexity */
+export const EnrollmentAddEventPage = () => {
     const { navigate } = useNavigate();
     const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
     const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });
@@ -87,7 +79,7 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     }
 
     return (
-        <div className={classes.informativeMessage}>
+        <div className="informative-message">
             <NoticeBox
                 error
                 title={'An error has occurred'}
@@ -104,8 +96,15 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
                     i18n.t('There was an error opening the Page')
                 )}
             </NoticeBox>
+
+            <style jsx>{`
+                .informative-message {
+                    margin-left: ${spacersNum.dp16}px;
+                    margin-top: ${spacersNum.dp24}px;
+                    margin-right: ${spacersNum.dp16}px;
+                }
+            `}</style>
         </div>
     );
 };
 
-export const EnrollmentAddEventPage = withStyles(styles)(EnrollmentAddEventPagePlain);

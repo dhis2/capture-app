@@ -1,33 +1,28 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { theme } from '../../../../styles/theme';
 
 type Props = {
-    classes: {
-        borderBox: string,
-    },
     contentClassName?: ?string,
     children: React.Node,
 };
 
-const styles = (theme: Theme) => ({
-    borderBox: {
-        borderRadius: theme.typography.pxToRem(6),
-        borderWidth: theme.typography.pxToRem(2),
-        borderColor: '#e0e0e0',
-        borderStyle: 'solid',
-    },
-});
-
-const BorderBoxPlain = (props: Props) => {
-    const { classes, children, contentClassName } = props;
+export const BorderBox = (props: Props) => {
+    const { children, contentClassName } = props;
     return (
-        <div className={classes.borderBox}>
+        <div className="borderBox">
             <div className={contentClassName}>
                 {children}
             </div>
+            <style jsx>{`
+                .borderBox {
+                    border-radius: ${theme.typography.pxToRem(6)};
+                    border-width: ${theme.typography.pxToRem(2)};
+                    border-color: #e0e0e0;
+                    border-style: solid;
+                }
+            `}</style>
         </div>
     );
 };
 
-export const BorderBox = withStyles(styles)(BorderBoxPlain);

@@ -1,7 +1,6 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
 
 type Props = {
@@ -11,39 +10,38 @@ type Props = {
     dataTest: string,
 };
 
-const styles = {
-    button: {
-        // Reset button styles
-        background: 'none',
-        border: 'none',
-        cursor: 'pointer',
-        font: 'inherit',
-
-        // Custom button styles
-        fontSize: '14px',
-        padding: '6px 4px',
-        color: colors.grey800,
-        borderRadius: '3px',
-
-        '&:hover': {
-            textDecoration: 'underline',
-            color: 'black',
-        },
-        '&.selected': {
-            color: 'black',
-        },
-    },
-};
-
-const BreadcrumbItemPlain = ({ label, onClick, selected, dataTest, classes }) => (
+export const BreadcrumbItem = ({ label, onClick, selected, dataTest }: Props) => (
     <button
         type="button"
-        className={cx(classes.button, { selected })}
+        className={cx('button', { selected })}
         onClick={onClick}
         data-test={dataTest}
     >
         {label}
+        <style jsx>{`
+            .button {
+                /* Reset button styles */
+                background: none;
+                border: none;
+                cursor: pointer;
+                font: inherit;
+
+                /* Custom button styles */
+                font-size: 14px;
+                padding: 6px 4px;
+                color: ${colors.grey800};
+                border-radius: 3px;
+            }
+            
+            .button:hover {
+                text-decoration: underline;
+                color: black;
+            }
+            
+            .button.selected {
+                color: black;
+            }
+        `}</style>
     </button>
 );
 
-export const BreadcrumbItem: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(BreadcrumbItemPlain);
