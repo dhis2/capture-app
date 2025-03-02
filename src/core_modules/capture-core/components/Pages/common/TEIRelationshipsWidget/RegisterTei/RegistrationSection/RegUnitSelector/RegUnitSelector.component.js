@@ -6,10 +6,10 @@ import { withStyles } from '@material-ui/core/styles';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     label: {
         paddingTop: '10px',
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

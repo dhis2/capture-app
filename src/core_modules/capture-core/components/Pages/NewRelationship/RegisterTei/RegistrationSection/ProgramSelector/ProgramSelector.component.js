@@ -4,10 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { ComposedProgramSelector } from './ComposedProgramSelector.component';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     programLabel: {
         paddingTop: '10px',
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },
