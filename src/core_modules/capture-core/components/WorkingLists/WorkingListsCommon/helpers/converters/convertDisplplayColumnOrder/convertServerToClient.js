@@ -9,9 +9,6 @@ export const convertDisplayColumnOrderToClient = (
         if (columnId === 'eventOrgUnit') {
             return 'eventOrgUnitId';
         }
-        if (columnId === 'orgUnit') {
-            return 'orgUnitId';
-        }
         return columnId;
     });
 };

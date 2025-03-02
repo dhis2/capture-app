@@ -4,7 +4,6 @@ import type { TeiWorkingListsTemplates } from '../../../types';
 import { TEI_WORKING_LISTS } from '../../../constants';
 import { getDefaultTemplate } from '../../../helpers';
 import { convertDisplayColumnOrderToClient } from '../../../../WorkingListsCommon/helpers/converters/convertDisplplayColumnOrder';
-import { convertOrderToClient } from '../../../../WorkingListsCommon/helpers/converters/orderConverter';
 
 type ApiConfig = {
     trackedEntityInstanceFilters: Array<Object>,
@@ -63,7 +62,7 @@ export const getTEITemplates = (
                             enrolledAt: enrollmentCreatedDate,
                             occurredAt: enrollmentIncidentDate,
                             followUp,
-                            order: convertOrderToClient(order),
+                            order,
                             displayColumnOrder: convertDisplayColumnOrderToClient(displayColumnOrder),
                             assignedUserMode,
                             assignedUsers,

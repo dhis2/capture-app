@@ -4,7 +4,6 @@ import type { TeiWorkingListsTemplates } from '../../../types';
 import { PROGRAM_STAGE_WORKING_LISTS } from '../../../constants';
 import { getDefaultTemplate } from '../../../helpers';
 import { convertDisplayColumnOrderToClient } from '../../../../WorkingListsCommon/helpers/converters/convertDisplplayColumnOrder';
-import { convertOrderToClient } from '../../../../WorkingListsCommon/helpers/converters/orderConverter';
 
 type ApiConfig = {
     programStageWorkingLists: Array<Object>,
@@ -71,7 +70,7 @@ export const getProgramStageTemplates = (
                             status: eventStatus,
                             scheduledAt: eventScheduledAt,
                             dataFilters,
-                            order: convertOrderToClient(order),
+                            order,
                             displayColumnOrder: convertDisplayColumnOrderToClient(displayColumnOrder),
                             assignedUserMode,
                             assignedUsers,

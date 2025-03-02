@@ -11,9 +11,7 @@ export const convertDisplayColumnOrderToServer = (
         if (columnId === 'eventOrgUnitId') {
             return 'eventOrgUnit';
         }
-        if (columnId === 'orgUnitId') {
-            return 'orgUnit';
-        }
+
         return columnId;
     });
 };
