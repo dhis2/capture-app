@@ -101,7 +101,7 @@ export const buildArgumentsForTemplate = ({
         attributeValueFilters,
         dataFilters,
         order: getOrderQueryArgs({ sortById, sortByDirection }),
-        displayColumnOrder: visibleColumnIds,
+        displayColumnOrder: visibleColumnIds?.map(columnId => (columnId === 'eventOrgUnitId' ? 'eventOrgUnit' : columnId)),
         programStage: programStageId,
     };
     const data = {

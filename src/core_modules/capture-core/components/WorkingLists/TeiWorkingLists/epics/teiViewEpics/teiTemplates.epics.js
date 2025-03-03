@@ -19,7 +19,6 @@ import {
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
 import { getLocationQuery } from '../../../../../utils/routing';
 import { getDefaultTemplate } from '../../helpers';
-import { convertDisplayColumnOrderToServer } from '../../../WorkingListsCommon/helpers/converters/convertDisplplayColumnOrder';
 
 export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, { mutate }: ApiUtils) =>
     action$.pipe(
@@ -51,7 +50,7 @@ export const addTEITemplateEpic = (action$: InputObservable, store: ReduxStore, 
                 name,
                 program,
                 entityQueryCriteria: {
-                    displayColumnOrder: convertDisplayColumnOrderToServer(displayColumnOrder),
+                    displayColumnOrder,
                     order,
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),
@@ -170,7 +169,7 @@ export const updateTEITemplateEpic = (action$: InputObservable, store: ReduxStor
                 userGroupAccesses,
                 userAccesses,
                 entityQueryCriteria: {
-                    displayColumnOrder: convertDisplayColumnOrderToServer(displayColumnOrder),
+                    displayColumnOrder,
                     order,
                     ...(assignedUserMode && { assignedUserMode }),
                     ...(assignedUsers?.length > 0 && { assignedUsers }),

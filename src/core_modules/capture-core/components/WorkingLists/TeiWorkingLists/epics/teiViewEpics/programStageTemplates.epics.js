@@ -19,7 +19,6 @@ import {
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
 import { getLocationQuery } from '../../../../../utils/routing';
 import { getDefaultTemplate } from '../../helpers';
-import { convertDisplayColumnOrderToServer } from '../../../WorkingListsCommon/helpers/converters/convertDisplplayColumnOrder';
 
 export const addProgramStageTemplateEpic = (action$: InputObservable, store: ReduxStore, { mutate }: ApiUtils) =>
     action$.pipe(
@@ -58,7 +57,7 @@ export const addProgramStageTemplateEpic = (action$: InputObservable, store: Red
                 program,
                 programStage,
                 programStageQueryCriteria: {
-                    displayColumnOrder: convertDisplayColumnOrderToServer(displayColumnOrder),
+                    displayColumnOrder,
                     order,
                     enrolledAt,
                     eventStatus: status,
@@ -205,7 +204,7 @@ export const updateProgramStageTemplateEpic = (action$: InputObservable, store: 
                 userGroupAccesses,
                 userAccesses,
                 programStageQueryCriteria: {
-                    displayColumnOrder: convertDisplayColumnOrderToServer(displayColumnOrder),
+                    displayColumnOrder,
                     order,
                     enrolledAt,
                     eventStatus: status,
