@@ -66,6 +66,7 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
             visible: true,
             type: dataElementTypes.ORGANISATION_UNIT,
             header: ADDITIONAL_FILTERS_LABELS.orgUnit,
+            apiViewName: 'eventOrgUnit',
         },
         ...(programStage.enableUserAssignment
             ? [

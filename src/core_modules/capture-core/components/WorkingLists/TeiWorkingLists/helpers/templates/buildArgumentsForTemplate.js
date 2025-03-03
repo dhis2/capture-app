@@ -87,7 +87,6 @@ export const buildArgumentsForTemplate = ({
             mainFiltersConverted,
         });
     const attributeValueFilters = convertToTEIFilterAttributes({ filters, attributeValueFilters: attributesColumns });
-    const visibleColumnIds: Array<string> = columns.filter(({ visible }) => visible).map(({ id }) => id);
     const criteria: ApiTrackerQueryCriteria = {
         programStatus,
         occurredAt,
@@ -101,7 +100,8 @@ export const buildArgumentsForTemplate = ({
         attributeValueFilters,
         dataFilters,
         order: getOrderQueryArgs({ sortById, sortByDirection }),
-        displayColumnOrder: visibleColumnIds?.map(columnId => (columnId === 'eventOrgUnitId' ? 'eventOrgUnit' : columnId)),
+        // $FlowFixMe Destructuring of union types is not handled properly by Flow.
+        displayColumnOrder: columns.filter(({ visible }) => visible).map(({ id, apiViewName }) => apiViewName || id),
         programStage: programStageId,
     };
     const data = {
@@ -111,7 +111,8 @@ export const buildArgumentsForTemplate = ({
         sortById,
         sortByDirection,
         filters,
-        visibleColumnIds,
+        // $FlowFixMe Destructuring of union types is not handled properly by Flow.
+        visibleColumnIds: columns.filter(({ visible }) => visible).map(({ id }) => id),
     };
     return { data, criteria };
 };
