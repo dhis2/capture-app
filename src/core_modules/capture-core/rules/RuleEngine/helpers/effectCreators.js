@@ -82,6 +82,7 @@ const createMessageEffects = (
     effects.map(effect => ({
         id: effect.id,
         type: effect.type,
+        targetDataType: effect.targetDataType,
         message,
     }));
 
