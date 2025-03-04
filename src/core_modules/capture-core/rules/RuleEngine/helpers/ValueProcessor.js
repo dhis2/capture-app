@@ -1,6 +1,5 @@
 // @flow
 import log from 'loglevel';
-// TODO: add some kind of errorcreator to d2 before moving
 import { mapTypeToInterfaceFnName, typeKeys } from '../constants';
 import type { IConvertInputRulesValue } from '../types/ruleEngine.types';
 
@@ -16,14 +15,7 @@ export class ValueProcessor {
     };
 
     converterObject: IConvertInputRulesValue;
-    processValue: (value: any, type: $Values<typeof typeKeys>) => any;
-
-    constructor(converterObject: IConvertInputRulesValue) {
-        this.converterObject = converterObject;
-        this.processValue = this.processValue.bind(this);
-    }
-
-    processValue(value: any, type: $Values<typeof typeKeys>): any {
+    processValue: (value: any, type: $Values<typeof typeKeys>) => any = (value, type) => {
         if (!typeKeys[type]) {
             log.warn(ValueProcessor.errorMessages.TYPE_NOT_SUPPORTED);
             return '';
@@ -36,5 +28,10 @@ export class ValueProcessor {
         // $FlowFixMe
         const convertedValue = this.converterObject[convertFnName] ? this.converterObject[convertFnName](value) : value;
         return convertedValue ?? null;
+    };
+
+    constructor(converterObject: IConvertInputRulesValue) {
+        this.converterObject = converterObject;
+        this.processValue = this.processValue.bind(this);
     }
 }

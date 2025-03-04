@@ -9,8 +9,8 @@ const processDataElementValue = ({
     dataElementId: ?string,
     dataElements: ?DataElements,
 }) => {
-    if (dataElementId && dataElements && dataElements[dataElementId]) {
-        const dataElement = dataElements[dataElementId];
+    const dataElement = dataElementId && dataElements?.[dataElementId];
+    if (dataElement) {
         return {
             name: dataElement.name,
             valueType: dataElement.valueType,
@@ -26,8 +26,8 @@ const processTEAValue = ({
     trackedEntityAttributeId: ?string,
     trackedEntityAttributes: ?TrackedEntityAttributes,
 }) => {
-    if (trackedEntityAttributeId && trackedEntityAttributes && trackedEntityAttributes[trackedEntityAttributeId]) {
-        const attribute = trackedEntityAttributes[trackedEntityAttributeId];
+    const attribute = trackedEntityAttributeId && trackedEntityAttributes?.[trackedEntityAttributeId];
+    if (attribute) {
         return {
             name: attribute.displayFormName || attribute.displayName,
             valueType: attribute.valueType,

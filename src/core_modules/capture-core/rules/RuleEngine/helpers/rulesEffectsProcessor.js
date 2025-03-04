@@ -1,14 +1,12 @@
 // @flow
 import log from 'loglevel';
 import {
-    mapTypeToInterfaceFnName,
     attributeTypes,
     effectActions,
-    idNames,
+    mapTypeToInterfaceFnName,
     rulesEngineEffectTargetDataTypes,
     typeKeys,
 } from '../constants';
-
 import type {
     ProgramRuleEffect,
     DataElement,
@@ -19,24 +17,21 @@ import type {
     AssignOutputEffect,
     HideOutputEffect,
     HideProgramStageEffect,
-    MessageEffect,
-    GeneralErrorEffect,
-    GeneralWarningEffect,
+    ErrorEffects,
+    WarningEffects,
     CompulsoryEffect,
     OutputEffects,
 } from '../types/ruleEngine.types';
 import { normalizeRuleVariable } from './normalizeRuleVariable';
+import { sanitiseFalsy } from './sanitiseFalsy';
 import { getOutputEffectsWithPreviousValueCheck } from './previousValueCheck';
+import {
+    createEffectsForConfiguredDataTypes,
+    createWarningEffect,
+    createErrorEffect,
+} from './effectCreators';
 
-const sanitiseFalsy = (value) => {
-    if (value) {
-        return value;
-    }
-    if (value === 0) {
-        return 0;
-    }
-    return '';
-};
+type BaseValueType = number | ?string | boolean;
 
 const errorCreator = (message: string) => (details?: ?Object) => ({
     ...details,
@@ -46,73 +41,9 @@ const errorCreator = (message: string) => (details?: ?Object) => ({
 const numberToString = (number: number): string =>
     (isNaN(number) || number === Infinity ? '' : String(number));
 
-type BaseValueType = number | ?string | boolean;
-type WarningEffect = Array<MessageEffect> | GeneralWarningEffect;
-type ErrorEffect = Array<MessageEffect> | GeneralErrorEffect;
-
 export function getRulesEffectsProcessor(
     outputConverters: IConvertOutputRulesEffectsValue,
 ) {
-    const idNamesArray = [idNames.DATA_ELEMENT_ID, idNames.TRACKED_ENTITY_ATTRIBUTE_ID];
-
-    function createEffectsForConfiguredDataTypes(
-        effect: ProgramRuleEffect,
-        getOutputEffect: () => any,
-    ): any {
-        return idNamesArray
-            .filter(idName => effect[idName])
-            .map((idName) => {
-                const outputEffect = getOutputEffect();
-                outputEffect.id = effect[idName];
-                outputEffect.targetDataType =
-                    idName === idNames.DATA_ELEMENT_ID
-                        ? rulesEngineEffectTargetDataTypes.DATA_ELEMENT
-                        : rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE;
-                return outputEffect;
-            });
-    }
-
-    function createErrorDetectionEffect(
-        effect: ProgramRuleEffect,
-        type: $Values<typeof effectActions>): any {
-        const result = createEffectsForConfiguredDataTypes(effect, (): any => ({
-            type,
-            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
-        }));
-        return result.length !== 0 ? result : {
-            type,
-            id: 'general',
-        };
-    }
-
-    function createWarningEffect(
-        effect: ProgramRuleEffect,
-        type: $Values<typeof effectActions>): WarningEffect {
-        const result = createErrorDetectionEffect(effect, type);
-        if (Array.isArray(result)) {
-            return result;
-        }
-        result.warning = {
-            id: effect.id,
-            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
-        };
-        return result;
-    }
-
-    function createErrorEffect(
-        effect: ProgramRuleEffect,
-        type: $Values<typeof effectActions>): ErrorEffect {
-        const result = createErrorDetectionEffect(effect, type);
-        if (Array.isArray(result)) {
-            return result;
-        }
-        result.error = {
-            id: effect.id,
-            message: `${effect.displayContent || ''} ${sanitiseFalsy(effect.data)}`,
-        };
-        return result;
-    }
-
     function convertNormalizedValueToOutputValue(normalizedValue: BaseValueType, valueType: string) {
         let outputValue;
         if (normalizedValue || normalizedValue === 0 || normalizedValue === false) {
@@ -149,19 +80,20 @@ export function getRulesEffectsProcessor(
     function processAssignValue(
         effect: ProgramRuleEffect,
         dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes): AssignOutputEffect | Array<AssignOutputEffect> {
+        trackedEntityAttributes: ?TrackedEntityAttributes,
+    ): Array<AssignOutputEffect> {
         if (effect.attributeType === attributeTypes.DATA_ELEMENT && dataElements) {
-            return createAssignValueEffect(
+            return [createAssignValueEffect(
                 effect.data,
                 dataElements[effect.field],
                 rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-            );
+            )];
         } else if (effect.attributeType === attributeTypes.TRACKED_ENTITY_ATTRIBUTE && trackedEntityAttributes) {
-            return createAssignValueEffect(
+            return [createAssignValueEffect(
                 effect.data,
                 trackedEntityAttributes[effect.field],
                 rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE,
-            );
+            )];
         }
         return [];
     }
@@ -175,11 +107,11 @@ export function getRulesEffectsProcessor(
     ): Array<HideOutputEffect> {
         const outputEffects = createEffectsForConfiguredDataTypes(
             effect,
-            () => ({
-                type: effectActions.HIDE_FIELD,
-                ...(effect.content ? { content: effect.content } : {}),
-            }),
-        );
+            effectActions.HIDE_FIELD,
+        ).map(outputEffect => ({
+            ...outputEffect,
+            ...(effect.content ? { content: effect.content } : {}),
+        }));
         return getOutputEffectsWithPreviousValueCheck({
             outputEffects,
             formValues,
@@ -191,19 +123,19 @@ export function getRulesEffectsProcessor(
         });
     }
 
-    function processShowError(effect: ProgramRuleEffect): ErrorEffect {
+    function processShowError(effect: ProgramRuleEffect): ErrorEffects {
         return createErrorEffect(effect, effectActions.SHOW_ERROR);
     }
 
-    function processShowWarning(effect: ProgramRuleEffect): WarningEffect {
+    function processShowWarning(effect: ProgramRuleEffect): WarningEffects {
         return createWarningEffect(effect, effectActions.SHOW_WARNING);
     }
 
-    function processShowErrorOnComplete(effect: ProgramRuleEffect): ErrorEffect {
+    function processShowErrorOnComplete(effect: ProgramRuleEffect): ErrorEffects {
         return createErrorEffect(effect, effectActions.SHOW_ERROR_ONCOMPLETE);
     }
 
-    function processShowWarningOnComplete(effect: ProgramRuleEffect): WarningEffect {
+    function processShowWarningOnComplete(effect: ProgramRuleEffect): WarningEffects {
         return createWarningEffect(effect, effectActions.SHOW_WARNING_ONCOMPLETE);
     }
 
@@ -230,9 +162,7 @@ export function getRulesEffectsProcessor(
     }
 
     function processMakeCompulsory(effect: ProgramRuleEffect): Array<CompulsoryEffect> {
-        return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.MAKE_COMPULSORY,
-        }));
+        return createEffectsForConfiguredDataTypes(effect, effectActions.MAKE_COMPULSORY);
     }
 
     function processDisplayText(effect: ProgramRuleEffect): any {
@@ -264,24 +194,27 @@ export function getRulesEffectsProcessor(
     }
 
     function processHideOptionGroup(effect: ProgramRuleEffect): any {
-        return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.HIDE_OPTION_GROUP,
-            optionGroupId: effect.optionGroupId,
-        }));
+        return createEffectsForConfiguredDataTypes(effect, effectActions.HIDE_OPTION_GROUP)
+            .map(outputEffect => ({
+                ...outputEffect,
+                optionGroupId: effect.optionGroupId,
+            }));
     }
 
     function processHideOption(effect: ProgramRuleEffect): any {
-        return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.HIDE_OPTION,
-            optionId: effect.optionId,
-        }));
+        return createEffectsForConfiguredDataTypes(effect, effectActions.HIDE_OPTION)
+            .map(outputEffect => ({
+                ...outputEffect,
+                optionId: effect.optionId,
+            }));
     }
 
     function processShowOptionGroup(effect: ProgramRuleEffect): any {
-        return createEffectsForConfiguredDataTypes(effect, () => ({
-            type: effectActions.SHOW_OPTION_GROUP,
-            optionGroupId: effect.optionGroupId,
-        }));
+        return createEffectsForConfiguredDataTypes(effect, effectActions.SHOW_OPTION_GROUP)
+            .map(outputEffect => ({
+                ...outputEffect,
+                optionGroupId: effect.optionGroupId,
+            }));
     }
 
     const mapActionsToProcessor = {
@@ -323,8 +256,8 @@ export function getRulesEffectsProcessor(
                 formValues,
                 onProcessValue,
             ))
-        // when mapActionsToProcessor function returns `null` we filter those value out.
-            .filter(keepTruthyValues => keepTruthyValues);
+        // when mapActionsToProcessor function returns `null` we filter those values out.
+            .filter(Boolean);
     }
 
     return processRulesEffects;

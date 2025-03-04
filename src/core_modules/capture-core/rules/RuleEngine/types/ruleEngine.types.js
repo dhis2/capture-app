@@ -121,17 +121,29 @@ export type HideProgramStageEffect = OutputEffect & {
 
 };
 
-export type MessageEffect = OutputEffect & {
+type ValidationMessage = {|
+    id: string,
     message: string,
-};
+|};
 
-export type GeneralErrorEffect = OutputEffect & {
-    error: { id: string, message: string },
-};
+export type GeneralErrorEffect = {|
+    ...$Exact<OutputEffect>,
+    error: ValidationMessage
+|};
 
-export type GeneralWarningEffect = OutputEffect & {
-    warning: { id: string, message: string },
-};
+export type GeneralWarningEffect = {|
+    ...$Exact<OutputEffect>,
+    warning: ValidationMessage
+|};
+
+export type MessageEffect = {|
+    ...$Exact<OutputEffect>,
+    message: string,
+|};
+
+export type WarningEffects = Array<MessageEffect> | Array<GeneralWarningEffect>;
+
+export type ErrorEffects = Array<MessageEffect> | Array<GeneralErrorEffect>;
 
 export type CompulsoryEffect = OutputEffect & {
 
@@ -175,7 +187,7 @@ export type ProgramRule = {
     priority: number,
     condition: string,
     description?: ?string,
-    displayName: string, // TODO: Refactor and remove
+    displayName: string,
     programId: string,
     programStageId?: ?string,
     programRuleActions: Array<ProgramRuleAction>,
