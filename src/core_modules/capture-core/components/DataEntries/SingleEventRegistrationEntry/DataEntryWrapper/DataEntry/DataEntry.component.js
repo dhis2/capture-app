@@ -630,10 +630,11 @@ class NewEventDataEntry extends Component<Props> {
 
         return (
             <span>
-                {
-                    i18n.t('Saving to {{programName}} in {{orgUnitName}}',
+                {orgUnitName
+                    ? i18n.t('Saving to {{programName}} in {{orgUnitName}}',
                         { orgUnitName, programName, interpolation: { escapeValue: false } })
-                }
+                    : i18n.t('Saving to {{programName}}',
+                        { programName, interpolation: { escapeValue: false } })}
             </span>
         );
     }
