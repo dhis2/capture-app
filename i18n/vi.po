@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -759,6 +759,23 @@ msgstr ""
 "Phân tổ tùy chọn này không hợp lệ cho đơn vị được chọn. Hãy chọn một phân tổ"
 " phù hợp."
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "Hãy chọn {{category}}"
 
@@ -891,9 +908,6 @@ msgstr "Các chỉ số"
 msgid "Warnings"
 msgstr "Cảnh báo"
 
-msgid "Show all events"
-msgstr "Hiện tất cả sự kiện"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Không thể tải sự kiện. Bạn có chắc nó tồn tại?"
 
@@ -927,9 +941,6 @@ msgstr "Đang tải"
 
 msgid "An error occurred while loading the form"
 msgstr "Có lỗi khi tải biểu nhập"
-
-msgid "Back to all stages and events"
-msgstr "Quay trở lại tất cả giai đoạn và sự kiện"
 
 msgid "Possible duplicates found"
 msgstr "Có thể tìm thấy các dữ liệu trùng"
@@ -1292,6 +1303,12 @@ msgstr "Vào tab “Lên lịch” để lên lịch lại sự kiện này"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Ngày đã lên lịch không thể thay đổi cho sự kiện {{ eventStatus }}"
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Sự kiện đã hoàn tất"
 
@@ -1426,8 +1443,8 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Chọn một {{linkableStageLabel}}"
 
-msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }}không lặp lại"
+msgid "{{ linkableStageLabel }} can only have one event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }}không thể liên kết đến sự kiện"
@@ -1438,10 +1455,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Mối quan hệ mơ hồ, liên hệ với quản trị viên hệ thống"
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr "Sự kiện liên kết"
+
 msgid "Enter details now"
 msgstr "Nhập chi tiết bây giờ"
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1546,9 +1575,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr "Có lỗi xảy ra khi tải thông tin"
 
-msgid "Linked event"
-msgstr "Sự kiện liên kết"
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1565,6 +1591,9 @@ msgstr "Nhật ký thay đổi"
 msgid "No changes to display"
 msgstr "Không có thay đổi nào để hiển thị"
 
+msgid "Data item"
+msgstr "Mục dữ liệu"
+
 msgid "Updated"
 msgstr "Đã cập nhật"
 
@@ -1577,11 +1606,17 @@ msgstr "Đã xóa"
 msgid "Date"
 msgstr "Ngày"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "Người dùng"
 
-msgid "Data item"
-msgstr "Mục dữ liệu"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr "Thay đổi"

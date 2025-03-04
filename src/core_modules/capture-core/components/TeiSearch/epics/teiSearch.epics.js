@@ -4,6 +4,7 @@ import { from, of } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { map, takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { convertValue as convertToClient } from '../../../converters/formToClient';
 import { convertValue as convertToServer } from '../../../converters/clientToServer';
 import {
@@ -34,10 +35,18 @@ import {
 import { getSearchFormId } from '../getSearchFormId';
 import type { QuerySingleResource } from '../../../utils/api/api.types';
 
-const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
-    (['ACCESSIBLE', 'CAPTURE', 'ALL'].includes(orgUnitScope) ?
-        { ouMode: orgUnitScope } :
-        { orgUnit: orgUnit && orgUnit.id, ouMode: orgUnitScope });
+const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) => {
+    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+        ? 'orgUnitMode'
+        : 'ouMode';
+    const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+        ? 'orgUnits'
+        : 'orgUnit';
+
+    return ['ACCESSIBLE', 'CAPTURE', 'ALL'].includes(orgUnitScope)
+        ? { [orgUnitModeQueryParam]: orgUnitScope }
+        : { [orgUnitQueryParam]: orgUnit?.id, [orgUnitModeQueryParam]: orgUnitScope };
+};
 
 const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
     (programId ? { program: programId } : { trackedEntityType: trackedEntityTypeId });

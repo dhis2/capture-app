@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -752,6 +752,23 @@ msgstr ""
 "ຕົວເລືອກໃນໝວດໝູ່ບໍ່ຖືກຕ້ອງສຳລັບຫົວໜ່ວຍການຈັດຕັ້ງ. "
 "ກະລຸນາເລືອກທີ່ອັນທີ່ຖືກຕ້ອງ."
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "ກະລຸນາເລືອກ {{category}} ."
 
@@ -882,9 +899,6 @@ msgstr "ຕົວຊີ້ວັດ"
 msgid "Warnings"
 msgstr "ແຈ້ງເຕືອນ"
 
-msgid "Show all events"
-msgstr "ສະແດງເຫດການທັງໝົດ"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "ບໍ່ສາມາດໂຫຼດເຫດການໄດ້. ທ່ານແນ່ໃຈບໍ່ວ່າມັນມີຢູ່?"
 
@@ -918,9 +932,6 @@ msgstr "ກໍາລັງໂຫຼດ"
 
 msgid "An error occurred while loading the form"
 msgstr "ພົບບັນຫາໃນລະຫວ່າງການໂຫຼດຟອມ"
-
-msgid "Back to all stages and events"
-msgstr "ກັບໄປທຸກຂັ້ນຕອນ ແລະ ເຫດການ"
 
 msgid "Possible duplicates found"
 msgstr "ພົບການຊໍ້າກັນທີ່ເປັນໄປໄດ້"
@@ -1271,6 +1282,12 @@ msgstr "ໄປທີ່ແຖບ \"ຕາຕະລາງ\" ເພື່ອຈັ
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "ວັນທີທີ່ກຳນົດໄວ້ບໍ່ສາມາດປ່ຽນແປງໄດ້ສຳລັບເຫດການ {{ eventStatus }}"
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "ກິດຈະກຳສຳເລັດແລ້ວ"
 
@@ -1402,8 +1419,8 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "ເລືອກ {{linkableStageLabel}}"
 
-msgid "{{ linkableStageLabel }} is not repeatable"
-msgstr "{{ linkableStageLabel }} ແມ່ນບໍ່ສາມາດເຮັດຊ້ຳໄດ້"
+msgid "{{ linkableStageLabel }} can only have one event"
+msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} ບໍ່ມີເຫດການທີ່ສາມາດເຊື່ອມໂຍງໄດ້"
@@ -1414,10 +1431,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "ການເຊື່ອມໂຍງບໍ່ຊັດເຈນ, ຕິດຕໍ່ຜູ້ດູແລລະບົບ"
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr "ປ້ອນລາຍລະອຽດ"
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1522,9 +1551,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr "ເກີດຄວາມຜິດພາດຂຶ້ນໃນຂະນະທີ່ໂຫຼດລາຍການ."
 
-msgid "Linked event"
-msgstr ""
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1539,6 +1565,9 @@ msgstr "ບັນທຶກການປ່ຽນແປງ"
 msgid "No changes to display"
 msgstr "ບໍ່ມີການປ່ຽນແປງທີ່ຈະສະແດງ"
 
+msgid "Data item"
+msgstr "ລາຍການຂໍ້ມູນ"
+
 msgid "Updated"
 msgstr ""
 
@@ -1551,11 +1580,17 @@ msgstr "ລົບ"
 msgid "Date"
 msgstr "ວັນທີ່"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "ຜູ້ໃຊ້"
 
-msgid "Data item"
-msgstr "ລາຍການຂໍ້ມູນ"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr "ປ່ຽນ"

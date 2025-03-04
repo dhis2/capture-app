@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-19T09:36:55.016Z\n"
-"PO-Revision-Date: 2025-02-19T09:36:55.016Z\n"
+"POT-Creation-Date: 2025-02-17T15:42:27.630Z\n"
+"PO-Revision-Date: 2025-02-17T15:42:27.630Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -919,6 +919,12 @@ msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Fill in at least {{count}} attribute to search"
 msgstr[1] "Fill in at least {{count}} attributes to search"
 
+msgid "Missing search criteria"
+msgstr "Missing search criteria"
+
+msgid "Back to search"
+msgstr "Back to search"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
 
@@ -1027,9 +1033,6 @@ msgstr ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 
-msgid "Back to search"
-msgstr "Back to search"
-
 msgid "An error has occurred"
 msgstr "An error has occurred"
 
@@ -1038,9 +1041,6 @@ msgstr "Too many results"
 
 msgid "Cannot search in all programs"
 msgstr "Cannot search in all programs"
-
-msgid "Missing search criteria"
-msgstr "Missing search criteria"
 
 msgid "Results found"
 msgstr "Results found"

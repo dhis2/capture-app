@@ -16,7 +16,7 @@ import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.co
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { navigate, serverVersion: { minor } }: ApiUtils) =>
+export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map((action) => {
@@ -34,7 +34,6 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
                     mainDataClientValues,
                     navigate,
                     completed,
-                    minor,
                 );
 
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];

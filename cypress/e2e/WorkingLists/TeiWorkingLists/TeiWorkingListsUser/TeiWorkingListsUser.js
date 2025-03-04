@@ -1,6 +1,7 @@
 import { defineStep as And, Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { v4 as uuid } from 'uuid';
 import '../sharedSteps';
+import { hasVersionSupport } from '../../../../support/tagUtils';
 
 const cleanUpIfApplicable = (programId) => {
     cy.buildApiUrl(`programStageWorkingLists?filter=program.id:eq:${programId}&fields=id,displayName`)
@@ -24,9 +25,7 @@ Given('you open the main page with child programe context', () => {
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
-    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="template-selector-create-list"]')
-        .click();
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 });
 
 Given('you open the main page with Ngelehun and Malaria focus investigation context', () => {
@@ -34,9 +33,7 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 });
 
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
-    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="template-selector-create-list"]')
-        .click();
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tei-working-lists"]')
         .within(() => {
@@ -742,9 +739,7 @@ Then('the program stage custom working list filters are loaded', () => {
 });
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {
-    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="template-selector-create-list"]')
-        .click();
+    cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
     cy.get('[data-test="tei-working-lists"]')
         .within(() => {
@@ -831,7 +826,10 @@ Then('the download dialog opens', () => {
 });
 
 Then('the CSV button exists', () => {
-    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    const pagingParam = hasVersionSupport('@v>=41') ? 'paging=false' : 'skipPaging=true';
+    const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
+    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnit';
+    const params = `order=createdAt%3Adesc&${orgUnitParam}=DiszpKrYNg8&${orgUnitModeParam}=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&${pagingParam}`;
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download as CSV');
@@ -843,7 +841,10 @@ Then('the CSV button exists', () => {
 });
 
 Then('the JSON button exists', () => {
-    const params = 'order=createdAt%3Adesc&orgUnit=DiszpKrYNg8&ouMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&skipPaging=true';
+    const pagingParam = hasVersionSupport('@v>=41') ? 'paging=false' : 'skipPaging=true';
+    const orgUnitModeParam = hasVersionSupport('@v>=41') ? 'orgUnitMode' : 'ouMode';
+    const orgUnitParam = hasVersionSupport('@v>=41') ? 'orgUnits' : 'orgUnit';
+    const params = `order=createdAt%3Adesc&${orgUnitParam}=DiszpKrYNg8&${orgUnitModeParam}=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C%21relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D&${pagingParam}`;
     cy.get('[data-test="working-lists-download-dialog"]')
         .within(() => {
             cy.contains('Download as JSON');
