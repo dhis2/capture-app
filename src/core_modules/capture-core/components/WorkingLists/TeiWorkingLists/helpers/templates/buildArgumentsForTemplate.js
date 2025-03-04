@@ -99,7 +99,11 @@ export const buildArgumentsForTemplate = ({
         scheduledAt,
         attributeValueFilters,
         dataFilters,
-        order: getOrderQueryArgs({ sortById, sortByDirection }),
+        order: getOrderQueryArgs({
+            // $FlowFixMe Destructuring of union types is not handled properly by Flow.
+            sortById: columns.find(({ id }) => id === sortById)?.apiViewName || sortById,
+            sortByDirection,
+        }),
         // $FlowFixMe Destructuring of union types is not handled properly by Flow.
         displayColumnOrder: columns.filter(({ visible }) => visible).map(({ id, apiViewName }) => apiViewName || id),
         programStage: programStageId,
