@@ -56,11 +56,7 @@ export const getOpenDataEntryActions = (
 ) => {
     let defaultDataEntryValues = {
         orgUnit: orgUnit
-            ? {
-                id: orgUnit.id,
-                name: orgUnit.name,
-                path: orgUnit.path,
-            }
+            ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
             : undefined,
     };
 

@@ -520,6 +520,7 @@ const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(Save
 type Props = {
     formFoundation: RenderFoundation,
     programName: string,
+    orgUnitId: string,
     orgUnit: OrgUnit,
     orgUnitName: string,
     stageName: string,
@@ -674,7 +675,7 @@ class NewEventDataEntry extends Component<Props> {
                         onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
                         onUpdateFormField={onUpdateField(orgUnit)}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
-                        selectedOrgUnitId={orgUnit.id}
+                        selectedOrgUnitId={orgUnit?.id}
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={this.dataEntrySections}

@@ -23,7 +23,6 @@ const getStyles = () => ({
 });
 
 const NewPagePlain = ({
-    showMessageToSelectOrgUnitOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage,
     showMessageThatCategoryOptionIsInvalidForOrgUnit,
     showDefaultViewOnNewPage,
@@ -35,7 +34,6 @@ const NewPagePlain = ({
     programCategorySelectionIncomplete,
     categoryOptionIsInvalidForOrgUnit,
     missingCategoriesInProgramSelection,
-    orgUnitSelectionIncomplete,
     trackedEntityName,
     trackedEntityInstanceAttributes,
 }: Props) => {
@@ -47,9 +45,7 @@ const NewPagePlain = ({
     }, [scopeType, currentScopeId]);
 
     useEffect(() => {
-        if (orgUnitSelectionIncomplete) {
-            showMessageToSelectOrgUnitOnNewPage();
-        } else if (programCategorySelectionIncomplete) {
+        if (programCategorySelectionIncomplete) {
             showMessageToSelectProgramCategoryOnNewPage();
         } else if (categoryOptionIsInvalidForOrgUnit) {
             showMessageThatCategoryOptionIsInvalidForOrgUnit();
@@ -59,8 +55,6 @@ const NewPagePlain = ({
     },
     [
         programCategorySelectionIncomplete,
-        orgUnitSelectionIncomplete,
-        showMessageToSelectOrgUnitOnNewPage,
         showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
         categoryOptionIsInvalidForOrgUnit,
@@ -150,3 +144,6 @@ export const NewPageComponent: ComponentType<ContainerProps> =
         withErrorMessageHandler(),
         withStyles(getStyles),
     )(NewPagePlain);
+
+
+// her 2
