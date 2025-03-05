@@ -38,6 +38,5 @@ export type PlainProps = {|
     canAddNew: boolean,
     onlyEnrollOnce: boolean,
     tetName: string,
-    ...CssClasses,
 |};
 

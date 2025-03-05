@@ -1,9 +1,8 @@
 // @flow
-import React, { type ComponentType, useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
@@ -12,17 +11,11 @@ import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import { addEnrollmentEventPageDefaultActionTypes } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
-import type { PlainProps, Props } from './newEventWorkspace.types';
+import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
 import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 
-const styles = () => ({
-    innerWrapper: {
-        padding: `0 ${spacersNum.dp16}px`,
-    },
-});
-
-const NewEventWorkspacePlain = ({
+export const NewEventWorkspace = ({
     stageId,
     programId,
     orgUnitId,
@@ -31,9 +24,8 @@ const NewEventWorkspacePlain = ({
     dataEntryHasChanges,
     onCancel,
     onSave,
-    classes,
     ...passOnProps
-}: PlainProps) => {
+}: Props) => {
     const { tab } = useLocationQuery();
     const { events, enrolledAt, occurredAt } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(tab ?? tabMode.REPORT);
@@ -58,7 +50,7 @@ const NewEventWorkspacePlain = ({
                     <WidgetStageHeader stage={stage} />
                 }
             >
-                <div data-test={'add-event-enrollment-page-content'} className={classes.innerWrapper}>
+                <div data-test={'add-event-enrollment-page-content'} className="inner-wrapper">
                     <TabBar dataTest="new-event-tab-bar">
                         <Tab
                             key="report-tab"
@@ -114,6 +106,11 @@ const NewEventWorkspacePlain = ({
                         enableUserAssignment
                     />}
                 </div>
+                <style jsx>{`
+                    .inner-wrapper {
+                        padding: 0 ${spacersNum.dp16}px;
+                    }
+                `}</style>
             </Widget>
             <DiscardDialog
                 {...defaultDialogProps}
@@ -124,7 +121,3 @@ const NewEventWorkspacePlain = ({
         </>
     );
 };
-
-export const NewEventWorkspace: ComponentType<
-    Props,
-> = withStyles(styles)(NewEventWorkspacePlain);

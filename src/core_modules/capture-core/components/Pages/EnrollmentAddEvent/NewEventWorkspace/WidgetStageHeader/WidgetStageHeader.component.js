@@ -1,31 +1,15 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './widgetStageHeader.types';
 
-const styles = () => ({
-    wrapper: {
-        paddingLeft: spacersNum.dp16,
-    },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: spacersNum.dp8,
-    },
-    icon: {
-        paddingRight: spacersNum.dp8,
-    },
-});
-
-const WidgetStageHeaderPlain = ({
+export const WidgetStageHeader = ({
     stage,
-    classes,
 }: Props) => (
-    <div className={classes.header}>
+    <div className="header">
         {stage?.icon && (
-            <div className={classes.icon}>
+            <div className="icon">
                 <NonBundledDhis2Icon
                     name={stage?.icon?.name}
                     color={stage?.icon?.color}
@@ -36,9 +20,18 @@ const WidgetStageHeaderPlain = ({
             </div>
         )}
         <span>{stage?.name}</span>
+
+        <style jsx>{`
+            .header {
+                display: flex;
+                align-items: center;
+                padding: ${spacersNum.dp8}px;
+            }
+            
+            .icon {
+                padding-right: ${spacersNum.dp8}px;
+            }
+        `}</style>
     </div>
 );
 
-export const WidgetStageHeader: ComponentType<
-    $Diff<Props, CssClasses>,
-> = withStyles(styles)(WidgetStageHeaderPlain);

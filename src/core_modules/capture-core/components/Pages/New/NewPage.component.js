@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import type { ComponentType } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
@@ -16,19 +15,12 @@ import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 
-const getStyles = () => ({
-    container: {
-        padding: '24px 24px 16px 24px',
-    },
-});
-
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage,
     showMessageThatCategoryOptionIsInvalidForOrgUnit,
     showDefaultViewOnNewPage,
     handleMainPageNavigation,
-    classes,
     currentScopeId,
     newPageStatus,
     writeAccess,
@@ -69,7 +61,7 @@ const NewPagePlain = ({
     const orgUnitId = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
 
     return (
-        <div data-test="registration-page-content" className={classes.container} >
+        <div data-test="registration-page-content" className="container">
             {
                 !writeAccess ?
                     <NoWriteAccessMessage
@@ -140,6 +132,12 @@ const NewPagePlain = ({
 
                     </OrgUnitFetcher>
             }
+
+            <style jsx>{`
+                .container {
+                    padding: 24px 24px 16px 24px;
+                }
+            `}</style>
         </div>
     );
 };
@@ -148,5 +146,4 @@ export const NewPageComponent: ComponentType<ContainerProps> =
     compose(
         withLoadingIndicator(),
         withErrorMessageHandler(),
-        withStyles(getStyles),
     )(NewPagePlain);

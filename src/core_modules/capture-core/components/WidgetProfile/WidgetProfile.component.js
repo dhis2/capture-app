@@ -1,11 +1,9 @@
 // @flow
 /* eslint-disable complexity */
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from 'react-query';
@@ -29,34 +27,16 @@ import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 
-const styles = {
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100%',
-    },
-    container: {
-        padding: `0 ${spacers.dp16}`,
-        marginBottom: spacers.dp8,
-    },
-    actions: {
-        display: 'flex',
-        gap: '4px',
-    },
-};
-
 const showEditModal = (loading, error, showEdit, modalState) =>
     !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE;
 
-const WidgetProfilePlain = ({
+export const WidgetProfile = ({
     teiId,
     programId,
     readOnlyMode = false,
     orgUnitId = '',
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
-    classes,
 }: PlainProps) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
@@ -135,8 +115,14 @@ const WidgetProfilePlain = ({
         }
 
         return (
-            <div className={classes.container}>
+            <div className="container">
                 <FlatList dataTest="profile-widget-flatlist" list={displayInListAttributes} />
+                <style jsx>{`
+                    .container {
+                        padding: 0 ${spacers.dp16};
+                        margin-bottom: ${spacers.dp8};
+                    }
+                `}</style>
             </div>
         );
     };
@@ -147,7 +133,7 @@ const WidgetProfilePlain = ({
         <div data-test="profile-widget">
             <Widget
                 header={
-                    <div className={classes.header}>
+                    <div className="header">
                         <div>
                             {trackedEntityTypeName
                                 ? i18n.t('{{trackedEntityTypeName}} profile', {
@@ -156,7 +142,7 @@ const WidgetProfilePlain = ({
                                 })
                                 : i18n.t('Profile')}
                         </div>
-                        <div className={classes.actions}>
+                        <div className="actions">
                             {isEditable && (
                                 <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
                                     {i18n.t('Edit')}
@@ -174,6 +160,18 @@ const WidgetProfilePlain = ({
                                 readOnlyMode={readOnlyMode || false}
                             />
                         </div>
+                        <style jsx>{`
+                            .header {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                width: 100%;
+                            }
+                            .actions {
+                                display: flex;
+                                gap: 4px;
+                            }
+                        `}</style>
                     </div>
                 }
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
@@ -208,4 +206,3 @@ const WidgetProfilePlain = ({
     );
 };
 
-export const WidgetProfile: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(WidgetProfilePlain);

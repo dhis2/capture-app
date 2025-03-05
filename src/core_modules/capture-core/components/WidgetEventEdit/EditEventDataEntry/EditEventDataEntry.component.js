@@ -57,11 +57,11 @@ const tabMode = Object.freeze({
     SCHEDULE: 'SCHEDULE',
 });
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },

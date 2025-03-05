@@ -128,7 +128,15 @@
                 ]
             }
         ],
-        "import/extensions": ["error", "never"]
+        "import/extensions": ["error", "never"],  
+        "react/no-unknown-property": [
+            2,
+            {
+                "ignore": [
+                "jsx"
+                ]
+            }
+        ]
     },
     "settings": {
         "import/resolver": {

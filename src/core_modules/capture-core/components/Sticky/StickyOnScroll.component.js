@@ -1,37 +1,14 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
 type Props = {
     offsetTop: number,
     minViewpointWidth: number,
     children: React.Node,
     containerClass?: ?string,
-    classes: {
-        container: string,
-        stickyContainerAbsolute: string,
-        stickyContainerFixed: string,
-        stickyContainerAtBottom: string,
-    },
 }
 
-const styles = () => ({
-    container: {
-        position: 'relative',
-    },
-    stickyContainerAbsolute: {
-        position: 'static',
-    },
-    stickyContainerFixed: {
-        position: 'fixed',
-    },
-    stickyContainerAtBottom: {
-        position: 'absolute',
-        bottom: 0,
-    },
-});
-
-class StickyOnScrollPlain extends React.Component<Props> {
+export class StickyOnScroll extends React.Component<Props> {
     stickyContainer: any;
     scrollTimer: any;
     resizeTimer: any;
@@ -67,7 +44,7 @@ class StickyOnScrollPlain extends React.Component<Props> {
             width < this.props.minViewpointWidth;
     }
 
-    setStickyContainerInstance = (instance) => {
+    setStickyContainerInstance = (instance: HTMLDivElement | null) => {
         this.stickyContainer = instance;
         this.setSticky();
     }
@@ -80,22 +57,21 @@ class StickyOnScrollPlain extends React.Component<Props> {
     }
 
     setSticky = () => {
-        const classes = this.props.classes;
         if (this.stickyContainer && (this.stickyDisabled() || !this.isNearTop())) {
-            this.stickyContainer.className = classes.stickyContainerAbsolute;
+            this.stickyContainer.className = 'sticky-container-absolute';
             this.stickyContainer.style.top = 'initial';
             this.stickyContainer.style.marginRight = 'initial';
             this.stickyContainer.style.width = 'initial';
             return;
         }
         if (this.stickyContainer && this.isAtBottomOfContainer()) {
-            this.stickyContainer.className = classes.stickyContainerAtBottom;
+            this.stickyContainer.className = 'sticky-container-at-bottom';
             this.stickyContainer.style.top = 'initial';
             this.stickyContainer.style.marginRight = 'initial';
             return;
         }
         if (this.stickyContainer) {
-            this.stickyContainer.className = classes.stickyContainerFixed;
+            this.stickyContainer.className = 'sticky-container-fixed';
             this.stickyContainer.style.top = `${this.props.offsetTop}px`;
             this.stickyContainer.style.width = `${this.stickyContainer.parentElement.clientWidth}px`;
             this.stickyContainer.style.marginRight = `${this.getRightMargin()}px`;
@@ -116,17 +92,30 @@ class StickyOnScrollPlain extends React.Component<Props> {
         this.scrollTimer = window.setTimeout(this.setSticky, 10);
     }
 
-
     render() {
-        const { classes, children, containerClass } = this.props;
+        const { children, containerClass } = this.props;
         return (
-            <div className={containerClass || classes.container}>
+            <div className={containerClass || 'container'}>
                 <div ref={(stickyContainerInstance) => { this.setStickyContainerInstance(stickyContainerInstance); }}>
                     {children}
                 </div>
+                <style jsx>{`
+                    .container {
+                        position: relative;
+                    }
+                    .sticky-container-absolute {
+                        position: static;
+                    }
+                    .sticky-container-fixed {
+                        position: fixed;
+                    }
+                    .sticky-container-at-bottom {
+                        position: absolute;
+                        bottom: 0;
+                    }
+                `}</style>
             </div>
         );
     }
 }
 
-export const StickyOnScroll = withStyles(styles)(StickyOnScrollPlain);

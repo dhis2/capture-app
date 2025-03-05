@@ -1,32 +1,19 @@
 // @flow
 import React, { useState } from 'react';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
-import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
 import { MapModal } from '../MapModal';
 import type { MiniMapProps } from './MiniMap.types';
 import { convertToClientCoordinates } from './converters';
 import { useUpdateEnrollment } from '../dataMutation/dataMutation';
 
-const styles = () => ({
-    mapContainer: {
-        width: 150,
-        height: 120,
-    },
-    map: {
-        width: '100%',
-        height: '100%',
-    },
-});
-
-const MiniMapPlain = ({
+export const MiniMap = ({
     coordinates,
     geometryType,
     enrollment,
     refetchEnrollment,
     refetchTEI,
     onError,
-    classes,
 }: MiniMapProps) => {
     const [isOpenMap, setOpenMap] = useState(false);
     const { updateMutation } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
@@ -38,16 +25,15 @@ const MiniMapPlain = ({
             map?.fitBounds(clientValues);
         }
     };
-
     return (
         <>
-            <div className={classes.mapContainer}>
+            <div className="map-container">
                 <Map
                     ref={(mapRef) => {
                         onMapReady(mapRef);
                     }}
                     center={center}
-                    className={classes.map}
+                    className="map"
                     zoom={11}
                     zoomControl={false}
                     attributionControl={false}
@@ -73,8 +59,16 @@ const MiniMapPlain = ({
                     enrollment={enrollment}
                 />
             )}
+            <style jsx>{`
+                .map-container {
+                    width: 150px;
+                    height: 120px;
+                }
+                .map {
+                    width: 100%;
+                    height: 100%;
+                }
+            `}</style>
         </>
     );
 };
-
-export const MiniMap = withStyles(styles)(MiniMapPlain);

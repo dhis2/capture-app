@@ -47,5 +47,4 @@ export type PlainProps = {|
     onUpdateEnrollmentStatusSuccess?: ({ redirect?: boolean }) => void,
     onUpdateEnrollmentStatusError?: (message: string) => void,
     onAccessLostFromTransfer?: () => void,
-    ...CssClasses,
 |};

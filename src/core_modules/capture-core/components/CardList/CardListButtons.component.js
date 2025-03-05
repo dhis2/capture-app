@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { useDispatch } from 'react-redux';
@@ -9,6 +8,7 @@ import { availableCardListButtonState, enrollmentTypes } from './CardList.consta
 import {
     navigateToEnrollmentOverview,
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { theme } from '../../../../styles/theme';
 
 type Props = {
     currentSearchScopeId?: string,
@@ -18,14 +18,6 @@ type Props = {
     enrollmentType: string,
     programName?: string,
 }
-
-const buttonStyles = (theme: Theme) => ({
-    buttonMargin: {
-        '&:not(:first-child)': {
-            marginLeft: theme.typography.pxToRem(8),
-        },
-    },
-});
 
 const deriveNavigationButtonState = (type): $Keys<typeof availableCardListButtonState> => {
     switch (type) {
@@ -39,20 +31,44 @@ const deriveNavigationButtonState = (type): $Keys<typeof availableCardListButton
     }
 };
 
-const ActionButtons = withStyles(buttonStyles)(({ buttonProps, classes }) => (
-    <>{buttonProps.map(props => (
-        !props.hide && <Button
-            small
-            className={classes.buttonMargin}
-            dataTest={props.dataTest}
-            onClick={props.onClick}
-        >
-            {props.label}
-        </Button>
-    ))}</>
-));
 
-const CardListButtons = ({
+const ActionButton = ({ dataTest, onClick, label, hide }) => {
+    if (hide) return null;
+
+    return (
+        <>
+            <Button
+                small
+                className="buttonMargin"
+                dataTest={dataTest}
+                onClick={onClick}
+            >
+                {label}
+            </Button>
+            <style jsx>{`
+                :global(.button-margin:not(:first-child)) {
+                    margin-left: ${theme.typography.pxToRem(8)};
+                }
+            `}</style>
+        </>
+    );
+};
+
+const ActionButtons = ({ buttonProps }: { buttonProps: Array<Object>}) => (
+    <>
+        {buttonProps.map((props, index) => (
+            <ActionButton
+                key={props.dataTest || index}
+                dataTest={props.dataTest}
+                onClick={props.onClick}
+                label={props.label}
+                hide={props.hide}
+            />
+        ))}
+    </>
+);
+
+export const CardListButtons = ({
     currentSearchScopeId,
     currentSearchScopeType,
     id,
@@ -108,4 +124,3 @@ const CardListButtons = ({
     return <ActionButtons buttonProps={buttonLists} />;
 };
 
-export { CardListButtons };

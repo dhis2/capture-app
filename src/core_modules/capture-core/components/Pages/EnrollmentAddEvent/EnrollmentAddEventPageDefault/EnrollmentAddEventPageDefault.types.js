@@ -38,7 +38,6 @@ export type Props = {|
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
     onDeleteTrackedEntitySuccess: () => void,
-    ...CssClasses,
 |};
 
 export type ContainerProps = {|
