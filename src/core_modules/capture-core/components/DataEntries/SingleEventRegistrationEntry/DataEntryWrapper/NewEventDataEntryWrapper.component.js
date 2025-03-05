@@ -48,8 +48,8 @@ const NewEventDataEntryWrapperPlain = ({
     const { id: programId } = useCurrentProgramInfo();
     const orgUnitId = useLocationQuery().orgUnitId;
     const { formFoundation, stage } = useMetadataForProgramStage({ programId });
-    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
-    const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
+    const { orgUnit: orgUnitContext, error } = useCoreOrgUnit(orgUnitId);
+    const rulesReady = useRulesEngine({ programId, orgUnitContext, formFoundation });
     const titleText = useScopeTitleText(programId);
 
     if (error) {
@@ -100,7 +100,7 @@ const NewEventDataEntryWrapperPlain = ({
                 <DataEntry
                     programId={programId}
                     stage={stage}
-                    orgUnit={orgUnit}
+                    orgUnit={orgUnitContext}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
                 />
