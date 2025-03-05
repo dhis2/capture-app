@@ -1,5 +1,5 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { rulesEngine } from '../rulesEngine';
+import { ruleEngine } from '../rulesEngine';
 
 const groups = [
     { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
@@ -476,7 +476,7 @@ test('expressions with d2Functions in tracker program', () => {
     };
 
     // when
-    const rulesEffects = rulesEngine.getProgramRuleEffects({
+    const rulesEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: { programRuleVariables, programRules, constants },
         trackedEntityAttributes,
         selectedEntity: teiValues,
