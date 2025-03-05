@@ -11,6 +11,11 @@ import {
 } from '../../metaData';
 import { getApplicableRuleEffectsForEventProgram } from '..';
 
+const groups = [
+    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
+    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
+];
+
 const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [
     {
         id: 'effectId',
@@ -20,8 +25,8 @@ const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [
 ]);
 
 const mockOptionSet = new OptionSet('optionSet1', [new Option('option1', 'opt1')]);
-jest.mock('@dhis2/rules-engine-javascript/build/cjs/RulesEngine', () => ({
-    RulesEngine: jest
+jest.mock('../RuleEngine/RuleEngine', () => ({
+    RuleEngine: jest
         .fn()
         .mockImplementation(() => ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
 }));
@@ -50,7 +55,7 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
         trackedEntityInstanceId: 'vCGpQAWG17I',
     };
 
-    const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC', groups };
 
     const programStage = new ProgramStage((stage) => {
         stage.id = 'EventProgramStage';

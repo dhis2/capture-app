@@ -1,6 +1,6 @@
 // @flow
 import type { OutputEffects } from '@dhis2/rules-engine-javascript';
-import { rulesEngine } from './rulesEngine';
+import { ruleEngine } from './rulesEngine';
 import type { DataElement, ProgramStage } from '../metaData';
 import { constantsStore } from '../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../metaDataMemoryStores/optionSets/optionSets.store';
@@ -128,7 +128,7 @@ const getApplicableRuleEffects = ({
     const constants = constantsStore.get();
     const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
 
-    const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
+    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: { programRuleVariables, programRules, constants },
         currentEvent,
         otherEvents,

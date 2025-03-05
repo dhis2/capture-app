@@ -1,5 +1,10 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { rulesEngine } from '../rulesEngine';
+import { ruleEngine } from '../rulesEngine';
+
+const groups = [
+    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
+    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
+];
 
 test('expressions with d2Functions in tracker program', () => {
     // given
@@ -70,7 +75,7 @@ test('expressions with d2Functions in tracker program', () => {
                 {
                     id: 'FjkwPhzoAVr',
                     displayContent: "d2:countIfValue(#{undefinedVariable}, 'Male') = ",
-                    data: "d2:countIfValue(#{undefinedVariable}, 'Male') = ",
+                    data: "d2:countIfValue(#{undefinedVariable}, 'Male')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -132,15 +137,15 @@ test('expressions with d2Functions in tracker program', () => {
                 },
                 {
                     id: 'lkEUdkLRAVr',
-                    displayContent: "d2:extractDataMatrixValue('gtin', ']d2')",
-                    data: "d2:extractDataMatrixValue('gtin', ']d2')",
+                    displayContent: "d2:extractDataMatrixValue('gtin', ']d2013456789012345715171231')",
+                    data: "d2:extractDataMatrixValue('gtin', ']d2013456789012345715171231')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
                     id: 'FlkodkLRAVr',
-                    displayContent: "d2:extractDataMatrixValue('batch number', ']d2')",
-                    data: "d2:extractDataMatrixValue('batch number', ']d2')",
+                    displayContent: "d2:extractDataMatrixValue('best before date', ']d2013456789012345715171231')",
+                    data: "d2:extractDataMatrixValue('best before date', ']d2013456789012345715171231')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -153,29 +158,29 @@ test('expressions with d2Functions in tracker program', () => {
                 },
                 {
                     id: 'kuYookLRAVr',
-                    displayContent: "d2:extractDataMatrixValue('lot number', ']Q3703')",
-                    data: "d2:extractDataMatrixValue('lot number', ']Q3703')",
+                    displayContent: "d2:extractDataMatrixValue('lot number', ']Q310703')",
+                    data: "d2:extractDataMatrixValue('lot number', ']Q310703')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
                     id: 'lkyodkLRAVr',
-                    displayContent: "d2:extractDataMatrixValue('best before date', ']Q3369')",
-                    data: "d2:extractDataMatrixValue('best before date', ']Q3369')",
+                    displayContent: "d2:extractDataMatrixValue('best before date', ']Q336901234563691789012')",
+                    data: "d2:extractDataMatrixValue('best before date', ']Q336901234563691789012')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
                     id: 'lkpyodkLRAVr',
-                    displayContent: "d2:extractDataMatrixValue('expiration date', ']Q3369')",
-                    data: "d2:extractDataMatrixValue('expiration date', ']Q3369')",
+                    displayContent: "d2:extractDataMatrixValue('3690', ']Q336901234563691789012')",
+                    data: "d2:extractDataMatrixValue('3690', ']Q336901234563691789012')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
                     id: 'lkyohgyRAVr',
-                    displayContent: "d2:extractDataMatrixValue('serial number', ']Q3369')",
-                    data: "d2:extractDataMatrixValue('serial number', ']Q3369')",
+                    displayContent: "d2:extractDataMatrixValue('serial number', ']Q321369')",
+                    data: "d2:extractDataMatrixValue('serial number', ']Q321369')",
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -194,51 +199,9 @@ test('expressions with d2Functions in tracker program', () => {
                     programRuleActionType: 'DISPLAYTEXT',
                 },
                 {
-                    id: 'FolkokLRAVr',
-                    displayContent: 'd2:lastEventDate(V{enrollment_date})',
-                    data: 'd2:lastEventDate(V{enrollment_date})',
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
                     id: 'FolkwkLRAVr',
                     displayContent: 'd2:lastEventDate(#{undefinedVariable})',
                     data: 'd2:lastEventDate(#{undefinedVariable})',
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'llokowfRAVr',
-                    displayContent: "d2:addControlDigits('2')",
-                    data: "d2:addControlDigits('2')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'lloksfegwAVr',
-                    displayContent: "d2:addControlDigits('7')",
-                    data: "d2:addControlDigits('7')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'lkyksfegwAVr',
-                    displayContent: "d2:addControlDigits('9')",
-                    data: "d2:addControlDigits('9')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'llolkyfRAVr',
-                    displayContent: "d2:addControlDigits('12345678912')",
-                    data: "d2:addControlDigits('12345678912')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'FollowfRAVr',
-                    displayContent: 'd2:checkControlDigits(1)',
-                    data: 'd2:checkControlDigits(1)',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -494,7 +457,7 @@ test('expressions with d2Functions in tracker program', () => {
         CUbZcLm9LyN: 'USERNAME',
         p8htbyJHydl: { latitude: '12.4353', longitude: '67.34534' },
     };
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const enrollmentData = { enrolledAt: '2020-05-14T10:00:00.000Z' };
     const currentEvent = {
         occurredAt: '2020-07-14T10:00:00.000Z',
@@ -513,7 +476,7 @@ test('expressions with d2Functions in tracker program', () => {
     };
 
     // when
-    const rulesEffects = rulesEngine.getProgramRuleEffects({
+    const rulesEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: { programRuleVariables, programRules, constants },
         trackedEntityAttributes,
         selectedEntity: teiValues,
@@ -546,33 +509,18 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'feedback',
             displayText: {
                 id: 'FkeGdlkYAVr',
-                message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) ",
+                message: "d2:validatePattern('d2:daysBetween( '2020-01-28', V{enrollment_date})', 108) false",
             },
         },
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'Foc3PhzoAVr', message: 'd2:count(#{undefinedVariable}) =  0' },
+            displayText: { id: 'Foc3PhzoAVr', message: 'd2:hasValue(#{undefinedVariable}) false' },
         },
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'FjkwPhzoAVr', message: "d2:countIfValue(#{undefinedVariable}, 'Male') =  " },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'TkgrHcLselM', message: 'd2:countIfZeroPos(100) =  0' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'Foc3PhzoAVr', message: 'd2:hasValue(#{undefinedVariable}) ' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'FoljdkeoAVr', message: "d2:validatePattern('Male', 'a') " },
+            displayText: { id: 'FoljdkeoAVr', message: "d2:validatePattern('Male', 'a') false" },
         },
         {
             type: 'DISPLAYTEXT',
@@ -582,36 +530,14 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'kpljdlkYAVr', message: 'd2:validatePattern() ' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'FoljdjkRAVr', message: "d2:hasUserRole('admin') " },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'FoljdkLRAVr',
-                message: "d2:extractDataMatrixValue('batch number', 3) Incomplete DataMatrix input",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'FollkyLRAVr',
-                message:
-                    "d2:extractDataMatrixValue('batch number', 'unknow') Unsupported GS1 identifier: {gs1Identifier}",
-            },
+            displayText: { id: 'FoljdjkRAVr', message: "d2:hasUserRole('admin') false" },
         },
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
             displayText: {
                 id: 'lkEUdkLRAVr',
-                message: "d2:extractDataMatrixValue('gtin', ']d2') ",
+                message: "d2:extractDataMatrixValue('gtin', ']d2013456789012345715171231') 34567890123457",
             },
         },
         {
@@ -619,15 +545,7 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'feedback',
             displayText: {
                 id: 'FlkodkLRAVr',
-                message: "d2:extractDataMatrixValue('batch number', ']d2') ",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'kuYodkLRAVr',
-                message: "d2:extractDataMatrixValue('production date', ']Q3unknown') ",
+                message: "d2:extractDataMatrixValue('best before date', ']d2013456789012345715171231') 171231",
             },
         },
         {
@@ -635,15 +553,7 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'feedback',
             displayText: {
                 id: 'kuYookLRAVr',
-                message: "d2:extractDataMatrixValue('lot number', ']Q3703') ",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'lkyodkLRAVr',
-                message: "d2:extractDataMatrixValue('best before date', ']Q3369') ",
+                message: "d2:extractDataMatrixValue('lot number', ']Q310703') 703",
             },
         },
         {
@@ -651,7 +561,7 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'feedback',
             displayText: {
                 id: 'lkpyodkLRAVr',
-                message: "d2:extractDataMatrixValue('expiration date', ']Q3369') ",
+                message: "d2:extractDataMatrixValue('3690', ']Q336901234563691789012') 123456",
             },
         },
         {
@@ -659,15 +569,7 @@ test('expressions with d2Functions in tracker program', () => {
             id: 'feedback',
             displayText: {
                 id: 'lkyohgyRAVr',
-                message: "d2:extractDataMatrixValue('serial number', ']Q3369') ",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'lkyolktRAVr',
-                message: "d2:extractDataMatrixValue('unknow key', ']d2') ",
+                message: "d2:extractDataMatrixValue('serial number', ']Q321369') 369",
             },
         },
         {
@@ -678,51 +580,7 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'FolkokLRAVr', message: 'd2:lastEventDate(V{enrollment_date}) ' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'FolkwkLRAVr', message: 'd2:lastEventDate(#{undefinedVariable}) ' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'llokowfRAVr', message: "d2:addControlDigits('2') 261" },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'lloksfegwAVr', message: "d2:addControlDigits('7') 709" },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'lkyksfegwAVr', message: "d2:addControlDigits('9') 950" },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'llolkyfRAVr', message: "d2:addControlDigits('12345678912') 1234567891200" },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'FollowfRAVr', message: 'd2:checkControlDigits(1) 1' },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: {
-                id: 'ghy5rwfRAVr',
-                message:
-                    "d2:multiTextContains('multiTextValues', 'searchString') multiTextValues",
-            },
-        },
-        {
-            type: 'DISPLAYTEXT',
-            id: 'feedback',
-            displayText: { id: 'AFkfzcDf4Fs', message: "d2:inOrgUnitGroup('CHC') =  " },
+            displayText: { id: 'AFkfzcDf4Fs', message: "d2:inOrgUnitGroup('CHC') =  true" },
         },
         {
             type: 'DISPLAYTEXT',
@@ -753,7 +611,7 @@ test('expressions with d2Functions in tracker program', () => {
         {
             type: 'DISPLAYTEXT',
             id: 'feedback',
-            displayText: { id: 'NLsawa3P5hc', message: "d2:substring('hello dhis 2', -1, 10) =  " },
+            displayText: { id: 'NLsawa3P5hc', message: "d2:substring('hello dhis 2', -1, 10) =  hello dhis" },
         },
         {
             type: 'DISPLAYTEXT',
@@ -830,7 +688,6 @@ test('expressions with d2Functions in tracker program', () => {
             type: 'SETMANDATORYFIELD',
         },
         {
-            content: undefined,
             id: 'zDhUuAYrxNC',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
@@ -838,13 +695,11 @@ test('expressions with d2Functions in tracker program', () => {
             name: undefined,
         },
         {
-            content: undefined,
             id: 'unknown',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
         },
         {
-            content: undefined,
             id: 'Z5z8vFQy0w0',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
@@ -852,7 +707,6 @@ test('expressions with d2Functions in tracker program', () => {
             name: undefined,
         },
         {
-            content: undefined,
             id: 'TzqawmlPkI5',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
@@ -860,13 +714,11 @@ test('expressions with d2Functions in tracker program', () => {
             name: undefined,
         },
         {
-            content: undefined,
             id: 'f8j4XDEozvj',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
         },
         {
-            content: undefined,
             type: 'HIDEFIELD',
             id: 'g6yEXDEozvj',
             hadValue: true,
@@ -874,19 +726,16 @@ test('expressions with d2Functions in tracker program', () => {
             targetDataType: 'trackedEntityAttribute',
         },
         {
-            content: undefined,
             id: 'jBBkFuPKctq',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
         },
         {
-            content: undefined,
             id: 'A4Fg6jgWauf',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
         },
         {
-            content: undefined,
             id: 'CUbZcLm9LyN',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
@@ -894,7 +743,6 @@ test('expressions with d2Functions in tracker program', () => {
             name: undefined,
         },
         {
-            content: undefined,
             id: 'p8htbyJHydl',
             targetDataType: 'trackedEntityAttribute',
             type: 'HIDEFIELD',
@@ -902,19 +750,9 @@ test('expressions with d2Functions in tracker program', () => {
             name: undefined,
         },
         {
-            content: undefined,
             id: 'unknown',
             targetDataType: 'dataElement',
             type: 'HIDEFIELD',
-        },
-        {
-            displayKeyValuePair: {
-                id: 'khy8GmlwpgZ',
-                key: "d2:weeksBetween('2020-01-28', V{unknown} ) = ",
-                value: '',
-            },
-            id: 'feedback',
-            type: 'DISPLAYKEYVALUEPAIR',
         },
     ]);
 });

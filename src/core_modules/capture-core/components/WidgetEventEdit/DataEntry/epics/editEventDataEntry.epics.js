@@ -9,7 +9,8 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramThrowIfNotFound } from '../../../../metaData';
+import { getProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
+import { convertValue } from '../../../../converters/serverToClient';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -85,7 +86,7 @@ const runRulesForEditSingleEvent = async ({
             program,
             stage,
             orgUnit: coreOrgUnit,
-            currentEvent: { ...currentEvent, createdAt: apiCurrentEventOriginal.createdAt },
+            currentEvent: { ...currentEvent, createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME) },
             otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
