@@ -1,3 +1,15 @@
+# [101.30.0](https://github.com/dhis2/capture-app/compare/v101.29.2...v101.30.0) (2025-03-05)
+
+
+### Bug Fixes
+
+* update github actions cache v2 -> v4 ([#3988](https://github.com/dhis2/capture-app/issues/3988)) ([14d89f6](https://github.com/dhis2/capture-app/commit/14d89f635867e65ebe83463ce504e2503c0f015a))
+
+
+### Features
+
+* [DHIS2-18944] add effect to refresh list on event deletion ([#3982](https://github.com/dhis2/capture-app/issues/3982)) ([2369d18](https://github.com/dhis2/capture-app/commit/2369d18255cce5950ad5b2bfa344f13579fc28eb))
+
 ## [101.29.2](https://github.com/dhis2/capture-app/compare/v101.29.1...v101.29.2) (2025-02-27)
 
 
