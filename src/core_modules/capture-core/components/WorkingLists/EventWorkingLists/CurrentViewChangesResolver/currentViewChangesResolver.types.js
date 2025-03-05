@@ -31,4 +31,5 @@ export type CurrentViewChangesResolverOutputProps = {|
     sortById?: string,
     sortByDirection?: string,
     currentViewHasTemplateChanges?: boolean,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
 |};
