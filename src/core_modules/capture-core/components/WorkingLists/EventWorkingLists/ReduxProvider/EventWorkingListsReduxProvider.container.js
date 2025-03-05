@@ -14,7 +14,7 @@ import type { Props } from './eventWorkingListsReduxProvider.types';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/eventFilters';
 
-export const EventWorkingListsReduxProvider = ({ storeId, program, programStage, orgUnitId }: Props) => {
+export const EventWorkingListsReduxProvider = ({ storeId, program, programStage, orgUnitId, mainViewConfig }: Props) => {
     const dispatch = useDispatch();
     const dataEngine = useDataEngine();
 
@@ -27,7 +27,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
         onClearFilters,
         onUpdateDefaultTemplate,
         ...commonStateManagementRestProps
-    } = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
+    } = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program, mainViewConfig);
 
     const currentTemplate = currentTemplateId && templates &&
     templates.find(template => template.id === currentTemplateId);

@@ -27,8 +27,8 @@ export const retrieveTemplatesEpic = (
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
-        concatMap(({ payload: { storeId, programId } }) => {
-            const promise = getTemplates(programId, querySingleResource)
+        concatMap(({ payload: { storeId, programId, mainViewConfig } }) => {
+            const promise = getTemplates(programId, querySingleResource, mainViewConfig)
                 .then(({ templates, defaultTemplateId }) =>
                     fetchTemplatesSuccess(templates, defaultTemplateId, storeId))
                 .catch((error) => {
