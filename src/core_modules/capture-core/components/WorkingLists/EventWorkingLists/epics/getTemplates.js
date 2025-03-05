@@ -25,8 +25,8 @@ export const getTemplates = (programId: string, querySingleResource: QuerySingle
                         const { displayColumnOrder, order, eventDate } = apiEventFilter.eventQueryCriteria;
                         const convertedEventQueryCriteria = {
                             ...apiEventFilter.eventQueryCriteria,
-                            displayColumnOrder: displayColumnOrder?.map(columnId => (columnId === 'eventDate' ? 'occurredAt' : columnId)),
-                            order: order?.includes('eventDate') ? order.replace('eventDate', 'occurredAt') : order,
+                            displayColumnOrder,
+                            order,
                             occurredAt: eventDate,
                         };
 
