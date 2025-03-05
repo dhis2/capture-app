@@ -10,10 +10,7 @@ import { withDataEntryNotesHandler } from '../../../../DataEntry/dataEntryNotes/
 import { Notes } from '../../../../Notes/Notes.component';
 import { withDataEntryRelationshipsHandler } from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import { Relationships } from '../../../../Relationships/Relationships.component';
-import {
-    getEventDateValidatorContainers,
-    getOrgUnitValidatorContainers,
-} from './fieldValidators';
+import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from './fieldValidators';
 import { type RenderFoundation } from '../../../../../metaData';
 import { withMainButton } from './withMainButton';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';

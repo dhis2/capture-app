@@ -144,6 +144,3 @@ export const NewPageComponent: ComponentType<ContainerProps> =
         withErrorMessageHandler(),
         withStyles(getStyles),
     )(NewPagePlain);
-
-
-// her 2
