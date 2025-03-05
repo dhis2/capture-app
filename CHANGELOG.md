@@ -1,3 +1,31 @@
+## [101.28.2](https://github.com/dhis2/capture-app/compare/v101.28.1...v101.28.2) (2025-02-26)
+
+
+### Bug Fixes
+
+* [DHIS2-18714] add 'Missing search criteria' modal when adding a relationship ([#3973](https://github.com/dhis2/capture-app/issues/3973)) ([471b56e](https://github.com/dhis2/capture-app/commit/471b56ee25c63671a5900ebb1b14be43f373c8b2))
+
+## [101.28.1](https://github.com/dhis2/capture-app/compare/v101.28.0...v101.28.1) (2025-02-25)
+
+
+### Bug Fixes
+
+* [DHIS2-18876] replace deprecated parameters from 2.41 ([#3962](https://github.com/dhis2/capture-app/issues/3962)) ([27a78b3](https://github.com/dhis2/capture-app/commit/27a78b35fcf5216ea67a70e18c1339668ee75e0c))
+
+# [101.28.0](https://github.com/dhis2/capture-app/compare/v101.27.4...v101.28.0) (2025-02-24)
+
+
+### Features
+
+* [DHIS2-18746][DHIS2-18903] Show org. unit in edit event form ([#3949](https://github.com/dhis2/capture-app/issues/3949)) ([3d0e394](https://github.com/dhis2/capture-app/commit/3d0e394a966946713e437b1d15ff7971db91edea))
+
+## [101.27.4](https://github.com/dhis2/capture-app/compare/v101.27.3...v101.27.4) (2025-02-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([33b6852](https://github.com/dhis2/capture-app/commit/33b6852dd929686bf7b10ec74e888dc2cb1b3af8))
+
 ## [101.27.3](https://github.com/dhis2/capture-app/compare/v101.27.2...v101.27.3) (2025-02-18)
 
 

@@ -925,6 +925,12 @@ msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Fill in at least {{count}} attribute to search"
 msgstr[1] "Fill in at least {{count}} attributes to search"
 
+msgid "Missing search criteria"
+msgstr "Missing search criteria"
+
+msgid "Back to search"
+msgstr "Back to search"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Could not retrieve metadata. Please try again later."
 
@@ -1033,9 +1039,6 @@ msgstr ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 
-msgid "Back to search"
-msgstr "Back to search"
-
 msgid "An error has occurred"
 msgstr "An error has occurred"
 
@@ -1044,9 +1047,6 @@ msgstr "Too many results"
 
 msgid "Cannot search in all programs"
 msgstr "Cannot search in all programs"
-
-msgid "Missing search criteria"
-msgstr "Missing search criteria"
 
 msgid "Results found"
 msgstr "Results found"

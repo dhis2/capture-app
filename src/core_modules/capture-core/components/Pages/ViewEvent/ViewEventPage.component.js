@@ -1,6 +1,5 @@
 // @flow
 import React, { useEffect } from 'react';
-import { useConfig } from '@dhis2/app-runtime';
 import { OrgUnitFetcher } from 'capture-core/components/OrgUnitFetcher';
 import { useSelector } from 'react-redux';
 import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
@@ -11,10 +10,10 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 type Props = {
   isUserInteractionInProgress: boolean,
   showAddRelationship: boolean,
+  isReadOnly: boolean,
 };
 
-export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => {
-    const { serverVersion: { minor } } = useConfig();
+export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship, isReadOnly }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
 
     const { selectedCategories, programId, orgUnitId } = useSelector(({ currentSelections }) => ({
@@ -29,6 +28,7 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRel
                 programId={programId}
                 orgUnitId={orgUnitId}
                 selectedCategories={selectedCategories}
+                isReadOnly={isReadOnly}
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 formIsOpen
             />
@@ -38,7 +38,6 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRel
                         <ViewEventNewRelationshipWrapper /> :
                         <ViewEvent
                             programId={programId}
-                            serverMinorVersion={minor}
                         />
                 }
             </OrgUnitFetcher>

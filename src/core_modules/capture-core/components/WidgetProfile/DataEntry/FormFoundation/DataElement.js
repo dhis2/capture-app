@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { pipe, errorCreator } from 'capture-core-utils';
+import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
 
 import type { ProgramTrackedEntityAttribute, TrackedEntityAttribute, OptionSet as OptionSetType } from './types';
 import {
@@ -46,20 +46,26 @@ const onValidateOnScopeTrackedEntityType = (
     let requestPromise;
     if (dataElementUnique.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
         const orgUnitId = contextProps.orgUnitId;
+        const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+            ? 'orgUnits'
+            : 'orgUnit';
         requestPromise = querySingleResource({
             resource: 'tracker/trackedEntities',
             params: {
                 trackedEntityType: contextProps.trackedEntityTypeId,
-                orgUnit: orgUnitId,
+                [orgUnitQueryParam]: orgUnitId,
                 filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
             },
         });
     } else {
+        const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+            ? 'orgUnitMode'
+            : 'ouMode';
         requestPromise = querySingleResource({
             resource: 'tracker/trackedEntities',
             params: {
                 trackedEntityType: contextProps.trackedEntityTypeId,
-                ouMode: 'ACCESSIBLE',
+                [orgUnitModeQueryParam]: 'ACCESSIBLE',
                 filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
             },
         });
@@ -115,20 +121,26 @@ const buildDataElementUnique = (
             let requestPromise;
             if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                 const orgUnitId = contextProps.orgUnitId;
+                const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+                    ? 'orgUnits'
+                    : 'orgUnit';
                 requestPromise = querySingleResource({
                     resource: 'tracker/trackedEntities',
                     params: {
                         program: contextProps.programId,
-                        orgUnit: orgUnitId,
+                        [orgUnitQueryParam]: orgUnitId,
                         filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                     },
                 });
             } else {
+                const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                    ? 'orgUnitMode'
+                    : 'ouMode';
                 requestPromise = querySingleResource({
                     resource: 'tracker/trackedEntities',
                     params: {
                         program: contextProps.programId,
-                        ouMode: 'ACCESSIBLE',
+                        [orgUnitModeQueryParam]: 'ACCESSIBLE',
                         filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
                     },
                 });

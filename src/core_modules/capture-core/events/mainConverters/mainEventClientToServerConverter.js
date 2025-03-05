@@ -9,7 +9,7 @@ const keysToSkip = {
     completedBy: 'completedBy',
 };
 
-export function convertMainEventClientToServer(event: Object, serverMinorVersion: number) {
+export function convertMainEventClientToServer(event: Object) {
     const mapClientKeyToServerKey = {
         eventId: 'event',
         programId: 'program',
@@ -19,7 +19,7 @@ export function convertMainEventClientToServer(event: Object, serverMinorVersion
         enrollmentId: 'enrollment',
         assignee: 'assignedUser',
     };
-    event = convertEventAttributeOptions(event, serverMinorVersion);
+    event = convertEventAttributeOptions(event);
     // eslint-disable-next-line complexity
     return convertMainEvent(event, mapClientKeyToServerKey, (key, value) => {
         let convertedValue;

@@ -4,7 +4,6 @@ import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
@@ -26,13 +25,13 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/prepareEnrollmentEvents';
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../../helpers';
 import type { QuerySingleResource } from '../../../../utils/api';
+import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../metadataRetrieval/coreOrgUnit';
 
 const runRulesForEditSingleEvent = async ({
     store,
     dataEntryId,
     itemId,
     uid,
-    orgUnit,
     fieldData,
     programId,
     querySingleResource,
@@ -42,7 +41,6 @@ const runRulesForEditSingleEvent = async ({
     itemId: string,
     uid: string,
     programId: string,
-    orgUnit: OrgUnit,
     fieldData?: ?FieldData,
     querySingleResource: QuerySingleResource
 }) => {
@@ -66,6 +64,10 @@ const runRulesForEditSingleEvent = async ({
     // $FlowFixMe
     const currentEvent = { ...currentEventValues, ...currentEventMainData, eventId };
 
+    const { coreOrgUnit, cached } =
+        // $FlowFixMe
+        await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
+
     let effects;
     if (program instanceof TrackerProgram) {
         const { enrollment, attributeValues } = state.enrollmentDomain;
@@ -82,7 +84,7 @@ const runRulesForEditSingleEvent = async ({
         effects = getApplicableRuleEffectsForTrackerProgram({
             program,
             stage,
-            orgUnit,
+            orgUnit: coreOrgUnit,
             currentEvent: { ...currentEvent, createdAt: apiCurrentEventOriginal.createdAt },
             otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
@@ -91,7 +93,7 @@ const runRulesForEditSingleEvent = async ({
     } else {
         effects = getApplicableRuleEffectsForEventProgram({
             program,
-            orgUnit,
+            orgUnit: coreOrgUnit,
             currentEvent,
         });
     }
@@ -105,6 +107,7 @@ const runRulesForEditSingleEvent = async ({
     return batchActions([
         updateRulesEffects(effectsWithValidations, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+        ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
     ],
     editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
 };
@@ -114,20 +117,19 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
     store: ReduxStore,
     { querySingleResource }: ApiUtils,
 ) =>
-// $FlowSuppress
+    // $FlowSuppress
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
         switchMap((action) => {
-            const { dataEntryId, itemId, uid, orgUnit, programId } = action.payload;
+            const { dataEntryId, itemId, uid, programId } = action.payload;
             const runRulesForEditSingleEventPromise = runRulesForEditSingleEvent({
                 store,
                 dataEntryId,
                 itemId,
                 uid,
-                orgUnit,
                 programId,
                 querySingleResource,
             });
@@ -139,7 +141,7 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
     store: ReduxStore,
     { querySingleResource }: ApiUtils,
 ) =>
-// $FlowSuppress
+    // $FlowSuppress
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
@@ -153,7 +155,6 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
                 dataEntryId,
                 itemId,
                 uid,
-                orgUnit,
                 programId,
             } = action.payload;
             const fieldData: FieldData = {
@@ -166,7 +167,6 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
                 dataEntryId,
                 itemId,
                 uid,
-                orgUnit,
                 fieldData,
                 programId,
                 querySingleResource,

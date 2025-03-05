@@ -15,10 +15,10 @@ import {
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import { setCurrentDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
 
-const makeMapStateToProps = (_, ownProps) => {
+const makeMapStateToProps = () => {
     const programStageSelector = makeProgramStageSelector();
     const eventAccessSelector = makeEventAccessSelector();
-    const assignedUserContextSelector = makeAssignedUserContextSelector(ownProps.serverMinorVersion);
+    const assignedUserContextSelector = makeAssignedUserContextSelector();
 
     // $FlowFixMe[not-an-object] automated comment
     return (state: ReduxState) => {

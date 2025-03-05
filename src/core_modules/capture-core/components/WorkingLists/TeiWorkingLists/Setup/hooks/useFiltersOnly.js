@@ -1,5 +1,6 @@
 // @flow
 import { useMemo } from 'react';
+import { featureAvailable, FEATURES } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
 import { MAIN_FILTERS } from '../../constants';
@@ -82,10 +83,14 @@ export const useFiltersOnly = (
                         type: dataElementTypes.ASSIGNEE,
                         header: i18n.t('Assigned to'),
                         transformRecordsFilter: (rawFilter: Object) => {
-                            const { assignedUser, assignedUserMode } = rawFilter;
+                            const { assignedUserMode } = rawFilter;
+                            const assignedUsersQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+                                ? 'assignedUsers'
+                                : 'assignedUser';
+                            const assignedUser = rawFilter[assignedUsersQueryParam];
                             return {
                                 assignedUserMode,
-                                ...(assignedUser && { assignedUser }),
+                                ...(assignedUser && { [assignedUsersQueryParam]: assignedUser }),
                             };
                         },
                     },

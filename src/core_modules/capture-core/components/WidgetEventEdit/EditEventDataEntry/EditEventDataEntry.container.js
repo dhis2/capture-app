@@ -32,12 +32,14 @@ const mapStateToProps = (state: ReduxState, props) => {
     const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
 
     const dataEntryKey = `${props.dataEntryId}-${itemId}`;
+    const orgUnitFieldValue = state.dataEntriesFieldsValue[dataEntryKey]?.orgUnit;
     const isCompleted = state.dataEntriesFieldsValue[dataEntryKey]?.complete === 'true';
 
     return {
         ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
         itemId,
         isCompleted,
+        orgUnitFieldValue,
         enrolledAt: state.enrollmentDomain?.enrollment?.enrolledAt,
         occurredAt: state.enrollmentDomain?.enrollment?.occurredAt,
         eventData: state.enrollmentDomain?.enrollment?.events,

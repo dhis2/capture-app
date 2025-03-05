@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -772,6 +772,23 @@ msgid ""
 "select a valid combination."
 msgstr ""
 
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
+msgstr ""
+
 msgid "Please select {{category}}."
 msgstr "Выберите {{category}}."
 
@@ -901,9 +918,6 @@ msgstr "Индикаторы"
 msgid "Warnings"
 msgstr "Предупреждения"
 
-msgid "Show all events"
-msgstr "Показать все события"
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Событие не удалось загрузить. Вы уверены, что оно существует?"
 
@@ -940,9 +954,6 @@ msgstr "Загрузка"
 
 msgid "An error occurred while loading the form"
 msgstr ""
-
-msgid "Back to all stages and events"
-msgstr "Обратно ко всем этапам и событиям"
 
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты "
@@ -1317,6 +1328,12 @@ msgstr ""
 "Запланированная дата не может быть изменена для событий со статусом {{ "
 "eventStatus }}."
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Событие завершено"
 
@@ -1470,7 +1487,7 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr "Выбрать этап {{linkableStageLabel}}"
 
-msgid "{{ linkableStageLabel }} is not repeatable"
+msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
@@ -1482,10 +1499,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr "Неопределенные связи, обратитесь к системному администратору"
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr "Ввести данные сейчас"
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1591,9 +1620,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "Linked event"
-msgstr ""
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1608,6 +1634,9 @@ msgstr "Лог изменений"
 msgid "No changes to display"
 msgstr "Нет изменений для отображения"
 
+msgid "Data item"
+msgstr "Переменная"
+
 msgid "Updated"
 msgstr "Обновлено"
 
@@ -1620,11 +1649,17 @@ msgstr "Удален/а/о"
 msgid "Date"
 msgstr "Дата"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "Пользователь"
 
-msgid "Data item"
-msgstr "Переменная"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr "Изменить"
