@@ -298,6 +298,7 @@ export class InputBuilder {
 
         const attributeValues = selectedEntity ? Object
             .keys(selectedEntity)
+            .filter(key => selectedEntity[key] !== null)
             .map(key => new RuleAttributeValue(
                 key,
                 this.convertTrackedEntityAttributeValue(key, selectedEntity[key]),
