@@ -229,7 +229,7 @@ export type TrackedEntityAttribute = {
 };
 
 export type TrackedEntityAttributes = {
-    [id: ?string]: TrackedEntityAttribute
+    [id: ?string]: TrackedEntityAttribute,
 };
 
 export type OrgUnitGroup = $ReadOnly<{|

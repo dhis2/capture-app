@@ -10,7 +10,7 @@ import type {
     EventsData,
     DataElements,
 } from '../../../../rules/RuleEngine';
-import { rulesEngine } from '../../../../rules/rulesEngine';
+import { ruleEngine } from '../../../../rules/rulesEngine';
 import {
     dataElementTypes,
     type RenderFoundation,
@@ -77,7 +77,7 @@ export const getRulesActionsForTEI = ({
     userRoles: Array<string>,
     programName: string,
 }) => {
-    const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
+    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
         otherEvents,
@@ -124,7 +124,7 @@ export const getRulesActionsForTEIAsync = async ({
     querySingleResource: QuerySingleResource,
     onGetValidationContext: () => Object,
 }) => {
-    const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
+    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
         otherEvents,
