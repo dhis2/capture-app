@@ -1,5 +1,4 @@
 // @flow
-import log from 'loglevel';
 import { featureAvailable, FEATURES } from 'capture-core-utils/featuresSupport';
 import { RulesEngine, environmentTypes } from '@dhis2/rules-engine-javascript';
 import { RuleEngine } from './RuleEngine/RuleEngine';
@@ -24,12 +23,12 @@ const kotlinRuleEngine = () => new RuleEngine(
 let rulesEngine = kotlinRuleEngine();
 
 const switchToCapture = () => {
-    log.info('Using capture rule engine');
+    console.log('Using capture rule engine');
     rulesEngine = captureRuleEngine();
 };
 
 const switchToKotlin = () => {
-    log.info('Using kotlin rule engine');
+    console.log('Using kotlin rule engine');
     rulesEngine = kotlinRuleEngine();
 };
 
