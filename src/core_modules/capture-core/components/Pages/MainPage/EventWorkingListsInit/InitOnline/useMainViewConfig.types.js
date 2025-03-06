@@ -21,6 +21,7 @@ export type DatastoreWorkingListsEvents = {|
 |};
 
 export type DataStoreWorkingLists = {|
+    version: 1,
     global: {
         event: DatastoreWorkingListsEvents,
     }

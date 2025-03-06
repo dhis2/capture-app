@@ -27,7 +27,11 @@ export const useMainViewConfig: UseMainViewConfig = () => {
             enabled: !!configExists,
             select: (workingLists: DataStoreWorkingLists) => {
                 // only adding support for relative event date as of now
-                // we should use Zod here long-term to properly validate the structure of the object!!
+                // we should use Zod here long-term to properly validate the structure of the object
+                // and give error messages to the user
+                if (workingLists?.version !== 1) {
+                    return undefined;
+                }
                 const occurredAt = workingLists?.global?.event?.mainView?.occurredAt;
                 if (
                     !occurredAt ||
