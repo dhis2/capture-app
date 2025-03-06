@@ -5,17 +5,30 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
 import { useApiMetadataQuery } from '../../../../../utils/reactQueryHelpers';
-import type { WorkingListsEvents, UseMainViewConfig } from './useMainViewConfig.types';
+import type { DataStoreWorkingLists, UseMainViewConfig } from './useMainViewConfig.types';
 
 export const useMainViewConfig: UseMainViewConfig = () => {
+    const {
+        data: configExists,
+        isLoading: namespaceIsLoading,
+        isError: namespaceIsError,
+        error: namespaceError,
+    } = useApiMetadataQuery<any>(
+        ['dataStore', 'capture'], {
+            resource: 'dataStore/capture',
+        }, {
+            select: (captureKeys: ?Array<string>) => captureKeys?.includes('workingLists'),
+        });
+
     const { data: mainViewConfig, isLoading, isError, error } = useApiMetadataQuery<any>(
         ['dataStore', 'workingListsEvents'], {
-            resource: 'dataStore/capture/workingListsEvents',
+            resource: 'dataStore/capture/workingLists',
         }, {
-            select: (workingListsEvents: WorkingListsEvents) => {
+            enabled: !!configExists,
+            select: (workingLists: DataStoreWorkingLists) => {
                 // only adding support for relative event date as of now
-                // we should use Zod here long-term to properly validate the structure of the object
-                const occurredAt = workingListsEvents?.mainView?.occurredAt;
+                // we should use Zod here long-term to properly validate the structure of the object!!
+                const occurredAt = workingLists?.global?.event?.mainView?.occurredAt;
                 if (
                     !occurredAt ||
                     !isObject(occurredAt) ||
@@ -36,6 +49,7 @@ export const useMainViewConfig: UseMainViewConfig = () => {
                                 period: occurredAt.period,
                                 startBuffer: 0,
                                 endBuffer: 0,
+                                lockedAll: !!occurredAt.lockedInAllViews,
                             },
                         };
                     }
@@ -50,6 +64,7 @@ export const useMainViewConfig: UseMainViewConfig = () => {
                             type: occurredAt.type,
                             startBuffer: occurredAt.startBuffer,
                             endBuffer: occurredAt.endBuffer,
+                            lockedAll: !!occurredAt.lockedInAllViews,
                         },
                     };
                 }
@@ -59,16 +74,22 @@ export const useMainViewConfig: UseMainViewConfig = () => {
     );
 
     useEffect(() => {
+        if (namespaceIsError) {
+            log.error(
+                errorCreator(
+                    'capture namespace could not be fetched from the datastore')({ error }),
+            );
+        }
         if (isError) {
             log.error(
                 errorCreator(
-                    'workingListEvents could not be fetched from the datastore')({ error }),
+                    'workingLists key could not be fetched from the datastore')({ error }),
             );
         }
-    }, [isError, error]);
+    }, [isError, error, namespaceIsError, namespaceError]);
 
     return {
         mainViewConfig,
-        mainViewConfigReady: !isLoading,
+        mainViewConfigReady: !namespaceIsLoading && !isLoading,
     };
 };

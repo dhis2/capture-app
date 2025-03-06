@@ -21,9 +21,9 @@ export const getTemplates = (programId: string, querySingleResource: QuerySingle
             templates: [...apiEventFilters, defaultEventFilter]
                 .map(({ eventQueryCriteria, ...eventFilter }) => {
                     // $FlowFixMe
-                    const { displayColumnOrder, order, eventDate } = eventQueryCriteria;
+                    const { displayColumnOrder, order, eventDate, ...criteria } = eventQueryCriteria;
                     const convertedEventQueryCriteria = {
-                        ...eventQueryCriteria,
+                        ...criteria,
                         displayColumnOrder: displayColumnOrder?.map(columnId => (columnId === 'eventDate' ? 'occurredAt' : columnId)),
                         order: order?.includes('eventDate') ? order.replace('eventDate', 'occurredAt') : order,
                         occurredAt: eventDate,

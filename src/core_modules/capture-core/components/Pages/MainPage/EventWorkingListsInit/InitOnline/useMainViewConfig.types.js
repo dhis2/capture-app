@@ -11,10 +11,17 @@ export type DatastoreOccurredAt = {|
     period?: 'TODAY' | 'THIS_WEEK' | 'THIS_MONTH' | 'THIS_YEAR' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_3_MONTHS',
     startBuffer?: number,
     endBuffer?: number,
+    lockedInAllViews?: boolean,
 |};
 
-export type WorkingListsEvents = {|
+export type DatastoreWorkingListsEvents = {|
     mainView: {
         occurredAt: DatastoreOccurredAt,
+    }
+|};
+
+export type DataStoreWorkingLists = {|
+    global: {
+        event: DatastoreWorkingListsEvents,
     }
 |};
