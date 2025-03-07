@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: '**/node_modules'
@@ -45,7 +45,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache
         with:
           path: '**/node_modules'
@@ -64,7 +64,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache
         with:
           path: '**/node_modules'
@@ -83,7 +83,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache
         with:
           path: '**/node_modules'
@@ -184,7 +184,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache
         with:
           path: '**/node_modules'
@@ -218,7 +218,7 @@ jobs:
         with:
           name: app-build
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache
         with:
           path: '**/node_modules'
