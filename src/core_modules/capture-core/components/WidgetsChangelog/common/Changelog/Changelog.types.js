@@ -64,6 +64,8 @@ export type ChangelogProps = {
     isOpen: boolean,
     close: () => void,
     pager?: Pager,
+    defaultPage: number,
+    defaultPageSize: number,
     loading: boolean,
     records?: Array<ChangelogRecord>,
     setPage: (number) => void,

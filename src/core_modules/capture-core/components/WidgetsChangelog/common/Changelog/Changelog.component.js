@@ -25,6 +25,8 @@ export const ChangelogComponent = ({
     records,
     loading,
     pager,
+    defaultPage,
+    defaultPageSize,
     columnToSortBy,
     setColumnToSortBy,
     attributeToFilterBy,
@@ -79,22 +81,21 @@ export const ChangelogComponent = ({
                         </DataTableRow>
                     )}
                 </DataTableBody>
-                {pager && (
-                    <DataTableFoot>
-                        <DataTableRow>
-                            <DataTableCell colSpan="5">
-                                <Pagination
-                                    page={pager.page}
-                                    pageSize={pager.pageSize}
-                                    onPageChange={setPage}
-                                    onPageSizeChange={setPageSize}
-                                    isLastPage={!pager.nextPage}
-                                    dataTest={'changelog-pagination'}
-                                />
-                            </DataTableCell>
-                        </DataTableRow>
-                    </DataTableFoot>
-                )}
+                <DataTableFoot>
+                    <DataTableRow>
+                        <DataTableCell colSpan="5">
+                            <Pagination
+                                page={pager?.page ?? defaultPage}
+                                pageSize={pager?.pageSize ?? defaultPageSize}
+                                onPageChange={setPage}
+                                onPageSizeChange={setPageSize}
+                                isLastPage={!pager?.nextPage}
+                                dataTest={'changelog-pagination'}
+                                disabled={loading}
+                            />
+                        </DataTableCell>
+                    </DataTableRow>
+                </DataTableFoot>
             </DataTable>
         </ModalContent>
 
