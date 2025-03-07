@@ -140,7 +140,7 @@ const convertProgramRule = (rule: ProgramRule) => {
         condition,
         programRuleActions,
         id: uid,
-        name,
+        displayName: name,
         programStageId: programStage,
         priority,
     } = rule;

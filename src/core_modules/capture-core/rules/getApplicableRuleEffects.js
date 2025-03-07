@@ -1,40 +1,18 @@
 // @flow
 import type { OutputEffects } from '@dhis2/rules-engine-javascript';
 import { ruleEngine } from './rulesEngine';
-import type { DataElement, ProgramStage } from '../metaData';
 import { constantsStore } from '../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../metaDataMemoryStores/optionSets/optionSets.store';
 import { convertOptionSetsToRulesEngineFormat } from './converters/optionSetsConverter';
 import { postProcessRulesEffects } from './postProcessRulesEffects';
 import { buildEffectsHierarchy } from './buildEffectsHierarchy';
+import { getDataElementsForRulesExecution } from './getDataElementsForRulesExecution';
+import { getTrackedEntityAttributesForRulesExecution } from './getTrackedEntityAttributesForRulesExecution';
 import type {
     GetApplicableRuleEffectsForTrackerProgramInput,
     GetApplicableRuleEffectsForEventProgramInput,
     GetApplicableRuleEffectsInput,
 } from './rules.types';
-
-const getDataElementsForRulesExecution = (stages: Map<string, ProgramStage>) =>
-    [...stages.values()]
-        .flatMap(stage => stage.stageForm.getElements())
-        .reduce((accRulesDataElements, dataElement) => {
-            accRulesDataElements[dataElement.id] = {
-                id: dataElement.id,
-                valueType: dataElement.type,
-                optionSetId: dataElement.optionSet && dataElement.optionSet.id,
-                name: dataElement.formName || dataElement.name,
-            };
-            return accRulesDataElements;
-        }, {});
-
-const getTrackedEntityAttributesForRulesExecution = (attributes: Array<DataElement>) =>
-    attributes.reduce((accRulesAttributes, attribute) => {
-        accRulesAttributes[attribute.id] = {
-            id: attribute.id,
-            valueType: attribute.type,
-            optionSetId: attribute.optionSet && attribute.optionSet.id,
-        };
-        return accRulesAttributes;
-    }, {});
 
 const getRulesMetadata = (programRuleVariables, programRules, programStageRules) => ({
     programRuleVariables,
