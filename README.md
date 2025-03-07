@@ -8,6 +8,7 @@ Find the official documentation of the Capture app [here](https://docs.dhis2.org
  
 ## Getting Started
 
+Test
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
