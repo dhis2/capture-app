@@ -1,11 +1,9 @@
 // @flow
 import React from 'react';
-import { Modal } from '@dhis2/ui';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useChangelogData, useListDataValues } from '../hooks';
 import { ChangelogComponent } from './Changelog.component';
 import { CHANGELOG_ENTITY_TYPES } from './Changelog.constants';
-import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import type { ItemDefinitions } from './Changelog.types';
 
 type Props = {
@@ -60,14 +58,7 @@ export const Changelog = ({
         pageSize,
     });
 
-    if (isChangelogLoading || isProcessingLoading) {
-        return (
-            <Modal onClose={close}>
-                <LoadingMaskElementCenter />
-            </Modal>
-        );
-    }
-
+    const loading = (isChangelogLoading || isProcessingLoading);
     const supportsChangelogV2 = featureAvailable(FEATURES.changelogsV2);
 
     return (
@@ -76,6 +67,7 @@ export const Changelog = ({
             close={close}
             records={processedRecords}
             pager={pager}
+            loading={loading}
             setPage={setPage}
             setPageSize={setPageSize}
             entityType={entityType}
