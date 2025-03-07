@@ -162,6 +162,7 @@ export const useListDataValues = ({
         }),
         {
             enabled: !!rawRecords && !!dataItemDefinitions && !!entityId && !!entityType,
+            keepPreviousData: true,
             staleTime: Infinity,
             cacheTime: Infinity,
         },
