@@ -47,17 +47,25 @@ export const workingListsCommonActionTypes = {
     TEMPLATE_SHARING_SETTINGS_SET: 'WorkingListsTemplateSharingSettingsSet',
 };
 
-export const fetchTemplates = (
+export const fetchTemplates = ({
+    programId,
+    storeId,
+    workingListsType,
+    selectedTemplateId,
+    mainViewConfig,
+}: {
     programId: string,
     storeId: string,
     workingListsType: string,
     selectedTemplateId?: string,
-) =>
+    mainViewConfig?: Object,
+}) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({
         programId,
         storeId,
         selectedTemplateId,
         workingListsType,
+        mainViewConfig,
     });
 
 export const fetchTemplatesSuccess = (templates: Array<any>, defaultTemplateId: string, storeId: string) =>

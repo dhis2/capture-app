@@ -206,7 +206,7 @@ const getMainDataFilters = async (
     }
     if (occurredAt) {
         const convertedDate = getDateFilter({ dateFilter: occurredAt });
-        convertedDate && filters.push({ ...convertedDate, id: 'occurredAt' });
+        convertedDate && filters.push({ ...convertedDate, id: 'occurredAt', locked: occurredAt.lockedAll });
     }
     if (assignedUserMode) {
         filters.push({

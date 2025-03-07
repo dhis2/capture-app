@@ -2,7 +2,7 @@
 import React from 'react';
 import { EventWorkingListsInitHeader } from '../Header';
 import { EventWorkingListsOffline } from '../../../../WorkingLists/EventWorkingListsOffline';
-import { EventWorkingListsInitRunningMutationsHandler } from '../RunningMutationsHandler';
+import { EventWorkingListsInitOnline } from '../InitOnline';
 import type { Props } from './eventWorkingListsInitConnectionStatusResolver.types';
 
 export const EventWorkingListsInitConnectionStatusResolver = ({ isOnline, storeId, ...passOnProps }: Props) => (
@@ -13,7 +13,7 @@ export const EventWorkingListsInitConnectionStatusResolver = ({ isOnline, storeI
                     storeId={storeId}
                 />
                 :
-                <EventWorkingListsInitRunningMutationsHandler
+                <EventWorkingListsInitOnline
                     {...passOnProps}
                     storeId={storeId}
                 />

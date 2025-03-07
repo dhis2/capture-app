@@ -47,7 +47,7 @@ export const TeiWorkingListsReduxProvider = ({
         lastTransaction !== lastTransactionOnListDataRefresh;
 
     const onLoadTemplates = useCallback(() => {
-        dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE, selectedTemplateId));
+        dispatch(fetchTemplates({ programId, storeId, workingListsType: TEI_WORKING_LISTS_TYPE, selectedTemplateId }));
     }, [dispatch, programId, storeId, selectedTemplateId]);
 
     useEffect(() => {

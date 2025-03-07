@@ -38,13 +38,15 @@ import type {
 import type { EventRecords } from '../../EventWorkingListsCommon';
 import type {
     EventWorkingListsTemplates,
+    MainViewConfig,
 } from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,
     program: Program,
     programStage: ProgramStage,
-    orgUnitId: string
+    orgUnitId: string,
+    mainViewConfig?: MainViewConfig,
 |}>;
 
 export type EventWorkingListsReduxOutputProps = {|
