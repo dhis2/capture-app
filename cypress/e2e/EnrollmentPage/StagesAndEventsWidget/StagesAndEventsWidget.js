@@ -16,13 +16,13 @@ After({ tags: '@with-restore-deleted-event' }, () => {
         .type('2023-01-26')
         .blur();
 
-    cy.get('[data-test="virtualized-select"]')
+    cy.get('[data-test="single-select-input"]')
         .eq(0)
         .click()
         .contains('P+')
         .click();
 
-    cy.get('[data-test="virtualized-select"]')
+    cy.get('[data-test="single-select-input"]')
         .eq(1)
         .click()
         .contains('New')

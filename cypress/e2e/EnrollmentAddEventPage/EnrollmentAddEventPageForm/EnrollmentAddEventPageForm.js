@@ -98,7 +98,7 @@ When(/^you type (.*) in the input number (.*)$/, (value, eq) => {
 When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
     cy
         .get('[data-test="new-enrollment-event-form"]')
-        .get('[data-test="virtualized-select"]')
+        .get('[data-test="single-select-input"]')
         .eq(eq)
         .click()
         .contains(value)
