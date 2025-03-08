@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Yury Rogachev <yury@dhis2.org>, 2022
+# Yury Rogachev <yury@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2022\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -219,7 +219,7 @@ msgid "No write access"
 msgstr "Yozuv kiritish uchun ruxsat yoʼq"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Yangi {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Shakl koʼrinishiga oʼtish"
@@ -767,7 +767,7 @@ msgid "Link"
 msgstr "Havola"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Yangi {{trackedEntityName}} sifatida saqlash"
 
 msgid "Organisation Unit"
 msgstr "Tashkiliy birlik"
