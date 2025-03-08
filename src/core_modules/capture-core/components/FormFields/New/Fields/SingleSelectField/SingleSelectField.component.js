@@ -59,7 +59,7 @@ class SingleSelectFieldPlain extends Component<Props> {
                 placeholder={placeholder}
                 filterable={filterable}
                 clearable={clearable}
-                dataTest="single-select-field"
+                dataTest="single-select-input"
                 {...passOnProps}
             >
                 {options && options.map(option => (

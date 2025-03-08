@@ -34,7 +34,7 @@ Given('you add an enrollment event that will result in a rule effect to hide a p
         .blur();
 
     cy
-        .get('[data-test="virtualized-select"]')
+        .get('[data-test="single-select-input"]')
         .eq(6)
         .click()
         .contains('Termination of pregnancy')

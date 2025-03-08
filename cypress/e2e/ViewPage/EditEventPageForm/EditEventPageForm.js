@@ -9,7 +9,7 @@ const cleanUpEvent = () => {
 
     cy.get('[data-test="dataEntrySection-categorycombo"]')
         .within(() => {
-            cy.get('[data-test="virtualized-select"]')
+            cy.get('[data-test="single-select-input"]')
                 .eq(0)
                 .click()
                 .contains('CARE International')
@@ -82,7 +82,7 @@ And('you enable edit mode', () => {
 When('you change the category combination and save', () => {
     cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
         .within(() => {
-            cy.get('[data-test="virtualized-select"]')
+            cy.get('[data-test="single-select-input"]')
                 .eq(0)
                 .click()
                 .contains('APHIAplus')
