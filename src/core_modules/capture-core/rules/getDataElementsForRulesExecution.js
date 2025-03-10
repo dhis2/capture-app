@@ -8,7 +8,7 @@ export const getDataElementsForRulesExecution = (stages: Map<string, ProgramStag
             accRulesDataElements[dataElement.id] = {
                 id: dataElement.id,
                 valueType: dataElement.type,
-                optionSetId: dataElement.optionSet && dataElement.optionSet.id,
+                optionSetId: dataElement.optionSet?.id,
                 name: dataElement.formName || dataElement.name,
             };
             return accRulesDataElements;

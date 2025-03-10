@@ -6,7 +6,7 @@ export const getTrackedEntityAttributesForRulesExecution = (attributes: Array<Da
         accRulesAttributes[attribute.id] = {
             id: attribute.id,
             valueType: attribute.type,
-            optionSetId: attribute.optionSet && attribute.optionSet.id,
+            optionSetId: attribute.optionSet?.id,
         };
         return accRulesAttributes;
     }, {});

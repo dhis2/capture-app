@@ -277,7 +277,10 @@ describe('Event rules engine', () => {
             displayName: 'Gender',
             version: 0,
             valueType: 'TEXT',
-            options: undefined,
+            options: [
+                { id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] },
+                { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] },
+            ],
         },
     };
 

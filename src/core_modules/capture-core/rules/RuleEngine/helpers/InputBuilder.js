@@ -291,9 +291,9 @@ export class InputBuilder {
 
     getOptionSet(field: string, type: string): KotlinOptionSet {
         if (variableSourceTypesDataElementSpecific[type]) {
-            return this.convertOptionSet(this.dataElements[field].optionSetId);
+            return this.convertOptionSet(this.dataElements[field]?.optionSetId);
         } else if (variableSourceTypesTrackedEntitySpecific[type]) {
-            return this.convertOptionSet(this.trackedEntityAttributes[field].optionSetId);
+            return this.convertOptionSet(this.trackedEntityAttributes[field]?.optionSetId);
         }
         return [];
     }
