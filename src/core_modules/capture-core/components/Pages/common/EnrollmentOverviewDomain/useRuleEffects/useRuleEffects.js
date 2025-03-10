@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { convertValue } from '../../../../../converters/serverToClient';
 import { getApplicableRuleEffectsForTrackerProgram } from '../../../../../rules';
-import { dataElementTypes, type TrackerProgram } from '../../../../../metaData';
+import { dataElementTypes, getTrackerProgramThrowIfNotFound, type TrackerProgram } from '../../../../../metaData';
 import type { UseRuleEffectsInput } from './useRuleEffects.types';
 
 // $FlowFixMe
@@ -48,12 +48,14 @@ const useEnrollmentData = enrollment => useMemo(() => {
         return undefined;
     }
 
-    const { enrollment: enrollmentId, enrolledAt, occurredAt } = enrollment;
+    const { enrollment: enrollmentId, enrolledAt, occurredAt, status, program } = enrollment;
 
     return {
         enrolledAt: convertDate(enrolledAt),
         occurredAt: occurredAt ? convertDate(occurredAt) : undefined,
         enrollmentId,
+        enrollmentStatus: status,
+        programName: getTrackerProgramThrowIfNotFound(program).name,
     };
 }, [enrollment]);
 

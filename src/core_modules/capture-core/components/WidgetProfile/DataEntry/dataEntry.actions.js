@@ -1,5 +1,6 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
+import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import type {
     OrgUnit,
     TrackedEntityAttributes,
@@ -7,9 +8,8 @@ import type {
     ProgramRulesContainer,
     EventsData,
     DataElements,
-    Enrollment,
-} from '@dhis2/rules-engine-javascript';
-import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
+} from '../../../rules/RuleEngine';
+import type { EnrollmentData } from './Types';
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 import type { RenderFoundation } from '../../../metaData';
@@ -54,13 +54,14 @@ const dataEntryPropsToInclude: Array<Object> = [
 
 type Context = {
     orgUnit: OrgUnit,
+    programName: string,
     trackedEntityAttributes: ?TrackedEntityAttributes,
     optionSets: OptionSets,
     rulesContainer: ProgramRulesContainer,
     formFoundation: RenderFoundation,
     otherEvents?: ?EventsData,
     dataElements: ?DataElements,
-    enrollment?: ?Enrollment,
+    enrollment?: EnrollmentData,
     userRoles: Array<string>,
     state: ReduxState,
 };
@@ -89,6 +90,7 @@ export const getUpdateFieldActions = async ({
         dataElements,
         enrollment,
         userRoles,
+        programName,
     } = context;
     const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload || {};
     const fieldData: FieldData = {
@@ -110,6 +112,7 @@ export const getUpdateFieldActions = async ({
         otherEvents,
         dataElements,
         userRoles,
+        programName,
         querySingleResource,
         onGetValidationContext,
     });
