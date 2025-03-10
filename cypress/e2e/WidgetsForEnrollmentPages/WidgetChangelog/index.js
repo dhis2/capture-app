@@ -23,6 +23,7 @@ Then(/^the number of changelog table rows should be (.*)$/, (numberOfRows) => {
 
 When(/^you change the page size to (.*)$/, (pageSize) => {
     cy.get('[data-test="changelog-pagination-pagesize-select"]')
+        .should('not.be.disabled')
         .click();
 
     cy.get('[data-test="dhis2-uicore-select-menu-menuwrapper"]')
