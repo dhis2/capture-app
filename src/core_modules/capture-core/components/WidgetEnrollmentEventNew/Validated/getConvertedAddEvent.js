@@ -4,6 +4,7 @@ import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDa
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
 import { type RenderFoundation } from '../../../metaData';
+import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 
 export const getAddEventEnrollmentServerData = ({
     formFoundation,
@@ -47,6 +48,7 @@ export const getAddEventEnrollmentServerData = ({
         orgUnitName: mainDataServerValues.orgUnit.name,
         trackedEntity: teiId,
         enrollment: enrollmentId,
+        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ? {} : { scheduledAt: mainDataServerValues.occurredAt }),
         updatedAt,
         uid,
         dataValues: Object
