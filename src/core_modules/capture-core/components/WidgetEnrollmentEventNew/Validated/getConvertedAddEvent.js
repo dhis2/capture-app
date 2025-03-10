@@ -47,7 +47,6 @@ export const getAddEventEnrollmentServerData = ({
         orgUnitName: mainDataServerValues.orgUnit.name,
         trackedEntity: teiId,
         enrollment: enrollmentId,
-        scheduledAt: mainDataServerValues.occurredAt,
         updatedAt,
         uid,
         dataValues: Object
