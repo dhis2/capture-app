@@ -346,6 +346,13 @@ test('expressions with d2Functions in tracker program', () => {
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
+                {
+                    id: 'reT7Iyr4PT2',
+                    displayContent: '#{gender} = ',
+                    data: '#{gender}',
+                    location: 'feedback',
+                    programRuleActionType: 'DISPLAYTEXT',
+                },
                 { id: 'nKNmayYigcy', programStageId: 'PUZaKR0Jh2k', programRuleActionType: 'HIDEPROGRAMSTAGE' },
                 {
                     id: 'nKNmayYigcy',
@@ -415,7 +422,7 @@ test('expressions with d2Functions in tracker program', () => {
             trackedEntityAttributeId: 'w75KJ2mc4zz',
             displayName: 'INFECTION_SOURCE',
             programId: 'IpHINAT79UW',
-            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
+            programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
             useNameForOptionSet: false,
         },
         {
@@ -423,7 +430,7 @@ test('expressions with d2Functions in tracker program', () => {
             trackedEntityAttributeId: 'w75KJ2mc4zz',
             displayName: 'INFECTION_SOURCE',
             programId: 'IpHINAT79UW',
-            programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
+            programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
             useNameForOptionSet: false,
         },
         {
@@ -433,6 +440,14 @@ test('expressions with d2Functions in tracker program', () => {
             trackedEntityAttributeId: 'w75KJ2mc4zz',
             programId: 'IpHINAT79UW',
         },
+        {
+            id: 'abc123wwwxy',
+            displayName: 'gender',
+            programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
+            trackedEntityAttributeId: 'cejWyOfXge6',
+            programId: 'IpHINAT79UW',
+            useNameForOptionSet: true,
+        },
     ];
     const optionSets = {
         pC3N9N77UmT: {
@@ -441,8 +456,8 @@ test('expressions with d2Functions in tracker program', () => {
             version: 0,
             valueType: 'MULTI_TEXT',
             options: [
-                { id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] },
-                { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] },
+                { id: 'rBvjJYbMCVx', displayName: 'Male', code: 'M', translations: [] },
+                { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'F', translations: [] },
             ],
             dataElement: { type: 'MULTI_TEXT' },
         } };
@@ -456,6 +471,7 @@ test('expressions with d2Functions in tracker program', () => {
         A4Fg6jgWauf: 'IMAGE',
         CUbZcLm9LyN: 'USERNAME',
         p8htbyJHydl: { latitude: '12.4353', longitude: '67.34534' },
+        cejWyOfXge6: 'M',
     };
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const enrollmentData = { enrolledAt: '2020-05-14T10:00:00.000Z' };
@@ -666,6 +682,11 @@ test('expressions with d2Functions in tracker program', () => {
             type: 'DISPLAYTEXT',
             id: 'feedback',
             displayText: { id: 'Eeb7Ixr4Pv6', message: 'd2:floor((5+5) / 2) =  5' },
+        },
+        {
+            type: 'DISPLAYTEXT',
+            id: 'feedback',
+            displayText: { id: 'reT7Iyr4PT2', message: '#{gender} =  Male' },
         },
         { type: 'HIDEPROGRAMSTAGE', id: 'PUZaKR0Jh2k' },
         { id: 'SWfdBhglX0fk', type: 'HIDESECTION' },

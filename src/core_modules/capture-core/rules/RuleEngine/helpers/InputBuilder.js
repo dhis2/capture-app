@@ -1,6 +1,7 @@
 // @flow
 import { Instant, LocalDate } from '@js-joda/core';
 import {
+    Option,
     RuleActionJs,
     RuleDataValue,
     RuleEngineContextJs,
@@ -26,7 +27,7 @@ import type {
     ProgramRuleVariable,
     ProgramRulesContainer,
     OrgUnit,
-    Option,
+    Option as RawOption,
     OptionSets,
     Constants,
     EventData,
@@ -37,17 +38,34 @@ import type {
     IConvertInputRulesValue,
 } from '../types/ruleEngine.types';
 import type {
-    KotlinOption,
+    KotlinOptionSet,
     KotlinOptionSets,
 } from '../types/kotlinRuleEngine.types';
 
+const variableSourceTypesDataElementSpecific = {
+    DATAELEMENT_CURRENT_EVENT: 'DATAELEMENT_CURRENT_EVENT',
+    DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE: 'DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE',
+    DATAELEMENT_NEWEST_EVENT_PROGRAM: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
+    DATAELEMENT_PREVIOUS_EVENT: 'DATAELEMENT_PREVIOUS_EVENT',
+};
+
+const variableSourceTypesTrackedEntitySpecific = {
+    TEI_ATTRIBUTE: 'TEI_ATTRIBUTE',
+};
+
+export const variableSourceTypes = {
+    ...variableSourceTypesDataElementSpecific,
+    ...variableSourceTypesTrackedEntitySpecific,
+    CALCULATED_VALUE: 'CALCULATED_VALUE',
+};
+
 const programRuleVariableSourceIdExtractor = {
-    DATAELEMENT_CURRENT_EVENT: variable => variable.dataElementId,
-    DATAELEMENT_NEWEST_EVENT_PROGRAM: variable => variable.dataElementId,
-    DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE: variable => variable.dataElementId,
-    DATAELEMENT_PREVIOUS_EVENT: variable => variable.dataElementId,
-    TEI_ATTRIBUTE: variable => variable.trackedEntityAttributeId,
-    CALCULATED_VALUE: variable => '', // eslint-disable-line
+    [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: variable => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM]: variable => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE]: variable => variable.dataElementId,
+    [variableSourceTypes.DATAELEMENT_PREVIOUS_EVENT]: variable => variable.dataElementId,
+    [variableSourceTypes.TEI_ATTRIBUTE]: variable => variable.trackedEntityAttributeId,
+    [variableSourceTypes.CALCULATED_VALUE]: variable => '', // eslint-disable-line
 };
 
 const eventMainKeys = new Set([
@@ -155,39 +173,13 @@ const convertProgramRule = (rule: ProgramRule) => {
     );
 };
 
-const convertRuleVariable = (variable: ProgramRuleVariable, optionSets: KotlinOptionSets) => {
-    const {
-        programRuleVariableSourceType,
-        displayName: name,
-        useNameForOptionSet,
-        valueType: fieldType,
-        programStageId: programStage,
-    } = variable;
-
-    const type = programRuleVariableSourceIdExtractor[programRuleVariableSourceType]
-        ? programRuleVariableSourceType : 'CALCULATED_VALUE';
-
-    const field = programRuleVariableSourceIdExtractor[type](variable);
-
-    return new RuleVariableJs(
-        RuleVariableType[type],
-        name,
-        !useNameForOptionSet,
-        optionSets[field] || [],
-        field,
-        ruleValueTypeMap[fieldType] || RuleValueType.TEXT,
-        programStage,
-    );
-};
-
 const convertConstants = (constants: Constants): Map<string, string> =>
     constants.reduce((acc, constant) => {
         acc.set(constant.displayName, constant.value);
         return acc;
     }, new Map);
 
-const convertOption = (option: Option): KotlinOption =>
-    ({ name: option.displayName, code: option.code });
+const convertOption = (option: RawOption) => new Option(option.displayName, option.code);
 
 const buildSupplementaryData = ({
     selectedOrgUnit,
@@ -217,16 +209,21 @@ export class InputBuilder {
     processValue: (value: any, type: $Values<typeof typeKeys>) => any;
     dataElements: DataElements;
     trackedEntityAttributes: TrackedEntityAttributes;
+    optionSets: OptionSets;
+    kotlinOptionSets: KotlinOptionSets;
     selectedOrgUnit: OrgUnit;
     constructor(
         inputConverter: IConvertInputRulesValue,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
+        optionSets: OptionSets,
         selectedOrgUnit: OrgUnit,
     ) {
         this.processValue = new ValueProcessor(inputConverter).processValue;
         this.dataElements = dataElements || {};
         this.trackedEntityAttributes = trackedEntityAttributes || {};
+        this.optionSets = optionSets;
+        this.kotlinOptionSets = {};
         this.selectedOrgUnit = selectedOrgUnit;
     }
 
@@ -281,6 +278,51 @@ export class InputBuilder {
         );
     };
 
+    convertOptionSet(optionSetId: ?string): KotlinOptionSet {
+        if (!optionSetId || !this.optionSets[optionSetId]) {
+            return [];
+        }
+        if (this.kotlinOptionSets[optionSetId]) {
+            return this.kotlinOptionSets[optionSetId];
+        }
+        this.kotlinOptionSets[optionSetId] = this.optionSets[optionSetId].options.map(convertOption);
+        return this.kotlinOptionSets[optionSetId];
+    }
+
+    getOptionSet(field: string, type: string): KotlinOptionSet {
+        if (variableSourceTypesDataElementSpecific[type]) {
+            return this.convertOptionSet(this.dataElements[field].optionSetId);
+        } else if (variableSourceTypesTrackedEntitySpecific[type]) {
+            return this.convertOptionSet(this.trackedEntityAttributes[field].optionSetId);
+        }
+        return [];
+    }
+
+    convertRuleVariable = (variable: ProgramRuleVariable) => {
+        const {
+            programRuleVariableSourceType,
+            displayName: name,
+            useNameForOptionSet,
+            valueType: fieldType,
+            programStageId: programStage,
+        } = variable;
+
+        const type = programRuleVariableSourceIdExtractor[programRuleVariableSourceType]
+            ? programRuleVariableSourceType : 'CALCULATED_VALUE';
+
+        const field = programRuleVariableSourceIdExtractor[type](variable);
+
+        return new RuleVariableJs(
+            RuleVariableType[type],
+            name,
+            !useNameForOptionSet,
+            this.getOptionSet(field, type),
+            field,
+            ruleValueTypeMap[fieldType] || RuleValueType.TEXT,
+            programStage,
+        );
+    };
+
     buildEnrollment = ({
         selectedEnrollment,
         selectedEntity,
@@ -321,22 +363,15 @@ export class InputBuilder {
     buildRuleEngineContext = ({
         programRulesContainer,
         selectedUserRoles,
-        optionSets,
     }: {
         programRulesContainer: ProgramRulesContainer,
         selectedUserRoles: ?Array<string>,
-        optionSets: OptionSets,
     }) => {
         const { programRules, programRuleVariables, constants } = programRulesContainer;
 
-        const kotlinOptionSets = Object.keys(optionSets).reduce((acc, key) => {
-            acc[key] = (optionSets[key].options || []).map(convertOption);
-            return acc;
-        }, {});
-
         return new RuleEngineContextJs(
             programRules && programRules.map(convertProgramRule),
-            programRuleVariables && programRuleVariables.map(variable => convertRuleVariable(variable, kotlinOptionSets)),
+            programRuleVariables && programRuleVariables.map(this.convertRuleVariable),
             buildSupplementaryData({ selectedOrgUnit: this.selectedOrgUnit, selectedUserRoles }),
             constants && convertConstants(constants),
         );

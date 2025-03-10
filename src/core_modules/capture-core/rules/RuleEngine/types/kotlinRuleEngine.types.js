@@ -1,11 +1,7 @@
 // @flow
+import { Option } from '@dhis2/rule-engine';
 
-export type KotlinOption = {
-    name: string,
-    code: string,
-};
-
-type KotlinOptionSet = Array<KotlinOption>;
+export type KotlinOptionSet = Array<typeof Option>;
 
 export type KotlinOptionSets = {|
     [id: string]: KotlinOptionSet,

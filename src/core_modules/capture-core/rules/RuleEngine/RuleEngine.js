@@ -47,12 +47,16 @@ export class RuleEngine {
             !selectedOrgUnit ||
             !currentEvent && !selectedEnrollment) return [];
 
-        const inputBuilder = new InputBuilder(this.inputConverter, dataElements, trackedEntityAttributes, selectedOrgUnit);
+        const inputBuilder = new InputBuilder(
+            this.inputConverter,
+            dataElements,
+            trackedEntityAttributes,
+            optionSets,
+            selectedOrgUnit,
+        );
         const executionContext = inputBuilder.buildRuleEngineContext({
             programRulesContainer,
             selectedUserRoles,
-            selectedOrgUnit,
-            optionSets,
         });
         const enrollment = selectedEnrollment ?
             inputBuilder.buildEnrollment({
