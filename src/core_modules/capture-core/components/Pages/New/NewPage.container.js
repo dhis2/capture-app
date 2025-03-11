@@ -85,9 +85,10 @@ export const NewPage: ComponentType<{||}> = () => {
     // the selection is incomplete we want the user to see a specific message
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
+    // TODO: OrgUnitSelectionIncomplete should be removed when DHIS2-19171 is implemented
     const orgUnitSelectionIncomplete: boolean = useSelector(
         ({ currentSelections }) =>
-            (program instanceof TrackerProgram) && // Remove when DHIS2-19171 is implemented
+            (program instanceof TrackerProgram) &&
             !currentSelections.orgUnitId &&
             !currentSelections.complete,
     );
