@@ -160,11 +160,10 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
 export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
-        switchMap(() => {
+        switchMap((action) => {
+            const orgUnitId = action.payload.orgUnitId;
             const state = store.value;
-            console.log('test state', state);
             const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
             const showaccessible = state.currentSelections.showaccessible;
 
             if (showaccessible && !orgUnitId) {

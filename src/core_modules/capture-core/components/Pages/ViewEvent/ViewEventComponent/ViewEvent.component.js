@@ -1,5 +1,6 @@
 // @flow
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
@@ -10,6 +11,8 @@ import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
+import { startGoBackToMainPage } from './viewEvent.actions';
+import { useLocationQuery } from '../../../../utils/routing';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -58,70 +61,72 @@ type Props = {
     onSaveAssigneeError: (prevAssignee: UserFormField | null) => void,
 };
 
-type State = {
-    warningOpen: boolean
-}
-class ViewEventPlain extends Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            warningOpen: false,
-        };
-    }
+export const ViewEventPlain = (props: Props) => {
+    const {
+        classes,
+        programId,
+        programStage,
+        showEditEvent,
+        onBackToViewEvent,
+        isUserInteractionInProgress,
+        currentDataEntryKey,
+        eventAccess,
+        assignee,
+        getAssignedUserSaveContext,
+        onSaveAssignee,
+        onSaveAssigneeError,
+    } = props;
 
-    render() {
-        const {
-            classes,
-            programId,
-            programStage,
-            showEditEvent,
-            onBackToViewEvent,
-            isUserInteractionInProgress,
-            currentDataEntryKey,
-            eventAccess,
-            assignee,
-            getAssignedUserSaveContext,
-            onSaveAssignee,
-            onSaveAssigneeError,
-            onBackToAllEvents,
-        } = this.props;
+    const [warningOpen, setWarningOpen] = useState(false);
+    const dispatch = useDispatch();
+    const { orgUnitId } = useLocationQuery();
 
-        return (
-            <div className={classes.container}>
-                <EventBreadcrumb
-                    programId={programId}
-                    page={showEditEvent ? pageKeys.EDIT_EVENT : pageKeys.VIEW_EVENT}
-                    userInteractionInProgress={isUserInteractionInProgress}
+    const handleCancelDialog = () => {
+        setWarningOpen(false);
+    };
+
+    const handleDestroyDialog = () => {
+        onBackToAllEvents();
+    };
+
+    const onBackToAllEvents = () => {
+        dispatch(startGoBackToMainPage(orgUnitId));
+    };
+
+    return (
+        <div className={classes.container}>
+            <EventBreadcrumb
+                programId={programId}
+                page={showEditEvent ? pageKeys.EDIT_EVENT : pageKeys.VIEW_EVENT}
+                userInteractionInProgress={isUserInteractionInProgress}
+                onBackToViewEvent={onBackToViewEvent}
+                onBackToMainPage={onBackToAllEvents}
+            />
+            <div className={classes.contentContainer}>
+                <EventDetails
+                    eventAccess={eventAccess}
+                    programStage={programStage}
                     onBackToViewEvent={onBackToViewEvent}
-                    onBackToMainPage={onBackToAllEvents}
+                    onBackToAllEvents={onBackToAllEvents}
                 />
-                <div className={classes.contentContainer}>
-                    <EventDetails
-                        eventAccess={eventAccess}
-                        programStage={programStage}
-                        onBackToViewEvent={onBackToViewEvent}
-                        onBackToAllEvents={onBackToAllEvents}
-                    />
-                    <RightColumnWrapper
-                        eventAccess={eventAccess}
-                        programStage={programStage}
-                        dataEntryKey={currentDataEntryKey}
-                        assignee={assignee}
-                        getAssignedUserSaveContext={getAssignedUserSaveContext}
-                        onSaveAssignee={onSaveAssignee}
-                        onSaveAssigneeError={onSaveAssigneeError}
-                    />
-                </div>
-                <DiscardDialog
-                    {...defaultDialogProps}
-                    onCancel={() => { this.setState({ warningOpen: false }); }}
-                    onDestroy={() => this.props.onBackToAllEvents()}
-                    open={this.state.warningOpen}
+                <RightColumnWrapper
+                    eventAccess={eventAccess}
+                    programStage={programStage}
+                    dataEntryKey={currentDataEntryKey}
+                    assignee={assignee}
+                    getAssignedUserSaveContext={getAssignedUserSaveContext}
+                    onSaveAssignee={onSaveAssignee}
+                    onSaveAssigneeError={onSaveAssigneeError}
                 />
             </div>
-
-        );
-    }
-}
+            <DiscardDialog
+                {...defaultDialogProps}
+                onCancel={handleCancelDialog}
+                onDestroy={handleDestroyDialog}
+                open={warningOpen}
+            />
+        </div>
+    );
+};
 
 export const ViewEventComponent = withStyles(getStyles)(ViewEventPlain);
