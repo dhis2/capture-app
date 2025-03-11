@@ -1,8 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { pipe } from 'capture-core-utils';
 import moment from 'moment';
-import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
+import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
 import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
@@ -30,11 +29,6 @@ const translatedPeriods = {
     [periods.RELATIVE_RANGE]: i18n.t('Relative range'),
 };
 
-const convertToViewValue = (filterValue: string) => pipe(
-    value => moment(value),
-    momentDate => convertMomentToDateFormatString(momentDate),
-)(filterValue);
-
 function translateAbsoluteDate(filter: AbsoluteDateFilterData) {
     let appliedText = '';
     const fromValue = filter.ge;
@@ -44,18 +38,18 @@ function translateAbsoluteDate(filter: AbsoluteDateFilterData) {
         const momentFrom = moment(fromValue);
         const momentTo = moment(toValue);
         if (momentFrom.isSame(momentTo)) {
-            appliedText = convertMomentToDateFormatString(momentFrom);
+            appliedText = convertIsoToLocalCalendar(fromValue);
         } else {
-            const appliedTextFrom = convertMomentToDateFormatString(momentFrom);
-            const appliedTextTo = convertMomentToDateFormatString(momentTo);
+            const appliedTextFrom = convertIsoToLocalCalendar(fromValue);
+            const appliedTextTo = convertIsoToLocalCalendar(toValue);
             appliedText = i18n.t('{{fromDate}} to {{toDate}}', { fromDate: appliedTextFrom, toDate: appliedTextTo });
         }
     } else if (fromValue) {
-        const appliedTextFrom = convertToViewValue(fromValue);
+        const appliedTextFrom = convertIsoToLocalCalendar(fromValue);
         appliedText = i18n.t('after or equal to {{date}}', { date: appliedTextFrom });
     } else {
         // $FlowFixMe[incompatible-call] automated comment
-        const appliedTextTo = convertToViewValue(toValue);
+        const appliedTextTo = convertIsoToLocalCalendar(toValue);
         appliedText = i18n.t('before or equal to {{date}}', { date: appliedTextTo });
     }
     return appliedText;

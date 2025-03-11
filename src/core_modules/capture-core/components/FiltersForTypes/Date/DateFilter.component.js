@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { Temporal } from '@js-temporal/polyfill';
 import { isValidZeroOrPositiveInteger } from 'capture-core-utils/validators/form';
 import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
 import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
@@ -16,7 +17,7 @@ import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './options';
 import { getDateFilterData } from './dateFilterDataGetter';
 import { RangeFilter } from './RangeFilter.component';
-import { parseDate } from '../../../utils/converters/date';
+import { convertLocalToIsoCalendar } from '../../../utils/converters/date';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
@@ -117,24 +118,27 @@ const getRelativeRangeErrors = (startValue, endValue, submitAttempted) => {
     return errors;
 };
 
+// eslint-disable-next-line complexity
 const isAbsoluteRangeFilterValid = (from, to) => {
-    if (!from?.value && !to?.value) {
-        return false;
-    }
     const fromValue = from?.value;
     const toValue = to?.value;
-    const parseResultFrom = fromValue ? parseDate(fromValue) : { isValid: true, moment: null };
-    const parseResultTo = toValue ? parseDate(toValue) : { isValid: true, moment: null };
 
-    if (!(parseResultFrom.isValid && parseResultTo.isValid)) {
+    if (!fromValue && !toValue) {
         return false;
     }
-    const isValidMomentDate = () =>
-        parseResultFrom.momentDate &&
-        parseResultTo.momentDate &&
-        parseResultFrom.momentDate.isAfter(parseResultTo.momentDate);
 
-    return !isValidMomentDate();
+    const isFromValueValid = from ? from.isValid : true;
+    const isToValueValid = to ? to.isValid : true;
+
+    if (!isFromValueValid || !isToValueValid) {
+        return false;
+    }
+
+    if ((!fromValue && toValue) || (fromValue && !toValue)) {
+        return true;
+    }
+
+    return !DateFilter.isFromAfterTo(fromValue, toValue);
 };
 
 const isRelativeRangeFilterValid = (startValue, endValue) => {
@@ -186,11 +190,11 @@ class DateFilterPlain extends Component<Props, State> implements UpdatableFilter
     }
 
     static isFromAfterTo(valueFrom: string, valueTo: string) {
-        const momentFrom = parseDate(valueFrom).momentDate;
-        const momentTo = parseDate(valueTo).momentDate;
-        // $FlowFixMe[incompatible-use] automated comment
-        // $FlowFixMe[incompatible-call] automated comment
-        return momentFrom.isAfter(momentTo);
+        const from = convertLocalToIsoCalendar(valueFrom);
+        const to = convertLocalToIsoCalendar(valueTo);
+        const fromIso = Temporal.PlainDate.from(from.split('T')[0]);
+        const toIso = Temporal.PlainDate.from(to.split('T')[0]);
+        return Temporal.PlainDate.compare(fromIso, toIso) > 0;
     }
 
     toD2DateTextFieldInstance: any;

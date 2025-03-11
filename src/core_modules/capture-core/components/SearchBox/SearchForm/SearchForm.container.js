@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import type { ComponentType } from 'react';
 import { isObject, isString } from 'd2-utilizr/src';
+import { convertFormToClient } from 'capture-core/converters';
 import { SearchFormComponent } from './SearchForm.component';
 import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
@@ -23,6 +24,24 @@ const isValueContainingCharacter = (value: any) => {
     }
 
     if (isObject(value)) {
+        if ('from' in value && 'to' in value) {
+            const fromValues = isObject(value.from) ?
+                [value.from.time, value.from.date] :
+                [value.from];
+
+            const toValues = isObject(value.to) ?
+                [value.to.time, value.to.date] :
+                [value.to];
+
+            const allValues = [...fromValues, ...toValues];
+            const validValues = allValues
+                .filter(v => isString(v))
+                .filter(v => Boolean(v?.replace(/\s/g, '').length))
+                .length;
+
+            return validValues === allValues.length;
+        }
+
         const numberOfValuesWithLength = Object.values(value)
             .filter(v => isString(v))
             .filter((v: any) => Boolean(v.replace(/\s/g, '').length))
@@ -48,7 +67,8 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): C
             const { name, id, type } = attributeSearchForm.getElement(attributeValueKey);
             const value = searchTerms[attributeValueKey];
             if (isValueContainingCharacter(value)) {
-                return [...accumulated, { name, value, id, type }];
+                const convertedValue = convertFormToClient(value, type);
+                return [...accumulated, { name, value: convertedValue, id, type }];
             }
             return accumulated;
         }, []);

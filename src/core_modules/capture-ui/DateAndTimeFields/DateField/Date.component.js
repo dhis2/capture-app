@@ -1,12 +1,16 @@
 // @flow
 import React from 'react';
 import { CalendarInput } from '@dhis2/ui';
-import { systemSettingsStore } from '../../../capture-core/metaDataMemoryStores';
 
 type ValidationOptions = {
     error?: ?string,
     errorCode?: ?string,
 };
+
+type ValidationProps = {|
+    error: boolean,
+    validationText: string,
+|};
 
 type Props = {
     value: ?Object,
@@ -18,11 +22,14 @@ type Props = {
     onBlur: (value: Object, options: ValidationOptions) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-    calendar?: string,
     placeholder?: string,
     label?: string,
-    calendarMaxMoment?: any,
-    innerMessage?: any
+    calendarMax?: any,
+    innerMessage?: any,
+    dateFormat: ?string,
+    calendarType: ?string,
+    locale?: string,
+    validation?: ?ValidationProps,
 };
 
 type Validation = {|
@@ -35,9 +42,6 @@ type Validation = {|
 type State = {
     calendarError: ?Validation,
 };
-
-const formatDate = (date: any, dateFormat: string): ?string =>
-    (dateFormat === 'dd-MM-yyyy' ? date?.format('DD-MM-YYYY') : date?.format('YYYY-MM-DD'));
 
 export class DateField extends React.Component<Props, State> {
     handleDateSelected: (value: {calendarDateString: string}) => void;
@@ -65,20 +69,22 @@ export class DateField extends React.Component<Props, State> {
             maxWidth,
             calendarWidth,
             inputWidth,
-            calendar,
-            calendarMaxMoment,
+            calendarMax,
             value,
             innerMessage,
+            calendarType,
+            dateFormat,
+            locale,
+            validation,
         } = this.props;
-
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
-        const calendarType = calendar || 'gregory';
-        const format = systemSettingsStore.get().dateFormat;
-        const errorProps = innerMessage && innerMessage.messageType === 'error'
+        const calendar = calendarType || 'gregory';
+        const format = dateFormat || 'YYYY-MM-DD';
+        const errorProps = validation || (innerMessage && innerMessage.messageType === 'error'
             ? { error: !!innerMessage.message?.dateInnerErrorMessage,
                 validationText: innerMessage.message?.dateInnerErrorMessage }
-            : {};
+            : {});
 
         return (
             <div
@@ -92,14 +98,15 @@ export class DateField extends React.Component<Props, State> {
                     placeholder={this.props.placeholder}
                     format={format}
                     onDateSelect={this.handleDateSelected}
-                    calendar={calendarType}
+                    calendar={calendar}
                     date={value}
                     width={String(calculatedCalendarWidth)}
                     inputWidth={String(calculatedInputWidth)}
                     onFocus={this.props.onFocus}
                     disabled={this.props.disabled}
                     {...errorProps}
-                    maxDate={calendarMaxMoment && formatDate(calendarMaxMoment, format)}
+                    maxDate={calendarMax}
+                    locale={locale}
                 />
             </div>
         );

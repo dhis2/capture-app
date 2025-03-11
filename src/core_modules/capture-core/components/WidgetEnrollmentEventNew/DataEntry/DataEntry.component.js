@@ -47,6 +47,7 @@ import {
     attributeOptionsKey,
     getCategoryOptionsValidatorContainers,
 } from '../../DataEntryDhis2Helpers';
+import { systemSettingsStore } from '../../../metaDataMemoryStores';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -153,6 +154,8 @@ const buildReportDateSettingsFn = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarType: systemSettingsStore.get().calendar,
+            dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => 'occurredAt',
         getValidatorContainers: () => getEventDateValidatorContainers(),
