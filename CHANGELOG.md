@@ -1,3 +1,29 @@
+# [101.30.0](https://github.com/dhis2/capture-app/compare/v101.29.2...v101.30.0) (2025-03-05)
+
+
+### Bug Fixes
+
+* update github actions cache v2 -> v4 ([#3988](https://github.com/dhis2/capture-app/issues/3988)) ([14d89f6](https://github.com/dhis2/capture-app/commit/14d89f635867e65ebe83463ce504e2503c0f015a))
+
+
+### Features
+
+* [DHIS2-18944] add effect to refresh list on event deletion ([#3982](https://github.com/dhis2/capture-app/issues/3982)) ([2369d18](https://github.com/dhis2/capture-app/commit/2369d18255cce5950ad5b2bfa344f13579fc28eb))
+
+## [101.29.2](https://github.com/dhis2/capture-app/compare/v101.29.1...v101.29.2) (2025-02-27)
+
+
+### Bug Fixes
+
+* [DHIS2-18676] display error for age in the future ([#3932](https://github.com/dhis2/capture-app/issues/3932)) ([fd9fa54](https://github.com/dhis2/capture-app/commit/fd9fa54619b17f13045d88fcd6c3cb3d998c3900))
+
+## [101.29.1](https://github.com/dhis2/capture-app/compare/v101.29.0...v101.29.1) (2025-02-26)
+
+
+### Bug Fixes
+
+* [DHIS2-18855] add error logging for program indicators missing expressions ([#3981](https://github.com/dhis2/capture-app/issues/3981)) ([7f356d5](https://github.com/dhis2/capture-app/commit/7f356d53ed38dad120e1ec3d17c0987cd135a29c))
+
 # [101.29.0](https://github.com/dhis2/capture-app/compare/v101.28.2...v101.29.0) (2025-02-26)
 
 
