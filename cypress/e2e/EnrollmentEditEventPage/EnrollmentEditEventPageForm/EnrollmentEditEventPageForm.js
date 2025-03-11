@@ -113,16 +113,17 @@ When(/^the user changes the gender to (.*)/, gender =>
         .click(),
 );
 
-When(/^the user sets Plurality assessed to (.*)/, text =>
-    cy
-        .get('[data-test="widget-enrollment-event"]')
+When(/^the user sets Plurality assessed to (.*)/, (text) => {
+    cy.get('[data-test="widget-enrollment-event"]')
         .get('[data-test="scope-selector"]')
         .get('[data-test="single-select-input"]')
         .eq(4)
-        .click()
+        .click();
+
+    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
         .contains(text)
-        .click({ force: true }),
-);
+        .click({ force: true });
+});
 
 When('the user clicks switch tab to Schedule', () => {
     cy.get('[data-test="edit-event-tab-bar"]').get('button').contains('Schedule').click();

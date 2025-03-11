@@ -100,7 +100,9 @@ When(/^you select (.*) in the select number (.*)$/, (value, eq) => {
         .get('[data-test="new-enrollment-event-form"]')
         .get('[data-test="single-select-input"]')
         .eq(eq)
-        .click()
+        .click();
+
+    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
         .contains(value)
         .click();
 });
@@ -148,7 +150,7 @@ Then(/^the newest event in datatable nr (.*) should contain (.*)$/, (eq, status)
 });
 
 When(/^the user selects (.*)$/, (value) => {
-    cy.get('.Select')
+    cy.get('[data-test="single-select-input"]')
         .type(value.slice(0, -1));
     cy.contains(value)
         .click();

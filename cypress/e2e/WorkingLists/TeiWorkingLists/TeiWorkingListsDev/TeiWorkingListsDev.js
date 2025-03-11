@@ -176,7 +176,7 @@ When('you click the next page button on the tei working list', () => {
     cy.intercept('GET', '**/tracker/trackedEntities**').as('getTeis');
 
     cy.get('[data-test="search-pagination-next-page"]')
-        .click();
+        .click({ force: true });
 });
 
 Then('new teis should be retrieved from the api', () => {

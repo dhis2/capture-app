@@ -28,9 +28,8 @@ export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>)
         }
 
         render() {
-            const { onSetFocus, onRemoveFocus, onFocus, inFocus, onBlur, classes, ...passOnProps } = this.props;
-            const { inputWrapperFocused, inputWrapperUnfocused, ...passOnClasses } = classes;
-            const inputWrapper = inFocus ? inputWrapperFocused : inputWrapperUnfocused;
+            const { onSetFocus, onRemoveFocus, onFocus, inFocus, onBlur, ...passOnProps } = this.props;
+            const inputWrapper = inFocus ? defaultClasses.inputWrapperFocused : defaultClasses.inputWrapperUnfocused;
             return (
                 <div
                     className={classNames(defaultClasses.inputWrapper, inputWrapper)}
@@ -40,7 +39,6 @@ export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>)
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         {...passOnProps}
-                        classes={passOnClasses}
                     />
                 </div>
             );

@@ -1,26 +1,19 @@
 // @flow
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 import { SingleSelectField as SingleSelectFieldUI, SingleSelectOption } from '@dhis2/ui';
 import { withFocusHandler } from './withFocusHandler';
-
-const getStyles = () => ({
-});
 
 type Props = {
     value: ?string,
     onChange?: any,
     onBlur?: ?(value: any) => void,
     options: Array<{value: any, label: string}>,
-    classes: {
-        inputWrapperFocused: string,
-        inputWrapperUnfocused: string,
-    },
     disabled?: ?boolean,
     required?: ?boolean,
     placeholder?: ?string,
     filterable?: ?boolean,
     clearable?: ?boolean,
+    dataTest?: ?string,
 };
 
 const SingleSelectComponent =
@@ -28,50 +21,46 @@ const SingleSelectComponent =
         SingleSelectFieldUI,
     );
 
-class SingleSelectFieldPlain extends Component<Props> {
-    handleSelect = ({ selected }) => {
-        this.props.onBlur && this.props.onBlur(selected);
-    }
+export const SingleSelectField = (props: Props) => {
+    const {
+        value,
+        onBlur,
+        onChange,
+        options,
+        disabled,
+        required,
+        placeholder,
+        filterable = true,
+        clearable = true,
+        dataTest = 'single-select-input',
+        ...passOnProps
+    } = props;
 
-    render() {
-        const {
-            value,
-            onBlur,
-            onChange,
-            options,
-            classes,
-            disabled,
-            required,
-            placeholder,
-            filterable = true,
-            clearable = true,
-            ...passOnProps
-        } = this.props;
+    const handleSelect = ({ selected }) => {
+        onBlur && onBlur(selected);
+    };
 
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <SingleSelectComponent
-                selected={value || ''}
-                onChange={this.handleSelect}
-                classes={classes}
-                disabled={disabled}
-                required={required}
-                placeholder={placeholder}
-                filterable={filterable}
-                clearable={clearable}
-                dataTest="single-select-input"
-                {...passOnProps}
-            >
-                {options && options.map(option => (
-                    <SingleSelectOption
-                        key={option.value}
-                        label={option.label}
-                        value={option.value}
-                    />
-                ))}
-            </SingleSelectComponent>
-        );
-    }
-}
 
-export const SingleSelectField = withStyles(getStyles)(SingleSelectFieldPlain);
+    return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
+        <SingleSelectComponent
+            selected={value || ''}
+            onChange={handleSelect}
+            disabled={disabled}
+            required={required}
+            placeholder={placeholder}
+            filterable={filterable}
+            clearable={clearable}
+            dataTest={dataTest}
+            {...passOnProps}
+        >
+            {options && options.map(option => (
+                <SingleSelectOption
+                    key={option.value}
+                    label={option.label}
+                    value={option.value}
+                />
+            ))}
+        </SingleSelectComponent>
+    );
+};

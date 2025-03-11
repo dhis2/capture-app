@@ -11,14 +11,16 @@ const cleanUpEvent = () => {
         .within(() => {
             cy.get('[data-test="single-select-input"]')
                 .eq(0)
-                .click()
-                .contains('CARE International')
-                .click({ force: true });
+                .click();
         });
+
+    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+        .contains('CARE International')
+        .click({ force: true });
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
-        .click();
+        .click({ force: true });
 };
 
 After({ tags: '@with-event-coc-clean-up' }, cleanUpEvent);
@@ -49,7 +51,7 @@ And('you (incomplete)(complete) and save the event', () => {
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
-        .click();
+        .click({ force: true });
 });
 
 Then(/^you are redirected to the main page and the event status (.*) is displayed in the list/, (status) => {
@@ -84,10 +86,15 @@ When('you change the category combination and save', () => {
         .within(() => {
             cy.get('[data-test="single-select-input"]')
                 .eq(0)
-                .click()
-                .contains('APHIAplus')
-                .click({ force: true });
+                .click();
         });
+
+    cy.get('[data-test="dhis2-uicore-singleselect-filterinput"]')
+        .type('APHIAp');
+
+    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+        .contains('APHIAplus')
+        .click({ force: true });
 
     cy.get('[data-test="dhis2-uicore-button"]')
         .contains('Save')
@@ -143,9 +150,13 @@ Then('the relationship is deleted', () => {
 
 And('you select the TB Program', () => {
     cy.get('[data-test="relationship-register-tei-program-selector"]')
-        .find('input')
-        .type('TB', { force: true });
-    cy.contains('TB program').click();
+        .click();
+    cy.get('[data-test="dhis2-uicore-singleselect-filterinput"]')
+        .type('TB');
+
+    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
+        .contains('TB program')
+        .click();
 });
 
 Then('the TB program enroll form is loaded', () => {
