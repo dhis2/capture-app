@@ -58,5 +58,13 @@ export type Props = {|
    onAddNote: (note: string) => void,
    onResetCategoryOption: (categoryId: string) => void,
    onClickCategoryOption: (optionId: string, categoryId: string) => void,
-   ...CssClasses
+   validation?: ?{
+      error: boolean,
+      validationText: string,
+    },
+    setValidation: (validation: {
+      error: boolean,
+      validationText: string,
+    }) => void,
+    ...CssClasses
 |};
