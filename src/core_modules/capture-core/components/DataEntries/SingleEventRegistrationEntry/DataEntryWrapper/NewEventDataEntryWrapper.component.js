@@ -12,6 +12,7 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
 import { useMetadataForProgramStage } from '../../common/ProgramStage/useMetadataForProgramStage';
+import { LoadingMaskForPage } from '../../../LoadingMasks';
 
 const getStyles = () => ({
     flexContainer: {
@@ -47,7 +48,7 @@ const NewEventDataEntryWrapperPlain = ({
 }: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
     const orgUnitId = useLocationQuery().orgUnitId;
-    const { formFoundation, stage } = useMetadataForProgramStage({ programId });
+    const { formFoundation, stage, isLoading } = useMetadataForProgramStage({ programId });
     const { orgUnit: orgUnitContext, error } = useCoreOrgUnit(orgUnitId);
     const rulesReady = useRulesEngine({ programId, orgUnitContext, formFoundation });
     const titleText = useScopeTitleText(programId);
@@ -66,7 +67,11 @@ const NewEventDataEntryWrapperPlain = ({
     };
     const isCustomForm = checkIfCustomForm();
 
-    return rulesReady && (
+    if (isLoading || !rulesReady) {
+        return <LoadingMaskForPage />;
+    }
+
+    return (
         <div className={classes.container}>
             <div className={classes.flexContainer}>
                 <div className={classes.title} >
