@@ -4,6 +4,7 @@ import React, { useCallback } from 'react';
 import type { ComponentType } from 'react';
 import { NewPageComponent } from './NewPage.component';
 import {
+    showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage, showMessageThatCategoryOptionIsInvalidForOrgUnit,
 } from './NewPage.actions';
@@ -55,6 +56,10 @@ export const NewPage: ComponentType<{||}> = () => {
         trackedEntityInstanceAttributes &&
         deriveTeiName(trackedEntityInstanceAttributes, trackedEntityType?.id || '', teiId);
 
+    const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
+        () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
+        [dispatch]);
+
     const dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit = useCallback(
         () => { dispatch(showMessageThatCategoryOptionIsInvalidForOrgUnit()); },
         [dispatch]);
@@ -79,6 +84,13 @@ export const NewPage: ComponentType<{||}> = () => {
     // This is combo category selection. When you have selected a program but
     // the selection is incomplete we want the user to see a specific message
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
+
+    const orgUnitSelectionIncomplete: boolean = useSelector(
+        ({ currentSelections }) =>
+            (program instanceof TrackerProgram) &&
+            !currentSelections.orgUnitId &&
+            !currentSelections.complete,
+    );
 
     const newPageStatus: $Keys<typeof newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
@@ -110,11 +122,13 @@ export const NewPage: ComponentType<{||}> = () => {
                 formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
             />
             <NewPageComponent
+                showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
                 showMessageToSelectProgramCategoryOnNewPage={dispatchShowMessageToSelectProgramCategoryOnNewPage}
                 showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
                 showMessageThatCategoryOptionIsInvalidForOrgUnit={dispatchShowMessageThatCategoryOptionIsInvalidForOrgUnit}
                 handleMainPageNavigation={handleMainPageNavigation}
                 currentScopeId={currentScopeId}
+                orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
                 programCategorySelectionIncomplete={programSelectionIsIncomplete}
                 missingCategoriesInProgramSelection={missingCategories}
                 categoryOptionIsInvalidForOrgUnit={categoryOptionIsInvalidForOrgUnit}

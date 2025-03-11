@@ -15,12 +15,14 @@ type InputAttribute = {
 };
 
 export type ContainerProps = $ReadOnly<{|
+  showMessageToSelectOrgUnitOnNewPage: ()=>void,
   showMessageToSelectProgramCategoryOnNewPage: ()=>void,
   showMessageThatCategoryOptionIsInvalidForOrgUnit: ()=>void,
   categoryOptionIsInvalidForOrgUnit: boolean,
   showDefaultViewOnNewPage: ()=>void,
   handleMainPageNavigation: ()=>void,
   currentScopeId: string,
+  orgUnitSelectionIncomplete: boolean,
   programCategorySelectionIncomplete: boolean,
   missingCategoriesInProgramSelection: ProgramCategories,
   newPageStatus: $Keys<newPageStatuses>,
