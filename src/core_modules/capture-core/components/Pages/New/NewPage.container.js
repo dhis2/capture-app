@@ -87,7 +87,7 @@ export const NewPage: ComponentType<{||}> = () => {
 
     const orgUnitSelectionIncomplete: boolean = useSelector(
         ({ currentSelections }) =>
-            (program instanceof TrackerProgram) &&
+            (program instanceof TrackerProgram) && // Remove when DHIS2-19171 is implemented
             !currentSelections.orgUnitId &&
             !currentSelections.complete,
     );
