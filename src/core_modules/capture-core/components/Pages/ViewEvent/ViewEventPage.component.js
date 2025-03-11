@@ -17,13 +17,11 @@ type Props = {
 export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship, isReadOnly }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const { orgUnitId } = useLocationQuery();
-
     const { selectedCategories, programId } = useSelector(({ currentSelections }) => ({
         selectedCategories: currentSelections.categoriesMeta,
         programId: currentSelections.programId,
     }));
 
-    console.log('test orgUnitId view event page', orgUnitId);
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
             <TopBar

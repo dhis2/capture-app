@@ -100,7 +100,6 @@ const MainPageContainer = () => {
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
-    console.log('test orgUnitId main page', orgUnitId);
     const showAllAccessible = all !== undefined;
 
     const {

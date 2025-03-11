@@ -85,7 +85,6 @@ export const EnrollmentEditEventPage = () => {
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
-    console.log('orgUnitId', orgUnitId);
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const storedEvent = enrollmentSite?.events?.find(item => item.event === eventId);
 
