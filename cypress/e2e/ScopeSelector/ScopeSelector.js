@@ -112,8 +112,7 @@ When('you select the first entity from the table', () => {
 });
 
 Then('you can see the view event page', () => {
-    cy.url().should('include', 'viewEvent?orgUnitId');
-    cy.url().should('include', 'viewEventId');
+    cy.url().should('include', 'viewEvent?viewEventId');
 });
 
 Given('you land on a main page with an invalid program id', () => {
