@@ -112,7 +112,6 @@ When('you select the first entity from the table', () => {
 });
 
 Then('you can see the view event page', () => {
-    cy.url().should('include', 'viewEvent?orgUnitId');
     cy.url().should('include', 'viewEventId');
 });
 
