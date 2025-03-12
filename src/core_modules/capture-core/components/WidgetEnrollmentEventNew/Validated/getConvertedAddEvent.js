@@ -1,10 +1,10 @@
 // @flow
 import moment from 'moment';
+import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
 import { type RenderFoundation } from '../../../metaData';
-import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 
 export const getAddEventEnrollmentServerData = ({
     formFoundation,
