@@ -5,9 +5,9 @@ import { useBatchDataEntryConfigurations } from './hooks';
 import { BatchDataEntryConfigurationsComponenet } from './BatchDataEntryConfigurations.component';
 
 export const BatchDataEntryConfigurations = ({ programId, onSelectConfiguration }: Props) => {
-    const { batchDataEntryConfigurations } = useBatchDataEntryConfigurations(programId);
+    const { batchDataEntryConfigurations, isLoading, isError } = useBatchDataEntryConfigurations(programId);
 
-    if (!batchDataEntryConfigurations || batchDataEntryConfigurations.length === 0) {
+    if (isError || isLoading || !batchDataEntryConfigurations || batchDataEntryConfigurations.length === 0) {
         return null;
     }
 

@@ -32,7 +32,7 @@ const BatchDataEntryActiveComponentPlain = ({ title, onBackToBatchDataEntry, cla
 
     return (
         <div className={classes.container}>
-            <Widget header={i18n.t('Batch data entry')} noncollapsible>
+            <Widget header={i18n.t('Batch data entry')} noncollapsible borderless>
                 <div className={classes.content}>
                     <div>
                         {i18n.t('Form')}:&nbsp;

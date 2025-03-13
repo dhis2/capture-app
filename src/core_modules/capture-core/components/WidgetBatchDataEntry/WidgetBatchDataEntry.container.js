@@ -6,12 +6,12 @@ import { BatchDataEntryConfigurations } from './BatchDataEntryConfigurations';
 import { BatchDataEntryActive } from './BatchDataEntryActive';
 
 export const WidgetBatchDataEntry = ({ programId, setShowBatchDataEntryPlugin }: Props) => {
-    const [pluginProps, setPluginProps] = useState();
+    const [pluginProps, setPluginProps] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             const batchDataEntry = await getBatchDataEntry(programId);
-            batchDataEntry?.activeList && setPluginProps(batchDataEntry.activeList);
+            setPluginProps(batchDataEntry?.activeList);
         };
         programId && fetchData();
     }, [programId]);
@@ -25,7 +25,7 @@ export const WidgetBatchDataEntry = ({ programId, setShowBatchDataEntryPlugin }:
         [programId, setShowBatchDataEntryPlugin],
     );
 
-    if (!programId) {
+    if (!programId || pluginProps === false) {
         return null;
     }
 

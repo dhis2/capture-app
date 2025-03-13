@@ -66,7 +66,7 @@ export const useBatchDataEntryConfigurations = (
 
     return {
         batchDataEntryConfigurations: data,
-        isLoading: !namespaceIsLoading && !isLoading,
+        isLoading: namespaceIsLoading || isLoading,
         isError,
     };
 };
