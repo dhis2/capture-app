@@ -10,7 +10,7 @@ import {
 } from './NewPage.actions';
 import { newPageStatuses } from './NewPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
+import { getScopeFromScopeId, TrackerProgram, TrackedEntityType, EventProgram } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useTrackedEntityInstances } from './hooks';
@@ -45,7 +45,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { orgUnitId, programId, teiId } = useLocationQuery();
-    const program = programId && programCollection.get(programId);
+    const program = programId ? programCollection.get(programId) : undefined;
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
         selectedOrgUnitId: orgUnitId,
     });
@@ -88,7 +88,7 @@ export const NewPage: ComponentType<{||}> = () => {
     // TODO: OrgUnitSelectionIncomplete should be removed when DHIS2-19171 is implemented
     const orgUnitSelectionIncomplete: boolean = useSelector(
         ({ currentSelections }) =>
-            (program instanceof TrackerProgram) &&
+            !(program instanceof EventProgram) &&
             !currentSelections.orgUnitId &&
             !currentSelections.complete,
     );
@@ -116,6 +116,7 @@ export const NewPage: ComponentType<{||}> = () => {
             <TopBar
                 orgUnitId={orgUnitId}
                 programId={programId}
+                program={program}
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 teiId={teiId}
                 trackedEntityName={trackedEntityType?.name}
