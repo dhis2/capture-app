@@ -181,6 +181,14 @@ const structureFilters = (apiFilters: Array<Object>, columns: ColumnsForConverte
         dataFilters: [],
     });
 
+const getApiSortById = (sortById: string, columns: ColumnsForConverter) => {
+    const column = columns.get(sortById);
+    if (column?.isMainProperty) {
+        return column.apiName ?? sortById;
+    }
+    return sortById;
+};
+
 const getSortOrder = (sortById: string, sortByDirection: string) => `${sortById}:${sortByDirection}`;
 
 const getColumnsOrder = (columns: Array<ColumnForConverter>) =>
@@ -199,7 +207,8 @@ export const convertToEventFilterEventQueryCriteria = ({
     sortByDirection: string,
     columns: ColumnsForConverter,
 |}): ApiEventQueryCriteria => {
-    const sortOrderCriteria = getSortOrder(sortById, sortByDirection);
+    const apiSortById = getApiSortById(sortById, columns);
+    const sortOrderCriteria = getSortOrder(apiSortById, sortByDirection);
     const filtersCriteria = pipe(
         () => typeConvertFilters(filters, columns),
         convertedFilters => structureFilters(convertedFilters, columns),

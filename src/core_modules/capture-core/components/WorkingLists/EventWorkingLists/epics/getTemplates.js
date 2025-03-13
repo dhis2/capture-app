@@ -22,11 +22,9 @@ export const getTemplates = (programId: string, querySingleResource: QuerySingle
                 defaultTemplate,
                 ...(apiEventFilters
                     .map((apiEventFilter) => {
-                        const { displayColumnOrder, order, eventDate } = apiEventFilter.eventQueryCriteria;
+                        const { eventDate } = apiEventFilter.eventQueryCriteria;
                         const convertedEventQueryCriteria = {
                             ...apiEventFilter.eventQueryCriteria,
-                            displayColumnOrder,
-                            order,
                             occurredAt: eventDate,
                         };
 
