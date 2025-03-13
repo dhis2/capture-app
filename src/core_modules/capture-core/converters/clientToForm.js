@@ -1,6 +1,6 @@
 // @flow
 import moment from 'moment';
-import { convertMomentToDateFormatString } from '../utils/converters/date';
+import { convertIsoToLocalCalendar } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
 import { stringifyNumber } from './common/stringifyNumber';
@@ -23,16 +23,14 @@ type RangeValue = {
 }
 
 function convertDateForEdit(rawValue: string): string {
-    const momentInstance = moment(rawValue);
-    return convertMomentToDateFormatString(momentInstance);
+    return convertIsoToLocalCalendar(rawValue);
 }
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     const dateTime = moment(rawValue);
-    const dateString = convertMomentToDateFormatString(dateTime);
     const timeString = dateTime.format('HH:mm');
     return {
-        date: dateString,
+        date: convertIsoToLocalCalendar(rawValue),
         time: timeString,
     };
 }
@@ -55,7 +53,7 @@ function convertAgeForEdit(rawValue: string): AgeFormValue {
     const days = now.diff(age, 'days');
 
     return {
-        date: convertMomentToDateFormatString(moment(rawValue)),
+        date: convertIsoToLocalCalendar(rawValue),
         years: years.toString(),
         months: months.toString(),
         days: days.toString(),

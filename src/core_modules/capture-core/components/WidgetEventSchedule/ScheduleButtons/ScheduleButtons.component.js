@@ -16,7 +16,7 @@ const styles = {
     },
 };
 
-const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes }: Props) => {
+const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, validation }: Props) => {
     const [cancelDialogVisible, setCancelDialogVisible] = useState(false);
     const handleCancelClick = () => {
         if (hasChanges) { setCancelDialogVisible(true); } else { onCancel(); }
@@ -26,6 +26,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes }: Pro
             <Button
                 onClick={onSchedule}
                 primary
+                disabled={validation?.error}
             >
                 {i18n.t('Schedule')}
             </Button>
