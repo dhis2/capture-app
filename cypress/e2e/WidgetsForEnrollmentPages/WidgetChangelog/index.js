@@ -22,6 +22,9 @@ Then(/^the number of changelog table rows should be (.*)$/, (numberOfRows) => {
 });
 
 When(/^you change the page size to (.*)$/, (pageSize) => {
+    cy.get('[data-test="changelog-data-table-body"]')
+        .should('not.contain', 'No changes to display');
+
     cy.get('[data-test="changelog-pagination-pagesize-select"]')
         .click();
 
