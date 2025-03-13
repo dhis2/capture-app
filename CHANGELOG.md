@@ -1,3 +1,10 @@
+## [101.30.1](https://github.com/dhis2/capture-app/compare/v101.30.0...v101.30.1) (2025-03-13)
+
+
+### Bug Fixes
+
+* [DHIS2-19140] Changelog modal unmounts when loading ([#3991](https://github.com/dhis2/capture-app/issues/3991)) ([9d9bf76](https://github.com/dhis2/capture-app/commit/9d9bf760680729c84ac7829d97fd376edcff1647))
+
 # [101.30.0](https://github.com/dhis2/capture-app/compare/v101.29.2...v101.30.0) (2025-03-05)
 
 
