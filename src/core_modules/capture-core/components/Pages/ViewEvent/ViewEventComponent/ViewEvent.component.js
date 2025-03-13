@@ -1,13 +1,11 @@
 // @flow
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
-import { DiscardDialog } from '../../../Dialogs/DiscardDialog.component';
-import { defaultDialogProps } from '../../../Dialogs/DiscardDialog.constants';
 import type { UserFormField } from '../../../FormFields/UserField';
 import { EventBreadcrumb } from '../../../Breadcrumbs/EventBreadcrumb';
 import { pageKeys } from '../../../Breadcrumbs/EventBreadcrumb/EventBreadcrumb';
@@ -41,7 +39,6 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     programId: string,
-    onBackToAllEvents: () => void,
     currentDataEntryKey: string,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
@@ -77,18 +74,8 @@ export const ViewEventPlain = (props: Props) => {
         onSaveAssigneeError,
     } = props;
 
-    const [warningOpen, setWarningOpen] = useState(false);
     const dispatch = useDispatch();
     const { orgUnitId } = useLocationQuery();
-
-    const handleCancelDialog = () => {
-        setWarningOpen(false);
-    };
-
-    const handleDestroyDialog = () => {
-        onBackToAllEvents();
-    };
-
     const onBackToAllEvents = () => {
         dispatch(startGoBackToMainPage(orgUnitId));
     };
@@ -119,12 +106,6 @@ export const ViewEventPlain = (props: Props) => {
                     onSaveAssigneeError={onSaveAssigneeError}
                 />
             </div>
-            <DiscardDialog
-                {...defaultDialogProps}
-                onCancel={handleCancelDialog}
-                onDestroy={handleDestroyDialog}
-                open={warningOpen}
-            />
         </div>
     );
 };
