@@ -88,8 +88,7 @@ Feature: User uses the ScopeSelector to navigate
 
   Scenario: New event page > Selecting org unit while program is preselected
     Given you land on a new event page with preselected program
-    When you select org unit
-    Then new event page url is valid
+    Then org unit context slector is disabled
     And you can see the new event page
 
   Scenario: New event page > Url with invalid program id
