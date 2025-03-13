@@ -1,9 +1,10 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { compose } from 'redux';
 import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import type { ComponentType } from 'react';
+import { batchDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BatchDataEntryBreadcrumb';
 import type { Props, ContainerProps } from './mainPage.types';
 import { WorkingListsType } from './WorkingListsType';
 import { MainPageStatuses } from './MainPage.constants';
@@ -12,6 +13,8 @@ import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
+import { BatchDataEntry } from '../../BatchDataEntry';
+import { WidgetBatchDataEntry } from '../../WidgetBatchDataEntry';
 import {
     InvalidCategoryCombinationForOrgUnitMessage,
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
@@ -20,6 +23,8 @@ import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
 const getStyles = () => ({
     listContainer: {
         padding: 24,
+        display: 'flex',
+        gap: spacers.dp16,
     },
     container: {
         display: 'flex',
@@ -34,6 +39,7 @@ const getStyles = () => ({
         flex: 0.4,
     },
     searchBoxWrapper: {
+        height: 'fit-content',
         padding: spacers.dp16,
         background: colors.white,
         border: '1px solid',
@@ -52,13 +58,29 @@ const MainPagePlain = ({
     setShowAccessible,
     classes,
     onChangeTemplate,
+    trackedEntityName,
 }: Props) => {
+    const [showBatchDataEntryPlugin, setShowBatchDataEntryPlugin] = useState(false);
+
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
         const noOrgUnitSelected = !orgUnitId;
         const isEventProgram = !trackedEntityTypeId;
         return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
     }, [programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId]);
+
+    if (showBatchDataEntryPlugin) {
+        return (
+            <BatchDataEntry
+                programId={programId}
+                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                displayFrontPageList={displayFrontPageList}
+                page={batchDataEntryBreadcrumbsKeys.MAIN_PAGE}
+                trackedEntityName={trackedEntityName}
+                // trackedEntities={['id1', 'id2']} - TODO in DHIS2-19024
+            />
+        );
+    }
 
     return (
         <>
@@ -76,7 +98,7 @@ const MainPagePlain = ({
                     {MainPageStatus === MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED && (
                         <WithoutCategorySelectedMessage programId={programId} />
                     )}
-                    {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (
+                    {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (<>
                         <div className={classes.listContainer} data-test={'main-page-working-list'}>
                             <WorkingListsType
                                 programId={programId}
@@ -84,7 +106,11 @@ const MainPagePlain = ({
                                 selectedTemplateId={selectedTemplateId}
                                 onChangeTemplate={onChangeTemplate}
                             />
-                        </div>
+                            <WidgetBatchDataEntry
+                                programId={programId}
+                                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                            />
+                        </div></>
                     )}
                 </>
             ) : (
@@ -94,6 +120,11 @@ const MainPagePlain = ({
                     </div>
                     <div className={classes.quarter}>
                         <TemplateSelector />
+                        <br />
+                        <WidgetBatchDataEntry
+                            programId={programId}
+                            setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                        />
                     </div>
                 </div>
             )}

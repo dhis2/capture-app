@@ -1,0 +1,60 @@
+// @flow
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
+import { IconChevronRight16, DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
+import type { PlainProps } from './BatchDataEntryConfigurations.types';
+import { Widget } from '../../Widget';
+
+const styles = () => ({
+    container: {
+        flex: '0.4',
+        minWidth: '400px',
+    },
+    table: {
+        borderWidth: '1px 0 0 0 !important',
+    },
+    title: {
+        '&:hover': {
+            cursor: 'pointer',
+            textDecoration: 'underline',
+        },
+    },
+});
+
+const BatchDataEntryConfigurationsComponenetPlain = ({
+    batchDataEntryConfigurations,
+    onSelectConfiguration,
+    classes,
+}: PlainProps) => (
+    <div className={classes.container}>
+        <Widget header={i18n.t('Batch data entry forms')} noncollapsible>
+            <DataTable className={classes.table}>
+                <DataTableBody>
+                    {batchDataEntryConfigurations.map(config => (
+                        <DataTableRow
+                            onClick={() =>
+                                onSelectConfiguration({
+                                    configKey: config.configKey,
+                                    dataKey: config.dataKey,
+                                    pluginUrl: config.pluginUrl,
+                                    title: config.title,
+                                })
+                            }
+                        >
+                            <DataTableCell>
+                                <strong className={classes.title}>{config.title}</strong>
+                                {config.subtitle && <div>{config.subtitle}</div>}
+                            </DataTableCell>
+                            <DataTableCell>
+                                <IconChevronRight16 />
+                            </DataTableCell>
+                        </DataTableRow>
+                    ))}
+                </DataTableBody>
+            </DataTable>
+        </Widget>
+    </div>
+);
+
+export const BatchDataEntryConfigurationsComponenet = withStyles(styles)(BatchDataEntryConfigurationsComponenetPlain);
