@@ -77,7 +77,6 @@ const MainPagePlain = ({
                 displayFrontPageList={displayFrontPageList}
                 page={batchDataEntryBreadcrumbsKeys.MAIN_PAGE}
                 trackedEntityName={trackedEntityName}
-                // trackedEntities={['id1', 'id2']} - TODO in DHIS2-19024
             />
         );
     }
@@ -98,7 +97,7 @@ const MainPagePlain = ({
                     {MainPageStatus === MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED && (
                         <WithoutCategorySelectedMessage programId={programId} />
                     )}
-                    {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (<>
+                    {MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (
                         <div className={classes.listContainer} data-test={'main-page-working-list'}>
                             <WorkingListsType
                                 programId={programId}
@@ -110,7 +109,7 @@ const MainPagePlain = ({
                                 programId={programId}
                                 setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
                             />
-                        </div></>
+                        </div>
                     )}
                 </>
             ) : (

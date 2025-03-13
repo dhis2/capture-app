@@ -19,6 +19,7 @@ type Props = {
     programId: string,
     trackedEntityName?: string,
     page: $Values<typeof breadcrumbsKeys>,
+    ...CssClasses,
 };
 
 const styles = {
@@ -35,7 +36,7 @@ const BreadcrumbsPlain = ({
     displayFrontPageList,
     page,
     classes,
-}) => {
+}: Props) => {
     const { label } = useOriginLabel({
         trackedEntityName,
         programId,

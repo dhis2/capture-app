@@ -33,6 +33,7 @@ const BatchDataEntryConfigurationsComponenetPlain = ({
                 <DataTableBody>
                     {batchDataEntryConfigurations.map(config => (
                         <DataTableRow
+                            key={config.dataKey}
                             onClick={() =>
                                 onSelectConfiguration({
                                     configKey: config.configKey,
