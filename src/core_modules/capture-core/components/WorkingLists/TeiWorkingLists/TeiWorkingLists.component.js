@@ -8,6 +8,7 @@ import { TEI_WORKING_LISTS_STORE_ID } from './constants';
 
 const getStyles = () => ({
     listContainer: {
+        width: '100%',
         padding: spacers.dp16,
         background: colors.white,
         border: '1px solid',
@@ -17,13 +18,11 @@ const getStyles = () => ({
 });
 
 const TeiWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }: Props) => (
-    <div data-test="tei-working-lists">
-        <div className={listContainer}>
-            <TeiWorkingListsReduxProvider
-                storeId={TEI_WORKING_LISTS_STORE_ID}
-                {...passOnProps}
-            />
-        </div>
+    <div className={listContainer} data-test="tei-working-lists">
+        <TeiWorkingListsReduxProvider
+            storeId={TEI_WORKING_LISTS_STORE_ID}
+            {...passOnProps}
+        />
     </div>
 );
 

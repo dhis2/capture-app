@@ -8,6 +8,9 @@ import type { Props, PlainProps } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
+import { WidgetBatchDataEntry } from '../../WidgetBatchDataEntry';
+import { BatchDataEntry } from '../../BatchDataEntry';
+import { batchDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BatchDataEntryBreadcrumb';
 
 const getStyles = () => ({
     backButton: {
@@ -27,6 +30,7 @@ const getStyles = () => ({
         flex: 0.4,
     },
     searchBoxWrapper: {
+        height: 'fit-content',
         padding: spacers.dp16,
         background: colors.white,
         border: '1px solid',
@@ -35,21 +39,48 @@ const getStyles = () => ({
     },
 });
 
-const SearchPagePlain = ({ programId, orgUnitId, onNavigateToMainPage, classes }: PlainProps) => (
+const SearchPagePlain = ({
+    programId,
+    orgUnitId,
+    onNavigateToMainPage,
+    setShowBatchDataEntryPlugin,
+    showBatchDataEntryPlugin,
+    classes,
+}: PlainProps) => (
     <>
         <TopBar programId={programId} orgUnitId={orgUnitId} />
-        <Button icon={<IconChevronLeft24 />} dataTest="back-button" className={classes.backButton} onClick={onNavigateToMainPage}>
-            {i18n.t('Back')}
-        </Button>
+        {showBatchDataEntryPlugin ? (
+            <BatchDataEntry
+                programId={programId}
+                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                page={batchDataEntryBreadcrumbsKeys.SEARCH_PAGE}
+            />
+        ) : (
+            <>
+                <Button
+                    icon={<IconChevronLeft24 />}
+                    dataTest="back-button"
+                    className={classes.backButton}
+                    onClick={onNavigateToMainPage}
+                >
+                    {i18n.t('Back')}
+                </Button>
 
-        <div className={classes.container}>
-            <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
-                <SearchBox programId={programId} />
-            </div>
-            <div className={classes.quarter}>
-                <TemplateSelector />
-            </div>
-        </div>
+                <div className={classes.container}>
+                    <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
+                        <SearchBox programId={programId} />
+                    </div>
+                    <div className={classes.quarter}>
+                        <TemplateSelector />
+                        <br />
+                        <WidgetBatchDataEntry
+                            programId={programId}
+                            setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                        />
+                    </div>
+                </div>
+            </>
+        )}
     </>
 );
 
