@@ -130,7 +130,7 @@ Feature: User uses the ScopeSelector to navigate
     And you select both org unit and program Malaria case registration
     And you select the first entity from the table
     When you remove the org unit selection
-    Then you should be taken to the main page with only program selected
+    Then you can see the view event page
 
   Scenario: View event page > Url with invalid event id
     Given you land on a view event page with an invalid id
