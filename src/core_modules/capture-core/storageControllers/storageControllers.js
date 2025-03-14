@@ -7,9 +7,9 @@ import { initMainControllerAsync } from './mainStorageController';
 const adapterTypes = [availableAdapters.INDEXED_DB];
 const storageControllers: { [key: string]: StorageController } = {};
 
-export async function initAsync(onCacheExpired: Function, currentUser: { id: string }) {
+export async function initAsync(onCacheExpired: Function, currentUserId: string) {
     storageControllers.main = await initMainControllerAsync(adapterTypes, onCacheExpired);
-    storageControllers.user = await initUserControllerAsync(storageControllers.main, currentUser);
+    storageControllers.user = await initUserControllerAsync(storageControllers.main, currentUserId);
 }
 
 export function closeAsync() {
