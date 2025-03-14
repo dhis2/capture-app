@@ -1,3 +1,10 @@
+## [101.30.2](https://github.com/dhis2/capture-app/compare/v101.30.1...v101.30.2) (2025-03-14)
+
+
+### Bug Fixes
+
+* [DHIS2-18763] Org. unit context selector does not work for View event in Event programs ([#3997](https://github.com/dhis2/capture-app/issues/3997)) ([d9a75dc](https://github.com/dhis2/capture-app/commit/d9a75dc2417cffcf78a7f69d8b85dd7a98a88c8a))
+
 ## [101.30.1](https://github.com/dhis2/capture-app/compare/v101.30.0...v101.30.1) (2025-03-13)
 
 
