@@ -1,3 +1,10 @@
+# [101.31.0](https://github.com/dhis2/capture-app/compare/v101.30.2...v101.31.0) (2025-03-14)
+
+
+### Features
+
+* [DHIS2-19196][LIBS-726] bump @dhis2-ui/calendar from 10.0.3 to 10.4.0 ([#3998](https://github.com/dhis2/capture-app/issues/3998)) ([6bbdf82](https://github.com/dhis2/capture-app/commit/6bbdf821407f4f77bcc84e157069133b067607d9))
+
 ## [101.30.2](https://github.com/dhis2/capture-app/compare/v101.30.1...v101.30.2) (2025-03-14)
 
 
