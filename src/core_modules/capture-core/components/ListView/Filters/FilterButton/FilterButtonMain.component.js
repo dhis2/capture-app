@@ -7,7 +7,8 @@ import { ChevronDown, ChevronUp } from 'capture-ui/Icons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import type { UpdateFilter, ClearFilter, RemoveFilter } from '../../types';
-import type { FilterData, Options } from '../../../FiltersForTypes';
+import type { FilterData, Options, FilterDataInput } from '../../../FiltersForTypes';
+import { LockedFilterButton } from './LockedFilterButton.component';
 
 const getStyles = (theme: Theme) => ({
     icon: {
@@ -40,7 +41,7 @@ type Props = {
     isRemovable?: boolean,
     onSetVisibleSelector: Function,
     selectorVisible: boolean,
-    filterValue?: FilterData,
+    filterValue?: FilterDataInput,
     buttonText?: string,
     disabled?: boolean,
     tooltipContent?: string,
@@ -118,6 +119,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 id={id}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.onClose}
+                // $FlowFixMe
                 filterValue={filterValue}
                 onRemove={this.onRemove}
                 isRemovable={isRemovable}
@@ -129,7 +131,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
         this.activeFilterButtonInstance = activeFilterButtonInstance;
     }
 
-    renderWithAppliedFilter() {
+    renderActiveFilterButton() {
         const { selectorVisible, classes, title, buttonText } = this.props;
 
         const arrowIconElement = selectorVisible ? (
@@ -153,6 +155,21 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 buttonText={buttonText}
             />
         );
+    }
+
+    renderWithAppliedFilter() {
+        const { filterValue, title, buttonText } = this.props;
+
+        if (filterValue?.locked) {
+            return (
+                <LockedFilterButton
+                    title={title}
+                    buttonText={buttonText}
+                />
+            );
+        }
+
+        return this.renderActiveFilterButton();
     }
 
     renderWithoutAppliedFilter() {

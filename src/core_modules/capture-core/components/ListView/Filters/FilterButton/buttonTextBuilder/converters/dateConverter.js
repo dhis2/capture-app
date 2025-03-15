@@ -63,7 +63,7 @@ export function convertDate(filter: DateFilterData): string {
         return translatedPeriods[filter.period];
     }
     if (areRelativeRangeValuesSupported(filter.startBuffer, filter.endBuffer)) {
-        return translatedPeriods[periods.RELATIVE_RANGE];
+        return `${translatedPeriods[periods.RELATIVE_RANGE]} (${filter.startBuffer ?? ''} -> ${filter.endBuffer ?? ''})`;
     }
     return '';
 }
