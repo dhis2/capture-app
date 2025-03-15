@@ -216,6 +216,7 @@ export type InterfaceProps = $ReadOnly<{|
     onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
     onUpdateTemplate?: UpdateTemplate,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
     orgUnitId: string,
     programId: string,
     rowIdKey: string,
