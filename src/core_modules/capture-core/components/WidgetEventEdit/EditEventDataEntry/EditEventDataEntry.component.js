@@ -189,12 +189,12 @@ const buildScheduleDateSettingsFn = () => {
             calendarWidth: 350,
             label: props.formFoundation.getLabel('scheduledAt'),
             disabled: true,
+            required: false,
             calendarType: systemSettingsStore.get().calendar,
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getIsHidden: (props: Object) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
         getPropName: () => 'scheduledAt',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
