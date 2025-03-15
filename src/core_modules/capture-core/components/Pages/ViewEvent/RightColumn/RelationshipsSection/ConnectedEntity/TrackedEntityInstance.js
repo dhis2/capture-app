@@ -12,7 +12,7 @@ type Props = {
 export const TrackedEntityInstance = ({ name, id, orgUnitId, linkProgramId }: Props) => {
     const getUrl = useCallback(
         () =>
-            `/#/enrollment?${buildUrlQueryString({
+            `/enrollment?${buildUrlQueryString({
                 teiId: id,
                 programId: linkProgramId,
                 orgUnitId,

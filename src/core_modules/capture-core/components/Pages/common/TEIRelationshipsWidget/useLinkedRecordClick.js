@@ -23,7 +23,7 @@ export const useLinkedRecordClick = () => {
             }
         } else if (navigationArgs.trackedEntityId) {
             const { trackedEntityId, programId } = navigationArgs;
-            url = `/enrollment?${buildUrlQueryString({
+            url = `#/enrollment?${buildUrlQueryString({
                 programId,
                 orgUnitId,
                 teiId: trackedEntityId,
