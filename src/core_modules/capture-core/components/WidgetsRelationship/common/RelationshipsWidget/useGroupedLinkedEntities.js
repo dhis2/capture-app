@@ -14,23 +14,23 @@ import type { ApiLinkedEntity, InputRelationshipData, RelationshipTypes } from '
 const getFallbackFieldsByRelationshipEntity = {
     [RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE]: () => [{
         id: 'trackedEntityTypeName',
-        displayName: i18n.t('Type'),
+        displayFormName: i18n.t('Type'),
         convertValue: trackedEntityTypeName => trackedEntityTypeName,
     }, {
         id: 'relationshipCreatedAt',
-        displayName: i18n.t('Created date'),
+        displayFormName: i18n.t('Created date'),
         convertValue: createdDate => convertClientToList(
             convertServerToClient(createdDate, dataElementTypes.DATE), dataElementTypes.DATE,
         ),
     }],
     [RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE]: () => [{
         id: 'programStageName',
-        displayName: i18n.t('Program stage name'),
+        displayFormName: i18n.t('Program stage name'),
         convertValue: programStageName => programStageName,
     },
     {
         id: 'relationshipCreatedAt',
-        displayName: i18n.t('Created date'),
+        displayFormName: i18n.t('Created date'),
         convertValue: createdDate => convertClientToList(
             convertServerToClient(createdDate, dataElementTypes.DATE), dataElementTypes.DATE,
         ),
@@ -219,7 +219,7 @@ export const useGroupedLinkedEntities = (
 
                 accGroupedLinkedEntities.push({
                     id: groupId,
-                    name: name || relationshipType.displayName,
+                    name: name || relationshipType.displayFormName,
                     linkedEntities: [linkedEntityData],
                     columns,
                     context,

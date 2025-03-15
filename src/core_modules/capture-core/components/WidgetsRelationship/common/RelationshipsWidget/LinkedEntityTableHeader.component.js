@@ -12,11 +12,11 @@ export const LinkedEntityTableHeader = ({ columns, context }: Props) => (
         <DataTableRow>
             {
                 columns
-                    .map(({ id, displayName }) => (
+                    .map(({ id, displayFormName }) => (
                         <DataTableColumnHeader
                             key={id}
                         >
-                            {displayName}
+                            {displayFormName}
                         </DataTableColumnHeader>
                     ))
             }

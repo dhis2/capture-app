@@ -63,12 +63,12 @@ const getRelationshipTypes = async (): Promise<RelationshipTypes> => {
 
     const attributes = (await userStorageController.getAll(userStores.TRACKED_ENTITY_ATTRIBUTES, {
         predicate: ({ id }) => attributeIds[id],
-        project: ({ id, valueType, displayName, optionSet }) => ({ id, valueType, displayName, optionSet }),
+        project: ({ id, valueType, displayFormName, optionSet }) => ({ id, valueType, displayFormName, optionSet }),
     }));
 
     const dataElements = (await userStorageController.getAll(userStores.DATA_ELEMENTS, {
         predicate: ({ id }) => dataElementIds[id],
-        project: ({ id, valueType, displayName, optionSet }) => ({ id, valueType, displayName, optionSet }),
+        project: ({ id, valueType, displayFormName, optionSet }) => ({ id, valueType, displayFormName, optionSet }),
     }));
 
     const attributesWithPossibleOptionSet = await getOptionSetValuesForElement(attributes, userStorageController);

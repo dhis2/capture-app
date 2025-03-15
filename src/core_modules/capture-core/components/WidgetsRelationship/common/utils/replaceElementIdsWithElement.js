@@ -14,7 +14,7 @@ const elementTypes = {
 type Elements = {|
     [key: string]: {
         id: string,
-        displayName: string,
+        displayFormName: string,
         valueType: $Keys<typeof dataElementTypes>,
         options?: Array<{ code: string, name: string }>,
     },
@@ -28,7 +28,7 @@ type Context = {|
 type ElementArray = $ReadOnlyArray<{|
     id: string,
     type: $Keys<typeof dataElementTypes>,
-    displayName: string,
+    displayFormName: string,
     options?: Array<{ code: string, name: string }>,
 |}>;
 
@@ -65,7 +65,7 @@ export const replaceElementIdsWithElement = (
             return {
                 id: elementId,
                 type: element.valueType,
-                displayName: element.displayName,
+                displayFormName: element.displayFormName,
                 options: element.options,
             };
         })

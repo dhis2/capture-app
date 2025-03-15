@@ -6,7 +6,7 @@ import { extractElementIdsFromRelationshipTypes, formatRelationshipTypes } from 
 
 type Element = {|
     id: string,
-    displayName: string,
+    displayFormName: string,
     valueType: string,
     optionSet?: {|
         options: Array<{
@@ -20,7 +20,7 @@ const relationshipTypesQuery = {
     resource: 'relationshipTypes',
     params: {
         filter: 'access.data.read:eq:true',
-        fields: 'id,displayName,fromToName,toFromName,access[data[read,write],read,write],fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
+        fields: 'id,displayFormName,fromToName,toFromName,access[data[read,write],read,write],fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
     },
 };
 
@@ -41,7 +41,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         const filteredAttributeQuery = {
             resource: 'trackedEntityAttributes',
             params: {
-                fields: 'id,displayName,valueType,optionSet[id,options[code,name]]',
+                fields: 'id,displayFormName,valueType,optionSet[id,options[code,name]]',
                 filter: `id:in:[${Object.keys(attributeIds).join(',')}]`,
                 paging: false,
             },
@@ -50,7 +50,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         const filteredDataElementQuery = {
             resource: 'dataElements',
             params: {
-                fields: 'id,displayName,valueType,optionSet[id,options[code,name]]',
+                fields: 'id,displayFormName,valueType,optionSet[id,options[code,name]]',
                 filter: `id:in:[${Object.keys(dataElementIds).join(',')}]`,
                 paging: false,
             },

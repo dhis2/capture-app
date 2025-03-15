@@ -4,7 +4,7 @@ import { dataElementTypes } from '../../../../metaData';
 export type ElementValue = {|
     attribute?: string,
     dataElement?: string,
-    displayName: string,
+    displayFormName: string,
     valueType: string,
     value: any,
 |};
@@ -36,7 +36,7 @@ export type ApiRelationshipConstraint = ApiTrackedEntityConstraint | ApiProgramS
 
 export type ApiRelationshipType = $ReadOnly<{|
     id: string,
-    displayName: string,
+    displayFormName: string,
     bidirectional: boolean,
     access: Object,
     toFromName: string,
@@ -50,7 +50,7 @@ export type ApiRelationshipTypes = $ReadOnlyArray<ApiRelationshipType>;
 export type TrackerDataViewEntity = $ReadOnly<{|
     id: string,
     type: $Keys<typeof dataElementTypes>,
-    displayName: string,
+    displayFormName: string,
     options?: Array<{ code: string, name: string }>,
 |}>;
 
@@ -81,7 +81,7 @@ export type RelationshipConstraint = TrackedEntityConstraint | ProgramStageInsta
 
 export type RelationshipType = $ReadOnly<{|
     id: string,
-    displayName: string,
+    displayFormName: string,
     bidirectional: boolean,
     access: Object,
     toFromName: string,
