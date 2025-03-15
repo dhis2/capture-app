@@ -1,3 +1,10 @@
+# [101.32.0](https://github.com/dhis2/capture-app/compare/v101.31.0...v101.32.0) (2025-03-15)
+
+
+### Features
+
+* [DHIS2-16338] Display event's org. unit in working lists ([#3974](https://github.com/dhis2/capture-app/issues/3974)) ([196fa1c](https://github.com/dhis2/capture-app/commit/196fa1c57ab3d1cedcca18afe8a2798d04009d40))
+
 # [101.31.0](https://github.com/dhis2/capture-app/compare/v101.30.2...v101.31.0) (2025-03-14)
 
 
