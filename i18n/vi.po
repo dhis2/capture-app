@@ -2,15 +2,17 @@
 # Translators:
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
-# phil_dhis2, 2022
+# Philip Larsen Donnelly, 2024
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
+# Em Le <em.hispvietnam@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2022-03-23T15:21:27.814Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2022\n"
-"Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
+"Last-Translator: Em Le <em.hispvietnam@gmail.com>, 2024\n"
+"Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -216,7 +218,7 @@ msgid "No write access"
 msgstr "Không có quyền viết"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "{{titleText}}mới"
 
 msgid "Switch to form view"
 msgstr "Chuyển sang xem biểu nhập"
@@ -259,7 +261,7 @@ msgid "New event"
 msgstr "Sự kiện mới"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr ""
+msgstr "Bạn không có quyền tạo một sự kiện cho các lựa chọn hiện tại"
 
 msgid "Save"
 msgstr "Lưu lại"
@@ -301,7 +303,7 @@ msgstr "Bạn đã đăng ký {{attributeName}} này"
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr "{{TrackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
+msgstr "{{trackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
 
 msgid "Show registered {{trackedEntityTypeName}}"
 msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
@@ -529,7 +531,7 @@ msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Tìm kiếm một {{trackedEntityName}}trong {{programName}}"
 
 msgid "Clear selections"
 msgstr "Xóa các lựa chọn"
@@ -607,14 +609,14 @@ msgid "Organisation unit could not be loaded"
 msgstr "Không thể tải đơn vị"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
+msgstr "Cá thể với mã id \"{{teiId}}\" không tồn tại"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
+msgstr "Đăng ký với mã id \"{{enrollmentId}}\" không tồn tại"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
@@ -622,6 +624,8 @@ msgstr ""
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"{{programName}}có phân tổ. Hãy chọn tất cả phân tổ để xem Bảng thông tin của"
+" chương trình này."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
@@ -629,27 +633,29 @@ msgid ""
 msgstr ""
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}}không có đăng ký tham gia vào chương trình này."
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Đăng ký {{teiDisplayName}}vào chương trình này."
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayName}}là một {{tetName}}và không thể đăng ký vào "
+"{{programName}}. Chọn một chương trình khác cho phép {{tetName}}đăng ký."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "Đăng ký một {{selectedTetName}}mới vào chương trình này."
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr ""
+msgstr "{{programName}}là chương trình sự kiện và không có phần đăng ký."
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Tạo một sự kiện mới trong chương trình này."
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "Xem danh sách cá thể trong chương trình này."
 
 msgid "Delete event"
 msgstr "Xóa sự kiện"
@@ -736,17 +742,19 @@ msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chọn {{missingCategories}} để bắt đầu báo cáo"
 
 msgid "Save as new"
-msgstr ""
+msgstr "Lưu mới"
 
 msgid "View dashboard"
 msgstr "Xem bảng điều khiển"
 
 msgid "Create for"
-msgstr ""
+msgstr "Tạo cho"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
+"Bạn có thể chọn một chương trình từ thanh trên cùng và tạo trong chương "
+"trình đó"
 
 msgid "Save new"
 msgstr ""
@@ -758,7 +766,7 @@ msgid "Link"
 msgstr "Liên kết"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Lưu {{trackedEntityName}}mới"
 
 msgid "Organisation Unit"
 msgstr "Đơn vị"
@@ -796,7 +804,7 @@ msgid "Search {{name}}"
 msgstr "Tim kiêm {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Tìm bởi {{name}}"
 
 msgid "Search by attributes"
 msgstr "Tìm kiếm theo thuộc tính"
@@ -805,7 +813,7 @@ msgid "Back"
 msgstr "Trở lại"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Tìm cho {{titleText}}"
 
 msgid "Search for"
 msgstr "Tìm"
@@ -876,7 +884,7 @@ msgid "Event details"
 msgstr "Chi tiết sự kiện"
 
 msgid "Event completed"
-msgstr ""
+msgstr "Sự kiện đã hoàn tất"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -901,7 +909,7 @@ msgid "Possible duplicates found"
 msgstr "Có thể tìm thấy các bản sao"
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "Có lỗi khi tải các dữ liệu có khả năng trùng"
 
 msgid "You dont have access to delete this relationship"
 msgstr "Bạn không có quyền truy cập để xóa mối quan hệ này"
@@ -940,7 +948,7 @@ msgid "An error has occured. See log for details"
 msgstr "Có lỗi. Xem log để biết thêm chi tiết."
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}}trong chương trình {{escape}}{{programName}}"
 
 msgid "Program not found"
 msgstr "Chương trình không tìm thấy"
@@ -955,7 +963,7 @@ msgid "Error saving event"
 msgstr "Có lỗi khi đang lưu sự kiện"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "Không thể lưu sự kiện"
 
 msgid "Could not delete event"
 msgstr "Không thể xóa sự kiện"
@@ -970,13 +978,13 @@ msgid "Could not delete working list"
 msgstr "Không thể xóa danh sách làm việc"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "Tìm kiếm đơn vị thất bại"
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "Lỗi khi lưu cá thể"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "Lỗi khi lưu đăng ký"
 
 msgid "tracked entity instance"
 msgstr "thực thể được theo dõi"
