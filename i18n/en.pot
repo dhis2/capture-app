@@ -1717,6 +1717,9 @@ msgstr "Delete events"
 msgid "This cannot be undone. Are you sure you want to delete the selected events?"
 msgstr "This cannot be undone. Are you sure you want to delete the selected events?"
 
+msgid "{{trackedEntityName}} organisation unit"
+msgstr "{{trackedEntityName}} organisation unit"
+
 msgid "Registration Date"
 msgstr "Registration Date"
 

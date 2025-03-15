@@ -6,6 +6,7 @@ import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
 import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRelationshipWrapper.container';
 import { TopBar } from './TopBar.container';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import { useLocationQuery } from '../../../utils/routing';
 
 type Props = {
   isUserInteractionInProgress: boolean,
@@ -15,15 +16,14 @@ type Props = {
 
 export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship, isReadOnly }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
-
-    const { selectedCategories, programId, orgUnitId } = useSelector(({ currentSelections }) => ({
+    const { orgUnitId } = useLocationQuery();
+    const { selectedCategories, programId } = useSelector(({ currentSelections }) => ({
         selectedCategories: currentSelections.categoriesMeta,
         programId: currentSelections.programId,
-        orgUnitId: currentSelections.orgUnitId,
     }));
 
     return (
-        <div>
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
             <TopBar
                 programId={programId}
                 orgUnitId={orgUnitId}
@@ -32,15 +32,13 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRel
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 formIsOpen
             />
-            <OrgUnitFetcher orgUnitId={orgUnitId}>
-                {
-                    showAddRelationship ?
-                        <ViewEventNewRelationshipWrapper /> :
-                        <ViewEvent
-                            programId={programId}
-                        />
-                }
-            </OrgUnitFetcher>
-        </div>
+            {
+                showAddRelationship ?
+                    <ViewEventNewRelationshipWrapper /> :
+                    <ViewEvent
+                        programId={programId}
+                    />
+            }
+        </OrgUnitFetcher>
     );
 };

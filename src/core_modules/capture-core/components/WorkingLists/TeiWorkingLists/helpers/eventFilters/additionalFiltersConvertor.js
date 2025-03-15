@@ -5,6 +5,7 @@ export const ADDITIONAL_FILTERS = {
     scheduledAt: 'scheduledAt',
     status: 'status',
     assignedUser: 'assignee',
+    orgUnit: 'eventOrgUnitId',
 };
 
 export const ADDITIONAL_FILTERS_LABELS = {
@@ -13,11 +14,13 @@ export const ADDITIONAL_FILTERS_LABELS = {
     scheduledAt: 'Scheduled date',
     status: 'Event status',
     assignee: 'Assigned to',
+    orgUnit: 'Event organisation unit',
 };
 
 export const ADDITIONAL_FILTERS_API_NAME = {
     [ADDITIONAL_FILTERS.occurredAt]: 'occurredAt',
     [ADDITIONAL_FILTERS.assignedUser]: 'assignedUser',
+    [ADDITIONAL_FILTERS.orgUnit]: 'orgUnit',
 };
 
 export const getFilterApiName = (clientFilter: string) => ADDITIONAL_FILTERS_API_NAME[clientFilter] || clientFilter;

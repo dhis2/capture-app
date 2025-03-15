@@ -20,7 +20,8 @@ export const useInjectDataFetchingMetaToLoadList = (
         (selectedTemplate: Object, context: Object) => {
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TeiWorkingListsColumnConfig) => {
-                    const { id, type, visible } = defaultColumn;
+                    // $FlowFixMe Destructuring of union types is not handled properly by Flow.
+                    const { id, type, visible, apiViewName } = defaultColumn;
                     const mainProperty = defaultColumn.mainProperty && typeof defaultColumn.mainProperty === 'boolean'
                         ? defaultColumn.mainProperty
                         : undefined;
@@ -36,6 +37,7 @@ export const useInjectDataFetchingMetaToLoadList = (
                             visible,
                             mainProperty,
                             additionalColumn,
+                            apiViewName,
                         },
                     ];
                 }),

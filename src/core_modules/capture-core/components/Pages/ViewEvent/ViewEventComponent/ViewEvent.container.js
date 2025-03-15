@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
-import { rollbackAssignee, setAssignee, startGoBackToMainPage } from './viewEvent.actions';
+import { rollbackAssignee, setAssignee } from './viewEvent.actions';
 import { cancelEditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { ViewEventComponent } from './ViewEvent.component';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
@@ -42,9 +42,6 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onBackToAllEvents: () => {
-        dispatch(startGoBackToMainPage());
-    },
     onBackToViewEvent: () => {
         dispatch(batchActions([
             cancelEditEventDataEntry(),
