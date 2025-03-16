@@ -75,8 +75,8 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 // $FlowFixMe[missing-annot] automated comment
                 saveTypes.map(saveType => this.getButtonDefinition(saveType)) :
                 [
-                    this.getButtonDefinition(buttonTypes.SAVEANDEXIT),
                     this.getButtonDefinition(buttonTypes.SAVEANDADDANOTHER),
+                    this.getButtonDefinition(buttonTypes.SAVEANDEXIT),
                 ];
             return dataEntryHasChanges || !hasRecentlyAddedEvents ?
                 buttons :
