@@ -1,6 +1,6 @@
 // @flow
 export type Props = {|
-    pluginUrl: string,
+    pluginSource: string,
     configKey: string,
     dataKey?: string,
     onClose: () => Promise<void>,

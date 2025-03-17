@@ -2,7 +2,7 @@
 type ActiveList = {|
     dataKey?: string,
     configKey: string,
-    pluginUrl: string,
+    pluginSource: string,
     title: string,
 |};
 
@@ -12,7 +12,7 @@ export type DataStoreConfigurationRaw = {|
     programId: string,
     title: { [locale: string]: string },
     subtitle?: { [locale: string]: string },
-    pluginUrl: string,
+    pluginSource: string,
 |};
 
 export type DataStoreConfiguration = {|
@@ -21,7 +21,7 @@ export type DataStoreConfiguration = {|
     programId: string,
     title: string,
     subtitle?: string,
-    pluginUrl: string,
+    pluginSource: string,
 |};
 
 export type Props = {

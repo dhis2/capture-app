@@ -4,7 +4,7 @@ import { Plugin } from '@dhis2/app-runtime/experimental';
 import { Button } from '@dhis2/ui';
 import type { Props } from './BatchDataEntryPlugin.types';
 
-export const BatchDataEntryPlugin = ({ pluginUrl, configKey, dataKey, onClose, onBackToOriginPage }: Props) => {
+export const BatchDataEntryPlugin = ({ pluginSource, configKey, dataKey, onClose, onBackToOriginPage }: Props) => {
     const [pluginWidth, setPluginWidth] = useState(undefined);
     const containerRef = useRef<?HTMLDivElement>();
 
@@ -28,7 +28,7 @@ export const BatchDataEntryPlugin = ({ pluginUrl, configKey, dataKey, onClose, o
     return (
         <div ref={containerRef}>
             <Plugin
-                pluginSource={pluginUrl}
+                pluginSource={pluginSource}
                 width={pluginWidth}
                 configKey={configKey}
                 dataKey={dataKey}

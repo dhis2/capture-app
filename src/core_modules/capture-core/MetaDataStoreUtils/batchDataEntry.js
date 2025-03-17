@@ -6,7 +6,7 @@ import { getUserStorageController, userStores } from '../storageControllers';
 type ActiveList = {|
     dataKey?: string,
     configKey: string,
-    pluginUrl: string,
+    pluginSource: string,
     title: string,
 |};
 

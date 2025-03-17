@@ -38,7 +38,7 @@ const BatchDataEntryConfigurationsComponenetPlain = ({
                                 onSelectConfiguration({
                                     configKey: config.configKey,
                                     dataKey: config.dataKey,
-                                    pluginUrl: config.pluginUrl,
+                                    pluginSource: config.pluginSource,
                                     title: config.title,
                                 })
                             }
