@@ -22,6 +22,12 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         type: elementTypeKeys.DATE,
         header: stage.stageForm.getLabel(mainPropertyNames.OCCURRED_AT),
     }, {
+        id: mainPropertyNames.ORGANISATION_UNIT,
+        visible: true,
+        type: elementTypeKeys.ORGANISATION_UNIT,
+        header: i18n.t('Organisation unit'),
+        apiName: 'orgUnit',
+    }, {
         id: mainPropertyNames.EVENT_STATUS,
         visible: true,
         // $FlowFixMe[prop-missing] automated comment

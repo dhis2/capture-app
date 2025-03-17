@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
@@ -49,6 +49,8 @@ export const WidgetEventSchedule = ({
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [scheduledOrgUnit, setScheduledOrgUnit] = useState();
+    const [validation, setValidation] = useState();
+    const isFirstRender = useRef(true);
     useEffect(() => {
         if (initialOrgUnitId && orgUnitName) {
             const orgUnit = { id: initialOrgUnitId, name: orgUnitName };
@@ -56,9 +58,14 @@ export const WidgetEventSchedule = ({
         }
     }, [orgUnitName, initialOrgUnitId]);
     const [isFormValid, setIsFormValid] = useState(false);
-    const convertFn = pipe(convertFormToClient, convertClientToServer);
-    const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
-    const serverSuggestedScheduleDate = convertFn(suggestedScheduleDate, dataElementTypes.DATE);
+    const convertScheduleDate = (date, validationResult = { error: false }) => {
+        if (!date || validationResult?.error) {
+            return '';
+        }
+        return pipe(convertFormToClient, convertClientToServer)(date, dataElementTypes.DATE);
+    };
+    const serverScheduleDate = convertScheduleDate(scheduleDate, validation);
+    const serverSuggestedScheduleDate = convertScheduleDate(suggestedScheduleDate);
     const [notes, setNotes] = useState([]);
     const [assignee, setAssignee] = useState(storedAssignee);
     const { eventId } = useLocationQuery();
@@ -71,8 +78,11 @@ export const WidgetEventSchedule = ({
     const { programCategory } = useCategoryCombinations(programId);
 
     useEffect(() => {
-        if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
-    }, [suggestedScheduleDate, scheduleDate]);
+        if (isFirstRender.current && !scheduleDate && suggestedScheduleDate) {
+            setScheduleDate(suggestedScheduleDate);
+            isFirstRender.current = false;
+        }
+    }, [scheduleDate, suggestedScheduleDate]);
 
     useEffect(() => {
         setAssignee(storedAssignee);
@@ -191,10 +201,12 @@ export const WidgetEventSchedule = ({
             displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
             suggestedScheduleDate={suggestedScheduleDate}
             serverSuggestedScheduleDate={serverSuggestedScheduleDate}
+            validation={validation}
             onCancel={onCancel}
             setScheduleDate={setScheduleDate}
             setScheduledOrgUnit={setScheduledOrgUnit}
             setIsFormValid={setIsFormValid}
+            setValidation={setValidation}
             onSchedule={onHandleSchedule}
             onAddNote={onAddNote}
             eventCountInOrgUnit={eventCountInOrgUnit}

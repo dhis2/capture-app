@@ -1,3 +1,50 @@
+## [101.32.1](https://github.com/dhis2/capture-app/compare/v101.32.0...v101.32.1) (2025-03-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([433d9a4](https://github.com/dhis2/capture-app/commit/433d9a475a2f49a5807391181a2bffa4fc528039))
+
+# [101.32.0](https://github.com/dhis2/capture-app/compare/v101.31.0...v101.32.0) (2025-03-15)
+
+
+### Features
+
+* [DHIS2-16338] Display event's org. unit in working lists ([#3974](https://github.com/dhis2/capture-app/issues/3974)) ([196fa1c](https://github.com/dhis2/capture-app/commit/196fa1c57ab3d1cedcca18afe8a2798d04009d40))
+
+# [101.31.0](https://github.com/dhis2/capture-app/compare/v101.30.2...v101.31.0) (2025-03-14)
+
+
+### Features
+
+* [DHIS2-19196][LIBS-726] bump @dhis2-ui/calendar from 10.0.3 to 10.4.0 ([#3998](https://github.com/dhis2/capture-app/issues/3998)) ([6bbdf82](https://github.com/dhis2/capture-app/commit/6bbdf821407f4f77bcc84e157069133b067607d9))
+
+## [101.30.2](https://github.com/dhis2/capture-app/compare/v101.30.1...v101.30.2) (2025-03-14)
+
+
+### Bug Fixes
+
+* [DHIS2-18763] Org. unit context selector does not work for View event in Event programs ([#3997](https://github.com/dhis2/capture-app/issues/3997)) ([d9a75dc](https://github.com/dhis2/capture-app/commit/d9a75dc2417cffcf78a7f69d8b85dd7a98a88c8a))
+
+## [101.30.1](https://github.com/dhis2/capture-app/compare/v101.30.0...v101.30.1) (2025-03-13)
+
+
+### Bug Fixes
+
+* [DHIS2-19140] Changelog modal unmounts when loading ([#3991](https://github.com/dhis2/capture-app/issues/3991)) ([9d9bf76](https://github.com/dhis2/capture-app/commit/9d9bf760680729c84ac7829d97fd376edcff1647))
+
+# [101.30.0](https://github.com/dhis2/capture-app/compare/v101.29.2...v101.30.0) (2025-03-05)
+
+
+### Bug Fixes
+
+* update github actions cache v2 -> v4 ([#3988](https://github.com/dhis2/capture-app/issues/3988)) ([14d89f6](https://github.com/dhis2/capture-app/commit/14d89f635867e65ebe83463ce504e2503c0f015a))
+
+
+### Features
+
+* [DHIS2-18944] add effect to refresh list on event deletion ([#3982](https://github.com/dhis2/capture-app/issues/3982)) ([2369d18](https://github.com/dhis2/capture-app/commit/2369d18255cce5950ad5b2bfa344f13579fc28eb))
+
 ## [101.29.2](https://github.com/dhis2/capture-app/compare/v101.29.1...v101.29.2) (2025-02-27)
 
 
