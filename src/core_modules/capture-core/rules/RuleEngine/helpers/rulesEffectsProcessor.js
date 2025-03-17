@@ -82,18 +82,22 @@ export function getRulesEffectsProcessor(
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
     ): Array<AssignOutputEffect> {
-        if (effect.attributeType === attributeTypes.DATA_ELEMENT && dataElements) {
-            return [createAssignValueEffect(
-                effect.data,
-                dataElements[effect.field],
-                rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-            )];
-        } else if (effect.attributeType === attributeTypes.TRACKED_ENTITY_ATTRIBUTE && trackedEntityAttributes) {
-            return [createAssignValueEffect(
-                effect.data,
-                trackedEntityAttributes[effect.field],
-                rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE,
-            )];
+        if (effect.attributeType === attributeTypes.DATA_ELEMENT) {
+            if (dataElements?.[effect.field]) {
+                return [createAssignValueEffect(
+                    effect.data,
+                    dataElements[effect.field],
+                    rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                )];
+            }
+        } else if (effect.attributeType === attributeTypes.TRACKED_ENTITY_ATTRIBUTE) {
+            if (trackedEntityAttributes?.[effect.field]) {
+                return [createAssignValueEffect(
+                    effect.data,
+                    trackedEntityAttributes[effect.field],
+                    rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE,
+                )];
+            }
         }
         return [];
     }
