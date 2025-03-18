@@ -1,3 +1,10 @@
+## [101.32.3](https://github.com/dhis2/capture-app/compare/v101.32.2...v101.32.3) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-19221] enrollment dashboard workflows ([#4002](https://github.com/dhis2/capture-app/issues/4002)) ([94f393e](https://github.com/dhis2/capture-app/commit/94f393e62762172639da2f73ea4a174c543040f2))
+
 ## [101.32.2](https://github.com/dhis2/capture-app/compare/v101.32.1...v101.32.2) (2025-03-18)
 
 
