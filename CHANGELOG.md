@@ -1,3 +1,31 @@
+## [101.32.5](https://github.com/dhis2/capture-app/compare/v101.32.4...v101.32.5) (2025-03-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4010](https://github.com/dhis2/capture-app/issues/4010)) ([6e9605c](https://github.com/dhis2/capture-app/commit/6e9605c225cb848916cb7036bedb2fa7481a1b7b))
+
+## [101.32.4](https://github.com/dhis2/capture-app/compare/v101.32.3...v101.32.4) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-16918] Event relationship URL link is broken ([#4003](https://github.com/dhis2/capture-app/issues/4003)) ([f0a0726](https://github.com/dhis2/capture-app/commit/f0a07269f01aeb2324d3b977dd927a07eb30f3f8))
+
+## [101.32.3](https://github.com/dhis2/capture-app/compare/v101.32.2...v101.32.3) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-19221] enrollment dashboard workflows ([#4002](https://github.com/dhis2/capture-app/issues/4002)) ([94f393e](https://github.com/dhis2/capture-app/commit/94f393e62762172639da2f73ea4a174c543040f2))
+
+## [101.32.2](https://github.com/dhis2/capture-app/compare/v101.32.1...v101.32.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-19165] handle empty schedule date ([#3995](https://github.com/dhis2/capture-app/issues/3995)) ([3113224](https://github.com/dhis2/capture-app/commit/311322400c3212ce8b0fa7b4e7dc72715d77a658))
+
 ## [101.32.1](https://github.com/dhis2/capture-app/compare/v101.32.0...v101.32.1) (2025-03-16)
 
 

@@ -1,8 +1,8 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "101.32.1",
-    "cacheVersion": "7",
+    "version": "101.32.5",
+    "cacheVersion": "8",
     "serverVersion": "38",
     "license": "BSD-3-Clause",
     "private": true,
@@ -10,6 +10,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
+        "@dhis2/rules-engine-javascript": "101.32.5",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-icons": "^1.0.1",
@@ -18,7 +19,6 @@
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/d2-ui-sharing-dialog": "^7.3.3",
         "@dhis2/rule-engine": "^3.3.9",
-        "@dhis2/rules-engine-javascript": "101.32.1",
         "@dhis2/ui": "^9.10.1",
         "@dhis2-ui/calendar": "^10.4.0",
         "@joakim_sm/react-infinite-calendar": "^2.4.2",
