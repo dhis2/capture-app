@@ -13,7 +13,7 @@ import type {
     CachedOptionSet,
     CachedDataElement,
 } from '../../../../storageControllers/cache.types';
-import { Section, ProgramStage, RenderFoundation, CustomForm, DataElement } from '../../../../metaData';
+import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
 import { DataElementFactory } from './DataElementFactory';
