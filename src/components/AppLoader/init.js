@@ -11,7 +11,7 @@ import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoa
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
-import { rulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
 
 function setLogLevel() {
     const levels = {
@@ -157,14 +157,23 @@ export async function initializeAsync(
         },
     });
 
-    rulesEngine.setSelectedUserRoles(userRoles.map(({ id }) => id));
-
     const systemSettings = await onQueryApi({
         resource: 'system/info',
         params: {
             fields: 'dateFormat,serverTimeZoneId,calendar',
         },
     });
+
+    // initialize rule engine
+    let ruleEngineSettings;
+    try {
+        ruleEngineSettings = await onQueryApi({
+            resource: 'dataStore/capture/ruleEngine',
+        });
+    } catch {
+        ruleEngineSettings = { version: 'default' };
+    }
+    initRulesEngine(ruleEngineSettings.version, userRoles);
 
     // initialize storage controllers
     try {

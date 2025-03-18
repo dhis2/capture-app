@@ -1,15 +1,102 @@
 // @flow
-import type {
-    ProgramRuleVariable,
-    EventData,
-    EventsData,
-    TEIValues,
-    Enrollment,
-    OptionSets,
-    CompareDates,
-    Constants,
-} from './services/VariableService';
-import { typeof effectActions, typeof rulesEngineEffectTargetDataTypes } from './constants';
+import {
+    typeof effectActions,
+    typeof eventStatuses,
+    typeof rulesEngineEffectTargetDataTypes,
+} from '../constants';
+
+export type ProgramRuleVariable = {
+    id: string,
+    displayName: string,
+    programRuleVariableSourceType: string,
+    valueType: string,
+    programId: string,
+    dataElementId?: ?string,
+    trackedEntityAttributeId?: ?string,
+    programStageId?: ?string,
+    useNameForOptionSet?: ?boolean,
+};
+
+type EventMain = {
+    +eventId?: string,
+    +programId?: string,
+    +programStageId?: string,
+    +programStageName?: string,
+    +orgUnitId?: string,
+    +trackedEntityInstanceId?: string,
+    +enrollmentId?: string,
+    +enrollmentStatus?: string,
+    +status?: $Values<eventStatuses>,
+    +occurredAt?: string,
+    +scheduledAt?: string,
+    +completedAt?: string,
+    +createdAt?: string,
+};
+
+export type EventValues = {
+    [elementId: string]: any,
+};
+
+export type EventData = EventValues & EventMain;
+
+export type EventsData = Array<EventData>;
+
+export type EventsDataContainer = {
+    all: EventsData,
+    byStage: { [stageId: string]: EventsData },
+};
+
+export type TEIValues = {
+    [attributeId: string]: any,
+};
+
+export type Enrollment = {
+    +enrolledAt?: string,
+    +occurredAt?: string,
+    +enrollmentId?: string,
+    +programName?: string,
+    +enrollmentStatus?: string,
+};
+
+export type Option = {
+    id: string,
+    code: string,
+    displayName: string,
+};
+
+export type OptionSet = {
+    id: string,
+    displayName: string,
+    options: Array<Option>,
+};
+
+export type OptionSets = {|
+    [id: string]: OptionSet,
+|};
+
+type Constant = {|
+    id: string,
+    displayName: string,
+    value: any,
+|};
+
+export type Constants = Array<Constant>;
+
+export type VariableServiceInput = {|
+    programRuleVariables: ?Array<ProgramRuleVariable>,
+    currentEvent?: EventData,
+    otherEvents?: EventsData,
+    dataElements: ?DataElements,
+    selectedEntity: ?TEIValues,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+    selectedEnrollment: ?Enrollment,
+    selectedOrgUnit: OrgUnit,
+    optionSets: OptionSets,
+    constants: ?Constants,
+|};
+
+export type CompareDates = (firstRulesDate: ?string, secondRulesDate: ?string) => number;
+
 
 export type OutputEffect = {
     type: $Values<effectActions>,
@@ -34,37 +121,55 @@ export type HideProgramStageEffect = OutputEffect & {
 
 };
 
-export type MessageEffect = OutputEffect & {
+type ValidationMessage = {|
+    id: string,
     message: string,
-};
+|};
 
-export type GeneralErrorEffect = OutputEffect & {
-    error: { id: string, message: string },
-};
+export type GeneralErrorEffect = {|
+    ...$Exact<OutputEffect>,
+    error: ValidationMessage
+|};
 
-export type GeneralWarningEffect = OutputEffect & {
-    warning: { id: string, message: string },
-};
+export type GeneralWarningEffect = {|
+    ...$Exact<OutputEffect>,
+    warning: ValidationMessage
+|};
+
+export type MessageEffect = {|
+    ...$Exact<OutputEffect>,
+    message: string,
+|};
+
+export type WarningEffects = Array<MessageEffect> | Array<GeneralWarningEffect>;
+
+export type ErrorEffects = Array<MessageEffect> | Array<GeneralErrorEffect>;
 
 export type CompulsoryEffect = OutputEffect & {
 
 };
 
-export type ProgramRuleEffect = {
-    id: string,
+type ProgramRuleData = {|
+    name: string,
     location: ?string,
-    action: string,
     dataElementId: ?string,
     trackedEntityAttributeId: ?string,
     programStageId: ?string,
     programStageSectionId: ?string,
     optionGroupId: ?string,
     optionId: ?string,
+    style?: ?Object,
+|};
+
+export type ProgramRuleEffect = {
+    id: string,
+    action: string,
     content: ?string,
     displayContent: ?string,
     data: any,
-    style?: ?Object,
-    name: string,
+    field: ?string,
+    attributeType: ?string,
+    ...ProgramRuleData,
 };
 
 export type ProgramRuleAction = {
@@ -72,16 +177,8 @@ export type ProgramRuleAction = {
     content: string,
     displayContent: string,
     data: ?string,
-    location: ?string,
     programRuleActionType: string,
-    dataElementId?: ?string,
-    programStageId?: ?string,
-    programStageSectionId?: ?string,
-    trackedEntityAttributeId?: ?string,
-    optionGroupId: ?string,
-    optionId: ?string,
-    style?: ?Object,
-    name: string,
+    ...ProgramRuleData,
 };
 
 export type ProgramRule = {
@@ -90,7 +187,7 @@ export type ProgramRule = {
     priority: number,
     condition: string,
     description?: ?string,
-    displayName: string, // TODO: Refactor and remove
+    displayName: string,
     programId: string,
     programStageId?: ?string,
     programRuleActions: Array<ProgramRuleAction>,
@@ -132,7 +229,7 @@ export type TrackedEntityAttribute = {
 };
 
 export type TrackedEntityAttributes = {
-    [id: ?string]: TrackedEntityAttribute
+    [id: ?string]: TrackedEntityAttribute,
 };
 
 export type OrgUnitGroup = $ReadOnly<{|
