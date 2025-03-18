@@ -1,3 +1,10 @@
+## [101.32.4](https://github.com/dhis2/capture-app/compare/v101.32.3...v101.32.4) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-16918] Event relationship URL link is broken ([#4003](https://github.com/dhis2/capture-app/issues/4003)) ([f0a0726](https://github.com/dhis2/capture-app/commit/f0a07269f01aeb2324d3b977dd927a07eb30f3f8))
+
 ## [101.32.3](https://github.com/dhis2/capture-app/compare/v101.32.2...v101.32.3) (2025-03-18)
 
 
