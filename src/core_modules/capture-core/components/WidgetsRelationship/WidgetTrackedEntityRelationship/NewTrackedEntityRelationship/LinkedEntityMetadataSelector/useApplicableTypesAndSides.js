@@ -100,7 +100,7 @@ export const useApplicableTypesAndSides = (
             toConstraint,
             bidirectional,
             id,
-            displayFormName,
+            displayName,
             fromToName,
             toFromName,
         }) => {
@@ -121,13 +121,13 @@ export const useApplicableTypesAndSides = (
 
                     return {
                         id,
-                        name: displayFormName,
+                        name: displayName,
                         sides: [{
                             programId: program?.id,
                             trackedEntityTypeId: trackedEntityType.id,
                             trackedEntityName: trackedEntityType.name.toLowerCase(),
                             targetSide: TARGET_SIDES.TO,
-                            name: fromToName ?? displayFormName,
+                            name: fromToName ?? displayName,
                         }],
                     };
                 }
@@ -145,7 +145,7 @@ export const useApplicableTypesAndSides = (
 
                 return {
                     id,
-                    name: displayFormName,
+                    name: displayName,
                     sides: targetSides.map((targetSide) => {
                         const {
                             trackedEntityTypeId,

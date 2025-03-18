@@ -6,7 +6,7 @@ import { extractElementIdsFromRelationshipTypes, formatRelationshipTypes } from 
 
 type Element = {|
     id: string,
-    displayFormName: string,
+    displayName: string,
     valueType: string,
     optionSet?: {|
         options: Array<{
@@ -20,7 +20,7 @@ const relationshipTypesQuery = {
     resource: 'relationshipTypes',
     params: {
         filter: 'access.data.read:eq:true',
-        fields: 'id,displayFormName,fromToName,toFromName,access[data[read,write],read,write],fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
+        fields: 'id,displayName,fromToName,toFromName,access[data[read,write],read,write],fromConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]],toConstraint[relationshipEntity,trackerDataView,trackedEntityType[id,name],program[id,name],programStage[id,name]]',
     },
 };
 

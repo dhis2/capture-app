@@ -7,7 +7,7 @@ export const useTrackedEntityTypeName = (tetId: string) => {
         resource: 'trackedEntityTypes',
         id: tetId,
         params: {
-            fields: 'displayFormName',
+            fields: 'displayName',
         },
     }), [tetId]);
 
@@ -16,7 +16,7 @@ export const useTrackedEntityTypeName = (tetId: string) => {
         query,
         {
             enabled: !!tetId,
-            select: ({ displayFormName }: any) => displayFormName,
+            select: ({ displayName }: any) => displayName,
         });
 
     return {
