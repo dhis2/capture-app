@@ -1,21 +1,21 @@
 # 
 # Translators:
 # Edem Kossi <ekossi@hispwca.org>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # Bram Piot <bram.piot@gmail.com>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # Yayra Gomado <ygomado@hispwca.org>, 2021
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2021
-# phil_dhis2, 2022
-# Viktor Varland <viktor@dhis2.org>, 2022
 # Karoline Tufte Lien <karoline@dhis2.org>, 2022
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2023
+# Philip Larsen Donnelly, 2024
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2023\n"
+"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,19 +71,19 @@ msgid "This value is validating"
 msgstr "Valeur en cours de validation"
 
 msgid "Async field update failed"
-msgstr "Echec de la mise à jour du champ asynchrone"
+msgstr "Echec de la mise à jour asynchrone du champ"
 
 msgid "A value is required"
 msgstr "Une valeur est requise"
 
 msgid "Please provide a valid number"
-msgstr "Veuillez saisir un chiffre valide"
+msgstr "Veuillez saisir un nombre valide"
 
 msgid "Please provide a valid integer"
 msgstr "Veuillez saisir un nombre entier valide"
 
 msgid "Please provide a positive integer"
-msgstr "Veuillez saisir un nombre entier positif valide"
+msgstr "Veuillez saisir un nombre entier positif"
 
 msgid "Please provide zero or a positive integer"
 msgstr "Veuillez saisir un zéro ou nombre entier positif valide"
@@ -92,7 +92,7 @@ msgid "Please provide a negative integer"
 msgstr "Veuillez saisir un nombre entier négatif valide"
 
 msgid "Please provide a valid date"
-msgstr "Veuillez spécifier une date valide"
+msgstr "Veuillez saisir une date valide"
 
 msgid "A date in the future is not allowed"
 msgstr "Aucune date future n'est autorisée"
@@ -104,10 +104,10 @@ msgid "Please provide a valid time"
 msgstr "Veuillez saisir une heure valide"
 
 msgid "Please provide an integer between 0 and 100"
-msgstr "Veuillez fournir un nombre entier compris entre 0 et 100"
+msgstr "Veuillez saisir un nombre entier compris entre 0 et 100"
 
 msgid "Please provide a valid url"
-msgstr "Veuillez saisir un lien URL valide"
+msgstr "Veuillez saisir un URL valide"
 
 msgid "Please provide a valid email address"
 msgstr "Veuillez saisir une adresse email valide"
@@ -134,13 +134,13 @@ msgid "Checking..."
 msgstr "Vérification..."
 
 msgid "Area"
-msgstr "Aire"
+msgstr "Zone"
 
 msgid "Coordinate"
 msgstr "Coordonnée"
 
 msgid "Enrollment"
-msgstr "Enrôlement"
+msgstr "Inscription"
 
 msgid "A future date is not allowed"
 msgstr "Une date future n'est pas permise"
@@ -164,10 +164,10 @@ msgid "Search for user"
 msgstr "Rechercher un utilisateur"
 
 msgid "Complete event"
-msgstr "Evènement complété"
+msgstr "Événement terminé"
 
 msgid "Basic info"
-msgstr "Infos de base"
+msgstr "Informations de base"
 
 msgid "Status"
 msgstr "Statut"
@@ -201,8 +201,8 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"La relation entre le type {{nom du type de relation}} et {{Nom d'entité}} "
-"existe déjà"
+"La relation entre le type {{relationshipTypeName}} et {{entityName}} existe "
+"déjà"
 
 msgid "Active"
 msgstr "Actif"
@@ -234,7 +234,7 @@ msgid "No write access"
 msgstr "Aucun accès en écriture"
 
 msgid "New {{titleText}}"
-msgstr "Nouveau {{texte du titre}}"
+msgstr "Nouveau {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Passer à la vue du formulaire"
@@ -290,7 +290,7 @@ msgid "without"
 msgstr "Sans"
 
 msgid "enrollment"
-msgstr "Enrôlement"
+msgstr "inscription"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -309,21 +309,20 @@ msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
-"Un élément est déjà enregistré avec ce {{nom d'attribut}}, mais vous n'y "
-"avez pas accès"
+"Un élément est déjà enregistré avec ce {{attributeName}}, mais vous n'y avez"
+" pas accès"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "Vous avez déjà enregistré ce {{nom d'attribut}}"
+msgstr "Vous avez déjà enregistré ce {{attributeName}}"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
-"Un {{Nom de type d'entité suivie}} ayant ce {{Nom d'attribut}} est déjà "
-"enregistré"
+"Un {{trackedEntityTypeName}} ayant ce {{attributeName}} est déjà enregistré"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Afficher le {{Nom de type d'entité suivie}} enregistré"
+msgstr "Afficher le {{trackedEntityTypeName}} enregistré"
 
 msgid "Registered person"
 msgstr "Personne inscrite"
@@ -520,7 +519,7 @@ msgid "Reset filter"
 msgstr "Réinitialiser le filtre"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{de}} à {{à}}"
+msgstr "{{fromDate}} à {{toDate}}"
 
 msgid "after or equal to {{date}}"
 msgstr "après ou égal à {{date}}"
@@ -649,7 +648,7 @@ msgid ""
 "{{teiDisplayName}}"
 msgstr ""
 "Choisissez un programme pour ajouter de nouvelles inscriptions ou voir les "
-"inscriptions existantes pour {{Nom d'affichage de la tei}}."
+"inscriptions existantes pour {{teiDisplayName}}."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
@@ -724,15 +723,14 @@ msgid "Registered events"
 msgstr "Événements enregistrés"
 
 msgid "Please select {{category}}."
-msgstr "Veuillez sélectionner {{catégorie}}."
+msgstr "Veuillez sélectionner {{category}}."
 
 msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
-"Ou voir tous les enregistrements auxquels vous avez accès dans {{programme}}"
+"Ou voir tous les enregistrements auxquels vous avez accès dans {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
-msgstr ""
-"Ou voir tous les événements auxquels vous avez accès dans {{programme}}"
+msgstr "Ou voir tous les événements auxquels vous avez accès dans {{program}}"
 
 msgid "Please select an organisation unit."
 msgstr "Veuillez sélectionner une unité d'organisation."
@@ -780,7 +778,7 @@ msgid "Search results"
 msgstr "Résultats de la recherche"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr "Aucun {{Nom de type d'entité suivie}} trouvé."
+msgstr "Aucun {{trackedEntityTypeName}} trouvé."
 
 msgid "New search"
 msgstr "Nouvelle recherche"
@@ -789,10 +787,10 @@ msgid "Edit search"
 msgstr "Modifier la recherche"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr "Lier à un {{Type d'entité suivie}} existant"
+msgstr "Lier à un {{trackedEntityType}} existant"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr "Créer un nouveau {{Type d'entité suivie}}"
+msgstr "Créer un nouveau {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Enregistrer"
@@ -800,11 +798,11 @@ msgstr "Enregistrer"
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
-"Renseigner au moins les attributs {{Nombre minimal d'attributs requis pour "
-"la recherche}} pour la recherche"
+"Renseigner au moins les attributs {{minAttributesRequiredToSearch}} pour la "
+"recherche"
 
 msgid "Search {{name}}"
-msgstr "Rechercher {{nom}}"
+msgstr "Rechercher {{name}}"
 
 msgid "Search by {{name}}"
 msgstr "Rechercher par {{name}}"
@@ -816,7 +814,7 @@ msgid "Back"
 msgstr "Précédent"
 
 msgid "Search for {{titleText}}"
-msgstr "Rechercher {{texte du titre}}"
+msgstr "Rechercher {{titleText}}"
 
 msgid "Search for"
 msgstr "Rechercher"
@@ -866,7 +864,7 @@ msgid "Choose a type to start searching"
 msgstr "Choisir un type pour commencer la recherche"
 
 msgid "View active enrollment"
-msgstr "Voir les inscriptions actives"
+msgstr "Afficher les inscriptions actives"
 
 msgid "Re-enroll"
 msgstr "Réinscrire"
@@ -909,7 +907,7 @@ msgid "Assign"
 msgstr "Assigner"
 
 msgid "Event assigned to {{name}}"
-msgstr "Événement attribué à {{nom}}"
+msgstr "Événement attribué à {{name}}"
 
 msgid "Feedbacks"
 msgstr "Feedbacks"
@@ -949,8 +947,8 @@ msgstr "Chercher {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
-"Renseigner au moins les attributs {{Nombre minimal d'attributs requis}} pour"
-" la recherche"
+"Renseigner au moins les attributs {{minAttributesRequired}} pour la "
+"recherche"
 
 msgid "To work with the selected program,"
 msgstr "Pour utiliser le programme sélectionné,"
@@ -977,7 +975,7 @@ msgid "Mark incomplete"
 msgstr "Mark comme inachevé"
 
 msgid "Delete enrollment"
-msgstr "Supprimer enrôlement"
+msgstr "Supprimer l'inscription"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -999,7 +997,7 @@ msgid "Mark for follow-up"
 msgstr "Marquer pour suivi"
 
 msgid "Enrollment date"
-msgstr "Date d'enrôlement"
+msgstr "Date de l'inscription"
 
 msgid "Incident date"
 msgstr "Date de l´incident"
@@ -1075,16 +1073,16 @@ msgid "Person Profile"
 msgstr "Profil d'une personne"
 
 msgid "New {{ eventName }} event"
-msgstr "Nouvel événement {{nomdel'événement}}"
+msgstr "Nouvel événement {{ eventName }}"
 
 msgid "Show {{ rest }} more"
-msgstr "Afficher {{rest}} plus"
+msgstr "Afficher {{ rest }} plus"
 
 msgid "Reset list"
 msgstr "Réinitialiser la liste"
 
 msgid "Go to full {{ eventName }}"
-msgstr "Aller à l'intégralité de {{nom de l'événement}}"
+msgstr "Aller à l'intégralité de {{ eventName }}"
 
 msgid "This stage can only have one event"
 msgstr "Ce stade ne peut avoir qu'un seul événement"
@@ -1099,7 +1097,7 @@ msgid "Due date"
 msgstr "Date d'échéance"
 
 msgid "{{ totalEvents }} events"
-msgstr "{{total des événements}} événements"
+msgstr "{{ totalEvents }} événements"
 
 msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} en retard"
@@ -1135,7 +1133,7 @@ msgid "an error occurred loading working lists"
 msgstr "une erreur est survenue lors du chargement des listes de tâches"
 
 msgid "Enrollment status"
-msgstr "Statut de l'enrôlement"
+msgstr "Statut de l'inscription"
 
 msgid "Assigned to"
 msgstr "Attribue"
@@ -1165,7 +1163,7 @@ msgid "Share view..."
 msgstr "Partager la vue..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Souhaitez-vous vraiment supprimer la vue '{{nom du modèle}}' ?"
+msgstr "Souhaitez-vous vraiment supprimer la vue '{{templateName}}' ?"
 
 msgid "Confirm"
 msgstr "Confirmer"
@@ -1249,7 +1247,7 @@ msgid "Set coordinate"
 msgstr "Définir les coordonnées"
 
 msgid "Page {{currentPage}}"
-msgstr "Page {{page en cours}}"
+msgstr "Page {{currentPage}}"
 
 msgid "Date"
 msgstr "Date"
