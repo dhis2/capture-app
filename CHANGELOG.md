@@ -1,3 +1,10 @@
+# [101.33.0](https://github.com/dhis2/capture-app/compare/v101.32.5...v101.33.0) (2025-03-18)
+
+
+### Features
+
+* [DHIS2-16688] replace rule engine ([#3955](https://github.com/dhis2/capture-app/issues/3955)) ([83eb423](https://github.com/dhis2/capture-app/commit/83eb4230cc21b0d5d62fc39d784ea2737908ebbf))
+
 ## [101.32.5](https://github.com/dhis2/capture-app/compare/v101.32.4...v101.32.5) (2025-03-18)
 
 
