@@ -1,3 +1,10 @@
+## [101.32.2](https://github.com/dhis2/capture-app/compare/v101.32.1...v101.32.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* [DHIS2-19165] handle empty schedule date ([#3995](https://github.com/dhis2/capture-app/issues/3995)) ([3113224](https://github.com/dhis2/capture-app/commit/311322400c3212ce8b0fa7b4e7dc72715d77a658))
+
 ## [101.32.1](https://github.com/dhis2/capture-app/compare/v101.32.0...v101.32.1) (2025-03-16)
 
 
