@@ -109,6 +109,8 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
             });
             foundation.addSection(section);
         });
+
+        stage.dataElements = stage.stageForm.getElements();
     });
 
     const program = new TrackerProgram((initProgram) => {

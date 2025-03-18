@@ -18,11 +18,14 @@ Object {
     "trackedEntityInstanceId": "vCGpQAWG17I",
   },
   "dataElements": Object {
-    "da1Id": Object {
-      "id": "da1Id",
-      "name": "dataElement1",
-      "optionSetId": undefined,
-      "valueType": "TEXT",
+    "da1Id": DataElement {
+      "_compulsory": false,
+      "_disabled": false,
+      "_displayInForms": true,
+      "_displayInReports": true,
+      "_id": "da1Id",
+      "_name": "dataElement1",
+      "_type": "TEXT",
     },
   },
   "optionSets": Object {

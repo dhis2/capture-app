@@ -73,6 +73,7 @@ describe('getApplicableRuleEffectsForEventProgram', () => {
             });
             foundation.addSection(section);
         });
+        stage.dataElements = stage.stageForm.getElements();
     });
 
     const program = new EventProgram((initProgram) => {

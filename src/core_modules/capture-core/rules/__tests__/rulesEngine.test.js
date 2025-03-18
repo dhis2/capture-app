@@ -1,5 +1,7 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { ruleEngine } from '../rulesEngine';
+import { initRulesEngine, ruleEngine } from '../rulesEngine';
+
+initRulesEngine('', []);
 
 const groups = [
     { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
@@ -353,8 +355,14 @@ describe('Program Rule Variables corner cases', () => {
             dataElements: dataElementsInProgram,
         });
 
-        // then (currentEvent and selectedEnrollment not defined => empty effect array)
-        expect(rulesEffects).toEqual([]);
+        // then
+        expect(rulesEffects).toEqual([
+            {
+                type: 'DISPLAYTEXT',
+                id: 'feedback',
+                displayText: { id: 'Eeb7Ixr4Pvx', message: "d2:left('dhis', 3) =  dhi" },
+            },
+        ]);
     });
 
     test('without currentEvent and with otherEvents', () => {
@@ -425,8 +433,14 @@ describe('Program Rule Variables corner cases', () => {
             otherEvents,
         });
 
-        // then (currentEvent and selectedEnrollment not defined => empty effect array)
-        expect(rulesEffects).toEqual([]);
+        // then
+        expect(rulesEffects).toEqual([
+            {
+                type: 'DISPLAYTEXT',
+                id: 'feedback',
+                displayText: { id: 'Eeb7Ixr4Pvx', message: "d2:left('dhis', 3) =  dhi" },
+            },
+        ]);
     });
 
     test('with currentEvent and with otherEvents', () => {
