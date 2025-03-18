@@ -1673,7 +1673,7 @@ msgid ""
 msgstr "此操作无法撤销。您确定要删除所选事件吗？"
 
 msgid "{{trackedEntityName}} organisation unit"
-msgstr ""
+msgstr "{{trackedEntityName}} 机构"
 
 msgid "Registration Date"
 msgstr "登记日期"
