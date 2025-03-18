@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable complexity */
 import { RuleEngineJs } from '@dhis2/rule-engine';
 import {
     InputBuilder,
@@ -45,7 +46,7 @@ export class RuleEngine {
     }: RulesEngineInput): OutputEffects {
         if (!programRulesContainer.programRules ||
             !selectedOrgUnit ||
-            !currentEvent && !selectedEnrollment) return [];
+            (!currentEvent && !selectedEnrollment)) return [];
 
         const inputBuilder = new InputBuilder(
             this.inputConverter,

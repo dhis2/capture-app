@@ -8,6 +8,8 @@ import {
     dateUtils,
 } from './converters';
 
+let selectedRuleEngine;
+
 const captureRuleEngine = () => new RulesEngine(
     inputConverter,
     outputConverter,
@@ -20,16 +22,14 @@ const kotlinRuleEngine = () => new RuleEngine(
     outputConverter,
 );
 
-let rulesEngine = kotlinRuleEngine();
-
 const switchToCapture = () => {
     console.log('Using capture rule engine');
-    rulesEngine = captureRuleEngine();
+    selectedRuleEngine = captureRuleEngine();
 };
 
 const switchToKotlin = () => {
     console.log('Using kotlin rule engine');
-    rulesEngine = kotlinRuleEngine();
+    selectedRuleEngine = kotlinRuleEngine();
 };
 
 const versions = {
@@ -45,7 +45,7 @@ export const initRulesEngine = (version: string, userRoles: Array<{ id: string }
     } else {
         featureAvailable(FEATURES.kotlinRuleEngine) ? switchToKotlin() : switchToCapture();
     }
-    rulesEngine.setSelectedUserRoles(userRoles.map(({ id }) => id));
+    selectedRuleEngine.setSelectedUserRoles(userRoles.map(({ id }) => id));
 };
 
-export const ruleEngine = () => rulesEngine;
+export const ruleEngine = () => selectedRuleEngine || kotlinRuleEngine();
