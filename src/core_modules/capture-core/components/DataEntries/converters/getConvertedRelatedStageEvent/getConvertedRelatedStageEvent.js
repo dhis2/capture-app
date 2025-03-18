@@ -65,10 +65,11 @@ const getEventDetailsByLinkMode = ({
                 }),
             );
         }
+
         return ({
             linkedEvent: {
                 ...baseEventDetails,
-                scheduledAt: serverRequestEvent.scheduledAt,
+                scheduledAt: serverRequestEvent.occurredAt,
                 orgUnit: convertFn(linkedEventOrgUnit, dataElementTypes.ORGANISATION_UNIT),
             },
             linkedEventId: baseEventDetails.event,
