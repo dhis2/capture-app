@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2021
-# Philip Larsen Donnelly, 2022
 # 晓东 林 <13981924470@126.com>, 2022
-# easylin <lin_xd@126.com>, 2023
+# Philip Larsen Donnelly, 2024
+# easylin <lin_xd@126.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2023-01-04T13:43:37.774Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2023\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,16 +45,16 @@ msgid "Organisation unit"
 msgstr "机构"
 
 msgid "Date of enrollment"
-msgstr "注册日期"
+msgstr "加入日期"
 
 msgid "Last updated"
 msgstr "上次更新"
 
 msgid "Enrolled"
-msgstr "已注册"
+msgstr "已加入"
 
 msgid "Previously enrolled"
-msgstr "以前报名的"
+msgstr "以前加入的"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -129,7 +129,7 @@ msgid "Coordinate"
 msgstr "坐标"
 
 msgid "Enrollment"
-msgstr "注册"
+msgstr "加入登记"
 
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
@@ -270,10 +270,10 @@ msgid "without"
 msgstr "没有"
 
 msgid "enrollment"
-msgstr "注册"
+msgstr "加入登记"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr "通过从顶部栏中选择一个项目来注册"
+msgstr "通过从顶部栏中选择一个项目来加入登记"
 
 msgid "An error has occurred. See log for details"
 msgstr "发生了错误。查看日志以获取详细信息"
@@ -593,19 +593,19 @@ msgstr "id 为“{{teiId}}”的跟踪实体实例不存在"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
-msgstr "打开此注册时出错。请输入有效网址。"
+msgstr "打开此加入登记时出错。请输入有效网址。"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "ID 为“{{enrollmentId}}”的注册不存在"
+msgstr "ID 为“{{enrollmentId}}”的加入登记不存在"
 
 msgid "Enrollment Dashboard"
-msgstr "注册仪表板"
+msgstr "加入登记仪表板"
 
 msgid "No indicator output for this enrollment yet"
-msgstr "此注册尚无指标输出"
+msgstr "此加入登记尚无指标输出"
 
 msgid "No feedback for this enrollment yet"
-msgstr "此注册尚无反馈"
+msgstr "此加入登记尚无反馈"
 
 msgid "Program stage not found"
 msgstr "未找到项目阶段"
@@ -613,32 +613,32 @@ msgstr "未找到项目阶段"
 msgid ""
 "Choose a program to add new or see existing enrollments for "
 "{{teiDisplayName}}"
-msgstr "选择一个项目以添加新的或查看 {{teiDisplayName}} 的现有注册"
+msgstr "选择一个项目以添加新的或查看 {{teiDisplayName}} 的现有加入登记"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr "{{programName}} 有类别。选择所有类别以查看仪表板。"
 
 msgid "Choose an enrollment to view the dashboard."
-msgstr "选择一个注册以查看仪表板。"
+msgstr "选择一个加入登记以查看仪表板。"
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr "该项目未注册{{teiDisplayName}} 。"
+msgstr "{{teiDisplayName}}未加入登记到该项目 。"
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr "在此项目中注册{{teiDisplayName}}。"
+msgstr "在此项目中加入登记{{teiDisplayName}}。"
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
-"{{teiDisplayName}}是一个{{tetName}}，无法注册到{{programName}}中。选择另一个允许{{tetName}}注册的项目。"
+"{{teiDisplayName}}是一个{{tetName}}，无法加入登记到{{programName}}中。选择另一个允许{{tetName}}加入登记的项目。"
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr "在此项目中注册新的{{selectedTetName}}。"
+msgstr "在此项目中加入登记新的{{selectedTetName}}。"
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr "{{programName}}是事件项目，不需要注册。"
+msgstr "{{programName}}是事件项目，不需要加入登记。"
 
 msgid "Create a new event in this program."
 msgstr "在此项目中创建一个新事件。"
@@ -647,7 +647,7 @@ msgid "View working list in this program."
 msgstr "查看此项目中的工作清单。"
 
 msgid "Enrollment{{escape}} New Event"
-msgstr "登记{{escape}}新事件"
+msgstr "加入登记{{escape}}新事件"
 
 msgid "There was an error loading the page"
 msgstr "加载页面时出错"
@@ -668,19 +668,19 @@ msgid "stage"
 msgstr "阶段"
 
 msgid "Enrollment{{escape}} View Event"
-msgstr "注册{{escape}} 查看事件"
+msgstr "加入登记{{escape}} 查看事件"
 
 msgid "Enrollment{{escape}} Edit Event"
-msgstr "注册{{escape}} 编辑事件"
+msgstr "加入登记{{escape}} 中编辑事件"
 
 msgid "The enrollment event data could not be found"
-msgstr "找不到注册事件数据"
+msgstr "找不到加入登记事件数据"
 
 msgid "There are no feedback for this event"
 msgstr "本次活动暂无反馈"
 
 msgid "Registered events"
-msgstr "登记的事件"
+msgstr "注册的事件"
 
 msgid "Please select {{category}}."
 msgstr "请选择 {{category}}."
@@ -704,7 +704,7 @@ msgid "View dashboard"
 msgstr "查看仪表盘"
 
 msgid "View enrollment"
-msgstr "查看注册"
+msgstr "查看加入登记"
 
 msgid "Create for"
 msgstr "为创建"
@@ -750,7 +750,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr "创建新的{{trackedEntityType}}"
 
 msgid "Register"
-msgstr "登记"
+msgstr "注册"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -809,10 +809,10 @@ msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
 
 msgid "View active enrollment"
-msgstr "查看有效的注册"
+msgstr "查看有效的加入登记"
 
 msgid "Re-enroll"
-msgstr "重新注册"
+msgstr "重新加入登记"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
@@ -900,7 +900,7 @@ msgid "Save comment"
 msgstr "保存注释"
 
 msgid "Enrollment actions"
-msgstr "注册操作"
+msgstr "加入登记操作"
 
 msgid "We are processing your request."
 msgstr "我们正在处理您的请求。"
@@ -915,18 +915,18 @@ msgid "Mark incomplete"
 msgstr "标记为未完成"
 
 msgid "Delete enrollment"
-msgstr "删除注册"
+msgstr "删除加入登记"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
-msgstr "您确定要删除此注册吗？这将永久删除当前注册。"
+msgstr "您确定要删除此注册吗？这将永久删除当前加入登记。"
 
 msgid "No, cancel"
 msgstr "不，取消"
 
 msgid "Yes, delete enrollment."
-msgstr "是的，删除注册。"
+msgstr "是的，删除加入登记。"
 
 msgid "Remove mark for follow-up"
 msgstr "删除标记以进行后续操作"
@@ -935,13 +935,13 @@ msgid "Mark for follow-up"
 msgstr "后续标记"
 
 msgid "Enrollment date"
-msgstr "登记日期"
+msgstr "加入登记日期"
 
 msgid "Incident date"
 msgstr "事件日期"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
-msgstr "无法加载注册的小部件。请稍后再试"
+msgstr "无法加载加入登记的小部件。请稍后再试"
 
 msgid "Follow-up"
 msgstr "后续"
@@ -959,13 +959,13 @@ msgid "Cancelled"
 msgstr "已取消"
 
 msgid "Comments about this enrollment"
-msgstr "关于本次注册的评论"
+msgstr "关于本次加入登记的评论"
 
 msgid "Write a comment about this enrollment"
-msgstr "写一篇关于这个注册登记的评论"
+msgstr "写一篇关于这个加入登记的评论"
 
 msgid "This enrollment doesn't have any comments"
-msgstr "本次注册没有任何评论"
+msgstr "本次加入登记没有任何评论"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
@@ -1010,7 +1010,7 @@ msgid "New {{ eventName }} event"
 msgstr "新的 {{ eventName }} 事件"
 
 msgid "Show {{ rest }} more"
-msgstr "显示 {{ rest}} 更多"
+msgstr "显示 {{ rest }} 更多"
 
 msgid "Reset list"
 msgstr "重置列表"
@@ -1037,7 +1037,7 @@ msgid "{{ overdueEvents }} overdue"
 msgstr "{{ overdueEvents }} 逾期"
 
 msgid "{{ scheduledEvents }} scheduled"
-msgstr "{{ ScheduledEvents }} 已安排"
+msgstr "{{ scheduledEvents }} 已安排"
 
 msgid "Stages and Events"
 msgstr "阶段和事件"
@@ -1067,7 +1067,7 @@ msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
 
 msgid "Enrollment status"
-msgstr "登记状态"
+msgstr "加入状态"
 
 msgid "Assigned to"
 msgstr "指派到"
@@ -1118,13 +1118,13 @@ msgid "An error has occured. See log for details"
 msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr "调度{{escape }}到期{{ time }}"
+msgstr "调度{{ escape }}到期{{ time }}"
 
 msgid "Scheduled"
 msgstr "已经调度"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr "逾期{{escape }}到期{{time }}"
+msgstr "逾期{{ escape }}到期{{ time }}"
 
 msgid "Overdue"
 msgstr "逾期"
@@ -1169,10 +1169,10 @@ msgid "Error saving tracked entity instance"
 msgstr "保存跟踪的实体实例时出错"
 
 msgid "Error saving enrollment"
-msgstr "保存注册时出错"
+msgstr "保存加入登记时出错"
 
 msgid "Error saving the enrollment event"
-msgstr "保存注册事件时出错"
+msgstr "保存加入登记事件时出错"
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
