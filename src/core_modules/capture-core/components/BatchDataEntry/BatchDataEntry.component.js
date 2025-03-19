@@ -1,11 +1,14 @@
 // @flow
 import React, { useEffect, useState, useCallback } from 'react';
+import { useQueryClient } from 'react-query';
 import { withStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
-import { getBatchDataEntry, removeBatchDataEntry } from 'capture-core/MetaDataStoreUtils/batchDataEntry';
+import { removeBatchDataEntry } from 'capture-core/MetaDataStoreUtils/batchDataEntry';
+import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './BatchDataEntry.types';
 import { BatchDataEntryPlugin } from './BatchDataEntryPlugin';
 import { BatchDataEntryBreadcrumb } from '../Breadcrumbs/BatchDataEntryBreadcrumb';
+import { useBatchDataEntryFromIndexedDB } from '../../utils/cachedDataHooks/useBatchDataEntryFromIndexedDB';
 
 const styles = () => ({
     container: {
@@ -22,20 +25,18 @@ const BatchDataEntryPlain = ({
     classes,
 }: Props) => {
     const [pluginProps, setPluginProps] = useState();
+    const { cachedBatchDataEntry } = useBatchDataEntryFromIndexedDB(programId);
+    const queryClient = useQueryClient();
 
     useEffect(() => {
-        const fetchData = async () => {
-            const batchDataEntry = await getBatchDataEntry(programId);
-            batchDataEntry?.activeList && setPluginProps(batchDataEntry.activeList);
-        };
-        programId && fetchData();
-    }, [programId]);
+        setPluginProps(cachedBatchDataEntry?.activeList);
+    }, [cachedBatchDataEntry?.activeList]);
 
     const onClose = useCallback(async () => {
         await removeBatchDataEntry(programId);
-        setPluginProps();
+        await queryClient.refetchQueries([ReactQueryAppNamespace, 'indexedDB', 'cachedBatchDataEntry', programId]);
         setShowBatchDataEntryPlugin(false);
-    }, [programId, setShowBatchDataEntryPlugin]);
+    }, [programId, setShowBatchDataEntryPlugin, queryClient]);
 
     const onBackToOriginPage = useCallback(() => {
         setShowBatchDataEntryPlugin(false);

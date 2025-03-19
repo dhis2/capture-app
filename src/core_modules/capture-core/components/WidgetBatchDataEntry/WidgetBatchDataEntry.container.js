@@ -1,28 +1,29 @@
 // @flow
 import React, { useEffect, useState, useCallback } from 'react';
-import { getBatchDataEntry, setBatchDataEntry } from 'capture-core/MetaDataStoreUtils/batchDataEntry';
+import { useQueryClient } from 'react-query';
+import { setBatchDataEntry } from 'capture-core/MetaDataStoreUtils/batchDataEntry';
+import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './WidgetBatchDataEntry.types';
 import { BatchDataEntryConfigurations } from './BatchDataEntryConfigurations';
 import { BatchDataEntryActive } from './BatchDataEntryActive';
+import { useBatchDataEntryFromIndexedDB } from '../../utils/cachedDataHooks/useBatchDataEntryFromIndexedDB';
 
 export const WidgetBatchDataEntry = ({ programId, setShowBatchDataEntryPlugin }: Props) => {
     const [pluginProps, setPluginProps] = useState(false);
+    const { cachedBatchDataEntry } = useBatchDataEntryFromIndexedDB(programId);
+    const queryClient = useQueryClient();
 
     useEffect(() => {
-        const fetchData = async () => {
-            const batchDataEntry = await getBatchDataEntry(programId);
-            setPluginProps(batchDataEntry?.activeList);
-        };
-        programId && fetchData();
-    }, [programId]);
+        setPluginProps(cachedBatchDataEntry?.activeList);
+    }, [cachedBatchDataEntry?.activeList]);
 
     const onSelectConfiguration = useCallback(
         async (dataStoreConfiguration) => {
             await setBatchDataEntry({ id: programId, activeList: dataStoreConfiguration });
-            setPluginProps(dataStoreConfiguration);
+            await queryClient.refetchQueries([ReactQueryAppNamespace, 'indexedDB', 'cachedBatchDataEntry', programId]);
             setShowBatchDataEntryPlugin(true);
         },
-        [programId, setShowBatchDataEntryPlugin],
+        [programId, setShowBatchDataEntryPlugin, queryClient],
     );
 
     if (!programId || pluginProps === false) {
