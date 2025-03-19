@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-02-17T15:42:27.630Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -902,6 +902,12 @@ msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "至少填写 {{count}} 属性进行搜索"
 
+msgid "Missing search criteria"
+msgstr "缺少搜索条件"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "无法检索元数据。请稍后再试。"
 
@@ -1007,9 +1013,6 @@ msgid ""
 "looking for."
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
-msgid "Back to search"
-msgstr "返回搜寻"
-
 msgid "An error has occurred"
 msgstr "发生了错误"
 
@@ -1018,9 +1021,6 @@ msgstr "结果太多"
 
 msgid "Cannot search in all programs"
 msgstr "无法在所有项目中搜索"
-
-msgid "Missing search criteria"
-msgstr "缺少搜索条件"
 
 msgid "Results found"
 msgstr "找到的结果"
@@ -1255,6 +1255,12 @@ msgstr "转到`调度`选项卡以重新安排调度此事件"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
 
+msgid "Geometry (Area)"
+msgstr "几何（面积）"
+
+msgid "Geometry (Coordinate)"
+msgstr "几何（坐标）"
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1384,7 +1390,7 @@ msgid "Choose a {{linkableStageLabel}}"
 msgstr "选择 {{linkableStageLabel}}"
 
 msgid "{{ linkableStageLabel }} can only have one event"
-msgstr ""
+msgstr "{{ linkableStageLabel }} 只能有一个事件"
 
 msgid "{{ linkableStageLabel }} has no linkable events"
 msgstr "{{ linkableStageLabel }} 没有可链接的事件"
@@ -1396,7 +1402,7 @@ msgid "Ambiguous relationships, contact system administrator"
 msgstr "关系不明确，请联系系统管理员"
 
 msgid "Enter details"
-msgstr ""
+msgstr "输入详细信息"
 
 msgid "Linked event"
 msgstr "关联事件"
@@ -1408,10 +1414,10 @@ msgid "Link to an existing event"
 msgstr "链接到现有活动"
 
 msgid "The event was successfully linked"
-msgstr ""
+msgstr "活动已成功链接"
 
 msgid "An error occurred while linking the event"
-msgstr ""
+msgstr "链接事件时发生错误"
 
 msgid "Scheduled date"
 msgstr "调度日期"
@@ -1527,6 +1533,9 @@ msgstr "变更日志"
 msgid "No changes to display"
 msgstr "没有显示任何变化"
 
+msgid "Data item"
+msgstr "数据条目"
+
 msgid "Updated"
 msgstr "更新"
 
@@ -1539,11 +1548,17 @@ msgstr "删除的"
 msgid "Date"
 msgstr "日期"
 
+msgid "Sort by date"
+msgstr "按日期排序"
+
 msgid "User"
 msgstr "用户"
 
-msgid "Data item"
-msgstr "数据条目"
+msgid "Sort by username"
+msgstr "按用户名排序"
+
+msgid "Sort by data item"
+msgstr "按数据项排序"
 
 msgid "Change"
 msgstr "改变"
@@ -1656,6 +1671,9 @@ msgstr "删除事件"
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
 msgstr "此操作无法撤销。您确定要删除所选事件吗？"
+
+msgid "{{trackedEntityName}} organisation unit"
+msgstr "{{trackedEntityName}} 机构"
 
 msgid "Registration Date"
 msgstr "登记日期"

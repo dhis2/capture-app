@@ -1,18 +1,25 @@
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { rulesEngine } from '../rulesEngine';
+import { initRulesEngine, ruleEngine } from '../rulesEngine';
+
+initRulesEngine('', []);
+
+const groups = [
+    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
+    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
+];
 
 describe('Rules engine', () => {
     const constants = [];
     const dataElementsInProgram = {};
     const programRuleVariables = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
     const currentEvent = {};
 
     test('Rules engine without programRules', () => {
         // when
         const programRules = undefined;
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -44,7 +51,7 @@ describe('Rules engine', () => {
                 ],
             },
         ];
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -75,7 +82,7 @@ describe('Rules engine', () => {
                 ],
             },
         ];
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -88,8 +95,8 @@ describe('Rules engine', () => {
     });
 
     test('user roles', () => {
-        rulesEngine.setSelectedUserRoles(['ADMIN']);
-        expect(rulesEngine.userRoles).toEqual(['ADMIN']);
+        ruleEngine().setSelectedUserRoles(['ADMIN']);
+        expect(ruleEngine().userRoles).toEqual(['ADMIN']);
     });
 
     test('SHOW_WARNING program rule effect with a general target', () => {
@@ -110,7 +117,7 @@ describe('Rules engine', () => {
                 ],
             },
         ];
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -149,7 +156,7 @@ describe('Rules engine', () => {
                 ],
             },
         ];
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -186,7 +193,7 @@ describe('Rules engine', () => {
                 ],
             },
         ];
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -214,7 +221,7 @@ describe('Rules engine', () => {
                 ],
             },
         ];
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -228,10 +235,10 @@ describe('Rules engine', () => {
 
     test('The rules engine can enable verbose logging', () => {
         // When
-        rulesEngine.setFlags({ verbose: true });
+        ruleEngine().setFlags({ verbose: true });
 
         // Then
-        expect(rulesEngine.getFlags()).toEqual({ verbose: true });
+        expect(ruleEngine().getFlags()).toEqual({ verbose: true });
     });
 
     test('Rules are calculated when verbose is set', () => {
@@ -254,8 +261,8 @@ describe('Rules engine', () => {
         ];
 
         // When
-        rulesEngine.setFlags({ verbose: true });
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        ruleEngine().setFlags({ verbose: true });
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -279,7 +286,7 @@ describe('Rules engine', () => {
 
 describe('Program Rule Variables corner cases', () => {
     const constants = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
 
     test('without currentEvent and without otherEvents', () => {
@@ -340,7 +347,7 @@ describe('Program Rule Variables corner cases', () => {
         ];
 
         // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             selectedOrgUnit: orgUnit,
             optionSets,
@@ -402,7 +409,7 @@ describe('Program Rule Variables corner cases', () => {
                 programStageId: 'A03MvHHogjR',
                 status: 'ACTIVE',
                 trackedEntityInstanceId: 'vCGpQAWG17I',
-                occurredAt: '2021-05-31T00:00:00.000',
+                occurredAt: '2021-05-31T00:00:00.000Z',
             },
         ];
         const programRuleVariables = [
@@ -417,7 +424,7 @@ describe('Program Rule Variables corner cases', () => {
         ];
 
         // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             selectedOrgUnit: orgUnit,
             optionSets,
@@ -495,7 +502,7 @@ describe('Program Rule Variables corner cases', () => {
                 programStageId: 'A03MvHHogjR',
                 status: 'ACTIVE',
                 trackedEntityInstanceId: 'vCGpQAWG17I',
-                occurredAt: '2021-05-31T00:00:00.000',
+                occurredAt: '2021-05-31T00:00:00.000Z',
             },
         ];
         const programRuleVariables = [
@@ -533,7 +540,7 @@ describe('Program Rule Variables corner cases', () => {
         ];
 
         // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             selectedOrgUnit: orgUnit,
             optionSets,
@@ -610,7 +617,7 @@ describe('Program Rule Variables corner cases', () => {
                 programStageId: 'A03MvHHogjR',
                 status: 'ACTIVE',
                 trackedEntityInstanceId: 'vCGpQAWG17I',
-                occurredAt: '2021-05-31T00:00:00.000',
+                occurredAt: '2021-05-31T00:00:00.000Z',
             },
         ];
         const programRuleVariables = [
@@ -648,7 +655,7 @@ describe('Program Rule Variables corner cases', () => {
         ];
 
         // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             selectedOrgUnit: orgUnit,
             optionSets,
@@ -686,7 +693,7 @@ describe('Program Rule Variables corner cases', () => {
         ];
 
         // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             selectedOrgUnit: orgUnit,
             optionSets,
@@ -744,7 +751,7 @@ describe('Program Rule Variables corner cases', () => {
         const currentEvent = undefined;
 
         // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             trackedEntityAttributes,
             selectedEntity: teiValues,

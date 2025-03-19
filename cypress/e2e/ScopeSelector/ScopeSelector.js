@@ -112,7 +112,7 @@ When('you select the first entity from the table', () => {
 });
 
 Then('you can see the view event page', () => {
-    cy.url().should('include', 'viewEvent?viewEventId');
+    cy.url().should('include', 'viewEventId');
 });
 
 Given('you land on a main page with an invalid program id', () => {
@@ -131,7 +131,7 @@ Then('you should see error message', () => {
 });
 
 Given('you land on a view event page from the url', () => {
-    cy.visit('/#/viewEvent?viewEventId=a969f7a3bf1');
+    cy.visit('/#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=a969f7a3bf1');
 });
 
 Given('you are in the new event page with no selections made', () => {
@@ -208,7 +208,7 @@ Then('you should be taken to the main page with only program selected', () => {
 });
 
 Given('you land on a view event page with an invalid id', () => {
-    cy.visit('/#/viewEvent?viewEventId=invalid');
+    cy.visit('/#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=invalid');
 });
 
 When('you click the find button', () => {

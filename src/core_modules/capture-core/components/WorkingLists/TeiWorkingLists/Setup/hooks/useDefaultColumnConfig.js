@@ -5,13 +5,16 @@ import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram, type DataElement } from '../../../../../metaData';
 import type { MainColumnConfig, MetadataColumnConfig, TeiWorkingListsColumnConfigs } from '../../types';
 
-const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
+const getMainConfig = (hasDisplayInReportsAttributes: boolean, trackedEntityName: string): Array<MainColumnConfig> =>
     [
         {
             id: 'orgUnit',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: i18n.t('Organisation unit'),
+            header: i18n.t('{{trackedEntityName}} organisation unit', {
+                trackedEntityName,
+                interpolation: { escapeValue: false },
+            }),
         },
         {
             id: 'createdAt',
@@ -53,11 +56,18 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
                     visible: true,
                     type: dataElementTypes.DATE,
                     header:
-                          programStage.stageForm.getLabel('scheduledAt') ||
-                          i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
+                        programStage.stageForm.getLabel('scheduledAt') ||
+                        i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
                 },
             ]
             : []),
+        {
+            id: ADDITIONAL_FILTERS.orgUnit,
+            visible: true,
+            type: dataElementTypes.ORGANISATION_UNIT,
+            header: ADDITIONAL_FILTERS_LABELS.orgUnit,
+            apiViewName: 'eventOrgUnit',
+        },
         ...(programStage.enableUserAssignment
             ? [
                 {
@@ -109,12 +119,12 @@ export const useDefaultColumnConfig = (
     programStageId: ?string,
 ): TeiWorkingListsColumnConfigs =>
     useMemo(() => {
-        const { attributes, stages } = program;
+        const { attributes, stages, trackedEntityType } = program;
         const programStage = programStageId && stages.get(programStageId);
         const hasDisplayInReportsAttributes = attributes.some(attribute => attribute.displayInReports);
 
         const defaultColumns = [
-            ...getMainConfig(hasDisplayInReportsAttributes),
+            ...getMainConfig(hasDisplayInReportsAttributes, trackedEntityType?.name),
             ...getTEIMetaDataConfig(attributes, orgUnitId),
         ];
 

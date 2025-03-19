@@ -141,19 +141,27 @@ const isOptionSetFilter = (type: $Keys<typeof filterTypesObject>, filter: any) =
     return filter.in;
 };
 
-const getSortOrder = (order: ?string) => {
-    const sortOrderParts = order && order.split(':');
-    if (!sortOrderParts || sortOrderParts.length < 2) {
-        return {
-            sortById: 'occurredAt',
-            sortByDirection: 'desc',
-        };
+const getSortOrder = (
+    order: ?string,
+    columnsMetaForDataFetching?: ColumnsMetaForDataFetching,
+) => {
+    const [sortById, sortByDirection] = order?.split(':') ?? [];
+
+    if (!sortById || !sortByDirection) {
+        return { sortById: 'occurredAt', sortByDirection: 'desc' };
     }
 
-    return {
-        sortById: sortOrderParts[0],
-        sortByDirection: sortOrderParts[1],
-    };
+    const sortByColumn = columnsMetaForDataFetching && (
+        [...columnsMetaForDataFetching.entries()]
+            .find(([, { apiName }]) => apiName === sortById)?.[1]
+        ?? columnsMetaForDataFetching.get(sortById)
+    );
+
+    if (!sortByColumn?.id) {
+        return { sortById: 'occurredAt', sortByDirection: 'desc' };
+    }
+
+    return { sortById: sortByColumn.id, sortByDirection };
 };
 
 const getDataElementFilters = (
@@ -227,7 +235,7 @@ export async function convertToClientConfig(
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     querySingleResource: QuerySingleResource,
 ): Promise<ClientConfig> {
-    const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria && eventQueryCriteria.order);
+    const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria && eventQueryCriteria.order, columnsMetaForDataFetching);
     const filters = [
         ...getDataElementFilters(eventQueryCriteria && eventQueryCriteria.dataFilters, columnsMetaForDataFetching),
         ...(await getMainDataFilters(eventQueryCriteria, columnsMetaForDataFetching, querySingleResource)),

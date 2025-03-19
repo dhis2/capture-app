@@ -11,7 +11,7 @@ import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoa
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
-import { rulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
 
 function setLogLevel() {
     const levels = {
@@ -130,10 +130,10 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function, m
 }
 
 async function initializeSystemSettingsAsync(
-    uiLocale: string,
     systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, },
+    userSettings: { uiLocale: string, captureScope: Array<{ id: string }>, searchScope: Array<{id: string}> },
 ) {
-    const systemSettingsCacheData = await cacheSystemSettings(uiLocale, systemSettings);
+    const systemSettingsCacheData = await cacheSystemSettings(systemSettings, userSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
@@ -144,16 +144,18 @@ export async function initializeAsync(
 ) {
     setLogLevel();
 
-    const userSettings = await onQueryApi({
-        resource: 'userSettings',
-    });
-    const currentUser = await onQueryApi({
+    const {
+        id: currentUserId,
+        userRoles,
+        organisationUnits: captureScope,
+        teiSearchOrganisationUnits: searchScope,
+        settings: userSettings,
+    } = await onQueryApi({
         resource: 'me',
         params: {
-            fields: 'id,userRoles',
+            fields: 'id,userRoles,organisationUnits,teiSearchOrganisationUnits,settings',
         },
     });
-    rulesEngine.setSelectedUserRoles(currentUser.userRoles.map(({ id }) => id));
 
     const systemSettings = await onQueryApi({
         resource: 'system/info',
@@ -162,9 +164,20 @@ export async function initializeAsync(
         },
     });
 
+    // initialize rule engine
+    let ruleEngineSettings;
+    try {
+        ruleEngineSettings = await onQueryApi({
+            resource: 'dataStore/capture/ruleEngine',
+        });
+    } catch {
+        ruleEngineSettings = { version: 'default' };
+    }
+    initRulesEngine(ruleEngineSettings.version, userRoles);
+
     // initialize storage controllers
     try {
-        await initControllersAsync(onCacheExpired, currentUser);
+        await initControllersAsync(onCacheExpired, currentUserId);
     } catch (error) {
         throw new DisplayException(i18n.t(
             'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
@@ -175,9 +188,8 @@ export async function initializeAsync(
     const uiLocale = userSettings.keyUiLocale;
     const dbLocale = userSettings.keyDbLocale;
     await setLocaleDataAsync(uiLocale);
-
     // initialize system settings
-    await initializeSystemSettingsAsync(uiLocale, systemSettings);
+    await initializeSystemSettingsAsync(systemSettings, { uiLocale, captureScope, searchScope });
 
     // initialize metadata
     await initializeMetaDataAsync(dbLocale, onQueryApi, minorServerVersion);

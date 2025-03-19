@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-12T09:38:57.012Z\n"
-"PO-Revision-Date: 2025-03-12T09:38:57.012Z\n"
+"POT-Creation-Date: 2025-03-14T11:31:23.626Z\n"
+"PO-Revision-Date: 2025-03-14T11:31:23.626Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -610,18 +610,6 @@ msgstr "Notice"
 msgid "Close the notice"
 msgstr "Close the notice"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "Program with id \"{{programId}}\" does not exist"
-
-msgid "An error occurred while fetching enrollments. Please enter a valid url."
-msgstr "An error occurred while fetching enrollments. Please enter a valid url."
-
 msgid "No feedback for this enrollment yet"
 msgstr "No feedback for this enrollment yet"
 
@@ -699,6 +687,18 @@ msgstr "Create a new event in this program."
 
 msgid "View working list in this program."
 msgstr "View working list in this program."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Program with id \"{{programId}}\" does not exist"
+
+msgid "An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
@@ -1728,6 +1728,9 @@ msgstr "Delete events"
 
 msgid "This cannot be undone. Are you sure you want to delete the selected events?"
 msgstr "This cannot be undone. Are you sure you want to delete the selected events?"
+
+msgid "{{trackedEntityName}} organisation unit"
+msgstr "{{trackedEntityName}} organisation unit"
 
 msgid "Registration Date"
 msgstr "Registration Date"
