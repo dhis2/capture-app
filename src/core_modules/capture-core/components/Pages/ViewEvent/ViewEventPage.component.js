@@ -11,10 +11,9 @@ import { useLocationQuery } from '../../../utils/routing';
 type Props = {
   isUserInteractionInProgress: boolean,
   showAddRelationship: boolean,
-  isReadOnly: boolean,
 };
 
-export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship, isReadOnly }: Props) => {
+export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const { orgUnitId } = useLocationQuery();
     const { selectedCategories, programId } = useSelector(({ currentSelections }) => ({
@@ -28,7 +27,6 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRel
                 programId={programId}
                 orgUnitId={orgUnitId}
                 selectedCategories={selectedCategories}
-                isReadOnly={isReadOnly}
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 formIsOpen
             />
