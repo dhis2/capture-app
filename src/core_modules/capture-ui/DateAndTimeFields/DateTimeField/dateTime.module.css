@@ -4,6 +4,7 @@
 
 .fieldsContainerVertical {
     flex-direction: column;
+    align-items: center;
 }
 
 .formControl {
