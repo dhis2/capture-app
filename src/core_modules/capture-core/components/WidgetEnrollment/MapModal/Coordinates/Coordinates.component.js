@@ -28,9 +28,9 @@ const styles = (theme: Theme) => ({
         flexGrow: 1,
     },
     fieldButton: {
-        height: '42px !important',
-        width: 42,
-        borderRadius: '0 !important',
+        height: '40px',
+        width: '40px',
+        borderRadius: '0',
     },
     errorContainer: {
         backgroundColor: theme.palette.error.lighter,

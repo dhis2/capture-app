@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { IconButton } from 'capture-ui';
+import { IconCross24 } from '@dhis2/ui';
 import classNames from 'classnames';
 import defaultClasses from './dateTime.module.css';
 import { orientations } from '../../constants/orientations.const';
@@ -25,6 +27,8 @@ type Props = {
     timeLabel: string,
     innerMessage: Object,
     locale?: string,
+    shrinkDisabled: boolean,
+    disabled: boolean,
 };
 
 type State = {
@@ -119,7 +123,22 @@ export class DateTimeField extends Component<Props, State> {
         });
     }
 
+    handleClear = () => {
+        this.props.onBlur(null);
+    }
+
     getValue = () => this.props.value || {};
+
+    renderClearButton = () => (
+        <IconButton
+            style={{ height: '40px', width: '40px', borderRadius: '0' }}
+            disabled={!!this.props.disabled}
+            onClick={this.handleClear}
+        >
+            <IconCross24 />
+        </IconButton>
+    );
+
 
     render() {
         const {
@@ -151,9 +170,9 @@ export class DateTimeField extends Component<Props, State> {
                 <div
                     className={classNames(defaultClasses.fieldsContainer, { [defaultClasses.fieldsContainerVertical]: isVertical })}
                 >
+                    {isVertical ? this.renderClearButton() : null}
                     <div style={dateStyle}>
-                        {/* $FlowFixMe[cannot-spread-inexact] automated comment
-                          */}
+                        {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                         <DateTimeDate
                             value={dateValue}
                             maxWidth={dateMaxWidth}
@@ -182,6 +201,7 @@ export class DateTimeField extends Component<Props, State> {
                         />
                         <div className={classes?.innerInputError}>{innerMessage?.message?.timeError}</div>
                     </div>
+                    {isVertical ? null : this.renderClearButton()}
                 </div>
             </div>
         );
