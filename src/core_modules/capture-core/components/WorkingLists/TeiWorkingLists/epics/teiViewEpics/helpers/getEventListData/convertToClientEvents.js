@@ -126,6 +126,11 @@ export const convertToClientEvents = (
                 return acc;
             }, {});
 
+        const programOwner = apiTEI.programOwners[0]?.orgUnit;
+        if (programOwner) {
+            record.programOwner = programOwner;
+        }
+
         return {
             id: apiEvent.event,
             record,
