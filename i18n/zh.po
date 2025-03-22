@@ -938,7 +938,7 @@ msgid "Enrollment date"
 msgstr "加入登记日期"
 
 msgid "Incident date"
-msgstr "事件日期"
+msgstr "事件发生日期"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "无法加载加入登记的小部件。请稍后再试"
