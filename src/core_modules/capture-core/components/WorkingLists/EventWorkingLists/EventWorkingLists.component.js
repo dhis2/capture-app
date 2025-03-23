@@ -7,7 +7,7 @@ import { EventWorkingListsReduxProvider } from './ReduxProvider';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
 import type { Props } from './EventWorkingLists.types';
 
-export const EventWorkingLists = ({ storeId, programId, programStageId, orgUnitId }: Props) => {
+export const EventWorkingLists = ({ storeId, programId, programStageId, orgUnitId, selectedTemplateId, onChangeTemplate }: Props) => {
     const { program, programStage, error } = useProgramStageInfo(programStageId, programId);
 
     useEffect(() => {
@@ -29,6 +29,8 @@ export const EventWorkingLists = ({ storeId, programId, programStageId, orgUnitI
                 // $FlowFixMe
                 programStage={programStage}
                 orgUnitId={orgUnitId}
+                selectedTemplateId={selectedTemplateId}
+                onChangeTemplate={onChangeTemplate}
             />
         </div>
     );

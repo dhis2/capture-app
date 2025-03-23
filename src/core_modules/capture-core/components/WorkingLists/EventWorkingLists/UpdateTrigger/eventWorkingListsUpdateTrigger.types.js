@@ -9,6 +9,7 @@ type ExtractedProps = $ReadOnly<{|
     lastTransactionOnListDataRefresh?: number,
     onLoadView: Function,
     onUpdateList: Function,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
 |}>;
 
 type RestProps = $Rest<EventWorkingListsRowMenuSetupOutputProps & { lastIdDeleted: string, lastTransactionOnListDataRefresh: number, listDataRefreshTimestamp: number },
@@ -25,4 +26,5 @@ export type EventWorkingListsUpdateTriggerOutputProps = $ReadOnly<{|
     forceUpdateOnMount: boolean,
     onLoadView: LoadView,
     onUpdateList: UpdateList,
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
 |}>;
