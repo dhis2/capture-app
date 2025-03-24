@@ -102,7 +102,6 @@ class Index extends React.Component<Props> {
 
     renderHeaderRow(visibleColumns: Array<Column>) {
         const { classes, sortById, sortByDirection, dataSource, onSelectAll, allRowsAreSelected } = this.props;
-        console.log('visibleColumns', visibleColumns);
 
         const getSortDirection = (column) => {
             if (column.sortDisabled) {

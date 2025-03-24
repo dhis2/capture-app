@@ -128,7 +128,7 @@ export const convertToClientEvents = (
 
         const programOwner = apiTEI.programOwners[0]?.orgUnit;
         if (programOwner) {
-            record.programOwner = programOwner;
+            record.programOwnerId = programOwner;
         }
 
         return {

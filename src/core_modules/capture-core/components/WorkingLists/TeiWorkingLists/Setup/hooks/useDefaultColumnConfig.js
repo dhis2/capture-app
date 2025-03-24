@@ -8,11 +8,12 @@ import type { MainColumnConfig, MetadataColumnConfig, TeiWorkingListsColumnConfi
 const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
     [
         {
-            id: 'programOwner',
+            id: 'programOwnerId',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
             header: i18n.t('Owner organisation unit'),
             sortDisabled: true,
+            apiViewName: 'programOwner',
         },
         {
             id: 'createdAt',
