@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-17T15:42:27.630Z\n"
+"POT-Creation-Date: 2025-03-14T11:31:23.626Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -601,19 +601,6 @@ msgstr "注意"
 msgid "Close the notice"
 msgstr "关闭通知"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "ID为“ {{enrollmentId}}”的登记不存在"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "ID 为“{{programId}}”的程序不存在"
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr "获取注册时出错。请输入有效网址。"
-
 msgid "No feedback for this enrollment yet"
 msgstr "此报名尚无反馈"
 
@@ -687,6 +674,19 @@ msgstr "在此项目中创建一个新事件。"
 
 msgid "View working list in this program."
 msgstr "查看此项目中的工作清单。"
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "ID为“ {{enrollmentId}}”的登记不存在"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "ID 为“{{programId}}”的项目不存在"
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "获取注册时出错。请输入有效网址。"
 
 msgid "Page is missing required values from URL"
 msgstr "页面缺少 URL 中的必需值"
@@ -1040,7 +1040,7 @@ msgid "Create saved list"
 msgstr "创建保存列表"
 
 msgid "Create new in another program"
-msgstr "在另一个程序中创建新的"
+msgstr "在另一个项目中创建新的"
 
 msgid "Create new event"
 msgstr "创建新事件"
@@ -1184,10 +1184,10 @@ msgid ""
 msgstr "选择登记所有权应转移到的机构。"
 
 msgid "Enrollment date"
-msgstr "加入日期"
+msgstr "登记日期"
 
 msgid "Incident date"
-msgstr "事件日期"
+msgstr "事件发生日期"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr "无法加载报名的小部件。请稍后再试"
@@ -1226,13 +1226,13 @@ msgid "program or stage is invalid"
 msgstr "项目或阶段无效"
 
 msgid "Notes about this enrollment"
-msgstr "加入须知"
+msgstr "报名登记须知"
 
 msgid "Write a note about this enrollment"
-msgstr "撰写有关此加入的说明"
+msgstr "撰写有关此报名登记的说明"
 
 msgid "This enrollment doesn't have any notes"
-msgstr "本次加入没有任何说明"
+msgstr "本次报名登记没有任何说明"
 
 msgid "Error"
 msgstr "错误"
@@ -1318,7 +1318,7 @@ msgid "Write a note about this scheduled event"
 msgstr "撰写关于此预定活动的说明"
 
 msgid "Program or stage is invalid"
-msgstr "程序或阶段无效"
+msgstr "项目或活动阶段无效"
 
 msgid "Save note"
 msgstr "保存笔记"
@@ -1682,7 +1682,7 @@ msgid "Inactive"
 msgstr "闲置"
 
 msgid "Enrollment status"
-msgstr "加入状态"
+msgstr "报名登记状态"
 
 msgid "Follow up"
 msgstr "后续跟踪"
