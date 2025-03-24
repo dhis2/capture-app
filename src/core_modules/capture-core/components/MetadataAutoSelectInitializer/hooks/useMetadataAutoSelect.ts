@@ -1,4 +1,3 @@
-// @flow
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
@@ -6,12 +5,27 @@ import { getUserStorageController, userStores } from '../../../storageController
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { useOrgUnitAutoSelect } from '../../../dataQueries';
 
-const getAllPrograms = () => {
+type Program = {
+    id: string;
+    access: {
+        data: {
+            read: boolean;
+        };
+    };
+};
+
+const getAllPrograms = (): Promise<Program[]> => {
     const userStorageController = getUserStorageController();
     return userStorageController.getAll(userStores.PROGRAMS, {
-        predicate: ({ access }) => access.data.read,
-        project: ({ id }) => ({ id }),
+        predicate: ({ access }: Program) => access.data.read,
+        project: ({ id }: Program) => ({ id }),
     });
+};
+
+type UrlParams = {
+    programId?: string | null;
+    orgUnitId?: string | null;
+    [key: string]: string | null | undefined;
 };
 
 export const useMetadataAutoSelect = () => {
@@ -34,7 +48,7 @@ export const useMetadataAutoSelect = () => {
     const { isLoading: loadingOrgUnits, data: searchOrgUnits } = useOrgUnitAutoSelect(queryOptions);
 
     const updateUrlIfApplicable = useCallback(() => {
-        const paramsToAdd = {
+        const paramsToAdd: UrlParams = {
             programId: null,
             orgUnitId: null,
         };
