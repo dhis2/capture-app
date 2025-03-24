@@ -51,8 +51,6 @@ export type Enrollment = {
     +enrolledAt?: string,
     +occurredAt?: string,
     +enrollmentId?: string,
-    +programName?: string,
-    +enrollmentStatus?: string,
 };
 
 export type Option = {

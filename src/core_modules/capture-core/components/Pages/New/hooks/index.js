@@ -1,1 +1,1 @@
-export { useTrackedEntityAttributes } from './useTrackedEntityAttributes';
+export { useTrackedEntityInstances } from './useTrackedEntityInstances';

@@ -11,11 +11,6 @@ import {
 } from '../../metaData';
 import { getApplicableRuleEffectsForTrackerProgram } from '..';
 
-const groups = [
-    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
-    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
-];
-
 const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [
     {
         id: 'effectId',
@@ -25,8 +20,8 @@ const mockGetProgramRuleEffects = jest.fn().mockImplementation(() => [
 ]);
 
 const mockOptionSet = new OptionSet('optionSet1', [new Option('option1', 'opt1')]);
-jest.mock('../RuleEngine/RuleEngine', () => ({
-    RuleEngine: jest
+jest.mock('@dhis2/rules-engine-javascript/build/cjs/RulesEngine', () => ({
+    RulesEngine: jest
         .fn()
         .mockImplementation(() => ({ getProgramRuleEffects: (...args) => mockGetProgramRuleEffects(...args) })),
 }));
@@ -72,7 +67,7 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
         },
     ];
 
-    const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC', groups };
+    const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC' };
 
     const enrollmentData = {
         enrolledAt: '2021-05-31T00:00:00.000',
@@ -109,8 +104,6 @@ describe('getApplicableRuleEffectsForTrackerProgram', () => {
             });
             foundation.addSection(section);
         });
-
-        stage.dataElements = stage.stageForm.getElements();
     });
 
     const program = new TrackerProgram((initProgram) => {

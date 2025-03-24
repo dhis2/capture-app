@@ -38,8 +38,6 @@ export const enrollmentPageActionTypes = {
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
     UPDATE_TEI_DISPLAY_NAME: 'EnrollmentPage.UpdateTeiDisplayName',
     UPDATE_ENROLLMENT_DATE: 'EnrollmentPage.UpdateEnrollmentDate',
-
-    BREAK_THE_GLASS_SUCCESS: 'EnrollmentPage.BreakTheGlassSuccess',
 };
 
 
@@ -83,10 +81,10 @@ export const resetTeiId = () =>
 export const fetchTei = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI)(payload);
 
-export const verifyFetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string, programOwners: Array<{ orgUnit: string, program: string}> }) =>
+export const verifyFetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string }) =>
     actionCreator(enrollmentPageActionTypes.VERIFY_FETCH_TEI_SUCCESS)(payload);
 
-export const fetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string, programOwners: Array<{ orgUnit: string, program: string}> }) =>
+export const fetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string }) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI_SUCCESS)(payload);
 
 export const fetchTeiError = (teiId: string) =>
@@ -147,6 +145,3 @@ export const updateTeiDisplayName = (teiDisplayName: string) =>
 
 export const updateEnrollmentDate = ({ enrollmentId, enrollmentDate }: { enrollmentId: string, enrollmentDate: string }) =>
     actionCreator(enrollmentPageActionTypes.UPDATE_ENROLLMENT_DATE)({ enrollmentId, enrollmentDate });
-
-export const breakTheGlassSuccess = ({ teiId, programId }: { teiId: string, programId: string }) =>
-    actionCreator(enrollmentPageActionTypes.BREAK_THE_GLASS_SUCCESS)({ teiId, programId });

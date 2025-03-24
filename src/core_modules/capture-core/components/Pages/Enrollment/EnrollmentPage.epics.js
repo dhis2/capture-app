@@ -1,8 +1,9 @@
 // @flow
 import { ofType } from 'redux-observable';
 import { catchError, concatMap, map, filter } from 'rxjs/operators';
-import { from, EMPTY } from 'rxjs';
+import { from, of, EMPTY } from 'rxjs';
 import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import {
     enrollmentPageActionTypes,
     resetEnrollmentId,
@@ -18,21 +19,26 @@ import {
     commitNonTrackerProgramId,
     programIdError,
     fetchEnrollments,
+    verifyFetchedEnrollments,
+    saveEnrollments,
     fetchEnrollmentsError,
     showErrorViewOnEnrollmentPage,
     clearErrorView,
-} from '../EnrollmentPage.actions';
-import { enrollmentAccessLevels, selectionStatus } from '../EnrollmentPage.constants';
-import { buildUrlQueryString, getLocationQuery } from '../../../../utils/routing';
-import { deriveTeiName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
-import { getScopeInfo } from '../../../../metaData';
-import { scopeTypes } from '../../../../metaData/helpers/constants';
+} from './EnrollmentPage.actions';
+import { enrollmentAccessLevels, serverErrorMessages, selectionStatus } from './EnrollmentPage.constants';
+import { buildUrlQueryString, getLocationQuery } from '../../../utils/routing';
+import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { getScopeInfo } from '../../../metaData';
+import { scopeTypes } from '../../../metaData/helpers/constants';
+
+const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
+    moment.utc(b.enrolledAt).diff(moment.utc(a.enrolledAt)));
 
 const teiQuery = id => ({
     resource: 'tracker/trackedEntities',
     id,
     params: {
-        fields: ['attributes', 'trackedEntityType', 'programOwners'],
+        fields: ['attributes', 'trackedEntityType'],
     },
 });
 
@@ -41,6 +47,15 @@ const enrollmentIdQuery = enrollmentId => ({
     id: enrollmentId,
     params: {
         fields: ['trackedEntity', 'program'],
+    },
+});
+
+const enrollmentsQuery = (teiId, programId) => ({
+    resource: 'tracker/trackedEntities',
+    id: teiId,
+    params: {
+        program: programId,
+        fields: ['enrollments'],
     },
 });
 
@@ -167,14 +182,13 @@ export const fetchTeiIdEpic = (action$: InputObservable, store: ReduxStore, { qu
     action$.pipe(
         ofType(enrollmentPageActionTypes.FETCH_TEI),
         concatMap(({ payload: { teiId, programId } }) => from(querySingleResource(teiQuery(teiId))
-            .then(({ attributes, trackedEntityType, programOwners }) => {
+            .then(({ attributes, trackedEntityType }) => {
                 const teiDisplayName = deriveTeiName(attributes, trackedEntityType, teiId);
                 return verifyFetchTeiSuccess({
                     teiDisplayName,
                     tetId: trackedEntityType,
                     teiId,
                     programId,
-                    programOwners,
                 });
             })
             .catch(() => fetchTeiError(teiId)))),
@@ -233,6 +247,7 @@ export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxSto
             // Update url
             const { teiId, programId } = store.value.enrollmentPage;
             navigate(`/enrollment?${buildUrlQueryString({ ...getLocationQuery(), teiId, programId })}`);
+
             if (teiIdReady(store) && programIdReady(store)) {
                 return fetchEnrollments();
             } else if (enrollmentIdReady(store) && teiIdReady(store)) {
@@ -242,6 +257,38 @@ export const teiOrProgramChangeEpic = (action$: InputObservable, store: ReduxSto
             return null;
         }),
         filter(action => action),
+    );
+
+export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
+        concatMap(() => {
+            const { teiId, programId } = store.value.enrollmentPage;
+            return from(querySingleResource(enrollmentsQuery(teiId, programId)))
+                .pipe(
+                    map(({ enrollments }) => {
+                        const enrollmentsSortedByDate = sortByDate(enrollments
+                            .filter(enrollment => enrollment.program === programId));
+                        return saveEnrollments({ enrollments: enrollmentsSortedByDate });
+                    }),
+                    catchError((error) => {
+                        if (error.message) {
+                            if (error.message.includes(serverErrorMessages.OWNERSHIP_ACCESS_PARTIALLY_DENIED)) {
+                                return of(fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
+                            } else if (error.message.includes(serverErrorMessages.OWNERSHIP_ACCESS_DENIED)) {
+                                return of(fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS }));
+                            } else if (error.message.includes(serverErrorMessages.PROGRAM_ACCESS_CLOSED)) {
+                                return of(fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
+                            } else if (error.message.includes(serverErrorMessages.ORGUNIT_OUT_OF_SCOPE)) {
+                                return of(fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS }));
+                            }
+                        }
+                        const errorMessage = i18n.t('An error occurred while fetching enrollments. Please enter a valid url.');
+                        return of(showErrorViewOnEnrollmentPage({ error: errorMessage }));
+                    }),
+                    map(action => verifyFetchedEnrollments({ teiId, programId, action })),
+                );
+        }),
     );
 
 export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: ReduxStore) =>

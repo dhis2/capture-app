@@ -4,11 +4,6 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from '@dhis2/rules-engine-javascript';
 import { variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { TrackerProgram, getProgramThrowIfNotFound } from '../../metaData';
-import {
-    getDataElementsForRulesExecution,
-    getTrackedEntityAttributesForRulesExecution,
-} from '../../rules';
 
 export type CachedProgramIndicator = {
     id: string,
@@ -22,14 +17,6 @@ export type CachedProgramIndicator = {
     shortName: string,
     style?: ?{ color?: ?string },
 };
-
-type ValueTypeReference = { [id: string]: { valueType: string } };
-
-type ProgramData = {|
-    programId: string,
-    dataElements: ValueTypeReference,
-    attributes: ValueTypeReference,
-|};
 
 const staticReplacements = [
     { regExp: new RegExp('([^\\w\\d])(and)([^\\w\\d])', 'gi'), replacement: '$1&&$3' },
@@ -56,7 +43,7 @@ function trimVariableQualifiers(input) {
     return trimmed;
 }
 
-function getDirectAddressedVariable(variableWithCurls, programData) {
+function getDirectAddressedVariable(variableWithCurls, programId) {
     const variableName = trimVariableQualifiers(variableWithCurls);
     const variableNameParts = variableName.split('.');
 
@@ -68,10 +55,10 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
             id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE,
-            valueType: programData.dataElements[variableNameParts[1]].valueType,
+            valueType: 'TEXT',
             programStageId: variableNameParts[0],
             dataElementId: variableNameParts[1],
-            programId: programData.programId,
+            programId,
         };
     } else { // if (variableNameParts.length === 1)
         // This is an attribute
@@ -79,21 +66,21 @@ function getDirectAddressedVariable(variableWithCurls, programData) {
             id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: variableSourceTypes.TEI_ATTRIBUTE,
-            valueType: programData.attributes[variableNameParts[0]].valueType,
+            valueType: 'TEXT',
             trackedEntityAttributeId: variableNameParts[0],
-            programId: programData.programId,
+            programId,
         };
     }
     return newVariableObject;
 }
 
-function getVariables(action, rule, programData) {
+function getVariables(action, rule, programId) {
     const variablesInCondition = getVariablesFromExpression(rule.condition);
     // $FlowFixMe[incompatible-call] automated comment
     const variablesInData = getVariablesFromExpression(action.data);
 
-    const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => getDirectAddressedVariable(variableInCondition, programData));
-    const directAddressedVariablesFromData = variablesInData.map(variableInData => getDirectAddressedVariable(variableInData, programData));
+    const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => getDirectAddressedVariable(variableInCondition, programId));
+    const directAddressedVariablesFromData = variablesInData.map(variableInData => getDirectAddressedVariable(variableInData, programId));
     const variables = [...directAddressedVariablesFromConditions, ...directAddressedVariablesFromData];
 
     return {
@@ -158,10 +145,7 @@ function replacePositiveValueCountIfPresent(rule, action, variableObjectsCurrent
     }
 }
 
-function buildIndicatorRuleAndVariables(
-    programIndicator: CachedProgramIndicator,
-    programData: ProgramData,
-) {
+function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator, programId: string) {
     // $FlowFixMe[prop-missing] automated comment
     const newAction: ProgramRuleAction = {
         id: programIndicator.id,
@@ -184,7 +168,7 @@ function buildIndicatorRuleAndVariables(
         programRuleActions: [newAction],
     };
 
-    const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programData);
+    const { variables, variableObjectsCurrentExpression } = getVariables(newAction, newRule, programId);
 
     // Change expression or data part of the rule to match the program rules execution model
     replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
@@ -202,18 +186,7 @@ function buildIndicatorRuleAndVariables(
 
 export function getRulesAndVariablesFromProgramIndicators(
     cachedProgramIndicators: Array<CachedProgramIndicator>,
-    programId: string,
-) {
-    const program = getProgramThrowIfNotFound(programId);
-    const dataElements = getDataElementsForRulesExecution(program.stages);
-    const attributes = (program instanceof TrackerProgram) ?
-        getTrackedEntityAttributesForRulesExecution(program.attributes) : {};
-    const programData = {
-        programId,
-        dataElements,
-        attributes,
-    };
-
+    programId: string) {
     // Filter out program indicators without an expression
     const validProgramIndicators = cachedProgramIndicators.filter((indicator) => {
         if (!indicator.expression) {
@@ -231,7 +204,7 @@ export function getRulesAndVariablesFromProgramIndicators(
     });
 
     return validProgramIndicators
-        .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programData))
+        .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programId))
         .filter(container => container)
         .reduce((accOneLevelContainer, container) => {
             // $FlowFixMe[incompatible-type] automated comment

@@ -207,7 +207,7 @@ import {
     verifyFetchedEnrollmentsEpic,
     autoSwitchOrgUnitEpic,
     clearErrorViewEpic,
-} from '../core_modules/capture-core/components/Pages/Enrollment/epics';
+} from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,

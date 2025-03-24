@@ -1,5 +1,5 @@
 // @flow
-import { pipe, FEATURES, featureAvailable } from 'capture-core-utils';
+import { pipe } from 'capture-core-utils';
 import { generateUID } from '../../../../utils/uid/generateUID';
 import { dataElementTypes, ProgramStage } from '../../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
@@ -40,8 +40,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         status: convertStatusOut(stageComplete),
         geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
-        // $FlowFixMe
-        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ? {} : { scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE) }),
+        scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE),
         programStage: firstStageMetadata.id,
         program: programId,
         orgUnit: orgUnitId,

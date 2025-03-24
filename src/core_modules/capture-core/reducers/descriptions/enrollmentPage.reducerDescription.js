@@ -96,14 +96,10 @@ export const enrollmentPageDesc = createReducerDescription({
             enrollmentAccessLevel: enrollmentAccessLevels.UNKNOWN_ACCESS,
         }),
     [FETCH_TEI_SUCCESS]:
-        (state, { payload: { tetId, teiDisplayName, programOwners } }) => ({
+        (state, { payload: { tetId, teiDisplayName } }) => ({
             ...state,
             tetId,
             teiDisplayName,
-            programOwners: (programOwners || {}).reduce((acc, { orgUnit, program }) => {
-                acc[program] = orgUnit;
-                return acc;
-            }, {}),
             fetchStatus: {
                 ...state.fetchStatus,
                 teiId: selectionStatus.READY,
