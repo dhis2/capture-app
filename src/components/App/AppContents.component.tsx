@@ -1,0 +1,32 @@
+// @flow
+import React, { memo } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { systemSettingsStore } from '../../core_modules/capture-core/metaDataMemoryStores';
+import { FeedbackBar } from '../../core_modules/capture-core/components/FeedbackBar';
+import { AppPagesLoader } from './AppPagesLoader.component';
+
+const getStyles = (theme: any) => ({
+    app: {
+        fontFamily: theme.typography.fontFamily,
+        fontSize: theme.typography.pxToRem(16),
+    },
+});
+
+type Props = {
+    classes: {
+        app: string;
+    };
+};
+
+const Index = ({ classes }: Props) => (
+    <div
+        className={classes.app}
+        dir={systemSettingsStore.get().dir}
+    >
+        <AppPagesLoader />
+        <FeedbackBar />
+    </div>
+);
+Index.displayName = 'AppContents';
+
+export const AppContents = withStyles(getStyles)(memo(Index));

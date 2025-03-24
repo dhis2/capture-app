@@ -8,7 +8,7 @@ const config = {
     coreApp: true,
 
     entryPoints: {
-        app: './src/index',
+        app: './src/index.tsx',
     },
 };
 

@@ -1,0 +1,11 @@
+import { actionCreator } from '../../core_modules/capture-core/actions/actions.utils';
+
+export const appStartActionTypes = {
+    APP_LOAD: 'AppLoad',
+    APP_LOAD_SUCESS: 'AppLoadSuccess',
+    APP_LOAD_FAILED: 'AppLoadFailed',
+} as const;
+
+export const loadApp = () => actionCreator(appStartActionTypes.APP_LOAD)();
+export const loadAppSuccess = (payload: unknown) => actionCreator(appStartActionTypes.APP_LOAD_SUCESS)(payload);
+export const loadAppFailed = (message: string) => actionCreator(appStartActionTypes.APP_LOAD_FAILED)({ message });
