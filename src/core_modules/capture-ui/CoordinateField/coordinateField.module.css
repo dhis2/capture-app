@@ -83,3 +83,9 @@
 .buttonsContainerVertical {
     display: flex;
 }
+
+.clearIcon {
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 0 !important;
+}

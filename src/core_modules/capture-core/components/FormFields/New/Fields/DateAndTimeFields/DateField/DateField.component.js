@@ -14,64 +14,69 @@ const getStyles = () => ({
         flexDirection: 'column',
         alignItems: 'center',
     },
+    clearButton: {
+        height: '40px',
+        width: '40px',
+        borderRadius: 0,
+    },
 });
 
 type Props = {
     value?: any,
     disabled?: boolean,
     onChange?: (value: any) => void,
-    formHorizontal: string,
     orientation: string,
     classes: {
         fieldsContainer: string,
         fieldsContainerVertical: string,
+        clearButton: string,
     },
 };
 
-class DateFieldPlain extends React.Component<Props> {
-    handleClear = () => {
-        const { onChange } = this.props;
+const DateFieldPlain = (props: Props) => {
+    const {
+        value,
+        onChange,
+        disabled,
+        orientation,
+        classes,
+        ...passOnProps
+    } = props;
+
+    const handleClear = () => {
         onChange && onChange(null);
     };
 
-    renderClearButton = () => (
+    const isVertical = orientation === orientations.VERTICAL;
+
+    const renderClearButton = () => (
         <IconButton
-            style={{ height: '40px', width: '40px', borderRadius: '0' }}
-            disabled={!!this.props.disabled}
-            onClick={this.handleClear}
+            className={classes.clearButton}
+            disabled={!!disabled}
+            onClick={handleClear}
         >
             <IconCross24 />
         </IconButton>
     );
 
-
-    render() {
-        const {
-            value,
-            onChange,
-            disabled,
-            orientation,
-            ...passOnProps
-        } = this.props;
-
-        const isVertical = orientation === orientations.VERTICAL;
-
-        return (
-            <div className={classNames(this.props.classes.fieldsContainer, { [this.props.classes.fieldsContainerVertical]: isVertical })}>
-                {isVertical ? this.renderClearButton() : null}
-                {/*  $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <UIDateField
-                    placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
-                    locale={systemSettingsStore.get().uiLocale}
-                    value={value}
-                    onChange={onChange}
-                    {...passOnProps}
-                />
-                {isVertical ? null : this.renderClearButton()}
-            </div>
-
-        );
-    }
-}
+    return (
+        <div
+            className={classNames(classes.fieldsContainer, {
+                [classes.fieldsContainerVertical]: isVertical,
+            })}
+        >
+            {isVertical && renderClearButton()}
+            {/*  $FlowFixMe[cannot-spread-inexact] automated comment */}
+            <UIDateField
+                placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
+                locale={systemSettingsStore.get().uiLocale}
+                value={value}
+                onChange={onChange}
+                {...passOnProps}
+            />
+            {!isVertical && renderClearButton()}
+        </div>
+    );
+};
 
 export const DateField = withTheme()(withStyles(getStyles)(DateFieldPlain));
