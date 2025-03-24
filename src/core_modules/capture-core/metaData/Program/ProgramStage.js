@@ -4,6 +4,7 @@
 
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule } from '@dhis2/rules-engine-javascript';
+import type { CachedDataElement } from '../../storageControllers/cache.types';
 import type { Icon } from '../Icon';
 import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
@@ -27,6 +28,7 @@ export class ProgramStage {
     _reportDateToUse: string;
     _minDaysFromStart: number;
     _icon: Icon | void;
+    _dataElements: Array<CachedDataElement>;
     _programRules: Array<ProgramRule>;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {
@@ -175,6 +177,14 @@ export class ProgramStage {
 
     set minDaysFromStart(minDays: number = 0) {
         this._minDaysFromStart = minDays;
+    }
+
+    get dataElements(): Array<CachedDataElement> {
+        return this._dataElements;
+    }
+
+    set dataElements(dataElements: Array<CachedDataElement>) {
+        this._dataElements = dataElements;
     }
 
     set programRules(programRules: Array<ProgramRule>) {
