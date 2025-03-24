@@ -12,6 +12,7 @@ const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumn
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
             header: i18n.t('Owner organisation unit'),
+            sortDisabled: true,
         },
         {
             id: 'createdAt',
