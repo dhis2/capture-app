@@ -19,6 +19,8 @@ When converting types:
 
 - NEVER create a new file unless explicitly asked to do so, only rename existing ones
 - Make sure to remove any Flow comments and type annotations
+- Refactor incrementally, convert one file at a time
+- ALWAYS remove the `// @flow` comment from the file before converting it
 
 ### Global Type Declarations
 

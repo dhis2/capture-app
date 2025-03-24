@@ -1,11 +1,10 @@
-// @flow
 import {
     formsValuesDesc,
     formsSectionsFieldsUIDesc,
     formsDesc,
     formsFieldsMiscDesc,
-} from 'capture-core/reducers/descriptions/form.reducerDescription';
-import { eventsDesc, eventsValuesDesc } from 'capture-core/reducers/descriptions/events.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/form.reducerDescription';
+import { eventsDesc, eventsValuesDesc } from '../../core_modules/capture-core/reducers/descriptions/events.reducerDescription';
 import {
     dataEntriesDesc,
     dataEntriesUIDesc,
@@ -15,7 +14,7 @@ import {
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
     dataEntriesInProgressListDesc,
-} from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/dataEntry.reducerDescription';
 import {
     rulesEffectsHiddenFieldsDesc,
     rulesEffectsErrorMessagesDesc,
@@ -28,7 +27,7 @@ import {
     rulesEffectsGeneralErrorsDesc,
     rulesEffectsDisabledFieldsDesc,
     ruleEffectsOptionsVisibilityDesc,
-} from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import {
     workingListsDesc,
     workingListsMetaDesc,
@@ -38,33 +37,33 @@ import {
     workingListsStickyFiltersDesc,
     workingListsTemplatesDesc,
     workingListsListRecordsDesc,
-} from 'capture-core/reducers/descriptions/workingLists';
-import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
-import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
-import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
-import { viewEventPageDesc } from 'capture-core/reducers/descriptions/viewEvent.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/workingLists';
+import { mainPageDesc } from '../../core_modules/capture-core/reducers/descriptions/mainPage.reducerDescription';
+import { newEventPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newEvent.reducerDescription';
+import { editEventPageDesc } from '../../core_modules/capture-core/reducers/descriptions/editEvent.reducerDescription';
+import { viewEventPageDesc } from '../../core_modules/capture-core/reducers/descriptions/viewEvent.reducerDescription';
 import {
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,
-} from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/newRelationship.reducerDescription';
 import {
     organisationUnitDesc,
     organisationUnitRootsDesc,
-} from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
-import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/organisationUnits.reducerDescription';
+import { networkStatusDesc } from '../../core_modules/capture-core/reducers/descriptions/networkStatus.reducerDescription';
 import {
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
-} from 'capture-core/reducers/descriptions/recentlyAddedEvents.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/recentlyAddedEvents.reducerDescription';
 import {
     teiSearchDesc,
-} from 'capture-core/reducers/descriptions/teiSearch.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/teiSearch.reducerDescription';
 
-import { notesDesc } from 'capture-core/reducers/descriptions/notes.reducerDescription';
-import { relationshipsDesc } from 'capture-core/reducers/descriptions/relationships.reducerDescription';
+import { notesDesc } from '../../core_modules/capture-core/reducers/descriptions/notes.reducerDescription';
+import { relationshipsDesc } from '../../core_modules/capture-core/reducers/descriptions/relationships.reducerDescription';
 import {
     generatedUniqueValuesCacheDesc,
-} from 'capture-core/reducers/descriptions/generatedUniqueValuesCache.reducerDescription';
+} from '../../core_modules/capture-core/reducers/descriptions/generatedUniqueValuesCache.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';

@@ -39,6 +39,11 @@ declare global {
         value: ReduxState;
         dispatch: ReduxDispatch;
         getState: () => ReduxState;
+        [Symbol.observable]: () => Observable<ReduxState>;
+    };
+
+    type StateObservable = {
+        value: ReduxState;
     };
 
     type CaptureClientEvent = {
@@ -179,7 +184,7 @@ declare global {
         };
     };
 
-    type Epic = (action$: Observable<unknown>, store: ReduxStore) => Observable<unknown>;
+    type Epic = (action$: Observable<unknown>, store: ReduxStore | StateObservable) => Observable<unknown>;
     type InputObservable = Observable<unknown>;
     type Stream = Observable<unknown>;
 

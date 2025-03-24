@@ -1,14 +1,12 @@
-// @flow
-
 export type CancelablePromise<T> = {
-    promise: Promise<T>,
-    cancel: () => void,
+    promise: Promise<T>;
+    cancel: () => void;
 };
 
-export const makeCancelable = (promise: Promise<any>) => {
+export const makeCancelable = <T>(promise: Promise<T>): CancelablePromise<T> => {
     let hasCanceled = false;
 
-    const wrappedPromise: Promise<any> = new Promise((resolve, reject) => {
+    const wrappedPromise: Promise<T> = new Promise((resolve, reject) => {
         promise.then(
             val => (hasCanceled ? reject({ isCanceled: true }) : resolve(val)),
             error => (hasCanceled ? reject({ isCanceled: true }) : reject(error)),

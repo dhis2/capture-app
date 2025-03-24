@@ -1,6 +1,6 @@
 // @flow
 
-export const buildUrl = (...urlParts: Array<string>) =>
+export const buildUrl = (...urlParts: string[]): string =>
     urlParts
         .map(part => part.replace(/(^\/)|(\/$)/, ''))
         .join('/');

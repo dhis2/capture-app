@@ -1,16 +1,17 @@
-// @flow
 import { convertFormValuesToClient } from '../converters/helpers/formToClient';
 import type { RenderFoundation } from '../metaData';
 import { convertDataEntryValuesToClientValues } from '../components/DataEntry/common/convertDataEntryValuesToClientValues';
 
 export type FieldData = {
-    elementId: string,
-    value: any,
-    valid: boolean,
+    elementId: string;
+    value: unknown;
+    valid: boolean;
 };
 
+type ReduxState = Record<string, any>;
+
 function getDataEntryValidatons(dataEntryMeta: {[key: string]: { isValid: boolean }}) {
-    return Object.keys(dataEntryMeta).reduce((accValidations, key) => {
+    return Object.keys(dataEntryMeta).reduce((accValidations: Record<string, boolean>, key) => {
         accValidations[key] = dataEntryMeta[key].isValid;
         return accValidations;
     }, {});
@@ -19,7 +20,7 @@ function getDataEntryValidatons(dataEntryMeta: {[key: string]: { isValid: boolea
 function getValidDataEntryValues(
     dataEntryValues: { [key: string]: any },
     dataEntryValidations: { [key: string]: boolean }) {
-    return Object.keys(dataEntryValues).reduce((accValidValues, key) => {
+    return Object.keys(dataEntryValues).reduce((accValidValues: Record<string, any>, key) => {
         accValidValues[key] = dataEntryValidations[key] ? dataEntryValues[key] : null;
         return accValidValues;
     }, {});
@@ -37,16 +38,16 @@ function getValidFormValues(formValues: { [key: string]: any }, fieldsValidation
         ), {});
 }
 
-function getFieldsValidationForForm(sectionsFieldsUI: Object, formId: string) {
+function getFieldsValidationForForm(sectionsFieldsUI: Record<string, any>, formId: string) {
     const fieldsUIState = Object.keys(sectionsFieldsUI)
         .filter(sectionKey => sectionKey.startsWith(formId))
-        .reduce((accFormElementsUIState, stateKey) => {
+        .reduce((accFormElementsUIState: Record<string, any>, stateKey) => {
             accFormElementsUIState = { ...accFormElementsUIState, ...sectionsFieldsUI[stateKey] };
             return accFormElementsUIState;
         }, {});
 
     const fieldsValidation = Object.keys(fieldsUIState)
-        .reduce((accFieldsValidation, key) => {
+        .reduce((accFieldsValidation: Record<string, boolean>, key) => {
             accFieldsValidation[key] = fieldsUIState[key].valid;
             return accFieldsValidation;
         }, {});
@@ -58,7 +59,7 @@ export function getCurrentClientValues(
     state: ReduxState,
     foundation: RenderFoundation,
     formId: string,
-    updatedEventField?: ?FieldData) {
+    updatedEventField?: FieldData) {
     const currentFormData = state.formsValues[formId] || {};
     const updatedCurrentFormData = updatedEventField ?
         { ...currentFormData, [updatedEventField.elementId]: updatedEventField.value } :
@@ -95,4 +96,4 @@ export function getCurrentClientMainData(
         );
 
     return dataEntryClientValues;
-}
+} 

@@ -1,4 +1,3 @@
-// @flow
 function sliceArrayIntoGroups(chunks: number, array: Array<any>, size: number) {
     const groups = [];
 
@@ -10,7 +9,7 @@ function sliceArrayIntoGroups(chunks: number, array: Array<any>, size: number) {
     return groups;
 }
 
-export function chunk(array: ?Array<any>, size: number) {
+export function chunk(array: Array<any> | null | undefined, size: number) {
     if (!array || array.length === 0) {
         return [];
     }

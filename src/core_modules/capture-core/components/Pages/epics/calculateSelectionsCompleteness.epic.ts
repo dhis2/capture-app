@@ -1,6 +1,5 @@
-// @flow
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { ofType } from 'redux-observable';
+import { ofType, StateObservable } from 'redux-observable';
 import { filter, map } from 'rxjs/operators';
 import {
     calculateSelectionsCompleteness,
@@ -11,16 +10,18 @@ import { newPageActionTypes } from '../New/NewPage.actions';
 import { viewEventPageActionTypes } from '../ViewEvent/ViewEventPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
+import { Observable } from 'rxjs';
 
-type CurrentSelectionsState = {
-    programId?: ?string,
-    orgUnitId?: ?string,
-    showaccesible: boolean,
-    categories?: ?Object,
-    categoryCheckInProgress?: ?boolean,
+type InputAction = {
+    type: string;
+    payload?: {
+        triggeringActionType?: string;
+    };
 };
 
-const calculateCompleteStatus = (state: CurrentSelectionsState) => {
+type InputObservable = Observable<InputAction>;
+
+const calculateCompleteStatus = (state: ReduxState['currentSelections']): boolean => {
     if (!state.orgUnitId || !state.programId || state.categoryCheckInProgress) {
         return false;
     }
@@ -53,9 +54,9 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map((action) => {
-            const isComplete = calculateCompleteStatus(store.value.currentSelections);
+            const isComplete = calculateCompleteStatus(store.getState().currentSelections);
             return calculateSelectionsCompleteness(
                 isComplete,
-                (action.payload && action.payload.triggeringActionType) || action.type,
+                (action.payload?.triggeringActionType) || action.type,
             );
-        }));
+        })); 

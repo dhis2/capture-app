@@ -1,11 +1,23 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { getFeedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescriptionGetter';
 import { getMainStorageController } from 'capture-core/storageControllers';
 import { appStartActionTypes } from '../../components/AppStart';
 
+type FeedbackMessage = {
+    title: string;
+    content: string;
+};
+
+type FeedbackItem = {
+    message: FeedbackMessage;
+    feedbackType: 'ERROR' | 'SUCCESS' | 'INFO' | 'WARNING';
+    displayType: 'dialog' | 'snackbar';
+};
+
+type FeedbackState = FeedbackItem[];
+
 export const feedbackDesc = getFeedbackDesc({
-    [appStartActionTypes.APP_LOAD_SUCESS]: (state) => {
+    [appStartActionTypes.APP_LOAD_SUCESS]: (state: FeedbackState) => {
         const storageController = getMainStorageController();
         if (storageController.Adapters[0] !== storageController.adapterType) {
             return [

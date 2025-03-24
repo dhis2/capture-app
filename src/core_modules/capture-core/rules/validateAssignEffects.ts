@@ -1,4 +1,3 @@
-// @flow
 import { errorCreator } from 'capture-core-utils';
 import { effectActions } from '@dhis2/rules-engine-javascript';
 import log from 'loglevel';
@@ -10,7 +9,7 @@ import type { Validations } from '../utils/validation/validateValue';
 import { validateValue } from '../utils/validation/validateValue';
 
 export type AssignOutputEffectWithValidations = {
-    [metaDataId: string]: Array<AssignOutputEffect & Validations>,
+    [metaDataId: string]: Array<AssignOutputEffect & Validations>;
 };
 
 export const validateAssignEffects = async ({
@@ -19,12 +18,12 @@ export const validateAssignEffects = async ({
     querySingleResource,
     onGetValidationContext,
 }: {
-    dataElements: Array<DataElement>,
-    effects: Object,
-    querySingleResource: QuerySingleResource,
-    onGetValidationContext?: () => Object,
-}): Promise<?AssignOutputEffectWithValidations> => {
-    const assignEffects: {| [metaDataId: string]: Array<AssignOutputEffect> |} = effects[effectActions.ASSIGN_VALUE];
+    dataElements: Array<DataElement>;
+    effects: Record<string, any>;
+    querySingleResource: QuerySingleResource;
+    onGetValidationContext?: () => Record<string, any>;
+}): Promise<Record<string, any> | null> => {
+    const assignEffects: Record<string, Array<AssignOutputEffect>> = effects[effectActions.ASSIGN_VALUE];
     if (!assignEffects) {
         return effects;
     }
@@ -57,7 +56,7 @@ export const validateAssignEffects = async ({
             );
             return acc;
         }
-    }, Promise.resolve({}));
+    }, Promise.resolve({} as Record<string, Array<AssignOutputEffect & Validations>>));
 
     return { ...effects, [effectActions.ASSIGN_VALUE]: assignEffectsWithValidations };
-};
+}; 
