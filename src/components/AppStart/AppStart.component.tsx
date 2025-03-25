@@ -18,8 +18,8 @@ interface ReduxStore {
     // Add other store properties as needed
 }
 
-export const AppStart: React.FC = () => {
-    const [ready, setReadyStatus] = useState<boolean>(false);
+export const AppStart = () => {
+    const [readyStatus, setReadyStatus] = useState<boolean>(false);
     const [cacheExpired, setCacheExpired] = useState<boolean>(false);
 
     const store = useRef<ReduxStore | null>(null);
@@ -53,7 +53,7 @@ export const AppStart: React.FC = () => {
                 >
                     <Router>
                         {
-                            ready ?
+                            readyStatus ?
                                 <App
                                     store={store.current as ReduxStore}
                                 /> :
