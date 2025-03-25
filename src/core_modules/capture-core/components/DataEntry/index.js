@@ -1,4 +1,5 @@
-// @flow
+// This file is kept for backward compatibility
+// New code should import from the TypeScript files directly
 
 // Components
 export { DataEntry } from './DataEntry.container';
@@ -9,10 +10,8 @@ export { withDataEntryFieldIfApplicable } from './dataEntryField/withDataEntryFi
 export { withBrowserBackWarning } from './withBrowserBackWarning';
 export { withCancelButton } from './withCancelButton';
 export { withSaveHandler } from './withSaveHandler/withSaveHandler';
-export { withFeedbackOutput } from './dataEntryOutput/withFeedbackOutput';
-export { withWarningOutput } from './dataEntryOutput/withWarningOutput';
-export { withErrorOutput } from './dataEntryOutput/withErrorOutput';
-export { withIndicatorOutput } from './dataEntryOutput/withIndicatorOutput';
+export { withFeedbackOutput } from './dataEntryOutput/withFeedbackOutput.tsx';
+export { withIndicatorOutput } from './dataEntryOutput/withIndicatorOutput.tsx';
 export { withCleanUp } from './withCleanUp';
 export { withAskToCreateNew } from './withAskToCreateNew';
 

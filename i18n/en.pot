@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-14T11:31:23.626Z\n"
-"PO-Revision-Date: 2025-03-14T11:31:23.626Z\n"
+"POT-Creation-Date: 2025-03-25T12:47:56.764Z\n"
+"PO-Revision-Date: 2025-03-25T12:47:56.764Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -187,24 +187,6 @@ msgstr "Assigned user"
 
 msgid "Search for user"
 msgstr "Search for user"
-
-msgid "Notes"
-msgstr "Notes"
-
-msgid "Basic info"
-msgstr "Basic info"
-
-msgid "Status"
-msgstr "Status"
-
-msgid "Relationships"
-msgstr "Relationships"
-
-msgid "Assignee"
-msgstr "Assignee"
-
-msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr "Saving to {{programName}} in {{orgUnitName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -893,6 +875,12 @@ msgstr "Feedback"
 msgid "Indicators"
 msgstr "Indicators"
 
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Relationships"
+msgstr "Relationships"
+
 msgid "Warnings"
 msgstr "Warnings"
 
@@ -1091,6 +1079,9 @@ msgstr "You don't have access to assign a user to this event"
 msgid "Assign"
 msgstr "Assign"
 
+msgid "Assignee"
+msgstr "Assignee"
+
 msgid "This program is protected"
 msgstr "This program is protected"
 
@@ -1243,6 +1234,12 @@ msgstr "Add coordinates"
 
 msgid "Add area"
 msgstr "Add area"
+
+msgid "Basic info"
+msgstr "Basic info"
+
+msgid "Status"
+msgstr "Status"
 
 msgid "Please provide an valid organisation unit"
 msgstr "Please provide an valid organisation unit"
