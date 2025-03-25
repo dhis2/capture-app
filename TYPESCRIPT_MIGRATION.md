@@ -146,19 +146,30 @@ const MyComponent: React.FC<MyComponentProps> = ({ name, count = 0, onClick }) =
 };
 ```
 
+3. **Do not explicitly specify return types for components**:
+   - TypeScript can infer the return type, so do not add `React.FC<Props>`.
+   - We've disabled the `@typescript-eslint/explicit-function-return-type` rule for this reason
+   - This keeps the code cleaner and more maintainable
+
+```typescript
+// GOOD: Let TypeScript infer the return type
+const MyComponent = ({ name }) => {
+  return <div>{name}</div>;
+};
+
+// BAD: Don't explicitly specify JSX.Element or React.ReactElement
+const MyComponent = ({ name }: MyComponentProps): JSX.Element => {
+  return <div>{name}</div>;
+};
+```
+
 ### Common TypeScript Patterns for External Libraries
 
 When working with libraries that don't have proper TypeScript types or return complex types:
 
-1. Use type assertions for translation functions:
-```typescript
-// For i18n translation functions that return complex types
-i18n.t('some.translation.key') as string
-```
+1. Use declaration merging to extend library types when needed.
 
-2. Use declaration merging to extend library types when needed.
-
-3. For frequently used untyped dependencies, add them to the global declarations file:
+2. For frequently used untyped dependencies, add them to the global declarations file:
 ```typescript
 // src/declarations.d.ts
 declare module 'some-library' {
@@ -187,6 +198,7 @@ Our ESLint configuration ensures that TypeScript files follow the same coding st
 2. Use TypeScript-specific rules where appropriate (e.g., `@typescript-eslint/indent` instead of `indent`)
 3. Disable Flow-specific rules for TypeScript files
 4. Set `@typescript-eslint/no-explicit-any` to "warn" rather than "error" during the migration phase
+5. Disable `@typescript-eslint/explicit-function-return-type` to avoid requiring explicit return types, especially for React components
 
 The configuration for TypeScript files is in the `.eslintrc` file's `overrides` section. This ensures consistent code style across your codebase during the incremental migration.
 
