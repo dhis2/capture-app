@@ -28,28 +28,28 @@ interface ReduxState {
 }
 
 const getFeedbackOutput = () => {
-    const FeedbackOutputBuilder = class extends React.Component<Props> {
-        getItems = () => {
-            const { feedbackItems } = this.props;
+    // Using function component instead of class component to avoid TypeScript errors
+    const FeedbackOutputComponent = (props: Props) => {
+        const getItems = () => {
+            const { feedbackItems } = props;
             const displayTexts = feedbackItems?.displayTexts || [];
             const displayKeyValuePairs = feedbackItems?.displayKeyValuePairs || [];
             return [...displayTexts, ...displayKeyValuePairs];
-        }
+        };
 
-        render = () => {
-            const feedback = this.getItems();
-            const hasItems = feedback.length > 0;
-            return (
-                <div>
-                    {hasItems &&
-                        <WidgetFeedback feedback={feedback} emptyText={i18n.t('No feedback for this event yet')} />
-                    }
-                </div>
-            );
-        }
+        const feedback = getItems();
+        const hasItems = feedback.length > 0;
+        
+        return (
+            <div>
+                {hasItems &&
+                    <WidgetFeedback feedback={feedback} emptyText={i18n.t('No feedback for this event yet')} />
+                }
+            </div>
+        );
     };
     
-    return FeedbackOutputBuilder;
+    return FeedbackOutputComponent;
 };
 
 const mapStateToProps = (state: ReduxState, props: any) => {

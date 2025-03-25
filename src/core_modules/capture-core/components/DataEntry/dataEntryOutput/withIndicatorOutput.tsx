@@ -28,28 +28,28 @@ interface ReduxState {
 }
 
 const getIndicatorOutput = () => {
-    const IndicatorOutputBuilder = class extends React.Component<Props> {
-        getItems = () => {
-            const { indicatorItems } = this.props;
+    // Using function component instead of class component to avoid TypeScript errors
+    const IndicatorOutputComponent = (props: Props) => {
+        const getItems = () => {
+            const { indicatorItems } = props;
             const displayTexts = indicatorItems?.displayTexts || [];
             const displayKeyValuePairs = indicatorItems?.displayKeyValuePairs || [];
             return [...displayTexts, ...displayKeyValuePairs];
-        }
+        };
 
-        render = () => {
-            const indicators = this.getItems();
-            const hasItems = indicators.length > 0;
-            return (
-                <div>
-                    {hasItems &&
-                        <WidgetIndicator indicators={indicators} emptyText={i18n.t('No indicator output for this event yet')} />
-                    }
-                </div>
-            );
-        }
+        const indicators = getItems();
+        const hasItems = indicators.length > 0;
+        
+        return (
+            <div>
+                {hasItems &&
+                    <WidgetIndicator indicators={indicators} emptyText={i18n.t('No indicator output for this event yet')} />
+                }
+            </div>
+        );
     };
     
-    return IndicatorOutputBuilder;
+    return IndicatorOutputComponent;
 };
 
 const mapStateToProps = (state: ReduxState, props: any) => {
