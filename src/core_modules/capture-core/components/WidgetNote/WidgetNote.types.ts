@@ -1,4 +1,4 @@
-import { NoteType } from './NoteSection/NoteSection.js';
+import { NoteType } from './NoteSection/NoteSection';
 
 export type Props = {
     title: string;

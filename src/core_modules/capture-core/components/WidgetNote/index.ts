@@ -1,2 +1,2 @@
-export { NoteSection } from './NoteSection/NoteSection.js';
-export { WidgetNote } from './WidgetNote.component.js';
+export { NoteSection } from './NoteSection/NoteSection';
+export { WidgetNote } from './WidgetNote.component';
