@@ -39,7 +39,7 @@ const getIndicatorOutput = () => {
 
         const indicators = getItems();
         const hasItems = indicators.length > 0;
-        
+
         return (
             <div>
                 {hasItems &&
@@ -48,7 +48,7 @@ const getIndicatorOutput = () => {
             </div>
         );
     };
-    
+
     return IndicatorOutputComponent;
 };
 

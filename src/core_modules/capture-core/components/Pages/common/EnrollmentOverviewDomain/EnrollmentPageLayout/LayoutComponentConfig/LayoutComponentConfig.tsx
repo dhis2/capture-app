@@ -125,7 +125,9 @@ export const IndicatorWidget: WidgetConfig = {
 
 export const EnrollmentNote: WidgetConfig = {
     Component: WidgetEnrollmentNote,
-    getProps: (): void => {},
+    getProps: (): void => {
+        // Empty function required by interface
+    },
 };
 
 export const ProfileWidget: WidgetConfig = {

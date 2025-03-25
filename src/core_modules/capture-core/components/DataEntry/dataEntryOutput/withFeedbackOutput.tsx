@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
-import { WidgetFeedback } from '../../WidgetFeedback';
-import { FilteredText, FilteredKeyValue } from '../../WidgetFeedback';
+import { WidgetFeedback, FilteredText, FilteredKeyValue } from '../../WidgetFeedback';
 
 interface Props {
     feedbackItems?: {
@@ -39,7 +38,7 @@ const getFeedbackOutput = () => {
 
         const feedback = getItems();
         const hasItems = feedback.length > 0;
-        
+
         return (
             <div>
                 {hasItems &&
@@ -48,7 +47,7 @@ const getFeedbackOutput = () => {
             </div>
         );
     };
-    
+
     return FeedbackOutputComponent;
 };
 
