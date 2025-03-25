@@ -21,7 +21,7 @@ When converting types:
 - Make sure to remove any Flow comments and type annotations
 - Refactor incrementally, convert one file at a time
 - ALWAYS remove the `// @flow` comment from the file before converting it
-
+- Use `any` for types that are not known at the time of writing the code. Do not use `unknown`.
 ### Global Type Declarations
 
 For files like `typeDeclarations.js` that define global types with Flow:

@@ -1,11 +1,10 @@
-import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { ofType, StateObservable, Epic } from 'redux-observable';
+import { programCollection } from '../../../metaDataMemoryStores/programCollection/programCollection';
+import { ofType, Epic } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import {
     resetProgramIdBase,
 } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import { scopeSelectorActionTypes } from '../../ScopeSelector';
-import { Observable } from 'rxjs';
 
 type ReduxState = {
     currentSelections: {

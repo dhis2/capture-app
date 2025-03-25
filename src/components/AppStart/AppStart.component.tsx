@@ -4,10 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 // eslint-disable-next-line import/extensions
 import 'typeface-roboto';
-import { AppLoader } from '../AppLoader';
 import { App } from '../App';
-import { loadApp } from './appStart.actions';
-import { addBeforeUnloadEventListener } from './unload';
 import { CacheExpired } from './CacheExpired.component';
 import { JSSProviderShell } from './JSSProviderShell.component';
 import { theme } from '../../styles/uiTheme';
@@ -18,16 +15,16 @@ export const AppStart = () => {
 
     const store = useRef<ReduxStore | null>(null);
 
-    const handleRunApp = useCallback((storeArg: ReduxStore) => {
-        store.current = storeArg;
-        setReadyStatus(true);
-        storeArg.dispatch(loadApp());
-        addBeforeUnloadEventListener(storeArg);
-    }, []);
+    // const handleRunApp = useCallback((storeArg: ReduxStore) => {
+    //     store.current = storeArg;
+    //     setReadyStatus(true);
+    //     storeArg.dispatch(loadApp());
+    //     addBeforeUnloadEventListener(storeArg);
+    // }, []);
 
-    const handleCacheExpired = useCallback(() => {
-        setCacheExpired(true);
-    }, []);
+    // const handleCacheExpired = useCallback(() => {
+    //     setCacheExpired(true);
+    // }, []);
 
     if (cacheExpired) {
         return <CacheExpired />;
@@ -42,10 +39,11 @@ export const AppStart = () => {
                         {ready ? (
                             <App store={store.current} />
                         ) : (
-                            <AppLoader
-                                onRunApp={handleRunApp}
-                                onCacheExpired={handleCacheExpired}
-                            />
+                            // <AppLoader
+                            //     onRunApp={handleRunApp}
+                            //     onCacheExpired={handleCacheExpired}
+                            // />
+                            <p>Loading...</p>
                         )}
                     </Router>
                 </MuiThemeProvider>

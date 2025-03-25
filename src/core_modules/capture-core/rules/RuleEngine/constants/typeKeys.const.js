@@ -1,5 +1,5 @@
 // @flow
-export const typeKeys = {
+export const typeKeys = Object.freeze({
     TEXT: 'TEXT',
     MULTI_TEXT: 'MULTI_TEXT',
     LONG_TEXT: 'LONG_TEXT',
@@ -24,4 +24,6 @@ export const typeKeys = {
     URL: 'URL',
     FILE_RESOURCE: 'FILE_RESOURCE',
     IMAGE: 'IMAGE',
-};
+} as const);
+
+export type TypeKey = typeof typeKeys[keyof typeof typeKeys];
