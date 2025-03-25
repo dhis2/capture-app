@@ -129,7 +129,7 @@ This means TypeScript will only report errors in `.ts` and `.tsx` files, allowin
 For React components:
 
 1. Use React's TypeScript types:
-   - Function components: `React.FC<Props>`
+   - Function components: Do not add `React.FC<Props>`, but type the props instead.
    - Class components: `React.Component<Props, State>`
    - Hooks: e.g., `useState<T>`, `useRef<T>`, etc.
 
@@ -141,24 +141,24 @@ interface MyComponentProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const MyComponent: React.FC<MyComponentProps> = ({ name, count = 0, onClick }) => {
+const MyComponent = ({ name, count = 0, onClick }: MyComponentProps) => {
   // Component implementation
 };
 ```
 
 3. **Do not explicitly specify return types for components**:
-   - TypeScript can infer the return type, so do not add `React.FC<Props>`.
+   - Type the props and let TypeScript infer the return type.
    - We've disabled the `@typescript-eslint/explicit-function-return-type` rule for this reason
    - This keeps the code cleaner and more maintainable
 
 ```typescript
 // GOOD: Let TypeScript infer the return type
-const MyComponent = ({ name }) => {
+const MyComponent = ({ name }: MyComponentProps) => {
   return <div>{name}</div>;
 };
 
 // BAD: Don't explicitly specify JSX.Element or React.ReactElement
-const MyComponent = ({ name }: MyComponentProps): JSX.Element => {
+const MyComponent = ({ name }: MyComponentProps) => {
   return <div>{name}</div>;
 };
 ```
