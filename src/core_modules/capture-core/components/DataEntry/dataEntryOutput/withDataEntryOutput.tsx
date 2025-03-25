@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface Props {
-    dataEntryOutputs: Array<React.Component<any>>;
+    dataEntryOutputs: Array<React.ReactNode>;
 }
 
 const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: React.ComponentType<any>) =>
