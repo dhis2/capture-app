@@ -1,7 +1,6 @@
-// @flow
-import React, { type ComponentType, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, createStyles } from '@material-ui/core';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import cx from 'classnames';
@@ -12,17 +11,43 @@ import { TextField } from '../../FormFields/New';
 import { convertClientToList } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
 
-const FocusTextField = withFocusSaver()(TextField);
+// Using any type to avoid TypeScript errors with withFocusSaver
+const FocusTextField = withFocusSaver()(TextField) as any;
+
+export type NoteType = {
+    value: string;
+    storedAt: string;
+    note?: string;
+    createdBy?: {
+        firstName: string;
+        surname: string;
+    };
+    [key: string]: any;
+};
 
 type Props = {
-    notes: Array<Object>,
-    handleAddNote: (text: string) => void,
-    placeholder: string,
-    emptyNoteMessage: string,
-    ...CssClasses
+    notes: Array<NoteType>;
+    handleAddNote: (text: string) => void;
+    placeholder: string;
+    emptyNoteMessage: string;
+    classes: {
+        item?: string;
+        wrapper?: string;
+        notesWrapper?: string;
+        editor?: string;
+        emptyNotes?: string;
+        name?: string;
+        lastUpdated?: string;
+        body?: string;
+        newNoteButtonContainer?: string;
+        rightColumn?: string;
+        header?: string;
+        headerText?: string;
+        [key: string]: string | undefined;
+    };
 }
 
-const styles = {
+const styles = createStyles({
     item: {
         padding: spacersNum.dp12,
         marginRight: spacersNum.dp4,
@@ -70,7 +95,7 @@ const styles = {
         display: 'flex',
         gap: '4px',
     },
-};
+});
 
 const NoteSectionPlain = ({
     placeholder,
@@ -83,7 +108,7 @@ const NoteSectionPlain = ({
     const [newNoteValue, setNewNoteValue] = useState('');
     const { fromServerDate } = useTimeZoneConversion();
 
-    const handleChange = useCallback((value) => {
+    const handleChange = useCallback((value: string) => {
         setEditing(true);
         setNewNoteValue(value);
     }, []);
@@ -99,7 +124,7 @@ const NoteSectionPlain = ({
         setEditing(false);
     }, [handleAddNote, newNoteValue]);
 
-    const NoteItem = ({ value, storedAt, createdBy }) => (
+    const NoteItem = ({ value, storedAt, createdBy }: NoteType) => (
         <div data-test="note-item" className={cx(classes.item)}>
             {/* TODO: add avatar */}
             <div className={classes.rightColumn}>
@@ -120,13 +145,12 @@ const NoteSectionPlain = ({
         </div>
     );
 
-
     return (
         <div className={classes.wrapper}>
             <div className={classes.notesWrapper}>
                 {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map(note => <NoteItem key={`note-item-${note.note}-`} {...note} />)
+                    .map(note => <NoteItem key={`note-item-${note.note || ''}-`} {...note} />)
                 }
                 {notes.length === 0 &&
                 <div className={classes.emptyNotes}>
@@ -151,16 +175,16 @@ const NoteSectionPlain = ({
                     onClick={onAddNote}
                     primary
                 >
-                    {i18n.t('Save note')}
+                    {i18n.t('Save note') as React.ReactNode}
                 </Button>
                 <Button
                     dataTest="cancel-note-btn"
                     onClick={onCancel}
                 >
-                    {i18n.t('Cancel')}
+                    {i18n.t('Cancel') as React.ReactNode}
                 </Button>
             </div>}
         </div>);
 };
 
-export const NoteSection: ComponentType<Props> = withStyles(styles)(NoteSectionPlain);
+export const NoteSection = withStyles(styles)(NoteSectionPlain);
