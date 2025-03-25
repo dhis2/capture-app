@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useRef, useCallback } from 'react';
 import { HashRouter as Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,11 +12,17 @@ import { CacheExpired } from './CacheExpired.component';
 import { JSSProviderShell } from './JSSProviderShell.component';
 import { theme } from '../../styles/uiTheme';
 
-export const AppStart = () => {
-    const [ready, setReadyStatus] = useState(false);
-    const [cacheExpired, setCacheExpired] = useState(false);
+// Define a basic type for the Redux store
+interface ReduxStore {
+    dispatch: (action: any) => void;
+    // Add other store properties as needed
+}
 
-    const store: {current: Object} = useRef();
+export const AppStart: React.FC = () => {
+    const [ready, setReadyStatus] = useState<boolean>(false);
+    const [cacheExpired, setCacheExpired] = useState<boolean>(false);
+
+    const store = useRef<ReduxStore | null>(null);
 
     const handleRunApp = useCallback((storeArg: ReduxStore) => {
         store.current = storeArg;
@@ -50,7 +55,7 @@ export const AppStart = () => {
                         {
                             ready ?
                                 <App
-                                    store={store.current}
+                                    store={store.current as ReduxStore}
                                 /> :
                                 <AppLoader
                                     onRunApp={handleRunApp}
@@ -62,4 +67,4 @@ export const AppStart = () => {
             </JSSProviderShell>
         </React.Fragment>
     );
-};
+}; 

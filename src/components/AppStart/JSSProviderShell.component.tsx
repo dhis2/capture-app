@@ -1,27 +1,28 @@
-// @flow
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { JssProvider } from 'react-jss';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { create } from 'jss';
+import { create, JssOptions } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 
 // Change the insertion point for jss styles.
 // For this app the insertion point should be below the css.
 const insertionPoint = document.createElement('noscript');
 insertionPoint.setAttribute('id', 'jss-insertion-point');
-// $FlowFixMe
 document.head.appendChild(insertionPoint);
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
-// $FlowFixMe
-jss.options.insertionPoint = insertionPoint;
-
-type Props = {
-    children: React$Node,
+// Add insertionPoint to JSS options
+(jss as any).options = {
+    ...(jss as any).options || {},
+    insertionPoint
 };
 
-export const JSSProviderShell = ({ children }: Props) => (
+interface JSSProviderShellProps {
+    children: ReactNode;
+}
+
+export const JSSProviderShell: React.FC<JSSProviderShellProps> = ({ children }) => (
     <JssProvider jss={jss} generateId={generateClassName}>
         {children}
     </JssProvider>
-);
+); 

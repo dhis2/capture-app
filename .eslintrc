@@ -62,7 +62,7 @@
         "react/jsx-indent": [2, 4],
         "react/jsx-indent-props": [2, 4],
         "react/prefer-es6-class": [1, "always"],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
         "react/forbid-prop-types": [0],
         "no-param-reassign": 0,
@@ -132,12 +132,27 @@
     },
     "settings": {
         "import/resolver": {
-            "node": { "extensions": [".js", ".mjs"] },
+            "node": { "extensions": [".js", ".mjs", ".ts", ".tsx"] },
             "webpack": {
                 "config": "config/eslint/webpack.config.js"
             },
             "exports": {}
         },
         "import/core-modules": ["rxjs/operators"]
-    }
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "parser": "@typescript-eslint/parser",
+            "plugins": ["@typescript-eslint"],
+            "extends": [
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "rules": {
+                "flowtype/no-types-missing-file-annotation": "off",
+                "flowtype/define-flow-type": "off",
+                "flowtype/require-valid-file-annotation": "off"
+            }
+        }
+    ]
 }
