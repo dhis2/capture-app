@@ -17,7 +17,6 @@ const FocusTextField = withFocusSaver()(TextField) as any;
 export type NoteType = {
     value: string;
     storedAt: string;
-    note?: string;
     createdBy?: {
         firstName: string;
         surname: string;
@@ -150,7 +149,7 @@ const NoteSectionPlain = ({
             <div className={classes.notesWrapper}>
                 {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map(note => <NoteItem key={`note-item-${note.note || ''}-`} {...note} />)
+                    .map(note => <NoteItem key={`note-item-${note.value}-${note.storedAt}`} {...note} />)
                 }
                 {notes.length === 0 &&
                 <div className={classes.emptyNotes}>
