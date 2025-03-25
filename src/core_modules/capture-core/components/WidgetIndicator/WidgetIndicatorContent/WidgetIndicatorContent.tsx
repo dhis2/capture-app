@@ -6,7 +6,7 @@ import {
     ContentTypeWithClasses,
     FilteredKeyValue,
     FilteredText,
-    WidgetData
+    WidgetData,
 } from '../../WidgetFeedback/WidgetFeedback.types';
 import { sortIndicatorsFn } from './sortIndicatorsFn';
 

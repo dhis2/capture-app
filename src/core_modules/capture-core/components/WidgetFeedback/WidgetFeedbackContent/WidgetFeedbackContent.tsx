@@ -5,7 +5,7 @@ import {
     FilteredText,
     FilteredKeyValue,
     WidgetData,
-    ContentTypeWithClasses
+    ContentTypeWithClasses,
 } from '../WidgetFeedback.types';
 
 const styles = {
