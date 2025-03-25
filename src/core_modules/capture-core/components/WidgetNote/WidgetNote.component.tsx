@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
 import { Widget } from '../Widget';
-import { Props } from './WidgetNote.types';
-import { NoteSection } from './NoteSection/NoteSection';
+import { Props } from './WidgetNote.types.js';
+import { NoteSection, NoteType } from './NoteSection/NoteSection.js';
 
 export const WidgetNote = ({ title, notes, onAddNote, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
