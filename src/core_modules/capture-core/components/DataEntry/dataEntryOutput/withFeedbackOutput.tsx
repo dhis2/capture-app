@@ -7,10 +7,10 @@ import { WidgetFeedback } from '../../WidgetFeedback';
 import { FilteredText, FilteredKeyValue } from '../../WidgetFeedback';
 
 interface Props {
-    feedbackItems: {
-        displayTexts: Array<FilteredText>,
-        displayKeyValuePairs: Array<FilteredKeyValue>,
-    },
+    feedbackItems?: {
+        displayTexts: Array<FilteredText>;
+        displayKeyValuePairs: Array<FilteredKeyValue>;
+    } | null;
 }
 
 interface ReduxState {
@@ -21,14 +21,14 @@ interface ReduxState {
     };
     rulesEffectsFeedback: {
         [key: string]: {
-            displayTexts: Array<FilteredText>,
-            displayKeyValuePairs: Array<FilteredKeyValue>,
+            displayTexts: Array<FilteredText>;
+            displayKeyValuePairs: Array<FilteredKeyValue>;
         };
     };
 }
 
-const getFeedbackOutput = () =>
-    class FeedbackOutputBuilder extends React.Component<Props> {
+const getFeedbackOutput = () => {
+    const FeedbackOutputBuilder = class extends React.Component<Props> {
         getItems = () => {
             const { feedbackItems } = this.props;
             const displayTexts = feedbackItems?.displayTexts || [];
@@ -48,7 +48,9 @@ const getFeedbackOutput = () =>
             );
         }
     };
-
+    
+    return FeedbackOutputBuilder;
+};
 
 const mapStateToProps = (state: ReduxState, props: any) => {
     const itemId = state.dataEntries[props.id].itemId;
@@ -62,8 +64,7 @@ const mapStateToProps = (state: ReduxState, props: any) => {
 const mapDispatchToProps = () => ({});
 
 export const withFeedbackOutput = () =>
-    (InnerComponent: React.ComponentType<any>) =>
-
-        withDataEntryOutput()(
-            InnerComponent,
-            connect(mapStateToProps, mapDispatchToProps)(getFeedbackOutput()));
+    (InnerComponent: React.ComponentType<any>) => {
+        const ConnectedFeedbackOutput = connect(mapStateToProps, mapDispatchToProps)(getFeedbackOutput());
+        return withDataEntryOutput()(InnerComponent, ConnectedFeedbackOutput);
+    };
