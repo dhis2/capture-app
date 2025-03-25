@@ -11,9 +11,9 @@ declare module 'src/core_modules/*';
 
 // Add additional declarations for any problematic imports
 declare module '@dhis2/d2-i18n' {
-  const i18n: {
-    t: (key: string, options?: any) => string;
-    // Add other methods as needed
-  };
-  export default i18n;
-} 
+    const i18n: {
+        t: (key: string, options?: any) => string;
+        // Add other methods as needed
+    };
+    export default i18n;
+}

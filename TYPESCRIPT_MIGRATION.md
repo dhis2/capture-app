@@ -179,6 +179,27 @@ yarn tsc:check
 yarn linter:check
 ```
 
+### ESLint Configuration
+
+Our ESLint configuration ensures that TypeScript files follow the same coding standards as Flow files. We've configured ESLint to:
+
+1. Use the same base rules for TypeScript files as for Flow files
+2. Use TypeScript-specific rules where appropriate (e.g., `@typescript-eslint/indent` instead of `indent`)
+3. Disable Flow-specific rules for TypeScript files
+4. Set `@typescript-eslint/no-explicit-any` to "warn" rather than "error" during the migration phase
+
+The configuration for TypeScript files is in the `.eslintrc` file's `overrides` section. This ensures consistent code style across your codebase during the incremental migration.
+
+### Continuous Integration
+
+TypeScript type checking is part of our CI pipeline on GitHub Actions. This ensures all TypeScript files remain type-safe throughout the migration process. The workflow:
+
+1. Runs Flow checking on Flow files
+2. Runs TypeScript checking on TypeScript files
+3. Ensures both type systems pass on their respective files
+
+The GitHub Actions workflow runs these checks on every push and pull request, preventing TypeScript type errors from being merged into the codebase.
+
 ## Best Practices for Incremental Migration
 
 1. **Focus on one module at a time**: Convert all files within a specific feature or component before moving to the next.

@@ -146,12 +146,80 @@
             "parser": "@typescript-eslint/parser",
             "plugins": ["@typescript-eslint"],
             "extends": [
+                "airbnb",
+                "plugin:react-hooks/recommended",
+                "react-app",
                 "plugin:@typescript-eslint/recommended"
             ],
             "rules": {
                 "flowtype/no-types-missing-file-annotation": "off",
                 "flowtype/define-flow-type": "off",
-                "flowtype/require-valid-file-annotation": "off"
+                "flowtype/require-valid-file-annotation": "off",
+                
+                "@typescript-eslint/indent": [2, 4],
+                "@typescript-eslint/no-unused-vars": [
+                    "error",
+                    {
+                        "vars": "all",
+                        "args": "after-used",
+                        "ignoreRestSiblings": true
+                    }
+                ],
+                "@typescript-eslint/no-unused-expressions": 0,
+                "@typescript-eslint/no-explicit-any": "warn",
+                
+                "indent": [2, 4],
+                "max-len": [
+                    1,
+                    120,
+                    4,
+                    {
+                        "ignoreComments": true,
+                        "ignoreUrls": true,
+                        "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
+                    }
+                ],
+                "complexity": [1, 8],
+                "no-prototype-builtins": "off",
+                "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+                "comma-dangle": [
+                    "error",
+                    {
+                        "arrays": "always-multiline",
+                        "objects": "always-multiline",
+                        "imports": "always-multiline",
+                        "exports": "always-multiline",
+                        "functions": "always-multiline"
+                    }
+                ],
+                "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+                "no-return-assign": ["error", "except-parens"],
+                "react/jsx-indent": [2, 4],
+                "react/jsx-indent-props": [2, 4],
+                "react/prefer-es6-class": [1, "always"],
+                "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+                "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
+                "react/forbid-prop-types": [0],
+                "no-param-reassign": 0,
+                "react/prop-types": 0,
+                "import/prefer-default-export": 0,
+                "react/prefer-stateless-function": 0,
+                "react/jsx-no-bind": 0,
+                "react/require-default-props": 0,
+                "import/no-extraneous-dependencies": "off",
+                "react-hooks/exhaustive-deps": "error",
+                "camelcase": [
+                    "error",
+                    {
+                        "properties": "never",
+                        "allow": [
+                            "UNSAFE_componentWillMount",
+                            "UNSAFE_componentWillReceiveProps",
+                            "UNSAFE_componentWillUpdate"
+                        ]
+                    }
+                ],
+                "import/extensions": ["error", "never"]
             }
         }
     ]

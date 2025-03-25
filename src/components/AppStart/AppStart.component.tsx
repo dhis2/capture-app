@@ -67,4 +67,4 @@ export const AppStart: React.FC = () => {
             </JSSProviderShell>
         </React.Fragment>
     );
-}; 
+};

@@ -10,4 +10,4 @@ export const CacheExpired: React.FC = () => (
             ) as string
         }
     </div>
-); 
+);

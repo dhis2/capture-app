@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { JssProvider } from 'react-jss';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { create, JssOptions } from 'jss';
+import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 
 // Change the insertion point for jss styles.
@@ -14,7 +14,7 @@ const jss = create(jssPreset());
 // Add insertionPoint to JSS options
 (jss as any).options = {
     ...(jss as any).options || {},
-    insertionPoint
+    insertionPoint,
 };
 
 interface JSSProviderShellProps {
@@ -25,4 +25,4 @@ export const JSSProviderShell: React.FC<JSSProviderShellProps> = ({ children }) 
     <JssProvider jss={jss} generateId={generateClassName}>
         {children}
     </JssProvider>
-); 
+);
