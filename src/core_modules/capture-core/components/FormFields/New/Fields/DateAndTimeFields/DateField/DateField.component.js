@@ -11,7 +11,7 @@ const getStyles = () => ({
         display: 'flex',
     },
     fieldsContainerVertical: {
-        flexDirection: 'column',
+        flexDirection: 'column-reverse',
         alignItems: 'center',
     },
     clearButton: {
@@ -24,7 +24,7 @@ const getStyles = () => ({
 type Props = {
     value?: any,
     disabled?: boolean,
-    onChange?: (value: any) => void,
+    onBlur?: (value: any) => void,
     orientation: string,
     classes: {
         fieldsContainer: string,
@@ -36,7 +36,7 @@ type Props = {
 const DateFieldPlain = (props: Props) => {
     const {
         value,
-        onChange,
+        onBlur,
         disabled,
         orientation,
         classes,
@@ -44,7 +44,7 @@ const DateFieldPlain = (props: Props) => {
     } = props;
 
     const handleClear = () => {
-        onChange && onChange(null);
+        onBlur && onBlur(null);
     };
 
     const isVertical = orientation === orientations.VERTICAL;
@@ -65,16 +65,15 @@ const DateFieldPlain = (props: Props) => {
                 [classes.fieldsContainerVertical]: isVertical,
             })}
         >
-            {isVertical && renderClearButton()}
             {/*  $FlowFixMe[cannot-spread-inexact] automated comment */}
             <UIDateField
                 placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
                 locale={systemSettingsStore.get().uiLocale}
                 value={value}
-                onChange={onChange}
+                onBlur={onBlur}
                 {...passOnProps}
             />
-            {!isVertical && renderClearButton()}
+            {renderClearButton()}
         </div>
     );
 };

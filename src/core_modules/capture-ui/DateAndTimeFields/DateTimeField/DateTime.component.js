@@ -135,7 +135,6 @@ const DateTimeFieldPlain = (props: Props) => {
                 [defaultClasses.fieldsContainerVertical]: isVertical,
             })}
         >
-            {isVertical && renderClearButton()}
             <div className={defaultClasses.inputContainer}>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <DateTimeDate
@@ -170,7 +169,7 @@ const DateTimeFieldPlain = (props: Props) => {
                     </div>
                 )}
             </div>
-            {!isVertical && renderClearButton()}
+            {renderClearButton()}
         </div>
     );
 };
