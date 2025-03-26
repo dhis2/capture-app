@@ -68,7 +68,7 @@ const MainPagePlain = ({
         return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
     }, [programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId]);
 
-    if (MainPageStatus === MainPageStatuses.BATCH_DATA_ENTRY_PLUGIN) {
+    if (MainPageStatus === MainPageStatuses.SHOW_BATCH_DATA_ENTRY_PLUGIN) {
         return (
             <BatchDataEntry
                 programId={programId}
