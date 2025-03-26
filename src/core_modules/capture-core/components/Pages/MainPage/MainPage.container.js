@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 // $FlowFixMe
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
@@ -37,10 +37,13 @@ const useMainPageStatus = ({
     orgUnitId,
     showAllAccessible,
     categoryOptionIsInvalidForOrgUnit,
+    showBatchDataEntryPlugin,
 }) => {
     const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
 
     return useMemo(() => {
+        if (showBatchDataEntryPlugin) return MainPageStatuses.SHOW_BATCH_DATA_ENTRY_PLUGIN;
+
         if (!programId) return MainPageStatuses.DEFAULT;
 
         if (selectedProgram?.categoryCombination) {
@@ -63,7 +66,7 @@ const useMainPageStatus = ({
         }
 
         return MainPageStatuses.SHOW_WORKING_LIST;
-    }, [programId, selectedProgram, withoutOrgUnit, categories, categoryOptionIsInvalidForOrgUnit]);
+    }, [programId, selectedProgram, withoutOrgUnit, categories, categoryOptionIsInvalidForOrgUnit, showBatchDataEntryPlugin]);
 };
 
 const useSelectorMainPage = () =>
@@ -97,6 +100,7 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate
 };
 
 const MainPageContainer = () => {
+    const [showBatchDataEntryPlugin, setShowBatchDataEntryPlugin] = useState(false);
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
@@ -124,6 +128,7 @@ const MainPageContainer = () => {
         orgUnitId,
         showAllAccessible,
         categoryOptionIsInvalidForOrgUnit,
+        showBatchDataEntryPlugin,
     });
 
     const {
@@ -183,6 +188,7 @@ const MainPageContainer = () => {
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
                 trackedEntityName={trackedEntityType?.name}
+                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
             />
         </OrgUnitFetcher>
     );

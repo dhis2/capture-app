@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { compose } from 'redux';
 import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
@@ -59,9 +59,8 @@ const MainPagePlain = ({
     classes,
     onChangeTemplate,
     trackedEntityName,
+    setShowBatchDataEntryPlugin,
 }: Props) => {
-    const [showBatchDataEntryPlugin, setShowBatchDataEntryPlugin] = useState(false);
-
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
         const noOrgUnitSelected = !orgUnitId;
@@ -69,7 +68,7 @@ const MainPagePlain = ({
         return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
     }, [programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId]);
 
-    if (showBatchDataEntryPlugin) {
+    if (MainPageStatus === MainPageStatuses.BATCH_DATA_ENTRY_PLUGIN) {
         return (
             <BatchDataEntry
                 programId={programId}
