@@ -37,12 +37,12 @@ const useMainPageStatus = ({
     orgUnitId,
     showAllAccessible,
     categoryOptionIsInvalidForOrgUnit,
-    showBatchDataEntryPlugin,
+    showBulkDataEntryPlugin,
 }) => {
     const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
 
     return useMemo(() => {
-        if (showBatchDataEntryPlugin) return MainPageStatuses.SHOW_BATCH_DATA_ENTRY_PLUGIN;
+        if (showBulkDataEntryPlugin) return MainPageStatuses.SHOW_BULK_DATA_ENTRY_PLUGIN;
 
         if (!programId) return MainPageStatuses.DEFAULT;
 
@@ -66,7 +66,7 @@ const useMainPageStatus = ({
         }
 
         return MainPageStatuses.SHOW_WORKING_LIST;
-    }, [programId, selectedProgram, withoutOrgUnit, categories, categoryOptionIsInvalidForOrgUnit, showBatchDataEntryPlugin]);
+    }, [programId, selectedProgram, withoutOrgUnit, categories, categoryOptionIsInvalidForOrgUnit, showBulkDataEntryPlugin]);
 };
 
 const useSelectorMainPage = () =>
@@ -100,7 +100,7 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate
 };
 
 const MainPageContainer = () => {
-    const [showBatchDataEntryPlugin, setShowBatchDataEntryPlugin] = useState(false);
+    const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
@@ -128,7 +128,7 @@ const MainPageContainer = () => {
         orgUnitId,
         showAllAccessible,
         categoryOptionIsInvalidForOrgUnit,
-        showBatchDataEntryPlugin,
+        showBulkDataEntryPlugin,
     });
 
     const {
@@ -188,7 +188,7 @@ const MainPageContainer = () => {
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
                 trackedEntityName={trackedEntityType?.name}
-                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
             />
         </OrgUnitFetcher>
     );

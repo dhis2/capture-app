@@ -3,7 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors, Button, Tag } from '@dhis2/ui';
-import type { PlainProps } from './BatchDataEntryActive.types';
+import type { PlainProps } from './BulkDataEntryActive.types';
 import { Widget } from '../../Widget';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip/';
 
@@ -30,23 +30,23 @@ const styles = () => ({
     },
 });
 
-const BatchDataEntryActiveComponentPlain = ({ title, onBackToBatchDataEntry, classes }: PlainProps) => {
+const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, classes }: PlainProps) => {
     const text = title.length > 30 ? `${title.substring(0, 27)}...` : title;
 
     return (
         <div className={classes.container}>
-            <Widget header={i18n.t('Batch data entry')} noncollapsible borderless>
+            <Widget header={i18n.t('Bulk data entry')} noncollapsible borderless>
                 <div className={classes.content}>
                     <div>
                         <ConditionalTooltip content={title} placement={'top'} enabled={title.length > 30}>
                             {text}
                         </ConditionalTooltip>
                         <Tag className={classes.tag}>
-                            {i18n.t('Continue data entry')}
+                            {i18n.t('Unsaved changes')}
                         </Tag>
                     </div>
-                    <Button className={classes.button} onClick={onBackToBatchDataEntry} secondary small>
-                        {i18n.t('Back to form')}
+                    <Button className={classes.button} onClick={onBackToBulkDataEntry} secondary small>
+                        {i18n.t('Continue data entry')}
                     </Button>
                 </div>
             </Widget>
@@ -54,4 +54,4 @@ const BatchDataEntryActiveComponentPlain = ({ title, onBackToBatchDataEntry, cla
     );
 };
 
-export const BatchDataEntryActiveComponent = withStyles(styles)(BatchDataEntryActiveComponentPlain);
+export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain);

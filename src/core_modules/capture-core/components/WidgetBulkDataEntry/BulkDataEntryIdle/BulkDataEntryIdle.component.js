@@ -3,7 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IconChevronRight16, DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
-import type { PlainProps } from './BatchDataEntryIdle.types';
+import type { PlainProps } from './BulkDataEntryIdle.types';
 import { Widget } from '../../Widget';
 
 const styles = () => ({
@@ -25,16 +25,16 @@ const styles = () => ({
     },
 });
 
-const BatchDataEntryIdleComponenetPlain = ({
-    batchDataEntryConfigurations,
+const BulkDataEntryIdleComponenetPlain = ({
+    bulkDataEntryConfigurations,
     onSelectConfiguration,
     classes,
 }: PlainProps) => (
     <div className={classes.container}>
-        <Widget header={i18n.t('Batch data entry forms')} noncollapsible>
+        <Widget header={i18n.t('Bulk data entry')} noncollapsible>
             <DataTable className={classes.table}>
                 <DataTableBody>
-                    {batchDataEntryConfigurations.map(config => (
+                    {bulkDataEntryConfigurations.map(config => (
                         <DataTableRow
                             key={config.dataKey}
                             onClick={() =>
@@ -61,4 +61,4 @@ const BatchDataEntryIdleComponenetPlain = ({
     </div>
 );
 
-export const BatchDataEntryIdleComponenet = withStyles(styles)(BatchDataEntryIdleComponenetPlain);
+export const BulkDataEntryIdleComponenet = withStyles(styles)(BulkDataEntryIdleComponenetPlain);

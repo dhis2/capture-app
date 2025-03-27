@@ -1,16 +1,16 @@
 // @flow
-import { getBatchDataEntry } from 'capture-core/MetaDataStoreUtils/batchDataEntry';
+import { getBulkDataEntry } from 'capture-core/MetaDataStoreUtils/bulkDataEntry';
 import { useIndexedDBQuery } from '../../utils/reactQueryHelpers';
 
-export const useBatchDataEntryFromIndexedDB = (programId: string) => {
+export const useBulkDataEntryFromIndexedDB = (programId: string) => {
     const {
-        data: cachedBatchDataEntry,
+        data: cachedBulkDataEntry,
         isLoading,
         isError,
     } = useIndexedDBQuery(
-        ['cachedBatchDataEntry', programId],
+        ['cachedBulkDataEntry', programId],
         // $FlowFixMe
-        () => getBatchDataEntry(programId),
+        () => getBulkDataEntry(programId),
         {
             staleTime: Infinity,
             cacheTime: Infinity,
@@ -19,7 +19,7 @@ export const useBatchDataEntryFromIndexedDB = (programId: string) => {
     );
 
     return {
-        cachedBatchDataEntry,
+        cachedBulkDataEntry,
         isLoading,
         isError,
     };

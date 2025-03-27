@@ -10,7 +10,7 @@ import { BreadcrumbItem } from '../common/BreadcrumbItem';
 export const breadcrumbsKeys = Object.freeze({
     MAIN_PAGE: 'mainPage',
     SEARCH_PAGE: 'searchPage',
-    BATCH_DATA_ENTRY: 'batchDataEntry',
+    BULK_DATA_ENTRY: 'bulkDataEntry',
 });
 
 type Props = {
@@ -55,9 +55,9 @@ const BreadcrumbsPlain = ({
                     condition: true,
                 },
                 {
-                    key: breadcrumbsKeys.BATCH_DATA_ENTRY,
+                    key: breadcrumbsKeys.BULK_DATA_ENTRY,
                     onClick: () => {},
-                    label: i18n.t('Batch data entry'),
+                    label: i18n.t('Bulk data entry'),
                     selected: true,
                     condition: true,
                 },
@@ -73,7 +73,7 @@ const BreadcrumbsPlain = ({
                         label={button.label}
                         onClick={button.onClick}
                         selected={button.selected}
-                        dataTest={`batchDataEntry-breadcrumb-${button.key}-item`}
+                        dataTest={`bulkDataEntry-breadcrumb-${button.key}-item`}
                     />
                     {index < breadcrumbItems.length - 1 && <IconChevronRight16 color={colors.grey800} />}
                 </React.Fragment>
@@ -82,4 +82,4 @@ const BreadcrumbsPlain = ({
     );
 };
 
-export const BatchDataEntryBreadcrumb: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(BreadcrumbsPlain);
+export const BulkDataEntryBreadcrumb: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(BreadcrumbsPlain);

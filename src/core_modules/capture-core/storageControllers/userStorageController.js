@@ -46,7 +46,7 @@ const storeSpecificCreateActions = {
     [userStores.ORGANISATION_UNIT_GROUPS]: (objectStore) => {
         objectStore.createIndex('organisationUnitId', 'organisationUnitIds', { multiEntry: true });
     },
-    [userStores.BATCH_DATA_ENTRY]: (objectStore) => {
+    [userStores.BULK_DATA_ENTRY]: (objectStore) => {
         objectStore.createIndex('programId', 'programId');
     },
 };

@@ -8,9 +8,9 @@ import type { Props, PlainProps } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
-import { WidgetBatchDataEntry } from '../../WidgetBatchDataEntry';
-import { BatchDataEntry } from '../../BatchDataEntry';
-import { batchDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BatchDataEntryBreadcrumb';
+import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
+import { BulkDataEntry } from '../../BulkDataEntry';
+import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 
 const getStyles = () => ({
     backButton: {
@@ -43,17 +43,17 @@ const SearchPagePlain = ({
     programId,
     orgUnitId,
     onNavigateToMainPage,
-    setShowBatchDataEntryPlugin,
-    showBatchDataEntryPlugin,
+    setShowBulkDataEntryPlugin,
+    showBulkDataEntryPlugin,
     classes,
 }: PlainProps) => (
     <>
         <TopBar programId={programId} orgUnitId={orgUnitId} />
-        {showBatchDataEntryPlugin ? (
-            <BatchDataEntry
+        {showBulkDataEntryPlugin ? (
+            <BulkDataEntry
                 programId={programId}
-                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
-                page={batchDataEntryBreadcrumbsKeys.SEARCH_PAGE}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                page={bulkDataEntryBreadcrumbsKeys.SEARCH_PAGE}
             />
         ) : (
             <>
@@ -73,9 +73,9 @@ const SearchPagePlain = ({
                     <div className={classes.right}>
                         <TemplateSelector />
                         <br />
-                        <WidgetBatchDataEntry
+                        <WidgetBulkDataEntry
                             programId={programId}
-                            setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
                         />
                     </div>
                 </div>

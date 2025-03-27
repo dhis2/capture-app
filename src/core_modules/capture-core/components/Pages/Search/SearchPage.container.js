@@ -26,7 +26,7 @@ const usePreselectedProgram = (currentSelectionsId): ?string => {
 };
 
 export const SearchPage: ComponentType<{||}> = () => {
-    const [showBatchDataEntryPlugin, setShowBatchDataEntryPlugin] = useState(false);
+    const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
     const dispatch = useDispatch();
     const { programId, orgUnitId } = useLocationQuery();
 
@@ -53,8 +53,8 @@ export const SearchPage: ComponentType<{||}> = () => {
                 programId={programId}
                 orgUnitId={orgUnitId}
                 onNavigateToMainPage={onNavigateToMainPage}
-                showBatchDataEntryPlugin={showBatchDataEntryPlugin}
-                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                showBulkDataEntryPlugin={showBulkDataEntryPlugin}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
             />
         </ResultsPageSizeContext.Provider>
     );

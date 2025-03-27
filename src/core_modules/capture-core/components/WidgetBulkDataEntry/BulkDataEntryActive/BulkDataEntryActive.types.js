@@ -1,11 +1,11 @@
 // @flow
 export type Props = {
     title: string,
-    setShowBatchDataEntryPlugin: (show: boolean) => void,
+    setShowBulkDataEntryPlugin: (show: boolean) => void,
 };
 
 export type PlainProps = {
     title: string,
-    onBackToBatchDataEntry: () => void,
+    onBackToBulkDataEntry: () => void,
     ...CssClasses,
 };

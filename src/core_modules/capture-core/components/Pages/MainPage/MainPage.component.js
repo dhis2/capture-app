@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import type { ComponentType } from 'react';
-import { batchDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BatchDataEntryBreadcrumb';
+import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 import type { Props, ContainerProps } from './mainPage.types';
 import { WorkingListsType } from './WorkingListsType';
 import { MainPageStatuses } from './MainPage.constants';
@@ -13,8 +13,8 @@ import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
-import { BatchDataEntry } from '../../BatchDataEntry';
-import { WidgetBatchDataEntry } from '../../WidgetBatchDataEntry';
+import { BulkDataEntry } from '../../BulkDataEntry';
+import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
 import {
     InvalidCategoryCombinationForOrgUnitMessage,
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
@@ -59,7 +59,7 @@ const MainPagePlain = ({
     classes,
     onChangeTemplate,
     trackedEntityName,
-    setShowBatchDataEntryPlugin,
+    setShowBulkDataEntryPlugin,
 }: Props) => {
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
@@ -68,13 +68,13 @@ const MainPagePlain = ({
         return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
     }, [programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId]);
 
-    if (MainPageStatus === MainPageStatuses.SHOW_BATCH_DATA_ENTRY_PLUGIN) {
+    if (MainPageStatus === MainPageStatuses.SHOW_BULK_DATA_ENTRY_PLUGIN) {
         return (
-            <BatchDataEntry
+            <BulkDataEntry
                 programId={programId}
-                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
                 displayFrontPageList={displayFrontPageList}
-                page={batchDataEntryBreadcrumbsKeys.MAIN_PAGE}
+                page={bulkDataEntryBreadcrumbsKeys.MAIN_PAGE}
                 trackedEntityName={trackedEntityName}
             />
         );
@@ -104,9 +104,9 @@ const MainPagePlain = ({
                                 selectedTemplateId={selectedTemplateId}
                                 onChangeTemplate={onChangeTemplate}
                             />
-                            <WidgetBatchDataEntry
+                            <WidgetBulkDataEntry
                                 programId={programId}
-                                setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
                             />
                         </div>
                     )}
@@ -119,9 +119,9 @@ const MainPagePlain = ({
                     <div className={classes.right}>
                         <TemplateSelector />
                         <br />
-                        <WidgetBatchDataEntry
+                        <WidgetBulkDataEntry
                             programId={programId}
-                            setShowBatchDataEntryPlugin={setShowBatchDataEntryPlugin}
+                            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
                         />
                     </div>
                 </div>

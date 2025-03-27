@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { breadcrumbsKeys } from '../BatchDataEntryBreadcrumb';
+import { breadcrumbsKeys } from '../BulkDataEntryBreadcrumb';
 
 type Props = {
     programId: string,

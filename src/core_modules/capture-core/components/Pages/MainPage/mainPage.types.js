@@ -13,7 +13,7 @@ export type ContainerProps = $ReadOnly<{|
     error: boolean,
     ready: boolean,
     trackedEntityName?: string,
-    setShowBatchDataEntryPlugin: (show: boolean) => void,
+    setShowBulkDataEntryPlugin: (show: boolean) => void,
 |}
 >;
 

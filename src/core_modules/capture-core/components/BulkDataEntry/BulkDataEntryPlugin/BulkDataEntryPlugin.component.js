@@ -2,9 +2,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
 import { Button } from '@dhis2/ui';
-import type { Props } from './BatchDataEntryPlugin.types';
+import type { Props } from './BulkDataEntryPlugin.types';
 
-export const BatchDataEntryPlugin = ({ pluginSource, configKey, dataKey, onClose, onBackToOriginPage }: Props) => {
+export const BulkDataEntryPlugin = ({ pluginSource, configKey, dataKey, onClose, onBackToOriginPage }: Props) => {
     const [pluginWidth, setPluginWidth] = useState(undefined);
     const containerRef = useRef<?HTMLDivElement>();
 
@@ -40,7 +40,7 @@ export const BatchDataEntryPlugin = ({ pluginSource, configKey, dataKey, onClose
                 <br />
                 <Button onClick={onBackToOriginPage}>Back to origin to add rows</Button>
                 <br />
-                <Button onClick={onClose}>Close batch data entry form</Button>
+                <Button onClick={onClose}>Close bulk data entry form</Button>
             </div>
         </div>
     );

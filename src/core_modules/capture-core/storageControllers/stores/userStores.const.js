@@ -18,5 +18,5 @@ export const userStores = {
     CATEGORY_OPTIONS_BY_CATEGORY: 'categoryOptionsByCategory',
     CATEGORY_OPTIONS: 'categoryOptions',
     REDUX_PERSIST: 'reduxPersist',
-    BATCH_DATA_ENTRY: 'batchDataEntry',
+    BULK_DATA_ENTRY: 'bulkDataEntry',
 };

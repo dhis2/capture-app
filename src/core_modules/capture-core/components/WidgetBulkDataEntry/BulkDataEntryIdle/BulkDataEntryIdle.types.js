@@ -30,7 +30,7 @@ export type Props = {
 };
 
 export type PlainProps = {
-    batchDataEntryConfigurations: Array<DataStoreConfiguration>,
+    bulkDataEntryConfigurations: Array<DataStoreConfiguration>,
     onSelectConfiguration: (dataStoreConfiguration: ActiveList) => Promise<void>,
     ...CssClasses,
 };
