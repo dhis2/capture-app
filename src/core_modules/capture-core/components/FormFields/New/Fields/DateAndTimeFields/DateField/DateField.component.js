@@ -1,47 +1,82 @@
 // @flow
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { DateField as UIDateField } from 'capture-ui';
+import { IconButton, DateField as UIDateField, orientations } from 'capture-ui';
+import { IconCross24 } from '@dhis2/ui';
+import classNames from 'classnames';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
-const getStyles = (theme: Theme) => ({
-    innerInputError: {
-        color: theme.palette.error.main,
-        padding: theme.typography.pxToRem(3),
-        fontSize: theme.typography.pxToRem(12),
+const getStyles = () => ({
+    fieldsContainer: {
+        display: 'flex',
     },
-    innerInputWarning: {
-        color: theme.palette.warning.dark,
-        padding: theme.typography.pxToRem(3),
-        fontSize: theme.typography.pxToRem(12),
+    fieldsContainerVertical: {
+        flexDirection: 'column-reverse',
+        alignItems: 'center',
     },
-    innerInputInfo: {
-        color: 'green',
-        padding: theme.typography.pxToRem(3),
-        fontSize: theme.typography.pxToRem(12),
-    },
-    innerInputValidating: {
-        color: 'orange',
-        padding: theme.typography.pxToRem(3),
-        fontSize: theme.typography.pxToRem(12),
+    clearButton: {
+        height: '40px',
+        width: '40px',
+        borderRadius: 0,
     },
 });
 
 type Props = {
-}
+    value?: any,
+    disabled?: boolean,
+    onBlur?: (value: any) => void,
+    orientation: string,
+    classes: {
+        fieldsContainer: string,
+        fieldsContainerVertical: string,
+        clearButton: string,
+    },
+};
 
-class DateFieldPlain extends React.Component<Props> {
-    render() {
-        const { ...passOnProps } = this.props;
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
+const DateFieldPlain = (props: Props) => {
+    const {
+        value,
+        onBlur,
+        disabled,
+        orientation,
+        classes,
+        ...passOnProps
+    } = props;
+
+    const handleClear = () => {
+        onBlur && onBlur(null);
+    };
+
+    const isVertical = orientation === orientations.VERTICAL;
+
+    const renderClearButton = () => (
+        <IconButton
+            className={classes.clearButton}
+            disabled={!!disabled}
+            onClick={handleClear}
+        >
+            <IconCross24 />
+        </IconButton>
+    );
+
+    return (
+        <div
+            className={classNames(classes.fieldsContainer, {
+                [classes.fieldsContainerVertical]: isVertical,
+            })}
+        >
+            {/*  $FlowFixMe[cannot-spread-inexact] automated comment */}
             <UIDateField
                 placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
                 locale={systemSettingsStore.get().uiLocale}
+                value={value}
+                onBlur={onBlur}
+                disabled={disabled}
                 {...passOnProps}
             />
-        );
-    }
-}
+            {renderClearButton()}
+        </div>
+    );
+};
 
 export const DateField = withTheme()(withStyles(getStyles)(DateFieldPlain));

@@ -13,7 +13,6 @@ export const getDateTimeRangeFieldConfig = (metaData: MetaDataElement, options: 
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
         dateWidth: options.formHorizontal ? 150 : '100%',
-        dateMaxWidth: options.formHorizontal ? 150 : 350,
         orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         shrinkDisabled: options.formHorizontal,
         calendarWidth: options.formHorizontal ? 250 : 350,

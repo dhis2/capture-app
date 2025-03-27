@@ -1,4 +1,5 @@
 // @flow
+import { orientations } from 'capture-ui';
 import {
     DateField,
     withGotoInterface,
@@ -20,7 +21,11 @@ import labelTypeClasses from '../../buildField.module.css';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;
-    return passOnProps;
+    const orientation = formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL;
+    return {
+        orientation,
+        ...passOnProps,
+    };
 };
 
 export const DateFieldForForm = withGotoInterface()(
