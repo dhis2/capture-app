@@ -32,11 +32,11 @@ const getStyles = () => ({
         gap: spacers.dp16,
         padding: spacers.dp16,
     },
-    half: {
+    left: {
         flex: 1,
     },
-    quarter: {
-        flex: 0.4,
+    right: {
+        width: '260px',
     },
     searchBoxWrapper: {
         height: 'fit-content',
@@ -113,10 +113,10 @@ const MainPagePlain = ({
                 </>
             ) : (
                 <div className={classes.container}>
-                    <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
+                    <div className={`${classes.left} ${classes.searchBoxWrapper}`}>
                         <SearchBox programId={programId} />
                     </div>
-                    <div className={classes.quarter}>
+                    <div className={classes.right}>
                         <TemplateSelector />
                         <br />
                         <WidgetBatchDataEntry

@@ -4,7 +4,7 @@ import { useQueryClient } from 'react-query';
 import { setBatchDataEntry } from 'capture-core/MetaDataStoreUtils/batchDataEntry';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './WidgetBatchDataEntry.types';
-import { BatchDataEntryConfigurations } from './BatchDataEntryConfigurations';
+import { BatchDataEntryIdle } from './BatchDataEntryIdle';
 import { BatchDataEntryActive } from './BatchDataEntryActive';
 import { useBatchDataEntryFromIndexedDB } from '../../utils/cachedDataHooks/useBatchDataEntryFromIndexedDB';
 
@@ -36,5 +36,5 @@ export const WidgetBatchDataEntry = ({ programId, setShowBatchDataEntryPlugin }:
         );
     }
 
-    return <BatchDataEntryConfigurations programId={programId} onSelectConfiguration={onSelectConfiguration} />;
+    return <BatchDataEntryIdle programId={programId} onSelectConfiguration={onSelectConfiguration} />;
 };

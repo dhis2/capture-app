@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-24T08:34:22.178Z\n"
-"PO-Revision-Date: 2025-03-24T08:34:22.178Z\n"
+"POT-Creation-Date: 2025-03-27T13:35:11.670Z\n"
+"PO-Revision-Date: 2025-03-27T13:35:11.670Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -537,12 +537,6 @@ msgstr "No results found"
 
 msgid "No items to display"
 msgstr "No items to display"
-
-msgid "Add to batch data entry"
-msgstr "Add to batch data entry"
-
-msgid "Open in batch data entry"
-msgstr "Open in batch data entry"
 
 msgid "Select columns"
 msgstr "Select columns"
@@ -1100,11 +1094,8 @@ msgstr "You don't have access to assign a user to this event"
 msgid "Assign"
 msgstr "Assign"
 
-msgid "Form"
-msgstr "Form"
-
-msgid "Unsaved changes"
-msgstr "Unsaved changes"
+msgid "Continue data entry"
+msgstr "Continue data entry"
 
 msgid "Batch data entry forms"
 msgstr "Batch data entry forms"
@@ -1752,9 +1743,6 @@ msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
-
-msgid "Available batch entry forms"
-msgstr "Available batch entry forms"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "

@@ -3,13 +3,16 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IconChevronRight16, DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
-import type { PlainProps } from './BatchDataEntryConfigurations.types';
+import type { PlainProps } from './BatchDataEntryIdle.types';
 import { Widget } from '../../Widget';
 
 const styles = () => ({
     container: {
-        flex: '0.4',
-        minWidth: '400px',
+        width: '260px',
+        minWidth: '260px',
+        height: 'fit-content',
+        maxHeight: '100vh',
+        overflowY: 'scroll',
     },
     table: {
         borderWidth: '1px 0 0 0 !important',
@@ -22,7 +25,7 @@ const styles = () => ({
     },
 });
 
-const BatchDataEntryConfigurationsComponenetPlain = ({
+const BatchDataEntryIdleComponenetPlain = ({
     batchDataEntryConfigurations,
     onSelectConfiguration,
     classes,
@@ -58,4 +61,4 @@ const BatchDataEntryConfigurationsComponenetPlain = ({
     </div>
 );
 
-export const BatchDataEntryConfigurationsComponenet = withStyles(styles)(BatchDataEntryConfigurationsComponenetPlain);
+export const BatchDataEntryIdleComponenet = withStyles(styles)(BatchDataEntryIdleComponenetPlain);

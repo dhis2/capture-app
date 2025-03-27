@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
-import type { Props } from './BatchDataEntryConfigurations.types';
+import type { Props } from './BatchDataEntryIdle.types';
 import { useBatchDataEntryConfigurations } from './hooks';
-import { BatchDataEntryConfigurationsComponenet } from './BatchDataEntryConfigurations.component';
+import { BatchDataEntryIdleComponenet } from './BatchDataEntryIdle.component';
 
-export const BatchDataEntryConfigurations = ({ programId, onSelectConfiguration }: Props) => {
+export const BatchDataEntryIdle = ({ programId, onSelectConfiguration }: Props) => {
     const { batchDataEntryConfigurations, isLoading, isError } = useBatchDataEntryConfigurations(programId);
 
     if (isError || isLoading || !batchDataEntryConfigurations || batchDataEntryConfigurations.length === 0) {
@@ -12,7 +12,7 @@ export const BatchDataEntryConfigurations = ({ programId, onSelectConfiguration 
     }
 
     return (
-        <BatchDataEntryConfigurationsComponenet
+        <BatchDataEntryIdleComponenet
             batchDataEntryConfigurations={batchDataEntryConfigurations}
             onSelectConfiguration={onSelectConfiguration}
         />

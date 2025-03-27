@@ -9,6 +9,7 @@ import { TEI_WORKING_LISTS_STORE_ID } from './constants';
 const getStyles = () => ({
     listContainer: {
         width: '100%',
+        height: 'fit-content',
         padding: spacers.dp16,
         background: colors.white,
         border: '1px solid',

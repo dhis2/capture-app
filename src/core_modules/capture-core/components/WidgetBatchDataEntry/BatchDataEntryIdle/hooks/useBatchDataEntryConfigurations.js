@@ -4,7 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
 import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
-import type { DataStoreConfigurationRaw, DataStoreConfiguration } from '../BatchDataEntryConfigurations.types';
+import type { DataStoreConfigurationRaw, DataStoreConfiguration } from '../BatchDataEntryIdle.types';
 
 const getLocalizedString = (field: { [string]: string }, locale: string): string => {
     if (field[locale]) {
