@@ -71,6 +71,8 @@ const DateFieldPlain = (props: Props) => {
                 locale={systemSettingsStore.get().uiLocale}
                 value={value}
                 onBlur={onBlur}
+                disabled={disabled}
+                orientation={orientation}
                 {...passOnProps}
             />
             {renderClearButton()}
