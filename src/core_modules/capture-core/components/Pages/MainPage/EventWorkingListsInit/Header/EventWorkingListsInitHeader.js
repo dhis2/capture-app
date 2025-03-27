@@ -7,6 +7,7 @@ import type { Props } from './eventWorkingListsInitHeader.types';
 
 const getStyles = () => ({
     container: {
+        width: '100%',
         background: colors.white,
         border: '1px solid',
         borderColor: colors.grey400,
