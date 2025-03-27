@@ -72,7 +72,6 @@ const DateFieldPlain = (props: Props) => {
                 value={value}
                 onBlur={onBlur}
                 disabled={disabled}
-                orientation={orientation}
                 {...passOnProps}
             />
             {renderClearButton()}
