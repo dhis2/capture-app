@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import { createSelector } from 'reselect';
 import { errorCreator } from 'capture-core-utils';
-import { getOrgUnitNames } from '../../../../../../../metadataRetrieval/orgUnitName';
 import { dataElementTypes } from '../../../../../../../metaData';
 import type {
     SubvalueKeysByType,
@@ -47,13 +46,9 @@ const getSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApi
             return acc;
         }, {});
 
-    const getOrganisationUnitSubvalue = async (keys: Array<string>) =>
-        getOrgUnitNames(keys, querySingleResource);
-
     const subvalueGetterByType: {|
         [string]: any,
     |} = {
-        [dataElementTypes.ORGANISATION_UNIT]: getOrganisationUnitSubvalue,
         [dataElementTypes.IMAGE]: getImageResourceSubvalue,
         [dataElementTypes.FILE_RESOURCE]: getFileResourceSubvalue,
     };
