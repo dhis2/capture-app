@@ -120,6 +120,7 @@ const NoteSectionPlain = ({
         </div>
     );
 
+    console.log('NoteSectionPlain: notes', notes);
 
     return (
         <div className={classes.wrapper}>
