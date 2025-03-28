@@ -1,4 +1,5 @@
 import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import '../sharedSteps';
 
 Given('you select view changelog in the event overflow button', () => {
     cy.get('[data-test="widget-event-edit-overflow-button"]')
