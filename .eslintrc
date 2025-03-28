@@ -128,7 +128,10 @@
                 ]
             }
         ],
-        "import/extensions": ["error", "never"]
+        "import/extensions": ["error", "never", {
+            "ts": "always",
+            "tsx": "always"
+        }]
     },
     "settings": {
         "import/resolver": {
@@ -220,7 +223,10 @@
                         ]
                     }
                 ],
-                "import/extensions": ["error", "never"]
+                "import/extensions": ["error", "never", {
+            "ts": "always",
+            "tsx": "always"
+        }]
             }
         }
     ]
