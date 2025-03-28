@@ -63,7 +63,8 @@ export const TeiWorkingListsReduxProvider = ({
 
     const onClickListRow = useCallback(({ id }) => {
         const record = records[id];
-        const orgUnitIdParameter = orgUnitId || record.orgUnit?.id || record.programOwner;
+        console.log('record', record);
+        const orgUnitIdParameter = orgUnitId || record.orgUnit?.id || record.programOwnerId;
 
         return programStage
             ? navigate(
