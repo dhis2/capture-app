@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
-import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage/index.js';
+import { withStyles } from '@material-ui/core/styles';
+import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 import { Props } from './NoWriteAccessMessage.types';
 
 const styles = () => ({
