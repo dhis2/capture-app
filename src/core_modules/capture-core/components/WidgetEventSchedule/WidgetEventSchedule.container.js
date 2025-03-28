@@ -71,8 +71,7 @@ export const WidgetEventSchedule = ({
     const { eventId } = useLocationQuery();
     const selectedOrgUnitId = scheduledOrgUnit?.id || initialOrgUnitId;
     const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate);
-    const eventCountInOrgUnit = events
-        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === serverScheduleDate).length;
+    const eventCountInOrgUnit = events.length;
     const [selectedCategories, setSelectedCategories] = useState({});
     const [categoryOptionsError, setCategoryOptionsError] = useState();
     const { programCategory } = useCategoryCombinations(programId);

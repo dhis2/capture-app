@@ -20,8 +20,8 @@ export const useEventsInOrgUnit = (orgUnitId: string, selectedDate: string) => {
                         resource: 'tracker/events',
                         params: ({ variables: { orgUnitId: id, selectedDate: date } }) => ({
                             orgUnit: id,
-                            occurredAfter: date,
-                            occurredBefore: date,
+                            scheduledAfter: date,
+                            scheduledBefore: date,
                             ...newPagingQueryParam,
                             status: 'SCHEDULE',
                             [orgUnitModeQueryParam]: 'SELECTED',
@@ -34,7 +34,6 @@ export const useEventsInOrgUnit = (orgUnitId: string, selectedDate: string) => {
         ),
         { lazy: true },
     );
-
 
     useEffect(() => {
         if (orgUnitId && selectedDate) {
