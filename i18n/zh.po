@@ -45,7 +45,7 @@ msgid "Organisation unit"
 msgstr "机构"
 
 msgid "Date of enrollment"
-msgstr "加入日期"
+msgstr "注册日期"
 
 msgid "Last updated"
 msgstr "上次更新"
@@ -129,7 +129,7 @@ msgid "Coordinate"
 msgstr "坐标"
 
 msgid "Enrollment"
-msgstr "加入登记"
+msgstr "报名登记"
 
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
