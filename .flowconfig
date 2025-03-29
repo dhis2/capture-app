@@ -1,5 +1,6 @@
 [ignore]
 .*/contents/.*
+.*node_modules/@js-temporal/polyfill/.*
 
 [declarations]
 <PROJECT_ROOT>/node_modules/.*
@@ -14,4 +15,13 @@ module.name_mapper='^capture-ui' ->'<PROJECT_ROOT>/src/core_modules/capture-ui'
 module.name_mapper='^capture-core-utils' ->'<PROJECT_ROOT>/src/core_modules/capture-core-utils'
 module.name_mapper='^@dhis2/app-runtime/experimental' ->'<PROJECT_ROOT>/node_modules/@dhis2/app-runtime/build/es/experimental'
 module.name_mapper='^@dhis2/rules-engine-javascript' ->'<PROJECT_ROOT>/packages/rules-engine/src'
+
+# Handle TypeScript imports from Flow - all TypeScript imports treated as any
+module.name_mapper='.*\.\(ts\|tsx\)$' -> '<PROJECT_ROOT>/flow-typed/typescript.js.flow'
+
 esproposal.optional_chaining=enable
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
+module.file_ext=.ts
+module.file_ext=.tsx
