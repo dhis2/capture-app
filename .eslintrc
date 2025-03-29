@@ -139,8 +139,5 @@
             "exports": {}
         },
         "import/core-modules": ["rxjs/operators"]
-    },
-    "rules": {
-        "import/extensions": ["error", "never"]
     }
 }
