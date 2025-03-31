@@ -1,15 +1,16 @@
-// @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
 
-type Props = {
+type OwnProps = {
     label: string,
     onClick: () => void,
     selected: boolean,
     dataTest: string,
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const styles = {
     button: {
@@ -33,9 +34,9 @@ const styles = {
             color: 'black',
         },
     },
-};
+} as const;
 
-const BreadcrumbItemPlain = ({ label, onClick, selected, dataTest, classes }) => (
+const BreadcrumbItemPlain: React.FC<Props> = ({ label, onClick, selected, dataTest, classes }) => (
     <button
         type="button"
         className={cx(classes.button, { selected })}
@@ -46,4 +47,4 @@ const BreadcrumbItemPlain = ({ label, onClick, selected, dataTest, classes }) =>
     </button>
 );
 
-export const BreadcrumbItem: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(BreadcrumbItemPlain);
+export const BreadcrumbItem = withStyles(styles)(BreadcrumbItemPlain) as React.ComponentType<OwnProps>;
