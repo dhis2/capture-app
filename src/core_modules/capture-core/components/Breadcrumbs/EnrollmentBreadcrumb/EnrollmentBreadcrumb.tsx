@@ -1,8 +1,7 @@
 // @flow
-import type { ComponentType } from 'react';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { colors, IconChevronRight16 } from '@dhis2/ui';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
@@ -12,15 +11,7 @@ import {
     EnrollmentPageKeys,
 } from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 
-type Props = {
-    onBackToMainPage: () => void,
-    onBackToDashboard?: () => void,
-    onBackToViewEvent?: () => void,
-    displayFrontPageList: boolean,
-    programId: string,
-    userInteractionInProgress?: boolean,
-    trackedEntityName?: string,
-};
+type EnrollmentPageKeyTypes = typeof EnrollmentPageKeys[keyof typeof EnrollmentPageKeys];
 
 export const EventStatuses = {
     ACTIVE: 'ACTIVE',
@@ -28,22 +19,42 @@ export const EventStatuses = {
     SKIPPED: 'SKIPPED',
     SCHEDULE: 'SCHEDULE',
     OVERDUE: 'OVERDUE',
+} as const;
+
+type EventStatus = typeof EventStatuses[keyof typeof EventStatuses];
+
+type OwnProps = {
+    onBackToMainPage: () => void;
+    onBackToDashboard?: () => void;
+    onBackToViewEvent?: () => void;
+    displayFrontPageList: boolean;
+    programId: string;
+    userInteractionInProgress?: boolean;
+    trackedEntityName?: string;
+    eventStatus?: EventStatus;
+    page: 'mainPage' | EnrollmentPageKeyTypes;
 };
+type WarningKey = typeof pageKeys[keyof typeof pageKeys];
+
+type Props = OwnProps & WithStyles<typeof styles>;
+
 
 const styles = {
     container: {
         display: 'flex',
         alignItems: 'center',
     },
-};
+} as const;
 
-const pageKeys = Object.freeze({
+const pageKeys = {
     MAIN_PAGE: 'mainPage',
     ...EnrollmentPageKeys,
-});
+} as const;
 
-const eventIsScheduled = eventStatus => [EventStatuses.SCHEDULE, EventStatuses.OVERDUE, EventStatuses.SKIPPED]
-    .includes(eventStatus);
+const eventIsScheduled = (eventStatus?: EventStatus): boolean =>
+    !!eventStatus && ([EventStatuses.SCHEDULE, EventStatuses.OVERDUE, EventStatuses.SKIPPED] as EventStatus[])
+        .includes(eventStatus);
+
 
 const BreadcrumbsPlain = ({
     onBackToMainPage,
@@ -56,8 +67,8 @@ const BreadcrumbsPlain = ({
     userInteractionInProgress = false,
     page,
     classes,
-}) => {
-    const [openWarning, setOpenWarning] = useState(null);
+}: Props) => {
+    const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
 
     const { label } = useWorkingListLabel({
         trackedEntityName,
@@ -65,15 +76,23 @@ const BreadcrumbsPlain = ({
         displayFrontPageList,
     });
 
-    const handleNavigation = useCallback((callback, warningType) => {
-        if (userInteractionInProgress) {
+    const handleNavigation = useCallback((callback?: () => void, warningType?: WarningKey) => {
+        if (userInteractionInProgress && warningType) {
             setOpenWarning(warningType);
         } else {
             callback && callback();
         }
     }, [userInteractionInProgress]);
 
-    const breadcrumbItems = useMemo(() => ([
+    type BreadcrumbItemType = {
+        key: WarningKey;
+        onClick: () => void;
+        label: string;
+        selected: boolean;
+        condition: boolean;
+    };
+
+    const breadcrumbItems = useMemo<BreadcrumbItemType[]>(() => ([
         {
             key: pageKeys.MAIN_PAGE,
             onClick: () => handleNavigation(onBackToMainPage, pageKeys.MAIN_PAGE),
@@ -98,19 +117,19 @@ const BreadcrumbsPlain = ({
         },
         {
             key: pageKeys.EDIT_EVENT,
-            onClick: () => {},
+            onClick: () => undefined,
             label: i18n.t('Edit event'),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },
         {
             key: pageKeys.NEW_EVENT,
-            onClick: () => {},
+            onClick: () => undefined,
             label: i18n.t('New event'),
             selected: page === pageKeys.NEW_EVENT,
             condition: page === pageKeys.NEW_EVENT,
         },
-    ].filter(item => item.condition)), [
+    ] as BreadcrumbItemType[]).filter((item): item is BreadcrumbItemType => item.condition), [
         label,
         page,
         eventStatus,
@@ -140,7 +159,7 @@ const BreadcrumbsPlain = ({
                 open={openWarning === pageKeys.MAIN_PAGE}
                 onDestroy={() => {
                     setOpenWarning(null);
-                    onBackToMainPage && onBackToMainPage();
+                    onBackToMainPage?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
                 {...defaultDialogProps}
@@ -150,7 +169,7 @@ const BreadcrumbsPlain = ({
                 open={openWarning === pageKeys.OVERVIEW}
                 onDestroy={() => {
                     setOpenWarning(null);
-                    onBackToDashboard && onBackToDashboard();
+                    onBackToDashboard?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
                 {...defaultDialogProps}
@@ -160,7 +179,7 @@ const BreadcrumbsPlain = ({
                 open={openWarning === pageKeys.VIEW_EVENT}
                 onDestroy={() => {
                     setOpenWarning(null);
-                    onBackToViewEvent && onBackToViewEvent();
+                    onBackToViewEvent?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
                 {...defaultDialogProps}
@@ -169,4 +188,4 @@ const BreadcrumbsPlain = ({
     );
 };
 
-export const EnrollmentBreadcrumb: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(BreadcrumbsPlain);
+export const EnrollmentBreadcrumb = withStyles(styles)(BreadcrumbsPlain) as ComponentType<OwnProps>;

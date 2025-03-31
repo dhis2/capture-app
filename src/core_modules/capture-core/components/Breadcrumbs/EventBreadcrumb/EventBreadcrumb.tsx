@@ -1,26 +1,29 @@
-// @flow
-import React, { type ComponentType, useCallback, useMemo, useState } from 'react';
+import React, { ComponentType, useCallback, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors, IconChevronRight16 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { BreadcrumbItem } from '../common/BreadcrumbItem';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useWorkingListLabel } from './hooks/useWorkingListLabel';
 
-export const pageKeys = Object.freeze({
+export const pageKeys = {
     MAIN_PAGE: 'mainPage',
     VIEW_EVENT: 'viewEvent',
     EDIT_EVENT: 'editEvent',
-});
+} as const;
 
-type Props = {
-    page: string,
-    programId: string,
-    userInteractionInProgress?: boolean,
-    onBackToMainPage?: () => void,
-    onBackToViewEvent?: () => void,
+type PageKeys = typeof pageKeys[keyof typeof pageKeys];
+
+type OwnProps = {
+    page: PageKeys;
+    programId: string;
+    userInteractionInProgress?: boolean;
+    onBackToMainPage?: () => void;
+    onBackToViewEvent?: () => void;
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const styles = {
     container: {
@@ -29,7 +32,6 @@ const styles = {
     },
 };
 
-
 const EventBreadcrumbPlain = ({
     page,
     programId,
@@ -37,19 +39,27 @@ const EventBreadcrumbPlain = ({
     onBackToViewEvent,
     onBackToMainPage,
     classes,
-}) => {
-    const [openWarning, setOpenWarning] = useState(null);
+}: Props) => {
+    const [openWarning, setOpenWarning] = useState<PageKeys | null>(null);
     const { label } = useWorkingListLabel({ programId });
 
-    const handleNavigation = useCallback((callback, warningType) => {
-        if (userInteractionInProgress) {
+    const handleNavigation = useCallback((callback?: () => void, warningType?: PageKeys) => {
+        if (userInteractionInProgress && warningType) {
             setOpenWarning(warningType);
         } else {
-            callback && callback();
+            callback?.();
         }
     }, [userInteractionInProgress]);
 
-    const breadcrumbItems = useMemo(() => ([
+    type BreadcrumbItemType = {
+        key: PageKeys;
+        onClick: () => void;
+        label: string;
+        selected: boolean;
+        condition: boolean;
+    };
+
+    const breadcrumbItems = useMemo<BreadcrumbItemType[]>(() => ([
         {
             key: pageKeys.MAIN_PAGE,
             onClick: () => handleNavigation(onBackToMainPage, pageKeys.MAIN_PAGE),
@@ -66,12 +76,12 @@ const EventBreadcrumbPlain = ({
         },
         {
             key: pageKeys.EDIT_EVENT,
-            onClick: () => {},
+            onClick: () => undefined,
             label: i18n.t('Edit event'),
             selected: page === pageKeys.EDIT_EVENT,
             condition: page === pageKeys.EDIT_EVENT,
         },
-    ].filter(item => item.condition !== false)), [
+    ] as BreadcrumbItemType[]).filter((item): item is BreadcrumbItemType => item.condition), [
         label,
         handleNavigation,
         onBackToViewEvent,
@@ -87,7 +97,6 @@ const EventBreadcrumbPlain = ({
                         label={button.label}
                         onClick={button.onClick}
                         selected={button.selected}
-                        classes={classes}
                         dataTest={`event-breadcrumb-${button.key}-item`}
                     />
                     {index < (breadcrumbItems.length - 1) && (
@@ -100,7 +109,7 @@ const EventBreadcrumbPlain = ({
                 open={openWarning === pageKeys.MAIN_PAGE}
                 onDestroy={() => {
                     setOpenWarning(null);
-                    onBackToMainPage && onBackToMainPage();
+                    onBackToMainPage?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
                 {...defaultDialogProps}
@@ -109,7 +118,7 @@ const EventBreadcrumbPlain = ({
                 open={openWarning === pageKeys.VIEW_EVENT}
                 onDestroy={() => {
                     setOpenWarning(null);
-                    onBackToViewEvent && onBackToViewEvent();
+                    onBackToViewEvent?.();
                 }}
                 onCancel={() => setOpenWarning(null)}
                 {...defaultDialogProps}
@@ -118,5 +127,4 @@ const EventBreadcrumbPlain = ({
     );
 };
 
-
-export const EventBreadcrumb: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(EventBreadcrumbPlain);
+export const EventBreadcrumb = withStyles(styles)(EventBreadcrumbPlain) as ComponentType<OwnProps>;

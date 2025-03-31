@@ -1,22 +1,20 @@
-// @flow
-import * as React from 'react';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, Layer, Popper } from '@dhis2/ui';
 
-type Props = {
-    label?: string,
-    primary?: boolean,
-    secondary?: boolean,
-    icon?: React.Node,
-    onClick?: () => void,
-    open?: boolean,
-    component: React.Node,
-    dataTest?: string,
-    small?: boolean,
-    large?: boolean,
-    disabled?: boolean,
-};
+interface Props {
+    label?: string;
+    primary?: boolean;
+    secondary?: boolean;
+    icon?: React.ReactElement;
+    onClick?: () => void;
+    open?: boolean;
+    component: React.ReactNode;
+    dataTest?: string;
+    small?: boolean;
+    large?: boolean;
+    disabled?: boolean;
+}
 
 export const OverflowButton = ({
     label,
@@ -31,15 +29,15 @@ export const OverflowButton = ({
     dataTest,
     component,
 }: Props) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const anchorRef = useRef(null);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const anchorRef = useRef<HTMLDivElement | null>(null);
     const open = propsOpen !== undefined ? propsOpen : isOpen;
 
     const toggle = () => {
         if (propsOpen === undefined) {
             setIsOpen(prev => !prev);
         }
-        handleClick && handleClick();
+        handleClick?.();
     };
 
     return (
@@ -59,8 +57,8 @@ export const OverflowButton = ({
             </Button>
 
             {open && (
-                <Layer onBackdropClick={toggle} transparent>
-                    <Popper reference={anchorRef} placement="bottom-end">
+                <Layer onBackdropClick={toggle} translucent>
+                    <Popper reference={anchorRef as React.RefObject<HTMLDivElement>} placement="bottom-end">
                         {component}
                     </Popper>
                 </Layer>
