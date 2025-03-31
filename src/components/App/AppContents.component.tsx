@@ -1,25 +1,20 @@
-
-// @flow
 import React, { memo } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
 import { FeedbackBar } from 'capture-core/components/FeedbackBar';
 import { AppPagesLoader } from './AppPagesLoader.component';
+import { Theme } from '../../types/global.types';
 
-const getStyles = theme => ({
+const getStyles = (theme: any) => ({
     app: {
         fontFamily: theme.typography.fontFamily,
         fontSize: theme.typography.pxToRem(16),
     },
 });
 
-type Props = {
-    classes: {
-        app: string,
-    },
-};
+type Props = WithStyles<typeof getStyles>;
 
-const Index = ({ classes }: Props) => (
+const Index = ({ classes }: Props): JSX.Element => (
     <div
         className={classes.app}
         dir={systemSettingsStore.get().dir}

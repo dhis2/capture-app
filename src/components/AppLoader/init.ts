@@ -1,19 +1,31 @@
-// @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
 import i18n from '@dhis2/d2-i18n';
-import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
+
+interface LocaleDataType {
+    dateFnsLocale: any;
+    weekDays: any;
+    weekDaysShort: any;
+    calendarFormatHeaderLong: string;
+    calendarFormatHeaderShort: string;
+    selectDatesText: string;
+    selectDateText: string;
+    todayLabelShort: string;
+    todayLabelLong: string;
+    weekStartsOn: number;
+}
 
 import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+import { QuerySingleResource } from '../../types/global.types';
 
-function setLogLevel() {
+function setLogLevel(): void {
     const levels = {
         [environments.dev]: log.levels.DEBUG,
         [environments.devDebug]: log.levels.TRACE,
@@ -21,7 +33,7 @@ function setLogLevel() {
         [environments.prod]: log.levels.ERROR,
     };
 
-    let level = levels[process.env.NODE_ENV];
+    let level = levels[process.env.NODE_ENV as keyof typeof levels];
     if (!level && level !== 0) {
         level = log.levels.ERROR;
     }
@@ -29,14 +41,13 @@ function setLogLevel() {
     log.setLevel(level);
 }
 
-function setMomentLocaleAsync(locale: string) {
+function setMomentLocaleAsync(locale: string): Promise<void> {
     if (locale === 'en') {
         moment.locale(locale);
         return Promise.resolve();
     }
 
     return new Promise((resolve) => {
-        // $FlowFixMe[unsupported-syntax] automated comment
         import(`moment/locale/${locale}`)
             .then(() => {
                 moment.locale(locale);
@@ -44,7 +55,6 @@ function setMomentLocaleAsync(locale: string) {
                 resolve();
             })
             .catch(() => {
-                // fallback to english
                 moment.locale('en');
                 log.error(`could not get moment locale config for ${locale}`);
                 resolve();
@@ -52,9 +62,8 @@ function setMomentLocaleAsync(locale: string) {
     });
 }
 
-function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any, firstDayOfWeek: number) {
+function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any, firstDayOfWeek: number): Promise<void> {
     return new Promise((resolve, reject) => {
-        // $FlowFixMe[unsupported-syntax] automated comment
         import(`date-fns/locale/${locale}/index.js`)
             .then((dateFnLocale) => {
                 const localeData: LocaleDataType = {
@@ -102,46 +111,45 @@ function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any,
     });
 }
 
-function changeI18nLocale(locale) {
+function changeI18nLocale(locale: string): void {
     i18n.changeLanguage(locale);
 }
 
-function initI18n(locale) {
+function initI18n(locale: string): void {
     changeI18nLocale(locale);
     i18n.setDefaultNamespace('default');
 }
 
-async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
+async function setLocaleDataAsync(uiLocale: string): Promise<void> { //eslint-disable-line
     const locale = uiLocale;
     await setMomentLocaleAsync(locale);
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();
 
-    // $FlowFixMe[prop-missing] automated comment
     const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
 
     await setDateFnLocaleAsync(locale, weekdays, weekdaysShort, firstDayOfWeek);
     initI18n(locale);
 }
 
-async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function, minorServerVersion: number) {
+async function initializeMetaDataAsync(dbLocale: string, onQueryApi: QuerySingleResource, minorServerVersion: number): Promise<void> {
     await loadMetaData(onQueryApi);
     await buildMetaDataAsync(dbLocale, minorServerVersion);
 }
 
 async function initializeSystemSettingsAsync(
-    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, },
+    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string },
     userSettings: { uiLocale: string, captureScope: Array<{ id: string }>, searchScope: Array<{id: string}> },
-) {
+): Promise<void> {
     const systemSettingsCacheData = await cacheSystemSettings(systemSettings, userSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
 export async function initializeAsync(
-    onCacheExpired: Function,
-    onQueryApi: Function,
+    onCacheExpired: () => void,
+    onQueryApi: QuerySingleResource,
     minorServerVersion: number,
-) {
+): Promise<void> {
     setLogLevel();
 
     const {
@@ -164,7 +172,6 @@ export async function initializeAsync(
         },
     });
 
-    // initialize rule engine
     let ruleEngineSettings;
     try {
         ruleEngineSettings = await onQueryApi({
@@ -175,22 +182,18 @@ export async function initializeAsync(
     }
     initRulesEngine(ruleEngineSettings.version, userRoles);
 
-    // initialize storage controllers
     try {
         await initControllersAsync(onCacheExpired, currentUserId);
     } catch (error) {
         throw new DisplayException(i18n.t(
             'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
-        ), error);
+        ), error as Error);
     }
 
-    // set locale data
     const uiLocale = userSettings.keyUiLocale;
     const dbLocale = userSettings.keyDbLocale;
     await setLocaleDataAsync(uiLocale);
-    // initialize system settings
     await initializeSystemSettingsAsync(systemSettings, { uiLocale, captureScope, searchScope });
 
-    // initialize metadata
     await initializeMetaDataAsync(dbLocale, onQueryApi, minorServerVersion);
 }
