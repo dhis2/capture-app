@@ -32,14 +32,14 @@ const styles = {
     },
 };
 
-const EventBreadcrumbPlain: React.FC<Props> = ({
+const EventBreadcrumbPlain = ({
     page,
     programId,
     userInteractionInProgress,
     onBackToViewEvent,
     onBackToMainPage,
     classes,
-}) => {
+}: Props) => {
     const [openWarning, setOpenWarning] = useState<PageKeys | null>(null);
     const { label } = useWorkingListLabel({ programId });
 

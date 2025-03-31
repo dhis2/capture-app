@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
@@ -13,11 +12,7 @@ type Props = {
     programId: string;
 }
 
-type ReturnType = {
-    label: string;
-}
-
-export const useWorkingListLabel = ({ programId }: Props): ReturnType => {
+export const useWorkingListLabel = ({ programId }: Props) => {
     const workingListTemplate = useSelector((state: any) => state.workingListsTemplates?.eventList);
     const workingListProgramId = useSelector((state: any) => state.workingListsContext?.eventList?.programIdView);
 

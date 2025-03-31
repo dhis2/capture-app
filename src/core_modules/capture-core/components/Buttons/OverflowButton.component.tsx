@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import { useRef, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, Layer, Popper } from '@dhis2/ui';
@@ -18,7 +17,7 @@ interface Props {
     disabled?: boolean;
 }
 
-export const OverflowButton: React.FC<Props> = ({
+export const OverflowButton = ({
     label,
     primary,
     secondary,
@@ -30,7 +29,7 @@ export const OverflowButton: React.FC<Props> = ({
     icon,
     dataTest,
     component,
-}) => {
+}: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const anchorRef = useRef<HTMLDivElement | null>(null);
     const open = propsOpen !== undefined ? propsOpen : isOpen;
@@ -39,7 +38,7 @@ export const OverflowButton: React.FC<Props> = ({
         if (propsOpen === undefined) {
             setIsOpen(prev => !prev);
         }
-        handleClick?.(); // Optional chaining for safety
+        handleClick?.();
     };
 
     return (

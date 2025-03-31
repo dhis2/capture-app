@@ -14,8 +14,6 @@ type Props = {
     trackedEntityName?: string;
 }
 
-
-// Define keys for default filters for better type safety
 const DefaultFilterKeys = {
     ACTIVE: 'active',
     COMPLETE: 'complete',
@@ -35,13 +33,11 @@ export const useWorkingListLabel = ({
     trackedEntityName,
     displayFrontPageList,
 }: Props) => {
-    // Use RootState with useSelector for better type safety
     const workingListTemplates = useSelector((state: any) => state.workingListsTemplates?.teiList);
     const workingListProgramId = useSelector((state: any) => state.workingListsContext?.teiList?.programIdView);
 
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
 
-    // Explicitly type selectedTemplate
     const selectedTemplate: Template | undefined = templates?.find(({ id }) => id === selectedTemplateId);
     const isSameProgram: boolean = workingListProgramId === programId;
 
@@ -53,7 +49,6 @@ export const useWorkingListLabel = ({
                 return selectedTemplate.name;
             }
 
-            // Type guard for selectedTemplateId
             if (selectedTemplateId && !selectedTemplate && DefaultFilterKeys[selectedTemplateId.toUpperCase() as keyof typeof DefaultFilterKeys]) {
                 return DefaultFilterLabels[selectedTemplateId as DefaultFilterKey];
             }

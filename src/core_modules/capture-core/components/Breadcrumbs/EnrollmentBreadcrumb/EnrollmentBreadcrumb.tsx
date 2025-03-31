@@ -56,7 +56,7 @@ const eventIsScheduled = (eventStatus?: EventStatus): boolean =>
         .includes(eventStatus);
 
 
-const BreadcrumbsPlain: React.FC<Props> = ({
+const BreadcrumbsPlain = ({
     onBackToMainPage,
     onBackToDashboard,
     onBackToViewEvent,
@@ -67,8 +67,8 @@ const BreadcrumbsPlain: React.FC<Props> = ({
     userInteractionInProgress = false,
     page,
     classes,
-}) => {
-    const [openWarning, setOpenWarning] = useState<WarningKey | null>(null); // Typed useState
+}: Props) => {
+    const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
 
     const { label } = useWorkingListLabel({
         trackedEntityName,

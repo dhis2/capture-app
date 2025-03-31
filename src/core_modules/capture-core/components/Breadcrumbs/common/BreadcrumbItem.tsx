@@ -1,4 +1,4 @@
-import React from 'react';
+import { ComponentType } from 'react';
 import cx from 'classnames';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
@@ -36,7 +36,7 @@ const styles = {
     },
 } as const;
 
-const BreadcrumbItemPlain: React.FC<Props> = ({ label, onClick, selected, dataTest, classes }) => (
+const BreadcrumbItemPlain = ({ label, onClick, selected, dataTest, classes }: Props) => (
     <button
         type="button"
         className={cx(classes.button, { selected })}
@@ -47,4 +47,4 @@ const BreadcrumbItemPlain: React.FC<Props> = ({ label, onClick, selected, dataTe
     </button>
 );
 
-export const BreadcrumbItem = withStyles(styles)(BreadcrumbItemPlain) as React.ComponentType<OwnProps>;
+export const BreadcrumbItem = withStyles(styles)(BreadcrumbItemPlain) as ComponentType<OwnProps>;
