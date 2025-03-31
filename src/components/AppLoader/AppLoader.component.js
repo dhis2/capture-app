@@ -1,4 +1,5 @@
-import React, { useCallback, useMemo, useEffect, useState } from 'react';
+// @flow
+import React, { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
 import { useDataEngine, useConfig, useTimeZoneConversion } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
@@ -10,12 +11,11 @@ import { buildUrl } from 'capture-core-utils';
 import { initFeatureAvailability } from 'capture-core-utils/featuresSupport';
 import { initializeAsync } from './init';
 import { getStore } from '../../store/getStore';
-import { ReduxStore } from '../../types/global.types';
 
-interface Props {
-    onRunApp: (store: ReduxStore) => void;
-    onCacheExpired: () => void;
-}
+type Props = {
+    onRunApp: (store: ReduxStore) => void,
+    onCacheExpired: Function,
+};
 
 const useApiUtils = () => {
     const dataEngine = useDataEngine();
@@ -24,16 +24,15 @@ const useApiUtils = () => {
     return useMemo(() => ({
         querySingleResource: makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         mutate: dataEngine.mutate.bind(dataEngine),
-        // @ts-ignore - Accessing private properties needed for original functionality
         absoluteApiPath: buildUrl(dataEngine.link.config.baseUrl, dataEngine.link.versionedApiPath),
         serverVersion,
         fromClientDate,
     }), [dataEngine, serverVersion, fromClientDate]);
 };
 
-export const AppLoader: React.FC<Props> = (props) => {
+export const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
-    const [loadError, setLoadError] = useState<string | null>(null);
+    const [loadError, setLoadError] = React.useState(null);
     const { querySingleResource, mutate, absoluteApiPath, serverVersion, fromClientDate } = useApiUtils();
 
     const { navigate } = useNavigate();
@@ -48,11 +47,11 @@ export const AppLoader: React.FC<Props> = (props) => {
 
     const load = useCallback(async () => {
         try {
-            initFeatureAvailability(serverVersion as { minor: number });
+            initFeatureAvailability(serverVersion);
             await initializeAsync(
                 onCacheExpired,
                 querySingleResource,
-                serverVersion?.minor || 0,
+                serverVersion.minor,
             );
             const store = getStore(
                 navigate, {
@@ -62,11 +61,12 @@ export const AppLoader: React.FC<Props> = (props) => {
                     serverVersion,
                     fromClientDate,
                 },
-                () => onRunApp(store as unknown as ReduxStore));
+                // $FlowFixMe[prop-missing] automated comment
+                () => onRunApp(store));
         } catch (error) {
             let message = 'The application could not be loaded.';
             if (error && error instanceof DisplayException) {
-                logError((error as DisplayException).innerError);
+                logError(error.innerError);
                 message += ` ${error.toString()}`;
             } else {
                 logError(error);

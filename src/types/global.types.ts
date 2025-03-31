@@ -8,7 +8,13 @@ export type ReduxAction<Payload, Meta> = {
     meta: Meta;
 };
 
-export type ReduxState = Record<string, unknown>;
+export type ReduxState = {
+    app?: {
+        initDone?: boolean;
+        goingOnline?: boolean;
+    };
+    [key: string]: unknown;
+};
 
 export type ReduxDispatch = {
     (action: {

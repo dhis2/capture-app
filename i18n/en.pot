@@ -5,8 +5,24 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-29T17:42:28.968Z\n"
-"PO-Revision-Date: 2025-03-29T17:42:28.968Z\n"
+"POT-Creation-Date: 2025-03-31T14:02:46.742Z\n"
+"PO-Revision-Date: 2025-03-31T14:02:46.742Z\n"
+
+msgid "Choose one or more dates..."
+msgstr "Choose one or more dates..."
+
+msgid "Choose a date..."
+msgstr "Choose a date..."
+
+msgid "Today"
+msgstr "Today"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. "
@@ -428,9 +444,6 @@ msgstr "Days in the past"
 
 msgid "To"
 msgstr "To"
-
-msgid "Today"
-msgstr "Today"
 
 msgid "This week"
 msgstr "This week"
