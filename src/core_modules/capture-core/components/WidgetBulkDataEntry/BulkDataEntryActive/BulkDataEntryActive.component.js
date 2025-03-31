@@ -5,7 +5,6 @@ import i18n from '@dhis2/d2-i18n';
 import { spacers, colors, Button, Tag } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryActive.types';
 import { Widget } from '../../Widget';
-import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip/';
 
 const styles = () => ({
     container: {
@@ -21,8 +20,12 @@ const styles = () => ({
         borderTop: `1px solid ${colors.grey400}`,
         padding: spacers.dp16,
     },
+    title: {
+        display: 'flex',
+    },
     tag: {
         marginLeft: spacers.dp8,
+        flexShrink: 0,
         backgroundColor: `${colors.yellow200} !important`,
     },
     button: {
@@ -30,28 +33,20 @@ const styles = () => ({
     },
 });
 
-const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, classes }: PlainProps) => {
-    const text = title.length > 30 ? `${title.substring(0, 27)}...` : title;
-
-    return (
-        <div className={classes.container}>
-            <Widget header={i18n.t('Bulk data entry')} noncollapsible borderless>
-                <div className={classes.content}>
-                    <div>
-                        <ConditionalTooltip content={title} placement={'top'} enabled={title.length > 30}>
-                            {text}
-                        </ConditionalTooltip>
-                        <Tag className={classes.tag}>
-                            {i18n.t('Unsaved changes')}
-                        </Tag>
-                    </div>
-                    <Button className={classes.button} onClick={onBackToBulkDataEntry} secondary small>
-                        {i18n.t('Continue data entry')}
-                    </Button>
+const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, classes }: PlainProps) => (
+    <div className={classes.container}>
+        <Widget header={i18n.t('Bulk data entry')} noncollapsible borderless>
+            <div className={classes.content}>
+                <div className={classes.title}>
+                    {title}
+                    <Tag className={classes.tag}>{i18n.t('Unsaved changes')}</Tag>
                 </div>
-            </Widget>
-        </div>
-    );
-};
+                <Button className={classes.button} onClick={onBackToBulkDataEntry} secondary small>
+                    {i18n.t('Continue data entry')}
+                </Button>
+            </div>
+        </Widget>
+    </div>
+);
 
 export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain);
