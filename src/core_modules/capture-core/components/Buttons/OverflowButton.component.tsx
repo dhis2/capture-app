@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, Layer, Popper } from '@dhis2/ui';
 
