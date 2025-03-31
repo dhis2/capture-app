@@ -1,8 +1,6 @@
 import React from 'react';
-import './app.css';
 import { Provider as ReduxProvider } from 'react-redux';
 import D2UIApp from '@dhis2/d2-ui-app';
-import { AppContents } from './AppContents.component';
 import {
     RulesEngineVerboseInitializer,
 } from 'capture-core/components/RulesEngineVerboseInitializer';
@@ -10,10 +8,12 @@ import {
     MetadataAutoSelectInitializer,
 } from 'capture-core/components/MetadataAutoSelectInitializer';
 import { ReduxStore } from '../../types/global.types';
+import './app.css';
+import { AppContents } from './AppContents.component';
 
-interface Props {
+type Props = {
     store: ReduxStore;
-}
+};
 
 export const App = ({ store }: Props): JSX.Element => (
     <React.Fragment>
@@ -23,7 +23,7 @@ export const App = ({ store }: Props): JSX.Element => (
             <D2UIApp>
                 <MetadataAutoSelectInitializer>
                     <RulesEngineVerboseInitializer>
-                        {AppContents && <AppContents as any />}
+                        {React.createElement(AppContents)}
                     </RulesEngineVerboseInitializer>
                 </MetadataAutoSelectInitializer>
             </D2UIApp>

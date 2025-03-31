@@ -47,7 +47,7 @@ export const AppLoader: React.FC<Props> = (props) => {
 
     const load = useCallback(async () => {
         try {
-            initFeatureAvailability(serverVersion);
+            initFeatureAvailability(serverVersion as { minor: number });
             await initializeAsync(
                 onCacheExpired,
                 querySingleResource,
@@ -65,7 +65,7 @@ export const AppLoader: React.FC<Props> = (props) => {
         } catch (error) {
             let message = 'The application could not be loaded.';
             if (error && error instanceof DisplayException) {
-                logError(error.innerError);
+                logError((error as DisplayException).innerError);
                 message += ` ${error.toString()}`;
             } else {
                 logError(error);

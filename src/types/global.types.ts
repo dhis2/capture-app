@@ -2,28 +2,28 @@ import '@dhis2/app-runtime';
 
 export type QuerySingleResource = (resourceQuery: any, variables?: any) => Promise<any>;
 
-export interface ReduxAction<Payload, Meta> {
+export type ReduxAction<Payload, Meta> = {
     type: string;
     payload: Payload;
     meta: Meta;
-}
+};
 
-export type ReduxState = Object;
+export type ReduxState = Record<string, unknown>;
 
-export interface ReduxDispatch {
+export type ReduxDispatch = {
     (action: {
         type: string;
         [props: string]: any;
     }): void;
-}
+};
 
-export interface ReduxStore {
+export type ReduxStore = {
     readonly value: ReduxState;
     readonly dispatch: ReduxDispatch;
     readonly getState: () => ReduxState;
-}
+};
 
-export interface CaptureClientEvent {
+export type CaptureClientEvent = {
     eventId: string;
     programId: string;
     programStageId: string;
@@ -36,39 +36,39 @@ export interface CaptureClientEvent {
     scheduledAt: string;
     completedAt: string;
     attributeCategoryOptions?: string;
-}
+};
 
-export interface UserFormValue {
+export type UserFormValue = {
     id: string;
     username: string;
     name: string;
-}
+};
 
-export interface UiEventData {
+export type UiEventData = {
     target: {
         value: any
     }
-}
+};
 
-export interface D2 {
-    models: Object;
+export type D2 = {
+    models: Record<string, unknown>;
     system: {
         settings: {
-            all: () => Object;
+            all: () => Record<string, unknown>;
         };
         systemInfo: {
             dateFormat: string;
         };
     };
-    i18n: Object;
+    i18n: Record<string, unknown>;
     currentUser: {
         authorities: Set<string>;
         userRoles: Array<string>;
         id: string;
     };
-}
+};
 
-export interface Theme {
+export type Theme = {
     palette: {
         common: {
             black: string;
@@ -177,32 +177,32 @@ export interface Theme {
         between: (value: string | number) => string;
         only: (value: string | number) => string;
     };
-}
+};
 
-export interface CssClasses {
-    readonly classes: Object;
-}
+export type CssClasses = {
+    readonly classes: Record<string, unknown>;
+};
 
-export interface ApiUtilsWithoutHistory {
+export type ApiUtilsWithoutHistory = {
     querySingleResource: QuerySingleResource;
     mutate: DataEngineMutate;
     absoluteApiPath: string;
     serverVersion: { minor: number };
     fromClientDate: (date?: string | Date | number | null) => any;
-}
+};
 
-export interface ApiUtils {
+export type ApiUtils = {
     querySingleResource: QuerySingleResource;
     mutate: DataEngineMutate;
     absoluteApiPath: string;
     serverVersion: { minor: number };
     navigate: (path: string, scrollToTop?: boolean) => void;
     fromClientDate: (date?: string | Date | number | null) => any;
-}
+};
 
-export interface DataEngineMutate {
+export type DataEngineMutate = {
     (input: any): Promise<any>;
-}
+};
 
 export type Epic = (action$: any, store: ReduxStore) => any;
 export type InputObservable = any;

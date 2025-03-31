@@ -12,11 +12,7 @@ import { CacheExpired } from './CacheExpired.component';
 import { JSSProviderShell } from './JSSProviderShell.component';
 import { theme } from '../../styles/uiTheme';
 
-// Define a basic type for the Redux store
-interface ReduxStore {
-    dispatch: (action: any) => void;
-    // Add other store properties as needed
-}
+import { ReduxStore } from '../../types/global.types';
 
 export const AppStart = () => {
     const [readyStatus, setReadyStatus] = useState<boolean>(false);
