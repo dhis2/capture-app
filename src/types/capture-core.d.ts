@@ -88,6 +88,46 @@ declare module 'capture-core/components/Pages/MainPage/MainPage.container' {
     export const MainPage: ComponentType<any>;
 }
 
+declare module 'capture-core/components/Pages/ViewEvent' {
+    import { ComponentType } from 'react';
+    export const ViewEventPage: ComponentType<any>;
+}
+
+declare module 'capture-core/components/Pages/MainPage' {
+    import { ComponentType } from 'react';
+    export const MainPage: ComponentType<any>;
+}
+
+declare module 'capture-core/components/Pages/Search' {
+    import { ComponentType } from 'react';
+    export const SearchPage: ComponentType<any>;
+}
+
+declare module 'capture-core/components/Pages/New' {
+    import { ComponentType } from 'react';
+    export const NewPage: ComponentType<any>;
+}
+
+declare module 'capture-core/components/Pages/Enrollment' {
+    import { ComponentType } from 'react';
+    export const EnrollmentPage: ComponentType<any>;
+}
+
+declare module 'capture-core/components/Pages/StageEvent' {
+    import { ComponentType } from 'react';
+    export const StageEventListPage: ComponentType<any>;
+}
+
+declare module 'capture-core/components/Pages/EnrollmentEditEvent' {
+    import { ComponentType } from 'react';
+    export const EnrollmentEditEventPage: ComponentType<any>;
+}
+
+declare module 'capture-core/components/Pages/EnrollmentAddEvent' {
+    import { ComponentType } from 'react';
+    export const EnrollmentAddEventPage: ComponentType<any>;
+}
+
 declare module 'capture-core/components/LoadingMasks' {
     import { ComponentType } from 'react';
 
