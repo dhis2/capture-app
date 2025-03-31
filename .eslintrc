@@ -157,6 +157,7 @@
                 "flowtype/require-valid-file-annotation": "off",
                 
                 "@typescript-eslint/indent": [2, 4],
+                "@typescript-eslint/explicit-module-boundary-types": "off",
                 "@typescript-eslint/explicit-function-return-type": "off",
                 "@typescript-eslint/no-unused-vars": [
                     "error",
@@ -166,9 +167,9 @@
                         "ignoreRestSiblings": true
                     }
                 ],
+                "no-unused-vars": "off",
                 "@typescript-eslint/no-unused-expressions": 0,
                 "@typescript-eslint/no-explicit-any": "warn",
-                
                 "indent": [2, 4],
                 "max-len": [
                     1,
