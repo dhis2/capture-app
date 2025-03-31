@@ -1,7 +1,7 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 const styles = (theme: Theme) => ({
     button: {
@@ -18,29 +18,23 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {
-    classes: {
-        contents: string,
-        button: string,
-    },
-    onClick: () => void,
-    className?: ?string,
-    muiClasses: Object,
-    children: React.Node,
-    disabled?: ?boolean,
-    muiButtonRef: (muiButtonInstance: any) => void,
-};
+    onClick: () => void;
+    className?: string;
+    children: React.ReactNode;
+    disabled?: boolean;
+} & WithStyles<typeof styles>;
 
-const LinkButtonPlain = (props: Props) => {
-    const { classes, children, muiClasses, muiButtonRef, className, ...passOnProps } = props;
+const LinkButtonPlain = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
+    const { classes, children, className, ...passOnProps } = props;
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
         <button
+            ref={ref}
             className={classNames(classes.button, className)}
             {...passOnProps}
         >
             {children}
         </button>
     );
-};
+});
 
 export const LinkButton = withStyles(styles)(LinkButtonPlain);
