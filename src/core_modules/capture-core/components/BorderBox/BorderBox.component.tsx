@@ -1,14 +1,6 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-
-type Props = {
-    classes: {
-        borderBox: string,
-    },
-    contentClassName?: ?string,
-    children: React.Node,
-};
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 
 const styles = (theme: Theme) => ({
     borderBox: {
@@ -18,6 +10,13 @@ const styles = (theme: Theme) => ({
         borderStyle: 'solid',
     },
 });
+
+type BorderBoxPlainProps = {
+    contentClassName?: string;
+    children: React.ReactNode;
+};
+
+type Props = BorderBoxPlainProps & WithStyles<typeof styles>;
 
 const BorderBoxPlain = (props: Props) => {
     const { classes, children, contentClassName } = props;
@@ -30,4 +29,4 @@ const BorderBoxPlain = (props: Props) => {
     );
 };
 
-export const BorderBox = withStyles(styles)(BorderBoxPlain);
+export const BorderBox = withStyles(styles)(BorderBoxPlain) as React.ComponentType<Props>;
