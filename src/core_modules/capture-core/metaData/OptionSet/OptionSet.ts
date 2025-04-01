@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
+import { viewTypes, inputTypes, inputTypesAsArray, InputType } from './optionSet.const';
 import { DataElement } from '../DataElement';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Option, Value } from './Option';
@@ -66,7 +66,7 @@ export class OptionSet {
             return;
         }
 
-        if (inputTypesAsArray.includes(inputType)) {
+        if (inputTypesAsArray.includes(inputType as InputType)) {
             this._inputType = inputType as keyof typeof inputTypes;
         } else {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_INPUTTYPE)({ optionSet: this, inputType }));
