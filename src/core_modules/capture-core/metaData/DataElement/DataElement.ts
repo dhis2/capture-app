@@ -1,10 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-restricted-syntax */
 import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import { errorCreator } from 'capture-core-utils';
-import { OptionSet } from '../OptionSet/OptionSet';
+import { OptionSet } from '../OptionSet';
 import { dataElementTypes } from './dataElementTypes';
 // import type { CachedAttributeValue } from '../../storageControllers'; // Flow type
 // import type { Section } from '../RenderFoundation'; // Flow type
@@ -234,15 +232,19 @@ export class DataElement {
             const convertedOptionSet = new OptionSet(
                 this.optionSet.id,
                 currentOptions,
-                null,
+                undefined,
                 this,
                 onConvert,
                 this.optionSet.attributeValues,
             );
 
             convertedOptionSet.inputType = this.optionSet.inputType;
-            convertedOptionSet.viewType = this.optionSet.viewType;
-            convertedOptionSet.emptyText = this.optionSet.emptyText;
+            if (this.optionSet.viewType) {
+                convertedOptionSet.viewType = this.optionSet.viewType;
+            }
+            if (this.optionSet.emptyText) {
+                convertedOptionSet.emptyText = this.optionSet.emptyText;
+            }
 
             return convertedOptionSet;
         }

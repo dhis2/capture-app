@@ -1,13 +1,12 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import type { OptionGroup } from './OptionGroup';
 import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
-import type { DataElement } from '../DataElement';
+import { DataElement } from '../DataElement';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Option, Value } from './Option';
+import type { OptionGroup } from './OptionGroup';
 import type { CachedAttributeValue } from '../../storageControllers';
 
 export class OptionSet {
@@ -18,24 +17,24 @@ export class OptionSet {
     };
     static multiOptionsValuesSeparator = ',';
 
-    _id: ?string;
-    _emptyText: ?string;
-    _attributeValues: Array<CachedAttributeValue>;
-    _options: Array<Option>;
-    _optionGroups: Map<string, OptionGroup>;
-    _viewType: $Values<typeof viewTypes>;
-    _inputType: $Values<typeof inputTypes>;
-    _dataElement: ?DataElement;
+    private _id?: string;
+    private _emptyText?: string;
+    private _attributeValues: CachedAttributeValue[];
+    private _options: Option[];
+    private _optionGroups: Map<string, OptionGroup>;
+    private _viewType?: keyof typeof viewTypes;
+    private _inputType: keyof typeof inputTypes;
+    private _dataElement?: DataElement;
 
     constructor(
-        id?: ?string,
-        options?: ?Array<Option>,
-        optionGroups?: ?Map<string, OptionGroup>,
-        dataElement?: ?DataElement,
-        onConvert?: ?ConvertFn,
-        attributeValues?: ?Array<CachedAttributeValue>,
+        id?: string,
+        options?: Option[],
+        optionGroups?: Map<string, OptionGroup>,
+        dataElement?: DataElement,
+        onConvert?: ConvertFn,
+        attributeValues?: CachedAttributeValue[],
     ) {
-        this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
+        this._options = !options ? [] : options.reduce((accOptions: Option[], currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
                 currentOption.value = onConvert && dataElement ?
                     onConvert(currentOption.value, dataElement.type, dataElement) :
@@ -52,62 +51,63 @@ export class OptionSet {
         this._id = id;
         this._dataElement = dataElement;
         this._attributeValues = attributeValues || [];
-        this._inputType = inputTypes.DROPDOWN;
+        this._inputType = inputTypes.DROPDOWN as keyof typeof inputTypes;
     }
 
     set id(id: string) {
         this._id = id;
     }
-    get id(): ?string {
+    get id(): string | undefined {
         return this._id;
     }
 
-    set inputType(inputType: ?string) {
+    set inputType(inputType: string) {
         if (!inputType) {
             return;
         }
 
         if (inputTypesAsArray.includes(inputType)) {
-            this._inputType = inputType;
+            this._inputType = inputType as keyof typeof inputTypes;
         } else {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_INPUTTYPE)({ optionSet: this, inputType }));
         }
     }
-    get inputType(): $Values<typeof inputTypes> {
+
+    get inputType(): keyof typeof inputTypes {
         return this._inputType;
     }
 
-    set viewType(viewType: ?string) {
+    set viewType(viewType: string) {
         if (!viewType) {
             return;
         }
 
-        if (viewTypes[viewType]) {
-            this._viewType = viewType;
+        if (viewType in viewTypes) {
+            this._viewType = viewType as keyof typeof viewTypes;
         } else {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_VIEWTYPE)({ optionSet: this, viewType }));
         }
     }
-    get viewType(): ?string {
+    get viewType(): keyof typeof viewTypes | undefined {
         return this._viewType;
     }
 
-    get emptyText(): ?string {
+    get emptyText(): string | undefined {
         return this._emptyText;
     }
-    set emptyText(emptyText?: ?string): ?string {
+    set emptyText(emptyText: string) {
         this._emptyText = emptyText;
     }
 
-    get attributeValues(): Array<ApiAttributeValues> {
+    get attributeValues(): CachedAttributeValue[] {
         return this._attributeValues;
     }
 
-    set attributeValues(value: Array<ApiAttributeValues>) {
+    set attributeValues(value: CachedAttributeValue[]) {
         this._attributeValues = value;
     }
 
-    get options(): Array<Option> {
+    get options(): Option[] {
         return this._options;
     }
 
@@ -119,11 +119,11 @@ export class OptionSet {
         this._optionGroups = optionGroups;
     }
 
-    get dataElement(): ?DataElement {
+    get dataElement(): DataElement | undefined {
         return this._dataElement;
     }
 
-    addOption(option: Option) {
+    addOption(option: Option): void {
         if (option.value || option.value === false || option.value === 0) {
             this._options.push(option);
         } else {
@@ -135,13 +135,13 @@ export class OptionSet {
         const option = this.options.find(o => o.value === value);
         if (!option) {
             throw new Error(
-                errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, value }),
+                errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, value }).message,
             );
         }
         return option;
     }
 
-    getOption(value: Value): ?Option {
+    getOption(value: Value): Option | undefined {
         const option = this.options.find(o => o.value === value);
         if (!option) {
             log.warn(
@@ -151,20 +151,20 @@ export class OptionSet {
         return option;
     }
 
-    getOptionsThrowIfNotFound(values: Array<Value>): Array<Option> {
+    getOptionsThrowIfNotFound(values: Value[]): Option[] {
         return values.map((value: Value) => {
             const option = this.options.find(o => o.value === value);
             if (!option) {
                 throw new Error(
-                    errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, value }),
+                    errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, value }).message,
                 );
             }
             return option;
         });
     }
 
-    getOptions(values: Array<Value>): Array<Option> {
-        return values.reduce((accOptions: Array<Option>, value: Value) => {
+    getOptions(values: Value[]): Option[] {
+        return values.reduce((accOptions: Option[], value: Value) => {
             const option = this.options.find(o => o.value === value);
             if (option) {
                 accOptions.push(option);
@@ -177,18 +177,18 @@ export class OptionSet {
         }, []);
     }
 
-    getOptionText(value: Value): ?string {
+    getOptionText(value: Value): string | undefined {
         const option = this.getOption(value);
-        return option && option.text;
+        return option?.text;
     }
 
-    getOptionsText(values: Array<Value>): Array<string> {
+    getOptionsText(values: Value[]): string[] {
         const options = this.getOptions(values);
         return options.map((option: Option) => option.text);
     }
 
     getMultiOptionsText(codes: string): string {
-        return codes.split(OptionSet.multiOptionsValuesSeparator).reduce((acc, code) => {
+        return codes.split(OptionSet.multiOptionsValuesSeparator).reduce((acc: string[], code) => {
             const option = this.options.find(o => o.value === code);
             if (option) {
                 acc.push(option.text);
@@ -199,18 +199,16 @@ export class OptionSet {
         }, []).join(`${OptionSet.multiOptionsValuesSeparator} `);
     }
 
-    getOptionsTextAsString(values: Array<Value>): string {
+    getOptionsTextAsString(values: Value[]): string {
         const texts = this.getOptionsText(values);
         return texts.toString();
     }
 
-    resolveTextsAsString(values: Value | Array<Value>): ?string {
+    resolveTextsAsString(values: Value | Value[]): string | undefined {
         if (isArray(values)) {
-            // $FlowFixMe[incompatible-call] automated comment
-            return this.getOptionsTextAsString(values);
+            return this.getOptionsTextAsString(values as Value[]);
         }
 
-        // $FlowFixMe[incompatible-call] automated comment
-        return this.getOptionText(values);
+        return this.getOptionText(values as Value);
     }
 }
