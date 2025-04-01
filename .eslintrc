@@ -152,7 +152,6 @@
                 "flowtype/define-flow-type": "off",
                 "flowtype/require-valid-file-annotation": "off",
                 
-                "@typescript-eslint/indent": [2, 4],
                 "@typescript-eslint/explicit-module-boundary-types": "off",
                 "@typescript-eslint/explicit-function-return-type": "off",
                 "@typescript-eslint/no-unused-vars": [
