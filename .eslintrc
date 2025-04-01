@@ -132,7 +132,10 @@
     },
     "settings": {
         "import/resolver": {
-            "typescript": {}
+            "typescript": {
+                "alwaysTryTypes": true,
+                "project": "./tsconfig.json"
+            }
         },
         "import/core-modules": ["rxjs/operators"]
     },
