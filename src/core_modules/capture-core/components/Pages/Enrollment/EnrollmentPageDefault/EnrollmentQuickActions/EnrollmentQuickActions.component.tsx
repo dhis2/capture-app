@@ -1,13 +1,13 @@
-// @flow
-import React, { useState, useMemo } from 'react';
-// $FlowFixMe
+import React, { useState, useMemo, ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from '@material-ui/core';
+import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../../../../Widget';
-import { QuickActionButton } from './QuickActionButton/QuickActionButton';
+import { QuickActionButton } from './QuickActionButton/QuickActionButton.component';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
-import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
+import { useNavigate, buildUrlQueryString } from '../../../../../utils/routing';
+import type { ProgramStage, TrackerProgram } from '../../../../../metaData';
 
 const styles = {
     contentContainer: {
@@ -15,44 +15,76 @@ const styles = {
         display: 'flex',
         gap: spacers.dp8,
     },
+} as const;
 
+type EventCount = { eventCount?: number };
+
+type Event = { programStage: string };
+
+type OwnProps = {
+    stages: Array<ProgramStage & EventCount>,
+    events: Array<Event>,
+    ruleEffects?: Array<OutputEffect>,
+    program: TrackerProgram,
+    orgUnitId: string,
+    enrollmentId: string,
+    teiId: string,
 };
 
-const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes }) => {
-    const [open, setOpen] = useState(true);
-    const { navigate } = useNavigate();
-    const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
+type Props = OwnProps & WithStyles<typeof styles>;
 
-    const stagesWithEventCount = useMemo(() => stages.map((stage) => {
-        const mutatedStage = { ...stage };
-        mutatedStage.eventCount = (events
-            ?.filter(event => event.programStage === stage.id)
-            ?.length
-        );
+const EnrollmentQuickActionsComponentPlain = (
+    {
+        stages,
+        events,
+        ruleEffects,
+        classes,
+        program,
+        enrollmentId,
+        teiId,
+        orgUnitId,
+    }: Props) => {
+    const [open, setOpen] = useState<boolean>(true);
+    const { navigate } = useNavigate();
+
+    const stagesWithEventCount = useMemo(() => stages.map((stage: ProgramStage & EventCount) => {
+        const mutatedStage = { ...stage } as (ProgramStage & EventCount);
+        mutatedStage.eventCount = (
+            events
+                ?.filter((event: Event) => event.programStage === stage.id)
+                ?.length
+        ) ?? 0;
         return mutatedStage;
     }), [events, stages]);
 
     const hiddenProgramStageRuleEffects = useMemo(
-        () => ruleEffects?.filter(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE'),
+        () => ruleEffects?.filter((ruleEffect: OutputEffect): boolean => ruleEffect.id === 'HIDEPROGRAMSTAGE'),
         [ruleEffects],
     );
 
     const noStageAvailable = useMemo(
         () =>
             stagesWithEventCount.every(
-                programStage =>
-                    (!programStage.dataAccess.write) ||
-                    (!programStage.repeatable && programStage.eventCount > 0) ||
-                    hiddenProgramStageRuleEffects?.find(ruleEffect => ruleEffect.id === programStage.id),
+                (programStage: ProgramStage & EventCount) =>
+                    (!programStage.access?.data?.write) ||
+                    (!programStage.repeatable && (programStage.eventCount ?? 0) > 0) ||
+                    hiddenProgramStageRuleEffects
+                        ?.find((ruleEffect: OutputEffect) => ruleEffect.id === programStage.id),
             ),
         [stagesWithEventCount, hiddenProgramStageRuleEffects],
     );
 
     const onNavigationFromQuickActions = (tab: string) => {
-        navigate(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
+        navigate(`/enrollmentEventNew?${buildUrlQueryString({
+            programId: program.id ?? '',
+            teiId: teiId ?? '',
+            enrollmentId: enrollmentId ?? '',
+            orgUnitId: orgUnitId ?? '',
+            tab,
+        })}`);
     };
 
-    const ready = events !== undefined && stages !== undefined;
+    const ready: boolean = events !== undefined && stages !== undefined;
 
     return (
         <Widget
@@ -96,4 +128,5 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
     );
 };
 
-export const EnrollmentQuickActions = withStyles(styles)(EnrollmentQuickActionsComponent);
+export const EnrollmentQuickActions =
+    withStyles(styles)(EnrollmentQuickActionsComponentPlain) as ComponentType<OwnProps>;
