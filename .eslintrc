@@ -135,7 +135,11 @@
             "typescript": {
                 "alwaysTryTypes": true,
                 "project": "./tsconfig.json"
-            }
+            },
+            "webpack": {
+                "config": "./config/eslint/webpack.config.js"
+            },
+            "exports": {}
         },
         "import/core-modules": ["rxjs/operators"]
     },
