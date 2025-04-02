@@ -18,7 +18,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "src",
-    "allowImportingTsExtensions": true,
     "paths": {
       "capture-core": ["core_modules/capture-core"],
       "capture-ui": ["core_modules/capture-ui"],
