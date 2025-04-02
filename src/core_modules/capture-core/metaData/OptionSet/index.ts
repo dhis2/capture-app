@@ -1,4 +1,4 @@
-export { OptionSet } from './OptionSet.ts';
-export { Option } from './Option.ts';
-export { OptionGroup } from './OptionGroup.ts';
-export { inputTypes, inputTypesAsArray, viewTypes } from './optionSet.const.ts';
+export { OptionSet } from './OptionSet';
+export { Option } from './Option';
+export { OptionGroup } from './OptionGroup';
+export { inputTypes, inputTypesAsArray, viewTypes } from './optionSet.const';

@@ -1,1 +1,1 @@
-export { EventBreadcrumb } from './EventBreadcrumb.tsx';
+export { EventBreadcrumb } from './EventBreadcrumb';

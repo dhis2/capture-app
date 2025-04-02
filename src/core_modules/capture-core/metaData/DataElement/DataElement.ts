@@ -2,8 +2,8 @@
 import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import { errorCreator } from 'capture-core-utils';
-import { OptionSet } from '../OptionSet/OptionSet.ts';
-import { dataElementTypes } from './dataElementTypes.ts';
+import { OptionSet } from '../OptionSet/OptionSet';
+import { dataElementTypes } from './dataElementTypes';
 // import type { CachedAttributeValue } from '../../storageControllers'; // Flow type
 // import type { Section } from '../RenderFoundation'; // Flow type
 // import type { Unique } from './Unique'; // Flow type

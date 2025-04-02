@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { HashRouter as Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -8,8 +9,8 @@ import { AppLoader } from '../AppLoader';
 import { App } from '../App';
 import { loadApp } from './appStart.actions';
 import { addBeforeUnloadEventListener } from './unload';
-import { CacheExpired } from './CacheExpired.component.tsx';
-import { JSSProviderShell } from './JSSProviderShell.component.tsx';
+import { CacheExpired } from './CacheExpired.component';
+import { JSSProviderShell } from './JSSProviderShell.component';
 import { theme } from '../../styles/uiTheme';
 
 // Define a basic type for the Redux store
@@ -17,6 +18,8 @@ interface ReduxStore {
     dispatch: (action: any) => void;
     // Add other store properties as needed
 }
+
+const queryClient = new QueryClient();
 
 export const AppStart = () => {
     const [readyStatus, setReadyStatus] = useState<boolean>(false);
@@ -48,22 +51,24 @@ export const AppStart = () => {
         <React.Fragment>
             <CssBaseline />
             <JSSProviderShell>
-                <MuiThemeProvider
-                    theme={theme}
-                >
-                    <Router>
-                        {
-                            readyStatus ?
-                                <App
-                                    store={store.current as ReduxStore}
-                                /> :
-                                <AppLoader
-                                    onRunApp={handleRunApp}
-                                    onCacheExpired={handleCacheExpired}
-                                />
-                        }
-                    </Router>
-                </MuiThemeProvider>
+                <QueryClientProvider client={queryClient}>
+                    <MuiThemeProvider
+                        theme={theme}
+                    >
+                        <Router>
+                            {
+                                readyStatus ?
+                                    <App
+                                        store={store.current as ReduxStore}
+                                    /> :
+                                    <AppLoader
+                                        onRunApp={handleRunApp}
+                                        onCacheExpired={handleCacheExpired}
+                                    />
+                            }
+                        </Router>
+                    </MuiThemeProvider>
+                </QueryClientProvider>
             </JSSProviderShell>
         </React.Fragment>
     );

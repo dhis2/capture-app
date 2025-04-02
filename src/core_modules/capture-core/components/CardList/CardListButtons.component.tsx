@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, type ButtonEventHandler } from '@dhis2/ui';
 import { useDispatch } from 'react-redux';
 import { searchScopes } from '../SearchBox';
-import { availableCardListButtonState, enrollmentTypes } from './CardList.constants.ts';
+import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
 import {
     navigateToEnrollmentOverview,
 } from '../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';

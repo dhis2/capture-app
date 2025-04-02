@@ -1,6 +1,6 @@
-export { DataElement } from './DataElement.ts';
-export { DateDataElement } from './DateDataElement.ts';
-export { dataElementTypes } from './dataElementTypes.ts';
+export { DataElement } from './DataElement';
+export { DateDataElement } from './DateDataElement';
+export { dataElementTypes } from './dataElementTypes';
 export {
     Unique,
     scopes as uniqueScope,

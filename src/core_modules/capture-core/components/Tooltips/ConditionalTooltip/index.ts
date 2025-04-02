@@ -1,1 +1,1 @@
-export { ConditionalTooltip } from './ConditionalTooltip.component.tsx';
+export { ConditionalTooltip } from './ConditionalTooltip.component';

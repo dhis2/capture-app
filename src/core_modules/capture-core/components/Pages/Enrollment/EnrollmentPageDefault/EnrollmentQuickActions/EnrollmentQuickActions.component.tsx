@@ -4,7 +4,7 @@ import { colors, spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
 import { withStyles, WithStyles } from '@material-ui/core';
 import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../../../../Widget';
-import { QuickActionButton } from './QuickActionButton/QuickActionButton.tsx';
+import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 import { useNavigate, buildUrlQueryString } from '../../../../../utils/routing';
 import type { ProgramStage, TrackerProgram } from '../../../../../metaData';
