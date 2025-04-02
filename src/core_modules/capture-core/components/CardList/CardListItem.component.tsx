@@ -231,7 +231,7 @@ const CardListItemIndex = ({
                                         key={id}
                                         name={name}
                                         value={item.values[id] as string | undefined}
-                                        type={type}
+                                        type={type as keyof typeof dataElementTypes}
                                     />
                                 );
                             })
