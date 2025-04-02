@@ -15,7 +15,5 @@
 3.  **Update Index File (if applicable):**
     *   Rename the corresponding `index.js` (if one exists in the same directory) to `index.ts`.
     *   Update the export statement(s) in `index.ts` to point to the renamed component file.
-4.  **Refine Imports/Exports:**
-    *   Ensure all import/export paths **omit** file extensions (`.ts`, `.tsx`). TypeScript resolves these automatically (e.g., use `'./MyComponent'` instead of `'./MyComponent.tsx'`).
-5.  **Address Errors:** Fix any resulting TypeScript errors, often related to nullability mismatches, specific event types, prop mismatches, or incorrect HOC/ref handling.
+4.  **Address Errors:** Fix any resulting TypeScript errors, often related to nullability mismatches, specific event types, prop mismatches, or incorrect HOC/ref handling.
     *   *Optional:* If `React.forwardRef` was added, a `displayName` property might have been included. This can often be removed if not specifically needed for debugging. 
