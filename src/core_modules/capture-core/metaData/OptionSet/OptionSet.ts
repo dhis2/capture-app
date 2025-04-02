@@ -2,10 +2,10 @@
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import { viewTypes, inputTypes, inputTypesAsArray, InputType } from './optionSet.const';
-import { DataElement } from '../DataElement';
-import type { ConvertFn } from '../DataElement/DataElement';
-import type { Option, Value } from './Option';
+import { viewTypes, inputTypes, inputTypesAsArray, InputType } from './optionSet.const.ts';
+import { DataElement } from '../DataElement/DataElement.ts';
+import type { ConvertFn } from '../DataElement/DataElement.ts';
+import type { Option, Value } from './Option.ts';
 import type { OptionGroup } from './OptionGroup';
 import type { CachedAttributeValue } from '../../storageControllers';
 

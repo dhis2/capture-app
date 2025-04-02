@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { enrollmentTypes } from './CardList.constants';
+import { enrollmentTypes } from './CardList.constants.ts';
 
 type Attribute = {
   lastUpdated: string,

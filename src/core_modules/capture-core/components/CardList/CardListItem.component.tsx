@@ -10,8 +10,8 @@ import {
     type CardProfileImageElementInformation,
     searchScopes,
 } from '../SearchBox';
-import { enrollmentTypes } from './CardList.constants';
-import { ListEntry } from './ListEntry.component';
+import { enrollmentTypes } from './CardList.constants.ts';
+import { ListEntry } from './ListEntry.component.tsx';
 import { dataElementTypes, getTrackerProgramThrowIfNotFound, type TrackerProgram } from '../../metaData';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';

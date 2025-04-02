@@ -1,1 +1,1 @@
-export { EnrollmentBreadcrumb } from './EnrollmentBreadcrumb';
+export { EnrollmentBreadcrumb } from './EnrollmentBreadcrumb.tsx';

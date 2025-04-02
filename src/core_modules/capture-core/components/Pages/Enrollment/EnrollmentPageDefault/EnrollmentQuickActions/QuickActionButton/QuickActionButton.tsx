@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { QuickActionButtonTypes } from './QuickActionButton.types';
+import { QuickActionButtonTypes } from './QuickActionButton.types.ts';
 
 const styles = {
     button: {

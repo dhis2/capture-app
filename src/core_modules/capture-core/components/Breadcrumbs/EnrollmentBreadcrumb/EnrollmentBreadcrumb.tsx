@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useState, ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { colors, IconChevronRight16 } from '@dhis2/ui';
-import { useWorkingListLabel } from './hooks/useWorkingListLabel';
-import { BreadcrumbItem } from '../common/BreadcrumbItem';
+import { useWorkingListLabel } from './hooks/useWorkingListLabel.ts';
+import { BreadcrumbItem } from '../common/BreadcrumbItem.tsx';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
 import {

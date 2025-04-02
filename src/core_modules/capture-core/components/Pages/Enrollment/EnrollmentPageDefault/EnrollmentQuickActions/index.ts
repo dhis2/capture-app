@@ -1,1 +1,1 @@
-export { EnrollmentQuickActions } from './EnrollmentQuickActions.component';
+export { EnrollmentQuickActions } from './EnrollmentQuickActions.component.tsx';

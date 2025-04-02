@@ -8,8 +8,8 @@ import { AppLoader } from '../AppLoader';
 import { App } from '../App';
 import { loadApp } from './appStart.actions';
 import { addBeforeUnloadEventListener } from './unload';
-import { CacheExpired } from './CacheExpired.component';
-import { JSSProviderShell } from './JSSProviderShell.component';
+import { CacheExpired } from './CacheExpired.component.tsx';
+import { JSSProviderShell } from './JSSProviderShell.component.tsx';
 import { theme } from '../../styles/uiTheme';
 
 // Define a basic type for the Redux store

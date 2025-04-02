@@ -1,4 +1,4 @@
-export { CardList } from './CardList.component';
-export { CardListButtons } from './CardListButtons.component';
-export { ListEntry } from './ListEntry.component';
-export type { RenderCustomCardActions } from './CardList.types';
+export { CardList } from './CardList.component.tsx';
+export { CardListButtons } from './CardListButtons.component.tsx';
+export { ListEntry } from './ListEntry.component.tsx';
+export type { RenderCustomCardActions } from './CardList.types.ts';

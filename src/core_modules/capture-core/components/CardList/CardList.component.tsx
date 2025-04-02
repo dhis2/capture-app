@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import type { Theme } from '@material-ui/core/styles';
-import { CardListItem } from './CardListItem.component';
-import { makeElementsContainerSelector } from './CardList.selectors';
+import { CardListItem } from './CardListItem.component.tsx';
+import { makeElementsContainerSelector } from './CardList.selectors.ts';
 import { CardDataElementsInformation } from '../SearchBox';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 

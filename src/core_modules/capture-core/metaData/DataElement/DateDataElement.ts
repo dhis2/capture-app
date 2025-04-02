@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { DataElement } from '../DataElement';
+import { DataElement } from './DataElement.ts';
 
 export class DateDataElement extends DataElement {
     private _allowFutureDate: boolean;
