@@ -38,26 +38,23 @@ export class DataElement {
     _displayInReports = true;
     _icon?: IconType;
     _unique?: UniqueType;
-    _inherit = false;
+    _inherit?: boolean;
     _searchable?: boolean;
     _url?: string;
-    _attributeValues: CachedAttributeValueType[] = [];
+    _attributeValues?: CachedAttributeValueType[];
     _section?: SectionType;
 
     // eslint-disable-next-line complexity
     constructor(initFn?: (_this: DataElement) => void) {
         this.type = dataElementTypes.UNKNOWN;
+        this._displayInReports = true;
+        this._displayInForms = true;
+        this.disabled = false;
+        this.compulsory = false;
 
         if (initFn && isFunction(initFn)) {
             initFn(this);
         }
-
-        if (this._id === undefined) this._id = '';
-        if (this._name === undefined) this._name = '';
-        if (this._shortName === undefined) this._shortName = '';
-        if (this._code === undefined) this._code = '';
-        if (this._formName === undefined) this._formName = '';
-        if (this._description === undefined) this._description = '';
     }
 
     set id(id: string) {
@@ -174,7 +171,7 @@ export class DataElement {
         return this._unique;
     }
 
-    get inherit(): boolean {
+    get inherit(): boolean | undefined {
         return this._inherit;
     }
 
@@ -198,7 +195,7 @@ export class DataElement {
         return this._url;
     }
 
-    get attributeValues(): CachedAttributeValueType[] {
+    get attributeValues(): CachedAttributeValueType[] | undefined {
         return this._attributeValues;
     }
 
