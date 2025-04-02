@@ -70,7 +70,7 @@ export const WidgetEventSchedule = ({
     const [assignee, setAssignee] = useState(storedAssignee);
     const { eventId } = useLocationQuery();
     const selectedOrgUnitId = scheduledOrgUnit?.id || initialOrgUnitId;
-    const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate);
+    const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate, programId);
     const eventCountInOrgUnit = events.length;
     const [selectedCategories, setSelectedCategories] = useState({});
     const [categoryOptionsError, setCategoryOptionsError] = useState();
