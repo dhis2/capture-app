@@ -1,49 +1,44 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
-import type { ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type Theme, type WithStyles } from '@material-ui/core/styles';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { CardImage } from '../../../capture-ui/CardImage/CardImage.component';
-import type {
-    CardDataElementsInformation,
-    CardProfileImageElementInformation,
+import {
+    type CardDataElementsInformation,
+    type CardProfileImageElementInformation,
+    searchScopes,
 } from '../SearchBox';
-import { searchScopes } from '../SearchBox';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
-import { dataElementTypes, getTrackerProgramThrowIfNotFound } from '../../metaData';
+import { dataElementTypes, getTrackerProgramThrowIfNotFound, type TrackerProgram } from '../../metaData';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
-type OwnProps = $ReadOnly<{|
-    item: ListItem,
-        currentSearchScopeName ?: string,
-        currentProgramId ?: string,
-        currentSearchScopeType ?: string,
-        renderCustomCardActions ?: RenderCustomCardActions,
-        profileImageDataElement: ?CardProfileImageElementInformation,
-            dataElements: CardDataElementsInformation,
-|}>;
+type OwnProps = {
+    readonly item: ListItem,
+    readonly currentSearchScopeName?: string,
+    readonly currentProgramId?: string,
+    readonly currentSearchScopeType?: string,
+    readonly renderCustomCardActions?: RenderCustomCardActions,
+    readonly profileImageDataElement: CardProfileImageElementInformation | null,
+    readonly dataElements: CardDataElementsInformation,
+};
 
-type Props = $ReadOnly<{|
-    ...OwnProps,
-    ...CssClasses
-    |}>;
+type Props = OwnProps & WithStyles<typeof styles>;
 
-const getStyles = (theme: Theme) => ({
+const styles = (theme: Theme) => ({
     itemContainer: {
         maxWidth: theme.typography.pxToRem(600),
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column' as const,
         margin: theme.typography.pxToRem(8),
         padding: theme.typography.pxToRem(8),
         borderRadius: theme.typography.pxToRem(5),
         border: `1px solid ${colors.grey400}`,
         backgroundColor: colors.grey050,
-        position: 'relative',
+        position: 'relative' as const,
     },
     itemDataContainer: {
         display: 'flex',
@@ -52,7 +47,7 @@ const getStyles = (theme: Theme) => ({
         fontSize: theme.typography.pxToRem(12),
         color: colors.grey700,
         paddingBottom: theme.typography.pxToRem(8),
-        position: 'absolute',
+        position: 'absolute' as const,
         top: theme.typography.pxToRem(8),
         right: theme.typography.pxToRem(8),
     },
@@ -63,7 +58,7 @@ const getStyles = (theme: Theme) => ({
     },
     itemValuesContainer: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'wrap' as const,
         flexGrow: 1,
     },
     image: {
@@ -75,57 +70,65 @@ const getStyles = (theme: Theme) => ({
         marginTop: theme.typography.pxToRem(8),
     },
     checkIcon: {
-        position: 'relative',
+        position: 'relative' as const,
         top: '-2px',
     },
 });
 
+type Enrollment = { program: string, status: string, lastUpdated: string, orgUnit: string, enrolledAt: string };
+
 const deriveEnrollmentType =
-  (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
-      if (!currentProgramId) {
-          return enrollmentTypes.DONT_SHOW_TAG;
-      }
+    (enrollments: readonly Enrollment[], currentProgramId?: string): keyof typeof enrollmentTypes => {
+        if (!currentProgramId) {
+            return enrollmentTypes.DONT_SHOW_TAG;
+        }
 
-      const enrollmentsInCurrentProgram = enrollments
-          .filter(({ program }) => program === currentProgramId)
-          .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
+        const enrollmentsInCurrentProgram = enrollments
+            .filter(({ program }) => program === currentProgramId)
+            .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
 
 
-      const { ACTIVE, CANCELLED, COMPLETED } = enrollmentTypes;
-      if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
-          return ACTIVE;
-      } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
-          return COMPLETED;
-      } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
-          return CANCELLED;
-      }
-      return enrollmentTypes.DONT_SHOW_TAG;
-  };
+        const { ACTIVE, CANCELLED, COMPLETED } = enrollmentTypes;
+        if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
+            return ACTIVE;
+        } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
+            return COMPLETED;
+        } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
+            return CANCELLED;
+        }
+        return enrollmentTypes.DONT_SHOW_TAG;
+    };
 
-const deriveEnrollmentOrgUnitIdAndDate = (enrollments, enrollmentType, currentProgramId): {orgUnitId?: string, enrolledAt?: string} => {
+type EnrollmentOrgUnitInfo = { orgUnitId?: string, enrolledAt?: string };
+
+const deriveEnrollmentOrgUnitIdAndDate = (
+    enrollments: readonly Enrollment[] | undefined,
+    enrollmentType: keyof typeof enrollmentTypes,
+    currentProgramId?: string,
+): EnrollmentOrgUnitInfo => {
     if (!enrollments?.length) { return {}; }
     if (!currentProgramId && enrollments.length) {
-        const { orgUnit: orgUnitId, enrolledAt } = enrollments[0];
-
-        return {
-            orgUnitId,
-            enrolledAt,
-        };
+        const { orgUnit: orgUnitId, enrolledAt } = enrollments[0] ?? {};
+        return { orgUnitId, enrolledAt };
     }
-    const { orgUnit: orgUnitId, enrolledAt } =
-        enrollments
-            .filter(({ program }) => program === currentProgramId)
-            .filter(({ status }) => status === enrollmentType)
-            .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0]
-        || {};
+
+    const relevantEnrollment = enrollments
+        .filter(({ program }) => program === currentProgramId)
+        .filter(({ status }) => status === enrollmentType)
+        .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0];
+
+    const { orgUnit: orgUnitId, enrolledAt } = relevantEnrollment || {};
 
     return { orgUnitId, enrolledAt };
 };
 
-const deriveProgramFromEnrollment = (enrollments, currentSearchScopeType) => {
-    if (currentSearchScopeType === searchScopes.ALL_PROGRAMS || currentSearchScopeType === searchScopes.PROGRAM) {
-        const program = getTrackerProgramThrowIfNotFound(enrollments[0].program);
-
+const deriveProgramFromEnrollment = (
+    enrollments: readonly Enrollment[],
+    currentSearchScopeType?: string,
+): TrackerProgram | undefined => {
+    // eslint-disable-next-line max-len
+    if ((currentSearchScopeType === searchScopes.ALL_PROGRAMS || currentSearchScopeType === searchScopes.PROGRAM) && enrollments?.[0]?.program) {
+        const program: TrackerProgram = getTrackerProgramThrowIfNotFound(enrollments[0].program);
         return program;
     }
     return undefined;
@@ -141,27 +144,26 @@ const CardListItemIndex = ({
     currentSearchScopeName,
     currentSearchScopeType,
 }: Props) => {
-    const enrollments = item.tei ? item.tei.enrollments : [];
+    const enrollments: readonly Enrollment[] = item.tei?.enrollments ?? [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitId, enrolledAt } = deriveEnrollmentOrgUnitIdAndDate(enrollments, enrollmentType, currentProgramId);
-    const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId);
-    const program = enrollments && enrollments.length
+    const { displayName: orgUnitName } = useOrgUnitNameWithAncestors(orgUnitId ?? null);
+    const program: TrackerProgram | undefined = enrollments.length
         ? deriveProgramFromEnrollment(enrollments, currentSearchScopeType)
         : undefined;
     const { fromServerDate } = useTimeZoneConversion();
 
-    const renderImageDataElement = (imageElement?: ?CardProfileImageElementInformation) => {
+    const renderImageDataElement = (imageElement: CardProfileImageElementInformation | null): React.ReactNode => {
         if (!imageElement) { return null; }
-        const imageValue = item.values[imageElement.id];
+        const imageValue = item.values[imageElement.id] as { url: string } | undefined;
         return (
             <div>
-                {imageValue && <CardImage imageUrl={imageValue.url} className={classes.image} size="medium" />}
-
+                {imageValue && <CardImage dataTest={`list-item-image-${imageElement.id}`} imageUrl={imageValue.url} className={classes.image} size="medium" />}
             </div>
         );
     };
 
-    const renderTag = () => {
+    const renderTag = (): React.ReactNode => {
         switch (enrollmentType) {
         case enrollmentTypes.ACTIVE:
             return (
@@ -197,15 +199,17 @@ const CardListItemIndex = ({
         }
     };
 
-    const renderEnrollmentDetails = () => {
+    const renderEnrollmentDetails = (): React.ReactNode => {
         if (currentSearchScopeType === searchScopes.ALL_PROGRAMS) {
             return null;
         }
+
         return (<>
             <ListEntry
                 name={i18n.t('Organisation unit')}
                 value={orgUnitName}
-            />  <ListEntry
+            />
+            <ListEntry
                 name={program?.enrollment?.enrollmentDateLabel ?? i18n.t('Date of enrollment')}
                 value={enrolledAt}
                 type={dataElementTypes.DATE}
@@ -220,14 +224,17 @@ const CardListItemIndex = ({
                     {renderImageDataElement(profileImageDataElement)}
                     <div>
                         {dataElements
-                            .map(({ id, name, type }) => (
-                                <ListEntry
-                                    key={id}
-                                    name={name}
-                                    value={item.values[id]}
-                                    type={type}
-                                />
-                            ))
+                            .map((dataElement: { id: string, name: string, type: string }) => {
+                                const { id, name, type } = dataElement;
+                                return (
+                                    <ListEntry
+                                        key={id}
+                                        name={name}
+                                        value={item.values[id] as string | undefined}
+                                        type={type}
+                                    />
+                                );
+                            })
                         }
                         {renderEnrollmentDetails()}
                     </div>
@@ -238,7 +245,7 @@ const CardListItemIndex = ({
                     </div>
                 </div>
             </div>
-            {item.tei && item.tei.updatedAt && (
+            {item.tei?.updatedAt && (
                 <div className={classes.smallerLetters}>
                     {i18n.t('Last updated')}{' '}
                     {item.tei && (
@@ -268,4 +275,5 @@ const CardListItemIndex = ({
     );
 };
 
-export const CardListItem: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(CardListItemIndex);
+export const CardListItem =
+    withStyles(styles)(CardListItemIndex) as React.ComponentType<OwnProps>;

@@ -1,23 +1,24 @@
-// @flow
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { Icon } from '../Icon/Icon';
 import type { CachedAttributeValue } from '../../storageControllers';
 
-export type Value = string | number | boolean | {};
+export type Value = string | number | boolean | Record<string, unknown>;
 
 export class Option {
-    _id: string;
-    _code: string;
-    _value: Value;
-    _text: string;
-    _description: ?string;
-    _attributeValues: ?Array<CachedAttributeValue>;
-    _icon: Icon | void;
+    private _id!: string;
+    private _code!: string;
+    private _value!: Value;
+    private _text!: string;
+    private _description?: string;
+    private _attributeValues?: CachedAttributeValue[];
+    private _icon?: Icon;
 
-    constructor(initFn?: (_this: Option) => void) {
-        initFn && isFunction(initFn) && initFn(this);
+    constructor(initFn?: (this: Option) => void) {
+        if (initFn && isFunction(initFn)) {
+            initFn.call(this);
+        }
     }
 
     set id(id: string) {
@@ -39,6 +40,7 @@ export class Option {
     set value(value: Value) {
         this._value = value;
     }
+
     get value(): Value {
         return this._value;
     }
@@ -46,44 +48,44 @@ export class Option {
     set text(text: string) {
         this._text = text;
     }
+
     get text(): string {
         return this._text;
     }
 
-    set description(description: ?string) {
+    set description(description: string | undefined) {
         this._description = description;
     }
-    get description(): ?string {
+
+    get description(): string | undefined {
         return this._description;
     }
 
-    set icon(icon?: Icon) {
+    set icon(icon: Icon | undefined) {
         this._icon = icon;
     }
 
-    get icon(): Icon | void {
+    get icon(): Icon | undefined {
         return this._icon;
     }
 
-    get attributeValues(): ?Array<CachedAttributeValue> {
+    get attributeValues(): CachedAttributeValue[] | undefined {
         return this._attributeValues;
     }
 
-    set attributeValues(value: ?Array<CachedAttributeValue>) {
+    set attributeValues(value: CachedAttributeValue[] | undefined) {
         this._attributeValues = value;
     }
 
-    clone() {
+    clone(): Option {
+        // @ts-expect-error - We know these properties exist on the object
         return new Option((cloneObject) => {
             Object
                 .getOwnPropertyNames(this)
                 .forEach((propName) => {
-                    // $FlowFixMe
                     if (propName === '_icon' && this[propName]) {
-                        // $FlowFixMe
-                        cloneObject.icon = this.icon.clone();
+                        cloneObject.icon = this.icon?.clone();
                     } else {
-                        // $FlowFixMe
                         cloneObject[propName] = this[propName];
                     }
                 });

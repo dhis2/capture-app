@@ -1,4 +1,3 @@
-// @flow
 export const dataElementTypes = {
     TEXT: 'TEXT',
     MULTI_TEXT: 'MULTI_TEXT',
@@ -35,4 +34,4 @@ export const dataElementTypes = {
     ASSIGNEE: 'ASSIGNEE',
     STATUS: 'STATUS',
     UNKNOWN: 'UNKNOWN',
-};
+} as const;

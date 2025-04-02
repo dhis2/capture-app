@@ -1,21 +1,20 @@
-// @flow
-import React from 'react';
-import type { ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import * as React from 'react';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { CardListItem } from './CardListItem.component';
 import { makeElementsContainerSelector } from './CardList.selectors';
-import type { CardDataElementsInformation } from '../SearchBox';
+import { CardDataElementsInformation } from '../SearchBox';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
-type OwnProps = $ReadOnly<{|
-    dataElements: CardDataElementsInformation,
-    items: Array<ListItem>,
-    currentProgramId?: string,
-    currentSearchScopeName?: string,
-    currentSearchScopeType?: string,
-    noItemsText?: string,
-    renderCustomCardActions?: RenderCustomCardActions,
-|}>
+type OwnProps = {
+    dataElements: CardDataElementsInformation;
+    items: ListItem[];
+    currentProgramId?: string;
+    currentSearchScopeName?: string;
+    currentSearchScopeType?: string;
+    noItemsText?: string;
+    renderCustomCardActions?: RenderCustomCardActions;
+};
 
 const getStyles = (theme: Theme) => ({
     noItemsContainer: {
@@ -24,17 +23,20 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+type Props = OwnProps & WithStyles<typeof getStyles>;
 
-const CardListIndex = ({
-    classes,
-    items,
-    renderCustomCardActions,
-    dataElements,
-    noItemsText,
-    currentProgramId,
-    currentSearchScopeName,
-    currentSearchScopeType,
-}: OwnProps & CssClasses) => {
+const CardListIndex: React.FC<Props> = (props) => {
+    const {
+        classes,
+        items,
+        renderCustomCardActions,
+        dataElements,
+        noItemsText,
+        currentProgramId,
+        currentSearchScopeName,
+        currentSearchScopeType,
+    } = props;
+
     const { profileImageDataElement, dataElementsExceptProfileImage } = makeElementsContainerSelector()(dataElements);
     return (
         <div data-test="search-results-list">
@@ -62,4 +64,4 @@ const CardListIndex = ({
     );
 };
 
-export const CardList: ComponentType<OwnProps> = withStyles(getStyles)(CardListIndex);
+export const CardList = withStyles(getStyles)(CardListIndex);

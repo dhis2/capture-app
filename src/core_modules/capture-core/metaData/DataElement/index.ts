@@ -1,4 +1,3 @@
-// @flow
 export { DataElement } from './DataElement';
 export { DateDataElement } from './DateDataElement';
 export { dataElementTypes } from './dataElementTypes';
