@@ -1,3 +1,11 @@
+## [101.33.2](https://github.com/dhis2/capture-app/compare/v101.33.1...v101.33.2) (2025-04-02)
+
+
+### Bug Fixes
+
+* [DHIS2-19336] provide empty array instead of `null` to `RuleEnrollmentJs` ([#4028](https://github.com/dhis2/capture-app/issues/4028)) ([959ffb6](https://github.com/dhis2/capture-app/commit/959ffb62cc59b201ed09c065ee2c12caf8f06697))
+* **translations:** sync translations from transifex (master) ([e973d3e](https://github.com/dhis2/capture-app/commit/e973d3e09cb4b9835f66fe2ba752b679641cbbd4))
+
 ## [101.33.1](https://github.com/dhis2/capture-app/compare/v101.33.0...v101.33.1) (2025-03-23)
 
 
