@@ -4,6 +4,7 @@
 
 1.  **Rename Component:** Rename the file `[FileName.js]` to `[FileName.tsx]`. ALWAYS DO THIS FIRST AS LINTING WILL FAIL IF YOU DON'T.
 2.  **Convert Component Code:** Update the code within `[FileName.tsx]`:
+    *   PLEASE NEVER CHANGE ANY LOGIC, ONLY ADD TYPES. If you encounter any errors that are not related to types, add a TODO comment and notify the user. Make sure to check that you have the correct file extension for the file you're editing. If you encounter an error that is not related to types, finish the migration without trying to fix the error and notify the user. IF YOU ARE NOT SURE, ASK THE USER.
     *   Remove Flow directives (`// @flow`) and related comments (`// $FlowFixMe`).
     *   Convert Flow types (`type`, `?Type`, `Array<Type>`) to TypeScript equivalents (e.g., `type`, `Type | undefined` or `Type | null`, `Type[]`). **Note:** Pay close attention to nullability; check if the consuming code/library expects `undefined` or `null`.
     *   Prefer using `type` aliases over `interface` for defining object shapes and types, unless extending interfaces.
@@ -12,8 +13,9 @@
     *   Update React-specific types (e.g., `React.Node` to `React.ReactNode`). Ensure event types match expected types (e.g., `React.MouseEvent<HTMLButtonElement>`).
     *   If exporting a component that uses withStyles, please add `as ComponentType<Props>` to the end of the export statement. Example: `withStyles(styles)(ComponentPlain) as ComponentType<Props>;`
     *   Import types from libraries where necessary (e.g., `Props` types or utility types like `WithStyles` from UI libraries when dealing with HOCs).
-3.  **Update Index File (if applicable):**
+    *   Never add file extension to imports.
+1.  **Update Index File (if applicable):**
     *   Rename the corresponding `index.js` (if one exists in the same directory) to `index.ts`.
     *   Update the export statement(s) in `index.ts` to point to the renamed component file.
-4.  **Address Errors:** Fix any resulting TypeScript errors, often related to nullability mismatches, specific event types, prop mismatches, or incorrect HOC/ref handling.
+2.  **Address Errors:** Fix any resulting TypeScript errors, often related to nullability mismatches, specific event types, prop mismatches, or incorrect HOC/ref handling.
     *   *Optional:* If `React.forwardRef` was added, a `displayName` property might have been included. This can often be removed if not specifically needed for debugging. 
