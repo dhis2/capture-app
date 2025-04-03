@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-14T11:31:23.626Z\n"
-"PO-Revision-Date: 2025-03-14T11:31:23.626Z\n"
+"POT-Creation-Date: 2025-03-27T14:56:19.688Z\n"
+"PO-Revision-Date: 2025-03-27T14:56:19.688Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -35,17 +35,8 @@ msgstr ""
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
 
-msgid "Enrollment dashboard"
-msgstr "Enrollment dashboard"
-
-msgid "View event"
-msgstr "View event"
-
-msgid "Edit event"
-msgstr "Edit event"
-
-msgid "New event"
-msgstr "New event"
+msgid "Bulk data entry"
+msgstr "Bulk data entry"
 
 msgid "Active enrollments"
 msgstr "Active enrollments"
@@ -59,11 +50,23 @@ msgstr "Cancelled enrollments"
 msgid "{{trackedEntityName}} list"
 msgstr "{{trackedEntityName}} list"
 
+msgid "Working List"
+msgstr "Working List"
+
 msgid "Search"
 msgstr "Search"
 
-msgid "Working List"
-msgstr "Working List"
+msgid "Enrollment dashboard"
+msgstr "Enrollment dashboard"
+
+msgid "View event"
+msgstr "View event"
+
+msgid "Edit event"
+msgstr "Edit event"
+
+msgid "New event"
+msgstr "New event"
 
 msgid "Event list"
 msgstr "Event list"
@@ -1113,6 +1116,12 @@ msgid ""
 msgstr ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
+
+msgid "Unsaved changes"
+msgstr "Unsaved changes"
+
+msgid "Continue data entry"
+msgstr "Continue data entry"
 
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
