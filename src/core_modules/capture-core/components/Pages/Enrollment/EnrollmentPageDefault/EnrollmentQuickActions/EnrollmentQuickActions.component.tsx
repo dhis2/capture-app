@@ -6,8 +6,8 @@ import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
-import { useNavigate, buildUrlQueryString } from '../../../../../utils/routing';
-import type { ProgramStage, TrackerProgram } from '../../../../../metaData';
+import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
+import type { TrackerProgram } from '../../../../../metaData';
 
 const styles = {
     contentContainer: {
@@ -19,46 +19,45 @@ const styles = {
 
 type EventCount = { eventCount?: number };
 
+type ProgramStage = {
+    id: string;
+    dataAccess: {
+        write: boolean;
+    };
+    repeatable: boolean;
+};
+
 type Event = { programStage: string };
 
 type OwnProps = {
     stages: Array<ProgramStage & EventCount>,
     events: Array<Event>,
     ruleEffects?: Array<OutputEffect>,
-    program: TrackerProgram,
-    orgUnitId: string,
-    enrollmentId: string,
-    teiId: string,
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
-const EnrollmentQuickActionsComponentPlain = (
-    {
-        stages,
-        events,
-        ruleEffects,
-        classes,
-        program,
-        enrollmentId,
-        teiId,
-        orgUnitId,
-    }: Props) => {
+const EnrollmentQuickActionsComponentPlain = ({
+    stages,
+    events,
+    ruleEffects,
+    classes,
+}: Props) => {
     const [open, setOpen] = useState<boolean>(true);
     const { navigate } = useNavigate();
+    const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
 
-    const stagesWithEventCount = useMemo(() => stages.map((stage: ProgramStage & EventCount) => {
-        const mutatedStage = { ...stage } as (ProgramStage & EventCount);
-        mutatedStage.eventCount = (
-            events
-                ?.filter((event: Event) => event.programStage === stage.id)
-                ?.length
-        ) ?? 0;
+    const stagesWithEventCount = useMemo(() => stages.map((stage) => {
+        const mutatedStage = { ...stage };
+        mutatedStage.eventCount = (events
+            ?.filter(event => event.programStage === stage.id)
+            ?.length
+        );
         return mutatedStage;
     }), [events, stages]);
 
     const hiddenProgramStageRuleEffects = useMemo(
-        () => ruleEffects?.filter((ruleEffect: OutputEffect): boolean => ruleEffect.id === 'HIDEPROGRAMSTAGE'),
+        () => ruleEffects?.filter((ruleEffect: OutputEffect): boolean => ruleEffect.type === 'HIDEPROGRAMSTAGE'),
         [ruleEffects],
     );
 
@@ -66,7 +65,7 @@ const EnrollmentQuickActionsComponentPlain = (
         () =>
             stagesWithEventCount.every(
                 (programStage: ProgramStage & EventCount) =>
-                    (!programStage.access?.data?.write) ||
+                    (!programStage.dataAccess?.write) ||
                     (!programStage.repeatable && (programStage.eventCount ?? 0) > 0) ||
                     hiddenProgramStageRuleEffects
                         ?.find((ruleEffect: OutputEffect) => ruleEffect.id === programStage.id),
@@ -75,13 +74,7 @@ const EnrollmentQuickActionsComponentPlain = (
     );
 
     const onNavigationFromQuickActions = (tab: string) => {
-        navigate(`/enrollmentEventNew?${buildUrlQueryString({
-            programId: program.id ?? '',
-            teiId: teiId ?? '',
-            enrollmentId: enrollmentId ?? '',
-            orgUnitId: orgUnitId ?? '',
-            tab,
-        })}`);
+        navigate(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
     };
 
     const ready: boolean = events !== undefined && stages !== undefined;
@@ -103,7 +96,7 @@ const EnrollmentQuickActionsComponentPlain = (
                         label={i18n.t('New Event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
-                        disable={noStageAvailable}
+                        disabled={noStageAvailable}
                     />
 
                     <QuickActionButton
@@ -111,7 +104,7 @@ const EnrollmentQuickActionsComponentPlain = (
                         label={i18n.t('Schedule an event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}
-                        disable={noStageAvailable}
+                        disabled={noStageAvailable}
                     />
 
                     {/* DHIS2-13016: Should hide Make referral until the feature is developped

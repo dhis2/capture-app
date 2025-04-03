@@ -5,5 +5,5 @@ export type QuickActionButtonTypes = {
     label: string;
     onClickAction: () => void;
     dataTest?: string;
-    disable?: boolean;
+    disabled?: boolean;
 };
