@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, switchMap } from 'rxjs/operators';
+import { map, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { batchActions } from 'redux-batched-actions';
 import i18n from '@dhis2/d2-i18n';
@@ -96,7 +96,7 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
         map(actionBatch =>
             actionBatch.payload
                 .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
-        switchMap((action) => {
+        concatMap((action) => {
             const { dataEntryId, itemId, uid, rulesExecutionDependenciesClientFormatted } = action.payload;
             const runRulesForNewEventPromise = runRulesForNewEvent({
                 store,
@@ -119,7 +119,7 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (
         map(actionBatch =>
             actionBatch.payload
                 .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
-        switchMap((action) => {
+        concatMap((action) => {
             const {
                 dataEntryId,
                 itemId,
