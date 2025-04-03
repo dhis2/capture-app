@@ -22,22 +22,22 @@ export class OptionSet {
     };
     static multiOptionsValuesSeparator = ',';
 
-    _id?: string;
-    _emptyText?: string;
+    _id: string | undefined;
+    _emptyText: string | undefined;
     _attributeValues: CachedAttributeValue[];
     _options: Option[];
     _optionGroups: Map<string, OptionGroup>;
-    _viewType?: keyof typeof viewTypes;
+    _viewType: keyof typeof viewTypes | undefined;
     _inputType: keyof typeof inputTypes;
     _dataElement?: DataElement;
 
     constructor(
         id?: string | undefined,
-        options?: Option[],
-        optionGroups?: Map<string, OptionGroup>,
-        dataElement?: DataElement,
-        onConvert?: ConvertFn,
-        attributeValues?: CachedAttributeValue[],
+        options?: Option[] | undefined,
+        optionGroups?: Map<string, OptionGroup> | undefined,
+        dataElement?: DataElement | undefined,
+        onConvert?: ConvertFn | undefined,
+        attributeValues?: CachedAttributeValue[] | undefined,
     ) {
         this._options = !options ? [] : options.reduce((accOptions: Option[], currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
@@ -100,7 +100,8 @@ export class OptionSet {
     get emptyText(): string | undefined {
         return this._emptyText;
     }
-    set emptyText(emptyText: string) {
+
+    set emptyText(emptyText: string | undefined) {
         this._emptyText = emptyText;
     }
 

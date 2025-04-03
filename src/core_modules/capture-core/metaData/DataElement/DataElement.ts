@@ -2,11 +2,11 @@
 import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import { errorCreator } from 'capture-core-utils';
-import { OptionSet } from '../OptionSet/OptionSet';
+import { OptionSet } from '../OptionSet';
 import { dataElementTypes } from './dataElementTypes';
-// import type { CachedAttributeValue } from '../../storageControllers'; // Flow type
-// import type { Section } from '../RenderFoundation'; // Flow type
-// import type { Unique } from './Unique'; // Flow type
+// import type { CachedAttributeValue } from '../../storageControllers';
+// import type { Section } from '../RenderFoundation';
+// import type { Unique } from './Unique';
 
 // TODO: Replace these placeholders with actual imported types
 // For now, using 'any' to unblock conversion. Define these properly later.
