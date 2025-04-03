@@ -19,10 +19,10 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
-      "capture-core": ["core_modules/capture-core"],
-      "capture-ui": ["core_modules/capture-ui"],
-      "capture-core-utils": ["core_modules/capture-core-utils"],
-      "@dhis2/rules-engine-javascript": ["../packages/rules-engine/src"]
+      "capture-core/*": ["core_modules/capture-core/*"],
+      "capture-ui/*": ["core_modules/capture-ui/*"],
+      "capture-core-utils/*": ["core_modules/capture-core-utils/*"],
+      "@dhis2/rules-engine-javascript/*": ["../packages/rules-engine/src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
