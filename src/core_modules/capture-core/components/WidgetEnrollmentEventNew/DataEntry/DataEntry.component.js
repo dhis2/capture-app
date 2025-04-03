@@ -125,6 +125,7 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
 });
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
+const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
@@ -153,6 +154,7 @@ const buildReportDateSettingsFn = () => {
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
+            orientation: getOrientation(props.formHorizontal),
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
             calendarType: systemSettingsStore.get().calendar,
             dateFormat: systemSettingsStore.get().dateFormat,
@@ -245,9 +247,6 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
         ),
     ),
 );
-
-const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
-
 
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: Object) => {
