@@ -1,0 +1,22 @@
+---
+description: General code guidelines for bugs and features.
+globs: src/*.js
+alwaysApply: false
+---
+
+## Logging
+When logging things to the browser console please use the following format. 
+
+```
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+
+log.error(
+    errorCreator('Message to be logged')(
+        {
+            // Any details
+        },
+    ),
+);
+
+```
