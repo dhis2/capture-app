@@ -9,13 +9,22 @@ function isLangRTL(code) {
 }
 
 export async function cacheSystemSettings(
+    uiLocale: string,
     systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, },
-    userSettings: { uiLocale: string, captureScope: Array<{id: string}>, searchScope: Array<{id: string}> },
 ) {
     const systemSettingsArray = [
         {
             id: 'dateFormat',
             value: systemSettings.dateFormat.toUpperCase(),
+        },
+        // This is a user setting, and both this and the dir property below should be placed somewhere else. Will do this in https://dhis2.atlassian.net/browse/DHIS2-19015.
+        {
+            id: 'uiLocale',
+            value: uiLocale,
+        },
+        {
+            id: 'dir',
+            value: isLangRTL(uiLocale) ? 'rtl' : 'ltr',
         },
         {
             id: 'serverTimeZoneId',
@@ -24,25 +33,6 @@ export async function cacheSystemSettings(
         {
             id: 'calendar',
             value: systemSettings.calendar !== 'julian' ? systemSettings.calendar : 'iso8601',
-        },
-        // These are user settings and should be placed somewhere else. Will do this in https://dhis2.atlassian.net/browse/DHIS2-19015.
-        {
-            id: 'uiLocale',
-            value: userSettings.uiLocale,
-        },
-        {
-            id: 'dir',
-            value: isLangRTL(userSettings.uiLocale) ? 'rtl' : 'ltr',
-        },
-        {
-            id: 'captureScope',
-            // $FlowFixMe
-            value: userSettings.captureScope.map(orgUnit => orgUnit.id),
-        },
-        {
-            id: 'searchScope',
-            // $FlowFixMe
-            value: userSettings.searchScope.map(orgUnit => orgUnit.id),
         },
     ];
 

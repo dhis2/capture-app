@@ -5,7 +5,7 @@ import type {
     Enrollment,
     TEIValues,
     OrgUnit,
-} from '../../../../rules/RuleEngine/types/ruleEngine.types';
+} from '@dhis2/rules-engine-javascript';
 import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,

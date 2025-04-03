@@ -7,8 +7,8 @@ import type {
     Enrollment,
     ProgramRule,
     ProgramRuleVariable,
-    TrackedEntityAttributes,
-} from './RuleEngine';
+    TrackedEntityAttribute,
+} from '@dhis2/rules-engine-javascript';
 import type { ProgramStage, TrackerProgram, EventProgram, RenderFoundation } from '../metaData';
 
 export type GetApplicableRuleEffectsForTrackerProgramInput = {|
@@ -37,6 +37,6 @@ export type GetApplicableRuleEffectsInput = {|
     stages: Map<string, ProgramStage>,
     programRules: Array<ProgramRule>,
     programRuleVariables: Array<ProgramRuleVariable>,
-    trackedEntityAttributes?: TrackedEntityAttributes,
+    trackedEntityAttributes?: { [string]: TrackedEntityAttribute },
     foundationForPostProcessing: RenderFoundation,
 |};

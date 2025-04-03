@@ -1,7 +1,7 @@
 // @flow
 import { useLayoutEffect } from 'react';
 import { useLocationQuery } from '../utils/routing';
-import { ruleEngine } from './rulesEngine';
+import { rulesEngine } from './rulesEngine';
 
 export const useRuleEngineFlags = () => {
     // This hook is used to set the verbose flag on the rules engine
@@ -10,7 +10,6 @@ export const useRuleEngineFlags = () => {
     const { verbose } = useLocationQuery();
 
     const updateFlags = (flags) => {
-        const rulesEngine = ruleEngine();
         rulesEngine.setFlags({ ...rulesEngine.getFlags(), ...flags });
     };
 

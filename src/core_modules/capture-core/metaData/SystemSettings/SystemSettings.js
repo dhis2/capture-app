@@ -6,6 +6,4 @@ export class SystemSettings {
     trackerAppRelativePath: string;
     calendar: string;
     uiLocale: string;
-    captureScope: Array<string>;
-    searchScope: Array<string>;
 }

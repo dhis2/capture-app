@@ -2,8 +2,8 @@
 import { StorageController, IndexedDBAdapter } from 'capture-core-utils/storage';
 import { userStores } from './stores/index';
 
-function getStorageName(mainStorageName: string, userId: string) {
-    return mainStorageName + userId;
+function getStorageName(mainStorageName: string, user: { id: string }) {
+    return mainStorageName + user.id;
 }
 
 function getStores() {
@@ -13,9 +13,9 @@ function getStores() {
 
 function createStorageController(
     mainStorageController: typeof StorageController,
-    currentUserId: string,
+    currentUser: { id: string },
 ) {
-    const storageName = getStorageName(mainStorageController.name, currentUserId);
+    const storageName = getStorageName(mainStorageController.name, currentUser);
     const appCacheVersion = mainStorageController.version;
     const stores = getStores();
     const storageController =
@@ -48,9 +48,9 @@ const storeSpecificCreateActions = {
     },
 };
 
-export async function initUserControllerAsync(mainStorageController: typeof StorageController, currentUserId: string) {
+export async function initUserControllerAsync(mainStorageController: typeof StorageController, currentUser: { id: string }) {
     const userStorageController =
-        createStorageController(mainStorageController, currentUserId);
+        createStorageController(mainStorageController, currentUser);
 
     let upgradeTempData;
     await userStorageController

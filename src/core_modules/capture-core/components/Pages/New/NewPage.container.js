@@ -13,7 +13,7 @@ import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../uti
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { useTrackedEntityAttributes } from './hooks';
+import { useTrackedEntityInstances } from './hooks';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { programCollection } from '../../../metaDataMemoryStores/programCollection/programCollection';
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
@@ -49,13 +49,12 @@ export const NewPage: ComponentType<{||}> = () => {
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
         selectedOrgUnitId: orgUnitId,
     });
-    const { trackedEntityAttributes, loading: isTrackedEntityAttributesLoading } =
-        useTrackedEntityAttributes(teiId, programId);
+    const { trackedEntityInstanceAttributes, loading: isTrackedEntityAttributesLoading } = useTrackedEntityInstances(teiId, programId);
     // $FlowFixMe
     const trackedEntityType = program?.trackedEntityType;
     const teiDisplayName =
-    trackedEntityAttributes &&
-        deriveTeiName(trackedEntityAttributes, trackedEntityType?.id || '', teiId);
+        trackedEntityInstanceAttributes &&
+        deriveTeiName(trackedEntityInstanceAttributes, trackedEntityType?.id || '', teiId);
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
@@ -134,7 +133,7 @@ export const NewPage: ComponentType<{||}> = () => {
                 newPageStatus={newPageStatus}
                 error={error}
                 ready={ready}
-                trackedEntityInstanceAttributes={trackedEntityAttributes}
+                trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
                 trackedEntityName={trackedEntityType?.name}
             />
         </>

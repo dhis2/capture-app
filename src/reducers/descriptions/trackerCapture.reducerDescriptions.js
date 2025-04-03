@@ -73,7 +73,6 @@ import { activePageDesc } from '../../core_modules/capture-core/reducers/descrip
 import { searchDomainDesc } from '../../core_modules/capture-core/reducers/descriptions/searchDomain.reducerDescription';
 import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
 import { enrollmentDomainDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentDomain.reducerDescription';
-import { breakTheGlassAccessDesc } from '../../core_modules/capture-core/reducers/descriptions/breakTheGlass.reducerDescription';
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
 import { trackedEntityInstanceDesc } from '../../core_modules/capture-core/reducers/descriptions/trackedEntityInstance.reducerDescription';
@@ -86,7 +85,6 @@ export const reducerDescriptions = [
     editEventPageDesc,
     enrollmentPageDesc,
     enrollmentDomainDesc,
-    breakTheGlassAccessDesc,
     eventsDesc,
     eventsValuesDesc,
     dataEntriesDesc,

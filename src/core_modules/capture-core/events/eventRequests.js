@@ -69,8 +69,6 @@ function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'occurredAt' || inputKey === 'scheduledAt' || inputKey === 'completedAt') {
         convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
-    } else if (inputKey === 'createdAt') {
-        convertedValue = convertValue(valueToConvert, dataElementTypes.DATETIME);
     } else {
         convertedValue = valueToConvert;
     }

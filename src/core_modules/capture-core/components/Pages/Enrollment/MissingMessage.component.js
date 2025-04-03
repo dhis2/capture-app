@@ -12,7 +12,7 @@ import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetBreakingTheGlass } from '../../WidgetBreakingTheGlass';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
-import { fetchEnrollments, breakTheGlassSuccess } from './EnrollmentPage.actions';
+import { fetchEnrollments } from './EnrollmentPage.actions';
 import { useResetProgramId } from '../../ScopeSelector';
 
 export const missingStatuses = {
@@ -185,10 +185,7 @@ export const MissingMessage = withStyles(getStyles)(({
             <WidgetBreakingTheGlass
                 teiId={teiId}
                 programId={programId}
-                onBreakingTheGlass={() => {
-                    dispatch(breakTheGlassSuccess({ teiId, programId }));
-                    dispatch(fetchEnrollments());
-                }}
+                onBreakingTheGlass={() => dispatch(fetchEnrollments())}
                 onCancel={resetProgramIdAndEnrollmentContext}
             />
         }

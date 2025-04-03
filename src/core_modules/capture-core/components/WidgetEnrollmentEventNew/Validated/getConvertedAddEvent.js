@@ -1,6 +1,5 @@
 // @flow
 import moment from 'moment';
-import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
@@ -48,7 +47,7 @@ export const getAddEventEnrollmentServerData = ({
         orgUnitName: mainDataServerValues.orgUnit.name,
         trackedEntity: teiId,
         enrollment: enrollmentId,
-        ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ? {} : { scheduledAt: mainDataServerValues.occurredAt }),
+        scheduledAt: mainDataServerValues.occurredAt,
         updatedAt,
         uid,
         dataValues: Object

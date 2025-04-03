@@ -9,31 +9,23 @@ import type {
     ProgramRulesContainer,
     EventsData,
     DataElements,
-} from '../../../../rules/RuleEngine';
-import { ruleEngine } from '../../../../rules/rulesEngine';
-import {
-    dataElementTypes,
-    type RenderFoundation,
-} from '../../../../metaData';
+} from '@dhis2/rules-engine-javascript';
+import { rulesEngine } from '../../../../rules/rulesEngine';
+import type { RenderFoundation } from '../../../../metaData';
 import {
     updateRulesEffects,
     postProcessRulesEffects,
     buildEffectsHierarchy,
     validateAssignEffects,
 } from '../../../../rules';
-import { convertServerToClient } from '../../../../converters';
 import type { QuerySingleResource } from '../../../../utils/api';
-import type { EnrollmentData } from '../Types';
 
-const getEnrollmentForRulesExecution = (enrollment: ?EnrollmentData, programName: string): ?Enrollment =>
+const getEnrollmentForRulesExecution = enrollment =>
     enrollment && {
+        // $FlowFixMe[prop-missing]
         enrollmentId: enrollment.enrollment,
-        // $FlowFixMe
-        enrolledAt: convertServerToClient(enrollment.enrolledAt, dataElementTypes.DATE),
-        // $FlowFixMe
-        occurredAt: convertServerToClient(enrollment.occurredAt, dataElementTypes.DATE),
-        enrollmentStatus: enrollment.status,
-        programName,
+        enrolledAt: enrollment.enrolledAt,
+        occurredAt: enrollment.occurredAt,
     };
 
 const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
@@ -62,12 +54,11 @@ export const getRulesActionsForTEI = ({
     otherEvents,
     dataElements,
     userRoles,
-    programName,
 }: {
     foundation: RenderFoundation,
     formId: string,
     orgUnit: OrgUnit,
-    enrollmentData?: EnrollmentData,
+    enrollmentData?: ?Enrollment,
     teiValues?: ?TEIValues,
     trackedEntityAttributes: ?TrackedEntityAttributes,
     optionSets: OptionSets,
@@ -75,15 +66,14 @@ export const getRulesActionsForTEI = ({
     otherEvents?: ?EventsData,
     dataElements: ?DataElements,
     userRoles: Array<string>,
-    programName: string,
 }) => {
-    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
+    const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
         otherEvents,
         dataElements: getDataElementsForRulesExecution(dataElements),
         trackedEntityAttributes,
-        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData, programName),
+        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData),
         selectedEntity: teiValues,
         selectedOrgUnit: orgUnit,
         selectedUserRoles: userRoles,
@@ -105,14 +95,13 @@ export const getRulesActionsForTEIAsync = async ({
     otherEvents,
     dataElements,
     userRoles,
-    programName,
     querySingleResource,
     onGetValidationContext,
 }: {
     foundation: RenderFoundation,
     formId: string,
     orgUnit: OrgUnit,
-    enrollmentData?: EnrollmentData,
+    enrollmentData?: ?Enrollment,
     teiValues?: ?TEIValues,
     trackedEntityAttributes: ?TrackedEntityAttributes,
     optionSets: OptionSets,
@@ -120,18 +109,16 @@ export const getRulesActionsForTEIAsync = async ({
     otherEvents?: ?EventsData,
     dataElements: ?DataElements,
     userRoles: Array<string>,
-    programName: string,
     querySingleResource: QuerySingleResource,
     onGetValidationContext: () => Object,
 }) => {
-    const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
+    const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
         otherEvents,
         dataElements: getDataElementsForRulesExecution(dataElements),
         trackedEntityAttributes,
-        // $FlowFixMe (flow doesn't understand that selectedEnrollment.enrolledAt/occurredAt are strings)
-        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData, programName),
+        selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData),
         selectedEntity: teiValues,
         selectedOrgUnit: orgUnit,
         selectedUserRoles: userRoles,

@@ -4,5 +4,4 @@ export {
     useOrgUnitNames,
     getOrgUnitNames,
     getCachedOrgUnitName,
-    getAncestorIds,
 } from './orgUnitName';
