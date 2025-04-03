@@ -111,7 +111,6 @@ export const openEventForEditInDataEntry = ({
         {
             id: 'scheduledAt',
             type: 'DATE',
-            validatorContainers: getEventDateValidatorContainers(),
         },
         {
             id: 'orgUnit',

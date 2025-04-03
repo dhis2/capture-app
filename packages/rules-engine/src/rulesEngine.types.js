@@ -109,7 +109,7 @@ export type DataElement = {
     name: string,
 };
 
-export type DataElements = { [elementId: string]: DataElement };
+export type DataElements = { [elementId: ?string]: DataElement };
 
 export type RuleVariable = {
     variableValue: any,
@@ -132,7 +132,7 @@ export type TrackedEntityAttribute = {
 };
 
 export type TrackedEntityAttributes = {
-    [id: string]: TrackedEntityAttribute
+    [id: ?string]: TrackedEntityAttribute
 };
 
 export type OrgUnitGroup = $ReadOnly<{|
