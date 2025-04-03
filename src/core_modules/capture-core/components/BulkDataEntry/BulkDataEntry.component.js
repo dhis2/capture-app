@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useQueryClient } from 'react-query';
 import { withStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
@@ -24,13 +24,8 @@ const BulkDataEntryPlain = ({
     page,
     classes,
 }: Props) => {
-    const [pluginProps, setPluginProps] = useState();
     const { cachedBulkDataEntry } = useBulkDataEntryFromIndexedDB(programId);
     const queryClient = useQueryClient();
-
-    useEffect(() => {
-        setPluginProps(cachedBulkDataEntry?.activeList);
-    }, [cachedBulkDataEntry?.activeList]);
 
     const onClose = useCallback(async () => {
         await removeBulkDataEntry(programId);
@@ -42,7 +37,7 @@ const BulkDataEntryPlain = ({
         setShowBulkDataEntryPlugin(false);
     }, [setShowBulkDataEntryPlugin]);
 
-    if (!pluginProps) {
+    if (!cachedBulkDataEntry?.activeList) {
         return null;
     }
 
@@ -55,7 +50,11 @@ const BulkDataEntryPlain = ({
                 displayFrontPageList={displayFrontPageList}
                 page={page}
             />
-            <BulkDataEntryPlugin {...pluginProps} onClose={onClose} onBackToOriginPage={onBackToOriginPage} />
+            <BulkDataEntryPlugin
+                {...cachedBulkDataEntry.activeList}
+                onClose={onClose}
+                onBackToOriginPage={onBackToOriginPage}
+            />
         </div>
     );
 };

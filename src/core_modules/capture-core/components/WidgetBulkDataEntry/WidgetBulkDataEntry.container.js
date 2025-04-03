@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useQueryClient } from 'react-query';
 import { setBulkDataEntry } from 'capture-core/MetaDataStoreUtils/bulkDataEntry';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
@@ -9,13 +9,8 @@ import { BulkDataEntryActive } from './BulkDataEntryActive';
 import { useBulkDataEntryFromIndexedDB } from '../../utils/cachedDataHooks/useBulkDataEntryFromIndexedDB';
 
 export const WidgetBulkDataEntry = ({ programId, setShowBulkDataEntryPlugin }: Props) => {
-    const [pluginProps, setPluginProps] = useState(false);
     const { cachedBulkDataEntry } = useBulkDataEntryFromIndexedDB(programId);
     const queryClient = useQueryClient();
-
-    useEffect(() => {
-        setPluginProps(cachedBulkDataEntry?.activeList);
-    }, [cachedBulkDataEntry?.activeList]);
 
     const onSelectConfiguration = useCallback(
         async (dataStoreConfiguration) => {
@@ -26,13 +21,16 @@ export const WidgetBulkDataEntry = ({ programId, setShowBulkDataEntryPlugin }: P
         [programId, setShowBulkDataEntryPlugin, queryClient],
     );
 
-    if (!programId || pluginProps === false) {
+    if (!programId) {
         return null;
     }
 
-    if (pluginProps?.configKey) {
+    if (cachedBulkDataEntry?.activeList?.configKey) {
         return (
-            <BulkDataEntryActive title={pluginProps.title} setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin} />
+            <BulkDataEntryActive
+                title={cachedBulkDataEntry?.activeList.title}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+            />
         );
     }
 
