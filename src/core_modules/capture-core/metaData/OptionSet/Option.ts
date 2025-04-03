@@ -7,17 +7,17 @@ import type { CachedAttributeValue } from '../../storageControllers';
 export type Value = string | number | boolean | Record<string, unknown>;
 
 export class Option {
-    private _id!: string;
-    private _code!: string;
-    private _value!: Value;
-    private _text!: string;
-    private _description?: string;
-    private _attributeValues?: CachedAttributeValue[];
-    private _icon?: Icon;
+    _id!: string;
+    _code!: string;
+    _value!: Value;
+    _text!: string;
+    _description?: string;
+    _attributeValues?: CachedAttributeValue[];
+    _icon?: Icon | undefined;
 
-    constructor(initFn?: (this: Option) => void) {
+    constructor(initFn?: (_this: Option) => void) {
         if (initFn && isFunction(initFn)) {
-            initFn.call(this);
+            initFn(this);
         }
     }
 
@@ -78,7 +78,6 @@ export class Option {
     }
 
     clone(): Option {
-        // @ts-expect-error - We know these properties exist on the object
         return new Option((cloneObject) => {
             Object
                 .getOwnPropertyNames(this)

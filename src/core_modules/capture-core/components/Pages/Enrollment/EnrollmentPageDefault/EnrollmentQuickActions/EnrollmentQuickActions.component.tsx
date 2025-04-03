@@ -1,13 +1,13 @@
-// @flow
-import React, { useState, useMemo } from 'react';
-// $FlowFixMe
+import React, { useState, useMemo, ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors, spacers, IconAdd24, IconCalendar24 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from '@material-ui/core';
+import type { OutputEffect } from '@dhis2/rules-engine-javascript';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
+import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
 
 const styles = {
     contentContainer: {
@@ -15,11 +15,17 @@ const styles = {
         display: 'flex',
         gap: spacers.dp8,
     },
+} as const;
 
-};
+type Props = OwnProps & WithStyles<typeof styles>;
 
-const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes }) => {
-    const [open, setOpen] = useState(true);
+const EnrollmentQuickActionsComponentPlain = ({
+    stages,
+    events,
+    ruleEffects,
+    classes,
+}: Props) => {
+    const [open, setOpen] = useState<boolean>(true);
     const { navigate } = useNavigate();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
 
@@ -33,17 +39,18 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
     }), [events, stages]);
 
     const hiddenProgramStageRuleEffects = useMemo(
-        () => ruleEffects?.filter(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE'),
+        () => ruleEffects?.filter((ruleEffect: OutputEffect): boolean => ruleEffect.type === 'HIDEPROGRAMSTAGE'),
         [ruleEffects],
     );
 
     const noStageAvailable = useMemo(
         () =>
             stagesWithEventCount.every(
-                programStage =>
-                    (!programStage.dataAccess.write) ||
-                    (!programStage.repeatable && programStage.eventCount > 0) ||
-                    hiddenProgramStageRuleEffects?.find(ruleEffect => ruleEffect.id === programStage.id),
+                (programStage: ProgramStage & EventCount) =>
+                    (!programStage.dataAccess?.write) ||
+                    (!programStage.repeatable && (programStage.eventCount ?? 0) > 0) ||
+                    hiddenProgramStageRuleEffects
+                        ?.find((ruleEffect: OutputEffect) => ruleEffect.id === programStage.id),
             ),
         [stagesWithEventCount, hiddenProgramStageRuleEffects],
     );
@@ -52,7 +59,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
         navigate(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
     };
 
-    const ready = events !== undefined && stages !== undefined;
+    const ready: boolean = events !== undefined && stages !== undefined;
 
     return (
         <Widget
@@ -71,7 +78,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
                         label={i18n.t('New Event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                         dataTest={'quick-action-button-report'}
-                        disable={noStageAvailable}
+                        disabled={noStageAvailable}
                     />
 
                     <QuickActionButton
@@ -79,7 +86,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
                         label={i18n.t('Schedule an event')}
                         onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                         dataTest={'quick-action-button-schedule'}
-                        disable={noStageAvailable}
+                        disabled={noStageAvailable}
                     />
 
                     {/* DHIS2-13016: Should hide Make referral until the feature is developped
@@ -96,4 +103,5 @@ const EnrollmentQuickActionsComponent = ({ stages, events, ruleEffects, classes 
     );
 };
 
-export const EnrollmentQuickActions = withStyles(styles)(EnrollmentQuickActionsComponent);
+export const EnrollmentQuickActions =
+    withStyles(styles)(EnrollmentQuickActionsComponentPlain) as ComponentType<OwnProps>;

@@ -4,7 +4,7 @@ import moment from 'moment';
 import { withStyles, type Theme, type WithStyles } from '@material-ui/core/styles';
 import { colors, Tag, IconCheckmark16, Tooltip } from '@dhis2/ui';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { CardImage } from '../../../capture-ui/CardImage/CardImage.component';
+import { CardImage } from 'capture-ui/CardImage/CardImage.component';
 import {
     type CardDataElementsInformation,
     type CardProfileImageElementInformation,
@@ -231,7 +231,7 @@ const CardListItemIndex = ({
                                         key={id}
                                         name={name}
                                         value={item.values[id] as string | undefined}
-                                        type={type}
+                                        type={type as keyof typeof dataElementTypes}
                                     />
                                 );
                             })

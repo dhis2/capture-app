@@ -2,7 +2,8 @@
 const customAlias = require('./alias');
 
 const webpackConfig = { resolve: {
-    alias: customAlias
+    alias: customAlias,
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
 } };
 
 module.exports = webpackConfig;

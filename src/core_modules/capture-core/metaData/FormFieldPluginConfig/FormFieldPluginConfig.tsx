@@ -1,19 +1,27 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
 
 import isFunction from 'd2-utilizr/lib/isFunction';
-import { DataElement } from '../DataElement';
+import type { DataElement } from '../DataElement';
+
+type CustomAttribute = {
+    IdFromPlugin: string;
+    IdFromApp: string;
+};
+
+type CustomAttributes = {
+    [key: string]: CustomAttribute;
+};
 
 export class FormFieldPluginConfig {
-    _id: string;
-    _name: string;
-    _pluginSource: string;
-    _fields: Map<string, DataElement>;
-    _customAttributes: { [string]: { IdFromPlugin: string, IdFromApp: string } };
+    private _id!: string;
+    private _name!: string;
+    private _pluginSource!: string;
+    private _fields!: Map<string, DataElement>;
+    private _customAttributes!: CustomAttributes;
 
-    constructor(initFn: ?(_this: FormFieldPluginConfig) => void) {
+    constructor(initFn: ((_this: FormFieldPluginConfig) => void) | undefined) {
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -45,19 +53,19 @@ export class FormFieldPluginConfig {
         return this._pluginSource;
     }
 
-    get customAttributes(): { [string]: { IdFromPlugin: string, IdFromApp: string } } {
-        return this._customAttributes;
-    }
-
-    set customAttributes(value: { [string]: { IdFromPlugin: string, IdFromApp: string } }) {
-        this._customAttributes = value;
-    }
-
     set pluginSource(value: string) {
         this._pluginSource = value;
     }
 
-    addField(idFromPlugin: string, field: DataElement) {
+    get customAttributes(): CustomAttributes {
+        return this._customAttributes;
+    }
+
+    set customAttributes(value: CustomAttributes) {
+        this._customAttributes = value;
+    }
+
+    addField(idFromPlugin: string, field: DataElement): void {
         if (!this.fields.has(idFromPlugin)) {
             this.fields.set(idFromPlugin, field);
         }
