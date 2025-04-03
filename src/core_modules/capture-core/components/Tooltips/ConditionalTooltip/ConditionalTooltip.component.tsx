@@ -1,7 +1,6 @@
 import React from 'react';
-import type { ComponentProps, ReactNode } from 'react';
-import { Tooltip } from '@dhis2/ui';
-import type { TooltipRenderProps } from '@dhis2/ui';
+import type { ComponentProps, FC, ReactNode } from 'react';
+import { Tooltip, type TooltipRenderProps } from '@dhis2/ui';
 
 type DhisTooltipProps = ComponentProps<typeof Tooltip>;
 
@@ -11,7 +10,7 @@ type Props = Omit<DhisTooltipProps, 'children' | 'enabled'> & {
     children: ReactNode;
 };
 
-export const ConditionalTooltip = (props: Props) => {
+export const ConditionalTooltip: FC<Props> = (props) => {
     const { enabled, wrapperClassName, children, ...passOnProps } = props;
 
     if (!enabled) {
