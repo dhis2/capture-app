@@ -24,3 +24,10 @@ export type SectionSpecs = {|
     displayDescription: string,
     dataElements: ?Array<CachedSectionDataElements>,
 |};
+
+export type RuleProgramStageDataElement = {|
+    id: string,
+    name: string,
+    valueType: string,
+    optionSetId: ?string,
+|};
