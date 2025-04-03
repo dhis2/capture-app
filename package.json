@@ -81,7 +81,7 @@
         "linter:check": "yarn workspaces run linter:check && yarn workspaces run build && eslint -c .eslintrc . --quiet",
         "flow:check": "./node_modules/.bin/flow check ./src",
         "flow:addTypes": "flow-typed install",
-        "tsc:check": "./node_modules/.bin/tsc --noEmit -p tsconfig.checkts.json",
+        "tsc:check": "./node_modules/.bin/tsc --noEmit",
         "cy:open": "export NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://127.0.0.1:3000' && cypress open\"",
         "cy:run": "export NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://127.0.0.1:3000' && cypress run\"",
         "verifyCacheVersion": "node scripts/verifyCacheVersion.js",
