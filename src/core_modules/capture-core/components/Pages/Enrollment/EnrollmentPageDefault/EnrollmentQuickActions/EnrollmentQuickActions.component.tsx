@@ -7,7 +7,7 @@ import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
-import type { TrackerProgram } from '../../../../../metaData';
+import { OwnProps, ProgramStage, EventCount } from './EnrollmentQuickActions.types';
 
 const styles = {
     contentContainer: {
@@ -16,24 +16,6 @@ const styles = {
         gap: spacers.dp8,
     },
 } as const;
-
-type EventCount = { eventCount?: number };
-
-type ProgramStage = {
-    id: string;
-    dataAccess: {
-        write: boolean;
-    };
-    repeatable: boolean;
-};
-
-type Event = { programStage: string };
-
-type OwnProps = {
-    stages: Array<ProgramStage & EventCount>,
-    events: Array<Event>,
-    ruleEffects?: Array<OutputEffect>,
-};
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
