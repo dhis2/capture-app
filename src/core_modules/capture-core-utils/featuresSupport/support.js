@@ -15,6 +15,9 @@ export const FEATURES = Object.freeze({
     newNoteEndpoint: 'newNoteEndpoint',
     newPagingQueryParam: 'newPagingQueryParam',
     newOrgUnitModeQueryParam: 'newOrgUnitModeQueryParam',
+    moreGenericErrorMessages: 'moreGenericErrorMessages',
+    sendEmptyScheduledAt: 'sendEmptyScheduledAt',
+    kotlinRuleEngine: 'kotlinRuleEngine',
 });
 
 // The first minor version that supports the feature
@@ -34,6 +37,9 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.newNoteEndpoint]: 42,
     [FEATURES.newPagingQueryParam]: 41,
     [FEATURES.newOrgUnitModeQueryParam]: 41,
+    [FEATURES.moreGenericErrorMessages]: 42,
+    [FEATURES.sendEmptyScheduledAt]: 41,
+    [FEATURES.kotlinRuleEngine]: 42,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>
