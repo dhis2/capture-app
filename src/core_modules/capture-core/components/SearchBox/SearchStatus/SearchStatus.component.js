@@ -40,13 +40,12 @@ export const SearchStatusPlain = ({
     searchableFields,
     navigateToRegisterTrackedEntity,
     showInitialSearchBox,
-    fallbackTriggered,
     uniqueTEAName = '',
     trackedEntityName,
     classes,
 }: Props) => {
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
-        return <SearchResults availableSearchOption={availableSearchOption} fallbackTriggered={fallbackTriggered} />;
+        return <SearchResults availableSearchOption={availableSearchOption} />;
     }
 
     if (searchStatus === searchBoxStatus.NO_RESULTS) {

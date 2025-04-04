@@ -57,13 +57,13 @@ const useFormDataLifecycle = (
             .forEach(({ formId, searchForm }) => {
                 const elements = searchForm.getElements();
                 const formValuesThatExistInTETypeSearchScope =
-                  ([...elements.values()].reduce((acc, { id: fieldId }) => {
-                      if (Object.keys(keptFallbackSearchFormValues).includes(fieldId)) {
-                          const fieldValue = keptFallbackSearchFormValues[fieldId];
-                          return { ...acc, [fieldId]: fieldValue };
-                      }
-                      return acc;
-                  }, {}));
+                    ([...elements.values()].reduce((acc, { id: fieldId }) => {
+                        if (Object.keys(keptFallbackSearchFormValues).includes(fieldId)) {
+                            const fieldValue = keptFallbackSearchFormValues[fieldId];
+                            return { ...acc, [fieldId]: fieldValue };
+                        }
+                        return acc;
+                    }, {}));
                 addFormIdToReduxStore(formId, formValuesThatExistInTETypeSearchScope);
             });
         // we remove the data on unmount to clean the store
@@ -75,17 +75,6 @@ const useFormDataLifecycle = (
         addFormIdToReduxStore,
         removeFormDataFromReduxStore,
     ]);
-
-
-const expandTheAttributesForm = (searchGroupsForSelectedScope, expandedFormId, setExpandedFormId) => {
-    searchGroupsForSelectedScope
-        .filter(searchGroup => !searchGroup.unique)
-        .forEach(({ formId }, index) => {
-            if (!expandedFormId && index === 0) {
-                setExpandedFormId(formId);
-            }
-        });
-};
 
 const expandTheFirstForm = (searchGroupsForSelectedScope, expandedFormId, setExpandedFormId) => {
     searchGroupsForSelectedScope
@@ -113,7 +102,6 @@ const SearchFormIndex = ({
     isSearchViaUniqueIdValid,
     showUniqueSearchValueEmptyModal,
     keptFallbackSearchFormValues,
-    fallbackTriggered,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
@@ -130,16 +118,12 @@ const SearchFormIndex = ({
     );
 
     useEffect(() => {
-        if (fallbackTriggered) {
-            expandTheAttributesForm(searchGroupsForSelectedScope, expandedFormId, setExpandedFormId);
-        } else {
-            expandTheFirstForm(searchGroupsForSelectedScope, expandedFormId, setExpandedFormId);
-        }
+        expandTheFirstForm(searchGroupsForSelectedScope, expandedFormId, setExpandedFormId);
     }, [
-        fallbackTriggered,
         searchGroupsForSelectedScope,
         expandedFormId,
     ]);
+
 
     return useMemo(() => {
         const formReference = {};
@@ -256,12 +240,12 @@ const SearchFormIndex = ({
                                             disabled={searchStatus === searchBoxStatus.LOADING}
                                             onClick={() =>
                                                 selectedSearchScopeId &&
-                                            handleSearchViaUniqueId(
-                                                searchScope,
-                                                selectedSearchScopeId,
-                                                formId,
-                                                name,
-                                            )}
+                                                handleSearchViaUniqueId(
+                                                    searchScope,
+                                                    selectedSearchScopeId,
+                                                    formId,
+                                                    name,
+                                                )}
                                         >
                                             {i18n.t('Search by {{name}}', {
                                                 name, interpolation: { escapeValue: false },
@@ -313,12 +297,12 @@ const SearchFormIndex = ({
                                             disabled={searchStatus === searchBoxStatus.LOADING}
                                             onClick={() =>
                                                 selectedSearchScopeId &&
-                                            handleSearchViaAttributes(
-                                                searchScope,
-                                                selectedSearchScopeId,
-                                                formId,
-                                                minAttributesRequiredToSearch,
-                                            )
+                                                handleSearchViaAttributes(
+                                                    searchScope,
+                                                    selectedSearchScopeId,
+                                                    formId,
+                                                    minAttributesRequiredToSearch,
+                                                )
                                             }
                                         >
                                             {searchByText}

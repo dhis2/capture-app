@@ -59,7 +59,6 @@ export const SearchResultsIndex = ({
     currentSearchScopeName,
     currentFormId,
     currentSearchTerms,
-    fallbackTriggered,
     handleCreateNew,
     orgUnitId,
 }: Props) => {
@@ -197,7 +196,7 @@ export const SearchResultsIndex = ({
             </div>
         </Widget>}
         {
-            currentSearchScopeType === searchScopes.PROGRAM && !fallbackTriggered && otherResults === undefined &&
+            currentSearchScopeType === searchScopes.PROGRAM && otherResults === undefined &&
             <div className={classes.bottom}>
                 <div className={classes.bottomText}>
                     {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.

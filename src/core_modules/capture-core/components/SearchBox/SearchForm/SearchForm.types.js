@@ -18,7 +18,6 @@ export type FormsValues = {
 export type OwnProps = {|
   +searchGroupsForSelectedScope: SearchGroups,
   +selectedSearchScopeId: ?string,
-  +fallbackTriggered: boolean,
 |}
 
 export type PropsFromRedux ={|
