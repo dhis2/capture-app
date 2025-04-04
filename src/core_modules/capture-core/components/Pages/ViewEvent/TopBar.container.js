@@ -20,6 +20,7 @@ type TopBarProps = {
     programId?: string,
     orgUnitId?: string,
     selectedCategories?: any,
+    isReadOnly: boolean,
     formIsOpen: boolean,
 };
 
@@ -27,6 +28,7 @@ export const TopBar = ({
     programId,
     orgUnitId,
     selectedCategories,
+    isReadOnly,
     isUserInteractionInProgress,
     formIsOpen,
 }: TopBarProps) => {
@@ -67,7 +69,7 @@ export const TopBar = ({
             isUserInteractionInProgress={isUserInteractionInProgress}
             formIsOpen={formIsOpen}
             onStartAgain={() => reset()}
-            isReadOnly
+            isReadOnly={isReadOnly}
         >
             <TopBarActions
                 selectedProgramId={programId}
