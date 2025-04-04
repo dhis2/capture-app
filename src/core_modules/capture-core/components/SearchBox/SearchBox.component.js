@@ -75,21 +75,9 @@ const Index = ({
     }, [trackedEntityTypeId, preselectedProgramId]);
 
     useEffect(() => {
-        // This statement is here because when we trigger the fallback search,
-        // we rerender the page without a preselectedProgramId.
-        // This is triggering this hook. However the fallback search view needs
-        // to start with a loading spinner and not with the initial view.
-        if (!fallbackTriggered) {
-            cleanFallbackRelatedData();
-            showInitialSearchBox();
-        }
-        return () => {
-            if (fallbackTriggered) {
-                return cleanSearchRelatedInfo();
-            }
-            return undefined;
-        };
-    }, [fallbackTriggered, cleanSearchRelatedInfo, preselectedProgramId, showInitialSearchBox]);
+        cleanSearchRelatedInfo();
+        showInitialSearchBox();
+    }, [cleanSearchRelatedInfo, showInitialSearchBox]);
 
     const searchGroupsForSelectedScope = availableSearchOption?.searchGroups ?? [];
 
