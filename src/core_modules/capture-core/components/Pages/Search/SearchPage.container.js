@@ -7,6 +7,7 @@ import { SearchPageComponent } from './SearchPage.component';
 import { navigateToMainPage, openSearchPage } from './SearchPage.actions';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks';
 import { ResultsPageSizeContext } from '../shared-contexts';
+import { cleanSearchRelatedData } from '../../SearchBox';
 
 const usePreselectedProgram = (currentSelectionsId): ?string => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
@@ -30,7 +31,10 @@ export const SearchPage: ComponentType<{||}> = () => {
     const { programId, orgUnitId } = useLocationQuery();
 
     const onNavigateToMainPage = useCallback(
-        () => { dispatch(navigateToMainPage()); },
+        () => {
+            dispatch(cleanSearchRelatedData());
+            dispatch(navigateToMainPage());
+        },
         [dispatch]);
     const preselectedProgramId = usePreselectedProgram(programId);
 

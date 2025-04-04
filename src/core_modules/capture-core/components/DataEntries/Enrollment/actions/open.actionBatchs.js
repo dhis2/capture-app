@@ -16,6 +16,7 @@ import { convertDateObjectToDateFormatString } from '../../../../utils/converter
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
+import { cleanSearchRelatedData } from '../../../SearchBox';
 
 const itemId = 'newEnrollment';
 
@@ -108,6 +109,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         ...dataEntryActions,
         addFormDataActions,
         updateRulesEffects(effects, formId),
+        cleanSearchRelatedData(),
         ...extraActions,
     ], batchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH);
 };
