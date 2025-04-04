@@ -25,7 +25,6 @@ export type PropsFromRedux ={|
 |}
 
 export type OwnProps ={|
-    fallbackTriggered: boolean,
     availableSearchOption: ?AvailableSearchOption,
 |}
 
