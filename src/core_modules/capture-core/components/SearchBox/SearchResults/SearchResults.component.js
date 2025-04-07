@@ -44,7 +44,7 @@ export const getStyles = (theme: Theme) => ({
 });
 
 
-export const SearchResultsIndex = ({
+const SearchResultsIndex = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     startFallbackSearch,

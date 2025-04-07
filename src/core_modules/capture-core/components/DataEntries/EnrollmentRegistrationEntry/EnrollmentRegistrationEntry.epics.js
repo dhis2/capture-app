@@ -10,6 +10,7 @@ import { openDataEntryForNewEnrollmentBatchAsync } from '../Enrollment';
 import { getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 import type { TrackerProgram } from '../../../metaData/Program';
+import { cleanSearchRelatedData } from '../../SearchBox';
 
 export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: InputObservable) =>
     action$.pipe(
@@ -45,6 +46,7 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: Input
                     firstStage,
                     programCategory,
                     formFoundation,
+                    extraActions: [cleanSearchRelatedData()],
                 });
 
                 return from(openEnrollmentPromise);
