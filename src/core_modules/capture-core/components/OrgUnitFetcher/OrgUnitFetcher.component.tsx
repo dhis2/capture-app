@@ -1,12 +1,14 @@
-// @flow
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { fetchOrgUnit } from './OrgUnitFetcher.actions';
+import type { OrgUnitFetcherProps } from './OrgUnitFetcher.types';
 
-export const OrgUnitFetcher = (({ orgUnitId, children, error }: Object) => {
+export const OrgUnitFetcher = ({ orgUnitId, children, error }: OrgUnitFetcherProps) => {
     const dispatch = useDispatch();
-    const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId]);
+    const orgUnit = useSelector(({ organisationUnits }: { organisationUnits: Record<string, unknown> }) =>
+        organisationUnits[orgUnitId],
+    );
 
     useEffect(() => {
         if (!orgUnit && orgUnitId) {
@@ -15,4 +17,4 @@ export const OrgUnitFetcher = (({ orgUnitId, children, error }: Object) => {
     }, [orgUnitId, orgUnit, dispatch]);
 
     return orgUnit || !orgUnitId || error ? children : <LoadingMaskElementCenter />;
-});
+};
