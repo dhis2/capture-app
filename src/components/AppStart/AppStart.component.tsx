@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { HashRouter as Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
