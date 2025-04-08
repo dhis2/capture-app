@@ -12,6 +12,8 @@ export type ContainerProps = $ReadOnly<{|
     selectedTemplateId: string,
     error: boolean,
     ready: boolean,
+    trackedEntityName?: string,
+    setShowBulkDataEntryPlugin: (show: boolean) => void,
 |}
 >;
 
