@@ -23,6 +23,7 @@ type Props = {
     },
     previousOrgUnitId?: string,
     isReadOnly?: boolean,
+    tooltip?: boolean,
     classes: Object,
 };
 
@@ -50,16 +51,17 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
     }
 
     render() {
-        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, isReadOnly, classes } = this.props;
+        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, isReadOnly, tooltip, classes } = this.props;
+        console.log('tooltip', tooltip);
 
         return (
             <ConditionalTooltip
-                enabled={isReadOnly}
+                enabled={tooltip}
                 content={i18n.t('Choose an organisation unit in the form below')}
             >
                 <SelectorBarItem
                     label={i18n.t('Organisation unit')}
-                    noValueMessage={i18n.t('None selected')}
+                    noValueMessage={i18n.t('Choose an organisation unit')}
                     value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
                     open={!isReadOnly && this.state.open}
                     setOpen={open => this.setState({ open })}

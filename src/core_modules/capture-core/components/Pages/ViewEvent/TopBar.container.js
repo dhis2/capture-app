@@ -67,7 +67,7 @@ export const TopBar = ({
             isUserInteractionInProgress={isUserInteractionInProgress}
             formIsOpen={formIsOpen}
             onStartAgain={() => reset()}
-            isReadOnly
+            isReadOnlyOrgUnit
         >
             <TopBarActions
                 selectedProgramId={programId}
