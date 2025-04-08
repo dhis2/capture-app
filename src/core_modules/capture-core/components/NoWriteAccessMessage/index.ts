@@ -1,1 +1,1 @@
-export { NoWriteAccessMessage } from './NoWriteAccessMessage';
+export { NoWriteAccessMessage } from './NoWriteAccessMessage.component';
