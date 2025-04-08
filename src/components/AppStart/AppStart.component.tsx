@@ -19,8 +19,6 @@ interface ReduxStore {
     // Add other store properties as needed
 }
 
-const queryClient = new QueryClient();
-
 export const AppStart = () => {
     const [readyStatus, setReadyStatus] = useState<boolean>(false);
     const [cacheExpired, setCacheExpired] = useState<boolean>(false);
@@ -51,24 +49,22 @@ export const AppStart = () => {
         <React.Fragment>
             <CssBaseline />
             <JSSProviderShell>
-                <QueryClientProvider client={queryClient}>
-                    <MuiThemeProvider
-                        theme={theme}
-                    >
-                        <Router>
-                            {
-                                readyStatus ?
-                                    <App
-                                        store={store.current as ReduxStore}
-                                    /> :
-                                    <AppLoader
-                                        onRunApp={handleRunApp}
-                                        onCacheExpired={handleCacheExpired}
-                                    />
-                            }
-                        </Router>
-                    </MuiThemeProvider>
-                </QueryClientProvider>
+                <MuiThemeProvider
+                    theme={theme}
+                >
+                    <Router>
+                        {
+                            readyStatus ?
+                                <App
+                                    store={store.current as ReduxStore}
+                                /> :
+                                <AppLoader
+                                    onRunApp={handleRunApp}
+                                    onCacheExpired={handleCacheExpired}
+                                />
+                        }
+                    </Router>
+                </MuiThemeProvider>
             </JSSProviderShell>
         </React.Fragment>
     );
