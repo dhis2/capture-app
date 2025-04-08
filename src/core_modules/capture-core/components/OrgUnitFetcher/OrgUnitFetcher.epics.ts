@@ -7,20 +7,16 @@ import { actionTypes, setCurrentOrgUnit, errorRetrievingOrgUnit } from './OrgUni
 import type { FetchOrgUnitActionPayload } from './OrgUnitFetcher.types';
 
 type ReduxState = {
-    organisationUnits: Record<string, any>;
+    organisationUnits: Record<string, unknown>;
 };
 
 type ReduxStore = {
     value: ReduxState;
 };
 
-type ApiUtils = {
-    querySingleResource: any;
-};
-
 export const orgUnitFetcherEpic = (
     action$: Observable<Action & { payload: FetchOrgUnitActionPayload }>,
-    store: ReduxStore,
+    _store: ReduxStore,
 ) => action$.pipe(
     ofType(actionTypes.FETCH_ORG_UNIT),
     map(({ payload: { orgUnitId } }) => getCoreOrgUnit({

@@ -11,8 +11,8 @@ export const actionTypes = {
 export const fetchOrgUnit = (orgUnitId: string) =>
     actionCreator(actionTypes.FETCH_ORG_UNIT)({ orgUnitId });
 
-export const setCurrentOrgUnit = (orgUnit: CoreOrgUnit) => 
+export const setCurrentOrgUnit = (orgUnit: CoreOrgUnit) =>
     actionCreator(actionTypes.FETCH_ORG_UNIT_SUCCESS)(orgUnit);
 
-export const errorRetrievingOrgUnit = () => 
+export const errorRetrievingOrgUnit = () =>
     actionCreator(actionTypes.FETCH_ORG_UNIT_FAILURE)();
