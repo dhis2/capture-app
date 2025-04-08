@@ -45,6 +45,13 @@ const buildTEIRecord = ({
     programId: string,
 }) =>
     columnsMetaForDataFetching.map(({ id, mainProperty, type }) => {
+        if (id === 'programOwnerId') {
+            return {
+                id,
+                value: apiTEI.programOwners?.[0]?.orgUnit,
+            };
+        }
+
         const value = mainProperty ? apiTEI[id] : attributeValuesById[id];
         const urls = buildUrlByElementType[RECORD_TYPE.trackedEntity][type]
             ? buildUrlByElementType[RECORD_TYPE.trackedEntity][type]({ trackedEntity, id, programId })
