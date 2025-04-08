@@ -41,7 +41,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         const filteredAttributeQuery = {
             resource: 'trackedEntityAttributes',
             params: {
-                fields: 'id,displayName,valueType,optionSet[id,options[code,name]]',
+                fields: 'id,displayFormName,valueType,optionSet[id,options[code,name]]',
                 filter: `id:in:[${Object.keys(attributeIds).join(',')}]`,
                 paging: false,
             },
@@ -50,7 +50,7 @@ export const useRelationshipTypes = (cachedRelationshipTypes?: RelationshipTypes
         const filteredDataElementQuery = {
             resource: 'dataElements',
             params: {
-                fields: 'id,displayName,valueType,optionSet[id,options[code,name]]',
+                fields: 'id,displayFormName,valueType,optionSet[id,options[code,name]]',
                 filter: `id:in:[${Object.keys(dataElementIds).join(',')}]`,
                 paging: false,
             },
