@@ -1,6 +1,5 @@
 import { actionCreator } from '../../actions/actions.utils';
 import type { CoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit/coreOrgUnit.types';
-import type { FetchOrgUnitActionPayload, SetCurrentOrgUnitActionPayload } from './OrgUnitFetcher.types';
 
 export const actionTypes = {
     FETCH_ORG_UNIT: 'OrgUnitFetcher.FetchOrgUnit',
