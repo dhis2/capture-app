@@ -1,10 +1,9 @@
-// @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import type { QuickActionButtonTypes } from './QuickActionButton.types';
+import { QuickActionButtonTypes } from './QuickActionButton.types';
 
 const styles = {
     button: {
@@ -14,15 +13,17 @@ const styles = {
     },
 };
 
-const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disable, classes }: QuickActionButtonTypes) => (
+type Props = QuickActionButtonTypes & WithStyles<typeof styles>;
+
+const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disabled = false, classes }: Props) => (
     <ConditionalTooltip
         content={i18n.t('No available program stages')}
-        enabled={disable}
+        enabled={disabled}
     >
         <Button
             onClick={onClickAction}
             dataTest={dataTest}
-            disabled={disable}
+            disabled={disabled}
         >
             <div className={classes.button}>
                 {icon}
@@ -31,4 +32,5 @@ const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disable,
         </Button>
     </ConditionalTooltip>);
 
-export const QuickActionButton = withStyles(styles)(QuickActionButtonPlain);
+export const QuickActionButton =
+    withStyles(styles)(QuickActionButtonPlain) as ComponentType<QuickActionButtonTypes>;

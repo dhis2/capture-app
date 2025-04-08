@@ -2,12 +2,17 @@
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
+import type { OptionGroup } from './OptionGroup';
 import { viewTypes, inputTypes, inputTypesAsArray, InputType } from './optionSet.const';
-import { DataElement } from '../DataElement';
+import type { DataElement } from '../DataElement';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Option, Value } from './Option';
-import type { OptionGroup } from './OptionGroup';
 import type { CachedAttributeValue } from '../../storageControllers';
+
+type ApiAttributeValues = {
+    attribute: { id: string },
+    value: string,
+};
 
 export class OptionSet {
     static errorMessages = {
@@ -17,22 +22,22 @@ export class OptionSet {
     };
     static multiOptionsValuesSeparator = ',';
 
-    private _id?: string;
-    private _emptyText?: string;
-    private _attributeValues: CachedAttributeValue[];
-    private _options: Option[];
-    private _optionGroups: Map<string, OptionGroup>;
-    private _viewType?: keyof typeof viewTypes;
-    private _inputType: keyof typeof inputTypes;
-    private _dataElement?: DataElement;
+    _id: string | undefined;
+    _emptyText: string | undefined;
+    _attributeValues: CachedAttributeValue[];
+    _options: Option[];
+    _optionGroups: Map<string, OptionGroup>;
+    _viewType: keyof typeof viewTypes | undefined;
+    _inputType: keyof typeof inputTypes;
+    _dataElement?: DataElement;
 
     constructor(
-        id?: string,
-        options?: Option[],
-        optionGroups?: Map<string, OptionGroup>,
-        dataElement?: DataElement,
-        onConvert?: ConvertFn,
-        attributeValues?: CachedAttributeValue[],
+        id?: string | undefined,
+        options?: Option[] | undefined,
+        optionGroups?: Map<string, OptionGroup> | undefined,
+        dataElement?: DataElement | undefined,
+        onConvert?: ConvertFn | undefined,
+        attributeValues?: CachedAttributeValue[] | undefined,
     ) {
         this._options = !options ? [] : options.reduce((accOptions: Option[], currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
@@ -61,7 +66,7 @@ export class OptionSet {
         return this._id;
     }
 
-    set inputType(inputType: string) {
+    set inputType(inputType: string | undefined) {
         if (!inputType) {
             return;
         }
@@ -77,12 +82,12 @@ export class OptionSet {
         return this._inputType;
     }
 
-    set viewType(viewType: string) {
+    set viewType(viewType: string | undefined) {
         if (!viewType) {
             return;
         }
 
-        if (viewType in viewTypes) {
+        if (viewTypes[viewType]) {
             this._viewType = viewType as keyof typeof viewTypes;
         } else {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_VIEWTYPE)({ optionSet: this, viewType }));
@@ -95,15 +100,16 @@ export class OptionSet {
     get emptyText(): string | undefined {
         return this._emptyText;
     }
-    set emptyText(emptyText: string) {
+
+    set emptyText(emptyText: string | undefined) {
         this._emptyText = emptyText;
     }
 
-    get attributeValues(): CachedAttributeValue[] {
+    get attributeValues(): ApiAttributeValues[] {
         return this._attributeValues;
     }
 
-    set attributeValues(value: CachedAttributeValue[]) {
+    set attributeValues(value: ApiAttributeValues[]) {
         this._attributeValues = value;
     }
 
