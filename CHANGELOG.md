@@ -1,3 +1,10 @@
+## [101.33.3](https://github.com/dhis2/capture-app/compare/v101.33.2...v101.33.3) (2025-04-08)
+
+
+### Bug Fixes
+
+* [DHIS2-19415] editing two fields simultaneously blocks saving ([#4044](https://github.com/dhis2/capture-app/issues/4044)) ([ca448d3](https://github.com/dhis2/capture-app/commit/ca448d3c5ac6bc3896aa62243c9d90a163d07f43))
+
 ## [101.33.2](https://github.com/dhis2/capture-app/compare/v101.33.1...v101.33.2) (2025-04-02)
 
 
