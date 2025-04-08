@@ -1,6 +1,5 @@
-// @flow
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 
 const styles = () => ({
@@ -9,18 +8,19 @@ const styles = () => ({
         fontSize: 16,
         fontWeight: 500,
     },
-
     message: {
         marginTop: 10,
     },
 });
 
-type Props = {|
-    title?: string,
-    message: string,
-    ...CssClasses
-|}
-export const NoWriteAccessMessagePlain: ComponentType<Props> = ({ title, message, classes }) => (
+type Props = {
+    title?: string;
+    message: string;
+};
+
+type PropsWithStyles = Props & WithStyles<typeof styles>;
+
+export const NoWriteAccessMessagePlain = ({ title, message, classes }: PropsWithStyles) => (
     <>
         <div className={classes.header}>
             {title}
@@ -33,5 +33,5 @@ export const NoWriteAccessMessagePlain: ComponentType<Props> = ({ title, message
     </>
 );
 
-export const NoWriteAccessMessage: ComponentType<$Diff<Props, CssClasses>> =
-  withStyles(styles)(NoWriteAccessMessagePlain);
+export const NoWriteAccessMessage =
+  withStyles(styles)(NoWriteAccessMessagePlain) as ComponentType<Props>;
