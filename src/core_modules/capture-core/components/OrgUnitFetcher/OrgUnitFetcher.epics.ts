@@ -16,7 +16,6 @@ type ReduxStore = {
 
 export const orgUnitFetcherEpic = (
     action$: Observable<Action & { payload: FetchOrgUnitActionPayload }>,
-    _store: ReduxStore,
 ) => action$.pipe(
     ofType(actionTypes.FETCH_ORG_UNIT),
     map(({ payload: { orgUnitId } }) => getCoreOrgUnit({
