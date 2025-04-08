@@ -51,7 +51,6 @@ export const TopBar = ({
             onResetProgramId={() => resetProgramIdAndEnrollmentContext()}
             onResetOrgUnitId={() => resetOrgUnitId()}
             onStartAgain={() => reset()}
-            isReadOnlyOrgUnit
         >
             {trackedEntityName ? (
                 <SingleLockedSelect
