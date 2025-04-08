@@ -6,14 +6,6 @@ import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
 import { actionTypes, setCurrentOrgUnit, errorRetrievingOrgUnit } from './OrgUnitFetcher.actions';
 import type { FetchOrgUnitActionPayload } from './OrgUnitFetcher.types';
 
-type ReduxState = {
-    organisationUnits: Record<string, unknown>;
-};
-
-type ReduxStore = {
-    value: ReduxState;
-};
-
 export const orgUnitFetcherEpic = (
     action$: Observable<Action & { payload: FetchOrgUnitActionPayload }>,
 ) => action$.pipe(
