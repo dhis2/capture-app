@@ -12,10 +12,11 @@ import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
+import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
+import { EventRegistrationEntryWrapper } from '../../EventRegistrationEntryWrapper';
 import {
     InvalidCategoryCombinationForOrgUnitMessage,
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
-import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
 
 const getStyles = () => ({
     listContainer: {
@@ -56,9 +57,12 @@ const MainPagePlain = ({
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
         const noOrgUnitSelected = !orgUnitId;
-        const isEventProgram = !trackedEntityTypeId;
-        return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
-    }, [programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId]);
+
+        return noProgramSelected ||
+               noOrgUnitSelected ||
+               displayFrontPageList ||
+               selectedTemplateId;
+    }, [programId, orgUnitId, displayFrontPageList, selectedTemplateId]);
 
     return (
         <>
@@ -88,14 +92,30 @@ const MainPagePlain = ({
                     )}
                 </>
             ) : (
-                <div className={classes.container}>
-                    <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
-                        <SearchBox programId={programId} />
-                    </div>
-                    <div className={classes.quarter}>
-                        <TemplateSelector />
-                    </div>
-                </div>
+                <>
+                    {trackedEntityTypeId ? (
+                        <div className={classes.container}>
+                            <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
+                                <SearchBox programId={programId} />
+                            </div>
+                            <div className={classes.quarter}>
+                                <TemplateSelector />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className={classes.container}>
+                            <div className={classes.half}>
+                                <EventRegistrationEntryWrapper
+                                    dataEntryId="singleEvent"
+                                    selectedScopeId={programId}
+                                />
+                            </div>
+                            <div className={classes.quarter}>
+                                <TemplateSelector />
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
         </>
     );

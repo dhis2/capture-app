@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
@@ -15,7 +15,14 @@ import type { Props } from './eventWorkingListsReduxProvider.types';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/eventFilters';
 
-export const EventWorkingListsReduxProvider = ({ storeId, program, programStage, orgUnitId }: Props) => {
+export const EventWorkingListsReduxProvider = ({
+    storeId,
+    program,
+    programStage,
+    orgUnitId,
+    selectedTemplateId,
+    onChangeTemplate,
+}: Props) => {
     const dispatch = useDispatch();
     const dataEngine = useDataEngine();
     const { orgUnitId: contextOrgUnitId } = useLocationQuery();
@@ -28,8 +35,32 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
         onResetListColumnOrder,
         onClearFilters,
         onUpdateDefaultTemplate,
+        onSelectTemplate,
+        viewPreloaded,
         ...commonStateManagementRestProps
     } = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
+
+    // Use selected template ID from props if provided
+    useEffect(() => {
+        if (selectedTemplateId &&
+            selectedTemplateId !== currentTemplateId &&
+            !viewPreloaded &&
+            templates &&
+            templates.length > 0) {
+            const template = templates.find(t => t.id === selectedTemplateId);
+            if (template) {
+                onSelectTemplate(selectedTemplateId, template.criteria?.programStage);
+            }
+        }
+    }, [selectedTemplateId, templates, currentTemplateId, onSelectTemplate, viewPreloaded]);
+
+    // Custom onSelectTemplate that calls the provided onChangeTemplate
+    const handleSelectTemplate = useCallback((templateId, programStageId) => {
+        onSelectTemplate(templateId, programStageId);
+        if (onChangeTemplate) {
+            onChangeTemplate(templateId);
+        }
+    }, [onSelectTemplate, onChangeTemplate]);
 
     const currentTemplate = currentTemplateId && templates &&
     templates.find(template => template.id === currentTemplateId);
@@ -105,6 +136,8 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
             onUpdateList={injectDownloadRequestToUpdateList}
             onDeleteEvent={onDeleteEvent}
             downloadRequest={downloadRequest}
+            onSelectTemplate={handleSelectTemplate}
+            onChangeTemplate={onChangeTemplate}
         />
     );
 };

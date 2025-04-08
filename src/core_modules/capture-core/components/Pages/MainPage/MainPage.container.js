@@ -115,7 +115,7 @@ const MainPageContainer = () => {
     const selectedProgram = programCollection.get(programId);
     // $FlowFixMe[prop-missing]
     const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
-    const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
+    const displayFrontPageList = selectedProgram?.displayFrontPageList;
     const MainPageStatus = useMainPageStatus({
         programId,
         selectedProgram,
