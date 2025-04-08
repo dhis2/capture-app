@@ -1,6 +1,8 @@
 // @flow
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import {
     EventProgram,
     TrackerProgram,
@@ -138,6 +140,14 @@ export class ProgramFactory {
                 o.categoryCombination = this._buildCategoryCombination(cachedProgram.categoryCombo);
             });
             const d2Stage = cachedProgram.programStages && cachedProgram.programStages[0];
+
+            // Future: would be a good idea to use Zod here for schema validatons
+            if (!d2Stage) {
+                log.error(
+                    errorCreator('Invalid event program (program stage is missing)')(
+                        { program: cachedProgram }));
+                return null;
+            }
             program.stage =
                 await this.programStageFactory.build(
                     d2Stage,
