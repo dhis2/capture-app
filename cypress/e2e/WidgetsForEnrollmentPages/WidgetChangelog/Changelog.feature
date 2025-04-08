@@ -1,28 +1,62 @@
+@v>=41
 Feature: The user interacts with the changelog widget
 
-@v>=41
-  Scenario: The user can view an event changelog on the enrollment edit event
+  Background:
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    When you select view changelog in the event overflow button
+    And you select view changelog in the event overflow button
+
+
+  Scenario: The user can view an event changelog on the enrollment edit event
     Then the changelog modal should be visible
     And the changelog modal should contain data
-    # One row is filtered out as the metadata is no longer there
     And the number of changelog table rows should be 9
 
-  @v>=41
   Scenario: The user can change changelog page size
-    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    When you select view changelog in the event overflow button
-    And you change the page size to 20
-    # One row is filtered out as the metadata is no longer there
+    When you change the page size to 20
     Then the number of changelog table rows should be 19
     And you change the page size to 100
     Then the number of changelog table rows should be 37
+    And the table footer should display page 1
+
+  Scenario: The user can navigate between pages in the changelog
+    When you move to the next page
+    Then the table footer should display page 2
+    When you move to the previous page
     Then the table footer should display page 1
 
-  @v>=41
-  Scenario: The user can move to the next page in the changelog
-    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    When you select view changelog in the event overflow button
-    And you move to the next page
-    Then the table footer should display page 2
+  Scenario: The user can filter the changelog by data item
+    When you select "Treatment card" from the data item filter flyout menu
+    Then the filter pill should be visible with label "Treatment card"
+    And only rows with Data item "Treatment card" should be displayed
+
+  Scenario: Only one filter can be applied at a time
+    When you select "HIV testing done" from the data item filter flyout menu
+    Then the filter pill should be visible with label "HIV testing done"
+    When you select "Disease Classification" from the data item filter flyout menu
+    Then the filter pill should be visible with label "Disease Classification"
+    And only rows with Data item "Disease Classification" should be displayed
+
+  Scenario: The filter remains active when sorting is applied
+    When you select "Disease Classification" from the data item filter flyout menu
+    When you click the sort Date icon
+    Then only rows with Data item "Disease Classification" should be displayed
+    And the changelog data is sorted on Date in ascending order
+
+  Scenario: The user can remove the applied filter
+    When you select "Disease Classification" from the data item filter flyout menu
+    Then the filter pill should be visible with label "Disease Classification"
+    And only rows with Data item "Disease Classification" should be displayed
+    When you remove the filter
+    Then the filter pill should be visible with label "Show all"
+
+  Scenario: The user can sort by Date in ascending order
+    When you click the sort Date icon
+    Then the changelog data is sorted on Date in ascending order
+
+  Scenario: The user can sort by User in ascending order
+    When you click the sort User icon
+    Then the changelog data is sorted on User in ascending order
+
+  Scenario: The user can sort by Data item in ascending order
+    When you click the sort Data item icon
+    Then the changelog data is sorted on Data item in ascending order

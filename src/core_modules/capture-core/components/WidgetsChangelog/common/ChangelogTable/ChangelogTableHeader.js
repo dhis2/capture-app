@@ -28,6 +28,7 @@ type ColumnConfig = {|
     isSortable: boolean,
     name?: string,
     sortIconTitle?: string,
+    dataTest?: string,
 |};
 
 const getCurrentSortDirection = (
@@ -61,6 +62,7 @@ export const ChangelogTableHeader = ({
             sortIconTitle: i18n.t('Sort by date'),
             width: '140px',
             isSortable: true,
+            dataTest: 'changelog-sort-date',
         },
         {
             name: SORT_TARGETS.USERNAME,
@@ -68,6 +70,7 @@ export const ChangelogTableHeader = ({
             sortIconTitle: i18n.t('Sort by username'),
             width: '125px',
             isSortable: supportsChangelogV2,
+            dataTest: 'changelog-sort-username',
         },
         {
             name: sortTargetDataItem,
@@ -75,6 +78,7 @@ export const ChangelogTableHeader = ({
             sortIconTitle: i18n.t('Sort by data item'),
             width: '125px',
             isSortable: supportsChangelogV2,
+            dataTest: 'changelog-sort-dataItem',
         },
         {
             label: i18n.t('Change'),
@@ -97,12 +101,14 @@ export const ChangelogTableHeader = ({
                     sortIconTitle,
                     width,
                     isSortable,
+                    dataTest,
                 }) => (
                     <DataTableColumnHeader
                         key={label}
                         fixed
                         top="0"
                         width={width}
+                        dataTest={dataTest}
                         name={isSortable ? name : undefined}
                         sortDirection={
                             isSortable && name
