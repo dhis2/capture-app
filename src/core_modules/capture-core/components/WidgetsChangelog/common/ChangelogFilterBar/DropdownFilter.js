@@ -51,11 +51,12 @@ const DropdownFilterPlain = ({
         <DropdownButton
             open={isMenuOpen}
             onClick={() => onToggleMenu(filterColumn)}
+            dataTest={`changelog-filter-${filterColumn}`}
             component={
                 isMenuOpen && (
                     <FlyoutMenu
                         role="menu"
-                        dataTest={`changelog-filter-${filterColumn}`}
+                        dataTest={`changelog-filter-${filterColumn}-flyoutmenu`}
                         maxHeight="300px"
                     >
                         <MenuItem
