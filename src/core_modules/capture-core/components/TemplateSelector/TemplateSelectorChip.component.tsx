@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
 import type { WorkingListTemplate } from './workingListsBase.types';
-import { TooltipForChip } from '../Tooltips/TooltipForChip/TooltipForChip.component';
+import { TooltipForChip } from '../Tooltips/TooltipForChip';
 
 type Props = {
     template: WorkingListTemplate;

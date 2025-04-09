@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFeature, FEATURES } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
 import type { WorkingListTemplate } from '../workingListsBase.types';
@@ -9,26 +9,22 @@ type DataResponse = {
     };
 };
 
-export const useProgramStageTemplates = (programId: string) => {
+export const useProgramStageTemplates = (programId: string | undefined) => {
     const supportsStoreProgramStageWorkingList = useFeature(FEATURES.storeProgramStageWorkingList);
-    const { error, loading, data, refetch } = useDataQuery(
-        useMemo(
-            () => ({
-                templates: {
-                    resource: 'programStageWorkingLists',
-                    params: {
-                        filter: `program.id:eq:${programId}`,
-                        fields: 'id,displayName,access,sortOrder',
-                    },
-                },
-            }),
-            [programId],
-        ),
-        { lazy: true },
-    );
+    const { error, loading, data, refetch } = useDataQuery({
+        templates: {
+            resource: 'programStageWorkingLists',
+            params: {
+                filter: programId ? `program.id:eq:${programId}` : '',
+                fields: 'id,displayName,access,sortOrder',
+            },
+        },
+    }, { lazy: true });
 
     useEffect(() => {
-        supportsStoreProgramStageWorkingList && refetch();
+        if (programId && supportsStoreProgramStageWorkingList) {
+            refetch();
+        }
     }, [refetch, programId, supportsStoreProgramStageWorkingList]);
 
     return {

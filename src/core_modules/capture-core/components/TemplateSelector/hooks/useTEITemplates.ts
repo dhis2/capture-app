@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import type { WorkingListTemplate } from '../workingListsBase.types';
 
@@ -8,25 +8,21 @@ type DataResponse = {
     };
 };
 
-export const useTEITemplates = (programId: string) => {
-    const { error, loading, data, refetch } = useDataQuery(
-        useMemo(
-            () => ({
-                templates: {
-                    resource: 'trackedEntityInstanceFilters',
-                    params: {
-                        filter: `program.id:eq:${programId}`,
-                        fields: 'id,displayName,access,sortOrder',
-                    },
-                },
-            }),
-            [programId],
-        ),
-        { lazy: true },
-    );
+export const useTEITemplates = (programId: string | undefined) => {
+    const { error, loading, data, refetch } = useDataQuery({
+        templates: {
+            resource: 'trackedEntityInstanceFilters',
+            params: {
+                filter: programId ? `program.id:eq:${programId}` : '',
+                fields: 'id,displayName,access,sortOrder',
+            },
+        },
+    }, { lazy: true });
 
     useEffect(() => {
-        refetch();
+        if (programId) {
+            refetch();
+        }
     }, [refetch, programId]);
 
     return {
