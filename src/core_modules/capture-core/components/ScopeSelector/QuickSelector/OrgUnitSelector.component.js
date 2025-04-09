@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { SelectorBarItem, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { OrgUnitField } from '../../FormFields/New';
+import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
 
 const styles = () => ({
     selectBarMenu: {
@@ -22,11 +23,12 @@ type Props = {
     },
     previousOrgUnitId?: string,
     isReadOnly?: boolean,
+    tooltip?: boolean,
     classes: Object,
 };
 
 type State = {
-   open: boolean,
+    open: boolean,
 };
 
 class OrgUnitSelectorPlain extends Component<Props, State> {
@@ -42,39 +44,44 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(selectedOu: {id: string, displayName: string, code?: string}) {
+    handleClick(selectedOu: { id: string, displayName: string, code?: string }) {
         const orgUnitObject = { id: selectedOu.id, name: selectedOu.displayName, code: selectedOu.code };
         const { handleClickOrgUnit } = this.props;
         handleClickOrgUnit && handleClickOrgUnit(selectedOu.id, orgUnitObject);
     }
 
     render() {
-        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, isReadOnly, classes } = this.props;
+        const { selectedOrgUnitId, selectedOrgUnit, previousOrgUnitId, onReset, isReadOnly, tooltip, classes } = this.props;
 
         return (
-            <SelectorBarItem
-                label={i18n.t('Organisation unit')}
-                noValueMessage={i18n.t('Choose an organisation unit')}
-                value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
-                open={!isReadOnly && this.state.open}
-                setOpen={open => this.setState({ open })}
-                onClearSelectionClick={!isReadOnly ? () => onReset() : undefined}
-                displayOnly={isReadOnly}
-                dataTest="org-unit-selector-container"
+            <ConditionalTooltip
+                enabled={tooltip}
+                content={i18n.t('Choose an organisation unit in the form below')}
             >
-                <div className={classes.selectBarMenu}>
-                    <OrgUnitField
-                        data-test="org-unit-field"
-                        onSelectClick={(selectedOu, event) => {
-                            event.stopPropagation();
-                            event.preventDefault();
-                            this.setState({ open: false });
-                            this.handleClick(selectedOu);
-                        }}
-                        previousOrgUnitId={selectedOrgUnitId || previousOrgUnitId}
-                    />
-                </div>
-            </SelectorBarItem>
+                <SelectorBarItem
+                    label={i18n.t('Organisation unit')}
+                    noValueMessage={i18n.t(isReadOnly ? 'None selected' : 'Choose an organisation unit')}
+                    value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
+                    open={!isReadOnly && this.state.open}
+                    setOpen={open => this.setState({ open })}
+                    onClearSelectionClick={!isReadOnly ? () => onReset() : undefined}
+                    displayOnly={isReadOnly}
+                    dataTest="org-unit-selector-container"
+                >
+                    <div className={classes.selectBarMenu}>
+                        <OrgUnitField
+                            data-test="org-unit-field"
+                            onSelectClick={(selectedOu, event) => {
+                                event.stopPropagation();
+                                event.preventDefault();
+                                this.setState({ open: false });
+                                this.handleClick(selectedOu);
+                            }}
+                            previousOrgUnitId={selectedOrgUnitId || previousOrgUnitId}
+                        />
+                    </div>
+                </SelectorBarItem>
+            </ConditionalTooltip>
         );
     }
 }

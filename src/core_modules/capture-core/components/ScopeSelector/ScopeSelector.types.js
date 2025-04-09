@@ -18,7 +18,8 @@ export type OwnProps = $ReadOnly<{|
   onStartAgain: () => void,
   formIsOpen?: boolean,
   children: Node,
-  isReadOnly?: boolean,
+  isReadOnlyOrgUnit?: boolean,
+  orgUnitTooltip?: boolean,
 |}>
 
 export type PropsFromRedux = $ReadOnly<{|

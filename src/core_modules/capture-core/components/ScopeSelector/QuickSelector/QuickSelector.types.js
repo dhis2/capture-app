@@ -17,5 +17,6 @@ export type Props = {
     onStartAgain: () => void,
     formIsOpen: boolean,
     children: Node,
-    isReadOnly?: boolean,
+    isReadOnlyOrgUnit?: boolean,
+    orgUnitTooltip?: boolean,
 };

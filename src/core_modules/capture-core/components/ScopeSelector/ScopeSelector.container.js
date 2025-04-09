@@ -31,7 +31,8 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     onStartAgain,
     formIsOpen = false,
     children,
-    isReadOnly,
+    isReadOnlyOrgUnit,
+    orgUnitTooltip,
 }) => {
     const dispatch = useDispatch();
     const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: undefined, id: selectedOrgUnitId });
@@ -82,7 +83,8 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
             isUserInteractionInProgress={isUserInteractionInProgress}
             formIsOpen={formIsOpen}
             onStartAgain={onStartAgain}
-            isReadOnly={isReadOnly}
+            isReadOnlyOrgUnit={isReadOnlyOrgUnit}
+            orgUnitTooltip={orgUnitTooltip}
             ready={ready}
         >
             {children}
