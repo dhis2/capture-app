@@ -11,7 +11,7 @@ export const useTEITemplates = (programId: string | undefined) => {
         {
             resource: 'trackedEntityInstanceFilters',
             params: {
-                filter: programId ? `program.id:eq:${programId}` : '',
+                filter: `program.id:eq:${programId}`,
                 fields: 'id,displayName,access,sortOrder',
             },
         },
