@@ -14,7 +14,7 @@ import type {
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
     CachedCategory,
-} from '../../storageControllers/cache.types';
+} from '../../storageControllers';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { BuildProgramsInput } from './buildPrograms.types';
 

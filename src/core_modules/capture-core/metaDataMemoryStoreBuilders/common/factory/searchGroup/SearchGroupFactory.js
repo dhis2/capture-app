@@ -12,7 +12,7 @@ import {
 import type {
     CachedAttributeTranslation,
     CachedTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import { OptionSetFactory } from '../optionSet';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 

@@ -4,7 +4,7 @@
 
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule } from '@dhis2/rules-engine-javascript';
-import type { CachedDataElement } from '../../storageControllers/cache.types';
+import type { CachedDataElement } from '../../storageControllers';
 import type { Icon } from '../Icon';
 import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';

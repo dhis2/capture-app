@@ -31,7 +31,7 @@ import type
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
     CachedProgramTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 
 export class ProgramFactory {
     programStageFactory: ProgramStageFactory;
