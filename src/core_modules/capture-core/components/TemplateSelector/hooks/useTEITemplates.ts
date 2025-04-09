@@ -1,6 +1,12 @@
-// @flow
 import { useMemo, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import type { WorkingListTemplate } from '../workingListsBase.types';
+
+type DataResponse = {
+    templates?: {
+        trackedEntityInstanceFilters?: WorkingListTemplate[];
+    };
+};
 
 export const useTEITemplates = (programId: string) => {
     const { error, loading, data, refetch } = useDataQuery(
@@ -8,24 +14,24 @@ export const useTEITemplates = (programId: string) => {
             () => ({
                 templates: {
                     resource: 'trackedEntityInstanceFilters',
-                    params: ({ variables }) => ({
-                        filter: `program.id:eq:${variables.programId}`,
+                    params: {
+                        filter: `program.id:eq:${programId}`,
                         fields: 'id,displayName,access,sortOrder',
-                    }),
+                    },
                 },
             }),
-            [],
+            [programId],
         ),
         { lazy: true },
     );
 
     useEffect(() => {
-        refetch({ variables: { programId } });
+        refetch();
     }, [refetch, programId]);
 
     return {
         error,
         loading,
-        TEITemplates: data?.templates?.trackedEntityInstanceFilters ? data.templates.trackedEntityInstanceFilters : [],
+        TEITemplates: (data as DataResponse)?.templates?.trackedEntityInstanceFilters || [],
     };
 };

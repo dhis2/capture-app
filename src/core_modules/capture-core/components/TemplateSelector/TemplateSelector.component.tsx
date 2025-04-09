@@ -1,6 +1,5 @@
-// @flow
-import React, { useMemo, useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useMemo, useState, type ComponentType, type ReactNode } from 'react';
+import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
 import { Button, spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -8,10 +7,9 @@ import { localeCompareStrings } from '../../utils/localeCompareStrings';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import type { WorkingListTemplates, WorkingListTemplate } from './workingListsBase.types';
 import { Widget } from '../Widget';
-import { BookmarkAddIcon } from '../../../capture-ui/Icons';
+import { BookmarkAddIcon } from 'capture-ui/Icons';
 
-
-const getStyles = () => ({
+const styles = createStyles({
     configsContainer: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -46,14 +44,14 @@ const getStyles = () => ({
 });
 
 type Props = {
-    templates: WorkingListTemplates,
-    onSelectTemplate: (template: WorkingListTemplate) => void,
-    onCreateTemplate: () => void,
-    classes: Object,
+    templates: WorkingListTemplates;
+    onSelectTemplate: (template: WorkingListTemplate) => void;
+    onCreateTemplate: () => void;
 };
 
-const TemplateSelectorPlain = (props: Props) => {
-    const { templates, onSelectTemplate, onCreateTemplate, classes } = props;
+type TemplateSelectorPlainProps = Props & WithStyles<typeof styles>;
+
+const TemplateSelectorPlain = ({ templates, onSelectTemplate, onCreateTemplate, classes }: TemplateSelectorPlainProps) => {
     const [open, setOpen] = useState(true);
     const customTemplates = useMemo(
         () =>
@@ -87,9 +85,14 @@ const TemplateSelectorPlain = (props: Props) => {
         );
     });
 
+    const savedListsHeader = i18n.t('Saved lists in this program') as ReactNode;
+    const quickAccessText = i18n.t('Saved lists offer quick access to your most used views in a program.') as ReactNode;
+    const noSavedListsText = i18n.t('There are no saved lists in this program yet, create one using the button below.') as ReactNode;
+    const createSavedListText = i18n.t('Create saved list') as ReactNode;
+
     return (
         <Widget
-            header={i18n.t('Saved lists in this program')}
+            header={savedListsHeader}
             open={open}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
@@ -101,19 +104,19 @@ const TemplateSelectorPlain = (props: Props) => {
                     <>
                         <BookmarkAddIcon className={classes.icon} />
                         <p className={classes.text}>
-                            {i18n.t('Saved lists offer quick access to your most used views in a program.')}
+                            {quickAccessText}
                         </p>
                         <p className={classes.text}>
-                            {i18n.t('There are no saved lists in this program yet, create one using the button below.')}
+                            {noSavedListsText}
                         </p>
                     </>
                 )}
                 <Button small onClick={onCreateTemplate} color="secondary" dataTest="template-selector-create-list">
-                    {i18n.t('Create saved list')}
+                    {createSavedListText}
                 </Button>
             </div>
         </Widget>
     );
 };
 
-export const TemplateSelector = withStyles(getStyles)(TemplateSelectorPlain);
+export const TemplateSelector = withStyles(styles)(TemplateSelectorPlain) as ComponentType<Props>;
