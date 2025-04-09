@@ -129,7 +129,7 @@ Feature: User uses the ScopeSelector to navigate
     Given you are in the main page with no selections made
     And you select both org unit and program Malaria case registration
     When you select the first entity from the table
-    Then you remove the org unit selection
+    Then you can not remove the org unit selection
 
   Scenario: View event page > Url with invalid event id
     Given you land on a view event page with an invalid id
