@@ -124,7 +124,6 @@ const SearchFormIndex = ({
         expandedFormId,
     ]);
 
-
     return useMemo(() => {
         const formReference = {};
         const containerButtonRef = {};

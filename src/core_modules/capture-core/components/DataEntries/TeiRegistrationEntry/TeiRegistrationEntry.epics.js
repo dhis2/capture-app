@@ -9,7 +9,6 @@ import { teiRegistrationEntryActionTypes } from './TeiRegistrationEntry.actions'
 import { openDataEntryForNewTeiBatchAsync } from '../TrackedEntityInstance';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
-import { cleanSearchRelatedData } from '../../SearchBox';
 
 export const startNewTeiDataEntrySelfInitialisationEpic = (
     action$: InputObservable,
@@ -34,7 +33,6 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (
                     dataEntryId,
                     querySingleResource,
                     formValues,
-                    extraActions: [cleanSearchRelatedData()],
                 });
 
                 return from(openTeiPromise);
