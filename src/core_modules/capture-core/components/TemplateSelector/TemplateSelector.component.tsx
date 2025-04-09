@@ -1,4 +1,4 @@
-import React, { useMemo, useState, type ComponentType, type ReactNode } from 'react';
+import React, { useMemo, useState, type ComponentType } from 'react';
 import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
 import { Button, spacers, colors } from '@dhis2/ui';
