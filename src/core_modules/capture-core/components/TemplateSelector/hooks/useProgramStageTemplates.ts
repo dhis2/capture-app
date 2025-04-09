@@ -13,7 +13,7 @@ export const useProgramStageTemplates = (programId: string | undefined) => {
         {
             resource: 'programStageWorkingLists',
             params: {
-                filter: programId ? `program.id:eq:${programId}` : '',
+                filter: `program.id:eq:${programId}`,
                 fields: 'id,displayName,access,sortOrder',
             },
         },

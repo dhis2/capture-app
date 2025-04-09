@@ -1,4 +1,4 @@
-import React, { useMemo, useState, type ComponentType } from 'react';
+import React, { useMemo, useState } from 'react';
 import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
 import { Button, spacers, colors } from '@dhis2/ui';
@@ -114,4 +114,4 @@ const TemplateSelectorPlain = ({ templates, onSelectTemplate, onCreateTemplate, 
     );
 };
 
-export const TemplateSelector = withStyles(styles)(TemplateSelectorPlain) as ComponentType<Props>;
+export const TemplateSelector = withStyles(styles)(TemplateSelectorPlain);
