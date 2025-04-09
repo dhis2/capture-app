@@ -1,33 +1,28 @@
-import { useEffect } from 'react';
-import { useDataQuery } from '@dhis2/app-runtime';
+import { useApiDataQuery } from 'capture-core/utils/reactQueryHelpers';
 import type { WorkingListTemplate } from '../workingListsBase.types';
 
 type DataResponse = {
-    templates?: {
-        trackedEntityInstanceFilters?: WorkingListTemplate[];
-    };
+    trackedEntityInstanceFilters?: WorkingListTemplate[];
 };
 
 export const useTEITemplates = (programId: string | undefined) => {
-    const { error, loading, data, refetch } = useDataQuery({
-        templates: {
+    const { error, isLoading, data } = useApiDataQuery<DataResponse>(
+        ['trackedEntityInstanceFilters', programId],
+        {
             resource: 'trackedEntityInstanceFilters',
             params: {
                 filter: programId ? `program.id:eq:${programId}` : '',
                 fields: 'id,displayName,access,sortOrder',
             },
         },
-    }, { lazy: true });
-
-    useEffect(() => {
-        if (programId) {
-            refetch();
-        }
-    }, [refetch, programId]);
+        {
+            enabled: !!programId,
+        },
+    );
 
     return {
         error,
-        loading,
-        TEITemplates: (data as DataResponse)?.templates?.trackedEntityInstanceFilters || [],
+        loading: isLoading,
+        TEITemplates: data?.trackedEntityInstanceFilters || [],
     };
 };
