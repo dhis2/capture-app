@@ -85,14 +85,9 @@ const TemplateSelectorPlain = ({ templates, onSelectTemplate, onCreateTemplate, 
         );
     });
 
-    const savedListsHeader = i18n.t('Saved lists in this program') as ReactNode;
-    const quickAccessText = i18n.t('Saved lists offer quick access to your most used views in a program.') as ReactNode;
-    const noSavedListsText = i18n.t('There are no saved lists in this program yet, create one using the button below.') as ReactNode;
-    const createSavedListText = i18n.t('Create saved list') as ReactNode;
-
     return (
         <Widget
-            header={savedListsHeader}
+            header={i18n.t('Saved lists in this program')}
             open={open}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
@@ -104,15 +99,15 @@ const TemplateSelectorPlain = ({ templates, onSelectTemplate, onCreateTemplate, 
                     <>
                         <BookmarkAddIcon className={classes.icon} />
                         <p className={classes.text}>
-                            {quickAccessText}
+                            {i18n.t('Saved lists offer quick access to your most used views in a program.')}
                         </p>
                         <p className={classes.text}>
-                            {noSavedListsText}
+                            {i18n.t('There are no saved lists in this program yet, create one using the button below.')}
                         </p>
                     </>
                 )}
                 <Button small onClick={onCreateTemplate} color="secondary" dataTest="template-selector-create-list">
-                    {createSavedListText}
+                    {i18n.t('Create saved list')}
                 </Button>
             </div>
         </Widget>

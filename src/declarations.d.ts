@@ -12,7 +12,7 @@ declare module 'src/core_modules/*';
 // Add additional declarations for any problematic imports
 declare module '@dhis2/d2-i18n' {
     const i18n: {
-        t: (key: string, options?: any) => React.ReactNode;
+        t: (key: string, options?: any) => any;
         // Add other methods as needed
     };
     export default i18n;
