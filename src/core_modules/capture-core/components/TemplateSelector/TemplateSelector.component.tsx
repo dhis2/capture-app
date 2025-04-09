@@ -3,11 +3,11 @@ import { withStyles, createStyles, type WithStyles } from '@material-ui/core/sty
 import cx from 'classnames';
 import { Button, spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { BookmarkAddIcon } from 'capture-ui/Icons';
 import { localeCompareStrings } from '../../utils/localeCompareStrings';
+import { Widget } from '../Widget';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import type { WorkingListTemplates, WorkingListTemplate } from './workingListsBase.types';
-import { Widget } from '../Widget';
-import { BookmarkAddIcon } from 'capture-ui/Icons';
 
 const styles = createStyles({
     configsContainer: {

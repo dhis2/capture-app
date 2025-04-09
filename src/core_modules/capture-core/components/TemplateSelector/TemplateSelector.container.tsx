@@ -12,7 +12,7 @@ export const TemplateSelector = () => {
 
     const onSelectTemplate = (template: WorkingListTemplate) =>
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId, selectedTemplateId: template.id })}`);
-    
+
     const onCreateTemplate = () => {
         const urlQueryString = buildUrlQueryString({
             orgUnitId,
