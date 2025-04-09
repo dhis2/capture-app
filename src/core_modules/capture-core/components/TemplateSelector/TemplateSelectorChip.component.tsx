@@ -1,16 +1,14 @@
-// @flow
 import React, { useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
 import type { WorkingListTemplate } from './workingListsBase.types';
 import { TooltipForChip } from '../Tooltips/TooltipForChip';
 
 type Props = {
-    template: WorkingListTemplate,
-    onSelectTemplate: (template: WorkingListTemplate) => void,
+    template: WorkingListTemplate;
+    onSelectTemplate: (template: WorkingListTemplate) => void;
 };
 
-export const TemplateSelectorChip = (props: Props) => {
-    const { template, onSelectTemplate } = props;
+export const TemplateSelectorChip = ({ template, onSelectTemplate }: Props) => {
     const { displayName } = template;
 
     const selectTemplateHandler = useCallback(() => {
@@ -37,6 +35,5 @@ export const TemplateSelectorChip = (props: Props) => {
                 {text}
             </Chip>
         </TooltipForChip>
-
     );
 };
