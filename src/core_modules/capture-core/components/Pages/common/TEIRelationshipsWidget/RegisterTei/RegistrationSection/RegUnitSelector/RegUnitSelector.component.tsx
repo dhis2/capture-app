@@ -8,8 +8,7 @@ import type { RegUnitSelectorProps } from './RegUnitSelector.types';
 const getStyles = (theme: Theme) => ({
     label: {
         paddingTop: '10px',
-        color: theme.palette.text.primary,
-        '@media (max-width: 523px)': {
+        [theme.breakpoints.down(523)]: {
             paddingTop: '0px !important',
         },
     },
