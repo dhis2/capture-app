@@ -9,7 +9,6 @@ type Props = {
 export const SearchOrgUnitSelectorRefHandler = React.forwardRef<any, Omit<Props, 'innerRef'>>((props, ref) => {
     const { innerRef, ...passOnProps } = props as Props;
     const refToUse = innerRef || ref;
-    
     return (
         <SearchOrgUnitSelector
             ref={refToUse}
