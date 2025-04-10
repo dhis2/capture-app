@@ -41,24 +41,6 @@ const styles = createStyles({
 type Props = ComposedProgramSelectorProps & WithStyles<typeof styles>;
 
 class ProgramSelector extends React.Component<Props> {
-    getOptionsFromPrograms = (programs: Program[]): ProgramOption[] =>
-        programs
-            .map(program => ({
-                label: program.name,
-                value: program.id,
-                iconLeft: this.getProgramIcon(program),
-            }));
-
-    baseLineFilter = (program: Program) => {
-        const { trackedEntityTypeId } = this.props;
-
-        const isValid = program instanceof TrackerProgram &&
-        program.trackedEntityType.id === trackedEntityTypeId &&
-        program.access.data.write;
-
-        return isValid;
-    }
-
     getProgramIcon(program: Program) {
         const icon = program.icon || {};
         const { color = '', name = '' } = icon as { color?: string; name?: string };
@@ -97,6 +79,24 @@ class ProgramSelector extends React.Component<Props> {
             </div>
         );
     }
+
+    baseLineFilter = (program: Program) => {
+        const { trackedEntityTypeId } = this.props;
+
+        const isValid = program instanceof TrackerProgram &&
+        program.trackedEntityType.id === trackedEntityTypeId &&
+        program.access.data.write;
+
+        return isValid;
+    }
+
+    getOptionsFromPrograms = (programs: Program[]): ProgramOption[] =>
+        programs
+            .map(program => ({
+                label: program.name,
+                value: program.id,
+                iconLeft: this.getProgramIcon(program),
+            }));
 
     render() {
         const { classes, orgUnitIds, onUpdateSelectedProgram, onClearFilter, ...passOnProps } = this.props;
