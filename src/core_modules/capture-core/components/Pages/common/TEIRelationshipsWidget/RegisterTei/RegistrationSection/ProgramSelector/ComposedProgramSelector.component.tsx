@@ -77,7 +77,8 @@ class ProgramSelector extends React.Component<Props> {
                     {i18n.t('Show all')}
                 </LinkButton>
             </div>
-        );
+
+    );
     }
 
     baseLineFilter = (program: Program) => {
@@ -89,7 +90,7 @@ class ProgramSelector extends React.Component<Props> {
 
         return isValid;
     }
-
+    
     getOptionsFromPrograms = (programs: Program[]): ProgramOption[] =>
         programs
             .map(program => ({
