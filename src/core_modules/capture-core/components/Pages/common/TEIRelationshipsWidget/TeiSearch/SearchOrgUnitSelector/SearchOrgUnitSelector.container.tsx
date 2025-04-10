@@ -1,4 +1,3 @@
-// @flow
 import { connect } from 'react-redux';
 import {
     setOrgUnitScope,
@@ -9,7 +8,22 @@ import {
 import { get as getOrgUnitRoots } from '../../../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
 
-const mapStateToProps = (state: ReduxState, props: Object) => {
+type ReduxState = {
+    teiSearch: {
+        [key: string]: {
+            selectedOrgUnit: any;
+            selectedOrgUnitScope: string;
+            orgUnitsSearchText: string;
+            orgUnitsLoading: boolean;
+        };
+    };
+};
+
+type Props = {
+    searchId: string;
+};
+
+const mapStateToProps = (state: ReduxState, props: Props) => {
     const searchId = props.searchId;
 
     const filteredRoots = getOrgUnitRoots(searchId);
@@ -25,14 +39,16 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     };
 };
 
+type ReduxDispatch = (action: any) => void;
+
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onFilterOrgUnits: (searchId: string, searchText: string) => {
+    onFilterOrgUnits: (searchId: string, searchText: string | null) => {
         const action = searchText ?
             requestFilterOrgUnits(searchId, searchText) :
             clearOrgUnitsFilter(searchId);
         dispatch(action);
     },
-    onSetOrgUnit: (searchId: string, orgUnit: ?any) => {
+    onSetOrgUnit: (searchId: string, orgUnit: any | null) => {
         dispatch(setOrgUnit(searchId, orgUnit));
     },
     onSelectOrgUnitScope: (searchId: string, orgUnitScope: string) => {
@@ -40,7 +56,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
 export const SearchOrgUnitSelector = connect(mapStateToProps, mapDispatchToProps)(
     SearchOrgUnitSelectorRefHandler,
 );
