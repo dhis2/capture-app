@@ -7,7 +7,7 @@ import type { RegistrationSectionProps } from './RegistrationSection.types';
 
 const getStyles = (theme: Theme) => ({
     section: {
-        backgroundColor: 'white',
+        backgroundColor: theme.palette.background.paper,
         maxWidth: '892px',
     },
 });

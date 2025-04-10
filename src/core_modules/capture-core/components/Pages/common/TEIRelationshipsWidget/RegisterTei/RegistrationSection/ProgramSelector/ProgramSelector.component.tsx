@@ -7,6 +7,7 @@ import type { ProgramSelectorProps } from './ProgramSelector.types';
 const getStyles = (theme: Theme) => ({
     programLabel: {
         paddingTop: '10px',
+        color: theme.palette.text.primary,
         '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
