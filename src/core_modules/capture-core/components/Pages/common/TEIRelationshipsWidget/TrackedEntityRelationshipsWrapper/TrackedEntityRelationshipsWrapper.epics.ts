@@ -10,9 +10,11 @@ import { getSearchFormId } from '../../../../TeiSearch/getSearchFormId';
 import { addFormData } from '../../../../D2Form/actions/form.actions';
 import { initializeTeiSearch } from '../../../../TeiSearch/actions/teiSearch.actions';
 import { findModes } from '../../../NewRelationship/findModes';
-import { type TrackerProgram } from '../../../../../metaData';
+import {
+    type TrackerProgram,
+    getTrackerProgramThrowIfNotFound,
+} from '../../../../../metaData';
 import { initializeRegisterTei, initializeRegisterTeiFailed } from '../RegisterTei/registerTei.actions';
-import { getTrackerProgramThrowIfNotFound } from '../../../../../metaData';
 import { errorCreator } from '../../../../../../capture-core-utils';
 
 const searchId = 'relationshipTeiSearchWidget';

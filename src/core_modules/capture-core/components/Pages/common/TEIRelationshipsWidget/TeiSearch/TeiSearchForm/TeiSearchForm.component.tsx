@@ -64,9 +64,6 @@ type ClassKeys = 'container' | 'orgUnitSection' | 'searchButtonContainer' | 'min
 type TeiSearchFormPlainProps = Props & WithStyles<ClassKeys>;
 
 class SearchFormPlain extends React.Component<TeiSearchFormPlainProps, State> {
-    formInstance: any;
-    orgUnitSelectorInstance: any;
-
     constructor(props: TeiSearchFormPlainProps) {
         super(props);
         this.state = {
@@ -78,7 +75,10 @@ class SearchFormPlain extends React.Component<TeiSearchFormPlainProps, State> {
         const attributeName = searchForm.getElements()[0].formName;
         return `Search ${attributeName}`;
     }
-    
+
+    formInstance: any;
+    orgUnitSelectorInstance: any;
+
     static errorMessages = {
         NO_ITEM_SELECTED: 'No item selected',
         SEARCH_FORM_MISSING: 'search form is missing. see log for details',
@@ -160,8 +160,7 @@ class SearchFormPlain extends React.Component<TeiSearchFormPlainProps, State> {
                         defaultValue: 'Fill in at least {{count}} attribute to search',
                         defaultValue_plural: 'Fill in at least {{count}} attributes to search',
                     }) as React.ReactNode
-                }
-            </div>
+                }        </div>
         );
     }
 
