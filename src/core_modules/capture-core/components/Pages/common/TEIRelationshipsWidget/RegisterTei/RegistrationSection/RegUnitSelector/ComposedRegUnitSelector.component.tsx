@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import {
     withDefaultShouldUpdateInterface,
     withDefaultFieldContainer,
@@ -10,20 +9,15 @@ import {
     withOrgUnitFieldImplicitRootsFilterHandler,
     orgUnitFieldScopes,
 } from '../../../../../../FormFields/New';
+import type { ComposedRegUnitSelectorProps } from './RegUnitSelector.types';
 
 const OrgUnitFieldImplicitRootsFilterHandlerHOC =
     withOrgUnitFieldImplicitRootsFilterHandler()(SingleOrgUnitSelectField);
 
-
-type Props = {
-    onUpdateSelectedOrgUnit: (orgUnit: ?Object) => void,
-};
-
-class OrgUnitFieldWrapper extends React.Component<Props> {
+class OrgUnitFieldWrapper extends React.Component<ComposedRegUnitSelectorProps> {
     render() {
         const { onUpdateSelectedOrgUnit, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <OrgUnitFieldImplicitRootsFilterHandlerHOC
                 onSelect={onUpdateSelectedOrgUnit}
                 scope={orgUnitFieldScopes.USER_CAPTURE}
@@ -38,11 +32,11 @@ export const ComposedRegUnitSelector =
     withDefaultShouldUpdateInterface()(
         withDefaultFieldContainer()(
             withLabel({
-                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                onGetCustomFieldLabeClass: (props: Object) =>
+                onGetUseVerticalOrientation: (props: Record<string, any>) => props.formHorizontal,
+                onGetCustomFieldLabeClass: (props: Record<string, any>) =>
                     props.labelClass,
             })(
-                withFilterProps((props: Object) => {
+                withFilterProps((props: Record<string, any>) => {
                     const { labelClass, ...passOnProps } = props;
                     return passOnProps;
                 })(

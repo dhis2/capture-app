@@ -1,5 +1,3 @@
-
-// @flow
 import { actionCreator } from '../../../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -12,7 +10,7 @@ export const actionTypes = {
 export const changeProgram = (programId: string) =>
     actionCreator(actionTypes.PROGRAM_CHANGE)({ programId });
 
-export const changeOrgUnit = (orgUnit: ?Object, resetProgramSelection: boolean) =>
+export const changeOrgUnit = (orgUnit: Record<string, any> | null | undefined, resetProgramSelection: boolean) =>
     actionCreator(actionTypes.ORG_UNIT_CHANGE)({ orgUnit, resetProgramSelection });
 
 export const searchOrgUnitFailed = () =>

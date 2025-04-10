@@ -1,21 +1,18 @@
-// @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Section, SectionHeaderSimple } from '../../../../../Section';
 import { SectionContents } from './SectionContents.component';
+import type { RegistrationSectionProps } from './RegistrationSection.types';
 
-const getStyles = (theme: Theme) => ({
+const styles = createStyles({
     section: {
         backgroundColor: 'white',
-        maxWidth: theme.typography.pxToRem(892),
+        maxWidth: '892px',
     },
 });
 
-type Props = {
-    trackedEntityTypeId: string,
-    classes: Object,
-};
+type Props = RegistrationSectionProps & WithStyles<typeof styles>;
 
 const renderSectionHeader = () => {
     const title = i18n.t('Registration');
@@ -31,7 +28,6 @@ const RegistrationSectionPlain = (props: Props) => {
     return (
         <Section
             header={renderSectionHeader()}
-            elevation={2}
             className={classes.section}
         >
             <SectionContents
@@ -40,4 +36,5 @@ const RegistrationSectionPlain = (props: Props) => {
         </Section>
     );
 };
-export const RegistrationSection = withStyles(getStyles)(RegistrationSectionPlain);
+
+export const RegistrationSection = withStyles(styles)(RegistrationSectionPlain);

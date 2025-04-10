@@ -1,13 +1,9 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import { ProgramSelector } from './ProgramSelector';
 import { RegUnitSelector } from './RegUnitSelector';
+import type { SectionContentsProps } from './RegistrationSection.types';
 
-type Props = {
-    trackedEntityTypeId: string,
-};
-
-export const SectionContents = ({ trackedEntityTypeId }: Props) => (
+export const SectionContents = ({ trackedEntityTypeId }: SectionContentsProps) => (
     <>
         <RegUnitSelector />
         <ProgramSelector

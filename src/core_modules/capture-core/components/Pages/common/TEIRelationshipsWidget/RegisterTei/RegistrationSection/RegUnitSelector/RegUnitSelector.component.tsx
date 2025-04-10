@@ -1,26 +1,20 @@
-// @flow
-/* eslint-disable react/no-multi-comp */
-import * as React from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
+import type { RegUnitSelectorProps } from './RegUnitSelector.types';
 
-const getStyles = (theme: Theme) => ({
+const styles = createStyles({
     label: {
         paddingTop: '10px',
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },
 });
 
-type Props = {
-    selectedProgramId: ?string,
-    classes: Object,
-    onUpdateSelectedOrgUnit: (orgUnit: ?Object, resetProgramSelection: boolean) => void,
-    programId: string,
-};
+type Props = RegUnitSelectorProps & WithStyles<typeof styles>;
 
 class RegUnitSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
@@ -32,7 +26,7 @@ class RegUnitSelectorPlain extends React.Component<Props> {
         },
     };
 
-    handleUpdateSelectedOrgUnit = (orgUnit: Object) => {
+    handleUpdateSelectedOrgUnit = (orgUnit: Record<string, any>) => {
         const { programId, onUpdateSelectedOrgUnit } = this.props;
         if (!programId || !orgUnit) {
             onUpdateSelectedOrgUnit(orgUnit, false);
@@ -53,7 +47,6 @@ class RegUnitSelectorPlain extends React.Component<Props> {
     render() {
         const { classes, onUpdateSelectedOrgUnit, programId, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedRegUnitSelector
                 labelClass={classes.label}
                 label={i18n.t('Organisation Unit')}
@@ -64,4 +57,5 @@ class RegUnitSelectorPlain extends React.Component<Props> {
         );
     }
 }
-export const RegUnitSelectorComponent = withStyles(getStyles)(RegUnitSelectorPlain);
+
+export const RegUnitSelectorComponent = withStyles(styles)(RegUnitSelectorPlain);

@@ -1,21 +1,19 @@
-// @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { ComposedProgramSelector } from './ComposedProgramSelector.component';
+import type { ProgramSelectorComponentProps } from './ProgramSelector.types';
 
-const getStyles = (theme: Theme) => ({
+const styles = createStyles({
     programLabel: {
         paddingTop: '10px',
-        [theme.breakpoints.down(523)]: {
+        '@media (max-width: 523px)': {
             paddingTop: '0px !important',
         },
     },
 });
 
-type Props = {
-    classes: Object,
-};
+type Props = ProgramSelectorComponentProps & WithStyles<typeof styles>;
 
 class ProgramSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
@@ -30,7 +28,6 @@ class ProgramSelectorPlain extends React.Component<Props> {
     render() {
         const { classes, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedProgramSelector
                 dataTest="relationship-register-tei-program-selector"
                 styles={ProgramSelectorPlain.baseComponentStyles}
@@ -41,4 +38,5 @@ class ProgramSelectorPlain extends React.Component<Props> {
         );
     }
 }
-export const ProgramSelectorComponent = withStyles(getStyles)(ProgramSelectorPlain);
+
+export const ProgramSelectorComponent = withStyles(styles)(ProgramSelectorPlain);
