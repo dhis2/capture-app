@@ -64,6 +64,14 @@ const options = [
 const errorMessage = 'Please select an organisation unit';
 
 class SearchOrgUnitSelectorPlain extends React.Component<PropsWithoutClasses & WithStyles<typeof styles>> {
+    gotoInstance: any;
+
+    onSelectOrgUnitScope = (value: any) => {
+        if (value) {
+            this.props.onSelectOrgUnitScope(this.props.searchId, value);
+        }
+    }
+
     getErrorMessage = () => {
         if (!this.isValid() && this.props.searchAttempted) {
             return i18n.t(errorMessage);
@@ -71,15 +79,7 @@ class SearchOrgUnitSelectorPlain extends React.Component<PropsWithoutClasses & W
         return null;
     }
 
-    gotoInstance: any;
-
     isValid = () => this.props.selectedOrgUnitScope === 'ACCESSIBLE' || this.props.selectedOrgUnit
-
-    onSelectOrgUnitScope = (value: any) => {
-        if (value) {
-            this.props.onSelectOrgUnitScope(this.props.searchId, value);
-        }
-    }
 
     onSetOrgUnit = (orgUnit: Record<string, unknown> | null) => {
         this.props.onSetOrgUnit(this.props.searchId, orgUnit);
