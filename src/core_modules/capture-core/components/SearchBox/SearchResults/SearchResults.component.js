@@ -216,7 +216,10 @@ const SearchResultsIndex = ({
                 {i18n.t('If none of search results match, you can create a new ')}&quot;{trackedEntityName}&quot;.
             </div>
 
-            <Button onClick={handleCreateNew} dataTest="create-new-button">
+            <Button
+                onClick={() => handleCreateNew(currentSearchTerms)}
+                dataTest="create-new-button"
+            >
                 {i18n.t('Create new')}
             </Button>
         </div>
