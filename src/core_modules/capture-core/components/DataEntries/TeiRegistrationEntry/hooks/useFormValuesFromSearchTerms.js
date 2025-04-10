@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const useFormValuesFromSearchTerms = ({ inheritedAttributes }: Props) => {
-    const searchTerms = useSelector(({ searchDomain }) => searchDomain.currentSearchInfo.currentSearchTerms);
+    const searchTerms = useSelector(({ newPage }) => newPage.prepopulatedData);
 
     return useMemo(() => {
         if (inheritedAttributes) {
