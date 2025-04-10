@@ -1,10 +1,10 @@
 import React from 'react';
-import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { ComposedProgramSelector } from './ComposedProgramSelector.component';
 import type { ProgramSelectorProps } from './ProgramSelector.types';
 
-const styles = createStyles({
+const getStyles = (theme: Theme) => ({
     programLabel: {
         paddingTop: '10px',
         '@media (max-width: 523px)': {
@@ -13,7 +13,7 @@ const styles = createStyles({
     },
 });
 
-type Props = ProgramSelectorProps & WithStyles<typeof styles>;
+type Props = ProgramSelectorProps & WithStyles<typeof getStyles>;
 
 class ProgramSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
@@ -39,4 +39,4 @@ class ProgramSelectorPlain extends React.Component<Props> {
     }
 }
 
-export const ProgramSelectorComponent = withStyles(styles)(ProgramSelectorPlain);
+export const ProgramSelectorComponent = withStyles(getStyles)(ProgramSelectorPlain);

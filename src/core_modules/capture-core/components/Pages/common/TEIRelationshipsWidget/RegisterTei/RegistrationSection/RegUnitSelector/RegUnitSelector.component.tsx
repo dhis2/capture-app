@@ -1,11 +1,11 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
 import type { RegUnitSelectorProps } from './RegUnitSelector.types';
 
-const styles = createStyles({
+const getStyles = (theme: Theme) => ({
     label: {
         paddingTop: '10px',
         '@media (max-width: 523px)': {
@@ -14,7 +14,7 @@ const styles = createStyles({
     },
 });
 
-type Props = RegUnitSelectorProps & WithStyles<typeof styles>;
+type Props = RegUnitSelectorProps & WithStyles<typeof getStyles>;
 
 class RegUnitSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
@@ -58,4 +58,4 @@ class RegUnitSelectorPlain extends React.Component<Props> {
     }
 }
 
-export const RegUnitSelectorComponent = withStyles(styles)(RegUnitSelectorPlain);
+export const RegUnitSelectorComponent = withStyles(getStyles)(RegUnitSelectorPlain);
