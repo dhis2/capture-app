@@ -1,14 +1,10 @@
-// @flow
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
-} from '../../../../../metaData';
-import type {
-    SearchGroup,
+    type SearchGroup,
 } from '../../../../../metaData';
 
-
-export function getSearchGroups(trackedEntityTypeId: string, programId: ?string): Array<SearchGroup> {
+export function getSearchGroups(trackedEntityTypeId: string, programId: string | null): Array<SearchGroup> {
     if (programId) {
         const program = getTrackerProgramThrowIfNotFound(programId);
         return program.searchGroups;
@@ -16,4 +12,3 @@ export function getSearchGroups(trackedEntityTypeId: string, programId: ?string)
     const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
     return trackedEntityType.searchGroups;
 }
-

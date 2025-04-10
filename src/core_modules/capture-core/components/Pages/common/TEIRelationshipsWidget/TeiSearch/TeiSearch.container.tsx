@@ -1,5 +1,4 @@
-// @flow
-import { type ComponentType } from 'react';
+import { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { TeiSearchComponent } from './TeiSearch.component';
 import {
@@ -10,14 +9,26 @@ import {
     teiSearchResultsChangePage,
     setOpenSearchGroupSection,
 } from './actions/teiSearch.actions';
-import type { Props, OwnProps } from './TeiSearch.types';
+import { type OwnProps } from './TeiSearch.types';
 import { getSearchGroups } from './getSearchGroups';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../metaData';
+
+type ReduxState = {
+    teiSearch: {
+        [key: string]: {
+            searchResults?: any;
+            openSearchGroupSection?: string | null;
+            selectedProgramId?: string | null;
+        };
+    };
+};
+
+type ReduxDispatch = (action: any) => void;
 
 const mapStateToProps = (state: ReduxState, props: OwnProps) => {
     const currentTeiSearch = state.teiSearch[props.id] ?? {};
     const { selectedTrackedEntityTypeId } = props;
-    const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
+    const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId || null);
     const { name } = getTrackedEntityTypeThrowIfNotFound(selectedTrackedEntityTypeId);
     return {
         searchGroups,
@@ -44,10 +55,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps) => ({
     onEditSearch: (searchId: string) => {
         dispatch(teiEditSearch(searchId));
     },
-    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: ?string) => {
+    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: string | null) => {
         dispatch(setOpenSearchGroupSection(searchId, searchGroupId));
     },
 });
 
 export const TeiSearch: ComponentType<OwnProps> =
-  connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(TeiSearchComponent);
+  connect(mapStateToProps, mapDispatchToProps)(TeiSearchComponent);

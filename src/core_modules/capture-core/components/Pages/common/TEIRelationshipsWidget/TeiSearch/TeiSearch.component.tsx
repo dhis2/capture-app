@@ -1,15 +1,14 @@
-// @flow
-import React, { type ComponentType, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
 import { Section, SectionHeaderSimple } from '../../../../Section';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
-import type { Props } from './TeiSearch.types';
+import { type Props } from './TeiSearch.types';
 
-const getStyles = (theme: Theme) => ({
+const styles = createStyles((theme: Theme) => ({
     container: {
         margin: theme.typography.pxToRem(10),
     },
@@ -22,21 +21,21 @@ const getStyles = (theme: Theme) => ({
         maxWidth: theme.typography.pxToRem(900),
         marginBottom: theme.typography.pxToRem(20),
     },
-});
+}));
 
-const TeiSearchPlain = (props) => {
+const TeiSearchPlain = (props: Props) => {
     const [programSectionOpen, setProgramSectionOpen] = useState(true);
 
-    const getFormId = useCallback((searchGroupId) => {
+    const getFormId = useCallback((searchGroupId: string) => {
         const contextId = props.selectedProgramId || props.selectedTrackedEntityTypeId || '';
         return `${props.id}-${contextId}-${searchGroupId}`;
     }, [props.selectedProgramId, props.selectedTrackedEntityTypeId, props.id]);
 
-    const handleSearch = (formId, searchGroupId) => {
+    const handleSearch = (formId: string, searchGroupId: string) => {
         props.onSearch(formId, searchGroupId, props.id);
     };
 
-    const handleSearchResultsChangePage = (pageNumber) => {
+    const handleSearchResultsChangePage = (pageNumber: number) => {
         props.onSearchResultsChangePage(props.id, pageNumber);
     };
 
@@ -48,11 +47,11 @@ const TeiSearchPlain = (props) => {
         props.onEditSearch(props.id);
     };
 
-    const handleSearchValidationFailed = (...args) => {
+    const handleSearchValidationFailed = (...args: [string, string]) => {
         props.onSearchValidationFailed(...args, props.id);
     };
 
-    const renderSearchForms = searchGroups => (
+    const renderSearchForms = (searchGroups: any[]) => (
         <div className={props.classes.container}>
             {renderProgramSection()}
             {renderSearchGroups(searchGroups)}
@@ -85,7 +84,7 @@ const TeiSearchPlain = (props) => {
         );
     };
 
-    const onChangeSectionCollapseState = (id) => {
+    const onChangeSectionCollapseState = (id: string) => {
         if (props.openSearchGroupSection === id) {
             props.onSetOpenSearchGroupSection(props.id, null);
             return;
@@ -93,7 +92,7 @@ const TeiSearchPlain = (props) => {
         props.onSetOpenSearchGroupSection(props.id, id);
     };
 
-    const renderSearchGroups = searchGroups => searchGroups.map((sg, i) => {
+    const renderSearchGroups = (searchGroups: any[]) => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
         const formId = getFormId(searchGroupId);
         const header = sg.unique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
@@ -164,4 +163,4 @@ const TeiSearchPlain = (props) => {
     return searchGroups ? renderSearchForms(searchGroups) : (<div />);
 };
 
-export const TeiSearchComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(TeiSearchPlain);
+export const TeiSearchComponent = withStyles(styles)(TeiSearchPlain);
