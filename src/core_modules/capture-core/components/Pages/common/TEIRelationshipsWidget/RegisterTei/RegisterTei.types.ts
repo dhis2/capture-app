@@ -1,9 +1,5 @@
 import { type InputAttribute } from '../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
 
-type CssClasses = {
-    classes: Record<string, any>;
-};
-
 export type SharedProps = {
     onLink: (teiId: string, values: Record<string, any>) => void;
     onGetUnsavedAttributeValues?: (() => any) | null;

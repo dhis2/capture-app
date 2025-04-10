@@ -10,16 +10,15 @@ export const RegisterTei = ({
     onSave,
     onGetUnsavedAttributeValues,
     onCancel,
-    teiId,
     trackedEntityTypeId,
     suggestedProgramId,
 }: ContainerProps) => {
     const dataEntryId = 'relationship';
-    const error = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { error: any } }) => 
+    const error = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { error: any } }) =>
         (newRelationshipRegisterTei.error));
     const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
-    
+
     const inheritedAttributes: InputAttribute[] = [];
     const isLoadingAttributes = false;
 
