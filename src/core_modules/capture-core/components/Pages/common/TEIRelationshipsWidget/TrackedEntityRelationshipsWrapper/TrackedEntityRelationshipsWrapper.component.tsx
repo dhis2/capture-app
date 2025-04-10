@@ -13,7 +13,7 @@ import {
     TeiRelationshipSearchResults,
 } from '../../../NewRelationship/TeiRelationship/SearchResults/TeiRelationshipSearchResults.component';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
-import { RegisterTei } from '../RegisterTei';
+import { RegisterTei } from '../RegisterTei/RegisterTei.container';
 import { useCoreOrgUnit } from '../../../../../metadataRetrieval/coreOrgUnit';
 
 export const TrackedEntityRelationshipsWrapper = ({

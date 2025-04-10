@@ -1,21 +1,11 @@
 import * as React from 'react';
 import { type InputAttribute } from '../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
 
-type RegisterTeiComponentProps = {
-    dataEntryId: string;
-    onLink: () => void;
-    onCancel: () => void;
-    onSaveWithoutEnrollment: (teiPayload: Record<string, any>) => void;
-    onSaveWithEnrollment: (teiPayload: Record<string, any>) => void;
-    onGetUnsavedAttributeValues?: (() => any) | null;
-    trackedEntityName: string | null;
-    selectedScopeId: string;
-    error: any;
-    trackedEntityTypeId: string;
-    inheritedAttributes: InputAttribute[];
-};
+import { type ComponentProps } from './RegisterTei.types';
 
-export const RegisterTeiComponent = (props: RegisterTeiComponentProps) => {
+type RegisterTeiComponentProps = ComponentProps;
+
+export const RegisterTei = (props: RegisterTeiComponentProps) => {
     const {
         dataEntryId,
         onLink,

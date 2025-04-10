@@ -19,10 +19,10 @@ export type ContainerProps = {
 
 export type ComponentProps = {
     selectedScopeId: string;
-    error: string;
+    error: any;
     dataEntryId: string;
     trackedEntityName: string | null;
     inheritedAttributes: InputAttribute[];
-    onSaveWithEnrollment: () => void;
-    onSaveWithoutEnrollment: () => void;
-} & SharedProps & CssClasses;
+    onSaveWithEnrollment: (teiPayload: Record<string, any>) => void;
+    onSaveWithoutEnrollment: (teiPayload: Record<string, any>) => void;
+} & SharedProps;
