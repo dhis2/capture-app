@@ -1,4 +1,4 @@
-import type { ReactNode, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import type { Program } from 'capture-core/metaData';
 
 export type ProgramSelectorProps = {

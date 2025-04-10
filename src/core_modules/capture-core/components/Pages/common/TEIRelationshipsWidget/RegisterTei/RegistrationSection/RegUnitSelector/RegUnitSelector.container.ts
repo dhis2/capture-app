@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { RegUnitSelectorComponent } from './RegUnitSelector.component';
-import { changeOrgUnit, searchOrgUnitFailed } from '../registrationSection.actions';
 import type { Dispatch } from 'redux';
+import { changeOrgUnit, searchOrgUnitFailed } from '../registrationSection.actions';
+import { RegUnitSelectorComponent } from './RegUnitSelector.component';
 
 type StateProps = {
     value: Record<string, any> | null | undefined;

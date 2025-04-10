@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { ProgramSelectorComponent } from './ProgramSelector.component';
-import { changeProgram, clearProgramFilter } from '../registrationSection.actions';
 import type { Dispatch } from 'redux';
+import { changeProgram, clearProgramFilter } from '../registrationSection.actions';
+import { ProgramSelectorComponent } from './ProgramSelector.component';
 
 type StateProps = {
     orgUnitIds: string[] | null;
