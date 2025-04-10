@@ -63,6 +63,24 @@ class ProgramSelector extends React.Component<Props> {
         );
     }
 
+    getOptionsFromPrograms = (programs: Program[]): ProgramOption[] =>
+        programs
+            .map(program => ({
+                label: program.name,
+                value: program.id,
+                iconLeft: this.getProgramIcon(program),
+            }));
+
+    baseLineFilter = (program: Program) => {
+        const { trackedEntityTypeId } = this.props;
+
+        const isValid = program instanceof TrackerProgram &&
+        program.trackedEntityType.id === trackedEntityTypeId &&
+        program.access.data.write;
+
+        return isValid;
+    }
+
     renderIsFilteredText() {
         const { classes, onClearFilter } = this.props;
         return (
@@ -77,27 +95,8 @@ class ProgramSelector extends React.Component<Props> {
                     {i18n.t('Show all')}
                 </LinkButton>
             </div>
-
-    );
+        );
     }
-
-    baseLineFilter = (program: Program) => {
-        const { trackedEntityTypeId } = this.props;
-
-        const isValid = program instanceof TrackerProgram &&
-        program.trackedEntityType.id === trackedEntityTypeId &&
-        program.access.data.write;
-
-        return isValid;
-    }
-    
-    getOptionsFromPrograms = (programs: Program[]): ProgramOption[] =>
-        programs
-            .map(program => ({
-                label: program.name,
-                value: program.id,
-                iconLeft: this.getProgramIcon(program),
-            }));
 
     render() {
         const { classes, orgUnitIds, onUpdateSelectedProgram, onClearFilter, ...passOnProps } = this.props;
