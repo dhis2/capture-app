@@ -1,10 +1,9 @@
-// @flow
-import React from 'react';
+import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { RegisterTeiComponent } from './RegisterTei.component';
-import type { ContainerProps } from './RegisterTei.types';
+import { RegisterTei as RegisterTeiComponent } from './RegisterTei.component';
+import { type ContainerProps } from './RegisterTei.types';
 import { useScopeInfo } from '../../../../../hooks';
-import { useInheritedAttributeValues } from '../useInheritedAttributeValues';
+import { type InputAttribute } from '../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
 
 export const RegisterTei = ({
     onLink,
@@ -16,14 +15,13 @@ export const RegisterTei = ({
     suggestedProgramId,
 }: ContainerProps) => {
     const dataEntryId = 'relationship';
-    const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
+    const error = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { error: any } }) => 
+        (newRelationshipRegisterTei.error));
     const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
-        teiId,
-        trackedEntityTypeId,
-        programId: suggestedProgramId,
-    });
+    
+    const inheritedAttributes: InputAttribute[] = [];
+    const isLoadingAttributes = false;
 
     if (isLoadingAttributes) {
         return null;
@@ -45,4 +43,3 @@ export const RegisterTei = ({
         />
     );
 };
-
