@@ -70,6 +70,10 @@ class SearchOrgUnitSelectorPlain extends React.Component<PropsWithoutClasses & W
         }
     }
 
+    onSetOrgUnit = (orgUnit: Record<string, unknown> | null) => {
+        this.props.onSetOrgUnit(this.props.searchId, orgUnit);
+    }
+
     getErrorMessage = () => {
         if (!this.isValid() && this.props.searchAttempted) {
             return i18n.t(errorMessage);
@@ -80,10 +84,6 @@ class SearchOrgUnitSelectorPlain extends React.Component<PropsWithoutClasses & W
     gotoInstance: any;
 
     isValid = () => this.props.selectedOrgUnitScope === 'ACCESSIBLE' || this.props.selectedOrgUnit
-
-    onSetOrgUnit = (orgUnit: Record<string, unknown> | null) => {
-        this.props.onSetOrgUnit(this.props.searchId, orgUnit);
-    }
 
     handleFilterOrgUnits = (searchText: string | null) => {
         this.props.onFilterOrgUnits(this.props.searchId, searchText);
