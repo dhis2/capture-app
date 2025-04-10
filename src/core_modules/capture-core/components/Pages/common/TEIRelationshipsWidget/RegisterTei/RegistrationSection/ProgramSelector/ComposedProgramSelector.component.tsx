@@ -1,10 +1,8 @@
-// @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { LinkButton } from '../../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../../ProgramFilterer';
-import type { Program } from '../../../../../../../metaData';
 import { TrackerProgram } from '../../../../../../../metaData';
 import {
     VirtualizedSelectField,
@@ -15,6 +13,8 @@ import {
     withFilterProps,
 } from '../../../../../../FormFields/New';
 import { NonBundledDhis2Icon } from '../../../../../../NonBundledDhis2Icon';
+import type { Program } from '../../../../../../../metaData';
+import type { ComposedProgramSelectorProps, ProgramOption } from './ProgramSelector.types';
 
 const getStyles = (theme: Theme) => ({
     iconContainer: {
@@ -29,7 +29,7 @@ const getStyles = (theme: Theme) => ({
     },
     isFilteredContainer: {
         fontSize: 12,
-        color: theme.palette.grey.dark,
+        color: theme.palette.grey[700],
         paddingTop: 5,
     },
     isFilteredLink: {
@@ -38,42 +38,14 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Option = {
-    label: string,
-    value: string,
-    iconLeft?: ?React.Node,
-};
-
-type Props = {
-    orgUnitIds: ?Array<string>,
-    value: string,
-    trackedEntityTypeId: string,
-    classes: Object,
-    onUpdateSelectedProgram: (programId: string) => void,
-    onClearFilter: () => void,
-};
+type Props = ComposedProgramSelectorProps & WithStyles<typeof getStyles>;
 
 class ProgramSelector extends React.Component<Props> {
-    baseLineFilter = (program: Program) => {
-        const { trackedEntityTypeId } = this.props;
-
-        const isValid = program instanceof TrackerProgram &&
-        program.trackedEntityType.id === trackedEntityTypeId &&
-        program.access.data.write;
-
-        return isValid;
-    }
-
-    getOptionsFromPrograms = (programs: Array<Program>): Array<Option> =>
-        programs
-            .map(program => ({
-                label: program.name,
-                value: program.id,
-                iconLeft: this.getProgramIcon(program),
-            }));
-
-    getProgramIcon({ icon: { color, name } = {}, name: programName }: Program) {
+    getProgramIcon(program: Program) {
+        const icon = program.icon || {};
+        const { color = '', name = '' } = icon as { color?: string; name?: string };
         const { classes } = this.props;
+        const programName = program.name;
 
         return (
             <div
@@ -89,6 +61,24 @@ class ProgramSelector extends React.Component<Props> {
                 />
             </div>
         );
+    }
+
+    getOptionsFromPrograms = (programs: Program[]): ProgramOption[] =>
+        programs
+            .map(program => ({
+                label: program.name,
+                value: program.id,
+                iconLeft: this.getProgramIcon(program),
+            }));
+
+    baseLineFilter = (program: Program) => {
+        const { trackedEntityTypeId } = this.props;
+
+        const isValid = program instanceof TrackerProgram &&
+        program.trackedEntityType.id === trackedEntityTypeId &&
+        program.access.data.write;
+
+        return isValid;
     }
 
     renderIsFilteredText() {
@@ -112,14 +102,12 @@ class ProgramSelector extends React.Component<Props> {
         const { classes, orgUnitIds, onUpdateSelectedProgram, onClearFilter, ...passOnProps } = this.props;
         return (
             <ProgramFilterer
-                orgUnitIds={orgUnitIds}
+                orgUnitIds={orgUnitIds || null}
                 baselineFilter={this.baseLineFilter}
             >
                 {
                     (programs, isFiltered) => (
                         <div>
-                            {/* $FlowFixMe[cannot-spread-inexact] automated
-                              * comment */}
                             <VirtualizedSelectField
                                 options={this.getOptionsFromPrograms(programs)}
                                 required={false}
@@ -139,10 +127,10 @@ export const ComposedProgramSelector =
     withFocusSaver()(
         withDefaultFieldContainer()(
             withLabel({
-                onGetCustomFieldLabeClass: (props: Object) =>
+                onGetCustomFieldLabeClass: (props: Record<string, any>) =>
                     props.programLabelClass,
             })(
-                withFilterProps((props: Object) => {
+                withFilterProps((props: Record<string, any>) => {
                     const { programLabelClass, ...passOnProps } = props;
                     return passOnProps;
                 })(
