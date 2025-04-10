@@ -51,6 +51,11 @@ export const newPageDesc = createReducerDescription(
             ...state,
             prepopulatedData: payload,
         }),
+
+        [newPageActionTypes.CLEAR_PREPOPULATED_DATA]: state => ({
+            ...state,
+            prepopulatedData: undefined,
+        }),
     },
     'newPage',
     initialNewPageState,

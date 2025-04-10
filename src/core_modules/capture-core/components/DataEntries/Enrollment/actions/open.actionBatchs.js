@@ -16,6 +16,7 @@ import { convertDateObjectToDateFormatString } from '../../../../utils/converter
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
+import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
 
 const itemId = 'newEnrollment';
 
@@ -69,6 +70,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     formFoundation: RenderFoundation,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
+    console.log('formValues', formValues);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage);
     const defaultDataEntryValues = { enrolledAt: convertDateObjectToDateFormatString(new Date()) };
@@ -107,6 +109,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         ),
         ...dataEntryActions,
         addFormDataActions,
+        clearPrepopulatedData(),
         updateRulesEffects(effects, formId),
         ...extraActions,
     ], batchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH);

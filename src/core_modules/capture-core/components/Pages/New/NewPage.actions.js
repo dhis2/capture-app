@@ -13,6 +13,7 @@ export const newPageActionTypes = {
     ALL_CATEGORY_OPTIONS_RESET: 'NewPage.AllCategoryOptionsReset',
     CLEAN_UP_UID: 'NewPage.CleanUpUid',
     SET_PREPOPULATE_DATA_ON_NEW_PAGE: 'NewPage.SetPrepopulateData',
+    CLEAR_PREPOPULATED_DATA: 'NewPage.ClearPrepopulatedData',
 };
 
 export const showMessageToSelectOrgUnitOnNewPage = () =>
@@ -39,7 +40,10 @@ export const resetAllCategoryOptions = () => actionCreator(newPageActionTypes.AL
 
 export const openNewPage = () => actionCreator(newPageActionTypes.NEW_PAGE_OPEN)();
 
-export const cleanUpUid = () => actionCreator(newPageActionTypes.CLEAN_UP_UID)({ });
+export const cleanUpUid = () => actionCreator(newPageActionTypes.CLEAN_UP_UID)({});
 
 export const setPrepopulateDataOnNewPage = (searchData: Object) =>
     actionCreator(newPageActionTypes.SET_PREPOPULATE_DATA_ON_NEW_PAGE)(searchData);
+
+export const clearPrepopulatedData = () =>
+    actionCreator(newPageActionTypes.CLEAR_PREPOPULATED_DATA)();
