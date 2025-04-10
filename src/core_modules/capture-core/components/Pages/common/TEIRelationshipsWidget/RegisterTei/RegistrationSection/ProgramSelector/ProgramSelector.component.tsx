@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { ComposedProgramSelector } from './ComposedProgramSelector.component';
-import type { ProgramSelectorComponentProps } from './ProgramSelector.types';
+import type { ProgramSelectorProps } from './ProgramSelector.types';
 
 const styles = createStyles({
     programLabel: {
@@ -13,7 +13,7 @@ const styles = createStyles({
     },
 });
 
-type Props = ProgramSelectorComponentProps & WithStyles<typeof styles>;
+type Props = ProgramSelectorProps & WithStyles<typeof styles>;
 
 class ProgramSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {

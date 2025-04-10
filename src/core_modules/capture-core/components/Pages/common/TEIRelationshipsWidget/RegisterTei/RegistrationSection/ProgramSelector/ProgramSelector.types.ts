@@ -5,7 +5,7 @@ export type ProgramSelectorProps = {
 };
 
 export type ProgramSelectorComponentProps = {
-    classes: Record<string, string>;
+    trackedEntityTypeId: string;
 };
 
 export type ComposedProgramSelectorProps = {

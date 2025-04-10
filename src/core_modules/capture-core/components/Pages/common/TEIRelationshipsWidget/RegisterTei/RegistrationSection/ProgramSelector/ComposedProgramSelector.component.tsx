@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, createStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { LinkButton } from '../../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../../ProgramFilterer';
@@ -16,7 +16,7 @@ import { NonBundledDhis2Icon } from '../../../../../../NonBundledDhis2Icon';
 import type { Program } from '../../../../../../../metaData';
 import type { ComposedProgramSelectorProps, ProgramOption } from './ProgramSelector.types';
 
-const styles = createStyles({
+const getStyles = (theme: Theme) => ({
     iconContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -29,7 +29,7 @@ const styles = createStyles({
     },
     isFilteredContainer: {
         fontSize: 12,
-        color: '#494949',
+        color: theme.palette.grey[700],
         paddingTop: 5,
     },
     isFilteredLink: {
@@ -38,7 +38,7 @@ const styles = createStyles({
     },
 });
 
-type Props = ComposedProgramSelectorProps & WithStyles<typeof styles>;
+type Props = ComposedProgramSelectorProps & WithStyles<typeof getStyles>;
 
 class ProgramSelector extends React.Component<Props> {
     getProgramIcon(program: Program) {
@@ -135,7 +135,7 @@ export const ComposedProgramSelector =
                     return passOnProps;
                 })(
                     withSelectTranslations()(
-                        withStyles(styles)(
+                        withStyles(getStyles)(
                             ProgramSelector,
                         ),
                     ),
