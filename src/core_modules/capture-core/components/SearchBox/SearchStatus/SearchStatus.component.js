@@ -41,6 +41,7 @@ export const SearchStatusPlain = ({
     navigateToRegisterTrackedEntity,
     showInitialSearchBox,
     uniqueTEAName = '',
+    currentSearchTerms = [],
     trackedEntityName,
     classes,
 }: Props) => {
@@ -57,7 +58,7 @@ export const SearchStatusPlain = ({
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
-                        <Button type="button" onClick={navigateToRegisterTrackedEntity}>
+                        <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms)}>
                             {i18n.t(`Create new ${trackedEntityName}`)}
                         </Button>
                         <Button

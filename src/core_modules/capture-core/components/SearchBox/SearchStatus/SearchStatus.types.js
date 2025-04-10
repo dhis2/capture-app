@@ -3,7 +3,7 @@ import type { AvailableSearchOption } from '../SearchBox.types';
 
 export type ContainerProps = $ReadOnly<{|
     showInitialSearchBox: () => void,
-    navigateToRegisterTrackedEntity: () => void,
+    navigateToRegisterTrackedEntity: (currentSearchTerms: Array<Object>) => void,
     minAttributesRequiredToSearch: number,
     searchableFields: Array<Object>,
     searchStatus: string,
@@ -14,6 +14,7 @@ export type ContainerProps = $ReadOnly<{|
 export type ComponentProps = $ReadOnly<{|
     ...ContainerProps,
     uniqueTEAName?: string,
+    currentSearchTerms: Array<Object>,
 |}>;
 
 export type Props = {|
