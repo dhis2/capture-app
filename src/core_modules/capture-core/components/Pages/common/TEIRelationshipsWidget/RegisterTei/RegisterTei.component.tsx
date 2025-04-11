@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import { compose } from 'redux';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type StyleRules } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
@@ -8,7 +8,24 @@ import { RegistrationSection } from './RegistrationSection';
 import { DataEntryWidgetOutput } from '../../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext, type ResultsPageSizeContextType } from '../../../shared-contexts';
 import { withErrorMessageHandler } from '../../../../../HOC';
-import { ComponentProps, getStyles } from './RegisterTei.types';
+import { ComponentProps } from './RegisterTei.types';
+
+export type StyleProps = {
+    container: React.CSSProperties;
+    leftContainer: React.CSSProperties;
+};
+
+export const getStyles = (): StyleRules<keyof StyleProps> => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    leftContainer: {
+        flexGrow: 10,
+        flexBasis: 0,
+        margin: 8,
+    },
+});
 
 type CardListButtonProps = {
     teiId: string;

@@ -1,5 +1,6 @@
-import type { WithStyles, StyleRules } from '@material-ui/core/styles';
+import type { WithStyles } from '@material-ui/core/styles';
 import type { InputAttribute } from '../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
+import { StyleProps, getStyles } from './RegisterTei.component';
 
 export type SharedProps = {
     onLink: (teiId: string, values: Record<string, any>) => void;
@@ -14,29 +15,12 @@ export type ContainerProps = {
     onSave: (teiPayload: Record<string, any>) => void;
 } & SharedProps;
 
-export type StyleProps = {
-    container: React.CSSProperties;
-    leftContainer: React.CSSProperties;
-};
-
-export const getStyles = (): StyleRules<keyof StyleProps> => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    leftContainer: {
-        flexGrow: 10,
-        flexBasis: 0,
-        margin: 8,
-    },
-});
-
 export type ComponentProps = {
     selectedScopeId: string;
     error: string;
     dataEntryId: string;
     trackedEntityName: string | null;
     inheritedAttributes: Array<InputAttribute>;
-    onSaveWithEnrollment: () => void;
-    onSaveWithoutEnrollment: () => void;
+    onSaveWithEnrollment: (teiPayload?: Record<string, any>) => void;
+    onSaveWithoutEnrollment: (teiPayload?: Record<string, any>) => void;
 } & SharedProps & WithStyles<typeof getStyles>;

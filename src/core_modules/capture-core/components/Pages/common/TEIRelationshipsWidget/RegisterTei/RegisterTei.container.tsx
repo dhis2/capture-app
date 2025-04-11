@@ -39,8 +39,8 @@ export const RegisterTei = ({
             dataEntryId={dataEntryId}
             onLink={onLink}
             onCancel={onCancel}
-            onSaveWithoutEnrollment={() => onSave({})}
-            onSaveWithEnrollment={() => onSave({})}
+            onSaveWithoutEnrollment={onSave}
+            onSaveWithEnrollment={onSave}
             onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
             trackedEntityName={trackedEntityName}
             selectedScopeId={selectedScopeId}
