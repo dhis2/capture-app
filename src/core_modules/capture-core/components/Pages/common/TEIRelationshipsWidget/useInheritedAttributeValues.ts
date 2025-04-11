@@ -28,23 +28,32 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, progra
         const attributeIds = new Set<string>();
 
         if (programId) {
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
-            if (program instanceof TrackerProgram) {
-                program.attributes.forEach((attribute) => {
-                    if (attribute.inherit) {
-                        attributeIds.add(attribute.id);
-                    }
-                });
+            try {
+                const program = getProgramFromProgramIdThrowIfNotFound(programId);
+                if (program instanceof TrackerProgram) {
+                    program.attributes.forEach((attribute) => {
+                        if (attribute.inherit) {
+                            attributeIds.add(attribute.id);
+                        }
+                    });
+                }
+                return attributeIds;
+            } catch (error) {
+                console.error('Error getting program:', error);
+                return attributeIds;
             }
-            return attributeIds;
         }
 
-        const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
-        trackedEntityType.attributes.forEach((attribute) => {
-            if (attribute.inherit) {
-                attributeIds.add(attribute.id);
-            }
-        });
+        try {
+            const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
+            trackedEntityType.attributes.forEach((attribute) => {
+                if (attribute.inherit) {
+                    attributeIds.add(attribute.id);
+                }
+            });
+        } catch (error) {
+            console.error('Error getting tracked entity type:', error);
+        }
         return attributeIds;
     }, [programId, trackedEntityTypeId]);
 
