@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { NoticeBox } from '@dhis2/ui';
@@ -10,10 +9,10 @@ const getStyles = () => ({
 });
 
 type Props = {
-    error?: ?string,
+    error?: string | null;
     classes: {
-        errorContainer: string,
-    }
+        errorContainer: string;
+    };
 };
 
 export const withErrorMessageHandler = () =>
@@ -33,9 +32,5 @@ export const withErrorMessageHandler = () =>
                 );
             }
 
-            return (
-                <InnerComponent
-                    {...passOnProps}
-                />
-            );
+            return <InnerComponent {...passOnProps} />;
         });
