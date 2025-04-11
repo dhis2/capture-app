@@ -1,6 +1,16 @@
-import type { WithStyles } from '@material-ui/core/styles';
 import type { InputAttribute } from '../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
-import { getStyles } from './RegisterTei.component';
+
+export type CardListButtonProps = {
+    teiId: string;
+    values: Record<string, any>;
+    handleOnClick: (teiId: string, values: Record<string, any>) => void;
+};
+
+export type DialogButtonsProps = {
+    onCancel: () => void;
+    onSave: () => void;
+    trackedEntityName: string | null;
+};
 
 export type SharedProps = {
     onLink: (teiId: string, values: Record<string, any>) => void;
@@ -15,7 +25,7 @@ export type ContainerProps = {
     onSave: (teiPayload: Record<string, any>) => void;
 } & SharedProps;
 
-export type ComponentProps = {
+export type ComponentPropsPlain = {
     selectedScopeId: string;
     error: string;
     dataEntryId: string;
@@ -23,4 +33,4 @@ export type ComponentProps = {
     inheritedAttributes: Array<InputAttribute>;
     onSaveWithEnrollment: (teiPayload: Record<string, any>) => void;
     onSaveWithoutEnrollment: (teiPayload: Record<string, any>) => void;
-} & SharedProps & WithStyles<typeof getStyles>;
+} & SharedProps;

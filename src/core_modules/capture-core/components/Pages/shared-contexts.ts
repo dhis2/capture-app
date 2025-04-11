@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export type ResultsPageSizeContextType = { resultsPageSize: number };
+export type InitialValueOfResultsPageSizeContext = { resultsPageSize: number };
 
 export const ResultsPageSizeContext =
-  createContext<ResultsPageSizeContextType>({ resultsPageSize: 5 });
+  createContext<InitialValueOfResultsPageSizeContext>({ resultsPageSize: 5 });

@@ -1,21 +1,16 @@
 import React, { useContext, useCallback } from 'react';
 import { compose } from 'redux';
-import { withStyles, type WithStyles, type StyleRules } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import { DataEntryWidgetOutput } from '../../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
-import { ResultsPageSizeContext, type ResultsPageSizeContextType } from '../../../shared-contexts';
+import { ResultsPageSizeContext, type InitialValueOfResultsPageSizeContext } from '../../../shared-contexts';
 import { withErrorMessageHandler } from '../../../../../HOC';
-import { ComponentProps } from './RegisterTei.types';
+import { ComponentPropsPlain, CardListButtonProps, DialogButtonsProps } from './RegisterTei.types';
 
-export type StyleProps = {
-    container: React.CSSProperties;
-    leftContainer: React.CSSProperties;
-};
-
-export const getStyles = (): StyleRules<keyof StyleProps> => ({
+const styles = {
     container: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -25,13 +20,9 @@ export const getStyles = (): StyleRules<keyof StyleProps> => ({
         flexBasis: 0,
         margin: 8,
     },
-});
-
-type CardListButtonProps = {
-    teiId: string;
-    values: Record<string, any>;
-    handleOnClick: (teiId: string, values: Record<string, any>) => void;
 };
+
+export type ComponentProps = ComponentPropsPlain & WithStyles<keyof typeof styles>;
 
 const CardListButton = (({ teiId, values, handleOnClick }: CardListButtonProps) => (
     <Button
@@ -42,12 +33,6 @@ const CardListButton = (({ teiId, values, handleOnClick }: CardListButtonProps) 
         {i18n.t('Link')}
     </Button>
 ));
-
-type DialogButtonsProps = {
-    onCancel: () => void;
-    onSave: () => void;
-    trackedEntityName: string | null;
-};
 
 const DialogButtons = ({ onCancel, onSave, trackedEntityName }: DialogButtonsProps) => (
     <>
@@ -86,7 +71,7 @@ const RegisterTeiPlain = ({
     inheritedAttributes,
     classes,
 }: RegisterTeiPlainProps) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext) as ResultsPageSizeContextType;
+    const { resultsPageSize } = useContext(ResultsPageSizeContext) as InitialValueOfResultsPageSizeContext;
 
     const renderDuplicatesCardActions = useCallback(({ item }: { item: { id: string; values: Record<string, any> } }) => (
         <CardListButton
@@ -145,7 +130,7 @@ const RegisterTeiPlain = ({
     );
 };
 
-export const RegisterTeiComponent = compose<React.ComponentType<Omit<ComponentProps, keyof WithStyles<typeof getStyles>>>>(
+export const RegisterTeiComponent = compose<React.ComponentType<Omit<ComponentProps, keyof WithStyles<keyof typeof styles>>>>(
     withErrorMessageHandler(),
-    withStyles(getStyles as any),
+    withStyles(styles as any),
 )(RegisterTeiPlain);
