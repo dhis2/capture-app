@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
 
-interface State {
+type State = {
     newRelationshipRegisterTei: {
         programId: string;
     };

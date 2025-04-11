@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { RegisterTeiDataEntryComponent } from './RegisterTeiDataEntry.component';
 import { withErrorMessageHandler } from '../../../../../../HOC/withErrorMessageHandler';
 
-interface State {
+type State = {
     newRelationshipRegisterTei: {
         orgUnit: any;
         dataEntryError: string;
