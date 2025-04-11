@@ -12,6 +12,7 @@ const programIdSelector = (state: State) => state.newRelationshipRegisterTei.pro
 export const makeEnrollmentMetadataSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
+        // TODO: Add back TrackerProgram type once the TrackerProgram class is refactored
         let program: any;
         try {
             program = getProgramFromProgramIdThrowIfNotFound(programId);

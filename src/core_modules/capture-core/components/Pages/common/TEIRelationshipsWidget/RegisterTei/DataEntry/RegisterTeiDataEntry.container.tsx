@@ -1,3 +1,4 @@
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { RegisterTeiDataEntryComponent } from './RegisterTeiDataEntry.component';
 import { withErrorMessageHandler } from '../../../../../../HOC/withErrorMessageHandler';
@@ -18,5 +19,8 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = () => ({});
 
-const WithErrorHandler = withErrorMessageHandler()(RegisterTeiDataEntryComponent);
-export const RegisterTeiDataEntry = connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler);
+export const RegisterTeiDataEntry =
+    compose(
+        connect(mapStateToProps, mapDispatchToProps),
+        withErrorMessageHandler(),
+    )(RegisterTeiDataEntryComponent);

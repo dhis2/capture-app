@@ -21,19 +21,16 @@ export const withErrorMessageHandler = () =>
             const { error, classes, ...passOnProps } = props;
 
             if (error) {
-                return React.createElement(
-                    NoticeBox,
-                    {
-                        error: true,
-                        dataTest: 'error-message-handler',
-                        className: classes.errorContainer,
-                    },
-                    React.createElement('div', null, error),
+                return (
+                    <NoticeBox
+                        error
+                        dataTest="error-message-handler"
+                        className={classes.errorContainer}
+                    >
+                        <div>{error}</div>
+                    </NoticeBox>
                 );
             }
 
-            return React.createElement(
-                InnerComponent,
-                passOnProps,
-            );
+            return <InnerComponent {...passOnProps} />;
         });
