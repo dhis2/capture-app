@@ -1,6 +1,6 @@
 import type { WithStyles } from '@material-ui/core/styles';
 import type { InputAttribute } from '../../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
-import { StyleProps, getStyles } from './RegisterTei.component';
+import { getStyles } from './RegisterTei.component';
 
 export type SharedProps = {
     onLink: (teiId: string, values: Record<string, any>) => void;
