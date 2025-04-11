@@ -16,6 +16,7 @@ import { convertDateObjectToDateFormatString } from '../../../../utils/converter
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
+import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
 
 const itemId = 'newEnrollment';
 
@@ -107,6 +108,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
         ),
         ...dataEntryActions,
         addFormDataActions,
+        clearPrepopulatedData(),
         updateRulesEffects(effects, formId),
         ...extraActions,
     ], batchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH);

@@ -80,9 +80,6 @@ export const showFallbackNotEnoughAttributesOnSearchBox = ({ searchableFields, m
 export const cleanSearchRelatedData = () =>
     actionCreator(searchBoxActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN)();
 
-export const cleanFallbackRelatedData = () =>
-    actionCreator(searchBoxActionTypes.FALLBACK_SEARCH_RELATED_DATA_CLEAN)();
-
 export const showUniqueSearchValueEmptyModal = ({ uniqueTEAName }) =>
     actionCreator(searchBoxActionTypes.SEARCH_UNIQUE_SEARCH_VALUE_EMPTY)({ uniqueTEAName });
 

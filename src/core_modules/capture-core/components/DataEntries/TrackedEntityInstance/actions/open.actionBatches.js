@@ -5,6 +5,7 @@ import { openDataEntryForNewTei } from './open.actions';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
 
 const itemId = 'newTei';
 
@@ -61,6 +62,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
                 }, {}),
         ),
         ...dataEntryActions,
+        clearPrepopulatedData(),
         ...extraActions,
     ], batchActionTypes.NEW_TEI_DATA_ENTRY_OPEN_BATCH);
 };
