@@ -22,7 +22,7 @@ type Return = {
 export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, programId: propsProgramId }: Props): Return => {
     const reduxProgramId = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { programId: string } }) =>
         newRelationshipRegisterTei.programId);
-    const programId = propsProgramId || reduxProgramId;
+    const programId = propsProgramId ?? reduxProgramId;
 
     const inheritedAttributeIds = useMemo(() => {
         const attributeIds = new Set<string>();
@@ -69,7 +69,7 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, progra
         }, {
             enabled: !!teiId,
             select: (response: { attributes?: Array<{ attribute: string }> }) => {
-                const attributes = response.attributes || [];
+                const attributes = response.attributes ?? [];
                 return attributes
                     .filter(attribute => inheritedAttributeIds.has(attribute.attribute));
             },
