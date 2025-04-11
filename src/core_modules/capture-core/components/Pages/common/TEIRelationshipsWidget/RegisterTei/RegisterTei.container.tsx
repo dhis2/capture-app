@@ -17,7 +17,7 @@ export const RegisterTei = ({
     const dataEntryId = 'relationship';
     const error = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { error: string } }) =>
         (newRelationshipRegisterTei.error));
-    const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
+    const selectedScopeId = suggestedProgramId ?? trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
     const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
         teiId,

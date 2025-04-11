@@ -42,7 +42,7 @@ type Props = ComposedProgramSelectorProps & WithStyles<typeof getStyles>;
 
 class ProgramSelector extends React.Component<Props> {
     getProgramIcon(program: Program) {
-        const icon = program.icon || {};
+        const icon = program.icon ?? {};
         const { color = '', name = '' } = icon as { color?: string; name?: string };
         const { classes } = this.props;
         const programName = program.name;
@@ -52,8 +52,8 @@ class ProgramSelector extends React.Component<Props> {
                 className={classes.iconContainer}
             >
                 <NonBundledDhis2Icon
-                    name={name || 'clinical_fe_outline'}
-                    color={color || '#e0e0e0'}
+                    name={name ?? 'clinical_fe_outline'}
+                    color={color ?? '#e0e0e0'}
                     alternativeText={programName}
                     width={22}
                     height={22}
@@ -102,7 +102,7 @@ class ProgramSelector extends React.Component<Props> {
         const { classes, orgUnitIds, onUpdateSelectedProgram, onClearFilter, ...passOnProps } = this.props;
         return (
             <ProgramFilterer
-                orgUnitIds={orgUnitIds || null}
+                orgUnitIds={orgUnitIds ?? null}
                 baselineFilter={this.baseLineFilter}
             >
                 {

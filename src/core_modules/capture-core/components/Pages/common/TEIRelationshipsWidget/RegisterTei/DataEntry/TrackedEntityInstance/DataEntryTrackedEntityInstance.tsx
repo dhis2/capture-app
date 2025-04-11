@@ -23,8 +23,8 @@ const RelationshipTrackedEntityInstancePlain = ({
     const { orgUnitId } = useLocationQuery();
     const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
     const teiRegistrationMetadata = getTeiRegistrationMetadata(trackedEntityTypeId);
-    const { trackedEntityType } = teiRegistrationMetadata || {};
-    const trackedEntityTypeNameLC = trackedEntityType?.name.toLocaleLowerCase() || '';
+    const { trackedEntityType } = teiRegistrationMetadata ?? {};
+    const trackedEntityTypeNameLC = trackedEntityType?.name.toLocaleLowerCase() ?? '';
 
     if (!teiRegistrationMetadata || !teiRegistrationMetadata.form) {
         return null;
