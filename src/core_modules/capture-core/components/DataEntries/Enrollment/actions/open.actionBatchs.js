@@ -70,7 +70,6 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     formFoundation: RenderFoundation,
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
-    console.log('formValues', formValues);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
     const firstStageDataEntryPropsToInclude = firstStage && getDataEntryPropsToInclude(firstStage);
     const defaultDataEntryValues = { enrolledAt: convertDateObjectToDateFormatString(new Date()) };
