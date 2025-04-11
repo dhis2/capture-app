@@ -73,6 +73,9 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, progra
                 return attributes
                     .filter(attribute => inheritedAttributeIds.has(attribute.attribute));
             },
+            onError: (error) => {
+                console.error('Error fetching tracked entity data:', error);
+            },
         });
 
     return {

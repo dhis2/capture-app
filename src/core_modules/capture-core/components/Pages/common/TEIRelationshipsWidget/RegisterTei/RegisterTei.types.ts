@@ -2,7 +2,7 @@ import type { InputAttribute } from '../../../../DataEntries/EnrollmentRegistrat
 
 export type SharedProps = {
     onLink: (teiId: string, values: Record<string, any>) => void;
-    onGetUnsavedAttributeValues?: ((args: any) => any) | undefined;
+    onGetUnsavedAttributeValues?: (args: any) => any;
     trackedEntityTypeId: string;
     onCancel: () => void;
 };
