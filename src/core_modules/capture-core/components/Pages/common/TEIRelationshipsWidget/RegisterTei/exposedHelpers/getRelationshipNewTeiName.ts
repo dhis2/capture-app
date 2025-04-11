@@ -1,7 +1,6 @@
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
-    type TrackedEntityType,
     type RenderFoundation,
 } from '../../../../../../metaData';
 import { convertFormToClient } from '../../../../../../converters';
@@ -47,8 +46,7 @@ function getMetadata(programId: string | null | undefined, tetId: string) {
 }
 
 function getClientValuesForFormData(formValues: Record<string, any>, formFoundation: RenderFoundation) {
-    // @ts-ignore - convertValues method exists on RenderFoundation but TypeScript can't find it
-    const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
+    const clientValues = (formFoundation as any).convertValues(formValues, convertFormToClient);
     return clientValues;
 }
 
