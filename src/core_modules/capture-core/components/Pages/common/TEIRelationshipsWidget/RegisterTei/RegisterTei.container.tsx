@@ -1,10 +1,15 @@
-// @flow
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RegisterTeiComponent } from './RegisterTei.component';
 import type { ContainerProps } from './RegisterTei.types';
 import { useScopeInfo } from '../../../../../hooks';
 import { useInheritedAttributeValues } from '../useInheritedAttributeValues';
+
+type State = {
+    newRelationshipRegisterTei: {
+        error: string;
+    };
+};
 
 export const RegisterTei = ({
     onLink,
@@ -16,7 +21,7 @@ export const RegisterTei = ({
     suggestedProgramId,
 }: ContainerProps) => {
     const dataEntryId = 'relationship';
-    const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
+    const error = useSelector((state: State) => (state.newRelationshipRegisterTei.error));
     const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
     const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
@@ -34,8 +39,8 @@ export const RegisterTei = ({
             dataEntryId={dataEntryId}
             onLink={onLink}
             onCancel={onCancel}
-            onSaveWithoutEnrollment={onSave}
-            onSaveWithEnrollment={onSave}
+            onSaveWithoutEnrollment={() => onSave({})}
+            onSaveWithEnrollment={() => onSave({})}
             onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
             trackedEntityName={trackedEntityName}
             selectedScopeId={selectedScopeId}
@@ -45,4 +50,3 @@ export const RegisterTei = ({
         />
     );
 };
-

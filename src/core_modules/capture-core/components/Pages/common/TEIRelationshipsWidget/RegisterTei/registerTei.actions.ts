@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -6,9 +5,11 @@ export const actionTypes = {
     REGISTER_TEI_INITIALIZE_FAILED: 'RelationshipsWidget.InitializeRegisterTeiFailed',
 };
 
+export type OrgUnit = Record<string, any> | null | undefined;
+
 export const initializeRegisterTei = (
-    programId: ?string,
-    orgUnit?: ?Object,
+    programId: string | null,
+    orgUnit?: OrgUnit,
 ) => actionCreator(actionTypes.REGISTER_TEI_INITIALIZE)({ programId, orgUnit });
 
 export const initializeRegisterTeiFailed = (errorMessage: string) =>
