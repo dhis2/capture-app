@@ -66,8 +66,6 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }: DialogButtonsPro
     </>
 );
 
-
-
 type RegisterTeiPlainProps = ComponentProps & WithStyles<typeof getStyles>;
 
 const RegisterTeiPlain = ({
