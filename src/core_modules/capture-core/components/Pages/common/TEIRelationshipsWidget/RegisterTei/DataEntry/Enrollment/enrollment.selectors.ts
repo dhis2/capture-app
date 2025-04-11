@@ -1,23 +1,24 @@
-// @flow
 import { createSelector } from 'reselect';
-import type { TrackerProgram } from '../../../../../../../metaData';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../../metaData';
 
-const programIdSelector = state => state.newRelationshipRegisterTei.programId;
+interface State {
+    newRelationshipRegisterTei: {
+        programId: string;
+    };
+}
 
-// $FlowFixMe
+const programIdSelector = (state: State) => state.newRelationshipRegisterTei.programId;
+
 export const makeEnrollmentMetadataSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
-        let program: TrackerProgram;
+        let program: any;
         try {
-            // $FlowFixMe[incompatible-type] automated comment
             program = getProgramFromProgramIdThrowIfNotFound(programId);
         } catch (error) {
             return null;
         }
 
-        // $FlowFixMe
         return program.enrollment;
     },
 );
