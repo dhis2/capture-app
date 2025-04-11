@@ -21,11 +21,4 @@ export type ComponentProps = {
     inheritedAttributes: Array<InputAttribute>;
     onSaveWithEnrollment: (teiPayload?: Record<string, any>) => void;
     onSaveWithoutEnrollment: (teiPayload?: Record<string, any>) => void;
-} & SharedProps & CssClasses;
-
-type CssClasses = {
-    classes: {
-        container: string;
-        leftContainer: string;
-    };
-};
+} & SharedProps;

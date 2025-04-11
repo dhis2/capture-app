@@ -23,7 +23,7 @@ export const RegisterTei = ({
         teiId,
         trackedEntityTypeId,
         programId: suggestedProgramId,
-    } as any);
+    });
 
     if (isLoadingAttributes) {
         return null;
