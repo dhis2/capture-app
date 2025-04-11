@@ -11,7 +11,6 @@ import {
 type Props = {
     teiId: string;
     trackedEntityTypeId: string;
-    programId?: string;
 };
 
 type Return = {
@@ -19,41 +18,31 @@ type Return = {
     isLoading: boolean;
 };
 
-export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, programId: propsProgramId }: Props): Return => {
-    const reduxProgramId = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { programId: string } }) =>
+export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
+    const programId = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { programId: string } }) =>
         newRelationshipRegisterTei.programId);
-    const programId = propsProgramId ?? reduxProgramId;
 
     const inheritedAttributeIds = useMemo(() => {
         const attributeIds = new Set<string>();
 
         if (programId) {
-            try {
-                const program = getProgramFromProgramIdThrowIfNotFound(programId);
-                if (program instanceof TrackerProgram) {
-                    program.attributes.forEach((attribute) => {
-                        if (attribute.inherit) {
-                            attributeIds.add(attribute.id);
-                        }
-                    });
-                }
-                return attributeIds;
-            } catch (error) {
-                console.error('Error getting program:', error);
-                return attributeIds;
+            const program = getProgramFromProgramIdThrowIfNotFound(programId);
+            if (program instanceof TrackerProgram) {
+                program.attributes.forEach((attribute) => {
+                    if (attribute.inherit) {
+                        attributeIds.add(attribute.id);
+                    }
+                });
             }
+            return attributeIds;
         }
 
-        try {
-            const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
-            trackedEntityType.attributes.forEach((attribute) => {
-                if (attribute.inherit) {
-                    attributeIds.add(attribute.id);
-                }
-            });
-        } catch (error) {
-            console.error('Error getting tracked entity type:', error);
-        }
+        const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
+        trackedEntityType.attributes.forEach((attribute) => {
+            if (attribute.inherit) {
+                attributeIds.add(attribute.id);
+            }
+        });
         return attributeIds;
     }, [programId, trackedEntityTypeId]);
 
@@ -72,9 +61,6 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, progra
                 const attributes = response.attributes ?? [];
                 return attributes
                     .filter(attribute => inheritedAttributeIds.has(attribute.attribute));
-            },
-            onError: (error) => {
-                console.error('Error fetching tracked entity data:', error);
             },
         });
 
