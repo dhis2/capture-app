@@ -1,4 +1,3 @@
-// @flow
 export { RegisterTei } from './RegisterTei.container';
 export { actionTypes } from './registerTei.actions';
 export { actionTypes as registrationSectionActionTypes } from './RegistrationSection';
