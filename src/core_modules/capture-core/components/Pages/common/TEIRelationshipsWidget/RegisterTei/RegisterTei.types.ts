@@ -21,6 +21,6 @@ export type ComponentProps = {
     dataEntryId: string;
     trackedEntityName: string | null;
     inheritedAttributes: Array<InputAttribute>;
-    onSaveWithEnrollment: (teiPayload?: Record<string, any>) => void;
-    onSaveWithoutEnrollment: (teiPayload?: Record<string, any>) => void;
+    onSaveWithEnrollment: (teiPayload: Record<string, any>) => void;
+    onSaveWithoutEnrollment: (teiPayload: Record<string, any>) => void;
 } & SharedProps & WithStyles<typeof getStyles>;
