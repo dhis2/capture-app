@@ -67,10 +67,6 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }: DialogButtonsPro
 );
 
 
-type CssClasses = {
-    container: string;
-    leftContainer: string;
-};
 
 type RegisterTeiPlainProps = ComponentProps & WithStyles<typeof getStyles>;
 
