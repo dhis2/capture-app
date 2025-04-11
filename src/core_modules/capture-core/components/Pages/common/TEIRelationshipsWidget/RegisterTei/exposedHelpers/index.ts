@@ -1,0 +1,1 @@
+export { getRelationshipNewTeiName } from './getRelationshipNewTeiName';

@@ -1,12 +1,28 @@
-// @flow
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
+    type TrackedEntityType,
     type RenderFoundation,
 } from '../../../../../../metaData';
 import { convertFormToClient } from '../../../../../../converters';
 import { getDisplayName } from '../../../../../../trackedEntityInstances/getDisplayName';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+
+interface ReduxState {
+    formsValues: {
+        [key: string]: Record<string, any>;
+    };
+    newRelationshipRegisterTei: {
+        programId: string;
+    };
+    newRelationship: {
+        selectedRelationshipType: {
+            to: {
+                trackedEntityTypeId: string;
+            };
+        };
+    };
+}
 
 function getTrackerProgramMetadata(programId: string) {
     const program = getTrackerProgramThrowIfNotFound(programId);
@@ -26,12 +42,12 @@ function getTETMetadata(tetId: string) {
     };
 }
 
-function getMetadata(programId: ?string, tetId: string) {
+function getMetadata(programId: string | null | undefined, tetId: string) {
     return programId ? getTrackerProgramMetadata(programId) : getTETMetadata(tetId);
 }
 
-
-function getClientValuesForFormData(formValues: Object, formFoundation: RenderFoundation) {
+function getClientValuesForFormData(formValues: Record<string, any>, formFoundation: RenderFoundation) {
+    // @ts-ignore - convertValues method exists on RenderFoundation but TypeScript can't find it
     const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
     return clientValues;
 }
@@ -46,6 +62,5 @@ export function getRelationshipNewTeiName(dataEntryId: string, itemId: string, s
     const clientValuesForFormData = getClientValuesForFormData(formValues, formFoundation);
     const displayName = getDisplayName(clientValuesForFormData, metaDataAttributes, tetName);
 
-    // $FlowFixM
     return displayName;
 }
