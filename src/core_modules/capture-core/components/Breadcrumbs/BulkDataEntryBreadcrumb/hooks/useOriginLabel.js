@@ -17,20 +17,17 @@ const DefaultFilterLabels = {
     cancelled: i18n.t('Cancelled enrollments'),
 };
 
-const getWorkingListLabel = (selectedTemplate, selectedTemplateId, trackedEntityName) => {
+const getWorkingListLabel = (selectedTemplate, selectedTemplateId) => {
     if (selectedTemplate && !selectedTemplate.isDefault) {
         return selectedTemplate.name;
     }
     if (selectedTemplateId && !selectedTemplate) {
         return DefaultFilterLabels[selectedTemplateId];
     }
-    if (selectedTemplate?.name === 'default') {
-        return i18n.t('{{trackedEntityName}} list', { trackedEntityName });
-    }
-    return i18n.t('Working List');
+    return i18n.t('Program overview');
 };
 
-export const useOriginLabel = ({ programId, trackedEntityName, displayFrontPageList, page }: Props) => {
+export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props) => {
     const workingListTemplates = useSelector(({ workingListsTemplates }) => workingListsTemplates?.teiList);
     const workingListProgramId = useSelector(({ workingListsContext }) => workingListsContext?.teiList?.programIdView);
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
@@ -47,20 +44,19 @@ export const useOriginLabel = ({ programId, trackedEntityName, displayFrontPageL
         }
 
         if (isSameProgram) {
-            return getWorkingListLabel(selectedTemplate, selectedTemplateId, trackedEntityName);
+            return getWorkingListLabel(selectedTemplate, selectedTemplateId);
         }
 
         if (!displayFrontPageList) {
             return i18n.t('Search');
         }
-        return trackedEntityName ? i18n.t('{{trackedEntityName}} list', { trackedEntityName }) : i18n.t('Working List');
+        return i18n.t('Program overview');
     }, [
         displayFrontPageList,
         isLoadingTemplates,
         isSameProgram,
         selectedTemplate,
         selectedTemplateId,
-        trackedEntityName,
         page,
     ]);
 

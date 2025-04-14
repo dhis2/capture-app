@@ -118,8 +118,7 @@ const MainPageContainer = () => {
 
     const selectedProgram = programCollection.get(programId);
     // $FlowFixMe[prop-missing]
-    const trackedEntityType = selectedProgram?.trackedEntityType;
-    const trackedEntityTypeId = trackedEntityType?.id;
+    const trackedEntityTypeId = selectedProgram?.trackedEntityType?.id;
     const displayFrontPageList = trackedEntityTypeId && selectedProgram?.displayFrontPageList;
     const MainPageStatus = useMainPageStatus({
         programId,
@@ -187,7 +186,6 @@ const MainPageContainer = () => {
                 error={error}
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
-                trackedEntityName={trackedEntityType?.name}
                 setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
             />
         </OrgUnitFetcher>

@@ -58,7 +58,6 @@ const MainPagePlain = ({
     setShowAccessible,
     classes,
     onChangeTemplate,
-    trackedEntityName,
     setShowBulkDataEntryPlugin,
 }: Props) => {
     const showMainPage = useMemo(() => {
@@ -75,7 +74,6 @@ const MainPagePlain = ({
                 setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
                 displayFrontPageList={displayFrontPageList}
                 page={bulkDataEntryBreadcrumbsKeys.MAIN_PAGE}
-                trackedEntityName={trackedEntityName}
             />
         );
     }

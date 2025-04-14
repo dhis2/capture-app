@@ -20,7 +20,6 @@ const BulkDataEntryPlain = ({
     programId,
     setShowBulkDataEntryPlugin,
     displayFrontPageList,
-    trackedEntityName,
     page,
     classes,
 }: Props) => {
@@ -46,7 +45,6 @@ const BulkDataEntryPlain = ({
             <BulkDataEntryBreadcrumb
                 onBackToOriginPage={onBackToOriginPage}
                 programId={programId}
-                trackedEntityName={trackedEntityName}
                 displayFrontPageList={displayFrontPageList}
                 page={page}
             />
