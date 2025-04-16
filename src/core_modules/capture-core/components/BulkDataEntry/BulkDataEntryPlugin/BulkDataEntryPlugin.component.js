@@ -34,13 +34,19 @@ export const BulkDataEntryPlugin = ({ pluginSource, configKey, dataKey, onClose,
                 dataKey={dataKey}
                 onClose={onClose}
             />
-            <div>
-                <br />
-                Dummy buttons for testing that will be inside the Plugin - TODO delete before merge
-                <br />
-                <Button onClick={onBackToOriginPage}>Back to origin to add rows</Button>
-                <br />
-                <Button onClick={onClose}>Close bulk data entry form</Button>
+            <div style={{ marginTop: '50px' }}>
+                <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
+                    TODO delete buttons before merge
+                </p>
+                <p style={{ marginBottom: '8px' }}>
+                    Dummy buttons for testing that will be inside the Plugin.
+                </p>
+                <Button onClick={onBackToOriginPage} style={{ marginRight: '8px' }}>
+                    Back to origin to add trackedEntities
+                </Button>
+                <Button onClick={onClose} style={{ marginRight: '8px' }}>
+                    Close bulk data entry form
+                </Button>
             </div>
         </div>
     );

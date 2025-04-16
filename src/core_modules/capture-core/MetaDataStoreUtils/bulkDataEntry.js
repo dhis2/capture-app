@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getUserStorageController, userStores } from '../storageControllers';
 
-type ActiveList = {|
+export type ActiveList = {|
     dataKey?: string,
     configKey: string,
     pluginSource: string,

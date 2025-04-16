@@ -1,6 +1,12 @@
 // @flow
 import { getBulkDataEntry } from 'capture-core/MetaDataStoreUtils/bulkDataEntry';
+import type { ActiveList } from 'capture-core/MetaDataStoreUtils/bulkDataEntry';
 import { useIndexedDBQuery } from '../../utils/reactQueryHelpers';
+
+export type CachedBulkDataEntry = {|
+    id: string,
+    activeList: ActiveList,
+|};
 
 export const useBulkDataEntryFromIndexedDB = (programId: string) => {
     const {
