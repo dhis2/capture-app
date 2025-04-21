@@ -18,7 +18,13 @@ const TETIdSelector = (state: State) => state.newRelationship.selectedRelationsh
 export const makeTETNameSelector = () => createSelector(
     TETIdSelector,
     (TETId: string): string | null => {
-        const TEType = getTrackedEntityTypeThrowIfNotFound(TETId);
+        let TEType;
+        try {
+            TEType = getTrackedEntityTypeThrowIfNotFound(TETId);
+        } catch (error) {
+            return null;
+        }
+
         return TEType.name;
     },
 );

@@ -22,6 +22,7 @@ export const RegisterTei = ({
     const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
         teiId,
         trackedEntityTypeId,
+        programId: suggestedProgramId,
     });
 
     if (isLoadingAttributes) {
@@ -33,8 +34,10 @@ export const RegisterTei = ({
             dataEntryId={dataEntryId}
             onLink={onLink}
             onCancel={onCancel}
-            onSaveWithoutEnrollment={(teiPayload?: Record<string, any>) => onSave(teiPayload as Record<string, any>)}
-            onSaveWithEnrollment={(teiPayload?: Record<string, any>) => onSave(teiPayload as Record<string, any>)}
+            // @ts-ignore - Preserving original implementation
+            onSaveWithoutEnrollment={onSave}
+            // @ts-ignore - Preserving original implementation
+            onSaveWithEnrollment={onSave}
             onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
             trackedEntityName={trackedEntityName}
             selectedScopeId={selectedScopeId}

@@ -11,6 +11,7 @@ import {
 type Props = {
     teiId: string;
     trackedEntityTypeId: string;
+    programId?: string;
 };
 
 type Return = {
@@ -18,9 +19,10 @@ type Return = {
     isLoading: boolean;
 };
 
-export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
-    const programId = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { programId: string } }) =>
+export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, programId: propsProgramId }: Props): Return => {
+    const reduxProgramId = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { programId: string } }) =>
         newRelationshipRegisterTei.programId);
+    const programId = propsProgramId ?? reduxProgramId;
 
     const inheritedAttributeIds = useMemo(() => {
         const attributeIds = new Set<string>();
