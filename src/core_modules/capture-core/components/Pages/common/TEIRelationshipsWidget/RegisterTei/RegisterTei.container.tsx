@@ -34,9 +34,9 @@ export const RegisterTei = ({
             dataEntryId={dataEntryId}
             onLink={onLink}
             onCancel={onCancel}
-            // @ts-ignore - Preserving original implementation
+            // @ts-expect-error - Preserving original implementation
             onSaveWithoutEnrollment={onSave}
-            // @ts-ignore - Preserving original implementation
+            // @ts-expect-error - Preserving original implementation
             onSaveWithEnrollment={onSave}
             onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
             trackedEntityName={trackedEntityName}
