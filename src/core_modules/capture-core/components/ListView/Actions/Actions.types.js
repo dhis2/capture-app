@@ -1,5 +1,5 @@
 // @flow
 
 export type Props = {
-    customActionsContents?: Array<React$Node>,
+    customActionsContents?: Array<{ key: string, actionContents: React$Node}>,
 };

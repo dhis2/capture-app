@@ -10,7 +10,13 @@ const styles = {
 };
 
 const ActionsPlain = ({ customActionsContents = [], classes }: Props & CssClasses) => (
-    <div className={classes.container}> {customActionsContents} </div>
+    <div className={classes.container}>
+        {customActionsContents.map(({ key, actionContents }) => (
+            <React.Fragment key={key}>
+                {actionContents}
+            </React.Fragment>
+        ))}
+    </div>
 );
 
 export const Actions: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ActionsPlain);

@@ -14,11 +14,17 @@ export const TrackerWorkingListsActionsSetup = ({
 }: Props) => {
     const customActionsContents: CustomActionsContents = useMemo(
         () => [
-            <BulkDataEntryAction
-                programId={program?.id}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
-                selectionInProgress={selectionInProgress}
-            />,
+            {
+                key: 'bulkDataEntryAction',
+                actionContents: (
+                    <BulkDataEntryAction
+                        key="bulkDataEntryAction"
+                        programId={program?.id}
+                        setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                        selectionInProgress={selectionInProgress}
+                    />
+                ),
+            },
         ],
         [program, setShowBulkDataEntryPlugin, selectionInProgress],
     );

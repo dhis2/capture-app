@@ -27,7 +27,7 @@ const BulkDataEntryActionDropdownButtonPlain = ({
     selectionInProgress,
     classes,
 }: Props & CssClasses) => {
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const { bulkDataEntryConfigurations, isLoading, isError } = useBulkDataEntryConfigurations(programId);
     const queryClient = useQueryClient();
 
@@ -49,7 +49,7 @@ const BulkDataEntryActionDropdownButtonPlain = ({
             secondary
             open={isOpen}
             small
-            onClick={() => setOpen(prev => !prev)}
+            onClick={() => setIsOpen(prev => !prev)}
             className={classes.container}
             component={
                 <>
@@ -61,7 +61,7 @@ const BulkDataEntryActionDropdownButtonPlain = ({
                                 label={config.title}
                                 value={config.dataKey}
                                 onClick={() => {
-                                    setOpen(prev => !prev);
+                                    setIsOpen(prev => !prev);
                                     onSelectConfiguration({
                                         configKey: config.configKey,
                                         dataKey: config.dataKey,

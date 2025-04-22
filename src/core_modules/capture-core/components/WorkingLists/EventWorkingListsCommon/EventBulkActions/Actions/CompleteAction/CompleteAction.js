@@ -46,7 +46,7 @@ const CompleteActionPlain = ({
     removeRowsFromSelection,
     onUpdateList,
     classes,
-}) => {
+}: Props & CssClasses) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
     const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);

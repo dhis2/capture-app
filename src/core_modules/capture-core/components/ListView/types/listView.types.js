@@ -62,7 +62,7 @@ export type CustomRowMenuContent = {|
 |};
 export type CustomRowMenuContents = Array<CustomRowMenuContent>;
 
-export type CustomActionsContents = Array<React$Node>;
+export type CustomActionsContents = Array<{key: string, actionContents: React$Node}>;
 
 export type FiltersData = { [id: string]: FilterData };
 
