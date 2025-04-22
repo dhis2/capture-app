@@ -37,7 +37,8 @@ const BulkDataEntryPlain = ({
 
     const onBackToOriginPage = useCallback(() => {
         setShowBulkDataEntryPlugin(false);
-    }, [setShowBulkDataEntryPlugin]);
+        setBulkDataEntryTrackedEntities(null);
+    }, [setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities]);
 
     if (!cachedBulkDataEntry?.activeList) {
         return null;

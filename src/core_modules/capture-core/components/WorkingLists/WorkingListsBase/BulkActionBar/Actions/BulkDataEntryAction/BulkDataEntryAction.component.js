@@ -22,7 +22,7 @@ export const BulkDataEntryActionPlain = ({
     const { cachedBulkDataEntry } = useBulkDataEntryFromIndexedDB(programId);
     if (cachedBulkDataEntry?.activeList.configKey) {
         return (
-            <Button small onClick={() => setShowBulkDataEntryPlugin(false)} className={classes.button}>
+            <Button small onClick={() => setShowBulkDataEntryPlugin(true)} className={classes.button}>
                 {selectionInProgress
                     ? i18n.t('Add to ongoing bulk data entry')
                     : i18n.t('Add page to ongoing bulk data entry')}
