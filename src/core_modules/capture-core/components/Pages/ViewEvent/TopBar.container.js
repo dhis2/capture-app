@@ -68,6 +68,7 @@ export const TopBar = ({
             formIsOpen={formIsOpen}
             onStartAgain={() => reset()}
             isReadOnlyOrgUnit
+            orgUnitTooltip
         >
             <TopBarActions
                 selectedProgramId={programId}
