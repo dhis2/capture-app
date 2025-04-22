@@ -21,7 +21,7 @@ export const makeTETNameSelector = () => createSelector(
         let TEType;
         try {
             TEType = getTrackedEntityTypeThrowIfNotFound(TETId);
-        } catch (error) {
+        } catch (error: unknown) {
             return null;
         }
 
