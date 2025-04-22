@@ -10,6 +10,7 @@ import type {
     ClearFilter,
     ClearFilters,
     RemoveFilter,
+    CustomActionsContents,
     CustomMenuContents,
     CustomRowMenuContents,
     FiltersData,
@@ -39,7 +40,9 @@ export type Props = $ReadOnly<{|
     programId: string,
     orgUnitId: string,
     selectedTemplateId?: string,
-    onChangeTemplate?: (selectedTemplateId?: string) => void
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
+    setShowBulkDataEntryPlugin: (show: boolean) => void,
+    setBulkDataEntryTrackedEntities: (trackedEntities: Array<string>) => void,
 |}>;
 
 export type TeiWorkingListsReduxOutputProps = {|
@@ -50,6 +53,7 @@ export type TeiWorkingListsReduxOutputProps = {|
     customColumnOrder?: CustomColumnOrder,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
+    customActionsContents?: CustomActionsContents,
     filters?: FiltersData,
     initialViewConfig?: InitialViewConfig,
     loadedContext?: LoadedContext,

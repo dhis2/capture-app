@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { BulkActionBar } from '../../WorkingListsBase/BulkActionBar';
+import type { CachedBulkDataEntry } from '../../../../utils/cachedDataHooks/useBulkDataEntryFromIndexedDB';
+import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsBase/BulkActionBar';
 import { CompleteAction, DeleteAction } from './Actions';
 import type { ProgramStage } from '../../../../metaData';
 
@@ -10,6 +11,9 @@ type Props = {|
     stage: ProgramStage,
     onUpdateList: (disableClearSelection?: boolean) => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
+    programId?: string,
+    setShowBulkDataEntryPlugin?: (show: boolean) => void,
+    cachedBulkDataEntry?: ?CachedBulkDataEntry,
 |}
 
 export const EventBulkActions = ({
@@ -18,6 +22,9 @@ export const EventBulkActions = ({
     onClearSelection,
     removeRowsFromSelection,
     onUpdateList,
+    programId,
+    setShowBulkDataEntryPlugin,
+    cachedBulkDataEntry,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
 
@@ -30,16 +37,25 @@ export const EventBulkActions = ({
             selectedRowsCount={selectedRowsCount}
             onClearSelection={onClearSelection}
         >
+            {programId && setShowBulkDataEntryPlugin && (
+                <BulkDataEntryAction
+                    programId={programId}
+                    setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                    selectionInProgress
+                />
+            )}
             <CompleteAction
                 selectedRows={selectedRows}
-                disabled={!stage.access.data.write}
+                stageDataWriteAccess={stage.access.data.write}
+                bulkDataEntryIsActive={Boolean(cachedBulkDataEntry?.activeList)}
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
             />
 
             <DeleteAction
                 selectedRows={selectedRows}
-                disabled={!stage.access.data.write}
+                stageDataWriteAccess={stage.access.data.write}
+                bulkDataEntryIsActive={Boolean(cachedBulkDataEntry?.activeList)}
                 onUpdateList={onUpdateList}
             />
         </BulkActionBar>

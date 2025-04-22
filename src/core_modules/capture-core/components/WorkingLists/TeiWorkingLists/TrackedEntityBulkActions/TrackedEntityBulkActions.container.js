@@ -5,6 +5,7 @@ import { EventBulkActions } from '../../EventWorkingListsCommon/EventBulkActions
 import { TrackedEntityBulkActionsComponent } from './TrackedEntityBulkActions.component';
 import type { ContainerProps } from './TrackedEntityBulkActions.types';
 import { errorCreator } from '../../../../../capture-core-utils';
+import { useBulkDataEntryFromIndexedDB } from '../../../../utils/cachedDataHooks/useBulkDataEntryFromIndexedDB';
 
 export const TrackedEntityBulkActions = ({
     programStageId,
@@ -13,6 +14,8 @@ export const TrackedEntityBulkActions = ({
     programId,
     ...passOnProps
 }: ContainerProps) => {
+    const { cachedBulkDataEntry } = useBulkDataEntryFromIndexedDB(programId);
+
     if (programStageId) {
         const stage = stages.get(programStageId);
 
@@ -23,7 +26,9 @@ export const TrackedEntityBulkActions = ({
 
         return (
             <EventBulkActions
+                programId={programId}
                 stage={stage}
+                cachedBulkDataEntry={cachedBulkDataEntry}
                 {...passOnProps}
             />
         );
@@ -34,6 +39,7 @@ export const TrackedEntityBulkActions = ({
             programId={programId}
             stages={stages}
             programDataWriteAccess={programDataWriteAccess}
+            cachedBulkDataEntry={cachedBulkDataEntry}
             {...passOnProps}
         />
     );

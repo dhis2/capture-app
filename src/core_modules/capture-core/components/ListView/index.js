@@ -7,6 +7,7 @@ export type {
     CustomRowMenuContent,
     CustomMenuContents,
     CustomMenuContent,
+    CustomActionsContents,
     DataSource,
     FiltersData,
     FiltersOnly,

@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { uniq } from 'lodash';
 // $FlowFixMe
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
@@ -101,6 +102,19 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate
 
 const MainPageContainer = () => {
     const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
+    const [bulkDataEntryTrackedEntities, setBulkDataEntryTrackedEntities] = useState(undefined);
+
+    const onHandleSetBulkDataEntryTrackedEntities = useCallback(
+        (trackedEntities: Array<string> | null) => {
+            if (trackedEntities) {
+                setBulkDataEntryTrackedEntities(uniq([...(bulkDataEntryTrackedEntities || []), ...trackedEntities]));
+            }
+            if (trackedEntities === null) {
+                setBulkDataEntryTrackedEntities(undefined);
+            }
+        },
+        [bulkDataEntryTrackedEntities],
+    );
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
@@ -187,6 +201,8 @@ const MainPageContainer = () => {
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
                 setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                setBulkDataEntryTrackedEntities={onHandleSetBulkDataEntryTrackedEntities}
+                bulkDataEntryTrackedEntities={bulkDataEntryTrackedEntities}
             />
         </OrgUnitFetcher>
     );

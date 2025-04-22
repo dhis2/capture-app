@@ -19,8 +19,10 @@ const styles = () => ({
 const BulkDataEntryPlain = ({
     programId,
     setShowBulkDataEntryPlugin,
+    setBulkDataEntryTrackedEntities,
     displayFrontPageList,
     page,
+    trackedEntities,
     classes,
 }: Props) => {
     const { cachedBulkDataEntry } = useBulkDataEntryFromIndexedDB(programId);
@@ -30,7 +32,8 @@ const BulkDataEntryPlain = ({
         await removeBulkDataEntry(programId);
         await queryClient.refetchQueries([ReactQueryAppNamespace, 'indexedDB', 'cachedBulkDataEntry', programId]);
         setShowBulkDataEntryPlugin(false);
-    }, [programId, setShowBulkDataEntryPlugin, queryClient]);
+        setBulkDataEntryTrackedEntities(null);
+    }, [programId, setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities, queryClient]);
 
     const onBackToOriginPage = useCallback(() => {
         setShowBulkDataEntryPlugin(false);
@@ -52,6 +55,7 @@ const BulkDataEntryPlain = ({
                 {...cachedBulkDataEntry.activeList}
                 onClose={onClose}
                 onBackToOriginPage={onBackToOriginPage}
+                trackedEntities={trackedEntities}
             />
         </div>
     );

@@ -15,6 +15,7 @@ export type {
     AssigneeFilterData,
     CustomRowMenuContent,
     CustomRowMenuContents,
+    CustomActionsContents,
     CustomMenuContent,
     CustomMenuContents,
     ChangePage,
