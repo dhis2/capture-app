@@ -1,9 +1,10 @@
 // @flow
 import type { AvailableSearchOption } from '../SearchBox.types';
+import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 
 export type ContainerProps = $ReadOnly<{|
     showInitialSearchBox: () => void,
-    navigateToRegisterTrackedEntity: (currentSearchTerms: Array<Object>) => void,
+    navigateToRegisterTrackedEntity: (currentSearchTerms: CurrentSearchTerms) => void,
     minAttributesRequiredToSearch: number,
     searchableFields: Array<Object>,
     searchStatus: string,

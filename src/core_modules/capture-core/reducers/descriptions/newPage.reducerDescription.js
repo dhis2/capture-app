@@ -3,10 +3,11 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newPageStatuses } from '../../components/Pages/New/NewPage.constants';
 import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
+import type { CurrentSearchTerms } from '../../components/SearchBox/SearchForm/SearchForm.types';
 
 type NewPageState = {
     newPageStatus: $Keys<typeof newPageStatuses>,
-    prepopulatedData?: Object,
+    prepopulatedData?: CurrentSearchTerms,
 }
 const initialNewPageState: NewPageState = {
     newPageStatus: newPageStatuses.DEFAULT,
