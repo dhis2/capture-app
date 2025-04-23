@@ -70,7 +70,7 @@ export const ChangelogTableHeader = ({
             sortIconTitle: i18n.t('Sort by username'),
             width: '125px',
             isSortable: supportsChangelogV2,
-            dataTest: 'changelog-sort-username',
+            dataTest: 'changelog-sort-user',
         },
         {
             name: sortTargetDataItem,

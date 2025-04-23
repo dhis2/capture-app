@@ -4,14 +4,12 @@ Feature: The user interacts with the changelog widget
   Background:
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
     And you select view changelog in the event overflow button
-
+    Then the changelog modal should contain data
 
   Scenario: The user can view an event changelog on the enrollment edit event
-    Then the changelog modal should be visible
-    And the changelog modal should contain data
-    And the number of changelog table rows should be 9
+    Then the number of changelog table rows should be 9
 
-  Scenario: The user can change changelog page size
+  Scenario: The user can change the changelog page size
     When you change the page size to 20
     Then the number of changelog table rows should be 19
     And you change the page size to 100
@@ -49,14 +47,14 @@ Feature: The user interacts with the changelog widget
     When you remove the filter
     Then the filter pill should be visible with label "Show all"
 
-  Scenario: The user can sort by Date in ascending order
+  Scenario: The user can sort by Date
     When you click the sort Date icon
     Then the changelog data is sorted on Date in ascending order
 
-  Scenario: The user can sort by User in ascending order
+  Scenario: The user can sort by User
     When you click the sort User icon
     Then the changelog data is sorted on User in ascending order
 
-  Scenario: The user can sort by Data item in ascending order
+  Scenario: The user can sort by Data item
     When you click the sort Data item icon
     Then the changelog data is sorted on Data item in ascending order

@@ -4,9 +4,6 @@ import '../sharedSteps';
 const getChangelogTableBody = () =>
     cy.get('[data-test="changelog-data-table-body"]');
 
-const getChangelogModal = () =>
-    cy.get('[data-test="changelog-modal"]');
-
 const getOverflowButton = () =>
     cy.get('[data-test="widget-event-edit-overflow-button"]');
 
@@ -14,10 +11,6 @@ const getOverflowButton = () =>
 Given('you select view changelog in the event overflow button', () => {
     getOverflowButton().click();
     cy.get('[data-test="event-overflow-view-changelog"] > a').click();
-});
-
-Then('the changelog modal should be visible', () => {
-    getChangelogModal().should('be.visible');
 });
 
 Then('the changelog modal should contain data', () => {
@@ -93,7 +86,6 @@ When('you click the sort Date icon', () => {
     cy.get('[data-test="changelog-sort-date"]')
         .find('svg')
         .click();
-    cy.intercept('GET', '**/changeLogs?*order=createdAt:*');
 });
 
 Then('the changelog data is sorted on Date in ascending order', () => {
@@ -114,48 +106,42 @@ Then('the changelog data is sorted on Date in ascending order', () => {
 });
 
 When('you click the sort User icon', () => {
-    cy.get('[data-test="changelog-sort-date"]')
+    cy.get('[data-test="changelog-sort-user"]')
         .find('svg')
         .click();
-    cy.intercept('GET', '**/changeLogs?*order=createdAt:*');
 });
 
 Then('the changelog data is sorted on User in ascending order', () => {
-    const parseDate = text => new Date(text).getTime();
-    let previous = 0;
-
+    let previous = '';
     cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
         cy.wrap($row)
             .find('td')
-            .eq(0)
+            .eq(1)
             .invoke('text')
             .then((text) => {
-                const current = parseDate(text.trim());
-                expect(current).to.be.at.least(previous);
+                const current = text.trim().toLowerCase();
+                expect(current >= previous).to.be.true;
                 previous = current;
             });
     });
 });
 
 When('you click the sort Data item icon', () => {
-    cy.get('[data-test="changelog-sort-date"]')
+    cy.get('[data-test="changelog-sort-dataItem"]')
         .find('svg')
         .click();
-    cy.intercept('GET', '**/changeLogs?*order=createdAt:*');
 });
 
 Then('the changelog data is sorted on Data item in ascending order', () => {
-    const parseDate = text => new Date(text).getTime();
-    let previous = 0;
-
+    let previous = '';
     cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
         cy.wrap($row)
             .find('td')
-            .eq(0)
+            .eq(2)
             .invoke('text')
             .then((text) => {
-                const current = parseDate(text.trim());
-                expect(current).to.be.at.least(previous);
+                const current = text.trim().toLowerCase();
+                expect(current >= previous).to.be.true;
                 previous = current;
             });
     });
