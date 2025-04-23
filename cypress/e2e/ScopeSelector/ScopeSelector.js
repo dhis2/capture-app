@@ -159,11 +159,6 @@ Given('you land on a new event page with preselected org unit', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8');
 });
 
-Given('you land on a new event page with preselected program', () => {
-    cy.visit('/#/new?programId=VBqh0ynB2wv');
-});
-
-
 Then('new event page url is valid', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
 });
