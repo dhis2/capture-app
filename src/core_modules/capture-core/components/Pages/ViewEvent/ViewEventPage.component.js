@@ -9,8 +9,8 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { useLocationQuery } from '../../../utils/routing';
 
 type Props = {
-  isUserInteractionInProgress: boolean,
-  showAddRelationship: boolean,
+    isUserInteractionInProgress: boolean,
+    showAddRelationship: boolean,
 };
 
 export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => {
@@ -20,6 +20,9 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRel
         selectedCategories: currentSelections.categoriesMeta,
         programId: currentSelections.programId,
     }));
+    const { showEditEvent } = useSelector(
+        ({ viewEventPage }) => viewEventPage.eventDetailsSection,
+    );
 
     return (
         <OrgUnitFetcher orgUnitId={orgUnitId}>
@@ -28,6 +31,7 @@ export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRel
                 orgUnitId={orgUnitId}
                 selectedCategories={selectedCategories}
                 isUserInteractionInProgress={isUserInteractionInProgress}
+                editEventMode={showEditEvent}
                 formIsOpen
             />
             {
