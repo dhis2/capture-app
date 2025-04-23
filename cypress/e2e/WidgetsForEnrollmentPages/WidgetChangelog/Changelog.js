@@ -112,17 +112,16 @@ When('you click the sort User icon', () => {
 });
 
 Then('the changelog data is sorted on User in ascending order', () => {
-    let previous = '';
-    cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
-        cy.wrap($row)
-            .find('td')
-            .eq(1)
-            .invoke('text')
-            .then((text) => {
-                const current = text.trim().toLowerCase();
-                expect(current >= previous).to.be.true;
-                previous = current;
-            });
+    cy.get('[data-test="changelog-data-table-body"] tr td:nth-child(2)').then(($cells) => {
+        const values = [...$cells].map(cell => cell.textContent.trim().toLowerCase());
+
+        const collator = new Intl.Collator(undefined, {
+            sensitivity: 'base',
+            numeric: true,
+        });
+
+        const sorted = [...values].sort((a, b) => collator.compare(a, b));
+        expect(values).to.deep.equal(sorted);
     });
 });
 
@@ -133,16 +132,16 @@ When('you click the sort Data item icon', () => {
 });
 
 Then('the changelog data is sorted on Data item in ascending order', () => {
-    let previous = '';
-    cy.get('[data-test="changelog-data-table-body"] tr').each(($row) => {
-        cy.wrap($row)
-            .find('td')
-            .eq(2)
-            .invoke('text')
-            .then((text) => {
-                const current = text.trim().toLowerCase();
-                expect(current >= previous).to.be.true;
-                previous = current;
-            });
+    cy.get('[data-test="changelog-data-table-body"] tr td:nth-child(3)').then(($cells) => {
+        const values = [...$cells].map(cell => cell.textContent.trim().toLowerCase());
+
+        const collator = new Intl.Collator(undefined, {
+            sensitivity: 'base',
+            numeric: true,
+        });
+
+        const sorted = [...values].sort((a, b) => collator.compare(a, b));
+        expect(values).to.deep.equal(sorted);
     });
 });
+
