@@ -32,12 +32,12 @@ const BulkDataEntryPlain = ({
         await removeBulkDataEntry(programId);
         await queryClient.refetchQueries([ReactQueryAppNamespace, 'indexedDB', 'cachedBulkDataEntry', programId]);
         setShowBulkDataEntryPlugin(false);
-        setBulkDataEntryTrackedEntities(null);
+        setBulkDataEntryTrackedEntities && setBulkDataEntryTrackedEntities(null);
     }, [programId, setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities, queryClient]);
 
     const onBackToOriginPage = useCallback(() => {
         setShowBulkDataEntryPlugin(false);
-        setBulkDataEntryTrackedEntities(null);
+        setBulkDataEntryTrackedEntities && setBulkDataEntryTrackedEntities(null);
     }, [setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities]);
 
     if (!cachedBulkDataEntry?.activeList) {
