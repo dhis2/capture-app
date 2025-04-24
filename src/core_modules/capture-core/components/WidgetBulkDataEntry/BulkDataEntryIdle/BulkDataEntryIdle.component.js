@@ -30,7 +30,7 @@ const BulkDataEntryIdleComponenetPlain = ({
     onSelectConfiguration,
     classes,
 }: PlainProps) => (
-    <div className={classes.container}>
+    <div className={classes.container} data-test="widget-bulk-data-entry-idle">
         <Widget header={i18n.t('Bulk data entry')} noncollapsible>
             <DataTable className={classes.table}>
                 <DataTableBody>
