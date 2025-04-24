@@ -55,14 +55,17 @@ Feature: The user interacts with the changelog widget
   @v>=42
   Scenario: The user can sort by Date
     When you click the sort Date icon
-    Then the changelog data is sorted on Date in ascending order
+    Then the changelog modal should contain data
+    And the changelog data is sorted on Date in ascending order
 
   @v>=42
   Scenario: The user can sort by User
     When you click the sort User icon
-    Then the changelog data is sorted on User in ascending order
+    Then the changelog modal should contain data
+    And the changelog data is sorted on User in ascending order
 
   @v>=42
   Scenario: The user can sort by Data item
     When you click the sort Data item icon
-    Then the changelog data is sorted on Data item in ascending order
+    Then the changelog modal should contain data
+    And the changelog data is sorted on Data item in ascending order
