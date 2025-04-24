@@ -25,4 +25,5 @@ Then('the BulkDataEntry widget in active mode is displayed', () => {
         cy.get('[data-test="dhis2-uicore-button"]').contains('Continue data entry');
         cy.get('[data-test="dhis2-uicore-tag-text"]').contains('Unsaved changes');
     });
+    cy.cleanIndexBD();
 });
