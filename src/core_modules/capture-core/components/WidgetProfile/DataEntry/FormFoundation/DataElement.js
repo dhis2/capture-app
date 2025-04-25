@@ -330,7 +330,6 @@ export const buildDataElement = (
             trackedEntityAttributeAPI =>
                 trackedEntityAttributeAPI.id === programTrackedEntityAttribute.trackedEntityAttributeId,
         );
-    console.log('programTrackedEntityAttribute', programTrackedEntityAttribute);
 
     if (!trackedEntityAttribute) {
         log.error(
