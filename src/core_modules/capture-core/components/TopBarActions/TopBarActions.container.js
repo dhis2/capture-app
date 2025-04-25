@@ -17,6 +17,7 @@ export const TopBarActions = ({
     selectedProgramId,
     selectedOrgUnitId,
     isUserInteractionInProgress = false,
+    handleRefreshNewTeForm = () => {},
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {
@@ -90,6 +91,7 @@ export const TopBarActions = ({
     };
 
     const handleAccept = () => {
+        handleRefreshNewTeForm();
         openNewRegistrationPage && newRegistrationPage();
         openNewRegistrationPageWithoutProgramId && newRegistrationPageWithoutProgramId();
         openSearchPage && searchPage();
