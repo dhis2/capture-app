@@ -194,7 +194,7 @@ const setBaseProperties = async ({
     dataElement.name = trackedEntityAttribute.displayName;
     dataElement.shortName = trackedEntityAttribute.displayShortName;
     dataElement.formName = trackedEntityAttribute.displayFormName;
-    dataElement.description = trackedEntityAttribute.description;
+    dataElement.description = trackedEntityAttribute.displayDescription;
     dataElement.displayInForms = true;
     dataElement.displayInReports = programTrackedEntityAttribute.displayInList;
     dataElement.disabled = false;
@@ -330,6 +330,7 @@ export const buildDataElement = (
             trackedEntityAttributeAPI =>
                 trackedEntityAttributeAPI.id === programTrackedEntityAttribute.trackedEntityAttributeId,
         );
+    console.log('programTrackedEntityAttribute', programTrackedEntityAttribute);
 
     if (!trackedEntityAttribute) {
         log.error(
