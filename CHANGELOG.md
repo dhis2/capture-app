@@ -1,3 +1,25 @@
+## [101.33.3](https://github.com/dhis2/capture-app/compare/v101.33.2...v101.33.3) (2025-04-08)
+
+
+### Bug Fixes
+
+* [DHIS2-19415] editing two fields simultaneously blocks saving ([#4044](https://github.com/dhis2/capture-app/issues/4044)) ([ca448d3](https://github.com/dhis2/capture-app/commit/ca448d3c5ac6bc3896aa62243c9d90a163d07f43))
+
+## [101.33.2](https://github.com/dhis2/capture-app/compare/v101.33.1...v101.33.2) (2025-04-02)
+
+
+### Bug Fixes
+
+* [DHIS2-19336] provide empty array instead of `null` to `RuleEnrollmentJs` ([#4028](https://github.com/dhis2/capture-app/issues/4028)) ([959ffb6](https://github.com/dhis2/capture-app/commit/959ffb62cc59b201ed09c065ee2c12caf8f06697))
+* **translations:** sync translations from transifex (master) ([e973d3e](https://github.com/dhis2/capture-app/commit/e973d3e09cb4b9835f66fe2ba752b679641cbbd4))
+
+## [101.33.1](https://github.com/dhis2/capture-app/compare/v101.33.0...v101.33.1) (2025-03-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4b0bb85](https://github.com/dhis2/capture-app/commit/4b0bb85baac0c8aebb97d5851ee6935b15fcf7e5))
+
 # [101.33.0](https://github.com/dhis2/capture-app/compare/v101.32.5...v101.33.0) (2025-03-18)
 
 

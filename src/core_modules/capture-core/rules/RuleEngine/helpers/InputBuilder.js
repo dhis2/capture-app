@@ -344,7 +344,7 @@ export class InputBuilder {
             .map(key => new RuleAttributeValue(
                 key,
                 this.convertTrackedEntityAttributeValue(key, selectedEntity[key]),
-            )) : null;
+            )) : [];
 
         const convertDate = (dateString: ?string) => this.toLocalDate(dateString, LocalDate.now());
 
