@@ -70,9 +70,12 @@ export const SearchResultsIndex = ({
     const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
     const [isFallbackLoading, setIsFallbackLoading] = useState(false);
 
-    const trackerProgram = getTrackerProgramThrowIfNotFound(currentSearchScopeId);
-    const { searchGroups } = trackerProgram?.trackedEntityType;
-    const availableSearchGroup = searchGroups.find(group => !group.unique);
+    const availableSearchGroup =
+        currentSearchScopeType === searchScopes.PROGRAM
+            ? getTrackerProgramThrowIfNotFound(currentSearchScopeId)
+                .trackedEntityType.searchGroups.find(group => !group.unique)
+            : undefined;
+
 
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
