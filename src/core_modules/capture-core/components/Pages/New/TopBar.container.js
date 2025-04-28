@@ -26,7 +26,6 @@ type TopBarProps = {
     teiDisplayName?: string,
     isUserInteractionInProgress: boolean,
     formIsOpen: boolean,
-    handleRefreshNewTeForm: () => void,
 };
 
 export const TopBar = ({
@@ -37,7 +36,6 @@ export const TopBar = ({
     trackedEntityName = '',
     teiDisplayName = '',
     formIsOpen,
-    handleRefreshNewTeForm,
 }: TopBarProps) => {
     const dispatch = useDispatch();
     const { setProgramId } = useSetProgramId();
@@ -104,7 +102,6 @@ export const TopBar = ({
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
                 isUserInteractionInProgress={isUserInteractionInProgress}
-                handleRefreshNewTeForm={handleRefreshNewTeForm}
             />
         </ScopeSelector>
     );

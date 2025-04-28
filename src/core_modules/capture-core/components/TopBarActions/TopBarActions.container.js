@@ -1,5 +1,6 @@
 // @flow
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ActionButtons } from './TopBarActions.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import type { Props } from './TopBarActions.types';
@@ -17,7 +18,6 @@ export const TopBarActions = ({
     selectedProgramId,
     selectedOrgUnitId,
     isUserInteractionInProgress = false,
-    handleRefreshNewTeForm = () => {},
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {
@@ -33,6 +33,7 @@ export const TopBarActions = ({
         openSearchPageWithoutProgramId;
 
     const { navigate } = useNavigate();
+    const history = useHistory();
 
     const newRegistrationPage = () => {
         const queryArgs = {};
@@ -43,7 +44,7 @@ export const TopBarActions = ({
             queryArgs.programId = selectedProgramId;
         }
 
-        navigate(`new?${buildUrlQueryString(queryArgs)}`);
+        history.replace(`new?${buildUrlQueryString(queryArgs)}`);
     };
 
     const newRegistrationPageWithoutProgramId = () => {
@@ -91,7 +92,6 @@ export const TopBarActions = ({
     };
 
     const handleAccept = () => {
-        handleRefreshNewTeForm();
         openNewRegistrationPage && newRegistrationPage();
         openNewRegistrationPageWithoutProgramId && newRegistrationPageWithoutProgramId();
         openSearchPage && searchPage();
