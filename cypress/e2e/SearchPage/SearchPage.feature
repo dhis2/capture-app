@@ -221,7 +221,7 @@ Feature: User interacts with Search page
         Then you should be taken to the main page with org unit and program preselected
 
     @with-indexBD-clean
-    Scenario: WidgetBulkDataEntry is displayed for programs with displayFrontPage set to true
+    Scenario: BulkDataEntry widget is displayed in the search page
         Given you are in the search page with the Child Programme and org unit being preselected from the url
         And the BulkDataEntry widget in idle mode is displayed
         When the user selects the "Routine visit" BulkDataEntry

@@ -48,7 +48,7 @@ Feature: User interacts with Main page
         Then the icon is rendered as a custom icon
 
     @with-indexBD-clean
-    Scenario: WidgetBulkDataEntry is displayed for programs with displayFrontPage set to true
+    Scenario: BulkDataEntry widget is displayed in the main page
         Given you are in the main page with Child Programme and Ngelehun CHC selected
         Then the TEI working list is displayed
         And the BulkDataEntry widget in idle mode is displayed
@@ -58,7 +58,7 @@ Feature: User interacts with Main page
         And the BulkDataEntry widget in active mode is displayed
 
     @with-indexBD-clean
-    Scenario: WidgetBulkDataEntry is not displayed for program with displayFrontPage set to false
+    Scenario: BulkDataEntry widget is displayed in the main page for program with displayFrontPage set to false
         Given you are in the main page with MNCH PNC and Ngelehun CHC selected
         Then the search form is displayed
         And the BulkDataEntry widget in idle mode is displayed
