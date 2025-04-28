@@ -30,12 +30,10 @@ export type ContainerProps = $ReadOnly<{|
   error: boolean,
   ready: boolean,
   programId?: string,
-  newPageKey?: string,
   teiId?: string,
   trackedEntityName?: string,
   teiDisplayName?: string,
   trackedEntityInstanceAttributes?: Array<InputAttribute>
-
 |}
 >
 

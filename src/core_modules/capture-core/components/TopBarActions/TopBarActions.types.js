@@ -1,7 +1,6 @@
 // @flow
 
 export type Props = {
-    handleRefreshNewTeForm?: () => void,
     selectedProgramId?: ?string,
     selectedOrgUnitId?: string,
     isUserInteractionInProgress?: boolean,

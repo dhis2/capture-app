@@ -31,7 +31,6 @@ const NewPagePlain = ({
     classes,
     currentScopeId,
     newPageStatus,
-    newPageKey,
     writeAccess,
     programCategorySelectionIncomplete,
     categoryOptionIsInvalidForOrgUnit,
@@ -91,7 +90,6 @@ const NewPagePlain = ({
                                 selectedScopeId={selectedScopeId}
                                 setScopeId={setScopeId}
                                 trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
-                                newPageKey={newPageKey}
                             />
                         }
 
