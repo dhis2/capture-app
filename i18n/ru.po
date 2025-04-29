@@ -5,13 +5,14 @@
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Yury Rogachev <yury@dhis2.org>, 2025
+# Nadiia <semchuk@aph.org.ua>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-03-14T11:31:23.626Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
+"Last-Translator: Nadiia <semchuk@aph.org.ua>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -624,22 +625,6 @@ msgstr "Заметка"
 msgid "Close the notice"
 msgstr "Закрыть заметку"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
-"Регистрационная запись с идентификатором \"{{enrollmentId}}\" не существует"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Отслеживаемый объект с идентификатором \"{{teiId}}\" не существует"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "Программа с идентификатором \"{{programId}}\" не существует"
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-"При получении регистрационных записей произошла ошибка. Пожалуйста, введите "
-"правильный URL адрес."
-
 msgid "No feedback for this enrollment yet"
 msgstr "Комментариев для данной регистрационной записи нет"
 
@@ -724,6 +709,22 @@ msgstr "Создать новое событие в данной програм�
 
 msgid "View working list in this program."
 msgstr "Просмотреть рабочий список в данной программе."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+"Регистрационная запись с идентификатором \"{{enrollmentId}}\" не существует"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Отслеживаемый объект с идентификатором \"{{teiId}}\" не существует"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Программа с идентификатором \"{{programId}}\" не существует"
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+"При получении регистрационных записей произошла ошибка. Пожалуйста, введите "
+"правильный URL адрес."
 
 msgid "Page is missing required values from URL"
 msgstr "Страница не содержит необходимых данных в URL адресе"
@@ -943,6 +944,12 @@ msgstr[1] "Заполните как минимум {{count}} атрибута/�
 msgstr[2] "Заполните как минимум {{count}} атрибутов для поиска."
 msgstr[3] "Заполните как минимум {{count}} атрибутов для поиска."
 
+msgid "Missing search criteria"
+msgstr "Критерии поиска отсутствуют"
+
+msgid "Back to search"
+msgstr "Назад к поиску"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Не удалось получить метаданные. Повторите попытку позже."
 
@@ -1053,9 +1060,6 @@ msgid ""
 "looking for."
 msgstr "Вы можете изменить параметры и перезапустить поиск "
 
-msgid "Back to search"
-msgstr "Назад к поиску"
-
 msgid "An error has occurred"
 msgstr "Произошла ошибка"
 
@@ -1064,9 +1068,6 @@ msgstr "Слишком много результатов"
 
 msgid "Cannot search in all programs"
 msgstr "Невозможно выполнить поиск во всех программах"
-
-msgid "Missing search criteria"
-msgstr "Критерии поиска отсутствуют"
 
 msgid "Results found"
 msgstr "Найдены результаты"
@@ -1757,7 +1758,7 @@ msgid "Details (Advanced)"
 msgstr ""
 
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Произошла неизвестная ошибка."
 
 msgid "An error occurred while completing events"
 msgstr ""
@@ -1773,6 +1774,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "{{trackedEntityName}} organisation unit"
 msgstr ""
 
 msgid "Registration Date"

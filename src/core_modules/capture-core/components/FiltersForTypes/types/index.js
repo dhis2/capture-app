@@ -16,3 +16,5 @@ export type FilterData =
     OptionSetFilterData |
     TextFilterData |
     TrueOnlyFilterData;
+
+export type FilterDataInput = FilterData & { locked?: boolean };
