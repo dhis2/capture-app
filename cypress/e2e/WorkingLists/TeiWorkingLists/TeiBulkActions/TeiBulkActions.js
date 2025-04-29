@@ -323,3 +323,20 @@ Then(/^the other (.*) bulk actions buttons are disabled$/, (actionType) => {
             .should('be.disabled');
     });
 });
+
+Then('the TEI working list is displayed', () => {
+    cy.get('[data-test="tei-working-lists"]').within(() => {
+        cy.contains('Rows per page').should('exist');
+        cy.contains('First name').should('exist');
+        cy.contains('Last name').should('exist');
+    });
+});
+
+Then('the program stage working list is displayed', () => {
+    cy.get('[data-test="tei-working-lists"]').within(() => {
+        cy.contains('Rows per page').should('exist');
+        cy.contains('First name').should('exist');
+        cy.contains('Last name').should('exist');
+        cy.contains('Ngelehun CHC').should('exist');
+    });
+});

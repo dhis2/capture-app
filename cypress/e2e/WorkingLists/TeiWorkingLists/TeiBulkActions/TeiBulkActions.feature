@@ -110,6 +110,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
       When you select the first 2 rows
       And the user selects the "Routine visit" BulkDataEntry from the "Open in bulk data entry" dropdown
       When the user navigates to "Program overview" using the breadcrumb
+      Then the TEI working list is displayed
       When you select all rows
       And the other enrollment bulk actions buttons are disabled
       And the user click the "Add to ongoing bulk data entry" button
@@ -133,6 +134,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
       When you select the first 2 rows
       And the user selects the "Routine visit" BulkDataEntry from the "Open in bulk data entry" dropdown
       When the user navigates to "Program overview" using the breadcrumb
+      Then the program stage working list is displayed
       When you select all rows
       And the other event bulk actions buttons are disabled
       And the user click the "Add to ongoing bulk data entry" button
