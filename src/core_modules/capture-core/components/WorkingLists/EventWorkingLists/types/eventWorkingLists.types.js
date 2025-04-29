@@ -37,3 +37,12 @@ export type EventWorkingListsTemplate = {|
 |};
 
 export type EventWorkingListsTemplates = Array<EventWorkingListsTemplate>;
+
+export type MainViewConfig = {|
+    eventDate: {|
+        period?: 'TODAY' | 'THIS_WEEK' | 'THIS_MONTH' | 'THIS_YEAR' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_3_MONTHS',
+        type: 'RELATIVE',
+        startBuffer: number,
+        endBuffer: number,
+    |}
+|};
