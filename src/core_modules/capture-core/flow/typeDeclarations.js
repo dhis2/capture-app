@@ -40,6 +40,11 @@ declare type ReduxStore = {
     +getState: () => ReduxState
 }
 
+declare type PlainReduxStore = {
+    +dispatch: ReduxDispatch,
+    +getState: () => ReduxState
+};
+
 // Events
 declare type CaptureClientEvent = {
     eventId: string,

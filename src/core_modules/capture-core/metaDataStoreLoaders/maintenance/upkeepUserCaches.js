@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { StorageController, DomLocalStorageAdapter } from 'capture-core-utils/storage';
 import { getMainStorageController, getUserStorageController } from '../../storageControllers';
 import { mainStores } from '../../storageControllers/stores';
@@ -8,13 +8,13 @@ import { mainStores } from '../../storageControllers/stores';
 const ACCESS_HISTORY_KEY = 'accessHistory';
 const cacheKeepCount = {
     LOCAL_STORAGE: 1,
-    INDEXED_DB: 5,
+    INDEXED_DB: 3,
 };
 const errorMessages = {
     DESTROY_FAILED: 'Could not delete user storage',
 };
 
-async function addUserCacheToHistory(
+async function addUserCacheRecordToAccessHistory(
     mainStorageController: typeof StorageController,
 ) {
     const { name: currentStorageName } = getUserStorageController();
@@ -67,6 +67,6 @@ async function removeCaches(
 export async function upkeepUserCaches(
 ) {
     const mainStorageController = getMainStorageController();
-    const updatedHistory = await addUserCacheToHistory(mainStorageController);
+    const updatedHistory = await addUserCacheRecordToAccessHistory(mainStorageController);
     await removeCaches(updatedHistory, mainStorageController);
 }

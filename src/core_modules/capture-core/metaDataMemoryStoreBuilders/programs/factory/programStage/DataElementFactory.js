@@ -8,7 +8,7 @@ import type {
     CachedDataElement,
     CachedProgramStageDataElement,
     CachedOptionSet,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import { DataElement, DateDataElement, dataElementTypes, Section } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';

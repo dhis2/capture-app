@@ -13,27 +13,28 @@ import { initializeAsync } from './init';
 import { getStore } from '../../store/getStore';
 
 type Props = {
-    onRunApp: (store: ReduxStore) => void,
+    onRunApp: (store: PlainReduxStore) => void,
     onCacheExpired: Function,
 };
 
 const useApiUtils = () => {
     const dataEngine = useDataEngine();
-    const { serverVersion } = useConfig();
+    const { serverVersion, baseUrl } = useConfig();
     const { fromClientDate } = useTimeZoneConversion();
     return useMemo(() => ({
         querySingleResource: makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         mutate: dataEngine.mutate.bind(dataEngine),
         absoluteApiPath: buildUrl(dataEngine.link.config.baseUrl, dataEngine.link.versionedApiPath),
         serverVersion,
+        baseUrl,
         fromClientDate,
-    }), [dataEngine, serverVersion, fromClientDate]);
+    }), [dataEngine, serverVersion, baseUrl, fromClientDate]);
 };
 
 export const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
     const [loadError, setLoadError] = React.useState(null);
-    const { querySingleResource, mutate, absoluteApiPath, serverVersion, fromClientDate } = useApiUtils();
+    const { querySingleResource, mutate, absoluteApiPath, serverVersion, baseUrl, fromClientDate } = useApiUtils();
 
     const { navigate } = useNavigate();
 
@@ -48,12 +49,13 @@ export const AppLoader = (props: Props) => {
     const load = useCallback(async () => {
         try {
             initFeatureAvailability(serverVersion);
-            await initializeAsync(
+            await initializeAsync({
                 onCacheExpired,
                 querySingleResource,
-                serverVersion.minor,
-            );
-            const store = getStore(
+                serverVersion,
+                baseUrl,
+            });
+            const store = await getStore(
                 navigate, {
                     querySingleResource,
                     mutate,
@@ -61,7 +63,6 @@ export const AppLoader = (props: Props) => {
                     serverVersion,
                     fromClientDate,
                 },
-                // $FlowFixMe[prop-missing] automated comment
                 () => onRunApp(store));
         } catch (error) {
             let message = 'The application could not be loaded.';
@@ -88,6 +89,7 @@ export const AppLoader = (props: Props) => {
         navigate,
         serverVersion,
         fromClientDate,
+        baseUrl,
     ]);
 
     useEffect(() => {

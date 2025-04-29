@@ -12,7 +12,7 @@ import type
     CachedTrackedEntityType,
     CachedTrackedEntityTypeAttribute,
     CachedTrackedEntityTypeTranslation,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import type { ConstructorInput } from './trackedEntityTypeFactory.types';
 
 export class TrackedEntityTypeFactory {

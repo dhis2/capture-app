@@ -9,7 +9,7 @@ function isLangRTL(code) {
 }
 
 export async function cacheSystemSettings(
-    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, },
+    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, baseUrl: string},
     userSettings: { uiLocale: string, captureScope: Array<{id: string}>, searchScope: Array<{id: string}> },
 ) {
     const systemSettingsArray = [
@@ -43,6 +43,10 @@ export async function cacheSystemSettings(
             id: 'searchScope',
             // $FlowFixMe
             value: userSettings.searchScope.map(orgUnit => orgUnit.id),
+        },
+        {
+            id: 'baseUrl',
+            value: systemSettings.baseUrl,
         },
     ];
 

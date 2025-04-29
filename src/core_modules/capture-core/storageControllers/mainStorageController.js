@@ -1,43 +1,68 @@
 // @flow
 import { StorageController } from 'capture-core-utils/storage/StorageController';
+import { hashSHA256 } from 'capture-core-utils/hash';
 import { mainStores } from './stores';
+import type { ServerVersion, AdapterTypes } from './types';
 
 const MAIN_STORAGE_KEY = 'dhis2ca';
 
-function getMajorCacheVersion() {
-    const appMajorVersion = Number(process.env.REACT_APP_SERVER_VERSION);
-    return (appMajorVersion - 30) * 1000;
-}
+const compute4DigitVersionString = (version: number) => ((version % 9000) + 1000).toString();
 
-function getMinorCacheVersion() {
+const computeMinorVersionPart = minor => compute4DigitVersionString(minor - 39);
+const computePatchVersionPart = patch => compute4DigitVersionString(patch ?? 0);
+const computeTagVersionPart = tag => (tag === 'SNAPSHOT' ? '0' : '1');
+
+const computeServerCacheVersion = ({ minor, patch, tag }) =>
+    computeMinorVersionPart(minor) +
+    computePatchVersionPart(patch) +
+    computeTagVersionPart(tag);
+
+const computeAppCacheVersion = () => {
     const appCacheVersionAsString = process.env.REACT_APP_CACHE_VERSION;
     const appCacheVersion = Number(appCacheVersionAsString);
-    return appCacheVersion;
-}
+    return compute4DigitVersionString(appCacheVersion);
+};
 
-function getCacheVersion() {
-    const majorCacheVersion = getMajorCacheVersion();
-    const minorCacheVersion = getMinorCacheVersion();
-    return (majorCacheVersion + minorCacheVersion);
-}
+const getCacheVersion = serverVersion => computeServerCacheVersion(serverVersion) + computeAppCacheVersion();
 
-function createStorageController(storageName: string, AdapterClasses: Array<any>, onCacheExpired: Function) {
-    const appCacheVersion = getCacheVersion();
-    const storageController =
-        new StorageController(
-            storageName,
-            appCacheVersion,
-            {
-                Adapters: AdapterClasses,
-                objectStores: Object.keys(mainStores).map(key => mainStores[key]),
-                onCacheExpired,
-            },
-        );
-    return storageController;
-}
+const createStorageController = async ({
+    baseUrl,
+    adapterTypes,
+    onCacheExpired,
+    serverVersion,
+}: {
+    baseUrl: string,
+    adapterTypes: Array<AdapterTypes>,
+    onCacheExpired: Function,
+    serverVersion: ServerVersion,
+}) => new StorageController(
+    `${MAIN_STORAGE_KEY}-${await hashSHA256(baseUrl)}`,
+    getCacheVersion(serverVersion),
+    {
+        Adapters: adapterTypes,
+        objectStores: Object.keys(mainStores).map(key => mainStores[key]),
+        onCacheExpired,
+    },
+);
 
-export async function initMainControllerAsync(adapterTypes: Array<any>, onCacheExpired: Function) {
-    const mainStorageController = createStorageController(MAIN_STORAGE_KEY, adapterTypes, onCacheExpired);
+export const initMainController = async ({
+    adapterTypes,
+    onCacheExpired,
+    serverVersion,
+    baseUrl,
+}: {
+    adapterTypes: Array<AdapterTypes>,
+    onCacheExpired: Function,
+    serverVersion: ServerVersion,
+    baseUrl: string,
+}) => {
+    const mainStorageController = await createStorageController({
+        baseUrl,
+        adapterTypes,
+        onCacheExpired,
+        serverVersion,
+    });
+
     let upgradeTempData;
     await mainStorageController.open(
         storage => storage
@@ -55,4 +80,4 @@ export async function initMainControllerAsync(adapterTypes: Array<any>, onCacheE
     );
 
     return mainStorageController;
-}
+};

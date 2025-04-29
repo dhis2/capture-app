@@ -105,10 +105,17 @@ declare module '@dhis2/app-runtime' {
         fromClientDate: (date?: string | Date | number | null) => DHIS2Date;
     };
 
+    declare export type ServerVersion = {
+        major: number,
+        minor: number,
+        patch?: ?number,
+        tag?: ?string,
+    };
+
     declare export function useConfig(): {|
         baseUrl: string,
         apiVersion: string,
-        serverVersion: { major: number, minor: number, patch?: number },
+        serverVersion: ServerVersion,
     |};
 
     declare export type ApiNetworkError = {|

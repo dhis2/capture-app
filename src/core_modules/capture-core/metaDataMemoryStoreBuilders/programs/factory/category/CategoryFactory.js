@@ -9,7 +9,7 @@ import type
 {
     ProgramCachedCategory,
     CachedCategory,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 
 export class CategoryFactory {
     cachedCategories: {[categoryId: string]: CachedCategory};

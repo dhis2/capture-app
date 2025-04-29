@@ -11,7 +11,7 @@ import type {
     CachedProgramTrackedEntityAttribute,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section, DataElement } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';

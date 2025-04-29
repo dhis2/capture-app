@@ -3,7 +3,7 @@ import { StorageController, IndexedDBAdapter } from 'capture-core-utils/storage'
 import { userStores } from './stores/index';
 
 function getStorageName(mainStorageName: string, userId: string) {
-    return mainStorageName + userId;
+    return `${mainStorageName}-${userId}`;
 }
 
 function getStores() {
@@ -48,31 +48,18 @@ const storeSpecificCreateActions = {
     },
 };
 
-export async function initUserControllerAsync(mainStorageController: typeof StorageController, currentUserId: string) {
+export async function initUserController(mainStorageController: typeof StorageController, currentUserId: string) {
     const userStorageController =
         createStorageController(mainStorageController, currentUserId);
 
-    let upgradeTempData;
     await userStorageController
-        .open(
-            storage => storage
-                .get(userStores.REDUX_PERSIST, 'reduxPersist:offline')
-                .then((data) => {
-                    upgradeTempData = data;
-                }),
-            (storage) => {
-                if (!upgradeTempData) {
-                    return null;
-                }
-                return storage
-                    .set(userStores.REDUX_PERSIST, upgradeTempData);
-            },
-            (objectStore, adapter) => {
+        .open({
+            onCreateObjectStore: (objectStore, adapter) => {
                 if (adapter === IndexedDBAdapter) {
                     storeSpecificCreateActions[objectStore.name] &&
                     storeSpecificCreateActions[objectStore.name](objectStore);
                 }
             },
-        );
+        });
     return userStorageController;
 }

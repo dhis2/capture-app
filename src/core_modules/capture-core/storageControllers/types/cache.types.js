@@ -1,6 +1,6 @@
 // @flow
 
-import { type Access } from '../metaData/Access';
+import { type Access } from '../../metaData/Access';
 
 type Translation = {
     property: string,

@@ -9,7 +9,7 @@ import type {
     CachedAttributeTranslation,
     CachedProgramTrackedEntityAttribute,
     CachedTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import {
     DataElement,
     DateDataElement,
