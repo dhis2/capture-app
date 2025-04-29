@@ -110,7 +110,7 @@ export const NewPage: ComponentType<{||}> = () => {
     );
 
     const [newPageKey, setNewPageKey] = useState();
-    const handleRefreshNewTeForm = () => {
+    const onOpenNewRegistrationPage = () => {
         setNewPageKey(uuid());
     };
 
@@ -124,7 +124,7 @@ export const NewPage: ComponentType<{||}> = () => {
                 trackedEntityName={trackedEntityType?.name}
                 teiDisplayName={teiDisplayName}
                 formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
-                handleRefreshNewTeForm={handleRefreshNewTeForm}
+                onOpenNewRegistrationPage={onOpenNewRegistrationPage}
             />
             <NewPageComponent
                 showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
