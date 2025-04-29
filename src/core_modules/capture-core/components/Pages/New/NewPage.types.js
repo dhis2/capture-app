@@ -35,6 +35,7 @@ export type ContainerProps = $ReadOnly<{|
   trackedEntityName?: string,
   teiDisplayName?: string,
   trackedEntityInstanceAttributes?: Array<InputAttribute>
+
 |}
 >
 
