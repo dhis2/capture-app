@@ -1,3 +1,10 @@
+## [102.0.1](https://github.com/dhis2/capture-app/compare/v102.0.0...v102.0.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* improve error handling metadata ([#4016](https://github.com/dhis2/capture-app/issues/4016)) ([8955604](https://github.com/dhis2/capture-app/commit/89556044dd4db88768824d4186e825916aad378c))
+
 # [102.0.0](https://github.com/dhis2/capture-app/compare/v101.33.3...v102.0.0) (2025-04-29)
 
 
