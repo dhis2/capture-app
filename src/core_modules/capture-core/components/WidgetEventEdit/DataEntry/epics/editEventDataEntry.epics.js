@@ -2,14 +2,15 @@
 import i18n from '@dhis2/d2-i18n';
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map, switchMap } from 'rxjs/operators';
+import { map, concatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramThrowIfNotFound } from '../../../../metaData';
+import { getProgramThrowIfNotFound, dataElementTypes } from '../../../../metaData';
+import { convertValue } from '../../../../converters/serverToClient';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -85,7 +86,7 @@ const runRulesForEditSingleEvent = async ({
             program,
             stage,
             orgUnit: coreOrgUnit,
-            currentEvent: { ...currentEvent, createdAt: apiCurrentEventOriginal.createdAt },
+            currentEvent: { ...currentEvent, createdAt: convertValue(apiCurrentEventOriginal.createdAt, dataElementTypes.DATETIME) },
             otherEvents: prepareEnrollmentEventsForRulesEngine(apiOtherEvents),
             enrollmentData: getEnrollmentForRulesEngine(enrollment),
             attributeValues: getAttributeValuesForRulesEngine(attributeValues, program.attributes),
@@ -123,7 +124,7 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
-        switchMap((action) => {
+        concatMap((action) => {
             const { dataEntryId, itemId, uid, programId } = action.payload;
             const runRulesForEditSingleEventPromise = runRulesForEditSingleEvent({
                 store,
@@ -147,7 +148,7 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
-        switchMap((action) => {
+        concatMap((action) => {
             const {
                 elementId,
                 value,

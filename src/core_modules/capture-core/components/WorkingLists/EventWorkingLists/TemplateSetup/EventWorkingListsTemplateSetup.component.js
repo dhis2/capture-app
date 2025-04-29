@@ -33,7 +33,7 @@ export const EventWorkingListsTemplateSetup = ({
             visibleColumnIds: columns && columns
                 .filter(({ visible }) => visible)
                 .map(({ id }) => id),
-            sortById,
+            sortById: columns.find(({ id }) => id === sortById)?.apiName || sortById,
             sortByDirection,
             programId: program.id,
         });
@@ -47,7 +47,7 @@ export const EventWorkingListsTemplateSetup = ({
             visibleColumnIds: columns && columns
                 .filter(({ visible }) => visible)
                 .map(({ id }) => id),
-            sortById,
+            sortById: columns.find(({ id }) => id === sortById)?.apiName || sortById,
             sortByDirection,
             clientId: uuid(),
             programId: program.id,

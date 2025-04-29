@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
+import { useLocationQuery } from 'capture-core/utils/routing';
 import {
     openViewEventPage,
     requestDeleteEvent,
@@ -17,6 +18,7 @@ import { convertToClientConfig } from '../helpers/eventFilters';
 export const EventWorkingListsReduxProvider = ({ storeId, program, programStage, orgUnitId, mainViewConfig }: Props) => {
     const dispatch = useDispatch();
     const dataEngine = useDataEngine();
+    const { orgUnitId: contextOrgUnitId } = useLocationQuery();
 
     const {
         currentTemplateId,
@@ -40,8 +42,8 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
 
     const onClickListRow = useCallback(({ id }) => {
         window.scrollTo(0, 0);
-        dispatch(openViewEventPage(id));
-    }, [dispatch]);
+        dispatch(openViewEventPage(id, contextOrgUnitId));
+    }, [dispatch, contextOrgUnitId]);
 
     const onDeleteEvent = useCallback((eventId: string) => {
         dispatch(requestDeleteEvent(eventId, storeId));
