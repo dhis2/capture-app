@@ -51,6 +51,7 @@ const BulkDataEntryActionDropdownButtonPlain = ({
             small
             onClick={() => setIsOpen(prev => !prev)}
             className={classes.container}
+            dataTest="dropdown-button-bulk-data-entry"
             component={
                 <>
                     <MenuSectionHeader label={i18n.t('Available bulk entry forms')} />

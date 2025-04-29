@@ -16,6 +16,14 @@ When('the user selects the {string} BulkDataEntry', (optionName) => {
     });
 });
 
+When('the user selects the {string} BulkDataEntry from the {string} dropdown', (optionName, dropdownButton) => {
+    cy.get('[data-test="dropdown-button-bulk-data-entry"]').contains(dropdownButton);
+    cy.get('[data-test="dropdown-button-bulk-data-entry"]').click();
+    cy.get('[data-test="dropdown-button-bulk-data-entry-popper"]').within(() => {
+        cy.contains(optionName).click();
+    });
+});
+
 When('the user navigates to {string} using the breadcrumb', (text) => {
     cy.get('[data-test="bulkDataEntry-breadcrumb"]').contains(text).click();
 });

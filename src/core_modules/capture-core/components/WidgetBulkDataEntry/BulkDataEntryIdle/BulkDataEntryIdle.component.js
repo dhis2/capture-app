@@ -32,8 +32,8 @@ const BulkDataEntryIdleComponenetPlain = ({
 }: PlainProps) => (
     <div className={classes.container} data-test="widget-bulk-data-entry-idle">
         <Widget header={i18n.t('Bulk data entry')} noncollapsible>
-            <DataTable className={classes.table}>
-                <DataTableBody>
+            <DataTable className={classes.table} dataTest="bulk-data-entry-table">
+                <DataTableBody dataTest="bulk-data-entry-body">
                     {bulkDataEntryConfigurations.map(config => (
                         <DataTableRow
                             key={config.dataKey}
