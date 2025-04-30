@@ -13,6 +13,9 @@ const styles = {
         backgroundColor: `${colors.grey100} !important`,
         border: `1px solid ${colors.grey500} !important`,
     },
+    flyoutMenu: {
+        width: '100%',
+    },
 };
 
 type Props = {
@@ -54,7 +57,7 @@ const BulkDataEntryActionDropdownButtonPlain = ({
             component={
                 <>
                     <MenuSectionHeader label={i18n.t('Available bulk entry forms')} />
-                    <FlyoutMenu dense maxWidth="250px">
+                    <FlyoutMenu dense maxWidth="250px" className={classes.flyoutMenu} >
                         {bulkDataEntryConfigurations.map(config => (
                             <MenuItem
                                 key={config.dataKey}
