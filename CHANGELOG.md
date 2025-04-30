@@ -1,3 +1,10 @@
+# [102.1.0](https://github.com/dhis2/capture-app/compare/v102.0.2...v102.1.0) (2025-04-30)
+
+
+### Features
+
+* [DHIS2-16991] Add clear button ([#4014](https://github.com/dhis2/capture-app/issues/4014)) ([80a7fa8](https://github.com/dhis2/capture-app/commit/80a7fa8dceb01b7fd29bd2e4e225fa8f937d8fa0))
+
 ## [102.0.2](https://github.com/dhis2/capture-app/compare/v102.0.1...v102.0.2) (2025-04-30)
 
 
