@@ -1,7 +1,7 @@
 // @flow
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
-import { map, filter, switchMap } from 'rxjs/operators';
+import { map, filter, concatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
@@ -185,7 +185,7 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
-        switchMap((action) => {
+        concatMap((action) => {
             const { dataEntryId, itemId, uid } = action.payload;
             const runRulesForNewSingleEventPromise = runRulesForNewSingleEvent({
                 store,
@@ -206,7 +206,7 @@ export const runRulesOnUpdateFieldForSingleEventEpic = (
         ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
-        switchMap((action) => {
+        concatMap((action) => {
             const { dataEntryId, itemId, uid, elementId, value, uiState } = action.payload;
             const fieldData: FieldData = {
                 elementId,

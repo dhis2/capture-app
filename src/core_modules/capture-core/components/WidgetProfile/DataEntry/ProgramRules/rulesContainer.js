@@ -23,7 +23,7 @@ const addProgramRules = (program, programRules) => {
     }));
 };
 
-const addRulesAndVariablesFromProgramIndicators = (program, programIndicators) => {
+const addRulesAndVariablesFromProgramIndicators = (rulesContainer, programIndicators, programId) => {
     const validProgramIndicators = programIndicators.filter((indicator) => {
         if (!indicator.expression) {
             log.error(
@@ -43,13 +43,13 @@ const addRulesAndVariablesFromProgramIndicators = (program, programIndicators) =
         ...programIndicator,
         programId: getProgramId(programIndicator),
     }));
-    const { rules, variables } = getRulesAndVariablesFromProgramIndicators(indicators, program.id);
+    const { rules, variables } = getRulesAndVariablesFromProgramIndicators(indicators, programId);
 
     if (variables) {
-        program.programRuleVariables = [...program.programRuleVariables, ...variables];
+        rulesContainer.programRuleVariables = [...rulesContainer.programRuleVariables, ...variables];
     }
     if (rules) {
-        program.programRules = [...program.programRules, ...rules];
+        rulesContainer.programRules = [...rulesContainer.programRules, ...rules];
     }
 };
 
@@ -70,7 +70,7 @@ export const buildRulesContainer = async ({
 
     programRuleVariables && addProgramVariables(rulesContainer, programRuleVariables);
     programRules && addProgramRules(rulesContainer, programRules);
-    programIndicators && addRulesAndVariablesFromProgramIndicators(rulesContainer, programIndicators);
+    programIndicators && addRulesAndVariablesFromProgramIndicators(rulesContainer, programIndicators, programAPI.id);
     rulesContainer.constants = constants;
 
     setRulesContainer(rulesContainer);

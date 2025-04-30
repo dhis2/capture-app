@@ -121,8 +121,8 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
 export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        map(({ payload: { eventId } }) => {
-            navigate(`/viewEvent?viewEventId=${eventId}`);
+        map(({ payload: { eventId: viewEventId, orgUnitId } }) => {
+            navigate(`/viewEvent?${buildUrlQueryString({ viewEventId, orgUnitId })}`);
             return resetLocationChange();
         }));
 
@@ -160,10 +160,10 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
 export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
-        switchMap(() => {
+        switchMap((action) => {
+            const orgUnitId = action.payload.orgUnitId;
             const state = store.value;
             const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
             const showaccessible = state.currentSelections.showaccessible;
 
             if (showaccessible && !orgUnitId) {
