@@ -1,3 +1,30 @@
+## [102.0.2](https://github.com/dhis2/capture-app/compare/v102.0.1...v102.0.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* [DHIS2-18854] Incorrect Display of Scheduled Events Count in Schedule Info Section ([#4027](https://github.com/dhis2/capture-app/issues/4027)) ([56c0f42](https://github.com/dhis2/capture-app/commit/56c0f427d443e98edfd9c6d41eb39e710713cb69))
+* [DHIS2-18952] Form name in widgets ([#4004](https://github.com/dhis2/capture-app/issues/4004)) ([847aed3](https://github.com/dhis2/capture-app/commit/847aed3b470eaeceb3c20ac6c9cb71619b61a099))
+
+## [102.0.1](https://github.com/dhis2/capture-app/compare/v102.0.0...v102.0.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* improve error handling metadata ([#4016](https://github.com/dhis2/capture-app/issues/4016)) ([8955604](https://github.com/dhis2/capture-app/commit/89556044dd4db88768824d4186e825916aad378c))
+
+# [102.0.0](https://github.com/dhis2/capture-app/compare/v101.33.3...v102.0.0) (2025-04-29)
+
+
+### Features
+
+* [DHIS2-19144] working lists performance options ([#3989](https://github.com/dhis2/capture-app/issues/3989)) ([c2f0a8c](https://github.com/dhis2/capture-app/commit/c2f0a8c975afc6d9d7900e8d2cd8defa223de460))
+
+
+### BREAKING CHANGES
+
+* Bump version to 102.0.0 to facilitate potential fixes for the bundled app in the 2.42 release
+
 ## [101.33.3](https://github.com/dhis2/capture-app/compare/v101.33.2...v101.33.3) (2025-04-08)
 
 
