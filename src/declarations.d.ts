@@ -4,6 +4,9 @@
 // Allow imports of JavaScript modules
 declare module '*.js';
 
+// Allow imports of CSS Modules
+declare module '*.css';
+
 // Allow imports from specific directories
 declare module 'src/components/*';
 declare module 'src/styles/*';

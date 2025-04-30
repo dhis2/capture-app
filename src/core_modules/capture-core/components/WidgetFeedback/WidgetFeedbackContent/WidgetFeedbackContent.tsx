@@ -1,5 +1,3 @@
-// @flow
-
 import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -30,8 +28,9 @@ const styles = {
     },
 };
 
+type Props = ContentType;
 
-const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: ContentType) => {
+const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Props): React.ReactElement => {
     if (!widgetData?.length) {
         return (
             <div
@@ -43,7 +42,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
         );
     }
 
-    const renderTextObject = (item: FilteredText) => (
+    const renderTextObject = (item: FilteredText): React.ReactElement => (
         <li
             className={classes.listItem}
             key={item.id}
@@ -52,7 +51,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
         </li>
     );
 
-    const renderKeyValue = (item: FilteredKeyValue) => (
+    const renderKeyValue = (item: FilteredKeyValue): React.ReactElement => (
         <li
             key={item.id}
             className={classes.listItem}
@@ -61,7 +60,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
         </li>
     );
 
-    const renderString = (item: string, index: number) => (
+    const renderString = (item: string, index: number): React.ReactElement => (
         <li
             key={index}
             className={classes.listItem}
@@ -78,10 +77,10 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
             <ul className={classes.unorderedList}>
                 {widgetData.map((rule: WidgetData, index: number) => {
                     if (typeof rule === 'object') {
-                        if (rule.key || rule.value) {
-                            return renderKeyValue(rule);
-                        } else if (rule.message) {
-                            return renderTextObject(rule);
+                        if ('key' in rule || 'value' in rule) {
+                            return renderKeyValue(rule as FilteredKeyValue);
+                        } else if ('message' in rule) {
+                            return renderTextObject(rule as FilteredText);
                         }
                     } else if (typeof rule === 'string') {
                         return renderString(rule, index);
@@ -93,4 +92,6 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
     );
 };
 
-export const WidgetFeedbackContent: ComponentType<$Diff<ContentType, CssClasses>> = withStyles(styles)(WidgetFeedbackContentComponent);
+type PropsWithoutClasses = Omit<ContentType, 'classes'>;
+
+export const WidgetFeedbackContent = withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<PropsWithoutClasses>;
