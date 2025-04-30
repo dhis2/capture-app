@@ -1,3 +1,22 @@
+## [102.0.1](https://github.com/dhis2/capture-app/compare/v102.0.0...v102.0.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* improve error handling metadata ([#4016](https://github.com/dhis2/capture-app/issues/4016)) ([8955604](https://github.com/dhis2/capture-app/commit/89556044dd4db88768824d4186e825916aad378c))
+
+# [102.0.0](https://github.com/dhis2/capture-app/compare/v101.33.3...v102.0.0) (2025-04-29)
+
+
+### Features
+
+* [DHIS2-19144] working lists performance options ([#3989](https://github.com/dhis2/capture-app/issues/3989)) ([c2f0a8c](https://github.com/dhis2/capture-app/commit/c2f0a8c975afc6d9d7900e8d2cd8defa223de460))
+
+
+### BREAKING CHANGES
+
+* Bump version to 102.0.0 to facilitate potential fixes for the bundled app in the 2.42 release
+
 ## [101.33.3](https://github.com/dhis2/capture-app/compare/v101.33.2...v101.33.3) (2025-04-08)
 
 
