@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import type { InputAttribute } from '../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
@@ -10,18 +9,23 @@ import {
 } from '../../../../metaData';
 
 type Props = {
-    teiId: string,
-    trackedEntityTypeId: string,
+    teiId: string;
+    trackedEntityTypeId: string;
+    programId?: string;
 };
 
 type Return = {
-    inheritedAttributes: Array<InputAttribute>,
-    isLoading: boolean,
+    inheritedAttributes: Array<InputAttribute>;
+    isLoading: boolean;
 };
-export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
-    const programId = useSelector(({ newRelationshipRegisterTei }) => newRelationshipRegisterTei.programId);
+
+export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId, programId: propsProgramId }: Props): Return => {
+    const reduxProgramId = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { programId: string } }) =>
+        newRelationshipRegisterTei.programId);
+    const programId = propsProgramId ?? reduxProgramId;
+
     const inheritedAttributeIds = useMemo(() => {
-        const attributeIds = new Set();
+        const attributeIds = new Set<string>();
 
         if (programId) {
             const program = getProgramFromProgramIdThrowIfNotFound(programId);
@@ -44,7 +48,6 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Prop
         return attributeIds;
     }, [programId, trackedEntityTypeId]);
 
-
     const { data, isLoading } = useApiDataQuery(
         ['inheritedAttributeValues', teiId, programId],
         {
@@ -56,8 +59,8 @@ export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Prop
             },
         }, {
             enabled: !!teiId,
-            select: (response) => {
-                const attributes = response.attributes || [];
+            select: (response: { attributes?: Array<{ attribute: string }> }) => {
+                const attributes = response.attributes ?? [];
                 return attributes
                     .filter(attribute => inheritedAttributeIds.has(attribute.attribute));
             },
