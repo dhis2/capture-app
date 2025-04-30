@@ -1,8 +1,6 @@
-// @flow
-
 import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import type { FilteredKeyValue, FilteredText, ContentType, WidgetData } from '../WidgetFeedback.types';
 
 const styles = {
@@ -30,8 +28,9 @@ const styles = {
     },
 };
 
+type Props = ContentType & WithStyles<typeof styles>;
 
-const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: ContentType) => {
+const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Props) => {
     if (!widgetData?.length) {
         return (
             <div
@@ -78,10 +77,10 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
             <ul className={classes.unorderedList}>
                 {widgetData.map((rule: WidgetData, index: number) => {
                     if (typeof rule === 'object') {
-                        if (rule.key || rule.value) {
-                            return renderKeyValue(rule);
-                        } else if (rule.message) {
-                            return renderTextObject(rule);
+                        if ('key' in rule || 'value' in rule) {
+                            return renderKeyValue(rule as FilteredKeyValue);
+                        } else if ('message' in rule) {
+                            return renderTextObject(rule as FilteredText);
                         }
                     } else if (typeof rule === 'string') {
                         return renderString(rule, index);
@@ -93,4 +92,5 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
     );
 };
 
-export const WidgetFeedbackContent: ComponentType<$Diff<ContentType, CssClasses>> = withStyles(styles)(WidgetFeedbackContentComponent);
+export const WidgetFeedbackContent =
+    withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<ContentType>;
