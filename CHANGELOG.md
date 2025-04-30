@@ -1,3 +1,11 @@
+## [102.0.2](https://github.com/dhis2/capture-app/compare/v102.0.1...v102.0.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* [DHIS2-18854] Incorrect Display of Scheduled Events Count in Schedule Info Section ([#4027](https://github.com/dhis2/capture-app/issues/4027)) ([56c0f42](https://github.com/dhis2/capture-app/commit/56c0f427d443e98edfd9c6d41eb39e710713cb69))
+* [DHIS2-18952] Form name in widgets ([#4004](https://github.com/dhis2/capture-app/issues/4004)) ([847aed3](https://github.com/dhis2/capture-app/commit/847aed3b470eaeceb3c20ac6c9cb71619b61a099))
+
 ## [102.0.1](https://github.com/dhis2/capture-app/compare/v102.0.0...v102.0.1) (2025-04-29)
 
 
