@@ -40,10 +40,12 @@ export const deriveAutoGenerateEvents = ({
         .map(
             ({
                 id: programStage,
+                reportDateToUse,
                 generatedByEnrollmentDate: generateScheduleDateByEnrollmentDate,
                 openAfterEnrollment,
                 minDaysFromStart,
             }) => {
+                const reportDate = reportDateToUse === 'enrollmentDate' ? enrolledAt : sanitizedOccurredAt;
                 const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate
                     ? enrolledAt
                     : sanitizedOccurredAt;
@@ -67,6 +69,7 @@ export const deriveAutoGenerateEvents = ({
                     programStage,
                     program: programId,
                     orgUnit: orgUnitId,
+                    ...(openAfterEnrollment ? { occurredAt: reportDate } : {}),
                 };
             },
         );
