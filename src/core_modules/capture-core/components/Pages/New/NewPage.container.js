@@ -45,7 +45,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { orgUnitId, programId, teiId } = useLocationQuery();
-    const program = programId && programCollection.get(programId);
+    const program = programId ? programCollection.get(programId) : undefined;
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
         selectedOrgUnitId: orgUnitId,
     });
@@ -113,6 +113,7 @@ export const NewPage: ComponentType<{||}> = () => {
             <TopBar
                 orgUnitId={orgUnitId}
                 programId={programId}
+                program={program}
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 teiId={teiId}
                 trackedEntityName={trackedEntityType?.name}
