@@ -1,3 +1,10 @@
+## [102.3.1](https://github.com/dhis2/capture-app/compare/v102.3.0...v102.3.1) (2025-05-01)
+
+
+### Bug Fixes
+
+* [DHIS2-19011] Forms retain values after search ([#4045](https://github.com/dhis2/capture-app/issues/4045)) ([48ff559](https://github.com/dhis2/capture-app/commit/48ff55914adf5a778ee5a27370ba5b92164c59bc))
+
 # [102.3.0](https://github.com/dhis2/capture-app/compare/v102.2.0...v102.3.0) (2025-05-01)
 
 
