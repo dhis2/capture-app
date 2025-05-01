@@ -1,3 +1,10 @@
+# [102.2.0](https://github.com/dhis2/capture-app/compare/v102.1.0...v102.2.0) (2025-05-01)
+
+
+### Features
+
+* [DHIS2-18382] Replace TE org.unit with the owner org. unit in workingList ([#4015](https://github.com/dhis2/capture-app/issues/4015)) ([1f66260](https://github.com/dhis2/capture-app/commit/1f6626020c7b56a48a21eb61e0c9e6915e58d0ca))
+
 # [102.1.0](https://github.com/dhis2/capture-app/compare/v102.0.2...v102.1.0) (2025-04-30)
 
 
