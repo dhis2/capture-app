@@ -6,12 +6,17 @@ import type { ContainerProps } from './SearchStatus.types';
 import { SearchStatus as SearchStatusComponent } from './SearchStatus.component';
 
 export const SearchStatus = (passOnProps: ContainerProps) => {
-    const { uniqueTEAName } = useSelector(
+    const { uniqueTEAName, currentSearchTerms } = useSelector(
         ({ searchDomain }) => ({
             uniqueTEAName: searchDomain.currentSearchInfo.uniqueTEAName,
+            currentSearchTerms: searchDomain.currentSearchInfo.currentSearchTerms,
         }),
         shallowEqual,
     );
 
-    return <SearchStatusComponent uniqueTEAName={uniqueTEAName} {...passOnProps} />;
+    return (<SearchStatusComponent
+        uniqueTEAName={uniqueTEAName}
+        currentSearchTerms={currentSearchTerms}
+        {...passOnProps}
+    />);
 };

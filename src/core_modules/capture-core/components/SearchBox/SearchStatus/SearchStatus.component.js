@@ -40,13 +40,13 @@ export const SearchStatusPlain = ({
     searchableFields,
     navigateToRegisterTrackedEntity,
     showInitialSearchBox,
-    fallbackTriggered,
     uniqueTEAName = '',
+    currentSearchTerms = [],
     trackedEntityName,
     classes,
 }: Props) => {
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
-        return <SearchResults availableSearchOption={availableSearchOption} fallbackTriggered={fallbackTriggered} />;
+        return <SearchResults availableSearchOption={availableSearchOption} />;
     }
 
     if (searchStatus === searchBoxStatus.NO_RESULTS) {
@@ -58,7 +58,7 @@ export const SearchStatusPlain = ({
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
-                        <Button type="button" onClick={navigateToRegisterTrackedEntity}>
+                        <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms)}>
                             {i18n.t(`Create new ${trackedEntityName}`)}
                         </Button>
                         <Button

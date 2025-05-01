@@ -25,7 +25,6 @@ export type PropsFromRedux ={|
 |}
 
 export type OwnProps ={|
-    fallbackTriggered: boolean,
     availableSearchOption: ?AvailableSearchOption,
 |}
 
@@ -33,7 +32,7 @@ export type DispatchersFromRedux = {|
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string, page: string, resultsPageSize: number |}) => void,
   startFallbackSearch: ({| programId: string, formId: string, resultsPageSize: number, page?: ?number |}) => void,
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page: string, resultsPageSize: number |}) => void,
-  handleCreateNew: () => void
+  handleCreateNew: (currentSearchTerms: CurrentSearchTerms) => void,
 |}
 
 export type Props = {|
