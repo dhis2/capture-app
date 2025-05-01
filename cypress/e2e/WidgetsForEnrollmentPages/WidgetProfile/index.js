@@ -24,7 +24,7 @@ Then(/^the user sees the edit profile modal/, () =>
     cy.get('[data-test="modal-edit-profile"]').within(() => {
         cy.contains('Edit Person').should('exist');
         cy.contains(
-            'Change information about this Person here. To change information about this enrollment, use the Edit button in the in the Enrollment box on this dashboard',
+            'Change information about this Person here. To change enrollment information, go to the Enrollment widget on this dashboard',
         ).should('exist');
         cy.contains('Save changes').should('exist');
         cy.contains('Cancel without saving').should('exist');
