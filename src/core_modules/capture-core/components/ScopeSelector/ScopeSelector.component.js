@@ -124,7 +124,8 @@ class ScopeSelectorClass extends Component<Props, State> {
                     selectedCategories={this.props.selectedCategories}
                     isUserInteractionInProgress={this.props.isUserInteractionInProgress}
                     formIsOpen={this.props.formIsOpen}
-                    isReadOnly={this.props.isReadOnly}
+                    isReadOnlyOrgUnit={this.props.isReadOnlyOrgUnit}
+                    orgUnitTooltip={this.props.orgUnitTooltip}
                 >
                     {this.props.children}
                 </QuickSelector>

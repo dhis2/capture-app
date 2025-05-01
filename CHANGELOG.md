@@ -1,3 +1,17 @@
+# [102.3.0](https://github.com/dhis2/capture-app/compare/v102.2.0...v102.3.0) (2025-05-01)
+
+
+### Features
+
+* [DHIS2-19190] Read Only for OrgUnit Selector ([#4013](https://github.com/dhis2/capture-app/issues/4013)) ([f6ba5c3](https://github.com/dhis2/capture-app/commit/f6ba5c3d0e937d9ee79d3a3ecf704b69cafc5d38))
+
+# [102.2.0](https://github.com/dhis2/capture-app/compare/v102.1.0...v102.2.0) (2025-05-01)
+
+
+### Features
+
+* [DHIS2-18382] Replace TE org.unit with the owner org. unit in workingList ([#4015](https://github.com/dhis2/capture-app/issues/4015)) ([1f66260](https://github.com/dhis2/capture-app/commit/1f6626020c7b56a48a21eb61e0c9e6915e58d0ca))
+
 # [102.1.0](https://github.com/dhis2/capture-app/compare/v102.0.2...v102.1.0) (2025-04-30)
 
 
