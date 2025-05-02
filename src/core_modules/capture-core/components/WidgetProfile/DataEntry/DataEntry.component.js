@@ -27,7 +27,7 @@ export const DataEntryComponent = ({
         <ModalTitle>{i18n.t(`Edit ${trackedEntityName}`)}</ModalTitle>
         <ModalContent>
             {i18n.t(
-                'Change information about this {{trackedEntityName}} here. To change enrollment information, go to the Enrollment widget on this dashboard',
+                'Change information about this {{trackedEntityName}} here. Information about this enrollment can be edited in the Enrollment widget.',
                 { trackedEntityName, interpolation: { escapeValue: false } },
             )}
             <DataEntry
