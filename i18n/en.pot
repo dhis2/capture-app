@@ -955,8 +955,8 @@ msgstr "Add relationship"
 msgid "No results found for "
 msgstr "No results found for "
 
-msgid "Choose an organisation unit"
-msgstr "Choose an organisation unit"
+msgid "Choose an organisation unit in the form below"
+msgstr "Choose an organisation unit in the form below"
 
 msgid "Clear selection"
 msgstr "Clear selection"
@@ -1367,6 +1367,9 @@ msgstr "Program or stage is invalid"
 msgid "Save note"
 msgstr "Save note"
 
+msgid "Edit {{trackedEntityName}}"
+msgstr "Edit {{trackedEntityName}}"
+
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
 "information about this enrollment, use the Edit button in the in the "
@@ -1728,8 +1731,8 @@ msgstr "Delete events"
 msgid "This cannot be undone. Are you sure you want to delete the selected events?"
 msgstr "This cannot be undone. Are you sure you want to delete the selected events?"
 
-msgid "{{trackedEntityName}} organisation unit"
-msgstr "{{trackedEntityName}} organisation unit"
+msgid "Owner organisation unit"
+msgstr "Owner organisation unit"
 
 msgid "Registration Date"
 msgstr "Registration Date"
