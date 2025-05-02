@@ -1,3 +1,10 @@
+## [102.3.2](https://github.com/dhis2/capture-app/compare/v102.3.1...v102.3.2) (2025-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-19441][DHIS2-19442] Missing translation ([#4058](https://github.com/dhis2/capture-app/issues/4058)) ([e86d8cf](https://github.com/dhis2/capture-app/commit/e86d8cf97a53726bfc53d5a48575aea5ee998298))
+
 ## [102.3.1](https://github.com/dhis2/capture-app/compare/v102.3.0...v102.3.1) (2025-05-01)
 
 
