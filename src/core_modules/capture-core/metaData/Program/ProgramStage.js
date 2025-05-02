@@ -25,7 +25,7 @@ export class ProgramStage {
     _generatedByEnrollmentDate: boolean;
     _repeatable: boolean;
     _hideDueDate: boolean;
-    _reportDateToUse: string;
+    _reportDateToUse: string | void;
     _minDaysFromStart: number;
     _icon: Icon | void;
     _dataElements: Array<CachedDataElement>;
@@ -159,13 +159,13 @@ export class ProgramStage {
         this._openAfterEnrollment = open;
     }
 
-    get reportDateToUse(): string {
+    get reportDateToUse(): string |  void {
         return this._reportDateToUse;
     }
 
-    set reportDateToUse(reportDate: string = 'enrolledAt') {
+    set reportDateToUse(reportDate: string |  void = undefined) {
         if (reportDate === 'false') {
-            this._reportDateToUse = 'enrolledAt';
+            this._reportDateToUse = undefined;
         } else {
             this._reportDateToUse = reportDate;
         }
