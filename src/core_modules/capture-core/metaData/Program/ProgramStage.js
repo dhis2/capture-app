@@ -159,11 +159,11 @@ export class ProgramStage {
         this._openAfterEnrollment = open;
     }
 
-    get reportDateToUse(): string |  void {
+    get reportDateToUse(): string | void {
         return this._reportDateToUse;
     }
 
-    set reportDateToUse(reportDate: string |  void = undefined) {
+    set reportDateToUse(reportDate: string | void = undefined) {
         if (reportDate === 'false') {
             this._reportDateToUse = undefined;
         } else {

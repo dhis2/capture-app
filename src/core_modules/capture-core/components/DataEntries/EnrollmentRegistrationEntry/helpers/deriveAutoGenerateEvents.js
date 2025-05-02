@@ -47,10 +47,10 @@ export const deriveAutoGenerateEvents = ({
             }) => {
                 const reportDateByKey: {| enrollmentDate: string, incidentDate: string |} = {
                     enrollmentDate: enrolledAt,
-                    incidentDate:  sanitizedOccurredAt,
+                    incidentDate: sanitizedOccurredAt,
                 };
-                const reportDate = reportDateToUse && reportDateByKey[reportDateToUse]
-                
+                const reportDate = reportDateToUse && reportDateByKey[reportDateToUse];
+
                 const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate
                     ? enrolledAt
                     : sanitizedOccurredAt;
