@@ -1,9 +1,12 @@
 // @flow
-import { hasValue } from 'capture-core-utils/validators/form';
+import { hasValue, isExpiredPeriod } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import { isValidDate } from '../../../../utils/validation/validators/form';
 
-const preValidateDate = (value?: ?string, internalComponentError?: ?{error: ?string, errorCode: ?string}) => {
+const preValidateDate = (
+    value?: ?string,
+    internalComponentError?: ?{error: ?string, errorCode: ?string},
+) => {
     if (!value) {
         return true;
     }
@@ -11,17 +14,31 @@ const preValidateDate = (value?: ?string, internalComponentError?: ?{error: ?str
     return isValidDate(value, internalComponentError);
 };
 
-export const getEventDateValidatorContainers = () => {
-    const validatorContainers = [
-        {
-            validator: hasValue,
-            errorMessage:
-                i18n.t('A value is required'),
-        },
-        {
-            validator: preValidateDate,
-            errorMessage: i18n.t('Please provide a valid date'),
-        },
-    ];
-    return validatorContainers;
+const validateNotExpired = (
+    value?: ?string,
+    props: Object,
+) => {
+    if (!value) {
+        return true;
+    }
+
+    console.log(props);
+
+    return isExpiredPeriod(value);
 };
+
+export const getEventDateValidatorContainers = (props: Object) => [
+    {
+        validator: hasValue,
+        errorMessage: i18n.t('A value is required'),
+    },
+    {
+        validator: preValidateDate,
+        errorMessage: i18n.t('Please provide a valid date'),
+    },
+    {
+        validator: (value: string) => validateNotExpired(value, props),
+        errorMessage: i18n.t('This date is before the first valid date'),
+    },
+];
+
