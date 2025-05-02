@@ -11,6 +11,7 @@ import {
 import { useCurrentTrackedEntityTypeId } from '../../hooks';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import { usePreselectedProgram } from './hooks';
+import { setPrepopulateDataOnNewPage } from '../Pages/New/NewPage.actions';
 
 export const SearchBox = ({ programId }: { programId: string }) => {
     const dispatch = useDispatch();
@@ -23,7 +24,8 @@ export const SearchBox = ({ programId }: { programId: string }) => {
     const dispatchCleanSearchRelatedData = useCallback(
         () => { dispatch(cleanSearchRelatedData()); },
         [dispatch]);
-    const dispatchNavigateToNewTrackedEntityPage = useCallback(() => {
+    const dispatchNavigateToNewTrackedEntityPage = useCallback((currentSearchTerms) => {
+        dispatch(setPrepopulateDataOnNewPage(currentSearchTerms));
         dispatch(navigateToNewTrackedEntityPage());
     }, [dispatch]);
 

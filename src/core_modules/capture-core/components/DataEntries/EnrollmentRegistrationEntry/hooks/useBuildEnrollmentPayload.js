@@ -150,6 +150,7 @@ export const useBuildEnrollmentPayload = ({
             programId,
             orgUnitId,
             attributeCategoryOptions,
+            occurredAt,
         });
 
         const redirect = getRedirectIds({
