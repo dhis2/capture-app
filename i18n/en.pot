@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-08T13:38:13.094Z\n"
-"PO-Revision-Date: 2025-04-08T13:38:13.094Z\n"
+"POT-Creation-Date: 2025-04-25T07:14:24.326Z\n"
+"PO-Revision-Date: 2025-04-25T07:14:24.326Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1363,6 +1363,9 @@ msgstr "Program or stage is invalid"
 
 msgid "Save note"
 msgstr "Save note"
+
+msgid "Edit {{trackedEntityName}}"
+msgstr "Edit {{trackedEntityName}}"
 
 msgid ""
 "Change information about this {{trackedEntityName}} here. To change "
