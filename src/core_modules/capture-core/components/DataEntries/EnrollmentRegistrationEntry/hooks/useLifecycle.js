@@ -25,7 +25,7 @@ export const useLifecycle = (
     const program = programId && getProgramThrowIfNotFound(programId);
     const ready =
         useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]) && !!orgUnit && dataEntryReadyRef.current === true;
-    const searchTerms = useSelector(({ searchDomain }) => searchDomain.currentSearchInfo.currentSearchTerms);
+    const searchTerms = useSelector(({ newPage }) => newPage.prepopulatedData);
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const {

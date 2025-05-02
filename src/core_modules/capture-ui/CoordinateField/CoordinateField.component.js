@@ -253,15 +253,15 @@ export class CoordinateField extends React.Component<Props, State> {
     }
 
     renderClearButton = () => {
-        const { shrinkDisabled, disabled } = this.props;
-        const clearIconClass = shrinkDisabled ? defaultClasses.clearIcon : defaultClasses.clearIconWithMargin;
+        const { disabled } = this.props;
         return (
-            <div className={clearIconClass}>
-                <IconButton style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }} disabled={!!disabled} onClick={this.handleClear}>
-                    <IconCross24 />
-                </IconButton>
-            </div>
-
+            <IconButton
+                className={defaultClasses.clearIcon}
+                disabled={!!disabled}
+                onClick={this.handleClear}
+            >
+                <IconCross24 />
+            </IconButton>
         );
     }
 

@@ -69,6 +69,7 @@ export const deriveAutoGenerateEvents = ({
                 return {
                     ...eventAttributeCategoryOptions,
                     status: 'SCHEDULE',
+                    occurredAt: reportDate,
                     scheduledAt,
                     event: generateUID(),
                     programStage,

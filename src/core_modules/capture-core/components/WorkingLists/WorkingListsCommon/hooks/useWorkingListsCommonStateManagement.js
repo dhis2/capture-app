@@ -60,7 +60,7 @@ import type {
 
 const useTemplates = (
     dispatch: ReduxDispatch,
-    { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
+    { storeId, workingListsType, mainViewConfig }: { storeId: string, workingListsType: string, mainViewConfig?: Object}) => {
     const templateState = useSelector(({ workingListsTemplates }) => {
         const {
             selectedTemplateId: currentTemplateId,
@@ -83,7 +83,12 @@ const useTemplates = (
             const programStageId = programStageIdArg || selectedTemplate?.criteria?.programStage;
             return dispatch(selectTemplate(templateId, storeId, programStageId));
         },
-        onLoadTemplates: (...args) => dispatch(fetchTemplates(...args, storeId, workingListsType)),
+        onLoadTemplates: (programId: string) => dispatch(fetchTemplates({
+            programId,
+            storeId,
+            workingListsType,
+            mainViewConfig,
+        })),
         onCancelLoadTemplates: () => dispatch(fetchTemplatesCancel(storeId)),
         onAddTemplate: (name: string, criteria: Object, data: Object, callBacks?: Callbacks) =>
             dispatch(addTemplate(
@@ -115,7 +120,7 @@ const useTemplates = (
         onUpdateTemplate: UpdateTemplate,
         onDeleteTemplate: DeleteTemplate,
         onSetTemplateSharingSettings: SetTemplateSharingSettings,
-    |}), [storeId, dispatch, workingListsType, templateState.templates]);
+    |}), [storeId, dispatch, workingListsType, templateState.templates, mainViewConfig]);
 
     return {
         ...templateState,
@@ -278,15 +283,25 @@ const useWorkingListsContext = (dispatch: ReduxDispatch, { storeId }: { storeId:
     };
 };
 
-export const useWorkingListsCommonStateManagement = ((storeId: string, workingListsType: string, program: Program) => {
+export const useWorkingListsCommonStateManagement = (
+    storeId: string,
+    workingListsType: string,
+    program: Program,
+    mainViewConfig?: Object,
+) => {
     const dispatch = useDispatch();
     const context = useWorkingListsContext(dispatch, { storeId, workingListsType });
-    const templates = useTemplates(dispatch, { storeId, workingListsType });
-    const view = useView(dispatch, program.categoryCombination && program.categoryCombination.id, { storeId, workingListsType });
+    const templates = useTemplates(dispatch, { storeId, workingListsType, mainViewConfig });
+    const view = useView(
+        dispatch,
+        program.categoryCombination && program.categoryCombination.id, {
+            storeId,
+            workingListsType,
+        });
 
     return {
         ...templates,
         ...view,
         ...context,
     };
-});
+};
