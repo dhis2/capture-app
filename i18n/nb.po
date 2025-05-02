@@ -1403,9 +1403,6 @@ msgstr "Lagre endringer"
 msgid "Profile"
 msgstr "Profil"
 
-msgid "Edit {{trackedEntityName}}"
-msgstr "Endre {{trackedEntityName}}"
-
 msgid "There is a problem with this form"
 msgstr "Det er et problem med dette skjemaet"
 
