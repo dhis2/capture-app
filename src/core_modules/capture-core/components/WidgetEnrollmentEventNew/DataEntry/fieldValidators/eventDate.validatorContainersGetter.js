@@ -1,5 +1,5 @@
 // @flow
-import { hasValue, isExpiredPeriod } from 'capture-core-utils/validators/form';
+import { hasValue, isValidPeriod } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import { isValidDate } from '../../../../utils/validation/validators/form';
 
@@ -21,10 +21,7 @@ const validateNotExpired = (
     if (!value) {
         return true;
     }
-
-    console.log(props);
-
-    return isExpiredPeriod(value);
+    return isValidPeriod(value, props);
 };
 
 export const getEventDateValidatorContainers = (props: Object) => [
@@ -38,7 +35,7 @@ export const getEventDateValidatorContainers = (props: Object) => [
     },
     {
         validator: (value: string) => validateNotExpired(value, props),
-        errorMessage: i18n.t('This date is before the first valid date'),
+        errorMessage: i18n.t('The date entered belongs to an expired period. Enter a date after.'),
     },
 ];
 

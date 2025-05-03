@@ -1,8 +1,6 @@
 // @flow
-import {
-    getFixedPeriodByDate,
-    convertToIso8601,
-} from '@dhis2/multi-calendar-dates';
+import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
+import { dateUtils } from '../../../capture-core/rules/converters';
 
 
 /* const useExpiredPeriod = ({ programId }) => {
@@ -29,42 +27,32 @@ import {
 
 const program = {
     expiryPeriodType: 'MONTHLY',
-    expiryDays: 2,
+    expiryDays: 3,
 };
 
-const getExpiryDate = (
+const isExpiredPeriod = (
     expiryPeriodType?: ?string,
     expiryDays: number,
     reportDate: string,
-): ?string => {
-    console.log('reportDate', reportDate);
-
+) => {
     const period = getFixedPeriodByDate({
         periodType: expiryPeriodType,
         date: reportDate,
         calendar: 'gregory',
         locale: 'en',
     });
-    console.log('period', period);
+    const today = dateUtils.getToday();
+    const endDate = period.endDate;
+    const expiryDate = dateUtils.addDays(endDate, expiryDays);
+    const isTodayBeforeExpiryDate = dateUtils.compareDates(today, expiryDate) <= 0;
 
-    const startDate = convertToIso8601(period.startDate, 'gregory');
-    console.log('startDate', startDate);
-    const expiry = startDate.add({ days: expiryDays });
-
-
-    console.log('expiryDate', expiry);
-
-
-    return expiry;
+    return !isTodayBeforeExpiryDate;
 };
 
-export const isExpiredPeriod = (reportDate: string) => {
+export const isValidPeriod = (reportDate: string, props: Object) => {
+    const { programId } = props;
+    console.log('programId', programId);
     const { expiryPeriodType, expiryDays } = program;
-    const expiryDate = getExpiryDate(expiryPeriodType, expiryDays, reportDate);
 
-    if (!expiryDate) {
-        return false;
-    }
-
-    return true;
+    return isExpiredPeriod(expiryPeriodType, expiryDays, reportDate);
 };
