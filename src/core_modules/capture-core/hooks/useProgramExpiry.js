@@ -1,4 +1,5 @@
 // @flow
+import { toClientExpiryPeriod } from '../components/DataEntry/constants/expiryPeriod.const';
 import { useApiMetadataQuery } from '../utils/reactQueryHelpers';
 
 export const useProgramExpiry = (programId: string) => {
@@ -13,7 +14,7 @@ export const useProgramExpiry = (programId: string) => {
     );
 
     return {
-        expiryPeriodType: data?.expiryPeriodType,
+        expiryPeriodType: toClientExpiryPeriod(data?.expiryPeriodType),
         expiryDays: data?.expiryDays,
         expiryValuesLoading: isLoading,
     };
