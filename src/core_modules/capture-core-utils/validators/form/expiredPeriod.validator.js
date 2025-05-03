@@ -2,7 +2,7 @@
 import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
 import { dateUtils } from '../../../capture-core/rules/converters';
 
-export const isExpiredPeriod = (
+export const isValidPeriod = (
     reportDate: string,
     props: Object,
 ) => {
@@ -22,7 +22,7 @@ export const isExpiredPeriod = (
 
     if (programExpiryDays) {
         const expiryDate = dateUtils.addDays(endDate, programExpiryDays);
-        return dateUtils.compareDates(today, expiryDate) > 0;
+        return dateUtils.compareDates(today, expiryDate) <= 0;
     }
-    return dateUtils.compareDates(today, endDate) > 0;
+    return dateUtils.compareDates(today, endDate) <= 0;
 };
