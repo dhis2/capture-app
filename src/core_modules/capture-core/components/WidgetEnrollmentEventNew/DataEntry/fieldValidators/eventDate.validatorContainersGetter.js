@@ -1,5 +1,5 @@
 // @flow
-import { hasValue, isValidPeriod } from 'capture-core-utils/validators/form';
+import { hasValue, isExpiredPeriod } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import { isValidDate } from '../../../../utils/validation/validators/form';
 
@@ -21,7 +21,7 @@ const validateNotExpired = (
     if (!value) {
         return true;
     }
-    return isValidPeriod(value, props);
+    return isExpiredPeriod(value, props);
 };
 
 export const getEventDateValidatorContainers = (props: Object) => [
