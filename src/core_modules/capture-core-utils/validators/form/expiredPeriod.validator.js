@@ -14,15 +14,17 @@ export const isValidPeriod = (
         locale: 'en',
     });
     if (!period) {
-        return false;
+        return { isValid: false, expiryDate: null };
     }
 
     const today = dateUtils.getToday();
     const endDate = period.endDate;
 
-    if (programExpiryDays) {
-        const expiryDate = dateUtils.addDays(endDate, programExpiryDays);
-        return dateUtils.compareDates(today, expiryDate) <= 0;
-    }
-    return dateUtils.compareDates(today, endDate) <= 0;
+    const expiryDate = programExpiryDays
+        ? dateUtils.addDays(endDate, programExpiryDays)
+        : endDate;
+
+    const isValid = dateUtils.compareDates(today, expiryDate) <= 0;
+
+    return { isValid, expiryDate };
 };
