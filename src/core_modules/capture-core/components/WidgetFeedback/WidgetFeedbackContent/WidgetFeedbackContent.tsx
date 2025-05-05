@@ -77,11 +77,10 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
             <ul className={classes.unorderedList}>
                 {widgetData.map((rule: WidgetData, index: number) => {
                     if (typeof rule === 'object') {
-                        const ruleObj = rule as any;
-                        if (ruleObj.key || ruleObj.value) {
-                            return renderKeyValue(ruleObj as FilteredKeyValue);
-                        } else if (ruleObj.message) {
-                            return renderTextObject(ruleObj as FilteredText);
+                        if ('key' in rule || 'value' in rule) {
+                            return renderKeyValue(rule as FilteredKeyValue);
+                        } else if ('message' in rule) {
+                            return renderTextObject(rule as FilteredText);
                         }
                     } else if (typeof rule === 'string') {
                         return renderString(rule, index);
