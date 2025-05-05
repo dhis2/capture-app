@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import type { CachedBulkDataEntry } from '../../../../utils/cachedDataHooks/useBulkDataEntryFromIndexedDB';
 import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsBase/BulkActionBar';
 import { CompleteAction, DeleteAction } from './Actions';
 import type { ProgramStage } from '../../../../metaData';
@@ -13,7 +12,7 @@ type Props = {|
     removeRowsFromSelection: (rows: Array<string>) => void,
     programId?: string,
     setShowBulkDataEntryPlugin?: (show: boolean) => void,
-    cachedBulkDataEntry?: ?CachedBulkDataEntry,
+    bulkDataEntryIsActive?: boolean,
 |}
 
 export const EventBulkActions = ({
@@ -24,7 +23,7 @@ export const EventBulkActions = ({
     onUpdateList,
     programId,
     setShowBulkDataEntryPlugin,
-    cachedBulkDataEntry,
+    bulkDataEntryIsActive,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
 
@@ -47,7 +46,7 @@ export const EventBulkActions = ({
             <CompleteAction
                 selectedRows={selectedRows}
                 stageDataWriteAccess={stage.access.data.write}
-                bulkDataEntryIsActive={Boolean(cachedBulkDataEntry?.activeList)}
+                bulkDataEntryIsActive={bulkDataEntryIsActive}
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
             />
@@ -55,7 +54,7 @@ export const EventBulkActions = ({
             <DeleteAction
                 selectedRows={selectedRows}
                 stageDataWriteAccess={stage.access.data.write}
-                bulkDataEntryIsActive={Boolean(cachedBulkDataEntry?.activeList)}
+                bulkDataEntryIsActive={bulkDataEntryIsActive}
                 onUpdateList={onUpdateList}
             />
         </BulkActionBar>
