@@ -15,7 +15,7 @@ import type { Props } from './eventWorkingListsReduxProvider.types';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/eventFilters';
 
-export const EventWorkingListsReduxProvider = ({ storeId, program, programStage, orgUnitId }: Props) => {
+export const EventWorkingListsReduxProvider = ({ storeId, program, programStage, orgUnitId, mainViewConfig }: Props) => {
     const dispatch = useDispatch();
     const dataEngine = useDataEngine();
     const { orgUnitId: contextOrgUnitId } = useLocationQuery();
@@ -29,7 +29,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
         onClearFilters,
         onUpdateDefaultTemplate,
         ...commonStateManagementRestProps
-    } = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
+    } = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program, mainViewConfig);
 
     const currentTemplate = currentTemplateId && templates &&
     templates.find(template => template.id === currentTemplateId);
@@ -49,7 +49,24 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
         dispatch(requestDeleteEvent(eventId, storeId));
     }, [dispatch, storeId]);
 
-    const injectDownloadRequestToLoadView = useCallback(
+    const getLockedFilters = useCallback((selectedTemplate: Object) => {
+        if (!selectedTemplate.isDefault) {
+            const { criteria } = templates.find(({ isDefault }) => isDefault);
+            const lockedFilters = Object.keys(criteria).reduce((acc, key) => {
+                const value = criteria[key];
+                if (value?.lockedAll) {
+                    acc[key] = value;
+                }
+                return acc;
+            }, {});
+
+            return lockedFilters;
+        }
+
+        return {};
+    }, [templates]);
+
+    const handleLoadView = useCallback(
         async (selectedTemplate: Object, context: Object, meta: Object) => {
             const eventQueryCriteria = selectedTemplate?.nextCriteria || selectedTemplate?.criteria;
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
@@ -66,9 +83,14 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
                 },
                 meta: { columnsMetaForDataFetching: meta.columnsMetaForDataFetching },
             });
-            return onLoadView(selectedTemplate, { ...context, currentRequest }, meta);
+
+            return onLoadView(
+                selectedTemplate,
+                { ...context, currentRequest, lockedFilters: getLockedFilters(selectedTemplate) },
+                meta,
+            );
         },
-        [onLoadView, orgUnitId, storeId, program, dataEngine],
+        [onLoadView, orgUnitId, storeId, program, dataEngine, getLockedFilters],
     );
 
     const injectDownloadRequestToUpdateList = useCallback(
@@ -101,7 +123,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, program, programStage,
             templates={templates}
             lastIdDeleted={lastEventIdDeleted}
             onClickListRow={onClickListRow}
-            onLoadView={injectDownloadRequestToLoadView}
+            onLoadView={handleLoadView}
             onUpdateList={injectDownloadRequestToUpdateList}
             onDeleteEvent={onDeleteEvent}
             downloadRequest={downloadRequest}

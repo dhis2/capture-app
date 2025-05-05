@@ -1,3 +1,65 @@
+## [102.3.2](https://github.com/dhis2/capture-app/compare/v102.3.1...v102.3.2) (2025-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-19441][DHIS2-19442] Missing translation ([#4058](https://github.com/dhis2/capture-app/issues/4058)) ([e86d8cf](https://github.com/dhis2/capture-app/commit/e86d8cf97a53726bfc53d5a48575aea5ee998298))
+
+## [102.3.1](https://github.com/dhis2/capture-app/compare/v102.3.0...v102.3.1) (2025-05-01)
+
+
+### Bug Fixes
+
+* [DHIS2-19011] Forms retain values after search ([#4045](https://github.com/dhis2/capture-app/issues/4045)) ([48ff559](https://github.com/dhis2/capture-app/commit/48ff55914adf5a778ee5a27370ba5b92164c59bc))
+
+# [102.3.0](https://github.com/dhis2/capture-app/compare/v102.2.0...v102.3.0) (2025-05-01)
+
+
+### Features
+
+* [DHIS2-19190] Read Only for OrgUnit Selector ([#4013](https://github.com/dhis2/capture-app/issues/4013)) ([f6ba5c3](https://github.com/dhis2/capture-app/commit/f6ba5c3d0e937d9ee79d3a3ecf704b69cafc5d38))
+
+# [102.2.0](https://github.com/dhis2/capture-app/compare/v102.1.0...v102.2.0) (2025-05-01)
+
+
+### Features
+
+* [DHIS2-18382] Replace TE org.unit with the owner org. unit in workingList ([#4015](https://github.com/dhis2/capture-app/issues/4015)) ([1f66260](https://github.com/dhis2/capture-app/commit/1f6626020c7b56a48a21eb61e0c9e6915e58d0ca))
+
+# [102.1.0](https://github.com/dhis2/capture-app/compare/v102.0.2...v102.1.0) (2025-04-30)
+
+
+### Features
+
+* [DHIS2-16991] Add clear button ([#4014](https://github.com/dhis2/capture-app/issues/4014)) ([80a7fa8](https://github.com/dhis2/capture-app/commit/80a7fa8dceb01b7fd29bd2e4e225fa8f937d8fa0))
+
+## [102.0.2](https://github.com/dhis2/capture-app/compare/v102.0.1...v102.0.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* [DHIS2-18854] Incorrect Display of Scheduled Events Count in Schedule Info Section ([#4027](https://github.com/dhis2/capture-app/issues/4027)) ([56c0f42](https://github.com/dhis2/capture-app/commit/56c0f427d443e98edfd9c6d41eb39e710713cb69))
+* [DHIS2-18952] Form name in widgets ([#4004](https://github.com/dhis2/capture-app/issues/4004)) ([847aed3](https://github.com/dhis2/capture-app/commit/847aed3b470eaeceb3c20ac6c9cb71619b61a099))
+
+## [102.0.1](https://github.com/dhis2/capture-app/compare/v102.0.0...v102.0.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* improve error handling metadata ([#4016](https://github.com/dhis2/capture-app/issues/4016)) ([8955604](https://github.com/dhis2/capture-app/commit/89556044dd4db88768824d4186e825916aad378c))
+
+# [102.0.0](https://github.com/dhis2/capture-app/compare/v101.33.3...v102.0.0) (2025-04-29)
+
+
+### Features
+
+* [DHIS2-19144] working lists performance options ([#3989](https://github.com/dhis2/capture-app/issues/3989)) ([c2f0a8c](https://github.com/dhis2/capture-app/commit/c2f0a8c975afc6d9d7900e8d2cd8defa223de460))
+
+
+### BREAKING CHANGES
+
+* Bump version to 102.0.0 to facilitate potential fixes for the bundled app in the 2.42 release
+
 ## [101.33.3](https://github.com/dhis2/capture-app/compare/v101.33.2...v101.33.3) (2025-04-08)
 
 

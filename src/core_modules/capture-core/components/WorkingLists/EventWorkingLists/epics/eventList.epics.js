@@ -24,8 +24,19 @@ export const initEventListEpic = (
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
             const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
-            const { programId, orgUnitId, categories, lastTransaction, programStageId } = action.payload.context;
-            const eventQueryCriteria = selectedTemplate.nextCriteria || selectedTemplate.criteria;
+            const {
+                programId,
+                orgUnitId,
+                categories,
+                lastTransaction,
+                programStageId,
+                lockedFilters,
+            } = action.payload.context;
+
+            const eventQueryCriteria = {
+                ...(selectedTemplate.nextCriteria || selectedTemplate.criteria),
+                ...lockedFilters,
+            };
             const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                 ? 'orgUnitMode'
                 : 'ouMode';
