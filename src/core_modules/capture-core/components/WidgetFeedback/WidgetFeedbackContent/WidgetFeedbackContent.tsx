@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
-import { withStyles, WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import type { FilteredKeyValue, FilteredText, ContentType, WidgetData } from '../WidgetFeedback.types';
 
 const styles = {
@@ -92,4 +92,5 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
     );
 };
 
-export const WidgetFeedbackContent = withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<Omit<ContentType, 'classes'>>;
+export const WidgetFeedbackContent =
+    withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<ContentType>;
