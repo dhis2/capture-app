@@ -48,7 +48,7 @@ export const convertToClientTeis = (
 
             const programOwner = tei.programOwners.find(({ program }) => program === programId)?.orgUnit;
             if (programOwner) {
-                record.programOwner = programOwner;
+                record.programOwnerId = programOwner;
             }
 
             return {

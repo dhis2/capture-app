@@ -2,16 +2,16 @@
 import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { useQueryClient } from 'react-query';
-import { setBulkDataEntry } from 'capture-core/MetaDataStoreUtils/bulkDataEntry';
-import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import { DropdownButton, MenuItem, MenuSectionHeader, FlyoutMenu, colors } from '@dhis2/ui';
-import { useBulkDataEntryConfigurations } from '../../../../../WidgetBulkDataEntry';
+import { useBulkDataEntryConfigurations, useActiveBulkDataEntryList } from '../../../../../WidgetBulkDataEntry';
 
 const styles = {
     container: {
         backgroundColor: `${colors.grey100} !important`,
         border: `1px solid ${colors.grey500} !important`,
+    },
+    flyoutMenu: {
+        width: '100%',
     },
 };
 
@@ -28,16 +28,15 @@ const BulkDataEntryActionDropdownButtonPlain = ({
     classes,
 }: Props & CssClasses) => {
     const [isOpen, setIsOpen] = useState(false);
+    const { setActiveList } = useActiveBulkDataEntryList(programId);
     const { bulkDataEntryConfigurations, isLoading, isError } = useBulkDataEntryConfigurations(programId);
-    const queryClient = useQueryClient();
 
     const onSelectConfiguration = useCallback(
-        async (dataStoreConfiguration) => {
-            await setBulkDataEntry({ id: programId, activeList: dataStoreConfiguration });
-            await queryClient.refetchQueries([ReactQueryAppNamespace, 'indexedDB', 'cachedBulkDataEntry', programId]);
+        async (configKey) => {
+            await setActiveList(configKey);
             setShowBulkDataEntryPlugin(true);
         },
-        [programId, setShowBulkDataEntryPlugin, queryClient],
+        [setShowBulkDataEntryPlugin, setActiveList],
     );
 
     if (isError || isLoading || !bulkDataEntryConfigurations || bulkDataEntryConfigurations.length === 0) {
@@ -55,7 +54,7 @@ const BulkDataEntryActionDropdownButtonPlain = ({
             component={
                 <>
                     <MenuSectionHeader label={i18n.t('Available bulk entry forms')} />
-                    <FlyoutMenu dense maxWidth="250px">
+                    <FlyoutMenu dense maxWidth="250px" className={classes.flyoutMenu} >
                         {bulkDataEntryConfigurations.map(config => (
                             <MenuItem
                                 key={config.dataKey}
@@ -63,12 +62,7 @@ const BulkDataEntryActionDropdownButtonPlain = ({
                                 value={config.dataKey}
                                 onClick={() => {
                                     setIsOpen(prev => !prev);
-                                    onSelectConfiguration({
-                                        configKey: config.configKey,
-                                        dataKey: config.dataKey,
-                                        pluginSource: config.pluginSource,
-                                        title: config.title,
-                                    });
+                                    onSelectConfiguration(config.configKey);
                                 }}
                             />
                         ))}

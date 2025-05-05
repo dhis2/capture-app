@@ -2,9 +2,9 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
-import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
-import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
-import type { DataStoreConfigurationRaw, DataStoreConfiguration } from '../BulkDataEntryIdle.types';
+import { useApiMetadataQuery } from '../../../utils/reactQueryHelpers';
+import { useUserLocale } from '../../../utils/localeData/useUserLocale';
+import type { DataStoreConfigurationRaw, DataStoreConfiguration } from '../WidgetBulkDataEntry.types';
 
 const getLocalizedString = (field: { [string]: string }, locale: string): string => {
     if (field[locale]) {

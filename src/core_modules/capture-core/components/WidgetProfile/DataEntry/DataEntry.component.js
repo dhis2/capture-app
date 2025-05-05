@@ -24,7 +24,9 @@ export const DataEntryComponent = ({
     orgUnit,
 }: PlainProps) => (
     <Modal large onClose={onCancel} dataTest="modal-edit-profile">
-        <ModalTitle>{i18n.t(`Edit ${trackedEntityName}`)}</ModalTitle>
+        <ModalTitle>{i18n.t('Edit {{trackedEntityName}}',
+            { trackedEntityName, interpolation: { escapeValue: false } },
+        )}</ModalTitle>
         <ModalContent>
             {i18n.t(
                 'Change information about this {{trackedEntityName}} here. To change information about this enrollment, use the Edit button in the in the Enrollment box on this dashboard',

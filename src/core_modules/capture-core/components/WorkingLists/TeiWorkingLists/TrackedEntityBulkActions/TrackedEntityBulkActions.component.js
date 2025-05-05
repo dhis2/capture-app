@@ -13,7 +13,7 @@ export const TrackedEntityBulkActionsComponent = ({
     onUpdateList,
     removeRowsFromSelection,
     setShowBulkDataEntryPlugin,
-    cachedBulkDataEntry,
+    bulkDataEntryIsActive,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
 
@@ -38,7 +38,7 @@ export const TrackedEntityBulkActionsComponent = ({
                 stages={stages}
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
-                bulkDataEntryIsActive={Boolean(cachedBulkDataEntry?.activeList)}
+                bulkDataEntryIsActive={bulkDataEntryIsActive}
             />
 
             <DeleteEnrollmentsAction
@@ -46,7 +46,7 @@ export const TrackedEntityBulkActionsComponent = ({
                 programDataWriteAccess={programDataWriteAccess}
                 programId={programId}
                 onUpdateList={onUpdateList}
-                bulkDataEntryIsActive={Boolean(cachedBulkDataEntry?.activeList)}
+                bulkDataEntryIsActive={bulkDataEntryIsActive}
             />
 
             {/* <DeleteTeiAction */}
