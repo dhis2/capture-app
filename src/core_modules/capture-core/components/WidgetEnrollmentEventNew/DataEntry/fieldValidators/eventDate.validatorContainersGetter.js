@@ -21,12 +21,12 @@ const validateNotExpired = (
     if (!value) {
         return true;
     }
-    const { isValid, expiryDate } = isValidPeriod(value, props);
+    const { isValid, firstValidDate } = isValidPeriod(value, props);
 
     return {
         valid: isValid,
-        errorMessage: i18n.t('The date entered belongs to an expired period. Enter a date after {{expiryDate}}.', {
-            expiryDate,
+        errorMessage: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
+            firstValidDate,
             interpolation: { escapeValue: false },
         }),
     };

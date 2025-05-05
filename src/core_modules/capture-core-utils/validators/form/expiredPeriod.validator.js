@@ -1,30 +1,46 @@
 // @flow
 import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
 import { dateUtils } from '../../../capture-core/rules/converters';
+import { pipe } from '../../../capture-core-utils';
+import { dataElementTypes } from '../../../capture-core/metaData';
+import {
+    convertClientToServer,
+    convertFormToClient,
+    convertClientToView,
+} from '../../../capture-core/converters';
 
 export const isValidPeriod = (
     reportDate: string,
-    props: Object,
+    props: {
+        programExpiryPeriodType: string,
+        programExpiryDays: number,
+    },
 ) => {
+    const convertFn = pipe(convertFormToClient, convertClientToServer);
+    const reportDateServer = convertFn(reportDate, dataElementTypes.DATE);
+
     const { programExpiryPeriodType, programExpiryDays } = props;
-    const period = getFixedPeriodByDate({
-        periodType: programExpiryPeriodType,
-        date: reportDate,
-        calendar: 'gregory',
-        locale: 'en',
-    });
-    if (!period) {
-        return { isValid: false, expiryDate: null };
-    }
+
 
     const today = dateUtils.getToday();
-    const endDate = period.endDate;
 
-    const expiryDate = programExpiryDays
-        ? dateUtils.addDays(endDate, programExpiryDays)
-        : endDate;
+    const threshold = programExpiryDays
+        ? dateUtils.addDays(today, -programExpiryDays)
+        : today;
 
-    const isValid = dateUtils.compareDates(today, expiryDate) <= 0;
+    const thresholdPeriod = getFixedPeriodByDate({
+        periodType: programExpiryPeriodType,
+        date: threshold,
+    });
 
-    return { isValid, expiryDate };
+    if (!thresholdPeriod) {
+        return { isValid: false, firstValidDate: null };
+    }
+
+    const firstValidDateServer = thresholdPeriod.startDate;
+
+    const isValid = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;
+    const firstValidDate = convertClientToView(firstValidDateServer, dataElementTypes.DATE);
+
+    return { isValid, firstValidDate };
 };
