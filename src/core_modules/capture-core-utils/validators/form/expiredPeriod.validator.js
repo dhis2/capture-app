@@ -32,10 +32,6 @@ export const isValidPeriod = (
         calendar: 'gregorian',
     });
 
-    if (!thresholdPeriod) {
-        return { isValid: false, firstValidDate: null };
-    }
-
     const firstValidDateServer = thresholdPeriod.startDate;
 
     const isValid = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;

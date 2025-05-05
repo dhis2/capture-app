@@ -18,7 +18,7 @@ const validateNotExpired = (
     value?: ?string,
     props: Object,
 ) => {
-    if (!value) {
+    if (!value || !props.programExpiryPeriodType) {
         return true;
     }
     const { isValid, firstValidDate } = isValidPeriod(value, props);
