@@ -6,8 +6,8 @@ import { dataElementTypes } from '../../../capture-core/metaData';
 import {
     convertClientToServer,
     convertFormToClient,
-    convertClientToView,
 } from '../../../capture-core/converters';
+import { convertIsoToLocalCalendar } from '../../../capture-core/utils/converters/date';
 
 export const isValidPeriod = (
     reportDate: string,
@@ -16,12 +16,10 @@ export const isValidPeriod = (
         programExpiryDays: number,
     },
 ) => {
-    const convertFn = pipe(convertFormToClient, convertClientToServer);
-    const reportDateServer = convertFn(reportDate, dataElementTypes.DATE);
-
     const { programExpiryPeriodType, programExpiryDays } = props;
 
-
+    const convertFn = pipe(convertFormToClient, convertClientToServer);
+    const reportDateServer = convertFn(reportDate, dataElementTypes.DATE);
     const today = dateUtils.getToday();
 
     const threshold = programExpiryDays
@@ -31,6 +29,7 @@ export const isValidPeriod = (
     const thresholdPeriod = getFixedPeriodByDate({
         periodType: programExpiryPeriodType,
         date: threshold,
+        calendar: 'gregorian',
     });
 
     if (!thresholdPeriod) {
@@ -40,7 +39,7 @@ export const isValidPeriod = (
     const firstValidDateServer = thresholdPeriod.startDate;
 
     const isValid = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;
-    const firstValidDate = convertClientToView(firstValidDateServer, dataElementTypes.DATE);
+    const firstValidDate = convertIsoToLocalCalendar(firstValidDateServer);
 
     return { isValid, firstValidDate };
 };
