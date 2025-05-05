@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from '@material-ui/core';
 import type { FilteredKeyValue, FilteredText, ContentType, WidgetData } from '../WidgetFeedback.types';
 
 const styles = {
@@ -28,9 +28,9 @@ const styles = {
     },
 };
 
-type Props = ContentType;
+type Props = ContentType & WithStyles<typeof styles>;
 
-const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Props): React.ReactElement => {
+const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Props) => {
     if (!widgetData?.length) {
         return (
             <div
@@ -42,7 +42,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
         );
     }
 
-    const renderTextObject = (item: FilteredText): React.ReactElement => (
+    const renderTextObject = (item: FilteredText) => (
         <li
             className={classes.listItem}
             key={item.id}
@@ -51,7 +51,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
         </li>
     );
 
-    const renderKeyValue = (item: FilteredKeyValue): React.ReactElement => (
+    const renderKeyValue = (item: FilteredKeyValue) => (
         <li
             key={item.id}
             className={classes.listItem}
@@ -60,7 +60,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
         </li>
     );
 
-    const renderString = (item: string, index: number): React.ReactElement => (
+    const renderString = (item: string, index: number) => (
         <li
             key={index}
             className={classes.listItem}
@@ -92,6 +92,4 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
     );
 };
 
-type PropsWithoutClasses = Omit<ContentType, 'classes'>;
-
-export const WidgetFeedbackContent = withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<PropsWithoutClasses>;
+export const WidgetFeedbackContent = withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<ContentType>;

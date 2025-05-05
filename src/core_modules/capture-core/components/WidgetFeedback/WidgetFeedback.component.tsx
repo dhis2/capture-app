@@ -4,8 +4,8 @@ import { Widget } from '../Widget';
 import { WidgetFeedbackContent } from './WidgetFeedbackContent/WidgetFeedbackContent';
 import type { Props } from './WidgetFeedback.types';
 
-export const WidgetFeedback = ({ feedback, emptyText }: Props): React.ReactElement => {
-    const [openStatus, setOpenStatus] = useState<boolean>(true);
+export const WidgetFeedback = ({ feedback, emptyText }: Props) => {
+    const [openStatus, setOpenStatus] = useState(true);
 
     return (
         <div

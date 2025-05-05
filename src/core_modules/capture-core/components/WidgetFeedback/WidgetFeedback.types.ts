@@ -13,16 +13,13 @@ export type FilteredKeyValue = {
 
 export type WidgetData = string | FilteredText | FilteredKeyValue;
 
-export type CssClasses = {
-    classes: {
-        [key: string]: string;
-    };
-}
-
 export type ContentType = {
     widgetData?: Array<WidgetData> | undefined;
     emptyText: string;
-} & CssClasses;
+    classes: {
+        [key: string]: string;
+    };
+};
 
 export type InputFeedbackProps = {
     widgetEffects?: Record<string, unknown>;
