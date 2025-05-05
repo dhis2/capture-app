@@ -1,7 +1,7 @@
 // @flow
 import type { ProgramStage } from '../../../../metaData';
 
-export type Props = {|
+type BaseProps = {|
     selectedRows: { [key: string]: boolean },
     programId: string,
     stages: Map<string, ProgramStage>,
@@ -9,9 +9,15 @@ export type Props = {|
     programDataWriteAccess: boolean,
     onUpdateList: () => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
+    setShowBulkDataEntryPlugin: (show: boolean) => void,
+|}
+
+export type Props = {|
+    ...BaseProps,
+    bulkDataEntryIsActive: boolean,
 |}
 
 export type ContainerProps = {|
-    ...Props,
+    ...BaseProps,
     programStageId: ?string,
 |}

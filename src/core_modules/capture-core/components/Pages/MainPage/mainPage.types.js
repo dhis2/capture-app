@@ -13,8 +13,9 @@ export type ContainerProps = $ReadOnly<{|
     error: boolean,
     ready: boolean,
     setShowBulkDataEntryPlugin: (show: boolean) => void,
-|}
->;
+    setBulkDataEntryTrackedEntities: (trackedEntities: Array<string>) => void,
+    bulkDataEntryTrackedEntities?: Array<string>,
+|}>;
 
 export type Props = $ReadOnly<{|
     ...ContainerProps,

@@ -16,8 +16,10 @@ const styles = () => ({
 const BulkDataEntryPlain = ({
     programId,
     setShowBulkDataEntryPlugin,
+    setBulkDataEntryTrackedEntities,
     displayFrontPageList,
     page,
+    trackedEntities,
     classes,
 }: Props) => {
     const { activeList, removeActiveList } = useActiveBulkDataEntryList(programId);
@@ -25,11 +27,13 @@ const BulkDataEntryPlain = ({
     const onClose = useCallback(async () => {
         await removeActiveList();
         setShowBulkDataEntryPlugin(false);
-    }, [setShowBulkDataEntryPlugin, removeActiveList]);
+        setBulkDataEntryTrackedEntities && setBulkDataEntryTrackedEntities(null);
+    }, [setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities, removeActiveList]);
 
     const onBackToOriginPage = useCallback(() => {
         setShowBulkDataEntryPlugin(false);
-    }, [setShowBulkDataEntryPlugin]);
+        setBulkDataEntryTrackedEntities && setBulkDataEntryTrackedEntities(null);
+    }, [setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities]);
 
     if (!activeList) {
         return null;
@@ -49,6 +53,7 @@ const BulkDataEntryPlain = ({
                 pluginSource={activeList.pluginSource}
                 onClose={onClose}
                 onBackToOriginPage={onBackToOriginPage}
+                trackedEntities={trackedEntities}
             />
         </div>
     );

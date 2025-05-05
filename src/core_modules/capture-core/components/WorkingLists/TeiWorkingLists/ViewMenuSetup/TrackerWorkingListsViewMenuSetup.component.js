@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
-import { TeiWorkingListsSetup } from '../Setup';
+import { TrackerWorkingListsActionsSetup } from '../ActionsSetup';
 import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Props } from './TrackerWorkingListsViewMenuSetup.types';
 import { DownloadDialog } from '../../WorkingListsCommon';
@@ -23,6 +23,9 @@ export const TrackerWorkingListsViewMenuSetup = ({
     programStageId,
     orgUnitId,
     recordsOrder,
+    records,
+    setShowBulkDataEntryPlugin,
+    setBulkDataEntryTrackedEntities,
     ...passOnProps
 }: Props) => {
     const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
@@ -102,6 +105,24 @@ export const TrackerWorkingListsViewMenuSetup = ({
         [onUpdateList, storeId],
     );
 
+    const injectSelectedRowsToBulkDataEntryPlugin = useCallback(
+        (show: boolean) => {
+            setShowBulkDataEntryPlugin(show);
+            if (selectionInProgress) {
+                setBulkDataEntryTrackedEntities(Object.keys(selectedRows));
+            } else {
+                setBulkDataEntryTrackedEntities(Object.keys(records));
+            }
+        },
+        [
+            setShowBulkDataEntryPlugin,
+            setBulkDataEntryTrackedEntities,
+            selectedRows,
+            records,
+            selectionInProgress,
+        ],
+    );
+
     const handleCustomUpdateTrigger = useCallback((disableClearSelection?: boolean) => {
         const id = uuid();
         setCustomUpdateTrigger(id);
@@ -118,17 +139,27 @@ export const TrackerWorkingListsViewMenuSetup = ({
             onClearSelection={clearSelection}
             onUpdateList={handleCustomUpdateTrigger}
             removeRowsFromSelection={removeRowsFromSelection}
+            setShowBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
         />
-    ), [program, programStageId, selectedRows, clearSelection, handleCustomUpdateTrigger, removeRowsFromSelection]);
+    ), [
+        program,
+        programStageId,
+        selectedRows,
+        clearSelection,
+        handleCustomUpdateTrigger,
+        removeRowsFromSelection,
+        injectSelectedRowsToBulkDataEntryPlugin,
+    ]);
 
     return (
         <>
-            <TeiWorkingListsSetup
+            <TrackerWorkingListsActionsSetup
                 {...passOnProps}
                 customUpdateTrigger={customUpdateTrigger}
                 program={program}
                 orgUnitId={orgUnitId}
                 recordsOrder={recordsOrder}
+                records={records}
                 programStageId={programStageId}
                 customListViewMenuContents={customListViewMenuContents}
                 onLoadView={injectDownloadRequestToLoadView}
@@ -139,6 +170,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 onSelectAll={selectAllRows}
                 onRowSelect={toggleRowSelected}
                 bulkActionBarComponent={TrackedEntityBulkActionsComponent}
+                setShowBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
             />
             <DownloadDialog
                 open={downloadDialogOpen}

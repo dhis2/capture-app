@@ -59,6 +59,8 @@ const MainPagePlain = ({
     classes,
     onChangeTemplate,
     setShowBulkDataEntryPlugin,
+    bulkDataEntryTrackedEntities,
+    setBulkDataEntryTrackedEntities,
 }: Props) => {
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
@@ -72,8 +74,10 @@ const MainPagePlain = ({
             <BulkDataEntry
                 programId={programId}
                 setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
                 displayFrontPageList={displayFrontPageList}
                 page={bulkDataEntryBreadcrumbsKeys.MAIN_PAGE}
+                trackedEntities={bulkDataEntryTrackedEntities}
             />
         );
     }
@@ -101,6 +105,8 @@ const MainPagePlain = ({
                                 orgUnitId={orgUnitId}
                                 selectedTemplateId={selectedTemplateId}
                                 onChangeTemplate={onChangeTemplate}
+                                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                                setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
                             />
                             <WidgetBulkDataEntry
                                 programId={programId}

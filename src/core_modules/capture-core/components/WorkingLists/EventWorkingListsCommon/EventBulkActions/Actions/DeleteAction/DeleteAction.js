@@ -11,13 +11,25 @@ import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
 
 type Props = {
     selectedRows: { [id: string]: boolean },
-    disabled?: boolean,
+    stageDataWriteAccess?: boolean,
     onUpdateList: () => void,
+    bulkDataEntryIsActive?: boolean,
 }
+
+const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
+    if (!stageDataWriteAccess) {
+        return i18n.t('You do not have access to delete events');
+    }
+    if (bulkDataEntryIsActive) {
+        return i18n.t('There is a bulk data entry with unsaved changes');
+    }
+    return '';
+};
 
 export const DeleteAction = ({
     selectedRows,
-    disabled,
+    stageDataWriteAccess,
+    bulkDataEntryIsActive,
     onUpdateList,
 }: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +38,9 @@ export const DeleteAction = ({
         ({ message }) => message,
         { critical: true },
     );
+
+    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
+    const disabled = !stageDataWriteAccess || bulkDataEntryIsActive;
 
     const { mutate: deleteEvents, isLoading } = useMutation(
         () => dataEngine.mutate({
@@ -53,7 +68,7 @@ export const DeleteAction = ({
         <>
             <ConditionalTooltip
                 enabled={disabled}
-                content={i18n.t('You do not have access to delete events')}
+                content={tooltipContent}
             >
                 <Button
                     small

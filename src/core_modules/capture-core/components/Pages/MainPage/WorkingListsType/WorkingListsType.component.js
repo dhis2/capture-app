@@ -5,7 +5,14 @@ import { EventWorkingListsInit } from '../EventWorkingListsInit';
 import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
 import type { Props } from './workingListsType.types';
 
-export const WorkingListsType = ({ programId, orgUnitId, selectedTemplateId, onChangeTemplate }: Props) => {
+export const WorkingListsType = ({
+    programId,
+    orgUnitId,
+    selectedTemplateId,
+    onChangeTemplate,
+    setShowBulkDataEntryPlugin,
+    setBulkDataEntryTrackedEntities,
+}: Props) => {
     const { programType } = useProgramInfo(programId);
     if (programType === programTypes.EVENT_PROGRAM) {
         return <EventWorkingListsInit programId={programId} orgUnitId={orgUnitId} />;
@@ -19,6 +26,8 @@ export const WorkingListsType = ({ programId, orgUnitId, selectedTemplateId, onC
                     orgUnitId={orgUnitId}
                     selectedTemplateId={selectedTemplateId}
                     onChangeTemplate={onChangeTemplate}
+                    setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                    setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
                 />
             </>
         );
