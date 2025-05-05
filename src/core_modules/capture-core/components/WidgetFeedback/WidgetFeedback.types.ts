@@ -1,20 +1,20 @@
 export type FilteredText = {
     id: string;
     message: string;
-    color?: string | undefined;
+    color?: string;
 }
 
 export type FilteredKeyValue = {
     id: string;
     key: string;
     value: string;
-    color?: string | undefined;
+    color?: string;
 }
 
 export type WidgetData = string | FilteredText | FilteredKeyValue;
 
 export type ContentType = {
-    widgetData?: Array<WidgetData> | undefined;
+    widgetData?: Array<WidgetData>;
     emptyText: string;
 };
 
@@ -24,12 +24,12 @@ export type InputFeedbackProps = {
 }
 
 export type Props = {
-    feedback?: Array<string | FilteredText | FilteredKeyValue> | undefined;
+    feedback?: Array<string | FilteredText | FilteredKeyValue>;
     emptyText: string;
 }
 
 export type IndicatorProps = {
-    indicators?: Array<string | FilteredText | FilteredKeyValue> | undefined;
+    indicators?: Array<string | FilteredText | FilteredKeyValue>;
     emptyText: string;
 }
 
