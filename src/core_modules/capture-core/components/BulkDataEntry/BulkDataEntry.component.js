@@ -1,14 +1,11 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useQueryClient } from 'react-query';
 import { withStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
-import { removeBulkDataEntry } from 'capture-core/MetaDataStoreUtils/bulkDataEntry';
-import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
 import type { Props } from './BulkDataEntry.types';
 import { BulkDataEntryPlugin } from './BulkDataEntryPlugin';
 import { BulkDataEntryBreadcrumb } from '../Breadcrumbs/BulkDataEntryBreadcrumb';
-import { useBulkDataEntryFromIndexedDB } from '../../utils/cachedDataHooks/useBulkDataEntryFromIndexedDB';
+import { useActiveBulkDataEntryList } from '../WidgetBulkDataEntry';
 
 const styles = () => ({
     container: {
@@ -23,20 +20,18 @@ const BulkDataEntryPlain = ({
     page,
     classes,
 }: Props) => {
-    const { cachedBulkDataEntry } = useBulkDataEntryFromIndexedDB(programId);
-    const queryClient = useQueryClient();
+    const { activeList, removeActiveList } = useActiveBulkDataEntryList(programId);
 
     const onClose = useCallback(async () => {
-        await removeBulkDataEntry(programId);
-        await queryClient.refetchQueries([ReactQueryAppNamespace, 'indexedDB', 'cachedBulkDataEntry', programId]);
+        await removeActiveList();
         setShowBulkDataEntryPlugin(false);
-    }, [programId, setShowBulkDataEntryPlugin, queryClient]);
+    }, [setShowBulkDataEntryPlugin, removeActiveList]);
 
     const onBackToOriginPage = useCallback(() => {
         setShowBulkDataEntryPlugin(false);
     }, [setShowBulkDataEntryPlugin]);
 
-    if (!cachedBulkDataEntry?.activeList) {
+    if (!activeList) {
         return null;
     }
 
@@ -49,7 +44,9 @@ const BulkDataEntryPlain = ({
                 page={page}
             />
             <BulkDataEntryPlugin
-                {...cachedBulkDataEntry.activeList}
+                configKey={activeList.configKey}
+                dataKey={activeList.dataKey}
+                pluginSource={activeList.pluginSource}
                 onClose={onClose}
                 onBackToOriginPage={onBackToOriginPage}
             />
