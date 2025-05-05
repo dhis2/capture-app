@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import type { Props } from './BulkDataEntryIdle.types';
-import { useBulkDataEntryConfigurations } from './hooks';
+import { useBulkDataEntryConfigurations } from '../hooks';
 import { BulkDataEntryIdleComponenet } from './BulkDataEntryIdle.component';
 
 export const BulkDataEntryIdle = ({ programId, onSelectConfiguration }: Props) => {

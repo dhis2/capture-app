@@ -4,10 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { getUserStorageController, userStores } from '../storageControllers';
 
 export type ActiveList = {|
-    dataKey?: string,
     configKey: string,
-    pluginSource: string,
-    title: string,
 |};
 
 export const getBulkDataEntry = async (programId: string) => {
