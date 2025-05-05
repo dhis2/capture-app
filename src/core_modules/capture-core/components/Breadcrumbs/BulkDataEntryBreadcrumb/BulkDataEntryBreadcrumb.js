@@ -63,7 +63,7 @@ const BreadcrumbsPlain = ({
     );
 
     return (
-        <div className={classes.container}>
+        <div className={classes.container} data-test="bulkDataEntry-breadcrumb">
             {breadcrumbItems.map((button, index) => (
                 <React.Fragment key={button.key}>
                     <BreadcrumbItem
