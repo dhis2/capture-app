@@ -16,9 +16,6 @@ export type WidgetData = string | FilteredText | FilteredKeyValue;
 export type ContentType = {
     widgetData?: Array<WidgetData> | undefined;
     emptyText: string;
-    classes: {
-        [key: string]: string;
-    };
 };
 
 export type InputFeedbackProps = {

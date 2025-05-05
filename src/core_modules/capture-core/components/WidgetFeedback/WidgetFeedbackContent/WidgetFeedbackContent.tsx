@@ -92,4 +92,4 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Prop
     );
 };
 
-export const WidgetFeedbackContent = withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<ContentType>;
+export const WidgetFeedbackContent = withStyles(styles)(WidgetFeedbackContentComponent) as ComponentType<Omit<ContentType, 'classes'>>;
