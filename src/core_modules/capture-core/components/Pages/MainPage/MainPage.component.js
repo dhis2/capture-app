@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import type { ComponentType } from 'react';
+import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 import type { Props, ContainerProps } from './mainPage.types';
 import { WorkingListsType } from './WorkingListsType';
 import { MainPageStatuses } from './MainPage.constants';
@@ -12,6 +13,8 @@ import { WithoutCategorySelectedMessage } from './WithoutCategorySelectedMessage
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
+import { BulkDataEntry } from '../../BulkDataEntry';
+import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
 import {
     InvalidCategoryCombinationForOrgUnitMessage,
 } from './InvalidCategoryCombinationForOrgUnitMessage/InvalidCategoryCombinationForOrgUnitMessage';
@@ -20,6 +23,8 @@ import { NoSelectionsInfoBox } from './NoSelectionsInfoBox';
 const getStyles = () => ({
     listContainer: {
         padding: 24,
+        display: 'flex',
+        gap: spacers.dp16,
     },
     container: {
         display: 'flex',
@@ -27,13 +32,14 @@ const getStyles = () => ({
         gap: spacers.dp16,
         padding: spacers.dp16,
     },
-    half: {
+    left: {
         flex: 1,
     },
-    quarter: {
-        flex: 0.4,
+    right: {
+        width: '260px',
     },
     searchBoxWrapper: {
+        height: 'fit-content',
         padding: spacers.dp16,
         background: colors.white,
         border: '1px solid',
@@ -52,6 +58,7 @@ const MainPagePlain = ({
     setShowAccessible,
     classes,
     onChangeTemplate,
+    setShowBulkDataEntryPlugin,
 }: Props) => {
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
@@ -59,6 +66,17 @@ const MainPagePlain = ({
         const isEventProgram = !trackedEntityTypeId;
         return noProgramSelected || noOrgUnitSelected || isEventProgram || displayFrontPageList || selectedTemplateId;
     }, [programId, orgUnitId, trackedEntityTypeId, displayFrontPageList, selectedTemplateId]);
+
+    if (MainPageStatus === MainPageStatuses.SHOW_BULK_DATA_ENTRY_PLUGIN) {
+        return (
+            <BulkDataEntry
+                programId={programId}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                displayFrontPageList={displayFrontPageList}
+                page={bulkDataEntryBreadcrumbsKeys.MAIN_PAGE}
+            />
+        );
+    }
 
     return (
         <>
@@ -84,16 +102,25 @@ const MainPagePlain = ({
                                 selectedTemplateId={selectedTemplateId}
                                 onChangeTemplate={onChangeTemplate}
                             />
+                            <WidgetBulkDataEntry
+                                programId={programId}
+                                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                            />
                         </div>
                     )}
                 </>
             ) : (
                 <div className={classes.container}>
-                    <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
+                    <div className={`${classes.left} ${classes.searchBoxWrapper}`}>
                         <SearchBox programId={programId} />
                     </div>
-                    <div className={classes.quarter}>
+                    <div className={classes.right}>
                         <TemplateSelector />
+                        <br />
+                        <WidgetBulkDataEntry
+                            programId={programId}
+                            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                        />
                     </div>
                 </div>
             )}

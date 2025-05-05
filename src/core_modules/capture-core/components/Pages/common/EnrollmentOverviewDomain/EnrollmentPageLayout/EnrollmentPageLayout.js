@@ -53,7 +53,6 @@ const EnrollmentPageLayoutPlain = ({
     pageLayout,
     availableWidgets,
     program,
-    trackedEntityName,
     userInteractionInProgress,
     eventStatus,
     currentPage,
@@ -116,7 +115,6 @@ const EnrollmentPageLayoutPlain = ({
                         onBackToDashboard={onBackToDashboard}
                         onBackToViewEvent={onBackToViewEvent}
                         programId={program.id}
-                        trackedEntityName={trackedEntityName}
                         displayFrontPageList={program.displayFrontPageList}
                         userInteractionInProgress={userInteractionInProgress}
                         eventStatus={eventStatus}

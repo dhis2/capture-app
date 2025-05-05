@@ -20,6 +20,7 @@ type StoreNames = {
     CATEGORY_OPTIONS_BY_CATEGORY: string,
     CATEGORY_OPTIONS: string,
     REDUX_PERSIST: string,
+    BULK_DATA_ENTRY: string,
 };
 
 export type ContextInput = {

@@ -35,6 +35,24 @@ msgstr ""
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
 
+msgid "Bulk data entry"
+msgstr "Bulk data entry"
+
+msgid "Active enrollments"
+msgstr "Active enrollments"
+
+msgid "Completed enrollments"
+msgstr "Completed enrollments"
+
+msgid "Cancelled enrollments"
+msgstr "Cancelled enrollments"
+
+msgid "Program overview"
+msgstr "Program overview"
+
+msgid "Search"
+msgstr "Search"
+
 msgid "Enrollment dashboard"
 msgstr "Enrollment dashboard"
 
@@ -46,24 +64,6 @@ msgstr "Edit event"
 
 msgid "New event"
 msgstr "New event"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} list"
-
-msgid "Search"
-msgstr "Search"
-
-msgid "Working List"
-msgstr "Working List"
 
 msgid "Event list"
 msgstr "Event list"
@@ -1113,6 +1113,12 @@ msgid ""
 msgstr ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
+
+msgid "Unsaved changes"
+msgstr "Unsaved changes"
+
+msgid "Continue data entry"
+msgstr "Continue data entry"
 
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
