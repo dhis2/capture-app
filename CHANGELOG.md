@@ -1,3 +1,17 @@
+## [102.3.3](https://github.com/dhis2/capture-app/compare/v102.3.2...v102.3.3) (2025-05-05)
+
+
+### Bug Fixes
+
+* [DHIS2-19450] format updatedAt with en locale ([#4069](https://github.com/dhis2/capture-app/issues/4069)) ([725019c](https://github.com/dhis2/capture-app/commit/725019c22427ecb54dc62579ead27f5ea9bca99e))
+
+## [102.3.2](https://github.com/dhis2/capture-app/compare/v102.3.1...v102.3.2) (2025-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-19441][DHIS2-19442] Missing translation ([#4058](https://github.com/dhis2/capture-app/issues/4058)) ([e86d8cf](https://github.com/dhis2/capture-app/commit/e86d8cf97a53726bfc53d5a48575aea5ee998298))
+
 ## [102.3.1](https://github.com/dhis2/capture-app/compare/v102.3.0...v102.3.1) (2025-05-01)
 
 

@@ -1364,6 +1364,9 @@ msgstr "Program or stage is invalid"
 msgid "Save note"
 msgstr "Save note"
 
+msgid "Edit {{trackedEntityName}}"
+msgstr "Edit {{trackedEntityName}}"
+
 msgid ""
 "Change information about this {{trackedEntityName}} here. Information about "
 "this enrollment can be edited in the Enrollment widget."
