@@ -1,7 +1,6 @@
-// @flow
-import React, { type ComponentType, useState, useCallback } from 'react';
+import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, createStyles, type WithStyles, Theme } from '@material-ui/core';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import cx from 'classnames';
@@ -11,18 +10,11 @@ import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
 import { convertClientToList } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
+import type { NoteSectionProps, NoteType } from '../WidgetNote.types';
 
 const FocusTextField = withFocusSaver()(TextField);
 
-type Props = {
-    notes: Array<Object>,
-    handleAddNote: (text: string) => void,
-    placeholder: string,
-    emptyNoteMessage: string,
-    ...CssClasses
-}
-
-const styles = {
+const getStyles = (_theme: Theme) => createStyles({
     item: {
         padding: spacersNum.dp12,
         marginRight: spacersNum.dp4,
@@ -70,7 +62,19 @@ const styles = {
         display: 'flex',
         gap: '4px',
     },
-};
+    rightColumn: {
+        flex: 1,
+    },
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    headerText: {
+        display: 'inline-block',
+    },
+});
+
+type PropsWithStyles = NoteSectionProps & WithStyles<typeof getStyles>;
 
 const NoteSectionPlain = ({
     placeholder,
@@ -78,12 +82,12 @@ const NoteSectionPlain = ({
     notes,
     handleAddNote,
     classes,
-}: Props) => {
-    const [isEditing, setEditing] = useState(false);
-    const [newNoteValue, setNewNoteValue] = useState('');
+}: PropsWithStyles) => {
+    const [isEditing, setEditing] = useState<boolean>(false);
+    const [newNoteValue, setNewNoteValue] = useState<string>('');
     const { fromServerDate } = useTimeZoneConversion();
 
-    const handleChange = useCallback((value) => {
+    const handleChange = useCallback((value: string) => {
         setEditing(true);
         setNewNoteValue(value);
     }, []);
@@ -99,7 +103,7 @@ const NoteSectionPlain = ({
         setEditing(false);
     }, [handleAddNote, newNoteValue]);
 
-    const NoteItem = ({ value, storedAt, createdBy }) => (
+    const NoteItem = ({ value, storedAt, createdBy }: NoteType) => (
         <div data-test="note-item" className={cx(classes.item)}>
             {/* TODO: add avatar */}
             <div className={classes.rightColumn}>
@@ -120,13 +124,12 @@ const NoteSectionPlain = ({
         </div>
     );
 
-
     return (
         <div className={classes.wrapper}>
             <div className={classes.notesWrapper}>
                 {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map(note => <NoteItem key={`note-item-${note.note}-`} {...note} />)
+                    .map(note => <NoteItem key={`note-item-${note.value}-`} {...note} />)
                 }
                 {notes.length === 0 &&
                 <div className={classes.emptyNotes}>
@@ -163,4 +166,4 @@ const NoteSectionPlain = ({
         </div>);
 };
 
-export const NoteSection: ComponentType<Props> = withStyles(styles)(NoteSectionPlain);
+export const NoteSection = withStyles(getStyles)(NoteSectionPlain) as ComponentType<NoteSectionProps>;
