@@ -37,14 +37,7 @@ const BulkDataEntryIdleComponenetPlain = ({
                     {bulkDataEntryConfigurations.map(config => (
                         <DataTableRow
                             key={config.dataKey}
-                            onClick={() =>
-                                onSelectConfiguration({
-                                    configKey: config.configKey,
-                                    dataKey: config.dataKey,
-                                    pluginSource: config.pluginSource,
-                                    title: config.title,
-                                })
-                            }
+                            onClick={() => onSelectConfiguration(config.configKey)}
                         >
                             <DataTableCell>
                                 <strong className={classes.title}>{config.title}</strong>

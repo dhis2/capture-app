@@ -1,5 +1,4 @@
 // @flow
-import type { CachedBulkDataEntry } from '../../../../utils/cachedDataHooks/useBulkDataEntryFromIndexedDB';
 import type { ProgramStage } from '../../../../metaData';
 
 type BaseProps = {|
@@ -15,7 +14,7 @@ type BaseProps = {|
 
 export type Props = {|
     ...BaseProps,
-    cachedBulkDataEntry: ?CachedBulkDataEntry,
+    bulkDataEntryIsActive: boolean,
 |}
 
 export type ContainerProps = {|
