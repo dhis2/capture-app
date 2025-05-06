@@ -23,7 +23,10 @@ export const useFiltersOnly = (
                     { text: i18n.t('Cancelled'), value: 'CANCELLED' },
                 ],
                 transformRecordsFilter: (rawFilter: string) => ({
-                    programStatus: rawFilter.split(':')[1],
+                    [featureAvailable(FEATURES.enrollmentStatusReplaceProgramStatusQueryParam)
+                        ? 'enrollmentStatus'
+                        : 'programStatus'
+                    ]: rawFilter.split(':')[1],
                 }),
             },
             {
