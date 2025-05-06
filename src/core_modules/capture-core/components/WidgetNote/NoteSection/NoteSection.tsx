@@ -14,7 +14,7 @@ import type { NoteSectionProps, NoteType } from '../WidgetNote.types';
 
 const FocusTextField = withFocusSaver()(TextField);
 
-const getStyles = (_theme: Theme) => createStyles({
+const getStyles = () => createStyles({
     item: {
         padding: spacersNum.dp12,
         marginRight: spacersNum.dp4,
