@@ -1,10 +1,8 @@
 ---
-title: Manual setup
+title: Manual Setup (Bulk Data Entry Plugin)
 sidebar_label: Manual setup
 id: manual-setup
 ---
-
-# Manual setup
 
 To enable bulk data entry functionality, you need to configure the data store in your DHIS2 instance. Follow these steps:
 
@@ -80,7 +78,7 @@ The plugins can also be accessed via dropdown menus from the tracked entities wo
 ![Dropdown menu bulk data entry program stage working lists](../resources/dropdown-menu-bulk-data-entry-program-stage-working-lists.png)
 ![Dropdown menu bulk data entry tracked entities working lists](../resources/dropdown-menu-bulk-data-entry-tracked-entities-working-lists.png)
 
-After the user selects a plugin configuration, it is stored in `IndexDB` for the duration of use.
+After the user selects a plugin configuration, it is stored in `IndexedDB` for the duration of use.
 
 ### Passing Tracked Entities to the Plugin
 
@@ -88,4 +86,4 @@ The plugin receives tracked entities through the `trackedEntities` prop - an arr
 
 ### Cleanup and Disposal
 
-To properly close the plugin and clean up resources, use the `onClose` function provided as a prop. This function will remove the selected configuration from `IndexBD`.
+To properly close the plugin and clean up resources, use the `onClose` function provided as a prop. This function will remove the selected configuration from `IndexedDB`.
