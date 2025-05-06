@@ -1,13 +1,12 @@
-// @flow
-
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { spacers, colors } from '@dhis2/ui';
 import cx from 'classnames';
 import type {
     ContentType,
     FilteredKeyValue,
     FilteredText,
+    WidgetData,
 } from '../../WidgetFeedback/WidgetFeedback.types';
 import { sortIndicatorsFn } from './sortIndicatorsFn';
 
@@ -50,7 +49,9 @@ const styles = {
     },
 };
 
-const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: ContentType) => {
+type Props = ContentType & WithStyles<typeof styles>;
+
+const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Props) => {
     if (!widgetData?.length) {
         return (
             <div className={classes.container}>
@@ -59,7 +60,7 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Con
     }
     const sortedWidgetData = widgetData.sort(sortIndicatorsFn);
 
-    const renderLegend = color => (
+    const renderLegend = (color: string) => (
         <div className={classes.legendBullet} style={{ backgroundColor: color }} />
     );
 
@@ -100,12 +101,14 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Con
 
     return (
         <div className={classes.container}>
-            {sortedWidgetData.map((action: any, index: number) => {
+            {sortedWidgetData.map((action: WidgetData, index: number) => {
                 const isLast = (index + 1) === widgetData.length;
-                if (action.key) {
-                    return renderKeyValue(action, isLast);
-                } else if (action.message) {
-                    return renderTextObject(action, isLast);
+                if (typeof action === 'object') {
+                    if ('key' in action) {
+                        return renderKeyValue(action as FilteredKeyValue, isLast);
+                    } else if ('message' in action) {
+                        return renderTextObject(action as FilteredText, isLast);
+                    }
                 } else if (typeof action === 'string') {
                     return renderString(action, index, isLast);
                 }
@@ -115,4 +118,5 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Con
     );
 };
 
-export const WidgetIndicatorContent: ComponentType<$Diff<ContentType, CssClasses>> = withStyles(styles)(WidgetIndicatorContentComponent);
+export const WidgetIndicatorContent =
+    withStyles(styles)(WidgetIndicatorContentComponent) as ComponentType<ContentType>;
