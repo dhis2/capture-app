@@ -1,3 +1,10 @@
+## [102.3.4](https://github.com/dhis2/capture-app/compare/v102.3.3...v102.3.4) (2025-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-19307] load section containing a DE not contained in the PS ([#4021](https://github.com/dhis2/capture-app/issues/4021)) ([58c1959](https://github.com/dhis2/capture-app/commit/58c195927e90fcf426eaba55bd9fe42a1d77fd25))
+
 ## [102.3.3](https://github.com/dhis2/capture-app/compare/v102.3.2...v102.3.3) (2025-05-05)
 
 
