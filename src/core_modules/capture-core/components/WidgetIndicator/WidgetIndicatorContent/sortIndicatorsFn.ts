@@ -1,6 +1,6 @@
+/* eslint-disable complexity */
 import { localeCompareStrings } from '../../../utils/localeCompareStrings';
 
-/* eslint-disable complexity */
 export const sortIndicatorsFn = (a, b): number => {
     if (typeof b === 'string') {
         return ((a.key && localeCompareStrings(a.key, b)) || (a.message && localeCompareStrings(a.message, b)));
