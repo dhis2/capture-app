@@ -1,6 +1,6 @@
 import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, createStyles, type WithStyles, Theme } from '@material-ui/core';
+import { withStyles, createStyles, type WithStyles } from '@material-ui/core';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import cx from 'classnames';
