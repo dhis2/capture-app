@@ -7,6 +7,7 @@ import { RelatedStagesActions as RelatedStagesActionsComponent } from './Related
 import { relatedStageStatus } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
 import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
+import { useProgramExpiry } from '../../../hooks';
 
 const RelatedStagesActionsPlain = ({
     programId,
@@ -30,7 +31,7 @@ const RelatedStagesActionsPlain = ({
     });
     const [saveAttempted, setSaveAttempted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
-    const [relatedStageDataValues, setRelatedStageDataValues] = useState<RelatedStageDataValueStates>({
+    const [relatedStageDataValues, setRelatedStageDataValues] = useState < RelatedStageDataValueStates >({
         linkMode: undefined,
         scheduledAt: '',
         scheduledAtFormatError: undefined,
@@ -38,6 +39,7 @@ const RelatedStagesActionsPlain = ({
         linkedEventId: undefined,
     });
     const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
+    const { expiryPeriodType, expiryDays } = useProgramExpiry(programId);
     useEffect(() => {
         if (!orgUnitLoading && data?.length === 1) {
             setRelatedStageDataValues(prev => ({
@@ -63,15 +65,18 @@ const RelatedStagesActionsPlain = ({
 
     const formIsValid = useCallback(() => {
         const { scheduledAt, scheduledAtFormatError, orgUnit, linkedEventId, linkMode } = relatedStageDataValues;
+
         return relatedStageWidgetIsValid({
             linkMode,
             scheduledAt,
             scheduledAtFormatError,
             orgUnit,
             linkedEventId,
+            programExpiryPeriodType: expiryPeriodType,
+            programExpiryDays: expiryDays,
             setErrorMessages: addErrorMessage,
         });
-    }, [relatedStageDataValues]);
+    }, [relatedStageDataValues, expiryPeriodType, expiryDays]);
 
     const getLinkedStageValues = () => ({
         linkMode: relatedStageDataValues.linkMode,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-07T08:19:45.209Z\n"
-"PO-Revision-Date: 2025-05-07T08:19:45.209Z\n"
+"POT-Creation-Date: 2025-05-07T10:07:15.049Z\n"
+"PO-Revision-Date: 2025-05-07T10:07:15.049Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1486,8 +1486,8 @@ msgstr "Scheduled date"
 msgid "Report date"
 msgstr "Report date"
 
-msgid "Please enter a date"
-msgstr "Please enter a date"
+msgid "Please enter a dateee"
+msgstr "Please enter a dateee"
 
 msgid "Please select a valid event"
 msgstr "Please select a valid event"
@@ -2062,6 +2062,9 @@ msgstr "Please enter a valid time"
 
 msgid "Please enter a time"
 msgstr "Please enter a time"
+
+msgid "Please enter a date"
+msgstr "Please enter a date"
 
 msgid "Set coordinate"
 msgstr "Set coordinate"
