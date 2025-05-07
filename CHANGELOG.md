@@ -1,3 +1,10 @@
+## [102.3.5](https://github.com/dhis2/capture-app/compare/v102.3.4...v102.3.5) (2025-05-07)
+
+
+### Bug Fixes
+
+* [DHIS2-13236] Incorrect text on top of Profile widget ([#4068](https://github.com/dhis2/capture-app/issues/4068)) ([0ab5c87](https://github.com/dhis2/capture-app/commit/0ab5c878605a1ed02d50d755e3afd2a8cb6c0e03))
+
 ## [102.3.4](https://github.com/dhis2/capture-app/compare/v102.3.3...v102.3.4) (2025-05-06)
 
 
