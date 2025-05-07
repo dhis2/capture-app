@@ -27,5 +27,5 @@ const PERIOD_TYPE_MAP: { [apiName: string]: string } = {
     FinancialNov: 'FYNOV',
 };
 
-export const toClientExpiryPeriod = (apiName?: string) =>
+export const serverToClientExpiryPeriod = (apiName?: string) =>
     (apiName ? PERIOD_TYPE_MAP[apiName] : undefined);

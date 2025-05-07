@@ -1,5 +1,5 @@
 // @flow
-import { toClientExpiryPeriod } from '../components/DataEntry/constants/expiryPeriod.const';
+import { serverToClientExpiryPeriod } from '../converters/serverToClientExpiryPeriod';
 import { useApiMetadataQuery } from '../utils/reactQueryHelpers';
 
 export const useProgramExpiry = (programId: string) => {
@@ -14,7 +14,7 @@ export const useProgramExpiry = (programId: string) => {
     );
 
     return {
-        expiryPeriodType: toClientExpiryPeriod(data?.expiryPeriodType),
+        expiryPeriodType: serverToClientExpiryPeriod(data?.expiryPeriodType),
         expiryDays: data?.expiryDays,
         expiryValuesLoading: isLoading,
     };

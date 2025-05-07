@@ -17,6 +17,7 @@ import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
 import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 import type { Props } from './scheduleDate.types';
+import { isValidPeriod } from '../../../../capture-core-utils/validators/form';
 
 const ScheduleDateField = withDefaultFieldContainer()(
     withLabel({
@@ -57,6 +58,8 @@ const ScheduleDatePlain = ({
     eventCountInOrgUnit,
     classes,
     hideDueDate,
+    programExpiryPeriodType,
+    programExpiryDays,
 }: Props) => {
     const validateDate = (dateString, internalComponentError) => {
         if (!hasValue(dateString)) {
@@ -67,10 +70,29 @@ const ScheduleDatePlain = ({
         }
 
         const dateValidation = isValidDate(dateString, internalComponentError);
+        if (!programExpiryPeriodType || !programExpiryDays) {
+            return {
+                error: false,
+                validationText: '',
+            };
+        }
+        const { isValid: validPeriod, firstValidDate } = isValidPeriod(dateString, {
+            programExpiryPeriodType,
+            programExpiryDays,
+        });
         if (!dateValidation.valid) {
             return {
                 error: true,
                 validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
+            };
+        }
+        if (!validPeriod) {
+            return {
+                error: true,
+                validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}', {
+                    firstValidDate,
+                    interpolation: { escapeValue: false },
+                }),
             };
         }
 
