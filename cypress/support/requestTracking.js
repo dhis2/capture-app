@@ -1,8 +1,16 @@
-// Collects GET requests from Capture to the tracker API and groups them by page, path and test name.
-// TODO think about how to organize the data to then more easily answer
-// on the same page
+// Collects GET requests from Capture to the tracker API and groups them by test, page and API path.
+//
+// This should help answer questions like
 // - are we making duplicate requests?
 // - are we making very similar requests?
+// - are we making expensive requests?
+//
+// Running the Cypress tests https://github.com/dhis2/capture-app/wiki/Cypress#run-cypress-tests-locally generates ../../trackerRequests.json.
+//
+// You can slice and dice the data as you like. This shows you the top x pages ordered by the most
+// requests made to the same API. Change the args, command to find your answers :)
+//
+// jq --arg top 10 --arg host http://localhost:8080/apps/capture -r 'to_entries | map(.key as $scenario | .value | to_entries | map(.key as $page | .value | to_entries | map({name: $scenario, page: $page, api: .key, count: .value.count}))[]) | flatten | sort_by(-.count) | .[0:($top|tonumber)] | .[] | "\(.count) requests by test: \(.name)\n   from page: \($host)\(.page)\n   to API: \(.api)"' trackerRequests.json
 const requestsPerTests = {};
 let currentPage = '';
 
