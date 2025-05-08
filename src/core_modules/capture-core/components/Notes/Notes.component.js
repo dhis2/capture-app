@@ -143,7 +143,7 @@ const NotesPlain = ({
             </Editor>
             <div className={classes.newNoteButtonsContainer} data-test="note-buttons-container">
                 <Button
-                    data-test="add-note-btn"
+                    dataTest="add-note-btn"
                     onClick={handleAddNote}
                     className={classes.addNoteContainer}
                     primary
@@ -175,7 +175,7 @@ const NotesPlain = ({
                     disabled={!canAddNote}
                     // eslint-disable-next-line indent
                     small={smallMainButton}
-                    data-test="write-note-btn"
+                    dataTest="write-note-btn"
                 >
                     {i18n.t('Write note')}
                 </Button>
