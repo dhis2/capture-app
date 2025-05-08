@@ -1,3 +1,10 @@
+## [102.3.6](https://github.com/dhis2/capture-app/compare/v102.3.5...v102.3.6) (2025-05-08)
+
+
+### Bug Fixes
+
+* [DHIS2-19172] Auto-generated events do not have report date prefilled in new event form ([#4067](https://github.com/dhis2/capture-app/issues/4067)) ([e4ca23e](https://github.com/dhis2/capture-app/commit/e4ca23e1cde4a2d4f583352de41d7cabf84c1c7e))
+
 ## [102.3.5](https://github.com/dhis2/capture-app/compare/v102.3.4...v102.3.5) (2025-05-07)
 
 
