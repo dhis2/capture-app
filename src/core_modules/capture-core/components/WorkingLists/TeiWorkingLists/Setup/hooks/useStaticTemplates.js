@@ -7,7 +7,7 @@ export const useStaticTemplates = (defaultAlteredTemplate?: WorkingListTemplate,
     useMemo(
         () => [
             defaultAlteredTemplate || {
-                id: defaultTemplateId ?? 'default',
+                id: defaultTemplateId,
                 isDefault: true,
                 name: 'default',
                 access: {
