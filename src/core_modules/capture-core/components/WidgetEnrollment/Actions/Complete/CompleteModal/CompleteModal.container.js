@@ -44,7 +44,7 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
     const onHandleCompleteEnrollmentAndEvents = useCallback(() => {
         const nowClient = fromClientDate(new Date());
         const nowServer = new Date(nowClient.getServerZonedISOString());
-        const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+        const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
         const eventsToComplete = events.reduce((acc, event) => {
             const { access } = programStages.find(p => p.id === event.programStage) || {};
             if (event.status === eventStatuses.ACTIVE && access.data.write) {

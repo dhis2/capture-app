@@ -1011,6 +1011,9 @@ msgstr ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr "No searchable attributes for {{trackedEntityName}}"
+
 msgid "Search in all programs"
 msgstr "Search in all programs"
 
@@ -1382,13 +1385,11 @@ msgid "Edit {{trackedEntityName}}"
 msgstr "Edit {{trackedEntityName}}"
 
 msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 msgstr ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 
 msgid " Loading..."
 msgstr " Loading..."
