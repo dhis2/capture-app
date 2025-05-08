@@ -1,3 +1,10 @@
+## [102.4.1](https://github.com/dhis2/capture-app/compare/v102.4.0...v102.4.1) (2025-05-08)
+
+
+### Bug Fixes
+
+* [DHIS2-18671] Discard changes dialog not responding ([#4059](https://github.com/dhis2/capture-app/issues/4059)) ([11f9223](https://github.com/dhis2/capture-app/commit/11f92234307e04d3ae665e02b2def878741f223d))
+
 # [102.4.0](https://github.com/dhis2/capture-app/compare/v102.3.6...v102.4.0) (2025-05-08)
 
 
