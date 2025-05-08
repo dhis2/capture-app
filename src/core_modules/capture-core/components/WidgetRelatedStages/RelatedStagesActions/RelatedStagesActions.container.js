@@ -8,6 +8,7 @@ import { relatedStageStatus } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
 import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
 import { useProgramExpiry } from '../../../hooks';
+import { useAuthorities } from '../../../utils/authority/useAuthorities';
 
 const RelatedStagesActionsPlain = ({
     programId,
@@ -40,6 +41,7 @@ const RelatedStagesActionsPlain = ({
     });
     const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
     const { expiryPeriodType, expiryDays } = useProgramExpiry(programId);
+    const { hasAuthority } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
     useEffect(() => {
         if (!orgUnitLoading && data?.length === 1) {
             setRelatedStageDataValues(prev => ({
@@ -65,7 +67,6 @@ const RelatedStagesActionsPlain = ({
 
     const formIsValid = useCallback(() => {
         const { scheduledAt, scheduledAtFormatError, orgUnit, linkedEventId, linkMode } = relatedStageDataValues;
-
         return relatedStageWidgetIsValid({
             linkMode,
             scheduledAt,
@@ -74,9 +75,10 @@ const RelatedStagesActionsPlain = ({
             linkedEventId,
             programExpiryPeriodType: expiryPeriodType,
             programExpiryDays: expiryDays,
+            canEditExpiredPeriod: hasAuthority,
             setErrorMessages: addErrorMessage,
         });
-    }, [relatedStageDataValues, expiryPeriodType, expiryDays]);
+    }, [relatedStageDataValues, expiryPeriodType, expiryDays, hasAuthority]);
 
     const getLinkedStageValues = () => ({
         linkMode: relatedStageDataValues.linkMode,

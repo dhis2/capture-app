@@ -22,6 +22,7 @@ import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategor
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { pipe } from '../../../capture-core-utils';
 import { useProgramExpiry } from '../../hooks';
+import { useAuthorities } from '../../utils/authority/useAuthorities';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -77,6 +78,7 @@ export const WidgetEventSchedule = ({
     const [categoryOptionsError, setCategoryOptionsError] = useState();
     const { programCategory } = useCategoryCombinations(programId);
     const { expiryPeriodType, expiryDays } = useProgramExpiry(programId);
+    const { hasAuthority } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
 
     useEffect(() => {
         if (isFirstRender.current && !scheduleDate && suggestedScheduleDate) {
@@ -220,6 +222,7 @@ export const WidgetEventSchedule = ({
             onSetAssignee={onSetAssignee}
             programExpiryPeriodType={expiryPeriodType}
             programExpiryDays={expiryDays}
+            canEditExpiredPeriod={hasAuthority}
             {...passOnProps}
         />
     );

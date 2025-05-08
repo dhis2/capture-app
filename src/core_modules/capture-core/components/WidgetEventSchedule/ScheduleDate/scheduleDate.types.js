@@ -17,6 +17,7 @@ export type Props = {|
     orgUnit: { id: string, name: string },
     programExpiryPeriodType?: string,
     programExpiryDays?: number,
+    canEditExpiredPeriod: boolean,
     validation?: ?{
         error: boolean,
         validationText: string,

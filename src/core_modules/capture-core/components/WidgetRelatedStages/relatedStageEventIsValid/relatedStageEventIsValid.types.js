@@ -15,4 +15,5 @@ export type RelatedStageIsValidProps = {|
     setErrorMessages: (message: ErrorMessagesForRelatedStages) => void,
     programExpiryPeriodType?: string,
     programExpiryDays?: number,
+    canEditExpiredPeriod: boolean,
 |}

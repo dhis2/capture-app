@@ -12,6 +12,7 @@ type Props = {
     setErrorMessages: (messages: Object) => void,
     programExpiryPeriodType?: string,
     programExpiryDays?: number,
+    canEditExpiredPeriod?: boolean,
 };
 
 export const isScheduledDateValid = (
@@ -19,6 +20,7 @@ export const isScheduledDateValid = (
     scheduledAtFormatError: ?{ error: ?string, errorCode: ?string },
     programExpiryPeriodType?: string,
     programExpiryDays?: number,
+    canEditExpiredPeriod?: boolean,
 ) => {
     const dateValidation = isValidDate(scheduledDate, scheduledAtFormatError);
 
@@ -32,10 +34,7 @@ export const isScheduledDateValid = (
             validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
         };
     }
-
-    console.log('scheduledDate', programExpiryPeriodType, programExpiryDays);
-
-    if (!programExpiryPeriodType || !programExpiryDays) {
+    if (!programExpiryPeriodType || !programExpiryDays || canEditExpiredPeriod) {
         return {
             valid: false,
             validationText: '',
@@ -70,12 +69,14 @@ const scheduleInOrgUnit = (props) => {
         setErrorMessages,
         programExpiryPeriodType,
         programExpiryDays,
+        canEditExpiredPeriod,
     } = props ?? {};
     const { valid: scheduledAtIsValid, validationText } = isScheduledDateValid(
         scheduledAt,
         scheduledAtFormatError,
         programExpiryPeriodType,
         programExpiryDays,
+        canEditExpiredPeriod,
     );
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 

@@ -6,6 +6,7 @@ import { useDataEntrySections } from './hooks';
 import { Section } from '../../../../metaData';
 import { RelatedStagesActions } from '../../../WidgetRelatedStages';
 import { useProgramExpiry } from '../../../../hooks';
+import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 
 const getSectionId = sectionId =>
     (sectionId === Section.MAIN_SECTION_ID ? `${Section.MAIN_SECTION_ID}-stage` : sectionId);
@@ -20,6 +21,7 @@ export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
     const beforeSectionId = getSectionId(firstSectionId);
     const dataEntrySections = useDataEntrySections(stageName, beforeSectionId);
     const { expiryPeriodType, expiryDays } = useProgramExpiry(props.programId);
+    const { hasAuthority } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
 
     return (
         <>
@@ -29,6 +31,7 @@ export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
                 orgUnitId={orgUnit?.id}
                 firstStageMetaData={firstStageMetaData}
                 dataEntrySections={dataEntrySections}
+                canEditExpiredPeriod={hasAuthority}
                 programExpiryPeriodType={expiryPeriodType}
                 programExpiryDays={expiryDays}
             />
