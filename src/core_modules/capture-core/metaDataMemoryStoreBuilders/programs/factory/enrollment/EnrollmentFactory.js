@@ -310,7 +310,7 @@ export class EnrollmentFactory {
                     });
                 } else if (cachedProgramSections) {
                     // $FlowFixMe
-                    cachedProgramSections.asyncForEach(async (programSection) => {
+                    await cachedProgramSections.asyncForEach(async (programSection) => {
                         section = await this._buildSection(
                             programSection.trackedEntityAttributes.map(id => trackedEntityAttributeDictionary[id]),
                             programSection.displayFormName,
