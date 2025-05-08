@@ -11,13 +11,12 @@ import {
     withInternalChangeHandler,
 } from 'capture-core/components/FormFields/New';
 import { isValidDate } from 'capture-core/utils/validation/validators/form';
-import { hasValue } from 'capture-core-utils/validators/form';
+import { hasValue, isValidPeriod } from 'capture-core-utils/validators/form';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
 import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 import type { Props } from './scheduleDate.types';
-import { isValidPeriod } from '../../../../capture-core-utils/validators/form';
 
 const ScheduleDateField = withDefaultFieldContainer()(
     withLabel({
@@ -85,12 +84,12 @@ const ScheduleDatePlain = ({
             };
         }
 
-        const { isValid: validPeriod, firstValidDate } = isValidPeriod(dateString, {
+        const { isWithinValidPeriod, firstValidDate } = isValidPeriod(dateString, {
             programExpiryPeriodType,
             programExpiryDays,
         });
 
-        if (!validPeriod) {
+        if (!isWithinValidPeriod) {
             return {
                 error: true,
                 validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}', {

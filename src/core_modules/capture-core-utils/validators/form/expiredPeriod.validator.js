@@ -12,11 +12,15 @@ import { convertIsoToLocalCalendar } from '../../../capture-core/utils/converter
 export const isValidPeriod = (
     reportDate: string,
     props: {
-        programExpiryPeriodType: string,
-        programExpiryDays: number,
+        programExpiryPeriodType?: string,
+        programExpiryDays?: number,
     },
 ) => {
     const { programExpiryPeriodType, programExpiryDays } = props;
+
+    if (!programExpiryPeriodType || !programExpiryDays) {
+        return { isWithinValidPeriod: true, firstValidDate: undefined };
+    }
 
     const convertFn = pipe(convertFormToClient, convertClientToServer);
     const reportDateServer = convertFn(reportDate, dataElementTypes.DATE);
@@ -34,8 +38,8 @@ export const isValidPeriod = (
 
     const firstValidDateServer = thresholdPeriod.startDate;
 
-    const isValid = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;
+    const isWithinValidPeriod = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;
     const firstValidDate = convertIsoToLocalCalendar(firstValidDateServer);
 
-    return { isValid, firstValidDate };
+    return { isWithinValidPeriod, firstValidDate };
 };

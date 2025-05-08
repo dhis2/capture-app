@@ -21,10 +21,10 @@ const validateNotExpired = (
     if (!value || !props.programExpiryPeriodType || props.canEditExpiredPeriod) {
         return true;
     }
-    const { isValid, firstValidDate } = isValidPeriod(value, props);
+    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(value, props);
 
     return {
-        valid: isValid,
+        valid: isWithinValidPeriod,
         errorMessage: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
             firstValidDate,
             interpolation: { escapeValue: false },

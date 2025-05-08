@@ -22,31 +22,24 @@ export const isScheduledDateValid = (
     programExpiryDays?: number,
     canEditExpiredPeriod?: boolean,
 ) => {
-    const dateValidation = isValidDate(scheduledDate, scheduledAtFormatError);
-
     if (!scheduledDate) {
-        return { valid: false, validationText: i18n.t('Please enter a dateee') };
+        return { valid: false, validationText: i18n.t('Please enter a date') };
     }
 
+    const dateValidation = isValidDate(scheduledDate, scheduledAtFormatError);
     if (!dateValidation.valid) {
         return {
             valid: false,
             validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
         };
     }
-    if (!programExpiryPeriodType || !programExpiryDays || canEditExpiredPeriod) {
-        return {
-            valid: false,
-            validationText: '',
-        };
-    }
 
-    const { isValid: validPeriod, firstValidDate } = isValidPeriod(scheduledDate, {
+    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(scheduledDate, {
         programExpiryPeriodType,
         programExpiryDays,
     });
 
-    if (!validPeriod) {
+    if (!canEditExpiredPeriod && !isWithinValidPeriod) {
         return {
             valid: false,
             validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}', {
