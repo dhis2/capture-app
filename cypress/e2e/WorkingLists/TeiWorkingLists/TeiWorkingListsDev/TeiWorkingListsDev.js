@@ -1,5 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
+import { hasVersionSupport } from '../../../../support/tagUtils';
 
 beforeEach(() => {
     // Disable cache for chromium browsers to force the api to be called
@@ -81,9 +82,10 @@ Then('teis with an active enrollment should be retrieved from the api', () => {
         .its('response.statusCode')
         .should('eq', 200);
 
+    const statusKey = hasVersionSupport('@v>=42') ? 'enrollmentStatus' : 'programStatus';
     cy.get('@result')
         .its('response.url')
-        .should('include', 'programStatus=ACTIVE');
+        .should('include', `${statusKey}=ACTIVE`);
 
     cy.get('@result')
         .its('response.url')
@@ -106,9 +108,10 @@ Then('teis with active enrollments and unassigned events should be retrieved fro
         .its('response.statusCode')
         .should('eq', 200);
 
+    const statusKey = hasVersionSupport('@v>=42') ? 'enrollmentStatus' : 'programStatus';
     cy.get('@result')
         .its('response.url')
-        .should('include', 'programStatus=ACTIVE');
+        .should('include', `${statusKey}=ACTIVE`);
 
     cy.get('@result')
         .its('response.url')
