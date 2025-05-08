@@ -15,6 +15,9 @@ export type Props = {|
     serverSuggestedScheduleDate?: ?string,
     hideDueDate?: boolean,
     orgUnit: { id: string, name: string },
+    programExpiryPeriodType?: string,
+    programExpiryDays?: number,
+    canEditExpiredPeriod: boolean,
     validation?: ?{
         error: boolean,
         validationText: string,
