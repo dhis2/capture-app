@@ -46,7 +46,7 @@ export const getStyles = (theme: Theme) => ({
 });
 
 
-export const SearchResultsIndex = ({
+const SearchResultsIndex = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     startFallbackSearch,
@@ -61,7 +61,6 @@ export const SearchResultsIndex = ({
     currentSearchScopeName,
     currentFormId,
     currentSearchTerms,
-    fallbackTriggered,
     handleCreateNew,
     orgUnitId,
 }: Props) => {
@@ -206,7 +205,7 @@ export const SearchResultsIndex = ({
             </div>
         </Widget>}
         {
-            currentSearchScopeType === searchScopes.PROGRAM && !fallbackTriggered && otherResults === undefined &&
+            currentSearchScopeType === searchScopes.PROGRAM && otherResults === undefined &&
             <div className={classes.bottom}>
                 <div className={classes.bottomText}>
                     {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
@@ -233,7 +232,10 @@ export const SearchResultsIndex = ({
                 {i18n.t('If none of search results match, you can create a new ')}&quot;{trackedEntityName}&quot;.
             </div>
 
-            <Button onClick={handleCreateNew} dataTest="create-new-button">
+            <Button
+                onClick={() => handleCreateNew(currentSearchTerms)}
+                dataTest="create-new-button"
+            >
                 {i18n.t('Create new')}
             </Button>
         </div>

@@ -1,3 +1,38 @@
+## [102.3.5](https://github.com/dhis2/capture-app/compare/v102.3.4...v102.3.5) (2025-05-07)
+
+
+### Bug Fixes
+
+* [DHIS2-13236] Incorrect text on top of Profile widget ([#4068](https://github.com/dhis2/capture-app/issues/4068)) ([0ab5c87](https://github.com/dhis2/capture-app/commit/0ab5c878605a1ed02d50d755e3afd2a8cb6c0e03))
+
+## [102.3.4](https://github.com/dhis2/capture-app/compare/v102.3.3...v102.3.4) (2025-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-19307] load section containing a DE not contained in the PS ([#4021](https://github.com/dhis2/capture-app/issues/4021)) ([58c1959](https://github.com/dhis2/capture-app/commit/58c195927e90fcf426eaba55bd9fe42a1d77fd25))
+
+## [102.3.3](https://github.com/dhis2/capture-app/compare/v102.3.2...v102.3.3) (2025-05-05)
+
+
+### Bug Fixes
+
+* [DHIS2-19450] format updatedAt with en locale ([#4069](https://github.com/dhis2/capture-app/issues/4069)) ([725019c](https://github.com/dhis2/capture-app/commit/725019c22427ecb54dc62579ead27f5ea9bca99e))
+
+## [102.3.2](https://github.com/dhis2/capture-app/compare/v102.3.1...v102.3.2) (2025-05-02)
+
+
+### Bug Fixes
+
+* [DHIS2-19441][DHIS2-19442] Missing translation ([#4058](https://github.com/dhis2/capture-app/issues/4058)) ([e86d8cf](https://github.com/dhis2/capture-app/commit/e86d8cf97a53726bfc53d5a48575aea5ee998298))
+
+## [102.3.1](https://github.com/dhis2/capture-app/compare/v102.3.0...v102.3.1) (2025-05-01)
+
+
+### Bug Fixes
+
+* [DHIS2-19011] Forms retain values after search ([#4045](https://github.com/dhis2/capture-app/issues/4045)) ([48ff559](https://github.com/dhis2/capture-app/commit/48ff55914adf5a778ee5a27370ba5b92164c59bc))
+
 # [102.3.0](https://github.com/dhis2/capture-app/compare/v102.2.0...v102.3.0) (2025-05-01)
 
 
