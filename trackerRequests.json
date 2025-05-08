@@ -1,0 +1,3024 @@
+{
+  "User interacts with tei working lists > The TEI custom working can be shared": {
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=M3xtLkYBlKI-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 311,
+            "status": 200
+          }
+        ],
+        "duration": 311
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=PpGINOT00UX": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?followUp=false&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "followUp": "false",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 305,
+            "status": 200
+          }
+        ],
+        "duration": 305
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=NoznaBGAjaR": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?followUp=false&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "followUp": "false",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 299,
+            "status": 200
+          }
+        ],
+        "duration": 299
+      }
+    }
+  },
+  "User interacts with tei working lists > User opens the default working list for a tracker program": {
+    "/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 435,
+            "status": 200
+          }
+        ],
+        "duration": 435
+      }
+    }
+  },
+  "User interacts with tei working lists > Show only teis with completed enrollments using the predefined working list": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 386,
+            "status": 304
+          }
+        ],
+        "duration": 386
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=complete": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 330,
+            "status": 200
+          }
+        ],
+        "duration": 330
+      }
+    }
+  },
+  "User interacts with tei working lists > Show only teis with completed enrollments using the filter": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 367,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 238,
+            "status": 304
+          }
+        ],
+        "duration": 605
+      }
+    }
+  },
+  "User interacts with tei working lists > Show only teis with first name containig John using the filter": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 387,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?filter=w75KJ2mc4zz%3Alike%3AJohn&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "filter": "w75KJ2mc4zz:like:John",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 209,
+            "status": 200
+          }
+        ],
+        "duration": 596
+      }
+    }
+  },
+  "User interacts with tei working lists > Show the registering unit column": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 378,
+            "status": 304
+          }
+        ],
+        "duration": 378
+      }
+    }
+  },
+  "User interacts with tei working lists > Show next page": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 366,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=2&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "2",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 411,
+            "status": 200
+          }
+        ],
+        "duration": 777
+      }
+    }
+  },
+  "User interacts with tei working lists > Show next page then previous page": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 370,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=2&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "2",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 389,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 415,
+            "status": 304
+          }
+        ],
+        "duration": 1174
+      }
+    }
+  },
+  "User interacts with tei working lists > Show next page then first page": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 376,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=2&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "2",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 384,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 507,
+            "status": 304
+          }
+        ],
+        "duration": 1267
+      }
+    }
+  },
+  "User interacts with tei working lists > Show 10 rows per page": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 374,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=10&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "10",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 307,
+            "status": 200
+          }
+        ],
+        "duration": 681
+      }
+    }
+  },
+  "User interacts with tei working lists > Show teis ordered ascendingly by first name": {
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 374,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=w75KJ2mc4zz%3Aasc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "w75KJ2mc4zz:asc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 412,
+            "status": 200
+          }
+        ],
+        "duration": 786
+      }
+    }
+  },
+  "User interacts with tei working lists > The TEI custom working lists is loaded": {
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=M3xtLkYBlKI-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=PpGINOT00UX": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    }
+  },
+  "User interacts with tei working lists > The user creates, updates and deletes a TEI custom working list": {
+    "/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 4,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 454,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 951,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 233,
+            "status": 200
+          }
+        ],
+        "duration": 1638
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=znN89zXF9xU": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 219,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=ACTIVE&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "ACTIVE",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 559,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 512,
+            "status": 304
+          }
+        ],
+        "duration": 1290
+      }
+    }
+  },
+  "User interacts with tei working lists > The user is navigated back to the selected working list after closing a TEI": {
+    "/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 455,
+            "status": 304
+          }
+        ],
+        "duration": 455
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=complete": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 336,
+            "status": 304
+          }
+        ],
+        "duration": 336
+      }
+    },
+    "/enrollment?enrollmentId=AUTO&orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&teiId=vOxUH373fy5": {
+      "/api/43/tracker/trackedEntities/vOxUH373fy5": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities/vOxUH373fy5?fields=attributes,trackedEntityType,programOwners",
+            "path": "/api/43/tracker/trackedEntities/vOxUH373fy5",
+            "query": {
+              "fields": "attributes,trackedEntityType,programOwners"
+            },
+            "duration": 41,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities/vOxUH373fy5?program=IpHINAT79UW&fields=programOwners%5Bprogram%2CorgUnit%5D",
+            "path": "/api/43/tracker/trackedEntities/vOxUH373fy5",
+            "query": {
+              "program": "IpHINAT79UW",
+              "fields": "programOwners[program,orgUnit]"
+            },
+            "duration": 127,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities/vOxUH373fy5?program=IpHINAT79UW&fields=enrollments",
+            "path": "/api/43/tracker/trackedEntities/vOxUH373fy5",
+            "query": {
+              "program": "IpHINAT79UW",
+              "fields": "enrollments"
+            },
+            "duration": 158,
+            "status": 200
+          }
+        ],
+        "duration": 326
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can delete a TEI working list right immediately after creating it.": {
+    "/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 4,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 413,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 874,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 179,
+            "status": 304
+          }
+        ],
+        "duration": 1466
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=rourlrLviUu": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=COMPLETED&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "COMPLETED",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 190,
+            "status": 304
+          }
+        ],
+        "duration": 190
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can open and select a program stage filter": {
+    "/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=M3xtLkYBlKI-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 287,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2Cs4NfKOuayqG%2CImv2o18b9wX%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,s4NfKOuayqG,Imv2o18b9wX,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 132,
+            "status": 200
+          }
+        ],
+        "duration": 419
+      },
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=uvMKOn1oWvd&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "uvMKOn1oWvd",
+              "fields": "*"
+            },
+            "duration": 86,
+            "status": 200
+          }
+        ],
+        "duration": 86
+      }
+    }
+  },
+  "User interacts with tei working lists > While in a program stage working list, the user can filter by both TEA and data elements": {
+    "/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 6,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 453,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=BHRmL07jKfL%2CI0bCsBZk2wu%2CpLr6VUoBiY6%2CXm1xcSZevRf%2CYGyelJBMeKy%2Cvu9dsAuJ29q%2CwNiQ2coVZ39%2CPgmUFEQYZdt%2CtWj04Ax4qlf%2Cerqa3phUfpI%2CH0YmvIuKqv0%2CB7sl37PwJlI&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "BHRmL07jKfL,I0bCsBZk2wu,pLr6VUoBiY6,Xm1xcSZevRf,YGyelJBMeKy,vu9dsAuJ29q,wNiQ2coVZ39,PgmUFEQYZdt,tWj04Ax4qlf,erqa3phUfpI,H0YmvIuKqv0,B7sl37PwJlI",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 91,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=BHRmL07jKfL%2CI0bCsBZk2wu%2CpLr6VUoBiY6%2CXm1xcSZevRf%2CYGyelJBMeKy%2Cvu9dsAuJ29q%2CwNiQ2coVZ39%2CPgmUFEQYZdt%2CtWj04Ax4qlf%2Cerqa3phUfpI%2CH0YmvIuKqv0%2CB7sl37PwJlI&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "BHRmL07jKfL,I0bCsBZk2wu,pLr6VUoBiY6,Xm1xcSZevRf,YGyelJBMeKy,vu9dsAuJ29q,wNiQ2coVZ39,PgmUFEQYZdt,tWj04Ax4qlf,erqa3phUfpI,H0YmvIuKqv0,B7sl37PwJlI",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 114,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=tWj04Ax4qlf%2Cerqa3phUfpI%2CH0YmvIuKqv0%2CB7sl37PwJlI&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "tWj04Ax4qlf,erqa3phUfpI,H0YmvIuKqv0,B7sl37PwJlI",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 91,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=tWj04Ax4qlf&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "tWj04Ax4qlf",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 197,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=tWj04Ax4qlf&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "tWj04Ax4qlf",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 56,
+            "status": 304
+          }
+        ],
+        "duration": 1002
+      },
+      "/api/43/tracker/events": {
+        "count": 5,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 112,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=ACTIVE&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "ACTIVE",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 146,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=ACTIVE&status=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "ACTIVE",
+              "status": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 129,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?filterAttributes=w75KJ2mc4zz%3Alike%3AUrzula&programStatus=ACTIVE&status=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "filterAttributes": "w75KJ2mc4zz:like:Urzula",
+              "programStatus": "ACTIVE",
+              "status": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 143,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?filter=sWoqcoByYmD%3Aeq%3Afalse&filterAttributes=w75KJ2mc4zz%3Alike%3AUrzula&programStatus=ACTIVE&status=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "filter": "sWoqcoByYmD:eq:false",
+              "filterAttributes": "w75KJ2mc4zz:like:Urzula",
+              "programStatus": "ACTIVE",
+              "status": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 448,
+            "status": 200
+          }
+        ],
+        "duration": 978
+      }
+    }
+  },
+  "User interacts with tei working lists > While in a program stage working list, the user can sort by both TEA and data elements": {
+    "/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 6,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 409,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=BHRmL07jKfL%2CI0bCsBZk2wu%2CpLr6VUoBiY6%2CXm1xcSZevRf%2CYGyelJBMeKy%2Cvu9dsAuJ29q%2CwNiQ2coVZ39%2CPgmUFEQYZdt%2CtWj04Ax4qlf%2Cerqa3phUfpI%2CH0YmvIuKqv0%2CB7sl37PwJlI&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "BHRmL07jKfL,I0bCsBZk2wu,pLr6VUoBiY6,Xm1xcSZevRf,YGyelJBMeKy,vu9dsAuJ29q,wNiQ2coVZ39,PgmUFEQYZdt,tWj04Ax4qlf,erqa3phUfpI,H0YmvIuKqv0,B7sl37PwJlI",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 55,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=tWj04Ax4qlf%2CH0YmvIuKqv0&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "tWj04Ax4qlf,H0YmvIuKqv0",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 67,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=tWj04Ax4qlf%2CH0YmvIuKqv0&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "tWj04Ax4qlf,H0YmvIuKqv0",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 21,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=H0YmvIuKqv0%2CtWj04Ax4qlf&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "H0YmvIuKqv0,tWj04Ax4qlf",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 23,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=tWj04Ax4qlf%2CH0YmvIuKqv0&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "tWj04Ax4qlf,H0YmvIuKqv0",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 21,
+            "status": 304
+          }
+        ],
+        "duration": 596
+      },
+      "/api/43/tracker/events": {
+        "count": 5,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 78,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?filterAttributes=w75KJ2mc4zz%3Alike%3Au&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "filterAttributes": "w75KJ2mc4zz:like:u",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 84,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?filterAttributes=w75KJ2mc4zz%3Alike%3Au&order=zDhUuAYrxNC%3Aasc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "filterAttributes": "w75KJ2mc4zz:like:u",
+              "order": "zDhUuAYrxNC:asc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 50,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?filterAttributes=w75KJ2mc4zz%3Alike%3Au&order=vANAXwtLwcT%3Aasc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "filterAttributes": "w75KJ2mc4zz:like:u",
+              "order": "vANAXwtLwcT:asc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 41,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?filterAttributes=w75KJ2mc4zz%3Alike%3Au&order=vANAXwtLwcT%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "filterAttributes": "w75KJ2mc4zz:like:u",
+              "order": "vANAXwtLwcT:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 64,
+            "status": 200
+          }
+        ],
+        "duration": 317
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can remove the program stage filter": {
+    "/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 390,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=BHRmL07jKfL%2CI0bCsBZk2wu%2CpLr6VUoBiY6%2CXm1xcSZevRf%2CYGyelJBMeKy%2Cvu9dsAuJ29q%2CwNiQ2coVZ39%2CPgmUFEQYZdt%2CtWj04Ax4qlf%2Cerqa3phUfpI%2CH0YmvIuKqv0%2CB7sl37PwJlI&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "BHRmL07jKfL,I0bCsBZk2wu,pLr6VUoBiY6,Xm1xcSZevRf,YGyelJBMeKy,vu9dsAuJ29q,wNiQ2coVZ39,PgmUFEQYZdt,tWj04Ax4qlf,erqa3phUfpI,H0YmvIuKqv0,B7sl37PwJlI",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 197,
+            "status": 304
+          }
+        ],
+        "duration": 587
+      },
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 124,
+            "status": 304
+          }
+        ],
+        "duration": 124
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can filter the events by scheduledAt date": {
+    "/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 4,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 413,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=BHRmL07jKfL%2CI0bCsBZk2wu%2CpLr6VUoBiY6%2CXm1xcSZevRf%2CYGyelJBMeKy%2Cvu9dsAuJ29q%2CwNiQ2coVZ39%2CPgmUFEQYZdt%2CtWj04Ax4qlf%2Cerqa3phUfpI%2CH0YmvIuKqv0%2CB7sl37PwJlI&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "BHRmL07jKfL,I0bCsBZk2wu,pLr6VUoBiY6,Xm1xcSZevRf,YGyelJBMeKy,vu9dsAuJ29q,wNiQ2coVZ39,PgmUFEQYZdt,tWj04Ax4qlf,erqa3phUfpI,H0YmvIuKqv0,B7sl37PwJlI",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 169,
+            "status": 304
+          }
+        ],
+        "duration": 582
+      },
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 145,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?scheduledAfter=2025-05-08&scheduledBefore=2025-05-08&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=WZbXY0S00lP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "scheduledAfter": "2025-05-08",
+              "scheduledBefore": "2025-05-08",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "WZbXY0S00lP",
+              "fields": "*"
+            },
+            "duration": 117,
+            "status": 200
+          }
+        ],
+        "duration": 262
+      }
+    }
+  },
+  "User interacts with tei working lists > The program stage working list configureation is kept when navigating": {
+    "/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 405,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=k4ODejBytgv%2CwNiQ2coVZ39&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "k4ODejBytgv,wNiQ2coVZ39",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 34,
+            "status": 200
+          }
+        ],
+        "duration": 439
+      },
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=bbKtnxRZKEP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "bbKtnxRZKEP",
+              "fields": "*"
+            },
+            "duration": 69,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=bbKtnxRZKEP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "bbKtnxRZKEP",
+              "fields": "*"
+            },
+            "duration": 84,
+            "status": 304
+          }
+        ],
+        "duration": 153
+      }
+    },
+    "/enrollmentEventEdit?eventId=xyCf4N3ESJU&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/events/xyCf4N3ESJU": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events/xyCf4N3ESJU",
+            "path": "/api/43/tracker/events/xyCf4N3ESJU",
+            "query": {},
+            "duration": 49,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events/xyCf4N3ESJU?fields=program,programStage,enrollment,trackedEntity,event",
+            "path": "/api/43/tracker/events/xyCf4N3ESJU",
+            "query": {
+              "fields": "program,programStage,enrollment,trackedEntity,event"
+            },
+            "duration": 281,
+            "status": 200
+          }
+        ],
+        "duration": 330
+      }
+    }
+  },
+  "User interacts with tei working lists > \"after each\" hook": {
+    "/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default": {
+      "/api/43/tracker/relationships": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/relationships?event=xyCf4N3ESJU&fields=from%2Cto%2CrelationshipType%2Crelationship%2CcreatedAt",
+            "path": "/api/43/tracker/relationships",
+            "query": {
+              "event": "xyCf4N3ESJU",
+              "fields": "from,to,relationshipType,relationship,createdAt"
+            },
+            "duration": 51,
+            "status": 200
+          }
+        ],
+        "duration": 51
+      }
+    }
+  },
+  "User interacts with tei working lists > The program stage working list without a orgUnit selected redirects to a tracker event": {
+    "/?programId=WSGAb5XwJ3Y&selectedTemplateId=WSGAb5XwJ3Y-default&all": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnitMode=ACCESSIBLE&program=WSGAb5XwJ3Y&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnitMode": "ACCESSIBLE",
+              "program": "WSGAb5XwJ3Y",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 555,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=JYWyAYTMdRv%2CD8G28uT0rmc%2CIOR1AXXl24H%2CY8aEiTpHSSQ%2CU2wOxsSMfnI%2CLz38wPTHYot%2CuMLt6VwXdlY%2CyePL5ikozRH%2CYEGdR3Xc7eW%2CDLeUHn2iSpk%2CcsS9S2Nji4A%2CdCtL74I7OOG%2CFONQxiQ3xrM%2CKEImyfAfPeU%2CnUHmhXVOo3q&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "JYWyAYTMdRv,D8G28uT0rmc,IOR1AXXl24H,Y8aEiTpHSSQ,U2wOxsSMfnI,Lz38wPTHYot,uMLt6VwXdlY,yePL5ikozRH,YEGdR3Xc7eW,DLeUHn2iSpk,csS9S2Nji4A,dCtL74I7OOG,FONQxiQ3xrM,KEImyfAfPeU,nUHmhXVOo3q",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 86,
+            "status": 200
+          }
+        ],
+        "duration": 641
+      },
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnitMode=ACCESSIBLE&program=WSGAb5XwJ3Y&programStage=bbKtnxRZKEP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnitMode": "ACCESSIBLE",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "bbKtnxRZKEP",
+              "fields": "*"
+            },
+            "duration": 218,
+            "status": 200
+          }
+        ],
+        "duration": 218
+      }
+    },
+    "/enrollmentEventEdit?eventId=cxQ44Gz8yEr&orgUnitId=yMCshbaVExv": {
+      "/api/43/tracker/events/cxQ44Gz8yEr": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events/cxQ44Gz8yEr?fields=program,programStage,enrollment,trackedEntity,event",
+            "path": "/api/43/tracker/events/cxQ44Gz8yEr",
+            "query": {
+              "fields": "program,programStage,enrollment,trackedEntity,event"
+            },
+            "duration": 76,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events/cxQ44Gz8yEr",
+            "path": "/api/43/tracker/events/cxQ44Gz8yEr",
+            "query": {},
+            "duration": 86,
+            "status": 200
+          }
+        ],
+        "duration": 162
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can open a program stage list without events": {
+    "/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 396,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=WSGAb5XwJ3Y&pageSize=15&trackedEntities=k4ODejBytgv%2CwNiQ2coVZ39&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "WSGAb5XwJ3Y",
+              "pageSize": "15",
+              "trackedEntities": "k4ODejBytgv,wNiQ2coVZ39",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 654,
+            "status": 200
+          }
+        ],
+        "duration": 1050
+      },
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=bbKtnxRZKEP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "bbKtnxRZKEP",
+              "fields": "*"
+            },
+            "duration": 126,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?occurredAfter=2025-05-08&occurredBefore=2025-05-08&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=WSGAb5XwJ3Y&programStage=bbKtnxRZKEP&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "occurredAfter": "2025-05-08",
+              "occurredBefore": "2025-05-08",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "WSGAb5XwJ3Y",
+              "programStage": "bbKtnxRZKEP",
+              "fields": "*"
+            },
+            "duration": 69,
+            "status": 200
+          }
+        ],
+        "duration": 195
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can filter the Foci response assigned events": {
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=M3xtLkYBlKI-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 250,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2Cs4NfKOuayqG%2CImv2o18b9wX%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,s4NfKOuayqG,Imv2o18b9wX,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 92,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=ClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 55,
+            "status": 200
+          }
+        ],
+        "duration": 397
+      },
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=uvMKOn1oWvd&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "uvMKOn1oWvd",
+              "fields": "*"
+            },
+            "duration": 109,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?assignedUserMode=ANY&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=uvMKOn1oWvd&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "assignedUserMode": "ANY",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "uvMKOn1oWvd",
+              "fields": "*"
+            },
+            "duration": 216,
+            "status": 200
+          }
+        ],
+        "duration": 325
+      }
+    }
+  },
+  "User interacts with tei working lists > The assigned user data is kept when switching between working list types": {
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=M3xtLkYBlKI-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 6,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 255,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=S3JjTA4QMNe%2CdNpxRu1mWG5%2Cs4NfKOuayqG%2CImv2o18b9wX%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "S3JjTA4QMNe,dNpxRu1mWG5,s4NfKOuayqG,Imv2o18b9wX,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 46,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 45,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?assignedUserMode=ANY&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "assignedUserMode": "ANY",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 208,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?assignedUserMode=NONE&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "assignedUserMode": "NONE",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 267,
+            "status": 200
+          }
+        ],
+        "duration": 821
+      },
+      "/api/43/tracker/events": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=CWaAcQYKVpq&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "CWaAcQYKVpq",
+              "fields": "*"
+            },
+            "duration": 80,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?assignedUserMode=ANY&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=CWaAcQYKVpq&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "assignedUserMode": "ANY",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "CWaAcQYKVpq",
+              "fields": "*"
+            },
+            "duration": 82,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?assignedUserMode=NONE&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=uvMKOn1oWvd&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "assignedUserMode": "NONE",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "uvMKOn1oWvd",
+              "fields": "*"
+            },
+            "duration": 61,
+            "status": 200
+          }
+        ],
+        "duration": 223
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can create and delete a program stage working list for Foci investigation & classification assigned events": {
+    "/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=M3xtLkYBlKI-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 5,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 261,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=S3JjTA4QMNe%2CdNpxRu1mWG5%2Cs4NfKOuayqG%2CImv2o18b9wX%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "S3JjTA4QMNe,dNpxRu1mWG5,s4NfKOuayqG,Imv2o18b9wX,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 92,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 115,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 103,
+            "status": 304
+          }
+        ],
+        "duration": 571
+      },
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=CWaAcQYKVpq&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "CWaAcQYKVpq",
+              "fields": "*"
+            },
+            "duration": 129,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?assignedUserMode=ANY&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=CWaAcQYKVpq&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "assignedUserMode": "ANY",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "CWaAcQYKVpq",
+              "fields": "*"
+            },
+            "duration": 96,
+            "status": 304
+          }
+        ],
+        "duration": 225
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=EZkB4CPbKXQ": {
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?assignedUserMode=ANY&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=CWaAcQYKVpq&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "assignedUserMode": "ANY",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "CWaAcQYKVpq",
+              "fields": "*"
+            },
+            "duration": 93,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?assignedUserMode=ANY&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=CWaAcQYKVpq&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "assignedUserMode": "ANY",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "CWaAcQYKVpq",
+              "fields": "*"
+            },
+            "duration": 44,
+            "status": 304
+          }
+        ],
+        "duration": 137
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 57,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 308,
+            "status": 304
+          }
+        ],
+        "duration": 365
+      }
+    }
+  },
+  "User interacts with tei working lists > The user creates, updates and deletes a Program stage custom working list": {
+    "/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 5,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 445,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj%2CTiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj,TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 92,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 76,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 111,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=TiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 60,
+            "status": 304
+          }
+        ],
+        "duration": 784
+      },
+      "/api/43/tracker/events": {
+        "count": 4,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 107,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 113,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=COMPLETED&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "COMPLETED",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 71,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=ACTIVE&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "ACTIVE",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 155,
+            "status": 304
+          }
+        ],
+        "duration": 446
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=N0HXCqhI0Ag": {
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=COMPLETED&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "COMPLETED",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 177,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=ACTIVE&enrollmentEnrolledAfter=2022-08-12&enrollmentEnrolledBefore=2028-02-02&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "ACTIVE",
+              "enrollmentEnrolledAfter": "2022-08-12",
+              "enrollmentEnrolledBefore": "2028-02-02",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 113,
+            "status": 200
+          }
+        ],
+        "duration": 290
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 3,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 32,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=TiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 75,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 593,
+            "status": 304
+          }
+        ],
+        "duration": 700
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can delete a Program stage working list right immediately after creating it.": {
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 430,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj%2CTiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj,TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 94,
+            "status": 304
+          }
+        ],
+        "duration": 524
+      },
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 90,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 114,
+            "status": 304
+          }
+        ],
+        "duration": 204
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=Dct2RxlxR7t": {
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 82,
+            "status": 304
+          }
+        ],
+        "duration": 82
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj%2CTiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj,TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 47,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 541,
+            "status": 304
+          }
+        ],
+        "duration": 588
+      }
+    }
+  },
+  "User interacts with tei working lists > The Program stage custom working can be shared": {
+    "/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 429,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj%2CTiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj,TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 75,
+            "status": 200
+          }
+        ],
+        "duration": 504
+      },
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 80,
+            "status": 304
+          }
+        ],
+        "duration": 80
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=mBxVYvqaEos": {
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 84,
+            "status": 304
+          }
+        ],
+        "duration": 84
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj%2CTiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj,TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 42,
+            "status": 304
+          }
+        ],
+        "duration": 42
+      }
+    }
+  },
+  "User interacts with tei working lists > The Program stage working list configuration is kept when changing the org unit": {
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 437,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj%2CTiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj,TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 105,
+            "status": 304
+          }
+        ],
+        "duration": 542
+      },
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 97,
+            "status": 304
+          }
+        ],
+        "duration": 97
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk&selectedTemplateId=i44LcMISChF": {
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 76,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?status=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "status": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 102,
+            "status": 200
+          }
+        ],
+        "duration": 178
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj%2CTiMeEVph5R5%2CILEn0CQsV2B%2CKWsrqi7xrX7&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj,TiMeEVph5R5,ILEn0CQsV2B,KWsrqi7xrX7",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 43,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=qDkgAbB5Jlk&pageSize=15&trackedEntities=QGyxOe1zewj&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "qDkgAbB5Jlk",
+              "pageSize": "15",
+              "trackedEntities": "QGyxOe1zewj",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 171,
+            "status": 304
+          }
+        ],
+        "duration": 214
+      }
+    },
+    "/?orgUnitId=g8upMTyEZGZ&programId=qDkgAbB5Jlk&selectedTemplateId=i44LcMISChF": {
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?status=COMPLETED&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=g8upMTyEZGZ&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "status": "COMPLETED",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "g8upMTyEZGZ",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 52,
+            "status": 200
+          }
+        ],
+        "duration": 52
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=g8upMTyEZGZ&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "g8upMTyEZGZ",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 402,
+            "status": 200
+          }
+        ],
+        "duration": 402
+      }
+    },
+    "/?orgUnitId=g8upMTyEZGZ&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default": {
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=g8upMTyEZGZ&orgUnitMode=SELECTED&program=qDkgAbB5Jlk&programStage=C0aLZo75dgJ&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "g8upMTyEZGZ",
+              "orgUnitMode": "SELECTED",
+              "program": "qDkgAbB5Jlk",
+              "programStage": "C0aLZo75dgJ",
+              "fields": "*"
+            },
+            "duration": 152,
+            "status": 200
+          }
+        ],
+        "duration": 152
+      }
+    }
+  },
+  "\"after each\" hook": {
+    "/?orgUnitId=g8upMTyEZGZ&programId=qDkgAbB5Jlk&selectedTemplateId=qDkgAbB5Jlk-default": {
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can save a program stage working list, based on a TEI working list configuration": {
+    "/?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/events": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=M3xtLkYBlKI-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 5,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 344,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2CImv2o18b9wX%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,Imv2o18b9wX,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 30,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2CImv2o18b9wX%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,Imv2o18b9wX,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 30,
+            "status": 304
+          }
+        ],
+        "duration": 404
+      },
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=ACTIVE&followUp=false&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=uvMKOn1oWvd&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "ACTIVE",
+              "followUp": "false",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "uvMKOn1oWvd",
+              "fields": "*"
+            },
+            "duration": 65,
+            "status": 200
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=ACTIVE&followUp=false&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=uvMKOn1oWvd&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "ACTIVE",
+              "followUp": "false",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "uvMKOn1oWvd",
+              "fields": "*"
+            },
+            "duration": 60,
+            "status": 304
+          }
+        ],
+        "duration": 125
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=klhzVgls081": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?programStatus=ACTIVE&followUp=false&order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "programStatus": "ACTIVE",
+              "followUp": "false",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 322,
+            "status": 200
+          }
+        ],
+        "duration": 322
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=M3xtLkYBlKI&selectedTemplateId=UKxocjlQDaG": {
+      "/api/43/tracker/events": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=ACTIVE&followUp=false&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=uvMKOn1oWvd&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "ACTIVE",
+              "followUp": "false",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "uvMKOn1oWvd",
+              "fields": "*"
+            },
+            "duration": 92,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/events?programStatus=ACTIVE&followUp=false&order=createdAt%3Adesc&page=1&pageSize=15&orgUnit=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&programStage=uvMKOn1oWvd&fields=*",
+            "path": "/api/43/tracker/events",
+            "query": {
+              "programStatus": "ACTIVE",
+              "followUp": "false",
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnit": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "programStage": "uvMKOn1oWvd",
+              "fields": "*"
+            },
+            "duration": 154,
+            "status": 304
+          }
+        ],
+        "duration": 246
+      },
+      "/api/43/tracker/trackedEntities": {
+        "count": 2,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?program=M3xtLkYBlKI&pageSize=15&trackedEntities=dNpxRu1mWG5%2CImv2o18b9wX%2CClJ3fn47c4s&fields=trackedEntity%2CcreatedAt%2Cattributes%5Battribute%2Cvalue%5D%2CprogramOwners%5BorgUnit%5D%2Cenrollments%5Benrollment%2Cstatus%2CorgUnit%2CenrolledAt%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "program": "M3xtLkYBlKI",
+              "pageSize": "15",
+              "trackedEntities": "dNpxRu1mWG5,Imv2o18b9wX,ClJ3fn47c4s",
+              "fields": "trackedEntity,createdAt,attributes[attribute,value],programOwners[orgUnit],enrollments[enrollment,status,orgUnit,enrolledAt]"
+            },
+            "duration": 36,
+            "status": 304
+          },
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=M3xtLkYBlKI&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "M3xtLkYBlKI",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 290,
+            "status": 304
+          }
+        ],
+        "duration": 326
+      }
+    }
+  },
+  "User interacts with tei working lists > The user can download the tracked entity working list": {
+    "/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [],
+        "duration": 0
+      }
+    },
+    "/?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnits=DiszpKrYNg8&orgUnitMode=SELECTED&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnits": "DiszpKrYNg8",
+              "orgUnitMode": "SELECTED",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 394,
+            "status": 304
+          }
+        ],
+        "duration": 394
+      }
+    }
+  },
+  "User interacts with tei working lists > The user cannot download the tracked entity working list when no orgUnit is selected": {
+    "/?programId=IpHINAT79UW&selectedTemplateId=IpHINAT79UW-default&all": {
+      "/api/43/tracker/trackedEntities": {
+        "count": 1,
+        "requests": [
+          {
+            "href": "http://localhost:8080/api/43/tracker/trackedEntities?order=createdAt%3Adesc&page=1&pageSize=15&orgUnitMode=ACCESSIBLE&program=IpHINAT79UW&fields=%3Aall%2C!relationships%2CprogramOwners%5BorgUnit%2Cprogram%5D",
+            "path": "/api/43/tracker/trackedEntities",
+            "query": {
+              "order": "createdAt:desc",
+              "page": "1",
+              "pageSize": "15",
+              "orgUnitMode": "ACCESSIBLE",
+              "program": "IpHINAT79UW",
+              "fields": ":all,!relationships,programOwners[orgUnit,program]"
+            },
+            "duration": 460,
+            "status": 200
+          }
+        ],
+        "duration": 460
+      }
+    }
+  }
+}

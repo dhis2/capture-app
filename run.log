@@ -24,6 +24,2114 @@ $ /home/ivo/code/dhis2/capture-app/node_modules/.bin/cypress run
 
 
   the user interacts with the "view all records regardless of OrgUnit"-page.
-    ✓ The working list are hidden by default (4522ms)
-    ✓ A message will be shown when OrgUnit is not selected (14532ms)
-    ✓ The working list will hydrate when event program is selected (4050ms)
+    ✓ The working list are hidden by default (1061ms)
+    ✓ A message will be shown when OrgUnit is not selected (5598ms)
+    ✓ The working list will hydrate when event program is selected (3609ms)
+    ✓ The working list will hydrate when tracker program is selected (2976ms)
+    ✓ the working list will hydrate when updated by the URL (2706ms)
+    ✓ The user can edit an event without selecting OrgUnit (7219ms)
+
+
+  6 passing (24s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        6                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     23 seconds                                                                       │
+  │ Spec Ran:     AllAccessibleRecordsPage/AllAccessibleRecordsPage.feature                        │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  MainPage/MainPage.feature                                                      (2 of 34)
+
+
+  User interacts with Main page
+    ✓ The Working list is displayed (6028ms)
+    ✓ The Working list is displayed for an event program (3775ms)
+    ✓ The Search form is displayed for programs with displayFrontPageList set to false (5753ms)
+    ✓ You can load a custom working list and switch between views (2129ms)
+    ✓ You are redirected to create a custom working list (3703ms)
+    - The icon is rendered as an svg
+    ✓ The icon is rendered as a custom icon (2053ms)
+
+
+  6 passing (24s)
+  1 pending
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        7                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      1                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     23 seconds                                                                       │
+  │ Spec Ran:     MainPage/MainPage.feature                                                        │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  NewEventThroughAddRelationship/NewEventThroughAddRelationship.featur           (3 of 34)
+            e                                                                                       
+
+
+  User adds events
+    ✓ User adds event in the malaria case registration program (9197ms)
+    ✓ User adds event with relationship to new person in the malaria case registration program (18009ms)
+    ✓ User adds event with relationship to existing person in the malaria case registration program (9845ms)
+    ✓ User gets navigated correctly when clicking on the back button (3512ms)
+
+
+  4 passing (41s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     40 seconds                                                                       │
+  │ Spec Ran:     NewEventThroughAddRelationship/NewEventThroughAddRelationship.feature            │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  NewPage/NewPage.feature                                                        (4 of 34)
+
+
+  User creates a new entries from the registration page
+    ✓ Viewing the registration page without any selections (3142ms)
+    ✓ New person in Tracker Program > Filling the Allergies with multiple options (11382ms)
+    ✓ Viewing the registration page with organisation unit selected (3300ms)
+    ✓ Viewing the registration page with organisation unit and tracked entity type person selected (4037ms)
+    ✓ Viewing the registration page with organisation unit and tracker program Child Programme selected (6146ms)
+    ✓ Viewing the registration page with organisation unit and event program Malaria case registration selected (5932ms)
+    ✓ Viewing section descriptions with organisation unit and event program Inpatient morbidity and mortality selected (6324ms)
+    ✓ Navigating to registration page without program selected (3934ms)
+    ✓ Navigating to registration page with program selected (6328ms)
+    ✓ Navigating to registration page from view single event page (4934ms)
+    ✓ Clicking the cancel button should navigate with correct context (5180ms)
+    ✓ New event in Antenatal care visit > Submitting the form with empty visit date throws validation error (2643ms)
+    ✓ New event in Antenatal care visit > Submitting the form with high hemoglobin value throws validation error (2711ms)
+    ✓ New event in Antenatal care visit > Submitting the form with correct values navigates you to the working list (7209ms)
+    ✓ New person > Submitting the form with unique name navigates you to the user dashboard (2708ms)
+    ✓ New person > Submitting the form from the duplicates modal navigates you to the user dashboard (2756ms)
+    ✓ New person > Submitting the form shows a list with duplicates (2908ms)
+    ✓ New person > Cancel the editing form should show a warning (11909ms)
+    - New person in Tracker Program > Submitting the form with empty visit date throws validation error
+    ✓ New person in Tracker Program > Filling the age with age 0 throws validation warning (7862ms)
+    ✓ New person in Tracker Program > Submitting the form with unique values navigates you to the user dashboard (9427ms)
+    ✓ New person in Tracker Program > Submitting the form with enrollment coordinate (16139ms)
+    (Attempt 1 of 4) New person in Tracker Program > Submitting the form from the duplicates modal navigates you to the user dashboard
+    ✓ New person in Tracker Program > Submitting the form from the duplicates modal navigates you to the user dashboard (10468ms)
+    ✓ New person in Tracker Program > Submitting the form shows a list with duplicates (14066ms)
+    ✓ New person in Tracker Program > Submitting without filling the form shows errors underneath the fields (4382ms)
+    ✓ Go to enrollment event when Open data entry form after enrollment is checked (11948ms)
+    ✓ New enrollment of existing TEI > The TEI form is prefield with the attributes values (3585ms)
+    ✓ First stage appears on registration page (3275ms)
+    ✓ New malaria entity without enrollment (2648ms)
+    ✓ New focus area without enrollment (1973ms)
+    ✓ Viewing the registration page with incomplete program categories selection (3498ms)
+    ✓ Navigating to registration page after selecting program category (5940ms)
+    ✓ New event in program with category combination > The form is prefilled with the selected category combination (2570ms)
+    ✓ New event in program with category combination > Submitting the form with empty category combination throws validation error (2684ms)
+
+
+  33 passing (4m)
+  1 pending
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        34                                                                               │
+  │ Passing:      33                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      1                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  1                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 minutes, 52 seconds                                                            │
+  │ Spec Ran:     NewPage/NewPage.feature                                                          │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/NewPage/NewPage.feature/Use     (1280x720)
+     r creates a new entries from the registration page -- New person in Tracker Prog               
+     ram  Submitting the form from the duplicates modal navigates you to the user das               
+     hboard (failed).png                                                                            
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  RelatedStages/RelatedStages.feature                                            (5 of 34)
+
+
+  Related stages
+    ✓ Edit event -> User is able to link and unlink an existing event (6206ms)
+    ✓ Edit event -> User is able to schedule an event in a different orgUnit (24313ms)
+    ✓ Edit event -> User is able to enter details in a different orgUnit (18310ms)
+    ✓ New event -> User is able to link and unlink an existing event (13709ms)
+    ✓ New event -> User is able to schedule an event in a different orgUnit (19950ms)
+    ✓ New event -> User is able to enter details in a different orgUnit (15921ms)
+    ✓ Enroll trackedEntity -> User is able to schedule an event in a different orgUnit (24636ms)
+    ✓ Enroll trackedEntity -> User is able to enter details in a different orgUnit (22008ms)
+
+
+  8 passing (2m)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        8                                                                                │
+  │ Passing:      8                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 minutes, 25 seconds                                                            │
+  │ Spec Ran:     RelatedStages/RelatedStages.feature                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  ScopeSelector/ScopeSelector.feature                                            (6 of 34)
+
+
+  User uses the ScopeSelector to navigate
+    ✓ Main page > Notifying that you need to select org unit and program to get started (3462ms)
+    ✓ Main page > Notifying that you need to select a program to get started (1889ms)
+    ✓ Main page >  Notifying that you need to select an org unit to get started (1758ms)
+    ✓ Main page > Clicking start again takes you to the main page (2992ms)
+    ✓ Main page > Selecting org unit and program and seeing table (4366ms)
+    ✓ Main page > Url with invalid program id (1352ms)
+    ✓ Main page > Url with invalid org unit id (1182ms)
+    ✓ Main page > Selecting program preselected org unit (1891ms)
+    ✓ Main page > Selecting org unit with preselected program (2412ms)
+    ✓ Main page > Clicking the find button while having an Event type of program preselected (3078ms)
+    ✓ Main page >  Clicking the find button while having an Tracker type of program preselected (4347ms)
+    ✓ Main page > Having a program preselected, select an org unit which does not contain the program (3029ms)
+    ✓ New event page > Landing on the page (3909ms)
+    ✓ New event page > Clicking the cancel button (1689ms)
+    ✓ New event page > Selecting program while org unit is preselected (2197ms)
+    ✓ New event page > Url with invalid program id (1154ms)
+    ✓ New event page > Url with invalid org unit id (1219ms)
+    ✓ View event page > Landing on the page (204ms)
+    ✓ View event page > Selecting the first entry of the events (4519ms)
+    ✓ View event page > Clicking the start again button after you navigated to the page (4911ms)
+    ✓ View event page > Removing the program selection after you navigated to the page (4814ms)
+    ✓ View event page > Removing the org unit selection is not possible (4400ms)
+    ✓ View event page > Url with invalid event id (1494ms)
+    ✓ Enrollment page > Landing on the page with url (example #1) (2307ms)
+    ✓ Enrollment page > Landing on the page with url (example #2) (2130ms)
+    ✓ Enrollment page > Landing on the page with url (example #3) (2175ms)
+    ✓ Enrollment page > Landing on the page with url (example #4) (2147ms)
+    ✓ Enrollment page > Landing on the page with url (example #5) (2176ms)
+    ✓ Enrollment page > Landing on the page with url (example #6) (2139ms)
+    ✓ Enrollment page > Landing on the page with url (example #7) (2179ms)
+    ✓ Enrollment page > Landing on the page with url (example #8) (2178ms)
+    ✓ Enrollment page > Landing on the page with url (example #9) (2275ms)
+    (Attempt 1 of 4) Enrollment page > Landing on the page with url (example #10)
+    (Attempt 2 of 4) Enrollment page > Landing on the page with url (example #10)
+    (Attempt 3 of 4) Enrollment page > Landing on the page with url (example #10)
+    1) Enrollment page > Landing on the page with url (example #10)
+    ✓ Enrollment page > Landing on the page with url (example #11) (2453ms)
+    ✓ Enrollment page > Landing on the page with url (example #12) (1935ms)
+    ✓ Enrollment page > navigating using the scope selector (5390ms)
+    ✓ Enrollment page > Fallback for tei missing name (1470ms)
+    ✓ Enrollment event edit page > resetting the tei (2491ms)
+    ✓ Enrollment event edit page > resetting the program (2649ms)
+    - Enrollment event edit page > resetting the org unit
+    ✓ Enrollment event edit page > resetting the enrollment (2568ms)
+    ✓ Enrollment event edit page > resetting the event (2743ms)
+    ✓ Enrollment event edit page > resetting the stage (2666ms)
+    ✓ Enrollment event edit page > Fallback for tei missing name (2061ms)
+    ✓ Enrollment event new page > resetting the tei (2672ms)
+    ✓ Enrollment event new page > resetting the program (2269ms)
+    ✓ Enrollment event new page > resetting the enrollment (2235ms)
+    ✓ Enrollment event new page > resetting the event (2294ms)
+    ✓ Enrollment event new page > resetting the stage (2073ms)
+    ✓ Enrollment event new page > Fallback for tei missing name (1433ms)
+
+
+  48 passing (4m)
+  1 pending
+  1 failing
+
+  1) User uses the ScopeSelector to navigate
+       Enrollment page > Landing on the page with url (example #10):
+     AssertionError: Timed out retrying after 25000ms: Expected to find content: 'Choose an organisation unit' within the element: <div.ScopeSelectorClass-stickyTopBar-18> but never did.
+      at eval (webpack://capture-app/./cypress/e2e/ScopeSelector/ScopeSelector.js:252:0)
+  at Array.map (<anonymous>)
+      at Context.eval (webpack://capture-app/./cypress/e2e/ScopeSelector/ScopeSelector.js:252:0)
+      at Registry.runStepDefininition (webpack://capture-app/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/registry.js:136:0)
+      at Object.fn (webpack://capture-app/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/browser-runtime.js:312:0)
+      at runStepWithLogGroup (webpack://capture-app/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/helpers/cypress.js:51:0)
+      at Context.eval (webpack://capture-app/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/browser-runtime.js:308:0)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        50                                                                               │
+  │ Passing:      48                                                                               │
+  │ Failing:      1                                                                                │
+  │ Pending:      1                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  4                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 minutes, 59 seconds                                                            │
+  │ Spec Ran:     ScopeSelector/ScopeSelector.feature                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/ScopeSelector/ScopeSelector     (1280x720)
+     .feature/User uses the ScopeSelector to navigate -- Enrollment page  Landing on                
+     the page with url (example #10) (failed).png                                                   
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/ScopeSelector/ScopeSelector     (1280x720)
+     .feature/User uses the ScopeSelector to navigate -- Enrollment page  Landing on                
+     the page with url (example #10) (failed) (attempt 2).png                                       
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/ScopeSelector/ScopeSelector     (1280x720)
+     .feature/User uses the ScopeSelector to navigate -- Enrollment page  Landing on                
+     the page with url (example #10) (failed) (attempt 3).png                                       
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/ScopeSelector/ScopeSelector     (1280x720)
+     .feature/User uses the ScopeSelector to navigate -- Enrollment page  Landing on                
+     the page with url (example #10) (failed) (attempt 4).png                                       
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  SearchForDuplicatesThroughAddRelationship/SearchForDuplicatesThrough           (7 of 34)
+            AddRelationship.feature                                                                 
+
+
+  Search for duplicates in the process of creating a new TEInstance
+    ✓ Clicking the create user button shows a list with no results on the second page (6525ms)
+    ✓ Clicking the create user button shows modal with the list of duplicates (4106ms)
+    ✓ Clicking the create user button shows a list with working pagination (4626ms)
+    ✓ Clicking the create user button shows a list with disabled pagination (3649ms)
+
+
+  4 passing (19s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     19 seconds                                                                       │
+  │ Spec Ran:     SearchForDuplicatesThroughAddRelationship/SearchForDuplicatesThroughAddRelations │
+  │               hip.feature                                                                      │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  SearchPage/SearchPage.feature                                                  (8 of 34)
+
+
+  User interacts with Search page
+    ✓ Default view of search page without any selections (3075ms)
+    ✓ Selecting manually a search domain. User lands on the page without search domain preselected and selects Person domain (2068ms)
+    ✓ Search domain is preselected. User lands on the search page with search domain Child Programme preselected (1614ms)
+    ✓ Searching using unique identifier returns no results (2688ms)
+    ✓ Searching using unique identifier returns results (3156ms)
+    ✓ Searching using attributes in Tracker Program returns no results (3401ms)
+    ✓ Searching using attributes in Tracker Program is invalid because no terms typed (2425ms)
+    ✓ Searching using attributes in Tracker Program is invalid because terms typed contain nothing but spaces (3401ms)
+    ✓ Searching using attributes in Tracker Program is invalid after clearing all search terms (4295ms)
+    ✓ Clicking the back button takes you to main page (1610ms)
+    ✓ Searching using attributes in Tracker Program returns results (3169ms)
+    ✓ Searching using one valid attribute and one attribute that contains only space (2735ms)
+    ✓ Searching using attributes in Tracker Program has a working pagination (3359ms)
+    ✓ Searching using attributes in Tracker Program navigates user to the dashboard view (4626ms)
+    ✓ Searching using attributes in TEType navigates user to dashboard view (3022ms)
+    ✓ Searching using attributes in Tracker Program domain has disabled pagination (3235ms)
+    ✓ Changing the program from the ScopeSelector will change the search scope (2464ms)
+    ✓ Searching using attributes in TEType domain is invalid after clearing all search terms (2811ms)
+    ✓ Searching using attributes in TEType domain is invalid because terms typed contain nothing but spaces (2293ms)
+    ✓ Searching using attributes in TEType domain has a working pagination (3383ms)
+    ✓ Pressing enter should trigger search unique identifier returns results (2204ms)
+    ✓ Pressing enter should trigger search attributes returns results (3216ms)
+    ✓ Searching using attributes in TEType domain has disabled pagination (3020ms)
+    ✓ Searching using only date range values as attributes (13329ms)
+    ✓ Searching using zip code range values as attributes (2965ms)
+    ✓ Searching using zip code range and name values as attributes (3072ms)
+    ✓ Fallback search with results (3195ms)
+    ✓ Fallback search navigates back to main page (2801ms)
+
+
+  28 passing (2m)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        28                                                                               │
+  │ Passing:      28                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 34 seconds                                                             │
+  │ Spec Ran:     SearchPage/SearchPage.feature                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  SearchThroughAddRelationship/SearchThroughAddRelationship.feature              (9 of 34)
+
+
+  User searches for existing TEInstance in the context of adding a relationship
+    ✓ Searching using attributes in Tracker Program returns no results (5760ms)
+    ✓ Searching using attributes in Tracker Program returns results (4278ms)
+    ✓ Searching using attributes in Tracker Program is invalid because no terms typed (3550ms)
+    ✓ Searching using attributes in Tracker Program throws error (4037ms)
+    ✓ Searching using attributes in Tracker Program has a working pagination (5386ms)
+    ✓ Searching using attributes in Tracker Program domain has disabled pagination (4234ms)
+    ✓ Searching using ip code range values as attributes (4400ms)
+    ✓ Searching using attributes in Tracker Program shows no results on the second page (5370ms)
+    ✓ Searching using attributes in TEType domain returns no results (3341ms)
+    ✓ Searching using attributes in TEType domain returns results (3473ms)
+    ✓ Searching using attributes in TEType domain is invalid because no terms typed (3108ms)
+    ✓ Searching using attributes in TEType domain throws error (3228ms)
+    ✓ Searching using attributes in TEType domain has a working pagination (4291ms)
+    ✓ Searching using attributes in TEType domain has disabled pagination (3674ms)
+    ✓ Searching using attributes in TEType domain shows no results on the second page (4385ms)
+
+
+  15 passing (1m)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        15                                                                               │
+  │ Passing:      15                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 4 seconds                                                              │
+  │ Spec Ran:     SearchThroughAddRelationship/SearchThroughAddRelationship.feature                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  SmokeTests/SmokeTests.feature                                                 (10 of 34)
+
+
+  Smoke tests
+    ✓ Show login prompt (762ms)
+    - Show app main selections and header bar: without auth cookie
+
+
+  1 passing (834ms)
+  1 pending
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      1                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     SmokeTests/SmokeTests.feature                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  TopBarActions/TopBarActions.feature                                           (11 of 34)
+
+
+  User uses the TopBarActions to navigate
+    ✓ Enrollment page > Clear selections (3312ms)
+    ✓ Enrollment page > The user searchs for a tei inside the same program (2180ms)
+    ✓ Enrollment page > You go to the search page without a program selected (1951ms)
+    ✓ Enrollment page > You go to the new page without a program selected (1661ms)
+    ✓ Enrollment page > You go to the new page inside the same program (1832ms)
+    ✓ Enrollment Event Edit page > Clear selections (2299ms)
+    ✓ Enrollment Event Edit page > The user searchs for a tei inside the same program (2176ms)
+    ✓ Enrollment Event Edit page > You go to the search page without a program selected (2151ms)
+    ✓ Enrollment Event Edit page > You go to the new page without a program selected (2408ms)
+    ✓ Enrollment Event Edit page > You go to the new page inside the same program (2615ms)
+    ✓ Enrollment Event edit page > When the user performs any actions in edit mood a popup warning message will appear. (6648ms)
+    ✓ Enrollment Event New page > Clear selections (1697ms)
+    ✓ Enrollment Event New page > The user searchs for a tei inside the same program (1922ms)
+    ✓ Enrollment Event New page > You go to the search page without a program selected (1985ms)
+    ✓ Enrollment Event New page > You go to the new page without a program selected (1920ms)
+    ✓ Enrollment Event New page > You go to the new page inside the same program (1665ms)
+    ✓ Enrollment Event New page > When the user performs any actions after it interacts with the form a popup warning message will appear. (7088ms)
+
+
+  17 passing (47s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        17                                                                               │
+  │ Passing:      17                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     46 seconds                                                                       │
+  │ Spec Ran:     TopBarActions/TopBarActions.feature                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentAddEventPage/EnrollmentAddEventPageForm/EnrollmentAddEvent          (12 of 34)
+            PageForm.feature                                                                        
+
+
+  User interacts with the Enrollment New Event Workspace
+    ✓ User can complete a Lab monitoring Event (11890ms)
+    ✓ User can save a Sputum smear microscopy test without completing (11557ms)
+    ✓ Required fields should display an error when saving without data (4397ms)
+    ✓ Required fields should display an error when blurred without data (3406ms)
+    ✓ Rules should trigger when data is typed in input (3545ms)
+    ✓ User should be asked to create new event after completing a stage and choose to cancel (23245ms)
+    ✓ User should be asked to create new event after completing a stage and choose to continue (23520ms)
+    ✓ User is able to schedule an event with a note (8921ms)
+    ✓ User can add a new event and complete the enrollment (13899ms)
+
+
+  9 passing (2m)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        9                                                                                │
+  │ Passing:      9                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 45 seconds                                                             │
+  │ Spec Ran:     EnrollmentAddEventPage/EnrollmentAddEventPageForm/EnrollmentAddEventPageForm.fea │
+  │               ture                                                                             │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentAddEventPage/EnrollmentAddEventPageNavigation/EnrollmentAd          (13 of 34)
+            dEventPageNavigation.feature                                                            
+
+
+  User interacts with Enrollment Add event page
+    ✓ The user can land on the enrollment add event page. (5324ms)
+
+
+  1 passing (5s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     5 seconds                                                                        │
+  │ Spec Ran:     EnrollmentAddEventPage/EnrollmentAddEventPageNavigation/EnrollmentAddEventPageNa │
+  │               vigation.feature                                                                 │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentAddEventPage/ProgramStageSelector/ProgramStageSelector.fea          (14 of 34)
+            ture                                                                                    
+
+
+  User is able to select program stage when navigating to EnrollmentEventNew without stageId
+    ✓ User can select stage when not present (3626ms)
+    ✓ The stage-button should be disabled when non-repeatable & event > 0 (2023ms)
+    (Attempt 1 of 4) The stage-button should be disabled when no data write access
+    (Attempt 2 of 4) The stage-button should be disabled when no data write access
+    (Attempt 3 of 4) The stage-button should be disabled when no data write access
+    1) The stage-button should be disabled when no data write access
+
+
+  2 passing (7s)
+  1 failing
+
+  1) User is able to select program stage when navigating to EnrollmentEventNew without stageId
+       The stage-button should be disabled when no data write access:
+     CypressError: `cy.request()` failed on:
+
+http://localhost:8080/api/auth/login
+
+The response we received from your web server was:
+
+  > 401: Unauthorized
+
+This was considered a failure because the status code was not `2xx` or `3xx`.
+
+If you do not want status codes to cause failures pass the option: `failOnStatusCode: false`
+
+-----------------------------------------------------------
+
+The request we sent was:
+
+Method: POST
+URL: http://localhost:8080/api/auth/login
+Headers: {
+  "Connection": "keep-alive",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/12.17.4 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36",
+  "accept": "*/*",
+  "accept-encoding": "gzip, deflate",
+  "content-type": "application/json",
+  "content-length": 2
+}
+Body: {}
+
+-----------------------------------------------------------
+
+The response we got was:
+
+Status: 401 - Unauthorized
+Headers: {
+  "content-security-policy": "frame-ancestors 'self' http://localhost:8083 http://localhost:8080 https://*.netlify.dhis2.org http://localhost:8082 http://localhost:8081 https://dhis2.stoplight.io http://localhost:3000 http://localhost:9000;",
+  "cache-control": "no-cache, private",
+  "x-content-type-options": "nosniff",
+  "x-xss-protection": "0",
+  "content-type": "application/json;charset=UTF-8",
+  "content-length": "95",
+  "date": "Thu, 08 May 2025 15:04:05 GMT",
+  "keep-alive": "timeout=20",
+  "connection": "keep-alive"
+}
+Body: {
+  "httpStatus": "Unauthorized",
+  "httpStatusCode": 401,
+  "status": "ERROR",
+  "message": "Bad credentials"
+}
+
+
+This error occurred while creating the session. Because the session setup failed, we failed the test.
+
+https://on.cypress.io/request
+      at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:132360:72)
+      at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)
+      at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)
+      at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)
+      at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)
+      at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1701:18)
+      at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)
+      at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)
+      at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)
+      at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)
+  From Your Spec Code:
+      at Context.eval (webpack://capture-app/./cypress/support/commands.js:38:0)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        3                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      1                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  4                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     7 seconds                                                                        │
+  │ Spec Ran:     EnrollmentAddEventPage/ProgramStageSelector/ProgramStageSelector.feature         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentAddEventPage/Prog     (1280x720)
+     ramStageSelector/ProgramStageSelector.feature/User is able to select program sta               
+     ge when navigating to EnrollmentEventNew without stageId -- The stage-button sho               
+     uld be disabled when no data write access (failed).png                                         
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentAddEventPage/Prog     (1280x720)
+     ramStageSelector/ProgramStageSelector.feature/User is able to select program sta               
+     ge when navigating to EnrollmentEventNew without stageId -- The stage-button sho               
+     uld be disabled when no data write access (failed) (attempt 2).png                             
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentAddEventPage/Prog     (1280x720)
+     ramStageSelector/ProgramStageSelector.feature/User is able to select program sta               
+     ge when navigating to EnrollmentEventNew without stageId -- The stage-button sho               
+     uld be disabled when no data write access (failed) (attempt 3).png                             
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentAddEventPage/Prog     (1280x720)
+     ramStageSelector/ProgramStageSelector.feature/User is able to select program sta               
+     ge when navigating to EnrollmentEventNew without stageId -- The stage-button sho               
+     uld be disabled when no data write access (failed) (attempt 4).png                             
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentEditEventPage/EnrollmentEditEventPageForm/EnrollmentEditEv          (15 of 34)
+            entPageForm.feature                                                                     
+
+
+  User interacts with Enrollment event page view/edit form
+    ✓ The user can view the sections, the labels and the values in the form (6312ms)
+    ✓ The user can enter and exit the edit mode. (4474ms)
+    ✓ The tracker program rules are triggered correctly for the Child Program. (6913ms)
+    ✓ The tracker program rules are triggered correctly for the WHO RMNCH Tracker Program (11298ms)
+    (Attempt 1 of 4) User can modify and save the data in the form
+    (Attempt 2 of 4) User can modify and save the data in the form
+    ✓ User can modify and save the data in the form (29654ms)
+    ✓ User goes directly to Edit mode for scheduled events (5030ms)
+    ✓ User can update schedule date for a scheduled event (14085ms)
+    ✓ User can update schedule date if Hide due date is enabled (2715ms)
+    ✓ User can see disabled scheduled date for active event (4172ms)
+    (Attempt 1 of 4) The user cannot enter edit mode for completed events
+    (Attempt 2 of 4) The user cannot enter edit mode for completed events
+    (Attempt 3 of 4) The user cannot enter edit mode for completed events
+    1) The user cannot enter edit mode for completed events
+    ✓ User can edit the event and complete the enrollment (12223ms)
+
+
+  10 passing (3m)
+  1 failing
+
+  1) User interacts with Enrollment event page view/edit form
+       The user cannot enter edit mode for completed events:
+     CypressError: `cy.request()` failed on:
+
+http://localhost:8080/api/auth/login
+
+The response we received from your web server was:
+
+  > 401: Unauthorized
+
+This was considered a failure because the status code was not `2xx` or `3xx`.
+
+If you do not want status codes to cause failures pass the option: `failOnStatusCode: false`
+
+-----------------------------------------------------------
+
+The request we sent was:
+
+Method: POST
+URL: http://localhost:8080/api/auth/login
+Headers: {
+  "Connection": "keep-alive",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/12.17.4 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36",
+  "accept": "*/*",
+  "accept-encoding": "gzip, deflate",
+  "content-type": "application/json",
+  "content-length": 2
+}
+Body: {}
+
+-----------------------------------------------------------
+
+The response we got was:
+
+Status: 401 - Unauthorized
+Headers: {
+  "content-security-policy": "frame-ancestors 'self' http://localhost:8083 http://localhost:8080 https://*.netlify.dhis2.org http://localhost:8082 http://localhost:8081 https://dhis2.stoplight.io http://localhost:3000 http://localhost:9000;",
+  "cache-control": "no-cache, private",
+  "x-content-type-options": "nosniff",
+  "x-xss-protection": "0",
+  "content-type": "application/json;charset=UTF-8",
+  "content-length": "95",
+  "date": "Thu, 08 May 2025 15:07:05 GMT",
+  "keep-alive": "timeout=20",
+  "connection": "keep-alive"
+}
+Body: {
+  "httpStatus": "Unauthorized",
+  "httpStatusCode": 401,
+  "status": "ERROR",
+  "message": "Bad credentials"
+}
+
+
+This error occurred while creating the session. Because the session setup failed, we failed the test.
+
+https://on.cypress.io/request
+      at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:132360:72)
+      at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)
+      at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)
+      at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)
+      at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)
+      at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1701:18)
+      at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)
+      at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)
+      at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)
+      at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)
+  From Your Spec Code:
+      at Context.eval (webpack://capture-app/./cypress/support/commands.js:38:0)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        11                                                                               │
+  │ Passing:      10                                                                               │
+  │ Failing:      1                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  6                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 minutes, 9 seconds                                                             │
+  │ Spec Ran:     EnrollmentEditEventPage/EnrollmentEditEventPageForm/EnrollmentEditEventPageForm. │
+  │               feature                                                                          │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentEditEventPage/Enr     (1280x720)
+     ollmentEditEventPageForm/EnrollmentEditEventPageForm.feature/User interacts with               
+      Enrollment event page viewedit form -- User can modify and save the data in the               
+      form (failed).png                                                                             
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentEditEventPage/Enr     (1280x720)
+     ollmentEditEventPageForm/EnrollmentEditEventPageForm.feature/User interacts with               
+      Enrollment event page viewedit form -- User can modify and save the data in the               
+      form (failed) (attempt 2).png                                                                 
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentEditEventPage/Enr     (1280x720)
+     ollmentEditEventPageForm/EnrollmentEditEventPageForm.feature/User interacts with               
+      Enrollment event page viewedit form -- The user cannot enter edit mode for comp               
+     leted events (failed).png                                                                      
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentEditEventPage/Enr     (1280x720)
+     ollmentEditEventPageForm/EnrollmentEditEventPageForm.feature/User interacts with               
+      Enrollment event page viewedit form -- The user cannot enter edit mode for comp               
+     leted events (failed) (attempt 2).png                                                          
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentEditEventPage/Enr     (1280x720)
+     ollmentEditEventPageForm/EnrollmentEditEventPageForm.feature/User interacts with               
+      Enrollment event page viewedit form -- The user cannot enter edit mode for comp               
+     leted events (failed) (attempt 3).png                                                          
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentEditEventPage/Enr     (1280x720)
+     ollmentEditEventPageForm/EnrollmentEditEventPageForm.feature/User interacts with               
+      Enrollment event page viewedit form -- The user cannot enter edit mode for comp               
+     leted events (failed) (attempt 4).png                                                          
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentEditEventPage/EnrollmentEditEventPageNavigation/Enrollment          (16 of 34)
+            EditEventPageNavigation.feature                                                         
+
+
+  User interacts with Enrollment event page
+    ✓ The user can land on the enrollment event page. (4255ms)
+    ✓ User can navigate back and forward between the enrollment event edit page and the enrollment page (6081ms)
+
+
+  2 passing (11s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     10 seconds                                                                       │
+  │ Spec Ran:     EnrollmentEditEventPage/EnrollmentEditEventPageNavigation/EnrollmentEditEventPag │
+  │               eNavigation.feature                                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentPage/BreakingTheGlass/BreakingTheGlass.feature                      (17 of 34)
+
+
+  Breaking the glass page
+    - User with search scope access tries to access an enrollment in a protected program
+
+
+  0 passing (47ms)
+  1 pending
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      0                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      1                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     EnrollmentPage/BreakingTheGlass/BreakingTheGlass.feature                         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentPage/EnrollmentPageNavigation/EnrollmentPageNavigation.fea          (18 of 34)
+            ture                                                                                    
+
+
+  User interacts with Enrollment page
+    ✓ Navigating to the registration page for new event by clicking the link button (7521ms)
+    ✓ Navigating to the working lists page for new event by clicking the link button (3897ms)
+    ✓ Navigating to the enrollment page for the same tet by clicking the link button (5131ms)
+    ✓ Navigating to the enrollment page for a different tet by clicking the link button (5538ms)
+    ✓ Auto select an enrollment when opening enrollment dashboard (1700ms)
+    ✓ Auto select orgunit when opening enrollment dashboard (1502ms)
+    ✓ Reset tei (2686ms)
+    ✓ Reset program (2873ms)
+    ✓ Reset orgUnit (2540ms)
+    ✓ Reset enrollment (2514ms)
+
+
+  10 passing (37s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        10                                                                               │
+  │ Passing:      10                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     36 seconds                                                                       │
+  │ Spec Ran:     EnrollmentPage/EnrollmentPageNavigation/EnrollmentPageNavigation.feature         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentPage/EnrollmentQuickActions/EnrollmentQuickActions.feature          (19 of 34)
+
+
+  User interacts with the quick actions-menu
+    ✓ The buttons should be disabled when stage is not available (3698ms)
+    ✓ User can click the new event-button (2718ms)
+    ✓ User can click the schedule event-button (2484ms)
+    (Attempt 1 of 4) The create new quick actions button should be disabled if no available stages
+    (Attempt 2 of 4) The create new quick actions button should be disabled if no available stages
+    (Attempt 3 of 4) The create new quick actions button should be disabled if no available stages
+    1) The create new quick actions button should be disabled if no available stages
+
+
+  3 passing (11s)
+  1 failing
+
+  1) User interacts with the quick actions-menu
+       The create new quick actions button should be disabled if no available stages:
+     CypressError: `cy.request()` failed on:
+
+http://localhost:8080/api/auth/login
+
+The response we received from your web server was:
+
+  > 401: Unauthorized
+
+This was considered a failure because the status code was not `2xx` or `3xx`.
+
+If you do not want status codes to cause failures pass the option: `failOnStatusCode: false`
+
+-----------------------------------------------------------
+
+The request we sent was:
+
+Method: POST
+URL: http://localhost:8080/api/auth/login
+Headers: {
+  "Connection": "keep-alive",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/12.17.4 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36",
+  "accept": "*/*",
+  "accept-encoding": "gzip, deflate",
+  "content-type": "application/json",
+  "content-length": 2
+}
+Body: {}
+
+-----------------------------------------------------------
+
+The response we got was:
+
+Status: 401 - Unauthorized
+Headers: {
+  "content-security-policy": "frame-ancestors 'self' http://localhost:8083 http://localhost:8080 https://*.netlify.dhis2.org http://localhost:8082 http://localhost:8081 https://dhis2.stoplight.io http://localhost:3000 http://localhost:9000;",
+  "cache-control": "no-cache, private",
+  "x-content-type-options": "nosniff",
+  "x-xss-protection": "0",
+  "content-type": "application/json;charset=UTF-8",
+  "content-length": "95",
+  "date": "Thu, 08 May 2025 15:08:25 GMT",
+  "keep-alive": "timeout=20",
+  "connection": "keep-alive"
+}
+Body: {
+  "httpStatus": "Unauthorized",
+  "httpStatusCode": 401,
+  "status": "ERROR",
+  "message": "Bad credentials"
+}
+
+
+This error occurred while creating the session. Because the session setup failed, we failed the test.
+
+https://on.cypress.io/request
+      at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:132360:72)
+      at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)
+      at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)
+      at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)
+      at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)
+      at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1701:18)
+      at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)
+      at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)
+      at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)
+      at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)
+  From Your Spec Code:
+      at Context.eval (webpack://capture-app/./cypress/support/commands.js:38:0)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      3                                                                                │
+  │ Failing:      1                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  4                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     11 seconds                                                                       │
+  │ Spec Ran:     EnrollmentPage/EnrollmentQuickActions/EnrollmentQuickActions.feature             │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/EnrollmentQu     (1280x720)
+     ickActions/EnrollmentQuickActions.feature/User interacts with the quick actions-               
+     menu -- The create new quick actions button should be disabled if no available s               
+     tages (failed).png                                                                             
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/EnrollmentQu     (1280x720)
+     ickActions/EnrollmentQuickActions.feature/User interacts with the quick actions-               
+     menu -- The create new quick actions button should be disabled if no available s               
+     tages (failed) (attempt 2).png                                                                 
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/EnrollmentQu     (1280x720)
+     ickActions/EnrollmentQuickActions.feature/User interacts with the quick actions-               
+     menu -- The create new quick actions button should be disabled if no available s               
+     tages (failed) (attempt 3).png                                                                 
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/EnrollmentQu     (1280x720)
+     ickActions/EnrollmentQuickActions.feature/User interacts with the quick actions-               
+     menu -- The create new quick actions button should be disabled if no available s               
+     tages (failed) (attempt 4).png                                                                 
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentPage/HiddenProgramStage/HiddenProgramStage.feature                  (20 of 34)
+
+
+  Hidden program stage
+    ✓ The user cannot add an event in a hidden program stage (16199ms)
+
+
+  1 passing (16s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     16 seconds                                                                       │
+  │ Spec Ran:     EnrollmentPage/HiddenProgramStage/HiddenProgramStage.feature                     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  EnrollmentPage/StagesAndEventsWidget/StagesAndEventsWidget.feature            (21 of 34)
+
+
+  User interacts with Stages and Events Widget
+    ✓ User can view program stages (4288ms)
+    ✓ User can close the Stages and Events Widget (3007ms)
+    ✓ User can close and reopen the Stages and Events Widget (3167ms)
+    ✓ User can view the list of events (3537ms)
+    ✓ User can view more events (2976ms)
+    ✓ User can sort the list of events (4451ms)
+    - User can go to Program Stage list by clicking Go to full
+    ✓ User can go to Add new page by clicking New event in stage (3172ms)
+    ✓ User can go to Add new page by clicking New event in stage even if there is no event (3103ms)
+    ✓ User can not go to Add new page if stage is not repeatable and there is event in the stage (2888ms)
+    ✓ User can skip a scheduled event (3010ms)
+    ✓ User can unskip a scheduled event (2955ms)
+    ✓ User can delete an event (10552ms)
+    (Attempt 1 of 4) Program stage is hidden if no data read access
+    (Attempt 2 of 4) Program stage is hidden if no data read access
+    (Attempt 3 of 4) Program stage is hidden if no data read access
+    1) Program stage is hidden if no data read access
+    (Attempt 1 of 4) Create new event button is disabled if no data write access
+    (Attempt 2 of 4) Create new event button is disabled if no data write access
+    (Attempt 3 of 4) Create new event button is disabled if no data write access
+    2) Create new event button is disabled if no data write access
+
+
+  12 passing (51s)
+  1 pending
+  2 failing
+
+  1) User interacts with Stages and Events Widget
+       Program stage is hidden if no data read access:
+     CypressError: `cy.request()` failed on:
+
+http://localhost:8080/api/auth/login
+
+The response we received from your web server was:
+
+  > 401: Unauthorized
+
+This was considered a failure because the status code was not `2xx` or `3xx`.
+
+If you do not want status codes to cause failures pass the option: `failOnStatusCode: false`
+
+-----------------------------------------------------------
+
+The request we sent was:
+
+Method: POST
+URL: http://localhost:8080/api/auth/login
+Headers: {
+  "Connection": "keep-alive",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/12.17.4 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36",
+  "accept": "*/*",
+  "accept-encoding": "gzip, deflate",
+  "content-type": "application/json",
+  "content-length": 2
+}
+Body: {}
+
+-----------------------------------------------------------
+
+The response we got was:
+
+Status: 401 - Unauthorized
+Headers: {
+  "content-security-policy": "frame-ancestors 'self' http://localhost:8083 http://localhost:8080 https://*.netlify.dhis2.org http://localhost:8082 http://localhost:8081 https://dhis2.stoplight.io http://localhost:3000 http://localhost:9000;",
+  "cache-control": "no-cache, private",
+  "x-content-type-options": "nosniff",
+  "x-xss-protection": "0",
+  "content-type": "application/json;charset=UTF-8",
+  "content-length": "95",
+  "date": "Thu, 08 May 2025 15:09:36 GMT",
+  "keep-alive": "timeout=20",
+  "connection": "keep-alive"
+}
+Body: {
+  "httpStatus": "Unauthorized",
+  "httpStatusCode": 401,
+  "status": "ERROR",
+  "message": "Bad credentials"
+}
+
+
+This error occurred while creating the session. Because the session setup failed, we failed the test.
+
+https://on.cypress.io/request
+      at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:132360:72)
+      at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)
+      at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)
+      at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)
+      at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)
+      at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1701:18)
+      at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)
+      at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)
+      at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)
+      at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)
+  From Your Spec Code:
+      at Context.eval (webpack://capture-app/./cypress/support/commands.js:38:0)
+
+  2) User interacts with Stages and Events Widget
+       Create new event button is disabled if no data write access:
+     CypressError: `cy.request()` failed on:
+
+http://localhost:8080/api/auth/login
+
+The response we received from your web server was:
+
+  > 401: Unauthorized
+
+This was considered a failure because the status code was not `2xx` or `3xx`.
+
+If you do not want status codes to cause failures pass the option: `failOnStatusCode: false`
+
+-----------------------------------------------------------
+
+The request we sent was:
+
+Method: POST
+URL: http://localhost:8080/api/auth/login
+Headers: {
+  "Connection": "keep-alive",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/12.17.4 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36",
+  "accept": "*/*",
+  "accept-encoding": "gzip, deflate",
+  "content-type": "application/json",
+  "content-length": 2
+}
+Body: {}
+
+-----------------------------------------------------------
+
+The response we got was:
+
+Status: 401 - Unauthorized
+Headers: {
+  "content-security-policy": "frame-ancestors 'self' http://localhost:8083 http://localhost:8080 https://*.netlify.dhis2.org http://localhost:8082 http://localhost:8081 https://dhis2.stoplight.io http://localhost:3000 http://localhost:9000;",
+  "cache-control": "no-cache, private",
+  "x-content-type-options": "nosniff",
+  "x-xss-protection": "0",
+  "content-type": "application/json;charset=UTF-8",
+  "content-length": "95",
+  "date": "Thu, 08 May 2025 15:09:38 GMT",
+  "keep-alive": "timeout=20",
+  "connection": "keep-alive"
+}
+Body: {
+  "httpStatus": "Unauthorized",
+  "httpStatusCode": 401,
+  "status": "ERROR",
+  "message": "Bad credentials"
+}
+
+
+This error occurred while creating the session. Because the session setup failed, we failed the test.
+
+https://on.cypress.io/request
+      at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:132360:72)
+      at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)
+      at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)
+      at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)
+      at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)
+      at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1701:18)
+      at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)
+      at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)
+      at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)
+      at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)
+  From Your Spec Code:
+      at Context.eval (webpack://capture-app/./cypress/support/commands.js:38:0)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        15                                                                               │
+  │ Passing:      12                                                                               │
+  │ Failing:      2                                                                                │
+  │ Pending:      1                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  8                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     51 seconds                                                                       │
+  │ Spec Ran:     EnrollmentPage/StagesAndEventsWidget/StagesAndEventsWidget.feature               │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/StagesAndEve     (1280x720)
+     ntsWidget/StagesAndEventsWidget.feature/User interacts with Stages and Events Wi               
+     dget -- Program stage is hidden if no data read access (failed).png                            
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/StagesAndEve     (1280x720)
+     ntsWidget/StagesAndEventsWidget.feature/User interacts with Stages and Events Wi               
+     dget -- Program stage is hidden if no data read access (failed) (attempt 2).png                
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/StagesAndEve     (1280x720)
+     ntsWidget/StagesAndEventsWidget.feature/User interacts with Stages and Events Wi               
+     dget -- Program stage is hidden if no data read access (failed) (attempt 3).png                
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/StagesAndEve     (1280x720)
+     ntsWidget/StagesAndEventsWidget.feature/User interacts with Stages and Events Wi               
+     dget -- Program stage is hidden if no data read access (failed) (attempt 4).png                
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/StagesAndEve     (1280x720)
+     ntsWidget/StagesAndEventsWidget.feature/User interacts with Stages and Events Wi               
+     dget -- Create new event button is disabled if no data write access (failed).png               
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/StagesAndEve     (1280x720)
+     ntsWidget/StagesAndEventsWidget.feature/User interacts with Stages and Events Wi               
+     dget -- Create new event button is disabled if no data write access (failed) (at               
+     tempt 2).png                                                                                   
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/StagesAndEve     (1280x720)
+     ntsWidget/StagesAndEventsWidget.feature/User interacts with Stages and Events Wi               
+     dget -- Create new event button is disabled if no data write access (failed) (at               
+     tempt 3).png                                                                                   
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/EnrollmentPage/StagesAndEve     (1280x720)
+     ntsWidget/StagesAndEventsWidget.feature/User interacts with Stages and Events Wi               
+     dget -- Create new event button is disabled if no data write access (failed) (at               
+     tempt 4).png                                                                                   
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  StageEventListPage/StageEventListNavigation/StageEventListNavigation          (22 of 34)
+            .feature                                                                                
+
+
+  User interacts with Stage Event List Page
+    ✓ Navigating to Stage Event List Page by url (2908ms)
+
+
+  1 passing (3s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 seconds                                                                        │
+  │ Spec Ran:     StageEventListPage/StageEventListNavigation/StageEventListNavigation.feature     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  ViewPage/EditEventPageForm/EditEventPageForm.feature                          (23 of 34)
+
+
+  User interacts with a single event page view/edit form
+    ✓ The single event is edited and the changes are reflected in the working list (6757ms)
+    ✓ User views the event details page (4971ms)
+    ✓ User edits the category combination (6481ms)
+    ✓ The user can add and then delete a relationship to a tracked entity (3404ms)
+    ✓ The user can see the enroll form for a tracked entity by adding a relationship (4419ms)
+
+
+  5 passing (26s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        5                                                                                │
+  │ Passing:      5                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     26 seconds                                                                       │
+  │ Spec Ran:     ViewPage/EditEventPageForm/EditEventPageForm.feature                             │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WidgetsForEnrollmentPages/WidgetChangelog/Changelog.feature                   (24 of 34)
+
+
+  The user interacts with the changelog widget
+    ✓ The user can view an event changelog on the enrollment edit event (4534ms)
+    ✓ The user can change the changelog page size (4517ms)
+    ✓ The user can navigate between pages in the changelog (3427ms)
+    ✓ The user can filter the changelog by data item (3807ms)
+    ✓ Only one filter can be applied at a time (3804ms)
+    (Attempt 1 of 4) The filter remains active when sorting is applied
+    ✓ The filter remains active when sorting is applied (6226ms)
+    ✓ The user can remove the applied filter (4112ms)
+    ✓ The user can sort by Date (3785ms)
+    ✓ The user can sort by User (2691ms)
+    ✓ The user can sort by Data item (3307ms)
+
+
+  10 passing (45s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        10                                                                               │
+  │ Passing:      10                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  1                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     45 seconds                                                                       │
+  │ Spec Ran:     WidgetsForEnrollmentPages/WidgetChangelog/Changelog.feature                      │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WidgetsForEnrollmentPages/W     (1280x720)
+     idgetChangelog/Changelog.feature/The user interacts with the changelog widget --               
+      The filter remains active when sorting is applied (failed).png                                
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WidgetsForEnrollmentPages/WidgetsForEnrollmentAddEventPage/WidgetsFo          (25 of 34)
+            rEnrollmentAddEventPage.feature                                                         
+
+
+  The user interacts with the widgets on the enrollment add event page
+    ✓ The profile widget can be closed on the enrollment dashboard (3495ms)
+    ✓ The profile widget can be closed and reopened on the enrollment dashboard (2389ms)
+    ✓ User can close the Enrollment Widget (3000ms)
+    ✓ User can close and reopen the Enrollment Widget (3205ms)
+    ✓ User can see the enrollment details (2281ms)
+    ✓ User can open the delete modal (2075ms)
+    ✓ User switch tab in add event page (4390ms)
+    ✓ You can assign a user when scheduling an event (3306ms)
+    ✓ User can complete the enrollment and the active events (8694ms)
+    ✓ User can see the enrollment minimap (1733ms)
+
+
+  10 passing (36s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        10                                                                               │
+  │ Passing:      10                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     36 seconds                                                                       │
+  │ Spec Ran:     WidgetsForEnrollmentPages/WidgetsForEnrollmentAddEventPage/WidgetsForEnrollmentA │
+  │               ddEventPage.feature                                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WidgetsForEnrollmentPages/WidgetsForEnrollmentDashboard/WidgetsForEn          (26 of 34)
+            rollmentDashboard.feature                                                               
+
+
+  The user interacts with the widgets on the enrollment dashboard
+    ✓ User can open the transfer modal (4381ms)
+    ✓ User can select an organisation unit in the transfer modal (3381ms)
+    (Attempt 1 of 4) User can transfer the enrollment to another organisation unit
+    (Attempt 2 of 4) User can transfer the enrollment to another organisation unit
+    (Attempt 3 of 4) User can transfer the enrollment to another organisation unit
+    1) User can transfer the enrollment to another organisation unit
+    ✓ The profile widget can be closed on the enrollment dashboard (2396ms)
+    ✓ The profile widget can be closed and reopened on the enrollment dashboard (3093ms)
+    ✓ The profile edit modal widget can be closed and reopened on the enrollment dashboard (3611ms)
+    ✓ The TEI rules are triggered correctly in the profile edit modal widget (13991ms)
+    ✓ The user updates the TEI attributes. The changes are reflected in the whole page. (19712ms)
+    ✓ You can delete a tracked entity from the profile widget (6930ms)
+    ✓ User can close the Enrollment Widget (3025ms)
+    ✓ User can close and reopen the Enrollment Widget (3055ms)
+    ✓ User can see the enrollment details (2986ms)
+    ✓ User can open the delete modal (3014ms)
+    ✓ User can add note on enrollment dashboard page (3814ms)
+    ✓ The program rules are triggered and the effects are displayed in the sidebar widgets (3110ms)
+    ✓ User can complete the enrollment and the active events (11236ms)
+    ✓ User can see the enrollment minimap (2480ms)
+    ✓ User can see in the profile widget the tracked entity type polygon geometry (2975ms)
+
+
+  17 passing (2m)
+  1 failing
+
+  1) The user interacts with the widgets on the enrollment dashboard
+       User can transfer the enrollment to another organisation unit:
+     Error: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.
+
+  > An unknown error occurred - Bad Request (400)
+
+When Cypress detects uncaught errors originating from your application it will automatically fail the current test.
+
+This behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.
+
+https://on.cypress.io/uncaught-exception-from-application
+      at parseStatus (http://localhost:3000/static/js/bundle.js:29925:11)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        18                                                                               │
+  │ Passing:      17                                                                               │
+  │ Failing:      1                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  4                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 minutes, 4 seconds                                                             │
+  │ Spec Ran:     WidgetsForEnrollmentPages/WidgetsForEnrollmentDashboard/WidgetsForEnrollmentDash │
+  │               board.feature                                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WidgetsForEnrollmentPages/W     (1280x720)
+     idgetsForEnrollmentDashboard/WidgetsForEnrollmentDashboard.feature/The user inte               
+     racts with the widgets on the enrollment dashboard -- User can transfer the enro               
+     llment to another organisation unit (failed).png                                               
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WidgetsForEnrollmentPages/W     (1280x720)
+     idgetsForEnrollmentDashboard/WidgetsForEnrollmentDashboard.feature/The user inte               
+     racts with the widgets on the enrollment dashboard -- User can transfer the enro               
+     llment to another organisation unit (failed) (attempt 2).png                                   
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WidgetsForEnrollmentPages/W     (1280x720)
+     idgetsForEnrollmentDashboard/WidgetsForEnrollmentDashboard.feature/The user inte               
+     racts with the widgets on the enrollment dashboard -- User can transfer the enro               
+     llment to another organisation unit (failed) (attempt 3).png                                   
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WidgetsForEnrollmentPages/W     (1280x720)
+     idgetsForEnrollmentDashboard/WidgetsForEnrollmentDashboard.feature/The user inte               
+     racts with the widgets on the enrollment dashboard -- User can transfer the enro               
+     llment to another organisation unit (failed) (attempt 4).png                                   
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WidgetsForEnrollmentPages/WidgetsForEnrollmentEditEvent/WidgetsForEn          (27 of 34)
+            rollmentEditEvent.feature                                                               
+
+
+  The user interacts with the widgets on the enrollment edit event
+    ✓ The profile widget can be closed on the enrollment edit event (3811ms)
+    ✓ The profile widget can be closed and reopened on the enrollment edit event (2693ms)
+    ✓ User can close the Enrollment Widget (2567ms)
+    ✓ User can close and reopen the Enrollment Widget (2812ms)
+    ✓ User can see the enrollment details (2398ms)
+    ✓ User can open the delete modal (2268ms)
+    - User can add note on edit event page view mode
+    - User can see note on edit event page edit mode
+    (Attempt 1 of 4) You can assign a user to a event
+    (Attempt 2 of 4) You can assign a user to a event
+    ✓ You can assign a user to a event (9259ms)
+    ✓ User can complete the enrollment and the active events (9497ms)
+    ✓ User can see the enrollment minimap (2498ms)
+
+
+  9 passing (2m)
+  2 pending
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        11                                                                               │
+  │ Passing:      9                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      2                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  2                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 34 seconds                                                             │
+  │ Spec Ran:     WidgetsForEnrollmentPages/WidgetsForEnrollmentEditEvent/WidgetsForEnrollmentEdit │
+  │               Event.feature                                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WidgetsForEnrollmentPages/W     (1280x720)
+     idgetsForEnrollmentEditEvent/WidgetsForEnrollmentEditEvent.feature/The user inte               
+     racts with the widgets on the enrollment edit event -- You can assign a user to                
+     a event (failed).png                                                                           
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WidgetsForEnrollmentPages/W     (1280x720)
+     idgetsForEnrollmentEditEvent/WidgetsForEnrollmentEditEvent.feature/The user inte               
+     racts with the widgets on the enrollment edit event -- You can assign a user to                
+     a event (failed) (attempt 2).png                                                               
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WidgetsForEnrollmentPages/WidgetsForEventSchedule/WidgetsForEventSch          (28 of 34)
+            edule.feature                                                                           
+
+
+  The user interacts with the widgets Schedule tab
+    - User cancel after choose a schedule date in schedule tab
+
+
+  0 passing (63ms)
+  1 pending
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      0                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      1                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     WidgetsForEnrollmentPages/WidgetsForEventSchedule/WidgetsForEventSchedule.featur │
+  │               e                                                                                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WorkingLists/EventWorkingLists/EventBulkActions/EventBulkAction.feat          (29 of 34)
+            ure                                                                                     
+
+
+  User facing tests for bulk actions on event working lists
+    ✓ the user should be able to select rows (4832ms)
+    ✓ the user should be able to deselect rows (3883ms)
+    ✓ the user should be able to select all rows (2794ms)
+    ✓ the user should be able to deselect all rows (3587ms)
+    ✓ the filters should be disabled when rows are selected (3039ms)
+    - the user should be able to bulk complete events
+    ✓ the user should be able to bulk delete events (2866ms)
+
+
+  6 passing (22s)
+  1 pending
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        7                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      1                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     21 seconds                                                                       │
+  │ Spec Ran:     WorkingLists/EventWorkingLists/EventBulkActions/EventBulkAction.feature          │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WorkingLists/EventWorkingLists/EventWorkingListsDev/EventWorkingList          (30 of 34)
+            sDev.feature                                                                            
+
+
+  Developer facing tests for user interaction with event working lists
+    ✓ User opens the default working list for an event program (3892ms)
+    ✓ Show only events assigned to anyone using the predefined working list (3665ms)
+    ✓ Show only events assigned to anyone using the filter (4373ms)
+    ✓ Show only active events assigned to anyone using the filter (4878ms)
+    ✓ Show only events where age is between 10 and 20 using the filter (4789ms)
+    ✓ Show next page (4190ms)
+    ✓ Show next page then previous page (5187ms)
+    ✓ Show next page then first page (5226ms)
+    ✓ Show 50 rows per page (4860ms)
+    ✓ Show events ordered ascendingly by report date (4350ms)
+
+
+  10 passing (47s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        10                                                                               │
+  │ Passing:      10                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     46 seconds                                                                       │
+  │ Spec Ran:     WorkingLists/EventWorkingLists/EventWorkingListsDev/EventWorkingListsDev.feature │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WorkingLists/EventWorkingLists/EventWorkingListsUser/EventWorkingLis          (31 of 34)
+            tsUser.feature                                                                          
+
+
+  User interacts with event working lists
+    ✓ User opens the default working list for an event program (6766ms)
+    ✓ Show only events assigned to anyone using the predefined working list (2793ms)
+    ✓ Show only events assigned to anyone using the filter (3449ms)
+    ✓ Show only active events assigned to anyone using the filter (3793ms)
+    ✓ Show only events where age is between 10 and 20 using the filter (4587ms)
+    ✓ Show the Household location column (2695ms)
+    ✓ Show next page (5880ms)
+    ✓ Show next page then previous page (11206ms)
+    ✓ Show next page then first page (11817ms)
+    ✓ Show 10 rows per page (4832ms)
+    ✓ Show events ordered ascendingly by report date (12556ms)
+    (Attempt 1 of 4) Ensure sharing settings are preserved when updating a working list
+    ✓ Ensure sharing settings are preserved when updating a working list (11306ms)
+    ✓ Save and load a view with a date filter (16337ms)
+    ✓ User is promted with message to select Category (1451ms)
+    ✓ The user can see the working list when selecting Category (2568ms)
+    ✓ The user can delete a working list right immediately after creating it. (14476ms)
+
+
+  16 passing (3m)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        16                                                                               │
+  │ Passing:      16                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  1                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 minutes, 33 seconds                                                            │
+  │ Spec Ran:     WorkingLists/EventWorkingLists/EventWorkingListsUser/EventWorkingListsUser.featu │
+  │               re                                                                               │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WorkingLists/EventWorkingLi     (1280x720)
+     sts/EventWorkingListsUser/EventWorkingListsUser.feature/User interacts with even               
+     t working lists -- Ensure sharing settings are preserved when updating a working               
+      list (failed).png                                                                             
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WorkingLists/TeiWorkingLists/TeiBulkActions/TeiBulkActions.feature            (32 of 34)
+
+
+  User facing tests for bulk actions on Tracked Entity working lists
+    ✓ the user should be able to select rows (5262ms)
+    ✓ the user should be able to deselect rows (3715ms)
+    ✓ the user should be able to select all rows (2590ms)
+    ✓ the user should be able to deselect all rows (3349ms)
+    ✓ the filters should be disabled when rows are selected (2806ms)
+    - The user should see an error message when trying to bulk complete enrollments with errors
+    ✓ the user should be able to bulk complete enrollments and events (2863ms)
+    - the user should be able to bulk complete enrollments without completing events
+    - the user should be able to bulk delete enrollments
+    - the user should be able to bulk delete only active enrollments
+    (Attempt 1 of 4) a restricted user should not be able to bulk delete enrollments
+    (Attempt 2 of 4) a restricted user should not be able to bulk delete enrollments
+    (Attempt 3 of 4) a restricted user should not be able to bulk delete enrollments
+    1) a restricted user should not be able to bulk delete enrollments
+
+
+  6 passing (23s)
+  4 pending
+  1 failing
+
+  1) User facing tests for bulk actions on Tracked Entity working lists
+       a restricted user should not be able to bulk delete enrollments:
+     CypressError: `cy.request()` failed on:
+
+http://localhost:8080/api/auth/login
+
+The response we received from your web server was:
+
+  > 401: Unauthorized
+
+This was considered a failure because the status code was not `2xx` or `3xx`.
+
+If you do not want status codes to cause failures pass the option: `failOnStatusCode: false`
+
+-----------------------------------------------------------
+
+The request we sent was:
+
+Method: POST
+URL: http://localhost:8080/api/auth/login
+Headers: {
+  "Connection": "keep-alive",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/12.17.4 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36",
+  "accept": "*/*",
+  "accept-encoding": "gzip, deflate",
+  "content-type": "application/json",
+  "content-length": 2
+}
+Body: {}
+
+-----------------------------------------------------------
+
+The response we got was:
+
+Status: 401 - Unauthorized
+Headers: {
+  "content-security-policy": "frame-ancestors 'self' http://localhost:8083 http://localhost:8080 https://*.netlify.dhis2.org http://localhost:8082 http://localhost:8081 https://dhis2.stoplight.io http://localhost:3000 http://localhost:9000;",
+  "cache-control": "no-cache, private",
+  "x-content-type-options": "nosniff",
+  "x-xss-protection": "0",
+  "content-type": "application/json;charset=UTF-8",
+  "content-length": "95",
+  "date": "Thu, 08 May 2025 15:19:41 GMT",
+  "keep-alive": "timeout=20",
+  "connection": "keep-alive"
+}
+Body: {
+  "httpStatus": "Unauthorized",
+  "httpStatusCode": 401,
+  "status": "ERROR",
+  "message": "Bad credentials"
+}
+
+
+This error occurred while creating the session. Because the session setup failed, we failed the test.
+
+https://on.cypress.io/request
+      at <unknown> (http://localhost:3000/__cypress/runner/cypress_runner.js:132360:72)
+      at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1807:23)
+      at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:1519:31)
+      at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:1576:18)
+      at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:1621:10)
+      at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:1701:18)
+      at _drainQueueStep (http://localhost:3000/__cypress/runner/cypress_runner.js:2407:12)
+      at _drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:2400:9)
+      at Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2416:5)
+      at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:2286:14)
+  From Your Spec Code:
+      at Context.eval (webpack://capture-app/./cypress/support/commands.js:38:0)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        11                                                                               │
+  │ Passing:      6                                                                                │
+  │ Failing:      1                                                                                │
+  │ Pending:      4                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  4                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     22 seconds                                                                       │
+  │ Spec Ran:     WorkingLists/TeiWorkingLists/TeiBulkActions/TeiBulkActions.feature               │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WorkingLists/TeiWorkingList     (1280x720)
+     s/TeiBulkActions/TeiBulkActions.feature/User facing tests for bulk actions on Tr               
+     acked Entity working lists -- a restricted user should not be able to bulk delet               
+     e enrollments (failed).png                                                                     
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WorkingLists/TeiWorkingList     (1280x720)
+     s/TeiBulkActions/TeiBulkActions.feature/User facing tests for bulk actions on Tr               
+     acked Entity working lists -- a restricted user should not be able to bulk delet               
+     e enrollments (failed) (attempt 2).png                                                         
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WorkingLists/TeiWorkingList     (1280x720)
+     s/TeiBulkActions/TeiBulkActions.feature/User facing tests for bulk actions on Tr               
+     acked Entity working lists -- a restricted user should not be able to bulk delet               
+     e enrollments (failed) (attempt 3).png                                                         
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WorkingLists/TeiWorkingList     (1280x720)
+     s/TeiBulkActions/TeiBulkActions.feature/User facing tests for bulk actions on Tr               
+     acked Entity working lists -- a restricted user should not be able to bulk delet               
+     e enrollments (failed) (attempt 4).png                                                         
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WorkingLists/TeiWorkingLists/TeiWorkingListsDev/TeiWorkingListsDev.f          (33 of 34)
+            eature                                                                                  
+
+
+  Developer facing tests for user interaction with Tei working lists
+    ✓ User opens the default working list for a tracker program (3768ms)
+    ✓ Show only teis with active enrollments using the predefined working list (3795ms)
+    ✓ Show only teis with active enrollments using the filter (4393ms)
+    ✓ Show only teis with active enrollments and unassinged events using the filter (4362ms)
+    ✓ Show only teis with first name containig John using the filter (4335ms)
+    ✓ Show next page (4122ms)
+    ✓ Show next page then previous page (4963ms)
+    ✓ Show next page then first page (5131ms)
+    ✓ Show 50 rows per page (4715ms)
+    ✓ Show teis ordered descendingly by first name (4164ms)
+
+
+  10 passing (45s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        10                                                                               │
+  │ Passing:      10                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     45 seconds                                                                       │
+  │ Spec Ran:     WorkingLists/TeiWorkingLists/TeiWorkingListsDev/TeiWorkingListsDev.feature       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  WorkingLists/TeiWorkingLists/TeiWorkingListsUser/TeiWorkingListsUser          (34 of 34)
+            .feature                                                                                
+
+
+  User interacts with tei working lists
+    ✓ The TEI custom working can be shared (10569ms)
+    ✓ User opens the default working list for a tracker program (2985ms)
+    ✓ Show only teis with completed enrollments using the predefined working list (2611ms)
+    ✓ Show only teis with completed enrollments using the filter (3112ms)
+    - Show only teis with active enrollments and unassinged events using the filter
+    ✓ Show only teis with first name containig John using the filter (2968ms)
+    ✓ Show the registering unit column (2653ms)
+    ✓ Show next page (3172ms)
+    ✓ Show next page then previous page (4510ms)
+    ✓ Show next page then first page (4647ms)
+    ✓ Show 10 rows per page (3177ms)
+    ✓ Show teis ordered ascendingly by first name (3255ms)
+    ✓ The TEI custom working lists is loaded (1858ms)
+    ✓ The user creates, updates and deletes a TEI custom working list (8788ms)
+    ✓ The user is navigated back to the selected working list after closing a TEI (2686ms)
+    ✓ The user can delete a TEI working list right immediately after creating it. (6578ms)
+    ✓ The user can open and select a program stage filter (3388ms)
+    ✓ While in a program stage working list, the user can filter by both TEA and data elements (6144ms)
+    ✓ While in a program stage working list, the user can sort by both TEA and data elements (3706ms)
+    ✓ The user can remove the program stage filter (2825ms)
+    ✓ The user can filter the events by scheduledAt date (5924ms)
+    ✓ The program stage working list configureation is kept when navigating (3380ms)
+    ✓ The program stage working list without a orgUnit selected redirects to a tracker event (3612ms)
+    ✓ The user can open a program stage list without events (5251ms)
+    ✓ The user can filter the Foci response assigned events (3386ms)
+    ✓ The assigned user data is kept when switching between working list types (3926ms)
+    ✓ The user can create and delete a program stage working list for Foci investigation & classification assigned events (5663ms)
+    ✓ The user creates, updates and deletes a Program stage custom working list (9913ms)
+    ✓ The user can delete a Program stage working list right immediately after creating it. (5344ms)
+    ✓ The Program stage custom working can be shared (7819ms)
+    (Attempt 1 of 4) The Program stage working list configuration is kept when changing the org unit
+    ✓ The Program stage working list configuration is kept when changing the org unit (7970ms)
+    ✓ The user can save a program stage working list, based on a TEI working list configuration (6070ms)
+    ✓ The user can download the tracked entity working list (2464ms)
+    - The user can download the tracked entity working list
+    ✓ The user cannot download the tracked entity working list when no orgUnit is selected (2271ms)
+
+
+  33 passing (3m)
+  2 pending
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        35                                                                               │
+  │ Passing:      33                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      2                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  1                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 minutes, 37 seconds                                                            │
+  │ Spec Ran:     WorkingLists/TeiWorkingLists/TeiWorkingListsUser/TeiWorkingListsUser.feature     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /home/ivo/code/dhis2/capture-app/cypress/screenshots/WorkingLists/TeiWorkingList     (1280x720)
+     s/TeiWorkingListsUser/TeiWorkingListsUser.feature/User interacts with tei workin               
+     g lists -- The Program stage working list configuration is kept when changing th               
+     e org unit (failed).png                                                                        
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔  AllAccessibleRecordsPage/AllAccessi      00:23        6        6        -        -        - │
+  │    bleRecordsPage.feature                                                                      │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  MainPage/MainPage.feature                00:23        7        6        -        1        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  NewEventThroughAddRelationship/NewE      00:40        4        4        -        -        - │
+  │    ventThroughAddRelationship.feature                                                          │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  NewPage/NewPage.feature                  03:52       34       33        -        1        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  RelatedStages/RelatedStages.feature      02:25        8        8        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✖  ScopeSelector/ScopeSelector.feature      03:59       50       48        1        1        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  SearchForDuplicatesThroughAddRelati      00:19        4        4        -        -        - │
+  │    onship/SearchForDuplicatesThroughAd                                                         │
+  │    dRelationship.feature                                                                       │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  SearchPage/SearchPage.feature            01:34       28       28        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  SearchThroughAddRelationship/Search      01:04       15       15        -        -        - │
+  │    ThroughAddRelationship.feature                                                              │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  SmokeTests/SmokeTests.feature            826ms        2        1        -        1        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  TopBarActions/TopBarActions.feature      00:46       17       17        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  EnrollmentAddEventPage/EnrollmentAd      01:45        9        9        -        -        - │
+  │    dEventPageForm/EnrollmentAddEventPa                                                         │
+  │    geForm.feature                                                                              │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  EnrollmentAddEventPage/EnrollmentAd      00:05        1        1        -        -        - │
+  │    dEventPageNavigation/EnrollmentAddE                                                         │
+  │    ventPageNavigation.feature                                                                  │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✖  EnrollmentAddEventPage/ProgramStage      00:07        3        2        1        -        - │
+  │    Selector/ProgramStageSelector.featu                                                         │
+  │    re                                                                                          │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✖  EnrollmentEditEventPage/EnrollmentE      03:09       11       10        1        -        - │
+  │    ditEventPageForm/EnrollmentEditEven                                                         │
+  │    tPageForm.feature                                                                           │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  EnrollmentEditEventPage/EnrollmentE      00:10        2        2        -        -        - │
+  │    ditEventPageNavigation/EnrollmentEd                                                         │
+  │    itEventPageNavigation.feature                                                               │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  EnrollmentPage/BreakingTheGlass/Bre       44ms        1        -        -        1        - │
+  │    akingTheGlass.feature                                                                       │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  EnrollmentPage/EnrollmentPageNaviga      00:36       10       10        -        -        - │
+  │    tion/EnrollmentPageNavigation.featu                                                         │
+  │    re                                                                                          │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✖  EnrollmentPage/EnrollmentQuickActio      00:11        4        3        1        -        - │
+  │    ns/EnrollmentQuickActions.feature                                                           │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  EnrollmentPage/HiddenProgramStage/H      00:16        1        1        -        -        - │
+  │    iddenProgramStage.feature                                                                   │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✖  EnrollmentPage/StagesAndEventsWidge      00:51       15       12        2        1        - │
+  │    t/StagesAndEventsWidget.feature                                                             │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  StageEventListPage/StageEventListNa      00:03        1        1        -        -        - │
+  │    vigation/StageEventListNavigation.f                                                         │
+  │    eature                                                                                      │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  ViewPage/EditEventPageForm/EditEven      00:26        5        5        -        -        - │
+  │    tPageForm.feature                                                                           │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WidgetsForEnrollmentPages/WidgetCha      00:45       10       10        -        -        - │
+  │    ngelog/Changelog.feature                                                                    │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WidgetsForEnrollmentPages/WidgetsFo      00:36       10       10        -        -        - │
+  │    rEnrollmentAddEventPage/WidgetsForE                                                         │
+  │    nrollmentAddEventPage.feature                                                               │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✖  WidgetsForEnrollmentPages/WidgetsFo      02:04       18       17        1        -        - │
+  │    rEnrollmentDashboard/WidgetsForEnro                                                         │
+  │    llmentDashboard.feature                                                                     │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WidgetsForEnrollmentPages/WidgetsFo      01:34       11        9        -        2        - │
+  │    rEnrollmentEditEvent/WidgetsForEnro                                                         │
+  │    llmentEditEvent.feature                                                                     │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WidgetsForEnrollmentPages/WidgetsFo       59ms        1        -        -        1        - │
+  │    rEventSchedule/WidgetsForEventSched                                                         │
+  │    ule.feature                                                                                 │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WorkingLists/EventWorkingLists/Even      00:21        7        6        -        1        - │
+  │    tBulkActions/EventBulkAction.featur                                                         │
+  │    e                                                                                           │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WorkingLists/EventWorkingLists/Even      00:46       10       10        -        -        - │
+  │    tWorkingListsDev/EventWorkingListsD                                                         │
+  │    ev.feature                                                                                  │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WorkingLists/EventWorkingLists/Even      02:33       16       16        -        -        - │
+  │    tWorkingListsUser/EventWorkingLists                                                         │
+  │    User.feature                                                                                │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✖  WorkingLists/TeiWorkingLists/TeiBul      00:22       11        6        1        4        - │
+  │    kActions/TeiBulkActions.feature                                                             │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WorkingLists/TeiWorkingLists/TeiWor      00:45       10       10        -        -        - │
+  │    kingListsDev/TeiWorkingListsDev.fea                                                         │
+  │    ture                                                                                        │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  WorkingLists/TeiWorkingLists/TeiWor      02:37       35       33        -        2        - │
+  │    kingListsUser/TeiWorkingListsUser.f                                                         │
+  │    eature                                                                                      │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✖  7 of 34 failed (21%)                     35:43      377      353        8       16        -  
+
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
