@@ -1,3 +1,10 @@
+# [102.4.0](https://github.com/dhis2/capture-app/compare/v102.3.6...v102.4.0) (2025-05-08)
+
+
+### Features
+
+* [DHIS2-10134] Disable fallback search button when TET have no searchable attributes ([#4060](https://github.com/dhis2/capture-app/issues/4060)) ([107e635](https://github.com/dhis2/capture-app/commit/107e6352c6cba15e998bb45001915722a89cd0c2))
+
 ## [102.3.6](https://github.com/dhis2/capture-app/compare/v102.3.5...v102.3.6) (2025-05-08)
 
 
