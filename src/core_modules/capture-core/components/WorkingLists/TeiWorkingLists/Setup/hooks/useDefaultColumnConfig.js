@@ -5,16 +5,15 @@ import { ADDITIONAL_FILTERS, ADDITIONAL_FILTERS_LABELS } from '../../helpers';
 import { dataElementTypes, type TrackerProgram, type DataElement } from '../../../../../metaData';
 import type { MainColumnConfig, MetadataColumnConfig, TeiWorkingListsColumnConfigs } from '../../types';
 
-const getMainConfig = (hasDisplayInReportsAttributes: boolean, trackedEntityName: string): Array<MainColumnConfig> =>
+const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
     [
         {
-            id: 'orgUnit',
+            id: 'programOwnerId',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: i18n.t('{{trackedEntityName}} organisation unit', {
-                trackedEntityName,
-                interpolation: { escapeValue: false },
-            }),
+            header: i18n.t('Owner organisation unit'),
+            sortDisabled: true,
+            apiViewName: 'programOwner',
         },
         {
             id: 'createdAt',
@@ -119,12 +118,12 @@ export const useDefaultColumnConfig = (
     programStageId: ?string,
 ): TeiWorkingListsColumnConfigs =>
     useMemo(() => {
-        const { attributes, stages, trackedEntityType } = program;
+        const { attributes, stages } = program;
         const programStage = programStageId && stages.get(programStageId);
         const hasDisplayInReportsAttributes = attributes.some(attribute => attribute.displayInReports);
 
         const defaultColumns = [
-            ...getMainConfig(hasDisplayInReportsAttributes, trackedEntityType?.name),
+            ...getMainConfig(hasDisplayInReportsAttributes),
             ...getTEIMetaDataConfig(attributes, orgUnitId),
         ];
 

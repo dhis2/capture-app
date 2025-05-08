@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { EventProgram, Program } from 'capture-core/metaData';
 import {
     ScopeSelector,
     useSetProgramId,
@@ -20,6 +21,7 @@ import { TopBarActions } from '../../TopBarActions';
 
 type TopBarProps = {
     programId?: string,
+    program?: Program,
     orgUnitId?: string,
     teiId?: string,
     trackedEntityName?: string,
@@ -30,6 +32,7 @@ type TopBarProps = {
 
 export const TopBar = ({
     programId,
+    program,
     orgUnitId,
     teiId,
     isUserInteractionInProgress,
@@ -81,6 +84,8 @@ export const TopBar = ({
             isUserInteractionInProgress={isUserInteractionInProgress}
             onStartAgain={() => reset()}
             formIsOpen={formIsOpen}
+            isReadOnlyOrgUnit={program instanceof EventProgram}
+            orgUnitTooltip={program instanceof EventProgram}
         >
             {teiId ? (
                 <SingleLockedSelect
