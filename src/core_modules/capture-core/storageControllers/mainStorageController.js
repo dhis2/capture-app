@@ -1,8 +1,8 @@
 // @flow
 import { StorageController } from 'capture-core-utils/storage/StorageController';
 import { hashSHA256 } from 'capture-core-utils/hash';
-import { mainStores } from './stores';
-import type { ServerVersion, AdapterTypes } from './types';
+import { ACCESS_HISTORY_KEYS, MAIN_STORES } from './constants';
+import type { Input } from './mainStorageController.types';
 
 const MAIN_STORAGE_KEY = 'dhis2ca';
 
@@ -30,17 +30,12 @@ const createStorageController = async ({
     adapterTypes,
     onCacheExpired,
     serverVersion,
-}: {
-    baseUrl: string,
-    adapterTypes: Array<AdapterTypes>,
-    onCacheExpired: Function,
-    serverVersion: ServerVersion,
 }) => new StorageController(
     `${MAIN_STORAGE_KEY}-${await hashSHA256(baseUrl)}`,
     getCacheVersion(serverVersion),
     {
         Adapters: adapterTypes,
-        objectStores: Object.keys(mainStores).map(key => mainStores[key]),
+        objectStores: Object.keys(MAIN_STORES).map(key => MAIN_STORES[key]),
         onCacheExpired,
     },
 );
@@ -50,12 +45,7 @@ export const initMainController = async ({
     onCacheExpired,
     serverVersion,
     baseUrl,
-}: {
-    adapterTypes: Array<AdapterTypes>,
-    onCacheExpired: Function,
-    serverVersion: ServerVersion,
-    baseUrl: string,
-}) => {
+}: Input) => {
     const mainStorageController = await createStorageController({
         baseUrl,
         adapterTypes,
@@ -65,17 +55,18 @@ export const initMainController = async ({
 
     let upgradeTempData;
     await mainStorageController.open(
-        storage => storage
-            .get(mainStores.USER_CACHES, 'accessHistory')
-            .then((data) => {
-                upgradeTempData = data;
-            }),
-        (storage) => {
+        async ({ get }) => {
+            upgradeTempData.accessHistoryMetadata =
+                await get(MAIN_STORES.USER_CACHES, ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_METADATA);
+            upgradeTempData.accessHistoryData =
+                await get(MAIN_STORES.USER_CACHES, ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_DATA);
+        },
+        async ({ set }) => {
             if (!upgradeTempData) {
-                return null;
+                return;
             }
-            return storage
-                .set(mainStores.USER_CACHES, upgradeTempData);
+            await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryMetadata);
+            await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryData);
         },
     );
 

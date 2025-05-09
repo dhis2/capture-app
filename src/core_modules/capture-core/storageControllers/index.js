@@ -1,9 +1,10 @@
 // @flow
-export { initAsync as initControllersAsync } from './storageControllers';
-export { closeAsync as closeControllersAsync } from './storageControllers';
 export {
-    getMainController as getMainStorageController,
-    getUserController as getUserStorageController,
+    initStorageControllers,
+    closeStorageControllers,
+    getMainStorageController,
+    getUserMetadataStorageController,
+    getUserDataStorageController,
 } from './storageControllers';
-export { userStores, mainStores } from './stores';
+export { MAIN_STORES, USER_METADATA_STORES, USER_DATA_STORES } from './constants';
 export type * from './types/cache.types';

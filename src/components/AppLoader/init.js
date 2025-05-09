@@ -10,7 +10,7 @@ import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocale
 
 import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
-import { initControllersAsync } from 'capture-core/storageControllers';
+import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
 
@@ -184,7 +184,7 @@ export async function initializeAsync({
 
     // initialize storage controllers
     try {
-        await initControllersAsync({
+        await initStorageControllers({
             onCacheExpired,
             currentUserId,
             serverVersion,

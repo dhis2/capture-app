@@ -2,9 +2,8 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { StorageController, DomLocalStorageAdapter } from 'capture-core-utils/storage';
-import { getMainStorageController, getUserMetadataStorageController, MAIN_STORES } from '../../storageControllers';
+import { ACCESS_HISTORY_KEYS, MAIN_STORES } from './constants';
 
-const ACCESS_HISTORY_KEY = 'accessHistory';
 const cacheKeepCount = {
     LOCAL_STORAGE: 1,
     INDEXED_DB: 3,
@@ -13,11 +12,12 @@ const errorMessages = {
     DESTROY_FAILED: 'Could not delete user storage',
 };
 
-async function addUserCacheRecordToAccessHistory(
+async function addCacheRecordToAccessHistory(
     mainStorageController: typeof StorageController,
+    accessHistoryKey: string,
+    currentStorageName: string,
 ) {
-    const { name: currentStorageName } = getUserMetadataStorageController();
-    const historyContainer = await mainStorageController.get(MAIN_STORES.USER_CACHES, ACCESS_HISTORY_KEY);
+    const historyContainer = await mainStorageController.get(MAIN_STORES.USER_CACHES, accessHistoryKey);
     const history = historyContainer && historyContainer.values;
     let cleanedHistory;
     if (history) {
@@ -28,13 +28,13 @@ async function addUserCacheRecordToAccessHistory(
     }
     const updatedHistory = [currentStorageName, ...cleanedHistory];
     await mainStorageController.set(MAIN_STORES.USER_CACHES, {
-        id: ACCESS_HISTORY_KEY,
+        id: accessHistoryKey,
         values: updatedHistory,
     });
     return updatedHistory;
 }
 
-async function removeCaches(
+async function removeMetadataCaches(
     history: Array<string>,
     mainStorageController: typeof StorageController,
 ) {
@@ -45,27 +45,40 @@ async function removeCaches(
 
     if (history.length > keepCount) {
         const historyPartToRemove = history.slice(keepCount);
-        const remainingHistory = history.slice(0, keepCount);
+        let remainingHistory = history.slice(0, keepCount);
         // $FlowFixMe
-        await historyPartToRemove.asyncForEach(async (cache) => {
+        await historyPartToRemove.asyncForEach(async (storageName) => {
             const controllerForStorageToRemove =
-                new StorageController(cache, 1, { Adapters: [currentAdapterType] });
+                new StorageController(storageName, 1, { Adapters: [currentAdapterType] });
             try {
                 await controllerForStorageToRemove.destroy();
             } catch (error) {
-                log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache, error }));
+                remainingHistory = [...remainingHistory, storageName];
+                log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache: storageName, error }));
             }
         });
         await mainStorageController.set(MAIN_STORES.USER_CACHES, {
-            id: ACCESS_HISTORY_KEY,
+            id: ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_METADATA,
             values: remainingHistory,
         });
     }
 }
 
-export async function upkeepUserCaches(
-) {
-    const mainStorageController = getMainStorageController();
-    const updatedHistory = await addUserCacheRecordToAccessHistory(mainStorageController);
-    await removeCaches(updatedHistory, mainStorageController);
-}
+export const upkeepUserCaches = async (
+    mainStorageController: typeof StorageController,
+    userMetadataStorageName: string,
+    userDataStorageName: string,
+) => {
+    await addCacheRecordToAccessHistory(
+        mainStorageController,
+        ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_DATA,
+        userDataStorageName,
+    );
+    const updatedUserMetadataHistory = await addCacheRecordToAccessHistory(
+        mainStorageController,
+        ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_METADATA,
+        userMetadataStorageName,
+    );
+
+    await removeMetadataCaches(updatedUserMetadataHistory, mainStorageController);
+};

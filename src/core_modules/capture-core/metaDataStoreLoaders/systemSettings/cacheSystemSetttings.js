@@ -1,6 +1,5 @@
 // @flow
-import { getMainStorageController } from '../../storageControllers';
-import { mainStores } from '../../storageControllers/stores';
+import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
 
 function isLangRTL(code) {
     const langs = ['ar', 'fa', 'ur'];
@@ -51,6 +50,6 @@ export async function cacheSystemSettings(
     ];
 
     const storageController = getMainStorageController();
-    await storageController.setAll(mainStores.SYSTEM_SETTINGS, systemSettingsArray);
+    await storageController.setAll(MAIN_STORES.SYSTEM_SETTINGS, systemSettingsArray);
     return systemSettingsArray;
 }
