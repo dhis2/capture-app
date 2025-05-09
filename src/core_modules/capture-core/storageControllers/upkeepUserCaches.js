@@ -18,7 +18,7 @@ async function addCacheRecordToAccessHistory(
     currentStorageName: string,
 ) {
     const historyContainer = await mainStorageController.get(MAIN_STORES.USER_CACHES, accessHistoryKey);
-    const history = historyContainer && historyContainer.values;
+    const history = historyContainer?.values;
     let cleanedHistory;
     if (history) {
         cleanedHistory = history

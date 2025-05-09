@@ -52,23 +52,20 @@ export const initMainController = async ({
         onCacheExpired,
         serverVersion,
     });
-
-    let upgradeTempData;
-    await mainStorageController.open(
-        async ({ get }) => {
+    const upgradeTempData = {};
+    await mainStorageController.open({
+        onBeforeUpgrade: async ({ get }) => {
             upgradeTempData.accessHistoryMetadata =
                 await get(MAIN_STORES.USER_CACHES, ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_METADATA);
             upgradeTempData.accessHistoryData =
                 await get(MAIN_STORES.USER_CACHES, ACCESS_HISTORY_KEYS.ACCESS_HISTORY_KEY_DATA);
         },
-        async ({ set }) => {
-            if (!upgradeTempData) {
-                return;
-            }
-            await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryMetadata);
-            await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryData);
+        onAfterUpgrade: async ({ set }) => {
+            upgradeTempData.accessHistoryMetadata &&
+                await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryMetadata);
+            upgradeTempData.accessHistoryData && await set(MAIN_STORES.USER_CACHES, upgradeTempData.accessHistoryData);
         },
-    );
+    });
 
     return mainStorageController;
 };
