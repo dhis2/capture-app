@@ -5,12 +5,17 @@
 // - are we making very similar requests?
 // - are we making expensive requests?
 //
-// Running the Cypress tests https://github.com/dhis2/capture-app/wiki/Cypress#run-cypress-tests-locally generates ../../trackerRequests.json.
+// Running the Cypress tests https://github.com/dhis2/capture-app/wiki/Cypress#run-cypress-tests-locally
+// generates ../../trackerRequests.json.
 //
 // This is how you can run a single spec:
 //
 // yarn start:forCypress # start the app
 // yarn cypress run --spec cypress/e2e/EnrollmentPage/EnrollmentPageNavigation/EnrollmentPageNavigation.feature
+//
+// Double check the requests JSON contains all the features you would expect:
+//
+// jq 'keys | map(split(" > ")) | map(.[0]) | unique' trackerRequests.json
 //
 // You can slice and dice the data as you like using for example jq.
 //
@@ -21,6 +26,8 @@
 // This shows you the top x pages ordered by the most requests made to the same API:
 //
 // jq --arg top 5 --arg host http://localhost:8080/apps/capture -r 'to_entries | map(.key as $scenario | .value | to_entries | map(.key as $page | .value | to_entries | map({name: $scenario, page: $page, api: .key, count: .value.count, totalDuration: .value.duration}))[]) | flatten | sort_by(-.count) | .[0:($top|tonumber)] | .[] | "\(.count) requests (\(.totalDuration)ms total) by test: \(.name)\n   from page: \($host)\(.page)\n   to API: \(.api)"' trackerRequests.json
+
+// this will contain the requests per spec as cypress does not share globals between specs (see afterEach)
 const requestsPerTest = {};
 let currentPage = '';
 
@@ -67,6 +74,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+    // this is a slow and ugly workaround!
     // globals are not shared between specs, alternatives like
     // https://github.com/cypress-io/cypress-example-recipes/tree/master/examples/server-communication__pass-value-between-specs
     // are so painful or don't even work at all
@@ -74,6 +82,10 @@ afterEach(() => {
     // so merge the requests of the global which contains requests for a single spec into the existing file
     // the file must already exist, otherwise cy.readFile will fail
     // https://docs.cypress.io/api/commands/writefile#Append-contents-to-the-end-of-a-file
+    //
+    // to start fresh do:
+    // 
+    // echo '{}' > trackerRequests.json
     cy.readFile('trackerRequests.json').then((existingData) => {
         // Merge the new requests with existing data
         const mergedData = {
