@@ -84,13 +84,13 @@ afterEach(() => {
     // https://docs.cypress.io/api/commands/writefile#Append-contents-to-the-end-of-a-file
     //
     // to start fresh do:
-    // 
+    //
     // echo '{}' > trackerRequests.json
     cy.readFile('trackerRequests.json').then((existingData) => {
         // Merge the new requests with existing data
         const mergedData = {
             ...existingData,
-            ...requestsPerTest
+            ...requestsPerTest,
         };
         cy.writeFile('trackerRequests.json', mergedData);
     });
