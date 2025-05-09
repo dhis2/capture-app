@@ -21,7 +21,7 @@
 // This shows you the top x pages ordered by the most requests made to the same API:
 //
 // jq --arg top 5 --arg host http://localhost:8080/apps/capture -r 'to_entries | map(.key as $scenario | .value | to_entries | map(.key as $page | .value | to_entries | map({name: $scenario, page: $page, api: .key, count: .value.count, totalDuration: .value.duration}))[]) | flatten | sort_by(-.count) | .[0:($top|tonumber)] | .[] | "\(.count) requests (\(.totalDuration)ms total) by test: \(.name)\n   from page: \($host)\(.page)\n   to API: \(.api)"' trackerRequests.json
-const requestsPerTests = {};
+const requestsPerTest = {};
 let currentPage = '';
 
 beforeEach(() => {
@@ -33,7 +33,7 @@ beforeEach(() => {
 
     cy.intercept('GET', '/api/*/tracker/**', (req) => {
         const testName = Cypress.currentTest.titlePath.join(' > ');
-        const requestsPerPage = requestsPerTests[testName] || {};
+        const requestsPerPage = requestsPerTest[testName] || {};
         const requestsPerPath = requestsPerPage[currentPage] || {};
         const url = new URL(req.url);
         const requests = requestsPerPath[url.pathname] || {};
@@ -44,7 +44,6 @@ beforeEach(() => {
 
         const startTime = Date.now();
         // capture the response time of the request
-        // TODO is this the best phase to get an accurate response time?
         // https://docs.cypress.io/api/commands/intercept#Response-phase
         req.on('response', (res) => {
             const endTime = Date.now();
@@ -63,10 +62,24 @@ beforeEach(() => {
 
         requestsPerPath[url.pathname] = requests;
         requestsPerPage[currentPage] = requestsPerPath;
-        requestsPerTests[testName] = requestsPerPage;
+        requestsPerTest[testName] = requestsPerPage;
     }).as('trackerGet');
 });
 
 afterEach(() => {
-    cy.writeFile('trackerRequests.json', requestsPerTests);
+    // globals are not shared between specs, alternatives like
+    // https://github.com/cypress-io/cypress-example-recipes/tree/master/examples/server-communication__pass-value-between-specs
+    // are so painful or don't even work at all
+    // https://github.com/cypress-io/cypress/issues/7667
+    // so merge the requests of the global which contains requests for a single spec into the existing file
+    // the file must already exist, otherwise cy.readFile will fail
+    // https://docs.cypress.io/api/commands/writefile#Append-contents-to-the-end-of-a-file
+    cy.readFile('trackerRequests.json').then((existingData) => {
+        // Merge the new requests with existing data
+        const mergedData = {
+            ...existingData,
+            ...requestsPerTest
+        };
+        cy.writeFile('trackerRequests.json', mergedData);
+    });
 });
