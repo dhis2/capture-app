@@ -1,21 +1,13 @@
 // @flow
 import { serverToClientExpiryPeriod } from '../converters/serverToClientExpiryPeriod';
-import { useApiMetadataQuery } from '../utils/reactQueryHelpers';
+import { useProgramFromIndexedDB } from '../utils/cachedDataHooks/useProgramFromIndexedDB';
 
 export const useProgramExpiry = (programId: string) => {
-    const { data, isLoading } = useApiMetadataQuery(
-        ['programProtectionLevel', programId],
-        {
-            resource: 'programs',
-            id: programId,
-            params: { fields: 'expiryPeriodType,expiryDays' },
-        },
-        { enabled: !!programId },
-    );
+    const { program, isLoading } = useProgramFromIndexedDB(programId, { enabled: !!programId });
 
     return {
-        expiryPeriodType: serverToClientExpiryPeriod(data?.expiryPeriodType),
-        expiryDays: data?.expiryDays,
+        expiryPeriodType: serverToClientExpiryPeriod(program?.expiryPeriodType),
+        expiryDays: program?.expiryDays,
         expiryValuesLoading: isLoading,
     };
 };
