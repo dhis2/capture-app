@@ -9,7 +9,7 @@ import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
 import { convertClientToList } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
-import type { OwnProps } from './NoteSection.types';
+import type { OwnProps, NoteType } from './NoteSection.types';
 
 const FocusTextField = withFocusSaver()(TextField);
 
@@ -92,7 +92,7 @@ const NoteSectionPlain = ({
         setEditing(false);
     }, [handleAddNote, newNoteValue]);
 
-    const NoteItem = ({ value, note, storedAt, createdBy }: any) => (
+    const NoteItem = ({ value, storedAt, createdBy }: NoteType) => (
         <div data-test="note-item" className={classes.item}>
             {/* TODO: add avatar */}
             <div>
@@ -107,7 +107,7 @@ const NoteSectionPlain = ({
                     </span>
                 </div>
                 <div className={classes.body}>
-                    <Parser>{note || value}</Parser>
+                    <Parser>{value}</Parser>
                 </div>
             </div>
         </div>
@@ -118,7 +118,8 @@ const NoteSectionPlain = ({
             <div className={classes.notesWrapper}>
                 {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map(note => <NoteItem key={`note-item-${note.note || note.value}-`} {...note} />)}
+                    .map(note => <NoteItem key={`note-item-${note.note || note.value}-`} {...note} />)
+                }
                 {notes.length === 0 &&
                 <div className={classes.emptyNotes}>
                     {emptyNoteMessage}
