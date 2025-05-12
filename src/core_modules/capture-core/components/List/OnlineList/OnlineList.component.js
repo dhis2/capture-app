@@ -36,6 +36,7 @@ export type Column = {
     visible: boolean,
     type: $Keys<typeof dataElementTypes>,
     optionSet?: ?OptionSet,
+    sortDisabled?: boolean,
 };
 
 type Props = {
@@ -102,11 +103,18 @@ class Index extends React.Component<Props> {
     renderHeaderRow(visibleColumns: Array<Column>) {
         const { classes, sortById, sortByDirection, dataSource, onSelectAll, allRowsAreSelected } = this.props;
 
+        const getSortDirection = (column) => {
+            if (column.sortDisabled) {
+                return undefined;
+            }
+            return sortById === column.id ? sortByDirection : 'default';
+        };
+
         const headerCells = visibleColumns.map(column => (
             <DataTableColumnHeader
                 dataTest={`table-row-${sortById === column.id ? sortByDirection : 'default'}`}
                 onSortIconClick={this.getSortHandler(column.id)}
-                sortDirection={sortById === column.id ? sortByDirection : 'default'}
+                sortDirection={getSortDirection(column)}
                 key={column.id}
                 align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
                 className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}

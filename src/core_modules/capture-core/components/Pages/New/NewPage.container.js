@@ -1,7 +1,8 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import type { ComponentType } from 'react';
+import { v4 as uuid } from 'uuid';
 import { NewPageComponent } from './NewPage.component';
 import {
     showMessageToSelectOrgUnitOnNewPage,
@@ -45,7 +46,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { orgUnitId, programId, teiId } = useLocationQuery();
-    const program = programId && programCollection.get(programId);
+    const program = programId ? programCollection.get(programId) : undefined;
     const { categoryOptionIsInvalidForOrgUnit } = useCategoryOptionIsValidForOrgUnit({
         selectedOrgUnitId: orgUnitId,
     });
@@ -108,16 +109,23 @@ export const NewPage: ComponentType<{||}> = () => {
           || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
     );
 
+    const [newPageKey, setNewPageKey] = useState();
+    const onOpenNewRegistrationPage = () => {
+        setNewPageKey(uuid());
+    };
+
     return (
         <>
             <TopBar
                 orgUnitId={orgUnitId}
                 programId={programId}
+                program={program}
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 teiId={teiId}
                 trackedEntityName={trackedEntityType?.name}
                 teiDisplayName={teiDisplayName}
                 formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
+                onOpenNewRegistrationPage={onOpenNewRegistrationPage}
             />
             <NewPageComponent
                 showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
@@ -136,6 +144,7 @@ export const NewPage: ComponentType<{||}> = () => {
                 ready={ready}
                 trackedEntityInstanceAttributes={trackedEntityAttributes}
                 trackedEntityName={trackedEntityType?.name}
+                newPageKey={newPageKey}
             />
         </>
     );

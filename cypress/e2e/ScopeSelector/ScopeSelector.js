@@ -159,11 +159,6 @@ Given('you land on a new event page with preselected org unit', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8');
 });
 
-Given('you land on a new event page with preselected program', () => {
-    cy.visit('/#/new?programId=VBqh0ynB2wv');
-});
-
-
 Then('new event page url is valid', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
 });
@@ -194,9 +189,9 @@ When('you remove the program selection', () => {
         .click();
 });
 
-When('you remove the org unit selection', () => {
+When('you can not remove the org unit selection', () => {
     cy.get('[data-test="org-unit-selector-container-clear-icon"]')
-        .click();
+        .should('not.exist');
 });
 
 Then('you should be taken to the main page with only org unit selected', () => {
