@@ -13,7 +13,7 @@ import type { OwnProps } from './NoteSection.types';
 
 const FocusTextField = withFocusSaver()(TextField);
 
-const styles = {
+const styles: Readonly<any> = {
     item: {
         padding: spacersNum.dp12,
         marginRight: spacersNum.dp4,
@@ -33,7 +33,7 @@ const styles = {
     },
     notesWrapper: {
         maxHeight: 400,
-        overflowY: 'auto' as const,
+        overflowY: 'auto',
     },
     editor: {
         paddingTop: spacersNum.dp16,
