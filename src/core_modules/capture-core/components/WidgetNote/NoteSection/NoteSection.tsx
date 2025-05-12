@@ -1,6 +1,6 @@
 import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles, createStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import { Button, Tooltip, colors, spacersNum } from '@dhis2/ui';
@@ -13,7 +13,7 @@ import type { OwnProps } from './NoteSection.types';
 
 const FocusTextField = withFocusSaver()(TextField);
 
-const styles = createStyles({
+const styles = {
     item: {
         padding: spacersNum.dp12,
         marginRight: spacersNum.dp4,
@@ -33,7 +33,7 @@ const styles = createStyles({
     },
     notesWrapper: {
         maxHeight: 400,
-        overflowY: 'auto',
+        overflowY: 'auto' as const,
     },
     editor: {
         paddingTop: spacersNum.dp16,
@@ -61,7 +61,7 @@ const styles = createStyles({
         display: 'flex',
         gap: '4px',
     },
-});
+};
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
@@ -92,7 +92,7 @@ const NoteSectionPlain = ({
         setEditing(false);
     }, [handleAddNote, newNoteValue]);
 
-    const NoteItem = ({ value, storedAt, createdBy }) => (
+    const NoteItem = ({ value, note, storedAt, createdBy }: any) => (
         <div data-test="note-item" className={classes.item}>
             {/* TODO: add avatar */}
             <div>
@@ -107,7 +107,7 @@ const NoteSectionPlain = ({
                     </span>
                 </div>
                 <div className={classes.body}>
-                    <Parser>{value}</Parser>
+                    <Parser>{note || value}</Parser>
                 </div>
             </div>
         </div>
@@ -118,17 +118,7 @@ const NoteSectionPlain = ({
             <div className={classes.notesWrapper}>
                 {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map((note) => {
-                        const noteValue = note.note || note.value;
-                        return (
-                            <NoteItem
-                                key={`note-item-${noteValue}-`}
-                                value={noteValue}
-                                storedAt={note.storedAt}
-                                createdBy={note.createdBy}
-                            />
-                        );
-                    })}
+                    .map(note => <NoteItem key={`note-item-${note.note || note.value}-`} {...note} />)}
                 {notes.length === 0 &&
                 <div className={classes.emptyNotes}>
                     {emptyNoteMessage}
