@@ -1,80 +1,20 @@
 import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, createStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import cx from 'classnames';
-import { colors, spacersNum, Button, Tooltip } from '@dhis2/ui';
+import { Button, Tooltip } from '@dhis2/ui';
 import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
 import { convertClientToList } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
-import type { NoteSectionProps, NoteType } from '../WidgetNote.types';
+import { styles, type Props, type NoteType } from './NoteSection.types';
 
 const FocusTextField = withFocusSaver()(TextField);
 
-const getStyles = () => createStyles({
-    item: {
-        padding: spacersNum.dp12,
-        marginRight: spacersNum.dp4,
-        background: colors.grey200,
-        borderRadius: '5px',
-        display: 'flex',
-        fontSize: '14px',
-        lineHeight: '19px',
-        color: colors.grey900,
-        '& + &': {
-            marginTop: spacersNum.dp8,
-        },
-    },
-    wrapper: {
-        padding: `0 ${spacersNum.dp16}px`,
-        marginBottom: spacersNum.dp16,
-    },
-    notesWrapper: {
-        maxHeight: 400,
-        overflowY: 'auto',
-    },
-    editor: {
-        paddingTop: spacersNum.dp16,
-    },
-    emptyNotes: {
-        fontSize: 14,
-        color: colors.grey600,
-    },
-    name: {
-        fontSize: '13px',
-        fontWeight: 500,
-    },
-    lastUpdated: {
-        fontSize: '12px',
-        marginLeft: '8px',
-        color: colors.grey700,
-    },
-    body: {
-        '& p': {
-            margin: `${spacersNum.dp8}px 0 0 0`,
-        },
-    },
-    newNoteButtonContainer: {
-        paddingTop: spacersNum.dp4,
-        display: 'flex',
-        gap: '4px',
-    },
-    rightColumn: {
-        flex: 1,
-    },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    headerText: {
-        display: 'inline-block',
-    },
-});
-
-type PropsWithStyles = NoteSectionProps & WithStyles<typeof getStyles>;
+type PropsWithStyles = Props & WithStyles<typeof styles>;
 
 const NoteSectionPlain = ({
     placeholder,
@@ -166,4 +106,4 @@ const NoteSectionPlain = ({
         </div>);
 };
 
-export const NoteSection = withStyles(getStyles)(NoteSectionPlain) as ComponentType<NoteSectionProps>;
+export const NoteSection = withStyles(styles)(NoteSectionPlain) as ComponentType<Props>;
