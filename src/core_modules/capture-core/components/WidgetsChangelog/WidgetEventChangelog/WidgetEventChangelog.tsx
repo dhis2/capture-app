@@ -1,14 +1,13 @@
-// @flow
 import React from 'react';
 import type { ItemDefinitions } from '../common/Changelog/Changelog.types';
 import { Changelog, CHANGELOG_ENTITY_TYPES } from '../common/Changelog';
 
 type Props = {
-    eventId: string,
-    eventData: Object,
-    dataItemDefinitions: ItemDefinitions,
-    isOpen: boolean,
-    setIsOpen: (boolean | boolean => boolean) => void,
+    eventId: string;
+    eventData: Record<string, any>;
+    dataItemDefinitions: ItemDefinitions;
+    isOpen: boolean;
+    setIsOpen: (value: boolean | ((prevState: boolean) => boolean)) => void;
 }
 
 export const WidgetEventChangelog = ({
