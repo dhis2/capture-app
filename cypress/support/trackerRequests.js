@@ -35,6 +35,10 @@
 // This shows you the top x pages ordered by the most requests made to the same API:
 //
 // jq --arg top 5 --arg host 'http://localhost:8080/apps/capture#' -r 'to_entries | map(.key as $scenario | .value | to_entries | map(.key as $page | .value | to_entries | map({name: $scenario, page: $page, api: .key, count: .value.count, totalDuration: .value.duration}))[]) | flatten | sort_by(-.count) | .[0:($top|tonumber)] | .[] | "\(.count) requests (\(.totalDuration)ms total) by test: \(.name)\n   from page: \($host)\(.page)\n   to API: \(.api)"' trackerRequests.json
+//
+// Analyze fields and which request uses it (you will need to search for the URL in the trackerRequests.json file to find the scenario):
+//
+// jq -r '[.. | objects | select(has("href") and has("query")) | select(.query.fields != null) | {fields: .query.fields, href}] | unique_by(.fields)[]| "\(.fields) | \(.href)"' trackerRequests.json
 
 // this will contain the requests per spec as cypress does not share globals between specs (see afterEach)
 const requestsPerTest = {};
