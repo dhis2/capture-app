@@ -1,20 +1,19 @@
 import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles, type WithStyles, createStyles } from '@material-ui/core';
 import { withFocusSaver } from 'capture-ui';
 import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
-import cx from 'classnames';
 import { Button, Tooltip, colors, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { TextField } from '../../FormFields/New';
 import { convertClientToList } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
-import type { OwnProps, NoteType } from './NoteSection.types';
+import type { OwnProps } from './NoteSection.types';
 
 const FocusTextField = withFocusSaver()(TextField);
 
-const styles = {
+const styles = createStyles({
     item: {
         padding: spacersNum.dp12,
         marginRight: spacersNum.dp4,
@@ -34,7 +33,7 @@ const styles = {
     },
     notesWrapper: {
         maxHeight: 400,
-        overflowY: 'auto' as const,
+        overflowY: 'auto',
     },
     editor: {
         paddingTop: spacersNum.dp16,
@@ -62,17 +61,7 @@ const styles = {
         display: 'flex',
         gap: '4px',
     },
-    rightColumn: {
-        flex: 1,
-    },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    headerText: {
-        display: 'inline-block',
-    },
-};
+});
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
@@ -103,22 +92,22 @@ const NoteSectionPlain = ({
         setEditing(false);
     }, [handleAddNote, newNoteValue]);
 
-    const NoteItem = ({ value, note, storedAt, createdBy }: NoteType) => (
-        <div data-test="note-item" className={cx(classes.item)}>
+    const NoteItem = ({ value, storedAt, createdBy }) => (
+        <div data-test="note-item" className={classes.item}>
             {/* TODO: add avatar */}
-            <div className={classes.rightColumn}>
-                <div className={classes.header}>
-                    {createdBy && <span className={cx(classes.headerText, classes.name)}>
+            <div>
+                <div>
+                    {createdBy && <span className={classes.name}>
                         {createdBy.firstName} {' '} {createdBy.surname}
                     </span>}
-                    <span className={cx(classes.headerText, classes.lastUpdated)}>
+                    <span className={classes.lastUpdated}>
                         <Tooltip content={convertClientToList(moment(fromServerDate(storedAt).getClientZonedISOString()).toISOString(), dataElementTypes.DATETIME)}>
                             {moment(fromServerDate(storedAt)).fromNow()}
                         </Tooltip>
                     </span>
                 </div>
                 <div className={classes.body}>
-                    <Parser>{note || value}</Parser>
+                    <Parser>{value}</Parser>
                 </div>
             </div>
         </div>
@@ -129,8 +118,17 @@ const NoteSectionPlain = ({
             <div className={classes.notesWrapper}>
                 {notes
                     .sort((a, b) => moment(a.storedAt).valueOf() - moment(b.storedAt).valueOf())
-                    .map(note => <NoteItem key={`note-item-${note.value || note.note}-`} {...note} />)
-                }
+                    .map((note) => {
+                        const noteValue = note.note || note.value;
+                        return (
+                            <NoteItem
+                                key={`note-item-${noteValue}-`}
+                                value={noteValue}
+                                storedAt={note.storedAt}
+                                createdBy={note.createdBy}
+                            />
+                        );
+                    })}
                 {notes.length === 0 &&
                 <div className={classes.emptyNotes}>
                     {emptyNoteMessage}
