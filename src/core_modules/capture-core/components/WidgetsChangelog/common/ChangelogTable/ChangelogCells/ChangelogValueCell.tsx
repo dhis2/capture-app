@@ -39,8 +39,8 @@ const styles: Readonly<any> = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 type ComponentProps = {
-    previousValue?: string;
-    currentValue?: string;
+    previousValue?: string | null;
+    currentValue?: string | null;
     classes: Record<string, string>;
 };
 
@@ -52,13 +52,13 @@ const Updated = ({ previousValue, currentValue, classes }: ComponentProps) => (
     </div>
 );
 
-const Created = ({ currentValue, classes }: Pick<ComponentProps, 'currentValue' | 'classes'>) => (
+const Created = ({ currentValue, classes }: ComponentProps) => (
     <div className={classes.container}>
         <span className={classes.currentValue}>{currentValue}</span>
     </div>
 );
 
-const Deleted = ({ previousValue, classes }: Pick<ComponentProps, 'previousValue' | 'classes'>) => (
+const Deleted = ({ previousValue, classes }: ComponentProps) => (
     <div className={classes.container}>
         <span className={classes.previousValue}>{previousValue}</span>
     </div>
