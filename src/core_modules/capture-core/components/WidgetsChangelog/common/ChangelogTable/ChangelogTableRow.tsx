@@ -4,7 +4,7 @@ import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ChangelogChangeCell, ChangelogValueCell } from './ChangelogCells';
 import type { ChangelogRecord } from '../Changelog/Changelog.types';
 
-type OwnProps = { 
+type OwnProps = {
     record: ChangelogRecord;
 };
 
