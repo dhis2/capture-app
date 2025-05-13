@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, CircularLoader, colors } from '@dhis2/ui';
+import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { CardList, CardListButtons } from '../../CardList';
 import { withNavigation } from '../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchBox.constants';
@@ -17,6 +18,7 @@ import { SearchResultsHeader } from '../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { Widget } from '../../Widget';
+import { getTrackerProgramThrowIfNotFound } from '../../../metaData';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -66,6 +68,13 @@ const SearchResultsIndex = ({
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
     const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
     const [isFallbackLoading, setIsFallbackLoading] = useState(false);
+
+    const availableSearchGroup =
+        currentSearchScopeType === searchScopes.PROGRAM
+            ? getTrackerProgramThrowIfNotFound(currentSearchScopeId)
+                .trackedEntityType.searchGroups.find(group => !group.unique)
+            : undefined;
+
 
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
@@ -201,14 +210,21 @@ const SearchResultsIndex = ({
                 <div className={classes.bottomText}>
                     {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
                 </div>
-
-                <Button
-                    onClick={handleFallbackSearch}
-                    dataTest="fallback-search-button"
-                    loading={isFallbackLoading}
+                <ConditionalTooltip
+                    enabled={!availableSearchGroup}
+                    content={i18n.t('No searchable attributes for {{trackedEntityName}}', {
+                        trackedEntityName, interpolation: false,
+                    })}
                 >
-                    {i18n.t('Search in all programs')}
-                </Button>
+                    <Button
+                        onClick={handleFallbackSearch}
+                        dataTest="fallback-search-button"
+                        loading={isFallbackLoading}
+                        disabled={!availableSearchGroup}
+                    >
+                        {i18n.t('Search in all programs')}
+                    </Button>
+                </ConditionalTooltip>
             </div>
         }
         <div className={classes.bottom}>
