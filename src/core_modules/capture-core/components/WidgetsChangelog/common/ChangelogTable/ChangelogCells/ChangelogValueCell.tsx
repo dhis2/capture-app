@@ -52,13 +52,13 @@ const Updated = ({ previousValue, currentValue, classes }: ComponentProps) => (
     </div>
 );
 
-const Created = ({ currentValue, classes }: ComponentProps) => (
+const Created = ({ currentValue, classes }: Pick<ComponentProps, 'currentValue' | 'classes'>) => (
     <div className={classes.container}>
         <span className={classes.currentValue}>{currentValue}</span>
     </div>
 );
 
-const Deleted = ({ previousValue, classes }: ComponentProps) => (
+const Deleted = ({ previousValue, classes }: Pick<ComponentProps, 'previousValue' | 'classes'>) => (
     <div className={classes.container}>
         <span className={classes.previousValue}>{previousValue}</span>
     </div>
