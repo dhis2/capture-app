@@ -43,16 +43,16 @@ type BaseProps = {
 };
 
 type UpdatedProps = BaseProps & {
-    previousValue?: string | null;
-    currentValue?: string | null;
+    previousValue?: string;
+    currentValue?: string;
 };
 
 type CreatedProps = BaseProps & {
-    currentValue?: string | null;
+    currentValue?: string;
 };
 
 type DeletedProps = BaseProps & {
-    previousValue?: string | null;
+    previousValue?: string;
 };
 
 const Updated = ({ previousValue, currentValue, classes }: UpdatedProps) => (
