@@ -41,7 +41,7 @@ type Props = OwnProps & WithStyles<typeof styles>;
 type ComponentProps = {
     previousValue?: string;
     currentValue?: string;
-    classes: Props['classes'];
+    classes: Record<string, string>;
 };
 
 const Updated = ({ previousValue, currentValue, classes }: ComponentProps) => (
