@@ -35,3 +35,14 @@ Feature: User interacts with a single event page view/edit form
     And you navigate to register a person relationship
     And you select the TB Program
     Then the TB program enroll form is loaded
+
+  Scenario: User can add note on edit event page view mode
+    Given you land on the edit event page by having typed /#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=a36385cbdb2
+    When you fill in the note: view mode note
+    Then list should contain the new note: view mode note
+
+  Scenario: User can see note on edit event page edit mode
+    Given you land on the edit event page by having typed /#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=a36385cbdb2
+    And you enable edit mode
+    And you fill in the note: edit mode note
+    Then list should contain the new note: edit mode note
