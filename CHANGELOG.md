@@ -1,3 +1,10 @@
+## [102.4.2](https://github.com/dhis2/capture-app/compare/v102.4.1...v102.4.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18839] TEA with number option set value does not show in Profile widget on Capture App ([#4076](https://github.com/dhis2/capture-app/issues/4076)) ([ed6d28d](https://github.com/dhis2/capture-app/commit/ed6d28d4f3a26cbe3a2c01a3c6aaa96737b16769))
+
 ## [102.4.1](https://github.com/dhis2/capture-app/compare/v102.4.0...v102.4.1) (2025-05-08)
 
 
