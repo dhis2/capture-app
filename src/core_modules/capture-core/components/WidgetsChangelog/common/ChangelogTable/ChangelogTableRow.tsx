@@ -8,8 +8,8 @@ type OwnProps = {
     record: ChangelogRecord;
 };
 
-const styles = {
-    dataItemColumn: { wordWrap: 'break-word', hyphens: 'auto' } as const,
+const styles: Readonly<any> = {
+    dataItemColumn: { wordWrap: 'break-word', hyphens: 'auto' },
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;

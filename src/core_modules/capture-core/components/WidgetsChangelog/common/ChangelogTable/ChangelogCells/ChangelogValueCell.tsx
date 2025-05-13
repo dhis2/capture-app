@@ -11,7 +11,7 @@ type OwnProps = {
     currentValue?: string;
 };
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         flexDirection: 'row',
@@ -34,7 +34,7 @@ const styles = {
     arrow: {
         margin: spacers.dp4,
     },
-} as const;
+};
 
 type Props = OwnProps & WithStyles<typeof styles>;
 

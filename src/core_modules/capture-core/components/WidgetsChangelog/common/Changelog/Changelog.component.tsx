@@ -50,7 +50,7 @@ export const ChangelogComponent = ({
         <ModalContent>
             {supportsChangelogV2 && (
                 <ChangelogFilterBar
-                    attributeToFilterBy={attributeToFilterBy ?? null}
+                    attributeToFilterBy={attributeToFilterBy}
                     setAttributeToFilterBy={setAttributeToFilterBy}
                     filterValue={filterValue}
                     setFilterValue={setFilterValue}
@@ -75,7 +75,7 @@ export const ChangelogComponent = ({
                     ) : (
                         <DataTableRow>
                             <DataTableCell align={'center'} colSpan="5">
-                                {i18n.t('No changes to display') as React.ReactNode}
+                                {i18n.t('No changes to display')}
                             </DataTableCell>
                         </DataTableRow>
                     )}
@@ -101,7 +101,7 @@ export const ChangelogComponent = ({
         <ModalActions>
             <ButtonStrip>
                 <Button onClick={close} secondary>
-                    {i18n.t('Close') as React.ReactNode}
+                    {i18n.t('Close')}
                 </Button>
             </ButtonStrip>
         </ModalActions>
