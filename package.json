@@ -68,7 +68,8 @@
         "rxjs": "^7.5.5",
         "styled-jsx": "^4",
         "typeface-roboto": "^0.0.75",
-        "uuid": "^9.0.0"
+        "uuid": "^9.0.0",
+        "zod": "^3.24.4"
     },
     "scripts": {
         "start": "yarn verifyCacheVersion && concurrently --kill-others \"yarn workspaces run build:watch\" \"d2-app-scripts start\"",

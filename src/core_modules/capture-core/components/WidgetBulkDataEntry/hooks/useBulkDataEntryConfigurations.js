@@ -4,7 +4,27 @@ import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
 import { useApiMetadataQuery } from '../../../utils/reactQueryHelpers';
 import { useUserLocale } from '../../../utils/localeData/useUserLocale';
-import type { DataStoreConfigurationRaw, DataStoreConfiguration } from '../WidgetBulkDataEntry.types';
+import type { DataStoreConfiguration } from '../WidgetBulkDataEntry.types';
+import { bulkDataEntryDatastoreSchema } from '../../../../../types';
+
+const validateStructure = (data) => {
+    const supportedVersion = 1;
+    const { success, error } = bulkDataEntryDatastoreSchema.safeParse(data);
+
+    if (success && data.version !== supportedVersion) {
+        return {
+            data: null,
+            validationError: 'Only version 1 of the bulkDataEntry is supported in this version of the app',
+        };
+    }
+
+    return {
+        data: success ? data : null,
+        validationError: !success
+            ? error.message || 'An unknown error occurred loading the bulkDataEntry Schema'
+            : null,
+    };
+};
 
 const getLocalizedString = (field: { [string]: string }, locale: string): string => {
     if (field[locale]) {
@@ -38,8 +58,16 @@ export const useBulkDataEntryConfigurations = (
         { resource: 'dataStore/capture/bulkDataEntry' },
         {
             enabled: !!configExists && !!programId,
-            select: (configurations?: Array<DataStoreConfigurationRaw>) =>
-                configurations?.reduce((acc, configuration) => {
+            select: (dataStoreConfigurationRaw) => {
+                const { data: dataStoreConfigurationValidated, validationError } =
+                    validateStructure(dataStoreConfigurationRaw);
+
+                if (validationError) {
+                    log.error(validationError);
+                    return [];
+                }
+
+                return dataStoreConfigurationValidated?.config.reduce((acc, configuration) => {
                     if (configuration.programId === programId) {
                         const configurationWithLocale: DataStoreConfiguration = {
                             ...configuration,
@@ -51,7 +79,8 @@ export const useBulkDataEntryConfigurations = (
                         acc = [...acc, configurationWithLocale];
                     }
                     return acc;
-                }, []),
+                }, []);
+            },
         },
     );
 
