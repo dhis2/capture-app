@@ -132,28 +132,55 @@ export class ProgramStageFactory {
         return section;
     }
 
+    async _buildSimpleSection(section: Section, cachedProgramStageDataElements: Array<CachedProgramStageDataElement>) {
+        // $FlowFixMe
+        cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
+            const cachedDataElementDefinition = this
+                .cachedDataElements
+                ?.get(cachedProgramStageDataElement.dataElementId);
+
+            const element = await this.dataElementFactory.build(
+                cachedProgramStageDataElement,
+                section,
+                cachedDataElementDefinition,
+            );
+            element && section.addElement(element);
+        }));
+    }
+
     async _buildMainSection(cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
         });
 
         if (cachedProgramStageDataElements) {
-            // $FlowFixMe
-            await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
-                const cachedDataElementDefinition = this
-                    .cachedDataElements
-                    ?.get(cachedProgramStageDataElement.dataElementId);
-
-                const element = await this.dataElementFactory.build(
-                    cachedProgramStageDataElement,
-                    section,
-                    cachedDataElementDefinition,
-                );
-                element && section.addElement(element);
-            }));
+            await this._buildSimpleSection(section, cachedProgramStageDataElements);
         }
 
         return section;
+    }
+
+    async _buildLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
+        if (!cachedProgramStageDataElements) return;
+
+        // Check if there exist data elements which are not assigned to a section
+        const dataElementsInSection = stageForm.getElements().reduce((acc, dataElement) => {
+            acc.add(dataElement.id);
+            return acc;
+        }, new Set());
+
+        const unassignedDataElements = cachedProgramStageDataElements
+            .filter(dataElement => !dataElementsInSection.has(dataElement.dataElementId));
+
+        if (unassignedDataElements.length === 0) return;
+
+        // Create a special section for the unassigned data elements
+        const section = new Section((o) => {
+            o.id = Section.LEFTOVERS_SECTION_ID;
+        });
+
+        await this._buildSimpleSection(section, unassignedDataElements);
+        stageForm.addSection(section);
     }
 
     static _convertProgramStageDataElementsToObject(
@@ -309,6 +336,8 @@ export class ProgramStageFactory {
         } else {
             stageForm.addSection(await this._buildMainSection(cachedProgramStage.programStageDataElements));
         }
+
+        this._buildLeftoversSection(stageForm, cachedProgramStage.programStageDataElements);
 
         return stage;
     }
