@@ -101,6 +101,8 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate
 
 const MainPageContainer = () => {
     const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
+    const [bulkDataEntryTrackedEntities, setBulkDataEntryTrackedEntities] = useState(undefined);
+
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
@@ -187,6 +189,8 @@ const MainPageContainer = () => {
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
                 setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
+                bulkDataEntryTrackedEntities={bulkDataEntryTrackedEntities}
             />
         </OrgUnitFetcher>
     );

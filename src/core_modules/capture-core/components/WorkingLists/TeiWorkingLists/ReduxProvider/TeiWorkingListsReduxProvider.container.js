@@ -22,6 +22,8 @@ export const TeiWorkingListsReduxProvider = ({
     orgUnitId,
     selectedTemplateId,
     onChangeTemplate,
+    setShowBulkDataEntryPlugin,
+    setBulkDataEntryTrackedEntities,
 }: Props) => {
     const program = useTrackerProgram(programId);
     const apiTemplates = useApiTemplate();
@@ -120,6 +122,8 @@ export const TeiWorkingListsReduxProvider = ({
             onAddTemplate={injectCallbacksForAddTemplate}
             onDeleteTemplate={injectCallbacksForDeleteTemplate}
             storeId={storeId}
+            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+            setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
         />
     );
 };
