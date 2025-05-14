@@ -14,7 +14,8 @@ import {
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
     actionTypes as editEventDataEntryAction,
-    actionTypes as editEventActionTypes } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+    actionTypes as editEventActionTypes,
+} from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
@@ -37,7 +38,7 @@ const alertVariants = {
 
 type ErrorFeedbackInput = {
     message: string,
-    variant?: string,
+    variant?: $Keys<typeof alertVariants>,
     action?: Node,
 };
 
@@ -62,153 +63,115 @@ function getErrorFeedback({ message, variant, action }: ErrorFeedbackInput) {
     };
 }
 
-export const getFeedbackDesc = (appUpdaters: Updaters) =>
-    createReducerDescription(
-        {
-            ...appUpdaters,
+export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescription({
+    ...appUpdaters,
+    [feedbackActionTypes.CLOSE_FEEDBACK]: (state) => {
+        const newState = [...state];
+        newState.shift();
+        return newState;
+    },
+    [dataEntryActionTypes.COMPLETE_EVENT_ERROR]: (state, action) =>
+        addErrorFeedback(state, {
+            message: action.payload.error,
+            action: action.payload.action,
+            variant: alertVariants.critical,
+        }),
+    [enrollmentActionTypes.ENROLLMENT_LOAD_FAILED]: (state, action) =>
+        addErrorFeedback(state, action.payload),
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_ERROR]: (state, action) =>
+        addErrorFeedback(state, action.payload.errorMessage),
+    [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (state, action) => {
+        const error = action.payload;
+        const errorMessage = isString(error) ? error : error.message;
+        const errorObject = isObject(error) ? error : null;
+        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
+        const newState = [
+            ...state,
+            getErrorFeedback(i18n.t('Could not save event')),
+        ];
+        return newState;
+    },
+    [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (state, action) => [
+        ...state,
+        getErrorFeedback({
+            message: action.payload.errorMessage,
+            variant: alertVariants.critical,
+        }),
+    ],
+    [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: state => [
+        ...state,
+        getErrorFeedback({ message: i18n.t('Could not delete event') }),
+    ],
 
-            [feedbackActionTypes.CLOSE_FEEDBACK]: (state) => {
-                const newState = [...state];
-                newState.shift();
-                return newState;
-            },
-
-            [dataEntryActionTypes.COMPLETE_EVENT_ERROR]: (state, action) =>
-                addErrorFeedback(state, {
-                    message: action.payload.error,
-                    action: action.payload.action,
-                    variant: alertVariants.critical,
-                }),
-
-            [enrollmentActionTypes.ENROLLMENT_LOAD_FAILED]: (state, action) =>
-                addErrorFeedback(state, { message: action.payload }),
-
-            [workingListsCommonActionTypes.LIST_VIEW_INIT_ERROR]: (state, action) =>
-                addErrorFeedback(state, { message: action.payload.errorMessage }),
-
-            [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (
-                state,
-                action,
-            ) => {
-                const error = action.payload;
-                const errorMessage = isString(error) ? error : error.message;
-                const errorObject = isObject(error) ? error : null;
-                log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
-
-                return [
-                    ...state,
-                    getErrorFeedback({
-                        message: i18n.t('Could not save event'),
-                        variant: alertVariants.critical,
-                    }),
-                ];
-            },
-
-            [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (state, action) => [
-                ...state,
-                getErrorFeedback({
-                    message: action.payload.errorMessage,
-                    variant: alertVariants.critical,
-                }),
-            ],
-
-            [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: state => [
-                ...state,
-                getErrorFeedback({ message: i18n.t('Could not delete event') }),
-            ],
-
-            [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: state => [
-                ...state,
-                getErrorFeedback({
-                    message: i18n.t('Could not save working list'),
-                    variant: alertVariants.critical,
-                }),
-            ],
-
-            [workingListsCommonActionTypes.TEMPLATE_ADD_ERROR]: state => [
-                ...state,
-                getErrorFeedback({
-                    message: i18n.t('Could not add working list'),
-                    variant: alertVariants.critical,
-                }),
-            ],
-
-            [workingListsCommonActionTypes.TEMPLATE_DELETE_ERROR]: state => [
-                ...state,
-                getErrorFeedback({ message: i18n.t('Could not delete working list') }),
-            ],
-
-            [asyncHandlerActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
-                addErrorFeedback(state, {
-                    message: action.payload.message,
-                    variant: alertVariants.critical,
-                }),
-
-            [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER]: (
-                state,
-                action,
-            ) => {
-                const error = action.payload;
-                const errorMessage = isString(error) ? error : error.message;
-                const errorObject = isObject(error) ? error : null;
-                log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
-
-                return [
-                    ...state,
-                    getErrorFeedback({
-                        message: i18n.t('Could not save event'),
-                        variant: alertVariants.critical,
-                    }),
-                ];
-            },
-
-            [dataEntryActionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
-                addErrorFeedback(state, { message: action.payload.message }),
-
-            [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (
-                state,
-                action,
-            ) => addErrorFeedback(state, { message: action.payload.message }),
-
-            [registrationSectionActionTypes.ORG_UNIT_SEARCH_FAILED]: state =>
-                addErrorFeedback(state, { message: i18n.t('Organisation unit search failed.') }),
-
-            [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED]: state =>
-                addErrorFeedback(state, {
-                    message: i18n.t('Error saving tracked entity instance'),
-                    variant: alertVariants.critical,
-                }),
-
-            [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: state =>
-                addErrorFeedback(state, {
-                    message: i18n.t('Error saving enrollment'),
-                    variant: alertVariants.critical,
-                }),
-
-            [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
-                addErrorFeedback(state, {
-                    message: i18n.t('Error saving the enrollment event'),
-                    variant: alertVariants.critical,
-                }),
-
-            [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: state =>
-                addErrorFeedback(state, { message: i18n.t('Error deleting the enrollment event') }),
-
-            [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: state =>
-                addErrorFeedback(state, {
-                    message: i18n.t('Error editing the event, the changes made were not saved'),
-                    variant: alertVariants.critical,
-                }),
-
-            [enrollmentSiteActionTypes.ERROR_ENROLLMENT]: (state, action) =>
-                addErrorFeedback(state, { message: i18n.t(action.payload.message) }),
-
-            [viewEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
-                addErrorFeedback(state, { message: i18n.t('Error updating the Assignee') }),
-
-            [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
-                addErrorFeedback(state, { message: i18n.t('Error updating the Assignee') }),
-        },
-        'feedbacks',
-        [],
-    );
+    [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: state => [
+        ...state,
+        getErrorFeedback({
+            message: i18n.t('Could not save working list'),
+            variant: alertVariants.critical,
+        }),
+    ],
+    [workingListsCommonActionTypes.TEMPLATE_ADD_ERROR]: state => [
+        ...state,
+        getErrorFeedback({
+            message: i18n.t('Could not add working list'),
+            variant: alertVariants.critical,
+        }),
+    ],
+    [workingListsCommonActionTypes.TEMPLATE_DELETE_ERROR]: state => [
+        ...state,
+        getErrorFeedback({ message: i18n.t('Could not delete working list') }),
+    ],
+    [asyncHandlerActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, { payload }) =>
+        addErrorFeedback(state, {
+            message: payload.message,
+            variant: alertVariants.critical,
+        }),
+    [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER]: (state, action) => {
+        const error = action.payload;
+        const errorMessage = isString(error) ? error : error.message;
+        const errorObject = isObject(error) ? error : null;
+        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
+        const newState = [
+            ...state,
+            getErrorFeedback({
+                message: i18n.t('Could not save event'),
+                variant: alertVariants.critical,
+            }),
+        ];
+        return newState;
+    },
+    [dataEntryActionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
+        addErrorFeedback(state, { message: action.payload.message }),
+    [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
+        addErrorFeedback(state, { message: action.payload.message }),
+    [registrationSectionActionTypes.ORG_UNIT_SEARCH_FAILED]: state =>
+        addErrorFeedback(state, { message: i18n.t('Organisation unit search failed.') }),
+    [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED]: state =>
+        addErrorFeedback(state, {
+            message: i18n.t('Error saving tracked entity instance'),
+            variant: alertVariants.critical,
+        }),
+    [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: state =>
+        addErrorFeedback(state, {
+            message: i18n.t('Error saving enrollment'),
+            variant: alertVariants.critical,
+        }),
+    [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
+        addErrorFeedback(state, {
+            message: i18n.t('Error saving the enrollment event'),
+            variant: alertVariants.critical,
+        }),
+    [editEventActionTypes.DELETE_EVENT_DATA_ENTRY_FAILED]: state =>
+        addErrorFeedback(state, { message: i18n.t('Error deleting the enrollment event') }),
+    [editEventDataEntryAction.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: state =>
+        addErrorFeedback(state, {
+            message: i18n.t('Error editing the event, the changes made were not saved'),
+            variant: alertVariants.critical,
+        }),
+    [enrollmentSiteActionTypes.ERROR_ENROLLMENT]: (state, action) =>
+        addErrorFeedback(state, { message: i18n.t(action.payload.message) }),
+    [viewEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
+        addErrorFeedback(state, { message: i18n.t('Error updating the Assignee') }),
+    [enrollmentEditEventActionTypes.ASSIGNEE_SAVE_FAILED]: state =>
+        addErrorFeedback(state, { message: i18n.t('Error updating the Assignee') }),
+}, 'feedbacks', []);
