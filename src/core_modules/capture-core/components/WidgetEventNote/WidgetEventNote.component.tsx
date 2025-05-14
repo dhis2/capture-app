@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
@@ -8,9 +7,10 @@ import { WidgetNote } from '../WidgetNote';
 
 export const WidgetEventNote = ({ dataEntryKey, dataEntryId }: Props) => {
     const dispatch = useDispatch();
-    const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
+    const notes = useSelector(({ dataEntriesNotes }: { dataEntriesNotes: Record<string, any[]> }) => 
+        dataEntriesNotes[`${dataEntryId}-${dataEntryKey}`] ?? []);
 
-    const onAddNote = (newNoteValue) => {
+    const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEvent(dataEntryKey, dataEntryId, newNoteValue));
     };
 
