@@ -1,10 +1,9 @@
-// @flow
 import React, { type ComponentType, useEffect, useRef, useState } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import cx from 'classnames';
 import { colors, IconChevronUp24, spacersNum } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
-import type { WidgetCollapsibleProps, WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
+import { type WidgetCollapsibleProps, type WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
 
 const styles = {
     headerContainer: {
@@ -101,7 +100,7 @@ const WidgetCollapsiblePlain = ({
     const [childrenVisible, setChildrenVisibility] = useState(open); // controls whether children are rendered to the DOM
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
     const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
-    const hideChildrenTimeoutRef = useRef(null);
+    const hideChildrenTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const initialRenderRef = useRef(true);
 
     useEffect(() => {
@@ -116,7 +115,7 @@ const WidgetCollapsiblePlain = ({
 
         setPostEffectOpenStatus(open);
 
-        clearTimeout(hideChildrenTimeoutRef.current);
+        clearTimeout(hideChildrenTimeoutRef.current as ReturnType<typeof setTimeout>);
         if (open) {
             setChildrenVisibility(true);
         } else {
@@ -166,4 +165,4 @@ const WidgetCollapsiblePlain = ({
     );
 };
 
-export const WidgetCollapsible: ComponentType<WidgetCollapsibleProps> = withStyles(styles)(WidgetCollapsiblePlain);
+export const WidgetCollapsible = withStyles(styles)(WidgetCollapsiblePlain) as ComponentType<WidgetCollapsibleProps>;

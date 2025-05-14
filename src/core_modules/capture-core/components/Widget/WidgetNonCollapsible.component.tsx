@@ -1,9 +1,8 @@
-// @flow
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { colors, spacersNum } from '@dhis2/ui';
 import cx from 'classnames';
-import type { WidgetNonCollapsibleProps, WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
+import { type WidgetNonCollapsibleProps, type WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
 
 const styles = {
     container: {
@@ -50,5 +49,4 @@ const WidgetNonCollapsiblePlain = ({
     </div>
 );
 
-export const WidgetNonCollapsible: ComponentType<WidgetNonCollapsibleProps> =
-    withStyles(styles)(WidgetNonCollapsiblePlain);
+export const WidgetNonCollapsible = withStyles(styles)(WidgetNonCollapsiblePlain) as ComponentType<WidgetNonCollapsibleProps>;
