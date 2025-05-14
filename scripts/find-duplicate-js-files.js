@@ -28,10 +28,19 @@ const EXCLUDED_DIRS = ['node_modules', 'build', 'dist', 'coverage', '.git', 'flo
  * @returns {Array<string>} List of file paths
  */
 function getAllFiles(dir, fileList = []) {
+  if (!dir || typeof dir !== 'string') {
+    console.warn('Invalid directory path provided');
+    return fileList;
+  }
+
   try {
     const files = fs.readdirSync(dir);
     
-    files.forEach(file => {
+    for (const file of files) {
+      if (!file || typeof file !== 'string') {
+        continue;
+      }
+      
       const filePath = path.join(dir, file);
       
       try {
@@ -39,7 +48,7 @@ function getAllFiles(dir, fileList = []) {
         
         if (stat.isDirectory()) {
           if (EXCLUDED_DIRS.includes(file)) {
-            return;
+            continue;
           }
           
           getAllFiles(filePath, fileList);
@@ -49,7 +58,7 @@ function getAllFiles(dir, fileList = []) {
       } catch (err) {
         console.warn(`Warning: Could not access ${filePath}: ${err.message}`);
       }
-    });
+    }
   } catch (err) {
     console.warn(`Warning: Could not read directory ${dir}: ${err.message}`);
   }
@@ -63,12 +72,21 @@ function getAllFiles(dir, fileList = []) {
  * @returns {Array<Object>} List of duplicate JavaScript files with their TypeScript counterparts
  */
 function findDuplicateJsFiles(srcDir) {
+  if (!srcDir || typeof srcDir !== 'string') {
+    console.warn('Invalid source directory provided');
+    return [];
+  }
+
   const allFiles = getAllFiles(srcDir);
   const duplicates = [];
   
   const filesByDir = {};
   
-  allFiles.forEach(filePath => {
+  for (const filePath of allFiles) {
+    if (!filePath || typeof filePath !== 'string') {
+      continue;
+    }
+    
     const dir = path.dirname(filePath);
     const fileName = path.basename(filePath);
     
@@ -77,13 +95,17 @@ function findDuplicateJsFiles(srcDir) {
     }
     
     filesByDir[dir].push(fileName);
-  });
+  }
   
-  Object.keys(filesByDir).forEach(dir => {
+  for (const dir of Object.keys(filesByDir)) {
     const dirFiles = filesByDir[dir];
     const baseNames = {};
     
-    dirFiles.forEach(fileName => {
+    for (const fileName of dirFiles) {
+      if (!fileName || typeof fileName !== 'string') {
+        continue;
+      }
+      
       const ext = path.extname(fileName);
       const baseName = fileName.replace(ext, '');
       
@@ -92,29 +114,29 @@ function findDuplicateJsFiles(srcDir) {
       }
       
       baseNames[baseName].push(fileName);
-    });
+    }
     
-    Object.keys(baseNames).forEach(baseName => {
+    for (const baseName of Object.keys(baseNames)) {
       const files = baseNames[baseName];
       
       if (files.length > 1) {
-        const hasJs = files.some(f => f.endsWith('.js'));
-        const hasTs = files.some(f => f.endsWith('.ts') || f.endsWith('.tsx'));
+        const hasJs = files.some(f => f && typeof f === 'string' && f.endsWith('.js'));
+        const hasTs = files.some(f => f && typeof f === 'string' && (f.endsWith('.ts') || f.endsWith('.tsx')));
         
         if (hasJs && hasTs) {
-          const jsFiles = files.filter(f => f.endsWith('.js'));
-          const tsFiles = files.filter(f => f.endsWith('.ts') || f.endsWith('.tsx'));
+          const jsFiles = files.filter(f => f && typeof f === 'string' && f.endsWith('.js'));
+          const tsFiles = files.filter(f => f && typeof f === 'string' && (f.endsWith('.ts') || f.endsWith('.tsx')));
           
-          jsFiles.forEach(jsFile => {
+          for (const jsFile of jsFiles) {
             duplicates.push({
               jsFile: path.join(dir, jsFile),
               tsFiles: tsFiles.map(tsFile => path.join(dir, tsFile))
             });
-          });
+          }
         }
       }
-    });
-  });
+    }
+  }
   
   return duplicates;
 }
@@ -128,18 +150,27 @@ function main() {
   
   const duplicates = findDuplicateJsFiles(srcDir);
   
-  if (duplicates.length > 0) {
+  if (duplicates && duplicates.length > 0) {
     console.error('Found JavaScript files that have TypeScript counterparts in the same directory:');
     console.error('These files should be deleted as part of the TypeScript migration process.\n');
     
-    duplicates.forEach(({ jsFile, tsFiles }) => {
-      console.error(`JavaScript file: ${jsFile}`);
+    for (const duplicate of duplicates) {
+      if (!duplicate || !duplicate.jsFile || !Array.isArray(duplicate.tsFiles)) {
+        continue;
+      }
+      
+      console.error(`JavaScript file: ${duplicate.jsFile}`);
       console.error(`TypeScript counterpart(s):`);
-      tsFiles.forEach(tsFile => {
+      
+      for (const tsFile of duplicate.tsFiles) {
+        if (!tsFile || typeof tsFile !== 'string') {
+          continue;
+        }
         console.error(`  - ${tsFile}`);
-      });
+      }
+      
       console.error('');
-    });
+    }
     
     console.error(`Total: ${duplicates.length} duplicate file(s) found.`);
     process.exit(1); // Exit with error
@@ -149,4 +180,5 @@ function main() {
   }
 }
 
+// Execute the main function
 main();
