@@ -95,7 +95,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   @with-indexBD-clean
   Scenario: User open trackedEntities page in bulk data entry
-      Given you open the main page with Ngelehun and child programe context
+      Given you open the main page with the child programe context
       And the BulkDataEntry widget in idle mode is displayed
       And the user selects the "Routine visit" BulkDataEntry from the "Open page in bulk data entry" dropdown
       When the user navigates to "Program overview" using the breadcrumb
@@ -105,7 +105,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   @with-indexBD-clean
   Scenario: User open selected trackedEntities rows in bulk data entry
-      Given you open the main page with Ngelehun and child programe context
+      Given you open the main page with the child programe context
       And the BulkDataEntry widget in idle mode is displayed
       When you select the first 2 rows
       And the user selects the "Routine visit" BulkDataEntry from the "Open in bulk data entry" dropdown
@@ -119,7 +119,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   @with-indexBD-clean
   Scenario: User open program stage events page in bulk data entry
-      Given you open the main page with Ngelehun and child program context and configure a program stage working list
+      Given you open the main page with the child program context and configure a program stage working list
       And the BulkDataEntry widget in idle mode is displayed
       And the user selects the "Routine visit" BulkDataEntry from the "Open page in bulk data entry" dropdown
       When the user navigates to "Program overview" using the breadcrumb
@@ -129,7 +129,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
 
   @with-indexBD-clean
   Scenario: User open selected program stage event rows in bulk data entry
-      Given you open the main page with Ngelehun and child program context and configure a program stage working list
+      Given you open the main page with the child program context and configure a program stage working list
       And the BulkDataEntry widget in idle mode is displayed
       When you select the first 2 rows
       And the user selects the "Routine visit" BulkDataEntry from the "Open in bulk data entry" dropdown

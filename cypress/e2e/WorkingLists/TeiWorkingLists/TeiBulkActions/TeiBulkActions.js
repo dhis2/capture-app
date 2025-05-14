@@ -3,6 +3,10 @@ import '../../sharedSteps';
 
 Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with the child programe context', () => {
+    cy.visit('#/?programId=IpHINAT79UW&all');
     cy.get('[data-test="tei-working-lists"]').within(() => {
         cy.contains('Rows per page').should('exist');
         cy.contains('First name').should('exist');
@@ -22,8 +26,8 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () =
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
 });
 
-Given('you open the main page with Ngelehun and child program context and configure a program stage working list', () => {
-    cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+Given('you open the main page with the child program context and configure a program stage working list', () => {
+    cy.visit('#/?programId=IpHINAT79UW&all');
 
     cy.get('[data-test="tei-working-lists"]')
         .within(() => {
