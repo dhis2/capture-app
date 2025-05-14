@@ -1,0 +1,71 @@
+import React from 'react';
+import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
+import { NoticeBoxes } from './NoticeBoxes.container';
+import type { PlainProps } from './dataEntry.types';
+import { DataEntry } from '../../DataEntry';
+import { TEI_MODAL_STATE } from './dataEntry.actions';
+
+export const DataEntryComponent = ({
+    dataEntryId,
+    itemId,
+    onCancel,
+    onSave,
+    saveAttempted,
+    onUpdateFormField,
+    onUpdateFormFieldAsync,
+    trackedEntityName,
+    formFoundation,
+    modalState,
+    onGetValidationContext,
+    errorsMessages,
+    warningsMessages,
+    orgUnit,
+}: PlainProps) => (
+    <Modal large onClose={onCancel} dataTest="modal-edit-profile">
+        <ModalTitle>{i18n.t('Edit {{trackedEntityName}}',
+            { trackedEntityName, interpolation: { escapeValue: false } },
+        ) as string}</ModalTitle>
+        <ModalContent>
+            {i18n.t(
+                'Change information about this {{trackedEntityName}} here. Information about this enrollment can be edited in the Enrollment widget.',
+                { trackedEntityName, interpolation: { escapeValue: false } },
+            ) as string}
+            <DataEntry
+                id={dataEntryId}
+                formFoundation={formFoundation}
+                saveAttempted={saveAttempted}
+                onUpdateFormField={onUpdateFormField}
+                onUpdateFormFieldAsync={onUpdateFormFieldAsync}
+                onGetValidationContext={onGetValidationContext}
+                orgUnit={orgUnit}
+            />
+            <NoticeBoxes
+                dataEntryId={dataEntryId}
+                itemId={itemId}
+                saveAttempted={saveAttempted}
+                errorsMessages={errorsMessages}
+                warningsMessages={warningsMessages}
+                hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}
+            />
+        </ModalContent>
+        <ModalActions>
+            <ButtonStrip end>
+                <Button onClick={onCancel} secondary>
+                    {i18n.t('Cancel without saving') as string}
+                </Button>
+                {modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
+                    <Button loading primary>
+                        {i18n.t(' Loading...') as string}
+                    </Button>
+                )}
+
+                {(modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
+                    <Button onClick={onSave} primary>
+                        {i18n.t('Save changes') as string}
+                    </Button>
+                )}
+            </ButtonStrip>
+        </ModalActions>
+    </Modal>
+);
