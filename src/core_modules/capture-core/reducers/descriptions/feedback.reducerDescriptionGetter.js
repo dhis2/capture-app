@@ -77,6 +77,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) =>
                 addErrorFeedback(state, {
                     message: action.payload.error,
                     action: action.payload.action,
+                    variant: alertVariants.critical,
                 }),
 
             [enrollmentActionTypes.ENROLLMENT_LOAD_FAILED]: (state, action) =>
@@ -105,7 +106,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) =>
 
             [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (state, action) => [
                 ...state,
-                getErrorFeedback({ message: action.payload.errorMessage }),
+                getErrorFeedback({
+                    message: action.payload.errorMessage,
+                    variant: alertVariants.critical,
+                }),
             ],
 
             [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: state => [
@@ -115,12 +119,18 @@ export const getFeedbackDesc = (appUpdaters: Updaters) =>
 
             [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: state => [
                 ...state,
-                getErrorFeedback({ message: i18n.t('Could not save working list') }),
+                getErrorFeedback({
+                    message: i18n.t('Could not save working list'),
+                    variant: alertVariants.critical,
+                }),
             ],
 
             [workingListsCommonActionTypes.TEMPLATE_ADD_ERROR]: state => [
                 ...state,
-                getErrorFeedback({ message: i18n.t('Could not add working list') }),
+                getErrorFeedback({
+                    message: i18n.t('Could not add working list'),
+                    variant: alertVariants.critical,
+                }),
             ],
 
             [workingListsCommonActionTypes.TEMPLATE_DELETE_ERROR]: state => [
@@ -129,7 +139,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) =>
             ],
 
             [asyncHandlerActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
-                addErrorFeedback(state, { message: action.payload.message }),
+                addErrorFeedback(state, {
+                    message: action.payload.message,
+                    variant: alertVariants.critical,
+                }),
 
             [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER]: (
                 state,
@@ -161,10 +174,16 @@ export const getFeedbackDesc = (appUpdaters: Updaters) =>
                 addErrorFeedback(state, { message: i18n.t('Organisation unit search failed.') }),
 
             [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED]: state =>
-                addErrorFeedback(state, { message: i18n.t('Error saving tracked entity instance') }),
+                addErrorFeedback(state, {
+                    message: i18n.t('Error saving tracked entity instance'),
+                    variant: alertVariants.critical,
+                }),
 
             [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: state =>
-                addErrorFeedback(state, { message: i18n.t('Error saving enrollment') }),
+                addErrorFeedback(state, {
+                    message: i18n.t('Error saving enrollment'),
+                    variant: alertVariants.critical,
+                }),
 
             [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
                 addErrorFeedback(state, {
