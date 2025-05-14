@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useCallback, type ComponentType } from 'react';
 import moment from 'moment';
 import {
@@ -11,7 +10,7 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import type { PlainProps } from './enrollment.types';
@@ -41,12 +40,15 @@ const styles = {
     },
 };
 
-const getGeometryType = geometryType =>
+const getGeometryType = (geometryType?: string) =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
-const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel || i18n.t('Enrollment date');
-const getIncidentDateLabel = program => program.displayIncidentDateLabel || i18n.t('Incident date');
+const getEnrollmentDateLabel = (program: { displayEnrollmentDateLabel?: string }) => 
+    program.displayEnrollmentDateLabel || i18n.t('Enrollment date');
+const getIncidentDateLabel = (program: { displayIncidentDateLabel?: string }) => 
+    program.displayIncidentDateLabel || i18n.t('Incident date');
 
-// eslint-disable-next-line complexity
+type Props = PlainProps & WithStyles<typeof styles>;
+
 export const WidgetEnrollmentPlain = ({
     classes,
     events,
@@ -72,10 +74,10 @@ export const WidgetEnrollmentPlain = ({
     onUpdateEnrollmentStatusSuccess,
     onAccessLostFromTransfer,
     type = dataElementTypes.ORGANISATION_UNIT,
-}: PlainProps) => {
+}: Props) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
-    const localDateTime: string = (convertValue(enrollment?.updatedAt, dataElementTypes.DATETIME): any);
+    const localDateTime = convertValue(enrollment?.updatedAt, dataElementTypes.DATETIME) as string;
     const geometryType = getGeometryType(enrollment?.geometry?.type);
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
@@ -179,7 +181,7 @@ export const WidgetEnrollmentPlain = ({
                             </div>
                         )}
                         <Actions
-                            tetName={program.trackedEntityType.displayName}
+                            tetName={program.trackedEntityType?.displayName}
                             onlyEnrollOnce={program.onlyEnrollOnce}
                             programStages={program.programStages}
                             enrollment={enrollment}
@@ -204,4 +206,4 @@ export const WidgetEnrollmentPlain = ({
     );
 };
 
-export const WidgetEnrollment: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(WidgetEnrollmentPlain);
+export const WidgetEnrollment = withStyles(styles)(WidgetEnrollmentPlain) as ComponentType<PlainProps>;
