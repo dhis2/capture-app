@@ -7,11 +7,6 @@ Given('you open the main page with Ngelehun and child programe context', () => {
 
 Given('you open the main page with the child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&all');
-    cy.get('[data-test="tei-working-lists"]').within(() => {
-        cy.contains('Rows per page').should('exist');
-        cy.contains('First name').should('exist');
-        cy.contains('Last name').should('exist');
-    });
 });
 
 Given('you open the main page with Ngelehun and Malaria Case diagnosis context', () => {
@@ -44,13 +39,6 @@ Given('you open the main page with the child program context and configure a pro
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
-
-    cy.get('[data-test="tei-working-lists"]').within(() => {
-        cy.contains('Rows per page').should('exist');
-        cy.contains('First name').should('exist');
-        cy.contains('Last name').should('exist');
-        cy.contains('Ngelehun CHC').should('exist');
-    });
 });
 
 // you open the working lists
@@ -328,19 +316,9 @@ Then(/^the other (.*) bulk actions buttons are disabled$/, (actionType) => {
     });
 });
 
-Then('the TEI working list is displayed', () => {
-    cy.get('[data-test="tei-working-lists"]').within(() => {
-        cy.contains('Rows per page').should('exist');
-        cy.contains('First name').should('exist');
-        cy.contains('Last name').should('exist');
-    });
-});
-
-Then('the program stage working list is displayed', () => {
-    cy.get('[data-test="tei-working-lists"]').within(() => {
-        cy.contains('Rows per page').should('exist');
-        cy.contains('First name').should('exist');
-        cy.contains('Last name').should('exist');
-        cy.contains('Ngelehun CHC').should('exist');
-    });
+Then('the working list is displayed', () => {
+    cy.get('[data-test="working-list-table-loading"]').should('not.exist');
+    cy.get('[data-test="tei-working-lists"]')
+        .find('tr')
+        .should('have.length', 16);
 });

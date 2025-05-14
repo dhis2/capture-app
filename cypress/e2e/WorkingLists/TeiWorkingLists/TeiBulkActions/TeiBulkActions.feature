@@ -96,6 +96,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
   @with-indexBD-clean
   Scenario: User open trackedEntities page in bulk data entry
       Given you open the main page with the child programe context
+      And the working list is displayed
       And the BulkDataEntry widget in idle mode is displayed
       And the user selects the "Routine visit" BulkDataEntry from the "Open page in bulk data entry" dropdown
       When the user navigates to "Program overview" using the breadcrumb
@@ -106,11 +107,12 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
   @with-indexBD-clean
   Scenario: User open selected trackedEntities rows in bulk data entry
       Given you open the main page with the child programe context
+      And the working list is displayed
       And the BulkDataEntry widget in idle mode is displayed
       When you select the first 2 rows
       And the user selects the "Routine visit" BulkDataEntry from the "Open in bulk data entry" dropdown
       When the user navigates to "Program overview" using the breadcrumb
-      Then the TEI working list is displayed
+      Then the working list is displayed
       When you select all rows
       And the other enrollment bulk actions buttons are disabled
       And the user click the "Add to ongoing bulk data entry" button
@@ -120,6 +122,7 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
   @with-indexBD-clean
   Scenario: User open program stage events page in bulk data entry
       Given you open the main page with the child program context and configure a program stage working list
+      And the working list is displayed
       And the BulkDataEntry widget in idle mode is displayed
       And the user selects the "Routine visit" BulkDataEntry from the "Open page in bulk data entry" dropdown
       When the user navigates to "Program overview" using the breadcrumb
@@ -130,11 +133,12 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
   @with-indexBD-clean
   Scenario: User open selected program stage event rows in bulk data entry
       Given you open the main page with the child program context and configure a program stage working list
+      And the working list is displayed
       And the BulkDataEntry widget in idle mode is displayed
       When you select the first 2 rows
       And the user selects the "Routine visit" BulkDataEntry from the "Open in bulk data entry" dropdown
       When the user navigates to "Program overview" using the breadcrumb
-      Then the program stage working list is displayed
+      And the working list is displayed
       When you select all rows
       And the other event bulk actions buttons are disabled
       And the user click the "Add to ongoing bulk data entry" button
