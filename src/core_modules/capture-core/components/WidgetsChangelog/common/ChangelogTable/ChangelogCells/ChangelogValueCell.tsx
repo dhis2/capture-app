@@ -38,22 +38,18 @@ const styles: Readonly<any> = {
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
-type BaseProps = {
-    classes: Record<string, string>;
-};
-
-type UpdatedProps = BaseProps & {
+type UpdatedProps = {
     previousValue?: string;
     currentValue?: string;
-};
+} & WithStyles<typeof styles>;
 
-type CreatedProps = BaseProps & {
+type CreatedProps = {
     currentValue?: string;
-};
+} & WithStyles<typeof styles>;
 
-type DeletedProps = BaseProps & {
+type DeletedProps = {
     previousValue?: string;
-};
+} & WithStyles<typeof styles>;
 
 const Updated = ({ previousValue, currentValue, classes }: UpdatedProps) => (
     <div className={classes.container}>
