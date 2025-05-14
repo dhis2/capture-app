@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
-"PO-Revision-Date: 2025-05-02T13:23:06.732Z\n"
+"POT-Creation-Date: 2025-05-14T17:34:43.587Z\n"
+"PO-Revision-Date: 2025-05-14T17:34:43.587Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1386,9 +1386,6 @@ msgstr " Loading..."
 msgid "Save changes"
 msgstr "Save changes"
 
-msgid "Profile"
-msgstr "Profile"
-
 msgid "There is a problem with this form"
 msgstr "There is a problem with this form"
 
@@ -1400,9 +1397,6 @@ msgstr "There was a problem saving changes"
 
 msgid "Try again or contact your system administrator for support"
 msgstr "Try again or contact your system administrator for support"
-
-msgid "Fix errors in the form to continue."
-msgstr "Fix errors in the form to continue."
 
 msgid "You do not have access to delete this {{trackedEntityTypeName}}"
 msgstr "You do not have access to delete this {{trackedEntityTypeName}}"
@@ -1430,6 +1424,9 @@ msgstr "Profile widget could not be loaded. Please try again later"
 
 msgid "{{trackedEntityTypeName}} profile"
 msgstr "{{trackedEntityTypeName}} profile"
+
+msgid "Profile"
+msgstr "Profile"
 
 msgid "tracked entity instance"
 msgstr "tracked entity instance"
