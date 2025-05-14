@@ -160,7 +160,7 @@ export class ProgramStageFactory {
         return section;
     }
 
-    async _buildLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
+    async _addLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
         if (!cachedProgramStageDataElements) return;
 
         // Check if there exist data elements which are not assigned to a section
@@ -337,7 +337,7 @@ export class ProgramStageFactory {
             stageForm.addSection(await this._buildMainSection(cachedProgramStage.programStageDataElements));
         }
 
-        this._buildLeftoversSection(stageForm, cachedProgramStage.programStageDataElements);
+        this._addLeftoversSection(stageForm, cachedProgramStage.programStageDataElements);
 
         return stage;
     }
