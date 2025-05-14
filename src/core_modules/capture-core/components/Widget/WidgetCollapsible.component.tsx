@@ -1,5 +1,5 @@
 import React, { type ComponentType, useEffect, useRef, useState } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
 import { colors, IconChevronUp24, spacersNum } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';

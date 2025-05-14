@@ -1,5 +1,5 @@
 import React, { type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import { colors, spacersNum } from '@dhis2/ui';
 import cx from 'classnames';
 import { type WidgetNonCollapsibleProps, type WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';

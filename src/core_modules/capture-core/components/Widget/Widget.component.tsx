@@ -14,7 +14,6 @@ export const Widget = ({ noncollapsible = false, ...passOnProps }: Props) => {
             </div>
         );
     }
-    
     const nonCollapsibleProps = passOnProps as React.ComponentProps<typeof WidgetNonCollapsible>;
     return (
         <div>
