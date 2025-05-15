@@ -6,11 +6,14 @@ type Props = {
   longitude: number | string;
 };
 
-const toSixDecimal = (value: number | string) => (parseFloat(value.toString()) ? parseFloat(value.toString()).toFixed(6) : null);
+const toSixDecimal = (value: number | string) => {
+    const parsedValue = parseFloat(value.toString());
+    return parsedValue ? parsedValue.toFixed(6) : null;
+};
 
 export const MinimalCoordinates = ({ latitude, longitude }: Props) => (
     <div>
-        {`${i18n.t('Lat')}: ${toSixDecimal(latitude)}`}<br />
-        {`${i18n.t('Long')}: ${toSixDecimal(longitude)}`}
+        {i18n.t('Lat')}: {toSixDecimal(latitude)}<br />
+        {i18n.t('Long')}: {toSixDecimal(longitude)}
     </div>
 );

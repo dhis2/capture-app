@@ -3,7 +3,7 @@ type Location = {
     latitude: number;
 };
 
-function isNumValid(num: number | string | undefined): boolean {
+function isNumValid(num: number | string): boolean {
     if (typeof num === 'number') {
         return true;
     } else if (typeof num === 'string') {
@@ -13,7 +13,7 @@ function isNumValid(num: number | string | undefined): boolean {
     return false;
 }
 
-export const isValidCoordinate = (value: Location | null | undefined): boolean => {
+export const isValidCoordinate = (value: Location): boolean => {
     if (!value) {
         return false;
     }
