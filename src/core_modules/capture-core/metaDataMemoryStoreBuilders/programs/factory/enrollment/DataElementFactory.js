@@ -89,6 +89,14 @@ export class DataElementFactory {
                     valid: otherTrackedEntityInstances.length === 0,
                     data,
                 };
+            }).catch((error) => {
+                if (error?.message?.includes('Non-searchable attribute(s) can not be used during global search')) {
+                    return {
+                        valid: true,
+                        data: {},
+                    };
+                }
+                throw error;
             });
     }
 
