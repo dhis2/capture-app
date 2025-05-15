@@ -51,7 +51,7 @@ export const LinkToExistingPlain = ({
                 }) as string}
                 className={classes.singleSelectField}
                 error={saveAttempted && !!errorMessages.linkedEventId}
-                validationText={saveAttempted && errorMessages.linkedEventId}
+                validationText={saveAttempted && errorMessages.linkedEventId ? errorMessages.linkedEventId : undefined}
                 dataTest="related-stages-existing-response-list"
             >
                 {linkableEvents
