@@ -6,7 +6,7 @@ import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventNote.actions';
 import type { ClientNote, FormNote, SaveContext } from './WidgetEventNote.types';
-import type { ReduxStore, ApiUtils, EpicAction } from '../../types';
+import type { ReduxStore, ApiUtils, EpicAction } from 'capture-core-utils/types';
 
 import {
     addEventNote,
