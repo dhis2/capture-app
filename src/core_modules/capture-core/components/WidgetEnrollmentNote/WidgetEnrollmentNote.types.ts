@@ -1,6 +1,3 @@
-export type Props = {
-};
-
 export type ClientNote = {
     value: string;
     createdBy: {
