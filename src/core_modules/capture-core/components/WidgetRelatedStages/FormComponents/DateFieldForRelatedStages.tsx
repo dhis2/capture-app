@@ -54,9 +54,9 @@ export const DateFieldForRelatedStages = ({
             label={scheduledLabel}
             value={relatedStagesDataValues.scheduledAt ? relatedStagesDataValues.scheduledAt : ''}
             required
-            onSetFocus={() => { /* empty by design */ }}
-            onFocus={() => { /* empty by design */ }}
-            onRemoveFocus={() => { /* empty by design */ }}
+            onSetFocus={() => {}}
+            onFocus={() => {}}
+            onRemoveFocus={() => {}}
             styles={baseInputStyles}
             calendarWidth={350}
             onBlur={onBlur}

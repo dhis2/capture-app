@@ -92,7 +92,7 @@ const linkToExistingResponse = (props) => {
     return linkedEventIdIsValid;
 };
 
-export const ValidationFunctionsByLinkMode: { [key: string]: (props: Props) => boolean } = {
+export const ValidationFunctionsByLinkMode: Record<string, (props?: Props) => boolean> = {
     [relatedStageActions.SCHEDULE_IN_ORG]: props => scheduleInOrgUnit(props),
     [relatedStageActions.ENTER_DATA]: props => enterData(props),
     [relatedStageActions.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),

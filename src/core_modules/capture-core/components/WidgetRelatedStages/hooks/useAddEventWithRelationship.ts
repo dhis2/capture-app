@@ -13,8 +13,7 @@ type ApiEnrollmentEvent = {
 const addEventWithRelationshipMutation = {
     resource: '/tracker?async=false&importStrategy=CREATE_AND_UPDATE',
     type: 'create',
-    data: ({ serverData }: { serverData: any }) => serverData,
-    id: 'addEventWithRelationship',
+    data: ({ serverData }) => serverData,
 };
 
 type Props = {
