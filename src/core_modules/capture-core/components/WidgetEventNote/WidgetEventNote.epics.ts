@@ -38,7 +38,7 @@ const createServerData = (eventId: string, note: string, useNewEndpoint: boolean
 export const addNoteForEventEpic = (action$: EpicAction<AddNoteActionPayload>, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
-        switchMap((action) => {
+        switchMap((action: { payload: AddNoteActionPayload }) => {
             const state = store.value;
             const payload = action.payload;
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
@@ -91,7 +91,7 @@ export const addNoteForEventEpic = (action$: EpicAction<AddNoteActionPayload>, s
 export const removeNoteForEventEpic = (action$: EpicAction<any, RemoveNoteActionMeta>) =>
     action$.pipe(
         ofType(actionTypes.ADD_NOTE_FAILED_FOR_EVENT),
-        map((action) => {
+        map((action: { meta: { context: SaveContext } }) => {
             const context = action.meta.context;
             return batchActions([
                 removeNote(context.dataEntryId, context.itemId, context.noteClientId),
