@@ -36,6 +36,9 @@ export type Props = {|
    scheduleDate?: ?string,
    serverScheduleDate?: ?string,
    suggestedScheduleDate?: ?string,
+   programExpiryPeriodType?: string,
+   programExpiryDays?: number,
+   canEditExpiredPeriod: boolean,
    setScheduledOrgUnit: (orgUnit: ?{
       id: string,
       name: string,
