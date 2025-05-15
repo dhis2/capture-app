@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { getUserStorageController } from '../../../storageControllers';
 import { userStores } from '../../../storageControllers/stores';
@@ -8,11 +7,10 @@ export const useStageLabels = (programId: string, programStageId?: string) => {
     const storageController = getUserStorageController();
 
     const { data, error, isLoading } = useIndexedDBQuery(
-        // $FlowFixMe - react-query types are not up-to-date
         ['programStageLabels', programStageId],
         () =>
             storageController.get(userStores.PROGRAMS, programId, {
-                project: ({ programStages }) => {
+                project: ({ programStages }: { programStages?: Array<{ id: string; displayDueDateLabel?: string; displayExecutionDateLabel?: string }> }) => {
                     const stage = programStages
                         ?.find(storeStage => storeStage.id === programStageId);
                     if (!stage) return {};

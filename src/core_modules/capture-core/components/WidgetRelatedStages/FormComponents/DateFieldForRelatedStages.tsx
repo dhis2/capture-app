@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import {
     DateField,
@@ -13,13 +12,13 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
-type Props = {|
-    scheduledLabel: string,
-    relatedStagesDataValues: RelatedStageDataValueStates,
-    onBlurDateField: (value: string, internalComponentError?: {error: ?string, errorCode: ?string}) => void,
-    saveAttempted: boolean,
-    errorMessages: ErrorMessagesForRelatedStages,
-|}
+type Props = {
+    scheduledLabel: string;
+    relatedStagesDataValues: RelatedStageDataValueStates;
+    onBlurDateField: (value: string, internalComponentError?: {error: string | null, errorCode: string | null}) => void;
+    saveAttempted: boolean;
+    errorMessages: ErrorMessagesForRelatedStages;
+}
 
 const DateFieldForForm =
     withDefaultFieldContainer()(
@@ -43,7 +42,7 @@ export const DateFieldForRelatedStages = ({
 }: Props) => {
     const [touched, setTouched] = useState(false);
 
-    const onBlur = (event, internalComponentError) => {
+    const onBlur = (event: string, internalComponentError: {error: string | null, errorCode: string | null} | undefined) => {
         setTouched(true);
         onBlurDateField(event, internalComponentError);
     };
@@ -55,9 +54,9 @@ export const DateFieldForRelatedStages = ({
             label={scheduledLabel}
             value={relatedStagesDataValues.scheduledAt ? relatedStagesDataValues.scheduledAt : ''}
             required
-            onSetFocus={() => {}}
-            onFocus={() => {}}
-            onRemoveFocus={() => {}}
+            onSetFocus={() => { /* empty by design */ }}
+            onFocus={() => { /* empty by design */ }}
+            onRemoveFocus={() => { /* empty by design */ }}
             styles={baseInputStyles}
             calendarWidth={350}
             onBlur={onBlur}

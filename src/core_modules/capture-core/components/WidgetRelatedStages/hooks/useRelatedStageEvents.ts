@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { convertDateObjectToDateFormatString } from '../../../utils/converters/date';
 import type { RelatedStagesEvents } from '../RelatedStagesActions/RelatedStagesActions.types';
@@ -6,19 +5,19 @@ import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../utils/api';
 
 type Props = {
-    stageId: ?string,
-    enrollmentId: ?string,
-    scheduledLabel: string,
-    occurredLabel: string,
-    relationshipTypeId: ?string,
-    enabled?: boolean,
+    stageId: string | undefined;
+    enrollmentId: string | undefined;
+    scheduledLabel: string;
+    occurredLabel: string;
+    relationshipTypeId: string | undefined;
+    enabled?: boolean;
 }
 
 type ReturnType = {
-    events: Array<RelatedStagesEvents>,
-    linkableEvents: Array<RelatedStagesEvents>,
-    isLoading: boolean,
-    isError: boolean,
+    events: Array<RelatedStagesEvents>;
+    linkableEvents: Array<RelatedStagesEvents>;
+    isLoading: boolean;
+    isError: boolean;
 }
 
 export const useRelatedStageEvents = ({
