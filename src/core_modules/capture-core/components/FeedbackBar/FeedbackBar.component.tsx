@@ -19,7 +19,7 @@ const FeedbackBarComponentPlain = ({ feedback, onClose }: Props) => {
     if (!feedback) {
         return null;
     }
-    
+
     const { message, displayType } = feedback;
     const isAlertBarOpen = typeof message === 'string' && !displayType;
     const isDialogOpen = typeof message === 'object' && displayType === 'dialog';
