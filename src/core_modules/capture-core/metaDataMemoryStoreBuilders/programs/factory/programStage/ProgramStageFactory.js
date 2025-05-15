@@ -337,7 +337,7 @@ export class ProgramStageFactory {
             stageForm.addSection(await this._buildMainSection(cachedProgramStage.programStageDataElements));
         }
 
-        this._addLeftoversSection(stageForm, cachedProgramStage.programStageDataElements);
+        await this._addLeftoversSection(stageForm, cachedProgramStage.programStageDataElements);
 
         return stage;
     }
