@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import log from 'loglevel';
 import { Tag } from '@dhis2/ui';
@@ -7,12 +6,16 @@ import { CHANGE_TYPES } from '../../Changelog/Changelog.constants';
 import { errorCreator } from '../../../../../../capture-core-utils';
 
 type Config = {
-    label: string,
+    label: string;
     variant: {
-        neutral?: boolean,
-        positive?: boolean,
-        negative?: boolean,
-    },
+        neutral?: boolean;
+        positive?: boolean;
+        negative?: boolean;
+    };
+};
+
+type ChangelogChangeCellProps = {
+    changeType: string;
 };
 
 const changeTypeConfigs = {
@@ -27,8 +30,7 @@ const ChangelogChangeComponent = ({ label, variant }: Config) => (
     </Tag>
 );
 
-
-export const ChangelogChangeCell = ({ changeType }: Object) => {
+export const ChangelogChangeCell = ({ changeType }: ChangelogChangeCellProps) => {
     const config = changeTypeConfigs[changeType];
 
     if (!config) {
@@ -40,4 +42,3 @@ export const ChangelogChangeCell = ({ changeType }: Object) => {
         <ChangelogChangeComponent {...config} />
     );
 };
-

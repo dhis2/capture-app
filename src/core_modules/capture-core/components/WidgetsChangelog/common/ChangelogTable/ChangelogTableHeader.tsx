@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -14,22 +13,22 @@ import {
 import type { SortDirection } from '../Changelog/Changelog.types';
 
 type Props = {
-    columnToSortBy: string,
-    sortDirection: SortDirection,
-    setSortDirection: (SortDirection) => void,
-    setColumnToSortBy: (column: string) => void,
-    entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
-    supportsChangelogV2: boolean,
+    columnToSortBy: string;
+    sortDirection: SortDirection;
+    setSortDirection: (direction: SortDirection) => void;
+    setColumnToSortBy: (column: string) => void;
+    entityType: typeof CHANGELOG_ENTITY_TYPES[keyof typeof CHANGELOG_ENTITY_TYPES];
+    supportsChangelogV2: boolean;
 };
 
-type ColumnConfig = {|
-    label: string,
-    width: string,
-    isSortable: boolean,
-    name?: string,
-    sortIconTitle?: string,
-    dataTest?: string,
-|};
+type ColumnConfig = {
+    label: string;
+    width: string;
+    isSortable: boolean;
+    name?: string;
+    sortIconTitle?: string;
+    dataTest?: string;
+};
 
 const getCurrentSortDirection = (
     columnName: string,
@@ -46,9 +45,13 @@ export const ChangelogTableHeader = ({
     entityType,
     supportsChangelogV2,
 }: Props) => {
-    const handleSortIconClick = ({ name, direction }) => {
-        setSortDirection(direction);
-        setColumnToSortBy(name);
+    const handleSortIconClick = (
+        { name, direction }: { name?: string; direction: SortDirection },
+    ) => {
+        if (name) {
+            setSortDirection(direction);
+            setColumnToSortBy(name);
+        }
     };
 
     const sortTargetDataItem = entityType === CHANGELOG_ENTITY_TYPES.TRACKED_ENTITY
@@ -106,7 +109,6 @@ export const ChangelogTableHeader = ({
                     <DataTableColumnHeader
                         key={label}
                         fixed
-                        top="0"
                         width={width}
                         dataTest={dataTest}
                         name={isSortable ? name : undefined}

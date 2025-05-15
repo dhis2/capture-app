@@ -1,15 +1,18 @@
-// @flow
 import React from 'react';
 import { DataTableCell, DataTableRow } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ChangelogChangeCell, ChangelogValueCell } from './ChangelogCells';
 import type { ChangelogRecord } from '../Changelog/Changelog.types';
 
-type Props = { record: ChangelogRecord, classes: Object };
+type OwnProps = {
+    record: ChangelogRecord;
+};
 
-const styles = {
+const styles: Readonly<any> = {
     dataItemColumn: { wordWrap: 'break-word', hyphens: 'auto' },
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const ChangelogTableRowPlain = ({ record, classes }: Props) => (
     <DataTableRow>

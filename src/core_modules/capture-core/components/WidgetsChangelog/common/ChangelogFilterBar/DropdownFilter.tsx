@@ -1,24 +1,22 @@
-// @flow
 import React, { useCallback } from 'react';
 import { DropdownButton, FlyoutMenu, MenuItem, Divider, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import type { FilterValueType } from './ChangelogFilter.types';
 
 type FilterItem = {
-    id: string,
-    name: string,
+    id: string;
+    name: string;
 };
 
-type Props = {
-    label: string,
-    items: Array<FilterItem>,
-    classes: Object,
-    filterColumn: string,
-    openMenuName: string | null,
-    onToggleMenu: (menuName: string) => void,
-    onItemSelected: (value: FilterValueType, filterColumn: string) => void,
-    selectedFilterValue: FilterValueType,
+type OwnProps = {
+    label: string;
+    items: Array<FilterItem>;
+    filterColumn: string;
+    openMenuName: string | null;
+    onToggleMenu: (menuName: string) => void;
+    onItemSelected: (value: FilterValueType, filterColumn: string) => void;
+    selectedFilterValue: FilterValueType;
 };
 
 const styles = {
@@ -26,6 +24,8 @@ const styles = {
         color: colors.grey600,
     },
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const DropdownFilterPlain = ({
     label,
@@ -53,9 +53,8 @@ const DropdownFilterPlain = ({
             onClick={() => onToggleMenu(filterColumn)}
             dataTest={`changelog-filter-${filterColumn}`}
             component={
-                isMenuOpen && (
+                isMenuOpen ? (
                     <FlyoutMenu
-                        role="menu"
                         dataTest={`changelog-filter-${filterColumn}-flyoutmenu`}
                         maxHeight="300px"
                     >
@@ -66,6 +65,7 @@ const DropdownFilterPlain = ({
                                 onToggleMenu(filterColumn);
                             }}
                             label={i18n.t('Show all')}
+                            suffix={null}
                         />
                         <Divider />
                         {items.map(item => (
@@ -76,10 +76,11 @@ const DropdownFilterPlain = ({
                                     onToggleMenu(filterColumn);
                                 }}
                                 label={item.name}
+                                suffix={null}
                             />
                         ))}
                     </FlyoutMenu>
-                )
+                ) : undefined
             }
         >
             <span className={classes.label}>{label}</span>&nbsp;{filterValue}

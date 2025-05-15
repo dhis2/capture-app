@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { useChangelogData, useListDataValues } from '../hooks';
@@ -7,13 +6,13 @@ import { CHANGELOG_ENTITY_TYPES } from './Changelog.constants';
 import type { ItemDefinitions } from './Changelog.types';
 
 type Props = {
-    entityId: string,
-    entityData: Object,
-    entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
-    isOpen: boolean,
-    close: () => void,
-    dataItemDefinitions: ItemDefinitions,
-    programId?: string,
+    entityId: string;
+    entityData: Record<string, any>;
+    entityType: typeof CHANGELOG_ENTITY_TYPES[keyof typeof CHANGELOG_ENTITY_TYPES];
+    isOpen: boolean;
+    close: () => void;
+    dataItemDefinitions: ItemDefinitions;
+    programId?: string;
 };
 
 export const Changelog = ({

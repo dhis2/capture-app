@@ -1,4 +1,3 @@
-// @flow
 export const CHANGE_TYPES = Object.freeze({
     CREATED: 'CREATE',
     DELETED: 'DELETE',

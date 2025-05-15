@@ -1,24 +1,17 @@
-// @flow
 import React from 'react';
 import log from 'loglevel';
 import { colors, IconArrowRight16, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { CHANGE_TYPES } from '../../Changelog/Changelog.constants';
 import { errorCreator } from '../../../../../../capture-core-utils';
 
-type Props = {
-    changeType: $Values<typeof CHANGE_TYPES>,
-    previousValue?: string,
-    currentValue?: string,
-    classes: {
-        container: string,
-        previousValue: string,
-        currentValue: string,
-        arrow: string,
-    }
-}
+type OwnProps = {
+    changeType: typeof CHANGE_TYPES[keyof typeof CHANGE_TYPES];
+    previousValue?: string;
+    currentValue?: string;
+};
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         flexDirection: 'row',
@@ -43,7 +36,22 @@ const styles = {
     },
 };
 
-const Updated = ({ previousValue, currentValue, classes }) => (
+type Props = OwnProps & WithStyles<typeof styles>;
+
+type UpdatedProps = {
+    previousValue?: string;
+    currentValue?: string;
+} & WithStyles<typeof styles>;
+
+type CreatedProps = {
+    currentValue?: string;
+} & WithStyles<typeof styles>;
+
+type DeletedProps = {
+    previousValue?: string;
+} & WithStyles<typeof styles>;
+
+const Updated = ({ previousValue, currentValue, classes }: UpdatedProps) => (
     <div className={classes.container}>
         <div className={classes.previousValue}>{previousValue}</div>
         <div className={classes.arrow}><IconArrowRight16 /></div>
@@ -51,13 +59,13 @@ const Updated = ({ previousValue, currentValue, classes }) => (
     </div>
 );
 
-const Created = ({ currentValue, classes }) => (
+const Created = ({ currentValue, classes }: CreatedProps) => (
     <div className={classes.container}>
         <span className={classes.currentValue}>{currentValue}</span>
     </div>
 );
 
-const Deleted = ({ previousValue, classes }) => (
+const Deleted = ({ previousValue, classes }: DeletedProps) => (
     <div className={classes.container}>
         <span className={classes.previousValue}>{previousValue}</span>
     </div>
