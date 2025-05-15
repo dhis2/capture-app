@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
-"PO-Revision-Date: 2025-05-02T13:23:06.732Z\n"
+"POT-Creation-Date: 2025-05-15T20:31:57.133Z\n"
+"PO-Revision-Date: 2025-05-15T20:31:57.133Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1363,6 +1363,9 @@ msgstr "Event notes"
 
 msgid "Write a note about this scheduled event"
 msgstr "Write a note about this scheduled event"
+
+msgid "No notes added yet"
+msgstr "No notes added yet"
 
 msgid "Program or stage is invalid"
 msgstr "Program or stage is invalid"
