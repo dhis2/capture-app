@@ -18,7 +18,7 @@
         "@dhis2/d2-ui-org-unit-tree": "^7.3.3",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
         "@dhis2/d2-ui-sharing-dialog": "^7.3.3",
-        "@dhis2/rule-engine": "^3.3.9",
+        "@dhis2/rule-engine": "^3.3.10",
         "@dhis2/ui": "^9.10.1",
         "@dhis2-ui/calendar": "^10.4.0",
         "@joakim_sm/react-infinite-calendar": "^2.4.2",
