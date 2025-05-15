@@ -43,8 +43,8 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
                 {coordinates.slice(0, showMore ? coordinates.length : 1).map((coordinatePair, index) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <div key={index}>
-                        {i18n.t('lat')}: {coordinatePair[1]}<br />
-                        {i18n.t('long')}: {coordinatePair[0]}
+                        {`${i18n.t('lat')}: ${coordinatePair[1]}`}<br />
+                        {`${i18n.t('long')}: ${coordinatePair[0]}`}
                     </div>
                 ))}
             </div>
