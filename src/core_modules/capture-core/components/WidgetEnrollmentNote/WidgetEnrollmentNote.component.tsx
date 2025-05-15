@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,9 +8,10 @@ import { useLocationQuery } from '../../utils/routing';
 export const WidgetEnrollmentNote = () => {
     const dispatch = useDispatch();
     const { enrollmentId } = useLocationQuery();
-    const notes = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment?.notes ?? []);
+    const notes = useSelector(({ enrollmentDomain }: { enrollmentDomain?: { enrollment?: { notes?: Array<any> } } }) =>
+        enrollmentDomain?.enrollment?.notes ?? []);
 
-    const onAddNote = (newNoteValue) => {
+    const onAddNote = (newNoteValue: string) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
     };
 

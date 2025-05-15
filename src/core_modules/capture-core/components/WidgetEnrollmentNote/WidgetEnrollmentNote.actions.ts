@@ -1,4 +1,3 @@
-// @flow
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
@@ -19,7 +18,7 @@ export const batchActionTypes = {
 export const requestAddNoteForEnrollment = (enrollmentId: string, note: string) =>
     actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_ENROLLMENT)({ enrollmentId, note });
 
-export const startAddNoteForEnrollment = (enrollmentUid: string, serverData: Object, selections: Object, context: Object) =>
+export const startAddNoteForEnrollment = (enrollmentUid: string, serverData: Record<string, unknown>, selections: Record<string, unknown>, context: Record<string, unknown>) =>
     actionCreator(actionTypes.START_ADD_NOTE_FOR_ENROLLMENT)({ selections, context }, {
         offline: {
             effect: {
@@ -34,5 +33,5 @@ export const startAddNoteForEnrollment = (enrollmentUid: string, serverData: Obj
         },
     });
 
-export const addEnrollmentNote = (enrollmentUid: string, note: Object) =>
+export const addEnrollmentNote = (enrollmentUid: string, note: Record<string, unknown>) =>
     actionCreator(actionTypes.ADD_ENROLLMENT_NOTE)({ enrollmentUid, note });
