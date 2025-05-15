@@ -41,7 +41,7 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
         <>
             <div>
                 {coordinates.slice(0, showMore ? coordinates.length : 1).map((coordinatePair, index) => (
-                    <div key={`coordinate-${coordinatePair[0]}-${coordinatePair[1]}-${index}`}>
+                    <div key={index}>
                         {`${i18n.t('lat')}: ${coordinatePair[1]}`}<br />
                         {`${i18n.t('long')}: ${coordinatePair[0]}`}
                     </div>
