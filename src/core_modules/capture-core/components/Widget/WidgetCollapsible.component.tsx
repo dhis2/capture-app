@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
 import { colors, IconChevronUp24, spacersNum } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
-import { type WidgetCollapsibleProps, type WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
+import type { WidgetCollapsibleProps, WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
 
 const styles = {
     headerContainer: {

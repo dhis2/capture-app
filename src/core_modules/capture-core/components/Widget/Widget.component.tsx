@@ -1,7 +1,7 @@
 import React from 'react';
 import { WidgetCollapsible } from './WidgetCollapsible.component';
 import { WidgetNonCollapsible } from './WidgetNonCollapsible.component';
-import { type Props } from './widget.types';
+import type { Props } from './widget.types';
 
 export const Widget = ({ noncollapsible = false, ...passOnProps }: Props) => {
     if (!noncollapsible) {

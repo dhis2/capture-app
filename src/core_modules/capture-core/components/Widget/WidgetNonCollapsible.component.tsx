@@ -2,7 +2,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { colors, spacersNum } from '@dhis2/ui';
 import cx from 'classnames';
-import { type WidgetNonCollapsibleProps, type WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
+import type { WidgetNonCollapsibleProps, WidgetNonCollapsiblePropsPlain } from './widgetNonCollapsible.types';
 
 const styles = {
     container: {
