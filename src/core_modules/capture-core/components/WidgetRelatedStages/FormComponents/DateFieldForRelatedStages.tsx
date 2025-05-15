@@ -42,7 +42,7 @@ export const DateFieldForRelatedStages = ({
 }: Props) => {
     const [touched, setTouched] = useState(false);
 
-    const onBlur = (event: string, internalComponentError: {error: string | null, errorCode: string | null} | undefined) => {
+    const onBlur = (event, internalComponentError) => {
         setTouched(true);
         onBlurDateField(event, internalComponentError);
     };
@@ -54,9 +54,9 @@ export const DateFieldForRelatedStages = ({
             label={scheduledLabel}
             value={relatedStagesDataValues.scheduledAt ? relatedStagesDataValues.scheduledAt : ''}
             required
-            onSetFocus={() => { /* empty by design */ }}
-            onFocus={() => { /* empty by design */ }}
-            onRemoveFocus={() => { /* empty by design */ }}
+            onSetFocus={() => {}} // eslint-disable-line @typescript-eslint/no-empty-function
+            onFocus={() => {}} // eslint-disable-line @typescript-eslint/no-empty-function
+            onRemoveFocus={() => {}} // eslint-disable-line @typescript-eslint/no-empty-function
             styles={baseInputStyles}
             calendarWidth={350}
             onBlur={onBlur}

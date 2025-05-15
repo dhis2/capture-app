@@ -109,4 +109,4 @@ const ScheduleInOrgUnitPlain = ({
     );
 };
 
-export const ScheduleInOrgUnit = withStyles(styles)(ScheduleInOrgUnitPlain) as ComponentType<Omit<Props, 'classes'>>;
+export const ScheduleInOrgUnit = withStyles(styles)(ScheduleInOrgUnitPlain) as ComponentType<Props>;

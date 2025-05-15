@@ -6,4 +6,4 @@ export type {
     RelatedStageRelationshipType,
 } from './WidgetRelatedStages.types';
 export { relatedStageActions } from './constants';
-export { relatedStageEventIsValid as relatedStageWidgetIsValid } from './relatedStageEventIsValid/relatedStageEventIsValid';
+export { relatedStageWidgetIsValid } from './relatedStageEventIsValid/relatedStageEventIsValid';

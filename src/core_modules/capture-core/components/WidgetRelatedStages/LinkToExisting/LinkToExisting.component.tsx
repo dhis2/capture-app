@@ -29,7 +29,7 @@ export const LinkToExistingPlain = ({
     saveAttempted,
     classes,
 }: LinkToExistingProps) => {
-    const onChange = (value: string) => {
+    const onChange = (value) => {
         setRelatedStagesDataValues({
             ...relatedStagesDataValues,
             linkedEventId: value,
@@ -41,14 +41,14 @@ export const LinkToExistingPlain = ({
             <p className={classes.label}>
                 {i18n.t('Choose a {{linkableStageLabel}} event', {
                     linkableStageLabel,
-                }) as string}
+                })}
             </p>
             <SingleSelectField
                 selected={relatedStagesDataValues.linkedEventId}
-                onChange={({ selected }: { selected: string }) => onChange(selected)}
+                onChange={({ selected }) => onChange(selected)}
                 placeholder={i18n.t('Choose a {{linkableStageLabel}}', {
                     linkableStageLabel,
-                }) as string}
+                })}
                 className={classes.singleSelectField}
                 error={saveAttempted && !!errorMessages.linkedEventId}
                 validationText={saveAttempted && errorMessages.linkedEventId ? errorMessages.linkedEventId : undefined}

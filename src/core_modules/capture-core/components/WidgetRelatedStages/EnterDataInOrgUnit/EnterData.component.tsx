@@ -114,4 +114,4 @@ export const EnterDataInOrgUnitPlain = ({
     );
 };
 
-export const EnterDataInOrgUnit = withStyles(styles)(EnterDataInOrgUnitPlain) as ComponentType<Omit<Props, 'classes'>>;
+export const EnterDataInOrgUnit = withStyles(styles)(EnterDataInOrgUnitPlain) as ComponentType<Props>;

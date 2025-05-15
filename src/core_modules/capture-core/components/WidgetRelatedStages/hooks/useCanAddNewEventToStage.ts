@@ -9,7 +9,7 @@ export const useCanAddNewEventToStage = (programStage: ProgramStage | undefined,
     );
 
     return useMemo(() => {
-        const isProgramStageHidden = hiddenProgramStages?.[programStage?.id ?? ''];
+        const isProgramStageHidden = hiddenProgramStages?.[programStage?.id];
 
         if (isProgramStageHidden) { return false; }
 

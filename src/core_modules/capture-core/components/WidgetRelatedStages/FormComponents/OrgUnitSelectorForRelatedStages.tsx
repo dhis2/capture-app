@@ -50,7 +50,7 @@ export const OrgUnitSelectorForRelatedStages = ({
 }: Props) => {
     const [touched, setTouched] = useState(false);
 
-    const handleSelect = (event: OrgUnitValue) => {
+    const handleSelect = (event) => {
         setTouched(true);
         onSelectOrgUnit(event);
     };

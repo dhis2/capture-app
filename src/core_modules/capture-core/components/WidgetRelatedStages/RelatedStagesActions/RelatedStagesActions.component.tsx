@@ -362,4 +362,4 @@ const RelatedStagesActionsPlain = ({
     );
 };
 
-export const RelatedStagesActions = withStyles(styles)(RelatedStagesActionsPlain) as ComponentType<Omit<PlainProps, 'classes'>>;
+export const RelatedStagesActions = withStyles(styles)(RelatedStagesActionsPlain) as ComponentType<PlainProps>;

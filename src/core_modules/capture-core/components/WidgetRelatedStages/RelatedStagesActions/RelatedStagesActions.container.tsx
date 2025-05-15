@@ -5,7 +5,7 @@ import type { Props, ErrorMessagesForRelatedStages } from './RelatedStagesAction
 import { RelatedStagesActions as RelatedStagesActionsComponent } from './RelatedStagesActions.component';
 import { relatedStageStatus } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
-import { relatedStageEventIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
+import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
 
 type RefType = {
     eventHasLinkableStageRelationship: () => boolean;
@@ -72,7 +72,7 @@ const RelatedStagesActionsPlain = ({
 
     const formIsValid = useCallback(() => {
         const { scheduledAt, scheduledAtFormatError, orgUnit, linkedEventId, linkMode } = relatedStageDataValues;
-        return relatedStageEventIsValid({
+        return relatedStageWidgetIsValid({
             linkMode,
             scheduledAt,
             scheduledAtFormatError,
