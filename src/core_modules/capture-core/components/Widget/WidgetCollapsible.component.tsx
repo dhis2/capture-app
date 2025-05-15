@@ -100,7 +100,7 @@ const WidgetCollapsiblePlain = ({
     const [childrenVisible, setChildrenVisibility] = useState(open); // controls whether children are rendered to the DOM
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
     const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
-    const hideChildrenTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const hideChildrenTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
     const initialRenderRef = useRef(true);
 
     useEffect(() => {
