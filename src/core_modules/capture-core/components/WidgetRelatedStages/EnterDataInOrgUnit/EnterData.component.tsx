@@ -65,9 +65,9 @@ export const EnterDataInOrgUnitPlain = ({
     setRelatedStagesDataValues,
     saveAttempted,
     errorMessages,
-    classes = {},
+    classes,
 }: Props) => {
-    const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
+    const onSelectOrgUnit = (e) => {
         const orgUnit = {
             id: e.id,
             name: e.displayName,
@@ -88,7 +88,7 @@ export const EnterDataInOrgUnitPlain = ({
     };
 
     return (
-        <div className={classes.wrapper}>
+        <div className={classes?.wrapper}>
             <div>
                 <OrgUnitSelectorForRelatedStages
                     relatedStagesDataValues={relatedStagesDataValues}
@@ -98,7 +98,7 @@ export const EnterDataInOrgUnitPlain = ({
                     saveAttempted={saveAttempted}
                 />
             </div>
-            <div className={classes.infoBox}>
+            <div className={classes?.infoBox}>
                 <IconInfo16 />
                 {i18n.t(
                     relatedStagesDataValues?.orgUnit?.name

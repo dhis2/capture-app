@@ -15,7 +15,6 @@ import {
 } from './hooks';
 import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
-import { type RequestEvent } from '../DataEntries';
 
 const styles = {
     header: {
@@ -63,7 +62,7 @@ export const WidgetRelatedStagesPlain = ({
 
     const onLink = useCallback(() => {
         setIsLinking(true);
-        const serverRequestEvent = enrollment?.events.find(e => e.event === eventId) as RequestEvent | undefined;
+        const serverRequestEvent = enrollment?.events.find(e => e.event === eventId);
 
         const {
             formHasError,
