@@ -35,7 +35,7 @@ const FeedbackBarComponentPlain = ({ feedback, onClose }: Props) => {
                     <ModalContent>{message?.content || ''}</ModalContent>
                     <ModalActions>
                         <Button onClick={onClose} primary>
-                            {i18n.t('Close') as string}
+                            {i18n.t('Close')}
                         </Button>
                     </ModalActions>
                 </Modal>
