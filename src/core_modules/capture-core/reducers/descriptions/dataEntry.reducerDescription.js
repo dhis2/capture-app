@@ -7,7 +7,6 @@ import {
     loadEditActionTypes,
 } from '../../components/DataEntry';
 import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
-import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 
 // cleans up data entries that start with dataEntryId
@@ -128,7 +127,7 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         dataEntryValues[payload.fieldId] = payload.value;
         return newState;
     },
-    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [actionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
     [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'dataEntriesFieldsValue');
 
@@ -222,7 +221,7 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         dataEntryValuesUI[payload.fieldId] = { ...dataEntryValuesUI[payload.fieldId], ...payload.valueMeta, modified: true };
         return newState;
     },
-    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [actionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
     [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'dataEntriesFieldsUI');
 
