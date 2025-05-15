@@ -134,7 +134,7 @@ export class ProgramStageFactory {
 
     async _addDataElementsToSection(section: Section, cachedProgramStageDataElements: Array<CachedProgramStageDataElement>) {
         // $FlowFixMe
-        cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
+        await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
             const cachedDataElementDefinition = this
                 .cachedDataElements
                 ?.get(cachedProgramStageDataElement.dataElementId);
