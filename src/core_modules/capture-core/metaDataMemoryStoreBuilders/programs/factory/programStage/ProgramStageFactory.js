@@ -132,7 +132,7 @@ export class ProgramStageFactory {
         return section;
     }
 
-    async _buildSimpleSection(section: Section, cachedProgramStageDataElements: Array<CachedProgramStageDataElement>) {
+    async _addDataElementsToSection(section: Section, cachedProgramStageDataElements: Array<CachedProgramStageDataElement>) {
         // $FlowFixMe
         cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
             const cachedDataElementDefinition = this
@@ -154,7 +154,7 @@ export class ProgramStageFactory {
         });
 
         if (cachedProgramStageDataElements) {
-            await this._buildSimpleSection(section, cachedProgramStageDataElements);
+            await this._addDataElementsToSection(section, cachedProgramStageDataElements);
         }
 
         return section;
@@ -179,7 +179,7 @@ export class ProgramStageFactory {
             o.id = Section.LEFTOVERS_SECTION_ID;
         });
 
-        await this._buildSimpleSection(section, unassignedDataElements);
+        await this._addDataElementsToSection(section, unassignedDataElements);
         stageForm.addSection(section);
     }
 
