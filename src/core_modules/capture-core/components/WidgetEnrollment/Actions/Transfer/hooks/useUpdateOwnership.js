@@ -4,9 +4,9 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from 'react-query';
+import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
 import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
-import { errorCreator, FEATURES, useFeature } from '../../../../../../capture-core-utils';
 
 export type UpdateEnrollmentOwnership = {|
     orgUnitId: string,
@@ -32,9 +32,9 @@ type ReturnTypes = {
 const updateEnrollmentOwnershipMutation = {
     resource: 'tracker/ownership/transfer',
     type: 'update',
-    params: ({ teiId, programId, orgUnitId, teiParamKey }) => ({
+    params: ({ teiId, programId, orgUnitId, teiParamKey, orgUnitKey }) => ({
         program: programId,
-        ou: orgUnitId,
+        [orgUnitKey]: orgUnitId,
         [teiParamKey]: teiId,
     }),
 };
@@ -46,11 +46,12 @@ export const useUpdateOwnership = ({
     onAccessLostFromTransfer,
 }: Props): ReturnTypes => {
     const dataEngine = useDataEngine();
-    const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
     const { show: showErrorAlert } = useAlert(
         i18n.t('An error occurred while transferring ownership'),
         { critical: true },
     );
+    const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
+    const orgUnitKey = useFeature(FEATURES.orgUnitReplaceOuQueryParam) ? 'orgUnit' : 'ou';
 
     // $FlowFixMe
     const { mutateAsync: updateEnrollmentOwnership, isLoading } = useMutation(
@@ -59,6 +60,7 @@ export const useUpdateOwnership = ({
                 programId,
                 teiId,
                 orgUnitId,
+                orgUnitKey,
                 teiParamKey,
             },
         }),
