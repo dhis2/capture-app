@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { SingleSelectField, SingleSelectOption, spacers } from '@dhis2/ui';
@@ -30,7 +29,7 @@ export const LinkToExistingPlain = ({
     saveAttempted,
     classes,
 }: LinkToExistingProps) => {
-    const onChange = (value) => {
+    const onChange = (value: string) => {
         setRelatedStagesDataValues({
             ...relatedStagesDataValues,
             linkedEventId: value,
@@ -42,14 +41,14 @@ export const LinkToExistingPlain = ({
             <p className={classes.label}>
                 {i18n.t('Choose a {{linkableStageLabel}} event', {
                     linkableStageLabel,
-                })}
+                }) as string}
             </p>
             <SingleSelectField
                 selected={relatedStagesDataValues.linkedEventId}
-                onChange={({ selected }) => onChange(selected)}
+                onChange={({ selected }: { selected: string }) => onChange(selected)}
                 placeholder={i18n.t('Choose a {{linkableStageLabel}}', {
                     linkableStageLabel,
-                })}
+                }) as string}
                 className={classes.singleSelectField}
                 error={saveAttempted && !!errorMessages.linkedEventId}
                 validationText={saveAttempted && errorMessages.linkedEventId}
