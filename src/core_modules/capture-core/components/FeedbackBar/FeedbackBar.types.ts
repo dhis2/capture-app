@@ -7,6 +7,6 @@ export type Feedback = {
 };
 
 export type FeedbackBarComponentProps = {
-    feedback: Feedback;
+    feedback?: Feedback;
     onClose: () => void;
 };
