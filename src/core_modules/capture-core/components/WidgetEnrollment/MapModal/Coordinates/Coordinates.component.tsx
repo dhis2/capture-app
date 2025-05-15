@@ -50,8 +50,8 @@ const CoordinatesPlain = ({
 }: Props) => {
     const [position, setPosition] = useState<[number, number] | null>(defaultValues || null);
     const [center, setCenter] = useState<[number, number] | undefined>(undefined);
-    const [tempLatitude, setTempLatitude] = useState<number | string | null>(defaultValues ? defaultValues[0] : null);
-    const [tempLongitude, setTempLongitude] = useState<number | string | null>(defaultValues ? defaultValues[1] : null);
+    const [tempLatitude, setTempLatitude] = useState<number | undefined>(position?.[0]);
+    const [tempLongitude, setTempLongitude] = useState<number | undefined>(position?.[1]);
     const [isEditing, setEditing] = useState(!defaultValues);
     const [isValid, setValid] = useState(true);
     const hasErrors = useMemo(() => {
@@ -67,8 +67,8 @@ const CoordinatesPlain = ({
             setTempLongitude(defaultValues[1]);
             setEditing(false);
         } else {
-            setTempLatitude(null);
-            setTempLongitude(null);
+            setTempLatitude(undefined);
+            setTempLongitude(undefined);
         }
     };
 
@@ -122,9 +122,9 @@ const CoordinatesPlain = ({
 
     const renderLatitude = () => (
         <CoordinateInput
-            label={`${i18n.t('Latitude')}`}
+            label={i18n.t('Latitude')}
             value={tempLatitude}
-            classes={classes as any}
+            classes={classes}
             disabled={!isEditing}
             onBlur={(latitude) => {
                 if (!latitude) {
@@ -152,9 +152,9 @@ const CoordinatesPlain = ({
 
     const renderLongitude = () => (
         <CoordinateInput
-            label={`${i18n.t('Longitude')}`}
+            label={i18n.t('Longitude')}
             value={tempLongitude}
-            classes={classes as any}
+            classes={classes}
             disabled={!isEditing}
             onBlur={(longitude) => {
                 if (!longitude) {
@@ -190,7 +190,7 @@ const CoordinatesPlain = ({
                         setEditing(true);
                     }}
                 >
-                    {`${i18n.t('Edit')}`}
+                    {i18n.t('Edit')}
                 </Button>
             ) : (
                 <Button
@@ -199,8 +199,8 @@ const CoordinatesPlain = ({
                     onClick={() => {
                         setValid(true);
                         setPosition(null);
-                        setTempLatitude(null);
-                        setTempLongitude(null);
+                        setTempLatitude(undefined);
+                        setTempLongitude(undefined);
                     }}
                 />
             )}
@@ -216,7 +216,7 @@ const CoordinatesPlain = ({
                 }}
                 secondary
             >
-                {`${i18n.t('Cancel')}`}
+                {i18n.t('Cancel')}
             </Button>
             <Button
                 disabled={hasErrors}
@@ -229,14 +229,14 @@ const CoordinatesPlain = ({
                 }}
                 primary
             >
-                {`${i18n.t('Set coordinates')}`}
+                {i18n.t('Set coordinates')}
             </Button>
         </ButtonStrip>
     );
 
     return (
         <Modal large>
-            <ModalTitle>{`${i18n.t('Coordinates')}`}</ModalTitle>
+            <ModalTitle>{i18n.t('Coordinates')}</ModalTitle>
             <ModalContent className={classes.modalContent}>
                 {renderMap()}
                 <div className={classNames({ [classes.errorContainer]: hasErrors })}>
@@ -246,7 +246,7 @@ const CoordinatesPlain = ({
                         {renderFieldButton()}
                     </div>
                     {hasErrors && (
-                        <div className={classes.inputWrapper}>{`${i18n.t('Please provide valid coordinates')}`}</div>
+                        <div className={classes.inputWrapper}>{i18n.t('Please provide valid coordinates')}</div>
                     )}
                 </div>
             </ModalContent>

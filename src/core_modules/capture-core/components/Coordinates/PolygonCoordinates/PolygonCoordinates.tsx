@@ -12,7 +12,7 @@ type StyleProps = {
     viewButton: string;
 };
 
-const styles = {
+const styles: Readonly<any> = {
     buttonContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -41,15 +41,16 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
         <>
             <div>
                 {coordinates.slice(0, showMore ? coordinates.length : 1).map((coordinatePair, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <div key={index}>
-                        {`${i18n.t('lat')}: ${coordinatePair[1]}`}<br />
-                        {`${i18n.t('long')}: ${coordinatePair[0]}`}
+                        {i18n.t('lat')}: {coordinatePair[1]}<br />
+                        {i18n.t('long')}: {coordinatePair[0]}
                     </div>
                 ))}
             </div>
             <div className={classes.buttonContainer}>
                 <button className={classes.viewButton} onClick={() => setShowMore(!showMore)}>
-                    {`${showMore ? i18n.t('Show less') : i18n.t('Show more')}`}
+                    {showMore ? i18n.t('Show less') : i18n.t('Show more')}
                     {showMore ? <IconChevronUp16 /> : <IconChevronDown16 />}
                 </button>
             </div>
@@ -57,4 +58,4 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
     );
 };
 
-export const PolygonCoordinates = withStyles(styles as any)(PolygonCoordinatesPlain) as ComponentType<OwnProps>;
+export const PolygonCoordinates = withStyles(styles)(PolygonCoordinatesPlain) as ComponentType<OwnProps>;

@@ -1,4 +1,6 @@
-export const convertCoordinatesToServer = (coordinates?: Array<[number, number] | null> | null): [number, number] | null => {
+export const convertCoordinatesToServer = (
+    coordinates?: Array<[number, number] | null> | null,
+): [number, number] | null => {
     if (!coordinates || !coordinates[0]) {
         return null;
     }
