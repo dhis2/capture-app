@@ -11,7 +11,7 @@ export const relatedStageWidgetIsValid = (props: RelatedStageIsValidProps): bool
         return false;
     }
 
-    const validationFunction = ValidationFunctionsByLinkMode[linkMode as string];
+    const validationFunction = ValidationFunctionsByLinkMode[linkMode];
 
     if (!validationFunction) {
         log.error(errorCreator('No validation function found for referral mode'));

@@ -30,8 +30,8 @@ export const isScheduledDateValid = (
     };
 };
 
-const scheduleInOrgUnit = (props?: Props): boolean => {
-    const { scheduledAt, scheduledAtFormatError, orgUnit, setErrorMessages } = props ?? {} as Props;
+const scheduleInOrgUnit = (props) => {
+    const { scheduledAt, scheduledAtFormatError, orgUnit, setErrorMessages } = props ?? {};
     const { valid: scheduledAtIsValid, errorMessage } = isScheduledDateValid(scheduledAt, scheduledAtFormatError);
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
@@ -58,8 +58,8 @@ const scheduleInOrgUnit = (props?: Props): boolean => {
     return scheduledAtIsValid && orgUnitIsValid;
 };
 
-const enterData = (props?: Props): boolean => {
-    const { orgUnit, setErrorMessages } = props ?? {} as Props;
+const enterData = (props) => {
+    const { orgUnit, setErrorMessages } = props ?? {};
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
     if (!orgUnitIsValid) {
@@ -75,8 +75,8 @@ const enterData = (props?: Props): boolean => {
     return orgUnitIsValid;
 };
 
-const linkToExistingResponse = (props?: Props): boolean => {
-    const { linkedEventId, setErrorMessages } = props ?? {} as Props;
+const linkToExistingResponse = (props) => {
+    const { linkedEventId, setErrorMessages } = props ?? {};
     const linkedEventIdIsValid = !!linkedEventId;
 
     if (!linkedEventIdIsValid) {
@@ -92,8 +92,8 @@ const linkToExistingResponse = (props?: Props): boolean => {
     return linkedEventIdIsValid;
 };
 
-export const ValidationFunctionsByLinkMode: Record<string, (props?: Props) => boolean> = {
-    [relatedStageActions.SCHEDULE_IN_ORG]: (props?: Props) => scheduleInOrgUnit(props),
-    [relatedStageActions.ENTER_DATA]: (props?: Props) => enterData(props),
-    [relatedStageActions.LINK_EXISTING_RESPONSE]: (props?: Props) => linkToExistingResponse(props),
+export const ValidationFunctionsByLinkMode: { [key: string]: (props: Props) => boolean } = {
+    [relatedStageActions.SCHEDULE_IN_ORG]: props => scheduleInOrgUnit(props),
+    [relatedStageActions.ENTER_DATA]: props => enterData(props),
+    [relatedStageActions.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
 };
