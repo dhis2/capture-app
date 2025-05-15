@@ -6,6 +6,7 @@ import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventNote.actions';
 import type { ClientNote, FormNote, SaveContext } from './WidgetEventNote.types';
+import type { ReduxStore, ApiUtils, EpicAction } from '../../types';
 
 import {
     addEventNote,
@@ -17,32 +18,14 @@ import {
     removeNote,
 } from '../DataEntry/actions/dataEntry.actions';
 
-type ApiUtils = {
-    querySingleResource: (params: { resource: string; params?: Record<string, unknown> }) => Promise<any>;
-    fromClientDate: (date: string) => { getServerZonedISOString: () => string };
+type AddNoteActionPayload = {
+    itemId: string;
+    dataEntryId: string;
+    note: string;
 };
 
-type ReduxStore = {
-    value: {
-        dataEntries: Record<string, { eventId: string }>;
-        currentSelections: Record<string, unknown>;
-    };
-};
-
-type ActionWithPayload = {
-    type: string;
-    payload: {
-        itemId: string;
-        dataEntryId: string;
-        note: string;
-    };
-};
-
-type ActionWithMeta = {
-    type: string;
-    meta: {
-        context: SaveContext;
-    };
+type RemoveNoteActionMeta = {
+    context: SaveContext;
 };
 
 const createServerData = (eventId: string, note: string, useNewEndpoint: boolean): Record<string, unknown> => {
@@ -52,10 +35,10 @@ const createServerData = (eventId: string, note: string, useNewEndpoint: boolean
     return { event: eventId, notes: [{ value: note }] };
 };
 
-export const addNoteForEventEpic = (action$: any, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
+export const addNoteForEventEpic = (action$: EpicAction<AddNoteActionPayload>, store: ReduxStore, { querySingleResource, fromClientDate }: ApiUtils) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
-        switchMap((action: ActionWithPayload) => {
+        switchMap((action) => {
             const state = store.value;
             const payload = action.payload;
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
@@ -105,10 +88,10 @@ export const addNoteForEventEpic = (action$: any, store: ReduxStore, { querySing
             });
         }));
 
-export const removeNoteForEventEpic = (action$: any) =>
+export const removeNoteForEventEpic = (action$: EpicAction<any, RemoveNoteActionMeta>) =>
     action$.pipe(
         ofType(actionTypes.ADD_NOTE_FAILED_FOR_EVENT),
-        map((action: ActionWithMeta) => {
+        map((action) => {
             const context = action.meta.context;
             return batchActions([
                 removeNote(context.dataEntryId, context.itemId, context.noteClientId),
