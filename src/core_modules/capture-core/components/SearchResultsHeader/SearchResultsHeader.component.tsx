@@ -1,6 +1,6 @@
-// @flow
-import React from 'react';
-import { withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import type { CurrentSearchTerms } from '../SearchBox';
 import { convertValue } from '../../converters/clientToList';
@@ -14,14 +14,15 @@ const styles = (theme: Theme) => ({
     },
 });
 
-type SearchResultsHeaderType = $ReadOnly<{|
-  currentSearchTerms: CurrentSearchTerms,
-  currentSearchScopeName?: string,
-  ...CssClasses
-|}>
+type Props = {
+  currentSearchTerms: CurrentSearchTerms;
+  currentSearchScopeName?: string;
+}
+
+type SearchResultsHeaderProps = Props & WithStyles<typeof styles>;
 
 const SearchResultsHeaderPlain =
-  ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderType) =>
+  ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderProps) =>
       (<div data-test="search-results-top" className={classes.topSection} >
           {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
           {currentSearchTerms && <div>
@@ -37,4 +38,4 @@ const SearchResultsHeaderPlain =
       </div>
       );
 
-export const SearchResultsHeader = withStyles(styles)(SearchResultsHeaderPlain);
+export const SearchResultsHeader = withStyles(styles)(SearchResultsHeaderPlain) as ComponentType<Props>;
