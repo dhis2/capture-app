@@ -1,4 +1,4 @@
-import React, { type ComponentType, useState } from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Button, spacers } from '@dhis2/ui';
