@@ -1,4 +1,4 @@
-// @flow
+
 import { useMemo } from 'react';
 import { relatedStageStatus } from '../constants';
 import { getUserStorageController, userStores } from '../../../storageControllers';
@@ -11,10 +11,10 @@ const getRelationshipTypeFromIndexedDB = () => {
     return storageController.getAll(userStores.RELATIONSHIP_TYPES);
 };
 
-type Props = {|
-    programStageId: string,
-    programId: string,
-|};
+type Props = {
+    programStageId: string;
+    programId: string;
+};
 
 const filterBidirectionalRelationship = (): boolean => true;
 

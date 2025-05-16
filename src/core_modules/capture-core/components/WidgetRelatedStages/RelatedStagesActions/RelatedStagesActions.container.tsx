@@ -1,4 +1,3 @@
-// @flow
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { useOrgUnitAutoSelect } from '../../../dataQueries';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
@@ -8,6 +7,16 @@ import { relatedStageStatus } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
 import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
 
+type RefType = {
+    eventHasLinkableStageRelationship: () => boolean;
+    formIsValidOnSave: () => boolean;
+    getLinkedStageValues: () => {
+        linkMode?: keyof typeof import('../constants').relatedStageActions;
+        relatedStageDataValues: RelatedStageDataValueStates;
+        selectedRelationshipType: any;
+    };
+};
+
 const RelatedStagesActionsPlain = ({
     programId,
     enrollmentId,
@@ -15,7 +24,7 @@ const RelatedStagesActionsPlain = ({
     isLinking,
     onLink,
     ...passOnProps
-}: Props, ref) => {
+}: Props, ref: React.Ref<RefType>) => {
     const { currentRelatedStagesStatus, selectedRelationshipType, constraint } = useRelatedStages({
         programStageId,
         programId,
@@ -29,7 +38,7 @@ const RelatedStagesActionsPlain = ({
         enrollmentId,
     });
     const [saveAttempted, setSaveAttempted] = useState(false);
-    const [errorMessages, setErrorMessages] = useState({});
+    const [errorMessages, setErrorMessages] = useState<ErrorMessagesForRelatedStages>({});
     const [relatedStageDataValues, setRelatedStageDataValues] = useState<RelatedStageDataValueStates>({
         linkMode: undefined,
         scheduledAt: '',
@@ -48,7 +57,7 @@ const RelatedStagesActionsPlain = ({
     }, [data, orgUnitLoading, setRelatedStageDataValues]);
 
     const addErrorMessage = (message: ErrorMessagesForRelatedStages) => {
-        setErrorMessages((prevMessages: Object) => ({
+        setErrorMessages((prevMessages: Record<string, any>) => ({
             ...prevMessages,
             ...message,
         }));
@@ -79,7 +88,6 @@ const RelatedStagesActionsPlain = ({
         selectedRelationshipType,
     });
 
-    // useImperativeHandler for exposing functions to ref
     useImperativeHandle(ref, () => ({
         eventHasLinkableStageRelationship,
         formIsValidOnSave,
@@ -116,8 +124,4 @@ const RelatedStagesActionsPlain = ({
     );
 };
 
-export const RelatedStagesActions = forwardRef < Props, {|
-    eventHasLinkableStageRelationship: Function,
-        formIsValidOnSave: Function,
-            getLinkedStageValues: Function
-                |}>(RelatedStagesActionsPlain);
+export const RelatedStagesActions = forwardRef<RefType, Props>(RelatedStagesActionsPlain);
