@@ -1,22 +1,22 @@
 import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import { Theme } from '@material-ui/core';
+import { type Theme } from '@material-ui/core';
 import { spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { CategorySelector } from './CategorySelector.component';
 import type { CategoryOption } from './CategoryOptions.types';
 
-const getStyles = (theme: Theme) => ({
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         padding: `${spacers.dp8}  ${spacers.dp16}`,
     },
     error: {
-        backgroundColor: theme.palette.error.light,
+        backgroundColor: '#FFE0E0', // theme.palette.error.light
     },
     containerVertical: {
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         margin: 8,
     },
     label: {
@@ -33,14 +33,14 @@ const getStyles = (theme: Theme) => ({
         alignItems: 'center',
     },
     requiredClass: {
-        color: theme.palette.error.main,
+        color: '#FF0000', // theme.palette.error.main
     },
     errorMessage: {
-        color: theme.palette.error.main,
-        fontSize: theme.typography.pxToRem(14),
+        color: '#FF0000', // theme.palette.error.main
+        fontSize: '14px', // theme.typography.pxToRem(14)
         padding: '10px 8px',
     },
-});
+};
 
 type OwnProps = {
     orientation?: string;
@@ -53,7 +53,7 @@ type OwnProps = {
     required?: boolean;
 };
 
-type Props = OwnProps & WithStyles<typeof getStyles>;
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const CategoryOptionsPlain = (props: Props) => {
     const { classes,
@@ -109,4 +109,4 @@ const CategoryOptionsPlain = (props: Props) => {
     );
 };
 
-export const CategoryOptions = withStyles(getStyles)(CategoryOptionsPlain) as ComponentType<OwnProps>;
+export const CategoryOptions = withStyles(styles)(CategoryOptionsPlain) as ComponentType<OwnProps>;

@@ -12,7 +12,7 @@ const styles: Readonly<any> = {
         marginLeft: '-8px',
     },
     buttonContainer: {
-        paddingRight: 16,
+        paddingRight: 16, // theme.spacing.unit * 2
     },
 };
 

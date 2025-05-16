@@ -47,4 +47,4 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, valid
     </div>);
 };
 
-export const ScheduleButtons = withStyles(styles)(ScheduleButtonsPlain) as ComponentType<Omit<Props, 'classes'>>;
+export const ScheduleButtons = withStyles(styles)(ScheduleButtonsPlain);

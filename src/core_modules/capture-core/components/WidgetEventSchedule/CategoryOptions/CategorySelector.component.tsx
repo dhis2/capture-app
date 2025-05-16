@@ -69,7 +69,6 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         return null;
     }
 
-    onSelectSelector!: Function;
     cancelablePromise: any;
 
     constructor(props: Props) {

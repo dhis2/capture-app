@@ -1,7 +1,7 @@
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import {
     DateField,
     withDefaultFieldContainer,
@@ -32,13 +32,13 @@ const ScheduleDateField = withDefaultFieldContainer()(
     ),
 );
 
-const styles = {
+const styles: Readonly<any> = {
     infoBox: {
         padding: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
     },
     fieldWrapper: {
         display: 'flex',
-        flexWrap: 'wrap' as const,
+        flexWrap: 'wrap',
     },
     fieldLabel: {
         color: colors.grey900,
@@ -93,9 +93,6 @@ const ScheduleDatePlain = ({
                     width="100%"
                     calendarWidth={350}
                     styles={baseInputStyles}
-                    onSetFocus={() => { }}
-                    onFocus={() => { }}
-                    onRemoveFocus={() => { }}
                     onBlur={(date: string | undefined, internalComponentError: any) => {
                         setScheduleDate(date || '');
                         setValidation(validateDate(date, internalComponentError));
@@ -125,4 +122,4 @@ const ScheduleDatePlain = ({
     );
 };
 
-export const ScheduleDate = withStyles(styles)(ScheduleDatePlain) as ComponentType<Omit<Props, 'classes'>>;
+export const ScheduleDate = withStyles(styles)(ScheduleDatePlain);

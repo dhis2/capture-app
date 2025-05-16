@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles, Theme } from '@material-ui/core/styles';
+import { withStyles, type Theme } from '@material-ui/core/styles';
 import { UserField } from '../../FormFields/UserField/UserField.component';
 import type { Props } from './Assignee.types';
 

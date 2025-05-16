@@ -12,8 +12,8 @@ import {
 } from '../../FormFields/New';
 
 export type OrgUnitValue = {
-    checked?: boolean;
     id: string;
+    checked?: boolean;
     children?: number;
     name?: string;
     displayName?: string;
