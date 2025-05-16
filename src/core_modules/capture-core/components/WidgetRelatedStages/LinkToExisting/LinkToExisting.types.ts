@@ -6,14 +6,14 @@ import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
 export type LinkToExistingProps = {
     relatedStagesDataValues: RelatedStageDataValueStates;
-    setRelatedStagesDataValues: (values: RelatedStageDataValueStates) => void;
+    setRelatedStagesDataValues: (callback: (prevValues: RelatedStageDataValueStates) => RelatedStageDataValueStates) => void;
     linkableEvents: Array<RelatedStagesEvents>;
     errorMessages: ErrorMessagesForRelatedStages;
     saveAttempted: boolean;
     linkableStageLabel: string;
-    classes: {
-        searchRow: string;
-        label: string;
-        singleSelectField: string;
+    classes?: {
+        searchRow?: string;
+        label?: string;
+        singleSelectField?: string;
     };
 }

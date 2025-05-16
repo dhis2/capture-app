@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { SingleSelectField, SingleSelectOption, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -30,15 +30,15 @@ export const LinkToExistingPlain = ({
     classes,
 }: LinkToExistingProps) => {
     const onChange = (value) => {
-        setRelatedStagesDataValues({
-            ...relatedStagesDataValues,
+        setRelatedStagesDataValues(prevValues => ({
+            ...prevValues,
             linkedEventId: value,
-        });
+        }));
     };
 
     return (
-        <div className={classes.searchRow}>
-            <p className={classes.label}>
+        <div className={classes?.searchRow}>
+            <p className={classes?.label}>
                 {i18n.t('Choose a {{linkableStageLabel}} event', {
                     linkableStageLabel,
                 })}
@@ -49,7 +49,7 @@ export const LinkToExistingPlain = ({
                 placeholder={i18n.t('Choose a {{linkableStageLabel}}', {
                     linkableStageLabel,
                 })}
-                className={classes.singleSelectField}
+                className={classes?.singleSelectField}
                 error={saveAttempted && !!errorMessages.linkedEventId}
                 validationText={
                     saveAttempted && errorMessages.linkedEventId
@@ -72,4 +72,4 @@ export const LinkToExistingPlain = ({
     );
 };
 
-export const LinkToExisting = withStyles(styles)(LinkToExistingPlain);
+export const LinkToExisting = withStyles(styles)(LinkToExistingPlain) as ComponentType<LinkToExistingProps>;

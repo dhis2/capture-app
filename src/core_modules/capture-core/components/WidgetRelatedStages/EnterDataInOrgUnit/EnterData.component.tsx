@@ -67,7 +67,7 @@ export const EnterDataInOrgUnitPlain = ({
     errorMessages,
     classes,
 }: Props) => {
-    const onSelectOrgUnit = (e) => {
+    const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         const orgUnit = {
             id: e.id,
             name: e.displayName,

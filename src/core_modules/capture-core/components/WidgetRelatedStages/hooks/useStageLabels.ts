@@ -10,7 +10,7 @@ export const useStageLabels = (programId: string, programStageId?: string) => {
         ['programStageLabels', programStageId],
         () =>
             storageController.get(userStores.PROGRAMS, programId, {
-                project: (programStages) => {
+                project: ({ programStages }) => {
                     const stage = programStages
                         ?.find(storeStage => storeStage.id === programStageId);
                     if (!stage) return {};

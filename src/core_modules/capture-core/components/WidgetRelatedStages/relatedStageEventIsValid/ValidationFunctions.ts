@@ -30,63 +30,69 @@ export const isScheduledDateValid = (
     };
 };
 
-const scheduleInOrgUnit = (props) => {
+const scheduleInOrgUnit = (props?: Props): boolean => {
     const { scheduledAt, scheduledAtFormatError, orgUnit, setErrorMessages } = props ?? {};
     const { valid: scheduledAtIsValid, errorMessage } = isScheduledDateValid(scheduledAt, scheduledAtFormatError);
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
-    if (!scheduledAtIsValid) {
-        setErrorMessages({
-            scheduledAt: errorMessage,
-        });
-    } else {
-        setErrorMessages({
-            scheduledAt: null,
-        });
-    }
+    if (setErrorMessages) {
+        if (!scheduledAtIsValid) {
+            setErrorMessages({
+                scheduledAt: errorMessage,
+            });
+        } else {
+            setErrorMessages({
+                scheduledAt: null,
+            });
+        }
 
-    if (!orgUnitIsValid) {
-        setErrorMessages({
-            orgUnit: i18n.t('Please provide a valid organisation unit'),
-        });
-    } else {
-        setErrorMessages({
-            orgUnit: null,
-        });
+        if (!orgUnitIsValid) {
+            setErrorMessages({
+                orgUnit: i18n.t('Please provide a valid organisation unit'),
+            });
+        } else {
+            setErrorMessages({
+                orgUnit: null,
+            });
+        }
     }
 
     return scheduledAtIsValid && orgUnitIsValid;
 };
 
-const enterData = (props) => {
+const enterData = (props?: Props): boolean => {
     const { orgUnit, setErrorMessages } = props ?? {};
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
-    if (!orgUnitIsValid) {
-        setErrorMessages({
-            orgUnit: i18n.t('Please provide a valid organisation unit'),
-        });
-    } else {
-        setErrorMessages({
-            orgUnit: null,
-        });
+    if (setErrorMessages) {
+        if (!orgUnitIsValid) {
+            setErrorMessages({
+                orgUnit: i18n.t('Please provide a valid organisation unit'),
+            });
+        } else {
+            setErrorMessages({
+                orgUnit: null,
+            });
+        }
     }
 
     return orgUnitIsValid;
 };
 
-const linkToExistingResponse = (props) => {
+const linkToExistingResponse = (props?: Props): boolean => {
     const { linkedEventId, setErrorMessages } = props ?? {};
     const linkedEventIdIsValid = !!linkedEventId;
 
-    if (!linkedEventIdIsValid) {
-        setErrorMessages({
-            linkedEventId: i18n.t('Please select a valid event'),
-        });
-    } else {
-        setErrorMessages({
-            linkedEventId: null,
-        });
+    if (setErrorMessages) {
+        if (!linkedEventIdIsValid) {
+            setErrorMessages({
+                linkedEventId: i18n.t('Please select a valid event'),
+            });
+        } else {
+            setErrorMessages({
+                linkedEventId: null,
+            });
+        }
     }
 
     return linkedEventIdIsValid;
