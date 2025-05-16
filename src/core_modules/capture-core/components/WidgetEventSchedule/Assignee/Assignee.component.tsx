@@ -25,9 +25,9 @@ const AssigneePlain = (props: Props) => {
     const { classes, assignee, ...passOnProps } = props;
     return (
         <div className={classes.container}>
-            <div className={classes.label}>{i18n.t('Assignee') as React.ReactNode}</div>
+            <div className={classes.label}>{i18n.t('Assignee')}</div>
             <div className={classes.field}>
-                <UserField inputPlaceholderText={i18n.t('Search for user') as string} value={assignee} {...passOnProps} />
+                <UserField inputPlaceholderText={i18n.t('Search for user')} value={assignee} {...passOnProps} />
             </div>
         </div>
     );

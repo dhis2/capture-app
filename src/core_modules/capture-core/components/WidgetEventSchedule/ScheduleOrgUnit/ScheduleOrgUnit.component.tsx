@@ -12,13 +12,13 @@ import {
 } from '../../FormFields/New';
 
 export type OrgUnitValue = {
-    checked: boolean;
+    checked?: boolean;
     id: string;
-    children: number;
-    name: string;
-    displayName: string;
-    path: string;
-    selected: string[];
+    children?: number;
+    name?: string;
+    displayName?: string;
+    path?: string;
+    selected?: string[];
 }
 
 type Props = {
@@ -56,12 +56,12 @@ export const ScheduleOrgUnit = ({
         onDeselectOrgUnit();
     };
 
-    const shouldShowError = (!isValidOrgUnit(orgUnit as any) && touched);
-    const errorMessages = i18n.t('Please provide a valid organisation unit') as string;
+    const shouldShowError = (!isValidOrgUnit(orgUnit) && touched);
+    const errorMessages = i18n.t('Please provide a valid organisation unit');
 
     return (
         <OrgUnitFieldForForm
-            label={i18n.t('Organisation unit') as string}
+            label={i18n.t('Organisation unit')}
             value={orgUnit}
             required
             onSelectClick={handleSelect}

@@ -11,7 +11,7 @@ export const ScheduleText = ({ orgUnitName, stageName, programName }: Props) => 
                     ? 'Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}'
                     : 'Scheduling an event in {{stageName}} for {{programName}}',
                 { orgUnitName, stageName, programName, interpolation: { escapeValue: false } },
-            ) as ReactNode}
+            )}
         </span>
     </InfoIconText>
 );

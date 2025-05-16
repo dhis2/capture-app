@@ -5,17 +5,17 @@ import i18n from '@dhis2/d2-i18n';
 import { CategorySelector } from './CategorySelector.component';
 import type { CategoryOption } from './CategoryOptions.types';
 
-const styles: Readonly<any> = {
+const getStyles = (theme: any) => ({
     container: {
         display: 'flex',
         padding: `${spacers.dp8}  ${spacers.dp16}`,
     },
     error: {
-        backgroundColor: '#ffe0e0',
+        backgroundColor: theme.palette.error.lighter,
     },
     containerVertical: {
         display: 'flex',
-        flexDirection: 'column' as const,
+        flexDirection: 'column',
         margin: 8,
     },
     label: {
@@ -39,7 +39,7 @@ const styles: Readonly<any> = {
         fontSize: '14px',
         padding: '10px 8px',
     },
-};
+});
 
 type OwnProps = {
     orientation?: string;
@@ -52,7 +52,7 @@ type OwnProps = {
     required?: boolean;
 };
 
-type Props = OwnProps & WithStyles<typeof styles>;
+type Props = OwnProps & WithStyles<any>;
 
 const CategoryOptionsPlain = (props: Props) => {
     const { classes,
@@ -94,7 +94,7 @@ const CategoryOptionsPlain = (props: Props) => {
                     />
                     {hasError && <div className={classes.errorMessage}>{
                         i18n.t('Please select {{categoryName}}',
-                            { categoryName: category.displayName }) as React.ReactNode}</div>
+                            { categoryName: category.displayName })}</div>
                     }
                 </div>
             </div>
@@ -108,4 +108,4 @@ const CategoryOptionsPlain = (props: Props) => {
     );
 };
 
-export const CategoryOptions = withStyles(styles)(CategoryOptionsPlain) as ComponentType<OwnProps>;
+export const CategoryOptions = withStyles(getStyles as any)(CategoryOptionsPlain) as ComponentType<OwnProps>;

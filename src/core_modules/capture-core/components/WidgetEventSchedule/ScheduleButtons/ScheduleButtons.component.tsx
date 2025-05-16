@@ -27,7 +27,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, valid
                 primary
                 disabled={validation?.error}
             >
-                {i18n.t('Schedule') as ReactNode}
+                {i18n.t('Schedule')}
             </Button>
         </div>
         <div className={classes.button}>
@@ -35,7 +35,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, valid
                 onClick={handleCancelClick}
                 secondary
             >
-                {i18n.t('Cancel') as ReactNode}
+                {i18n.t('Cancel')}
             </Button>
         </div>
         <DiscardDialog

@@ -13,7 +13,7 @@ import { NoteSection } from '../WidgetNote';
 import type { Props } from './widgetEventSchedule.types';
 import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
-import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
+import { ScheduleOrgUnit, type OrgUnitValue } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 
 const styles = (theme: any) => ({
     wrapper: {
@@ -59,11 +59,11 @@ const WidgetEventSchedulePlain = ({
     setValidation,
     ...passOnProps
 }: WidgetEventSchedulePlainProps) => {
-    const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
+    const onSelectOrgUnit = (e: OrgUnitValue) => {
         setScheduledOrgUnit({
             id: e.id,
-            name: e.displayName,
-            path: e.path,
+            name: e.displayName || '',
+            path: e.path || '',
         });
     };
 
@@ -72,7 +72,7 @@ const WidgetEventSchedulePlain = ({
     };
 
     React.useEffect(() => {
-        const formIsValid = () => Boolean(isValidOrgUnit(orgUnit as any) && scheduleDate && !validation?.error);
+        const formIsValid = () => Boolean(isValidOrgUnit(orgUnit) && scheduleDate && !validation?.error);
         setIsFormValid(formIsValid());
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
 
