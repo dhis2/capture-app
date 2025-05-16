@@ -1,4 +1,4 @@
-import React, { useState, type ReactNode } from 'react';
+import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';

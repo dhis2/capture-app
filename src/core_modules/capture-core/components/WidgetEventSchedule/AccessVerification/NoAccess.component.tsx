@@ -25,8 +25,8 @@ type Props = OwnProps & WithStyles<typeof styles>;
 const NoAccessPlain = ({ classes, onCancel }: Props) => (
     <div>
         <NoWriteAccessMessage
-            title={i18n.t('New event') as string}
-            message={i18n.t("You don't have access to create an event in the current selections") as string}
+            title={i18n.t('New event')}
+            message={i18n.t("You don't have access to create an event in the current selections")}
         />
         <div className={classes.buttonRow}>
             <div className={classes.buttonContainer}>
@@ -34,7 +34,7 @@ const NoAccessPlain = ({ classes, onCancel }: Props) => (
                     primary
                     disabled
                 >
-                    {i18n.t('Save') as React.ReactNode}
+                    {i18n.t('Save')}
                 </Button>
             </div>
             <div className={classes.buttonContainer}>
@@ -42,7 +42,7 @@ const NoAccessPlain = ({ classes, onCancel }: Props) => (
                     secondary
                     onClick={onCancel}
                 >
-                    {i18n.t('Cancel') as React.ReactNode}
+                    {i18n.t('Cancel')}
                 </Button>
             </div>
         </div>

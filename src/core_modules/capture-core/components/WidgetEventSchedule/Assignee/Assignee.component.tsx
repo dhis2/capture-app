@@ -1,19 +1,19 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Theme } from '@material-ui/core/styles';
 import { UserField } from '../../FormFields/UserField/UserField.component';
 import type { Props } from './Assignee.types';
 
-const getStyles = () => ({
+const getStyles = (theme: Theme) => ({
     container: {
         display: 'flex',
         alignItems: 'baseline',
         padding: '8px 8px 8px 12px',
     },
     label: {
-        fontSize: 14,
+        fontSize: theme.typography.pxToRem(14),
         flexBasis: 200,
-        color: '#212934',
+        color: theme.palette.text.primary,
     },
     field: {
         flexBasis: 150,
@@ -33,4 +33,4 @@ const AssigneePlain = (props: Props) => {
     );
 };
 
-export const Assignee = withStyles(getStyles)(AssigneePlain);
+export const Assignee = withStyles(getStyles)(AssigneePlain) as ComponentType<Omit<Props, 'classes'>>;
