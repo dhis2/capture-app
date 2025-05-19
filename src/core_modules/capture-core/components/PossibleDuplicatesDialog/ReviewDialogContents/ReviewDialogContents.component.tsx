@@ -42,7 +42,7 @@ const ReviewDialogContentsPlain = ({
                     dataEntryId={dataEntryId}
                     selectedScopeId={selectedScopeId}
                     nextPageButtonDisabled={teis.length < resultsPageSize}
-                    onChangePage={(page) => { /* Required prop but handled by container */ }}
+                    onChangePage={() => { /* Required prop but handled by container */ }}
                 />
             </ModalContent>
         </React.Fragment>
