@@ -2,7 +2,7 @@
 import type { DataStoreConfiguration } from '../WidgetBulkDataEntry.types';
 
 export type Props = {
-    programId: string,
+    bulkDataEntryConfigurations?: Array<DataStoreConfiguration>,
     onSelectConfiguration: (configKey: string) => Promise<void>,
 };
 
