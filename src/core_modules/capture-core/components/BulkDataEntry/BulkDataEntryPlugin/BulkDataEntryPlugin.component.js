@@ -2,17 +2,25 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
 import { Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
 import type { Props } from './BulkDataEntryPlugin.types';
 
-export const BulkDataEntryPlugin = ({
+const styles = () => ({
+    container: {
+        height: '80vh',
+    },
+});
+
+const BulkDataEntryPluginPlain = ({
     pluginSource,
     configKey,
     dataKey,
     onClose,
     onBackToOriginPage,
     trackedEntities,
+    classes,
 }: Props) => {
-    const [pluginWidth, setPluginWidth] = useState(undefined);
+    const [size, setPluginSize] = useState({ width: undefined, height: undefined });
     const containerRef = useRef<?HTMLDivElement>();
 
     useEffect(() => {
@@ -20,7 +28,9 @@ export const BulkDataEntryPlugin = ({
         if (!container) return () => {};
 
         const resizeObserver = new ResizeObserver((entries) => {
-            entries.forEach(entry => setPluginWidth(entry.contentRect.width));
+            entries.forEach(entry =>
+                setPluginSize({ width: entry.contentRect.width, height: entry.contentRect.height }),
+            );
         });
 
         resizeObserver.observe(container);
@@ -33,10 +43,11 @@ export const BulkDataEntryPlugin = ({
     }, [containerRef]);
 
     return (
-        <div ref={containerRef}>
+        <div ref={containerRef} className={classes.container}>
             <Plugin
                 pluginSource={pluginSource}
-                width={pluginWidth}
+                width={size.width}
+                height={size.height}
                 configKey={configKey}
                 dataKey={dataKey}
                 onClose={onClose}
@@ -67,3 +78,5 @@ export const BulkDataEntryPlugin = ({
         </div>
     );
 };
+
+export const BulkDataEntryPlugin = withStyles(styles)(BulkDataEntryPluginPlain);

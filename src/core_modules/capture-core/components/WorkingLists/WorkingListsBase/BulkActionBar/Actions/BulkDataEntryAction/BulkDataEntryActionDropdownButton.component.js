@@ -3,7 +3,7 @@ import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { DropdownButton, MenuItem, MenuSectionHeader, FlyoutMenu, colors } from '@dhis2/ui';
-import { useBulkDataEntryConfigurations, useActiveBulkDataEntryList } from '../../../../../WidgetBulkDataEntry';
+import { useBulkDataEntryConfigurations } from '../../../../../common/bulkDataEntry';
 
 const styles = {
     container: {
@@ -28,8 +28,8 @@ const BulkDataEntryActionDropdownButtonPlain = ({
     classes,
 }: Props & CssClasses) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { setActiveList } = useActiveBulkDataEntryList(programId);
-    const { bulkDataEntryConfigurations, isLoading, isError } = useBulkDataEntryConfigurations(programId);
+    const { setActiveList, bulkDataEntryConfigurations, isLoading, isError } =
+        useBulkDataEntryConfigurations(programId);
 
     const onSelectConfiguration = useCallback(
         async (configKey) => {

@@ -6,4 +6,5 @@ export type Props = {|
     onClose: () => Promise<void>,
     onBackToOriginPage: () => void,
     trackedEntities?: Array<string>,
+    ...CssClasses,
 |};

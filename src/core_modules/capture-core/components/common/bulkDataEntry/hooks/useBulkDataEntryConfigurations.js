@@ -2,14 +2,14 @@
 import { useCallback } from 'react';
 import { useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
-import { setBulkDataEntry, removeBulkDataEntry } from 'capture-core/MetaDataStoreUtils/bulkDataEntry';
-import { useBulkDataEntryFromIndexedDB } from '../../../utils/cachedDataHooks/useBulkDataEntryFromIndexedDB';
-import { useBulkDataEntryConfigurations } from './useBulkDataEntryConfigurations';
+import { setBulkDataEntry, removeBulkDataEntry } from './bulkDataEntryStorageUtils';
+import { useBulkDataEntryFromIndexedDB } from './useBulkDataEntryFromIndexedDB';
+import { useBulkDataEntryDatastoreConfigurations } from './useBulkDataEntryDatastoreConfigurations';
 
 const getActiveBulkDataEntryConfiguration = (bulkDataEntryConfigurations, cachedBulkDataEntry) =>
     bulkDataEntryConfigurations?.find(config => config.configKey === cachedBulkDataEntry?.activeList?.configKey);
 
-export const useActiveBulkDataEntryList = (programId: string) => {
+export const useBulkDataEntryConfigurations = (programId: string) => {
     const queryClient = useQueryClient();
 
     const {
@@ -21,8 +21,7 @@ export const useActiveBulkDataEntryList = (programId: string) => {
     const {
         bulkDataEntryConfigurations,
         isLoading: isLoadingBulkDataEntryConfigurations,
-        isError: isErrorBulkDataEntryConfigurations,
-    } = useBulkDataEntryConfigurations(programId);
+    } = useBulkDataEntryDatastoreConfigurations(programId);
 
     const activeList = getActiveBulkDataEntryConfiguration(bulkDataEntryConfigurations, cachedBulkDataEntry);
 
@@ -46,7 +45,8 @@ export const useActiveBulkDataEntryList = (programId: string) => {
         activeList,
         setActiveList,
         removeActiveList,
+        bulkDataEntryConfigurations,
         isLoading: isLoadingBulkDataEntryFromIndexedDB || isLoadingBulkDataEntryConfigurations,
-        isError: isErrorBulkDataEntryFromIndexedDB || isErrorBulkDataEntryConfigurations,
+        isError: isErrorBulkDataEntryFromIndexedDB,
     };
 };

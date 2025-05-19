@@ -5,7 +5,7 @@ import { spacers } from '@dhis2/ui';
 import type { Props } from './BulkDataEntry.types';
 import { BulkDataEntryPlugin } from './BulkDataEntryPlugin';
 import { BulkDataEntryBreadcrumb } from '../Breadcrumbs/BulkDataEntryBreadcrumb';
-import { useActiveBulkDataEntryList } from '../WidgetBulkDataEntry';
+import { useBulkDataEntryConfigurations } from '../common/bulkDataEntry';
 
 const styles = () => ({
     container: {
@@ -22,7 +22,7 @@ const BulkDataEntryPlain = ({
     trackedEntities,
     classes,
 }: Props) => {
-    const { activeList, removeActiveList } = useActiveBulkDataEntryList(programId);
+    const { activeList, removeActiveList } = useBulkDataEntryConfigurations(programId);
 
     const onClose = useCallback(async () => {
         await removeActiveList();
