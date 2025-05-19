@@ -10,10 +10,10 @@ const mapStateToProps = (state: Object, props: { sectionMetaData: MetaDataSectio
         const visibleFields = Array.from(props.sectionMetaData.elements.keys())
             .filter(id => !fieldsHiddenByRules[id]);
 
-        return { isHidden: visibleFields.length == 0 };
+        return { isHidden: !visibleFields.length };
     }
 
-    return { isHidden: props.sectionMetaData.elements.size == 0 };
+    return { isHidden: !props.sectionMetaData.elements.size };
 };
 
 const mapDispatchToProps = () => ({});

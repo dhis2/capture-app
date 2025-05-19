@@ -1,3 +1,18 @@
+## [102.4.3](https://github.com/dhis2/capture-app/compare/v102.4.2...v102.4.3) (2025-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-19467] form inconsistencies ([#4061](https://github.com/dhis2/capture-app/issues/4061)) ([1560585](https://github.com/dhis2/capture-app/commit/1560585d62169c4648d36da8b484bdcda0727d18))
+* [DHIS2-19530] deprecated api query params ([#4063](https://github.com/dhis2/capture-app/issues/4063)) ([8400dd8](https://github.com/dhis2/capture-app/commit/8400dd8627c1674dce287392303d74bff304b20d))
+
+## [102.4.2](https://github.com/dhis2/capture-app/compare/v102.4.1...v102.4.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18839] TEA with number option set value does not show in Profile widget on Capture App ([#4076](https://github.com/dhis2/capture-app/issues/4076)) ([ed6d28d](https://github.com/dhis2/capture-app/commit/ed6d28d4f3a26cbe3a2c01a3c6aaa96737b16769))
+
 ## [102.4.1](https://github.com/dhis2/capture-app/compare/v102.4.0...v102.4.1) (2025-05-08)
 
 
