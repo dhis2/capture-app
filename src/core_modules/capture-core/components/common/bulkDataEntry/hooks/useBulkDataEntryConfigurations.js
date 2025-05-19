@@ -21,7 +21,6 @@ export const useBulkDataEntryConfigurations = (programId: string) => {
     const {
         bulkDataEntryConfigurations,
         isLoading: isLoadingBulkDataEntryConfigurations,
-        isError: isErrorBulkDataEntryConfigurations,
     } = useBulkDataEntryDatastoreConfigurations(programId);
 
     const activeList = getActiveBulkDataEntryConfiguration(bulkDataEntryConfigurations, cachedBulkDataEntry);
@@ -48,6 +47,6 @@ export const useBulkDataEntryConfigurations = (programId: string) => {
         removeActiveList,
         bulkDataEntryConfigurations,
         isLoading: isLoadingBulkDataEntryFromIndexedDB || isLoadingBulkDataEntryConfigurations,
-        isError: isErrorBulkDataEntryFromIndexedDB || isErrorBulkDataEntryConfigurations,
+        isError: isErrorBulkDataEntryFromIndexedDB,
     };
 };

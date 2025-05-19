@@ -53,7 +53,6 @@ export const useBulkDataEntryDatastoreConfigurations = (
 ): {|
     bulkDataEntryConfigurations?: BulkDataEntryConfigurations,
     isLoading: boolean,
-    isError: boolean,
 |} => {
     const { locale } = useUserLocale();
     const {
@@ -110,6 +109,5 @@ export const useBulkDataEntryDatastoreConfigurations = (
     return {
         bulkDataEntryConfigurations: data,
         isLoading: namespaceIsLoading || isLoading,
-        isError,
     };
 };
