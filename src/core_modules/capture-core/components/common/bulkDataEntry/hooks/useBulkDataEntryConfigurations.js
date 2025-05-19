@@ -2,8 +2,8 @@
 import { useCallback } from 'react';
 import { useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
-import { setBulkDataEntry, removeBulkDataEntry } from 'capture-core/MetaDataStoreUtils/bulkDataEntry';
-import { useBulkDataEntryFromIndexedDB } from '../../../utils/cachedDataHooks/useBulkDataEntryFromIndexedDB';
+import { setBulkDataEntry, removeBulkDataEntry } from './bulkDataEntryStorageUtils';
+import { useBulkDataEntryFromIndexedDB } from './useBulkDataEntryFromIndexedDB';
 import { useBulkDataEntryDatastoreConfigurations } from './useBulkDataEntryDatastoreConfigurations';
 
 const getActiveBulkDataEntryConfiguration = (bulkDataEntryConfigurations, cachedBulkDataEntry) =>

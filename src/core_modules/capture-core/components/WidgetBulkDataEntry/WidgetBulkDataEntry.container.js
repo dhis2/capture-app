@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import type { Props } from './WidgetBulkDataEntry.types';
 import { BulkDataEntryIdle } from './BulkDataEntryIdle';
 import { BulkDataEntryActive } from './BulkDataEntryActive';
-import { useBulkDataEntryConfigurations } from './hooks';
+import { useBulkDataEntryConfigurations } from '../common/bulkDataEntry';
 
 export const WidgetBulkDataEntry = ({ programId, setShowBulkDataEntryPlugin }: Props) => {
     const { activeList, setActiveList, bulkDataEntryConfigurations, isError, isLoading } =

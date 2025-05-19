@@ -1,11 +1,25 @@
 // @flow
+import { z } from 'zod';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
-import { useApiMetadataQuery } from '../../../utils/reactQueryHelpers';
-import { useUserLocale } from '../../../utils/localeData/useUserLocale';
-import type { DataStoreConfiguration } from '../WidgetBulkDataEntry.types';
-import { bulkDataEntryDatastoreSchema } from '../../../../../types';
+import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
+import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
+import type { DataStoreConfiguration, BulkDataEntryConfigurations } from '../bulkDataEntry.types';
+
+const bulkDataEntryDatastoreSchema = z.object({
+    version: z.number(),
+    config: z.array(
+        z.object({
+            programId: z.string(),
+            configKey: z.string(),
+            dataKey: z.string().optional(),
+            pluginSource: z.string(),
+            title: z.record(z.string()),
+            subtitle: z.record(z.string()).optional(),
+        }),
+    ),
+});
 
 const validateStructure = (data) => {
     const supportedVersion = 1;
@@ -37,7 +51,7 @@ const getLocalizedString = (field: { [string]: string }, locale: string): string
 export const useBulkDataEntryDatastoreConfigurations = (
     programId: string,
 ): {|
-    bulkDataEntryConfigurations?: Array<DataStoreConfiguration>,
+    bulkDataEntryConfigurations?: BulkDataEntryConfigurations,
     isLoading: boolean,
     isError: boolean,
 |} => {

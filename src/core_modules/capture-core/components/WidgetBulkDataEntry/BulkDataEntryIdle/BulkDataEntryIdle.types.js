@@ -1,5 +1,5 @@
 // @flow
-import type { DataStoreConfiguration } from '../WidgetBulkDataEntry.types';
+import type { DataStoreConfiguration } from '../../common/bulkDataEntry';
 
 export type Props = {
     bulkDataEntryConfigurations?: Array<DataStoreConfiguration>,

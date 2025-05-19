@@ -5,7 +5,7 @@ import { spacers } from '@dhis2/ui';
 import type { Props } from './BulkDataEntry.types';
 import { BulkDataEntryPlugin } from './BulkDataEntryPlugin';
 import { BulkDataEntryBreadcrumb } from '../Breadcrumbs/BulkDataEntryBreadcrumb';
-import { useBulkDataEntryConfigurations } from '../WidgetBulkDataEntry';
+import { useBulkDataEntryConfigurations } from '../common/bulkDataEntry';
 
 const styles = () => ({
     container: {
