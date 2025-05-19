@@ -8,7 +8,7 @@ export const relatedStageWidgetIsValid = (props: RelatedStageIsValidProps): bool
     const { linkMode } = props;
 
     if (!linkMode) {
-        return false;
+        return true;
     }
 
     const validationFunction = ValidationFunctionsByLinkMode[linkMode];
