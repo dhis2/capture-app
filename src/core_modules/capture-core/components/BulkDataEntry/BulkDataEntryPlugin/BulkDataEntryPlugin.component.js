@@ -19,7 +19,7 @@ const BulkDataEntryPluginPlain = ({
     onBackToOriginPage,
     classes,
 }: Props) => {
-    const [size, setPluginSize] = useState({ width: undefined, height: undefined });
+    const [pluginSize, setPluginSize] = useState({ width: undefined, height: undefined });
     const containerRef = useRef<?HTMLDivElement>();
 
     useEffect(() => {
@@ -45,8 +45,8 @@ const BulkDataEntryPluginPlain = ({
         <div ref={containerRef} className={classes.container}>
             <Plugin
                 pluginSource={pluginSource}
-                width={size.width}
-                height={size.height}
+                width={pluginSize.width}
+                height={pluginSize.height}
                 configKey={configKey}
                 dataKey={dataKey}
                 onClose={onClose}
