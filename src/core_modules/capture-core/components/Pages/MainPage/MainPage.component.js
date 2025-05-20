@@ -58,9 +58,9 @@ const MainPagePlain = ({
     setShowAccessible,
     classes,
     onChangeTemplate,
-    setShowBulkDataEntryPlugin,
+    onCloseBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     bulkDataEntryTrackedEntities,
-    setBulkDataEntryTrackedEntities,
 }: Props) => {
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
@@ -73,8 +73,7 @@ const MainPagePlain = ({
         return (
             <BulkDataEntry
                 programId={programId}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
-                setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
+                onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
                 displayFrontPageList={displayFrontPageList}
                 page={bulkDataEntryBreadcrumbsKeys.MAIN_PAGE}
                 trackedEntities={bulkDataEntryTrackedEntities}
@@ -105,12 +104,11 @@ const MainPagePlain = ({
                                 orgUnitId={orgUnitId}
                                 selectedTemplateId={selectedTemplateId}
                                 onChangeTemplate={onChangeTemplate}
-                                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
-                                setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
+                                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                             />
                             <WidgetBulkDataEntry
                                 programId={programId}
-                                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                             />
                         </div>
                     )}
@@ -125,7 +123,7 @@ const MainPagePlain = ({
                         <br />
                         <WidgetBulkDataEntry
                             programId={programId}
-                            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                         />
                     </div>
                 </div>

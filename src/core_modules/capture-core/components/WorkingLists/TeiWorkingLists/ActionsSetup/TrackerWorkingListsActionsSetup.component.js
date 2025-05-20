@@ -7,7 +7,7 @@ import { BulkDataEntryAction } from '../../WorkingListsBase/BulkActionBar';
 
 export const TrackerWorkingListsActionsSetup = ({
     program,
-    setShowBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     selectionInProgress,
     records,
     ...passOnProps
@@ -20,13 +20,13 @@ export const TrackerWorkingListsActionsSetup = ({
                     <BulkDataEntryAction
                         key="bulkDataEntryAction"
                         programId={program?.id}
-                        setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                        onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                         selectionInProgress={selectionInProgress}
                     />
                 ),
             },
         ],
-        [program, setShowBulkDataEntryPlugin, selectionInProgress],
+        [program, onOpenBulkDataEntryPlugin, selectionInProgress],
     );
 
     return (

@@ -12,7 +12,7 @@ export const TrackedEntityBulkActionsComponent = ({
     onClearSelection,
     onUpdateList,
     removeRowsFromSelection,
-    setShowBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     bulkDataEntryIsActive,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
@@ -28,7 +28,7 @@ export const TrackedEntityBulkActionsComponent = ({
         >
             <BulkDataEntryAction
                 programId={programId}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                 selectionInProgress
             />
             <CompleteAction

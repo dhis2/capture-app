@@ -24,8 +24,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
     orgUnitId,
     recordsOrder,
     records,
-    setShowBulkDataEntryPlugin,
-    setBulkDataEntryTrackedEntities,
+    onOpenBulkDataEntryPlugin,
     ...passOnProps
 }: Props) => {
     const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
@@ -106,21 +105,8 @@ export const TrackerWorkingListsViewMenuSetup = ({
     );
 
     const injectSelectedRowsToBulkDataEntryPlugin = useCallback(
-        (show: boolean) => {
-            setShowBulkDataEntryPlugin(show);
-            if (selectionInProgress) {
-                setBulkDataEntryTrackedEntities(Object.keys(selectedRows));
-            } else {
-                setBulkDataEntryTrackedEntities(Object.keys(records));
-            }
-        },
-        [
-            setShowBulkDataEntryPlugin,
-            setBulkDataEntryTrackedEntities,
-            selectedRows,
-            records,
-            selectionInProgress,
-        ],
+        () => onOpenBulkDataEntryPlugin(selectionInProgress ? Object.keys(selectedRows) : Object.keys(records)),
+        [onOpenBulkDataEntryPlugin, selectedRows, records, selectionInProgress],
     );
 
     const handleCustomUpdateTrigger = useCallback((disableClearSelection?: boolean) => {
@@ -139,7 +125,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
             onClearSelection={clearSelection}
             onUpdateList={handleCustomUpdateTrigger}
             removeRowsFromSelection={removeRowsFromSelection}
-            setShowBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
+            onOpenBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
         />
     ), [
         program,
@@ -170,7 +156,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 onSelectAll={selectAllRows}
                 onRowSelect={toggleRowSelected}
                 bulkActionBarComponent={TrackedEntityBulkActionsComponent}
-                setShowBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
             />
             <DownloadDialog
                 open={downloadDialogOpen}

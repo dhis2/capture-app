@@ -17,13 +17,13 @@ const styles = {
 
 type Props = {
     programId: string,
-    setShowBulkDataEntryPlugin: (show: boolean) => void,
+    onOpenBulkDataEntryPlugin: () => void,
     selectionInProgress: ?boolean,
 };
 
 const BulkDataEntryActionDropdownButtonPlain = ({
     programId,
-    setShowBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     selectionInProgress,
     classes,
 }: Props & CssClasses) => {
@@ -34,9 +34,9 @@ const BulkDataEntryActionDropdownButtonPlain = ({
     const onSelectConfiguration = useCallback(
         async (configKey) => {
             await setActiveList(configKey);
-            setShowBulkDataEntryPlugin(true);
+            onOpenBulkDataEntryPlugin();
         },
-        [setShowBulkDataEntryPlugin, setActiveList],
+        [onOpenBulkDataEntryPlugin, setActiveList],
     );
 
     if (isError || isLoading || !bulkDataEntryConfigurations || bulkDataEntryConfigurations.length === 0) {

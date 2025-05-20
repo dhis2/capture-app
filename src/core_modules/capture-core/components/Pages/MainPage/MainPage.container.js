@@ -82,7 +82,14 @@ const useSelectorMainPage = () =>
         shallowEqual,
     );
 
-const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate }) => {
+const useCallbackMainPage = ({
+    orgUnitId,
+    programId,
+    showAllAccessible,
+    navigate,
+    setShowBulkDataEntryPlugin,
+    setBulkDataEntryTrackedEntities,
+}) => {
     const onChangeTemplate = useCallback(
         id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, navigate }),
         [navigate, orgUnitId, programId, showAllAccessible],
@@ -93,9 +100,21 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate
         [navigate, programId],
     );
 
+    const onCloseBulkDataEntryPlugin = useCallback(() => {
+        setBulkDataEntryTrackedEntities(undefined);
+        setShowBulkDataEntryPlugin(false);
+    }, [setBulkDataEntryTrackedEntities, setShowBulkDataEntryPlugin]);
+
+    const onOpenBulkDataEntryPlugin = useCallback((trackedEntities) => {
+        setBulkDataEntryTrackedEntities(trackedEntities);
+        setShowBulkDataEntryPlugin(true);
+    }, [setBulkDataEntryTrackedEntities, setShowBulkDataEntryPlugin]);
+
     return {
         onChangeTemplate,
         onSetShowAccessible,
+        onCloseBulkDataEntryPlugin,
+        onOpenBulkDataEntryPlugin,
     };
 };
 
@@ -132,10 +151,16 @@ const MainPageContainer = () => {
         showBulkDataEntryPlugin,
     });
 
-    const {
-        onChangeTemplate,
-        onSetShowAccessible,
-    } = useCallbackMainPage({ orgUnitId, programId, showAllAccessible, navigate, dispatch });
+    const { onChangeTemplate, onSetShowAccessible, onCloseBulkDataEntryPlugin, onOpenBulkDataEntryPlugin } =
+        useCallbackMainPage({
+            orgUnitId,
+            programId,
+            showAllAccessible,
+            navigate,
+            dispatch,
+            setShowBulkDataEntryPlugin,
+            setBulkDataEntryTrackedEntities,
+        });
 
     useEffect(() => {
         dispatch(updateShowAccessibleStatus(showAllAccessible));
@@ -188,8 +213,8 @@ const MainPageContainer = () => {
                 error={error}
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
-                setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
+                onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                 bulkDataEntryTrackedEntities={bulkDataEntryTrackedEntities}
             />
         </OrgUnitFetcher>

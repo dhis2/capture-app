@@ -15,14 +15,14 @@ const styles = {
 
 export const BulkDataEntryActionPlain = ({
     programId,
-    setShowBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     selectionInProgress,
     classes,
 }: Props & CssClasses) => {
     const { activeList } = useBulkDataEntryConfigurations(programId);
     if (activeList?.configKey) {
         return (
-            <Button small onClick={() => setShowBulkDataEntryPlugin(true)} className={classes.button}>
+            <Button small onClick={onOpenBulkDataEntryPlugin} className={classes.button}>
                 {selectionInProgress
                     ? i18n.t('Add to ongoing bulk data entry')
                     : i18n.t('Add page to ongoing bulk data entry')}
@@ -33,7 +33,7 @@ export const BulkDataEntryActionPlain = ({
     return (
         <BulkDataEntryActionDropdownButton
             programId={programId}
-            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
             selectionInProgress={selectionInProgress}
         />
     );

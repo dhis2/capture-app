@@ -15,8 +15,7 @@ const styles = () => ({
 
 const BulkDataEntryPlain = ({
     programId,
-    setShowBulkDataEntryPlugin,
-    setBulkDataEntryTrackedEntities,
+    onCloseBulkDataEntryPlugin,
     displayFrontPageList,
     page,
     trackedEntities,
@@ -26,14 +25,9 @@ const BulkDataEntryPlain = ({
 
     const onClose = useCallback(async () => {
         await removeActiveList();
-        setShowBulkDataEntryPlugin(false);
-        setBulkDataEntryTrackedEntities && setBulkDataEntryTrackedEntities(null);
-    }, [setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities, removeActiveList]);
+        onCloseBulkDataEntryPlugin();
+    }, [onCloseBulkDataEntryPlugin, removeActiveList]);
 
-    const onBackToOriginPage = useCallback(() => {
-        setShowBulkDataEntryPlugin(false);
-        setBulkDataEntryTrackedEntities && setBulkDataEntryTrackedEntities(null);
-    }, [setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities]);
 
     if (!activeList) {
         return null;
@@ -42,7 +36,7 @@ const BulkDataEntryPlain = ({
     return (
         <div className={classes.container}>
             <BulkDataEntryBreadcrumb
-                onBackToOriginPage={onBackToOriginPage}
+                onBackToOriginPage={onCloseBulkDataEntryPlugin}
                 programId={programId}
                 displayFrontPageList={displayFrontPageList}
                 page={page}
@@ -52,7 +46,7 @@ const BulkDataEntryPlain = ({
                 dataKey={activeList.dataKey}
                 pluginSource={activeList.pluginSource}
                 onClose={onClose}
-                onBackToOriginPage={onBackToOriginPage}
+                onBackToOriginPage={onCloseBulkDataEntryPlugin}
                 trackedEntities={trackedEntities}
             />
         </div>
