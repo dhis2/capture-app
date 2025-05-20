@@ -24,7 +24,6 @@ export const isValidOrgUnitInProgram = (
     }
 
     const programId = props?.programId;
-    
     if (!programId) {
         return true;
     }
