@@ -27,8 +27,8 @@ const mapStateToProps = (
 
 const mapDispatchToProps = () => ({});
 
-const WithLoadingIndicator = withLoadingIndicator(() => ({ padding: '100px 0' }), null, (props: any) => (!props.isUpdating && props.ready));
-const WithErrorHandler = withErrorMessageHandler();
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(ReviewDialogContentsComponent);
+const WithLoadingIndicator = withLoadingIndicator(() => ({ padding: '100px 0' }), null, (props: any) => (!props.isUpdating && props.ready));
 const LoadingComponent = WithLoadingIndicator(ConnectedComponent);
+const WithErrorHandler = withErrorMessageHandler();
 export const ReviewDialogContents = WithErrorHandler(LoadingComponent);
