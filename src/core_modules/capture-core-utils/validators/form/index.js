@@ -12,3 +12,4 @@ export { isValidUrl } from './url.validator';
 export { isValidPhoneNumber } from './phone.validator';
 export { isValidOrgUnit } from './orgUnit.validator';
 export { isValidCoordinate } from './coordinate.validator';
+export { isValidOrgUnitInProgram } from './orgUnitInProgram.validator';

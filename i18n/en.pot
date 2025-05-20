@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
-"PO-Revision-Date: 2025-05-02T13:23:06.732Z\n"
+"POT-Creation-Date: 2025-05-20T15:53:10.580Z\n"
+"PO-Revision-Date: 2025-05-20T15:53:10.580Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1252,6 +1252,9 @@ msgstr "Add area"
 
 msgid "Please provide an valid organisation unit"
 msgstr "Please provide an valid organisation unit"
+
+msgid "The selected organisation unit does not belong to the chosen program"
+msgstr "The selected organisation unit does not belong to the chosen program"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
