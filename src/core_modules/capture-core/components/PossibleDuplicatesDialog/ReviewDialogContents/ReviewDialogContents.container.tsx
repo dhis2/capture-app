@@ -4,6 +4,7 @@ import { ReviewDialogContentsComponent } from './ReviewDialogContents.component'
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withErrorMessageHandler } from '../../../HOC/withErrorMessageHandler';
 import { getAttributesFromScopeId } from '../../../metaData/helpers';
+import type { ReduxStore } from 'capture-core-utils/types/global';
 
 const buildDataElements = (scopeId: string) => {
     const currentSearchScopeDataElements = getAttributesFromScopeId(scopeId);
@@ -13,17 +14,8 @@ const buildDataElements = (scopeId: string) => {
         .map(({ id, name, type }: { id: string, name: string, type: string }) => ({ id, name, type }));
 };
 
-type ReduxState = {
-    possibleDuplicates: {
-        isLoading: boolean;
-        isUpdating: boolean;
-        loadError: boolean;
-        teis: any[];
-    };
-};
-
 const mapStateToProps = (
-    { possibleDuplicates }: ReduxState,
+    { possibleDuplicates }: ReduxStore['value'],
     { selectedScopeId }: { selectedScopeId: string },
 ) => ({
     ready: !possibleDuplicates.isLoading,

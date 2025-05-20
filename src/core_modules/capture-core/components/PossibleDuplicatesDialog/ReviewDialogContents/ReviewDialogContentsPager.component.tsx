@@ -5,16 +5,18 @@ import { withNavigation } from '../../Pagination/withDefaultNavigation';
 import type { Props } from './ReviewDialogContentsPager.types';
 import { useDuplicates } from '../useDuplicates';
 
-const Pager = withNavigation()(Pagination);
-
-const getStyles = (theme: any) => ({
+const styles = {
     container: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginLeft: theme.typography.pxToRem(8),
-        maxWidth: theme.typography.pxToRem(600),
+        marginLeft: '8px',
+        maxWidth: '600px',
     },
-});
+};
+
+const Pager = withNavigation()(Pagination);
+
+
 
 const ReviewDialogContentsPagerPlain = ({
     currentPage,
@@ -38,4 +40,4 @@ const ReviewDialogContentsPagerPlain = ({
     );
 };
 
-export const ReviewDialogContentsPagerComponent = withStyles(getStyles)(ReviewDialogContentsPagerPlain) as ComponentType<Omit<Props, keyof WithStyles<typeof getStyles>>>;
+export const ReviewDialogContentsPagerComponent = withStyles(styles)(ReviewDialogContentsPagerPlain) as ComponentType<Omit<Props, keyof WithStyles<typeof styles>>>;

@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
+import type { ReduxStore } from 'capture-core-utils/types/global';
 import { ReviewDialogContentsPagerComponent } from './ReviewDialogContentsPager.component';
 
 const mapStateToProps = (
-    { possibleDuplicates }: { possibleDuplicates: { currentPage: number } },
+    { possibleDuplicates }: ReduxStore['value'],
 ) => ({
     currentPage: possibleDuplicates.currentPage || 1,
 });

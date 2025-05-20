@@ -7,15 +7,17 @@ import { ReviewDialogContentsPager } from './ReviewDialogContentsPager.container
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import type { Props } from './ReviewDialogContents.types';
 
-const getStyles = (theme: any) => ({
+const styles = {
     linkButtonContainer: {
-        paddingTop: theme.typography.pxToRem(10),
+        paddingTop: '10px',
     },
     title: {
         margin: 0,
-        paddingLeft: theme.typography.pxToRem(10),
+        paddingLeft: '10px',
     },
-});
+};
+
+
 
 const ReviewDialogContentsPlain = ({
     dataElements,
@@ -49,4 +51,4 @@ const ReviewDialogContentsPlain = ({
     );
 };
 
-export const ReviewDialogContentsComponent = withStyles(getStyles)(ReviewDialogContentsPlain) as ComponentType<Props>;
+export const ReviewDialogContentsComponent = withStyles(styles)(ReviewDialogContentsPlain) as ComponentType<Props>;

@@ -15,5 +15,3 @@ type PropsFromRedux = {
 };
 
 export type Props = OwnProps & DispatchersFromFromRedux & PropsFromRedux & WithStyles<typeof styles>;
-
-declare const styles: Record<string, any>;
