@@ -12,6 +12,7 @@ type Props = {
 };
 
 const DefaultFilterLabels = {
+    default: i18n.t('Program overview'),
     active: i18n.t('Active enrollments'),
     complete: i18n.t('Completed enrollments'),
     cancelled: i18n.t('Cancelled enrollments'),
