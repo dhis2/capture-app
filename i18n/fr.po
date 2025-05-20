@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2025\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -636,19 +636,6 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "L'inscription avec id \"{{enrollmentId}}\" n'existe pas"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "L'entité suivie avec id \"{{teiId}}\" n'existe pas"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr ""
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-
 msgid "No feedback for this enrollment yet"
 msgstr "Aucun commentaire pour cet enrôlement pour le moment"
 
@@ -729,6 +716,19 @@ msgstr "Créez un nouvel événement dans ce programme."
 
 msgid "View working list in this program."
 msgstr "Afficher la liste de travail dans ce programme."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "L'inscription avec id \"{{enrollmentId}}\" n'existe pas"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "L'entité suivie avec id \"{{teiId}}\" n'existe pas"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
 
 msgid "Page is missing required values from URL"
 msgstr "Des valeurs obligatoires ne figurent pas dans l'URL de la page"
@@ -950,6 +950,12 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+msgid "Missing search criteria"
+msgstr ""
+
+msgid "Back to search"
+msgstr " Retour à l'écran de recherche"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -980,8 +986,8 @@ msgstr "Ajouetr relation"
 msgid "No results found for "
 msgstr "Aucun résultat trouvé pour"
 
-msgid "Choose an organisation unit"
-msgstr "Choisissez une unité d'organisation"
+msgid "Choose an organisation unit in the form below"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Effacer la sélection"
@@ -1032,6 +1038,9 @@ msgstr ""
 "Vous ne trouvez pas les résultats désirés ? Essayez de rechercher tous les "
 "programmes utilisant le type "
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "Rechercher dans tous les programmes"
 
@@ -1067,9 +1076,6 @@ msgstr ""
 "Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
 "recherche pour trouver les éléments que vous recherchez."
 
-msgid "Back to search"
-msgstr " Retour à l'écran de recherche"
-
 msgid "An error has occurred"
 msgstr "Une erreur s'est produite."
 
@@ -1078,9 +1084,6 @@ msgstr "Résultats trop nombreux"
 
 msgid "Cannot search in all programs"
 msgstr "Impossible d'effectuer une recherche dans tous les programmes"
-
-msgid "Missing search criteria"
-msgstr ""
 
 msgid "Results found"
 msgstr "Résultats trouvés"
@@ -1322,6 +1325,12 @@ msgstr ""
 "La date prévue ne peut pas être modifiée pour les événements {{ eventStatus "
 "}}"
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Événement terminé"
 
@@ -1362,14 +1371,15 @@ msgstr[0] "La date prévue est {{count}} jour {{position}} la date suggérée."
 msgstr[1] "xx"
 msgstr[2] "La date prévue est {{count}} jour {{position}} la date suggérée."
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Ce jour-là, {{count}} est programmé événement à {{orgUnitName}}."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgstr[0] ""
 msgstr[1] ""
-"Il y a {{count}} événements programmés sur {{orgUnitName}} ce jour-là."
 msgstr[2] ""
-"Il y a {{count}} événements programmés dans {{orgUnitName}} ce jour-là."
 
 msgid "Schedule date / Due date"
 msgstr "Date prévue / Date d'échéance"
@@ -1392,14 +1402,13 @@ msgstr ""
 msgid "Save note"
 msgstr "Enregistrer note"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+msgid "Edit {{trackedEntityName}}"
 msgstr ""
-"Modifier les informations sur cette {{trackedEntityName}} ici. Pour modifier"
-" les informations relatives à cette inscription, utiliser le bouton Modifier"
-" dans la case Inscription de ce tableau de bord."
+
+msgid ""
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
+msgstr ""
 
 msgid " Loading..."
 msgstr "Chargement…"
@@ -1613,6 +1622,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Data item"
+msgstr "Item de données"
+
 msgid "Updated"
 msgstr "Mis-à-jour"
 
@@ -1625,11 +1637,17 @@ msgstr "Supprimé"
 msgid "Date"
 msgstr "Date"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "Utilisateur"
 
-msgid "Data item"
-msgstr "Item de données"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr "Modifier"
@@ -1741,6 +1759,9 @@ msgstr "Supprimer des événements"
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"
