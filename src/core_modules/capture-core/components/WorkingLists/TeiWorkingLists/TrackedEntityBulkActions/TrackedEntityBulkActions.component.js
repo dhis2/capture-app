@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsBase/BulkActionBar';
+import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
 import { CompleteAction, DeleteEnrollmentsAction } from './Actions';
 import type { Props } from './TrackedEntityBulkActions.types';
 

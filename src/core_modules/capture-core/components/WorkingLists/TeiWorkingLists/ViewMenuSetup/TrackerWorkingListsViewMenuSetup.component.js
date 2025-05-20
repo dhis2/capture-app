@@ -8,11 +8,10 @@ import i18n from '@dhis2/d2-i18n';
 import { TrackerWorkingListsActionsSetup } from '../ActionsSetup';
 import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Props } from './TrackerWorkingListsViewMenuSetup.types';
-import { DownloadDialog } from '../../WorkingListsCommon';
+import { DownloadDialog, useSelectedRowsController } from '../../WorkingListsCommon';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/TEIFilters';
 import { FEATURES, useFeature } from '../../../../../capture-core-utils';
-import { useSelectedRowsController } from '../../WorkingListsBase/BulkActionBar';
 import { TrackedEntityBulkActions } from '../TrackedEntityBulkActions';
 
 export const TrackerWorkingListsViewMenuSetup = ({

@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { TeiWorkingListsSetup } from '../Setup';
 import type { CustomActionsContents } from '../../WorkingListsBase';
 import type { Props } from './TrackerWorkingListsActionsSetup.types';
-import { BulkDataEntryAction } from '../../WorkingListsBase/BulkActionBar';
+import { BulkDataEntryAction } from '../../WorkingListsCommon';
 
 export const TrackerWorkingListsActionsSetup = ({
     program,
