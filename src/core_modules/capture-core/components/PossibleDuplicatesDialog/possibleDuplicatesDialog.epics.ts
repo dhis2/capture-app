@@ -15,7 +15,6 @@ import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
 import { getAttributesFromScopeId } from '../../metaData/helpers';
-import { searchGroupDuplicateActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 import { escapeString } from '../../utils/escapeString';
 
 function getGroupElementsFromScopeId(scopeId: string | null) {
@@ -94,7 +93,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                 return stream$.pipe(
                     map(({ trackedEntityInstanceContainers: searchResults, pagingData }: { trackedEntityInstanceContainers: any, pagingData: any }) =>
                         duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
-                    takeUntil(action$.pipe(ofType(searchGroupDuplicateActionTypes.DUPLICATES_RESET))),
+                    takeUntil(action$.pipe(ofType(actionTypes.DUPLICATES_RESET))),
                     catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
                 );
