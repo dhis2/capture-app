@@ -17,8 +17,6 @@ const styles = {
     },
 };
 
-
-
 const ReviewDialogContentsPlain = ({
     dataElements,
     teis,

@@ -16,8 +16,6 @@ const styles = {
 
 const Pager = withNavigation()(Pagination);
 
-
-
 const ReviewDialogContentsPagerPlain = ({
     currentPage,
     nextPageButtonDisabled,

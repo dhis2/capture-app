@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
+import type { ReduxStore } from '../../../../../core_modules/capture-core-utils/types/global';
 import { ReviewDialogContentsComponent } from './ReviewDialogContents.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withErrorMessageHandler } from '../../../HOC/withErrorMessageHandler';
 import { getAttributesFromScopeId } from '../../../metaData/helpers';
-import type { ReduxStore } from 'capture-core-utils/types/global';
 
 const buildDataElements = (scopeId: string) => {
     const currentSearchScopeDataElements = getAttributesFromScopeId(scopeId);
