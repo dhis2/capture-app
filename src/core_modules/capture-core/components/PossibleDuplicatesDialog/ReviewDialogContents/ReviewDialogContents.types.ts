@@ -16,4 +16,4 @@ type PropsFromRedux = {
     dataElements: CardDataElementsInformation;
 };
 
-export type Props = OwnProps & PropsFromRedux & WithStyles<typeof styles>;
+export type Props = OwnProps & PropsFromRedux & WithStyles<any>;

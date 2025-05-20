@@ -14,4 +14,4 @@ type PropsFromRedux = {
     currentPage: number;
 };
 
-export type Props = OwnProps & DispatchersFromFromRedux & PropsFromRedux & WithStyles<typeof styles>;
+export type Props = OwnProps & DispatchersFromFromRedux & PropsFromRedux & WithStyles<any>;
