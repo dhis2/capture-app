@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
-import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
+import { useAuthority } from '../../../../../../../utils/userInfo/useAuthority';
 import { useCascadeDeleteTei } from './hooks/useCascadeDeleteTei';
 
 type Props = {

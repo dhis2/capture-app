@@ -22,6 +22,7 @@ export type DeleteTemplate = (
 
 export type UpdateList = (queryArgs: Object, columnsMetaForDataFetching: Object, lastTransaction: number) => void;
 
+/*
 export type LoadView = (
     template: Object,
     context: {
@@ -36,6 +37,22 @@ export type LoadView = (
         filtersOnlyMetaForDataFetching: any,
     },
 ) => Promise<void> | void;
+*/
+export type LoadView = (
+    template: Object,
+    context: {
+        programId: string,
+        orgUnitId: string,
+        categories?: Categories,
+        programStageId?: string,
+        currentRequest?: string,
+    },
+    meta: {
+        columnsMetaForDataFetching: any,
+        filtersOnlyMetaForDataFetching: any,
+    },
+) => void;
+
 
 export type InitialViewConfig = {|
     filters?: FiltersData,

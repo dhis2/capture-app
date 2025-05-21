@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import log from 'loglevel';
-import { EventBulkActions } from '../../EventWorkingListsCommon/EventBulkActions';
+import { errorCreator } from 'capture-core-utils';
+import { EventBulkActions } from '../../../EventWorkingListsCommon/EventBulkActions';
 import { TrackedEntityBulkActionsComponent } from './TrackedEntityBulkActions.component';
 import type { ContainerProps } from './TrackedEntityBulkActions.types';
-import { errorCreator } from '../../../../../capture-core-utils';
 
 export const TrackedEntityBulkActions = ({
     programStageId,

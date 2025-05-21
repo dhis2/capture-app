@@ -8,14 +8,12 @@ import type {
     ChangePage,
     ChangeRowsPerPage,
     ClearFilter,
-    ClearFilters,
     RemoveFilter,
     CustomMenuContents,
     CustomRowMenuContents,
     FiltersData,
     LoadedContext,
     LoadTemplates,
-    LoadView,
     SelectRestMenuItem,
     SelectRow,
     SelectTemplate,
@@ -25,12 +23,18 @@ import type {
     StickyFilters,
     UnloadingContext,
     UpdateFilter,
+    WorkingListTemplates,
+    SetTemplateSharingSettings,
 } from '../../WorkingListsBase';
 import type {
     CustomColumnOrder,
     RecordsOrder,
     UpdateList,
     InitialViewConfig,
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
+    LoadView,
 } from '../../WorkingListsCommon';
 import type { TeiWorkingListsTemplates, TeiRecords, ApiTrackerQueryCriteria } from '../types';
 
@@ -63,7 +67,6 @@ export type TeiWorkingListsReduxOutputProps = {|
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
     onRemoveFilter: RemoveFilter,
-    onClearFilters: ClearFilters,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
     onClickListRow: SelectRow,
@@ -89,5 +92,13 @@ export type TeiWorkingListsReduxOutputProps = {|
     updating: boolean,
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
-    onPreserveCurrentViewState: (templateId: string, critera: ApiTrackerQueryCriteria) => void
+    onPreserveCurrentViewState: (templateId: string, critera: ApiTrackerQueryCriteria) => void,
+    apiTemplates: WorkingListTemplates,
+    forceUpdateOnMount: boolean,
+    onAddTemplate: AddTemplate,
+    onDeleteTemplate: DeleteTemplate,
+    onUpdateTemplate: UpdateTemplate,
+    onSetTemplateSharingSettings: SetTemplateSharingSettings,
+    templateSharingType: string,
+    storeId: string,
 |};

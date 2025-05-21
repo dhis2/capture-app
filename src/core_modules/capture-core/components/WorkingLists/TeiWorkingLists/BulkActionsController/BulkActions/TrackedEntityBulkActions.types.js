@@ -1,5 +1,5 @@
 // @flow
-import type { ProgramStage } from '../../../../metaData';
+import type { ProgramStage } from '../../../../../metaData';
 
 export type Props = {|
     selectedRows: { [key: string]: boolean },

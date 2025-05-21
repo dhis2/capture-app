@@ -37,7 +37,6 @@ export const TeiWorkingListsSetup = ({
     programStageId,
     onUpdateList,
     onLoadView,
-    onClearFilters,
     onResetListColumnOrder,
     onPreserveCurrentViewState,
     customColumnOrder,
@@ -100,7 +99,9 @@ export const TeiWorkingListsSetup = ({
                     filtersOnly,
                     programStageFiltersOnly,
                     columns,
+                    // $FlowFixMe The logic ensures that sortById is defined when this function is called
                     sortById,
+                    // $FlowFixMe The logic ensures that sortByDirection is defined when this function is called
                     sortByDirection,
                     programId: program.id,
                     programStageId,
@@ -134,7 +135,9 @@ export const TeiWorkingListsSetup = ({
                 filtersOnly,
                 programStageFiltersOnly,
                 columns,
+                // $FlowFixMe The logic ensures that sortById is defined when this callback is called
                 sortById,
+                // $FlowFixMe The logic ensures that sortByDirection is defined when this callback is called
                 sortByDirection,
                 programId: program.id,
                 programStageId,
@@ -161,7 +164,9 @@ export const TeiWorkingListsSetup = ({
                 filtersOnly,
                 programStageFiltersOnly,
                 columns,
+                // $FlowFixMe The logic ensures that sortById is defined when this callback is called
                 sortById,
+                // $FlowFixMe The logic ensures that sortByDirection is defined when this callback is called
                 sortByDirection,
                 programId: program.id,
                 programStageId,

@@ -40,6 +40,7 @@ export const TeiWorkingListsReduxProvider = ({
         programStage,
         currentTemplateId,
         viewPreloaded,
+        onClearFilters,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();

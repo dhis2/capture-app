@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { useAuthority } from '../../../../../../utils/userInfo/useAuthority';
+import { useAuthority } from '../../../../../../../utils/userInfo/useAuthority';
 import { EnrollmentDeleteModal } from './EnrollmentDeleteModal';
-import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
+import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
 
 type Props = {
     selectedRows: { [id: string]: boolean },

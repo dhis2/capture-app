@@ -5,10 +5,10 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
-import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { errorCreator, FEATURES, featureAvailable } from '../../../../../../../../capture-core-utils';
-import type { ProgramStage } from '../../../../../../../metaData';
+import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
+import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../../utils/reactQueryHelpers';
+import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../../utils/api';
+import type { ProgramStage } from '../../../../../../../../metaData';
 
 type Props = {
     selectedRows: { [id: string]: any },
