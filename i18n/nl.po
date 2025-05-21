@@ -2,17 +2,17 @@
 # Translators:
 # Cherise Beek <cherise.beek@gmail.com>, 2021
 # Yury Rogachev <yury@dhis2.org>, 2021
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # Rica, 2025
-# Charel van den Elsen, 2025
+# Charel van den Elsen <zobeadzorg@gmail.com>, 2025
 # Philip Larsen Donnelly, 2025
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2025\n"
+"Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -624,21 +624,6 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Bijgehouden entiteitsinstantie met id \"{{teiId}}\" bestaat niet"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr ""
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-"Er is een fout opgetreden bij het ophalen van inschrijvingen. Voer een "
-"geldige URL in."
-
 msgid "No feedback for this enrollment yet"
 msgstr "Nog geen feedback voor deze inschrijving"
 
@@ -720,6 +705,21 @@ msgstr "Maak een nieuw evenement aan in dit programma."
 
 msgid "View working list in this program."
 msgstr "Bekijk werklijst in dit programma."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Bijgehouden entiteitsinstantie met id \"{{teiId}}\" bestaat niet"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+"Er is een fout opgetreden bij het ophalen van inschrijvingen. Voer een "
+"geldige URL in."
 
 msgid "Page is missing required values from URL"
 msgstr "Pagina mist vereiste waarden van URL"
@@ -941,6 +941,12 @@ msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Vul minimaal {{count}} attribuut in om te zoeken"
 msgstr[1] "Vul minimaal {{tel}} attributen in om te zoeken"
 
+msgid "Missing search criteria"
+msgstr "Ontbrekende zoekcriteria"
+
+msgid "Back to search"
+msgstr "Terug naar zoeken"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -972,7 +978,7 @@ msgstr "Relatie toevoegen"
 msgid "No results found for "
 msgstr "Geen resultaten gevonden voor"
 
-msgid "Choose an organisation unit"
+msgid "Choose an organisation unit in the form below"
 msgstr ""
 
 msgid "Clear selection"
@@ -1024,6 +1030,9 @@ msgstr ""
 "Vindt u niet de resultaten waarnaar u op zoek was? Probeer alle programma's "
 "te doorzoeken die dit type gebruiken"
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "Zoek in alle programma's"
 
@@ -1052,9 +1061,6 @@ msgid ""
 msgstr ""
 "U kunt uw zoektermen wijzigen en opnieuw zoeken om te vinden wat u zoekt."
 
-msgid "Back to search"
-msgstr "Terug naar zoeken"
-
 msgid "An error has occurred"
 msgstr "er is een fout opgetreden"
 
@@ -1063,9 +1069,6 @@ msgstr "Te veel resultaten"
 
 msgid "Cannot search in all programs"
 msgstr "Kan niet in alle programma's zoeken"
-
-msgid "Missing search criteria"
-msgstr "Ontbrekende zoekcriteria"
 
 msgid "Results found"
 msgstr "Gevonden resultaten"
@@ -1361,13 +1364,14 @@ msgstr[0] ""
 msgstr[1] ""
 "De geplande datum is {{getelde}} dagen {{positie}} de voorgestelde datum."
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgstr[0] ""
-"Er zijn {{count}} geplande evenementen in {{orgUnitName}} op deze dag."
 msgstr[1] ""
-"Er zijn {{count}} geplande evenementen in {{orgUnitName}} op deze dag."
 
 msgid "Schedule date / Due date"
 msgstr "Schemadatum / Vervaldatum"
@@ -1390,14 +1394,13 @@ msgstr ""
 msgid "Save note"
 msgstr "Notitie opslaan"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+msgid "Edit {{trackedEntityName}}"
 msgstr ""
-"Wijzig hier informatie over deze {{trackedEntityName}}. Gebruik de knop "
-"Bewerken in het vak Inschrijving op dit dashboard om informatie over deze "
-"inschrijving te wijzigen"
+
+msgid ""
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
+msgstr ""
 
 msgid " Loading..."
 msgstr " Bezig met laden..."
@@ -1725,7 +1728,7 @@ msgid "Details (Advanced)"
 msgstr ""
 
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Een onbekende fout is opgetreden."
 
 msgid "An error occurred while completing events"
 msgstr ""
@@ -1741,6 +1744,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"
