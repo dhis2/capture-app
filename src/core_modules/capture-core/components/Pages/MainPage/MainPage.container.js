@@ -88,7 +88,7 @@ const useCallbackMainPage = ({
     showAllAccessible,
     navigate,
     setShowBulkDataEntryPlugin,
-    setBulkDataEntryTrackedEntities,
+    setBulkDataEntryTrackedEntityIds,
 }) => {
     const onChangeTemplate = useCallback(
         id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, navigate }),
@@ -101,14 +101,14 @@ const useCallbackMainPage = ({
     );
 
     const onCloseBulkDataEntryPlugin = useCallback(() => {
-        setBulkDataEntryTrackedEntities(undefined);
+        setBulkDataEntryTrackedEntityIds(undefined);
         setShowBulkDataEntryPlugin(false);
-    }, [setBulkDataEntryTrackedEntities, setShowBulkDataEntryPlugin]);
+    }, [setBulkDataEntryTrackedEntityIds, setShowBulkDataEntryPlugin]);
 
     const onOpenBulkDataEntryPlugin = useCallback((trackedEntities) => {
-        setBulkDataEntryTrackedEntities(trackedEntities);
+        setBulkDataEntryTrackedEntityIds(trackedEntities);
         setShowBulkDataEntryPlugin(true);
-    }, [setBulkDataEntryTrackedEntities, setShowBulkDataEntryPlugin]);
+    }, [setBulkDataEntryTrackedEntityIds, setShowBulkDataEntryPlugin]);
 
     return {
         onChangeTemplate,
@@ -120,7 +120,7 @@ const useCallbackMainPage = ({
 
 const MainPageContainer = () => {
     const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
-    const [bulkDataEntryTrackedEntityIds, setBulkDataEntryTrackedEntities] = useState(undefined);
+    const [bulkDataEntryTrackedEntityIds, setBulkDataEntryTrackedEntityIds] = useState(undefined);
 
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
@@ -159,7 +159,7 @@ const MainPageContainer = () => {
             navigate,
             dispatch,
             setShowBulkDataEntryPlugin,
-            setBulkDataEntryTrackedEntities,
+            setBulkDataEntryTrackedEntityIds,
         });
 
     useEffect(() => {
