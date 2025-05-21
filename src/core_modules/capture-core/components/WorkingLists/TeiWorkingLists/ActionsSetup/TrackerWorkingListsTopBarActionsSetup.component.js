@@ -1,18 +1,18 @@
 // @flow
 import React, { useMemo } from 'react';
 import { TeiWorkingListsSetup } from '../Setup';
-import type { CustomActionsContents } from '../../WorkingListsBase';
-import type { Props } from './TrackerWorkingListsActionsSetup.types';
+import type { CustomTopBarActions } from '../../WorkingListsBase';
+import type { Props } from './TrackerWorkingListsTopBarActionsSetup.types';
 import { BulkDataEntryAction } from '../../WorkingListsCommon';
 
-export const TrackerWorkingListsActionsSetup = ({
+export const TrackerWorkingListsTopBarActionsSetup = ({
     program,
     onOpenBulkDataEntryPlugin,
     selectionInProgress,
     records,
     ...passOnProps
 }: Props) => {
-    const customActionsContents: CustomActionsContents = useMemo(
+    const customTopBarActions: CustomTopBarActions = useMemo(
         () => [
             {
                 key: 'bulkDataEntryAction',
@@ -35,7 +35,7 @@ export const TrackerWorkingListsActionsSetup = ({
             program={program}
             records={records}
             selectionInProgress={selectionInProgress}
-            customActionsContents={customActionsContents}
+            customTopBarActions={customTopBarActions}
         />
     );
 };

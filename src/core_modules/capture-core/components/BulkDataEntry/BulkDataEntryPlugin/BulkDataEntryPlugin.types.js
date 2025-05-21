@@ -5,6 +5,6 @@ export type Props = {|
     dataKey?: string,
     onClose: () => Promise<void>,
     onBackToOriginPage: () => void,
-    trackedEntities?: Array<string>,
+    trackedEntityIds?: Array<string>,
     ...CssClasses,
 |};

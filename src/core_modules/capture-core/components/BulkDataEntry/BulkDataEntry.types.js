@@ -7,6 +7,6 @@ export type Props = {
     onCloseBulkDataEntryPlugin: () => void,
     displayFrontPageList?: boolean,
     trackedEntityName?: string,
-    trackedEntities?: Array<string>,
+    trackedEntityIds?: Array<string>,
     ...CssClasses,
 };

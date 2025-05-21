@@ -120,7 +120,7 @@ const useCallbackMainPage = ({
 
 const MainPageContainer = () => {
     const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
-    const [bulkDataEntryTrackedEntities, setBulkDataEntryTrackedEntities] = useState(undefined);
+    const [bulkDataEntryTrackedEntityIds, setBulkDataEntryTrackedEntities] = useState(undefined);
 
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
@@ -215,7 +215,7 @@ const MainPageContainer = () => {
                 displayFrontPageList={displayFrontPageList}
                 onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
                 onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
-                bulkDataEntryTrackedEntities={bulkDataEntryTrackedEntities}
+                bulkDataEntryTrackedEntityIds={bulkDataEntryTrackedEntityIds}
             />
         </OrgUnitFetcher>
     );

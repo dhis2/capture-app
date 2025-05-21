@@ -17,7 +17,7 @@ const BulkDataEntryPluginPlain = ({
     dataKey,
     onClose,
     onBackToOriginPage,
-    trackedEntities,
+    trackedEntityIds,
     classes,
 }: Props) => {
     const [pluginSize, setPluginSize] = useState({ width: undefined, height: undefined });
@@ -51,7 +51,7 @@ const BulkDataEntryPluginPlain = ({
                 configKey={configKey}
                 dataKey={dataKey}
                 onClose={onClose}
-                trackedEntities={trackedEntities}
+                trackedEntityIds={trackedEntityIds}
             />
             <div style={{ marginTop: '50px' }}>
                 <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
@@ -68,7 +68,7 @@ const BulkDataEntryPluginPlain = ({
                 </Button>
                 <p style={{ marginTop: '16px' }}>List of the latest trackedEntities passed on to the Plugin for testing. The Plugin will be solely responsible for caching and keeping track of these trackedEntities</p>
                 <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-                    {trackedEntities?.map(te => (
+                    {trackedEntityIds?.map(te => (
                         <li key={te} style={{ marginBottom: '4px' }}>
                             {te}
                         </li>

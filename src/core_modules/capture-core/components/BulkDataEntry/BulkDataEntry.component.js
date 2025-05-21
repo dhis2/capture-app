@@ -18,7 +18,7 @@ const BulkDataEntryPlain = ({
     onCloseBulkDataEntryPlugin,
     displayFrontPageList,
     page,
-    trackedEntities,
+    trackedEntityIds,
     classes,
 }: Props) => {
     const { activeList, removeActiveList } = useBulkDataEntryConfigurations(programId);
@@ -47,7 +47,7 @@ const BulkDataEntryPlain = ({
                 pluginSource={activeList.pluginSource}
                 onClose={onClose}
                 onBackToOriginPage={onCloseBulkDataEntryPlugin}
-                trackedEntities={trackedEntities}
+                trackedEntityIds={trackedEntityIds}
             />
         </div>
     );

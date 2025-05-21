@@ -60,7 +60,7 @@ const MainPagePlain = ({
     onChangeTemplate,
     onCloseBulkDataEntryPlugin,
     onOpenBulkDataEntryPlugin,
-    bulkDataEntryTrackedEntities,
+    bulkDataEntryTrackedEntityIds,
 }: Props) => {
     const showMainPage = useMemo(() => {
         const noProgramSelected = !programId;
@@ -76,7 +76,7 @@ const MainPagePlain = ({
                 onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
                 displayFrontPageList={displayFrontPageList}
                 page={bulkDataEntryBreadcrumbsKeys.MAIN_PAGE}
-                trackedEntities={bulkDataEntryTrackedEntities}
+                trackedEntityIds={bulkDataEntryTrackedEntityIds}
             />
         );
     }

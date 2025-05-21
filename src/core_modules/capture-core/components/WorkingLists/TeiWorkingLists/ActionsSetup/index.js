@@ -1,3 +1,3 @@
 // @flow
-export { TrackerWorkingListsActionsSetup } from './TrackerWorkingListsActionsSetup.component';
-export { TrackerWorkingListsActionsSetupOutputProps } from './TrackerWorkingListsActionsSetup.types';
+export { TrackerWorkingListsTopBarActionsSetup } from './TrackerWorkingListsTopBarActionsSetup.component';
+export { TrackerWorkingListsTopBarActionsSetupOutputProps } from './TrackerWorkingListsTopBarActionsSetup.types';

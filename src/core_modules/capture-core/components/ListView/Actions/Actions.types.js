@@ -1,5 +1,5 @@
 // @flow
 
 export type Props = {
-    customActionsContents?: Array<{ key: string, actionContents: React$Node}>,
+    customTopBarActions?: Array<{ key: string, actionContents: React$Node}>,
 };

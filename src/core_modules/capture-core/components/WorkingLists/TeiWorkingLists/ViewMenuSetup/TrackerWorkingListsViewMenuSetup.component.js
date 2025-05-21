@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
-import { TrackerWorkingListsActionsSetup } from '../ActionsSetup';
+import { TrackerWorkingListsTopBarActionsSetup } from '../ActionsSetup';
 import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Props } from './TrackerWorkingListsViewMenuSetup.types';
 import { DownloadDialog, useSelectedRowsController } from '../../WorkingListsCommon';
@@ -138,7 +138,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
 
     return (
         <>
-            <TrackerWorkingListsActionsSetup
+            <TrackerWorkingListsTopBarActionsSetup
                 {...passOnProps}
                 customUpdateTrigger={customUpdateTrigger}
                 program={program}

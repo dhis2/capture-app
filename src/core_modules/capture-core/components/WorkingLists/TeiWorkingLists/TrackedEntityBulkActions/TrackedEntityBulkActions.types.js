@@ -9,7 +9,7 @@ type BaseProps = {|
     programDataWriteAccess: boolean,
     onUpdateList: () => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
-    onOpenBulkDataEntryPlugin: () => void,
+    onOpenBulkDataEntryPlugin: (trackedEntityIds: Array<string>) => void,
 |}
 
 export type Props = {|
