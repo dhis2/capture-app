@@ -9,15 +9,15 @@ import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 
 type Props = {
     isUserInteractionInProgress: boolean,
+    eventDetailsSection: Object,
     showAddRelationship: boolean,
-    isReadOnly: boolean,
     orgUnitId: string,
 };
 
 export const ViewEventPageComponent = ({
     isUserInteractionInProgress,
+    eventDetailsSection,
     showAddRelationship,
-    isReadOnly,
     orgUnitId,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
@@ -32,8 +32,8 @@ export const ViewEventPageComponent = ({
                 programId={programId}
                 orgUnitId={orgUnitId}
                 selectedCategories={selectedCategories}
-                isReadOnly={isReadOnly}
                 isUserInteractionInProgress={isUserInteractionInProgress}
+                editEventMode={eventDetailsSection.showEditEvent}
                 formIsOpen
             />
             {

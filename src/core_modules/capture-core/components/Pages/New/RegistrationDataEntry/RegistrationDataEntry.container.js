@@ -9,7 +9,8 @@ import {
     startSavingNewTrackedEntityInstance,
     startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { cleanUpDataEntry, openNewPage } from '../NewPage.actions';
+import { openNewPage } from '../NewPage.actions';
+import { cleanUpDataEntry } from '../../../DataEntry';
 import {
     NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID,
     NEW_SINGLE_EVENT_DATA_ENTRY_ID,
@@ -21,6 +22,7 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
     dataEntryId,
     setScopeId,
     trackedEntityInstanceAttributes,
+    newPageKey,
 }) => {
     const dispatch = useDispatch();
     const { teiId } = useLocationQuery();
@@ -63,5 +65,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
             onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
             teiId={teiId}
             trackedEntityInstanceAttributes={trackedEntityInstanceAttributes}
+            key={newPageKey}
         />);
 };

@@ -7,7 +7,6 @@ import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
-    const isReadOnly = eventDetailsSection.showEditEvent;
     const eventOrgUnitId = state.viewEventPage.loadedValues?.orgUnit?.id;
     const isUserInteractionInProgress =
       (state.currentSelections.complete && eventDetailsSection.showEditEvent)
@@ -19,7 +18,7 @@ const mapStateToProps = (state: ReduxState) => {
         error: state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error,
         ready: !state.activePage.lockedSelectorLoads,
         isUserInteractionInProgress,
-        isReadOnly,
+        eventDetailsSection,
         orgUnitId: eventOrgUnitId,
         showAddRelationship: state.viewEventPage.showAddRelationship,
     };

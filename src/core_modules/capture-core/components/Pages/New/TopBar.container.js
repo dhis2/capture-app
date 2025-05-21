@@ -28,6 +28,7 @@ type TopBarProps = {
     teiDisplayName?: string,
     isUserInteractionInProgress: boolean,
     formIsOpen: boolean,
+    onOpenNewRegistrationPage: () => void,
 };
 
 export const TopBar = ({
@@ -39,6 +40,7 @@ export const TopBar = ({
     trackedEntityName = '',
     teiDisplayName = '',
     formIsOpen,
+    onOpenNewRegistrationPage,
 }: TopBarProps) => {
     const dispatch = useDispatch();
     const { setProgramId } = useSetProgramId();
@@ -84,7 +86,8 @@ export const TopBar = ({
             isUserInteractionInProgress={isUserInteractionInProgress}
             onStartAgain={() => reset()}
             formIsOpen={formIsOpen}
-            isReadOnly={program instanceof EventProgram}
+            isReadOnlyOrgUnit={program instanceof EventProgram}
+            orgUnitTooltip={program instanceof EventProgram}
         >
             {teiId ? (
                 <SingleLockedSelect
@@ -106,6 +109,7 @@ export const TopBar = ({
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
                 isUserInteractionInProgress={isUserInteractionInProgress}
+                onOpenNewRegistrationPage={onOpenNewRegistrationPage}
             />
         </ScopeSelector>
     );

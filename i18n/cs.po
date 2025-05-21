@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -616,20 +616,6 @@ msgstr "Oznámení"
 msgid "Close the notice"
 msgstr "Zavřít oznámení"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "Program s id \"{{programId}}\" neexistuje"
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-"Při načítání registrací došlo k chybě. Zadejte prosím platnou adresu URL."
-
 msgid "No feedback for this enrollment yet"
 msgstr "K tomuto zápisu zatím není žádná zpětná vazba"
 
@@ -710,6 +696,20 @@ msgstr "Vytvořte novou událost v tomto programu."
 
 msgid "View working list in this program."
 msgstr "Zobrazit pracovní seznam v tomto programu."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Program s id \"{{programId}}\" neexistuje"
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+"Při načítání registrací došlo k chybě. Zadejte prosím platnou adresu URL."
 
 msgid "Page is missing required values from URL"
 msgstr "Na stránce chybí požadované hodnoty z adresy URL"
@@ -934,6 +934,12 @@ msgstr[1] "Vyplňte alespoň {{count}} atributy pro vyhledávání."
 msgstr[2] "Vyplňte alespoň {{count}} atributů pro vyhledávání."
 msgstr[3] "Vyplňte alespoň {{count}} atributy pro vyhledávání."
 
+msgid "Missing search criteria"
+msgstr "Chybí kritéria vyhledávání"
+
+msgid "Back to search"
+msgstr "Zpět na vyhledávání"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Nepodařilo se načíst metadata. Prosím zkuste to znovu později."
 
@@ -964,8 +970,8 @@ msgstr "Přidat vztah"
 msgid "No results found for "
 msgstr "Pro dotaz nebyly nalezeny žádné výsledky"
 
-msgid "Choose an organisation unit"
-msgstr "Vyberte organizační jednotku"
+msgid "Choose an organisation unit in the form below"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Vymazat výběr"
@@ -1014,6 +1020,9 @@ msgstr ""
 "Nenašli jste hledané výsledky? Zkuste vyhledat všechny programy, které "
 "používají typ"
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "Hledat ve všech programech"
 
@@ -1043,9 +1052,6 @@ msgid ""
 msgstr ""
 "Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
 
-msgid "Back to search"
-msgstr "Zpět na vyhledávání"
-
 msgid "An error has occurred"
 msgstr "Došlo k chybě"
 
@@ -1054,9 +1060,6 @@ msgstr "Příliš mnoho výsledků"
 
 msgid "Cannot search in all programs"
 msgstr "Nelze vyhledávat ve všech programech"
-
-msgid "Missing search criteria"
-msgstr "Chybí kritéria vyhledávání"
 
 msgid "Results found"
 msgstr "Nalezeny výsledky"
@@ -1303,6 +1306,12 @@ msgstr "Chcete-li tuto událost přeplánovat, přejděte na kartu \"Plán\"."
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Naplánované datum nelze změnit pro události {{ eventStatus }}"
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "Událost dokončena"
 
@@ -1344,16 +1353,16 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Na tento den je v {{orgUnitName}} naplánovaná {{count}} událost."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgstr[0] ""
 msgstr[1] ""
-"Na tento den jsou v {{orgUnitName}} naplánované {{count}} události."
 msgstr[2] ""
-"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
 msgstr[3] ""
-"Na tento den je v {{orgUnitName}} naplánovaných {{count}} událostí."
 
 msgid "Schedule date / Due date"
 msgstr "Datum plánu / Datum konce platnosti"
@@ -1376,14 +1385,13 @@ msgstr ""
 msgid "Save note"
 msgstr "Uložit poznámku"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+msgid "Edit {{trackedEntityName}}"
 msgstr ""
-"Zde můžete změnit informace o této {{trackedEntityName}}. Chcete-li změnit "
-"informace o tomto zápisu, použijte tlačítko Upravit v poli Zápis na tomto "
-"ovládacím panelu"
+
+msgid ""
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
+msgstr ""
 
 msgid " Loading..."
 msgstr " Načítání..."
@@ -1596,6 +1604,9 @@ msgstr "Seznam změn"
 msgid "No changes to display"
 msgstr "Žádné změny k zobrazení"
 
+msgid "Data item"
+msgstr "Datová položka"
+
 msgid "Updated"
 msgstr "Aktualizováno"
 
@@ -1608,11 +1619,17 @@ msgstr "Smazáno"
 msgid "Date"
 msgstr "datum"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "Uživatel"
 
-msgid "Data item"
-msgstr "Datová položka"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr "Změna"
@@ -1726,6 +1743,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"
