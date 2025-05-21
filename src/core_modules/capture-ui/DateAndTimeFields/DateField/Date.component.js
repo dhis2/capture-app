@@ -65,7 +65,7 @@ export class DateField extends React.Component<Props, State> {
 
     render() {
         const {
-            width,
+            width = '100%',
             maxWidth,
             calendarWidth,
             inputWidth,

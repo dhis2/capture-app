@@ -107,9 +107,6 @@ export class ProgramStageFactory {
                 } else {
                     const id = sectionDataElement.id;
                     const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
-                    const cachedDataElementDefinition = this
-                        .cachedDataElements
-                        ?.get(cachedProgramStageDataElement.dataElementId);
 
                     if (!cachedProgramStageDataElement) {
                         log.error(
@@ -117,6 +114,10 @@ export class ProgramStageFactory {
                                 { sectionDataElement }));
                         return;
                     }
+
+                    const cachedDataElementDefinition = this
+                        .cachedDataElements
+                        ?.get(cachedProgramStageDataElement.dataElementId);
 
                     const element = await this.dataElementFactory.build(
                         cachedProgramStageDataElement,

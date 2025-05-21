@@ -196,7 +196,9 @@ function getBuiltPrograms(
         })
         .map(cachedProgram => programFactory.build(cachedProgram));
 
-    return Promise.all(promisePrograms);
+    return Promise.all(promisePrograms)
+        // $FlowFixMe
+        .then(programs => programs.filter(Boolean));
 }
 
 function postProcessPrograms(

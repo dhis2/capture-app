@@ -1,5 +1,7 @@
 import { Given, Then, defineStep as And, After, When, Before } from '@badeball/cypress-cucumber-preprocessor';
 
+const timeStamp = Math.round((new Date()).getTime() / 1000);
+
 const cleanUpEvent = () => {
     cy.visit('/#/viewEvent?viewEventId=rgWr86qs0sI');
 
@@ -150,4 +152,22 @@ And('you select the TB Program', () => {
 
 Then('the TB program enroll form is loaded', () => {
     cy.contains('TB identifier').should('exist');
+});
+
+Given(/^you land on the edit event page by having typed (.*)$/, (url) => {
+    cy.visit(url);
+});
+
+When(/^you fill in the note: (.*)$/, (note) => {
+    cy.get('[data-test="write-note-btn"]').click();
+    cy.get('[data-test="note-textfield"]').type(`${note}-${timeStamp}`);
+    cy.wait(100);
+    cy.get('[data-test="add-note-btn"]').should('exist');
+    cy.get('[data-test="add-note-btn"]').click();
+});
+
+Then(/^list should contain the new note: (.*)$/, (note) => {
+    cy.get('[data-test="notes-list"]').within(() => {
+        cy.get('[data-test="note-item"]').contains(`${note}-${timeStamp}`).should('exist');
+    });
 });

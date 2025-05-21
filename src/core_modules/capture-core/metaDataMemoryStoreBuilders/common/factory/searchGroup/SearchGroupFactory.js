@@ -77,6 +77,7 @@ export class SearchGroupFactory {
                 id,
                 translations,
                 displayName,
+                displayFormName,
                 displayShortName,
                 description,
                 unique,
@@ -94,7 +95,7 @@ export class SearchGroupFactory {
 
             o.formName =
               this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-              || displayName;
+              || displayFormName;
 
             o.description =
               this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
