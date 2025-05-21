@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -619,21 +619,6 @@ msgstr "Merknad"
 msgid "Close the notice"
 msgstr "Lukk merknaden"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "Program med ID \"{{programId}}\" eksisterer ikke"
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-"Det oppsto en feil under henting av registreringer. Vennligst skriv inn en "
-"gyldig url."
-
 msgid "No feedback for this enrollment yet"
 msgstr "Ingen tilbakemeldinger for denne registreringen enda"
 
@@ -715,6 +700,21 @@ msgstr "Opprett ny hendelse i dette programmet"
 
 msgid "View working list in this program."
 msgstr "Se arbeidsliste i dette programmet."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Program med ID \"{{programId}}\" eksisterer ikke"
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+"Det oppsto en feil under henting av registreringer. Vennligst skriv inn en "
+"gyldig url."
 
 msgid "Page is missing required values from URL"
 msgstr "Siden mangler nødvendige verdier fra URL"
@@ -937,6 +937,12 @@ msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Fyll inn minst {{count}}attributt for å søke"
 msgstr[1] "Fyll inn minst {{count}} attributter for å søke"
 
+msgid "Missing search criteria"
+msgstr "Manglende søkekriterier"
+
+msgid "Back to search"
+msgstr "Tilbake til søk"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Kunne ikke hente metadata. Prøv igjen senere."
 
@@ -967,8 +973,8 @@ msgstr "Legg til relasjon"
 msgid "No results found for "
 msgstr "Ingen resultater funnet for"
 
-msgid "Choose an organisation unit"
-msgstr "Velg en organisasjonsenhet"
+msgid "Choose an organisation unit in the form below"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Fjern valg"
@@ -1017,6 +1023,9 @@ msgstr ""
 "Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
 " bruker type"
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "Søk i alle programmer"
 
@@ -1044,9 +1053,6 @@ msgid ""
 "looking for."
 msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
 
-msgid "Back to search"
-msgstr "Tilbake til søk"
-
 msgid "An error has occurred"
 msgstr "Det har oppstått en feil"
 
@@ -1055,9 +1061,6 @@ msgstr "For mange resultat"
 
 msgid "Cannot search in all programs"
 msgstr "Kan ikke søke i alle programmer"
-
-msgid "Missing search criteria"
-msgstr "Manglende søkekriterier"
 
 msgid "Results found"
 msgstr "Resultater funnet"
@@ -1357,12 +1360,14 @@ msgstr[0] ""
 msgstr[1] ""
 "Den planlagte datoen er {{count}} dager {{posisjon}} den foreslåtte datoen."
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "Det er {{count}} planlagt hendelse i {{orgUnitName}} denne dagen."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgstr[0] ""
 msgstr[1] ""
-"Det er {{count}} planlagte hendelser i {{orgUnitName}} denne dagen."
 
 msgid "Schedule date / Due date"
 msgstr "Planlagt dato / Forfallsdato"
@@ -1385,14 +1390,13 @@ msgstr ""
 msgid "Save note"
 msgstr "Lagre notat"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+msgid "Edit {{trackedEntityName}}"
 msgstr ""
-"Endre informasjon om denne {{trackedEntityName}} her. For å endre "
-"informasjon om denne registreringen, bruk Rediger-knappen i "
-"registreringsboksen på dette dashbordet"
+
+msgid ""
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
+msgstr ""
 
 msgid " Loading..."
 msgstr "Laster..."
@@ -1741,6 +1745,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"

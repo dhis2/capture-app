@@ -1,17 +1,17 @@
 # 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2024
-# Nadiia <semchuk@aph.org.ua>, 2024
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Éva Tamási, 2025
+# Nadiia <semchuk@aph.org.ua>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-27T10:03:03.122Z\n"
+"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Éva Tamási, 2025\n"
+"Last-Translator: Nadiia <semchuk@aph.org.ua>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -603,19 +603,6 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr ""
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -687,6 +674,19 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
 msgid "Page is missing required values from URL"
@@ -853,7 +853,7 @@ msgid "events"
 msgstr "події"
 
 msgid "event"
-msgstr ""
+msgstr "подія"
 
 msgid "You don't have access to edit this event"
 msgstr ""
@@ -881,9 +881,6 @@ msgstr "Показники"
 msgid "Warnings"
 msgstr ""
 
-msgid "Show all events"
-msgstr ""
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
 
@@ -909,6 +906,12 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+msgid "Missing search criteria"
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -919,9 +922,6 @@ msgid "Loading"
 msgstr "Завантаження"
 
 msgid "An error occurred while loading the form"
-msgstr ""
-
-msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -942,7 +942,7 @@ msgstr "Додати зв'язок"
 msgid "No results found for "
 msgstr ""
 
-msgid "Choose an organisation unit"
+msgid "Choose an organisation unit in the form below"
 msgstr ""
 
 msgid "Clear selection"
@@ -990,6 +990,9 @@ msgid ""
 "that use type "
 msgstr ""
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr ""
 
@@ -1015,9 +1018,6 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "Back to search"
-msgstr ""
-
 msgid "An error has occurred"
 msgstr ""
 
@@ -1025,9 +1025,6 @@ msgid "Too many results"
 msgstr "Забагато результатів"
 
 msgid "Cannot search in all programs"
-msgstr ""
-
-msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
@@ -1263,6 +1260,12 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1302,9 +1305,12 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -1331,10 +1337,12 @@ msgstr ""
 msgid "Save note"
 msgstr "Зберегти нотатку"
 
+msgid "Edit {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
 msgid " Loading..."
@@ -1394,7 +1402,7 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr ""
 
-msgid "{{ linkableStageLabel }} is not repeatable"
+msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
@@ -1406,10 +1414,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr ""
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1515,9 +1535,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "Linked event"
-msgstr ""
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1532,6 +1549,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Data item"
+msgstr "Елемент даних"
+
 msgid "Updated"
 msgstr ""
 
@@ -1544,11 +1564,17 @@ msgstr ""
 msgid "Date"
 msgstr "Дата"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "Користувач"
 
-msgid "Data item"
-msgstr "Елемент даних"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
+msgstr ""
 
 msgid "Change"
 msgstr ""
@@ -1660,6 +1686,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"

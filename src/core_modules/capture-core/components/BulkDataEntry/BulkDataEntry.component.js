@@ -23,7 +23,7 @@ const BulkDataEntryPlain = ({
 }: Props) => {
     const { activeList, removeActiveList } = useBulkDataEntryConfigurations(programId);
 
-    const onClose = useCallback(async () => {
+    const onComplete = useCallback(async () => {
         await removeActiveList();
         onCloseBulkDataEntryPlugin();
     }, [onCloseBulkDataEntryPlugin, removeActiveList]);
@@ -45,8 +45,8 @@ const BulkDataEntryPlain = ({
                 configKey={activeList.configKey}
                 dataKey={activeList.dataKey}
                 pluginSource={activeList.pluginSource}
-                onClose={onClose}
-                onBackToOriginPage={onCloseBulkDataEntryPlugin}
+                onComplete={onComplete}
+                onDefer={onCloseBulkDataEntryPlugin}
                 trackedEntityIds={trackedEntityIds}
             />
         </div>

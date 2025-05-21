@@ -15,8 +15,8 @@ const BulkDataEntryPluginPlain = ({
     pluginSource,
     configKey,
     dataKey,
-    onClose,
-    onBackToOriginPage,
+    onComplete,
+    onDefer,
     trackedEntityIds,
     classes,
 }: Props) => {
@@ -50,7 +50,8 @@ const BulkDataEntryPluginPlain = ({
                 height={pluginSize.height}
                 configKey={configKey}
                 dataKey={dataKey}
-                onClose={onClose}
+                onComplete={onComplete}
+                onDefer={onDefer}
                 trackedEntityIds={trackedEntityIds}
             />
             <div style={{ marginTop: '50px' }}>
@@ -60,10 +61,10 @@ const BulkDataEntryPluginPlain = ({
                 <p style={{ marginBottom: '8px' }}>
                     Dummy buttons for testing that will be inside the Plugin.
                 </p>
-                <Button onClick={onBackToOriginPage} style={{ marginRight: '8px' }}>
+                <Button onClick={onDefer} style={{ marginRight: '8px' }}>
                     Back to origin to add trackedEntities
                 </Button>
-                <Button onClick={onClose} style={{ marginRight: '8px' }}>
+                <Button onClick={onComplete} style={{ marginRight: '8px' }}>
                     Close bulk data entry form
                 </Button>
                 <p style={{ marginTop: '16px' }}>List of the latest trackedEntities passed on to the Plugin for testing. The Plugin will be solely responsible for caching and keeping track of these trackedEntities</p>
