@@ -82,7 +82,14 @@ const useSelectorMainPage = () =>
         shallowEqual,
     );
 
-const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate }) => {
+const useCallbackMainPage = ({
+    orgUnitId,
+    programId,
+    showAllAccessible,
+    navigate,
+    setShowBulkDataEntryPlugin,
+    setBulkDataEntryTrackedEntityIds,
+}) => {
     const onChangeTemplate = useCallback(
         id => handleChangeTemplateUrl({ programId, orgUnitId, selectedTemplateId: id, showAllAccessible, navigate }),
         [navigate, orgUnitId, programId, showAllAccessible],
@@ -93,15 +100,27 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate
         [navigate, programId],
     );
 
+    const onCloseBulkDataEntryPlugin = useCallback(() => {
+        setBulkDataEntryTrackedEntityIds(undefined);
+        setShowBulkDataEntryPlugin(false);
+    }, [setBulkDataEntryTrackedEntityIds, setShowBulkDataEntryPlugin]);
+
+    const onOpenBulkDataEntryPlugin = useCallback((trackedEntities) => {
+        setBulkDataEntryTrackedEntityIds(trackedEntities);
+        setShowBulkDataEntryPlugin(true);
+    }, [setBulkDataEntryTrackedEntityIds, setShowBulkDataEntryPlugin]);
+
     return {
         onChangeTemplate,
         onSetShowAccessible,
+        onCloseBulkDataEntryPlugin,
+        onOpenBulkDataEntryPlugin,
     };
 };
 
 const MainPageContainer = () => {
     const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
-    const [bulkDataEntryTrackedEntities, setBulkDataEntryTrackedEntities] = useState(undefined);
+    const [bulkDataEntryTrackedEntityIds, setBulkDataEntryTrackedEntityIds] = useState(undefined);
 
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
@@ -132,10 +151,16 @@ const MainPageContainer = () => {
         showBulkDataEntryPlugin,
     });
 
-    const {
-        onChangeTemplate,
-        onSetShowAccessible,
-    } = useCallbackMainPage({ orgUnitId, programId, showAllAccessible, navigate, dispatch });
+    const { onChangeTemplate, onSetShowAccessible, onCloseBulkDataEntryPlugin, onOpenBulkDataEntryPlugin } =
+        useCallbackMainPage({
+            orgUnitId,
+            programId,
+            showAllAccessible,
+            navigate,
+            dispatch,
+            setShowBulkDataEntryPlugin,
+            setBulkDataEntryTrackedEntityIds,
+        });
 
     useEffect(() => {
         dispatch(updateShowAccessibleStatus(showAllAccessible));
@@ -188,9 +213,9 @@ const MainPageContainer = () => {
                 error={error}
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
-                setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
-                bulkDataEntryTrackedEntities={bulkDataEntryTrackedEntities}
+                onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+                bulkDataEntryTrackedEntityIds={bulkDataEntryTrackedEntityIds}
             />
         </OrgUnitFetcher>
     );

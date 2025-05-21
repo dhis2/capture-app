@@ -3,7 +3,7 @@ import React, { useState, useCallback, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { DropdownButton, MenuItem, MenuSectionHeader, FlyoutMenu, colors } from '@dhis2/ui';
-import { useBulkDataEntryConfigurations, useActiveBulkDataEntryList } from '../../../../../WidgetBulkDataEntry';
+import { useBulkDataEntryConfigurations } from '../../../../../common/bulkDataEntry';
 
 const styles = {
     container: {
@@ -17,26 +17,26 @@ const styles = {
 
 type Props = {
     programId: string,
-    setShowBulkDataEntryPlugin: (show: boolean) => void,
+    onOpenBulkDataEntryPlugin: () => void,
     selectionInProgress: ?boolean,
 };
 
 const BulkDataEntryActionDropdownButtonPlain = ({
     programId,
-    setShowBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     selectionInProgress,
     classes,
 }: Props & CssClasses) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { setActiveList } = useActiveBulkDataEntryList(programId);
-    const { bulkDataEntryConfigurations, isLoading, isError } = useBulkDataEntryConfigurations(programId);
+    const { setActiveList, bulkDataEntryConfigurations, isLoading, isError } =
+        useBulkDataEntryConfigurations(programId);
 
     const onSelectConfiguration = useCallback(
         async (configKey) => {
             await setActiveList(configKey);
-            setShowBulkDataEntryPlugin(true);
+            onOpenBulkDataEntryPlugin();
         },
-        [setShowBulkDataEntryPlugin, setActiveList],
+        [onOpenBulkDataEntryPlugin, setActiveList],
     );
 
     if (isError || isLoading || !bulkDataEntryConfigurations || bulkDataEntryConfigurations.length === 0) {

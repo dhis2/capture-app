@@ -1,7 +1,8 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import type { ComponentType } from 'react';
+import { v4 as uuid } from 'uuid';
 import { NewPageComponent } from './NewPage.component';
 import {
     showMessageToSelectOrgUnitOnNewPage,
@@ -108,6 +109,11 @@ export const NewPage: ComponentType<{||}> = () => {
           || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
     );
 
+    const [newPageKey, setNewPageKey] = useState();
+    const onOpenNewRegistrationPage = () => {
+        setNewPageKey(uuid());
+    };
+
     return (
         <>
             <TopBar
@@ -119,6 +125,7 @@ export const NewPage: ComponentType<{||}> = () => {
                 trackedEntityName={trackedEntityType?.name}
                 teiDisplayName={teiDisplayName}
                 formIsOpen={newPageStatus === newPageStatuses.DEFAULT}
+                onOpenNewRegistrationPage={onOpenNewRegistrationPage}
             />
             <NewPageComponent
                 showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
@@ -137,6 +144,7 @@ export const NewPage: ComponentType<{||}> = () => {
                 ready={ready}
                 trackedEntityInstanceAttributes={trackedEntityAttributes}
                 trackedEntityName={trackedEntityType?.name}
+                newPageKey={newPageKey}
             />
         </>
     );

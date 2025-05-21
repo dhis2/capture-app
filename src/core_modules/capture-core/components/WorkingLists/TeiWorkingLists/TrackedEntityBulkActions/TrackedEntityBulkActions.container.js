@@ -1,20 +1,27 @@
 // @flow
-import React from 'react';
+import React, { useCallback } from 'react';
 import log from 'loglevel';
 import { EventBulkActions } from '../../EventWorkingListsCommon/EventBulkActions';
 import { TrackedEntityBulkActionsComponent } from './TrackedEntityBulkActions.component';
 import type { ContainerProps } from './TrackedEntityBulkActions.types';
 import { errorCreator } from '../../../../../capture-core-utils';
-import { useActiveBulkDataEntryList } from '../../../WidgetBulkDataEntry';
+import { useBulkDataEntryConfigurations } from '../../../common/bulkDataEntry';
 
 export const TrackedEntityBulkActions = ({
     programStageId,
     stages,
     programDataWriteAccess,
     programId,
+    onOpenBulkDataEntryPlugin,
+    recordsOrder,
+    selectedRows,
     ...passOnProps
 }: ContainerProps) => {
-    const { activeList } = useActiveBulkDataEntryList(programId);
+    const { activeList } = useBulkDataEntryConfigurations(programId);
+
+    const injectSelectedRowsToBulkDataEntryPlugin = useCallback(() => {
+        recordsOrder && onOpenBulkDataEntryPlugin(recordsOrder.filter(recordOrder => selectedRows[recordOrder]));
+    }, [onOpenBulkDataEntryPlugin, recordsOrder, selectedRows]);
 
     if (programStageId) {
         const stage = stages.get(programStageId);
@@ -29,6 +36,8 @@ export const TrackedEntityBulkActions = ({
                 programId={programId}
                 stage={stage}
                 bulkDataEntryIsActive={Boolean(activeList)}
+                selectedRows={selectedRows}
+                onOpenBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
                 {...passOnProps}
             />
         );
@@ -40,6 +49,8 @@ export const TrackedEntityBulkActions = ({
             stages={stages}
             programDataWriteAccess={programDataWriteAccess}
             bulkDataEntryIsActive={Boolean(activeList)}
+            selectedRows={selectedRows}
+            onOpenBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
             {...passOnProps}
         />
     );

@@ -10,8 +10,7 @@ export const WorkingListsType = ({
     orgUnitId,
     selectedTemplateId,
     onChangeTemplate,
-    setShowBulkDataEntryPlugin,
-    setBulkDataEntryTrackedEntities,
+    onOpenBulkDataEntryPlugin,
 }: Props) => {
     const { programType } = useProgramInfo(programId);
     if (programType === programTypes.EVENT_PROGRAM) {
@@ -26,8 +25,7 @@ export const WorkingListsType = ({
                     orgUnitId={orgUnitId}
                     selectedTemplateId={selectedTemplateId}
                     onChangeTemplate={onChangeTemplate}
-                    setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
-                    setBulkDataEntryTrackedEntities={setBulkDataEntryTrackedEntities}
+                    onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                 />
             </>
         );

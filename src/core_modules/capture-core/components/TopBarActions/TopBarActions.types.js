@@ -1,6 +1,7 @@
 // @flow
 
 export type Props = {
+    onOpenNewRegistrationPage?: () => void,
     selectedProgramId?: ?string,
     selectedOrgUnitId?: string,
     isUserInteractionInProgress?: boolean,

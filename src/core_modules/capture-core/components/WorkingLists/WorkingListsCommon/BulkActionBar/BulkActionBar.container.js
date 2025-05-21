@@ -8,12 +8,10 @@ export const BulkActionBar = ({
     selectedRowsCount,
     children,
 }: ContainerProps) => (
-    <>
-        <BulkActionBarComponent
-            selectedRowsCount={selectedRowsCount}
-            onClearSelection={onClearSelection}
-        >
-            {children}
-        </BulkActionBarComponent>
-    </>
+    <BulkActionBarComponent
+        selectedRowsCount={selectedRowsCount}
+        onClearSelection={onClearSelection}
+    >
+        {children}
+    </BulkActionBarComponent>
 );

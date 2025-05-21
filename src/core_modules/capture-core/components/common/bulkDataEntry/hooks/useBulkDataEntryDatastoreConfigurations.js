@@ -1,10 +1,44 @@
 // @flow
+import { z } from 'zod';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
-import { useApiMetadataQuery } from '../../../utils/reactQueryHelpers';
-import { useUserLocale } from '../../../utils/localeData/useUserLocale';
-import type { DataStoreConfigurationRaw, DataStoreConfiguration } from '../WidgetBulkDataEntry.types';
+import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
+import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
+import type { DataStoreConfiguration, BulkDataEntryConfigurations } from '../bulkDataEntry.types';
+
+const bulkDataEntryDatastoreSchema = z.object({
+    version: z.number(),
+    config: z.array(
+        z.object({
+            programId: z.string(),
+            configKey: z.string(),
+            dataKey: z.string().optional(),
+            pluginSource: z.string(),
+            title: z.record(z.string()),
+            subtitle: z.record(z.string()).optional(),
+        }),
+    ),
+});
+
+const validateStructure = (data) => {
+    const supportedVersion = 1;
+    const { success, error } = bulkDataEntryDatastoreSchema.safeParse(data);
+
+    if (success && data.version !== supportedVersion) {
+        return {
+            data: null,
+            validationError: 'Only version 1 of the bulkDataEntry is supported in this version of the app',
+        };
+    }
+
+    return {
+        data: success ? data : null,
+        validationError: !success
+            ? error.message || 'An unknown error occurred loading the bulkDataEntry Schema'
+            : null,
+    };
+};
 
 const getLocalizedString = (field: { [string]: string }, locale: string): string => {
     if (field[locale]) {
@@ -14,12 +48,11 @@ const getLocalizedString = (field: { [string]: string }, locale: string): string
     return field[Object.keys(field)[0]];
 };
 
-export const useBulkDataEntryConfigurations = (
+export const useBulkDataEntryDatastoreConfigurations = (
     programId: string,
 ): {|
-    bulkDataEntryConfigurations?: Array<DataStoreConfiguration>,
+    bulkDataEntryConfigurations?: BulkDataEntryConfigurations,
     isLoading: boolean,
-    isError: boolean,
 |} => {
     const { locale } = useUserLocale();
     const {
@@ -38,8 +71,16 @@ export const useBulkDataEntryConfigurations = (
         { resource: 'dataStore/capture/bulkDataEntry' },
         {
             enabled: !!configExists && !!programId,
-            select: (configurations?: Array<DataStoreConfigurationRaw>) =>
-                configurations?.reduce((acc, configuration) => {
+            select: (dataStoreConfigurationRaw) => {
+                const { data: dataStoreConfigurationValidated, validationError } =
+                    validateStructure(dataStoreConfigurationRaw);
+
+                if (validationError) {
+                    log.error(validationError);
+                    return [];
+                }
+
+                return dataStoreConfigurationValidated?.config.reduce((acc, configuration) => {
                     if (configuration.programId === programId) {
                         const configurationWithLocale: DataStoreConfiguration = {
                             ...configuration,
@@ -51,7 +92,8 @@ export const useBulkDataEntryConfigurations = (
                         acc = [...acc, configurationWithLocale];
                     }
                     return acc;
-                }, []),
+                }, []);
+            },
         },
     );
 
@@ -67,6 +109,5 @@ export const useBulkDataEntryConfigurations = (
     return {
         bulkDataEntryConfigurations: data,
         isLoading: namespaceIsLoading || isLoading,
-        isError,
     };
 };

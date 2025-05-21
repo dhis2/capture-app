@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getUserStorageController, userStores } from '../storageControllers';
+import { getUserStorageController, userStores } from 'capture-core/storageControllers';
 
 export type ActiveList = {|
     configKey: string,

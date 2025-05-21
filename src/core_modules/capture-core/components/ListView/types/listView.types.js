@@ -62,7 +62,7 @@ export type CustomRowMenuContent = {|
 |};
 export type CustomRowMenuContents = Array<CustomRowMenuContent>;
 
-export type CustomActionsContents = Array<{key: string, actionContents: React$Node}>;
+export type CustomTopBarActions = Array<{key: string, actionContents: React$Node}>;
 
 export type FiltersData = { [id: string]: FilterData };
 
@@ -95,7 +95,7 @@ export type InterfaceProps = $ReadOnly<{|
     currentPage: number,
     customMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
-    customActionsContents?: CustomActionsContents,
+    customTopBarActions?: CustomTopBarActions,
     dataSource: DataSource,
     filters: FiltersData,
     onChangePage: ChangePage,

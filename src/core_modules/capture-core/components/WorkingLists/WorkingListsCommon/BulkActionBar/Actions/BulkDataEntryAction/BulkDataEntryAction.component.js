@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { useActiveBulkDataEntryList } from '../../../../../WidgetBulkDataEntry';
+import { useBulkDataEntryConfigurations } from '../../../../../common/bulkDataEntry';
 import { type Props } from './BulkDataEntryAction.types';
 import { BulkDataEntryActionDropdownButton } from './BulkDataEntryActionDropdownButton.component';
 
@@ -15,14 +15,14 @@ const styles = {
 
 export const BulkDataEntryActionPlain = ({
     programId,
-    setShowBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     selectionInProgress,
     classes,
 }: Props & CssClasses) => {
-    const { activeList } = useActiveBulkDataEntryList(programId);
+    const { activeList } = useBulkDataEntryConfigurations(programId);
     if (activeList?.configKey) {
         return (
-            <Button small onClick={() => setShowBulkDataEntryPlugin(true)} className={classes.button}>
+            <Button small onClick={onOpenBulkDataEntryPlugin} className={classes.button}>
                 {selectionInProgress
                     ? i18n.t('Add to ongoing bulk data entry')
                     : i18n.t('Add page to ongoing bulk data entry')}
@@ -33,7 +33,7 @@ export const BulkDataEntryActionPlain = ({
     return (
         <BulkDataEntryActionDropdownButton
             programId={programId}
-            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
             selectionInProgress={selectionInProgress}
         />
     );

@@ -1,3 +1,67 @@
+## [102.4.4](https://github.com/dhis2/capture-app/compare/v102.4.3...v102.4.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4093](https://github.com/dhis2/capture-app/issues/4093)) ([23fd8b8](https://github.com/dhis2/capture-app/commit/23fd8b80aecb4a282d89e85490eab7e2cb24fb6b))
+
+## [102.4.3](https://github.com/dhis2/capture-app/compare/v102.4.2...v102.4.3) (2025-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-19467] form inconsistencies ([#4061](https://github.com/dhis2/capture-app/issues/4061)) ([1560585](https://github.com/dhis2/capture-app/commit/1560585d62169c4648d36da8b484bdcda0727d18))
+* [DHIS2-19530] deprecated api query params ([#4063](https://github.com/dhis2/capture-app/issues/4063)) ([8400dd8](https://github.com/dhis2/capture-app/commit/8400dd8627c1674dce287392303d74bff304b20d))
+
+## [102.4.2](https://github.com/dhis2/capture-app/compare/v102.4.1...v102.4.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18839] TEA with number option set value does not show in Profile widget on Capture App ([#4076](https://github.com/dhis2/capture-app/issues/4076)) ([ed6d28d](https://github.com/dhis2/capture-app/commit/ed6d28d4f3a26cbe3a2c01a3c6aaa96737b16769))
+
+## [102.4.1](https://github.com/dhis2/capture-app/compare/v102.4.0...v102.4.1) (2025-05-08)
+
+
+### Bug Fixes
+
+* [DHIS2-18671] Discard changes dialog not responding ([#4059](https://github.com/dhis2/capture-app/issues/4059)) ([11f9223](https://github.com/dhis2/capture-app/commit/11f92234307e04d3ae665e02b2def878741f223d))
+
+# [102.4.0](https://github.com/dhis2/capture-app/compare/v102.3.6...v102.4.0) (2025-05-08)
+
+
+### Features
+
+* [DHIS2-10134] Disable fallback search button when TET have no searchable attributes ([#4060](https://github.com/dhis2/capture-app/issues/4060)) ([107e635](https://github.com/dhis2/capture-app/commit/107e6352c6cba15e998bb45001915722a89cd0c2))
+
+## [102.3.6](https://github.com/dhis2/capture-app/compare/v102.3.5...v102.3.6) (2025-05-08)
+
+
+### Bug Fixes
+
+* [DHIS2-19172] Auto-generated events do not have report date prefilled in new event form ([#4067](https://github.com/dhis2/capture-app/issues/4067)) ([e4ca23e](https://github.com/dhis2/capture-app/commit/e4ca23e1cde4a2d4f583352de41d7cabf84c1c7e))
+
+## [102.3.5](https://github.com/dhis2/capture-app/compare/v102.3.4...v102.3.5) (2025-05-07)
+
+
+### Bug Fixes
+
+* [DHIS2-13236] Incorrect text on top of Profile widget ([#4068](https://github.com/dhis2/capture-app/issues/4068)) ([0ab5c87](https://github.com/dhis2/capture-app/commit/0ab5c878605a1ed02d50d755e3afd2a8cb6c0e03))
+
+## [102.3.4](https://github.com/dhis2/capture-app/compare/v102.3.3...v102.3.4) (2025-05-06)
+
+
+### Bug Fixes
+
+* [DHIS2-19307] load section containing a DE not contained in the PS ([#4021](https://github.com/dhis2/capture-app/issues/4021)) ([58c1959](https://github.com/dhis2/capture-app/commit/58c195927e90fcf426eaba55bd9fe42a1d77fd25))
+
+## [102.3.3](https://github.com/dhis2/capture-app/compare/v102.3.2...v102.3.3) (2025-05-05)
+
+
+### Bug Fixes
+
+* [DHIS2-19450] format updatedAt with en locale ([#4069](https://github.com/dhis2/capture-app/issues/4069)) ([725019c](https://github.com/dhis2/capture-app/commit/725019c22427ecb54dc62579ead27f5ea9bca99e))
+
 ## [102.3.2](https://github.com/dhis2/capture-app/compare/v102.3.1...v102.3.2) (2025-05-02)
 
 

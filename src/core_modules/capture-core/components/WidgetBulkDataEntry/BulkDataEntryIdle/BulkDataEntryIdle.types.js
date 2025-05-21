@@ -1,8 +1,8 @@
 // @flow
-import type { DataStoreConfiguration } from '../WidgetBulkDataEntry.types';
+import type { DataStoreConfiguration } from '../../common/bulkDataEntry';
 
 export type Props = {
-    programId: string,
+    bulkDataEntryConfigurations?: Array<DataStoreConfiguration>,
     onSelectConfiguration: (configKey: string) => Promise<void>,
 };
 

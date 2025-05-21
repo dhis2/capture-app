@@ -3,7 +3,8 @@ export type Props = {|
     pluginSource: string,
     configKey: string,
     dataKey?: string,
-    onClose: () => Promise<void>,
-    onBackToOriginPage: () => void,
-    trackedEntities?: Array<string>,
+    onComplete: () => Promise<void>,
+    onDefer: () => void,
+    trackedEntityIds?: Array<string>,
+    ...CssClasses,
 |};

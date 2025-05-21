@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsBase/BulkActionBar';
+import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
 import { CompleteAction, DeleteAction } from './Actions';
 import type { ProgramStage } from '../../../../metaData';
 
@@ -11,7 +11,7 @@ type Props = {|
     onUpdateList: (disableClearSelection?: boolean) => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
     programId?: string,
-    setShowBulkDataEntryPlugin?: (show: boolean) => void,
+    onOpenBulkDataEntryPlugin?: () => void,
     bulkDataEntryIsActive?: boolean,
 |}
 
@@ -22,7 +22,7 @@ export const EventBulkActions = ({
     removeRowsFromSelection,
     onUpdateList,
     programId,
-    setShowBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     bulkDataEntryIsActive,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
@@ -36,10 +36,10 @@ export const EventBulkActions = ({
             selectedRowsCount={selectedRowsCount}
             onClearSelection={onClearSelection}
         >
-            {programId && setShowBulkDataEntryPlugin && (
+            {programId && onOpenBulkDataEntryPlugin && (
                 <BulkDataEntryAction
                     programId={programId}
-                    setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                    onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                     selectionInProgress
                 />
             )}
