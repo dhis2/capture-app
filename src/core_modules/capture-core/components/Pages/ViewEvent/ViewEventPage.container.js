@@ -19,7 +19,6 @@ const mapStateToProps = (state: ReduxState) => {
         error: state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error,
         ready: !state.activePage.lockedSelectorLoads,
         isUserInteractionInProgress,
-        eventDetailsSection,
         isReadOnly,
         orgUnitId: eventOrgUnitId,
         showAddRelationship: state.viewEventPage.showAddRelationship,
