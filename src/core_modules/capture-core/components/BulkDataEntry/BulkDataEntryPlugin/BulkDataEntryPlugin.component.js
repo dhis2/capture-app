@@ -15,8 +15,8 @@ const BulkDataEntryPluginPlain = ({
     pluginSource,
     configKey,
     dataKey,
-    onClose,
-    onBackToOriginPage,
+    onComplete,
+    onDefer,
     classes,
 }: Props) => {
     const [pluginSize, setPluginSize] = useState({ width: undefined, height: undefined });
@@ -49,7 +49,8 @@ const BulkDataEntryPluginPlain = ({
                 height={pluginSize.height}
                 configKey={configKey}
                 dataKey={dataKey}
-                onClose={onClose}
+                onComplete={onComplete}
+                onDefer={onDefer}
             />
             <div style={{ marginTop: '50px' }}>
                 <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
@@ -58,10 +59,10 @@ const BulkDataEntryPluginPlain = ({
                 <p style={{ marginBottom: '8px' }}>
                     Dummy buttons for testing that will be inside the Plugin.
                 </p>
-                <Button onClick={onBackToOriginPage} style={{ marginRight: '8px' }}>
+                <Button onClick={onDefer} style={{ marginRight: '8px' }}>
                     Back to origin to add trackedEntities
                 </Button>
-                <Button onClick={onClose} style={{ marginRight: '8px' }}>
+                <Button onClick={onComplete} style={{ marginRight: '8px' }}>
                     Close bulk data entry form
                 </Button>
             </div>

@@ -22,12 +22,12 @@ const BulkDataEntryPlain = ({
 }: Props) => {
     const { activeList, removeActiveList } = useBulkDataEntryConfigurations(programId);
 
-    const onClose = useCallback(async () => {
+    const onComplete = useCallback(async () => {
         await removeActiveList();
         setShowBulkDataEntryPlugin(false);
     }, [setShowBulkDataEntryPlugin, removeActiveList]);
 
-    const onBackToOriginPage = useCallback(() => {
+    const onDefer = useCallback(() => {
         setShowBulkDataEntryPlugin(false);
     }, [setShowBulkDataEntryPlugin]);
 
@@ -38,7 +38,7 @@ const BulkDataEntryPlain = ({
     return (
         <div className={classes.container}>
             <BulkDataEntryBreadcrumb
-                onBackToOriginPage={onBackToOriginPage}
+                onBackToOriginPage={onDefer}
                 programId={programId}
                 displayFrontPageList={displayFrontPageList}
                 page={page}
@@ -47,8 +47,8 @@ const BulkDataEntryPlain = ({
                 configKey={activeList.configKey}
                 dataKey={activeList.dataKey}
                 pluginSource={activeList.pluginSource}
-                onClose={onClose}
-                onBackToOriginPage={onBackToOriginPage}
+                onComplete={onComplete}
+                onDefer={onDefer}
             />
         </div>
     );
