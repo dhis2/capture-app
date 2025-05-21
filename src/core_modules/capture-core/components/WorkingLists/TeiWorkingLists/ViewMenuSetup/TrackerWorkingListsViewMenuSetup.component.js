@@ -5,14 +5,13 @@ import { useSelector } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
-import { TrackerWorkingListsActionsSetup } from '../ActionsSetup';
+import { TrackerWorkingListsTopBarActionsSetup } from '../ActionsSetup';
 import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Props } from './TrackerWorkingListsViewMenuSetup.types';
-import { DownloadDialog } from '../../WorkingListsCommon';
+import { DownloadDialog, useSelectedRowsController } from '../../WorkingListsCommon';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/TEIFilters';
 import { FEATURES, useFeature } from '../../../../../capture-core-utils';
-import { useSelectedRowsController } from '../../WorkingListsBase/BulkActionBar';
 import { TrackedEntityBulkActions } from '../TrackedEntityBulkActions';
 
 export const TrackerWorkingListsViewMenuSetup = ({
@@ -24,8 +23,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
     orgUnitId,
     recordsOrder,
     records,
-    setShowBulkDataEntryPlugin,
-    setBulkDataEntryTrackedEntities,
+    onOpenBulkDataEntryPlugin,
     ...passOnProps
 }: Props) => {
     const [customUpdateTrigger, setCustomUpdateTrigger] = useState();
@@ -105,23 +103,6 @@ export const TrackerWorkingListsViewMenuSetup = ({
         [onUpdateList, storeId],
     );
 
-    const injectSelectedRowsToBulkDataEntryPlugin = useCallback(
-        (show: boolean) => {
-            setShowBulkDataEntryPlugin(show);
-            if (selectionInProgress) {
-                setBulkDataEntryTrackedEntities(Object.keys(selectedRows));
-            } else {
-                setBulkDataEntryTrackedEntities(Object.keys(records));
-            }
-        },
-        [
-            setShowBulkDataEntryPlugin,
-            setBulkDataEntryTrackedEntities,
-            selectedRows,
-            records,
-            selectionInProgress,
-        ],
-    );
 
     const handleCustomUpdateTrigger = useCallback((disableClearSelection?: boolean) => {
         const id = uuid();
@@ -139,7 +120,8 @@ export const TrackerWorkingListsViewMenuSetup = ({
             onClearSelection={clearSelection}
             onUpdateList={handleCustomUpdateTrigger}
             removeRowsFromSelection={removeRowsFromSelection}
-            setShowBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
+            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+            recordsOrder={recordsOrder}
         />
     ), [
         program,
@@ -148,12 +130,13 @@ export const TrackerWorkingListsViewMenuSetup = ({
         clearSelection,
         handleCustomUpdateTrigger,
         removeRowsFromSelection,
-        injectSelectedRowsToBulkDataEntryPlugin,
+        onOpenBulkDataEntryPlugin,
+        recordsOrder,
     ]);
 
     return (
         <>
-            <TrackerWorkingListsActionsSetup
+            <TrackerWorkingListsTopBarActionsSetup
                 {...passOnProps}
                 customUpdateTrigger={customUpdateTrigger}
                 program={program}
@@ -170,7 +153,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 onSelectAll={selectAllRows}
                 onRowSelect={toggleRowSelected}
                 bulkActionBarComponent={TrackedEntityBulkActionsComponent}
-                setShowBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
             />
             <DownloadDialog
                 open={downloadDialogOpen}

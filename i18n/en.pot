@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
-"PO-Revision-Date: 2025-05-02T13:23:06.732Z\n"
+"POT-Creation-Date: 2025-05-20T11:31:12.978Z\n"
+"PO-Revision-Date: 2025-05-20T11:31:12.978Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -38,6 +38,9 @@ msgstr ""
 msgid "Bulk data entry"
 msgstr "Bulk data entry"
 
+msgid "Program overview"
+msgstr "Program overview"
+
 msgid "Active enrollments"
 msgstr "Active enrollments"
 
@@ -46,9 +49,6 @@ msgstr "Completed enrollments"
 
 msgid "Cancelled enrollments"
 msgstr "Cancelled enrollments"
-
-msgid "Program overview"
-msgstr "Program overview"
 
 msgid "Search"
 msgstr "Search"
@@ -1889,29 +1889,6 @@ msgstr "an error occurred loading the working lists"
 msgid "an error occurred loading Tracked entity instance lists"
 msgstr "an error occurred loading Tracked entity instance lists"
 
-msgid "Add to ongoing bulk data entry"
-msgstr "Add to ongoing bulk data entry"
-
-msgid "Add page to ongoing bulk data entry"
-msgstr "Add page to ongoing bulk data entry"
-
-msgid "Available bulk entry forms"
-msgstr "Available bulk entry forms"
-
-msgid "Open in bulk data entry"
-msgstr "Open in bulk data entry"
-
-msgid "Open page in bulk data entry"
-msgstr "Open page in bulk data entry"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} selected"
-msgstr[1] "{{count}} selected"
-
-msgid "Deselect all"
-msgstr "Deselect all"
-
 msgid "Update view"
 msgstr "Update view"
 
@@ -1944,6 +1921,29 @@ msgstr "Show Less"
 
 msgid "Show All"
 msgstr "Show All"
+
+msgid "Add to ongoing bulk data entry"
+msgstr "Add to ongoing bulk data entry"
+
+msgid "Add page to ongoing bulk data entry"
+msgstr "Add page to ongoing bulk data entry"
+
+msgid "Available bulk entry forms"
+msgstr "Available bulk entry forms"
+
+msgid "Open in bulk data entry"
+msgstr "Open in bulk data entry"
+
+msgid "Open page in bulk data entry"
+msgstr "Open page in bulk data entry"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} selected"
+msgstr[1] "{{count}} selected"
+
+msgid "Deselect all"
+msgstr "Deselect all"
 
 msgid "Download as JSON"
 msgstr "Download as JSON"

@@ -9,9 +9,9 @@ const styles = {
     },
 };
 
-const ActionsPlain = ({ customActionsContents = [], classes }: Props & CssClasses) => (
+const ActionsPlain = ({ customTopBarActions = [], classes }: Props & CssClasses) => (
     <div className={classes.container}>
-        {customActionsContents.map(({ key, actionContents }) => (
+        {customTopBarActions.map(({ key, actionContents }) => (
             <React.Fragment key={key}>
                 {actionContents}
             </React.Fragment>

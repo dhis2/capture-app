@@ -1,18 +1,18 @@
 // @flow
 import React, { useMemo } from 'react';
 import { TeiWorkingListsSetup } from '../Setup';
-import type { CustomActionsContents } from '../../WorkingListsBase';
-import type { Props } from './TrackerWorkingListsActionsSetup.types';
-import { BulkDataEntryAction } from '../../WorkingListsBase/BulkActionBar';
+import type { CustomTopBarActions } from '../../WorkingListsBase';
+import type { Props } from './TrackerWorkingListsTopBarActionsSetup.types';
+import { BulkDataEntryAction } from '../../WorkingListsCommon';
 
-export const TrackerWorkingListsActionsSetup = ({
+export const TrackerWorkingListsTopBarActionsSetup = ({
     program,
-    setShowBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     selectionInProgress,
-    records,
+    recordsOrder,
     ...passOnProps
 }: Props) => {
-    const customActionsContents: CustomActionsContents = useMemo(
+    const customTopBarActions: CustomTopBarActions = useMemo(
         () => [
             {
                 key: 'bulkDataEntryAction',
@@ -20,22 +20,22 @@ export const TrackerWorkingListsActionsSetup = ({
                     <BulkDataEntryAction
                         key="bulkDataEntryAction"
                         programId={program?.id}
-                        setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                        onOpenBulkDataEntryPlugin={() => onOpenBulkDataEntryPlugin(recordsOrder)}
                         selectionInProgress={selectionInProgress}
                     />
                 ),
             },
         ],
-        [program, setShowBulkDataEntryPlugin, selectionInProgress],
+        [program, onOpenBulkDataEntryPlugin, recordsOrder, selectionInProgress],
     );
 
     return (
         <TeiWorkingListsSetup
             {...passOnProps}
             program={program}
-            records={records}
+            recordsOrder={recordsOrder}
             selectionInProgress={selectionInProgress}
-            customActionsContents={customActionsContents}
+            customTopBarActions={customTopBarActions}
         />
     );
 };

@@ -15,12 +15,12 @@ const BulkDataEntryPluginPlain = ({
     pluginSource,
     configKey,
     dataKey,
-    onClose,
-    onBackToOriginPage,
-    trackedEntities,
+    onComplete,
+    onDefer,
+    trackedEntityIds,
     classes,
 }: Props) => {
-    const [size, setPluginSize] = useState({ width: undefined, height: undefined });
+    const [pluginSize, setPluginSize] = useState({ width: undefined, height: undefined });
     const containerRef = useRef<?HTMLDivElement>();
 
     useEffect(() => {
@@ -46,12 +46,13 @@ const BulkDataEntryPluginPlain = ({
         <div ref={containerRef} className={classes.container}>
             <Plugin
                 pluginSource={pluginSource}
-                width={size.width}
-                height={size.height}
+                width={pluginSize.width}
+                height={pluginSize.height}
                 configKey={configKey}
                 dataKey={dataKey}
-                onClose={onClose}
-                trackedEntities={trackedEntities}
+                onComplete={onComplete}
+                onDefer={onDefer}
+                trackedEntityIds={trackedEntityIds}
             />
             <div style={{ marginTop: '50px' }}>
                 <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
@@ -60,15 +61,15 @@ const BulkDataEntryPluginPlain = ({
                 <p style={{ marginBottom: '8px' }}>
                     Dummy buttons for testing that will be inside the Plugin.
                 </p>
-                <Button onClick={onBackToOriginPage} style={{ marginRight: '8px' }}>
+                <Button onClick={onDefer} style={{ marginRight: '8px' }}>
                     Back to origin to add trackedEntities
                 </Button>
-                <Button onClick={onClose} style={{ marginRight: '8px' }}>
+                <Button onClick={onComplete} style={{ marginRight: '8px' }}>
                     Close bulk data entry form
                 </Button>
                 <p style={{ marginTop: '16px' }}>List of the latest trackedEntities passed on to the Plugin for testing. The Plugin will be solely responsible for caching and keeping track of these trackedEntities</p>
                 <ul style={{ paddingLeft: '20px', listStyleType: 'disc' }}>
-                    {trackedEntities?.map(te => (
+                    {trackedEntityIds?.map(te => (
                         <li key={te} style={{ marginBottom: '4px' }}>
                             {te}
                         </li>

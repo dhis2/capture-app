@@ -15,25 +15,19 @@ const styles = () => ({
 
 const BulkDataEntryPlain = ({
     programId,
-    setShowBulkDataEntryPlugin,
-    setBulkDataEntryTrackedEntities,
+    onCloseBulkDataEntryPlugin,
     displayFrontPageList,
     page,
-    trackedEntities,
+    trackedEntityIds,
     classes,
 }: Props) => {
     const { activeList, removeActiveList } = useBulkDataEntryConfigurations(programId);
 
-    const onClose = useCallback(async () => {
+    const onComplete = useCallback(async () => {
         await removeActiveList();
-        setShowBulkDataEntryPlugin(false);
-        setBulkDataEntryTrackedEntities && setBulkDataEntryTrackedEntities(null);
-    }, [setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities, removeActiveList]);
+        onCloseBulkDataEntryPlugin();
+    }, [onCloseBulkDataEntryPlugin, removeActiveList]);
 
-    const onBackToOriginPage = useCallback(() => {
-        setShowBulkDataEntryPlugin(false);
-        setBulkDataEntryTrackedEntities && setBulkDataEntryTrackedEntities(null);
-    }, [setShowBulkDataEntryPlugin, setBulkDataEntryTrackedEntities]);
 
     if (!activeList) {
         return null;
@@ -42,7 +36,7 @@ const BulkDataEntryPlain = ({
     return (
         <div className={classes.container}>
             <BulkDataEntryBreadcrumb
-                onBackToOriginPage={onBackToOriginPage}
+                onBackToOriginPage={onCloseBulkDataEntryPlugin}
                 programId={programId}
                 displayFrontPageList={displayFrontPageList}
                 page={page}
@@ -51,9 +45,9 @@ const BulkDataEntryPlain = ({
                 configKey={activeList.configKey}
                 dataKey={activeList.dataKey}
                 pluginSource={activeList.pluginSource}
-                onClose={onClose}
-                onBackToOriginPage={onBackToOriginPage}
-                trackedEntities={trackedEntities}
+                onComplete={onComplete}
+                onDefer={onCloseBulkDataEntryPlugin}
+                trackedEntityIds={trackedEntityIds}
             />
         </div>
     );

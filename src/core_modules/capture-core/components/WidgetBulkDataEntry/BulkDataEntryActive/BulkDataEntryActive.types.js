@@ -1,7 +1,7 @@
 // @flow
 export type Props = {
     title: string,
-    setShowBulkDataEntryPlugin: (show: boolean) => void,
+    onOpenBulkDataEntryPlugin: () => void,
 };
 
 export type PlainProps = {

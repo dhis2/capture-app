@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -600,19 +600,6 @@ msgstr "注意"
 msgid "Close the notice"
 msgstr "关闭通知"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "ID为“ {{enrollmentId}}”的报名不存在"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr ""
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr "获取注册时出错。请输入有效网址。"
-
 msgid "No feedback for this enrollment yet"
 msgstr "此报名尚无反馈"
 
@@ -686,6 +673,19 @@ msgstr "在此项目中创建一个新事件。"
 
 msgid "View working list in this program."
 msgstr "查看此项目中的工作清单。"
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "ID为“ {{enrollmentId}}”的报名不存在"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "获取注册时出错。请输入有效网址。"
 
 msgid "Page is missing required values from URL"
 msgstr "页面缺少 URL 中的必需值"
@@ -901,6 +901,12 @@ msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
 
+msgid "Missing search criteria"
+msgstr "缺少搜索条件"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "无法检索元数据。请稍后再试。"
 
@@ -931,7 +937,7 @@ msgstr "添加关系"
 msgid "No results found for "
 msgstr "没有找到结果"
 
-msgid "Choose an organisation unit"
+msgid "Choose an organisation unit in the form below"
 msgstr ""
 
 msgid "Clear selection"
@@ -979,6 +985,9 @@ msgid ""
 "that use type "
 msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "搜索所有项目"
 
@@ -1006,9 +1015,6 @@ msgid ""
 "looking for."
 msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
-msgid "Back to search"
-msgstr "返回搜寻"
-
 msgid "An error has occurred"
 msgstr "发生了错误"
 
@@ -1017,9 +1023,6 @@ msgstr "结果太多"
 
 msgid "Cannot search in all programs"
 msgstr "无法在所有程序中搜索"
-
-msgid "Missing search criteria"
-msgstr "缺少搜索条件"
 
 msgid "Results found"
 msgstr "找到的结果"
@@ -1254,6 +1257,12 @@ msgstr "转到“安排”选项卡重新安排此活动"
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "无法更改 {{ eventStatus }} 事件的预定日期"
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr "事件完成"
 
@@ -1290,10 +1299,13 @@ msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "今天在 {{orgUnitName}} 有 {{count}} 个已经安排的事件。"
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgstr[0] ""
 
 msgid "Schedule date / Due date"
 msgstr "计划日期/截止日期"
@@ -1316,11 +1328,13 @@ msgstr ""
 msgid "Save note"
 msgstr "保存笔记"
 
+msgid "Edit {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
-msgstr "在此处更改有关此 {{trackedEntityName}} 的信息。要更改有关此报名的信息，请使用此仪表板上“报名”框中的“编辑”按钮"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
+msgstr ""
 
 msgid " Loading..."
 msgstr " 正在加载..."
@@ -1523,6 +1537,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Data item"
+msgstr ""
+
 msgid "Updated"
 msgstr "更新的"
 
@@ -1535,10 +1552,16 @@ msgstr "删除的"
 msgid "Date"
 msgstr "日期"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr "用户"
 
-msgid "Data item"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
 msgstr ""
 
 msgid "Change"
@@ -1651,6 +1674,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"

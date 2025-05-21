@@ -45,7 +45,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
             filters,
             columns,
             customMenuContents,
-            customActionsContents,
+            customTopBarActions,
             onSetColumnOrder,
             isSelectionInProgress,
             bulkActionBarComponent,
@@ -65,7 +65,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
                     {filters}
                 </div>
                 <div className={classes.topBarRightContainer}>
-                    <Actions customActionsContents={customActionsContents} />
+                    <Actions customTopBarActions={customTopBarActions} />
                     <ColumnSelector
                         onSave={onSetColumnOrder}
                         columns={columns}
@@ -100,7 +100,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
             onRowSelect,
             onSelectAll,
             customRowMenuContents,
-            customActionsContents,
+            customTopBarActions,
             isSelectionInProgress,
             ...passOnProps
         } = this.props;
@@ -115,7 +115,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
                 showSelectCheckBox
                 isSelectionInProgress={isSelectionInProgress}
                 customRowMenuContents={customRowMenuContents}
-                customActionsContents={customActionsContents}
+                customTopBarActions={customTopBarActions}
                 onRowClick={onClickListRow}  // TODO: Fix row click naming for the online and offline list
                 onRowSelect={onRowSelect}
                 onSelectAll={onSelectAll}
