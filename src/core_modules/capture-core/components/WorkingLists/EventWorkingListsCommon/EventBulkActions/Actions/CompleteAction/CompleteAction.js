@@ -9,7 +9,8 @@ import { Widget } from '../../../../../Widget';
 
 type Props = {|
     selectedRows: { [key: string]: boolean },
-    disabled?: boolean,
+    stageDataWriteAccess?: boolean,
+    bulkDataEntryIsActive?: boolean,
     onUpdateList: (disableClearSelections?: boolean) => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
 |}
@@ -28,15 +29,28 @@ const styles = {
     },
 };
 
+const getTooltipContent = (stageDataWriteAccess?: boolean, bulkDataEntryIsActive?: boolean) => {
+    if (!stageDataWriteAccess) {
+        return i18n.t('You do not have access to complete events');
+    }
+    if (bulkDataEntryIsActive) {
+        return i18n.t('There is a bulk data entry with unsaved changes');
+    }
+    return '';
+};
+
 const CompleteActionPlain = ({
     selectedRows,
-    disabled,
+    stageDataWriteAccess,
+    bulkDataEntryIsActive,
     removeRowsFromSelection,
     onUpdateList,
     classes,
-}) => {
+}: Props & CssClasses) => {
     const [isCompleteDialogOpen, setIsCompleteDialogOpen] = useState(false);
     const [openAccordion, setOpenAccordion] = useState(false);
+    const tooltipContent = getTooltipContent(stageDataWriteAccess, bulkDataEntryIsActive);
+    const disabled = !stageDataWriteAccess || bulkDataEntryIsActive;
     const {
         eventCounts,
         isLoading,
@@ -55,7 +69,7 @@ const CompleteActionPlain = ({
         <>
             <ConditionalTooltip
                 enabled={disabled}
-                content={i18n.t('You do not have access to complete events')}
+                content={tooltipContent}
             >
                 <Button
                     small

@@ -11,7 +11,18 @@ type Props = {
     programDataWriteAccess: boolean,
     programId: string,
     onUpdateList: () => void,
+    bulkDataEntryIsActive: boolean,
 }
+
+const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
+    if (!programDataWriteAccess) {
+        return i18n.t('You do not have access to delete enrollments');
+    }
+    if (bulkDataEntryIsActive) {
+        return i18n.t('There is a bulk data entry with unsaved changes');
+    }
+    return '';
+};
 
 const CASCADE_DELETE_TEI_AUTHORITY = 'F_ENROLLMENT_CASCADE_DELETE';
 
@@ -20,9 +31,12 @@ export const DeleteEnrollmentsAction = ({
     programDataWriteAccess,
     programId,
     onUpdateList,
+    bulkDataEntryIsActive,
 }: Props) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { hasAuthority } = useAuthority({ authority: CASCADE_DELETE_TEI_AUTHORITY });
+    const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
+    const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
     if (!hasAuthority) {
         return null;
@@ -31,12 +45,12 @@ export const DeleteEnrollmentsAction = ({
     return (
         <>
             <ConditionalTooltip
-                enabled={!programDataWriteAccess}
-                content={i18n.t('You do not have access to delete enrollments')}
+                enabled={disabled}
+                content={tooltipContent}
             >
                 <Button
                     small
-                    disabled={!programDataWriteAccess}
+                    disabled={disabled}
                     onClick={() => setIsDeleteDialogOpen(true)}
                 >
                     {i18n.t('Delete enrollments')}
