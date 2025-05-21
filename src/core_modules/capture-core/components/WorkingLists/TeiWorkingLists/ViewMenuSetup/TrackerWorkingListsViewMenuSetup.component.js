@@ -103,10 +103,6 @@ export const TrackerWorkingListsViewMenuSetup = ({
         [onUpdateList, storeId],
     );
 
-    const injectSelectedRowsToBulkDataEntryPlugin = useCallback(
-        () => onOpenBulkDataEntryPlugin(selectionInProgress ? Object.keys(selectedRows) : Object.keys(records)),
-        [onOpenBulkDataEntryPlugin, selectedRows, records, selectionInProgress],
-    );
 
     const handleCustomUpdateTrigger = useCallback((disableClearSelection?: boolean) => {
         const id = uuid();
@@ -124,7 +120,8 @@ export const TrackerWorkingListsViewMenuSetup = ({
             onClearSelection={clearSelection}
             onUpdateList={handleCustomUpdateTrigger}
             removeRowsFromSelection={removeRowsFromSelection}
-            onOpenBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
+            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+            recordsOrder={recordsOrder}
         />
     ), [
         program,
@@ -133,7 +130,8 @@ export const TrackerWorkingListsViewMenuSetup = ({
         clearSelection,
         handleCustomUpdateTrigger,
         removeRowsFromSelection,
-        injectSelectedRowsToBulkDataEntryPlugin,
+        onOpenBulkDataEntryPlugin,
+        recordsOrder,
     ]);
 
     return (
@@ -155,7 +153,7 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 onSelectAll={selectAllRows}
                 onRowSelect={toggleRowSelected}
                 bulkActionBarComponent={TrackedEntityBulkActionsComponent}
-                onOpenBulkDataEntryPlugin={injectSelectedRowsToBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
             />
             <DownloadDialog
                 open={downloadDialogOpen}

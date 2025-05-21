@@ -9,7 +9,7 @@ export const TrackerWorkingListsTopBarActionsSetup = ({
     program,
     onOpenBulkDataEntryPlugin,
     selectionInProgress,
-    records,
+    recordsOrder,
     ...passOnProps
 }: Props) => {
     const customTopBarActions: CustomTopBarActions = useMemo(
@@ -20,20 +20,20 @@ export const TrackerWorkingListsTopBarActionsSetup = ({
                     <BulkDataEntryAction
                         key="bulkDataEntryAction"
                         programId={program?.id}
-                        onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+                        onOpenBulkDataEntryPlugin={() => onOpenBulkDataEntryPlugin(recordsOrder)}
                         selectionInProgress={selectionInProgress}
                     />
                 ),
             },
         ],
-        [program, onOpenBulkDataEntryPlugin, selectionInProgress],
+        [program, onOpenBulkDataEntryPlugin, recordsOrder, selectionInProgress],
     );
 
     return (
         <TeiWorkingListsSetup
             {...passOnProps}
             program={program}
-            records={records}
+            recordsOrder={recordsOrder}
             selectionInProgress={selectionInProgress}
             customTopBarActions={customTopBarActions}
         />
