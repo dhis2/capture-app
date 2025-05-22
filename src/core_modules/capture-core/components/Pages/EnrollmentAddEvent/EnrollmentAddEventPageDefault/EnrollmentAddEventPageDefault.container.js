@@ -184,7 +184,6 @@ export const EnrollmentAddEventPageDefault = ({
                 enrollmentId={enrollmentId}
                 onBackToMainPage={onBackToMainPage}
                 onBackToDashboard={handleCancel}
-                trackedEntityName={trackedEntityName}
                 userInteractionInProgress={userInteractionInProgress}
                 onSave={handleSave}
                 onCancel={handleCancel}

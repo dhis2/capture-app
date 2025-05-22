@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 // $FlowFixMe
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
@@ -37,10 +37,13 @@ const useMainPageStatus = ({
     orgUnitId,
     showAllAccessible,
     categoryOptionIsInvalidForOrgUnit,
+    showBulkDataEntryPlugin,
 }) => {
     const withoutOrgUnit = useMemo(() => !orgUnitId && !showAllAccessible, [orgUnitId, showAllAccessible]);
 
     return useMemo(() => {
+        if (showBulkDataEntryPlugin) return MainPageStatuses.SHOW_BULK_DATA_ENTRY_PLUGIN;
+
         if (!programId) return MainPageStatuses.DEFAULT;
 
         if (selectedProgram?.categoryCombination) {
@@ -63,7 +66,7 @@ const useMainPageStatus = ({
         }
 
         return MainPageStatuses.SHOW_WORKING_LIST;
-    }, [programId, selectedProgram, withoutOrgUnit, categories, categoryOptionIsInvalidForOrgUnit]);
+    }, [programId, selectedProgram, withoutOrgUnit, categories, categoryOptionIsInvalidForOrgUnit, showBulkDataEntryPlugin]);
 };
 
 const useSelectorMainPage = () =>
@@ -97,6 +100,7 @@ const useCallbackMainPage = ({ orgUnitId, programId, showAllAccessible, navigate
 };
 
 const MainPageContainer = () => {
+    const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { all, programId, orgUnitId, selectedTemplateId } = useLocationQuery();
@@ -123,6 +127,7 @@ const MainPageContainer = () => {
         orgUnitId,
         showAllAccessible,
         categoryOptionIsInvalidForOrgUnit,
+        showBulkDataEntryPlugin,
     });
 
     const {
@@ -181,6 +186,7 @@ const MainPageContainer = () => {
                 error={error}
                 ready={ready}
                 displayFrontPageList={displayFrontPageList}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
             />
         </OrgUnitFetcher>
     );

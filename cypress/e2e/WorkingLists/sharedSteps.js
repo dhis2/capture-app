@@ -129,13 +129,15 @@ When('you change rows per page to 10', () => {
 });
 
 When(/^you select the first (.*) rows$/, (rows) => {
-    cy.get('[data-test="dhis2-uicore-tablebody"]')
-        .find('tr')
-        .each(($tr, index) => {
-            if (index < rows) {
-                cy.wrap($tr).find('[data-test="select-row-checkbox"]').click();
-            }
-        });
+    cy.get('[data-test="online-list-table"]').within(() => {
+        cy.get('[data-test="dhis2-uicore-tablebody"]')
+            .find('tr')
+            .each(($tr, index) => {
+                if (index < rows) {
+                    cy.wrap($tr).find('[data-test="select-row-checkbox"]').click();
+                }
+            });
+    });
 });
 
 Then(/^the bulk action bar should say (.*) selected$/, (rows) => {
@@ -144,15 +146,17 @@ Then(/^the bulk action bar should say (.*) selected$/, (rows) => {
 });
 
 Then(/^the first (.*) rows should be selected$/, (rows) => {
-    cy.get('[data-test="dhis2-uicore-tablebody"]')
-        .find('tr')
-        .each(($tr, index) => {
-            if (index < rows) {
-                cy.wrap($tr)
-                    .should('have.class', 'selected')
-                    .find('[data-test="select-row-checkbox"]');
-            }
-        });
+    cy.get('[data-test="online-list-table"]').within(() => {
+        cy.get('[data-test="dhis2-uicore-tablebody"]')
+            .find('tr')
+            .each(($tr, index) => {
+                if (index < rows) {
+                    cy.wrap($tr)
+                        .should('have.class', 'selected')
+                        .find('[data-test="select-row-checkbox"]');
+                }
+            });
+    });
 });
 
 When('you select all rows', () => {
@@ -160,13 +164,15 @@ When('you select all rows', () => {
 });
 
 Then('all rows should be selected', () => {
-    cy.get('[data-test="dhis2-uicore-tablebody"]')
-        .find('tr')
-        .each(($tr) => {
-            cy.wrap($tr)
-                .should('have.class', 'selected')
-                .find('[data-test="select-row-checkbox"]');
-        });
+    cy.get('[data-test="online-list-table"]').within(() => {
+        cy.get('[data-test="dhis2-uicore-tablebody"]')
+            .find('tr')
+            .each(($tr) => {
+                cy.wrap($tr)
+                    .should('have.class', 'selected')
+                    .find('[data-test="select-row-checkbox"]');
+            });
+    });
 });
 
 Then('the bulk action bar should not be present', () => {

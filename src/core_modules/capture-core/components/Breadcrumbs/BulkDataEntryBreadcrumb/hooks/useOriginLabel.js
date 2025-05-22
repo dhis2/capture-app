@@ -2,12 +2,14 @@
 import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { breadcrumbsKeys } from '../BulkDataEntryBreadcrumb';
 
 type Props = {
     programId: string,
-    displayFrontPageList: boolean,
+    displayFrontPageList?: boolean,
     trackedEntityName?: string,
-}
+    page: string,
+};
 
 const DefaultFilterLabels = {
     default: i18n.t('Program overview'),
@@ -16,10 +18,17 @@ const DefaultFilterLabels = {
     cancelled: i18n.t('Cancelled enrollments'),
 };
 
-export const useWorkingListLabel = ({
-    programId,
-    displayFrontPageList,
-}: Props) => {
+const getWorkingListLabel = (selectedTemplate, selectedTemplateId) => {
+    if (selectedTemplate && !selectedTemplate.isDefault) {
+        return selectedTemplate.name;
+    }
+    if (selectedTemplateId && !selectedTemplate) {
+        return DefaultFilterLabels[selectedTemplateId];
+    }
+    return i18n.t('Program overview');
+};
+
+export const useOriginLabel = ({ programId, displayFrontPageList, page }: Props) => {
     const workingListTemplates = useSelector(({ workingListsTemplates }) => workingListsTemplates?.teiList);
     const workingListProgramId = useSelector(({ workingListsContext }) => workingListsContext?.teiList?.programIdView);
     const { selectedTemplateId, loading: isLoadingTemplates, templates } = workingListTemplates ?? {};
@@ -27,22 +36,21 @@ export const useWorkingListLabel = ({
     const isSameProgram = workingListProgramId === programId;
 
     const label = useMemo(() => {
-        if (isLoadingTemplates) return '...';
-
-        if (isSameProgram) {
-            if (selectedTemplate && !selectedTemplate.isDefault) {
-                return selectedTemplate.name;
-            }
-
-            if (selectedTemplateId && !selectedTemplate) {
-                return DefaultFilterLabels[selectedTemplateId];
-            }
-
-            return i18n.t('Program overview');
+        if (page === breadcrumbsKeys.SEARCH_PAGE) {
+            return i18n.t('Search');
         }
 
-        if (!displayFrontPageList) return i18n.t('Search');
+        if (isLoadingTemplates) {
+            return '...';
+        }
 
+        if (isSameProgram) {
+            return getWorkingListLabel(selectedTemplate, selectedTemplateId);
+        }
+
+        if (!displayFrontPageList) {
+            return i18n.t('Search');
+        }
         return i18n.t('Program overview');
     }, [
         displayFrontPageList,
@@ -50,6 +58,7 @@ export const useWorkingListLabel = ({
         isSameProgram,
         selectedTemplate,
         selectedTemplateId,
+        page,
     ]);
 
     return {
