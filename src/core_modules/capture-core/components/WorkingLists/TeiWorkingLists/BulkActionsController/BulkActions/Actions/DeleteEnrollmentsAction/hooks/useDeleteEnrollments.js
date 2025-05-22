@@ -4,9 +4,9 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
-import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../utils/api';
-import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../utils/reactQueryHelpers';
-import { errorCreator, FEATURES, featureAvailable } from '../../../../../../../../capture-core-utils';
+import { errorCreator, FEATURES, featureAvailable } from 'capture-core-utils';
+import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../../../../../../utils/api';
+import { ReactQueryAppNamespace, useApiDataQuery } from '../../../../../../../../utils/reactQueryHelpers';
 
 type Props = {
     selectedRows: { [id: string]: boolean },

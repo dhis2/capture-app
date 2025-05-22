@@ -1,6 +1,6 @@
 // @flow
 import type { TrackerProgram } from '../../../../metaData';
-import type { TeiWorkingListsReduxOutputProps } from '../ReduxProvider';
+import type { TrackerWorkingListsBulkActionsSetupOutputProps } from '../BulkActionsController';
 import type {
     CustomColumnOrder,
     RecordsOrder,
@@ -10,9 +10,8 @@ import type {
     DeleteTemplate,
     UpdateTemplate,
 } from '../../WorkingListsCommon';
-import type { FiltersData, WorkingListTemplates, SetTemplateSharingSettings } from '../../WorkingListsBase';
-import type { LoadTeiView, TeiRecords } from '../types';
-import type { TrackerWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup/TrackerWorkingListsViewMenuSetup.types';
+import type { WorkingListTemplates, ResetColumnOrder } from '../../WorkingListsBase';
+import type { LoadTeiView, TeiRecords, ApiTrackerQueryCriteria, TeiWorkingListsTemplates } from '../types';
 
 type ExtractedProps = $ReadOnly<{|
     customColumnOrder?: CustomColumnOrder,
@@ -20,27 +19,21 @@ type ExtractedProps = $ReadOnly<{|
     onAddTemplate: AddTemplate,
     onDeleteTemplate: DeleteTemplate,
     onUpdateTemplate: UpdateTemplate,
-    onSetTemplateSharingSettings: SetTemplateSharingSettings,
     onUpdateList: UpdateList,
     program: TrackerProgram,
     records?: TeiRecords,
     recordsOrder?: RecordsOrder,
     currentTemplateId?: string,
-    initialViewConfig: InitialViewConfig,
-    filters?: FiltersData,
-    sortById: string,
-    sortByDirection: string,
-    templateSharingType: string,
+    initialViewConfig?: InitialViewConfig,
     apiTemplates: WorkingListTemplates,
-    forceUpdateOnMount?: boolean,
+    onResetListColumnOrder: ResetColumnOrder,
+    onPreserveCurrentViewState: (templateId: string, critera: ApiTrackerQueryCriteria) => void,
+    templates?: TeiWorkingListsTemplates
 |}>;
+
+type RestProps = $Rest<TrackerWorkingListsBulkActionsSetupOutputProps, ExtractedProps>;
 
 export type Props = $ReadOnly<{|
-    ...TrackerWorkingListsViewMenuSetupOutputProps,
-    ...ExtractedProps,
-|}>;
-
-export type TrackerWorkingListsSetupOutputProps = $ReadOnly<{|
-    ...TeiWorkingListsReduxOutputProps,
+    ...RestProps,
     ...ExtractedProps,
 |}>;

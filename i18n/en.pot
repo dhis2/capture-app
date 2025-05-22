@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
-"PO-Revision-Date: 2025-05-02T13:23:06.732Z\n"
+"POT-Creation-Date: 2025-05-22T12:31:36.902Z\n"
+"PO-Revision-Date: 2025-05-22T12:31:36.902Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1729,24 +1729,6 @@ msgstr "Delete events"
 msgid "This cannot be undone. Are you sure you want to delete the selected events?"
 msgstr "This cannot be undone. Are you sure you want to delete the selected events?"
 
-msgid "Owner organisation unit"
-msgstr "Owner organisation unit"
-
-msgid "Registration Date"
-msgstr "Registration Date"
-
-msgid "Inactive"
-msgstr "Inactive"
-
-msgid "Enrollment status"
-msgstr "Enrollment status"
-
-msgid "Follow up"
-msgstr "Follow up"
-
-msgid "Choose a program stage to filter by {{label}}"
-msgstr "Choose a program stage to filter by {{label}}"
-
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
 "completing the rest. Please see the details below."
@@ -1870,6 +1852,24 @@ msgstr ""
 
 msgid "An error occurred while deleting the records"
 msgstr "An error occurred while deleting the records"
+
+msgid "Owner organisation unit"
+msgstr "Owner organisation unit"
+
+msgid "Registration Date"
+msgstr "Registration Date"
+
+msgid "Inactive"
+msgstr "Inactive"
+
+msgid "Enrollment status"
+msgstr "Enrollment status"
+
+msgid "Follow up"
+msgstr "Follow up"
+
+msgid "Choose a program stage to filter by {{label}}"
+msgstr "Choose a program stage to filter by {{label}}"
 
 msgid "Working list could not be updated"
 msgstr "Working list could not be updated"

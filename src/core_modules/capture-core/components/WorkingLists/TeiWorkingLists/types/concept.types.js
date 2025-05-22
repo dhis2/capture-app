@@ -76,11 +76,11 @@ export type LoadTeiView = (
         orgUnitId: string,
         categories?: Categories,
         programStageId?: string,
-        currentRequest?: string,
     |},
     meta: {|
         columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
         filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     |},
-) => Promise<void> | void;
+) => Promise<void>;
 
+export type UpdateTrackerList = (queryArgs: Object, meta: Object) => void;

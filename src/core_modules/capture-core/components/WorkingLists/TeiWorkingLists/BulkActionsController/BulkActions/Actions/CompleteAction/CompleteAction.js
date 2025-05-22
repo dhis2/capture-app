@@ -14,10 +14,10 @@ import {
     ModalContent,
     ModalTitle,
 } from '@dhis2/ui';
-import { ConditionalTooltip } from '../../../../../Tooltips/ConditionalTooltip';
+import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
 import { useCompleteBulkEnrollments } from './hooks/useCompleteBulkEnrollments';
-import { Widget } from '../../../../../Widget';
-import type { ProgramStage } from '../../../../../../metaData';
+import { Widget } from '../../../../../../Widget';
+import type { ProgramStage } from '../../../../../../../metaData';
 
 type Props = {
     selectedRows: { [id: string]: any },
