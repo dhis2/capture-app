@@ -14,43 +14,57 @@ To enable bulk data entry functionality, you need to configure the data store in
 
 ## Configuration Structure
 
-In the `bulkDataEntry` key you created, you can store your bulk data entry form configurations. Each configuration is defined as a JSON object within an array, where each object represents a specific bulk data entry form. Below is an example configuration with three different forms:
+In the `bulkDataEntry` key you created, you can store your bulk data entry form configurations. The structure is as follows:
 
 ```json title="capture/bulkDataEntry"
-[
-  {
-    "configKey": "routineVisit", 
-    "dataKey": "routineVisit",
-    "programId": "IpHINAT79UW",
-    "pluginSource": "https://{instance-url}/api/apps/{name-of-plugin}/plugin.html",
-    "title": {
-      "en": "Routine visit"
-    },
-    "subtitle": {
-      "en": "Covers all patient visit forms"
-    },
-  },
-  {
-    "configKey": "treatment",
-    "programId": "IpHINAT79UW",
-    "pluginSource": "https://{instance-url}/api/apps/{name-of-plugin}/plugin.html",
-    "title": {
-      "en": "Treatment",
-      "es": "Tratamiento"
-    },
-  },
-  {
-    "configKey": "caseBasedSurveillance",
-    "programId": "uy2gU8kT1jF",
-    "pluginSource": "https://{instance-url}/api/apps/{name-of-plugin}/plugin.html",
-    "title": {
-      "en": "Case based surveillance"
-    },
-    "subtitle": {
-      "en": "Covers ad-hoc visits and RMNCH238972"
-    },
+{
+    "version": 1,
+    "config": []
 }
-]
+```
+
+The `version` field indicates the configuration version as a number. The `config` array contains one or more bulk data entry configuration objects. Below is an example showcasing three different configurations:
+
+```json title="capture/bulkDataEntry"
+{
+    "version": 1,
+    "config": [
+        {
+            "title": {
+                "en": "Routine visit"
+            },
+            "dataKey": "routineVisit",
+            "subtitle": {
+                "en": "Covers all patient visit forms"
+            },
+            "configKey": "routineVisit",
+            "programId": "IpHINAT79UW",
+            "pluginSource": "https://debug.dhis2.org/dev"
+        },
+        {
+            "title": {
+                "es": "Tratamiento",
+                "en": "Treatment",
+                "fr": "Traitement",
+                "no": "Behandling"
+            },
+            "configKey": "treatment",
+            "programId": "IpHINAT79UW",
+            "pluginSource": "https://developers.dhis2.org/docs/capture-plugins/developer/getting-started"
+        },
+        {
+            "title": {
+                "en": "Case based surveillance"
+            },
+            "subtitle": {
+                "en": "Covers ad-hoc visits and RMNCH238972"
+            },
+            "configKey": "caseBasedSurveillance",
+            "programId": "uy2gU8kT1jF",
+            "pluginSource": "https://docs.dhis2.org/en/home.html"
+        }
+    ]
+}
 ```
 
 ### Configuration Fields
@@ -68,7 +82,7 @@ Each configuration object requires the following fields:
 
 ## Selecting a Plugin Configuration
 
-Once configured, bulk data entry plugins are accessible in multiple locations throughout the Capture app. You'll find them displayed as widgets on both the program overview and search pages:
+Once configured, bulk data entry plugins are accessible in multiple locations throughout the Capture app. You'll find them displayed as widgets on both the Program overview and Search pages:
 
 ![Widget bulk data entry main page](../resources/widget-bulk-data-entry-main-page.png)
 ![Widget bulk data entry search page](../resources/widget-bulk-data-entry-search-page.png)
@@ -82,8 +96,13 @@ After the user selects a plugin configuration, it is stored in `IndexedDB` for t
 
 ### Passing Tracked Entities to the Plugin
 
-The plugin receives tracked entities through the `trackedEntities` prop - an array containing the IDs of selected tracked entities.
+The plugin receives tracked entities through the `trackedEntityIds` prop - an array containing the IDs of selected tracked entities.
 
 ### Cleanup and Disposal
 
-To properly close the plugin and clean up resources, use the `onClose` function provided as a prop. This function will remove the selected configuration from `IndexedDB`.
+To exit the Plugin and return to the Program overview or Search pages, use the `onDefer` function provided as a prop. This will place the Plugin in an idle state until further action is taken.
+
+![Widget bulk data entry main page](../resources/widget-bulk-data-entry-main-page-idle.png)
+![Widget bulk data entry search page](../resources/widget-bulk-data-entry-search-page-idle.png)
+
+To ensure proper cleanup and resource management, use the `onComplete` function provided as a prop to close the plugin. This will clear the selected configuration from `IndexedDB`.

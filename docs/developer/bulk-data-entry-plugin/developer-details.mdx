@@ -15,16 +15,23 @@ type BulkDataEntryPluginProps = {|
     pluginSource: string,    
     configKey: string,  
     dataKey?: string,        
-    onClose: () => Promise<void>, 
-    trackedEntities?: Array<string>,
+    onComplete: () => Promise<void>,
+    onDefer: () => void,
+    trackedEntityIds?: Array<string>,
 |};
+```
+
+### Exiting the Plugin
+
+To exit the Plugin and return to the Program overview or Search pages, use the `onDefer` function provided as a prop. This will place the Plugin in an idle state until further action is taken.
+
+```ts
+onDefer();
 ```
 
 ### Closing the Plugin
 
-To properly close the plugin and clean up resources, use the `onClose` function provided as a prop. This function will remove the selected configuration from IndexedDB.
-
+To ensure proper cleanup and resource management, use the `onComplete` function provided as a prop to close the plugin. This will clear the selected configuration from `IndexedDB`.
 ```ts
-onClose();
+onComplete();
 ```
-
