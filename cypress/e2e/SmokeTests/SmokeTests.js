@@ -69,23 +69,23 @@ const getObjectStoreContents = db =>
             .transaction(objectStoreName, 'readonly')
             .objectStore(objectStoreName);
 
-        const accessHistoryRequest = objectStore.get('accessHistory');
+        const accessHistoryMetadataRequest = objectStore.get('accessHistoryMetadata');
 
-        accessHistoryRequest.onsuccess = (accessHistoryEvent) => {
-            const offlineDataRequest = objectStore.get('offlineDataAccessHistory');
+        accessHistoryMetadataRequest.onsuccess = (accessHistoryEvent) => {
+            const accessHistoryDataRequest = objectStore.get('accessHistoryData');
 
-            offlineDataRequest.onsuccess = (offlineDataEvent) => {
+            accessHistoryDataRequest.onsuccess = (offlineDataEvent) => {
                 resolve({
                     userCachesMetadata: accessHistoryEvent.target.result.values,
-                    userCachesOfflineData:
+                    userCachesData:
                         offlineDataEvent.target.result.values,
                 });
             };
 
-            offlineDataRequest.onerror = reject;
+            accessHistoryDataRequest.onerror = reject;
         };
 
-        accessHistoryRequest.onerror = reject;
+        accessHistoryMetadataRequest.onerror = reject;
     });
 
 
@@ -99,19 +99,19 @@ Then('IndexedDBs matching the naming pattern and structure should be found', () 
 
     cy.window().then(async (win) => {
         const instanceDbName = `dhis2ca-${await hashSHA256(Cypress.env('dhis2BaseUrl'))}`;
-        const userMetadataDbName = `${instanceDbName}-${userId}`;
-        const userOfflineDbName = `${userMetadataDbName}-offline`;
+        const userMetadataDbName = `${instanceDbName}-${userId}-metadata`;
+        const userDataDbName = `${instanceDbName}-${userId}-data`;
 
         const databaseMatches = (await win.indexedDB.databases())
-            .filter(({ name }) => [instanceDbName, userMetadataDbName, userOfflineDbName].includes(name));
+            .filter(({ name }) => [instanceDbName, userMetadataDbName, userDataDbName].includes(name));
 
         expect(databaseMatches).to.have.length(3);
 
         const instanceDb = await openDb(win, instanceDbName);
-        const { userCachesMetadata, userCachesOfflineData } = await getObjectStoreContents(instanceDb);
+        const { userCachesMetadata, userCachesData } = await getObjectStoreContents(instanceDb);
 
         expect(userCachesMetadata).to.include(userMetadataDbName);
-        expect(userCachesOfflineData).to.include(userOfflineDbName);
+        expect(userCachesData).to.include(userDataDbName);
 
         instanceDb.close();
     });
