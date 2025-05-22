@@ -1,4 +1,3 @@
-type QueryRefetchFunction = () => void;
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -6,6 +5,8 @@ import { useMutation } from 'react-query';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
 import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
 import { errorCreator, FEATURES, useFeature } from '../../../../../../capture-core-utils';
+
+type QueryRefetchFunction = () => void;
 
 export type UpdateEnrollmentOwnership = (params: {
     orgUnitId: string;

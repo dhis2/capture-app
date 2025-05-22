@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, ComponentType } from 'react';
 import { createRoot } from 'react-dom/client';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import L, { Control } from 'leaflet';
+import L from 'leaflet';
 import { withLeaflet } from 'react-leaflet';
 
 type Props = {

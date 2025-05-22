@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { OrganisationUnitTree } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import type { Props } from './OrgUnitField.types';
 
 const getStyles = () => ({
     orgunitTree: {

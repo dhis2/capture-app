@@ -5,8 +5,8 @@ import { processErrorReports } from '../processErrorReports';
 const enrollmentUpdate: any = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
     type: 'create',
-    data: (enrollment: any) => ({
-        enrollments: [enrollment],
+    data: (enrollmentData: any) => ({
+        enrollments: [enrollmentData],
     }),
     id: 'enrollmentUpdate',
 };
@@ -19,15 +19,16 @@ export const useUpdateEnrollment = ({
     onError,
 }: {
     enrollment: any;
-    setEnrollment: (enrollment: any) => void;
+    setEnrollment: (enrollmentData: any) => void;
     propertyName: string;
     updateHandler?: (value: any) => void;
     onError?: (error: any) => void;
 }) => {
     const [updateEnrollmentMutation] = useDataMutation(enrollmentUpdate, {
         onError: (e) => {
-            setEnrollment(enrollment);
-            updateHandler && updateHandler(enrollment[propertyName]);
+            const originalEnrollment = enrollment;
+            setEnrollment(originalEnrollment);
+            updateHandler && updateHandler(originalEnrollment[propertyName]);
             onError && onError(processErrorReports(e));
         },
     });

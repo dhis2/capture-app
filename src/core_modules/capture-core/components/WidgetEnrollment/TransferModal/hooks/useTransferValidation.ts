@@ -19,12 +19,6 @@ export const OrgUnitScopes = Object.freeze({
 
 type OrgUnitScope = typeof OrgUnitScopes[keyof typeof OrgUnitScopes];
 
-type CaptureOrgUnitsResponse = {
-    captureOrgUnits: {
-        organisationUnits: Array<{ id: string }>;
-    };
-};
-
 const orgUnitIsInCaptureScope = async (orgUnitId: string, dataEngine: any) => {
     const captureScopeQuery = await dataEngine.query({
         captureOrgUnits: {

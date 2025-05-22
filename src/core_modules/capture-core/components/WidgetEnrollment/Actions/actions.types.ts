@@ -2,7 +2,7 @@ import type { QueryRefetchFunction } from '../enrollment.types';
 import type { UpdateEnrollmentOwnership } from './Transfer/hooks/useUpdateOwnership';
 
 export type Props = {
-    enrollment: Object;
+    enrollment: Record<string, unknown>;
     events: Array<{ status: string; event: string; programStage: string }>;
     programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
     refetchEnrollment: QueryRefetchFunction;
@@ -10,7 +10,7 @@ export type Props = {
     ownerOrgUnitId: string;
     onDelete: () => void;
     onAddNew: () => void;
-    onUpdateEnrollmentStatus?: (enrollment: Object) => void;
+    onUpdateEnrollmentStatus?: (enrollment: Record<string, unknown>) => void;
     onUpdateEnrollmentStatusSuccess?: (options: { redirect?: boolean }) => void;
     onUpdateEnrollmentStatusError?: (message: string) => void;
     onError?: (message: string) => void;
@@ -19,8 +19,8 @@ export type Props = {
     onlyEnrollOnce: boolean;
     tetName: string;
     onAccessLostFromTransfer?: () => void;
-    onUpdate?: (arg: Object) => void;
-    onUpdateStatus?: (arg: Object, redirect?: boolean) => void;
+    onUpdate?: (arg: Record<string, unknown>) => void;
+    onUpdateStatus?: (arg: Record<string, unknown>, redirect?: boolean) => void;
     canCascadeDeleteEnrollment?: boolean;
     loading?: boolean;
     isTransferLoading?: boolean;
@@ -28,14 +28,14 @@ export type Props = {
 };
 
 export type PlainProps = {
-    enrollment: Object;
+    enrollment: Record<string, unknown>;
     events: Array<{ status: string; event: string; programStage: string }>;
     programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
     ownerOrgUnitId: string;
-    onUpdate: (arg: Object) => void;
-    onUpdateStatus: (arg: Object, redirect?: boolean) => void;
-    onDelete: (arg: Object) => void;
-    onAddNew: (arg: Object) => void;
+    onUpdate: (arg: Record<string, unknown>) => void;
+    onUpdateStatus: (arg: Record<string, unknown>, redirect?: boolean) => void;
+    onDelete: (arg: Record<string, unknown>) => void;
+    onAddNew: (arg: Record<string, unknown>) => void;
     onUpdateOwnership: UpdateEnrollmentOwnership;
     canCascadeDeleteEnrollment: boolean;
     isTransferLoading: boolean;

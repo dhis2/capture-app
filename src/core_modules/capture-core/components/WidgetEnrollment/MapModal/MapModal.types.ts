@@ -21,7 +21,7 @@ export type EnrollmentWithGeometry = {
 export type MapModalProps = {
     center?: [number, number];
     enrollment: EnrollmentWithGeometry;
-    onUpdate: (arg: Object) => void;
+    onUpdate: (arg: Record<string, unknown>) => void;
     setOpenMap: (toggle: boolean) => void;
     defaultValues?: Array<Array<number>> | [number, number];
 };

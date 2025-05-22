@@ -51,15 +51,15 @@ export const ActionsPlain = ({
     const [isOpenTransfer, setOpenTransfer] = useState(false);
     const [isOpenCompleteModal, setOpenCompleteModal] = useState(false);
 
-    const handleOnUpdate = (arg: Object) => {
+    const handleOnUpdate = (arg: Record<string, unknown>) => {
         setOpenActions(false);
         onUpdate(arg);
     };
-    const handleOnDelete = (arg: Object) => {
+    const handleOnDelete = (arg: Record<string, unknown>) => {
         setOpenActions(false);
         onDelete(arg);
     };
-    const handleOnUpdateStatus = (arg: Object, redirect?: boolean) => {
+    const handleOnUpdateStatus = (arg: Record<string, unknown>, redirect?: boolean) => {
         setOpenActions(false);
         onUpdateStatus(arg, redirect);
     };

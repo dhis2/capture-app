@@ -20,7 +20,7 @@ export type ApiEnrollmentEvent = {
     scheduledAt: string;
     updatedAt: string;
     dataValues: Array<ApiDataValue>;
-    notes?: Array<Object>;
+    notes?: Array<Record<string, unknown>>;
     deleted?: boolean;
     pendingApiResponse?: boolean | null;
     assignedUser?: {
@@ -34,7 +34,7 @@ export type ApiEnrollmentEvent = {
 };
 
 export type EventReducerProps = {
-    enrollments?: Array<Object> | null;
+    enrollments?: Array<Record<string, unknown>> | null;
     events: Array<ApiEnrollmentEvent>;
 };
 
@@ -43,24 +43,24 @@ export type Props = {
     enrollmentId: string;
     programId: string;
     readOnlyMode?: boolean;
-    externalData: { status: { value: string | null }, events?: Array<Object> | null };
+    externalData: { status: { value: string | null }, events?: Array<Record<string, unknown>> | null };
     onDelete: () => void;
     onAddNew: () => void;
     onUpdateEnrollmentDate?: (enrollmentDate: string) => void;
     onUpdateIncidentDate?: (enrollmentDate: string) => void;
     onError?: (message: string) => void;
     onSuccess?: () => void;
-    onUpdateEnrollmentStatus?: (enrollment: Object) => void;
+    onUpdateEnrollmentStatus?: (enrollment: Record<string, unknown>) => void;
     onUpdateEnrollmentStatusSuccess?: (options: { redirect?: boolean }) => void;
     onUpdateEnrollmentStatusError?: (message: string) => void;
     onAccessLostFromTransfer?: () => void;
 };
 
 export type PlainProps = {
-    enrollment: Object;
+    enrollment: Record<string, unknown>;
     events: Array<{ status: string, event: string, programStage: string }>;
-    program: Object;
-    ownerOrgUnit: Object;
+    program: Record<string, unknown>;
+    ownerOrgUnit: Record<string, unknown>;
     locale: string;
     refetchEnrollment: QueryRefetchFunction;
     refetchTEI: QueryRefetchFunction;
@@ -75,7 +75,7 @@ export type PlainProps = {
     onAddNew: () => void;
     onError?: (message: string) => void;
     onSuccess?: () => void;
-    onUpdateEnrollmentStatus?: (enrollment: Object) => void;
+    onUpdateEnrollmentStatus?: (enrollment: Record<string, unknown>) => void;
     onUpdateEnrollmentStatusSuccess?: (options: { redirect?: boolean }) => void;
     onUpdateEnrollmentStatusError?: (message: string) => void;
     onAccessLostFromTransfer?: () => void;

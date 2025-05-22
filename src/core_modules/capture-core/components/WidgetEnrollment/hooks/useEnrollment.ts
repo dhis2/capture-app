@@ -1,24 +1,13 @@
-import { useMemo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { useUpdateEnrollment } from './useUpdateEnrollment';
-import type { QueryRefetchFunction } from '../enrollment.types';
 
 type Props = {
     enrollmentId: string;
     onUpdateEnrollmentDate?: (date: string) => void;
     onUpdateIncidentDate?: (date: string) => void;
     onError?: (error: any) => void;
-    externalData?: { status: { value: string | null }, events?: Array<Object> | null };
-};
-
-type EnrollmentQueryType = {
-    enrollment: {
-        resource: string;
-        id: ({ variables }: { variables: { enrollmentId: string } }) => string;
-        params: {
-            fields: string;
-        };
-    };
+    externalData?: { status: { value: string | null }, events?: Array<Record<string, unknown>> | null };
 };
 
 export const useEnrollment = ({
@@ -34,7 +23,7 @@ export const useEnrollment = ({
         {
             enrollment: {
                 resource: 'tracker/enrollments/',
-                id: ({ enrollmentId }) => enrollmentId,
+                id: ({ enrollmentId: id }) => id,
                 params: {
                     fields: 'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,occurredAt,followUp,deleted,createdBy,updatedBy,updatedAt,geometry',
                 },

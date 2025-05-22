@@ -1,6 +1,6 @@
 type Feature = {
     type: string;
-    properties: Object;
+    properties: Record<string, unknown>;
     geometry: {
         type: string;
         coordinates: Array<Array<Array<number> | number>>;
