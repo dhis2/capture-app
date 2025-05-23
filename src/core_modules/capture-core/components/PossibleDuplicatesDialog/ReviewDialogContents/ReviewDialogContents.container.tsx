@@ -33,6 +33,6 @@ const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(ReviewDi
 const WithLoadingIndicator = withLoadingIndicator(
     () => ({ padding: '100px 0' }),
     null,
-    (props: any) => (!props.isUpdating && props.ready),
+    (props: {isUpdating?: boolean, ready?: boolean}) => (!props.isUpdating && props.ready),
 )(ConnectedComponent);
 export const ReviewDialogContents = withErrorMessageHandler()(WithLoadingIndicator) as ComponentType<OwnProps>;
