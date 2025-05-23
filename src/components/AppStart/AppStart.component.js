@@ -19,7 +19,7 @@ export const AppStart = () => {
 
     const store: {current: Object} = useRef();
 
-    const handleRunApp = useCallback((storeArg: ReduxStore) => {
+    const handleRunApp = useCallback((storeArg: PlainReduxStore) => {
         store.current = storeArg;
         setReadyStatus(true);
         storeArg.dispatch(loadApp());

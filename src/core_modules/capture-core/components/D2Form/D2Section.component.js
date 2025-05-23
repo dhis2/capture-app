@@ -30,7 +30,7 @@ type Props = {
     sectionId: string,
     formBuilderId: string,
     formId: string,
-    onFieldsValidated: ?(any, formBuilderId: string) => void,
+    onFieldsValidated: ?(fieldsUI: Object, formId: string, uidsForIsValidating: Array<string>) => void,
 };
 
 class D2SectionPlain extends React.PureComponent<Props> {
@@ -39,9 +39,13 @@ class D2SectionPlain extends React.PureComponent<Props> {
     componentDidMount() {
         if (this.props.isHidden) {
             // Inform withSaveHandler that this section is done initialising
-            this.props.onFieldsValidated && this.props.onFieldsValidated(
-                {},
-                this.props.formBuilderId,
+            this.props.onFieldsValidated?.(
+                Array.from(this.props.sectionMetaData.elements.keys()).reduce((acc, fieldKey) => {
+                    acc[fieldKey] = { valid: true };
+                    return acc;
+                }, {}),
+                this.props.formId,
+                [],
             );
         }
     }

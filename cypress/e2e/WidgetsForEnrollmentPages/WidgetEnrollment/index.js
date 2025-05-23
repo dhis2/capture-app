@@ -4,8 +4,11 @@ import { hasVersionSupport } from '../../../support/tagUtils';
 
 After({ tags: '@with-transfer-ownership-data-cleanup' }, () => {
     const teiQueryKey = hasVersionSupport('@v>=41') ? 'trackedEntity' : 'trackedEntityInstance';
-    cy.buildApiUrl('tracker', `ownership/transfer?program=IpHINAT79UW&ou=DiszpKrYNg8&${teiQueryKey}=EaOyKGOIGRp`)
-        .then(url => cy.request('PUT', url));
+    const orgUnitKey = hasVersionSupport('@v>=42') ? 'orgUnit' : 'ou';
+    cy.buildApiUrl(
+        'tracker',
+        `ownership/transfer?program=IpHINAT79UW&${orgUnitKey}=DiszpKrYNg8&${teiQueryKey}=EaOyKGOIGRp`,
+    ).then(url => cy.request('PUT', url));
 });
 
 const changeEnrollmentAndEventsStatus = () => (

@@ -13,3 +13,7 @@ Feature: Smoke tests
         And you sign in
         Then you should see the app main selections
         And you should see the header bar
+
+    Scenario: IndexedDBs follow the naming pattern and structure
+        Given you are in the main page with no selections made
+        Then IndexedDBs matching the naming pattern and structure should be found

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -614,20 +614,6 @@ msgstr "ການແຈ້ງເຕືອນ"
 msgid "Close the notice"
 msgstr "ປິດການແຈ້ງເຕືອນ"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "ລົງທະບຽນດ້ວຍໄອດີ \" {{enrollmentId}} \" ແມ່ນບໍ່ພົບ"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "ຕິດຕາມກໍລະນີແບບບຸກຄົນດ້ວຍໄອດີ \" {{teiId}} \" ແມ່ນບໍ່ພົບ"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "ໂປແກຼມດ້ວຍໄອດີ \" {{programId}} \" ແມ່ນບໍ່ພົບ"
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-"ເກີດຂໍ໊ຜິດພາດຂຶ້ນໃນຂະນະທີ່ດຶງຂໍ້ມູນການລົງທະບຽນ. ກະລຸນາໃສ່ URL ທີ່ຖືກຕ້ອງ."
-
 msgid "No feedback for this enrollment yet"
 msgstr "ບໍ່ມີຄຳເຫັນສຳລັບການລົງທະບຽນນີ້ເທື່ອ"
 
@@ -702,6 +688,20 @@ msgstr "ສ້າງເຫດການໃຫມ່ໃນໂປແກຼມນີ
 
 msgid "View working list in this program."
 msgstr "ເບິ່ງລາຍຊື່ເຮັດວຽກຢູ່ໃນໂປແກຼມນີ້."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "ລົງທະບຽນດ້ວຍໄອດີ \" {{enrollmentId}} \" ແມ່ນບໍ່ພົບ"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "ຕິດຕາມກໍລະນີແບບບຸກຄົນດ້ວຍໄອດີ \" {{teiId}} \" ແມ່ນບໍ່ພົບ"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "ໂປແກຼມດ້ວຍໄອດີ \" {{programId}} \" ແມ່ນບໍ່ພົບ"
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+"ເກີດຂໍ໊ຜິດພາດຂຶ້ນໃນຂະນະທີ່ດຶງຂໍ້ມູນການລົງທະບຽນ. ກະລຸນາໃສ່ URL ທີ່ຖືກຕ້ອງ."
 
 msgid "Page is missing required values from URL"
 msgstr "ບໍ່ພົບໜ້ານີ້ ຕ້ອງການຄ່າຈາກ URL"
@@ -921,6 +921,12 @@ msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "ຕື່ມຂໍ້ມູນໃສ່ຢ່າງໜ້ອຍ {{count}} ຄຸນລັກສະນະພື່ອຊອກຫາ"
 
+msgid "Missing search criteria"
+msgstr "ບໍ່ມີເງື່ອນໄຂການຄົ້ນຫາ"
+
+msgid "Back to search"
+msgstr "ກັບໄປຫາການຄົ້ນຫາ"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "ບໍ່ສາມາດດຶງຂໍ້ມູນ metadata ໄດ້. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ."
 
@@ -951,8 +957,8 @@ msgstr "ເພີ່ມຄວາມສໍາພັນ"
 msgid "No results found for "
 msgstr "ບໍ່ພົບຜົນໄດ້ຮັບ"
 
-msgid "Choose an organisation unit"
-msgstr "ເລືອກຫົວໜ່ວຍການຈັດຕັງ"
+msgid "Choose an organisation unit in the form below"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "ລົບການເລືອກ"
@@ -999,6 +1005,9 @@ msgid ""
 "that use type "
 msgstr "ບໍ່ພົບສິ່ງທີ່ທ່ານກໍາລັງຊອກຫາບໍ່? ລອງຄົ້ນຫາໂປແກຼມທັງຫມົດໂດຍເລືອກປະເພດ"
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "ຄົ້ນຫາໃນທຸກໂປແກຼມ"
 
@@ -1027,9 +1036,6 @@ msgid ""
 "looking for."
 msgstr "ທ່ານສາມາດປ່ຽນຄໍາຄົ້ນຫາ ແລະ ຄົ້ນຫາອີກເທື່ອຫນຶ່ງ"
 
-msgid "Back to search"
-msgstr "ກັບໄປຫາການຄົ້ນຫາ"
-
 msgid "An error has occurred"
 msgstr "ພົບຂໍ້ຜິດພາດ"
 
@@ -1038,9 +1044,6 @@ msgstr "ຜົນໄດ້ຮັບຫຼາຍເກີນໄປ"
 
 msgid "Cannot search in all programs"
 msgstr "ບໍ່ສາມາດຄົ້ນຫາໃນທຸກໂປແກຼມ"
-
-msgid "Missing search criteria"
-msgstr "ບໍ່ມີເງື່ອນໄຂການຄົ້ນຫາ"
 
 msgid "Results found"
 msgstr "ພົບຜົນໄດ້ຮັບ"
@@ -1324,10 +1327,13 @@ msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] "ວັນທີທີ່ກຳນົດໄວ້ແມ່ນ {{count}} ມື້ {{position}} ວັນທີທີ່ແນະນຳ."
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "ມີ {{count}} ນັດໝາຍທີ່ກຳນົດໄວ້ໃນ {{orgUnitName}} ໃນມື້ນີ້."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgstr[0] ""
 
 msgid "Schedule date / Due date"
 msgstr "ວັນທີຕາຕະລາງ / ວັນຄົບກໍານົດ"
@@ -1350,14 +1356,13 @@ msgstr ""
 msgid "Save note"
 msgstr "ບັນທຶກ"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+msgid "Edit {{trackedEntityName}}"
 msgstr ""
-"ປ່ຽນຂໍ້ມູນກ່ຽວກັບ {{trackedEntityName}} ນີ້. "
-"ເພື່ອປ່ຽນຂໍ້ມູນກ່ຽວກັບການລົງທະບຽນນີ້, "
-"ໃຫ້ໃຊ້ປຸ່ມແກ້ໄຂໃນປ່ອງການລົງທະບຽນຢູ່ໃນກະດານຂ່າວ"
+
+msgid ""
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
+msgstr ""
 
 msgid " Loading..."
 msgstr "ກຳລັງໂຫຼດ..."
@@ -1704,6 +1709,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"

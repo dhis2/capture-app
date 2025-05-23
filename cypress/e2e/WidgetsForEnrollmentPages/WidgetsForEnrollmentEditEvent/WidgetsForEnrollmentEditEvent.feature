@@ -45,21 +45,18 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the user clicks on the delete action
     Then the user sees the delete enrollment modal
 
-  # DHIS2-17635
-  @v<=41
   Scenario: User can add note on edit event page view mode
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be loaded
-    When you fill in the note: new test note
-    Then list should contain the new note: new test note
+    When you fill in the note: view mode note
+    Then list should contain the new note: view mode note
 
-  # DHIS2-17635
-  @v<=41
   Scenario: User can see note on edit event page edit mode
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=XGLkLlOXgmE&orgUnitId=DiszpKrYNg8
     Then the enrollment widget should be loaded
     When you click edit mode
-    Then list should contain the new note: new test note
+    And you fill in the note: edit mode note
+    Then list should contain the new note: edit mode note
 
   Scenario: You can assign a user to a event
     Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=veuwiLC2x0e&orgUnitId=g8upMTyEZGZ
@@ -69,33 +66,6 @@ Feature: The user interacts with the widgets on the enrollment edit event
     Then the event has the user Tracker demo User assigned
     When you remove the assigned user
     Then the event has no assignd user
-
-  @v>=41
-  Scenario: The user can view an event changelog on the enrollment edit event
-    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    When you select view changelog in the event overflow button
-    Then the changelog modal should be visible
-    And the changelog modal should contain data
-    # One row is filtered out as the metadata is no longer there
-    And the number of changelog table rows should be 9
-
-  @v>=41
-  Scenario: The user can change changelog page size
-    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    When you select view changelog in the event overflow button
-    And you change the page size to 20
-    # One row is filtered out as the metadata is no longer there
-    Then the number of changelog table rows should be 19
-    And you change the page size to 100
-    Then the number of changelog table rows should be 37
-    Then the table footer should display page 1
-
-  @v>=41
-  Scenario: The user can move to the next page in the changelog
-    Given you land on the enrollment edit event page by having typed /#/enrollmentEventEdit?eventId=QsAhMiZtnl2&orgUnitId=DiszpKrYNg8
-    When you select view changelog in the event overflow button
-    And you move to the next page
-    Then the table footer should display page 2
 
   Scenario: User can complete the enrollment and the active events
     Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?eventId=PyXThVzWJzL&orgUnitId=RzgSFJ9E46G

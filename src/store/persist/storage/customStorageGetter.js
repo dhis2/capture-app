@@ -1,10 +1,9 @@
 // @flow
-import { getUserStorageController } from 'capture-core/storageControllers';
-import { userStores } from 'capture-core/storageControllers/stores';
+import { getUserDataStorageController, USER_DATA_STORES } from 'capture-core/storageControllers';
 
-export function getCustomStorage() {
-    const store = userStores.REDUX_PERSIST;
-    const storageController = getUserStorageController();
+export async function getCustomStorage() {
+    const storageController = getUserDataStorageController();
+    const store = USER_DATA_STORES.REDUX_PERSIST;
 
     return {
         setItem: (key: string, value: any) => storageController.set(store, {

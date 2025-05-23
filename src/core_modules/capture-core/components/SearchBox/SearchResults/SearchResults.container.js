@@ -12,6 +12,7 @@ import {
 } from '../SearchBox.actions';
 import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { searchScopes, PAGINATION } from '../SearchBox.constants';
+import { setPrepopulateDataOnNewPage } from '../../Pages/New/NewPage.actions';
 
 const getCurrentScope = (scopeId: string, scopeType: $Keys<typeof searchScopes>) => {
     if (!scopeId) {
@@ -98,7 +99,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { availableSearchOptions })
             page,
         }));
     },
-    handleCreateNew: () => {
+    handleCreateNew: (currentSearchTerms) => {
+        dispatch(setPrepopulateDataOnNewPage(currentSearchTerms));
         dispatch(navigateToNewTrackedEntityPage());
     },
 });
