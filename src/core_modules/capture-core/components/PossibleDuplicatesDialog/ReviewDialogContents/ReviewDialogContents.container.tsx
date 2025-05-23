@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
 import type { ReduxStore } from '../../../../../core_modules/capture-core-utils/types/global';
 import { ReviewDialogContentsComponent } from './ReviewDialogContents.component';
@@ -27,8 +28,8 @@ const mapStateToProps = (
 
 const mapDispatchToProps = () => ({});
 
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(ReviewDialogContentsComponent);
-const WithLoadingIndicator = withLoadingIndicator(() => ({ padding: '100px 0' }), null, (props: any) => (!props.isUpdating && props.ready));
-const LoadingComponent = WithLoadingIndicator(ConnectedComponent);
-const WithErrorHandler = withErrorMessageHandler();
-export const ReviewDialogContents = WithErrorHandler(LoadingComponent);
+export const ReviewDialogContents = compose(
+    withErrorMessageHandler(),
+    withLoadingIndicator(() => ({ padding: '100px 0' }), null, (props: {isUpdating?: boolean, ready?: boolean}) => (!props.isUpdating && props.ready)),
+    connect(mapStateToProps, mapDispatchToProps),
+)(ReviewDialogContentsComponent);
