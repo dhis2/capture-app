@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator, buildUrl } from 'capture-core-utils';
 import { useState, useCallback, useEffect } from 'react';
@@ -6,35 +5,8 @@ import { useDataEngine, useConfig } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { convertValue as convertServerToClient } from '../../../converters/serverToClient';
 import { subValueGetterByElementType } from './getSubValueForTei';
-import { Option } from '../../../metaData';
 import { isMultiTextWithoutOptionset } from '../../../metaDataMemoryStoreBuilders/common/helpers/dataElement/unsupportedMultiText';
-
-type InputProgramData = {
-    id: string,
-    programTrackedEntityAttributes: Array<{
-        trackedEntityAttribute: {
-            id: string,
-            displayFormName?: ?string,
-            optionSet?: ?{
-                id: ?string,
-                options: Array<Option>,
-            },
-            valueType: string,
-            unique: boolean,
-        },
-        displayInList: boolean,
-    }>,
-};
-
-type InputAttribute = {
-    attribute: string,
-    code: string,
-    createdAt: string,
-    displayName: string,
-    lastUpdated: string,
-    value: string,
-    valueType: string,
-};
+import type { InputProgramData, InputAttribute } from './hooks.types';
 
 const MULIT_TEXT_WITH_NO_OPTIONS_SET =
     'could not create the metadata because a MULIT_TEXT without associated option sets was found';
@@ -44,13 +16,13 @@ export const useClientAttributesWithSubvalues = (teiId: string, program: InputPr
     const { baseUrl, apiVersion } = useConfig();
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
 
-    const [listAttributes, setListAttributes] = useState([]);
+    const [listAttributes, setListAttributes] = useState<any[]>([]);
 
     const getListAttributes = useCallback(async () => {
         if (program && trackedEntityInstanceAttributes) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const { programTrackedEntityAttributes } = program;
-            const computedAttributes = await programTrackedEntityAttributes.reduce(async (promisedAcc, currentTEA) => {
+            const computedAttributes = await programTrackedEntityAttributes.reduce(async (promisedAcc: Promise<any[]>, currentTEA) => {
                 const {
                     displayInList,
                     trackedEntityAttribute: { id, optionSet, valueType, unique, displayFormName },
@@ -70,7 +42,6 @@ export const useClientAttributesWithSubvalues = (teiId: string, program: InputPr
                             querySingleResource,
                         });
                     } else {
-                        // $FlowFixMe dataElementTypes flow error
                         value = convertServerToClient(foundAttribute.value, valueType);
                     }
                 }
