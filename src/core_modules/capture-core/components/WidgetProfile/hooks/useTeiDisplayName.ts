@@ -31,7 +31,7 @@ const getAttributesValues = (attributes: Attribute[], firstId: string, secondId?
     const firstValue = convertValue(attributes.find(({ attribute }) => attribute === firstId));
     const secondValue = convertValue(attributes.find(({ attribute }) => attribute === secondId));
 
-    return firstValue || secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
+    return firstValue ?? secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
 };
 
 const getTetAttributesDisplayInList = (attributes: Attribute[], tetAttributes: TetAttribute[]) => {
@@ -47,7 +47,7 @@ const getTetAttributes = (attributes: Attribute[], tetAttributes: { id: string }
 };
 
 const deriveTeiName = (tetAttributes: TetAttribute[] | { id: string }[], updatedAttributes: Attribute[], fallbackName?: string) => {
-    if (!tetAttributes || !updatedAttributes) return fallbackName || DEFAULT_NAME;
+    if (!tetAttributes || !updatedAttributes) return fallbackName ?? DEFAULT_NAME;
 
     const teiNameDisplayInReports = getTetAttributesDisplayInList(updatedAttributes, tetAttributes as TetAttribute[]);
     if (teiNameDisplayInReports) return teiNameDisplayInReports;
@@ -55,7 +55,7 @@ const deriveTeiName = (tetAttributes: TetAttribute[] | { id: string }[], updated
     const teiName = getTetAttributes(updatedAttributes, tetAttributes as { id: string }[]);
     if (teiName) return teiName;
 
-    return fallbackName || DEFAULT_NAME;
+    return fallbackName ?? DEFAULT_NAME;
 };
 
 export const useTeiDisplayName = (

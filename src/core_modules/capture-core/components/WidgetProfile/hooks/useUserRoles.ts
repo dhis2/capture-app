@@ -20,7 +20,7 @@ export const useUserRoles = () => {
 
     const userRoles = useMemo(
         () => {
-            if (!loading && data && data.userData) {
+            if (!loading && data?.userData) {
                 const userData = data.userData as {
                     userCredentials?: {
                         userRoles?: Array<{ id: string }>
