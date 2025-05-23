@@ -8,7 +8,7 @@ import type {
     CachedAttributeTranslation,
     CachedTrackedEntityTypeAttribute,
     CachedTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import {
     DataElement,
     DataElementUnique,

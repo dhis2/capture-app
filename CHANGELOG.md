@@ -1,3 +1,25 @@
+## [102.4.5](https://github.com/dhis2/capture-app/compare/v102.4.4...v102.4.5) (2025-05-23)
+
+
+### Bug Fixes
+
+* [DHIS2-15903] indexedDB caching ([#4056](https://github.com/dhis2/capture-app/issues/4056)) ([750101c](https://github.com/dhis2/capture-app/commit/750101ce5094ce245a32d92e5f2847ac7bc95d76))
+
+## [102.4.4](https://github.com/dhis2/capture-app/compare/v102.4.3...v102.4.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4093](https://github.com/dhis2/capture-app/issues/4093)) ([23fd8b8](https://github.com/dhis2/capture-app/commit/23fd8b80aecb4a282d89e85490eab7e2cb24fb6b))
+
+## [102.4.3](https://github.com/dhis2/capture-app/compare/v102.4.2...v102.4.3) (2025-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-19467] form inconsistencies ([#4061](https://github.com/dhis2/capture-app/issues/4061)) ([1560585](https://github.com/dhis2/capture-app/commit/1560585d62169c4648d36da8b484bdcda0727d18))
+* [DHIS2-19530] deprecated api query params ([#4063](https://github.com/dhis2/capture-app/issues/4063)) ([8400dd8](https://github.com/dhis2/capture-app/commit/8400dd8627c1674dce287392303d74bff304b20d))
+
 ## [102.4.2](https://github.com/dhis2/capture-app/compare/v102.4.1...v102.4.2) (2025-05-13)
 
 
