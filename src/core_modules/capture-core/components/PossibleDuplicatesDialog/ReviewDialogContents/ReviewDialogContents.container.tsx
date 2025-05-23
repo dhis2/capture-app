@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
 import type { ReduxStore } from '../../../../../core_modules/capture-core-utils/types/global';
 import { ReviewDialogContentsComponent } from './ReviewDialogContents.component';
@@ -28,8 +27,11 @@ const mapStateToProps = (
 
 const mapDispatchToProps = () => ({});
 
-export const ReviewDialogContents = compose(
-    withErrorMessageHandler(),
-    withLoadingIndicator(() => ({ padding: '100px 0' }), null, (props: {isUpdating?: boolean, ready?: boolean}) => (!props.isUpdating && props.ready)),
-    connect(mapStateToProps, mapDispatchToProps),
-)(ReviewDialogContentsComponent);
+// Using a different approach to fix the infinite loading issue
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(ReviewDialogContentsComponent);
+const WithLoadingIndicator = withLoadingIndicator(
+    () => ({ padding: '100px 0' }),
+    null,
+    (props: {isUpdating?: boolean, ready?: boolean}) => (!props.isUpdating && props.ready),
+)(ConnectedComponent);
+export const ReviewDialogContents = withErrorMessageHandler()(WithLoadingIndicator);
