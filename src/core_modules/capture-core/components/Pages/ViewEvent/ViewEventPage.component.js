@@ -14,11 +14,7 @@ type Props = {
     showAddRelationship: boolean,
 };
 
-export const ViewEventPageComponent = ({
-    isUserInteractionInProgress,
-    eventDetailsSection,
-    showAddRelationship,
-}: Props) => {
+export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetailsSection, showAddRelationship }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const { orgUnitId } = useLocationQuery();
     const { selectedCategories, programId } = useSelector(({ currentSelections }) => ({
