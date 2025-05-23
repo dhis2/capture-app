@@ -1,18 +1,12 @@
-// @flow
 import log from 'loglevel';
 import type { RelatedStageIsValidProps } from './relatedStageEventIsValid.types';
 import { errorCreator } from '../../../../capture-core-utils';
 import { ValidationFunctionsByLinkMode } from './ValidationFunctions';
 
 
-export const relatedStageWidgetIsValid = ({
-    linkMode,
-    scheduledAt,
-    scheduledAtFormatError,
-    orgUnit,
-    linkedEventId,
-    setErrorMessages,
-}: RelatedStageIsValidProps): boolean => {
+export const relatedStageWidgetIsValid = (props: RelatedStageIsValidProps): boolean => {
+    const { linkMode } = props;
+
     if (!linkMode) {
         return true;
     }
@@ -24,11 +18,5 @@ export const relatedStageWidgetIsValid = ({
         return false;
     }
 
-    return validationFunction({
-        scheduledAt,
-        scheduledAtFormatError,
-        orgUnit,
-        linkedEventId,
-        setErrorMessages,
-    });
+    return validationFunction(props);
 };

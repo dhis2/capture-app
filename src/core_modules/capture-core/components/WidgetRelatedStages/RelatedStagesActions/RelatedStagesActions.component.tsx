@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
@@ -13,7 +12,7 @@ import type { PlainProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     wrapper: {
         padding: spacers.dp8,
         width: 'fit-content',
@@ -41,7 +40,15 @@ const styles = () => ({
     link: {
         padding: spacers.dp8,
     },
-});
+};
+
+type ScheduleProps = {
+    actionsOptions?: PlainProps['actionsOptions'];
+    selectedAction?: keyof typeof relatedStageActions;
+    updateSelectedAction: (action: keyof typeof relatedStageActions | undefined) => void;
+    programStage: any;
+    canAddNewEventToStage: boolean;
+};
 
 const Schedule = ({
     actionsOptions,
@@ -49,7 +56,7 @@ const Schedule = ({
     updateSelectedAction,
     programStage,
     canAddNewEventToStage,
-}) => {
+}: ScheduleProps) => {
     const { hidden, disabled, disabledMessage } =
         (actionsOptions && actionsOptions[relatedStageActions.SCHEDULE_IN_ORG]) || {};
     if (hidden) {
@@ -59,7 +66,7 @@ const Schedule = ({
     const tooltipEnabled = disabled || !canAddNewEventToStage;
     let tooltipContent = '';
     if (disabled) {
-        tooltipContent = disabledMessage;
+        tooltipContent = disabledMessage || '';
     } else {
         tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
             linkableStageLabel: programStage.stageForm.name,
@@ -72,19 +79,27 @@ const Schedule = ({
             key={relatedStageActions.SCHEDULE_IN_ORG}
             content={tooltipContent}
             closeDelay={50}
-            enabled={tooltipEnabled}
+            enabled={!!tooltipEnabled}
         >
             <Radio
                 name={`related-stage-action-${relatedStageActions.SCHEDULE_IN_ORG}`}
                 checked={relatedStageActions.SCHEDULE_IN_ORG === selectedAction}
-                disabled={tooltipEnabled}
+                disabled={!!tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={({ value }) => updateSelectedAction(value as keyof typeof relatedStageActions)}
                 value={relatedStageActions.SCHEDULE_IN_ORG}
                 dataTest="related-stages-actions-schedule"
             />
         </ConditionalTooltip>
     );
+};
+
+type EnterDataProps = {
+    actionsOptions?: PlainProps['actionsOptions'];
+    selectedAction?: keyof typeof relatedStageActions;
+    updateSelectedAction: (action: keyof typeof relatedStageActions | undefined) => void;
+    programStage: any;
+    canAddNewEventToStage: boolean;
 };
 
 const EnterData = ({
@@ -93,7 +108,7 @@ const EnterData = ({
     updateSelectedAction,
     programStage,
     canAddNewEventToStage,
-}) => {
+}: EnterDataProps) => {
     const { hidden, disabled, disabledMessage } =
         (actionsOptions && actionsOptions[relatedStageActions.ENTER_DATA]) || {};
     if (hidden) {
@@ -103,7 +118,7 @@ const EnterData = ({
     const tooltipEnabled = disabled || !canAddNewEventToStage;
     let tooltipContent = '';
     if (disabled) {
-        tooltipContent = disabledMessage;
+        tooltipContent = disabledMessage || '';
     } else {
         tooltipContent = i18n.t('{{ linkableStageLabel }} can only have one event', {
             linkableStageLabel: programStage.stageForm.name,
@@ -116,19 +131,27 @@ const EnterData = ({
             key={relatedStageActions.ENTER_DATA}
             content={tooltipContent}
             closeDelay={50}
-            enabled={tooltipEnabled}
+            enabled={!!tooltipEnabled}
         >
             <Radio
                 name={`related-stage-action-${relatedStageActions.ENTER_DATA}`}
                 checked={relatedStageActions.ENTER_DATA === selectedAction}
-                disabled={tooltipEnabled}
+                disabled={!!tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={({ value }) => updateSelectedAction(value as keyof typeof relatedStageActions)}
                 value={relatedStageActions.ENTER_DATA}
                 dataTest="related-stages-actions-enter-details"
             />
         </ConditionalTooltip>
     );
+};
+
+type LinkExistingResponseProps = {
+    actionsOptions?: PlainProps['actionsOptions'];
+    linkableEvents: Array<any>;
+    selectedAction?: keyof typeof relatedStageActions;
+    updateSelectedAction: (action: keyof typeof relatedStageActions | undefined) => void;
+    programStage: any;
 };
 
 const LinkExistingResponse = ({
@@ -137,7 +160,7 @@ const LinkExistingResponse = ({
     selectedAction,
     updateSelectedAction,
     programStage,
-}) => {
+}: LinkExistingResponseProps) => {
     const { hidden, disabled, disabledMessage } =
         (actionsOptions && actionsOptions[relatedStageActions.LINK_EXISTING_RESPONSE]) || {};
     if (hidden) {
@@ -147,7 +170,7 @@ const LinkExistingResponse = ({
     const tooltipEnabled = disabled || !linkableEvents.length;
     let tooltipContent = '';
     if (disabled) {
-        tooltipContent = disabledMessage;
+        tooltipContent = disabledMessage || '';
     } else if (!linkableEvents.length) {
         tooltipContent = i18n.t('{{ linkableStageLabel }} has no linkable events', {
             linkableStageLabel: programStage.stageForm.name,
@@ -160,14 +183,14 @@ const LinkExistingResponse = ({
             key={relatedStageActions.LINK_EXISTING_RESPONSE}
             content={tooltipContent}
             closeDelay={50}
-            enabled={tooltipEnabled}
+            enabled={!!tooltipEnabled}
         >
             <Radio
                 name={`related-stage-action-${relatedStageActions.LINK_EXISTING_RESPONSE}`}
                 checked={relatedStageActions.LINK_EXISTING_RESPONSE === selectedAction}
-                disabled={tooltipEnabled}
+                disabled={!!tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={({ value }) => updateSelectedAction(value as keyof typeof relatedStageActions)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
                 dataTest="related-stages-actions-link-existing-response"
             />
@@ -175,7 +198,17 @@ const LinkExistingResponse = ({
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }) => {
+type LinkButtonProps = {
+    onLink?: () => void;
+    label: string;
+    dataTest: string;
+    isLinking?: boolean;
+    classes: {
+        link?: string;
+    };
+};
+
+const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes = {} }: LinkButtonProps) => {
     if (!onLink) {
         return null;
     }
@@ -190,7 +223,7 @@ const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, cla
 });
 
 const RelatedStagesActionsPlain = ({
-    classes,
+    classes = {},
     type,
     relationshipName,
     scheduledLabel,
@@ -209,7 +242,7 @@ const RelatedStagesActionsPlain = ({
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
-    const updateSelectedAction = (action: ?$Values<typeof relatedStageActions>) => {
+    const updateSelectedAction = (action: keyof typeof relatedStageActions | undefined) => {
         setRelatedStagesDataValues(prevState => ({
             ...prevState,
             linkMode: action,
@@ -329,4 +362,4 @@ const RelatedStagesActionsPlain = ({
     );
 };
 
-export const RelatedStagesActions: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);
+export const RelatedStagesActions = withStyles(styles)(RelatedStagesActionsPlain) as ComponentType<PlainProps>;

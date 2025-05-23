@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useRef, useCallback, useState } from 'react';
 import { IconLink24, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -16,7 +15,6 @@ import {
 } from './hooks';
 import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
-import { type RequestEvent } from '../DataEntries';
 
 const styles = {
     header: {
@@ -42,7 +40,7 @@ export const WidgetRelatedStagesPlain = ({
     onUpdateEnrollmentEventsSuccess,
     onUpdateEnrollmentEventsError,
     onNavigateToEvent,
-    classes,
+    classes = {},
 }: Props) => {
     const [isLinking, setIsLinking] = useState(false);
     const { enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
@@ -51,7 +49,7 @@ export const WidgetRelatedStagesPlain = ({
         linkedEvent,
         isLoading: isLinkedEventLoading,
     } = useLinkedEventByOriginId({ originEventId: eventId, skipBidirectionalChecks: true });
-    const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
+    const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({
         eventId,
@@ -64,8 +62,7 @@ export const WidgetRelatedStagesPlain = ({
 
     const onLink = useCallback(() => {
         setIsLinking(true);
-        // $FlowFixMe[incompatible-type]
-        const serverRequestEvent: ?RequestEvent = enrollment?.events.find(e => e.event === eventId);
+        const serverRequestEvent = enrollment?.events.find(e => e.event === eventId);
 
         const {
             formHasError,
@@ -132,4 +129,4 @@ export const WidgetRelatedStagesPlain = ({
     );
 };
 
-export const WidgetRelatedStages: ComponentType<Props> = withStyles(styles)(WidgetRelatedStagesPlain);
+export const WidgetRelatedStages = withStyles(styles)(WidgetRelatedStagesPlain) as ComponentType<Props>;

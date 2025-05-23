@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { ComponentType } from 'react';
@@ -8,7 +7,7 @@ import { OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
-const styles = {
+const styles: Readonly<any> = {
     wrapper: {
         padding: `${spacers.dp16} 0`,
         maxWidth: '55.75rem',
@@ -45,12 +44,19 @@ const styles = {
 };
 
 type Props = {
-    linkableStageLabel: string,
-    relatedStagesDataValues: RelatedStageDataValueStates,
-    setRelatedStagesDataValues: (() => Object) => void,
-    saveAttempted: boolean,
-    errorMessages: ErrorMessagesForRelatedStages,
-    ...CssClasses
+    linkableStageLabel: string;
+    relatedStagesDataValues: RelatedStageDataValueStates;
+    setRelatedStagesDataValues: (callback: (prevValues: RelatedStageDataValueStates) => RelatedStageDataValueStates) => void;
+    saveAttempted: boolean;
+    errorMessages: ErrorMessagesForRelatedStages;
+    classes?: {
+        wrapper?: string;
+        fieldWrapper?: string;
+        fieldLabel?: string;
+        fieldContent?: string;
+        alternateColor?: string;
+        infoBox?: string;
+    };
 }
 
 export const EnterDataInOrgUnitPlain = ({
@@ -61,7 +67,7 @@ export const EnterDataInOrgUnitPlain = ({
     errorMessages,
     classes,
 }: Props) => {
-    const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
+    const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         const orgUnit = {
             id: e.id,
             name: e.displayName,
@@ -77,12 +83,12 @@ export const EnterDataInOrgUnitPlain = ({
     const onDeselectOrgUnit = () => {
         setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
-            orgUnit: null,
+            orgUnit: undefined,
         }));
     };
 
     return (
-        <div className={classes.wrapper}>
+        <div className={classes?.wrapper}>
             <div>
                 <OrgUnitSelectorForRelatedStages
                     relatedStagesDataValues={relatedStagesDataValues}
@@ -92,7 +98,7 @@ export const EnterDataInOrgUnitPlain = ({
                     saveAttempted={saveAttempted}
                 />
             </div>
-            <div className={classes.infoBox}>
+            <div className={classes?.infoBox}>
                 <IconInfo16 />
                 {i18n.t(
                     relatedStagesDataValues?.orgUnit?.name
@@ -108,4 +114,4 @@ export const EnterDataInOrgUnitPlain = ({
     );
 };
 
-export const EnterDataInOrgUnit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(EnterDataInOrgUnitPlain);
+export const EnterDataInOrgUnit = withStyles(styles)(EnterDataInOrgUnitPlain) as ComponentType<Props>;

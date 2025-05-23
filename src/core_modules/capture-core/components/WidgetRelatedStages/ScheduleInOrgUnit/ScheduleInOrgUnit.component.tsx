@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
@@ -7,7 +6,7 @@ import { DateFieldForRelatedStages, OrgUnitSelectorForRelatedStages } from '../F
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
-const styles = {
+const styles: Readonly<any> = {
     wrapper: {
         padding: `${spacers.dp16} 0`,
         maxWidth: '55.75rem',
@@ -35,12 +34,18 @@ const styles = {
 };
 
 type Props = {
-    relatedStagesDataValues: RelatedStageDataValueStates,
-    setRelatedStagesDataValues: (() => Object) => void,
-    errorMessages: ErrorMessagesForRelatedStages,
-    scheduledLabel: string,
-    saveAttempted: boolean,
-    ...CssClasses,
+    relatedStagesDataValues: RelatedStageDataValueStates;
+    setRelatedStagesDataValues: (callback: (prevValues: RelatedStageDataValueStates) => RelatedStageDataValueStates) => void;
+    errorMessages: ErrorMessagesForRelatedStages;
+    scheduledLabel: string;
+    saveAttempted: boolean;
+    classes?: {
+        wrapper?: string;
+        fieldWrapper?: string;
+        fieldLabel?: string;
+        fieldContent?: string;
+        alternateColor?: string;
+    };
 }
 
 const ScheduleInOrgUnitPlain = ({
@@ -49,9 +54,9 @@ const ScheduleInOrgUnitPlain = ({
     saveAttempted,
     errorMessages,
     scheduledLabel,
-    classes,
+    classes = {},
 }: Props) => {
-    const onBlurDateField = (e, internalComponentError) => {
+    const onBlurDateField = (e: string, internalComponentError?: {error: string | null; errorCode: string | null}) => {
         setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
             scheduledAt: e,
@@ -59,7 +64,7 @@ const ScheduleInOrgUnitPlain = ({
         }));
     };
 
-    const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
+    const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         const orgUnit = {
             id: e.id,
             name: e.displayName,
@@ -75,7 +80,7 @@ const ScheduleInOrgUnitPlain = ({
     const onDeselectOrgUnit = () => {
         setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
-            orgUnit: null,
+            orgUnit: undefined,
         }));
     };
 
@@ -104,4 +109,4 @@ const ScheduleInOrgUnitPlain = ({
     );
 };
 
-export const ScheduleInOrgUnit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ScheduleInOrgUnitPlain);
+export const ScheduleInOrgUnit = withStyles(styles)(ScheduleInOrgUnitPlain) as ComponentType<Props>;
