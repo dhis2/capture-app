@@ -1,6 +1,5 @@
-import type { ReactNode } from 'react';
-import type { Option } from '../../../metaData';
 import type { QuerySingleResource } from 'capture-core/utils/api/api.types';
+import type { Option } from '../../../metaData';
 
 export type Geometry = {
     type: string;

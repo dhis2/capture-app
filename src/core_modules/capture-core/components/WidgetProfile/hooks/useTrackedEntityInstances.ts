@@ -9,7 +9,7 @@ type TrackedEntityInstance = {
     [key: string]: any;
 };
 
-type TrackedEntityTypeData = {
+type TetData = {
     trackedEntityType?: {
         displayName?: string;
         access?: any;
@@ -44,7 +44,7 @@ export const useTrackedEntityInstances = (
         ),
     );
 
-    const { loading: tetLoading, data: tetData, refetch: refetchTET } = useDataQuery(
+    const { loading: tetLoading, data: tetData, refetch: refetchTET } = useDataQuery<TetData>(
         useMemo(
             () => ({
                 trackedEntityType: {
