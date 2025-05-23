@@ -2,7 +2,7 @@
 import type {
     CachedOption,
     CachedOptionSet,
-} from 'capture-core/storageControllers/cache.types';
+} from 'capture-core/storageControllers';
 import type {
     OptionSet,
     OptionSets,

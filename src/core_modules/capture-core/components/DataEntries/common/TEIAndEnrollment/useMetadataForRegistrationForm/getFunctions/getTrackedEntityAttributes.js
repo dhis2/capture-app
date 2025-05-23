@@ -1,11 +1,10 @@
 // @flow
 
-import { getUserStorageController } from '../../../../../../storageControllers';
-import { userStores } from '../../../../../../storageControllers/stores';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../../../storageControllers';
 
 export const getTrackedEntityAttributes = (attributeIds: Array<string>) => {
-    const storageController = getUserStorageController();
-    return storageController.getAll(userStores.TRACKED_ENTITY_ATTRIBUTES, {
+    const storageController = getUserMetadataStorageController();
+    return storageController.getAll(USER_METADATA_STORES.TRACKED_ENTITY_ATTRIBUTES, {
         predicate: attribute => attributeIds.includes(attribute.id),
     });
 };
