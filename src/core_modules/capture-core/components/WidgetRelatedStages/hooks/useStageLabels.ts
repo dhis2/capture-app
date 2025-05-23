@@ -1,15 +1,14 @@
 import i18n from '@dhis2/d2-i18n';
-import { getUserStorageController } from '../../../storageControllers';
-import { userStores } from '../../../storageControllers/stores';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 
 export const useStageLabels = (programId: string, programStageId?: string) => {
-    const storageController = getUserStorageController();
+    const storageController = getUserMetadataStorageController();
 
     const { data, error, isLoading } = useIndexedDBQuery(
         ['programStageLabels', programStageId],
         () =>
-            storageController.get(userStores.PROGRAMS, programId, {
+            storageController.get(USER_METADATA_STORES.PROGRAMS, programId, {
                 project: ({ programStages }) => {
                     const stage = programStages
                         ?.find(storeStage => storeStage.id === programStageId);

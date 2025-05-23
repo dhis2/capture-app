@@ -1,6 +1,6 @@
 // @flow
 
-export const userStores = {
+export const USER_METADATA_STORES = {
     CONSTANTS: 'constants',
     ORGANISATION_UNIT_LEVELS: 'organisationUnitLevels',
     ORGANISATION_UNIT_GROUPS: 'organisationUnitGroups',
@@ -17,5 +17,4 @@ export const userStores = {
     CATEGORIES: 'categories',
     CATEGORY_OPTIONS_BY_CATEGORY: 'categoryOptionsByCategory',
     CATEGORY_OPTIONS: 'categoryOptions',
-    REDUX_PERSIST: 'reduxPersist',
 };
