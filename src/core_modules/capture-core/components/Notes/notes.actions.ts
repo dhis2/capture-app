@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../actions/actions.utils';
 import type { Note } from './notes.types';
 

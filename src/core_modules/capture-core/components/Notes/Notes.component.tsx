@@ -1,10 +1,8 @@
-// @flow
-
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ComponentType } from 'react';
 import moment from 'moment';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { colors, spacersNum, Menu, MenuItem, Button, Tooltip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
@@ -15,13 +13,12 @@ import { convertClientToList } from '../../converters';
 import { dataElementTypes } from '../../metaData';
 import type { Note } from './notes.types';
 
-
 const FocusTextField = withFocusSaver()(TextField);
 
-const styles = theme => ({
+const styles = {
     noteItem: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column' as const,
         alignItems: 'normal',
         cursor: 'default !important',
         padding: spacersNum.dp12,
@@ -34,11 +31,11 @@ const styles = theme => ({
         marginBottom: spacersNum.dp8,
     },
     commandButton: {
-        width: theme.typography.pxToRem(30),
-        height: theme.typography.pxToRem(30),
+        width: '30px',
+        height: '30px',
     },
     borderBoxContent: {
-        margin: theme.typography.pxToRem(10),
+        margin: '10px',
     },
     newNoteButtonsContainer: {
         marginTop: spacersNum.dp4,
@@ -61,31 +58,22 @@ const styles = theme => ({
         marginRight: 5,
         marginLeft: 2,
     },
-});
+    notesContainer: {},
+    newNoteContainer: {},
+    newNoteFormContainer: {},
+    inputContainer: {},
+};
 
 type Props = {
-    notes: Array<Note>,
-    onAddNote: (value: string) => void,
-    onBlur: (value: ?string, options: any) => void,
-    value: ?string,
-    entityAccess: { read: boolean, write: boolean },
-    smallMainButton: boolean,
-    classes: {
-        noteItem: string,
-        inputContainer: string,
-        borderBoxContent: string,
-        newNoteButtonsContainer: string,
-        newNoteContainer: string,
-        newNoteFormContainer: string,
-        textEditorContainer: string,
-        notesContainer: string,
-        noteItemHeader: string,
-        noteItemUser: string,
-        noteItemDate: string,
-        notesList: string,
-        addNoteContainer: string,
-    },
+    notes: Array<Note>;
+    onAddNote: (value: string) => void;
+    onBlur: (value: string | null, options: any) => void;
+    value: string | null;
+    entityAccess?: { read: boolean; write: boolean };
+    smallMainButton?: boolean;
 };
+
+type NotesProps = Props & WithStyles<typeof styles>;
 
 const NotesPlain = ({
     notes,
@@ -95,7 +83,7 @@ const NotesPlain = ({
     entityAccess = { read: true, write: true },
     smallMainButton,
     classes,
-}: Props) => {
+}: NotesProps) => {
     const [addIsOpen, setAddIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const { fromServerDate } = useTimeZoneConversion();
@@ -126,8 +114,8 @@ const NotesPlain = ({
         onBlur(null, { touched: false });
     };
 
-    const handleChange = (value: ?string) => {
-        setInputValue(value);
+    const handleChange = (value: string | null) => {
+        setInputValue(value || '');
     };
 
     const renderInput = () => (
@@ -173,7 +161,6 @@ const NotesPlain = ({
                 <Button
                     onClick={toggleIsOpen}
                     disabled={!canAddNote}
-                    // eslint-disable-next-line indent
                     small={smallMainButton}
                     dataTest="write-note-btn"
                 >
@@ -212,6 +199,7 @@ const NotesPlain = ({
                                     <Parser>{n.value}</Parser>
                                 </div>
                             </>}
+                            suffix={null}
                         />
                     ),
                 )}
@@ -223,4 +211,4 @@ const NotesPlain = ({
     );
 };
 
-export const Notes = withStyles(styles)(NotesPlain);
+export const Notes = withStyles(styles)(NotesPlain) as ComponentType<Props>;
