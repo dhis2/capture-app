@@ -6,21 +6,21 @@ import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
 import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRelationshipWrapper.container';
 import { TopBar } from './TopBar.container';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import { useLocationQuery } from '../../../utils/routing';
 
 type Props = {
     isUserInteractionInProgress: boolean,
     eventDetailsSection: Object,
     showAddRelationship: boolean,
-    orgUnitId: string,
 };
 
 export const ViewEventPageComponent = ({
     isUserInteractionInProgress,
     eventDetailsSection,
     showAddRelationship,
-    orgUnitId,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
+    const { orgUnitId } = useLocationQuery();
     const { selectedCategories, programId } = useSelector(({ currentSelections }) => ({
         selectedCategories: currentSelections.categoriesMeta,
         programId: currentSelections.programId,
