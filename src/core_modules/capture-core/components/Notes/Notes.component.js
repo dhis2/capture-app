@@ -143,6 +143,7 @@ const NotesPlain = ({
             </Editor>
             <div className={classes.newNoteButtonsContainer} data-test="note-buttons-container">
                 <Button
+                    dataTest="add-note-btn"
                     onClick={handleAddNote}
                     className={classes.addNoteContainer}
                     primary
@@ -174,6 +175,7 @@ const NotesPlain = ({
                     disabled={!canAddNote}
                     // eslint-disable-next-line indent
                     small={smallMainButton}
+                    dataTest="write-note-btn"
                 >
                     {i18n.t('Write note')}
                 </Button>
@@ -183,13 +185,13 @@ const NotesPlain = ({
 
     return (
         <div className={classes.notesContainer}>
-            <Menu dense className={classes.notesList} data-test="notes-list">
+            <Menu dense className={classes.notesList} dataTest="notes-list">
                 {notes.map(n =>
                     (
                         <MenuItem
                             className={classes.noteItem}
                             key={n.clientId}
-                            data-test="note"
+                            dataTest="note-item"
                             label={<>
                                 <div className={classes.noteItemHeader}>
                                     <div className={classes.noteItemUser} data-test="note-user">

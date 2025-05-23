@@ -2832,10 +2832,10 @@
     workbox-routing "^6.1.5"
     workbox-strategies "^6.1.5"
 
-"@dhis2/rule-engine@^3.3.9":
-  version "3.3.9"
-  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.3.9.tgz#7a9aeadaeaec0b2dcdbf245af829178080e8adac"
-  integrity sha512-429Xwf/gn82bvNdQrR36hfW3/1KXHgE+CquX3x4VQ75vfrNDhplzOeksg9RkhGnmis4akVsNgNgf1rIfLnlF+w==
+"@dhis2/rule-engine@^3.3.10":
+  version "3.3.10"
+  resolved "https://registry.yarnpkg.com/@dhis2/rule-engine/-/rule-engine-3.3.10.tgz#71bf2302fc4919469910cddb92f7d79ec8458e7f"
+  integrity sha512-o3thG4iVwt4VKR3goLnrcTpkz4maw67kqUctcb6t1wK9thYosbtcZg+GpEmFe/ajskJuLmckEMj96WoTBTCUhA==
   dependencies:
     "@js-joda/core" "3.2.0"
     format-util "^1.0.5"
@@ -10331,9 +10331,9 @@ http-proxy-agent@^4.0.1:
     debug "4"
 
 http-proxy-middleware@^2.0.3:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/http-proxy-middleware/-/http-proxy-middleware-2.0.7.tgz#915f236d92ae98ef48278a95dedf17e991936ec6"
-  integrity sha512-fgVY8AV7qU7z/MmXJ/rxwbrtQH4jBQ9m7kp3llF0liB7glmFeVZFBepQb32T3y8n8k2+AEYuMPCpinYW+/CuRA==
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/http-proxy-middleware/-/http-proxy-middleware-2.0.9.tgz#e9e63d68afaa4eee3d147f39149ab84c0c2815ef"
+  integrity sha512-c1IyJYLYppU574+YI7R4QyX2ystMtVXZwIdzazUIPIJsHuWNd+mho2j+bKoHftndicGj9yh+xjd+l0yj7VeT1Q==
   dependencies:
     "@types/http-proxy" "^1.17.8"
     http-proxy "^1.18.1"
@@ -17736,9 +17736,9 @@ undici-types@~6.13.0:
   integrity sha512-xtFJHudx8S2DSoujjMd1WeWvn7KKWFRESZTMeL1RptAYERu29D6jphMjjY+vn96jvN3kVPDNxU/E13VTaXj6jg==
 
 undici@^5.25.4:
-  version "5.28.5"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-5.28.5.tgz#b2b94b6bf8f1d919bc5a6f31f2c01deb02e54d4b"
-  integrity sha512-zICwjrDrcrUE0pyyJc1I2QzBkLM8FINsgOrt6WjA+BgajVq9Nxu2PbFFXUrAggLfDXlZGZBVZYw7WNV5KiBiBA==
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-5.29.0.tgz#419595449ae3f2cdcba3580a2e8903399bd1f5a3"
+  integrity sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==
   dependencies:
     "@fastify/busboy" "^2.0.0"
 

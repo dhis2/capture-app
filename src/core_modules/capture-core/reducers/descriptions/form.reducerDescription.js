@@ -11,7 +11,6 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { rulesEffectsActionTypes } from '../../rules';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 
 const removeFormData = (state, { payload: { formId } }) => {
     const remainingKeys = Object.keys(state).filter(key => !key.includes(formId));
@@ -85,7 +84,7 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
-    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [dataEntryActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
     [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'formsValues');
 
@@ -202,7 +201,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         };
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
-    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [dataEntryActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const { formId, rulesEffects } = action.payload;
         const formSectionFields = state[formId];
