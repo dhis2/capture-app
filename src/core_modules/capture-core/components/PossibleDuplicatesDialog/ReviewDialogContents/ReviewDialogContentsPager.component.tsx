@@ -1,21 +1,20 @@
-// @flow
 import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { Pagination } from 'capture-ui';
 import { withNavigation } from '../../Pagination/withDefaultNavigation';
 import type { Props } from './ReviewDialogContentsPager.types';
 import { useDuplicates } from '../useDuplicates';
 
-const Pager = withNavigation()(Pagination);
-
-const getStyles = (theme: Theme) => ({
+const styles = {
     container: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginLeft: theme.typography.pxToRem(8),
-        maxWidth: theme.typography.pxToRem(600),
+        marginLeft: '8px',
+        maxWidth: '600px',
     },
-});
+};
+
+const Pager = withNavigation()(Pagination);
 
 const ReviewDialogContentsPagerPlain = ({
     currentPage,
@@ -39,5 +38,4 @@ const ReviewDialogContentsPagerPlain = ({
     );
 };
 
-export const ReviewDialogContentsPagerComponent: ComponentType<$Diff<Props, CssClasses>> =
-  withStyles(getStyles)(ReviewDialogContentsPagerPlain);
+export const ReviewDialogContentsPagerComponent = withStyles(styles)(ReviewDialogContentsPagerPlain) as ComponentType<Omit<Props, keyof WithStyles<typeof styles>>>;

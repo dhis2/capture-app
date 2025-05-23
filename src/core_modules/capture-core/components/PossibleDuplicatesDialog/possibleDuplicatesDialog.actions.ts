@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../actions/actions.utils';
 import type { ChangePageActionCreator, ReviewDuplicatesActionCreator } from './PossibleDuplicatesDialog.types';
 
@@ -28,7 +27,7 @@ export const reviewDuplicates = ({
         dataEntryId,
     });
 
-export const duplicatesForReviewRetrievalSuccess = (teis: Array<Object>, currentPage: number) =>
+export const duplicatesForReviewRetrievalSuccess = (teis: Array<Record<string, unknown>>, currentPage: number) =>
     actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS)({ teis, currentPage });
 
 export const duplicatesReviewSkipped = () =>

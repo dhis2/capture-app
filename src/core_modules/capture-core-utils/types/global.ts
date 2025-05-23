@@ -5,6 +5,13 @@ export type ReduxStore = {
     value: {
         dataEntries: Record<string, { eventId: string }>;
         currentSelections: Record<string, unknown>;
+        possibleDuplicates: {
+            isLoading: boolean;
+            isUpdating: boolean;
+            loadError: boolean;
+            teis: any[];
+            currentPage?: number;
+        };
     };
 };
 

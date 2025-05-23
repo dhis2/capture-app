@@ -1,4 +1,3 @@
-// @flow
 export { RegisterTei } from './RegisterTei.container';
 export { openNewRelationshipRegisterTeiEpic } from './open.epics';
 export { actionTypes } from './registerTei.actions';
