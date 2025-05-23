@@ -1,18 +1,18 @@
-// @flow
-import React, { useState } from 'react';
+import React, { useState, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { IconChevronUp16, IconChevronDown16, colors, spacers } from '@dhis2/ui';
 
-type Props = $ReadOnly<{|
-    coordinates: Array<Array<number>>,
-    classes: {
-        buttonContainer: string,
-        viewButton: string,
-    },
-|}>;
+type OwnProps = {
+    coordinates: Array<Array<number>>;
+};
 
-const styles = {
+type StyleProps = {
+    buttonContainer: string;
+    viewButton: string;
+};
+
+const styles: Readonly<any> = {
     buttonContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -32,6 +32,8 @@ const styles = {
         },
     },
 };
+
+type Props = OwnProps & WithStyles<keyof StyleProps>;
 
 const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
     const [showMore, setShowMore] = useState(false);
@@ -56,4 +58,4 @@ const PolygonCoordinatesPlain = ({ coordinates, classes }: Props) => {
     );
 };
 
-export const PolygonCoordinates = withStyles(styles)(PolygonCoordinatesPlain);
+export const PolygonCoordinates = withStyles(styles)(PolygonCoordinatesPlain) as ComponentType<OwnProps>;

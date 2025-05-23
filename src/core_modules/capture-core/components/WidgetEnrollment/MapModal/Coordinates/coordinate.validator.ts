@@ -1,11 +1,9 @@
-// @flow
-
 type Location = {
-    longitude: number,
-    latitude: number,
+    longitude: number;
+    latitude: number;
 };
 
-function isNumValid(num) {
+function isNumValid(num: number | string): boolean {
     if (typeof num === 'number') {
         return true;
     } else if (typeof num === 'string') {
@@ -15,7 +13,7 @@ function isNumValid(num) {
     return false;
 }
 
-export const isValidCoordinate = (value: Location) => {
+export const isValidCoordinate = (value: Location): boolean => {
     if (!value) {
         return false;
     }
@@ -25,8 +23,8 @@ export const isValidCoordinate = (value: Location) => {
         return false;
     }
 
-    const ld = parseInt(longitude, 10);
-    const lt = parseInt(latitude, 10);
+    const ld = parseInt(longitude.toString(), 10);
+    const lt = parseInt(latitude.toString(), 10);
 
     return ld >= -180 && ld <= 180 && lt >= -90 && lt <= 90;
 };
