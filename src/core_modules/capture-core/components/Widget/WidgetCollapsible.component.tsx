@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useEffect, useRef, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
@@ -101,7 +100,7 @@ const WidgetCollapsiblePlain = ({
     const [childrenVisible, setChildrenVisibility] = useState(open); // controls whether children are rendered to the DOM
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
     const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
-    const hideChildrenTimeoutRef = useRef(null);
+    const hideChildrenTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
     const initialRenderRef = useRef(true);
 
     useEffect(() => {
@@ -116,7 +115,7 @@ const WidgetCollapsiblePlain = ({
 
         setPostEffectOpenStatus(open);
 
-        clearTimeout(hideChildrenTimeoutRef.current);
+        clearTimeout(hideChildrenTimeoutRef.current as ReturnType<typeof setTimeout>);
         if (open) {
             setChildrenVisibility(true);
         } else {
@@ -166,4 +165,4 @@ const WidgetCollapsiblePlain = ({
     );
 };
 
-export const WidgetCollapsible: ComponentType<WidgetCollapsibleProps> = withStyles(styles)(WidgetCollapsiblePlain);
+export const WidgetCollapsible = withStyles(styles)(WidgetCollapsiblePlain) as ComponentType<WidgetCollapsibleProps>;
