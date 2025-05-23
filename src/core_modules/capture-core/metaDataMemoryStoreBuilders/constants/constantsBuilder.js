@@ -1,9 +1,9 @@
 // @flow
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
-import { getUserStorageController } from '../../storageControllers';
+import { getUserMetadataStorageController } from '../../storageControllers';
 
 async function getConstants(storeName: string) {
-    const storageController = getUserStorageController();
+    const storageController = getUserMetadataStorageController();
     return storageController.getAll(storeName);
 }
 

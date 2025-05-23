@@ -1,6 +1,6 @@
 // @flow
 import type { UseQueryOptions } from 'react-query';
-import { userStores, getUserStorageController } from '../../storageControllers';
+import { USER_METADATA_STORES, getUserMetadataStorageController } from '../../storageControllers';
 import { useIndexedDBQuery } from '../reactQueryHelpers';
 import type { CachedOptionSet } from '../../storageControllers/';
 
@@ -9,13 +9,13 @@ export const useOptionSetsFromIndexedDB = (queryKey: Array<string | number>, opt
     isLoading: boolean,
     isError: boolean,
 } => {
-    const storageController = getUserStorageController();
+    const storageController = getUserMetadataStorageController();
     const { enabled = !!optionSetIds } = queryOptions ?? {};
 
     const { data, isLoading, isError } = useIndexedDBQuery(
         ['optionSets', ...queryKey],
         () => storageController.getAll(
-            userStores.OPTION_SETS, {
+            USER_METADATA_STORES.OPTION_SETS, {
                 // $FlowIgnore - the enabled prop guarantees that optionSetIds will be defined
                 predicate: optionSet => optionSetIds.has(optionSet.id),
             },
