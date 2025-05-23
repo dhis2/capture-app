@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 

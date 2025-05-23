@@ -1,23 +1,9 @@
-// @flow
-import type { QuerySingleResource } from 'capture-core/utils/api';
 import { dataElementTypes } from '../../../metaData';
 import { FEATURES, featureAvailable } from '../../../../capture-core-utils';
 import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
+import type { Attribute, SubValueFunctionParams } from './hooks.types';
 
-type Attribute = {
-    id: string,
-    value: string,
-    teiId: string,
-    programId: string,
-    absoluteApiPath: string,
-};
-
-type SubValueFunctionParams = {
-    attribute: Attribute,
-    querySingleResource: QuerySingleResource,
-};
-
-const buildTEAFileUrl = (attribute) => {
+const buildTEAFileUrl = (attribute: Attribute) => {
     const { absoluteApiPath, teiId, programId, id } = attribute;
 
     return featureAvailable(FEATURES.trackerFileEndpoint)
