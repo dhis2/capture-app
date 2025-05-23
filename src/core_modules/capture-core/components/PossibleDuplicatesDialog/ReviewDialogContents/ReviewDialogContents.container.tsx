@@ -30,11 +30,9 @@ const mapStateToProps = (
 const mapDispatchToProps = () => ({});
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(ReviewDialogContentsComponent);
-
 const WithLoadingIndicator = withLoadingIndicator(
     () => ({ padding: '100px 0' }),
     null,
-    (props: {isUpdating?: boolean, ready?: boolean}) => (!props.isUpdating && props.ready),
+    (props: any) => (!props.isUpdating && props.ready),
 )(ConnectedComponent);
-
 export const ReviewDialogContents = withErrorMessageHandler()(WithLoadingIndicator) as ComponentType<OwnProps>;
