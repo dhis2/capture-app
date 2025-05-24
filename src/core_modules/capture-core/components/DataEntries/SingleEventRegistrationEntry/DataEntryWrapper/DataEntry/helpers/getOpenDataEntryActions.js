@@ -1,6 +1,7 @@
 // @flow
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { loadNewDataEntry } from '../../../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../fieldValidators';
 import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../index';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 import { dataEntryId, itemId, formId } from './constants';
@@ -15,6 +16,11 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         id: 'occurredAt',
         type: 'DATE',
         validatorContainers: getEventDateValidatorContainers(),
+    },
+    {
+        id: 'orgUnit',
+        type: 'ORGANISATION_UNIT',
+        validatorContainers: getOrgUnitValidatorContainers(),
     },
     {
         clientId: 'geometry',
@@ -43,8 +49,17 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
 ];
 
-export const getOpenDataEntryActions = (programCategory: ?ProgramCategory, selectedCategories: ?{ [key: string]: string }) => {
-    let defaultDataEntryValues;
+export const getOpenDataEntryActions = (
+    programCategory: ?ProgramCategory,
+    selectedCategories: ?{ [key: string]: string },
+    orgUnit: ?{ ...OrgUnit, path: string },
+) => {
+    let defaultDataEntryValues = {
+        orgUnit: orgUnit
+            ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
+            : undefined,
+    };
+
     if (programCategory && programCategory.categories) {
         dataEntryPropsToInclude.push(...programCategory.categories.map(category => ({
             id: `attributeCategoryOptions-${category.id}`,
@@ -57,7 +72,7 @@ export const getOpenDataEntryActions = (programCategory: ?ProgramCategory, selec
         defaultDataEntryValues = Object.keys(selectedCategories).reduce((accValues, key) => {
             accValues[`attributeCategoryOptions-${key}`] = selectedCategories[key];
             return accValues;
-        }, {});
+        }, defaultDataEntryValues);
     }
 
     return [

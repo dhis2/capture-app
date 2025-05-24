@@ -15,6 +15,7 @@ export type StateProps = {|
 export type ContainerProps = {|
     id: string,
     selectedScopeId: string,
+    orgUnitId: string,
 |};
 
 export type DispatchProps = {|
