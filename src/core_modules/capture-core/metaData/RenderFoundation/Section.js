@@ -10,6 +10,7 @@ import type { FormFieldPluginConfig } from '../FormFieldPluginConfig';
 
 export class Section {
     static MAIN_SECTION_ID = '#MAIN#';
+    static LEFTOVERS_SECTION_ID = '#LEFTOVERS#';
 
     static errorMessages = {
         DATA_ELEMENT_NOT_FOUND: 'Data element was not found',
