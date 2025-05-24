@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -35,16 +35,8 @@ msgstr ""
 "Lý do có thể do trình duyệt hoặc chế độ (ví dụ: chế độ bảo mật) không được "
 "hỗ trợ. Xem nhật ký để biết chi tiết."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
-"Bạn đã mở một phiên bản khác của Ứng dụng Ghi trong cùng một miền. Hiện tại,"
-" Ứng dụng Ghi chỉ hỗ trợ chạy đồng thời một phiên bản (trong cùng một miền)."
-" Vui lòng làm mới trang này nếu bạn muốn sử dụng lại phiên bản này, nhưng "
-"lưu ý rằng điều này sẽ đóng các phiên bản khác."
 
 msgid "Enrollment dashboard"
 msgstr "Bảng thông tin đăng ký"
@@ -617,19 +609,6 @@ msgstr "Thông báo"
 msgid "Close the notice"
 msgstr "Đóng thông báo"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Đăng ký với mã id \"{{enrollmentId}}\" không tồn tại"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Cá thể với mã id \"{{teiId}}\" không tồn tại"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "Chương trình với mã id \"{{programId}}\" không tồn tại"
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr "Có lỗi khi tải thông tin đăng ký. Hãy nhập một URL hợp lệ"
-
 msgid "No feedback for this enrollment yet"
 msgstr "Chưa có phản hồi cho đăng ký này"
 
@@ -709,6 +688,19 @@ msgstr "Tạo một sự kiện mới trong chương trình này."
 
 msgid "View working list in this program."
 msgstr "Xem danh sách cá thể trong chương trình này."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Đăng ký với mã id \"{{enrollmentId}}\" không tồn tại"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Cá thể với mã id \"{{teiId}}\" không tồn tại"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Chương trình với mã id \"{{programId}}\" không tồn tại"
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "Có lỗi khi tải thông tin đăng ký. Hãy nhập một URL hợp lệ"
 
 msgid "Page is missing required values from URL"
 msgstr "Trang này đang thiếu giá trị bắt buộc từ URL"
@@ -930,6 +922,12 @@ msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] "Nhập vào ít nhất {{count}}thuộc tính để tìm kiếm"
 
+msgid "Missing search criteria"
+msgstr "Tiêu chí tìm kiếm bị thiếu"
+
+msgid "Back to search"
+msgstr "Quay lại tìm kiếm"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Không thể lấy thông tin dữ liệu mô tả. Hãy thử lại sau."
 
@@ -960,8 +958,8 @@ msgstr "Thêm Quan Hệ"
 msgid "No results found for "
 msgstr "Không tìm thấy kết quả cho"
 
-msgid "Choose an organisation unit"
-msgstr "Chọn một đơn vị"
+msgid "Choose an organisation unit in the form below"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Bỏ chọn"
@@ -1012,6 +1010,9 @@ msgstr ""
 "Không tìm thấy kết quả bạn đang tìm kiếm? Cố gắng tìm kiếm tất cả các chương"
 " trình sử dụng loại"
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "Tìm kiếm trong tất cả các chương trình"
 
@@ -1041,9 +1042,6 @@ msgstr ""
 "Bạn có thể thay đổi cụm từ tìm kiếm của mình và tìm kiếm lại để tìm những gì"
 " bạn muốn."
 
-msgid "Back to search"
-msgstr "Quay lại tìm kiếm"
-
 msgid "An error has occurred"
 msgstr "một lỗi đã xảy ra"
 
@@ -1052,9 +1050,6 @@ msgstr "Quá nhiều kết quả"
 
 msgid "Cannot search in all programs"
 msgstr "Không thể tìm trong tất cả chương trình"
-
-msgid "Missing search criteria"
-msgstr "Tiêu chí tìm kiếm bị thiếu"
 
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
@@ -1347,11 +1342,13 @@ msgid_plural ""
 msgstr[0] ""
 "Ngày lên lịch cách {{count}}ngày {{position}}so với ngày được đề xuất."
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgstr[0] ""
-"Có {{count}}sự kiện được lên lịch trong ngày này tại {{orgUnitName}}"
 
 msgid "Schedule date / Due date"
 msgstr "Ngày lên lịch / Ngày đến hạn"
@@ -1374,14 +1371,13 @@ msgstr ""
 msgid "Save note"
 msgstr "Lưu ghi chú"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+msgid "Edit {{trackedEntityName}}"
 msgstr ""
-"Thay đổi thông tin về {{trackedEntityName}}tại đây. Để thay đổi thông tin "
-"đăng ký vào chương trình, sử dụng nút Chỉnh sửa trong hộp Đăng ký chương "
-"trình trên bảng thông tin này."
+
+msgid ""
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
+msgstr ""
 
 msgid " Loading..."
 msgstr "Đang tải..."
@@ -1736,6 +1732,9 @@ msgid ""
 msgstr ""
 "Không thể hoàn tác thao tác này. Bạn có chắc chắn muốn xóa các sự kiện đã "
 "chọn không?"
+
+msgid "Owner organisation unit"
+msgstr ""
 
 msgid "Registration Date"
 msgstr "Ngày đăng ký"

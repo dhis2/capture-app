@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Enzo Nicolas Rossi <enzo@dhis2.org>, 2025\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/hisp-uio/teams/100509/es_419/)\n"
@@ -35,17 +35,8 @@ msgstr ""
 "modo de privacidad) no son compatibles. Un administrador deberá ver el "
 "registro de auditoría para obtener más detalles."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
-"Abrió otra versión de la aplicación Capture en el mismo dominio. "
-"Actualmente, la aplicación Capture solo admite la ejecución de una versión "
-"al mismo tiempo (en el mismo dominio). Actualice esta página si desea volver"
-" a utilizar esta versión, pero tenga en cuenta que esto cerrará otras "
-"versiones."
 
 msgid "Enrollment dashboard"
 msgstr "Panel de inscripción"
@@ -627,21 +618,6 @@ msgstr "Aviso"
 msgid "Close the notice"
 msgstr "cerrar el aviso"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "La inscripción con id \"{{enrollmentId}}\" no existe"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "La instancia de entidad rastreada con id \"{{teiId}}\" no existe"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr ""
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-"Se produjo un error al obtener las inscripciones. Por favor introduzca un "
-"URL válido."
-
 msgid "No feedback for this enrollment yet"
 msgstr "Aún no hay comentarios para esta inscripción"
 
@@ -722,6 +698,21 @@ msgstr "Crear un nuevo evento en este programa."
 
 msgid "View working list in this program."
 msgstr "Ver lista de trabajo en este programa."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "La inscripción con id \"{{enrollmentId}}\" no existe"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "La instancia de entidad rastreada con id \"{{teiId}}\" no existe"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+"Se produjo un error al obtener las inscripciones. Por favor introduzca un "
+"URL válido."
 
 msgid "Page is missing required values from URL"
 msgstr "A la página le faltan los valores obligatorios de la URL"
@@ -943,6 +934,12 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+msgid "Missing search criteria"
+msgstr ""
+
+msgid "Back to search"
+msgstr "Volver a la búsqueda"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 "No se pudo recuperar los metadatos. Por favor, inténtelo de nuevo más tarde."
@@ -974,7 +971,7 @@ msgstr "Añadir relación"
 msgid "No results found for "
 msgstr "No se encontraron resultados para"
 
-msgid "Choose an organisation unit"
+msgid "Choose an organisation unit in the form below"
 msgstr ""
 
 msgid "Clear selection"
@@ -1025,6 +1022,9 @@ msgid ""
 msgstr ""
 "¿No encuentra los resultados que buscaba? Intente buscar todos los programas"
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr ""
 
@@ -1050,9 +1050,6 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "Back to search"
-msgstr "Volver a la búsqueda"
-
 msgid "An error has occurred"
 msgstr ""
 
@@ -1060,9 +1057,6 @@ msgid "Too many results"
 msgstr "Demasiados resultados"
 
 msgid "Cannot search in all programs"
-msgstr ""
-
-msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
@@ -1342,9 +1336,12 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -1370,10 +1367,12 @@ msgstr ""
 msgid "Save note"
 msgstr ""
 
+msgid "Edit {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
 msgid " Loading..."
@@ -1716,6 +1715,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"
