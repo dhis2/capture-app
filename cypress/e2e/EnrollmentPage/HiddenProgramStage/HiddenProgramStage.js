@@ -52,6 +52,7 @@ Then('the Postpartum care visit button is disabled in the enrollmentEventNew pag
         '/#/enrollmentEventNew?enrollmentId=fmhIsWXVDmS&orgUnitId=s7SLtx8wmRA&programId=WSGAb5XwJ3Y&teiId=uW8Y7AIcRKA',
     );
 
-    cy.get('[data-test="program-stage-selector-button"]').should('have.length', 5);
+    cy.get('[data-test=profile-widget]').contains('Person profile');
+    cy.get('[data-test="enrollment-newEvent-page"]').contains('Choose a stage for a new event').should('exist');
     cy.get('[data-test="program-stage-selector-button"]').contains('Postpartum care visit').should('be.disabled');
 });
