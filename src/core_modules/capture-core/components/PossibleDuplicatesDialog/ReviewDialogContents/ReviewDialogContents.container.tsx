@@ -30,7 +30,6 @@ const mapStateToProps = (
 
 const mapDispatchToProps = () => ({});
 
-// Using compose to fix the infinite loading issue
 export const ReviewDialogContents = compose<ComponentType<OwnProps>>(
     connect(mapStateToProps, mapDispatchToProps),
     withLoadingIndicator(
