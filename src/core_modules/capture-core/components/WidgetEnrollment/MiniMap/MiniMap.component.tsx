@@ -1,23 +1,12 @@
-// @flow
 import React, { useState } from 'react';
 import { Map, TileLayer, Marker, Polygon } from 'react-leaflet';
 import { withStyles } from '@material-ui/core';
 import { dataElementTypes } from '../../../metaData';
 import { MapModal } from '../MapModal';
 import type { MiniMapProps } from './MiniMap.types';
+import { styles } from './MiniMap.types';
 import { convertToClientCoordinates } from './converters';
 import { useUpdateEnrollment } from '../dataMutation/dataMutation';
-
-const styles = () => ({
-    mapContainer: {
-        width: 150,
-        height: 120,
-    },
-    map: {
-        width: '100%',
-        height: '100%',
-    },
-});
 
 const MiniMapPlain = ({
     coordinates,
@@ -29,10 +18,10 @@ const MiniMapPlain = ({
     classes,
 }: MiniMapProps) => {
     const [isOpenMap, setOpenMap] = useState(false);
-    const { updateMutation } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError);
+    const { updateMutation = () => { /* empty by design */ } } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError) || {};
     const clientValues = convertToClientCoordinates(coordinates, geometryType);
     const center = geometryType === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
-    const onMapReady = (mapRef) => {
+    const onMapReady = (mapRef: any) => {
         if (mapRef?.contextValue && geometryType === dataElementTypes.POLYGON) {
             const { map } = mapRef.contextValue;
             map?.fitBounds(clientValues);

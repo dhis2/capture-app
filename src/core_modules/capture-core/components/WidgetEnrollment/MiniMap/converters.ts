@@ -1,7 +1,6 @@
-// @flow
 import { dataElementTypes } from '../../../metaData';
 
-export const convertToClientCoordinates = (coordinates: any[], type: $Values<typeof dataElementTypes>) => {
+export const convertToClientCoordinates = (coordinates: any[], type: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON) => {
     if (type === dataElementTypes.COORDINATE) {
         return [coordinates[1], coordinates[0]];
     }
