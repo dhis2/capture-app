@@ -30,7 +30,7 @@ const MiniMapPlain = ({
     classes,
 }: Props) => {
     const [isOpenMap, setOpenMap] = useState(false);
-    const { updateMutation = () => { /* empty by design */ } } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError) || {};
+    const { updateMutation = () => { /* empty by design */ } } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError) ?? {};
     const clientValues = convertToClientCoordinates(coordinates, geometryType);
     const center = geometryType === dataElementTypes.COORDINATE ? clientValues : clientValues[0];
     const onMapReady = (mapRef: any) => {
