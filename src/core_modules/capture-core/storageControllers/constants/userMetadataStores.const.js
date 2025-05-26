@@ -17,5 +17,4 @@ export const USER_METADATA_STORES = {
     CATEGORIES: 'categories',
     CATEGORY_OPTIONS_BY_CATEGORY: 'categoryOptionsByCategory',
     CATEGORY_OPTIONS: 'categoryOptions',
-    BULK_DATA_ENTRY: 'bulkDataEntry',
 };
