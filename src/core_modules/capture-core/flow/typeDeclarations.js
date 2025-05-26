@@ -40,6 +40,11 @@ declare type ReduxStore = {
     +getState: () => ReduxState
 }
 
+declare type PlainReduxStore = {
+    +dispatch: ReduxDispatch,
+    +getState: () => ReduxState
+};
+
 // Events
 declare type CaptureClientEvent = {
     eventId: string,
@@ -189,9 +194,6 @@ declare class process {
         NODE_ENV: string,
         NODE_PATH: string,
         REACT_APP_CACHE_VERSION: string,
-        REACT_APP_SERVER_VERSION: string,
-        REACT_APP_VERSION: string,
-        REACT_APP_DHIS2_API_VERSION: string,
     }
 }
 

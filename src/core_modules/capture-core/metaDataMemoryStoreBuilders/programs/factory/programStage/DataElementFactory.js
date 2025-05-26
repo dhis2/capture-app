@@ -2,13 +2,12 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getUserStorageController } from '../../../../storageControllers';
-import { userStores } from '../../../../storageControllers/stores';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import type {
     CachedDataElement,
     CachedProgramStageDataElement,
     CachedOptionSet,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import { DataElement, DateDataElement, dataElementTypes, Section } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';
@@ -131,7 +130,7 @@ export class DataElementFactory {
         cachedDataElementDefinition?: CachedDataElement,
     ): Promise<?DataElement> {
         const cachedDataElement = cachedDataElementDefinition ||
-            await getUserStorageController().get(userStores.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
+            await getUserMetadataStorageController().get(USER_METADATA_STORES.DATA_ELEMENTS, cachedProgramStageDataElement.dataElementId);
 
         if (!cachedDataElement) {
             log.error(
