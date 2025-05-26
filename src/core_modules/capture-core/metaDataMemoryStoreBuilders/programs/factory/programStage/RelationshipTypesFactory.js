@@ -4,7 +4,7 @@
 import type {
     CachedRelationshipType,
     CachedRelationshipConstraint,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import { RelationshipType } from '../../../../metaData';
 
 export class RelationshipTypesFactory {
