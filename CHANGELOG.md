@@ -1,3 +1,12 @@
+## [102.4.6](https://github.com/dhis2/capture-app/compare/v102.4.5...v102.4.6) (2025-05-26)
+
+
+### Bug Fixes
+
+* [DHIS2-18735] deselecting static list breaks breadcrumbs ([ea74faf](https://github.com/dhis2/capture-app/commit/ea74faffe1720844d7d0fd8e9f4408a52bea5e5b))
+* [DHIS2-18951] Ignore Non-searchable attributes error when validating unique attribute ([#4043](https://github.com/dhis2/capture-app/issues/4043)) ([86559e5](https://github.com/dhis2/capture-app/commit/86559e5950400f510541c505275c6a8d3c3a1b78))
+* **translations:** sync translations from transifex (master) ([#4103](https://github.com/dhis2/capture-app/issues/4103)) ([84343d8](https://github.com/dhis2/capture-app/commit/84343d81ba5423d855e4b16d8e933445b335b585))
+
 ## [102.4.5](https://github.com/dhis2/capture-app/compare/v102.4.4...v102.4.5) (2025-05-23)
 
 
