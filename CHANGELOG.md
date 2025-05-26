@@ -1,3 +1,10 @@
+## [102.4.5](https://github.com/dhis2/capture-app/compare/v102.4.4...v102.4.5) (2025-05-23)
+
+
+### Bug Fixes
+
+* [DHIS2-15903] indexedDB caching ([#4056](https://github.com/dhis2/capture-app/issues/4056)) ([750101c](https://github.com/dhis2/capture-app/commit/750101ce5094ce245a32d92e5f2847ac7bc95d76))
+
 ## [102.4.4](https://github.com/dhis2/capture-app/compare/v102.4.3...v102.4.4) (2025-05-20)
 
 

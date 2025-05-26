@@ -2,7 +2,7 @@
 import type {
     CachedOptionSet,
     CachedTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 
 export type ConstructorInput = {|
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
