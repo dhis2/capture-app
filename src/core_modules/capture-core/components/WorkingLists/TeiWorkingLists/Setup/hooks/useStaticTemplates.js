@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { WorkingListTemplate } from '../../../WorkingListsBase';
 
-export const useStaticTemplates = (defaultAlteredTemplate?: WorkingListTemplate) =>
+export const useStaticTemplates = (defaultAlteredTemplate?: WorkingListTemplate, defaultTemplateId: string) =>
     useMemo(
         () => [
             defaultAlteredTemplate || {
-                id: 'default',
+                id: defaultTemplateId,
                 isDefault: true,
                 name: 'default',
                 access: {
@@ -60,5 +60,5 @@ export const useStaticTemplates = (defaultAlteredTemplate?: WorkingListTemplate)
                 },
             },
         ],
-        [defaultAlteredTemplate],
+        [defaultAlteredTemplate, defaultTemplateId],
     );
