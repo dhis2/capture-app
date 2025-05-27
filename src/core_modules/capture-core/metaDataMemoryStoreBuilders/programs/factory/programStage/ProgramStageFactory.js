@@ -12,7 +12,7 @@ import type {
     CachedProgramStageDataElementsAsObject,
     CachedOptionSet,
     CachedDataElement,
-} from '../../../../storageControllers';
+} from '../../../../storageControllers/cache.types';
 import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';

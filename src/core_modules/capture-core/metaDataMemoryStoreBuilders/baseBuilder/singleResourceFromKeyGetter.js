@@ -1,7 +1,8 @@
 // @flow
-import { getUserMetadataStorageController, typeof USER_METADATA_STORES } from '../../storageControllers';
+import { typeof userStores } from '../../storageControllers/stores';
+import { getUserStorageController } from '../../storageControllers';
 
-export const getCachedSingleResourceFromKeyAsync = (store: $Values<USER_METADATA_STORES>, key: string) => {
-    const storageController = getUserMetadataStorageController();
+export const getCachedSingleResourceFromKeyAsync = (store: $Values<userStores>, key: string) => {
+    const storageController = getUserStorageController();
     return storageController.get(store, key);
 };

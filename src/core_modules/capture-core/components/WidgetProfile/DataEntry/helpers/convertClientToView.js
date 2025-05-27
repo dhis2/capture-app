@@ -1,9 +1,6 @@
 // @flow
 import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../metaData';
-import {
-    convertOptionSetValueServerToClient,
-    convertClientToView as convertValue,
-} from '../../../../converters';
+import { convertValue } from '../../../../converters/clientToView';
 
 type Attribute = {
     attribute: string,
@@ -24,7 +21,7 @@ export const convertClientToView = (clientAttribute: Attribute) => {
             option =>
                 new Option((o) => {
                     o.text = option.displayName;
-                    o.value = convertOptionSetValueServerToClient(option.code, valueType) ?? option.code;
+                    o.value = option.code;
                 }),
         );
         dataElement.optionSet = new OptionSet(attribute, options, null, dataElement);

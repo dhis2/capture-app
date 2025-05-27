@@ -1,1 +1,0 @@
-export { MinimalCoordinates } from './MinimalCoordinates';

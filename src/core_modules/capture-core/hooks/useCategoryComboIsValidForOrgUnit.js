@@ -3,15 +3,15 @@ import { useMemo } from 'react';
 // $FlowFixMe
 import { shallowEqual, useSelector } from 'react-redux';
 import { useIndexedDBQuery } from '../utils/reactQueryHelpers';
-import { getUserMetadataStorageController, USER_METADATA_STORES } from '../storageControllers';
+import { getUserStorageController, userStores } from '../storageControllers';
 
 type Props = {
     selectedOrgUnitId: string,
 }
 
 const getSelectedCategoryOption = (selectedCategories: Array<string>) => {
-    const storageController = getUserMetadataStorageController();
-    return storageController.getAll(USER_METADATA_STORES.CATEGORY_OPTIONS, {
+    const storageController = getUserStorageController();
+    return storageController.getAll(userStores.CATEGORY_OPTIONS, {
         predicate: ({ id, organisationUnits }) => selectedCategories.includes(id) && organisationUnits,
     });
 };

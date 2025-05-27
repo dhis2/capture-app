@@ -1,6 +1,6 @@
 // @flow
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
-import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
+import { getUserStorageController, userStores } from '../../../../storageControllers';
 
 type Props = {|
     programId: string,
@@ -11,9 +11,9 @@ type Props = {|
 const getDataElementsForStage = async ({
     dataElementIds,
 }) => {
-    const storageController = getUserMetadataStorageController();
+    const storageController = getUserStorageController();
 
-    return storageController.getAll(USER_METADATA_STORES.DATA_ELEMENTS, {
+    return storageController.getAll(userStores.DATA_ELEMENTS, {
         predicate: dataElement => dataElementIds.includes(dataElement.id),
     });
 };

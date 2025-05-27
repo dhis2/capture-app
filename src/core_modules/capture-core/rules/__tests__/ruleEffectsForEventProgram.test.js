@@ -968,12 +968,6 @@ describe('Event rules engine', () => {
             { JGnHr6WI3AY: 'Yes' },
             [
                 {
-                    type: 'ASSIGN',
-                    id: 'PFXeJV8d7ja',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
@@ -1032,23 +1026,17 @@ describe('Event rules engine', () => {
                 { type: 'HIDEFIELD', id: 'Z5z8vFQy0w0', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-            ],
-        ],
-        [
-            { QQLXTXVidW2: 'Yes', leqawmlPkI5: 'Yes,No' },
-            [
-                {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
                 {
                     type: 'ASSIGN',
                     id: 'PFXeJV8d7ja',
                     value: null,
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
+            ],
+        ],
+        [
+            { QQLXTXVidW2: 'Yes', leqawmlPkI5: 'Yes,No' },
+            [
                 {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
@@ -1107,23 +1095,23 @@ describe('Event rules engine', () => {
                     optionId: 'RCT079wdeKT',
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-            ],
-        ],
-        [
-            { QQLXTXVidW2: 'No', leqawmlPkI5: 'Yes,No' },
-            [
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
                 {
                     type: 'ASSIGN',
                     id: 'PFXeJV8d7ja',
                     value: null,
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
-                {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: 'Probable Case',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
+            ],
+        ],
+        [
+            { QQLXTXVidW2: 'No', leqawmlPkI5: 'Yes,No' },
+            [
                 {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
@@ -1183,11 +1171,82 @@ describe('Event rules engine', () => {
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'ASSIGN',
+                    id: 'PFXeJV8d7ja',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: 'Probable Case',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
             ],
         ],
         [
             { QQLXTXVidW2: 'Unknown' },
             [
+                {
+                    type: 'HIDEOPTION',
+                    id: 'ovY6E8BSdto',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'MkeWrqeqZXL',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'ovY6E8BSdto',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'fPV0gQ8ds6D',
+                },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'JGnHr6WI3AY',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'p8htbyJHydl',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'CUbZcLm9LyN',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'dUeRcF2cApV',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'bYt4why1tL3',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'xBoo6HyaYcd',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'RCT079wdeKT',
+                },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 {
                     type: 'ASSIGN',
                     id: 'Z5z8vFQy0w0',
@@ -1200,76 +1259,11 @@ describe('Event rules engine', () => {
                     value: null,
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'ovY6E8BSdto',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'MkeWrqeqZXL',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'ovY6E8BSdto',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'fPV0gQ8ds6D',
-                },
-                { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'JGnHr6WI3AY',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'p8htbyJHydl',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'CUbZcLm9LyN',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                { type: 'HIDEFIELD', id: 'jBBkFuPKctq', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'dUeRcF2cApV',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'bYt4why1tL3',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'xBoo6HyaYcd',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'RCT079wdeKT',
-                },
-                { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
             ],
         ],
         [
             { CUbZcLm9LyN: 'Yes' },
             [
-                {
-                    type: 'ASSIGN',
-                    id: 'PFXeJV8d7ja',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
                 {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
@@ -1329,23 +1323,17 @@ describe('Event rules engine', () => {
                 },
                 { type: 'HIDEFIELD', id: 'Z5z8vFQy0w0', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEFIELD', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-            ],
-        ],
-        [
-            { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Inconclusive' },
-            [
                 {
                     type: 'ASSIGN',
                     id: 'PFXeJV8d7ja',
                     value: null,
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
-                {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: 'Probable Case',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
+            ],
+        ],
+        [
+            { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Inconclusive' },
+            [
                 {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
@@ -1404,11 +1392,81 @@ describe('Event rules engine', () => {
                     optionId: 'RCT079wdeKT',
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'ASSIGN',
+                    id: 'PFXeJV8d7ja',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: 'Probable Case',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
             ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Positive' },
             [
+                {
+                    type: 'HIDEOPTION',
+                    id: 'ovY6E8BSdto',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'MkeWrqeqZXL',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'ovY6E8BSdto',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'fPV0gQ8ds6D',
+                },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'JGnHr6WI3AY',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'p8htbyJHydl',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'CUbZcLm9LyN',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'pqxvAQU1z9W',
+                },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'dUeRcF2cApV',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'bYt4why1tL3',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'xBoo6HyaYcd',
+                },
+                {
+                    type: 'HIDEOPTION',
+                    id: 'bOYWVEBaWy6',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                    optionId: 'RCT079wdeKT',
+                },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 {
                     type: 'ASSIGN',
                     id: 'PFXeJV8d7ja',
@@ -1421,82 +1479,12 @@ describe('Event rules engine', () => {
                     value: 'Laboratory Confirmed Case',
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
                 },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'ovY6E8BSdto',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'MkeWrqeqZXL',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'ovY6E8BSdto',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'fPV0gQ8ds6D',
-                },
-                { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'JGnHr6WI3AY',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'p8htbyJHydl',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'CUbZcLm9LyN',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'pqxvAQU1z9W',
-                },
-                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                { type: 'HIDEFIELD', id: 'jBBkFuPKctq', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'dUeRcF2cApV',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'bYt4why1tL3',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'xBoo6HyaYcd',
-                },
-                {
-                    type: 'HIDEOPTION',
-                    id: 'bOYWVEBaWy6',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                    optionId: 'RCT079wdeKT',
-                },
-                { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
             ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Negative' },
             [
                 {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: 'Suspected Case',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
-                    type: 'ASSIGN',
-                    id: 'PFXeJV8d7ja',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
@@ -1554,24 +1542,24 @@ describe('Event rules engine', () => {
                     optionId: 'RCT079wdeKT',
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: 'Suspected Case',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
+                {
+                    type: 'ASSIGN',
+                    id: 'PFXeJV8d7ja',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
             ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Unknown' },
             [
                 {
-                    type: 'ASSIGN',
-                    id: 'Z5z8vFQy0w0',
-                    value: 'Suspected Case',
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
-                    type: 'ASSIGN',
-                    id: 'PFXeJV8d7ja',
-                    value: null,
-                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
-                },
-                {
                     type: 'HIDEOPTION',
                     id: 'ovY6E8BSdto',
                     targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
@@ -1629,6 +1617,18 @@ describe('Event rules engine', () => {
                     optionId: 'RCT079wdeKT',
                 },
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                {
+                    type: 'ASSIGN',
+                    id: 'Z5z8vFQy0w0',
+                    value: 'Suspected Case',
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
+                {
+                    type: 'ASSIGN',
+                    id: 'PFXeJV8d7ja',
+                    value: null,
+                    targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT,
+                },
             ],
         ],
     ])('where different fields are hidden', (currentEvent, expected) => {

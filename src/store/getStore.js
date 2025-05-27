@@ -14,7 +14,7 @@ import { getPersistOptions } from './persist/persistOptionsGetter';
 import { reducerDescriptions } from '../reducers/descriptions/trackerCapture.reducerDescriptions';
 import { epics } from '../epics/trackerCapture.epics';
 
-export async function getStore(
+export function getStore(
     navigate: (path: string, scrollToTop?: boolean) => void,
     apiUtils: ApiUtilsWithoutHistory,
     onRehydrated: () => void) {
@@ -35,7 +35,7 @@ export async function getStore(
         effect: getEffectReconciler(apiUtils.mutate),
         persistCallback: onRehydrated,
         queue: queueConfig,
-        persistOptions: await getPersistOptions(),
+        persistOptions: getPersistOptions(),
     });
 
     const epicMiddleware = createEpicMiddleware({

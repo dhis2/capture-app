@@ -1,6 +1,7 @@
 // @flow
 import { useMemo, useRef, useState } from 'react';
-import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
+import { mainStores } from '../../storageControllers/stores';
+import { getMainStorageController } from '../../storageControllers';
 
 export const useSystemSettingsFromIndexedDB = (
     key: string,
@@ -12,7 +13,7 @@ export const useSystemSettingsFromIndexedDB = (
 
     useMemo(() => {
         storageController
-            .get(MAIN_STORES.SYSTEM_SETTINGS, key)
+            .get(mainStores.SYSTEM_SETTINGS, key)
             .then((response) => {
                 setCachedSystemSettings({ [key]: response?.value });
                 setLoading(false);

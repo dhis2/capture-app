@@ -3,7 +3,7 @@ import type
 {
     CachedTrackedEntityAttribute,
     CachedOptionSet,
-} from '../../../../storageControllers';
+} from '../../../../storageControllers/cache.types';
 import type {
     DataEntryFormConfig,
 } from '../../../../components/DataEntries/common/TEIAndEnrollment';

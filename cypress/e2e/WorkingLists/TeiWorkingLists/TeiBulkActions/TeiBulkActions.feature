@@ -44,8 +44,6 @@ Feature: User facing tests for bulk actions on Tracked Entity working lists
     And you close the error dialog
     And the unsuccessful enrollments should still be selected
 
-#DHIS2-18447
-@skip
   Scenario: the user should be able to bulk complete enrollments and events
     Given you open the main page with Ngelehun and Malaria focus investigation context
     And you select the first 4 rows

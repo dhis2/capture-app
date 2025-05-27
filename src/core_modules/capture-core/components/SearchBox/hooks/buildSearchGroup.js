@@ -1,5 +1,6 @@
 // @flow
-import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
+import { getUserStorageController } from '../../../storageControllers';
+import { userStores } from '../../../storageControllers/stores';
 import { SearchGroupFactory } from '../../../metaDataMemoryStoreBuilders/common/factory';
 import type {
     ProgramTrackedEntityAttribute,
@@ -17,15 +18,15 @@ export const buildSearchGroup = async ({
     programTrackedEntityAttributes,
     trackedEntityTypeAttributes,
 }: SearchProgramOrTET, locale: string) => {
-    const storageController = getUserMetadataStorageController();
+    const storageController = getUserStorageController();
     const searchAttributes = programTrackedEntityAttributes ?? trackedEntityTypeAttributes;
 
-    const trackedEntityAttributes = await storageController.getAll(USER_METADATA_STORES.TRACKED_ENTITY_ATTRIBUTES, {
+    const trackedEntityAttributes = await storageController.getAll(userStores.TRACKED_ENTITY_ATTRIBUTES, {
         predicate: trackedEntityAttribute => searchAttributes
             .some(tea => tea.trackedEntityAttributeId === trackedEntityAttribute.id),
     });
 
-    const optionSets = await storageController.getAll(USER_METADATA_STORES.OPTION_SETS, {
+    const optionSets = await storageController.getAll(userStores.OPTION_SETS, {
         predicate: optionSet => trackedEntityAttributes
             ?.some(tea => tea.optionSet?.id === optionSet.trackedEntityAttributeId),
     });

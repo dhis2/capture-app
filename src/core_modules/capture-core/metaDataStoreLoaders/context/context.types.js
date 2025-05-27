@@ -19,6 +19,7 @@ type StoreNames = {
     CATEGORIES: string,
     CATEGORY_OPTIONS_BY_CATEGORY: string,
     CATEGORY_OPTIONS: string,
+    REDUX_PERSIST: string,
 };
 
 export type ContextInput = {

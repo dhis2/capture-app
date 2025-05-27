@@ -9,8 +9,7 @@ import {
     startSavingNewTrackedEntityInstance,
     startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { openNewPage } from '../NewPage.actions';
-import { cleanUpDataEntry } from '../../../DataEntry';
+import { cleanUpDataEntry, openNewPage } from '../NewPage.actions';
 import {
     NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID,
     NEW_SINGLE_EVENT_DATA_ENTRY_ID,

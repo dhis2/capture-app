@@ -10,7 +10,6 @@ import { getProgramStageTemplates } from './templates/getProgramStageTemplates';
 import { getTEITemplates } from './templates/getTEITemplates';
 import { TEI_WORKING_LISTS_TYPE, TEI_WORKING_LISTS, PROGRAM_STAGE_WORKING_LISTS } from '../../constants';
 
-// Deduplicate default template so that only one default template is returned
 const removeDefaultTemplate = templates =>
     templates.reduce(
         (acc, template) => (template.isDefault && acc.find(accItem => accItem.isDefault) ? acc : [...acc, template]),

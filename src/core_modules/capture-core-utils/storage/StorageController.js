@@ -130,7 +130,7 @@ export class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async open({ onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore } = {}) {
+    async open(...args) {
         if (this.adapter.isOpen()) {
             throw new IndexedDBError(
                 errorCreator(StorageController.errorMessages.STORAGE_ALREADY_OPEN)({ adapter: this.adapter }),
@@ -142,9 +142,9 @@ export class StorageController {
         }
 
         try {
-            await this.adapter.open(onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore);
-        } catch {
-            await this._openFallbackAdapter(onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore);
+            await this.adapter.open(...args);
+        } catch (error) {
+            await this._openFallbackAdapter(...args);
         }
     }
 

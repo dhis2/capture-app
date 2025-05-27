@@ -4,7 +4,7 @@ import type {
     CachedOptionSet,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
-} from '../../../../../../storageControllers';
+} from '../../../../../../storageControllers/cache.types';
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {|

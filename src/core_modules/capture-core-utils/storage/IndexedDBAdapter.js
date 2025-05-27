@@ -168,7 +168,7 @@ export class IndexedDBAdapter {
                                     if (!db.objectStoreNames.contains(store)) {
                                         return Promise.resolve(null);
                                     }
-                                    return IndexedDBAdapter.get(store, key, {}, db, keyPath);
+                                    return IndexedDBAdapter.get(store, key, db, keyPath);
                                 },
                                 isDowngrade: true,
                             }),

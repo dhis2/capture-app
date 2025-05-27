@@ -5,7 +5,8 @@ import { ProgramFactory } from './factory';
 import type { TrackedEntityType, EventProgram, TrackerProgram } from '../../metaData';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getRulesAndVariablesFromProgramIndicators } from './getRulesAndVariablesFromIndicators';
-import { getUserMetadataStorageController, USER_METADATA_STORES as stores } from '../../storageControllers';
+import { getUserStorageController } from '../../storageControllers';
+import { userStores as stores } from '../../storageControllers/stores';
 import type {
     CachedProgram,
     CachedOptionSet,
@@ -13,7 +14,7 @@ import type {
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
     CachedCategory,
-} from '../../storageControllers';
+} from '../../storageControllers/cache.types';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { BuildProgramsInput } from './buildPrograms.types';
 
@@ -50,7 +51,7 @@ function getCategories(
 }
 
 export async function getBuilderPrerequisites() {
-    const storageController = getUserMetadataStorageController();
+    const storageController = getUserStorageController();
 
     const cachedProgramsPromise = getPrograms(storageController, stores.PROGRAMS);
     const cachedProgramRulesVariables = getProgramRulesVariables(storageController, stores.PROGRAM_RULES_VARIABLES);

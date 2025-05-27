@@ -1,5 +1,6 @@
 // @flow
-import { getMainStorageController, MAIN_STORES } from '../../storageControllers';
+import { getMainStorageController } from '../../storageControllers';
+import { mainStores } from '../../storageControllers/stores';
 
 function isLangRTL(code) {
     const langs = ['ar', 'fa', 'ur'];
@@ -8,7 +9,7 @@ function isLangRTL(code) {
 }
 
 export async function cacheSystemSettings(
-    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, baseUrl: string},
+    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, },
     userSettings: { uiLocale: string, captureScope: Array<{id: string}>, searchScope: Array<{id: string}> },
 ) {
     const systemSettingsArray = [
@@ -43,13 +44,9 @@ export async function cacheSystemSettings(
             // $FlowFixMe
             value: userSettings.searchScope.map(orgUnit => orgUnit.id),
         },
-        {
-            id: 'baseUrl',
-            value: systemSettings.baseUrl,
-        },
     ];
 
     const storageController = getMainStorageController();
-    await storageController.setAll(MAIN_STORES.SYSTEM_SETTINGS, systemSettingsArray);
+    await storageController.setAll(mainStores.SYSTEM_SETTINGS, systemSettingsArray);
     return systemSettingsArray;
 }

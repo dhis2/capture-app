@@ -1,14 +1,14 @@
 
 import { useMemo } from 'react';
 import { relatedStageStatus } from '../constants';
-import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
+import { getUserStorageController, userStores } from '../../../storageControllers';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { RELATIONSHIP_ENTITIES } from '../WidgetRelatedStages.constants';
 import type { RelationshipType } from '../WidgetRelatedStages.types';
 
 const getRelationshipTypeFromIndexedDB = () => {
-    const storageController = getUserMetadataStorageController();
-    return storageController.getAll(USER_METADATA_STORES.RELATIONSHIP_TYPES);
+    const storageController = getUserStorageController();
+    return storageController.getAll(userStores.RELATIONSHIP_TYPES);
 };
 
 type Props = {

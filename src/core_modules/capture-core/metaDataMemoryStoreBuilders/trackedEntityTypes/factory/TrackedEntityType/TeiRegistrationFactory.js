@@ -14,7 +14,7 @@ import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import type {
     CachedTrackedEntityType,
     CachedTrackedEntityAttribute,
-} from '../../../../storageControllers';
+} from '../../../../storageControllers/cache.types';
 import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './teiRegistrationFactory.types';
 import { FormFieldPluginConfig } from '../../../../metaData/FormFieldPluginConfig';

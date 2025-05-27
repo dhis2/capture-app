@@ -9,7 +9,6 @@
         "flow",
         "flow-typed",
         "i18n",
-        "public",
-        ".d2"
+        "public"
     ]
 }

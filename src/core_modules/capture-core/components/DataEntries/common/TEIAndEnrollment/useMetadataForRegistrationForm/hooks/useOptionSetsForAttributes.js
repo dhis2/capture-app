@@ -1,7 +1,7 @@
 // @flow
 import { getOptionSets } from '../getFunctions/getOptionSets';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
-import type { CachedTrackedEntityAttribute } from '../../../../../../storageControllers';
+import type { CachedTrackedEntityAttribute } from '../../../../../../storageControllers/cache.types';
 
 type Props = {
     selectedScopeId: string,

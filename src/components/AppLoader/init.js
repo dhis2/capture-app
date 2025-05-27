@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import type { ServerVersion } from '@dhis2/app-runtime';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
@@ -10,7 +9,7 @@ import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocale
 
 import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
-import { initStorageControllers } from 'capture-core/storageControllers';
+import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
 
@@ -131,24 +130,18 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function, m
 }
 
 async function initializeSystemSettingsAsync(
-    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, baseUrl: string },
+    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, },
     userSettings: { uiLocale: string, captureScope: Array<{ id: string }>, searchScope: Array<{id: string}> },
 ) {
     const systemSettingsCacheData = await cacheSystemSettings(systemSettings, userSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
-export async function initializeAsync({
-    onCacheExpired,
-    querySingleResource,
-    serverVersion,
-    baseUrl,
-}: {
+export async function initializeAsync(
     onCacheExpired: Function,
-    querySingleResource: Function,
-    serverVersion: ServerVersion,
-    baseUrl: string,
-}) {
+    onQueryApi: Function,
+    minorServerVersion: number,
+) {
     setLogLevel();
 
     const {
@@ -157,14 +150,14 @@ export async function initializeAsync({
         organisationUnits: captureScope,
         teiSearchOrganisationUnits: searchScope,
         settings: userSettings,
-    } = await querySingleResource({
+    } = await onQueryApi({
         resource: 'me',
         params: {
             fields: 'id,userRoles,organisationUnits,teiSearchOrganisationUnits,settings',
         },
     });
 
-    const systemSettings = await querySingleResource({
+    const systemSettings = await onQueryApi({
         resource: 'system/info',
         params: {
             fields: 'dateFormat,serverTimeZoneId,calendar',
@@ -174,7 +167,7 @@ export async function initializeAsync({
     // initialize rule engine
     let ruleEngineSettings;
     try {
-        ruleEngineSettings = await querySingleResource({
+        ruleEngineSettings = await onQueryApi({
             resource: 'dataStore/capture/ruleEngine',
         });
     } catch {
@@ -184,12 +177,7 @@ export async function initializeAsync({
 
     // initialize storage controllers
     try {
-        await initStorageControllers({
-            onCacheExpired,
-            currentUserId,
-            serverVersion,
-            baseUrl,
-        });
+        await initControllersAsync(onCacheExpired, currentUserId);
     } catch (error) {
         throw new DisplayException(i18n.t(
             'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
@@ -201,8 +189,8 @@ export async function initializeAsync({
     const dbLocale = userSettings.keyDbLocale;
     await setLocaleDataAsync(uiLocale);
     // initialize system settings
-    await initializeSystemSettingsAsync({ ...systemSettings, baseUrl }, { uiLocale, captureScope, searchScope });
+    await initializeSystemSettingsAsync(systemSettings, { uiLocale, captureScope, searchScope });
 
     // initialize metadata
-    await initializeMetaDataAsync(dbLocale, querySingleResource, serverVersion.minor);
+    await initializeMetaDataAsync(dbLocale, onQueryApi, minorServerVersion);
 }

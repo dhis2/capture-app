@@ -18,8 +18,6 @@ export const FEATURES = Object.freeze({
     moreGenericErrorMessages: 'moreGenericErrorMessages',
     sendEmptyScheduledAt: 'sendEmptyScheduledAt',
     kotlinRuleEngine: 'kotlinRuleEngine',
-    orgUnitReplaceOuQueryParam: 'orgUnitReplaceOuQueryParam',
-    enrollmentStatusReplaceProgramStatusQueryParam: 'enrollmentStatusReplaceProgramStatusQueryParam',
 });
 
 // The first minor version that supports the feature
@@ -42,8 +40,6 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.moreGenericErrorMessages]: 42,
     [FEATURES.sendEmptyScheduledAt]: 41,
     [FEATURES.kotlinRuleEngine]: 42,
-    [FEATURES.orgUnitReplaceOuQueryParam]: 42,
-    [FEATURES.enrollmentStatusReplaceProgramStatusQueryParam]: 42,
 });
 
 export const hasAPISupportForFeature = (minorVersion: string | number, featureName: string) =>

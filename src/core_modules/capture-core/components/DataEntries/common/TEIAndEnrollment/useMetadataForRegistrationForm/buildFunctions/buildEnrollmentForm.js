@@ -5,7 +5,7 @@ import type {
     CachedTrackedEntityAttribute,
     CachedProgram,
     CachedTrackedEntityType,
-} from '../../../../../../storageControllers';
+} from '../../../../../../storageControllers/cache.types';
 import type { TrackedEntityType } from '../../../../../../metaData';
 import { buildSearchGroup } from '../../../../../SearchBox/hooks';
 import type { DataEntryFormConfig } from '../types';

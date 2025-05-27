@@ -1,9 +1,9 @@
 // @flow
 import { getCustomStorage } from './storage/customStorageGetter';
 
-export async function getPersistOptions() {
+export function getPersistOptions() {
     return {
-        storage: await getCustomStorage(),
+        storage: getCustomStorage(),
         whitelist: ['offline', 'networkStatus'],
     };
 }

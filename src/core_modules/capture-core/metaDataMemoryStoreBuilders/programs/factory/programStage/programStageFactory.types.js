@@ -4,7 +4,7 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
     CachedSectionDataElements,
-} from '../../../../storageControllers';
+} from '../../../../storageControllers/cache.types';
 import type {
     DataEntryFormConfig,
 } from '../../../../components/DataEntries/common/TEIAndEnrollment';

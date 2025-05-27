@@ -8,7 +8,7 @@ import type {
     CachedOptionGroup,
     CachedOptionSetTranslation,
     CachedOptionTranslation,
-} from '../../../../storageControllers';
+} from '../../../../storageControllers/cache.types';
 import { OptionSet, Option, optionSetInputTypes as inputTypes } from '../../../../metaData';
 import type { DataElement } from '../../../../metaData';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';

@@ -4,7 +4,7 @@ import { buildConstants } from '../constants/constantsBuilder';
 import { buildOptionSets } from '../optionSets/optionSetsBuilder';
 import { buildTrackedEntityTypes } from '../trackedEntityTypes/trackedEntityTypesBuilder';
 import { getCommonPrerequisitesAsync } from './commonPrerequisitesGetter';
-import { USER_METADATA_STORES as stores } from '../../storageControllers';
+import { userStores as stores } from '../../storageControllers/stores';
 
 export async function buildMetaDataAsync(locale: string, minorServerVersion: number) {
     const {

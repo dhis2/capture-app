@@ -1,7 +1,8 @@
 // @flow
-import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../../../storageControllers';
+import { getUserStorageController } from '../../../../../../storageControllers';
+import { userStores } from '../../../../../../storageControllers/stores';
 
 export const getTrackedEntityTypeById = (tetId: string) => {
-    const storageController = getUserMetadataStorageController();
-    return storageController.get(USER_METADATA_STORES.TRACKED_ENTITY_TYPES, tetId);
+    const storageController = getUserStorageController();
+    return storageController.get(userStores.TRACKED_ENTITY_TYPES, tetId);
 };

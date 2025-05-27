@@ -2,7 +2,7 @@
 import { Icon } from '../../../../metaData';
 import type {
     CachedStyle,
-} from '../../../../storageControllers';
+} from '../../../../storageControllers/cache.types';
 
 export const buildIcon = (cachedStyle?: ?CachedStyle) => {
     const { color, icon: name } = cachedStyle || {};
