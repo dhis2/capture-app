@@ -1,6 +1,5 @@
 import { dataElementTypes } from '../../../metaData';
-
-export type QueryRefetchFunction = (options?: Record<string, any>) => Promise<any>;
+import type { QueryRefetchFunction } from 'capture-core-utils/types';
 
 export type OwnProps = {
     coordinates: Array<Array<[number, number]>>;
