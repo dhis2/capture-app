@@ -14,12 +14,6 @@ type StateProps = PropsFromRedux;
 type DispatchProps = {
 };
 
-type PossibleDuplicatesState = ReduxStore['value']['possibleDuplicates'];
-
-type State = {
-    possibleDuplicates: PossibleDuplicatesState;
-};
-
 const buildDataElements = (scopeId: string) => {
     const currentSearchScopeDataElements = getAttributesFromScopeId(scopeId);
 
@@ -29,7 +23,7 @@ const buildDataElements = (scopeId: string) => {
 };
 
 const mapStateToProps = (
-    { possibleDuplicates }: State,
+    { possibleDuplicates }: ReduxStore['value'],
     { selectedScopeId }: { selectedScopeId: string },
 ): StateProps => ({
     ready: !possibleDuplicates.isLoading,

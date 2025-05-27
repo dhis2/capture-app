@@ -9,16 +9,10 @@ type StateProps = {
 type DispatchProps = {
 };
 
-type PossibleDuplicatesState = ReduxStore['value']['possibleDuplicates'];
-
-type State = {
-    possibleDuplicates: PossibleDuplicatesState;
-};
-
 const mapStateToProps = (
-    state: State,
+    { possibleDuplicates }: ReduxStore['value'],
 ): StateProps => ({
-    currentPage: state.possibleDuplicates.currentPage || 1,
+    currentPage: possibleDuplicates.currentPage || 1,
 });
 
 const mapDispatchToProps = (): DispatchProps => ({});
