@@ -1,9 +1,9 @@
 import React, { type ComponentType } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import type { Theme } from '@material-ui/core/styles';
 import { Pagination } from 'capture-ui';
 import { withNavigation } from '../../Pagination/withDefaultNavigation';
-import type { Props } from './ReviewDialogContentsPager.types';
+import type { Props, OwnProps } from './ReviewDialogContentsPager.types';
 import { useDuplicates } from '../useDuplicates';
 
 const getStyles = (theme: Theme) => ({
@@ -39,4 +39,4 @@ const ReviewDialogContentsPagerPlain = ({
     );
 };
 
-export const ReviewDialogContentsPagerComponent = withStyles(getStyles)(ReviewDialogContentsPagerPlain) as ComponentType<Omit<Props, keyof WithStyles<typeof getStyles>>>;
+export const ReviewDialogContentsPagerComponent = withStyles(getStyles)(ReviewDialogContentsPagerPlain) as ComponentType<OwnProps>;

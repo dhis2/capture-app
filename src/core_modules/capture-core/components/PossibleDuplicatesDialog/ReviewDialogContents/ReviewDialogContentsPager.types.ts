@@ -4,6 +4,7 @@ export type OwnProps = {
     nextPageButtonDisabled: boolean;
     dataEntryId: string;
     selectedScopeId: string;
+    onChangePage: (page: number) => void;
 };
 
 type DispatchersFromFromRedux = {
