@@ -7,7 +7,16 @@ import { ReviewDialogContentsComponent } from './ReviewDialogContents.component'
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withErrorMessageHandler } from '../../../HOC/withErrorMessageHandler';
 import { getAttributesFromScopeId } from '../../../metaData/helpers';
-import type { OwnProps } from './ReviewDialogContents.types';
+import type { OwnProps, PropsFromRedux } from './ReviewDialogContents.types';
+
+type StateProps = PropsFromRedux;
+
+type DispatchProps = {
+};
+
+type State = {
+    possibleDuplicates: ReduxStore['value']['possibleDuplicates'];
+};
 
 const buildDataElements = (scopeId: string) => {
     const currentSearchScopeDataElements = getAttributesFromScopeId(scopeId);
@@ -18,9 +27,9 @@ const buildDataElements = (scopeId: string) => {
 };
 
 const mapStateToProps = (
-    { possibleDuplicates }: ReduxStore['value'],
+    { possibleDuplicates }: State,
     { selectedScopeId }: { selectedScopeId: string },
-) => ({
+): StateProps => ({
     ready: !possibleDuplicates.isLoading,
     isUpdating: possibleDuplicates.isUpdating,
     error: possibleDuplicates.loadError ? i18n.t('An error occurred loading possible duplicates') : undefined,
@@ -28,7 +37,7 @@ const mapStateToProps = (
     dataElements: buildDataElements(selectedScopeId),
 });
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (): DispatchProps => ({});
 
 export const ReviewDialogContents = compose<ComponentType<OwnProps>>(
     connect(mapStateToProps, mapDispatchToProps),

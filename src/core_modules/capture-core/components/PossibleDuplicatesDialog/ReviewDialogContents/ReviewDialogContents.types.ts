@@ -8,7 +8,7 @@ export type OwnProps = {
     dataEntryId: string;
 };
 
-type PropsFromRedux = {
+export type PropsFromRedux = {
     ready: boolean;
     isUpdating: boolean;
     error?: string;
