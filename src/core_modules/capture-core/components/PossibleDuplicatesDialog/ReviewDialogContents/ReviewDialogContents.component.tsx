@@ -1,5 +1,6 @@
 import React, { useContext, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { ModalTitle, ModalContent } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { CardList } from '../../CardList';
@@ -7,15 +8,15 @@ import { ReviewDialogContentsPager } from './ReviewDialogContentsPager.container
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import type { Props } from './ReviewDialogContents.types';
 
-const styles = {
+const getStyles = (theme: Theme) => ({
     linkButtonContainer: {
-        paddingTop: '10px',
+        paddingTop: theme.typography.pxToRem(10),
     },
     title: {
         margin: 0,
-        paddingLeft: '10px',
+        paddingLeft: theme.typography.pxToRem(10),
     },
-};
+});
 
 const ReviewDialogContentsPlain = ({
     dataElements,
@@ -49,4 +50,4 @@ const ReviewDialogContentsPlain = ({
     );
 };
 
-export const ReviewDialogContentsComponent = withStyles(styles)(ReviewDialogContentsPlain) as ComponentType<Props>;
+export const ReviewDialogContentsComponent = withStyles(getStyles)(ReviewDialogContentsPlain) as ComponentType<Props>;
