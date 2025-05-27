@@ -37,7 +37,8 @@ const mapStateToProps = (
     dataElements: buildDataElements(selectedScopeId),
 });
 
-const mapDispatchToProps = (): DispatchProps => ({});
+const mapDispatchToProps = (): DispatchProps => ({
+});
 
 export const ReviewDialogContents = compose<ComponentType<OwnProps>>(
     connect(mapStateToProps, mapDispatchToProps),
