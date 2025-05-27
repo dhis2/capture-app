@@ -14,8 +14,10 @@ type StateProps = PropsFromRedux;
 type DispatchProps = {
 };
 
+type PossibleDuplicatesState = ReduxStore['value']['possibleDuplicates'];
+
 type State = {
-    possibleDuplicates: ReduxStore['value']['possibleDuplicates'];
+    possibleDuplicates: PossibleDuplicatesState;
 };
 
 const buildDataElements = (scopeId: string) => {
