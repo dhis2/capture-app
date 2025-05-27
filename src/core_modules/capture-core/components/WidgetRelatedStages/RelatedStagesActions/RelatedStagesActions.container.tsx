@@ -31,6 +31,7 @@ const RelatedStagesActionsPlain = ({
     });
     const { scheduledLabel, occurredLabel } = useStageLabels(programId, constraint?.programStage?.id);
     const { events, linkableEvents, isLoading: isLoadingEvents } = useRelatedStageEvents({
+        programId,
         stageId: constraint?.programStage?.id,
         relationshipTypeId: selectedRelationshipType?.id,
         scheduledLabel,
