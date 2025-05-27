@@ -1,11 +1,10 @@
-// @flow
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, type ComponentType, type ReactNode } from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconCross24, spacers, Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core';
 import type { CoordinatesProps } from './Coordinates.types';
 import { CoordinateInput } from '../../../../../capture-ui/internal/CoordinateInput/CoordinateInput.component';
 import { isEqual } from '../../../../utils/valueEqualityChecker';
@@ -33,12 +32,14 @@ const styles = (theme: Theme) => ({
         borderRadius: '0',
     },
     errorContainer: {
-        backgroundColor: theme.palette.error.lighter,
+        backgroundColor: theme.palette.error.light,
         color: theme.palette.error.main,
     },
 });
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
+
+type Props = CoordinatesProps & WithStyles<typeof styles>;
 
 const CoordinatesPlain = ({
     classes,
@@ -46,11 +47,11 @@ const CoordinatesPlain = ({
     setOpen,
     defaultValues,
     onSetCoordinates,
-}: CoordinatesProps) => {
-    const [position, setPosition] = useState(defaultValues);
-    const [center, setCenter] = useState();
-    const [tempLatitude, setTempLatitude] = useState(position?.[0]);
-    const [tempLongitude, setTempLongitude] = useState(position?.[1]);
+}: Props) => {
+    const [position, setPosition] = useState<[number, number] | null>(defaultValues || null);
+    const [center, setCenter] = useState<[number, number] | undefined>(undefined);
+    const [tempLatitude, setTempLatitude] = useState<string | null | undefined>(position?.[0]?.toString());
+    const [tempLongitude, setTempLongitude] = useState<string | null | undefined>(position?.[1]?.toString());
     const [isEditing, setEditing] = useState(!defaultValues);
     const [isValid, setValid] = useState(true);
     const hasErrors = useMemo(() => {
@@ -59,11 +60,11 @@ const CoordinatesPlain = ({
     }, [position, defaultValues, isValid]);
 
     const resetToDefaultValues = () => {
-        setCenter(initialCenter);
-        setPosition(defaultValues);
+        setCenter(initialCenter || undefined);
+        setPosition(defaultValues || null);
         if (defaultValues) {
-            setTempLatitude(defaultValues[0]);
-            setTempLongitude(defaultValues[1]);
+            setTempLatitude(defaultValues[0].toString());
+            setTempLongitude(defaultValues[1].toString());
             setEditing(false);
         } else {
             setTempLatitude(null);
@@ -71,22 +72,22 @@ const CoordinatesPlain = ({
         }
     };
 
-    const onHandleMapClicked = (mapCoordinates) => {
+    const onHandleMapClicked = (mapCoordinates: { latlng: { lat: number; lng: number } }) => {
         if (isEditing) {
             const { lat, lng } = mapCoordinates.latlng;
             const newPosition: [number, number] = [lat, lng];
             setValid(true);
             setPosition(newPosition);
-            setTempLatitude(lat);
-            setTempLongitude(lng);
+            setTempLatitude(lat.toString());
+            setTempLongitude(lng.toString());
         }
     };
 
-    const onSearch = (searchPosition: any) => {
+    const onSearch = (searchPosition: [number, number]) => {
         setCenter(searchPosition);
         setValid(true);
-        setTempLatitude(searchPosition[0]);
-        setTempLongitude(searchPosition[1]);
+        setTempLatitude(searchPosition[0].toString());
+        setTempLongitude(searchPosition[1].toString());
         setPosition(searchPosition);
     };
 
@@ -121,15 +122,16 @@ const CoordinatesPlain = ({
 
     const renderLatitude = () => (
         <CoordinateInput
-            label={i18n.t('Latitude')}
+            label={i18n.t('Latitude') as string}
             value={tempLatitude}
-            classes={classes}
+            classes={{}}
+            className={classes.inputContent}
             disabled={!isEditing}
             onBlur={(latitude) => {
                 if (!latitude) {
                     return;
                 }
-                const longitude = tempLongitude || (position?.[1] ? position[1] : undefined);
+                const longitude = tempLongitude || (position?.[1] ? position[1].toString() : undefined);
                 if (!longitude) {
                     return;
                 }
@@ -139,7 +141,7 @@ const CoordinatesPlain = ({
                     return;
                 }
                 setValid(true);
-                const newPosition = [Number(latitude), longitude];
+                const newPosition: [number, number] = [Number(latitude), Number(longitude)];
                 setPosition(newPosition);
                 setCenter(newPosition);
             }}
@@ -151,15 +153,16 @@ const CoordinatesPlain = ({
 
     const renderLongitude = () => (
         <CoordinateInput
-            label={i18n.t('Longitude')}
+            label={i18n.t('Longitude') as string}
             value={tempLongitude}
-            classes={classes}
+            classes={{}}
+            className={classes.inputContent}
             disabled={!isEditing}
             onBlur={(longitude) => {
                 if (!longitude) {
                     return;
                 }
-                const latitude = tempLatitude || (position?.[1] ? position[0] : undefined);
+                const latitude = tempLatitude || (position?.[1] ? position[0].toString() : undefined);
                 if (!latitude) {
                     return;
                 }
@@ -169,7 +172,7 @@ const CoordinatesPlain = ({
                     return;
                 }
                 setValid(true);
-                const newPosition = [latitude, Number(longitude)];
+                const newPosition: [number, number] = [Number(latitude), Number(longitude)];
                 setPosition(newPosition);
                 setCenter(newPosition);
             }}
@@ -189,7 +192,7 @@ const CoordinatesPlain = ({
                         setEditing(true);
                     }}
                 >
-                    {i18n.t('Edit')}
+                    {i18n.t('Edit') as ReactNode}
                 </Button>
             ) : (
                 <Button
@@ -215,7 +218,7 @@ const CoordinatesPlain = ({
                 }}
                 secondary
             >
-                {i18n.t('Cancel')}
+                {i18n.t('Cancel') as ReactNode}
             </Button>
             <Button
                 disabled={hasErrors}
@@ -228,7 +231,7 @@ const CoordinatesPlain = ({
                 }}
                 primary
             >
-                {i18n.t('Set coordinates')}
+                {i18n.t('Set coordinates') as ReactNode}
             </Button>
         </ButtonStrip>
     );
@@ -245,7 +248,7 @@ const CoordinatesPlain = ({
                         {renderFieldButton()}
                     </div>
                     {hasErrors && (
-                        <div className={classes.inputWrapper}>{i18n.t('Please provide valid coordinates')}</div>
+                        <div className={classes.inputWrapper}>{i18n.t('Please provide valid coordinates') as ReactNode}</div>
                     )}
                 </div>
             </ModalContent>
@@ -253,4 +256,5 @@ const CoordinatesPlain = ({
         </Modal>
     );
 };
-export const Coordinates = withStyles(styles)(CoordinatesPlain);
+
+export const Coordinates = withStyles(styles)(CoordinatesPlain) as ComponentType<CoordinatesProps>;
