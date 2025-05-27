@@ -1,5 +1,5 @@
+import type { QueryRefetchFunction } from '../../../../capture-core-utils/types';
 import { dataElementTypes } from '../../../metaData';
-import type { QueryRefetchFunction } from 'capture-core-utils/types';
 
 export type OwnProps = {
     coordinates: Array<Array<[number, number]>>;
