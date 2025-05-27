@@ -1,30 +1,25 @@
-// @flow
-import React, { type Node } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions, AlertStack, AlertBar } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { FeedbackBarComponentProps } from './FeedbackBar.types';
 
-const styles = () => ({
+const styles = {
     closeButton: {
         marginTop: '5px',
     },
     actionContainer: {
         paddingRight: 2,
     },
-});
-
-type Feedback = {
-    message: string | { title: string, content: string },
-    action?: Node,
-    displayType?: 'alert' | 'dialog',
 };
 
-type Props = {
-    feedback: Feedback,
-    onClose: () => void,
-};
+type Props = FeedbackBarComponentProps & WithStyles<typeof styles>;
 
-const FeedbackBarComponentPlain = ({ feedback = {}, onClose }: Props) => {
+const FeedbackBarComponentPlain = ({ feedback, onClose }: Props) => {
+    if (!feedback) {
+        return null;
+    }
+
     const { message, displayType } = feedback;
     const isAlertBarOpen = typeof message === 'string' && !displayType;
     const isDialogOpen = typeof message === 'object' && displayType === 'dialog';
@@ -53,4 +48,4 @@ const FeedbackBarComponentPlain = ({ feedback = {}, onClose }: Props) => {
     );
 };
 
-export const FeedbackBarComponent = withStyles(styles)(FeedbackBarComponentPlain);
+export const FeedbackBarComponent = withStyles(styles)(FeedbackBarComponentPlain) as ComponentType<FeedbackBarComponentProps>;
