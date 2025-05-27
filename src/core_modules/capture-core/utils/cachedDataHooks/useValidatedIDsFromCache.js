@@ -4,7 +4,7 @@ import {
     containsKeyInStorageAsync,
     getCachedSingleResourceFromKeyAsync,
 } from '../../MetaDataStoreUtils/MetaDataStoreUtils';
-import { userStores } from '../../storageControllers/stores';
+import { USER_METADATA_STORES } from '../../storageControllers';
 
 type Props = {|
     programId: string,
@@ -38,11 +38,11 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props): Retur
     const getPromises = useCallback(() => {
         const promises = [];
         if (programId) {
-            promises.push(containsKeyInStorageAsync(userStores.PROGRAMS, programId, { id: programId, type: IdTypes.PROGRAM_ID, convert: value => value }));
+            promises.push(containsKeyInStorageAsync(USER_METADATA_STORES.PROGRAMS, programId, { id: programId, type: IdTypes.PROGRAM_ID, convert: value => value }));
         }
 
         if (orgUnitId) {
-            promises.push(getCachedSingleResourceFromKeyAsync(userStores.ORGANISATION_UNITS_BY_PROGRAM, programId, { id: orgUnitId, type: IdTypes.ORG_UNIT_ID, convert: value => !!value?.organisationUnits[orgUnitId] }));
+            promises.push(getCachedSingleResourceFromKeyAsync(USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM, programId, { id: orgUnitId, type: IdTypes.ORG_UNIT_ID, convert: value => !!value?.organisationUnits[orgUnitId] }));
         }
 
         Promise.all(promises)

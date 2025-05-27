@@ -1,15 +1,14 @@
 // @flow
 /* eslint-disable no-await-in-loop */
 import { MemoryAdapter } from 'capture-core-utils/storage';
-import { getUserStorageController } from '../../../../storageControllers';
-import { userStores } from '../../../../storageControllers/stores';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 
 type Predicate = (categoryOption: Object) => boolean;
 type Project = (caegoryOption: Object) => any;
 
 async function getCategoryOptionIds(categoryId: string) {
-    const storageController = getUserStorageController();
-    const storeData = await storageController.get(userStores.CATEGORY_OPTIONS_BY_CATEGORY, categoryId);
+    const storageController = getUserMetadataStorageController();
+    const storeData = await storageController.get(USER_METADATA_STORES.CATEGORY_OPTIONS_BY_CATEGORY, categoryId);
     return storeData.options;
 }
 
@@ -26,8 +25,8 @@ async function getCategoryOptionsThroughCursor(
         return predicate(categoryOption);
     };
 
-    const storageController = getUserStorageController();
-    const mappedOptions = await storageController.getAll(userStores.CATEGORY_OPTIONS, {
+    const storageController = getUserMetadataStorageController();
+    const mappedOptions = await storageController.getAll(USER_METADATA_STORES.CATEGORY_OPTIONS, {
         predicate: internalPredicate,
         project,
         onIsAborted,
@@ -44,10 +43,10 @@ function getCategoryOptionsFromMemoryAdapterAsync(
     predicate: Predicate,
     project: Project,
 ) {
-    const storageController = getUserStorageController();
+    const storageController = getUserMetadataStorageController();
     const optionPromises = categoryOptionIds
         .map(id => storageController
-            .get(userStores.CATEGORY_OPTIONS, id)
+            .get(USER_METADATA_STORES.CATEGORY_OPTIONS, id)
             .then(co =>
                 (predicate(co) ? project(co) : null)),
         );
@@ -67,7 +66,7 @@ async function getCategoryOptions(
     },
 ) {
     const { predicate, project } = callbacks;
-    if (getUserStorageController().adapterType === MemoryAdapter) {
+    if (getUserMetadataStorageController().adapterType === MemoryAdapter) {
         return getCategoryOptionsFromMemoryAdapterAsync(categoryOptionIds, predicate, project);
     }
     const mappedOptions = await getCategoryOptionsThroughCursor(categoryId, categoryOptionIds, callbacks);
