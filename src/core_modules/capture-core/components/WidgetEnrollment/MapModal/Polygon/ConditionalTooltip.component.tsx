@@ -13,27 +13,18 @@ export const ConditionalTooltip = (props: Props) => {
 
     return enabled ?
         (<Tooltip {...passOnProps}>
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            { ({ onMouseOver, onMouseOut, ref }: any) => {
-                const handleMouseOver = (e: any) => {
-                    onMouseOver(e);
-                };
-                const handleMouseOut = (e: any) => {
-                    onMouseOut(e);
-                };
-                return (
-                    <span
-                        ref={(btnRef) => {
-                            if (btnRef) {
-                                btnRef.onpointerenter = handleMouseOver;
-                                btnRef.onpointerleave = handleMouseOut;
-                                ref.current = btnRef;
-                            }
-                        }}
-                    >
-                        {children}
-                    </span>
-                );
-            }}
+            { ({ onMouseOver, onMouseOut, ref }: any) => (
+                <span
+                    ref={(btnRef) => {
+                        if (btnRef) {
+                            btnRef.onpointerenter = onMouseOver;
+                            btnRef.onpointerleave = onMouseOut;
+                            ref.current = btnRef;
+                        }
+                    }}
+                >
+                    {children}
+                </span>
+            )}
         </Tooltip>) : children;
 };

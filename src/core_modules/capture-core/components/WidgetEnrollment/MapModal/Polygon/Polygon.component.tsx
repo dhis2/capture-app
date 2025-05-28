@@ -61,14 +61,14 @@ const PolygonPlain = ({
     defaultValues,
     onSetCoordinates,
 }: Props) => {
-    const [polygonArea, setPolygonArea] = useState<Array<Array<number>> | null>(defaultValues || null);
+    const [polygonArea, setPolygonArea] = useState<Array<Array<number>> | null>(defaultValues ?? null);
     const [center, setCenter] = useState<[number, number] | undefined>(undefined);
     const [drawingState, setDrawingState] = useState<string | undefined>(undefined);
     const prevDrawingState = useRef<string | undefined>(undefined);
 
     const resetToDefaultValues = () => {
-        setCenter(initialCenter || undefined);
-        setPolygonArea(defaultValues || null);
+        setCenter(initialCenter ?? undefined);
+        setPolygonArea(defaultValues ?? null);
     };
 
     const onMapPolygonCreated = (e: any) => {

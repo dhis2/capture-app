@@ -2,13 +2,13 @@ import React, { useEffect, useState, useCallback, type ComponentType } from 'rea
 import ReactDOM from 'react-dom';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import L from 'leaflet';
+import L, { Control } from 'leaflet';
 import { withLeaflet } from 'react-leaflet';
 
 type Props = {
     onClick: () => void;
     disabled?: boolean | null;
-    leaflet: any;
+    leaflet: typeof Control;
 };
 
 const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {

@@ -12,7 +12,7 @@ export const MapModal = ({
     center: storedCenter,
 }: MapModalProps) => {
     const { geometryType, dataElementType } = useGeometry(enrollment as { program: string });
-    const { center: centerPoint } = useCenterPoint(enrollment.orgUnit as string, storedCenter);
+    const { center } = useCenterPoint(enrollment.orgUnit, storedCenter);
 
     const onSetCoordinates = useCallback((coordinates: [number, number] | Array<[number, number]> | null) => {
         const geometry = coordinates ? { type: geometryType, coordinates } : null;
@@ -21,7 +21,7 @@ export const MapModal = ({
 
     return (
         <MapModalComponent
-            center={centerPoint ?? null}
+            center={center}
             type={dataElementType}
             setOpen={setOpenMap}
             onSetCoordinates={onSetCoordinates}

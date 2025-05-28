@@ -1,7 +1,7 @@
 import { dataElementTypes } from '../../../metaData';
 
 export type MapModalComponentProps = {
-    center: [number, number] | null;
+    center?: [number, number] | null;
     type: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON;
     defaultValues?: number[][] | [number, number] | null;
     setOpen: (open: boolean) => void;

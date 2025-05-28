@@ -13,9 +13,8 @@ export type FeatureCollection = {
 };
 
 export type PolygonProps = {
-    center: [number, number] | null;
+    center?: [number, number] | null;
     setOpen: (open: boolean) => void;
     onSetCoordinates: (coordinates: [number, number] | Array<[number, number]> | null) => void;
     defaultValues?: Array<Array<number>> | null;
-    classes: Record<string, string>;
 }
