@@ -16,7 +16,6 @@ export type Props = {|
     onSave: ExternalSaveHandler,
     dataEntryHasChanges: boolean,
     userInteractionInProgress: boolean,
-    trackedEntityName: string,
     onBackToMainPage: () => void,
     onBackToDashboard: () => void,
     onCancel: () => void,
