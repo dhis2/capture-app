@@ -5,7 +5,7 @@ export type MapModalComponentProps = {
     type: typeof dataElementTypes.COORDINATE | typeof dataElementTypes.POLYGON;
     defaultValues?: number[][] | [number, number] | null;
     setOpen: (open: boolean) => void;
-    onSetCoordinates: (coordinates: [number, number] | [number, number][] | null) => void;
+    onSetCoordinates: (coordinates: [number, number] | Array<Array<[number, number]>> | null) => void;
 }
 
 export type MapModalProps = {
