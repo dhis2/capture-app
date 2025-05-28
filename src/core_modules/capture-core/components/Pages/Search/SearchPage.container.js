@@ -35,6 +35,14 @@ export const SearchPage: ComponentType<{||}> = () => {
         [dispatch]);
     const preselectedProgramId = usePreselectedProgram(programId);
 
+    const onCloseBulkDataEntryPlugin = useCallback(() => (
+        setShowBulkDataEntryPlugin(false)
+    ), [setShowBulkDataEntryPlugin]);
+
+    const onOpenBulkDataEntryPlugin = useCallback(() => (
+        setShowBulkDataEntryPlugin(true)
+    ), [setShowBulkDataEntryPlugin]);
+
     useEffect(() => {
         if (programId && (programId !== preselectedProgramId)) {
             // There is no search for Event type of programs.
@@ -54,7 +62,8 @@ export const SearchPage: ComponentType<{||}> = () => {
                 orgUnitId={orgUnitId}
                 onNavigateToMainPage={onNavigateToMainPage}
                 showBulkDataEntryPlugin={showBulkDataEntryPlugin}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+                onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
             />
         </ResultsPageSizeContext.Provider>
     );

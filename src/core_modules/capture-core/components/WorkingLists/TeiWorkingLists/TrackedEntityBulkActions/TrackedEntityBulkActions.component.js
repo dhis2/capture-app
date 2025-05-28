@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
-import { BulkActionBar } from '../../WorkingListsBase/BulkActionBar';
-import { CompleteAction } from './Actions';
+import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
+import { CompleteAction, DeleteEnrollmentsAction } from './Actions';
 import type { Props } from './TrackedEntityBulkActions.types';
-import { DeleteEnrollmentsAction } from './Actions/DeleteEnrollmentsAction';
 
 export const TrackedEntityBulkActionsComponent = ({
     selectedRows,
@@ -13,6 +12,8 @@ export const TrackedEntityBulkActionsComponent = ({
     onClearSelection,
     onUpdateList,
     removeRowsFromSelection,
+    onOpenBulkDataEntryPlugin,
+    bulkDataEntryIsActive,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
 
@@ -25,6 +26,11 @@ export const TrackedEntityBulkActionsComponent = ({
             selectedRowsCount={selectedRowsCount}
             onClearSelection={onClearSelection}
         >
+            <BulkDataEntryAction
+                programId={programId}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+                selectionInProgress
+            />
             <CompleteAction
                 programId={programId}
                 programDataWriteAccess={programDataWriteAccess}
@@ -32,6 +38,7 @@ export const TrackedEntityBulkActionsComponent = ({
                 stages={stages}
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
+                bulkDataEntryIsActive={bulkDataEntryIsActive}
             />
 
             <DeleteEnrollmentsAction
@@ -39,6 +46,7 @@ export const TrackedEntityBulkActionsComponent = ({
                 programDataWriteAccess={programDataWriteAccess}
                 programId={programId}
                 onUpdateList={onUpdateList}
+                bulkDataEntryIsActive={bulkDataEntryIsActive}
             />
 
             {/* <DeleteTeiAction */}

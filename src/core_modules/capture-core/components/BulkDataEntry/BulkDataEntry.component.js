@@ -15,21 +15,19 @@ const styles = () => ({
 
 const BulkDataEntryPlain = ({
     programId,
-    setShowBulkDataEntryPlugin,
+    onCloseBulkDataEntryPlugin,
     displayFrontPageList,
     page,
+    trackedEntityIds,
     classes,
 }: Props) => {
     const { activeList, removeActiveList } = useBulkDataEntryConfigurations(programId);
 
     const onComplete = useCallback(async () => {
         await removeActiveList();
-        setShowBulkDataEntryPlugin(false);
-    }, [setShowBulkDataEntryPlugin, removeActiveList]);
+        onCloseBulkDataEntryPlugin();
+    }, [onCloseBulkDataEntryPlugin, removeActiveList]);
 
-    const onDefer = useCallback(() => {
-        setShowBulkDataEntryPlugin(false);
-    }, [setShowBulkDataEntryPlugin]);
 
     if (!activeList) {
         return null;
@@ -38,7 +36,7 @@ const BulkDataEntryPlain = ({
     return (
         <div className={classes.container}>
             <BulkDataEntryBreadcrumb
-                onBackToOriginPage={onDefer}
+                onBackToOriginPage={onCloseBulkDataEntryPlugin}
                 programId={programId}
                 displayFrontPageList={displayFrontPageList}
                 page={page}
@@ -48,7 +46,8 @@ const BulkDataEntryPlain = ({
                 dataKey={activeList.dataKey}
                 pluginSource={activeList.pluginSource}
                 onComplete={onComplete}
-                onDefer={onDefer}
+                onDefer={onCloseBulkDataEntryPlugin}
+                trackedEntityIds={trackedEntityIds}
             />
         </div>
     );
