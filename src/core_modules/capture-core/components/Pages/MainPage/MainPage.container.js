@@ -105,8 +105,8 @@ const useCallbackMainPage = ({
         setShowBulkDataEntryPlugin(false);
     }, [setBulkDataEntryTrackedEntityIds, setShowBulkDataEntryPlugin]);
 
-    const onOpenBulkDataEntryPlugin = useCallback((trackedEntities) => {
-        setBulkDataEntryTrackedEntityIds(trackedEntities);
+    const onOpenBulkDataEntryPlugin = useCallback((trackedEntityIds) => {
+        setBulkDataEntryTrackedEntityIds(trackedEntityIds);
         setShowBulkDataEntryPlugin(true);
     }, [setBulkDataEntryTrackedEntityIds, setShowBulkDataEntryPlugin]);
 
