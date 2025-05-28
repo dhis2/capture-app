@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, type ComponentType } from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import L from 'leaflet';
@@ -33,8 +33,7 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
 
         deleteControl.onAdd = () => {
             const div = L.DomUtil.create('div', '');
-            const root = createRoot(div);
-            root.render(jsx);
+            ReactDOM.render(jsx, div);
             return div;
         };
         setLeafletElement(deleteControl);
