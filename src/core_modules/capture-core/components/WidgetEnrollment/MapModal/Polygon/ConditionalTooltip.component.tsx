@@ -13,16 +13,14 @@ export const ConditionalTooltip = (props: Props) => {
 
     return enabled ?
         (<Tooltip {...passOnProps}>
-            {/* @ts-ignore - Tooltip render function type mismatch */}
-            { ({ onMouseOver, onMouseOut, ref }) => {
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            { ({ onMouseOver, onMouseOut, ref }: any) => {
                 const handleMouseOver = (e: any) => {
                     onMouseOver(e);
                 };
-                
                 const handleMouseOut = (e: any) => {
                     onMouseOut(e);
                 };
-                
                 return (
                     <span
                         ref={(btnRef) => {

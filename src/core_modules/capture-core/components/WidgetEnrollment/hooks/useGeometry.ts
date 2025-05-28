@@ -3,7 +3,7 @@ import { dataElementTypes } from '../../../metaData';
 import { useProgram } from './useProgram';
 
 export const useGeometry = (enrollment: { program: string }) => {
-    const { program, error } = useProgram(enrollment.program);
+    const { program } = useProgram(enrollment.program);
     const featureType = program?.featureType;
 
     if (featureType === 'POINT') {

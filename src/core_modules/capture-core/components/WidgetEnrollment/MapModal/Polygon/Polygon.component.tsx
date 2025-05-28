@@ -11,7 +11,7 @@ import { convertPolygonToServer } from './converters';
 import { DeleteControl } from './DeleteControl.component';
 import { ConditionalTooltip } from './ConditionalTooltip.component';
 
-const styles = (theme: Theme) => ({
+const styles = (_theme: Theme) => ({
     modalContent: {
         width: '100%',
     },

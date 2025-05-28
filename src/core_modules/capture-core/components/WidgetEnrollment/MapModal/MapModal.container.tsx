@@ -1,4 +1,4 @@
-import React, { useCallback, type ComponentType } from 'react';
+import React, { useCallback } from 'react';
 import { useGeometry } from '../hooks/useGeometry';
 import type { MapModalProps } from './MapModal.types';
 import { MapModal as MapModalComponent } from './MapModal.component';
