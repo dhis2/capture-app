@@ -1,10 +1,21 @@
-// @flow
 import { useMemo, useState } from 'react';
 import { useApiMetadataQuery } from 'capture-core/utils/reactQueryHelpers';
 
-const DEFAULT_CENTER = [51.505, -0.09];
+const DEFAULT_CENTER: [number, number] = [51.505, -0.09];
 
-const convertToClientCoordinates = ({ coordinates, type }: { coordinates: any[], type: string }) => {
+type GeometryData = {
+    coordinates: any[];
+    type: string;
+};
+
+type OrgUnitData = {
+    geometry?: GeometryData;
+    parent?: {
+        id: string;
+    };
+};
+
+const convertToClientCoordinates = ({ coordinates, type }: GeometryData): [number, number] => {
     switch (type) {
     case 'Point':
         return [coordinates[1], coordinates[0]];
@@ -15,7 +26,7 @@ const convertToClientCoordinates = ({ coordinates, type }: { coordinates: any[],
     }
 };
 
-export const useCenterPoint = (orgUnitId: string, storedCenter: ?[number, number]) => {
+export const useCenterPoint = (orgUnitId: string, storedCenter: [number, number] | null | undefined) => {
     const [orgUnitKey, setOrgUnitKey] = useState(orgUnitId);
     const queryKey = ['organisationUnit', 'geometry', orgUnitKey];
     const queryFn = {
@@ -26,11 +37,11 @@ export const useCenterPoint = (orgUnitId: string, storedCenter: ?[number, number
         },
     };
     const queryOptions = { enabled: !storedCenter && Boolean(orgUnitId) };
-    const { data, isLoading } = useApiMetadataQuery<any>(queryKey, queryFn, queryOptions);
+    const { data, isLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
 
     const center = useMemo(() => {
         if (data) {
-            const { geometry, parent } = data;
+            const { geometry, parent } = data as OrgUnitData;
             if (geometry) {
                 return convertToClientCoordinates(geometry);
             } else if (parent?.id) {

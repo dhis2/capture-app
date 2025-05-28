@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { useGeometry } from '../hooks/useGeometry';
 import type { MapModalProps } from './MapModal.types';
@@ -12,7 +11,7 @@ export const MapModal = ({
     defaultValues,
     center: storedCenter,
 }: MapModalProps) => {
-    const { geometryType, dataElementType } = useGeometry(enrollment);
+    const { geometryType, dataElementType } = useGeometry(enrollment as { program: string });
     const { center } = useCenterPoint(enrollment.orgUnit, storedCenter);
 
     const onSetCoordinates = useCallback((coordinates) => {

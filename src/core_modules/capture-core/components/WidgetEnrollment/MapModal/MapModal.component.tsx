@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { dataElementTypes } from '../../../metaData';
 import type { MapModalComponentProps } from './MapModal.types';
@@ -12,7 +11,7 @@ export const MapModal = ({ type, center, setOpen, onSetCoordinates, defaultValue
                 center={center}
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
-                defaultValues={defaultValues}
+                defaultValues={defaultValues as [number, number] | null}
             />
         )}
         {type === dataElementTypes.POLYGON && (
@@ -20,7 +19,7 @@ export const MapModal = ({ type, center, setOpen, onSetCoordinates, defaultValue
                 center={center}
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
-                defaultValues={defaultValues}
+                defaultValues={defaultValues as number[][] | null}
             />
         )}
     </>

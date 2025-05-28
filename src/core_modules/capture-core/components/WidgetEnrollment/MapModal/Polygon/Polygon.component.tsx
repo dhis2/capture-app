@@ -1,12 +1,11 @@
-// @flow
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, Button, ButtonStrip } from '@dhis2/ui';
-import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
+import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import type { PolygonProps, FeatureCollection } from './Polygon.types';
 import { convertPolygonToServer } from './converters';
 import { DeleteControl } from './DeleteControl.component';
@@ -25,11 +24,18 @@ const styles = () => ({
     },
 });
 
-const coordsToFeatureCollection = (inputCoordinates: any): ?FeatureCollection => {
+const drawing = {
+    STARTED: 'STARTED',
+    FINISHED: 'FINISHED',
+};
+
+type Props = PolygonProps & WithStyles<typeof styles>;
+
+const coordsToFeatureCollection = (inputCoordinates: any): FeatureCollection | null => {
     if (!inputCoordinates) {
         return null;
     }
-    const list = inputCoordinates[0].length > 2 ? inputCoordinates[0] : inputCoordinates.map(c => [c[1], c[0]]);
+    const list = inputCoordinates[0]?.length > 2 ? inputCoordinates[0] : inputCoordinates.map((c: number[]) => [c[1], c[0]]);
 
     return {
         type: 'FeatureCollection',
@@ -46,11 +52,6 @@ const coordsToFeatureCollection = (inputCoordinates: any): ?FeatureCollection =>
     };
 };
 
-const drawing = {
-    STARTED: 'STARTED',
-    FINISHED: 'FINISHED',
-};
-
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 const PolygonPlain = ({
@@ -59,19 +60,19 @@ const PolygonPlain = ({
     setOpen,
     defaultValues,
     onSetCoordinates,
-}: PolygonProps) => {
-    const [polygonArea, setPolygonArea] = useState(defaultValues);
-    const [center, setCenter] = useState();
-    const [drawingState, setDrawingState] = useState(undefined);
-    const prevDrawingState = useRef(undefined);
+}: Props) => {
+    const [polygonArea, setPolygonArea] = useState<Array<Array<number>> | null>(defaultValues ?? null);
+    const [center, setCenter] = useState<[number, number] | undefined>(undefined);
+    const [drawingState, setDrawingState] = useState<string | undefined>(undefined);
+    const prevDrawingState = useRef<string | undefined>(undefined);
 
     const resetToDefaultValues = () => {
-        setCenter(initialCenter);
-        setPolygonArea(defaultValues);
+        setCenter(initialCenter ?? undefined);
+        setPolygonArea(defaultValues ?? null);
     };
 
     const onMapPolygonCreated = (e: any) => {
-        const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates[0].map(c => [c[1], c[0]]);
+        const polygonCoordinates = e.layer.toGeoJSON().geometry.coordinates[0].map((c: number[]) => [c[1], c[0]]);
         setPolygonArea(polygonCoordinates);
         setDrawingState(drawing.FINISHED);
         prevDrawingState.current = drawing.FINISHED;
@@ -148,7 +149,7 @@ const PolygonPlain = ({
         </Map>
     );
 
-    const onFeatureGroupReady = (reactFGref: any, featureCollection: ?FeatureCollection) => {
+    const onFeatureGroupReady = (reactFGref: any, featureCollection: FeatureCollection | null) => {
         if (!reactFGref) {
             return;
         }
@@ -215,11 +216,11 @@ const PolygonPlain = ({
 
     return (
         <Modal large>
-            <ModalTitle> {i18n.t('Area')}</ModalTitle>
+            <ModalTitle>{i18n.t('Area')}</ModalTitle>
             <ModalContent className={classes.modalContent}>{renderMap()}</ModalContent>
             <ModalActions>{renderActions()}</ModalActions>
         </Modal>
     );
 };
 
-export const Polygon = withStyles(styles)(PolygonPlain);
+export const Polygon = withStyles(styles)(PolygonPlain) as ComponentType<PolygonProps>;

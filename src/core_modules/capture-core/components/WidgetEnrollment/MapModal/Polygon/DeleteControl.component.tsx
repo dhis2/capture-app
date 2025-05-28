@@ -1,5 +1,4 @@
-// @flow
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, type ComponentType } from 'react';
 import ReactDOM from 'react-dom';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
@@ -7,13 +6,13 @@ import L, { Control } from 'leaflet';
 import { withLeaflet } from 'react-leaflet';
 
 type Props = {
-    onClick: () => void,
-    disabled?: ?boolean,
-    leaflet: typeof Control,
+    onClick: () => void;
+    disabled?: boolean | null;
+    leaflet: typeof Control;
 };
 
 const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
-    const [leafletElement, setLeafletElement] = useState();
+    const [leafletElement, setLeafletElement] = useState<any>();
     const onHandleClick = useCallback(() => !disabled && onClick(), [disabled, onClick]);
 
     useEffect(() => {
@@ -27,7 +26,7 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
                     onClick={onHandleClick}
                     title={text}
                     role="button"
-                    tabIndex="0"
+                    tabIndex={0}
                 />
             </div>
         );
@@ -49,4 +48,4 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
     return null;
 };
 
-export const DeleteControl = withLeaflet(DeleteControlPlain);
+export const DeleteControl = withLeaflet(DeleteControlPlain) as ComponentType<Omit<Props, 'leaflet'>>;

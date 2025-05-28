@@ -1,10 +1,11 @@
-// @flow
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Tooltip } from '@dhis2/ui';
 
 type Props = {
-    enabled: boolean,
-    children: any,
+    enabled: boolean;
+    children: ReactNode;
+    content?: string;
+    position?: string;
 };
 
 export const ConditionalTooltip = (props: Props) => {
@@ -12,7 +13,7 @@ export const ConditionalTooltip = (props: Props) => {
 
     return enabled ?
         (<Tooltip {...passOnProps}>
-            { ({ onMouseOver, onMouseOut, ref }) => (
+            { ({ onMouseOver, onMouseOut, ref }: any) => (
                 <span
                     ref={(btnRef) => {
                         if (btnRef) {

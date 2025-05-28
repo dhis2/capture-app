@@ -1,6 +1,10 @@
-// @flow
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+
+type ProgramData = {
+    featureType: string;
+    [key: string]: any;
+};
 
 export const useProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(
@@ -18,5 +22,5 @@ export const useProgram = (programId: string) => {
             [programId],
         ),
     );
-    return { error, loading, program: data?.program };
+    return { error, loading, program: data?.program as ProgramData | undefined };
 };
