@@ -1,19 +1,18 @@
-// @flow
-import React, { useEffect, useState, useCallback } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useState, useCallback, type ComponentType } from 'react';
+import { createRoot } from 'react-dom/client';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import L, { Control } from 'leaflet';
+import L from 'leaflet';
 import { withLeaflet } from 'react-leaflet';
 
 type Props = {
-    onClick: () => void,
-    disabled?: ?boolean,
-    leaflet: typeof Control,
+    onClick: () => void;
+    disabled?: boolean | null;
+    leaflet: any;
 };
 
 const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
-    const [leafletElement, setLeafletElement] = useState();
+    const [leafletElement, setLeafletElement] = useState<any>();
     const onHandleClick = useCallback(() => !disabled && onClick(), [disabled, onClick]);
 
     useEffect(() => {
@@ -27,21 +26,22 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
                     onClick={onHandleClick}
                     title={text}
                     role="button"
-                    tabIndex="0"
+                    tabIndex={0}
                 />
             </div>
         );
 
         deleteControl.onAdd = () => {
             const div = L.DomUtil.create('div', '');
-            ReactDOM.render(jsx, div);
+            const root = createRoot(div);
+            root.render(jsx);
             return div;
         };
         setLeafletElement(deleteControl);
     }, [onHandleClick, disabled]);
 
     useEffect(() => {
-        leafletElement && leafletElement.addTo(leaflet.map);
+        leafletElement && leaflet.map && leafletElement.addTo(leaflet.map);
     }, [leafletElement, leaflet.map]);
 
     useEffect(() => () => leafletElement && leafletElement.remove(), [leafletElement]);
@@ -49,4 +49,4 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
     return null;
 };
 
-export const DeleteControl = withLeaflet(DeleteControlPlain);
+export const DeleteControl = withLeaflet(DeleteControlPlain) as ComponentType<Omit<Props, 'leaflet'>>;
