@@ -40,7 +40,7 @@ const DeleteControlPlain = ({ onClick, disabled, leaflet }: Props) => {
     }, [onHandleClick, disabled]);
 
     useEffect(() => {
-        leafletElement && leaflet.map && leafletElement.addTo(leaflet.map);
+        leafletElement && leafletElement.addTo(leaflet.map);
     }, [leafletElement, leaflet.map]);
 
     useEffect(() => () => leafletElement && leafletElement.remove(), [leafletElement]);

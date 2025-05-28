@@ -8,7 +8,7 @@ export const MapModal = ({ type, center, setOpen, onSetCoordinates, defaultValue
     <>
         {type === dataElementTypes.COORDINATE && (
             <Coordinates
-                center={center ?? null}
+                center={center}
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
                 defaultValues={defaultValues as [number, number] | null}
@@ -16,7 +16,7 @@ export const MapModal = ({ type, center, setOpen, onSetCoordinates, defaultValue
         )}
         {type === dataElementTypes.POLYGON && (
             <Polygon
-                center={center ?? null}
+                center={center}
                 setOpen={setOpen}
                 onSetCoordinates={onSetCoordinates}
                 defaultValues={defaultValues as number[][] | null}

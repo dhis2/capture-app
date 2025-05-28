@@ -14,7 +14,7 @@ export const MapModal = ({
     const { geometryType, dataElementType } = useGeometry(enrollment as { program: string });
     const { center } = useCenterPoint(enrollment.orgUnit, storedCenter);
 
-    const onSetCoordinates = useCallback((coordinates: [number, number] | Array<[number, number]> | null) => {
+    const onSetCoordinates = useCallback((coordinates) => {
         const geometry = coordinates ? { type: geometryType, coordinates } : null;
         onUpdate({ ...enrollment, geometry });
     }, [enrollment, geometryType, onUpdate]);
