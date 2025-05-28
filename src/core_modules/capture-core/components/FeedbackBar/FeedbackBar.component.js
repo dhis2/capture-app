@@ -17,6 +17,7 @@ type Feedback = {
     message: string | { title: string, content: string },
     action?: Node,
     displayType?: 'alert' | 'dialog',
+    variant?: 'info' | 'success' | 'warning' | 'critical',
 };
 
 type Props = {
@@ -24,16 +25,22 @@ type Props = {
     onClose: () => void,
 };
 
+
+const getAlertVariant = (variant?: string) => (
+    variant ? { [variant]: true } : {}
+);
+
 const FeedbackBarComponentPlain = ({ feedback = {}, onClose }: Props) => {
-    const { message, displayType } = feedback;
+    const { message, displayType, variant } = feedback;
     const isAlertBarOpen = typeof message === 'string' && !displayType;
     const isDialogOpen = typeof message === 'object' && displayType === 'dialog';
+    const alertVariant = getAlertVariant(variant);
 
     return (
         <>
             <AlertStack>
                 {isAlertBarOpen && (
-                    <AlertBar duration={5000}>
+                    <AlertBar {...alertVariant} duration={5000}>
                         {message}
                     </AlertBar>
                 )}
