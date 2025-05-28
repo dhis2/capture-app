@@ -1,10 +1,9 @@
-// @flow
 import React from 'react';
 import { Tooltip } from '@dhis2/ui';
 import { useOrgUnitNameWithAncestors } from '../../../metadataRetrieval/orgUnitName';
 
 type Props = {
-    orgUnitId: string,
+    orgUnitId: string;
 };
 
 export const TooltipOrgUnit = ({ orgUnitId }: Props) => {
