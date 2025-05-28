@@ -4,7 +4,7 @@ import { convertClientToView } from '../DataEntry';
 
 const DEFAULT_NAME = i18n.t('tracked entity instance');
 
-type Attribute = {
+type TeiAttribute = {
     attribute: string;
     value?: string;
     [key: string]: any;
@@ -19,7 +19,7 @@ type TetAttribute = {
     [key: string]: any;
 };
 
-const convertValue = (attribute: Attribute | undefined) => {
+const convertValue = (attribute: TeiAttribute | undefined) => {
     if (attribute?.value) {
         const convertedValue = convertClientToView(attribute as any);
         return typeof convertedValue === 'string' ? convertedValue : '';
@@ -27,26 +27,26 @@ const convertValue = (attribute: Attribute | undefined) => {
     return '';
 };
 
-const getAttributesValues = (attributes: Attribute[], firstId: string, secondId?: string): string => {
+const getAttributesValues = (attributes: TeiAttribute[], firstId: string, secondId?: string): string => {
     const firstValue = convertValue(attributes.find(({ attribute }) => attribute === firstId));
     const secondValue = convertValue(attributes.find(({ attribute }) => attribute === secondId));
 
     return firstValue ?? secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
 };
 
-const getTetAttributesDisplayInList = (attributes: Attribute[], tetAttributes: TetAttribute[]) => {
+const getTetAttributesDisplayInList = (attributes: TeiAttribute[], tetAttributes: TetAttribute[]) => {
     const [firstId, secondId] = tetAttributes
         .filter(({ displayInList }) => displayInList)
         .map(({ trackedEntityAttribute }) => trackedEntityAttribute.id);
     return getAttributesValues(attributes, firstId, secondId);
 };
 
-const getTetAttributes = (attributes: Attribute[], tetAttributes: { id: string }[]) => {
+const getTetAttributes = (attributes: TeiAttribute[], tetAttributes: { id: string }[]) => {
     const [firstId, secondId] = tetAttributes.map(({ id }) => id);
     return getAttributesValues(attributes, firstId, secondId);
 };
 
-const deriveTeiName = (tetAttributes: TetAttribute[] | { id: string }[], updatedAttributes: Attribute[], fallbackName?: string) => {
+const deriveTeiName = (tetAttributes: TetAttribute[] | { id: string }[], updatedAttributes: TeiAttribute[], fallbackName?: string) => {
     if (!tetAttributes || !updatedAttributes) return fallbackName ?? DEFAULT_NAME;
 
     const teiNameDisplayInReports = getTetAttributesDisplayInList(updatedAttributes, tetAttributes as TetAttribute[]);
@@ -61,7 +61,7 @@ const deriveTeiName = (tetAttributes: TetAttribute[] | { id: string }[], updated
 export const useTeiDisplayName = (
     program: any,
     storedAttributeValues: Array<{ [attrId: string]: any }>,
-    attributes: Array<Attribute>,
+    attributes: Array<TeiAttribute>,
     fallbackName?: string,
 ) =>
     useMemo(() => {
