@@ -6,6 +6,7 @@ import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../utils/api';
 
 type Props = {
+    programId: string,
     stageId: ?string,
     enrollmentId: ?string,
     scheduledLabel: string,
@@ -22,6 +23,7 @@ type ReturnType = {
 }
 
 export const useRelatedStageEvents = ({
+    programId,
     stageId,
     enrollmentId,
     relationshipTypeId,
@@ -32,11 +34,12 @@ export const useRelatedStageEvents = ({
     const query = useMemo(() => ({
         resource: 'tracker/events',
         params: {
+            program: programId,
             programStage: stageId,
             enrollments: enrollmentId,
             fields: 'event,occurredAt,scheduledAt,status,relationships',
         },
-    }), [stageId, enrollmentId]);
+    }), [programId, stageId, enrollmentId]);
     const { data, isLoading, isError } = useApiDataQuery<Array<RelatedStagesEvents>>(
         ['availableRelatedStageEvents', stageId, enrollmentId, relationshipTypeId],
         query,
