@@ -135,6 +135,13 @@ msgstr "Enrollment"
 msgid "Complete event"
 msgstr "Complete event"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+
 msgid "A value is required"
 msgstr "A value is required"
 
@@ -1337,6 +1344,13 @@ msgstr[0] ""
 msgstr[1] ""
 "There are {{count}} scheduled events in this program in {{orgUnitName}} on "
 "this day."
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}"
+msgstr ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}"
 
 msgid "Schedule date / Due date"
 msgstr "Schedule date / Due date"
