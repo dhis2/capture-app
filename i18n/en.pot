@@ -48,6 +48,9 @@ msgstr "Completed enrollments"
 msgid "Cancelled enrollments"
 msgstr "Cancelled enrollments"
 
+msgid "Loading..."
+msgstr "Loading..."
+
 msgid "{{trackedEntityName}} list"
 msgstr "{{trackedEntityName}} list"
 
