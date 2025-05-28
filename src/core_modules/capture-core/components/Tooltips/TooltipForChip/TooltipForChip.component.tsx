@@ -14,7 +14,7 @@ type OwnProps = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 const styles = {
-    button: {
+    chip: {
         border: 'none',
         backgroundColor: 'transparent',
         borderRadius: '16px',
@@ -35,7 +35,7 @@ const TooltipForChipPlain = (props: Props) => {
         return (
             <button
                 onClick={onClick}
-                className={classes.button}
+                className={classes.chip}
             >
                 {children}
             </button>
@@ -60,7 +60,7 @@ const TooltipForChipPlain = (props: Props) => {
                     <button
                         ref={handleButtonRef}
                         onClick={onClick}
-                        className={classes.button}
+                        className={classes.chip}
                         onPointerEnter={onMouseOver}
                         onPointerLeave={onMouseOut}
                         onFocus={handleFocus}
