@@ -1,0 +1,23 @@
+import { connect } from 'react-redux';
+import type { ReduxStore } from '../../../../../core_modules/capture-core-utils/types/global';
+import { ReviewDialogContentsPagerComponent } from './ReviewDialogContentsPager.component';
+
+type StateProps = {
+    currentPage: number;
+};
+
+type DispatchProps = {
+};
+
+const mapStateToProps = (
+    { possibleDuplicates }: ReduxStore['value'],
+): StateProps => ({
+    currentPage: possibleDuplicates.currentPage || 1,
+});
+
+const mapDispatchToProps = (): DispatchProps => ({});
+
+export const ReviewDialogContentsPager = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(ReviewDialogContentsPagerComponent);

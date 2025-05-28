@@ -1,6 +1,6 @@
-// @flow
-import React, { type ComponentType, useContext } from 'react';
+import React, { useContext, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { ModalTitle, ModalContent } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { CardList } from '../../CardList';
@@ -19,18 +19,17 @@ const getStyles = (theme: Theme) => ({
 });
 
 const ReviewDialogContentsPlain = ({
-    classes,
     dataElements,
     teis,
     selectedScopeId,
     dataEntryId,
     renderCardActions,
 }: Props) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+    const { resultsPageSize } = useContext(ResultsPageSizeContext as React.Context<{ resultsPageSize: number }>);
     return (
         <React.Fragment>
             <ModalContent data-test="duplicates-modal">
-                <ModalTitle className={classes.title}>
+                <ModalTitle>
                     {i18n.t('Possible duplicates found')}
                 </ModalTitle>
                 <CardList
@@ -44,10 +43,11 @@ const ReviewDialogContentsPlain = ({
                     dataEntryId={dataEntryId}
                     selectedScopeId={selectedScopeId}
                     nextPageButtonDisabled={teis.length < resultsPageSize}
+                    onChangePage={() => { /* Required prop but handled by container */ }}
                 />
             </ModalContent>
         </React.Fragment>
     );
 };
 
-export const ReviewDialogContentsComponent: ComponentType<Props> = withStyles(getStyles)(ReviewDialogContentsPlain);
+export const ReviewDialogContentsComponent = withStyles(getStyles)(ReviewDialogContentsPlain) as ComponentType<Props>;
