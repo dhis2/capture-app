@@ -453,7 +453,7 @@ msgid "Clear"
 msgstr "Очистити"
 
 msgid "No results"
-msgstr ""
+msgstr "Немає результатів"
 
 msgid "Description"
 msgstr "Опис"
