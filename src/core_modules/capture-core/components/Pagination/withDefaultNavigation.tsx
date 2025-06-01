@@ -1,4 +1,3 @@
-// @flow
 /**
  * @namespace Pagination
  */
@@ -6,6 +5,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton } from 'capture-ui';
 import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
+import type { Theme } from '@material-ui/core/styles';
 
 const styles = (theme: Theme) => ({
     root: {
@@ -51,15 +51,16 @@ const LastPageIcon = () => (
 );
 
 type Props = {
-    nextPageButtonDisabled: boolean,
-    currentPage: number,
-    onChangePage: (pageNumber: number) => void,
-    disabled?: boolean,
+    nextPageButtonDisabled: boolean;
+    currentPage: number;
+    onChangePage: (pageNumber: number) => void;
+    disabled?: boolean;
     classes: {
-        root: string,
-    },
-    theme: Theme,
+        root: string;
+    };
+    theme: Theme;
 };
+
 const getNavigation = (InnerComponent: React.ComponentType<any>) =>
     class PaginationNavigation extends React.Component<Props> {
         handleFirstPageButtonClick = () => {
@@ -112,7 +113,6 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         render() {
             const { classes, theme, ...passOnProps } = this.props;
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     navigationElements={this.renderNavigationElement()}
                     {...passOnProps}

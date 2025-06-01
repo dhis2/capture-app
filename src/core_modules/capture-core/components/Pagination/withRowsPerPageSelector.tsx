@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import './rowsPerPage.css';
 
@@ -10,9 +9,9 @@ import type { VirtualizedOptionConfig } from
 const OptionsSelectWithTranslations = withTranslations()(OptionsSelectVirtualized);
 
 type Props = {
-    rowsPerPage: number,
-    onChangeRowsPerPage: (rowsPerPage: number) => void,
-    disabled?: boolean,
+    rowsPerPage: number;
+    onChangeRowsPerPage: (rowsPerPage: number) => void;
+    disabled?: boolean;
 };
 
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
@@ -27,11 +26,12 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
             return options;
         }
 
-        options: Array<VirtualizedOptionConfig>;
         constructor(props: Props) {
             super(props);
             this.options = RowsPerPageSelector.getOptions();
         }
+
+        options: Array<VirtualizedOptionConfig>;
 
         handleRowsSelect = (rowsPerPage: number) => {
             this.props.onChangeRowsPerPage(rowsPerPage);
@@ -58,7 +58,6 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
         render = () => {
             const { ...passOnProps } = this.props;
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     rowsCountSelector={this.renderSelectorElement()}
                     {...passOnProps}
