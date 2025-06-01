@@ -1,5 +1,3 @@
-// @flow
-
 export const FEATURETYPE = {
     POINT: 'FEATURETYPE_POINT',
     POLYGON: 'FEATURETYPE_POLYGON',

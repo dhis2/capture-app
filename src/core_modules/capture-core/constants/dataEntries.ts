@@ -1,5 +1,3 @@
-// @flow
-
 export const dataEntryIds = Object.freeze({
     SINGLE_EVENT: 'singleEvent',
     ENROLLMENT_EVENT: 'enrollmentEvent',
