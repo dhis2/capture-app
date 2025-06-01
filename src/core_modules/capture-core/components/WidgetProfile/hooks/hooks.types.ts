@@ -38,10 +38,5 @@ export type InputProgramData = {
 
 export type InputAttribute = {
     attribute: string;
-    code: string;
-    createdAt: string;
-    displayName: string;
-    lastUpdated: string;
     value: string;
-    valueType: string;
 };

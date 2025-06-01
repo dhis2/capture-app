@@ -67,11 +67,6 @@ export const useTrackedEntityInstances = (
                 attributes.map(({ attribute, value }: { attribute: string; value: string }) => ({
                     attribute,
                     value,
-                    code: '',
-                    createdAt: '',
-                    displayName: '',
-                    lastUpdated: '',
-                    valueType: '',
                 })),
             );
         }
