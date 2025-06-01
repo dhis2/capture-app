@@ -2,11 +2,11 @@ import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core';
 import { CircularLoader } from '@dhis2/ui';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
-        display: 'flex' as const,
-        alignItems: 'center' as const,
-        justifyContent: 'center' as const,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: 'calc(100vh - 48px)',
     },
 };

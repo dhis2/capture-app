@@ -2,10 +2,10 @@ import React, { type ComponentType } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core';
 import { CircularLoader } from '@dhis2/ui';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         left: '50%',
-        position: 'fixed' as const,
+        position: 'fixed',
         top: '50%',
         transform: 'translate(-50%, -50%)',
     },
