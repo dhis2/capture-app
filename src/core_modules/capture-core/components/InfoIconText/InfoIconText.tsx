@@ -1,7 +1,6 @@
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, type ReactNode } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { IconInfo16, colors } from '@dhis2/ui';
-import type { InfoIconTextProps } from './InfoIconText.types';
 
 const styles: Readonly<any> = {
     icon: {
@@ -20,6 +19,10 @@ const styles: Readonly<any> = {
         color: colors.grey800,
         marginLeft: 6,
     },
+};
+
+type InfoIconTextProps = {
+    children: string | ReactNode;
 };
 
 type Props = InfoIconTextProps & WithStyles<typeof styles>;
