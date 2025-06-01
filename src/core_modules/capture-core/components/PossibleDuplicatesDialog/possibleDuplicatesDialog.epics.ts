@@ -1,4 +1,3 @@
-// @flow
 import { pipe as pipeD2, featureAvailable, FEATURES } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
@@ -16,10 +15,9 @@ import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
 import { getAttributesFromScopeId } from '../../metaData/helpers';
-import { searchGroupDuplicateActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 import { escapeString } from '../../utils/escapeString';
 
-function getGroupElementsFromScopeId(scopeId: ?string) {
+function getGroupElementsFromScopeId(scopeId: string | null) {
     if (!scopeId) {
         return null;
     }
@@ -38,9 +36,9 @@ function getGroupElementsFromScopeId(scopeId: ?string) {
 
 
 export const loadSearchGroupDuplicatesForReviewEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { absoluteApiPath, querySingleResource }: ApiUtils,
+    action$: any,
+    store: any,
+    { absoluteApiPath, querySingleResource }: { absoluteApiPath: string, querySingleResource: any },
 ) =>
     action$.pipe(
         ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
@@ -52,7 +50,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                 scopeType,
                 dataEntryId,
             },
-        }) => {
+        }: any) => {
             const { formsValues, dataEntries } = store.value;
             const dataEntryKey = getDataEntryKey(dataEntryId, dataEntries[dataEntryId].itemId);
             const formValues = formsValues[dataEntryKey];
@@ -60,7 +58,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
             try {
                 const groupElements = getGroupElementsFromScopeId(selectedScopeId) || [];
                 const filters = groupElements
-                    .map((element) => {
+                    .map((element: any) => {
                         const value = formValues[element.id];
                         if (!value && value !== 0 && value !== false) {
                             return null;
@@ -69,7 +67,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                         const hasOptionSet = element.optionSet && element.type !== dataElementTypes.MULTI_TEXT;
                         return `${element.id}:${hasOptionSet ? 'eq' : 'like'}:${escapeString(serverValue)}`;
                     })
-                    .filter(f => f);
+                    .filter((f: string | null) => f);
 
                 if (filters.length === 0) {
                     return Promise.resolve(duplicatesReviewSkipped());
@@ -89,13 +87,13 @@ export const loadSearchGroupDuplicatesForReviewEpic = (
                 const attributes = getAttributesFromScopeId(selectedScopeId);
                 const programId = scopeType === scopeTypes.TRACKER_PROGRAM ? selectedScopeId : null;
 
-                const stream$: Stream = from(
+                const stream$ = from(
                     getTrackedEntityInstances(queryArgs, attributes, absoluteApiPath, querySingleResource, programId),
                 );
                 return stream$.pipe(
-                    map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
+                    map(({ trackedEntityInstanceContainers: searchResults, pagingData }: { trackedEntityInstanceContainers: any, pagingData: any }) =>
                         duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
-                    takeUntil(action$.pipe(ofType(searchGroupDuplicateActionTypes.DUPLICATES_RESET))),
+                    takeUntil(action$.pipe(ofType(actionTypes.DUPLICATES_RESET))),
                     catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
                 );
