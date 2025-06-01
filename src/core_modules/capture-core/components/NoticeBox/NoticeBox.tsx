@@ -36,7 +36,7 @@ export const NoticeBox = ({ formId }: NoticeBoxProps) => {
 
     return toggle ? (
         <Modal onClose={() => setToggle(false)} position="middle">
-            <ModalTitle>{i18n.t('Notice') as string}</ModalTitle>
+            <ModalTitle>{i18n.t('Notice')}</ModalTitle>
             <ModalContent>
                 <ul>
                     {contentList.map(content => (
@@ -45,7 +45,7 @@ export const NoticeBox = ({ formId }: NoticeBoxProps) => {
                 </ul>
                 <ModalActions>
                     <ButtonStrip end>
-                        <Button onClick={() => setToggle(false)}>{i18n.t('Close the notice') as string}</Button>
+                        <Button onClick={() => setToggle(false)}>{i18n.t('Close the notice')}</Button>
                     </ButtonStrip>
                 </ModalActions>
             </ModalContent>
