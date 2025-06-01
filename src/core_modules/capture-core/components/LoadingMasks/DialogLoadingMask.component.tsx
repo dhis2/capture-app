@@ -1,9 +1,7 @@
-// @flow
 import React, { Component } from 'react';
 import { CircularLoader, Modal, ModalContent } from '@dhis2/ui';
 
-type Props = {
-};
+type Props = Record<string, never>;
 
 export class DialogLoadingMask extends Component<Props> {
     render() {
