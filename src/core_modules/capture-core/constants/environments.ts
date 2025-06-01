@@ -1,5 +1,3 @@
-// @flow
-
 export const environments = {
     prod: 'production',
     dev: 'development',
