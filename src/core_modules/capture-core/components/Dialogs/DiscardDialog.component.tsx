@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import type { Props } from './discardDialog.types';
@@ -33,4 +32,3 @@ export const DiscardDialog = ({
         </Modal>
     );
 };
-
