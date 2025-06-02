@@ -233,8 +233,6 @@ And(/^you click the save (.*) submit button$/, (TEType) => {
 And('you navigate to the Enrollment dashboard', () => {
     cy.contains('Enrollment dashboard')
         .click();
-    cy.contains('Yes, discard changes')
-        .click();
 });
 
 And('you are in Child programme and Tombo Wallah CHP organization unit registration page', () => {
