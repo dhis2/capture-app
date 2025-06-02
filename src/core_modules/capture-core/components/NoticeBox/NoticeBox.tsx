@@ -1,11 +1,10 @@
-// @flow
 import React, { useState, useEffect } from 'react';
-// $FlowFixMe
 import { useSelector, shallowEqual } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalActions, ModalContent, ModalTitle, Button, ButtonStrip } from '@dhis2/ui';
+import type { NoticeBoxProps, HiddenFieldEffect, ContentListItem } from './NoticeBox.types';
 
-const buildContentListToDisplay = rulesEffectsHiddenFields =>
+const buildContentListToDisplay = (rulesEffectsHiddenFields: Record<string, HiddenFieldEffect>): ContentListItem[] =>
     Object.keys(rulesEffectsHiddenFields).reduce((acc, key) => {
         if (rulesEffectsHiddenFields[key].hadValue) {
             const text =
@@ -14,15 +13,15 @@ const buildContentListToDisplay = rulesEffectsHiddenFields =>
             return [...acc, { key, text }];
         }
         return acc;
-    }, []);
+    }, [] as ContentListItem[]);
 
-export const NoticeBox = ({ formId }: { formId: string }) => {
+export const NoticeBox = ({ formId }: NoticeBoxProps) => {
     const [toggle, setToggle] = useState(false);
-    const [contentList, setContentList] = useState([]);
+    const [contentList, setContentList] = useState<ContentListItem[]>([]);
 
     const { rulesEffectsHiddenFields } = useSelector(
-        state => ({
-            rulesEffectsHiddenFields: state.rulesEffectsHiddenFields[formId] || [],
+        (state: { rulesEffectsHiddenFields: Record<string, Record<string, HiddenFieldEffect>> }) => ({
+            rulesEffectsHiddenFields: state.rulesEffectsHiddenFields[formId] || {},
         }),
         shallowEqual,
     );
