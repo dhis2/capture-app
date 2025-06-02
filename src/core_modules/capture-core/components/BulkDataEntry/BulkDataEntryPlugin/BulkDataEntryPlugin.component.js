@@ -7,7 +7,7 @@ import type { Props } from './BulkDataEntryPlugin.types';
 
 const styles = () => ({
     container: {
-        height: '80vh',
+        height: 'calc(100vh - 250px)',
     },
 });
 

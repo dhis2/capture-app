@@ -10,9 +10,9 @@ export type ActiveList = {|
 export const getBulkDataEntry = async (programId: string) => {
     try {
         const storageController = getUserDataStorageController();
-        return storageController.get(USER_DATA_STORES.BULK_DATA_ENTRY, programId);
+        return await storageController.get(USER_DATA_STORES.BULK_DATA_ENTRY, programId);
     } catch (error) {
-        log.error(errorCreator('Could not get a bulkDataEntry value from IndexDB ')({ error }));
+        log.error(errorCreator('Could not get a bulkDataEntry value from IndexedDB ')({ error }));
         return null;
     }
 };
@@ -22,7 +22,7 @@ export const setBulkDataEntry = async (bulkDataEntry: { id: string, activeList: 
         const storageController = getUserDataStorageController();
         await storageController.set(USER_DATA_STORES.BULK_DATA_ENTRY, bulkDataEntry);
     } catch (error) {
-        log.error(errorCreator('Could not set a bulkDataEntry value to IndexDB ')({ error }));
+        log.error(errorCreator('Could not set a bulkDataEntry value to IndexedDB ')({ error }));
     }
 };
 
@@ -31,6 +31,6 @@ export const removeBulkDataEntry = async (id: string) => {
         const storageController = getUserDataStorageController();
         await storageController.remove(USER_DATA_STORES.BULK_DATA_ENTRY, id);
     } catch (error) {
-        log.error(errorCreator('Could not remove a bulkDataEntry value from IndexDB ')({ error }));
+        log.error(errorCreator('Could not remove a bulkDataEntry value from IndexedDB ')({ error }));
     }
 };
