@@ -1,7 +1,7 @@
 // @flow
-import { hasValue, isValidPeriod } from 'capture-core-utils/validators/form';
+import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import { isValidDate } from '../../../../../utils/validation/validators/form';
+import { isValidDate, isValidPeriod } from '../../../../../utils/validation/validators/form';
 
 const preValidateDate = (
     value?: ?string,

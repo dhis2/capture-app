@@ -1,13 +1,10 @@
 // @flow
 import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
-import { dateUtils } from '../../../capture-core/rules/converters';
-import { pipe } from '../../../capture-core-utils';
-import { dataElementTypes } from '../../../capture-core/metaData';
-import {
-    convertClientToServer,
-    convertFormToClient,
-} from '../../../capture-core/converters';
-import { convertIsoToLocalCalendar } from '../../../capture-core/utils/converters/date';
+import { pipe } from 'capture-core-utils';
+import { convertClientToServer, convertFormToClient } from 'capture-core/converters';
+import { dataElementTypes } from 'capture-core/metaData';
+import { dateUtils } from 'capture-core/rules/converters';
+import { convertIsoToLocalCalendar } from 'capture-core/utils/converters/date';
 
 export const isValidPeriod = (
     reportDate: string,
