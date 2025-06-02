@@ -1,11 +1,8 @@
-// @flow
-import React, { type ComponentType, type Node } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React, { type ComponentType, type ReactNode } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { IconInfo16, colors } from '@dhis2/ui';
 
-type OwnProps = {| children: string | Node |}
-
-const styles = () => ({
+const styles: Readonly<any> = {
     icon: {
         position: 'relative',
         top: 1,
@@ -22,9 +19,15 @@ const styles = () => ({
         color: colors.grey800,
         marginLeft: 6,
     },
-});
+};
 
-const InfoIconTextPlain = ({ classes, children }) => (
+type InfoIconTextProps = {
+    children: string | ReactNode;
+};
+
+type Props = InfoIconTextProps & WithStyles<typeof styles>;
+
+const InfoIconTextPlain = ({ classes, children }: Props) => (
     <div className={classes.container}>
         <span className={classes.icon}>
             <IconInfo16 color={colors.grey800} />
@@ -35,4 +38,4 @@ const InfoIconTextPlain = ({ classes, children }) => (
     </div>
 );
 
-export const InfoIconText: ComponentType<OwnProps> = withStyles(styles)(InfoIconTextPlain);
+export const InfoIconText = withStyles(styles)(InfoIconTextPlain) as ComponentType<InfoIconTextProps>;
