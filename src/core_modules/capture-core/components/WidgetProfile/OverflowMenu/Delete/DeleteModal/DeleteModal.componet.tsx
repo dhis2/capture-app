@@ -1,13 +1,12 @@
-// @flow
 import React, { useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
-import type { Props } from './DeleteModal.types';
+import i18n from '@dhis2/d2-i18n';
+import type { DeleteModalProps } from '../../types/overflowMenu.types';
 import { useDeleteTrackedEntity } from './hooks';
 
-export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
-    const [errorReports, setErrorReports] = useState([]);
-    const handleErrors = (errors) => {
+export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: DeleteModalProps) => {
+    const [errorReports, setErrorReports] = useState<Array<{ uid: string; message: string }>>([]);
+    const handleErrors = (errors: Array<{ uid: string; message: string }>) => {
         setErrorReports(errors);
     };
     const { deleteMutation, deleteLoading } = useDeleteTrackedEntity(onDeleteSuccess, handleErrors);

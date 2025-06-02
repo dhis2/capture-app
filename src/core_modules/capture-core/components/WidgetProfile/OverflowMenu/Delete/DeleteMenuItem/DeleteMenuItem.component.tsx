@@ -1,11 +1,10 @@
-// @flow
 import React, { useMemo } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { IconDelete16, MenuItem } from '@dhis2/ui';
-import type { Props } from './DeleteMenuItem.types';
+import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip/';
+import type { DeleteMenuItemProps } from '../../types/overflowMenu.types';
 
-const getTooltipContent = (disabled, trackedEntityTypeName) => {
+const getTooltipContent = (disabled: boolean, trackedEntityTypeName: string) => {
     if (disabled) {
         return i18n.t('You do not have access to delete this {{trackedEntityTypeName}}', {
             trackedEntityTypeName,
@@ -21,7 +20,7 @@ export const DeleteMenuItem = ({
     canWriteData,
     setActionsIsOpen,
     setDeleteModalIsOpen,
-}: Props) => {
+}: DeleteMenuItemProps) => {
     const disabled = useMemo(() => !canWriteData || !canCascadeDeleteTei, [canWriteData, canCascadeDeleteTei]);
     const tooltipContent = getTooltipContent(disabled, trackedEntityTypeName);
 
@@ -40,6 +39,7 @@ export const DeleteMenuItem = ({
                     setActionsIsOpen(false);
                 }}
                 disabled={disabled}
+                suffix={null}
             />
         </ConditionalTooltip>
     );

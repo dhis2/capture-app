@@ -1,30 +1,37 @@
-// @flow
 import { useDataMutation } from '@dhis2/app-runtime';
 import { v4 as uuid } from 'uuid';
 
-const trackedEntityDelete = {
+type ErrorReport = {
+    message: string;
+    uid: string;
+};
+
+type TrackedEntity = {
+    trackedEntity: string;
+};
+
+const trackedEntityDelete: any = {
     resource: 'tracker?async=false&importStrategy=DELETE',
     type: 'create',
-    data: trackedEntity => ({
+    data: (trackedEntity: TrackedEntity) => ({
         trackedEntities: [trackedEntity],
     }),
 };
 
-const processErrorReports = (error): Array<{ message: string, uid: string }> => {
-    // $FlowFixMe[prop-missing]
+const processErrorReports = (error: any): Array<ErrorReport> => {
     const errorReports = error?.details?.validationReport?.errorReports;
     return errorReports?.length > 0 ? errorReports : [{ uid: uuid(), message: error.message }];
 };
 
 export const useDeleteTrackedEntity = (
     onSuccess?: () => void,
-    onError?: (errorReports: Array<{ message: string, uid: string }>) => void,
+    onError?: (errorReports: Array<ErrorReport>) => void,
 ) => {
     const [deleteMutation, { loading: deleteLoading }] = useDataMutation(trackedEntityDelete, {
         onComplete: () => {
             onSuccess && onSuccess();
         },
-        onError: (e) => {
+        onError: (e: any) => {
             onError && onError(processErrorReports(e));
         },
     });
