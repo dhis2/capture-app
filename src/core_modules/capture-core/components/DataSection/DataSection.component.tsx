@@ -1,11 +1,10 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-import type { Props } from './dataSection.type';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
+import type { DataSectionProps } from './DataSection.types';
 
-
-const styles = theme => ({
+const styles = (theme: Theme) => ({
     sectionWrapper: {
         border: `1px solid ${colors.grey300}`,
         borderRadius: '3px',
@@ -23,6 +22,8 @@ const styles = theme => ({
     },
 });
 
+type Props = DataSectionProps & WithStyles<typeof styles>;
+
 const DataSectionPlain = ({ sectionName, children, classes, dataTest }: Props) => (
     <div
         data-test={dataTest}
@@ -33,5 +34,5 @@ const DataSectionPlain = ({ sectionName, children, classes, dataTest }: Props) =
     </div>
 );
 
-
-export const DataSection: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(DataSectionPlain);
+export const DataSection =
+    withStyles(styles)(DataSectionPlain) as ComponentType<DataSectionProps>;
