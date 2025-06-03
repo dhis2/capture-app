@@ -1,2 +1,2 @@
 export { DataSection } from './DataSection.component';
-export type { Props as DataSectionProps } from './DataSection.types';
+export type { DataSectionProps } from './DataSection.types';

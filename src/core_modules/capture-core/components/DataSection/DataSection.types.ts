@@ -4,7 +4,7 @@ type CssClasses = {
     classes: Record<string, string>;
 };
 
-export type Props = {
+export type DataSectionProps = {
     sectionName: string;
     children: ReactNode;
     dataTest?: string;

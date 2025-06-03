@@ -1,9 +1,10 @@
 import React, { type ComponentType } from 'react';
 import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core';
-import type { Props as DataSectionProps } from './DataSection.types';
+import type { Theme } from '@material-ui/core/styles';
+import type { DataSectionProps } from './DataSection.types';
 
-const styles = (theme: any) => ({
+const styles = (theme: Theme) => ({
     sectionWrapper: {
         border: `1px solid ${colors.grey300}`,
         borderRadius: '3px',
