@@ -1,16 +1,16 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
+import type { EpicAction, ReduxStore } from '../../../capture-core-utils/types';
 
 import { getEventListOnReconnect, goingOnlineExecuted, batchActionTypes } from './connectivity.actions';
 
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 
-export const goingOnlineEpic = (action$: InputObservable, store: ReduxStore) =>
+export const goingOnlineEpic = (action$: EpicAction<{ online: boolean }>, store: ReduxStore) =>
     action$.pipe(
         ofType(OFFLINE_STATUS_CHANGED),
-        filter((action) => {
+        filter((action: any) => {
             const online = !!action.payload.online;
             return online;
         }),
