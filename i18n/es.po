@@ -1405,7 +1405,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Schedule date / Due date"
-msgstr "Fecha de programación/fecha de vencimiento"
+msgstr "Fecha de programación/fecha prevista"
 
 msgid "Please provide a valid organisation unit"
 msgstr "Proporcione una unidad organizativa válida"
