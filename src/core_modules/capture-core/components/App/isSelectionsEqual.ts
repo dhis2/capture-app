@@ -1,9 +1,7 @@
-// @flow
-
 const CATEGORIES_KEY = 'categories';
 const COMPLETE_KEY = 'complete';
 
-export const isSelectionsEqual = (set1: Object, set2: Object) => {
+export const isSelectionsEqual = (set1: Record<string, any>, set2: Record<string, any>) => {
     const set1Keys = Object
         .keys(set1)
         .filter(key =>
