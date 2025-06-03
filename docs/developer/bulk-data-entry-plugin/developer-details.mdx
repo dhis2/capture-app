@@ -15,7 +15,7 @@ type BulkDataEntryPluginProps = {|
     pluginSource: string,    
     configKey: string,  
     dataKey?: string,        
-    onComplete: () => Promise<void>,
+    onComplete: () => void,
     onDefer: () => void,
     trackedEntityIds?: Array<string>,
 |};
