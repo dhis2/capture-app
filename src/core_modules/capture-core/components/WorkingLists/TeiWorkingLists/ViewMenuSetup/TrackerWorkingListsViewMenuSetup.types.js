@@ -1,5 +1,5 @@
 // @flow
-import type { TrackerWorkingListsSetupOutputProps } from '../Setup';
+import type { TrackerWorkingListsTopBarActionsSetupOutputProps } from '../ActionsSetup';
 import type { UpdateList } from '../../WorkingListsCommon';
 import type { LoadTeiView } from '../types';
 
@@ -10,12 +10,12 @@ type ExtractedProps = $ReadOnly<{|
 |}>;
 
 export type Props = {|
-    ...TrackerWorkingListsSetupOutputProps,
+    ...TrackerWorkingListsTopBarActionsSetupOutputProps,
     ...ExtractedProps,
 |};
 
 export type TrackerWorkingListsViewMenuSetupOutputProps = {|
-    ...TrackerWorkingListsSetupOutputProps,
+    ...TrackerWorkingListsTopBarActionsSetupOutputProps,
     onLoadView: LoadTeiView,
     onUpdateList: UpdateList,
     customUpdateTrigger: ?string,

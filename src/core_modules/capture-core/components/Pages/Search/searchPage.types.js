@@ -5,7 +5,8 @@ export type Props = $ReadOnly<{|
     orgUnitId: string,
     onNavigateToMainPage: () => void,
     showBulkDataEntryPlugin: boolean,
-    setShowBulkDataEntryPlugin: (show: boolean) => void,
+    onOpenBulkDataEntryPlugin: () => void,
+    onCloseBulkDataEntryPlugin: () => void,
 |}>;
 
 export type PlainProps = $ReadOnly<{|
