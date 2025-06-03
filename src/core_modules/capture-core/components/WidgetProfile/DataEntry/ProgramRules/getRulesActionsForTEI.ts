@@ -1,15 +1,3 @@
-// @flow
-import type {
-    Enrollment,
-    TEIValues,
-    OutputEffects,
-    OrgUnit,
-    TrackedEntityAttributes,
-    OptionSets,
-    ProgramRulesContainer,
-    EventsData,
-    DataElements,
-} from '../../../../rules/RuleEngine';
 import { ruleEngine } from '../../../../rules/rulesEngine';
 import {
     dataElementTypes,
@@ -23,23 +11,32 @@ import {
 } from '../../../../rules';
 import { convertServerToClient } from '../../../../converters';
 import type { QuerySingleResource } from '../../../../utils/api';
-import type { EnrollmentData } from '../Types';
+import type {
+    Enrollment,
+    TEIValues,
+    OutputEffects,
+    OrgUnit,
+    TrackedEntityAttributes,
+    OptionSets,
+    ProgramRulesContainer,
+    EventsData,
+    DataElements,
+} from '../../../../rules/RuleEngine';
+import type { EnrollmentData, GetRulesActionsParams, GetRulesActionsAsyncParams } from '../types/dataEntry.types';
 
-const getEnrollmentForRulesExecution = (enrollment: ?EnrollmentData, programName: string): ?Enrollment =>
+const getEnrollmentForRulesExecution = (enrollment: EnrollmentData | undefined, programName: string): Enrollment | undefined =>
     enrollment && {
         enrollmentId: enrollment.enrollment,
-        // $FlowFixMe
         enrolledAt: convertServerToClient(enrollment.enrolledAt, dataElementTypes.DATE),
-        // $FlowFixMe
         occurredAt: convertServerToClient(enrollment.occurredAt, dataElementTypes.DATE),
         enrollmentStatus: enrollment.status,
         programName,
     };
 
-const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
+const getDataElementsForRulesExecution = (dataElements: DataElements | undefined) =>
     dataElements &&
     Object.values(dataElements).reduce(
-        (acc, dataElement: any) => ({
+        (acc: Record<string, any>, dataElement: any) => ({
             ...acc,
             [dataElement.id]: {
                 id: dataElement.id,
@@ -63,20 +60,7 @@ export const getRulesActionsForTEI = ({
     dataElements,
     userRoles,
     programName,
-}: {
-    foundation: RenderFoundation,
-    formId: string,
-    orgUnit: OrgUnit,
-    enrollmentData?: EnrollmentData,
-    teiValues?: ?TEIValues,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    optionSets: OptionSets,
-    rulesContainer: ProgramRulesContainer,
-    otherEvents?: ?EventsData,
-    dataElements: ?DataElements,
-    userRoles: Array<string>,
-    programName: string,
-}) => {
+}: GetRulesActionsParams) => {
     const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
@@ -108,29 +92,13 @@ export const getRulesActionsForTEIAsync = async ({
     programName,
     querySingleResource,
     onGetValidationContext,
-}: {
-    foundation: RenderFoundation,
-    formId: string,
-    orgUnit: OrgUnit,
-    enrollmentData?: EnrollmentData,
-    teiValues?: ?TEIValues,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    optionSets: OptionSets,
-    rulesContainer: ProgramRulesContainer,
-    otherEvents?: ?EventsData,
-    dataElements: ?DataElements,
-    userRoles: Array<string>,
-    programName: string,
-    querySingleResource: QuerySingleResource,
-    onGetValidationContext: () => Object,
-}) => {
+}: GetRulesActionsAsyncParams) => {
     const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: rulesContainer,
         currentEvent: null,
         otherEvents,
         dataElements: getDataElementsForRulesExecution(dataElements),
         trackedEntityAttributes,
-        // $FlowFixMe (flow doesn't understand that selectedEnrollment.enrolledAt/occurredAt are strings)
         selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData, programName),
         selectedEntity: teiValues,
         selectedOrgUnit: orgUnit,

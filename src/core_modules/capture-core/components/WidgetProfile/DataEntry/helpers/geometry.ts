@@ -1,7 +1,5 @@
-// @flow
 import { dataElementTypes } from '../../../../metaData';
-
-type GeometryValues = { FEATURETYPE: string, DATAELEMENTTYPE: string, LABEL: string };
+import type { GeometryValues } from '../types/dataEntry.types';
 
 export const GEOMETRY: { POINT: GeometryValues, POLYGON: GeometryValues } = {
     POINT: {
@@ -16,6 +14,6 @@ export const GEOMETRY: { POINT: GeometryValues, POLYGON: GeometryValues } = {
     },
 };
 
-export const getFeatureType = (type: string) => GEOMETRY[type]?.FEATURETYPE || type;
-export const getDataElement = (type: string) => GEOMETRY[type]?.DATAELEMENTTYPE || type;
-export const getLabel = (type: string) => GEOMETRY[type]?.LABEL || type;
+export const getFeatureType = (type: string): string => GEOMETRY[type]?.FEATURETYPE ?? type;
+export const getDataElement = (type: string): string => GEOMETRY[type]?.DATAELEMENTTYPE ?? type;
+export const getLabel = (type: string): string => GEOMETRY[type]?.LABEL ?? type;
