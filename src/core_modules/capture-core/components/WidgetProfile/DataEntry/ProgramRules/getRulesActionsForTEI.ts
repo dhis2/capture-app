@@ -1,7 +1,6 @@
 import { ruleEngine } from '../../../../rules/rulesEngine';
 import {
     dataElementTypes,
-    type RenderFoundation,
 } from '../../../../metaData';
 import {
     updateRulesEffects,
@@ -10,15 +9,22 @@ import {
     validateAssignEffects,
 } from '../../../../rules';
 import { convertServerToClient } from '../../../../converters';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { QuerySingleResource } from '../../../../utils/api';
 import type {
     Enrollment,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     TEIValues,
     OutputEffects,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     OrgUnit,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     TrackedEntityAttributes,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     OptionSets,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ProgramRulesContainer,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     EventsData,
     DataElements,
 } from '../../../../rules/RuleEngine';
