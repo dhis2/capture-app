@@ -1,7 +1,8 @@
 // @flow
 import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
 import { pipe } from 'capture-core-utils';
-import { convertClientToServer, convertFormToClient } from 'capture-core/converters';
+import { convertValue as convertClientToServer } from 'capture-core/converters/clientToServer';
+import { convertValue as convertFormToClient } from 'capture-core/converters/formToClient';
 import { dataElementTypes } from 'capture-core/metaData';
 import { dateUtils } from 'capture-core/rules/converters';
 import { convertIsoToLocalCalendar } from 'capture-core/utils/converters/date';
