@@ -1,18 +1,5 @@
 import { createSelector } from 'reselect';
-
-type ReduxState = {
-    currentSelections: {
-        programId?: string;
-        trackedEntityTypeId?: string;
-        orgUnitId?: string;
-    };
-    viewEventPage: {
-        eventId?: string;
-    };
-    editEventPage: {
-        eventId?: string;
-    };
-};
+import { ReduxState } from './withAppUrlSync.types';
 
 const programIdSelector = (state: ReduxState) => state.currentSelections.programId;
 const trackedEntityTypeIdSelector = (state: ReduxState) => state.currentSelections.trackedEntityTypeId;
