@@ -1,7 +1,6 @@
-// @flow
 import React from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { colors, IconInfo16, IconWarning16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useOrgUnitNameWithAncestors } from '../../../../metadataRetrieval/orgUnitName';
@@ -9,20 +8,20 @@ import { OrgUnitScopes } from '../hooks/useTransferValidation';
 import { ProgramAccessLevels } from '../hooks/useProgramAccessLevel';
 
 type Props = {
-    ownerOrgUnitId: string,
-    validOrgUnitId: ?string,
-    programAccessLevel: string,
+    ownerOrgUnitId: string;
+    validOrgUnitId?: string;
+    programAccessLevel: string;
     orgUnitScopes: {
-        origin: $Keys<typeof OrgUnitScopes>,
-        destination: $Keys<typeof OrgUnitScopes>,
-    },
-    classes: Object,
+        origin: keyof typeof OrgUnitScopes | null;
+        destination: keyof typeof OrgUnitScopes | null;
+    };
+    classes: Record<string, string>;
 };
 
 const styles = {
     container: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column' as const,
         gap: '8px',
     },
     alert: {
@@ -47,11 +46,11 @@ const InfoBoxesPlain = ({
     programAccessLevel,
     orgUnitScopes,
     classes,
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const { displayName: ownerOrgUnitName } = useOrgUnitNameWithAncestors(ownerOrgUnitId);
-    const { displayName: newOrgUnitName } = useOrgUnitNameWithAncestors(validOrgUnitId);
+    const { displayName: newOrgUnitName } = useOrgUnitNameWithAncestors(validOrgUnitId ?? null);
 
-    const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.CLOSED].includes(programAccessLevel)
+    const showWarning = [ProgramAccessLevels.PROTECTED, ProgramAccessLevels.CLOSED].includes(programAccessLevel as any)
         && orgUnitScopes.destination === OrgUnitScopes.SEARCH;
 
     return (
@@ -59,20 +58,20 @@ const InfoBoxesPlain = ({
             {newOrgUnitName && (
                 <div className={cx(classes.alert, { info: true })}>
                     <IconInfo16 color={colors.grey600} />
-                    {i18n.t('Transferring enrollment ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}', {
+                    {String(i18n.t('Transferring enrollment ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}', {
                         ownerOrgUnit: ownerOrgUnitName,
                         newOrgUnit: newOrgUnitName,
                         escape: '.',
-                    })}
+                    }))}
                 </div>
             )}
 
             {showWarning && (
                 <div className={cx(classes.alert, { warning: true })}>
                     <IconWarning16 />
-                    {i18n.t('You will lose access to the enrollment when transferring ownership to {{organisationUnit}}.', {
+                    {String(i18n.t('You will lose access to the enrollment when transferring ownership to {{organisationUnit}}.', {
                         organisationUnit: newOrgUnitName,
-                    })}
+                    }))}
                 </div>
             )}
         </div>
