@@ -386,6 +386,10 @@ You now have two options:
 
 6. Modify the event details and click **Save**.
 
+> **Note**  
+> The **Edit event** button is disabled if the program stage has **Block entry form after completed** enabled and your user role does not include the **Uncomplete events** authority.
+
+
 ## Delete an event { #capture_delete_event } 
 
 1. Open the **Capture** app.
