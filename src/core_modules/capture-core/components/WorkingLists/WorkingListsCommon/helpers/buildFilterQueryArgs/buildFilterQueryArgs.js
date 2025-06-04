@@ -35,11 +35,12 @@ function convertFilter(
         storeId: string,
         isInit: boolean,
     },
+    unique?: boolean,
 ) {
     if (sourceValue && sourceValue.usingOptionSet) {
         return convertOptionSet(sourceValue, type);
     }
-    return mappersForTypes[type] ? mappersForTypes[type](sourceValue, meta.key, meta.storeId, meta.isInit) : sourceValue;
+    return mappersForTypes[type] ? mappersForTypes[type]({ sourceValue, meta, unique }) : sourceValue;
 }
 export const buildFilterQueryArgs = (
     filters: FiltersData, {
@@ -52,18 +53,21 @@ export const buildFilterQueryArgs = (
     .keys(filters)
     .filter(key => filters[key])
     .reduce((acc, key) => {
-        const { type } = columns.get(key) || (filtersOnly && filtersOnly.get(key)) || {};
+        const { type, unique } = columns.get(key) || (filtersOnly && filtersOnly.get(key)) || {};
         if (!type) {
             log.error(errorCreator('Could not get type for key')({ key, storeId }));
         } else {
             const sourceValue = filters[key];
             const queryArgValue = convertFilter(
                 sourceValue,
-                type, {
+                type,
+                {
                     key,
                     storeId,
                     isInit,
-                });
+                },
+                unique,
+            );
             acc[key] = queryArgValue;
         }
         return acc;
