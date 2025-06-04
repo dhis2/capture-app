@@ -10,17 +10,19 @@ type Props = {
     orgUnit: ?Object,
     linkedEventId: ?string,
     setErrorMessages: (messages: Object) => void,
-    programExpiryPeriodType?: string,
-    programExpiryDays?: number,
-    canEditExpiredPeriod?: boolean,
+    expiryPeriod: {
+        expiryPeriodType: ?string,
+        expiryDays: ?number,
+     },
 };
 
 export const isScheduledDateValid = (
     scheduledDate: ?string,
     scheduledAtFormatError: ?{ error: ?string, errorCode: ?string },
-    programExpiryPeriodType?: string,
-    programExpiryDays?: number,
-    canEditExpiredPeriod?: boolean,
+    expiryPeriod: {
+        expiryPeriodType: ?string,
+        expiryDays: ?number,
+     },
 ) => {
     if (!scheduledDate) {
         return { valid: false, validationText: i18n.t('Please enter a date') };
@@ -34,12 +36,9 @@ export const isScheduledDateValid = (
         };
     }
 
-    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(scheduledDate, {
-        programExpiryPeriodType,
-        programExpiryDays,
-    });
+    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(scheduledDate, expiryPeriod);
 
-    if (!canEditExpiredPeriod && !isWithinValidPeriod) {
+    if (!isWithinValidPeriod) {
         return {
             valid: false,
             validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}', {
@@ -60,16 +59,12 @@ const scheduleInOrgUnit = (props) => {
         scheduledAtFormatError,
         orgUnit,
         setErrorMessages,
-        programExpiryPeriodType,
-        programExpiryDays,
-        canEditExpiredPeriod,
+        expiryPeriod,
     } = props ?? {};
     const { valid: scheduledAtIsValid, validationText } = isScheduledDateValid(
         scheduledAt,
         scheduledAtFormatError,
-        programExpiryPeriodType,
-        programExpiryDays,
-        canEditExpiredPeriod,
+        expiryPeriod,
     );
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 

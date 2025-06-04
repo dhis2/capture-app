@@ -6,17 +6,16 @@ import { dataElementTypes } from '../../../../metaData';
 import { dateUtils } from '../../../../rules/converters';
 import { convertIsoToLocalCalendar } from '../../../converters/date';
 
-
 export const isValidPeriod = (
     reportDate: string,
-    props: {
-        programExpiryPeriodType?: string,
-        programExpiryDays?: number,
+    expiryPeriod: {
+        expiryPeriodType: ?string,
+        expiryDays: ?number,
     },
 ) => {
-    const { programExpiryPeriodType, programExpiryDays } = props;
+    const { expiryPeriodType, expiryDays } = expiryPeriod;
 
-    if (!programExpiryPeriodType || !programExpiryDays) {
+    if (!expiryPeriodType) {
         return { isWithinValidPeriod: true, firstValidDate: undefined };
     }
 
@@ -24,12 +23,12 @@ export const isValidPeriod = (
     const reportDateServer = convertFn(reportDate, dataElementTypes.DATE);
     const today = dateUtils.getToday();
 
-    const threshold = programExpiryDays
-        ? dateUtils.addDays(today, -programExpiryDays)
+    const threshold = expiryDays
+        ? dateUtils.addDays(today, -expiryDays)
         : today;
 
     const thresholdPeriod = getFixedPeriodByDate({
-        periodType: programExpiryPeriodType,
+        periodType: expiryPeriodType,
         date: threshold,
         calendar: 'gregorian',
     });

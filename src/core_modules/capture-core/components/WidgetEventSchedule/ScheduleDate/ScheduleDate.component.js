@@ -57,9 +57,7 @@ const ScheduleDatePlain = ({
     eventCountInOrgUnit,
     classes,
     hideDueDate,
-    programExpiryPeriodType,
-    programExpiryDays,
-    canEditExpiredPeriod,
+    expiryPeriod,
 }: Props) => {
     const validateDate = (dateString, internalComponentError) => {
         if (!hasValue(dateString)) {
@@ -77,17 +75,14 @@ const ScheduleDatePlain = ({
             };
         }
 
-        if (!programExpiryPeriodType || !programExpiryDays || canEditExpiredPeriod) {
+        if (!expiryPeriod.expiryPeriodType) {
             return {
                 error: false,
                 validationText: '',
             };
         }
 
-        const { isWithinValidPeriod, firstValidDate } = isValidPeriod(dateString, {
-            programExpiryPeriodType,
-            programExpiryDays,
-        });
+        const { isWithinValidPeriod, firstValidDate } = isValidPeriod(dateString, expiryPeriod);
 
         if (!isWithinValidPeriod) {
             return {

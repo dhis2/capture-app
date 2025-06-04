@@ -13,7 +13,6 @@ import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
 import { useMetadataForProgramStage } from '../../common/ProgramStage/useMetadataForProgramStage';
 import { useProgramExpiry } from '../../../../hooks';
-import { useAuthorities } from '../../../../utils/authority/useAuthorities';
 
 const getStyles = () => ({
     flexContainer: {
@@ -53,8 +52,7 @@ const NewEventDataEntryWrapperPlain = ({
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
     const titleText = useScopeTitleText(programId);
-    const { expiryPeriodType, expiryDays } = useProgramExpiry(programId);
-    const { hasAuthority } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
+    const expiryPeriod = useProgramExpiry(programId);
 
     if (error) {
         return error.errorComponent;
@@ -107,9 +105,7 @@ const NewEventDataEntryWrapperPlain = ({
                     orgUnit={orgUnit}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
-                    programExpiryPeriodType={expiryPeriodType}
-                    programExpiryDays={expiryDays}
-                    canEditExpiredPeriod={hasAuthority}
+                    expiryPeriod={expiryPeriod}
                 />
                 <EventsList />
             </div>

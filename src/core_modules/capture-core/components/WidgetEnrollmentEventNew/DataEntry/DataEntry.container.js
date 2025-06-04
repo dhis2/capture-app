@@ -15,7 +15,6 @@ import {
 import typeof { addEventSaveTypes } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
 import { useProgramExpiry } from '../../../hooks';
-import { useAuthorities } from '../../../utils/authority/useAuthorities';
 
 export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
@@ -23,8 +22,7 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
     const dataEntryItemId = useSelector(({ dataEntries }) => dataEntries[id] && dataEntries[id].itemId);
     const dataEntryKey = getDataEntryKey(id, dataEntryItemId);
     const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey].orgUnit);
-    const { expiryPeriodType, expiryDays } = useProgramExpiry(programId);
-    const { hasAuthority } = useAuthorities({ authorities: ['F_EDIT_EXPIRED'] });
+    const expiryPeriod = useProgramExpiry(programId);
 
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
@@ -79,14 +77,12 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
             id={id}
             orgUnitFieldValue={orgUnitFieldValue}
             programId={programId}
-            programExpiryPeriodType={expiryPeriodType}
-            programExpiryDays={expiryDays}
+            expiryPeriod={expiryPeriod}
             onUpdateDataEntryField={onUpdateDataEntryField}
             onUpdateField={onUpdateField}
             onStartAsyncUpdateField={onStartAsyncUpdateField}
             onAddNote={onAddNote}
             onSetSaveTypes={onSetSaveTypes}
-            canEditExpiredPeriod={hasAuthority}
         />
     );
 };
