@@ -1,3 +1,10 @@
+## [102.4.8](https://github.com/dhis2/capture-app/compare/v102.4.7...v102.4.8) (2025-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-11847] Add critical alert to post errors ([#4078](https://github.com/dhis2/capture-app/issues/4078)) ([4ae8eca](https://github.com/dhis2/capture-app/commit/4ae8eca441ebfb543f17397df9fd45ac34a59df8))
+
 ## [102.4.7](https://github.com/dhis2/capture-app/compare/v102.4.6...v102.4.7) (2025-06-02)
 
 
