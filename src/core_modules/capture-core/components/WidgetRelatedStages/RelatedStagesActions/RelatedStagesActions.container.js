@@ -32,7 +32,7 @@ const RelatedStagesActionsPlain = ({
     });
     const [saveAttempted, setSaveAttempted] = useState(false);
     const [errorMessages, setErrorMessages] = useState({});
-    const [relatedStageDataValues, setRelatedStageDataValues] = useState < RelatedStageDataValueStates >({
+    const [relatedStageDataValues, setRelatedStageDataValues] = useState<RelatedStageDataValueStates>({
         linkMode: undefined,
         scheduledAt: '',
         scheduledAtFormatError: undefined,
