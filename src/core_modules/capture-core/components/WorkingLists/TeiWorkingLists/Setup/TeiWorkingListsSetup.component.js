@@ -77,7 +77,6 @@ export const TeiWorkingListsSetup = ({
         columns,
         sortById,
         sortByDirection,
-        programStageId,
         isDefaultTemplateAltered: storedTemplates?.find(template => template.isDefault)?.isAltered,
     });
 
