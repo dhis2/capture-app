@@ -1,10 +1,8 @@
-// @flow
-
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
 
-type Props = {|
-  programId: string,
-|}
+type Props = {
+    programId: string;
+};
 
 export const ProgramAccessLevels = Object.freeze({
     OPEN: 'OPEN',

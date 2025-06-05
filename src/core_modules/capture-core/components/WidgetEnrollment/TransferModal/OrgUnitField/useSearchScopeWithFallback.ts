@@ -1,11 +1,8 @@
-// @flow
-
 import { useApiMetadataQuery } from '../../../../utils/reactQueryHelpers';
 
 type Props = {
-    searchText: ?string,
+    searchText?: string;
 };
-
 
 export const useSearchScopeWithFallback = ({ searchText }: Props) => {
     const { data: orgUnitRoots, isLoading } = useApiMetadataQuery(
@@ -28,7 +25,6 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
     );
 
     const { data: searchOrgUnits, isLoading: isLoadingSearch } = useApiMetadataQuery(
-        // $FlowFixMe - react-query types are not up to date
         ['organisationUnits', 'userOrgUnitScope', 'search', searchText],
         {
             resource: 'organisationUnits',
@@ -42,7 +38,6 @@ export const useSearchScopeWithFallback = ({ searchText }: Props) => {
         },
         {
             enabled: Boolean(searchText),
-            // Clearing cache after 120 minutes to avoid memory leaks
             cacheTime: 120 * 60 * 1000,
             select: (data) => {
                 const { organisationUnits } = data;

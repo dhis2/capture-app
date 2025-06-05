@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import {
     Modal,
@@ -10,7 +9,7 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { TransferModalProps } from './TransferModal.types';
-import { OrgUnitField } from './OrgUnitField/OrgUnitField.container';
+import { OrgUnitField } from './OrgUnitField';
 import { useTransferValidation } from './hooks/useTransferValidation';
 import { InfoBoxes } from './InfoBoxes';
 
@@ -59,7 +58,6 @@ export const TransferModal = ({
                     onSelectClick={handleOrgUnitChange}
                 />
 
-                {/* Alert */}
                 <InfoBoxes
                     ownerOrgUnitId={ownerOrgUnitId}
                     validOrgUnitId={selectedOrgUnit?.id}

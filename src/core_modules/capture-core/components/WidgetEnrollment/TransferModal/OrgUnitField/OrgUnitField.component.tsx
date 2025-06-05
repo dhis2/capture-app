@@ -1,7 +1,7 @@
-// @flow
 import * as React from 'react';
 import { OrganisationUnitTree } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+
 
 const getStyles = () => ({
     orgunitTree: {
@@ -15,14 +15,11 @@ const getStyles = () => ({
 });
 
 type Props = {
-    roots: Array<Object>,
-    classes: {
-        orgunitTree: string,
-    },
-    onSelectClick: Function,
-    selected: ?{ path: string, id: string },
-    treeKey: string,
-};
+    roots: Array<{ id: string; path: string }>;
+    onSelectClick: (orgUnit: { id: string; path: string }) => void;
+    selected?: { path: string; id: string };
+    treeKey: string;
+} & WithStyles<typeof getStyles>;
 
 const OrgUnitTreePlain = (props: Props) => {
     const { roots, selected, classes, treeKey, onSelectClick } = props;
@@ -47,13 +44,13 @@ const OrgUnitTreePlain = (props: Props) => {
 
     const [expanded, setExpanded] = React.useState(initiallyExpanded);
 
-    const handleExpand = ({ path }) => {
+    const handleExpand = ({ path }: { path: string }) => {
         if (expanded && !expanded.includes(path)) {
             setExpanded([...expanded, path]);
         }
     };
 
-    const handleCollapse = ({ path }) => {
+    const handleCollapse = ({ path }: { path: string }) => {
         const pathIndex = expanded?.indexOf(path);
 
         if (pathIndex && pathIndex !== -1 && expanded) {
@@ -79,7 +76,7 @@ const OrgUnitTreePlain = (props: Props) => {
                 key={treeKey}
                 dataTest={'widget-enrollment-transfer-orgunit-tree'}
                 roots={roots.map(item => item.id)}
-                expanded={expanded}
+                expanded={expanded as any}
                 handleExpand={handleExpand}
                 handleCollapse={handleCollapse}
                 singleSelection
