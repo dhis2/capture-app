@@ -1,6 +1,5 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { ProgramRulesContainer } from '../../../../rules/RuleEngine';
 import { getTrackedEntityAttributeId, getDataElementId, getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
 import type { BuildRulesContainerParams } from '../types/dataEntry.types';

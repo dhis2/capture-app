@@ -17,9 +17,9 @@ export type EnrollmentData = {
     status: string;
 };
 
-export type GeometryValues = { 
-    FEATURETYPE: string; 
-    DATAELEMENTTYPE: string; 
+export type GeometryValues = {
+    FEATURETYPE: string;
+    DATAELEMENTTYPE: string;
     LABEL: string;
 };
 
@@ -27,12 +27,12 @@ export type ProgramAttributeData = {
     attribute: string;
     value: string;
     valueType: keyof typeof dataElementTypes;
-    optionSet?: { 
-        options: Array<{ 
-            name: string; 
-            code: string; 
-            displayName: string; 
-        }> 
+    optionSet?: {
+        options: Array<{
+            name: string;
+            code: string;
+            displayName: string;
+        }>
     };
 };
 
