@@ -58,20 +58,20 @@ const InfoBoxesPlain = ({
             {newOrgUnitName && (
                 <div className={cx(classes.alert, { info: true })}>
                     <IconInfo16 color={colors.grey600} />
-                    {String(i18n.t('Transferring enrollment ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}', {
+                    {i18n.t('Transferring enrollment ownership from {{ownerOrgUnit}} to {{newOrgUnit}}{{escape}}', {
                         ownerOrgUnit: ownerOrgUnitName,
                         newOrgUnit: newOrgUnitName,
                         escape: '.',
-                    }))}
+                    })}
                 </div>
             )}
 
             {showWarning && (
                 <div className={cx(classes.alert, { warning: true })}>
                     <IconWarning16 />
-                    {String(i18n.t('You will lose access to the enrollment when transferring ownership to {{organisationUnit}}.', {
+                    {i18n.t('You will lose access to the enrollment when transferring ownership to {{organisationUnit}}.', {
                         organisationUnit: newOrgUnitName,
-                    }))}
+                    })}
                 </div>
             )}
         </div>

@@ -47,10 +47,10 @@ export const TransferModal = ({
             onClose={() => setOpenTransfer(false)}
             dataTest={'widget-enrollment-transfer-modal'}
         >
-            <ModalTitle>{String(i18n.t('Transfer Ownership'))}</ModalTitle>
+            <ModalTitle>{i18n.t('Transfer Ownership')}</ModalTitle>
             <ModalContent>
                 <div>
-                    {String(i18n.t('Choose the organisation unit to which enrollment ownership should be transferred.'))}
+                    {i18n.t('Choose the organisation unit to which enrollment ownership should be transferred.')}
                 </div>
 
                 <OrgUnitField
@@ -69,7 +69,7 @@ export const TransferModal = ({
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={() => setOpenTransfer(false)}>
-                        {String(i18n.t('Cancel'))}
+                        {i18n.t('Cancel')}
                     </Button>
                     <Button
                         dataTest={'widget-enrollment-transfer-button'}
@@ -78,7 +78,7 @@ export const TransferModal = ({
                         loading={isTransferLoading}
                         onClick={handleOnUpdateOwnership}
                     >
-                        {String(i18n.t('Transfer'))}
+                        {i18n.t('Transfer')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
