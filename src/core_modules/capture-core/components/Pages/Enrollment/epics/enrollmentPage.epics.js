@@ -79,16 +79,20 @@ const enrollmentIdLoaded = (enrollmentId: string, enrollments: ?Array<Object>) =
     enrollments && enrollments.some(enrollment => enrollment.enrollment === enrollmentId);
 
 
-// The verification epics which are triggered by the completion of
-// async requests (e.g. verifyEnrollmentIdSuccessEpic) are not subject
-// to race conditions with other async requests because the chain of
-// epics and reducers triggered by the completion is resolved
-// synchronously before moving on to the next completed request.
+// The verification epics, which are triggered by the completion of
+// async requests (e.g. verifyEnrollmentIdSuccessEpic), are not subject
+// to race conditions with other async requests because the triggered
+// chain of epics and reducers is resolved synchronously before moving
+// on to the next completed request.
 
-// Note that the reason for doing the verification in a separate epic
-// is to make sure we are using the most recent version of the redux
-// store (but we might in fact have access to the most recent state
-// using the old store object as well).
+// The reason for doing the verifications in separate epic is to make
+// sure we never use a stale version of the redux store. However,
+// this might in fact be an unnecessary precaution. Most likely the
+// store never goes stale, at least many clues points in that direction
+// (the store is a javascript object, and the reducers modifies only
+// parts of this object, hence the reference to the entire store object
+// is most likely preserved, meaning any changes to the store will show
+// up in the store object passed in the beginning of the epic).
 
 // Epics for enrollmentId
 export const changedEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore) =>
