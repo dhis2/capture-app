@@ -1,3 +1,55 @@
+## [102.4.8](https://github.com/dhis2/capture-app/compare/v102.4.7...v102.4.8) (2025-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-11847] Add critical alert to post errors ([#4078](https://github.com/dhis2/capture-app/issues/4078)) ([4ae8eca](https://github.com/dhis2/capture-app/commit/4ae8eca441ebfb543f17397df9fd45ac34a59df8))
+
+## [102.4.7](https://github.com/dhis2/capture-app/compare/v102.4.6...v102.4.7) (2025-06-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4113](https://github.com/dhis2/capture-app/issues/4113)) ([57bca70](https://github.com/dhis2/capture-app/commit/57bca70f6f121f717b2cdd21e8ce722c4ee7852b))
+
+## [102.4.6](https://github.com/dhis2/capture-app/compare/v102.4.5...v102.4.6) (2025-05-26)
+
+
+### Bug Fixes
+
+* [DHIS2-18735] deselecting static list breaks breadcrumbs ([ea74faf](https://github.com/dhis2/capture-app/commit/ea74faffe1720844d7d0fd8e9f4408a52bea5e5b))
+* [DHIS2-18951] Ignore Non-searchable attributes error when validating unique attribute ([#4043](https://github.com/dhis2/capture-app/issues/4043)) ([86559e5](https://github.com/dhis2/capture-app/commit/86559e5950400f510541c505275c6a8d3c3a1b78))
+* **translations:** sync translations from transifex (master) ([#4103](https://github.com/dhis2/capture-app/issues/4103)) ([84343d8](https://github.com/dhis2/capture-app/commit/84343d81ba5423d855e4b16d8e933445b335b585))
+
+## [102.4.5](https://github.com/dhis2/capture-app/compare/v102.4.4...v102.4.5) (2025-05-23)
+
+
+### Bug Fixes
+
+* [DHIS2-15903] indexedDB caching ([#4056](https://github.com/dhis2/capture-app/issues/4056)) ([750101c](https://github.com/dhis2/capture-app/commit/750101ce5094ce245a32d92e5f2847ac7bc95d76))
+
+## [102.4.4](https://github.com/dhis2/capture-app/compare/v102.4.3...v102.4.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4093](https://github.com/dhis2/capture-app/issues/4093)) ([23fd8b8](https://github.com/dhis2/capture-app/commit/23fd8b80aecb4a282d89e85490eab7e2cb24fb6b))
+
+## [102.4.3](https://github.com/dhis2/capture-app/compare/v102.4.2...v102.4.3) (2025-05-15)
+
+
+### Bug Fixes
+
+* [DHIS2-19467] form inconsistencies ([#4061](https://github.com/dhis2/capture-app/issues/4061)) ([1560585](https://github.com/dhis2/capture-app/commit/1560585d62169c4648d36da8b484bdcda0727d18))
+* [DHIS2-19530] deprecated api query params ([#4063](https://github.com/dhis2/capture-app/issues/4063)) ([8400dd8](https://github.com/dhis2/capture-app/commit/8400dd8627c1674dce287392303d74bff304b20d))
+
+## [102.4.2](https://github.com/dhis2/capture-app/compare/v102.4.1...v102.4.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* [DHIS2-18839] TEA with number option set value does not show in Profile widget on Capture App ([#4076](https://github.com/dhis2/capture-app/issues/4076)) ([ed6d28d](https://github.com/dhis2/capture-app/commit/ed6d28d4f3a26cbe3a2c01a3c6aaa96737b16769))
+
 ## [102.4.1](https://github.com/dhis2/capture-app/compare/v102.4.0...v102.4.1) (2025-05-08)
 
 

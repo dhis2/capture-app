@@ -15,7 +15,7 @@ import {
     autoSwitchOrgUnit,
 } from '../EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages } from '../EnrollmentPage.constants';
-import { getUserStorageController, userStores } from '../../../../storageControllers';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import { getAncestorIds } from '../../../../metadataRetrieval/orgUnitName';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
@@ -91,7 +91,7 @@ const handleNotFoundError = async ({ ownerId, programId, breakTheGlassAccessUnti
         return saveEnrollments({ enrollments: [] });
     }
 
-    const programAccessLevel = await getUserStorageController().get(userStores.PROGRAMS, programId, {
+    const programAccessLevel = await getUserMetadataStorageController().get(USER_METADATA_STORES.PROGRAMS, programId, {
         project: ({ accessLevel }) => accessLevel,
     });
 

@@ -2,13 +2,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
-import { getUserStorageController, userStores } from '../../../storageControllers';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { useOrgUnitAutoSelect } from '../../../dataQueries';
 
 const getAllPrograms = () => {
-    const userStorageController = getUserStorageController();
-    return userStorageController.getAll(userStores.PROGRAMS, {
+    const userStorageController = getUserMetadataStorageController();
+    return userStorageController.getAll(USER_METADATA_STORES.PROGRAMS, {
         predicate: ({ access }) => access.data.read,
         project: ({ id }) => ({ id }),
     });

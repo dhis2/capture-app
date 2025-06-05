@@ -4,7 +4,7 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
     CachedSectionDataElements,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import type {
     DataEntryFormConfig,
 } from '../../../../components/DataEntries/common/TEIAndEnrollment';
@@ -23,11 +23,4 @@ export type SectionSpecs = {|
     displayName: string,
     displayDescription: string,
     dataElements: ?Array<CachedSectionDataElements>,
-|};
-
-export type RuleProgramStageDataElement = {|
-    id: string,
-    name: string,
-    valueType: string,
-    optionSetId: ?string,
 |};
