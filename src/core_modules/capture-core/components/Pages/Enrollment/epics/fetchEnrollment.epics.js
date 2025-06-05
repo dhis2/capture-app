@@ -26,7 +26,7 @@ const enrollmentsQuery = (teiId, programId) => ({
     id: teiId,
     params: {
         program: programId,
-        fields: ['enrollments', 'programOwners[program,orgUnit]'],
+        fields: ['enrollments[enrollment,program,trackedEntity,status,enrolledAt]', 'programOwners[program,orgUnit]'],
     },
 });
 
