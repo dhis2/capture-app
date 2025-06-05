@@ -1,7 +1,6 @@
 // @flow
 import React, { useEffect, useRef, useState } from 'react';
 import { Plugin } from '@dhis2/app-runtime/experimental';
-import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import type { Props } from './BulkDataEntryPlugin.types';
 
@@ -52,20 +51,6 @@ const BulkDataEntryPluginPlain = ({
                 onComplete={onComplete}
                 onDefer={onDefer}
             />
-            <div style={{ marginTop: '50px' }}>
-                <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
-                    TODO delete buttons before merge
-                </p>
-                <p style={{ marginBottom: '8px' }}>
-                    Dummy buttons for testing that will be inside the Plugin.
-                </p>
-                <Button onClick={onDefer} style={{ marginRight: '8px' }}>
-                    Back to origin to add trackedEntities
-                </Button>
-                <Button onClick={onComplete} style={{ marginRight: '8px' }}>
-                    Close bulk data entry form
-                </Button>
-            </div>
         </div>
     );
 };
