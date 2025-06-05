@@ -59,7 +59,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
         setPageAndParams() {
             const { location } = this.props;
             this.page = location.pathname.substring(1);
-            this.params = queryString.parse(location && location.search);
+            this.params = queryString.parse(location?.search);
         }
 
         getSyncSpecification() {
@@ -94,7 +94,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
 
             return (
                 <InnerComponent
-                    statePage={page || pageKeys.MAIN}
+                    statePage={page ?? pageKeys.MAIN}
                     urlPage={this.page}
                     urlParams={this.params}
                     onUpdate={this.handleUpdate}
@@ -114,7 +114,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         onUpdateFromUrl: (page: string | undefined, updateData: UpdateDataContainer) => {
-            if (page && pageFetchesOrgUnitUsingTheOldWay(page) && page != null) {
+            if (pageFetchesOrgUnitUsingTheOldWay(page) && page != null) {
                 dispatch(updaterForPages[page](updateData));
             }
         },
