@@ -75,7 +75,7 @@ const ScheduleDatePlain = ({
             };
         }
 
-        if (!expiryPeriod.expiryPeriodType) {
+        if (!expiryPeriod) {
             return {
                 error: false,
                 validationText: '',

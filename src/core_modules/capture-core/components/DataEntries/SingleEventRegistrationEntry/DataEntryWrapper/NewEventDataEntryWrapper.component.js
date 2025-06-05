@@ -12,7 +12,7 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
 import { useMetadataForProgramStage } from '../../common/ProgramStage/useMetadataForProgramStage';
-import { useProgramExpiry } from '../../../../hooks';
+import { useProgramExpiryForUser } from '../../../../hooks';
 
 const getStyles = () => ({
     flexContainer: {
@@ -52,7 +52,7 @@ const NewEventDataEntryWrapperPlain = ({
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
     const titleText = useScopeTitleText(programId);
-    const expiryPeriod = useProgramExpiry(programId);
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     if (error) {
         return error.errorComponent;

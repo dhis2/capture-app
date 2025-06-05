@@ -10,7 +10,7 @@ type Props = {
     orgUnit: ?Object,
     linkedEventId: ?string,
     setErrorMessages: (messages: Object) => void,
-    expiryPeriod: {
+    expiryPeriod?: {
         expiryPeriodType: ?string,
         expiryDays: ?number,
      },
@@ -19,7 +19,7 @@ type Props = {
 export const isScheduledDateValid = (
     scheduledDate: ?string,
     scheduledAtFormatError: ?{ error: ?string, errorCode: ?string },
-    expiryPeriod: {
+    expiryPeriod?: {
         expiryPeriodType: ?string,
         expiryDays: ?number,
      },

@@ -13,7 +13,7 @@ export type RelatedStageIsValidProps = {|
     },
     linkedEventId: ?string,
     setErrorMessages: (message: ErrorMessagesForRelatedStages) => void,
-    expiryPeriod: {
+    expiryPeriod?: {
         expiryPeriodType: ?string,
         expiryDays: ?number,
     },

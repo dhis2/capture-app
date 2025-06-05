@@ -7,7 +7,7 @@ import { RelatedStagesActions as RelatedStagesActionsComponent } from './Related
 import { relatedStageStatus } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
 import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
-import { useProgramExpiry } from '../../../hooks';
+import { useProgramExpiryForUser } from '../../../hooks';
 
 const RelatedStagesActionsPlain = ({
     programId,
@@ -40,7 +40,7 @@ const RelatedStagesActionsPlain = ({
         linkedEventId: undefined,
     });
     const { isLoading: orgUnitLoading, data } = useOrgUnitAutoSelect();
-    const expiryPeriod = useProgramExpiry(programId);
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     useEffect(() => {
         if (!orgUnitLoading && data?.length === 1) {

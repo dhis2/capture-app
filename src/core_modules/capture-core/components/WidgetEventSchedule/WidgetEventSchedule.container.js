@@ -21,7 +21,7 @@ import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { pipe } from '../../../capture-core-utils';
-import { useProgramExpiry } from '../../hooks';
+import { useProgramExpiryForUser } from '../../hooks';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -76,7 +76,7 @@ export const WidgetEventSchedule = ({
     const [selectedCategories, setSelectedCategories] = useState({});
     const [categoryOptionsError, setCategoryOptionsError] = useState();
     const { programCategory } = useCategoryCombinations(programId);
-    const expiryPeriod = useProgramExpiry(programId);
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     useEffect(() => {
         if (isFirstRender.current && !scheduleDate && suggestedScheduleDate) {

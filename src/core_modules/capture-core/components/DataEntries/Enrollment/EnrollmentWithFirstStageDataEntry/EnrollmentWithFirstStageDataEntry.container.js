@@ -5,7 +5,7 @@ import { FirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry.compone
 import { useDataEntrySections } from './hooks';
 import { Section } from '../../../../metaData';
 import { RelatedStagesActions } from '../../../WidgetRelatedStages';
-import { useProgramExpiry } from '../../../../hooks';
+import { useProgramExpiryForUser } from '../../../../hooks';
 
 const getSectionId = sectionId =>
     (sectionId === Section.MAIN_SECTION_ID ? `${Section.MAIN_SECTION_ID}-stage` : sectionId);
@@ -19,7 +19,7 @@ export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
     const [[firstSectionId]] = firstStageFormFoundation.sections;
     const beforeSectionId = getSectionId(firstSectionId);
     const dataEntrySections = useDataEntrySections(stageName, beforeSectionId);
-    const expiryPeriod = useProgramExpiry(props.programId);
+    const expiryPeriod = useProgramExpiryForUser(props.programId);
 
     return (
         <>

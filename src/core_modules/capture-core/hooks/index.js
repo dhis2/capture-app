@@ -6,4 +6,4 @@ export { useEnrollmentEditEventPageMode } from './useEnrollmentEditEventPageMode
 export { useAvailableProgramStages } from './useAvailableProgramStages';
 export { useScopeInfo } from './useScopeInfo';
 export { useScopeTitleText } from './useScopeTitleText';
-export { useProgramExpiry } from './useProgramExpiry';
+export { useProgramExpiryForUser } from './useProgramExpiryForUser';

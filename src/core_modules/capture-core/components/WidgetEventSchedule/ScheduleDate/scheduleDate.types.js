@@ -14,7 +14,7 @@ export type Props = {|
     serverSuggestedScheduleDate?: ?string,
     hideDueDate?: boolean,
     orgUnit: { id: string, name: string },
-    expiryPeriod: {
+    expiryPeriod?: {
         expiryPeriodType: ?string,
         expiryDays: ?number,
     },
