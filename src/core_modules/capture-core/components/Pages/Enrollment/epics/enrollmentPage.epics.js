@@ -44,15 +44,6 @@ const enrollmentIdQuery = enrollmentId => ({
     },
 });
 
-const programOwnersQuery = (teiId, programId) => ({
-    resource: 'tracker/trackedEntities',
-    id: teiId,
-    params: {
-        program: programId,
-        fields: ['programOwners[program,orgUnit]'],
-    },
-});
-
 const captureScopeQuery = orgUnitId => ({
     resource: 'organisationUnits',
     params: {
@@ -258,24 +249,19 @@ export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: Re
 // Auto-switch orgUnit epic
 export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, navigate }: ApiUtils) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS),
-        map(() => (({ teiId, programId }) => ({ teiId, programId }))(store.value.enrollmentPage)),
-        concatMap(({ teiId, programId }) => from(querySingleResource(programOwnersQuery(teiId, programId)))
+        ofType(enrollmentPageActionTypes.AUTO_SWITCH_ORGUNIT),
+        map(({ payload: { programId, programOwners } }) => programOwners.find(programOwner => programOwner.program === programId)),
+        filter(programOwner => programOwner),
+        concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
             .pipe(
-                map(({ programOwners }) => programOwners.find(programOwner => programOwner.program === programId)),
-                filter(programOwner => programOwner),
-                concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
-                    .pipe(
-                        concatMap(({ organisationUnits }) => {
-                            if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
-                                // Update orgUnitId in url
-                                const { orgUnitId, ...restOfQueries } = getLocationQuery();
-                                navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwner.orgUnit })}`);
-                            }
-                            return EMPTY;
-                        }),
-                        catchError(() => EMPTY),
-                    )),
+                concatMap(({ organisationUnits }) => {
+                    if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
+                        // Update orgUnitId in url
+                        const { orgUnitId, ...restOfQueries } = getLocationQuery();
+                        navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwner.orgUnit })}`);
+                    }
+                    return EMPTY;
+                }),
                 catchError(() => EMPTY),
             )),
     );

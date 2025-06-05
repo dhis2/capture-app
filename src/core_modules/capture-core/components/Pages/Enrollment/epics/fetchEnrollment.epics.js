@@ -12,6 +12,7 @@ import {
     saveEnrollments,
     fetchEnrollmentsError,
     showErrorViewOnEnrollmentPage,
+    autoSwitchOrgUnit,
 } from '../EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages } from '../EnrollmentPage.constants';
 import { getUserStorageController, userStores } from '../../../../storageControllers';
@@ -25,7 +26,7 @@ const enrollmentsQuery = (teiId, programId) => ({
     id: teiId,
     params: {
         program: programId,
-        fields: ['enrollments'],
+        fields: ['enrollments', 'programOwners[program,orgUnit]'],
     },
 });
 
@@ -144,10 +145,13 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
             const { teiId, programId } = store.value.enrollmentPage;
             return from(querySingleResource(enrollmentsQuery(teiId, programId)))
                 .pipe(
-                    map(({ enrollments }) => {
+                    concatMap(({ enrollments, programOwners }) => {
                         const enrollmentsSortedByDate = sortByDate(enrollments
                             .filter(enrollment => enrollment.program === programId));
-                        return saveEnrollments({ enrollments: enrollmentsSortedByDate });
+                        return of(
+                            saveEnrollments({ enrollments: enrollmentsSortedByDate }),
+                            autoSwitchOrgUnit({ programId, programOwners }),
+                        );
                     }),
                     catchError((error) => {
                         if (featureAvailable(FEATURES.moreGenericErrorMessages)) {
