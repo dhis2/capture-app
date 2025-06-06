@@ -12,7 +12,6 @@ import {
     saveEnrollments,
     fetchEnrollmentsError,
     showErrorViewOnEnrollmentPage,
-    autoSwitchOrgUnit,
 } from '../EnrollmentPage.actions';
 import { enrollmentAccessLevels, serverErrorMessages } from '../EnrollmentPage.constants';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
@@ -26,20 +25,20 @@ const enrollmentsQuery = (teiId, programId) => ({
     id: teiId,
     params: {
         program: programId,
-        fields: ['enrollments[enrollment,program,trackedEntity,status,enrolledAt]', 'programOwners[program,orgUnit]'],
+        fields: ['enrollments[enrollment,program,trackedEntity,status,enrolledAt]'],
     },
 });
 
-const makeCheckIsOwnerInScope = (querySingleResource, ownerId) => async (scope) => {
+const makeCheckIsOwnerInScope = (querySingleResource, programOwnerId) => async (scope) => {
     const ownerPath = [
-        ...await getAncestorIds(ownerId, querySingleResource),
-        ownerId,
+        ...await getAncestorIds(programOwnerId, querySingleResource),
+        programOwnerId,
     ];
 
     return ownerPath.some(orgUnitId => scope.includes(orgUnitId));
 };
 
-const handleOpenAndAuditedAccessLevel = async (checkIsOwnerInScope) => {
+const handleOpenAndAuditedAccessLevel = async (checkIsOwnerInScope, action) => {
     const { captureScope, searchScope } = systemSettingsStore.get();
     const extendedSearchScope = [
         ...captureScope,
@@ -47,31 +46,31 @@ const handleOpenAndAuditedAccessLevel = async (checkIsOwnerInScope) => {
     ];
 
     if (await checkIsOwnerInScope(extendedSearchScope)) {
-        return saveEnrollments({ enrollments: [] });
+        return action;
     }
 
     return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
 };
 
-const handleClosedAccessLevel = async (checkIsOwnerInScope) => {
+const handleClosedAccessLevel = async (checkIsOwnerInScope, action) => {
     const { captureScope } = systemSettingsStore.get();
     if (await checkIsOwnerInScope(captureScope)) {
-        return saveEnrollments({ enrollments: [] });
+        return action;
     }
 
     return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.NO_ACCESS });
 };
 
-const handleProtectedAccessLevel = async (checkIsOwnerInScope, breakTheGlassAccessUntil) => {
+const handleProtectedAccessLevel = async (checkIsOwnerInScope, action, breakTheGlassAccessUntil) => {
     const { captureScope } = systemSettingsStore.get();
     if (await checkIsOwnerInScope(captureScope)) {
-        return saveEnrollments({ enrollments: [] });
+        return action;
     }
 
     const { searchScope } = systemSettingsStore.get();
     if (await checkIsOwnerInScope(searchScope)) {
         if (breakTheGlassAccessUntil >= new Date().getTime()) {
-            return saveEnrollments({ enrollments: [] });
+            return action;
         }
         return fetchEnrollmentsError({ accessLevel: enrollmentAccessLevels.LIMITED_ACCESS });
     }
@@ -86,23 +85,27 @@ const accessLevelHandlers = {
     PROTECTED: handleProtectedAccessLevel,
 };
 
-const handleNotFoundError = async ({ ownerId, programId, breakTheGlassAccessUntil, querySingleResource }) => {
-    if (!ownerId) {
-        return saveEnrollments({ enrollments: [] });
+const handleNotFoundError = async ({ programOwnerId, programId, breakTheGlassAccessUntil, querySingleResource }) => {
+    if (!programOwnerId) {
+        return saveEnrollments({ enrollments: [], programOwnerId });
     }
 
     const programAccessLevel = await getUserMetadataStorageController().get(USER_METADATA_STORES.PROGRAMS, programId, {
         project: ({ accessLevel }) => accessLevel,
     });
 
-    const checkIsOwnerInScope = makeCheckIsOwnerInScope(querySingleResource, ownerId);
+    const checkIsOwnerInScope = makeCheckIsOwnerInScope(querySingleResource, programOwnerId);
 
-    return accessLevelHandlers[programAccessLevel](checkIsOwnerInScope, breakTheGlassAccessUntil);
+    return accessLevelHandlers[programAccessLevel](
+        checkIsOwnerInScope,
+        saveEnrollments({ enrollments: [], programOwnerId }),
+        breakTheGlassAccessUntil,
+    );
 };
 
 const handleErrorsFromNewerBackends = ({
     error,
-    ownerId,
+    programOwnerId,
     programId,
     breakTheGlassAccessUntil,
     querySingleResource,
@@ -110,7 +113,7 @@ const handleErrorsFromNewerBackends = ({
     const { httpStatusCode } = error?.details || {};
     if (httpStatusCode === 404) {
         return from(handleNotFoundError({
-            ownerId,
+            programOwnerId,
             programId,
             breakTheGlassAccessUntil,
             querySingleResource,
@@ -145,19 +148,19 @@ export const fetchEnrollmentsEpic = (action$: InputObservable, store: ReduxStore
             const { teiId, programId } = store.value.enrollmentPage;
             return from(querySingleResource(enrollmentsQuery(teiId, programId)))
                 .pipe(
-                    concatMap(({ enrollments, programOwners }) => {
+                    map(({ enrollments }) => {
                         const enrollmentsSortedByDate = sortByDate(enrollments
                             .filter(enrollment => enrollment.program === programId));
-                        return of(
-                            saveEnrollments({ enrollments: enrollmentsSortedByDate }),
-                            autoSwitchOrgUnit({ programId, programOwners }),
-                        );
+                        return saveEnrollments({
+                            enrollments: enrollmentsSortedByDate,
+                            programOwnerId: store.value.enrollmentPage.programOwners[programId],
+                        });
                     }),
                     catchError((error) => {
                         if (featureAvailable(FEATURES.moreGenericErrorMessages)) {
                             return handleErrorsFromNewerBackends({
                                 error,
-                                ownerId: store.value.enrollmentPage.programOwners[programId],
+                                programOwnerId: store.value.enrollmentPage.programOwners[programId],
                                 breakTheGlassAccessUntil: store.value.breakTheGlassAccess[teiId]?.[programId],
                                 programId,
                                 querySingleResource,

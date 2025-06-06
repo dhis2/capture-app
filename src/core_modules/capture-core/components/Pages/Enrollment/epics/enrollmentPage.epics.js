@@ -32,7 +32,7 @@ const teiQuery = id => ({
     resource: 'tracker/trackedEntities',
     id,
     params: {
-        fields: ['attributes', 'trackedEntityType', 'programOwners'],
+        fields: ['attributes', 'trackedEntityType', 'programOwners[program,orgUnit]'],
     },
 });
 
@@ -253,16 +253,16 @@ export const verifyFetchedEnrollmentsEpic = (action$: InputObservable, store: Re
 // Auto-switch orgUnit epic
 export const autoSwitchOrgUnitEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, navigate }: ApiUtils) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.AUTO_SWITCH_ORGUNIT),
-        map(({ payload: { programId, programOwners } }) => programOwners.find(programOwner => programOwner.program === programId)),
-        filter(programOwner => programOwner),
-        concatMap(programOwner => from(querySingleResource(captureScopeQuery(programOwner.orgUnit)))
+        ofType(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS),
+        map(({ payload: { programOwnerId } }) => programOwnerId),
+        filter(programOwnerId => programOwnerId),
+        concatMap(programOwnerId => from(querySingleResource(captureScopeQuery(programOwnerId)))
             .pipe(
                 concatMap(({ organisationUnits }) => {
                     if (organisationUnits.length > 0 && store.value.enrollmentPage.pageOpen) {
                         // Update orgUnitId in url
                         const { orgUnitId, ...restOfQueries } = getLocationQuery();
-                        navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwner.orgUnit })}`);
+                        navigate(`/enrollment?${buildUrlQueryString({ ...restOfQueries, orgUnitId: programOwnerId })}`);
                     }
                     return EMPTY;
                 }),

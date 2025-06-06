@@ -29,8 +29,6 @@ export const enrollmentPageActionTypes = {
     FETCH_ENROLLMENTS_ERROR: 'EnrollmentPage.FetchEnrollmentsError',
     FETCH_ENROLLMENTS_SUCCESS: 'EnrollmentPage.FetchEnrollmentsSuccess',
 
-    AUTO_SWITCH_ORGUNIT: 'EnrollmentPage.AutoSwitchOrgunit',
-
     DEFAULT_VIEW: 'EnrollmentPage.DefaultView',
     LOADING_VIEW: 'EnrollmentPage.LoadingView',
     MISSING_MESSAGE_VIEW: 'EnrollmentPage.MissingMessageView',
@@ -119,12 +117,8 @@ export const verifyFetchedEnrollments = ({ teiId, programId, action }: Object) =
 export const fetchEnrollmentsError = ({ accessLevel }: { accessLevel: string }) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_ERROR)({ accessLevel });
 
-export const saveEnrollments = ({ enrollments }: any) =>
-    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ enrollments });
-
-// orgUnits
-export const autoSwitchOrgUnit = ({ programId, programOwners }: { programId: string, programOwners: ProgramOwners }) =>
-    actionCreator(enrollmentPageActionTypes.AUTO_SWITCH_ORGUNIT)({ programId, programOwners });
+export const saveEnrollments = ({ enrollments, programOwnerId }: { enrollments: Object, programOwnerId: ?string }) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ enrollments, programOwnerId });
 
 // Page status
 export const showDefaultViewOnEnrollmentPage = () =>
