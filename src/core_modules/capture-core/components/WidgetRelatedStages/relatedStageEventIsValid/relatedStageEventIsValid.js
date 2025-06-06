@@ -12,6 +12,7 @@ export const relatedStageWidgetIsValid = ({
     orgUnit,
     linkedEventId,
     setErrorMessages,
+    expiryPeriod,
 }: RelatedStageIsValidProps): boolean => {
     if (!linkMode) {
         return true;
@@ -30,5 +31,6 @@ export const relatedStageWidgetIsValid = ({
         orgUnit,
         linkedEventId,
         setErrorMessages,
+        expiryPeriod,
     });
 };
