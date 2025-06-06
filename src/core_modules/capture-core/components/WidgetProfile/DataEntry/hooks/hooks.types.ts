@@ -8,6 +8,7 @@ import type {
 } from '../../../../rules/RuleEngine';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
+import type { EnrollmentData } from '../types/dataEntry.types';
 
 export type Geometry = {
     coordinates: any;

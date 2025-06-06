@@ -22,7 +22,7 @@ import {
 } from './index';
 import { getRulesActionsForTEI } from '../ProgramRules';
 import type { UseLifecycleParams } from './hooks.types';
-import type { EnrollmentData } from '../Types/dataEntry.types';
+import type { EnrollmentData } from '../types/dataEntry.types';
 
 export const useLifecycle = ({
     programAPI,

@@ -1,19 +1,6 @@
-// @flow
-import type {
-    Enrollment,
-    TEIValues,
-    OutputEffects,
-    OrgUnit,
-    TrackedEntityAttributes,
-    OptionSets,
-    ProgramRulesContainer,
-    EventsData,
-    DataElements,
-} from '../../../../rules/RuleEngine';
 import { ruleEngine } from '../../../../rules/rulesEngine';
 import {
     dataElementTypes,
-    type RenderFoundation,
 } from '../../../../metaData';
 import {
     updateRulesEffects,
@@ -22,24 +9,40 @@ import {
     validateAssignEffects,
 } from '../../../../rules';
 import { convertServerToClient } from '../../../../converters';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { QuerySingleResource } from '../../../../utils/api';
-import type { EnrollmentData } from '../Types';
+import type {
+    Enrollment,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    TEIValues,
+    OutputEffects,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    OrgUnit,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    TrackedEntityAttributes,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    OptionSets,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ProgramRulesContainer,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    EventsData,
+    DataElements,
+} from '../../../../rules/RuleEngine';
+import type { EnrollmentData, GetRulesActionsParams, GetRulesActionsAsyncParams } from '../types/dataEntry.types';
 
-const getEnrollmentForRulesExecution = (enrollment: ?EnrollmentData, programName: string): ?Enrollment =>
+const getEnrollmentForRulesExecution = (enrollment: EnrollmentData | undefined, programName: string): Enrollment | undefined =>
     enrollment && {
         enrollmentId: enrollment.enrollment,
-        // $FlowFixMe
         enrolledAt: convertServerToClient(enrollment.enrolledAt, dataElementTypes.DATE),
-        // $FlowFixMe
         occurredAt: convertServerToClient(enrollment.occurredAt, dataElementTypes.DATE),
         enrollmentStatus: enrollment.status,
         programName,
     };
 
-const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
+const getDataElementsForRulesExecution = (dataElements: DataElements | undefined) =>
     dataElements &&
     Object.values(dataElements).reduce(
-        (acc, dataElement: any) => ({
+        (acc: Record<string, any>, dataElement: any) => ({
             ...acc,
             [dataElement.id]: {
                 id: dataElement.id,

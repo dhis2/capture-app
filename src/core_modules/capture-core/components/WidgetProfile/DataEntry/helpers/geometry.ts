@@ -1,7 +1,5 @@
-// @flow
 import { dataElementTypes } from '../../../../metaData';
-
-type GeometryValues = { FEATURETYPE: string, DATAELEMENTTYPE: string, LABEL: string };
+import type { GeometryValues } from '../types/dataEntry.types';
 
 export const GEOMETRY: { POINT: GeometryValues, POLYGON: GeometryValues } = {
     POINT: {
