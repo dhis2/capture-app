@@ -1,3 +1,10 @@
+# [102.5.0](https://github.com/dhis2/capture-app/compare/v102.4.8...v102.5.0) (2025-06-06)
+
+
+### Features
+
+* [DHIS2-18889] BulkDataEntryPlugin entry point ([#4000](https://github.com/dhis2/capture-app/issues/4000)) ([dbed996](https://github.com/dhis2/capture-app/commit/dbed9969068023f6e52f39682975fd16877e00ef))
+
 ## [102.4.8](https://github.com/dhis2/capture-app/compare/v102.4.7...v102.4.8) (2025-06-04)
 
 
