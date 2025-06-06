@@ -1,6 +1,5 @@
-import type { ReactNode } from 'react';
-import type { Option } from '../../../metaData';
 import type { QuerySingleResource } from 'capture-core/utils/api/api.types';
+import type { Option } from '../../../metaData';
 
 export type Geometry = {
     type: string;
@@ -39,10 +38,5 @@ export type InputProgramData = {
 
 export type InputAttribute = {
     attribute: string;
-    code: string;
-    createdAt: string;
-    displayName: string;
-    lastUpdated: string;
     value: string;
-    valueType: string;
 };

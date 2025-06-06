@@ -20,11 +20,11 @@ export const useUserRoles = () => {
 
     const userRoles = useMemo(
         () => {
-            if (!loading && data && data.userData) {
-                const userData = data.userData as { 
-                    userCredentials?: { 
-                        userRoles?: Array<{ id: string }> 
-                    } 
+            if (!loading && data?.userData) {
+                const userData = data.userData as {
+                    userCredentials?: {
+                        userRoles?: Array<{ id: string }>
+                    }
                 };
                 return userData.userCredentials?.userRoles?.map(({ id }) => id);
             }

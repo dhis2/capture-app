@@ -46,7 +46,7 @@ export const useProgram = (programId: string) => {
 
     return {
         program: programMetadata,
-        loading: programLoading || optionGroupsLoading,
-        error: programError || optionGroupsError,
+        loading: programLoading ?? optionGroupsLoading,
+        error: programError ?? optionGroupsError,
     };
 };
