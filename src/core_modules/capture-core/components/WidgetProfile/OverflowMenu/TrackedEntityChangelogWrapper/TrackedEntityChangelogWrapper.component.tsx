@@ -1,38 +1,30 @@
+// @flow
 import React, { useMemo } from 'react';
 import { dataElementTypes, RenderFoundation, type DataElement } from '../../../../metaData';
 import { useFormFoundation } from '../../DataEntry/hooks';
 import { WidgetTrackedEntityChangelog } from '../../../WidgetsChangelog';
-import type { TrackedEntityChangelogWrapperProps } from '../types/overflowMenu.types';
+import type { Props } from './TrackedEntityChangelogWrapper.types';
 
-export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, trackedEntityData, ...passOnProps }: TrackedEntityChangelogWrapperProps) => {
+export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, trackedEntityData, ...passOnProps }: Props) => {
     const formFoundation: RenderFoundation = useFormFoundation(programAPI);
 
-    const transformedTrackedEntityData = useMemo(() => {
-        if (!Array.isArray(trackedEntityData)) return {};
-        return trackedEntityData.reduce((acc: Record<string, unknown>, item: any) => {
-            acc[item.attribute] = item.value;
-            return acc;
-        }, {});
-    }, [trackedEntityData]);
+    const transformedTrackedEntityData = trackedEntityData.reduce((acc, item) => {
+        acc[item.attribute] = item.value;
+        return acc;
+    }, {});
 
     const dataItemDefinitions = useMemo(() => {
         if (!Object.keys(formFoundation)?.length) return {};
         const elements = formFoundation.getElements();
         const contextLabels = formFoundation.getLabels();
 
-        const fieldElementsById = elements.reduce((acc: Record<string, any>, element: DataElement) => {
+        const fieldElementsById = elements.reduce((acc, element: DataElement) => {
             if (!transformedTrackedEntityData.hasOwnProperty(element.id)) {
                 return acc;
             }
 
             const { optionSet } = element;
-            const metadata: {
-                id: string;
-                name: string;
-                type: string;
-                optionSet?: string;
-                options?: Array<{ code: string; name: string }>;
-            } = {
+            const metadata = {
                 id: element.id,
                 name: element.formName,
                 type: element.type,
@@ -52,7 +44,7 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, tr
             return acc;
         }, {});
 
-        const fieldElementsContext = Object.keys(contextLabels).reduce((acc: Record<string, any>, key) => {
+        const fieldElementsContext = Object.keys(contextLabels).reduce((acc, key) => {
             acc[key] = {
                 id: key,
                 name: contextLabels[key],

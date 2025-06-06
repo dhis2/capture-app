@@ -1,3 +1,5 @@
+// @flow
+
 const valueToEscape = Object.freeze({
     COLON: ':',
     COMMA: ',',

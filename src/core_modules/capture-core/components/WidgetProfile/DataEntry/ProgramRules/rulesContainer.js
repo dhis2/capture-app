@@ -1,10 +1,11 @@
+// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import type { ProgramRulesContainer } from '@dhis2/rules-engine-javascript';
 import { getTrackedEntityAttributeId, getDataElementId, getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
-import type { BuildRulesContainerParams } from '../types/dataEntry.types';
 
-const addProgramVariables = (program: any, programRuleVariables: any[]): void => {
+const addProgramVariables = (program, programRuleVariables) => {
     program.programRuleVariables = programRuleVariables.map(programRulesVariable => ({
         ...programRulesVariable,
         programId: getProgramId(programRulesVariable),
@@ -13,7 +14,7 @@ const addProgramVariables = (program: any, programRuleVariables: any[]): void =>
     }));
 };
 
-const addProgramRules = (program: any, programRules: any[]): void => {
+const addProgramRules = (program, programRules) => {
     program.programRules = programRules.map(programRule => ({
         ...programRule,
         programId: getProgramId(programRule),
@@ -22,7 +23,7 @@ const addProgramRules = (program: any, programRules: any[]): void => {
     }));
 };
 
-const addRulesAndVariablesFromProgramIndicators = (rulesContainer: any, programIndicators: any[], programId: string): void => {
+const addRulesAndVariablesFromProgramIndicators = (rulesContainer, programIndicators, programId) => {
     const validProgramIndicators = programIndicators.filter((indicator) => {
         if (!indicator.expression) {
             log.error(
@@ -52,14 +53,20 @@ const addRulesAndVariablesFromProgramIndicators = (rulesContainer: any, programI
     }
 };
 
+
 export const buildRulesContainer = async ({
     programAPI,
     programRules,
     constants,
     setRulesContainer,
-}: BuildRulesContainerParams): Promise<void> => {
+}: {
+    programAPI: any,
+    programRules: Array<any>,
+    constants: Array<any>,
+    setRulesContainer: (rulesContainer: ProgramRulesContainer) => void,
+}) => {
     const { programRuleVariables, programIndicators } = programAPI;
-    const rulesContainer: any = {};
+    const rulesContainer = {};
 
     programRuleVariables && addProgramVariables(rulesContainer, programRuleVariables);
     programRules && addProgramRules(rulesContainer, programRules);

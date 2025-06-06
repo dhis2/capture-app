@@ -1,9 +1,10 @@
+// @flow
 import React, { useState } from 'react';
 import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { OverflowButton } from '../../Buttons';
-import type { OverflowMenuComponentProps } from './types/overflowMenu.types';
+import type { PlainProps } from './OverflowMenu.types';
 import { DeleteMenuItem, DeleteModal } from './Delete';
+import { OverflowButton } from '../../Buttons';
 import { TrackedEntityChangelogWrapper } from './TrackedEntityChangelogWrapper';
 
 export const OverflowMenuComponent = ({
@@ -17,7 +18,7 @@ export const OverflowMenuComponent = ({
     teiId,
     programAPI,
     readOnlyMode,
-}: OverflowMenuComponentProps) => {
+}: PlainProps) => {
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
     const [changelogIsOpen, setChangelogIsOpen] = useState(false);
