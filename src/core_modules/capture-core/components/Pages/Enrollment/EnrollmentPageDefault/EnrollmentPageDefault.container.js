@@ -207,7 +207,6 @@ export const EnrollmentPageDefault = () => {
             onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
             onViewAll={onViewAll}
             onBackToMainPage={onBackToMainPage}
-            trackedEntityName={program.trackedEntityType.name}
             onCreateNew={onCreateNew}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
