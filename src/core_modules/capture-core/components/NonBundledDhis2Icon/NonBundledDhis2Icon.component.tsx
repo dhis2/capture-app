@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useConfig } from '@dhis2/app-runtime';
 import { buildUrl, FEATURES, useFeature } from 'capture-core-utils';
@@ -12,7 +11,6 @@ export const NonBundledDhis2Icon = ({ name, alternativeText = name, ...passOnPro
 
     if (name) {
         source = buildUrl(baseUrl, `api/${apiVersion}/icons/${name}/icon`);
-        // Append .svg to source if supportCustomIcons is false (feature flag v41)
         source = supportCustomIcons ? source : `${source}.svg`;
     }
 

@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { filter, map, concatMap } from 'rxjs/operators';
@@ -17,13 +16,14 @@ import { programCollection } from '../../metaDataMemoryStores';
 import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { getLocationQuery } from '../../utils/routing';
 import { getCoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
+import type { EpicAction, ReduxStore } from '../../../capture-core-utils/types/global';
 
-export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.FROM_URL_UPDATE),
         filter(action => action.payload.nextProps.orgUnitId),
         concatMap((action) => {
-            const { organisationUnits } = store.value;
+            const { organisationUnits } = store.value as any;
             const { orgUnitId } = action.payload.nextProps;
             if (organisationUnits[orgUnitId]) {
                 return of(completeUrlUpdate());
@@ -36,13 +36,13 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable, sto
         }),
     );
 
-export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: EpicAction<any>) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.FROM_URL_UPDATE),
         filter(action => !action.payload.nextProps.orgUnitId),
         map(() => setEmptyOrgUnitBasedOnUrl()));
 
-export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+export const validateSelectionsBasedOnUrlUpdateEpic = (action$: EpicAction<any>) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.FROM_URL_UPDATE_COMPLETE,

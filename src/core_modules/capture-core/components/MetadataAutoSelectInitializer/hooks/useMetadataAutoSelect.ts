@@ -1,4 +1,3 @@
-// @flow
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
