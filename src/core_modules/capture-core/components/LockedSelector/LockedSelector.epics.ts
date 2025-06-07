@@ -54,7 +54,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: EpicAction<any>)
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map(() => {
-            const { programId, orgUnitId } = getLocationQuery() as any;
+            const { programId, orgUnitId } = getLocationQuery();
 
             if (programId) {
                 const program = programCollection.get(programId);
