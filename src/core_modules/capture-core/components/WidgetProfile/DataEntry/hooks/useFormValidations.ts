@@ -1,16 +1,15 @@
-// @flow
 import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 
-const prepareMessages = (rulesEffectsGeneral, rulesEffectsMessages, saveAttempted, type) => {
+const prepareMessages = (rulesEffectsGeneral: any, rulesEffectsMessages: any, saveAttempted: boolean, type: string) => {
     let messages = rulesEffectsGeneral && rulesEffectsGeneral[type] ? rulesEffectsGeneral[type] : [];
     if (saveAttempted) {
         messages = rulesEffectsGeneral[`${type}OnComplete`] ? [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]] : messages;
 
         messages = Object.values(rulesEffectsMessages).reduce(
-            (acc, rulesEffectsMessage: any) =>
+            (acc: any, rulesEffectsMessage: any) =>
                 (rulesEffectsMessage[`${type}OnComplete`] ? [...acc, { message: rulesEffectsMessage[`${type}OnComplete`], id: uuid() }] : acc),
             messages,
         );
@@ -25,19 +24,17 @@ export const useFormValidations = (dataEntryId: string, itemId: string, saveAtte
         rulesEffectsGeneralWarnings = {},
         rulesEffectsMessages = {},
         formsSectionsFieldsUI = {},
-    } = useSelector(store => ({
+    } = useSelector((store: any) => ({
         rulesEffectsGeneralErrors: store.rulesEffectsGeneralErrors && store.rulesEffectsGeneralErrors[ruleId],
         rulesEffectsGeneralWarnings: store.rulesEffectsGeneralWarnings && store.rulesEffectsGeneralWarnings[ruleId],
         rulesEffectsMessages: store.rulesEffectsMessages && store.rulesEffectsMessages[ruleId],
         formsSectionsFieldsUI: store.formsSectionsFieldsUI && store.formsSectionsFieldsUI[ruleId],
     }));
 
-    // $FlowFixMe[incompatible-use]
-    const fieldsValidated = useMemo(() => Object.values(formsSectionsFieldsUI).every(({ valid }) => valid === true), [formsSectionsFieldsUI]);
+    const fieldsValidated = useMemo(() => Object.values(formsSectionsFieldsUI).every(({ valid }: any) => valid === true), [formsSectionsFieldsUI]);
     const rulesValidated = useMemo(
         () =>
-            // $FlowFixMe[incompatible-use]
-            Object.values(rulesEffectsMessages).every(({ error, errorOnComplete }) => !error && !errorOnComplete) &&
+            Object.values(rulesEffectsMessages).every(({ error, errorOnComplete }: any) => !error && !errorOnComplete) &&
             !rulesEffectsGeneralErrors.errors &&
             !rulesEffectsGeneralErrors.errorOnComplete,
         [rulesEffectsMessages, rulesEffectsGeneralErrors],
