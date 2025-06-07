@@ -1,6 +1,6 @@
 import React from 'react';
 import { colors } from '@dhis2/ui';
-import type { IncompleteSelectionsMessageProps } from './IncompleteSelectionsMessage.types';
+import type { ReactNode } from 'react';
 
 const containerStyle = {
     display: 'flex',
@@ -15,7 +15,12 @@ const messageBoxStyle = {
     borderRadius: '4px',
 };
 
-export const IncompleteSelectionsMessage = ({ children, dataTest = 'informative-paper' }: IncompleteSelectionsMessageProps) => (
+type Props = {
+    children: ReactNode;
+    dataTest?: string;
+};
+
+export const IncompleteSelectionsMessage = ({ children, dataTest = 'informative-paper' }: Props) => (
     <div style={containerStyle}>
         <div style={messageBoxStyle} data-test={dataTest}>
             {children}
