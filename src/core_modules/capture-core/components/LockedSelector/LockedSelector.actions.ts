@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../actions/actions.utils';
 import type { CoreOrgUnit } from '../../metadataRetrieval/coreOrgUnit';
 
@@ -15,7 +14,7 @@ export const lockedSelectorActionTypes = {
     FETCH_ORG_UNIT_ERROR: 'LockedSelector.FetchOrgUnitError',
 };
 
-export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.FROM_URL_UPDATE)(data);
+export const updateSelectionsFromUrl = (data: Record<string, unknown>) => actionCreator(lockedSelectorActionTypes.FROM_URL_UPDATE)(data);
 export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID)();
 export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_INVALID)({ error });
 export const setCurrentOrgUnitBasedOnUrl = (orgUnit: CoreOrgUnit) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS)(orgUnit);
