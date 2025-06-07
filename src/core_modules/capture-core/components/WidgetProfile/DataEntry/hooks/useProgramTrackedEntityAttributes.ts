@@ -1,9 +1,8 @@
-// @flow
 import { useMemo } from 'react';
 
 const processProgramTrackedEntityAttributes = (programAPI: any) =>
     programAPI?.programTrackedEntityAttributes?.reduce(
-        (acc, currentValue) => ({
+        (acc: any, currentValue: any) => ({
             ...acc,
             [currentValue.trackedEntityAttribute.id]: currentValue.trackedEntityAttribute,
         }),

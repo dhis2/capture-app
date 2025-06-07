@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
@@ -21,6 +20,6 @@ export const useConstants = () => {
 
     return {
         error,
-        constants: !loading && data?.constants?.constants,
+        constants: !loading && (data as any)?.constants?.constants,
     };
 };

@@ -1,13 +1,12 @@
-// @flow
 import { useMemo } from 'react';
 import { convertValue } from '../../../../converters/serverToClient';
 import { dataElementTypes } from '../../../../metaData';
 import { useOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 
-const convertDate = date => convertValue(date, dataElementTypes.DATE);
+const convertDate = (date: any) => convertValue(date, dataElementTypes.DATE);
 
-const getClientFormattedDataValuesAsObject = (dataValues, elementsById) =>
-    dataValues.reduce((acc, { dataElement: id, value }) => {
+const getClientFormattedDataValuesAsObject = (dataValues: any, elementsById: any) =>
+    dataValues.reduce((acc: any, { dataElement: id, value }: any) => {
         const dataElement = elementsById[id];
         if (dataElement) {
             acc[id] = convertValue(value, dataElement.valueType);
@@ -16,20 +15,20 @@ const getClientFormattedDataValuesAsObject = (dataValues, elementsById) =>
     }, {});
 
 const getOrgUnitIds = (enrollment: any): Array<string> =>
-    (enrollment ? enrollment.events.reduce((acc, event) => {
+    (enrollment ? enrollment.events.reduce((acc: Array<string>, event: any) => {
         if (event.orgUnit) {
             acc.push(event.orgUnit);
         }
         return acc;
     }, []) : []);
 
-export const useEvents = (enrollment: any, elementsById: Array<any>) => {
+export const useEvents = (enrollment: any, elementsById: any) => {
     const orgUnitIds = useMemo(() => getOrgUnitIds(enrollment), [enrollment]);
     const { orgUnitNames } = useOrgUnitNames(orgUnitIds);
     return useMemo(
         () =>
             enrollment && orgUnitNames &&
-            enrollment.events.map(event => ({
+            enrollment.events.map((event: any) => ({
                 eventId: event.event,
                 programId: event.program,
                 programStageId: event.programStage,

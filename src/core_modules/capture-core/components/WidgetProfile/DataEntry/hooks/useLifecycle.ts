@@ -1,7 +1,6 @@
-// @flow
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCoreOrgUnit, type CoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
+import { useCoreOrgUnit } from 'capture-core/metadataRetrieval/coreOrgUnit';
 import type {
     TrackedEntityAttributes,
     OptionSets,
@@ -21,10 +20,21 @@ import {
     useProgramTrackedEntityAttributes,
     useGeometryValues,
 } from './index';
-import type { Geometry } from '../helpers/types';
+import type { Geometry } from './hooks.types';
 import { getRulesActionsForTEI } from '../ProgramRules';
 import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
 import type { EnrollmentData } from '../Types';
+
+type UseLifecycleParams = {
+    programAPI: any;
+    orgUnitId: string;
+    clientAttributesWithSubvalues: Array<any>;
+    userRoles: Array<string>;
+    dataEntryId: string;
+    itemId: string;
+    geometry: Geometry | null;
+    dataEntryFormConfig: DataEntryFormConfig | null;
+};
 
 export const useLifecycle = ({
     programAPI,
@@ -35,25 +45,13 @@ export const useLifecycle = ({
     itemId,
     geometry,
     dataEntryFormConfig,
-}: {
-    programAPI: any,
-    orgUnitId: string,
-    clientAttributesWithSubvalues: Array<any>,
-    userRoles: Array<string>,
-    dataEntryId: string,
-    itemId: string,
-    geometry: ?Geometry,
-    dataEntryFormConfig: ?DataEntryFormConfig,
-}) => {
+}: UseLifecycleParams) => {
     const dispatch = useDispatch();
-    // TODO: Getting the entire state object is bad and this needs to be refactored.
-    // The problem is the helper methods that take the entire state object.
-    // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
-    const state = useSelector(stateArg => stateArg);
-    const enrollment: EnrollmentData = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
+    const state = useSelector((stateArg: any) => stateArg);
+    const enrollment: EnrollmentData = useSelector(({ enrollmentDomain }: any) => enrollmentDomain?.enrollment);
     const dataElements: DataElements = useDataElements(programAPI);
     const otherEvents = useEvents(enrollment, dataElements);
-    const orgUnit: ?CoreOrgUnit = useCoreOrgUnit(orgUnitId).orgUnit;
+    const orgUnit: any = useCoreOrgUnit(orgUnitId).orgUnit;
     const rulesContainer: ProgramRulesContainer = useRulesContainer(programAPI);
     const formFoundation: RenderFoundation = useFormFoundation(programAPI, dataEntryFormConfig);
     const { formValues, clientValues } = useFormValues({ formFoundation, clientAttributesWithSubvalues, orgUnit });

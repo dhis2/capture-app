@@ -1,12 +1,9 @@
-// @flow
 import { useMemo } from 'react';
-import type { TrackedEntityAttributes, DataElements } from '@dhis2/rules-engine-javascript';
 import { convertServerToClient } from '../../../../converters';
 
-const getOptionSets = array =>
+const getOptionSets = (array: any) =>
     array &&
-    Object.values(array)?.reduce((acc, currentValue) => {
-        // $FlowFixMe[incompatible-use]
+    Object.values(array)?.reduce((acc: any, currentValue: any) => {
         const { optionSet } = currentValue;
         if (optionSet) {
             const { valueType, options, id } = optionSet;
@@ -14,7 +11,7 @@ const getOptionSets = array =>
                 ...acc,
                 [id]: {
                     ...optionSet,
-                    options: options.map(option => ({
+                    options: options.map((option: any) => ({
                         ...option,
                         code: convertServerToClient(option.code, valueType),
                     })),
@@ -24,7 +21,7 @@ const getOptionSets = array =>
         return acc;
     }, {});
 
-export const useOptionSets = (programTrackedEntityAttributes: TrackedEntityAttributes, dataElements: DataElements) =>
+export const useOptionSets = (programTrackedEntityAttributes: any, dataElements: any) =>
     useMemo(
         () => ({ ...getOptionSets(programTrackedEntityAttributes), ...getOptionSets(dataElements) }),
         [programTrackedEntityAttributes, dataElements],
