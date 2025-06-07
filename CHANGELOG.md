@@ -1,3 +1,15 @@
+# [102.6.0](https://github.com/dhis2/capture-app/compare/v102.5.0...v102.6.0) (2025-06-07)
+
+
+### Bug Fixes
+
+* [DHIS2-19633] Adjust form width to 40/60 ([#4130](https://github.com/dhis2/capture-app/issues/4130)) ([46c69c1](https://github.com/dhis2/capture-app/commit/46c69c181e7eacd8b2db89b5935ce50b2241fb86))
+
+
+### Features
+
+* [DHIS2-18664] Add org unit field to new event from for Event programs ([#3976](https://github.com/dhis2/capture-app/issues/3976)) ([7f22b5b](https://github.com/dhis2/capture-app/commit/7f22b5be15512a0bb0fcb336da6ba171eb071ef9))
+
 # [102.5.0](https://github.com/dhis2/capture-app/compare/v102.4.8...v102.5.0) (2025-06-06)
 
 
