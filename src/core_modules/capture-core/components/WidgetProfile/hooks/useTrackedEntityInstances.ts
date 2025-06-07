@@ -1,28 +1,35 @@
-// @flow
 import { useEffect, useMemo, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
-import type { Geometry } from '../DataEntry/helpers/types';
+import type { Geometry, InputAttribute } from './hooks.types';
 
-type InputAttribute = {
-    attribute: string,
-    code: string,
-    created: string,
-    displayName: string,
-    lastUpdated: string,
-    value: string,
-    valueType: string,
+type TrackedEntityInstance = {
+    attributes?: Array<{ attribute: string; value: string }>;
+    geometry?: Geometry;
+    trackedEntityType?: string;
+    [key: string]: any;
+};
+
+type TetData = {
+    trackedEntityType?: {
+        displayName?: string;
+        access?: any;
+    };
+};
+
+type QueryData = {
+    trackedEntityInstance?: TrackedEntityInstance;
 };
 
 export const useTrackedEntityInstances = (
     teiId: string,
     programId: string,
     storedAttributeValues: Array<{ [key: string]: string }>,
-    storedGeometry: ?Geometry,
+    storedGeometry?: Geometry,
 ) => {
     const [trackedEntityInstanceAttributes, setTrackedEntityInstanceAttributes] = useState<Array<InputAttribute>>([]);
-    const [geometry, setGeometry] = useState();
+    const [geometry, setGeometry] = useState<Geometry | undefined>();
 
-    const { error, loading, data } = useDataQuery(
+    const { error, loading, data } = useDataQuery<QueryData>(
         useMemo(
             () => ({
                 trackedEntityInstance: {
@@ -37,12 +44,12 @@ export const useTrackedEntityInstances = (
         ),
     );
 
-    const { loading: tetLoading, data: tetData, refetch: refetchTET } = useDataQuery(
+    const { loading: tetLoading, data: tetData, refetch: refetchTET } = useDataQuery<TetData>(
         useMemo(
             () => ({
                 trackedEntityType: {
                     resource: 'trackedEntityTypes',
-                    id: ({ variables: { tetId } }) => tetId,
+                    id: ({ variables }: any) => variables.tetId,
                     params: {
                         fields: 'displayName,access',
                     },
@@ -54,9 +61,10 @@ export const useTrackedEntityInstances = (
     );
 
     useEffect(() => {
-        if (data?.trackedEntityInstance?.attributes?.length > 0) {
+        const attributes = data?.trackedEntityInstance?.attributes;
+        if (attributes && attributes.length > 0) {
             setTrackedEntityInstanceAttributes(
-                data?.trackedEntityInstance?.attributes.map(({ attribute, value }) => ({
+                attributes.map(({ attribute, value }: { attribute: string; value: string }) => ({
                     attribute,
                     value,
                 })),
@@ -66,13 +74,13 @@ export const useTrackedEntityInstances = (
 
     useEffect(() => {
         if (data?.trackedEntityInstance?.geometry) {
-            setGeometry(data?.trackedEntityInstance?.geometry);
+            setGeometry(data?.trackedEntityInstance?.geometry as Geometry);
         }
     }, [data?.trackedEntityInstance?.geometry]);
 
     useEffect(() => {
         if (storedAttributeValues?.length > 0) {
-            setTrackedEntityInstanceAttributes(storedAttributeValues);
+            setTrackedEntityInstanceAttributes(storedAttributeValues as Array<InputAttribute>);
         }
     }, [storedAttributeValues]);
 
@@ -93,8 +101,8 @@ export const useTrackedEntityInstances = (
         loading,
         trackedEntity: !loading && data?.trackedEntityInstance,
         trackedEntityInstanceAttributes: !loading && trackedEntityInstanceAttributes,
-        trackedEntityTypeName: tetLoading ? undefined : tetData?.trackedEntityType?.displayName,
-        trackedEntityTypeAccess: !tetLoading && tetData?.trackedEntityType?.access,
+        trackedEntityTypeName: tetLoading ? undefined : (tetData?.trackedEntityType as any)?.displayName,
+        trackedEntityTypeAccess: !tetLoading && (tetData?.trackedEntityType as any)?.access,
         geometry,
     };
 };

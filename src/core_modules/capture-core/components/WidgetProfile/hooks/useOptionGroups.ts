@@ -1,11 +1,29 @@
-// @flow
 import { useMemo } from 'react';
 import { useApiMetadataQuery } from 'capture-core/utils/reactQueryHelpers';
 
-const createOptionSetToOptionGroupDictionary = ({ optionGroups }) => optionGroups.reduce(
-    (acc, optionGroup) => {
+type OptionGroup = {
+    id: string;
+    optionSet: {
+        id: string;
+    };
+    options: Array<{
+        id: string;
+    }>;
+};
+
+type TransformedOptionGroup = {
+    id: string;
+    options: string[];
+};
+
+type OptionSetDict = {
+    [optionSetId: string]: TransformedOptionGroup[];
+};
+
+const createOptionSetToOptionGroupDictionary = ({ optionGroups }: { optionGroups: OptionGroup[] }): OptionSetDict => optionGroups.reduce(
+    (acc: OptionSetDict, optionGroup: OptionGroup) => {
         const optionSetId = optionGroup.optionSet.id;
-        const transformedOptionGroup = {
+        const transformedOptionGroup: TransformedOptionGroup = {
             id: optionGroup.id,
             options: optionGroup.options.map(option => option.id),
         };
@@ -26,7 +44,7 @@ export const useOptionGroups = (program: any) => {
         }
 
         const attributes = program.programTrackedEntityAttributes.reduce(
-            (acc, attribute) => {
+            (acc: string[], attribute: any) => {
                 const optionSet = attribute.trackedEntityAttribute.optionSet;
                 if (optionSet) {
                     acc.push(optionSet.id);
@@ -48,7 +66,7 @@ export const useOptionGroups = (program: any) => {
         enabled: Boolean(program),
         select: createOptionSetToOptionGroupDictionary,
     };
-    const { data, isLoading, error } = useApiMetadataQuery<any>(queryKey, queryFn, queryOptions);
+    const { data, isLoading, error } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
 
     return {
         optionGroups: program ? data : null,
