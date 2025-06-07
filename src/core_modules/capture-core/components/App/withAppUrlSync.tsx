@@ -1,24 +1,14 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import queryString, { type QueryParameters } from 'query-string';
+import queryString from 'query-string';
+import type { ParsedQuery } from 'query-string';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
-
-type Props = {
-    location: {
-        search: string,
-        pathname: string,
-    },
-    onUpdateFromUrl: (page: ?string, data: UpdateDataContainer) => void,
-    params: Object,
-    page: ?string,
-    locationSwitchInProgress: ?boolean,
-};
+import type { Props, ReduxState, ReduxDispatch } from './withAppUrlSync.types';
 
 export const pageKeys = {
     MAIN: '',
@@ -66,11 +56,10 @@ const updaterForPages = {
  */
 export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     class AppUrlSyncer extends React.Component<Props> {
-        params: ?QueryParameters;
-        page: string;
-
-        handleUpdate = (updateData: UpdateDataContainer) => {
-            this.props.onUpdateFromUrl(this.page, updateData);
+        setPageAndParams() {
+            const { location } = this.props;
+            this.page = location.pathname.substring(1);
+            this.params = queryString.parse(location?.search);
         }
 
         getSyncSpecification() {
@@ -78,11 +67,12 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
             return specificationForPages[page] || [];
         }
 
-        setPageAndParams() {
-            const { location } = this.props;
-            this.page = location.pathname.substring(1);
-            this.params = queryString.parse(location && location.search);
+        handleUpdate = (updateData: UpdateDataContainer) => {
+            this.props.onUpdateFromUrl(this.page, updateData);
         }
+
+        params?: ParsedQuery;
+        page = '';
 
         render() {
             const {
@@ -103,9 +93,8 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
             this.setPageAndParams();
 
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
-                    statePage={page || pageKeys.MAIN}
+                    statePage={page ?? pageKeys.MAIN}
                     urlPage={this.page}
                     urlParams={this.params}
                     onUpdate={this.handleUpdate}
@@ -124,13 +113,13 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: string, updateData: UpdateDataContainer) => {
+        onUpdateFromUrl: (page: string | undefined, updateData: UpdateDataContainer) => {
             if (pageFetchesOrgUnitUsingTheOldWay(page) && page != null) {
                 dispatch(updaterForPages[page](updateData));
             }
         },
     });
 
-    // $FlowFixMe[missing-annot] automated comment
-    return connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);
+    const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);
+    return ConnectedComponent as React.ComponentType<any>;
 };
