@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import type { ProgramRulesContainer } from '../../../../rules/RuleEngine/types/ruleEngine.types';
 
 import { useProgramRules, useConstants } from './index';
 import { buildRulesContainer } from '../ProgramRules';
@@ -6,7 +7,7 @@ import { buildRulesContainer } from '../ProgramRules';
 export const useRulesContainer = (programAPI: any) => {
     const { programRules, loading: loadingProgramRules } = useProgramRules(programAPI.id);
     const { constants } = useConstants();
-    const [rulesContainer, setRulesContainer] = useState<any>({});
+    const [rulesContainer, setRulesContainer] = useState<ProgramRulesContainer>({});
 
     useEffect(() => {
         if (!loadingProgramRules && constants) {
