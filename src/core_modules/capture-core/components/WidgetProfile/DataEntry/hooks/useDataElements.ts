@@ -1,9 +1,8 @@
-// @flow
 import { useMemo } from 'react';
 
-const getDataElement = programStageDataElements =>
+const getDataElement = (programStageDataElements: any) =>
     programStageDataElements.reduce(
-        (acc, current) => ({
+        (acc: any, current: any) => ({
             ...acc,
             [current.dataElement.id]: {
                 displayInReports: current.displayInReports,
@@ -16,11 +15,10 @@ const getDataElement = programStageDataElements =>
         {},
     );
 
-const getDataElementsInProgram = program =>
+const getDataElementsInProgram = (program: any) =>
     [...program.programStages.values()]
-        // $FlowFixMe
         .reduce(
-            (acc, current) => ({
+            (acc: any, current: any) => ({
                 ...acc,
                 ...getDataElement(current.programStageDataElements),
             }),
