@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -40,13 +39,13 @@ const onValidateOnScopeTrackedEntityType = (
     dataElementUnique: DataElementUnique,
     dataElement: DataElement,
     serverValue: any,
-    contextProps: Object = {},
+    contextProps: any = {},
     querySingleResource: QuerySingleResource,
 ) => {
     let requestPromise;
     if (dataElementUnique.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
         const orgUnitId = contextProps.orgUnitId;
-        const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+        const orgUnitQueryParam = featureAvailable(FEATURES.newEntityFilterQueryParam)
             ? 'orgUnits'
             : 'orgUnit';
         requestPromise = querySingleResource({
@@ -58,7 +57,7 @@ const onValidateOnScopeTrackedEntityType = (
             },
         });
     } else {
-        const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+        const orgUnitModeQueryParam = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
             ? 'orgUnitMode'
             : 'ouMode';
         requestPromise = querySingleResource({
@@ -71,9 +70,9 @@ const onValidateOnScopeTrackedEntityType = (
         });
     }
     return requestPromise
-        .then((result) => {
+        .then((result: any) => {
             const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-            const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+            const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
             const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
             const data = {
                 id: trackedEntityInstance.trackedEntity,
@@ -97,7 +96,7 @@ const buildDataElementUnique = (
             ? dataElementUniqueScope.ORGANISATION_UNIT
             : dataElementUniqueScope.ENTIRE_SYSTEM;
 
-        dataEntry.onValidate = (value: any, contextProps: Object = {}) => {
+        dataEntry.onValidate = (value: any, contextProps: any = {}) => {
             const serverValue = pipe(convertFormToClient, convertClientToServer)(
                 value,
                 trackedEntityAttribute.valueType,
@@ -106,7 +105,7 @@ const buildDataElementUnique = (
             if (contextProps.onGetUnsavedAttributeValues) {
                 const unsavedAttributeValues = contextProps.onGetUnsavedAttributeValues(dataElement.id);
                 if (unsavedAttributeValues) {
-                    const foundValue = unsavedAttributeValues.find(usav => usav === serverValue);
+                    const foundValue = unsavedAttributeValues.find((usav: any) => usav === serverValue);
                     if (foundValue) {
                         return {
                             valid: false,
@@ -121,7 +120,7 @@ const buildDataElementUnique = (
             let requestPromise;
             if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                 const orgUnitId = contextProps.orgUnitId;
-                const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+                const orgUnitQueryParam = featureAvailable(FEATURES.newEntityFilterQueryParam)
                     ? 'orgUnits'
                     : 'orgUnit';
                 requestPromise = querySingleResource({
@@ -133,7 +132,7 @@ const buildDataElementUnique = (
                     },
                 });
             } else {
-                const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                const orgUnitModeQueryParam = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
                     ? 'orgUnitMode'
                     : 'ouMode';
                 requestPromise = querySingleResource({
@@ -145,9 +144,9 @@ const buildDataElementUnique = (
                     },
                 });
             }
-            return requestPromise.then((result) => {
+            return requestPromise.then((result: any) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
                 if (otherTrackedEntityInstances.length === 0) {
                     return onValidateOnScopeTrackedEntityType(
                         dataEntry,
@@ -183,11 +182,11 @@ const setBaseProperties = async ({
     trackedEntityAttribute,
     querySingleResource,
 }: {
-    dataElement: DataElement,
-    optionSets: Array<OptionSetType>,
-    programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
-    trackedEntityAttribute: TrackedEntityAttribute,
-    querySingleResource: QuerySingleResource,
+    dataElement: DataElement;
+    optionSets: Array<OptionSetType>;
+    programTrackedEntityAttribute: ProgramTrackedEntityAttribute;
+    trackedEntityAttribute: TrackedEntityAttribute;
+    querySingleResource: QuerySingleResource;
 }) => {
     dataElement.id = trackedEntityAttribute.id;
     dataElement.compulsory = programTrackedEntityAttribute.mandatory;
@@ -211,7 +210,7 @@ const setBaseProperties = async ({
             optionSets,
             trackedEntityAttribute.optionSet.id,
             programTrackedEntityAttribute.renderOptionsAsRadio,
-        );
+        ) || undefined;
     }
 };
 
@@ -243,7 +242,7 @@ const buildDateDataElement = async (
 ) => {
     const dateDataElement = new DateDataElement();
     dateDataElement.type = dataElementTypes.DATE;
-    dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate;
+    dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate ?? undefined;
     await setBaseProperties({
         dataElement: dateDataElement,
         optionSets,
@@ -258,7 +257,7 @@ const buildOptionSet = async (
     dataElement: DataElement,
     optionSets: Array<OptionSetType>,
     optionSetId: string,
-    renderOptionsAsRadio: ?boolean,
+    renderOptionsAsRadio?: boolean | null,
 ) => {
     const optionSetAPI = optionSets.find(optionSet => optionSet.id === optionSetId);
 
@@ -285,9 +284,9 @@ const buildOptionSet = async (
         new Map(
             optionSetAPI.optionGroups.map(group => [
                 group.id,
-                new OptionGroup((o) => {
-                    o.id = group.id;
-                    o.optionIds = new Map(group.options.map(option => [option, option]));
+                new OptionGroup(function (this: any) {
+                    this.id = group.id;
+                    this.optionIds = new Map(group.options.map(option => [option, option]));
                 }),
             ]),
         );
@@ -300,14 +299,15 @@ const buildOptionSet = async (
         convertOptionSetValue,
         optionSetAPI.attributeValues,
     );
-    optionSet.inputType = renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null;
+    optionSet.inputType = renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : undefined;
     return optionSet;
 };
 
 export const buildTetFeatureType = (featureType: 'POINT' | 'POLYGON') => {
     const dataElement = new DataElement((dataEntry) => {
         dataEntry.id = getFeatureType(featureType);
-        dataEntry.name = i18n.t(getLabel(featureType));
+        const label = getLabel(featureType);
+        dataEntry.name = label ? i18n.t(label) : '';
         dataEntry.formName = dataEntry.name;
         dataEntry.compulsory = false;
         dataEntry.displayInForms = true;

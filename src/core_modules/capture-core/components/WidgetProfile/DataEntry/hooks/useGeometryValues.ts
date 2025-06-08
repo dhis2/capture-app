@@ -14,8 +14,10 @@ export const useGeometryValues = ({ featureType, geometry }: { featureType: stri
             const formValue = convertClientToForm(clientValue, dataElementType);
             const convertedFeatureType = getFeatureType(featureType);
 
-            setFormValues({ [convertedFeatureType]: formValue });
-            setClientValues({ [convertedFeatureType]: clientValue });
+            if (convertedFeatureType) {
+                setFormValues({ [convertedFeatureType]: formValue });
+                setClientValues({ [convertedFeatureType]: clientValue });
+            }
         }
     }, [geometry, featureType]);
 

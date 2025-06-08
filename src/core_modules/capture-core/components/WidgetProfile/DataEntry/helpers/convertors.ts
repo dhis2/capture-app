@@ -1,5 +1,3 @@
-// @flow
-
 export const getProgramStageSectionId = (valueApi: any) => valueApi?.programStageSection?.id;
 
 export const getProgramStageId = (valueApi: any) => valueApi?.programStage?.id;
@@ -19,13 +17,13 @@ export const getProgramId = (valueApi: any) => valueApi?.program?.id;
 export const getTrackedEntityTypeId = (valueApi: any) => valueApi?.trackedEntityType?.id;
 
 export const getProgramTrackedEntityAttributes = (valueApi: any) =>
-    valueApi?.map(programAttribute => ({
+    valueApi?.map((programAttribute: any) => ({
         ...programAttribute,
         trackedEntityAttributeId: getTrackedEntityAttributeId(programAttribute),
     }));
 
 export const getProgramRuleActions = (valueApi: any) =>
-    valueApi?.map(apiProgramRuleAction => ({
+    valueApi?.map((apiProgramRuleAction: any) => ({
         ...apiProgramRuleAction,
         programStageSectionId: getProgramStageSectionId(apiProgramRuleAction),
         programStageId: getProgramStageId(apiProgramRuleAction),
