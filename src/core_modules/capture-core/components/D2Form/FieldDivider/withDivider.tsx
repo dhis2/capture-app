@@ -1,7 +1,6 @@
-// @flow
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { DividerHorizontal as Divider } from 'capture-ui';
 
 const getStyles = () => ({
@@ -12,18 +11,16 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    formHorizontal: boolean,
-    classes: {
-        dividerContainer: string,
-        divider: string,
-    }
+type OwnProps = {
+    formHorizontal: boolean;
 };
+
+type Props = OwnProps & WithStyles<typeof getStyles>;
 
 type Field = {
     props: {
-        hidden?: ?boolean,
-    }
+        hidden?: boolean;
+    };
 };
 
 export const withDivider = () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
@@ -52,11 +49,10 @@ export const withDivider = () => (InnerComponent: React.ComponentType<any>) => w
             const calculatedProps = !formHorizontal ? { onRenderDivider: this.renderDivider } : null;
 
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     {...calculatedProps}
                     {...passOnProps}
                 />
             );
         }
-    });
+    }) as React.ComponentType<OwnProps>;

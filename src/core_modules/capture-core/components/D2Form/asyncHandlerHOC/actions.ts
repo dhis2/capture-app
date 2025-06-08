@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { actionCreator } from '../../../actions/actions.utils';
 
@@ -14,8 +13,8 @@ export const fieldIsValidating = (
     fieldId: string,
     formBuilderId: string,
     formId: string,
-    message: ?string,
-    fieldUIUpdates: ?Object,
+    message: string | undefined,
+    fieldUIUpdates: Record<string, unknown> | undefined,
     validatingUid: string,
 ) =>
     actionCreator(actionTypes.FIELD_IS_VALIDATING)(
@@ -30,7 +29,7 @@ export const fieldIsValidating = (
     );
 
 export const fieldsValidated = (
-    fieldsUI: Object,
+    fieldsUI: Record<string, unknown>,
     formBuilderId: string,
     formId: string,
     validatingUids: Array<string>,
@@ -44,13 +43,13 @@ export const startUpdateFieldAsync = (
     formBuilderId: string,
     formId: string,
     uid: string,
-    callback: Function,
+    callback: () => Promise<any>,
 ) => actionCreator(actionTypes.START_UPDATE_FIELD_ASYNC)(
     { elementId, fieldLabel, formBuilderId, formId, uid, callback });
 
 export const updateFieldFromAsync = (
     value: any,
-    uiState: Object,
+    uiState: Record<string, unknown>,
     elementId: string,
     formBuilderId: string,
     formId: string,
@@ -60,7 +59,7 @@ export const updateFieldFromAsync = (
 
 export const asyncUpdateFieldFailed = (
     message: string,
-    uiState: Object,
+    uiState: Record<string, unknown>,
     elementId: string,
     formBuilderId: string,
     formId: string,
