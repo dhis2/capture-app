@@ -1,11 +1,10 @@
-// @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconDelete16, MenuItem } from '@dhis2/ui';
 import type { Props } from './DeleteMenuItem.types';
 import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip/';
 
-const getTooltipContent = (disabled, trackedEntityTypeName) => {
+const getTooltipContent = (disabled: boolean, trackedEntityTypeName: string) => {
     if (disabled) {
         return i18n.t('You do not have access to delete this {{trackedEntityTypeName}}', {
             trackedEntityTypeName,
@@ -34,12 +33,13 @@ export const DeleteMenuItem = ({
                 label={i18n.t('Delete {{trackedEntityTypeName}}', {
                     trackedEntityTypeName,
                     interpolation: { escapeValue: false },
-                })}
+                }) as string}
                 onClick={() => {
                     setDeleteModalIsOpen(true);
                     setActionsIsOpen(false);
                 }}
                 disabled={disabled}
+                suffix=""
             />
         </ConditionalTooltip>
     );

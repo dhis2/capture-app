@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalContent, ModalTitle, ModalActions, ButtonStrip, Button, NoticeBox } from '@dhis2/ui';
@@ -6,8 +5,8 @@ import type { Props } from './DeleteModal.types';
 import { useDeleteTrackedEntity } from './hooks';
 
 export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal, onDeleteSuccess }: Props) => {
-    const [errorReports, setErrorReports] = useState([]);
-    const handleErrors = (errors) => {
+    const [errorReports, setErrorReports] = useState<Array<{ message: string; uid: string }>>([]);
+    const handleErrors = (errors: Array<{ message: string; uid: string }>) => {
         setErrorReports(errors);
     };
     const { deleteMutation, deleteLoading } = useDeleteTrackedEntity(onDeleteSuccess, handleErrors);
@@ -28,7 +27,7 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
                             trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         },
-                    )}
+                    ) as string}
                 </p>
                 {errorReports.length > 0 && (
                     <NoticeBox
@@ -49,13 +48,13 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={() => setOpenModal(false)} secondary>
-                        {i18n.t('No, cancel')}
+                        {i18n.t('No, cancel') as string}
                     </Button>
                     <Button onClick={() => deleteMutation(trackedEntity)} primary loading={deleteLoading} destructive>
                         {i18n.t('Yes, delete {{trackedEntityTypeName}}', {
                             trackedEntityTypeName,
                             interpolation: { escapeValue: false },
-                        })}
+                        }) as string}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import type { Props } from './OverflowMenu.types';
