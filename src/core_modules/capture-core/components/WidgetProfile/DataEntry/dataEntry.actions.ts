@@ -1,4 +1,3 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import type {
@@ -22,6 +21,7 @@ import { addFormData } from '../../D2Form/actions/form.actions';
 import { updateFieldUIOnly } from '../../D2Form/FormBuilder/formBuilder.actions';
 import type { Geometry } from './helpers/types';
 import type { QuerySingleResource } from '../../../utils/api';
+import type { EpicAction } from '../../../../capture-core-utils/types/global';
 
 export const TEI_MODAL_STATE = {
     OPEN: 'Open',
@@ -41,7 +41,8 @@ export const dataEntryActionTypes = {
     SET_TEI_VALUES: 'SetTeiValues',
     CLEAN_TEI_MODAL: 'CleanTeiModal',
 };
-const dataEntryPropsToInclude: Array<Object> = [
+
+const dataEntryPropsToInclude: Array<Record<string, unknown>> = [
     {
         clientId: 'geometry',
         dataEntryId: 'geometry',
@@ -53,17 +54,17 @@ const dataEntryPropsToInclude: Array<Object> = [
 ];
 
 type Context = {
-    orgUnit: OrgUnit,
-    programName: string,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    optionSets: OptionSets,
-    rulesContainer: ProgramRulesContainer,
-    formFoundation: RenderFoundation,
-    otherEvents?: ?EventsData,
-    dataElements: ?DataElements,
-    enrollment?: EnrollmentData,
-    userRoles: Array<string>,
-    state: ReduxState,
+    orgUnit: OrgUnit;
+    programName: string;
+    trackedEntityAttributes?: TrackedEntityAttributes;
+    optionSets: OptionSets;
+    rulesContainer: ProgramRulesContainer;
+    formFoundation: RenderFoundation;
+    otherEvents?: EventsData;
+    dataElements?: DataElements;
+    enrollment?: EnrollmentData;
+    userRoles: Array<string>;
+    state: any;
 };
 
 export const getUpdateFieldActions = async ({
@@ -73,11 +74,11 @@ export const getUpdateFieldActions = async ({
     innerAction,
     uid,
 }: {
-    context: Context,
-    querySingleResource: QuerySingleResource,
-    onGetValidationContext: () => Object,
-    innerAction: ReduxAction<any, any>,
-    uid: string
+    context: Context;
+    querySingleResource: QuerySingleResource;
+    onGetValidationContext: () => Record<string, unknown>;
+    innerAction: EpicAction<any>;
+    uid: string;
 }) => {
     const {
         orgUnit,
@@ -92,7 +93,7 @@ export const getUpdateFieldActions = async ({
         userRoles,
         programName,
     } = context;
-    const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload || {};
+    const { dataEntryId, itemId, elementId, value, uiState } = (innerAction as any).payload || {};
     const fieldData: FieldData = {
         elementId,
         value,
@@ -134,7 +135,7 @@ export const setTeiModalError = (hasError: boolean) =>
 
 export const setTeiValues = (
     attributeValues: Array<{ [key: string]: string }>,
-    geometry: ?Geometry,
+    geometry?: Geometry,
 ) => actionCreator(dataEntryActionTypes.SET_TEI_VALUES)({ attributeValues, geometry });
 
 export const cleanTeiModal = () => actionCreator(dataEntryActionTypes.CLEAN_TEI_MODAL)();
@@ -150,15 +151,15 @@ export const updateTeiRequest = ({
     onSaveErrorActionType,
     formFoundation,
 }: {
-    itemId: string,
-    dataEntryId: string,
-    orgUnitId: string,
-    trackedEntityTypeId: string,
-    trackedEntityInstanceId: string,
-    onSaveExternal?: (eventServerValues: any, uid: string) => void,
-    onSaveSuccessActionType?: string,
-    onSaveErrorActionType?: string,
-    formFoundation: RenderFoundation,
+    itemId: string;
+    dataEntryId: string;
+    orgUnitId: string;
+    trackedEntityTypeId: string;
+    trackedEntityInstanceId: string;
+    onSaveExternal?: (eventServerValues: any, uid: string) => void;
+    onSaveSuccessActionType?: string;
+    onSaveErrorActionType?: string;
+    formFoundation: RenderFoundation;
 }) =>
     actionCreator(dataEntryActionTypes.TEI_UPDATE_REQUEST)({
         itemId,
@@ -178,10 +179,10 @@ export const updateTei = ({
     onSaveErrorActionType,
     uid,
 }: {
-    serverData: Object,
-    onSaveSuccessActionType?: string,
-    onSaveErrorActionType?: string,
-    uid: string,
+    serverData: Record<string, unknown>;
+    onSaveSuccessActionType?: string;
+    onSaveErrorActionType?: string;
+    uid: string;
 }) =>
     actionCreator(dataEntryActionTypes.TEI_UPDATE)(
         {},
@@ -203,9 +204,9 @@ export const getOpenDataEntryActions = ({
     itemId,
     formValues,
 }: {
-    dataEntryId: string,
-    itemId: string,
-    formValues: { [key: string]: any },
+    dataEntryId: string;
+    itemId: string;
+    formValues: { [key: string]: any };
 }) =>
     batchActions(
         [

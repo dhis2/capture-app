@@ -1,5 +1,3 @@
-// @flow
-/* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
@@ -40,7 +38,7 @@ const onValidateOnScopeTrackedEntityType = (
     dataElementUnique: DataElementUnique,
     dataElement: DataElement,
     serverValue: any,
-    contextProps: Object = {},
+    contextProps: any = {},
     querySingleResource: QuerySingleResource,
 ) => {
     let requestPromise;
@@ -73,7 +71,7 @@ const onValidateOnScopeTrackedEntityType = (
     return requestPromise
         .then((result) => {
             const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-            const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+            const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
             const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
             const data = {
                 id: trackedEntityInstance.trackedEntity,
@@ -97,7 +95,7 @@ const buildDataElementUnique = (
             ? dataElementUniqueScope.ORGANISATION_UNIT
             : dataElementUniqueScope.ENTIRE_SYSTEM;
 
-        dataEntry.onValidate = (value: any, contextProps: Object = {}) => {
+        dataEntry.onValidate = (value: any, contextProps: any = {}) => {
             const serverValue = pipe(convertFormToClient, convertClientToServer)(
                 value,
                 trackedEntityAttribute.valueType,
@@ -106,7 +104,7 @@ const buildDataElementUnique = (
             if (contextProps.onGetUnsavedAttributeValues) {
                 const unsavedAttributeValues = contextProps.onGetUnsavedAttributeValues(dataElement.id);
                 if (unsavedAttributeValues) {
-                    const foundValue = unsavedAttributeValues.find(usav => usav === serverValue);
+                    const foundValue = unsavedAttributeValues.find((usav: any) => usav === serverValue);
                     if (foundValue) {
                         return {
                             valid: false,
@@ -147,7 +145,7 @@ const buildDataElementUnique = (
             }
             return requestPromise.then((result) => {
                 const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
                 if (otherTrackedEntityInstances.length === 0) {
                     return onValidateOnScopeTrackedEntityType(
                         dataEntry,
@@ -183,11 +181,11 @@ const setBaseProperties = async ({
     trackedEntityAttribute,
     querySingleResource,
 }: {
-    dataElement: DataElement,
-    optionSets: Array<OptionSetType>,
-    programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
-    trackedEntityAttribute: TrackedEntityAttribute,
-    querySingleResource: QuerySingleResource,
+    dataElement: DataElement;
+    optionSets: Array<OptionSetType>;
+    programTrackedEntityAttribute: ProgramTrackedEntityAttribute;
+    trackedEntityAttribute: TrackedEntityAttribute;
+    querySingleResource: QuerySingleResource;
 }) => {
     dataElement.id = trackedEntityAttribute.id;
     dataElement.compulsory = programTrackedEntityAttribute.mandatory;
@@ -258,7 +256,7 @@ const buildOptionSet = async (
     dataElement: DataElement,
     optionSets: Array<OptionSetType>,
     optionSetId: string,
-    renderOptionsAsRadio: ?boolean,
+    renderOptionsAsRadio?: boolean,
 ) => {
     const optionSetAPI = optionSets.find(optionSet => optionSet.id === optionSetId);
 
@@ -285,10 +283,11 @@ const buildOptionSet = async (
         new Map(
             optionSetAPI.optionGroups.map(group => [
                 group.id,
-                new OptionGroup((o) => {
-                    o.id = group.id;
-                    o.optionIds = new Map(group.options.map(option => [option, option]));
-                }),
+                new OptionGroup(function (this: any) {
+                    this.id = group.id;
+                    this.optionIds = new Map(group.options.map(option => [option, option]));
+                } as any),
+
             ]),
         );
 

@@ -1,17 +1,18 @@
-// @flow
 import React from 'react';
 import { NoticeBox } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+
+type Props = {
+    errorsMessages?: Array<{ id: string; message: string }>;
+    warningsMessages?: Array<{ id: string; message: string }>;
+    hasApiError?: boolean;
+};
 
 export const NoticeBoxes = ({
     errorsMessages = [],
     warningsMessages = [],
     hasApiError = false,
-}: {
-    errorsMessages: Array<{ id: string, message: string }>,
-    warningsMessages: Array<{ id: string, message: string }>,
-    hasApiError?: boolean,
-}) => (
+}: Props) => (
     <>
         <br />
         {errorsMessages && errorsMessages.length > 0 && (
@@ -36,7 +37,7 @@ export const NoticeBoxes = ({
         <br />
         {hasApiError && (
             <NoticeBox title={i18n.t('There was a problem saving changes')} error>
-                {i18n.t('Try again or contact your system administrator for support')}
+                {i18n.t('Try again or contact your system administrator for support') as string}
             </NoticeBox>
         )}
         <br />
