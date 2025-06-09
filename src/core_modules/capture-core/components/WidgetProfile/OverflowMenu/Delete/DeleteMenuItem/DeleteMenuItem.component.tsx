@@ -33,13 +33,13 @@ export const DeleteMenuItem = ({
                 label={i18n.t('Delete {{trackedEntityTypeName}}', {
                     trackedEntityTypeName,
                     interpolation: { escapeValue: false },
-                }) as string}
+                })}
                 onClick={() => {
                     setDeleteModalIsOpen(true);
                     setActionsIsOpen(false);
                 }}
                 disabled={disabled}
-                suffix=""
+                suffix={null}
             />
         </ConditionalTooltip>
     );

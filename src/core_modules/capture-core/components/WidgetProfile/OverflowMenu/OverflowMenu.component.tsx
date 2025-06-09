@@ -39,12 +39,12 @@ export const OverflowMenuComponent = ({
                     <FlyoutMenu dense>
                         {displayChangelog && (
                             <MenuItem
-                                label={i18n.t('View changelog') as string}
+                                label={i18n.t('View changelog')}
                                 onClick={() => {
                                     setChangelogIsOpen(true);
                                     setActionsIsOpen(false);
                                 }}
-                                suffix=""
+                                suffix={null}
                             />
                         )}
                         {!readOnlyMode && (

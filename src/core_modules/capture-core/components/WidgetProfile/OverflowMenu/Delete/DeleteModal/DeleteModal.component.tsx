@@ -27,7 +27,7 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
                             trackedEntityTypeName,
                             interpolation: { escapeValue: false },
                         },
-                    ) as string}
+                    )}
                 </p>
                 {errorReports.length > 0 && (
                     <NoticeBox
@@ -48,13 +48,13 @@ export const DeleteModal = ({ trackedEntityTypeName, trackedEntity, setOpenModal
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={() => setOpenModal(false)} secondary>
-                        {i18n.t('No, cancel') as string}
+                        {i18n.t('No, cancel')}
                     </Button>
                     <Button onClick={() => deleteMutation(trackedEntity)} primary loading={deleteLoading} destructive>
                         {i18n.t('Yes, delete {{trackedEntityTypeName}}', {
                             trackedEntityTypeName,
                             interpolation: { escapeValue: false },
-                        }) as string}
+                        })}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
