@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { fieldIsValidating, fieldsValidated, startUpdateFieldAsync } from './actions';
+import type { ReduxDispatch } from '../../App/withAppUrlSync.types';
 
 type Props = {
     id: string;
@@ -47,10 +48,6 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
     };
 
 const mapStateToProps = () => ({});
-
-type ReduxDispatch = {
-    (action: { type: string; [key: string]: any }): void;
-};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onIsValidating: (
