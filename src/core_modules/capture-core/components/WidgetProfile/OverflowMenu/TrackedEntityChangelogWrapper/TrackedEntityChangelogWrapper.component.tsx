@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import { dataElementTypes, RenderFoundation, type DataElement } from '../../../../metaData';
 import { useFormFoundation } from '../../DataEntry/hooks';
@@ -6,9 +5,9 @@ import { WidgetTrackedEntityChangelog } from '../../../WidgetsChangelog';
 import type { Props } from './TrackedEntityChangelogWrapper.types';
 
 export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, trackedEntityData, ...passOnProps }: Props) => {
-    const formFoundation: RenderFoundation = useFormFoundation(programAPI);
+    const formFoundation: RenderFoundation = useFormFoundation(programAPI, undefined);
 
-    const transformedTrackedEntityData = trackedEntityData.reduce((acc, item) => {
+    const transformedTrackedEntityData = trackedEntityData.reduce((acc: Record<string, any>, item: any) => {
         acc[item.attribute] = item.value;
         return acc;
     }, {});
@@ -18,13 +17,13 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, tr
         const elements = formFoundation.getElements();
         const contextLabels = formFoundation.getLabels();
 
-        const fieldElementsById = elements.reduce((acc, element: DataElement) => {
+        const fieldElementsById = elements.reduce((acc: Record<string, any>, element: DataElement) => {
             if (!transformedTrackedEntityData.hasOwnProperty(element.id)) {
                 return acc;
             }
 
             const { optionSet } = element;
-            const metadata = {
+            const metadata: any = {
                 id: element.id,
                 name: element.formName,
                 type: element.type,
@@ -44,7 +43,7 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, tr
             return acc;
         }, {});
 
-        const fieldElementsContext = Object.keys(contextLabels).reduce((acc, key) => {
+        const fieldElementsContext = Object.keys(contextLabels).reduce((acc: Record<string, any>, key) => {
             acc[key] = {
                 id: key,
                 name: contextLabels[key],

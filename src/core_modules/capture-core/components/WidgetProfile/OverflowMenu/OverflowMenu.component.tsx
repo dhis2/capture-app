@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import { FlyoutMenu, IconMore16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -45,6 +44,7 @@ export const OverflowMenuComponent = ({
                                     setChangelogIsOpen(true);
                                     setActionsIsOpen(false);
                                 }}
+                                suffix={null}
                             />
                         )}
                         {!readOnlyMode && (
