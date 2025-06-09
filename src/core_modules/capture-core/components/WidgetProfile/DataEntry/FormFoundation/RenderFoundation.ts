@@ -133,18 +133,18 @@ const buildElementsForSection = async ({
                 o.customAttributes = attributes;
             });
 
-            const fieldPromises = pluginElement.fieldMap
-                .filter(field => field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE)
-                .map(async (field) => {
-                    const fieldElement = await buildDataElement(
-                        field as any,
-                        trackedEntityAttributes,
-                        optionSets,
-                        querySingleResource,
-                        minorServerVersion,
-                    );
-                    return fieldElement ? { field, fieldElement } : null;
-                });
+            const filteredFields = pluginElement.fieldMap
+                .filter(field => field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE);
+            const fieldPromises = filteredFields.map(async (field) => {
+                const fieldElement = await buildDataElement(
+                    field as any,
+                    trackedEntityAttributes,
+                    optionSets,
+                    querySingleResource,
+                    minorServerVersion,
+                );
+                return fieldElement ? { field, fieldElement } : null;
+            });
 
             const resolvedFieldElements = await Promise.all(fieldPromises);
             const fieldElements = resolvedFieldElements.filter(Boolean) as Array<{ field: any; fieldElement: any }>;
