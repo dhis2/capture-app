@@ -3,7 +3,7 @@ import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import isObject from 'd2-utilizr/lib/isObject';
 import { errorCreator } from 'capture-core-utils';
-import type { DataElement } from '../../DataElement';
+import { dataElementTypes, type DataElement } from '../../DataElement';
 import type { ConvertFn } from '../../DataElement/DataElement';
 
 export type ValuesType = { [key: string]: any };
@@ -17,13 +17,33 @@ function getElementsById(dataElements: Array<DataElement>) {
     return dataElements.toHashMap('id');
 }
 
-function convertObjectValues(values: ValuesType, elementsById: { [id: string]: DataElement }, onConvert: ConvertFn) {
-    return Object.keys(values).reduce((inProgressValues, id) => {
-        const metaElement = elementsById[id];
-        const rawValue = values[id];
-        const convertedValue = metaElement ? metaElement.convertValue(rawValue, onConvert) : rawValue;
-        return { ...inProgressValues, [id]: convertedValue };
-    }, {});
+function convertObjectValues(
+    values: ValuesType,
+    elementsById: { [id: string]: DataElement },
+    onConvert: ConvertFn,
+) {
+    return Object.entries(values).reduce(
+        (acc, [id, rawValue]) => {
+            const element = elementsById[id];
+            if (!element) {
+                acc[id] = rawValue;
+                return acc;
+            }
+            const clientValue = element?.convertValue(rawValue, onConvert);
+
+            if (element.optionSet) {
+                if (element.type === dataElementTypes.MULTI_TEXT) {
+                    acc[id] = element.optionSet?.getMultiOptionsText(clientValue);
+                } else {
+                    acc[id] = element.optionSet?.getOptionText(clientValue);
+                }
+            } else {
+                acc[id] = clientValue;
+            }
+            return acc;
+        },
+        {},
+    );
 }
 
 function convertArrayValues(
