@@ -1,7 +1,6 @@
-// @flow
 import { colors } from '@dhis2/ui';
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 
 const getStyles = () => ({
     evenNumbers: {
@@ -9,23 +8,20 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    formHorizontal: boolean,
-    classes: {
-        evenNumbers: string,
-        oddNumbers: string,
-    },
+type OwnProps = {
+    formHorizontal: boolean;
 };
+
+type Props = OwnProps & WithStyles<typeof getStyles>;
 
 type Field = {
     props: {
-        hidden?: ?boolean,
-    }
+        hidden?: boolean;
+    };
 };
 
 export const withAlternateBackgroundColors = () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
     class AlternateBackgroundColorsHOC extends React.Component<Props> {
-        hiddenFieldsCount: number;
         getContainerProps = (index: number, total: number, field: Field) => {
             if (index === 0) {
                 this.hiddenFieldsCount = 0;
@@ -43,16 +39,17 @@ export const withAlternateBackgroundColors = () => (InnerComponent: React.Compon
             };
         }
 
+        hiddenFieldsCount = 0;
+
         render() {
             const { formHorizontal, classes, ...passOnProps } = this.props;
             const calculatedProps = !formHorizontal ? { onGetContainerProps: this.getContainerProps } : null;
 
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     {...calculatedProps}
                     {...passOnProps}
                 />
             );
         }
-    });
+    }) as React.ComponentType<OwnProps>;

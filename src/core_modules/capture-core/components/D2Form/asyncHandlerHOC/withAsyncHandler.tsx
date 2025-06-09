@@ -1,34 +1,30 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { fieldIsValidating, fieldsValidated, startUpdateFieldAsync } from './actions';
+import type { ReduxDispatch } from '../../App/withAppUrlSync.types';
 
 type Props = {
-    id: string,
-    onIsValidating: Function,
-    onFieldsValidated: Function,
-    onUpdateFieldAsyncInner: Function,
-    onUpdateFieldAsync: ?Function,
+    id: string;
+    onIsValidating: (...args: any[]) => void;
+    onFieldsValidated: (...args: any[]) => void;
+    onUpdateFieldAsyncInner: (...args: any[]) => void;
+    onUpdateFieldAsync?: (...args: any[]) => void;
 };
 
-// HOC wrapped around D2Form handling callbacks for async functionality
 const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
     class AsyncHandlerHOC extends React.Component<Props> {
-        // $FlowFixMe[missing-annot] automated comment
-        handleIsValidating = (...args) => {
+        handleIsValidating = (...args: any[]) => {
             const { id } = this.props;
             this.props.onIsValidating(...args, id);
         }
 
-        // $FlowFixMe[missing-annot] automated comment
-        handleFieldsValidated = (...args) => {
+        handleFieldsValidated = (...args: any[]) => {
             const { id } = this.props;
             this.props.onFieldsValidated(...args, id);
         }
 
-        // $FlowFixMe[missing-annot] automated comment
-        handleUpdateFieldAsyncInner = (...args) => {
+        handleUpdateFieldAsyncInner = (...args: any[]) => {
             const { onUpdateFieldAsyncInner, onUpdateFieldAsync } = this.props;
             onUpdateFieldAsyncInner(...args, onUpdateFieldAsync);
         };
@@ -41,7 +37,6 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
                 onUpdateFieldAsync,
                 ...passOnProps } = this.props;
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     onIsValidating={this.handleIsValidating}
                     onFieldsValidated={this.handleFieldsValidated}
@@ -59,15 +54,15 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         fieldId: string,
         formBuilderId: string,
         validatingUid: string,
-        message: ?string,
-        fieldUIUpdates: ?Object,
+        message: string | undefined,
+        fieldUIUpdates: Record<string, unknown> | undefined,
         formId: string,
     ) => {
         const action = fieldIsValidating(fieldId, formBuilderId, formId, message, fieldUIUpdates, validatingUid);
         dispatch(action);
     },
     onFieldsValidated: (
-        fieldsUI: Object,
+        fieldsUI: Record<string, unknown>,
         formBuilderId: string,
         validatingUids: Array<string>,
         formId: string,
@@ -80,8 +75,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         fieldLabel: string,
         formBuilderId: string,
         formId: string,
-        callback: Function,
-        onUpdateFieldAsync: ?Function,
+        callback: () => Promise<any>,
+        onUpdateFieldAsync?: (action: any) => void,
     ) => {
         const action = startUpdateFieldAsync(
             fieldId,
@@ -100,10 +95,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-
 export const withAsyncHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
-
-        // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)((getAsyncHandler(InnerComponent)));
