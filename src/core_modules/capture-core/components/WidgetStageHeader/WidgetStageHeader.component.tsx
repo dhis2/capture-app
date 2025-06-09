@@ -1,7 +1,6 @@
-// @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import type { Props } from './widgetStageHeader.types';
 
@@ -19,10 +18,12 @@ const styles = () => ({
     },
 });
 
+type WidgetStageHeaderPlainProps = Props & WithStyles<typeof styles>;
+
 const WidgetStageHeaderPlain = ({
     stage,
     classes,
-}: Props) => (
+}: WidgetStageHeaderPlainProps) => (
     <div className={classes.header}>
         {stage?.icon && (
             <div className={classes.icon}>
@@ -39,6 +40,4 @@ const WidgetStageHeaderPlain = ({
     </div>
 );
 
-export const WidgetStageHeader: ComponentType<
-    $Diff<Props, CssClasses>,
-> = withStyles(styles)(WidgetStageHeaderPlain);
+export const WidgetStageHeader = withStyles(styles)(WidgetStageHeaderPlain);
