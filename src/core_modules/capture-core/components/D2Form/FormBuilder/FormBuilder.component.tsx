@@ -7,7 +7,7 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import i18n from '@dhis2/d2-i18n';
 
-import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
+import type { CancelablePromise } from 'capture-core-utils';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 import type { PluginContext } from '../FormFieldPlugin/FormFieldPlugin.types';
 import { getValidators, validateValue, validatorTypes } from '../../../utils/validation';
@@ -497,7 +497,7 @@ export class FormBuilder extends React.Component<Props> {
     fieldInstances: Map<string, any>;
     asyncUIState: { [id: string]: FieldUI };
     fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
-    validateAllCancelablePromise?: CancelablePromise<any>;
+    validateAllCancelablePromise?: CancelablePromise<any> | null;
     commitUpdateTriggeredForFields: { [fieldId: string]: boolean };
 
     renderPlugin = (
