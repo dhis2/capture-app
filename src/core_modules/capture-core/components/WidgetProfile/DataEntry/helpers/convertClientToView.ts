@@ -1,4 +1,3 @@
-// @flow
 import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../metaData';
 import {
     convertOptionSetValueServerToClient,
@@ -6,11 +5,11 @@ import {
 } from '../../../../converters';
 
 type Attribute = {
-    attribute: string,
-    value: string,
-    valueType: $Keys<typeof dataElementTypes>,
-    optionSet: { options: Array<{ name: string, code: string, displayName: string }> },
-}
+    attribute: string;
+    value: string;
+    valueType: keyof typeof dataElementTypes;
+    optionSet: { options: Array<{ name: string; code: string; displayName: string }> };
+};
 
 export const convertClientToView = (clientAttribute: Attribute) => {
     const { value, attribute, valueType, optionSet } = clientAttribute;
@@ -27,7 +26,7 @@ export const convertClientToView = (clientAttribute: Attribute) => {
                     o.value = convertOptionSetValueServerToClient(option.code, valueType) ?? option.code;
                 }),
         );
-        dataElement.optionSet = new OptionSet(attribute, options, null, dataElement);
+        dataElement.optionSet = new OptionSet(attribute, options, undefined, dataElement);
     }
     return convertValue(value, valueType, dataElement);
 };

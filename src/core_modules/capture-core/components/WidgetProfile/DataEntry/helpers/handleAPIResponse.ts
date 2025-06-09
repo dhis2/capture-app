@@ -1,5 +1,3 @@
-// @flow
-
 export const REQUESTED_ENTITIES = Object.freeze({
     events: 'events',
     trackedEntities: 'trackedEntities',

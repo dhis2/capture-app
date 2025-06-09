@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -40,7 +39,7 @@ const onValidateOnScopeTrackedEntityType = (
     dataElementUnique: DataElementUnique,
     dataElement: DataElement,
     serverValue: any,
-    contextProps: Object = {},
+    contextProps: Record<string, any> = {},
     querySingleResource: QuerySingleResource,
 ) => {
     let requestPromise;
@@ -97,7 +96,7 @@ const buildDataElementUnique = (
             ? dataElementUniqueScope.ORGANISATION_UNIT
             : dataElementUniqueScope.ENTIRE_SYSTEM;
 
-        dataEntry.onValidate = (value: any, contextProps: Object = {}) => {
+        dataEntry.onValidate = (value: any, contextProps: Record<string, any> = {}) => {
             const serverValue = pipe(convertFormToClient, convertClientToServer)(
                 value,
                 trackedEntityAttribute.valueType,
@@ -183,11 +182,11 @@ const setBaseProperties = async ({
     trackedEntityAttribute,
     querySingleResource,
 }: {
-    dataElement: DataElement,
-    optionSets: Array<OptionSetType>,
-    programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
-    trackedEntityAttribute: TrackedEntityAttribute,
-    querySingleResource: QuerySingleResource,
+    dataElement: DataElement;
+    optionSets: Array<OptionSetType>;
+    programTrackedEntityAttribute: ProgramTrackedEntityAttribute;
+    trackedEntityAttribute: TrackedEntityAttribute;
+    querySingleResource: QuerySingleResource;
 }) => {
     dataElement.id = trackedEntityAttribute.id;
     dataElement.compulsory = programTrackedEntityAttribute.mandatory;
@@ -211,7 +210,7 @@ const setBaseProperties = async ({
             optionSets,
             trackedEntityAttribute.optionSet.id,
             programTrackedEntityAttribute.renderOptionsAsRadio,
-        );
+        ) ?? undefined;
     }
 };
 
@@ -243,7 +242,7 @@ const buildDateDataElement = async (
 ) => {
     const dateDataElement = new DateDataElement();
     dateDataElement.type = dataElementTypes.DATE;
-    dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate;
+    dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate ?? undefined;
     await setBaseProperties({
         dataElement: dateDataElement,
         optionSets,
@@ -258,7 +257,7 @@ const buildOptionSet = async (
     dataElement: DataElement,
     optionSets: Array<OptionSetType>,
     optionSetId: string,
-    renderOptionsAsRadio: ?boolean,
+    renderOptionsAsRadio?: boolean | null,
 ) => {
     const optionSetAPI = optionSets.find(optionSet => optionSet.id === optionSetId);
 
@@ -285,9 +284,9 @@ const buildOptionSet = async (
         new Map(
             optionSetAPI.optionGroups.map(group => [
                 group.id,
-                new OptionGroup((o) => {
-                    o.id = group.id;
-                    o.optionIds = new Map(group.options.map(option => [option, option]));
+                new OptionGroup(function () {
+                    this.id = group.id;
+                    this.optionIds = new Map(group.options.map(option => [option, option]));
                 }),
             ]),
         );
@@ -300,7 +299,7 @@ const buildOptionSet = async (
         convertOptionSetValue,
         optionSetAPI.attributeValues,
     );
-    optionSet.inputType = renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null;
+    optionSet.inputType = renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : undefined;
     return optionSet;
 };
 
