@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import { FormFieldPluginComponent } from './FormFieldPlugin.component';
 import type { ContainerProps } from './FormFieldPlugin.types';
@@ -22,7 +21,6 @@ export const FormFieldPlugin = (props: ContainerProps) => {
     const configuredPluginIds = useMemo(() => Object.keys(metadataByPluginId), [metadataByPluginId]);
     const { orgUnitId } = useLocationQuery();
 
-    // Plugin related functionality and feedback
     const { pluginValues } = usePluginValues(formId, metadataByPluginId, pluginContext);
     const { errors, warnings, formSubmitted } = usePluginMessages(formId, metadataByPluginId);
     const { setFieldValue, setContextFieldValue } = usePluginCallbacks({
@@ -32,7 +30,6 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         pluginContext,
     });
 
-    // Remove ids from plugin metadata before passing to plugin
     const formattedMetadata = useMemo(() => {
         const metadata = [...fieldsMetadata.entries()];
 
@@ -60,4 +57,3 @@ export const FormFieldPlugin = (props: ContainerProps) => {
         />
     );
 };
-

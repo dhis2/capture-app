@@ -1,13 +1,11 @@
-// @flow
-
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import type { MetadataByPluginId } from '../FormFieldPlugin.types';
 
 export const usePluginMessages = (formId: string, metadataByPluginId: MetadataByPluginId) => {
-    const rulesEffects = useSelector(({ rulesEffectsMessages }) => rulesEffectsMessages[formId]);
-    const formFieldsUI = useSelector(({ formsSectionsFieldsUI }) => formsSectionsFieldsUI[formId]);
-    const formSubmitted = useSelector(({ dataEntriesUI }) => dataEntriesUI[formId]?.saveAttempted ?? false);
+    const rulesEffects = useSelector((state: any) => state.rulesEffectsMessages[formId]);
+    const formFieldsUI = useSelector((state: any) => state.formsSectionsFieldsUI[formId]);
+    const formSubmitted = useSelector((state: any) => state.dataEntriesUI[formId]?.saveAttempted ?? false);
 
     const { errors, warnings } = useMemo(() => {
         if (!metadataByPluginId) {
@@ -21,7 +19,6 @@ export const usePluginMessages = (formId: string, metadataByPluginId: MetadataBy
             .reduce((acc, metadata) => {
                 const [idFromPlugin, dataElement] = metadata;
 
-                // $FlowFixMe - Not sure why flow thinks this is mixed type
                 const fieldId = dataElement.id;
 
                 if (rulesEffects) {

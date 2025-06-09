@@ -1,14 +1,13 @@
-// @flow
 import { PluginConfigConvertFns } from './formatPluginConfig.const';
 import type { PluginFormFieldMetadata } from '../FormFieldPlugin.types';
 import type { DataElement } from '../../../../metaData';
 
-type FormattedAttributes = {| [key: string]: any |};
+type FormattedAttributes = { [key: string]: any };
 
-type FormatOptions = {|
-    keysToOmit?: Array<string>,
-    attributes?: FormattedAttributes,
-|}
+type FormatOptions = {
+    keysToOmit?: Array<string>;
+    attributes?: FormattedAttributes;
+};
 
 export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
     dataElement: DataElement | PluginFormFieldMetadata,
@@ -17,7 +16,7 @@ export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
         keysToOmit = ['dataElement', 'optionGroups'],
     }: FormatOptions = {},
 ): TConfigReturn => {
-    const removeUnderscoreFromObjectAttributes = obj => Object.entries(obj)
+    const removeUnderscoreFromObjectAttributes = (obj: any): any => Object.entries(obj)
         .reduce((acc, [key, value]) => {
             const modifiedKey = key.replace(/^_/, '');
 
@@ -33,7 +32,6 @@ export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
                 return acc;
             }
 
-            // Recursively process nested objects and arrays
             if (value !== null) {
                 if (typeof value === 'object') {
                     if (Array.isArray(value)) {
@@ -50,6 +48,5 @@ export const formatPluginConfig = <TConfigReturn = PluginFormFieldMetadata>(
             return acc;
         }, {});
 
-    // $FlowFixMe
-    return removeUnderscoreFromObjectAttributes(dataElement);
+    return removeUnderscoreFromObjectAttributes(dataElement) as TConfigReturn;
 };
