@@ -43,7 +43,7 @@ export class D2CustomForm extends React.Component<Props> {
                 const type = propName.replace(/^on/, '');
                 return {
                     id: id.toString(),
-                    type: type.toLowerCase(),
+                    type,
                     handler,
                 };
             });
@@ -160,9 +160,7 @@ export class D2CustomForm extends React.Component<Props> {
                 domScriptElement.async = true;
                 domScriptElement.innerHTML = scriptData;
 
-                if (document.body) {
-                    document.body.appendChild(domScriptElement);
-                }
+                document.body.appendChild(domScriptElement);
             });
     }
 

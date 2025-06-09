@@ -48,7 +48,11 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = (dispatch: any) => ({
+type ReduxDispatch = {
+    (action: { type: string; [key: string]: any }): void;
+};
+
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onIsValidating: (
         fieldId: string,
         formBuilderId: string,
