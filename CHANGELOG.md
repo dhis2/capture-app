@@ -1,3 +1,10 @@
+## [102.6.2](https://github.com/dhis2/capture-app/compare/v102.6.1...v102.6.2) (2025-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-18951] Unique attributes error handling in profile Widget ([#4148](https://github.com/dhis2/capture-app/issues/4148)) ([7233db9](https://github.com/dhis2/capture-app/commit/7233db98ca6160a06b1299fd89d34f96862bff5b))
+
 ## [102.6.1](https://github.com/dhis2/capture-app/compare/v102.6.0...v102.6.1) (2025-06-10)
 
 
