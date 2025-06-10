@@ -1,11 +1,11 @@
-// @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { DebounceField } from 'capture-ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { OrgUnitTreeComponent } from './OrgUnitField.component';
 import { useSearchScopeWithFallback } from './useSearchScopeWithFallback';
+
 
 const styles = {
     root: {
@@ -20,28 +20,22 @@ const styles = {
     },
     orgUnitTreeContainer: {
         maxHeight: 300,
-        overflowY: 'auto',
+        overflowY: 'auto' as const,
         margin: '10px 0',
         padding: '0 8px',
     },
 };
 
 type Props = {
-    selected: { id: string, path: Array<string> },
-    onSelectClick: (Object) => void,
-    classes: {
-        root: string,
-        debounceFieldContainer: string,
-        orgUnitTreeContainer: string,
-    },
-};
+    selected: { id: string; path: string[] };
+    onSelectClick: (orgUnit: { id: string; path: string }) => void;
+} & WithStyles<typeof styles>;
 
 export const OrgUnitFieldPlain = ({ selected, onSelectClick, classes }: Props) => {
-    const [searchText, setSearchText] = useState(undefined);
+    const [searchText, setSearchText] = useState<string | undefined>(undefined);
     const { orgUnitRoots } = useSearchScopeWithFallback({ searchText });
 
-
-    const handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    const handleFilterChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
         const { value } = event.currentTarget;
         setSearchText(value);
     };

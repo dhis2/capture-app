@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import {
     Modal,
@@ -10,7 +9,7 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { TransferModalProps } from './TransferModal.types';
-import { OrgUnitField } from './OrgUnitField/OrgUnitField.container';
+import { OrgUnitField } from './OrgUnitField';
 import { useTransferValidation } from './hooks/useTransferValidation';
 import { InfoBoxes } from './InfoBoxes';
 
@@ -49,6 +48,7 @@ export const TransferModal = ({
             dataTest={'widget-enrollment-transfer-modal'}
         >
             <ModalTitle>{i18n.t('Transfer Ownership')}</ModalTitle>
+
             <ModalContent>
                 <div>
                     {i18n.t('Choose the organisation unit to which enrollment ownership should be transferred.')}
@@ -59,7 +59,6 @@ export const TransferModal = ({
                     onSelectClick={handleOrgUnitChange}
                 />
 
-                {/* Alert */}
                 <InfoBoxes
                     ownerOrgUnitId={ownerOrgUnitId}
                     validOrgUnitId={selectedOrgUnit?.id}
@@ -73,6 +72,7 @@ export const TransferModal = ({
                     <Button onClick={() => setOpenTransfer(false)}>
                         {i18n.t('Cancel')}
                     </Button>
+
                     <Button
                         dataTest={'widget-enrollment-transfer-button'}
                         primary

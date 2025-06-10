@@ -1,16 +1,15 @@
-// @flow
 import { useEffect, useMemo, useState } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { ProgramAccessLevels, useProgramAccessLevel } from './useProgramAccessLevel';
 
 type OrgUnit = {
-    id: string,
-    path: Array<string>,
+    id: string;
+    path: string[];
 };
 
 type Props = {
-    programId: string,
-    ownerOrgUnitId: string,
+    programId: string;
+    ownerOrgUnitId: string;
 };
 
 export const OrgUnitScopes = Object.freeze({
@@ -18,7 +17,7 @@ export const OrgUnitScopes = Object.freeze({
     SEARCH: 'SEARCH',
 });
 
-const orgUnitIsInCaptureScope = async (orgUnitId: string, dataEngine: { query: (Object) => Promise<Object> }) => {
+const orgUnitIsInCaptureScope = async (orgUnitId: string, dataEngine: { query: (query: any) => Promise<any> }) => {
     const captureScopeQuery = await dataEngine.query({
         captureOrgUnits: {
             resource: 'organisationUnits',
@@ -33,11 +32,13 @@ const orgUnitIsInCaptureScope = async (orgUnitId: string, dataEngine: { query: (
     return captureScopeQuery?.captureOrgUnits?.organisationUnits?.length > 0;
 };
 
-
 export const useTransferValidation = ({ ownerOrgUnitId, programId }: Props) => {
     const dataEngine = useDataEngine();
-    const [selectedOrgUnit, setSelectedOrgUnit] = useState<?OrgUnit>();
-    const [orgUnitScopes, setOrgUnitScopes] = useState({
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState<OrgUnit | undefined>();
+    const [orgUnitScopes, setOrgUnitScopes] = useState<{
+        origin: keyof typeof OrgUnitScopes | null;
+        destination: keyof typeof OrgUnitScopes | null;
+    }>({
         origin: null,
         destination: null,
     });
@@ -47,7 +48,7 @@ export const useTransferValidation = ({ ownerOrgUnitId, programId }: Props) => {
         [accessLevel, orgUnitScopes.origin]);
 
     useEffect(() => {
-        const updateOriginScope = (newScope: $Values<typeof OrgUnitScopes>) => setOrgUnitScopes(
+        const updateOriginScope = (newScope: keyof typeof OrgUnitScopes) => setOrgUnitScopes(
             prevOrgUnitScopes => ({
                 ...prevOrgUnitScopes,
                 origin: newScope,
@@ -60,7 +61,7 @@ export const useTransferValidation = ({ ownerOrgUnitId, programId }: Props) => {
         });
     }, [dataEngine, ownerOrgUnitId]);
 
-    const updateDestinationScope = (newScope: $Values<typeof OrgUnitScopes>) => setOrgUnitScopes(
+    const updateDestinationScope = (newScope: keyof typeof OrgUnitScopes) => setOrgUnitScopes(
         prevOrgUnitScopes => ({
             ...prevOrgUnitScopes,
             destination: newScope,
@@ -68,7 +69,7 @@ export const useTransferValidation = ({ ownerOrgUnitId, programId }: Props) => {
     );
 
     const handleOrgUnitChange = async (orgUnit: OrgUnit) => {
-        if (!orgUnit || orgUnit.id === selectedOrgUnit) return;
+        if (!orgUnit || orgUnit.id === selectedOrgUnit?.id) return;
 
         if (accessLevel === ProgramAccessLevels.OPEN || accessLevel === ProgramAccessLevels.AUDITED) {
             updateDestinationScope(OrgUnitScopes.CAPTURE);
