@@ -14,6 +14,7 @@ import { getOpenDataEntryActions } from './DataEntryWrapper/DataEntry';
 import type { ContainerProps, StateProps, MapStateToProps } from './SingleEventRegistrationEntry.types';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { itemId } from './DataEntryWrapper/DataEntry/helpers/constants';
+import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 
 const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
 
@@ -33,7 +34,8 @@ const mergeProps = (stateProps: StateProps): StateProps => (stateProps);
 const openSingleEventDataEntry = (InnerComponent: React.ComponentType<ContainerProps>) => (
     (props: ContainerProps) => {
         const hasRun = useRef<boolean>(false);
-        const { selectedScopeId } = props;
+        const { selectedScopeId, orgUnitId } = props;
+        const { orgUnit } = useCoreOrgUnit(orgUnitId);
         const dispatch = useDispatch();
         const selectedCategories = useSelector((state: ReduxState) => state.currentSelections.categories);
         const { isLoading, programCategory } = useCategoryCombinations(selectedScopeId);
@@ -42,12 +44,12 @@ const openSingleEventDataEntry = (InnerComponent: React.ComponentType<ContainerP
             if (!isLoading && !hasRun.current) {
                 dispatch(
                     batchActions([
-                        ...getOpenDataEntryActions(programCategory, selectedCategories),
+                        ...getOpenDataEntryActions(programCategory, selectedCategories, orgUnit),
                     ]),
                 );
                 hasRun.current = true;
             }
-        }, [selectedCategories, dispatch, isLoading, programCategory]);
+        }, [selectedCategories, dispatch, isLoading, programCategory, orgUnit]);
 
         return (
             <InnerComponent

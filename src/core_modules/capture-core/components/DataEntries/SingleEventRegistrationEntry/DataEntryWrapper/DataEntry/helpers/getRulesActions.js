@@ -18,7 +18,7 @@ export const getRulesActions = ({
     state: ReduxState,
     program: EventProgram,
     formFoundation: RenderFoundation,
-    orgUnit: OrgUnit,
+    orgUnit: ?OrgUnit,
 }) => {
     const formValuesClient = getCurrentClientValues(state, formFoundation, formId);
     const dataEntryValuesClient = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);

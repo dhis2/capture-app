@@ -198,6 +198,9 @@ msgstr "Assignee"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{programName}} in {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr "Saving to {{programName}}"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -223,6 +226,9 @@ msgstr "Completed"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Please add or cancel the note before saving the event"
+
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -1244,9 +1250,6 @@ msgstr "Add coordinates"
 
 msgid "Add area"
 msgstr "Add area"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Please provide an valid organisation unit"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
