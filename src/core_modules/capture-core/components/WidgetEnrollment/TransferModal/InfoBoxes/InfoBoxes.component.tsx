@@ -15,7 +15,6 @@ type Props = {
         origin: keyof typeof OrgUnitScopes | null;
         destination: keyof typeof OrgUnitScopes | null;
     };
-    classes: Record<string, string>;
 };
 
 const styles = {

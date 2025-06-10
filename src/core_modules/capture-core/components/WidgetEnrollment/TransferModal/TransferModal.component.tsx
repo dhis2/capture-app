@@ -48,6 +48,7 @@ export const TransferModal = ({
             dataTest={'widget-enrollment-transfer-modal'}
         >
             <ModalTitle>{i18n.t('Transfer Ownership')}</ModalTitle>
+
             <ModalContent>
                 <div>
                     {i18n.t('Choose the organisation unit to which enrollment ownership should be transferred.')}
@@ -71,6 +72,7 @@ export const TransferModal = ({
                     <Button onClick={() => setOpenTransfer(false)}>
                         {i18n.t('Cancel')}
                     </Button>
+
                     <Button
                         dataTest={'widget-enrollment-transfer-button'}
                         primary
