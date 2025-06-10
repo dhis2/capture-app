@@ -9,11 +9,11 @@ import type { RenderFoundation } from '../../../../metaData';
 
 export const useRulesEngine = ({
     programId,
-    orgUnit,
+    orgUnitContext,
     formFoundation,
 }: {
     programId: string,
-    orgUnit: ?OrgUnit,
+    orgUnitContext: ?OrgUnit,
     formFoundation: ?RenderFoundation,
 }) => {
     const dispatch = useDispatch();
@@ -25,25 +25,25 @@ export const useRulesEngine = ({
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
-        if (orgUnit && program && !!formFoundation) {
+        if (orgUnitContext && program && !!formFoundation) {
             dispatch(batchActions([
                 getRulesActions({
                     state,
                     program,
-                    orgUnit,
+                    orgUnit: orgUnitContext,
                     formFoundation,
                 }),
             ]));
-            orgUnitRef.current = orgUnit;
+            orgUnitRef.current = orgUnitContext;
         }
     // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         dispatch,
         program,
-        orgUnit,
+        orgUnitContext,
         formFoundation,
     ]);
 
-    return !!orgUnit && orgUnitRef.current === orgUnit;
+    return orgUnitRef.current === orgUnitContext;
 };

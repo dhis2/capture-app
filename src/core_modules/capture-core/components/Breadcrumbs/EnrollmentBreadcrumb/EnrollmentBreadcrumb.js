@@ -19,7 +19,6 @@ type Props = {
     displayFrontPageList: boolean,
     programId: string,
     userInteractionInProgress?: boolean,
-    trackedEntityName?: string,
 };
 
 export const EventStatuses = {
@@ -51,7 +50,6 @@ const BreadcrumbsPlain = ({
     onBackToViewEvent,
     eventStatus,
     programId,
-    trackedEntityName,
     displayFrontPageList,
     userInteractionInProgress = false,
     page,
@@ -60,7 +58,6 @@ const BreadcrumbsPlain = ({
     const [openWarning, setOpenWarning] = useState(null);
 
     const { label } = useWorkingListLabel({
-        trackedEntityName,
         programId,
         displayFrontPageList,
     });
