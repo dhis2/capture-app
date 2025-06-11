@@ -12,6 +12,7 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
 import { useMetadataForProgramStage } from '../../common/ProgramStage/useMetadataForProgramStage';
+import { useProgramExpiryForUser } from '../../../../hooks';
 import { LoadingMaskForPage } from '../../../LoadingMasks';
 
 const getStyles = () => ({
@@ -52,6 +53,7 @@ const NewEventDataEntryWrapperPlain = ({
     const { orgUnit: orgUnitContext, error } = useCoreOrgUnit(orgUnitId);
     const rulesReady = useRulesEngine({ programId, orgUnitContext, formFoundation });
     const titleText = useScopeTitleText(programId);
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     if (error) {
         return error.errorComponent;
@@ -108,6 +110,7 @@ const NewEventDataEntryWrapperPlain = ({
                     orgUnit={orgUnitContext}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
+                    expiryPeriod={expiryPeriod}
                 />
                 <EventsList />
             </div>
