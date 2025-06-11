@@ -1,10 +1,11 @@
+// @flow
 import * as React from 'react';
 import { D2CustomForm } from './D2CustomForm.component';
 
 import type { CustomForm as MetadataCustomForm } from '../../../metaData';
 
 type Props = {
-    customForm: MetadataCustomForm;
+    customForm: MetadataCustomForm,
 };
 
 export const withCustomForm = () => (InnerComponent: React.ComponentType<any>) =>
@@ -16,7 +17,7 @@ export const withCustomForm = () => (InnerComponent: React.ComponentType<any>) =
                     {...passOnProps}
                 >
                     {
-                        customFormSpecs ? (onRenderField: any, fields: any) => (
+                        customFormSpecs ? (onRenderField, fields) => (
                             <D2CustomForm
                                 onRenderField={onRenderField}
                                 fields={fields}

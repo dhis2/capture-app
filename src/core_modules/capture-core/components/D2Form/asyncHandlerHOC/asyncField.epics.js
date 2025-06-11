@@ -1,7 +1,7 @@
+// @flow
 import log from 'loglevel';
 import { concatMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
-import type { Observable } from 'rxjs';
 
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -12,7 +12,8 @@ import {
     asyncUpdateFieldFailed,
 } from './actions';
 
-export const asyncUpdateFieldEpic = (action$: Observable<any>) =>
+// epic for handlng async field updates, e.g. file and image
+export const asyncUpdateFieldEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.START_UPDATE_FIELD_ASYNC),
         concatMap((action) => {
@@ -37,7 +38,7 @@ export const asyncUpdateFieldEpic = (action$: Observable<any>) =>
                     );
                     return onSuccess ? onSuccess(innerAction) : innerAction;
                 })
-                .catch((error: any) => {
+                .catch((error) => {
                     const { message } = getErrorMessageAndDetails(error);
                     const errorMessage = i18n.t('Async field update failed');
                     log.error(errorCreator(message || errorMessage)({ error }));
