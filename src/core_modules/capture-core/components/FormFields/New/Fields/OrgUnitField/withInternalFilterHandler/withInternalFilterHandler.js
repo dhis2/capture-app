@@ -2,7 +2,7 @@
 import * as React from 'react';
 import log from 'loglevel';
 import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
-import type { CancelablePromise } from 'capture-core-utils';
+import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
 import { orgUnitFieldScopes } from './scopes.const';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 
