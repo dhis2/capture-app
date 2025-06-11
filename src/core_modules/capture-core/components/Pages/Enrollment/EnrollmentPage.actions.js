@@ -48,6 +48,8 @@ type IdSuite = {
     programId?: ?string,
 };
 
+type ProgramOwners = Array<{ orgUnit: string, program: string }>;
+
 export const openEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_OPEN)();
 
@@ -83,10 +85,10 @@ export const resetTeiId = () =>
 export const fetchTei = (payload: IdSuite) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI)(payload);
 
-export const verifyFetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string, programOwners: Array<{ orgUnit: string, program: string}> }) =>
+export const verifyFetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string, programOwners: ProgramOwners }) =>
     actionCreator(enrollmentPageActionTypes.VERIFY_FETCH_TEI_SUCCESS)(payload);
 
-export const fetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string, programOwners: Array<{ orgUnit: string, program: string}> }) =>
+export const fetchTeiSuccess = (payload: { ...IdSuite, teiDisplayName: string, tetId: string, programOwners: ProgramOwners }) =>
     actionCreator(enrollmentPageActionTypes.FETCH_TEI_SUCCESS)(payload);
 
 export const fetchTeiError = (teiId: string) =>
@@ -115,8 +117,8 @@ export const verifyFetchedEnrollments = ({ teiId, programId, action }: Object) =
 export const fetchEnrollmentsError = ({ accessLevel }: { accessLevel: string }) =>
     actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_ERROR)({ accessLevel });
 
-export const saveEnrollments = ({ enrollments }: any) =>
-    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ enrollments });
+export const saveEnrollments = ({ enrollments, programOwnerId }: { enrollments: Object, programOwnerId: ?string }) =>
+    actionCreator(enrollmentPageActionTypes.FETCH_ENROLLMENTS_SUCCESS)({ enrollments, programOwnerId });
 
 // Page status
 export const showDefaultViewOnEnrollmentPage = () =>
