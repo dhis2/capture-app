@@ -1,6 +1,5 @@
 // @flow
 import { useMemo } from 'react';
-import { useFeature, FEATURES } from 'capture-core-utils';
 import { areFiltersEqual } from '../../../WorkingListsBase';
 import type { Input, InitialViewConfigComputed, CurrentViewConfig } from './useViewHasTemplateChanges.types';
 
@@ -42,10 +41,8 @@ export const useViewHasTemplateChanges = ({
     columns,
     sortById,
     sortByDirection,
-    programStageId,
     isDefaultTemplateAltered,
 }: Input) => {
-    const supportsStoreProgramStageWorkingList = useFeature(FEATURES.storeProgramStageWorkingList);
     const calculatedInitialViewConfig = useMemo(() => {
         if (!initialViewConfig) {
             return initialViewConfig;
@@ -66,9 +63,6 @@ export const useViewHasTemplateChanges = ({
         if (isDefaultTemplateAltered) {
             return true;
         }
-        if (!supportsStoreProgramStageWorkingList && programStageId) {
-            return undefined;
-        }
         if (!calculatedInitialViewConfig) {
             return undefined;
         }
@@ -81,8 +75,6 @@ export const useViewHasTemplateChanges = ({
         sortById,
         sortByDirection,
         calculatedInitialViewConfig,
-        programStageId,
-        supportsStoreProgramStageWorkingList,
         isDefaultTemplateAltered,
     ]);
 

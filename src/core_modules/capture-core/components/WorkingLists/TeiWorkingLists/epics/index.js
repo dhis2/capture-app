@@ -2,7 +2,6 @@
 export {
     initTeiViewEpic,
     updateTeiListEpic,
-    retrieveTEITemplatesEpic,
     updateTEITemplateEpic,
     addTEITemplateEpic,
     deleteTEITemplateEpic,
