@@ -6,8 +6,6 @@ import { makeCancelablePromise } from 'capture-core-utils';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import i18n from '@dhis2/d2-i18n';
-
-import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
 import type { ErrorData, PostProcessErrorMessage } from './formbuilder.types';
 import type { PluginContext } from '../FormFieldPlugin/FormFieldPlugin.types';
 import { getValidators, validateValue, validatorTypes } from '../../../utils/validation';
@@ -16,6 +14,11 @@ import type { DataElement } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
 import type { FieldUI } from '../../../storageControllers';
 import type { RenderDividerFn, GetContainerPropsFn } from '../../../components/FormFields/New';
+
+type CancelablePromise<T> = {
+    promise: Promise<T>;
+    cancel: () => void;
+};
 
 const defaultClasses: any = {};
 
@@ -168,7 +171,7 @@ export class FormBuilder extends React.Component<Props> {
                             undefined,
                         );
 
-                        return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
+                        return fieldValidatingPromiseContainer.cancelableValidatingPromise?.promise || Promise.resolve();
                     }
                     return Promise.resolve();
                 };
@@ -339,7 +342,7 @@ export class FormBuilder extends React.Component<Props> {
                         touched: true,
                     },
                 );
-                return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
+                return fieldValidatingPromiseContainer.cancelableValidatingPromise?.promise || Promise.resolve();
             }
             return Promise.resolve();
         };
@@ -438,7 +441,7 @@ export class FormBuilder extends React.Component<Props> {
             FormBuilder.executeValidateAllFields(props, this.fieldsValidatingPromiseContainer),
         );
 
-        this.validateAllCancelablePromise
+        this.validateAllCancelablePromise!
             .promise
             .then((validationContainerArray) => {
                 const validationContainers = validationContainerArray
@@ -497,7 +500,7 @@ export class FormBuilder extends React.Component<Props> {
     fieldInstances: Map<string, any>;
     asyncUIState: { [id: string]: FieldUI };
     fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
-    validateAllCancelablePromise?: CancelablePromise<any>;
+    validateAllCancelablePromise?: CancelablePromise<any> | null;
     commitUpdateTriggeredForFields: { [fieldId: string]: boolean };
 
     renderPlugin = (
