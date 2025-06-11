@@ -140,7 +140,7 @@ And('you click the Enter details action button', () => {
         .click();
 });
 
-Then('you can see the Baby postnatal new event form where you can enter details', () => {
+Then('you can see the Baby postnatal new event form', () => {
     cy.get('[data-test="edit-event-report-tab"]')
         .should('contain', 'Report');
     cy.get('[data-test="edit-event-schedule-tab"]')
