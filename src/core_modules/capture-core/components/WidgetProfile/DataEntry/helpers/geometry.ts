@@ -15,6 +15,6 @@ export const GEOMETRY: { POINT: GeometryValues; POLYGON: GeometryValues } = {
     },
 };
 
-export const getFeatureType = (type: string) => GEOMETRY[type]?.FEATURETYPE || type;
-export const getDataElement = (type: string) => GEOMETRY[type]?.DATAELEMENTTYPE || type;
-export const getLabel = (type: string) => GEOMETRY[type]?.LABEL || type;
+export const getFeatureType = (type: string) => GEOMETRY[type]?.FEATURETYPE ?? type;
+export const getDataElement = (type: string) => GEOMETRY[type]?.DATAELEMENTTYPE ?? type;
+export const getLabel = (type: string) => GEOMETRY[type]?.LABEL ?? type;

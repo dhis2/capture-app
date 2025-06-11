@@ -39,7 +39,7 @@ const onValidateOnScopeTrackedEntityType = (
     dataElementUnique: DataElementUnique,
     dataElement: DataElement,
     serverValue: any,
-    contextProps: Record<string, any> = {},
+    contextProps: Record<string, any>,
     querySingleResource: QuerySingleResource,
 ) => {
     let requestPromise;
@@ -86,6 +86,96 @@ const onValidateOnScopeTrackedEntityType = (
         });
 };
 
+const validateUnsavedAttributeValues = (contextProps: Record<string, any>, dataElementId: string, serverValue: any) => {
+    if (!contextProps.onGetUnsavedAttributeValues) {
+        return null;
+    }
+
+    const unsavedAttributeValues = contextProps.onGetUnsavedAttributeValues(dataElementId);
+    if (!unsavedAttributeValues) {
+        return null;
+    }
+
+    const foundValue = unsavedAttributeValues.find(usav => usav === serverValue);
+    if (foundValue) {
+        return {
+            valid: false,
+            data: {
+                attributeValueExistsUnsaved: true,
+            },
+        };
+    }
+
+    return null;
+};
+
+const createTrackedEntityRequest = (
+    scope: string,
+    contextProps: Record<string, any>,
+    dataElementId: string,
+    serverValue: any,
+    querySingleResource: QuerySingleResource,
+) => {
+    if (scope === dataElementUniqueScope.ORGANISATION_UNIT) {
+        const orgUnitId = contextProps.orgUnitId;
+        const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+            ? 'orgUnits'
+            : 'orgUnit';
+        return querySingleResource({
+            resource: 'tracker/trackedEntities',
+            params: {
+                program: contextProps.programId,
+                [orgUnitQueryParam]: orgUnitId,
+                filter: `${dataElementId}:EQ:${escapeString(serverValue)}`,
+            },
+        });
+    }
+    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+        ? 'orgUnitMode'
+        : 'ouMode';
+    return querySingleResource({
+        resource: 'tracker/trackedEntities',
+        params: {
+            program: contextProps.programId,
+            [orgUnitModeQueryParam]: 'ACCESSIBLE',
+            filter: `${dataElementId}:EQ:${escapeString(serverValue)}`,
+        },
+    });
+};
+
+const processValidationResult = (
+    result: any,
+    contextProps: Record<string, any>,
+    dataEntry: DataElementUnique,
+    dataElement: DataElement,
+    serverValue: any,
+    querySingleResource: QuerySingleResource,
+) => {
+    const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
+    const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+
+    if (otherTrackedEntityInstances.length === 0) {
+        return onValidateOnScopeTrackedEntityType(
+            dataEntry,
+            dataElement,
+            serverValue,
+            contextProps,
+            querySingleResource,
+        );
+    }
+
+    const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+    const data = {
+        id: trackedEntityInstance.trackedEntity,
+        tetId: trackedEntityInstance.trackedEntityType,
+    };
+
+    return {
+        valid: otherTrackedEntityInstances.length === 0,
+        data,
+    };
+};
+
 const buildDataElementUnique = (
     dataElement: DataElement,
     trackedEntityAttribute: TrackedEntityAttribute,
@@ -102,72 +192,27 @@ const buildDataElementUnique = (
                 trackedEntityAttribute.valueType,
             );
 
-            if (contextProps.onGetUnsavedAttributeValues) {
-                const unsavedAttributeValues = contextProps.onGetUnsavedAttributeValues(dataElement.id);
-                if (unsavedAttributeValues) {
-                    const foundValue = unsavedAttributeValues.find(usav => usav === serverValue);
-                    if (foundValue) {
-                        return {
-                            valid: false,
-                            data: {
-                                attributeValueExistsUnsaved: true,
-                            },
-                        };
-                    }
-                }
+            const unsavedValidation = validateUnsavedAttributeValues(contextProps, dataElement.id, serverValue);
+            if (unsavedValidation) {
+                return unsavedValidation;
             }
 
-            let requestPromise;
-            if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
-                const orgUnitId = contextProps.orgUnitId;
-                const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-                    ? 'orgUnits'
-                    : 'orgUnit';
-                requestPromise = querySingleResource({
-                    resource: 'tracker/trackedEntities',
-                    params: {
-                        program: contextProps.programId,
-                        [orgUnitQueryParam]: orgUnitId,
-                        filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
-                    },
-                });
-            } else {
-                const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-                    ? 'orgUnitMode'
-                    : 'ouMode';
-                requestPromise = querySingleResource({
-                    resource: 'tracker/trackedEntities',
-                    params: {
-                        program: contextProps.programId,
-                        [orgUnitModeQueryParam]: 'ACCESSIBLE',
-                        filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
-                    },
-                });
-            }
-            return requestPromise.then((result) => {
-                const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
-                if (otherTrackedEntityInstances.length === 0) {
-                    return onValidateOnScopeTrackedEntityType(
-                        dataEntry,
-                        dataElement,
-                        serverValue,
-                        contextProps,
-                        querySingleResource,
-                    );
-                }
-                const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+            const requestPromise = createTrackedEntityRequest(
+                dataEntry.scope,
+                contextProps,
+                dataElement.id,
+                serverValue,
+                querySingleResource,
+            );
 
-                const data = {
-                    id: trackedEntityInstance.trackedEntity,
-                    tetId: trackedEntityInstance.trackedEntityType,
-                };
-
-                return {
-                    valid: otherTrackedEntityInstances.length === 0,
-                    data,
-                };
-            });
+            return requestPromise.then(result => processValidationResult(
+                result,
+                contextProps,
+                dataEntry,
+                dataElement,
+                serverValue,
+                querySingleResource,
+            ));
         };
 
         if (trackedEntityAttribute.pattern) {

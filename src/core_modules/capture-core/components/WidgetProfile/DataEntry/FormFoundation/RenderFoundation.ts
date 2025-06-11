@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import type {
     ProgramTrackedEntityAttribute,
     TrackedEntityAttribute,
@@ -99,6 +99,53 @@ const buildMainSection = async ({
     return section;
 };
 
+const buildPluginAttributes = (pluginElement: PluginElement) =>
+    pluginElement.fieldMap
+        .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
+        .reduce((acc, attribute) => {
+            acc[attribute.IdFromApp] = attribute;
+            return acc;
+        }, {});
+
+const createPluginConfig = (pluginElement: PluginElement, attributes: any) =>
+    new FormFieldPluginConfig((o) => {
+        o.id = pluginElement.id;
+        o.name = pluginElement.name;
+        o.pluginSource = pluginElement.pluginSource;
+        o.fields = new Map();
+        o.customAttributes = attributes;
+    });
+
+const processPluginElement = async (
+    pluginElement: PluginElement,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+) => {
+    const attributes = buildPluginAttributes(pluginElement);
+    const element = createPluginConfig(pluginElement, attributes);
+
+    /* eslint-disable no-await-in-loop */
+    for (const field of pluginElement.fieldMap) {
+        if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
+            const fieldElement = await buildDataElement(
+                field as any,
+                trackedEntityAttributes,
+                optionSets,
+                querySingleResource,
+                minorServerVersion,
+            );
+            if (fieldElement) {
+                element.addField(field.IdFromPlugin, fieldElement);
+            }
+        }
+    }
+    /* eslint-enable no-await-in-loop */
+
+    return element;
+};
+
 const buildElementsForSection = async ({
     programTrackedEntityAttributes,
     trackedEntityAttributes,
@@ -114,57 +161,29 @@ const buildElementsForSection = async ({
     querySingleResource: QuerySingleResource;
     minorServerVersion: number;
 }) => {
+    /* eslint-disable no-await-in-loop */
     for (const trackedEntityAttribute of programTrackedEntityAttributes) {
         if (isPluginElement(trackedEntityAttribute)) {
-            const pluginElement = trackedEntityAttribute;
-
-            const attributes = pluginElement.fieldMap
-                .filter(attributeField => attributeField.objectType === FieldElementObjectTypes.ATTRIBUTE)
-                .reduce((acc, attribute) => {
-                    acc[attribute.IdFromApp] = attribute;
-                    return acc;
-                }, {});
-
-            const element = new FormFieldPluginConfig((o) => {
-                o.id = pluginElement.id;
-                o.name = pluginElement.name;
-                o.pluginSource = pluginElement.pluginSource;
-                o.fields = new Map();
-                o.customAttributes = attributes;
-            });
-
-            /* eslint-disable no-await-in-loop */
-            for (const field of pluginElement.fieldMap) {
-                if (field.objectType && field.objectType === FieldElementObjectTypes.TRACKED_ENTITY_ATTRIBUTE) {
-                    const fieldElement = await buildDataElement(
-                        field as any,
-                        trackedEntityAttributes,
-                        optionSets,
-                        querySingleResource,
-                        minorServerVersion,
-                    );
-                    if (fieldElement) {
-                        element.addField(field.IdFromPlugin, fieldElement);
-                    }
-                }
-            }
-            /* eslint-enable no-await-in-loop */
-
-            element && section.addElement(element);
-        } else if (isProgramTrackedEntityAttribute(trackedEntityAttribute)) {
-            const programTrackedEntityAttribute = trackedEntityAttribute;
-            /* eslint-disable no-await-in-loop */
-            const element = await buildDataElement(
-                programTrackedEntityAttribute,
+            const element = await processPluginElement(
+                trackedEntityAttribute,
                 trackedEntityAttributes,
                 optionSets,
                 querySingleResource,
                 minorServerVersion,
             );
-            /* eslint-enable no-await-in-loop */
+            element && section.addElement(element);
+        } else if (isProgramTrackedEntityAttribute(trackedEntityAttribute)) {
+            const element = await buildDataElement(
+                trackedEntityAttribute,
+                trackedEntityAttributes,
+                optionSets,
+                querySingleResource,
+                minorServerVersion,
+            );
             element && section.addElement(element);
         }
     }
+    /* eslint-enable no-await-in-loop */
     return section;
 };
 
@@ -208,7 +227,101 @@ const buildSection = async ({
     return section;
 };
 
-export const buildFormFoundation = async (program: any, querySingleResource: QuerySingleResource, minorServerVersion: number, dataEntryFormConfig?: DataEntryFormConfig | null) => {
+const buildAttributeDictionary = (programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute | PluginElement>) =>
+    programTrackedEntityAttributes.reduce((acc, trackedEntityAttribute) => {
+        if (isProgramTrackedEntityAttribute(trackedEntityAttribute) && trackedEntityAttribute.trackedEntityAttributeId) {
+            acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
+        }
+        return acc;
+    }, {});
+
+const processFormConfigElement = (element: any, trackedEntityAttributeDictionary: any) => {
+    if (element.type === FormFieldTypes.PLUGIN) {
+        const fieldMap = element.fieldMap?.map(field => ({
+            ...field,
+            ...trackedEntityAttributeDictionary[field.IdFromApp],
+        }));
+
+        return {
+            ...element,
+            fieldMap,
+        };
+    }
+    return trackedEntityAttributeDictionary[element.id];
+};
+
+const buildFormConfigAttributes = (formConfigSection: any, trackedEntityAttributeDictionary: any) =>
+    formConfigSection.elements.reduce((acc, element) => {
+        const processedElement = processFormConfigElement(element, trackedEntityAttributeDictionary);
+        if (processedElement) {
+            acc.push(processedElement);
+        }
+        return acc;
+    }, []);
+
+const processFormConfigSection = async (
+    formConfigSection: any,
+    trackedEntityAttributeDictionary: any,
+    programSections: any,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+) => {
+    const attributes = buildFormConfigAttributes(formConfigSection, trackedEntityAttributeDictionary);
+    const sectionMetadata = programSections?.find(cachedSection => cachedSection.id === formConfigSection.id);
+
+    if (!sectionMetadata && programSections && programSections.length > 0) {
+        log.warn(
+            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                { sectionId: formConfigSection.id },
+            ),
+        );
+    }
+
+    return buildSection({
+        programTrackedEntityAttributes: attributes,
+        sectionCustomLabel: formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
+        sectionCustomId: formConfigSection.id,
+        sectionDisplayDescription: sectionMetadata?.displayDescription ?? '',
+        minorServerVersion,
+        trackedEntityAttributes,
+        optionSets,
+        querySingleResource,
+    });
+};
+
+const processProgramSections = async (
+    programSections: any,
+    trackedEntityAttributeDictionary: any,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+) => {
+    const sections: Array<Section> = [];
+    /* eslint-disable no-await-in-loop */
+    for (const programSection of programSections) {
+        const builtProgramSection = buildProgramSection(programSection);
+        const section = await buildSection({
+            programTrackedEntityAttributes: builtProgramSection.map(id => trackedEntityAttributeDictionary[id]),
+            trackedEntityAttributes,
+            optionSets,
+            sectionCustomLabel: programSection.displayFormName,
+            sectionCustomId: programSection.id,
+            sectionDisplayDescription: programSection.displayDescription,
+            querySingleResource,
+            minorServerVersion,
+        });
+        if (section) {
+            sections.push(section);
+        }
+    }
+    /* eslint-enable no-await-in-loop */
+    return sections;
+};
+
+const buildFormFoundationData = (program: any) => {
     const { programSections, trackedEntityType } = program;
     const programTrackedEntityAttributes = getProgramTrackedEntityAttributes(program.programTrackedEntityAttributes);
     const trackedEntityTypeId: string = getTrackedEntityTypeId(program);
@@ -220,107 +333,130 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
         (acc, currentValue) => (currentValue.optionSet ? [...acc, currentValue.optionSet] : acc),
         [],
     );
-    const renderFoundation = new RenderFoundation((o) => {
-        o.featureType = getFeatureType(program.featureType);
-        o.name = program.displayName;
-    });
 
-    let section;
-    if (programSections?.length || dataEntryFormConfig) {
-        if (trackedEntityTypeId) {
-            section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
-            section && renderFoundation.addSection(section);
+    return {
+        programSections,
+        trackedEntityType,
+        programTrackedEntityAttributes,
+        trackedEntityTypeId,
+        trackedEntityAttributes,
+        optionSets,
+    };
+};
+
+const buildFormFoundationWithSections = async (
+    foundationData: any,
+    renderFoundation: RenderFoundation,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+    dataEntryFormConfig?: DataEntryFormConfig | null,
+) => {
+    const { programSections, trackedEntityType, programTrackedEntityAttributes, trackedEntityTypeId, trackedEntityAttributes, optionSets } = foundationData;
+
+    if (trackedEntityTypeId) {
+        const section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
+        section && renderFoundation.addSection(section);
+    }
+
+    if (programTrackedEntityAttributes) {
+        const trackedEntityAttributeDictionary = buildAttributeDictionary(programTrackedEntityAttributes);
+
+        if (dataEntryFormConfig) {
+            await processDataEntryFormConfig(
+                dataEntryFormConfig,
+                trackedEntityAttributeDictionary,
+                programSections,
+                trackedEntityAttributes,
+                optionSets,
+                querySingleResource,
+                minorServerVersion,
+                renderFoundation,
+            );
+        } else {
+            const sections = await processProgramSections(
+                programSections,
+                trackedEntityAttributeDictionary,
+                trackedEntityAttributes,
+                optionSets,
+                querySingleResource,
+                minorServerVersion,
+            );
+            sections.forEach(section => renderFoundation.addSection(section));
         }
-        if (programTrackedEntityAttributes) {
-            const trackedEntityAttributeDictionary = programTrackedEntityAttributes
-                .reduce((acc, trackedEntityAttribute) => {
-                    if (trackedEntityAttribute.trackedEntityAttributeId) {
-                        acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
-                    }
-                    return acc;
-                }, {});
+    }
+};
 
-
-            if (dataEntryFormConfig) {
-                for (const formConfigSection of dataEntryFormConfig as any) {
-                    const attributes = formConfigSection.elements.reduce((acc, element) => {
-                        if (element.type === FormFieldTypes.PLUGIN) {
-                            const fieldMap = element
-                                .fieldMap
-                                ?.map(field => ({
-                                    ...field,
-                                    ...trackedEntityAttributeDictionary[field.IdFromApp],
-                                }));
-
-                            acc.push({
-                                ...element,
-                                fieldMap,
-                            });
-                            return acc;
-                        }
-                        const attribute = trackedEntityAttributeDictionary[element.id];
-                        if (attribute) {
-                            acc.push(attribute);
-                        }
-                        return acc;
-                    }, []);
-
-                    const sectionMetadata = programSections
-                        ?.find(cachedSection => cachedSection.id === formConfigSection.id);
-
-                    if (!sectionMetadata && programSections && programSections.length > 0) {
-                        log.warn(
-                            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
-                                { sectionId: formConfigSection.id },
-                            ),
-                        );
-                    }
-
-                    /* eslint-disable no-await-in-loop */
-                    section = await buildSection({
-                        programTrackedEntityAttributes: attributes,
-                        sectionCustomLabel: formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
-                        sectionCustomId: formConfigSection.id,
-                        sectionDisplayDescription: sectionMetadata?.displayDescription ?? '',
-                        minorServerVersion,
-                        trackedEntityAttributes,
-                        optionSets,
-                        querySingleResource,
-                    });
-                    /* eslint-enable no-await-in-loop */
-                    section && renderFoundation.addSection(section);
-                }
-            } else {
-                for (const programSection of programSections) {
-                    const builtProgramSection = buildProgramSection(programSection);
-
-                    /* eslint-disable no-await-in-loop */
-                    section = await buildSection({
-                        programTrackedEntityAttributes: builtProgramSection.map(id => trackedEntityAttributeDictionary[id]),
-                        trackedEntityAttributes,
-                        optionSets,
-                        sectionCustomLabel: programSection.displayFormName,
-                        sectionCustomId: programSection.id,
-                        sectionDisplayDescription: programSection.displayDescription,
-                        querySingleResource,
-                        minorServerVersion,
-                    });
-                    /* eslint-enable no-await-in-loop */
-                    section && renderFoundation.addSection(section);
-                }
-            }
-        }
-    } else {
-        section = await buildMainSection({
-            trackedEntityType,
+const processDataEntryFormConfig = async (
+    dataEntryFormConfig: DataEntryFormConfig,
+    trackedEntityAttributeDictionary: any,
+    programSections: any,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+    renderFoundation: RenderFoundation,
+) => {
+    const sectionPromises = (dataEntryFormConfig as any).map((formConfigSection: any) =>
+        processFormConfigSection(
+            formConfigSection,
+            trackedEntityAttributeDictionary,
+            programSections,
             trackedEntityAttributes,
             optionSets,
-            programTrackedEntityAttributes,
+            querySingleResource,
+            minorServerVersion,
+        ),
+    );
+
+    const sections = await Promise.all(sectionPromises);
+    sections.forEach(section => section && renderFoundation.addSection(section));
+};
+
+const initializeRenderFoundation = (program: any) => new RenderFoundation((o) => {
+    o.featureType = getFeatureType(program.featureType);
+    o.name = program.displayName;
+});
+
+const buildFormFoundationSections = async (
+    foundationData: any,
+    renderFoundation: RenderFoundation,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+    dataEntryFormConfig?: DataEntryFormConfig | null,
+) => {
+    if (foundationData.programSections?.length || dataEntryFormConfig) {
+        await buildFormFoundationWithSections(
+            foundationData,
+            renderFoundation,
+            querySingleResource,
+            minorServerVersion,
+            dataEntryFormConfig,
+        );
+    } else {
+        const section = await buildMainSection({
+            trackedEntityType: foundationData.trackedEntityType,
+            trackedEntityAttributes: foundationData.trackedEntityAttributes,
+            optionSets: foundationData.optionSets,
+            programTrackedEntityAttributes: foundationData.programTrackedEntityAttributes,
             querySingleResource,
             minorServerVersion,
         });
         section && renderFoundation.addSection(section);
     }
+};
+
+const buildFormFoundation = async (program: any, querySingleResource: QuerySingleResource, minorServerVersion: number, dataEntryFormConfig?: DataEntryFormConfig | null) => {
+    const foundationData = buildFormFoundationData(program);
+    const renderFoundation = initializeRenderFoundation(program);
+
+    await buildFormFoundationSections(
+        foundationData,
+        renderFoundation,
+        querySingleResource,
+        minorServerVersion,
+        dataEntryFormConfig,
+    );
+
     return renderFoundation;
 };
 
