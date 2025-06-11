@@ -77,6 +77,7 @@ export const EnrollmentEditEventPageComponent = ({
             eventDate={eventDate}
             teiId={teiId}
             pageStatus={pageStatus}
+            isUserInteractionInProgress={userInteractionInProgress}
         />
         <EnrollmentPageLayout
             pageLayout={pageLayout}
