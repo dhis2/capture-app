@@ -159,12 +159,13 @@ function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
     return requestData?.join(':');
 }
 
-export function convertDate(
+export function convertDate({
+    sourceValue,
+    meta: { key, storeId, isInit },
+}: {
     sourceValue: DateFilterData,
-    key: string,
-    storeId: string,
-    isInit: boolean,
-) {
+    meta: { key: string, storeId: string, isInit: boolean },
+}) {
     if (sourceValue.type === 'ABSOLUTE') {
         return convertAbsoluteDate(sourceValue);
     }

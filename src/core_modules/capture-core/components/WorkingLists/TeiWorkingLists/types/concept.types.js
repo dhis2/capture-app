@@ -36,6 +36,7 @@ export type ColumnConfigBase = {|
     multiValueFilter?: boolean,
     filterHidden?: boolean,
     additionalColumn?: boolean,
+    unique?: boolean,
 |};
 export type MetadataColumnConfig = {
     ...ColumnConfigBase,

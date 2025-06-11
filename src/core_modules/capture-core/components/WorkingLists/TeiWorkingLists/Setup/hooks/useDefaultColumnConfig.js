@@ -99,6 +99,7 @@ const getTEIMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string
         options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
         multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
         filterHidden: !(orgUnitId || searchable || unique),
+        unique: Boolean(unique),
     }));
 
 const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> =>

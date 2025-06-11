@@ -1,7 +1,7 @@
 // @flow
 import type { TrueOnlyFilterData } from '../../../../../ListView';
 
-export function convertTrueOnly(filter: TrueOnlyFilterData) {
+export function convertTrueOnly({ sourceValue }: { sourceValue: TrueOnlyFilterData }) {
     // $FlowFixMe[incompatible-type] automated comment
-    return `eq:${filter.value}`;
+    return `eq:${sourceValue.value}`;
 }

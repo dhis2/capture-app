@@ -12,6 +12,7 @@ export type Column = {
     multiValueFilter?: boolean,
     filterHidden?: boolean,
     additionalColumn?: boolean,
+    unique?: boolean,
 };
 
 export type Columns = Array<Column>;

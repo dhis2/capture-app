@@ -42,7 +42,7 @@ export const convertToTEIFilterAttributes = ({
 
             return {
                 // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
-                ...getFilterByType[element.type](filter),
+                ...getFilterByType[element.type](filter, element),
                 attribute: key,
             };
         })
