@@ -1,6 +1,6 @@
 // @flow
 import { useDispatch } from 'react-redux';
-import React, { useCallback, useMemo, useEffect } from 'react';
+import React, { useCallback, useMemo, useEffect, useState } from 'react';
 import type { ComponentType } from 'react';
 import { useLocationQuery } from '../../../utils/routing';
 import { SearchPageComponent } from './SearchPage.component';
@@ -26,6 +26,7 @@ const usePreselectedProgram = (currentSelectionsId): ?string => {
 };
 
 export const SearchPage: ComponentType<{||}> = () => {
+    const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
     const dispatch = useDispatch();
     const { programId, orgUnitId } = useLocationQuery();
 
@@ -52,6 +53,8 @@ export const SearchPage: ComponentType<{||}> = () => {
                 programId={programId}
                 orgUnitId={orgUnitId}
                 onNavigateToMainPage={onNavigateToMainPage}
+                showBulkDataEntryPlugin={showBulkDataEntryPlugin}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
             />
         </ResultsPageSizeContext.Provider>
     );

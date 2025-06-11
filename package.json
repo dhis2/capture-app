@@ -1,8 +1,8 @@
 {
     "name": "capture-app",
     "homepage": ".",
-    "version": "102.4.7",
-    "cacheVersion": "1",
+    "version": "102.6.2",
+    "cacheVersion": "2",
     "license": "BSD-3-Clause",
     "private": true,
     "workspaces": [
@@ -10,7 +10,7 @@
     ],
     "dependencies": {
         "@dhis2-ui/calendar": "^10.4.0",
-        "@dhis2/rules-engine-javascript": "102.4.7",
+        "@dhis2/rules-engine-javascript": "102.6.2",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/d2-ui-rich-text": "^7.4.0",
@@ -59,7 +59,8 @@
         "rxjs": "^7.5.5",
         "styled-jsx": "^4",
         "typeface-roboto": "^0.0.75",
-        "uuid": "^9.0.0"
+        "uuid": "^9.0.0",
+        "zod": "^3.24.4"
     },
     "scripts": {
         "start": "yarn verifyCacheVersion && concurrently --kill-others \"yarn workspaces run build:watch\" \"d2-app-scripts start\"",

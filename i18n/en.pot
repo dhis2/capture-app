@@ -27,6 +27,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr "Please refresh the page (Either the server or the app version changed)"
 
+msgid "Bulk data entry"
+msgstr "Bulk data entry"
+
+msgid "Program overview"
+msgstr "Program overview"
+
+msgid "Active enrollments"
+msgstr "Active enrollments"
+
+msgid "Completed enrollments"
+msgstr "Completed enrollments"
+
+msgid "Cancelled enrollments"
+msgstr "Cancelled enrollments"
+
+msgid "Search"
+msgstr "Search"
+
 msgid "Enrollment dashboard"
 msgstr "Enrollment dashboard"
 
@@ -38,24 +56,6 @@ msgstr "Edit event"
 
 msgid "New event"
 msgstr "New event"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} list"
-
-msgid "Search"
-msgstr "Search"
-
-msgid "Working List"
-msgstr "Working List"
 
 msgid "Event list"
 msgstr "Event list"
@@ -198,6 +198,9 @@ msgstr "Assignee"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{programName}} in {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr "Saving to {{programName}}"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -223,6 +226,9 @@ msgstr "Completed"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Please add or cancel the note before saving the event"
+
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -1109,6 +1115,12 @@ msgstr ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
 
+msgid "Unsaved changes"
+msgstr "Unsaved changes"
+
+msgid "Continue data entry"
+msgstr "Continue data entry"
+
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
 
@@ -1238,9 +1250,6 @@ msgstr "Add coordinates"
 
 msgid "Add area"
 msgstr "Add area"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Please provide an valid organisation unit"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."

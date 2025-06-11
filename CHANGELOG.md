@@ -1,3 +1,43 @@
+## [102.6.2](https://github.com/dhis2/capture-app/compare/v102.6.1...v102.6.2) (2025-06-10)
+
+
+### Bug Fixes
+
+* [DHIS2-18951] Unique attributes error handling in profile Widget ([#4148](https://github.com/dhis2/capture-app/issues/4148)) ([7233db9](https://github.com/dhis2/capture-app/commit/7233db98ca6160a06b1299fd89d34f96862bff5b))
+
+## [102.6.1](https://github.com/dhis2/capture-app/compare/v102.6.0...v102.6.1) (2025-06-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4139](https://github.com/dhis2/capture-app/issues/4139)) ([dd5ac47](https://github.com/dhis2/capture-app/commit/dd5ac4728d1d067ac7f55521805532d145bb151b))
+
+# [102.6.0](https://github.com/dhis2/capture-app/compare/v102.5.0...v102.6.0) (2025-06-07)
+
+
+### Bug Fixes
+
+* [DHIS2-19633] Adjust form width to 40/60 ([#4130](https://github.com/dhis2/capture-app/issues/4130)) ([46c69c1](https://github.com/dhis2/capture-app/commit/46c69c181e7eacd8b2db89b5935ce50b2241fb86))
+
+
+### Features
+
+* [DHIS2-18664] Add org unit field to new event from for Event programs ([#3976](https://github.com/dhis2/capture-app/issues/3976)) ([7f22b5b](https://github.com/dhis2/capture-app/commit/7f22b5be15512a0bb0fcb336da6ba171eb071ef9))
+
+# [102.5.0](https://github.com/dhis2/capture-app/compare/v102.4.8...v102.5.0) (2025-06-06)
+
+
+### Features
+
+* [DHIS2-18889] BulkDataEntryPlugin entry point ([#4000](https://github.com/dhis2/capture-app/issues/4000)) ([dbed996](https://github.com/dhis2/capture-app/commit/dbed9969068023f6e52f39682975fd16877e00ef))
+
+## [102.4.8](https://github.com/dhis2/capture-app/compare/v102.4.7...v102.4.8) (2025-06-04)
+
+
+### Bug Fixes
+
+* [DHIS2-11847] Add critical alert to post errors ([#4078](https://github.com/dhis2/capture-app/issues/4078)) ([4ae8eca](https://github.com/dhis2/capture-app/commit/4ae8eca441ebfb543f17397df9fd45ac34a59df8))
+
 ## [102.4.7](https://github.com/dhis2/capture-app/compare/v102.4.6...v102.4.7) (2025-06-02)
 
 

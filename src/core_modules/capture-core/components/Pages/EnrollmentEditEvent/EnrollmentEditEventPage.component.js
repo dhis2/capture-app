@@ -84,7 +84,6 @@ export const EnrollmentEditEventPageComponent = ({
             currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
             userInteractionInProgress={userInteractionInProgress}
-            trackedEntityName={trackedEntityName}
             onBackToMainPage={onBackToMainPage}
             onBackToDashboard={onBackToDashboard}
             onBackToViewEvent={onBackToViewEvent}

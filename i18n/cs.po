@@ -35,6 +35,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Aktivní zápisy"
+
+msgid "Completed enrollments"
+msgstr "Dokončené zápisy"
+
+msgid "Cancelled enrollments"
+msgstr "Zrušené zápisy"
+
+msgid "Search"
+msgstr "Hledat"
+
 msgid "Enrollment dashboard"
 msgstr "Ovládací panel zápisu"
 
@@ -46,24 +64,6 @@ msgstr "Upravit událost"
 
 msgid "New event"
 msgstr "Nová událost"
-
-msgid "Active enrollments"
-msgstr "Aktivní zápisy"
-
-msgid "Completed enrollments"
-msgstr "Dokončené zápisy"
-
-msgid "Cancelled enrollments"
-msgstr "Zrušené zápisy"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} seznam"
-
-msgid "Search"
-msgstr "Hledat"
-
-msgid "Working List"
-msgstr "Pracovní seznam"
 
 msgid "Event list"
 msgstr "Seznam událostí"
@@ -206,6 +206,9 @@ msgstr "Přiřazený"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Ukládání do {{programName}} v {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -229,6 +232,9 @@ msgstr "Dokončeno"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Před uložením události přidejte nebo zrušte poznámku."
+
+msgid "Please provide an valid organisation unit"
+msgstr "Uveďte prosím platnou organizační jednotku"
 
 msgid "Save and add another"
 msgstr "Uložit a přidat další"
@@ -1125,6 +1131,12 @@ msgstr ""
 "Pro kontrolu zápisů v tomto chráněném programu musíte uvést důvod. Veškerá "
 "aktivita bude zaznamenána."
 
+msgid "Unsaved changes"
+msgstr ""
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Akce zápisu"
 
@@ -1252,9 +1264,6 @@ msgstr "Přidat souřadnice"
 
 msgid "Add area"
 msgstr "Přidat oblast"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Uveďte prosím platnou organizační jednotku"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organizační jednotku nelze načíst. Zkuste to znovu později."
