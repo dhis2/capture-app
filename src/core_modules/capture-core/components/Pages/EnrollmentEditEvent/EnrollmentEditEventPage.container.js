@@ -37,11 +37,7 @@ import { cleanUpDataEntry } from '../../DataEntry';
 import { useLinkedRecordClick } from '../common/TEIRelationshipsWidget';
 import { pageKeys } from '../../App/withAppUrlSync';
 import { withErrorMessageHandler } from '../../../HOC';
-import {
-    DataStoreKeyByPage,
-    EnrollmentPageKeys,
-    useEnrollmentPageLayout,
-} from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import { DataStoreKeyByPage, useEnrollmentPageLayout } from '../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import { DefaultPageLayout } from './PageLayout/DefaultPageLayout.constants';
 import { getProgramEventAccess } from '../../../metaData';
 import { rollbackAssignee, setAssignee } from './EnrollmentEditEventPage.actions';
@@ -249,9 +245,8 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const scheduleDate = getEventScheduleDate(event);
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
-    const userInteractionInProgress =
-        useSelector(state => dataEntryHasChanges(state, dataEntryKey)) &&
-        currentPageMode === EnrollmentPageKeys.EDIT_EVENT;
+    const userInteractionInProgress = useSelector(state => dataEntryHasChanges(state, dataEntryKey));
+
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
     const eventAccess = getProgramEventAccess(programId, programStage?.id);
 
