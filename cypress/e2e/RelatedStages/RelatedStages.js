@@ -140,7 +140,7 @@ And('you click the Enter details action button', () => {
         .click();
 });
 
-Then('you can see the Baby postnatal new event form where you can enter details', () => {
+Then('you can see the Baby postnatal new event form', () => {
     cy.get('[data-test="edit-event-report-tab"]')
         .should('contain', 'Report');
     cy.get('[data-test="edit-event-schedule-tab"]')
@@ -232,8 +232,6 @@ And(/^you click the save (.*) submit button$/, (TEType) => {
 
 And('you navigate to the Enrollment dashboard', () => {
     cy.contains('Enrollment dashboard')
-        .click();
-    cy.contains('Yes, discard changes')
         .click();
 });
 
