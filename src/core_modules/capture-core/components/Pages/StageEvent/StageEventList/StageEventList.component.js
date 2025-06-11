@@ -7,7 +7,7 @@ import { Widget } from '../../../Widget';
 import type { Props } from './StageEventList.types';
 import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingLists } from '../../../WorkingLists/EventWorkingLists';
-import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
+import { TrackerWorkingList } from '../../../WorkingLists/TrackerWorkingList';
 
 const getStyles = () => ({});
 
@@ -34,7 +34,7 @@ const StageEventListPlain = ({ stage, programId, ...passOnProps }) => {
                 {programType === programTypes.EVENT_PROGRAM && <EventWorkingLists
                     {...workingListProps}
                 />}
-                {programType === programTypes.TRACKER_PROGRAM && <TeiWorkingLists
+                {programType === programTypes.TRACKER_PROGRAM && <TrackerWorkingList
                     {...workingListProps}
                 />}
             </Widget>
