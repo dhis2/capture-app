@@ -8,7 +8,7 @@ export const PluginConfigConvertFns = Object.freeze({
     attributeValues: (value: any, attributes: Attributes) => {
         if (Array.isArray(value)) {
             const attributeValues = value.reduce((acc, curr: any) => {
-                const configAttribute = attributes && attributes[curr.attribute.id];
+                const configAttribute = attributes?.[curr.attribute.id];
                 if (!configAttribute) return acc;
 
                 acc[configAttribute.IdFromPlugin] = curr.value;
