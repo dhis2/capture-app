@@ -16,8 +16,7 @@ export const TopBarActions = ({
     selectedProgramId,
     selectedOrgUnitId,
     isUserInteractionInProgress = false,
-    onOpenNewRegistrationPage = () => {
-    },
+    onOpenNewRegistrationPage = () => {},
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {

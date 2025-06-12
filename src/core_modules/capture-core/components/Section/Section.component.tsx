@@ -3,7 +3,7 @@ import React, { Component, type ReactElement, type ComponentType } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         flexGrow: 1,
         display: 'flex',

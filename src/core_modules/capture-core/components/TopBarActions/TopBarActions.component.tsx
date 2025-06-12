@@ -6,7 +6,7 @@ import { scopeTypes } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         alignItems: 'center',
@@ -60,23 +60,18 @@ const ActionButtonsPlain = ({
                                 dataTest="new-menuitem-one"
                                 label={`${i18n.t('Create new in another program')}...`}
                                 onClick={() => { onNewClickWithoutProgramId(); }}
-                                suffix=""
+                                suffix={null}
                             />
                         </FlyoutMenu>
                     }
                 >
-                    {(() => {
-                        if (scopeType === scopeTypes.TRACKER_PROGRAM) {
-                            return i18n.t('Create new {{trackedEntityType}}', {
-                                trackedEntityType: trackedEntityName,
-                                interpolation: { escapeValue: false },
-                            });
-                        }
-                        if (scopeType === scopeTypes.EVENT_PROGRAM) {
-                            return i18n.t('Create new event');
-                        }
-                        return '';
-                    })()}
+                    {scopeType === scopeTypes.TRACKER_PROGRAM 
+                        ? i18n.t('Create new {{trackedEntityType}}', {
+                            trackedEntityType: trackedEntityName,
+                            interpolation: { escapeValue: false },
+                        })
+                        : i18n.t('Create new event')
+                    }
                 </SplitButton>
             )}
 
@@ -108,13 +103,13 @@ const ActionButtonsPlain = ({
                                     interpolation: { escapeValue: false },
                                 })}
                                 onClick={() => { onFindClick(); setOpenSearch(prev => !prev); }}
-                                suffix=""
+                                suffix={null}
                             />
                             <MenuItem
                                 dataTest="find-menuitem-two"
                                 label={`${i18n.t('Search')}...`}
                                 onClick={() => { onFindClickWithoutProgramId(); setOpenSearch(prev => !prev); }}
-                                suffix=""
+                                suffix={null}
                             />
                         </FlyoutMenu>
                     }

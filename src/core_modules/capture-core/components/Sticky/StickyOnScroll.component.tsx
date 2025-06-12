@@ -11,7 +11,7 @@ type OwnProps = {
 
 type Props = OwnProps & WithStyles<typeof styles>;
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         position: 'relative' as const,
     },
@@ -43,27 +43,18 @@ class StickyOnScrollPlain extends React.Component<Props> {
         window.removeEventListener('scroll', this.onScroll);
     }
 
-    stickyContainer: any;
-
-    isNearTop = () => window.pageYOffset + this.props.offsetTop > this.stickyContainer.parentElement.offsetTop
-
-    isAtBottomOfContainer = () => {
-        const elementRect = this.stickyContainer.getBoundingClientRect();
-        const parentRect = this.stickyContainer.parentElement.getBoundingClientRect();
-        return parentRect.bottom <= elementRect.bottom && (this.stickyContainer.offsetTop - Math.abs(parentRect.top) < this.props.offsetTop);
+    onResize = () => {
+        if (this.resizeTimer) {
+            window.clearTimeout(this.resizeTimer);
+        }
+        this.resizeTimer = window.setTimeout(this.setSticky, 250);
     }
 
-    stickyDisabled = () => {
-        const width = document.documentElement ? document.documentElement.clientWidth : 0;
-        const height = document.documentElement ? document.documentElement.clientHeight : 0;
-        return (
-            height - (this.props.offsetTop + this.stickyContainer.offsetHeight)) < 0 ||
-            width < this.props.minViewpointWidth;
-    }
-
-    setStickyContainerInstance = (instance) => {
-        this.stickyContainer = instance;
-        this.setSticky();
+    onScroll = () => {
+        if (this.scrollTimer) {
+            window.clearTimeout(this.scrollTimer);
+        }
+        this.scrollTimer = window.setTimeout(this.setSticky, 10);
     }
 
     getRightMargin = () => {
@@ -71,6 +62,11 @@ class StickyOnScrollPlain extends React.Component<Props> {
         const width = document.documentElement ? document.documentElement.clientWidth : 0;
         const rightParent = this.stickyContainer.parentElement.offsetLeft + parentElement.offsetWidth;
         return width - rightParent;
+    }
+
+    setStickyContainerInstance = (instance) => {
+        this.stickyContainer = instance;
+        this.setSticky();
     }
 
     setSticky = () => {
@@ -96,23 +92,25 @@ class StickyOnScrollPlain extends React.Component<Props> {
         }
     }
 
+    stickyContainer: any;
     resizeTimer: any;
-
-    onResize = () => {
-        if (this.resizeTimer) {
-            window.clearTimeout(this.resizeTimer);
-        }
-        this.resizeTimer = window.setTimeout(this.setSticky, 250);
-    }
-
     scrollTimer: any;
 
-    onScroll = () => {
-        if (this.scrollTimer) {
-            window.clearTimeout(this.scrollTimer);
-        }
-        this.scrollTimer = window.setTimeout(this.setSticky, 10);
+    stickyDisabled = () => {
+        const width = document.documentElement ? document.documentElement.clientWidth : 0;
+        const height = document.documentElement ? document.documentElement.clientHeight : 0;
+        return (
+            height - (this.props.offsetTop + this.stickyContainer.offsetHeight)) < 0 ||
+            width < this.props.minViewpointWidth;
     }
+
+    isAtBottomOfContainer = () => {
+        const elementRect = this.stickyContainer.getBoundingClientRect();
+        const parentRect = this.stickyContainer.parentElement.getBoundingClientRect();
+        return parentRect.bottom <= elementRect.bottom && (this.stickyContainer.offsetTop - Math.abs(parentRect.top) < this.props.offsetTop);
+    }
+
+    isNearTop = () => window.pageYOffset + this.props.offsetTop > this.stickyContainer.parentElement.offsetTop
 
 
     render() {
