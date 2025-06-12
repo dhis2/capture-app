@@ -24,6 +24,7 @@
       "capture-ui": ["core_modules/capture-ui"],
       "capture-ui/*": ["core_modules/capture-ui/*"],
       "capture-core-utils": ["core_modules/capture-core-utils"],
+      "capture-core-utils/*": ["core_modules/capture-core-utils/*"],
       "@dhis2/rules-engine-javascript": ["../packages/rules-engine/src"]
     }
   },
