@@ -1,3 +1,5 @@
+// @flow
+/* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
@@ -38,7 +40,7 @@ const onValidateOnScopeTrackedEntityType = (
     dataElementUnique: DataElementUnique,
     dataElement: DataElement,
     serverValue: any,
-    contextProps: Record<string, any>,
+    contextProps: Object = {},
     querySingleResource: QuerySingleResource,
 ) => {
     let requestPromise;
@@ -72,7 +74,7 @@ const onValidateOnScopeTrackedEntityType = (
         .then((result) => {
             const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
             const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
-            const trackedEntityInstance = otherTrackedEntityInstances?.[0] || {};
+            const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
             const data = {
                 id: trackedEntityInstance.trackedEntity,
                 tetId: trackedEntityInstance.trackedEntityType,
@@ -85,96 +87,6 @@ const onValidateOnScopeTrackedEntityType = (
         });
 };
 
-const validateUnsavedAttributeValues = (contextProps: Record<string, any>, dataElementId: string, serverValue: any) => {
-    if (!contextProps.onGetUnsavedAttributeValues) {
-        return null;
-    }
-
-    const unsavedAttributeValues = contextProps.onGetUnsavedAttributeValues(dataElementId);
-    if (!unsavedAttributeValues) {
-        return null;
-    }
-
-    const foundValue = unsavedAttributeValues.find(usav => usav === serverValue);
-    if (foundValue) {
-        return {
-            valid: false,
-            data: {
-                attributeValueExistsUnsaved: true,
-            },
-        };
-    }
-
-    return null;
-};
-
-const createTrackedEntityRequest = (
-    scope: string,
-    contextProps: Record<string, any>,
-    dataElementId: string,
-    serverValue: any,
-    querySingleResource: QuerySingleResource,
-) => {
-    if (scope === dataElementUniqueScope.ORGANISATION_UNIT) {
-        const orgUnitId = contextProps.orgUnitId;
-        const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
-            ? 'orgUnits'
-            : 'orgUnit';
-        return querySingleResource({
-            resource: 'tracker/trackedEntities',
-            params: {
-                program: contextProps.programId,
-                [orgUnitQueryParam]: orgUnitId,
-                filter: `${dataElementId}:EQ:${escapeString(serverValue)}`,
-            },
-        });
-    }
-    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
-        ? 'orgUnitMode'
-        : 'ouMode';
-    return querySingleResource({
-        resource: 'tracker/trackedEntities',
-        params: {
-            program: contextProps.programId,
-            [orgUnitModeQueryParam]: 'ACCESSIBLE',
-            filter: `${dataElementId}:EQ:${escapeString(serverValue)}`,
-        },
-    });
-};
-
-const processValidationResult = (
-    result: any,
-    contextProps: Record<string, any>,
-    dataEntry: DataElementUnique,
-    dataElement: DataElement,
-    serverValue: any,
-    querySingleResource: QuerySingleResource,
-) => {
-    const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
-    const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
-
-    if (otherTrackedEntityInstances.length === 0) {
-        return onValidateOnScopeTrackedEntityType(
-            dataEntry,
-            dataElement,
-            serverValue,
-            contextProps,
-            querySingleResource,
-        );
-    }
-
-    const trackedEntityInstance = otherTrackedEntityInstances?.[0] || {};
-    const data = {
-        id: trackedEntityInstance.trackedEntity,
-        tetId: trackedEntityInstance.trackedEntityType,
-    };
-
-    return {
-        valid: otherTrackedEntityInstances.length === 0,
-        data,
-    };
-};
-
 const buildDataElementUnique = (
     dataElement: DataElement,
     trackedEntityAttribute: TrackedEntityAttribute,
@@ -185,33 +97,78 @@ const buildDataElementUnique = (
             ? dataElementUniqueScope.ORGANISATION_UNIT
             : dataElementUniqueScope.ENTIRE_SYSTEM;
 
-        dataEntry.onValidate = (value: any, contextProps: Record<string, any> = {}) => {
+        dataEntry.onValidate = (value: any, contextProps: Object = {}) => {
             const serverValue = pipe(convertFormToClient, convertClientToServer)(
                 value,
                 trackedEntityAttribute.valueType,
             );
 
-            const unsavedValidation = validateUnsavedAttributeValues(contextProps, dataElement.id, serverValue);
-            if (unsavedValidation) {
-                return unsavedValidation;
+            if (contextProps.onGetUnsavedAttributeValues) {
+                const unsavedAttributeValues = contextProps.onGetUnsavedAttributeValues(dataElement.id);
+                if (unsavedAttributeValues) {
+                    const foundValue = unsavedAttributeValues.find(usav => usav === serverValue);
+                    if (foundValue) {
+                        return {
+                            valid: false,
+                            data: {
+                                attributeValueExistsUnsaved: true,
+                            },
+                        };
+                    }
+                }
             }
 
-            const requestPromise = createTrackedEntityRequest(
-                dataEntry.scope,
-                contextProps,
-                dataElement.id,
-                serverValue,
-                querySingleResource,
-            );
+            let requestPromise;
+            if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
+                const orgUnitId = contextProps.orgUnitId;
+                const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+                    ? 'orgUnits'
+                    : 'orgUnit';
+                requestPromise = querySingleResource({
+                    resource: 'tracker/trackedEntities',
+                    params: {
+                        program: contextProps.programId,
+                        [orgUnitQueryParam]: orgUnitId,
+                        filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
+                    },
+                });
+            } else {
+                const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+                    ? 'orgUnitMode'
+                    : 'ouMode';
+                requestPromise = querySingleResource({
+                    resource: 'tracker/trackedEntities',
+                    params: {
+                        program: contextProps.programId,
+                        [orgUnitModeQueryParam]: 'ACCESSIBLE',
+                        filter: `${dataElement.id}:EQ:${escapeString(serverValue)}`,
+                    },
+                });
+            }
+            return requestPromise.then((result) => {
+                const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
+                const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
+                if (otherTrackedEntityInstances.length === 0) {
+                    return onValidateOnScopeTrackedEntityType(
+                        dataEntry,
+                        dataElement,
+                        serverValue,
+                        contextProps,
+                        querySingleResource,
+                    );
+                }
+                const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
 
-            return requestPromise.then(result => processValidationResult(
-                result,
-                contextProps,
-                dataEntry,
-                dataElement,
-                serverValue,
-                querySingleResource,
-            ));
+                const data = {
+                    id: trackedEntityInstance.trackedEntity,
+                    tetId: trackedEntityInstance.trackedEntityType,
+                };
+
+                return {
+                    valid: otherTrackedEntityInstances.length === 0,
+                    data,
+                };
+            });
         };
 
         if (trackedEntityAttribute.pattern) {
@@ -226,11 +183,11 @@ const setBaseProperties = async ({
     trackedEntityAttribute,
     querySingleResource,
 }: {
-    dataElement: DataElement;
-    optionSets: Array<OptionSetType>;
-    programTrackedEntityAttribute: ProgramTrackedEntityAttribute;
-    trackedEntityAttribute: TrackedEntityAttribute;
-    querySingleResource: QuerySingleResource;
+    dataElement: DataElement,
+    optionSets: Array<OptionSetType>,
+    programTrackedEntityAttribute: ProgramTrackedEntityAttribute,
+    trackedEntityAttribute: TrackedEntityAttribute,
+    querySingleResource: QuerySingleResource,
 }) => {
     dataElement.id = trackedEntityAttribute.id;
     dataElement.compulsory = programTrackedEntityAttribute.mandatory;
@@ -248,13 +205,13 @@ const setBaseProperties = async ({
         dataElement.unique = buildDataElementUnique(dataElement, trackedEntityAttribute, querySingleResource);
     }
 
-    if (trackedEntityAttribute.optionSet?.id) {
+    if (trackedEntityAttribute.optionSet && trackedEntityAttribute.optionSet.id) {
         dataElement.optionSet = await buildOptionSet(
             dataElement,
             optionSets,
             trackedEntityAttribute.optionSet.id,
             programTrackedEntityAttribute.renderOptionsAsRadio,
-        ) ?? undefined;
+        );
     }
 };
 
@@ -286,7 +243,7 @@ const buildDateDataElement = async (
 ) => {
     const dateDataElement = new DateDataElement();
     dateDataElement.type = dataElementTypes.DATE;
-    dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate ?? undefined;
+    dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate;
     await setBaseProperties({
         dataElement: dateDataElement,
         optionSets,
@@ -301,7 +258,7 @@ const buildOptionSet = async (
     dataElement: DataElement,
     optionSets: Array<OptionSetType>,
     optionSetId: string,
-    renderOptionsAsRadio?: boolean | null,
+    renderOptionsAsRadio: ?boolean,
 ) => {
     const optionSetAPI = optionSets.find(optionSet => optionSet.id === optionSetId);
 
@@ -328,9 +285,9 @@ const buildOptionSet = async (
         new Map(
             optionSetAPI.optionGroups.map(group => [
                 group.id,
-                new OptionGroup(function () {
-                    this.id = group.id;
-                    this.optionIds = new Map(group.options.map(option => [option, option]));
+                new OptionGroup((o) => {
+                    o.id = group.id;
+                    o.optionIds = new Map(group.options.map(option => [option, option]));
                 }),
             ]),
         );
@@ -343,7 +300,7 @@ const buildOptionSet = async (
         convertOptionSetValue,
         optionSetAPI.attributeValues,
     );
-    optionSet.inputType = renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : undefined;
+    optionSet.inputType = renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null;
     return optionSet;
 };
 
