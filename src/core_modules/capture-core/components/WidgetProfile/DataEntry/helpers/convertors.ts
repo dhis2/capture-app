@@ -1,5 +1,3 @@
-// @flow
-
 export const getProgramStageSectionId = (valueApi: any) => valueApi?.programStageSection?.id;
 
 export const getProgramStageId = (valueApi: any) => valueApi?.programStage?.id;

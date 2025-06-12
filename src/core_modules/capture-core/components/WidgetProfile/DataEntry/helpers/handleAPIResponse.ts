@@ -1,5 +1,3 @@
-// @flow
-
 export const REQUESTED_ENTITIES = Object.freeze({
     events: 'events',
     trackedEntities: 'trackedEntities',
@@ -10,5 +8,5 @@ export const handleAPIResponse = (resourceName: string, apiResponse: any) => {
     if (!apiResponse) {
         return [];
     }
-    return apiResponse[resourceName] || apiResponse.instances || [];
+    return apiResponse[resourceName] ?? apiResponse.instances ?? [];
 };
