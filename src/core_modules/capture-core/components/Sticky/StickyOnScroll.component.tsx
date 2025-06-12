@@ -1,21 +1,17 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { type ReactNode, type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 
-type Props = {
-    offsetTop: number,
-    minViewpointWidth: number,
-    children: React.Node,
-    containerClass?: ?string,
-    classes: {
-        container: string,
-        stickyContainerAbsolute: string,
-        stickyContainerFixed: string,
-        stickyContainerAtBottom: string,
-    },
-}
+type OwnProps = {
+    offsetTop: number;
+    minViewpointWidth: number;
+    children: ReactNode;
+    containerClass?: string;
+};
 
-const styles = () => ({
+type Props = OwnProps & WithStyles<typeof styles>;
+
+const styles: Readonly<any> = {
     container: {
         position: 'relative',
     },
@@ -29,7 +25,7 @@ const styles = () => ({
         position: 'absolute',
         bottom: 0,
     },
-});
+};
 
 class StickyOnScrollPlain extends React.Component<Props> {
     stickyContainer: any;
@@ -129,4 +125,4 @@ class StickyOnScrollPlain extends React.Component<Props> {
     }
 }
 
-export const StickyOnScroll = withStyles(styles)(StickyOnScrollPlain);
+export const StickyOnScroll = withStyles(styles)(StickyOnScrollPlain) as ComponentType<OwnProps>;

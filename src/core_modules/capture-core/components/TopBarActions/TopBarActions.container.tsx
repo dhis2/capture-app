@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import { ActionButtons } from './TopBarActions.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
@@ -35,7 +34,7 @@ export const TopBarActions = ({
     const { navigate } = useNavigate();
 
     const newRegistrationPage = () => {
-        const queryArgs = {};
+        const queryArgs: Record<string, string> = {};
         if (selectedOrgUnitId) {
             queryArgs.orgUnitId = selectedOrgUnitId;
         }
@@ -52,7 +51,7 @@ export const TopBarActions = ({
     };
 
     const searchPage = () => {
-        const queryArgs = {};
+        const queryArgs: Record<string, string> = {};
         if (selectedOrgUnitId) {
             queryArgs.orgUnitId = selectedOrgUnitId;
         }
