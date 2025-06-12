@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator, featureAvailable, FEATURES } from 'capture-core-utils';
@@ -73,7 +72,7 @@ const onValidateOnScopeTrackedEntityType = (
         .then((result) => {
             const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
             const otherTrackedEntityInstances = apiTrackedEntities.filter(item => item.trackedEntity !== contextProps.trackedEntityInstanceId);
-            const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+            const trackedEntityInstance = otherTrackedEntityInstances?.[0] || {};
             const data = {
                 id: trackedEntityInstance.trackedEntity,
                 tetId: trackedEntityInstance.trackedEntityType,
@@ -164,7 +163,7 @@ const processValidationResult = (
         );
     }
 
-    const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) || {};
+    const trackedEntityInstance = otherTrackedEntityInstances?.[0] || {};
     const data = {
         id: trackedEntityInstance.trackedEntity,
         tetId: trackedEntityInstance.trackedEntityType,
@@ -249,7 +248,7 @@ const setBaseProperties = async ({
         dataElement.unique = buildDataElementUnique(dataElement, trackedEntityAttribute, querySingleResource);
     }
 
-    if (trackedEntityAttribute.optionSet && trackedEntityAttribute.optionSet.id) {
+    if (trackedEntityAttribute.optionSet?.id) {
         dataElement.optionSet = await buildOptionSet(
             dataElement,
             optionSets,

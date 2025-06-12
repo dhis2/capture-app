@@ -1,8 +1,6 @@
-/* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, capitalizeFirstLetter } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import type {
     ProgramTrackedEntityAttribute,
     TrackedEntityAttribute,
@@ -396,7 +394,7 @@ const processDataEntryFormConfig = async (
     minorServerVersion: number,
     renderFoundation: RenderFoundation,
 ) => {
-    const sectionPromises = (dataEntryFormConfig as any).map((formConfigSection: any) =>
+    const sectionPromises = (dataEntryFormConfig as any).map(async (formConfigSection: any) =>
         processFormConfigSection(
             formConfigSection,
             trackedEntityAttributeDictionary,
@@ -467,6 +465,6 @@ export const build = async (
     minorServerVersion: number,
     dataEntryFormConfig?: DataEntryFormConfig | null,
 ) => {
-    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) || {};
+    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) ?? {};
     setFormFoundation && setFormFoundation(formFoundation);
 };
