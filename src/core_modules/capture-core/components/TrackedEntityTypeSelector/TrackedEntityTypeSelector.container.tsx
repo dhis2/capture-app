@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import type { OwnProps } from './TrackedEntityTypeSelector.types';
@@ -9,7 +8,7 @@ export const TrackedEntityTypeSelector = ({ onSelect, accessNeeded = 'read', hea
     const dispatch = useDispatch();
 
     const dispatchSetTrackedEntityTypeIdOnUrl = useCallback(
-        ({ trackedEntityTypeId }) => { dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId })); },
+        ({ trackedEntityTypeId }: { trackedEntityTypeId: string }) => { dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId })); },
         [dispatch]);
 
     return (
