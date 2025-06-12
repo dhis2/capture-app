@@ -45,12 +45,10 @@ const renderComponent = (
     }
     const customSettings = getCustomSettings && getCustomSettings(settings);
 
-    let Widget = MemoizedWidgets[name];
-
-    if (!Widget) {
-        Widget = widgetConfig.Component;
-        MemoizedWidgets[name] = React.memo(Widget);
+    if (!MemoizedWidgets[name]) {
+        MemoizedWidgets[name] = React.memo(widgetConfig.Component);
     }
+    const Widget = MemoizedWidgets[name];
 
     return (
         <Widget
