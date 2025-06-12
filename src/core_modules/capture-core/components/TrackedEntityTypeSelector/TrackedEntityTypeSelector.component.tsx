@@ -62,14 +62,10 @@ export const TrackedEntityTypeSelectorPlain =
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
                               .filter(({ trackedEntityTypeAccess }: any) => {
                                   if (accessNeeded === 'write') {
-                                      return trackedEntityTypeAccess
-                                        && trackedEntityTypeAccess.data
-                                        && trackedEntityTypeAccess.data.write;
+                                      return trackedEntityTypeAccess?.data?.write;
                                   }
                                   if (accessNeeded === 'read') {
-                                      return trackedEntityTypeAccess
-                                        && trackedEntityTypeAccess.data
-                                        && trackedEntityTypeAccess.data.read;
+                                      return trackedEntityTypeAccess?.data?.read;
                                   }
                                   return false;
                               })
