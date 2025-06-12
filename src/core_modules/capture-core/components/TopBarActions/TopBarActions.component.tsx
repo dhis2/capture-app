@@ -65,7 +65,7 @@ const ActionButtonsPlain = ({
                         </FlyoutMenu>
                     }
                 >
-                    {scopeType === scopeTypes.TRACKER_PROGRAM 
+                    {scopeType === scopeTypes.TRACKER_PROGRAM
                         ? i18n.t('Create new {{trackedEntityType}}', {
                             trackedEntityType: trackedEntityName,
                             interpolation: { escapeValue: false },

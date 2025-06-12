@@ -7,12 +7,12 @@ const styles: Readonly<any> = {
     container: {
         flexGrow: 1,
         display: 'flex',
-        flexDirection: 'column' as const,
-        position: 'relative' as const,
+        flexDirection: 'column',
+        position: 'relative',
         border: `1px solid ${colors.grey300}`,
     },
     mainActionButton: {
-        position: 'absolute' as const,
+        position: 'absolute',
         right: 15,
         top: 30,
     },
