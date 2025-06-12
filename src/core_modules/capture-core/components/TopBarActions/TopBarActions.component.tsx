@@ -1,13 +1,12 @@
-// @flow
 import React, { type ComponentType, useState, useEffect } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, DropdownButton, FlyoutMenu, MenuItem, SplitButton } from '@dhis2/ui';
 import { scopeTypes } from '../../metaData';
 import { useScopeInfo } from '../../hooks/useScopeInfo';
 import type { PlainProps } from './TopBarActions.types';
 
-const styles = () => ({
+const styles = {
     container: {
         display: 'flex',
         alignItems: 'center',
@@ -15,7 +14,10 @@ const styles = () => ({
         gap: `${spacers.dp4}`,
         height: '40px',
     },
-});
+    marginRight: {
+        marginRight: spacers.dp8,
+    },
+};
 
 const ActionButtonsPlain = ({
     onNewClick,
@@ -25,7 +27,7 @@ const ActionButtonsPlain = ({
     selectedProgramId,
     classes,
     openConfirmDialog,
-}: PlainProps & CssClasses) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
     const [openSearch, setOpenSearch] = useState(false);
 
@@ -58,19 +60,23 @@ const ActionButtonsPlain = ({
                                 dataTest="new-menuitem-one"
                                 label={`${i18n.t('Create new in another program')}...`}
                                 onClick={() => { onNewClickWithoutProgramId(); }}
+                                suffix=""
                             />
                         </FlyoutMenu>
                     }
                 >
-                    {scopeType === scopeTypes.TRACKER_PROGRAM && (
-                        i18n.t('Create new {{trackedEntityType}}', {
-                            trackedEntityType: trackedEntityName,
-                            interpolation: { escapeValue: false },
-                        })
-                    )}
-                    {scopeType === scopeTypes.EVENT_PROGRAM && (
-                        i18n.t('Create new event')
-                    )}
+                    {(() => {
+                        if (scopeType === scopeTypes.TRACKER_PROGRAM) {
+                            return i18n.t('Create new {{trackedEntityType}}', {
+                                trackedEntityType: trackedEntityName,
+                                interpolation: { escapeValue: false },
+                            });
+                        }
+                        if (scopeType === scopeTypes.EVENT_PROGRAM) {
+                            return i18n.t('Create new event');
+                        }
+                        return '';
+                    })()}
                 </SplitButton>
             )}
 
@@ -102,11 +108,13 @@ const ActionButtonsPlain = ({
                                     interpolation: { escapeValue: false },
                                 })}
                                 onClick={() => { onFindClick(); setOpenSearch(prev => !prev); }}
+                                suffix=""
                             />
                             <MenuItem
                                 dataTest="find-menuitem-two"
                                 label={`${i18n.t('Search')}...`}
                                 onClick={() => { onFindClickWithoutProgramId(); setOpenSearch(prev => !prev); }}
+                                suffix=""
                             />
                         </FlyoutMenu>
                     }
@@ -118,4 +126,4 @@ const ActionButtonsPlain = ({
     );
 };
 
-export const ActionButtons: ComponentType<PlainProps> = withStyles(styles)(ActionButtonsPlain);
+export const ActionButtons = withStyles(styles)(ActionButtonsPlain) as ComponentType<PlainProps>;

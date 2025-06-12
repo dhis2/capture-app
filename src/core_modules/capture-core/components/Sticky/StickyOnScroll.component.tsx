@@ -1,41 +1,33 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { type ReactNode, type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 
-type Props = {
-    offsetTop: number,
-    minViewpointWidth: number,
-    children: React.Node,
-    containerClass?: ?string,
-    classes: {
-        container: string,
-        stickyContainerAbsolute: string,
-        stickyContainerFixed: string,
-        stickyContainerAtBottom: string,
-    },
-}
+type OwnProps = {
+    offsetTop: number;
+    minViewpointWidth: number;
+    children: ReactNode;
+    containerClass?: string;
+};
 
-const styles = () => ({
+type Props = OwnProps & WithStyles<typeof styles>;
+
+const styles = {
     container: {
-        position: 'relative',
+        position: 'relative' as const,
     },
     stickyContainerAbsolute: {
-        position: 'static',
+        position: 'static' as const,
     },
     stickyContainerFixed: {
-        position: 'fixed',
+        position: 'fixed' as const,
     },
     stickyContainerAtBottom: {
-        position: 'absolute',
+        position: 'absolute' as const,
         bottom: 0,
     },
-});
+};
 
 class StickyOnScrollPlain extends React.Component<Props> {
-    stickyContainer: any;
-    scrollTimer: any;
-    resizeTimer: any;
-
     static defaultProps = {
         offsetTop: 0,
         minViewpointWidth: 0,
@@ -50,6 +42,8 @@ class StickyOnScrollPlain extends React.Component<Props> {
         window.removeEventListener('resize', this.onResize);
         window.removeEventListener('scroll', this.onScroll);
     }
+
+    stickyContainer: any;
 
     isNearTop = () => window.pageYOffset + this.props.offsetTop > this.stickyContainer.parentElement.offsetTop
 
@@ -102,12 +96,16 @@ class StickyOnScrollPlain extends React.Component<Props> {
         }
     }
 
+    resizeTimer: any;
+
     onResize = () => {
         if (this.resizeTimer) {
             window.clearTimeout(this.resizeTimer);
         }
         this.resizeTimer = window.setTimeout(this.setSticky, 250);
     }
+
+    scrollTimer: any;
 
     onScroll = () => {
         if (this.scrollTimer) {
@@ -129,4 +127,4 @@ class StickyOnScrollPlain extends React.Component<Props> {
     }
 }
 
-export const StickyOnScroll = withStyles(styles)(StickyOnScrollPlain);
+export const StickyOnScroll = withStyles(styles)(StickyOnScrollPlain) as ComponentType<OwnProps>;
