@@ -6,7 +6,8 @@ export type CurrentSearchTerms = Array<{|
   +name: string,
   +value: any,
   +id: string,
-  +type: $Values<dataElementTypes>
+  +type: $Values<dataElementTypes>,
+  +optionSet?: Object
 |}>
 
 export type FormsValues = {

@@ -6,7 +6,12 @@ import type { AvailableSearchOption } from '../SearchBox.types';
 import type { ListItem } from '../../CardList/CardList.types';
 
 
-export type CardDataElementsInformation = Array<{| id: string, name: string, type: $Values<dataElementTypes> |}>
+export type CardDataElementsInformation = Array<{|
+  id: string,
+  name: string,
+  type: $Values<dataElementTypes>,
+  optionSet?: Object
+|}>
 
 export type CardProfileImageElementInformation = $ReadOnly<{| id: string, name: string, type: "IMAGE" |}>
 
