@@ -1,7 +1,7 @@
-// @flow
 import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 import {
     SingleSelectField,
     SingleSelectOption,
@@ -12,7 +12,7 @@ import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms, useCurrentTrackedEntityTypeId } from '../../hooks';
 import { InfoIconText } from '../InfoIconText';
 
-const styles = ({ typography }) => ({
+const styles: Readonly<any> = ({ typography }: Theme) => ({
     searchRow: {
         maxWidth: typography.pxToRem(400),
         display: 'flex',
@@ -32,14 +32,15 @@ const styles = ({ typography }) => ({
     },
 });
 
+type ComponentProps = Props & WithStyles<typeof styles>;
 
 export const TrackedEntityTypeSelectorPlain =
-  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl, accessNeeded, headerText, footerText }: Props) => {
+  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl, accessNeeded, headerText, footerText }: ComponentProps) => {
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
       const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
 
-      const handleSelectionChange = ({ selected }) => {
-          onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE);
+      const handleSelectionChange = ({ selected }: { selected: string }) => {
+          onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE as keyof typeof scopeTypes);
           onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: selected });
       };
 
@@ -59,8 +60,7 @@ export const TrackedEntityTypeSelectorPlain =
                   >
                       {
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                              // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                              .filter(({ trackedEntityTypeAccess }) => {
+                              .filter(({ trackedEntityTypeAccess }: any) => {
                                   if (accessNeeded === 'write') {
                                       return trackedEntityTypeAccess
                                         && trackedEntityTypeAccess.data
@@ -73,8 +73,7 @@ export const TrackedEntityTypeSelectorPlain =
                                   }
                                   return false;
                               })
-                              // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                              .map(({ trackedEntityTypeName, trackedEntityTypeId }) =>
+                              .map(({ trackedEntityTypeName, trackedEntityTypeId }: any) =>
                                   (<SingleSelectOption
                                       key={trackedEntityTypeId}
                                       value={trackedEntityTypeId}
@@ -100,4 +99,4 @@ export const TrackedEntityTypeSelectorPlain =
       );
   };
 
-export const TrackedEntityTypeSelectorComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(TrackedEntityTypeSelectorPlain);
+export const TrackedEntityTypeSelectorComponent = withStyles(styles)(TrackedEntityTypeSelectorPlain) as ComponentType<Props>;
