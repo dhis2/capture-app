@@ -23,3 +23,4 @@ export type {
 } from './types';
 export { TEMPLATE_SHARING_TYPE } from './constants';
 export { DownloadDialog } from './DownloadDialog';
+export { BulkActionBar, BulkDataEntryAction, useSelectedRowsController } from './BulkActionBar';

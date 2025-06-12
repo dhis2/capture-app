@@ -148,7 +148,7 @@ class Index extends React.Component<Props> {
         const columnsCount = visibleColumns.length + (getCustomEndCellBody ? 1 : 0);
 
         return updating ? (
-            <DataTableRow className={classes.loadingRow} />
+            <DataTableRow className={classes.loadingRow} dataTest="working-list-table-loading" />
         ) : (
             this.renderRows(visibleColumns, columnsCount)
         );

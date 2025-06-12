@@ -22,6 +22,7 @@ export const TeiWorkingListsReduxProvider = ({
     orgUnitId,
     selectedTemplateId,
     onChangeTemplate,
+    onOpenBulkDataEntryPlugin,
 }: Props) => {
     const program = useTrackerProgram(programId);
     const apiTemplates = useApiTemplate();
@@ -120,6 +121,7 @@ export const TeiWorkingListsReduxProvider = ({
             onAddTemplate={injectCallbacksForAddTemplate}
             onDeleteTemplate={injectCallbacksForDeleteTemplate}
             storeId={storeId}
+            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
         />
     );
 };
