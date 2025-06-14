@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-01-24T15:26:19.128Z\n"
+"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/hisp-uio/teams/100509/sv/)\n"
@@ -32,12 +32,26 @@ msgid ""
 "is not supported. See log for details."
 msgstr ""
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
+
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "Search"
+msgstr "Sök"
 
 msgid "Enrollment dashboard"
 msgstr ""
@@ -50,24 +64,6 @@ msgstr ""
 
 msgid "New event"
 msgstr "Ny händelse"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "Sök"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -210,6 +206,9 @@ msgstr ""
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr ""
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -230,6 +229,9 @@ msgid "Completed"
 msgstr "Avklarad"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -600,19 +602,6 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr ""
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -686,6 +675,19 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+
 msgid "Page is missing required values from URL"
 msgstr ""
 
@@ -731,6 +733,23 @@ msgstr ""
 msgid ""
 "The category option is not valid for the selected organisation unit. Please "
 "select a valid combination."
+msgstr ""
+
+msgid "Get started with Capture app"
+msgstr ""
+
+msgid "Report data"
+msgstr ""
+
+msgid ""
+"Choose a program and organisation unit to see existing data and create new "
+"records."
+msgstr ""
+
+msgid "Click 'Search'. For program-specific results, choose a program first."
+msgstr ""
+
+msgid "Learn more about Capture app"
 msgstr ""
 
 msgid "Please select {{category}}."
@@ -861,9 +880,6 @@ msgstr "indikatorer"
 msgid "Warnings"
 msgstr ""
 
-msgid "Show all events"
-msgstr ""
-
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
 
@@ -887,6 +903,12 @@ msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Missing search criteria"
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -897,9 +919,6 @@ msgid "Loading"
 msgstr ""
 
 msgid "An error occurred while loading the form"
-msgstr ""
-
-msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -920,7 +939,7 @@ msgstr ""
 msgid "No results found for "
 msgstr ""
 
-msgid "Choose an organisation unit"
+msgid "Choose an organisation unit in the form below"
 msgstr ""
 
 msgid "Clear selection"
@@ -968,6 +987,9 @@ msgid ""
 "that use type "
 msgstr ""
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr ""
 
@@ -993,9 +1015,6 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "Back to search"
-msgstr ""
-
 msgid "An error has occurred"
 msgstr ""
 
@@ -1003,9 +1022,6 @@ msgid "Too many results"
 msgstr ""
 
 msgid "Cannot search in all programs"
-msgstr ""
-
-msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
@@ -1072,6 +1088,12 @@ msgstr ""
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
+msgstr ""
+
+msgid "Unsaved changes"
+msgstr "Ej sparade ändringar"
+
+msgid "Continue data entry"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1196,9 +1218,6 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Please provide an valid organisation unit"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1241,6 +1260,12 @@ msgstr ""
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr ""
 
+msgid "Geometry (Area)"
+msgstr ""
+
+msgid "Geometry (Coordinate)"
+msgstr ""
+
 msgid "Event completed"
 msgstr ""
 
@@ -1278,9 +1303,12 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1305,10 +1333,12 @@ msgstr ""
 msgid "Save note"
 msgstr ""
 
+msgid "Edit {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
 msgid " Loading..."
@@ -1368,7 +1398,7 @@ msgstr ""
 msgid "Choose a {{linkableStageLabel}}"
 msgstr ""
 
-msgid "{{ linkableStageLabel }} is not repeatable"
+msgid "{{ linkableStageLabel }} can only have one event"
 msgstr ""
 
 msgid "{{ linkableStageLabel }} has no linkable events"
@@ -1380,10 +1410,22 @@ msgstr ""
 msgid "Ambiguous relationships, contact system administrator"
 msgstr ""
 
+msgid "Enter details"
+msgstr ""
+
+msgid "Linked event"
+msgstr ""
+
 msgid "Enter details now"
 msgstr ""
 
 msgid "Link to an existing event"
+msgstr ""
+
+msgid "The event was successfully linked"
+msgstr ""
+
+msgid "An error occurred while linking the event"
 msgstr ""
 
 msgid "Scheduled date"
@@ -1487,9 +1529,6 @@ msgstr ""
 msgid "An error occurred while loading the widget."
 msgstr ""
 
-msgid "Linked event"
-msgstr ""
-
 msgid ""
 "This {{stageName}} event is linked to a {{linkedStageName}} event. Review "
 "the linked event details before entering data below"
@@ -1504,6 +1543,9 @@ msgstr ""
 msgid "No changes to display"
 msgstr ""
 
+msgid "Data item"
+msgstr ""
+
 msgid "Updated"
 msgstr "Uppdaterad"
 
@@ -1516,10 +1558,16 @@ msgstr "Raderad"
 msgid "Date"
 msgstr "Datum"
 
+msgid "Sort by date"
+msgstr ""
+
 msgid "User"
 msgstr ""
 
-msgid "Data item"
+msgid "Sort by username"
+msgstr ""
+
+msgid "Sort by data item"
 msgstr ""
 
 msgid "Change"
@@ -1632,6 +1680,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"

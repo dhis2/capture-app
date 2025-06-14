@@ -34,6 +34,24 @@ msgstr "造成这种情况的可能原因是不支持浏览器或模式（例如
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "活跃的登记"
+
+msgid "Completed enrollments"
+msgstr "完成登记"
+
+msgid "Cancelled enrollments"
+msgstr "取消登记"
+
+msgid "Search"
+msgstr "搜索"
+
 msgid "Enrollment dashboard"
 msgstr "登记仪表板"
 
@@ -45,24 +63,6 @@ msgstr "编辑事件"
 
 msgid "New event"
 msgstr "新事件"
-
-msgid "Active enrollments"
-msgstr "活跃的登记"
-
-msgid "Completed enrollments"
-msgstr "完成登记"
-
-msgid "Cancelled enrollments"
-msgstr "取消登记"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} 清单"
-
-msgid "Search"
-msgstr "搜索"
-
-msgid "Working List"
-msgstr "工作列表"
 
 msgid "Event list"
 msgstr "事件列表"
@@ -205,6 +205,9 @@ msgstr "分配者"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "保存到 {{orgUnitName}} 中的 {{programName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -226,6 +229,9 @@ msgstr "已完成"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "请在保存事件前添加或取消备注"
+
+msgid "Please provide an valid organisation unit"
+msgstr "请提供有效的组织单位"
 
 msgid "Save and add another"
 msgstr "保存并另外添加"
@@ -1084,6 +1090,12 @@ msgid ""
 "program. All activity will be logged."
 msgstr "您必须提供一个理由来检查此受保护计划的注册情况。所有活动都将被记录。"
 
+msgid "Unsaved changes"
+msgstr "未保存的更改"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "登记行动"
 
@@ -1205,9 +1217,6 @@ msgstr "添加坐标"
 
 msgid "Add area"
 msgstr "添加区域"
-
-msgid "Please provide an valid organisation unit"
-msgstr "请提供有效的组织单位"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索机构。请稍后再试。"

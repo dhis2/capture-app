@@ -1,17 +1,17 @@
 # 
 # Translators:
-# Mai Nguyen <thanhmai.jica@gmail.com>, 2024
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
 # Philip Larsen Donnelly, 2024
 # Em Le <em.hispvietnam@gmail.com>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
+# Mai Nguyen <thanhmai.jica@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
+"Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,6 +38,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Các đăng ký hiện tại"
+
+msgid "Completed enrollments"
+msgstr "Các lần đăng ký đã hoàn thành"
+
+msgid "Cancelled enrollments"
+msgstr "Các lần đăng ký bị hủy"
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
 msgid "Enrollment dashboard"
 msgstr "Bảng thông tin đăng ký"
 
@@ -49,24 +67,6 @@ msgstr "Sửa sự kiện"
 
 msgid "New event"
 msgstr "Sự kiện mới"
-
-msgid "Active enrollments"
-msgstr "Các đăng ký hiện tại"
-
-msgid "Completed enrollments"
-msgstr "Các lần đăng ký đã hoàn thành"
-
-msgid "Cancelled enrollments"
-msgstr "Các lần đăng ký bị hủy"
-
-msgid "{{trackedEntityName}} list"
-msgstr "Danh sách {{trackedEntityName}}"
-
-msgid "Search"
-msgstr "Tìm kiếm"
-
-msgid "Working List"
-msgstr "Danh sách cá thể"
 
 msgid "Event list"
 msgstr "Danh sách sự kiện"
@@ -209,6 +209,9 @@ msgstr "Người nhận"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Đang lưu vào {{programName}}tại {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -232,6 +235,9 @@ msgstr "Hoàn tất"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Hãy thêm hoặc hủy ghi chú trước khi lưu sự kiện"
+
+msgid "Please provide an valid organisation unit"
+msgstr "Vui lòng cung cấp đơn vị hợp lệ"
 
 msgid "Save and add another"
 msgstr "Lưu và thêm sự kiện khác"
@@ -1125,6 +1131,12 @@ msgstr ""
 "Bạn phải cung cấp lý do kiểm tra các đăng ký trong chương trình được bảo vệ "
 "này. Tất cả hoạt động đều được ghi lại."
 
+msgid "Unsaved changes"
+msgstr "Các thay đổi chưa được lưu"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Hành động đăng ký"
 
@@ -1252,9 +1264,6 @@ msgstr "Thêm tọa độ"
 
 msgid "Add area"
 msgstr "Thêm khu vực"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Vui lòng cung cấp đơn vị hợp lệ"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "không thể lấy lại đơn vị. Hãy thử lại sau"

@@ -39,6 +39,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Активные регистрационные записи"
+
+msgid "Completed enrollments"
+msgstr "Завершенные регистрационные записи"
+
+msgid "Cancelled enrollments"
+msgstr "Отмененные регистрационные записи"
+
+msgid "Search"
+msgstr "Поиск"
+
 msgid "Enrollment dashboard"
 msgstr "Регистрационная инфопанель"
 
@@ -50,24 +68,6 @@ msgstr "Редактировать событие"
 
 msgid "New event"
 msgstr "Новое событие"
-
-msgid "Active enrollments"
-msgstr "Активные регистрационные записи"
-
-msgid "Completed enrollments"
-msgstr "Завершенные регистрационные записи"
-
-msgid "Cancelled enrollments"
-msgstr "Отмененные регистрационные записи"
-
-msgid "{{trackedEntityName}} list"
-msgstr "Список: {{trackedEntityName}} "
-
-msgid "Search"
-msgstr "Поиск"
-
-msgid "Working List"
-msgstr " Рабочий список"
 
 msgid "Event list"
 msgstr ""
@@ -211,6 +211,9 @@ msgstr "Назначенный пользователь"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "{{programName}}: Сохранение в {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -235,6 +238,9 @@ msgid "Completed"
 msgstr "Завершен/а/о"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -1138,6 +1144,12 @@ msgstr ""
 "Вы должны указать причину проверки регистрационных записей в данной "
 "защищенной программе. Все действия будут регистрироваться."
 
+msgid "Unsaved changes"
+msgstr "Не сохраненные изменения"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Действия с регистрационной записью"
 
@@ -1273,9 +1285,6 @@ msgstr "Добавить координаты"
 
 msgid "Add area"
 msgstr "Добавить участок"
-
-msgid "Please provide an valid organisation unit"
-msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
