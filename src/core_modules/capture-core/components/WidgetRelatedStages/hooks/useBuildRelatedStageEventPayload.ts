@@ -47,7 +47,7 @@ export const useBuildRelatedStageEventPayload = () => {
         teiId: string;
         enrollmentId: string;
     }) => {
-        if (relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship()) {
+        if (relatedStageRef?.current?.eventHasLinkableStageRelationship()) {
             const isValid = relatedStageRef.current.formIsValidOnSave();
 
             if (!isValid || !relatedStageRef.current?.getLinkedStageValues || !programStageId || !serverRequestEvent) {

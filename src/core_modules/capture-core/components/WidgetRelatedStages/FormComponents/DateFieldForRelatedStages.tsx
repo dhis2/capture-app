@@ -47,7 +47,7 @@ export const DateFieldForRelatedStages = ({
     };
     const calendarType = systemSettingsStore.get().calendar;
     const dateFormat = systemSettingsStore.get().dateFormat;
-    const shouldShowError = (touched || saveAttempted);
+    const shouldShowError = (touched ?? saveAttempted);
     return (
         <DateFieldForForm
             label={scheduledLabel}
