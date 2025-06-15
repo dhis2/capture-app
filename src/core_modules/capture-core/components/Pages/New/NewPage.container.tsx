@@ -1,4 +1,3 @@
-// @flow
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useState } from 'react';
 import type { ComponentType } from 'react';
@@ -20,7 +19,7 @@ import { programCollection } from '../../../metaDataMemoryStores/programCollecti
 import { useCategoryOptionIsValidForOrgUnit } from '../../../hooks/useCategoryComboIsValidForOrgUnit';
 import { TopBar } from './TopBar.container';
 
-const useUserWriteAccess = (scopeId) => {
+const useUserWriteAccess = (scopeId: string) => {
     const scope = getScopeFromScopeId(scopeId);
     if (scopeId && !scope) {
         return false;
@@ -42,7 +41,8 @@ const useUserWriteAccess = (scopeId) => {
         return false;
     }
 };
-export const NewPage: ComponentType<{||}> = () => {
+
+export const NewPage: ComponentType<Record<string, never>> = () => {
     const dispatch = useDispatch();
     const { navigate } = useNavigate();
     const { orgUnitId, programId, teiId } = useLocationQuery();
@@ -52,8 +52,7 @@ export const NewPage: ComponentType<{||}> = () => {
     });
     const { trackedEntityAttributes, loading: isTrackedEntityAttributesLoading } =
         useTrackedEntityAttributes(teiId, programId);
-    // $FlowFixMe
-    const trackedEntityType = program?.trackedEntityType;
+    const trackedEntityType = (program as any)?.trackedEntityType;
     const teiDisplayName =
     trackedEntityAttributes &&
         deriveTeiName(trackedEntityAttributes, trackedEntityType?.id || '', teiId);
@@ -75,24 +74,22 @@ export const NewPage: ComponentType<{||}> = () => {
         [dispatch]);
 
     const error: boolean =
-        useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
+        useSelector(({ activePage }: any) => activePage.selectionsError && activePage.selectionsError.error);
 
     const ready: boolean =
-        useSelector(({ activePage }) => (!activePage.isDataEntryLoading)) && !isTrackedEntityAttributesLoading;
+        useSelector(({ activePage }: any) => (!activePage.isDataEntryLoading)) && !isTrackedEntityAttributesLoading;
 
     const currentScopeId: string =
-        useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
+        useSelector(({ currentSelections }: any) => currentSelections.programId || currentSelections.trackedEntityTypeId);
 
-    // This is combo category selection. When you have selected a program but
-    // the selection is incomplete we want the user to see a specific message
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
     const orgUnitSelectionIncomplete: boolean = useSelector(
-        ({ currentSelections }) => !currentSelections.orgUnitId && !currentSelections.complete,
+        ({ currentSelections }: any) => !currentSelections.orgUnitId && !currentSelections.complete,
     );
 
-    const newPageStatus: $Keys<typeof newPageStatuses> =
-        useSelector(({ newPage }) => newPage.newPageStatus);
+    const newPageStatus: keyof typeof newPageStatuses =
+        useSelector(({ newPage }: any) => newPage.newPageStatus);
 
     const handleMainPageNavigation = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
@@ -101,7 +98,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const writeAccess = useUserWriteAccess(currentScopeId);
 
     const isUserInteractionInProgress: boolean = useSelector(
-        state =>
+        (state: any) =>
             dataEntryHasChanges(state, 'singleEvent-newEvent')
           || dataEntryHasChanges(state, 'relationship-newTei')
           || dataEntryHasChanges(state, 'relationship-newEvent')
@@ -109,7 +106,7 @@ export const NewPage: ComponentType<{||}> = () => {
           || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
     );
 
-    const [newPageKey, setNewPageKey] = useState();
+    const [newPageKey, setNewPageKey] = useState<string>();
     const onOpenNewRegistrationPage = () => {
         setNewPageKey(uuid());
     };
@@ -119,7 +116,7 @@ export const NewPage: ComponentType<{||}> = () => {
             <TopBar
                 orgUnitId={orgUnitId}
                 programId={programId}
-                program={program}
+                program={program as any}
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 teiId={teiId}
                 trackedEntityName={trackedEntityType?.name}

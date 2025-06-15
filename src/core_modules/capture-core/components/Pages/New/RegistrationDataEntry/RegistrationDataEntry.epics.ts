@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
@@ -14,10 +13,10 @@ import {
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { cleanUpUid } from '../NewPage.actions';
 
-export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable) =>
+export const startSavingNewTrackedEntityInstanceEpic = (action$: any) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START),
-        map((action) => {
+        map((action: any) => {
             const { teiPayload } = action.payload;
             return saveNewTrackedEntityInstance(
                 {
@@ -26,10 +25,10 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
         }),
     );
 
-export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
+export const completeSavingNewTrackedEntityInstanceEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
-        flatMap(({ payload: { bundleReport: { typeReportMap } } }) => {
+        flatMap(({ payload: { bundleReport: { typeReportMap } } }: any) => {
             const {
                 currentSelections: { orgUnitId },
             } = store.value;
@@ -41,12 +40,12 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
         }),
     );
 
-export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
-    action$: InputObservable,
+export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
+    action$: any,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
-        map((action) => {
+        map((action: any) => {
             const { enrollmentPayload, uid, redirect } = action.payload;
 
             return saveNewTrackedEntityInstanceWithEnrollment({
@@ -62,13 +61,13 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (
     );
 
 export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { navigate }: ApiUtils,
+    action$: any,
+    store: any,
+    { navigate }: any,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
-        flatMap((action) => {
+        flatMap((action: any) => {
             const {
                 payload: {
                     bundleReport: { typeReportMap },
@@ -120,7 +119,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     );
 
 export const failedSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
-    action$: InputObservable,
+    action$: any,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED),

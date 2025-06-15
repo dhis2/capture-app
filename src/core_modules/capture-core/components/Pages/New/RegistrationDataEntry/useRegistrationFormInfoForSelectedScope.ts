@@ -1,24 +1,22 @@
-// @flow
 import { useMemo } from 'react';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../../metaData';
 
-type RegistrationOptions = $ReadOnly<{|
-  [elementId: string]: {|
-    +name: string,
-    +registrationMetaData: string,
-    +formId: string,
-    +formFoundation: Object,
-  |}
-|}>
+type RegistrationOptions = {
+  [elementId: string]: {
+    name: string;
+    registrationMetaData: any;
+    formId: string;
+    formFoundation: any;
+  };
+};
 
 const useRegistrationOptions = (): RegistrationOptions => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
     return useMemo(() =>
         Object.values(trackedEntityTypesWithCorrelatedPrograms)
-            // $FlowFixMe https://github.com/facebook/flow/issues/2221
-            .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeTeiRegistration, programs }) => ({
+            .reduce((acc: any, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeTeiRegistration, programs }: any) => ({
                 ...acc,
                 [trackedEntityTypeId]: {
                     formFoundation: trackedEntityTypeTeiRegistration.form,
@@ -26,7 +24,7 @@ const useRegistrationOptions = (): RegistrationOptions => {
                     name: trackedEntityTypeName,
                     formId: `registrationPageForm-${trackedEntityTypeId}`,
                 },
-                ...programs.reduce((accumulated, { programId, programName, enrollment }) => ({
+                ...programs.reduce((accumulated: any, { programId, programName, enrollment }: any) => ({
                     ...accumulated,
                     [programId]: {
                         name: programName,
@@ -35,7 +33,7 @@ const useRegistrationOptions = (): RegistrationOptions => {
                         formId: `registrationPageForm-${programId}`,
                     },
                 }), {}),
-            }), {}),
+            }), {}) as RegistrationOptions,
     [trackedEntityTypesWithCorrelatedPrograms]);
 };
 
