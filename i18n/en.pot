@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
-"PO-Revision-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-15T20:23:15.233Z\n"
+"PO-Revision-Date: 2025-06-15T20:23:15.233Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -868,6 +868,9 @@ msgstr "event"
 
 msgid "You don't have access to edit this event"
 msgstr "You don't have access to edit this event"
+
+msgid "{{eventDate}} belongs to an expired period. Event cannot be edited"
+msgstr "{{eventDate}} belongs to an expired period. Event cannot be edited"
 
 msgid "View changelog"
 msgstr "View changelog"
