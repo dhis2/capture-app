@@ -16,8 +16,7 @@ export const TopBarActions = ({
     selectedProgramId,
     selectedOrgUnitId,
     isUserInteractionInProgress = false,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onOpenNewRegistrationPage = () => {},
+    onOpenNewRegistrationPage = () => undefined,
 }: Props) => {
     const [context, setContext] = useState(defaultContext);
     const {
