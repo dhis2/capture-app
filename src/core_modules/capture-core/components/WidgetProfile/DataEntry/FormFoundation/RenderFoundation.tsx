@@ -330,9 +330,9 @@ export const buildFormFoundation = async (
 
 export const build = async (
     program: any,
+    setFormFoundation: (formFoundation: RenderFoundation) => void,
     querySingleResource: QuerySingleResource,
     minorServerVersion: number,
-    setFormFoundation?: (formFoundation: RenderFoundation) => void,
     dataEntryFormConfig?: DataEntryFormConfig | null,
 ) => {
     const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) || {};
