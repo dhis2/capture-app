@@ -22,6 +22,8 @@ import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
+import { is } from 'cypress/types/bluebird';
+import { tooltip } from 'leaflet';
 
 const getStyles = () => ({
     container: {
@@ -129,7 +131,20 @@ const EventDetailsSectionPlain = (props: Props) => {
     );
 
     const renderActionsContainer = () => {
-        const canEdit = eventAccess.write;
+        const expiryPeriod = useProgramExpiryForUser(programId);    
+        const { isWithinValidPeriod } = isValidPeriod(eventDate, expiryPeriod);
+        const isDisabled = !eventAccess.write || !isWithinValidPeriod;
+
+        let tooltipContent = '';
+        if (!eventAccess.write) {
+            tooltipContent = i18n.t(`You don't have access to edit this event`);
+        } else if (!isWithinValidPeriod) {
+            tooltipContent = i18n.t('{{eventDate}} belongs to an expired period. Event cannot be edited', {
+                eventDate,
+                interpolation: { escapeValue: false },
+            });
+        }
+
         return (
             <div className={classes.actionsContainer}>
                 {!showEditEvent && !isLoading &&
@@ -137,13 +152,13 @@ const EventDetailsSectionPlain = (props: Props) => {
                     className={classes.editButtonContainer}
                 >
                     <ConditionalTooltip
-                        content={i18n.t('You don\'t have access to edit this event')}
-                        enabled={!canEdit}
+                        content={tooltipContent}
+                        enabled={isDisabled}
                     >
                         <Button
                             className={classes.button}
                             onClick={() => onOpenEditEvent(orgUnit, programCategory)}
-                            disabled={!canEdit}
+                            disabled={isDisabled}
                             secondary
                             small
                         >
