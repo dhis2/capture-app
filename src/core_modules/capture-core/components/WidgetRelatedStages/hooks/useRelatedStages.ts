@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { relatedStageStatus } from '../constants';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
@@ -11,10 +10,10 @@ const getRelationshipTypeFromIndexedDB = () => {
     return storageController.getAll(USER_METADATA_STORES.RELATIONSHIP_TYPES);
 };
 
-type Props = {|
-    programStageId: string,
-    programId: string,
-|};
+type Props = {
+    programStageId: string;
+    programId: string;
+};
 
 const filterBidirectionalRelationship = (): boolean => true;
 
@@ -30,6 +29,7 @@ const filterUnidirectionalRelationship = (relationshipType: RelationshipType, pr
 
     return true;
 };
+
 export const useRelatedStages = ({ programStageId, programId }: Props) => {
     const { data: relationshipTypes } = useIndexedDBQuery(
         ['RelatedStages', 'relationshipTypes', programId, programStageId],
@@ -41,19 +41,16 @@ export const useRelatedStages = ({ programStageId, programId }: Props) => {
                     }
                     const { fromConstraint, toConstraint, bidirectional } = relationshipType;
 
-                    // Related stages should be of type program stage
                     if (fromConstraint.relationshipEntity !== RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE
                         || toConstraint.relationshipEntity !== RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE) {
                         return false;
                     }
 
-                    // Either the from or to side should be the current stage
                     if (fromConstraint.programStage.id !== programStageId
                         && toConstraint.programStage.id !== programStageId) {
                         return false;
                     }
 
-                    // Related stages should only be able to refer to stages in the same program
                     if (fromConstraint.programStage.program.id !== programId
                         || toConstraint.programStage.program.id !== programId) {
                         return false;
@@ -80,7 +77,6 @@ export const useRelatedStages = ({ programStageId, programId }: Props) => {
         relationshipTypes?.[0] : undefined;
     const constraint = selectedRelationshipType?.toConstraint?.programStage?.id === programStageId ?
         selectedRelationshipType?.fromConstraint : selectedRelationshipType?.toConstraint;
-
 
     return {
         currentRelatedStagesStatus,

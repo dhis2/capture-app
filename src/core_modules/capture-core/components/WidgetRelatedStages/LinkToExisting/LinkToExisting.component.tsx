@@ -1,11 +1,10 @@
-// @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { SingleSelectField, SingleSelectOption, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import type { LinkToExistingProps } from './LinkToExisting.types';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     searchRow: {
         padding: spacers.dp16,
         display: 'flex',
@@ -19,7 +18,9 @@ const styles = () => ({
     singleSelectField: {
         flexGrow: 1,
     },
-});
+};
+
+type Props = LinkToExistingProps & WithStyles<typeof styles>;
 
 export const LinkToExistingPlain = ({
     relatedStagesDataValues,
@@ -29,8 +30,8 @@ export const LinkToExistingPlain = ({
     errorMessages,
     saveAttempted,
     classes,
-}: LinkToExistingProps) => {
-    const onChange = (value) => {
+}: Props) => {
+    const onChange = (value: string) => {
         setRelatedStagesDataValues({
             ...relatedStagesDataValues,
             linkedEventId: value,
@@ -40,9 +41,9 @@ export const LinkToExistingPlain = ({
     return (
         <div className={classes.searchRow}>
             <p className={classes.label}>
-                {i18n.t('Choose a {{linkableStageLabel}} event', {
+                {String(i18n.t('Choose a {{linkableStageLabel}} event', {
                     linkableStageLabel,
-                })}
+                }))}
             </p>
             <SingleSelectField
                 selected={relatedStagesDataValues.linkedEventId}
@@ -52,7 +53,7 @@ export const LinkToExistingPlain = ({
                 })}
                 className={classes.singleSelectField}
                 error={saveAttempted && !!errorMessages.linkedEventId}
-                validationText={saveAttempted && errorMessages.linkedEventId}
+                validationText={saveAttempted ? errorMessages.linkedEventId : undefined}
                 dataTest="related-stages-existing-response-list"
             >
                 {linkableEvents
@@ -69,4 +70,4 @@ export const LinkToExistingPlain = ({
     );
 };
 
-export const LinkToExisting = withStyles(styles)(LinkToExistingPlain);
+export const LinkToExisting = withStyles(styles)(LinkToExistingPlain) as ComponentType<LinkToExistingProps>;
