@@ -1,10 +1,9 @@
-// @flow
 import { colors } from '@dhis2/ui';
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component, type ReactElement, type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     container: {
         flexGrow: 1,
         display: 'flex',
@@ -17,28 +16,29 @@ const styles = () => ({
         right: 15,
         top: 30,
     },
-});
-
-type Props = {
-    children?: ?React$Element<any>,
-    style?: ?Object,
-    contentStyle?: ?Object,
-    mainActionButton?: ?React$Element<any>,
-    header?: ?React$Element<any>,
-    description?: ?React$Element<any>,
-    isCollapsed?: ?boolean,
-    onChangeCollapseState?: ?() => void,
-    extendedCollapsibility?: boolean,
-    classes: any,
-    className?: ?string,
 };
+
+type OwnProps = {
+    children?: ReactElement;
+    style?: Record<string, any>;
+    contentStyle?: Record<string, any>;
+    mainActionButton?: ReactElement;
+    header?: ReactElement;
+    description?: ReactElement;
+    isCollapsed?: boolean;
+    onChangeCollapseState?: () => void;
+    extendedCollapsibility?: boolean;
+    className?: string;
+};
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 class SectionPlain extends Component<Props> {
     getHeader() {
         const orgHeader = this.props.header;
 
-        if (orgHeader && orgHeader.type && orgHeader.type.name === 'SectionHeaderSimple' && this.props.onChangeCollapseState) {
-            const clonedHeader = React.cloneElement(orgHeader, {
+        if (orgHeader && React.isValidElement(orgHeader) && (orgHeader.type as any)?.name === 'SectionHeaderSimple' && this.props.onChangeCollapseState) {
+            const clonedHeader = React.cloneElement(orgHeader as any, {
                 onChangeCollapseState: this.props.onChangeCollapseState,
                 isCollapsed: this.props.isCollapsed,
                 extendedCollapsibility: this.props.extendedCollapsibility,
@@ -51,7 +51,7 @@ class SectionPlain extends Component<Props> {
     renderContents() {
         const { isCollapsed, contentStyle, mainActionButton, classes } = this.props;
         const showChildren = !isCollapsed;
-        const accContentStyle = Object.assign({}, contentStyle, isCollapsed ? { display: 'none' } : null);
+        const accContentStyle = { ...contentStyle, ...(isCollapsed ? { display: 'none' } : {}) };
         const mainActionButtonElement = mainActionButton ?
             (
                 <div className={classes.mainActionButton}>
@@ -89,4 +89,4 @@ class SectionPlain extends Component<Props> {
     }
 }
 
-export const Section = withStyles(styles)(SectionPlain);
+export const Section = withStyles(styles)(SectionPlain) as ComponentType<OwnProps>;

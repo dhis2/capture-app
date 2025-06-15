@@ -1,7 +1,6 @@
-// @flow
 import { colors } from '@dhis2/ui';
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component, type ReactElement, type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ChevronIcon } from 'capture-ui';
 
 const styles = () => ({
@@ -28,23 +27,22 @@ const styles = () => ({
     },
 });
 
-type Props = {
-    title: string | React$Element<any>,
-    children?: ?React$Element<any>,
-    secondary?: ?boolean,
-    titleStyle?: ?Object,
-    containerStyle?: ?Object,
-    onChangeCollapseState?: ?() => void,
-    isCollapsed?: ?boolean,
-    extendedCollapsibility?: boolean,
-    isCollapseButtonEnabled?: boolean,
-    classes: Object
+type OwnProps = {
+    title: string | ReactElement;
+    children?: ReactElement;
+    secondary?: boolean;
+    titleStyle?: Record<string, any>;
+    containerStyle?: Record<string, any>;
+    onChangeCollapseState?: () => void;
+    isCollapsed?: boolean;
+    extendedCollapsibility?: boolean;
+    isCollapseButtonEnabled?: boolean;
 };
 
-class SectionHeaderSimplePlain extends Component<Props> {
-    handleChangeCollapse: () => void;
+type Props = OwnProps & WithStyles<typeof styles>;
 
-    static defaultProps = {
+class SectionHeaderSimplePlain extends Component<Props> {
+    static readonly defaultProps = {
         isCollapseButtonEnabled: true,
     };
 
@@ -53,9 +51,8 @@ class SectionHeaderSimplePlain extends Component<Props> {
         this.handleChangeCollapse = this.handleChangeCollapse.bind(this);
     }
 
-    handleChangeCollapse() {
-        // $FlowFixMe[not-a-function] automated comment
-        this.props.onChangeCollapseState();
+    handleChangeCollapse = () => {
+        this.props.onChangeCollapseState?.();
     }
 
     render() {
@@ -105,4 +102,4 @@ class SectionHeaderSimplePlain extends Component<Props> {
     }
 }
 
-export const SectionHeaderSimple = withStyles(styles)(SectionHeaderSimplePlain);
+export const SectionHeaderSimple = withStyles(styles)(SectionHeaderSimplePlain) as ComponentType<OwnProps>;

@@ -1,21 +1,17 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { type ReactNode, type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 
-type Props = {
-    offsetTop: number,
-    minViewpointWidth: number,
-    children: React.Node,
-    containerClass?: ?string,
-    classes: {
-        container: string,
-        stickyContainerAbsolute: string,
-        stickyContainerFixed: string,
-        stickyContainerAtBottom: string,
-    },
-}
+type OwnProps = {
+    offsetTop: number;
+    minViewpointWidth: number;
+    children: ReactNode;
+    containerClass?: string;
+};
 
-const styles = () => ({
+type Props = OwnProps & WithStyles<typeof styles>;
+
+const styles: Readonly<any> = {
     container: {
         position: 'relative',
     },
@@ -29,14 +25,17 @@ const styles = () => ({
         position: 'absolute',
         bottom: 0,
     },
-});
+};
 
 class StickyOnScrollPlain extends React.Component<Props> {
+    // eslint-disable-next-line react/sort-comp
     stickyContainer: any;
+    // eslint-disable-next-line react/sort-comp
     scrollTimer: any;
+    // eslint-disable-next-line react/sort-comp
     resizeTimer: any;
 
-    static defaultProps = {
+    static readonly defaultProps = {
         offsetTop: 0,
         minViewpointWidth: 0,
     }
@@ -51,7 +50,7 @@ class StickyOnScrollPlain extends React.Component<Props> {
         window.removeEventListener('scroll', this.onScroll);
     }
 
-    isNearTop = () => window.pageYOffset + this.props.offsetTop > this.stickyContainer.parentElement.offsetTop
+    isNearTop = () => window.scrollY + this.props.offsetTop > this.stickyContainer.parentElement.offsetTop
 
     isAtBottomOfContainer = () => {
         const elementRect = this.stickyContainer.getBoundingClientRect();
@@ -129,4 +128,4 @@ class StickyOnScrollPlain extends React.Component<Props> {
     }
 }
 
-export const StickyOnScroll = withStyles(styles)(StickyOnScrollPlain);
+export const StickyOnScroll = withStyles(styles)(StickyOnScrollPlain) as ComponentType<OwnProps>;
