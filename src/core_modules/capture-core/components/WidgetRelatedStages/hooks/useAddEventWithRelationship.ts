@@ -33,10 +33,10 @@ export const useAddEventWithRelationship = ({
                 data: serverData,
             }),
         {
-            onMutate: (payload: { serverData: Record<string, unknown> }) => {
+            onMutate: (payload: { serverData: Object }) => {
                 onUpdateOrAddEnrollmentEvents && onUpdateOrAddEnrollmentEvents((payload.serverData as any).events);
             },
-            onSuccess: (_, payload: { linkMode: string; eventIdToRedirectTo?: string; serverData: Record<string, unknown> }) => {
+            onSuccess: (_, payload: { linkMode: string; eventIdToRedirectTo?: string; serverData: Object }) => {
                 setIsLinking(false);
                 const queryKey = [ReactQueryAppNamespace, 'linkedEventByOriginEvent', eventId];
                 queryClient.refetchQueries(queryKey);
@@ -48,7 +48,7 @@ export const useAddEventWithRelationship = ({
                     showSuccess({ message: i18n.t('The event was successfully linked') });
                 }
             },
-            onError: (_, payload: { serverData: Record<string, unknown> }) => {
+            onError: (_, payload: { serverData: Object }) => {
                 setIsLinking(false);
                 showAlert({ message: i18n.t('An error occurred while linking the event') });
                 onUpdateEnrollmentEventsError && onUpdateEnrollmentEventsError((payload.serverData as any).events);
