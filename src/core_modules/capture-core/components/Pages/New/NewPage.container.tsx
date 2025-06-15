@@ -52,7 +52,7 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
     });
     const { trackedEntityAttributes, loading: isTrackedEntityAttributesLoading } =
         useTrackedEntityAttributes(teiId, programId);
-    const trackedEntityType = (program as any)?.trackedEntityType;
+    const trackedEntityType = program?.trackedEntityType;
     const teiDisplayName =
     trackedEntityAttributes &&
         deriveTeiName(trackedEntityAttributes, trackedEntityType?.id || '', teiId);
@@ -116,7 +116,7 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
             <TopBar
                 orgUnitId={orgUnitId}
                 programId={programId}
-                program={program as any}
+                program={program}
                 isUserInteractionInProgress={isUserInteractionInProgress}
                 teiId={teiId}
                 trackedEntityName={trackedEntityType?.name}
