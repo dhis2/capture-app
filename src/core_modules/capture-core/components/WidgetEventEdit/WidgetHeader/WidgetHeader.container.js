@@ -54,7 +54,7 @@ const WidgetHeaderPlain = ({
     const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
-    const expiryPeriod = useProgramExpiryForUser(programId);    
+    const expiryPeriod = useProgramExpiryForUser(programId);
     const { isWithinValidPeriod } = isValidPeriod(eventDate, expiryPeriod);
 
     const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
@@ -68,7 +68,8 @@ const WidgetHeaderPlain = ({
         tooltipContent = i18n.t('{{eventDate}} belongs to an expired period. Event cannot be edited', {
             eventDate,
             interpolation: { escapeValue: false },
-        });    }
+        });
+    }
 
     const { programCategory } = useCategoryCombinations(programId);
 

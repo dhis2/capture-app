@@ -22,8 +22,6 @@ import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
-import { is } from 'cypress/types/bluebird';
-import { tooltip } from 'leaflet';
 
 const getStyles = () => ({
     container: {
@@ -131,13 +129,13 @@ const EventDetailsSectionPlain = (props: Props) => {
     );
 
     const renderActionsContainer = () => {
-        const expiryPeriod = useProgramExpiryForUser(programId);    
+        const expiryPeriod = useProgramExpiryForUser(programId);
         const { isWithinValidPeriod } = isValidPeriod(eventDate, expiryPeriod);
         const isDisabled = !eventAccess.write || !isWithinValidPeriod;
 
         let tooltipContent = '';
         if (!eventAccess.write) {
-            tooltipContent = i18n.t(`You don't have access to edit this event`);
+            tooltipContent = i18n.t('You don\'t have access to edit this event');
         } else if (!isWithinValidPeriod) {
             tooltipContent = i18n.t('{{eventDate}} belongs to an expired period. Event cannot be edited', {
                 eventDate,
