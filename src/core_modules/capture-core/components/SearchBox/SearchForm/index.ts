@@ -1,4 +1,3 @@
-// @flow
 export { SearchForm } from './SearchForm.container';
 export type { CurrentSearchTerms } from './SearchForm.types';
 export {

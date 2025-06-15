@@ -1,10 +1,10 @@
-// @flow
 import { connect } from 'react-redux';
 import type { ComponentType } from 'react';
 import { isObject, isString } from 'd2-utilizr/src';
 import { convertFormToClient } from 'capture-core/converters';
 import { SearchFormComponent } from './SearchForm.component';
-import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
+import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, PropsFromRedux } from './SearchForm.types';
+import type { ReduxDispatch } from '../../App/withAppUrlSync.types';
 import {
     saveCurrentSearchInfo,
     searchViaAttributesOnScopeProgram,
@@ -14,6 +14,14 @@ import {
     showUniqueSearchValueEmptyModal,
 } from '../SearchBox.actions';
 import { addFormData, removeFormData } from '../../D2Form/actions/form.actions';
+
+type ReduxState = {
+    formsValues: Record<string, Record<string, any>>;
+    searchDomain: {
+        searchStatus: string;
+        keptFallbackSearchFormValues: Record<string, any>;
+    };
+};
 
 const isValueContainingCharacter = (value: any) => {
     if (!value) {
@@ -52,9 +60,9 @@ const isValueContainingCharacter = (value: any) => {
     return true;
 };
 
-const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): CurrentSearchTerms => {
+const collectCurrentSearchTerms = (searchGroupsForSelectedScope: any[], formsValues: Record<string, Record<string, any>>): CurrentSearchTerms => {
     const { searchForm: attributeSearchForm, formId } = searchGroupsForSelectedScope
-        .reduce((accumulated, searchGroup) => {
+        .reduce((accumulated: any, searchGroup: any) => {
             if (!searchGroup.unique) {
                 return { accumulated, ...searchGroup };
             }
@@ -63,7 +71,7 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): C
 
     const searchTerms = formsValues[formId] || {};
     return Object.keys(searchTerms)
-        .reduce((accumulated, attributeValueKey) => {
+        .reduce((accumulated: CurrentSearchTerms, attributeValueKey) => {
             const { name, id, type } = attributeSearchForm.getElement(attributeValueKey);
             const value = searchTerms[attributeValueKey];
             if (isValueContainingCharacter(value)) {
@@ -71,7 +79,7 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): C
                 return [...accumulated, { name, value: convertedValue, id, type }];
             }
             return accumulated;
-        }, []);
+        }, [] as CurrentSearchTerms);
 };
 
 const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: OwnProps): PropsFromRedux => {
@@ -128,7 +136,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
     },
     removeFormDataFromReduxStore: () => {
         searchGroupsForSelectedScope
-            .forEach(({ formId }) => {
+            .forEach(({ formId }: { formId: string }) => {
                 dispatch(removeFormData(formId));
             });
     },
@@ -137,6 +145,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
     },
 });
 
-
 export const SearchForm: ComponentType<OwnProps> =
-  connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(SearchFormComponent);
+  connect(mapStateToProps, mapDispatchToProps)(SearchFormComponent);

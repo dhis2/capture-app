@@ -1,11 +1,11 @@
-// @flow
 import React, {
     type ComponentType,
     useContext,
     useState,
     useEffect,
 } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, CircularLoader, colors } from '@dhis2/ui';
@@ -45,7 +45,6 @@ export const getStyles = (theme: Theme) => ({
     },
 });
 
-
 const SearchResultsIndex = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
@@ -63,8 +62,8 @@ const SearchResultsIndex = ({
     currentSearchTerms,
     handleCreateNew,
     orgUnitId,
-}: Props) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+}: Props & WithStyles<typeof getStyles>) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
     const [isTopResultsOpen, setTopResultsOpen] = useState(true);
     const [isOtherResultsOpen, setOtherResultsOpen] = useState(true);
     const [isFallbackLoading, setIsFallbackLoading] = useState(false);
@@ -75,8 +74,7 @@ const SearchResultsIndex = ({
                 .trackedEntityType.searchGroups.find(group => !group.unique)
             : undefined;
 
-
-    const handlePageChange = (newPage) => {
+    const handlePageChange = (newPage: any) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
             searchViaAttributesOnScopeProgram({
@@ -99,7 +97,7 @@ const SearchResultsIndex = ({
         }
     };
 
-    const handleOtherPageChange = (newOtherPage) => {
+    const handleOtherPageChange = (newOtherPage: any) => {
         setIsFallbackLoading(true);
         startFallbackSearch({
             programId: currentSearchScopeId,
@@ -146,11 +144,11 @@ const SearchResultsIndex = ({
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={dataElements}
-                renderCustomCardActions={({ item, enrollmentType, programName }) => (
+                renderCustomCardActions={({ item, enrollmentType, programName }: any) => (
                     <CardListButtons
                         programName={programName}
                         currentSearchScopeId={currentSearchScopeId}
-                        currentSearchScopeType={currentSearchScopeType}
+                        currentSearchScopeType={currentSearchScopeType as any}
                         id={item.id}
                         orgUnitId={orgUnitId}
                         enrollmentType={enrollmentType}
@@ -167,7 +165,7 @@ const SearchResultsIndex = ({
         </Widget>
 
         {otherResults !== undefined && <Widget
-            header={<SearchResultsHeader currentSearchScopeName={i18n.t('all programs')} />}
+            header={<SearchResultsHeader currentSearchScopeName={i18n.t('all programs')} currentSearchTerms={[]} />}
             borderless
             open={isOtherResultsOpen}
             onClose={() => setOtherResultsOpen(false)}
@@ -186,7 +184,7 @@ const SearchResultsIndex = ({
                     dataElements={dataElements}
                     renderCustomCardActions={({
                         item, enrollmentType, currentSearchScopeType: searchScopeType, programName,
-                    }) => (<CardListButtons
+                    }: any) => (<CardListButtons
                         programName={programName}
                         currentSearchScopeType={searchScopeType}
                         currentSearchScopeId={currentSearchScopeId}
@@ -242,4 +240,4 @@ const SearchResultsIndex = ({
     </>);
 };
 
-export const SearchResultsComponent: ComponentType<Props> = withStyles(getStyles)(SearchResultsIndex);
+export const SearchResultsComponent = withStyles(getStyles)(SearchResultsIndex) as ComponentType<Props>;

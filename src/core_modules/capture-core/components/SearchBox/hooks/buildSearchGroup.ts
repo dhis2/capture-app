@@ -1,4 +1,3 @@
-// @flow
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
 import { SearchGroupFactory } from '../../../metaDataMemoryStoreBuilders/common/factory';
 import type {
@@ -7,10 +6,10 @@ import type {
 } from '../../WidgetProfile/DataEntry/FormFoundation/types';
 
 type SearchProgramOrTET = {
-    minAttributesRequiredToSearch: number,
-    programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
-    trackedEntityTypeAttributes: Array<TrackedEntityAttribute>,
-}
+    minAttributesRequiredToSearch: number;
+    programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>;
+    trackedEntityTypeAttributes: Array<TrackedEntityAttribute>;
+};
 
 export const buildSearchGroup = async ({
     minAttributesRequiredToSearch,

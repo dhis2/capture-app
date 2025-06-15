@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useProgramFromIndexedDB } from '../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { buildSearchOption } from '../../../hooks/useSearchOptions';
@@ -13,16 +12,15 @@ const searchScopes = {
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
-type Props = {|
-    trackedEntityTypeId: ?string,
-    programId: ?string,
-|};
-
+type Props = {
+    trackedEntityTypeId?: string | null;
+    programId?: string | null;
+};
 
 export const useSearchOption = ({
     programId,
     trackedEntityTypeId,
-}: Props): { searchOption: ?AvailableSearchOption, isLoading: boolean, isError: boolean } => {
+}: Props): { searchOption?: AvailableSearchOption; isLoading: boolean; isError: boolean } => {
     const { locale } = useUserLocale();
 
     const searchScope = useMemo(() => {
@@ -46,14 +44,12 @@ export const useSearchOption = ({
     const searchData = (programData ?? trackedEntityTypeData);
     const { id: searchId, displayName: searchName } = searchData ?? {};
 
-    const { data, isLoading, isError, error } = useIndexedDBQuery<?AvailableSearchOption>(
+    const { data, isLoading, isError } = useIndexedDBQuery<AvailableSearchOption | undefined>(
         ['searchGroup', searchId],
-        // $FlowFixMe - flow does not understand that searchScope is not null here
         () => buildSearchGroup(searchData, locale),
         {
             enabled: !!(searchId && locale && searchData),
-            // $FlowFixMe - flow does not understand select
-            select: (searchGroups: ?SearchGroups) => {
+            select: (searchGroups?: SearchGroups) => {
                 if (!searchName || !searchGroups || !searchScope) {
                     return undefined;
                 }
@@ -67,11 +63,9 @@ export const useSearchOption = ({
         },
     );
 
-
     return {
         searchOption: data,
         isLoading,
         isError,
-        error,
     };
 };
