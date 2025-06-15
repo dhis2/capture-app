@@ -7,11 +7,11 @@ export const createServerData = ({
     enrollment,
 }: {
     linkedEvent?: LinkedRequestEvent;
-    relationship?: any;
+    relationship?: Record<string, unknown>;
     enrollment: any;
 }) => {
     const exisitingEvents = enrollment.events.map((event: any) => (
-        (event.event === relationship?.from?.event?.event || event.event === relationship?.to?.event?.event)
+        (event.event === (relationship as any)?.from?.event?.event || event.event === (relationship as any)?.to?.event?.event)
             ? { ...event, pendingApiResponse: true, relationships: [relationship], uid: event.event }
             : event
     ));

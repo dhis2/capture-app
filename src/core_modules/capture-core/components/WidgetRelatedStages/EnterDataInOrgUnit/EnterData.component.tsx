@@ -93,7 +93,7 @@ export const EnterDataInOrgUnitPlain = ({
             </div>
             <div className={classes.infoBox}>
                 <IconInfo16 />
-                {String(i18n.t(
+                {i18n.t(
                     relatedStagesDataValues?.orgUnit?.name
                         ? 'Enter {{linkableStageLabel}} details for {{orgUnitLabel}} in the next step'
                         : 'Select organisation unit and enter {{linkableStageLabel}} details in the next step',
@@ -101,7 +101,7 @@ export const EnterDataInOrgUnitPlain = ({
                         linkableStageLabel,
                         orgUnitLabel: relatedStagesDataValues?.orgUnit?.name,
                     },
-                ))}
+                )}
             </div>
         </div>
     );
