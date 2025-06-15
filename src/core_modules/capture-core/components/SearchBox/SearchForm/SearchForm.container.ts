@@ -60,7 +60,7 @@ const isValueContainingCharacter = (value: any) => {
     return true;
 };
 
-const collectCurrentSearchTerms = (searchGroupsForSelectedScope: any, formsValues: any): CurrentSearchTerms => {
+const collectCurrentSearchTerms = (searchGroupsForSelectedScope: any[], formsValues: Record<string, Record<string, any>>): CurrentSearchTerms => {
     const { searchForm: attributeSearchForm, formId } = searchGroupsForSelectedScope
         .reduce((accumulated: any, searchGroup: any) => {
             if (!searchGroup.unique) {
@@ -136,7 +136,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
     },
     removeFormDataFromReduxStore: () => {
         searchGroupsForSelectedScope
-            .forEach(({ formId }: any) => {
+            .forEach(({ formId }: { formId: string }) => {
                 dispatch(removeFormData(formId));
             });
     },
