@@ -28,8 +28,11 @@ const styles: Readonly<any> = {
 };
 
 class StickyOnScrollPlain extends React.Component<Props> {
+    // eslint-disable-next-line react/sort-comp
     stickyContainer: any;
+    // eslint-disable-next-line react/sort-comp
     scrollTimer: any;
+    // eslint-disable-next-line react/sort-comp
     resizeTimer: any;
 
     static defaultProps = {
@@ -47,7 +50,7 @@ class StickyOnScrollPlain extends React.Component<Props> {
         window.removeEventListener('scroll', this.onScroll);
     }
 
-    isNearTop = () => window.pageYOffset + this.props.offsetTop > this.stickyContainer.parentElement.offsetTop
+    isNearTop = () => window.scrollY + this.props.offsetTop > this.stickyContainer.parentElement.offsetTop
 
     isAtBottomOfContainer = () => {
         const elementRect = this.stickyContainer.getBoundingClientRect();
