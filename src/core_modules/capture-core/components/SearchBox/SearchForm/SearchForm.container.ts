@@ -4,6 +4,7 @@ import { isObject, isString } from 'd2-utilizr/src';
 import { convertFormToClient } from 'capture-core/converters';
 import { SearchFormComponent } from './SearchForm.component';
 import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, PropsFromRedux } from './SearchForm.types';
+import type { ReduxDispatch } from '../../App/withAppUrlSync.types';
 import {
     saveCurrentSearchInfo,
     searchViaAttributesOnScopeProgram,
@@ -13,6 +14,14 @@ import {
     showUniqueSearchValueEmptyModal,
 } from '../SearchBox.actions';
 import { addFormData, removeFormData } from '../../D2Form/actions/form.actions';
+
+type ReduxState = {
+    formsValues: Record<string, Record<string, any>>;
+    searchDomain: {
+        searchStatus: string;
+        keptFallbackSearchFormValues: Record<string, any>;
+    };
+};
 
 const isValueContainingCharacter = (value: any) => {
     if (!value) {
@@ -62,7 +71,7 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope: any, formsValue
 
     const searchTerms = formsValues[formId] || {};
     return Object.keys(searchTerms)
-        .reduce((accumulated: any, attributeValueKey) => {
+        .reduce((accumulated: CurrentSearchTerms, attributeValueKey) => {
             const { name, id, type } = attributeSearchForm.getElement(attributeValueKey);
             const value = searchTerms[attributeValueKey];
             if (isValueContainingCharacter(value)) {
@@ -73,7 +82,7 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope: any, formsValue
         }, [] as CurrentSearchTerms);
 };
 
-const mapStateToProps = (state: any, { searchGroupsForSelectedScope }: OwnProps): PropsFromRedux => {
+const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: OwnProps): PropsFromRedux => {
     const {
         formsValues,
         searchDomain: {
@@ -98,7 +107,7 @@ const mapStateToProps = (state: any, { searchGroupsForSelectedScope }: OwnProps)
     };
 };
 
-const mapDispatchToProps = (dispatch: any, { searchGroupsForSelectedScope }: OwnProps): DispatchersFromRedux => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedScope }: OwnProps): DispatchersFromRedux => ({
     searchViaUniqueIdOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
         dispatch(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId, formId }));
     },
