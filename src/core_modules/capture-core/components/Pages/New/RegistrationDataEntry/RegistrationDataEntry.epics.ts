@@ -2,6 +2,7 @@ import { ofType } from 'redux-observable';
 import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
 import { dataEntryKeys } from 'capture-core/constants';
+import type { ReduxStore, EpicAction } from '../../../../../capture-core-utils/types/global';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
@@ -13,7 +14,7 @@ import {
 import { buildUrlQueryString } from '../../../../utils/routing';
 import { cleanUpUid } from '../NewPage.actions';
 
-export const startSavingNewTrackedEntityInstanceEpic = (action$: any) =>
+export const startSavingNewTrackedEntityInstanceEpic = (action$: EpicAction<any>) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START),
         map((action: any) => {
@@ -25,7 +26,7 @@ export const startSavingNewTrackedEntityInstanceEpic = (action$: any) =>
         }),
     );
 
-export const completeSavingNewTrackedEntityInstanceEpic = (action$: any, store: any) =>
+export const completeSavingNewTrackedEntityInstanceEpic = (action$: EpicAction<any>, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
         flatMap(({ payload: { bundleReport: { typeReportMap } } }: any) => {
@@ -41,7 +42,7 @@ export const completeSavingNewTrackedEntityInstanceEpic = (action$: any, store: 
     );
 
 export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
-    action$: any,
+    action$: EpicAction<any>,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
@@ -61,9 +62,9 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     );
 
 export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
-    action$: any,
+    action$: EpicAction<any>,
     store: any,
-    { navigate }: any,
+    { navigate }: { navigate: (url: string) => void },
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
@@ -119,7 +120,7 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     );
 
 export const failedSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
-    action$: any,
+    action$: EpicAction<any>,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED),
