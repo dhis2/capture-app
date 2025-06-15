@@ -1,10 +1,9 @@
-// @flow
 import { useMemo, useEffect } from 'react';
 import log from 'loglevel';
 import { FEATURES, featureAvailable, errorCreator } from 'capture-core-utils';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 
-export const useTrackedEntityAttributes = (teiId?: string, programId: string) => {
+export const useTrackedEntityAttributes = (teiId?: string, programId?: string) => {
     const {
         data: programAttributes,
         error: programAttributesError,
@@ -47,8 +46,7 @@ export const useTrackedEntityAttributes = (teiId?: string, programId: string) =>
     useEffect(() => {
         if (programAttributesIsError) {
             if (featureAvailable(FEATURES.moreGenericErrorMessages)) {
-                // $FlowFixMe
-                const { httpStatusCode } = programAttributesError?.details || {};
+                const { httpStatusCode } = (programAttributesError as any)?.details || {};
                 if (httpStatusCode === 404) {
                     return;
                 }
@@ -69,7 +67,7 @@ export const useTrackedEntityAttributes = (teiId?: string, programId: string) =>
         }
 
         return (programAttributesIsError && tetAttributesIsError) ? [] :
-            (programAttributes?.attributes || tetAttributes?.attributes || undefined);
+            ((programAttributes as any)?.attributes || (tetAttributes as any)?.attributes || undefined);
     }, [teiId, programAttributesIsError, tetAttributesIsError, programAttributes, tetAttributes]);
 
     return {

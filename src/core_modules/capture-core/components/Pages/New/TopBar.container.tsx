@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EventProgram, Program } from 'capture-core/metaData';
@@ -20,15 +19,15 @@ import {
 import { TopBarActions } from '../../TopBarActions';
 
 type TopBarProps = {
-    programId?: string,
-    program?: Program,
-    orgUnitId?: string,
-    teiId?: string,
-    trackedEntityName?: string,
-    teiDisplayName?: string,
-    isUserInteractionInProgress: boolean,
-    formIsOpen: boolean,
-    onOpenNewRegistrationPage: () => void,
+    programId?: string;
+    program?: Program;
+    orgUnitId?: string;
+    teiId?: string;
+    trackedEntityName?: string;
+    teiDisplayName?: string;
+    isUserInteractionInProgress: boolean;
+    formIsOpen: boolean;
+    onOpenNewRegistrationPage: () => void;
 };
 
 export const TopBar = ({
@@ -51,12 +50,12 @@ export const TopBar = ({
     const { resetTeiId } = useResetTeiId();
     const { reset } = useReset();
 
-    const { selectedCategories } = useSelector(({ currentSelections }) => ({
+    const { selectedCategories } = useSelector(({ currentSelections }: any) => ({
         selectedCategories: currentSelections.categoriesMeta,
     }));
 
     const dispatchOnSetCategoryOption = useCallback(
-        (categoryOption: Object, categoryId: string) => {
+        (categoryOption: Record<string, any>, categoryId: string) => {
             dispatch(setCategoryOption(categoryId, categoryOption));
         },
         [dispatch],

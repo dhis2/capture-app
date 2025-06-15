@@ -1,10 +1,9 @@
-// @flow
 import React, { type ComponentType, useContext, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import type { Props } from './RegistrationDataEntry.types';
+import type { Props, OwnProps, ContainerProps } from './RegistrationDataEntry.types';
 import { TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
@@ -17,7 +16,7 @@ import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../../
 import { EnrollmentRegistrationEntryWrapper } from '../EnrollmentRegistrationEntryWrapper.component';
 import { useCurrentOrgUnitId } from '../../../../hooks/useCurrentOrgUnitId';
 
-const getStyles = ({ typography }) => ({
+const styles: Readonly<any> = ({ typography }: any) => ({
     container: {
         marginBottom: spacers.dp12,
         padding: spacers.dp16,
@@ -57,7 +56,7 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-const DialogButtons = ({ onCancel, onSave }) => (
+const DialogButtons = ({ onCancel, onSave }: { onCancel: () => void; onSave?: () => void }) => (
     <>
         <Button onClick={onCancel} secondary>
             {i18n.t('Cancel')}
@@ -77,7 +76,7 @@ const DialogButtons = ({ onCancel, onSave }) => (
     </>
 );
 
-const CardListButton = (({ teiId, orgUnitId }) => {
+const CardListButton = (({ teiId, orgUnitId }: { teiId: string; orgUnitId: string }) => {
     const dispatch = useDispatch();
     const { programId } = useLocationQuery();
 
@@ -109,7 +108,7 @@ const RegistrationDataEntryPlain = ({
     trackedEntityInstanceAttributes,
 }: Props) => {
     const { navigate } = useNavigate();
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+    const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
     const currentOrgUnitId = useCurrentOrgUnitId();
@@ -124,25 +123,25 @@ const RegistrationDataEntryPlain = ({
         return navigate(`/?${url}`);
     }, [currentOrgUnitId, navigate, scopeType, selectedScopeId]);
 
-    const handleRegistrationScopeSelection = (id) => {
+    const handleRegistrationScopeSelection = (id: string) => {
         setScopeId(id);
     };
 
-    const renderDuplicatesDialogActions = useCallback((callbackOnCancel, onSave) => (
+    const renderDuplicatesDialogActions = useCallback((callbackOnCancel: () => void, onSave?: () => void) => (
         <DialogButtons
             onCancel={callbackOnCancel}
             onSave={onSave}
         />
     ), []);
 
-    const renderDuplicatesCardActions = useCallback(({ item }) => (
+    const renderDuplicatesCardActions = useCallback((props: { item: any }) => (
         <CardListButton
-            teiId={item.id}
-            orgUnitId={item.tei.orgUnit}
+            teiId={props.item.id}
+            orgUnitId={props.item.tei.orgUnit}
         />
     ), []);
 
-    const ExistingUniqueValueDialogActions = useCallback(({ teiId: existingTeiId }) => {
+    const ExistingUniqueValueDialogActions = useCallback(({ teiId: existingTeiId }: { teiId: string }) => {
         const dispatch = useDispatch(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
         const { programId, orgUnitId } = useLocationQuery(); // eslint-disable-line react-hooks/rules-of-hooks -- This is valid because the callback here is a React component
 
@@ -288,5 +287,4 @@ const RegistrationDataEntryPlain = ({
     );
 };
 
-export const RegistrationDataEntryComponent: ComponentType<$Diff<Props, CssClasses>> =
-    withStyles(getStyles)(RegistrationDataEntryPlain);
+export const RegistrationDataEntryComponent = withStyles(styles)(RegistrationDataEntryPlain) as ComponentType<OwnProps & ContainerProps>;

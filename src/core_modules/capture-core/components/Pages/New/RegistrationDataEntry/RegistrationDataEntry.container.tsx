@@ -1,4 +1,3 @@
-// @flow
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import React, { useCallback, type ComponentType, useEffect } from 'react';
@@ -28,11 +27,11 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
     const { teiId } = useLocationQuery();
 
     const dispatchOnSaveWithoutEnrollment = useCallback(
-        (teiPayload) => { dispatch(startSavingNewTrackedEntityInstance(teiPayload)); },
+        (teiPayload: any) => { dispatch(startSavingNewTrackedEntityInstance(teiPayload)); },
         [dispatch]);
 
     const dispatchOnSaveWithEnrollment = useCallback(
-        (enrollmentPayload, redirect) => {
+        (enrollmentPayload: any, redirect: any) => {
             const uid = uuid();
             dispatch(
                 startSavingNewTrackedEntityInstanceWithEnrollment(
@@ -44,7 +43,7 @@ export const RegistrationDataEntry: ComponentType<OwnProps> = ({
         },
         [dispatch]);
 
-    const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
+    const dataEntryIsReady = useSelector(({ dataEntries }: any) => (!!dataEntries[dataEntryId]));
 
     useEffect(() => {
         dispatch(openNewPage());
