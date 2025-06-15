@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -8,31 +7,30 @@ import {
     withInternalChangeHandler,
     withLabel,
 } from '../../FormFields/New';
-import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
-type OrgUnitValue = {|
-    checked: boolean,
-    id: string,
-    children: number,
-    displayName: string,
-    path: string,
-    selected: string[],
-|}
+type OrgUnitValue = {
+    checked: boolean;
+    id: string;
+    children: number;
+    displayName: string;
+    path: string;
+    selected: string[];
+};
 
 type Props = {
-    relatedStagesDataValues: RelatedStageDataValueStates,
-    onSelectOrgUnit: (orgUnit: OrgUnitValue) => void,
-    onDeselectOrgUnit: () => void,
-    saveAttempted: boolean,
-    errorMessages: ErrorMessagesForRelatedStages,
+    relatedStagesDataValues: RelatedStageDataValueStates;
+    onSelectOrgUnit: (orgUnit: OrgUnitValue) => void;
+    onDeselectOrgUnit: () => void;
+    saveAttempted: boolean;
+    errorMessages: ErrorMessagesForRelatedStages;
 };
 
 const OrgUnitFieldForForm = withDefaultFieldContainer()(
     withLabel({
-        onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
+        onGetCustomFieldLabeClass: () => 'dateLabel',
     })(
         withDisplayMessages()(
             withInternalChangeHandler()(
@@ -51,7 +49,7 @@ export const OrgUnitSelectorForRelatedStages = ({
 }: Props) => {
     const [touched, setTouched] = useState(false);
 
-    const handleSelect = (event) => {
+    const handleSelect = (event: OrgUnitValue) => {
         setTouched(true);
         onSelectOrgUnit(event);
     };
@@ -71,7 +69,7 @@ export const OrgUnitSelectorForRelatedStages = ({
             onSelectClick={handleSelect}
             onBlur={handleDeselect}
             styles={baseInputStyles}
-            errorMessage={shouldShowError && errorMessages?.orgUnit}
+            errorMessage={shouldShowError ? errorMessages?.orgUnit : undefined}
             data-test="relates-stages-org-unit"
         />
     );

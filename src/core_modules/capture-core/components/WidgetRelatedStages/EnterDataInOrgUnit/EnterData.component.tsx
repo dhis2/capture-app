@@ -1,14 +1,12 @@
-// @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import type { ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { colors, spacers, spacersNum, IconInfo16 } from '@dhis2/ui';
 import { OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
-const styles = {
+const styles: Readonly<any> = {
     wrapper: {
         padding: `${spacers.dp16} 0`,
         maxWidth: '55.75rem',
@@ -44,14 +42,15 @@ const styles = {
     },
 };
 
-type Props = {
-    linkableStageLabel: string,
-    relatedStagesDataValues: RelatedStageDataValueStates,
-    setRelatedStagesDataValues: (() => Object) => void,
-    saveAttempted: boolean,
-    errorMessages: ErrorMessagesForRelatedStages,
-    ...CssClasses
-}
+type OwnProps = {
+    linkableStageLabel: string;
+    relatedStagesDataValues: RelatedStageDataValueStates;
+    setRelatedStagesDataValues: (updater: (prevValues: RelatedStageDataValueStates) => RelatedStageDataValueStates) => void;
+    saveAttempted: boolean;
+    errorMessages: ErrorMessagesForRelatedStages;
+};
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 export const EnterDataInOrgUnitPlain = ({
     linkableStageLabel,
@@ -61,7 +60,7 @@ export const EnterDataInOrgUnitPlain = ({
     errorMessages,
     classes,
 }: Props) => {
-    const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
+    const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         const orgUnit = {
             id: e.id,
             name: e.displayName,
@@ -77,7 +76,7 @@ export const EnterDataInOrgUnitPlain = ({
     const onDeselectOrgUnit = () => {
         setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
-            orgUnit: null,
+            orgUnit: undefined,
         }));
     };
 
@@ -94,7 +93,7 @@ export const EnterDataInOrgUnitPlain = ({
             </div>
             <div className={classes.infoBox}>
                 <IconInfo16 />
-                {i18n.t(
+                {String(i18n.t(
                     relatedStagesDataValues?.orgUnit?.name
                         ? 'Enter {{linkableStageLabel}} details for {{orgUnitLabel}} in the next step'
                         : 'Select organisation unit and enter {{linkableStageLabel}} details in the next step',
@@ -102,10 +101,10 @@ export const EnterDataInOrgUnitPlain = ({
                         linkableStageLabel,
                         orgUnitLabel: relatedStagesDataValues?.orgUnit?.name,
                     },
-                )}
+                ))}
             </div>
         </div>
     );
 };
 
-export const EnterDataInOrgUnit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(EnterDataInOrgUnitPlain);
+export const EnterDataInOrgUnit = withStyles(styles)(EnterDataInOrgUnitPlain) as ComponentType<OwnProps>;
