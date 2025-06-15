@@ -35,7 +35,7 @@ class StickyOnScrollPlain extends React.Component<Props> {
     // eslint-disable-next-line react/sort-comp
     resizeTimer: any;
 
-    static defaultProps = {
+    static readonly defaultProps = {
         offsetTop: 0,
         minViewpointWidth: 0,
     }

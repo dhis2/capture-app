@@ -42,7 +42,7 @@ type OwnProps = {
 type Props = OwnProps & WithStyles<typeof styles>;
 
 class SectionHeaderSimplePlain extends Component<Props> {
-    static defaultProps = {
+    static readonly defaultProps = {
         isCollapseButtonEnabled: true,
     };
 
