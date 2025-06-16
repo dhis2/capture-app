@@ -1,3 +1,10 @@
+## [102.6.3](https://github.com/dhis2/capture-app/compare/v102.6.2...v102.6.3) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-11104] Translation for Unique Search ([#4133](https://github.com/dhis2/capture-app/issues/4133)) ([acf4132](https://github.com/dhis2/capture-app/commit/acf413202da668bcae2af53d3ae56988fd99eaf7))
+
 ## [102.6.2](https://github.com/dhis2/capture-app/compare/v102.6.1...v102.6.2) (2025-06-10)
 
 
