@@ -5,6 +5,12 @@ import { relatedStageActions } from '../constants';
 
 const ReactQueryAppNamespace = 'capture';
 
+const addEventWithRelationshipMutation = {
+    resource: '/tracker?async=false&importStrategy=CREATE_AND_UPDATE',
+    type: 'create',
+    data: ({ serverData }) => serverData,
+} as const;
+
 export const useAddEventWithRelationship = ({
     eventId,
     onUpdateOrAddEnrollmentEvents,
@@ -27,16 +33,16 @@ export const useAddEventWithRelationship = ({
 
     const { mutate } = useMutation(
         ({ serverData }: { serverData: any }) =>
-            dataEngine.mutate({
-                resource: '/tracker?async=false&importStrategy=CREATE_AND_UPDATE',
-                type: 'create',
-                data: serverData,
+            dataEngine.mutate(addEventWithRelationshipMutation, {
+                variables: {
+                    serverData,
+                },
             }),
         {
-            onMutate: (payload: { serverData: Object }) => {
+            onMutate: (payload: { serverData: Record<string, unknown> }) => {
                 onUpdateOrAddEnrollmentEvents && onUpdateOrAddEnrollmentEvents((payload.serverData as any).events);
             },
-            onSuccess: (_, payload: { linkMode: string; eventIdToRedirectTo?: string; serverData: Object }) => {
+            onSuccess: (_, payload: { linkMode: string; eventIdToRedirectTo?: string; serverData: Record<string, unknown> }) => {
                 setIsLinking(false);
                 const queryKey = [ReactQueryAppNamespace, 'linkedEventByOriginEvent', eventId];
                 queryClient.refetchQueries(queryKey);
@@ -48,7 +54,7 @@ export const useAddEventWithRelationship = ({
                     showSuccess({ message: i18n.t('The event was successfully linked') });
                 }
             },
-            onError: (_, payload: { serverData: Object }) => {
+            onError: (_, payload: { serverData: Record<string, unknown> }) => {
                 setIsLinking(false);
                 showAlert({ message: i18n.t('An error occurred while linking the event') });
                 onUpdateEnrollmentEventsError && onUpdateEnrollmentEventsError((payload.serverData as any).events);

@@ -7,7 +7,7 @@ export const createServerData = ({
     enrollment,
 }: {
     linkedEvent?: LinkedRequestEvent;
-    relationship?: Object;
+    relationship?: Record<string, unknown>;
     enrollment: any;
 }) => {
     const exisitingEvents = enrollment.events.map((event: any) => (

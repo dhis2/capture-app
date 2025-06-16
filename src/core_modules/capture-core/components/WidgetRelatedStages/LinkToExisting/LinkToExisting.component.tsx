@@ -41,9 +41,9 @@ export const LinkToExistingPlain = ({
     return (
         <div className={classes.searchRow}>
             <p className={classes.label}>
-                {String(i18n.t('Choose a {{linkableStageLabel}} event', {
+                {i18n.t('Choose a {{linkableStageLabel}} event', {
                     linkableStageLabel,
-                }))}
+                })}
             </p>
             <SingleSelectField
                 selected={relatedStagesDataValues.linkedEventId}

@@ -7,6 +7,7 @@ import {
     withInternalChangeHandler,
     withLabel,
 } from '../../FormFields/New';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { baseInputStyles } from './commonProps';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
@@ -30,7 +31,7 @@ type Props = {
 
 const OrgUnitFieldForForm = withDefaultFieldContainer()(
     withLabel({
-        onGetCustomFieldLabeClass: () => 'dateLabel',
+        onGetCustomFieldLabeClass: () => labelTypeClasses.dateLabel,
     })(
         withDisplayMessages()(
             withInternalChangeHandler()(

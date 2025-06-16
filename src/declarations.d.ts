@@ -22,3 +22,8 @@ declare module 'd2-utilizr/lib/isFunction' {
     const isFunction: (value: any) => boolean;
     export default isFunction;
 }
+
+declare module '*.module.css' {
+    const classes: { [key: string]: string };
+    export default classes;
+}
