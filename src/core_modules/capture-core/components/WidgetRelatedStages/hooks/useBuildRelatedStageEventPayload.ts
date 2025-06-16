@@ -1,4 +1,3 @@
-// @flow
 import { getConvertedRelatedStageEvent, type RequestEvent, type LinkedRequestEvent } from '../../DataEntries';
 import type { RelatedStageRefPayload } from '../index';
 
@@ -7,12 +6,12 @@ export const createServerData = ({
     relationship,
     enrollment,
 }: {
-    linkedEvent: ?LinkedRequestEvent,
-    relationship: ?Object,
-    enrollment: Object,
+    linkedEvent?: LinkedRequestEvent;
+    relationship?: Record<string, unknown>;
+    enrollment: any;
 }) => {
-    const exisitingEvents = enrollment.events.map(event => (
-        (event.event === relationship?.from.event.event || event.event === relationship?.to.event.event)
+    const exisitingEvents = enrollment.events.map((event: any) => (
+        (event.event === (relationship as any)?.from?.event?.event || event.event === (relationship as any)?.to?.event?.event)
             ? { ...event, pendingApiResponse: true, relationships: [relationship], uid: event.event }
             : event
     ));
@@ -21,7 +20,7 @@ export const createServerData = ({
         return {
             events: [
                 ...exisitingEvents,
-                { ...linkedEvent, pendingApiResponse: true, relationships: [relationship], uid: linkedEvent.event },
+                { ...linkedEvent, pendingApiResponse: true, relationships: [relationship], uid: (linkedEvent as any).event },
             ],
             relationships: [relationship],
         };
@@ -41,14 +40,14 @@ export const useBuildRelatedStageEventPayload = () => {
         teiId,
         enrollmentId,
     }: {
-        serverRequestEvent: ?RequestEvent,
-        relatedStageRef?: { current: ?RelatedStageRefPayload },
-        programStageId: string,
-        programId: string,
-        teiId: string,
-        enrollmentId: string,
+        serverRequestEvent?: RequestEvent;
+        relatedStageRef?: { current?: RelatedStageRefPayload };
+        programStageId: string;
+        programId: string;
+        teiId: string;
+        enrollmentId: string;
     }) => {
-        if (relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship()) {
+        if (relatedStageRef?.current?.eventHasLinkableStageRelationship()) {
             const isValid = relatedStageRef.current.formIsValidOnSave();
 
             if (!isValid || !relatedStageRef.current?.getLinkedStageValues || !programStageId || !serverRequestEvent) {

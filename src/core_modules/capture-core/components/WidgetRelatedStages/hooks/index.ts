@@ -1,4 +1,3 @@
-// @flow
 export { useRelatedStages } from './useRelatedStages';
 export { useStageLabels } from './useStageLabels';
 export { useRelatedStageEvents } from './useRelatedStageEvents';

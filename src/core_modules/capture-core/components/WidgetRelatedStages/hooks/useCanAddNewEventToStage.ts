@@ -1,12 +1,11 @@
-// @flow
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { ProgramStage } from '../../../metaData';
 import type { RelatedStagesEvents } from '../RelatedStagesActions/RelatedStagesActions.types';
 
-export const useCanAddNewEventToStage = (programStage: ?ProgramStage, existingRelatedEvents: RelatedStagesEvents[]) => {
-    const hiddenProgramStages = useSelector(({ rulesEffectsHiddenProgramStageDesc }) =>
-        rulesEffectsHiddenProgramStageDesc?.['enrollmentEvent-newEvent'],
+export const useCanAddNewEventToStage = (programStage?: ProgramStage, existingRelatedEvents: RelatedStagesEvents[] = []) => {
+    const hiddenProgramStages = useSelector((state: any) =>
+        state.rulesEffectsHiddenProgramStageDesc?.['enrollmentEvent-newEvent'],
     );
 
     return useMemo(() => {

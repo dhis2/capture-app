@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { convertDateObjectToDateFormatString } from '../../../utils/converters/date';
 import type { RelatedStagesEvents } from '../RelatedStagesActions/RelatedStagesActions.types';
@@ -6,21 +5,21 @@ import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 import { handleAPIResponse, REQUESTED_ENTITIES } from '../../../utils/api';
 
 type Props = {
-    programId: string,
-    stageId: ?string,
-    enrollmentId: ?string,
-    scheduledLabel: string,
-    occurredLabel: string,
-    relationshipTypeId: ?string,
-    enabled?: boolean,
-}
+    programId: string;
+    stageId?: string;
+    enrollmentId?: string;
+    scheduledLabel: string;
+    occurredLabel: string;
+    relationshipTypeId?: string;
+    enabled?: boolean;
+};
 
 type ReturnType = {
-    events: Array<RelatedStagesEvents>,
-    linkableEvents: Array<RelatedStagesEvents>,
-    isLoading: boolean,
-    isError: boolean,
-}
+    events: Array<RelatedStagesEvents>;
+    linkableEvents: Array<RelatedStagesEvents>;
+    isLoading: boolean;
+    isError: boolean;
+};
 
 export const useRelatedStageEvents = ({
     programId,
@@ -40,7 +39,7 @@ export const useRelatedStageEvents = ({
             fields: 'event,occurredAt,scheduledAt,status,relationships',
         },
     }), [programId, stageId, enrollmentId]);
-    const { data, isLoading, isError } = useApiDataQuery<Array<RelatedStagesEvents>>(
+    const { data, isLoading, isError } = useApiDataQuery(
         ['availableRelatedStageEvents', stageId, enrollmentId, relationshipTypeId],
         query,
         {
