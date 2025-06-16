@@ -38,17 +38,17 @@ const EditModePlain = (props: Props) => {
         <div className={classes.container}>
             <div className={classes.searchContainer}>
                 <UserField
-                    inputPlaceholderText={String(i18n.t('Search for user'))}
+                    inputPlaceholderText={i18n.t('Search for user')}
                     value={tempUser}
                     focusOnMount
                     onSet={onHandleSet}
                 />
                 <ButtonStrip className={classes.buttonContainer}>
                     <Button onClick={() => onSet(tempUser)} small primary dataTest="widget-assignee-save">
-                        {String(i18n.t('Save'))}
+                        {i18n.t('Save')}
                     </Button>
                     <Button onClick={onCancel} small secondary>
-                        {String(i18n.t('Cancel'))}
+                        {i18n.t('Cancel')}
                     </Button>
                 </ButtonStrip>
             </div>
