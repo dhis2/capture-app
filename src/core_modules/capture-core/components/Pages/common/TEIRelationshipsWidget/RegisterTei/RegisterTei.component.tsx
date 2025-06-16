@@ -10,7 +10,7 @@ import { ResultsPageSizeContext } from '../../../shared-contexts';
 import type { ComponentProps } from './RegisterTei.types';
 import { withErrorMessageHandler } from '../../../../../HOC';
 
-const getStyles = () => createStyles({
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -20,7 +20,7 @@ const getStyles = () => createStyles({
         flexBasis: 0,
         margin: 8,
     },
-});
+};
 
 type CardListButtonProps = {
     teiId: string;
@@ -66,7 +66,7 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }: DialogButtonsPro
     </>
 );
 
-type RegisterTeiPlainProps = ComponentProps & WithStyles<typeof getStyles>;
+type RegisterTeiPlainProps = ComponentProps & WithStyles<typeof styles>;
 
 const RegisterTeiPlain = ({
     dataEntryId,
@@ -147,5 +147,5 @@ const RegisterTeiPlain = ({
 
 export const RegisterTeiComponent = compose(
     withErrorMessageHandler(),
-    withStyles(getStyles),
+    withStyles(styles),
 )(RegisterTeiPlain) as ComponentType<Omit<ComponentProps, 'classes'>>;
