@@ -72,7 +72,7 @@ export const updateTeiEpic = (action$: any, store: any) =>
                 ],
             };
 
-            onSaveExternal && onSaveExternal(serverData, uid);
+            onSaveExternal?.(serverData, uid);
             return updateTei({
                 serverData,
                 onSaveSuccessActionType,

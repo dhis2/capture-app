@@ -1,6 +1,6 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-// import type { ProgramRulesContainer } from '@dhis2/rules-engine-javascript';
+
 import { getTrackedEntityAttributeId, getDataElementId, getProgramId, getProgramRuleActions, getProgramStageId } from '../helpers';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
 

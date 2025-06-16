@@ -41,7 +41,7 @@ const getDataElementsForRulesExecution = (dataElements?: DataElements) =>
             [dataElement.id]: {
                 id: dataElement.id,
                 valueType: dataElement.valueType,
-                optionSetId: dataElement.optionSet && dataElement.optionSet.id,
+                optionSetId: dataElement.optionSet?.id,
             },
         }),
         {},
