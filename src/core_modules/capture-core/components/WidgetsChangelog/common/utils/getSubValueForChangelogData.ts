@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -6,25 +5,25 @@ import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api';
 
 type SubValueTEAProps = {
-    trackedEntity: Object,
-    attributeId: string,
-    programId: string,
-    absoluteApiPath: string,
-    querySingleResource: QuerySingleResource,
-    latestValue?: boolean,
+    trackedEntity: { teiId: string; value: any };
+    attributeId: string;
+    programId: string;
+    absoluteApiPath: string;
+    querySingleResource: QuerySingleResource;
+    latestValue?: boolean;
 };
 
 type SubValuesDataElementProps = {
-    dataElement: Object,
-    querySingleResource: QuerySingleResource,
-    eventId: string,
-    absoluteApiPath: string,
-    latestValue?: boolean,
+    dataElement: { id: string; value: any };
+    querySingleResource: QuerySingleResource;
+    eventId: string;
+    absoluteApiPath: string;
+    latestValue?: boolean;
 };
 
-const buildTEAUrlByElementType: {|
-[string]: Function,
-|} = {
+const buildTEAUrlByElementType: {
+    [key: string]: (props: SubValueTEAProps) => Promise<any>;
+} = {
     [dataElementTypes.FILE_RESOURCE]: async ({
         trackedEntity,
         attributeId,
@@ -85,9 +84,9 @@ const buildTEAUrlByElementType: {|
     },
 };
 
-const buildDataElementUrlByElementType: {|
-[string]: Function,
-|} = {
+const buildDataElementUrlByElementType: {
+    [key: string]: (props: SubValuesDataElementProps) => Promise<any>;
+} = {
     [dataElementTypes.FILE_RESOURCE]: async ({ dataElement, querySingleResource, eventId, absoluteApiPath, latestValue }: SubValuesDataElementProps) => {
         const { id: dataElementId, value } = dataElement;
         if (!value) return null;

@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import log from 'loglevel';
 import { useTimeZoneConversion, useConfig, useDataEngine } from '@dhis2/app-runtime';
@@ -14,15 +13,15 @@ import { RECORD_TYPE, subValueGetterByElementType } from '../utils/getSubValueFo
 import { makeQuerySingleResource } from '../../../../utils/api';
 
 type Props = {
-    rawRecords: Object,
-    dataItemDefinitions: ItemDefinitions,
-    entityId: string,
-    entityData: Object,
-    entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
-    programId?: string,
-    sortDirection: SortDirection,
-    page: number,
-    pageSize: number,
+    rawRecords: any;
+    dataItemDefinitions: ItemDefinitions;
+    entityId: string;
+    entityData: any;
+    entityType: typeof CHANGELOG_ENTITY_TYPES[keyof typeof CHANGELOG_ENTITY_TYPES];
+    programId?: string;
+    sortDirection: SortDirection;
+    page: number;
+    pageSize: number;
 };
 
 const fetchFormattedValues = async ({

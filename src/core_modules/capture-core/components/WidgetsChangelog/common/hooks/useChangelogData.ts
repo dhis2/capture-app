@@ -1,4 +1,3 @@
-// @flow
 import { useState } from 'react';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import {
@@ -11,9 +10,9 @@ import {
 import type { SortDirection } from '../Changelog/Changelog.types';
 
 type Props = {
-    entityId: string,
-    programId?: string,
-    entityType: $Values<typeof CHANGELOG_ENTITY_TYPES>,
+    entityId: string;
+    programId?: string;
+    entityType: typeof CHANGELOG_ENTITY_TYPES[keyof typeof CHANGELOG_ENTITY_TYPES];
 };
 
 export const useChangelogData = ({ entityId, entityType, programId }: Props) => {
@@ -21,7 +20,7 @@ export const useChangelogData = ({ entityId, entityType, programId }: Props) => 
     const [sortDirection, setSortDirection] = useState<SortDirection>(SORT_DIRECTIONS.DEFAULT);
 
     const [attributeToFilterBy, setAttributeToFilterBy] = useState<string | null>(null);
-    const [filterValue, setFilterValue] = useState<Object>(null);
+    const [filterValue, setFilterValue] = useState<{ id: string } | null>(null);
 
     const [page, setPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(DEFAULT_PAGE_SIZE);
