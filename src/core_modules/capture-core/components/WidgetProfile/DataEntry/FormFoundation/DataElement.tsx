@@ -72,7 +72,7 @@ const onValidateOnScopeTrackedEntityType = (
         .then((result) => {
             const apiTrackedEntities = handleAPIResponse(REQUESTED_ENTITIES.trackedEntities, result);
             const otherTrackedEntityInstances = apiTrackedEntities.filter((item: any) => item.trackedEntity !== contextProps.trackedEntityInstanceId);
-            const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) ?? {};
+            const trackedEntityInstance = otherTrackedEntityInstances?.[0] ?? {};
             const data = {
                 id: trackedEntityInstance.trackedEntity,
                 tetId: trackedEntityInstance.trackedEntityType,
@@ -163,7 +163,7 @@ const buildDataElementUnique = (
                         querySingleResource,
                     );
                 }
-                const trackedEntityInstance = (otherTrackedEntityInstances && otherTrackedEntityInstances[0]) ?? {};
+                const trackedEntityInstance = otherTrackedEntityInstances?.[0] ?? {};
 
                 const data = {
                     id: trackedEntityInstance.trackedEntity,

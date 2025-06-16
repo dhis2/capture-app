@@ -11,7 +11,7 @@ import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { NoticeBox } from '../NoticeBox';
-import type { PlainProps } from './widgetProfile.types';
+import type { Props } from './widgetProfile.types';
 import {
     useProgram,
     useTrackedEntityInstances,
@@ -47,7 +47,7 @@ const styles = {
 const showEditModal = (loading: boolean, error: any, showEdit: boolean, modalState: string) =>
     !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE;
 
-type Props = PlainProps & WithStyles<typeof styles>;
+type ComponentProps = Props & WithStyles<typeof styles>;
 
 const WidgetProfilePlain = ({
     teiId,
@@ -57,7 +57,7 @@ const WidgetProfilePlain = ({
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     classes,
-}: Props) => {
+}: ComponentProps) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
@@ -89,10 +89,10 @@ const WidgetProfilePlain = ({
     [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
-    const error = programsError || trackedEntityInstancesError || userRolesError;
+    const error = programsError ?? trackedEntityInstancesError ?? userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, trackedEntityInstanceAttributes || []);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
-    const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
+    const displayChangelog = supportsChangelog && program?.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
         .filter(item => item.displayInList)
@@ -208,4 +208,4 @@ const WidgetProfilePlain = ({
     );
 };
 
-export const WidgetProfile = withStyles(styles)(WidgetProfilePlain) as ComponentType<PlainProps>;
+export const WidgetProfile = withStyles(styles)(WidgetProfilePlain) as ComponentType<Props>;
