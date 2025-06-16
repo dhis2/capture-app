@@ -12,12 +12,35 @@ export type ReduxStore = {
             teis: any[];
             currentPage?: number;
         };
+        newPage?: {
+            uid?: string;
+        };
+        enrollmentPage?: {
+            teiId?: string;
+            programId?: string;
+            enrollmentId?: string;
+            fetchStatus?: Record<string, unknown>;
+            enrollments?: any[];
+            pageOpen?: boolean;
+        };
+        enrollmentDomain?: {
+            enrollment?: {
+                events?: any[];
+            };
+            eventSaveInProgress?: {
+                linkMode?: string;
+                requestEventId?: string;
+                linkedEventId?: string;
+                linkedOrgUnitId?: string;
+            };
+        };
     };
 };
 
 export type ApiUtils = {
     querySingleResource: (params: { resource: string; params?: Record<string, unknown> }) => Promise<any>;
     fromClientDate: (date: string) => { getServerZonedISOString: () => string };
+    navigate: (url: string) => void;
 };
 
 /**

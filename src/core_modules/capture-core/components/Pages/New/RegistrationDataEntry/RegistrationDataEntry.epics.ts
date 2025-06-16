@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { flatMap, map } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
 import { dataEntryKeys } from 'capture-core/constants';
-import type { ReduxStore, EpicAction } from '../../../../../capture-core-utils/types/global';
+import type { ReduxStore, EpicAction, ApiUtils } from '../../../../../capture-core-utils/types/global';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
@@ -63,8 +63,8 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
 
 export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic = (
     action$: EpicAction<any>,
-    store: any,
-    { navigate }: { navigate: (url: string) => void },
+    store: ReduxStore,
+    { navigate }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
