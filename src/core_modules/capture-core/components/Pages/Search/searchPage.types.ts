@@ -5,7 +5,3 @@ export type Props = {
     showBulkDataEntryPlugin: boolean;
     setShowBulkDataEntryPlugin: (show: boolean) => void;
 };
-
-export type PlainProps = Props & {
-    classes: Record<string, string>;
-};

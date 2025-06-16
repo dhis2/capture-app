@@ -1,10 +1,8 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
-import { compose } from 'redux';
-import { withStyles } from '@material-ui/core/styles';
-import { createStyles } from '@material-ui/core';
-import type { Props, PlainProps } from './searchPage.types';
+import { withStyles, type WithStyles, createStyles } from '@material-ui/core';
+import type { Props } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
@@ -46,7 +44,7 @@ const SearchPagePlain = ({
     setShowBulkDataEntryPlugin,
     showBulkDataEntryPlugin,
     classes,
-}: PlainProps) => (
+}: Props & WithStyles<typeof getStyles>) => (
     <>
         <TopBar programId={programId} orgUnitId={orgUnitId} />
         {showBulkDataEntryPlugin ? (
@@ -84,6 +82,5 @@ const SearchPagePlain = ({
     </>
 );
 
-export const SearchPageComponent = compose(withStyles(getStyles))(
-    SearchPagePlain,
-) as ComponentType<Props>;
+export const SearchPageComponent =
+    withStyles(getStyles)(SearchPagePlain) as ComponentType<Props>;
