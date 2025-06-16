@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { v4 as uuid } from 'uuid';
 import { pipe } from 'capture-core-utils';
@@ -10,10 +9,10 @@ import { GEOMETRY } from './helpers';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
-const geometryType = formValuesKey =>
+const geometryType = (formValuesKey: string) =>
     Object.values(GEOMETRY).find((value: any) => value.FEATURETYPE === formValuesKey);
 
-const standardGeoJson = (geometry) => {
+const standardGeoJson = (geometry: any) => {
     if (!geometry) {
         return undefined;
     }
@@ -31,20 +30,20 @@ const standardGeoJson = (geometry) => {
     return undefined;
 };
 
-const deriveAttributesFromFormValues = (formValues = {}) =>
+const deriveAttributesFromFormValues = (formValues: any = {}) =>
     Object.keys(formValues)
         .filter(key => !geometryType(key))
         .map(key => ({ attribute: key, value: formValues[key] }));
 
-const deriveGeometryFromFormValues = (formValues = {}) =>
+const deriveGeometryFromFormValues = (formValues: any = {}) =>
     Object.keys(formValues)
         .filter(key => geometryType(key))
-        .reduce((acc, currentKey) => standardGeoJson(formValues[currentKey]), undefined);
+        .reduce((acc: any, currentKey: string) => standardGeoJson(formValues[currentKey]), undefined);
 
-export const updateTeiEpic = (action$: InputObservable, store: ReduxStore) =>
+export const updateTeiEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(dataEntryActionTypes.TEI_UPDATE_REQUEST),
-        map((action) => {
+        map((action: any) => {
             const uid = uuid();
             const { formsValues } = store.value;
             const {
@@ -83,10 +82,10 @@ export const updateTeiEpic = (action$: InputObservable, store: ReduxStore) =>
         }),
     );
 
-export const updateTeiSucceededEpic = (action$: InputObservable) =>
+export const updateTeiSucceededEpic = (action$: any) =>
     action$.pipe(
         ofType(dataEntryActionTypes.TEI_UPDATE_SUCCESS),
-        map((action) => {
+        map((action: any) => {
             const trackedEntity = action.meta?.serverData?.trackedEntities[0] || {};
             const { attributes = [], geometry } = trackedEntity;
 
@@ -95,7 +94,7 @@ export const updateTeiSucceededEpic = (action$: InputObservable) =>
         }),
     );
 
-export const updateTeiFailedEpic = (action$: InputObservable) =>
+export const updateTeiFailedEpic = (action$: any) =>
     action$.pipe(
         ofType(dataEntryActionTypes.TEI_UPDATE_ERROR),
         map(() => setTeiModalError(true)),
