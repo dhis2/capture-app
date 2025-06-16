@@ -8,7 +8,7 @@ type Props = {
     dataItemDefinitions: ItemDefinitions;
     isOpen: boolean;
     close: () => void;
-    trackedEntityData: any;
+    trackedEntityData: Record<string, unknown>;
 };
 
 export const WidgetTrackedEntityChangelog = ({

@@ -4,7 +4,7 @@ import { Changelog, CHANGELOG_ENTITY_TYPES } from '../common/Changelog';
 
 type Props = {
     eventId: string;
-    eventData: any;
+    eventData: Record<string, unknown>;
     dataItemDefinitions: ItemDefinitions;
     isOpen: boolean;
     setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
