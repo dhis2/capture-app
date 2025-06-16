@@ -31,7 +31,7 @@ export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, tr
                 options: undefined,
             };
 
-            if (optionSet && optionSet.options) {
+            if (optionSet?.options) {
                 metadata.optionSet = optionSet.id;
                 metadata.options = optionSet.options.map(option => ({
                     code: option.value,

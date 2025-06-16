@@ -21,7 +21,7 @@ const standardGeoJson = (geometry: any) => {
             type: 'Polygon',
             coordinates: geometry,
         };
-    } else if (geometry.longitude && geometry.latitude) {
+    } else if (geometry?.longitude && geometry?.latitude) {
         return {
             type: 'Point',
             coordinates: [geometry.longitude, geometry.latitude],

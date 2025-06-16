@@ -211,7 +211,7 @@ const setBaseProperties = async ({
         dataElement.unique = buildDataElementUnique(dataElement, trackedEntityAttribute, querySingleResource);
     }
 
-    if (trackedEntityAttribute.optionSet && trackedEntityAttribute.optionSet.id) {
+    if (trackedEntityAttribute.optionSet?.id) {
         dataElement.optionSet = await buildOptionSet(
             dataElement,
             optionSets,
