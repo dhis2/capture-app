@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { cleanUpUid } from './NewPage.actions';

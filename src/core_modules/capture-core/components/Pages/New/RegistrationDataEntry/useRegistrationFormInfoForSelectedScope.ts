@@ -1,24 +1,25 @@
-// @flow
 import { useMemo } from 'react';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../../metaData';
+import type { RenderFoundation } from '../../../../metaData/RenderFoundation';
+import type { Enrollment } from '../../../../metaData/Program/Enrollment';
+import type { TeiRegistration } from '../../../../metaData/TrackedEntityType/TeiRegistration';
 
-type RegistrationOptions = $ReadOnly<{|
-  [elementId: string]: {|
-    +name: string,
-    +registrationMetaData: string,
-    +formId: string,
-    +formFoundation: Object,
-  |}
-|}>
+type RegistrationOptions = {
+  [elementId: string]: {
+    name: string;
+    registrationMetaData: Enrollment | TeiRegistration;
+    formId: string;
+    formFoundation: RenderFoundation;
+  };
+};
 
 const useRegistrationOptions = (): RegistrationOptions => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
     return useMemo(() =>
         Object.values(trackedEntityTypesWithCorrelatedPrograms)
-            // $FlowFixMe https://github.com/facebook/flow/issues/2221
-            .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeTeiRegistration, programs }) => ({
+            .reduce((acc: any, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeTeiRegistration, programs }: any) => ({
                 ...acc,
                 [trackedEntityTypeId]: {
                     formFoundation: trackedEntityTypeTeiRegistration.form,
@@ -26,7 +27,7 @@ const useRegistrationOptions = (): RegistrationOptions => {
                     name: trackedEntityTypeName,
                     formId: `registrationPageForm-${trackedEntityTypeId}`,
                 },
-                ...programs.reduce((accumulated, { programId, programName, enrollment }) => ({
+                ...programs.reduce((accumulated: any, { programId, programName, enrollment }: any) => ({
                     ...accumulated,
                     [programId]: {
                         name: programName,
@@ -35,11 +36,15 @@ const useRegistrationOptions = (): RegistrationOptions => {
                         formId: `registrationPageForm-${programId}`,
                     },
                 }), {}),
-            }), {}),
+            }), {}) as RegistrationOptions,
     [trackedEntityTypesWithCorrelatedPrograms]);
 };
 
-export const useRegistrationFormInfoForSelectedScope = (selectedScopeId: string) => {
+export const useRegistrationFormInfoForSelectedScope = (selectedScopeId: string): {
+    formFoundation: RenderFoundation | null;
+    formId: string | null;
+    registrationMetaData: Enrollment | TeiRegistration | Record<string, never>;
+} => {
     const options = useRegistrationOptions();
     const { scopeType } = useScopeInfo(selectedScopeId);
 
@@ -47,5 +52,5 @@ export const useRegistrationFormInfoForSelectedScope = (selectedScopeId: string)
         const { formFoundation, formId, registrationMetaData } = options[selectedScopeId];
         return { formFoundation, formId, registrationMetaData };
     }
-    return { formFoundation: [], formId: null, registrationMetaData: {} };
+    return { formFoundation: null, formId: null, registrationMetaData: {} };
 };

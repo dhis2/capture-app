@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../../actions/actions.utils';
 import { effectMethods } from '../../../../trackerOffline';
 import type {
@@ -18,9 +17,8 @@ export const registrationFormActionTypes = {
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE: 'SaveNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED: 'FailSavingNewTrackedEntityInstanceWithEnrollment',
-};
+} as const;
 
-// without enrollment
 export const startSavingNewTrackedEntityInstance = (teiPayload: TeiPayload) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START)({ teiPayload });
 
@@ -45,13 +43,12 @@ export const saveNewTrackedEntityInstance = (candidateForRegistration: any) =>
         },
     );
 
-// with enrollment
 export const startSavingNewTrackedEntityInstanceWithEnrollment = (
     enrollmentPayload: EnrollmentPayload,
     uid: string,
     redirect: {
-        programStageId?: string,
-        eventId?: string,
+        programStageId?: string;
+        eventId?: string;
     },
 ) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)({
@@ -65,12 +62,12 @@ export const saveNewTrackedEntityInstanceWithEnrollment = ({
     uid,
     redirect,
 }: {
-    candidateForRegistration: any,
-    uid: string,
+    candidateForRegistration: any;
+    uid: string;
     redirect: {
-        programStageId?: string,
-        eventId?: string,
-    }
+        programStageId?: string;
+        eventId?: string;
+    };
 }) =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)(
         { ...candidateForRegistration },
