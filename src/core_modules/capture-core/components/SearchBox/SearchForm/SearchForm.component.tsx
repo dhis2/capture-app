@@ -1,5 +1,5 @@
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
-import { withStyles, type WithStyles, createStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
 import { D2Form } from '../../D2Form';
@@ -9,7 +9,7 @@ import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
-const getStyles = () => createStyles({
+const styles: Readonly<any> = {
     searchDomainsContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -41,7 +41,7 @@ const getStyles = () => createStyles({
         flexGrow: 1,
         color: colors.red600,
     },
-});
+};
 
 const useFormDataLifecycle = (
     searchGroupsForSelectedScope,
@@ -98,7 +98,7 @@ const SearchFormIndex = ({
     isSearchViaUniqueIdValid,
     showUniqueSearchValueEmptyModal,
     keptFallbackSearchFormValues,
-}: Props & WithStyles<typeof getStyles>) => {
+}: Props & WithStyles<typeof styles>) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
 
     useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore, keptFallbackSearchFormValues);
@@ -342,4 +342,4 @@ const SearchFormIndex = ({
     ]);
 };
 
-export const SearchFormComponent = withStyles(getStyles)(SearchFormIndex) as ComponentType<Props>;
+export const SearchFormComponent = withStyles(styles)(SearchFormIndex) as ComponentType<Props>;
