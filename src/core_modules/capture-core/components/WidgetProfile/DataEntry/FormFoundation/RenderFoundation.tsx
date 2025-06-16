@@ -53,7 +53,7 @@ const buildTetFeatureTypeSection = async (
 
     const section = new Section((o) => {
         o.id = programTrackedEntityTypeId;
-        o.name = trackedEntityType?.displayName || '';
+        o.name = trackedEntityType?.displayName ?? '';
     });
 
     featureTypeField && section.addElement(featureTypeField);
@@ -230,7 +230,7 @@ export const buildFormFoundation = async (
     });
 
     let section;
-    if (programSections?.length || dataEntryFormConfig) {
+    if (programSections?.length ?? dataEntryFormConfig) {
         if (trackedEntityTypeId) {
             section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
             section && renderFoundation.addSection(section);
@@ -335,6 +335,6 @@ export const build = async (
     minorServerVersion: number,
     dataEntryFormConfig?: DataEntryFormConfig | null,
 ) => {
-    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) || {};
+    const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) ?? {};
     setFormFoundation && setFormFoundation(formFoundation);
 };
