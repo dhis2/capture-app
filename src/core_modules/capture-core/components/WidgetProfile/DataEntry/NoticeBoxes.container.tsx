@@ -15,7 +15,7 @@ export const NoticeBoxes = ({
 }: Props) => (
     <>
         <br />
-        {errorsMessages && errorsMessages.length > 0 && (
+        {errorsMessages?.length > 0 && (
             <NoticeBox title={i18n.t('There is a problem with this form')} error>
                 <ul>
                     {errorsMessages?.map(error => (
@@ -25,7 +25,7 @@ export const NoticeBoxes = ({
             </NoticeBox>
         )}
         <br />
-        {warningsMessages && warningsMessages.length > 0 && (
+        {warningsMessages?.length > 0 && (
             <NoticeBox title={i18n.t('There are warnings in this form')} warning>
                 <ul>
                     {warningsMessages?.map(warning => (
