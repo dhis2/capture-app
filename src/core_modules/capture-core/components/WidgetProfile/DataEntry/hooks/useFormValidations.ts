@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
 
 const prepareMessages = (rulesEffectsGeneral: any, rulesEffectsMessages: any, saveAttempted: boolean, type: string) => {
-    let messages = rulesEffectsGeneral && rulesEffectsGeneral[type] ? rulesEffectsGeneral[type] : [];
+    let messages = rulesEffectsGeneral?.[type] ?? [];
     if (saveAttempted) {
         messages = rulesEffectsGeneral[`${type}OnComplete`] ? [...messages, ...rulesEffectsGeneral[`${type}OnComplete`]] : messages;
 
