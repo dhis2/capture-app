@@ -15,7 +15,7 @@ const getUrlSyncer = (
             if (param && param.length > 0) {
                 const regExp = new RegExp(`${id}=`, 'i');
                 const result = param[param.length - 1].replace(regExp, '').trim();
-                value = result || null;
+                value = result ?? null;
             }
             return value;
         }
