@@ -1,3 +1,10 @@
+## [102.6.5](https://github.com/dhis2/capture-app/compare/v102.6.4...v102.6.5) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-7079] Frontend validation when adding new events in locked periods ([#4070](https://github.com/dhis2/capture-app/issues/4070)) ([e72917e](https://github.com/dhis2/capture-app/commit/e72917ec85b1b22c381f669a6af5e7d69516b2d2))
+
 ## [102.6.4](https://github.com/dhis2/capture-app/compare/v102.6.3...v102.6.4) (2025-06-16)
 
 
