@@ -25,7 +25,7 @@ const getUrlSyncer = (
                 .keys(locationParams)
                 .reduce((accNextParams, locationKey) => {
                     const syncSpec = syncSpecification.find(s => s.urlParameterName === locationKey);
-                    const paramName = syncSpec?.urlParameterName || locationKey;
+                    const paramName = syncSpec?.urlParameterName ?? locationKey;
                     accNextParams[paramName] = locationParams[locationKey];
                     return accNextParams;
                 }, {} as Record<string, unknown>);
@@ -48,14 +48,14 @@ const getUrlSyncer = (
         }
 
         noUpdateRequired() {
-            this.props.onNoUpdateRequired && this.props.onNoUpdateRequired();
+            this.props.onNoUpdateRequired?.();
         }
 
         triggerSyncCallback() {
             if (this.queuedUpdate) {
                 this.update({
                     nextProps: this.queuedUpdate.nextProps,
-                    prevProps: this.props.stateParams || {},
+                    prevProps: this.props.stateParams ?? {},
                     nextPage: this.props.urlPage,
                     prevPage: this.props.statePage,
                 });
@@ -69,7 +69,7 @@ const getUrlSyncer = (
             return syncSpecifications
                 .some((spec) => {
                     const locationValue = locationParams[spec.urlParameterName];
-                    const propValue = (this.props.stateParams && this.props.stateParams[spec.urlParameterName]) || undefined;
+                    const propValue = this.props.stateParams?.[spec.urlParameterName] ?? undefined;
                     return locationValue !== propValue;
                 });
         }
@@ -77,7 +77,7 @@ const getUrlSyncer = (
         isOutOfSync() {
             const syncSpecification = onGetSyncSpecification(this.props);
             const { history: { location }, statePage, urlPage } = this.props;
-            const locationParams = queryString.parse(location && location.search);
+            const locationParams = queryString.parse(location?.search);
             const urlParamsAreOutOfSync = this.paramsNeedsUpdate(syncSpecification, locationParams);
             const urlPathnameIsOutOfSync = urlPage !== statePage;
 
