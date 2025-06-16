@@ -125,7 +125,7 @@ export const TopBar = ({
             <TopBarActions
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
-                isUserInteractionInProgress={mode === dataEntryKeys.EDIT}
+                isUserInteractionInProgress={isUserInteractionInProgress}
             />
         </ScopeSelector>
     );
