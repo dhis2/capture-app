@@ -1,11 +1,10 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { resetLocationChange } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const navigateBackToMainPageEpic = (action$: any, store: any, { navigate }: any) =>
     action$.pipe(
         ofType(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE),
         switchMap(() => {
@@ -16,4 +15,3 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
             });
         }),
     );
-

@@ -1,9 +1,9 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
+import { createStyles } from '@material-ui/core';
 import type { Props, PlainProps } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
@@ -12,7 +12,7 @@ import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
 import { BulkDataEntry } from '../../BulkDataEntry';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 
-const getStyles = () => ({
+const getStyles = () => createStyles({
     backButton: {
         margin: spacers.dp16,
         padding: '0',
@@ -84,6 +84,6 @@ const SearchPagePlain = ({
     </>
 );
 
-export const SearchPageComponent: ComponentType<$Diff<Props, CssClasses>> = compose(withStyles(getStyles))(
+export const SearchPageComponent = compose(withStyles(getStyles))(
     SearchPagePlain,
-);
+) as ComponentType<Props>;
