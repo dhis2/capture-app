@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
+import type { Action } from 'redux';
 import type { Props } from './dataEntry.types';
 import { DataEntryComponent } from './DataEntry.component';
 import { useLifecycle, useFormValidations } from './hooks';
@@ -57,7 +58,7 @@ export const DataEntry = ({
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const onUpdateFormField = useCallback(
-        (innerAction: any) => {
+        (innerAction: Action) => {
             const uid = uuid();
             onDisable();
             dispatch(startRunRulesPostUpdateField(dataEntryId, itemId, uid));
@@ -72,7 +73,7 @@ export const DataEntry = ({
         [dispatch, querySingleResource, context, onGetValidationContext, onDisable, onEnable],
     );
     const onUpdateFormFieldAsync = useCallback(
-        (innerAction: any) => {
+        (innerAction: Action) => {
             dispatch(innerAction);
         },
         [dispatch],

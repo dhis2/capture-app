@@ -131,7 +131,7 @@ const WidgetProfilePlain = ({
 
         if (error) {
             log.error(errorCreator('Profile widget could not be loaded')({ error }));
-            return <span>{i18n.t('Profile widget could not be loaded. Please try again later') as string}</span>;
+            return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
         }
 
         return (
@@ -154,12 +154,12 @@ const WidgetProfilePlain = ({
                                     trackedEntityTypeName,
                                     interpolation: { escapeValue: false },
                                 })
-                                : i18n.t('Profile') as string}
+                                : i18n.t('Profile')}
                         </div>
                         <div className={classes.actions}>
                             {isEditable && (
                                 <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
-                                    {i18n.t('Edit') as string}
+                                    {i18n.t('Edit')}
                                 </Button>
                             )}
                             <OverflowMenu

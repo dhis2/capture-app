@@ -29,7 +29,7 @@ export const DataEntryComponent = ({
             {i18n.t(
                 'Change information about this {{trackedEntityName}} here. Information about this enrollment can be edited in the Enrollment widget.',
                 { trackedEntityName, interpolation: { escapeValue: false } },
-            ) as string}
+            )}
             <DataEntry
                 id={dataEntryId}
                 formFoundation={formFoundation}
@@ -48,17 +48,17 @@ export const DataEntryComponent = ({
         <ModalActions>
             <ButtonStrip end>
                 <Button onClick={onCancel} secondary>
-                    {i18n.t('Cancel without saving') as string}
+                    {i18n.t('Cancel without saving')}
                 </Button>
                 {modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
                     <Button loading primary>
-                        {i18n.t(' Loading...') as string}
+                        {i18n.t(' Loading...')}
                     </Button>
                 )}
 
                 {(modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
                     <Button onClick={onSave} primary>
-                        {i18n.t('Save changes') as string}
+                        {i18n.t('Save changes')}
                     </Button>
                 )}
             </ButtonStrip>

@@ -37,7 +37,7 @@ export const NoticeBoxes = ({
         <br />
         {hasApiError && (
             <NoticeBox title={i18n.t('There was a problem saving changes')} error>
-                {i18n.t('Try again or contact your system administrator for support') as string}
+                {i18n.t('Try again or contact your system administrator for support')}
             </NoticeBox>
         )}
         <br />
