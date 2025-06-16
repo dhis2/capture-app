@@ -9,8 +9,8 @@ import {
     type TextFilterData,
 } from '../../../../WorkingListsBase';
 import type { ApiDataFilterBoolean, ApiDataFilterDateContents } from '../../../types';
-import { ADDITIONAL_FILTERS } from '../..';
 import { MAIN_FILTERS } from '../../../constants';
+import { ADDITIONAL_FILTERS } from '../../eventFilters';
 
 const getTextFilter = (filter: TextFilterData) => ({
     like: filter.value,

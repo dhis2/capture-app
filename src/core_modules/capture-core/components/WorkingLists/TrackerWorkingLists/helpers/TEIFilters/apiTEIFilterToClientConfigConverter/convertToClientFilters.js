@@ -22,7 +22,8 @@ import type {
 import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
-import { ADDITIONAL_FILTERS } from '../..';
+import { ADDITIONAL_FILTERS } from '../../eventFilters';
+
 
 const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
     const value = filter.like;
