@@ -1,3 +1,24 @@
+## [102.6.5](https://github.com/dhis2/capture-app/compare/v102.6.4...v102.6.5) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-7079] Frontend validation when adding new events in locked periods ([#4070](https://github.com/dhis2/capture-app/issues/4070)) ([e72917e](https://github.com/dhis2/capture-app/commit/e72917ec85b1b22c381f669a6af5e7d69516b2d2))
+
+## [102.6.4](https://github.com/dhis2/capture-app/compare/v102.6.3...v102.6.4) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-19694] use the EQ operator when filtering by unique TEA in the WLs ([#4129](https://github.com/dhis2/capture-app/issues/4129)) ([1753883](https://github.com/dhis2/capture-app/commit/175388348038a69219c7d4d333044c87ec14849d))
+
+## [102.6.3](https://github.com/dhis2/capture-app/compare/v102.6.2...v102.6.3) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-11104] Translation for Unique Search ([#4133](https://github.com/dhis2/capture-app/issues/4133)) ([acf4132](https://github.com/dhis2/capture-app/commit/acf413202da668bcae2af53d3ae56988fd99eaf7))
+
 ## [102.6.2](https://github.com/dhis2/capture-app/compare/v102.6.1...v102.6.2) (2025-06-10)
 
 
