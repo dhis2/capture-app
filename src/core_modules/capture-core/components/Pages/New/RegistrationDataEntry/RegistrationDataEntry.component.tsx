@@ -279,6 +279,7 @@ const RegistrationDataEntryPlain = ({
                     <SingleEventRegistrationEntry
                         id="singleEvent"
                         selectedScopeId={selectedScopeId}
+                        orgUnitId={currentOrgUnitId}
                     />
                 )
             }

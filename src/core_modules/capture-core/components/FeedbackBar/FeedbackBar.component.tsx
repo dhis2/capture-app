@@ -15,20 +15,25 @@ const styles = {
 
 type Props = FeedbackBarComponentProps & WithStyles<typeof styles>;
 
+const getAlertVariant = (variant?: string) => (
+    variant ? { [variant]: true } : {}
+);
+
 const FeedbackBarComponentPlain = ({ feedback, onClose }: Props) => {
     if (!feedback) {
         return null;
     }
 
-    const { message, displayType } = feedback;
+    const { message, displayType, variant } = feedback;
     const isAlertBarOpen = typeof message === 'string' && !displayType;
     const isDialogOpen = typeof message === 'object' && displayType === 'dialog';
+    const alertVariant = getAlertVariant(variant);
 
     return (
         <>
             <AlertStack>
                 {isAlertBarOpen && (
-                    <AlertBar duration={5000}>
+                    <AlertBar {...alertVariant} duration={5000}>
                         {message}
                     </AlertBar>
                 )}

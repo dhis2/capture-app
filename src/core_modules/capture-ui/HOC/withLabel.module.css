@@ -10,8 +10,7 @@
 
 .labelContainer {
     padding-right: 16px;
-    flex-grow: 0;
-    flex-shrink: 0;
+    min-width: 40%;
 }
 
 .labelContainerVertical {

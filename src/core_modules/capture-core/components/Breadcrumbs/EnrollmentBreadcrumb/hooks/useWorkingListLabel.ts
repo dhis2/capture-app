@@ -11,10 +11,10 @@ type Template = {
 type Props = {
     programId: string;
     displayFrontPageList: boolean;
-    trackedEntityName?: string;
 }
 
 const DefaultFilterKeys = {
+    DEFAULT: 'default',
     ACTIVE: 'active',
     COMPLETE: 'complete',
     CANCELLED: 'cancelled',
@@ -23,6 +23,7 @@ const DefaultFilterKeys = {
 type DefaultFilterKey = typeof DefaultFilterKeys[keyof typeof DefaultFilterKeys];
 
 const DefaultFilterLabels: { [key in DefaultFilterKey]: string } = {
+    [DefaultFilterKeys.DEFAULT]: i18n.t('Program overview'),
     [DefaultFilterKeys.ACTIVE]: i18n.t('Active enrollments'),
     [DefaultFilterKeys.COMPLETE]: i18n.t('Completed enrollments'),
     [DefaultFilterKeys.CANCELLED]: i18n.t('Cancelled enrollments'),
@@ -30,7 +31,6 @@ const DefaultFilterLabels: { [key in DefaultFilterKey]: string } = {
 
 export const useWorkingListLabel = ({
     programId,
-    trackedEntityName,
     displayFrontPageList,
 }: Props) => {
     const workingListTemplates = useSelector((state: any) => state.workingListsTemplates?.teiList);
@@ -53,20 +53,18 @@ export const useWorkingListLabel = ({
                 return DefaultFilterLabels[selectedTemplateId as DefaultFilterKey];
             }
 
-            if (selectedTemplate?.name === 'default') {
-                return i18n.t('{{trackedEntityName}} list', { trackedEntityName });
-            }
+            return i18n.t('Program overview');
         }
 
         if (!displayFrontPageList) return i18n.t('Search');
-        return trackedEntityName ? i18n.t('{{trackedEntityName}} list', { trackedEntityName }) : i18n.t('Working List');
+
+        return i18n.t('Program overview');
     }, [
         displayFrontPageList,
         isLoadingTemplates,
         isSameProgram,
         selectedTemplate,
         selectedTemplateId,
-        trackedEntityName,
     ]);
 
     return {

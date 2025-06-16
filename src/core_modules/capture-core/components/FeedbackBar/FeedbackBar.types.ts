@@ -4,6 +4,7 @@ export type Feedback = {
     message: string | { title: string; content: string };
     action?: ReactNode;
     displayType?: 'alert' | 'dialog';
+    variant?: 'info' | 'success' | 'warning' | 'critical';
 };
 
 export type FeedbackBarComponentProps = {

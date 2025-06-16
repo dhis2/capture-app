@@ -10,7 +10,7 @@ import {
 } from './NewPage.actions';
 import { newPageStatuses } from './NewPage.constants';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
-import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
+import { getScopeFromScopeId, TrackerProgram, TrackedEntityType, EventProgram } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { useTrackedEntityAttributes } from './hooks';
@@ -84,8 +84,12 @@ export const NewPage: ComponentType<Record<string, never>> = () => {
 
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
+    // TODO: OrgUnitSelectionIncomplete should be removed when DHIS2-19171 is implemented
     const orgUnitSelectionIncomplete: boolean = useSelector(
-        ({ currentSelections }: any) => !currentSelections.orgUnitId && !currentSelections.complete,
+        ({ currentSelections }: any) =>
+            !(program instanceof EventProgram) &&
+            !currentSelections.orgUnitId &&
+            !currentSelections.complete,
     );
 
     const newPageStatus: keyof typeof newPageStatuses =

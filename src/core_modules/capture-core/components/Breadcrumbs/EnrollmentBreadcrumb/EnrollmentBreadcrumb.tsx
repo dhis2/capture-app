@@ -29,7 +29,6 @@ type OwnProps = {
     displayFrontPageList: boolean;
     programId: string;
     userInteractionInProgress?: boolean;
-    trackedEntityName?: string;
     eventStatus?: EventStatus;
     page: 'mainPage' | EnrollmentPageKeyTypes;
 };
@@ -61,7 +60,6 @@ const BreadcrumbsPlain = ({
     onBackToViewEvent,
     eventStatus,
     programId,
-    trackedEntityName,
     displayFrontPageList,
     userInteractionInProgress = false,
     page,
@@ -70,7 +68,6 @@ const BreadcrumbsPlain = ({
     const [openWarning, setOpenWarning] = useState<WarningKey | null>(null);
 
     const { label } = useWorkingListLabel({
-        trackedEntityName,
         programId,
         displayFrontPageList,
     });

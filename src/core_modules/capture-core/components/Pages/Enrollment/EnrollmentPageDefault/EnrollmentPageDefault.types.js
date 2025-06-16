@@ -47,7 +47,6 @@ export type Props = {|
     pageLayout: PageLayoutConfig,
     availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
     onDeleteTrackedEntitySuccess: () => void,
-    trackedEntityName: string,
 |};
 
 export type PlainProps = {|

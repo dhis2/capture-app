@@ -51,6 +51,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Inscripciones activas"
+
+msgid "Completed enrollments"
+msgstr "Inscripciónes completadas"
+
+msgid "Cancelled enrollments"
+msgstr "Inscripciones canceladas "
+
+msgid "Search"
+msgstr "Buscar"
+
 msgid "Enrollment dashboard"
 msgstr "Panel de inscripción"
 
@@ -62,24 +80,6 @@ msgstr "Editar evento"
 
 msgid "New event"
 msgstr "Evento nuevo"
-
-msgid "Active enrollments"
-msgstr "Inscripciones activas"
-
-msgid "Completed enrollments"
-msgstr "Inscripciónes completadas"
-
-msgid "Cancelled enrollments"
-msgstr "Inscripciones canceladas "
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} lista"
-
-msgid "Search"
-msgstr "Buscar"
-
-msgid "Working List"
-msgstr "Lista de trabajo"
 
 msgid "Event list"
 msgstr "Lista de eventos"
@@ -224,6 +224,9 @@ msgstr "Asignado por"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Guardando en {{programName}} en {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -248,6 +251,9 @@ msgstr "Completado"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Por favor, añada o cancele la nota antes de guardar el evento"
+
+msgid "Please provide an valid organisation unit"
+msgstr "Por favor, indique una unidad organizativa válida"
 
 msgid "Save and add another"
 msgstr "Guardar y agregar otro"
@@ -1166,6 +1172,12 @@ msgstr ""
 "Debe proporcionar una razón para ver inscripciones en este programa "
 "protegido. Toda actividad será registrada en el log."
 
+msgid "Unsaved changes"
+msgstr ""
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Acciones de inscripción"
 
@@ -1297,9 +1309,6 @@ msgstr "Establecer coordenadas"
 msgid "Add area"
 msgstr "Agregar área"
 
-msgid "Please provide an valid organisation unit"
-msgstr "Por favor, indique una unidad organizativa válida"
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 "No se pudo recuperar la unidad de organización. Por favor, inténtelo de "
@@ -1405,7 +1414,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Schedule date / Due date"
-msgstr "Fecha de programación/fecha de vencimiento"
+msgstr "Fecha de programación/fecha prevista"
 
 msgid "Please provide a valid organisation unit"
 msgstr "Proporcione una unidad organizativa válida"
