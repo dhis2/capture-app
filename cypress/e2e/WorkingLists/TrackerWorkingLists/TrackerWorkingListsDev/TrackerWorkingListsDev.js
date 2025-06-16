@@ -47,7 +47,7 @@ Then('teis should be retrieved from the api using the default query args', () =>
 });
 
 Then('the first page of the default tei working list should be displayed', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('exist');
 
@@ -153,7 +153,7 @@ Then('the list should display the teis retrieved from the api', () => {
     cy.get('@teis')
         .then((body) => {
             const apiTrackedEntities = body.trackedEntities || body.instances || [];
-            cy.get('[data-test="tei-working-lists"]')
+            cy.get('[data-test="tracker-working-lists"]')
                 .find('tr')
                 .should('have.length', apiTrackedEntities.length + 1);
         });
@@ -161,7 +161,7 @@ Then('the list should display the teis retrieved from the api', () => {
     cy.get('@teis')
         .then((body) => {
             const apiTrackedEntities = body.trackedEntities || body.instances || [];
-            cy.get('[data-test="tei-working-lists"]')
+            cy.get('[data-test="tracker-working-lists"]')
                 .find('tr')
                 .each(($teiRow, index) => {
                     const rowId = $teiRow.get(0).getAttribute('data-test');

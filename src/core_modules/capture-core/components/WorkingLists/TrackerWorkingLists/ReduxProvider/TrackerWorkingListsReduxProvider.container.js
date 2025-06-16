@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TrackerWorkingListsViewMenuSetup } from '../ViewMenuSetup';
 import { useWorkingListsCommonStateManagement, fetchTemplates, TEMPLATE_SHARING_TYPE } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-import { TEI_WORKING_LISTS_TYPE } from '../constants';
+import { TRACKER_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './TrackerWorkingListsReduxProvider.types';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { useNavigate, buildUrlQueryString } from '../../../../utils/routing';
@@ -41,13 +41,13 @@ export const TrackerWorkingListsReduxProvider = ({
         currentTemplateId,
         viewPreloaded,
         ...commonStateManagementProps
-    } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
+    } = useWorkingListsCommonStateManagement(storeId, TRACKER_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();
     const forceUpdateOnMount = moment().diff(moment(listDataRefreshTimestamp || 0), 'minutes') > 5 ||
         lastTransaction !== lastTransactionOnListDataRefresh;
 
     const onLoadTemplates = useCallback(() => {
-        dispatch(fetchTemplates({ programId, storeId, workingListsType: TEI_WORKING_LISTS_TYPE, selectedTemplateId }));
+        dispatch(fetchTemplates({ programId, storeId, workingListsType: TRACKER_WORKING_LISTS_TYPE, selectedTemplateId }));
     }, [dispatch, programId, storeId, selectedTemplateId]);
 
     useEffect(() => {

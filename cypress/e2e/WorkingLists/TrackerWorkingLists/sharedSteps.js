@@ -2,7 +2,7 @@ import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import '../sharedSteps';
 
 When(/^you set the assginee filter to (.*)$/, (assignedUser) => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Assigned to')
         .click();
 
@@ -12,7 +12,7 @@ When(/^you set the assginee filter to (.*)$/, (assignedUser) => {
 });
 
 Then(/^the assignee filter button should show that (.*) filter is in effect/, (assignedUser) => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains(`Assigned to: ${assignedUser}`)
         .should('exist');
 });

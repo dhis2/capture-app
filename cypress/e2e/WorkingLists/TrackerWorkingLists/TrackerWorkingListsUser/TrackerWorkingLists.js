@@ -35,7 +35,7 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 Given('you open the main page with Ngelehun, WHO RMNCH Tracker and First antenatal care visit context', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .within(() => {
             cy.contains('More filters')
                 .click();
@@ -60,7 +60,7 @@ Given('you open the main page with Ngelehun and Malaria case diagnosis and House
     cleanUpIfApplicable('qDkgAbB5Jlk');
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .within(() => {
             cy.contains('More filters')
                 .click();
@@ -101,7 +101,7 @@ Then('the default working list should be displayed', () => {
         'Wayne',
     ];
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 16)
         .each(($teiRow, index) => {
@@ -128,7 +128,7 @@ Then('the list should display teis with a completed enrollment', () => {
         'Alan Thompson',
     ];
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 6)
         .each(($teiRow, index) => {
@@ -145,13 +145,13 @@ Then('the list should display teis with a completed enrollment', () => {
 });
 
 Then('the enrollment status filter button should show that the completed filter is in effect', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment status: Completed')
         .should('exist');
 });
 
 When('you set the enrollment status filter to completed', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment status')
         .click();
 
@@ -161,7 +161,7 @@ When('you set the enrollment status filter to completed', () => {
 });
 
 When('you set the enrollment date to a relative range', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment date')
         .click();
     cy.get('[data-test="date-range-filter-start"]')
@@ -171,7 +171,7 @@ When('you set the enrollment date to a relative range', () => {
 });
 
 When('you set the event status filter to completed', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Event status')
         .click();
 
@@ -181,7 +181,7 @@ When('you set the event status filter to completed', () => {
 });
 
 When('you set the WHOMCH Smoking filter to No', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .within(() => {
             cy.get('[data-test="more-filters"]').eq(1)
                 .click();
@@ -201,7 +201,7 @@ Then('the list should display teis with an active enrollment and unassinged even
         'FSL05494',
     ];
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 3)
         .each(($teiRow, index) => {
@@ -214,7 +214,7 @@ Then('the list should display teis with an active enrollment and unassinged even
 });
 
 Then('the list should display teis with John as the first name', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 4)
         .each(($teiRow, index) => {
@@ -269,7 +269,7 @@ Then('the list should display data for the second page', () => {
         'Olvia',
     ];
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 16)
         .each(($teiRow, index) => {
@@ -295,7 +295,7 @@ Then('the list should display 10 rows of data', () => {
         'Donald',
     ];
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 11)
         .each(($teiRow, index) => {
@@ -346,7 +346,7 @@ Then('the list should display data ordered ascendingly by first name', () => {
         'John',
     ];
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 16)
         .each(($teiRow, index) => {
@@ -364,7 +364,7 @@ Then('the list should display data ordered ascendingly by last name', () => {
         'Siren',
     ];
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 3)
         .each(($teiRow, index) => {
@@ -382,7 +382,7 @@ Then('the list should display data ordered descending by WHOMCH Hemoglobin', () 
         'Siren',
     ];
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 3)
         .each(($teiRow, index) => {
@@ -561,7 +561,7 @@ When('you create a copy of the working list',
     });
 
 When('you open the program stage filters from the more filters dropdown menu', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .within(() => {
             cy.contains('More filters')
                 .click();
@@ -610,35 +610,35 @@ When('you select a data element columns and save from the column selector', () =
 Then('you see data elements specific filters and columns', () => {
     cy.get('[data-test="filter-button-container-assignee"]')
         .should('exist');
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .should('exist');
 });
 
 Then('the list should display 1 row of data', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment status: Active')
         .should('exist');
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Event status: Completed')
         .should('exist');
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('First name: Urzula')
         .should('exist');
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('WHOMCH Smoking: No')
         .should('exist');
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 2);
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('table')
         .contains('Urzula')
         .should('exist');
 });
 
 Then(/^you ?(.*) see program stage working list events/, (not) => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('WHOMCH Smoking')
         .should(not ? 'not.exist' : 'exist');
 });
@@ -652,7 +652,7 @@ When('you remove the program stage filter', () => {
 });
 
 When('you open a tei from the working list', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Filona')
         .click();
 });
@@ -671,7 +671,7 @@ Then('the working list called completed enrollments should be selected', () => {
 });
 
 Then('you see scheduledAt filter', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Appointment date')
         .should('exist');
 });
@@ -689,7 +689,7 @@ When('you select a scheduledAt column and save from the column selector', () => 
 });
 
 When('you select the events scheduled today', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Appointment date')
         .click();
 
@@ -699,7 +699,7 @@ When('you select the events scheduled today', () => {
 });
 
 Then('you see the selected option in the scheduledAt filter', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Appointment date: Today')
         .should('exist');
 });
@@ -709,10 +709,10 @@ Then('you are redirect to the default templete', () => {
 });
 
 Then('the TEI working list initial configuration was kept', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment status: Active')
         .should('exist');
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="more-filters"]')
         .should('have.length', 2);
 });
@@ -727,13 +727,13 @@ And('you change the org unit', () => {
 });
 
 Then('the working list configuration was kept', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Event status: Completed')
         .should('exist');
 });
 
 Then('the program stage custom working list filters are loaded', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="more-filters"]')
         .should('have.length', 2);
 });
@@ -741,7 +741,7 @@ Then('the program stage custom working list filters are loaded', () => {
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and configure a program stage working list', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8&selectedTemplateId=WSGAb5XwJ3Y-default');
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .within(() => {
             cy.contains('More filters')
                 .click();
@@ -761,7 +761,7 @@ Given('you open the main page with Ngelehun and WHO RMNCH Tracker context and co
 Given('you open the main page with all accesible records in the WHO RMNCH Tracker context and configure a program stage working list', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&all');
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .within(() => {
             cy.contains('More filters')
                 .click();
@@ -792,11 +792,11 @@ When('you go back using the browser button', () => {
 });
 
 Then('the program stage working list is loaded', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('[data-test="more-filters"]')
         .should('have.length', 2);
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('WHOMCH Hemoglobin value')
         .should('exist');
 });
@@ -856,7 +856,7 @@ Then('the JSON button exists', () => {
 });
 
 When('you set the event visit date to Today', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Date of visit')
         .click();
 
@@ -866,7 +866,7 @@ When('you set the event visit date to Today', () => {
 });
 
 Then('the working list is empty', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('No items to display')
         .click();
 });
@@ -880,13 +880,13 @@ Then('the assignee column is displayed', () => {
         .contains('Tracker demo User (tracker)')
         .should('exist');
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .find('tr')
         .should('have.length', 2);
 });
 
 And('you filter by assigned Foci investigation & classification events', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .within(() => {
             cy.contains('More filters')
                 .click();
@@ -902,7 +902,7 @@ And('you filter by assigned Foci investigation & classification events', () => {
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
 
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Assigned to')
         .click();
 

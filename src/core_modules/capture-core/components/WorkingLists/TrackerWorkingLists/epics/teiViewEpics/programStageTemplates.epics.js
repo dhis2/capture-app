@@ -16,7 +16,7 @@ import {
     workingListsCommonActionTypes,
     workingListsCommonActionTypesBatchActionTypes,
 } from '../../../WorkingListsCommon';
-import { TEI_WORKING_LISTS_TYPE } from '../../constants';
+import { TRACKER_WORKING_LISTS_TYPE } from '../../constants';
 import { getLocationQuery } from '../../../../../utils/routing';
 import { getDefaultTemplate } from '../../helpers';
 
@@ -25,7 +25,7 @@ export const addProgramStageTemplateEpic = (action$: InputObservable, store: Red
         ofType(workingListsCommonActionTypes.TEMPLATE_ADD),
         filter(
             ({ payload: { workingListsType, programStage } }) =>
-                workingListsType === TEI_WORKING_LISTS_TYPE && programStage.id,
+                workingListsType === TRACKER_WORKING_LISTS_TYPE && programStage.id,
         ),
         concatMap((action) => {
             const {
@@ -114,7 +114,7 @@ export const deleteProgramStageTemplateEpic = (action$: InputObservable, store: 
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(
             ({ payload: { workingListsType, programStageId } }) =>
-                workingListsType === TEI_WORKING_LISTS_TYPE && programStageId,
+                workingListsType === TRACKER_WORKING_LISTS_TYPE && programStageId,
         ),
         concatMap(
             ({
@@ -168,7 +168,7 @@ export const updateProgramStageTemplateEpic = (action$: InputObservable, store: 
         ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
         filter(
             ({ payload: { workingListsType, programStage } }) =>
-                workingListsType === TEI_WORKING_LISTS_TYPE && programStage.id,
+                workingListsType === TRACKER_WORKING_LISTS_TYPE && programStage.id,
         ),
         concatMap((action) => {
             const {

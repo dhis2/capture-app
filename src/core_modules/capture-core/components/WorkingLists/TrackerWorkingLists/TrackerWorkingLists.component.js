@@ -4,7 +4,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TrackerWorkingListsReduxProvider } from './ReduxProvider';
 import type { Props } from './TrackerWorkingLists.types';
-import { TEI_WORKING_LISTS_STORE_ID } from './constants';
+import { TRACKER_WORKING_LISTS_STORE_ID } from './constants';
 
 const getStyles = () => ({
     listContainer: {
@@ -19,9 +19,9 @@ const getStyles = () => ({
 });
 
 const TrackerWorkingListsPlain = ({ classes: { listContainer }, ...passOnProps }: Props) => (
-    <div className={listContainer} data-test="tei-working-lists">
+    <div className={listContainer} data-test="tracker-working-lists">
         <TrackerWorkingListsReduxProvider
-            storeId={TEI_WORKING_LISTS_STORE_ID}
+            storeId={TRACKER_WORKING_LISTS_STORE_ID}
             {...passOnProps}
         />
     </div>

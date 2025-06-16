@@ -1,7 +1,7 @@
 // @flow
 import type { QuerySingleResource } from 'capture-core/utils/api';
 import type { TrackerWorkingListsTemplates } from '../../../types';
-import { TEI_WORKING_LISTS } from '../../../constants';
+import { TRACKER_WORKING_LISTS } from '../../../constants';
 import { getDefaultTemplate } from '../../../helpers';
 
 type ApiConfig = {
@@ -77,6 +77,6 @@ export const getTEITemplates = (
                 ),
             ],
             defaultTemplateId: defaultTemplate.id,
-            id: TEI_WORKING_LISTS,
+            id: TRACKER_WORKING_LISTS,
         };
     });

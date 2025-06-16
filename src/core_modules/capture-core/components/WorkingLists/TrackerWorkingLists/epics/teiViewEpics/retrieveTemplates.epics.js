@@ -8,7 +8,7 @@ import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { workingListsCommonActionTypes, fetchTemplatesSuccess, fetchTemplatesError } from '../../../WorkingListsCommon';
 import { getProgramStageTemplates } from './templates/getProgramStageTemplates';
 import { getTEITemplates } from './templates/getTEITemplates';
-import { TEI_WORKING_LISTS_TYPE, TEI_WORKING_LISTS, PROGRAM_STAGE_WORKING_LISTS } from '../../constants';
+import { TRACKER_WORKING_LISTS_TYPE, TRACKER_WORKING_LISTS, PROGRAM_STAGE_WORKING_LISTS } from '../../constants';
 
 // Deduplicate default template so that only one default template is returned
 const removeDefaultTemplate = templates =>
@@ -19,7 +19,7 @@ const removeDefaultTemplate = templates =>
 
 const mergeTempletes = (APItemplates, selectedTemplateId) => {
     const programStageTempletes = APItemplates?.find(template => template.id === PROGRAM_STAGE_WORKING_LISTS) || {};
-    const TEITempletes = APItemplates?.find(template => template.id === TEI_WORKING_LISTS) || {};
+    const TEITempletes = APItemplates?.find(template => template.id === TRACKER_WORKING_LISTS) || {};
     const templates = removeDefaultTemplate([...TEITempletes.templates, ...programStageTempletes.templates]) || [];
 
     return {
@@ -38,7 +38,7 @@ export const retrieveAllTemplatesEpic = (
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(
             ({ payload: { workingListsType } }) =>
-                workingListsType === TEI_WORKING_LISTS_TYPE &&
+                workingListsType === TRACKER_WORKING_LISTS_TYPE &&
                 featureAvailable(FEATURES.storeProgramStageWorkingList),
         ),
         concatMap(({ payload: { storeId, programId, selectedTemplateId } }) => {
@@ -76,7 +76,7 @@ export const retrieveTEITemplatesEpic = (
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(
             ({ payload: { workingListsType } }) =>
-                workingListsType === TEI_WORKING_LISTS_TYPE &&
+                workingListsType === TRACKER_WORKING_LISTS_TYPE &&
                     !featureAvailable(FEATURES.storeProgramStageWorkingList),
         ),
         concatMap(({ payload: { storeId, programId, selectedTemplateId } }) => {
