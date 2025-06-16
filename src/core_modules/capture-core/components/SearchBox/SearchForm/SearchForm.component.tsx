@@ -1,6 +1,5 @@
-// @flow
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, colors } from '@dhis2/ui';
 import { D2Form } from '../../D2Form';
@@ -10,7 +9,7 @@ import type { Props } from './SearchForm.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 
-const getStyles = () => ({
+const styles: Readonly<any> = {
     searchDomainsContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -42,7 +41,7 @@ const getStyles = () => ({
         flexGrow: 1,
         color: colors.red600,
     },
-});
+};
 
 const useFormDataLifecycle = (
     searchGroupsForSelectedScope,
@@ -51,8 +50,6 @@ const useFormDataLifecycle = (
     keptFallbackSearchFormValues,
 ) =>
     useEffect(() => {
-        // in order for the Form component to render
-        // a formId under the `forms` reducer needs to be added.
         searchGroupsForSelectedScope
             .forEach(({ formId, searchForm }) => {
                 const elements = searchForm.getElements();
@@ -66,7 +63,6 @@ const useFormDataLifecycle = (
                     }, {}));
                 addFormIdToReduxStore(formId, formValuesThatExistInTETypeSearchScope);
             });
-        // we remove the data on unmount to clean the store
         return () => removeFormDataFromReduxStore();
     },
     [
@@ -102,15 +98,14 @@ const SearchFormIndex = ({
     isSearchViaUniqueIdValid,
     showUniqueSearchValueEmptyModal,
     keptFallbackSearchFormValues,
-}: Props) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+}: Props & WithStyles<typeof styles>) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext) as any;
 
     useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore, keptFallbackSearchFormValues);
 
     const [error, setError] = useState(false);
-    const [expandedFormId, setExpandedFormId] = useState(null);
+    const [expandedFormId, setExpandedFormId] = useState<string | null>(null);
 
-    // each time the user selects new search scope we want the expanded form id to be initialised
     useEffect(() => {
         setExpandedFormId(null);
     },
@@ -181,9 +176,9 @@ const SearchFormIndex = ({
                 }
             </div>);
 
-        const handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+        const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
             if (event.key === 'Enter' && expandedFormId && selectedSearchScopeId) {
-                const buttonRef = containerButtonRef[expandedFormId].children[0];
+                const buttonRef = (containerButtonRef[expandedFormId] as any).children[0];
                 buttonRef.focus();
                 setTimeout(() => { buttonRef.click(); });
             }
@@ -220,36 +215,38 @@ const SearchFormIndex = ({
                                         />
                                     }
                                 >
-                                    <div className={classes.searchRow}>
-                                        <div className={classes.searchRowSelectElement}>
-                                            <D2Form
-                                                formRef={
-                                                    (formInstance) => { formReference[formId] = formInstance; }
-                                                }
-                                                formFoundation={searchForm}
-                                                id={formId}
-                                            />
+                                    <div>
+                                        <div className={classes.searchRow}>
+                                            <div className={classes.searchRowSelectElement}>
+                                                <D2Form
+                                                    formRef={
+                                                        (formInstance) => { formReference[formId] = formInstance; }
+                                                    }
+                                                    formFoundation={searchForm}
+                                                    id={formId}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div
-                                        className={classes.searchButtonContainer}
-                                        ref={(ref) => { containerButtonRef[formId] = ref; }}
-                                    >
-                                        <Button
-                                            disabled={searchStatus === searchBoxStatus.LOADING}
-                                            onClick={() =>
-                                                selectedSearchScopeId &&
-                                                handleSearchViaUniqueId(
-                                                    searchScope,
-                                                    selectedSearchScopeId,
-                                                    formId,
-                                                    name,
-                                                )}
+                                        <div
+                                            className={classes.searchButtonContainer}
+                                            ref={(ref) => { containerButtonRef[formId] = ref; }}
                                         >
-                                            {i18n.t('Search by {{name}}', {
-                                                name, interpolation: { escapeValue: false },
-                                            })}
-                                        </Button>
+                                            <Button
+                                                disabled={searchStatus === searchBoxStatus.LOADING}
+                                                onClick={() =>
+                                                    selectedSearchScopeId &&
+                                                    handleSearchViaUniqueId(
+                                                        searchScope,
+                                                        selectedSearchScopeId,
+                                                        formId,
+                                                        name,
+                                                    )}
+                                            >
+                                                {i18n.t('Search by {{name}}', {
+                                                    name, interpolation: { escapeValue: false },
+                                                })}
+                                            </Button>
+                                        </div>
                                     </div>
                                 </Section>
                             </div>
@@ -279,36 +276,38 @@ const SearchFormIndex = ({
                                         />
                                     }
                                 >
-                                    <div className={classes.searchRow}>
-                                        <div className={classes.searchRowSelectElement}>
-                                            <D2Form
-                                                formRef={(formInstance) => { formReference[formId] = formInstance; }}
-                                                formFoundation={searchForm}
-                                                id={formId}
+                                    <div>
+                                        <div className={classes.searchRow}>
+                                            <div className={classes.searchRowSelectElement}>
+                                                <D2Form
+                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
+                                                    formFoundation={searchForm}
+                                                    id={formId}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={classes.searchButtonContainer}
+                                            ref={(ref) => { containerButtonRef[formId] = ref; }}
+                                        >
+                                            <Button
+                                                disabled={searchStatus === searchBoxStatus.LOADING}
+                                                onClick={() =>
+                                                    selectedSearchScopeId &&
+                                                    handleSearchViaAttributes(
+                                                        searchScope,
+                                                        selectedSearchScopeId,
+                                                        formId,
+                                                        minAttributesRequiredToSearch,
+                                                    )
+                                                }
+                                            >
+                                                {searchByText}
+                                            </Button>
+                                            <FormInformativeMessage
+                                                minAttributesRequiredToSearch={minAttributesRequiredToSearch}
                                             />
                                         </div>
-                                    </div>
-                                    <div
-                                        className={classes.searchButtonContainer}
-                                        ref={(ref) => { containerButtonRef[formId] = ref; }}
-                                    >
-                                        <Button
-                                            disabled={searchStatus === searchBoxStatus.LOADING}
-                                            onClick={() =>
-                                                selectedSearchScopeId &&
-                                                handleSearchViaAttributes(
-                                                    searchScope,
-                                                    selectedSearchScopeId,
-                                                    formId,
-                                                    minAttributesRequiredToSearch,
-                                                )
-                                            }
-                                        >
-                                            {searchByText}
-                                        </Button>
-                                        <FormInformativeMessage
-                                            minAttributesRequiredToSearch={minAttributesRequiredToSearch}
-                                        />
                                     </div>
                                 </Section>
                             </div>
@@ -343,4 +342,4 @@ const SearchFormIndex = ({
     ]);
 };
 
-export const SearchFormComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(SearchFormIndex);
+export const SearchFormComponent = withStyles(styles)(SearchFormIndex) as ComponentType<Props>;

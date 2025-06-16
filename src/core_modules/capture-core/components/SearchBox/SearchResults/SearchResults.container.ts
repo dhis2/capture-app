@@ -1,9 +1,8 @@
-// @flow
 import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SearchResultsComponent } from './SearchResults.component';
-import type { Props, PropsFromRedux, DispatchersFromRedux, OwnProps } from './SearchResults.types';
+import type { PropsFromRedux, DispatchersFromRedux, OwnProps } from './SearchResults.types';
 import {
     navigateToNewTrackedEntityPage,
     searchViaAttributesOnScopeTrackedEntityType,
@@ -14,7 +13,7 @@ import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound }
 import { searchScopes, PAGINATION } from '../SearchBox.constants';
 import { setPrepopulateDataOnNewPage } from '../../Pages/New/NewPage.actions';
 
-const getCurrentScope = (scopeId: string, scopeType: $Keys<typeof searchScopes>) => {
+const getCurrentScope = (scopeId: string, scopeType: keyof typeof searchScopes) => {
     if (!scopeId) {
         return null;
     }
@@ -28,10 +27,10 @@ const getCurrentScope = (scopeId: string, scopeType: $Keys<typeof searchScopes>)
     return null;
 };
 
-const getName = scopeEntity => (scopeEntity ? scopeEntity.name : '');
-const getDataElements = scopeEntity => (scopeEntity ? [...scopeEntity.attributes.values()] : []);
+const getName = (scopeEntity: any) => (scopeEntity ? scopeEntity.name : '');
+const getDataElements = (scopeEntity: any) => (scopeEntity ? [...scopeEntity.attributes.values()] : []);
 
-const mapStateToProps = (state: ReduxState): PropsFromRedux => {
+const mapStateToProps = (state: any): PropsFromRedux => {
     const {
         searchResults,
         otherResults,
@@ -51,8 +50,8 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const currentSearchScopeDataElements = getDataElements(scopeEntity);
 
     const dataElements = currentSearchScopeDataElements
-        .filter(({ displayInReports }) => displayInReports)
-        .map(({ id, name, type }) => ({ id, name, type }));
+        .filter(({ displayInReports }: any) => displayInReports)
+        .map(({ id, name, type }: any) => ({ id, name, type }));
     const { orgUnitId } = state.currentSelections;
 
     return {
@@ -70,8 +69,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     };
 };
 
-
-const mapDispatchToProps = (dispatch: ReduxDispatch, { availableSearchOptions }): DispatchersFromRedux => ({
+const mapDispatchToProps = (dispatch: any, { availableSearchOptions }: any): DispatchersFromRedux => ({
     searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, page, resultsPageSize }) => {
         dispatch(searchViaAttributesOnScopeTrackedEntityType({
             trackedEntityTypeId,
@@ -105,8 +103,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { availableSearchOptions })
     },
 });
 
-
 export const SearchResults: ComponentType<OwnProps> =
   compose(
-      connect<Props, _, _, _, _, _>(mapStateToProps, mapDispatchToProps),
+      connect(mapStateToProps, mapDispatchToProps),
   )(SearchResultsComponent);
