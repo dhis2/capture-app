@@ -1,3 +1,10 @@
+## [102.6.4](https://github.com/dhis2/capture-app/compare/v102.6.3...v102.6.4) (2025-06-16)
+
+
+### Bug Fixes
+
+* [DHIS2-19694] use the EQ operator when filtering by unique TEA in the WLs ([#4129](https://github.com/dhis2/capture-app/issues/4129)) ([1753883](https://github.com/dhis2/capture-app/commit/175388348038a69219c7d4d333044c87ec14849d))
+
 ## [102.6.3](https://github.com/dhis2/capture-app/compare/v102.6.2...v102.6.3) (2025-06-16)
 
 
