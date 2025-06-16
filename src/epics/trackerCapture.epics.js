@@ -176,7 +176,7 @@ import {
     addProgramStageTemplateEpic,
     deleteProgramStageTemplateEpic,
     updateProgramStageTemplateEpic,
-} from '../core_modules/capture-core/components/WorkingLists/TrackerWorkingList';
+} from '../core_modules/capture-core/components/WorkingLists/TrackerWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
