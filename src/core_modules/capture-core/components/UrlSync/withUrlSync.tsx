@@ -7,7 +7,7 @@ import type { Props, SyncSpecification, SyncSpecificationGetter, UpdateDataConta
 export type { UpdateDataContainer } from './withUrlSync.types';
 
 const getUrlSyncer = (
-    InnerComponent: React.ComponentType<any>,
+    InnerComponent: React.ComponentType<Record<string, unknown>>,
     onGetSyncSpecification: SyncSpecificationGetter) =>
     class UrlSyncer extends React.Component<Props> {
         static getValueFromParam(param: Array<string> | null, id: string): string | null {
@@ -20,7 +20,7 @@ const getUrlSyncer = (
             return value;
         }
 
-        static getNextProps(locationParams: Record<string, any>, syncSpecification: Array<SyncSpecification>) {
+        static getNextProps(locationParams: Record<string, unknown>, syncSpecification: Array<SyncSpecification>) {
             const nextParams = Object
                 .keys(locationParams)
                 .reduce((accNextParams, locationKey) => {
@@ -28,7 +28,7 @@ const getUrlSyncer = (
                     const paramName = syncSpec?.urlParameterName || locationKey;
                     accNextParams[paramName] = locationParams[locationKey];
                     return accNextParams;
-                }, {} as Record<string, any>);
+                }, {} as Record<string, unknown>);
 
             return nextParams;
         }
@@ -41,7 +41,7 @@ const getUrlSyncer = (
             this.triggerSyncCallback();
         }
 
-        queuedUpdate: { nextProps: Record<string, any> } | null = null;
+        queuedUpdate: { nextProps: Record<string, unknown> } | null = null;
 
         update(updateData: UpdateDataContainer) {
             this.props.onUpdate(updateData);
@@ -111,5 +111,5 @@ const getUrlSyncer = (
     };
 
 export const withUrlSync = (onGetSyncSpecification: SyncSpecificationGetter) =>
-    (InnerComponent: React.ComponentType<any>) =>
+    (InnerComponent: React.ComponentType<Record<string, unknown>>) =>
         getUrlSyncer(InnerComponent, onGetSyncSpecification);

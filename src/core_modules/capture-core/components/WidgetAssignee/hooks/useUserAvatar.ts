@@ -1,5 +1,11 @@
 import { useApiMetadataQuery } from 'capture-core/utils/reactQueryHelpers';
 
+type UserAvatarResponse = {
+    avatar?: {
+        id: string;
+    };
+};
+
 export const useUserAvatar = (userId?: string) => {
     const queryKey = ['users', ...(userId ? [userId] : [])];
     const queryFn = {
@@ -13,7 +19,7 @@ export const useUserAvatar = (userId?: string) => {
     const { data, isLoading } = useApiMetadataQuery(queryKey, queryFn, queryOptions);
 
     return {
-        avatarId: (data as any)?.avatar?.id,
+        avatarId: (data as UserAvatarResponse)?.avatar?.id,
         isLoading,
     };
 };

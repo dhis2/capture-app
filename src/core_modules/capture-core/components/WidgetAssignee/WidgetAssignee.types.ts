@@ -10,7 +10,7 @@ export type Props = {
     assignee: Assignee | null;
     enabled: boolean;
     writeAccess: boolean;
-    getSaveContext: () => { event: any };
+    getSaveContext: () => { event: Record<string, unknown> };
     onSave: (newAssignee: Assignee) => void;
     onSaveError: (prevAssignee: Assignee | null) => void;
 };
