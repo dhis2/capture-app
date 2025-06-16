@@ -91,7 +91,7 @@ export const getUpdateFieldActions = async ({
         userRoles,
         programName,
     } = context;
-    const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload || {};
+    const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload ?? {};
     const fieldData: FieldData = {
         elementId,
         value,

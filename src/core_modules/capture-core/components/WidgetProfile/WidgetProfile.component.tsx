@@ -90,7 +90,7 @@ const WidgetProfilePlain = ({
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, trackedEntityInstanceAttributes || []);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, trackedEntityInstanceAttributes ?? []);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
@@ -115,7 +115,7 @@ const WidgetProfilePlain = ({
     useEffect(() => {
         if (storedAttributeValues?.length > 0) {
             setTeiModalState(TEI_MODAL_STATE.CLOSE);
-            onUpdateTeiAttributeValues && onUpdateTeiAttributeValues(storedAttributeValues, teiDisplayName);
+            onUpdateTeiAttributeValues?.(storedAttributeValues, teiDisplayName);
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
 
@@ -171,7 +171,7 @@ const WidgetProfilePlain = ({
                                 trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}
                                 programAPI={program}
-                                readOnlyMode={readOnlyMode || false}
+                                readOnlyMode={readOnlyMode ?? false}
                             />
                         </div>
                     </div>
@@ -192,7 +192,7 @@ const WidgetProfilePlain = ({
                         dataEntryFormConfig={dataEntryFormConfig}
                         orgUnitId={orgUnitId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
-                        userRoles={userRoles || []}
+                        userRoles={userRoles ?? []}
                         trackedEntityInstanceId={teiId}
                         onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
                         onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}

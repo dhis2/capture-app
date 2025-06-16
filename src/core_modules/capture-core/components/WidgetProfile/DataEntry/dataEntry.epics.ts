@@ -86,7 +86,7 @@ export const updateTeiSucceededEpic = (action$: any) =>
     action$.pipe(
         ofType(dataEntryActionTypes.TEI_UPDATE_SUCCESS),
         map((action: any) => {
-            const trackedEntity = action.meta?.serverData?.trackedEntities[0] || {};
+            const trackedEntity = action.meta?.serverData?.trackedEntities[0] ?? {};
             const { attributes = [], geometry } = trackedEntity;
 
 
