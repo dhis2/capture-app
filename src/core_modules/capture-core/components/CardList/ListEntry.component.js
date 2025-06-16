@@ -6,9 +6,10 @@ import { convertValue } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
 
 type Props = {|
-  name: string,
-  value?: string,
-  type?: $Values<typeof dataElementTypes>,
+    name: string,
+    value?: string,
+    type?: $Values<typeof dataElementTypes>,
+    dataElement?: Object,
   ...CssClasses
 |}
 
@@ -33,12 +34,13 @@ const ListEntryPlain = ({
     value,
     classes,
     type = dataElementTypes.TEXT,
+    dataElement,
 }: Props) => (value ? <div className={classes.entry}>
     <span className={classes.elementName}>
         {name}:&nbsp;
     </span>
     <span className={classes.elementValue}>
-        {convertValue(value, type)}
+        {convertValue(value, type, dataElement)}
     </span>
 </div> : null);
 

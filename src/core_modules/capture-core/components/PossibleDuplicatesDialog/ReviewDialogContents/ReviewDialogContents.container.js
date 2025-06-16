@@ -14,7 +14,7 @@ const buildDataElements = (scopeId) => {
 
     return currentSearchScopeDataElements
         .filter(({ displayInReports }) => displayInReports)
-        .map(({ id, name, type }) => ({ id, name, type }));
+        .map(({ id, name, type, optionSet }) => ({ id, name, type, optionSet }));
 };
 
 const mapStateToProps = (
