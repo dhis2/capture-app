@@ -1,7 +1,6 @@
-// @flow
 import type { Assignee } from './WidgetAssignee.types';
 
-export const convertClientToServer = (assignee?: Assignee): ApiAssignedUser | null => (
+export const convertClientToServer = (assignee?: Assignee): any | null => (
     assignee
         ? {
             uid: assignee.id,

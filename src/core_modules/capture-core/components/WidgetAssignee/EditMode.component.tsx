@@ -1,8 +1,7 @@
-// @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ButtonStrip, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import type { Assignee } from './WidgetAssignee.types';
 import { UserField } from '../FormFields/UserField';
 
@@ -22,11 +21,10 @@ const styles = () => ({
 });
 
 type Props = {
-    assignee: Assignee | null,
-    onCancel: () => {},
-    onSet: (user: Assignee | null) => void,
-    ...CssClasses,
-};
+    assignee: Assignee | null;
+    onCancel: () => void;
+    onSet: (user: Assignee | null) => void;
+} & WithStyles<typeof styles>;
 
 const EditModePlain = (props: Props) => {
     const { onCancel, onSet, assignee, classes } = props;
@@ -40,19 +38,17 @@ const EditModePlain = (props: Props) => {
         <div className={classes.container}>
             <div className={classes.searchContainer}>
                 <UserField
-                    inputPlaceholderText={i18n.t('Search for user')}
+                    inputPlaceholderText={String(i18n.t('Search for user'))}
                     value={tempUser}
-                    inputWrapperClasses={{}}
-                    focusInputOnMount
-                    exitBehaviour="doNothing"
+                    focusOnMount
                     onSet={onHandleSet}
                 />
                 <ButtonStrip className={classes.buttonContainer}>
                     <Button onClick={() => onSet(tempUser)} small primary dataTest="widget-assignee-save">
-                        {i18n.t('Save')}
+                        {String(i18n.t('Save'))}
                     </Button>
                     <Button onClick={onCancel} small secondary>
-                        {i18n.t('Cancel')}
+                        {String(i18n.t('Cancel'))}
                     </Button>
                 </ButtonStrip>
             </div>

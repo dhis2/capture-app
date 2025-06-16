@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useRef } from 'react';
 import { useDataMutation } from '@dhis2/app-runtime';
 import type { Props, Assignee } from './WidgetAssignee.types';
@@ -25,11 +24,13 @@ const WidgetAssigneeWithHooks = (props: Props) => {
     );
 
     const onSet = useCallback(
-        async (newAssignee: Assignee) => {
-            const { event } = getSaveContext();
-            prevAssignee.current = assignee;
-            onSave(newAssignee);
-            await updateMutation({ ...event, assignedUser: convertClientToServer(newAssignee) });
+        async (newAssignee: Assignee | null) => {
+            if (newAssignee) {
+                const { event } = getSaveContext();
+                prevAssignee.current = assignee;
+                onSave(newAssignee);
+                await updateMutation({ ...event, assignedUser: convertClientToServer(newAssignee) });
+            }
         },
         [updateMutation, getSaveContext, onSave, assignee],
     );

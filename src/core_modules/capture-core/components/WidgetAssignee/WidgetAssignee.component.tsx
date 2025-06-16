@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconUser24, spacers } from '@dhis2/ui';
@@ -35,7 +34,7 @@ const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }
             <Widget
                 header={
                     <span className={classes.header}>
-                        <IconUser24 /> <span>{i18n.t('Assignee')}</span>
+                        <IconUser24 /> <span>{String(i18n.t('Assignee'))}</span>
                     </span>
                 }
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}

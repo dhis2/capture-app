@@ -1,8 +1,7 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, UserAvatar } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { Assignee } from './WidgetAssignee.types';
 
@@ -28,18 +27,17 @@ const styles = () => ({
 });
 
 type Props = {
-    assignee: Assignee | null,
-    onEdit: () => {},
-    writeAccess: boolean,
-    avatarId?: string,
-    ...CssClasses,
-};
+    assignee: Assignee | null;
+    onEdit: () => void;
+    writeAccess: boolean;
+    avatarId?: string;
+} & WithStyles<typeof styles>;
 
 const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: Props) => (
     assignee ? (
         <div className={classes.wrapper}>
             <div className={classes.avatarWrapper}>
-                {i18n.t('Assigned to')}
+                {String(i18n.t('Assigned to'))}
                 <UserAvatar name={assignee.name} className={classes.avatar} avatarId={avatarId} small />
                 {assignee.name}
             </div>
@@ -55,13 +53,13 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
                     secondary
                     small
                 >
-                    {i18n.t('Edit')}
+                    {String(i18n.t('Edit'))}
                 </Button>
             </ConditionalTooltip>
         </div>
     ) : (
         <div className={classes.wrapper}>
-            {i18n.t('No one is assigned to this event')}
+            {String(i18n.t('No one is assigned to this event'))}
             <ConditionalTooltip
                 content={i18n.t("You don't have access to assign a user to this event")}
                 enabled={!writeAccess}
@@ -74,7 +72,7 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
                     secondary
                     disabled={!writeAccess}
                 >
-                    {i18n.t('Assign')}
+                    {String(i18n.t('Assign'))}
                 </Button>
             </ConditionalTooltip>
         </div>
