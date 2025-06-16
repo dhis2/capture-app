@@ -34,7 +34,7 @@ const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }
             <Widget
                 header={
                     <span className={classes.header}>
-                        <IconUser24 /> <span>{String(i18n.t('Assignee'))}</span>
+                        <IconUser24 /> <span>{i18n.t('Assignee')}</span>
                     </span>
                 }
                 onOpen={useCallback(() => setOpen(true), [setOpen])}
