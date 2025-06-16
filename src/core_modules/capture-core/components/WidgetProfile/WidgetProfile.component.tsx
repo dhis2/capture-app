@@ -60,8 +60,8 @@ const WidgetProfilePlain = ({
 }: ComponentProps) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
-    const [open, setOpenStatus] = useState(true);
-    const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
+    const [open, setOpenStatus] = useState<boolean>(true);
+    const [modalState, setTeiModalState] = useState<string>(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
