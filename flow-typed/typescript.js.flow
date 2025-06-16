@@ -1,0 +1,7 @@
+// @flow
+
+// This file enables Flow to treat all TypeScript imports as 'any'
+// No need to manually declare each component or its exports
+
+// This creates a generic handler for any named export from a TypeScript module
+declare module.exports: any; 
