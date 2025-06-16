@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/';
 import { spacers, IconFileDocument24, Button, IconMore16, FlyoutMenu, MenuItem } from '@dhis2/ui';
 import { useQueryClient } from 'react-query';
 import i18n from '@dhis2/d2-i18n';
-import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
+import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
@@ -22,6 +22,8 @@ import { CHANGELOG_ENTITY_TYPES } from '../../../WidgetsChangelog';
 import { useCategoryCombinations } from '../../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
+import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
+import { useProgramExpiryForUser } from '../../../../hooks';
 
 const getStyles = () => ({
     container: {
@@ -94,6 +96,7 @@ const EventDetailsSectionPlain = (props: Props) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     const onSaveExternal = () => {
         const queryKey = [ReactQueryAppNamespace, 'changelog', CHANGELOG_ENTITY_TYPES.EVENT, eventId];
@@ -129,16 +132,15 @@ const EventDetailsSectionPlain = (props: Props) => {
     );
 
     const renderActionsContainer = () => {
-        const expiryPeriod = useProgramExpiryForUser(programId);
-        const { isWithinValidPeriod } = isValidPeriod(eventDate, expiryPeriod);
+        const { isWithinValidPeriod } = isValidPeriod(eventData?.dataEntryValues?.occurredAt, expiryPeriod);
         const isDisabled = !eventAccess.write || !isWithinValidPeriod;
 
         let tooltipContent = '';
         if (!eventAccess.write) {
-            tooltipContent = i18n.t(`You don't have access to edit this event`);
+            tooltipContent = i18n.t('You don\'t have access to edit this event');
         } else if (!isWithinValidPeriod) {
             tooltipContent = i18n.t('{{eventDate}} belongs to an expired period. Event cannot be edited', {
-                eventDate,
+                eventDate: eventData?.dataEntryValues?.occurredAt,
                 interpolation: { escapeValue: false },
             });
         }
@@ -215,7 +217,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                 <EventChangelogWrapper
                     isOpen
                     setIsOpen={setChangeLogIsOpen}
-                    eventData={eventData}
+                    eventData={eventData?.eventContainer?.values}
                     eventId={eventId}
                     formFoundation={programStage.stageForm}
                 />

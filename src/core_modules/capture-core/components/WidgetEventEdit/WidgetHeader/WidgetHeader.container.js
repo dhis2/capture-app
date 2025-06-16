@@ -8,7 +8,7 @@ import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { getProgramEventAccess } from '../../../metaData';
@@ -17,6 +17,7 @@ import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from '../constants/status.const';
 import type { PlainProps, Props } from './WidgetHeader.types';
+import { isValidPeriod } from '../../../utils/validation/validators/form';
 
 const styles = {
     icon: {
@@ -42,6 +43,7 @@ const WidgetHeaderPlain = ({
     orgUnit,
     setChangeLogIsOpen,
     classes,
+    eventDate,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -63,7 +65,7 @@ const WidgetHeaderPlain = ({
     if (blockEntryForm) {
         tooltipContent = i18n.t('The event cannot be edited after it has been completed');
     } else if (!eventAccess?.write) {
-        tooltipContent = i18n.t("You don't have access to edit this event");
+        tooltipContent = i18n.t('You don\'t have access to edit this event');
     } else if (!isWithinValidPeriod) {
         tooltipContent = i18n.t('{{eventDate}} belongs to an expired period. Event cannot be edited', {
             eventDate,

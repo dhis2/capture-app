@@ -10,7 +10,7 @@ import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptio
 const mapStateToProps = (state: ReduxState) => ({
     showEditEvent: state.viewEventPage.eventDetailsSection && state.viewEventPage.eventDetailsSection.showEditEvent,
     eventId: state.viewEventPage.eventId,
-    eventData: state.viewEventPage.loadedValues?.eventContainer?.values || {},
+    eventData: state.viewEventPage.loadedValues || {},
     programId: state.currentSelections.programId,
 });
 
