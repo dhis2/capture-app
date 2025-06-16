@@ -37,7 +37,7 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
     assignee ? (
         <div className={classes.wrapper}>
             <div className={classes.avatarWrapper}>
-                {String(i18n.t('Assigned to'))}
+                {i18n.t('Assigned to')}
                 <UserAvatar name={assignee.name} className={classes.avatar} avatarId={avatarId} small />
                 {assignee.name}
             </div>
@@ -53,13 +53,13 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
                     secondary
                     small
                 >
-                    {String(i18n.t('Edit'))}
+                    {i18n.t('Edit')}
                 </Button>
             </ConditionalTooltip>
         </div>
     ) : (
         <div className={classes.wrapper}>
-            {String(i18n.t('No one is assigned to this event'))}
+            {i18n.t('No one is assigned to this event')}
             <ConditionalTooltip
                 content={i18n.t("You don't have access to assign a user to this event")}
                 enabled={!writeAccess}
@@ -72,7 +72,7 @@ const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: 
                     secondary
                     disabled={!writeAccess}
                 >
-                    {String(i18n.t('Assign'))}
+                    {i18n.t('Assign')}
                 </Button>
             </ConditionalTooltip>
         </div>
