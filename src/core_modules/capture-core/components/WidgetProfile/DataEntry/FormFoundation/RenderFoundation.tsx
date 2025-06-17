@@ -215,100 +215,6 @@ const buildSection = async ({
     return section;
 };
 
-const addSectionToFoundation = (renderFoundation: RenderFoundation, section: Section | null) => {
-    if (section) {
-        renderFoundation.addSection(section);
-    }
-};
-
-const buildTrackedEntityAttributeDictionary = (programTrackedEntityAttributes: Array<any>) =>
-    programTrackedEntityAttributes.reduce((acc: Record<string, any>, trackedEntityAttribute) => {
-        if (trackedEntityAttribute.trackedEntityAttributeId) {
-            acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
-        }
-        return acc;
-    }, {});
-
-const processFormConfigElement = (element: any, trackedEntityAttributeDictionary: Record<string, any>) => {
-    if (element.type === FormFieldTypes.PLUGIN) {
-        const fieldMap = element.fieldMap?.map((field: any) => ({
-            ...field,
-            ...trackedEntityAttributeDictionary[field.IdFromApp],
-        }));
-        return { ...element, fieldMap };
-    }
-    return trackedEntityAttributeDictionary[element.id];
-};
-
-const processFormConfigSection = async (
-    formConfigSection: any,
-    programSections: any,
-    trackedEntityAttributeDictionary: Record<string, any>,
-    trackedEntityAttributes: Array<TrackedEntityAttribute>,
-    optionSets: Array<OptionSet>,
-    querySingleResource: QuerySingleResource,
-    minorServerVersion: number,
-) => {
-    const attributes = formConfigSection.elements.reduce((acc: Array<any>, element: any) => {
-        const processedElement = processFormConfigElement(element, trackedEntityAttributeDictionary);
-        if (processedElement) {
-            acc.push(processedElement);
-        }
-        return acc;
-    }, []);
-
-    const sectionMetadata = programSections?.find((cachedSection: any) => cachedSection.id === formConfigSection.id);
-
-    if (!sectionMetadata && programSections?.length > 0) {
-        log.warn(
-            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
-                { sectionId: formConfigSection.id },
-            ),
-        );
-    }
-
-    return buildSection({
-        programTrackedEntityAttributes: attributes,
-        sectionCustomLabel: formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
-        sectionCustomId: formConfigSection.id,
-        sectionDisplayDescription: sectionMetadata?.displayDescription ?? '',
-        minorServerVersion,
-        trackedEntityAttributes,
-        optionSets,
-        querySingleResource,
-    });
-};
-
-const processProgramSections = async (
-    programSections: any,
-    trackedEntityAttributeDictionary: Record<string, any>,
-    trackedEntityAttributes: Array<TrackedEntityAttribute>,
-    optionSets: Array<OptionSet>,
-    querySingleResource: QuerySingleResource,
-    minorServerVersion: number,
-) => {
-    const sections: Section[] = [];
-    /* eslint-disable no-await-in-loop */
-    for (const programSection of programSections) {
-        const builtProgramSection = buildProgramSection(programSection);
-        const section = await buildSection({
-            programTrackedEntityAttributes: builtProgramSection.map((id: string) => trackedEntityAttributeDictionary[id]),
-            trackedEntityAttributes,
-            optionSets,
-            sectionCustomLabel: programSection.displayFormName,
-            sectionCustomId: programSection.id,
-            sectionDisplayDescription: programSection.displayDescription,
-            querySingleResource,
-            minorServerVersion,
-        });
-        if (section) {
-            sections.push(section);
-        }
-    }
-    /* eslint-enable no-await-in-loop */
-    return sections;
-};
-
 export const buildFormFoundation = async (
     program: any,
     querySingleResource: QuerySingleResource,
@@ -331,44 +237,99 @@ export const buildFormFoundation = async (
         o.name = program.displayName;
     });
 
+    let section;
     if (programSections?.length || dataEntryFormConfig) {
         if (trackedEntityTypeId) {
-            const section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
-            addSectionToFoundation(renderFoundation, section);
+            section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
+            if (section) {
+                renderFoundation.addSection(section);
+            }
         }
-
         if (programTrackedEntityAttributes) {
-            const trackedEntityAttributeDictionary = buildTrackedEntityAttributeDictionary(programTrackedEntityAttributes);
+            const trackedEntityAttributeDictionary = programTrackedEntityAttributes
+                .reduce((acc: Record<string, any>, trackedEntityAttribute) => {
+                    if (trackedEntityAttribute.trackedEntityAttributeId) {
+                        acc[trackedEntityAttribute.trackedEntityAttributeId] = trackedEntityAttribute;
+                    }
+                    return acc;
+                }, {});
+
 
             if (dataEntryFormConfig) {
                 /* eslint-disable no-await-in-loop */
-                for (const formConfigSection of dataEntryFormConfig as any) {
-                    const section = await processFormConfigSection(
-                        formConfigSection,
-                        programSections,
-                        trackedEntityAttributeDictionary,
+                await (dataEntryFormConfig as any).asyncForEach(async (formConfigSection: any) => {
+                    const attributes = formConfigSection.elements.reduce((acc: Array<any>, element: any) => {
+                        if (element.type === FormFieldTypes.PLUGIN) {
+                            const fieldMap = element
+                                .fieldMap
+                                ?.map((field: any) => ({
+                                    ...field,
+                                    ...trackedEntityAttributeDictionary[field.IdFromApp],
+                                }));
+
+                            acc.push({
+                                ...element,
+                                fieldMap,
+                            });
+                            return acc;
+                        }
+                        const attribute = trackedEntityAttributeDictionary[element.id];
+                        if (attribute) {
+                            acc.push(attribute);
+                        }
+                        return acc;
+                    }, []);
+
+                    const sectionMetadata = programSections
+                        ?.find((cachedSection: any) => cachedSection.id === formConfigSection.id);
+
+                    if (!sectionMetadata && programSections?.length > 0) {
+                        log.warn(
+                            errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
+                                { sectionId: formConfigSection.id },
+                            ),
+                        );
+                    }
+
+                    section = await buildSection({
+                        programTrackedEntityAttributes: attributes,
+                        sectionCustomLabel: formConfigSection.name ?? sectionMetadata?.displayFormName ?? i18n.t('Profile'),
+                        sectionCustomId: formConfigSection.id,
+                        sectionDisplayDescription: sectionMetadata?.displayDescription ?? '',
+                        minorServerVersion,
                         trackedEntityAttributes,
                         optionSets,
                         querySingleResource,
-                        minorServerVersion,
-                    );
-                    addSectionToFoundation(renderFoundation, section);
-                }
+                    });
+                    if (section) {
+                        renderFoundation.addSection(section);
+                    }
+                });
                 /* eslint-enable no-await-in-loop */
             } else {
-                const sections = await processProgramSections(
-                    programSections,
-                    trackedEntityAttributeDictionary,
-                    trackedEntityAttributes,
-                    optionSets,
-                    querySingleResource,
-                    minorServerVersion,
-                );
-                sections.forEach(section => addSectionToFoundation(renderFoundation, section));
+                /* eslint-disable no-await-in-loop */
+                for (const programSection of programSections) {
+                    const builtProgramSection = buildProgramSection(programSection);
+
+                    section = await buildSection({
+                        programTrackedEntityAttributes: builtProgramSection.map((id: string) => trackedEntityAttributeDictionary[id]),
+                        trackedEntityAttributes,
+                        optionSets,
+                        sectionCustomLabel: programSection.displayFormName,
+                        sectionCustomId: programSection.id,
+                        sectionDisplayDescription: programSection.displayDescription,
+                        querySingleResource,
+                        minorServerVersion,
+                    });
+                    if (section) {
+                        renderFoundation.addSection(section);
+                    }
+                }
+                /* eslint-enable no-await-in-loop */
             }
         }
     } else {
-        const section = await buildMainSection({
+        section = await buildMainSection({
             trackedEntityType,
             trackedEntityAttributes,
             optionSets,
@@ -376,7 +337,9 @@ export const buildFormFoundation = async (
             querySingleResource,
             minorServerVersion,
         });
-        addSectionToFoundation(renderFoundation, section);
+        if (section) {
+            renderFoundation.addSection(section);
+        }
     }
     return renderFoundation;
 };
