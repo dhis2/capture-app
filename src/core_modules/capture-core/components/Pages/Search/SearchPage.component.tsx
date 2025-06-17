@@ -1,7 +1,7 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
-import { withStyles, type WithStyles, createStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import type { Props } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
@@ -10,7 +10,7 @@ import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
 import { BulkDataEntry } from '../../BulkDataEntry';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 
-const getStyles = () => createStyles({
+const styles: Readonly<any> = {
     backButton: {
         margin: spacers.dp16,
         padding: '0',
@@ -35,7 +35,7 @@ const getStyles = () => createStyles({
         borderColor: colors.grey400,
         borderRadius: 3,
     },
-});
+};
 
 const SearchPagePlain = ({
     programId,
@@ -44,7 +44,7 @@ const SearchPagePlain = ({
     setShowBulkDataEntryPlugin,
     showBulkDataEntryPlugin,
     classes,
-}: Props & WithStyles<typeof getStyles>) => (
+}: Props & WithStyles<typeof styles>) => (
     <>
         <TopBar programId={programId} orgUnitId={orgUnitId} />
         {showBulkDataEntryPlugin ? (
@@ -83,4 +83,4 @@ const SearchPagePlain = ({
 );
 
 export const SearchPageComponent =
-    withStyles(getStyles)(SearchPagePlain) as ComponentType<Props>;
+    withStyles(styles)(SearchPagePlain) as ComponentType<Props>;
