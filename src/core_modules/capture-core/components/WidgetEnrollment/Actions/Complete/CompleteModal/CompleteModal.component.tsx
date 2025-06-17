@@ -1,6 +1,5 @@
-// @flow
-import { Modal, ModalActions, ModalContent, ModalTitle, Button, ButtonStrip } from '@dhis2/ui';
 import React from 'react';
+import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './completeModal.types';
 
@@ -12,24 +11,26 @@ export const CompleteModalComponent = ({
     onCompleteEnrollmentAndEvents,
 }: PlainProps) => (
     <Modal position="middle" large dataTest="widget-enrollment-complete-modal">
-        <ModalTitle>{i18n.t('Complete enrollment')}</ModalTitle>
+        <ModalTitle>{i18n.t('Complete enrollment') as string}</ModalTitle>
         <ModalContent>
-            <p>{i18n.t('Would you like to complete the enrollment and all active events as well?')}</p>
+            <p>{i18n.t('Would you like to complete the enrollment and all active events as well?') as string}</p>
 
             {Object.keys(programStagesWithActiveEvents).length !== 0 && (
                 <>
-                    {i18n.t('The following events will be completed:')}
+                    {i18n.t('The following events will be completed:') as string}
                     {Object.keys(programStagesWithActiveEvents).map((key) => {
                         const { count, name } = programStagesWithActiveEvents[key];
                         return (
                             <ul key={key}>
-                                {i18n.t('{{count}} event in {{programStageName}}', {
-                                    count,
-                                    defaultValue: '{{count}} event in {{programStageName}}',
-                                    defaultValue_plural: '{{count}} events in {{programStageName}}',
-                                    programStageName: name,
-                                    interpolation: { escapeValue: false },
-                                })}
+                                <li>
+                                    {i18n.t('{{count}} event in {{programStageName}}', {
+                                        count,
+                                        defaultValue: '{{count}} event in {{programStageName}}',
+                                        defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                        programStageName: name,
+                                        interpolation: { escapeValue: false },
+                                    }) as string}
+                                </li>
                             </ul>
                         );
                     })}
@@ -38,19 +39,21 @@ export const CompleteModalComponent = ({
 
             {Object.keys(programStagesWithoutAccess).length !== 0 && (
                 <>
-                    {i18n.t('The following events will not be completed due to lack of access:')}
+                    {i18n.t('The following events will not be completed due to lack of access:') as string}
                     {Object.keys(programStagesWithoutAccess).map((key) => {
                         const { count, name } = programStagesWithoutAccess[key];
 
                         return (
                             <ul key={key}>
-                                {i18n.t('{{count}} event in {{programStageName}}', {
-                                    count,
-                                    defaultValue: '{{count}} event in {{programStageName}}',
-                                    defaultValue_plural: '{{count}} events in {{programStageName}}',
-                                    programStageName: name,
-                                    interpolation: { escapeValue: false },
-                                })}
+                                <li>
+                                    {i18n.t('{{count}} event in {{programStageName}}', {
+                                        count,
+                                        defaultValue: '{{count}} event in {{programStageName}}',
+                                        defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                        programStageName: name,
+                                        interpolation: { escapeValue: false },
+                                    }) as string}
+                                </li>
                             </ul>
                         );
                     })}
@@ -67,7 +70,7 @@ export const CompleteModalComponent = ({
                         primary
                         dataTest="widget-enrollment-actions-complete-button"
                     >
-                        {i18n.t('Yes, complete enrollment and events')}
+                        {i18n.t('Yes, complete enrollment and events') as string}
                     </Button>
                     <Button
                         onClick={() => {
@@ -76,10 +79,10 @@ export const CompleteModalComponent = ({
                         }}
                         secondary
                     >
-                        {i18n.t('Complete enrollment only')}
+                        {i18n.t('Complete enrollment only') as string}
                     </Button>
                     <Button onClick={() => setOpenCompleteModal(false)} secondary>
-                        {i18n.t('No, cancel')}
+                        {i18n.t('No, cancel') as string}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

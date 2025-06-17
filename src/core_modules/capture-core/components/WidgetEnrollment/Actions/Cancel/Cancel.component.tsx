@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { IconCross16, IconUndo16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -17,7 +16,8 @@ export const Cancel = ({ enrollment, onUpdate }: Props) =>
                 })
             }
             icon={<IconUndo16 />}
-            label={i18n.t('Reactivate')}
+            label={i18n.t('Reactivate') as string}
+            suffix=""
         />
     ) : (
         <MenuItem
@@ -31,6 +31,7 @@ export const Cancel = ({ enrollment, onUpdate }: Props) =>
             }
             icon={<IconCross16 />}
             destructive
-            label={i18n.t('Mark as cancelled')}
+            label={i18n.t('Mark as cancelled') as string}
+            suffix=""
         />
     ));

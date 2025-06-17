@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-16T08:48:30.505Z\n"
-"PO-Revision-Date: 2025-06-16T08:48:30.505Z\n"
+"POT-Creation-Date: 2025-06-17T11:30:06.676Z\n"
+"PO-Revision-Date: 2025-06-17T11:30:06.676Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1130,11 +1130,14 @@ msgstr "Enrollment actions"
 msgid "We are processing your request."
 msgstr "We are processing your request."
 
-msgid "Only one enrollment per {{tetName}} is allowed in this program"
-msgstr "Only one enrollment per {{tetName}} is allowed in this program"
+msgid "Edit location"
+msgstr "Edit location"
 
-msgid "Add new"
-msgstr "Add new"
+msgid "Add location"
+msgstr "Add location"
+
+msgid "Add new {{tetName}}"
+msgstr "Add new {{tetName}}"
 
 msgid "Reactivate"
 msgstr "Reactivate"
@@ -1142,27 +1145,14 @@ msgstr "Reactivate"
 msgid "Mark as cancelled"
 msgstr "Mark as cancelled"
 
-msgid "Mark incomplete"
-msgstr "Mark incomplete"
-
-msgid "You do not have access to delete this enrollment"
-msgstr "You do not have access to delete this enrollment"
+msgid "Mark as incomplete"
+msgstr "Mark as incomplete"
 
 msgid "Delete enrollment"
 msgstr "Delete enrollment"
 
-msgid ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
-msgstr ""
-"Are you sure you want to delete this enrollment? This will permanently "
-"remove the current enrollment."
-
-msgid "Yes, delete enrollment."
-msgstr "Yes, delete enrollment."
-
-msgid "Remove mark for follow-up"
-msgstr "Remove mark for follow-up"
+msgid "Remove from follow-up"
+msgstr "Remove from follow-up"
 
 msgid "Mark for follow-up"
 msgstr "Mark for follow-up"

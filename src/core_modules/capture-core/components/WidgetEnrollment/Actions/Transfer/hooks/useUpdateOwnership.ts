@@ -1,5 +1,3 @@
-// @flow
-import type { QueryRefetchFunction } from '@dhis2/app-runtime';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -8,31 +6,33 @@ import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
 import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
 
-export type UpdateEnrollmentOwnership = {|
-    orgUnitId: string,
-    programAccessLevel: ?$Values<typeof ProgramAccessLevels>,
+type QueryRefetchFunction = any;
+
+export type UpdateEnrollmentOwnership = (params: {
+    orgUnitId: string;
+    programAccessLevel?: any;
     orgUnitScopes: {
-        origin: ?$Values<typeof OrgUnitScopes>,
-        destination: ?$Values<typeof OrgUnitScopes>,
-    },
-|} => Promise<void>;
+        origin?: any;
+        destination?: any;
+    };
+}) => Promise<any>;
 
 type Props = {
-    teiId: ?string,
-    programId: ?string,
-    onAccessLostFromTransfer?: () => void,
-    refetchTEI: QueryRefetchFunction,
-}
+    teiId?: string | null;
+    programId?: string | null;
+    onAccessLostFromTransfer?: () => void;
+    refetchTEI: QueryRefetchFunction;
+};
 
 type ReturnTypes = {
-    updateEnrollmentOwnership: UpdateEnrollmentOwnership,
-    isTransferLoading: boolean,
-}
+    updateEnrollmentOwnership: UpdateEnrollmentOwnership;
+    isTransferLoading: boolean;
+};
 
-const updateEnrollmentOwnershipMutation = {
+const updateEnrollmentOwnershipMutation: any = {
     resource: 'tracker/ownership/transfer',
     type: 'update',
-    params: ({ teiId, programId, orgUnitId, teiParamKey, orgUnitKey }) => ({
+    params: ({ teiId, programId, orgUnitId, teiParamKey, orgUnitKey }: any) => ({
         program: programId,
         [orgUnitKey]: orgUnitId,
         [teiParamKey]: teiId,
@@ -53,9 +53,8 @@ export const useUpdateOwnership = ({
     const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
     const orgUnitKey = useFeature(FEATURES.orgUnitReplaceOuQueryParam) ? 'orgUnit' : 'ou';
 
-    // $FlowFixMe
-    const { mutateAsync: updateEnrollmentOwnership, isLoading } = useMutation(
-        ({ orgUnitId }) => dataEngine.mutate(updateEnrollmentOwnershipMutation, {
+    const { mutateAsync: mutateOwnership, isLoading } = useMutation(
+        ({ orgUnitId }: { orgUnitId: string }) => dataEngine.mutate(updateEnrollmentOwnershipMutation, {
             variables: {
                 programId,
                 teiId,
@@ -65,8 +64,7 @@ export const useUpdateOwnership = ({
             },
         }),
         {
-            onSuccess: (_, { programAccessLevel, orgUnitScopes }) => {
-                // If the user is transferring ownership to a capture scope, we stay on the same page
+            onSuccess: (_, { programAccessLevel, orgUnitScopes }: any) => {
                 if (orgUnitScopes.destination === OrgUnitScopes.CAPTURE) {
                     refetchTEI();
                     return;
@@ -77,7 +75,6 @@ export const useUpdateOwnership = ({
                     return;
                 }
 
-                // Assuming that all cases are outside the capture scope and program is protected or closed
                 if (programAccessLevel === ProgramAccessLevels.PROTECTED) {
                     if (orgUnitScopes.origin === OrgUnitScopes.CAPTURE) {
                         onAccessLostFromTransfer && onAccessLostFromTransfer();
@@ -102,6 +99,8 @@ export const useUpdateOwnership = ({
             },
         },
     );
+
+    const updateEnrollmentOwnership: UpdateEnrollmentOwnership = params => mutateOwnership(params);
 
     return {
         updateEnrollmentOwnership,

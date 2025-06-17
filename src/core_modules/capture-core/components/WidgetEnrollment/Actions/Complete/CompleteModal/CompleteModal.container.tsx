@@ -1,9 +1,8 @@
-// @flow
-import React, { useMemo, useCallback } from 'react';
-import moment from 'moment';
+import React, { useCallback, useMemo } from 'react';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
-import { eventStatuses, plainStatus } from '../../../constants/status.const';
+import moment from 'moment';
 import { CompleteModalComponent } from './CompleteModal.component';
+import { eventStatuses, plainStatus } from '../../../constants/status.const';
 import type { Props } from './completeModal.types';
 
 export const CompleteModal = ({ enrollment, events, programStages, setOpenCompleteModal, onUpdateStatus }: Props) => {
@@ -13,7 +12,7 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
             events.reduce(
                 (acc, event) => {
                     const { name, access } = programStages.find(p => p.id === event.programStage) || {};
-                    const accKey = access.data.write ? 'programStagesWithActiveEvents' : 'programStagesWithoutAccess';
+                    const accKey = access?.data?.write ? 'programStagesWithActiveEvents' : 'programStagesWithoutAccess';
 
                     if (event.status === eventStatuses.ACTIVE) {
                         if (acc[accKey][event.programStage]) {
@@ -21,7 +20,7 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
                         } else {
                             acc[accKey][event.programStage] = {
                                 count: 1,
-                                name,
+                                name: name || '',
                             };
                         }
                     }
@@ -47,11 +46,11 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
         const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
         const eventsToComplete = events.reduce((acc, event) => {
             const { access } = programStages.find(p => p.id === event.programStage) || {};
-            if (event.status === eventStatuses.ACTIVE && access.data.write) {
+            if (event.status === eventStatuses.ACTIVE && access?.data?.write) {
                 return [...acc, { ...event, status: eventStatuses.COMPLETED, updatedAt }];
             }
             return acc;
-        }, []);
+        }, [] as any[]);
         const completedEnrollment = {
             ...enrollment,
             status: plainStatus.COMPLETED,

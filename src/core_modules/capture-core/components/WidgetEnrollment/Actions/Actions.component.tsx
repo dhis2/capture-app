@@ -1,7 +1,6 @@
-// @flow
 import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import React, { type ComponentType, useState } from 'react';
 import { Cancel } from './Cancel';
 import { Complete, CompleteModal } from './Complete';
@@ -15,7 +14,7 @@ import { MapModal } from '../MapModal';
 import { Transfer } from './Transfer';
 import { TransferModal } from '../TransferModal';
 
-const styles = {
+const styles: Readonly<any> = {
     actions: {
         margin: `${spacersNum.dp8}px 0 0 0`,
     },
@@ -75,7 +74,7 @@ export const ActionsPlain = ({
                 open={isOpenActions}
                 onClick={() => setOpenActions(prev => !prev)}
                 component={
-                    loading ? null : (
+                    loading ? undefined : (
                         <FlyoutMenu dense maxWidth="250px">
                             <AddNew
                                 onlyEnrollOnce={onlyEnrollOnce}
@@ -125,13 +124,13 @@ export const ActionsPlain = ({
                     )
                 }
             >
-                {i18n.t('Enrollment actions')}
+                {i18n.t('Enrollment actions') as string}
             </DropdownButton>
             {loading && (
                 <div className={classes.loading}>
                     <LoadingMaskForButton />
                     &nbsp;
-                    {i18n.t('We are processing your request.')}
+                    {i18n.t('We are processing your request.') as string}
                 </div>
             )}
             {isOpenMap && <MapModal
@@ -141,7 +140,7 @@ export const ActionsPlain = ({
             />}
             {isOpenTransfer && (
                 <TransferModal
-                    enrollment={enrollment}
+                    enrollment={{ ...enrollment, program: enrollment.program || '' }}
                     ownerOrgUnitId={ownerOrgUnitId}
                     setOpenTransfer={setOpenTransfer}
                     onUpdateOwnership={onUpdateOwnership}
@@ -161,4 +160,5 @@ export const ActionsPlain = ({
     );
 };
 
-export const ActionsComponent: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(ActionsPlain);
+type OwnProps = Omit<PlainProps, keyof WithStyles<any>>;
+export const ActionsComponent = withStyles(styles)(ActionsPlain) as ComponentType<OwnProps>;
