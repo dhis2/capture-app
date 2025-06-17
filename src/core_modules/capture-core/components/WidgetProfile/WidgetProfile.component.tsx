@@ -88,7 +88,7 @@ const WidgetProfilePlain = ({
         (Array.isArray(trackedEntityInstanceAttributes) && trackedEntityInstanceAttributes.length > 0) && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
     [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
-    const loading = (programsLoading ?? false) || (trackedEntityInstancesLoading ?? false) || (userRolesLoading ?? false) || !configIsFetched;
+    const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError ?? trackedEntityInstancesError ?? userRolesError;
     const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, Array.isArray(trackedEntityInstanceAttributes) ? trackedEntityInstanceAttributes : []);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
