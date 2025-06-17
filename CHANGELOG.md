@@ -1,3 +1,10 @@
+## [102.6.7](https://github.com/dhis2/capture-app/compare/v102.6.6...v102.6.7) (2025-06-17)
+
+
+### Bug Fixes
+
+* [DHIS2-19744] return memoized component also on first render ([#4152](https://github.com/dhis2/capture-app/issues/4152)) ([340a3aa](https://github.com/dhis2/capture-app/commit/340a3aafc3ae4444d68c3346d9fdd5f350664483))
+
 ## [102.6.6](https://github.com/dhis2/capture-app/compare/v102.6.5...v102.6.6) (2025-06-17)
 
 
