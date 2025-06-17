@@ -217,7 +217,7 @@ const setBaseProperties = async ({
             optionSets,
             trackedEntityAttribute.optionSet.id,
             programTrackedEntityAttribute.renderOptionsAsRadio,
-        ) ?? undefined;
+        ) || undefined;
     }
 };
 
@@ -249,7 +249,7 @@ const buildDateDataElement = async (
 ) => {
     const dateDataElement = new DateDataElement();
     dateDataElement.type = dataElementTypes.DATE;
-    dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate ?? undefined;
+    dateDataElement.allowFutureDate = programTrackedEntityAttribute.allowFutureDate || undefined;
     await setBaseProperties({
         dataElement: dateDataElement,
         optionSets,

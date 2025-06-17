@@ -56,9 +56,7 @@ const buildTetFeatureTypeSection = async (
         o.name = trackedEntityType?.displayName ?? '';
     });
 
-    if (featureTypeField) {
-        section.addElement(featureTypeField);
-    }
+    featureTypeField && section.addElement(featureTypeField);
     return section;
 };
 
@@ -87,9 +85,7 @@ const buildMainSection = async ({
     }
 
     const featureTypeField = buildTetFeatureTypeField(trackedEntityType);
-    if (featureTypeField) {
-        section.addElement(featureTypeField);
-    }
+    featureTypeField && section.addElement(featureTypeField);
 
     await buildElementsForSection({
         programTrackedEntityAttributes,
@@ -153,9 +149,7 @@ const buildElementsForSection = async ({
             });
             /* eslint-enable no-await-in-loop */
 
-            if (element) {
-                section.addElement(element);
-            }
+            element && section.addElement(element);
         } else if (isProgramTrackedEntityAttribute(trackedEntityAttribute)) {
             const programTrackedEntityAttribute = trackedEntityAttribute;
             /* eslint-disable no-await-in-loop */
@@ -167,9 +161,7 @@ const buildElementsForSection = async ({
                 minorServerVersion,
             );
             /* eslint-enable no-await-in-loop */
-            if (element) {
-                section.addElement(element);
-            }
+            element && section.addElement(element);
         }
     }
     return section;
@@ -241,9 +233,7 @@ export const buildFormFoundation = async (
     if (programSections?.length || dataEntryFormConfig) {
         if (trackedEntityTypeId) {
             section = await buildTetFeatureTypeSection(trackedEntityTypeId, trackedEntityType);
-            if (section) {
-                renderFoundation.addSection(section);
-            }
+            section && renderFoundation.addSection(section);
         }
         if (programTrackedEntityAttributes) {
             const trackedEntityAttributeDictionary = programTrackedEntityAttributes
@@ -283,7 +273,7 @@ export const buildFormFoundation = async (
                     const sectionMetadata = programSections
                         ?.find((cachedSection: any) => cachedSection.id === formConfigSection.id);
 
-                    if (!sectionMetadata && programSections?.length > 0) {
+                    if (!sectionMetadata && programSections && programSections.length > 0) {
                         log.warn(
                             errorCreator('Could not find metadata for section. This could indicate that your form configuration may be out of sync with your metadata.')(
                                 { sectionId: formConfigSection.id },
@@ -301,9 +291,7 @@ export const buildFormFoundation = async (
                         optionSets,
                         querySingleResource,
                     });
-                    if (section) {
-                        renderFoundation.addSection(section);
-                    }
+                    section && renderFoundation.addSection(section);
                 });
                 /* eslint-enable no-await-in-loop */
             } else {
@@ -321,9 +309,7 @@ export const buildFormFoundation = async (
                         querySingleResource,
                         minorServerVersion,
                     });
-                    if (section) {
-                        renderFoundation.addSection(section);
-                    }
+                    section && renderFoundation.addSection(section);
                 }
                 /* eslint-enable no-await-in-loop */
             }
@@ -337,9 +323,7 @@ export const buildFormFoundation = async (
             querySingleResource,
             minorServerVersion,
         });
-        if (section) {
-            renderFoundation.addSection(section);
-        }
+        section && renderFoundation.addSection(section);
     }
     return renderFoundation;
 };
@@ -352,7 +336,5 @@ export const build = async (
     dataEntryFormConfig?: DataEntryFormConfig | null,
 ) => {
     const formFoundation = (await buildFormFoundation(program, querySingleResource, minorServerVersion, dataEntryFormConfig)) ?? {};
-    if (setFormFoundation) {
-        setFormFoundation(formFoundation);
-    }
+    setFormFoundation && setFormFoundation(formFoundation);
 };
