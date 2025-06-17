@@ -1,4 +1,3 @@
-// @flow
 import { v4 as uuid } from 'uuid';
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -51,14 +50,14 @@ export const DataEntry = ({
         userRoles,
         dataEntryId,
         itemId,
-        geometry,
+        geometry: geometry ?? null,
         dataEntryFormConfig,
     });
     const { formFoundation } = context;
     const { formValidated, errorsMessages, warningsMessages } = useFormValidations(dataEntryId, itemId, saveAttempted);
 
     const onUpdateFormField = useCallback(
-        (innerAction: ReduxAction<any, any>) => {
+        (innerAction: any) => {
             const uid = uuid();
             onDisable();
             dispatch(startRunRulesPostUpdateField(dataEntryId, itemId, uid));
@@ -73,7 +72,7 @@ export const DataEntry = ({
         [dispatch, querySingleResource, context, onGetValidationContext, onDisable, onEnable],
     );
     const onUpdateFormFieldAsync = useCallback(
-        (innerAction: ReduxAction<any, any>) => {
+        (innerAction: any) => {
             dispatch(innerAction);
         },
         [dispatch],

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { NoticeBox } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -8,9 +7,9 @@ export const NoticeBoxes = ({
     warningsMessages = [],
     hasApiError = false,
 }: {
-    errorsMessages: Array<{ id: string, message: string }>,
-    warningsMessages: Array<{ id: string, message: string }>,
-    hasApiError?: boolean,
+    errorsMessages: Array<{ id: string; message: string }>;
+    warningsMessages: Array<{ id: string; message: string }>;
+    hasApiError?: boolean;
 }) => (
     <>
         <br />
