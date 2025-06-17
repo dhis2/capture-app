@@ -1,4 +1,3 @@
-// @flow
 import type {
     Enrollment,
     TEIValues,
@@ -25,21 +24,19 @@ import { convertServerToClient } from '../../../../converters';
 import type { QuerySingleResource } from '../../../../utils/api';
 import type { EnrollmentData } from '../Types';
 
-const getEnrollmentForRulesExecution = (enrollment: ?EnrollmentData, programName: string): ?Enrollment =>
+const getEnrollmentForRulesExecution = (enrollment: EnrollmentData | undefined, programName: string): Enrollment | undefined =>
     enrollment && {
         enrollmentId: enrollment.enrollment,
-        // $FlowFixMe
         enrolledAt: convertServerToClient(enrollment.enrolledAt, dataElementTypes.DATE),
-        // $FlowFixMe
         occurredAt: convertServerToClient(enrollment.occurredAt, dataElementTypes.DATE),
         enrollmentStatus: enrollment.status,
         programName,
     };
 
-const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
-    dataElements &&
-    Object.values(dataElements).reduce(
-        (acc, dataElement: any) => ({
+const getDataElementsForRulesExecution = (dataElements?: DataElements): Record<string, any> | undefined => {
+    if (!dataElements) return undefined;
+    return Object.values(dataElements).reduce(
+        (acc: Record<string, any>, dataElement: any) => ({
             ...acc,
             [dataElement.id]: {
                 id: dataElement.id,
@@ -47,8 +44,9 @@ const getDataElementsForRulesExecution = (dataElements: ?DataElements) =>
                 optionSetId: dataElement.optionSet && dataElement.optionSet.id,
             },
         }),
-        {},
+        {} as Record<string, any>,
     );
+};
 
 export const getRulesActionsForTEI = ({
     foundation,
@@ -64,18 +62,18 @@ export const getRulesActionsForTEI = ({
     userRoles,
     programName,
 }: {
-    foundation: RenderFoundation,
-    formId: string,
-    orgUnit: OrgUnit,
-    enrollmentData?: EnrollmentData,
-    teiValues?: ?TEIValues,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    optionSets: OptionSets,
-    rulesContainer: ProgramRulesContainer,
-    otherEvents?: ?EventsData,
-    dataElements: ?DataElements,
-    userRoles: Array<string>,
-    programName: string,
+    foundation: RenderFoundation;
+    formId: string;
+    orgUnit: OrgUnit;
+    enrollmentData?: EnrollmentData;
+    teiValues?: TEIValues;
+    trackedEntityAttributes?: TrackedEntityAttributes;
+    optionSets: OptionSets;
+    rulesContainer: ProgramRulesContainer;
+    otherEvents?: EventsData;
+    dataElements?: DataElements;
+    userRoles: Array<string>;
+    programName: string;
 }) => {
     const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: rulesContainer,
@@ -109,20 +107,20 @@ export const getRulesActionsForTEIAsync = async ({
     querySingleResource,
     onGetValidationContext,
 }: {
-    foundation: RenderFoundation,
-    formId: string,
-    orgUnit: OrgUnit,
-    enrollmentData?: EnrollmentData,
-    teiValues?: ?TEIValues,
-    trackedEntityAttributes: ?TrackedEntityAttributes,
-    optionSets: OptionSets,
-    rulesContainer: ProgramRulesContainer,
-    otherEvents?: ?EventsData,
-    dataElements: ?DataElements,
-    userRoles: Array<string>,
-    programName: string,
-    querySingleResource: QuerySingleResource,
-    onGetValidationContext: () => Object,
+    foundation: RenderFoundation;
+    formId: string;
+    orgUnit: OrgUnit;
+    enrollmentData?: EnrollmentData;
+    teiValues?: TEIValues;
+    trackedEntityAttributes?: TrackedEntityAttributes;
+    optionSets: OptionSets;
+    rulesContainer: ProgramRulesContainer;
+    otherEvents?: EventsData;
+    dataElements?: DataElements;
+    userRoles: Array<string>;
+    programName: string;
+    querySingleResource: QuerySingleResource;
+    onGetValidationContext: () => Record<string, any>;
 }) => {
     const effects: OutputEffects = ruleEngine().getProgramRuleEffects({
         programRulesContainer: rulesContainer,
@@ -130,7 +128,6 @@ export const getRulesActionsForTEIAsync = async ({
         otherEvents,
         dataElements: getDataElementsForRulesExecution(dataElements),
         trackedEntityAttributes,
-        // $FlowFixMe (flow doesn't understand that selectedEnrollment.enrolledAt/occurredAt are strings)
         selectedEnrollment: getEnrollmentForRulesExecution(enrollmentData, programName),
         selectedEntity: teiValues,
         selectedOrgUnit: orgUnit,

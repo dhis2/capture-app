@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -9,7 +8,6 @@ import { TEI_MODAL_STATE } from './dataEntry.actions';
 
 export const DataEntryComponent = ({
     dataEntryId,
-    itemId,
     onCancel,
     onSave,
     saveAttempted,
@@ -28,10 +26,10 @@ export const DataEntryComponent = ({
             { trackedEntityName, interpolation: { escapeValue: false } },
         )}</ModalTitle>
         <ModalContent>
-            {i18n.t(
+            {String(i18n.t(
                 'Change information about this {{trackedEntityName}} here. Information about this enrollment can be edited in the Enrollment widget.',
                 { trackedEntityName, interpolation: { escapeValue: false } },
-            )}
+            ))}
             <DataEntry
                 id={dataEntryId}
                 formFoundation={formFoundation}
@@ -42,9 +40,6 @@ export const DataEntryComponent = ({
                 orgUnit={orgUnit}
             />
             <NoticeBoxes
-                dataEntryId={dataEntryId}
-                itemId={itemId}
-                saveAttempted={saveAttempted}
                 errorsMessages={errorsMessages}
                 warningsMessages={warningsMessages}
                 hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}
@@ -53,17 +48,17 @@ export const DataEntryComponent = ({
         <ModalActions>
             <ButtonStrip end>
                 <Button onClick={onCancel} secondary>
-                    {i18n.t('Cancel without saving')}
+                    {String(i18n.t('Cancel without saving'))}
                 </Button>
                 {modalState === TEI_MODAL_STATE.OPEN_DISABLE && (
                     <Button loading primary>
-                        {i18n.t(' Loading...')}
+                        {String(i18n.t(' Loading...'))}
                     </Button>
                 )}
 
                 {(modalState === TEI_MODAL_STATE.OPEN || modalState === TEI_MODAL_STATE.OPEN_ERROR) && (
                     <Button onClick={onSave} primary>
-                        {i18n.t('Save changes')}
+                        {String(i18n.t('Save changes'))}
                     </Button>
                 )}
             </ButtonStrip>
