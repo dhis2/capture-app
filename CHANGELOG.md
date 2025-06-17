@@ -1,3 +1,10 @@
+## [102.6.6](https://github.com/dhis2/capture-app/compare/v102.6.5...v102.6.6) (2025-06-17)
+
+
+### Bug Fixes
+
+* [DHIS2-19647] Breadcrumb always shows "Discard changes" warning ([#4121](https://github.com/dhis2/capture-app/issues/4121)) ([d84ff92](https://github.com/dhis2/capture-app/commit/d84ff92537704098eb7f024099c80e1d0c0ffc03))
+
 ## [102.6.5](https://github.com/dhis2/capture-app/compare/v102.6.4...v102.6.5) (2025-06-16)
 
 
