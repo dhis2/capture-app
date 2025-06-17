@@ -1,59 +1,38 @@
-// @flow
-/**
- * @namespace UrlSync
- */
 import * as React from 'react';
-import queryString, { type QueryParameters } from 'query-string';
+import queryString from 'query-string';
+import type { ParsedQuery } from 'query-string';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
+import type { Props, SyncSpecification, SyncSpecificationGetter, UpdateDataContainer } from './withUrlSync.types';
 
-type Props = {
-    urlPage: string,
-    statePage: string,
-    urlParams?: ?string,
-    stateParams: ?Object,
-    onUpdate: (selections: Object) => void,
-    onNoUpdateRequired?: ?() => void,
-    history: Object
-};
-
-type SyncSpecification = {|
-    urlParameterName: string,
-|};
-type SyncSpecificationGetter = (props: Props) => Array<SyncSpecification>;
-
-export type UpdateDataContainer = {
-    nextProps: Object,
-    prevProps: Object,
-    nextPage: ?string,
-    prevPage: ?string,
-};
+export type { UpdateDataContainer } from './withUrlSync.types';
 
 const getUrlSyncer = (
-    InnerComponent: React.ComponentType<any>,
+    InnerComponent: React.ComponentType<Record<string, unknown>>,
     onGetSyncSpecification: SyncSpecificationGetter) =>
     class UrlSyncer extends React.Component<Props> {
-        static getValueFromParam(param: ?Array<string>, id: string) {
-            let value = null;
+        static getValueFromParam(param: Array<string> | null, id: string): string | null {
+            let value: string | null = null;
             if (param && param.length > 0) {
                 const regExp = new RegExp(`${id}=`, 'i');
-                value = param[param.length - 1].replace(regExp, '').trim() || null;
+                const result = param[param.length - 1].replace(regExp, '').trim();
+                value = result ?? null;
             }
             return value;
         }
 
-        static getNextProps(locationParams: Object, syncSpecification: Array<SyncSpecification>) {
+        static getNextProps(locationParams: Record<string, unknown>, syncSpecification: Array<SyncSpecification>) {
             const nextParams = Object
                 .keys(locationParams)
                 .reduce((accNextParams, locationKey) => {
-                    const syncSpec = syncSpecification.find(s => s.urlParameterName === locationKey) || {};
-                    accNextParams[syncSpec.urlParameterName || locationKey] = locationParams[locationKey];
+                    const syncSpec = syncSpecification.find(s => s.urlParameterName === locationKey);
+                    const paramName = syncSpec?.urlParameterName ?? locationKey;
+                    accNextParams[paramName] = locationParams[locationKey];
                     return accNextParams;
-                }, {});
+                }, {} as Record<string, unknown>);
 
             return nextParams;
         }
 
-        queuedUpdate: ?Object;
         componentDidMount() {
             this.triggerSyncCallback();
         }
@@ -62,19 +41,21 @@ const getUrlSyncer = (
             this.triggerSyncCallback();
         }
 
+        queuedUpdate: { nextProps: Record<string, unknown> } | null = null;
+
         update(updateData: UpdateDataContainer) {
             this.props.onUpdate(updateData);
         }
 
         noUpdateRequired() {
-            this.props.onNoUpdateRequired && this.props.onNoUpdateRequired();
+            this.props.onNoUpdateRequired?.();
         }
 
         triggerSyncCallback() {
             if (this.queuedUpdate) {
                 this.update({
                     nextProps: this.queuedUpdate.nextProps,
-                    prevProps: this.props.stateParams || {},
+                    prevProps: this.props.stateParams ?? {},
                     nextPage: this.props.urlPage,
                     prevPage: this.props.statePage,
                 });
@@ -84,11 +65,11 @@ const getUrlSyncer = (
             }
         }
 
-        paramsNeedsUpdate(syncSpecifications: Array<SyncSpecification>, locationParams: QueryParameters) {
+        paramsNeedsUpdate(syncSpecifications: Array<SyncSpecification>, locationParams: ParsedQuery) {
             return syncSpecifications
                 .some((spec) => {
                     const locationValue = locationParams[spec.urlParameterName];
-                    const propValue = (this.props.stateParams && this.props.stateParams[spec.urlParameterName]) || undefined;
+                    const propValue = this.props.stateParams?.[spec.urlParameterName] ?? undefined;
                     return locationValue !== propValue;
                 });
         }
@@ -96,7 +77,7 @@ const getUrlSyncer = (
         isOutOfSync() {
             const syncSpecification = onGetSyncSpecification(this.props);
             const { history: { location }, statePage, urlPage } = this.props;
-            const locationParams = queryString.parse(location && location.search);
+            const locationParams = queryString.parse(location?.search);
             const urlParamsAreOutOfSync = this.paramsNeedsUpdate(syncSpecification, locationParams);
             const urlPathnameIsOutOfSync = urlPage !== statePage;
 
@@ -114,7 +95,6 @@ const getUrlSyncer = (
 
             if (urlOutOfSync && pageFetchesOrgUnitUsingTheOldWay(urlPage)) {
                 return (
-                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         urlOutOfSync
                         {...passOnProps}
@@ -130,12 +110,6 @@ const getUrlSyncer = (
         }
     };
 
-/**
- * Compare values from the url params and the props (usually from the state) based on the sync specification. Calls onUpdate or onNoUpdateRequired accordingly. Additionally checks if the page has changed.
- * @alias withUrlSync
- * @memberof UrlSync
- * @example withUrlSync(props => [{ urlParameterName: 'programId' }])([InnerComponent])
- */
 export const withUrlSync = (onGetSyncSpecification: SyncSpecificationGetter) =>
-    (InnerComponent: React.ComponentType<any>) =>
+    (InnerComponent: React.ComponentType<Record<string, unknown>>) =>
         getUrlSyncer(InnerComponent, onGetSyncSpecification);

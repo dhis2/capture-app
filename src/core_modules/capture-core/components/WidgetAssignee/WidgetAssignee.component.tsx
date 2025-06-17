@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconUser24, spacers } from '@dhis2/ui';
@@ -19,7 +18,7 @@ const styles = () => ({
 });
 
 const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }: PlainProps) => {
-    const [open, setOpenStatus] = useState(true);
+    const [open, setOpen] = useState(true);
     const [editMode, setEditMode] = useState(false);
 
     const handleSet = useCallback(
@@ -38,8 +37,8 @@ const WidgetAssigneePlain = ({ assignee, writeAccess, onSet, avatarId, classes }
                         <IconUser24 /> <span>{i18n.t('Assignee')}</span>
                     </span>
                 }
-                onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
-                onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
+                onOpen={useCallback(() => setOpen(true), [setOpen])}
+                onClose={useCallback(() => setOpen(false), [setOpen])}
                 open={open}
             >
                 <div className={classes.wrapper}>

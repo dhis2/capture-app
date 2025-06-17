@@ -1,8 +1,7 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, UserAvatar } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import type { Assignee } from './WidgetAssignee.types';
 
@@ -28,12 +27,11 @@ const styles = () => ({
 });
 
 type Props = {
-    assignee: Assignee | null,
-    onEdit: () => {},
-    writeAccess: boolean,
-    avatarId?: string,
-    ...CssClasses,
-};
+    assignee: Assignee | null;
+    onEdit: () => void;
+    writeAccess: boolean;
+    avatarId?: string;
+} & WithStyles<typeof styles>;
 
 const DisplayModePlain = ({ assignee, onEdit, writeAccess, avatarId, classes }: Props) => (
     assignee ? (
