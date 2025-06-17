@@ -12,7 +12,7 @@ export const AddLocation = ({ enrollment, setOpenMap }: Props) => {
             dataTest="widget-enrollment-actions-add-location"
             onClick={() => setOpenMap(true)}
             icon={<IconLocation16 />}
-            label={hasGeometry ? (i18n.t('Edit location') as string) : (i18n.t('Add location') as string)}
+            label={hasGeometry ? i18n.t('Edit location') : i18n.t('Add location')}
             suffix=""
         />
     );

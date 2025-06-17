@@ -16,7 +16,7 @@ export const Cancel = ({ enrollment, onUpdate }: Props) =>
                 })
             }
             icon={<IconUndo16 />}
-            label={i18n.t('Reactivate') as string}
+            label={i18n.t('Reactivate')}
             suffix=""
         />
     ) : (
@@ -31,7 +31,7 @@ export const Cancel = ({ enrollment, onUpdate }: Props) =>
             }
             icon={<IconCross16 />}
             destructive
-            label={i18n.t('Mark as cancelled') as string}
+            label={i18n.t('Mark as cancelled')}
             suffix=""
         />
     ));

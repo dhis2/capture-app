@@ -15,7 +15,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) =>
                 })
             }
             icon={<IconStarFilled16 />}
-            label={i18n.t('Remove from follow-up') as string}
+            label={i18n.t('Remove from follow-up')}
             suffix=""
         />
     ) : (
@@ -29,7 +29,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) =>
                 })
             }
             icon={<IconFlag16 />}
-            label={i18n.t('Mark for follow-up') as string}
+            label={i18n.t('Mark for follow-up')}
             suffix=""
         />
     ));

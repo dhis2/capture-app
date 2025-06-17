@@ -10,7 +10,7 @@ export const Transfer = ({ enrollment, setOpenTransfer }: Props) => (
         dataTest="widget-enrollment-actions-transfer"
         onClick={setOpenTransfer}
         icon={<IconArrowRight16 />}
-        label={i18n.t('Transfer') as string}
+        label={i18n.t('Transfer')}
         suffix=""
     />
 );

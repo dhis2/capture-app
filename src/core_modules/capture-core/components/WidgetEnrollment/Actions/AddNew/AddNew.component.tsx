@@ -14,7 +14,7 @@ export const AddNew = ({ tetName, canAddNew, onlyEnrollOnce, onAddNew }: Props) 
             dataTest="widget-enrollment-actions-add-new"
             onClick={() => onAddNew({})}
             icon={<IconAdd16 />}
-            label={i18n.t('Add new {{tetName}}', { tetName }) as string}
+            label={i18n.t('Add new {{tetName}}', { tetName })}
             suffix=""
         />
     );

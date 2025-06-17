@@ -19,7 +19,7 @@ export const Complete = ({ enrollment, events, onUpdate, setOpenCompleteModal }:
                     })
                 }
                 icon={<IconCheckmark16 />}
-                label={i18n.t('Mark as incomplete') as string}
+                label={i18n.t('Mark as incomplete')}
                 suffix=""
             />
         );
@@ -32,7 +32,7 @@ export const Complete = ({ enrollment, events, onUpdate, setOpenCompleteModal }:
                 dataTest="widget-enrollment-actions-complete-modal"
                 onClick={() => setOpenCompleteModal(true)}
                 icon={<IconCheckmark16 />}
-                label={i18n.t('Complete') as string}
+                label={i18n.t('Complete')}
                 suffix=""
             />
         );
@@ -49,7 +49,7 @@ export const Complete = ({ enrollment, events, onUpdate, setOpenCompleteModal }:
                 })
             }
             icon={<IconCheckmark16 />}
-            label={i18n.t('Complete') as string}
+            label={i18n.t('Complete')}
             suffix=""
         />
     );

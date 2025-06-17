@@ -124,13 +124,13 @@ export const ActionsPlain = ({
                     )
                 }
             >
-                {i18n.t('Enrollment actions') as string}
+                {i18n.t('Enrollment actions')}
             </DropdownButton>
             {loading && (
                 <div className={classes.loading}>
                     <LoadingMaskForButton />
                     &nbsp;
-                    {i18n.t('We are processing your request.') as string}
+                    {i18n.t('We are processing your request.')}
                 </div>
             )}
             {isOpenMap && <MapModal

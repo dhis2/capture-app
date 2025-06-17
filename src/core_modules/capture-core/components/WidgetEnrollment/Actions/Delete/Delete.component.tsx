@@ -10,7 +10,7 @@ export const Delete = ({ enrollment, canCascadeDeleteEnrollment, onDelete }: Pro
         onClick={() => onDelete({ ...enrollment, cascadeDeleteEnrollment: canCascadeDeleteEnrollment })}
         icon={<IconDelete16 />}
         destructive
-        label={i18n.t('Delete enrollment') as string}
+        label={i18n.t('Delete enrollment')}
         suffix=""
     />
 );
