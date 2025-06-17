@@ -7,50 +7,41 @@ import { plainStatus, eventStatuses } from '../../constants/status.const';
 export const Complete = ({ enrollment, events, onUpdate, setOpenCompleteModal }: Props) => {
     const hasActiveEvents = events?.some(event => event.status === eventStatuses.ACTIVE);
 
-    if (enrollment.status === plainStatus.COMPLETED) {
-        return (
-            <MenuItem
-                dense
-                dataTest="widget-enrollment-actions-incomplete"
-                onClick={() =>
-                    onUpdate({
-                        ...enrollment,
-                        status: plainStatus.ACTIVE,
-                    })
-                }
-                icon={<IconCheckmark16 />}
-                label={i18n.t('Mark as incomplete')}
-                suffix=""
-            />
-        );
-    }
-
-    if (hasActiveEvents) {
-        return (
-            <MenuItem
-                dense
-                dataTest="widget-enrollment-actions-complete-modal"
-                onClick={() => setOpenCompleteModal(true)}
-                icon={<IconCheckmark16 />}
-                label={i18n.t('Complete')}
-                suffix=""
-            />
-        );
-    }
-
     return (
-        <MenuItem
-            dense
-            dataTest="widget-enrollment-actions-complete"
-            onClick={() =>
-                onUpdate({
-                    ...enrollment,
-                    status: plainStatus.COMPLETED,
-                })
-            }
-            icon={<IconCheckmark16 />}
-            label={i18n.t('Complete')}
-            suffix=""
-        />
+        <>
+            {enrollment.status === plainStatus.COMPLETED ? (
+                <MenuItem
+                    dense
+                    dataTest="widget-enrollment-actions-incomplete"
+                    onClick={() =>
+                        onUpdate({
+                            ...enrollment,
+                            status: plainStatus.ACTIVE,
+                        })
+                    }
+                    icon={<IconCheckmark16 />}
+                    label={i18n.t('Mark incomplete')}
+                    suffix=""
+                />
+            ) : (
+                <MenuItem
+                    dense
+                    dataTest="widget-enrollment-actions-complete"
+                    onClick={() => {
+                        if (hasActiveEvents) {
+                            setOpenCompleteModal(true);
+                            return null;
+                        }
+                        return onUpdate({
+                            ...enrollment,
+                            status: plainStatus.COMPLETED,
+                        });
+                    }}
+                    icon={<IconCheckmark16 />}
+                    label={i18n.t('Complete')}
+                    suffix=""
+                />
+            )}
+        </>
     );
 };

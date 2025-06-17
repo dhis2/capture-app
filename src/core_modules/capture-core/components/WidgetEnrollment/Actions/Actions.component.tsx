@@ -96,7 +96,6 @@ export const ActionsPlain = ({
                                 onUpdate={handleOnUpdate}
                             />
                             <Transfer
-                                enrollment={enrollment}
                                 setOpenTransfer={() => {
                                     setOpenTransfer(true);
                                     setOpenActions(false);

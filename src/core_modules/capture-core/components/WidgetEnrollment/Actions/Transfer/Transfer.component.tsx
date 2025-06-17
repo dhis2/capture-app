@@ -3,8 +3,7 @@ import { IconArrowRight16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './transfer.types';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Transfer = ({ enrollment, setOpenTransfer }: Props) => (
+export const Transfer = ({ setOpenTransfer }: Props) => (
     <MenuItem
         dense
         dataTest="widget-enrollment-actions-transfer"

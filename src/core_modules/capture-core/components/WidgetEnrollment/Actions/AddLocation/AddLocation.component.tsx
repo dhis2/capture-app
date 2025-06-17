@@ -1,10 +1,14 @@
 import React from 'react';
 import { IconLocation16, MenuItem } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
+import { useGeometryLabel } from '../../hooks/useGeometry';
 import type { Props } from './addLocation.types';
 
 export const AddLocation = ({ enrollment, setOpenMap }: Props) => {
-    const hasGeometry = enrollment?.geometry;
+    const label = useGeometryLabel(enrollment);
+
+    if (!label) {
+        return null;
+    }
 
     return (
         <MenuItem
@@ -12,7 +16,7 @@ export const AddLocation = ({ enrollment, setOpenMap }: Props) => {
             dataTest="widget-enrollment-actions-add-location"
             onClick={() => setOpenMap(true)}
             icon={<IconLocation16 />}
-            label={hasGeometry ? i18n.t('Edit location') : i18n.t('Add location')}
+            label={label}
             suffix=""
         />
     );

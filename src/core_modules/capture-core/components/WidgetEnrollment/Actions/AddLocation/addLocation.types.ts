@@ -1,4 +1,4 @@
 export type Props = {
-    enrollment: Record<string, any>;
+    enrollment: any;
     setOpenMap: (open: boolean) => void;
 };
