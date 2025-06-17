@@ -65,6 +65,7 @@ export const useUpdateOwnership = ({
         }),
         {
             onSuccess: (_, { programAccessLevel, orgUnitScopes }: any) => {
+                // If the user is transferring ownership to a capture scope, we stay on the same page
                 if (orgUnitScopes.destination === OrgUnitScopes.CAPTURE) {
                     refetchTEI();
                     return;
@@ -75,6 +76,7 @@ export const useUpdateOwnership = ({
                     return;
                 }
 
+                // Assuming that all cases are outside the capture scope and program is protected or closed
                 if (programAccessLevel === ProgramAccessLevels.PROTECTED) {
                     if (orgUnitScopes.origin === OrgUnitScopes.CAPTURE) {
                         onAccessLostFromTransfer && onAccessLostFromTransfer();
