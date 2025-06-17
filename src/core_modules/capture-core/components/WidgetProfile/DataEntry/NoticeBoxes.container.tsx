@@ -14,7 +14,7 @@ export const NoticeBoxes = ({
     <>
         <br />
         {errorsMessages && errorsMessages.length > 0 && (
-            <NoticeBox title={String(i18n.t('There is a problem with this form'))} error>
+            <NoticeBox title={i18n.t('There is a problem with this form')} error>
                 <ul>
                     {errorsMessages?.map(error => (
                         <li key={error.id}> {error.message} </li>
@@ -24,7 +24,7 @@ export const NoticeBoxes = ({
         )}
         <br />
         {warningsMessages && warningsMessages.length > 0 && (
-            <NoticeBox title={String(i18n.t('There are warnings in this form'))} warning>
+            <NoticeBox title={i18n.t('There are warnings in this form')} warning>
                 <ul>
                     {warningsMessages?.map(warning => (
                         <li key={warning.id}> {warning.message} </li>
@@ -34,8 +34,8 @@ export const NoticeBoxes = ({
         )}
         <br />
         {hasApiError && (
-            <NoticeBox title={String(i18n.t('There was a problem saving changes'))} error>
-                {String(i18n.t('Try again or contact your system administrator for support'))}
+            <NoticeBox title={i18n.t('There was a problem saving changes')} error>
+                {i18n.t('Try again or contact your system administrator for support')}
             </NoticeBox>
         )}
         <br />
