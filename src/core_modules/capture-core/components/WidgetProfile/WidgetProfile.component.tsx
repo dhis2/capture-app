@@ -60,8 +60,8 @@ const WidgetProfilePlain = ({
 }: ComponentProps) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
-    const [open, setOpen] = useState<boolean>(true);
-    const [modalState, setModalState] = useState<string>(TEI_MODAL_STATE.CLOSE);
+    const [open, setOpenStatus] = useState<boolean>(true);
+    const [modalState, setTeiModalState] = useState<string>(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
     const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
@@ -109,12 +109,12 @@ const WidgetProfilePlain = ({
     }, [queryClient, teiId]);
 
     useEffect(() => {
-        hasError && setModalState(TEI_MODAL_STATE.OPEN_ERROR);
+        hasError && setTeiModalState(TEI_MODAL_STATE.OPEN_ERROR);
     }, [hasError]);
 
     useEffect(() => {
         if (storedAttributeValues?.length > 0) {
-            setModalState(TEI_MODAL_STATE.CLOSE);
+            setTeiModalState(TEI_MODAL_STATE.CLOSE);
             onUpdateTeiAttributeValues?.(storedAttributeValues, teiDisplayName);
         }
     }, [storedAttributeValues, onUpdateTeiAttributeValues, teiDisplayName]);
@@ -140,8 +140,8 @@ const WidgetProfilePlain = ({
             </div>
         );
     };
-    const handleOnDisable = useCallback(() => setModalState(TEI_MODAL_STATE.OPEN_DISABLE), [setModalState]);
-    const handleOnEnable = useCallback(() => setModalState(TEI_MODAL_STATE.OPEN), [setModalState]);
+    const handleOnDisable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN_DISABLE), [setTeiModalState]);
+    const handleOnEnable = useCallback(() => setTeiModalState(TEI_MODAL_STATE.OPEN), [setTeiModalState]);
 
     return (
         <div data-test="profile-widget">
@@ -158,7 +158,7 @@ const WidgetProfilePlain = ({
                         </div>
                         <div className={classes.actions}>
                             {isEditable && (
-                                <Button onClick={() => setModalState(TEI_MODAL_STATE.OPEN)} secondary small>
+                                <Button onClick={() => setTeiModalState(TEI_MODAL_STATE.OPEN)} secondary small>
                                     {i18n.t('Edit')}
                                 </Button>
                             )}
@@ -176,8 +176,8 @@ const WidgetProfilePlain = ({
                         </div>
                     </div>
                 }
-                onOpen={useCallback(() => setOpen(true), [setOpen])}
-                onClose={useCallback(() => setOpen(false), [setOpen])}
+                onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
+                onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
                 {renderProfile()}
@@ -185,7 +185,7 @@ const WidgetProfilePlain = ({
             {showEditModal(loading, error, isEditable, modalState) && (
                 <>
                     <DataEntry
-                        onCancel={() => setModalState(TEI_MODAL_STATE.CLOSE)}
+                        onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}
                         onDisable={handleOnDisable}
                         onEnable={handleOnEnable}
                         programAPI={program}
