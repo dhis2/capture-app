@@ -1,22 +1,21 @@
-// @flow
 import { useDispatch } from 'react-redux';
-import React, { useCallback, useMemo, useEffect, useState } from 'react';
-import type { ComponentType } from 'react';
+import React, { useCallback, useMemo, useEffect, useState, type ComponentType } from 'react';
 import { useLocationQuery } from '../../../utils/routing';
 import { SearchPageComponent } from './SearchPage.component';
 import { navigateToMainPage, openSearchPage } from './SearchPage.actions';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks';
 import { ResultsPageSizeContext } from '../shared-contexts';
 
-const usePreselectedProgram = (currentSelectionsId): ?string => {
+const usePreselectedProgram = (currentSelectionsId: string): string | null | undefined => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
     return useMemo(() => {
         const { programId } =
           Object.values(trackedEntityTypesWithCorrelatedPrograms)
-              // $FlowFixMe https://github.com/facebook/flow/issues/2221
-              .map(({ programs }) =>
-                  programs.find(({ programId: currentProgramId }) => currentProgramId === currentSelectionsId))
+              .map((item: any) => {
+                  const { programs } = item;
+                  return programs.find(({ programId: currentProgramId }: any) => currentProgramId === currentSelectionsId);
+              })
               .filter(program => program)[0]
             || {};
 
@@ -25,7 +24,7 @@ const usePreselectedProgram = (currentSelectionsId): ?string => {
     );
 };
 
-export const SearchPage: ComponentType<{||}> = () => {
+export const SearchPage: ComponentType<Record<string, never>> = () => {
     const [showBulkDataEntryPlugin, setShowBulkDataEntryPlugin] = useState(false);
     const dispatch = useDispatch();
     const { programId, orgUnitId } = useLocationQuery();
@@ -37,8 +36,6 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     useEffect(() => {
         if (programId && (programId !== preselectedProgramId)) {
-            // There is no search for Event type of programs.
-            // In this case we navigate the users back to the main page
             onNavigateToMainPage();
         }
     }, [programId, preselectedProgramId, onNavigateToMainPage]);

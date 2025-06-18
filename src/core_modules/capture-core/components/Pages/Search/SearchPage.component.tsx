@@ -1,10 +1,8 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconChevronLeft24, spacers, colors } from '@dhis2/ui';
-import { compose } from 'redux';
-import { withStyles } from '@material-ui/core/styles';
-import type { Props, PlainProps } from './searchPage.types';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Props } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
@@ -12,7 +10,7 @@ import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
 import { BulkDataEntry } from '../../BulkDataEntry';
 import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 
-const getStyles = () => ({
+const styles: Readonly<any> = {
     backButton: {
         margin: spacers.dp16,
         padding: '0',
@@ -37,7 +35,7 @@ const getStyles = () => ({
         borderColor: colors.grey400,
         borderRadius: 3,
     },
-});
+};
 
 const SearchPagePlain = ({
     programId,
@@ -46,7 +44,7 @@ const SearchPagePlain = ({
     setShowBulkDataEntryPlugin,
     showBulkDataEntryPlugin,
     classes,
-}: PlainProps) => (
+}: Props & WithStyles<typeof styles>) => (
     <>
         <TopBar programId={programId} orgUnitId={orgUnitId} />
         {showBulkDataEntryPlugin ? (
@@ -84,6 +82,5 @@ const SearchPagePlain = ({
     </>
 );
 
-export const SearchPageComponent: ComponentType<$Diff<Props, CssClasses>> = compose(withStyles(getStyles))(
-    SearchPagePlain,
-);
+export const SearchPageComponent =
+    withStyles(styles)(SearchPagePlain) as ComponentType<Props>;
