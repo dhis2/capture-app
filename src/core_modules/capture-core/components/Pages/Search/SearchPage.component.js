@@ -43,7 +43,8 @@ const SearchPagePlain = ({
     programId,
     orgUnitId,
     onNavigateToMainPage,
-    setShowBulkDataEntryPlugin,
+    onCloseBulkDataEntryPlugin,
+    onOpenBulkDataEntryPlugin,
     showBulkDataEntryPlugin,
     classes,
 }: PlainProps) => (
@@ -52,7 +53,7 @@ const SearchPagePlain = ({
         {showBulkDataEntryPlugin ? (
             <BulkDataEntry
                 programId={programId}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
                 page={bulkDataEntryBreadcrumbsKeys.SEARCH_PAGE}
             />
         ) : (
@@ -75,7 +76,7 @@ const SearchPagePlain = ({
                         <br />
                         <WidgetBulkDataEntry
                             programId={programId}
-                            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                         />
                     </div>
                 </div>
