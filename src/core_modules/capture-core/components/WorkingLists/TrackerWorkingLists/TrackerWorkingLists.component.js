@@ -3,7 +3,7 @@ import { colors, spacers } from '@dhis2/ui';
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TrackerWorkingListsReduxProvider } from './ReduxProvider';
-import type { Props } from './TrackerWorkingLists.types';
+import type { Props } from './trackerWorkingLists.types';
 import { TRACKER_WORKING_LISTS_STORE_ID } from './constants';
 
 const getStyles = () => ({

@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import type { Props } from './TrackerWorkingListsSetup.types';
+import type { Props } from './trackerWorkingListsSetup.types';
 import { WorkingListsBase } from '../../WorkingListsBase';
 import {
     useDefaultColumnConfig,

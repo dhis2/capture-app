@@ -128,7 +128,7 @@
                 ]
             }
         ],
-        "import/extensions": ["error", "never", { "types": "always" }]
+        "import/extensions": ["error", "never"]
     },
     "settings": {
         "import/resolver": {
