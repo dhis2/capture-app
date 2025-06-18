@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RegisterTeiComponent } from './RegisterTei.component';
@@ -14,10 +13,11 @@ export const RegisterTei = ({
     teiId,
     trackedEntityTypeId,
     suggestedProgramId,
-}: ContainerProps) => {
+}: ContainerProps): React.ReactElement | null => {
     const dataEntryId = 'relationship';
-    const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
-    const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
+    const error = useSelector(({ newRelationshipRegisterTei }: { newRelationshipRegisterTei: { error: string } }) =>
+        (newRelationshipRegisterTei.error));
+    const selectedScopeId = suggestedProgramId ?? trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
     const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
         teiId,
@@ -34,7 +34,9 @@ export const RegisterTei = ({
             dataEntryId={dataEntryId}
             onLink={onLink}
             onCancel={onCancel}
+            // @ts-expect-error - Preserving original implementation
             onSaveWithoutEnrollment={onSave}
+            // @ts-expect-error - Preserving original implementation
             onSaveWithEnrollment={onSave}
             onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
             trackedEntityName={trackedEntityName}
@@ -45,4 +47,3 @@ export const RegisterTei = ({
         />
     );
 };
-
