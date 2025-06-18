@@ -1,6 +1,5 @@
-// @flow
-import { Modal, ModalActions, ModalContent, ModalTitle, Button, ButtonStrip } from '@dhis2/ui';
 import React from 'react';
+import { Button, ButtonStrip, Modal, ModalActions, ModalContent, ModalTitle } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { PlainProps } from './completeModal.types';
 
@@ -23,13 +22,15 @@ export const CompleteModalComponent = ({
                         const { count, name } = programStagesWithActiveEvents[key];
                         return (
                             <ul key={key}>
-                                {i18n.t('{{count}} event in {{programStageName}}', {
-                                    count,
-                                    defaultValue: '{{count}} event in {{programStageName}}',
-                                    defaultValue_plural: '{{count}} events in {{programStageName}}',
-                                    programStageName: name,
-                                    interpolation: { escapeValue: false },
-                                })}
+                                <li>
+                                    {i18n.t('{{count}} event in {{programStageName}}', {
+                                        count,
+                                        defaultValue: '{{count}} event in {{programStageName}}',
+                                        defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                        programStageName: name,
+                                        interpolation: { escapeValue: false },
+                                    })}
+                                </li>
                             </ul>
                         );
                     })}
@@ -44,13 +45,15 @@ export const CompleteModalComponent = ({
 
                         return (
                             <ul key={key}>
-                                {i18n.t('{{count}} event in {{programStageName}}', {
-                                    count,
-                                    defaultValue: '{{count}} event in {{programStageName}}',
-                                    defaultValue_plural: '{{count}} events in {{programStageName}}',
-                                    programStageName: name,
-                                    interpolation: { escapeValue: false },
-                                })}
+                                <li>
+                                    {i18n.t('{{count}} event in {{programStageName}}', {
+                                        count,
+                                        defaultValue: '{{count}} event in {{programStageName}}',
+                                        defaultValue_plural: '{{count}} events in {{programStageName}}',
+                                        programStageName: name,
+                                        interpolation: { escapeValue: false },
+                                    })}
+                                </li>
                             </ul>
                         );
                     })}

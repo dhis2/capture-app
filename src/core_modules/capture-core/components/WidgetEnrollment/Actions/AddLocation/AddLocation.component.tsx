@@ -1,6 +1,5 @@
-// @flow
-import { IconLocation16, MenuItem } from '@dhis2/ui';
 import React from 'react';
+import { IconLocation16, MenuItem } from '@dhis2/ui';
 import { useGeometryLabel } from '../../hooks/useGeometry';
 import type { Props } from './addLocation.types';
 
@@ -15,9 +14,10 @@ export const AddLocation = ({ enrollment, setOpenMap }: Props) => {
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-add-location"
+            onClick={() => setOpenMap(true)}
             icon={<IconLocation16 />}
             label={label}
-            onClick={() => setOpenMap(true)}
+            suffix=""
         />
     );
 };

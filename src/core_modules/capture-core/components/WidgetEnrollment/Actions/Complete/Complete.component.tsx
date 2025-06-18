@@ -1,12 +1,11 @@
-// @flow
-import { IconCheckmark16, MenuItem } from '@dhis2/ui';
 import React from 'react';
+import { IconCheckmark16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './complete.types';
 import { plainStatus, eventStatuses } from '../../constants/status.const';
 
 export const Complete = ({ enrollment, events, onUpdate, setOpenCompleteModal }: Props) => {
-    const hasActiveEvents = events.some(event => event.status === eventStatuses.ACTIVE);
+    const hasActiveEvents = events?.some(event => event.status === eventStatuses.ACTIVE);
 
     return (
         <>
@@ -22,6 +21,7 @@ export const Complete = ({ enrollment, events, onUpdate, setOpenCompleteModal }:
                     }
                     icon={<IconCheckmark16 />}
                     label={i18n.t('Mark incomplete')}
+                    suffix=""
                 />
             ) : (
                 <MenuItem
@@ -39,6 +39,7 @@ export const Complete = ({ enrollment, events, onUpdate, setOpenCompleteModal }:
                     }}
                     icon={<IconCheckmark16 />}
                     label={i18n.t('Complete')}
+                    suffix=""
                 />
             )}
         </>

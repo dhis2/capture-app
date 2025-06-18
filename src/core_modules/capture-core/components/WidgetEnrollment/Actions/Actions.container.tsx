@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { ActionsComponent } from './Actions.component';
 import type { Props } from './actions.types';

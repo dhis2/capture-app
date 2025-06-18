@@ -1,6 +1,5 @@
-// @flow
-import { IconFlag16, MenuItem } from '@dhis2/ui';
 import React from 'react';
+import { IconFlag16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './followup.types';
 
@@ -17,6 +16,7 @@ export const Followup = ({ enrollment, onUpdate }: Props) =>
             }
             icon={<IconFlag16 />}
             label={i18n.t('Remove mark for follow-up')}
+            suffix=""
         />
     ) : (
         <MenuItem
@@ -30,5 +30,6 @@ export const Followup = ({ enrollment, onUpdate }: Props) =>
             }
             icon={<IconFlag16 />}
             label={i18n.t('Mark for follow-up')}
+            suffix=""
         />
     ));

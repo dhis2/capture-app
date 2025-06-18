@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import {
     IconDelete16,
@@ -29,6 +28,7 @@ export const Delete = ({ canCascadeDeleteEnrollment, enrollment, onDelete }: Pro
                 destructive
                 label={i18n.t('Delete')}
                 onClick={() => setToggle(true)}
+                suffix=""
             />
 
             {toggle && (

@@ -1,7 +1,6 @@
-// @flow
 import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import React, { type ComponentType, useState } from 'react';
 import { Cancel } from './Cancel';
 import { Complete, CompleteModal } from './Complete';
@@ -45,7 +44,7 @@ export const ActionsPlain = ({
     loading,
     onlyEnrollOnce,
     classes,
-}: PlainProps) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const [isOpenActions, setOpenActions] = useState(false);
     const [isOpenMap, setOpenMap] = useState(false);
     const [isOpenTransfer, setOpenTransfer] = useState(false);
@@ -75,7 +74,7 @@ export const ActionsPlain = ({
                 open={isOpenActions}
                 onClick={() => setOpenActions(prev => !prev)}
                 component={
-                    loading ? null : (
+                    loading ? undefined : (
                         <FlyoutMenu dense maxWidth="250px">
                             <AddNew
                                 onlyEnrollOnce={onlyEnrollOnce}
@@ -161,4 +160,4 @@ export const ActionsPlain = ({
     );
 };
 
-export const ActionsComponent: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(ActionsPlain);
+export const ActionsComponent = withStyles(styles)(ActionsPlain) as ComponentType<PlainProps>;
