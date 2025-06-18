@@ -9,10 +9,10 @@ import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidatio
 
 export type UpdateEnrollmentOwnership = (params: {
     orgUnitId: string;
-    programAccessLevel?: any;
+    programAccessLevel?: typeof ProgramAccessLevels[keyof typeof ProgramAccessLevels];
     orgUnitScopes: {
-        origin?: any;
-        destination?: any;
+        origin?: typeof OrgUnitScopes[keyof typeof OrgUnitScopes] | null;
+        destination?: typeof OrgUnitScopes[keyof typeof OrgUnitScopes] | null;
     };
 }) => Promise<any>;
 
@@ -52,7 +52,7 @@ export const useUpdateOwnership = ({
     const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
     const orgUnitKey = useFeature(FEATURES.orgUnitReplaceOuQueryParam) ? 'orgUnit' : 'ou';
 
-    const { mutateAsync: mutateOwnership, isLoading } = useMutation(
+    const { mutateAsync: updateEnrollmentOwnership, isLoading } = useMutation(
         ({ orgUnitId }: { orgUnitId: string }) => dataEngine.mutate(updateEnrollmentOwnershipMutation, {
             variables: {
                 programId,
@@ -100,8 +100,6 @@ export const useUpdateOwnership = ({
             },
         },
     );
-
-    const updateEnrollmentOwnership: UpdateEnrollmentOwnership = params => mutateOwnership(params);
 
     return {
         updateEnrollmentOwnership,
