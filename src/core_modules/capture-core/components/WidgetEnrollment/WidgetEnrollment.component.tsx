@@ -112,14 +112,14 @@ export const WidgetEnrollmentPlain = ({
     return (
         <div data-test="widget-enrollment">
             <Widget
-                header={i18n.t('Enrollment') as string}
+                header={i18n.t('Enrollment')}
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
                 {initError && (
                     <div className={classes.enrollment}>
-                        {i18n.t('Enrollment widget could not be loaded. Please try again later') as string}
+                        {i18n.t('Enrollment widget could not be loaded. Please try again later')}
                     </div>
                 )}
                 {loading && <LoadingMaskElementCenter />}
@@ -184,7 +184,7 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon} data-test="widget-enrollment-icon-clock">
                                 <IconClock16 color={colors.grey600} />
                             </span>
-                            {i18n.t('Last updated') as string}
+                            {i18n.t('Last updated')}
                             <Tooltip content={(localDateTime)}>
                                 {moment(fromServerDate(enrollment.updatedAt)).fromNow()}
                             </Tooltip>
