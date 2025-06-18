@@ -12,7 +12,7 @@ import type {
 } from '../../WorkingListsCommon';
 import type { FiltersData, WorkingListTemplates, SetTemplateSharingSettings } from '../../WorkingListsBase';
 import type { LoadTeiView, TeiRecords } from '../types';
-import type { TrackerWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup/TrackerWorkingListsViewMenuSetup.types';
+import type { TrackerWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup/tTrackerWorkingListsViewMenuSetup.types';
 
 type ExtractedProps = $ReadOnly<{|
     customColumnOrder?: CustomColumnOrder,
