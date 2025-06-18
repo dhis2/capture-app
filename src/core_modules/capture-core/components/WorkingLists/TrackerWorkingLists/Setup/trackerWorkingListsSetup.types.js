@@ -40,7 +40,7 @@ export type Props = $ReadOnly<{|
     ...ExtractedProps,
 |}>;
 
-export type TrackerWorkingListssSetupOutputProps = $ReadOnly<{|
+export type TrackerWorkingListsSetupOutputProps = $ReadOnly<{|
     ...TrackerWorkingListsReduxOutputProps,
     ...ExtractedProps,
 |}>;
