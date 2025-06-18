@@ -98,7 +98,7 @@ const WidgetEventEditPlain = ({
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
-    const eventDate = loadedValues?.dataEntryValues?.occurredAt;
+    const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
@@ -124,7 +124,7 @@ const WidgetEventEditPlain = ({
                             programId={programId}
                             orgUnit={orgUnit}
                             setChangeLogIsOpen={setChangeLogIsOpen}
-                            eventDate={eventDate}
+                            occurredAt={occurredAt}
                         />
                     }
                     noncollapsible

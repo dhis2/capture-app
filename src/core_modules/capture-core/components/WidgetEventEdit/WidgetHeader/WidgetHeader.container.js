@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState, useEffect } from 'react';
+import React, { type ComponentType, useState, useEffect, useMemo } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
@@ -43,7 +43,7 @@ const WidgetHeaderPlain = ({
     orgUnit,
     setChangeLogIsOpen,
     classes,
-    eventDate,
+    occurredAt,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -57,21 +57,24 @@ const WidgetHeaderPlain = ({
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isWithinValidPeriod } = isValidPeriod(eventDate, expiryPeriod);
+    const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
 
     const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
-
-    let tooltipContent = '';
-    if (blockEntryForm) {
-        tooltipContent = i18n.t('The event cannot be edited after it has been completed');
-    } else if (!eventAccess?.write) {
-        tooltipContent = i18n.t('You don\'t have access to edit this event');
-    } else if (!isWithinValidPeriod) {
-        tooltipContent = i18n.t('{{eventDate}} belongs to an expired period. Event cannot be edited', {
-            eventDate,
-            interpolation: { escapeValue: false },
-        });
-    }
+    const tooltipContent = useMemo(() => {
+        if (blockEntryForm) {
+            return i18n.t('The event cannot be edited after it has been completed');
+        }
+        if (!eventAccess?.write) {
+            return i18n.t('You don\'t have access to edit this event');
+        }
+        if (!isWithinValidPeriod) {
+            return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
+                occurredAt,
+                interpolation: { escapeValue: false },
+            });
+        }
+        return '';
+    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt]);
 
     const { programCategory } = useCategoryCombinations(programId);
 
