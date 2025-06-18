@@ -21,7 +21,7 @@ export const useInjectDataFetchingMetaToLoadList = (
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
                     // $FlowFixMe Destructuring of union types is not handled properly by Flow.
-                    const { id, type, visible, apiViewName } = defaultColumn;
+                    const { id, type, visible, apiViewName, unique } = defaultColumn;
                     const mainProperty = defaultColumn.mainProperty && typeof defaultColumn.mainProperty === 'boolean'
                         ? defaultColumn.mainProperty
                         : undefined;
@@ -38,6 +38,7 @@ export const useInjectDataFetchingMetaToLoadList = (
                             mainProperty,
                             additionalColumn,
                             apiViewName,
+                            unique,
                         },
                     ];
                 }),
@@ -70,7 +71,7 @@ export const useInjectDataFetchingMetaToUpdateList = (
         (queryArgs: Object) => {
             const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
                 defaultColumns.map((defaultColumn: TrackerWorkingListsColumnConfig) => {
-                    const { id, type, visible } = defaultColumn;
+                    const { id, type, visible, unique } = defaultColumn;
                     const mainProperty = defaultColumn.mainProperty && typeof defaultColumn.mainProperty === 'boolean'
                         ? defaultColumn.mainProperty
                         : undefined;
@@ -86,6 +87,7 @@ export const useInjectDataFetchingMetaToUpdateList = (
                             visible,
                             mainProperty,
                             additionalColumn,
+                            unique,
                         },
                     ];
                 }),

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
-"PO-Revision-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-05T18:08:17.161Z\n"
+"PO-Revision-Date: 2025-06-05T18:08:17.161Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -135,6 +135,13 @@ msgstr "Enrollment"
 msgid "Complete event"
 msgstr "Complete event"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+
 msgid "A value is required"
 msgstr "A value is required"
 
@@ -198,6 +205,9 @@ msgstr "Assignee"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{programName}} in {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr "Saving to {{programName}}"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -223,6 +233,9 @@ msgstr "Completed"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Please add or cancel the note before saving the event"
+
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -1244,9 +1257,6 @@ msgstr "Add coordinates"
 
 msgid "Add area"
 msgstr "Add area"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Please provide an valid organisation unit"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
