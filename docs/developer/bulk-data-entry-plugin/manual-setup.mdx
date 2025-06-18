@@ -39,7 +39,7 @@ The `version` field indicates the configuration version as a number. The `config
             },
             "configKey": "routineVisit",
             "programId": "IpHINAT79UW",
-            "pluginSource": "https://debug.dhis2.org/dev"
+            "pluginSource": "https://debug.dhis2.org/dev/api/apps/routine-visit/plugin.html"
         },
         {
             "title": {
@@ -50,7 +50,7 @@ The `version` field indicates the configuration version as a number. The `config
             },
             "configKey": "treatment",
             "programId": "IpHINAT79UW",
-            "pluginSource": "https://developers.dhis2.org/docs/capture-plugins/developer/getting-started"
+            "pluginSource": "https://debug.dhis2.org/dev/api/apps/treatment/plugin.html"
         },
         {
             "title": {
@@ -61,7 +61,7 @@ The `version` field indicates the configuration version as a number. The `config
             },
             "configKey": "caseBasedSurveillance",
             "programId": "uy2gU8kT1jF",
-            "pluginSource": "https://docs.dhis2.org/en/home.html"
+            "pluginSource": "https://debug.dhis2.org/dev/api/apps/case-based-surveillance/plugin.html"
         }
     ]
 }
@@ -75,7 +75,7 @@ Each configuration object requires the following fields:
 |-------|----------|-------------|
 | `configKey` | Yes | An identifier for the configuration. Must be unique per `programId`. Will be passed to the plugin. |  
 | `programId` | Yes |  The identifier of the program where this bulk data entry will be available. |
-| `pluginSource` | Yes | The URL of the plugin. Must point to a valid plugin installed on the instance. |
+| `pluginSource` | Yes | The URL of the plugin. Must point to a valid plugin installed on the instance and follow the pattern: https://{instance-url}/api/apps/{plugin-name}/plugin.html. |
 | `title` | Yes | The display title of the configuration. Supports multiple languages using locale codes (e.g., "en", "es"). |
 | `subtitle` | No | An optional subtitle for the configuration. Supports multiple languages using locale codes. |
 | `dataKey` | No | An optional identifier that is not used internally by the app but is passed through to the plugin. This property is intended for advanced usage and can be used by the plugin to maintain separate in-progress caches for a given `configKey`. |
