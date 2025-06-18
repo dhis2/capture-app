@@ -11,8 +11,8 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
         () =>
             events.reduce(
                 (acc, event) => {
-                    const { name, access } = programStages.find(p => p.id === event.programStage) || {};
-                    const accKey = access?.data?.write ? 'programStagesWithActiveEvents' : 'programStagesWithoutAccess';
+                    const { name, access } = programStages.find(p => p.id === event.programStage) || {} as any;
+                    const accKey = access.data.write ? 'programStagesWithActiveEvents' : 'programStagesWithoutAccess';
 
                     if (event.status === eventStatuses.ACTIVE) {
                         if (acc[accKey][event.programStage]) {
@@ -20,7 +20,7 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
                         } else {
                             acc[accKey][event.programStage] = {
                                 count: 1,
-                                name: name || '',
+                                name,
                             };
                         }
                     }
@@ -45,8 +45,8 @@ export const CompleteModal = ({ enrollment, events, programStages, setOpenComple
         const nowServer = new Date(nowClient.getServerZonedISOString());
         const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
         const eventsToComplete = events.reduce((acc, event) => {
-            const { access } = programStages.find(p => p.id === event.programStage) || {};
-            if (event.status === eventStatuses.ACTIVE && access?.data?.write) {
+            const { access } = programStages.find(p => p.id === event.programStage) || {} as any;
+            if (event.status === eventStatuses.ACTIVE && access.data.write) {
                 return [...acc, { ...event, status: eventStatuses.COMPLETED, updatedAt }];
             }
             return acc;

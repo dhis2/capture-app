@@ -14,7 +14,7 @@ import { MapModal } from '../MapModal';
 import { Transfer } from './Transfer';
 import { TransferModal } from '../TransferModal';
 
-const styles: Readonly<any> = {
+const styles = {
     actions: {
         margin: `${spacersNum.dp8}px 0 0 0`,
     },
@@ -44,7 +44,7 @@ export const ActionsPlain = ({
     loading,
     onlyEnrollOnce,
     classes,
-}: PlainProps) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const [isOpenActions, setOpenActions] = useState(false);
     const [isOpenMap, setOpenMap] = useState(false);
     const [isOpenTransfer, setOpenTransfer] = useState(false);
@@ -96,6 +96,7 @@ export const ActionsPlain = ({
                                 onUpdate={handleOnUpdate}
                             />
                             <Transfer
+                                enrollment={enrollment}
                                 setOpenTransfer={() => {
                                     setOpenTransfer(true);
                                     setOpenActions(false);
@@ -139,7 +140,7 @@ export const ActionsPlain = ({
             />}
             {isOpenTransfer && (
                 <TransferModal
-                    enrollment={{ ...enrollment, program: enrollment.program || '' }}
+                    enrollment={enrollment}
                     ownerOrgUnitId={ownerOrgUnitId}
                     setOpenTransfer={setOpenTransfer}
                     onUpdateOwnership={onUpdateOwnership}
@@ -159,5 +160,4 @@ export const ActionsPlain = ({
     );
 };
 
-type OwnProps = Omit<PlainProps, keyof WithStyles<any>>;
-export const ActionsComponent = withStyles(styles)(ActionsPlain) as ComponentType<OwnProps>;
+export const ActionsComponent = withStyles(styles)(ActionsPlain) as ComponentType<PlainProps>;

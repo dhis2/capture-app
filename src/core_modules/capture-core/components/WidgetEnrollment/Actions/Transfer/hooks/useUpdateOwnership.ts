@@ -3,10 +3,9 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { useMutation } from 'react-query';
 import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
+import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import { ProgramAccessLevels } from '../../../TransferModal/hooks/useProgramAccessLevel';
 import { OrgUnitScopes } from '../../../TransferModal/hooks/useTransferValidation';
-
-type QueryRefetchFunction = any;
 
 export type UpdateEnrollmentOwnership = (params: {
     orgUnitId: string;

@@ -1,10 +1,8 @@
-import type { WithStyles } from '@material-ui/core';
+import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 import type { UpdateEnrollmentOwnership } from './Transfer/hooks/useUpdateOwnership';
 
-type QueryRefetchFunction = any;
-
 export type Props = {
-    enrollment: Record<string, any>;
+    enrollment: any;
     events: Array<{ status: string; event: string; programStage: string }>;
     programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
     refetchEnrollment: QueryRefetchFunction;
@@ -24,7 +22,7 @@ export type Props = {
 };
 
 export type PlainProps = {
-    enrollment: Record<string, any>;
+    enrollment: any;
     events: Array<{ status: string; event: string; programStage: string }>;
     programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
     ownerOrgUnitId: string;
@@ -39,4 +37,4 @@ export type PlainProps = {
     canAddNew: boolean;
     onlyEnrollOnce: boolean;
     tetName: string;
-} & WithStyles<any>;
+};
