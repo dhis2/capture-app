@@ -1,37 +1,35 @@
-// @flow
-import { useDataMutation, type QueryRefetchFunction } from '@dhis2/app-runtime';
+import { useDataMutation } from '@dhis2/app-runtime';
 import { useRef } from 'react';
+import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 
-const enrollmentUpdate = {
+const enrollmentUpdate: Mutation = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
     type: 'create',
-    data: enrollment => ({
+    data: (enrollment: any) => ({
         enrollments: [enrollment],
     }),
 };
 
-const enrollmentDelete = {
+const enrollmentDelete: Mutation = {
     resource: 'tracker?async=false&importStrategy=DELETE',
     type: 'create',
-    data: enrollment => ({
+    data: (enrollment: any) => ({
         enrollments: [enrollment],
     }),
 };
 
-const processErrorReports = (error) => {
-    // $FlowFixMe[prop-missing]
+const processErrorReports = (error: any): string => {
     const errorReports = error?.details?.validationReport?.errorReports;
     return errorReports?.length > 0
-        ? errorReports.reduce((acc, errorReport) => `${acc} ${errorReport.message}`, '')
+        ? errorReports.reduce((acc: string, errorReport: any) => `${acc} ${errorReport.message}`, '')
         : error.message;
 };
-
 
 export const useUpdateEnrollment = (
     refetchEnrollment: QueryRefetchFunction,
     refetchTEI: QueryRefetchFunction,
-    onError?: ?(message: string) => void,
-    onSuccess?: ({redirect?: boolean}) => void,
+    onError?: (message: string) => void,
+    onSuccess?: (params: { redirect?: boolean }) => void,
 ) => {
     const redirect: {current: boolean} = useRef(false);
     const changeRedirect = (value: boolean) => (redirect.current = value);
@@ -56,7 +54,7 @@ export const useUpdateEnrollment = (
 
 export const useDeleteEnrollment = (
     onDelete: () => void,
-    onError?: ?(message: string) => void,
+    onError?: (message: string) => void,
     onSuccess?: () => void,
 ) => {
     const [deleteMutation, { loading: deleteLoading }] = useDataMutation(
@@ -73,4 +71,3 @@ export const useDeleteEnrollment = (
     );
     return { deleteMutation, deleteLoading };
 };
-

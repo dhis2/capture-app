@@ -1,15 +1,14 @@
-// @flow
 import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { useUpdateEnrollment } from './useUpdateEnrollment';
 
 type Props = {
-    enrollmentId: string,
-    onUpdateEnrollmentDate?: (date: string) => void,
-    onUpdateIncidentDate?: (date: string) => void,
-    onError?: (error: any) => void,
-    externalData?: { status: { value: ?string }, events?: ?Array<Object> },
-}
+    enrollmentId: string;
+    onUpdateEnrollmentDate?: (date: string) => void;
+    onUpdateIncidentDate?: (date: string) => void;
+    onError?: (error: any) => void;
+    externalData?: { status: { value: string | null }; events?: Array<Record<string, unknown>> | null };
+};
 
 export const useEnrollment = ({
     enrollmentId,
@@ -18,14 +17,14 @@ export const useEnrollment = ({
     onError,
     externalData,
 }: Props) => {
-    const [enrollment, setEnrollment] = useState();
+    const [enrollment, setEnrollment] = useState<any>();
 
     const { error, loading, data, refetch } = useDataQuery(
         useMemo(
             () => ({
                 enrollment: {
                     resource: 'tracker/enrollments/',
-                    id: ({ variables: { enrollmentId: updatedEnrollmentId } }) => updatedEnrollmentId,
+                    id: ({ variables: { enrollmentId: updatedEnrollmentId } }: any) => updatedEnrollmentId,
                     params: {
                         fields: 'enrollment,trackedEntity,program,status,orgUnit,enrolledAt,occurredAt,followUp,deleted,createdBy,updatedBy,updatedAt,geometry',
                     },
@@ -42,13 +41,13 @@ export const useEnrollment = ({
 
     useEffect(() => {
         if (data) {
-            setEnrollment(data.enrollment);
+            setEnrollment((data as any).enrollment);
         }
     }, [setEnrollment, data]);
 
     useEffect(() => {
         if (externalData?.status?.value) {
-            setEnrollment(e => ({ ...e, status: externalData?.status?.value }));
+            setEnrollment((e: any) => ({ ...e, status: externalData?.status?.value }));
         }
     }, [setEnrollment, externalData?.status]);
 

@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
@@ -23,7 +22,7 @@ export const useTrackedEntityInstances = (teiId: string, programId: string) => {
         refetch,
         ownerOrgUnit:
             !loading &&
-            data?.trackedEntityInstances?.programOwners[0]?.orgUnit,
-        enrollments: !loading && data?.trackedEntityInstances ? data?.trackedEntityInstances?.enrollments : [],
+            (data as any)?.trackedEntityInstances?.programOwners[0]?.orgUnit,
+        enrollments: !loading && data?.trackedEntityInstances ? (data as any)?.trackedEntityInstances?.enrollments : [],
     };
 };

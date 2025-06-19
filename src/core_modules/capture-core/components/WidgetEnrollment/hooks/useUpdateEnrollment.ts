@@ -1,14 +1,22 @@
-// @flow
 import { useCallback } from 'react';
 import { useDataMutation } from '@dhis2/app-runtime';
+import type { Mutation } from 'capture-core-utils/types/app-runtime';
 import { processErrorReports } from '../processErrorReports';
 
-const enrollmentUpdate = {
+const enrollmentUpdate: Mutation = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
     type: 'create',
-    data: enrollment => ({
+    data: (enrollment: any) => ({
         enrollments: [enrollment],
     }),
+};
+
+type UseUpdateEnrollmentProps = {
+    enrollment: any;
+    setEnrollment: (enrollment: any) => void;
+    propertyName: string;
+    updateHandler?: (value: any) => void;
+    onError?: (error: any) => void;
 };
 
 export const useUpdateEnrollment = ({
@@ -17,13 +25,7 @@ export const useUpdateEnrollment = ({
     propertyName,
     updateHandler,
     onError,
-}: {
-    enrollment: any,
-    setEnrollment: (enrollment: any) => void,
-    propertyName: string,
-    updateHandler?: (value: any) => void,
-    onError?: (error: any) => void,
-}) => {
+}: UseUpdateEnrollmentProps) => {
     const [updateEnrollmentMutation] = useDataMutation(enrollmentUpdate, {
         onError: (e) => {
             setEnrollment(enrollment);
