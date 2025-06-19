@@ -1,17 +1,18 @@
 import { useDataMutation } from '@dhis2/app-runtime';
 import { useRef } from 'react';
+import type { Mutation } from 'capture-core-utils/types/app-runtime';
 
-const enrollmentUpdate = {
+const enrollmentUpdate: Mutation = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
-    type: 'create' as const,
+    type: 'create',
     data: (enrollment: any) => ({
         enrollments: [enrollment],
     }),
 };
 
-const enrollmentDelete = {
+const enrollmentDelete: Mutation = {
     resource: 'tracker?async=false&importStrategy=DELETE',
-    type: 'create' as const,
+    type: 'create',
     data: (enrollment: any) => ({
         enrollments: [enrollment],
     }),

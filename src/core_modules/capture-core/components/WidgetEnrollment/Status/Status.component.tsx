@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core';
 import { Tag, spacersNum } from '@dhis2/ui';
 import { plainStatus, translatedStatus } from '../constants/status.const';
+import type { Props } from './status.types';
 
 const styles = {
     status: {
@@ -9,11 +10,7 @@ const styles = {
     },
 };
 
-type OwnProps = {
-    status?: string;
-};
-
-export const StatusPlain = ({ status = '', classes }: OwnProps & WithStyles<typeof styles>) => (
+export const StatusPlain = ({ status = '', classes }: Props & WithStyles<typeof styles>) => (
     <>
         <Tag
             className={classes.status}

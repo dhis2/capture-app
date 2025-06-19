@@ -82,7 +82,6 @@ export const WidgetEnrollment = ({
 
     return (
         <WidgetEnrollmentNote
-            as={undefined as any}
             enrollment={enrollment}
             events={events}
             canAddNew={canAddNew}

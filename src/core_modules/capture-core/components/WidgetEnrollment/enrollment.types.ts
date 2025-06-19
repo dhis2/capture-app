@@ -44,5 +44,4 @@ export type PlainProps = {
     onUpdateEnrollmentStatusSuccess?: (params: { redirect?: boolean }) => void;
     onUpdateEnrollmentStatusError?: (message: string) => void;
     onAccessLostFromTransfer?: () => void;
-    classes: Record<string, string>;
 };
