@@ -71,14 +71,6 @@ const styles = (theme: Theme) => ({
         ...theme.typography.caption,
         color: theme.palette.error.main,
     },
-    row: {
-        display: 'flex',
-        alignItems: 'center',
-        margin: `${spacersNum.dp8}px 0`,
-        fontSize: '14px',
-        color: colors.grey900,
-        gap: `${spacersNum.dp4}px`,
-    },
 });
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -109,7 +101,7 @@ const DateComponentPlain = ({
         if (!dateValidation.valid) {
             return {
                 error: true,
-                validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
+                validationText: dateValidation.errorMessage ?? i18n.t('Please provide a valid date'),
             };
         }
 
@@ -118,7 +110,7 @@ const DateComponentPlain = ({
             if (futureValidation !== true) {
                 return {
                     error: true,
-                    validationText: futureValidation.errorMessage || i18n.t('A date in the future is not allowed'),
+                    validationText: futureValidation.errorMessage ?? i18n.t('A date in the future is not allowed'),
                 };
             }
         }
@@ -162,7 +154,7 @@ const DateComponentPlain = ({
                     calendarType={systemSettingsStore.get().calendar}
                     dateFormat={systemSettingsStore.get().dateFormat}
                     validation={validation}
-                    calendarMax={!allowFutureDate ? convertDateObjectToDateFormatString(moment().toDate()) : undefined}
+                    calendarMax={!allowFutureDate ? convertDateObjectToDateFormatString(moment()) : undefined}
                 />
             </div>
             <div className={classes.buttonStrip}>
@@ -189,7 +181,7 @@ const DateComponentPlain = ({
             )}
         </div>
     ) : (
-        <div className={classes.row} data-test="widget-enrollment-date">
+        <div data-test="widget-enrollment-date">
             <span data-test="widget-enrollment-icon-calendar">
                 <IconCalendar16 color={colors.grey600} />
             </span>
