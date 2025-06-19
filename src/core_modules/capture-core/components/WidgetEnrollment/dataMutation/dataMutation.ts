@@ -31,7 +31,7 @@ export const useUpdateEnrollment = (
     onError?: (message: string) => void,
     onSuccess?: (params: { redirect?: boolean }) => void,
 ) => {
-    const redirect = useRef(false);
+    const redirect: {current: boolean} = useRef(false);
     const changeRedirect = (value: boolean) => (redirect.current = value);
 
     const [updateMutation, { loading: updateLoading }] = useDataMutation(
@@ -53,8 +53,6 @@ export const useUpdateEnrollment = (
 };
 
 export const useDeleteEnrollment = (
-    refetchEnrollment: QueryRefetchFunction,
-    refetchTEI: QueryRefetchFunction,
     onDelete: () => void,
     onError?: (message: string) => void,
     onSuccess?: () => void,
@@ -63,8 +61,6 @@ export const useDeleteEnrollment = (
         enrollmentDelete,
         {
             onComplete: () => {
-                refetchEnrollment();
-                refetchTEI();
                 onDelete();
                 onSuccess && onSuccess();
             },

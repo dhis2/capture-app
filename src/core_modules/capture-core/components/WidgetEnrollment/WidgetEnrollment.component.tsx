@@ -13,7 +13,7 @@ import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import { withStyles, type WithStyles } from '@material-ui/core';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
-
+import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { dataElementTypes } from '../../metaData';
 import { convertValue } from '../../converters/clientToView';
@@ -21,7 +21,6 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { Date } from './Date';
 import { Actions } from './Actions';
 import { MiniMap } from './MiniMap';
-import type { PlainProps } from './enrollment.types';
 
 const styles = {
     enrollment: {
@@ -39,8 +38,6 @@ const styles = {
         display: 'flex',
         gap: `${spacersNum.dp4}px`,
     },
-    icon: {},
-    followup: {},
 };
 
 const getGeometryType = (geometryType: string) =>
@@ -76,7 +73,7 @@ export const WidgetEnrollmentPlain = ({
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
     const localDateTime: string = convertValue(enrollment.updatedAt, dataElementTypes.DATETIME) as string;
-    const geometryType = getGeometryType((enrollment.geometry as any)?.type);
+    const geometryType = getGeometryType((enrollment.geometry)?.type);
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment.orgUnit);
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit.id);
 
@@ -100,8 +97,8 @@ export const WidgetEnrollmentPlain = ({
                 {!initError && !loading && (
                     <div className={classes.enrollment} data-test="widget-enrollment-contents">
                         <div className={classes.statuses} data-test="widget-enrollment-status">
-                            {(enrollment.followUp as boolean) && (
-                                <Tag className={classes.followup} negative>
+                            {(enrollment.followUp) && (
+                                <Tag negative>
                                     {i18n.t('Follow-up')}
                                 </Tag>
                             )}
@@ -120,7 +117,7 @@ export const WidgetEnrollmentPlain = ({
                             />
                         </span>
 
-                        {(program.displayIncidentDate as boolean) && (
+                        {(program.displayIncidentDate) && (
                             <span data-test="widget-enrollment-incident-date">
                                 <Date
                                     date={enrollment.occurredAt}
@@ -135,7 +132,7 @@ export const WidgetEnrollmentPlain = ({
                         )}
 
                         <div className={classes.row} data-test="widget-enrollment-orgunit">
-                            <span className={classes.icon} data-test="widget-enrollment-icon-orgunit">
+                            <span data-test="widget-enrollment-icon-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             {i18n.t('Started at{{escape}}', {
@@ -145,7 +142,7 @@ export const WidgetEnrollmentPlain = ({
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-owner-orgunit">
-                            <span className={classes.icon} data-test="widget-enrollment-icon-owner-orgunit">
+                            <span data-test="widget-enrollment-icon-owner-orgunit">
                                 <IconDimensionOrgUnit16 color={colors.grey600} />
                             </span>
                             {i18n.t('Owned by{{escape}}', {
@@ -155,19 +152,19 @@ export const WidgetEnrollmentPlain = ({
                         </div>
 
                         <div className={classes.row} data-test="widget-enrollment-last-update">
-                            <span className={classes.icon} data-test="widget-enrollment-icon-clock">
+                            <span data-test="widget-enrollment-icon-clock">
                                 <IconClock16 color={colors.grey600} />
                             </span>
                             {i18n.t('Last updated')}
                             <Tooltip content={localDateTime}>
-                                {moment(fromServerDate(enrollment.updatedAt as string)).fromNow()}
+                                {moment(fromServerDate(enrollment.updatedAt)).fromNow()}
                             </Tooltip>
                         </div>
 
-                        {(enrollment.geometry as any) && (
+                        {(enrollment.geometry) && (
                             <div className={classes.row}>
                                 <MiniMap
-                                    coordinates={(enrollment.geometry as any).coordinates}
+                                    coordinates={(enrollment.geometry).coordinates}
                                     geometryType={geometryType}
                                     enrollment={enrollment}
                                     refetchEnrollment={refetchEnrollment}
@@ -177,12 +174,12 @@ export const WidgetEnrollmentPlain = ({
                             </div>
                         )}
                         <Actions
-                            tetName={(program.trackedEntityType as any).displayName}
-                            onlyEnrollOnce={program.onlyEnrollOnce as boolean}
-                            programStages={program.programStages as any}
+                            tetName={program.trackedEntityType.displayName}
+                            onlyEnrollOnce={program.onlyEnrollOnce}
+                            programStages={program.programStages}
                             enrollment={enrollment}
                             events={events}
-                            ownerOrgUnitId={ownerOrgUnit.id as string}
+                            ownerOrgUnitId={ownerOrgUnit.id}
                             refetchEnrollment={refetchEnrollment}
                             refetchTEI={refetchTEI}
                             onDelete={onDelete}

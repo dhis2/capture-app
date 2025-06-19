@@ -2,7 +2,7 @@ import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime'
 import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
 
 export type EventReducerProps = {
-    enrollments?: Array<Record<string, unknown>> | null;
+    enrollments?: Array<any> | null;
     events: Array<ApiEnrollmentEvent>;
 };
 
@@ -25,10 +25,28 @@ export type Props = {
 };
 
 export type PlainProps = {
-    enrollment: Record<string, unknown>;
+    enrollment: {
+        enrolledAt: string;
+        occurredAt: string;
+        updatedAt: string;
+        status: string;
+        orgUnit: string;
+        followUp: boolean;
+        geometry: any;
+
+    };
     events: Array<{ status: string; event: string; programStage: string }>;
-    program: Record<string, unknown>;
-    ownerOrgUnit: Record<string, unknown>;
+    program: {
+        programStages: Array<{ name: string; id: string; access: { data: { write: boolean } } }>;
+        onlyEnrollOnce: boolean;
+        displayIncidentDate: boolean;
+        selectEnrollmentDatesInFuture: boolean;
+        selectIncidentDatesInFuture: boolean;
+        trackedEntityType: {
+            displayName: string;
+        }
+    };
+    ownerOrgUnit: { id: string };
     locale: string;
     refetchEnrollment: QueryRefetchFunction;
     refetchTEI: QueryRefetchFunction;

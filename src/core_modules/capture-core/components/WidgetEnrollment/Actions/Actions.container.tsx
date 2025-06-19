@@ -19,7 +19,7 @@ export const Actions = ({
     ...passOnProps
 }: Props) => {
     const { updateMutation, updateLoading } = useUpdateEnrollment(refetchEnrollment, refetchTEI, onError, onSuccess);
-    const { deleteMutation, deleteLoading } = useDeleteEnrollment(refetchEnrollment, refetchTEI, onDelete, onError, onSuccess);
+    const { deleteMutation, deleteLoading } = useDeleteEnrollment(onDelete, onError, onSuccess);
     const { hasAuthority } = useAuthorities({ authorities: ['F_ENROLLMENT_CASCADE_DELETE'] });
     const { updateEnrollmentOwnership, isTransferLoading } = useUpdateOwnership({
         teiId: enrollment.trackedEntity,
