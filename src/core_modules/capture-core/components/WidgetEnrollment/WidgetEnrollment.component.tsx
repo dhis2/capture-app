@@ -72,7 +72,7 @@ export const WidgetEnrollmentPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
-    const localDateTime: string = convertValue(enrollment?.updatedAt, dataElementTypes.DATETIME) as string;
+    const localDateTime: string = convertValue(enrollment?.updatedAt, dataElementTypes.DATETIME);
     const geometryType = getGeometryType(enrollment?.geometry?.type);
     const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
     const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
@@ -161,7 +161,7 @@ export const WidgetEnrollmentPlain = ({
                             </Tooltip>
                         </div>
 
-                        {(enrollment.geometry) && (
+                        {enrollment.geometry && (
                             <div className={classes.row}>
                                 <MiniMap
                                     coordinates={enrollment.geometry.coordinates}

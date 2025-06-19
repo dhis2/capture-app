@@ -68,7 +68,7 @@ export const WidgetEnrollment = ({
         refetch: refetchTEI,
     } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrgUnitNameWithAncestors(
-        typeof ownerOrgUnit === 'string' ? ownerOrgUnit : null,
+        typeof ownerOrgUnit === 'string' ? ownerOrgUnit : undefined,
     );
     const { error: errorLocale, locale } = useUserLocale();
     const canAddNew = useCanAddNew(enrollments, programId, program?.trackedEntityType.access);

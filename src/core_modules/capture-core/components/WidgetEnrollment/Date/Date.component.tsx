@@ -71,6 +71,14 @@ const styles = (theme: Theme) => ({
         ...theme.typography.caption,
         color: theme.palette.error.main,
     },
+    row: {
+        display: 'flex',
+        alignItems: 'center',
+        margin: `${spacersNum.dp8}px 0`,
+        fontSize: '14px',
+        color: colors.grey900,
+        gap: `${spacersNum.dp4}px`,
+    },
 });
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -181,7 +189,7 @@ const DateComponentPlain = ({
             )}
         </div>
     ) : (
-        <div data-test="widget-enrollment-date">
+        <div className={classes.row} data-test="widget-enrollment-date">
             <span data-test="widget-enrollment-icon-calendar">
                 <IconCalendar16 color={colors.grey600} />
             </span>
