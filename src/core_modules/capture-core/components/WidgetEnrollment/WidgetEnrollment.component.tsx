@@ -40,10 +40,10 @@ const styles = {
     },
 };
 
-const getGeometryType = (geometryType: string) =>
+const getGeometryType = geometryType =>
     (geometryType === 'Point' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON);
-const getEnrollmentDateLabel = (program: any) => program.displayEnrollmentDateLabel ?? i18n.t('Enrollment date');
-const getIncidentDateLabel = (program: any) => program.displayIncidentDateLabel ?? i18n.t('Incident date');
+const getEnrollmentDateLabel = program => program.displayEnrollmentDateLabel ?? i18n.t('Enrollment date');
+const getIncidentDateLabel = program => program.displayIncidentDateLabel ?? i18n.t('Incident date');
 
 export const WidgetEnrollmentPlain = ({
     classes,
@@ -72,13 +72,13 @@ export const WidgetEnrollmentPlain = ({
 }: PlainProps & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { fromServerDate } = useTimeZoneConversion();
-    const localDateTime: string = convertValue(enrollment.updatedAt, dataElementTypes.DATETIME) as string;
-    const geometryType = getGeometryType((enrollment.geometry)?.type);
-    const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment.orgUnit);
-    const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit.id);
+    const localDateTime: string = convertValue(enrollment?.updatedAt, dataElementTypes.DATETIME) as string;
+    const geometryType = getGeometryType(enrollment?.geometry?.type);
+    const { displayName: orgUnitName, ancestors } = useOrgUnitNameWithAncestors(enrollment?.orgUnit);
+    const { displayName: ownerOrgUnitName, ancestors: ownerAncestors } = useOrgUnitNameWithAncestors(ownerOrgUnit?.id);
 
-    const orgUnitClientValue = { id: enrollment.orgUnit, name: orgUnitName, ancestors };
-    const ownerOrgUnitClientValue = { id: ownerOrgUnit.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
+    const orgUnitClientValue = { id: enrollment?.orgUnit, name: orgUnitName, ancestors };
+    const ownerOrgUnitClientValue = { id: ownerOrgUnit?.id, name: ownerOrgUnitName, ancestors: ownerAncestors };
 
     return (
         <div data-test="widget-enrollment">
@@ -97,7 +97,7 @@ export const WidgetEnrollmentPlain = ({
                 {!initError && !loading && (
                     <div className={classes.enrollment} data-test="widget-enrollment-contents">
                         <div className={classes.statuses} data-test="widget-enrollment-status">
-                            {(enrollment.followUp) && (
+                            {enrollment.followUp && (
                                 <Tag negative>
                                     {i18n.t('Follow-up')}
                                 </Tag>
@@ -117,7 +117,7 @@ export const WidgetEnrollmentPlain = ({
                             />
                         </span>
 
-                        {(program.displayIncidentDate) && (
+                        {program.displayIncidentDate && (
                             <span data-test="widget-enrollment-incident-date">
                                 <Date
                                     date={enrollment.occurredAt}
@@ -164,7 +164,7 @@ export const WidgetEnrollmentPlain = ({
                         {(enrollment.geometry) && (
                             <div className={classes.row}>
                                 <MiniMap
-                                    coordinates={(enrollment.geometry).coordinates}
+                                    coordinates={enrollment.geometry.coordinates}
                                     geometryType={geometryType}
                                     enrollment={enrollment}
                                     refetchEnrollment={refetchEnrollment}
@@ -188,7 +188,7 @@ export const WidgetEnrollmentPlain = ({
                             onError={onError}
                             onSuccess={onSuccess}
                             onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
-                            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess as any}
+                            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
                             onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
                             onAccessLostFromTransfer={onAccessLostFromTransfer}
                         />
