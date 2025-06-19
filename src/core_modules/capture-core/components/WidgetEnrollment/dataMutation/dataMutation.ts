@@ -1,6 +1,6 @@
 import { useDataMutation } from '@dhis2/app-runtime';
 import { useRef } from 'react';
-import type { Mutation } from 'capture-core-utils/types/app-runtime';
+import type { Mutation, QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
 
 const enrollmentUpdate: Mutation = {
     resource: 'tracker?async=false&importStrategy=UPDATE',
@@ -26,8 +26,8 @@ const processErrorReports = (error: any): string => {
 };
 
 export const useUpdateEnrollment = (
-    refetchEnrollment: any,
-    refetchTEI: any,
+    refetchEnrollment: QueryRefetchFunction,
+    refetchTEI: QueryRefetchFunction,
     onError?: (message: string) => void,
     onSuccess?: (params: { redirect?: boolean }) => void,
 ) => {
@@ -53,6 +53,8 @@ export const useUpdateEnrollment = (
 };
 
 export const useDeleteEnrollment = (
+    refetchEnrollment: QueryRefetchFunction,
+    refetchTEI: QueryRefetchFunction,
     onDelete: () => void,
     onError?: (message: string) => void,
     onSuccess?: () => void,
@@ -61,6 +63,8 @@ export const useDeleteEnrollment = (
         enrollmentDelete,
         {
             onComplete: () => {
+                refetchEnrollment();
+                refetchTEI();
                 onDelete();
                 onSuccess && onSuccess();
             },

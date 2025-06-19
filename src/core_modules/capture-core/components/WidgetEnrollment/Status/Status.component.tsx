@@ -11,15 +11,13 @@ const styles = {
 };
 
 export const StatusPlain = ({ status = '', classes }: Props & WithStyles<typeof styles>) => (
-    <>
-        <Tag
-            className={classes.status}
-            neutral={status === plainStatus.ACTIVE}
-            negative={status === plainStatus.CANCELLED}
-        >
-            {translatedStatus[status] || status}
-        </Tag>
-    </>
+    <Tag
+        className={classes.status}
+        neutral={status === plainStatus.ACTIVE}
+        negative={status === plainStatus.CANCELLED}
+    >
+        {translatedStatus[status] ?? status}
+    </Tag>
 );
 
 export const Status = withStyles(styles)(StatusPlain);

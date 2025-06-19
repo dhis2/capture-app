@@ -1,6 +1,9 @@
+import type { QueryRefetchFunction } from 'capture-core-utils/types/app-runtime';
+import type { ApiEnrollmentEvent } from 'capture-core-utils/types/api-types';
+
 export type EventReducerProps = {
     enrollments?: Array<Record<string, unknown>> | null;
-    events: Array<any>;
+    events: Array<ApiEnrollmentEvent>;
 };
 
 export type Props = {
@@ -27,9 +30,9 @@ export type PlainProps = {
     program: Record<string, unknown>;
     ownerOrgUnit: Record<string, unknown>;
     locale: string;
-    refetchEnrollment: any;
-    refetchTEI: any;
-    initError?: any;
+    refetchEnrollment: QueryRefetchFunction;
+    refetchTEI: QueryRefetchFunction;
+    initError?: boolean;
     loading: boolean;
     canAddNew: boolean;
     editDateEnabled: boolean;
