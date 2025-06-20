@@ -117,6 +117,7 @@ const EventDetailsSectionPlain = (props: Props) => {
                     formFoundation={formFoundation}
                     orgUnit={orgUnit}
                     onSaveExternal={onSaveExternal}
+                    expiryPeriod={expiryPeriod}
                     programId={programId}
                     {...passOnProps}
                 /> :

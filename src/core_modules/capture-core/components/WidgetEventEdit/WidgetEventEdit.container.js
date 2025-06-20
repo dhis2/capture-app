@@ -19,6 +19,7 @@ import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
+import { useProgramExpiryForUser } from '../../hooks';
 
 const styles = {
     container: {
@@ -99,6 +100,7 @@ const WidgetEventEditPlain = ({
     const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
     const occurredAt = loadedValues?.dataEntryValues?.occurredAt;
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
 
@@ -156,6 +158,7 @@ const WidgetEventEditPlain = ({
                                     stageId={stageId}
                                     teiId={teiId}
                                     enrollmentId={enrollmentId}
+                                    expiryPeriod={expiryPeriod}
                                     eventId={eventId}
                                     eventStatus={eventStatus}
                                     onCancelEditEvent={onCancelEditEvent}
