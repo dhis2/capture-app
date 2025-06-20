@@ -7,7 +7,7 @@ Then('for an event program the page navigation should show that you are on the f
 });
 
 Then('for a tracker program the page navigation should show that you are on the first page', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Page 1')
         .should('exist');
 });
@@ -55,7 +55,7 @@ Then('the pagination for the event working list should show the second page', ()
 });
 
 Then('the pagination for the tei working list should show the second page', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Page 2')
         .should('exist');
 });
@@ -67,13 +67,13 @@ Then('the sort arrow should indicate ascending order', () => {
 });
 
 Then('the enrollment status filter button should show that the active filter is in effect', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment status: Active')
         .should('exist');
 });
 
 When('you set the enrollment status filter to active', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('Enrollment status')
         .click();
 
@@ -83,7 +83,7 @@ When('you set the enrollment status filter to active', () => {
 });
 
 When(/^you set the first name filter to (.*)$/, (name) => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('First name')
         .click();
 
@@ -99,7 +99,7 @@ When('you apply the current filter', () => {
 });
 
 Then('the first name filter button should show that the filter is in effect', () => {
-    cy.get('[data-test="tei-working-lists"]')
+    cy.get('[data-test="tracker-working-lists"]')
         .contains('First name: John')
         .should('exist');
 });
