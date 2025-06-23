@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -35,7 +34,7 @@ export const UnlinkModal = ({
             data: { relationships: [{ relationship: relationshipId }] },
         };
 
-        return dataEngine.mutate(mutation);
+        return dataEngine.mutate(mutation as any);
     };
 
     const mutation = useMutation(deleteRelationship, {

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -37,7 +36,7 @@ export const UnlinkAndDeleteModal = ({
             data: { events: [{ event: eventId }] },
         };
 
-        return dataEngine.mutate(mutation);
+        return dataEngine.mutate(mutation as any);
     };
 
     const mutation = useMutation(deleteEvent, {

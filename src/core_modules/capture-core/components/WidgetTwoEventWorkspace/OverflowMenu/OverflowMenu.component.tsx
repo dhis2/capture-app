@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import {
     Divider,
@@ -64,6 +63,7 @@ export const OverflowMenuComponent = ({
                             icon={<IconView16 />}
                             dataTest="event-overflow-view-linked-event"
                             onClick={handleViewLinkedEvent}
+                            suffix=""
                         />
                         <Divider />
                         <ConditionalTooltip
@@ -77,6 +77,7 @@ export const OverflowMenuComponent = ({
                                 dense
                                 dataTest="event-overflow-unlink-event"
                                 onClick={handleUnlinkEvent}
+                                suffix=""
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
@@ -91,6 +92,7 @@ export const OverflowMenuComponent = ({
                                 destructive
                                 dataTest="event-overflow-unlink-and-delete-event"
                                 onClick={handleUnlinkAndDeleteEvent}
+                                suffix=""
                             />
                         </ConditionalTooltip>
                     </FlyoutMenu>
