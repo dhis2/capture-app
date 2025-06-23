@@ -8,7 +8,6 @@ import {
     spacers,
 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
 import type { PlainProps, ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
@@ -19,7 +18,7 @@ import { FEATURES, useFeature } from '../../../capture-core-utils';
 import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
-import { useProgramExpiryForUser } from '../../hooks';
+import { useProgramExpiryForUser, useEnrollmentEditEventPageMode, useAvailableProgramStages } from '../../hooks';
 
 const styles = {
     container: {
