@@ -49,7 +49,7 @@ const DataEntryFieldsToInclude = {
 
 export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: RenderFoundation) => {
     const dataEntryValues = Object.values(DataEntryFieldsToInclude).map((entry: any) => {
-        const value = linkedEvent[entry.apiKey as keyof LinkedEvent];
+        const value = linkedEvent[entry.apiKey];
         if (!value) return null;
 
         const convertedValue = entry.convertFn ? entry.convertFn(value) : convertFn(value, entry.type);
