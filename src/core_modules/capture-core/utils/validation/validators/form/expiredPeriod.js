@@ -7,7 +7,7 @@ import { convertIsoToLocalCalendar } from '../../../converters/date';
 
 export const isValidPeriod = (
     reportDate: string,
-    expiryPeriod?: {
+    expiryPeriod?: ?{
         expiryPeriodType: ?string,
         expiryDays: ?number,
     },

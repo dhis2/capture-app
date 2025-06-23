@@ -60,6 +60,10 @@ export type CustomRowMenuContent = {|
     clickHandler?: ?(rowData: DataSourceItem) => any,
     icon: React$Node,
     label: string,
+    expiredPeriod: ?{
+        expiryPeriodType: ?string,
+        expiryDays: ?number,
+    },
 |};
 export type CustomRowMenuContents = Array<CustomRowMenuContent>;
 
