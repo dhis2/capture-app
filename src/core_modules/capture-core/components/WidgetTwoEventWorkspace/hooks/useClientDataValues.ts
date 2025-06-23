@@ -69,9 +69,9 @@ export const useClientDataValues = ({
         ['formattedDataValues', linkedEventId, dataValues],
         () => formatDataValues(
             dataValues,
-            formFoundation!,
+            formFoundation as RenderFoundation,
             querySingleResource,
-            linkedEventId!,
+            linkedEventId as string,
             buildUrl(baseUrl, `api/${apiVersion}`),
         ),
         {

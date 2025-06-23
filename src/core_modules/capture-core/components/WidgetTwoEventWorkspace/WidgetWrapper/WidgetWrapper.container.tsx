@@ -1,8 +1,8 @@
 import React from 'react';
 import { colors, spacersNum, IconLink16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/';
-import type { Props } from './WidgetWrapper.types';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { PlainProps } from './WidgetWrapper.types';
 import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
 
 export const styles: Readonly<any> = {
@@ -39,7 +39,7 @@ export const styles: Readonly<any> = {
     },
 };
 
-const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Props) => {
+const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: PlainProps & WithStyles<typeof styles>) => {
     if (type === WidgetTwoEventWorkspaceWrapperTypes.EDIT_EVENT) {
         return (
             <div className={classes.container}>

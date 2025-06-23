@@ -1,10 +1,10 @@
 import React from 'react';
 import { spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { EnrollmentPageKeys }
     from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import type { Props } from './WidgetHeader.types';
+import type { PlainProps } from './WidgetHeader.types';
 import { OverflowMenuComponent } from '../OverflowMenu';
 
 export const styles: Readonly<any> = {
@@ -28,7 +28,7 @@ const WidgetHeaderPlain = ({
     classes,
     onDeleteEvent,
     onDeleteEventRelationship,
-}: Props) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const { icon } = linkedStage;
     return (
         <>

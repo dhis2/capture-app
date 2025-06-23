@@ -11,7 +11,7 @@ const convertFn = pipe(convertServerToClient, convertClientToView);
 export const Placements = {
     TOP: 'TOP',
     BOTTOM: 'BOTTOM',
-} as const;
+};
 
 const StatusLabels = {
     ACTIVE: i18n.t('Active'),
