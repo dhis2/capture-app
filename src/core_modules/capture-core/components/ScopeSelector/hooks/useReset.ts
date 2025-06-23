@@ -1,4 +1,3 @@
-// @flow
 import { useNavigate } from 'capture-core/utils/routing';
 
 export const useReset = () => {

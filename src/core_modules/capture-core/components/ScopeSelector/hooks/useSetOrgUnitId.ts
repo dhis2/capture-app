@@ -1,4 +1,3 @@
-// @flow
 import { useLocation } from 'react-router-dom';
 import { useNavigate, buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 
@@ -8,7 +7,7 @@ export const useSetOrgUnitId = () => {
 
     const restOfQueries = useLocationQuery();
 
-    const setOrgUnitId = (orgUnitId: string, pageToPush: string = pathname, withRestOfQueries?: ?boolean = true) => {
+    const setOrgUnitId = (orgUnitId: string, pageToPush: string = pathname, withRestOfQueries = true) => {
         withRestOfQueries
             ? navigate(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, orgUnitId })}`)
             : navigate(`${pageToPush}?${buildUrlQueryString({ orgUnitId })}`);
