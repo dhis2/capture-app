@@ -1,21 +1,19 @@
-// @flow
 import React, { useMemo } from 'react';
 import { spacers } from '@dhis2/ui';
 import { FlatList } from 'capture-ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import type { RenderFoundation } from '../../metaData';
 import { getDataEntryDetails, Placements } from './utils/getDataEntryDetails';
 
-type Props = {
-    linkedEvent: any,
-    dataValues: any,
-    formFoundation: RenderFoundation,
-    classes: {
-        container: string,
-    },
-}
+type OwnProps = {
+    linkedEvent: any;
+    dataValues: any;
+    formFoundation: RenderFoundation;
+};
 
-const styles = {
+type Props = OwnProps & WithStyles<typeof styles>;
+
+const styles: Readonly<any> = {
     container: {
         padding: `${spacers.dp8} ${spacers.dp16}`,
         display: 'flex',

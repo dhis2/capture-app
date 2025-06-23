@@ -1,12 +1,11 @@
-// @flow
 import React from 'react';
 import { colors, spacersNum, IconLink16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/';
-import type { Props } from './WidgetWrapper.types';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { PlainProps } from './WidgetWrapper.types';
 import { WidgetTwoEventWorkspaceWrapperTypes } from '../index';
 
-const styles = {
+export const styles: Readonly<any> = {
     container: {
         width: 'fit-content',
         marginBottom: '16px',
@@ -40,7 +39,7 @@ const styles = {
     },
 };
 
-const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Props) => {
+const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: PlainProps & WithStyles<typeof styles>) => {
     if (type === WidgetTwoEventWorkspaceWrapperTypes.EDIT_EVENT) {
         return (
             <div className={classes.container}>
@@ -53,14 +52,14 @@ const WidgetWrapperPlain = ({ widget, type, stage, linkedStage, classes }: Props
                         <div>{i18n.t('Linked event')}</div>
                     </div>
                     <div className={classes.decription}>
-                        {i18n.t(
+                        {linkedStage?.name && stage?.name ? i18n.t(
                             'This {{stageName}} event is linked to a {{linkedStageName}} event. Review the linked event details before entering data below',
                             {
-                                linkedStageName: linkedStage?.name,
-                                stageName: stage?.name,
+                                linkedStageName: linkedStage.name,
+                                stageName: stage.name,
                                 interpolation: { escapeValue: false },
                             },
-                        )}
+                        ) : ''}
                     </div>
                     {widget}
                 </div>

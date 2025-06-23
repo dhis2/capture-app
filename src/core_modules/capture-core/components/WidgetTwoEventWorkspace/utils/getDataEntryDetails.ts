@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { pipe } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
@@ -37,14 +36,14 @@ const DataEntryFieldsToInclude = {
         type: dataElementTypes.ORGANISATION_UNIT,
         placement: Placements.TOP,
         label: i18n.t('Organisation unit'),
-        convertFn: orgUnitId => <TooltipOrgUnit orgUnitId={orgUnitId} />,
+        convertFn: (orgUnitId: string) => React.createElement(TooltipOrgUnit, { orgUnitId }),
     },
     status: {
         apiKey: 'status',
         type: dataElementTypes.TEXT,
         placement: Placements.BOTTOM,
         label: i18n.t('Status'),
-        convertFn: value => StatusLabels[value],
+        convertFn: (value: keyof typeof StatusLabels) => StatusLabels[value],
     },
 };
 
@@ -68,7 +67,7 @@ export const getDataEntryDetails = (linkedEvent: LinkedEvent, formFoundation: Re
         acc[entry.placement].push(entry);
         return acc;
     }, {
-        [Placements.TOP]: [],
-        [Placements.BOTTOM]: [],
+        [Placements.TOP]: [] as any[],
+        [Placements.BOTTOM]: [] as any[],
     });
 };

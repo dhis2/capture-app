@@ -1,14 +1,13 @@
-// @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import { spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { EnrollmentPageKeys }
     from '../../Pages/common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.constants';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import type { PlainProps, Props } from './WidgetHeader.types';
+import type { PlainProps } from './WidgetHeader.types';
 import { OverflowMenuComponent } from '../OverflowMenu';
 
-const styles = {
+export const styles: Readonly<any> = {
     menu: {
         marginLeft: 'auto',
     },
@@ -29,7 +28,7 @@ const WidgetHeaderPlain = ({
     classes,
     onDeleteEvent,
     onDeleteEventRelationship,
-}: Props) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const { icon } = linkedStage;
     return (
         <>
@@ -63,4 +62,4 @@ const WidgetHeaderPlain = ({
     );
 };
 
-export const WidgetHeader: ComponentType<PlainProps> = withStyles(styles)(WidgetHeaderPlain);
+export const WidgetHeader = withStyles(styles)(WidgetHeaderPlain);

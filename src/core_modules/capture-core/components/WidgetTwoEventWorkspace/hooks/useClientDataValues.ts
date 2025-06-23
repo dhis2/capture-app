@@ -1,4 +1,3 @@
-// @flow
 import { useConfig, useDataEngine } from '@dhis2/app-runtime';
 import { useQuery } from 'react-query';
 import type { RenderFoundation } from '../../../metaData';
@@ -7,20 +6,20 @@ import { buildUrl, pipe } from '../../../../capture-core-utils';
 import { subValueGetterByElementType } from '../utils/getSubValueForDataValue';
 import { makeQuerySingleResource } from '../../../utils/api';
 
-type Props = {|
-    linkedEventId: ?string,
-    dataValues: Array<{| dataElement: string, value: any |}>,
-    formFoundation: ?RenderFoundation,
-|}
+type Props = {
+    linkedEventId?: string | null;
+    dataValues: Array<{ dataElement: string; value: any }>;
+    formFoundation?: RenderFoundation | null;
+};
 
 const convertFn = pipe(convertServerToClient, convertClientToView);
 
 const formatDataValues = async (
-    dataValues: Array<{| dataElement: string, value: any |}>,
+    dataValues: Array<{ dataElement: string; value: any }>,
     formFoundation: RenderFoundation,
-    querySingleResource,
-    linkedEventId,
-    absoluteApiPath,
+    querySingleResource: any,
+    linkedEventId: string,
+    absoluteApiPath: string,
 ) => {
     const elements = formFoundation.getElements();
 
@@ -31,9 +30,7 @@ const formatDataValues = async (
         }
 
         let value = dataValue.value;
-        // $FlowFixMe - subValueGetterByElementType is only a subset of the full dataElementTypes
         if (subValueGetterByElementType[element.type]) {
-            // $FlowFixMe
             value = await subValueGetterByElementType[element.type]({
                 dataElement: {
                     id: element.id,
@@ -57,7 +54,7 @@ const formatDataValues = async (
             acc[dataValue.id] = dataValue.value;
         }
         return acc;
-    }, {});
+    }, {} as Record<string, any>);
 };
 
 export const useClientDataValues = ({
@@ -72,11 +69,9 @@ export const useClientDataValues = ({
         ['formattedDataValues', linkedEventId, dataValues],
         () => formatDataValues(
             dataValues,
-            // $FlowFixMe
-            formFoundation,
+            formFoundation as RenderFoundation,
             querySingleResource,
-            // $FlowFixMe
-            linkedEventId,
+            linkedEventId as string,
             buildUrl(baseUrl, `api/${apiVersion}`),
         ),
         {

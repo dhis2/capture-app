@@ -1,18 +1,17 @@
-// @flow
 import { useMemo } from 'react';
 import { useApiDataQuery } from '../../../utils/reactQueryHelpers';
 
-type Props = {|
-    originEventId: string,
-    skipBidirectionalChecks?: boolean,
-|};
+type Props = {
+    originEventId: string;
+    skipBidirectionalChecks?: boolean;
+};
 
-const calculateRelatedStageRelationships = (event, skipBidirectionalChecks) => {
+const calculateRelatedStageRelationships = (event: any, skipBidirectionalChecks?: boolean) => {
     if (!event || !event.relationships || event.relationships.length === 0) {
         return null;
     }
 
-    const stageToStageRelationships = event.relationships.filter(({ to, from }) => {
+    const stageToStageRelationships = event.relationships.filter(({ to, from }: any) => {
         if (!to.event || !from.event) {
             return null;
         }

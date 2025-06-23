@@ -1,4 +1,3 @@
-// @flow
 import { useIndexedDBQuery } from '../../../utils/reactQueryHelpers';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../storageControllers';
 
@@ -9,7 +8,7 @@ export const useRelationshipTypeAccess = (relationshipTypeId: string) => {
         ['relationshipTypeAccess', relationshipTypeId],
         () =>
             storageController.get(USER_METADATA_STORES.RELATIONSHIP_TYPES, relationshipTypeId, {
-                project: ({ access }) => ({
+                project: ({ access }: any) => ({
                     hasWriteAccess: access?.data?.write ?? false,
                 }),
             }),

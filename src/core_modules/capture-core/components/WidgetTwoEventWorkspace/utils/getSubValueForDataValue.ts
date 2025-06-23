@@ -1,15 +1,17 @@
-// @flow
 import { dataElementTypes } from '../../../metaData';
 import type { QuerySingleResource } from '../../../utils/api';
 import { featureAvailable, FEATURES } from '../../../../capture-core-utils';
 import { getOrgUnitNames } from '../../../metadataRetrieval/orgUnitName';
 
 type SubValueFunctionProps = {
-    dataElement: Object,
-    querySingleResource: QuerySingleResource,
-    eventId: string,
-    absoluteApiPath: string,
-}
+    dataElement: {
+        id: string;
+        value: any;
+    };
+    querySingleResource: QuerySingleResource;
+    eventId: string;
+    absoluteApiPath: string;
+};
 
 const getFileResourceSubvalue = async ({ dataElement, querySingleResource, eventId, absoluteApiPath }: SubValueFunctionProps) => {
     const { value } = dataElement;
@@ -50,7 +52,7 @@ const getOrganisationUnitSubvalue = async ({ dataElement: { value }, querySingle
     return organisationUnits[value];
 };
 
-export const subValueGetterByElementType = {
+export const subValueGetterByElementType: Record<string, (props: SubValueFunctionProps) => Promise<any>> = {
     [dataElementTypes.FILE_RESOURCE]: getFileResourceSubvalue,
     [dataElementTypes.IMAGE]: getImageSubvalue,
     [dataElementTypes.ORGANISATION_UNIT]: getOrganisationUnitSubvalue,
