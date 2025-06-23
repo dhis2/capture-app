@@ -22,8 +22,7 @@ export const isValidPeriod = (
         return { isWithinValidPeriod: true, firstValidDate: undefined };
     }
 
-    // $FlowFixMe[incompatible-type]
-    const reportDateServer: ?string = convertClientToServer(reportDate, dataElementTypes.DATE);
+    const reportDateServer = ((convertClientToServer(reportDate, dataElementTypes.DATE): any): string);
     const today = dateUtils.getToday();
 
     const threshold = expiryDays
