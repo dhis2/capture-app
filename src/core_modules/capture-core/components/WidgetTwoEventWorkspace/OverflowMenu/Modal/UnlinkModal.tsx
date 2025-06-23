@@ -1,26 +1,23 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
-    Button,
-    ButtonStrip,
     Modal,
-    ModalActions,
     ModalContent,
     ModalTitle,
+    ModalActions,
+    ButtonStrip,
+    Button,
 } from '@dhis2/ui';
 import log from 'loglevel';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
-import type { Props } from './UnlinkAndDeleteModal.types';
+import type { Props } from './UnlinkModal.types';
 
-export const UnlinkAndDeleteModal = ({
+export const UnlinkModal = ({
     setOpenModal,
-    eventId,
-    originEventId,
     relationshipId,
-    onDeleteEvent,
+    originEventId,
     onDeleteEventRelationship,
 }: Props) => {
     const dataEngine = useDataEngine();
@@ -30,60 +27,55 @@ export const UnlinkAndDeleteModal = ({
         { critical: true },
     );
 
-    const deleteEvent = async () => {
+    const deleteRelationship = async () => {
         const mutation = {
-            resource: 'tracker?async=false&importStrategy=DELETE',
+            resource: 'tracker?importStrategy=DELETE&async=false',
             type: 'create',
-            data: { events: [{ event: eventId }] },
+            data: { relationships: [{ relationship: relationshipId }] },
         };
 
-        return dataEngine.mutate(mutation);
+        return dataEngine.mutate(mutation as any);
     };
 
-    const mutation = useMutation(deleteEvent, {
+    const mutation = useMutation(deleteRelationship, {
         onSuccess: () => {
             queryClient.invalidateQueries([
                 ReactQueryAppNamespace,
                 'linkedEventByOriginEvent',
                 originEventId,
             ]);
-            setOpenModal(false);
-            onDeleteEvent && onDeleteEvent(eventId);
             onDeleteEventRelationship && onDeleteEventRelationship(relationshipId);
+            setOpenModal(false);
         },
         onError: (error) => {
             showErrorAlert();
             log.error(
-                `Failed to unlink and delete event with ID: ${eventId}`,
+                `Failed to remove relationship with id ${relationshipId}`,
                 error,
             );
         },
     });
 
     return (
-        <Modal dataTest="event-unlink-and-delete-modal">
-            <ModalTitle>{i18n.t('Unlink and delete linked event')}</ModalTitle>
+        <Modal dataTest="event-unlink-modal">
+            <ModalTitle>
+                {i18n.t('Unlink event')}
+            </ModalTitle>
             <ModalContent>
-                <p>
-                    {i18n.t(
-                        'Are you sure you want to remove the link and delete the linked event? This action permanently removes the link, linked event, and all related data.',
-                    )}
-                </p>
+                <p>{i18n.t('Are you sure you want to remove the link between these events? This action removes the link itself, but the linked event will remain.') as string}</p>
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
-                    <Button
-                        onClick={() => setOpenModal(false)}
-                        secondary
-                    >
-                        {i18n.t('No, cancel')}
+                    <Button onClick={() => setOpenModal(false)} secondary>
+                        {i18n.t('No, cancel') as string}
                     </Button>
                     <Button
                         destructive
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
+                        dataTest="event-overflow-unlink-event-confirm"
                     >
-                        {i18n.t('Yes, unlink and delete linked event')}
+                        {i18n.t('Yes, unlink event') as string}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

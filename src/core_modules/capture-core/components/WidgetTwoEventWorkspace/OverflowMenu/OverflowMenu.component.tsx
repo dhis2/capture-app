@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import {
     Divider,
@@ -60,37 +59,40 @@ export const OverflowMenuComponent = ({
                 component={
                     <FlyoutMenu dense maxWidth="250px">
                         <MenuItem
-                            label={i18n.t('View linked event')}
+                            label={i18n.t('View linked event') as string}
                             icon={<IconView16 />}
                             dataTest="event-overflow-view-linked-event"
                             onClick={handleViewLinkedEvent}
+                            suffix=""
                         />
                         <Divider />
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link between these events')}
+                            content={i18n.t('You do not have access to remove the link between these events') as string}
                             enabled={!relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink event')}
+                                label={i18n.t('Unlink event') as string}
                                 icon={<IconLink16 />}
                                 disabled={!relationshipTypeWriteAccess}
                                 dense
                                 dataTest="event-overflow-unlink-event"
                                 onClick={handleUnlinkEvent}
+                                suffix=""
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link and delete the linked event')}
+                            content={i18n.t('You do not have access to remove the link and delete the linked event') as string}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink and delete linked event')}
+                                label={i18n.t('Unlink and delete linked event') as string}
                                 icon={<IconDelete16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense
                                 destructive
                                 dataTest="event-overflow-unlink-and-delete-event"
                                 onClick={handleUnlinkAndDeleteEvent}
+                                suffix=""
                             />
                         </ConditionalTooltip>
                     </FlyoutMenu>

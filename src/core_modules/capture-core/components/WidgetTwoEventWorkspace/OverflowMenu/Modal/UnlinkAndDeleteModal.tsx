@@ -1,24 +1,25 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
+    Button,
+    ButtonStrip,
     Modal,
+    ModalActions,
     ModalContent,
     ModalTitle,
-    ModalActions,
-    ButtonStrip,
-    Button,
 } from '@dhis2/ui';
 import log from 'loglevel';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from 'capture-core/utils/reactQueryHelpers';
-import type { Props } from './UnlinkModal.types';
+import type { Props } from './UnlinkAndDeleteModal.types';
 
-export const UnlinkModal = ({
+export const UnlinkAndDeleteModal = ({
     setOpenModal,
-    relationshipId,
+    eventId,
     originEventId,
+    relationshipId,
+    onDeleteEvent,
     onDeleteEventRelationship,
 }: Props) => {
     const dataEngine = useDataEngine();
@@ -28,55 +29,60 @@ export const UnlinkModal = ({
         { critical: true },
     );
 
-    const deleteRelationship = async () => {
+    const deleteEvent = async () => {
         const mutation = {
-            resource: 'tracker?importStrategy=DELETE&async=false',
+            resource: 'tracker?async=false&importStrategy=DELETE',
             type: 'create',
-            data: { relationships: [{ relationship: relationshipId }] },
+            data: { events: [{ event: eventId }] },
         };
 
-        return dataEngine.mutate(mutation);
+        return dataEngine.mutate(mutation as any);
     };
 
-    const mutation = useMutation(deleteRelationship, {
+    const mutation = useMutation(deleteEvent, {
         onSuccess: () => {
             queryClient.invalidateQueries([
                 ReactQueryAppNamespace,
                 'linkedEventByOriginEvent',
                 originEventId,
             ]);
-            onDeleteEventRelationship && onDeleteEventRelationship(relationshipId);
             setOpenModal(false);
+            onDeleteEvent && onDeleteEvent(eventId);
+            onDeleteEventRelationship && onDeleteEventRelationship(relationshipId);
         },
         onError: (error) => {
             showErrorAlert();
             log.error(
-                `Failed to remove relationship with id ${relationshipId}`,
+                `Failed to unlink and delete event with ID: ${eventId}`,
                 error,
             );
         },
     });
 
     return (
-        <Modal dataTest="event-unlink-modal">
-            <ModalTitle>
-                {i18n.t('Unlink event')}
-            </ModalTitle>
+        <Modal dataTest="event-unlink-and-delete-modal">
+            <ModalTitle>{i18n.t('Unlink and delete linked event')}</ModalTitle>
             <ModalContent>
-                <p>{i18n.t('Are you sure you want to remove the link between these events? This action removes the link itself, but the linked event will remain.')}</p>
+                <p>
+                    {i18n.t(
+                        'Are you sure you want to remove the link and delete the linked event? This action permanently removes the link, linked event, and all related data.',
+                    ) as string}
+                </p>
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
-                    <Button onClick={() => setOpenModal(false)} secondary>
-                        {i18n.t('No, cancel')}
+                    <Button
+                        onClick={() => setOpenModal(false)}
+                        secondary
+                    >
+                        {i18n.t('No, cancel') as string}
                     </Button>
                     <Button
                         destructive
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
-                        dataTest="event-overflow-unlink-event-confirm"
                     >
-                        {i18n.t('Yes, unlink event')}
+                        {i18n.t('Yes, unlink and delete linked event') as string}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
