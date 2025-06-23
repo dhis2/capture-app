@@ -2,6 +2,8 @@
 import i18n from '@dhis2/d2-i18n';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { isValidDate, isValidPeriod } from '../../../../utils/validation/validators/form';
+import { convertFormToClient } from '../../../../converters';
+import { dataElementTypes } from '../../../../metaData';
 
 const preValidateDate = (
     value?: ?string,
@@ -21,7 +23,8 @@ const validateNotExpired = (
     if (!value || !props?.expiryPeriod) {
         return true;
     }
-    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(value, props.expiryPeriod);
+    const occurredAtClient = ((convertFormToClient(value, dataElementTypes.DATE): any): string);
+    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, props.expiryPeriod);
     return {
         valid: isWithinValidPeriod,
         errorMessage: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {

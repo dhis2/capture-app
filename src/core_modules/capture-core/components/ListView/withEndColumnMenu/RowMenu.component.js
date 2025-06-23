@@ -9,6 +9,7 @@ import { isValidPeriod } from '../../../utils/validation/validators/form';
 
 export const RowMenu = (props: Props) => {
     const { customRowMenuContents = [], row } = props;
+    const eventOccurredAt = row.occurredAt;
 
     const anchorRef = useRef(null);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
@@ -17,17 +18,14 @@ export const RowMenu = (props: Props) => {
         setActionsIsOpen(prev => !prev);
     };
 
-    const eventOccurredAt = row.occurredAt;
-
-
     const renderMenuItems = () => customRowMenuContents.map((content) => {
         const { isWithinValidPeriod } = isValidPeriod(eventOccurredAt, content?.expiredPeriod);
         const isDisabled = !content.clickHandler || !isWithinValidPeriod;
         return (
             <ConditionalTooltip
                 key={content.key}
-                content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
-                    occurredAt: eventOccurredAt,
+                content={i18n.t('{{eventOccurredAt}} belongs to an expired period. Event cannot be edited', {
+                    eventOccurredAt,
                     interpolation: { escapeValue: false },
                 })}
                 enabled={!isWithinValidPeriod}

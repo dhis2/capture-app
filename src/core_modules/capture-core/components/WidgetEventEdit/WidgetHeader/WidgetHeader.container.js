@@ -11,13 +11,14 @@ import { ConditionalTooltip } from 'capture-core/components/Tooltips/Conditional
 import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import { getProgramEventAccess } from '../../../metaData';
+import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from '../constants/status.const';
 import type { PlainProps, Props } from './WidgetHeader.types';
 import { isValidPeriod } from '../../../utils/validation/validators/form';
+import { convertFormToClient } from '../../../converters';
 
 const styles = {
     icon: {
@@ -57,7 +58,8 @@ const WidgetHeaderPlain = ({
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
 
     const expiryPeriod = useProgramExpiryForUser(programId);
-    const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
+    const occurredAtClient = ((convertFormToClient(occurredAt, dataElementTypes.DATE): any): string);
+    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
 
     const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
     const tooltipContent = useMemo(() => {

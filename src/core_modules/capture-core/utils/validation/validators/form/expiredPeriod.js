@@ -35,7 +35,7 @@ export const isValidPeriod = (
         calendar: 'gregorian',
     });
 
-    const firstValidDateServer: ?string = thresholdPeriod.startDate;
+    const firstValidDateServer = thresholdPeriod.startDate;
 
     const isWithinValidPeriod = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;
     const firstValidDate = convertIsoToLocalCalendar(firstValidDateServer);

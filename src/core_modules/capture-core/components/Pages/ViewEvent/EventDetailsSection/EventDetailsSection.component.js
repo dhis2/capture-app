@@ -11,7 +11,7 @@ import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
 import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
-import type { ProgramStage } from '../../../../metaData';
+import { dataElementTypes, type ProgramStage } from '../../../../metaData';
 import { useCoreOrgUnit } from '../../../../metadataRetrieval/coreOrgUnit';
 import { NoticeBox } from '../../../NoticeBox';
 import { FEATURES, useFeature } from '../../../../../capture-core-utils';
@@ -24,6 +24,7 @@ import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptio
 import { useMetadataForProgramStage } from '../../../DataEntries/common/ProgramStage/useMetadataForProgramStage';
 import { isValidPeriod } from '../../../../utils/validation/validators/form/expiredPeriod';
 import { useProgramExpiryForUser } from '../../../../hooks';
+import { convertFormToClient } from '../../../../converters';
 
 const getStyles = () => ({
     container: {
@@ -133,7 +134,8 @@ const EventDetailsSectionPlain = (props: Props) => {
     );
 
     const renderActionsContainer = () => {
-        const { isWithinValidPeriod } = isValidPeriod(eventData?.dataEntryValues?.occurredAt, expiryPeriod);
+        const occurredAtClient = ((convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE): any): string);
+        const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
         const isDisabled = !eventAccess.write || !isWithinValidPeriod;
 
         let tooltipContent = '';
