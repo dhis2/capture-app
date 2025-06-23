@@ -266,7 +266,7 @@ export class EnrollmentFactory {
 
                 if (this.dataEntryFormConfig) {
                     // $FlowFixMe
-                    this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+                    await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                         const attributes = formConfigSection.elements.reduce((acc, element) => {
                             if (element.type === FormFieldTypes.PLUGIN) {
                                 const fieldMap = element
