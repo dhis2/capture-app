@@ -1,7 +1,6 @@
 // @flow
 import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
-import { pipe } from 'capture-core-utils';
-import { convertClientToServer, convertFormToClient } from '../../../../converters';
+import { convertClientToServer } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 import { dateUtils } from '../../../../rules/converters';
 import { convertIsoToLocalCalendar } from '../../../converters/date';
@@ -23,8 +22,8 @@ export const isValidPeriod = (
         return { isWithinValidPeriod: true, firstValidDate: undefined };
     }
 
-    const convertFn = pipe(convertFormToClient, convertClientToServer);
-    const reportDateServer = convertFn(reportDate, dataElementTypes.DATE);
+    // $FlowFixMe[incompatible-type]
+    const reportDateServer: ?string = convertClientToServer(reportDate, dataElementTypes.DATE);
     const today = dateUtils.getToday();
 
     const threshold = expiryDays
@@ -37,7 +36,7 @@ export const isValidPeriod = (
         calendar: 'gregorian',
     });
 
-    const firstValidDateServer = thresholdPeriod.startDate;
+    const firstValidDateServer: ?string = thresholdPeriod.startDate;
 
     const isWithinValidPeriod = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;
     const firstValidDate = convertIsoToLocalCalendar(firstValidDateServer);

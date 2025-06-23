@@ -12,6 +12,7 @@ import type { EventRowProps } from './EventRow.types';
 import { DeleteActionButton } from './DeleteActionButton';
 import { SkipAction } from './SkipAction';
 import { DeleteActionModal } from './DeleteActionModal';
+import { useProgramExpiryForUser } from '../../../../../../hooks';
 
 const styles = {
     row: {
@@ -49,6 +50,8 @@ const EventRowPlain = ({
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
+    const expiryPeriod = useProgramExpiryForUser(programId);
+
     return (
         <DataTableRow
             className={!pendingApiResponse ? classes.row : classes.rowDisabled}
@@ -84,6 +87,8 @@ const EventRowPlain = ({
                                 <DeleteActionButton
                                     setActionsOpen={setActionsOpen}
                                     setDeleteModalOpen={setDeleteModalOpen}
+                                    occurredAt={eventDetails.occurredAt}
+                                    expiryPeriod={expiryPeriod}
                                 />
                             </FlyoutMenu>
                         )}
