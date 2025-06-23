@@ -67,7 +67,7 @@ When('you unlink the Baby Postnatal linked event', () => {
 And('you delete the Birth event', () => {
     cy.get('[data-test="overflow-button"]')
         .eq(0)
-        .click();
+        .click({ force: true });
     cy.get('[data-test="stages-and-events-delete"]')
         .click();
     cy.get('[data-test="dhis2-uicore-modal"]').within(() => {
