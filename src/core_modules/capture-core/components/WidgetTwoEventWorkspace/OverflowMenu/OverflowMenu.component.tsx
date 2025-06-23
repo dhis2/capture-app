@@ -59,7 +59,7 @@ export const OverflowMenuComponent = ({
                 component={
                     <FlyoutMenu dense maxWidth="250px">
                         <MenuItem
-                            label={i18n.t('View linked event') as string}
+                            label={i18n.t('View linked event')}
                             icon={<IconView16 />}
                             dataTest="event-overflow-view-linked-event"
                             onClick={handleViewLinkedEvent}
@@ -67,11 +67,11 @@ export const OverflowMenuComponent = ({
                         />
                         <Divider />
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link between these events') as string}
+                            content={i18n.t('You do not have access to remove the link between these events')}
                             enabled={!relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink event') as string}
+                                label={i18n.t('Unlink event')}
                                 icon={<IconLink16 />}
                                 disabled={!relationshipTypeWriteAccess}
                                 dense
@@ -81,11 +81,11 @@ export const OverflowMenuComponent = ({
                             />
                         </ConditionalTooltip>
                         <ConditionalTooltip
-                            content={i18n.t('You do not have access to remove the link and delete the linked event') as string}
+                            content={i18n.t('You do not have access to remove the link and delete the linked event')}
                             enabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                         >
                             <MenuItem
-                                label={i18n.t('Unlink and delete linked event') as string}
+                                label={i18n.t('Unlink and delete linked event')}
                                 icon={<IconDelete16 />}
                                 disabled={!stageWriteAccess || !relationshipTypeWriteAccess}
                                 dense

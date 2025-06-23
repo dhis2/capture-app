@@ -62,12 +62,12 @@ export const UnlinkModal = ({
                 {i18n.t('Unlink event')}
             </ModalTitle>
             <ModalContent>
-                <p>{i18n.t('Are you sure you want to remove the link between these events? This action removes the link itself, but the linked event will remain.') as string}</p>
+                <p>{i18n.t('Are you sure you want to remove the link between these events? This action removes the link itself, but the linked event will remain.')}</p>
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={() => setOpenModal(false)} secondary>
-                        {i18n.t('No, cancel') as string}
+                        {i18n.t('No, cancel')}
                     </Button>
                     <Button
                         destructive
@@ -75,7 +75,7 @@ export const UnlinkModal = ({
                         disabled={mutation.isLoading}
                         dataTest="event-overflow-unlink-event-confirm"
                     >
-                        {i18n.t('Yes, unlink event') as string}
+                        {i18n.t('Yes, unlink event')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

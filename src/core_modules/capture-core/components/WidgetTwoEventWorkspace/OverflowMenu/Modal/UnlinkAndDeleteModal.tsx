@@ -66,7 +66,7 @@ export const UnlinkAndDeleteModal = ({
                 <p>
                     {i18n.t(
                         'Are you sure you want to remove the link and delete the linked event? This action permanently removes the link, linked event, and all related data.',
-                    ) as string}
+                    )}
                 </p>
             </ModalContent>
             <ModalActions>
@@ -75,14 +75,14 @@ export const UnlinkAndDeleteModal = ({
                         onClick={() => setOpenModal(false)}
                         secondary
                     >
-                        {i18n.t('No, cancel') as string}
+                        {i18n.t('No, cancel')}
                     </Button>
                     <Button
                         destructive
                         onClick={() => mutation.mutate()}
                         disabled={mutation.isLoading}
                     >
-                        {i18n.t('Yes, unlink and delete linked event') as string}
+                        {i18n.t('Yes, unlink and delete linked event')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
