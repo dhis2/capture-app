@@ -27,6 +27,8 @@ import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 
+const EMPTY_USER_ROLES: string[] = [];
+
 const styles: Readonly<any> = {
     header: {
         display: 'flex',
@@ -192,7 +194,7 @@ const WidgetProfilePlain = ({
                         dataEntryFormConfig={dataEntryFormConfig}
                         orgUnitId={orgUnitId}
                         clientAttributesWithSubvalues={clientAttributesWithSubvalues}
-                        userRoles={userRoles || []}
+                        userRoles={userRoles ?? EMPTY_USER_ROLES}
                         trackedEntityInstanceId={teiId}
                         onSaveSuccessActionType={dataEntryActionTypes.TEI_UPDATE_SUCCESS}
                         onSaveErrorActionType={dataEntryActionTypes.TEI_UPDATE_ERROR}
