@@ -1,4 +1,3 @@
-// @flow
 import { useLocation } from 'react-router-dom';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
 import type { Url } from '../../../utils/url';
