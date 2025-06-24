@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useNavigate, buildUrlQueryString } from '../../../utils/routing';
-
-type Url = Record<string, string>;
+import type { Url } from '../../../utils/url';
 
 export const useResetViewEventId = () => {
     const { navigate } = useNavigate();
