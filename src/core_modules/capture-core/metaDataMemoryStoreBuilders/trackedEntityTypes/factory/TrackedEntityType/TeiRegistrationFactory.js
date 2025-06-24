@@ -102,7 +102,7 @@ export class TeiRegistrationFactory {
                 }, {});
 
             // $FlowFixMe
-            this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+            await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                 const fieldElements = formConfigSection.elements.reduce((acc, element) => {
                     if (element.type === FormFieldTypes.PLUGIN) {
                         const fieldMap = element
