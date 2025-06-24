@@ -1,3 +1,10 @@
+## [102.6.10](https://github.com/dhis2/capture-app/compare/v102.6.9...v102.6.10) (2025-06-24)
+
+
+### Bug Fixes
+
+* [DHIS2-19767] Translate Choose Org Unit label ([#4164](https://github.com/dhis2/capture-app/issues/4164)) ([1273d37](https://github.com/dhis2/capture-app/commit/1273d37809d3b37de00872b2500cdb6f1eda31cf))
+
 ## [102.6.9](https://github.com/dhis2/capture-app/compare/v102.6.8...v102.6.9) (2025-06-24)
 
 
