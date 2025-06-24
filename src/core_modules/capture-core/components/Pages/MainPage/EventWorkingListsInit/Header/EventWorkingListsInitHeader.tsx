@@ -1,4 +1,3 @@
-// @flow
 import { colors, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import React, { type ComponentType } from 'react';
@@ -33,7 +32,7 @@ const EventWorkingListsInitHeaderPlain =
                 <span
                     className={title}
                 >
-                    {i18n.t('Registered events')}
+                    {i18n.t('Registered events') as string}
                 </span>
             </div>
             <div
@@ -44,5 +43,4 @@ const EventWorkingListsInitHeaderPlain =
         </div>
     );
 
-export const EventWorkingListsInitHeader: ComponentType<$Diff<Props, CssClasses>> =
-    withStyles(getStyles)(EventWorkingListsInitHeaderPlain);
+export const EventWorkingListsInitHeader = withStyles(getStyles)(EventWorkingListsInitHeaderPlain) as ComponentType<Omit<Props, 'classes'>>;
