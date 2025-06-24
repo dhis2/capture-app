@@ -1,13 +1,12 @@
-// @flow
 import * as React from 'react';
 import { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Input, MenuItem, spacers, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { OptionLabel } from '../../OptionLabel';
 import type { Icon } from '../../../../metaData';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     input: {
         position: 'sticky',
         top: '0',
@@ -22,29 +21,30 @@ const styles = () => ({
         justifyContent: 'center',
         padding: `${spacers.dp16} ${spacers.dp8}`,
     },
-});
+};
 
 type Option = {
-    value: string,
-    label: string,
-    icon?: Icon,
+    value: string;
+    label: string;
+    icon?: Icon;
 };
 
-type Props = {
-    dataTest: string,
-    options: Array<Option>,
-    onChange: (option: Option) => void,
-    searchText: string,
-    ...CssClasses,
+type OwnProps = {
+    dataTest: string;
+    options: Array<Option>;
+    onChange: (option: Option) => void;
+    searchText: string;
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, classes }: Props) => {
     const [filter, setFilter] = useState('');
 
-    const filtered = options.reduce((acc, item) => {
+    const filtered = options.reduce((acc: Option[], item) => {
         const match = item.label.toLowerCase().includes(filter.toLowerCase());
         return match ? [...acc, item] : acc;
-    }, []);
+    }, [] as Option[]);
 
     const hasMatch = filtered?.length > 0;
 
@@ -54,7 +54,7 @@ const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, clas
                 dense
                 dataTest={`${dataTest}-filterinput`}
                 value={filter}
-                onChange={({ value }) => setFilter(value)}
+                onChange={({ value }) => setFilter(value || '')}
                 type="text"
                 placeholder={searchText}
                 initialFocus
@@ -66,7 +66,8 @@ const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, clas
                         key={option.value}
                         label={<OptionLabel icon={option.icon} label={option.label} />}
                         value={option.value}
-                        onClick={onChange}
+                        suffix=""
+                        onClick={() => onChange(option)}
                     />
                 ))
             ) : (

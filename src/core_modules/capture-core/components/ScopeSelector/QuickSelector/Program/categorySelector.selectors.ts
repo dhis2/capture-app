@@ -1,14 +1,12 @@
-// @flow
 import { createSelector } from 'reselect';
 
-const filteredOptionsSelector = data => data.options;
-const onSelectFromPropsSelector = data => data.onSelect;
+const filteredOptionsSelector = (data: any) => data.options;
+const onSelectFromPropsSelector = (data: any) => data.onSelect;
 
-// $FlowFixMe
 export const makeOnSelectSelector = () => createSelector(
     filteredOptionsSelector,
     onSelectFromPropsSelector,
-    (filteredOptions, onSelect) => (optionId) => {
+    (filteredOptions: any[], onSelect: (option: any) => void) => (optionId: string) => {
         const option = filteredOptions
             .find(o => o.value === optionId);
 

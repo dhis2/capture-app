@@ -1,7 +1,6 @@
-// @flow
-
 import React, { useEffect, useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+// @ts-expect-error - SelectorBarItem exists at runtime but not in TypeScript definitions
 import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { programCollection } from '../../../../metaDataMemoryStores';
@@ -21,18 +20,19 @@ const styles = () => ({
     },
 });
 
-type Props = {
-    handleClickProgram?: (value: string) => void,
-    handleSetCatergoryCombo?: (category: Object, categoryId: string) => void,
-    onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
-    onResetCategoryOption: (categoryId: string) => void,
-    onResetOrgUnit: () => void,
-    selectedProgramId?: string,
-    selectedOrgUnitId?: string,
-    selectedCategories: Object,
-    formIsOpen: boolean,
-    classes: Object,
+type OwnProps = {
+    handleClickProgram?: (value: string) => void;
+    handleSetCatergoryCombo?: (category: Record<string, any>, categoryId: string) => void;
+    onResetProgramId: (baseAction: any) => void;
+    onResetCategoryOption: (categoryId: string) => void;
+    onResetOrgUnit: () => void;
+    selectedProgramId?: string;
+    selectedOrgUnitId?: string;
+    selectedCategories: Record<string, any>;
+    formIsOpen: boolean;
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const ProgramSelectorPlain = ({
     handleClickProgram,
@@ -49,7 +49,7 @@ const ProgramSelectorPlain = ({
     const [open, setOpen] = useState(false);
     const [programsArray, setProgramsArray] = useState<Array<Program>>([]);
     const selectedProgram = selectedProgramId ? programCollection.get(selectedProgramId) : null;
-    const programOptions = getOptions(selectedOrgUnitId, programsArray);
+    const programOptions = getOptions(programsArray, selectedOrgUnitId);
     const isMenuDisabled = !handleClickProgram;
 
     useEffect(() => {
@@ -58,7 +58,7 @@ const ProgramSelectorPlain = ({
 
     const renderCategories = () => {
         if (selectedProgram?.categoryCombination) {
-            return Array.from(selectedProgram.categoryCombination.categories.values()).map(category => (
+            return Array.from(selectedProgram.categoryCombination.categories.values()).map((category: any) => (
                 <CategorySelector
                     key={category.id}
                     category={category}
@@ -114,6 +114,7 @@ const ProgramSelectorPlain = ({
                                                 onResetProgramId(resetProgramIdBase());
                                             }}
                                             label={i18n.t('Clear selection')}
+                                            suffix=""
                                         />
                                     </>
                                 )}
