@@ -21,11 +21,12 @@ export const RowMenu = (props: Props) => {
     const renderMenuItems = () => customRowMenuContents.map((content) => {
         const { isWithinValidPeriod } = isValidPeriod(eventOccurredAt, content?.expiredPeriod);
         const isDisabled = !content.clickHandler || !isWithinValidPeriod;
+
         return (
             <ConditionalTooltip
                 key={content.key}
-                content={i18n.t('{{eventOccurredAt}} belongs to an expired period. Event cannot be edited', {
-                    eventOccurredAt,
+                content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
+                    occurredAt: eventOccurredAt,
                     interpolation: { escapeValue: false },
                 })}
                 enabled={!isWithinValidPeriod}

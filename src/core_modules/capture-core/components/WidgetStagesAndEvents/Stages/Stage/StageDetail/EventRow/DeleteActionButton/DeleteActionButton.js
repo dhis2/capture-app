@@ -28,12 +28,12 @@ export const DeleteActionButton = ({
     expiryPeriod,
 }: Props) => {
     const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
-    const occurredAtClient = convertClientToView(occurredAt, dataElementTypes.DATE);
+    const occurredAtClientView = convertClientToView(occurredAt, dataElementTypes.DATE);
 
     return (
         <ConditionalTooltip
-            content={i18n.t('{{eventDate}} belongs to an expired period. Event cannot be edited', {
-                eventDate: occurredAtClient,
+            content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
+                occurredAt: occurredAtClientView,
                 interpolation: { escapeValue: false },
             })}
             enabled={!isWithinValidPeriod}

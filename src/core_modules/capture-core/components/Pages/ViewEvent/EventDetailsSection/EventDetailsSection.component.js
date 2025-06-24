@@ -142,8 +142,8 @@ const EventDetailsSectionPlain = (props: Props) => {
         if (!eventAccess.write) {
             tooltipContent = i18n.t('You don\'t have access to edit this event');
         } else if (!isWithinValidPeriod) {
-            tooltipContent = i18n.t('{{eventDate}} belongs to an expired period. Event cannot be edited', {
-                eventDate: eventData?.dataEntryValues?.occurredAt,
+            tooltipContent = i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
+                occurredAt: eventData?.dataEntryValues?.occurredAt,
                 interpolation: { escapeValue: false },
             });
         }
