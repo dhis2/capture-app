@@ -1,10 +1,10 @@
 // @flow
 import React, { useState, useRef } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu } from '@dhis2/ui';
 import type { Props } from './rowMenu.types';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
-import i18n from '../../../../../locales';
 import { isValidPeriod } from '../../../utils/validation/validators/form';
 
 export const RowMenu = (props: Props) => {
