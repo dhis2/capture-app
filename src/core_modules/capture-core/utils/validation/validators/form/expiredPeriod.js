@@ -1,9 +1,8 @@
 // @flow
 import { getFixedPeriodByDate } from '@dhis2/multi-calendar-dates';
-import { convertClientToServer } from '../../../../converters';
+import { convertClientToServer, convertClientToView } from '../../../../converters';
 import { dataElementTypes } from '../../../../metaData';
 import { dateUtils } from '../../../../rules/converters';
-import { convertIsoToLocalCalendar } from '../../../converters/date';
 
 export const isValidPeriod = (
     reportDate: string,
@@ -38,7 +37,7 @@ export const isValidPeriod = (
     const firstValidDateServer = thresholdPeriod.startDate;
 
     const isWithinValidPeriod = dateUtils.compareDates(reportDateServer, firstValidDateServer) >= 0;
-    const firstValidDate = convertIsoToLocalCalendar(firstValidDateServer);
+    const firstValidDate = convertClientToView(firstValidDateServer, dataElementTypes.DATE);
 
     return { isWithinValidPeriod, firstValidDate };
 };

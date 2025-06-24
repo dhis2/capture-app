@@ -23,7 +23,7 @@ const validateNotExpired = (
     if (!value || !props?.expiryPeriod) {
         return true;
     }
-    const occurredAtClient: string = ((convertFormToClient(value, dataElementTypes.DATE): any): string);
+    const occurredAtClient = ((convertFormToClient(value, dataElementTypes.DATE): any): string);
     const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, props.expiryPeriod);
 
     return {
