@@ -1,3 +1,10 @@
+## [102.6.9](https://github.com/dhis2/capture-app/compare/v102.6.8...v102.6.9) (2025-06-24)
+
+
+### Bug Fixes
+
+* [DHIS2-19330] data element increments twice on render ([#4075](https://github.com/dhis2/capture-app/issues/4075)) ([daa09c0](https://github.com/dhis2/capture-app/commit/daa09c0229e3f1df0c22bd1a857d8a1d0b3879ba))
+
 ## [102.6.8](https://github.com/dhis2/capture-app/compare/v102.6.7...v102.6.8) (2025-06-19)
 
 
