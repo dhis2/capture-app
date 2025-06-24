@@ -44,7 +44,7 @@ const getDataElementsForRulesExecution = (dataElements?: DataElements): Record<s
                 optionSetId: dataElement.optionSet && dataElement.optionSet.id,
             },
         }),
-        {} as Record<string, any>,
+        {},
     );
 };
 
