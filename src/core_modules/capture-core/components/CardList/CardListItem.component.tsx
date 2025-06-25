@@ -170,37 +170,37 @@ const CardListItemIndex = ({
 
     const renderTag = (): React.ReactNode => {
         switch (enrollmentType) {
-            case enrollmentTypes.ACTIVE:
-                return (
-                    <Tag
-                        dataTest="dhis2-uicore-tag"
-                        positive
-                        icon={
-                            <span className={classes.checkIcon}>
-                                <IconCheckmark16 />
-                            </span>
-                        }
-                    >
-                        {i18n.t('Enrolled')}
-                    </Tag>
-                );
-            case enrollmentTypes.CANCELLED:
-            case enrollmentTypes.COMPLETED:
-                return (
-                    <Tag
-                        dataTest="dhis2-uicore-tag"
-                        neutral
-                        icon={
-                            <span className={classes.checkIcon}>
-                                <IconCheckmark16 />
-                            </span>
-                        }
-                    >
-                        {i18n.t('Previously enrolled')}
-                    </Tag>
-                );
-            default:
-                return null;
+        case enrollmentTypes.ACTIVE:
+            return (
+                <Tag
+                    dataTest="dhis2-uicore-tag"
+                    positive
+                    icon={
+                        <span className={classes.checkIcon}>
+                            <IconCheckmark16 />
+                        </span>
+                    }
+                >
+                    {i18n.t('Enrolled')}
+                </Tag>
+            );
+        case enrollmentTypes.CANCELLED:
+        case enrollmentTypes.COMPLETED:
+            return (
+                <Tag
+                    dataTest="dhis2-uicore-tag"
+                    neutral
+                    icon={
+                        <span className={classes.checkIcon}>
+                            <IconCheckmark16 />
+                        </span>
+                    }
+                >
+                    {i18n.t('Previously enrolled')}
+                </Tag>
+            );
+        default:
+            return null;
         }
     };
 
