@@ -1,6 +1,7 @@
 import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
 import { map } from 'rxjs/operators';
+import type { InputObservable } from '../../../flow/typeDeclarations';
 import { actionTypes as editActionTypes } from '../../WidgetEventEdit';
 import {
     commitEnrollmentEvent,
@@ -9,13 +10,13 @@ import {
 } from '../common/EnrollmentOverviewDomain/enrollment.actions';
 
 
-export const updateEventSucceededEpic = (action$: any) =>
+export const updateEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(ofType(editActionTypes.EVENT_SCHEDULE_SUCCESS), map((action: any) => {
         const { eventId } = action.meta;
         return commitEnrollmentEvent(eventId);
     }));
 
-export const updateEventFailedEpic = (action$: any) =>
+export const updateEventFailedEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             editActionTypes.EVENT_SCHEDULE_ERROR,
