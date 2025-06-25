@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useRef } from 'react';
 import { useDataMutation } from '@dhis2/app-runtime';
 import type { Props, Assignee } from './WidgetAssignee.types';
