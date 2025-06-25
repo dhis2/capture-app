@@ -91,7 +91,7 @@ export const EnrollmentEditEventPage = () => {
     const dispatch = useDispatch();
 
     const eventId = useSelector((state: ReduxState) => state.viewEventPage.eventId);
-    const error = useSelector((state: ReduxState) => (state as any).activePage.viewEventLoadError?.error);
+    const error = useSelector((state: ReduxState) => state.activePage.viewEventLoadError?.error);
     const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();

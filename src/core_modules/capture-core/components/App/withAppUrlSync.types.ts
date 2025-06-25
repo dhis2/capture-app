@@ -17,6 +17,12 @@ export type ReduxState = {
     editEventPage: {
         eventId?: string;
     };
+    activePage: {
+        viewEventLoadError?: {
+            error?: string;
+        };
+        lockedSelectorLoads?: boolean;
+    };
 };
 
 export type ReduxDispatch = (action: {

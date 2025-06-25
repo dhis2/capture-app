@@ -1,13 +1,6 @@
 import { actionCreator } from '../../../actions/actions.utils';
 import type { UserFormField } from '../../FormFields/UserField';
-
-type ApiAssignedUser = {
-    uid: string;
-    username: string;
-    displayName?: string;
-    firstName: string;
-    surname: string;
-};
+import type { ApiAssignedUser } from '../../../flow/apiTypes';
 
 export const actionTypes = {
     ASSIGNEE_SET: 'EnrollmentDomain.AssigneeSet',
