@@ -35,13 +35,9 @@ const deriveAttributesFromFormValues = (formValues: Record<string, any> = {}) =>
         .filter(key => !geometryType(key))
         .map(key => ({ attribute: key, value: formValues[key] }));
 
-const deriveGeometryFromFormValues = (formValues: Record<string, any> = {}): any => {
-    const geometryKeys = Object.keys(formValues).filter(key => geometryType(key));
-    if (geometryKeys.length === 0) return undefined;
-    return geometryKeys.reduce((acc: any, currentKey) => {
-        const result = standardGeoJson(formValues[currentKey]);
-        return result || acc;
-    }, undefined);
+const deriveGeometryFromFormValues = (formValues: Record<string, any> = {}) => {
+    const geometryKey = Object.keys(formValues).find(key => geometryType(key));
+    return geometryKey ? standardGeoJson(formValues[geometryKey]) : undefined;
 };
 
 export const updateTeiEpic = (action$: any, store: any) =>
