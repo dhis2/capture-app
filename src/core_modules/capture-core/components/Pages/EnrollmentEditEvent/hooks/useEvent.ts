@@ -31,8 +31,8 @@ const enrollmentQuery = {
 
 export const useEvent = (eventId: string) => {
     const [event, setEvent] = useState(defaultState);
-    const { data, error, refetch } = useDataQuery(eventQuery, { lazy: true });
-    const { data: dataFallback, refetch: refetchFallback } = useDataQuery(enrollmentQuery, { lazy: true });
+    const { data, error, refetch } = useDataQuery(eventQuery);
+    const { data: dataFallback, refetch: refetchFallback } = useDataQuery(enrollmentQuery);
 
     useEffect(() => {
         if (eventId) {
