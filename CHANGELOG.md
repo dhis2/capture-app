@@ -1,3 +1,38 @@
+## [102.6.10](https://github.com/dhis2/capture-app/compare/v102.6.9...v102.6.10) (2025-06-24)
+
+
+### Bug Fixes
+
+* [DHIS2-19767] Translate Choose Org Unit label ([#4164](https://github.com/dhis2/capture-app/issues/4164)) ([1273d37](https://github.com/dhis2/capture-app/commit/1273d37809d3b37de00872b2500cdb6f1eda31cf))
+
+## [102.6.9](https://github.com/dhis2/capture-app/compare/v102.6.8...v102.6.9) (2025-06-24)
+
+
+### Bug Fixes
+
+* [DHIS2-19330] data element increments twice on render ([#4075](https://github.com/dhis2/capture-app/issues/4075)) ([daa09c0](https://github.com/dhis2/capture-app/commit/daa09c0229e3f1df0c22bd1a857d8a1d0b3879ba))
+
+## [102.6.8](https://github.com/dhis2/capture-app/compare/v102.6.7...v102.6.8) (2025-06-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4153](https://github.com/dhis2/capture-app/issues/4153)) ([717791b](https://github.com/dhis2/capture-app/commit/717791bec73ca44a55ff01c4782250bb5e8446d7))
+
+## [102.6.7](https://github.com/dhis2/capture-app/compare/v102.6.6...v102.6.7) (2025-06-17)
+
+
+### Bug Fixes
+
+* [DHIS2-19744] return memoized component also on first render ([#4152](https://github.com/dhis2/capture-app/issues/4152)) ([340a3aa](https://github.com/dhis2/capture-app/commit/340a3aafc3ae4444d68c3346d9fdd5f350664483))
+
+## [102.6.6](https://github.com/dhis2/capture-app/compare/v102.6.5...v102.6.6) (2025-06-17)
+
+
+### Bug Fixes
+
+* [DHIS2-19647] Breadcrumb always shows "Discard changes" warning ([#4121](https://github.com/dhis2/capture-app/issues/4121)) ([d84ff92](https://github.com/dhis2/capture-app/commit/d84ff92537704098eb7f024099c80e1d0c0ffc03))
+
 ## [102.6.5](https://github.com/dhis2/capture-app/compare/v102.6.4...v102.6.5) (2025-06-16)
 
 

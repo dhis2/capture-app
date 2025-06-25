@@ -966,6 +966,12 @@ msgstr "No results found for "
 msgid "Choose an organisation unit in the form below"
 msgstr "Choose an organisation unit in the form below"
 
+msgid "None selected"
+msgstr "None selected"
+
+msgid "Choose an organisation unit"
+msgstr "Choose an organisation unit"
+
 msgid "Clear selection"
 msgstr "Clear selection"
 
