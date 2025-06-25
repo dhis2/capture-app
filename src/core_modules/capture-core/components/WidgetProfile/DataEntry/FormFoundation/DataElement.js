@@ -84,6 +84,14 @@ const onValidateOnScopeTrackedEntityType = (
                 valid: otherTrackedEntityInstances.length === 0,
                 data,
             };
+        }).catch((error) => {
+            if (error?.message?.includes('Non-searchable attribute(s) can not be used during global search')) {
+                return {
+                    valid: true,
+                    data: {},
+                };
+            }
+            throw error;
         });
 };
 
@@ -194,7 +202,7 @@ const setBaseProperties = async ({
     dataElement.name = trackedEntityAttribute.displayName;
     dataElement.shortName = trackedEntityAttribute.displayShortName;
     dataElement.formName = trackedEntityAttribute.displayFormName;
-    dataElement.description = trackedEntityAttribute.description;
+    dataElement.description = trackedEntityAttribute.displayDescription;
     dataElement.displayInForms = true;
     dataElement.displayInReports = programTrackedEntityAttribute.displayInList;
     dataElement.disabled = false;

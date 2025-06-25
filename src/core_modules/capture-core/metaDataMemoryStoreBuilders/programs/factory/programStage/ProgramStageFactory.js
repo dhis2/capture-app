@@ -12,7 +12,7 @@ import type {
     CachedProgramStageDataElementsAsObject,
     CachedOptionSet,
     CachedDataElement,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
 import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
@@ -107,9 +107,6 @@ export class ProgramStageFactory {
                 } else {
                     const id = sectionDataElement.id;
                     const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
-                    const cachedDataElementDefinition = this
-                        .cachedDataElements
-                        ?.get(cachedProgramStageDataElement.dataElementId);
 
                     if (!cachedProgramStageDataElement) {
                         log.error(
@@ -117,6 +114,10 @@ export class ProgramStageFactory {
                                 { sectionDataElement }));
                         return;
                     }
+
+                    const cachedDataElementDefinition = this
+                        .cachedDataElements
+                        ?.get(cachedProgramStageDataElement.dataElementId);
 
                     const element = await this.dataElementFactory.build(
                         cachedProgramStageDataElement,
@@ -131,28 +132,55 @@ export class ProgramStageFactory {
         return section;
     }
 
+    async _addDataElementsToSection(section: Section, cachedProgramStageDataElements: Array<CachedProgramStageDataElement>) {
+        // $FlowFixMe
+        await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
+            const cachedDataElementDefinition = this
+                .cachedDataElements
+                ?.get(cachedProgramStageDataElement.dataElementId);
+
+            const element = await this.dataElementFactory.build(
+                cachedProgramStageDataElement,
+                section,
+                cachedDataElementDefinition,
+            );
+            element && section.addElement(element);
+        }));
+    }
+
     async _buildMainSection(cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
         const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
         });
 
         if (cachedProgramStageDataElements) {
-            // $FlowFixMe
-            await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
-                const cachedDataElementDefinition = this
-                    .cachedDataElements
-                    ?.get(cachedProgramStageDataElement.dataElementId);
-
-                const element = await this.dataElementFactory.build(
-                    cachedProgramStageDataElement,
-                    section,
-                    cachedDataElementDefinition,
-                );
-                element && section.addElement(element);
-            }));
+            await this._addDataElementsToSection(section, cachedProgramStageDataElements);
         }
 
         return section;
+    }
+
+    async _addLeftoversSection(stageForm: RenderFoundation, cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
+        if (!cachedProgramStageDataElements) return;
+
+        // Check if there exist data elements which are not assigned to a section
+        const dataElementsInSection = stageForm.getElements().reduce((acc, dataElement) => {
+            acc.add(dataElement.id);
+            return acc;
+        }, new Set());
+
+        const unassignedDataElements = cachedProgramStageDataElements
+            .filter(dataElement => !dataElementsInSection.has(dataElement.dataElementId));
+
+        if (unassignedDataElements.length === 0) return;
+
+        // Create a special section for the unassigned data elements
+        const section = new Section((o) => {
+            o.id = Section.LEFTOVERS_SECTION_ID;
+        });
+
+        await this._addDataElementsToSection(section, unassignedDataElements);
+        stageForm.addSection(section);
     }
 
     static _convertProgramStageDataElementsToObject(
@@ -308,6 +336,8 @@ export class ProgramStageFactory {
         } else {
             stageForm.addSection(await this._buildMainSection(cachedProgramStage.programStageDataElements));
         }
+
+        await this._addLeftoversSection(stageForm, cachedProgramStage.programStageDataElements);
 
         return stage;
     }

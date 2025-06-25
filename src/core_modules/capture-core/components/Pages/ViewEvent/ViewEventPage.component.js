@@ -6,41 +6,39 @@ import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
 import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRelationshipWrapper.container';
 import { TopBar } from './TopBar.container';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import { useLocationQuery } from '../../../utils/routing';
 
 type Props = {
-  isUserInteractionInProgress: boolean,
-  showAddRelationship: boolean,
-  isReadOnly: boolean,
+    isUserInteractionInProgress: boolean,
+    eventDetailsSection: Object,
+    showAddRelationship: boolean,
 };
 
-export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship, isReadOnly }: Props) => {
+export const ViewEventPageComponent = ({ isUserInteractionInProgress, eventDetailsSection, showAddRelationship }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
-
-    const { selectedCategories, programId, orgUnitId } = useSelector(({ currentSelections }) => ({
+    const { orgUnitId } = useLocationQuery();
+    const { selectedCategories, programId } = useSelector(({ currentSelections }) => ({
         selectedCategories: currentSelections.categoriesMeta,
         programId: currentSelections.programId,
-        orgUnitId: currentSelections.orgUnitId,
     }));
 
     return (
-        <div>
+        <OrgUnitFetcher orgUnitId={orgUnitId}>
             <TopBar
                 programId={programId}
                 orgUnitId={orgUnitId}
                 selectedCategories={selectedCategories}
-                isReadOnly={isReadOnly}
                 isUserInteractionInProgress={isUserInteractionInProgress}
+                editEventMode={eventDetailsSection.showEditEvent}
                 formIsOpen
             />
-            <OrgUnitFetcher orgUnitId={orgUnitId}>
-                {
-                    showAddRelationship ?
-                        <ViewEventNewRelationshipWrapper /> :
-                        <ViewEvent
-                            programId={programId}
-                        />
-                }
-            </OrgUnitFetcher>
-        </div>
+            {
+                showAddRelationship ?
+                    <ViewEventNewRelationshipWrapper /> :
+                    <ViewEvent
+                        programId={programId}
+                    />
+            }
+        </OrgUnitFetcher>
     );
 };

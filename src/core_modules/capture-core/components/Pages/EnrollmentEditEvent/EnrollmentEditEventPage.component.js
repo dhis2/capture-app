@@ -62,6 +62,7 @@ export const EnrollmentEditEventPageComponent = ({
     onUpdateOrAddEnrollmentEvents,
     onUpdateEnrollmentEventsSuccess,
     onUpdateEnrollmentEventsError,
+    userInteractionInProgress,
 }: PlainProps) => (
     <OrgUnitFetcher orgUnitId={orgUnitId}>
         <TopBar
@@ -76,13 +77,13 @@ export const EnrollmentEditEventPageComponent = ({
             eventDate={eventDate}
             teiId={teiId}
             pageStatus={pageStatus}
+            isUserInteractionInProgress={userInteractionInProgress}
         />
         <EnrollmentPageLayout
             pageLayout={pageLayout}
             currentPage={mode === EnrollmentPageKeys.EDIT_EVENT ? EnrollmentPageKeys.EDIT_EVENT : EnrollmentPageKeys.VIEW_EVENT}
             availableWidgets={WidgetsForEnrollmentEventEdit}
-            userInteractionInProgress={mode === EnrollmentPageKeys.EDIT_EVENT}
-            trackedEntityName={trackedEntityName}
+            userInteractionInProgress={userInteractionInProgress}
             onBackToMainPage={onBackToMainPage}
             onBackToDashboard={onBackToDashboard}
             onBackToViewEvent={onBackToViewEvent}

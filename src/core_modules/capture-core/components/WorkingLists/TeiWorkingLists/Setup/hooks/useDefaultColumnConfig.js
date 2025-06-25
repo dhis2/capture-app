@@ -8,10 +8,12 @@ import type { MainColumnConfig, MetadataColumnConfig, TeiWorkingListsColumnConfi
 const getMainConfig = (hasDisplayInReportsAttributes: boolean): Array<MainColumnConfig> =>
     [
         {
-            id: 'orgUnit',
+            id: 'programOwnerId',
             visible: false,
             type: dataElementTypes.ORGANISATION_UNIT,
-            header: i18n.t('Organisation unit'),
+            header: i18n.t('Owner organisation unit'),
+            sortDisabled: true,
+            apiViewName: 'programOwner',
         },
         {
             id: 'createdAt',
@@ -53,11 +55,18 @@ const getProgramStageMainConfig = (programStage): Array<MetadataColumnConfig> =>
                     visible: true,
                     type: dataElementTypes.DATE,
                     header:
-                          programStage.stageForm.getLabel('scheduledAt') ||
-                          i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
+                        programStage.stageForm.getLabel('scheduledAt') ||
+                        i18n.t(ADDITIONAL_FILTERS_LABELS.scheduledAt),
                 },
             ]
             : []),
+        {
+            id: ADDITIONAL_FILTERS.orgUnit,
+            visible: true,
+            type: dataElementTypes.ORGANISATION_UNIT,
+            header: ADDITIONAL_FILTERS_LABELS.orgUnit,
+            apiViewName: 'eventOrgUnit',
+        },
         ...(programStage.enableUserAssignment
             ? [
                 {
@@ -90,6 +99,7 @@ const getTEIMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string
         options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
         multiValueFilter: !!optionSet || type === dataElementTypes.BOOLEAN,
         filterHidden: !(orgUnitId || searchable || unique),
+        unique: Boolean(unique),
     }));
 
 const getDataValuesMetaDataConfig = (dataElements): Array<MetadataColumnConfig> =>

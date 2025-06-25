@@ -10,16 +10,27 @@ import type { QuerySingleResource } from '../../utils/api';
 const displayNameCache = {};
 const maxBatchSize = 50;
 
+const fields = 'id,displayName,ancestors[id,displayName]';
+const resource = 'organisationUnits';
+
 const displayNamesQuery = {
     organisationUnits: {
-        resource: 'organisationUnits',
+        resource,
         params: ({ filter }) => ({
-            fields: 'id,displayName,ancestors[id,displayName]',
+            fields,
             filter: `id:in:[${filter}]`,
             pageSize: maxBatchSize,
         }),
     },
 };
+
+const displayNameQuery = (orgUnitId: string) => ({
+    resource,
+    id: orgUnitId,
+    params: {
+        fields,
+    },
+});
 
 const updateCacheWithOrgUnits = (organisationUnits) => {
     organisationUnits.forEach(({ id, displayName, ancestors }) => {
@@ -69,13 +80,13 @@ const createBatches = (orgUnitIds: Array<string>): Array<Array<string>> => {
     return batches;
 };
 
-const getAncestors = (orgUnitId) => {
-    const orgUnit = displayNameCache[orgUnitId];
+const getAncestors = (orgUnitId, property) => {
+    const orgUnit = orgUnitId && displayNameCache[orgUnitId];
 
     if (!orgUnit) return [];
 
-    const ancestors = getAncestors(orgUnit.ancestor);
-    ancestors.push(orgUnit.displayName);
+    const ancestors = getAncestors(orgUnit.ancestor, property);
+    ancestors.push(property === 'id' ? orgUnitId : orgUnit[property]);
 
     return ancestors;
 };
@@ -189,7 +200,7 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     const { orgUnit: fetchedOrgUnit, error } = useOrganisationUnit(fetchId, 'displayName,ancestors[id,displayName]');
 
     if (orgUnitId && cachedOrgUnit) {
-        const ancestors = getAncestors(cachedOrgUnit.ancestor);
+        const ancestors = getAncestors(cachedOrgUnit.ancestor, 'displayName');
 
         return {
             displayName: cachedOrgUnit.displayName,
@@ -208,6 +219,17 @@ export const useOrgUnitNameWithAncestors = (orgUnitId: ?string): {
     }
 
     return { error };
+};
+
+export const getAncestorIds = async (orgUnitId: string, querySingleResource: QuerySingleResource) => {
+    const cachedOrgUnit = displayNameCache[orgUnitId];
+    if (cachedOrgUnit) {
+        return getAncestors(cachedOrgUnit.ancestor, 'id');
+    }
+
+    const apiOrgUnit = await querySingleResource(displayNameQuery(orgUnitId));
+    updateCacheWithOrgUnits([apiOrgUnit]);
+    return getAncestors(displayNameCache[orgUnitId].ancestor, 'id');
 };
 
 export const getCachedOrgUnitName = (orgUnitId: string): ?string => displayNameCache[orgUnitId]?.displayName;

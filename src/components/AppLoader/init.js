@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
+import type { ServerVersion } from '@dhis2/app-runtime';
 import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
@@ -9,9 +10,9 @@ import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocale
 
 import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
-import { initControllersAsync } from 'capture-core/storageControllers';
+import { initStorageControllers } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
-import { rulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
+import { initRulesEngine } from '../../core_modules/capture-core/rules/rulesEngine';
 
 function setLogLevel() {
     const levels = {
@@ -130,41 +131,65 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function, m
 }
 
 async function initializeSystemSettingsAsync(
-    uiLocale: string,
-    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, },
+    systemSettings: { dateFormat: string, serverTimeZoneId: string, calendar: string, baseUrl: string },
+    userSettings: { uiLocale: string, captureScope: Array<{ id: string }>, searchScope: Array<{id: string}> },
 ) {
-    const systemSettingsCacheData = await cacheSystemSettings(uiLocale, systemSettings);
+    const systemSettingsCacheData = await cacheSystemSettings(systemSettings, userSettings);
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
-export async function initializeAsync(
+export async function initializeAsync({
+    onCacheExpired,
+    querySingleResource,
+    serverVersion,
+    baseUrl,
+}: {
     onCacheExpired: Function,
-    onQueryApi: Function,
-    minorServerVersion: number,
-) {
+    querySingleResource: Function,
+    serverVersion: ServerVersion,
+    baseUrl: string,
+}) {
     setLogLevel();
 
-    const userSettings = await onQueryApi({
-        resource: 'userSettings',
-    });
-    const currentUser = await onQueryApi({
+    const {
+        id: currentUserId,
+        userRoles,
+        organisationUnits: captureScope,
+        teiSearchOrganisationUnits: searchScope,
+        settings: userSettings,
+    } = await querySingleResource({
         resource: 'me',
         params: {
-            fields: 'id,userRoles',
+            fields: 'id,userRoles,organisationUnits,teiSearchOrganisationUnits,settings',
         },
     });
-    rulesEngine.setSelectedUserRoles(currentUser.userRoles.map(({ id }) => id));
 
-    const systemSettings = await onQueryApi({
+    const systemSettings = await querySingleResource({
         resource: 'system/info',
         params: {
             fields: 'dateFormat,serverTimeZoneId,calendar',
         },
     });
 
+    // initialize rule engine
+    let ruleEngineSettings;
+    try {
+        ruleEngineSettings = await querySingleResource({
+            resource: 'dataStore/capture/ruleEngine',
+        });
+    } catch {
+        ruleEngineSettings = { version: 'default' };
+    }
+    initRulesEngine(ruleEngineSettings.version, userRoles);
+
     // initialize storage controllers
     try {
-        await initControllersAsync(onCacheExpired, currentUser);
+        await initStorageControllers({
+            onCacheExpired,
+            currentUserId,
+            serverVersion,
+            baseUrl,
+        });
     } catch (error) {
         throw new DisplayException(i18n.t(
             'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
@@ -175,10 +200,9 @@ export async function initializeAsync(
     const uiLocale = userSettings.keyUiLocale;
     const dbLocale = userSettings.keyDbLocale;
     await setLocaleDataAsync(uiLocale);
-
     // initialize system settings
-    await initializeSystemSettingsAsync(uiLocale, systemSettings);
+    await initializeSystemSettingsAsync({ ...systemSettings, baseUrl }, { uiLocale, captureScope, searchScope });
 
     // initialize metadata
-    await initializeMetaDataAsync(dbLocale, onQueryApi, minorServerVersion);
+    await initializeMetaDataAsync(dbLocale, querySingleResource, serverVersion.minor);
 }

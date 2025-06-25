@@ -79,7 +79,6 @@ Feature: The user interacts with the widgets on the enrollment dashboard
   Scenario: You can delete a tracked entity from the profile widget
     Given you add a new tracked entity in the Malaria focus investigation program
     When the user clicks the "Enrollment dashboard" breadcrumb item
-    Then the user should see the confirm dialog
     When you open the overflow menu and click the "Delete Focus area" button
     Then you see the delete tracked entity confirmation modal
     When you confirm by clicking the "Yes, delete Focus area" button
@@ -120,8 +119,8 @@ Feature: The user interacts with the widgets on the enrollment dashboard
   Scenario: User can add note on enrollment dashboard page
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     Then the stages and events should be loaded
-    When you fill in the note: new test enrollment note
-    Then list should contain the new note: new test enrollment note
+    When you fill in the note: enrollment note
+    Then list should contain the new note: enrollment note
 
   Scenario: The program rules are triggered and the effects are displayed in the sidebar widgets
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE

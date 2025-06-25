@@ -86,12 +86,6 @@ Feature: User uses the ScopeSelector to navigate
     Then new event page url is valid
     And you can see the new event page
 
-  Scenario: New event page > Selecting org unit while program is preselected
-    Given you land on a new event page with preselected program
-    When you select org unit
-    Then new event page url is valid
-    And you can see the new event page
-
   Scenario: New event page > Url with invalid program id
     Given you land on a new event page with an invalid program id
     Then you should see error message
@@ -125,12 +119,11 @@ Feature: User uses the ScopeSelector to navigate
     When you remove the program selection
     Then you should be taken to the main page with only org unit selected
 
-  Scenario: View event page > Removing the org unit selection after you navigated to the page
+  Scenario: View event page > Removing the org unit selection is not possible
     Given you are in the main page with no selections made
     And you select both org unit and program Malaria case registration
-    And you select the first entity from the table
-    When you remove the org unit selection
-    Then you should be taken to the main page with only program selected
+    When you select the first entity from the table
+    Then you can not remove the org unit selection
 
   Scenario: View event page > Url with invalid event id
     Given you land on a view event page with an invalid id

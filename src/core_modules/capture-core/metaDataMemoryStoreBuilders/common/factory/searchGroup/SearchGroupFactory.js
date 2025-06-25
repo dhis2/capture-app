@@ -12,7 +12,7 @@ import {
 import type {
     CachedAttributeTranslation,
     CachedTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import { OptionSetFactory } from '../optionSet';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 
@@ -77,6 +77,7 @@ export class SearchGroupFactory {
                 id,
                 translations,
                 displayName,
+                displayFormName,
                 displayShortName,
                 description,
                 unique,
@@ -94,7 +95,7 @@ export class SearchGroupFactory {
 
             o.formName =
               this._getAttributeTranslation(translations, translationPropertyNames.NAME)
-              || displayName;
+              || displayFormName;
 
             o.description =
               this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)

@@ -36,6 +36,10 @@ export type Props = {|
    scheduleDate?: ?string,
    serverScheduleDate?: ?string,
    suggestedScheduleDate?: ?string,
+   expiryPeriod?: {
+      expiryPeriodType: ?string,
+      expiryDays: ?number,
+   },
    setScheduledOrgUnit: (orgUnit: ?{
       id: string,
       name: string,
@@ -58,5 +62,13 @@ export type Props = {|
    onAddNote: (note: string) => void,
    onResetCategoryOption: (categoryId: string) => void,
    onClickCategoryOption: (optionId: string, categoryId: string) => void,
-   ...CssClasses
+   validation?: ?{
+      error: boolean,
+      validationText: string,
+    },
+    setValidation: (validation: {
+      error: boolean,
+      validationText: string,
+    }) => void,
+    ...CssClasses
 |};

@@ -10,7 +10,7 @@ import { withDataEntryNotesHandler } from '../../../../DataEntry/dataEntryNotes/
 import { Notes } from '../../../../Notes/Notes.component';
 import { withDataEntryRelationshipsHandler } from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import { Relationships } from '../../../../Relationships/Relationships.component';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from './fieldValidators';
 import { type RenderFoundation } from '../../../../../metaData';
 import { withMainButton } from './withMainButton';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
@@ -32,7 +32,9 @@ import {
     withFilterProps,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
-    orientations, SingleSelectField,
+    orientations,
+    SingleSelectField,
+    SingleOrgUnitSelectField,
 } from '../../../../FormFields/New';
 import { Assignee } from './Assignee';
 
@@ -134,6 +136,8 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
     ...componentProps,
 });
 
+const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
@@ -162,12 +166,13 @@ const buildReportDateSettingsFn = () => {
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
+            orientation: getOrientation(props.formHorizontal),
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
             calendarType: systemSettingsStore.get().calendar,
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => 'occurredAt',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: (props: Object) => getEventDateValidatorContainers(props),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -175,6 +180,46 @@ const buildReportDateSettingsFn = () => {
     };
 
     return reportDateSettings;
+};
+
+const buildOrgUnitSettingsFn = () => {
+    const orgUnitComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(SingleOrgUnitSelectField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+    const orgUnitSettings = {
+        getComponent: () => orgUnitComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: i18n.t('Organisation unit'),
+            required: true,
+        }),
+        getPropName: () => 'orgUnit',
+        getValidatorContainers: () => getOrgUnitValidatorContainers(),
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        }),
+    };
+
+    return orgUnitSettings;
 };
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
@@ -214,9 +259,6 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
         ),
     ),
 );
-
-const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
-
 
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: Object) => {
@@ -467,7 +509,8 @@ const AOCField = withAOCFieldBuilder({})(
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AOCField);
 const NoteField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(NoteField);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
+const OrgUnitField = withDataEntryField(buildOrgUnitSettingsFn())(GeometryField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(OrgUnitField);
 const FeedbackOutput = withFeedbackOutput()(ReportDateField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
@@ -480,6 +523,7 @@ const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(Save
 type Props = {
     formFoundation: RenderFoundation,
     programName: string,
+    orgUnitId: string,
     orgUnit: OrgUnit,
     orgUnitName: string,
     stageName: string,
@@ -589,10 +633,11 @@ class NewEventDataEntry extends Component<Props> {
 
         return (
             <span>
-                {
-                    i18n.t('Saving to {{programName}} in {{orgUnitName}}',
+                {orgUnitName
+                    ? i18n.t('Saving to {{programName}} in {{orgUnitName}}',
                         { orgUnitName, programName, interpolation: { escapeValue: false } })
-                }
+                    : i18n.t('Saving to {{programName}}',
+                        { programName, interpolation: { escapeValue: false } })}
             </span>
         );
     }
@@ -634,7 +679,7 @@ class NewEventDataEntry extends Component<Props> {
                         onUpdateDataEntryField={onUpdateDataEntryField(orgUnit)}
                         onUpdateFormField={onUpdateField(orgUnit)}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField(orgUnit)}
-                        selectedOrgUnitId={orgUnit.id}
+                        selectedOrgUnitId={orgUnit?.id}
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={this.dataEntrySections}

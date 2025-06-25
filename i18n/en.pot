@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-05T15:09:44.608Z\n"
-"PO-Revision-Date: 2025-03-05T15:09:44.608Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"PO-Revision-Date: 2025-06-17T08:51:07.987Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -24,16 +24,26 @@ msgstr ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. "
-"Currently, the Capture App only supports running one version concurrently "
-"(in the same domain). Please refresh this page if you would like to use "
-"this version again, but be aware that this will close other versions."
-msgstr ""
-"You opened another version of the Capture App in the same domain. "
-"Currently, the Capture App only supports running one version concurrently "
-"(in the same domain). Please refresh this page if you would like to use "
-"this version again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
+msgstr "Please refresh the page (Either the server or the app version changed)"
+
+msgid "Bulk data entry"
+msgstr "Bulk data entry"
+
+msgid "Program overview"
+msgstr "Program overview"
+
+msgid "Active enrollments"
+msgstr "Active enrollments"
+
+msgid "Completed enrollments"
+msgstr "Completed enrollments"
+
+msgid "Cancelled enrollments"
+msgstr "Cancelled enrollments"
+
+msgid "Search"
+msgstr "Search"
 
 msgid "Enrollment dashboard"
 msgstr "Enrollment dashboard"
@@ -46,24 +56,6 @@ msgstr "Edit event"
 
 msgid "New event"
 msgstr "New event"
-
-msgid "Active enrollments"
-msgstr "Active enrollments"
-
-msgid "Completed enrollments"
-msgstr "Completed enrollments"
-
-msgid "Cancelled enrollments"
-msgstr "Cancelled enrollments"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} list"
-
-msgid "Search"
-msgstr "Search"
-
-msgid "Working List"
-msgstr "Working List"
 
 msgid "Event list"
 msgstr "Event list"
@@ -143,6 +135,13 @@ msgstr "Enrollment"
 msgid "Complete event"
 msgstr "Complete event"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+
 msgid "A value is required"
 msgstr "A value is required"
 
@@ -206,6 +205,9 @@ msgstr "Assignee"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{programName}} in {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr "Saving to {{programName}}"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -231,6 +233,9 @@ msgstr "Completed"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Please add or cancel the note before saving the event"
+
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -607,18 +612,6 @@ msgstr "Notice"
 msgid "Close the notice"
 msgstr "Close the notice"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "Program with id \"{{programId}}\" does not exist"
-
-msgid "An error occurred while fetching enrollments. Please enter a valid url."
-msgstr "An error occurred while fetching enrollments. Please enter a valid url."
-
 msgid "No feedback for this enrollment yet"
 msgstr "No feedback for this enrollment yet"
 
@@ -696,6 +689,18 @@ msgstr "Create a new event in this program."
 
 msgid "View working list in this program."
 msgstr "View working list in this program."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Tracked entity instance with id \"{{teiId}}\" does not exist"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Program with id \"{{programId}}\" does not exist"
+
+msgid "An error occurred while fetching enrollments. Please enter a valid url."
+msgstr "An error occurred while fetching enrollments. Please enter a valid url."
 
 msgid "Page is missing required values from URL"
 msgstr "Page is missing required values from URL"
@@ -955,6 +960,12 @@ msgstr "Add relationship"
 msgid "No results found for "
 msgstr "No results found for "
 
+msgid "Choose an organisation unit in the form below"
+msgstr "Choose an organisation unit in the form below"
+
+msgid "None selected"
+msgstr "None selected"
+
 msgid "Choose an organisation unit"
 msgstr "Choose an organisation unit"
 
@@ -1003,6 +1014,9 @@ msgid ""
 msgstr ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
+
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr "No searchable attributes for {{trackedEntityName}}"
 
 msgid "Search in all programs"
 msgstr "Search in all programs"
@@ -1113,6 +1127,12 @@ msgid ""
 msgstr ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
+
+msgid "Unsaved changes"
+msgstr "Unsaved changes"
+
+msgid "Continue data entry"
+msgstr "Continue data entry"
 
 msgid "Enrollment actions"
 msgstr "Enrollment actions"
@@ -1244,9 +1264,6 @@ msgstr "Add coordinates"
 msgid "Add area"
 msgstr "Add area"
 
-msgid "Please provide an valid organisation unit"
-msgstr "Please provide an valid organisation unit"
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
 
@@ -1330,10 +1347,18 @@ msgid_plural "The scheduled date is {{count}} days {{position}} the suggested da
 msgstr[0] "The scheduled date is {{count}} day {{position}} the suggested date."
 msgstr[1] "The scheduled date is {{count}} days {{position}} the suggested date."
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgid_plural "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[0] "There are {{count}} scheduled event in {{orgUnitName}} on this day."
-msgstr[1] "There are {{count}} scheduled events in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgid_plural ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgstr[0] ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
+msgstr[1] ""
+"There are {{count}} scheduled events in this program in {{orgUnitName}} on "
+"this day."
 
 msgid "Schedule date / Due date"
 msgstr "Schedule date / Due date"
@@ -1356,14 +1381,15 @@ msgstr "Program or stage is invalid"
 msgid "Save note"
 msgstr "Save note"
 
+msgid "Edit {{trackedEntityName}}"
+msgstr "Edit {{trackedEntityName}}"
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 msgstr ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 
 msgid " Loading..."
 msgstr " Loading..."
@@ -1716,6 +1742,9 @@ msgstr "Delete events"
 
 msgid "This cannot be undone. Are you sure you want to delete the selected events?"
 msgstr "This cannot be undone. Are you sure you want to delete the selected events?"
+
+msgid "Owner organisation unit"
+msgstr "Owner organisation unit"
 
 msgid "Registration Date"
 msgstr "Registration Date"

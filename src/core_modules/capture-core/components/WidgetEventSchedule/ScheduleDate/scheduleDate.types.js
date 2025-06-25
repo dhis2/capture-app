@@ -1,6 +1,5 @@
 // @flow
 
-
 export type Props = {|
     stageId: string,
     programId: string,
@@ -15,5 +14,17 @@ export type Props = {|
     serverSuggestedScheduleDate?: ?string,
     hideDueDate?: boolean,
     orgUnit: { id: string, name: string },
+    expiryPeriod?: {
+        expiryPeriodType: ?string,
+        expiryDays: ?number,
+    },
+    validation?: ?{
+        error: boolean,
+        validationText: string,
+    },
+    setValidation: (validation: {
+        error: boolean,
+        validationText: string,
+    }) => void,
     ...CssClasses,
 |};

@@ -112,7 +112,7 @@ When('you select the first entity from the table', () => {
 });
 
 Then('you can see the view event page', () => {
-    cy.url().should('include', 'viewEvent?viewEventId');
+    cy.url().should('include', 'viewEventId');
 });
 
 Given('you land on a main page with an invalid program id', () => {
@@ -131,7 +131,7 @@ Then('you should see error message', () => {
 });
 
 Given('you land on a view event page from the url', () => {
-    cy.visit('/#/viewEvent?viewEventId=a969f7a3bf1');
+    cy.visit('/#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=a969f7a3bf1');
 });
 
 Given('you are in the new event page with no selections made', () => {
@@ -158,11 +158,6 @@ Given('you land on a new event page with an invalid org unit id', () => {
 Given('you land on a new event page with preselected org unit', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8');
 });
-
-Given('you land on a new event page with preselected program', () => {
-    cy.visit('/#/new?programId=VBqh0ynB2wv');
-});
-
 
 Then('new event page url is valid', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=DiszpKrYNg8&programId=VBqh0ynB2wv`);
@@ -194,9 +189,9 @@ When('you remove the program selection', () => {
         .click();
 });
 
-When('you remove the org unit selection', () => {
+When('you can not remove the org unit selection', () => {
     cy.get('[data-test="org-unit-selector-container-clear-icon"]')
-        .click();
+        .should('not.exist');
 });
 
 Then('you should be taken to the main page with only org unit selected', () => {
@@ -208,7 +203,7 @@ Then('you should be taken to the main page with only program selected', () => {
 });
 
 Given('you land on a view event page with an invalid id', () => {
-    cy.visit('/#/viewEvent?viewEventId=invalid');
+    cy.visit('/#/viewEvent?orgUnitId=DiszpKrYNg8&viewEventId=invalid');
 });
 
 When('you click the find button', () => {

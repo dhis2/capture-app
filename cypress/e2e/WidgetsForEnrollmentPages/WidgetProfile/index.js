@@ -24,7 +24,7 @@ Then(/^the user sees the edit profile modal/, () =>
     cy.get('[data-test="modal-edit-profile"]').within(() => {
         cy.contains('Edit Person').should('exist');
         cy.contains(
-            'Change information about this Person here. To change information about this enrollment, use the Edit button in the in the Enrollment box on this dashboard',
+            'Change information about this Person here. Information about this enrollment can be edited in the Enrollment widget.',
         ).should('exist');
         cy.contains('Save changes').should('exist');
         cy.contains('Cancel without saving').should('exist');
@@ -43,6 +43,8 @@ Given('you add a new tracked entity in the Malaria focus investigation program',
 });
 
 When('you open the overflow menu and click the "Delete Focus area" button', () => {
+    cy.get('[data-test=profile-widget]').contains('Focus area profile');
+
     cy.get('[data-test="widget-profile-overflow-menu"]')
         .click();
     cy.contains('Delete Focus area')

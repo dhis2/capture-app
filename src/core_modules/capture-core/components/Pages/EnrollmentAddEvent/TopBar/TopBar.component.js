@@ -34,7 +34,8 @@ export const EnrollmentAddEventTopBar = ({
             onResetOrgUnitId={() => onResetOrgUnitId()}
             isUserInteractionInProgress={userInteractionInProgress}
             onStartAgain={() => reset()}
-            isReadOnly
+            isReadOnlyOrgUnit
+            orgUnitTooltip
         >
             <SingleLockedSelect
                 displayOnly

@@ -234,7 +234,7 @@ When('you open the column selector', () => {
 
 When('you select the organisation unit and save from the column selector', () => {
     cy.get('aside[role="dialog"]')
-        .contains('Organisation unit')
+        .contains('Owner organisation unit')
         .parents('tr')
         .find('input[type="checkbox"]')
         .click();
@@ -246,7 +246,7 @@ When('you select the organisation unit and save from the column selector', () =>
 
 Then('the organisation unit should display in the list', () => {
     cy.get('[data-test="online-list-table"]')
-        .contains('Organisation unit')
+        .contains('Owner organisation unit')
         .should('exist');
 });
 

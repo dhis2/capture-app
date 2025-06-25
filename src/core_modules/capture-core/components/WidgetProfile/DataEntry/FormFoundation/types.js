@@ -47,7 +47,7 @@ export type TrackedEntityAttribute = {
     displayName: string,
     displayShortName: string,
     displayFormName: string,
-    description: string,
+    displayDescription: string,
     translations: Array<Translation>,
     valueType: string,
     optionSetValue: boolean,

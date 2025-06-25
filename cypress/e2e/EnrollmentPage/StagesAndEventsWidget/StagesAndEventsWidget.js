@@ -1,40 +1,33 @@
 import { Given, When, Then, defineStep as And, After } from '@badeball/cypress-cucumber-preprocessor';
+import moment from 'moment';
 import { getCurrentYear } from '../../../support/date';
 import '../sharedSteps';
 
 After({ tags: '@with-restore-deleted-event' }, () => {
-    cy.visit('#/enrollment?enrollmentId=ITyaPVATEwc&orgUnitId=DiszpKrYNg8&programId=ur1Edk5Oe2n&teiId=wsk89u7zquT');
-
-    cy.get('[data-test="stages-and-events-widget"]')
-        .find('[data-test="widget-contents"]')
-        .contains('[data-test="stage-content"]', 'TB visit')
-        .find('[data-test="create-new-button"]')
-        .click();
-
-    cy.get('input[type="text"]')
-        .first()
-        .type('2023-01-26')
-        .blur();
-
-    cy.get('[data-test="single-select-input"]')
-        .eq(0)
-        .click();
-
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
-        .contains('P+')
-        .click();
-
-    cy.get('[data-test="single-select-input"]')
-        .eq(1)
-        .click();
-
-    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
-        .contains('New')
-        .click();
-
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Save without completing')
-        .click();
+    cy.buildApiUrl('tracker?async=false')
+        .then((trackerUrl) => {
+            const events = {
+                events: [
+                    {
+                        orgUnit: 'DiszpKrYNg8',
+                        occurredAt: moment().format('YYYY-MM-DD'),
+                        status: 'ACTIVE',
+                        program: 'ur1Edk5Oe2n',
+                        programStage: 'ZkbAXlQUYJG',
+                        trackedEntity: 'wsk89u7zquT',
+                        enrollment: 'ITyaPVATEwc',
+                        dataValues: [
+                            { dataElement: 'D7m8vpzxHDJ', value: 'P+' },
+                            { dataElement: 'HmkXnHJxcD1', value: 'New' },
+                        ],
+                    },
+                ],
+            };
+            cy.request('POST', trackerUrl, events);
+        })
+        .then(() => {
+            cy.reload();
+        });
 });
 
 Then('the program stages should be displayed', () => {

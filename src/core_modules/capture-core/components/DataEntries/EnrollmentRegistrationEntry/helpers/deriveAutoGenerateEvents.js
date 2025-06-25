@@ -40,10 +40,17 @@ export const deriveAutoGenerateEvents = ({
         .map(
             ({
                 id: programStage,
+                reportDateToUse,
                 generatedByEnrollmentDate: generateScheduleDateByEnrollmentDate,
                 openAfterEnrollment,
                 minDaysFromStart,
             }) => {
+                const reportDateByKey: {| enrollmentDate: string, incidentDate: string |} = {
+                    enrollmentDate: enrolledAt,
+                    incidentDate: sanitizedOccurredAt,
+                };
+                const reportDate = reportDateToUse && reportDateByKey[reportDateToUse];
+
                 const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate
                     ? enrolledAt
                     : sanitizedOccurredAt;
@@ -62,11 +69,13 @@ export const deriveAutoGenerateEvents = ({
                 return {
                     ...eventAttributeCategoryOptions,
                     status: 'SCHEDULE',
+                    occurredAt: reportDate,
                     scheduledAt,
                     event: generateUID(),
                     programStage,
                     program: programId,
                     orgUnit: orgUnitId,
+                    ...(openAfterEnrollment && reportDate ? { occurredAt: reportDate } : {}),
                 };
             },
         );

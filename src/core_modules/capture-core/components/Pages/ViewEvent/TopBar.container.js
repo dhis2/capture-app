@@ -5,6 +5,8 @@ import {
     ScopeSelector,
     useResetViewEventId,
     useReset,
+    useSetOrgUnitId,
+    useResetOrgUnitId,
 } from '../../ScopeSelector';
 import {
     setCategoryOption,
@@ -18,7 +20,7 @@ type TopBarProps = {
     programId?: string,
     orgUnitId?: string,
     selectedCategories?: any,
-    isReadOnly: boolean,
+    editEventMode?: boolean,
     formIsOpen: boolean,
 };
 
@@ -26,12 +28,14 @@ export const TopBar = ({
     programId,
     orgUnitId,
     selectedCategories,
-    isReadOnly,
     isUserInteractionInProgress,
+    editEventMode,
     formIsOpen,
 }: TopBarProps) => {
     const dispatch = useDispatch();
     const { resetViewEventId } = useResetViewEventId();
+    const { setOrgUnitId } = useSetOrgUnitId();
+    const { resetOrgUnitId } = useResetOrgUnitId();
     const { reset } = useReset();
     const dispatchOnSetCategoryOption = useCallback(
         (categoryOption: Object, categoryId: string) => {
@@ -57,14 +61,16 @@ export const TopBar = ({
             selectedOrgUnitId={orgUnitId}
             selectedCategories={selectedCategories}
             onResetProgramId={() => resetViewEventId('/', { orgUnitId })}
-            onResetOrgUnitId={() => resetViewEventId('/', { programId })}
+            onSetOrgUnit={id => setOrgUnitId(id)}
+            onResetOrgUnitId={() => resetOrgUnitId()}
             onSetCategoryOption={dispatchOnSetCategoryOption}
             onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
             onResetCategoryOption={dispatchOnResetCategoryOption}
             isUserInteractionInProgress={isUserInteractionInProgress}
             formIsOpen={formIsOpen}
             onStartAgain={() => reset()}
-            isReadOnly={isReadOnly}
+            isReadOnlyOrgUnit
+            orgUnitTooltip={editEventMode}
         >
             <TopBarActions
                 selectedProgramId={programId}

@@ -1,17 +1,18 @@
 # 
 # Translators:
-# Ulanbek Abakirov <ulans@mail.ru>, 2020
 # Wanda <wanda@frontlineaids.org>, 2021
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
 # Yury Rogachev <yury@dhis2.org>, 2025
+# Nadiia <semchuk@aph.org.ua>, 2025
+# Ulanbek Abakirov <ulans@mail.ru>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
+"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,16 +36,26 @@ msgstr ""
 "Возможные причины: браузер или выбранный режим (например: инкогнито) не "
 "поддерживается. Смотреть детали в лог-файле."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
-"Вы открыли другую версию приложения Capture в том же домене. В настоящее "
-"время приложение Capture поддерживает одновременную работу только одной "
-"версии в том же самом домене. Обновите эту страницу, если вы хотите "
-"использовать эту версию, но имейте в виду, что другие версии будут закрыты."
+
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Активные регистрационные записи"
+
+msgid "Completed enrollments"
+msgstr "Завершенные регистрационные записи"
+
+msgid "Cancelled enrollments"
+msgstr "Отмененные регистрационные записи"
+
+msgid "Search"
+msgstr "Поиск"
 
 msgid "Enrollment dashboard"
 msgstr "Регистрационная инфопанель"
@@ -57,24 +68,6 @@ msgstr "Редактировать событие"
 
 msgid "New event"
 msgstr "Новое событие"
-
-msgid "Active enrollments"
-msgstr "Активные регистрационные записи"
-
-msgid "Completed enrollments"
-msgstr "Завершенные регистрационные записи"
-
-msgid "Cancelled enrollments"
-msgstr "Отмененные регистрационные записи"
-
-msgid "{{trackedEntityName}} list"
-msgstr "Список: {{trackedEntityName}} "
-
-msgid "Search"
-msgstr "Поиск"
-
-msgid "Working List"
-msgstr " Рабочий список"
 
 msgid "Event list"
 msgstr ""
@@ -113,10 +106,10 @@ msgid "Last updated"
 msgstr "Последнее обновление"
 
 msgid "Lat"
-msgstr ""
+msgstr "Широта"
 
 msgid "Long"
-msgstr ""
+msgstr "Долгота"
 
 msgid "lat"
 msgstr ""
@@ -218,6 +211,9 @@ msgstr "Назначенный пользователь"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "{{programName}}: Сохранение в {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -242,6 +238,9 @@ msgid "Completed"
 msgstr "Завершен/а/о"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -624,22 +623,6 @@ msgstr "Заметка"
 msgid "Close the notice"
 msgstr "Закрыть заметку"
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
-"Регистрационная запись с идентификатором \"{{enrollmentId}}\" не существует"
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr "Отслеживаемый объект с идентификатором \"{{teiId}}\" не существует"
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr "Программа с идентификатором \"{{programId}}\" не существует"
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-"При получении регистрационных записей произошла ошибка. Пожалуйста, введите "
-"правильный URL адрес."
-
 msgid "No feedback for this enrollment yet"
 msgstr "Комментариев для данной регистрационной записи нет"
 
@@ -724,6 +707,22 @@ msgstr "Создать новое событие в данной програм�
 
 msgid "View working list in this program."
 msgstr "Просмотреть рабочий список в данной программе."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+"Регистрационная запись с идентификатором \"{{enrollmentId}}\" не существует"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Отслеживаемый объект с идентификатором \"{{teiId}}\" не существует"
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr "Программа с идентификатором \"{{programId}}\" не существует"
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
+msgstr ""
+"При получении регистрационных записей произошла ошибка. Пожалуйста, введите "
+"правильный URL адрес."
 
 msgid "Page is missing required values from URL"
 msgstr "Страница не содержит необходимых данных в URL адресе"
@@ -943,6 +942,12 @@ msgstr[1] "Заполните как минимум {{count}} атрибута/�
 msgstr[2] "Заполните как минимум {{count}} атрибутов для поиска."
 msgstr[3] "Заполните как минимум {{count}} атрибутов для поиска."
 
+msgid "Missing search criteria"
+msgstr "Критерии поиска отсутствуют"
+
+msgid "Back to search"
+msgstr "Назад к поиску"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr "Не удалось получить метаданные. Повторите попытку позже."
 
@@ -973,8 +978,8 @@ msgstr "Добавить связь"
 msgid "No results found for "
 msgstr "Не найдено результатов для "
 
-msgid "Choose an organisation unit"
-msgstr "Выбрать организационную единицу"
+msgid "Choose an organisation unit in the form below"
+msgstr ""
 
 msgid "Clear selection"
 msgstr "Очистить выбор"
@@ -1024,6 +1029,9 @@ msgstr ""
 "Нужных результаты не найдены? Попробуйте выполнить поиск по всем программам,"
 " использующим тип "
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "Искать во всех программах"
 
@@ -1053,9 +1061,6 @@ msgid ""
 "looking for."
 msgstr "Вы можете изменить параметры и перезапустить поиск "
 
-msgid "Back to search"
-msgstr "Назад к поиску"
-
 msgid "An error has occurred"
 msgstr "Произошла ошибка"
 
@@ -1064,9 +1069,6 @@ msgstr "Слишком много результатов"
 
 msgid "Cannot search in all programs"
 msgstr "Невозможно выполнить поиск во всех программах"
-
-msgid "Missing search criteria"
-msgstr "Критерии поиска отсутствуют"
 
 msgid "Results found"
 msgstr "Найдены результаты"
@@ -1141,6 +1143,12 @@ msgid ""
 msgstr ""
 "Вы должны указать причину проверки регистрационных записей в данной "
 "защищенной программе. Все действия будут регистрироваться."
+
+msgid "Unsaved changes"
+msgstr "Не сохраненные изменения"
+
+msgid "Continue data entry"
+msgstr ""
 
 msgid "Enrollment actions"
 msgstr "Действия с регистрационной записью"
@@ -1278,9 +1286,6 @@ msgstr "Добавить координаты"
 msgid "Add area"
 msgstr "Добавить участок"
 
-msgid "Please provide an valid organisation unit"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 "не удалось загрузить организационную единицу. Повторите попытку позже."
@@ -1379,21 +1384,16 @@ msgstr[2] ""
 msgstr[3] ""
 "Запланированная дата - {{count}} дней {{position}} предложенной даты."
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgstr[0] ""
-"В данный день - {{count}} запланированное событие в организационной единице "
-"{{orgUnitName}}."
 msgstr[1] ""
-"В данный день - {{count}} запланированное/ых событие/й/я в организационной "
-"единице {{orgUnitName}}."
 msgstr[2] ""
-"В данный день - {{count}} запланированных события/й в организационной "
-"единице {{orgUnitName}}."
 msgstr[3] ""
-"В данный день - {{count}} запланированных события/й в организационной "
-"единице {{orgUnitName}}."
 
 msgid "Schedule date / Due date"
 msgstr "Запланированная дата / Дата выполнения"
@@ -1416,14 +1416,13 @@ msgstr ""
 msgid "Save note"
 msgstr "Сохранить заметку"
 
-msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+msgid "Edit {{trackedEntityName}}"
 msgstr ""
-"Изменить информацию об объекте {{trackedEntityName}} здесь. Чтобы изменить "
-"данные регистрационной записи, воспользуйтесь кнопкой \"Изменить\" в поле "
-"\"Регистрационная запись\" на данной панели."
+
+msgid ""
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
+msgstr ""
 
 msgid " Loading..."
 msgstr "Загрузка..."
@@ -1757,7 +1756,7 @@ msgid "Details (Advanced)"
 msgstr ""
 
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Произошла неизвестная ошибка."
 
 msgid "An error occurred while completing events"
 msgstr ""
@@ -1773,6 +1772,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"

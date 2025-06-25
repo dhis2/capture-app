@@ -1,6 +1,13 @@
 import { rulesEngineEffectTargetDataTypes, variableSourceTypes } from '@dhis2/rules-engine-javascript';
-import { rulesEngine } from '../rulesEngine';
+import { ruleEngine } from '../rulesEngine';
 import { systemSettingsStore } from '../../metaDataMemoryStores';
+
+const groups = [
+    { id: 'CXw2yu5fodb', name: 'CHC', code: 'CHC' },
+    { id: 'oRVt7g429ZO', name: 'Public facilities', code: 'Public facilities' },
+];
+
+systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD' });
 
 describe('Event Event rules engine', () => {
     // these variables are shared between each test
@@ -61,6 +68,7 @@ describe('Event Event rules engine', () => {
         {
             id: 'Z92dJO9gIje',
             dataElementId: 'sWoqcoByYmD',
+            valueType: 'BOOLEAN',
             displayName: 'womanSmoking',
             programId: 'lxAQ7Zs9VYR',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
@@ -69,13 +77,14 @@ describe('Event Event rules engine', () => {
         {
             id: 'omrL0gtPpDL',
             dataElementId: 'vANAXwtLwcT',
+            valueType: 'NUMBER',
             displayName: 'hemoglobin',
             programId: 'lxAQ7Zs9VYR',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
             useNameForOptionSet: true,
         },
     ];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
 
     describe.each([
@@ -113,7 +122,7 @@ describe('Event Event rules engine', () => {
         ],
     ])('where value needs to >= 9 and <= 99', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
+            const rulesEffects = ruleEngine().getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -151,7 +160,7 @@ describe('Event Event rules engine', () => {
         ],
     ])('where field is hidden regarding a boolean value', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
+            const rulesEffects = ruleEngine().getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -221,6 +230,7 @@ describe('Event rules engine', () => {
         {
             id: 'RycV5uDi66i',
             dataElementId: 'qrur9Dvnyt5',
+            valueType: 'INTEGER',
             displayName: 'age',
             programId: 'eBAyeGv0exc',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
@@ -229,6 +239,7 @@ describe('Event rules engine', () => {
         {
             id: 'zINGRka3g9N',
             dataElementId: 'oZg33kd9taw',
+            valueType: 'TEXT',
             displayName: 'gender',
             programId: 'eBAyeGv0exc',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
@@ -239,6 +250,7 @@ describe('Event rules engine', () => {
             displayName: 'Zj7UnCAulEk.vV9UWAZohSf',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'vV9UWAZohSf',
+            valueType: 'INTEGER_POSITIVE',
             programId: 'eBAyeGv0exc',
         },
         {
@@ -246,6 +258,7 @@ describe('Event rules engine', () => {
             displayName: 'Zj7UnCAulEk.GieVkTxp4HH',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'GieVkTxp4HH',
+            valueType: 'NUMBER',
             programId: 'eBAyeGv0exc',
         },
         {
@@ -253,17 +266,21 @@ describe('Event rules engine', () => {
             displayName: 'Zj7UnCAulEk.GieVkTxp4HH',
             programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_CURRENT_EVENT,
             dataElementId: 'GieVkTxp4HH',
+            valueType: 'NUMBER',
             programId: 'eBAyeGv0exc',
         },
     ];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {
         pC3N9N77UmT: {
             id: 'pC3N9N77UmT',
             displayName: 'Gender',
             version: 0,
             valueType: 'TEXT',
-            options: undefined,
+            options: [
+                { id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] },
+                { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] },
+            ],
         },
     };
 
@@ -272,7 +289,7 @@ describe('Event rules engine', () => {
             { oZg33kd9taw: 'Female', SWfdB5lX0fk: null },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -283,7 +300,7 @@ describe('Event rules engine', () => {
             [
                 { id: 'SWfdB5lX0fk', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' },
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -293,7 +310,7 @@ describe('Event rules engine', () => {
             { oZg33kd9taw: null, SWfdB5lX0fk: null },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -301,7 +318,7 @@ describe('Event rules engine', () => {
         ],
     ])('where field is hidden regarding the gender of the event', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
+            const rulesEffects = ruleEngine().getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -318,7 +335,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: null, GieVkTxp4HH: null, vV9UWAZohSf: null },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -328,7 +345,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: null, GieVkTxp4HH: null, vV9UWAZohSf: 85 },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'Infinity' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -348,7 +365,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: null, GieVkTxp4HH: 180, vV9UWAZohSf: 85 },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.234567901234566' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.23456790123457' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -358,7 +375,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: 40, GieVkTxp4HH: null, vV9UWAZohSf: null },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'NaN' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -368,7 +385,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: 40, GieVkTxp4HH: null, vV9UWAZohSf: 85 },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 'Infinity' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -388,7 +405,7 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: 40, GieVkTxp4HH: 180, vV9UWAZohSf: 85 },
             [
                 {
-                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.234567901234566' },
+                    displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: '26.23456790123457' },
                     id: 'indicators',
                     type: 'DISPLAYKEYVALUEPAIR',
                 },
@@ -396,7 +413,7 @@ describe('Event rules engine', () => {
         ],
     ])('where BMI is calculated', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
+            const rulesEffects = ruleEngine().getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -781,7 +798,7 @@ describe('Event rules engine', () => {
             useNameForOptionSet: false,
         },
     ];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {
         L6eMZDJkCwX: {
             id: 'L6eMZDJkCwX',
@@ -1616,7 +1633,7 @@ describe('Event rules engine', () => {
         ],
     ])('where different fields are hidden', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
+            const rulesEffects = ruleEngine().getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -1672,7 +1689,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     id: 'SYAL0GIDnxI',
                     displayContent: 'display age = ',
-                    data: 'd2:hasValue(#{age}) && #{age}',
+                    data: '#{age}',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -1686,7 +1703,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     id: 'JXssEpbJdO2',
                     displayContent: 'd2:right(#{age}, 3) = ',
-                    data: 'd2:hasValue(#{age}) && d2:right(#{age}, 3)',
+                    data: 'd2:right(#{age}, 3)',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -1700,7 +1717,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     id: 'k07KnI11Sf4',
                     displayContent: 'd2:left(#{age}, 3) = ',
-                    data: 'd2:hasValue(#{age}) && d2:left(#{age}, 3)',
+                    data: 'd2:left(#{age}, 3)',
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
@@ -1830,20 +1847,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     location: 'feedback',
                     programRuleActionType: 'DISPLAYTEXT',
                 },
-                {
-                    id: 'enZhulwjMED',
-                    displayContent: "d2:condition('1 == 2', 'equal', 'not equal') = ",
-                    data: "d2:condition('1 == 2', 'equal', 'not equal')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
-                {
-                    id: 'i2UOFxZJo4a',
-                    displayContent: "d2:condition('2 == 2', 'equal', 'not equal') = ",
-                    data: "d2:condition('2 == 2', 'equal', 'not equal')",
-                    location: 'feedback',
-                    programRuleActionType: 'DISPLAYTEXT',
-                },
             ],
         },
     ];
@@ -1886,7 +1889,7 @@ describe('Event rules engine effects with functions and effects', () => {
             programId: 'eBAyeGv0exc',
         },
     ];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', code: 'OU_559' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', code: 'OU_559', groups };
     const optionSets = {
         pC3N9N77UmT: {
             id: 'pC3N9N77UmT',
@@ -1909,11 +1912,6 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = " },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
                     displayText: { id: 'vQCRnX6w9pM', message: 'd2:oizp( -10000000 ) = 0' },
                 },
                 { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'SYAL0GIDnxI', message: 'display age =  ' } },
@@ -1926,11 +1924,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
                     displayText: { id: 'JXssEpbJdO2', message: 'd2:right(#{age}, 3) =  ' },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'o0LLNIYsliy', message: "d2:monthsBetween( '2020-01-28', V{event_date}) =  " },
                 },
                 {
                     type: 'DISPLAYTEXT',
@@ -1974,11 +1967,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
                     displayText: { id: 'QpeF2WDjwIV', message: "d2:addDays( '2020-01-12', 5 ) =  2020-01-17" },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'WJTjezLR4cJ', message: "d2:weeksBetween('2020-01-28', V{event_date} ) =  " },
                 },
                 {
                     type: 'DISPLAYTEXT',
@@ -2031,17 +2019,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  ' },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
+                    displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  false' },
                 },
             ],
         ],
@@ -2183,16 +2161,6 @@ describe('Event rules engine effects with functions and effects', () => {
                     id: 'feedback',
                     displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  true' },
                 },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
-                },
             ],
         ],
         [
@@ -2333,21 +2301,11 @@ describe('Event rules engine effects with functions and effects', () => {
                     id: 'feedback',
                     displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  true' },
                 },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'enZhulwjMED', message: "d2:condition('1 == 2', 'equal', 'not equal') =  not equal" },
-                },
-                {
-                    type: 'DISPLAYTEXT',
-                    id: 'feedback',
-                    displayText: { id: 'i2UOFxZJo4a', message: "d2:condition('2 == 2', 'equal', 'not equal') =  equal" },
-                },
             ],
         ],
     ])('where functions take place', (currentEvent, expected) => {
         test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
+            const rulesEffects = ruleEngine().getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -2428,14 +2386,14 @@ describe('Event rules engine effects with functions and effects', () => {
         },
     ];
     const programRuleVariables = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
     const currentEvent = {};
 
     describe('where z-score take place', () => {
         test('with given values', () => {
             // when
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
+            const rulesEffects = ruleEngine().getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -2463,7 +2421,7 @@ describe('Event rules engine effects with functions and effects', () => {
                 {
                     type: 'DISPLAYTEXT',
                     id: 'feedback',
-                    displayText: { id: 'QJlZHo0GoVK', message: "d2:zScoreWFH( 100, 20, 'F' )  =  2.84" },
+                    displayText: { id: 'QJlZHo0GoVK', message: "d2:zScoreWFH( 100, 20, 'F' )  =  3" },
                 },
                 {
                     type: 'DISPLAYTEXT',
@@ -2489,7 +2447,7 @@ describe('Event rules engine', () => {
         qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'NUMBER' },
     };
     const programRuleVariables = [];
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {};
     const currentEvent = {};
 
@@ -2602,7 +2560,7 @@ describe('Event rules engine', () => {
         ],
     ])('where assign actions are triggered', (programRules, expected) => {
         test(`with given value(s): ${JSON.stringify(programRules)}`, () => {
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
+            const rulesEffects = ruleEngine().getProgramRuleEffects({
                 programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
                 dataElements: dataElementsInProgram,
@@ -2646,7 +2604,7 @@ describe('Assign effects', () => {
         hyur9Dvnyt5: { id: 'hyur9Dvnyt5', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
         ght5r9Dnyt5: { id: 'ght5r9Dnyt5', valueType: 'MULTI_TEXT', optionSetId: 'pC3N9N77UmT' },
     };
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', groups };
     const optionSets = {
         pC3N9N77UmT: {
             id: 'pC3N9N77UmT',
@@ -2830,9 +2788,9 @@ describe('Assign effects', () => {
             },
         ];
         const programRuleVariables = [];
-        systemSettingsStore.set({ dateFormat: 'YYYY-MM-DD' });
+
         // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
+        const rulesEffects = ruleEngine().getProgramRuleEffects({
             programRulesContainer: { programRuleVariables, programRules, constants },
             currentEvent,
             dataElements: dataElementsInProgram,
@@ -2846,12 +2804,6 @@ describe('Assign effects', () => {
             { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: '10', targetDataType: 'dataElement' },
             { type: 'ASSIGN', id: 'oZg33kd9taw', value: 'false', targetDataType: 'dataElement' },
             { type: 'ASSIGN', id: 'oZ3fhkd9taw', value: '', targetDataType: 'dataElement' },
-            {
-                id: 'hrur9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: 'false',
-            },
             {
                 id: 'g67r9Dvnyt5',
                 targetDataType: 'dataElement',
@@ -2874,13 +2826,7 @@ describe('Assign effects', () => {
                 id: 'lowr9Dvnyt5',
                 targetDataType: 'dataElement',
                 type: 'ASSIGN',
-                value: 34535353,
-            },
-            {
-                id: 'kht29Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: false,
+                value: '34535353',
             },
             {
                 id: 'hyrt9Dvnyt5',
@@ -2893,15 +2839,9 @@ describe('Assign effects', () => {
                 targetDataType: 'dataElement',
                 type: 'ASSIGN',
                 value: {
-                    date: 'Invalid date',
-                    time: 'Invalid date',
+                    date: '1985-01-01',
+                    time: '00:00',
                 },
-            },
-            {
-                id: 'sldkjfjfjfe',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: false,
             },
             {
                 id: 'kyt49Dvnyt5',
@@ -2946,12 +2886,6 @@ describe('Assign effects', () => {
                 value: 'Female,Male',
             },
             {
-                id: 'plor9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: '',
-            },
-            {
                 id: 'frg39Dvnyt5',
                 targetDataType: 'dataElement',
                 type: 'ASSIGN',
@@ -2960,84 +2894,6 @@ describe('Assign effects', () => {
                     longitude: 434,
                 },
             },
-            {
-                id: 'kjyu9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: '',
-            },
-            {
-                id: 'kjfr9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: {
-                    date: 'Invalid date',
-                    days: 'NaN',
-                    months: 'NaN',
-                    years: 'NaN',
-                },
-            },
-            {
-                id: 'lqwr9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: false,
-            },
-            {
-                id: 'mjus9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: '',
-            },
-            {
-                id: 'fgrr9Dvnyt5',
-                targetDataType: 'dataElement',
-                type: 'ASSIGN',
-                value: '',
-            },
-        ]);
-    });
-
-    test('Assign effect with the program rule variable id found in the content key', () => {
-        const programRules = [
-            {
-                id: 'cq1dwUY4lVU',
-                condition: 'true',
-                displayName: 'testing assign actions',
-                programId: 'eBAyeGv0exc',
-                programRuleActions: [
-                    {
-                        id: 'lJOYxhjupx2',
-                        data: 'rowExpresion',
-                        dataElementId: 'qrur9Dvnyt5',
-                        programRuleActionType: 'ASSIGN',
-                        content: 'Hemoglobin value lower than normal RycV5uDi66i',
-                    },
-                ],
-            },
-        ];
-        const programRuleVariables = [
-            {
-                id: 'RycV5uDi66i',
-                dataElementId: 'qrur9Dvnyt5',
-                displayName: 'age',
-                programId: 'eBAyeGv0exc',
-                programRuleVariableSourceType: variableSourceTypes.DATAELEMENT_NEWEST_EVENT_PROGRAM,
-                useNameForOptionSet: true,
-            },
-        ];
-        // when
-        const rulesEffects = rulesEngine.getProgramRuleEffects({
-            programRulesContainer: { programRuleVariables, programRules, constants },
-            currentEvent,
-            dataElements: dataElementsInProgram,
-            selectedOrgUnit: orgUnit,
-            optionSets,
-        });
-
-        // then
-        expect(rulesEffects).toEqual([
-            { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: 'false', targetDataType: 'dataElement' },
         ]);
     });
 });

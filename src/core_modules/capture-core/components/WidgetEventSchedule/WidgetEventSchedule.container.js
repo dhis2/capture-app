@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
@@ -21,6 +21,7 @@ import { NoAccess } from './AccessVerification';
 import { useCategoryCombinations } from '../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { pipe } from '../../../capture-core-utils';
+import { useProgramExpiryForUser } from '../../hooks';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -49,6 +50,8 @@ export const WidgetEventSchedule = ({
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [scheduledOrgUnit, setScheduledOrgUnit] = useState();
+    const [validation, setValidation] = useState();
+    const isFirstRender = useRef(true);
     useEffect(() => {
         if (initialOrgUnitId && orgUnitName) {
             const orgUnit = { id: initialOrgUnitId, name: orgUnitName };
@@ -56,23 +59,31 @@ export const WidgetEventSchedule = ({
         }
     }, [orgUnitName, initialOrgUnitId]);
     const [isFormValid, setIsFormValid] = useState(false);
-    const convertFn = pipe(convertFormToClient, convertClientToServer);
-    const serverScheduleDate = convertFn(scheduleDate, dataElementTypes.DATE);
-    const serverSuggestedScheduleDate = convertFn(suggestedScheduleDate, dataElementTypes.DATE);
+    const convertScheduleDate = (date, validationResult = { error: false }) => {
+        if (!date || validationResult?.error) {
+            return '';
+        }
+        return pipe(convertFormToClient, convertClientToServer)(date, dataElementTypes.DATE);
+    };
+    const serverScheduleDate = convertScheduleDate(scheduleDate, validation);
+    const serverSuggestedScheduleDate = convertScheduleDate(suggestedScheduleDate);
     const [notes, setNotes] = useState([]);
     const [assignee, setAssignee] = useState(storedAssignee);
     const { eventId } = useLocationQuery();
     const selectedOrgUnitId = scheduledOrgUnit?.id || initialOrgUnitId;
-    const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate);
-    const eventCountInOrgUnit = events
-        .filter(event => moment(event.scheduledAt).format('YYYY-MM-DD') === serverScheduleDate).length;
+    const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate, programId);
+    const eventCountInOrgUnit = events.length;
     const [selectedCategories, setSelectedCategories] = useState({});
     const [categoryOptionsError, setCategoryOptionsError] = useState();
     const { programCategory } = useCategoryCombinations(programId);
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     useEffect(() => {
-        if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
-    }, [suggestedScheduleDate, scheduleDate]);
+        if (isFirstRender.current && !scheduleDate && suggestedScheduleDate) {
+            setScheduleDate(suggestedScheduleDate);
+            isFirstRender.current = false;
+        }
+    }, [scheduleDate, suggestedScheduleDate]);
 
     useEffect(() => {
         setAssignee(storedAssignee);
@@ -191,10 +202,12 @@ export const WidgetEventSchedule = ({
             displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
             suggestedScheduleDate={suggestedScheduleDate}
             serverSuggestedScheduleDate={serverSuggestedScheduleDate}
+            validation={validation}
             onCancel={onCancel}
             setScheduleDate={setScheduleDate}
             setScheduledOrgUnit={setScheduledOrgUnit}
             setIsFormValid={setIsFormValid}
+            setValidation={setValidation}
             onSchedule={onHandleSchedule}
             onAddNote={onAddNote}
             eventCountInOrgUnit={eventCountInOrgUnit}
@@ -205,6 +218,7 @@ export const WidgetEventSchedule = ({
             onClickCategoryOption={onClickCategoryOption}
             onResetCategoryOption={onResetCategoryOption}
             onSetAssignee={onSetAssignee}
+            expiryPeriod={expiryPeriod}
             {...passOnProps}
         />
     );

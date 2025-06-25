@@ -23,7 +23,10 @@ export const ChangelogComponent = ({
     isOpen,
     close,
     records,
+    loading,
     pager,
+    defaultPage,
+    defaultPageSize,
     columnToSortBy,
     setColumnToSortBy,
     attributeToFilterBy,
@@ -65,37 +68,34 @@ export const ChangelogComponent = ({
                     entityType={entityType}
                     supportsChangelogV2={supportsChangelogV2}
                 />
-                {records && records.length > 0 ? (
-                    <DataTableBody dataTest={'changelog-data-table-body'}>
-                        {records.map(record => (
+                <DataTableBody dataTest={'changelog-data-table-body'} loading={loading}>
+                    {records && records.length > 0 ? (
+                        records.map(record => (
                             <ChangelogTableRow key={record.reactKey} record={record} />
-                        ))}
-                    </DataTableBody>
-                ) : (
-                    <DataTableBody>
+                        ))
+                    ) : (
                         <DataTableRow>
-                            <DataTableCell align={'center'} colSpan="4">
+                            <DataTableCell align={'center'} colSpan="5">
                                 {i18n.t('No changes to display')}
                             </DataTableCell>
                         </DataTableRow>
-                    </DataTableBody>
-                )}
-                {pager && (
-                    <DataTableFoot>
-                        <DataTableRow>
-                            <DataTableCell colSpan="5">
-                                <Pagination
-                                    page={pager.page}
-                                    pageSize={pager.pageSize}
-                                    onPageChange={setPage}
-                                    onPageSizeChange={setPageSize}
-                                    isLastPage={!pager.nextPage}
-                                    dataTest={'changelog-pagination'}
-                                />
-                            </DataTableCell>
-                        </DataTableRow>
-                    </DataTableFoot>
-                )}
+                    )}
+                </DataTableBody>
+                <DataTableFoot>
+                    <DataTableRow>
+                        <DataTableCell colSpan="5">
+                            <Pagination
+                                page={pager?.page ?? defaultPage}
+                                pageSize={pager?.pageSize ?? defaultPageSize}
+                                onPageChange={setPage}
+                                onPageSizeChange={setPageSize}
+                                isLastPage={!pager?.nextPage}
+                                dataTest={'changelog-pagination'}
+                                disabled={loading}
+                            />
+                        </DataTableCell>
+                    </DataTableRow>
+                </DataTableFoot>
             </DataTable>
         </ModalContent>
 

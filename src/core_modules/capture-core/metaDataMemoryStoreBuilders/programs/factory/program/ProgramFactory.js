@@ -1,6 +1,8 @@
 // @flow
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import {
     EventProgram,
     TrackerProgram,
@@ -8,8 +10,7 @@ import {
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
-import { getUserStorageController } from '../../../../storageControllers';
-import { userStores } from '../../../../storageControllers/stores';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import { SearchGroupFactory } from '../../../common/factory';
 import { buildIcon } from '../../../common/helpers';
 import { EnrollmentFactory } from '../enrollment';
@@ -31,7 +32,7 @@ import type
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
     CachedProgramTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 
 export class ProgramFactory {
     programStageFactory: ProgramStageFactory;
@@ -138,6 +139,14 @@ export class ProgramFactory {
                 o.categoryCombination = this._buildCategoryCombination(cachedProgram.categoryCombo);
             });
             const d2Stage = cachedProgram.programStages && cachedProgram.programStages[0];
+
+            // Future: would be a good idea to use Zod here for schema validatons
+            if (!d2Stage) {
+                log.error(
+                    errorCreator('Invalid event program (program stage is missing)')(
+                        { program: cachedProgram }));
+                return null;
+            }
             program.stage =
                 await this.programStageFactory.build(
                     d2Stage,
@@ -175,7 +184,7 @@ export class ProgramFactory {
 
             program.enrollment = await this.enrollmentFactory.build(cachedProgram, program.searchGroups);
         }
-        program.organisationUnits = (await getUserStorageController().get(userStores.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
+        program.organisationUnits = (await getUserMetadataStorageController().get(USER_METADATA_STORES.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
         program.icon = buildIcon(cachedProgram.style);
         program.displayFrontPageList = cachedProgram.displayFrontPageList;
         program.onlyEnrollOnce = cachedProgram.onlyEnrollOnce;

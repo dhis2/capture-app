@@ -56,7 +56,7 @@ export const CompleteModal = ({
     const onHandleCompleteEnrollmentAndEvents = useCallback(() => {
         const nowClient = fromClientDate(new Date());
         const nowServer = new Date(nowClient.getServerZonedISOString());
-        const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+        const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
         const eventsToComplete = events.reduce((acc, event) => {
             const { access } = programStages.find(p => p.id === event.programStage) || {};
             const isCurrentEvent = eventId && event.event === eventId;

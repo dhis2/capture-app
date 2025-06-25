@@ -146,7 +146,7 @@ export const EnrollmentPageDefault = () => {
     const onUpdateEventStatus = useCallback((eventId: string, status: string) => {
         const nowClient = fromClientDate(new Date());
         const nowServer = new Date(nowClient.getServerZonedISOString());
-        const updatedAt = moment(nowServer).format('YYYY-MM-DDTHH:mm:ss');
+        const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
 
         dispatch(updateEnrollmentEventStatus(eventId, status, updatedAt));
     }, [dispatch, fromClientDate]);
@@ -207,7 +207,6 @@ export const EnrollmentPageDefault = () => {
             onDeleteTrackedEntitySuccess={onDeleteTrackedEntitySuccess}
             onViewAll={onViewAll}
             onBackToMainPage={onBackToMainPage}
-            trackedEntityName={program.trackedEntityType.name}
             onCreateNew={onCreateNew}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}

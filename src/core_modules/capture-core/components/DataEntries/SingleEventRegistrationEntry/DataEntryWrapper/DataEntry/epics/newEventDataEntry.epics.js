@@ -1,9 +1,8 @@
 // @flow
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
-import { map, filter, switchMap } from 'rxjs/operators';
+import { map, filter, concatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { type OrgUnit } from '@dhis2/rules-engine-javascript';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
@@ -40,6 +39,7 @@ import { newPageActionTypes } from '../../../../../Pages/New/NewPage.actions';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
 import { validateAssignEffects } from '../../../../../../rules';
 import type { QuerySingleResource } from '../../../../../../utils/api';
+import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../../../metadataRetrieval/coreOrgUnit';
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>
     action$.pipe(
@@ -129,7 +129,6 @@ const runRulesForNewSingleEvent = async ({
     dataEntryId,
     itemId,
     uid,
-    orgUnit,
     fieldData,
     querySingleResource,
 }: {
@@ -137,7 +136,6 @@ const runRulesForNewSingleEvent = async ({
     dataEntryId: string,
     itemId: string,
     uid: string,
-    orgUnit: OrgUnit,
     fieldData?: ?FieldData,
     querySingleResource: QuerySingleResource,
 }) => {
@@ -153,9 +151,13 @@ const runRulesForNewSingleEvent = async ({
     const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
     const currentEvent = { ...currentEventValues, ...currentEventMainData, programStageId };
 
+    const { coreOrgUnit, cached } =
+        // $FlowFixMe
+        await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
+
     const effects = getApplicableRuleEffectsForEventProgram({
         program,
-        orgUnit,
+        orgUnit: coreOrgUnit,
         currentEvent,
     });
 
@@ -168,6 +170,7 @@ const runRulesForNewSingleEvent = async ({
     return batchActions([
         updateRulesEffects(effectsWithValidations, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+        ...(coreOrgUnit && !cached ? [orgUnitFetched(coreOrgUnit)] : []),
     ],
     batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
     );
@@ -182,14 +185,13 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
-        switchMap((action) => {
-            const { dataEntryId, itemId, uid, orgUnit } = action.payload;
+        concatMap((action) => {
+            const { dataEntryId, itemId, uid } = action.payload;
             const runRulesForNewSingleEventPromise = runRulesForNewSingleEvent({
                 store,
                 dataEntryId,
                 itemId,
                 uid,
-                orgUnit,
                 querySingleResource,
             });
             return from(runRulesForNewSingleEventPromise);
@@ -204,8 +206,8 @@ export const runRulesOnUpdateFieldForSingleEventEpic = (
         ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
-        switchMap((action) => {
-            const { dataEntryId, itemId, uid, orgUnit, elementId, value, uiState } = action.payload;
+        concatMap((action) => {
+            const { dataEntryId, itemId, uid, elementId, value, uiState } = action.payload;
             const fieldData: FieldData = {
                 elementId,
                 value,
@@ -216,7 +218,6 @@ export const runRulesOnUpdateFieldForSingleEventEpic = (
                 dataEntryId,
                 itemId,
                 uid,
-                orgUnit,
                 fieldData,
                 querySingleResource,
             });

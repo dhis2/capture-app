@@ -7,6 +7,11 @@ type ValidationOptions = {
     errorCode?: ?string,
 };
 
+type ValidationProps = {|
+    error: boolean,
+    validationText: string,
+|};
+
 type Props = {
     value: ?Object,
     width: number,
@@ -24,6 +29,7 @@ type Props = {
     dateFormat: ?string,
     calendarType: ?string,
     locale?: string,
+    validation?: ?ValidationProps,
 };
 
 type Validation = {|
@@ -59,7 +65,7 @@ export class DateField extends React.Component<Props, State> {
 
     render() {
         const {
-            width,
+            width = '100%',
             maxWidth,
             calendarWidth,
             inputWidth,
@@ -69,15 +75,16 @@ export class DateField extends React.Component<Props, State> {
             calendarType,
             dateFormat,
             locale,
+            validation,
         } = this.props;
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
         const calendar = calendarType || 'gregory';
         const format = dateFormat || 'YYYY-MM-DD';
-        const errorProps = innerMessage && innerMessage.messageType === 'error'
+        const errorProps = validation || (innerMessage && innerMessage.messageType === 'error'
             ? { error: !!innerMessage.message?.dateInnerErrorMessage,
                 validationText: innerMessage.message?.dateInnerErrorMessage }
-            : {};
+            : {});
 
         return (
             <div
