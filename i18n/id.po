@@ -6,16 +6,16 @@
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2024
-# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2024
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2025
 # Philip Larsen Donnelly, 2025
+# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2025\n"
+"Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2025\n"
 "Language-Team: Indonesian (https://app.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,6 +42,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "Search"
+msgstr "Pencarian"
+
 msgid "Enrollment dashboard"
 msgstr ""
 
@@ -53,24 +71,6 @@ msgstr "Sunting even"
 
 msgid "New event"
 msgstr "Event baru"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "Pencarian"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -213,6 +213,9 @@ msgstr "penerima tugas"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Simpan ke {{programName}} pada {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -236,6 +239,9 @@ msgid "Completed"
 msgstr "Selesai"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -1112,6 +1118,12 @@ msgid ""
 "program. All activity will be logged."
 msgstr ""
 
+msgid "Unsaved changes"
+msgstr "Perubahan belum disimpan"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Tindakan pendaftaran"
 
@@ -1234,9 +1246,6 @@ msgid "Add coordinates"
 msgstr ""
 
 msgid "Add area"
-msgstr ""
-
-msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."

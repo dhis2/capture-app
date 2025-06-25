@@ -3,6 +3,10 @@ export type ApiDataFilterText = {|
     like: string,
 |};
 
+export type ApiDataFilterTextUnique = {|
+    eq: string,
+|};
+
 export type ApiDataFilterNumeric = {|
     ge?: ?string,
     le?: ?string,
@@ -58,6 +62,7 @@ export type ApiTrackerQueryCriteria = {|
 
 export type ApiDataFilter = (
     | ApiDataFilterText
+    | ApiDataFilterTextUnique
     | ApiDataFilterNumeric
     | ApiDataFilterBoolean
     | ApiDataFilterTrueOnly

@@ -172,7 +172,7 @@ const buildReportDateSettingsFn = () => {
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => 'occurredAt',
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: (props: Object) => getEventDateValidatorContainers(props),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,

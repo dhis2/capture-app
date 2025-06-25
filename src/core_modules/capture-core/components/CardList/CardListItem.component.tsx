@@ -17,13 +17,13 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 type OwnProps = {
-    readonly item: ListItem,
-    readonly currentSearchScopeName?: string,
-    readonly currentProgramId?: string,
-    readonly currentSearchScopeType?: string,
-    readonly renderCustomCardActions?: RenderCustomCardActions,
-    readonly profileImageDataElement: CardProfileImageElementInformation | null,
-    readonly dataElements: CardDataElementsInformation,
+    item: ListItem,
+    currentSearchScopeName?: string,
+    currentProgramId?: string,
+    currentSearchScopeType?: string,
+    renderCustomCardActions?: RenderCustomCardActions,
+    profileImageDataElement: CardProfileImageElementInformation | null,
+    dataElements: CardDataElementsInformation,
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -165,37 +165,37 @@ const CardListItemIndex = ({
 
     const renderTag = (): React.ReactNode => {
         switch (enrollmentType) {
-        case enrollmentTypes.ACTIVE:
-            return (
-                <Tag
-                    dataTest="dhis2-uicore-tag"
-                    positive
-                    icon={
-                        <span className={classes.checkIcon}>
-                            <IconCheckmark16 />
-                        </span>
-                    }
-                >
-                    {i18n.t('Enrolled')}
-                </Tag>
-            );
-        case enrollmentTypes.CANCELLED:
-        case enrollmentTypes.COMPLETED:
-            return (
-                <Tag
-                    dataTest="dhis2-uicore-tag"
-                    neutral
-                    icon={
-                        <span className={classes.checkIcon}>
-                            <IconCheckmark16 />
-                        </span>
-                    }
-                >
-                    {i18n.t('Previously enrolled')}
-                </Tag>
-            );
-        default:
-            return null;
+            case enrollmentTypes.ACTIVE:
+                return (
+                    <Tag
+                        dataTest="dhis2-uicore-tag"
+                        positive
+                        icon={
+                            <span className={classes.checkIcon}>
+                                <IconCheckmark16 />
+                            </span>
+                        }
+                    >
+                        {i18n.t('Enrolled')}
+                    </Tag>
+                );
+            case enrollmentTypes.CANCELLED:
+            case enrollmentTypes.COMPLETED:
+                return (
+                    <Tag
+                        dataTest="dhis2-uicore-tag"
+                        neutral
+                        icon={
+                            <span className={classes.checkIcon}>
+                                <IconCheckmark16 />
+                            </span>
+                        }
+                    >
+                        {i18n.t('Previously enrolled')}
+                    </Tag>
+                );
+            default:
+                return null;
         }
     };
 

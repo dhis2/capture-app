@@ -60,7 +60,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
             >
                 <SelectorBarItem
                     label={i18n.t('Organisation unit')}
-                    noValueMessage={i18n.t(isReadOnly ? 'None selected' : 'Choose an organisation unit')}
+                    noValueMessage={isReadOnly ? i18n.t('None selected') : i18n.t('Choose an organisation unit')}
                     value={selectedOrgUnitId ? selectedOrgUnit?.name : ''}
                     open={!isReadOnly && this.state.open}
                     setOpen={open => this.setState({ open })}

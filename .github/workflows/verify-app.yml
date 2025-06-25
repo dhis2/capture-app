@@ -108,6 +108,7 @@ jobs:
 
   setup-matrix:
     runs-on: ubuntu-latest
+    if: "!(startsWith(github.event.head_commit.message, 'fix(translations)') && github.actor == 'dhis2-bot') && !contains(github.event.head_commit.message, '[skip ci]')"
     outputs:
       matrix: ${{ steps.set-matrix.outputs.specs }}
     steps:

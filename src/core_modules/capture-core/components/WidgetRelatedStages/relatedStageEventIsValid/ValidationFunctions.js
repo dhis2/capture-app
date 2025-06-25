@@ -1,36 +1,76 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
-import { isValidDate } from '../../../utils/validation/validators/form';
+import { isValidDate, isValidPeriod } from '../../../utils/validation/validators/form';
 import { relatedStageActions } from '../constants';
 
 type Props = {
     scheduledAt: ?string,
-    scheduledAtFormatError: ?{error: ?string, errorCode: ?string},
+    scheduledAtFormatError: ?{ error: ?string, errorCode: ?string },
     orgUnit: ?Object,
     linkedEventId: ?string,
     setErrorMessages: (messages: Object) => void,
+    expiryPeriod?: {
+        expiryPeriodType: ?string,
+        expiryDays: ?number,
+     },
 };
 
-export const isScheduledDateValid = (scheduledDate: ?string, scheduledAtFormatError: ?{error: ?string, errorCode: ?string}) => {
+export const isScheduledDateValid = (
+    scheduledDate: ?string,
+    scheduledAtFormatError: ?{ error: ?string, errorCode: ?string },
+    expiryPeriod?: {
+        expiryPeriodType: ?string,
+        expiryDays: ?number,
+     },
+) => {
     if (!scheduledDate) {
-        return { valid: false, errorMessage: i18n.t('Please enter a date') };
+        return { valid: false, validationText: i18n.t('Please enter a date') };
     }
-    const { valid, errorMessage } = isValidDate(scheduledDate, scheduledAtFormatError);
+
+    const dateValidation = isValidDate(scheduledDate, scheduledAtFormatError);
+    if (!dateValidation.valid) {
+        return {
+            valid: false,
+            validationText: dateValidation.errorMessage || i18n.t('Please provide a valid date'),
+        };
+    }
+
+    const { isWithinValidPeriod, firstValidDate } = isValidPeriod(scheduledDate, expiryPeriod);
+
+    if (!isWithinValidPeriod) {
+        return {
+            valid: false,
+            validationText: i18n.t('The date entered belongs to an expired period. Enter a date after {{firstValidDate}}.', {
+                firstValidDate,
+                interpolation: { escapeValue: false },
+            }),
+        };
+    }
     return {
-        valid,
-        errorMessage,
+        valid: true,
+        validationText: '',
     };
 };
 
 const scheduleInOrgUnit = (props) => {
-    const { scheduledAt, scheduledAtFormatError, orgUnit, setErrorMessages } = props ?? {};
-    const { valid: scheduledAtIsValid, errorMessage } = isScheduledDateValid(scheduledAt, scheduledAtFormatError);
+    const {
+        scheduledAt,
+        scheduledAtFormatError,
+        orgUnit,
+        setErrorMessages,
+        expiryPeriod,
+    } = props ?? {};
+    const { valid: scheduledAtIsValid, validationText } = isScheduledDateValid(
+        scheduledAt,
+        scheduledAtFormatError,
+        expiryPeriod,
+    );
     const orgUnitIsValid = isValidOrgUnit(orgUnit);
 
     if (!scheduledAtIsValid) {
         setErrorMessages({
-            scheduledAt: errorMessage,
+            scheduledAt: validationText,
         });
     } else {
         setErrorMessages({

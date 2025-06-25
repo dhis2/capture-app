@@ -12,6 +12,7 @@ import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
     ApiDataFilterText,
+    ApiDataFilterTextUnique,
     ApiDataFilterBoolean,
     ApiDataFilterDate,
     ApiDataFilterDateContents,
@@ -23,9 +24,15 @@ import { areRelativeRangeValuesSupported }
     from '../../../../../../utils/validation/validators/areRelativeRangeValuesSupported';
 import { DATE_TYPES, ASSIGNEE_MODES, MAIN_FILTERS } from '../../../constants';
 import { ADDITIONAL_FILTERS } from '../../../helpers';
+import { type DataElement } from '../../../../../../metaData';
 
-const getTextFilter = (filter: ApiDataFilterText): ?TextFilterData => {
-    const value = filter.like;
+const getTextFilter = (
+    filter: ApiDataFilterText & ApiDataFilterTextUnique,
+    dataElement?: DataElement,
+): ?TextFilterData => {
+    const value = dataElement?.unique
+        ? filter.eq ?? filter.like
+        : filter.like;
     return value ? { value } : undefined;
 };
 
@@ -185,7 +192,7 @@ const convertAttributeFilters = (
             ? // $FlowFixMe
             getOptionSetFilter(serverFilter, element.type)
             : // $FlowFixMe
-            getFilterByType[element.type](serverFilter);
+            getFilterByType[element.type](serverFilter, element);
 
         return value ? { ...acc, [serverFilter.attribute]: value } : acc;
     }, {});
