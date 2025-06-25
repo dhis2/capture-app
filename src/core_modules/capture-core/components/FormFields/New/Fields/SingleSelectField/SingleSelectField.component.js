@@ -30,7 +30,7 @@ type Props = {
 
 const SingleSelectComponent = compose(
     withStyles(styles),
-    withFocusHandler()
+    withFocusHandler(),
 )(SingleSelectFieldUI);
 
 export const SingleSelectField = (props: Props) => {
