@@ -1,3 +1,10 @@
+## [102.6.12](https://github.com/dhis2/capture-app/compare/v102.6.11...v102.6.12) (2025-06-25)
+
+
+### Bug Fixes
+
+* use 'en' as fallback in `localeCompareStrings` ([#4174](https://github.com/dhis2/capture-app/issues/4174)) ([2f222b6](https://github.com/dhis2/capture-app/commit/2f222b60a5cafad46d2de1b730515d0886232752))
+
 ## [102.6.11](https://github.com/dhis2/capture-app/compare/v102.6.10...v102.6.11) (2025-06-25)
 
 
