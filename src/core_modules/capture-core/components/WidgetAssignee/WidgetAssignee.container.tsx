@@ -24,13 +24,11 @@ const WidgetAssigneeWithHooks = (props: Props) => {
     );
 
     const onSet = useCallback(
-        async (newAssignee: Assignee | null) => {
-            if (newAssignee) {
-                const { event } = getSaveContext();
-                prevAssignee.current = assignee;
-                onSave(newAssignee);
-                await updateMutation({ ...event, assignedUser: convertClientToServer(newAssignee) });
-            }
+        async (newAssignee: Assignee) => {
+            const { event } = getSaveContext();
+            prevAssignee.current = assignee;
+            onSave(newAssignee);
+            await updateMutation({ ...event, assignedUser: convertClientToServer(newAssignee) });
         },
         [updateMutation, getSaveContext, onSave, assignee],
     );
