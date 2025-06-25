@@ -32,7 +32,7 @@ const EventWorkingListsInitHeaderPlain =
                 <span
                     className={title}
                 >
-                    {i18n.t('Registered events') as string}
+                    {i18n.t('Registered events')}
                 </span>
             </div>
             <div
