@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { dataEntryKeys } from 'capture-core/constants';
@@ -18,19 +17,19 @@ import {
 } from '../../ScopeSelector';
 import { TopBarActions } from '../../TopBarActions';
 
-type Props = {|
-    programStage: ?ProgramStage,
-    enrollmentId: string,
-    programId: ?string,
-    mode: string,
-    orgUnitId: string,
-    trackedEntityName: string,
-    teiDisplayName: string,
-    eventDate?: string,
-    enrollmentsAsOptions: Array<Object>,
-    pageStatus: string,
-    teiId: string,
-|};
+type Props = {
+    programStage?: ProgramStage | null;
+    enrollmentId: string;
+    programId?: string | null;
+    mode: string;
+    orgUnitId: string;
+    trackedEntityName: string;
+    teiDisplayName: string;
+    eventDate?: string;
+    enrollmentsAsOptions: Array<Record<string, unknown>>;
+    pageStatus: string;
+    teiId: string;
+};
 
 export const TopBar = ({
     mode,
@@ -71,7 +70,7 @@ export const TopBar = ({
             <SingleLockedSelect
                 displayOnly
                 ready={pageStatus !== pageStatuses.MISSING_DATA}
-                onClear={() => resetTeiId('/', { programId })}
+                onClear={() => resetTeiId('/', { programId: programId || undefined })}
                 options={[
                     {
                         label: teiDisplayName,
@@ -84,7 +83,7 @@ export const TopBar = ({
             />
             <SingleLockedSelect
                 ready={pageStatus !== pageStatuses.MISSING_DATA}
-                onClear={() => resetEnrollmentId('enrollment', { programId, teiId })}
+                onClear={() => resetEnrollmentId('enrollment', { programId: programId || undefined, teiId })}
                 options={enrollmentsAsOptions}
                 selectedValue={enrollmentId}
                 title={i18n.t('Enrollment')}

@@ -1,4 +1,3 @@
-// @flow
 import type {
     PageLayoutConfig,
     WidgetConfig,
@@ -13,7 +12,7 @@ import {
     RelatedStagesWorkspace,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
-export const WidgetsForEnrollmentEventEdit: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
+export const WidgetsForEnrollmentEventEdit: Readonly<{ [key: string]: WidgetConfig }> = Object.freeze({
     EditEventWorkspace,
     TwoEventWorkspace,
     RelatedStagesWorkspace,

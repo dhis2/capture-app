@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,19 +51,19 @@ import { cancelEditEventDataEntry } from '../../WidgetEventEdit/EditEventDataEnt
 import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 
-const getEventDate = (event) => {
+const getEventDate = (event: any) => {
     const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
     return eventDate;
 };
 
-const getEventScheduleDate = (event) => {
+const getEventScheduleDate = (event: any) => {
     if (!event?.scheduledAt) { return undefined; }
     const eventDataConvertValue = convertIsoToLocalCalendar(event?.scheduledAt);
     return eventDataConvertValue?.toString();
 };
 
-const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }) => {
+const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }: any) => {
     if (isLoading) {
         return pageStatuses.LOADING;
     }
@@ -80,17 +79,16 @@ export const EnrollmentEditEventPage = () => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
 
-    const eventId = useSelector(({ viewEventPage }) => viewEventPage.eventId);
-    const error = useSelector(({ activePage }) => activePage.viewEventLoadError?.error);
+    const eventId = useSelector(({ viewEventPage }: any) => viewEventPage.eventId);
+    const error = useSelector(({ activePage }: any) => activePage.viewEventLoadError?.error);
     const { loading, event } = useEvent(eventId);
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
-    const storedEvent = enrollmentSite?.events?.find(item => item.event === eventId);
+    const storedEvent = enrollmentSite?.events?.find((item: any) => item.event === eventId);
 
     useEffect(() => {
         if (!urlEventId) {
-            // return to main page
             navigate(`/?${buildUrlQueryString({ orgUnitId })}`);
         } else if (eventId !== urlEventId) {
             dispatch(changeEventFromUrl(urlEventId, pageKeys.ENROLLMENT_EVENT));
@@ -104,7 +102,6 @@ export const EnrollmentEditEventPage = () => {
             teiId={teiId}
             enrollmentId={enrollmentId}
             orgUnitId={orgUnitId}
-            error={error}
             initMode={initMode}
             enrollmentSite={enrollmentSite}
             event={storedEvent}
@@ -139,7 +136,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch]);
 
     const { program } = useProgramInfo(programId);
-    const programStage = [...program?.stages?.values() ?? []].find(item => item.id === stageId);
+    const programStage = [...program?.stages?.values() ?? []].find((item: any) => item.id === stageId);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules));
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
@@ -154,19 +151,19 @@ const EnrollmentEditEventPageWithContextPlain = ({
         navigate(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
-    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentError = (message: string) => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
-    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate) => {
+    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate: any) => {
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
     }, [dispatch]);
 
-    const onUpdateEnrollmentStatusError = useCallback((message) => {
+    const onUpdateEnrollmentStatusError = useCallback((message: string) => {
         dispatch(rollbackEnrollmentAndEvents());
         dispatch(showEnrollmentError({ message }));
     }, [dispatch]);
 
-    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
+    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }: any) => {
         dispatch(commitEnrollmentAndEvents());
         redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
@@ -179,19 +176,19 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(deleteEnrollmentEventRelationship(relationshipId));
     }, [dispatch]);
 
-    const onUpdateOrAddEnrollmentEvents = useCallback((events) => {
+    const onUpdateOrAddEnrollmentEvents = useCallback((events: any) => {
         dispatch(updateOrAddEnrollmentEvents({ events }));
     }, [dispatch]);
 
-    const onUpdateEnrollmentEventsSuccess = useCallback((events) => {
+    const onUpdateEnrollmentEventsSuccess = useCallback((events: any) => {
         dispatch(commitEnrollmentEvents({ events }));
     }, [dispatch]);
 
-    const onUpdateEnrollmentEventsError = useCallback((events) => {
+    const onUpdateEnrollmentEventsError = useCallback((events: any) => {
         dispatch(rollbackEnrollmentEvents({ events }));
     }, [dispatch]);
 
-    const onSaveAndCompleteEnrollment = useCallback((enrollmentToUpdate) => {
+    const onSaveAndCompleteEnrollment = useCallback((enrollmentToUpdate: any) => {
         dispatch(setExternalEnrollmentStatus(statusTypes.COMPLETED));
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
         navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -223,7 +220,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         );
     };
 
-    const onHandleScheduleSave = (eventData: Object) => {
+    const onHandleScheduleSave = (eventData: Record<string, unknown>) => {
         dispatch(updateEnrollmentEvent(eventId, eventData));
         navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
@@ -240,15 +237,14 @@ const EnrollmentEditEventPageWithContextPlain = ({
     };
 
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
-    // $FlowFixMe
-    const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
+    const { name: trackedEntityName, id: trackedEntityTypeId } = (program as any)?.trackedEntityType ?? {};
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
-    const eventAccess = getProgramEventAccess(programId, programStage?.id);
+    const eventAccess = getProgramEventAccess(programId, programStage?.id || null);
 
 
     const pageStatus = getPageStatus({
@@ -262,17 +258,15 @@ const EnrollmentEditEventPageWithContextPlain = ({
     });
     const assignee = useAssignee(event);
     const getAssignedUserSaveContext = useAssignedUserSaveContext(event);
-    const onSaveAssignee = (newAssignee) => {
-        // $FlowFixMe dataElementTypes flow error
-        const assignedUser: ApiAssignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
+    const onSaveAssignee = (newAssignee: any) => {
+        const assignedUser: any = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
         dispatch(setAssignee(assignedUser, newAssignee, eventId));
     };
     const onAccessLostFromTransfer = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
-    const onSaveAssigneeError = (prevAssignee) => {
-        const assignedUser: ApiAssignedUser | typeof undefined = prevAssignee
-            // $FlowFixMe dataElementTypes flow error
+    const onSaveAssigneeError = (prevAssignee: any) => {
+        const assignedUser: any = prevAssignee
             ? convertClientToServer(prevAssignee, dataElementTypes.ASSIGNEE)
             : undefined;
         dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
@@ -312,7 +306,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
             onEnrollmentError={onEnrollmentError}
             onEnrollmentSuccess={onEnrollmentSuccess}
             onUpdateEnrollmentStatus={onUpdateEnrollmentStatus}
-            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess}
+            onUpdateEnrollmentStatusSuccess={onUpdateEnrollmentStatusSuccess as any}
             onUpdateEnrollmentStatusError={onUpdateEnrollmentStatusError}
             onSaveAndCompleteEnrollment={onSaveAndCompleteEnrollment}
             eventStatus={event?.status}
