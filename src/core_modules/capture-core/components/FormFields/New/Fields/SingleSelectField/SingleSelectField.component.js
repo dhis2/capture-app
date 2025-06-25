@@ -1,7 +1,19 @@
 // @flow
 import React from 'react';
+import { compose } from 'redux';
 import { SingleSelectField as SingleSelectFieldUI, SingleSelectOption } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
 import { withFocusHandler } from './withFocusHandler';
+
+const styles = theme => ({
+    inputWrapperFocused: {
+        border: `2px solid ${theme.palette.primary.light}`,
+        borderRadius: '5px',
+    },
+    inputWrapperUnfocused: {
+        padding: 2,
+    },
+});
 
 type Props = {
     value: ?string,
@@ -16,10 +28,10 @@ type Props = {
     dataTest?: ?string,
 };
 
-const SingleSelectComponent =
-    withFocusHandler()(
-        SingleSelectFieldUI,
-    );
+const SingleSelectComponent = compose(
+    withStyles(styles),
+    withFocusHandler()
+)(SingleSelectFieldUI);
 
 export const SingleSelectField = (props: Props) => {
     const {
