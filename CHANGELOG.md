@@ -1,3 +1,10 @@
+## [102.6.11](https://github.com/dhis2/capture-app/compare/v102.6.10...v102.6.11) (2025-06-25)
+
+
+### Bug Fixes
+
+* [DHIS2-19632] Search result cards display option codes instead of names/texts ([#4147](https://github.com/dhis2/capture-app/issues/4147)) ([a799279](https://github.com/dhis2/capture-app/commit/a799279dfa2ed58aa29afe8593a0893883541921))
+
 ## [102.6.10](https://github.com/dhis2/capture-app/compare/v102.6.9...v102.6.10) (2025-06-24)
 
 
