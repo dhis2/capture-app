@@ -1,9 +1,9 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { searchPageActionTypes } from './SearchPage.actions';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { resetLocationChange } from '../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
+import type { InputObservable, ReduxStore, ApiUtils } from '../../../flow/typeDeclarations';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
@@ -16,4 +16,3 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
             });
         }),
     );
-

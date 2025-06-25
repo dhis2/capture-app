@@ -1,10 +1,16 @@
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 import { searchScopes } from '../SearchBox.constants';
-import { dataElementTypes } from '../../../metaData';
+import { dataElementTypes, OptionSet } from '../../../metaData';
 import type { AvailableSearchOption } from '../SearchBox.types';
 import type { ListItem } from '../../CardList/CardList.types';
 
-export type CardDataElementsInformation = Array<{ id: string; name: string; type: typeof dataElementTypes[keyof typeof dataElementTypes] }>;
+export type CardDataElementsInformation = Array<{
+    id: string;
+    name: string;
+    type: typeof dataElementTypes[keyof typeof dataElementTypes];
+    optionSet?: OptionSet | null;
+}>;
+
 
 export type CardProfileImageElementInformation = Readonly<{ id: string; name: string; type: 'IMAGE' }>;
 

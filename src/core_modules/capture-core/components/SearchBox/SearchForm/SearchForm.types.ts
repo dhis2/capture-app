@@ -1,11 +1,12 @@
 import type { SearchGroups } from '../SearchBox.types';
-import { dataElementTypes } from '../../../metaData';
+import { dataElementTypes, OptionSet } from '../../../metaData';
 
 export type CurrentSearchTerms = Array<{
     name: string;
     value: any;
     id: string;
     type: typeof dataElementTypes[keyof typeof dataElementTypes];
+    optionSet?: OptionSet | null;
 }>;
 
 export type FormsValues = {

@@ -29,6 +29,7 @@ type Props = {
     enrollmentsAsOptions: Array<Record<string, unknown>>;
     pageStatus: string;
     teiId: string;
+    isUserInteractionInProgress: boolean;
 };
 
 export const TopBar = ({
@@ -43,6 +44,7 @@ export const TopBar = ({
     teiId,
     eventDate,
     pageStatus,
+    isUserInteractionInProgress,
 }: Props) => {
     const { setOrgUnitId } = useSetOrgUnitId();
 
@@ -53,7 +55,6 @@ export const TopBar = ({
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
     const { reset } = useReset();
-    const isUserInteractionInProgress = mode === dataEntryKeys.EDIT;
 
     return (
         <ScopeSelector
@@ -123,7 +124,7 @@ export const TopBar = ({
             <TopBarActions
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
-                isUserInteractionInProgress={mode === dataEntryKeys.EDIT}
+                isUserInteractionInProgress={isUserInteractionInProgress}
             />
         </ScopeSelector>
     );

@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core';
 import type { Theme, WithStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
 import { convertValue } from '../../converters/clientToView';
-import { dataElementTypes } from '../../metaData';
+import { DataElement, dataElementTypes } from '../../metaData';
 
 const styles = (theme: Theme) => ({
     elementName: {
@@ -24,6 +24,7 @@ type BaseProps = {
     name: string;
     value?: string | null;
     type?: keyof typeof dataElementTypes;
+    dataElement?: DataElement;
 };
 
 type Props = BaseProps & WithStyles<typeof styles>;
@@ -33,6 +34,7 @@ const ListEntryComponent: React.FC<Props> = ({
     value,
     classes,
     type = dataElementTypes.TEXT,
+    dataElement,
 }) => {
     if (!value) {
         return null;
@@ -44,7 +46,7 @@ const ListEntryComponent: React.FC<Props> = ({
                 {name}:&nbsp;
             </span>
             <span className={classes.elementValue}>
-                {convertValue(value, type)}
+                {convertValue(value, type, dataElement)}
             </span>
         </div>
     );

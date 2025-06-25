@@ -12,18 +12,23 @@ import {
 } from '../SearchBox';
 import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
-import { dataElementTypes, getTrackerProgramThrowIfNotFound, type TrackerProgram } from '../../metaData';
+import {
+    dataElementTypes,
+    getTrackerProgramThrowIfNotFound,
+    OptionSet,
+    type TrackerProgram,
+} from '../../metaData';
 import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 type OwnProps = {
-    readonly item: ListItem,
-    readonly currentSearchScopeName?: string,
-    readonly currentProgramId?: string,
-    readonly currentSearchScopeType?: string,
-    readonly renderCustomCardActions?: RenderCustomCardActions,
-    readonly profileImageDataElement: CardProfileImageElementInformation | null,
-    readonly dataElements: CardDataElementsInformation,
+    item: ListItem,
+    currentSearchScopeName?: string,
+    currentProgramId?: string,
+    currentSearchScopeType?: string,
+    renderCustomCardActions?: RenderCustomCardActions,
+    profileImageDataElement: CardProfileImageElementInformation | null,
+    dataElements: CardDataElementsInformation,
 };
 
 type Props = OwnProps & WithStyles<typeof styles>;
@@ -224,14 +229,15 @@ const CardListItemIndex = ({
                     {renderImageDataElement(profileImageDataElement)}
                     <div>
                         {dataElements
-                            .map((dataElement: { id: string, name: string, type: string }) => {
-                                const { id, name, type } = dataElement;
+                            .map((dataElement: { id: string, name: string, type: string, optionSet: OptionSet }) => {
+                                const { id, name, type, optionSet } = dataElement;
                                 return (
                                     <ListEntry
                                         key={id}
                                         name={name}
                                         value={item.values[id] as string | undefined}
                                         type={type as keyof typeof dataElementTypes}
+                                        dataElement={{ optionSet, type }}
                                     />
                                 );
                             })
