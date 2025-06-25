@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import type { ReduxState } from '../../App/withAppUrlSync.types';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
+import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
@@ -53,7 +53,7 @@ import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 
 const getEventDate = (event: Record<string, unknown>) => {
-    const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
+    const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
     return eventDate;
 };
@@ -92,7 +92,7 @@ export const EnrollmentEditEventPage = () => {
 
     const eventId = useSelector((state: ReduxState) => state.viewEventPage.eventId);
     const error = useSelector((state: ReduxState) => (state as any).activePage.viewEventLoadError?.error);
-    const { loading, event } = useEvent(eventId || '');
+    const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
@@ -250,13 +250,13 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     const trackedEntityType = (program as Record<string, unknown>)?.trackedEntityType as { name: string; id: string } | undefined;
     const { name: trackedEntityName = '', id: trackedEntityTypeId = '' } = trackedEntityType ?? {};
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
     const dataEntryKey = `${dataEntryIds.ENROLLMENT_EVENT}-${currentPageMode}`;
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
-    const eventAccess = getProgramEventAccess(programId, programStage?.id || null);
+    const eventAccess = getProgramEventAccess(programId, programStage?.id ?? null);
 
 
     const pageStatus = getPageStatus({
