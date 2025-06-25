@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 
 import {
@@ -12,8 +11,8 @@ import {
 import { TopBarActions } from '../../TopBarActions';
 
 type TopBarProps = {
-    programId?: string,
-    orgUnitId?: string,
+    programId?: string;
+    orgUnitId?: string;
 };
 
 export const TopBar = ({ programId, orgUnitId }: TopBarProps) => {
