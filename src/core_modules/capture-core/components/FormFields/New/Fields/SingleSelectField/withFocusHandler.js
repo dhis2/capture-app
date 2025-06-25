@@ -19,12 +19,12 @@ export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>)
     class FocusHandlerHOC extends React.Component<Props> {
         handleBlur = (event: SyntheticEvent<HTMLInputElement>) => {
             this.props.onRemoveFocus();
-            this.props.onBlur && this.props.onBlur(event);
+            this.props.onBlur?.(event);
         }
 
         handleFocus = () => {
             this.props.onSetFocus();
-            this.props.onFocus && this.props.onFocus();
+            this.props.onFocus?.();
         }
 
         render() {

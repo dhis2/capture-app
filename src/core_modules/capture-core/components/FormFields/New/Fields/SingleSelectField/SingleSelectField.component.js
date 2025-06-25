@@ -37,7 +37,7 @@ export const SingleSelectField = (props: Props) => {
     } = props;
 
     const handleSelect = ({ selected }) => {
-        onBlur && onBlur(selected);
+        onBlur?.(selected);
     };
 
 
@@ -54,7 +54,7 @@ export const SingleSelectField = (props: Props) => {
             dataTest={dataTest}
             {...passOnProps}
         >
-            {options && options.map(option => (
+            {options?.map(option => (
                 <SingleSelectOption
                     key={option.value}
                     label={option.label}

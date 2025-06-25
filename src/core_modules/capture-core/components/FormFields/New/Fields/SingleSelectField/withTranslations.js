@@ -23,8 +23,8 @@ export const withSelectSingleTranslations = () => (InnerComponent: React.Compone
             const translationsWithDefaultValues = {
                 ...TranslationBuilder.defaultProps.translations,
                 ...translations,
-                clearText: translations && translations.clearText ? translations.clearText : i18n.t('Clear'),
-                noResults: translations && translations.noResults ? translations.noResults : i18n.t('No results found'),
+                clearText: translations?.clearText ? translations.clearText : i18n.t('Clear'),
+                noResults: translations?.noResults ? translations.noResults : i18n.t('No results found'),
             };
 
             return (
