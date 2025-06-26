@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState, useEffect } from 'react';
+import React, { type ComponentType, useState, useEffect, useMemo } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
@@ -8,15 +8,17 @@ import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
+import { useEnrollmentEditEventPageMode, useProgramExpiryForUser } from 'capture-core/hooks';
 import { startShowEditEventDataEntry } from '../WidgetEventEdit.actions';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
-import { getProgramEventAccess } from '../../../metaData';
+import { dataElementTypes, getProgramEventAccess } from '../../../metaData';
 import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCategoryCombinations';
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from '../constants/status.const';
 import type { PlainProps, Props } from './WidgetHeader.types';
+import { isValidPeriod } from '../../../utils/validation/validators/form';
+import { convertFormToClient } from '../../../converters';
 
 const styles = {
     icon: {
@@ -35,13 +37,14 @@ const styles = {
     },
 };
 
-export const WidgetHeaderPlain = ({
+const WidgetHeaderPlain = ({
     eventStatus,
     stage,
     programId,
     orgUnit,
     setChangeLogIsOpen,
     classes,
+    occurredAt,
 }: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
     const dispatch = useDispatch();
@@ -53,11 +56,27 @@ export const WidgetHeaderPlain = ({
     const eventAccess = getProgramEventAccess(programId, stage.id);
     const { hasAuthority } = useAuthorities({ authorities: ['F_UNCOMPLETE_EVENT'] });
     const blockEntryForm = stage.blockEntryForm && !hasAuthority && eventStatus === eventStatuses.COMPLETED;
-    const disableEdit = !eventAccess?.write || blockEntryForm;
 
-    const tooltipContent = blockEntryForm
-        ? i18n.t('The event cannot be edited after it has been completed')
-        : i18n.t("You don't have access to edit this event");
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const occurredAtClient = ((convertFormToClient(occurredAt, dataElementTypes.DATE): any): string);
+    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
+
+    const disableEdit = !eventAccess?.write || blockEntryForm || !isWithinValidPeriod;
+    const tooltipContent = useMemo(() => {
+        if (blockEntryForm) {
+            return i18n.t('The event cannot be edited after it has been completed');
+        }
+        if (!eventAccess?.write) {
+            return i18n.t('You don\'t have access to edit this event');
+        }
+        if (!isWithinValidPeriod) {
+            return i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
+                occurredAt,
+                interpolation: { escapeValue: false },
+            });
+        }
+        return '';
+    }, [blockEntryForm, eventAccess?.write, isWithinValidPeriod, occurredAt]);
 
     const { programCategory } = useCategoryCombinations(programId);
 
