@@ -1,9 +1,16 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { withStyles } from '@material-ui/core/';
-import { spacers, IconFileDocument24, Button, IconMore16, FlyoutMenu, MenuItem } from '@dhis2/ui';
+import {
+    spacers,
+    IconFileDocument24,
+    Button,
+    IconMore16,
+    FlyoutMenu,
+    MenuItem,
+} from '@dhis2/ui';
 import { useQueryClient } from 'react-query';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../../Tooltips/ConditionalTooltip';
@@ -52,8 +59,7 @@ const getStyles = () => ({
     button: {
         whiteSpace: 'nowrap',
     },
-    editButtonContainer: {
-    },
+    editButtonContainer: {},
 });
 
 type Props = {
@@ -64,7 +70,7 @@ type Props = {
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
     programId: string,
-    onBackToAllEvents: () => {},
+    onBackToAllEvents: () => void,
     classes: {
         container: string,
         headerContainer: string,
@@ -76,6 +82,7 @@ type Props = {
     },
 };
 
+// eslint-disable-next-line complexity
 const EventDetailsSectionPlain = (props: Props) => {
     const {
         classes,
@@ -105,6 +112,30 @@ const EventDetailsSectionPlain = (props: Props) => {
         onBackToAllEvents();
     };
 
+    const occurredAtClient = ((convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE): any): string);
+    const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
+    const isDisabled = !eventAccess.write || !isWithinValidPeriod;
+
+    const tooltipContent = useMemo(() => {
+        if (!eventAccess.write) {
+            return i18n.t("You don't have access to edit this event");
+        }
+        if (!isWithinValidPeriod) {
+            return i18n.t(
+                '{{occurredAt}} belongs to an expired period. Event cannot be edited',
+                {
+                    occurredAt: eventData?.dataEntryValues?.occurredAt,
+                    interpolation: { escapeValue: false },
+                },
+            );
+        }
+        return undefined;
+    }, [
+        eventAccess.write,
+        isWithinValidPeriod,
+        eventData?.dataEntryValues?.occurredAt,
+    ]);
+
     if (error) {
         return error.errorComponent;
     }
@@ -133,27 +164,10 @@ const EventDetailsSectionPlain = (props: Props) => {
         </div>
     );
 
-    const renderActionsContainer = () => {
-        const occurredAtClient = ((convertFormToClient(eventData?.dataEntryValues?.occurredAt, dataElementTypes.DATE): any): string);
-        const { isWithinValidPeriod } = isValidPeriod(occurredAtClient, expiryPeriod);
-        const isDisabled = !eventAccess.write || !isWithinValidPeriod;
-
-        let tooltipContent = '';
-        if (!eventAccess.write) {
-            tooltipContent = i18n.t('You don\'t have access to edit this event');
-        } else if (!isWithinValidPeriod) {
-            tooltipContent = i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
-                occurredAt: eventData?.dataEntryValues?.occurredAt,
-                interpolation: { escapeValue: false },
-            });
-        }
-
-        return (
-            <div className={classes.actionsContainer}>
-                {!showEditEvent && !isLoading &&
-                <div
-                    className={classes.editButtonContainer}
-                >
+    const renderActionsContainer = () => (
+        <div className={classes.actionsContainer}>
+            {!showEditEvent && !isLoading &&
+                <div className={classes.editButtonContainer}>
                     <ConditionalTooltip
                         content={tooltipContent}
                         enabled={isDisabled}
@@ -169,29 +183,28 @@ const EventDetailsSectionPlain = (props: Props) => {
                         </Button>
                     </ConditionalTooltip>
                 </div>}
-                {supportsChangelog && (
-                    <OverflowButton
-                        open={actionsIsOpen}
-                        onClick={() => setActionsIsOpen(prev => !prev)}
-                        secondary
-                        small
-                        icon={<IconMore16 />}
-                        component={(
-                            <FlyoutMenu dense>
-                                <MenuItem
-                                    label={i18n.t('View changelog')}
-                                    onClick={() => {
-                                        setChangeLogIsOpen(true);
-                                        setActionsIsOpen(false);
-                                    }}
-                                />
-                            </FlyoutMenu>
-                        )}
-                    />
-                )}
-            </div>
-        );
-    };
+            {supportsChangelog && (
+                <OverflowButton
+                    open={actionsIsOpen}
+                    onClick={() => setActionsIsOpen(prev => !prev)}
+                    secondary
+                    small
+                    icon={<IconMore16 />}
+                    component={(
+                        <FlyoutMenu dense>
+                            <MenuItem
+                                label={i18n.t('View changelog')}
+                                onClick={() => {
+                                    setChangeLogIsOpen(true);
+                                    setActionsIsOpen(false);
+                                }}
+                            />
+                        </FlyoutMenu>
+                    )}
+                />
+            )}
+        </div>
+    );
 
     if (!orgUnit || !formFoundation || isLoading) {
         return null;

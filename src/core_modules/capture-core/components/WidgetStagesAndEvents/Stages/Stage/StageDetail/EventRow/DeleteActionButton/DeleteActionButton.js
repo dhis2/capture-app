@@ -6,11 +6,13 @@ import {
     IconDelete16,
     MenuItem,
 } from '@dhis2/ui';
+import { pipe } from 'capture-core-utils';
 import { ConditionalTooltip } from '../../../../../../Tooltips/ConditionalTooltip';
 import { isValidPeriod } from '../../../../../../../utils/validation/validators/form';
-import { convertClientToView } from '../../../../../../../converters';
+import { convertClientToView, convertServerToClient } from '../../../../../../../converters';
 import { dataElementTypes } from '../../../../../../../metaData';
 
+const convertFn = pipe(convertServerToClient, convertClientToView);
 type Props = {
     setActionsOpen: (open: boolean) => void,
     setDeleteModalOpen: (open: boolean) => void,
@@ -28,11 +30,11 @@ export const DeleteActionButton = ({
     expiryPeriod,
 }: Props) => {
     const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
-    const occurredAtClientView = convertClientToView(occurredAt, dataElementTypes.DATE);
+    const occurredAtClientView = convertFn(occurredAt, dataElementTypes.DATE);
 
     return (
         <ConditionalTooltip
-            content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
+            content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted2', {
                 occurredAt: occurredAtClientView,
                 interpolation: { escapeValue: false },
             })}
