@@ -1,4 +1,3 @@
-// @flow
 import { useCallback, useMemo } from 'react';
 import type {
     ColumnConfig,
@@ -9,8 +8,8 @@ import { renderWidgets } from '../renderPageComponents';
 
 type Props = {
     pageLayout: PageLayoutConfig,
-    availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
-    props: Object,
+    availableWidgets: Readonly<Record<string, WidgetConfig>>,
+    props: Record<string, any>,
 };
 
 export const useWidgetColumns = ({
@@ -23,7 +22,7 @@ export const useWidgetColumns = ({
         rightColumn,
     } = pageLayout;
 
-    const createColumnWidgets = useCallback(column =>
+    const createColumnWidgets = useCallback((column: Array<ColumnConfig> | null) =>
         column?.map((widget: ColumnConfig) => renderWidgets(widget, availableWidgets, props)).filter(Boolean),
     [availableWidgets, props],
     );

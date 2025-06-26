@@ -1,4 +1,3 @@
-// @flow
 import { WidgetStagesAndEvents } from '../../../../../WidgetStagesAndEvents';
 import type { Props as StagesAndEventProps } from '../../../../../WidgetStagesAndEvents/stagesAndEvents.types';
 import { TrackedEntityRelationshipsWrapper } from '../../../TEIRelationshipsWidget/TrackedEntityRelationshipsWrapper';
@@ -36,7 +35,7 @@ import {
 
 export const QuickActions: WidgetConfig = {
     Component: EnrollmentQuickActions,
-    getProps: ({ stages, events, ruleEffects }) => ({
+    getProps: ({ stages, events, ruleEffects }: any) => ({
         stages,
         events,
         ruleEffects,
@@ -56,7 +55,7 @@ export const StagesAndEvents: WidgetConfig = {
         onRollbackDeleteEvent,
         onEventClick,
         ruleEffects,
-    }): StagesAndEventProps => ({
+    }: any): StagesAndEventProps => ({
         programId: program.id,
         stages,
         events,
@@ -72,7 +71,7 @@ export const StagesAndEvents: WidgetConfig = {
 
 export const TrackedEntityRelationship: WidgetConfig = {
     Component: TrackedEntityRelationshipsWrapper,
-    shouldHideWidget: ({ addRelationShipContainerElement }) => !addRelationShipContainerElement,
+    shouldHideWidget: ({ addRelationShipContainerElement }: any) => !addRelationShipContainerElement,
     getProps: ({
         program,
         orgUnitId,
@@ -80,7 +79,7 @@ export const TrackedEntityRelationship: WidgetConfig = {
         toggleVisibility,
         teiId,
         onLinkedRecordClick,
-    }): TrackedEntityRelationshipProps => ({
+    }: any): TrackedEntityRelationshipProps => ({
         trackedEntityTypeId: program.trackedEntityType.id,
         programId: program.id,
         orgUnitId,
@@ -94,44 +93,44 @@ export const TrackedEntityRelationship: WidgetConfig = {
 
 export const ErrorWidget: WidgetConfig = {
     Component: WidgetError,
-    getProps: ({ widgetEffects }): WidgetErrorProps => ({
+    getProps: ({ widgetEffects }: any): WidgetErrorProps => ({
         error: widgetEffects?.errors,
     }),
 };
 
 export const WarningWidget: WidgetConfig = {
     Component: WidgetWarning,
-    getProps: ({ widgetEffects }): WidgetWarningProps => ({
+    getProps: ({ widgetEffects }: any): WidgetWarningProps => ({
         warning: widgetEffects?.warnings,
     }),
 };
 
 export const FeedbackWidget: WidgetConfig = {
     Component: WidgetFeedback,
-    shouldHideWidget: ({ hideWidgets }) => hideWidgets?.feedback,
+    shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.feedback,
     getProps: ({ widgetEffects, feedbackEmptyText }: InputFeedbackProps): WidgetFeedbackProps => ({
-        feedback: widgetEffects?.feedbacks,
+        feedback: widgetEffects?.feedbacks as any,
         emptyText: feedbackEmptyText,
     }),
 };
 
 export const IndicatorWidget: WidgetConfig = {
     Component: WidgetIndicator,
-    shouldHideWidget: ({ hideWidgets }) => hideWidgets?.indicator,
+    shouldHideWidget: ({ hideWidgets }: any) => hideWidgets?.indicator,
     getProps: ({ widgetEffects, indicatorEmptyText }: InputIndicatorProps): IndicatorProps => ({
-        indicators: widgetEffects?.indicators,
+        indicators: widgetEffects?.indicators as any,
         emptyText: indicatorEmptyText,
     }),
 };
 
 export const EnrollmentNote: WidgetConfig = {
     Component: WidgetEnrollmentNote,
-    getProps: (): void => {},
+    getProps: () => ({}),
 };
 
 export const ProfileWidget: WidgetConfig = {
     Component: WidgetProfile,
-    getCustomSettings: ({ readOnlyMode = true }) => ({
+    getCustomSettings: ({ readOnlyMode = true }: any) => ({
         readOnlyMode,
     }),
     getProps: ({
@@ -140,7 +139,7 @@ export const ProfileWidget: WidgetConfig = {
         orgUnitId,
         onUpdateTeiAttributeValues,
         onDeleteTrackedEntitySuccess,
-    }): WidgetProfileProps => ({
+    }: any): WidgetProfileProps => ({
         teiId,
         programId: program.id,
         orgUnitId,
@@ -162,7 +161,7 @@ export const NewEventWorkspace: WidgetConfig = {
         rulesExecutionDependencies,
         onSave,
         onCancel,
-    }): NewEventWorkspaceWrapperProps => ({
+    }: any): NewEventWorkspaceWrapperProps => ({
         programId: program.id,
         stageId,
         orgUnitId,
@@ -178,8 +177,8 @@ export const NewEventWorkspace: WidgetConfig = {
 
 export const EnrollmentWidget: WidgetConfig = {
     Component: WidgetEnrollment,
-    shouldHideWidget: ({ enrollmentId }) => enrollmentId === 'AUTO',
-    getCustomSettings: ({ readOnlyMode }) => ({
+    shouldHideWidget: ({ enrollmentId }: any) => enrollmentId === 'AUTO',
+    getCustomSettings: ({ readOnlyMode }: any) => ({
         readOnlyMode,
     }),
     getProps: ({
@@ -197,7 +196,7 @@ export const EnrollmentWidget: WidgetConfig = {
         onUpdateEnrollmentStatusError,
         onEnrollmentError,
         onAccessLostFromTransfer,
-    }): WidgetEnrollmentProps => ({
+    }: any): WidgetEnrollmentProps => ({
         teiId,
         enrollmentId,
         programId: program.id,
@@ -234,7 +233,7 @@ export const EditEventWorkspace: WidgetConfig = {
         onSaveAndCompleteEnrollmentSuccessActionType,
         onDeleteEvent,
         onDeleteEventRelationship,
-    }): WidgetEventEditProps => ({
+    }: any): WidgetEventEditProps => ({
         programId: program.id,
         stageId,
         orgUnitId,
@@ -257,7 +256,7 @@ export const EditEventWorkspace: WidgetConfig = {
 
 export const TwoEventWorkspace: WidgetConfig = {
     Component: WidgetTwoEventWorkspace,
-    getProps: ({ currentPage, eventId, program, stageId, orgUnitId }) => ({
+    getProps: ({ currentPage, eventId, program, stageId, orgUnitId }: any) => ({
         currentPage,
         eventId,
         programId: program.id,
@@ -275,7 +274,7 @@ export const AssigneeWidget: WidgetConfig = {
         eventAccess,
         onSaveAssignee,
         onSaveAssigneeError,
-    }) => ({
+    }: any) => ({
         enabled: programStage?.enableUserAssignment || false,
         assignee,
         getSaveContext: getAssignedUserSaveContext,
@@ -287,7 +286,7 @@ export const AssigneeWidget: WidgetConfig = {
 
 export const EventNote: WidgetConfig = {
     Component: WidgetEventNote,
-    getProps: ({ dataEntryKey, dataEntryId }) => ({
+    getProps: ({ dataEntryKey, dataEntryId }: any) => ({
         dataEntryKey,
         dataEntryId,
     }),
@@ -295,7 +294,7 @@ export const EventNote: WidgetConfig = {
 
 export const RelatedStagesWorkspace: WidgetConfig = {
     Component: WidgetRelatedStages,
-    shouldHideWidget: ({ currentPage }) => currentPage === EnrollmentPageKeys.EDIT_EVENT,
+    shouldHideWidget: ({ currentPage }: any) => currentPage === EnrollmentPageKeys.EDIT_EVENT,
     getProps: ({
         program,
         stageId,
@@ -306,7 +305,7 @@ export const RelatedStagesWorkspace: WidgetConfig = {
         onUpdateEnrollmentEventsSuccess,
         onUpdateEnrollmentEventsError,
         onNavigateToEvent,
-    }) => ({
+    }: any) => ({
         programId: program.id,
         programStageId: stageId,
         enrollmentId,

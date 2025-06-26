@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import log from 'loglevel';
 import type {
@@ -10,16 +9,15 @@ import { errorCreator } from '../../../../../../../capture-core-utils';
 import { EnrollmentPlugin } from '../../../EnrollmentPlugin';
 import { WidgetTypes } from '../DefaultEnrollmentLayout.constants';
 
-const MemoizedWidgets: { [key: string]: React$ComponentType<any> } = {};
-const UnsupportedWidgets: { [key: string]: boolean } = {};
+const MemoizedWidgets: Record<string, React.ComponentType<any>> = {};
+const UnsupportedWidgets: Record<string, boolean> = {};
 
 const renderComponent = (
     widget: ColumnConfig,
-    availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
-    props: Object,
+    availableWidgets: Readonly<Record<string, WidgetConfig>>,
+    props: Record<string, any>,
 ) => {
-    // Manually casting the type to DefaultWidgetColumnConfig
-    const { name, settings = {} } = ((widget: any): DefaultWidgetColumnConfig);
+    const { name, settings = {} } = (widget as any) as DefaultWidgetColumnConfig;
     const widgetConfig = availableWidgets[name];
 
     if (!widgetConfig) {
@@ -36,7 +34,6 @@ const renderComponent = (
     if (hideWidget) return null;
     let widgetProps = {};
 
-    // In case the widget is not supported, we don't want to crash the app
     try {
         widgetProps = getProps(props);
     } catch (error) {
@@ -50,16 +47,14 @@ const renderComponent = (
     }
     const Widget = MemoizedWidgets[name];
 
-    return (
-        <Widget
-            {...widgetProps}
-            {...customSettings}
-            key={name}
-        />
-    );
+    return React.createElement(Widget, {
+        ...widgetProps,
+        ...customSettings,
+        key: name,
+    });
 };
 
-const getPropsForPlugin = ({ program, enrollmentId, teiId, orgUnitId, programStage, eventId, stageId }) => ({
+const getPropsForPlugin = ({ program, enrollmentId, teiId, orgUnitId, programStage, eventId, stageId }: any) => ({
     programId: program.id,
     enrollmentId,
     teiId,
@@ -70,11 +65,10 @@ const getPropsForPlugin = ({ program, enrollmentId, teiId, orgUnitId, programSta
 
 const renderPlugin = (
     widget: ColumnConfig,
-    availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
-    props: Object,
+    availableWidgets: Readonly<Record<string, WidgetConfig>>,
+    props: Record<string, any>,
 ) => {
-    // Manually casting the type to PluginWidgetColumnConfig
-    const { source } = ((widget: any): PluginWidgetColumnConfig);
+    const { source } = (widget as any) as PluginWidgetColumnConfig;
     let PluginWidget = MemoizedWidgets[source];
 
     if (!PluginWidget) {
@@ -83,19 +77,17 @@ const renderPlugin = (
     }
     const widgetProps = getPropsForPlugin(props);
 
-    return (
-        <PluginWidget
-            key={source}
-            pluginSource={source}
-            {...widgetProps}
-        />
-    );
+    return React.createElement(PluginWidget, {
+        key: source,
+        pluginSource: source,
+        ...widgetProps,
+    });
 };
 
 export const renderWidgets = (
     widget: ColumnConfig,
-    availableWidgets: $ReadOnly<{ [key: string]: WidgetConfig }>,
-    props: Object,
+    availableWidgets: Readonly<Record<string, WidgetConfig>>,
+    props: Record<string, any>,
 ) => {
     const { type } = widget;
 

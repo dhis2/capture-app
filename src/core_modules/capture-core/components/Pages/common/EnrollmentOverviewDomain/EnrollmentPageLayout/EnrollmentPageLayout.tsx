@@ -1,13 +1,12 @@
-// @flow
 import React, { useCallback, useMemo, useState } from 'react';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
 import type { PlainProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
 
-const getEnrollmentPageStyles = () => ({
+const getEnrollmentPageStyles: Readonly<any> = () => ({
     container: {
         minHeight: '90vh',
         padding: '16px 24px 16px 24px',
@@ -46,8 +45,10 @@ const getEnrollmentPageStyles = () => ({
     },
 });
 
-// Function to validate hex color
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
+
+type OwnProps = PlainProps;
+type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;
 
 const EnrollmentPageLayoutPlain = ({
     pageLayout,
@@ -61,10 +62,10 @@ const EnrollmentPageLayoutPlain = ({
     onBackToViewEvent,
     classes,
     ...passOnProps
-}: PlainProps) => {
+}: Props) => {
     const [mainContentVisible, setMainContentVisibility] = useState(true);
     const [addRelationShipContainerElement, setAddRelationshipContainerElement] =
-        useState<HTMLDivElement | void>(undefined);
+        useState<HTMLDivElement | undefined>(undefined);
     const toggleVisibility = useCallback(() => setMainContentVisibility(current => !current), []);
 
     const allProps = useMemo(() => ({

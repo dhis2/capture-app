@@ -1,4 +1,3 @@
-// @flow
 import {
     EnrollmentWidget,
     ErrorWidget,
@@ -16,7 +15,6 @@ export const EnrollmentPageKeys = Object.freeze({
     VIEW_EVENT: 'viewEvent',
 });
 
-// Default components are available across all Enrollment Pages
 export const DefaultWidgetsForEnrollmentOverview = {
     TrackedEntityRelationship,
     ErrorWidget,

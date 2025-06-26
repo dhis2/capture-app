@@ -1,5 +1,3 @@
-// @flow
-
 export {
     DefaultWidgetsForEnrollmentOverview,
 } from './DefaultEnrollmentLayout.constants';

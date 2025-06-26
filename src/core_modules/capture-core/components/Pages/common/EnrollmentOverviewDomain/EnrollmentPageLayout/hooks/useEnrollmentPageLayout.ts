@@ -1,9 +1,8 @@
-// @flow
 import { useApiMetadataQuery } from '../../../../../../utils/reactQueryHelpers';
 import type { PageLayoutConfig } from '../DefaultEnrollmentLayout.types';
 
 type Props = {
-    selectedScopeId: ?string,
+    selectedScopeId: string | null,
     defaultPageLayout: PageLayoutConfig,
     dataStoreKey: string,
 }
@@ -17,8 +16,8 @@ export const useEnrollmentPageLayout = ({ selectedScopeId, defaultPageLayout, da
             enabled: !!selectedScopeId,
             select: (captureDataStore: any) => {
                 const { entries } = captureDataStore ?? {};
-                const enrollmentPageConfig = entries?.find(({ key }) => key === dataStoreKey)?.value;
-                const enrollmentPageConfigForScope: ?PageLayoutConfig = enrollmentPageConfig?.[selectedScopeId];
+                const enrollmentPageConfig = entries?.find(({ key }: any) => key === dataStoreKey)?.value;
+                const enrollmentPageConfigForScope: PageLayoutConfig | null = selectedScopeId ? enrollmentPageConfig?.[selectedScopeId] : null;
 
                 if (!enrollmentPageConfigForScope) return defaultPageLayout;
 
