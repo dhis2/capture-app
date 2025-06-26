@@ -18,21 +18,21 @@ export const RowMenu = (props: Props) => {
     const renderMenuItems = () => customRowMenuContents.map((content) => {
         const tooltipContent = typeof content.tooltipContent === 'function'
             ? content.tooltipContent(row)
-            : content.tooltipContent;
+            : null;
 
-        const tooltipEnabledRaw = typeof content.tooltipEnabled === 'function'
+        const tooltipEnabled = typeof content.tooltipEnabled === 'function'
             ? content.tooltipEnabled(row)
-            : content.tooltipEnabled;
+            : false;
 
-        const isDisabledRaw = typeof content.disabled === 'function'
+        const isDisabled = typeof content.disabled === 'function'
             ? content.disabled(row)
-            : content.disabled;
+            : false;
 
         return (
             <ConditionalTooltip
                 key={content.key}
                 content={tooltipContent}
-                enabled={!!tooltipEnabledRaw}
+                enabled={!!tooltipEnabled}
             >
                 <MenuItem
                     key={content.key}
@@ -44,7 +44,7 @@ export const RowMenu = (props: Props) => {
                             handler(row);
                         }
                     }}
-                    disabled={!content.clickHandler || !!isDisabledRaw}
+                    disabled={!content.clickHandler || !!isDisabled}
                     label={content.label}
                     icon={content.icon}
                 />
