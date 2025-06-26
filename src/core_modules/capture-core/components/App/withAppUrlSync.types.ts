@@ -1,0 +1,37 @@
+import type { ReactNode } from 'react';
+import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
+
+export type ReduxState = {
+    app: {
+        page?: string;
+        locationSwitchInProgress?: boolean;
+    };
+    currentSelections: {
+        programId?: string;
+        trackedEntityTypeId?: string;
+        orgUnitId?: string;
+    };
+    viewEventPage: {
+        eventId?: string;
+    };
+    editEventPage: {
+        eventId?: string;
+    };
+};
+
+export type ReduxDispatch = (action: {
+    type: string;
+    [props: string]: any;
+}) => void;
+
+export type Props = {
+    location: {
+        search: string;
+        pathname: string;
+    };
+    onUpdateFromUrl: (page: string | undefined, data: UpdateDataContainer) => void;
+    params: Record<string, any>;
+    page?: string;
+    locationSwitchInProgress?: boolean;
+    children?: ReactNode;
+};
