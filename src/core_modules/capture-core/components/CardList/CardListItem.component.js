@@ -25,7 +25,7 @@ type OwnProps = $ReadOnly<{|
         currentSearchScopeType ?: string,
         renderCustomCardActions ?: RenderCustomCardActions,
         profileImageDataElement: ?CardProfileImageElementInformation,
-            dataElements: CardDataElementsInformation,
+        dataElements: CardDataElementsInformation,
 |}>;
 
 type Props = $ReadOnly<{|
@@ -220,12 +220,13 @@ const CardListItemIndex = ({
                     {renderImageDataElement(profileImageDataElement)}
                     <div>
                         {dataElements
-                            .map(({ id, name, type }) => (
+                            .map(({ id, name, type, optionSet }) => (
                                 <ListEntry
                                     key={id}
                                     name={name}
                                     value={item.values[id]}
                                     type={type}
+                                    dataElement={{ optionSet, type }}
                                 />
                             ))
                         }

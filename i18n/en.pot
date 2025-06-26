@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
-"PO-Revision-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"PO-Revision-Date: 2025-06-17T08:51:07.987Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -134,6 +134,13 @@ msgstr "Enrollment"
 
 msgid "Complete event"
 msgstr "Complete event"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
 
 msgid "A value is required"
 msgstr "A value is required"
@@ -955,6 +962,12 @@ msgstr "No results found for "
 
 msgid "Choose an organisation unit in the form below"
 msgstr "Choose an organisation unit in the form below"
+
+msgid "None selected"
+msgstr "None selected"
+
+msgid "Choose an organisation unit"
+msgstr "Choose an organisation unit"
 
 msgid "Clear selection"
 msgstr "Clear selection"

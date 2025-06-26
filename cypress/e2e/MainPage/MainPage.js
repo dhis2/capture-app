@@ -40,7 +40,7 @@ Then('the icon is rendered as an svg', () => {
 });
 
 Then('the TEI working list is displayed', () => {
-    cy.get('[data-test="tei-working-lists"]').within(() => {
+    cy.get('[data-test="tracker-working-lists"]').within(() => {
         cy.contains('Rows per page').should('exist');
         cy.contains('First name').should('exist');
         cy.contains('Last name').should('exist');

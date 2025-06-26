@@ -20,6 +20,7 @@ export type PlainProps = {|
     program: ?Program,
     trackedEntityTypeId: string,
     mode: string,
+    userInteractionInProgress: boolean,
     orgUnitId: string,
     trackedEntityName: string,
     teiDisplayName: string,

@@ -3,7 +3,6 @@
 # David Júnior <davidjr.mondlane@gmail.com>, 2021
 # Fernando Jorge Bade, 2023
 # Philip Larsen Donnelly, 2024
-# Ge Joao <gsimango@saudigitus.org>, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # Sheila André <sandre@saudigitus.org>, 2024
 # Jason Pickering <jason@dhis2.org>, 2024
@@ -15,13 +14,14 @@
 # David Mondlane, 2025
 # Nancy Espinoza, 2025
 # Andres Miguel Rubio, 2025
+# Ge Joao <gsimango@saudigitus.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Andres Miguel Rubio, 2025\n"
+"Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2025\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,6 +48,24 @@ msgstr ""
 msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
 
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Inscrições ativas"
+
+msgid "Completed enrollments"
+msgstr "Inscrições concluídas"
+
+msgid "Cancelled enrollments"
+msgstr "Inscrições canceladas"
+
+msgid "Search"
+msgstr "Pesquisar"
+
 msgid "Enrollment dashboard"
 msgstr "Painel de controlo das inscrições"
 
@@ -59,24 +77,6 @@ msgstr "Editar evento"
 
 msgid "New event"
 msgstr "Novo evento"
-
-msgid "Active enrollments"
-msgstr "Inscrições ativas"
-
-msgid "Completed enrollments"
-msgstr "Inscrições concluídas"
-
-msgid "Cancelled enrollments"
-msgstr "Inscrições canceladas"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} lista"
-
-msgid "Search"
-msgstr "Pesquisar"
-
-msgid "Working List"
-msgstr "Lista de trabalho"
 
 msgid "Event list"
 msgstr "Lista de eventos"
@@ -220,6 +220,9 @@ msgstr "Cessionário"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Gravar em {{programName}} em {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -244,6 +247,9 @@ msgstr "Concluído"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Adicione ou cancele a nota antes de guardar o evento"
+
+msgid "Please provide an valid organisation unit"
+msgstr "Indique uma unidade organizacional válida"
 
 msgid "Save and add another"
 msgstr "Gravar e adicionar outro"
@@ -1150,6 +1156,12 @@ msgstr ""
 "Deve fornecer um motivo para verificar as inscrições neste programa "
 "protegido. Todas as atividades serão registradas."
 
+msgid "Unsaved changes"
+msgstr "Alterações não salvas"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Ações de inscrição"
 
@@ -1283,9 +1295,6 @@ msgstr "Adicionar coordenadas"
 
 msgid "Add area"
 msgstr "Adicionar área"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Indique uma unidade organizacional válida"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""

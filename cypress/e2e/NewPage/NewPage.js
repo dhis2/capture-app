@@ -653,10 +653,6 @@ And('you delete the recently added malaria entity', () => {
     cy.get('[data-test="stage-selector-container-clear-icon"]')
         .click();
 
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Yes, discard changes')
-        .click();
-
     cy.get('[data-test="profile-widget"]')
         .contains('Malaria Entity profile')
         .should('exist');
