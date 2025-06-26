@@ -26,9 +26,9 @@ export const useUserRoles = () => {
                         userRoles?: Array<{ id: string }>
                     }
                 };
-                return userData.userCredentials?.userRoles?.map(({ id }) => id);
+                return userData.userCredentials?.userRoles?.map(({ id }) => id) ?? [];
             }
-            return undefined;
+            return [];
         },
         [loading, data],
     );

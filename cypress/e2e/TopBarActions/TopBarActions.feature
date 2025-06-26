@@ -62,6 +62,7 @@ Feature: User uses the TopBarActions to navigate
         And the user see the following text: Gestational age at visit
         When the user clicks on the edit button
         And the view enrollment event form is in edit mode
+        When the user interacts with the edit event form
         When the user clicks the element containing the text: Clear selections
         Then the user sees the warning popup
 

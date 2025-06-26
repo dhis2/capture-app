@@ -28,3 +28,12 @@ When(/^the user set the WHOMCH Diastolic blood pressure to (.*)/, score =>
 And(/^the view enrollment event form is in (.*) mode$/, (mode) => {
     cy.get(`[data-test="widget-enrollment-event-${mode}"]`).should('exist');
 });
+
+When('the user interacts with the edit event form', () => {
+    cy
+        .get('[data-test="widget-enrollment-event"]')
+        .find('input[type="text"]')
+        .eq(4)
+        .type(20)
+        .blur();
+});
