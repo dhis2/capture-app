@@ -20,7 +20,7 @@ export const EventWorkingListsRowMenuSetup = ({ onDeleteEvent, programId, ...pas
         tooltipContent: (row) => {
             const { occurredAt } = row ?? {};
             const { isWithinValidPeriod } = isValidPeriod(occurredAt, expiryPeriod);
-            return isWithinValidPeriod ? null : i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
+            return isWithinValidPeriod ? null : i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted', {
                 occurredAt,
                 interpolation: { escapeValue: false },
             });
