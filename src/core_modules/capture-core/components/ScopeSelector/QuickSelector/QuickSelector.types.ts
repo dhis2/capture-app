@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 export type Props = {
     selectedOrgUnitId?: string;
-    selectedProgramId?: string | null | undefined;
+    selectedProgramId?: string | null;
     selectedCategories: Record<string, any>;
     selectedOrgUnit: Record<string, any>;
     previousOrgUnitId?: string;

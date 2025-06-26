@@ -54,7 +54,7 @@ const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, clas
                 dense
                 dataTest={`${dataTest}-filterinput`}
                 value={filter}
-                onChange={({ value }) => setFilter(value || '')}
+                onChange={({ value }) => setFilter(value ?? '')}
                 type="text"
                 placeholder={searchText}
                 initialFocus
