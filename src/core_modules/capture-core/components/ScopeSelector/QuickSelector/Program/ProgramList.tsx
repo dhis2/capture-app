@@ -24,7 +24,7 @@ type OwnProps = {
         icon?: Icon;
     }>;
     programsArray: Array<Program>;
-    onChange: (option: { value: string }) => void;
+    onChange: (option: { value?: string }) => void;
     onResetOrgUnit: () => void;
 };
 
@@ -50,7 +50,7 @@ const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgU
                         label={<OptionLabel icon={option.icon} label={option.label} />}
                         value={option.value}
                         suffix=""
-                        onClick={() => onChange({ value: option.value })}
+                        onClick={onChange}
                     />
                 ))
             )}

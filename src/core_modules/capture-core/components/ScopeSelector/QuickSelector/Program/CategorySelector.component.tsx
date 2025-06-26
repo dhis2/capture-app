@@ -1,6 +1,6 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-// @ts-expect-error - SelectorBarItem exists at runtime but not in TypeScript definitions
+// @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import log from 'loglevel';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
@@ -121,7 +121,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             (currentRequestCancelablePromise && this.cancelablePromise !== currentRequestCancelablePromise);
 
         currentRequestCancelablePromise = makeCancelablePromise(
-            CategorySelectorPlain
+            CategorySelector
                 .getOptionsAsync(
                     category.id,
                     selectedOrgUnitId,
@@ -238,4 +238,4 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         );
     }
 }
-export const CategorySelector = withStyles(styles)(CategorySelectorPlain);
+export const CategorySelector = withStyles(styles)(CategorySelectorPlain) as any;

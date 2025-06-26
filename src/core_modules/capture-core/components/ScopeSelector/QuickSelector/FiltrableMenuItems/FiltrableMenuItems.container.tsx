@@ -32,7 +32,7 @@ type Option = {
 type OwnProps = {
     dataTest: string;
     options: Array<Option>;
-    onChange: (option: Option) => void;
+    onChange: (option: { value?: string; }) => void;
     searchText: string;
 };
 
@@ -67,7 +67,7 @@ const FiltrableMenuItemsPlain = ({ dataTest, options, onChange, searchText, clas
                         label={<OptionLabel icon={option.icon} label={option.label} />}
                         value={option.value}
                         suffix=""
-                        onClick={() => onChange(option)}
+                        onClick={onChange}
                     />
                 ))
             ) : (

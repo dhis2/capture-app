@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-// @ts-expect-error - SelectorBarItem exists at runtime but not in TypeScript definitions
+// @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, spacers } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { OrgUnitField } from '../../FormFields/New';
@@ -44,7 +44,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick = (selectedOu: { id: string; displayName: string; code?: string }) => {
+    handleClick(selectedOu: { id: string; displayName: string; code?: string }) {
         const orgUnitObject = { id: selectedOu.id, name: selectedOu.displayName, code: selectedOu.code };
         const { handleClickOrgUnit } = this.props;
         handleClickOrgUnit && handleClickOrgUnit(selectedOu.id, orgUnitObject);
@@ -55,7 +55,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
 
         return (
             <ConditionalTooltip
-                enabled={!!tooltip}
+                enabled={Boolean(tooltip)}
                 content={i18n.t('Choose an organisation unit in the form below')}
             >
                 <SelectorBarItem

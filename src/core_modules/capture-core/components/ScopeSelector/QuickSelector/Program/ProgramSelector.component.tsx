@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-// @ts-expect-error - SelectorBarItem exists at runtime but not in TypeScript definitions
+// @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { programCollection } from '../../../../metaDataMemoryStores';
