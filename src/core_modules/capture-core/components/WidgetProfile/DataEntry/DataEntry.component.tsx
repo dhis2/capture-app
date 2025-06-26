@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -9,7 +8,6 @@ import { TEI_MODAL_STATE } from './dataEntry.actions';
 
 export const DataEntryComponent = ({
     dataEntryId,
-    itemId,
     onCancel,
     onSave,
     saveAttempted,
@@ -42,9 +40,6 @@ export const DataEntryComponent = ({
                 orgUnit={orgUnit}
             />
             <NoticeBoxes
-                dataEntryId={dataEntryId}
-                itemId={itemId}
-                saveAttempted={saveAttempted}
                 errorsMessages={errorsMessages}
                 warningsMessages={warningsMessages}
                 hasApiError={modalState === TEI_MODAL_STATE.OPEN_ERROR}

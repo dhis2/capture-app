@@ -1,11 +1,9 @@
-// @flow
 /* eslint-disable complexity */
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import type { ComponentType } from 'react';
+import React, { useEffect, useState, useCallback, useMemo, type ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { useQueryClient } from 'react-query';
@@ -29,7 +27,7 @@ import {
     useDataEntryFormConfig,
 } from '../DataEntries/common/TEIAndEnrollment';
 
-const styles = {
+const styles: Readonly<any> = {
     header: {
         display: 'flex',
         alignItems: 'center',
@@ -46,8 +44,10 @@ const styles = {
     },
 };
 
-const showEditModal = (loading, error, showEdit, modalState) =>
+const showEditModal = (loading: boolean, error: any, showEdit: boolean, modalState: string) =>
     !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE;
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 const WidgetProfilePlain = ({
     teiId,
@@ -57,13 +57,13 @@ const WidgetProfilePlain = ({
     onUpdateTeiAttributeValues,
     onDeleteSuccess,
     classes,
-}: PlainProps) => {
+}: Props) => {
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const queryClient = useQueryClient();
     const [open, setOpenStatus] = useState(true);
     const [modalState, setTeiModalState] = useState(TEI_MODAL_STATE.CLOSE);
     const { loading: programsLoading, program, error: programsError } = useProgram(programId);
-    const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }) => ({
+    const { storedAttributeValues, storedGeometry, hasError } = useSelector(({ trackedEntityInstance }: any) => ({
         storedAttributeValues: trackedEntityInstance?.attributeValues,
         storedGeometry: trackedEntityInstance?.geometry,
         hasError: trackedEntityInstance?.hasError,
@@ -85,18 +85,18 @@ const WidgetProfilePlain = ({
     } = useUserRoles();
 
     const isEditable = useMemo(() =>
-        trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
+        Array.isArray(trackedEntityInstanceAttributes) && trackedEntityInstanceAttributes.length > 0 && trackedEntityTypeAccess?.data?.write && !readOnlyMode,
     [trackedEntityInstanceAttributes, readOnlyMode, trackedEntityTypeAccess]);
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program, trackedEntityInstanceAttributes);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, Array.isArray(trackedEntityInstanceAttributes) ? trackedEntityInstanceAttributes : []);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
     const displayInListAttributes = useMemo(() => clientAttributesWithSubvalues
-        .filter(item => item.displayInList)
-        .map((clientAttribute) => {
+        .filter((item: any) => item.displayInList)
+        .map((clientAttribute: any) => {
             const { attribute, key, valueType } = clientAttribute;
             const value = convertClientToView(clientAttribute);
             return {
@@ -165,9 +165,9 @@ const WidgetProfilePlain = ({
                             <OverflowMenu
                                 trackedEntityTypeName={trackedEntityTypeName}
                                 canWriteData={canWriteData}
-                                trackedEntity={trackedEntity}
+                                trackedEntity={trackedEntity ? { trackedEntity: trackedEntity.trackedEntity || teiId } : { trackedEntity: teiId }}
                                 onDeleteSuccess={onDeleteSuccess}
-                                displayChangelog={displayChangelog}
+                                displayChangelog={!!displayChangelog}
                                 trackedEntityData={clientAttributesWithSubvalues}
                                 teiId={teiId}
                                 programAPI={program}
@@ -208,4 +208,4 @@ const WidgetProfilePlain = ({
     );
 };
 
-export const WidgetProfile: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(WidgetProfilePlain);
+export const WidgetProfile = withStyles(styles)(WidgetProfilePlain) as ComponentType<PlainProps>;
