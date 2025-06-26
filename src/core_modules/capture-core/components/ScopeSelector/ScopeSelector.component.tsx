@@ -1,7 +1,6 @@
-// @flow
-import React, { Component, type ComponentType } from 'react';
+import React, { Component } from 'react';
 import { compose } from 'redux';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { QuickSelector } from './QuickSelector/QuickSelector.component';
 import { DiscardDialog } from '../Dialogs/DiscardDialog.component';
 import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
@@ -10,15 +9,15 @@ import { withLoadingIndicator } from '../../HOC';
 
 const styles = {
     stickyTopBar: {
-        position: 'sticky',
+        position: 'sticky' as const,
         top: 0,
         zIndex: 1000,
         width: '100%',
     },
 };
 
-class ScopeSelectorClass extends Component<Props, State> {
-    constructor(props: Props) {
+class ScopeSelectorClass extends Component<Props & WithStyles<typeof styles>, State> {
+    constructor(props: Props & WithStyles<typeof styles>) {
         super(props);
 
         this.state = {
@@ -40,7 +39,7 @@ class ScopeSelectorClass extends Component<Props, State> {
         this.setState({ openOrgUnitWarning: true });
     }
 
-    handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
+    handleOpenProgramWarning = (baseAction: any) => {
         if (this.dontShowWarning()) {
             this.props.onResetProgramId(baseAction);
             return;
@@ -121,7 +120,7 @@ class ScopeSelectorClass extends Component<Props, State> {
                     selectedOrgUnitId={this.props.selectedOrgUnitId}
                     selectedProgramId={this.props.selectedProgramId}
                     selectedOrgUnit={this.props.selectedOrgUnit}
-                    selectedCategories={this.props.selectedCategories}
+                    selectedCategories={this.props.selectedCategories || {}}
                     isUserInteractionInProgress={this.props.isUserInteractionInProgress}
                     formIsOpen={this.props.formIsOpen}
                     isReadOnlyOrgUnit={this.props.isReadOnlyOrgUnit}
@@ -158,7 +157,7 @@ class ScopeSelectorClass extends Component<Props, State> {
     }
 }
 
-export const ScopeSelectorComponent: ComponentType<$Diff<Props, CssClasses>> = compose(
+export const ScopeSelectorComponent = compose(
     withLoadingIndicator(() => ({ height: '100px' })),
     withStyles(styles),
-)(ScopeSelectorClass);
+)(ScopeSelectorClass) as any;

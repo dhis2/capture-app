@@ -1,6 +1,5 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import type { Icon } from '../../../metaData';
 
@@ -17,10 +16,9 @@ const styles = () => ({
 });
 
 type Props = {
-    icon?: Icon,
-    label: string,
-    ...CssClasses,
-};
+    icon?: Icon;
+    label: string;
+} & WithStyles<typeof styles>;
 
 export const OptionLabelPlain = ({ icon, label, classes }: Props) => (
     <div className={classes.label}>

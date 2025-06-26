@@ -1,8 +1,8 @@
-// @flow
-import React, { type ComponentType, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+// @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, Menu, MenuItem, MenuDivider } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { capitalizeFirstLetter, lowerCaseFirstLetter } from 'capture-core-utils/string';
 import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
@@ -12,31 +12,30 @@ import { FiltrableMenuItems } from '../QuickSelector/FiltrableMenuItems';
 import { OptionLabel } from '../OptionLabel';
 import type { Icon } from '../../../metaData';
 
-type Props = {|
-    isUserInteractionInProgress?: boolean,
-    options: Array<Option>,
-    onClear?: () => void,
-    onSelect?: (value: string) => void,
-    title: string,
-    selectedValue: string,
-    displayOnly?: boolean,
-    ...CssClasses,
-|};
+export type Props = {
+    isUserInteractionInProgress?: boolean;
+    options: Option[];
+    onClear?: () => void;
+    onSelect?: (value: string) => void;
+    title: string;
+    selectedValue: string;
+    displayOnly?: boolean;
+} & WithStyles<typeof styles>;
 
-type Option = {|
-    label: string,
-    value: any,
-    icon?: Icon,
-|};
+export type Option = {
+    label: string;
+    value: any;
+    icon?: Icon;
+};
 
-type ReadyProp = {|
-    ready: boolean,
-|};
+export type ReadyProp = {
+    ready: boolean;
+};
 
 const styles = () => ({
     selectBarMenu: {
         maxHeight: '80vh',
-        overflow: 'auto',
+        overflow: 'auto' as const,
     },
     label: {
         display: 'flex',
@@ -44,8 +43,9 @@ const styles = () => ({
     },
 });
 
-const getSelectedOption = (options, selectedValue) => (
-    options.find(({ value }) => value === selectedValue) || {});
+const getSelectedOption = (options: Option[], selectedValue: string): Partial<Option> => (
+    options.find(({ value }) => value === selectedValue) || {}
+);
 
 const SingleLockedSelectPlain = ({
     onClear,
@@ -77,14 +77,16 @@ const SingleLockedSelectPlain = ({
         setOpenStartAgainWarning(true);
     };
     const handleOnSelect = useCallback(
-        ({ value }) => {
+        ({ value }: { value: string }) => {
             onSelect && onSelect(value);
         },
         [onSelect],
     );
-    const handleOnChange = (item) => {
+    const handleOnChange = (item: { value?: string }) => {
         setOpenSelectorBarItem(false);
-        handleOnSelect(item);
+        if (item.value) {
+            handleOnSelect({ value: item.value });
+        }
     };
 
     const { label, icon } = getSelectedOption(options, selectedValue);
@@ -119,7 +121,8 @@ const SingleLockedSelectPlain = ({
                                         key={option.value}
                                         label={<OptionLabel icon={option.icon} label={option.label} />}
                                         value={option.value}
-                                        onClick={handleOnChange}
+                                        onClick={payload => handleOnChange(payload)}
+                                        suffix=""
                                     />
                                 ))
                             )}
@@ -133,7 +136,8 @@ const SingleLockedSelectPlain = ({
                                             setOpenSelectorBarItem(false);
                                             handleOnClear();
                                         }}
-                                        label={i18n.t('Clear selection')}
+                                        label={i18n.t('Clear selection') as string}
+                                        suffix=""
                                     />
                                 </>
                             )}
@@ -152,10 +156,10 @@ const SingleLockedSelectPlain = ({
     );
 };
 
-export const SingleLockedSelect: ComponentType<$Diff<Props & ReadyProp, CssClasses>> = compose(
+export const SingleLockedSelect = compose(
     withLoadingIndicator(
         () => ({ height: '100%', alignItems: 'center', justifyContent: 'center' }),
         () => ({ size: 15 }),
     ),
     withStyles(styles),
-)(SingleLockedSelectPlain);
+)(SingleLockedSelectPlain) as any;
