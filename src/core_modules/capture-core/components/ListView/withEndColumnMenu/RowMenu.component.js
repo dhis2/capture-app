@@ -1,15 +1,12 @@
 // @flow
 import React, { useState, useRef } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu } from '@dhis2/ui';
 import type { Props } from './rowMenu.types';
 import { ConditionalTooltip } from '../../Tooltips/ConditionalTooltip';
-import { isValidPeriod } from '../../../utils/validation/validators/form';
 
 export const RowMenu = (props: Props) => {
     const { customRowMenuContents = [], row } = props;
-    const eventOccurredAt = row.occurredAt;
 
     const anchorRef = useRef(null);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
@@ -19,30 +16,35 @@ export const RowMenu = (props: Props) => {
     };
 
     const renderMenuItems = () => customRowMenuContents.map((content) => {
-        const { isWithinValidPeriod } = isValidPeriod(eventOccurredAt, content?.expiredPeriod);
-        const isDisabled = !content.clickHandler || !isWithinValidPeriod;
+        const tooltipContent = typeof content.tooltipContent === 'function'
+            ? content.tooltipContent(row)
+            : content.tooltipContent;
+
+        const tooltipEnabledRaw = typeof content.tooltipEnabled === 'function'
+            ? content.tooltipEnabled(row)
+            : content.tooltipEnabled;
+
+        const isDisabledRaw = typeof content.disabled === 'function'
+            ? content.disabled(row)
+            : content.disabled;
 
         return (
             <ConditionalTooltip
                 key={content.key}
-                content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be edited', {
-                    occurredAt: eventOccurredAt,
-                    interpolation: { escapeValue: false },
-                })}
-                enabled={!isWithinValidPeriod}
+                content={tooltipContent}
+                enabled={!!tooltipEnabledRaw}
             >
                 <MenuItem
                     key={content.key}
                     data-test={`menu-item-${content.key}`}
                     onClick={() => {
-                        if (!content.clickHandler) {
-                            return;
+                        const handler = content.clickHandler;
+                        if (typeof handler === 'function') {
+                            setActionsIsOpen(false);
+                            handler(row);
                         }
-                        setActionsIsOpen(false);
-                        // $FlowFixMe common flow, I checked this 4 lines up
-                        content.clickHandler(row);
                     }}
-                    disabled={isDisabled}
+                    disabled={!content.clickHandler || !!isDisabledRaw}
                     label={content.label}
                     icon={content.icon}
                 />

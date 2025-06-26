@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-26T08:46:31.584Z\n"
-"PO-Revision-Date: 2025-06-26T08:46:31.584Z\n"
+"POT-Creation-Date: 2025-06-26T11:34:57.433Z\n"
+"PO-Revision-Date: 2025-06-26T11:34:57.433Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -585,9 +585,6 @@ msgstr "Stage filters"
 msgid "Rows per page"
 msgstr "Rows per page"
 
-msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-msgstr "{{occurredAt}} belongs to an expired period. Event cannot be edited"
-
 msgid "Could not get organisation unit"
 msgstr "Could not get organisation unit"
 
@@ -878,6 +875,9 @@ msgstr "event"
 
 msgid "You don't have access to edit this event"
 msgstr "You don't have access to edit this event"
+
+msgid "{{occurredAt}} belongs to an expired period. Event cannot be edited"
+msgstr "{{occurredAt}} belongs to an expired period. Event cannot be edited"
 
 msgid "View changelog"
 msgstr "View changelog"
