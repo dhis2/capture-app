@@ -29,6 +29,12 @@ Cypress.Commands.add('forceVisit', (url) => {
     cy.window().then((win) => { win.location.href = url; });
 });
 
+Cypress.Commands.add('cleanIndexBD', () => {
+    cy.window().then(win =>
+        win.indexedDB.databases().then(db => db.forEach(database => win.indexedDB.deleteDatabase(database.name))),
+    );
+});
+
 // overrides loginByApi from @dhis2/cypress-commands
 // temporary solution: should use solution from @dhis2/cypres-commands when available
 Cypress.Commands.add('loginByApi', ({ username, password, baseUrl }) => {
