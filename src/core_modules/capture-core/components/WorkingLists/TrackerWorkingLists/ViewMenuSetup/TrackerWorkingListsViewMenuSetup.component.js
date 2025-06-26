@@ -7,7 +7,7 @@ import { makeQuerySingleResource } from 'capture-core/utils/api';
 import i18n from '@dhis2/d2-i18n';
 import { TrackerWorkingListsTopBarActionsSetup } from '../ActionsSetup';
 import type { CustomMenuContents } from '../../WorkingListsBase';
-import type { Props } from './TrackerWorkingListsViewMenuSetup.types';
+import type { Props } from './trackerWorkingListsViewMenuSetup.types';
 import { DownloadDialog, useSelectedRowsController } from '../../WorkingListsCommon';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/TEIFilters';
