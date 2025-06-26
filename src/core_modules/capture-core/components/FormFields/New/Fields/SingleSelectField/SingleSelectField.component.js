@@ -5,7 +5,6 @@ import { withFocusHandler } from './withFocusHandler';
 
 type Props = {
     value: ?string,
-    onChange?: any,
     onBlur?: ?(value: any) => void,
     options: Array<{value: any, label: string}>,
     disabled?: ?boolean,
@@ -16,16 +15,11 @@ type Props = {
     dataTest?: ?string,
 };
 
-const SingleSelectComponent =
-    withFocusHandler()(
-        SingleSelectFieldUI,
-    );
 
-export const SingleSelectField = (props: Props) => {
+const SingleSelectFieldComponentPlain = (props: Props) => {
     const {
         value,
         onBlur,
-        onChange,
         options,
         disabled,
         required,
@@ -33,34 +27,38 @@ export const SingleSelectField = (props: Props) => {
         filterable = true,
         clearable = true,
         dataTest = 'single-select-input',
-        ...passOnProps
     } = props;
+    const selectedValue: ?string = value ?? '';
+
+    const handleBlur = () => {
+        onBlur?.(selectedValue || null);
+    };
 
     const handleSelect = ({ selected }) => {
         onBlur?.(selected);
     };
-
-
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
-        <SingleSelectComponent
-            selected={value || ''}
-            onChange={handleSelect}
-            disabled={disabled}
-            required={required}
-            placeholder={placeholder}
-            filterable={filterable}
-            clearable={clearable}
-            dataTest={dataTest}
-            {...passOnProps}
-        >
-            {options?.map(option => (
-                <SingleSelectOption
-                    key={option.value}
-                    label={option.label}
-                    value={option.value}
-                />
-            ))}
-        </SingleSelectComponent>
+        <div onBlur={handleBlur}>
+            <SingleSelectFieldUI
+                dataTest={dataTest}
+                selected={selectedValue}
+                onChange={handleSelect}
+                disabled={disabled}
+                required={required}
+                placeholder={placeholder}
+                filterable={filterable}
+                clearable={clearable}
+            >
+                {options.map(option => (
+                    <SingleSelectOption
+                        key={option.value}
+                        label={option.label}
+                        value={option.value}
+                    />
+                ))}
+            </SingleSelectFieldUI>
+        </div>
     );
 };
+
+export const SingleSelectField = withFocusHandler()(SingleSelectFieldComponentPlain);
