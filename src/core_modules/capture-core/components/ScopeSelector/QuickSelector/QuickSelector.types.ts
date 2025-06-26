@@ -8,7 +8,7 @@ export type Props = {
     previousOrgUnitId?: string;
     onSetOrgUnit?: (orgUnitId: string, orgUnitObject: Record<string, any>) => void;
     onSetProgramId?: (programId: string) => void;
-    onSetCategoryOption?: (categoryId: string, categoryOptionId: string) => void;
+    onSetCategoryOption?: (categoryOption: Record<string, any>, categoryId: string) => void;
     onResetOrgUnitId: () => void;
     onResetProgramId: (baseAction: any) => void;
     onResetCategoryOption?: (categoryId: string) => void;
@@ -18,4 +18,5 @@ export type Props = {
     children: ReactNode;
     isReadOnlyOrgUnit?: boolean;
     orgUnitTooltip?: boolean;
+    isUserInteractionInProgress?: boolean;
 };

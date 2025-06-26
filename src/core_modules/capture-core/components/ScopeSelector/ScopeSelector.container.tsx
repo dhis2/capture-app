@@ -1,5 +1,4 @@
-// @flow
-import React, { type ComponentType, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
@@ -7,16 +6,14 @@ import { useOrgUnitNameWithAncestors } from '../../metadataRetrieval/orgUnitName
 import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
 
-const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName, displayName, ouNameError) => {
-    // because we want the orgUnit to be fetched and stored
-    // before allowing the user to view the locked selector
+const deriveReadiness = (lockedSelectorLoads: boolean, selectedOrgUnitId?: string | null, selectedOrgUnitName?: string, displayName?: string, ouNameError?: any) => {
     if (!ouNameError && selectedOrgUnitId && (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
         return false;
     }
     return !lockedSelectorLoads;
 };
 
-export const ScopeSelector: ComponentType<OwnProps> = ({
+export const ScopeSelector = ({
     isUserInteractionInProgress = false,
     selectedProgramId,
     selectedOrgUnitId,
@@ -33,9 +30,9 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
     children,
     isReadOnlyOrgUnit,
     orgUnitTooltip,
-}) => {
+}: OwnProps) => {
     const dispatch = useDispatch();
-    const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: undefined, id: selectedOrgUnitId });
+    const [selectedOrgUnit, setSelectedOrgUnit] = useState<{ name?: string; id?: string | null }>({ name: undefined, id: selectedOrgUnitId });
     const { displayName, error: ouNameError } = useOrgUnitNameWithAncestors(selectedOrgUnit.id);
 
     useEffect(() => {
@@ -50,12 +47,12 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
         }
     }, [selectedOrgUnitId, selectedOrgUnit, setSelectedOrgUnit]);
 
-    const handleSetOrgUnit = (orgUnitId, orgUnitObject) => {
+    const handleSetOrgUnit = (orgUnitId: string, orgUnitObject: Record<string, any>) => {
         setSelectedOrgUnit(orgUnitObject);
-        onSetOrgUnit && onSetOrgUnit(orgUnitId);
+        onSetOrgUnit && onSetOrgUnit(orgUnitId, orgUnitObject);
     };
 
-    const { lockedSelectorLoads, previousOrgUnitId } = useSelector(({ activePage, app }) => (
+    const { lockedSelectorLoads, previousOrgUnitId } = useSelector(({ activePage, app }: any) => (
         {
             lockedSelectorLoads: activePage.lockedSelectorLoads,
             previousOrgUnitId: app.previousOrgUnitId,
@@ -67,7 +64,7 @@ export const ScopeSelector: ComponentType<OwnProps> = ({
         <ScopeSelectorComponent
             onResetProgramId={onResetProgramId}
             onResetOrgUnitId={() => {
-                selectedOrgUnit && dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id));
+                selectedOrgUnit && dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id || undefined));
                 return onResetOrgUnitId();
             }}
             onResetAllCategoryOptions={onResetAllCategoryOptions}
