@@ -34,7 +34,7 @@ export const DeleteActionButton = ({
 
     return (
         <ConditionalTooltip
-            content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted2', {
+            content={i18n.t('{{occurredAt}} belongs to an expired period. Event cannot be deleted', {
                 occurredAt: occurredAtClientView,
                 interpolation: { escapeValue: false },
             })}
