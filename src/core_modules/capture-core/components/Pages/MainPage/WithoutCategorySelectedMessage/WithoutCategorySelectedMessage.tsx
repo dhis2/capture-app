@@ -1,15 +1,13 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-// $FlowFixMe
 import { shallowEqual, useSelector } from 'react-redux';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 
-const styles = {
+const styles: Readonly<any> = {
     incompleteMessageContainer: {
         marginTop: '10px',
     },
@@ -26,9 +24,15 @@ const errorMessages = {
     GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-const WithoutCategorySelectedMessagePlain = ({ programId, classes }) => {
+type OwnProps = {
+    programId: string;
+};
+
+type Props = OwnProps & WithStyles<typeof styles>;
+
+const WithoutCategorySelectedMessagePlain = ({ programId, classes }: Props) => {
     const { program } = useProgramInfo(programId);
-    const { categories } = useSelector(({ currentSelections }) => ({
+    const { categories } = useSelector(({ currentSelections }: { currentSelections: any }) => ({
         categories: currentSelections.categories,
     }), shallowEqual);
 

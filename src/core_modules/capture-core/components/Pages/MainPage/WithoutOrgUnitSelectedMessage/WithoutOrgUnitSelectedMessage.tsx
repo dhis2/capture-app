@@ -1,13 +1,12 @@
-// @flow
 import React, { useMemo } from 'react';
 import { colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import { programTypes } from '../../../../metaData';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 
-const styles = {
+const styles: Readonly<any> = {
     incompleteMessageContainer: {
         marginTop: '10px',
     },
@@ -32,11 +31,12 @@ const styles = {
     },
 };
 
-type Props = {|
-    programId: string,
-    setShowAccessible: () => void,
-    ...CssClasses,
-|}
+type OwnProps = {
+    programId: string;
+    setShowAccessible: () => void;
+};
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, classes }: Props) => {
     const { program, programType } = useProgramInfo(programId);

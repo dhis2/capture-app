@@ -1,10 +1,9 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         justifyContent: 'center',
@@ -46,9 +45,7 @@ const styles = {
     },
 };
 
-type Props = {|
-    ...CssClasses,
-|};
+type Props = WithStyles<typeof styles>;
 
 const EmptyStateIcon = () => (
     <svg width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">

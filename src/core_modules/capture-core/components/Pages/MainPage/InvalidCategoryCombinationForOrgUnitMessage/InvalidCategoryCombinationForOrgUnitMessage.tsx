@@ -1,16 +1,17 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 
-const styles = {
+const styles: Readonly<any> = {
     incompleteMessageContainer: {
         marginTop: '10px',
     },
 };
 
-export const InvalidCategoryCombinationForOrgUnitMessagePlain = ({ classes }: {| ...CssClasses |}) => (
+type Props = WithStyles<typeof styles>;
+
+export const InvalidCategoryCombinationForOrgUnitMessagePlain = ({ classes }: Props) => (
     <div className={classes.incompleteMessageContainer}>
         <IncompleteSelectionsMessage>
             {i18n.t(

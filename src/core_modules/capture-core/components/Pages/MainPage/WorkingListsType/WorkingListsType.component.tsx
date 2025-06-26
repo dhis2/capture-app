@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingListsInit } from '../EventWorkingListsInit';
