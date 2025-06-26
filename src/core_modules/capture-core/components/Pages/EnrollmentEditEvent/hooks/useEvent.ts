@@ -1,4 +1,3 @@
-// @flow
 import { useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
@@ -7,12 +6,13 @@ const defaultState = {
     programStage: '',
     enrollment: '',
     trackedEntity: '',
+    event: '',
 };
 
 const eventQuery = {
     event: {
         resource: 'tracker/events',
-        id: ({ variables: { id } }) => id,
+        id: ({ variables }: any) => variables.id,
         params: {
             fields: ['program', 'programStage', 'enrollment', 'trackedEntity', 'event'],
         },
@@ -22,7 +22,7 @@ const eventQuery = {
 const enrollmentQuery = {
     enrollment: {
         resource: 'tracker/enrollments',
-        id: ({ variables: { enrollment } }) => enrollment,
+        id: ({ variables }: any) => variables.enrollment,
         params: {
             fields: ['trackedEntity'],
         },
@@ -42,21 +42,20 @@ export const useEvent = (eventId: string) => {
     }, [eventId, refetch]);
 
     useEffect(() => {
-        data?.event && setEvent(data.event);
+        data?.event && setEvent(data.event as any);
     }, [data?.event]);
 
     useEffect(() => {
-        // fallback for the case when the endpoint tracker/events does not return the trackedEntity field.
         if (event.enrollment && event.trackedEntity === undefined) {
             refetchFallback({ variables: { enrollment: event.enrollment } });
         }
     }, [event.enrollment, event.trackedEntity, refetchFallback]);
 
     useEffect(() => {
-        if (dataFallback?.enrollment?.trackedEntity) {
-            setEvent(e => ({ ...e, trackedEntity: dataFallback?.enrollment?.trackedEntity }));
+        if (dataFallback?.enrollment && (dataFallback.enrollment as any).trackedEntity) {
+            setEvent(e => ({ ...e, trackedEntity: (dataFallback.enrollment as any).trackedEntity }));
         }
-    }, [dataFallback?.enrollment?.trackedEntity]);
+    }, [dataFallback?.enrollment]);
 
     return {
         error,

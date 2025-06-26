@@ -2408,7 +2408,7 @@
     "@dhis2/pwa" "10.5.0"
     moment "^2.24.0"
 
-"@dhis2/app-runtime@3.10.2", "@dhis2/app-runtime@^3.10.2":
+"@dhis2/app-runtime@3.10.2", "@dhis2/app-runtime@^3.10.2", "@dhis2/app-runtime@^3.9.3":
   version "3.10.2"
   resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-3.10.2.tgz#e82639bd68234bdeaf2f6d3c256dcdfcdd267da2"
   integrity sha512-GiftKk8ZTXlPElXAgVJn41Vj6E1vEGTPGrjrqU7j41ZTYsg+tUcCkISNt1woe5l7E+8+y+9Fy4bgqSsBOAEUvg==
@@ -2424,10 +2424,20 @@
   resolved "https://registry.yarnpkg.com/@dhis2/app-service-alerts/-/app-service-alerts-3.10.2.tgz#0e07c3530606f81ab998a20f2c478600b6027a77"
   integrity sha512-2IqaawnlOzYVJLBF2AKVQJ4cuxJNZD7FK0XE0XOv1WwFs70h6bp23MQueIJ/QHxLo7lamE0FC22m4diM4P0CuA==
 
+"@dhis2/app-service-alerts@3.14.4":
+  version "3.14.4"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-alerts/-/app-service-alerts-3.14.4.tgz#08352be174b59909664f991e0f91ffdb8e77850b"
+  integrity sha512-VWm794Kz9ntjIVFFKvvG0yt7ntXZw/qN0K2wmg+jaAMBeNGdxRCsnxDTMcAVN3POmAzD71X3X1jd7OfRumxGjQ==
+
 "@dhis2/app-service-config@3.10.2":
   version "3.10.2"
   resolved "https://registry.yarnpkg.com/@dhis2/app-service-config/-/app-service-config-3.10.2.tgz#be52676068e31cdb1fe3f8ddabb8153e1cd6e3e6"
   integrity sha512-Crw7Tx4yg4qWw3qYxNCIye77IaY2HUYyDmDKPVVWzgmrcSGxpunv/NtsUg12pxrVfVLnqlH9L6AF9A6hO0afmw==
+
+"@dhis2/app-service-config@3.14.4":
+  version "3.14.4"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-config/-/app-service-config-3.14.4.tgz#44a52b64c91f1252e4709c56f84d0347be45af8b"
+  integrity sha512-pX8GQJOZwztoiPZ1Fp1Uq5Z0bFSTpmp8IPZqWMWAoQtHuFMlqtBRGKODd8XsbazNSteg29jS+/oz+vT8Dfj+oA==
 
 "@dhis2/app-service-data@3.10.2":
   version "3.10.2"
@@ -2436,6 +2446,13 @@
   dependencies:
     react-query "^3.13.11"
 
+"@dhis2/app-service-data@3.14.4":
+  version "3.14.4"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-data/-/app-service-data-3.14.4.tgz#84e48f357f19bd8fc9a194a4381d1e1a58a41841"
+  integrity sha512-iyWMKkvWms+Lp8V/+V0PZhjynis9LtXzPoSfHwusB+cFPeBVDvxld8hW/BttGIX8ujPpYluljHSE4b1kfEzy2A==
+  dependencies:
+    "@tanstack/react-query" "^4.36.1"
+
 "@dhis2/app-service-offline@3.10.2":
   version "3.10.2"
   resolved "https://registry.yarnpkg.com/@dhis2/app-service-offline/-/app-service-offline-3.10.2.tgz#082279b7045e702c2eecda751d762225313156b0"
@@ -2443,10 +2460,24 @@
   dependencies:
     lodash "^4.17.21"
 
+"@dhis2/app-service-offline@3.14.4":
+  version "3.14.4"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-offline/-/app-service-offline-3.14.4.tgz#b0dd39fb20fc747a27dff39a9f929a8c68bd63f4"
+  integrity sha512-8NkzyDO0pn6/nCFnRBmtcxJSdOaLcFjM7OzkWkwEAlIaa7jgQZl09FLXt8bygU9ELtLkzHO2tuDCHR2ggDIhFA==
+  dependencies:
+    lodash "^4.17.21"
+
 "@dhis2/app-service-plugin@3.10.2":
   version "3.10.2"
   resolved "https://registry.yarnpkg.com/@dhis2/app-service-plugin/-/app-service-plugin-3.10.2.tgz#09de64ee59017c86c8dab96a0d2ca0d915ae9d31"
   integrity sha512-FqR6ILmvAXT2n1SzCZknT+5jJRdajg1dBegWAu3xqZXAntsM4wvFLCx6EtjS5LO2Kga9VZ+TJmVr2UFX1330CQ==
+  dependencies:
+    post-robot "^10.0.46"
+
+"@dhis2/app-service-plugin@3.14.4":
+  version "3.14.4"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-plugin/-/app-service-plugin-3.14.4.tgz#0742be93265d785dacea364556f5edd02c95c00f"
+  integrity sha512-XUWzNEC3MTyj/RPX+JLhkKNItkqwnLRkaqY2roMQNBHQFHB5m6KhHr07+tV+2TKMDBNul8LqDq0brFu7OUow/g==
   dependencies:
     post-robot "^10.0.46"
 
@@ -3832,6 +3863,19 @@
   integrity sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
   dependencies:
     defer-to-connect "^1.0.1"
+
+"@tanstack/query-core@4.40.0":
+  version "4.40.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.40.0.tgz#ce53b25573ca17a2497a8313b1d8f0e135feaaa3"
+  integrity sha512-7MJTtZkCSuehMC7IxMOCGsLvHS3jHx4WjveSrGsG1Nc1UQLjaFwwkpLA2LmPfvOAxnH4mszMOBFD6LlZE+aB+Q==
+
+"@tanstack/react-query@^4.36.1":
+  version "4.40.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.40.0.tgz#9c82722f028d4b3ab3a2325d31c655bec8d43876"
+  integrity sha512-kt1G/wETT/Ad79cac5zJ8tyaMOm4rgyeomW5yDxgOO9qEhOwufgw9kgPpp+T9U0M0lL7EMoc6YXgv4gYhXu9tg==
+  dependencies:
+    "@tanstack/query-core" "4.40.0"
+    use-sync-external-store "^1.2.0"
 
 "@teppeis/multimaps@2.0.0":
   version "2.0.0"
@@ -17153,6 +17197,11 @@ url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+use-sync-external-store@^1.2.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.5.0.tgz#55122e2a3edd2a6c106174c27485e0fd59bcfca0"
+  integrity sha512-Rb46I4cGGVBmjamjphe8L/UnvJD+uPPtTkNvX5mZgqdbavhI4EbgIWJiIHXJ8bc/i9EQGPRh4DwEURJ552Do0A==
 
 use@^3.1.0:
   version "3.1.1"
