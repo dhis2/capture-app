@@ -1,9 +1,9 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+// @ts-expect-error - SelectorBarItem is available at runtime, but its TypeScript definition is not exposed by the UI library
 import { SelectorBarItem, Menu, MenuItem, MenuDivider, spacers } from '@dhis2/ui';
 import log from 'loglevel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import type { Category as CategoryMetadata } from '../../../../metaData';
 import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
@@ -11,25 +11,26 @@ import { makeOnSelectSelector } from './categorySelector.selectors';
 import { FiltrableMenuItems } from '../FiltrableMenuItems';
 
 type SelectOption = {
-    label: string,
-    value: string,
+    label: string;
+    value: string;
 };
 
-type Props = {
-    category: CategoryMetadata,
-    selectedOrgUnitId: ?string,
-    onSelect: (option: SelectOption) => void,
-    selectedCategoryName: ?string,
-    onClearSelectionClick: () => void,
-    disabled?: boolean,
-    displayOnly?: boolean,
-    classes: Object,
+type OwnProps = {
+    category: CategoryMetadata;
+    selectedOrgUnitId: string | null | undefined;
+    onSelect: (option: SelectOption) => void;
+    selectedCategoryName: string | null | undefined;
+    onClearSelectionClick: () => void;
+    disabled?: boolean;
+    displayOnly?: boolean;
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 type State = {
-    options: ?Array<SelectOption>,
-    prevOrgUnitId: ?string,
-    open: boolean,
+    options: Array<SelectOption> | null | undefined;
+    prevOrgUnitId: string | null | undefined;
+    open: boolean;
 };
 
 const styles = () => ({
@@ -43,10 +44,10 @@ const styles = () => ({
 class CategorySelectorPlain extends React.Component<Props, State> {
     static getOptionsAsync(
         categoryId: string,
-        selectedOrgUnitId: ?string,
-        onIsAborted: Function,
+        selectedOrgUnitId: string | null | undefined,
+        onIsAborted: () => boolean,
     ) {
-        const predicate = (categoryOption: Object) => {
+        const predicate = (categoryOption: Record<string, any>) => {
             if (!selectedOrgUnitId) {
                 return true;
             }
@@ -59,7 +60,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             return !!orgUnits[selectedOrgUnitId];
         };
 
-        const project = (categoryOption: Object) => ({
+        const project = (categoryOption: Record<string, any>) => ({
             label: categoryOption.displayName,
             value: categoryOption.id,
             writeAccess: categoryOption.access.data.write,
@@ -81,9 +82,6 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         return null;
     }
 
-    onSelectSelector: Function;
-    cancelablePromise: Object;
-
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -92,7 +90,6 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             open: false,
         };
         this.onSelectSelector = makeOnSelectSelector();
-        // todo you cannot setState from this component (lgtm report)
         this.loadCagoryOptions(this.props);
     }
 
@@ -106,6 +103,9 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         this.cancelablePromise && this.cancelablePromise.cancel();
         this.cancelablePromise = null;
     }
+
+    onSelectSelector: (data: any) => (optionId: string) => void;
+    cancelablePromise: any;
 
     loadCagoryOptions(props: Props) {
         const { category, selectedOrgUnitId } = props;
@@ -185,7 +185,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                     if (displayOnly) return;
                     this.setState({ open });
                 }}
-                onClearSelectionClick={!displayOnly && onClearSelectionClick}
+                onClearSelectionClick={!displayOnly ? onClearSelectionClick : undefined}
                 dataTest="category-selector-container"
                 disabled={disabled}
                 displayOnly={displayOnly}
@@ -209,9 +209,10 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                                         key={option.value}
                                         label={option.label}
                                         value={option.value}
+                                        suffix=""
                                         onClick={(item) => {
                                             this.setState({ open: false });
-                                            handleSelect(item.value);
+                                            handleSelect(item.value || '');
                                         }}
                                     />
                                 ))
@@ -226,6 +227,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                                             onClearSelectionClick();
                                         }}
                                         label={i18n.t('Clear selection')}
+                                        suffix=""
                                     />
                                 </>
                             )}
@@ -236,4 +238,4 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         );
     }
 }
-export const CategorySelector = withStyles(styles)(CategorySelectorPlain);
+export const CategorySelector = withStyles(styles)(CategorySelectorPlain) as any;

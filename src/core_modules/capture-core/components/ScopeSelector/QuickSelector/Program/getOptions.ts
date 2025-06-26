@@ -1,12 +1,11 @@
-// @flow
 import type { Program, Icon } from '../../../../metaData';
 
 const getOptionsFromPrograms = (
     programs: Array<Program>,
 ): Array<{
-    value: string,
-    label: string,
-    icon?: Icon,
+    value: string;
+    label: string;
+    icon?: Icon;
 }> =>
     programs.map(program => ({
         label: program.name,
@@ -14,7 +13,7 @@ const getOptionsFromPrograms = (
         icon: program.icon,
     }));
 
-export const getOptions = (selectedOrgUnitId?: string, programsArray: Array<Program>) => {
+export const getOptions = (programsArray: Array<Program>, selectedOrgUnitId?: string) => {
     const programOptions = selectedOrgUnitId
         ? getOptionsFromPrograms(
             programsArray.filter(program => program.organisationUnits[selectedOrgUnitId] && program.access.data.read),

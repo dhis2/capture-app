@@ -1,7 +1,6 @@
-// @flow
 import * as React from 'react';
 import { MenuDivider, MenuItem, Button, colors, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { FiltrableMenuItems } from '../FiltrableMenuItems';
 import type { Program, Icon } from '../../../../metaData';
@@ -18,17 +17,18 @@ const styles = () => ({
     },
 });
 
-type Props = {
+type OwnProps = {
     programOptions: Array<{
-        value: string,
-        label: string,
-        icon?: Icon,
-    }>,
-    programsArray: Array<Program>,
-    onChange: ({ value: string }) => void,
-    onResetOrgUnit: () => void,
-    ...CssClasses,
+        value: string;
+        label: string;
+        icon?: Icon;
+    }>;
+    programsArray: Array<Program>;
+    onChange: (option: { value?: string }) => void;
+    onResetOrgUnit: () => void;
 };
+
+type Props = OwnProps & WithStyles<typeof styles>;
 
 const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgUnit, classes }: Props) => {
     const areAllProgramsAvailable =
@@ -49,6 +49,7 @@ const ProgramListPlain = ({ programOptions, programsArray, onChange, onResetOrgU
                         key={option.value}
                         label={<OptionLabel icon={option.icon} label={option.label} />}
                         value={option.value}
+                        suffix=""
                         onClick={onChange}
                     />
                 ))

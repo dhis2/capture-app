@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { SelectorBar } from '@dhis2/ui';
 import { ProgramSelector } from './Program/ProgramSelector.component';
