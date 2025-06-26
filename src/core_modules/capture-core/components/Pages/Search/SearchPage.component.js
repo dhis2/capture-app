@@ -8,6 +8,9 @@ import type { Props, PlainProps } from './searchPage.types';
 import { TopBar } from './TopBar.container';
 import { SearchBox } from '../../SearchBox';
 import { TemplateSelector } from '../../TemplateSelector';
+import { WidgetBulkDataEntry } from '../../WidgetBulkDataEntry';
+import { BulkDataEntry } from '../../BulkDataEntry';
+import { bulkDataEntryBreadcrumbsKeys } from '../../Breadcrumbs/BulkDataEntryBreadcrumb';
 
 const getStyles = () => ({
     backButton: {
@@ -20,13 +23,14 @@ const getStyles = () => ({
         margin: `0 ${spacers.dp16} 0`,
         gap: spacers.dp16,
     },
-    half: {
+    left: {
         flex: 1,
     },
-    quarter: {
-        flex: 0.4,
+    right: {
+        width: '260px',
     },
     searchBoxWrapper: {
+        height: 'fit-content',
         padding: spacers.dp16,
         background: colors.white,
         border: '1px solid',
@@ -35,21 +39,48 @@ const getStyles = () => ({
     },
 });
 
-const SearchPagePlain = ({ programId, orgUnitId, onNavigateToMainPage, classes }: PlainProps) => (
+const SearchPagePlain = ({
+    programId,
+    orgUnitId,
+    onNavigateToMainPage,
+    setShowBulkDataEntryPlugin,
+    showBulkDataEntryPlugin,
+    classes,
+}: PlainProps) => (
     <>
         <TopBar programId={programId} orgUnitId={orgUnitId} />
-        <Button icon={<IconChevronLeft24 />} dataTest="back-button" className={classes.backButton} onClick={onNavigateToMainPage}>
-            {i18n.t('Back')}
-        </Button>
+        {showBulkDataEntryPlugin ? (
+            <BulkDataEntry
+                programId={programId}
+                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                page={bulkDataEntryBreadcrumbsKeys.SEARCH_PAGE}
+            />
+        ) : (
+            <>
+                <Button
+                    icon={<IconChevronLeft24 />}
+                    dataTest="back-button"
+                    className={classes.backButton}
+                    onClick={onNavigateToMainPage}
+                >
+                    {i18n.t('Back')}
+                </Button>
 
-        <div className={classes.container}>
-            <div className={`${classes.half} ${classes.searchBoxWrapper}`}>
-                <SearchBox programId={programId} />
-            </div>
-            <div className={classes.quarter}>
-                <TemplateSelector />
-            </div>
-        </div>
+                <div className={classes.container}>
+                    <div className={`${classes.left} ${classes.searchBoxWrapper}`}>
+                        <SearchBox programId={programId} />
+                    </div>
+                    <div className={classes.right}>
+                        <TemplateSelector />
+                        <br />
+                        <WidgetBulkDataEntry
+                            programId={programId}
+                            setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                        />
+                    </div>
+                </div>
+            </>
+        )}
     </>
 );
 

@@ -4,9 +4,14 @@ import { typeof searchScopes } from '../SearchBox.constants';
 import { typeof dataElementTypes } from '../../../metaData';
 import type { AvailableSearchOption } from '../SearchBox.types';
 import type { ListItem } from '../../CardList/CardList.types';
+import type { OptionSet } from '../../../metaData';
 
-
-export type CardDataElementsInformation = Array<{| id: string, name: string, type: $Values<dataElementTypes> |}>
+export type CardDataElementsInformation = Array<{|
+  id: string,
+  name: string,
+  type: $Values<dataElementTypes>,
+  optionSet?: ?OptionSet,
+|}>
 
 export type CardProfileImageElementInformation = $ReadOnly<{| id: string, name: string, type: "IMAGE" |}>
 

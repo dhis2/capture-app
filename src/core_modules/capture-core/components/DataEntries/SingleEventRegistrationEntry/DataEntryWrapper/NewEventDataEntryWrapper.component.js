@@ -12,6 +12,8 @@ import { useLocationQuery } from '../../../../utils/routing';
 import { useRulesEngine } from './useRulesEngine';
 import type { PlainProps } from './NewEventDataEntryWrapper.types';
 import { useMetadataForProgramStage } from '../../common/ProgramStage/useMetadataForProgramStage';
+import { useProgramExpiryForUser } from '../../../../hooks';
+import { LoadingMaskForPage } from '../../../LoadingMasks';
 
 const getStyles = () => ({
     flexContainer: {
@@ -47,10 +49,11 @@ const NewEventDataEntryWrapperPlain = ({
 }: PlainProps) => {
     const { id: programId } = useCurrentProgramInfo();
     const orgUnitId = useLocationQuery().orgUnitId;
-    const { formFoundation, stage } = useMetadataForProgramStage({ programId });
-    const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
-    const rulesReady = useRulesEngine({ programId, orgUnit, formFoundation });
+    const { formFoundation, stage, isLoading } = useMetadataForProgramStage({ programId });
+    const { orgUnit: orgUnitContext, error } = useCoreOrgUnit(orgUnitId);
+    const rulesReady = useRulesEngine({ programId, orgUnitContext, formFoundation });
     const titleText = useScopeTitleText(programId);
+    const expiryPeriod = useProgramExpiryForUser(programId);
 
     if (error) {
         return error.errorComponent;
@@ -66,7 +69,11 @@ const NewEventDataEntryWrapperPlain = ({
     };
     const isCustomForm = checkIfCustomForm();
 
-    return rulesReady && (
+    if (isLoading || !rulesReady) {
+        return <LoadingMaskForPage />;
+    }
+
+    return (
         <div className={classes.container}>
             <div className={classes.flexContainer}>
                 <div className={classes.title} >
@@ -100,9 +107,10 @@ const NewEventDataEntryWrapperPlain = ({
                 <DataEntry
                     programId={programId}
                     stage={stage}
-                    orgUnit={orgUnit}
+                    orgUnit={orgUnitContext}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
+                    expiryPeriod={expiryPeriod}
                 />
                 <EventsList />
             </div>

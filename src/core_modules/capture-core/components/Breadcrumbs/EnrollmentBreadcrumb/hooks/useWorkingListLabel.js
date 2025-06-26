@@ -10,6 +10,7 @@ type Props = {
 }
 
 const DefaultFilterLabels = {
+    default: i18n.t('Program overview'),
     active: i18n.t('Active enrollments'),
     complete: i18n.t('Completed enrollments'),
     cancelled: i18n.t('Cancelled enrollments'),
@@ -17,7 +18,6 @@ const DefaultFilterLabels = {
 
 export const useWorkingListLabel = ({
     programId,
-    trackedEntityName,
     displayFrontPageList,
 }: Props) => {
     const workingListTemplates = useSelector(({ workingListsTemplates }) => workingListsTemplates?.teiList);
@@ -38,20 +38,18 @@ export const useWorkingListLabel = ({
                 return DefaultFilterLabels[selectedTemplateId];
             }
 
-            if (selectedTemplate.name === 'default') {
-                return i18n.t('{{trackedEntityName}} list', { trackedEntityName });
-            }
+            return i18n.t('Program overview');
         }
 
         if (!displayFrontPageList) return i18n.t('Search');
-        return trackedEntityName ? i18n.t('{{trackedEntityName}} list', { trackedEntityName }) : i18n.t('Working List');
+
+        return i18n.t('Program overview');
     }, [
         displayFrontPageList,
         isLoadingTemplates,
         isSameProgram,
         selectedTemplate,
         selectedTemplateId,
-        trackedEntityName,
     ]);
 
     return {
