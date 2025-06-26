@@ -136,7 +136,7 @@ const SingleLockedSelectPlain = ({
                                             setOpenSelectorBarItem(false);
                                             handleOnClear();
                                         }}
-                                        label={i18n.t('Clear selection') as string}
+                                        label={i18n.t('Clear selection')}
                                         suffix=""
                                     />
                                 </>
