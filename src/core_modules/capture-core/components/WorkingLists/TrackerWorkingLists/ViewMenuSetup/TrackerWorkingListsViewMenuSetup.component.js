@@ -11,7 +11,6 @@ import type { Props } from './trackerWorkingListsViewMenuSetup.types';
 import { DownloadDialog } from '../../WorkingListsCommon';
 import { computeDownloadRequest } from './downloadRequest';
 import { convertToClientConfig } from '../helpers/TEIFilters';
-import { FEATURES, useFeature } from '../../../../../capture-core-utils';
 import { useSelectedRowsController } from '../../WorkingListsBase/BulkActionBar';
 import { TrackedEntityBulkActions } from '../TrackedEntityBulkActions';
 
@@ -35,7 +34,6 @@ export const TrackerWorkingListsViewMenuSetup = ({
         allRowsAreSelected,
         removeRowsFromSelection,
     } = useSelectedRowsController({ recordIds: recordsOrder });
-    const hasCSVSupport = useFeature(FEATURES.trackedEntitiesCSV);
     const downloadRequest = useSelector(
         ({ workingLists }) => workingLists[storeId] && workingLists[storeId].currentRequest,
     );
@@ -144,7 +142,6 @@ export const TrackerWorkingListsViewMenuSetup = ({
                 open={downloadDialogOpen}
                 onClose={handleCloseDialog}
                 request={downloadRequest}
-                hasCSVSupport={hasCSVSupport}
             />
         </>
     );

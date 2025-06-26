@@ -168,7 +168,6 @@ import { updateTeiEpic, updateTeiSucceededEpic, updateTeiFailedEpic } from '../c
 import {
     initTeiViewEpic,
     updateTeiListEpic,
-    retrieveTEITemplatesEpic,
     updateTEITemplateEpic,
     addTEITemplateEpic,
     deleteTEITemplateEpic,
@@ -251,7 +250,6 @@ export const epics = combineEpics(
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
-    retrieveTEITemplatesEpic,
     updateTEITemplateEpic,
     addTEITemplateEpic,
     deleteTEITemplateEpic,

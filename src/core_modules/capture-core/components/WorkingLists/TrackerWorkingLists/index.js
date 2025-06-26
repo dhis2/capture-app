@@ -3,7 +3,6 @@ export { TrackerWorkingLists } from './TrackerWorkingLists.component';
 export {
     initTeiViewEpic,
     updateTeiListEpic,
-    retrieveTEITemplatesEpic,
     updateTEITemplateEpic,
     addTEITemplateEpic,
     deleteTEITemplateEpic,
