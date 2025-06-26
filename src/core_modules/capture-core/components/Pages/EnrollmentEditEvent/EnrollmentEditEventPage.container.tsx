@@ -1,9 +1,9 @@
-// @flow
 import React, { useCallback, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataEntryIds } from 'capture-core/constants';
 import { useEnrollmentEditEventPageMode } from 'capture-core/hooks';
+import type { ReduxState } from '../../App/withAppUrlSync.types';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
@@ -50,19 +50,29 @@ import { setCurrentDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { convertIsoToLocalCalendar } from '../../../utils/converters/date';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
-const getEventDate = (event) => {
-    const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt || event?.scheduledAt);
+const getEventDate = (event: Record<string, unknown>) => {
+    const eventDataConvertValue = convertDateWithTimeForView(event?.occurredAt ?? event?.scheduledAt);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
     return eventDate;
 };
 
-const getEventScheduleDate = (event) => {
+const getEventScheduleDate = (event: Record<string, unknown>) => {
     if (!event?.scheduledAt) { return undefined; }
     const eventDataConvertValue = convertIsoToLocalCalendar(event?.scheduledAt);
     return eventDataConvertValue?.toString();
 };
 
-const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }) => {
+type PageStatusParams = {
+    orgUnitId: string;
+    enrollmentSite: Record<string, unknown>;
+    teiDisplayName: string;
+    trackedEntityName: string;
+    programStage: Record<string, unknown>;
+    isLoading: boolean;
+    event: Record<string, unknown>;
+};
+
+const getPageStatus = ({ orgUnitId, enrollmentSite, teiDisplayName, trackedEntityName, programStage, isLoading, event }: PageStatusParams) => {
     if (isLoading) {
         return pageStatuses.LOADING;
     }
@@ -78,17 +88,16 @@ export const EnrollmentEditEventPage = () => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
 
-    const eventId = useSelector(({ viewEventPage }) => viewEventPage.eventId);
-    const error = useSelector(({ activePage }) => activePage.viewEventLoadError?.error);
-    const { loading, event } = useEvent(eventId);
+    const eventId = useSelector((state: ReduxState) => state.viewEventPage.eventId);
+    const error = useSelector((state: ReduxState) => state.activePage.viewEventLoadError?.error);
+    const { loading, event } = useEvent(eventId ?? '');
     const { program: programId, programStage: stageId, trackedEntity: teiId, enrollment: enrollmentId } = event;
     const { orgUnitId, eventId: urlEventId, initMode } = useLocationQuery();
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
-    const storedEvent = enrollmentSite?.events?.find(item => item.event === eventId);
+    const storedEvent = enrollmentSite?.events?.find((item: Record<string, unknown>) => item.event === eventId);
 
     useEffect(() => {
         if (!urlEventId) {
-            // return to main page
             navigate(`/?${buildUrlQueryString({ orgUnitId })}`);
         } else if (eventId !== urlEventId) {
             dispatch(changeEventFromUrl(urlEventId, pageKeys.ENROLLMENT_EVENT));
@@ -102,7 +111,6 @@ export const EnrollmentEditEventPage = () => {
             teiId={teiId}
             enrollmentId={enrollmentId}
             orgUnitId={orgUnitId}
-            error={error}
             initMode={initMode}
             enrollmentSite={enrollmentSite}
             event={storedEvent}
@@ -137,7 +145,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     }, [dispatch]);
 
     const { program } = useProgramInfo(programId);
-    const programStage = [...program?.stages?.values() ?? []].find(item => item.id === stageId);
+    const programStage = [...program?.stages?.values() ?? []].find((item: Record<string, unknown>) => item.id === stageId);
     const hideWidgets = useHideWidgetByRuleLocations(program?.programRules.concat(programStage?.programRules));
 
     const onDeleteTrackedEntitySuccess = useCallback(() => {
@@ -152,19 +160,19 @@ const EnrollmentEditEventPageWithContextPlain = ({
         navigate(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
-    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentError = (message: string) => dispatch(showEnrollmentError({ message }));
     const onEnrollmentSuccess = () => dispatch(fetchEnrollments());
 
-    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate) => {
+    const onUpdateEnrollmentStatus = useCallback((enrollmentToUpdate: Record<string, unknown>) => {
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
     }, [dispatch]);
 
-    const onUpdateEnrollmentStatusError = useCallback((message) => {
+    const onUpdateEnrollmentStatusError = useCallback((message: string) => {
         dispatch(rollbackEnrollmentAndEvents());
         dispatch(showEnrollmentError({ message }));
     }, [dispatch]);
 
-    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }) => {
+    const onUpdateEnrollmentStatusSuccess = useCallback(({ redirect }: { redirect?: boolean }) => {
         dispatch(commitEnrollmentAndEvents());
         redirect && navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
     }, [dispatch, navigate, programId, orgUnitId, teiId, enrollmentId]);
@@ -177,19 +185,19 @@ const EnrollmentEditEventPageWithContextPlain = ({
         dispatch(deleteEnrollmentEventRelationship(relationshipId));
     }, [dispatch]);
 
-    const onUpdateOrAddEnrollmentEvents = useCallback((events) => {
+    const onUpdateOrAddEnrollmentEvents = useCallback((events: Array<Record<string, unknown>>) => {
         dispatch(updateOrAddEnrollmentEvents({ events }));
     }, [dispatch]);
 
-    const onUpdateEnrollmentEventsSuccess = useCallback((events) => {
+    const onUpdateEnrollmentEventsSuccess = useCallback((events: Array<Record<string, unknown>>) => {
         dispatch(commitEnrollmentEvents({ events }));
     }, [dispatch]);
 
-    const onUpdateEnrollmentEventsError = useCallback((events) => {
+    const onUpdateEnrollmentEventsError = useCallback((events: Array<Record<string, unknown>>) => {
         dispatch(rollbackEnrollmentEvents({ events }));
     }, [dispatch]);
 
-    const onSaveAndCompleteEnrollment = useCallback((enrollmentToUpdate) => {
+    const onSaveAndCompleteEnrollment = useCallback((enrollmentToUpdate: Record<string, unknown>) => {
         dispatch(setExternalEnrollmentStatus(statusTypes.COMPLETED));
         dispatch(updateEnrollmentAndEvents(enrollmentToUpdate));
         navigate(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
@@ -221,7 +229,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
         );
     };
 
-    const onHandleScheduleSave = (eventData: Object) => {
+    const onHandleScheduleSave = (eventData: Record<string, unknown>) => {
         dispatch(updateEnrollmentEvent(eventId, eventData));
         navigate(`enrollment?${buildUrlQueryString({ enrollmentId })}`);
     };
@@ -238,9 +246,9 @@ const EnrollmentEditEventPageWithContextPlain = ({
     };
 
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
-    // $FlowFixMe
-    const { name: trackedEntityName, id: trackedEntityTypeId } = program?.trackedEntityType;
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
+    const trackedEntityType = (program as Record<string, unknown>)?.trackedEntityType as { name: string; id: string } | undefined;
+    const { name: trackedEntityName = '', id: trackedEntityTypeId = '' } = trackedEntityType ?? {};
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite ?? {}], programId);
     const eventDate = getEventDate(event);
     const scheduleDate = getEventScheduleDate(event);
     const { currentPageMode } = useEnrollmentEditEventPageMode(event?.status);
@@ -248,7 +256,7 @@ const EnrollmentEditEventPageWithContextPlain = ({
     const userInteractionInProgress = useSelector(state => dataEntryHasChanges(state, dataEntryKey));
 
     const outputEffects = useWidgetDataFromStore(dataEntryKey);
-    const eventAccess = getProgramEventAccess(programId, programStage?.id);
+    const eventAccess = getProgramEventAccess(programId, programStage?.id ?? null);
 
 
     const pageStatus = getPageStatus({
@@ -262,17 +270,15 @@ const EnrollmentEditEventPageWithContextPlain = ({
     });
     const assignee = useAssignee(event);
     const getAssignedUserSaveContext = useAssignedUserSaveContext(event);
-    const onSaveAssignee = (newAssignee) => {
-        // $FlowFixMe dataElementTypes flow error
-        const assignedUser: ApiAssignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
+    const onSaveAssignee = (newAssignee: Record<string, unknown>) => {
+        const assignedUser = convertClientToServer(newAssignee, dataElementTypes.ASSIGNEE);
         dispatch(setAssignee(assignedUser, newAssignee, eventId));
     };
     const onAccessLostFromTransfer = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
-    const onSaveAssigneeError = (prevAssignee) => {
-        const assignedUser: ApiAssignedUser | typeof undefined = prevAssignee
-            // $FlowFixMe dataElementTypes flow error
+    const onSaveAssigneeError = (prevAssignee: Record<string, unknown> | null) => {
+        const assignedUser = prevAssignee
             ? convertClientToServer(prevAssignee, dataElementTypes.ASSIGNEE)
             : undefined;
         dispatch(rollbackAssignee(assignedUser, prevAssignee, eventId));
