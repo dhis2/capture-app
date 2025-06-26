@@ -1,6 +1,3 @@
-// @flow
-
-
 import { WidgetTypes } from './DefaultEnrollmentLayout.constants';
 
 type DefaultComponents = 'QuickActions'
@@ -22,7 +19,7 @@ type DefaultComponents = 'QuickActions'
 export type DefaultWidgetColumnConfig = {
     type: typeof WidgetTypes.COMPONENT,
     name: DefaultComponents,
-    settings?: Object,
+    settings?: Record<string, any>,
 }
 
 export type PluginWidgetColumnConfig = {
@@ -33,15 +30,15 @@ export type PluginWidgetColumnConfig = {
 export type ColumnConfig = DefaultWidgetColumnConfig | PluginWidgetColumnConfig;
 
 export type PageLayoutConfig = {
-    title?: ?string,
-    backgroundColor?: ?string,
-    leftColumn: ?Array<ColumnConfig>,
-    rightColumn: ?Array<ColumnConfig>,
+    title?: string | null,
+    backgroundColor?: string | null,
+    leftColumn: Array<ColumnConfig> | null,
+    rightColumn: Array<ColumnConfig> | null,
 }
 
 export type WidgetConfig = {
-    Component: React$ComponentType<any>,
-    shouldHideWidget?: (props: Object) => boolean,
-    getProps: Function,
-    getCustomSettings?: Function,
+    Component: React.ComponentType<any>,
+    shouldHideWidget?: (props: Record<string, any>) => boolean,
+    getProps: (...args: any[]) => any,
+    getCustomSettings?: (...args: any[]) => any,
 };

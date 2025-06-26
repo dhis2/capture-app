@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -20,6 +19,6 @@ export const skipCategoriesResetAfterSettingOrgUnit =
         actionCreator(actionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET)({ triggeringActionType });
 
 export const resetCategoriesAfterSettingOrgUnit =
-    (resetCategories: Array<string>, triggeringActionType: string) =>
+    (resetCategories: string[], triggeringActionType: string) =>
         actionCreator(actionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET)(
             { resetCategories, triggeringActionType });
