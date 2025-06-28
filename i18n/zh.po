@@ -2,15 +2,15 @@
 # Translators:
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
-# 晓东 林 <13981924470@126.com>, 2025
 # easylin <lin_xd@126.com>, 2025
+# 晓东 林 <13981924470@126.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2025\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,6 +142,11 @@ msgstr "报名登记"
 
 msgid "Complete event"
 msgstr "完成事件"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr "输入的日期属于过期日期。输入{{firstValidDate}} 之后的日期。"
 
 msgid "A value is required"
 msgstr "需要一个值"
@@ -940,6 +945,12 @@ msgstr "没有找到结果"
 
 msgid "Choose an organisation unit in the form below"
 msgstr "从下面选择一个组织机构"
+
+msgid "None selected"
+msgstr "没有选择"
+
+msgid "Choose an organisation unit"
+msgstr "选择机构"
 
 msgid "Clear selection"
 msgstr "清空选项"
