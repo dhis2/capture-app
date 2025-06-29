@@ -1,6 +1,6 @@
-// @flow
 /* eslint-disable complexity */
-import { isNumber, isObject } from 'lodash';
+import isNumber from 'lodash/isNumber';
+import isObject from 'lodash/isObject';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useEffect } from 'react';
@@ -17,7 +17,7 @@ export const useMainViewConfig: UseMainViewConfig = () => {
         ['dataStore', 'capture'], {
             resource: 'dataStore/capture',
         }, {
-            select: (captureKeys: ?Array<string>) => captureKeys?.includes('workingLists'),
+            select: (captureKeys: Array<string> | null | undefined) => captureKeys?.includes('workingLists'),
         });
 
     const { data: mainViewConfig, isLoading, isError, error } = useApiMetadataQuery<any>(
@@ -40,9 +40,9 @@ export const useMainViewConfig: UseMainViewConfig = () => {
                 ) {
                     return undefined;
                 }
-
                 // The general idea is that the return value here should have the same data structure
                 // as the response from the working lists api
+
                 if (occurredAt.period) {
                     if (['TODAY', 'THIS_WEEK', 'THIS_MONTH', 'THIS_YEAR', 'LAST_WEEK', 'LAST_MONTH', 'LAST_3_MONTHS']
                         .includes(occurredAt.period)
