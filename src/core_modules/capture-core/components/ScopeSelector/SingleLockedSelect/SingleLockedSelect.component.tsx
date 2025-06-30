@@ -12,7 +12,7 @@ import { FiltrableMenuItems } from '../QuickSelector/FiltrableMenuItems';
 import { OptionLabel } from '../OptionLabel';
 import type { Icon } from '../../../metaData';
 
-export type Props = {
+type Props = {
     isUserInteractionInProgress?: boolean;
     options: Option[];
     onClear?: () => void;
@@ -22,15 +22,12 @@ export type Props = {
     displayOnly?: boolean;
 } & WithStyles<typeof styles>;
 
-export type Option = {
+type Option = {
     label: string;
     value: any;
     icon?: Icon;
 };
 
-export type ReadyProp = {
-    ready: boolean;
-};
 
 const styles = () => ({
     selectBarMenu: {
@@ -77,16 +74,14 @@ const SingleLockedSelectPlain = ({
         setOpenStartAgainWarning(true);
     };
     const handleOnSelect = useCallback(
-        ({ value }: { value: string }) => {
+        ({ value }) => {
             onSelect && onSelect(value);
         },
         [onSelect],
     );
-    const handleOnChange = (item: { value?: string }) => {
+    const handleOnChange = (item) => {
         setOpenSelectorBarItem(false);
-        if (item.value) {
-            handleOnSelect({ value: item.value });
-        }
+        handleOnSelect(item);
     };
 
     const { label, icon } = getSelectedOption(options, selectedValue);
@@ -121,7 +116,7 @@ const SingleLockedSelectPlain = ({
                                         key={option.value}
                                         label={<OptionLabel icon={option.icon} label={option.label} />}
                                         value={option.value}
-                                        onClick={payload => handleOnChange(payload)}
+                                        onClick={handleOnChange}
                                         suffix=""
                                     />
                                 ))

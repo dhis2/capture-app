@@ -1,1 +1,1 @@
-export { SingleLockedSelect, type Props as SingleLockedSelectProps, type Option, type ReadyProp } from './SingleLockedSelect.component';
+export { SingleLockedSelect } from './SingleLockedSelect.component';

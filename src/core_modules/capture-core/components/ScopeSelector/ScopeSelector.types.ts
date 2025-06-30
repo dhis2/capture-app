@@ -6,7 +6,7 @@ export type OwnProps = {
   selectedOrgUnitId?: string;
   selectedProgramId?: string | null;
   previousOrgUnitId?: string;
-  selectedCategories?: Record<string, any>;
+  selectedCategories?: { [categoryId: string]: { writeAccess: boolean } };
   onSetProgramId?: (id: string) => void;
   onResetProgramId: () => void;
   onSetOrgUnit?: (id: string, orgUnit: Record<string, any>) => void;

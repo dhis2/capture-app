@@ -64,7 +64,7 @@ export const ScopeSelector = ({
         <ScopeSelectorComponent
             onResetProgramId={onResetProgramId}
             onResetOrgUnitId={() => {
-                selectedOrgUnit && dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id || undefined));
+                selectedOrgUnit && dispatch(resetOrgUnitIdFromScopeSelector(selectedOrgUnit?.id ?? undefined));
                 return onResetOrgUnitId();
             }}
             onResetAllCategoryOptions={onResetAllCategoryOptions}
