@@ -61,6 +61,7 @@ const sortText = (clientValueA: any, clientValueB: any, direction: string, optio
 
 const sortTime = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const { eventDateA, eventDateB } = options;
+    // most recent dates first
     if (direction === SORT_DIRECTION.DESC) {
         if (clientValueA !== clientValueB) {
             return moment(clientValueB).unix() - moment(clientValueA).unix();
@@ -85,6 +86,7 @@ const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: stri
     return sortText(orgUnitNameA, orgUnitNameB, direction, options);
 };
 
+// desc: Scheduled -> Active -> Completed -> Skipped
 const sortStatus = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const { eventDateA, eventDateB, dueDateA, dueDateB } = options;
     const descOrder = ['Scheduled', 'Active', 'Completed', 'Skipped'];

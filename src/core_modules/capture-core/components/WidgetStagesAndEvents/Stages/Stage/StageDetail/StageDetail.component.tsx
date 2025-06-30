@@ -254,7 +254,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             small
             secondary
             dataTest="view-all-button"
-            className={classes.hidenButton}
+            className={classes.hidenButton} // DHIS2-11733: hide the button until the page is fully implemented
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
