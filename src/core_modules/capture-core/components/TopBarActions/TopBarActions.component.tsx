@@ -14,9 +14,6 @@ const styles: Readonly<any> = {
         gap: `${spacers.dp4}`,
         height: '40px',
     },
-    marginRight: {
-        marginRight: spacers.dp8,
-    },
 };
 
 const ActionButtonsPlain = ({

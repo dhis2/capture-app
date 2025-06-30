@@ -7,6 +7,8 @@ import { resetOrgUnitIdFromScopeSelector } from './ScopeSelector.actions';
 
 
 const deriveReadiness = (lockedSelectorLoads: boolean, selectedOrgUnitId?: string | null, selectedOrgUnitName?: string, displayName?: string, ouNameError?: any) => {
+    // because we want the orgUnit to be fetched and stored
+    // before allowing the user to view the locked selector
     if (!ouNameError && selectedOrgUnitId && (!selectedOrgUnitName || selectedOrgUnitName !== displayName)) {
         return false;
     }
