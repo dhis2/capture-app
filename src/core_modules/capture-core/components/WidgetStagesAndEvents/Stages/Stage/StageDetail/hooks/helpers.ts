@@ -6,6 +6,8 @@ import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/da
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElementClient } from '../../../../types/common.types';
 import type { ApiEnrollmentEvent } from '../../../../../../../capture-core-utils/types/api-types';
+
+type FieldKey = { id: string; resolveValue?: (event: ApiEnrollmentEvent) => any };
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
@@ -41,12 +43,12 @@ const getEventStatus = (event: ApiEnrollmentEvent) => {
     return { status: event.status, options: undefined };
 };
 
-const getValueByKeyFromEvent = (event: ApiEnrollmentEvent, { id, resolveValue }: Record<string, unknown>) => {
+const getValueByKeyFromEvent = (event: ApiEnrollmentEvent, { id, resolveValue }: FieldKey) => {
     if (resolveValue) {
-        return (resolveValue as (eventParam: ApiEnrollmentEvent) => unknown)(event);
+        return resolveValue(event);
     }
 
-    return (event as Record<string, unknown>)[id as string];
+    return event[id];
 };
 
 
