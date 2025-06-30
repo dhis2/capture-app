@@ -177,7 +177,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             })
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElementsClient))
-            .map((row) => {
+            .map((row: Record<string, unknown>) => {
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
                         key={`${id}-${row.id}`}
