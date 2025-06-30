@@ -6,6 +6,7 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from '../../../../../../../utils/reactQueryHelpers';
 import { errorCreator } from '../../../../../../../../capture-core-utils';
+import type { ApiEnrollmentEvent } from '../../../../../../../../capture-core-utils/types/api-types';
 
 type Props = {
     eventId: string;
@@ -14,7 +15,7 @@ type Props = {
     programId: string;
     enrollmentId: string;
     onDeleteEvent: (eventId: string) => void;
-    onRollbackDeleteEvent: (eventToRollbackOnFail: any) => void;
+    onRollbackDeleteEvent: (eventToRollbackOnFail: ApiEnrollmentEvent) => void;
     setDeleteModalOpen: (open: boolean) => void;
 };
 
@@ -62,7 +63,7 @@ export const DeleteActionModal = ({
                 const previousData = queryClient
                     .getQueryData(enrollmentDomainQueryKey) as {
                         enrollments?: Array<{
-                            events?: Array<any>;
+                            events?: Array<ApiEnrollmentEvent>;
                         }>;
                     };
                 const eventToRollbackOnFail = previousData

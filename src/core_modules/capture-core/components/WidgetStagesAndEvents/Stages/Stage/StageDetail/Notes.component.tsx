@@ -1,9 +1,10 @@
 import React, { type ComponentType } from 'react';
 import { IconMessages16 } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core';
+import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
 type Props = {
-    event: any;
+    event: ApiEnrollmentEvent;
 };
 
 const styles = {

@@ -9,10 +9,11 @@ import { useMutation } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { EventStatuses } from '../EventRow';
 import { errorCreator } from '../../../../../../../../capture-core-utils';
+import type { ApiEnrollmentEvent } from '../../../../../../../../capture-core-utils/types/api-types';
 
 type Props = {
     eventId: string;
-    eventDetails: any;
+    eventDetails: ApiEnrollmentEvent;
     pendingApiResponse: boolean;
     onUpdateEventStatus: (eventId: string, status: string) => void;
     setActionsOpen: (open: boolean) => void;

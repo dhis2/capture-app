@@ -1,7 +1,8 @@
 import type { StageDataElement, StageCommonProps } from '../../../types/common.types';
+import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
 type ExtractedProps = {
-    events: Array<any>;
+    events: Array<ApiEnrollmentEvent>;
     dataElements: Array<StageDataElement>;
     eventName: string;
     hideDueDate?: boolean;
@@ -11,7 +12,7 @@ type ExtractedProps = {
     onCreateNew: (stageId: string) => void;
     onDeleteEvent: (eventId: string) => void;
     onUpdateEventStatus: (eventId: string, status: string) => void;
-    onRollbackDeleteEvent: (eventId: any) => void;
+    onRollbackDeleteEvent: (event: ApiEnrollmentEvent) => void;
     hiddenProgramStage?: boolean;
 };
 

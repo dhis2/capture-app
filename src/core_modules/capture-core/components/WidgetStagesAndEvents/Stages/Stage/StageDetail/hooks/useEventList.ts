@@ -6,6 +6,7 @@ import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { errorCreator, buildUrl } from 'capture-core-utils';
 import { dataElementTypes, DataElement, OptionSet, Option } from '../../../../../../metaData';
 import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
+import type { ApiEnrollmentEvent } from '../../../../../../../capture-core-utils/types/api-types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
 import {
@@ -57,7 +58,7 @@ const getAllFieldsWithValue = (
         return acc;
     }, {} as Record<string, unknown>);
 
-const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, events: Array<any>) => {
+const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, events: Array<ApiEnrollmentEvent>) => {
     const [value, setValue] = useState<Array<Record<string, unknown>> | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState(true);

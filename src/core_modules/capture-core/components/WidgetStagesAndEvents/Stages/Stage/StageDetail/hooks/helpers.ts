@@ -5,11 +5,12 @@ import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTy
 import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElementClient } from '../../../../types/common.types';
+import type { ApiEnrollmentEvent } from '../../../../../../../capture-core-utils/types/api-types';
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
 
-const getEventStatus = (event: any) => {
+const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
     const dueDate = moment(event.scheduledAt);
     const dueDateFromNow = dueDate.from(today);
@@ -40,16 +41,16 @@ const getEventStatus = (event: any) => {
     return { status: event.status, options: undefined };
 };
 
-const getValueByKeyFromEvent = (event: any, { id, resolveValue }: Record<string, unknown>) => {
+const getValueByKeyFromEvent = (event: ApiEnrollmentEvent, { id, resolveValue }: Record<string, unknown>) => {
     if (resolveValue) {
-        return (resolveValue as (eventParam: any) => unknown)(event);
+        return (resolveValue as (eventParam: ApiEnrollmentEvent) => unknown)(event);
     }
 
     return (event as Record<string, unknown>)[id as string];
 };
 
 
-const convertStatusForView = (event: any) => {
+const convertStatusForView = (event: ApiEnrollmentEvent) => {
     const { status, options } = getEventStatus(event);
     const isPositive = [statusTypes.COMPLETED].includes(status);
     const isNegative = [statusTypes.OVERDUE].includes(status);
@@ -62,10 +63,10 @@ const convertStatusForView = (event: any) => {
 };
 
 
-const convertNoteForView = (event: any) => React.createElement(Notes, { event });
+const convertNoteForView = (event: ApiEnrollmentEvent) => React.createElement(Notes, { event });
 
 const groupRecordsByType = async (
-    events: Array<any>,
+    events: Array<ApiEnrollmentEvent>,
     dataElements: Array<StageDataElementClient>,
     querySingleResource: QuerySingleResource,
     absoluteApiPath: string,
