@@ -6,11 +6,11 @@ import { convertIsoToLocalCalendar } from '../../../../../../utils/converters/da
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElementClient } from '../../../../types/common.types';
 import type { ApiEnrollmentEvent } from '../../../../../../../capture-core-utils/types/api-types';
-
-type FieldKey = { id: string; resolveValue?: (event: ApiEnrollmentEvent) => any };
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
+
+type FieldKey = { id: string; resolveValue?: (event: ApiEnrollmentEvent) => any };
 
 const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
