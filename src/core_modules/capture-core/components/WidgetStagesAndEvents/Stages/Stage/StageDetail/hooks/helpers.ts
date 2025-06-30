@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
@@ -10,7 +9,7 @@ import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
 
-const getEventStatus = (event: ApiEnrollmentEvent) => {
+const getEventStatus = (event: any) => {
     const today = moment().startOf('day');
     const dueDate = moment(event.scheduledAt);
     const dueDateFromNow = dueDate.from(today);
@@ -41,16 +40,16 @@ const getEventStatus = (event: ApiEnrollmentEvent) => {
     return { status: event.status, options: undefined };
 };
 
-const getValueByKeyFromEvent = (event: ApiEnrollmentEvent, { id, resolveValue }: Object) => {
+const getValueByKeyFromEvent = (event: any, { id, resolveValue }: Record<string, unknown>) => {
     if (resolveValue) {
-        return resolveValue(event);
+        return (resolveValue as (eventParam: any) => unknown)(event);
     }
 
-    return event[id];
+    return (event as Record<string, unknown>)[id as string];
 };
 
 
-const convertStatusForView = (event: ApiEnrollmentEvent) => {
+const convertStatusForView = (event: any) => {
     const { status, options } = getEventStatus(event);
     const isPositive = [statusTypes.COMPLETED].includes(status);
     const isNegative = [statusTypes.OVERDUE].includes(status);
@@ -63,15 +62,14 @@ const convertStatusForView = (event: ApiEnrollmentEvent) => {
 };
 
 
-const convertNoteForView = (event: ApiEnrollmentEvent) => <Notes event={event} />;
+const convertNoteForView = (event: any) => React.createElement(Notes, { event });
 
 const groupRecordsByType = async (
-    events: Array<ApiEnrollmentEvent>,
+    events: Array<any>,
     dataElements: Array<StageDataElementClient>,
     querySingleResource: QuerySingleResource,
     absoluteApiPath: string,
 ) => {
-    // $FlowFixMe
     const dataElementsByType = events.reduce((acc, event) => {
         event.dataValues.forEach((dataValue) => {
             const { dataElement: id, value } = dataValue;
@@ -85,8 +83,7 @@ const groupRecordsByType = async (
             }
         });
         return acc;
-    }, []);
-    // $FlowFixMe
+    }, [] as Array<{ type: string; eventId: string; ids: Record<string, unknown> }>);
     for await (const item of dataElementsByType) {
         item.ids = await getSubValues(item, querySingleResource, absoluteApiPath);
     }

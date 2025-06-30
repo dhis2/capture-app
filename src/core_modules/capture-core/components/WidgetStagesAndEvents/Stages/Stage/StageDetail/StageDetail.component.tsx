@@ -1,8 +1,6 @@
-// @flow
 import React, { type ComponentType, useState, useCallback } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-// $FlowFixMe
 import {
     colors,
     spacers,
@@ -30,7 +28,7 @@ import { errorCreator } from '../../../../../../capture-core-utils';
 import { useClientDataElements } from './hooks/useClientDataElements';
 
 
-const styles = {
+const styles: Readonly<any> = {
     row: {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
@@ -87,9 +85,10 @@ const styles = {
     newButton: {
         margin: `${spacers.dp8} ${spacers.dp12}`,
     },
+    footerToolbar: {},
 };
 
-const StageDetailPlain = (props: Props) => {
+const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
     const {
         events,
         eventName,
@@ -113,21 +112,21 @@ const StageDetailPlain = (props: Props) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
+    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm || { getLabel: () => '' });
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);
 
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
-    const getSortDirection = column => (column.id === columnName ? sortDirection : column.sortDirection);
-    const onSortIconClick = ({ name, direction }) => {
+    const getSortDirection = (column: { id: string; sortDirection?: string | null }) => (column.id === columnName ? sortDirection : column.sortDirection);
+    const onSortIconClick = ({ name, direction }: { name?: string; direction: any }) => {
         if (direction === SORT_DIRECTION.DEFAULT && name !== defaultSortState.columnName) {
             setSortInstructions(defaultSortState);
         } else {
             setSortInstructions({
-                columnName: name,
-                sortDirection: direction,
+                columnName: name || defaultSortState.columnName,
+                sortDirection: direction as any,
             });
         }
     };
@@ -151,8 +150,8 @@ const StageDetailPlain = (props: Props) => {
                 <DataTableColumnHeader
                     key={column.id}
                     name={column.id}
-                    sortDirection={getSortDirection(column)}
-                    onSortIconClick={column.sortDirection && onSortIconClick}
+                    sortDirection={getSortDirection(column) as any}
+                    onSortIconClick={column.sortDirection ? onSortIconClick : undefined}
                 >
                     {column.header}
                 </DataTableColumnHeader>
@@ -175,12 +174,11 @@ const StageDetailPlain = (props: Props) => {
         return dataSource
             .sort((dataA, dataB) => {
                 const { type } = headerColumns.find(col => col.id === columnName) || {};
-                // $FlowFixMe
                 return sortDataFromEvent({ dataA, dataB, type, columnName, direction: sortDirection });
             })
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElementsClient))
-            .map((row: Object) => {
+            .map((row: Record<string, unknown>) => {
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
                         key={`${id}-${row.id}`}
@@ -190,7 +188,8 @@ const StageDetailPlain = (props: Props) => {
                         {({ onMouseOver, onMouseOut, ref }) => (
                             <DataTableCell
                                 key={id}
-                                onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
+                                onClick={() => !row.pendingApiResponse && onEventClick(row.id as string)}
+                                // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
                                 ref={(tableCell) => {
                                     if (tableCell) {
                                         if (row.pendingApiResponse) {
@@ -205,7 +204,7 @@ const StageDetailPlain = (props: Props) => {
                                 }}
                             >
                                 <div>
-                                    {row[id]}
+                                    {row[id] as React.ReactNode}
                                 </div>
                             </DataTableCell>
                         )}
@@ -220,8 +219,9 @@ const StageDetailPlain = (props: Props) => {
 
                 return (
                     <EventRow
-                        id={row.id}
-                        pendingApiResponse={row.pendingApiResponse}
+                        key={row.id as string}
+                        id={row.id as string}
+                        pendingApiResponse={row.pendingApiResponse as boolean}
                         eventDetails={eventDetails}
                         teiId={eventDetails.trackedEntity}
                         stageWriteAccess={stage?.access?.data?.write}
@@ -255,7 +255,7 @@ const StageDetailPlain = (props: Props) => {
             small
             secondary
             dataTest="view-all-button"
-            className={classes.hidenButton} // DHIS2-11733: hide the button until the page is fully implemented
+            className={classes.hidenButton}
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
@@ -312,4 +312,4 @@ const StageDetailPlain = (props: Props) => {
     );
 };
 
-export const StageDetail: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(StageDetailPlain);
+export const StageDetail = withStyles(styles)(StageDetailPlain) as ComponentType<Props>;

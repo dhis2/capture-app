@@ -1,4 +1,3 @@
-// @flow
 import { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
@@ -30,7 +29,7 @@ const basedFieldTypes = [
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertNoteForView },
 ];
-const getBaseColumnHeaders = props => [
+const getBaseColumnHeaders = (props: { formFoundation: { getLabel: (key: string) => string } }) => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Assigned to'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
@@ -40,13 +39,12 @@ const getBaseColumnHeaders = props => [
 ];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
-// $FlowFixMe
-const getBaseColumns = props => baseFields.map((key, index) => ({ ...key, ...getBaseColumnHeaders(props)[index] }));
+const getBaseColumns = (props: { formFoundation: { getLabel: (key: string) => string } }) => baseFields.map((key, index) => ({ ...key, ...getBaseColumnHeaders(props)[index] }));
 
 const getAllFieldsWithValue = (
     eventId: string,
     dataElements: Array<StageDataElementClient>,
-    dataElementsByType: Array<{type: string, eventId: string, ids: Object}>,
+    dataElementsByType: Array<{type: string; eventId: string; ids: Record<string, unknown>}>,
 ) => dataElements
     .reduce((acc, { id, type }) => {
         const value = dataElementsByType
@@ -57,11 +55,11 @@ const getAllFieldsWithValue = (
             acc[id] = undefined;
         }
         return acc;
-    }, {});
+    }, {} as Record<string, unknown>);
 
-const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, events: Array<ApiEnrollmentEvent>) => {
-    const [value, setValue] = useState(null);
-    const [error, setError] = useState(null);
+const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, events: Array<any>) => {
+    const [value, setValue] = useState<Array<Record<string, unknown>> | null>(null);
+    const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState(true);
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
@@ -74,13 +72,13 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, ev
             const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
             const dataElementsByType =
                 await groupRecordsByType(events, dataElements, querySingleResource, absoluteApiPath);
-            const eventsData = [];
+            const eventsData: Array<Record<string, unknown>> = [];
             for (const event of events) {
                 const eventId = event.event;
                 const predefinedFields = baseFields.reduce((acc, field) => {
                     acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
                     return acc;
-                }, {});
+                }, {} as Record<string, unknown>);
 
                 const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
                 eventsData.push({
@@ -92,7 +90,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, ev
             }
             setValue(eventsData);
         } catch (e) {
-            setError(e);
+            setError(e as Error);
         } finally {
             setLoading(false);
         }
@@ -110,7 +108,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, ev
 };
 
 
-const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, enableUserAssignment: boolean, formFoundation: Object) => {
+const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean, enableUserAssignment: boolean, formFoundation: { getLabel: (key: string) => string }) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, formName, type, optionSet } = currDataElement;
@@ -122,7 +120,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
                 acc.push({ id, header: formName || name, type, sortDirection: SORT_DIRECTION.DEFAULT });
             }
             return acc;
-        }, []);
+        }, [] as Array<{ id: string; header: string; type: string; sortDirection: string }>);
         return [
             ...getBaseColumns({ formFoundation })
                 .filter(col => (enableUserAssignment || col.id !== 'assignedUser') && (!hideDueDate || col.id !== 'scheduledAt')),
@@ -132,7 +130,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
     return headerColumns;
 };
 
-function getDataElement(stageDataElement, type) {
+function getDataElement(stageDataElement: StageDataElementClient | undefined, type: string) {
     if (!stageDataElement) {
         return null;
     }
@@ -153,7 +151,7 @@ function getDataElement(stageDataElement, type) {
     return dataElement;
 }
 
-const formatRowForView = (row: Object, dataElements: Array<StageDataElementClient>) => Object.keys(row).reduce((acc, id) => {
+const formatRowForView = (row: Record<string, unknown>, dataElements: Array<StageDataElementClient>) => Object.keys(row).reduce((acc, id) => {
     const { type: predefinedType } = baseFields.find(f => f.id === id) || {};
     const stageDataElement = dataElements.find(el => el.id === id);
     const { type } = stageDataElement || {};
@@ -167,7 +165,7 @@ const formatRowForView = (row: Object, dataElements: Array<StageDataElementClien
         acc[id] = convertClientToList(value, type, dataElement);
     }
     return acc;
-}, {});
+}, {} as Record<string, unknown>);
 
 
 export {
