@@ -7,7 +7,7 @@ import { SORT_DIRECTION } from './constants';
 import { localeCompareStrings } from '../../../../../../utils/localeCompareStrings';
 
 
-const sortNumber = (clientValueA: unknown, clientValueB: unknown, direction: string, options: Record<string, unknown>): number => {
+const sortNumber = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const numA = Number(clientValueA);
     const numB = Number(clientValueB);
     const { eventDateA, eventDateB } = options;
@@ -19,7 +19,7 @@ const sortNumber = (clientValueA: unknown, clientValueB: unknown, direction: str
         if (numA !== numB) {
             return numA - numB;
         }
-        return moment(eventDateB as string).unix() - moment(eventDateA as string).unix();
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
     } else if (direction === SORT_DIRECTION.ASC) {
         if (Number.isNaN(numA)) return -1;
         if (Number.isNaN(numB)) return 1;
@@ -27,13 +27,13 @@ const sortNumber = (clientValueA: unknown, clientValueB: unknown, direction: str
         if (numA !== numB) {
             return numB - numA;
         }
-        return moment(eventDateB as string).unix() - moment(eventDateA as string).unix();
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
     }
 
     return 0;
 };
 
-const sortText = (clientValueA: unknown, clientValueB: unknown, direction: string, options: Record<string, unknown>): number => {
+const sortText = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const { eventDateA, eventDateB } = options;
 
     if (direction === SORT_DIRECTION.DESC) {
@@ -41,98 +41,98 @@ const sortText = (clientValueA: unknown, clientValueB: unknown, direction: strin
         if (!clientValueB) return -1;
 
         if (clientValueA !== clientValueB) {
-            return localeCompareStrings(clientValueB as string, clientValueA as string);
+            return localeCompareStrings(clientValueB, clientValueA);
         }
 
-        return moment(eventDateB as string).unix() - moment(eventDateA as string).unix();
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
     } else if (direction === SORT_DIRECTION.ASC) {
         if (!clientValueA) return -1;
         if (!clientValueB) return 1;
 
         if (clientValueA !== clientValueB) {
-            return localeCompareStrings(clientValueA as string, clientValueB as string);
+            return localeCompareStrings(clientValueA, clientValueB);
         }
 
-        return moment(eventDateB as string).unix() - moment(eventDateA as string).unix();
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
     }
 
     return 0;
 };
 
-const sortTime = (clientValueA: unknown, clientValueB: unknown, direction: string, options: Record<string, unknown>): number => {
+const sortTime = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const { eventDateA, eventDateB } = options;
     if (direction === SORT_DIRECTION.DESC) {
         if (clientValueA !== clientValueB) {
-            return moment(clientValueB as string).unix() - moment(clientValueA as string).unix();
+            return moment(clientValueB).unix() - moment(clientValueA).unix();
         }
-        return moment(eventDateB as string).unix() - moment(eventDateA as string).unix();
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
     }
 
     if (direction === SORT_DIRECTION.ASC) {
         if (clientValueA !== clientValueB) {
-            return moment(clientValueA as string).unix() - moment(clientValueB as string).unix();
+            return moment(clientValueA).unix() - moment(clientValueB).unix();
         }
-        return moment(eventDateA as string).unix() - moment(eventDateB as string).unix();
+        return moment(eventDateA).unix() - moment(eventDateB).unix();
     }
 
     return 0;
 };
 
-const sortOrgUnit = (clientValueA: unknown, clientValueB: unknown, direction: string, options: Record<string, unknown>): number => {
-    const orgUnitNameA = getCachedOrgUnitName(clientValueA as string);
-    const orgUnitNameB = getCachedOrgUnitName(clientValueB as string);
+const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: string, options: any) => {
+    const orgUnitNameA = getCachedOrgUnitName(clientValueA);
+    const orgUnitNameB = getCachedOrgUnitName(clientValueB);
 
     return sortText(orgUnitNameA, orgUnitNameB, direction, options);
 };
 
-const sortStatus = (clientValueA: unknown, clientValueB: unknown, direction: string, options: Record<string, unknown>): number => {
+const sortStatus = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const { eventDateA, eventDateB, dueDateA, dueDateB } = options;
     const descOrder = ['Scheduled', 'Active', 'Completed', 'Skipped'];
 
     if (direction === SORT_DIRECTION.DESC) {
-        if ((clientValueA as { text: string }).text !== (clientValueB as { text: string }).text) {
-            return descOrder.indexOf((clientValueA as { text: string }).text) - descOrder.indexOf((clientValueB as { text: string }).text);
+        if (clientValueA.text !== clientValueB.text) {
+            return descOrder.indexOf(clientValueA.text) - descOrder.indexOf(clientValueB.text);
         }
 
-        if ((clientValueA as { text: string }).text === 'Scheduled') {
-            return moment(dueDateB as string).unix() - moment(dueDateA as string).unix();
+        if (clientValueA.text === 'Scheduled') {
+            return moment(dueDateB).unix() - moment(dueDateA).unix();
         }
 
-        return moment(eventDateB as string).unix() - moment(eventDateA as string).unix();
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
     }
 
     if (direction === SORT_DIRECTION.ASC) {
-        if ((clientValueA as { text: string }).text !== (clientValueB as { text: string }).text) {
-            return descOrder.indexOf((clientValueB as { text: string }).text) - descOrder.indexOf((clientValueA as { text: string }).text);
+        if (clientValueA.text !== clientValueB.text) {
+            return descOrder.indexOf(clientValueB.text) - descOrder.indexOf(clientValueA.text);
         }
 
-        if ((clientValueA as { text: string }).text === 'Scheduled') {
-            return moment(dueDateB as string).unix() - moment(dueDateA as string).unix();
+        if (clientValueA.text === 'Scheduled') {
+            return moment(dueDateB).unix() - moment(dueDateA).unix();
         }
 
-        return moment(eventDateB as string).unix() - moment(eventDateA as string).unix();
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
     }
 
 
     return 0;
 };
 
-export const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: Record<string, unknown>): number => {
+export const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: any) => {
     if (!type) {
         log.error(errorCreator('Type is not defined')({ dataA, dataB }));
     }
-    const clientValueA = (dataA as Record<string, unknown>)[columnName as string];
-    const clientValueB = (dataB as Record<string, unknown>)[columnName as string];
+    const clientValueA = dataA[columnName];
+    const clientValueB = dataB[columnName];
     const options = {
-        eventDateA: (dataA as Record<string, unknown>).occurredAt,
-        eventDateB: (dataB as Record<string, unknown>).occurredAt,
-        dueDateA: (dataA as Record<string, unknown>).scheduledAt,
-        dueDateB: (dataB as Record<string, unknown>).scheduledAt,
+        eventDateA: dataA.occurredAt,
+        eventDateB: dataB.occurredAt,
+        dueDateA: dataA.scheduledAt,
+        dueDateB: dataB.scheduledAt,
     };
-    return sortForTypes[type as string](clientValueA, clientValueB, direction as string, options);
+    return sortForTypes[type](clientValueA, clientValueB, direction, options);
 };
 
-const sortForTypes: Record<string, (a: unknown, b: unknown, direction: string, options: Record<string, unknown>) => number> = {
+const sortForTypes = {
     [dataElementTypes.EMAIL]: sortText,
     [dataElementTypes.TEXT]: sortText,
     [dataElementTypes.PHONE_NUMBER]: sortText,
@@ -153,9 +153,9 @@ const sortForTypes: Record<string, (a: unknown, b: unknown, direction: string, o
     [dataElementTypes.ORGANISATION_UNIT]: sortOrgUnit,
     [dataElementTypes.USERNAME]: sortText,
     [dataElementTypes.STATUS]: sortStatus,
-    [dataElementTypes.COORDINATE]: () => 0,
-    [dataElementTypes.POLYGON]: () => 0,
-    [dataElementTypes.FILE_RESOURCE]: () => 0,
-    [dataElementTypes.IMAGE]: () => 0,
-    [dataElementTypes.UNKNOWN]: () => 0,
+    [dataElementTypes.COORDINATE]: () => null,
+    [dataElementTypes.POLYGON]: () => null,
+    [dataElementTypes.FILE_RESOURCE]: () => null,
+    [dataElementTypes.IMAGE]: () => null,
+    [dataElementTypes.UNKNOWN]: () => null,
 };

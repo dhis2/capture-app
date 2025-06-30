@@ -85,7 +85,6 @@ const styles: Readonly<any> = {
     newButton: {
         margin: `${spacers.dp8} ${spacers.dp12}`,
     },
-    footerToolbar: {},
 };
 
 const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
@@ -112,7 +111,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         sortDirection: SORT_DIRECTION.DESC,
     };
     const { stage } = getProgramAndStageForProgram(programId, stageId);
-    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm || { getLabel: () => '' });
+    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate, enableUserAssignment, stage?.stageForm);
     const dataElementsClient = useClientDataElements(dataElements);
     const { loading, value: dataSource, error } = useComputeDataFromEvent(dataElementsClient, events);
 
@@ -178,7 +177,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
             })
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElementsClient))
-            .map((row: Record<string, unknown>) => {
+            .map((row) => {
                 const cells = headerColumns.map(({ id }) => (
                     <Tooltip
                         key={`${id}-${row.id}`}
@@ -188,7 +187,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
                         {({ onMouseOver, onMouseOut, ref }) => (
                             <DataTableCell
                                 key={id}
-                                onClick={() => !row.pendingApiResponse && onEventClick(row.id as string)}
+                                onClick={() => !row.pendingApiResponse && onEventClick(row.id)}
                                 // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
                                 ref={(tableCell) => {
                                     if (tableCell) {
@@ -273,7 +272,7 @@ const StageDetailPlain = (props: Props & WithStyles<typeof styles>) => {
         );
 
         return (
-            <div className={classes.footerToolbar}>
+            <div>
                 {renderShowMoreButton()}
                 {renderViewAllButton()}
                 {renderCreateNewButton()}

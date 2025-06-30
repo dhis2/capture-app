@@ -107,7 +107,7 @@ export const DeleteActionModal = ({
                     </Button>
                     <Button
                         destructive
-                        onClick={() => !pendingApiResponse && mutate({})}
+                        onClick={() => !pendingApiResponse && mutate({ eventId })}
                     >
                         {i18n.t('Yes, delete event')}
                     </Button>

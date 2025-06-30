@@ -47,7 +47,7 @@ export const SkipAction = ({
         }),
         {
             onMutate: (payload: { status: string }) => {
-                const status = (EventStatuses as Record<string, string>)[payload.status];
+                const status = EventStatuses[payload.status];
                 const previousStatus = eventDetails.status;
 
                 status && onUpdateEventStatus(eventId, status);

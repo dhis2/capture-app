@@ -30,7 +30,7 @@ const basedFieldTypes = [
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertNoteForView },
 ];
-const getBaseColumnHeaders = (props: { formFoundation: { getLabel: (key: string) => string } }) => [
+const getBaseColumnHeaders = props => [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: props.formFoundation.getLabel('occurredAt'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Assigned to'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
@@ -40,7 +40,7 @@ const getBaseColumnHeaders = (props: { formFoundation: { getLabel: (key: string)
 ];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
-const getBaseColumns = (props: { formFoundation: { getLabel: (key: string) => string } }) => baseFields.map((key, index) => ({ ...key, ...getBaseColumnHeaders(props)[index] }));
+const getBaseColumns = props => baseFields.map((key, index) => ({ ...key, ...getBaseColumnHeaders(props)[index] }));
 
 const getAllFieldsWithValue = (
     eventId: string,
@@ -56,7 +56,7 @@ const getAllFieldsWithValue = (
             acc[id] = undefined;
         }
         return acc;
-    }, {} as Record<string, unknown>);
+    }, {});
 
 const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, events: Array<ApiEnrollmentEvent>) => {
     const [value, setValue] = useState<Array<Record<string, unknown>> | null>(null);
@@ -79,7 +79,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElementClient>, ev
                 const predefinedFields = baseFields.reduce((acc, field) => {
                     acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
                     return acc;
-                }, {} as Record<string, unknown>);
+                }, {});
 
                 const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
                 eventsData.push({
@@ -166,7 +166,7 @@ const formatRowForView = (row: Record<string, unknown>, dataElements: Array<Stag
         acc[id] = convertClientToList(value, type, dataElement);
     }
     return acc;
-}, {} as Record<string, unknown>);
+}, {});
 
 
 export {
