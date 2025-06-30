@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getCachedOrgUnitName } from 'capture-core/metadataRetrieval/orgUnitName';
@@ -8,7 +7,7 @@ import { SORT_DIRECTION } from './constants';
 import { localeCompareStrings } from '../../../../../../utils/localeCompareStrings';
 
 
-const sortNumber = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+const sortNumber = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const numA = Number(clientValueA);
     const numB = Number(clientValueB);
     const { eventDateA, eventDateB } = options;
@@ -34,7 +33,7 @@ const sortNumber = (clientValueA: Object, clientValueB: Object, direction: strin
     return 0;
 };
 
-const sortText = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+const sortText = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const { eventDateA, eventDateB } = options;
 
     if (direction === SORT_DIRECTION.DESC) {
@@ -60,7 +59,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
     return 0;
 };
 
-const sortTime = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+const sortTime = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const { eventDateA, eventDateB } = options;
     // most recent dates first
     if (direction === SORT_DIRECTION.DESC) {
@@ -80,7 +79,7 @@ const sortTime = (clientValueA: Object, clientValueB: Object, direction: string,
     return 0;
 };
 
-const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: string, options: Object) => {
+const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: string, options: any) => {
     const orgUnitNameA = getCachedOrgUnitName(clientValueA);
     const orgUnitNameB = getCachedOrgUnitName(clientValueB);
 
@@ -88,7 +87,7 @@ const sortOrgUnit = (clientValueA: string, clientValueB: string, direction: stri
 };
 
 // desc: Scheduled -> Active -> Completed -> Skipped
-const sortStatus = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+const sortStatus = (clientValueA: any, clientValueB: any, direction: string, options: any) => {
     const { eventDateA, eventDateB, dueDateA, dueDateB } = options;
     const descOrder = ['Scheduled', 'Active', 'Completed', 'Skipped'];
 
@@ -120,7 +119,7 @@ const sortStatus = (clientValueA: Object, clientValueB: Object, direction: strin
     return 0;
 };
 
-export const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: Object) => {
+export const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: any) => {
     if (!type) {
         log.error(errorCreator('Type is not defined')({ dataA, dataB }));
     }

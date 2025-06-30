@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -8,8 +7,8 @@ import {
 } from '@dhis2/ui';
 
 type Props = {
-    setActionsOpen: (open: boolean) => void,
-    setDeleteModalOpen: (open: boolean) => void,
+    setActionsOpen: (open: boolean) => void;
+    setDeleteModalOpen: (open: boolean) => void;
 };
 
 export const DeleteActionButton = ({
@@ -26,6 +25,7 @@ export const DeleteActionButton = ({
                 setDeleteModalOpen(true);
                 setActionsOpen(false);
             }}
+            suffix=""
         />
     </>
 );

@@ -1,6 +1,5 @@
-// @flow
 import React, { useState } from 'react';
-import { withStyles } from '@material-ui/core/';
+import { withStyles, type WithStyles } from '@material-ui/core/';
 import {
     DataTableCell,
     DataTableRow,
@@ -13,7 +12,7 @@ import { DeleteActionButton } from './DeleteActionButton';
 import { SkipAction } from './SkipAction';
 import { DeleteActionModal } from './DeleteActionModal';
 
-const styles = {
+const styles: Readonly<any> = {
     row: {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
@@ -45,7 +44,7 @@ const EventRowPlain = ({
     programId,
     enrollmentId,
     classes,
-}: EventRowProps) => {
+}: EventRowProps & WithStyles<typeof styles>) => {
     const [actionsOpen, setActionsOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
@@ -98,7 +97,6 @@ const EventRowPlain = ({
                             enrollmentId={enrollmentId}
                             onDeleteEvent={onDeleteEvent}
                             onRollbackDeleteEvent={onRollbackDeleteEvent}
-                            setActionsOpen={setActionsOpen}
                             setDeleteModalOpen={setDeleteModalOpen}
                         />
                     )}

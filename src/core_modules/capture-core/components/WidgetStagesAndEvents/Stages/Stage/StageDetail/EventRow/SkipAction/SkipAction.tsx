@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
@@ -10,14 +9,15 @@ import { useMutation } from 'react-query';
 import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { EventStatuses } from '../EventRow';
 import { errorCreator } from '../../../../../../../../capture-core-utils';
+import type { ApiEnrollmentEvent } from '../../../../../../../../capture-core-utils/types/api-types';
 
-type Props = {|
-    eventId: string,
-    eventDetails: ApiEnrollmentEvent,
-    pendingApiResponse: boolean,
-    onUpdateEventStatus: (eventId: string, status: string) => void,
-    setActionsOpen: (open: boolean) => void,
-|}
+type Props = {
+    eventId: string;
+    eventDetails: ApiEnrollmentEvent;
+    pendingApiResponse: boolean;
+    onUpdateEventStatus: (eventId: string, status: string) => void;
+    setActionsOpen: (open: boolean) => void;
+};
 
 export const SkipAction = ({
     eventId,
@@ -32,7 +32,7 @@ export const SkipAction = ({
         { critical: true },
     );
     const { mutate: updateEventStatus } = useMutation(
-        ({ status }) => dataEngine.mutate({
+        ({ status }: { status: string }) => dataEngine.mutate({
             resource: 'tracker?async=false&importStrategy=UPDATE',
             type: 'create',
             data: {
@@ -46,7 +46,7 @@ export const SkipAction = ({
             },
         }),
         {
-            onMutate: (payload) => {
+            onMutate: (payload: { status: string }) => {
                 const status = EventStatuses[payload.status];
                 const previousStatus = eventDetails.status;
 
@@ -54,7 +54,7 @@ export const SkipAction = ({
 
                 return { previousStatus };
             },
-            onError: (error, payload, context) => {
+            onError: (error: unknown, payload: { status: string }, context?: { previousStatus: string }) => {
                 showError({ message: i18n.t('An error occurred when updating event status') });
                 log.error(errorCreator('An error occurred when updating event status')({ error, payload, context }));
                 context && onUpdateEventStatus(eventId, context.previousStatus);
@@ -62,7 +62,7 @@ export const SkipAction = ({
         },
     );
 
-    const handleMenuItemClick = (status) => {
+    const handleMenuItemClick = (status: string) => {
         setActionsOpen(false);
         !pendingApiResponse && updateEventStatus({ status });
     };
@@ -74,6 +74,7 @@ export const SkipAction = ({
                 icon={<IconRedo16 />}
                 label={i18n.t('Unskip')}
                 onClick={() => handleMenuItemClick(EventStatuses.SCHEDULE)}
+                suffix=""
             />
         );
     }
@@ -84,6 +85,7 @@ export const SkipAction = ({
             icon={<IconArrowRight16 />}
             label={i18n.t('Skip')}
             onClick={() => handleMenuItemClick(EventStatuses.SKIPPED)}
+            suffix=""
         />
     );
 };

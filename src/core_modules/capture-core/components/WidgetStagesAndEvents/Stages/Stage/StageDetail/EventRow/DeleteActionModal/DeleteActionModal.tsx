@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
@@ -7,17 +6,18 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { ReactQueryAppNamespace } from '../../../../../../../utils/reactQueryHelpers';
 import { errorCreator } from '../../../../../../../../capture-core-utils';
+import type { ApiEnrollmentEvent } from '../../../../../../../../capture-core-utils/types/api-types';
 
 type Props = {
-    eventId: string,
-    pendingApiResponse: boolean,
-    teiId: string,
-    programId: string,
-    enrollmentId: string,
-    onDeleteEvent: (eventId: string) => void,
-    onRollbackDeleteEvent: (eventToRollbackOnFail: ApiEnrollmentEvent) => void,
-    setDeleteModalOpen: (open: boolean) => void,
-}
+    eventId: string;
+    pendingApiResponse: boolean;
+    teiId: string;
+    programId: string;
+    enrollmentId: string;
+    onDeleteEvent: (eventId: string) => void;
+    onRollbackDeleteEvent: (eventToRollbackOnFail: ApiEnrollmentEvent) => void;
+    setDeleteModalOpen: (open: boolean) => void;
+};
 
 export const DeleteActionModal = ({
     setDeleteModalOpen,
@@ -61,16 +61,20 @@ export const DeleteActionModal = ({
         {
             onMutate: () => {
                 const previousData = queryClient
-                    .getQueryData(enrollmentDomainQueryKey);
+                    .getQueryData(enrollmentDomainQueryKey) as {
+                        enrollments?: Array<{
+                            events?: Array<ApiEnrollmentEvent>;
+                        }>;
+                    };
                 const eventToRollbackOnFail = previousData
                     ?.enrollments
-                    ?.flatMap(enrollment => enrollment.events)
+                    ?.flatMap(enrollment => enrollment.events || [])
                     ?.find(event => event.event === eventId);
 
                 onDeleteEvent(eventId);
                 return eventToRollbackOnFail;
             },
-            onError: (apiError, payload, eventToRollbackOnFail) => {
+            onError: (apiError: unknown, payload: unknown, eventToRollbackOnFail?: any) => {
                 showError({ message: i18n.t('An error occurred while deleting the event') });
                 log.error(errorCreator('An error occurred while deleting the event')({ apiError, payload }));
 

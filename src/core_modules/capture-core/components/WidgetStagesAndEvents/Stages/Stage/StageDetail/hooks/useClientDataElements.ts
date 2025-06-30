@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { convertValue } from 'capture-core/converters/serverToClient';
 import type { StageDataElement, StageDataElementClient } from '../../../../types/common.types';
@@ -9,7 +8,7 @@ export const useClientDataElements = (dataElements: Array<StageDataElement>) =>
             return [];
         }
 
-        return dataElements.map <StageDataElementClient>(
+        return dataElements.map<StageDataElementClient>(
             (dataElement: StageDataElement) => {
                 const {
                     options,

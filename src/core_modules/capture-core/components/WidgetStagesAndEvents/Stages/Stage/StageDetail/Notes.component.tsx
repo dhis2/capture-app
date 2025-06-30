@@ -1,12 +1,11 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import { IconMessages16 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
-type Props = {|
-    event: ApiEnrollmentEvent,
-    ...CssClasses,
-|};
+type Props = {
+    event: ApiEnrollmentEvent;
+};
 
 const styles = {
     wrapper: {
@@ -17,7 +16,7 @@ const styles = {
         paddingLeft: '2px',
     },
 };
-export const NotesPlain = ({ event, classes }: Props) => {
+export const NotesPlain = ({ event, classes }: Props & WithStyles<typeof styles>) => {
     const notesCount = event.notes?.length;
 
     return (
@@ -28,4 +27,4 @@ export const NotesPlain = ({ event, classes }: Props) => {
     );
 };
 
-export const Notes: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(NotesPlain);
+export const Notes = withStyles(styles)(NotesPlain) as ComponentType<Props>;
