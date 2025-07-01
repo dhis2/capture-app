@@ -44,8 +44,8 @@ const styles: Readonly<any> = {
     },
 };
 
-const showEditModal = (loading: boolean, error: any, showEdit: boolean, modalState: string) =>
-    !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE;
+const showEditModal = (loading: boolean, error: any, showEdit: boolean, modalState: string, program: any) =>
+    !loading && !error && showEdit && modalState !== TEI_MODAL_STATE.CLOSE && Boolean(program?.id);
 
 type Props = PlainProps & WithStyles<typeof styles>;
 
@@ -90,7 +90,7 @@ const WidgetProfilePlain = ({
 
     const loading = programsLoading || trackedEntityInstancesLoading || userRolesLoading || !configIsFetched;
     const error = programsError || trackedEntityInstancesError || userRolesError;
-    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, Array.isArray(trackedEntityInstanceAttributes) ? trackedEntityInstanceAttributes : []);
+    const clientAttributesWithSubvalues = useClientAttributesWithSubvalues(teiId, program as any, trackedEntityInstanceAttributes);
     const teiDisplayName = useTeiDisplayName(program, storedAttributeValues, clientAttributesWithSubvalues, teiId);
     const displayChangelog = supportsChangelog && program && program.trackedEntityType?.changelogEnabled;
 
@@ -182,7 +182,7 @@ const WidgetProfilePlain = ({
             >
                 {renderProfile()}
             </Widget>
-            {showEditModal(loading, error, isEditable, modalState) && (
+            {showEditModal(loading, error, isEditable, modalState, program) && (
                 <>
                     <DataEntry
                         onCancel={() => setTeiModalState(TEI_MODAL_STATE.CLOSE)}

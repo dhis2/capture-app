@@ -11,7 +11,7 @@ import type { InputProgramData, InputAttribute } from './hooks.types';
 const MULIT_TEXT_WITH_NO_OPTIONS_SET =
     'could not create the metadata because a MULIT_TEXT without associated option sets was found';
 
-export const useClientAttributesWithSubvalues = (teiId: string, program: InputProgramData, trackedEntityInstanceAttributes: Array<InputAttribute>) => {
+export const useClientAttributesWithSubvalues = (teiId: string, program: InputProgramData, trackedEntityInstanceAttributes: boolean | Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
     const { baseUrl, apiVersion } = useConfig();
     const absoluteApiPath = buildUrl(baseUrl, `api/${apiVersion}`);
@@ -19,7 +19,7 @@ export const useClientAttributesWithSubvalues = (teiId: string, program: InputPr
     const [listAttributes, setListAttributes] = useState<any[]>([]);
 
     const getListAttributes = useCallback(async () => {
-        if (program && trackedEntityInstanceAttributes) {
+        if (program && trackedEntityInstanceAttributes && Array.isArray(trackedEntityInstanceAttributes)) {
             const querySingleResource = makeQuerySingleResource(dataEngine.query.bind(dataEngine));
             const { programTrackedEntityAttributes } = program;
             const computedAttributes = await programTrackedEntityAttributes.reduce(async (promisedAcc: Promise<any[]>, currentTEA) => {
