@@ -1,5 +1,4 @@
 import React, { useState, useCallback, type ComponentType } from 'react';
-import { useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { WidgetStageHeader } from './WidgetStageHeader';
@@ -43,9 +42,9 @@ const NewEventWorkspacePlain = ({
 
     const handleTabChange = useCallback((selectedTab: string) => {
         if (dataEntryHasChanges) {
-        } else {
-            setMode(selectedTab);
+            return;
         }
+        setMode(selectedTab);
     }, [dataEntryHasChanges]);
 
     const renderTabContent = () => {

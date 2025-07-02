@@ -9,11 +9,9 @@ const EnrollmentAddEventPageDefault = ({
 }: ContainerProps) => {
     const { stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
-    const handleSave = () => {
-    };
+    const handleSave = () => undefined;
 
-    const handleAction = () => {
-    };
+    const handleAction = () => undefined;
 
     return (
         <EnrollmentAddEventPageDefaultComponent
