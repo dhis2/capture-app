@@ -1,4 +1,3 @@
-// @flow
 import React, { useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
@@ -42,19 +41,19 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         }
     }, [enrollmentsError, programError]);
 
-    const programStages = useMemo(() => !programLoading && program?.programStages?.reduce((accStage, currentStage) => {
+    const programStages = useMemo(() => !programLoading && program?.programStages?.reduce((accStage: any, currentStage: any) => {
         accStage.push({
             id: currentStage.id,
             dataAccess: currentStage.access.data,
             eventCount: (enrollment?.events
-                ?.filter(event => event.programStage === currentStage.id)
+                ?.filter((event: any) => event.programStage === currentStage.id)
                 ?.length
             ),
             displayName: currentStage.displayName,
             style: currentStage.style,
             repeatable: currentStage.repeatable,
             hiddenProgramStage: ruleEffects?.find(
-                ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === currentStage.id,
+                (ruleEffect: any) => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === currentStage.id,
             ),
         });
         return accStage;
