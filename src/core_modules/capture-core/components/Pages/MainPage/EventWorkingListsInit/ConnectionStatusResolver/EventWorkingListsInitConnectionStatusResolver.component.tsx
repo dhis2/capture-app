@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { EventWorkingListsInitHeader } from '../Header';
 import { EventWorkingListsOffline } from '../../../../WorkingLists/EventWorkingListsOffline';
