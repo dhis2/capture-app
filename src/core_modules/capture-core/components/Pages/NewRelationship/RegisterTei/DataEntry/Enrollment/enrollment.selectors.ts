@@ -1,11 +1,6 @@
 import { createSelector } from 'reselect';
 import { getProgramFromProgramIdThrowIfNotFound, type TrackerProgram } from '../../../../../../metaData';
-
-type ReduxState = {
-    newRelationshipRegisterTei: {
-        programId: string;
-    };
-};
+import type { ReduxState } from '../../../../../App/withAppUrlSync.types';
 
 const programIdSelector = (state: ReduxState) => state.newRelationshipRegisterTei.programId;
 

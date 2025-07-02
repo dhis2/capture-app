@@ -3,14 +3,7 @@ import { errorCreator } from 'capture-core-utils';
 import { createSelector } from 'reselect';
 import type { TrackedEntityType } from '../../../../../../metaData';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../../metaData';
-
-type ReduxState = {
-    newRelationship: {
-        selectedRelationshipType: {
-            to: { trackedEntityTypeId: string };
-        };
-    };
-};
+import type { ReduxState } from '../../../../../App/withAppUrlSync.types';
 
 const trackedEntityTypeIdSelector = (state: ReduxState) => state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 

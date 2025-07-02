@@ -23,6 +23,16 @@ export type ReduxState = {
         };
         lockedSelectorLoads?: boolean;
     };
+    newRelationshipRegisterTei: {
+        programId: string;
+        orgUnit: { id: string };
+        dataEntryError?: string;
+    };
+    newRelationship: {
+        selectedRelationshipType: {
+            to: { trackedEntityTypeId: string };
+        };
+    };
 };
 
 export type ReduxDispatch = (action: {
