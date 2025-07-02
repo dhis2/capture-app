@@ -1,12 +1,18 @@
 import { createSelector } from 'reselect';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaData';
+import { getProgramFromProgramIdThrowIfNotFound, type TrackerProgram } from '../../../../../../metaData';
 
-const programIdSelector = (state: any) => state.newRelationshipRegisterTei.programId;
+type ReduxState = {
+    newRelationshipRegisterTei: {
+        programId: string;
+    };
+};
+
+const programIdSelector = (state: ReduxState) => state.newRelationshipRegisterTei.programId;
 
 export const makeEnrollmentMetadataSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
-        let program: any;
+        let program: TrackerProgram;
         try {
             program = getProgramFromProgramIdThrowIfNotFound(programId);
         } catch (error) {

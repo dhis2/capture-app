@@ -4,7 +4,15 @@ import { createSelector } from 'reselect';
 import type { TrackedEntityType } from '../../../../../../metaData';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../../metaData';
 
-const trackedEntityTypeIdSelector = (state: any) => state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
+type ReduxState = {
+    newRelationship: {
+        selectedRelationshipType: {
+            to: { trackedEntityTypeId: string };
+        };
+    };
+};
+
+const trackedEntityTypeIdSelector = (state: ReduxState) => state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
 export const makeTeiRegistrationMetadataSelector = () => createSelector(
     trackedEntityTypeIdSelector,
