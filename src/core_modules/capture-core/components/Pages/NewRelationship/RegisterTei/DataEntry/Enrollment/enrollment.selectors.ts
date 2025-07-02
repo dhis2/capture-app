@@ -10,6 +10,7 @@ export const makeEnrollmentMetadataSelector = () => createSelector(
         try {
             program = getProgramFromProgramIdThrowIfNotFound(programId);
         } catch (error) {
+            console.error('Could not get program for id:', programId, error);
             return null;
         }
 

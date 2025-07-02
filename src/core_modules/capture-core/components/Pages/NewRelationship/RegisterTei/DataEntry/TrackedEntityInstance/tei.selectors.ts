@@ -13,7 +13,7 @@ export const makeTeiRegistrationMetadataSelector = () => createSelector(
         try {
             TEType = getTrackedEntityTypeThrowIfNotFound(TETypeId);
         } catch (error) {
-            log.error(errorCreator('Could not get TrackedEntityType for id')({ TETypeId }));
+            log.error(errorCreator('Could not get TrackedEntityType for id')({ TETypeId, error }));
             return null;
         }
 

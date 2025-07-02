@@ -20,7 +20,7 @@ const RelationshipTrackedEntityInstancePlain =
     }: Props) => {
         const orgUnitId = useCurrentOrgUnitId();
         const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
-        const { trackedEntityType } = teiRegistrationMetadata || {};
+        const { trackedEntityType } = teiRegistrationMetadata ?? {};
         const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
 
         return (

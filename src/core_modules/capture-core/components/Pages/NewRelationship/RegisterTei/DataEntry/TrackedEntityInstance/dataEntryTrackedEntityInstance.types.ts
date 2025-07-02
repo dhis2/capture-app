@@ -13,7 +13,7 @@ export type Props = {
     theme: Theme;
     onSave: (payload: TeiPayload) => void;
     onCancel: () => void;
-    teiRegistrationMetadata?: TeiRegistration | any;
+    teiRegistrationMetadata?: TeiRegistration;
     duplicatesReviewPageSize: number;
     renderDuplicatesCardActions?: RenderCustomCardActions;
     renderDuplicatesDialogActions?: (onCancel: () => void, onSave: (payload: TeiPayload) => void) => ReactNode;
