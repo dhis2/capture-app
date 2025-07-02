@@ -6,7 +6,8 @@ import { withFocusHandler } from './withFocusHandler';
 type Props = {
     value: ?string,
     onBlur?: ?(value: any) => void,
-    options: Array<{value: any, label: string}>,
+    onFocus?: ?(value: any) => void,
+    options: Array<{ value: any, label: string }>,
     disabled?: ?boolean,
     required?: ?boolean,
     placeholder?: ?string,
@@ -20,6 +21,7 @@ const SingleSelectFieldComponentPlain = (props: Props) => {
     const {
         value,
         onBlur,
+        onFocus,
         options,
         disabled,
         required,
@@ -43,6 +45,8 @@ const SingleSelectFieldComponentPlain = (props: Props) => {
                 dataTest={dataTest}
                 selected={selectedValue}
                 onChange={handleSelect}
+                onFocus={onFocus}
+                onKeyDown={onFocus}
                 disabled={disabled}
                 required={required}
                 placeholder={placeholder}
