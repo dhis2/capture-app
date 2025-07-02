@@ -1,12 +1,11 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -23,7 +22,30 @@ const styles = {
     },
 };
 
-const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }) => (
+type ProgramStage = {
+    id: string;
+    displayName: string;
+    dataAccess: {
+        write: boolean;
+    };
+    repeatable: boolean;
+    eventCount: number;
+    hiddenProgramStage: boolean;
+    style?: {
+        icon?: string;
+        color?: string;
+    };
+};
+
+type Props = {
+    programStages: ProgramStage[];
+    onSelectProgramStage: (stageId: string) => void;
+    onCancel: () => void;
+};
+
+type ProgramStageSelectorPlainProps = Props & WithStyles<typeof styles>;
+
+const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }: ProgramStageSelectorPlainProps) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {
             const disableStage =
@@ -46,7 +68,7 @@ const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStag
                             onClick={() => onSelectProgramStage(programStage.id)}
                             dataTest={'program-stage-selector-button'}
                             icon={
-                                programStage.style?.icon && (
+                                programStage.style?.icon ? (
                                     <div className={classes.icon}>
                                         <NonBundledDhis2Icon
                                             name={programStage.style?.icon}
@@ -56,7 +78,7 @@ const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStag
                                             cornerRadius={5}
                                         />
                                     </div>
-                                )
+                                ) : undefined
                             }
                         >
                             {programStage.displayName}
@@ -68,7 +90,7 @@ const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStag
         <Button
             className={classes.cancelbutton}
             secondary
-            big
+            large
             onClick={onCancel}
         >
             {i18n.t('Cancel without saving')}

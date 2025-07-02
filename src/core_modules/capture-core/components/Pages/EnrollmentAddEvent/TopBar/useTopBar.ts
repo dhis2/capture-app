@@ -1,4 +1,3 @@
-// @flow
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
@@ -14,7 +13,7 @@ import {
 } from '../../../ScopeSelector';
 import { useTeiDisplayName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
-export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, enrollment?: Object) => {
+export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, enrollment?: any) => {
     const { setOrgUnitId } = useSetOrgUnitId();
     const { resetOrgUnitId } = useResetOrgUnitId();
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
@@ -22,10 +21,10 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
     const { resetTeiId } = useResetTeiId();
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
-    const userInteractionInProgress = useSelector(state => dataEntryHasChanges(state, 'enrollmentEvent-newEvent'));
+    const userInteractionInProgress = useSelector((state: any) => dataEntryHasChanges(state, 'enrollmentEvent-newEvent'));
 
     const handleResetProgramId = useCallback(
-        () => resetProgramIdAndEnrollmentContext('enrollment'), [resetProgramIdAndEnrollmentContext],
+        () => resetProgramIdAndEnrollmentContext('enrollment', { teiId, programId }), [resetProgramIdAndEnrollmentContext, teiId, programId],
     );
     const handleResetEnrollmentId = useCallback(() => resetEnrollmentId('enrollment'), [resetEnrollmentId]);
     const handleResetTeiId = useCallback(() => resetTeiId('/'), [resetTeiId]);
@@ -33,7 +32,7 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
     const handleResetEventId = useCallback(() => resetEventId('enrollmentEventNew'), [resetEventId]);
 
     const { teiDisplayName, error: teiDisplayNameError } = useTeiDisplayName(teiId, programId);
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollment || {}], programId);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollment || {} as any], programId);
 
     return {
         handleSetOrgUnitId: setOrgUnitId,

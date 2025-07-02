@@ -1,4 +1,3 @@
-// @flow
 import type {
     PageLayoutConfig,
     WidgetConfig,
@@ -9,7 +8,7 @@ import {
     WidgetTypes,
 } from '../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 
-export const WidgetsForEnrollmentEventNew: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
+export const WidgetsForEnrollmentEventNew: Readonly<{ [key: string]: WidgetConfig }> = Object.freeze({
     NewEventWorkspace,
     ...DefaultWidgetsForEnrollmentOverview,
 });
