@@ -1,14 +1,12 @@
-// @flow
 import React, { useEffect, useRef } from 'react';
 
 type Props = {
-    setRelationshipRef: (HTMLDivElement) => void,
+    setRelationshipRef: (element: HTMLDivElement) => void,
 }
 
 export const AddRelationshipRefWrapper = ({ setRelationshipRef }: Props) => {
-    const renderRelationshipRef = useRef<?HTMLDivElement>(undefined);
+    const renderRelationshipRef = useRef<HTMLDivElement | null>(null);
 
-    // Extracting the logic to separate component because of the OrgUnitFetcher
     useEffect(() => {
         if (renderRelationshipRef.current) {
             setRelationshipRef(renderRelationshipRef.current);
