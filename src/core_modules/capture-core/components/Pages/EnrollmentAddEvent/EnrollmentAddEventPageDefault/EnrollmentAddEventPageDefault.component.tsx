@@ -18,7 +18,7 @@ const styles = {
     },
 };
 
-const EnrollmentAddEventPagePain = ({
+const EnrollmentAddEventPagePlain = ({
     program,
     stageId,
     orgUnitId,
@@ -106,4 +106,4 @@ const EnrollmentAddEventPagePain = ({
     );
 };
 
-export const EnrollmentAddEventPageDefaultComponent = withStyles(styles)(EnrollmentAddEventPagePain) as ComponentType<Props>;
+export const EnrollmentAddEventPageDefaultComponent = withStyles(styles)(EnrollmentAddEventPagePlain) as ComponentType<Props>;
