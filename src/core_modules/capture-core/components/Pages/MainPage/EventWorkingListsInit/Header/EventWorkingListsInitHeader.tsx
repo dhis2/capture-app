@@ -1,8 +1,7 @@
 import { colors, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, type ReactNode } from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { ReactNode } from 'react';
 
 export const styles = () => ({
     container: {
