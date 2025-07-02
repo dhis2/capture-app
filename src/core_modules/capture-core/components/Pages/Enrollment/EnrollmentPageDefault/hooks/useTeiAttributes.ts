@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
@@ -18,6 +17,6 @@ export const useTeiAttributes = (teiId: string) => {
 
     return {
         error,
-        attributes: !loading && data?.trackedEntityInstance?.attributes,
+        attributes: !loading && (data as any)?.trackedEntityInstance?.attributes,
     };
 };

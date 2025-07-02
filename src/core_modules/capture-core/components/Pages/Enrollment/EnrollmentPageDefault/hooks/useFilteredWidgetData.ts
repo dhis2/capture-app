@@ -1,20 +1,19 @@
-// @flow
 import { useMemo } from 'react';
 
-type rulesProps = {
-    type: string,
-    id: string,
-    error?: { id: string, message: string },
-    warning?: { id: string, message: string },
-    displayText?: { id: string, message: string },
-    displayKeyValuePair?: { id: string, key: string, value: string }
-}
+type RulesProps = {
+    type: string;
+    id: string;
+    error?: { id: string; message: string };
+    warning?: { id: string; message: string };
+    displayText?: { id: string; message: string };
+    displayKeyValuePair?: { id: string; key: string; value: string };
+};
 
-export const useFilteredWidgetData = (rulesEffects: ?Array<rulesProps>) => useMemo(() => {
-    let warnings = [];
-    let errors = [];
-    let feedbacks = [];
-    let indicators = [];
+export const useFilteredWidgetData = (rulesEffects?: Array<RulesProps> | null) => useMemo(() => {
+    let warnings: any[] = [];
+    let errors: any[] = [];
+    let feedbacks: any[] = [];
+    let indicators: any[] = [];
 
     const effectTypes = Object.freeze({
         SHOWWARNING: 'SHOWWARNING',

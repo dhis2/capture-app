@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useProgramFromIndexedDB } from '../../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useDataElementsFromIndexedDB } from '../../../../../utils/cachedDataHooks/useDataElementsFromIndexedDB';
@@ -33,7 +32,7 @@ export const useProgramMetadata = (programId: string) => {
                 }
                 return acc;
             }, new Set),
-            dataElementDictionary: dataElements.reduce((acc, dataElement) => {
+            dataElementDictionary: dataElements.reduce((acc: any, dataElement) => {
                 acc[dataElement.id] = dataElement;
                 return acc;
             }, {}),
@@ -43,11 +42,11 @@ export const useProgramMetadata = (programId: string) => {
         isLoading: loadingOptionSets,
         optionSets,
         isError: optionSetsError,
-    } = useOptionSetsFromIndexedDB([queryKey, programId], derivedDataElementValues && derivedDataElementValues.optionSetIds);
+    } = useOptionSetsFromIndexedDB([queryKey, programId], derivedDataElementValues?.optionSetIds as any);
 
     const optionSetDictionary = useMemo(
         () => (optionSets ? optionSets.reduce(
-            (acc, optionSet) => {
+            (acc: any, optionSet) => {
                 acc[optionSet.id] = {
                     options: optionSet.options.map(option => ({
                         name: option.displayName,
@@ -59,7 +58,7 @@ export const useProgramMetadata = (programId: string) => {
         [optionSets],
     );
 
-    const programMetadata: Program | void = useMemo(() => {
+    const programMetadata: Program | undefined = useMemo(() => {
         if (!program || !derivedDataElementValues || !optionSetDictionary) {
             return undefined;
         }

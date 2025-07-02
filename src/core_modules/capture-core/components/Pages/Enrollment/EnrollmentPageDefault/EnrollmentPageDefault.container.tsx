@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
@@ -6,6 +5,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
+import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
 import {
     commitEnrollmentAndEvents,
     rollbackEnrollmentAndEvents,
@@ -48,7 +48,7 @@ export const EnrollmentPageDefault = () => {
     const { navigate } = useNavigate();
     const dispatch = useDispatch();
     const { fromClientDate } = useTimeZoneConversion();
-    const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }) => widgetEnrollment);
+    const { status: widgetEnrollmentStatus } = useSelector(({ widgetEnrollment }: any) => widgetEnrollment);
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const { onLinkedRecordClick } = useLinkedRecordClick();
@@ -91,7 +91,6 @@ export const EnrollmentPageDefault = () => {
         apiAttributeValues: attributeValues,
     });
 
-    // $FlowFixMe
     const outputEffects = useFilteredWidgetData(ruleEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
@@ -104,12 +103,12 @@ export const EnrollmentPageDefault = () => {
         dispatch(deleteEnrollment({ enrollmentId }));
     };
 
-    const onViewAll = (stageId) => {
+    const onViewAll = (stageId: string) => {
         navigate(
             `/enrollment/stageEvents?${buildUrlQueryString({ orgUnitId, programId, stageId })}`);
     };
 
-    const onCreateNew = (stageId) => {
+    const onCreateNew = (stageId: string) => {
         navigate(
             `/enrollmentEventNew?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId, stageId })}`,
         );
@@ -119,19 +118,19 @@ export const EnrollmentPageDefault = () => {
         navigate(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, eventId })}`);
     };
 
-    const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues, teiDisplayName) => {
+    const onUpdateTeiAttributeValues = useCallback((updatedAttributeValues: any, teiDisplayName: string) => {
         dispatch(updateEnrollmentAttributeValues(updatedAttributeValues
-            .map(({ attribute, value }) => ({ id: attribute, value })),
+            .map(({ attribute, value }: any) => ({ id: attribute, value })),
         ));
         dispatch(updateTeiDisplayName(teiDisplayName));
     }, [dispatch]);
 
-    const onUpdateEnrollmentDate = useCallback((enrollmentDate) => {
+    const onUpdateEnrollmentDate = useCallback((enrollmentDate: string) => {
         dispatch(updateEnrollmentDate(enrollmentDate));
         dispatch(updateTopBarEnrollmentDate({ enrollmentId, enrollmentDate }));
     }, [dispatch, enrollmentId]);
 
-    const onUpdateIncidentDate = useCallback((incidentDate) => {
+    const onUpdateIncidentDate = useCallback((incidentDate: string) => {
         dispatch(updateIncidentDate(incidentDate));
     }, [dispatch]);
 
@@ -159,13 +158,13 @@ export const EnrollmentPageDefault = () => {
         navigate(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
 
-    const onEnrollmentError = message => dispatch(showEnrollmentError({ message }));
+    const onEnrollmentError = (message: string) => dispatch(showEnrollmentError({ message }));
     const onUpdateEnrollmentStatus = useCallback(
-        (enrollmentToUpdate: Object) => dispatch(updateEnrollmentAndEvents(enrollmentToUpdate)),
+        (enrollmentToUpdate: any) => dispatch(updateEnrollmentAndEvents(enrollmentToUpdate)),
         [dispatch],
     );
     const onUpdateEnrollmentStatusError = useCallback(
-        (message) => {
+        (message: string) => {
             dispatch(rollbackEnrollmentAndEvents());
             dispatch(showEnrollmentError({ message }));
         },
@@ -198,7 +197,6 @@ export const EnrollmentPageDefault = () => {
             teiId={teiId}
             orgUnitId={orgUnitId}
             program={program}
-            // $FlowFixMe
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
