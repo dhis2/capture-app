@@ -10,6 +10,8 @@ export const EventWorkingListsInitOnline = ({
     mutationInProgress,
     ...passOnProps
 }: Props) => {
+    // Retrieving the viewConfig this high up in the component tree because this is capture app specific config
+    // The EventWorkingLists can potentially be included a standalone Widget library in the future
     const { mainViewConfig, mainViewConfigReady } = useMainViewConfig();
 
     return (
