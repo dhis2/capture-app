@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-17T14:09:38.789Z\n"
-"PO-Revision-Date: 2025-06-17T14:09:38.789Z\n"
+"POT-Creation-Date: 2025-07-02T09:50:04.171Z\n"
+"PO-Revision-Date: 2025-07-02T09:50:04.171Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -717,18 +717,6 @@ msgstr "There was an error opening the Page"
 msgid "There was an error loading the page"
 msgstr "There was an error loading the page"
 
-msgid "Program stage is invalid"
-msgstr "Program stage is invalid"
-
-msgid "Report"
-msgstr "Report"
-
-msgid "Schedule"
-msgstr "Schedule"
-
-msgid "Refer"
-msgstr "Refer"
-
 msgid "You can't add any more {{ programStageName }} events"
 msgstr "You can't add any more {{ programStageName }} events"
 
@@ -1308,6 +1296,12 @@ msgstr "Go to “Schedule” tab to reschedule this event"
 
 msgid "Scheduled date cannot be changed for {{ eventStatus }} events"
 msgstr "Scheduled date cannot be changed for {{ eventStatus }} events"
+
+msgid "Report"
+msgstr "Report"
+
+msgid "Schedule"
+msgstr "Schedule"
 
 msgid "Geometry (Area)"
 msgstr "Geometry (Area)"
