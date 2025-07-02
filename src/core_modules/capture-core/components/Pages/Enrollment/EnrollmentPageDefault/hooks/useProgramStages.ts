@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
@@ -7,7 +6,7 @@ import type { ProgramStages } from '../EnrollmentPageDefault.types';
 import { Program } from '../../../../../metaData';
 
 export const useProgramStages = (program: Program, programStages?: ProgramStages) => useMemo(() => {
-    const stages = [];
+    const stages: any[] = [];
     if (program && programStages) {
         program.stages.forEach((item) => {
             const { id, name, icon, stageForm } = item;
@@ -24,11 +23,11 @@ export const useProgramStages = (program: Program, programStages?: ProgramStages
                     enableUserAssignment,
                     description: stageForm.description,
                     dataAccess,
-                    dataElements: programStageDataElements?.reduce((acc, currentStageData) => {
+                    dataElements: programStageDataElements?.reduce((acc: any[], currentStageData) => {
                         const { displayInReports, dataElement } = currentStageData;
                         if (displayInReports) {
                             const options = dataElement.optionSet ?
-                                dataElement.optionSet.options?.reduce((accOptions, option) => {
+                                dataElement.optionSet.options?.reduce((accOptions: any, option) => {
                                     accOptions[option.code] = option.name;
                                     return accOptions;
                                 }, {}) : undefined;

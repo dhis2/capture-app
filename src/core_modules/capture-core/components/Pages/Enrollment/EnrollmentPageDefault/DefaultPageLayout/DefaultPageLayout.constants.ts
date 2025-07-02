@@ -1,4 +1,3 @@
-// @flow
 import {
     QuickActions,
     StagesAndEvents,
@@ -7,18 +6,17 @@ import {
     WidgetTypes,
 } from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import type {
-    PageLayoutConfig,
     WidgetConfig,
 } from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 
-export const WidgetsForEnrollmentPageDefault: $ReadOnly<{ [key: string]: WidgetConfig }> = Object.freeze({
+export const WidgetsForEnrollmentPageDefault: Readonly<Record<string, WidgetConfig>> = Object.freeze({
     QuickActions,
     StagesAndEvents,
     EnrollmentNote,
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
-export const DefaultPageLayout: PageLayoutConfig = Object.freeze({
+export const DefaultPageLayout = Object.freeze({
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
