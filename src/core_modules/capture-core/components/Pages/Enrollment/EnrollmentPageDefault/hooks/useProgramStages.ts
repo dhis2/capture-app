@@ -5,6 +5,14 @@ import i18n from '@dhis2/d2-i18n';
 import type { ProgramStages } from '../EnrollmentPageDefault.types';
 import { Program } from '../../../../../metaData';
 
+const buildOptionsFromOptionSet = (optionSet: any) => {
+    if (!optionSet?.options) return undefined;
+    return optionSet.options.reduce((accOptions: any, option: any) => {
+        accOptions[option.code] = option.name;
+        return accOptions;
+    }, {});
+};
+
 export const useProgramStages = (program: Program, programStages?: ProgramStages) => useMemo(() => {
     const stages: any[] = [];
     if (program && programStages) {
@@ -26,11 +34,7 @@ export const useProgramStages = (program: Program, programStages?: ProgramStages
                     dataElements: programStageDataElements?.reduce((acc: any[], currentStageData) => {
                         const { displayInReports, dataElement } = currentStageData;
                         if (displayInReports) {
-                            const options = dataElement.optionSet ?
-                                dataElement.optionSet.options?.reduce((accOptions: any, option) => {
-                                    accOptions[option.code] = option.name;
-                                    return accOptions;
-                                }, {}) : undefined;
+                            const options = buildOptionsFromOptionSet(dataElement.optionSet);
                             acc.push({
                                 id: dataElement.id,
                                 name: dataElement.displayName,

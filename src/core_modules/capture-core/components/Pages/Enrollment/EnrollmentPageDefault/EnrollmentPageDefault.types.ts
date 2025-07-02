@@ -47,7 +47,6 @@ export type Props = {
     onDeleteTrackedEntitySuccess: () => void;
 };
 
-export type PlainProps = Props;
 
 type DataElement = Readonly<{
     id: string;
