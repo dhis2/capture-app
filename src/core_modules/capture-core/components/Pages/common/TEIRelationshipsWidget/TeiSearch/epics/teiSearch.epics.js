@@ -1,4 +1,3 @@
-// @flow
 import isArray from 'd2-utilizr/src/isArray';
 import { from, of } from 'rxjs';
 import { ofType } from 'redux-observable';
@@ -33,13 +32,12 @@ import {
     getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
 } from '../../../../../../metaData';
 import { getSearchFormId } from '../getSearchFormId';
-import type { QuerySingleResource } from '../../../../../../utils/api';
 
-const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) => {
-    const orgUnitModeQueryParam: string = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
+const getOuQueryArgs = (orgUnit, orgUnitScope) => {
+    const orgUnitModeQueryParam = featureAvailable(FEATURES.newOrgUnitModeQueryParam)
         ? 'orgUnitMode'
         : 'ouMode';
-    const orgUnitQueryParam: string = featureAvailable(FEATURES.newEntityFilterQueryParam)
+    const orgUnitQueryParam = featureAvailable(FEATURES.newEntityFilterQueryParam)
         ? 'orgUnits'
         : 'orgUnit';
     return orgUnitScope !== 'ACCESSIBLE' ?
@@ -47,15 +45,15 @@ const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) => {
         { [orgUnitModeQueryParam]: orgUnitScope };
 };
 
-const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
+const getContextQueryArgs = (programId, trackedEntityTypeId) =>
     (programId ? { program: programId } : { trackedEntityType: trackedEntityTypeId });
 
-const getPagingQueryArgs = (pageNumber: ?number = 1) => ({ page: pageNumber, pageSize: 5 });
+const getPagingQueryArgs = (pageNumber = 1) => ({ page: pageNumber, pageSize: 5 });
 
 export const searchTeiByTETIdEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { absoluteApiPath, querySingleResource }: ApiUtils,
+    action$,
+    store,
+    { absoluteApiPath, querySingleResource },
 ) =>
     action$.pipe(
         ofType(actionTypes.SEARCH_TE_IN_TET_SCOPE),
@@ -88,15 +86,6 @@ const searchTei = ({
     resultsPageSize,
     absoluteApiPath,
     querySingleResource,
-}: {
-    state: ReduxState,
-    searchId: string,
-    formId: string,
-    searchGroupId: any,
-    pageNumber?: ?number,
-    resultsPageSize: number,
-    absoluteApiPath: string,
-    querySingleResource: QuerySingleResource
 }) => {
     const currentTeiSearch = state.teiSearch[searchId];
     const formValues = state.formsValues[formId];
@@ -125,7 +114,6 @@ const searchTei = ({
         filter: filters,
         fields: 'attributes,enrollments,trackedEntity,orgUnit',
         ...getOuQueryArgs(selectedOrgUnit, selectedOrgUnitScope),
-        // $FlowFixMe[exponential-spread] automated comment
         ...getContextQueryArgs(selectedProgramId, selectedTrackedEntityTypeId),
         ...getPagingQueryArgs(pageNumber),
         pageSize: resultsPageSize,
@@ -158,7 +146,7 @@ const searchTei = ({
     );
 };
 
-export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
+export const teiSearchChangePageEpic = (action$, store, { absoluteApiPath, querySingleResource }) =>
     action$.pipe(
         ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE),
         switchMap((action) => {
@@ -189,7 +177,7 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
             );
         }));
 
-export const teiSearchEpic = (action$: InputObservable, store: ReduxStore, { absoluteApiPath, querySingleResource }: ApiUtils) =>
+export const teiSearchEpic = (action$, store, { absoluteApiPath, querySingleResource }) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SEARCH_TEI),
         switchMap((action) => {
@@ -217,7 +205,7 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore, { abs
                             isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
         }));
 
-export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxStore) =>
+export const teiSearchSetProgramEpic = (action$, store) =>
     action$.pipe(
         ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM),
         map((action) => {
@@ -246,7 +234,7 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
             ], batchActionTypes.BATCH_SET_TEI_SEARCH_PROGRAM_AND_TET);
         }));
 
-export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
+export const teiNewSearchEpic = (action$, store) =>
     action$.pipe(
         ofType(actionTypes.TEI_NEW_SEARCH),
         map((action) => {

@@ -1,11 +1,9 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withTheme } from '@material-ui/core';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
 import { TeiRegistrationEntry } from '../../../../../../DataEntries';
-import type { Props } from './dataEntryTrackedEntityInstance.types';
 import { getTeiRegistrationMetadata } from './tei.selectors';
 import { useLocationQuery } from '../../../../../../../utils/routing';
 
@@ -20,7 +18,7 @@ const RelationshipTrackedEntityInstancePlain =
         renderDuplicatesDialogActions,
         renderDuplicatesCardActions,
         ExistingUniqueValueDialogActions,
-    }: Props) => {
+    }) => {
         const { orgUnitId } = useLocationQuery();
         const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
         const teiRegistrationMetadata = getTeiRegistrationMetadata(trackedEntityTypeId);
@@ -32,7 +30,6 @@ const RelationshipTrackedEntityInstancePlain =
         }
 
         return (
-            // $FlowFixMe - flow error will be resolved when rewriting relationship metadata fetching
             <TeiRegistrationEntry
                 id={DATA_ENTRY_ID}
                 orgUnitId={orgUnitId}

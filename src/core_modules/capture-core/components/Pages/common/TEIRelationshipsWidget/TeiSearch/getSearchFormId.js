@@ -1,9 +1,7 @@
-// @flow
-
 export function getSearchFormId(
-    searchId: string,
-    contextId: string,
-    searchGroupId: string,
+    searchId,
+    contextId,
+    searchGroupId,
 ) {
     return `${searchId}-${contextId}-${searchGroupId}`;
 }

@@ -1,5 +1,3 @@
-// @flow
-
 import { createSelector } from 'reselect';
 import {
     getTrackedEntityTypeThrowIfNotFound,
@@ -7,10 +5,9 @@ import {
 
 const TETIdSelector = state => state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
-// $FlowFixMe
 export const makeTETNameSelector = () => createSelector(
     TETIdSelector,
-    (TETId: string) => {
+    (TETId) => {
         let TEType;
         try {
             TEType = getTrackedEntityTypeThrowIfNotFound(TETId);

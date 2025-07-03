@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useContext, useCallback } from 'react';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -8,7 +7,6 @@ import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container
 import { RegistrationSection } from './RegistrationSection';
 import { DataEntryWidgetOutput } from '../../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
-import type { ComponentProps } from './RegisterTei.types';
 import { withErrorMessageHandler } from '../../../../../HOC';
 
 const getStyles = () => ({
@@ -67,7 +65,7 @@ const RegisterTeiPlain = ({
     selectedScopeId,
     inheritedAttributes,
     classes,
-}: ComponentProps) => {
+) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
     const renderDuplicatesCardActions = useCallback(({ item }) => (
@@ -127,7 +125,7 @@ const RegisterTeiPlain = ({
     );
 };
 
-export const RegisterTeiComponent: ComponentType<$Diff<ComponentProps, CssClasses>> =
+export const RegisterTeiComponent =
   compose(
       withErrorMessageHandler(),
       withStyles(getStyles),

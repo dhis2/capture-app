@@ -1,7 +1,5 @@
-// @flow
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import type { InputAttribute } from '../../../DataEntries/EnrollmentRegistrationEntry/hooks/useFormValues';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import {
     getProgramFromProgramIdThrowIfNotFound,
@@ -9,16 +7,7 @@ import {
     TrackerProgram,
 } from '../../../../metaData';
 
-type Props = {
-    teiId: string,
-    trackedEntityTypeId: string,
-};
-
-type Return = {
-    inheritedAttributes: Array<InputAttribute>,
-    isLoading: boolean,
-};
-export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }: Props): Return => {
+export const useInheritedAttributeValues = ({ teiId, trackedEntityTypeId }) => {
     const programId = useSelector(({ newRelationshipRegisterTei }) => newRelationshipRegisterTei.programId);
     const inheritedAttributeIds = useMemo(() => {
         const attributeIds = new Set();

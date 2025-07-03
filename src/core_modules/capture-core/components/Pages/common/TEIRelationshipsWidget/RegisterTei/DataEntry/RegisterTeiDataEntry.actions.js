@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -10,5 +9,5 @@ export const actionTypes = {
 export const openDataEntry = () =>
     actionCreator(actionTypes.DATA_ENTRY_OPEN)();
 
-export const openDataEntryFailed = (errorMessage: string) =>
+export const openDataEntryFailed = (errorMessage) =>
     actionCreator(actionTypes.DATA_ENTRY_OPEN_FAILED)({ errorMessage });

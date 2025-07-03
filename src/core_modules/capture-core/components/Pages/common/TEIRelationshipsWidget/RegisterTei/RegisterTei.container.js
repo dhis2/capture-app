@@ -1,8 +1,6 @@
-// @flow
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RegisterTeiComponent } from './RegisterTei.component';
-import type { ContainerProps } from './RegisterTei.types';
 import { useScopeInfo } from '../../../../../hooks';
 import { useInheritedAttributeValues } from '../useInheritedAttributeValues';
 
@@ -14,18 +12,18 @@ export const RegisterTei = ({
     teiId,
     trackedEntityTypeId,
     suggestedProgramId,
-}: ContainerProps) => {
+}) => {
     const dataEntryId = 'relationship';
     const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
     const selectedScopeId = suggestedProgramId || trackedEntityTypeId;
     const { trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { inheritedAttributes, isLoading: isLoadingAttributes } = useInheritedAttributeValues({
+    const { inheritedAttributes, isLoading } = useInheritedAttributeValues({
         teiId,
         trackedEntityTypeId,
         programId: suggestedProgramId,
     });
 
-    if (isLoadingAttributes) {
+    if (isLoading) {
         return null;
     }
 

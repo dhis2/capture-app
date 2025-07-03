@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -7,9 +6,9 @@ export const actionTypes = {
 };
 
 export const initializeRegisterTei = (
-    programId: ?string,
-    orgUnit?: ?Object,
+    programId,
+    orgUnit,
 ) => actionCreator(actionTypes.REGISTER_TEI_INITIALIZE)({ programId, orgUnit });
 
-export const initializeRegisterTeiFailed = (errorMessage: string) =>
+export const initializeRegisterTeiFailed = (errorMessage) =>
     actionCreator(actionTypes.REGISTER_TEI_INITIALIZE_FAILED)({ errorMessage });

@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
@@ -15,12 +14,11 @@ import {
 } from '@dhis2/ui';
 import { D2Form } from '../../../../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
-import type { SearchGroup } from '../../../../../../metaData';
 import { withGotoInterface } from '../../../../../FormFields/New';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme) => ({
     orgUnitSection: {
         backgroundColor: 'white',
         padding: theme.typography.pxToRem(8),
@@ -40,33 +38,9 @@ const getStyles = (theme: Theme) => ({
         color: theme.palette.error.main,
     },
 });
-type State = {
-    showMissingSearchCriteriaModal: boolean,
-};
 
-type Props = {
-    id: string,
-    searchGroupId: string,
-    onSearch: (formId: string, searchGroupId: string) => void,
-    onSearchValidationFailed: (formId: string, SearchGroupId: string) => void,
-    searchAttempted: boolean,
-    searchId: string,
-    searchGroup: SearchGroup,
-    attributesWithValuesCount: number,
-    formsValues: { [formElement: string]: Object},
-    classes: {
-        container: string,
-        searchButtonContainer: string,
-        orgUnitSection: string,
-        minAttributesRequired: string,
-        minAttribtuesRequiredInvalid: string,
-    },
-};
-
-class SearchFormPlain extends React.Component<Props, State> {
-    formInstance: any;
-    orgUnitSelectorInstance: SearchOrgUnitSelector;
-    constructor(props: Props) {
+class SearchFormPlain extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             showMissingSearchCriteriaModal: false,
@@ -103,7 +77,6 @@ class SearchFormPlain extends React.Component<Props, State> {
 
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
-        // $FlowFixMe[prop-missing] automated comment
         if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
 
         if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();

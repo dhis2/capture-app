@@ -1,14 +1,12 @@
-// @flow
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
-    type RenderFoundation,
 } from '../../../../../../metaData';
 import { convertFormToClient } from '../../../../../../converters';
 import { getDisplayName } from '../../../../../../trackedEntityInstances/getDisplayName';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 
-function getTrackerProgramMetadata(programId: string) {
+function getTrackerProgramMetadata(programId) {
     const program = getTrackerProgramThrowIfNotFound(programId);
     return {
         form: program.enrollment.enrollmentForm,
@@ -17,7 +15,7 @@ function getTrackerProgramMetadata(programId: string) {
     };
 }
 
-function getTETMetadata(tetId: string) {
+function getTETMetadata(tetId) {
     const tet = getTrackedEntityTypeThrowIfNotFound(tetId);
     return {
         form: tet.teiRegistration.form,
@@ -26,17 +24,17 @@ function getTETMetadata(tetId: string) {
     };
 }
 
-function getMetadata(programId: ?string, tetId: string) {
+function getMetadata(programId, tetId) {
     return programId ? getTrackerProgramMetadata(programId) : getTETMetadata(tetId);
 }
 
 
-function getClientValuesForFormData(formValues: Object, formFoundation: RenderFoundation) {
+function getClientValuesForFormData(formValues, formFoundation) {
     const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
     return clientValues;
 }
 
-export function getRelationshipNewTeiName(dataEntryId: string, itemId: string, state: ReduxState) {
+export function getRelationshipNewTeiName(dataEntryId, itemId, state) {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
     const formValues = state.formsValues[dataEntryKey];
     const { programId } = state.newRelationshipRegisterTei;

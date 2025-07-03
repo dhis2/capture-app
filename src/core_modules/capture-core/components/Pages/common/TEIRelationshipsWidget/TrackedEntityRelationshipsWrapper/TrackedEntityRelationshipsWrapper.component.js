@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
@@ -7,8 +6,6 @@ import { useTEIRelationshipsWidgetMetadata } from '../useTEIRelationshipsWidgetM
 import {
     WidgetTrackedEntityRelationship,
 } from '../../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
-import type { OnSelectFindModeProps } from '../../../../WidgetsRelationship/WidgetTrackedEntityRelationship';
-import type { Props } from './TrackedEntityRelationshipsWrapper.types';
 import { TeiSearch } from '../TeiSearch/TeiSearch.container';
 import {
     TeiRelationshipSearchResults,
@@ -26,13 +23,13 @@ export const TrackedEntityRelationshipsWrapper = ({
     onOpenAddRelationship,
     onCloseAddRelationship,
     onLinkedRecordClick,
-}: Props) => {
+}) => {
     const dispatch = useDispatch();
     const { relationshipTypes, isError } = useTEIRelationshipsWidgetMetadata();
     const { orgUnit } = useCoreOrgUnit(orgUnitId);
     const initialOrgUnit = orgUnit ? { id: orgUnitId, name: orgUnit.name, path: orgUnit.path } : null;
 
-    const onSelectFindMode = ({ findMode, relationshipConstraint }: OnSelectFindModeProps) => {
+    const onSelectFindMode = ({ findMode, relationshipConstraint }) => {
         dispatch(selectFindMode({
             findMode,
             orgUnit: initialOrgUnit,

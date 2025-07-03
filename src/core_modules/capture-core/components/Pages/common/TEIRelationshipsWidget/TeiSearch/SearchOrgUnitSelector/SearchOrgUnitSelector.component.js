@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -14,19 +13,6 @@ import {
 const TeiSearchOrgUnitField = withFocusSaver()(withCalculateMessages()(withDefaultFieldContainer()(withLabel()(withDisplayMessages()(SingleOrgUnitSelectField)))));
 const TeiSearchSelectionBoxes = withDefaultFieldContainer()(withLabel()(SelectionBoxes));
 
-type Props = {
-    searchId: string,
-    selectedOrgUnit?: ?any,
-    selectedOrgUnitScope?: ?string,
-    treeRoots: ?Array<any>,
-    treeReady: ?boolean,
-    treeKey: ?string,
-    treeSearchText?: ?string,
-    onSelectOrgUnitScope: (searchId: string, orgUnitScope: string) => void,
-    onSetOrgUnit: (searchId: string, orgUnit: ?Object) => void,
-    onFilterOrgUnits: (searchId: string, searchText: ?string) => void,
-    searchAttempted: ?boolean,
-}
 
 const orgUnitFieldStyles = {
     labelContainerStyle: {
@@ -61,15 +47,13 @@ const options = [
 
 const errorMessage = 'Please select an organisation unit';
 
-export class SearchOrgUnitSelector extends React.Component<Props> {
-    gotoInstance: any;
-
-    onSelectOrgUnitScope = (value: any) => {
+export class SearchOrgUnitSelector extends React.Component {
+    onSelectOrgUnitScope = (value) => {
         if (value) {
             this.props.onSelectOrgUnitScope(this.props.searchId, value);
         }
     }
-    onSetOrgUnit = (orgUnit: ?Object) => {
+    onSetOrgUnit = (orgUnit) => {
         this.props.onSetOrgUnit(this.props.searchId, orgUnit);
     }
     renderOrgUnitScopeSelector = () => {
@@ -115,7 +99,7 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
         return null;
     }
 
-    handleFilterOrgUnits = (searchText: ?string) => {
+    handleFilterOrgUnits = (searchText) => {
         this.props.onFilterOrgUnits(this.props.searchId, searchText);
     }
 

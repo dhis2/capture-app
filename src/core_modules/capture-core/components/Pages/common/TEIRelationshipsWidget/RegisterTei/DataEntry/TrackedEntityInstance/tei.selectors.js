@@ -1,12 +1,9 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { TrackedEntityType } from '../../../../../../../metaData';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../../../metaData';
 
-// $FlowFixMe
-export const getTeiRegistrationMetadata = (TETypeId: string) => {
-    let TEType: TrackedEntityType;
+export const getTeiRegistrationMetadata = (TETypeId) => {
+    let TEType;
     try {
         TEType = getTrackedEntityTypeThrowIfNotFound(TETypeId);
     } catch (error) {

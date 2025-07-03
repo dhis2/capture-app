@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { of } from 'rxjs';
@@ -11,7 +10,6 @@ import { getSearchFormId } from '../../../../TeiSearch/getSearchFormId';
 import { addFormData } from '../../../../D2Form/actions/form.actions';
 import { initializeTeiSearch } from '../../../../TeiSearch/actions/teiSearch.actions';
 import { findModes } from '../../../NewRelationship/findModes';
-import type { TrackerProgram } from '../../../../../metaData';
 import { initializeRegisterTei, initializeRegisterTeiFailed } from '../RegisterTei/registerTei.actions';
 import { getTrackerProgramThrowIfNotFound } from '../../../../../metaData';
 import { errorCreator } from '../../../../../../capture-core-utils';
@@ -19,8 +17,8 @@ import { errorCreator } from '../../../../../../capture-core-utils';
 const searchId = 'relationshipTeiSearchWidget';
 
 // get tracker program if the suggested program id is valid for the current context
-function getTrackerProgram(suggestedProgramId: string) {
-    let trackerProgram: ?TrackerProgram;
+function getTrackerProgram(suggestedProgramId) {
+    let trackerProgram;
     try {
         const program = getTrackerProgramThrowIfNotFound(suggestedProgramId);
         if (program.access.data.write) {
@@ -36,7 +34,7 @@ function getTrackerProgram(suggestedProgramId: string) {
 }
 
 export const openRelationshipTeiSearchWidgetEpic =
-    (action$: InputObservable) =>
+    (action$) =>
         action$.pipe(
             ofType(actionTypes.WIDGET_SELECT_FIND_MODE),
             filter(action => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH'),
@@ -61,7 +59,7 @@ export const openRelationshipTeiSearchWidgetEpic =
             }),
         );
 
-export const openRelationshipTeiRegisterWidgetEpic = (action$: InputObservable) =>
+export const openRelationshipTeiRegisterWidgetEpic = (action$) =>
     action$.pipe(
         ofType(actionTypes.WIDGET_SELECT_FIND_MODE),
         filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
@@ -69,7 +67,7 @@ export const openRelationshipTeiRegisterWidgetEpic = (action$: InputObservable) 
             const { relationshipConstraint, orgUnit } = action.payload;
             const { programId } = relationshipConstraint;
 
-            let trackerProgram: ?TrackerProgram;
+            let trackerProgram;
             if (programId) {
                 try {
                     trackerProgram = getTrackerProgram(programId);

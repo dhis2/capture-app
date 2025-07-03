@@ -1,8 +1,6 @@
-// @flow
 import log from 'loglevel';
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
-import type { RelationshipTypes } from '../../../WidgetsRelationship';
 import {
     extractElementIdsFromRelationshipTypes,
     formatRelationshipTypes,
@@ -10,7 +8,7 @@ import {
 import { errorCreator } from '../../../../../capture-core-utils';
 
 // map through arrays of either dataElements or attributes and fetch optionSet values for each element if they have a optionSet
-const getOptionSetValuesForElement = async (elements: Array<Object>, userStorageController: Object) => {
+const getOptionSetValuesForElement = async (elements, userStorageController) => {
     // should be an object with keys of the element ids and value true
     const optionSetIds = elements
         .reduce((acc, { optionSet }) => {
@@ -53,7 +51,7 @@ const getOptionSetValuesForElement = async (elements: Array<Object>, userStorage
     });
 };
 
-const getRelationshipTypes = async (): Promise<RelationshipTypes> => {
+const getRelationshipTypes = async () => {
     const userStorageController = getUserMetadataStorageController();
     const cachedRelationshipTypes = await userStorageController.getAll(USER_METADATA_STORES.RELATIONSHIP_TYPES, {
         predicate: ({ access }) => access.data.read,
@@ -82,12 +80,9 @@ const getRelationshipTypes = async (): Promise<RelationshipTypes> => {
     });
 };
 
-export const useTEIRelationshipsWidgetMetadata = (): {
-    relationshipTypes: ?RelationshipTypes,
-    isError: boolean,
-} => {
+export const useTEIRelationshipsWidgetMetadata = () => {
     const { data: relationshipTypes, isError } =
-    useIndexedDBQuery<RelationshipTypes>(
+    useIndexedDBQuery(
         ['cachedRelationshipTypes'],
         getRelationshipTypes,
     );

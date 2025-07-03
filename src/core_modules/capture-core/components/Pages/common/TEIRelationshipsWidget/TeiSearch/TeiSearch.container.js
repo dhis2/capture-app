@@ -1,5 +1,3 @@
-// @flow
-import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { TeiSearchComponent } from './TeiSearch.component';
 import {
@@ -10,11 +8,10 @@ import {
     teiSearchResultsChangePage,
     setOpenSearchGroupSection,
 } from './actions/teiSearch.actions';
-import type { Props, OwnProps } from './TeiSearch.types';
 import { getSearchGroups } from './getSearchGroups';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../metaData';
 
-const mapStateToProps = (state: ReduxState, props: OwnProps) => {
+const mapStateToProps = (state, props) => {
     const currentTeiSearch = state.teiSearch[props.id] ?? {};
     const { selectedTrackedEntityTypeId } = props;
     const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, currentTeiSearch.selectedProgramId);
@@ -28,26 +25,26 @@ const mapStateToProps = (state: ReduxState, props: OwnProps) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps) => ({
-    onSearch: (formId: string, searchGroupId: string, searchId: string) => {
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    onSearch: (formId, searchGroupId, searchId) => {
         dispatch(requestSearchTei(formId, searchGroupId, searchId, ownProps.resultsPageSize));
     },
-    onSearchResultsChangePage: (searchId: string, pageNumber: number) => {
+    onSearchResultsChangePage: (searchId, pageNumber) => {
         dispatch(teiSearchResultsChangePage(searchId, pageNumber, ownProps.resultsPageSize));
     },
-    onSearchValidationFailed: (formId: string, searchGroupId: string, searchId: string) => {
+    onSearchValidationFailed: (formId, searchGroupId, searchId) => {
         dispatch(searchFormValidationFailed(formId, searchGroupId, searchId));
     },
-    onNewSearch: (searchId: string) => {
+    onNewSearch: (searchId) => {
         dispatch(teiNewSearch(searchId));
     },
-    onEditSearch: (searchId: string) => {
+    onEditSearch: (searchId) => {
         dispatch(teiEditSearch(searchId));
     },
-    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: ?string) => {
+    onSetOpenSearchGroupSection: (searchId, searchGroupId) => {
         dispatch(setOpenSearchGroupSection(searchId, searchGroupId));
     },
 });
 
-export const TeiSearch: ComponentType<OwnProps> =
-  connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(TeiSearchComponent);
+export const TeiSearch =
+  connect(mapStateToProps, mapDispatchToProps)(TeiSearchComponent);

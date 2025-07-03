@@ -1,5 +1,3 @@
-// @flow
-
 import { actionCreator } from '../../../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -11,20 +9,20 @@ export const actionTypes = {
     TEI_SEARCH_SET_ORG_UNIT: 'TeiSearchSetOrgUnit',
 };
 
-export const setOrgUnitScope = (searchId: string, orgUnitScope: string) =>
+export const setOrgUnitScope = (searchId, orgUnitScope) =>
     actionCreator(actionTypes.TEI_SEARCH_SET_ORG_UNIT_SCOPE)({ searchId, orgUnitScope });
 
-export const setOrgUnit = (searchId: string, orgUnit: ?any) =>
+export const setOrgUnit = (searchId, orgUnit) =>
     actionCreator(actionTypes.TEI_SEARCH_SET_ORG_UNIT)({ searchId, orgUnit });
 
-export const requestFilterOrgUnits = (searchId: string, searchText: string) =>
+export const requestFilterOrgUnits = (searchId, searchText) =>
     actionCreator(actionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS)({ searchId, searchText });
 
-export const filteredOrgUnitsRetrieved = (searchId: string, roots: ?Array<any>, searchText: string) =>
+export const filteredOrgUnitsRetrieved = (searchId, roots, searchText) =>
     actionCreator(actionTypes.TEI_SEARCH_FILTERED_ORG_UNITS_RETRIEVED)({ searchId, roots, searchText });
 
-export const filterOrgUnitsFailed = (searchId: string, error: any) =>
+export const filterOrgUnitsFailed = (searchId, error) =>
     actionCreator(actionTypes.TEI_SEARCH_FILTER_ORG_UNITS_FAILED)({ searchId, error });
 
-export const clearOrgUnitsFilter = (searchId: string) =>
+export const clearOrgUnitsFilter = (searchId) =>
     actionCreator(actionTypes.TEI_SEARCH_CLEAR_ORG_UNITS_FILTER)({ searchId });

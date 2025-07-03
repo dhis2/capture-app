@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { from } from 'rxjs';
@@ -19,16 +18,16 @@ import {
 const RETRIEVE_ERROR = 'Could not retrieve organisation unit list';
 
 
-const isInitializeTeiSearch = (action: Object, searchId: string) =>
+const isInitializeTeiSearch = (action, searchId) =>
     action.type === teiSearchActionTypes.INITIALIZE_TEI_SEARCH &&
   action.payload.searchId === searchId;
 
-const isRequestFilterOrgUnits = (action: Object, searchId: string) =>
+const isRequestFilterOrgUnits = (action, searchId) =>
     action.type === searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS &&
   action.payload.searchId === searchId;
 
 
-const cancelActionFilter = (action: Object, searchId: string) => {
+const cancelActionFilter = (action, searchId) => {
     if (isArray(action.payload)) {
         return action.payload.some(innerAction => isInitializeTeiSearch(innerAction, searchId));
     }
@@ -36,7 +35,7 @@ const cancelActionFilter = (action: Object, searchId: string) => {
 };
 
 // get organisation units based on search criteria
-export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const teiSearchFilterOrgUnitsEpic = (action$, store, { querySingleResource }) =>
     action$.pipe(
         ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS),
         concatMap((action) => {
