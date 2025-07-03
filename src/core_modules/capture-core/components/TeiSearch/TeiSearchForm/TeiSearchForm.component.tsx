@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
@@ -15,12 +14,13 @@ import {
 } from '@dhis2/ui';
 import { D2Form } from '../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
-import type { SearchGroup } from '../../../metaData';
 import { withGotoInterface } from '../../FormFields/New';
+import type { Props, State } from './TeiSearchForm.types';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
-const getStyles = (theme: Theme) => ({
+const styles = (theme: any) => ({
+    container: {},
     orgUnitSection: {
         backgroundColor: 'white',
         padding: theme.typography.pxToRem(8),
@@ -28,66 +28,39 @@ const getStyles = (theme: Theme) => ({
     },
     searchButtonContainer: {
         padding: theme.typography.pxToRem(10),
-        display: 'flex',
-        alignItems: 'center',
+        display: 'flex' as const,
+        alignItems: 'center' as const,
     },
     minAttributesRequired: {
         flexGrow: 1,
-        textAlign: 'right',
+        textAlign: 'right' as const,
         fontSize: theme.typography.pxToRem(14),
     },
     minAttribtuesRequiredInvalid: {
         color: theme.palette.error.main,
     },
 });
-type State = {
-    showMissingSearchCriteriaModal: boolean,
-};
 
-type Props = {
-    id: string,
-    searchGroupId: string,
-    onSearch: (formId: string, searchGroupId: string) => void,
-    onSearchValidationFailed: (formId: string, SearchGroupId: string) => void,
-    searchAttempted: boolean,
-    searchId: string,
-    searchGroup: SearchGroup,
-    attributesWithValuesCount: number,
-    formsValues: { [formElement: string]: Object},
-    classes: {
-        container: string,
-        searchButtonContainer: string,
-        orgUnitSection: string,
-        minAttributesRequired: string,
-        minAttribtuesRequiredInvalid: string,
-    },
-};
-
-class SearchFormPlain extends React.Component<Props, State> {
-    formInstance: any;
-    orgUnitSelectorInstance: SearchOrgUnitSelector;
-    constructor(props: Props) {
+class SearchFormPlain extends React.Component<Props & { classes: any }, State> {
+    constructor(props: Props & { classes: any }) {
         super(props);
         this.state = {
             showMissingSearchCriteriaModal: false,
         };
     }
 
-    static errorMessages = {
-        NO_ITEM_SELECTED: 'No item selected',
-        SEARCH_FORM_MISSING: 'search form is missing. see log for details',
-    };
-
-    validNumberOfAttributes = () => {
-        const attributesWithValuesCount = this.props.attributesWithValuesCount;
-        const minAttributesRequiredToSearch = this.props.searchGroup.minAttributesRequiredToSearch;
-        return attributesWithValuesCount >= minAttributesRequiredToSearch;
+    getUniqueSearchButtonText = (searchForm: any) => {
+        const attributeName = searchForm.getElements()[0].formName;
+        return `${i18n.t('Search')} ${attributeName}`;
     }
 
-
-    isSearchViaUniqueIdValid = () => {
-        const searchTerms = this.props.formsValues;
-        return Object.values(searchTerms).some(value => value !== undefined && value !== '');
+    handleSearchAttempt = () => {
+        const { error: validateFormError, isValid: isFormValid } = this.validateForm();
+        if (validateFormError || !isFormValid) {
+            this.props.onSearchValidationFailed(this.props.id, this.props.searchGroupId);
+            return;
+        }
+        this.props.onSearch(this.props.id, this.props.searchGroupId);
     }
 
     validateForm() {
@@ -104,7 +77,6 @@ class SearchFormPlain extends React.Component<Props, State> {
 
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
-        // $FlowFixMe[prop-missing] automated comment
         if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
 
         if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
@@ -120,23 +92,28 @@ class SearchFormPlain extends React.Component<Props, State> {
         };
     }
 
-    handleSearchAttempt = () => {
-        const { error: validateFormError, isValid: isFormValid } = this.validateForm();
-        if (validateFormError || !isFormValid) {
-            this.props.onSearchValidationFailed(this.props.id, this.props.searchGroupId);
-            return;
-        }
-        this.props.onSearch(this.props.id, this.props.searchGroupId);
+    isSearchViaUniqueIdValid = () => {
+        const searchTerms = this.props.formsValues;
+        return Object.values(searchTerms).some(value => value !== undefined && value !== '');
     }
 
-    getUniqueSearchButtonText = (searchForm) => {
-        const attributeName = searchForm.getElements()[0].formName;
-        return `${i18n.t('Search')} ${attributeName}`;
+    validNumberOfAttributes = () => {
+        const attributesWithValuesCount = this.props.attributesWithValuesCount;
+        const minAttributesRequiredToSearch = this.props.searchGroup.minAttributesRequiredToSearch;
+        return attributesWithValuesCount >= minAttributesRequiredToSearch;
     }
+
+    static errorMessages = {
+        NO_ITEM_SELECTED: 'No item selected',
+        SEARCH_FORM_MISSING: 'search form is missing. see log for details',
+    };
+
+    formInstance: any;
+    orgUnitSelectorInstance: any;
 
     renderOrgUnitSelector = () => (
         <TeiSearchOrgUnitSelector
-            innerRef={(instance) => {
+            innerRef={(instance: any) => {
                 this.orgUnitSelectorInstance = instance;
             }}
             searchId={this.props.searchId}
@@ -160,7 +137,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                         count: searchGroup.minAttributesRequiredToSearch,
                         defaultValue: 'Fill in at least {{count}} attribute to search',
                         defaultValue_plural: 'Fill in at least {{count}} attributes to search',
-                    })
+                    }) as React.ReactNode
                 }
             </div>
         );
@@ -178,11 +155,11 @@ class SearchFormPlain extends React.Component<Props, State> {
         return (
             <Modal position="middle" onClose={() => this.setState({ showMissingSearchCriteriaModal: false })}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
-                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`)}</ModalContent>
+                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`) as React.ReactNode}</ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={() => this.setState({ showMissingSearchCriteriaModal: false })} primary>
-                            {i18n.t('Back to search')}
+                            {i18n.t('Back to search') as React.ReactNode}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -209,7 +186,7 @@ class SearchFormPlain extends React.Component<Props, State> {
                 className={classes.container}
             >
                 <D2Form
-                    formRef={(formInstance) => { this.formInstance = formInstance; }}
+                    formRef={(formInstance: any) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
                     id={id}
                 />
@@ -231,4 +208,4 @@ class SearchFormPlain extends React.Component<Props, State> {
     }
 }
 
-export const TeiSearchFormComponent = withStyles(getStyles)(SearchFormPlain);
+export const TeiSearchFormComponent = withStyles(styles)(SearchFormPlain as any);

@@ -1,0 +1,17 @@
+import type { SearchGroup } from '../../../metaData';
+
+export type State = {
+    showMissingSearchCriteriaModal: boolean;
+};
+
+export type Props = {
+    id: string;
+    searchGroupId: string;
+    onSearch: (formId: string, searchGroupId: string) => void;
+    onSearchValidationFailed: (formId: string, SearchGroupId: string) => void;
+    searchAttempted: boolean;
+    searchId: string;
+    searchGroup: SearchGroup;
+    attributesWithValuesCount: number;
+    formsValues: { [formElement: string]: any };
+};
