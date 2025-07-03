@@ -34,14 +34,14 @@ const styles: Readonly<any> = {
 
 const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, classes }: PlainProps) => (
     <div className={classes.container}>
-        <Widget header={i18n.t('Bulk data entry') as string} noncollapsible borderless>
+        <Widget header={i18n.t('Bulk data entry')} noncollapsible borderless>
             <div className={classes.content}>
                 <div className={classes.title}>
                     {title}
-                    <Tag className={classes.tag}>{i18n.t('Unsaved changes') as string}</Tag>
+                    <Tag className={classes.tag}>{i18n.t('Unsaved changes')}</Tag>
                 </div>
                 <Button className={classes.button} onClick={onBackToBulkDataEntry} secondary small>
-                    {i18n.t('Continue data entry') as string}
+                    {i18n.t('Continue data entry')}
                 </Button>
             </div>
         </Widget>

@@ -36,7 +36,7 @@ const BulkDataEntryIdleComponenetPlain = ({
     classes,
 }: PlainProps) => (
     <div className={classes.container}>
-        <Widget header={i18n.t('Bulk data entry') as string} noncollapsible>
+        <Widget header={i18n.t('Bulk data entry')} noncollapsible>
             <DataTable className={classes.table}>
                 <DataTableBody>
                     {bulkDataEntryConfigurations.map(config => (
