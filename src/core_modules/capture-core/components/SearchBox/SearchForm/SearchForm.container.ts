@@ -109,17 +109,17 @@ const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: Ow
 
 const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedScope }: OwnProps): DispatchersFromRedux => ({
     searchViaUniqueIdOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
-        dispatch(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId, formId }));
+        dispatch(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId, formId, programId: null }));
     },
     searchViaUniqueIdOnScopeProgram: ({ programId, formId }) => {
         dispatch(searchViaUniqueIdOnScopeProgram({ programId, formId }));
     },
 
     searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, resultsPageSize }) => {
-        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, pageSize: resultsPageSize }));
+        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, pageSize: resultsPageSize, triggeredFrom: null }));
     },
     searchViaAttributesOnScopeProgram: ({ programId, formId, resultsPageSize }) => {
-        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, pageSize: resultsPageSize }));
+        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, pageSize: resultsPageSize, triggeredFrom: null }));
     },
     saveCurrentFormData: ({ searchScopeType, searchScopeId, formId, formsValues }) => {
         const currentSearchTerms = collectCurrentSearchTerms(searchGroupsForSelectedScope, formsValues);

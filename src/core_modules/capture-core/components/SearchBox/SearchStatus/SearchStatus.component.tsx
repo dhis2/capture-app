@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
@@ -13,7 +12,8 @@ import {
     Button,
     NoticeBox,
 } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 
 import type { ComponentProps, Props } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
@@ -157,4 +157,4 @@ export const SearchStatusPlain = ({
     return null;
 };
 
-export const SearchStatus: ComponentType<ComponentProps> = compose(withStyles(getStyles))(SearchStatusPlain);
+export const SearchStatus = compose(withStyles(getStyles))(SearchStatusPlain) as ComponentType<ComponentProps>;

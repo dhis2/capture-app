@@ -1,14 +1,13 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 
 export const NotEnoughAttributesMessage = ({
     minAttributesRequiredToSearch,
     searchableFields,
 }: {
-    minAttributesRequiredToSearch: number,
-    searchableFields: Array<Object>,
+    minAttributesRequiredToSearch: number;
+    searchableFields: Array<any>;
 }) => {
-    const searchableFieldsDisplayname = searchableFields?.map(field => field.formName)?.join(', ');
+    const searchableFieldsDisplayname = searchableFields?.map((field: any) => field.formName)?.join(', ');
 
     if (minAttributesRequiredToSearch === searchableFields.length && searchableFields.length > 1) {
         return i18n.t('Fill in these fields to search{{escape}} {{ searchableAttributes }}', {
