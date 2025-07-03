@@ -1,0 +1,66 @@
+import {
+    QuickActions,
+    StagesAndEvents,
+    EnrollmentNote,
+    DefaultWidgetsForEnrollmentOverview,
+    WidgetTypes,
+} from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
+import type {
+    WidgetConfig,
+} from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
+
+export const WidgetsForEnrollmentPageDefault: Readonly<Record<string, WidgetConfig>> = Object.freeze({
+    QuickActions,
+    StagesAndEvents,
+    EnrollmentNote,
+    ...DefaultWidgetsForEnrollmentOverview,
+});
+
+export const DefaultPageLayout = Object.freeze({
+    leftColumn: [
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'QuickActions',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'StagesAndEvents',
+        },
+    ],
+    rightColumn: [
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'ErrorWidget',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'WarningWidget',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'EnrollmentNote',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'FeedbackWidget',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'IndicatorWidget',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'TrackedEntityRelationship',
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'ProfileWidget',
+            settings: { readOnlyMode: false },
+        },
+        {
+            type: WidgetTypes.COMPONENT,
+            name: 'EnrollmentWidget',
+            settings: { readOnlyMode: false },
+        },
+    ],
+});

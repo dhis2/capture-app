@@ -40,9 +40,9 @@ export const useMainViewConfig: UseMainViewConfig = () => {
                 ) {
                     return undefined;
                 }
-
                 // The general idea is that the return value here should have the same data structure
                 // as the response from the working lists api
+
                 if (occurredAt.period) {
                     if (['TODAY', 'THIS_WEEK', 'THIS_MONTH', 'THIS_YEAR', 'LAST_WEEK', 'LAST_MONTH', 'LAST_3_MONTHS']
                         .includes(occurredAt.period)
