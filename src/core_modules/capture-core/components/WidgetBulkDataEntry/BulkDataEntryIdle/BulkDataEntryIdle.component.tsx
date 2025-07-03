@@ -17,6 +17,12 @@ const styles: Readonly<any> = {
         borderWidth: '1px 0 0 0 !important',
     },
     title: {
+        border: 'none',
+        background: 'none',
+        padding: 0,
+        font: 'inherit',
+        fontWeight: 'bold',
+        textAlign: 'left',
         '&:hover': {
             cursor: 'pointer',
             textDecoration: 'underline',
@@ -38,19 +44,13 @@ const BulkDataEntryIdleComponenetPlain = ({
                             key={config.dataKey}
                         >
                             <DataTableCell>
-                                <strong
+                                <button
+                                    type="button"
                                     className={classes.title}
                                     onClick={() => onSelectConfiguration(config.configKey)}
-                                    role="button"
-                                    tabIndex={0}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            onSelectConfiguration(config.configKey);
-                                        }
-                                    }}
                                 >
                                     {config.title}
-                                </strong>
+                                </button>
                                 {config.subtitle && <div>{config.subtitle}</div>}
                             </DataTableCell>
                             <DataTableCell>
