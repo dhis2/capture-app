@@ -6,6 +6,7 @@ import {
     WidgetTypes,
 } from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout';
 import type {
+    PageLayoutConfig,
     WidgetConfig,
 } from '../../../common/EnrollmentOverviewDomain/EnrollmentPageLayout/DefaultEnrollmentLayout.types';
 
@@ -16,51 +17,51 @@ export const WidgetsForEnrollmentPageDefault: Readonly<Record<string, WidgetConf
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
-export const DefaultPageLayout = Object.freeze({
+export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'QuickActions',
+            name: 'QuickActions' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'StagesAndEvents',
+            name: 'StagesAndEvents' as const,
         },
     ],
     rightColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'ErrorWidget',
+            name: 'ErrorWidget' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'WarningWidget',
+            name: 'WarningWidget' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'EnrollmentNote',
+            name: 'EnrollmentNote' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'FeedbackWidget',
+            name: 'FeedbackWidget' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'IndicatorWidget',
+            name: 'IndicatorWidget' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'TrackedEntityRelationship',
+            name: 'TrackedEntityRelationship' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'ProfileWidget',
+            name: 'ProfileWidget' as const,
             settings: { readOnlyMode: false },
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'EnrollmentWidget',
+            name: 'EnrollmentWidget' as const,
             settings: { readOnlyMode: false },
         },
     ],
-});
+};

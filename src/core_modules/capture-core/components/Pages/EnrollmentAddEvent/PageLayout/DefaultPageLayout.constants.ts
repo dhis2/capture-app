@@ -13,43 +13,43 @@ export const WidgetsForEnrollmentEventNew: Readonly<{ [key: string]: WidgetConfi
     ...DefaultWidgetsForEnrollmentOverview,
 });
 
-export const DefaultPageLayout: PageLayoutConfig = Object.freeze({
+export const DefaultPageLayout: PageLayoutConfig = {
     leftColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'NewEventWorkspace',
+            name: 'NewEventWorkspace' as const,
         },
     ],
     rightColumn: [
         {
             type: WidgetTypes.COMPONENT,
-            name: 'TrackedEntityRelationship',
+            name: 'TrackedEntityRelationship' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'ErrorWidget',
+            name: 'ErrorWidget' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'WarningWidget',
+            name: 'WarningWidget' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'FeedbackWidget',
+            name: 'FeedbackWidget' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'IndicatorWidget',
+            name: 'IndicatorWidget' as const,
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'ProfileWidget',
+            name: 'ProfileWidget' as const,
             settings: { readOnlyMode: true },
         },
         {
             type: WidgetTypes.COMPONENT,
-            name: 'EnrollmentWidget',
+            name: 'EnrollmentWidget' as const,
             settings: { readOnlyMode: true },
         },
     ],
-});
+};
