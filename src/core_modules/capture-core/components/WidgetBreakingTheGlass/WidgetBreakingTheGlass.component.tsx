@@ -11,7 +11,7 @@ import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import type { PlainProps } from './WidgetBreakingTheGlass.types';
 import { Widget } from '../Widget';
 
-const styles = ({ typography }: any) => ({
+const styles: Readonly<any> = ({ typography }: any) => ({
     title: {
         ...typography.title,
     },
