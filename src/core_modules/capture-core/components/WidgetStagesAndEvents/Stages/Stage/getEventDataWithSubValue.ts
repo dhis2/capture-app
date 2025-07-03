@@ -48,8 +48,7 @@ const getImageSubvalue = (keys: any, querySingleResource: QuerySingleResource, e
                 };
             }
             return {};
-        }).reduce((acc, imageSubvalue: any) => {
-            const { value, url, previewUrl } = imageSubvalue;
+        }).reduce((acc, { value, url, previewUrl }: any) => {
             if (value) {
                 acc[value] = { value, url, previewUrl };
             }
