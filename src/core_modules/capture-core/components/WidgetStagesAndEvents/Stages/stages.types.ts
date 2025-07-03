@@ -1,10 +1,5 @@
-import type { WithStyles } from '@material-ui/core';
 import type { Stage, StageCommonProps } from '../types/common.types';
 import type { ApiEnrollmentEvent } from '../../../../capture-core-utils/types/api-types';
-
-const styles = {
-    stage: {},
-};
 
 export type PlainProps = {
     stages: Array<Stage>;
@@ -13,7 +8,7 @@ export type PlainProps = {
     onDeleteEvent: (eventId: string) => void;
     onUpdateEventStatus: (eventId: string, status: string) => void;
     onRollbackDeleteEvent: (eventId: ApiEnrollmentEvent) => void;
-} & StageCommonProps & WithStyles<typeof styles>;
+} & StageCommonProps;
 
 export type InputProps = {
     stages?: Array<Stage>;

@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import cx from 'classnames';
 import { withStyles, type WithStyles } from '@material-ui/core';
 import { spacersNum } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
@@ -27,7 +26,7 @@ const rulesEffectHideProgramStage = (ruleEffects: Array<{id: string, type: strin
     Boolean(ruleEffects?.find(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === stageId))
 );
 
-export const StagePlain = ({ stage, events, classes, className, onCreateNew, ruleEffects, ...passOnProps }: Props & WithStyles<typeof styles>) => {
+export const StagePlain = ({ stage, events, classes, onCreateNew, ruleEffects, ...passOnProps }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
@@ -41,7 +40,7 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
     return (
         <div
             data-test="stage-content"
-            className={cx(classes.overview, className)}
+            className={classes.overview}
         >
             <Widget
                 header={<StageOverview
