@@ -79,5 +79,3 @@ export type ProgramStages = ReadonlyArray<ProgramStage>;
 export type Program = {
     programStages: ProgramStages;
 };
-
-export type PlainProps = Props;
