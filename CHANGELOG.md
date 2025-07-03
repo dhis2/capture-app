@@ -1,3 +1,10 @@
+## [102.6.15](https://github.com/dhis2/capture-app/compare/v102.6.14...v102.6.15) (2025-07-02)
+
+
+### Bug Fixes
+
+* skip flaky changelog cypress test ([#4188](https://github.com/dhis2/capture-app/issues/4188)) ([a6200ce](https://github.com/dhis2/capture-app/commit/a6200ce9ac94d0101ec5eb985334614212b29bdc))
+
 ## [102.6.14](https://github.com/dhis2/capture-app/compare/v102.6.13...v102.6.14) (2025-06-26)
 
 
