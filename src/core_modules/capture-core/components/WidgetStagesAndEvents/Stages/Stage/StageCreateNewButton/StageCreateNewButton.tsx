@@ -1,17 +1,16 @@
-// @flow
 import React, { useMemo } from 'react';
 import { Button, IconAdd16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ConditionalTooltip } from '../../../../Tooltips/ConditionalTooltip';
 
 type Props = {
-    onCreateNew: (stageId: string) => void,
-    stageWriteAccess: ?boolean,
-    eventCount: number,
-    repeatable: ?boolean,
-    preventAddingEventActionInEffect: ?boolean,
-    eventName: string,
-}
+    onCreateNew: () => void;
+    stageWriteAccess?: boolean;
+    eventCount: number;
+    repeatable?: boolean;
+    preventAddingEventActionInEffect?: boolean;
+    eventName: string;
+};
 
 export const StageCreateNewButton = ({
     onCreateNew,

@@ -1,7 +1,6 @@
-// @flow
-import React, { type ComponentType, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { spacersNum } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
@@ -23,11 +22,12 @@ const styles = {
         alignItems: 'center',
     },
 };
-const rulesEffectHideProgramStage = (ruleEffects, stageId) => (
+
+const rulesEffectHideProgramStage = (ruleEffects: Array<{id: string, type: string}> | undefined, stageId: string) => (
     Boolean(ruleEffects?.find(ruleEffect => ruleEffect.type === 'HIDEPROGRAMSTAGE' && ruleEffect.id === stageId))
 );
 
-export const StagePlain = ({ stage, events, classes, className, onCreateNew, ruleEffects, ...passOnProps }: Props) => {
+export const StagePlain = ({ stage, events, classes, className, onCreateNew, ruleEffects, ...passOnProps }: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate, repeatable, enableUserAssignment } = stage;
     const preventAddingNewEvents = rulesEffectHideProgramStage(ruleEffects, id);
@@ -82,4 +82,4 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, rul
     );
 };
 
-export const Stage: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(StagePlain);
+export const Stage = withStyles(styles)(StagePlain);

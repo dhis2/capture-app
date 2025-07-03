@@ -1,7 +1,6 @@
-// @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
     colors, spacers, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip,
@@ -14,6 +13,7 @@ import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import { convertValue as convertValueClientToView } from '../../../../../converters/clientToView';
 import { dataElementTypes } from '../../../../../metaData';
+import type { ApiEnrollmentEvent } from '../../../../../../capture-core-utils/types/api-types';
 
 const styles = {
     container: {
@@ -66,14 +66,14 @@ const styles = {
     },
 };
 
-const getLastUpdatedAt = (events, fromServerDate) => {
+const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (date: string) => Date) => {
     const lastEventUpdated = events.reduce((acc, event) => (
         new Date(acc.updatedAt).getTime() > new Date(event.updatedAt).getTime() ? acc : event
     ));
 
     if (lastEventUpdated) {
         const { updatedAt } = lastEventUpdated;
-        const localDateTime: string = (convertValueClientToView(updatedAt, dataElementTypes.DATETIME): any);
+        const localDateTime = convertValueClientToView(updatedAt, dataElementTypes.DATETIME) as string;
         return lastEventUpdated?.updatedAt && moment(updatedAt).isValid()
             ? (
                 <>
@@ -88,7 +88,7 @@ const getLastUpdatedAt = (events, fromServerDate) => {
     return null;
 };
 
-export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
+export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
@@ -155,4 +155,4 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
     </div>);
 };
 
-export const StageOverview: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(StageOverviewPlain);
+export const StageOverview = withStyles(styles)(StageOverviewPlain);

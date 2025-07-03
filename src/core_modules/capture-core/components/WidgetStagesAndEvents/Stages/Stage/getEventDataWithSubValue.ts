@@ -1,10 +1,9 @@
-// @flow
 import { featureAvailable, FEATURES } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 
-const getFileResourceSubvalue = async (keys: Object, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => {
+const getFileResourceSubvalue = async (keys: any, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => {
     const promises = Object.keys(keys)
         .map(async (key) => {
             const value = keys[key];
@@ -30,7 +29,7 @@ const getFileResourceSubvalue = async (keys: Object, querySingleResource: QueryS
         }, {});
 };
 
-const getImageSubvalue = (keys: Object, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => (
+const getImageSubvalue = (keys: any, querySingleResource: QuerySingleResource, eventId: string, absoluteApiPath: string) => (
     Object.keys(keys)
         .map((key) => {
             const value = keys[key];
@@ -49,7 +48,7 @@ const getImageSubvalue = (keys: Object, querySingleResource: QuerySingleResource
                 };
             }
             return {};
-        }).reduce((acc, { value, url, previewUrl }) => {
+        }).reduce((acc, { value, url, previewUrl }: any) => {
             if (value) {
                 acc[value] = { value, url, previewUrl };
             }
@@ -57,7 +56,7 @@ const getImageSubvalue = (keys: Object, querySingleResource: QuerySingleResource
         }, {})
 );
 
-const getOrganisationUnitSubvalue = async (keys: Object, querySingleResource: QuerySingleResource) => {
+const getOrganisationUnitSubvalue = async (keys: any, querySingleResource: QuerySingleResource) => {
     const ids = Object.values(keys).map(value => String(value));
     const orgUnitNames = await getOrgUnitNames(ids, querySingleResource);
     return orgUnitNames;
@@ -70,7 +69,7 @@ const subValueGetterByElementType = {
 };
 
 
-export async function getSubValues(item: Object, querySingleResource: QuerySingleResource, absoluteApiPath: string) {
+export async function getSubValues(item: any, querySingleResource: QuerySingleResource, absoluteApiPath: string) {
     const { type, ids: values, eventId } = item;
 
     if (!values) {
