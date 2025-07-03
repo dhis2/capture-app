@@ -9,7 +9,7 @@
         "packages/rules-engine"
     ],
     "dependencies": {
-        "@dhis2-ui/calendar": "^10.4.0",
+        "@dhis2-ui/calendar": "^10.7.6",
         "@dhis2/rules-engine-javascript": "102.6.12",
         "@dhis2/app-runtime": "^3.9.3",
         "@dhis2/d2-i18n": "^1.1.0",
@@ -127,7 +127,7 @@
         "@dhis2/app-runtime": "^3.10.2",
         "@babel/preset-react": "7.26.3",
         "@dhis2/ui": "^9.10.1",
-        "@dhis2-ui/calendar": "^10.4.0",
+        "@dhis2-ui/calendar": "^10.7.6",
         "@js-temporal/polyfill": "0.4.3",
         "core-js": "2.5.7",
         "i18next": "^20.5.0"
