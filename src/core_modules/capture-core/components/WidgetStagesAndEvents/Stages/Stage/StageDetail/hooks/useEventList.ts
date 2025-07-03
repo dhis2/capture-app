@@ -45,7 +45,7 @@ const getBaseColumns = props => baseFields.map((key, index) => ({ ...key, ...get
 const getAllFieldsWithValue = (
     eventId: string,
     dataElements: Array<StageDataElementClient>,
-    dataElementsByType: Array<{type: string; eventId: string; ids: Record<string, unknown>}>,
+    dataElementsByType: Array<{type: keyof typeof dataElementTypes; eventId: string; ids: Record<string, unknown>}>,
 ) => dataElements
     .reduce((acc, { id, type }) => {
         const value = dataElementsByType
@@ -121,7 +121,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
                 acc.push({ id, header: formName || name, type, sortDirection: SORT_DIRECTION.DEFAULT });
             }
             return acc;
-        }, [] as Array<{ id: string; header: string; type: string; sortDirection: string }>);
+        }, [] as Array<{ id: string; header: string; type: keyof typeof dataElementTypes; sortDirection: string }>);
         return [
             ...getBaseColumns({ formFoundation })
                 .filter(col => (enableUserAssignment || col.id !== 'assignedUser') && (!hideDueDate || col.id !== 'scheduledAt')),
@@ -131,7 +131,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDa
     return headerColumns;
 };
 
-function getDataElement(stageDataElement: StageDataElementClient | undefined, type: string) {
+function getDataElement(stageDataElement: StageDataElementClient | undefined, type: keyof typeof dataElementTypes) {
     if (!stageDataElement) {
         return null;
     }
