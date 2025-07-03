@@ -1,10 +1,9 @@
 import { colors, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import type { Props } from './eventWorkingListsInitHeader.types';
+import React, { type ComponentType, type ReactNode } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 
-const getStyles = () => ({
+export const styles = () => ({
     container: {
         width: '100%',
         background: colors.white,
@@ -16,12 +15,17 @@ const getStyles = () => ({
     headerContainer: {
         marginBottom: spacers.dp16,
     },
+    listContainer: {},
     title: {
         fontSize: 16,
         color: colors.grey800,
         fontWeight: 500,
     },
 });
+
+type Props = {
+    children: ReactNode;
+} & WithStyles<typeof styles>;
 
 const EventWorkingListsInitHeaderPlain =
     ({ children, classes: { container, headerContainer, listContainer, title } }: Props) => (
@@ -43,4 +47,5 @@ const EventWorkingListsInitHeaderPlain =
         </div>
     );
 
-export const EventWorkingListsInitHeader = withStyles(getStyles)(EventWorkingListsInitHeaderPlain) as ComponentType<Omit<Props, 'classes'>>;
+export const EventWorkingListsInitHeader =
+    withStyles(styles)(EventWorkingListsInitHeaderPlain) as ComponentType<Omit<Props, keyof WithStyles<typeof styles>>>;

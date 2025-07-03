@@ -3,7 +3,7 @@ import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { useWidgetColumns } from './hooks/useWidgetColumns';
 import { AddRelationshipRefWrapper } from './AddRelationshipRefWrapper';
-import type { PlainProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
+import type { Props as EnrollmentPageProps } from '../../../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
 import { EnrollmentBreadcrumb } from '../../../../Breadcrumbs/EnrollmentBreadcrumb';
 
 const getEnrollmentPageStyles: Readonly<any> = () => ({
@@ -47,7 +47,7 @@ const getEnrollmentPageStyles: Readonly<any> = () => ({
 
 const isValidHex = (color: string) => /^#[0-9A-F]{6}$/i.test(color);
 
-type OwnProps = PlainProps;
+type OwnProps = EnrollmentPageProps;
 type Props = OwnProps & WithStyles<typeof getEnrollmentPageStyles>;
 
 const EnrollmentPageLayoutPlain = ({
