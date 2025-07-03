@@ -1,4 +1,4 @@
-import React, { type ComponentType, useContext, useCallback } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -65,7 +65,7 @@ const RegisterTeiPlain = ({
     selectedScopeId,
     inheritedAttributes,
     classes,
-) => {
+}) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
     const renderDuplicatesCardActions = useCallback(({ item }) => (

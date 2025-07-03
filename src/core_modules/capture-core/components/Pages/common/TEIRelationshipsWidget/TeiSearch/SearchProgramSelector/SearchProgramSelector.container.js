@@ -7,7 +7,7 @@ const mapStateToProps = (state, props) => ({
     programOptions: getProgramOptions(props.selectedTrackedEntityTypeId),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     onSetProgram: (searchId, programId) => {
         dispatch(startSetProgram(searchId, programId));
     },

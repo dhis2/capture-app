@@ -24,5 +24,5 @@ export const filteredOrgUnitsRetrieved = (searchId, roots, searchText) =>
 export const filterOrgUnitsFailed = (searchId, error) =>
     actionCreator(actionTypes.TEI_SEARCH_FILTER_ORG_UNITS_FAILED)({ searchId, error });
 
-export const clearOrgUnitsFilter = (searchId) =>
+export const clearOrgUnitsFilter = searchId =>
     actionCreator(actionTypes.TEI_SEARCH_CLEAR_ORG_UNITS_FILTER)({ searchId });

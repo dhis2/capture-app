@@ -7,7 +7,7 @@ import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSele
 import { Section, SectionHeaderSimple } from '../../../../Section';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
 
-const getStyles = (theme) => ({
+const getStyles = theme => ({
     container: {
         margin: theme.typography.pxToRem(10),
     },

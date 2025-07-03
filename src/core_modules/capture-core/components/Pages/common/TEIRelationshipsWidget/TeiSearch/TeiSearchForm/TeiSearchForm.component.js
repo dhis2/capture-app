@@ -18,7 +18,7 @@ import { withGotoInterface } from '../../../../../FormFields/New';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
-const getStyles = (theme) => ({
+const getStyles = theme => ({
     orgUnitSection: {
         backgroundColor: 'white',
         padding: theme.typography.pxToRem(8),

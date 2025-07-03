@@ -24,7 +24,7 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     onFilterOrgUnits: (searchId, searchText) => {
         const action = searchText ?
             requestFilterOrgUnits(searchId, searchText) :

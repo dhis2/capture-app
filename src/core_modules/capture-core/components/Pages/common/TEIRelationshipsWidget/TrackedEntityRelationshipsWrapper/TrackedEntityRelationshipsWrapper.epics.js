@@ -34,7 +34,7 @@ function getTrackerProgram(suggestedProgramId) {
 }
 
 export const openRelationshipTeiSearchWidgetEpic =
-    (action$) =>
+    action$ =>
         action$.pipe(
             ofType(actionTypes.WIDGET_SELECT_FIND_MODE),
             filter(action => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH'),
@@ -59,7 +59,7 @@ export const openRelationshipTeiSearchWidgetEpic =
             }),
         );
 
-export const openRelationshipTeiRegisterWidgetEpic = (action$) =>
+export const openRelationshipTeiRegisterWidgetEpic = action$ =>
     action$.pipe(
         ofType(actionTypes.WIDGET_SELECT_FIND_MODE),
         filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),

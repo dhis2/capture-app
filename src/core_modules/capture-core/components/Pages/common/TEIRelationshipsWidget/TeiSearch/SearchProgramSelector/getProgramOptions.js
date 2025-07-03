@@ -1,7 +1,7 @@
 import { programCollection } from '../../../../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../../../../metaData';
 
-export const getProgramOptions = (trackedEntityTypeId) => Array.from(programCollection.values())
+export const getProgramOptions = trackedEntityTypeId => Array.from(programCollection.values())
     .filter(program =>
         program instanceof TrackerProgram &&
                 program.trackedEntityType.id === trackedEntityTypeId &&

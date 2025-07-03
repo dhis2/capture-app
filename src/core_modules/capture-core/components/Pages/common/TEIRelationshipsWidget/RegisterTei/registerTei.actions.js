@@ -10,5 +10,5 @@ export const initializeRegisterTei = (
     orgUnit,
 ) => actionCreator(actionTypes.REGISTER_TEI_INITIALIZE)({ programId, orgUnit });
 
-export const initializeRegisterTeiFailed = (errorMessage) =>
+export const initializeRegisterTeiFailed = errorMessage =>
     actionCreator(actionTypes.REGISTER_TEI_INITIALIZE_FAILED)({ errorMessage });

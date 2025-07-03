@@ -9,5 +9,5 @@ export const actionTypes = {
 export const openDataEntry = () =>
     actionCreator(actionTypes.DATA_ENTRY_OPEN)();
 
-export const openDataEntryFailed = (errorMessage) =>
+export const openDataEntryFailed = errorMessage =>
     actionCreator(actionTypes.DATA_ENTRY_OPEN_FAILED)({ errorMessage });

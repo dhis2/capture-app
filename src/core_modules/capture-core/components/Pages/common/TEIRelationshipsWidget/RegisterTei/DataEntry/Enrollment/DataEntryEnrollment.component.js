@@ -34,7 +34,7 @@ const NewEnrollmentRelationshipPlain =
                 selectedScopeId={programId}
                 orgUnitId={orgUnitId}
                 fieldOptions={fieldOptions}
-                saveButtonText={(trackedEntityTypeName) => i18n.t('Save new {{trackedEntityTypeName}} and link', {
+                saveButtonText={trackedEntityTypeName => i18n.t('Save new {{trackedEntityTypeName}} and link', {
                     trackedEntityTypeName,
                     interpolation: { escapeValue: false },
                 })}

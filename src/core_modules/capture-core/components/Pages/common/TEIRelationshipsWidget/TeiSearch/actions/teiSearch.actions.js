@@ -71,10 +71,10 @@ export const searchFormValidationFailed = (
 ) =>
     actionCreator(actionTypes.SEARCH_FORM_VALIDATION_FAILED)({ formId, searchGroupId, searchId });
 
-export const teiNewSearch = (searchId) =>
+export const teiNewSearch = searchId =>
     actionCreator(actionTypes.TEI_NEW_SEARCH)({ searchId });
 
-export const teiEditSearch = (searchId) =>
+export const teiEditSearch = searchId =>
     actionCreator(actionTypes.TEI_EDIT_SEARCH)({ searchId });
 
 export const teiSearchResultsChangePage = (searchId, pageNumber, resultsPageSize) =>
