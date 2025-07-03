@@ -13,14 +13,14 @@ export const useMainViewConfig: UseMainViewConfig = () => {
         isLoading: namespaceIsLoading,
         isError: namespaceIsError,
         error: namespaceError,
-    } = useApiMetadataQuery<Array<string> | null | undefined>(
+    } = useApiMetadataQuery<any>(
         ['dataStore', 'capture'], {
             resource: 'dataStore/capture',
         }, {
             select: (captureKeys: Array<string> | null | undefined) => captureKeys?.includes('workingLists'),
         });
 
-    const { data: mainViewConfig, isLoading, isError, error } = useApiMetadataQuery<DataStoreWorkingLists>(
+    const { data: mainViewConfig, isLoading, isError, error } = useApiMetadataQuery<any>(
         ['dataStore', 'workingListsEvents'], {
             resource: 'dataStore/capture/workingLists',
         }, {

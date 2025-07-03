@@ -16,7 +16,7 @@ export const EventWorkingListsInitOnline = ({
 
     return (
         <EventWorkingListsWithLoadingIndicator
-            {...passOnProps}
+            {...(passOnProps as any)}
             ready={!mutationInProgress && mainViewConfigReady}
             mainViewConfig={mainViewConfig}
         />

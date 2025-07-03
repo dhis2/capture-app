@@ -5,11 +5,6 @@ export type ReduxState = {
     app: {
         page?: string;
         locationSwitchInProgress?: boolean;
-        goingOnlineInProgress?: boolean;
-    };
-    offline: {
-        online?: boolean;
-        outbox?: Array<any>;
     };
     currentSelections: {
         programId?: string;
