@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import type { Props } from './WidgetBulkDataEntry.types';
 import { BulkDataEntryIdle } from './BulkDataEntryIdle';
@@ -32,7 +31,6 @@ export const WidgetBulkDataEntry = ({ programId, setShowBulkDataEntryPlugin }: P
 
     return (
         <BulkDataEntryIdle
-            programId={programId}
             onSelectConfiguration={onSelectConfiguration}
             bulkDataEntryConfigurations={bulkDataEntryConfigurations}
         />

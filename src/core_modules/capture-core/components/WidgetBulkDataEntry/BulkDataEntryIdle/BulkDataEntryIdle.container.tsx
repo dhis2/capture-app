@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import type { Props } from './BulkDataEntryIdle.types';
 import { BulkDataEntryIdleComponenet } from './BulkDataEntryIdle.component';

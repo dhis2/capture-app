@@ -1,18 +1,17 @@
-// @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IconChevronRight16, DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryIdle.types';
 import { Widget } from '../../Widget';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     container: {
         width: '260px',
         minWidth: '260px',
         height: 'fit-content',
         maxHeight: '100vh',
-        overflowY: 'scroll',
+        overflowY: 'auto',
     },
     table: {
         borderWidth: '1px 0 0 0 !important',
@@ -23,7 +22,7 @@ const styles = () => ({
             textDecoration: 'underline',
         },
     },
-});
+};
 
 const BulkDataEntryIdleComponenetPlain = ({
     bulkDataEntryConfigurations,
@@ -31,16 +30,27 @@ const BulkDataEntryIdleComponenetPlain = ({
     classes,
 }: PlainProps) => (
     <div className={classes.container}>
-        <Widget header={i18n.t('Bulk data entry')} noncollapsible>
+        <Widget header={i18n.t('Bulk data entry') as string} noncollapsible>
             <DataTable className={classes.table}>
                 <DataTableBody>
                     {bulkDataEntryConfigurations.map(config => (
                         <DataTableRow
                             key={config.dataKey}
-                            onClick={() => onSelectConfiguration(config.configKey)}
                         >
                             <DataTableCell>
-                                <strong className={classes.title}>{config.title}</strong>
+                                <strong
+                                    className={classes.title}
+                                    onClick={() => onSelectConfiguration(config.configKey)}
+                                    role="button"
+                                    tabIndex={0}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            onSelectConfiguration(config.configKey);
+                                        }
+                                    }}
+                                >
+                                    {config.title}
+                                </strong>
                                 {config.subtitle && <div>{config.subtitle}</div>}
                             </DataTableCell>
                             <DataTableCell>
@@ -54,4 +64,4 @@ const BulkDataEntryIdleComponenetPlain = ({
     </div>
 );
 
-export const BulkDataEntryIdleComponenet = withStyles(styles)(BulkDataEntryIdleComponenetPlain);
+export const BulkDataEntryIdleComponenet = withStyles(styles)(BulkDataEntryIdleComponenetPlain) as ComponentType<Omit<PlainProps, 'classes'>>;

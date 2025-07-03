@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import type { Props } from './BulkDataEntryActive.types';
 import { BulkDataEntryActiveComponent } from './BulkDataEntryActive.component';
