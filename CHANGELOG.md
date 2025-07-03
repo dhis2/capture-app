@@ -1,3 +1,17 @@
+## [102.6.14](https://github.com/dhis2/capture-app/compare/v102.6.13...v102.6.14) (2025-06-26)
+
+
+### Bug Fixes
+
+* [DHIS2-19765] omit program indicators in profile widget rule execution ([#4163](https://github.com/dhis2/capture-app/issues/4163)) ([ba786d1](https://github.com/dhis2/capture-app/commit/ba786d12b33852629cb45d2f0de118fc569fd739))
+
+## [102.6.13](https://github.com/dhis2/capture-app/compare/v102.6.12...v102.6.13) (2025-06-26)
+
+
+### Bug Fixes
+
+* [DHIS2-16601] Rename TEIWorkingLists to TrackerWorkingLists ([#4136](https://github.com/dhis2/capture-app/issues/4136)) ([a37dfd8](https://github.com/dhis2/capture-app/commit/a37dfd8ec28cedea818442f7e496f64e037e7bb2))
+
 ## [102.6.12](https://github.com/dhis2/capture-app/compare/v102.6.11...v102.6.12) (2025-06-25)
 
 
