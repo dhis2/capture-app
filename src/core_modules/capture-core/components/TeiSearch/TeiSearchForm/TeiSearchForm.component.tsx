@@ -1,6 +1,6 @@
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { errorCreator } from 'capture-core-utils';
@@ -19,7 +19,7 @@ import type { Props, State } from './TeiSearchForm.types';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
-const styles = (theme: any) => ({
+const styles = (theme: Theme) => ({
     container: {},
     orgUnitSection: {
         backgroundColor: 'white',
@@ -137,7 +137,7 @@ class SearchFormPlain extends React.Component<Props & { classes: any }, State> {
                         count: searchGroup.minAttributesRequiredToSearch,
                         defaultValue: 'Fill in at least {{count}} attribute to search',
                         defaultValue_plural: 'Fill in at least {{count}} attributes to search',
-                    }) as React.ReactNode
+                    })
                 }
             </div>
         );
@@ -155,11 +155,11 @@ class SearchFormPlain extends React.Component<Props & { classes: any }, State> {
         return (
             <Modal position="middle" onClose={() => this.setState({ showMissingSearchCriteriaModal: false })}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
-                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`) as React.ReactNode}</ModalContent>
+                <ModalContent>{i18n.t(`Please fill in ${uniqueTEAName} to search`)}</ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
                         <Button onClick={() => this.setState({ showMissingSearchCriteriaModal: false })} primary>
-                            {i18n.t('Back to search') as React.ReactNode}
+                            {i18n.t('Back to search')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -208,4 +208,4 @@ class SearchFormPlain extends React.Component<Props & { classes: any }, State> {
     }
 }
 
-export const TeiSearchFormComponent = withStyles(styles)(SearchFormPlain as any);
+export const TeiSearchFormComponent = withStyles(styles)(SearchFormPlain);

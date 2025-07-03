@@ -7,8 +7,24 @@ import {
 } from './searchOrgUnitSelector.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
+import type { ReduxDispatch } from '../../App/withAppUrlSync.types';
 
-const mapStateToProps = (state: any, props: any) => {
+type ReduxState = {
+    teiSearch: {
+        [searchId: string]: {
+            selectedOrgUnit?: any;
+            selectedOrgUnitScope?: string;
+            orgUnitsSearchText?: string;
+            orgUnitsLoading?: boolean;
+        };
+    };
+};
+
+type Props = {
+    searchId: string;
+};
+
+const mapStateToProps = (state: ReduxState, props: Props) => {
     const searchId = props.searchId;
 
     const filteredRoots = getOrgUnitRoots(searchId);
@@ -24,7 +40,7 @@ const mapStateToProps = (state: any, props: any) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onFilterOrgUnits: (searchId: string, searchText?: string) => {
         const action = searchText ?
             requestFilterOrgUnits(searchId, searchText) :

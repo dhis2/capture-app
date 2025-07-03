@@ -53,7 +53,7 @@ export class SearchOrgUnitSelector extends React.Component<Props> {
             this.props.onSelectOrgUnitScope(this.props.searchId, value);
         }
     }
-    onSetOrgUnit = (orgUnit?: any) => {
+    onSetOrgUnit = (orgUnit?: Record<string, unknown>) => {
         this.props.onSetOrgUnit(this.props.searchId, orgUnit);
     }
 
