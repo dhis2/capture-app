@@ -1,4 +1,3 @@
-import type { WithStyles } from '@material-ui/core';
 import type { ApiEnrollmentEvent } from '../../../../../capture-core-utils/types/api-types';
 import type { Stage, StageCommonProps } from '../../types/common.types';
 
@@ -13,4 +12,4 @@ type ExtractedProps = {
     onRollbackDeleteEvent: (eventId: ApiEnrollmentEvent) => void;
 };
 
-export type Props = ExtractedProps & StageCommonProps & WithStyles<any>;
+export type Props = ExtractedProps & StageCommonProps;

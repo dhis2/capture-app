@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import {
     colors, spacers, spacersNum, IconInfo16, IconWarning16, IconCalendar16, IconClockHistory16, Tooltip,
@@ -88,7 +88,7 @@ const getLastUpdatedAt = (events: Array<ApiEnrollmentEvent>, fromServerDate: (da
     return null;
 };
 
-export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
+export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props & WithStyles<typeof styles>) => {
     const { fromServerDate } = useTimeZoneConversion();
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
