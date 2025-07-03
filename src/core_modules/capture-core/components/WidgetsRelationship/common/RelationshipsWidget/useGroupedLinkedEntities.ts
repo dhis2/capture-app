@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import log from 'loglevel';
 import moment from 'moment';
@@ -10,34 +9,33 @@ import { convertClientToList, convertServerToClient } from '../../../../converte
 import type { GroupedLinkedEntities, LinkedEntityData } from './types';
 import type { ApiLinkedEntity, InputRelationshipData, RelationshipTypes } from '../Types';
 
-
 const getFallbackFieldsByRelationshipEntity = {
     [RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE]: () => [{
         id: 'trackedEntityTypeName',
         displayName: i18n.t('Type'),
-        convertValue: trackedEntityTypeName => trackedEntityTypeName,
+        convertValue: (trackedEntityTypeName: any) => trackedEntityTypeName,
     }, {
         id: 'relationshipCreatedAt',
         displayName: i18n.t('Created date'),
-        convertValue: createdDate => convertClientToList(
+        convertValue: (createdDate: any) => convertClientToList(
             convertServerToClient(createdDate, dataElementTypes.DATE), dataElementTypes.DATE,
         ),
     }],
     [RELATIONSHIP_ENTITIES.PROGRAM_STAGE_INSTANCE]: () => [{
         id: 'programStageName',
         displayName: i18n.t('Program stage name'),
-        convertValue: programStageName => programStageName,
+        convertValue: (programStageName: any) => programStageName,
     },
     {
         id: 'relationshipCreatedAt',
         displayName: i18n.t('Created date'),
-        convertValue: createdDate => convertClientToList(
+        convertValue: (createdDate: any) => convertClientToList(
             convertServerToClient(createdDate, dataElementTypes.DATE), dataElementTypes.DATE,
         ),
     }],
 };
 
-const getColumns = ({ relationshipEntity, trackerDataView }) => {
+const getColumns = ({ relationshipEntity, trackerDataView }: any) => {
     let fields;
     if (relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE) {
         fields = trackerDataView.attributes;
@@ -52,8 +50,7 @@ const getColumns = ({ relationshipEntity, trackerDataView }) => {
     return fields;
 };
 
-// $FlowFixMe destructering
-const getContext = ({ relationshipEntity, program, programStage, trackedEntityType }, access) => {
+const getContext = ({ relationshipEntity, program, programStage, trackedEntityType }: any, access: any) => {
     if (relationshipEntity === RELATIONSHIP_ENTITIES.TRACKED_ENTITY_INSTANCE) {
         return {
             navigation: {
@@ -82,8 +79,8 @@ const getContext = ({ relationshipEntity, program, programStage, trackedEntityTy
     };
 };
 
-const getEventData = ({ dataValues, event, program: programId }, { relationshipCreatedAt, relationshipId }, pendingApiResponse): LinkedEntityData => {
-    const values = dataValues.reduce((acc, dataValue) => {
+const getEventData = ({ dataValues, event, program: programId }: any, { relationshipCreatedAt, relationshipId }: any, pendingApiResponse: any): LinkedEntityData => {
+    const values = dataValues.reduce((acc: any, dataValue: any) => {
         acc[dataValue.dataElement] = dataValue.value;
         return acc;
     }, {});
@@ -103,8 +100,8 @@ const getEventData = ({ dataValues, event, program: programId }, { relationshipC
     };
 };
 
-const getTrackedEntityData = ({ attributes, trackedEntity }, { relationshipCreatedAt, relationshipId }, pendingApiResponse?: boolean): LinkedEntityData => {
-    const values = attributes.reduce((acc, attribute) => {
+const getTrackedEntityData = ({ attributes, trackedEntity }: any, { relationshipCreatedAt, relationshipId }: any, pendingApiResponse?: boolean): LinkedEntityData => {
+    const values = attributes.reduce((acc: any, attribute: any) => {
         acc[attribute.attribute] = attribute.value;
         return acc;
     }, {});
@@ -123,7 +120,7 @@ const getTrackedEntityData = ({ attributes, trackedEntity }, { relationshipCreat
     };
 };
 
-const getLinkedEntityData = (apiLinkedEntity, relationshipMeta, pendingApiResponse) => {
+const getLinkedEntityData = (apiLinkedEntity: any, relationshipMeta: any, pendingApiResponse: any) => {
     if (apiLinkedEntity.trackedEntity) {
         return getTrackedEntityData(apiLinkedEntity.trackedEntity, relationshipMeta, pendingApiResponse);
     }
@@ -157,7 +154,7 @@ export const determineLinkedEntity =
 
 export const useGroupedLinkedEntities = (
     sourceId: string,
-    relationshipTypes: ?RelationshipTypes,
+    relationshipTypes: RelationshipTypes | null | undefined,
     relationships?: Array<InputRelationshipData>,
 ): GroupedLinkedEntities => useMemo(() => {
     if (!relationships?.length || !relationshipTypes?.length) {
@@ -227,5 +224,5 @@ export const useGroupedLinkedEntities = (
             }
 
             return accGroupedLinkedEntities;
-        }, []);
+        }, [] as any);
 }, [relationships, relationshipTypes, sourceId]);

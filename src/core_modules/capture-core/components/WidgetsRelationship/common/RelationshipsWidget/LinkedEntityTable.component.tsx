@@ -1,4 +1,3 @@
-// @flow
 import React, { useState, useMemo, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import {
@@ -13,7 +12,7 @@ import type { Props, StyledProps } from './linkedEntityTable.types';
 
 const DEFAULT_VISIBLE_ROWS_COUNT = 5;
 
-const styles = {
+const styles: Readonly<any> = {
     button: {
         marginTop: `${spacers.dp8}`,
     },
@@ -70,11 +69,11 @@ const LinkedEntityTablePlain = ({
                 >
                     {i18n.t('Show {{ rest }} more', {
                         rest: Math.min(linkedEntities.length - visibleRowsCount, DEFAULT_VISIBLE_ROWS_COUNT),
-                    })}
+                    }) as string}
                 </Button>
             )}
         </div>
     );
 };
 
-export const LinkedEntityTable: ComponentType<Props> = withStyles(styles)(LinkedEntityTablePlain);
+export const LinkedEntityTable = withStyles(styles)(LinkedEntityTablePlain) as ComponentType<Props>;

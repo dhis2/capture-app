@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import {
@@ -13,7 +12,7 @@ import { convert as convertClientToList } from '../../../../converters/clientToL
 import type { Props, StyledProps } from './linkedEntityTableBody.types';
 import { DeleteRelationship } from './DeleteRelationship';
 
-const styles = {
+const styles: Readonly<any> = {
     row: {
         cursor: 'pointer',
     },
@@ -43,25 +42,25 @@ const LinkedEntityTableBodyPlain = ({
                             className={pendingApiResponse ? classes.rowDisabled : classes.row}
                         >
                             {
-                                // $FlowFixMe flow doesn't like destructering
-                                columns.map(({ id, type, options, convertValue }) => {
-                                    const value = type ?
-                                        convertClientToList(convertServerToClient(values[id], type), type, options) :
-                                        convertValue(baseValues?.[id] ?? context.display[id]);
+                                columns.map((column) => {
+                                    const { id } = column;
+                                    const value = 'type' in column ?
+                                        convertClientToList(convertServerToClient(values[id], column.type), column.type, column.options ?? null) :
+                                        column.convertValue(baseValues?.[id] ?? context.display[id]);
 
                                     return (
                                         <Tooltip
                                             key={`${entityId}-${id}`}
-                                            content={i18n.t('To open this relationship, please wait until saving is complete')}
+                                            content={i18n.t('To open this relationship, please wait until saving is complete') as string}
                                             closeDelay={50}
                                         >
                                             {({ onMouseOver, onMouseOut, ref }) => (
                                                 <DataTableCell
                                                     className={classes.row}
                                                     key={`${entityId}-${id}`}
-                                                    // $FlowFixMe flow doesn't like destructering
-                                                    onClick={() => !pendingApiResponse && onLinkedRecordClick({ ...context.navigation, ...navigation })}
-                                                    ref={(tableCell) => {
+                                                    onClick={() => !pendingApiResponse && onLinkedRecordClick({ ...context.navigation, ...navigation } as any)}
+                                                    {...({} as any)}
+                                                    ref={(tableCell: any) => {
                                                         if (tableCell) {
                                                             if (pendingApiResponse) {
                                                                 tableCell.onmouseover = onMouseOver;
@@ -82,7 +81,7 @@ const LinkedEntityTableBodyPlain = ({
                                 })}
                             {context.display.showDeleteButton && (
                                 <DeleteRelationship
-                                    handleDeleteRelationship={() => onDeleteRelationship({ relationshipId })}
+                                    handleDeleteRelationship={() => onDeleteRelationship({ relationshipId: relationshipId! })}
                                     disabled={pendingApiResponse}
                                 />
                             )}
@@ -93,4 +92,4 @@ const LinkedEntityTableBodyPlain = ({
     </DataTableBody>
 );
 
-export const LinkedEntityTableBody: ComponentType<Props> = withStyles(styles)(LinkedEntityTableBodyPlain);
+export const LinkedEntityTableBody = withStyles(styles)(LinkedEntityTableBodyPlain) as ComponentType<Props>;
