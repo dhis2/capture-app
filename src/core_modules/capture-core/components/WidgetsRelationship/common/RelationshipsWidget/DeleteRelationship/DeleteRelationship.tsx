@@ -1,5 +1,3 @@
-// @flow
-
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -14,24 +12,17 @@ import {
     colors,
 } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Props } from './DeleteRelationship.types';
 
-type Props = {
-    handleDeleteRelationship: () => void,
-    disabled?: boolean,
-    classes: {
-        tableCell: string,
-    },
-}
-
-const styles = {
+const styles: Readonly<any> = {
     tableCell: {
         display: 'flex',
         justifyContent: 'center',
     },
 };
 
-export const DeleteRelationshipPlain = ({ handleDeleteRelationship, disabled, classes }: Props) => {
+export const DeleteRelationshipPlain = ({ handleDeleteRelationship, disabled, classes }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     return (
         <>
