@@ -137,6 +137,30 @@ export class EnrollmentFactory {
         return section;
     }
 
+    async _addLeftoversSection(enrollmentForm: RenderFoundation, cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>) {
+        if (!cachedProgramTrackedEntityAttributes) return;
+
+        // Check if there exist attributes which are not assigned to a section
+        const attributesInSection = enrollmentForm.getElements().reduce((acc, attribute) => {
+            acc.add(attribute.id);
+            return acc;
+        }, new Set());
+
+        const unassignedAttributes = cachedProgramTrackedEntityAttributes
+            .filter(attribute => !attributesInSection.has(attribute.trackedEntityAttributeId));
+
+        if (unassignedAttributes.length === 0) return;
+
+        // Create a special section for the unassigned attributes
+        const section = new Section((o) => {
+            o.id = Section.LEFTOVERS_SECTION_ID;
+            o.group = Section.groups.ENROLLMENT;
+        });
+
+        await this._buildElementsForSection(unassignedAttributes, section);
+        enrollmentForm.addSection(section);
+    }
+
     async _buildElementsForSection(
         cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
         section: Section,
@@ -328,6 +352,9 @@ export class EnrollmentFactory {
             );
             section && enrollmentForm.addSection(section);
         }
+
+        await this._addLeftoversSection(enrollmentForm, cachedProgramTrackedEntityAttributes);
+
         return enrollmentForm;
     }
 
