@@ -1,7 +1,7 @@
-// @flow
 import { connect } from 'react-redux';
 import { makeTeiRegistrationMetadataSelector } from './tei.selectors';
 import { RelationshipTrackedEntityInstance } from './DataEntryTrackedEntityInstance.component';
+import type { ReduxState } from '../../../../../App/withAppUrlSync.types';
 
 const makeMapStateToProps = () => {
     const teiRegistrationMetadataSelector = makeTeiRegistrationMetadataSelector();
@@ -11,12 +11,10 @@ const makeMapStateToProps = () => {
 
         return { teiRegistrationMetadata };
     };
-    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
-// $FlowFixMe[missing-annot] automated comment
 export const DataEntryTrackedEntityInstance = connect(
     makeMapStateToProps,
     () => ({}),
-)(RelationshipTrackedEntityInstance);
+)(RelationshipTrackedEntityInstance as any);

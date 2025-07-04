@@ -1,7 +1,7 @@
-// @flow
 import { connect } from 'react-redux';
 import { makeEnrollmentMetadataSelector } from './enrollment.selectors';
 import { NewEnrollmentRelationship } from './DataEntryEnrollment.component';
+import type { ReduxState } from '../../../../../App/withAppUrlSync.types';
 
 const makeMapStateToProps = () => {
     const enrollmentMetadataSelector = makeEnrollmentMetadataSelector();
@@ -15,9 +15,7 @@ const makeMapStateToProps = () => {
             orgUnitId: state.newRelationshipRegisterTei.orgUnit.id,
         };
     };
-    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
-// $FlowFixMe
-export const DataEntryEnrollment = connect(makeMapStateToProps, () => ({}))(NewEnrollmentRelationship);
+export const DataEntryEnrollment = connect(makeMapStateToProps, () => ({}))(NewEnrollmentRelationship as any);

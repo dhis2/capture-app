@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withTheme } from '@material-ui/core';
@@ -13,7 +12,7 @@ const RelationshipTrackedEntityInstancePlain =
         theme,
         onSave,
         onCancel,
-        teiRegistrationMetadata = {},
+        teiRegistrationMetadata,
         duplicatesReviewPageSize,
         renderDuplicatesDialogActions,
         renderDuplicatesCardActions,
@@ -21,11 +20,10 @@ const RelationshipTrackedEntityInstancePlain =
     }: Props) => {
         const orgUnitId = useCurrentOrgUnitId();
         const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
-        const { trackedEntityType } = teiRegistrationMetadata || {};
+        const { trackedEntityType } = teiRegistrationMetadata ?? {};
         const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
 
         return (
-            // $FlowFixMe - flow error will be resolved when rewriting relationship metadata fetching
             <TeiRegistrationEntry
                 id={DATA_ENTRY_ID}
                 orgUnitId={orgUnitId}
