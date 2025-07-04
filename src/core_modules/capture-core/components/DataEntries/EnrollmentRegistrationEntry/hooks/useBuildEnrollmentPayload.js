@@ -39,11 +39,6 @@ type DataEntryReduxConverterProps = {
     trackedEntityTypeId: string;
 };
 
-function getClientValuesForFormData(formValues: Object, formFoundation: RenderFoundation) {
-    const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
-    return clientValues;
-}
-
 function getServerValuesForMainValues(
     values: Object,
     meta: Object,
@@ -99,7 +94,7 @@ export const useBuildEnrollmentPayload = ({
     } => {
         if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
-        const clientValues = getClientValuesForFormData(formValues, formFoundation);
+        const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
         const serverValuesForFormValues = formFoundation.convertAndGroupBySection(clientValues, convertClientToServer);
         const serverValuesForMainValues = getServerValuesForMainValues(
             dataEntryFieldValues,
