@@ -1,10 +1,9 @@
-// @flow
 import React from 'react';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import type { PlainProps, LinkedEntityMetadata, Side } from './linkedEntityMetadataSelector.types';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         padding: spacers.dp16,
         paddingTop: 0,
@@ -31,10 +30,10 @@ const styles = {
     },
 };
 
-export const LinkedEntityMetadataSelectorPlain = <TLinkedEntityMetadata: LinkedEntityMetadata, TSide: Side>({
+export const LinkedEntityMetadataSelectorPlain = <TLinkedEntityMetadata extends LinkedEntityMetadata, TSide extends Side>({
     applicableTypesInfo,
     onSelectLinkedEntityMetadata,
-    classes }: PlainProps<TLinkedEntityMetadata, TSide>) => (
+    classes }: PlainProps<TLinkedEntityMetadata, TSide> & WithStyles<typeof styles>) => (
         <div className={classes.container}>
             <div className={classes.typeSelector}>
                 {applicableTypesInfo.map(({ id, name, sides }) => (
@@ -50,11 +49,10 @@ export const LinkedEntityMetadataSelectorPlain = <TLinkedEntityMetadata: LinkedE
                                 {sides.map((side: TSide) => (
                                     <Button
                                         key={`${id}-${side.targetSide}`}
-                                        // $FlowFixMe
                                         onClick={() => onSelectLinkedEntityMetadata({
                                             ...side,
                                             relationshipId: id,
-                                        })}
+                                        } as unknown as TLinkedEntityMetadata)}
                                         secondary
                                     >
                                         {side.name}
@@ -69,5 +67,4 @@ export const LinkedEntityMetadataSelectorPlain = <TLinkedEntityMetadata: LinkedE
     );
 
 
-export const LinkedEntityMetadataSelector =
-    withStyles(styles)(LinkedEntityMetadataSelectorPlain);
+export const LinkedEntityMetadataSelector = withStyles(styles)(LinkedEntityMetadataSelectorPlain as any);

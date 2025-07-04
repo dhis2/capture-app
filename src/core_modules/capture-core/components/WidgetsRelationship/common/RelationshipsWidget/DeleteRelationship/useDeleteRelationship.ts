@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator, FEATURES, useFeature } from 'capture-core-utils';
@@ -8,15 +7,15 @@ import { useAlert, useDataEngine } from '@dhis2/app-runtime';
 import { ReactQueryAppNamespace } from '../../../../../utils/reactQueryHelpers';
 
 type Props = {
-    sourceId: string,
+    sourceId: string;
 };
 
-export type OnDeleteRelationship = ({ relationshipId: string }) => void;
+export type OnDeleteRelationship = ({ relationshipId }: { relationshipId: string }) => void;
 
 const deleteRelationshipMutation = {
     resource: 'tracker?importStrategy=DELETE&async=false',
     type: 'create',
-    data: ({ relationshipId }) => ({
+    data: ({ relationshipId }: { relationshipId: string }) => ({
         relationships: [
             {
                 relationship: relationshipId,
@@ -24,6 +23,7 @@ const deleteRelationshipMutation = {
         ],
     }),
 };
+
 export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationship: OnDeleteRelationship } => {
     const dataEngine = useDataEngine();
     const queryKey: string = useFeature(FEATURES.exportablePayload) ? 'relationships' : 'instances';
@@ -35,16 +35,16 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
         },
     );
     const { mutate: onDeleteRelationship } = useMutation(
-        ({ relationshipId }) => dataEngine.mutate(deleteRelationshipMutation, { variables: { relationshipId } }),
+        ({ relationshipId }: { relationshipId: string }) => dataEngine.mutate(deleteRelationshipMutation as any, { variables: { relationshipId } }),
         {
-            onMutate: ({ relationshipId }) => {
+            onMutate: ({ relationshipId }: { relationshipId: string }) => {
                 const prevRelationships = queryClient
                     .getQueryData([ReactQueryAppNamespace, 'relationships', sourceId]);
 
                 const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, prevRelationships);
 
                 const newRelationships = apiRelationships
-                    ?.filter(({ relationship }) => relationship !== relationshipId);
+                    ?.filter(({ relationship }: any) => relationship !== relationshipId);
 
                 queryClient.setQueryData(
                     [ReactQueryAppNamespace, 'relationships', sourceId],
@@ -52,7 +52,7 @@ export const useDeleteRelationship = ({ sourceId }: Props): { onDeleteRelationsh
 
                 return { prevRelationships };
             },
-            onError: (error, { relationshipId }, context) => {
+            onError: (error: any, { relationshipId }: { relationshipId: string }, context: any) => {
                 log.error(errorCreator('An error occurred while deleting the relationship')({ error, relationshipId }));
                 showError();
 
