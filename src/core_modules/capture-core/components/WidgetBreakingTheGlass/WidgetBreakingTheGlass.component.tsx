@@ -1,5 +1,4 @@
-// @flow
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, type ComponentType } from 'react';
 import {
     NoticeBox,
     TextAreaField,
@@ -8,11 +7,11 @@ import {
     spacersNum,
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import type { PlainProps } from './WidgetBreakingTheGlass.types';
 import { Widget } from '../Widget';
 
-const styles = ({ typography }) => ({
+const styles: Readonly<any> = ({ typography }: any) => ({
     title: {
         ...typography.title,
     },
@@ -28,13 +27,15 @@ const noticeBoxTitle = i18n.t('This program is protected');
 const reasonHeader = i18n.t('Reason to check for enrollments');
 const reasonPlaceholder = i18n.t('Describe the reason you are checking for enrollments in this protected program');
 
+type Props = PlainProps & WithStyles<typeof styles>;
+
 const WidgetBreakingTheGlassPlain = ({
     onBreakingTheGlass,
     onCancel,
     classes,
-}: PlainProps) => {
+}: Props) => {
     const [reason, setReason] = useState('');
-    const reasonChangeHandler = useCallback(({ value }) => {
+    const reasonChangeHandler = useCallback(({ value }: any) => {
         setReason(value);
     }, [setReason]);
 
@@ -76,4 +77,4 @@ const WidgetBreakingTheGlassPlain = ({
     );
 };
 
-export const WidgetBreakingTheGlassComponent = withStyles(styles)(WidgetBreakingTheGlassPlain);
+export const WidgetBreakingTheGlassComponent = withStyles(styles)(WidgetBreakingTheGlassPlain) as ComponentType<PlainProps>;

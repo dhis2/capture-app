@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { useDataMutation } from '@dhis2/app-runtime';
 import { FEATURES, useFeature } from 'capture-core-utils';
@@ -8,12 +7,12 @@ import { WidgetBreakingTheGlassComponent } from './WidgetBreakingTheGlass.compon
 const glassBreakRequest = {
     resource: 'tracker/ownership/override',
     type: 'create',
-    params: ({ teiId, teiParamKey, program, reason }) => ({
+    data: ({ teiId, teiParamKey, program, reason }: any) => ({
         [teiParamKey]: teiId,
         program,
         reason,
     }),
-};
+} as const;
 
 export const WidgetBreakingTheGlass = ({
     teiId,
@@ -24,7 +23,7 @@ export const WidgetBreakingTheGlass = ({
     const [postGlassBreakRequest] = useDataMutation(glassBreakRequest);
     const teiParamKey = useFeature(FEATURES.newTrackedEntityQueryParam) ? 'trackedEntity' : 'trackedEntityInstance';
 
-    const performGlassBreak = useCallback(async (reason) => {
+    const performGlassBreak = useCallback(async (reason?: string) => {
         await postGlassBreakRequest({
             teiId,
             teiParamKey,
