@@ -10,6 +10,7 @@ export type ReduxState = {
         programId?: string;
         trackedEntityTypeId?: string;
         orgUnitId?: string;
+        complete?: boolean;
     };
     viewEventPage: {
         eventId?: string;
@@ -21,7 +22,10 @@ export type ReduxState = {
         };
         eventDetailsSection?: {
             loading?: boolean;
+            showEditEvent?: boolean;
         };
+        loadError?: string;
+        showAddRelationship?: boolean;
     };
     editEventPage: {
         eventId?: string;
@@ -32,6 +36,32 @@ export type ReduxState = {
         };
         lockedSelectorLoads?: boolean;
         isDataEntryLoading?: boolean;
+        selectionsError?: {
+            error?: string;
+        };
+    };
+    dataEntries: Record<string, {
+        itemId?: string;
+        eventId?: string;
+    }>;
+    dataEntriesFieldsValue: Record<string, any>;
+    dataEntriesFieldsMeta: Record<string, any>;
+    formsValues: Record<string, any>;
+    enrollmentDomain?: {
+        enrollment?: {
+            enrolledAt?: string;
+            occurredAt?: string;
+            events?: any;
+        };
+    };
+    notes: {
+        viewEvent?: any[];
+    };
+    relationships: {
+        viewEvent?: any[];
+    };
+    newEventPage: {
+        recentlyAddedRelationshipId?: string;
     };
     newRelationshipRegisterTei: {
         programId: string;
