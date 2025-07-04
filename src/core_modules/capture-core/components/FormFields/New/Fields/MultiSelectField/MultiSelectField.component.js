@@ -44,23 +44,22 @@ const MultiSelectFieldComponentPlain = (props: Props) => {
     };
 
     return (
-        <div onBlur={handleBlur}>
-            <MultiSelectFieldUI
-                dataTest="multi-select-field"
-                onChange={onHandleChange}
-                onFocus={onFocus}
-                onKeyDown={onFocus}
-                selected={selected}
-                filterable
-                filterPlaceholder={translations.filterPlaceholder}
-                noMatchText={translations.noMatchText}
-                disabled={disabled}
-            >
-                {options.map(option => (
-                    <MultiSelectOption key={option.id} label={option.label} value={option.value} />
-                ))}
-            </MultiSelectFieldUI>
-        </div>
+        <MultiSelectFieldUI
+            dataTest="multi-select-field"
+            onChange={onHandleChange}
+            onFocus={onFocus}
+            onKeyDown={handleBlur}
+            onBlur={handleBlur}
+            selected={selected}
+            filterable
+            filterPlaceholder={translations.filterPlaceholder}
+            noMatchText={translations.noMatchText}
+            disabled={disabled}
+        >
+            {options.map(option => (
+                <MultiSelectOption key={option.id} label={option.label} value={option.value} />
+            ))}
+        </MultiSelectFieldUI>
     );
 };
 

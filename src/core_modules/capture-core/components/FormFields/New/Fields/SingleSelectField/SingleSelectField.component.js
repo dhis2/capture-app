@@ -40,28 +40,27 @@ const SingleSelectFieldComponentPlain = (props: Props) => {
         onBlur?.(selected);
     };
     return (
-        <div onBlur={handleBlur}>
-            <SingleSelectFieldUI
-                dataTest={dataTest}
-                selected={selectedValue}
-                onChange={handleSelect}
-                onFocus={onFocus}
-                onKeyDown={onFocus}
-                disabled={disabled}
-                required={required}
-                placeholder={placeholder}
-                filterable={filterable}
-                clearable={clearable}
-            >
-                {options.map(option => (
-                    <SingleSelectOption
-                        key={option.value}
-                        label={option.label}
-                        value={option.value}
-                    />
-                ))}
-            </SingleSelectFieldUI>
-        </div>
+        <SingleSelectFieldUI
+            dataTest={dataTest}
+            selected={selectedValue}
+            onChange={handleSelect}
+            onFocus={onFocus}
+            onKeyDown={handleBlur}
+            onBlur={handleBlur}
+            disabled={disabled}
+            required={required}
+            placeholder={placeholder}
+            filterable={filterable}
+            clearable={clearable}
+        >
+            {options.map(option => (
+                <SingleSelectOption
+                    key={option.value}
+                    label={option.label}
+                    value={option.value}
+                />
+            ))}
+        </SingleSelectFieldUI>
     );
 };
 
