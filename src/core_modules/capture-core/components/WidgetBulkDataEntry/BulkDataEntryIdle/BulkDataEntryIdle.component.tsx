@@ -1,29 +1,34 @@
-// @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { IconChevronRight16, DataTable, DataTableBody, DataTableRow, DataTableCell } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryIdle.types';
 import { Widget } from '../../Widget';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     container: {
         width: '260px',
         minWidth: '260px',
         height: 'fit-content',
         maxHeight: '100vh',
-        overflowY: 'scroll',
+        overflowY: 'auto',
     },
     table: {
         borderWidth: '1px 0 0 0 !important',
     },
     title: {
+        border: 'none',
+        background: 'none',
+        padding: 0,
+        font: 'inherit',
+        fontWeight: 'bold',
+        textAlign: 'left',
         '&:hover': {
             cursor: 'pointer',
             textDecoration: 'underline',
         },
     },
-});
+};
 
 const BulkDataEntryIdleComponenetPlain = ({
     bulkDataEntryConfigurations,
@@ -37,10 +42,15 @@ const BulkDataEntryIdleComponenetPlain = ({
                     {bulkDataEntryConfigurations.map(config => (
                         <DataTableRow
                             key={config.dataKey}
-                            onClick={() => onSelectConfiguration(config.configKey)}
                         >
                             <DataTableCell>
-                                <strong className={classes.title}>{config.title}</strong>
+                                <button
+                                    type="button"
+                                    className={classes.title}
+                                    onClick={() => onSelectConfiguration(config.configKey)}
+                                >
+                                    {config.title}
+                                </button>
                                 {config.subtitle && <div>{config.subtitle}</div>}
                             </DataTableCell>
                             <DataTableCell>
@@ -54,4 +64,4 @@ const BulkDataEntryIdleComponenetPlain = ({
     </div>
 );
 
-export const BulkDataEntryIdleComponenet = withStyles(styles)(BulkDataEntryIdleComponenetPlain);
+export const BulkDataEntryIdleComponenet = withStyles(styles)(BulkDataEntryIdleComponenetPlain) as ComponentType<Omit<PlainProps, 'classes'>>;

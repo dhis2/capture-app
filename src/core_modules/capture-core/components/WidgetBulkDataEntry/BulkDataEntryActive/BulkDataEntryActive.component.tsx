@@ -1,18 +1,17 @@
-// @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors, Button, Tag } from '@dhis2/ui';
 import type { PlainProps } from './BulkDataEntryActive.types';
 import { Widget } from '../../Widget';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     container: {
         width: '260px',
         minWidth: '260px',
         height: 'fit-content',
         maxHeight: '100vh',
-        overflowY: 'scroll',
+        overflowY: 'auto',
         border: `2px solid ${colors.yellow200}`,
         borderRadius: '4px',
     },
@@ -31,7 +30,7 @@ const styles = () => ({
     button: {
         marginTop: spacers.dp8,
     },
-});
+};
 
 const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, classes }: PlainProps) => (
     <div className={classes.container}>
@@ -49,4 +48,4 @@ const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, class
     </div>
 );
 
-export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain);
+export const BulkDataEntryActiveComponent = withStyles(styles)(BulkDataEntryActiveComponentPlain) as ComponentType<Omit<PlainProps, 'classes'>>;
