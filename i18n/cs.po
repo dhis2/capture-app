@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -142,6 +142,11 @@ msgstr "Zápis"
 
 msgid "Complete event"
 msgstr "Dokončit událost"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
 
 msgid "A value is required"
 msgstr "hodnota je vyžadována"
@@ -971,6 +976,12 @@ msgstr "Pro dotaz nebyly nalezeny žádné výsledky"
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Není vybrán žádný"
+
+msgid "Choose an organisation unit"
+msgstr "Vyberte organizační jednotku"
+
 msgid "Clear selection"
 msgstr "Vymazat výběr"
 
@@ -1132,7 +1143,7 @@ msgstr ""
 "aktivita bude zaznamenána."
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Neuložené změny"
 
 msgid "Continue data entry"
 msgstr ""

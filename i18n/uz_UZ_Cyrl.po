@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025\n"
 "Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -143,6 +143,11 @@ msgstr "Рўйхатга олиш"
 
 msgid "Complete event"
 msgstr "Ҳодиса/тадбирни якунлаш"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
 
 msgid "A value is required"
 msgstr "Қиймат талаб қилинади"
@@ -965,6 +970,12 @@ msgstr ""
 
 msgid "Choose an organisation unit in the form below"
 msgstr ""
+
+msgid "None selected"
+msgstr "Бирор нима танланмаган"
+
+msgid "Choose an organisation unit"
+msgstr "Ташкилий бирликни танланг"
 
 msgid "Clear selection"
 msgstr ""
