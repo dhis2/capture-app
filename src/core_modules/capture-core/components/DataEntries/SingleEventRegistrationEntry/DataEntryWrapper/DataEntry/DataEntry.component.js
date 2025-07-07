@@ -33,7 +33,7 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
-    VirtualizedSelectField,
+    SingleSelectField,
     SingleOrgUnitSelectField,
 } from '../../../../FormFields/New';
 import { Assignee } from './Assignee';
@@ -356,7 +356,7 @@ const buildCategoryOptionsFieldSettingsFn = () => {
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(VirtualizedSelectField),
+                                    withFilterProps(defaultFilterProps)(SingleSelectField),
                                 ),
                             ),
                         ),

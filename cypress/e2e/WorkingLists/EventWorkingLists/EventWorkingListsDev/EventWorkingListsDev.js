@@ -164,7 +164,7 @@ When('you click the next page button on the event working list', () => {
     cy.intercept('GET', '**/tracker/events**').as('getEvents');
 
     cy.get('[data-test="search-pagination-next-page"]')
-        .click();
+        .click({ force: true });
 });
 
 Then('new events should be retrieved from the api', () => {
