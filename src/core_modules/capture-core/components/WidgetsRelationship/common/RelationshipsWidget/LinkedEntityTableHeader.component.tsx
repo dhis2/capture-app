@@ -19,9 +19,9 @@ export const LinkedEntityTableHeader = ({ columns, context }: Props) => (
                         </DataTableColumnHeader>
                     ))
             }
-            {context.display.showDeleteButton && (
+            {context.display.showDeleteButton ? (
                 <DataTableColumnHeader />
-            )}
+            ) : null}
         </DataTableRow>
     </DataTableHead>
 );

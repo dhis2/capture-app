@@ -1,5 +1,6 @@
 import React, { useState, useMemo, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
+import type { WithStyles } from '@material-ui/core';
 import {
     DataTable,
     Button,
@@ -8,7 +9,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { LinkedEntityTableHeader } from './LinkedEntityTableHeader.component';
 import { LinkedEntityTableBody } from './LinkedEntityTableBody.component';
-import type { Props, StyledProps } from './linkedEntityTable.types';
+import type { Props } from './linkedEntityTable.types';
 
 const DEFAULT_VISIBLE_ROWS_COUNT = 5;
 
@@ -29,7 +30,7 @@ const LinkedEntityTablePlain = ({
     onDeleteRelationship,
     context,
     classes,
-}: StyledProps) => {
+}: Props & WithStyles<typeof styles>) => {
     const [visibleRowsCount, setVisibleRowsCount] = useState(DEFAULT_VISIBLE_ROWS_COUNT);
 
     const visibleLinkedEntities = useMemo(() =>
@@ -69,7 +70,7 @@ const LinkedEntityTablePlain = ({
                 >
                     {i18n.t('Show {{ rest }} more', {
                         rest: Math.min(linkedEntities.length - visibleRowsCount, DEFAULT_VISIBLE_ROWS_COUNT),
-                    }) as string}
+                    })}
                 </Button>
             )}
         </div>

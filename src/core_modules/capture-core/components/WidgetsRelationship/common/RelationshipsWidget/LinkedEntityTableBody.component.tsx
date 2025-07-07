@@ -1,5 +1,6 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
+import type { WithStyles } from '@material-ui/core';
 import {
     DataTableBody,
     DataTableRow,
@@ -9,7 +10,7 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
-import type { Props, StyledProps } from './linkedEntityTableBody.types';
+import type { Props } from './linkedEntityTableBody.types';
 import { DeleteRelationship } from './DeleteRelationship';
 
 const styles: Readonly<any> = {
@@ -29,7 +30,7 @@ const LinkedEntityTableBodyPlain = ({
     context,
     onDeleteRelationship,
     classes,
-}: StyledProps) => (
+}: Props & WithStyles<typeof styles>) => (
     <DataTableBody dataTest="relationship-table-body">
         {
             linkedEntities
@@ -42,16 +43,15 @@ const LinkedEntityTableBodyPlain = ({
                             className={pendingApiResponse ? classes.rowDisabled : classes.row}
                         >
                             {
-                                columns.map((column) => {
-                                    const { id } = column;
-                                    const value = 'type' in column ?
-                                        convertClientToList(convertServerToClient(values[id], column.type), column.type, column.options ?? null) :
-                                        column.convertValue(baseValues?.[id] ?? context.display[id]);
+                                columns.map(({ id, type, options, convertValue }: any) => {
+                                    const value = type ?
+                                        convertClientToList(convertServerToClient(values[id], type), type, options) :
+                                        convertValue(baseValues?.[id] ?? context.display[id]);
 
                                     return (
                                         <Tooltip
                                             key={`${entityId}-${id}`}
-                                            content={i18n.t('To open this relationship, please wait until saving is complete') as string}
+                                            content={i18n.t('To open this relationship, please wait until saving is complete')}
                                             closeDelay={50}
                                         >
                                             {({ onMouseOver, onMouseOut, ref }) => (
@@ -59,8 +59,8 @@ const LinkedEntityTableBodyPlain = ({
                                                     className={classes.row}
                                                     key={`${entityId}-${id}`}
                                                     onClick={() => !pendingApiResponse && onLinkedRecordClick({ ...context.navigation, ...navigation } as any)}
-                                                    {...({} as any)}
-                                                    ref={(tableCell: any) => {
+                                                    // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
+                                                    ref={(tableCell) => {
                                                         if (tableCell) {
                                                             if (pendingApiResponse) {
                                                                 tableCell.onmouseover = onMouseOver;
@@ -79,12 +79,12 @@ const LinkedEntityTableBodyPlain = ({
                                         </Tooltip>
                                     );
                                 })}
-                            {context.display.showDeleteButton && (
+                            {context.display.showDeleteButton ? (
                                 <DeleteRelationship
                                     handleDeleteRelationship={() => onDeleteRelationship({ relationshipId: relationshipId! })}
                                     disabled={pendingApiResponse}
                                 />
-                            )}
+                            ) : null}
                         </DataTableRow>
                     );
                 })
