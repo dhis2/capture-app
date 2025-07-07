@@ -1,3 +1,29 @@
+# [103.0.0](https://github.com/dhis2/capture-app/compare/v102.6.15...v103.0.0) (2025-07-07)
+
+
+### chore
+
+* **release:** stop support for 2.39 ([#4131](https://github.com/dhis2/capture-app/issues/4131)) ([a5ad527](https://github.com/dhis2/capture-app/commit/a5ad527ab664b7774efab119ec5b39acdf098dce))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 103.0.0 to facilitate potential fixes for 2.39.
+
+## [102.6.15](https://github.com/dhis2/capture-app/compare/v102.6.14...v102.6.15) (2025-07-02)
+
+
+### Bug Fixes
+
+* skip flaky changelog cypress test ([#4188](https://github.com/dhis2/capture-app/issues/4188)) ([a6200ce](https://github.com/dhis2/capture-app/commit/a6200ce9ac94d0101ec5eb985334614212b29bdc))
+
+## [102.6.14](https://github.com/dhis2/capture-app/compare/v102.6.13...v102.6.14) (2025-06-26)
+
+
+### Bug Fixes
+
+* [DHIS2-19765] omit program indicators in profile widget rule execution ([#4163](https://github.com/dhis2/capture-app/issues/4163)) ([ba786d1](https://github.com/dhis2/capture-app/commit/ba786d12b33852629cb45d2f0de118fc569fd739))
+
 ## [102.6.13](https://github.com/dhis2/capture-app/compare/v102.6.12...v102.6.13) (2025-06-26)
 
 

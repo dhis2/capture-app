@@ -1,10 +1,8 @@
 // @flow
 import { useMemo, useEffect } from 'react';
-import { useFeature, FEATURES } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useProgramStageTemplates = (programId: string) => {
-    const supportsStoreProgramStageWorkingList = useFeature(FEATURES.storeProgramStageWorkingList);
     const { error, loading, data, refetch } = useDataQuery(
         useMemo(
             () => ({
@@ -22,8 +20,8 @@ export const useProgramStageTemplates = (programId: string) => {
     );
 
     useEffect(() => {
-        supportsStoreProgramStageWorkingList && refetch({ variables: { programId } });
-    }, [refetch, programId, supportsStoreProgramStageWorkingList]);
+        refetch({ variables: { programId } });
+    }, [refetch, programId]);
 
     return {
         error,

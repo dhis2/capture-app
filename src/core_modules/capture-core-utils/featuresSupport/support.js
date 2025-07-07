@@ -1,6 +1,5 @@
 // @flow
 export const FEATURES = Object.freeze({
-    storeProgramStageWorkingList: 'storeProgramStageWorkingList',
     multiText: 'multiText',
     customIcons: 'customIcons',
     newTrackedEntityQueryParam: 'newTrackedEntityQueryParam',
@@ -9,7 +8,6 @@ export const FEATURES = Object.freeze({
     changelogsV2: 'changelogsV2',
     trackerImageEndpoint: 'trackerImageEndpoint',
     trackerFileEndpoint: 'trackerFileEndpoint',
-    trackedEntitiesCSV: 'trackedEntitiesCSV',
     newUIDsSeparator: 'newUIDsSeparator',
     newEntityFilterQueryParam: 'newEntityFilterQueryParam',
     newNoteEndpoint: 'newNoteEndpoint',
@@ -24,7 +22,6 @@ export const FEATURES = Object.freeze({
 
 // The first minor version that supports the feature
 const MINOR_VERSION_SUPPORT = Object.freeze({
-    [FEATURES.storeProgramStageWorkingList]: 40,
     [FEATURES.multiText]: 41,
     [FEATURES.customIcons]: 41,
     [FEATURES.exportablePayload]: 41,
@@ -33,7 +30,6 @@ const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.newTrackedEntityQueryParam]: 41,
     [FEATURES.changelogs]: 41,
     [FEATURES.changelogsV2]: 42,
-    [FEATURES.trackedEntitiesCSV]: 40,
     [FEATURES.newUIDsSeparator]: 41,
     [FEATURES.newEntityFilterQueryParam]: 41,
     [FEATURES.newNoteEndpoint]: 42,
