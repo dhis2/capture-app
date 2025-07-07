@@ -1,11 +1,11 @@
-// @flow
 import React, { type ComponentType, useState } from 'react';
 import { Chip, IconLink24, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
+import type { WithStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
 import { useGroupedLinkedEntities } from './useGroupedLinkedEntities';
 import { LinkedEntitiesViewer } from './LinkedEntitiesViewer.component';
-import type { Props, StyledProps } from './relationshipsWidget.types';
+import type { Props } from './relationshipsWidget.types';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
 
@@ -28,7 +28,7 @@ const RelationshipsWidgetPlain = ({
     onLinkedRecordClick,
     children,
     classes,
-}: StyledProps) => {
+}: Props & WithStyles<typeof styles>) => {
     const [open, setOpenStatus] = useState(true);
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships);
     const { onDeleteRelationship } = useDeleteRelationship({ sourceId });
@@ -91,4 +91,4 @@ const RelationshipsWidgetPlain = ({
     );
 };
 
-export const RelationshipsWidget: ComponentType<Props> = withStyles(styles)(RelationshipsWidgetPlain);
+export const RelationshipsWidget = withStyles(styles)(RelationshipsWidgetPlain) as ComponentType<Props>;

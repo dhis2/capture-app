@@ -1,9 +1,9 @@
-// @flow
 import React, { type ComponentType } from 'react';
+import type { WithStyles } from '@material-ui/core';
 import { withStyles } from '@material-ui/core';
 import { spacersNum, spacers, colors } from '@dhis2/ui';
 import { LinkedEntityTable } from './LinkedEntityTable.component';
-import type { Props, StyledProps } from './linkedEntitiesViewer.types';
+import type { Props } from './linkedEntitiesViewer.types';
 
 const styles = {
     container: {
@@ -26,7 +26,7 @@ const LinkedEntitiesViewerPlain = ({
     onLinkedRecordClick,
     onDeleteRelationship,
     classes,
-}: StyledProps) => (
+}: Props & WithStyles<typeof styles>) => (
     <div
         data-test="relationships"
         className={classes.container}
@@ -48,4 +48,4 @@ const LinkedEntitiesViewerPlain = ({
         })}
     </div>);
 
-export const LinkedEntitiesViewer: ComponentType<Props> = withStyles(styles)(LinkedEntitiesViewerPlain);
+export const LinkedEntitiesViewer = withStyles(styles)(LinkedEntitiesViewerPlain) as ComponentType<Props>;

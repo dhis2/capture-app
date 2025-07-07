@@ -1,6 +1,6 @@
-// @flow
 import React, { useState, useMemo, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
+import type { WithStyles } from '@material-ui/core';
 import {
     DataTable,
     Button,
@@ -9,11 +9,11 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { LinkedEntityTableHeader } from './LinkedEntityTableHeader.component';
 import { LinkedEntityTableBody } from './LinkedEntityTableBody.component';
-import type { Props, StyledProps } from './linkedEntityTable.types';
+import type { Props } from './linkedEntityTable.types';
 
 const DEFAULT_VISIBLE_ROWS_COUNT = 5;
 
-const styles = {
+const styles: Readonly<any> = {
     button: {
         marginTop: `${spacers.dp8}`,
     },
@@ -30,7 +30,7 @@ const LinkedEntityTablePlain = ({
     onDeleteRelationship,
     context,
     classes,
-}: StyledProps) => {
+}: Props & WithStyles<typeof styles>) => {
     const [visibleRowsCount, setVisibleRowsCount] = useState(DEFAULT_VISIBLE_ROWS_COUNT);
 
     const visibleLinkedEntities = useMemo(() =>
@@ -77,4 +77,4 @@ const LinkedEntityTablePlain = ({
     );
 };
 
-export const LinkedEntityTable: ComponentType<Props> = withStyles(styles)(LinkedEntityTablePlain);
+export const LinkedEntityTable = withStyles(styles)(LinkedEntityTablePlain) as ComponentType<Props>;

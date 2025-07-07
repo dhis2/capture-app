@@ -1,6 +1,6 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
+import type { WithStyles } from '@material-ui/core';
 import {
     DataTableBody,
     DataTableRow,
@@ -10,10 +10,10 @@ import {
 import i18n from '@dhis2/d2-i18n';
 import { convertServerToClient } from '../../../../converters';
 import { convert as convertClientToList } from '../../../../converters/clientToList';
-import type { Props, StyledProps } from './linkedEntityTableBody.types';
+import type { Props } from './linkedEntityTableBody.types';
 import { DeleteRelationship } from './DeleteRelationship';
 
-const styles = {
+const styles: Readonly<any> = {
     row: {
         cursor: 'pointer',
     },
@@ -30,7 +30,7 @@ const LinkedEntityTableBodyPlain = ({
     context,
     onDeleteRelationship,
     classes,
-}: StyledProps) => (
+}: Props & WithStyles<typeof styles>) => (
     <DataTableBody dataTest="relationship-table-body">
         {
             linkedEntities
@@ -43,8 +43,7 @@ const LinkedEntityTableBodyPlain = ({
                             className={pendingApiResponse ? classes.rowDisabled : classes.row}
                         >
                             {
-                                // $FlowFixMe flow doesn't like destructering
-                                columns.map(({ id, type, options, convertValue }) => {
+                                columns.map(({ id, type, options, convertValue }: any) => {
                                     const value = type ?
                                         convertClientToList(convertServerToClient(values[id], type), type, options) :
                                         convertValue(baseValues?.[id] ?? context.display[id]);
@@ -59,8 +58,8 @@ const LinkedEntityTableBodyPlain = ({
                                                 <DataTableCell
                                                     className={classes.row}
                                                     key={`${entityId}-${id}`}
-                                                    // $FlowFixMe flow doesn't like destructering
-                                                    onClick={() => !pendingApiResponse && onLinkedRecordClick({ ...context.navigation, ...navigation })}
+                                                    onClick={() => !pendingApiResponse && onLinkedRecordClick({ ...context.navigation, ...navigation } as any)}
+                                                    // @ts-expect-error - UI library expects a ref prop, but it is not defined in the types
                                                     ref={(tableCell) => {
                                                         if (tableCell) {
                                                             if (pendingApiResponse) {
@@ -80,12 +79,12 @@ const LinkedEntityTableBodyPlain = ({
                                         </Tooltip>
                                     );
                                 })}
-                            {context.display.showDeleteButton && (
+                            {context.display.showDeleteButton ? (
                                 <DeleteRelationship
-                                    handleDeleteRelationship={() => onDeleteRelationship({ relationshipId })}
+                                    handleDeleteRelationship={() => onDeleteRelationship({ relationshipId: relationshipId! })}
                                     disabled={pendingApiResponse}
                                 />
-                            )}
+                            ) : null}
                         </DataTableRow>
                     );
                 })
@@ -93,4 +92,4 @@ const LinkedEntityTableBodyPlain = ({
     </DataTableBody>
 );
 
-export const LinkedEntityTableBody: ComponentType<Props> = withStyles(styles)(LinkedEntityTableBodyPlain);
+export const LinkedEntityTableBody = withStyles(styles)(LinkedEntityTableBodyPlain) as ComponentType<Props>;
