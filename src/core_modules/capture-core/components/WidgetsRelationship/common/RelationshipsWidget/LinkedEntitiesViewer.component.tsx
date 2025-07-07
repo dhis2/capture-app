@@ -5,22 +5,21 @@ import { spacersNum, spacers, colors } from '@dhis2/ui';
 import { LinkedEntityTable } from './LinkedEntityTable.component';
 import type { Props } from './linkedEntitiesViewer.types';
 
-const styles: Readonly<any> = {
+const styles = {
     container: {
-        padding: spacers.dp16,
-        paddingTop: spacersNum.dp8,
-        borderTop: `1px solid ${colors.grey300}`,
+        padding: `0 ${spacers.dp16} ${spacers.dp12} ${spacers.dp16}`,
     },
-    groupContainer: {
-        paddingBottom: spacers.dp16,
-    },
-    groupName: {
-        fontSize: '14px',
+    title: {
         fontWeight: 500,
-        color: colors.grey900,
-        paddingBottom: spacers.dp8,
+        fontSize: 16,
+        color: colors.grey800,
+        paddingBottom: spacersNum.dp16,
+    },
+    wrapper: {
+        paddingBottom: spacersNum.dp16,
     },
 };
+
 
 const LinkedEntitiesViewerPlain = ({
     groupedLinkedEntities,
@@ -32,20 +31,21 @@ const LinkedEntitiesViewerPlain = ({
         data-test="relationships"
         className={classes.container}
     >
-        {groupedLinkedEntities.map(({ id, name, linkedEntities, columns, context }) => (
-            <div key={id} className={classes.groupContainer}>
-                <div className={classes.groupName}>
-                    {name}
+        {groupedLinkedEntities?.map((linkedEntityGroup) => {
+            const { id, name, linkedEntities, columns, context } = linkedEntityGroup;
+            return (
+                <div key={id} className={classes.wrapper}>
+                    <div className={classes.title}>{name}</div>
+                    <LinkedEntityTable
+                        linkedEntities={linkedEntities}
+                        columns={columns}
+                        onLinkedRecordClick={onLinkedRecordClick}
+                        onDeleteRelationship={onDeleteRelationship}
+                        context={context}
+                    />
                 </div>
-                <LinkedEntityTable
-                    linkedEntities={linkedEntities}
-                    columns={columns}
-                    onLinkedRecordClick={onLinkedRecordClick}
-                    context={context}
-                    onDeleteRelationship={onDeleteRelationship}
-                />
-            </div>
-        ))}
+            );
+        })}
     </div>);
 
 export const LinkedEntitiesViewer = withStyles(styles)(LinkedEntitiesViewerPlain) as ComponentType<Props>;

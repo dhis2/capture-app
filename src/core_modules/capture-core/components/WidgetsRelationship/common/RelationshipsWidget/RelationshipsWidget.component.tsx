@@ -1,5 +1,5 @@
 import React, { type ComponentType, useState } from 'react';
-import { Chip, spacers } from '@dhis2/ui';
+import { Chip, IconLink24, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import type { WithStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
@@ -9,20 +9,22 @@ import type { Props } from './relationshipsWidget.types';
 import { LoadingMaskElementCenter } from '../../../LoadingMasks';
 import { useDeleteRelationship } from './DeleteRelationship/useDeleteRelationship';
 
-const styles: Readonly<any> = {
-    chipContainer: {
+const styles = {
+    header: {
         display: 'flex',
         alignItems: 'center',
-        gap: spacers.dp4,
+    },
+    icon: {
+        paddingRight: spacers.dp8,
     },
 };
 
 const RelationshipsWidgetPlain = ({
     title,
     relationships,
-    relationshipTypes,
     isLoading,
     sourceId,
+    relationshipTypes,
     onLinkedRecordClick,
     children,
     classes,
@@ -31,34 +33,61 @@ const RelationshipsWidgetPlain = ({
     const groupedLinkedEntities = useGroupedLinkedEntities(sourceId, relationshipTypes, relationships);
     const { onDeleteRelationship } = useDeleteRelationship({ sourceId });
 
-    const relationshipsCount = groupedLinkedEntities.reduce((acc, group) => acc + group.linkedEntities.length, 0);
+    if (isLoading) {
+        return (
+            <Widget
+                header={(
+                    <div className={classes.header}>
+                        <span className={classes.icon}>
+                            <IconLink24 />
+                        </span>
+                    </div>
+                )}
+                onOpen={() => setOpenStatus(true)}
+                onClose={() => setOpenStatus(false)}
+                open={open}
+            >
+                <LoadingMaskElementCenter
+                    containerStyle={{ height: '100px', marginBottom: '50px' }}
+                />
+            </Widget>
+        );
+    }
 
     return (
-        <Widget
-            header={
-                <div className={classes.chipContainer}>
-                    <span>{title}</span>
-                    {relationshipsCount > 0 && (
-                        <Chip dense>
-                            {relationshipsCount}
-                        </Chip>
-                    )}
-                </div>
-            }
-            onOpen={() => setOpenStatus(true)}
-            onClose={() => setOpenStatus(false)}
-            open={open}
+        <div
+            data-test="tracked-entity-relationship-widget"
         >
-            {isLoading && <LoadingMaskElementCenter />}
-            {!isLoading && groupedLinkedEntities.length === 0 && children}
-            {!isLoading && groupedLinkedEntities.length > 0 && (
-                <LinkedEntitiesViewer
-                    groupedLinkedEntities={groupedLinkedEntities}
-                    onLinkedRecordClick={onLinkedRecordClick}
-                    onDeleteRelationship={onDeleteRelationship}
-                />
-            )}
-        </Widget>
+            <Widget
+                header={(
+                    <div className={classes.header}>
+                        <span className={classes.icon}>
+                            <IconLink24 />
+                        </span>
+                        <span>{title}</span>
+                        {relationships && (
+                            <Chip dense>
+                                {relationships.length}
+                            </Chip>
+                        )}
+                    </div>
+                )}
+                onOpen={() => setOpenStatus(true)}
+                onClose={() => setOpenStatus(false)}
+                open={open}
+            >
+                {
+                    groupedLinkedEntities && (
+                        <LinkedEntitiesViewer
+                            groupedLinkedEntities={groupedLinkedEntities}
+                            onLinkedRecordClick={onLinkedRecordClick}
+                            onDeleteRelationship={onDeleteRelationship}
+                        />
+                    )
+                }
+                {children}
+            </Widget>
+        </div>
     );
 };
 
