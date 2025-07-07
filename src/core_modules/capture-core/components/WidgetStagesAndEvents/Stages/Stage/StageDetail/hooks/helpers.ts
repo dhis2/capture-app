@@ -9,6 +9,7 @@ import type { ApiEnrollmentEvent } from '../../../../../../../capture-core-utils
 import { Notes } from '../Notes.component';
 import type { QuerySingleResource } from '../../../../../../utils/api/api.types';
 import { isEventOverdue } from '../../../../../../utils/isEventOverdue';
+import { dataElementTypes } from '../../../../../../metaData';
 
 type FieldKey = { id: string; resolveValue?: (event: ApiEnrollmentEvent) => any };
 
@@ -86,7 +87,7 @@ const groupRecordsByType = async (
             }
         });
         return acc;
-    }, [] as Array<{ type: string; eventId: string; ids: Record<string, unknown> }>);
+    }, [] as Array<{ type: keyof typeof dataElementTypes; eventId: string; ids: Record<string, unknown> }>);
     for await (const item of dataElementsByType) {
         item.ids = await getSubValues(item, querySingleResource, absoluteApiPath);
     }

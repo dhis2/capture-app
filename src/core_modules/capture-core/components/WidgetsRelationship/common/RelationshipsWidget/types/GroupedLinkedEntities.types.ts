@@ -1,53 +1,55 @@
 import { dataElementTypes } from '../../../../../metaData';
 
-export type MetadataBasedColumn = Readonly<{
-    id: string;
-    displayName: string;
-    type: keyof typeof dataElementTypes;
-    options?: Array<{ code: string; name: string }>;
-}>;
+export type MetadataBasedColumn = {
+    readonly id: string;
+    readonly displayName: string;
+    readonly type: keyof typeof dataElementTypes;
+    readonly options?: Array<{ code: string; name: string }>;
+};
 
-export type ManualColumn = Readonly<{
-    id: string;
-    displayName: string;
-    convertValue: (value: any) => any;
-    options?: Array<{ code: string; name: string }>;
-}>;
+export type ManualColumn = {
+    readonly id: string;
+    readonly displayName: string;
+    readonly convertValue: (value: any) => any;
+    readonly options?: Array<{ code: string; name: string }>;
+};
 
 export type TableColumn = MetadataBasedColumn | ManualColumn;
 
-export type NavigationContextTrackedEntity = Readonly<{
-    programId?: string;
-}>;
+export type NavigationContextTrackedEntity = {
+    readonly programId?: string;
+};
 
-export type NavigationContextEvent = Record<string, never>;
+export type NavigationContextEvent = {
+    readonly [key: string]: never;
+};
 
-export type LinkedEntityData = Readonly<{
-    id: string;
-    values: Readonly<{ [id: string]: string | null | undefined }>;
-    baseValues?: {
+export type LinkedEntityData = {
+    readonly id: string;
+    readonly values: { readonly [id: string]: string | null | undefined };
+    readonly baseValues?: {
         relationshipCreatedAt?: string;
         relationshipId: string;
         pendingApiResponse?: boolean;
     };
-    navigation?: {
+    readonly navigation?: {
         programId?: string;
         eventId?: string;
         trackedEntityId?: string;
     };
-}>;
+};
 
-export type Context = Readonly<{
-    navigation: NavigationContextTrackedEntity | NavigationContextEvent;
-    display: Record<string, any>;
-}>;
+export type Context = {
+    readonly navigation: NavigationContextTrackedEntity | NavigationContextEvent;
+    readonly display: Record<string, unknown>;
+};
 
-export type LinkedEntityGroup = Readonly<{
-    id: string;
-    name: string;
-    linkedEntities: readonly LinkedEntityData[];
-    columns: readonly TableColumn[];
-    context: Context;
-}>;
+export type LinkedEntityGroup = {
+    readonly id: string;
+    readonly name: string;
+    readonly linkedEntities: readonly LinkedEntityData[];
+    readonly columns: readonly TableColumn[];
+    readonly context: Context;
+};
 
 export type GroupedLinkedEntities = readonly LinkedEntityGroup[];

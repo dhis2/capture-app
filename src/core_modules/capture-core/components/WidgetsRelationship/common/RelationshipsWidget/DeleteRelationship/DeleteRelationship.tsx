@@ -12,14 +12,8 @@ import {
     colors,
 } from '@dhis2/ui';
 import { IconButton } from 'capture-ui';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-
-type Props = {
-    handleDeleteRelationship: () => void;
-    disabled?: boolean;
-};
-
-type StyledProps = Props & WithStyles<typeof styles>;
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Props } from './DeleteRelationship.types';
 
 const styles: Readonly<any> = {
     tableCell: {
@@ -28,7 +22,7 @@ const styles: Readonly<any> = {
     },
 };
 
-export const DeleteRelationshipPlain = ({ handleDeleteRelationship, disabled, classes }: StyledProps) => {
+export const DeleteRelationshipPlain = ({ handleDeleteRelationship, disabled, classes }: Props & WithStyles<typeof styles>) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     return (
         <>
