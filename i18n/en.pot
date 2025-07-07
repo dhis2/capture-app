@@ -1894,9 +1894,6 @@ msgstr "Working list could not be updated"
 msgid "an error occurred loading the working lists"
 msgstr "an error occurred loading the working lists"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "an error occurred loading Tracked entity instance lists"
-
 msgid "{{count}} selected"
 msgid_plural "{{count}} selected"
 msgstr[0] "{{count}} selected"

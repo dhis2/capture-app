@@ -1,4 +1,3 @@
-import { useFeature, FEATURES } from 'capture-core-utils';
 import { useApiDataQuery } from 'capture-core/utils/reactQueryHelpers';
 import type { WorkingListTemplate } from '../workingListsBase.types';
 
@@ -7,7 +6,6 @@ type DataResponse = {
 };
 
 export const useProgramStageTemplates = (programId: string | undefined) => {
-    const supportsStoreProgramStageWorkingList = useFeature(FEATURES.storeProgramStageWorkingList);
     const { error, isLoading, data } = useApiDataQuery<DataResponse>(
         ['programStageWorkingLists', programId],
         {
@@ -18,7 +16,7 @@ export const useProgramStageTemplates = (programId: string | undefined) => {
             },
         },
         {
-            enabled: !!programId && supportsStoreProgramStageWorkingList,
+            enabled: !!programId,
         },
     );
 

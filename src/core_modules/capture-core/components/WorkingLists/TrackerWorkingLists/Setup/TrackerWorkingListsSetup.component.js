@@ -77,7 +77,6 @@ export const TrackerWorkingListsSetup = ({
         columns,
         sortById,
         sortByDirection,
-        programStageId,
         isDefaultTemplateAltered: storedTemplates?.find(template => template.isDefault)?.isAltered,
     });
 
