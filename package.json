@@ -89,7 +89,7 @@
         "@babel/preset-react": "^7.26.3",
         "@badeball/cypress-cucumber-preprocessor": "17.2.1",
         "@cypress/webpack-preprocessor": "^6.0.0",
-        "@dhis2/cli-app-scripts": "^10.4.0",
+        "@dhis2/cli-app-scripts": "^12.6.4",
         "@dhis2/cli-helpers-engine": "^3.2.1",
         "@dhis2/cli-style": "^10.4.1",
         "@dhis2/cli-utils-cypress": "^9.0.2",
