@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Namwan Chanthavisouk, 2025\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -146,6 +146,11 @@ msgstr "ການລົງທະບຽນ"
 
 msgid "Complete event"
 msgstr "Complete event"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
 
 msgid "A value is required"
 msgstr "ຕ້ອງຕື່ມຄ່າ"
@@ -957,6 +962,12 @@ msgstr "ບໍ່ພົບຜົນໄດ້ຮັບ"
 
 msgid "Choose an organisation unit in the form below"
 msgstr ""
+
+msgid "None selected"
+msgstr "ຍັງບໍ່ໄດ້ເລືອກ"
+
+msgid "Choose an organisation unit"
+msgstr "ເລືອກຫົວໜ່ວຍການຈັດຕັງ"
 
 msgid "Clear selection"
 msgstr "ລົບການເລືອກ"
