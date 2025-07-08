@@ -4,8 +4,6 @@
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
 # Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2022
 # Christian Atavillos, 2023
-# Alison Andrade <aandrade@ippfwhr.org>, 2024
-# Janeth Cruz, 2024
 # Marta Vila <marta@dhis2.org>, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # Manuel Silva <manuel@dhis2.org>, 2024
@@ -14,17 +12,19 @@
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Prabhjot Singh, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # Andres Miguel Rubio, 2025
-# Carlos Tejo Alonso, 2025
 # Pablo Del Médico, 2025
+# Alison Andrade <aandrade@ippfwhr.org>, 2025
+# Carlos Tejo Alonso, 2025
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2025
+# Janeth Cruz, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Pablo Del Médico, 2025\n"
+"Last-Translator: Janeth Cruz, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -158,6 +158,11 @@ msgstr "Inscripción"
 
 msgid "Complete event"
 msgstr "Completar el evento"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
 
 msgid "A value is required"
 msgstr "Se requiere un valor"
@@ -1003,7 +1008,13 @@ msgid "No results found for "
 msgstr "No se encontraron resultados para"
 
 msgid "Choose an organisation unit in the form below"
-msgstr ""
+msgstr "Elija una unidad organizativa en el siguiente formulario"
+
+msgid "None selected"
+msgstr "Ninguno seleccionado"
+
+msgid "Choose an organisation unit"
+msgstr "Elija una unidad organizativa"
 
 msgid "Clear selection"
 msgstr "Despejar selecciones"
@@ -1173,7 +1184,7 @@ msgstr ""
 "protegido. Toda actividad será registrada en el log."
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Cambios no guardados"
 
 msgid "Continue data entry"
 msgstr ""
