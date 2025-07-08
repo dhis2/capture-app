@@ -17,6 +17,8 @@ import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
 import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
 import type { Props } from './scheduleDate.types';
+import { convertFormToClient } from '../../../converters';
+import { dataElementTypes } from '../../../metaData';
 
 const ScheduleDateField = withDefaultFieldContainer()(
     withLabel({
@@ -82,7 +84,8 @@ const ScheduleDatePlain = ({
             };
         }
 
-        const { isWithinValidPeriod, firstValidDate } = isValidPeriod(dateString, expiryPeriod);
+        const occurredAtClient = ((convertFormToClient(dateString, dataElementTypes.DATE): any): string);
+        const { isWithinValidPeriod, firstValidDate } = isValidPeriod(occurredAtClient, expiryPeriod);
 
         if (!isWithinValidPeriod) {
             return {

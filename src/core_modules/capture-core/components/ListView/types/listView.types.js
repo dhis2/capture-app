@@ -60,11 +60,13 @@ export type CustomRowMenuContent = {|
     clickHandler?: ?(rowData: DataSourceItem) => any,
     icon: React$Node,
     label: string,
+    tooltipContent?: (rowData: DataSourceItem) => string | null,
+    tooltipEnabled?: (rowData: DataSourceItem) => boolean,
+    disabled?: (rowData: DataSourceItem) => boolean,
 |};
 export type CustomRowMenuContents = Array<CustomRowMenuContent>;
 
 export type FiltersData = { [id: string]: FilterData };
-
 export type PaginationContextData = {
     onChangePage: Function,
     onChangeRowsPerPage: Function,
