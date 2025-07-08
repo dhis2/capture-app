@@ -1,3 +1,10 @@
+## [103.0.2](https://github.com/dhis2/capture-app/compare/v103.0.1...v103.0.2) (2025-07-08)
+
+
+### Bug Fixes
+
+* [LIBS-718] bump @dhis2-ui/calendar from 10.4.0 to 10.7.6 ([#4191](https://github.com/dhis2/capture-app/issues/4191)) ([ea207a0](https://github.com/dhis2/capture-app/commit/ea207a08d9ed9cf1b3a886c6049b8ba88a75791c))
+
 ## [103.0.1](https://github.com/dhis2/capture-app/compare/v103.0.0...v103.0.1) (2025-07-08)
 
 
