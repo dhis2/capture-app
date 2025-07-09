@@ -10,6 +10,7 @@ import type {
     ClearFilter,
     ClearFilters,
     RemoveFilter,
+    CustomTopBarActions,
     CustomMenuContents,
     CustomRowMenuContents,
     FiltersData,
@@ -39,7 +40,8 @@ export type Props = $ReadOnly<{|
     programId: string,
     orgUnitId: string,
     selectedTemplateId?: string,
-    onChangeTemplate?: (selectedTemplateId?: string) => void
+    onChangeTemplate?: (selectedTemplateId?: string) => void,
+    onOpenBulkDataEntryPlugin: (trackedEntities: Array<string>) => void,
 |}>;
 
 export type TrackerWorkingListsReduxOutputProps = {|
@@ -50,6 +52,7 @@ export type TrackerWorkingListsReduxOutputProps = {|
     customColumnOrder?: CustomColumnOrder,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
+    customTopBarActions?: CustomTopBarActions,
     filters?: FiltersData,
     initialViewConfig?: InitialViewConfig,
     loadedContext?: LoadedContext,

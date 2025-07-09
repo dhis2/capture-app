@@ -26,6 +26,7 @@ type Props = {
     programDataWriteAccess: boolean,
     onUpdateList: (disableClearSelections?: boolean) => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
+    bulkDataEntryIsActive: boolean,
 };
 
 const styles = {
@@ -47,6 +48,16 @@ const styles = {
     },
 };
 
+const getTooltipContent = (programDataWriteAccess: boolean, bulkDataEntryIsActive: boolean) => {
+    if (!programDataWriteAccess) {
+        return i18n.t('You do not have access to bulk complete enrollments');
+    }
+    if (bulkDataEntryIsActive) {
+        return i18n.t('There is a bulk data entry with unsaved changes');
+    }
+    return '';
+};
+
 const CompleteActionPlain = ({
     selectedRows,
     programId,
@@ -54,8 +65,9 @@ const CompleteActionPlain = ({
     programDataWriteAccess,
     onUpdateList,
     removeRowsFromSelection,
+    bulkDataEntryIsActive,
     classes,
-}) => {
+}: Props & CssClasses) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [completeEvents, setCompleteEvents] = useState(true);
     const [openAccordion, setOpenAccordion] = useState(false);
@@ -75,6 +87,8 @@ const CompleteActionPlain = ({
         onUpdateList,
         removeRowsFromSelection,
     });
+    const tooltipContent = getTooltipContent(programDataWriteAccess, bulkDataEntryIsActive);
+    const disabled = !programDataWriteAccess || bulkDataEntryIsActive;
 
     const ModalTextContent = () => {
         // If the data is still loading, show a spinner
@@ -173,12 +187,12 @@ const CompleteActionPlain = ({
     return (
         <>
             <ConditionalTooltip
-                enabled={!programDataWriteAccess}
-                content={i18n.t('You do not have access to bulk complete enrollments')}
+                enabled={disabled}
+                content={tooltipContent}
             >
                 <Button
                     small
-                    disabled={!programDataWriteAccess}
+                    disabled={disabled}
                     onClick={() => setModalIsOpen(true)}
                 >
                     {i18n.t('Complete enrollments')}

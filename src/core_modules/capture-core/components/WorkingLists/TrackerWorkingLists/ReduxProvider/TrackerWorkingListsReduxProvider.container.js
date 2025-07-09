@@ -22,6 +22,7 @@ export const TrackerWorkingListsReduxProvider = ({
     orgUnitId,
     selectedTemplateId,
     onChangeTemplate,
+    onOpenBulkDataEntryPlugin,
 }: Props) => {
     const program = useTrackerProgram(programId);
     const apiTemplates = useApiTemplate();
@@ -120,6 +121,7 @@ export const TrackerWorkingListsReduxProvider = ({
             onAddTemplate={injectCallbacksForAddTemplate}
             onDeleteTemplate={injectCallbacksForDeleteTemplate}
             storeId={storeId}
+            onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
         />
     );
 };

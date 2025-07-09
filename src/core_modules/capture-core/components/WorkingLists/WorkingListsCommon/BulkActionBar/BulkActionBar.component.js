@@ -16,6 +16,7 @@ const styles = {
         gap: '8px',
         display: 'flex',
         alignItems: 'center',
+        overflow: 'scroll',
     },
 };
 

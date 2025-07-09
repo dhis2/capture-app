@@ -5,6 +5,10 @@ Given('you open the main page with Ngelehun and child programe context', () => {
     cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
+Given('you open the main page with the child programe context', () => {
+    cy.visit('#/?programId=IpHINAT79UW&all');
+});
+
 Given('you open the main page with Ngelehun and Malaria Case diagnosis context', () => {
     cy.visit('#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
@@ -15,6 +19,26 @@ Given('you open the main page with Ngelehun and Malaria focus investigation cont
 
 Given('you open the main page with Ngelehun and WHO RMNCH Tracker context', () => {
     cy.visit('#/?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+});
+
+Given('you open the main page with the child program context and configure a program stage working list', () => {
+    cy.visit('#/?programId=IpHINAT79UW&all');
+
+    cy.get('[data-test="tracker-working-lists"]')
+        .within(() => {
+            cy.contains('More filters')
+                .click();
+        });
+
+    cy.get('[data-test="more-filters-menu"]')
+        .within(() => cy.contains('Program stage').click());
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Birth')
+        .click();
+
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
 });
 
 // you open the working lists
@@ -281,4 +305,20 @@ Then('the bulk delete enrollments button should not be visible', () => {
         .find('[data-test="dhis2-uicore-button"]')
         .contains('Delete enrollments')
         .should('not.exist');
+});
+
+Then(/^the other (.*) bulk actions buttons are disabled$/, (actionType) => {
+    cy.get('[data-test="bulk-action-bar"]').within(() => {
+        cy.contains(actionType === 'enrollment' ? 'Delete enrollments' : 'Delete')
+            .should('be.disabled');
+        cy.contains(actionType === 'enrollment' ? 'Complete enrollments' : 'Complete')
+            .should('be.disabled');
+    });
+});
+
+Then('the working list is displayed', () => {
+    cy.get('[data-test="working-list-table-loading"]').should('not.exist');
+    cy.get('[data-test="tracker-working-lists"]')
+        .find('tr')
+        .should('have.length', 16);
 });
