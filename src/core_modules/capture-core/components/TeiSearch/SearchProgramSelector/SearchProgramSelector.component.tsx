@@ -1,10 +1,7 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { OptionsSelectVirtualized } from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import type {
-    VirtualizedOptionConfig,
-} from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import type { Props } from './SearchProgramSelector.types';
 import { withDefaultFieldContainer, withLabel } from '../../FormFields/New';
 
 const SearchProgramField = withDefaultFieldContainer()(withLabel()(OptionsSelectVirtualized));
@@ -19,14 +16,8 @@ const programFieldStyles = {
     },
 };
 
-type Props = {
-    searchId: string,
-    selectedProgramId: ?string,
-    onSetProgram: (searchId: string, programId: ?string) => void,
-    programOptions: Array<VirtualizedOptionConfig>,
-}
 export class SearchProgramSelectorComponent extends React.Component<Props> {
-    onSelectProgram = (programId: ?string) => {
+    onSelectProgram = (programId?: string) => {
         this.props.onSetProgram(this.props.searchId, programId);
     }
     render() {
