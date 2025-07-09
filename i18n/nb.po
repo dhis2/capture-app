@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Merethe Wollan Blisten, 2024
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2024
+# Merethe Wollan Blisten, 2025
 # Karoline Tufte Lien <karoline@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -143,6 +143,11 @@ msgstr "Registrering"
 
 msgid "Complete event"
 msgstr "Fullfør hendelse"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
 
 msgid "A value is required"
 msgstr "En verdi kreves"
@@ -973,6 +978,12 @@ msgstr "Ingen resultater funnet for"
 
 msgid "Choose an organisation unit in the form below"
 msgstr ""
+
+msgid "None selected"
+msgstr "Ingen valgt"
+
+msgid "Choose an organisation unit"
+msgstr "Velg en organisasjonsenhet"
 
 msgid "Clear selection"
 msgstr "Fjern valg"

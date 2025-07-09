@@ -33,7 +33,7 @@ const styles: Readonly<any> = {
 };
 
 const BulkDataEntryActiveComponentPlain = ({ title, onBackToBulkDataEntry, classes }: PlainProps) => (
-    <div className={classes.container}>
+    <div className={classes.container} data-test="widget-bulk-data-entry-active">
         <Widget header={i18n.t('Bulk data entry')} noncollapsible borderless>
             <div className={classes.content}>
                 <div className={classes.title}>

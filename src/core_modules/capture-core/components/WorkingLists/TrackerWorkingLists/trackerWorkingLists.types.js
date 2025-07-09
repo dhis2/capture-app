@@ -4,5 +4,6 @@ export type Props = {|
     orgUnitId: string,
     selectedTemplateId?: string,
     onChangeTemplate?: (selectedTemplateId?: string) => void,
+    onOpenBulkDataEntryPlugin: (trackedEntityIds: Array<string>) => void,
     ...CssClasses,
 |};

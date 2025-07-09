@@ -5,5 +5,6 @@ export type Props = {|
     dataKey?: string,
     onComplete: () => Promise<void>,
     onDefer: () => void,
+    trackedEntityIds?: Array<string>,
     ...CssClasses,
 |};

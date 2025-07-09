@@ -3,10 +3,9 @@ import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react'
 import i18n from '@dhis2/d2-i18n';
 import { v4 as uuid } from 'uuid';
 import { EventWorkingListsRowMenuSetup } from '../RowMenuSetup';
-import { DownloadDialog } from '../../WorkingListsCommon';
+import { DownloadDialog, useSelectedRowsController } from '../../WorkingListsCommon';
 import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Props } from './EventWorkingListsViewMenuSetup.types';
-import { useSelectedRowsController } from '../../WorkingListsBase/BulkActionBar';
 import { EventBulkActions } from '../../EventWorkingListsCommon/EventBulkActions';
 
 export const EventWorkingListsViewMenuSetup = ({

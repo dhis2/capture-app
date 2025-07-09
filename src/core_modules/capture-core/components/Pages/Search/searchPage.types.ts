@@ -3,5 +3,6 @@ export type Props = {
     orgUnitId: string;
     onNavigateToMainPage: () => void;
     showBulkDataEntryPlugin: boolean;
-    setShowBulkDataEntryPlugin: (show: boolean) => void;
+    onOpenBulkDataEntryPlugin: () => void;
+    onCloseBulkDataEntryPlugin: () => void;
 };

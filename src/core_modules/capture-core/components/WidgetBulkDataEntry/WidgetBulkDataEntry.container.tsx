@@ -4,16 +4,16 @@ import { BulkDataEntryIdle } from './BulkDataEntryIdle';
 import { BulkDataEntryActive } from './BulkDataEntryActive';
 import { useBulkDataEntryConfigurations } from '../common/bulkDataEntry';
 
-export const WidgetBulkDataEntry = ({ programId, setShowBulkDataEntryPlugin }: Props) => {
+export const WidgetBulkDataEntry = ({ programId, onOpenBulkDataEntryPlugin }: Props) => {
     const { activeList, setActiveList, bulkDataEntryConfigurations, isError, isLoading } =
         useBulkDataEntryConfigurations(programId);
 
     const onSelectConfiguration = useCallback(
         async (configKey: string) => {
             await setActiveList(configKey);
-            setShowBulkDataEntryPlugin(true);
+            onOpenBulkDataEntryPlugin();
         },
-        [setShowBulkDataEntryPlugin, setActiveList],
+        [onOpenBulkDataEntryPlugin, setActiveList],
     );
 
     if (!programId || isError || isLoading) {
@@ -24,7 +24,7 @@ export const WidgetBulkDataEntry = ({ programId, setShowBulkDataEntryPlugin }: P
         return (
             <BulkDataEntryActive
                 title={activeList.title}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
             />
         );
     }

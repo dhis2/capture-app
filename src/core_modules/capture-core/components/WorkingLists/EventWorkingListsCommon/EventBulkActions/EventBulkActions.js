@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { BulkActionBar } from '../../WorkingListsBase/BulkActionBar';
+import { BulkActionBar, BulkDataEntryAction } from '../../WorkingListsCommon';
 import { CompleteAction, DeleteAction } from './Actions';
 import type { ProgramStage } from '../../../../metaData';
 
@@ -10,6 +10,9 @@ type Props = {|
     stage: ProgramStage,
     onUpdateList: (disableClearSelection?: boolean) => void,
     removeRowsFromSelection: (rows: Array<string>) => void,
+    programId?: string,
+    onOpenBulkDataEntryPlugin?: () => void,
+    bulkDataEntryIsActive?: boolean,
 |}
 
 export const EventBulkActions = ({
@@ -18,6 +21,9 @@ export const EventBulkActions = ({
     onClearSelection,
     removeRowsFromSelection,
     onUpdateList,
+    programId,
+    onOpenBulkDataEntryPlugin,
+    bulkDataEntryIsActive,
 }: Props) => {
     const selectedRowsCount = Object.keys(selectedRows).length;
 
@@ -30,16 +36,25 @@ export const EventBulkActions = ({
             selectedRowsCount={selectedRowsCount}
             onClearSelection={onClearSelection}
         >
+            {programId && onOpenBulkDataEntryPlugin && (
+                <BulkDataEntryAction
+                    programId={programId}
+                    onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+                    selectionInProgress
+                />
+            )}
             <CompleteAction
                 selectedRows={selectedRows}
-                disabled={!stage.access.data.write}
+                stageDataWriteAccess={stage.access.data.write}
+                bulkDataEntryIsActive={bulkDataEntryIsActive}
                 onUpdateList={onUpdateList}
                 removeRowsFromSelection={removeRowsFromSelection}
             />
 
             <DeleteAction
                 selectedRows={selectedRows}
-                disabled={!stage.access.data.write}
+                stageDataWriteAccess={stage.access.data.write}
+                bulkDataEntryIsActive={bulkDataEntryIsActive}
                 onUpdateList={onUpdateList}
             />
         </BulkActionBar>

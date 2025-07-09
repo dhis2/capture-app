@@ -16,6 +16,7 @@ const BulkDataEntryPluginPlain = ({
     dataKey,
     onComplete,
     onDefer,
+    trackedEntityIds,
     classes,
 }: Props) => {
     const [pluginSize, setPluginSize] = useState({ width: undefined, height: undefined });
@@ -50,6 +51,7 @@ const BulkDataEntryPluginPlain = ({
                 dataKey={dataKey}
                 onComplete={onComplete}
                 onDefer={onDefer}
+                trackedEntityIds={trackedEntityIds}
             />
         </div>
     );

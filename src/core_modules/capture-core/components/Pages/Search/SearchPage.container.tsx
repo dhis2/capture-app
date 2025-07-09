@@ -34,6 +34,14 @@ export const SearchPage: ComponentType<Record<string, never>> = () => {
         [dispatch]);
     const preselectedProgramId = usePreselectedProgram(programId);
 
+    const onCloseBulkDataEntryPlugin = useCallback(() => (
+        setShowBulkDataEntryPlugin(false)
+    ), [setShowBulkDataEntryPlugin]);
+
+    const onOpenBulkDataEntryPlugin = useCallback(() => (
+        setShowBulkDataEntryPlugin(true)
+    ), [setShowBulkDataEntryPlugin]);
+
     useEffect(() => {
         if (programId && (programId !== preselectedProgramId)) {
             onNavigateToMainPage();
@@ -51,7 +59,8 @@ export const SearchPage: ComponentType<Record<string, never>> = () => {
                 orgUnitId={orgUnitId}
                 onNavigateToMainPage={onNavigateToMainPage}
                 showBulkDataEntryPlugin={showBulkDataEntryPlugin}
-                setShowBulkDataEntryPlugin={setShowBulkDataEntryPlugin}
+                onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
+                onCloseBulkDataEntryPlugin={onCloseBulkDataEntryPlugin}
             />
         </ResultsPageSizeContext.Provider>
     );

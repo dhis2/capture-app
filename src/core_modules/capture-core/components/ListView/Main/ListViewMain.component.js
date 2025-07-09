@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { withFilters } from './withFilters';
 import { ListPagination } from '../Pagination';
 import { ColumnSelector } from '../ColumnSelector';
+import { Actions } from '../Actions';
 import { withEndColumnMenu } from '../withEndColumnMenu';
 import { DialogLoadingMask } from '../../LoadingMasks/DialogLoadingMask.component';
 import { OnlineList } from '../../List';
@@ -23,7 +24,7 @@ const getStyles = (theme: Theme) => ({
         alignItems: 'center',
         flexWrap: 'wrap',
     },
-    topBarButtonContainer: {
+    topBarRightContainer: {
         display: 'flex',
         gap: '6px',
         alignItems: 'center',
@@ -44,6 +45,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
             filters,
             columns,
             customMenuContents,
+            customTopBarActions,
             onSetColumnOrder,
             isSelectionInProgress,
             bulkActionBarComponent,
@@ -62,7 +64,8 @@ class ListViewMainPlain extends React.PureComponent<Props> {
                 >
                     {filters}
                 </div>
-                <div className={classes.topBarButtonContainer}>
+                <div className={classes.topBarRightContainer}>
+                    <Actions customTopBarActions={customTopBarActions} />
                     <ColumnSelector
                         onSave={onSetColumnOrder}
                         columns={columns}
@@ -97,6 +100,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
             onRowSelect,
             onSelectAll,
             customRowMenuContents,
+            customTopBarActions,
             isSelectionInProgress,
             ...passOnProps
         } = this.props;
@@ -111,6 +115,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
                 showSelectCheckBox
                 isSelectionInProgress={isSelectionInProgress}
                 customRowMenuContents={customRowMenuContents}
+                customTopBarActions={customTopBarActions}
                 onRowClick={onClickListRow}  // TODO: Fix row click naming for the online and offline list
                 onRowSelect={onRowSelect}
                 onSelectAll={onSelectAll}

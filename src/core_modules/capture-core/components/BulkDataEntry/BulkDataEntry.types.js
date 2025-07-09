@@ -4,8 +4,9 @@ import { bulkDataEntryBreadcrumbsKeys } from '../Breadcrumbs/BulkDataEntryBreadc
 export type Props = {
     programId: string,
     page: $Values<typeof bulkDataEntryBreadcrumbsKeys>,
-    setShowBulkDataEntryPlugin: (show: boolean) => void,
+    onCloseBulkDataEntryPlugin: () => void,
     displayFrontPageList?: boolean,
     trackedEntityName?: string,
+    trackedEntityIds?: Array<string>,
     ...CssClasses,
 };

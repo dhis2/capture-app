@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2025\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -145,6 +145,11 @@ msgstr "التسجيل"
 
 msgid "Complete event"
 msgstr "إكمال الحدث"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
 
 msgid "A value is required"
 msgstr "قيمة مطلوبة"
@@ -955,6 +960,12 @@ msgid "No results found for "
 msgstr ""
 
 msgid "Choose an organisation unit in the form below"
+msgstr ""
+
+msgid "None selected"
+msgstr "غير محدد"
+
+msgid "Choose an organisation unit"
 msgstr ""
 
 msgid "Clear selection"

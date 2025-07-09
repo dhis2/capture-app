@@ -140,6 +140,10 @@ Then(/^the user clicks the element containing the text: (.*)$/, (text) => {
     cy.contains(text).click();
 });
 
+When('the user click the {string} button', (text) => {
+    cy.get('[data-test="dhis2-uicore-button"]').contains(text).click();
+});
+
 Then(/^the current url is (.*)$/, (url) => {
     cy.url().should('eq', `${Cypress.config().baseUrl}${url}`);
 });

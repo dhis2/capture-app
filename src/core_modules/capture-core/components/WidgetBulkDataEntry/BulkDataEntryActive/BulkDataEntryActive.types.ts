@@ -1,6 +1,6 @@
 export type Props = {
     title: string;
-    setShowBulkDataEntryPlugin: (show: boolean) => void;
+    onOpenBulkDataEntryPlugin: () => void;
 };
 
 type CssClasses = {
