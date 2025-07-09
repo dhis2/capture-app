@@ -47,6 +47,7 @@ export type ColumnConfig = {
     multiValueFilter?: boolean,
     filterHidden?: boolean,
     additionalColumn?: boolean,
+    unique?: boolean,
 };
 
 export type ColumnConfigs = Array<ColumnConfig>;

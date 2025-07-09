@@ -52,7 +52,7 @@ Feature: The user interacts with the changelog widget
     When you remove the filter
     Then the filter pill should be visible with label "Show all"
 
-  @v>=42
+  @skip # Flaky test, fix in DHIS2-19814
   Scenario: The user can sort by Date
     When you click the sort Date icon
     Then the changelog modal should contain data

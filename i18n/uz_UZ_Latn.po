@@ -1,11 +1,12 @@
 # 
 # Translators:
+# Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
 # Yury Rogachev <yury@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -32,17 +33,26 @@ msgstr ""
 "maxfiylik rejimi) qoʼllab quvvatlanmasligi. Tafsilotlar uchun jurnalga "
 "qarang."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
-"Siz ayni shu domenda Nazorat Ilovasining boshqa versiyasini ochdingiz. "
-"Hozirda Nazorat Ilovasi faqat bitta versiyani bir vaqtda (bir xil "
-"ddomendagi) ishlashini qoʼllab quvvatlaydi. Ushbu versiyani qayta "
-"ishlatmoqchi boʼlsangiz, Iltimos, sahifani yangilang, ammo boshqa versiyalar"
-" yopilishini unutmang."
+
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "Search"
+msgstr "Izlash"
 
 msgid "Enrollment dashboard"
 msgstr ""
@@ -55,24 +65,6 @@ msgstr "Hodisa/tadbirni tahrirlang"
 
 msgid "New event"
 msgstr "Yangi hodisa"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "Izlash"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -152,6 +144,11 @@ msgstr "Roʼyxatga olish"
 msgid "Complete event"
 msgstr ""
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "Qiymat talab qilinadi"
 
@@ -215,6 +212,9 @@ msgstr "Vakolat berilgan shaxs"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr ""
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -239,6 +239,9 @@ msgid "Completed"
 msgstr "Toʼldirildi"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -616,19 +619,6 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr ""
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -700,6 +690,19 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
 msgid "Page is missing required values from URL"
@@ -919,6 +922,12 @@ msgid "Fill in at least {{count}} attribute to search"
 msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
 
+msgid "Missing search criteria"
+msgstr ""
+
+msgid "Back to search"
+msgstr "Qidiruvga qaytish"
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -948,6 +957,12 @@ msgstr "Oʼzaro aloqa kiritish"
 
 msgid "No results found for "
 msgstr ""
+
+msgid "Choose an organisation unit in the form below"
+msgstr ""
+
+msgid "None selected"
+msgstr "Biror nima tanlanmagan"
 
 msgid "Choose an organisation unit"
 msgstr ""
@@ -999,6 +1014,9 @@ msgid ""
 "that use type "
 msgstr ""
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr "Barcha dasturlarda qidirish"
 
@@ -1026,9 +1044,6 @@ msgstr ""
 "Qidiruv soʼzlarini oʼzgartirib, qidirilayotgan axborotni qayta qidiruvga "
 "topshirishingiz mumkin."
 
-msgid "Back to search"
-msgstr "Qidiruvga qaytish"
-
 msgid "An error has occurred"
 msgstr "Xatolik yuz berdi"
 
@@ -1036,9 +1051,6 @@ msgid "Too many results"
 msgstr "Natija juda koʼp"
 
 msgid "Cannot search in all programs"
-msgstr ""
-
-msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
@@ -1105,6 +1117,12 @@ msgstr ""
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
+msgstr ""
+
+msgid "Unsaved changes"
+msgstr "Saqlanmagan oʼzgartirishlar"
+
+msgid "Continue data entry"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1229,9 +1247,6 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Please provide an valid organisation unit"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1316,9 +1331,12 @@ msgid_plural ""
 "The scheduled date is {{count}} days {{position}} the suggested date."
 msgstr[0] ""
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgstr[0] ""
 
 msgid "Schedule date / Due date"
@@ -1342,10 +1360,12 @@ msgstr ""
 msgid "Save note"
 msgstr "Izohni saqlash"
 
+msgid "Edit {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
 msgid " Loading..."
@@ -1670,7 +1690,7 @@ msgid "Details (Advanced)"
 msgstr ""
 
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Номаълум хатолик юз берди"
 
 msgid "An error occurred while completing events"
 msgstr ""
@@ -1686,6 +1706,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"

@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Merethe Wollan Blisten, 2024
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2024
+# Merethe Wollan Blisten, 2025
 # Karoline Tufte Lien <karoline@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -33,16 +33,26 @@ msgstr ""
 "En mulig årsak til dette er at nettleseren eller modusen (f.eks. "
 "Personvernmodus) ikke støttes. Se logg for detaljer."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
-"Du åpnet en annen versjon av Capture-appen i samme domene. Foreløpig støtter"
-" Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
-"denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
-"at dette vil lukke andre versjoner."
+
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Aktive registreringer"
+
+msgid "Completed enrollments"
+msgstr "Fullførte registreringer"
+
+msgid "Cancelled enrollments"
+msgstr "Avbrutte registreringer"
+
+msgid "Search"
+msgstr "Søk"
 
 msgid "Enrollment dashboard"
 msgstr "Registreringsdashbord"
@@ -55,24 +65,6 @@ msgstr "Rediger hendelse"
 
 msgid "New event"
 msgstr "Ny hendelse"
-
-msgid "Active enrollments"
-msgstr "Aktive registreringer"
-
-msgid "Completed enrollments"
-msgstr "Fullførte registreringer"
-
-msgid "Cancelled enrollments"
-msgstr "Avbrutte registreringer"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}}-liste"
-
-msgid "Search"
-msgstr "Søk"
-
-msgid "Working List"
-msgstr "Arbeidsliste"
 
 msgid "Event list"
 msgstr "Hendelsesliste"
@@ -152,6 +144,11 @@ msgstr "Registrering"
 msgid "Complete event"
 msgstr "Fullfør hendelse"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "En verdi kreves"
 
@@ -215,6 +212,9 @@ msgstr "Tildelt programbruker"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Lagrer i {{programName}} i {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -241,6 +241,9 @@ msgid "Please add or cancel the note before saving the event"
 msgstr ""
 "Du må legge til eller avbryt registreringen i notatet før hendelsen kan "
 "lagres. "
+
+msgid "Please provide an valid organisation unit"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "Lagre og legg til en til"
@@ -976,6 +979,12 @@ msgstr "Ingen resultater funnet for"
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Ingen valgt"
+
+msgid "Choose an organisation unit"
+msgstr "Velg en organisasjonsenhet"
+
 msgid "Clear selection"
 msgstr "Fjern valg"
 
@@ -1136,6 +1145,12 @@ msgstr ""
 "Du må oppgi en grunn for å se etter registreringer i dette beskyttede "
 "programmet. All aktivitet vil bli logget."
 
+msgid "Unsaved changes"
+msgstr "Ikke lagrede endringer"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Registreringshandlinger"
 
@@ -1267,9 +1282,6 @@ msgstr "Legg til koordinater"
 
 msgid "Add area"
 msgstr "Legg til område"
-
-msgid "Please provide an valid organisation unit"
-msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisasjonsenheten kunne ikke hentes. Prøv igjen senere."

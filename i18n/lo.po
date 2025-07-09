@@ -2,17 +2,17 @@
 # Translators:
 # Philip Larsen Donnelly, 2022
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2024
-# Namwan Chanthavisouk, 2024
 # Saysamone Sibounma, 2024
 # Somkhit Bouavong <bouavongk@gmail.com>, 2024
 # Viktor Varland <viktor@dhis2.org>, 2025
+# Namwan Chanthavisouk, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
+"Last-Translator: Namwan Chanthavisouk, 2025\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,16 +36,26 @@ msgstr ""
 "ເຫດຜົນທີ່ເປັນໄປໄດ້ແມ່ນຍ້ອນບຣາວເຊີ ຫຼື ຮູບແບບ (ເຊັ່ນ: ຮູບແບບຄວາມເປັນສ່ວນຕົວ) "
 "ບໍ່ໄດ້ຖືກຮອງຮັບ. ເບິ່ງລາຍລະອຽດເພີ່ມເຕີມ."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
-"ທ່ານໄດ້ເປີດໃຊ້ເວີຊັນອື່ນຂອງແອັບ Capture ໃນໂດເມນດຽວກັນ. ໃນປັດຈຸບັນ, ແອັບ "
-"Capture ພຽງແຕ່ຮອງຮັບການໃຊ້ງານໃນເວີຊັນດຽວກັນ (ໃນໂດເມນດຽວກັນ). "
-"ກະ​ລຸ​ນາ​ໂຫຼດ​ຫນ້າ​ນີ້​ຄືນ​ໃຫມ່​ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ຕ້ອງ​ການ​ທີ່​ຈະ​ນໍາ​ໃຊ້​ເວີຊັນນີ້​ອີກ​ເທື່ອ​ຫນຶ່ງ​,"
-" ແຕ່​ລະວັງໄວ້ວ່າມັນຈະ​ປິດ​ເວີຊັນ​ອື່ນ​."
+
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "ການລົງທະບຽນທີ່ຍັງເຄື່ອນໄຫວ"
+
+msgid "Completed enrollments"
+msgstr "ສໍາເລັດການລົງທະບຽນ"
+
+msgid "Cancelled enrollments"
+msgstr "ຍົກເລີກການລົງທະບຽນ"
+
+msgid "Search"
+msgstr "ຄົນຫາ"
 
 msgid "Enrollment dashboard"
 msgstr ""
@@ -58,24 +68,6 @@ msgstr "ແກ້ໄຂເຫດການ"
 
 msgid "New event"
 msgstr "ກໍລະນີໃໝ່"
-
-msgid "Active enrollments"
-msgstr "ການລົງທະບຽນທີ່ຍັງເຄື່ອນໄຫວ"
-
-msgid "Completed enrollments"
-msgstr "ສໍາເລັດການລົງທະບຽນ"
-
-msgid "Cancelled enrollments"
-msgstr "ຍົກເລີກການລົງທະບຽນ"
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "ຄົນຫາ"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -155,6 +147,11 @@ msgstr "ການລົງທະບຽນ"
 msgid "Complete event"
 msgstr "Complete event"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "ຕ້ອງຕື່ມຄ່າ"
 
@@ -218,6 +215,9 @@ msgstr "ຜູ້ມອບໝາຍ"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "ບັນທຶກໃສ່ {{programName}} ໃນ {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -241,6 +241,9 @@ msgstr "ສໍາເລັດແລ້ວ"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "ກະລຸນາເພີ່ມ ຫຼື ຍົກເລີກຂໍ້ຄວາມກ່ອນບັນທຶກເຫດການ"
+
+msgid "Please provide an valid organisation unit"
+msgstr ""
 
 msgid "Save and add another"
 msgstr "ບັນທຶກ ແລະ ເພີ່ມອີກ"
@@ -960,6 +963,12 @@ msgstr "ບໍ່ພົບຜົນໄດ້ຮັບ"
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "ຍັງບໍ່ໄດ້ເລືອກ"
+
+msgid "Choose an organisation unit"
+msgstr "ເລືອກຫົວໜ່ວຍການຈັດຕັງ"
+
 msgid "Clear selection"
 msgstr "ລົບການເລືອກ"
 
@@ -1114,6 +1123,12 @@ msgstr ""
 "ທ່ານຕ້ອງໃຫ້ເຫດຜົນໃນການກວດສອບການລົງທະບຽນໃນໂປແກຣມທີ່ຖືກປ້ອງກັນນີ້. "
 "ການເຄື່ອນໄຫວທັງໝົດຈະຖືກບັນທຶກ."
 
+msgid "Unsaved changes"
+msgstr "ການປ່ຽນແປງທີ່ບໍ່ໄດ້ບັນທຶກໄວ້"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "ການປະຕິບັດການລົງທະບຽນ"
 
@@ -1239,9 +1254,6 @@ msgstr "ເພີ່ມຈຸດປະສານງານ"
 
 msgid "Add area"
 msgstr "ເພີ່ມພື້ນທີ່"
-
-msgid "Please provide an valid organisation unit"
-msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "ບໍ່ສາມາດດຶງຂໍ້ມູນຫົວໜ່ວຍອົງການຈັດຕັ້ງໄດ້. ກະລຸນາລອງໃໝ່ພາຍຫຼັງ."

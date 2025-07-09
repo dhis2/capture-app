@@ -11,7 +11,7 @@ import type {
     CachedProgramTrackedEntityAttribute,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
-} from '../../../../storageControllers/cache.types';
+} from '../../../../storageControllers';
 import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section, DataElement } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
@@ -266,7 +266,7 @@ export class EnrollmentFactory {
 
                 if (this.dataEntryFormConfig) {
                     // $FlowFixMe
-                    this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
+                    await this.dataEntryFormConfig.asyncForEach(async (formConfigSection) => {
                         const attributes = formConfigSection.elements.reduce((acc, element) => {
                             if (element.type === FormFieldTypes.PLUGIN) {
                                 const fieldMap = element
@@ -310,7 +310,7 @@ export class EnrollmentFactory {
                     });
                 } else if (cachedProgramSections) {
                     // $FlowFixMe
-                    cachedProgramSections.asyncForEach(async (programSection) => {
+                    await cachedProgramSections.asyncForEach(async (programSection) => {
                         section = await this._buildSection(
                             programSection.trackedEntityAttributes.map(id => trackedEntityAttributeDictionary[id]),
                             programSection.displayFormName,

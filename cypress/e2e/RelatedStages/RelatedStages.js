@@ -65,15 +65,21 @@ When('you unlink the Baby Postnatal linked event', () => {
 });
 
 And('you delete the Birth event', () => {
-    cy.get('[data-test="overflow-button"]')
-        .eq(0)
-        .click();
-    cy.get('[data-test="stages-and-events-delete"]')
-        .click();
-    cy.get('[data-test="dhis2-uicore-modal"]').within(() => {
-        cy.contains('button', 'Yes, delete event')
-            .click();
-    });
+    cy.buildApiUrl('tracker', 'enrollments/EOxeNf2MdBf?fields=events[event,programStage]')
+        .then(url => cy.request(url))
+        .then(({ body }) => {
+            const { events } = body;
+
+            if (events) {
+                const eventToDelete = events.find(event => event.programStage === 'A03MvHHogjR');
+                if (eventToDelete) {
+                    cy.buildApiUrl('tracker?async=false&importStrategy=DELETE').then((eventUrl) => {
+                        cy.request('POST', eventUrl, { events: [eventToDelete] });
+                        cy.reload();
+                    });
+                }
+            }
+        });
 });
 
 And('you open the Birth event edit page', () => {
@@ -140,7 +146,7 @@ And('you click the Enter details action button', () => {
         .click();
 });
 
-Then('you can see the Baby postnatal new event form where you can enter details', () => {
+Then('you can see the Baby postnatal new event form', () => {
     cy.get('[data-test="edit-event-report-tab"]')
         .should('contain', 'Report');
     cy.get('[data-test="edit-event-schedule-tab"]')
@@ -232,8 +238,6 @@ And(/^you click the save (.*) submit button$/, (TEType) => {
 
 And('you navigate to the Enrollment dashboard', () => {
     cy.contains('Enrollment dashboard')
-        .click();
-    cy.contains('Yes, discard changes')
         .click();
 });
 

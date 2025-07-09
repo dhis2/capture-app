@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-02-10T15:54:20.259Z\n"
+"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2025\n"
 "Language-Team: Central Kurdish (https://app.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -33,16 +33,26 @@ msgstr ""
 "یەکێک لە هۆکارەکان بریتیە لە تایبەتمەندی بڕاوسەرەکەت پاڵپشتی ئەمە ناکات. "
 "تکایە سەیری لۆگ فایل بکە بۆ زانیار زیاتر"
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
-"وەشانێکی جیاوازت لە پرۆگرامی کاپچەر کردۆتەوە لە هەمان دۆمەین. لە ئێستادا "
-"پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
-"تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
-"ئەم کردارە وەشانەکانیتر دادەخات"
+
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr ""
+
+msgid "Completed enrollments"
+msgstr ""
+
+msgid "Cancelled enrollments"
+msgstr ""
+
+msgid "Search"
+msgstr "گەڕان"
 
 msgid "Enrollment dashboard"
 msgstr ""
@@ -55,24 +65,6 @@ msgstr "حاڵەتەکە دەستکاری بکە"
 
 msgid "New event"
 msgstr "رووداوي نوي"
-
-msgid "Active enrollments"
-msgstr ""
-
-msgid "Completed enrollments"
-msgstr ""
-
-msgid "Cancelled enrollments"
-msgstr ""
-
-msgid "{{trackedEntityName}} list"
-msgstr ""
-
-msgid "Search"
-msgstr "گەڕان"
-
-msgid "Working List"
-msgstr ""
 
 msgid "Event list"
 msgstr ""
@@ -215,6 +207,9 @@ msgstr "نوێنەر"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr ""
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -237,6 +232,9 @@ msgid "Completed"
 msgstr "تەواوبوو"
 
 msgid "Please add or cancel the note before saving the event"
+msgstr ""
+
+msgid "Please provide an valid organisation unit"
 msgstr ""
 
 msgid "Save and add another"
@@ -615,19 +613,6 @@ msgstr ""
 msgid "Close the notice"
 msgstr ""
 
-msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
-
-msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
-
-msgid "Program with id \"{{programId}}\" does not exist"
-msgstr ""
-
-msgid ""
-"An error occurred while fetching enrollments. Please enter a valid url."
-msgstr ""
-
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -699,6 +684,19 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid "Program with id \"{{programId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"An error occurred while fetching enrollments. Please enter a valid url."
 msgstr ""
 
 msgid "Page is missing required values from URL"
@@ -918,6 +916,12 @@ msgid_plural "Fill in at least {{count}} attribute to search"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Missing search criteria"
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
 msgid "Could not retrieve metadata. Please try again later."
 msgstr ""
 
@@ -948,7 +952,7 @@ msgstr "پەوەندی درووستبکە"
 msgid "No results found for "
 msgstr ""
 
-msgid "Choose an organisation unit"
+msgid "Choose an organisation unit in the form below"
 msgstr ""
 
 msgid "Clear selection"
@@ -996,6 +1000,9 @@ msgid ""
 "that use type "
 msgstr ""
 
+msgid "No searchable attributes for {{trackedEntityName}}"
+msgstr ""
+
 msgid "Search in all programs"
 msgstr ""
 
@@ -1021,9 +1028,6 @@ msgid ""
 "looking for."
 msgstr ""
 
-msgid "Back to search"
-msgstr ""
-
 msgid "An error has occurred"
 msgstr ""
 
@@ -1031,9 +1035,6 @@ msgid "Too many results"
 msgstr ""
 
 msgid "Cannot search in all programs"
-msgstr ""
-
-msgid "Missing search criteria"
 msgstr ""
 
 msgid "Results found"
@@ -1100,6 +1101,12 @@ msgstr ""
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
 "program. All activity will be logged."
+msgstr ""
+
+msgid "Unsaved changes"
+msgstr "گۆڕانکاریە تۆمارنەکراوەکان"
+
+msgid "Continue data entry"
 msgstr ""
 
 msgid "Enrollment actions"
@@ -1224,9 +1231,6 @@ msgstr ""
 msgid "Add area"
 msgstr ""
 
-msgid "Please provide an valid organisation unit"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1312,9 +1316,12 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "There are {{count}} scheduled event in {{orgUnitName}} on this day."
+msgid ""
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgid_plural ""
-"There are {{count}} scheduled event in {{orgUnitName}} on this day."
+"There are {{count}} scheduled event in this program in {{orgUnitName}} on "
+"this day."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1339,10 +1346,12 @@ msgstr ""
 msgid "Save note"
 msgstr ""
 
+msgid "Edit {{trackedEntityName}}"
+msgstr ""
+
 msgid ""
-"Change information about this {{trackedEntityName}} here. To change "
-"information about this enrollment, use the Edit button in the in the "
-"Enrollment box on this dashboard"
+"Change information about this {{trackedEntityName}} here. Information about "
+"this enrollment can be edited in the Enrollment widget."
 msgstr ""
 
 msgid " Loading..."
@@ -1684,6 +1693,9 @@ msgstr ""
 
 msgid ""
 "This cannot be undone. Are you sure you want to delete the selected events?"
+msgstr ""
+
+msgid "Owner organisation unit"
 msgstr ""
 
 msgid "Registration Date"

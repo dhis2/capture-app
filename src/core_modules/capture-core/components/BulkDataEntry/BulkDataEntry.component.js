@@ -28,6 +28,9 @@ const BulkDataEntryPlain = ({
         onCloseBulkDataEntryPlugin();
     }, [onCloseBulkDataEntryPlugin, removeActiveList]);
 
+    const onDefer = useCallback(() => {
+        onCloseBulkDataEntryPlugin();
+    }, [onCloseBulkDataEntryPlugin]);
 
     if (!activeList) {
         return null;
@@ -36,7 +39,7 @@ const BulkDataEntryPlain = ({
     return (
         <div className={classes.container}>
             <BulkDataEntryBreadcrumb
-                onBackToOriginPage={onCloseBulkDataEntryPlugin}
+                onBackToOriginPage={onDefer}
                 programId={programId}
                 displayFrontPageList={displayFrontPageList}
                 page={page}
@@ -46,7 +49,7 @@ const BulkDataEntryPlain = ({
                 dataKey={activeList.dataKey}
                 pluginSource={activeList.pluginSource}
                 onComplete={onComplete}
-                onDefer={onCloseBulkDataEntryPlugin}
+                onDefer={onDefer}
                 trackedEntityIds={trackedEntityIds}
             />
         </div>

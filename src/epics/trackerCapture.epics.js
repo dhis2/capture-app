@@ -168,7 +168,6 @@ import { updateTeiEpic, updateTeiSucceededEpic, updateTeiFailedEpic } from '../c
 import {
     initTeiViewEpic,
     updateTeiListEpic,
-    retrieveTEITemplatesEpic,
     updateTEITemplateEpic,
     addTEITemplateEpic,
     deleteTEITemplateEpic,
@@ -176,7 +175,7 @@ import {
     addProgramStageTemplateEpic,
     deleteProgramStageTemplateEpic,
     updateProgramStageTemplateEpic,
-} from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
+} from '../core_modules/capture-core/components/WorkingLists/TrackerWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
@@ -251,7 +250,6 @@ export const epics = combineEpics(
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
-    retrieveTEITemplatesEpic,
     updateTEITemplateEpic,
     addTEITemplateEpic,
     deleteTEITemplateEpic,

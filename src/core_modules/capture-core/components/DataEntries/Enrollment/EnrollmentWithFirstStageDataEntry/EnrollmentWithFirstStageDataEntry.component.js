@@ -224,7 +224,7 @@ const getReportDateSettingsFn = () => {
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => stageMainDataIds.OCCURRED_AT,
-        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getValidatorContainers: (props: Object) => getEventDateValidatorContainers(props),
         getMeta: () => ({
             section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
         }),

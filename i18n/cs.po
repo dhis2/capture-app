@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-05-02T13:23:06.732Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -32,16 +32,26 @@ msgstr ""
 "Možným důvodem je to, že prohlížeč nebo režim (např. Režim ochrany osobních "
 "údajů) není podporován. Podrobnosti najdete v protokolu."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
 msgstr ""
-"Otevřeli jste jinou verzi aplikace Capture ve stejné doméně. V současné době"
-" aplikace Capture podporuje pouze běh jedné verze současně (ve stejné "
-"doméně). Chcete-li tuto verzi znovu použít, obnovte prosím tuto stránku, "
-"mějte však na paměti, že se tím zavřou další verze."
+
+msgid "Bulk data entry"
+msgstr ""
+
+msgid "Program overview"
+msgstr ""
+
+msgid "Active enrollments"
+msgstr "Aktivní zápisy"
+
+msgid "Completed enrollments"
+msgstr "Dokončené zápisy"
+
+msgid "Cancelled enrollments"
+msgstr "Zrušené zápisy"
+
+msgid "Search"
+msgstr "Hledat"
 
 msgid "Enrollment dashboard"
 msgstr "Ovládací panel zápisu"
@@ -54,24 +64,6 @@ msgstr "Upravit událost"
 
 msgid "New event"
 msgstr "Nová událost"
-
-msgid "Active enrollments"
-msgstr "Aktivní zápisy"
-
-msgid "Completed enrollments"
-msgstr "Dokončené zápisy"
-
-msgid "Cancelled enrollments"
-msgstr "Zrušené zápisy"
-
-msgid "{{trackedEntityName}} list"
-msgstr "{{trackedEntityName}} seznam"
-
-msgid "Search"
-msgstr "Hledat"
-
-msgid "Working List"
-msgstr "Pracovní seznam"
 
 msgid "Event list"
 msgstr "Seznam událostí"
@@ -151,6 +143,11 @@ msgstr "Zápis"
 msgid "Complete event"
 msgstr "Dokončit událost"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+
 msgid "A value is required"
 msgstr "hodnota je vyžadována"
 
@@ -214,6 +211,9 @@ msgstr "Přiřazený"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Ukládání do {{programName}} v {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -237,6 +237,9 @@ msgstr "Dokončeno"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Před uložením události přidejte nebo zrušte poznámku."
+
+msgid "Please provide an valid organisation unit"
+msgstr "Uveďte prosím platnou organizační jednotku"
 
 msgid "Save and add another"
 msgstr "Uložit a přidat další"
@@ -973,6 +976,12 @@ msgstr "Pro dotaz nebyly nalezeny žádné výsledky"
 msgid "Choose an organisation unit in the form below"
 msgstr ""
 
+msgid "None selected"
+msgstr "Není vybrán žádný"
+
+msgid "Choose an organisation unit"
+msgstr "Vyberte organizační jednotku"
+
 msgid "Clear selection"
 msgstr "Vymazat výběr"
 
@@ -1133,6 +1142,12 @@ msgstr ""
 "Pro kontrolu zápisů v tomto chráněném programu musíte uvést důvod. Veškerá "
 "aktivita bude zaznamenána."
 
+msgid "Unsaved changes"
+msgstr "Neuložené změny"
+
+msgid "Continue data entry"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Akce zápisu"
 
@@ -1260,9 +1275,6 @@ msgstr "Přidat souřadnice"
 
 msgid "Add area"
 msgstr "Přidat oblast"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Uveďte prosím platnou organizační jednotku"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organizační jednotku nelze načíst. Zkuste to znovu později."

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-20T11:31:12.978Z\n"
-"PO-Revision-Date: 2025-05-20T11:31:12.978Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"PO-Revision-Date: 2025-07-07T08:21:16.395Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -24,16 +24,8 @@ msgstr ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 
-msgid ""
-"You opened another version of the Capture App in the same domain. "
-"Currently, the Capture App only supports running one version concurrently "
-"(in the same domain). Please refresh this page if you would like to use "
-"this version again, but be aware that this will close other versions."
-msgstr ""
-"You opened another version of the Capture App in the same domain. "
-"Currently, the Capture App only supports running one version concurrently "
-"(in the same domain). Please refresh this page if you would like to use "
-"this version again, but be aware that this will close other versions."
+msgid "Please refresh the page (Either the server or the app version changed)"
+msgstr "Please refresh the page (Either the server or the app version changed)"
 
 msgid "Bulk data entry"
 msgstr "Bulk data entry"
@@ -143,6 +135,13 @@ msgstr "Enrollment"
 msgid "Complete event"
 msgstr "Complete event"
 
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+
 msgid "A value is required"
 msgstr "A value is required"
 
@@ -206,6 +205,9 @@ msgstr "Assignee"
 msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr "Saving to {{programName}} in {{orgUnitName}}"
 
+msgid "Saving to {{programName}}"
+msgstr "Saving to {{programName}}"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -231,6 +233,9 @@ msgstr "Completed"
 
 msgid "Please add or cancel the note before saving the event"
 msgstr "Please add or cancel the note before saving the event"
+
+msgid "Please provide an valid organisation unit"
+msgstr "Please provide an valid organisation unit"
 
 msgid "Save and add another"
 msgstr "Save and add another"
@@ -958,6 +963,12 @@ msgstr "No results found for "
 msgid "Choose an organisation unit in the form below"
 msgstr "Choose an organisation unit in the form below"
 
+msgid "None selected"
+msgstr "None selected"
+
+msgid "Choose an organisation unit"
+msgstr "Choose an organisation unit"
+
 msgid "Clear selection"
 msgstr "Clear selection"
 
@@ -1252,9 +1263,6 @@ msgstr "Add coordinates"
 
 msgid "Add area"
 msgstr "Add area"
-
-msgid "Please provide an valid organisation unit"
-msgstr "Please provide an valid organisation unit"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
@@ -1885,9 +1893,6 @@ msgstr "Working list could not be updated"
 
 msgid "an error occurred loading the working lists"
 msgstr "an error occurred loading the working lists"
-
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "an error occurred loading Tracked entity instance lists"
 
 msgid "Update view"
 msgstr "Update view"

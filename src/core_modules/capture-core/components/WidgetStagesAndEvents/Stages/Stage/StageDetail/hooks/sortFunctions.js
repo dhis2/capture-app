@@ -5,6 +5,7 @@ import { getCachedOrgUnitName } from 'capture-core/metadataRetrieval/orgUnitName
 import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
 import { SORT_DIRECTION } from './constants';
+import { localeCompareStrings } from '../../../../../../utils/localeCompareStrings';
 
 
 const sortNumber = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
@@ -41,7 +42,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
         if (!clientValueB) return -1;
 
         if (clientValueA !== clientValueB) {
-            return clientValueB.localeCompare(clientValueA);
+            return localeCompareStrings(clientValueB, clientValueA);
         }
 
         return moment(eventDateB).unix() - moment(eventDateA).unix();
@@ -50,7 +51,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
         if (!clientValueB) return 1;
 
         if (clientValueA !== clientValueB) {
-            return clientValueA.localeCompare(clientValueB);
+            return localeCompareStrings(clientValueA, clientValueB);
         }
 
         return moment(eventDateB).unix() - moment(eventDateA).unix();

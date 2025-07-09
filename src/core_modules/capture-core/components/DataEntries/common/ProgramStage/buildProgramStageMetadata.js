@@ -5,7 +5,7 @@ import type {
     CachedProgramStage,
 } from '../../../../storageControllers';
 import type { DataEntryFormConfig } from '../TEIAndEnrollment';
-import { getUserStorageController, userStores } from '../../../../storageControllers';
+import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
 import { ProgramStageFactory } from '../../../../metaDataMemoryStoreBuilders/programs/factory/programStage';
 
 export const buildProgramStageMetadata = async ({
@@ -25,10 +25,10 @@ export const buildProgramStageMetadata = async ({
     locale: string,
     minorServerVersion: number,
 }) => {
-    const storageController = getUserStorageController();
+    const storageController = getUserMetadataStorageController();
 
-    const cachedRelationshipTypes = await storageController.getAll(userStores.RELATIONSHIP_TYPES);
-    const cachedProgramRules = await storageController.getAll(userStores.PROGRAM_RULES, {
+    const cachedRelationshipTypes = await storageController.getAll(USER_METADATA_STORES.RELATIONSHIP_TYPES);
+    const cachedProgramRules = await storageController.getAll(USER_METADATA_STORES.PROGRAM_RULES, {
         predicate: rule => rule.programStageId === cachedProgramStage.id,
     });
 
