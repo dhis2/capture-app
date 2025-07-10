@@ -35,7 +35,12 @@ export type ApiRelationshipType = Readonly<{
     id: string;
     displayName: string;
     bidirectional: boolean;
-    access: Record<string, unknown>;
+    access: {
+        data: {
+            read: boolean;
+            write: boolean;
+        };
+    };
     toFromName: string;
     fromToName: string;
     fromConstraint: ApiRelationshipConstraint;
@@ -78,7 +83,12 @@ export type RelationshipType = Readonly<{
     id: string;
     displayName: string;
     bidirectional: boolean;
-    access: Record<string, unknown>;
+    access: {
+        data: {
+            read: boolean;
+            write: boolean;
+        };
+    };
     toFromName: string;
     fromToName: string;
     fromConstraint: RelationshipConstraint;

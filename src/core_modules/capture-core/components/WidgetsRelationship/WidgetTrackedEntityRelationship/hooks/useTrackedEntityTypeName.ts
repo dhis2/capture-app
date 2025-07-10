@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 
@@ -11,7 +10,7 @@ export const useTrackedEntityTypeName = (tetId: string) => {
         },
     }), [tetId]);
 
-    const { data, isLoading, error } = useApiDataQuery<?string>(
+    const { data, isLoading, error } = useApiDataQuery(
         ['trackedEntityTypeName', tetId],
         query,
         {

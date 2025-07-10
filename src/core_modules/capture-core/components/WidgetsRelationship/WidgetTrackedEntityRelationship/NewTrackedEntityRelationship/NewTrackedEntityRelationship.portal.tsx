@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { NewTrackedEntityRelationshipComponent } from './NewTrackedEntityRelationship.component';
