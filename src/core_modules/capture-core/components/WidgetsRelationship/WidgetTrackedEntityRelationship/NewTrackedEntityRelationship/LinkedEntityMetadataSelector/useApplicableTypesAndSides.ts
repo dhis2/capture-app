@@ -175,5 +175,5 @@ export const useApplicableTypesAndSides = (
                 };
             }
             return null;
-        }).filter((applicableType): applicableType is NonNullable<typeof applicableType> => applicableType !== null) as ApplicableTypesInfo,
+        }).filter(applicableType => applicableType !== null) as ApplicableTypesInfo,
 [relationshipTypes, sourceTrackedEntityTypeId, sourceProgramIds]);
