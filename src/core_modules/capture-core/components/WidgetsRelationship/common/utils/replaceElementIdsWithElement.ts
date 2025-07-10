@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator } from '../../../../../capture-core-utils';
 import type { ApiRelationshipType } from '../Types';
@@ -11,32 +10,30 @@ const elementTypes = {
     DATA_ELEMENT: 'dataElement',
 };
 
-type Elements = {|
+type Elements = {
     [key: string]: {
-        id: string,
-        displayName: string,
-        valueType: $Keys<typeof dataElementTypes>,
-        options?: Array<{ code: string, name: string }>,
-    },
-|}
+        valueType: keyof typeof dataElementTypes;
+        displayName: string;
+        options?: Array<{ code: string; name: string }>;
+    };
+};
 
-type Context = {|
-    relationshipType: ApiRelationshipType,
-    elementType: $Values<typeof elementTypes>
-|}
+type Context = {
+    relationshipType: ApiRelationshipType;
+    elementType: typeof elementTypes[keyof typeof elementTypes];
+};
 
-type ElementArray = $ReadOnlyArray<{|
-    id: string,
-    type: $Keys<typeof dataElementTypes>,
-    displayName: string,
-    options?: Array<{ code: string, name: string }>,
-|}>;
+type ElementArray = readonly {
+    id: string;
+    type: keyof typeof dataElementTypes;
+    displayName: string;
+    options?: Array<{ code: string; name: string }>;
+}[];
 
 export const replaceElementIdsWithElement = (
-    elementIds: ?$ReadOnlyArray<string>,
+    elementIds: readonly string[] | undefined,
     elements: Elements,
     { relationshipType, elementType }: Context): ElementArray =>
-    // $FlowFixMe
     (elementIds || [])
         .map((elementId) => {
             const element = elements[elementId];
@@ -48,7 +45,6 @@ export const replaceElementIdsWithElement = (
                     ),
                 );
 
-                // $FlowFixMe filter is unhandled
                 return null;
             }
 
@@ -58,7 +54,6 @@ export const replaceElementIdsWithElement = (
                         { elementId, element }),
                 );
 
-                // $FlowFixMe filter is unhandled
                 return null;
             }
 
@@ -69,4 +64,4 @@ export const replaceElementIdsWithElement = (
                 options: element.options,
             };
         })
-        .filter(element => element);
+        .filter((element): element is NonNullable<typeof element> => element !== null);

@@ -1,5 +1,3 @@
-// @flow
-
 import type { ApiRelationshipTypes } from '../Types';
 
 export const extractElementIdsFromRelationshipTypes = (relationshipTypes: ApiRelationshipTypes) => {
@@ -12,7 +10,7 @@ export const extractElementIdsFromRelationshipTypes = (relationshipTypes: ApiRel
         }).reduce((acc, attributeId) => {
             acc[attributeId] = true;
             return acc;
-        }, {});
+        }, {} as Record<string, boolean>);
 
     const dataElementIds = relationshipTypes
         .flatMap((relationshipType) => {
@@ -23,7 +21,7 @@ export const extractElementIdsFromRelationshipTypes = (relationshipTypes: ApiRel
         }).reduce((acc, dataElementId) => {
             acc[dataElementId] = true;
             return acc;
-        }, {});
+        }, {} as Record<string, boolean>);
 
     return {
         attributeIds,

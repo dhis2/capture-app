@@ -1,29 +1,29 @@
-// @flow
 import type { ApiRelationshipTypes, RelationshipTypes } from '../Types';
 import { replaceElementIdsWithElement } from './replaceElementIdsWithElement';
+import { dataElementTypes } from '../../../../metaData';
 
 const elementTypes = {
     ATTRIBUTE: 'ATTRIBUTE',
     DATA_ELEMENT: 'DATA_ELEMENT',
 };
 
-type Element = {|
-    id: string,
-    valueType: string,
-    displayName: string,
-    optionSet?: {|
+type Element = {
+    id: string;
+    valueType: string;
+    displayName: string;
+    optionSet?: {
         options: Array<{
-            code: string,
-            name: string,
-        }>,
-    |},
-|}
+            code: string;
+            name: string;
+        }>;
+    };
+};
 
-type Props = {|
-    relationshipTypes: ApiRelationshipTypes,
-    attributes: Array<Element>,
-    dataElements: Array<Element>,
-|}
+type Props = {
+    relationshipTypes: ApiRelationshipTypes;
+    attributes: Array<Element>;
+    dataElements: Array<Element>;
+};
 
 export const formatRelationshipTypes = ({
     relationshipTypes = [],
@@ -32,21 +32,21 @@ export const formatRelationshipTypes = ({
 }: Props): RelationshipTypes => {
     const attributesById = attributes.reduce((acc, { id, valueType, displayName, optionSet }) => {
         acc[id] = {
-            valueType,
+            valueType: valueType as keyof typeof dataElementTypes,
             displayName,
             options: optionSet?.options,
         };
         return acc;
-    }, {});
+    }, {} as Record<string, { valueType: keyof typeof dataElementTypes; displayName: string; options?: Array<{ code: string; name: string }> }>);
 
     const dataElementsById = dataElements.reduce((acc, { id, valueType, displayName, optionSet }) => {
         acc[id] = {
-            valueType,
+            valueType: valueType as keyof typeof dataElementTypes,
             displayName,
             options: optionSet?.options,
         };
         return acc;
-    }, {});
+    }, {} as Record<string, { valueType: keyof typeof dataElementTypes; displayName: string; options?: Array<{ code: string; name: string }> }>);
 
     return relationshipTypes
         .map((relationshipType) => {
@@ -74,7 +74,6 @@ export const formatRelationshipTypes = ({
 
             return {
                 ...relationshipType,
-                // $FlowFixMe Might be fixable with generics
                 fromConstraint: {
                     ...fromConstraint,
                     trackerDataView: {
@@ -82,7 +81,6 @@ export const formatRelationshipTypes = ({
                         dataElements: fromDataElements,
                     },
                 },
-                // $FlowFixMe Might be fixable with generics
                 toConstraint: {
                     ...toConstraint,
                     trackerDataView: {
