@@ -17,7 +17,7 @@ export type ErrorMessagesForRelatedStages = {
     linkedEventId?: string;
 };
 
-export type LinkButton = {
+export type LinkButtonProps = {
     onLink?: () => void;
     label: string;
     dataTest?: string;

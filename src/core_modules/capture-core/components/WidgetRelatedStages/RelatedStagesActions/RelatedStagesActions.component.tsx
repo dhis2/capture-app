@@ -8,7 +8,7 @@ import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import type { PlainProps, LinkButton } from './RelatedStagesActions.types';
+import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 
@@ -174,7 +174,7 @@ const LinkExistingResponse = ({
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }: LinkButton & WithStyles<typeof styles>) => {
+const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }: LinkButtonProps & WithStyles<typeof styles>) => {
     if (!onLink) {
         return null;
     }
