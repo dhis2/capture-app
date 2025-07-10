@@ -1,6 +1,5 @@
 import type { ApiRelationshipTypes, RelationshipTypes } from '../Types';
 import { replaceElementIdsWithElement } from './replaceElementIdsWithElement';
-import { dataElementTypes } from '../../../../metaData';
 
 const elementTypes = {
     ATTRIBUTE: 'ATTRIBUTE',
@@ -32,21 +31,21 @@ export const formatRelationshipTypes = ({
 }: Props): RelationshipTypes => {
     const attributesById = attributes.reduce((acc, { id, valueType, displayName, optionSet }) => {
         acc[id] = {
-            valueType: valueType as keyof typeof dataElementTypes,
+            valueType,
             displayName,
             options: optionSet?.options,
         };
         return acc;
-    }, {} as Record<string, { valueType: keyof typeof dataElementTypes; displayName: string; options?: Array<{ code: string; name: string }> }>);
+    }, {});
 
     const dataElementsById = dataElements.reduce((acc, { id, valueType, displayName, optionSet }) => {
         acc[id] = {
-            valueType: valueType as keyof typeof dataElementTypes,
+            valueType,
             displayName,
             options: optionSet?.options,
         };
         return acc;
-    }, {} as Record<string, { valueType: keyof typeof dataElementTypes; displayName: string; options?: Array<{ code: string; name: string }> }>);
+    }, {});
 
     return relationshipTypes
         .map((relationshipType) => {

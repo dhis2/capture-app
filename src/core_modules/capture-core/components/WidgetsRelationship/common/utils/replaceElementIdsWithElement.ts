@@ -64,4 +64,4 @@ export const replaceElementIdsWithElement = (
                 options: element.options,
             };
         })
-        .filter((element): element is NonNullable<typeof element> => element !== null);
+        .filter(element => element !== null && element !== undefined);
