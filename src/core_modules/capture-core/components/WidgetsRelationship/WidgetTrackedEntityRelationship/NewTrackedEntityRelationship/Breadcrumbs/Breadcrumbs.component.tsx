@@ -1,27 +1,30 @@
-// @flow
-import React, { type ComponentType, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { LinkButton } from '../../../../Buttons/LinkButton.component';
 import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS } from '../wizardSteps.const';
-import type { PlainProps, Props } from './breadcrumbs.types';
+import type { PlainProps } from './breadcrumbs.types';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
-        padding: `${spacers.dp8} 0`,
+        display: 'flex',
+        alignItems: 'center',
+        gap: spacers.dp8,
     },
 };
 
-const Slash = withStyles({ slash: { padding: 5 } })(({ classes }) => <span className={classes.slash}>/</span>);
+type Props = PlainProps & WithStyles<typeof styles>;
 
-const LinkedEntityMetadataSelectorStep = ({ currentStep, trackedEntityTypeName, onNavigate }) => {
+const Slash = () => <span>/</span>;
+
+const InitialStep = ({ currentStep, onNavigate, trackedEntityTypeName }) => {
     const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {
         trackedEntityTypeName: trackedEntityTypeName && trackedEntityTypeName.toLowerCase(),
     });
     return (currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.value ?
-        <LinkButton onClick={onNavigate}>{initialText}</LinkButton> :
-        <span>{initialText}</span>);
+        <LinkButton onClick={onNavigate}>{initialText as string}</LinkButton> :
+        <span>{initialText as string}</span>);
 };
 
 const RetrieverModeStep = ({ currentStep, onNavigate, linkedEntityMetadataName }) => {
@@ -33,7 +36,7 @@ const RetrieverModeStep = ({ currentStep, onNavigate, linkedEntityMetadataName }
         <>
             <Slash />
             {currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_RETRIEVER_MODE.value ?
-                <LinkButton onClick={onNavigate}>{linkedEntityMetadataName}</LinkButton> :
+                <LinkButton onClick={onNavigate}>{linkedEntityMetadataName as string}</LinkButton> :
                 <span>{linkedEntityMetadataName}</span>}
         </>
     );
@@ -57,7 +60,7 @@ const FindExistingStep = ({ currentStep }) => {
     return (
         <>
             <Slash />
-            <span>{stepText}</span>
+            <span>{stepText as string}</span>
         </>
     );
 };
@@ -65,12 +68,12 @@ const FindExistingStep = ({ currentStep }) => {
 const BreadcrumbsPlain = ({
     currentStep,
     onNavigate,
-    linkedEntityMetadataName,
     trackedEntityTypeName,
+    linkedEntityMetadataName,
     classes,
-}: PlainProps) => (
+}: Props) => (
     <div className={classes.container}>
-        <LinkedEntityMetadataSelectorStep
+        <InitialStep
             currentStep={currentStep}
             trackedEntityTypeName={trackedEntityTypeName}
             onNavigate={() =>
@@ -87,4 +90,4 @@ const BreadcrumbsPlain = ({
     </div>
 );
 
-export const Breadcrumbs: ComponentType<Props> = withStyles(styles)(BreadcrumbsPlain);
+export const Breadcrumbs = withStyles(styles)(BreadcrumbsPlain);
