@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
-import type { StyledContainerProps } from './NewTrackedEntityRelationship.types';
+import type { ContainerProps } from './NewTrackedEntityRelationship.types';
 
 const styles = {
     container: {
@@ -25,7 +25,7 @@ export const NewTrackedEntityRelationshipPlain = ({
     renderTrackedEntityRegistration,
     onSelectFindMode,
     classes,
-}: StyledContainerProps) => {
+}: ContainerProps & WithStyles<typeof styles>) => {
     const [addWizardVisible, setAddWizardVisible] = useState(false);
 
     const closeAddWizard = useCallback(() => {

@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -10,7 +10,7 @@ import {
     type LinkedEntityMetadata,
 } from './LinkedEntityMetadataSelector';
 import { RetrieverModeSelector } from './RetrieverModeSelector';
-import type { StyledComponentProps } from './NewTrackedEntityRelationship.types';
+import type { ComponentProps } from './NewTrackedEntityRelationship.types';
 import { useAddRelationship } from './hooks/useAddRelationship';
 import { TARGET_SIDES } from './common';
 import { generateUID } from '../../../../utils/uid/generateUID';
@@ -49,7 +49,7 @@ const NewTrackedEntityRelationshipPlain = ({
     renderTrackedEntityRegistration,
     onSelectFindMode,
     classes,
-}: StyledComponentProps) => {
+}: ComponentProps & WithStyles<typeof styles>) => {
     const [currentStep, setCurrentStep] =
         useState<WizardStep>(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
     const [selectedLinkedEntityMetadata, setSelectedLinkedEntityMetadata] = useState<LinkedEntityMetadata | undefined>(undefined);

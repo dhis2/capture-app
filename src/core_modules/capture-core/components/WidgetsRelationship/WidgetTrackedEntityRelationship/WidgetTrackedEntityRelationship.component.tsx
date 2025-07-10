@@ -40,7 +40,7 @@ export const WidgetTrackedEntityRelationship = ({
     if (isError) {
         return (
             <div>
-                {String(i18n.t('Something went wrong while loading relationships. Please try again later.'))}
+                {i18n.t('Something went wrong while loading relationships. Please try again later.')}
             </div>
         );
     }

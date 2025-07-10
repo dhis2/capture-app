@@ -35,9 +35,6 @@ export type ContainerProps = Readonly<{
     onSelectFindMode?: OnSelectFindMode;
 }>;
 
-export type StyledContainerProps = ContainerProps & {
-    classes: any;
-};
 
 export type PortalProps = Readonly<{
     renderElement: HTMLElement;
@@ -54,9 +51,6 @@ export type PortalProps = Readonly<{
     renderTrackedEntityRegistration?: RenderTrackedEntityRegistration;
 }>;
 
-export type StyledPortalProps = PortalProps & {
-    classes: any;
-};
 
 export type ComponentProps = Readonly<{
     teiId: string;
@@ -71,7 +65,3 @@ export type ComponentProps = Readonly<{
     renderTrackedEntityRegistration?: RenderTrackedEntityRegistration;
     onSelectFindMode?: OnSelectFindMode;
 }>;
-
-export type StyledComponentProps = ComponentProps & {
-    classes: any;
-};
