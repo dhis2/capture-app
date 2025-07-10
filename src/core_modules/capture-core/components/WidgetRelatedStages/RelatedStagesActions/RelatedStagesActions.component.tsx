@@ -50,7 +50,7 @@ const Schedule = ({
     canAddNewEventToStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionsOptions && actionsOptions[relatedStageActions.SCHEDULE_IN_ORG]) || {};
+        actionsOptions?.[relatedStageActions.SCHEDULE_IN_ORG] || {};
     if (hidden) {
         return null;
     }
@@ -94,7 +94,7 @@ const EnterData = ({
     canAddNewEventToStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionsOptions && actionsOptions[relatedStageActions.ENTER_DATA]) || {};
+        actionsOptions?.[relatedStageActions.ENTER_DATA] || {};
     if (hidden) {
         return null;
     }
@@ -138,7 +138,7 @@ const LinkExistingResponse = ({
     programStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionsOptions && actionsOptions[relatedStageActions.LINK_EXISTING_RESPONSE]) || {};
+        actionsOptions?.[relatedStageActions.LINK_EXISTING_RESPONSE] || {};
     if (hidden) {
         return null;
     }
