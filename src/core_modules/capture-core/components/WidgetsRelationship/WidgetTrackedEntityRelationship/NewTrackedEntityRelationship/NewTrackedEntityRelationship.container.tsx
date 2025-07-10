@@ -26,15 +26,15 @@ export const NewTrackedEntityRelationshipPlain = ({
     onSelectFindMode,
     classes,
 }: StyledContainerProps) => {
-    const [addWizardVisible, setAddWizardVisibility] = useState(false);
+    const [addWizardVisible, setAddWizardVisible] = useState(false);
 
     const closeAddWizard = useCallback(() => {
-        setAddWizardVisibility(false);
+        setAddWizardVisible(false);
         onCloseAddRelationship && onCloseAddRelationship();
     }, [onCloseAddRelationship]);
 
     const openAddWizard = useCallback(() => {
-        setAddWizardVisibility(true);
+        setAddWizardVisible(true);
         onOpenAddRelationship && onOpenAddRelationship();
     }, [onOpenAddRelationship]);
 
