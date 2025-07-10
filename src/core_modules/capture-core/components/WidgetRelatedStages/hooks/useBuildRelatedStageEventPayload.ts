@@ -41,7 +41,7 @@ export const useBuildRelatedStageEventPayload = () => {
         enrollmentId,
     }: {
         serverRequestEvent?: RequestEvent;
-        relatedStageRef?: { current?: RelatedStageRefPayload };
+        relatedStageRef?: { current?: RelatedStageRefPayload | null };
         programStageId: string;
         programId: string;
         teiId: string;

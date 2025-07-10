@@ -1,19 +1,18 @@
-// @flow
-import React, { type ComponentType, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { relatedStageActions, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
 import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import type { PlainProps } from './RelatedStagesActions.types';
+import type { PlainProps, LinkButtonProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     wrapper: {
         padding: spacers.dp8,
         width: 'fit-content',
@@ -41,7 +40,7 @@ const styles = () => ({
     link: {
         padding: spacers.dp8,
     },
-});
+};
 
 const Schedule = ({
     actionsOptions,
@@ -51,7 +50,7 @@ const Schedule = ({
     canAddNewEventToStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionsOptions && actionsOptions[relatedStageActions.SCHEDULE_IN_ORG]) || {};
+        actionsOptions?.[relatedStageActions.SCHEDULE_IN_ORG] || {};
     if (hidden) {
         return null;
     }
@@ -79,7 +78,7 @@ const Schedule = ({
                 checked={relatedStageActions.SCHEDULE_IN_ORG === selectedAction}
                 disabled={tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.SCHEDULE_IN_ORG}
                 dataTest="related-stages-actions-schedule"
             />
@@ -95,7 +94,7 @@ const EnterData = ({
     canAddNewEventToStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionsOptions && actionsOptions[relatedStageActions.ENTER_DATA]) || {};
+        actionsOptions?.[relatedStageActions.ENTER_DATA] || {};
     if (hidden) {
         return null;
     }
@@ -123,7 +122,7 @@ const EnterData = ({
                 checked={relatedStageActions.ENTER_DATA === selectedAction}
                 disabled={tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.ENTER_DATA}
                 dataTest="related-stages-actions-enter-details"
             />
@@ -139,7 +138,7 @@ const LinkExistingResponse = ({
     programStage,
 }) => {
     const { hidden, disabled, disabledMessage } =
-        (actionsOptions && actionsOptions[relatedStageActions.LINK_EXISTING_RESPONSE]) || {};
+        actionsOptions?.[relatedStageActions.LINK_EXISTING_RESPONSE] || {};
     if (hidden) {
         return null;
     }
@@ -167,7 +166,7 @@ const LinkExistingResponse = ({
                 checked={relatedStageActions.LINK_EXISTING_RESPONSE === selectedAction}
                 disabled={tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
                 dataTest="related-stages-actions-link-existing-response"
             />
@@ -175,7 +174,7 @@ const LinkExistingResponse = ({
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }) => {
+const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }: LinkButtonProps & WithStyles<typeof styles>) => {
     if (!onLink) {
         return null;
     }
@@ -204,12 +203,12 @@ const RelatedStagesActionsPlain = ({
     actionsOptions,
     onLink,
     isLinking,
-}: PlainProps) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
-    const updateSelectedAction = (action: ?$Values<typeof relatedStageActions>) => {
+    const updateSelectedAction = (action: keyof typeof relatedStageActions | undefined) => {
         setRelatedStagesDataValues(prevState => ({
             ...prevState,
             linkMode: action,
@@ -329,4 +328,4 @@ const RelatedStagesActionsPlain = ({
     );
 };
 
-export const RelatedStagesActions: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);
+export const RelatedStagesActions = withStyles(styles)(RelatedStagesActionsPlain);

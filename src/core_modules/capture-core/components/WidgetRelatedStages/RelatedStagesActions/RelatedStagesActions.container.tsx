@@ -1,13 +1,22 @@
-// @flow
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import { useOrgUnitAutoSelect } from '../../../dataQueries';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 import type { Props, ErrorMessagesForRelatedStages } from './RelatedStagesActions.types';
 import { RelatedStagesActions as RelatedStagesActionsComponent } from './RelatedStagesActions.component';
-import { relatedStageStatus } from '../constants';
+import { relatedStageStatus, relatedStageActions } from '../constants';
 import { useStageLabels, useRelatedStageEvents, useRelatedStages } from '../hooks';
 import { relatedStageWidgetIsValid } from '../relatedStageEventIsValid/relatedStageEventIsValid';
 import { useProgramExpiryForUser } from '../../../hooks';
+
+type RefHandle = {
+    eventHasLinkableStageRelationship: () => boolean;
+    formIsValidOnSave: () => boolean;
+    getLinkedStageValues: () => {
+        linkMode?: keyof typeof relatedStageActions;
+        relatedStageDataValues: RelatedStageDataValueStates;
+        selectedRelationshipType: any;
+    };
+};
 
 const RelatedStagesActionsPlain = ({
     programId,
@@ -52,7 +61,7 @@ const RelatedStagesActionsPlain = ({
     }, [data, orgUnitLoading, setRelatedStageDataValues]);
 
     const addErrorMessage = (message: ErrorMessagesForRelatedStages) => {
-        setErrorMessages((prevMessages: Object) => ({
+        setErrorMessages(prevMessages => ({
             ...prevMessages,
             ...message,
         }));
@@ -84,7 +93,6 @@ const RelatedStagesActionsPlain = ({
         selectedRelationshipType,
     });
 
-    // useImperativeHandler for exposing functions to ref
     useImperativeHandle(ref, () => ({
         eventHasLinkableStageRelationship,
         formIsValidOnSave,
@@ -121,8 +129,4 @@ const RelatedStagesActionsPlain = ({
     );
 };
 
-export const RelatedStagesActions = forwardRef < Props, {|
-    eventHasLinkableStageRelationship: Function,
-        formIsValidOnSave: Function,
-            getLinkedStageValues: Function
-                |}>(RelatedStagesActionsPlain);
+export const RelatedStagesActions = forwardRef<RefHandle, Props>(RelatedStagesActionsPlain);

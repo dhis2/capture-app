@@ -1,13 +1,11 @@
-// @flow
-import React, { type ComponentType, useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import { IconLink24, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
-import { type RelatedStageRefPayload } from './index';
 import { RelatedStagesActions } from './RelatedStagesActions';
 import { useLinkedEventByOriginId } from '../WidgetTwoEventWorkspace/hooks';
-import type { Props } from './WidgetRelatedStages.types';
+import type { Props as PlainProps, RelatedStageRefPayload } from './WidgetRelatedStages.types';
 import {
     useRelatedStages,
     useBuildRelatedStageEventPayload,
@@ -16,7 +14,7 @@ import {
 } from './hooks';
 import { relatedStageStatus } from './constants';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
-import { type RequestEvent } from '../DataEntries';
+import type { RequestEvent } from '../DataEntries';
 
 const styles = {
     header: {
@@ -30,6 +28,8 @@ const styles = {
         margin: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
     },
 };
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 export const WidgetRelatedStagesPlain = ({
     programId,
@@ -51,7 +51,7 @@ export const WidgetRelatedStagesPlain = ({
         linkedEvent,
         isLoading: isLinkedEventLoading,
     } = useLinkedEventByOriginId({ originEventId: eventId, skipBidirectionalChecks: true });
-    const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
+    const relatedStageRef = useRef<RelatedStageRefPayload>(null);
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({
         eventId,
@@ -64,8 +64,7 @@ export const WidgetRelatedStagesPlain = ({
 
     const onLink = useCallback(() => {
         setIsLinking(true);
-        // $FlowFixMe[incompatible-type]
-        const serverRequestEvent: ?RequestEvent = enrollment?.events.find(e => e.event === eventId);
+        const serverRequestEvent: RequestEvent | undefined = enrollment?.events.find(e => e.event === eventId);
 
         const {
             formHasError,
@@ -132,4 +131,4 @@ export const WidgetRelatedStagesPlain = ({
     );
 };
 
-export const WidgetRelatedStages: ComponentType<Props> = withStyles(styles)(WidgetRelatedStagesPlain);
+export const WidgetRelatedStages = withStyles(styles)(WidgetRelatedStagesPlain);
