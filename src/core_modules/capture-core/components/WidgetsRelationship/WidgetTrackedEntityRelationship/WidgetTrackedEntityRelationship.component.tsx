@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { WidgetTrackedEntityRelationshipProps } from './WidgetTrackedEntityRelationship.types';
@@ -31,7 +30,7 @@ export const WidgetTrackedEntityRelationship = ({
     } = useRelationships({
         entityId: teiId,
         searchMode: RelationshipSearchEntities.TRACKED_ENTITY,
-        relationshipTypes,
+        relationshipTypes: relationshipTypes || null,
     });
 
     const isLoading = useMemo(() => isLoadingRelationships || isLoadingTEType,
@@ -41,7 +40,7 @@ export const WidgetTrackedEntityRelationship = ({
     if (isError) {
         return (
             <div>
-                {i18n.t('Something went wrong while loading relationships. Please try again later.')}
+                {String(i18n.t('Something went wrong while loading relationships. Please try again later.'))}
             </div>
         );
     }

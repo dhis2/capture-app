@@ -1,10 +1,9 @@
-// @flow
-import React, { useCallback, useState, type ComponentType } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { NewTrackedEntityRelationshipPortal } from './NewTrackedEntityRelationship.portal';
-import type { ContainerProps, StyledContainerProps } from './NewTrackedEntityRelationship.types';
+import type { StyledContainerProps } from './NewTrackedEntityRelationship.types';
 
 const styles = {
     container: {
@@ -71,5 +70,5 @@ export const NewTrackedEntityRelationshipPlain = ({
     );
 };
 
-export const NewTrackedEntityRelationship: ComponentType<ContainerProps> =
+export const NewTrackedEntityRelationship =
     withStyles(styles)(NewTrackedEntityRelationshipPlain);
