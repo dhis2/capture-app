@@ -1,8 +1,7 @@
-// @flow
-import React, { type ComponentType, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, Radio, spacers, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { ConditionalTooltip } from 'capture-core/components/Tooltips/ConditionalTooltip';
 import { relatedStageActions, mainOptionTranslatedTexts, relatedStageStatus } from '../constants';
 import { useCanAddNewEventToStage } from '../hooks';
@@ -13,7 +12,7 @@ import type { PlainProps } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     wrapper: {
         padding: spacers.dp8,
         width: 'fit-content',
@@ -41,7 +40,7 @@ const styles = () => ({
     link: {
         padding: spacers.dp8,
     },
-});
+};
 
 const Schedule = ({
     actionsOptions,
@@ -79,7 +78,7 @@ const Schedule = ({
                 checked={relatedStageActions.SCHEDULE_IN_ORG === selectedAction}
                 disabled={tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.SCHEDULE_IN_ORG]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.SCHEDULE_IN_ORG}
                 dataTest="related-stages-actions-schedule"
             />
@@ -123,7 +122,7 @@ const EnterData = ({
                 checked={relatedStageActions.ENTER_DATA === selectedAction}
                 disabled={tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.ENTER_DATA]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.ENTER_DATA}
                 dataTest="related-stages-actions-enter-details"
             />
@@ -167,7 +166,7 @@ const LinkExistingResponse = ({
                 checked={relatedStageActions.LINK_EXISTING_RESPONSE === selectedAction}
                 disabled={tooltipEnabled}
                 label={mainOptionTranslatedTexts[relatedStageActions.LINK_EXISTING_RESPONSE]}
-                onChange={(e: Object) => updateSelectedAction(e.value)}
+                onChange={e => updateSelectedAction(e.value)}
                 value={relatedStageActions.LINK_EXISTING_RESPONSE}
                 dataTest="related-stages-actions-link-existing-response"
             />
@@ -175,7 +174,7 @@ const LinkExistingResponse = ({
     );
 };
 
-const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }) => {
+const LinkButton = ({ onLink, label, dataTest, isLinking, classes }) => {
     if (!onLink) {
         return null;
     }
@@ -187,7 +186,7 @@ const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, cla
             </Button>
         </div>
     );
-});
+};
 
 const RelatedStagesActionsPlain = ({
     classes,
@@ -204,12 +203,12 @@ const RelatedStagesActionsPlain = ({
     actionsOptions,
     onLink,
     isLinking,
-}: PlainProps) => {
+}: PlainProps & WithStyles<typeof styles>) => {
     const { programStage } = useProgramStageInfo(constraint?.programStage?.id);
 
     const selectedAction = useMemo(() => relatedStagesDataValues.linkMode, [relatedStagesDataValues.linkMode]);
 
-    const updateSelectedAction = (action: ?$Values<typeof relatedStageActions>) => {
+    const updateSelectedAction = (action: keyof typeof relatedStageActions | undefined) => {
         setRelatedStagesDataValues(prevState => ({
             ...prevState,
             linkMode: action,
@@ -284,6 +283,7 @@ const RelatedStagesActionsPlain = ({
                         label={i18n.t('Schedule')}
                         isLinking={isLinking}
                         dataTest="related-stages-buttons-schedule"
+                        classes={classes}
                     />
                 </>
             )}
@@ -302,6 +302,7 @@ const RelatedStagesActionsPlain = ({
                         label={i18n.t('Enter details')}
                         isLinking={isLinking}
                         dataTest="related-stages-buttons-enter-details"
+                        classes={classes}
                     />
                 </>
             )}
@@ -321,6 +322,7 @@ const RelatedStagesActionsPlain = ({
                         label={i18n.t('Link')}
                         isLinking={isLinking}
                         dataTest="related-stages-buttons-link-existing-response"
+                        classes={classes}
                     />
                 </>
             )}
@@ -329,4 +331,4 @@ const RelatedStagesActionsPlain = ({
     );
 };
 
-export const RelatedStagesActions: ComponentType<$Diff<PlainProps, CssClasses>> = withStyles(styles)(RelatedStagesActionsPlain);
+export const RelatedStagesActions = withStyles(styles)(RelatedStagesActionsPlain);

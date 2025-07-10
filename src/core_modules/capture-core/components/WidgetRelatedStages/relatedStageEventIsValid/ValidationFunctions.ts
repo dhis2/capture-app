@@ -1,28 +1,27 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from '../../../../capture-core-utils/validators/form';
 import { isValidDate, isValidPeriod } from '../../../utils/validation/validators/form';
 import { relatedStageActions } from '../constants';
 
 type Props = {
-    scheduledAt: ?string,
-    scheduledAtFormatError: ?{ error: ?string, errorCode: ?string },
-    orgUnit: ?Object,
-    linkedEventId: ?string,
-    setErrorMessages: (messages: Object) => void,
+    scheduledAt?: string;
+    scheduledAtFormatError?: { error?: string; errorCode?: string };
+    orgUnit?: any;
+    linkedEventId?: string;
+    setErrorMessages: (messages: any) => void;
     expiryPeriod?: {
-        expiryPeriodType: ?string,
-        expiryDays: ?number,
-     },
+        expiryPeriodType?: string;
+        expiryDays?: number;
+    };
 };
 
 export const isScheduledDateValid = (
-    scheduledDate: ?string,
-    scheduledAtFormatError: ?{ error: ?string, errorCode: ?string },
+    scheduledDate?: string,
+    scheduledAtFormatError?: { error?: string; errorCode?: string },
     expiryPeriod?: {
-        expiryPeriodType: ?string,
-        expiryDays: ?number,
-     },
+        expiryPeriodType?: string;
+        expiryDays?: number;
+    },
 ) => {
     if (!scheduledDate) {
         return { valid: false, validationText: i18n.t('Please enter a date') };
@@ -125,10 +124,8 @@ const linkToExistingResponse = (props) => {
     return linkedEventIdIsValid;
 };
 
-
-export const ValidationFunctionsByLinkMode: { [key: string]: (props: ?Props) => boolean } = {
+export const ValidationFunctionsByLinkMode: { [key: string]: (props?: Props) => boolean } = {
     [relatedStageActions.SCHEDULE_IN_ORG]: props => scheduleInOrgUnit(props),
     [relatedStageActions.ENTER_DATA]: props => enterData(props),
     [relatedStageActions.LINK_EXISTING_RESPONSE]: props => linkToExistingResponse(props),
 };
-

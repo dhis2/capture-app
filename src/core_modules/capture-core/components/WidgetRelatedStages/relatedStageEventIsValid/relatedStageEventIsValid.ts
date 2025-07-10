@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import type { RelatedStageIsValidProps } from './relatedStageEventIsValid.types';
 import { errorCreator } from '../../../../capture-core-utils';
@@ -13,7 +12,7 @@ export const relatedStageWidgetIsValid = ({
     linkedEventId,
     setErrorMessages,
     expiryPeriod,
-}: RelatedStageIsValidProps): boolean => {
+}: RelatedStageIsValidProps) => {
     if (!linkMode) {
         return true;
     }

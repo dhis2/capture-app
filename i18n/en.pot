@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-10T09:50:12.481Z\n"
-"PO-Revision-Date: 2025-07-10T09:50:12.481Z\n"
+"POT-Creation-Date: 2025-07-10T13:03:12.142Z\n"
+"PO-Revision-Date: 2025-07-10T13:03:12.142Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1472,11 +1472,14 @@ msgstr "Enter details"
 msgid "Linked event"
 msgstr "Linked event"
 
+msgid "Schedule for later"
+msgstr "Schedule for later"
+
 msgid "Enter details now"
 msgstr "Enter details now"
 
-msgid "Link to an existing event"
-msgstr "Link to an existing event"
+msgid "Link to existing event"
+msgstr "Link to existing event"
 
 msgid "The event was successfully linked"
 msgstr "The event was successfully linked"

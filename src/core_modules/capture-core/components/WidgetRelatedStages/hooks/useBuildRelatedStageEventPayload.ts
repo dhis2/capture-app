@@ -1,5 +1,4 @@
 import { getConvertedRelatedStageEvent, type RequestEvent, type LinkedRequestEvent } from '../../DataEntries';
-import type { RelatedStageRefPayload } from '../index';
 
 export const createServerData = ({
     linkedEvent,
@@ -41,7 +40,15 @@ export const useBuildRelatedStageEventPayload = () => {
         enrollmentId,
     }: {
         serverRequestEvent?: RequestEvent;
-        relatedStageRef?: { current?: RelatedStageRefPayload };
+        relatedStageRef?: { current?: {
+            eventHasLinkableStageRelationship: () => boolean;
+            formIsValidOnSave: () => boolean;
+            getLinkedStageValues: () => {
+                linkMode?: any;
+                relatedStageDataValues: any;
+                selectedRelationshipType: any;
+            };
+        } | null };
         programStageId: string;
         programId: string;
         teiId: string;

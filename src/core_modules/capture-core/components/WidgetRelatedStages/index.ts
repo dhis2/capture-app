@@ -1,4 +1,3 @@
-// @flow
 export { RelatedStagesActions } from './RelatedStagesActions';
 export { WidgetRelatedStages } from './WidgetRelatedStages.container';
 export type {

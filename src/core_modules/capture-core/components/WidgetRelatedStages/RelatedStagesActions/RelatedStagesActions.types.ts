@@ -35,7 +35,7 @@ export type PlainProps = {
     errorMessages: ErrorMessagesForRelatedStages;
     constraint?: Constraint;
     addErrorMessage: (errorMessages: ErrorMessagesForRelatedStages) => void;
-    setRelatedStagesDataValues: (updater: () => Record<string, unknown>) => void;
+    setRelatedStagesDataValues: (updater: (prev: RelatedStageDataValueStates) => RelatedStageDataValueStates) => void;
     onLink?: () => void;
     isLinking?: boolean;
     actionsOptions?: {

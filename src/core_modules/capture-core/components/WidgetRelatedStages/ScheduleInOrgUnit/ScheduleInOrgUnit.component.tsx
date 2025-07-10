@@ -1,13 +1,11 @@
-// @flow
 import React from 'react';
-import type { ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { colors, spacers, spacersNum } from '@dhis2/ui';
 import { DateFieldForRelatedStages, OrgUnitSelectorForRelatedStages } from '../FormComponents';
 import type { ErrorMessagesForRelatedStages } from '../RelatedStagesActions';
 import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
-const styles = {
+const styles: Readonly<any> = {
     wrapper: {
         padding: `${spacers.dp16} 0`,
         maxWidth: '55.75rem',
@@ -34,14 +32,15 @@ const styles = {
     },
 };
 
-type Props = {
-    relatedStagesDataValues: RelatedStageDataValueStates,
-    setRelatedStagesDataValues: (() => Object) => void,
-    errorMessages: ErrorMessagesForRelatedStages,
-    scheduledLabel: string,
-    saveAttempted: boolean,
-    ...CssClasses,
-}
+type PlainProps = {
+    relatedStagesDataValues: RelatedStageDataValueStates;
+    setRelatedStagesDataValues: (updater: (prev: RelatedStageDataValueStates) => RelatedStageDataValueStates) => void;
+    errorMessages: ErrorMessagesForRelatedStages;
+    scheduledLabel: string;
+    saveAttempted: boolean;
+};
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 const ScheduleInOrgUnitPlain = ({
     relatedStagesDataValues,
@@ -59,7 +58,7 @@ const ScheduleInOrgUnitPlain = ({
         }));
     };
 
-    const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
+    const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         const orgUnit = {
             id: e.id,
             name: e.displayName,
@@ -75,7 +74,7 @@ const ScheduleInOrgUnitPlain = ({
     const onDeselectOrgUnit = () => {
         setRelatedStagesDataValues(prevValues => ({
             ...prevValues,
-            orgUnit: null,
+            orgUnit: undefined,
         }));
     };
 
@@ -104,4 +103,4 @@ const ScheduleInOrgUnitPlain = ({
     );
 };
 
-export const ScheduleInOrgUnit: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ScheduleInOrgUnitPlain);
+export const ScheduleInOrgUnit = withStyles(styles)(ScheduleInOrgUnitPlain);
