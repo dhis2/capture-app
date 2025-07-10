@@ -7,8 +7,4 @@ export type Props = {
     readonly linkedEntityMetadataName?: string;
 };
 
-type CssClasses = {
-    classes: Record<string, string>;
-};
-
-export type PlainProps = Props & CssClasses;
+export type PlainProps = Props;

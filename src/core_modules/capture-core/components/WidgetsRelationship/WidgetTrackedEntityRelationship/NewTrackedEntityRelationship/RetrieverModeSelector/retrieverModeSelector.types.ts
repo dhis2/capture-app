@@ -4,8 +4,4 @@ export type Props = {
     readonly trackedEntityName: string;
 };
 
-type CssClasses = {
-    classes: Record<string, string>;
-};
-
-export type PlainProps = Props & CssClasses;
+export type PlainProps = Props;

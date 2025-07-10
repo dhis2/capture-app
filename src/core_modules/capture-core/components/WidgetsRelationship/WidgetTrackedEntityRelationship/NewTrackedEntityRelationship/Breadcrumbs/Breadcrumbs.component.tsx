@@ -6,25 +6,29 @@ import { LinkButton } from '../../../../Buttons/LinkButton.component';
 import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS } from '../wizardSteps.const';
 import type { PlainProps } from './breadcrumbs.types';
 
-const styles: Readonly<any> = {
+const styles = {
     container: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: spacers.dp8,
+        padding: `${spacers.dp8} 0`,
+    },
+};
+
+const slashStyles = {
+    slash: {
+        padding: 5,
     },
 };
 
 type Props = PlainProps & WithStyles<typeof styles>;
 
-const Slash = () => <span>/</span>;
+const Slash = withStyles(slashStyles)(({ classes }: WithStyles<typeof slashStyles>) => <span className={classes.slash}>/</span>);
 
-const InitialStep = ({ currentStep, onNavigate, trackedEntityTypeName }) => {
+const LinkedEntityMetadataSelectorStep = ({ currentStep, onNavigate, trackedEntityTypeName }) => {
     const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {
         trackedEntityTypeName: trackedEntityTypeName && trackedEntityTypeName.toLowerCase(),
     });
     return (currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA.value ?
-        <LinkButton onClick={onNavigate}>{initialText as string}</LinkButton> :
-        <span>{initialText as string}</span>);
+        <LinkButton onClick={onNavigate}>{initialText}</LinkButton> :
+        <span>{initialText}</span>);
 };
 
 const RetrieverModeStep = ({ currentStep, onNavigate, linkedEntityMetadataName }) => {
@@ -36,7 +40,7 @@ const RetrieverModeStep = ({ currentStep, onNavigate, linkedEntityMetadataName }
         <>
             <Slash />
             {currentStep.value > NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_RETRIEVER_MODE.value ?
-                <LinkButton onClick={onNavigate}>{linkedEntityMetadataName as string}</LinkButton> :
+                <LinkButton onClick={onNavigate}>{linkedEntityMetadataName}</LinkButton> :
                 <span>{linkedEntityMetadataName}</span>}
         </>
     );
@@ -60,7 +64,7 @@ const FindExistingStep = ({ currentStep }) => {
     return (
         <>
             <Slash />
-            <span>{stepText as string}</span>
+            <span>{stepText}</span>
         </>
     );
 };
@@ -68,12 +72,12 @@ const FindExistingStep = ({ currentStep }) => {
 const BreadcrumbsPlain = ({
     currentStep,
     onNavigate,
-    trackedEntityTypeName,
     linkedEntityMetadataName,
+    trackedEntityTypeName,
     classes,
 }: Props) => (
     <div className={classes.container}>
-        <InitialStep
+        <LinkedEntityMetadataSelectorStep
             currentStep={currentStep}
             trackedEntityTypeName={trackedEntityTypeName}
             onNavigate={() =>
