@@ -8,7 +8,7 @@ import { useCanAddNewEventToStage } from '../hooks';
 import { DataSection } from '../../DataSection';
 import { ScheduleInOrgUnit } from '../ScheduleInOrgUnit';
 import { useProgramStageInfo } from '../../../metaDataMemoryStores/programCollection/helpers';
-import type { PlainProps } from './RelatedStagesActions.types';
+import type { PlainProps, LinkButton } from './RelatedStagesActions.types';
 import { LinkToExisting } from '../LinkToExisting';
 import { EnterDataInOrgUnit } from '../EnterDataInOrgUnit/EnterData.component';
 
@@ -174,7 +174,7 @@ const LinkExistingResponse = ({
     );
 };
 
-const LinkButton = ({ onLink, label, dataTest, isLinking, classes }) => {
+const LinkButton = withStyles(styles)(({ onLink, label, dataTest, isLinking, classes }: LinkButton & WithStyles<typeof styles>) => {
     if (!onLink) {
         return null;
     }
@@ -186,7 +186,7 @@ const LinkButton = ({ onLink, label, dataTest, isLinking, classes }) => {
             </Button>
         </div>
     );
-};
+});
 
 const RelatedStagesActionsPlain = ({
     classes,
@@ -283,7 +283,6 @@ const RelatedStagesActionsPlain = ({
                         label={i18n.t('Schedule')}
                         isLinking={isLinking}
                         dataTest="related-stages-buttons-schedule"
-                        classes={classes}
                     />
                 </>
             )}
@@ -302,7 +301,6 @@ const RelatedStagesActionsPlain = ({
                         label={i18n.t('Enter details')}
                         isLinking={isLinking}
                         dataTest="related-stages-buttons-enter-details"
-                        classes={classes}
                     />
                 </>
             )}
@@ -322,7 +320,6 @@ const RelatedStagesActionsPlain = ({
                         label={i18n.t('Link')}
                         isLinking={isLinking}
                         dataTest="related-stages-buttons-link-existing-response"
-                        classes={classes}
                     />
                 </>
             )}

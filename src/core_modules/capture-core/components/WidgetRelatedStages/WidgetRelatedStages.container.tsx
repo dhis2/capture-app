@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
 import { RelatedStagesActions } from './RelatedStagesActions';
 import { useLinkedEventByOriginId } from '../WidgetTwoEventWorkspace/hooks';
-import type { Props as PlainProps } from './WidgetRelatedStages.types';
+import type { Props as PlainProps, RelatedStageRefPayload } from './WidgetRelatedStages.types';
 import {
     useRelatedStages,
     useBuildRelatedStageEventPayload,
@@ -51,15 +51,7 @@ export const WidgetRelatedStagesPlain = ({
         linkedEvent,
         isLoading: isLinkedEventLoading,
     } = useLinkedEventByOriginId({ originEventId: eventId, skipBidirectionalChecks: true });
-    const relatedStageRef = useRef<{
-        eventHasLinkableStageRelationship:() => boolean;
-        formIsValidOnSave: () => boolean;
-        getLinkedStageValues: () => {
-            linkMode?: any;
-            relatedStageDataValues: any;
-            selectedRelationshipType: any;
-        };
-            }>(null);
+    const relatedStageRef = useRef<RelatedStageRefPayload>(null);
     const { buildRelatedStageEventPayload } = useBuildRelatedStageEventPayload();
     const { addEventWithRelationship } = useAddEventWithRelationship({
         eventId,
