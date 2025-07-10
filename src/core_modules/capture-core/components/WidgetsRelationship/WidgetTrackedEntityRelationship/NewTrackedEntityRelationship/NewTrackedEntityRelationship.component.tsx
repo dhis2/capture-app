@@ -1,17 +1,16 @@
-// @flow
-import React, { useCallback, useState, type ComponentType, useMemo } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { Widget } from '../../../Widget';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { Breadcrumbs } from './Breadcrumbs';
-import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS } from './wizardSteps.const';
+import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS, type WizardStep } from './wizardSteps.const';
 import {
     LinkedEntityMetadataSelectorFromTrackedEntity,
     type LinkedEntityMetadata,
 } from './LinkedEntityMetadataSelector';
 import { RetrieverModeSelector } from './RetrieverModeSelector';
-import type { ComponentProps, StyledComponentProps } from './NewTrackedEntityRelationship.types';
+import type { ComponentProps } from './NewTrackedEntityRelationship.types';
 import { useAddRelationship } from './hooks/useAddRelationship';
 import { TARGET_SIDES } from './common';
 import { generateUID } from '../../../../utils/uid/generateUID';
@@ -50,10 +49,10 @@ const NewTrackedEntityRelationshipPlain = ({
     renderTrackedEntityRegistration,
     onSelectFindMode,
     classes,
-}: StyledComponentProps) => {
+}: ComponentProps & WithStyles<typeof styles>) => {
     const [currentStep, setCurrentStep] =
-        useState(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
-    const [selectedLinkedEntityMetadata: LinkedEntityMetadata, setSelectedLinkedEntityMetadata] = useState(undefined);
+        useState<WizardStep>(NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.SELECT_LINKED_ENTITY_METADATA);
+    const [selectedLinkedEntityMetadata, setSelectedLinkedEntityMetadata] = useState<LinkedEntityMetadata | undefined>(undefined);
     const { addRelationship } = useAddRelationship({
         teiId,
         onMutate: () => onSave && onSave(),
@@ -103,7 +102,7 @@ const NewTrackedEntityRelationshipPlain = ({
             });
         }, [addRelationship, selectedLinkedEntityMetadata, teiId]);
 
-    const onLinkToTrackedEntityFromRegistration = useCallback((trackedEntity: Object) => {
+    const onLinkToTrackedEntityFromRegistration = useCallback((trackedEntity: any) => {
         if (!selectedLinkedEntityMetadata) return;
         const { relationshipId: relationshipTypeId, targetSide } = selectedLinkedEntityMetadata;
         const relationshipId = generateUID();
@@ -144,7 +143,7 @@ const NewTrackedEntityRelationshipPlain = ({
     }, [addRelationship, selectedLinkedEntityMetadata, teiId]);
 
     const handleNavigation = useCallback(
-        (destination: $Values<typeof NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS>) => {
+        (destination: WizardStep) => {
             setCurrentStep(destination);
         }, []);
 
@@ -206,13 +205,11 @@ const NewTrackedEntityRelationshipPlain = ({
             );
         }
 
-        // Steps below will be implemented by new PR
         if (currentStep.id === NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS.FIND_EXISTING_LINKED_ENTITY.id) {
             const {
                 trackedEntityTypeId: linkedEntityTrackedEntityTypeId,
                 programId: linkedEntityProgramId,
-                // $FlowFixMe business logic dictates that we will have the linkedEntityMetadata at this step
-            }: LinkedEntityMetadata = selectedLinkedEntityMetadata;
+            } = selectedLinkedEntityMetadata as LinkedEntityMetadata;
 
             if (renderTrackedEntitySearch) {
                 return renderTrackedEntitySearch(
@@ -227,8 +224,7 @@ const NewTrackedEntityRelationshipPlain = ({
             const {
                 trackedEntityTypeId: linkedEntityTrackedEntityTypeId,
                 programId: linkedEntityProgramId,
-                // $FlowFixMe business logic dictates that we will have the linkedEntityMetadata at this step
-            }: LinkedEntityMetadata = selectedLinkedEntityMetadata;
+            } = selectedLinkedEntityMetadata as LinkedEntityMetadata;
 
             if (renderTrackedEntityRegistration) {
                 return renderTrackedEntityRegistration(
@@ -286,5 +282,5 @@ const NewTrackedEntityRelationshipPlain = ({
     );
 };
 
-export const NewTrackedEntityRelationshipComponent: ComponentType<ComponentProps> =
+export const NewTrackedEntityRelationshipComponent =
     withStyles(styles)(NewTrackedEntityRelationshipPlain);
