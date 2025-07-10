@@ -1,10 +1,9 @@
-// @flow
 import { useMemo } from 'react';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { featureAvailable, FEATURES } from 'capture-core-utils';
+import { determineLinkedEntity } from 'capture-core/components/WidgetsRelationship/common/RelationshipsWidget/useGroupedLinkedEntities';
 import { useApiDataQuery } from '../../../../utils/reactQueryHelpers';
 import type { InputRelationshipData, RelationshipTypes } from '../Types';
-import { determineLinkedEntity } from '../RelationshipsWidget/useGroupedLinkedEntities';
 
 export const RelationshipSearchEntities = Object.freeze({
     TRACKED_ENTITY: 'trackedEntity',
@@ -12,11 +11,11 @@ export const RelationshipSearchEntities = Object.freeze({
     EVENT: 'event',
 });
 
-type Props = {|
-    entityId: string,
-    searchMode: $Values<typeof RelationshipSearchEntities>,
-    relationshipTypes: ?RelationshipTypes,
-|}
+type Props = {
+    entityId: string;
+    searchMode: typeof RelationshipSearchEntities[keyof typeof RelationshipSearchEntities];
+    relationshipTypes: RelationshipTypes | null;
+};
 
 type ReturnData = Array<InputRelationshipData>;
 
@@ -27,7 +26,6 @@ export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Pr
         return {
             resource: 'tracker/relationships',
             params: {
-                // $FlowFixMe - searchMode should be a valid key of RelationshipSearchEntities
                 [searchMode]: entityId,
                 fields: 'relationship,relationshipType,createdAt,from[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]],to[trackedEntity[trackedEntity,attributes,program,orgUnit,trackedEntityType],event[event,dataValues,program,orgUnit,orgUnitName,status,createdAt]]',
                 ...(supportForFeature
@@ -37,18 +35,18 @@ export const useRelationships = ({ entityId, searchMode, relationshipTypes }: Pr
         };
     }, [entityId, searchMode]);
 
-    return useApiDataQuery<ReturnData>(
+    return useApiDataQuery(
         ['relationships', entityId],
         query,
         {
             enabled: !!entityId,
-            select: (apiResponse: any) => {
+            select: (apiResponse: any): ReturnData => {
                 const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);
                 if (!relationshipTypes?.length || !apiRelationships?.length) {
                     return [];
                 }
 
-                return apiRelationships.reduce((acc, relationship) => {
+                return apiRelationships.reduce((acc: ReturnData, relationship: any) => {
                     const relationshipType = relationshipTypes
                         .find(relType => relType.id === relationship.relationshipType);
                     if (!relationshipType) {

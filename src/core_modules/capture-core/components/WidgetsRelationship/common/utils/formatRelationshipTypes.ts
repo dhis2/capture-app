@@ -1,4 +1,3 @@
-// @flow
 import type { ApiRelationshipTypes, RelationshipTypes } from '../Types';
 import { replaceElementIdsWithElement } from './replaceElementIdsWithElement';
 
@@ -7,23 +6,23 @@ const elementTypes = {
     DATA_ELEMENT: 'DATA_ELEMENT',
 };
 
-type Element = {|
-    id: string,
-    valueType: string,
-    displayName: string,
-    optionSet?: {|
+type Element = {
+    id: string;
+    valueType: string;
+    displayName: string;
+    optionSet?: {
         options: Array<{
-            code: string,
-            name: string,
-        }>,
-    |},
-|}
+            code: string;
+            name: string;
+        }>;
+    };
+};
 
-type Props = {|
-    relationshipTypes: ApiRelationshipTypes,
-    attributes: Array<Element>,
-    dataElements: Array<Element>,
-|}
+type Props = {
+    relationshipTypes: ApiRelationshipTypes;
+    attributes: Array<Element>;
+    dataElements: Array<Element>;
+};
 
 export const formatRelationshipTypes = ({
     relationshipTypes = [],
@@ -74,7 +73,6 @@ export const formatRelationshipTypes = ({
 
             return {
                 ...relationshipType,
-                // $FlowFixMe Might be fixable with generics
                 fromConstraint: {
                     ...fromConstraint,
                     trackerDataView: {
@@ -82,7 +80,6 @@ export const formatRelationshipTypes = ({
                         dataElements: fromDataElements,
                     },
                 },
-                // $FlowFixMe Might be fixable with generics
                 toConstraint: {
                     ...toConstraint,
                     trackerDataView: {
