@@ -3,6 +3,7 @@ import { FEATURES, useFeature } from 'capture-core-utils';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
+import type { Mutation } from 'capture-core-utils/types/app-runtime';
 
 type Props = {
     teiId: string;
@@ -11,6 +12,12 @@ type Props = {
 };
 
 const ReactQueryAppNamespace = 'capture';
+
+const addRelationshipMutation: Mutation = {
+    resource: '/tracker?async=false&importStrategy=CREATE',
+    type: 'create',
+    data: ({ apiData }) => apiData,
+};
 
 export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     const queryClient = useQueryClient();
@@ -22,10 +29,10 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
     );
 
     const { mutate } = useMutation(
-        ({ apiData }: { apiData: any }) => dataEngine.mutate({
-            resource: '/tracker?async=false&importStrategy=CREATE',
-            type: 'create',
-            data: apiData,
+        ({ apiData }: { apiData: any; clientRelationship: any }) => dataEngine.mutate(addRelationshipMutation, {
+            variables: {
+                apiData,
+            },
         }),
         {
             onError: (_: any, requestData: any) => {
@@ -49,9 +56,9 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
                     { [queryKey]: newRelationships },
                 );
             },
-            onMutate: (payload: { apiData: any; clientRelationship: any }) => {
+            onMutate: (...props) => {
                 onMutate && onMutate();
-                const { clientRelationship } = payload;
+                const { clientRelationship } = props[0];
                 if (!clientRelationship) return;
 
                 queryClient.setQueryData([ReactQueryAppNamespace, 'relationships', teiId], (apiResponse: any) => {
