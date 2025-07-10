@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { TARGET_SIDES } from '../common';
 import type { ApplicableTypesInfo } from './linkedEntityMetadataSelector.types';
@@ -6,14 +5,14 @@ import type { RelationshipType } from '../../../common/Types';
 import { RELATIONSHIP_ENTITIES } from '../../../common/constants';
 import type { TargetSides } from '../../../common/LinkedEntityMetadataSelector';
 
-const isApplicableProgram = (programId, sourceProgramIds) =>
+const isApplicableProgram = (programId: string | undefined, sourceProgramIds: readonly string[] | undefined): boolean =>
     (!sourceProgramIds || !programId || sourceProgramIds.includes(programId));
 
 const isApplicableUnidirectionalRelationshipType = (
-    { trackedEntityType, program },
-    sourceTrackedEntityTypeId,
-    sourceProgramIds,
-) => {
+    { trackedEntityType, program }: { trackedEntityType: { id: string }, program?: { id: string } },
+    sourceTrackedEntityTypeId: string,
+    sourceProgramIds: readonly string[] | undefined,
+): boolean => {
     const trackedEntityTypeId = trackedEntityType.id;
     const programId = program?.id;
 
@@ -24,7 +23,7 @@ const isApplicableUnidirectionalRelationshipType = (
 };
 
 const computeTargetSidesDualMatchingTET = (() => {
-    const getProgramMatchInfo = (sourceProgramIds, programId) => {
+    const getProgramMatchInfo = (sourceProgramIds: readonly string[], programId: string | undefined) => {
         if (!programId) {
             return { noProgram: true, programMatch: false };
         }
@@ -36,7 +35,7 @@ const computeTargetSidesDualMatchingTET = (() => {
         return { programMatch: false, noProgram: false };
     };
 
-    return (sourceProgramIds, fromProgramId, toProgramId): Array<TargetSides> => {
+    return (sourceProgramIds: readonly string[] | undefined, fromProgramId: string | undefined, toProgramId: string | undefined): TargetSides[] => {
         if (!sourceProgramIds) {
             return [TARGET_SIDES.FROM, TARGET_SIDES.TO];
         }
@@ -64,7 +63,10 @@ const computeTargetSidesDualMatchingTET = (() => {
 const getApplicableTargetSidesForBidirectionalRelationshipType = ({
     fromConstraint,
     toConstraint,
-}, sourceTrackedEntityTypeId, sourceProgramIds): Array<TargetSides> => {
+}: {
+    fromConstraint: { trackedEntityType: { id: string }, program?: { id: string } };
+    toConstraint: { trackedEntityType: { id: string }, program?: { id: string } };
+}, sourceTrackedEntityTypeId: string, sourceProgramIds: readonly string[] | undefined): TargetSides[] => {
     const { trackedEntityType: fromTrackedEntityType } = fromConstraint;
     const { trackedEntityType: toTrackedEntityType } = toConstraint;
 
@@ -89,9 +91,9 @@ const getApplicableTargetSidesForBidirectionalRelationshipType = ({
 };
 
 export const useApplicableTypesAndSides = (
-    relationshipTypes: $ReadOnlyArray<RelationshipType>,
+    relationshipTypes: readonly RelationshipType[],
     sourceTrackedEntityTypeId: string,
-    sourceProgramIds: $ReadOnlyArray<string>,
+    sourceProgramIds: readonly string[],
 ): ApplicableTypesInfo => useMemo(() =>
     relationshipTypes
         .filter(({ access }) => access.data.write)
@@ -114,7 +116,6 @@ export const useApplicableTypesAndSides = (
                     );
 
                     if (!applicable) {
-                    // $FlowFixMe filter
                         return null;
                     }
                     const { trackedEntityType, program } = toConstraint;
@@ -139,7 +140,6 @@ export const useApplicableTypesAndSides = (
                 );
 
                 if (!targetSides.length) {
-                // $FlowFixMe filter
                     return null;
                 }
 
@@ -169,13 +169,11 @@ export const useApplicableTypesAndSides = (
                             trackedEntityName,
                             programId,
                             targetSide,
-                            // $FlowFixMe
                             name,
                         };
                     }),
                 };
             }
-            // $FlowFixMe filter
             return null;
-        }).filter(applicableType => applicableType),
+        }).filter((applicableType): applicableType is NonNullable<typeof applicableType> => applicableType !== null) as ApplicableTypesInfo,
 [relationshipTypes, sourceTrackedEntityTypeId, sourceProgramIds]);
