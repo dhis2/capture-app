@@ -32,10 +32,10 @@ export const LinkToExistingPlain = ({
     classes,
 }: Props) => {
     const onChange = (value: string) => {
-        setRelatedStagesDataValues(prevValues => ({
-            ...prevValues,
+        setRelatedStagesDataValues({
+            ...relatedStagesDataValues,
             linkedEventId: value,
-        }));
+        });
     };
 
     return (

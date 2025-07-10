@@ -6,7 +6,7 @@ import type { RelatedStageDataValueStates } from '../WidgetRelatedStages.types';
 
 export type LinkToExistingProps = {
     relatedStagesDataValues: RelatedStageDataValueStates;
-    setRelatedStagesDataValues: (updater: (prev: RelatedStageDataValueStates) => RelatedStageDataValueStates) => void;
+    setRelatedStagesDataValues: (updater: any) => void;
     linkableEvents: Array<RelatedStagesEvents>;
     errorMessages: ErrorMessagesForRelatedStages;
     saveAttempted: boolean;
