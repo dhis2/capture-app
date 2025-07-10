@@ -1,12 +1,8 @@
-// @flow
 import React from 'react';
 
 import { useApplicableTypesAndSides } from './useApplicableTypesAndSides';
-import {
-    LinkedEntityMetadataSelector,
-    type LinkedEntityMetadataSelectorType,
-} from '../../../common/LinkedEntityMetadataSelector';
-import type { Props, Side, LinkedEntityMetadata } from './linkedEntityMetadataSelector.types';
+import { LinkedEntityMetadataSelector } from '../../../common/LinkedEntityMetadataSelector';
+import type { Props } from './linkedEntityMetadataSelector.types';
 
 export const LinkedEntityMetadataSelectorFromTrackedEntity = ({
     relationshipTypes,
@@ -16,8 +12,7 @@ export const LinkedEntityMetadataSelectorFromTrackedEntity = ({
 }: Props) => {
     const applicableTypesInfo = useApplicableTypesAndSides(relationshipTypes, trackedEntityTypeId, [programId]);
 
-    const LinkedEntityMetadataSelectorCommon: LinkedEntityMetadataSelectorType<LinkedEntityMetadata, Side> =
-    LinkedEntityMetadataSelector;
+    const LinkedEntityMetadataSelectorCommon = LinkedEntityMetadataSelector;
 
     return (
         <LinkedEntityMetadataSelectorCommon

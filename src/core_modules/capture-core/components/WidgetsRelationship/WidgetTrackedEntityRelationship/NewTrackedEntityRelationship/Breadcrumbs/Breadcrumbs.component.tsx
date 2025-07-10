@@ -1,11 +1,10 @@
-// @flow
-import React, { type ComponentType, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { LinkButton } from '../../../../Buttons/LinkButton.component';
 import { NEW_TRACKED_ENTITY_RELATIONSHIP_WIZARD_STEPS } from '../wizardSteps.const';
-import type { PlainProps, Props } from './breadcrumbs.types';
+import type { PlainProps } from './breadcrumbs.types';
 
 const styles = {
     container: {
@@ -13,9 +12,17 @@ const styles = {
     },
 };
 
-const Slash = withStyles({ slash: { padding: 5 } })(({ classes }) => <span className={classes.slash}>/</span>);
+const slashStyles = {
+    slash: {
+        padding: 5,
+    },
+};
 
-const LinkedEntityMetadataSelectorStep = ({ currentStep, trackedEntityTypeName, onNavigate }) => {
+type Props = PlainProps & WithStyles<typeof styles>;
+
+const Slash = withStyles(slashStyles)(({ classes }: WithStyles<typeof slashStyles>) => <span className={classes.slash}>/</span>);
+
+const LinkedEntityMetadataSelectorStep = ({ currentStep, onNavigate, trackedEntityTypeName }) => {
     const initialText = i18n.t('New {{trackedEntityTypeName}} relationship', {
         trackedEntityTypeName: trackedEntityTypeName && trackedEntityTypeName.toLowerCase(),
     });
@@ -68,7 +75,7 @@ const BreadcrumbsPlain = ({
     linkedEntityMetadataName,
     trackedEntityTypeName,
     classes,
-}: PlainProps) => (
+}: Props) => (
     <div className={classes.container}>
         <LinkedEntityMetadataSelectorStep
             currentStep={currentStep}
@@ -87,4 +94,4 @@ const BreadcrumbsPlain = ({
     </div>
 );
 
-export const Breadcrumbs: ComponentType<Props> = withStyles(styles)(BreadcrumbsPlain);
+export const Breadcrumbs = withStyles(styles)(BreadcrumbsPlain);

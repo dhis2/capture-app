@@ -1,19 +1,19 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useDataEngine, useAlert } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from 'react-query';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
+import type { Mutation } from 'capture-core-utils/types/app-runtime';
 
 type Props = {
     teiId: string;
     onMutate?: () => void;
-    onSuccess?: (apiResponse: Object, requestData: Object) => void;
-}
+    onSuccess?: (apiResponse: Record<string, unknown>, requestData: Record<string, unknown>) => void;
+};
 
 const ReactQueryAppNamespace = 'capture';
 
-const addRelationshipMutation = {
+const addRelationshipMutation: Mutation = {
     resource: '/tracker?async=false&importStrategy=CREATE',
     type: 'create',
     data: ({ apiData }) => apiData,
@@ -28,15 +28,14 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
         { critical: true },
     );
 
-    // $FlowFixMe
     const { mutate } = useMutation(
-        ({ apiData }) => dataEngine.mutate(addRelationshipMutation, {
+        ({ apiData }: { apiData: any; clientRelationship: any }) => dataEngine.mutate(addRelationshipMutation, {
             variables: {
                 apiData,
             },
         }),
         {
-            onError: (_, requestData) => {
+            onError: (_: any, requestData: any) => {
                 showAlert();
                 const apiRelationshipId = requestData.clientRelationship.relationship;
                 const apiResponse = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
@@ -44,7 +43,7 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
 
                 if (apiRelationships.length === 0) return;
 
-                const newRelationships = apiRelationships.reduce((acc, relationship) => {
+                const newRelationships = apiRelationships.reduce((acc: any[], relationship: any) => {
                     if (relationship.relationship === apiRelationshipId) {
                         return acc;
                     }
@@ -58,29 +57,29 @@ export const useAddRelationship = ({ teiId, onMutate, onSuccess }: Props) => {
                 );
             },
             onMutate: (...props) => {
-                onMutate && onMutate(...props);
+                onMutate && onMutate();
                 const { clientRelationship } = props[0];
                 if (!clientRelationship) return;
 
-                queryClient.setQueryData([ReactQueryAppNamespace, 'relationships', teiId], (apiResponse) => {
+                queryClient.setQueryData([ReactQueryAppNamespace, 'relationships', teiId], (apiResponse: any) => {
                     const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, apiResponse);
                     const updatedInstances = [clientRelationship, ...apiRelationships];
                     return { [queryKey]: updatedInstances };
                 });
             },
-            onSuccess: async (apiResponse, requestData) => {
+            onSuccess: async (apiResponse: any, requestData: any) => {
                 const apiRelationshipIds = apiResponse.bundleReport.typeReportMap.RELATIONSHIP.objectReports.reduce(
-                    (acc, report) => [...acc, report.uid],
+                    (acc: string[], report: any) => [...acc, report.uid],
                     [],
                 );
                 const currentRelationships = queryClient.getQueryData([ReactQueryAppNamespace, 'relationships', teiId]);
                 const apiRelationships = handleAPIResponse(REQUESTED_ENTITIES.relationships, currentRelationships);
                 if (apiRelationships.length === 0) return;
 
-                const newRelationships = apiRelationships.map((relationship) => {
+                const newRelationships = apiRelationships.map((relationship: any) => {
                     if (
                         apiRelationshipIds.find(
-                            apiRelationshipId => apiRelationshipId === relationship.relationship,
+                            (apiRelationshipId: string) => apiRelationshipId === relationship.relationship,
                         )
                     ) {
                         return {

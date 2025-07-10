@@ -1,9 +1,8 @@
-// @flow
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import { Button, IconSearch16, IconAdd16, spacersNum, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
-import type { PlainProps, Props } from './retrieverModeSelector.types';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { PlainProps } from './retrieverModeSelector.types';
 
 const styles = {
     container: {
@@ -16,12 +15,14 @@ const styles = {
     },
 };
 
+type Props = PlainProps & WithStyles<typeof styles>;
+
 const RetrieverModeSelectorPlain = ({
     classes,
     onSearchSelected,
     onNewSelected,
     trackedEntityName,
-}: PlainProps) => (
+}: Props) => (
     <div className={classes.container}>
         <div className={classes.retrieverSelector}>
             <Button
@@ -42,4 +43,4 @@ const RetrieverModeSelectorPlain = ({
     </div>
 );
 
-export const RetrieverModeSelector: ComponentType<Props> = withStyles(styles)(RetrieverModeSelectorPlain);
+export const RetrieverModeSelector = withStyles(styles)(RetrieverModeSelectorPlain);
