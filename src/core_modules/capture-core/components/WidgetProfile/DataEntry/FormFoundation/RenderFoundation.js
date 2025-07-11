@@ -102,6 +102,52 @@ const buildMainSection = async ({
     return section;
 };
 
+const addLeftoversSection = async ({
+    renderFoundation,
+    programTrackedEntityAttributes,
+    trackedEntityAttributes,
+    optionSets,
+    querySingleResource,
+    minorServerVersion,
+}: {
+    renderFoundation: RenderFoundation,
+    programTrackedEntityAttributes: Array<ProgramTrackedEntityAttribute>,
+    trackedEntityAttributes: Array<TrackedEntityAttribute>,
+    optionSets: Array<OptionSet>,
+    querySingleResource: QuerySingleResource,
+    minorServerVersion: number,
+}) => {
+    if (!programTrackedEntityAttributes) return;
+
+    // Check if there exist attributes which are not assigned to a section
+    const attributesInSection = renderFoundation.getElements().reduce((acc, attribute) => {
+        acc.add(attribute.id);
+        return acc;
+    }, new Set());
+
+    const unassignedAttributes = programTrackedEntityAttributes
+        .filter(attribute => !attributesInSection.has(attribute.trackedEntityAttributeId));
+
+    if (unassignedAttributes.length === 0) return;
+
+    // Create a special section for the unassigned attributes
+    const section = new Section((o) => {
+        o.id = Section.LEFTOVERS_SECTION_ID;
+        o.group = Section.groups.ENROLLMENT;
+    });
+
+    await buildElementsForSection({
+        // $FlowIgnore
+        programTrackedEntityAttributes: unassignedAttributes,
+        trackedEntityAttributes,
+        optionSets,
+        section,
+        querySingleResource,
+        minorServerVersion,
+    });
+    renderFoundation.addSection(section);
+};
+
 const buildElementsForSection = async ({
     programTrackedEntityAttributes,
     trackedEntityAttributes,
@@ -322,6 +368,16 @@ export const buildFormFoundation = async (program: any, querySingleResource: Que
         });
         section && renderFoundation.addSection(section);
     }
+
+    await addLeftoversSection({
+        renderFoundation,
+        programTrackedEntityAttributes,
+        trackedEntityAttributes,
+        optionSets,
+        querySingleResource,
+        minorServerVersion,
+    });
+
     return renderFoundation;
 };
 
