@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -1655,6 +1655,9 @@ msgstr "载入工作列表发生错误"
 msgid "You do not have access to complete events"
 msgstr "您无法访问完成的事件"
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr "完成事件"
 
@@ -1679,11 +1682,11 @@ msgstr "出现未知错误。"
 msgid "An error occurred while completing events"
 msgstr "完成事件时发生错误"
 
-msgid "An error occurred while deleting the events"
-msgstr "删除事件时发生错误"
-
 msgid "You do not have access to delete events"
 msgstr "您无权删除事件"
+
+msgid "An error occurred while deleting the events"
+msgstr "删除事件时发生错误"
 
 msgid "Delete events"
 msgstr "删除事件"
@@ -1709,6 +1712,9 @@ msgstr "后续跟踪"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "选择要按 {{label}} 筛选的项目阶段"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr "您无法批量完成加入登记"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1743,9 +1749,6 @@ msgstr[0] "{{count}} 加入登记已标记为完成将不会被更改。"
 
 msgid "Mark all events within enrollments as complete"
 msgstr "将加入登记中的所有事件标记为已完成"
-
-msgid "You do not have access to bulk complete enrollments"
-msgstr "您无法批量完成加入登记"
 
 msgid "Complete enrollments"
 msgstr "完成登记"
@@ -1824,16 +1827,6 @@ msgstr "工作清单无法更新"
 msgid "an error occurred loading the working lists"
 msgstr "加载工作列表时发生错误"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "加载跟踪的实体实例列表时出错"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "已选择 {{count}} "
-
-msgid "Deselect all"
-msgstr "取消全选"
-
 msgid "Update view"
 msgstr "更新视图"
 
@@ -1866,6 +1859,28 @@ msgstr "显示较少<br>"
 
 msgid "Show All"
 msgstr "显示全部"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "已选择 {{count}} "
+
+msgid "Deselect all"
+msgstr "取消全选"
 
 msgid "Download as JSON"
 msgstr "下载为JSON"

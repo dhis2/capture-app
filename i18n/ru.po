@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -1748,6 +1748,9 @@ msgstr "произошла ошибка во время загрузки раб�
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1772,10 +1775,10 @@ msgstr "Произошла неизвестная ошибка."
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1802,6 +1805,9 @@ msgstr "Отслеживать"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Выберите этап программы для фильтрации по {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1841,9 +1847,6 @@ msgstr[2] ""
 msgstr[3] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1941,19 +1944,6 @@ msgstr "Не удалось обновить рабочий список"
 msgid "an error occurred loading the working lists"
 msgstr "произошла ошибка при загрузке рабочих списков"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "произошла ошибка при загрузке списков отслеживаемых объектов"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} выбран"
-msgstr[1] "{{count}} выбрано"
-msgstr[2] "{{count}} выбрано"
-msgstr[3] "{{count}} выбрано"
-
-msgid "Deselect all"
-msgstr "Отменить выбор всего"
-
 msgid "Update view"
 msgstr "Обновить список"
 
@@ -1986,6 +1976,31 @@ msgstr "Показать меньше"
 
 msgid "Show All"
 msgstr "Показать все"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} выбран"
+msgstr[1] "{{count}} выбрано"
+msgstr[2] "{{count}} выбрано"
+msgstr[3] "{{count}} выбрано"
+
+msgid "Deselect all"
+msgstr "Отменить выбор всего"
 
 msgid "Download as JSON"
 msgstr "Скачать в формате JSON"

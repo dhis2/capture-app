@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Rica, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/hisp-uio/teams/100509/nl/)\n"
@@ -1720,6 +1720,9 @@ msgstr "er is een fout opgetreden bij het laden van werklijsten"
 msgid "You do not have access to complete events"
 msgstr ""
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr ""
 
@@ -1744,10 +1747,10 @@ msgstr "Een onbekende fout is opgetreden."
 msgid "An error occurred while completing events"
 msgstr ""
 
-msgid "An error occurred while deleting the events"
+msgid "You do not have access to delete events"
 msgstr ""
 
-msgid "You do not have access to delete events"
+msgid "An error occurred while deleting the events"
 msgstr ""
 
 msgid "Delete events"
@@ -1774,6 +1777,9 @@ msgstr "Volg op"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Kies een programmafase om op te filteren {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1809,9 +1815,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Mark all events within enrollments as complete"
-msgstr ""
-
-msgid "You do not have access to bulk complete enrollments"
 msgstr ""
 
 msgid "Complete enrollments"
@@ -1897,19 +1900,6 @@ msgstr "Werklijst kon niet worden bijgewerkt"
 msgid "an error occurred loading the working lists"
 msgstr "er is een fout opgetreden bij het laden van de werklijsten"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-"er is een fout opgetreden bij het laden van lijsten met instanties van "
-"bijgehouden entiteiten"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} geselecteerd"
-msgstr[1] "{{count}} geselecteerd"
-
-msgid "Deselect all"
-msgstr "Deselecteer alles"
-
 msgid "Update view"
 msgstr "Weergave bijwerken"
 
@@ -1942,6 +1932,29 @@ msgstr "Laat minder zien"
 
 msgid "Show All"
 msgstr "Toon alles"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} geselecteerd"
+msgstr[1] "{{count}} geselecteerd"
+
+msgid "Deselect all"
+msgstr "Deselecteer alles"
 
 msgid "Download as JSON"
 msgstr "Downloaden als JSON"
