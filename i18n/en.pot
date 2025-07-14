@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-26T11:36:30.250Z\n"
-"PO-Revision-Date: 2025-06-26T11:36:30.250Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
+"PO-Revision-Date: 2025-07-07T08:21:16.395Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1713,6 +1713,9 @@ msgstr "an error occurred loading working lists"
 msgid "You do not have access to complete events"
 msgstr "You do not have access to complete events"
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr "There is a bulk data entry with unsaved changes"
+
 msgid "Complete events"
 msgstr "Complete events"
 
@@ -1737,11 +1740,11 @@ msgstr "An unknown error occurred."
 msgid "An error occurred while completing events"
 msgstr "An error occurred while completing events"
 
-msgid "An error occurred while deleting the events"
-msgstr "An error occurred while deleting the events"
-
 msgid "You do not have access to delete events"
 msgstr "You do not have access to delete events"
+
+msgid "An error occurred while deleting the events"
+msgstr "An error occurred while deleting the events"
 
 msgid "Delete events"
 msgstr "Delete events"
@@ -1766,6 +1769,9 @@ msgstr "Follow up"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Choose a program stage to filter by {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr "You do not have access to bulk complete enrollments"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1807,9 +1813,6 @@ msgstr[1] "{{count}} enrollments already marked as completed will not be changed
 
 msgid "Mark all events within enrollments as complete"
 msgstr "Mark all events within enrollments as complete"
-
-msgid "You do not have access to bulk complete enrollments"
-msgstr "You do not have access to bulk complete enrollments"
 
 msgid "Complete enrollments"
 msgstr "Complete enrollments"
@@ -1897,17 +1900,6 @@ msgstr "Working list could not be updated"
 msgid "an error occurred loading the working lists"
 msgstr "an error occurred loading the working lists"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "an error occurred loading Tracked entity instance lists"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} selected"
-msgstr[1] "{{count}} selected"
-
-msgid "Deselect all"
-msgstr "Deselect all"
-
 msgid "Update view"
 msgstr "Update view"
 
@@ -1940,6 +1932,29 @@ msgstr "Show Less"
 
 msgid "Show All"
 msgstr "Show All"
+
+msgid "Add to ongoing bulk data entry"
+msgstr "Add to ongoing bulk data entry"
+
+msgid "Add page to ongoing bulk data entry"
+msgstr "Add page to ongoing bulk data entry"
+
+msgid "Available bulk entry forms"
+msgstr "Available bulk entry forms"
+
+msgid "Open in bulk data entry"
+msgstr "Open in bulk data entry"
+
+msgid "Open page in bulk data entry"
+msgstr "Open page in bulk data entry"
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} selected"
+msgstr[1] "{{count}} selected"
+
+msgid "Deselect all"
+msgstr "Deselect all"
 
 msgid "Download as JSON"
 msgstr "Download as JSON"

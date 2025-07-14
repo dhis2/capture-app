@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Yury Rogachev <yury@dhis2.org>, 2025
 # Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
+# Yury Rogachev <yury@dhis2.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2025\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,6 +142,11 @@ msgid "Enrollment"
 msgstr "Roʼyxatga olish"
 
 msgid "Complete event"
+msgstr ""
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
 msgstr ""
 
 msgid "A value is required"
@@ -954,6 +959,12 @@ msgid "No results found for "
 msgstr ""
 
 msgid "Choose an organisation unit in the form below"
+msgstr ""
+
+msgid "None selected"
+msgstr "Biror nima tanlanmagan"
+
+msgid "Choose an organisation unit"
 msgstr ""
 
 msgid "Clear selection"

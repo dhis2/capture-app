@@ -4,8 +4,6 @@
 # Jaime Bosque <jaime.bosque@dhis2.org>, 2021
 # Pablo Pajuelo Cabezas <pablo@dhis2.org>, 2022
 # Christian Atavillos, 2023
-# Alison Andrade <aandrade@ippfwhr.org>, 2024
-# Janeth Cruz, 2024
 # Marta Vila <marta@dhis2.org>, 2024
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2024
 # Manuel Silva <manuel@dhis2.org>, 2024
@@ -14,17 +12,19 @@
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2024
 # Prabhjot Singh, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
-# Enzo Nicolas Rossi <enzo@dhis2.org>, 2024
 # Andres Miguel Rubio, 2025
-# Carlos Tejo Alonso, 2025
 # Pablo Del Médico, 2025
+# Alison Andrade <aandrade@ippfwhr.org>, 2025
+# Carlos Tejo Alonso, 2025
+# Enzo Nicolas Rossi <enzo@dhis2.org>, 2025
+# Janeth Cruz, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-04-09T14:11:50.346Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Pablo Del Médico, 2025\n"
+"Last-Translator: Janeth Cruz, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -158,6 +158,11 @@ msgstr "Inscripción"
 
 msgid "Complete event"
 msgstr "Completar el evento"
+
+msgid ""
+"The date entered belongs to an expired period. Enter a date after "
+"{{firstValidDate}}."
+msgstr ""
 
 msgid "A value is required"
 msgstr "Se requiere un valor"
@@ -1003,7 +1008,13 @@ msgid "No results found for "
 msgstr "No se encontraron resultados para"
 
 msgid "Choose an organisation unit in the form below"
-msgstr ""
+msgstr "Elija una unidad organizativa en el siguiente formulario"
+
+msgid "None selected"
+msgstr "Ninguno seleccionado"
+
+msgid "Choose an organisation unit"
+msgstr "Elija una unidad organizativa"
 
 msgid "Clear selection"
 msgstr "Despejar selecciones"
@@ -1173,7 +1184,7 @@ msgstr ""
 "protegido. Toda actividad será registrada en el log."
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Cambios no guardados"
 
 msgid "Continue data entry"
 msgstr ""
@@ -1765,6 +1776,9 @@ msgstr "se produjo un error al cargar listas de trabajo"
 msgid "You do not have access to complete events"
 msgstr "No tiene acceso para completar los eventos"
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr "Completar eventos"
 
@@ -1791,11 +1805,11 @@ msgstr "Se ha producido un error desconocido."
 msgid "An error occurred while completing events"
 msgstr "Se ha producido un error al completar los eventos"
 
-msgid "An error occurred while deleting the events"
-msgstr "Se ha producido un error al borrar los eventos"
-
 msgid "You do not have access to delete events"
 msgstr "No tiene acceso para eliminar eventos"
+
+msgid "An error occurred while deleting the events"
+msgstr "Se ha producido un error al borrar los eventos"
 
 msgid "Delete events"
 msgstr "Borrar eventos"
@@ -1823,6 +1837,9 @@ msgstr "Seguimiento"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Elija una etapa del programa para filtrar por {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr "No tiene acceso para completar de manera masiva las inscripciones"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1875,9 +1892,6 @@ msgstr[2] ""
 
 msgid "Mark all events within enrollments as complete"
 msgstr "Marcar todos los eventos dentro de las inscripciones como completos"
-
-msgid "You do not have access to bulk complete enrollments"
-msgstr "No tiene acceso para completar de manera masiva las inscripciones"
 
 msgid "Complete enrollments"
 msgstr "Completar inscripciones"
@@ -1974,20 +1988,6 @@ msgstr "No se pudo actualizar la lista de trabajo"
 msgid "an error occurred loading the working lists"
 msgstr "se produjo un error al cargar las listas de trabajo"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr ""
-"se produjo un error al cargar las listas de instancias de entidades "
-"rastreadas"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "{{count}} seleccionado"
-msgstr[1] "{{count}} seleccionado"
-msgstr[2] "{{count}} seleccionado"
-
-msgid "Deselect all"
-msgstr "Deseleccionar todo"
-
 msgid "Update view"
 msgstr "Actualizar vista"
 
@@ -2020,6 +2020,30 @@ msgstr "Mostrar menos"
 
 msgid "Show All"
 msgstr "Mostrar todo"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "{{count}} seleccionado"
+msgstr[1] "{{count}} seleccionado"
+msgstr[2] "{{count}} seleccionado"
+
+msgid "Deselect all"
+msgstr "Deseleccionar todo"
 
 msgid "Download as JSON"
 msgstr "Descargar como JSON"

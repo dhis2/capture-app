@@ -15,21 +15,22 @@ const styles = () => ({
 
 const BulkDataEntryPlain = ({
     programId,
-    setShowBulkDataEntryPlugin,
+    onCloseBulkDataEntryPlugin,
     displayFrontPageList,
     page,
+    trackedEntityIds,
     classes,
 }: Props) => {
     const { activeList, removeActiveList } = useBulkDataEntryConfigurations(programId);
 
     const onComplete = useCallback(async () => {
         await removeActiveList();
-        setShowBulkDataEntryPlugin(false);
-    }, [setShowBulkDataEntryPlugin, removeActiveList]);
+        onCloseBulkDataEntryPlugin();
+    }, [onCloseBulkDataEntryPlugin, removeActiveList]);
 
     const onDefer = useCallback(() => {
-        setShowBulkDataEntryPlugin(false);
-    }, [setShowBulkDataEntryPlugin]);
+        onCloseBulkDataEntryPlugin();
+    }, [onCloseBulkDataEntryPlugin]);
 
     if (!activeList) {
         return null;
@@ -49,6 +50,7 @@ const BulkDataEntryPlain = ({
                 pluginSource={activeList.pluginSource}
                 onComplete={onComplete}
                 onDefer={onDefer}
+                trackedEntityIds={trackedEntityIds}
             />
         </div>
     );

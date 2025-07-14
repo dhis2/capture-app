@@ -1,3 +1,78 @@
+## [103.1.1](https://github.com/dhis2/capture-app/compare/v103.1.0...v103.1.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4203](https://github.com/dhis2/capture-app/issues/4203)) ([8e2ae40](https://github.com/dhis2/capture-app/commit/8e2ae40509462f2d94bfbac7d579863c7a843e96))
+
+# [103.1.0](https://github.com/dhis2/capture-app/compare/v103.0.2...v103.1.0) (2025-07-09)
+
+
+### Features
+
+* [DHIS2-19024] Add trackedEntities from working lists to BulkDataEntryPlugin ([#4057](https://github.com/dhis2/capture-app/issues/4057)) ([1881ea6](https://github.com/dhis2/capture-app/commit/1881ea6064a1bc723751b6ea108426e66303f747))
+
+## [103.0.2](https://github.com/dhis2/capture-app/compare/v103.0.1...v103.0.2) (2025-07-08)
+
+
+### Bug Fixes
+
+* [LIBS-718] bump @dhis2-ui/calendar from 10.4.0 to 10.7.6 ([#4191](https://github.com/dhis2/capture-app/issues/4191)) ([ea207a0](https://github.com/dhis2/capture-app/commit/ea207a08d9ed9cf1b3a886c6049b8ba88a75791c))
+
+## [103.0.1](https://github.com/dhis2/capture-app/compare/v103.0.0...v103.0.1) (2025-07-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4168](https://github.com/dhis2/capture-app/issues/4168)) ([95730ec](https://github.com/dhis2/capture-app/commit/95730eceac41a6e1a2c6649ff196b1eae40b1340))
+
+# [103.0.0](https://github.com/dhis2/capture-app/compare/v102.6.15...v103.0.0) (2025-07-07)
+
+
+### chore
+
+* **release:** stop support for 2.39 ([#4131](https://github.com/dhis2/capture-app/issues/4131)) ([a5ad527](https://github.com/dhis2/capture-app/commit/a5ad527ab664b7774efab119ec5b39acdf098dce))
+
+
+### BREAKING CHANGES
+
+* **release:** Bump version to 103.0.0 to facilitate potential fixes for 2.39.
+
+## [102.6.15](https://github.com/dhis2/capture-app/compare/v102.6.14...v102.6.15) (2025-07-02)
+
+
+### Bug Fixes
+
+* skip flaky changelog cypress test ([#4188](https://github.com/dhis2/capture-app/issues/4188)) ([a6200ce](https://github.com/dhis2/capture-app/commit/a6200ce9ac94d0101ec5eb985334614212b29bdc))
+
+## [102.6.14](https://github.com/dhis2/capture-app/compare/v102.6.13...v102.6.14) (2025-06-26)
+
+
+### Bug Fixes
+
+* [DHIS2-19765] omit program indicators in profile widget rule execution ([#4163](https://github.com/dhis2/capture-app/issues/4163)) ([ba786d1](https://github.com/dhis2/capture-app/commit/ba786d12b33852629cb45d2f0de118fc569fd739))
+
+## [102.6.13](https://github.com/dhis2/capture-app/compare/v102.6.12...v102.6.13) (2025-06-26)
+
+
+### Bug Fixes
+
+* [DHIS2-16601] Rename TEIWorkingLists to TrackerWorkingLists ([#4136](https://github.com/dhis2/capture-app/issues/4136)) ([a37dfd8](https://github.com/dhis2/capture-app/commit/a37dfd8ec28cedea818442f7e496f64e037e7bb2))
+
+## [102.6.12](https://github.com/dhis2/capture-app/compare/v102.6.11...v102.6.12) (2025-06-25)
+
+
+### Bug Fixes
+
+* use 'en' as fallback in `localeCompareStrings` ([#4174](https://github.com/dhis2/capture-app/issues/4174)) ([2f222b6](https://github.com/dhis2/capture-app/commit/2f222b60a5cafad46d2de1b730515d0886232752))
+
+## [102.6.11](https://github.com/dhis2/capture-app/compare/v102.6.10...v102.6.11) (2025-06-25)
+
+
+### Bug Fixes
+
+* [DHIS2-19632] Search result cards display option codes instead of names/texts ([#4147](https://github.com/dhis2/capture-app/issues/4147)) ([a799279](https://github.com/dhis2/capture-app/commit/a799279dfa2ed58aa29afe8593a0893883541921))
+
 ## [102.6.10](https://github.com/dhis2/capture-app/compare/v102.6.9...v102.6.10) (2025-06-24)
 
 

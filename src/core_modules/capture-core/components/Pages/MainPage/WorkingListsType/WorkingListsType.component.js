@@ -2,10 +2,16 @@
 import React from 'react';
 import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingListsInit } from '../EventWorkingListsInit';
-import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
+import { TrackerWorkingLists } from '../../../WorkingLists/TrackerWorkingLists';
 import type { Props } from './workingListsType.types';
 
-export const WorkingListsType = ({ programId, orgUnitId, selectedTemplateId, onChangeTemplate }: Props) => {
+export const WorkingListsType = ({
+    programId,
+    orgUnitId,
+    selectedTemplateId,
+    onChangeTemplate,
+    onOpenBulkDataEntryPlugin,
+}: Props) => {
     const { programType } = useProgramInfo(programId);
     if (programType === programTypes.EVENT_PROGRAM) {
         return <EventWorkingListsInit programId={programId} orgUnitId={orgUnitId} />;
@@ -14,11 +20,12 @@ export const WorkingListsType = ({ programId, orgUnitId, selectedTemplateId, onC
     if (programType === programTypes.TRACKER_PROGRAM) {
         return (
             <>
-                <TeiWorkingLists
+                <TrackerWorkingLists
                     programId={programId}
                     orgUnitId={orgUnitId}
                     selectedTemplateId={selectedTemplateId}
                     onChangeTemplate={onChangeTemplate}
+                    onOpenBulkDataEntryPlugin={onOpenBulkDataEntryPlugin}
                 />
             </>
         );
