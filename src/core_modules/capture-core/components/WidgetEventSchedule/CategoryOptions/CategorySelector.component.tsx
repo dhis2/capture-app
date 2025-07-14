@@ -87,7 +87,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
     }
 
     componentWillUnmount() {
-        this.cancelablePromise && this.cancelablePromise.cancel();
+        this.cancelablePromise?.cancel();
         this.cancelablePromise = null;
     }
 
@@ -99,7 +99,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         this.setState({
             options: null,
         });
-        this.cancelablePromise && this.cancelablePromise.cancel();
+        this.cancelablePromise?.cancel();
 
         let currentRequestCancelablePromise: any;
 

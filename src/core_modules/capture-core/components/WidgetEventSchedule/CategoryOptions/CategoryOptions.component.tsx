@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
-import type { Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { CategorySelector } from './CategorySelector.component';
