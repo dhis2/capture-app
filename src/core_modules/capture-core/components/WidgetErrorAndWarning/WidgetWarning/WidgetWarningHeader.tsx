@@ -20,7 +20,7 @@ type Props = WithStyles<typeof styles>;
 const WidgetWarningHeaderPlain = ({ classes }: Props) => (
     <span className={classes.container}>
         <IconWarningFilled24 />
-        <p className={classes.label}>{i18n.t('Warning') as string}</p>
+        <p className={classes.label}>{i18n.t('Warning')}</p>
     </span>
 );
 

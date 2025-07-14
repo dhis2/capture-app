@@ -21,7 +21,7 @@ type Props = WithStyles<typeof styles>;
 const WidgetErrorHeaderPlain = ({ classes }: Props) => (
     <span className={classes.container}>
         <IconErrorFilled24 />
-        <p className={classes.label}>{i18n.t('Error') as string}</p>
+        <p className={classes.label}>{i18n.t('Error')}</p>
     </span>
 );
 
