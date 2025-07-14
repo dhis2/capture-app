@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
 
@@ -23,19 +22,25 @@ export const requestScheduleEvent = ({
     onSaveErrorActionType,
     assignedUser,
 }: {
-    scheduleDate: string,
-    notes: Array<{value: string}>,
-    programId: string,
-    orgUnitId: string,
-    stageId: string,
-    teiId: string,
-    eventId: string,
-    enrollmentId: string,
-    categoryOptions: Object,
-    onSaveExternal: (eventServerValues: Object, uid: string) => void,
-    onSaveSuccessActionType?: string,
-    onSaveErrorActionType?: string,
-    assignedUser?: ApiAssignedUser | null,
+    scheduleDate: string;
+    notes: Array<{
+        value: string;
+        storedAt?: string;
+        storedBy?: string;
+        createdBy?: any;
+        note?: string;
+    }>;
+    programId: string;
+    orgUnitId: string;
+    stageId: string;
+    teiId: string;
+    eventId: string;
+    enrollmentId: string;
+    categoryOptions: any;
+    onSaveExternal: (eventServerValues: any, uid: string) => void;
+    onSaveSuccessActionType?: string;
+    onSaveErrorActionType?: string;
+    assignedUser?: any;
 }) =>
     actionCreator(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST)({
         scheduleDate,
@@ -54,7 +59,7 @@ export const requestScheduleEvent = ({
     });
 
 export const scheduleEvent = (
-    serverData: Object,
+    serverData: any,
     uid: string,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
@@ -72,7 +77,7 @@ export const scheduleEvent = (
     });
 
 export const updateScheduledDateForEvent = (
-    serverData: Object,
+    serverData: any,
     eventId: string,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,

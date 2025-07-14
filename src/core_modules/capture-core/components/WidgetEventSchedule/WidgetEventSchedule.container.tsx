@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
@@ -43,14 +42,20 @@ export const WidgetEventSchedule = ({
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
-        programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
-    });
+        programStageScheduleConfig: programStageScheduleConfig as any,
+        programConfig: programConfig as any,
+        initialScheduleDate: initialScheduleDate || '',
+        eventData: Array.isArray(passOnProps.eventData) ? passOnProps.eventData : [],
+        enrolledAt: passOnProps.enrolledAt,
+        occurredAt: passOnProps.occurredAt,
+        hideDueDate: passOnProps.hideDueDate,
+    } as any);
     const { fromClientDate } = useTimeZoneConversion();
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
     const { currentUser, noteId } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
-    const [scheduledOrgUnit, setScheduledOrgUnit] = useState();
-    const [validation, setValidation] = useState();
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState<any>();
+    const [validation, setValidation] = useState<any>();
     const isFirstRender = useRef(true);
     useEffect(() => {
         if (initialOrgUnitId && orgUnitName) {
@@ -59,7 +64,7 @@ export const WidgetEventSchedule = ({
         }
     }, [orgUnitName, initialOrgUnitId]);
     const [isFormValid, setIsFormValid] = useState(false);
-    const convertScheduleDate = (date, validationResult = { error: false }) => {
+    const convertScheduleDate = (date: any, validationResult = { error: false }) => {
         if (!date || validationResult?.error) {
             return '';
         }
@@ -67,14 +72,14 @@ export const WidgetEventSchedule = ({
     };
     const serverScheduleDate = convertScheduleDate(scheduleDate, validation);
     const serverSuggestedScheduleDate = convertScheduleDate(suggestedScheduleDate);
-    const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState<any[]>([]);
     const [assignee, setAssignee] = useState(storedAssignee);
     const { eventId } = useLocationQuery();
     const selectedOrgUnitId = scheduledOrgUnit?.id || initialOrgUnitId;
     const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate, programId);
     const eventCountInOrgUnit = events.length;
-    const [selectedCategories, setSelectedCategories] = useState({});
-    const [categoryOptionsError, setCategoryOptionsError] = useState();
+    const [selectedCategories, setSelectedCategories] = useState<any>({});
+    const [categoryOptionsError, setCategoryOptionsError] = useState<any>();
     const { programCategory } = useCategoryCombinations(programId);
     const expiryPeriod = useProgramExpiryForUser(programId);
 
@@ -94,8 +99,8 @@ export const WidgetEventSchedule = ({
         if (programCategory?.categories &&
             Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
             const errors = programCategory.categories
-                .filter(({ id }) => !selectedCategories[id])
-                .reduce((acc, category) => {
+                .filter(({ id }: any) => !selectedCategories[id])
+                .reduce((acc: any, category: any) => {
                     acc[category.id] = { touched: true, valid: false };
                     return acc;
                 }, {});
@@ -115,7 +120,6 @@ export const WidgetEventSchedule = ({
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            // $FlowFixMe[incompatible-call]
             ...(assignee && { assignedUser: convertClientToServer(assignee, dataElementTypes.ASSIGNEE) }),
         }));
     }, [
@@ -137,27 +141,27 @@ export const WidgetEventSchedule = ({
         isFormValid,
     ]);
 
-    const onAddNote = (note) => {
+    const onAddNote = (note: string) => {
         const newNote = {
-            storedBy: currentUser.userName,
+            storedBy: (currentUser as any)?.userName,
             storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
             value: note,
             createdBy: {
-                firstName: currentUser.firstName,
-                surname: currentUser.surname,
+                firstName: (currentUser as any)?.firstName,
+                surname: (currentUser as any)?.surname,
             },
             note: noteId,
         };
         setNotes([...notes, newNote]);
     };
 
-    const onSetAssignee = useCallback(user => setAssignee(user), []);
+    const onSetAssignee = useCallback((user: any) => setAssignee(user), []);
     const onClickCategoryOption = useCallback((optionId: string, categoryId: string) => {
-        setSelectedCategories(prevCategoryOptions => ({
+        setSelectedCategories((prevCategoryOptions: any) => ({
             ...prevCategoryOptions,
             ...{ [categoryId]: optionId },
         }));
-        setCategoryOptionsError(prevError => ({
+        setCategoryOptionsError((prevError: any) => ({
             ...prevError,
             ...{ [categoryId]: { touched: true, valid: true } },
         }));
@@ -167,7 +171,7 @@ export const WidgetEventSchedule = ({
         const newCategoryOptions = { ...selectedCategories };
         delete newCategoryOptions[categoryId];
         setSelectedCategories(newCategoryOptions);
-        setCategoryOptionsError(prevError => ({
+        setCategoryOptionsError((prevError: any) => ({
             ...prevError,
             ...{ [categoryId]: { touched: true, valid: false } },
         }));
@@ -176,7 +180,7 @@ export const WidgetEventSchedule = ({
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
             <div>
-                {i18n.t('Program or stage is invalid')};
+                {i18n.t('Program or stage is invalid')}
             </div>
         );
     }
@@ -199,7 +203,7 @@ export const WidgetEventSchedule = ({
             enableUserAssignment={enableUserAssignment && stage?.enableUserAssignment}
             scheduleDate={scheduleDate}
             serverScheduleDate={serverScheduleDate}
-            displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
+            displayDueDateLabel={(programStageScheduleConfig as any)?.displayDueDateLabel || ''}
             suggestedScheduleDate={suggestedScheduleDate}
             serverSuggestedScheduleDate={serverSuggestedScheduleDate}
             validation={validation}
