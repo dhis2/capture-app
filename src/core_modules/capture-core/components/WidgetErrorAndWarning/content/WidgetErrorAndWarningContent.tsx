@@ -1,13 +1,11 @@
-// @flow
-
 import React from 'react';
 import { spacers, colors, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import cx from 'classnames';
 import type { contentTypes, ObjectType, StringType, Message } from './WidgetErrorAndWarningContent.types';
 import { widgetTypes } from './WidgetTypes';
 
-const styles = {
+const styles: Readonly<any> = {
     widgetWrapper: {
         padding: `0px ${spacersNum.dp16}px`,
     },
@@ -57,8 +55,9 @@ const StringItem = ({ message, listItem }: StringType) => (
     </li>
 );
 
+type Props = contentTypes & WithStyles<typeof styles>;
 
-const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: contentTypes) => {
+const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: Props) => {
     const warning = type === widgetTypes.WARNING;
     const error = type === widgetTypes.ERROR;
     return (
