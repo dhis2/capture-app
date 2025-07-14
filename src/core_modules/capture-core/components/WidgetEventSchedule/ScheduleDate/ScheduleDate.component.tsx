@@ -1,8 +1,7 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import {
     DateField,
     withDefaultFieldContainer,
@@ -16,7 +15,7 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { InfoBox } from '../InfoBox';
 import { baseInputStyles } from '../ScheduleOrgUnit/commonProps';
-import type { Props } from './scheduleDate.types';
+import type { PlainProps } from './ScheduleDate.types';
 
 const ScheduleDateField = withDefaultFieldContainer()(
     withLabel({
@@ -30,7 +29,7 @@ const ScheduleDateField = withDefaultFieldContainer()(
     ),
 );
 
-const styles = {
+const styles: Readonly<any> = {
     infoBox: {
         padding: `0 ${spacers.dp16} ${spacers.dp16} ${spacers.dp16}`,
     },
@@ -44,6 +43,8 @@ const styles = {
         fontSize: '14px',
     },
 };
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 const ScheduleDatePlain = ({
     scheduleDate,
@@ -59,7 +60,7 @@ const ScheduleDatePlain = ({
     hideDueDate,
     expiryPeriod,
 }: Props) => {
-    const validateDate = (dateString, internalComponentError) => {
+    const validateDate = (dateString: string, internalComponentError: any) => {
         if (!hasValue(dateString)) {
             return {
                 error: true,
@@ -109,10 +110,7 @@ const ScheduleDatePlain = ({
                     width="100%"
                     calendarWidth={350}
                     styles={baseInputStyles}
-                    onSetFocus={() => { }}
-                    onFocus={() => { }}
-                    onRemoveFocus={() => { }}
-                    onBlur={(date, internalComponentError) => {
+                    onBlur={(date: string, internalComponentError: any) => {
                         setScheduleDate(date);
                         setValidation(validateDate(date, internalComponentError));
                     }}
@@ -141,5 +139,4 @@ const ScheduleDatePlain = ({
     );
 };
 
-
-export const ScheduleDate: ComponentType<$Diff<Props, CssClasses>> = (withStyles(styles)(ScheduleDatePlain));
+export const ScheduleDate = withStyles(styles)(ScheduleDatePlain) as ComponentType<PlainProps>;

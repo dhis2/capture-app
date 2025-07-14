@@ -1,10 +1,9 @@
-// @flow
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { NoticeBox, spacersNum } from '@dhis2/ui';
 import moment from 'moment';
-import type { Props } from './infoBox.types';
+import type { PlainProps } from './InfoBox.types';
 
 const styles = {
     infoBox: {
@@ -16,6 +15,8 @@ const styles = {
 
 const getDayDifference = (startDate: string, endDate: string): number =>
     moment(startDate).diff(moment(endDate), 'days');
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 const InfoBoxPlain = ({
     scheduleDate,
@@ -75,4 +76,4 @@ const InfoBoxPlain = ({
     );
 };
 
-export const InfoBox: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(InfoBoxPlain);
+export const InfoBox = withStyles(styles)(InfoBoxPlain) as ComponentType<PlainProps>;
