@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { colors } from '@dhis2/ui';
 import { Widget } from '../../Widget';

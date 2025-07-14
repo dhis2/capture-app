@@ -1,10 +1,9 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { spacers, colors, IconErrorFilled24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         display: 'flex',
         alignItems: 'center',
@@ -17,10 +16,12 @@ const styles = {
     },
 };
 
-const WidgetErrorHeaderPlain = ({ classes }) => (
+type Props = WithStyles<typeof styles>;
+
+const WidgetErrorHeaderPlain = ({ classes }: Props) => (
     <span className={classes.container}>
         <IconErrorFilled24 />
-        <p className={classes.label}>{i18n.t('Error')}</p>
+        <p className={classes.label}>{i18n.t('Error') as string}</p>
     </span>
 );
 

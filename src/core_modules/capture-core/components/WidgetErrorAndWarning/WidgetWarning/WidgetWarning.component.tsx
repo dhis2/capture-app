@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { colors } from '@dhis2/ui';
 import { Widget } from '../../Widget';
@@ -7,7 +6,7 @@ import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningCo
 import { WidgetWarningHeader } from './WidgetWarningHeader';
 import { widgetTypes } from '../content/WidgetTypes';
 
-export const WidgetWarning = ({ warning }: PlainProps) => {
+export const WidgetWarning = ({ warning, classes }: PlainProps) => {
     const widgetType = widgetTypes.WARNING;
 
     if (!warning?.length) {
@@ -16,6 +15,7 @@ export const WidgetWarning = ({ warning }: PlainProps) => {
 
     return (
         <div
+            className={classes}
             data-test="error-widget"
         >
             <Widget
