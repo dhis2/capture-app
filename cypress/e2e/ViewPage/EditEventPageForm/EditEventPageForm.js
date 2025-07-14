@@ -11,7 +11,7 @@ const cleanUpEvent = () => {
 
     cy.get('[data-test="dataEntrySection-categorycombo"]')
         .within(() => {
-            cy.get('[data-test="single-select-input"]')
+            cy.get('[data-test="dhis2-uicore-singleselect"]')
                 .eq(0)
                 .click();
         });
@@ -86,7 +86,7 @@ And('you enable edit mode', () => {
 When('you change the category combination and save', () => {
     cy.get('[data-test="dataentry-field-attributeCategoryOptions-LFsZ8v5v7rq"]')
         .within(() => {
-            cy.get('[data-test="single-select-input"]')
+            cy.get('[data-test="dhis2-uicore-singleselect"]')
                 .eq(0)
                 .click();
         });

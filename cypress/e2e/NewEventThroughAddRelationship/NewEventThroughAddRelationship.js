@@ -11,7 +11,7 @@ When('you add data to the form', () => {
         .find('input')
         .type('25');
 
-    cy.get('[data-test="single-select-input"]')
+    cy.get('[data-test="dhis2-uicore-singleselect"]')
         .eq(0)
         .click();
 

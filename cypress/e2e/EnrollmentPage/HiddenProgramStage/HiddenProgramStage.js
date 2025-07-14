@@ -33,7 +33,7 @@ Given('you add an enrollment event that will result in a rule effect to hide a p
         .type(moment().format('YYYY-MM-DD'))
         .blur();
 
-    cy.get('[data-test="single-select-input"]')
+    cy.get('[data-test="dhis2-uicore-singleselect"]')
         .eq(6)
         .click();
 
