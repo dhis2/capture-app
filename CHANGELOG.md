@@ -1,3 +1,10 @@
+## [103.1.1](https://github.com/dhis2/capture-app/compare/v103.1.0...v103.1.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#4203](https://github.com/dhis2/capture-app/issues/4203)) ([8e2ae40](https://github.com/dhis2/capture-app/commit/8e2ae40509462f2d94bfbac7d579863c7a843e96))
+
 # [103.1.0](https://github.com/dhis2/capture-app/compare/v103.0.2...v103.1.0) (2025-07-09)
 
 
