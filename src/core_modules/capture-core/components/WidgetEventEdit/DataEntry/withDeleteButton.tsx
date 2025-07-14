@@ -1,23 +1,10 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import { type RenderFoundation } from '../../../metaData';
-
-type Props = {
-    onDelete: () => void,
-    formHorizontal?: ?boolean,
-    formFoundation: RenderFoundation,
-    hasDeleteButton?: ?boolean,
-};
-
-type State = {
-    isOpen: boolean,
-}
+import type { Props, State } from './withDeleteButton.types';
 
 const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
     class DeleteButtonHOC extends React.Component<Props, State> {
-        innerInstance: any;
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -29,33 +16,33 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
             return this.innerInstance;
         }
 
-        renderDeleteButton = (hasDeleteButton?: ?boolean) => (
+        innerInstance: any;
+
+        renderDeleteButton = (hasDeleteButton?: boolean) => (
             hasDeleteButton ? (<div>
                 <Button
                     onClick={() => { this.setState({ isOpen: true }); }}
-                    disabled={!this.props.formFoundation.access.data.write}
+                    secondary
                     destructive
                 >
-                    {i18n.t('Delete')}
+                    {i18n.t('Delete event')}
                 </Button>
-
                 {this.state.isOpen && (
                     <Modal
                         hide={!this.state.isOpen}
+                        onClose={() => { this.setState({ isOpen: false }); }}
+                        position="middle"
                     >
                         <ModalTitle>
                             {i18n.t('Delete event')}
                         </ModalTitle>
                         <ModalContent>
-                            {i18n.t('Deleting an event is permanent and cannot be undone.' + ' ' +
-                                'Are you sure you want to delete this event? ')}
+                            {i18n.t('Are you sure you want to delete this event? This action cannot be undone.')}
                         </ModalContent>
                         <ModalActions>
                             <ButtonStrip end>
                                 <Button
-                                    onClick={() => {
-                                        this.setState({ isOpen: false });
-                                    }}
+                                    onClick={() => { this.setState({ isOpen: false }); }}
                                     secondary
                                 >
                                     {i18n.t('No, cancel')}
@@ -73,20 +60,22 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                         </ModalActions>
                     </Modal>
                 )}
-            </div>
-            ) : null
-        )
+            </div>) : null
+        );
 
         render() {
-            const { onDelete, hasDeleteButton, ...passOnProps } = this.props;
+            const { hasDeleteButton, formHorizontal, formFoundation, ...passOnProps } = this.props;
+
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
-                <InnerComponent
-                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
-                    // $FlowFixMe[extra-arg] automated comment
-                    deleteButton={this.renderDeleteButton(hasDeleteButton)}
-                    {...passOnProps}
-                />
+                <div>
+                    <InnerComponent
+                        ref={(innerInstance) => { this.innerInstance = innerInstance; }}
+                        formHorizontal={formHorizontal}
+                        formFoundation={formFoundation}
+                        {...passOnProps}
+                    />
+                    {this.renderDeleteButton(hasDeleteButton)}
+                </div>
             );
         }
     };

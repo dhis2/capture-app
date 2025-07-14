@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
@@ -27,6 +26,7 @@ import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/prepar
 import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '../../helpers';
 import type { QuerySingleResource } from '../../../../utils/api';
 import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../metadataRetrieval/coreOrgUnit';
+import type { ApiUtils, EpicAction } from '../../../../../capture-core-utils/types';
 
 const runRulesForEditSingleEvent = async ({
     store,
@@ -37,13 +37,13 @@ const runRulesForEditSingleEvent = async ({
     programId,
     querySingleResource,
 }: {
-    store: ReduxStore,
-    dataEntryId: string,
-    itemId: string,
-    uid: string,
-    programId: string,
-    fieldData?: ?FieldData,
-    querySingleResource: QuerySingleResource
+    store: any;
+    dataEntryId: string;
+    itemId: string;
+    uid: string;
+    programId: string;
+    fieldData?: FieldData;
+    querySingleResource: QuerySingleResource;
 }) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
@@ -62,11 +62,9 @@ const runRulesForEditSingleEvent = async ({
     const foundation = stage.stageForm;
     const currentEventValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
     const currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
-    // $FlowFixMe
     const currentEvent = { ...currentEventValues, ...currentEventMainData, eventId };
 
     const { coreOrgUnit, cached } =
-        // $FlowFixMe
         await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
 
     let effects;
@@ -114,17 +112,16 @@ const runRulesForEditSingleEvent = async ({
 };
 
 export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
+    action$: EpicAction<any>,
+    store: any,
     { querySingleResource }: ApiUtils,
 ) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
-        map(actionBatch =>
-            actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
+        map((actionBatch: any) =>
+            actionBatch.payload.find((action: any) => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
-        concatMap((action) => {
+        concatMap((action: any) => {
             const { dataEntryId, itemId, uid, programId } = action.payload;
             const runRulesForEditSingleEventPromise = runRulesForEditSingleEvent({
                 store,
@@ -138,17 +135,16 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (
         }));
 
 export const runRulesOnUpdateFieldForEditSingleEventEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
+    action$: EpicAction<any>,
+    store: any,
     { querySingleResource }: ApiUtils,
 ) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
-        map(actionBatch =>
-            actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
+        map((actionBatch: any) =>
+            actionBatch.payload.find((action: any) => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE),
         ),
-        concatMap((action) => {
+        concatMap((action: any) => {
             const {
                 elementId,
                 value,
@@ -174,4 +170,3 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (
             });
             return from(runRulesForEditSingleEventPromise);
         }));
-

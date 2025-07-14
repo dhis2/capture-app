@@ -1,8 +1,7 @@
-// @flow
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 
-const validateOrgUnit = (value?: ?Object) => isValidOrgUnit(value);
+const validateOrgUnit = (value?: Record<string, unknown>) => isValidOrgUnit(value);
 
 export const getOrgUnitValidatorContainers = () => {
     const validatorContainers = [
