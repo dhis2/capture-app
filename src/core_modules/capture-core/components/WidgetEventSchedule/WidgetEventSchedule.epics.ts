@@ -60,11 +60,11 @@ export const scheduleEnrollmentEventEpic = (action$: any, store: any) =>
             }
 
             if (existingEnrollment) {
-                onSaveExternal && onSaveExternal(serverData.events[0]);
+                onSaveExternal?.(serverData.events[0]);
                 return updateScheduledDateForEvent(serverData, eventId, onSaveSuccessActionType, onSaveErrorActionType);
             }
 
-            onSaveExternal && onSaveExternal(serverData, uid);
+            onSaveExternal?.(serverData, uid);
             return scheduleEvent(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);
         }),
     );
