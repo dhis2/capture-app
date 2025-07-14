@@ -122,7 +122,7 @@ export const useDetermineSuggestedScheduleDate = ({
         }),
     ];
     const suggestedDate = scheduleDateComputeSteps.reduce((currentScheduleDate, computeScheduleDate) =>
-        (currentScheduleDate ?? computeScheduleDate())
+        (!currentScheduleDate ? computeScheduleDate() : currentScheduleDate)
     , undefined);
 
     return convertClientToForm(suggestedDate, dataElementTypes.DATE);

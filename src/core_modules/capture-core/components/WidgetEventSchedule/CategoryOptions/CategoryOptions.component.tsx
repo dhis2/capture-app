@@ -46,7 +46,7 @@ type Props = {
     categories: Array<CategoryOption>;
     selectedOrgUnitId: string;
     categoryOptionsError?: {[categoryId: string]: { touched: boolean; valid: boolean} } | null;
-    selectedCategories: {[categoryId: string]: string } | null;
+    selectedCategories: {[categoryId: string]: any } | null;
     onClickCategoryOption: (optionId: string, categoryId: string) => void;
     onResetCategoryOption: (categoryId: string) => void;
     required?: boolean;
@@ -79,7 +79,7 @@ const CategoryOptionsPlain = (props: Props) => {
                 </div>
                 <div className={orientation === 'horizontal' ? classes.field : ''}>
                     <CategorySelector
-                        initialValue={selectedCategories?.[category.id] ? { label: '', value: selectedCategories[category.id] } : null}
+                        initialValue={selectedCategories?.[category.id]}
                         category={category}
                         selectedOrgUnitId={selectedOrgUnitId}
                         onChange={(option) => {
