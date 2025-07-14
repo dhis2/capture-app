@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { CategorySelector } from './CategorySelector.component';
 import type { CategoryOption } from './CategoryOptions.types';
 
-const getStyles: any = (theme: Theme) => ({
+const getStyles: any = (theme: any) => ({
     container: {
         display: 'flex',
         padding: `${spacers.dp8}  ${spacers.dp16}`,
     },
     error: {
-        backgroundColor: theme.palette.error.light,
+        backgroundColor: theme.palette.error.lighter,
     },
     containerVertical: {
         display: 'flex',
@@ -32,7 +32,7 @@ const getStyles: any = (theme: Theme) => ({
         alignItems: 'center',
     },
     requiredClass: {
-        color: (theme.palette as any).required,
+        color: theme.palette.required,
     },
     errorMessage: {
         color: theme.palette.error.main,

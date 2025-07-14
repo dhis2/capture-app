@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
@@ -12,20 +11,20 @@ import {
     withLabel,
 } from '../../FormFields/New';
 
-type OrgUnitValue = {|
-    checked: boolean,
-    id: string,
-    children: number,
-    name: string,
-    displayName: string,
-    path: string,
-    selected: string[],
-|}
+type OrgUnitValue = {
+    checked: boolean;
+    id: string;
+    children: number;
+    name: string;
+    displayName: string;
+    path: string;
+    selected: string[];
+}
 
 type Props = {
-    onSelectOrgUnit: (orgUnit: OrgUnitValue) => void,
-    onDeselectOrgUnit: () => void,
-    orgUnit: OrgUnitValue,
+    onSelectOrgUnit: (orgUnit: OrgUnitValue) => void;
+    onDeselectOrgUnit: () => void;
+    orgUnit?: OrgUnitValue | null;
 };
 
 const OrgUnitFieldForForm = withDefaultFieldContainer()(
@@ -47,7 +46,7 @@ export const ScheduleOrgUnit = ({
 }: Props) => {
     const [touched, setTouched] = useState(false);
 
-    const handleSelect = (event) => {
+    const handleSelect = (event: any) => {
         setTouched(true);
         onSelectOrgUnit(event);
     };
@@ -68,7 +67,7 @@ export const ScheduleOrgUnit = ({
             onSelectClick={handleSelect}
             onBlur={handleDeselect}
             styles={baseInputStyles}
-            errorMessage={shouldShowError && errorMessages}
+            errorMessage={shouldShowError ? errorMessages : undefined}
         />
     );
 };

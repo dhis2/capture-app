@@ -1,4 +1,3 @@
-// @flow
 export {
     scheduleEnrollmentEventEpic,
 } from './WidgetEventSchedule.epics';

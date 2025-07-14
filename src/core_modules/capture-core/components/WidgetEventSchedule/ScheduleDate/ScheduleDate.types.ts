@@ -11,7 +11,15 @@ export type PlainProps = {
     eventCountInOrgUnit: number;
     serverSuggestedScheduleDate?: string | null;
     hideDueDate?: boolean;
-    orgUnit: { id: string; name: string };
+    orgUnit?: {
+        checked: boolean;
+        id: string;
+        children: number;
+        name: string;
+        displayName: string;
+        path: string;
+        selected: string[];
+    } | null;
     expiryPeriod?: {
         expiryPeriodType?: string | null;
         expiryDays?: number | null;

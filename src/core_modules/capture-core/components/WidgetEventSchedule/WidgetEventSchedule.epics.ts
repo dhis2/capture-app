@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { v4 as uuid } from 'uuid';
 import { map } from 'rxjs/operators';
@@ -11,10 +10,10 @@ import { statusTypes } from '../../events/statusTypes';
 import { convertCategoryOptionsToServer } from '../../converters/clientToServer';
 import { generateUID } from '../../utils/uid/generateUID';
 
-export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const scheduleEnrollmentEventEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST),
-        map((action) => {
+        map((action: any) => {
             const uid = uuid();
             const {
                 scheduleDate,
@@ -37,7 +36,7 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
             && [statusTypes.SCHEDULE, statusTypes.OVERDUE].includes(events[eventId].status);
             const attributeCategoryOptions = categoryOptions && convertCategoryOptionsToServer(categoryOptions);
 
-            let serverData = { events: [{
+            let serverData: any = { events: [{
                 scheduledAt: scheduleDate,
                 dataValues: [],
                 trackedEntity: teiId,
@@ -61,12 +60,11 @@ export const scheduleEnrollmentEventEpic = (action$: InputObservable, store: Red
             }
 
             if (existingEnrollment) {
-                onSaveExternal && onSaveExternal(serverData.events[0]);
+                onSaveExternal?.(serverData.events[0]);
                 return updateScheduledDateForEvent(serverData, eventId, onSaveSuccessActionType, onSaveErrorActionType);
             }
 
-            onSaveExternal && onSaveExternal(serverData, uid);
+            onSaveExternal?.(serverData, uid);
             return scheduleEvent(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);
         }),
     );
-

@@ -24,12 +24,12 @@ const getStyles = () => ({
 type Props = PlainProps & WithStyles<typeof getStyles>;
 
 const AssigneePlain = (props: Props) => {
-    const { classes, assignee, ...passOnProps } = props;
+    const { classes, assignee, onSetAssignee } = props;
     return (
         <div className={classes.container}>
             <div className={classes.label}>{i18n.t('Assignee')}</div>
             <div className={classes.field}>
-                <UserField inputPlaceholderText={i18n.t('Search for user')} value={assignee} {...passOnProps} />
+                <UserField inputPlaceholderText={i18n.t('Search for user')} value={assignee} onSet={onSetAssignee} />
             </div>
         </div>
     );

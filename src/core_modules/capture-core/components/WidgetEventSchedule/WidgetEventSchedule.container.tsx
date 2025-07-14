@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
@@ -40,17 +39,23 @@ export const WidgetEventSchedule = ({
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const dispatch = useDispatch();
-    const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
-    const { programConfig } = useScheduleConfigFromProgram(programId);
+    const { programStageScheduleConfig }: {programStageScheduleConfig?: any} = useScheduleConfigFromProgramStage(stageId);
+    const { programConfig }: {programConfig?: any} = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
-        programStageScheduleConfig, programConfig, initialScheduleDate, ...passOnProps,
+        programStageScheduleConfig,
+        programConfig,
+        initialScheduleDate,
+        eventData: passOnProps.eventData,
+        enrolledAt: passOnProps.enrolledAt,
+        occurredAt: passOnProps.occurredAt,
+        hideDueDate: passOnProps.hideDueDate,
     });
     const { fromClientDate } = useTimeZoneConversion();
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
-    const { currentUser, noteId } = useNoteDetails();
+    const { currentUser, noteId }: { currentUser: any, noteId: string } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
-    const [scheduledOrgUnit, setScheduledOrgUnit] = useState();
-    const [validation, setValidation] = useState();
+    const [scheduledOrgUnit, setScheduledOrgUnit] = useState<any>();
+    const [validation, setValidation] = useState<any>();
     const isFirstRender = useRef(true);
     useEffect(() => {
         if (initialOrgUnitId && orgUnitName) {
@@ -59,7 +64,7 @@ export const WidgetEventSchedule = ({
         }
     }, [orgUnitName, initialOrgUnitId]);
     const [isFormValid, setIsFormValid] = useState(false);
-    const convertScheduleDate = (date, validationResult = { error: false }) => {
+    const convertScheduleDate = (date: any, validationResult = { error: false }) => {
         if (!date || validationResult?.error) {
             return '';
         }
@@ -67,14 +72,20 @@ export const WidgetEventSchedule = ({
     };
     const serverScheduleDate = convertScheduleDate(scheduleDate, validation);
     const serverSuggestedScheduleDate = convertScheduleDate(suggestedScheduleDate);
-    const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState<Array<{
+        value: string;
+        storedAt: string;
+        storedBy?: string;
+        createdBy?: any;
+        note?: string;
+    }>>([]);
     const [assignee, setAssignee] = useState(storedAssignee);
     const { eventId } = useLocationQuery();
     const selectedOrgUnitId = scheduledOrgUnit?.id || initialOrgUnitId;
     const { events = [] } = useEventsInOrgUnit(selectedOrgUnitId, serverScheduleDate, programId);
     const eventCountInOrgUnit = events.length;
-    const [selectedCategories, setSelectedCategories] = useState({});
-    const [categoryOptionsError, setCategoryOptionsError] = useState();
+    const [selectedCategories, setSelectedCategories] = useState<any>({});
+    const [categoryOptionsError, setCategoryOptionsError] = useState<any>();
     const { programCategory } = useCategoryCombinations(programId);
     const expiryPeriod = useProgramExpiryForUser(programId);
 
@@ -94,8 +105,8 @@ export const WidgetEventSchedule = ({
         if (programCategory?.categories &&
             Object.keys(selectedCategories).length !== programCategory?.categories?.length) {
             const errors = programCategory.categories
-                .filter(({ id }) => !selectedCategories[id])
-                .reduce((acc, category) => {
+                .filter(({ id }: any) => !selectedCategories[id])
+                .reduce((acc: any, category: any) => {
                     acc[category.id] = { touched: true, valid: false };
                     return acc;
                 }, {});
@@ -115,7 +126,6 @@ export const WidgetEventSchedule = ({
             onSaveExternal: onSave,
             onSaveSuccessActionType,
             onSaveErrorActionType,
-            // $FlowFixMe[incompatible-call]
             ...(assignee && { assignedUser: convertClientToServer(assignee, dataElementTypes.ASSIGNEE) }),
         }));
     }, [
@@ -137,27 +147,29 @@ export const WidgetEventSchedule = ({
         isFormValid,
     ]);
 
-    const onAddNote = (note) => {
-        const newNote = {
-            storedBy: currentUser.userName,
-            storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
-            value: note,
-            createdBy: {
-                firstName: currentUser.firstName,
-                surname: currentUser.surname,
-            },
-            note: noteId,
-        };
-        setNotes([...notes, newNote]);
+    const onAddNote = (note: string) => {
+        if (currentUser) {
+            const newNote = {
+                storedBy: currentUser.userName,
+                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                value: note,
+                createdBy: {
+                    firstName: currentUser.firstName,
+                    surname: currentUser.surname,
+                },
+                note: noteId,
+            };
+            setNotes([...notes, newNote]);
+        }
     };
 
-    const onSetAssignee = useCallback(user => setAssignee(user), []);
+    const onSetAssignee = useCallback((user: any) => setAssignee(user), []);
     const onClickCategoryOption = useCallback((optionId: string, categoryId: string) => {
-        setSelectedCategories(prevCategoryOptions => ({
+        setSelectedCategories((prevCategoryOptions: any) => ({
             ...prevCategoryOptions,
             ...{ [categoryId]: optionId },
         }));
-        setCategoryOptionsError(prevError => ({
+        setCategoryOptionsError((prevError: any) => ({
             ...prevError,
             ...{ [categoryId]: { touched: true, valid: true } },
         }));
@@ -167,16 +179,16 @@ export const WidgetEventSchedule = ({
         const newCategoryOptions = { ...selectedCategories };
         delete newCategoryOptions[categoryId];
         setSelectedCategories(newCategoryOptions);
-        setCategoryOptionsError(prevError => ({
+        setCategoryOptionsError((prevError: any) => ({
             ...prevError,
             ...{ [categoryId]: { touched: true, valid: false } },
         }));
     }, [setSelectedCategories, selectedCategories]);
 
-    if (!program || !stage || !(program instanceof TrackerProgram)) {
+    if (!program || !stage || !(program instanceof TrackerProgram) || !programStageScheduleConfig) {
         return (
             <div>
-                {i18n.t('Program or stage is invalid')};
+                {i18n.t('Program or stage is invalid')}
             </div>
         );
     }

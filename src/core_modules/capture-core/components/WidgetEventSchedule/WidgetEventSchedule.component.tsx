@@ -1,7 +1,6 @@
-// @flow
-import React, { type ComponentType, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { DividerHorizontal as Divider } from 'capture-ui';
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
@@ -16,7 +15,7 @@ import { CategoryOptions } from './CategoryOptions/CategoryOptions.component';
 import { Assignee } from './Assignee';
 import { ScheduleOrgUnit } from './ScheduleOrgUnit/ScheduleOrgUnit.component';
 
-const styles = theme => ({
+const styles = (theme: any) => ({
     wrapper: {
         paddingLeft: spacersNum.dp16,
         minWidth: '300px',
@@ -28,6 +27,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.dividerForm,
     },
 });
+
 
 const WidgetEventSchedulePlain = ({
     stageId,
@@ -57,8 +57,8 @@ const WidgetEventSchedulePlain = ({
     validation,
     setValidation,
     ...passOnProps
-}: Props) => {
-    const onSelectOrgUnit = (e: { id: string, displayName: string, path: string }) => {
+}: Props & WithStyles<typeof styles>) => {
+    const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         setScheduledOrgUnit({
             id: e.id,
             name: e.displayName,
@@ -67,7 +67,7 @@ const WidgetEventSchedulePlain = ({
     };
 
     const onDeselectOrgUnit = () => {
-        setScheduledOrgUnit(undefined);
+        setScheduledOrgUnit(null);
     };
 
     useEffect(() => {
@@ -127,12 +127,13 @@ const WidgetEventSchedulePlain = ({
                     <NoteSection
                         notes={notes}
                         placeholder={i18n.t('Write a note about this scheduled event')}
+                        emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                         handleAddNote={onAddNote}
                     />
                 </DataSection>
                 {enableUserAssignment && (
                     <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
-                        <Assignee onSet={onSetAssignee} assignee={assignee} />
+                        <Assignee assignee={assignee} onSetAssignee={onSetAssignee} />
                     </DataSection>
                 )}
                 <ScheduleButtons
@@ -144,11 +145,11 @@ const WidgetEventSchedulePlain = ({
                 <ScheduleText
                     programName={programName}
                     stageName={stageName}
-                    orgUnitName={orgUnit?.name}
+                    orgUnitName={orgUnit?.name || ''}
                 />
             </div>
         </Widget>
     );
 };
 
-export const WidgetEventScheduleComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventSchedulePlain);
+export const WidgetEventScheduleComponent = withStyles(styles)(WidgetEventSchedulePlain);

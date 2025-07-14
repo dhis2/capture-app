@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-10T14:04:15.284Z\n"
-"PO-Revision-Date: 2025-07-10T14:04:15.284Z\n"
+"POT-Creation-Date: 2025-07-14T13:06:59.197Z\n"
+"PO-Revision-Date: 2025-07-14T13:06:59.197Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1368,6 +1368,12 @@ msgstr "Schedule date / Due date"
 
 msgid "Please provide a valid organisation unit"
 msgstr "Please provide a valid organisation unit"
+
+msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+
+msgid "Scheduling an event in {{stageName}} for {{programName}}"
+msgstr "Scheduling an event in {{stageName}} for {{programName}}"
 
 msgid "Schedule info"
 msgstr "Schedule info"
