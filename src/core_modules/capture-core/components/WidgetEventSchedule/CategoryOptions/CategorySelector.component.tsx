@@ -1,6 +1,5 @@
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
 import { OptionsSelectVirtualized } from
@@ -13,11 +12,11 @@ type SelectOption = {
 
 type Props = {
     // eslint-disable-next-line react/no-unused-prop-types
-    category: { id: string; name: string};
+    category: { id: string; displayName: string};
     selectedOrgUnitId: string | null;
     onChange: (option: SelectOption) => void;
     initialValue?: SelectOption | null;
-} & WithStyles<typeof styles>;
+}
 
 type State = {
     options: Array<SelectOption> | null;
@@ -26,9 +25,7 @@ type State = {
     selectedOption?: SelectOption | null;
 };
 
-const styles: any = () => ({});
-
-class CategorySelectorPlain extends React.Component<Props, State> {
+export class CategorySelector extends React.Component<Props, State> {
     static getOptionsAsync(
         categoryId: string,
         selectedOrgUnitId: string | null,
@@ -107,7 +104,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             (currentRequestCancelablePromise && this.cancelablePromise !== currentRequestCancelablePromise);
 
         currentRequestCancelablePromise = makeCancelablePromise(
-            CategorySelectorPlain
+            CategorySelector
                 .getOptionsAsync(
                     category.id,
                     selectedOrgUnitId,
@@ -164,4 +161,3 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         );
     }
 }
-export const CategorySelector = withStyles(styles)(CategorySelectorPlain);

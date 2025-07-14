@@ -79,7 +79,7 @@ const CategoryOptionsPlain = (props: Props) => {
                 </div>
                 <div className={orientation === 'horizontal' ? classes.field : ''}>
                     <CategorySelector
-                        initialValue={selectedCategories?.[category.id]}
+                        initialValue={selectedCategories?.[category.id] ? { label: '', value: selectedCategories[category.id] } : null}
                         category={category}
                         selectedOrgUnitId={selectedOrgUnitId}
                         onChange={(option) => {
