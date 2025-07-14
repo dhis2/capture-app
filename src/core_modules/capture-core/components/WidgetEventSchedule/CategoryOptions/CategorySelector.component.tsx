@@ -3,7 +3,8 @@ import log from 'loglevel';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
-import { OptionsSelectVirtualized } from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { OptionsSelectVirtualized } from
+    '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 
 type SelectOption = {
     label: string;
@@ -11,6 +12,7 @@ type SelectOption = {
 };
 
 type Props = {
+    // eslint-disable-next-line react/no-unused-prop-types
     category: { id: string; name: string};
     selectedOrgUnitId: string | null;
     onChange: (option: SelectOption) => void;
