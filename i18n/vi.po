@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-06-17T08:51:07.987Z\n"
+"POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -1719,6 +1719,9 @@ msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 msgid "You do not have access to complete events"
 msgstr "Bạn không có quyền hoàn thành sự kiện"
 
+msgid "There is a bulk data entry with unsaved changes"
+msgstr ""
+
 msgid "Complete events"
 msgstr "Hoàn thành sự kiện"
 
@@ -1746,11 +1749,11 @@ msgstr "Một lỗi không xác định đã xuất hiện."
 msgid "An error occurred while completing events"
 msgstr "Có lỗi khi hoàn tất sự kiện"
 
-msgid "An error occurred while deleting the events"
-msgstr "Có lỗi khi xoá sự kiện"
-
 msgid "You do not have access to delete events"
 msgstr "Bạn không có quyền xoá sự kiện"
+
+msgid "An error occurred while deleting the events"
+msgstr "Có lỗi khi xoá sự kiện"
 
 msgid "Delete events"
 msgstr "Xoá sự kiện"
@@ -1778,6 +1781,10 @@ msgstr "Theo dõi"
 
 msgid "Choose a program stage to filter by {{label}}"
 msgstr "Chọn một giai đoạn để lọc bởi {{label}}"
+
+msgid "You do not have access to bulk complete enrollments"
+msgstr ""
+"Bạn không có quyền truy cập vào danh sách đăng ký để hoàn thành hàng loạt"
 
 msgid ""
 "Some enrollments were completed successfully, but there was an error while "
@@ -1822,10 +1829,6 @@ msgstr[0] ""
 
 msgid "Mark all events within enrollments as complete"
 msgstr "Đánh dấu tất cả các sự kiện trong các đăng ký là đã hoàn tất"
-
-msgid "You do not have access to bulk complete enrollments"
-msgstr ""
-"Bạn không có quyền truy cập vào danh sách đăng ký để hoàn thành hàng loạt"
 
 msgid "Complete enrollments"
 msgstr "Hoàn tất đăng ký"
@@ -1908,16 +1911,6 @@ msgstr "Không thể cập nhật danh sách làm việc"
 msgid "an error occurred loading the working lists"
 msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 
-msgid "an error occurred loading Tracked entity instance lists"
-msgstr "đã có lỗi xảy ra khi tải danh sách cá thể"
-
-msgid "{{count}} selected"
-msgid_plural "{{count}} selected"
-msgstr[0] "Đã chọn {{count}}"
-
-msgid "Deselect all"
-msgstr "Bỏ chọn tất cả"
-
 msgid "Update view"
 msgstr "Cập nhật chế độ xem"
 
@@ -1950,6 +1943,28 @@ msgstr "Hiện ít hơn"
 
 msgid "Show All"
 msgstr "Hiển thị tất cả"
+
+msgid "Add to ongoing bulk data entry"
+msgstr ""
+
+msgid "Add page to ongoing bulk data entry"
+msgstr ""
+
+msgid "Available bulk entry forms"
+msgstr ""
+
+msgid "Open in bulk data entry"
+msgstr ""
+
+msgid "Open page in bulk data entry"
+msgstr ""
+
+msgid "{{count}} selected"
+msgid_plural "{{count}} selected"
+msgstr[0] "Đã chọn {{count}}"
+
+msgid "Deselect all"
+msgstr "Bỏ chọn tất cả"
 
 msgid "Download as JSON"
 msgstr "Tải về dạng JSON"
