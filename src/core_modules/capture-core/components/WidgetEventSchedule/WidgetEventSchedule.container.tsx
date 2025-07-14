@@ -49,10 +49,10 @@ export const WidgetEventSchedule = ({
         enrolledAt: passOnProps.enrolledAt,
         occurredAt: passOnProps.occurredAt,
         hideDueDate: passOnProps.hideDueDate,
-    } as any);
+    });
     const { fromClientDate } = useTimeZoneConversion();
     const orgUnitName = getCachedOrgUnitName(initialOrgUnitId);
-    const { currentUser, noteId } = useNoteDetails();
+    const { currentUser, noteId }: { currentUser: any, noteId: string } = useNoteDetails();
     const [scheduleDate, setScheduleDate] = useState('');
     const [scheduledOrgUnit, setScheduledOrgUnit] = useState<any>();
     const [validation, setValidation] = useState<any>();
@@ -72,7 +72,13 @@ export const WidgetEventSchedule = ({
     };
     const serverScheduleDate = convertScheduleDate(scheduleDate, validation);
     const serverSuggestedScheduleDate = convertScheduleDate(suggestedScheduleDate);
-    const [notes, setNotes] = useState<any[]>([]);
+    const [notes, setNotes] = useState<Array<{
+        value: string;
+        storedAt: string;
+        storedBy?: string;
+        createdBy?: any;
+        note?: string;
+    }>>([]);
     const [assignee, setAssignee] = useState(storedAssignee);
     const { eventId } = useLocationQuery();
     const selectedOrgUnitId = scheduledOrgUnit?.id || initialOrgUnitId;
@@ -143,12 +149,12 @@ export const WidgetEventSchedule = ({
 
     const onAddNote = (note: string) => {
         const newNote = {
-            storedBy: (currentUser as any)?.userName,
-            storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+            storedBy: currentUser?.userName,
+            storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString() || moment().toISOString(),
             value: note,
             createdBy: {
-                firstName: (currentUser as any)?.firstName,
-                surname: (currentUser as any)?.surname,
+                firstName: currentUser?.firstName,
+                surname: currentUser?.surname,
             },
             note: noteId,
         };

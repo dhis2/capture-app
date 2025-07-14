@@ -24,7 +24,7 @@ type OrgUnitValue = {
 type Props = {
     onSelectOrgUnit: (orgUnit: OrgUnitValue) => void;
     onDeselectOrgUnit: () => void;
-    orgUnit: OrgUnitValue;
+    orgUnit?: OrgUnitValue | null;
 };
 
 const OrgUnitFieldForForm = withDefaultFieldContainer()(
@@ -56,7 +56,7 @@ export const ScheduleOrgUnit = ({
         onDeselectOrgUnit();
     };
 
-    const shouldShowError = (!isValidOrgUnit(orgUnit?.id) && touched);
+    const shouldShowError = (!isValidOrgUnit(orgUnit) && touched);
     const errorMessages = i18n.t('Please provide a valid organisation unit');
 
     return (

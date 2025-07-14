@@ -1,5 +1,6 @@
 import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
+import type { ApiAssignedUser } from '../../../capture-core-utils/types/api-types';
 
 export const scheduleEventWidgetActionTypes = {
     EVENT_SCHEDULE_REQUEST: 'ScheduleEvent.RequestScheduleEvent',
@@ -40,7 +41,7 @@ export const requestScheduleEvent = ({
     onSaveExternal: (eventServerValues: any, uid: string) => void;
     onSaveSuccessActionType?: string;
     onSaveErrorActionType?: string;
-    assignedUser?: any;
+    assignedUser?: ApiAssignedUser;
 }) =>
     actionCreator(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST)({
         scheduleDate,

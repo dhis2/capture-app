@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { DividerHorizontal as Divider } from 'capture-ui';
 import i18n from '@dhis2/d2-i18n';
 import { isValidOrgUnit } from 'capture-core-utils/validators/form';
@@ -57,7 +57,7 @@ const WidgetEventSchedulePlain = ({
     validation,
     setValidation,
     ...passOnProps
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const onSelectOrgUnit = (e: { id: string; displayName: string; path: string }) => {
         setScheduledOrgUnit({
             id: e.id,
@@ -71,7 +71,7 @@ const WidgetEventSchedulePlain = ({
     };
 
     useEffect(() => {
-        const formIsValid = () => Boolean(isValidOrgUnit(orgUnit?.id) && scheduleDate && !validation?.error);
+        const formIsValid = () => Boolean(isValidOrgUnit(orgUnit) && scheduleDate && !validation?.error);
         setIsFormValid(formIsValid());
     }, [orgUnit, scheduleDate, validation, setIsFormValid]);
 
@@ -88,18 +88,18 @@ const WidgetEventSchedulePlain = ({
                     <ScheduleDate
                         programId={programId}
                         stageId={stageId}
-                        orgUnit={orgUnit as any}
+                        orgUnit={orgUnit}
                         scheduleDate={scheduleDate}
                         displayDueDateLabel={displayDueDateLabel}
                         serverSuggestedScheduleDate={serverSuggestedScheduleDate}
-                        validation={validation as any}
+                        validation={validation}
                         setValidation={setValidation}
                         {...passOnProps}
                     />
                     <Divider className={classes.divider} />
                     <div className={classes.evenNumbersRecords}>
                         <ScheduleOrgUnit
-                            orgUnit={orgUnit as any}
+                            orgUnit={orgUnit}
                             onSelectOrgUnit={onSelectOrgUnit}
                             onDeselectOrgUnit={onDeselectOrgUnit}
                             {...passOnProps}
@@ -113,7 +113,7 @@ const WidgetEventSchedulePlain = ({
                     <CategoryOptions
                         categories={programCategory.categories}
                         selectedOrgUnitId={orgUnit?.id}
-                        selectedCategories={selectedCategories as any}
+                        selectedCategories={selectedCategories}
                         categoryOptionsError={categoryOptionsError}
                         onClickCategoryOption={onClickCategoryOption}
                         onResetCategoryOption={onResetCategoryOption}
@@ -125,24 +125,22 @@ const WidgetEventSchedulePlain = ({
                     sectionName={i18n.t('Event notes')}
                 >
                     <NoteSection
-                        notes={notes as any}
+                        notes={notes}
                         placeholder={i18n.t('Write a note about this scheduled event')}
-                        emptyNoteMessage={i18n.t('No notes')}
+                        emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                         handleAddNote={onAddNote}
                     />
                 </DataSection>
                 {enableUserAssignment && (
                     <DataSection dataTest="assignee-section" sectionName={i18n.t('Assignee')}>
-                        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                        {/* @ts-ignore */}
-                        <Assignee assignee={assignee} onSet={onSetAssignee} />
+                        <Assignee assignee={assignee} onSetAssignee={onSetAssignee} />
                     </DataSection>
                 )}
                 <ScheduleButtons
                     hasChanges={scheduleDate !== suggestedScheduleDate}
                     onCancel={onCancel}
                     onSchedule={onSchedule}
-                    validation={validation as any}
+                    validation={validation}
                 />
                 <ScheduleText
                     programName={programName}

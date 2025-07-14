@@ -30,9 +30,13 @@ export type Props = {
    occurredAt: string;
    displayDueDateLabel: string;
    orgUnit?: {
+      checked: boolean;
       id: string;
+      children: number;
       name: string;
+      displayName: string;
       path: string;
+      selected: string[];
    } | null;
    stageName: string;
    programName: string;
@@ -53,7 +57,7 @@ export type Props = {
    eventCountInOrgUnit: number;
    notes: Array<{
       value: string;
-      storedAt?: string;
+      storedAt: string;
       storedBy?: string;
       createdBy?: any;
       note?: string;
@@ -74,10 +78,9 @@ export type Props = {
    validation?: {
       error: boolean;
       validationText: string;
-    } | null;
+    };
     setValidation: (validation: {
       error: boolean;
       validationText: string;
     }) => void;
-    classes: any;
 };
