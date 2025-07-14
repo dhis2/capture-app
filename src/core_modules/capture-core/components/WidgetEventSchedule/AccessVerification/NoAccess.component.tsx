@@ -1,11 +1,11 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 
-const getStyles = (theme: Theme) => ({
+const getStyles: any = (theme: Theme) => ({
     contents: {
         display: 'flex',
         justifyContent: 'center',
@@ -23,15 +23,10 @@ const getStyles = (theme: Theme) => ({
         paddingRight: theme.spacing.unit * 2,
     },
 });
+
 type Props = {
-    classes: {
-        contents: string,
-        buttonRow: string,
-        buttonContainer: string,
-        header: string,
-    },
-    onCancel: () => void,
-};
+    onCancel: () => void;
+} & WithStyles<typeof getStyles>;
 
 class NoAccessPlain extends Component<Props> {
     render() {
@@ -49,8 +44,6 @@ class NoAccessPlain extends Component<Props> {
                         className={classes.buttonContainer}
                     >
                         <Button
-                            variant="raised"
-                            color="primary"
                             disabled
                         >
                             {i18n.t('Save')}
@@ -60,8 +53,6 @@ class NoAccessPlain extends Component<Props> {
                         className={classes.buttonContainer}
                     >
                         <Button
-                            variant="text"
-                            color="primary"
                             onClick={onCancel}
                         >
                             {i18n.t('Cancel')}

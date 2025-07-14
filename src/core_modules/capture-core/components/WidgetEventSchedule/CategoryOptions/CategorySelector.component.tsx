@@ -1,40 +1,38 @@
-// @flow
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
 import { OptionsSelectVirtualized } from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 
 type SelectOption = {
-    label: string,
-    value: string,
+    label: string;
+    value: string;
 };
 
 type Props = {
-    category: { id: string, name: string},
-    selectedOrgUnitId: ?string,
-    onChange: (option: SelectOption) => void,
-    initialValue?: ?SelectOption,
-    ...CssClasses
-};
+    category: { id: string; name: string};
+    selectedOrgUnitId: string | null;
+    onChange: (option: SelectOption) => void;
+    initialValue?: SelectOption | null;
+} & WithStyles<typeof styles>;
 
 type State = {
-    options: ?Array<SelectOption>,
-    prevOrgUnitId: ?string,
-    open: boolean,
-    selectedOption?: ?SelectOption
+    options: Array<SelectOption> | null;
+    prevOrgUnitId: string | null;
+    open: boolean;
+    selectedOption?: SelectOption | null;
 };
 
-const styles = () => ({});
+const styles: any = () => ({});
 
 class CategorySelectorPlain extends React.Component<Props, State> {
     static getOptionsAsync(
         categoryId: string,
-        selectedOrgUnitId: ?string,
-        onIsAborted: Function,
+        selectedOrgUnitId: string | null,
+        onIsAborted: () => boolean,
     ) {
-        const predicate = (categoryOption: Object) => {
+        const predicate = (categoryOption: any) => {
             if (!selectedOrgUnitId) {
                 return true;
             }
@@ -47,7 +45,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             return !!orgUnits[selectedOrgUnitId];
         };
 
-        const project = (categoryOption: Object) => ({
+        const project = (categoryOption: any) => ({
             label: categoryOption.displayName,
             value: categoryOption.id,
             writeAccess: categoryOption.access.data.write,
@@ -69,9 +67,6 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         return null;
     }
 
-    onSelectSelector: Function;
-    cancelablePromise: Object;
-
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -80,7 +75,6 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             open: false,
             selectedOption: props.initialValue,
         };
-        // todo you cannot setState from this component (lgtm report)
         this.loadCagoryOptions(this.props);
     }
 
@@ -95,6 +89,8 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         this.cancelablePromise = null;
     }
 
+    cancelablePromise?: any;
+
     loadCagoryOptions(props: Props) {
         const { category, selectedOrgUnitId } = props;
 
@@ -103,13 +99,13 @@ class CategorySelectorPlain extends React.Component<Props, State> {
         });
         this.cancelablePromise && this.cancelablePromise.cancel();
 
-        let currentRequestCancelablePromise;
+        let currentRequestCancelablePromise: any;
 
         const isRequestAborted = () =>
             (currentRequestCancelablePromise && this.cancelablePromise !== currentRequestCancelablePromise);
 
         currentRequestCancelablePromise = makeCancelablePromise(
-            CategorySelector
+            CategorySelectorPlain
                 .getOptionsAsync(
                     category.id,
                     selectedOrgUnitId,
@@ -119,7 +115,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
 
         currentRequestCancelablePromise
             .promise
-            .then((options) => {
+            .then((options: SelectOption[]) => {
                 options.sort((a, b) => {
                     if (a.label === b.label) {
                         return 0;
@@ -135,7 +131,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
                 });
                 this.cancelablePromise = null;
             })
-            .catch((error) => {
+            .catch((error: any) => {
                 if (!(error && (error.aborted || error.isCanceled))) {
                     log.error(
                         errorCreator('An error occured loading category options')({ error }),
@@ -157,7 +153,7 @@ class CategorySelectorPlain extends React.Component<Props, State> {
             options ? <OptionsSelectVirtualized
                 value={this.state.selectedOption?.value}
                 nullable
-                onChange={(option) => {
+                onChange={(option: any) => {
                     this.setState({ selectedOption: option });
                     onChange(option);
                 }}

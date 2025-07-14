@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { generateUID } from '../../../utils/uid/generateUID';
@@ -17,7 +16,7 @@ export const useNoteDetails = () => {
 
     return {
         error,
-        currentUser: !loading && data.currentUser,
+        currentUser: !loading && data?.currentUser,
         noteId: generateUID(),
     };
 };

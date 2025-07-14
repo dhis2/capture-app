@@ -1,18 +1,18 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import { spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { CategorySelector } from './CategorySelector.component';
 import type { CategoryOption } from './CategoryOptions.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles: any = (theme: Theme) => ({
     container: {
         display: 'flex',
         padding: `${spacers.dp8}  ${spacers.dp16}`,
     },
     error: {
-        backgroundColor: theme.palette.error.lighter,
+        backgroundColor: theme.palette.error.light,
     },
     containerVertical: {
         display: 'flex',
@@ -33,7 +33,7 @@ const getStyles = (theme: Theme) => ({
         alignItems: 'center',
     },
     requiredClass: {
-        color: theme.palette.required,
+        color: (theme.palette as any).required,
     },
     errorMessage: {
         color: theme.palette.error.main,
@@ -43,16 +43,15 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    orientation: string,
-    categories: Array<CategoryOption>,
-    selectedOrgUnitId: string,
-    categoryOptionsError?: ?{[categoryId: string]: { touched: boolean, valid: boolean} },
-    selectedCategories: ?{[categoryId: string]: string },
-    onClickCategoryOption: (optionId: string, categoryId: string) => void,
-    onResetCategoryOption: (categoryId: string) => void,
-    required?: boolean,
-    ...CssClasses
-};
+    orientation: string;
+    categories: Array<CategoryOption>;
+    selectedOrgUnitId: string;
+    categoryOptionsError?: {[categoryId: string]: { touched: boolean; valid: boolean} } | null;
+    selectedCategories: {[categoryId: string]: string } | null;
+    onClickCategoryOption: (optionId: string, categoryId: string) => void;
+    onResetCategoryOption: (categoryId: string) => void;
+    required?: boolean;
+} & WithStyles<typeof getStyles>;
 
 const CategoryOptionsPlain = (props: Props) => {
     const { classes,
@@ -66,12 +65,12 @@ const CategoryOptionsPlain = (props: Props) => {
         required,
     } = props;
 
-    const renderCategorySelector = (category) => {
+    const renderCategorySelector = (category: CategoryOption) => {
         const { id } = category;
         const hasError = categoryOptionsError?.[id]?.touched && !categoryOptionsError?.[id]?.valid;
         return (<div className={hasError ? classes.error : ''}>
             <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
-                <div className={orientation === 'horizontal' && classes.label}>
+                <div className={orientation === 'horizontal' ? classes.label : ''}>
                     {category.displayName}
                     {required && <span
                         className={classes.requiredClass}
@@ -79,7 +78,7 @@ const CategoryOptionsPlain = (props: Props) => {
                     &nbsp;*
                     </span>}
                 </div>
-                <div className={orientation === 'horizontal' && classes.field}>
+                <div className={orientation === 'horizontal' ? classes.field : ''}>
                     <CategorySelector
                         initialValue={selectedCategories?.[category.id]}
                         category={category}

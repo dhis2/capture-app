@@ -1,28 +1,27 @@
-// @flow
 import moment from 'moment';
 import { convertServerToClient, convertClientToForm } from '../../../converters';
 import { dataElementTypes } from '../../../metaData';
 
-const convertDate = (date): any => convertServerToClient(date, dataElementTypes.DATE);
+const convertDate = (date: any): any => convertServerToClient(date, dataElementTypes.DATE);
 
-const sortByMostRecentDate = (a, b) => moment.utc(b.eventDate).diff(moment.utc(a.eventDate));
+const sortByMostRecentDate = (a: any, b: any) => moment.utc(b.eventDate).diff(moment.utc(a.eventDate));
 
-const getSuggestedDateByNextScheduleDate = (id, eventData) => {
+const getSuggestedDateByNextScheduleDate = (id: string, eventData: Array<any>) => {
     const possibleNextScheduleValues = eventData
         .map(event => ({ ...event, eventDate: event.scheduledAt ?? event.occurredAt }))
         .reduce((acc, event) => {
-            event.dataValues.forEach((item) => {
+            event.dataValues.forEach((item: any) => {
                 if (item.dataElement === id && item.value !== null) {
                     acc.push({ ...item, eventDate: convertDate(event.eventDate) });
                 }
             });
             return acc;
-        }, []).sort(sortByMostRecentDate);
+        }, [] as any[]).sort(sortByMostRecentDate);
     if (!possibleNextScheduleValues.length) { return undefined; }
     return possibleNextScheduleValues[0].value;
 };
 
-const getSuggestedDateByStandardInterval = (standardInterval, eventData) => {
+const getSuggestedDateByStandardInterval = (standardInterval: number, eventData: Array<any>) => {
     const events = eventData
         .map(event => ({ eventDate: event.scheduledAt ?? event.occurredAt }))
         .filter(event => event.eventDate)
@@ -33,29 +32,25 @@ const getSuggestedDateByStandardInterval = (standardInterval, eventData) => {
     return moment(events[0].eventDate).add(standardInterval, 'days').format();
 };
 
-/**
- * Based on this docs https://docs.google.com/document/d/1I9-xc1oA95cWb64MHmIJXTHXQnxzi1SJ3RUmiuzSh78/edit#heading=h.6omlcjr0bk5n
- * to determine the suggested schedule date
- */
 type Props = {
     programStageScheduleConfig: {
-        id: string,
+        id: string;
         nextScheduleDate?: {
-            id: string
-        },
-        standardInterval?: ?number,
-        generatedByEnrollmentDate?: ?boolean,
-        minDaysFromStart: number
-    },
+            id: string;
+        };
+        standardInterval?: number | null;
+        generatedByEnrollmentDate?: boolean | null;
+        minDaysFromStart: number;
+    };
     programConfig: {
-        displayIncidentDate?: boolean
-    },
-    enrolledAt: string,
-    occurredAt: string,
-    initialScheduleDate: string,
-    eventData: Array<Object>,
-    hideDueDate?: boolean
-}
+        displayIncidentDate?: boolean;
+    };
+    enrolledAt: string;
+    occurredAt: string;
+    initialScheduleDate: string;
+    eventData: Array<any>;
+    hideDueDate?: boolean;
+};
 
 const calculateSuggestedDateFromStart = ({
     generatedByEnrollmentDate,
@@ -63,7 +58,13 @@ const calculateSuggestedDateFromStart = ({
     enrolledAt,
     occurredAt,
     minDaysFromStart,
-}: Object) => {
+}: {
+    generatedByEnrollmentDate?: boolean | null;
+    displayIncidentDate?: boolean;
+    enrolledAt: string;
+    occurredAt: string;
+    minDaysFromStart: number;
+}) => {
     let suggestedScheduleDate;
     if (generatedByEnrollmentDate || !displayIncidentDate) {
         suggestedScheduleDate = moment(enrolledAt).add(minDaysFromStart, 'days').format();
@@ -124,6 +125,5 @@ export const useDetermineSuggestedScheduleDate = ({
         (!currentScheduleDate ? computeScheduleDate() : currentScheduleDate)
     , undefined);
 
-    // $FlowFixMe dataElementTypes flow error
     return convertClientToForm(suggestedDate, dataElementTypes.DATE);
 };

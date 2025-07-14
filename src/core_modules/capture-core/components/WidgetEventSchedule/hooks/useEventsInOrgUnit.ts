@@ -1,4 +1,3 @@
-// @flow
 import { useMemo, useEffect } from 'react';
 import { handleAPIResponse, REQUESTED_ENTITIES } from 'capture-core/utils/api';
 import { useDataQuery } from '@dhis2/app-runtime';
@@ -22,7 +21,7 @@ export const useEventsInOrgUnit = (
                 return {
                     events: {
                         resource: 'tracker/events',
-                        params: ({ variables: { orgUnitId: ouId, selectedDate: date, programId: pId } }) => ({
+                        params: ({ variables: { orgUnitId: ouId, selectedDate: date, programId: pId } }: any) => ({
                             orgUnit: ouId,
                             program: pId,
                             scheduledAfter: date,
