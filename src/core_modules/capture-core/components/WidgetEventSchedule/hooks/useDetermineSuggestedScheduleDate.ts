@@ -33,7 +33,7 @@ const getSuggestedDateByStandardInterval = (standardInterval: number, eventData:
 };
 
 type Props = {
-    programStageScheduleConfig: {
+    programStageScheduleConfig?: {
         id: string;
         nextScheduleDate?: {
             id: string;
@@ -42,12 +42,12 @@ type Props = {
         generatedByEnrollmentDate?: boolean | null;
         minDaysFromStart: number;
     };
-    programConfig: {
+    programConfig?: {
         displayIncidentDate?: boolean;
     };
     enrolledAt: string;
     occurredAt: string;
-    initialScheduleDate: string;
+    initialScheduleDate?: string;
     eventData: Array<any>;
     hideDueDate?: boolean;
 };
@@ -84,7 +84,7 @@ export const useDetermineSuggestedScheduleDate = ({
     hideDueDate,
 }: Props) => {
     if (initialScheduleDate && !hideDueDate) { return initialScheduleDate; }
-    if (!programStageScheduleConfig) { return undefined; }
+    if (!programStageScheduleConfig || !programConfig) { return undefined; }
 
     const {
         nextScheduleDate,

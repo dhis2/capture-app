@@ -39,13 +39,13 @@ export const WidgetEventSchedule = ({
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const dispatch = useDispatch();
-    const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
-    const { programConfig } = useScheduleConfigFromProgram(programId);
+    const { programStageScheduleConfig }: {programStageScheduleConfig?: any} = useScheduleConfigFromProgramStage(stageId);
+    const { programConfig }: {programConfig?: any} = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
-        programStageScheduleConfig: programStageScheduleConfig as any,
-        programConfig: programConfig as any,
-        initialScheduleDate: initialScheduleDate || '',
-        eventData: Array.isArray(passOnProps.eventData) ? passOnProps.eventData : [],
+        programStageScheduleConfig,
+        programConfig,
+        initialScheduleDate,
+        eventData: passOnProps.eventData,
         enrolledAt: passOnProps.enrolledAt,
         occurredAt: passOnProps.occurredAt,
         hideDueDate: passOnProps.hideDueDate,
@@ -148,17 +148,19 @@ export const WidgetEventSchedule = ({
     ]);
 
     const onAddNote = (note: string) => {
-        const newNote = {
-            storedBy: currentUser?.userName,
-            storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString() || moment().toISOString(),
-            value: note,
-            createdBy: {
-                firstName: currentUser?.firstName,
-                surname: currentUser?.surname,
-            },
-            note: noteId,
-        };
-        setNotes([...notes, newNote]);
+        if (currentUser) {
+            const newNote = {
+                storedBy: currentUser.userName,
+                storedAt: fromClientDate(moment().toISOString()).getServerZonedISOString(),
+                value: note,
+                createdBy: {
+                    firstName: currentUser.firstName,
+                    surname: currentUser.surname,
+                },
+                note: noteId,
+            };
+            setNotes([...notes, newNote]);
+        }
     };
 
     const onSetAssignee = useCallback((user: any) => setAssignee(user), []);
@@ -183,7 +185,7 @@ export const WidgetEventSchedule = ({
         }));
     }, [setSelectedCategories, selectedCategories]);
 
-    if (!program || !stage || !(program instanceof TrackerProgram)) {
+    if (!program || !stage || !(program instanceof TrackerProgram) || !programStageScheduleConfig) {
         return (
             <div>
                 {i18n.t('Program or stage is invalid')}
@@ -209,7 +211,7 @@ export const WidgetEventSchedule = ({
             enableUserAssignment={enableUserAssignment && stage?.enableUserAssignment}
             scheduleDate={scheduleDate}
             serverScheduleDate={serverScheduleDate}
-            displayDueDateLabel={(programStageScheduleConfig as any)?.displayDueDateLabel || ''}
+            displayDueDateLabel={programStageScheduleConfig.displayDueDateLabel}
             suggestedScheduleDate={suggestedScheduleDate}
             serverSuggestedScheduleDate={serverSuggestedScheduleDate}
             validation={validation}
