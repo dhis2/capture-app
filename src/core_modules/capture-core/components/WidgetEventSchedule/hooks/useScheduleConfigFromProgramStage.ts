@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
@@ -16,5 +15,5 @@ export const useScheduleConfigFromProgramStage = (stageId: string) => {
 
 
     return { error,
-        programStageScheduleConfig: !loading && data.programStageScheduleConfig };
+        programStageScheduleConfig: !loading && data?.programStageScheduleConfig };
 };
