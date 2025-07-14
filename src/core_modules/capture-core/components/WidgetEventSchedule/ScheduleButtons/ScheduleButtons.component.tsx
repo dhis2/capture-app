@@ -1,10 +1,9 @@
-// @flow
 import React, { type ComponentType, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { Button, spacers } from '@dhis2/ui';
 import { DiscardDialog } from '../../Dialogs/DiscardDialog.component';
-import type { Props } from './scheduleButtons.types';
+import type { PlainProps } from './ScheduleButtons.types';
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 
 const styles = {
@@ -15,6 +14,8 @@ const styles = {
     button: {
     },
 };
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, validation }: Props) => {
     const [cancelDialogVisible, setCancelDialogVisible] = useState(false);
@@ -48,4 +49,4 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes, valid
     </div>);
 };
 
-export const ScheduleButtons: ComponentType<$Diff<Props, CssClasses>> = (withStyles(styles)(ScheduleButtonsPlain));
+export const ScheduleButtons = withStyles(styles)(ScheduleButtonsPlain) as ComponentType<PlainProps>;
