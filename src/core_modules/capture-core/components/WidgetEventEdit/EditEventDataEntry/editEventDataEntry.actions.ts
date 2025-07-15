@@ -1,5 +1,6 @@
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
+import type { ApiEnrollmentEvent } from '../../../../capture-core-utils/types/api-types';
 
 export const batchActionTypes = {
     START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH: 'StartSaveEditEventDataEntryBatchForViewSingleEvent',
@@ -101,7 +102,7 @@ export const requestSaveAndCompleteEnrollment = ({
     itemId: string;
     dataEntryId: string;
     formFoundation: any;
-    onSaveAndCompleteEnrollmentExternal?: (enrollmentData: any) => void;
+    onSaveAndCompleteEnrollmentExternal?: (enrollmnet: ApiEnrollmentEvent) => void;
     onSaveAndCompleteEnrollmentSuccessActionType?: string;
     onSaveAndCompleteEnrollmentErrorActionType?: string;
     enrollment: any;

@@ -24,6 +24,7 @@ import { enrollmentSiteActionTypes } from '../../../components/Pages/common/Enro
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { TrackerProgram } from '../../../metaData/Program';
 import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
+import type { ReduxStore } from '../../../../capture-core-utils/types';
 
 
 const getDataEntryKey = (eventStatus?: string): string => (
@@ -38,7 +39,7 @@ const getDataEntryId = (event: any): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadViewEventDataEntryEpic = (action$: any, store: any) =>
+export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -75,7 +76,8 @@ export const loadViewEventDataEntryEpic = (action$: any, store: any) =>
             }
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
-            const { enrollment, attributeValues } = state.enrollmentDomain;
+            const enrollment = state.enrollmentDomain?.enrollment;
+            const attributeValues = state.enrollmentDomain?.attributeValues;
 
             const args = {
                 eventContainer,

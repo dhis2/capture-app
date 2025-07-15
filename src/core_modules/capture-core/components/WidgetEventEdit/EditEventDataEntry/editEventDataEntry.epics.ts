@@ -35,6 +35,7 @@ import {
 import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString';
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
 import { enrollmentEditEventActionTypes } from '../../Pages/EnrollmentEditEvent';
+import type { ReduxStore } from '../../../../capture-core-utils/types';
 
 const getDataEntryId = (event: any): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
@@ -42,7 +43,7 @@ const getDataEntryId = (event: any): string => (
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadEditEventDataEntryEpic = (action$: any, store: any) =>
+export const loadEditEventDataEntryEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
         map((action: any) => {
@@ -57,7 +58,8 @@ export const loadEditEventDataEntryEpic = (action$: any, store: any) =>
             const program = metadataContainer.program;
             const foundation = metadataContainer.stage.stageForm;
             const { orgUnit, programCategory } = action.payload;
-            const { enrollment, attributeValues } = state.enrollmentDomain;
+            const enrollment = state.enrollmentDomain?.enrollment;
+            const attributeValues = state.enrollmentDomain?.attributeValues;
 
             return batchActions([
                 showEditEventDataEntry(),
@@ -75,7 +77,7 @@ export const loadEditEventDataEntryEpic = (action$: any, store: any) =>
             ]);
         }));
 
-export const saveEditedEventEpic = (action$: any, store: any) =>
+export const saveEditedEventEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
         map((action: any) => {
@@ -197,7 +199,7 @@ export const saveEditedEventFailedEpic = (action$: any, store: any) =>
             return batchActions(actions, batchActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED);
         }));
 
-export const requestDeleteEventDataEntryEpic = (action$: any, store: any, dependencies: any) =>
+export const requestDeleteEventDataEntryEpic = (action$: any, store: ReduxStore, dependencies: any) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
         map((action: any) => {
@@ -209,7 +211,7 @@ export const requestDeleteEventDataEntryEpic = (action$: any, store: any, depend
         }));
 
 export const startCreateNewAfterCompletingEpic = (
-    action$: any, store: any, { navigate }: any) =>
+    action$: any, store: ReduxStore, { navigate }: any) =>
     action$.pipe(
         ofType(
             actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
@@ -233,7 +235,7 @@ export const startCreateNewAfterCompletingEpic = (
             return EMPTY;
         }));
 
-export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: any) =>
+export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
         ofType(actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST),
         map((action: any) => {

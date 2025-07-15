@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
-import { withStyles } from '@material-ui/core/';
+import { withStyles, WithStyles, Theme } from '@material-ui/core/';
 import { dataEntryIds } from 'capture-core/constants';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -12,7 +12,7 @@ import {
     withBrowserBackWarning,
 } from '../../../components/DataEntry';
 
-import { DataElement, dataElementTypes } from '../../../metaData';
+import { type RenderFoundation, DataElement, dataElementTypes } from '../../../metaData';
 import { convertFormToClient, convertClientToView } from '../../../converters';
 
 import {
@@ -30,7 +30,6 @@ import {
     getCategoryOptionsValidatorContainers,
     AOCsectionKey,
 } from '../../DataEntryDhis2Helpers';
-import type { Props } from './ViewEventDataEntry.types';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
@@ -271,6 +270,22 @@ const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(OrgUnitF
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
+export type OrgUnit = {
+    id: string;
+    name: string;
+    path: string;
+};
+
+export type Props = {
+    formFoundation?: RenderFoundation | null;
+    orgUnit: OrgUnit;
+    programId: string;
+    itemId: string;
+    theme: Theme,
+    dataEntryId: string;
+    assignee?: any;
+    orgUnitFieldValue?: OrgUnit | null;
+};
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
@@ -291,8 +306,8 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class ViewEventDataEntryPlain extends Component<Props> {
-    constructor(props: Props) {
+class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
+    constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,

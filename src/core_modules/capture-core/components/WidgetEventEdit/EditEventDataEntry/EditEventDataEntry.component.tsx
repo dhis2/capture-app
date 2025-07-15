@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { withStyles, type Theme } from '@material-ui/core/styles';
+import { withStyles, WithStyles, type Theme } from '@material-ui/core/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import { withMainButton } from '../DataEntry/withMainButton';
+import type { RenderFoundation } from '../../../metaData';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
 import { WidgetEventSchedule } from '../../WidgetEventSchedule';
 import {
@@ -47,7 +48,8 @@ import {
 } from '../../DataEntryDhis2Helpers/';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 import { getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
-import type { Props, State, DataEntrySection } from './EditEventDataEntry.types';
+import type { UserFormField } from '../../FormFields/UserField';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
@@ -415,6 +417,54 @@ const AskToCreateNewDataEntry = withAskToCreateNew()(DeletableDataEntry);
 const AskToCompleteEnrollment = withAskToCompleteEnrollment()(AskToCreateNewDataEntry);
 const DataEntryWrapper = withBrowserBackWarning()(AskToCompleteEnrollment);
 
+type OrgUnit = {
+    id: string;
+    name: string;
+    path: string;
+};
+
+type Props = {
+    formFoundation?: RenderFoundation | null;
+    orgUnit: OrgUnit;
+    programId: string;
+    itemId: string;
+    initialScheduleDate?: string;
+    onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void;
+    onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void;
+    onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void;
+    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void;
+    onSaveAndCompleteEnrollment: (
+        orgUnit: OrgUnit,
+    ) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void;
+    onHandleScheduleSave: (eventData: any) => void;
+    onDelete: () => void;
+    onCancel: () => void;
+    onConfirmCreateNew: (itemId: string) => void;
+    onCancelCreateNew: (itemId: string) => void;
+    theme: Theme,
+    dataEntryId: string;
+    onCancelEditEvent?: (isScheduled: boolean) => void;
+    eventStatus?: string;
+    enrollmentId: string;
+    isCompleted?: boolean;
+    assignee?: UserFormField | null;
+    orgUnitFieldValue?: OrgUnit | null;
+    stageId: string;
+    eventData: any;
+    enrolledAt: string;
+    occurredAt: string;
+    teiId: string;
+
+};
+
+type State = {
+    mode: string;
+};
+
+type DataEntrySection = {
+    placement: string;
+    name?: string;
+};
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
@@ -430,8 +480,8 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class EditEventDataEntryPlain extends Component<Props, State> {
-    constructor(props: Props) {
+class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>, State> {
+    constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
             theme: (props as any).theme,
@@ -489,11 +539,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                     onSaveSuccessActionType={actionTypes.EVENT_SCHEDULE_SUCCESS}
                     onSaveErrorActionType={actionTypes.EVENT_SCHEDULE_ERROR}
                     assignee={assignee}
-                    stageId={(passOnProps as any).stageId}
-                    eventData={(passOnProps as any).eventData}
-                    enrolledAt={(passOnProps as any).enrolledAt}
-                    occurredAt={(passOnProps as any).occurredAt}
-                    teiId={(passOnProps as any).teiId}
                     {...passOnProps}
                 />}
             </div>
