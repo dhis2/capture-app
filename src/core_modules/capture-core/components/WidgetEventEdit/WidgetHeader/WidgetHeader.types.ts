@@ -7,7 +7,3 @@ export type PlainProps = {
     orgUnit: any,
     setChangeLogIsOpen: (toggle: boolean) => void,
 };
-
-export type Props = PlainProps & {
-    classes?: any,
-};

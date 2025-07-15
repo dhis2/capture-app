@@ -26,7 +26,3 @@ export type ComponentProps = Props & {
     formFoundation: RenderFoundation,
     stage: ProgramStage,
 };
-
-export type PlainProps = ComponentProps & {
-    classes?: any,
-}
