@@ -33,8 +33,33 @@ export type ReduxStore = {
                 linkedEventId?: string;
                 linkedOrgUnitId?: string;
             };
+            attributeValues: any[];
         };
+        viewEventPage: {
+            eventId?: string;
+            eventDetailsSection?: {
+                loading?: boolean;
+            };
+            loadedValues: {
+                eventContainer: { event: any };
+                dataEntryValues: Record<string, unknown>;
+                formValues: Record<string, unknown>;
+            };
+            showEditEvent: boolean;
+        };
+        activePage: {
+            isDataEntryLoading?: boolean;
+        };
+        dataEntriesFieldsValue: Record<string, unknown>;
+        dataEntriesFieldsMeta: Record<string, unknown>;
+        formsValues: Record<string, unknown>;
     };
+};
+
+export type ReduxAction<T = any, M = any> = {
+    type: string;
+    payload: T;
+    meta?: M;
 };
 
 export type ApiUtils = {
@@ -49,4 +74,6 @@ export type ApiUtils = {
  * @template PayloadType The type of the action's payload.
  * @template MetaType The type of the action's meta.
  */
-export type EpicAction<PayloadType, MetaType = Record<string, unknown>> = Observable<Action & { payload: PayloadType, meta: MetaType }>;
+export type EpicAction<PayloadType, MetaType = Record<string, unknown>> = Observable<
+    Action & { payload: PayloadType; meta: MetaType }
+>;

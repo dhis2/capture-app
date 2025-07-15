@@ -1,4 +1,3 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { from, of } from 'rxjs';
@@ -25,6 +24,7 @@ import { enrollmentSiteActionTypes } from '../../../components/Pages/common/Enro
 import { getProgramAndStageFromEvent, scopeTypes, getScopeInfo } from '../../../metaData';
 import { TrackerProgram } from '../../../metaData/Program';
 import { convertEventAttributeOptions } from '../../../events/convertEventAttributeOptions';
+import type { ReduxStore } from '../../../../capture-core-utils/types';
 
 
 const getDataEntryKey = (eventStatus?: string): string => (
@@ -33,13 +33,13 @@ const getDataEntryKey = (eventStatus?: string): string => (
         : dataEntryKeys.VIEW
 );
 
-const getDataEntryId = (event): string => (
+const getDataEntryId = (event: any): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
         ? dataEntryIds.ENROLLMENT_EVENT
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -59,14 +59,14 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
                 editEventDataEntryBatchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH,
             ),
         ),
-        filter((action) => {
+        filter((action: any) => {
             // Check if current view event is container event. Also check if in view mode.
             const eventId = action.payload.eventContainer.id;
             const state = store.value;
             const viewEventPage = state.viewEventPage || {};
             return viewEventPage.eventId === eventId && !viewEventPage.showEditEvent;
         }),
-        switchMap((action) => {
+        switchMap((action: any) => {
             const state = store.value;
             const eventContainer = action.payload.eventContainer;
             const orgUnit = action.payload.orgUnit;
@@ -76,7 +76,8 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             }
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
-            const { enrollment, attributeValues } = state.enrollmentDomain;
+            const enrollment = state.enrollmentDomain?.enrollment;
+            const attributeValues = state.enrollmentDomain?.attributeValues;
 
             const args = {
                 eventContainer,

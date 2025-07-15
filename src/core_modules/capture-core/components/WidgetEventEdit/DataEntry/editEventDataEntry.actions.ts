@@ -30,6 +30,7 @@ import { getEnrollmentForRulesEngine, getAttributeValuesForRulesEngine } from '.
 import type { EnrollmentData, AttributeValue } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type { ProgramCategory } from '../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
@@ -195,7 +196,7 @@ export const startRunRulesOnUpdateForEditSingleEvent = (actionData: { payload: a
 
 export const startAsyncUpdateFieldForEditEvent = (
     innerAction: any,
-    onSuccess: () => void,
-    onError: () => void,
+    onSuccess: (successInnerAction: ReduxAction<any, any>) => void,
+    onError: (errorInnerAction: ReduxAction<any, any>) => void,
 ) =>
     actionPayloadAppender(innerAction)({ onSuccess, onError });

@@ -1,10 +1,10 @@
-// @flow
 import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import { statusTypes } from 'capture-core/events/statusTypes';
 import { batchActions } from 'redux-batched-actions';
 import { dataEntryKeys } from 'capture-core/constants';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import {
@@ -12,7 +12,7 @@ import {
     startRunRulesOnUpdateForEditSingleEvent,
     batchActionTypes,
 } from '../DataEntry/editEventDataEntry.actions';
-import { type RenderFoundation } from '../../../metaData';
+import type { RenderFoundation } from '../../../metaData';
 
 import {
     setCurrentDataEntry, startRunRulesPostUpdateField,
@@ -27,7 +27,7 @@ import {
 
 import { getLocationQuery } from '../../../utils/routing/getLocationQuery';
 
-const mapStateToProps = (state: ReduxState, props) => {
+const mapStateToProps = (state: any, props: any) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     const itemId = state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
 
@@ -46,7 +46,7 @@ const mapStateToProps = (state: ReduxState, props) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
+const mapDispatchToProps = (dispatch: any, props: any): any => ({
     onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -103,7 +103,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
         eventId: string,
         dataEntryId: string,
         formFoundation: RenderFoundation,
-        enrollment: Object,
+        enrollment: any,
     ) => {
         const {
             onSaveAndCompleteEnrollmentExternal,
@@ -154,7 +154,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, props): any => ({
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
 export const EditEventDataEntry = connect(mapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(EditEventDataEntryComponent),
 );

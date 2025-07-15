@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { type OrgUnit, effectActions } from '@dhis2/rules-engine-javascript';
 import { actionCreator } from '../../../actions/actions.utils';
@@ -34,7 +33,7 @@ export const actionTypes = {
     PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY: 'PrerequisitesErrorLoadingViewEventDataEntryForViewSingleEvent',
 };
 
-function getAssignee(clientAssignee: ?Object) {
+function getAssignee(clientAssignee: any) {
     return clientAssignee ? convertClientToForm(clientAssignee, dataElementTypes.USERNAME) : clientAssignee;
 }
 
@@ -49,15 +48,15 @@ export const loadViewEventDataEntry =
         dataEntryId,
         dataEntryKey,
     }: {
-        eventContainer: ClientEventContainer,
-        orgUnit: { ...OrgUnit, path: string },
-        foundation: RenderFoundation,
-        program: Program,
-        dataEntryId: string,
-        dataEntryKey: string,
-        enrollment?: EnrollmentData,
-        attributeValues?: Array<AttributeValue>,
-        onCategoriesQuery?: ?Promise<Object>,
+        eventContainer: ClientEventContainer;
+        orgUnit: OrgUnit & { path: string };
+        foundation: RenderFoundation;
+        program: Program;
+        dataEntryId: string;
+        dataEntryKey: string;
+        enrollment?: EnrollmentData;
+        attributeValues?: Array<AttributeValue>;
+        onCategoriesQuery?: Promise<any> | null;
     }) => {
         const dataEntryPropsToInclude = [
             {
@@ -94,7 +93,6 @@ export const loadViewEventDataEntry =
 
         if (eventContainer.event && eventContainer.event.attributeCategoryOptions) {
             const newUIDsSeparator = featureAvailable(FEATURES.newUIDsSeparator);
-            // $FlowFixMe - this should work
             const attributeCategoryOptionIds = eventContainer.event?.attributeCategoryOptions.split(newUIDsSeparator ? ',' : ';');
             const getCategoryOptionsFromIndexedDB = async (optionIds) => {
                 const categoryOptionsPromises = optionIds.map(async (optionId) => {
@@ -137,7 +135,6 @@ export const loadViewEventDataEntry =
             extraProps,
         );
 
-        // $FlowFixMe[cannot-spread-indexer] automated comment
         const currentEvent = { ...eventContainer.event, ...eventContainer.values };
 
         let effects;
@@ -171,7 +168,6 @@ export const loadViewEventDataEntry =
             updateRulesEffects(filteredEffects, formId),
             actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({
                 loadedValues: { dataEntryValues, formValues, eventContainer, orgUnit },
-                // $FlowFixMe[prop-missing] automated comment
                 assignee: getAssignee(eventContainer.event.assignee),
             }),
         ];

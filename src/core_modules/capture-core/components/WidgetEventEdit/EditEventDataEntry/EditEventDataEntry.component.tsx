@@ -1,13 +1,12 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles, type Theme } from '@material-ui/core/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
-import type { RenderFoundation } from '../../../metaData';
 import { withMainButton } from '../DataEntry/withMainButton';
+import type { RenderFoundation } from '../../../metaData';
 import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
 import { WidgetEventSchedule } from '../../WidgetEventSchedule';
 import {
@@ -49,15 +48,16 @@ import {
     withDataEntryFields,
 } from '../../DataEntryDhis2Helpers/';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
-import type { UserFormField } from '../../FormFields/UserField';
 import { getOrgUnitValidatorContainers } from '../DataEntry/fieldValidators';
+import type { UserFormField } from '../../FormFields/UserField';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const tabMode = Object.freeze({
     REPORT: 'REPORT',
     SCHEDULE: 'SCHEDULE',
 });
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: Theme): Readonly<any> => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {
@@ -94,7 +94,7 @@ const baseComponentStylesVertical = {
     },
 };
 
-function defaultFilterProps(props: Object) {
+function defaultFilterProps(props: any) {
     const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
     return passOnProps;
 }
@@ -103,13 +103,13 @@ const getCancelOptions = () => ({
     color: 'primary',
 });
 
-const getBaseComponentProps = (props: Object) => ({
+const getBaseComponentProps = (props: any) => ({
     fieldOptions: props.fieldOptions,
     formHorizontal: props.formHorizontal,
     styles: props.formHorizontal ? baseComponentStylesVertical : baseComponentStyles,
 });
 
-const createComponentProps = (props: Object, componentProps: Object) => ({
+const createComponentProps = (props: any, componentProps: any) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
@@ -121,8 +121,8 @@ const buildReportDateSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -135,7 +135,7 @@ const buildReportDateSettingsFn = () => {
         );
     const reportDateSettings = {
         getComponent: () => reportDateComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             width: '100%',
             calendarWidth: 350,
             label: props.formFoundation.getLabel('occurredAt'),
@@ -161,8 +161,8 @@ const buildScheduleDateSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                             customTooltip: () => {
                                 const isScheduleableStatus =
@@ -183,8 +183,8 @@ const buildScheduleDateSettingsFn = () => {
             ),
         );
     const scheduleDateSettings = {
-        getComponent: (props: Object) => scheduleDateComponent(props),
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponent: (props: any) => scheduleDateComponent(props),
+        getComponentProps: (props: any) => createComponentProps(props, {
             width: '100%',
             calendarWidth: 350,
             label: props.formFoundation.getLabel('scheduledAt'),
@@ -193,7 +193,7 @@ const buildScheduleDateSettingsFn = () => {
             calendarType: systemSettingsStore.get().calendar,
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
-        getIsHidden: (props: Object) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
+        getIsHidden: (props: any) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
         getPropName: () => 'scheduledAt',
         getMeta: () => ({
             placement: placements.TOP,
@@ -211,8 +211,8 @@ const buildOrgUnitSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -228,7 +228,7 @@ const buildOrgUnitSettingsFn = () => {
 
     const orgUnitSettings = {
         getComponent: () => orgUnitComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
             label: i18n.t('Organisation unit'),
             required: true,
@@ -250,8 +250,8 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
                 withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(withFilterProps(defaultFilterProps)(CoordinateField)),
@@ -267,8 +267,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
                 withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(withFilterProps(defaultFilterProps)(PolygonField)),
@@ -281,18 +281,18 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 
 
 const buildGeometrySettingsFn = () => ({
-    isApplicable: (props: Object) => {
+    isApplicable: (props: any) => {
         const featureType = props.formFoundation.featureType;
         return ['Polygon', 'Point'].includes(featureType);
     },
-    getComponent: (props: Object) => {
+    getComponent: (props: any) => {
         const featureType = props.formFoundation.featureType;
         if (featureType === 'Polygon') {
             return polygonComponent;
         }
         return pointComponent;
     },
-    getComponentProps: (props: Object) => {
+    getComponentProps: (props: any) => {
         const featureType = props.formFoundation.featureType;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
@@ -326,8 +326,8 @@ const buildCompleteFieldSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                         })(
                             withDisplayMessages()(
@@ -340,7 +340,7 @@ const buildCompleteFieldSettingsFn = () => {
         );
     const completeSettings = {
         getComponent: () => completeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             label: i18n.t('Complete event'),
             id: 'complete',
         }),
@@ -363,8 +363,8 @@ const getCategoryOptionsSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(
@@ -379,14 +379,14 @@ const getCategoryOptionsSettingsFn = () => {
         );
     const categoryOptionsSettings = {
         getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
+        getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
             ...props.categories?.find(category => category.id === fieldId) ?? {},
             required: true,
         }),
-        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
-        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
-        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
-        getMeta: (props: Object) => ({
+        getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: any) => props.categories?.map(category => category.id),
+        getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
+        getMeta: (props: any) => ({
             section: AOCsectionKey,
             placement: placements.TOP,
             sectionName: props.programCategory?.displayName,
@@ -397,8 +397,8 @@ const getCategoryOptionsSettingsFn = () => {
 };
 
 const saveHandlerConfig = {
-    onIsCompleting: (props: Object) => props.completeDataEntryFieldValue === 'true',
-    onFilterProps: (props: Object) => {
+    onIsCompleting: (props: any) => props.completeDataEntryFieldValue === 'true',
+    onFilterProps: (props: any) => {
         const { completeDataEntryFieldValue, ...passOnProps } = props;
         return passOnProps;
     },
@@ -418,47 +418,49 @@ const AskToCreateNewDataEntry = withAskToCreateNew()(DeletableDataEntry);
 const AskToCompleteEnrollment = withAskToCompleteEnrollment()(AskToCreateNewDataEntry);
 const DataEntryWrapper = withBrowserBackWarning()(AskToCompleteEnrollment);
 
+
 type Props = {
-    formFoundation: ?RenderFoundation,
-    orgUnit: OrgUnit,
-    programId: string,
-    itemId: string,
-    initialScheduleDate?: string,
-    onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
-    onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void,
-    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    formFoundation?: RenderFoundation | null;
+    orgUnit: OrgUnit;
+    programId: string;
+    itemId: string;
+    initialScheduleDate?: string;
+    onUpdateDataEntryField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void;
+    onUpdateField: (orgUnit: OrgUnit, programId: string) => (innerAction: ReduxAction<any, any>) => void;
+    onStartAsyncUpdateField: (orgUnit: OrgUnit, programId: string) => void;
+    onSave: (orgUnit: OrgUnit) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void;
     onSaveAndCompleteEnrollment: (
         orgUnit: OrgUnit,
-    ) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
-    onHandleScheduleSave: (eventData: Object) => void,
-    onDelete: () => void,
-    onCancel: () => void,
-    onConfirmCreateNew: (itemId: string) => void,
-    onCancelCreateNew: (itemId: string) => void,
-    classes: {
-        dataEntryContainer: string,
-        fieldLabelMediaBased?: ?string,
-    },
+    ) => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void;
+    onHandleScheduleSave: (eventData: any) => void;
+    onDelete: () => void;
+    onCancel: () => void;
+    onConfirmCreateNew: (itemId: string) => void;
+    onCancelCreateNew: (itemId: string) => void;
     theme: Theme,
-    dataEntryId: string,
-    onCancelEditEvent?: (isScheduled: boolean) => void,
-    eventStatus?: string,
-    enrollmentId?: string,
-    isCompleted?: boolean,
-    assignee?: UserFormField | null,
-    orgUnitFieldValue: ?OrgUnit,
+    dataEntryId: string;
+    onCancelEditEvent?: (isScheduled: boolean) => void;
+    eventStatus?: string;
+    enrollmentId: string;
+    isCompleted?: boolean;
+    assignee?: UserFormField | null;
+    orgUnitFieldValue?: OrgUnit | null;
+    stageId: string;
+    eventData: any;
+    enrolledAt: string;
+    occurredAt: string;
+    teiId: string;
+
 };
 
-
 type DataEntrySection = {
-    placement: $Values<typeof placements>,
-    name?: string,
+    placement: string;
+    name?: string;
 };
 
 type State = {
-    mode: string,
-}
+    mode: string;
+};
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
@@ -474,10 +476,8 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class EditEventDataEntryPlain extends Component<Props, State> {
-    fieldOptions: { theme: Theme };
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
-    constructor(props: Props) {
+class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getStyles>, State> {
+    constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
@@ -489,6 +489,9 @@ class EditEventDataEntryPlain extends Component<Props, State> {
     }
 
     onHandleSwitchTab = newMode => this.setState({ mode: newMode })
+
+    fieldOptions: { theme: Theme; fieldLabelMediaBasedClass: string };
+    dataEntrySections: { [key: string]: DataEntrySection };
 
     renderScheduleView() {
         const {
@@ -524,7 +527,7 @@ class EditEventDataEntryPlain extends Component<Props, State> {
                     >{i18n.t('Schedule')}</Tab>
                 </TabBar>
                 {this.state.mode === tabMode.REPORT && this.renderDataEntry()}
-                {this.state.mode === tabMode.SCHEDULE && // $FlowFixMe[cannot-spread-inexact] automated comment
+                {this.state.mode === tabMode.SCHEDULE &&
                 <WidgetEventSchedule
                     programId={programId}
                     onSave={onHandleScheduleSave}
@@ -553,7 +556,6 @@ class EditEventDataEntryPlain extends Component<Props, State> {
             ...passOnProps
         } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={dataEntryId}
                 onUpdateDataEntryField={onUpdateDataEntryField(orgUnit, programId)}
