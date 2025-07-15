@@ -103,7 +103,7 @@ class SearchFormPlain extends React.Component<Props & { classes: any }, State> {
         return attributesWithValuesCount >= minAttributesRequiredToSearch;
     }
 
-    static errorMessages = {
+    static readonly errorMessages = {
         NO_ITEM_SELECTED: 'No item selected',
         SEARCH_FORM_MISSING: 'search form is missing. see log for details',
     };
@@ -170,7 +170,7 @@ class SearchFormPlain extends React.Component<Props & { classes: any }, State> {
     render() {
         const { searchGroup, classes, id } = this.props;
 
-        const searchForm = searchGroup && searchGroup.searchForm;
+        const searchForm = searchGroup?.searchForm;
 
         if (!searchForm) {
             return (
