@@ -1,5 +1,3 @@
-// @flow
-
 export const eventStatuses = Object.freeze({
     ACTIVE: 'ACTIVE',
     COMPLETED: 'COMPLETED',

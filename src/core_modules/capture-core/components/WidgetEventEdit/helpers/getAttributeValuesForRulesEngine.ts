@@ -1,6 +1,5 @@
-// @flow
 import { convertServerToClient } from '../../../converters';
-import { type DataElement } from '../../../metaData';
+import type { DataElement } from '../../../metaData';
 import type {
     AttributeValue,
 } from '../../Pages/common/EnrollmentOverviewDomain/useCommonEnrollmentDomainData';

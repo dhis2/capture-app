@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { DataElement } from '../../../metaData';
@@ -13,7 +12,7 @@ export const EventChangelogWrapper = ({ formFoundation, eventId, eventData, ...p
 
         const fieldElementsById = elements.reduce((acc, element: DataElement) => {
             const { optionSet } = element;
-            const metadata = {
+            const metadata: any = {
                 id: element.id,
                 name: element.formName,
                 type: element.type,
