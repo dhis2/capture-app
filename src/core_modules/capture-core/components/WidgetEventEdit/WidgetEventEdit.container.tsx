@@ -97,7 +97,7 @@ const WidgetEventEditPlain = ({
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
     // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
-    const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
+    const loadedValues = useSelector((state: { viewEventPage: { loadedValues: any } }) => state.viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
