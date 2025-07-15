@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
@@ -47,10 +46,10 @@ export const actionTypes = {
 function getLoadActions(
     dataEntryId: string,
     itemId: string,
-    dataEntryValues: Object,
-    formValues: Object,
-    dataEntryPropsToInclude: Array<Object>,
-    clientValuesForDataEntry: Object,
+    dataEntryValues: Record<string, unknown>,
+    formValues: Record<string, unknown>,
+    dataEntryPropsToInclude: Array<Record<string, unknown>>,
+    clientValuesForDataEntry: Record<string, unknown>,
     extraProps: { [key: string]: any },
 ) {
     const dataEntryNotes = getDataEntryNotes(clientValuesForDataEntry);
@@ -89,9 +88,9 @@ export const openEventForEditInDataEntry = ({
     programCategory,
 }: {
     loadedValues: {
-        eventContainer: Object,
-        dataEntryValues: Object,
-        formValues: Object,
+        eventContainer: any,
+        dataEntryValues: Record<string, unknown>,
+        formValues: Record<string, unknown>,
     },
     orgUnit: OrgUnit,
     foundation: RenderFoundation,
@@ -190,14 +189,13 @@ export const openEventForEditInDataEntry = ({
 export const prerequisitesErrorOpeningEventForEditInDataEntry = (message: string) =>
     actionCreator(actionTypes.PREREQUISITES_ERROR_OPENING_EVENT_FOR_EDIT_IN_DATA_ENTRY)(message);
 
-export const startRunRulesOnUpdateForEditSingleEvent = (actionData: { payload: Object}) =>
+export const startRunRulesOnUpdateForEditSingleEvent = (actionData: { payload: any}) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
 
 export const startAsyncUpdateFieldForEditEvent = (
-    innerAction: ReduxAction<any, any>,
-    onSuccess: Function,
-    onError: Function,
+    innerAction: any,
+    onSuccess: () => void,
+    onError: () => void,
 ) =>
     actionPayloadAppender(innerAction)({ onSuccess, onError });
-
