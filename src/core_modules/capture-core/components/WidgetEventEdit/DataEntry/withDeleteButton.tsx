@@ -23,10 +23,9 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                 <Button
                     onClick={() => { this.setState({ isOpen: true }); }}
                     disabled={!this.props.formFoundation.access.data.write}
-                    secondary
                     destructive
                 >
-                    {i18n.t('Delete event')}
+                    {i18n.t('Delete')}
                 </Button>
                 {this.state.isOpen && (
                     <Modal
