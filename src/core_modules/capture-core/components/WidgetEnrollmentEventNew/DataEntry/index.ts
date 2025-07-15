@@ -1,4 +1,3 @@
-// @flow
 export { DataEntry } from './DataEntry.container';
 
 export {

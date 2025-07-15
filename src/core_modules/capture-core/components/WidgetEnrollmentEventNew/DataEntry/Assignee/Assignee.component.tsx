@@ -1,10 +1,10 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import type { WithStyles } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { UserField } from '../../../FormFields/UserField/UserField.component';
 
-const getStyles = () => ({
+const getStyles = {
     container: {
         display: 'flex',
         alignItems: 'baseline',
@@ -12,7 +12,7 @@ const getStyles = () => ({
     },
     containerVertical: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column' as const,
         margin: 8,
     },
     label: {
@@ -24,22 +24,22 @@ const getStyles = () => ({
         flexBasis: 150,
         flexGrow: 1,
     },
-});
+};
 
 type Props = {
-    classes: Object,
-    orientation: string
-};
+    orientation: string;
+    onBlur: (value: any) => void;
+    onSet: (value: any) => void;
+} & WithStyles<typeof getStyles>;
 
 const AssigneePlain = (props: Props) => {
     const { classes, orientation, ...passOnProps } = props;
     return (
         <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
-            <div className={orientation === 'horizontal' && classes.label}>
+            <div className={orientation === 'horizontal' ? classes.label : undefined}>
                 {i18n.t('Assigned user')}
             </div>
-            <div className={orientation === 'horizontal' && classes.field}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+            <div className={orientation === 'horizontal' ? classes.field : undefined}>
                 <UserField inputPlaceholderText={i18n.t('Search for user')} {...passOnProps} />
             </div>
         </div>);

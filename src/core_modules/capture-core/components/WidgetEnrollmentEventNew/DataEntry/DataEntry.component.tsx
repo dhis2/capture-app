@@ -1,6 +1,6 @@
-// @flow
 import React, { Component } from 'react';
 import { compose } from 'redux';
+import type { WithStyles, Theme } from '@material-ui/core/styles';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
@@ -12,7 +12,6 @@ import {
     getOrgUnitValidatorContainers,
     getNoteValidatorContainers,
 } from './fieldValidators';
-import { type RenderFoundation, type ProgramStage } from '../../../metaData';
 import {
     placements,
     withCleanUp,
@@ -36,8 +35,6 @@ import {
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { SavingText } from '../SavingText';
-import { addEventSaveTypes } from './addEventSaveTypes';
-import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
 import {
@@ -48,13 +45,14 @@ import {
     getCategoryOptionsValidatorContainers,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
+import type { PlainProps, DataEntrySection } from './DataEntry.component.types';
 
-const getStyles = theme => ({
+const getStyles = (theme: Theme): any => ({
     savingContextContainer: {
         paddingTop: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
-        color: theme.palette.grey.dark,
+        color: theme.palette.grey[700],
         fontSize: theme.typography.pxToRem(13),
     },
     savingContextText: {
@@ -108,24 +106,24 @@ const baseComponentStylesVertical = {
     },
 };
 
-function defaultFilterProps(props: Object) {
+function defaultFilterProps(props: any) {
     const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
     return passOnProps;
 }
 
-const getBaseComponentProps = (props: Object) => ({
+const getBaseComponentProps = (props: any) => ({
     fieldOptions: props.fieldOptions,
     formHorizontal: props.formHorizontal,
     styles: props.formHorizontal ? baseComponentStylesVertical : baseComponentStyles,
 });
 
-const createComponentProps = (props: Object, componentProps: Object) => ({
+const createComponentProps = (props: any, componentProps: any) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
 
-const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
-const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+const getCalendarAnchorPosition = (formHorizontal?: boolean) => (formHorizontal ? 'center' : 'left');
+const getOrientation = (formHorizontal?: boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
@@ -134,8 +132,8 @@ const buildReportDateSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) => props.fieldOptions.fieldLabelMediaBasedClass,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -149,7 +147,7 @@ const buildReportDateSettingsFn = () => {
         );
     const reportDateSettings = {
         getComponent: () => reportDateComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
             label: props.formFoundation.getLabel('occurredAt'),
             required: true,
@@ -160,7 +158,7 @@ const buildReportDateSettingsFn = () => {
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => 'occurredAt',
-        getValidatorContainers: (props: Object) => getEventDateValidatorContainers(props),
+        getValidatorContainers: (props: any) => getEventDateValidatorContainers(props),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -177,8 +175,8 @@ const buildOrgUnitSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) => props.fieldOptions.fieldLabelMediaBasedClass,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -193,7 +191,7 @@ const buildOrgUnitSettingsFn = () => {
 
     const orgUnitSettings = {
         getComponent: () => orgUnitComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
             label: i18n.t('Organisation unit'),
             required: true,
@@ -215,8 +213,8 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
                 withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) => props.fieldOptions.fieldLabelMediaBasedClass,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -234,8 +232,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
                 withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) => props.fieldOptions.fieldLabelMediaBasedClass,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -249,18 +247,18 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 );
 
 const buildGeometrySettingsFn = () => ({
-    isApplicable: (props: Object) => {
+    isApplicable: (props: any) => {
         const featureType = props.formFoundation.featureType;
         return ['Polygon', 'Point'].includes(featureType);
     },
-    getComponent: (props: Object) => {
+    getComponent: (props: any) => {
         const featureType = props.formFoundation.featureType;
         if (featureType === 'Polygon') {
             return polygonComponent;
         }
         return pointComponent;
     },
-    getComponentProps: (props: Object) => {
+    getComponentProps: (props: any) => {
         const featureType = props.formFoundation.featureType;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
@@ -308,7 +306,7 @@ const buildNotesSettingsFn = () => {
         );
     const notesSettings = {
         getComponent: () => noteComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             label: i18n.t('Notes'),
             onAddNote: props.onAddNote,
             id: 'notes',
@@ -329,7 +327,7 @@ const buildAssigneeSettingsFn = () => {
     const assigneeComponent =
         withTransformPropName(['onBlur', 'onSet'])(
             withFocusSaver()(
-                withFilterProps((props: Object) => {
+                withFilterProps((props: any) => {
                     const defaultfiltered = defaultFilterProps(props);
                     const { validationAttempted, touched, ...passOnProps } = defaultfiltered;
                     return passOnProps;
@@ -338,12 +336,12 @@ const buildAssigneeSettingsFn = () => {
         );
 
     return {
-        isApplicable: (props: Object) => {
+        isApplicable: (props: any) => {
             const enableUserAssignment = props.stage && props.stage.enableUserAssignment;
             return !!enableUserAssignment;
         },
         getComponent: () => assigneeComponent,
-        getComponentProps: (props: Object) => createComponentProps({}, {
+        getComponentProps: (props: any) => createComponentProps({}, {
             orientation: getOrientation(props.formHorizontal),
         }),
         getPropName: () => 'assignee',
@@ -361,9 +359,9 @@ const getCategoryOptionsSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
-                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -377,14 +375,14 @@ const getCategoryOptionsSettingsFn = () => {
         );
     const categoryOptionsSettings = {
         getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
-            ...props.categories?.find(category => category.id === fieldId) ?? {},
+        getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
+            ...props.categories?.find((category: any) => category.id === fieldId) ?? {},
             required: true,
         }),
-        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
-        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
-        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
-        getMeta: (props: Object) => ({
+        getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
+        getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
+        getMeta: (props: any) => ({
             section: AOCsectionKey,
             placement: placements.TOP,
             sectionName: props.programCategory?.displayName,
@@ -395,7 +393,7 @@ const getCategoryOptionsSettingsFn = () => {
 };
 
 
-const dataEntryFilterProps = (props: Object) => {
+const dataEntryFilterProps = (props: any) => {
     const {
         stage,
         onScrollToRelationships,
@@ -419,43 +417,7 @@ const WrappedDataEntry = compose(
     withFilterProps(dataEntryFilterProps),
 )(DataEntryContainer);
 
-type OrgUnit = {|
-    id: string,
-    name: string,
-    path: string,
-|};
-
-type Props = {
-    id: string,
-    orgUnitId: string,
-    programId: string,
-    stage: ProgramStage,
-    formFoundation: RenderFoundation,
-    onUpdateField: (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: Object,
-    onSetSaveTypes: (saveTypes: ?Array<$Values<typeof addEventSaveTypes>>) => void,
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => void,
-    onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
-    classes: {
-        savingContextContainer: string,
-        savingContextText: string,
-        savingContextNames: string,
-        topButtonsContainer: string,
-        horizontalPaper: string,
-        fieldLabelMediaBased: string,
-        horizontal: string,
-    },
-    theme: Theme,
-    formHorizontal: ?boolean,
-    recentlyAddedRelationshipId?: ?string,
-    placementDomNodeForSavingText?: HTMLElement,
-    programName: string,
-    orgUnitFieldValue: ?OrgUnit,
-};
-type DataEntrySection = {
-    placement: $Values<typeof placements>,
-    name: string,
-};
+type Props = PlainProps & WithStyles<any>;
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
@@ -484,15 +446,11 @@ const dataEntrySectionDefinitions = {
     },
 };
 class DataEntryPlain extends Component<Props> {
-    fieldOptions: { theme: Theme };
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
-    relationshipsInstance: ?HTMLDivElement;
-
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
-            fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
+            fieldLabelMediaBasedClass: (props.classes as any).fieldLabelMediaBased,
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
@@ -504,8 +462,7 @@ class DataEntryPlain extends Component<Props> {
     componentDidMount() {
         if (this.relationshipsInstance && this.props.recentlyAddedRelationshipId) {
             this.relationshipsInstance.scrollIntoView();
-            // $FlowFixMe[prop-missing] automated comment
-            this.props.onScrollToRelationships();
+            this.props.onScrollToRelationships?.();
         }
     }
 
@@ -513,9 +470,13 @@ class DataEntryPlain extends Component<Props> {
         inMemoryFileStore.clear();
     }
 
-    setRelationshipsInstance = (instance: ?HTMLDivElement) => {
+    setRelationshipsInstance = (instance?: HTMLDivElement | null) => {
         this.relationshipsInstance = instance;
     }
+
+    relationshipsInstance?: HTMLDivElement | null;
+    dataEntrySections: { [key: string]: DataEntrySection };
+    fieldOptions: { theme: Theme; fieldLabelMediaBasedClass?: string };
 
     render() {
         const {
@@ -535,22 +496,19 @@ class DataEntryPlain extends Component<Props> {
 
         return (
             <div data-test="new-enrollment-event-form">
-                {/* the props orgUnit, orgUnitId and selectedOrgUnitId should all be removed from here. See DHIS2-18869 */}
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <WrappedDataEntry
-                    id={id}
-                    onUpdateFormField={onUpdateField}
-                    onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                    fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.dataEntrySections}
-                    relationshipsRef={this.setRelationshipsInstance}
-                    stage={stage}
-                    orgUnitIdFieldValue={orgUnitFieldValue?.id}
-                    orgUnit={orgUnitFieldValue}
-                    orgUnitId={orgUnitFieldValue?.id}
-                    selectedOrgUnitId={orgUnitFieldValue?.id}
-                    {...passOnProps}
-                />
+                {React.createElement(WrappedDataEntry as any, {
+                    id,
+                    onUpdateFormField: onUpdateField,
+                    onUpdateFormFieldAsync: onStartAsyncUpdateField,
+                    fieldOptions: this.fieldOptions,
+                    dataEntrySections: this.dataEntrySections,
+                    relationshipsRef: this.setRelationshipsInstance,
+                    stage,
+                    orgUnitIdFieldValue: orgUnitFieldValue?.id,
+                    orgUnit: orgUnitFieldValue,
+                    selectedOrgUnitId: orgUnitFieldValue?.id,
+                    ...passOnProps,
+                })}
                 <SavingText
                     programName={programName}
                     stageName={stage.name}
@@ -564,4 +522,4 @@ class DataEntryPlain extends Component<Props> {
 
 
 export const DataEntryComponent =
-    withStyles(getStyles)(withTheme()(DataEntryPlain));
+    withStyles(getStyles as any)(withTheme()(DataEntryPlain));

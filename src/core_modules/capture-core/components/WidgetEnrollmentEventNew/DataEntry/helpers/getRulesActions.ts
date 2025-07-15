@@ -1,5 +1,4 @@
-// @flow
-import type { OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { OrgUnit, RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getCurrentClientValues,
@@ -7,11 +6,10 @@ import {
     getApplicableRuleEffectsForTrackerProgram,
     updateRulesEffects,
 } from '../../../../rules';
-import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
 import type { EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 
 export const getRulesActions = ({
-    state, // temporary
+    state,
     program,
     stage,
     formFoundation,
@@ -22,16 +20,16 @@ export const getRulesActions = ({
     attributesValuesRulesDependency,
     enrollmentDataRulesDependency,
 }: {
-    state: ReduxState,
-    program: TrackerProgram,
-    stage: ProgramStage,
-    formFoundation: RenderFoundation,
-    dataEntryId: string,
-    itemId: string,
-    orgUnit: ?OrgUnit,
-    eventsRulesDependency: EnrollmentEvents,
-    attributesValuesRulesDependency: AttributeValuesClientFormatted,
-    enrollmentDataRulesDependency: EnrollmentData,
+    state: any;
+    program: TrackerProgram;
+    stage: ProgramStage;
+    formFoundation: RenderFoundation;
+    dataEntryId: string;
+    itemId: string;
+    orgUnit?: OrgUnit | null;
+    eventsRulesDependency: EnrollmentEvents;
+    attributesValuesRulesDependency: AttributeValuesClientFormatted;
+    enrollmentDataRulesDependency: EnrollmentData;
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
 
