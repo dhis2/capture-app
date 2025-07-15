@@ -19,7 +19,6 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 enabled={!hasWriteAccess}
             >
                 <Button
-                    dataTest="dhis2-capture-update-button"
                     onClick={() => { this.props.onSave(); }}
                     disabled={!hasWriteAccess}
                     primary
