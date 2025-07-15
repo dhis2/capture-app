@@ -1,4 +1,3 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { from, of } from 'rxjs';
@@ -33,13 +32,13 @@ const getDataEntryKey = (eventStatus?: string): string => (
         : dataEntryKeys.VIEW
 );
 
-const getDataEntryId = (event): string => (
+const getDataEntryId = (event: any): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
         ? dataEntryIds.ENROLLMENT_EVENT
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadViewEventDataEntryEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -59,14 +58,14 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
                 editEventDataEntryBatchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH,
             ),
         ),
-        filter((action) => {
+        filter((action: any) => {
             // Check if current view event is container event. Also check if in view mode.
             const eventId = action.payload.eventContainer.id;
             const state = store.value;
             const viewEventPage = state.viewEventPage || {};
             return viewEventPage.eventId === eventId && !viewEventPage.showEditEvent;
         }),
-        switchMap((action) => {
+        switchMap((action: any) => {
             const state = store.value;
             const eventContainer = action.payload.eventContainer;
             const orgUnit = action.payload.orgUnit;
@@ -87,7 +86,6 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
                 attributeValues,
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
-                onCategoriesQuery: null,
             };
             eventContainer.event = convertEventAttributeOptions(eventContainer.event);
 

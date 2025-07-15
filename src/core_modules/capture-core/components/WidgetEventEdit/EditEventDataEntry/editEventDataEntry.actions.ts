@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 
@@ -28,7 +27,7 @@ export const actionTypes = {
 export const cancelEditEventDataEntry = () =>
     actionCreator(actionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY)();
 
-export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object) =>
+export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: any) =>
     actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)(
         { itemId, dataEntryId, formFoundation },
         { skipLogging: ['formFoundation'] },
@@ -36,9 +35,9 @@ export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: strin
 
 export const startSaveEditEventDataEntry = (
     eventId: string,
-    serverData: Object,
-    triggerActionCommit?: ?string,
-    triggerActionRollback?: ?string,
+    serverData: any,
+    triggerActionCommit?: string | null | undefined,
+    triggerActionRollback?: string | null | undefined,
 ) =>
     actionCreator(actionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY)(
         {},
@@ -64,10 +63,10 @@ export const startSaveEditEventDataEntry = (
 export const prerequisitesErrorLoadingEditEventDataEntry = (message: string) =>
     actionCreator(actionTypes.PREREQUISITES_ERROR_LOADING_EDIT_EVENT_DATA_ENTRY)(message);
 
-export const requestDeleteEventDataEntry = ({ eventId, enrollmentId }: { eventId: string, enrollmentId: string}) =>
+export const requestDeleteEventDataEntry = ({ eventId, enrollmentId }: { eventId: string; enrollmentId: string }) =>
     actionCreator(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY)({ eventId, enrollmentId });
 
-export const startDeleteEventDataEntry = (serverData: Object, eventId: string, params: Object) =>
+export const startDeleteEventDataEntry = (serverData: any, eventId: string, params: any) =>
     actionCreator(actionTypes.START_DELETE_EVENT_DATA_ENTRY)({ eventId }, {
         offline: {
             effect: {
@@ -87,7 +86,7 @@ export const startDeleteEventDataEntry = (serverData: Object, eventId: string, p
     });
 
 
-export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: Object) =>
+export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: any) =>
     actionCreator(actionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages });
 
 export const requestSaveAndCompleteEnrollment = ({
@@ -99,13 +98,13 @@ export const requestSaveAndCompleteEnrollment = ({
     onSaveAndCompleteEnrollmentErrorActionType,
     enrollment,
 }: {
-    itemId: string,
-    dataEntryId: string,
-    formFoundation: Object,
-    onSaveAndCompleteEnrollmentExternal?: (enrollmnet: ApiEnrollment) => void,
-    onSaveAndCompleteEnrollmentSuccessActionType?: string,
-    onSaveAndCompleteEnrollmentErrorActionType?: string,
-    enrollment: Object,
+    itemId: string;
+    dataEntryId: string;
+    formFoundation: any;
+    onSaveAndCompleteEnrollmentExternal?: (enrollmentData: any) => void;
+    onSaveAndCompleteEnrollmentSuccessActionType?: string;
+    onSaveAndCompleteEnrollmentErrorActionType?: string;
+    enrollment: any;
 }) =>
     actionCreator(actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST)(
         {

@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import { pipe } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core/';
@@ -13,7 +12,7 @@ import {
     withBrowserBackWarning,
 } from '../../../components/DataEntry';
 
-import { type RenderFoundation, DataElement, dataElementTypes } from '../../../metaData';
+import { DataElement, dataElementTypes } from '../../../metaData';
 import { convertFormToClient, convertClientToView } from '../../../converters';
 
 import {
@@ -31,10 +30,11 @@ import {
     getCategoryOptionsValidatorContainers,
     AOCsectionKey,
 } from '../../DataEntryDhis2Helpers';
+import type { Props } from './ViewEventDataEntry.types';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
-const getStyles = (theme: Theme) => ({
+export const getStyles = (theme: any): Readonly<any> => ({
     header: {
         ...theme.typography.title,
         fontSize: 18,
@@ -92,26 +92,26 @@ const baseComponentStylesVertical = {
     },
 };
 
-function defaultFilterProps(props: Object) {
+function defaultFilterProps(props: any) {
     const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
     return passOnProps;
 }
 
-const getBaseComponentProps = (props: Object) => ({
+const getBaseComponentProps = (props: any) => ({
     fieldOptions: props.fieldOptions,
     formHorizontal: props.formHorizontal,
     styles: props.formHorizontal ? baseComponentStylesVertical : baseComponentStyles,
 });
 
-const createComponentProps = (props: Object, componentProps: Object) => ({
+const createComponentProps = (props: any, componentProps: any) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
 
 const viewModeComponent = withDefaultFieldContainer()(
     withLabel({
-        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-        onGetCustomFieldLabeClass: (props: Object) =>
+        onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+        onGetCustomFieldLabeClass: (props: any) =>
             `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.defaultViewLabel}`,
     })(
         withFilterProps(defaultFilterProps)(ViewModeField),
@@ -125,11 +125,11 @@ const buildReportDateSettingsFn = () => {
 
     const reportDateSettings = {
         getComponent: () => viewModeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             label: props.formFoundation.getLabel(EventLabelsByStatus[props.eventStatus]),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getPropName: (props: Object) => EventLabelsByStatus[props.eventStatus],
+        getPropName: (props: any) => EventLabelsByStatus[props.eventStatus],
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
@@ -146,7 +146,7 @@ const buildOrgUnitSettingsFn = () => {
 
     const orgUnitSettings = {
         getComponent: () => viewModeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             label: i18n.t('Organisation unit'),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
@@ -167,11 +167,11 @@ const buildScheduleDateSettingsFn = () => {
 
     const scheduleDateSettings = {
         getComponent: () => viewModeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             label: `${props.formFoundation.getLabel('scheduledAt')}`,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        getIsHidden: (props: Object) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
+        getIsHidden: (props: any) => props.id !== dataEntryIds.ENROLLMENT_EVENT || props.hideDueDate,
         getPropName: () => 'scheduledAt',
         getMeta: () => ({
             placement: placements.TOP,
@@ -183,12 +183,12 @@ const buildScheduleDateSettingsFn = () => {
 };
 
 const buildGeometrySettingsFn = () => ({
-    isApplicable: (props: Object) => {
+    isApplicable: (props: any) => {
         const featureType = props.formFoundation.featureType;
         return ['Polygon', 'Point'].includes(featureType);
     },
     getComponent: () => viewModeComponent,
-    getComponentProps: (props: Object) => {
+    getComponentProps: (props: any) => {
         const featureType = props.formFoundation.featureType;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
@@ -222,7 +222,7 @@ const buildCompleteFieldSettingsFn = () => {
 
     const completeSettings = {
         getComponent: () => viewModeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             label: i18n.t('Event completed'),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
@@ -240,19 +240,19 @@ const buildCompleteFieldSettingsFn = () => {
 const getCategoryOptionsSettingsFn = () => {
     const categoryOptionsSettings = {
         getComponent: () => viewModeComponent,
-        getComponentProps: (props: Object, fieldId?: string) => createComponentProps(props, {
+        getComponentProps: (props: any, fieldId?: string) => createComponentProps(props, {
             ...props.categories?.find(category => category.id === fieldId) ?? {},
             valueConverter: value => props.categories
                 ?.find(category => category.id === fieldId)
                 ?.options?.find(option => option.value === value)
                 ?.label,
         }),
-        getPropName: (props: Object, fieldId?: string) => (
+        getPropName: (props: any, fieldId?: string) => (
             fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey
         ),
-        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
+        getFieldIds: (props: any) => props.categories?.map(category => category.id),
         getValidatorContainers: () => getCategoryOptionsValidatorContainers(),
-        getMeta: (props: Object) => ({
+        getMeta: (props: any) => ({
             section: AOCsectionKey,
             placement: placements.BOTTOM,
             sectionName: props.programCategory?.displayName,
@@ -271,25 +271,6 @@ const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(OrgUnitF
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
-type Props = {
-    formFoundation: ?RenderFoundation,
-    onUpdateField: (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: Object,
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
-    onCancel: () => void,
-    onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
-    classes: Object,
-    theme: Theme,
-    onOpenEditEvent: () => void,
-    dataEntryId: string,
-    programId: string,
-    itemId: string,
-};
-
-type DataEntrySection = {
-    placement: $Values<typeof placements>,
-    name: string,
-};
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
@@ -311,8 +292,6 @@ const dataEntrySectionDefinitions = {
 };
 
 class ViewEventDataEntryPlain extends Component<Props> {
-    fieldOptions: { theme: Theme };
-    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
@@ -321,6 +300,9 @@ class ViewEventDataEntryPlain extends Component<Props> {
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
+
+    fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
+    dataEntrySections: { [key: string]: any };
 
     render() {
         const {
@@ -331,7 +313,6 @@ class ViewEventDataEntryPlain extends Component<Props> {
         } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={dataEntryId}
                 viewMode
@@ -343,4 +324,4 @@ class ViewEventDataEntryPlain extends Component<Props> {
     }
 }
 
-export const ViewEventDataEntryComponent = withStyles(getStyles)(ViewEventDataEntryPlain);
+export const ViewEventDataEntryComponent = withStyles(getStyles)(ViewEventDataEntryPlain as any);

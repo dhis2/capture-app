@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { map, filter, flatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
@@ -37,16 +36,16 @@ import { buildUrlQueryString } from '../../../utils/routing/buildUrlQueryString'
 import { newEventWidgetActionTypes } from '../../WidgetEnrollmentEventNew/Validated/validated.actions';
 import { enrollmentEditEventActionTypes } from '../../Pages/EnrollmentEditEvent';
 
-const getDataEntryId = (event): string => (
+const getDataEntryId = (event: any): string => (
     getScopeInfo(event?.programId)?.scopeType === scopeTypes.TRACKER_PROGRAM
         ? dataEntryIds.ENROLLMENT_EVENT
         : dataEntryIds.SINGLE_EVENT
 );
 
-export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadEditEventDataEntryEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
-        map((action) => {
+        map((action: any) => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
@@ -76,10 +75,10 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
             ]);
         }));
 
-export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEditedEventEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
-        map((action) => {
+        map((action: any) => {
             const {
                 dataEntryId,
                 itemId,
@@ -102,7 +101,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+            const mainDataServerValues: any = convertMainEventClientToServer(mainDataClientValues);
 
 
             const { eventContainer: prevEventContainer } = state.viewEventPage.loadedValues;
@@ -149,10 +148,10 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
         }));
 
-export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
+export const saveEditedEventSucceededEpic = (action$: any) =>
     action$.pipe(
         ofType(actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED),
-        filter((action) => {
+        filter((action: any) => {
             const {
                 meta: { triggerAction },
             } = action;
@@ -161,7 +160,7 @@ export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
                 triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS
             );
         }),
-        map((action) => {
+        map((action: any) => {
             const meta = action.meta;
             if (meta.triggerAction === enrollmentEditEventActionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_SUCCESS) {
                 return commitEnrollmentAndEvents();
@@ -169,16 +168,16 @@ export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
             return commitEnrollmentEvent(meta.eventId);
         }));
 
-export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEditedEventFailedEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED),
-        filter((action) => {
+        filter((action: any) => {
             // Check if current view event is failed event
             const state = store.value;
             const viewEventPage = state.viewEventPage || {};
             return viewEventPage.eventId && viewEventPage.eventId === action.meta.eventId;
         }),
-        map((action) => {
+        map((action: any) => {
             // Revert event container if previous exists
             const state = store.value;
             const meta = action.meta;
@@ -188,7 +187,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
                 eventContainer.event.attributeCategoryOptions =
                     convertCategoryOptionsToServer(eventContainer.event.attributeCategoryOptions);
             }
-            let actions = [];
+            let actions: any[] = [];
 
             if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {
                 actions = [rollbackEnrollmentEvent(eventContainer.event.eventId)];
@@ -198,10 +197,10 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             return batchActions(actions, batchActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED);
         }));
 
-export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) =>
+export const requestDeleteEventDataEntryEpic = (action$: any, store: any, dependencies: any) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_DELETE_EVENT_DATA_ENTRY),
-        map((action) => {
+        map((action: any) => {
             const { eventId, enrollmentId } = action.payload;
             const params = { enrollmentId };
             const serverData = { events: [{ event: eventId }] };
@@ -210,13 +209,13 @@ export const requestDeleteEventDataEntryEpic = (action$: InputObservable, store:
         }));
 
 export const startCreateNewAfterCompletingEpic = (
-    action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+    action$: any, store: any, { navigate }: any) =>
     action$.pipe(
         ofType(
             actionTypes.START_CREATE_NEW_AFTER_COMPLETING,
             newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING,
         ),
-        flatMap((action) => {
+        flatMap((action: any) => {
             const { isCreateNew, enrollmentId, orgUnitId, programId, teiId, availableProgramStages } = action.payload;
             const params = { enrollmentId, orgUnitId, programId, teiId };
 
@@ -234,10 +233,10 @@ export const startCreateNewAfterCompletingEpic = (
             return EMPTY;
         }));
 
-export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEventAndCompleteEnrollmentEpic = (action$: any, store: any) =>
     action$.pipe(
         ofType(actionTypes.EVENT_SAVE_ENROLLMENT_COMPLETE_REQUEST),
-        map((action) => {
+        map((action: any) => {
             const {
                 itemId,
                 dataEntryId,
@@ -264,7 +263,7 @@ export const saveEventAndCompleteEnrollmentEpic = (action$: InputObservable, sto
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+            const mainDataServerValues: any = convertMainEventClientToServer(mainDataClientValues);
 
             const editEvent = {
                 ...mainDataServerValues,
