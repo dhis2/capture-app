@@ -22,6 +22,7 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
             hasDeleteButton ? (<div>
                 <Button
                     onClick={() => { this.setState({ isOpen: true }); }}
+                    disabled={!this.props.formFoundation.access.data.write}
                     secondary
                     destructive
                 >
@@ -30,19 +31,20 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
                 {this.state.isOpen && (
                     <Modal
                         hide={!this.state.isOpen}
-                        onClose={() => { this.setState({ isOpen: false }); }}
-                        position="middle"
                     >
                         <ModalTitle>
                             {i18n.t('Delete event')}
                         </ModalTitle>
                         <ModalContent>
-                            {i18n.t('Are you sure you want to delete this event? This action cannot be undone.')}
+                            {i18n.t('Deleting an event is permanent and cannot be undone.' + ' ' +
+                                'Are you sure you want to delete this event? ')}
                         </ModalContent>
                         <ModalActions>
                             <ButtonStrip end>
                                 <Button
-                                    onClick={() => { this.setState({ isOpen: false }); }}
+                                    onClick={() => {
+                                        this.setState({ isOpen: false });
+                                    }}
                                     secondary
                                 >
                                     {i18n.t('No, cancel')}
@@ -64,18 +66,14 @@ const getDeleteButton = (InnerComponent: React.ComponentType<any>) =>
         );
 
         render() {
-            const { hasDeleteButton, formHorizontal, formFoundation, ...passOnProps } = this.props;
+            const { onDelete, hasDeleteButton, ...passOnProps } = this.props;
 
             return (
-                <div>
-                    <InnerComponent
-                        ref={(innerInstance) => { this.innerInstance = innerInstance; }}
-                        formHorizontal={formHorizontal}
-                        formFoundation={formFoundation}
-                        {...passOnProps}
-                    />
-                    {this.renderDeleteButton(hasDeleteButton)}
-                </div>
+                <InnerComponent
+                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    deleteButton={this.renderDeleteButton(hasDeleteButton)}
+                    {...passOnProps}
+                />
             );
         }
     };

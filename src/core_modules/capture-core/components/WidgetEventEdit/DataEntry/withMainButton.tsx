@@ -20,33 +20,31 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             >
                 <Button
                     dataTest="dhis2-capture-update-button"
-                    onClick={this.props.onSave}
-                    primary
+                    onClick={() => { this.props.onSave(); }}
                     disabled={!hasWriteAccess}
+                    primary
                 >
-                    {i18n.t('Update event')}
+                    {i18n.t('Save')}
                 </Button>
             </ConditionalTooltip>
         );
 
         render() {
-            const { formHorizontal, formFoundation, ...passOnProps } = this.props;
-            const hasWriteAccess = formFoundation.access.data.write;
+            const { onSave, ...passOnProps } = this.props;
+            const hasWriteAccess = this.props.formFoundation.access.data.write;
 
             return (
-                <div>
-                    <InnerComponent
-                        ref={(innerInstance) => { this.innerInstance = innerInstance; }}
-                        formHorizontal={formHorizontal}
-                        formFoundation={formFoundation}
-                        {...passOnProps}
-                    />
-                    {this.renderMainButton(hasWriteAccess)}
-                </div>
+                <InnerComponent
+                    innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    mainButton={this.renderMainButton(hasWriteAccess)}
+                    {...passOnProps}
+                />
             );
         }
     };
 
+const mapDispatchToProps = () => ({});
+
 export const withMainButton = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        connect(null, () => ({}))(getMainButton(InnerComponent));
+        connect(null, mapDispatchToProps)(getMainButton(InnerComponent));

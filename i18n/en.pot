@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-14T14:34:09.138Z\n"
-"PO-Revision-Date: 2025-07-14T14:34:09.138Z\n"
+"POT-Creation-Date: 2025-07-15T06:54:54.193Z\n"
+"PO-Revision-Date: 2025-07-15T06:54:54.193Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1300,14 +1300,8 @@ msgstr "stage not found in rules execution"
 msgid "Delete event"
 msgstr "Delete event"
 
-msgid "Are you sure you want to delete this event? This action cannot be undone."
-msgstr "Are you sure you want to delete this event? This action cannot be undone."
-
 msgid "Yes, delete event"
 msgstr "Yes, delete event"
-
-msgid "Update event"
-msgstr "Update event"
 
 msgid "Go to “Schedule” tab to reschedule this event"
 msgstr "Go to “Schedule” tab to reschedule this event"
