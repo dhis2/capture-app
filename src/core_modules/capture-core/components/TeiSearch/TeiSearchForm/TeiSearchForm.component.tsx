@@ -19,7 +19,7 @@ import type { Props, State } from './TeiSearchForm.types';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
-const styles = (theme: Theme) => ({
+const styles: Readonly<any> = (theme: Theme) => ({
     container: {},
     orgUnitSection: {
         backgroundColor: 'white',
