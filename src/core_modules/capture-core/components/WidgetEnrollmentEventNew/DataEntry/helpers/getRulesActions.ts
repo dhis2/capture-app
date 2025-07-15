@@ -9,7 +9,7 @@ import {
 import type { EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 
 export const getRulesActions = ({
-    state,
+    state, // temporary
     program,
     stage,
     formFoundation,

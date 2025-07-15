@@ -22,6 +22,7 @@ import type { RulesExecutionDependenciesClientFormatted } from '../../common.typ
 import { getLocationQuery } from '../../../../utils/routing';
 import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../metadataRetrieval/coreOrgUnit';
 import type { QuerySingleResource } from '../../../../utils/api';
+import { ReduxStore, ApiUtils } from '../../../../../capture-core-utils/types/global';
 
 const runRulesForNewEvent = async ({
     store,
@@ -32,7 +33,7 @@ const runRulesForNewEvent = async ({
     fieldData,
     querySingleResource,
 }: {
-    store: any;
+    store: ReduxStore;
     dataEntryId: string;
     itemId: string;
     uid: string;
@@ -43,7 +44,7 @@ const runRulesForNewEvent = async ({
     const { events, attributeValues, enrollmentData } = rulesExecutionDependenciesClientFormatted;
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const { programId, stageId } = getLocationQuery() as { programId: string; stageId: string };
+    const { programId, stageId }: { programId: string; stageId: string } = getLocationQuery();
 
     const program = getTrackerProgramThrowIfNotFound(programId);
     const stage = program.getStage(stageId);
@@ -86,8 +87,8 @@ const runRulesForNewEvent = async ({
 
 export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
     action$: any,
-    store: any,
-    { querySingleResource }: any,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH),
@@ -109,8 +110,8 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
 
 export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (
     action$: any,
-    store: any,
-    { querySingleResource }: any,
+    store: ReduxStore,
+    { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH),

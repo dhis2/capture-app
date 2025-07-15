@@ -13,6 +13,8 @@ import {
 } from './actions/dataEntry.actions';
 import type { AddEventSaveType } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
+import { useProgramExpiryForUser } from '../../../hooks';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
@@ -20,8 +22,8 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
     const dataEntryItemId = useSelector(({ dataEntries }: any) => dataEntries[id] && dataEntries[id].itemId);
     const dataEntryKey = getDataEntryKey(id, dataEntryItemId);
     const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) => dataEntriesFieldsValue[dataEntryKey].orgUnit);
-
-    const onUpdateDataEntryField = useCallback((innerAction: any) => {
+    const expiryPeriod = useProgramExpiryForUser(programId);
+    const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
 
@@ -32,7 +34,7 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
         ], newEventWidgetDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH));
     }, [dispatch, rulesExecutionDependenciesClientFormatted]);
 
-    const onUpdateField = useCallback((innerAction: any) => {
+    const onUpdateField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
 
@@ -44,11 +46,11 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
     }, [dispatch, rulesExecutionDependenciesClientFormatted]);
 
     const onStartAsyncUpdateField = useCallback((
-        innerAction: any,
+        innerAction: ReduxAction<any, any>,
         dataEntryId: string,
         itemId: string,
     ) => {
-        const onAsyncUpdateSuccess = (successInnerAction: any) => {
+        const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
             const uid = uuid();
             return batchActions([
                 successInnerAction,
@@ -56,7 +58,7 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
                 executeRulesOnUpdateForNewEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, rulesExecutionDependenciesClientFormatted }),
             ], newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH);
         };
-        const onAsyncUpdateError = (errorInnerAction: any) => errorInnerAction;
+        const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     }, [dispatch, rulesExecutionDependenciesClientFormatted]);
@@ -74,6 +76,7 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
             id={id}
             orgUnitFieldValue={orgUnitFieldValue}
             programId={programId}
+            expiryPeriod={expiryPeriod}
             onUpdateDataEntryField={onUpdateDataEntryField}
             onUpdateField={onUpdateField}
             onStartAsyncUpdateField={onStartAsyncUpdateField}

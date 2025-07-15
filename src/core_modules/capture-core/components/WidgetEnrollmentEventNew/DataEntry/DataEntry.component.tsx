@@ -12,6 +12,7 @@ import {
     getOrgUnitValidatorContainers,
     getNoteValidatorContainers,
 } from './fieldValidators';
+import { type RenderFoundation, type ProgramStage } from '../../../metaData';
 import {
     placements,
     withCleanUp,
@@ -35,6 +36,8 @@ import {
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { SavingText } from '../SavingText';
+import type { AddEventSaveType } from './addEventSaveTypes';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { withTransformPropName } from '../../../HOC';
 import {
@@ -45,14 +48,13 @@ import {
     getCategoryOptionsValidatorContainers,
 } from '../../DataEntryDhis2Helpers';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
-import type { PlainProps, DataEntrySection } from './DataEntry.component.types';
 
-const getStyles = (theme: Theme): any => ({
+const getStyles = (theme: any): any => ({
     savingContextContainer: {
         paddingTop: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
-        color: theme.palette.grey[700],
+        color: theme.palette.grey.dark,
         fontSize: theme.typography.pxToRem(13),
     },
     savingContextText: {
@@ -133,7 +135,7 @@ const buildReportDateSettingsFn = () => {
                     withDefaultShouldUpdateInterface()(
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) => props.fieldOptions.fieldLabelMediaBasedClass,
+                            onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -176,7 +178,7 @@ const buildOrgUnitSettingsFn = () => {
                     withDefaultShouldUpdateInterface()(
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: any) => props.fieldOptions.fieldLabelMediaBasedClass,
+                            onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -214,7 +216,7 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => props.fieldOptions.fieldLabelMediaBasedClass,
+                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -233,7 +235,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
             withDefaultShouldUpdateInterface()(
                 withLabel({
                     onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: any) => props.fieldOptions.fieldLabelMediaBasedClass,
+                    onGetCustomFieldLabeClass: (props: any) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
@@ -361,7 +363,7 @@ const getCategoryOptionsSettingsFn = () => {
                         withLabel({
                             onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
                             onGetCustomFieldLabeClass: (props: any) =>
-                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass}`,
+                                `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -417,7 +419,36 @@ const WrappedDataEntry = compose(
     withFilterProps(dataEntryFilterProps),
 )(DataEntryContainer);
 
-type Props = PlainProps & WithStyles<any>;
+type OrgUnit = {
+    id: string;
+    name: string;
+    path: string;
+};
+
+type Props = {
+    id: string;
+    orgUnitId: string;
+    programId: string;
+    stage: ProgramStage;
+    formFoundation: RenderFoundation;
+    onUpdateField: (innerAction: any) => void;
+    onStartAsyncUpdateField: any;
+    onSetSaveTypes: (saveTypes: AddEventSaveType[] | null) => void;
+    onSave?: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => void;
+    onAddNote: (itemId: string, dataEntryId: string, note: string) => void;
+    onScrollToRelationships?: () => void;
+    theme: Theme;
+    formHorizontal?: boolean;
+    recentlyAddedRelationshipId?: string | null;
+    placementDomNodeForSavingText?: HTMLElement;
+    programName: string;
+    orgUnitFieldValue?: OrgUnit | null;
+};
+
+type DataEntrySection = {
+    placement: string,
+    name: string,
+};
 
 const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.BASICINFO]: {
@@ -445,8 +476,8 @@ const dataEntrySectionDefinitions = {
         name: '',
     },
 };
-class DataEntryPlain extends Component<Props> {
-    constructor(props: Props) {
+class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
+    constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,

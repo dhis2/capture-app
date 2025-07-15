@@ -11,7 +11,7 @@ export const newEventWidgetDataEntryBatchActionTypes = {
 export const newEventWidgetDataEntryActionTypes = {
     RULES_ON_UPDATE_EXECUTE: 'NewEvent.ExecuteRulesOnUpdate',
     EVENT_NOTE_ADD: 'NewEvent.AddEventNote',
-    SET_ADD_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
+    SET_ADD_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes', // TODO: https://jira.dhis2.org/browse/DHIS2-11669
 };
 
 export const executeRulesOnUpdateForNewEvent = (actionData: { payload: any }) =>

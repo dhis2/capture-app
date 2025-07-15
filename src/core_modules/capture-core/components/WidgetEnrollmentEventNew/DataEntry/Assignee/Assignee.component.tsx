@@ -28,11 +28,9 @@ const getStyles = {
 
 type Props = {
     orientation: string;
-    onBlur: (value: any) => void;
-    onSet: (value: any) => void;
-} & WithStyles<typeof getStyles>;
+};
 
-const AssigneePlain = (props: Props) => {
+const AssigneePlain = (props: Props & WithStyles<typeof getStyles>) => {
     const { classes, orientation, ...passOnProps } = props;
     return (
         <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
