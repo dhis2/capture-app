@@ -1,13 +1,10 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { OptionsSelectVirtualized } from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import type {
-    VirtualizedOptionConfig,
-} from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { SingleSelectField, SingleSelectOption } from '@dhis2/ui';
 import { withDefaultFieldContainer, withLabel } from '../../FormFields/New';
 
-const SearchProgramField = withDefaultFieldContainer()(withLabel()(OptionsSelectVirtualized));
+const SearchProgramField = withDefaultFieldContainer()(withLabel()(SingleSelectField));
 
 const programFieldStyles = {
     labelContainerStyle: {
@@ -23,21 +20,31 @@ type Props = {
     searchId: string,
     selectedProgramId: ?string,
     onSetProgram: (searchId: string, programId: ?string) => void,
-    programOptions: Array<VirtualizedOptionConfig>,
+    programOptions: Array<{value: string, label: string}>,
 }
 export class SearchProgramSelectorComponent extends React.Component<Props> {
-    onSelectProgram = (programId: ?string) => {
-        this.props.onSetProgram(this.props.searchId, programId);
+    onSelectProgram = ({ selected }: { selected: string }) => {
+        this.props.onSetProgram(this.props.searchId, selected);
     }
     render() {
+        const { programOptions, selectedProgramId } = this.props;
         return (
             <SearchProgramField
                 styles={programFieldStyles}
-                options={this.props.programOptions}
-                onSelect={this.onSelectProgram}
+                selected={selectedProgramId}
+                onChange={this.onSelectProgram}
                 label={i18n.t('Selected program')}
-                value={this.props.selectedProgramId}
-            />
+                clearable
+                filterable
+            >
+                {programOptions.map(option => (
+                    <SingleSelectOption
+                        key={option.value}
+                        label={option.label}
+                        value={option.value}
+                    />
+                ))}
+            </SearchProgramField>
         );
     }
 }
