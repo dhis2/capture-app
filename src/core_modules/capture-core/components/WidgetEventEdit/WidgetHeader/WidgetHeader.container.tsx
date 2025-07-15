@@ -1,9 +1,8 @@
-// @flow
-import React, { type ComponentType, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { dataEntryKeys } from 'capture-core/constants';
 import { useDispatch } from 'react-redux';
 import { spacersNum, Button, IconEdit24, IconMore16, FlyoutMenu, MenuItem, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { FEATURES, useFeature } from 'capture-core-utils';
 import { useAuthorities } from 'capture-core/utils/authority/useAuthorities';
@@ -16,9 +15,9 @@ import { useCategoryCombinations } from '../../DataEntryDhis2Helpers/AOC/useCate
 import { OverflowButton } from '../../Buttons';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { eventStatuses } from '../constants/status.const';
-import type { PlainProps, Props } from './WidgetHeader.types';
+import type { PlainProps } from './WidgetHeader.types';
 
-const styles = {
+const styles: Readonly<any> = {
     icon: {
         paddingRight: spacersNum.dp8,
     },
@@ -34,6 +33,8 @@ const styles = {
         display: 'inline-flex',
     },
 };
+
+type Props = PlainProps & WithStyles<typeof styles>;
 
 export const WidgetHeaderPlain = ({
     eventStatus,
@@ -110,6 +111,7 @@ export const WidgetHeaderPlain = ({
                                         <MenuItem
                                             label={i18n.t('View changelog')}
                                             dataTest={'event-overflow-view-changelog'}
+                                            suffix=""
                                             onClick={() => {
                                                 setChangeLogIsOpen(true);
                                                 setActionsIsOpen(false);
@@ -126,4 +128,4 @@ export const WidgetHeaderPlain = ({
     );
 };
 
-export const WidgetHeader: ComponentType<PlainProps> = withStyles(styles)(WidgetHeaderPlain);
+export const WidgetHeader = withStyles(styles)(WidgetHeaderPlain);

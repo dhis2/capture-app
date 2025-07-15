@@ -1,5 +1,4 @@
-// @flow
-import React, { type ComponentType, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { dataEntryIds, dataEntryKeys } from 'capture-core/constants';
 import { useSelector } from 'react-redux';
 import {
@@ -7,9 +6,9 @@ import {
     colors,
     spacers,
 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { useEnrollmentEditEventPageMode, useAvailableProgramStages } from 'capture-core/hooks';
-import type { PlainProps, ComponentProps } from './widgetEventEdit.types';
+import type { ComponentProps } from './widgetEventEdit.types';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
@@ -20,7 +19,7 @@ import { inMemoryFileStore } from '../DataEntry/file/inMemoryFileStore';
 import { WidgetHeader } from './WidgetHeader';
 import { WidgetTwoEventWorkspace, WidgetTwoEventWorkspaceWrapperTypes } from '../WidgetTwoEventWorkspace';
 
-const styles = {
+const styles: Readonly<any> = {
     container: {
         backgroundColor: 'white',
         borderRadius: 3,
@@ -68,6 +67,8 @@ const styles = {
     tooltip: { display: 'inline-flex' },
 };
 
+type Props = ComponentProps & WithStyles<typeof styles>;
+
 const WidgetEventEditPlain = ({
     eventStatus,
     initialScheduleDate,
@@ -89,14 +90,13 @@ const WidgetEventEditPlain = ({
     onDeleteEvent,
     onDeleteEventRelationship,
     classes,
-}: PlainProps) => {
+}: Props) => {
     useEffect(() => inMemoryFileStore.clear, []);
 
     const supportsChangelog = useFeature(FEATURES.changelogs);
     const { currentPageMode } = useEnrollmentEditEventPageMode(eventStatus);
     const [changeLogIsOpen, setChangeLogIsOpen] = useState(false);
-    // "Edit event"-button depends on loadedValues. Delay rendering component until loadedValues has been initialized.
-    const loadedValues = useSelector(({ viewEventPage }) => viewEventPage.loadedValues);
+    const loadedValues = useSelector((state: any) => state.viewEventPage.loadedValues);
     const orgUnit = loadedValues?.orgUnit;
 
     const availableProgramStages = useAvailableProgramStages(stage, teiId, enrollmentId, programId);
@@ -188,5 +188,4 @@ const WidgetEventEditPlain = ({
         </div>
     ) : <LoadingMaskElementCenter />;
 };
-export const WidgetEventEdit: ComponentType<ComponentProps> = withStyles(styles)(WidgetEventEditPlain);
-
+export const WidgetEventEdit = withStyles(styles)(WidgetEventEditPlain);

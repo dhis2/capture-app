@@ -1,4 +1,3 @@
-// @flow
 import { convertServerToClient } from '../../../converters';
 import { dataElementTypes, getTrackerProgramThrowIfNotFound } from '../../../metaData';
 import type {
@@ -19,9 +18,7 @@ export const getEnrollmentForRulesEngine = ({
     programName: string,
 } => ({
     enrollmentId: enrollment,
-    // $FlowFixMe
     enrolledAt: convertServerToClient(enrolledAt, dataElementTypes.DATE),
-    // $FlowFixMe
     occurredAt: convertServerToClient(occurredAt, dataElementTypes.DATE),
     enrollmentStatus: status,
     programName: getTrackerProgramThrowIfNotFound(program).name,

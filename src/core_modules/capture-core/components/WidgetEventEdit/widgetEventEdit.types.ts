@@ -1,11 +1,11 @@
-// @flow
 import type { UserFormField } from '../FormFields/UserField';
 import { ProgramStage, RenderFoundation } from '../../metaData';
+import type { ApiEnrollment } from '../../../capture-core-utils/types/api-types';
 
-export type Props = {|
+export type Props = {
     eventStatus?: string,
     onCancelEditEvent: (isScheduled: boolean) => void,
-    onHandleScheduleSave: (eventData: Object) =>void,
+    onHandleScheduleSave: (eventData: Record<string, unknown>) =>void,
     onSaveExternal: () => void,
     orgUnitId: string,
     programId: string,
@@ -20,15 +20,13 @@ export type Props = {|
     onSaveAndCompleteEnrollmentErrorActionType?: string,
     onDeleteEvent?: (eventId: string) => void,
     onDeleteEventRelationship?: (relationshipId: string) => void,
-|};
+};
 
-export type ComponentProps = {|
-    ...Props,
+export type ComponentProps = Props & {
     formFoundation: RenderFoundation,
     stage: ProgramStage,
-|};
+};
 
-export type PlainProps = {|
-    ...ComponentProps,
-    ...CssClasses,
-|}
+export type PlainProps = ComponentProps & {
+    classes?: any,
+}
