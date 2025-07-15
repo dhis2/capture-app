@@ -56,7 +56,7 @@ export const loadViewEventDataEntry =
         dataEntryKey: string;
         enrollment?: EnrollmentData;
         attributeValues?: Array<AttributeValue>;
-        onCategoriesQuery?: Promise<any>;
+        onCategoriesQuery?: Promise<any> | null;
     }) => {
         const dataEntryPropsToInclude = [
             {

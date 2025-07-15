@@ -37,8 +37,8 @@ export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: strin
 export const startSaveEditEventDataEntry = (
     eventId: string,
     serverData: any,
-    triggerActionCommit?: string | null | undefined,
-    triggerActionRollback?: string | null | undefined,
+    triggerActionCommit?: string | null,
+    triggerActionRollback?: string | null,
 ) =>
     actionCreator(actionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY)(
         {},

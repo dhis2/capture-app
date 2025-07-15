@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch: any, props: any): any => ({
         };
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
-        dispatch(startAsyncUpdateFieldForEditEvent(innerAction, onAsyncUpdateSuccess as any, onAsyncUpdateError as any));
+        dispatch(startAsyncUpdateFieldForEditEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
     onSave: () => (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         const { onSaveExternal } = props;

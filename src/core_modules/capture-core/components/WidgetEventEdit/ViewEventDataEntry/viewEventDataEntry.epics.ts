@@ -88,6 +88,7 @@ export const loadViewEventDataEntryEpic = (action$: any, store: ReduxStore) =>
                 attributeValues,
                 dataEntryId: getDataEntryId(eventContainer.event),
                 dataEntryKey: getDataEntryKey(eventContainer.event?.status),
+                onCategoriesQuery: null,
             };
             eventContainer.event = convertEventAttributeOptions(eventContainer.event);
 

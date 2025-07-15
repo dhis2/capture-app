@@ -3,6 +3,7 @@ import { withStyles, WithStyles, type Theme } from '@material-ui/core/styles';
 import { dataEntryIds } from 'capture-core/constants';
 import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import { withMainButton } from '../DataEntry/withMainButton';
 import type { RenderFoundation } from '../../../metaData';
@@ -56,7 +57,7 @@ const tabMode = Object.freeze({
     SCHEDULE: 'SCHEDULE',
 });
 
-export const getStyles = (theme: Theme): Readonly<any> => ({
+const getStyles = (theme: Theme): Readonly<any> => ({
     dataEntryContainer: {
     },
     fieldLabelMediaBased: {
@@ -417,11 +418,6 @@ const AskToCreateNewDataEntry = withAskToCreateNew()(DeletableDataEntry);
 const AskToCompleteEnrollment = withAskToCompleteEnrollment()(AskToCreateNewDataEntry);
 const DataEntryWrapper = withBrowserBackWarning()(AskToCompleteEnrollment);
 
-type OrgUnit = {
-    id: string;
-    name: string;
-    path: string;
-};
 
 type Props = {
     formFoundation?: RenderFoundation | null;
@@ -457,13 +453,13 @@ type Props = {
 
 };
 
-type State = {
-    mode: string;
-};
-
 type DataEntrySection = {
     placement: string;
     name?: string;
+};
+
+type State = {
+    mode: string;
 };
 
 const dataEntrySectionDefinitions = {
@@ -484,7 +480,7 @@ class EditEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
     constructor(props: Props & WithStyles<typeof getStyles>) {
         super(props);
         this.fieldOptions = {
-            theme: (props as any).theme,
+            theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
         this.dataEntrySections = dataEntrySectionDefinitions;

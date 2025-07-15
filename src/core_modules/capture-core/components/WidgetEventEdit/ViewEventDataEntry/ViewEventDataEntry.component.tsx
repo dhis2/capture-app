@@ -30,10 +30,11 @@ import {
     getCategoryOptionsValidatorContainers,
     AOCsectionKey,
 } from '../../DataEntryDhis2Helpers';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 
-export const getStyles = (theme: any): Readonly<any> => ({
+const getStyles = (theme: any): Readonly<any> => ({
     header: {
         ...theme.typography.title,
         fontSize: 18,
@@ -270,21 +271,23 @@ const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(OrgUnitF
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
-export type OrgUnit = {
-    id: string;
-    name: string;
-    path: string;
-};
-
-export type Props = {
-    formFoundation?: RenderFoundation | null;
-    orgUnit: OrgUnit;
+type Props = {
+    formFoundation: RenderFoundation | null;
+    onUpdateField: (innerAction: ReduxAction<any, any>) => void;
+    onStartAsyncUpdateField: any;
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void;
+    onCancel: () => void;
+    onAddNote: (itemId: string, dataEntryId: string, note: string) => void;
+    theme: Theme;
+    onOpenEditEvent: () => void;
+    dataEntryId: string;
     programId: string;
     itemId: string;
-    theme: Theme,
-    dataEntryId: string;
-    assignee?: any;
-    orgUnitFieldValue?: OrgUnit | null;
+};
+
+type DataEntrySection = {
+    placement: string;
+    name?: string;
 };
 
 const dataEntrySectionDefinitions = {
@@ -317,7 +320,7 @@ class ViewEventDataEntryPlain extends Component<Props & WithStyles<typeof getSty
     }
 
     fieldOptions: { theme: any; fieldLabelMediaBasedClass: string };
-    dataEntrySections: { [key: string]: any };
+    dataEntrySections: { [key: string]: DataEntrySection };
 
     render() {
         const {
