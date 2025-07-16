@@ -72,3 +72,4 @@ const ValidatedPlain = ({
 };
 
 export const ValidatedComponent = withStyles(styles)(memo(ValidatedPlain));
+// Adding memo because the lifecycle method in Validated.container grabs the entire state object.
