@@ -77,6 +77,7 @@ export const Validated = ({
         saveType?: keyof typeof addEventSaveTypes,
         enrollment?: Record<string, unknown>,
     ) => new Promise((resolve) => {
+        // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
         const {
             serverRequestEvent,
@@ -113,7 +114,7 @@ export const Validated = ({
                 onSaveErrorActionType: enrollment ? onSaveAndCompleteEnrollmentErrorActionType : onSaveErrorActionType,
             }),
 
-
+            // stores meta in redux to be used when navigating after save
             setSaveEnrollmentEventInProgress({
                 requestEventId: (serverRequestEvent as any)?.event,
                 linkedEventId: (linkedEvent as any)?.event,
@@ -159,7 +160,7 @@ export const Validated = ({
         [handleSave],
     );
 
-
+    // Clean up data entry on unmount in case the user navigates away, stopping delayed navigation
     useEffect(() => () => {
         dispatch(cleanUpEventSaveInProgress());
     }, [dispatch]);

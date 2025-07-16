@@ -49,13 +49,15 @@ export const useLifecycle = ({
     const attributesRef = useRef<any>(undefined);
     const enrollmentDataRef = useRef<any>(undefined);
 
-
+    // TODO: Getting the entire state object is bad and this needs to be refactored.
+    // The problem is the helper methods that take the entire state object.
+    // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
         if (isLoading) { return; }
         if (delayRulesExecutionRef.current) {
             // getRulesActions depends on settings in the redux store that are being managed through getOpenDataEntryActions.
-
+            // The purpose of the following lines of code is to make sure the redux store is ready before calling getRulesActions.
             delayRulesExecutionRef.current = false;
             setRulesExecutionTrigger(-rulesExecutionTrigger);
         } else {
@@ -77,6 +79,7 @@ export const useLifecycle = ({
             attributesRef.current = attributesValuesRulesDependency;
             enrollmentDataRef.current = enrollmentDataRulesDependency;
         }
+    // Ignoring state (due to various reasons, bottom line being that field updates are handled in epic)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         dispatch,
