@@ -28,7 +28,7 @@ const getStyles = () => ({
 });
 
 const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props & WithStyles<typeof getStyles>) => {
-    const anchorRef = useRef<HTMLDivElement>(null);
+    const anchorRef = useRef<any | null>(null);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const toggle = () => {
@@ -63,14 +63,14 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props & WithSty
                         key={content.key}
                         data-test={`menu-item-${content.key}`}
                         onClick={() => {
-                            if (!('clickHandler' in content) || !content.clickHandler) {
+                            if (!content.clickHandler) {
                                 return;
                             }
                             setActionsIsOpen(false);
                             content.clickHandler();
                         }}
-                        disabled={!('clickHandler' in content) || !content.clickHandler}
-                        label={'element' in content ? content.element : ''}
+                        disabled={!content.clickHandler}
+                        label={content.element}
                         suffix=""
                     />
                 );
@@ -89,7 +89,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props & WithSty
                 <Layer onBackdropClick={() => setActionsIsOpen(false)}>
                     <Popper
                         placement="bottom-end"
-                        reference={anchorRef.current as any}
+                        reference={anchorRef}
                     >
                         <FlyoutMenu>
                             {renderMenuItems()}
