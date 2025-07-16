@@ -74,7 +74,7 @@ export const Validated = ({
         dataEntryItemId: string,
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
-        saveType?: keyof typeof addEventSaveTypes,
+        saveType?: typeof addEventSaveTypes[keyof typeof addEventSaveTypes],
         enrollment?: Record<string, unknown>,
     ) => new Promise((resolve) => {
         // Creating a promise to be able to stop navigation if related stages has an error
@@ -96,17 +96,17 @@ export const Validated = ({
         }
 
         const serverData = createServerData({
-            serverRequestEvent: serverRequestEvent as any,
-            linkedEvent: linkedEvent as any,
-            relationship: relationship as any,
+            serverRequestEvent,
+            linkedEvent,
+            relationship,
             enrollment,
         });
 
         dispatch(batchActions([
             requestSaveEvent({
-                requestEvent: serverRequestEvent as any,
-                linkedEvent: linkedEvent as any,
-                relationship: relationship as any,
+                requestEvent: serverRequestEvent,
+                linkedEvent,
+                relationship,
                 serverData,
                 linkMode,
                 onSaveExternal,
@@ -116,9 +116,9 @@ export const Validated = ({
 
             // stores meta in redux to be used when navigating after save
             setSaveEnrollmentEventInProgress({
-                requestEventId: (serverRequestEvent as any)?.event,
-                linkedEventId: (linkedEvent as any)?.event,
-                linkedOrgUnitId: (linkedEvent as any)?.orgUnit,
+                requestEventId: serverRequestEvent?.event,
+                linkedEventId: linkedEvent?.event,
+                linkedOrgUnitId: linkedEvent?.orgUnit,
                 linkMode,
             }),
         ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS),
@@ -128,7 +128,7 @@ export const Validated = ({
     }), [buildNewEventPayload, dispatch, onSaveExternal, onSaveAndCompleteEnrollmentSuccessActionType, onSaveSuccessActionType, onSaveAndCompleteEnrollmentErrorActionType, onSaveErrorActionType]);
 
     const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
-        const saveResult = await handleSave(itemId, dataEntryId, formFoundation, 'COMPLETE');
+        const saveResult = await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
         if ((saveResult as any)?.success) {
             dispatch(startCreateNewAfterCompleting({
                 enrollmentId,
@@ -153,7 +153,7 @@ export const Validated = ({
                 dataEntryItemId,
                 dataEntryIdArgument,
                 formFoundationArgument,
-                'COMPLETE',
+                addEventSaveTypes.COMPLETE,
                 enrollment,
             );
         },

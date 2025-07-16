@@ -115,7 +115,7 @@ export const useBuildNewEventPayload = ({
     };
 
     const buildNewEventPayload = (
-        saveType?: keyof typeof addEventSaveTypes,
+        saveType?: typeof addEventSaveTypes[keyof typeof addEventSaveTypes],
         relatedStageRef?: { current: RelatedStageRefPayload | null },
     ) => {
         const requestEventId = generateUID();
@@ -137,7 +137,7 @@ export const useBuildNewEventPayload = ({
             enrollmentId,
             teiId,
             completed: saveType === addEventSaveTypes.COMPLETE,
-            fromClientDate: fromClientDate as any,
+            fromClientDate,
         });
 
         const {
