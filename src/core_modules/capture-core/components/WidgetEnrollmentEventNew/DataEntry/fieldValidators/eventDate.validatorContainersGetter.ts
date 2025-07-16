@@ -15,7 +15,7 @@ const preValidateDate = (
 
 const validateNotExpired = (
     value: string | null | undefined,
-    props: any,
+    props?: any,
 ) => {
     if (!value || !props.expiryPeriod) {
         return true;
@@ -31,7 +31,7 @@ const validateNotExpired = (
     };
 };
 
-export const getEventDateValidatorContainers = (props: any) => [
+export const getEventDateValidatorContainers = (props?: any) => [
     {
         validator: hasValue,
         errorMessage: i18n.t('A value is required'),

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { type ComponentType, Component } from 'react';
 import { compose } from 'redux';
 import type { WithStyles, Theme } from '@material-ui/core/styles';
 import { withStyles, withTheme } from '@material-ui/core/styles';
@@ -417,7 +417,7 @@ const WrappedDataEntry = compose(
     withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
     withCleanUp(),
     withFilterProps(dataEntryFilterProps),
-)(DataEntryContainer);
+)(DataEntryContainer) as ComponentType<any>;
 
 type OrgUnit = {
     id: string;
@@ -481,7 +481,7 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
-            fieldLabelMediaBasedClass: (props.classes as any).fieldLabelMediaBased,
+            fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
@@ -527,19 +527,22 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
 
         return (
             <div data-test="new-enrollment-event-form">
-                {React.createElement(WrappedDataEntry as any, {
-                    id,
-                    onUpdateFormField: onUpdateField,
-                    onUpdateFormFieldAsync: onStartAsyncUpdateField,
-                    fieldOptions: this.fieldOptions,
-                    dataEntrySections: this.dataEntrySections,
-                    relationshipsRef: this.setRelationshipsInstance,
-                    stage,
-                    orgUnitIdFieldValue: orgUnitFieldValue?.id,
-                    orgUnit: orgUnitFieldValue,
-                    selectedOrgUnitId: orgUnitFieldValue?.id,
-                    ...passOnProps,
-                })}
+                {/* the props orgUnit, orgUnitId and selectedOrgUnitId should all be removed from here. See DHIS2-18869 */}
+                <WrappedDataEntry
+                    id={id}
+                    onUpdateFormField={onUpdateField}
+                    onUpdateFormFieldAsync={onStartAsyncUpdateField}
+                    fieldOptions={this.fieldOptions}
+                    dataEntrySections={this.dataEntrySections}
+                    relationshipsRef={this.setRelationshipsInstance}
+                    stage={stage}
+                    orgUnitIdFieldValue={orgUnitFieldValue?.id}
+                    orgUnit={orgUnitFieldValue}
+                    // @ts-expect-error - See DHIS2-18869
+                    orgUnitId={orgUnitFieldValue?.id}
+                    selectedOrgUnitId={orgUnitFieldValue?.id}
+                    {...passOnProps}
+                />
                 <SavingText
                     programName={programName}
                     stageName={stage.name}
@@ -553,4 +556,4 @@ class DataEntryPlain extends Component<Props & WithStyles<typeof getStyles>> {
 
 
 export const DataEntryComponent =
-    withStyles(getStyles as any)(withTheme()(DataEntryPlain));
+    withStyles(getStyles)(withTheme()(DataEntryPlain));

@@ -11,7 +11,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'occurredAt',
         type: 'DATE',
-        validatorContainers: getEventDateValidatorContainers({}),
+        validatorContainers: getEventDateValidatorContainers(),
     },
     {
         id: 'orgUnit',
@@ -21,7 +21,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'scheduledAt',
         type: 'DATE',
-        validatorContainers: getEventDateValidatorContainers({}),
+        validatorContainers: getEventDateValidatorContainers(),
     },
     {
         clientId: 'geometry',
