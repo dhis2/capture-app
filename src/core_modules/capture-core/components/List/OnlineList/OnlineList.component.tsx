@@ -52,9 +52,9 @@ type Props = {
     sortByDirection: string;
     onSort: (id: string, direction: string) => void;
     updating?: boolean;
-    getCustomEndCellHeader: (props: Props) => ReactNode;
+    getCustomEndCellHeader?: (props: Props) => ReactNode;
     onRowClick: (rowData: any) => void;
-    getCustomEndCellBody: (row: any, props: Props) => ReactNode;
+    getCustomEndCellBody?: (row: any, props: Props) => ReactNode;
     customEndCellHeaderStyle?: any;
     customEndCellBodyStyle?: any;
 } & WithStyles<any>;
