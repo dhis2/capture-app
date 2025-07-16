@@ -17,14 +17,14 @@ import { dataElementTypes } from '../../../metaData';
 
 const getStyles: Readonly<any> = {
     tableContainer: {
-        overflowX: 'auto' as const,
+        overflowX: 'auto',
     },
     loadingRow: {
         height: 100,
     },
     headerAlign: {
         '&>span.container': {
-            alignItems: 'flex-end' as const,
+            alignItems: 'flex-end',
         },
     },
 };
@@ -57,7 +57,7 @@ type Props = {
     getCustomEndCellBody?: (row: any, props: Props) => ReactNode;
     customEndCellHeaderStyle?: any;
     customEndCellBodyStyle?: any;
-} & WithStyles<any>;
+} & WithStyles<typeof getStyles>;
 
 class Index extends React.Component<Props> {
     getSortHandler =
@@ -67,22 +67,24 @@ class Index extends React.Component<Props> {
             };
 
     getCustomEndCellHeader = () => {
-        const { getCustomEndCellHeader } = this.props;
+        const { getCustomEndCellHeader, getCustomEndCellBody } = this.props;
 
-        return this.props.getCustomEndCellBody ? (
+        return getCustomEndCellBody ? (
             <DataTableColumnHeader>
                 {getCustomEndCellHeader && getCustomEndCellHeader(this.props)}
             </DataTableColumnHeader>
         ) : null;
     };
 
-    getCustomEndCellBody = (row: any, customEndCellBodyProps: any) => (
-        this.props.getCustomEndCellBody ? (
+    getCustomEndCellBody = (row: any, customEndCellBodyProps: any) => {
+        const { getCustomEndCellBody } = this.props;
+
+        return getCustomEndCellBody ? (
             <DataTableCell>
-                {this.props.getCustomEndCellBody(row, customEndCellBodyProps)}
+                {getCustomEndCellBody(row, customEndCellBodyProps)}
             </DataTableCell>
-        ) : null
-    );
+        ) : null;
+    };
 
     static typesWithRightPlacement = [
         dataElementTypes.NUMBER,
