@@ -1,12 +1,11 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { DataTableHead, DataTable, DataTableBody, DataTableRow, DataTableCell, DataTableColumnHeader } from '@dhis2/ui';
 import { dataElementTypes } from '../../../metaData';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     tableContainer: {
         overflow: 'auto',
     },
@@ -15,25 +14,21 @@ const styles = () => ({
             alignItems: 'flex-end',
         },
     },
-});
+};
 
 type Column = {
-    id: string,
-    header: string,
-    visible: boolean,
-    type: $Keys<typeof dataElementTypes>,
+    id: string;
+    header: string;
+    visible: boolean;
+    type: keyof typeof dataElementTypes;
 };
 
 type Props = {
-    dataSource: Array<{ id: string, [elementId: string]: any }>,
-    columns: ?Array<Column>,
-    classes: {
-        headerAlign: string,
-        tableContainer: string,
-    },
-    rowIdKey: string,
-    noItemsText: ?string,
-};
+    dataSource: Array<{ id: string; [elementId: string]: any }>;
+    columns: Array<Column> | null;
+    rowIdKey: string;
+    noItemsText: string | null;
+} & WithStyles<typeof styles>;
 
 class Index extends Component<Props> {
     static typesWithRightPlacement = [
@@ -44,7 +39,7 @@ class Index extends Component<Props> {
         dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
 
-    renderHeaderRow(visibleColumns: Array<Column>) {
+    renderHeaderRow(visibleColumns: Column[]) {
         const { classes } = this.props;
 
         const headerCells = visibleColumns.map(column => (
@@ -60,14 +55,14 @@ class Index extends Component<Props> {
         return <DataTableRow dataTest="table-row">{headerCells}</DataTableRow>;
     }
 
-    renderRows(visibleColumns: Array<Column>) {
+    renderRows(visibleColumns: Column[]) {
         const { dataSource, noItemsText, rowIdKey } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;
             return (
                 <DataTableRow dataTest="table-row">
-                    <DataTableCell colSpan={columnsCount}>{noItemsText || i18n.t('No items to display')}</DataTableCell>
+                    <DataTableCell colSpan={columnsCount.toString()}>{noItemsText || i18n.t('No items to display')}</DataTableCell>
                 </DataTableRow>
             );
         }

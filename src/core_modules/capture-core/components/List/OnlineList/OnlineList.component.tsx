@@ -1,5 +1,3 @@
-// @flow
-
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -12,11 +10,12 @@ import {
     DataTableRow,
 } from '@dhis2/ui';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { ReactNode } from 'react';
 import type { OptionSet } from '../../../metaData';
 import { dataElementTypes } from '../../../metaData';
 
-const getStyles = () => ({
+const getStyles: Readonly<any> = {
     tableContainer: {
         overflowX: 'auto',
     },
@@ -28,44 +27,65 @@ const getStyles = () => ({
             alignItems: 'flex-end',
         },
     },
-});
+};
 
 export type Column = {
-    id: string,
-    header: string,
-    visible: boolean,
-    type: $Keys<typeof dataElementTypes>,
-    optionSet?: ?OptionSet,
-    sortDisabled?: boolean,
+    id: string;
+    header: string;
+    visible: boolean;
+    type: keyof typeof dataElementTypes;
+    optionSet?: OptionSet | null;
+    sortDisabled?: boolean;
 };
 
 type Props = {
-    dataSource: Array<Object>,
-    rowIdKey: string,
-    columns: ?Array<Column>,
-    selectedRows: { [key: string]: boolean },
-    onSelectAll: (ids: Array<string>) => void,
-    onRowSelect: (id: string) => void,
-    allRowsAreSelected: boolean,
-    isSelectionInProgress: ?boolean,
-    sortById: string,
-    showSelectCheckBox: ?boolean,
-    sortByDirection: string,
-    onSort: (id: string, direction: string) => void,
-    updating?: ?boolean,
-    getCustomEndCellHeader: (props: Props) => React.Node,
-    onRowClick: (rowData: Object) => void,
-    getCustomEndCellBody: (row: Object, props: Props) => React.Node,
-    customEndCellHeaderStyle?: ?Object,
-    customEndCellBodyStyle?: ?Object,
-    classes: {
-        tableContainer: string,
-        loadingRow: string,
-        headerAlign: string,
-    },
-};
+    dataSource: Array<any>;
+    rowIdKey: string;
+    columns: Array<Column> | null;
+    selectedRows: { [key: string]: boolean };
+    onSelectAll: (ids: Array<string>) => void;
+    onRowSelect: (id: string) => void;
+    allRowsAreSelected: boolean;
+    isSelectionInProgress: boolean | null;
+    sortById: string;
+    showSelectCheckBox: boolean | null;
+    sortByDirection: string;
+    onSort: (id: string, direction: string) => void;
+    updating?: boolean;
+    getCustomEndCellHeader?: (props: Props) => ReactNode;
+    onRowClick: (rowData: any) => void;
+    getCustomEndCellBody?: (row: any, props: Props) => ReactNode;
+    customEndCellHeaderStyle?: any;
+    customEndCellBodyStyle?: any;
+} & WithStyles<typeof getStyles>;
 
 class Index extends React.Component<Props> {
+    getSortHandler =
+        (id: string) =>
+            ({ direction }: { direction: string }) => {
+                this.props.onSort(id, direction);
+            };
+
+    getCustomEndCellHeader = () => {
+        const { getCustomEndCellHeader, getCustomEndCellBody } = this.props;
+
+        return getCustomEndCellBody ? (
+            <DataTableColumnHeader>
+                {getCustomEndCellHeader && getCustomEndCellHeader(this.props)}
+            </DataTableColumnHeader>
+        ) : null;
+    };
+
+    getCustomEndCellBody = (row: any, customEndCellBodyProps: any) => {
+        const { getCustomEndCellBody } = this.props;
+
+        return getCustomEndCellBody ? (
+            <DataTableCell>
+                {getCustomEndCellBody(row, customEndCellBodyProps)}
+            </DataTableCell>
+        ) : null;
+    };
+
     static typesWithRightPlacement = [
         dataElementTypes.NUMBER,
         dataElementTypes.INTEGER,
@@ -74,40 +94,14 @@ class Index extends React.Component<Props> {
         dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
 
-    getSortHandler =
-        (id: string) =>
-            ({ direction }: { direction: string }) => {
-                this.props.onSort(id, direction);
-            };
-
-    getCustomEndCellHeader = () => {
-        const { getCustomEndCellHeader, getCustomEndCellBody, customEndCellHeaderStyle } = this.props;
-
-        return getCustomEndCellBody ? (
-            <DataTableColumnHeader style={customEndCellHeaderStyle}>
-                {getCustomEndCellHeader && getCustomEndCellHeader(this.props)}
-            </DataTableColumnHeader>
-        ) : null;
-    };
-
-    getCustomEndCellBody = (row: Object, customEndCellBodyProps: Object) => {
-        const { getCustomEndCellBody, customEndCellBodyStyle } = this.props;
-
-        return getCustomEndCellBody ? (
-            <DataTableCell style={customEndCellBodyStyle}>
-                {getCustomEndCellBody(row, customEndCellBodyProps)}
-            </DataTableCell>
-        ) : null;
-    };
-
-    renderHeaderRow(visibleColumns: Array<Column>) {
+    renderHeaderRow(visibleColumns: Column[]) {
         const { classes, sortById, sortByDirection, dataSource, onSelectAll, allRowsAreSelected } = this.props;
 
-        const getSortDirection = (column) => {
+        const getSortDirection = (column: Column): 'asc' | 'desc' | 'default' | undefined => {
             if (column.sortDisabled) {
                 return undefined;
             }
-            return sortById === column.id ? sortByDirection : 'default';
+            return sortById === column.id ? (sortByDirection as 'asc' | 'desc') : 'default';
         };
 
         const headerCells = visibleColumns.map(column => (
@@ -129,7 +123,7 @@ class Index extends React.Component<Props> {
             >
                 <CheckboxField
                     checked={allRowsAreSelected}
-                    onChange={() => onSelectAll(dataSource.map(({ id }) => id))}
+                    onChange={() => onSelectAll(dataSource.map((item: any) => item.id))}
                 />
             </DataTableColumnHeader>
         ) : null;
@@ -143,9 +137,9 @@ class Index extends React.Component<Props> {
         );
     }
 
-    renderBody(visibleColumns: Array<Column>) {
-        const { getCustomEndCellBody, updating, classes } = this.props;
-        const columnsCount = visibleColumns.length + (getCustomEndCellBody ? 1 : 0);
+    renderBody(visibleColumns: Column[]) {
+        const { updating, classes } = this.props;
+        const columnsCount = visibleColumns.length + (this.props.getCustomEndCellBody ? 1 : 0);
 
         return updating ? (
             <DataTableRow className={classes.loadingRow} dataTest="working-list-table-loading" />
@@ -154,13 +148,13 @@ class Index extends React.Component<Props> {
         );
     }
 
-    renderRows(visibleColumns: Array<Column>, columnsCount: number) {
+    renderRows(visibleColumns: Column[], columnsCount: number) {
         const { dataSource, rowIdKey, selectedRows, onRowSelect, ...customEndCellBodyProps } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             return (
                 <DataTableRow dataTest="table-row">
-                    <DataTableCell colSpan={columnsCount}>{i18n.t('No items to display')}</DataTableCell>
+                    <DataTableCell colSpan={columnsCount.toString()}>{i18n.t('No items to display')}</DataTableCell>
                 </DataTableRow>
             );
         }
@@ -215,11 +209,11 @@ class Index extends React.Component<Props> {
             <div className={classes.tableContainer}>
                 <DataTable dataTest="online-list-table">
                     <DataTableHead>{this.renderHeaderRow(visibleColumns)}</DataTableHead>
-                    <DataTableBody loading={updating}>{this.renderBody(visibleColumns)}</DataTableBody>
+                    <DataTableBody loading={Boolean(updating)}>{this.renderBody(visibleColumns)}</DataTableBody>
                 </DataTable>
             </div>
         );
     }
 }
 
-export const OnlineList = withStyles(getStyles)(Index);
+export const OnlineList = withStyles(getStyles as any)(Index);

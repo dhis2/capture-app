@@ -1,9 +1,8 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 
-const getStyles = theme => ({
+const getStyles = (theme: any) => ({
     container: {
         borderColor: theme.palette.type === 'light'
             ? theme.palette.dividerLighter
@@ -18,19 +17,14 @@ const getStyles = theme => ({
 });
 
 type Props = {
-    classes: {
-        container: string,
-    }
-};
+    emptyListText?: string;
+} & WithStyles<typeof getStyles>;
 
 const Index = (props: Props) => (
     <div
         className={props.classes.container}
     >
-        {
-            // $FlowFixMe[incompatible-type] automated comment
-            // $FlowFixMe[prop-missing] automated comment
-            props.emptyListText || i18n.t('Data for offline list not present')}
+        {props.emptyListText || i18n.t('Data for offline list not present')}
     </div>
 );
 
