@@ -28,7 +28,7 @@ const ValidatedPlain = ({
     onCancel,
     id,
     ...passOnProps
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const { domRef: savingTextRef, domNode: savingTextDomNode } = usePlacementDomNode();
 
     return (
@@ -71,6 +71,4 @@ const ValidatedPlain = ({
     );
 };
 
-export const ValidatedComponent = withStyles(styles)(memo(ValidatedPlain)) as React.ComponentType<
-    Omit<Props, keyof WithStyles<typeof styles>>
->;
+export const ValidatedComponent = withStyles(styles)(memo(ValidatedPlain));

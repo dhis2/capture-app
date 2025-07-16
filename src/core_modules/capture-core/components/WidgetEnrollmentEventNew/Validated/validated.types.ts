@@ -27,5 +27,4 @@ export type Props = {
     relatedStageRef: (relatedStageInstance: any) => void;
     dataEntryFieldRef: (instance: any, id: string) => void;
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted;
-    classes: any;
 };

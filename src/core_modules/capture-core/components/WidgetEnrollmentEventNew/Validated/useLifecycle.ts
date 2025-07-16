@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 import type { TrackerProgram, ProgramStage, RenderFoundation } from '../../../metaData';
 import type { RulesExecutionDependenciesClientFormatted } from '../common.types';
@@ -22,7 +23,7 @@ export const useLifecycle = ({
     program: TrackerProgram;
     stage: ProgramStage;
     formFoundation: RenderFoundation;
-    orgUnitContext?: any;
+    orgUnitContext?: OrgUnit;
     dataEntryId: string;
     itemId: string;
     rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted;
@@ -48,10 +49,13 @@ export const useLifecycle = ({
     const attributesRef = useRef<any>(undefined);
     const enrollmentDataRef = useRef<any>(undefined);
 
+
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
         if (isLoading) { return; }
         if (delayRulesExecutionRef.current) {
+            // getRulesActions depends on settings in the redux store that are being managed through getOpenDataEntryActions.
+
             delayRulesExecutionRef.current = false;
             setRulesExecutionTrigger(-rulesExecutionTrigger);
         } else {
@@ -76,6 +80,7 @@ export const useLifecycle = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         dispatch,
+
         orgUnitContext,
         eventsRulesDependency,
         attributesValuesRulesDependency,

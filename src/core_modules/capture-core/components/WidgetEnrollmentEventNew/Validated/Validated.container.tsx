@@ -113,6 +113,7 @@ export const Validated = ({
                 onSaveErrorActionType: enrollment ? onSaveAndCompleteEnrollmentErrorActionType : onSaveErrorActionType,
             }),
 
+
             setSaveEnrollmentEventInProgress({
                 requestEventId: (serverRequestEvent as any)?.event,
                 linkedEventId: (linkedEvent as any)?.event,
@@ -157,6 +158,7 @@ export const Validated = ({
         },
         [handleSave],
     );
+
 
     useEffect(() => () => {
         dispatch(cleanUpEventSaveInProgress());
