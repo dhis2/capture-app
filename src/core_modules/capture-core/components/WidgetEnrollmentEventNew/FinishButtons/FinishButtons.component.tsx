@@ -1,6 +1,6 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 import { Button, spacersNum } from '@dhis2/ui';
 import { withCancelButton } from '../../DataEntry/withCancelButton';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
@@ -21,7 +21,7 @@ const FinishButtonsPlain = ({
     cancelButton,
     isLoading,
     classes,
-}: Props) => (
+}: Props & WithStyles<typeof styles>) => (
     <div className={classes.container}>
         <div className={classes.button}>
             <Button

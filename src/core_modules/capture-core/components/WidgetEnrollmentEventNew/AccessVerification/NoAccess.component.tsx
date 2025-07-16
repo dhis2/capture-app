@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles, type Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 
-const styles: Readonly<any> = {
+const getStyles: any = (theme: Theme) => ({
     contents: {
         display: 'flex',
         justifyContent: 'center',
@@ -19,15 +19,15 @@ const styles: Readonly<any> = {
         marginLeft: '-8px',
     },
     buttonContainer: {
-        paddingRight: 16,
+        paddingRight: theme.spacing.unit * 2,
     },
-};
+});
 
 type Props = {
     onCancel: () => void;
-};
+} & WithStyles<typeof getStyles>;
 
-class NoAccessPlain extends Component<Props & WithStyles<typeof styles>> {
+class NoAccessPlain extends Component<Props> {
     render() {
         const { classes, onCancel } = this.props;
         return (
@@ -64,4 +64,4 @@ class NoAccessPlain extends Component<Props & WithStyles<typeof styles>> {
     }
 }
 
-export const NoAccess = withStyles(styles)(NoAccessPlain);
+export const NoAccess = withStyles(getStyles)(NoAccessPlain);

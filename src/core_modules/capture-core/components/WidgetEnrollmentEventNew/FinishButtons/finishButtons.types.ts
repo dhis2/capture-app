@@ -13,8 +13,4 @@ export type Props = {
     onSave: (saveType: AddEventSaveType) => void;
     cancelButton: ReactElement;
     isLoading?: boolean;
-    classes: {
-        container: string;
-        button: string;
-    };
 };

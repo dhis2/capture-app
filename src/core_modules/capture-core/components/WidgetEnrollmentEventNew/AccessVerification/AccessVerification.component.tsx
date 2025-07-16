@@ -3,21 +3,18 @@ import { OrgUnitFetcher } from '../OrgUnitFetcher/OrgUnitFetcher.component';
 import { NoAccess } from './NoAccess.component';
 import type { Props } from './accessVerification.types';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const defaultOnCancel = () => {};
-
 export const AccessVerificationComponent = ({ eventAccess, onCancel, ...passOnProps }: Props) => {
     if (!eventAccess.write) {
         return (
             <NoAccess
-                onCancel={onCancel ?? defaultOnCancel}
+                onCancel={onCancel}
             />
         );
     }
 
     return (
         <OrgUnitFetcher
-            onCancel={onCancel ?? defaultOnCancel}
+            onCancel={onCancel}
             {...passOnProps}
         />
     );
