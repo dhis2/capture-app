@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import type { Theme } from '@material-ui/core/styles';
 import { withFilters } from './withFilters';
 import { ListPagination } from '../Pagination';
@@ -38,7 +38,7 @@ const getStyles: Readonly<any> = (theme: Theme) => ({
     },
 });
 
-class ListViewMainPlain extends React.PureComponent<Props> {
+class ListViewMainPlain extends React.PureComponent<Props & WithStyles<typeof getStyles>> {
     renderTopBar = () => {
         const {
             classes,
@@ -79,12 +79,14 @@ class ListViewMainPlain extends React.PureComponent<Props> {
     }
 
     renderPager = () => {
-        const { classes } = this.props;
+        const { classes, isSelectionInProgress } = this.props;
         return (
             <div
                 className={classes.paginationContainer}
             >
-                <ListPagination />
+                <ListPagination
+                    disabled={isSelectionInProgress}
+                />
             </div>
         );
     }

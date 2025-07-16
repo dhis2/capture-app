@@ -1,7 +1,7 @@
 import React, { useState, useRef, memo, useCallback } from 'react';
 import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu, Divider } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { withStyles, type WithStyles } from '@material-ui/core';
 
 import type { Props } from './listViewMenu.types';
 
@@ -27,7 +27,7 @@ const getStyles = () => ({
     },
 });
 
-const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
+const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props & WithStyles<typeof getStyles>) => {
     const anchorRef = useRef<HTMLDivElement>(null);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 

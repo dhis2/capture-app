@@ -4,7 +4,7 @@ import {
 } from '../listView.context';
 import { ListPaginationMain } from './ListPaginationMain.component';
 
-export const ListPaginationContextConsumer = (props: Record<string, never>) => {
+export const ListPaginationContextConsumer = (props: { disabled?: boolean; }) => {
     const paginationContextData = useContext(PaginationContext);
 
     return (

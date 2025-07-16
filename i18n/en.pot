@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-07-16T10:28:34.840Z\n"
-"PO-Revision-Date: 2025-07-16T10:28:34.840Z\n"
+"POT-Creation-Date: 2025-07-16T12:06:33.579Z\n"
+"PO-Revision-Date: 2025-07-16T12:06:33.579Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -584,6 +584,9 @@ msgstr "More filters"
 
 msgid "Stage filters"
 msgstr "Stage filters"
+
+msgid "Rows per page"
+msgstr "Rows per page"
 
 msgid "Could not get organisation unit"
 msgstr "Could not get organisation unit"

@@ -80,7 +80,7 @@ export type StickyFilters = {
 
 export type ChangePage = (pageNumber: number) => void;
 export type ChangeRowsPerPage = (rowsPerPage: number) => void;
-export type UpdateFilter = (id: string, data?: Record<string, unknown>) => void;
+export type UpdateFilter = (data: Record<string, unknown>, id: string) => void;
 export type ClearFilter = (id: string) => void;
 export type ClearFilters = (filterIds: Record<string, unknown>) => void;
 export type RemoveFilter = (id: string, includeFilters: Record<string, unknown>) => void;

@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import type { WithStyles } from '@material-ui/core';
 import type { ListViewContextBuilderPassOnProps } from '../ContextBuilder';
 import type {
     Columns,
@@ -28,7 +27,7 @@ type ComponentProps = {
     onSelectAll: (rows: Array<string>) => void;
     isSelectionInProgress?: boolean;
     bulkActionBarComponent: ReactNode;
-} & WithStyles<any>;
+};
 
 type RestProps = Omit<WithFilterPassOnProps, keyof ComponentProps>;
 
