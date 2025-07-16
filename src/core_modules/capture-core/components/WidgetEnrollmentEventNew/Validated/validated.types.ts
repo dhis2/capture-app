@@ -1,5 +1,5 @@
 import type { ProgramStage, RenderFoundation } from '../../../metaData';
-import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
+import type { AddEventSaveType } from '../DataEntry/addEventSaveTypes';
 import type {
     CommonValidatedProps,
     RulesExecutionDependenciesClientFormatted,
@@ -20,7 +20,7 @@ export type Props = {
     ready: boolean;
     id: string;
     itemId: string;
-    onSave: (saveType: keyof typeof addEventSaveTypes) => void;
+    onSave: (saveType: AddEventSaveType) => void;
     onCancel: () => void;
     onSaveAndCompleteEnrollment: (enrollment: any) => void;
     formRef: (formInstance: any) => void;

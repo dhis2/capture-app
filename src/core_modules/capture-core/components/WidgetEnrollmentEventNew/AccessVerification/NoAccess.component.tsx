@@ -1,11 +1,10 @@
-// @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 
-const getStyles = (theme: Theme) => ({
+const styles: Readonly<any> = {
     contents: {
         display: 'flex',
         justifyContent: 'center',
@@ -20,20 +19,15 @@ const getStyles = (theme: Theme) => ({
         marginLeft: '-8px',
     },
     buttonContainer: {
-        paddingRight: theme.spacing.unit * 2,
+        paddingRight: 16,
     },
-});
-type Props = {
-    classes: {
-        contents: string,
-        buttonRow: string,
-        buttonContainer: string,
-        header: string,
-    },
-    onCancel: () => void,
 };
 
-class NoAccessPlain extends Component<Props> {
+type Props = {
+    onCancel: () => void;
+};
+
+class NoAccessPlain extends Component<Props & WithStyles<typeof styles>> {
     render() {
         const { classes, onCancel } = this.props;
         return (
@@ -49,8 +43,7 @@ class NoAccessPlain extends Component<Props> {
                         className={classes.buttonContainer}
                     >
                         <Button
-                            variant="raised"
-                            color="primary"
+                            primary
                             disabled
                         >
                             {i18n.t('Save')}
@@ -60,8 +53,6 @@ class NoAccessPlain extends Component<Props> {
                         className={classes.buttonContainer}
                     >
                         <Button
-                            variant="text"
-                            color="primary"
                             onClick={onCancel}
                         >
                             {i18n.t('Cancel')}
@@ -73,4 +64,4 @@ class NoAccessPlain extends Component<Props> {
     }
 }
 
-export const NoAccess = withStyles(getStyles)(NoAccessPlain);
+export const NoAccess = withStyles(styles)(NoAccessPlain);

@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useCoreOrgUnit } from '../../../metadataRetrieval/coreOrgUnit';
 import { Validated } from '../Validated/Validated.container';

@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
@@ -31,7 +30,7 @@ export const WidgetEnrollmentEventNew = ({
     if (!program || !stage || !(program instanceof TrackerProgram) || isError || !formFoundation) {
         return (
             <div>
-                {i18n.t('program or stage is invalid')};
+                {i18n.t('program or stage is invalid')}
             </div>
         );
     }
