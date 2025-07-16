@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
 import { relatedStageActions } from '../../WidgetRelatedStages';
@@ -33,14 +32,14 @@ export const requestSaveEvent = ({
     onSaveSuccessActionType,
     onSaveErrorActionType,
 }: {
-    requestEvent: RequestEvent,
-    linkedEvent: ?LinkedRequestEvent,
-    relationship: ?Object,
-    serverData: Object,
-    linkMode: ?$Keys<typeof relatedStageActions>,
-    onSaveExternal: ?ExternalSaveHandler,
-    onSaveSuccessActionType?: string,
-    onSaveErrorActionType?: string,
+    requestEvent: RequestEvent;
+    linkedEvent?: LinkedRequestEvent;
+    relationship?: Record<string, unknown>;
+    serverData: Record<string, unknown>;
+    linkMode?: keyof typeof relatedStageActions;
+    onSaveExternal?: ExternalSaveHandler;
+    onSaveSuccessActionType?: string;
+    onSaveErrorActionType?: string;
 }) =>
     actionCreator(newEventWidgetActionTypes.EVENT_SAVE_REQUEST)({
         requestEvent,
@@ -59,10 +58,10 @@ export const setSaveEnrollmentEventInProgress = ({
     linkedOrgUnitId,
     linkMode,
 }: {
-    requestEventId: string,
-    linkedEventId: ?string,
-    linkedOrgUnitId: ?string,
-    linkMode: ?$Keys<typeof relatedStageActions>,
+    requestEventId: string;
+    linkedEventId?: string;
+    linkedOrgUnitId?: string;
+    linkMode?: keyof typeof relatedStageActions;
 }) => actionCreator(newEventWidgetActionTypes.SET_SAVE_ENROLLMENT_EVENT_IN_PROGRESS)({
     requestEventId,
     linkedEventId,
@@ -70,7 +69,11 @@ export const setSaveEnrollmentEventInProgress = ({
     linkMode,
 });
 
-export const saveEvents = ({ serverData, onSaveErrorActionType, onSaveSuccessActionType }: Object) =>
+export const saveEvents = ({ serverData, onSaveErrorActionType, onSaveSuccessActionType }: {
+    serverData: Record<string, unknown>;
+    onSaveErrorActionType?: string;
+    onSaveSuccessActionType?: string;
+}) =>
     actionCreator(newEventWidgetActionTypes.EVENT_SAVE)({}, {
         offline: {
             effect: {
@@ -83,7 +86,14 @@ export const saveEvents = ({ serverData, onSaveErrorActionType, onSaveSuccessAct
         },
     });
 
-export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: Object) =>
+export const startCreateNewAfterCompleting = ({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages }: {
+    enrollmentId: string;
+    isCreateNew?: boolean;
+    orgUnitId?: string;
+    programId: string;
+    teiId: string;
+    availableProgramStages: any;
+}) =>
     actionCreator(newEventWidgetActionTypes.START_CREATE_NEW_AFTER_COMPLETING)({ enrollmentId, isCreateNew, orgUnitId, programId, teiId, availableProgramStages });
 
 export const cleanUpEventSaveInProgress = () =>

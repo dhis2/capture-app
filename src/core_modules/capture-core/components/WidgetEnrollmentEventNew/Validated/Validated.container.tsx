@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
@@ -42,9 +41,9 @@ export const Validated = ({
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
-    const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
+    const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
     const eventSaveInProgress = useSelector(
-        ({ enrollmentDomain }) => !!enrollmentDomain.eventSaveInProgress?.requestEventId,
+        (state: any) => !!state.enrollmentDomain.eventSaveInProgress?.requestEventId,
     );
     const { buildNewEventPayload } = useBuildNewEventPayload({
         dataEntryId,
@@ -65,7 +64,6 @@ export const Validated = ({
         orgUnitContext,
         dataEntryId,
         itemId,
-        // $FlowFixMe Investigate
         rulesExecutionDependenciesClientFormatted,
     });
 
@@ -76,10 +74,9 @@ export const Validated = ({
         dataEntryItemId: string,
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
-        saveType: ?$Values<typeof addEventSaveTypes>,
-        enrollment: ?Object,
+        saveType?: keyof typeof addEventSaveTypes,
+        enrollment?: Record<string, unknown>,
     ) => new Promise((resolve) => {
-        // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
         const {
             serverRequestEvent,
@@ -98,17 +95,17 @@ export const Validated = ({
         }
 
         const serverData = createServerData({
-            serverRequestEvent,
-            linkedEvent,
-            relationship,
+            serverRequestEvent: serverRequestEvent as any,
+            linkedEvent: linkedEvent as any,
+            relationship: relationship as any,
             enrollment,
         });
 
         dispatch(batchActions([
             requestSaveEvent({
-                requestEvent: serverRequestEvent,
-                linkedEvent,
-                relationship,
+                requestEvent: serverRequestEvent as any,
+                linkedEvent: linkedEvent as any,
+                relationship: relationship as any,
                 serverData,
                 linkMode,
                 onSaveExternal,
@@ -116,11 +113,10 @@ export const Validated = ({
                 onSaveErrorActionType: enrollment ? onSaveAndCompleteEnrollmentErrorActionType : onSaveErrorActionType,
             }),
 
-            // stores meta in redux to be used when navigating after save
             setSaveEnrollmentEventInProgress({
-                requestEventId: serverRequestEvent?.event,
-                linkedEventId: linkedEvent?.event,
-                linkedOrgUnitId: linkedEvent?.orgUnit,
+                requestEventId: (serverRequestEvent as any)?.event,
+                linkedEventId: (linkedEvent as any)?.event,
+                linkedOrgUnitId: (linkedEvent as any)?.orgUnit,
                 linkMode,
             }),
         ], newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS),
@@ -130,8 +126,8 @@ export const Validated = ({
     }), [buildNewEventPayload, dispatch, onSaveExternal, onSaveAndCompleteEnrollmentSuccessActionType, onSaveSuccessActionType, onSaveAndCompleteEnrollmentErrorActionType, onSaveErrorActionType]);
 
     const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
-        const saveResult = await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
-        if (saveResult?.success) {
+        const saveResult = await handleSave(itemId, dataEntryId, formFoundation, 'COMPLETE');
+        if ((saveResult as any)?.success) {
             dispatch(startCreateNewAfterCompleting({
                 enrollmentId,
                 isCreateNew,
@@ -149,20 +145,19 @@ export const Validated = ({
             dataEntryItemId: string,
             dataEntryIdArgument: string,
             formFoundationArgument: RenderFoundation,
-            enrollment: Object,
+            enrollment: Record<string, unknown>,
         ) => {
             handleSave(
                 dataEntryItemId,
                 dataEntryIdArgument,
                 formFoundationArgument,
-                addEventSaveTypes.COMPLETE,
+                'COMPLETE',
                 enrollment,
             );
         },
         [handleSave],
     );
 
-    // Clean up data entry on unmount in case the user navigates away, stopping delayed navigation
     useEffect(() => () => {
         dispatch(cleanUpEventSaveInProgress());
     }, [dispatch]);
@@ -181,7 +176,6 @@ export const Validated = ({
             enrollmentId={enrollmentId}
             formFoundation={formFoundation}
             relatedStageRef={relatedStageRef}
-            // $FlowFixMe - Promise should be ignored downstream
             onSave={handleSave}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}
