@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,18 +11,18 @@ import {
     setNewEventSaveTypes,
     addNewEventNote,
 } from './actions/dataEntry.actions';
-import typeof { addEventSaveTypes } from './addEventSaveTypes';
+import type { AddEventSaveType } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
 import { useProgramExpiryForUser } from '../../../hooks';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
-    const { programId } = useSelector(({ currentSelections }) => currentSelections);
-    const dataEntryItemId = useSelector(({ dataEntries }) => dataEntries[id] && dataEntries[id].itemId);
+    const { programId } = useSelector(({ currentSelections }: any) => currentSelections);
+    const dataEntryItemId = useSelector(({ dataEntries }: any) => dataEntries[id] && dataEntries[id].itemId);
     const dataEntryKey = getDataEntryKey(id, dataEntryItemId);
-    const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey].orgUnit);
+    const orgUnitFieldValue = useSelector(({ dataEntriesFieldsValue }: any) => dataEntriesFieldsValue[dataEntryKey].orgUnit);
     const expiryPeriod = useProgramExpiryForUser(programId);
-
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
@@ -68,7 +67,7 @@ export const DataEntry = ({ rulesExecutionDependenciesClientFormatted, id, ...pa
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     }, [dispatch]);
 
-    const onSetSaveTypes = useCallback((newSaveTypes: ?Array<$Values<addEventSaveTypes>>) => {
+    const onSetSaveTypes = useCallback((newSaveTypes: AddEventSaveType[] | null) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
     }, [dispatch]);
     return (

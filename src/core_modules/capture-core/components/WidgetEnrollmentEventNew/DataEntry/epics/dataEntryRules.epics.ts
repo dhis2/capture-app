@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { map, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
@@ -23,6 +22,7 @@ import type { RulesExecutionDependenciesClientFormatted } from '../../common.typ
 import { getLocationQuery } from '../../../../utils/routing';
 import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../metadataRetrieval/coreOrgUnit';
 import type { QuerySingleResource } from '../../../../utils/api';
+import { ReduxStore, ApiUtils } from '../../../../../capture-core-utils/types/global';
 
 const runRulesForNewEvent = async ({
     store,
@@ -33,18 +33,18 @@ const runRulesForNewEvent = async ({
     fieldData,
     querySingleResource,
 }: {
-    store: ReduxStore,
-    dataEntryId: string,
-    itemId: string,
-    uid: string,
-    rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
-    fieldData?: ?FieldData,
-    querySingleResource: QuerySingleResource,
+    store: ReduxStore;
+    dataEntryId: string;
+    itemId: string;
+    uid: string;
+    rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted;
+    fieldData?: FieldData | null;
+    querySingleResource: QuerySingleResource;
 }) => {
     const { events, attributeValues, enrollmentData } = rulesExecutionDependenciesClientFormatted;
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const { programId, stageId } = getLocationQuery();
+    const { programId, stageId }: { programId: string; stageId: string } = getLocationQuery();
 
     const program = getTrackerProgramThrowIfNotFound(programId);
     const stage = program.getStage(stageId);
@@ -58,7 +58,6 @@ const runRulesForNewEvent = async ({
     const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
     const currentEvent = { ...currentEventValues, ...currentEventMainData, programStageId };
     const { coreOrgUnit, cached } =
-        // $FlowFixMe
         await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
 
     const effects = getApplicableRuleEffectsForTrackerProgram({
@@ -87,16 +86,16 @@ const runRulesForNewEvent = async ({
 };
 
 export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
-    action$: InputObservable,
+    action$: any,
     store: ReduxStore,
     { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH),
-        map(actionBatch =>
+        map((actionBatch: any) =>
             actionBatch.payload
-                .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
-        concatMap((action) => {
+                .find((action: any) => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
+        concatMap((action: any) => {
             const { dataEntryId, itemId, uid, rulesExecutionDependenciesClientFormatted } = action.payload;
             const runRulesForNewEventPromise = runRulesForNewEvent({
                 store,
@@ -110,16 +109,16 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (
         }));
 
 export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (
-    action$: InputObservable,
+    action$: any,
     store: ReduxStore,
     { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH),
-        map(actionBatch =>
+        map((actionBatch: any) =>
             actionBatch.payload
-                .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
-        concatMap((action) => {
+                .find((action: any) => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
+        concatMap((action: any) => {
             const {
                 dataEntryId,
                 itemId,

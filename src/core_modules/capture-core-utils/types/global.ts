@@ -53,6 +53,7 @@ export type ReduxStore = {
         dataEntriesFieldsValue: Record<string, unknown>;
         dataEntriesFieldsMeta: Record<string, unknown>;
         formsValues: Record<string, unknown>;
+        organisationUnits: any[];
     };
 };
 

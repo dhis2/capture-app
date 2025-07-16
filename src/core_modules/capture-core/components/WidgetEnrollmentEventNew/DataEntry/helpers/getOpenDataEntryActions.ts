@@ -1,4 +1,3 @@
-// @flow
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../fieldValidators';
@@ -6,7 +5,7 @@ import { getNoteValidatorContainers } from '../fieldValidators/note.validatorCon
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
 
-type DataEntryPropsToInclude = Array<Object>;
+type DataEntryPropsToInclude = Array<Record<string, unknown>>;
 
 const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
@@ -41,7 +40,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const getOpenDataEntryActions =
-    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory, orgUnit: Object) => {
+    (dataEntryId: string, itemId: string, programCategory?: ProgramCategory, orgUnit?: Record<string, unknown>) => {
         const defaultDataEntryValues = {
             orgUnit: orgUnit
                 ? { id: orgUnit.id, name: orgUnit.name, path: orgUnit.path }
@@ -56,4 +55,3 @@ export const getOpenDataEntryActions =
         }
         return loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude, defaultDataEntryValues);
     };
-
