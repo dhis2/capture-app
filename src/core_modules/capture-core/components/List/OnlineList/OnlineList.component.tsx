@@ -90,7 +90,7 @@ class Index extends React.Component<Props> {
         dataElementTypes.INTEGER_POSITIVE,
         dataElementTypes.INTEGER_NEGATIVE,
         dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
-    ] as const;
+    ];
 
     renderHeaderRow(visibleColumns: Column[]) {
         const { classes, sortById, sortByDirection, dataSource, onSelectAll, allRowsAreSelected } = this.props;
@@ -108,8 +108,8 @@ class Index extends React.Component<Props> {
                 onSortIconClick={this.getSortHandler(column.id)}
                 sortDirection={getSortDirection(column)}
                 key={column.id}
-                align={Index.typesWithRightPlacement.includes(column.type as any) ? 'right' : 'left'}
-                className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type as any) })}
+                align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
+                className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
             >
                 {column.header}
             </DataTableColumnHeader>
@@ -161,7 +161,7 @@ class Index extends React.Component<Props> {
             const cells = visibleColumns.map(column => (
                 <DataTableCell
                     key={column.id}
-                    align={Index.typesWithRightPlacement.includes(column.type as any) ? 'right' : 'left'}
+                    align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
                     style={{ cursor: this.props.isSelectionInProgress ? 'pointer' : 'default' }}
                     onClick={() => {
                         if (this.props.isSelectionInProgress) {

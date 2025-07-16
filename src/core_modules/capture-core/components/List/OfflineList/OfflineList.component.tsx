@@ -37,7 +37,7 @@ class Index extends Component<Props> {
         dataElementTypes.INTEGER_POSITIVE,
         dataElementTypes.INTEGER_NEGATIVE,
         dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
-    ] as const;
+    ];
 
     renderHeaderRow(visibleColumns: Column[]) {
         const { classes } = this.props;
@@ -45,8 +45,8 @@ class Index extends Component<Props> {
         const headerCells = visibleColumns.map(column => (
             <DataTableColumnHeader
                 key={column.id}
-                className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type as any) })}
-                align={Index.typesWithRightPlacement.includes(column.type as any) ? 'right' : 'left'}
+                className={classNames({ [classes.headerAlign]: Index.typesWithRightPlacement.includes(column.type) })}
+                align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
             >
                 {column.header}
             </DataTableColumnHeader>
@@ -71,7 +71,7 @@ class Index extends Component<Props> {
             const cells = visibleColumns.map(column => (
                 <DataTableCell
                     key={column.id}
-                    align={Index.typesWithRightPlacement.includes(column.type as any) ? 'right' : 'left'}
+                    align={Index.typesWithRightPlacement.includes(column.type) ? 'right' : 'left'}
                 >
                     {row[column.id]}
                 </DataTableCell>

@@ -1,13 +1,12 @@
 import React from 'react';
 import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import type { Theme } from '@material-ui/core/styles';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     container: {
         borderColor: theme.palette.type === 'light'
-            ? theme.palette.grey[300]
-            : theme.palette.grey[700],
+            ? theme.palette.dividerLighter
+            : theme.palette.dividerDarker,
         borderWidth: '1px',
         borderStyle: 'solid',
         padding: 10,
