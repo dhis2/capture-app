@@ -1,4 +1,3 @@
-// @flow
 import React, { memo } from 'react';
 import { ListViewContextBuilder } from './ContextBuilder';
 import type { InterfaceProps } from './types';

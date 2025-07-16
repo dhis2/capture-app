@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo } from 'react';
 import {
     FilterValuesContext,
@@ -6,6 +5,7 @@ import {
 } from '../listView.context';
 import { ListViewMain } from '../Main';
 import type { Props } from './listViewContextBuilder.types';
+import type { PaginationContextData } from '../types';
 
 export const ListViewContextBuilder = ({
     filters,
@@ -21,7 +21,7 @@ export const ListViewContextBuilder = ({
     dataSource,
     ...passOnProps
 }: Props) => {
-    const paginationContextData = useMemo(() => ({
+    const paginationContextData = useMemo((): PaginationContextData => ({
         onChangePage,
         onChangeRowsPerPage,
         rowsPerPage,

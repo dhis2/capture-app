@@ -1,5 +1,4 @@
-// @flow
-import React, { useState, useRef, memo, useCallback, type ComponentType } from 'react';
+import React, { useState, useRef, memo, useCallback } from 'react';
 import { IconButton } from 'capture-ui';
 import { MenuItem, Layer, Popper, IconMore24, FlyoutMenu, Divider } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -29,7 +28,7 @@ const getStyles = () => ({
 });
 
 const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
-    const anchorRef = useRef(null);
+    const anchorRef = useRef<HTMLDivElement>(null);
     const [actionsIsOpen, setActionsIsOpen] = useState(false);
 
     const toggle = () => {
@@ -40,7 +39,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
     const renderMenuItems = useCallback(() =>
         customMenuContents
             .map((content) => {
-                if (content.subHeader) {
+                if ('subHeader' in content) {
                     return (
                         <>
                             <Divider
@@ -64,17 +63,15 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                         key={content.key}
                         data-test={`menu-item-${content.key}`}
                         onClick={() => {
-                            if (!content.clickHandler) {
+                            if (!('clickHandler' in content) || !content.clickHandler) {
                                 return;
                             }
                             setActionsIsOpen(false);
-                            // $FlowFixMe Using exact types, in my book this should work. Please tell me what I'm missing.
                             content.clickHandler();
                         }}
-                        // $FlowFixMe Using exact types, in my book this should work. Please tell me what I'm missing.
-                        disabled={!content.clickHandler}
-                        // $FlowFixMe Using exact types, in my book this should work. Please tell me what I'm missing.
-                        label={content.element}
+                        disabled={!('clickHandler' in content) || !content.clickHandler}
+                        label={'element' in content ? content.element : ''}
+                        suffix=""
                     />
                 );
             })
@@ -89,12 +86,12 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                 <IconMore24 />
             </IconButton>
             {actionsIsOpen && (
-                <Layer onBackdropClick={() => setActionsIsOpen(false)} transparent>
+                <Layer onBackdropClick={() => setActionsIsOpen(false)}>
                     <Popper
                         placement="bottom-end"
-                        reference={anchorRef}
+                        reference={anchorRef.current as any}
                     >
-                        <FlyoutMenu role="menu">
+                        <FlyoutMenu>
                             {renderMenuItems()}
                         </FlyoutMenu>
                     </Popper>
@@ -104,5 +101,4 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
     );
 };
 
-export const ListViewMenu: ComponentType<$Diff<Props, CssClasses>> =
-    memo < $Diff<Props, CssClasses>>(withStyles(getStyles)(ListViewMenuPlain));
+export const ListViewMenu = memo(withStyles(getStyles)(ListViewMenuPlain));
