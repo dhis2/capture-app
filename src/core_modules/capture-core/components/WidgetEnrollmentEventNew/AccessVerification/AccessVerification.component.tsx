@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { OrgUnitFetcher } from '../OrgUnitFetcher/OrgUnitFetcher.component';
 import { NoAccess } from './NoAccess.component';

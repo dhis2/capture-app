@@ -1,4 +1,3 @@
-// @flow
 export { WidgetEnrollmentEventNew } from './WidgetEnrollmentEventNew.container';
 export {
     addNoteForNewEnrollmentEventEpic,
