@@ -1,7 +1,6 @@
-// @flow
-import React, { memo, type ComponentType } from 'react';
+import React, { memo } from 'react';
 import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
@@ -9,11 +8,11 @@ import { RelatedStagesActions } from '../../WidgetRelatedStages';
 import { usePlacementDomNode } from '../../../utils/portal/usePlacementDomNode';
 import type { Props } from './validated.types';
 
-const styles = () => ({
+const styles: Readonly<any> = {
     wrapper: {
         paddingLeft: spacersNum.dp16,
     },
-});
+};
 
 const ValidatedPlain = ({
     ready,
@@ -29,7 +28,7 @@ const ValidatedPlain = ({
     onCancel,
     id,
     ...passOnProps
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const { domRef: savingTextRef, domNode: savingTextDomNode } = usePlacementDomNode();
 
     return (
@@ -72,7 +71,5 @@ const ValidatedPlain = ({
     );
 };
 
-export const ValidatedComponent: ComponentType<
-    $Diff<Props, CssClasses>,
-> = withStyles(styles)(memo(ValidatedPlain));
+export const ValidatedComponent = withStyles(styles)(memo(ValidatedPlain));
 // Adding memo because the lifecycle method in Validated.container grabs the entire state object.

@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
@@ -42,9 +41,9 @@ export const Validated = ({
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
-    const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
+    const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
     const eventSaveInProgress = useSelector(
-        ({ enrollmentDomain }) => !!enrollmentDomain.eventSaveInProgress?.requestEventId,
+        (state: any) => !!state.enrollmentDomain.eventSaveInProgress?.requestEventId,
     );
     const { buildNewEventPayload } = useBuildNewEventPayload({
         dataEntryId,
@@ -65,7 +64,6 @@ export const Validated = ({
         orgUnitContext,
         dataEntryId,
         itemId,
-        // $FlowFixMe Investigate
         rulesExecutionDependenciesClientFormatted,
     });
 
@@ -76,8 +74,8 @@ export const Validated = ({
         dataEntryItemId: string,
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
-        saveType: ?$Values<typeof addEventSaveTypes>,
-        enrollment: ?Object,
+        saveType?: typeof addEventSaveTypes[keyof typeof addEventSaveTypes],
+        enrollment?: Record<string, unknown>,
     ) => new Promise((resolve) => {
         // Creating a promise to be able to stop navigation if related stages has an error
         window.scrollTo(0, 0);
@@ -131,7 +129,7 @@ export const Validated = ({
 
     const handleCreateNew = useCallback(async (isCreateNew?: boolean) => {
         const saveResult = await handleSave(itemId, dataEntryId, formFoundation, addEventSaveTypes.COMPLETE);
-        if (saveResult?.success) {
+        if ((saveResult as any)?.success) {
             dispatch(startCreateNewAfterCompleting({
                 enrollmentId,
                 isCreateNew,
@@ -149,7 +147,7 @@ export const Validated = ({
             dataEntryItemId: string,
             dataEntryIdArgument: string,
             formFoundationArgument: RenderFoundation,
-            enrollment: Object,
+            enrollment: Record<string, unknown>,
         ) => {
             handleSave(
                 dataEntryItemId,
@@ -181,7 +179,6 @@ export const Validated = ({
             enrollmentId={enrollmentId}
             formFoundation={formFoundation}
             relatedStageRef={relatedStageRef}
-            // $FlowFixMe - Promise should be ignored downstream
             onSave={handleSave}
             onCancelCreateNew={() => handleCreateNew()}
             onConfirmCreateNew={() => handleCreateNew(true)}

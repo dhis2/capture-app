@@ -1,4 +1,3 @@
-// @flow
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
@@ -21,13 +20,13 @@ export const useLifecycle = ({
         enrollmentData: enrollmentDataRulesDependency,
     },
 }: {
-    program: TrackerProgram,
-    stage: ProgramStage,
-    formFoundation: RenderFoundation,
-    orgUnitContext?: OrgUnit,
-    dataEntryId: string,
-    itemId: string,
-    rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
+    program: TrackerProgram;
+    stage: ProgramStage;
+    formFoundation: RenderFoundation;
+    orgUnitContext?: OrgUnit;
+    dataEntryId: string;
+    itemId: string;
+    rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted;
 }) => {
     const dispatch = useDispatch();
     const [rulesExecutionTrigger, setRulesExecutionTrigger] = useState(1);
@@ -46,9 +45,9 @@ export const useLifecycle = ({
         }
     }, [dispatch, dataEntryId, itemId, program, formFoundation, isLoading, programCategory, orgUnitContext]);
 
-    const eventsRef = useRef();
-    const attributesRef = useRef();
-    const enrollmentDataRef = useRef();
+    const eventsRef = useRef<any>(undefined);
+    const attributesRef = useRef<any>(undefined);
+    const enrollmentDataRef = useRef<any>(undefined);
 
     // TODO: Getting the entire state object is bad and this needs to be refactored.
     // The problem is the helper methods that take the entire state object.
@@ -84,6 +83,7 @@ export const useLifecycle = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         dispatch,
+
         orgUnitContext,
         eventsRulesDependency,
         attributesValuesRulesDependency,

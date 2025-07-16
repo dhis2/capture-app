@@ -1,10 +1,9 @@
-// @flow
 import moment from 'moment';
 import { FEATURES, featureAvailable } from 'capture-core-utils';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
-import { type RenderFoundation } from '../../../metaData';
+import type { RenderFoundation } from '../../../metaData';
 
 export const getAddEventEnrollmentServerData = ({
     formFoundation,
@@ -18,19 +17,19 @@ export const getAddEventEnrollmentServerData = ({
     fromClientDate,
     uid,
 }: {
-    formFoundation: RenderFoundation,
-    formClientValues: Object,
-    mainDataClientValues: Object,
-    eventId: string,
-    programId: string,
-    teiId: string,
-    enrollmentId: string,
-    completed?: boolean,
-    fromClientDate: (date: Date) => { getServerZonedISOString: () => string },
-    uid?: string,
+    formFoundation: RenderFoundation;
+    formClientValues: Record<string, unknown>;
+    mainDataClientValues: Record<string, unknown>;
+    eventId: string;
+    programId: string;
+    teiId: string;
+    enrollmentId: string;
+    completed?: boolean;
+    fromClientDate: (date: Date) => { getServerZonedISOString: () => string };
+    uid?: string;
 }) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+    const mainDataServerValues: any = convertMainEventClientToServer(mainDataClientValues);
     const nowClient = fromClientDate(new Date());
     const nowServer = new Date(nowClient.getServerZonedISOString());
     const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
@@ -61,12 +60,12 @@ export const getAddEventEnrollmentServerData = ({
     };
 };
 
-function getDataEntriesNotes(state: ReduxState, dataEntryKey: string) {
+function getDataEntriesNotes(state: any, dataEntryKey: string) {
     const notes = state.dataEntriesNotes && state.dataEntriesNotes[dataEntryKey];
-    return notes ? notes.map(note => ({ value: note.value })) : [];
+    return notes ? notes.map((note: any) => ({ value: note.value })) : [];
 }
 
-export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string, formFoundation: RenderFoundation) => {
+export const getNewEventClientValues = (state: any, dataEntryKey: string, formFoundation: RenderFoundation) => {
     const formValues = state.formsValues[dataEntryKey];
     const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
     const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];

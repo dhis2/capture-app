@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { dataElementTypes, type TrackerProgram } from '../../../metaData';
 import { convertServerToClient } from '../../../converters';
@@ -9,14 +8,14 @@ import type {
 } from '../common.types';
 
 const prepareAttributesForRulesEngine =
-    (attributeValues, program: TrackerProgram): AttributeValuesClientFormatted => attributeValues
-        .reduce((accAttributeValues, { id, value }) => {
-            const { type } = program.attributes.find(({ id: metadataId }) => id === metadataId) || {};
+    (attributeValues: any, program: TrackerProgram): AttributeValuesClientFormatted => attributeValues
+        .reduce((accAttributeValues: any, { id, value }: any) => {
+            const { type } = program.attributes.find(({ id: metadataId }: any) => id === metadataId) || {};
             accAttributeValues[id] = convertServerToClient(value, type);
             return accAttributeValues;
         }, {});
 
-const prepareEnrollmentDataForRulesEngine = ({ enrolledAt, occurredAt, enrollmentId }) => ({
+const prepareEnrollmentDataForRulesEngine = ({ enrolledAt, occurredAt, enrollmentId }: any) => ({
     enrolledAt: convertServerToClient(enrolledAt, dataElementTypes.DATE),
     occurredAt: convertServerToClient(occurredAt, dataElementTypes.DATE),
     enrollmentId,
@@ -29,4 +28,3 @@ export const useClientFormattedRulesExecutionDependencies =
             attributeValues: prepareAttributesForRulesEngine(attributeValues, program),
             enrollmentData: prepareEnrollmentDataForRulesEngine(enrollmentData),
         }), [events, attributeValues, enrollmentData, program]);
-

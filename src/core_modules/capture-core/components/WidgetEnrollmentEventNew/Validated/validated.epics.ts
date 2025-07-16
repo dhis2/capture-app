@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import {
@@ -7,17 +6,17 @@ import {
     saveEvents,
 } from './validated.actions';
 
-export const saveNewEnrollmentEventEpic = (action$: InputObservable) =>
+export const saveNewEnrollmentEventEpic = (action$: any) =>
     action$.pipe(
         ofType(
             newEventBatchActionTypes.REQUEST_SAVE_AND_SET_SUBMISSION_IN_PROGRESS,
         ),
-        map(actionBatch =>
+        map((actionBatch: any) =>
             actionBatch
                 .payload
-                .find(action => action.type === newEventWidgetActionTypes.EVENT_SAVE_REQUEST),
+                .find((action: any) => action.type === newEventWidgetActionTypes.EVENT_SAVE_REQUEST),
         ),
-        map((action) => {
+        map((action: any) => {
             const {
                 relationship,
                 serverData,

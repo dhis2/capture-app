@@ -1,4 +1,3 @@
-// @flow
 import { useSelector } from 'react-redux';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
 import type { RenderFoundation } from '../../../metaData';
@@ -11,12 +10,12 @@ import type { LinkedRequestEvent, RequestEvent } from '../../DataEntries';
 import type { RelatedStageRefPayload } from '../../WidgetRelatedStages';
 
 type Props = {
-    dataEntryId: string,
-    itemId: string,
-    programId: string,
-    formFoundation: RenderFoundation,
-    enrollmentId: string,
-    teiId: string,
+    dataEntryId: string;
+    itemId: string;
+    programId: string;
+    formFoundation: RenderFoundation;
+    enrollmentId: string;
+    teiId: string;
 };
 
 export const createServerData = ({
@@ -25,16 +24,16 @@ export const createServerData = ({
     relationship,
     enrollment,
 }: {
-    serverRequestEvent: RequestEvent,
-    linkedEvent: ?LinkedRequestEvent,
-    relationship: ?Object,
-    enrollment: ?Object,
+    serverRequestEvent: RequestEvent;
+    linkedEvent?: LinkedRequestEvent;
+    relationship?: Record<string, unknown>;
+    enrollment?: Record<string, unknown>;
 }) => {
     const relationships = relationship ? [relationship] : undefined;
     const newEvents = linkedEvent ? [serverRequestEvent, linkedEvent] : [serverRequestEvent];
 
     if (enrollment) {
-        const updatedEnrollment = { ...enrollment, events: [...(enrollment.events || []), ...newEvents] };
+        const updatedEnrollment = { ...enrollment, events: [...((enrollment as any).events || []), ...newEvents] };
         return {
             enrollments: [updatedEnrollment],
             relationships,
@@ -56,13 +55,13 @@ export const useBuildNewEventPayload = ({
     formFoundation,
 }: Props) => {
     const dataEntryKey = `${dataEntryId}-${itemId}`;
-    const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
-    const dataEntryValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
-    const dataEntryValuesMeta = useSelector(({ dataEntriesFieldsMeta }) => dataEntriesFieldsMeta[dataEntryKey]);
-    const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[dataEntryKey]);
+    const formValues = useSelector((state: any) => state.formsValues[dataEntryKey]);
+    const dataEntryValues = useSelector((state: any) => state.dataEntriesFieldsValue[dataEntryKey]);
+    const dataEntryValuesMeta = useSelector((state: any) => state.dataEntriesFieldsMeta[dataEntryKey]);
+    const notes = useSelector((state: any) => state.dataEntriesNotes[dataEntryKey]);
     const { fromClientDate } = useTimeZoneConversion();
 
-    const buildRelatedStageEventPayload = (serverRequestEvent, saveType: ?$Values<typeof addEventSaveTypes>, relatedStageRef) => {
+    const buildRelatedStageEventPayload = (serverRequestEvent: any, relatedStageRef: any) => {
         if (
             relatedStageRef?.current
             && relatedStageRef.current.eventHasLinkableStageRelationship()
@@ -116,8 +115,8 @@ export const useBuildNewEventPayload = ({
     };
 
     const buildNewEventPayload = (
-        saveType: ?$Values<typeof addEventSaveTypes>,
-        relatedStageRef?: {| current: (?RelatedStageRefPayload) |},
+        saveType?: typeof addEventSaveTypes[keyof typeof addEventSaveTypes],
+        relatedStageRef?: { current: RelatedStageRefPayload | null },
     ) => {
         const requestEventId = generateUID();
 
@@ -146,7 +145,7 @@ export const useBuildNewEventPayload = ({
             linkedEvent,
             relationship,
             linkMode,
-        } = buildRelatedStageEventPayload(serverRequestEvent, saveType, relatedStageRef);
+        } = buildRelatedStageEventPayload(serverRequestEvent, relatedStageRef);
 
         return {
             formHasError,
