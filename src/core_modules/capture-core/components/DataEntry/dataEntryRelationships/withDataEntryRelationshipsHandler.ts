@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import {
-    addRelationship,
     removeRelationship,
 } from '../actions/dataEntry.actions';
 import type { PlainProps, MapStateToPropsInput, MapDispatchToPropsReturn } from './withDataEntryRelationshipsHandler.types';
@@ -12,7 +11,7 @@ const getDataEntryRelationshipsHandler = (InnerComponent: React.ComponentType<an
         handleOpenAddRelationship = () => {
             this.props.onOpenAddRelationship(this.props.itemId, this.props.dataEntryId);
         }
-        
+
         handleRemoveRelationship = (relClientId: string) => {
             this.props.onRemoveRelationship(this.props.itemId, this.props.dataEntryId, relClientId);
         }
@@ -22,7 +21,7 @@ const getDataEntryRelationshipsHandler = (InnerComponent: React.ComponentType<an
             return React.createElement(InnerComponent, {
                 onOpenAddRelationship: this.handleOpenAddRelationship,
                 onRemoveRelationship: this.handleRemoveRelationship,
-                ...passOnProps
+                ...passOnProps,
             });
         }
     };

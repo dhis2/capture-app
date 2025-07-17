@@ -1,4 +1,3 @@
-import { convertValue } from '../../../converters/formToClient';
 import { convertDataEntryValuesToClientValues } from './convertDataEntryValuesToClientValues';
 import type { RenderFoundation } from '../../../metaData';
 

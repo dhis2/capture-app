@@ -3,34 +3,32 @@ import type { PlainProps } from './withDataEntryOutput.types';
 
 const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: React.ComponentType<any>) =>
     class DataEntryOutputBuilder extends React.Component<PlainProps> {
-        name: string;
         innerInstance: any;
-        
+
         constructor(props: PlainProps) {
             super(props);
-            this.name = 'DataEntryOutputBuilder';
         }
+
+        getOutput = (key: any) => React.createElement('div', { key },
+            React.createElement(Output, {
+                ...this.props,
+                innerInstance: this.innerInstance,
+            }),
+        );
 
         addOutput = (dataEntryOutputs: Array<React.Component<any>>) => {
             const output = this.getOutput(dataEntryOutputs ? dataEntryOutputs.length : 0);
             return dataEntryOutputs ? [...dataEntryOutputs, output] : [output];
         };
-        
-        getOutput = (key: any) => {
-            return React.createElement('div', { key }, 
-                React.createElement(Output, {
-                    ...this.props,
-                    innerInstance: this.innerInstance
-                })
-            );
-        };
+
+        name = 'DataEntryOutputBuilder';
 
         render() {
             const { dataEntryOutputs, ...passOnProps } = this.props;
             return React.createElement(InnerComponent, {
                 ref: (innerInstance: any) => { this.innerInstance = innerInstance; },
                 dataEntryOutputs: this.addOutput(dataEntryOutputs),
-                ...passOnProps
+                ...passOnProps,
             });
         }
     };

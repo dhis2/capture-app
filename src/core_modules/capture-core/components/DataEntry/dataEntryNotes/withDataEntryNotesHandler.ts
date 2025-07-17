@@ -14,7 +14,7 @@ const getDataEntryNotesHandler = (InnerComponent: React.ComponentType<any>) =>
             const { onAddNote, ...passOnProps } = this.props;
             return React.createElement(InnerComponent, {
                 onAddNote: this.handleAddNote,
-                ...passOnProps
+                ...passOnProps,
             });
         }
     };
