@@ -1,10 +1,8 @@
-// @flow
-import React, { useState, useEffect } from 'react';
-import { compose } from 'redux';
-import type { ComponentType } from 'react';
+import React, { useState, useEffect, type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { spacers, colors } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 import type { ComponentProps, Props } from './SearchBox.types';
 import { searchBoxStatus } from '../../reducers/descriptions/searchDomain.reducerDescription';
@@ -17,7 +15,7 @@ import { useScopeTitleText, useScopeInfo } from '../../hooks';
 import { useSearchOption } from './hooks';
 import { SearchStatus } from './SearchStatus';
 
-const getStyles = () => ({
+const getStyles: Readonly<any> = {
     half: {
         flex: 1,
     },
@@ -43,7 +41,7 @@ const getStyles = () => ({
         paddingTop: 50,
         paddingBottom: 50,
     },
-});
+};
 
 const Index = ({
     showInitialSearchBox,
@@ -55,11 +53,11 @@ const Index = ({
     navigateToRegisterTrackedEntity,
     minAttributesRequiredToSearch,
     searchableFields,
-}: Props) => {
+}: Props & WithStyles<any>) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
-    const { trackedEntityName } = useScopeInfo(selectedSearchScopeId);
-    const titleText = useScopeTitleText(selectedSearchScopeId);
+    const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
+    const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
         searchOption: availableSearchOption,
     } = useSearchOption({ programId: preselectedProgramId, trackedEntityTypeId });
@@ -79,7 +77,7 @@ const Index = ({
 
     const searchGroupsForSelectedScope = availableSearchOption?.searchGroups ?? [];
 
-    const handleSearchScopeSelection = (searchScopeId, searchType) => {
+    const handleSearchScopeSelection = (searchScopeId: string, searchType: any) => {
         showInitialSearchBox();
         cleanSearchRelatedInfo();
         setSearchScopeId(searchScopeId);
@@ -92,7 +90,7 @@ const Index = ({
                 <div className={classes.innerContainer}>
                     <div className={classes.searchFormContainer}>
                         <div className={classes.title}>
-                            {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
+                            {String(i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } }))}
                         </div>
                         <div>
                             <div className={classes.half}>
@@ -108,7 +106,7 @@ const Index = ({
 
                                 {searchGroupsForSelectedScope && (
                                     <SearchForm
-                                        selectedSearchScopeId={selectedSearchScopeId}
+                                        selectedSearchScopeId={selectedSearchScopeId ?? ''}
                                         searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                                     />
                                 )}
@@ -128,13 +126,11 @@ const Index = ({
             </div>
 
             {searchStatus === searchBoxStatus.INITIAL && !selectedSearchScopeId && (
-                <IncompleteSelectionsMessage>{i18n.t('Choose a type to start searching')}</IncompleteSelectionsMessage>
+                <IncompleteSelectionsMessage>{String(i18n.t('Choose a type to start searching'))}</IncompleteSelectionsMessage>
             )}
         </>
     );
 };
 
-export const SearchBoxComponent: ComponentType<ComponentProps> = compose(
-    withLoadingIndicator(),
-    withStyles(getStyles),
-)(Index);
+const SearchBoxWithStyles = withStyles(getStyles)(Index);
+export const SearchBoxComponent = withLoadingIndicator()(SearchBoxWithStyles) as ComponentType<ComponentProps>;

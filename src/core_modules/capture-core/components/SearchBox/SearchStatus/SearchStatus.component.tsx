@@ -1,7 +1,6 @@
-// @flow
-import React from 'react';
-import { compose } from 'redux';
-import type { ComponentType } from 'react';
+import React, { type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import {
     CircularLoader,
@@ -13,7 +12,6 @@ import {
     Button,
     NoticeBox,
 } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 import type { ComponentProps, Props } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
@@ -44,9 +42,9 @@ export const SearchStatusPlain = ({
     currentSearchTerms = [],
     trackedEntityName,
     classes,
-}: Props) => {
+}: Props & WithStyles<typeof getStyles>) => {
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
-        return <SearchResults availableSearchOption={availableSearchOption} />;
+        return <SearchResults availableSearchOption={availableSearchOption as any} />;
     }
 
     if (searchStatus === searchBoxStatus.NO_RESULTS) {
@@ -54,19 +52,19 @@ export const SearchStatusPlain = ({
             <Modal position="middle">
                 <ModalTitle>{i18n.t('No results found')}</ModalTitle>
                 <ModalContent>
-                    {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                    {String(i18n.t('You can change your search terms and search again to find what you are looking for.'))}
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
-                        <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms)}>
-                            {i18n.t(`Create new ${trackedEntityName}`)}
+                        <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms as any)}>
+                            {String(i18n.t(`Create new ${trackedEntityName}`))}
                         </Button>
                         <Button
                             disabled={searchStatus === searchBoxStatus.LOADING}
                             onClick={showInitialSearchBox}
                             primary
                         >
-                            {i18n.t('Back to search')}
+                            {String(i18n.t('Back to search'))}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -86,10 +84,10 @@ export const SearchStatusPlain = ({
         return (
             <div data-test="general-purpose-error-mesage" className={classes.informativeMessage}>
                 <NoticeBox title={i18n.t('An error has occurred')} error>
-                    {i18n.t(
+                    {String(i18n.t(
                         'There is a problem with this search, please change the search terms or try again later.' +
                             'For more details open the Console tab of the Developer tools ',
-                    )}
+                    ))}
                 </NoticeBox>
             </div>
         );
@@ -99,10 +97,10 @@ export const SearchStatusPlain = ({
         return (
             <div data-test="general-purpose-too-many-results-mesage" className={classes.informativeMessage}>
                 <NoticeBox title={i18n.t('Too many results')} warning>
-                    {i18n.t(
+                    {String(i18n.t(
                         'This search returned too many results to show. Try changing search terms or searching ' +
                             'by more attributes to narrow down the results.',
-                    )}
+                    ))}
                 </NoticeBox>
             </div>
         );
@@ -125,7 +123,7 @@ export const SearchStatusPlain = ({
                             onClick={showInitialSearchBox}
                             type="button"
                         >
-                            {i18n.t('Back to search')}
+                            {String(i18n.t('Back to search'))}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -138,7 +136,7 @@ export const SearchStatusPlain = ({
             <Modal position="middle" onClose={showInitialSearchBox}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
                 <ModalContent>
-                    {i18n.t(`Please fill in ${uniqueTEAName} to search`)}
+                    {String(i18n.t(`Please fill in ${uniqueTEAName} to search`))}
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
@@ -147,7 +145,7 @@ export const SearchStatusPlain = ({
                             onClick={showInitialSearchBox}
                             primary
                         >
-                            {i18n.t('Back to search')}
+                            {String(i18n.t('Back to search'))}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -157,4 +155,4 @@ export const SearchStatusPlain = ({
     return null;
 };
 
-export const SearchStatus: ComponentType<ComponentProps> = compose(withStyles(getStyles))(SearchStatusPlain);
+export const SearchStatus = withStyles(getStyles)(SearchStatusPlain) as ComponentType<ComponentProps>;

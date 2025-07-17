@@ -1,5 +1,3 @@
-// @flow
-// $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import React, { useCallback } from 'react';
 import { SearchBoxComponent } from './SearchBox.component';
@@ -24,13 +22,13 @@ export const SearchBox = ({ programId }: { programId: string }) => {
     const dispatchCleanSearchRelatedData = useCallback(
         () => { dispatch(cleanSearchRelatedData()); },
         [dispatch]);
-    const dispatchNavigateToNewTrackedEntityPage = useCallback((currentSearchTerms) => {
+    const dispatchNavigateToNewTrackedEntityPage = useCallback((currentSearchTerms: Array<Record<string, unknown>>) => {
         dispatch(setPrepopulateDataOnNewPage(currentSearchTerms));
         dispatch(navigateToNewTrackedEntityPage());
     }, [dispatch]);
 
     const { searchStatus, searchableFields, minAttributesRequiredToSearch } = useSelector(
-        ({ searchDomain }) => ({
+        ({ searchDomain }: any) => ({
             searchStatus: searchDomain.searchStatus,
             searchableFields: searchDomain.searchableFields,
             minAttributesRequiredToSearch: searchDomain.minAttributesRequiredToSearch,
@@ -38,19 +36,18 @@ export const SearchBox = ({ programId }: { programId: string }) => {
         shallowEqual,
     );
 
-    return (
-        <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <SearchBoxComponent
-                showInitialSearchBox={dispatchShowInitialSearchBox}
-                cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
-                navigateToRegisterTrackedEntity={dispatchNavigateToNewTrackedEntityPage}
-                preselectedProgramId={preselectedProgramId}
-                trackedEntityTypeId={trackedEntityTypeId}
-                searchStatus={searchStatus}
-                minAttributesRequiredToSearch={minAttributesRequiredToSearch}
-                searchableFields={searchableFields}
-                ready={searchStatus}
-            />
-        </ResultsPageSizeContext.Provider>
+    return React.createElement(ResultsPageSizeContext.Provider, 
+        { value: { resultsPageSize: 5 } },
+        React.createElement(SearchBoxComponent, {
+            showInitialSearchBox: dispatchShowInitialSearchBox,
+            cleanSearchRelatedInfo: dispatchCleanSearchRelatedData,
+            navigateToRegisterTrackedEntity: dispatchNavigateToNewTrackedEntityPage,
+            preselectedProgramId,
+            trackedEntityTypeId,
+            searchStatus,
+            minAttributesRequiredToSearch,
+            searchableFields,
+            ready: searchStatus,
+        })
     );
 };
