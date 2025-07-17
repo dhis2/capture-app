@@ -8,7 +8,3 @@ export type PlainProps = {
 export type MapStateToPropsInput = {
     dataEntryId: string;
 };
-
-export type MapDispatchToPropsReturn = {
-    onAddNote: (itemId: string, dataEntryId: string, note: string) => void;
-};

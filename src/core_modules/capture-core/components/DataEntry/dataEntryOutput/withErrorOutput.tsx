@@ -14,6 +14,7 @@ const getErrorOutput = () =>
     class ErrorOutputBuilder extends React.Component<Props> {
         constructor(props: Props) {
             super(props);
+            this.name = 'ErrorOutputBuilder';
         }
 
         getVisibleErrorItems() {
@@ -30,11 +31,11 @@ const getErrorOutput = () =>
             return errorItems || [];
         }
 
-        name = 'ErrorOutputBuilder';
+        name: string;
 
         render = () => {
             const visibleItems = this.getVisibleErrorItems();
-            return React.createElement(WidgetError, { error: visibleItems });
+            return <WidgetError error={visibleItems} />;
         }
     };
 

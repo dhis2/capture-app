@@ -17,12 +17,14 @@ const getDataEntryRelationshipsHandler = (InnerComponent: React.ComponentType<an
         }
 
         render() {
-            const { onOpenAddRelationship, onRemoveRelationship, ...passOnProps } = this.props;
-            return React.createElement(InnerComponent, {
-                onOpenAddRelationship: this.handleOpenAddRelationship,
-                onRemoveRelationship: this.handleRemoveRelationship,
-                ...passOnProps,
-            });
+            const { onOpenAddRelationship, onRemoveRelationship, itemId, dataEntryId, ...passOnProps } = this.props;
+            return (
+                <InnerComponent
+                    {...passOnProps}
+                    onOpenAddRelationship={this.handleOpenAddRelationship}
+                    onRemoveRelationship={this.handleRemoveRelationship}
+                />
+            );
         }
     };
 
@@ -38,9 +40,6 @@ const mapStateToProps = (state: any, props: MapStateToPropsInput) => {
 const mapDispatchToProps = (dispatch: any): MapDispatchToPropsReturn => ({
     onRemoveRelationship: (itemId: string, dataEntryId: string, relationshipClientId: string) => {
         dispatch(removeRelationship(dataEntryId, itemId, relationshipClientId));
-    },
-    onOpenAddRelationship: (itemId: string, dataEntryId: string) => {
-        console.log('Open add relationship for:', { itemId, dataEntryId });
     },
 });
 

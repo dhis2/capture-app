@@ -28,7 +28,7 @@ const getWarningOutput = () =>
 
         render = () => {
             const visibleItems = this.getVisibleWarningItems();
-            return React.createElement(WidgetWarning, { warning: visibleItems });
+            return <WidgetWarning warning={visibleItems} />;
         }
     };
 

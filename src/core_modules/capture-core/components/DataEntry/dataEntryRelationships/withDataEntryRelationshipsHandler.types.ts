@@ -11,6 +11,5 @@ export type MapStateToPropsInput = {
 };
 
 export type MapDispatchToPropsReturn = {
-    onOpenAddRelationship: (itemId: string, dataEntryId: string) => void;
     onRemoveRelationship: (itemId: string, dataEntryId: string, relationshipClientId: string) => void;
 };

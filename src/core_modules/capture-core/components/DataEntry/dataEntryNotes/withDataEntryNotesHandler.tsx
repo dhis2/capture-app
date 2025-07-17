@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getDataEntryKey } from '../common/getDataEntryKey';
-import { addNote } from '../actions/dataEntry.actions';
-import type { PlainProps, MapStateToPropsInput, MapDispatchToPropsReturn } from './withDataEntryNotesHandler.types';
+import type { PlainProps, MapStateToPropsInput } from './withDataEntryNotesHandler.types';
 
 const getDataEntryNotesHandler = (InnerComponent: React.ComponentType<any>) =>
     class DataEntryNotesHandlerHOC extends React.Component<PlainProps> {
@@ -11,11 +10,13 @@ const getDataEntryNotesHandler = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { onAddNote, ...passOnProps } = this.props;
-            return React.createElement(InnerComponent, {
-                onAddNote: this.handleAddNote,
-                ...passOnProps,
-            });
+            const { onAddNote, itemId, dataEntryId, ...passOnProps } = this.props;
+            return (
+                <InnerComponent
+                    {...passOnProps}
+                    onAddNote={this.handleAddNote}
+                />
+            );
         }
     };
 
@@ -24,16 +25,10 @@ const mapStateToProps = (state: any, props: MapStateToPropsInput) => {
     const key = getDataEntryKey(props.dataEntryId, itemId);
     return {
         itemId,
-        notes: state.dataEntriesNotes && state.dataEntriesNotes[key],
+        notes: state.dataEntriesNotes[key] || [],
     };
 };
 
-const mapDispatchToProps = (dispatch: any): MapDispatchToPropsReturn => ({
-    onAddNote: (itemId: string, dataEntryId: string, note: string) => {
-        dispatch(addNote(dataEntryId, itemId, note));
-    },
-});
-
 export const withDataEntryNotesHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
-        connect(mapStateToProps, mapDispatchToProps)(getDataEntryNotesHandler(InnerComponent));
+        connect(mapStateToProps, () => ({}))(getDataEntryNotesHandler(InnerComponent));

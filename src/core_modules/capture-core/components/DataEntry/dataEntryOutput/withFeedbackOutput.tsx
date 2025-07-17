@@ -25,12 +25,12 @@ const getFeedbackOutput = () =>
         render = () => {
             const feedback = this.getItems();
             const hasItems = feedback.length > 0;
-            return React.createElement('div', {},
-                hasItems &&
-                    React.createElement(WidgetFeedback, {
-                        feedback,
-                        emptyText: i18n.t('No feedback for this event yet'),
-                    }),
+            return (
+                <div>
+                    {hasItems &&
+                        <WidgetFeedback feedback={feedback} emptyText={i18n.t('No feedback for this event yet')} />
+                    }
+                </div>
             );
         }
     };

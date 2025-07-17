@@ -1,3 +1,4 @@
+import { convertValue } from '../../../converters/formToClient';
 import { convertDataEntryValuesToClientValues } from './convertDataEntryValuesToClientValues';
 import type { RenderFoundation } from '../../../metaData';
 
@@ -7,7 +8,7 @@ export function convertDataEntryToClientValues(
     dataEntryValues: any,
     dataEntryValuesMeta: any,
 ) {
-    const formClientValues = formFoundation.convertValues(formValues);
+    const formClientValues = formFoundation.convertValues(formValues, convertValue);
     const dataEntryClientValues = convertDataEntryValuesToClientValues(
         dataEntryValues,
         dataEntryValuesMeta,

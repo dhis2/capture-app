@@ -25,12 +25,13 @@ const getIndicatorOutput = () =>
         render = () => {
             const indicators = this.getItems();
             const hasItems = indicators.length > 0;
-            return React.createElement('div', {},
-                hasItems &&
-                    React.createElement(WidgetIndicator, {
-                        indicators,
-                        emptyText: i18n.t('No indicator output for this event yet'),
-                    }),
+            return (
+                <div>
+                    {hasItems &&
+                        <WidgetIndicator indicators={indicators} emptyText={i18n.t('No indicator output for this event yet')} />
+                    }
+                </div>
+
             );
         }
     };
