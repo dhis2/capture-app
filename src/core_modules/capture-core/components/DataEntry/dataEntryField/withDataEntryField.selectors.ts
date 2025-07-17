@@ -1,7 +1,6 @@
-// @flow
 import { createSelectorCreator, defaultMemoize } from 'reselect';
 
-const onIsEqual = (prevValues, currentValues) => {
+const onIsEqual = (prevValues: Record<string, any>, currentValues: Record<string, any>) => {
     const currentValuesIsEqual = Object
         .keys(currentValues)
         .every(key => currentValues[key] === prevValues[key]);
@@ -23,9 +22,8 @@ const createDeepEqualSelector = createSelectorCreator(
     onIsEqual,
 );
 
-const componentPropsSelector = (componentProps: ?Object) => componentProps || {};
+const componentPropsSelector = (componentProps?: Record<string, any>) => componentProps || {};
 
-// $FlowFixMe[missing-annot] automated comment
 export const makeReselectComponentProps = () => createDeepEqualSelector(
     componentPropsSelector,
     componentProps => componentProps,

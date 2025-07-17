@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import log from 'loglevel';
@@ -7,52 +6,19 @@ import { placements } from '../constants/placements.const';
 import { DataEntryField } from './internal/DataEntryField.component';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { makeReselectComponentProps } from './withDataEntryField.selectors';
-
-import type { ValidatorContainer } from './internal/dataEntryField.utils';
-import type { PluginContext } from '../../D2Form/FormFieldPlugin/FormFieldPlugin.types';
-
-type FieldContainer = {
-    field: React.Element<any>,
-    placement: $Values<typeof placements>,
-    section?: ?string,
-};
-
-type Props = {
-    id: string,
-    fields?: ?Array<React.Element<any>>,
-    pluginContext?: PluginContext,
-    completionAttempted?: ?boolean,
-    saveAttempted?: ?boolean,
-    dataEntryFieldRef?: ?(instance: any, key: string) => void,
-    onUpdateDataEntryField?: ?(innerAction: ReduxAction<any, any>, data: { value: any }) => void,
-};
-
-type Settings = {
-    getComponent: (props: Object) => React.ComponentType<any>,
-    getComponentProps?: ?(props: Object) => Object,
-    getPropName: (props: Object) => string,
-    getValidatorContainers?: ?(props: Object) => Array<ValidatorContainer>,
-    getMeta?: ?(props: Props) => Object,
-    getIsHidden?: ?(props: Object) => boolean,
-    getPassOnFieldData?: ?(props: Props) => boolean,
-    getOnUpdateField?: ?(props: Object) => (innerAction: ReduxAction<any, any>, data: { value: any }) => void,
-};
-
+import type { Props, Settings, FieldContainer } from './withDataEntryField.types';
 
 const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentType<any>) => {
     class DataEntryFieldBuilder extends React.Component<Props> {
-        reselectComponentProps: (?Object) => Object;
-
-        // $FlowFixMe[speculation-ambiguous]
-        dataEntryFieldInstance: DataEntryField;
+        // eslint-disable-next-line react/sort-comp
+        reselectComponentProps: (componentProps?: Record<string, any>) => Record<string, any>;
 
         constructor(props: Props) {
             super(props);
             this.reselectComponentProps = makeReselectComponentProps();
         }
 
-        // $FlowFixMe[speculation-ambiguous] automated comment
-        handleRef = (instance: DataEntryField) => {
+        handleRef = (instance: any) => {
             if (this.props.dataEntryFieldRef) {
                 const { getPropName } = settings;
                 const key = getPropName(this.props);
@@ -65,7 +31,6 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
                             'data entry field needs a key, but no propName was specified')({}));
                     return;
                 }
-                // $FlowFixMe
                 this.props.dataEntryFieldRef(instance, key);
             }
         };
@@ -103,6 +68,8 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             this.dataEntryFieldInstance.handleSet(value);
         }
 
+        dataEntryFieldInstance?: any;
+
         getFields() {
             const fields = this.props.fields;
             const { getMeta, getIsHidden } = settings;
@@ -129,7 +96,6 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
 
             return (
                 <div>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         fields={this.getFields()}
                         pluginContext={{
@@ -148,10 +114,10 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
     return DataEntryFieldBuilder;
 };
 
-const getMapStateToProps = (settings: Settings) => (state: ReduxState, props: Object) => {
+const getMapStateToProps = (settings: Settings) => (state: any, props: Record<string, any>) => {
     let passOnFieldDataProp;
     const { getPassOnFieldData, getPropName } = settings;
-    if (getPassOnFieldData && getPassOnFieldData(props)) {
+    if (getPassOnFieldData && getPassOnFieldData(props as Props)) {
         const propName = getPropName(props);
         const itemId = state.dataEntries[props.id].itemId;
         const key = getDataEntryKey(props.id, itemId);
@@ -169,7 +135,6 @@ const getMapStateToProps = (settings: Settings) => (state: ReduxState, props: Ob
 
 export const withDataEntryField = (settings: Settings) =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowFixMe
         connect(getMapStateToProps(settings), () => ({}))(
             getDataEntryField(settings, InnerComponent),
         );

@@ -1,12 +1,10 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 
-type Props = {
-    classes: Object
-};
+type Props = WithStyles<typeof styles>;
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
     container: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
@@ -14,7 +12,7 @@ const styles = theme => ({
     },
 });
 
-const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, customStyles?: ?Object) =>
+const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, customStyles?: Record<string, any>) =>
     class FieldContainerBuilder extends React.Component<Props> {
         render() {
             const { classes, ...passOnProps } = this.props;
@@ -32,6 +30,6 @@ const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, cust
         }
     };
 
-export const withDefaultFieldContainer = (customStyles?: ?Object) =>
+export const withDefaultFieldContainer = (customStyles?: Record<string, any>) =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles)(getFieldContainerBuilder(InnerComponent, customStyles));

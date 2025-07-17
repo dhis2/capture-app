@@ -1,6 +1,6 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
+import type { Theme } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 const styles = (theme: Theme) => ({
@@ -14,19 +14,15 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {
-    validationError: string,
-    touched: boolean,
-    validationAttempted: boolean,
-    classes: {
-        base: Object,
-        error: Object,
-    }
-};
+    validationError: string;
+    touched: boolean;
+    validationAttempted: boolean;
+} & WithStyles<typeof styles>;
 
 
 const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
     class FieldMessages extends React.Component<Props> {
-        static createMessageElement(text, classes) {
+        static createMessageElement(text: string, classes: string) {
             return (
                 <div
                     className={classes}
@@ -36,7 +32,7 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
             );
         }
 
-        static getMessageElement(validationError, classes) {
+        static getMessageElement(validationError: string, classes: { base: string; error: string }) {
             let messageElement;
 
             if (validationError) {
