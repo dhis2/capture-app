@@ -1,9 +1,8 @@
-// @flow
 
-export const dataEntryHasChanges = (state: ReduxState, key: string): boolean => {
+export const dataEntryHasChanges = (state: any, key: string): boolean => {
     const reduced = Object.keys(state.formsSectionsFieldsUI)
         .filter(formSectionUI => formSectionUI.startsWith(key))
-        .reduce((accElementsUI, sectionKey) =>
+        .reduce((accElementsUI: any[], sectionKey) =>
             [
                 ...accElementsUI,
                 ...Object.keys(state.formsSectionsFieldsUI[sectionKey])
