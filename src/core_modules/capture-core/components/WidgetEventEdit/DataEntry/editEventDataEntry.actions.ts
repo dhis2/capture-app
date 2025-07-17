@@ -31,6 +31,7 @@ import type { EnrollmentData, AttributeValue } from '../../Pages/common/Enrollme
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/prepareEnrollmentEvents';
 import type { ProgramCategory } from '../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import type { ReduxAction } from '../../../../capture-core-utils/types';
+import type { DataEntryPropToInclude } from '../../DataEntry/actions/dataEntryLoad.utils';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
@@ -49,7 +50,7 @@ function getLoadActions(
     itemId: string,
     dataEntryValues: Record<string, unknown>,
     formValues: Record<string, unknown>,
-    dataEntryPropsToInclude: Array<Record<string, unknown>>,
+    dataEntryPropsToInclude: Array<DataEntryPropToInclude>,
     clientValuesForDataEntry: Record<string, unknown>,
     extraProps: { [key: string]: any },
 ) {

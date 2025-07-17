@@ -2,30 +2,44 @@ import { convertValue } from '../../../converters/clientToForm';
 import type { RenderFoundation } from '../../../metaData';
 import { DataElement } from '../../../metaData';
 import { getValidationError } from '../dataEntryField/internal/dataEntryField.utils';
+import type { ValidatorContainer } from '../dataEntryField/internal/dataEntryField.utils';
 
-export type DataEntryPropToInclude = any;
+type DataEntryPropToIncludeStandard = {
+    id: string,
+    type: string,
+    validatorContainers?: Array<ValidatorContainer>,
+    clientIgnore?: boolean | null,
+};
+
+type DataEntryPropToIncludeSpecial = {
+    clientId: string,
+    dataEntryId: string,
+    onConvertIn?: (value: any) => any,
+    onConvertOut: (dataEntryValue: any, foundation: RenderFoundation, customFeatureType: string) => any,
+    featureType?: string,
+    validatorContainers?: Array<ValidatorContainer>,
+};
+
+export type DataEntryPropToInclude = DataEntryPropToIncludeStandard | DataEntryPropToIncludeSpecial;
 
 export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToInclude>) {
     return dataEntryPropsToInclude
         .reduce((accMeta, propToInclude) => {
             let propMeta;
-            if (propToInclude.type) {
-                propMeta = { type: propToInclude.type };
+            if ('type' in propToInclude) {
+                propMeta = { type: propToInclude.type, clientIgnore: propToInclude.clientIgnore };
+                accMeta[propToInclude.id] = propMeta;
             } else if (propToInclude.onConvertOut) {
                 propMeta = {
                     onConvertOut: propToInclude.onConvertOut.toString(),
                     clientId: propToInclude.clientId,
                     featureType: propToInclude.featureType,
                 };
+                accMeta[propToInclude.dataEntryId] = propMeta;
             } else {
                 propMeta = {};
             }
 
-            propMeta.clientIgnore = propToInclude.clientIgnore;
-
-            const key = propToInclude.id || propToInclude.dataEntryId || Object.keys(propToInclude)[0];
-
-            accMeta[key] = propMeta;
             return accMeta;
         }, {});
 }
@@ -35,8 +49,8 @@ export function getDataEntryValues(
     clientValuesForDataEntry: any,
 ) {
     const standardValuesArray = dataEntryPropsToInclude
-        .filter(propToInclude => propToInclude.type && propToInclude.id)
-        .map(propToInclude => new DataElement((o) => {
+        .filter(propToInclude => 'type' in propToInclude)
+        .map((propToInclude: DataEntryPropToIncludeStandard) => new DataElement((o) => {
             o.id = propToInclude.id;
             o.type = propToInclude.type;
         }))
@@ -46,10 +60,11 @@ export function getDataEntryValues(
         }));
 
     const specialValuesArray = dataEntryPropsToInclude
+        .filter(propToInclude => 'dataEntryId' in propToInclude)
         .filter(propToInclude => propToInclude.onConvertIn && propToInclude.dataEntryId)
         .map(propToInclude => ({
             id: propToInclude.dataEntryId,
-            value: propToInclude.onConvertIn(clientValuesForDataEntry[propToInclude.clientId]),
+            value: propToInclude.onConvertIn?.(clientValuesForDataEntry[propToInclude.clientId]),
         }));
 
     return [...standardValuesArray, ...specialValuesArray]
@@ -74,7 +89,7 @@ export function getFormValues(
     clientValuesForForm: any,
     formFoundation: RenderFoundation,
 ) {
-    const convertedValues = formFoundation.convertValues(clientValuesForForm);
+    const convertedValues = formFoundation.convertValues(clientValuesForForm, convertValue);
     return convertedValues;
 }
 
@@ -84,10 +99,11 @@ export function validateDataEntryValues(
 ) {
     return dataEntryPropsToInclude
         .reduce((accValidations, propToInclude) => {
-            const id = propToInclude.dataEntryId || propToInclude.id || Object.keys(propToInclude)[0];
+            const id = 'dataEntryId' in propToInclude ? propToInclude.dataEntryId : propToInclude.id;
 
             const value = values[id];
-            const validationError = getValidationError(value, propToInclude.validatorContainers);
+            const validatorContainers = propToInclude.validatorContainers;
+            const validationError = getValidationError(value, validatorContainers);
 
             accValidations[id] = {
                 isValid: !validationError,

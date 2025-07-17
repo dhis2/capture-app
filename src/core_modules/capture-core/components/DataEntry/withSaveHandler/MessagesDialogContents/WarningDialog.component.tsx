@@ -7,7 +7,6 @@ type Props = {
     warnings: Array<{key: string, name?: string, warning: string }>;
     onSave: () => void;
     onAbort: () => void;
-    classes: any;
 };
 
 class WarningDialogPlain extends React.Component<Props & WithStyles<typeof styles>> {
