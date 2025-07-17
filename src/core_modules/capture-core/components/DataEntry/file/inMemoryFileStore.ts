@@ -1,7 +1,5 @@
-// @flow
-
 class InMemoryFileStore {
-    fileUrls: { [string]: string };
+    fileUrls: Record<string, string>;
 
     constructor() {
         this.fileUrls = {};

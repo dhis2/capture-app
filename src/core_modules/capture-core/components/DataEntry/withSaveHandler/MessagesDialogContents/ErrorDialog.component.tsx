@@ -1,15 +1,14 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 
 type Props = {
-    errors: Array<{key: string, name: ?string, error: string }>,
-    onSave: () => void,
-    onAbort: () => void,
-    saveEnabled: boolean,
-    ...CssClasses
+    errors: Array<{key: string, name?: string, error: string }>;
+    onSave: () => void;
+    onAbort: () => void;
+    saveEnabled: boolean;
+    classes: any;
 };
 
 class ErrorDialogPlain extends React.Component<Props> {
@@ -28,7 +27,7 @@ class ErrorDialogPlain extends React.Component<Props> {
             </React.Fragment>
         );
     }
-    getContents(): Array<React.Node> {
+    getContents(): Array<React.ReactNode> {
         const { errors } = this.props;
 
         return errors
@@ -37,8 +36,8 @@ class ErrorDialogPlain extends React.Component<Props> {
                     key={errorData.key}
                 >
                     {errorData.name ?
-                        ErrorDialog.getItemWithName(errorData.name, errorData.error) :
-                        ErrorDialog.getItemWithoutName(errorData.error)
+                        ErrorDialogPlain.getItemWithName(errorData.name, errorData.error) :
+                        ErrorDialogPlain.getItemWithoutName(errorData.error)
                     }
                 </li>
             ));
@@ -69,7 +68,7 @@ class ErrorDialogPlain extends React.Component<Props> {
     render() {
         return (
             <React.Fragment>
-                <ModalTitle id="save-dialog-errors-title">
+                <ModalTitle>
                     {i18n.t('Validation errors')}
                 </ModalTitle>
                 <ModalContent>

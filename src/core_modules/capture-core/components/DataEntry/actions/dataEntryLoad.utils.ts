@@ -1,27 +1,9 @@
-// @flow
 import { convertValue } from '../../../converters/clientToForm';
-import { type RenderFoundation, DataElement } from '../../../metaData';
-
+import type { RenderFoundation } from '../../../metaData';
+import { DataElement } from '../../../metaData';
 import { getValidationError } from '../dataEntryField/internal/dataEntryField.utils';
-import type { ValidatorContainer } from '../dataEntryField/internal/dataEntryField.utils';
 
-type DataEntryPropToIncludeStandard = {|
-    id: string,
-    type: string,
-    validatorContainers?: ?Array<ValidatorContainer>,
-    clientIgnore?: ?boolean,
-|};
-
-type DataEntryPropToIncludeSpecial = {|
-    clientId: string,
-    dataEntryId: string,
-    onConvertIn: (value: any) => any,
-    onConvertOut: (dataEntryValue: any, foundation: RenderFoundation, customFeatureType: string) => any,
-    featureType?: string,
-    validatorContainers?: ?Array<ValidatorContainer>,
-|};
-
-export type DataEntryPropToInclude = DataEntryPropToIncludeStandard | DataEntryPropToIncludeSpecial;
+export type DataEntryPropToInclude = any;
 
 export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToInclude>) {
     return dataEntryPropsToInclude
@@ -39,24 +21,22 @@ export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToI
                 propMeta = {};
             }
 
-            // $FlowFixMe[prop-missing] automated comment
             propMeta.clientIgnore = propToInclude.clientIgnore;
 
-            // $FlowFixMe[prop-missing] automated comment
-            accMeta[propToInclude.id || propToInclude.dataEntryId] = propMeta;
+            const key = propToInclude.id || propToInclude.dataEntryId || Object.keys(propToInclude)[0];
+
+            accMeta[key] = propMeta;
             return accMeta;
         }, {});
 }
 
 export function getDataEntryValues(
     dataEntryPropsToInclude: Array<DataEntryPropToInclude>,
-    clientValuesForDataEntry: Object,
+    clientValuesForDataEntry: any,
 ) {
     const standardValuesArray = dataEntryPropsToInclude
-        // $FlowFixMe[prop-missing] automated comment
-        .filter(propToInclude => propToInclude.type)
-        // $FlowFixMe[prop-missing] automated comment
-        .map((propToInclude: DataEntryPropToIncludeStandard) => new DataElement((o) => {
+        .filter(propToInclude => propToInclude.type && propToInclude.id)
+        .map(propToInclude => new DataElement((o) => {
             o.id = propToInclude.id;
             o.type = propToInclude.type;
         }))
@@ -66,26 +46,24 @@ export function getDataEntryValues(
         }));
 
     const specialValuesArray = dataEntryPropsToInclude
-        // $FlowFixMe[prop-missing] automated comment
-        .filter(propToInclude => propToInclude.onConvertIn)
-        // $FlowFixMe[prop-missing] automated comment
-        .map((propToInclude: DataEntryPropToIncludeSpecial) => ({
+        .filter(propToInclude => propToInclude.onConvertIn && propToInclude.dataEntryId)
+        .map(propToInclude => ({
             id: propToInclude.dataEntryId,
             value: propToInclude.onConvertIn(clientValuesForDataEntry[propToInclude.clientId]),
         }));
 
     return [...standardValuesArray, ...specialValuesArray]
-        .reduce((accConvertedValues, valueItem: { id: string, value: any }) => {
+        .reduce((accConvertedValues, valueItem) => {
             accConvertedValues[valueItem.id] = valueItem.value;
             return accConvertedValues;
         }, {});
 }
 
 export function getDataEntryNotes(
-    clientValuesForDataEntry: Object,
-): Array<Object> {
+    clientValuesForDataEntry: any,
+): Array<any> {
     const notes = clientValuesForDataEntry.notes || [];
-    return notes.map((note, index) => ({
+    return notes.map((note: any, index: number) => ({
         ...note,
         storedAt: note.storedAt,
         key: index,
@@ -93,24 +71,23 @@ export function getDataEntryNotes(
 }
 
 export function getFormValues(
-    clientValuesForForm: Object,
+    clientValuesForForm: any,
     formFoundation: RenderFoundation,
 ) {
-    const convertedValues = formFoundation.convertValues(clientValuesForForm, convertValue);
+    const convertedValues = formFoundation.convertValues(clientValuesForForm);
     return convertedValues;
 }
 
 export function validateDataEntryValues(
-    values: {[key: string]: any},
+    values: any,
     dataEntryPropsToInclude: Array<DataEntryPropToInclude>,
 ) {
     return dataEntryPropsToInclude
         .reduce((accValidations, propToInclude) => {
-            // $FlowFixMe[prop-missing] automated comment
-            const id = propToInclude.dataEntryId || propToInclude.id;
+            const id = propToInclude.dataEntryId || propToInclude.id || Object.keys(propToInclude)[0];
+
             const value = values[id];
-            const validatorContainers = propToInclude.validatorContainers;
-            const validationError = getValidationError(value, validatorContainers);
+            const validationError = getValidationError(value, propToInclude.validatorContainers);
 
             accValidations[id] = {
                 isValid: !validationError,

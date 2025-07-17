@@ -1,23 +1,20 @@
-// @flow
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { loadEditDataEntry } from '../actions/dataEntry.actions';
 import { getDataEntryMeta, getDataEntryValues, getFormValues, validateDataEntryValues, getDataEntryNotes } from '../actions/dataEntryLoad.utils';
 import type { RenderFoundation } from '../../../metaData';
-
 import type { DataEntryPropToInclude } from '../actions/dataEntryLoad.utils';
 
-// eslint-disable-next-line complexity
 export async function loadEditDataEntryAsync(
     dataEntryId: string,
     itemId: string,
-    clientValuesForDataEntry: Object,
-    clientValuesForForm: Object,
-    dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
+    clientValuesForDataEntry: Record<string, any>,
+    clientValuesForForm: Record<string, any>,
     formFoundation: RenderFoundation,
-    attributeCategoryOptions?: Object,
-    extraProps?: ?{ [key: string]: any },
-    onAddSubValues?: (preDataEntryValues: Object, preFormValues: Object, formFoundation: RenderFoundation) => Promise<{ formValues: Object, dataEntryValues: Object }>,
+    dataEntryPropsToInclude?: Array<DataEntryPropToInclude> | null,
+    attributeCategoryOptions?: Record<string, any>,
+    extraProps?: Record<string, any> | null,
+    onAddSubValues?: (preDataEntryValues: Record<string, any>, preFormValues: Record<string, any>, foundation: RenderFoundation) => Promise<{ formValues: Record<string, any>, dataEntryValues: Record<string, any> }>,
 ) {
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
     const dataEntryNotes = getDataEntryNotes(clientValuesForDataEntry);
@@ -29,7 +26,7 @@ export async function loadEditDataEntryAsync(
         dataEntryValues = { ...preDataEntryValues, ...attributeCategoryOptions },
         formValues = preFormValues,
     } = onAddSubValues ?
-        (await onAddSubValues(preDataEntryValues, preFormValues, formFoundation)) || {} :
+        (await onAddSubValues(preDataEntryValues, preFormValues, formFoundation)) ?? {} :
         {};
 
     const dataEntryUI =
