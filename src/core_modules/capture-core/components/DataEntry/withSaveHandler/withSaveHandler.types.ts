@@ -1,7 +1,6 @@
 import type { RenderFoundation } from '../../../metaData';
 
 export type Props = {
-    classes: Record<string, any>;
     formFoundation: RenderFoundation;
     itemId: string;
     onSave: (itemId: string, id: string, formFoundation: RenderFoundation, saveType?: string | null) => void;

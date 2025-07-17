@@ -1,17 +1,16 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from '@material-ui/core';
 
 type Props = {
     errors: Array<{key: string, name?: string, error: string }>;
     onSave: () => void;
     onAbort: () => void;
     saveEnabled: boolean;
-    classes: any;
 };
 
-class ErrorDialogPlain extends React.Component<Props> {
+class ErrorDialogPlain extends React.Component<Props & WithStyles<typeof styles>> {
     static getItemWithName(name: string, message: string) {
         return (
             <React.Fragment>

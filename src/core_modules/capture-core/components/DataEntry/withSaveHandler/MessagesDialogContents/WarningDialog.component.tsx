@@ -1,7 +1,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from '@material-ui/core';
 
 type Props = {
     warnings: Array<{key: string, name?: string, warning: string }>;
@@ -10,7 +10,7 @@ type Props = {
     classes: any;
 };
 
-class WarningDialogPlain extends React.Component<Props> {
+class WarningDialogPlain extends React.Component<Props & WithStyles<typeof styles>> {
     static getItemWithName(name: string, message: string) {
         return (
             <React.Fragment>

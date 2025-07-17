@@ -3,7 +3,16 @@ import { validationStrategies } from '../../../../metaData/RenderFoundation/rend
 import { ErrorAndWarningDialog } from './ErrorAndWarningDialog.component';
 import { ErrorDialog } from './ErrorDialog.component';
 import { WarningDialog } from './WarningDialog.component';
-import type { Props } from './MessagesDialogContents.types';
+
+type Props = {
+    open: boolean;
+    errors?: Array<{key: string, name?: string | null, error: string}> | null;
+    warnings?: Array<{key: string, name?: string | null, warning: string}> | null;
+    isCompleting: boolean;
+    validationStrategy: string;
+    onAbort: () => void;
+    onSave: () => void;
+};
 
 function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: string) {
     if (validationStrategy === validationStrategies.NONE) {
@@ -19,8 +28,6 @@ function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: stri
 
 export const MessagesDialogContents = ({
     open,
-    onAbort,
-    onSave,
     errors,
     warnings,
     isCompleting,

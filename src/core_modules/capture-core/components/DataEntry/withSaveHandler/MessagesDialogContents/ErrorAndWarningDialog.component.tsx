@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 
@@ -28,10 +28,9 @@ type Props = {
     onSave: () => void;
     onAbort: () => void;
     saveEnabled: boolean;
-    classes: any;
 };
 
-class ErrorAndWarningDialogPlain extends React.Component<Props> {
+class ErrorAndWarningDialogPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
     static getItemWithName(name: string, message: string) {
         return (
             <React.Fragment>

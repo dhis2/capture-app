@@ -1,28 +1,4 @@
 import { actionCreator } from '../../../actions/actions.utils';
-import type {
-    StartCompleteEventPayload,
-    CompleteEventErrorPayload,
-    CompleteEventPayload,
-    CompleteValidationFailedPayload,
-    CompleteAbortPayload,
-    StartSaveEventPayload,
-    SaveEventErrorPayload,
-    SaveEventPayload,
-    SaveValidationFailedPayload,
-    SaveAbortPayload,
-    UpdateFieldPayload,
-    UpdateFormFieldPayload,
-    StartRunRulesPostUpdateFieldPayload,
-    RulesExecutedPostUpdateFieldPayload,
-    AddNotePayload,
-    RemoveNotePayload,
-    SetCurrentDataEntryPayload,
-    RemoveRelationshipPayload,
-    AddRelationshipPayload,
-    RelationshipAlreadyExistsPayload,
-    LoadEditDataEntryPayload,
-    CleanUpDataEntryPayload,
-} from './dataEntry.actions.types';
 
 export const batchActionTypes = {
     ASYNC_UPDATE_FIELD_FAILED_BATCH: 'AsyncUpdateFieldFailedBatch',
@@ -54,10 +30,10 @@ export const actionTypes = {
 };
 
 export const startCompleteEvent =
-    (eventId: string, id: string) => actionCreator(actionTypes.START_COMPLETE_EVENT)({ eventId, id } as StartCompleteEventPayload);
+    (eventId: string, id: string) => actionCreator(actionTypes.START_COMPLETE_EVENT)({ eventId, id });
 
 export const completeEventError =
-    (error: string, id: string) => actionCreator(actionTypes.COMPLETE_EVENT_ERROR)({ error, id } as CompleteEventErrorPayload);
+    (error: string, id: string) => actionCreator(actionTypes.COMPLETE_EVENT_ERROR)({ error, id });
 
 export const completeEvent =
     (clientValues: Record<string, any> | null | undefined, serverData: Record<string, any>, event: Record<string, any>, eventId: string, id: string) =>
@@ -71,21 +47,21 @@ export const completeEvent =
                 method: 'POST',
             },
             id,
-        } as CompleteEventPayload,
+        },
         {
             isOptimistic: true,
         });
 
 export const completeValidationFailed =
-    (eventId: string, id: string) => actionCreator(actionTypes.COMPLETE_VALIDATION_FAILED)({ eventId, id } as CompleteValidationFailedPayload);
+    (eventId: string, id: string) => actionCreator(actionTypes.COMPLETE_VALIDATION_FAILED)({ eventId, id });
 
 export const completeAbort =
-    (eventId: string, id: string) => actionCreator(actionTypes.COMPLETE_ABORT)({ eventId, id } as CompleteAbortPayload);
+    (eventId: string, id: string) => actionCreator(actionTypes.COMPLETE_ABORT)({ eventId, id });
 
 export const startSaveEvent =
-    (eventId: string, id: string) => actionCreator(actionTypes.START_SAVE_EVENT)({ eventId, id } as StartSaveEventPayload);
+    (eventId: string, id: string) => actionCreator(actionTypes.START_SAVE_EVENT)({ eventId, id });
 
-export const saveEventError = (error: string, id: string) => actionCreator(actionTypes.SAVE_EVENT_ERROR)({ error, id } as SaveEventErrorPayload);
+export const saveEventError = (error: string, id: string) => actionCreator(actionTypes.SAVE_EVENT_ERROR)({ error, id });
 
 export const saveEvent =
     (clientValues: Record<string, any> | null | undefined, serverData: Record<string, any>, event: Record<string, any>, eventId: string, id: string) =>
@@ -99,20 +75,20 @@ export const saveEvent =
                 method: 'POST',
             },
             id,
-        } as SaveEventPayload,
+        },
         {
             isOptimistic: true,
         });
 
 export const saveValidationFailed =
-    (itemId: string, id: string) => actionCreator(actionTypes.SAVE_VALIDATION_FALED)({ itemId, id } as SaveValidationFailedPayload);
+    (itemId: string, id: string) => actionCreator(actionTypes.SAVE_VALIDATION_FALED)({ itemId, id });
 
 export const saveAbort =
-    (itemId: string, id: string) => actionCreator(actionTypes.SAVE_ABORT)({ itemId, id } as SaveAbortPayload);
+    (itemId: string, id: string) => actionCreator(actionTypes.SAVE_ABORT)({ itemId, id });
 
 export const updateField =
     (value: any, valueMeta: Record<string, any>, fieldId: string, dataEntryId: string, itemId: string) =>
-        actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId, itemId } as UpdateFieldPayload);
+        actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId, itemId });
 
 export const updateFormField =
     (
@@ -127,50 +103,50 @@ export const updateFormField =
     ) =>
         actionCreator(
             actionTypes.UPDATE_FORM_FIELD)({
-                value,
-                uiState,
-                formId,
-                formBuilderId,
-                elementId,
-                dataEntryId,
-                itemId,
-                updateCompleteUid,
-            } as UpdateFormFieldPayload);
+            value,
+            uiState,
+            formId,
+            formBuilderId,
+            elementId,
+            dataEntryId,
+            itemId,
+            updateCompleteUid,
+        });
 
 export const startRunRulesPostUpdateField =
     (dataEntryId: string, itemId: string, uid: string) =>
-        actionCreator(actionTypes.START_RUN_RULES_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid } as StartRunRulesPostUpdateFieldPayload);
+        actionCreator(actionTypes.START_RUN_RULES_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
 
 export const rulesExecutedPostUpdateField =
     (dataEntryId: string, itemId: string, uid: string) =>
-        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid } as RulesExecutedPostUpdateFieldPayload);
+        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
 
 export const addNote =
     (dataEntryId: string, itemId: string, note: Record<string, any>) =>
-        actionCreator(actionTypes.ADD_DATA_ENTRY_NOTE)({ dataEntryId, itemId, note } as AddNotePayload);
+        actionCreator(actionTypes.ADD_DATA_ENTRY_NOTE)({ dataEntryId, itemId, note });
 
 export const removeNote =
     (dataEntryId: string, itemId: string, noteClientId: string) =>
-        actionCreator(actionTypes.REMOVE_DATA_ENTRY_NOTE)({ dataEntryId, itemId, noteClientId } as RemoveNotePayload);
+        actionCreator(actionTypes.REMOVE_DATA_ENTRY_NOTE)({ dataEntryId, itemId, noteClientId });
 
 export const setCurrentDataEntry =
     (dataEntryId: string, itemId: string, extraProps?: any) =>
-        actionCreator(actionTypes.SET_CURRENT_DATA_ENTRY)({ dataEntryId, itemId, extraProps } as SetCurrentDataEntryPayload);
+        actionCreator(actionTypes.SET_CURRENT_DATA_ENTRY)({ dataEntryId, itemId, extraProps });
 
 export const removeRelationship =
     (dataEntryId: string, itemId: string, relationshipClientId: string) =>
-        actionCreator(actionTypes.REMOVE_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId } as RemoveRelationshipPayload);
+        actionCreator(actionTypes.REMOVE_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
 
 export const addRelationship =
     (dataEntryId: string, itemId: string, relationship: Record<string, any>, newToEntity: Record<string, any>) =>
-        actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship, newToEntity } as AddRelationshipPayload);
+        actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship, newToEntity });
 
 export const relationshipAlreadyExists =
     (dataEntryId: string, itemId: string, message: string) =>
-        actionCreator(actionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS)({ dataEntryId, itemId, message } as RelationshipAlreadyExistsPayload);
+        actionCreator(actionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS)({ dataEntryId, itemId, message });
 
 export const loadEditDataEntry =
     (args: Record<string, any>) =>
-        actionCreator(actionTypes.LOAD_EDIT_DATA_ENTRY)(args as LoadEditDataEntryPayload);
+        actionCreator(actionTypes.LOAD_EDIT_DATA_ENTRY)(args);
 
-export const cleanUpDataEntry = (dataEntryId: string) => actionCreator(actionTypes.CLEAN_UP_DATA_ENTRY)({ dataEntryId } as CleanUpDataEntryPayload);
+export const cleanUpDataEntry = (dataEntryId: string) => actionCreator(actionTypes.CLEAN_UP_DATA_ENTRY)({ dataEntryId });
