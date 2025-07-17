@@ -3,6 +3,7 @@ import type { PlainProps } from './withDataEntryOutput.types';
 
 const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: React.ComponentType<any>) =>
     class DataEntryOutputBuilder extends React.Component<PlainProps> {
+        // eslint-disable-next-line react/sort-comp
         innerInstance: any;
 
         constructor(props: PlainProps) {
