@@ -2,7 +2,9 @@ import { When, defineStep as And } from '@badeball/cypress-cucumber-preprocessor
 
 And('you select search scope TB program', () => {
     cy.get('[data-test="dhis2-uicore-singleselect"]')
-        .click()
+        .click();
+
+    cy.get('[data-test="dhis2-uicore-singleselectoption"]')
         .contains('TB prog')
         .click();
 });
