@@ -53,8 +53,8 @@ const Index = ({
     minAttributesRequiredToSearch,
     searchableFields,
 }: Props & WithStyles<any>) => {
-    const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
-    const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
+    const [selectedSearchScopeId, setSelectedSearchScopeId] = useState(preselectedProgramId);
+    const [selectedSearchScopeType, setSelectedSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
     const titleText = useScopeTitleText(selectedSearchScopeId ?? null);
     const {
@@ -63,10 +63,10 @@ const Index = ({
 
     useEffect(() => {
         const scopeId = preselectedProgramId || trackedEntityTypeId;
-        setSearchScopeId(scopeId);
+        setSelectedSearchScopeId(scopeId);
 
         const type = preselectedProgramId ? searchScopes.PROGRAM : null;
-        setSearchScopeType(type);
+        setSelectedSearchScopeType(type);
     }, [trackedEntityTypeId, preselectedProgramId]);
 
     useEffect(() => {
@@ -79,8 +79,8 @@ const Index = ({
     const handleSearchScopeSelection = (searchScopeId: string, searchType: any) => {
         showInitialSearchBox();
         cleanSearchRelatedInfo();
-        setSearchScopeId(searchScopeId);
-        setSearchScopeType(searchType);
+        setSelectedSearchScopeId(searchScopeId);
+        setSelectedSearchScopeType(searchType);
     };
 
     return (

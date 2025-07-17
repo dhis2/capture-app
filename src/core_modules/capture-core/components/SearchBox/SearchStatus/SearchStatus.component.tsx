@@ -13,7 +13,7 @@ import {
     NoticeBox,
 } from '@dhis2/ui';
 
-import type { ComponentProps, Props } from './SearchStatus.types';
+import type { ComponentProps } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
@@ -42,7 +42,7 @@ export const SearchStatusPlain = ({
     currentSearchTerms = [],
     trackedEntityName,
     classes,
-}: Props & WithStyles<typeof getStyles>) => {
+}: ComponentProps & WithStyles<typeof getStyles>) => {
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
         return <SearchResults availableSearchOption={availableSearchOption as any} />;
     }

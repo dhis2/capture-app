@@ -15,5 +15,3 @@ export type ComponentProps = Readonly<{
     uniqueTEAName?: string;
     currentSearchTerms: Array<Record<string, unknown>>;
 }> & ContainerProps;
-
-export type Props = ComponentProps;
