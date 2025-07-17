@@ -114,10 +114,10 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
     return DataEntryFieldBuilder;
 };
 
-const getMapStateToProps = (settings: Settings) => (state: any, props: Record<string, any>) => {
+const getMapStateToProps = (settings: Settings) => (state: any, props: Props) => {
     let passOnFieldDataProp;
     const { getPassOnFieldData, getPropName } = settings;
-    if (getPassOnFieldData && getPassOnFieldData(props as Props)) {
+    if (getPassOnFieldData && getPassOnFieldData(props)) {
         const propName = getPropName(props);
         const itemId = state.dataEntries[props.id].itemId;
         const key = getDataEntryKey(props.id, itemId);

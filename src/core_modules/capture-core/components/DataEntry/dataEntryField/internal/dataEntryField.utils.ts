@@ -23,7 +23,7 @@ export function getValidationError(value: any, validatorContainers?: Array<Valid
             return false;
         }
 
-        errorMessage = (result && (result as any).errorMessage) || validatorContainer.errorMessage;
+        errorMessage = (result && 'errorMessage' in result && result.errorMessage) || validatorContainer.errorMessage;
         return true;
     });
 

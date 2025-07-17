@@ -6,7 +6,7 @@ import { getDataEntryKey } from '../../common/getDataEntryKey';
 import type { Props, Options, ContainerProps, ValueMetaUpdateOutput, ValueMetaInput } from './DataEntryField.types';
 
 class DataEntryFieldPlain extends React.Component<Props> {
-    gotoInstance?: HTMLDivElement;
+    gotoInstance?: HTMLDivElement | null;
     validateAndScrollToIfFailed() {
         const isValid = this.props.valueMeta && this.props.valueMeta.isValid;
 
@@ -57,7 +57,7 @@ class DataEntryFieldPlain extends React.Component<Props> {
         const { isValid, type, ...passOnValueMeta } = valueMeta as ValueMetaInput;
         return (
             <div
-                ref={(gotoInstance) => { this.gotoInstance = gotoInstance || undefined; }}
+                ref={(gotoInstance) => { this.gotoInstance = gotoInstance; }}
                 key={propName}
                 data-test={`dataentry-field-${propName}`}
             >
