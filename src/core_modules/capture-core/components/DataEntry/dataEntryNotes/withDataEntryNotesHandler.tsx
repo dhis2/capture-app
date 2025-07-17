@@ -1,16 +1,10 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getDataEntryKey } from '../common/getDataEntryKey';
-
-type Props = {
-    itemId: string,
-    dataEntryId: string,
-    onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
-}
+import type { PlainProps, MapStateToPropsInput } from './withDataEntryNotesHandler.types';
 
 const getDataEntryNotesHandler = (InnerComponent: React.ComponentType<any>) =>
-    class DataEntryNotesHandlerHOC extends React.Component<Props> {
+    class DataEntryNotesHandlerHOC extends React.Component<PlainProps> {
         handleAddNote = (note: string) => {
             this.props.onAddNote(this.props.itemId, this.props.dataEntryId, note);
         }
@@ -26,7 +20,7 @@ const getDataEntryNotesHandler = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { dataEntryId: string }) => {
+const mapStateToProps = (state: any, props: MapStateToPropsInput) => {
     const itemId = state.dataEntries && state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
     const key = getDataEntryKey(props.dataEntryId, itemId);
     return {
@@ -37,6 +31,4 @@ const mapStateToProps = (state: ReduxState, props: { dataEntryId: string }) => {
 
 export const withDataEntryNotesHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
-
-        // $FlowFixMe[missing-annot] automated comment
         connect(mapStateToProps, () => ({}))(getDataEntryNotesHandler(InnerComponent));

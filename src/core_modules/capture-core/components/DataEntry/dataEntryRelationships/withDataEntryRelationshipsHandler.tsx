@@ -1,23 +1,17 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import {
     removeRelationship,
 } from '../actions/dataEntry.actions';
-
-type Props = {
-    itemId: string,
-    dataEntryId: string,
-    onOpenAddRelationship: (itemId: string, dataEntryId: string) => void,
-    onRemoveRelationship: (itemId: string, dataEntryId: string, relClientId: string) => void,
-}
+import type { PlainProps, MapStateToPropsInput, MapDispatchToPropsReturn } from './withDataEntryRelationshipsHandler.types';
 
 const getDataEntryRelationshipsHandler = (InnerComponent: React.ComponentType<any>) =>
-    class DataEntryRelationshipsHandlerHOC extends React.Component<Props> {
+    class DataEntryRelationshipsHandlerHOC extends React.Component<PlainProps> {
         handleOpenAddRelationship = () => {
             this.props.onOpenAddRelationship(this.props.itemId, this.props.dataEntryId);
         }
+
         handleRemoveRelationship = (relClientId: string) => {
             this.props.onRemoveRelationship(this.props.itemId, this.props.dataEntryId, relClientId);
         }
@@ -34,16 +28,16 @@ const getDataEntryRelationshipsHandler = (InnerComponent: React.ComponentType<an
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { dataEntryId: string }) => {
+const mapStateToProps = (state: any, props: MapStateToPropsInput) => {
     const itemId = state.dataEntries && state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
     const dataEntryKey = getDataEntryKey(props.dataEntryId, itemId);
     return {
-        relationships: state.dataEntriesRelationships[dataEntryKey],
         itemId,
+        relationships: state.dataEntriesRelationships && state.dataEntriesRelationships[dataEntryKey],
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any): MapDispatchToPropsReturn => ({
     onRemoveRelationship: (itemId: string, dataEntryId: string, relationshipClientId: string) => {
         dispatch(removeRelationship(dataEntryId, itemId, relationshipClientId));
     },
@@ -51,6 +45,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 export const withDataEntryRelationshipsHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
-
-        // $FlowFixMe[missing-annot] automated comment
         connect(mapStateToProps, mapDispatchToProps)(getDataEntryRelationshipsHandler(InnerComponent));

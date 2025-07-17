@@ -1,21 +1,18 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
 
-
 type Props = {
-    errorItems: ?Array<any>,
-    errorOnCompleteItems: ?Array<any>,
-    saveAttempted: boolean,
+    errorItems: Array<any> | null;
+    errorOnCompleteItems: Array<any> | null;
+    saveAttempted: boolean;
 };
 
 const getErrorOutput = () =>
     class ErrorOutputBuilder extends React.Component<Props> {
-        name: string;
-        constructor(props) {
+        constructor(props: Props) {
             super(props);
             this.name = 'ErrorOutputBuilder';
         }
@@ -34,14 +31,15 @@ const getErrorOutput = () =>
             return errorItems || [];
         }
 
+        name: string;
+
         render = () => {
             const visibleItems = this.getVisibleErrorItems();
             return <WidgetError error={visibleItems} />;
         }
     };
 
-
-const mapStateToProps = (state: ReduxState, props: any) => {
+const mapStateToProps = (state: any, props: any) => {
     const itemId = state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     return {

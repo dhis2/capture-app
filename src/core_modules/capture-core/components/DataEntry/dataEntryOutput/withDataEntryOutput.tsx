@@ -1,15 +1,11 @@
-// @flow
-
 import * as React from 'react';
 
 type Props = {
-    dataEntryOutputs: Array<React.Component<any>>,
+    dataEntryOutputs: Array<React.Component<any>>;
 };
 
 const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: React.ComponentType<any>) =>
     class DataEntryOutputBuilder extends React.Component<Props> {
-        name: string;
-        innerInstance: ?any;
         constructor(props: Props) {
             super(props);
             this.name = 'DataEntryOutputBuilder';
@@ -22,20 +18,20 @@ const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: Re
         };
         getOutput = (key: any) => (
             <div key={key}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Output
                     key={key}
                     {...this.props}
                 />
             </div>
         )
+        name: string;
+        innerInstance: any;
 
         render = () => {
             const { dataEntryOutputs, ...passOnProps } = this.props;
 
             return (
                 <div>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         dataEntryOutputs={this.getDataEntryOutputs()}

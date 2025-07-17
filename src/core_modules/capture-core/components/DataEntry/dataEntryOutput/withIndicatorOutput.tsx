@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
@@ -9,13 +8,13 @@ import type { FilteredText, FilteredKeyValue } from '../../WidgetFeedback';
 
 type Props = {
     indicatorItems: {
-        displayTexts: Array<FilteredText>,
-        displayKeyValuePairs: Array<FilteredKeyValue>,
-    },
+        displayTexts: Array<FilteredText>;
+        displayKeyValuePairs: Array<FilteredKeyValue>;
+    };
 };
 
 const getIndicatorOutput = () =>
-    class IndicatorkOutputBuilder extends React.Component<Props> {
+    class IndicatorOutputBuilder extends React.Component<Props> {
         getItems = () => {
             const { indicatorItems } = this.props;
             const displayTexts = indicatorItems?.displayTexts || [];
@@ -37,8 +36,7 @@ const getIndicatorOutput = () =>
         }
     };
 
-
-const mapStateToProps = (state: ReduxState, props: any) => {
+const mapStateToProps = (state: any, props: any) => {
     const itemId = state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     return {
@@ -51,7 +49,6 @@ const mapDispatchToProps = () => ({});
 
 export const withIndicatorOutput = () =>
     (InnerComponent: React.ComponentType<any>) =>
-
         withDataEntryOutput()(
             InnerComponent,
             connect(mapStateToProps, mapDispatchToProps)(getIndicatorOutput()));

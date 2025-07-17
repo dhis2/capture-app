@@ -1,13 +1,11 @@
-// @flow
 import { convertValue } from '../../../converters/formToClient';
 import type { RenderFoundation } from '../../../metaData';
 
-// $FlowFixMe[prop-missing] automated comment
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
 
 export function convertDataEntryValuesToClientValues(
-    dataEntryValues: ?Object,
-    dataEntryValuesMeta: Object,
+    dataEntryValues: any,
+    dataEntryValuesMeta: any,
     foundation: RenderFoundation,
 ) {
     if (!dataEntryValues) {

@@ -1,13 +1,12 @@
-// @flow
 import { convertValue } from '../../../converters/formToClient';
 import { convertDataEntryValuesToClientValues } from './convertDataEntryValuesToClientValues';
 import type { RenderFoundation } from '../../../metaData';
 
 export function convertDataEntryToClientValues(
     formFoundation: RenderFoundation,
-    formValues: Object,
-    dataEntryValues: Object,
-    dataEntryValuesMeta: Object,
+    formValues: any,
+    dataEntryValues: any,
+    dataEntryValuesMeta: any,
 ) {
     const formClientValues = formFoundation.convertValues(formValues, convertValue);
     const dataEntryClientValues = convertDataEntryValuesToClientValues(

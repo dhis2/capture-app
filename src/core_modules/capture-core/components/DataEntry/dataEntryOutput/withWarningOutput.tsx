@@ -1,15 +1,13 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
 
-
 type Props = {
-    warningItems: ?Array<any>,
-    warningOnCompleteItems: ?Array<any>,
-    saveAttempted: boolean,
+    warningItems: Array<any> | null;
+    warningOnCompleteItems: Array<any> | null;
+    saveAttempted: boolean;
 };
 
 const getWarningOutput = () =>
@@ -34,8 +32,7 @@ const getWarningOutput = () =>
         }
     };
 
-
-const mapStateToProps = (state: ReduxState, props: any) => {
+const mapStateToProps = (state: any, props: any) => {
     const itemId = state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     return {
