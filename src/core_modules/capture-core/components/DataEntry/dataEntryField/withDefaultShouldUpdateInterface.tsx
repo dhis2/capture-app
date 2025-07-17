@@ -1,11 +1,10 @@
-// @flow
 import * as React from 'react';
 
 type Props = {
     value: any,
-    touched?: ?boolean,
-    validationAttempted?: ?boolean,
-    errorText?: ?string,
+    touched?: boolean | null,
+    validationAttempted?: boolean | null,
+    errorText?: string | null,
 };
 
 export const withDefaultShouldUpdateInterface = () =>
@@ -13,7 +12,6 @@ export const withDefaultShouldUpdateInterface = () =>
         class ShouldFieldUpdateInterface extends React.Component<Props> {
             shouldComponentUpdate(nextProps: Props) {
                 const pureCheck = ['value', 'touched', 'validationAttempted', 'validationError'];
-                // $FlowFixMe[prop-missing] automated comment
                 return pureCheck.some(propName => nextProps[propName] !== this.props[propName]);
             }
 
