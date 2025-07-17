@@ -9,7 +9,6 @@ import {
 import { useCurrentTrackedEntityTypeId } from '../../hooks';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import { usePreselectedProgram } from './hooks';
-import { setPrepopulateDataOnNewPage } from '../Pages/New/NewPage.actions';
 
 export const SearchBox = ({ programId }: { programId: string }) => {
     const dispatch = useDispatch();
@@ -35,7 +34,7 @@ export const SearchBox = ({ programId }: { programId: string }) => {
         shallowEqual,
     );
 
-    return React.createElement(ResultsPageSizeContext.Provider, 
+    return React.createElement(ResultsPageSizeContext.Provider,
         { value: { resultsPageSize: 5 } },
         React.createElement(SearchBoxComponent, {
             showInitialSearchBox: dispatchShowInitialSearchBox,
@@ -47,6 +46,6 @@ export const SearchBox = ({ programId }: { programId: string }) => {
             minAttributesRequiredToSearch,
             searchableFields,
             ready: searchStatus,
-        })
+        }),
     );
 };

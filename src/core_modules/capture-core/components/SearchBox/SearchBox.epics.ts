@@ -1,8 +1,7 @@
 import { ofType } from 'redux-observable';
 import { EMPTY } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-// @ts-ignore
-import type { InputObservable, ReduxStore, ApiUtils } from '../../../types';
+import type { InputObservable, ReduxStore, ApiUtils } from '../../../flow/typeDeclarations';
 import { searchBoxActionTypes } from './SearchBox.actions';
 import { buildUrlQueryString } from '../../utils/routing';
 
