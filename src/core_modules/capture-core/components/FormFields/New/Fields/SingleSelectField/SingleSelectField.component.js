@@ -13,6 +13,7 @@ type Props = {
     placeholder?: ?string,
     filterable?: ?boolean,
     clearable?: ?boolean,
+    dataTest?: ?string,
 };
 
 
@@ -27,6 +28,7 @@ const SingleSelectFieldComponentPlain = (props: Props) => {
         placeholder,
         filterable = true,
         clearable = true,
+        dataTest,
     } = props;
     const selectedValue: ?string = value ?? '';
 
@@ -49,6 +51,7 @@ const SingleSelectFieldComponentPlain = (props: Props) => {
             placeholder={placeholder}
             filterable={filterable}
             clearable={clearable}
+            dataTest={dataTest}
         >
             {options.map(option => (
                 <SingleSelectOption
