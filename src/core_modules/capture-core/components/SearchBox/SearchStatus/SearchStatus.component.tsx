@@ -52,19 +52,19 @@ export const SearchStatusPlain = ({
             <Modal position="middle">
                 <ModalTitle>{i18n.t('No results found')}</ModalTitle>
                 <ModalContent>
-                    {String(i18n.t('You can change your search terms and search again to find what you are looking for.'))}
+                    {i18n.t('You can change your search terms and search again to find what you are looking for.')}
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
                         <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms as any)}>
-                            {String(i18n.t(`Create new ${trackedEntityName}`))}
+                            {i18n.t(`Create new ${trackedEntityName}`)}
                         </Button>
                         <Button
                             disabled={searchStatus === searchBoxStatus.LOADING}
                             onClick={showInitialSearchBox}
                             primary
                         >
-                            {String(i18n.t('Back to search'))}
+                            {i18n.t('Back to search')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -84,10 +84,10 @@ export const SearchStatusPlain = ({
         return (
             <div data-test="general-purpose-error-mesage" className={classes.informativeMessage}>
                 <NoticeBox title={i18n.t('An error has occurred')} error>
-                    {String(i18n.t(
+                    {i18n.t(
                         'There is a problem with this search, please change the search terms or try again later.' +
                             'For more details open the Console tab of the Developer tools ',
-                    ))}
+                    )}
                 </NoticeBox>
             </div>
         );
@@ -97,10 +97,10 @@ export const SearchStatusPlain = ({
         return (
             <div data-test="general-purpose-too-many-results-mesage" className={classes.informativeMessage}>
                 <NoticeBox title={i18n.t('Too many results')} warning>
-                    {String(i18n.t(
+                    {i18n.t(
                         'This search returned too many results to show. Try changing search terms or searching ' +
                             'by more attributes to narrow down the results.',
-                    ))}
+                    )}
                 </NoticeBox>
             </div>
         );
@@ -123,7 +123,7 @@ export const SearchStatusPlain = ({
                             onClick={showInitialSearchBox}
                             type="button"
                         >
-                            {String(i18n.t('Back to search'))}
+                            {i18n.t('Back to search')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -136,7 +136,7 @@ export const SearchStatusPlain = ({
             <Modal position="middle" onClose={showInitialSearchBox}>
                 <ModalTitle>{i18n.t('Missing search criteria')}</ModalTitle>
                 <ModalContent>
-                    {String(i18n.t(`Please fill in ${uniqueTEAName} to search`))}
+                    {i18n.t(`Please fill in ${uniqueTEAName} to search`)}
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
@@ -145,7 +145,7 @@ export const SearchStatusPlain = ({
                             onClick={showInitialSearchBox}
                             primary
                         >
-                            {String(i18n.t('Back to search'))}
+                            {i18n.t('Back to search')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>

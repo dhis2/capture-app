@@ -52,7 +52,7 @@ const Index = ({
     navigateToRegisterTrackedEntity,
     minAttributesRequiredToSearch,
     searchableFields,
-}: Props & WithStyles<any>) => {
+}: Props & WithStyles<typeof getStyles>) => {
     const [selectedSearchScopeId, setSelectedSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSelectedSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const { trackedEntityName } = useScopeInfo(selectedSearchScopeId ?? null);
@@ -89,7 +89,7 @@ const Index = ({
                 <div className={classes.innerContainer}>
                     <div className={classes.searchFormContainer}>
                         <div className={classes.title}>
-                            {String(i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } }))}
+                            {i18n.t('Search for {{titleText}}', { titleText, interpolation: { escapeValue: false } })}
                         </div>
                         <div>
                             <div className={classes.half}>
