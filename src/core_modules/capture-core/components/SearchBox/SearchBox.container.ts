@@ -22,8 +22,7 @@ export const SearchBox = ({ programId }: { programId: string }) => {
     const dispatchCleanSearchRelatedData = useCallback(
         () => { dispatch(cleanSearchRelatedData()); },
         [dispatch]);
-    const dispatchNavigateToNewTrackedEntityPage = useCallback((currentSearchTerms: Array<Record<string, unknown>>) => {
-        dispatch(setPrepopulateDataOnNewPage(currentSearchTerms));
+    const dispatchNavigateToNewTrackedEntityPage = useCallback(() => {
         dispatch(navigateToNewTrackedEntityPage());
     }, [dispatch]);
 
@@ -41,7 +40,7 @@ export const SearchBox = ({ programId }: { programId: string }) => {
         React.createElement(SearchBoxComponent, {
             showInitialSearchBox: dispatchShowInitialSearchBox,
             cleanSearchRelatedInfo: dispatchCleanSearchRelatedData,
-            navigateToRegisterTrackedEntity: dispatchNavigateToNewTrackedEntityPage,
+            navigateToRegisterTrackedEntity: () => dispatchNavigateToNewTrackedEntityPage(),
             preselectedProgramId,
             trackedEntityTypeId,
             searchStatus,
