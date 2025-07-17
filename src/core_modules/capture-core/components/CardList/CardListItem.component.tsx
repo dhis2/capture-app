@@ -229,7 +229,7 @@ const CardListItemIndex = ({
                     {renderImageDataElement(profileImageDataElement)}
                     <div>
                         {dataElements
-                            .map((dataElement: { id: string, name: string, type: string, optionSet: OptionSet }) => {
+                            .map((dataElement: { id: string, name: string, type: string, optionSet?: OptionSet }) => {
                                 const { id, name, type, optionSet } = dataElement;
                                 return (
                                     <ListEntry
