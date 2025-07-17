@@ -1,7 +1,6 @@
-// @flow
-import React from 'react';
-import { compose } from 'redux';
-import type { ComponentType } from 'react';
+import React, { type ComponentType } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import {
     CircularLoader,
@@ -13,9 +12,8 @@ import {
     Button,
     NoticeBox,
 } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 
-import type { ComponentProps, Props } from './SearchStatus.types';
+import type { ComponentProps } from './SearchStatus.types';
 import { searchBoxStatus } from '../../../reducers/descriptions/searchDomain.reducerDescription';
 import { SearchResults } from '../SearchResults';
 import { NotEnoughAttributesMessage } from './NotEnoughAttributesMessage';
@@ -44,9 +42,9 @@ export const SearchStatusPlain = ({
     currentSearchTerms = [],
     trackedEntityName,
     classes,
-}: Props) => {
+}: ComponentProps & WithStyles<typeof getStyles>) => {
     if (searchStatus === searchBoxStatus.SHOW_RESULTS) {
-        return <SearchResults availableSearchOption={availableSearchOption} />;
+        return <SearchResults availableSearchOption={availableSearchOption as any} />;
     }
 
     if (searchStatus === searchBoxStatus.NO_RESULTS) {
@@ -58,7 +56,7 @@ export const SearchStatusPlain = ({
                 </ModalContent>
                 <ModalActions>
                     <ButtonStrip end>
-                        <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms)}>
+                        <Button type="button" onClick={() => navigateToRegisterTrackedEntity(currentSearchTerms as any)}>
                             {i18n.t(`Create new ${trackedEntityName}`)}
                         </Button>
                         <Button
@@ -157,4 +155,4 @@ export const SearchStatusPlain = ({
     return null;
 };
 
-export const SearchStatus: ComponentType<ComponentProps> = compose(withStyles(getStyles))(SearchStatusPlain);
+export const SearchStatus = withStyles(getStyles)(SearchStatusPlain) as ComponentType<ComponentProps>;

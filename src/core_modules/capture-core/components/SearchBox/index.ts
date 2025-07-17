@@ -1,4 +1,3 @@
-// @flow
 export {
     cleanSearchRelatedData,
     navigateToNewTrackedEntityPage,
@@ -21,4 +20,3 @@ export {
     fallbackSearchEpic,
     fallbackPushPageEpic,
 } from './SearchForm';
-

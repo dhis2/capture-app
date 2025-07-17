@@ -58,7 +58,7 @@ const searchViaUniqueIdStream = ({
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length === 0 && queryArgs.program) {
-                return of(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: programTETId, formId, programId }));
+                return of(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: programTETId ?? '', formId: formId ?? '', programId }));
             }
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId, enrollments } } = searchResults[0];

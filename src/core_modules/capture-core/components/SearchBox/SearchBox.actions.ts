@@ -29,19 +29,43 @@ export const saveCurrentSearchInfo = ({
     searchScopeId,
     formId,
     currentSearchTerms,
+}: {
+    searchScopeType: string;
+    searchScopeId: string;
+    formId: string;
+    currentSearchTerms: Array<Record<string, unknown>>;
 }) => actionCreator(searchBoxActionTypes.CURRENT_SEARCH_INFO_SAVE)(
     { searchScopeType, searchScopeId, formId, currentSearchTerms });
 
-export const searchViaUniqueIdOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId, programId }) =>
+export const searchViaUniqueIdOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId, programId }: {
+    trackedEntityTypeId: string;
+    formId: string;
+    programId?: string;
+}) =>
     actionCreator(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId, programId });
 
-export const searchViaUniqueIdOnScopeProgram = ({ programId, formId }) =>
+export const searchViaUniqueIdOnScopeProgram = ({ programId, formId }: {
+    programId: string;
+    formId: string;
+}) =>
     actionCreator(searchBoxActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId });
 
-export const searchViaAttributesOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId, page = 1, pageSize, triggeredFrom }) =>
+export const searchViaAttributesOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId, page = 1, pageSize, triggeredFrom }: {
+    trackedEntityTypeId: string;
+    formId: string;
+    page?: number;
+    pageSize?: number;
+    triggeredFrom?: string;
+}) =>
     actionCreator(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId, page, pageSize, triggeredFrom });
 
-export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1, pageSize, triggeredFrom }) =>
+export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1, pageSize, triggeredFrom }: {
+    programId: string;
+    formId: string;
+    page?: number;
+    pageSize?: number;
+    triggeredFrom?: string;
+}) =>
     actionCreator(searchBoxActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId, page, pageSize, triggeredFrom });
 
 export const showInitialViewOnSearchBox = () =>
@@ -59,28 +83,48 @@ export const showLoadingViewOnSearchBox = () =>
 export const showEmptyResultsViewOnSearchBox = () =>
     actionCreator(searchBoxActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
 
-export const showSuccessResultsViewOnSearchBox = (searchResults, currentPage) =>
+export const showSuccessResultsViewOnSearchBox = (searchResults: Array<Record<string, unknown>>, currentPage: number) =>
     actionCreator(searchBoxActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)({ searchResults, currentPage });
 
-export const addSuccessResultsViewOnSearchBox = (otherResults, otherCurrentPage) =>
+export const addSuccessResultsViewOnSearchBox = (otherResults: Array<Record<string, unknown>>, otherCurrentPage: number) =>
     actionCreator(searchBoxActionTypes.ADD_SEARCH_RESULTS_SUCCESS_VIEW)({ otherResults, otherCurrentPage });
 
-export const startFallbackSearch = ({ programId, formId, page = 1, pageSize, availableSearchOptions }) =>
+export const startFallbackSearch = ({ programId, formId, page = 1, pageSize, availableSearchOptions }: {
+    programId: string;
+    formId: string;
+    page?: number;
+    pageSize?: number;
+    availableSearchOptions?: Array<Record<string, unknown>>;
+}) =>
     actionCreator(searchBoxActionTypes.FALLBACK_SEARCH_START)({ programId, formId, page, pageSize, availableSearchOptions });
 
-export const fallbackSearch = ({ fallbackFormValues, trackedEntityTypeId, pageSize, page = 1 }) =>
+export const fallbackSearch = ({ fallbackFormValues, trackedEntityTypeId, pageSize, page = 1 }: {
+    fallbackFormValues: Record<string, unknown>;
+    trackedEntityTypeId: string;
+    pageSize?: number;
+    page?: number;
+}) =>
     actionCreator(searchBoxActionTypes.FALLBACK_SEARCH)({ fallbackFormValues, trackedEntityTypeId, pageSize, page });
 
-export const fallbackPushPage = ({ orgUnitId, trackedEntityTypeId, values }) =>
+export const fallbackPushPage = ({ orgUnitId, trackedEntityTypeId, values }: {
+    orgUnitId: string;
+    trackedEntityTypeId: string;
+    values: Record<string, unknown>;
+}) =>
     actionCreator(searchBoxActionTypes.FALLBACK_SEARCH_COMPLETED)({ orgUnitId, trackedEntityTypeId, values });
 
-export const showFallbackNotEnoughAttributesOnSearchBox = ({ searchableFields, minAttributesRequiredToSearch }) =>
+export const showFallbackNotEnoughAttributesOnSearchBox = ({ searchableFields, minAttributesRequiredToSearch }: {
+    searchableFields: Array<Record<string, unknown>>;
+    minAttributesRequiredToSearch: number;
+}) =>
     actionCreator(searchBoxActionTypes.FALLBACK_NOT_ENOUGH_ATTRIBUTES)({ searchableFields, minAttributesRequiredToSearch });
 
 export const cleanSearchRelatedData = () =>
     actionCreator(searchBoxActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN)();
 
-export const showUniqueSearchValueEmptyModal = ({ uniqueTEAName }) =>
+export const showUniqueSearchValueEmptyModal = ({ uniqueTEAName }: {
+    uniqueTEAName: string;
+}) =>
     actionCreator(searchBoxActionTypes.SEARCH_UNIQUE_SEARCH_VALUE_EMPTY)({ uniqueTEAName });
 
 export const navigateToNewTrackedEntityPage = () =>
