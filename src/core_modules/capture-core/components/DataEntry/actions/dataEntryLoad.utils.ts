@@ -36,8 +36,6 @@ export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToI
                     featureType: propToInclude.featureType,
                 };
                 accMeta[propToInclude.dataEntryId] = propMeta;
-            } else {
-                propMeta = {};
             }
 
             return accMeta;
@@ -62,7 +60,7 @@ export function getDataEntryValues(
     const specialValuesArray = dataEntryPropsToInclude
         .filter(propToInclude => 'dataEntryId' in propToInclude)
         .filter(propToInclude => propToInclude.onConvertIn && propToInclude.dataEntryId)
-        .map(propToInclude => ({
+        .map((propToInclude: DataEntryPropToIncludeSpecial) => ({
             id: propToInclude.dataEntryId,
             value: propToInclude.onConvertIn?.(clientValuesForDataEntry[propToInclude.clientId]),
         }));
