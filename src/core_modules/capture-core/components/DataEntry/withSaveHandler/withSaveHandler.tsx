@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
@@ -13,34 +14,13 @@ import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 import { newEventSaveTypes } from '../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/newEventSaveTypes';
-
-type Props = {
-    classes: Object,
-    formFoundation: RenderFoundation,
-    itemId: string,
-    onSave: (itemId: string, id: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
-    onSaveValidationFailed: (itemId: string, id: string) => void,
-    onSaveAbort: (itemId: string, id: string) => void,
-    saveAttempted?: ?boolean,
-    id: string,
-    warnings: ?Array<any>,
-    errors: ?Array<any>,
-    hasGeneralErrors: ?boolean,
-    inProgressList: Array<string>,
-    calculatedFoundation: RenderFoundation,
-    sectionsInitialised: boolean,
-};
-
-type IsCompletingFn = (props: Props) => boolean;
-type FilterPropsFn = (props: Object) => Object;
-type GetFormFoundationFn = (props: Object) => RenderFoundation;
-
-type State = {
-    messagesDialogOpen: boolean,
-    waitForPromisesDialogOpen: boolean,
-    waitForFieldValidations: boolean,
-    saveType?: ?string,
-};
+import type {
+    Props,
+    State,
+    IsCompletingFn,
+    FilterPropsFn,
+    GetFormFoundationFn,
+} from './withSaveHandler.types';
 
 const getSaveHandler = (
     InnerComponent: React.ComponentType<any>,
@@ -60,6 +40,7 @@ const getSaveHandler = (
                 waitForPromisesDialogOpen: false,
                 waitForFieldValidations: false,
             };
+            this.isCompleting = !!(onIsCompleting && onIsCompleting(props));
         }
 
         componentDidUpdate(prevProps: Props) {
@@ -84,7 +65,6 @@ const getSaveHandler = (
         };
 
         getDataEntryFieldInstances() {
-            // $FlowFixMe[missing-annot] automated comment
             return Array.from(this.dataEntryFieldInstances.entries()).map(entry => entry[1]);
         }
 
@@ -100,7 +80,7 @@ const getSaveHandler = (
             return fieldsValid;
         }
 
-        showMessagesPopup(saveType?: ?string) {
+        showMessagesPopup(saveType?: string | null) {
             this.setState({ messagesDialogOpen: true, saveType });
         }
 
@@ -115,14 +95,14 @@ const getSaveHandler = (
             return !this.props.hasGeneralErrors;
         }
 
-        shouldComplete(saveType?: ?string) {
+        shouldComplete(saveType?: string | null) {
             if (onIsCompleting) {
                 return onIsCompleting(this.props);
             }
             return [addEventSaveTypes.COMPLETE, newEventSaveTypes.SAVEANDCOMPLETE].includes(saveType);
         }
 
-        validateForm(saveType?: ?string) {
+        validateForm(saveType?: string | null) {
             const formInstance = this.formInstance;
             if (!formInstance) {
                 log.error(
@@ -147,7 +127,7 @@ const getSaveHandler = (
             };
         }
 
-        validateAndSave(saveType?: ?string) {
+        validateAndSave(saveType?: string | null) {
             const isDataEntryFieldsValid = this.validateDataEntryFields();
             if (!isDataEntryFieldsValid) {
                 this.props.onSaveValidationFailed(this.props.itemId, this.props.id);
@@ -162,7 +142,7 @@ const getSaveHandler = (
             this.handleSaveValidationOutcome(saveType, isFormValid);
         }
 
-        handleSaveAttempt = (saveType?: ?string) => {
+        handleSaveAttempt = (saveType?: string | null) => {
             const { inProgressList, sectionsInitialised } = this.props;
             if (inProgressList.length) {
                 this.setState({ waitForPromisesDialogOpen: true, saveType });
@@ -173,7 +153,7 @@ const getSaveHandler = (
             }
         }
 
-        handleSaveValidationOutcome(saveType?: ?string, isFormValid: boolean) {
+        handleSaveValidationOutcome(saveType?: string | null, isFormValid?: boolean) {
             const { onSaveValidationFailed, itemId, id, warnings, errors } = this.props;
             if (!isFormValid) {
                 onSaveValidationFailed(itemId, id);
@@ -194,7 +174,7 @@ const getSaveHandler = (
             this.setState({ messagesDialogOpen: false });
         }
 
-        handleSave = (saveType?: ?string) => {
+        handleSave = (saveType?: string | null) => {
             const { onSave, itemId, id, calculatedFoundation, warnings, errors } = this.props;
             if (saveType === addEventSaveTypes.COMPLETE && ((errors && errors.length > 0) || (warnings && warnings.length > 0))) {
                 this.showMessagesPopup(saveType);
@@ -209,12 +189,10 @@ const getSaveHandler = (
             </div>
         );
 
-        // $FlowFixMe[missing-annot] automated comment
         setFormInstance = (formInstance) => {
             this.formInstance = formInstance;
         }
 
-        // $FlowFixMe[missing-annot] automated comment
         setDataEntryFieldInstance = (dataEntryFieldInstance, id) => {
             this.dataEntryFieldInstances.set(id, dataEntryFieldInstance);
         }
@@ -282,7 +260,7 @@ const getSaveHandler = (
         const getWarnings = makeGetWarnings();
         const getErrors = makeGetErrors();
 
-        const mapStateToProps = (state: ReduxState, props: { id: string, formFoundation: RenderFoundation }) => {
+        const mapStateToProps = (state: any, props: { id: string, formFoundation: RenderFoundation }) => {
             const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
             const key = getDataEntryKey(props.id, itemId);
             const generalErrors = state.rulesEffectsGeneralErrors[key] && state.rulesEffectsGeneralErrors[key].error;
@@ -305,11 +283,10 @@ const getSaveHandler = (
             };
         };
 
-        // $FlowFixMe[not-an-object] automated comment
         return mapStateToProps;
     };
 
-    const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    const mapDispatchToProps = (dispatch: any) => ({
         onSaveValidationFailed: (itemId: string, id: string) => {
             dispatch(saveValidationFailed(itemId, id));
         },
@@ -318,7 +295,6 @@ const getSaveHandler = (
         },
     });
 
-    // $FlowFixMe
     return connect(makeStateToProps, mapDispatchToProps)(SaveHandlerHOC);
 };
 

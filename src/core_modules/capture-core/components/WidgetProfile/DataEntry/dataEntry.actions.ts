@@ -21,6 +21,7 @@ import { addFormData } from '../../D2Form/actions/form.actions';
 import { updateFieldUIOnly } from '../../D2Form/FormBuilder/formBuilder.actions';
 import type { Geometry } from './helpers/types';
 import type { QuerySingleResource } from '../../../utils/api';
+import { DataEntryPropToInclude } from '../../DataEntry/actions/dataEntryLoad.utils';
 
 export const TEI_MODAL_STATE = {
     OPEN: 'Open',
@@ -40,7 +41,7 @@ export const dataEntryActionTypes = {
     SET_TEI_VALUES: 'SetTeiValues',
     CLEAN_TEI_MODAL: 'CleanTeiModal',
 };
-const dataEntryPropsToInclude: Array<Record<string, any>> = [
+const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
     {
         clientId: 'geometry',
         dataEntryId: 'geometry',
@@ -48,6 +49,7 @@ const dataEntryPropsToInclude: Array<Record<string, any>> = [
     },
     {
         id: 'assignee',
+        type: 'assignee',
     },
 ];
 

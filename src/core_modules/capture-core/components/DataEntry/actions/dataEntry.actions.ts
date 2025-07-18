@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const batchActionTypes = {
@@ -30,7 +29,6 @@ export const actionTypes = {
     CLEAN_UP_DATA_ENTRY: 'CleanUpDataEntry',
 };
 
-// COMPLETE
 export const startCompleteEvent =
     (eventId: string, id: string) => actionCreator(actionTypes.START_COMPLETE_EVENT)({ eventId, id });
 
@@ -38,7 +36,7 @@ export const completeEventError =
     (error: string, id: string) => actionCreator(actionTypes.COMPLETE_EVENT_ERROR)({ error, id });
 
 export const completeEvent =
-    (clientValues: ?Object, serverData: Object, event: Object, eventId: string, id: string) =>
+    (clientValues: Record<string, any> | null | undefined, serverData: Record<string, any>, event: Record<string, any>, eventId: string, id: string) =>
         actionCreator(actionTypes.COMPLETE_EVENT)({
             clientValues,
             eventId,
@@ -60,14 +58,13 @@ export const completeValidationFailed =
 export const completeAbort =
     (eventId: string, id: string) => actionCreator(actionTypes.COMPLETE_ABORT)({ eventId, id });
 
-// SAVE
 export const startSaveEvent =
     (eventId: string, id: string) => actionCreator(actionTypes.START_SAVE_EVENT)({ eventId, id });
 
 export const saveEventError = (error: string, id: string) => actionCreator(actionTypes.SAVE_EVENT_ERROR)({ error, id });
 
 export const saveEvent =
-    (clientValues: ?Object, serverData: Object, event: Object, eventId: string, id: string) =>
+    (clientValues: Record<string, any> | null | undefined, serverData: Record<string, any>, event: Record<string, any>, eventId: string, id: string) =>
         actionCreator(actionTypes.SAVE_EVENT)({
             clientValues,
             eventId,
@@ -90,13 +87,13 @@ export const saveAbort =
     (itemId: string, id: string) => actionCreator(actionTypes.SAVE_ABORT)({ itemId, id });
 
 export const updateField =
-    (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, itemId: string) =>
+    (value: any, valueMeta: Record<string, any>, fieldId: string, dataEntryId: string, itemId: string) =>
         actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId, itemId });
 
 export const updateFormField =
     (
         value: any,
-        uiState: Object,
+        uiState: Record<string, any>,
         elementId: string,
         formBuilderId: string,
         formId: string,
@@ -125,7 +122,7 @@ export const rulesExecutedPostUpdateField =
         actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
 
 export const addNote =
-    (dataEntryId: string, itemId: string, note: Object) =>
+    (dataEntryId: string, itemId: string, note: Record<string, any>) =>
         actionCreator(actionTypes.ADD_DATA_ENTRY_NOTE)({ dataEntryId, itemId, note });
 
 export const removeNote =
@@ -133,7 +130,7 @@ export const removeNote =
         actionCreator(actionTypes.REMOVE_DATA_ENTRY_NOTE)({ dataEntryId, itemId, noteClientId });
 
 export const setCurrentDataEntry =
-    (dataEntryId: string, itemId: string, extraProps?: ?any) =>
+    (dataEntryId: string, itemId: string, extraProps?: any) =>
         actionCreator(actionTypes.SET_CURRENT_DATA_ENTRY)({ dataEntryId, itemId, extraProps });
 
 export const removeRelationship =
@@ -141,7 +138,7 @@ export const removeRelationship =
         actionCreator(actionTypes.REMOVE_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
 
 export const addRelationship =
-    (dataEntryId: string, itemId: string, relationship: Object, newToEntity: Object) =>
+    (dataEntryId: string, itemId: string, relationship: Record<string, any>, newToEntity: Record<string, any>) =>
         actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship, newToEntity });
 
 export const relationshipAlreadyExists =
@@ -149,7 +146,7 @@ export const relationshipAlreadyExists =
         actionCreator(actionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS)({ dataEntryId, itemId, message });
 
 export const loadEditDataEntry =
-    (args: Object) =>
+    (args: Record<string, any>) =>
         actionCreator(actionTypes.LOAD_EDIT_DATA_ENTRY)(args);
 
 export const cleanUpDataEntry = (dataEntryId: string) => actionCreator(actionTypes.CLEAN_UP_DATA_ENTRY)({ dataEntryId });

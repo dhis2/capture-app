@@ -1,9 +1,7 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { getDataEntryMeta, validateDataEntryValues } from './dataEntryLoad.utils';
-
 import type { DataEntryPropToInclude } from './dataEntryLoad.utils';
 
 export const actionTypes = {
@@ -13,12 +11,12 @@ export const actionTypes = {
 export function loadNewDataEntry(
     dataEntryId: string,
     itemId: string,
-    dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
-    defaultDataEntryValues?: ?Object,
-    defaultFormValues?: ?Object,
+    dataEntryPropsToInclude?: Array<DataEntryPropToInclude> | null,
+    defaultDataEntryValues?: Record<string, any> | null,
+    defaultFormValues?: Record<string, any> | null,
 ) {
-    const dataEntryValues = defaultDataEntryValues || {};
-    const formValues = defaultFormValues || {};
+    const dataEntryValues = defaultDataEntryValues ?? {};
+    const formValues = defaultFormValues ?? {};
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
     const dataEntryUI = dataEntryPropsToInclude ? validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
     const key = getDataEntryKey(dataEntryId, itemId);

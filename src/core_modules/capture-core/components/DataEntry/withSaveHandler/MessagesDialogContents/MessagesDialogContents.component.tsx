@@ -1,20 +1,20 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
+import { validationStrategies } from '../../../../metaData/RenderFoundation/renderFoundation.const';
 import { ErrorAndWarningDialog } from './ErrorAndWarningDialog.component';
 import { ErrorDialog } from './ErrorDialog.component';
 import { WarningDialog } from './WarningDialog.component';
 
-import { validationStrategies } from '../../../../metaData/RenderFoundation/renderFoundation.const';
-
 type Props = {
-    open: boolean,
-    warnings: ?Array<{key: string, name: ?string, warning: string }>,
-    errors: ?Array<{key: string, name: ?string, error: string }>,
-    isCompleting: boolean,
-    validationStrategy: $Values<typeof validationStrategies>,
+    open: boolean;
+    errors?: Array<{key: string, name?: string | null, error: string}> | null;
+    warnings?: Array<{key: string, name?: string | null, warning: string}> | null;
+    isCompleting: boolean;
+    validationStrategy: string;
+    onAbort: () => void;
+    onSave: () => void;
 };
 
-function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: $Values<typeof validationStrategies>) {
+function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: typeof validationStrategies[keyof typeof validationStrategies]) {
     if (validationStrategy === validationStrategies.NONE) {
         return true;
     }
@@ -26,15 +26,20 @@ function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: $Val
     return false;
 }
 
-export const MessagesDialogContents = (props: Props) => {
-    const { open, warnings, errors, isCompleting, validationStrategy, ...passOnProps } = props;
+export const MessagesDialogContents = ({
+    open,
+    errors,
+    warnings,
+    isCompleting,
+    validationStrategy,
+    ...passOnProps
+}: Props) => {
     if (!open) {
         return null;
     }
 
     if (warnings && warnings.length > 0 && errors && errors.length > 0) {
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ErrorAndWarningDialog
                 errors={errors}
                 warnings={warnings}
@@ -46,7 +51,6 @@ export const MessagesDialogContents = (props: Props) => {
 
     if (errors && errors.length > 0) {
         return (
-            // $FlowFixMe
             <ErrorDialog
                 errors={errors}
                 saveEnabled={isSaveAllowedWithErrors(isCompleting, validationStrategy)}
@@ -56,7 +60,6 @@ export const MessagesDialogContents = (props: Props) => {
     }
 
     return (
-        // $FlowFixMe
         <WarningDialog
             warnings={warnings}
             {...passOnProps}

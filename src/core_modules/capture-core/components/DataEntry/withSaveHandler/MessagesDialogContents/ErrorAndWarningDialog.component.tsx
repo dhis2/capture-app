@@ -1,10 +1,9 @@
-// @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = (theme: any) => ({
     errors: {
         border: `1px solid ${theme.palette.grey.light}`,
         borderRadius: theme.typography.pxToRem(4),
@@ -24,15 +23,14 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    errors: Array<{key: string, name: string, error: string }>,
-    warnings: Array<{key: string, name: string, warning: string }>,
-    onSave: () => void,
-    onAbort: () => void,
-    saveEnabled: boolean,
-    classes: Object,
+    errors: Array<{key: string, name: string, error: string }>;
+    warnings: Array<{key: string, name: string, warning: string }>;
+    onSave: () => void;
+    onAbort: () => void;
+    saveEnabled: boolean;
 };
 
-class ErrorAndWarningDialogPlain extends React.Component<Props> {
+class ErrorAndWarningDialogPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
     static getItemWithName(name: string, message: string) {
         return (
             <React.Fragment>
@@ -48,7 +46,7 @@ class ErrorAndWarningDialogPlain extends React.Component<Props> {
             </React.Fragment>
         );
     }
-    getContents(): React.Node {
+    getContents(): React.ReactNode {
         const { warnings, errors, classes } = this.props;
 
         const warningElements = warnings
@@ -57,8 +55,8 @@ class ErrorAndWarningDialogPlain extends React.Component<Props> {
                     key={warningData.key}
                 >
                     {warningData.name ?
-                        ErrorAndWarningDialog.getItemWithName(warningData.name, warningData.warning) :
-                        ErrorAndWarningDialog.getItemWithoutName(warningData.warning)
+                        ErrorAndWarningDialogPlain.getItemWithName(warningData.name, warningData.warning) :
+                        ErrorAndWarningDialogPlain.getItemWithoutName(warningData.warning)
                     }
                 </li>
             ));
@@ -69,8 +67,8 @@ class ErrorAndWarningDialogPlain extends React.Component<Props> {
                     key={errorData.key}
                 >
                     {errorData.name ?
-                        ErrorAndWarningDialog.getItemWithName(errorData.name, errorData.error) :
-                        ErrorAndWarningDialog.getItemWithoutName(errorData.error)
+                        ErrorAndWarningDialogPlain.getItemWithName(errorData.name, errorData.error) :
+                        ErrorAndWarningDialogPlain.getItemWithoutName(errorData.error)
                     }
                 </li>
             ));
@@ -130,7 +128,7 @@ class ErrorAndWarningDialogPlain extends React.Component<Props> {
     render() {
         return (
             <React.Fragment>
-                <ModalTitle id="save-dialog-errors-and-warnings-title">
+                <ModalTitle>
                     {i18n.t('Validation errors and warnings')}
                 </ModalTitle>
                 <ModalContent>

@@ -1,17 +1,15 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalTitle, ModalContent, ModalActions } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { WithStyles, withStyles } from '@material-ui/core';
 
 type Props = {
-    warnings: Array<{key: string, name: ?string, warning: string }>,
-    onSave: () => void,
-    onAbort: () => void,
-    ...CssClasses
+    warnings: Array<{key: string, name?: string, warning: string }>;
+    onSave: () => void;
+    onAbort: () => void;
 };
 
-class WarningDialogPlain extends React.Component<Props> {
+class WarningDialogPlain extends React.Component<Props & WithStyles<typeof styles>> {
     static getItemWithName(name: string, message: string) {
         return (
             <React.Fragment>
@@ -27,7 +25,7 @@ class WarningDialogPlain extends React.Component<Props> {
             </React.Fragment>
         );
     }
-    getContents(): Array<React.Node> {
+    getContents(): Array<React.ReactNode> {
         const { warnings } = this.props;
 
         return warnings
@@ -36,8 +34,8 @@ class WarningDialogPlain extends React.Component<Props> {
                     key={warningData.key}
                 >
                     {warningData.name ?
-                        WarningDialog.getItemWithName(warningData.name, warningData.warning) :
-                        WarningDialog.getItemWithoutName(warningData.warning)
+                        WarningDialogPlain.getItemWithName(warningData.name, warningData.warning) :
+                        WarningDialogPlain.getItemWithoutName(warningData.warning)
                     }
                 </li>
             ));
@@ -47,7 +45,7 @@ class WarningDialogPlain extends React.Component<Props> {
         const { onAbort, onSave, classes } = this.props;
         return (
             <React.Fragment>
-                <ModalTitle id="save-dialog-errors-and-warnings-title">
+                <ModalTitle>
                     {i18n.t('Validation warnings')}
                 </ModalTitle>
                 <ModalContent>

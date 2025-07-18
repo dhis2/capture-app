@@ -1,27 +1,25 @@
-// @flow
 import { createSelector } from 'reselect';
 import { messageStateKeys } from '../../../reducers/descriptions/rulesEffects.reducerDescription';
 
-const foundationSelector = (state, props, calculatedValues) => calculatedValues.foundation;
+const foundationSelector = (state: any, props: any, calculatedValues: any) => calculatedValues.foundation;
 
-const boundMessagesSelector = (state, props, calculatedValues) => state.rulesEffectsMessages[calculatedValues.key];
-const generalWarningsOnCompleteSelector = (state, props, calculatedValues) =>
+const boundMessagesSelector = (state: any, props: any, calculatedValues: any) => state.rulesEffectsMessages[calculatedValues.key];
+const generalWarningsOnCompleteSelector = (state: any, props: any, calculatedValues: any) =>
     (state.rulesEffectsGeneralWarnings[calculatedValues.key] ?
         state.rulesEffectsGeneralWarnings[calculatedValues.key].warningOnComplete :
         undefined
     );
-const generalErrorsOnCompleteSelector = (state, props, calculatedValues) =>
+const generalErrorsOnCompleteSelector = (state: any, props: any, calculatedValues: any) =>
     (state.rulesEffectsGeneralErrors[calculatedValues.key] ?
         state.rulesEffectsGeneralErrors[calculatedValues.key].errorOnComplete :
         undefined
     );
 
-// $FlowFixMe
 export const makeGetWarnings = () => createSelector(
     boundMessagesSelector,
     generalWarningsOnCompleteSelector,
     foundationSelector,
-    (boundMessages, generalWarningsOnComplete, foundation) => {
+    (boundMessages: any, generalWarningsOnComplete: any, foundation: any) => {
         boundMessages = boundMessages || {};
         generalWarningsOnComplete = generalWarningsOnComplete || [];
 
@@ -48,21 +46,20 @@ export const makeGetWarnings = () => createSelector(
             .filter(warning => warning);
 
         const unboundWarnings = generalWarningsOnComplete
-            .map((w => ({
+            .map((w: any) => ({
                 key: w.id,
                 name: null,
                 warning: w.message,
-            })));
+            }));
         return [...boundWarnings, ...unboundWarnings];
     },
 );
 
-// $FlowFixMe
 export const makeGetErrors = () => createSelector(
     boundMessagesSelector,
     generalErrorsOnCompleteSelector,
     foundationSelector,
-    (boundMessages, generalErrorsOnComplete, foundation) => {
+    (boundMessages: any, generalErrorsOnComplete: any, foundation: any) => {
         boundMessages = boundMessages || {};
         generalErrorsOnComplete = generalErrorsOnComplete || [];
 
@@ -89,11 +86,11 @@ export const makeGetErrors = () => createSelector(
             .filter(error => error);
 
         const unboundErrors = generalErrorsOnComplete
-            .map((e => ({
+            .map((e: any) => ({
                 key: e.id,
                 name: null,
                 error: e.message,
-            })));
+            }));
 
         return [...boundErrors, ...unboundErrors];
     },

@@ -4,10 +4,9 @@ import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getCategoryOptionsValidatorContainers } from '../fieldValidators/categoryOptions.validatorContainersGetter';
+import type { DataEntryPropToInclude } from '../../../DataEntry/actions/dataEntryLoad.utils';
 
-type DataEntryPropsToInclude = Array<Record<string, unknown>>;
-
-const dataEntryPropsToInclude: DataEntryPropsToInclude = [
+const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
     {
         id: 'occurredAt',
         type: 'DATE',
@@ -36,6 +35,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
     {
         id: 'assignee',
+        type: 'assignee',
     },
 ];
 
