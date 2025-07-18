@@ -1,26 +1,24 @@
-// @flow
 import * as React from 'react';
 import { CancelButton } from './CancelButton.container';
 
 type Props = {
-    id: string,
-    onCancel: () => void,
-    cancelButtonIsDisabled?: boolean,
-    cancelButtonRef?: ?Function,
+    id: string;
+    onCancel: () => void;
+    cancelButtonIsDisabled?: boolean;
+    cancelButtonRef?: (...args: any[]) => void;
 };
 
 type Options = {
-    color?: ?string,
+    color?: string;
 };
 
 type OptionsFn = (props: Props) => Options;
 
-const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?OptionsFn) =>
+const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: OptionsFn | null) =>
     class CancelButtonHOC extends React.Component<Props> {
-        innerInstance: any;
-
-
         getWrappedInstance = () => this.innerInstance;
+
+        innerInstance: any;
 
         render() {
             const { onCancel, cancelButtonIsDisabled, cancelButtonRef, ...passOnProps } = this.props;
@@ -35,7 +33,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
                             id={this.props.id}
                             onCancel={onCancel}
                             options={options}
-                            disabled={cancelButtonIsDisabled}
+                            disabled={Boolean(cancelButtonIsDisabled)}
                         />
                     }
                     {...passOnProps}
@@ -45,7 +43,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
     };
 
 
-export const withCancelButton = (optionsFn?: ?OptionsFn) =>
+export const withCancelButton = (optionsFn?: OptionsFn | null) =>
     (InnerComponent: React.ComponentType<any>) =>
 
         getCancelButton(InnerComponent, optionsFn);

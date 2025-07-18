@@ -1,5 +1,4 @@
 /* eslint-disable react/sort-comp */
-// @flow
 import * as React from 'react';
 import log from 'loglevel';
 import { Modal, ModalContent, ModalTitle } from '@dhis2/ui';

@@ -1,18 +1,20 @@
-// @flow
-/* eslint-disable react/no-multi-comp */
+/* eslint-disable react/sort-comp */
 import { spacers } from '@dhis2/ui';
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import type { ReactElement } from 'react';
+import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { D2Form } from '../D2Form';
 import { placements } from './constants/placements.const';
 import type { RenderFoundation } from '../../metaData';
+import type { ReduxAction } from '../../../capture-core-utils/types';
+
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { Section } from '../Section/Section.component';
 import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
 import { Field } from './Field.component';
 
-const styles = theme => ({
+const styles: Readonly<any> = (theme: any) => ({
     loadingContainer: {
         marginTop: 12,
     },
@@ -79,46 +81,49 @@ const styles = theme => ({
 });
 
 type DataEntrySection = {
-    placement: $Values<typeof placements>,
-    name: string,
-    beforeSectionId?: string
+    placement: typeof placements[keyof typeof placements];
+    name: string;
+    beforeSectionId?: string;
 };
 
 type FieldContainer = {
-    field: React.Element<any>,
-    placement: $Values<typeof placements>,
-    section?: ?string,
-    sectionName?: ?string
+    field: ReactElement<any>;
+    placement: typeof placements[keyof typeof placements];
+    section?: string;
+    sectionName?: string;
 };
 
 type DirectionClasses = {
-    container?: ?string,
-    dataEntryContainer?: ?string,
-    outputsContainer?: ?string,
-    outputsInnerContainer?: ?string,
-    formContainer?: ?string,
-}
+    container?: string;
+    dataEntryContainer?: string;
+    outputsContainer?: string;
+    outputsInnerContainer?: string;
+    formContainer?: string;
+    formInnerContainer?: string;
+};
 
-type Props = {
+type PlainProps = {
     id: string,
     itemId: string,
     ready: boolean,
-    formFoundation: ?RenderFoundation,
-    completeButton?: ?React.Element<any>,
-    mainButton?: ?React.Element<any>,
-    cancelButton?: ?React.Element<any>,
-    deleteButton?: ?React.Element<any>,
-    notes?: ?React.Element<any>,
-    fields?: ?Array<FieldContainer>,
-    dataEntryOutputs?: ?Array<any>,
-    completionAttempted?: ?boolean,
-    saveAttempted?: ?boolean,
-    classes: Object,
-    formHorizontal: ?boolean,
-    onUpdateFieldInner: (
-        action: ReduxAction<any, any>,
+    formFoundation: RenderFoundation,
+    completeButton?: ReactElement<any>,
+    mainButton?: ReactElement<any>,
+    cancelButton?: ReactElement<any>,
+    deleteButton?: ReactElement<any>,
+    notes?: ReactElement<any>,
+    fields?: Array<FieldContainer>,
+    dataEntryOutputs?: Array<any>,
+    completionAttempted?: boolean,
+    saveAttempted?: boolean,
+    formHorizontal?: boolean,
+    onUpdateFieldInner?: (
+        id: string,
+        itemId: string,
+        onUpdateFormField?: (innerAction: any) => void,
+        ...args: any[]
     ) => void,
-    onUpdateFormField?: ?(
+    onUpdateFormField?: (
         innerAction: ReduxAction<any, any>,
     ) => void,
     onUpdateFormFieldAsync: (
@@ -126,22 +131,24 @@ type Props = {
         fieldLabel: string,
         formBuilderId: string,
         formId: string,
-        callback: Function,
+        callback: (...args: any[]) => void,
         dataEntryId: string,
         itemId: string,
     ) => void,
-    dataEntrySections?: { [string]: DataEntrySection },
+    dataEntrySections?: { [key: string]: DataEntrySection },
     dataEntryFieldRef: any,
-    onAddNote?: ?Function,
-    onOpenAddRelationship?: ?Function,
-    onUpdateDataEntryField?: ?Function,
+    onAddNote?: (...args: any[]) => void,
+    onOpenAddRelationship?: (...args: any[]) => void,
+    onUpdateDataEntryField?: (...args: any[]) => void,
 };
 
-const fieldHorizontalFilter = (placement: $Values<typeof placements>) =>
+type Props = PlainProps & WithStyles<typeof styles>;
+
+const fieldHorizontalFilter = (placement: typeof placements[keyof typeof placements]) =>
     (fieldContainer: FieldContainer) =>
         fieldContainer.placement === placement;
 
-const fieldVerticalFilter = (placement: $Values<typeof placements>) =>
+const fieldVerticalFilter = (placement: typeof placements[keyof typeof placements]) =>
     (fieldContainer: FieldContainer) =>
         fieldContainer.placement === placement && !fieldContainer.section;
 
@@ -151,8 +158,10 @@ class DataEntryPlain extends React.Component<Props> {
         FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
     };
 
-    handleUpdateField = (...args) => {
-        this.props.onUpdateFieldInner(this.props.id, this.props.itemId, this.props.onUpdateFormField, ...args);
+    handleUpdateField = (...args: any[]) => {
+        if (this.props.onUpdateFieldInner && this.props.itemId) {
+            this.props.onUpdateFieldInner(this.props.id, this.props.itemId, this.props.onUpdateFormField, ...args);
+        }
     }
 
     getClasses = (): DirectionClasses => {
@@ -171,7 +180,7 @@ class DataEntryPlain extends React.Component<Props> {
 
     hasPlacement = (
         dataEntrySection: DataEntrySection,
-        placement: $Values<typeof placements>,
+        placement: typeof placements[keyof typeof placements],
         beforeSectionId?: string,
     ) =>
         dataEntrySection.placement === placement &&
@@ -181,11 +190,11 @@ class DataEntryPlain extends React.Component<Props> {
             )
         );
 
-    handleUpdateFieldAsync = (...args) => {
+    handleUpdateFieldAsync = (...args: [string, string, string, string, (...callbackArgs: any[]) => void]) => {
         this.props.onUpdateFormFieldAsync(...args, this.props.id, this.props.itemId);
     }
 
-    getSectionsWithPlacement(placement: $Values<typeof placements>, beforeSectionId?: string) {
+    getSectionsWithPlacement(placement: typeof placements[keyof typeof placements], beforeSectionId?: string) {
         const fields = this.props.fields || [];
         const sections = this.props.dataEntrySections || {};
 
@@ -214,22 +223,22 @@ class DataEntryPlain extends React.Component<Props> {
                                 <Section
                                     header={
                                         <SectionHeaderSimple
-                                            title={sectionFieldName ?? section.name}
+                                            title={sectionFieldName || section.name}
                                         />
                                     }
                                 >
-                                    {sectionFieldsContainer}
+                                    {sectionFieldsContainer as any}
                                 </Section>
                             </div>,
                         );
                     }
                 }
                 return accSections;
-            }, [])
+            }, [] as React.ReactElement[])
             : [];
     }
 
-    renderDataEntryFieldsByPlacement = (placement: $Values<typeof placements>, beforeSectionId?: string) => {
+    renderDataEntryFieldsByPlacement = (placement: typeof placements[keyof typeof placements], beforeSectionId?: string) => {
         const fields = this.props.fields || [];
         const fieldFilter = this.props.formHorizontal ? fieldHorizontalFilter(placement) : fieldVerticalFilter(placement);
         const fieldsByPlacement = fields ?
@@ -275,7 +284,6 @@ class DataEntryPlain extends React.Component<Props> {
         } = this.props;
 
         const d2Form = (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <D2Form
                 id={getDataEntryKey(id, itemId)}
                 validationAttempted={completionAttempted || saveAttempted}
@@ -324,7 +332,6 @@ class DataEntryPlain extends React.Component<Props> {
             <div className={directionClasses.container}>
                 <div className={directionClasses.dataEntryContainer}>
                     <div className={directionClasses.formContainer}>
-                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <div className={directionClasses.formInnerContainer}>
                             {this.renderDataEntryFieldsByPlacement(placements.TOP)}
                             {this.renderD2Form()}
