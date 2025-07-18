@@ -1,0 +1,11 @@
+// @flow
+
+declare module '@js-temporal/polyfill' {
+  declare export class Temporal {
+    static PlainDate: any;
+    static PlainDateTime: any;
+    static Now: {
+      plainDateISO(): any;
+    };
+  }
+} 
