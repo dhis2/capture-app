@@ -1,8 +1,7 @@
-// @flow
 import * as React from 'react';
 
 const getCleanUpHOC = (InnerComponent: React.ComponentType<any>) =>
-    (props: Object) => {
+    (props: Record<string, any>) => {
         const {
             onSearchGroupResultCountRetrieved,
             onSearchGroupResultCountRetrievalFailed,

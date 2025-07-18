@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -8,17 +7,19 @@ import { dataEntryHasChanges as getDataEntryHasChanges } from './common/dataEntr
 import { defaultDialogProps } from '../Dialogs/DiscardDialog.constants';
 
 type Props = {
-    dataEntryHasChanges: boolean,
-    history: Object,
+    dataEntryHasChanges: boolean;
+    history: Record<string, any>;
+    location: any;
+    match: any;
+    staticContext: any;
 };
 
 type State = {
-    dialogOpen: boolean,
+    dialogOpen: boolean;
 };
 
 const getEventListener = (InnerComponent: React.ComponentType<any>) =>
     class BrowserBackWarningForDataEntryHOC extends React.Component<Props, State> {
-        unblock: () => void;
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -28,7 +29,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
 
         componentDidMount() {
             const { history } = this.props;
-            this.unblock = history.block((nextLocation, method) => {
+            this.unblock = history.block((nextLocation: any, method: string) => {
                 const { dataEntryHasChanges } = this.props;
                 if (method === 'POP' && dataEntryHasChanges) {
                     this.setState({
@@ -41,15 +42,18 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
         }
 
         componentWillUnmount() {
-            this.unblock && this.unblock();
+            if (this.unblock) {
+                this.unblock();
+            }
         }
+
+        unblock!: () => void;
 
         handleDialogConfirm = () => {
             this.setState({
                 dialogOpen: false,
             });
             this.unblock();
-            // this.props.history.goBack();
         }
 
         handleDialogCancel = () => {
@@ -59,7 +63,6 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            // $FlowFixMe[prop-missing] automated comment
             const { dataEntryHasChanges, history, location, match, staticContext, ...passOnProps } = this.props;
             return (
                 <React.Fragment>
@@ -77,7 +80,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { id: string }) => {
+const mapStateToProps = (state: any, props: { id: string }) => {
     const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     const dataEntryHasChanges = getDataEntryHasChanges(state, key);
@@ -90,8 +93,4 @@ const mapDispatchToProps = () => ({});
 
 export const withBrowserBackWarning = () =>
     (InnerComponent: React.ComponentType<any>) =>
-
-        // $FlowFixMe[missing-annot] automated comment
-        connect(
-            // $FlowFixMe[missing-annot] automated comment
-            mapStateToProps, mapDispatchToProps)(withRouter(getEventListener(InnerComponent)));
+        connect(mapStateToProps, mapDispatchToProps)(withRouter(getEventListener(InnerComponent))) as any;

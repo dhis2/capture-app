@@ -1,29 +1,26 @@
-// @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } from '@dhis2/ui';
-import { type RenderFoundation } from '../../metaData';
+import type { RenderFoundation } from '../../metaData';
 import { addEventSaveTypes } from '../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {
-    onCancelCreateNew: (itemId: string) => void,
-    onConfirmCreateNew: (itemId: string) => void,
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
-    allowGenerateNextVisit?: ?boolean,
-    askCompleteEnrollmentOnEventComplete?: ?boolean,
-    availableProgramStages?: ?Array<Object>,
-    isCompleted?: boolean,
-    itemId: string
+    onCancelCreateNew: (itemId: string) => void;
+    onConfirmCreateNew: (itemId: string) => void;
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: string) => void;
+    allowGenerateNextVisit?: boolean;
+    askCompleteEnrollmentOnEventComplete?: boolean;
+    availableProgramStages?: Array<Record<string, any>>;
+    isCompleted?: boolean;
+    itemId: string;
 };
 
 type State = {
-    isOpen: boolean,
-}
+    isOpen: boolean;
+};
 
 const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
     class AskToCreateNewHOC extends React.Component<Props, State> {
-        handleOnSave: () => void;
-        innerInstance: any;
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -35,6 +32,8 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
         getWrappedInstance() {
             return this.innerInstance;
         }
+
+        innerInstance: any;
 
         handleOnSave(eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: string) {
             if (this.props.allowGenerateNextVisit &&
@@ -96,9 +95,8 @@ const askToCreateNewComponent = (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
-                        innerRef={(innerInstance) => { this.innerInstance = innerInstance; }}
+                        innerRef={(innerInstance: any) => { this.innerInstance = innerInstance; }}
                         onSave={this.handleOnSave}
                         {...passOnProps}
                     />
