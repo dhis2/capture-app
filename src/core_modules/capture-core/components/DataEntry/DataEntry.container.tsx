@@ -63,5 +63,5 @@ const mapDispatchToProps = (dispatch: any): DispatchProps => ({
 });
 
 export const DataEntry = connect(mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(DataEntryComponent),
+    withLoadingIndicator(() => ({ height: '350px' }))(DataEntryComponent),
 );

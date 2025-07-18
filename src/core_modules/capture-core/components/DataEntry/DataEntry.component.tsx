@@ -6,6 +6,7 @@ import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { D2Form } from '../D2Form';
 import { placements } from './constants/placements.const';
 import type { RenderFoundation } from '../../metaData';
+import type { ReduxAction } from '../../actions/actions.types';
 
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
@@ -101,57 +102,7 @@ type DirectionClasses = {
     formInnerContainer?: string;
 };
 
-type PlainProps = {
-    id: string;
-    itemId: string;
-    ready?: boolean;
-    formFoundation?: RenderFoundation;
-    completeButton?: ReactElement<any>;
-    mainButton?: ReactElement<any>;
-    cancelButton?: ReactElement<any>;
-    deleteButton?: ReactElement<any>;
-    notes?: ReactElement<any>;
-    fields?: Array<FieldContainer>;
-    dataEntryOutputs?: Array<any>;
-    completionAttempted?: boolean;
-    saveAttempted?: boolean;
-    classes?: Record<string, any>;
-    formHorizontal?: boolean;
-    viewMode?: boolean;
-    fieldOptions?: any;
-    orgUnit?: any;
-    orgUnitId?: string;
-    orgUnitIdFieldValue?: string;
-    programId?: string;
-    selectedOrgUnitId?: string;
-    initialScheduleDate?: string;
-    onUpdateFieldInner?: (
-        id: string,
-        itemId: string,
-        onUpdateFormField?: (innerAction: any) => void,
-        ...args: any[]
-    ) => void;
-    onUpdateFormField?: (innerAction: any) => void;
-    onUpdateFormFieldAsync?: (
-        fieldId: string,
-        fieldLabel: string,
-        formBuilderId: string,
-        formId: string,
-        callback: (...args: any[]) => void,
-        dataEntryId: string,
-        itemId: string,
-    ) => void;
-    onUpdateDataEntryField?: (...args: any[]) => void;
-    onSave?: (...args: any[]) => void;
-    onSaveAndCompleteEnrollment?: (...args: any[]) => void;
-    onGetValidationContext?: (...args: any[]) => any;
-    dataEntrySections?: { [key: string]: DataEntrySection };
-    dataEntryFieldRef?: any;
-    onAddNote?: (...args: any[]) => void;
-    onOpenAddRelationship?: (...args: any[]) => void;
-    [key: string]: any;
-};
-
+type PlainProps = { id: string, itemId: string, ready: boolean, formFoundation: RenderFoundation, completeButton?: ReactElement<any>, mainButton?: ReactElement<any>, cancelButton?: ReactElement<any>, deleteButton?: ReactElement<any>, notes?: ReactElement<any>, fields?: Array<FieldContainer>, dataEntryOutputs?: Array<any>, completionAttempted?: boolean, saveAttempted?: boolean, formHorizontal?: boolean, onUpdateFieldInner?: (id: string, itemId: string, onUpdateFormField?: (innerAction: any) => void, ...args: any[]) => void, onUpdateFormField?: (innerAction: ReduxAction<any, any>,) => void, onUpdateFormFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: (...args: any[]) => void, dataEntryId: string, itemId: string,) => void, dataEntrySections?: { [key: string]: DataEntrySection }, dataEntryFieldRef: any, onAddNote?: (...args: any[]) => void, onOpenAddRelationship?: (...args: any[]) => void, onUpdateDataEntryField?: (...args: any[]) => void, };
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const fieldHorizontalFilter = (placement: typeof placements[keyof typeof placements]) =>
@@ -200,10 +151,8 @@ class DataEntryPlain extends React.Component<Props> {
             )
         );
 
-    handleUpdateFieldAsync = (...args: any[]) => {
-        if (this.props.onUpdateFormFieldAsync && this.props.itemId) {
-            this.props.onUpdateFormFieldAsync(...args as [string, string, string, string, (...callbackArgs: any[]) => void], this.props.id, this.props.itemId);
-        }
+    handleUpdateFieldAsync = (...args: [string, string, string, string, (...callbackArgs: any[]) => void]) => {
+        this.props.onUpdateFormFieldAsync(...args, this.props.id, this.props.itemId);
     }
 
     getSectionsWithPlacement(placement: typeof placements[keyof typeof placements], beforeSectionId?: string) {
