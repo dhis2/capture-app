@@ -6,7 +6,7 @@ import { withStyles, type WithStyles } from '@material-ui/core/styles';
 import { D2Form } from '../D2Form';
 import { placements } from './constants/placements.const';
 import type { RenderFoundation } from '../../metaData';
-import type { ReduxAction } from '../../actions/actions.types';
+import type { ReduxAction } from '../../../capture-core-utils/types';
 
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
