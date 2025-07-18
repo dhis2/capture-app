@@ -102,7 +102,46 @@ type DirectionClasses = {
     formInnerContainer?: string;
 };
 
-type PlainProps = { id: string, itemId: string, ready: boolean, formFoundation: RenderFoundation, completeButton?: ReactElement<any>, mainButton?: ReactElement<any>, cancelButton?: ReactElement<any>, deleteButton?: ReactElement<any>, notes?: ReactElement<any>, fields?: Array<FieldContainer>, dataEntryOutputs?: Array<any>, completionAttempted?: boolean, saveAttempted?: boolean, formHorizontal?: boolean, onUpdateFieldInner?: (id: string, itemId: string, onUpdateFormField?: (innerAction: any) => void, ...args: any[]) => void, onUpdateFormField?: (innerAction: ReduxAction<any, any>,) => void, onUpdateFormFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: (...args: any[]) => void, dataEntryId: string, itemId: string,) => void, dataEntrySections?: { [key: string]: DataEntrySection }, dataEntryFieldRef: any, onAddNote?: (...args: any[]) => void, onOpenAddRelationship?: (...args: any[]) => void, onUpdateDataEntryField?: (...args: any[]) => void, };
+type PlainProps = {
+    id: string,
+    itemId: string,
+    ready: boolean,
+    formFoundation: RenderFoundation,
+    completeButton?: ReactElement<any>,
+    mainButton?: ReactElement<any>,
+    cancelButton?: ReactElement<any>,
+    deleteButton?: ReactElement<any>,
+    notes?: ReactElement<any>,
+    fields?: Array<FieldContainer>,
+    dataEntryOutputs?: Array<any>,
+    completionAttempted?: boolean,
+    saveAttempted?: boolean,
+    formHorizontal?: boolean,
+    onUpdateFieldInner?: (
+        id: string,
+        itemId: string,
+        onUpdateFormField?: (innerAction: any) => void,
+        ...args: any[]
+    ) => void,
+    onUpdateFormField?: (
+        innerAction: ReduxAction<any, any>,
+    ) => void,
+    onUpdateFormFieldAsync: (
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
+        callback: (...args: any[]) => void,
+        dataEntryId: string,
+        itemId: string,
+    ) => void,
+    dataEntrySections?: { [key: string]: DataEntrySection },
+    dataEntryFieldRef: any,
+    onAddNote?: (...args: any[]) => void,
+    onOpenAddRelationship?: (...args: any[]) => void,
+    onUpdateDataEntryField?: (...args: any[]) => void,
+};
+
 type Props = PlainProps & WithStyles<typeof styles>;
 
 const fieldHorizontalFilter = (placement: typeof placements[keyof typeof placements]) =>
