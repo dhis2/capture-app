@@ -344,7 +344,7 @@ type FinalTeiDataEntryProps = {
     onUpdateFormFieldAsync: (...args: any[]) => any;
     onUpdateFormField: (...args: any[]) => any;
     firstStageMetaData?: { stage: ProgramStage };
-    relatedStageRef?: React.RefObject<RelatedStageRefPayload>;
+    relatedStageRef?: { current: RelatedStageRefPayload | null },
     formFoundation: RenderFoundation;
 };
 // final step before the generic dataEntry is inserted
