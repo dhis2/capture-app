@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { placements } from '../../../../DataEntry/constants/placements.const';

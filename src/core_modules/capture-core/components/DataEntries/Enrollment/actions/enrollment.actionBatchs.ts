@@ -1,4 +1,3 @@
-// @flow
 import { v4 as uuid } from 'uuid';
 import { batchActions } from 'redux-batched-actions';
 import type {
@@ -16,6 +15,7 @@ import { TrackerProgram, RenderFoundation, ProgramStage } from '../../../../meta
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
 import type { QuerySingleResource } from '../../../../utils/api';
+import type { ReduxAction } from '../../../../../capture-core-utils/types';
 
 export const batchActionTypes = {
     RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT: 'RulesExecutedPostUpdateFieldForEnrollment',
@@ -39,20 +39,20 @@ export const runRulesOnUpdateFieldBatch = async ({
     querySingleResource,
     onGetValidationContext,
 }: {
-    program: TrackerProgram,
-    formId: string,
-    dataEntryId: string,
-    itemId: string,
-    orgUnit: OrgUnit,
-    enrollmentData?: Enrollment,
-    attributeValues?: TEIValues,
-    extraActions: Array<ReduxAction<any, any>>,
-    uid: string,
-    stage: ProgramStage,
-    formFoundation?: RenderFoundation,
-    currentEvent?: {[id: string]: any},
-    querySingleResource: QuerySingleResource,
-    onGetValidationContext: () => Object,
+    program: TrackerProgram;
+    formId: string;
+    dataEntryId: string;
+    itemId: string;
+    orgUnit: OrgUnit;
+    enrollmentData?: Enrollment;
+    attributeValues?: TEIValues;
+    extraActions: Array<ReduxAction<any, any>>;
+    uid: string;
+    stage: ProgramStage;
+    formFoundation?: RenderFoundation;
+    currentEvent?: {[id: string]: any};
+    querySingleResource: QuerySingleResource;
+    onGetValidationContext: () => any;
 }) => {
     const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
@@ -82,9 +82,9 @@ export const updateDataEntryFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
     orgUnit: OrgUnit,
-    stage?: ProgramStage,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
-    onGetValidationContext: () => Object,
+    onGetValidationContext: () => any,
 ) => {
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
@@ -111,9 +111,9 @@ export const updateFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
     orgUnit: OrgUnit,
-    stage?: ProgramStage,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
-    onGetValidationContext: () => Object,
+    onGetValidationContext: () => any,
 ) => {
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
@@ -142,9 +142,9 @@ export const asyncUpdateSuccessBatch = (
     itemId: string,
     programId: string,
     orgUnit: OrgUnit,
-    stage?: ProgramStage,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
-    onGetValidationContext: () => Object,
+    onGetValidationContext: () => any,
 ) => {
     const uid = uuid();
 

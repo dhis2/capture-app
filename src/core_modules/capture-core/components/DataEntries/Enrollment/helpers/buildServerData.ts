@@ -1,16 +1,15 @@
-// @flow
 import { pipe } from 'capture-core-utils';
 import type { Enrollment, RenderFoundation } from '../../../../metaData';
 import { convertValue as convertFormToClient } from '../../../../converters/formToClient';
 import { convertValue as convertClientToServer } from '../../../../converters/clientToServer';
 
 type Selections = {
-    programId: string,
-    orgUnitId: string,
+    programId: string;
+    orgUnitId: string;
 };
 
 function getFormServerValues(
-    formValues: Object,
+    formValues: any,
     formFoundation: RenderFoundation,
 ) {
     const formServerValues = formFoundation.convertValues(
@@ -27,7 +26,7 @@ function getFormServerValues(
 function getTEIServerData(
     enrollment: Enrollment,
     selections: Selections,
-    formServerValues: Object,
+    formServerValues: any,
 ) {
     const trackedEntityType = enrollment.trackedEntityType.id;
     return {
@@ -48,7 +47,7 @@ export function buildServerData(
     dataEntryKey: string,
     selections: Selections,
     enrollment: Enrollment,
-    formValues: Object = {},
+    formValues: any = {},
 ) {
     const formFoundation = enrollment.enrollmentForm;
     const formServerValues = getFormServerValues(formValues, formFoundation);

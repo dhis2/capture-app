@@ -1,20 +1,20 @@
-// @flow
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { connect } from 'react-redux';
-import { ProgramStage, RenderFoundation } from '../../../metaData';
+import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onUpdateDataEntryField: (
         innerAction: ReduxAction<any, any>,
         data: any,
         programId: string,
         orgUnit: OrgUnit,
-        stage?: ProgramStage,
+        stage: ProgramStage,
         formFoundation: RenderFoundation,
-        onGetValidationContext: () => Object,
+        onGetValidationContext: () => any,
     ) => {
         dispatch(
             updateDataEntryFieldBatch(innerAction, programId, orgUnit, stage, formFoundation, onGetValidationContext),
@@ -24,9 +24,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         innerAction: ReduxAction<any, any>,
         programId: string,
         orgUnit: OrgUnit,
-        stage?: ProgramStage,
+        stage: ProgramStage,
         formFoundation: RenderFoundation,
-        onGetValidationContext: () => Object,
+        onGetValidationContext: () => any,
     ) => {
         dispatch(updateFieldBatch(innerAction, programId, orgUnit, stage, formFoundation, onGetValidationContext));
     },
@@ -36,9 +36,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         itemId: string,
         programId: string,
         orgUnit: OrgUnit,
-        stage?: ProgramStage,
+        stage: ProgramStage,
         formFoundation: RenderFoundation,
-        onGetValidationContext: () => Object,
+        onGetValidationContext: () => any,
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
             asyncUpdateSuccessBatch(successInnerAction, dataEntryId, itemId, programId, orgUnit, stage, formFoundation, onGetValidationContext);
@@ -48,6 +48,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowFixMe
 export const EnrollmentDataEntry = connect(() => ({}), mapDispatchToProps)(EnrollmentDataEntryComponent);
-

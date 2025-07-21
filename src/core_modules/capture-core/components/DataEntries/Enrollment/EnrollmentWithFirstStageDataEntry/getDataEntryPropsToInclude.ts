@@ -1,4 +1,3 @@
-// @flow
 import type { ProgramStage } from '../../../../metaData';
 import { getEventDateValidatorContainers } from './fieldValidators';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusIn, convertStatusOut } from '../../converters';

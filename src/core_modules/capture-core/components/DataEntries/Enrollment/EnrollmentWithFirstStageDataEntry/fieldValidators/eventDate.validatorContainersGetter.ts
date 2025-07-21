@@ -1,11 +1,10 @@
-// @flow
 import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import { isValidDate, isValidPeriod } from '../../../../../utils/validation/validators/form';
 
 const preValidateDate = (
-    value?: ?string,
-    internalComponentError?: ?{error: ?string, errorCode: ?string},
+    value?: string | null,
+    internalComponentError?: {error?: string | null; errorCode?: string | null} | null,
 ) => {
     if (!value) {
         return true;
@@ -15,8 +14,8 @@ const preValidateDate = (
 };
 
 const validateNotExpired = (
-    value?: ?string,
-    props: Object,
+    value: string,
+    props: any,
 ) => {
     if (!value || !props.expiryPeriod) {
         return true;
@@ -32,7 +31,7 @@ const validateNotExpired = (
     };
 };
 
-export const getEventDateValidatorContainers = (props: Object) => [
+export const getEventDateValidatorContainers = (props?: any) => [
     {
         validator: hasValue,
         errorMessage: i18n.t('A value is required'),

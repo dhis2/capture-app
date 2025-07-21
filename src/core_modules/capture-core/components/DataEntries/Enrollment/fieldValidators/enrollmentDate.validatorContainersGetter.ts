@@ -1,9 +1,8 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { hasValue } from 'capture-core-utils/validators/form';
 import { isValidDate, isValidNonFutureDate } from '../../../../utils/validation/validators/form';
 
-const isValidIncidentDate = (value: string, internalComponentError?: ?{error: ?string, errorCode: ?string}) => {
+const isValidEnrollmentDate = (value: string, internalComponentError?: {error: string | null, errorCode: string | null} | null) => {
     if (!value) {
         return true;
     }
@@ -11,8 +10,7 @@ const isValidIncidentDate = (value: string, internalComponentError?: ?{error: ?s
     return isValidDate(value, internalComponentError);
 };
 
-
-export const getIncidentDateValidatorContainer = () => {
+export const getEnrollmentDateValidatorContainer = () => {
     const validatorContainers = [
         {
             validator: hasValue,
@@ -20,7 +18,7 @@ export const getIncidentDateValidatorContainer = () => {
                 i18n.t('A value is required'),
         },
         {
-            validator: isValidIncidentDate,
+            validator: isValidEnrollmentDate,
             errorMessage: i18n.t('Please provide a valid date'),
         },
         { validator: isValidNonFutureDate,

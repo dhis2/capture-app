@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import type { Props } from './EnrollmentWithFirstStageDataEntry.types';
 import { FirstStageDataEntry } from './EnrollmentWithFirstStageDataEntry.component';
@@ -7,7 +6,7 @@ import { Section } from '../../../../metaData';
 import { RelatedStagesActions } from '../../../WidgetRelatedStages';
 import { useProgramExpiryForUser } from '../../../../hooks';
 
-const getSectionId = sectionId =>
+const getSectionId = (sectionId: string) =>
     (sectionId === Section.MAIN_SECTION_ID ? `${Section.MAIN_SECTION_ID}-stage` : sectionId);
 
 export const EnrollmentWithFirstStageDataEntry = (props: Props) => {
