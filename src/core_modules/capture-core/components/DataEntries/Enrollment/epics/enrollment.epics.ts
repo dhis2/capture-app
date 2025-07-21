@@ -1,28 +1,28 @@
-// @flow
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
-import { getTrackerProgramThrowIfNotFound, ProgramStage, RenderFoundation, Section } from '../../../../metaData';
-import { getCurrentClientMainData, type FieldData } from '../../../../rules';
+import type { ProgramStage, RenderFoundation } from '../../../../metaData';
+import { Section, getTrackerProgramThrowIfNotFound } from '../../../../metaData';
+import { getCurrentClientMainData } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertFormToClient } from '../../../../converters';
 import { stageMainDataIds, convertToRulesEngineIds } from '../EnrollmentWithFirstStageDataEntry';
 import type { QuerySingleResource } from '../../../../utils/api';
 
 type Context = {
-    dataEntryId: string,
-    itemId: string,
-    uid: string,
-    programId: string,
-    orgUnit: OrgUnit,
-    stage: ProgramStage,
-    formFoundation: RenderFoundation,
-}
+    dataEntryId: string;
+    itemId: string;
+    uid: string;
+    programId: string;
+    orgUnit: OrgUnit;
+    stage: ProgramStage;
+    formFoundation: RenderFoundation;
+};
 
-const splitCurrentClientMainData = (stage, currentClientMainData) => {
+const splitCurrentClientMainData = (stage: any, currentClientMainData: any) => {
     if (!stage) {
         return { currentEnrollmentValues: currentClientMainData, currentEventMainData: {} };
     }
@@ -47,11 +47,11 @@ const runRulesOnEnrollmentUpdate = ({
     querySingleResource,
     onGetValidationContext,
 }: {
-    store: ReduxStore,
-    context: Context,
-    searchActions?: any,
-    querySingleResource: QuerySingleResource,
-    onGetValidationContext: () => Object,
+    store: any;
+    context: Context;
+    searchActions?: any;
+    querySingleResource: QuerySingleResource;
+    onGetValidationContext: () => any;
 }) => {
     const state = store.value;
     const { programId, dataEntryId, itemId, orgUnit, uid, stage, formFoundation } = context;
@@ -87,15 +87,15 @@ const runRulesOnEnrollmentUpdate = ({
 };
 
 export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { querySingleResource }: ApiUtils,
+    action$: any,
+    store: any,
+    { querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
-        map(actionBatch =>
-            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
-        concatMap((action) => {
+        map((actionBatch: any) =>
+            actionBatch.payload.find((action: any) => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
+        concatMap((action: any) => {
             const {
                 uid,
                 programId,
@@ -128,15 +128,15 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
         }));
 
 export const runRulesOnEnrollmentFieldUpdateEpic = (
-    action$: InputObservable,
-    store: ReduxStore,
-    { querySingleResource }: ApiUtils,
+    action$: any,
+    store: any,
+    { querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
-        map(actionBatch =>
-            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
-        concatMap((action) => {
+        map((actionBatch: any) =>
+            actionBatch.payload.find((action: any) => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
+        concatMap((action: any) => {
             const {
                 innerPayload: payload,
                 searchActions,
@@ -147,13 +147,8 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (
                 formFoundation,
                 onGetValidationContext,
             } = action.payload;
-            const { dataEntryId, itemId, elementId, value, uiState } = payload;
+            const { dataEntryId, itemId } = payload;
 
-            const fieldData: FieldData = {
-                elementId,
-                value,
-                valid: uiState.valid,
-            };
 
             return runRulesOnEnrollmentUpdate({
                 store,
@@ -166,7 +161,6 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (
                     stage,
                     formFoundation,
                 },
-                fieldData,
                 searchActions,
                 querySingleResource,
                 onGetValidationContext,

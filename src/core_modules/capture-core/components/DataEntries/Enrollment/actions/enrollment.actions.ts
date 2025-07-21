@@ -1,7 +1,6 @@
-// @flow
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
-import { ProgramStage, RenderFoundation } from '../../../../metaData';
+import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 
 export const actionTypes = {
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForNewEnrollment',
@@ -16,13 +15,13 @@ export const startRunRulesOnUpdateForNewEnrollment = ({
     formFoundation,
     onGetValidationContext,
 }: {
-    payload: Object,
-    uid: string,
-    programId: string,
-    orgUnit: OrgUnit,
-    stage?: ProgramStage,
-    formFoundation: RenderFoundation,
-    onGetValidationContext: () => Object,
+    payload: any;
+    uid: string;
+    programId: string;
+    orgUnit: OrgUnit;
+    stage?: ProgramStage;
+    formFoundation: RenderFoundation;
+    onGetValidationContext: () => any;
 }) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)({
         innerPayload: payload,
@@ -35,8 +34,8 @@ export const startRunRulesOnUpdateForNewEnrollment = ({
     });
 
 export const startAsyncUpdateFieldForNewEnrollment = (
-    innerAction: ReduxAction<any, any>,
-    onSuccess: Function,
-    onError: Function,
+    innerAction: any,
+    onSuccess: (...args: any[]) => any,
+    onError: (...args: any[]) => any,
 ) =>
     actionPayloadAppender(innerAction)({ onSuccess, onError });

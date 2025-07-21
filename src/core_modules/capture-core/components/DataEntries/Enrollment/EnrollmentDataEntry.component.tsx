@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -67,23 +66,23 @@ const baseComponentStylesVertical = {
     },
 };
 
-function defaultFilterProps(props: Object) {
+function defaultFilterProps(props: any) {
     const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
     return passOnProps;
 }
 
-const getBaseComponentProps = (props: Object) => ({
+const getBaseComponentProps = (props: any) => ({
     fieldOptions: props.fieldOptions,
     formHorizontal: props.formHorizontal,
     styles: props.formHorizontal ? baseComponentStylesVertical : baseComponentStyles,
 });
 
-const createComponentProps = (props: Object, componentProps: Object) => ({
+const createComponentProps = (props: any, componentProps: any) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
 
-const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal?: boolean) => (formHorizontal ? 'center' : 'left');
 
 const getEnrollmentDateSettings = () => {
     const reportDateComponent =
@@ -92,8 +91,8 @@ const getEnrollmentDateSettings = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -108,7 +107,7 @@ const getEnrollmentDateSettings = () => {
         );
     const enrollmentDateSettings = {
         getComponent: () => reportDateComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
             label: props.enrollmentMetadata.enrollmentDateLabel,
             required: true,
@@ -140,8 +139,8 @@ const getIncidentDateSettings = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -155,12 +154,12 @@ const getIncidentDateSettings = () => {
             ),
         );
     const incidentDateSettings = {
-        isApplicable: (props: Object) => {
+        isApplicable: (props: any) => {
             const showIncidentDate = props.enrollmentMetadata.showIncidentDate;
             return showIncidentDate;
         },
         getComponent: () => reportDateComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
             label: props.enrollmentMetadata.incidentDateLabel,
             required: true,
@@ -189,8 +188,8 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
                 withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) =>
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
@@ -209,8 +208,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
                 withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) =>
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
@@ -224,14 +223,14 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     ),
 );
 
-const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+const getOrientation = (formHorizontal?: boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const getGeometrySettings = () => ({
-    isApplicable: (props: Object) => {
+    isApplicable: (props: any) => {
         const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
         return ['Polygon', 'Point'].includes(featureType);
     },
-    getComponent: (props: Object) => {
+    getComponent: (props: any) => {
         const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
         if (featureType === 'Polygon') {
             return polygonComponent;
@@ -239,7 +238,7 @@ const getGeometrySettings = () => ({
 
         return pointComponent;
     },
-    getComponentProps: (props: Object) => {
+    getComponentProps: (props: any) => {
         const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
@@ -278,8 +277,8 @@ const getCategoryOptionsSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.selectLabel}`,
                         })(
                             withDisplayMessages()(
@@ -294,14 +293,14 @@ const getCategoryOptionsSettingsFn = () => {
         );
     const categoryOptionsSettings = {
         getComponent: () => categoryOptionsComponent,
-        getComponentProps: (props: Object, fieldId: string) => createComponentProps(props, {
-            ...props.categories?.find(category => category.id === fieldId) ?? {},
+        getComponentProps: (props: any, fieldId: string) => createComponentProps(props, {
+            ...props.categories?.find((category: any) => category.id === fieldId) ?? {},
             required: true,
         }),
-        getPropName: (props: Object, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
-        getFieldIds: (props: Object) => props.categories?.map(category => category.id),
-        getValidatorContainers: (props: Object, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
-        getMeta: (props: Object) => {
+        getPropName: (props: any, fieldId?: string) => (fieldId ? `${attributeOptionsKey}-${fieldId}` : attributeOptionsKey),
+        getFieldIds: (props: any) => props.categories?.map((category: any) => category.id),
+        getValidatorContainers: (props: any, fieldId?: string) => getCategoryOptionsValidatorContainers(props, fieldId),
+        getMeta: (props: any) => {
             const { firstStageMetaData, programCategory } = props;
 
             return {
@@ -318,37 +317,37 @@ const getCategoryOptionsSettingsFn = () => {
 };
 
 const getAOCSettingsFn = () => ({
-    hideAOC: ({ programId }) => {
+    hideAOC: ({ programId }: { programId: string }) => {
         const { stages: stagesMap, useFirstStageDuringRegistration } = getProgramThrowIfNotFound(programId);
 
         /*
         Show AOC selection if:
-        - There are any program stages in the program with “Auto-generate"
+        - There are any program stages in the program with "Auto-generate"
         - The "Show first stage on registration page" is selected for the program
         */
 
         const stages = [...stagesMap.values()];
 
-        const shouldShowAOC = stages.some(stage => stage.autoGenerateEvent) || useFirstStageDuringRegistration;
+        const shouldShowAOC = stages.some((stage: any) => stage.autoGenerateEvent) || useFirstStageDuringRegistration;
 
         return !shouldShowAOC;
     },
 });
 
 type FinalTeiDataEntryProps = {
-    enrollmentMetadata: Enrollment,
-    programId: string,
-    id: string,
-    orgUnitId: string,
-    orgUnit: OrgUnit,
-    onUpdateDataEntryField: Function,
-    onUpdateFormFieldAsync: Function,
-    onUpdateFormField: Function,
-    firstStageMetaData?: ?{ stage: ProgramStage },
-    relatedStageRef?: { current: ?RelatedStageRefPayload },
-    formFoundation: RenderFoundation,
+    enrollmentMetadata: Enrollment;
+    programId: string;
+    id: string;
+    orgUnitId: string;
+    orgUnit: OrgUnit;
+    onUpdateDataEntryField: (...args: any[]) => any;
+    onUpdateFormFieldAsync: (...args: any[]) => any;
+    onUpdateFormField: (...args: any[]) => any;
+    firstStageMetaData?: { stage: ProgramStage };
+    relatedStageRef?: { current?: RelatedStageRefPayload };
+    formFoundation: RenderFoundation;
 };
-// final step before the generic dataEntry is inserted
+
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     componentWillUnmount() {
         inMemoryFileStore.clear();
@@ -368,7 +367,6 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         const { enrollmentMetadata, firstStageMetaData, ...passOnProps } = this.props;
 
         return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
             firstStageMetaData ? (
                 <EnrollmentWithFirstStageDataEntry
                     {...passOnProps}
@@ -394,19 +392,19 @@ const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(I
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
 type PreEnrollmentDataEntryProps = {
-    programId: string,
-    orgUnit: OrgUnit,
-    onUpdateField: Function,
-    onUpdateDataEntryField: Function,
-    onStartAsyncUpdateField: Function,
-    onGetUnsavedAttributeValues?: ?Function,
-    teiId?: ?string,
-    firstStageMetaData?: ?{ stage: ProgramStage },
-    formFoundation: RenderFoundation,
-    enrollmentMetadata: Enrollment,
+    programId: string;
+    orgUnit: OrgUnit;
+    onUpdateField: (...args: any[]) => any;
+    onUpdateDataEntryField: (...args: any[]) => any;
+    onStartAsyncUpdateField: (...args: any[]) => any;
+    onGetUnsavedAttributeValues?: (...args: any[]) => any;
+    teiId?: string;
+    firstStageMetaData?: { stage: ProgramStage };
+    formFoundation: RenderFoundation;
+    enrollmentMetadata: Enrollment;
 };
 
-class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
+class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
     render() {
         return (
             <BrowserBackWarningHOC
@@ -428,7 +426,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
         };
     }
 
-    handleUpdateField = (...args: Array<any>) => {
+    handleUpdateField = (...args: any[]) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
         this.props.onUpdateField(
             ...args,
@@ -440,7 +438,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
         );
     };
 
-    handleUpdateDataEntryField = (...args: Array<any>) => {
+    handleUpdateDataEntryField = (...args: any[]) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
         this.props.onUpdateDataEntryField(
             ...args,
@@ -452,7 +450,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
         );
     }
 
-    handleStartAsyncUpdateField = (...args: Array<any>) => {
+    handleStartAsyncUpdateField = (...args: any[]) => {
         const { programId, orgUnit, firstStageMetaData, formFoundation } = this.props;
         this.props.onStartAsyncUpdateField(
             ...args,
@@ -475,7 +473,6 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
         } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <PreEnrollmentDataEntryPure
                 onGetValidationContext={this.getValidationContext}
                 onUpdateFormField={this.handleUpdateField}
