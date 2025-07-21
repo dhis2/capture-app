@@ -1,6 +1,5 @@
-// @flow
-import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, ModalContent, ModalTitle, ModalActions } from '@dhis2/ui';
 import { CardList } from '../../../CardList';
@@ -22,7 +21,7 @@ const ExistingTEIContentsComponentPlain = ({
     programId,
     ExistingUniqueValueDialogActions,
     classes,
-}: Props) => {
+}: Props & WithStyles<typeof styles>) => {
     const items = [
         {
             id: teiId,
@@ -38,7 +37,6 @@ const ExistingTEIContentsComponentPlain = ({
                 </ModalTitle>
                 <CardList
                     currentProgramId={programId}
-                    // $FlowFixMe
                     items={items}
                     dataElements={dataElements}
                 />
@@ -63,5 +61,5 @@ const ExistingTEIContentsComponentPlain = ({
     );
 };
 
-export const ExistingTEIContentsComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const ExistingTEIContentsComponent =
     withStyles(styles)(ExistingTEIContentsComponentPlain);

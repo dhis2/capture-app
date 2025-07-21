@@ -1,6 +1,5 @@
-// @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import type { ErrorData } from '../../../D2Form/FormBuilder';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
@@ -24,11 +23,10 @@ type Props = {
     errorData: ErrorData,
     trackedEntityTypeName: string,
     attributeName: string,
-    classes: Object,
     onShowExisting: () => void,
 };
 
-class UniqueTEADuplicateErrorMessageCreatorPlain extends React.Component<Props> {
+class UniqueTEADuplicateErrorMessageCreatorPlain extends React.Component<Props & WithStyles<typeof getStyles>> {
     static renderPrerequisitesError() {
         return (
             <div>
@@ -95,15 +93,15 @@ class UniqueTEADuplicateErrorMessageCreatorPlain extends React.Component<Props> 
         const { trackedEntityTypeName, attributeName, errorData, classes } = this.props;
 
         if (!trackedEntityTypeName || !attributeName) {
-            return UniqueTEADuplicateErrorMessageCreator.renderPrerequisitesError();
+            return UniqueTEADuplicateErrorMessageCreatorPlain.renderPrerequisitesError();
         }
 
         if (!errorData) {
-            return UniqueTEADuplicateErrorMessageCreator.renderNoAccess(attributeName);
+            return UniqueTEADuplicateErrorMessageCreatorPlain.renderNoAccess(attributeName);
         }
 
         if (errorData.attributeValueExistsUnsaved) {
-            return UniqueTEADuplicateErrorMessageCreator.renderAttributeValueExistsUnsaved(attributeName);
+            return UniqueTEADuplicateErrorMessageCreatorPlain.renderAttributeValueExistsUnsaved(attributeName);
         }
 
         return this.renderDefault(attributeName, trackedEntityTypeName, classes.linkButton);

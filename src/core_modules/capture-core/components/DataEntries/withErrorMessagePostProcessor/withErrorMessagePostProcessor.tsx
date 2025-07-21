@@ -1,6 +1,6 @@
-// @flow
 import * as React from 'react';
-import type { PostProcessErrorMessage } from '../../D2Form/FormBuilder';
+import { ReactNode } from 'react';
+import type { ComponentType } from 'react';
 import { UniqueTEADuplicate } from './UniqueTEADuplicate/UniqueTEADuplicate.component';
 import type { ExistingUniqueValueDialogActionsComponent } from './UniqueTEADuplicate/existingTeiContents.types';
 
@@ -11,26 +11,27 @@ type Props = {
 type CacheItem = {
     errorMessage: string,
     errorData: any,
-    outputElement: React.Node,
+    outputElement: ReactNode,
 };
 
-type GetTrackedEntityTypeName = (props: Object) => string;
+type GetTrackedEntityTypeName = (props: Props) => string;
 
-export const withErrorMessagePostProcessor = (getTrackedEntityTypeName: GetTrackedEntityTypeName) => (InnerComponent: React.ComponentType<any>) =>
+
+export const withErrorMessagePostProcessor = (getTrackedEntityTypeName: GetTrackedEntityTypeName) => (InnerComponent: ComponentType<any>) =>
     class ErrorMessagePostProcessorHOC extends React.Component<Props> {
-        cache: CacheItem;
         constructor(props: Props) {
             super(props);
             this.cache = {};
         }
+        cache: CacheItem | Record<string, never>;
 
-        postProcessErrorMessage: PostProcessErrorMessage = ({
+        postProcessErrorMessage = ({
             errorMessage,
             errorType,
             errorData,
             id,
             fieldLabel,
-        }) => {
+        }: any) => {
             if (errorType !== 'unique') {
                 return errorMessage;
             }
@@ -62,7 +63,6 @@ export const withErrorMessagePostProcessor = (getTrackedEntityTypeName: GetTrack
             const { ExistingUniqueValueDialogActions, ...passOnProps } = this.props;
 
             return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     onPostProcessErrorMessage={this.postProcessErrorMessage}
                     {...passOnProps}
@@ -70,4 +70,3 @@ export const withErrorMessagePostProcessor = (getTrackedEntityTypeName: GetTrack
             );
         }
     };
-
