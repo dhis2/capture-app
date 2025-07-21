@@ -4,7 +4,7 @@ import type { CachedTrackedEntityAttribute } from '../../../../../../storageCont
 
 type Props = {
     selectedScopeId: string;
-    attributes?: Array<CachedTrackedEntityAttribute>;
+    attributes: Array<CachedTrackedEntityAttribute> | null;
 };
 
 export const useOptionSetsForAttributes = ({ attributes, selectedScopeId }: Props) => {

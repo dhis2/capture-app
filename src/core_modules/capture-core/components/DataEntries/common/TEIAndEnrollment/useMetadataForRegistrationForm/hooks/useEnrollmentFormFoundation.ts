@@ -7,13 +7,13 @@ import type { CachedOptionSet, CachedTrackedEntityAttribute } from '../../../../
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {
-    scopeType: keyof typeof scopeTypes;
-    optionSets?: Array<CachedOptionSet>;
-    trackedEntityType?: TrackedEntityType;
-    trackedEntityTypeCollection?: TrackedEntityType;
-    program?: Program;
-    cachedTrackedEntityAttributes?: Array<CachedTrackedEntityAttribute>;
-    dataEntryFormConfig?: DataEntryFormConfig;
+    scopeType: typeof scopeTypes[keyof typeof scopeTypes];
+    optionSets: Array<CachedOptionSet>;
+    trackedEntityType: TrackedEntityType;
+    trackedEntityTypeCollection: TrackedEntityType;
+    program: Program;
+    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>;
+    dataEntryFormConfig: DataEntryFormConfig | null;
     configIsFetched: boolean;
     locale: string;
 };

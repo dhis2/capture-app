@@ -3,7 +3,7 @@ import { getTrackedEntityAttributes } from '../getFunctions/getTrackedEntityAttr
 
 type Props = {
     selectedScopeId: string;
-    attributeIds?: Array<string>;
+    attributeIds: Array<string> | null;
 };
 
 export const useTrackedEntityAttributes = ({ selectedScopeId, attributeIds }: Props) => {

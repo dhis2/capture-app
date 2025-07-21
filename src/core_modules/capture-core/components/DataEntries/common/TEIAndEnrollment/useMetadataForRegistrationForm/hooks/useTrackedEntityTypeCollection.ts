@@ -7,15 +7,15 @@ import type { CachedTrackedEntityType } from '../../../../../../storageControlle
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {
-    trackedEntityType?: CachedTrackedEntityType;
-    optionSets?: Array<OptionSet>;
-    dataEntryFormConfig?: DataEntryFormConfig;
+    trackedEntityType: CachedTrackedEntityType | null;
+    optionSets: Array<OptionSet> | null;
+    dataEntryFormConfig: DataEntryFormConfig | null;
     configIsFetched: boolean;
-    locale?: string;
+    locale: string;
 };
 
 type ReturnValues = {
-    trackedEntityTypeCollection?: TrackedEntityType;
+    trackedEntityTypeCollection: TrackedEntityType | null;
 };
 
 export const useTrackedEntityTypeCollection = ({

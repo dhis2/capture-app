@@ -1,7 +1,7 @@
 import type { TeiRegistration, Enrollment } from '../../../../../metaData';
 import { FormFieldTypes } from '../../../../D2Form/FormFieldPlugin/FormFieldPlugin.const';
 
-export type RegistrationFormMetadata = TeiRegistration | Enrollment | null | undefined;
+export type RegistrationFormMetadata = TeiRegistration | Enrollment | null;
 
 type FieldElementObjectTypes = 'TrackedEntityAttribute' | 'Attribute';
 

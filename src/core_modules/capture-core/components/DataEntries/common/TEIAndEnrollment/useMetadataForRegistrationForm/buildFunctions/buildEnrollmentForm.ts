@@ -10,12 +10,12 @@ import { buildSearchGroup } from '../../../../../SearchBox/hooks';
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {
-    cachedOptionSets?: Array<CachedOptionSet>;
-    cachedTrackedEntityType?: CachedTrackedEntityType;
-    trackedEntityTypeCollection?: TrackedEntityType;
-    cachedProgram?: CachedProgram;
-    cachedTrackedEntityAttributes?: Array<CachedTrackedEntityAttribute>;
-    dataEntryFormConfig?: DataEntryFormConfig;
+    cachedOptionSets: Array<CachedOptionSet>;
+    cachedTrackedEntityType: CachedTrackedEntityType;
+    trackedEntityTypeCollection: TrackedEntityType;
+    cachedProgram: CachedProgram;
+    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>;
+    dataEntryFormConfig: DataEntryFormConfig | null;
     locale: string;
     minorServerVersion?: number;
 };
@@ -30,15 +30,12 @@ export const buildEnrollmentForm = async ({
     locale,
     minorServerVersion,
 }: Props) => {
-    if (!cachedProgram) {
-        throw new Error('cachedProgram is required');
-    }
     const searchGroups = await buildSearchGroup(cachedProgram, locale);
     const enrollmentFactory = new EnrollmentFactory({
-        cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes?.map(tea => [tea.id, tea]) ?? []),
-        cachedOptionSets: new Map(cachedOptionSets?.map(optionSet => [optionSet.id, optionSet]) ?? []),
-        cachedTrackedEntityTypes: new Map(cachedTrackedEntityType ? [[cachedTrackedEntityType.id, cachedTrackedEntityType]] : []),
-        trackedEntityTypeCollection: new Map(trackedEntityTypeCollection ? [[trackedEntityTypeCollection.id, trackedEntityTypeCollection]] : []),
+        cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes.map(tea => [tea.id, tea])),
+        cachedOptionSets: new Map(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),
+        cachedTrackedEntityTypes: new Map([[cachedTrackedEntityType.id, cachedTrackedEntityType]]),
+        trackedEntityTypeCollection: new Map([[trackedEntityTypeCollection.id, trackedEntityTypeCollection]]),
         locale,
         dataEntryFormConfig,
         minorServerVersion,

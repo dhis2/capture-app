@@ -77,7 +77,7 @@ function getActiveUniqueItemFromCache(
 }
 
 export function getGeneratedUniqueValuesAsync(
-    foundation: RenderFoundation | null | undefined,
+    foundation: RenderFoundation | null,
     generatedUniqueValuesCache: {[id: string]: CacheItem},
     staticPatternValues: StaticPatternValues,
     querySingleResource: QuerySingleResource,
@@ -113,7 +113,7 @@ export function getGeneratedUniqueValuesAsync(
 }
 
 export const getUniqueValuesForAttributesWithoutValue = async (
-    foundation: RenderFoundation | null | undefined,
+    foundation: RenderFoundation | null,
     attributes: Array<any>,
     staticPatternValues: StaticPatternValues,
     querySingleResource: QuerySingleResource,
