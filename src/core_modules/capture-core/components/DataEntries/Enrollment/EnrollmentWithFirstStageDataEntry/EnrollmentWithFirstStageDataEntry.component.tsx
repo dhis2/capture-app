@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import { DataEntry } from '../../../DataEntry';
 import { Assignee } from '../../SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
@@ -31,7 +30,7 @@ const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
 
-const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal?: boolean | null) => (formHorizontal ? 'center' : 'left');
 
 const baseComponentStyles = {
     labelContainerStyle: {
@@ -50,31 +49,31 @@ const baseComponentStylesVertical = {
     },
 };
 
-function defaultFilterProps(props: Object) {
+function defaultFilterProps(props: any) {
     const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
     return passOnProps;
 }
 
-const getBaseComponentProps = (props: Object) => ({
+const getBaseComponentProps = (props: any) => ({
     fieldOptions: props.fieldOptions,
     formHorizontal: props.formHorizontal,
     styles: props.formHorizontal ? baseComponentStylesVertical : baseComponentStyles,
 });
 
-const createComponentProps = (props: Object, componentProps: Object) => ({
+const createComponentProps = (props: any, componentProps: any) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
 
-const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+const getOrientation = (formHorizontal?: boolean | null) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
                 withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) =>
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
@@ -93,8 +92,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
                 withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) =>
+                    onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: any) =>
                         `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
@@ -109,18 +108,18 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 );
 
 const getStageGeometrySettings = () => ({
-    isApplicable: (props: Object) => {
+    isApplicable: (props: any) => {
         const featureType = props.firstStageMetaData?.stage?.stageForm?.featureType;
         return ['Polygon', 'Point'].includes(featureType);
     },
-    getComponent: (props: Object) => {
+    getComponent: (props: any) => {
         const featureType = props.firstStageMetaData?.stage?.stageForm?.featureType;
         if (featureType === 'Polygon') {
             return polygonComponent;
         }
         return pointComponent;
     },
-    getComponentProps: (props: Object) => {
+    getComponentProps: (props: any) => {
         const featureType = props.firstStageMetaData?.stage?.stageForm?.featureType;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
@@ -157,8 +156,8 @@ const getCompleteFieldSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                         })(
                             withDisplayMessages()(
@@ -172,9 +171,9 @@ const getCompleteFieldSettingsFn = () => {
             ),
         );
     const completeSettings = {
-        isApplicable: (props: Object) => props.firstStageMetaData && props.firstStageMetaData.stage?.stageForm,
+        isApplicable: (props: any) => props.firstStageMetaData && props.firstStageMetaData.stage?.stageForm,
         getComponent: () => completeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             label: i18n.t('Complete event'),
             id: 'complete',
         }),
@@ -197,8 +196,8 @@ const getReportDateSettingsFn = () => {
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
+                            onGetUseVerticalOrientation: (props: any) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: any) =>
                                 `${props.fieldOptions && props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -212,9 +211,9 @@ const getReportDateSettingsFn = () => {
             ),
         );
     const reportDateSettings = {
-        isApplicable: (props: Object) => props.firstStageMetaData?.stage?.stageForm,
+        isApplicable: (props: any) => props.firstStageMetaData?.stage?.stageForm,
         getComponent: () => reportDateComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: any) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
             label: props.firstStageMetaData?.stage?.stageForm?.getLabel('occurredAt'),
             required: true,
@@ -224,7 +223,7 @@ const getReportDateSettingsFn = () => {
             dateFormat: systemSettingsStore.get().dateFormat,
         }),
         getPropName: () => stageMainDataIds.OCCURRED_AT,
-        getValidatorContainers: (props: Object) => getEventDateValidatorContainers(props),
+        getValidatorContainers: (props: any) => getEventDateValidatorContainers(props),
         getMeta: () => ({
             section: sectionKeysForFirstStageDataEntry.STAGE_BASIC_INFO,
         }),
@@ -237,7 +236,7 @@ const getAssigneeSettingsFn = () => {
     const assigneeComponent =
         withTransformPropName(['onBlur', 'onSet'])(
             withFocusSaver()(
-                withFilterProps((props: Object) => {
+                withFilterProps((props: any) => {
                     const defaultFiltred = defaultFilterProps(props);
                     const { validationAttempted, touched, ...passOnProps } = defaultFiltred;
                     return passOnProps;
@@ -246,12 +245,12 @@ const getAssigneeSettingsFn = () => {
         );
 
     return {
-        isApplicable: (props: Object) => {
+        isApplicable: (props: any) => {
             const enableUserAssignment = props.firstStageMetaData && props.firstStageMetaData.stage.enableUserAssignment;
             return !!enableUserAssignment;
         },
         getComponent: () => assigneeComponent,
-        getComponentProps: (props: Object) => createComponentProps({}, {
+        getComponentProps: (props: any) => createComponentProps({}, {
             orientation: getOrientation(props.formHorizontal),
         }),
         getPropName: () => 'assignee',
