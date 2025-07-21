@@ -1,4 +1,3 @@
-// @flow
 import { useMemo } from 'react';
 import { useOptionSetsForAttributes } from './hooks/useOptionSetsForAttributes';
 import { scopeTypes } from '../../../../../metaData';
@@ -11,9 +10,9 @@ import { useUserLocale } from '../../../../../utils/localeData/useUserLocale';
 import { useTrackedEntityAttributes } from './hooks/useTrackedEntityAttributes';
 import { useDataEntryFormConfig } from './hooks/useDataEntryFormConfig';
 
-type Props = {|
-    selectedScopeId: string,
-|}
+type Props = {
+    selectedScopeId: string;
+};
 
 export const FieldElementObjectTypes = Object.freeze({
     // TODO [DHIS2-17605] - Unify TEA and DataElement to a common key
@@ -67,7 +66,6 @@ export const useMetadataForRegistrationForm = ({ selectedScopeId }: Props) => {
         trackedEntityType,
         trackedEntityTypeCollection,
         cachedTrackedEntityAttributes,
-        selectedScopeId,
         dataEntryFormConfig,
         configIsFetched,
         locale,

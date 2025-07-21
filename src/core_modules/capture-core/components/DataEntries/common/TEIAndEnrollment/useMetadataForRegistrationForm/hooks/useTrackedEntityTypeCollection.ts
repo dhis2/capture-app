@@ -1,4 +1,3 @@
-// @flow
 import { useConfig } from '@dhis2/app-runtime';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildTrackedEntityTypeCollection } from '../buildFunctions/buildTrackedEntityTypeCollection';
@@ -8,16 +7,16 @@ import type { CachedTrackedEntityType } from '../../../../../../storageControlle
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {
-    trackedEntityType: ?CachedTrackedEntityType,
-    optionSets: ?Array<OptionSet>,
-    dataEntryFormConfig: ?DataEntryFormConfig,
-    configIsFetched: boolean,
-    locale: ?string,
+    trackedEntityType?: CachedTrackedEntityType;
+    optionSets?: Array<OptionSet>;
+    dataEntryFormConfig?: DataEntryFormConfig;
+    configIsFetched: boolean;
+    locale?: string;
 };
 
-type ReturnValues = {|
-    trackedEntityTypeCollection: ?TrackedEntityType,
-|};
+type ReturnValues = {
+    trackedEntityTypeCollection?: TrackedEntityType;
+};
 
 export const useTrackedEntityTypeCollection = ({
     trackedEntityType,
@@ -27,7 +26,6 @@ export const useTrackedEntityTypeCollection = ({
     locale,
 }: Props): ReturnValues => {
     const { data: trackedEntityAttributes } = useIndexedDBQuery(
-        // $FlowFixMe - QueryKey can be undefined
         ['trackedEntityAttributes', trackedEntityType?.id],
         () => getTrackedEntityAttributes(
             trackedEntityType
@@ -37,26 +35,23 @@ export const useTrackedEntityTypeCollection = ({
                         acc.push(trackedEntityAttributeId);
                     }
                     return acc;
-                }, []) ?? []),
+                }, [] as string[]) ?? []),
         { enabled: !!trackedEntityType },
     );
 
-    const { serverVersion: { minor: minorServerVersion } } = useConfig();
+    const { serverVersion } = useConfig();
+    const minorServerVersion = serverVersion?.minor;
 
     const { data: trackedEntityTypeCollection } = useIndexedDBQuery(
-        // $FlowFixMe - QueryKey can be undefined
         ['trackedEntityTypeCollection', trackedEntityType?.id],
         () => buildTrackedEntityTypeCollection({
-            // $FlowFixMe
             cachedTrackedEntityType: trackedEntityType,
             cachedTrackedEntityAttributes: new Map(
                 trackedEntityAttributes
                     ?.map(trackedEntityAttribute => [trackedEntityAttribute.id, trackedEntityAttribute]),
             ),
-            // $FlowFixMe
             cachedOptionSets: new Map(optionSets?.map(optionSet => [optionSet.id, optionSet])),
             dataEntryFormConfig,
-            // $FlowFixMe
             locale,
             minorServerVersion,
         }),

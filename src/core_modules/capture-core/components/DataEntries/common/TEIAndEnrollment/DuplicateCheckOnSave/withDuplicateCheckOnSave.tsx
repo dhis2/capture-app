@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useMemo } from 'react';
 import { scopeTypes, type Enrollment, type TeiRegistration } from '../../../../../metaData';
 import { PossibleDuplicatesDialog } from '../../../../PossibleDuplicatesDialog';
@@ -6,7 +5,7 @@ import { useDuplicateCheckerOnSaveReduxProvider } from './useDuplicateCheckerOnS
 import { useDuplicateCheckerOnSave } from './useDuplicateCheckerOnSave';
 import type { Props } from './withDuplicateCheckOnSave.types';
 
-const getMetadataInfo = (enrollmentMetadata, teiRegistrationMetadata): { metadata?: Enrollment | TeiRegistration, scopeType: string, passOnMetadata: Object } => {
+const getMetadataInfo = (enrollmentMetadata: Enrollment | undefined, teiRegistrationMetadata: TeiRegistration | undefined): { metadata?: Enrollment | TeiRegistration; scopeType: string; passOnMetadata: Record<string, any> } => {
     if (enrollmentMetadata) {
         return {
             metadata: enrollmentMetadata,

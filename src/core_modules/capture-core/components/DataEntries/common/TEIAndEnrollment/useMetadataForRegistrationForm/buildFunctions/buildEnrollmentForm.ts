@@ -1,4 +1,3 @@
-// @flow
 import { EnrollmentFactory } from '../../../../../../metaDataMemoryStoreBuilders/programs/factory/enrollment';
 import type {
     CachedOptionSet,
@@ -10,16 +9,16 @@ import type { TrackedEntityType } from '../../../../../../metaData';
 import { buildSearchGroup } from '../../../../../SearchBox/hooks';
 import type { DataEntryFormConfig } from '../types';
 
-type Props = {|
-    cachedOptionSets: Array<CachedOptionSet>,
-    cachedTrackedEntityType: CachedTrackedEntityType,
-    trackedEntityTypeCollection: TrackedEntityType,
-    cachedProgram: CachedProgram,
-    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    dataEntryFormConfig: ?DataEntryFormConfig,
-    locale: string,
-    minorServerVersion: number,
-|}
+type Props = {
+    cachedOptionSets?: Array<CachedOptionSet>;
+    cachedTrackedEntityType?: CachedTrackedEntityType;
+    trackedEntityTypeCollection?: TrackedEntityType;
+    cachedProgram?: CachedProgram;
+    cachedTrackedEntityAttributes?: Array<CachedTrackedEntityAttribute>;
+    dataEntryFormConfig?: DataEntryFormConfig;
+    locale: string;
+    minorServerVersion?: number;
+};
 
 export const buildEnrollmentForm = async ({
     cachedOptionSets,
@@ -31,13 +30,15 @@ export const buildEnrollmentForm = async ({
     locale,
     minorServerVersion,
 }: Props) => {
-    // $FlowFixMe - cachedProgram does not contain trackedEntityTypeAttributes
+    if (!cachedProgram) {
+        throw new Error('cachedProgram is required');
+    }
     const searchGroups = await buildSearchGroup(cachedProgram, locale);
     const enrollmentFactory = new EnrollmentFactory({
-        cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes.map(tea => [tea.id, tea])),
-        cachedOptionSets: new Map(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),
-        cachedTrackedEntityTypes: new Map([[cachedTrackedEntityType.id, cachedTrackedEntityType]]),
-        trackedEntityTypeCollection: new Map([[trackedEntityTypeCollection.id, trackedEntityTypeCollection]]),
+        cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes?.map(tea => [tea.id, tea]) ?? []),
+        cachedOptionSets: new Map(cachedOptionSets?.map(optionSet => [optionSet.id, optionSet]) ?? []),
+        cachedTrackedEntityTypes: new Map(cachedTrackedEntityType ? [[cachedTrackedEntityType.id, cachedTrackedEntityType]] : []),
+        trackedEntityTypeCollection: new Map(trackedEntityTypeCollection ? [[trackedEntityTypeCollection.id, trackedEntityTypeCollection]] : []),
         locale,
         dataEntryFormConfig,
         minorServerVersion,

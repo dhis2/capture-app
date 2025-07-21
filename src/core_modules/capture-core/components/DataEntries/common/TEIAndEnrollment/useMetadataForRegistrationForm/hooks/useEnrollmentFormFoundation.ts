@@ -1,4 +1,3 @@
-// @flow
 import { useConfig } from '@dhis2/app-runtime';
 import { useIndexedDBQuery } from '../../../../../../utils/reactQueryHelpers';
 import { buildEnrollmentForm } from '../buildFunctions/buildEnrollmentForm';
@@ -8,15 +7,15 @@ import type { CachedOptionSet, CachedTrackedEntityAttribute } from '../../../../
 import type { DataEntryFormConfig } from '../types';
 
 type Props = {
-    scopeType: $Values<typeof scopeTypes>,
-    optionSets: ?Array<CachedOptionSet>,
-    trackedEntityType: ?TrackedEntityType,
-    trackedEntityTypeCollection: ?TrackedEntityType,
-    program: ?Program,
-    cachedTrackedEntityAttributes: ?Array<CachedTrackedEntityAttribute>,
-    dataEntryFormConfig: ?DataEntryFormConfig,
-    configIsFetched: boolean,
-    locale: string,
+    scopeType: keyof typeof scopeTypes;
+    optionSets?: Array<CachedOptionSet>;
+    trackedEntityType?: TrackedEntityType;
+    trackedEntityTypeCollection?: TrackedEntityType;
+    program?: Program;
+    cachedTrackedEntityAttributes?: Array<CachedTrackedEntityAttribute>;
+    dataEntryFormConfig?: DataEntryFormConfig;
+    configIsFetched: boolean;
+    locale: string;
 };
 
 export const useEnrollmentFormFoundation = ({
@@ -30,20 +29,15 @@ export const useEnrollmentFormFoundation = ({
     program,
     locale,
 }: Props) => {
-    const { serverVersion: { minor: minorServerVersion } } = useConfig();
+    const { serverVersion } = useConfig();
+    const minorServerVersion = serverVersion?.minor;
     const { data: enrollment, isLoading, error } = useIndexedDBQuery(
-        // $FlowFixMe - QueryKey can be undefined
         ['enrollmentForm', program?.id],
         () => buildEnrollmentForm({
-            // $FlowFixMe - Flow does not understand that the values are not null here
             cachedProgram: program,
-            // $FlowFixMe
             cachedTrackedEntityType: trackedEntityType,
-            // $FlowFixMe
             trackedEntityTypeCollection,
-            // $FlowFixMe
             cachedTrackedEntityAttributes,
-            // $FlowFixMe
             cachedOptionSets: optionSets,
             dataEntryFormConfig,
             locale,

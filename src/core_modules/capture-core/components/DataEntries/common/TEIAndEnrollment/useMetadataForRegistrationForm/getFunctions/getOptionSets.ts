@@ -1,4 +1,3 @@
-// @flow
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../../../storageControllers';
 
 export const getOptionSets = (optionSetIds: Array<string>) => {

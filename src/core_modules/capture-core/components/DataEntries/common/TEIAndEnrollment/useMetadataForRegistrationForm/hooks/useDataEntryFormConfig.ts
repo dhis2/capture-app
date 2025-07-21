@@ -1,10 +1,8 @@
-// @flow
-
 import { useApiMetadataQuery } from '../../../../../../utils/reactQueryHelpers';
 
-type Props = {|
-    selectedScopeId: string,
-|}
+type Props = {
+    selectedScopeId: string;
+};
 
 const configQuery = {
     resource: 'dataStore/capture/dataEntryForms',

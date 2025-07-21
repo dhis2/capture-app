@@ -1,4 +1,3 @@
-// @flow
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import moment from 'moment';
@@ -7,12 +6,12 @@ import type { RenderFoundation } from '../../../../metaData';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
 
 type StaticPatternValues = {
-    orgUnitCode: string,
+    orgUnitCode: string;
 };
 
 type CacheItem = {
-    value: any,
-    expires: number,
+    value: any;
+    expires: number;
 };
 
 function getExpiryTimeStamp() {
@@ -78,8 +77,8 @@ function getActiveUniqueItemFromCache(
 }
 
 export function getGeneratedUniqueValuesAsync(
-    foundation: ?RenderFoundation,
-    generatedUniqueValuesCache: Object,
+    foundation: RenderFoundation | null | undefined,
+    generatedUniqueValuesCache: {[id: string]: CacheItem},
     staticPatternValues: StaticPatternValues,
     querySingleResource: QuerySingleResource,
 ) {
@@ -114,8 +113,8 @@ export function getGeneratedUniqueValuesAsync(
 }
 
 export const getUniqueValuesForAttributesWithoutValue = async (
-    foundation: ?RenderFoundation,
-    attributes: Object,
+    foundation: RenderFoundation | null | undefined,
+    attributes: Array<any>,
     staticPatternValues: StaticPatternValues,
     querySingleResource: QuerySingleResource,
 ) => {
@@ -125,7 +124,7 @@ export const getUniqueValuesForAttributesWithoutValue = async (
     const uniqueDataElements = foundation.getElements().filter(dataElement => dataElement.unique && dataElement.unique.generatable);
 
     if (uniqueDataElements && uniqueDataElements.length > 0) {
-        const uniqueDataElementsWithoutValue = uniqueDataElements.reduce((acc, dataElement) => {
+        const uniqueDataElementsWithoutValue = uniqueDataElements.reduce((acc: any[], dataElement) => {
             const matchedApiAttribute = attributes.find(attribute => attribute.attribute === dataElement.id);
             if (matchedApiAttribute) {
                 if (matchedApiAttribute.unique && !matchedApiAttribute.value) {

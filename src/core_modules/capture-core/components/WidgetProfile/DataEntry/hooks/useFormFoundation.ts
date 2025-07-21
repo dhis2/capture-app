@@ -4,7 +4,7 @@ import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { buildFormFoundation } from '../FormFoundation';
 import type { DataEntryFormConfig } from '../../../DataEntries/common/TEIAndEnrollment';
 
-export const useFormFoundation = (programAPI: any, dataEntryFormConfig: DataEntryFormConfig | null) => {
+export const useFormFoundation = (programAPI: any, dataEntryFormConfig: DataEntryFormConfig | null | undefined) => {
     const [formFoundation, setFormFoundation] = useState<any>({});
     const dataEngine = useDataEngine();
     const { serverVersion } = useConfig();
