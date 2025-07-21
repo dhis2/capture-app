@@ -19,11 +19,11 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
             })}
         </ModalTitle>
         <ModalContent>
-            <p>{i18n.t('Would you like to complete the enrollment and all active events as well?') as string}</p>
+            <p>{i18n.t('Would you like to complete the enrollment and all active events as well?')}</p>
 
             {Object.keys(programStagesWithActiveEvents).length !== 0 && (
                 <>
-                    {i18n.t('The following events will be completed:') as string}
+                    {i18n.t('The following events will be completed:')}
                     {Object.keys(programStagesWithActiveEvents).map((key) => {
                         const { count, name } = programStagesWithActiveEvents[key];
                         return (
@@ -43,7 +43,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
 
             {Object.keys(programStagesWithoutAccess).length !== 0 && (
                 <>
-                    {i18n.t('The following events will not be completed due to lack of access:') as string}
+                    {i18n.t('The following events will not be completed due to lack of access:')}
                     {Object.keys(programStagesWithoutAccess).map((key) => {
                         const { count, name } = programStagesWithoutAccess[key];
 
@@ -65,13 +65,13 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={onCompleteEnrollmentAndEvents} primary>
-                        {i18n.t('Yes, complete enrollment and events') as string}
+                        {i18n.t('Yes, complete enrollment and events')}
                     </Button>
                     <Button onClick={onCompleteEnrollment} secondary dataTest="enrollment-actions-complete-button">
-                        {i18n.t('Complete enrollment only') as string}
+                        {i18n.t('Complete enrollment only')}
                     </Button>
                     <Button onClick={onCancel} secondary>
-                        {i18n.t('No, cancel') as string}
+                        {i18n.t('No, cancel')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
@@ -88,14 +88,14 @@ export const CompleteEnrollmentModalComponent = ({ programStageName, onCancel, o
             })}
         </ModalTitle>
         <ModalContent>
-            <p>{i18n.t('Would you like to complete the enrollment?') as string}</p>
+            <p>{i18n.t('Would you like to complete the enrollment?')}</p>
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={onCompleteEnrollment} primary>
-                        {i18n.t('Complete enrollment') as string}
+                        {i18n.t('Complete enrollment')}
                     </Button>
                     <Button onClick={onCancel} secondary>
-                        {i18n.t('No, cancel') as string}
+                        {i18n.t('No, cancel')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
