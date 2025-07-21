@@ -1,4 +1,3 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getApplicableRuleEffectsForTrackerProgram, updateRulesEffects } from '../../../../rules';
@@ -17,10 +16,11 @@ import { addFormData } from '../../../D2Form/actions/form.actions';
 import type { ProgramCategory } from '../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
 import { getDataEntryPropsToInclude } from '../EnrollmentWithFirstStageDataEntry';
 import { clearPrepopulatedData } from '../../../Pages/New/NewPage.actions';
+import type { ReduxAction } from '../../../../../capture-core-utils/types';
 
 const itemId = 'newEnrollment';
 
-type DataEntryPropsToInclude = Array<Object>;
+type DataEntryPropsToInclude = Array<any>;
 
 const enrollmentDataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
@@ -58,16 +58,16 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     programCategory,
     formFoundation,
 }: {
-    program: TrackerProgram,
-    orgUnit: OrgUnit,
-    dataEntryId: string,
-    extraActions?: Array<ReduxAction<any, any>>,
-    extraDataEntryProps?: Array<Object>,
-    formValues: { [key: string]: any },
-    clientValues: { [key: string]: any },
-    firstStage?: ProgramStage,
-    programCategory?: ProgramCategory,
-    formFoundation: RenderFoundation,
+    program: TrackerProgram;
+    orgUnit: OrgUnit;
+    dataEntryId: string;
+    extraActions?: Array<ReduxAction<any, any>>;
+    extraDataEntryProps?: Array<any>;
+    formValues: { [key: string]: any };
+    clientValues: { [key: string]: any };
+    firstStage?: ProgramStage;
+    programCategory?: ProgramCategory;
+    formFoundation: RenderFoundation;
 }) => {
     const formId = getDataEntryKey(dataEntryId, itemId);
     const addFormDataActions = addFormData(`${dataEntryId}-${itemId}`, formValues);
@@ -105,6 +105,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async ({
     return batchActions([
         openDataEntryForNewEnrollment(
             dataEntryId,
+            {},
         ),
         ...dataEntryActions,
         addFormDataActions,
