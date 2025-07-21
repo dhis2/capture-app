@@ -2,15 +2,15 @@
 # Translators:
 # Philip Larsen Donnelly, 2024
 # Viktor Varland <viktor@dhis2.org>, 2024
-# easylin <lin_xd@126.com>, 2025
 # 晓东 林 <13981924470@126.com>, 2025
+# easylin <lin_xd@126.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2025-07-07T08:21:16.395Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2025\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2025\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1657,7 +1657,7 @@ msgid "You do not have access to complete events"
 msgstr "您无法访问完成的事件"
 
 msgid "There is a bulk data entry with unsaved changes"
-msgstr ""
+msgstr "批量输入数据时出现未保存的更改数据"
 
 msgid "Complete events"
 msgstr "完成事件"
@@ -1862,19 +1862,19 @@ msgid "Show All"
 msgstr "显示全部"
 
 msgid "Add to ongoing bulk data entry"
-msgstr ""
+msgstr "添加到正在进行的批量数据录入"
 
 msgid "Add page to ongoing bulk data entry"
-msgstr ""
+msgstr "为正在进行的批量数据录入添加页面"
 
 msgid "Available bulk entry forms"
-msgstr ""
+msgstr "可用的批量输入表格"
 
 msgid "Open in bulk data entry"
-msgstr ""
+msgstr "打开批量数据录入"
 
 msgid "Open page in bulk data entry"
-msgstr ""
+msgstr "批量输入数据时打开页面"
 
 msgid "{{count}} selected"
 msgid_plural "{{count}} selected"

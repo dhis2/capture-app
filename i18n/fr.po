@@ -368,8 +368,8 @@ msgstr "Terminer l'inscription"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
-"Un doublon existe (mais des erreurs ont été commises. Voir le journal pour "
-"plus de détails"
+"Il existe un doublon (mais il y a eu des erreurs). Voir le journal pour plus"
+" de détails)."
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
@@ -955,7 +955,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 msgid "Missing search criteria"
-msgstr ""
+msgstr "Critères de recherche manquants"
 
 msgid "Back to search"
 msgstr " Retour à l'écran de recherche"
@@ -970,7 +970,7 @@ msgid "Loading"
 msgstr "Chargement"
 
 msgid "An error occurred while loading the form"
-msgstr ""
+msgstr "Une erreur s'est produite lors du chargement du formulaire"
 
 msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
@@ -991,7 +991,7 @@ msgid "No results found for "
 msgstr "Aucun résultat trouvé pour"
 
 msgid "Choose an organisation unit in the form below"
-msgstr ""
+msgstr "Choisissez une unité d'organisation dans le formulaire ci-dessous"
 
 msgid "None selected"
 msgstr "Aucune sélection"
@@ -1122,7 +1122,7 @@ msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
 
 msgid "No tracked entity types available"
-msgstr ""
+msgstr "Aucun type d'entité suivie n'est disponible"
 
 msgid "Assigned to"
 msgstr "Attribue"
@@ -1152,9 +1152,11 @@ msgid ""
 "Describe the reason you are checking for enrollments in this protected "
 "program"
 msgstr ""
+"Décrivez la raison pour laquelle vous vérifiez les inscriptions à ce "
+"programme protégé."
 
 msgid "Check for enrollments"
-msgstr ""
+msgstr "Vérifier les inscriptions"
 
 msgid ""
 "You must provide a reason to check for enrollments in this protected "
