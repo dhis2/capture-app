@@ -24,7 +24,7 @@ export type PlainProps = {
 export type Props = {
     programAPI: any;
     orgUnitId: string;
-    dataEntryFormConfig?: DataEntryFormConfig;
+    dataEntryFormConfig: DataEntryFormConfig | null;
     onCancel: () => void;
     onDisable: () => void;
     onEnable: () => void;

@@ -1,4 +1,3 @@
-// @flow
 import { useCallback, useState, useRef, useEffect } from 'react';
 import type { Input } from './useDuplicateCheckerOnSave.types';
 
@@ -11,7 +10,7 @@ export const useDuplicateCheckerOnSave = ({
     duplicatesReviewPageSize,
 }: Input) => {
     const [duplicatesVisible, showDuplicates] = useState(false);
-    const saveRef = useRef();
+    const saveRef = useRef<(() => void) | undefined>(undefined);
 
     useEffect(() => onResetPossibleDuplicates, [onResetPossibleDuplicates]);
 

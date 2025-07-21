@@ -1,4 +1,3 @@
-// @flow
 import { EnrollmentFactory } from '../../../../../../metaDataMemoryStoreBuilders/programs/factory/enrollment';
 import type {
     CachedOptionSet,
@@ -10,16 +9,16 @@ import type { TrackedEntityType } from '../../../../../../metaData';
 import { buildSearchGroup } from '../../../../../SearchBox/hooks';
 import type { DataEntryFormConfig } from '../types';
 
-type Props = {|
-    cachedOptionSets: Array<CachedOptionSet>,
-    cachedTrackedEntityType: CachedTrackedEntityType,
-    trackedEntityTypeCollection: TrackedEntityType,
-    cachedProgram: CachedProgram,
-    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-    dataEntryFormConfig: ?DataEntryFormConfig,
-    locale: string,
-    minorServerVersion: number,
-|}
+type Props = {
+    cachedOptionSets: Array<CachedOptionSet>;
+    cachedTrackedEntityType: CachedTrackedEntityType;
+    trackedEntityTypeCollection: TrackedEntityType;
+    cachedProgram: CachedProgram;
+    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>;
+    dataEntryFormConfig: DataEntryFormConfig | null;
+    locale: string;
+    minorServerVersion?: number;
+};
 
 export const buildEnrollmentForm = async ({
     cachedOptionSets,
@@ -31,7 +30,6 @@ export const buildEnrollmentForm = async ({
     locale,
     minorServerVersion,
 }: Props) => {
-    // $FlowFixMe - cachedProgram does not contain trackedEntityTypeAttributes
     const searchGroups = await buildSearchGroup(cachedProgram, locale);
     const enrollmentFactory = new EnrollmentFactory({
         cachedTrackedEntityAttributes: new Map(cachedTrackedEntityAttributes.map(tea => [tea.id, tea])),

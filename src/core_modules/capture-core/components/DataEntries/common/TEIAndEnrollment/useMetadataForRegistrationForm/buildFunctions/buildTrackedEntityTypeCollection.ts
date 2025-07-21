@@ -1,4 +1,3 @@
-// @flow
 import { TrackedEntityTypeFactory } from '../../../../../../metaDataMemoryStoreBuilders/trackedEntityTypes/factory';
 import type {
     CachedOptionSet,
@@ -7,14 +6,14 @@ import type {
 } from '../../../../../../storageControllers';
 import type { DataEntryFormConfig } from '../types';
 
-type Props = {|
-    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-    cachedOptionSets: Map<string, CachedOptionSet>,
-    cachedTrackedEntityType: CachedTrackedEntityType,
-    dataEntryFormConfig: ?DataEntryFormConfig,
-    locale: string,
-    minorServerVersion: number,
-|}
+type Props = {
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+    cachedOptionSets: Map<string, CachedOptionSet>;
+    cachedTrackedEntityType: CachedTrackedEntityType;
+    dataEntryFormConfig: DataEntryFormConfig | null;
+    locale: string;
+    minorServerVersion?: number;
+};
 
 export const buildTrackedEntityTypeCollection = async ({
     cachedTrackedEntityAttributes,
