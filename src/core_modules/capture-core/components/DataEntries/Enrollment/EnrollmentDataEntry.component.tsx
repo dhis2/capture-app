@@ -82,7 +82,7 @@ const createComponentProps = (props: any, componentProps: any) => ({
     ...componentProps,
 });
 
-const getCalendarAnchorPosition = (formHorizontal?: boolean) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
 
 const getEnrollmentDateSettings = () => {
     const reportDateComponent =
@@ -223,7 +223,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     ),
 );
 
-const getOrientation = (formHorizontal?: boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+const getOrientation = (formHorizontal: boolean | null) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const getGeometrySettings = () => ({
     isApplicable: (props: any) => {
@@ -347,7 +347,7 @@ type FinalTeiDataEntryProps = {
     relatedStageRef?: React.RefObject<RelatedStageRefPayload>;
     formFoundation: RenderFoundation;
 };
-
+// final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     componentWillUnmount() {
         inMemoryFileStore.clear();
@@ -398,8 +398,8 @@ type PreEnrollmentDataEntryProps = {
     onUpdateDataEntryField: (...args: any[]) => any;
     onStartAsyncUpdateField: (...args: any[]) => any;
     onGetUnsavedAttributeValues?: (...args: any[]) => any;
-    teiId?: string;
-    firstStageMetaData?: { stage: ProgramStage };
+    teiId?: string | null;
+    firstStageMetaData?: { stage: ProgramStage } | null;
     formFoundation: RenderFoundation;
     enrollmentMetadata: Enrollment;
 };

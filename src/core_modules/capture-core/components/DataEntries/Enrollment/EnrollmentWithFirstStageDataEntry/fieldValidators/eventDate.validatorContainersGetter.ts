@@ -14,8 +14,8 @@ const preValidateDate = (
 };
 
 const validateNotExpired = (
+    value: string,
     props: any,
-    value?: string | null,
 ) => {
     if (!value || !props.expiryPeriod) {
         return true;

@@ -11,6 +11,7 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertFormToClient } from '../../../../converters';
 import { stageMainDataIds, convertToRulesEngineIds } from '../EnrollmentWithFirstStageDataEntry';
 import type { QuerySingleResource } from '../../../../utils/api';
+import type { ApiUtils } from '../../../../../capture-core-utils/types';
 
 type Context = {
     dataEntryId: string;
@@ -89,7 +90,7 @@ const runRulesOnEnrollmentUpdate = ({
 export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
     action$: any,
     store: any,
-    { querySingleResource }: any,
+    { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
@@ -130,7 +131,7 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (
 export const runRulesOnEnrollmentFieldUpdateEpic = (
     action$: any,
     store: any,
-    { querySingleResource }: any,
+    { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH),

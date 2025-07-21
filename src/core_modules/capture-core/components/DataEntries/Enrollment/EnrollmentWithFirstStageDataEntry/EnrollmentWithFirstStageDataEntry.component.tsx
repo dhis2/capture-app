@@ -30,7 +30,7 @@ const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
 
-const getCalendarAnchorPosition = (formHorizontal?: boolean | null) => (formHorizontal ? 'center' : 'left');
+const getCalendarAnchorPosition = (formHorizontal: boolean | null) => (formHorizontal ? 'center' : 'left');
 
 const baseComponentStyles = {
     labelContainerStyle: {
@@ -65,7 +65,7 @@ const createComponentProps = (props: any, componentProps: any) => ({
     ...componentProps,
 });
 
-const getOrientation = (formHorizontal?: boolean | null) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+const getOrientation = (formHorizontal: boolean | null) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const pointComponent = withCalculateMessages(overrideMessagePropNames)(
     withFocusSaver()(

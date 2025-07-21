@@ -12,9 +12,9 @@ const mapDispatchToProps = (dispatch: any) => ({
         data: any,
         programId: string,
         orgUnit: OrgUnit,
+        stage: ProgramStage,
         formFoundation: RenderFoundation,
         onGetValidationContext: () => any,
-        stage?: ProgramStage,
     ) => {
         dispatch(
             updateDataEntryFieldBatch(innerAction, programId, orgUnit, stage, formFoundation, onGetValidationContext),
@@ -24,9 +24,9 @@ const mapDispatchToProps = (dispatch: any) => ({
         innerAction: ReduxAction<any, any>,
         programId: string,
         orgUnit: OrgUnit,
+        stage: ProgramStage,
         formFoundation: RenderFoundation,
         onGetValidationContext: () => any,
-        stage?: ProgramStage,
     ) => {
         dispatch(updateFieldBatch(innerAction, programId, orgUnit, stage, formFoundation, onGetValidationContext));
     },
@@ -36,9 +36,9 @@ const mapDispatchToProps = (dispatch: any) => ({
         itemId: string,
         programId: string,
         orgUnit: OrgUnit,
+        stage: ProgramStage,
         formFoundation: RenderFoundation,
         onGetValidationContext: () => any,
-        stage?: ProgramStage,
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
             asyncUpdateSuccessBatch(successInnerAction, dataEntryId, itemId, programId, orgUnit, stage, formFoundation, onGetValidationContext);

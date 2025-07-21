@@ -8,11 +8,11 @@ export type Props = {
         stage: ProgramStage;
     };
     formFoundation: RenderFoundation;
-    orgUnit?: OrgUnit | null;
+    orgUnit: OrgUnit | null;
     programId: string;
-    relatedStageRef?: React.RefObject<RelatedStageRefPayload>;
+    relatedStageRef?: { current: RelatedStageRefPayload | null },
     relatedStageActionsOptions?: {
-        [key in keyof typeof relatedStageActions]?: {
+        [key in keyof typeof relatedStageActions]: {
             hidden?: boolean;
             disabled?: boolean;
             disabledMessage?: string;

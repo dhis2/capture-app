@@ -82,7 +82,7 @@ export const updateDataEntryFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
     orgUnit: OrgUnit,
-    stage: ProgramStage | undefined,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
 ) => {
@@ -111,7 +111,7 @@ export const updateFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
     orgUnit: OrgUnit,
-    stage: ProgramStage | undefined,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
 ) => {
@@ -142,7 +142,7 @@ export const asyncUpdateSuccessBatch = (
     itemId: string,
     programId: string,
     orgUnit: OrgUnit,
-    stage: ProgramStage | undefined,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
 ) => {
