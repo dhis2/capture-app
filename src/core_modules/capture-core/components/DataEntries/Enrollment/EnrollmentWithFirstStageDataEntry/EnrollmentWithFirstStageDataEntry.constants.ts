@@ -1,5 +1,3 @@
-// @flow
-
 export const sectionKeysForFirstStageDataEntry = {
     ENROLLMENT: 'enrollment',
     STATUS: 'status',

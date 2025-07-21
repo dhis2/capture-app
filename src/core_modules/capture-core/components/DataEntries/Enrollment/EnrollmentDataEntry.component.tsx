@@ -344,7 +344,7 @@ type FinalTeiDataEntryProps = {
     onUpdateFormFieldAsync: (...args: any[]) => any;
     onUpdateFormField: (...args: any[]) => any;
     firstStageMetaData?: { stage: ProgramStage };
-    relatedStageRef?: { current?: RelatedStageRefPayload };
+    relatedStageRef?: React.RefObject<RelatedStageRefPayload>;
     formFoundation: RenderFoundation;
 };
 
