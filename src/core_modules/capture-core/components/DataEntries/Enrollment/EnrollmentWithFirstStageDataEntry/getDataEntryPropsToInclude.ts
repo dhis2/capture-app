@@ -21,7 +21,7 @@ export const getDataEntryPropsToInclude = (firstStage: ProgramStage) => [
     {
         id: stageMainDataIds.OCCURRED_AT,
         type: 'DATE',
-        validatorContainers: getEventDateValidatorContainers({}),
+        validatorContainers: getEventDateValidatorContainers(),
     },
     {
         clientId: stageMainDataIds.COMPLETE,
