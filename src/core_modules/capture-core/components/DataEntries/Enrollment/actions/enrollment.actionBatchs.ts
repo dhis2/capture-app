@@ -82,9 +82,9 @@ export const updateDataEntryFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
     orgUnit: OrgUnit,
+    stage: ProgramStage | undefined,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
-    stage?: ProgramStage,
 ) => {
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
@@ -111,9 +111,9 @@ export const updateFieldBatch = (
     innerAction: ReduxAction<any, any>,
     programId: string,
     orgUnit: OrgUnit,
+    stage: ProgramStage | undefined,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
-    stage?: ProgramStage,
 ) => {
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
@@ -142,9 +142,9 @@ export const asyncUpdateSuccessBatch = (
     itemId: string,
     programId: string,
     orgUnit: OrgUnit,
+    stage: ProgramStage | undefined,
     formFoundation: RenderFoundation,
     onGetValidationContext: () => any,
-    stage?: ProgramStage,
 ) => {
     const uid = uuid();
 
