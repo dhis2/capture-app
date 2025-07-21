@@ -23,7 +23,7 @@ export const withErrorMessagePostProcessor = (getTrackedEntityTypeName: GetTrack
             super(props);
             this.cache = {};
         }
-        cache: { [key: string]: CacheItem };
+        cache: CacheItem | Record<string, never>;
 
         postProcessErrorMessage = ({
             errorMessage,
