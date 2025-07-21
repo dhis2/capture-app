@@ -5,7 +5,7 @@ import { WidgetTrackedEntityChangelog } from '../../../WidgetsChangelog';
 import type { Props } from './TrackedEntityChangelogWrapper.types';
 
 export const TrackedEntityChangelogWrapper = ({ programAPI, teiId, setIsOpen, trackedEntityData, ...passOnProps }: Props) => {
-    const formFoundation: RenderFoundation = useFormFoundation(programAPI, undefined);
+    const formFoundation: RenderFoundation = useFormFoundation(programAPI, null);
 
     const transformedTrackedEntityData = trackedEntityData.reduce((acc: Record<string, any>, item: any) => {
         acc[item.attribute] = item.value;

@@ -33,7 +33,7 @@ type UseLifecycleParams = {
     dataEntryId: string;
     itemId: string;
     geometry: Geometry | null;
-    dataEntryFormConfig: DataEntryFormConfig | null | undefined;
+    dataEntryFormConfig: DataEntryFormConfig | null;
 };
 
 export const useLifecycle = ({
