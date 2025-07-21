@@ -1,15 +1,11 @@
-// @flow
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
 import { getUserMetadataStorageController, USER_METADATA_STORES } from '../../../../storageControllers';
-
-type Props = {|
-    programId: string,
-    dataElementIds: Array<string>,
-    stageId?: string,
-|}
+import type { Props } from './useDataElementsForStage.types';
 
 const getDataElementsForStage = async ({
     dataElementIds,
+}: {
+    dataElementIds: Array<string>;
 }) => {
     const storageController = getUserMetadataStorageController();
 
@@ -24,7 +20,6 @@ export const useDataElementsForStage = ({
     stageId,
 }: Props) => {
     const { data, isLoading } = useIndexedDBQuery(
-        // $FlowFixMe
         [programId, 'dataElements', stageId, { dataElementIds }],
         () => getDataElementsForStage({
             dataElementIds,

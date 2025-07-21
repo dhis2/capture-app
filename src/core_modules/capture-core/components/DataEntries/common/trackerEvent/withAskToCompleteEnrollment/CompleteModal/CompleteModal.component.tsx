@@ -1,4 +1,3 @@
-// @flow
 import { Modal, ModalActions, ModalContent, ModalTitle, Button, ButtonStrip } from '@dhis2/ui';
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -20,11 +19,11 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
             })}
         </ModalTitle>
         <ModalContent>
-            <p>{i18n.t('Would you like to complete the enrollment and all active events as well?')}</p>
+            <p>{i18n.t('Would you like to complete the enrollment and all active events as well?') as string}</p>
 
             {Object.keys(programStagesWithActiveEvents).length !== 0 && (
                 <>
-                    {i18n.t('The following events will be completed:')}
+                    {i18n.t('The following events will be completed:') as string}
                     {Object.keys(programStagesWithActiveEvents).map((key) => {
                         const { count, name } = programStagesWithActiveEvents[key];
                         return (
@@ -35,7 +34,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
                                     defaultValue_plural: '{{count}} events in {{programStageName}}',
                                     programStageName: name,
                                     interpolation: { escapeValue: false },
-                                })}
+                                }) as string}
                             </ul>
                         );
                     })}
@@ -44,7 +43,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
 
             {Object.keys(programStagesWithoutAccess).length !== 0 && (
                 <>
-                    {i18n.t('The following events will not be completed due to lack of access:')}
+                    {i18n.t('The following events will not be completed due to lack of access:') as string}
                     {Object.keys(programStagesWithoutAccess).map((key) => {
                         const { count, name } = programStagesWithoutAccess[key];
 
@@ -56,7 +55,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
                                     defaultValue_plural: '{{count}} events in {{programStageName}}',
                                     programStageName: name,
                                     interpolation: { escapeValue: false },
-                                })}
+                                }) as string}
                             </ul>
                         );
                     })}
@@ -66,13 +65,13 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={onCompleteEnrollmentAndEvents} primary>
-                        {i18n.t('Yes, complete enrollment and events')}
+                        {i18n.t('Yes, complete enrollment and events') as string}
                     </Button>
                     <Button onClick={onCompleteEnrollment} secondary dataTest="enrollment-actions-complete-button">
-                        {i18n.t('Complete enrollment only')}
+                        {i18n.t('Complete enrollment only') as string}
                     </Button>
                     <Button onClick={onCancel} secondary>
-                        {i18n.t('No, cancel')}
+                        {i18n.t('No, cancel') as string}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
@@ -89,14 +88,14 @@ export const CompleteEnrollmentModalComponent = ({ programStageName, onCancel, o
             })}
         </ModalTitle>
         <ModalContent>
-            <p>{i18n.t('Would you like to complete the enrollment?')}</p>
+            <p>{i18n.t('Would you like to complete the enrollment?') as string}</p>
             <ModalActions>
                 <ButtonStrip end>
                     <Button onClick={onCompleteEnrollment} primary>
-                        {i18n.t('Complete enrollment')}
+                        {i18n.t('Complete enrollment') as string}
                     </Button>
                     <Button onClick={onCancel} secondary>
-                        {i18n.t('No, cancel')}
+                        {i18n.t('No, cancel') as string}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

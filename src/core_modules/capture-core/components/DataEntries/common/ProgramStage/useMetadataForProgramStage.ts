@@ -1,25 +1,12 @@
-// @flow
 import { useMemo } from 'react';
 import { useConfig } from '@dhis2/app-runtime';
-import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedDataHooks/useProgramFromIndexedDB';
 import { useUserLocale } from '../../../../utils/localeData/useUserLocale';
 import { useDataEntryFormConfig, useOptionSetsForAttributes } from '../TEIAndEnrollment';
 import { useDataElementsForStage } from './useDataElementsForStage';
 import { useIndexedDBQuery } from '../../../../utils/reactQueryHelpers';
 import { buildProgramStageMetadata } from './buildProgramStageMetadata';
-
-type Props = {|
-    programId: string,
-    stageId?: string,
-|}
-
-type ReturnType = {|
-    formFoundation: ?RenderFoundation,
-    stage: ?ProgramStage,
-    isLoading: boolean,
-    isError: boolean,
-|}
+import type { Props, ReturnType } from './useMetadataForProgramStage.types';
 
 export const useMetadataForProgramStage = ({
     programId,
@@ -28,7 +15,8 @@ export const useMetadataForProgramStage = ({
     const scopeId = stageId || programId;
     const { program } = useProgramFromIndexedDB(programId, { enabled: !!programId });
     const { locale } = useUserLocale();
-    const { serverVersion: { minor } } = useConfig();
+    const { serverVersion } = useConfig();
+    const minor = serverVersion?.minor;
     const { dataEntryFormConfig, configIsFetched } = useDataEntryFormConfig({ selectedScopeId: scopeId });
 
     const programStage = useMemo(() => {
@@ -59,19 +47,14 @@ export const useMetadataForProgramStage = ({
     });
 
     const { data: programStageMetadata, isIdle, isLoading, isError } = useIndexedDBQuery(
-        // $FlowFixMe
         ['programStageMetadata', programId, stageId],
-        // $FlowFixMe
         () => buildProgramStageMetadata({
-            // $FlowFixMe
             cachedProgramStage: programStage,
-            // $FlowFixMe
             cachedDataElements: dataElements,
             programId,
-            // $FlowFixMe
             cachedOptionSets: optionSets,
             locale,
-            minorServerVersion: minor,
+            minorServerVersion: minor || 0,
             dataEntryFormConfig,
         }),
         {
