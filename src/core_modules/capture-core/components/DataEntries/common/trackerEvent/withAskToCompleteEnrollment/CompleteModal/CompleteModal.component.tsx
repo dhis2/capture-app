@@ -34,7 +34,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
                                     defaultValue_plural: '{{count}} events in {{programStageName}}',
                                     programStageName: name,
                                     interpolation: { escapeValue: false },
-                                }) as string}
+                                })}
                             </ul>
                         );
                     })}
@@ -55,7 +55,7 @@ export const CompleteEnrollmentAndEventsModalComponent = ({
                                     defaultValue_plural: '{{count}} events in {{programStageName}}',
                                     programStageName: name,
                                     interpolation: { escapeValue: false },
-                                }) as string}
+                                })}
                             </ul>
                         );
                     })}
