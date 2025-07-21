@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
 import type { ErrorData } from '../../../D2Form/FormBuilder';
@@ -9,7 +8,7 @@ import type { QuerySingleResource } from '../../../../utils/api/api.types';
 const LoadingInddicatorWrappedContents = withLoadingIndicator()(ExistingTEIContents);
 
 type Props = {
-    programId: ?string,
+    programId: string | null,
     errorData: ErrorData,
     querySingleResource: QuerySingleResource,
 };
@@ -17,11 +16,10 @@ type Props = {
 type State = {
     ready: boolean,
     tetAttributesOnly: boolean,
-    attributeValues: ?{[id: string]: any},
+    attributeValues: {[id: string]: any} | null,
 };
 
 class ExistingTEILoaderComponentPlain extends React.Component<Props, State> {
-    cancelablePromise: any;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -35,6 +33,8 @@ class ExistingTEILoaderComponentPlain extends React.Component<Props, State> {
     componentWillUnmount() {
         this.cancelablePromise && this.cancelablePromise.cancel();
     }
+
+    cancelablePromise: any;
 
     requestTeiWithoutProgram() {
         const { errorData, querySingleResource } = this.props;
@@ -131,7 +131,6 @@ class ExistingTEILoaderComponentPlain extends React.Component<Props, State> {
         const { ...passOnProps } = this.props;
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <LoadingInddicatorWrappedContents
                 {...this.state}
                 {...passOnProps}

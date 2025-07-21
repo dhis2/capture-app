@@ -1,19 +1,7 @@
-// @flow
 import * as React from 'react';
-import type { ErrorData } from '../../../D2Form/FormBuilder';
 import { UniqueTEADuplicateErrorMessageCreator } from './ErrorMessageCreator.component';
 import { ExistingTEIDialog } from './ExistingTEIDialog.component';
-
-type Props = {
-    ExistingUniqueValueDialogActions: any,
-    errorData?: ErrorData,
-    trackedEntityTypeName: string,
-    attributeName: string,
-};
-
-type State = {
-    existingTeiDialogOpen: boolean,
-};
+import type { Props, State } from './uniqueTEADuplicate.types';
 
 export class UniqueTEADuplicate extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -41,14 +29,12 @@ export class UniqueTEADuplicate extends React.Component<Props, State> {
 
         return (
             <React.Fragment>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <UniqueTEADuplicateErrorMessageCreator
                     onShowExisting={this.openDialog}
                     trackedEntityTypeName={trackedEntityTypeName}
                     attributeName={attributeName}
                     {...passOnProps}
                 />
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <ExistingTEIDialog
                     open={existingTeiDialogOpen}
                     onCancel={this.closeDialog}

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Modal } from '@dhis2/ui';
 import { ExistingTEILoader } from './ExistingTEILoader.container';

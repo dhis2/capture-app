@@ -1,12 +1,11 @@
-// @flow
 import { connect } from 'react-redux';
 import { ExistingTEIContentsComponent } from './ExistingTEIContents.component';
-import { makeDataElementsSelector, makeGetClientValuesSelector } from './existingTEIContents.selectors';
+import { makeDataElementsSelector, makeGetClientValuesSelector } from './existingTeiContents.selectors';
 
 const makeMapStateToProps = () => {
     const dataElementsSelector = makeDataElementsSelector();
     const clientValuesSelector = makeGetClientValuesSelector();
-    const mapStateToProps = (state: ReduxState, props: Object) => {
+    const mapStateToProps = (state: any, props: any) => {
         const dataElements = dataElementsSelector(props);
         const attributeValues = clientValuesSelector(props, dataElements);
         return {
@@ -18,7 +17,7 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-const mergeProps = (stateProps: Object, dispatchProps: Object, ownProps: Object) => {
+const mergeProps = (stateProps: any, dispatchProps: any, ownProps: any) => {
     const { programId, tetAttributesOnly, errorData, ...passOnOwnProps } = ownProps;
     return {
         ...passOnOwnProps,
@@ -28,5 +27,4 @@ const mergeProps = (stateProps: Object, dispatchProps: Object, ownProps: Object)
     };
 };
 
-// $FlowFixMe
-export const ExistingTEIContents = connect(makeMapStateToProps, () => ({}), mergeProps)(ExistingTEIContentsComponent);
+export const ExistingTEIContents = connect(makeMapStateToProps, () => ({}), mergeProps)(ExistingTEIContentsComponent as any);

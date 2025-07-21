@@ -1,5 +1,3 @@
-// @flow
-
 import { createSelector } from 'reselect';
 import { convertServerToClient } from '../../../../converters';
 import {
@@ -15,12 +13,11 @@ const programIdSelector = props => props.programId;
 const tetAttributesOnlySelector = props => props.tetAttributesOnly;
 const tetIdSelector = props => props.errorData.tetId;
 
-// $FlowFixMe
 export const makeDataElementsSelector = () => createSelector(
     programIdSelector,
     tetAttributesOnlySelector,
     tetIdSelector,
-    (programId: ?string, tetAttributesOnly: boolean, tetId: string) => {
+    (programId: string | null, tetAttributesOnly: boolean, tetId: string) => {
         if (tetAttributesOnly) {
             let teType;
             try {
@@ -36,7 +33,6 @@ export const makeDataElementsSelector = () => createSelector(
 
         let program: TrackerProgram;
         try {
-            // $FlowFixMe[incompatible-call] automated comment
             program = getTrackerProgramThrowIfNotFound(programId);
         } catch (error) {
             return [];
@@ -48,7 +44,7 @@ export const makeDataElementsSelector = () => createSelector(
     },
 );
 
-// $FlowFixMe
+// @ts-expect-error - keeping original functionality as before ts rewrite
 export const makeGetClientValuesSelector = () => createSelector(
     (props, dataElements) => dataElements,
     props => props.attributeValues,
