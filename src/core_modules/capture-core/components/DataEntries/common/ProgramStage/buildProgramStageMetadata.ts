@@ -1,4 +1,3 @@
-// @flow
 import type {
     CachedDataElement,
     CachedOptionSet,
@@ -17,13 +16,13 @@ export const buildProgramStageMetadata = async ({
     minorServerVersion,
     dataEntryFormConfig,
 }: {
-    cachedProgramStage: CachedProgramStage,
-    programId: string,
-    cachedOptionSets: Array<CachedOptionSet>,
-    cachedDataElements: Array<CachedDataElement>,
-    dataEntryFormConfig: ?DataEntryFormConfig,
-    locale: string,
-    minorServerVersion: number,
+    cachedProgramStage: CachedProgramStage;
+    programId: string;
+    cachedOptionSets: Array<CachedOptionSet>;
+    cachedDataElements: Array<CachedDataElement>;
+    dataEntryFormConfig: DataEntryFormConfig | null;
+    locale: string;
+    minorServerVersion: number;
 }) => {
     const storageController = getUserMetadataStorageController();
 
@@ -33,9 +32,9 @@ export const buildProgramStageMetadata = async ({
     });
 
     const programStageFactory = new ProgramStageFactory({
-        cachedOptionSets: new Map<string, CachedOptionSet>(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),
+        cachedOptionSets: new Map(cachedOptionSets.map(optionSet => [optionSet.id, optionSet])),
         cachedRelationshipTypes,
-        cachedDataElements: new Map<string, CachedDataElement>(cachedDataElements.map(dataElement => [dataElement.id, dataElement])),
+        cachedDataElements: new Map(cachedDataElements.map(dataElement => [dataElement.id, dataElement])),
         locale,
         minorServerVersion,
         dataEntryFormConfig,

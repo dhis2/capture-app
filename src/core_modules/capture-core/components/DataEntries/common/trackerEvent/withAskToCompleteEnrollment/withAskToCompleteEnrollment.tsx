@@ -1,27 +1,26 @@
-// @flow
 import React, { useState, useRef, useMemo } from 'react';
-import { type ComponentType } from 'react';
+import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import { CompleteModal } from './CompleteModal';
 import { statusTypes as eventStatuses } from '../../../../../events/statusTypes';
-import { type RenderFoundation } from '../../../../../metaData';
+import type { RenderFoundation } from '../../../../../metaData';
 import { addEventSaveTypes } from '../../../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 import { relatedStageActions } from '../../../../WidgetRelatedStages';
 import type { RelatedStageRefPayload } from '../../../../WidgetRelatedStages';
 
 type Props = {
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
-    askCompleteEnrollmentOnEventComplete?: ?boolean,
-    isCompleted?: boolean,
-    eventId?: ?string,
-    formFoundation: RenderFoundation,
-    relatedStageRef?: { current: ?RelatedStageRefPayload },
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: string) => void;
+    askCompleteEnrollmentOnEventComplete?: boolean;
+    isCompleted?: boolean;
+    eventId?: string;
+    formFoundation: RenderFoundation;
+    relatedStageRef?: { current: RelatedStageRefPayload | null };
     onSaveAndCompleteEnrollment: (
         eventId: string,
         dataEntryId: string,
         formFoundation: RenderFoundation,
         enrollment: string,
-    ) => void,
+    ) => void;
 };
 
 const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (props: Props) => {
@@ -34,11 +33,11 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         relatedStageRef,
         ...passOnProps
     } = props;
-    const enrollment = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
+    const enrollment = useSelector(({ enrollmentDomain }: { enrollmentDomain: any }) => enrollmentDomain?.enrollment);
     const events = enrollment?.events;
-    const hasActiveEvents = useMemo(() => events?.some(event => event.status === eventStatuses.ACTIVE), [events]);
+    const hasActiveEvents = useMemo(() => events?.some((event: any) => event.status === eventStatuses.ACTIVE), [events]);
     const [isOpenCompleteModal, setOpenCompleteModal] = useState(false);
-    const eventDataToSave = useRef({});
+    const eventDataToSave = useRef<any>({});
 
     const handleOnSaveEvent = () => {
         setOpenCompleteModal(false);
@@ -46,7 +45,7 @@ const getAskToCompleteEnrollment = (InnerComponent: ComponentType<any>) => (prop
         onSave(itemId, dataEntryId, formFoundation, saveType);
     };
 
-    const handleCompleteEnrollment = (updatedEnrollment) => {
+    const handleCompleteEnrollment = (updatedEnrollment: any) => {
         setOpenCompleteModal(false);
         const { itemId, dataEntryId, formFoundation } = eventDataToSave.current;
         onSaveAndCompleteEnrollment(itemId, dataEntryId, formFoundation, updatedEnrollment);

@@ -1,4 +1,3 @@
-// @flow
 import React, { useMemo, useCallback } from 'react';
 import moment from 'moment';
 import { useTimeZoneConversion } from '@dhis2/app-runtime';
@@ -27,9 +26,9 @@ export const CompleteModal = ({
     const { programStagesWithActiveEvents, programStagesWithoutAccess } = useMemo(
         () =>
             events.reduce(
-                (acc, event) => {
-                    const { name, access } = programStages.find(p => p.id === event.programStage) || {};
-                    const accKey = access.data.write ? 'programStagesWithActiveEvents' : 'programStagesWithoutAccess';
+                (acc: any, event: any) => {
+                    const { name, access } = programStages.find((p: any) => p.id === event.programStage) || {};
+                    const accKey = access?.data?.write ? 'programStagesWithActiveEvents' : 'programStagesWithoutAccess';
 
                     if (event.status === eventStatuses.ACTIVE) {
                         if (acc[accKey][event.programStage]) {
@@ -57,10 +56,10 @@ export const CompleteModal = ({
         const nowClient = fromClientDate(new Date());
         const nowServer = new Date(nowClient.getServerZonedISOString());
         const updatedAt = moment(nowServer).locale('en').format('YYYY-MM-DDTHH:mm:ss');
-        const eventsToComplete = events.reduce((acc, event) => {
-            const { access } = programStages.find(p => p.id === event.programStage) || {};
+        const eventsToComplete = events.reduce((acc: any, event: any) => {
+            const { access } = programStages.find((p: any) => p.id === event.programStage) || {};
             const isCurrentEvent = eventId && event.event === eventId;
-            if (event.status === eventStatuses.ACTIVE && access.data.write && !isCurrentEvent) {
+            if (event.status === eventStatuses.ACTIVE && access?.data?.write && !isCurrentEvent) {
                 return [...acc, { ...event, status: eventStatuses.COMPLETED, updatedAt }];
             }
             return acc;
