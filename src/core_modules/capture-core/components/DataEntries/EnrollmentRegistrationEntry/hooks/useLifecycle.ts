@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { startNewEnrollmentDataEntryInitialisation } from '../EnrollmentRegistrationEntry.actions';
 import { scopeTypes, getProgramThrowIfNotFound } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
@@ -13,19 +14,18 @@ import { useMergeFormFoundationsIfApplicable } from './useMergeFormFoundationsIf
 export const useLifecycle = (
     selectedScopeId: string,
     dataEntryId: string,
-    orgUnit: any,
-    programId: string,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
+    orgUnit?: OrgUnit,
     teiId?: string,
 ) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
-    const program = programId && getProgramThrowIfNotFound(programId);
+    const program = selectedScopeId && getProgramThrowIfNotFound(selectedScopeId);
     const ready =
         useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) && !!orgUnit && dataEntryReadyRef.current === true;
     const searchTerms = useSelector(({ newPage }: any) => newPage.prepopulatedData);
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { firstStageMetaData } = useBuildFirstStageRegistration(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const { firstStageMetaData } = useBuildFirstStageRegistration(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const {
         formId,
         registrationMetaData: enrollmentMetadata,
@@ -33,13 +33,13 @@ export const useLifecycle = (
     } = useMetadataForRegistrationForm({ selectedScopeId });
 
     const { formFoundation } = useMergeFormFoundationsIfApplicable(enrollmentFormFoundation, firstStageMetaData);
-    const { programCategory } = useCategoryCombinations(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const { programCategory } = useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
-        program: program as any,
-        trackedEntityInstanceAttributes: trackedEntityInstanceAttributes ?? [],
+        program,
+        trackedEntityInstanceAttributes,
         orgUnit,
-        formFoundation: formFoundation as any,
-        teiId: teiId ?? undefined,
+        formFoundation,
+        teiId,
         searchTerms,
     });
     useEffect(() => {
@@ -49,7 +49,7 @@ export const useLifecycle = (
     useEffect(() => {
         if (
             dataEntryReadyRef.current === false &&
-            (formValuesReadyRef as any).current === true &&
+            formValuesReadyRef.current === true &&
             orgUnit &&
             scopeType === scopeTypes.TRACKER_PROGRAM &&
             formFoundation

@@ -1,7 +1,7 @@
 import React, { type ComponentType, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
@@ -57,7 +57,7 @@ const EnrollmentRegistrationEntryPlain =
       isUserInteractionInProgress,
       isSavingInProgress,
       ...rest
-  }: PlainProps) => {
+  }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
 
@@ -83,8 +83,6 @@ const EnrollmentRegistrationEntryPlain =
                           id={id}
                           onPostProcessErrorMessage={onPostProcessErrorMessage}
                           onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future')}
-                          onUpdateField={() => console.log('onUpdateField will be here in the future')}
-                          onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future')}
                           {...rest}
                       />
                       <div className={classes.actions}>

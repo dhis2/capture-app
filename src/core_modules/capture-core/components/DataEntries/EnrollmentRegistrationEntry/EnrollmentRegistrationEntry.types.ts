@@ -93,7 +93,7 @@ export type Props = Omit<OwnProps, 'saveButtonText'> & ContainerProps;
 type PropsAddedInHOC = {
     onPostProcessErrorMessage: (message: string) => string;
     onSave: (saveType?: string) => void;
-} & any;
+}
 
 type PropsRemovedInHOC = {
     renderDuplicatesCardActions?: RenderCustomCardActions;

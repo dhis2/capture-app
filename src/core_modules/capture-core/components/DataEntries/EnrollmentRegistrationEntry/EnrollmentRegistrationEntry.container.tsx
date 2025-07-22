@@ -31,7 +31,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         formId,
         enrollmentMetadata,
         formFoundation,
-    } = useLifecycle(selectedScopeId, id, orgUnit, selectedScopeId, trackedEntityInstanceAttributes, teiId);
+    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId);
     const { buildTeiWithEnrollment } = useBuildEnrollmentPayload({
         programId: selectedScopeId,
         dataEntryId: id,

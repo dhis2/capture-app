@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { makeQuerySingleResource } from 'capture-core/utils/api';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { getUniqueValuesForAttributesWithoutValue } from '../../common/TEIAndEnrollment';
 import type { RenderFoundation } from '../../../../metaData';
 import { convertClientToForm, convertServerToClient } from '../../../../converters';
@@ -36,18 +37,18 @@ export type InputAttribute = {
 
 type InputForm = {
     program: InputProgramData;
-    trackedEntityInstanceAttributes: Array<InputAttribute>;
-    orgUnit: any;
+    trackedEntityInstanceAttributes?: Array<InputAttribute>;
+    orgUnit: OrgUnit | null;
     formFoundation: RenderFoundation;
     teiId?: string;
-    searchTerms?: Array<{[key: string]: string}>;
+    searchTerms: Array<{[key: string]: string}> | null;
 };
 
 type StaticPatternValues = {
     orgUnitCode: string;
 };
 
-const useClientAttributesWithSubvalues = (program: InputProgramData, attributes: Array<InputAttribute>) => {
+const useClientAttributesWithSubvalues = (program: InputProgramData, attributes?: Array<InputAttribute>) => {
     const dataEngine = useDataEngine();
     const [listAttributes, setListAttributes] = useState<any>(null);
 
@@ -111,7 +112,7 @@ const buildFormValues = async ({
     setFormValues: (values: any) => void;
     setClientValues: (values: any) => void;
     formValuesReadyRef: { current: boolean };
-    searchTerms?: Array<{[key: string]: any}>;
+    searchTerms: Array<{[key: string]: any}> | null;
     querySingleResource: QuerySingleResource;
 }) => {
     const clientValues = clientAttributesWithSubvalues?.reduce((acc, currentValue) => ({ ...acc, [currentValue.attribute]: currentValue.value }), {});
@@ -123,7 +124,7 @@ const buildFormValues = async ({
     const searchFormValues = searchTerms?.reduce((acc, item) => ({ ...acc, [item.id]: convertClientToForm(item.value, item.type) }), {});
 
     const uniqueValues = await getUniqueValuesForAttributesWithoutValue(
-        foundation ?? null,
+        foundation,
         clientAttributesWithSubvalues,
         staticPatternValues,
         querySingleResource,
