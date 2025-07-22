@@ -4,7 +4,7 @@ import { isValidDate, isValidPeriod } from '../../../../../../utils/validation/v
 
 const preValidateDate = (
     value?: string,
-    internalComponentError?: any,
+    internalComponentError?: {error: string | null, errorCode: string | null} | null,
 ) => {
     if (!value) {
         return true;

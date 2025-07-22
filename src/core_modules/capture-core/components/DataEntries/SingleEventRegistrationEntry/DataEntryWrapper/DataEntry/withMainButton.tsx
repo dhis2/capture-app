@@ -14,10 +14,10 @@ type Props = {
     onCancel: () => void,
     saveTypes: Array<string>,
     formHorizontal?: boolean | null,
-    dataEntryHasChanges?: boolean | null,
+    dataEntryHasChanges: boolean | null,
     formFoundation: RenderFoundation,
     finalInProgress?: boolean | null,
-    hasRecentlyAddedEvents?: boolean | null,
+    hasRecentlyAddedEvents: boolean | null,
     isCreateNew?: boolean | null,
 };
 
@@ -81,6 +81,8 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 [this.getButtonDefinition(buttonTypes.FINISH), ...buttons];
         }
 
+        innerInstance: any;
+
         renderMultiButton = (buttons: any, hasWriteAccess: boolean | null) => {
             const primary = buttons[0];
             const secondaries = buttons.slice(1);
@@ -127,13 +129,13 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             } = this.props;
             const hasWriteAccess = this.props.formFoundation.access.data.write;
             const buttons = formHorizontal ?
-                this.getFormHorizontalButtons(dataEntryHasChanges ?? false, hasRecentlyAddedEvents ?? false) :
-                this.getFormVerticalButtons(dataEntryHasChanges ?? false, hasRecentlyAddedEvents ?? false, saveTypes);
+                this.getFormHorizontalButtons(dataEntryHasChanges, hasRecentlyAddedEvents) :
+                this.getFormVerticalButtons(dataEntryHasChanges, hasRecentlyAddedEvents, saveTypes);
 
             const mainButton = this.renderMultiButton(buttons, hasWriteAccess);
             return (
                 <InnerComponent
-                    ref={(innerInstance) => { (this as any).innerInstance = innerInstance; }}
+                    ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     mainButton={mainButton}
                     formHorizontal={formHorizontal}
                     {...passOnProps}

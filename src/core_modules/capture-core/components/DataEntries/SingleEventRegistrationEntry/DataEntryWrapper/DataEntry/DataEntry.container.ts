@@ -23,6 +23,8 @@ import {
 } from './dataEntry.selectors';
 import type { RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
+import { newEventSaveTypes } from './newEventSaveTypes';
+import type { ReduxAction } from '../../../../../../capture-core-utils/types';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -41,7 +43,7 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: any) => {
+    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
 
@@ -51,7 +53,7 @@ const mapDispatchToProps = (dispatch: any) => ({
             startRunRulesOnUpdateForNewSingleEvent({ ...innerAction.payload, uid, orgUnit }),
         ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
-    onUpdateField: (orgUnit: OrgUnit) => (innerAction: any) => {
+    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
 
@@ -62,11 +64,11 @@ const mapDispatchToProps = (dispatch: any) => ({
         ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
     onStartAsyncUpdateField: (orgUnit: OrgUnit) => (
-        innerAction: any,
+        innerAction: ReduxAction<any, any>,
         dataEntryId: string,
         itemId: string,
     ) => {
-        const onAsyncUpdateSuccess = (successInnerAction: any) => {
+        const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
             const uid = uuid();
             return batchActions([
                 successInnerAction,
@@ -74,7 +76,7 @@ const mapDispatchToProps = (dispatch: any) => ({
                 startRunRulesOnUpdateForNewSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, orgUnit }),
             ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH);
         };
-        const onAsyncUpdateError = (errorInnerAction: any) => errorInnerAction;
+        const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
@@ -85,7 +87,7 @@ const mapDispatchToProps = (dispatch: any) => ({
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
-    onSetSaveTypes: (newSaveTypes?: any) => {
+    onSetSaveTypes: (newSaveTypes?: typeof newEventSaveTypes[keyof typeof newEventSaveTypes]) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
     },
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {

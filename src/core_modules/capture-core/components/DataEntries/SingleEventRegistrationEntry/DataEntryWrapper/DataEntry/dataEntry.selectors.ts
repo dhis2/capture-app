@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { programCollection } from '../../../../../metaDataMemoryStores/programCollection/programCollection';
+import { type ProgramStage } from '../../../../../metaData';
 
 const programIdSelector = (state: any) => state.currentSelections.programId;
 
@@ -16,5 +17,5 @@ const stageSelector = (props: any) => props.stage;
 
 export const makeWritableRelationshipTypesSelector = () => createSelector(
     stageSelector,
-    (stage: any) => (stage ? stage.relationshipTypesWhereStageIsFrom.filter((r: any) => r.access.data.write) : []),
+    (stage: ProgramStage) => (stage ? stage.relationshipTypesWhereStageIsFrom.filter((r: any) => r.access.data.write) : []),
 );
