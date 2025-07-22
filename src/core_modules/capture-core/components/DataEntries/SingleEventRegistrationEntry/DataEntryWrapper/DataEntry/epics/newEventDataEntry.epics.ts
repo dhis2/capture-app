@@ -57,7 +57,7 @@ export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsComple
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
         ),
         filter(() => {
-            const { app: { page } } = store.value as any;
+            const { app: { page } } = store.value;
             return page === 'new';
         }),
         filter((action) => {
@@ -113,14 +113,14 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Epi
             }
 
             // cancel if tracker program
-            const programId = state.currentSelections.programId as string;
+            const programId = state.currentSelections.programId;
             const program = getProgramFromProgramIdThrowIfNotFound(programId);
             return !(program instanceof TrackerProgram);
         }),
         map(() => {
             const state = store.value;
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
-            const stageContainer = getStageForEventProgram(state.currentSelections.programId as string);
+            const stageContainer = getStageForEventProgram(state.currentSelections.programId);
             const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
             return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
         }));
@@ -145,7 +145,7 @@ const runRulesForNewSingleEvent = async ({
     const formId = getDataEntryKey(dataEntryId, itemId);
 
     const programId = state.currentSelections.programId;
-    const program = getEventProgramThrowIfNotFound(programId as string);
+    const program = getEventProgramThrowIfNotFound(programId);
 
     const foundation = program.stage.stageForm;
     const programStageId = foundation.id;

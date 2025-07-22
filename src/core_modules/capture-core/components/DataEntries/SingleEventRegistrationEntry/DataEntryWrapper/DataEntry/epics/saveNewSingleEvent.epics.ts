@@ -41,7 +41,7 @@ export const saveNewEventLocationChangeEpic = (action$: EpicAction<SaveEventPayl
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const { programId, orgUnitId } = getLocationQuery() as any;
+            const { programId, orgUnitId } = getLocationQuery();
 
             navigate(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();

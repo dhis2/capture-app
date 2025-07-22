@@ -56,12 +56,7 @@ export const saveNewEventInStageLocationChangeEpic = (action$: EpicAction<SaveEv
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map(() => {
-            const { enrollmentId, programId, orgUnitId, teiId } = getLocationQuery() as {
-                enrollmentId: string;
-                programId: string;
-                orgUnitId: string;
-                teiId: string;
-            };
+            const { enrollmentId, programId, orgUnitId, teiId } = getLocationQuery();
             navigate(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
             return resetLocationChange();
         }));

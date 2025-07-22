@@ -17,12 +17,12 @@ export const cancelNewEventEpic = (action$: EpicAction<any>, store: ReduxStore) 
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
             const state = store.value;
-            if (!state.offline?.online) {
+            if (!state.offline.online) {
                 return cancelNewEventNoWorkingListUpdateNeeded();
             }
 
-            const listId = state.workingListsTemplates?.eventList && state.workingListsTemplates.eventList.currentListId;
-            const listSelections = listId && state.workingListsContext?.[listId];
+            const listId = state.workingListsTemplates.eventList && state.workingListsTemplates.eventList.currentListId;
+            const listSelections = listId && state.workingListsContext[listId];
             if (!listSelections) {
                 return cancelNewEventInitializeWorkingLists();
             }
@@ -32,7 +32,7 @@ export const cancelNewEventEpic = (action$: EpicAction<any>, store: ReduxStore) 
             }
 
             const recentlyAddedEventsCount = Object
-                .keys(state.recentlyAddedEvents || {})
+                .keys(state.recentlyAddedEvents)
                 .length;
             if (recentlyAddedEventsCount > 0) {
                 return cancelNewEventUpdateWorkingList();
@@ -44,7 +44,7 @@ export const cancelNewEventLocationChangeEpic = (action$: EpicAction<any>, store
     action$.pipe(
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const { programId, orgUnitId } = getLocationQuery() as { programId: string; orgUnitId: string };
+            const { programId, orgUnitId } = getLocationQuery();
 
             navigate(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();

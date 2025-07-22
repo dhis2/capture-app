@@ -58,7 +58,7 @@ export const saveNewEventAddAnotherEpic = (
             orgUnitId: state.currentSelections.orgUnitId,
         };
         const clientEventValues = { ...formClientValues, created: moment().toISOString() };
-        const relationshipData = (state as any).dataEntriesRelationships[dataEntryKey];
+        const relationshipData = state.dataEntriesRelationships[dataEntryKey];
         return batchActions([
             startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId),
             newRecentlyAddedEvent(clientEvent, clientEventValues),

@@ -1,4 +1,5 @@
 import { convertDataEntryToClientValues } from '../../../../../DataEntry/common/convertDataEntryToClientValues';
+import { convertValue as convertToServerValue } from '../../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../../events/mainConverters';
 import type { RenderFoundation } from '../../../../../../metaData';
 import { getLocationQuery } from '../../../../../../utils/routing';
@@ -20,7 +21,7 @@ const getApiCategoriesArgument = (categories: { [id: string]: string } | null | 
 };
 
 export const getNewEventServerData = (state: any, formFoundation: RenderFoundation, formClientValues: Record<string, any>, mainDataClientValues: Record<string, any>) => {
-    const formServerValues = formFoundation.convertValues(formClientValues);
+    const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Record<string, any> = convertMainEventClientToServer(mainDataClientValues);
 
     return {
@@ -48,9 +49,9 @@ export const getAddEventEnrollmentServerData = (state: any,
     history: Record<string, any>,
     completed?: boolean,
 ) => {
-    const formServerValues = formFoundation.convertValues(formClientValues);
+    const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Record<string, any> = convertMainEventClientToServer(mainDataClientValues);
-    const { teiId, enrollmentId, programId, orgUnitId } = getLocationQuery() as any;
+    const { teiId, enrollmentId, programId, orgUnitId } = getLocationQuery();
 
     if (!mainDataServerValues.status) {
         mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';
