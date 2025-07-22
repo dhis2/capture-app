@@ -45,7 +45,7 @@ function getClientValuesForFormData(formValues: Record<string, unknown>, formFou
 
 function getServerValuesForMainValues(
     values: Record<string, unknown>,
-    meta: Record<string, unknown>,
+    meta: any,
     formFoundation: RenderFoundation,
 ) {
     const clientValues = convertDataEntryValuesToClientValues(
