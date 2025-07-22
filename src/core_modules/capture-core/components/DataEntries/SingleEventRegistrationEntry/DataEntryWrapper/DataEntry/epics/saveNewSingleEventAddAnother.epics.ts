@@ -1,9 +1,9 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'moment';
+import type { EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
@@ -20,8 +20,19 @@ import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
+type SaveEventAddAnotherPayload = {
+    dataEntryId: string;
+    eventId: string;
+    formFoundation: any;
+};
+
+type SaveEventAddAnotherFailedMeta = {
+    clientId: string;
+};
+
+
 export const saveNewEventAddAnotherEpic = (
-    action$: InputObservable,
+    action$: EpicAction<SaveEventAddAnotherPayload>,
     store: ReduxStore,
 ) => action$.pipe(
     ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER),
@@ -47,7 +58,7 @@ export const saveNewEventAddAnotherEpic = (
             orgUnitId: state.currentSelections.orgUnitId,
         };
         const clientEventValues = { ...formClientValues, created: moment().toISOString() };
-        const relationshipData = state.dataEntriesRelationships[dataEntryKey];
+        const relationshipData = (state as any).dataEntriesRelationships[dataEntryKey];
         return batchActions([
             startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId),
             newRecentlyAddedEvent(clientEvent, clientEventValues),
@@ -55,7 +66,7 @@ export const saveNewEventAddAnotherEpic = (
         ], newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH);
     }));
 
-export const saveNewEventAddAnotherFailedEpic = (action$: InputObservable) =>
+export const saveNewEventAddAnotherFailedEpic = (action$: EpicAction<any, SaveEventAddAnotherFailedMeta>) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER),
         map((action) => {

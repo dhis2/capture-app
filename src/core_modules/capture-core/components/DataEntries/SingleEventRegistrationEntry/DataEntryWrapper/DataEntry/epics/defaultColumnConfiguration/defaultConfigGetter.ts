@@ -1,4 +1,3 @@
-// @flow
 import i18n from '@dhis2/d2-i18n';
 import {
     dataElementTypes as elementTypeKeys,
@@ -31,7 +30,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
         },
     ];
 
-    const extraFields = [];
+    const extraFields: any[] = [];
     if (stage.enableUserAssignment) {
         const assigneeField = {
             id: mainPropertyNames.ASSIGNEE,
@@ -47,7 +46,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
     return [...baseFields, ...extraFields];
 };
 
-export const getMetaDataConfig = (stage: RenderFoundation): Array<{id: string, visible: boolean}> =>
+export const getMetaDataConfig = (stage: RenderFoundation): Array<{id: string; visible: boolean}> =>
     stage
         .getElements()
         .map(element => ({

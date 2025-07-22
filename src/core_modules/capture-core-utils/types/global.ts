@@ -54,6 +54,21 @@ export type ReduxStore = {
         dataEntriesFieldsMeta: Record<string, unknown>;
         formsValues: Record<string, unknown>;
         organisationUnits: any[];
+        app?: {
+            page?: string;
+        };
+        dataEntriesRelationships: Record<string, any[]>;
+        dataEntriesNotes?: Record<string, any[]>;
+        offline?: {
+            online?: boolean;
+        };
+        workingListsTemplates?: {
+            eventList?: {
+                currentListId?: string;
+            };
+        };
+        workingListsContext?: Record<string, any>;
+        recentlyAddedEvents?: Record<string, any>;
     };
 };
 
