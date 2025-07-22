@@ -5,7 +5,7 @@ import type { RenderFoundation } from '../../../../../../metaData';
 import { getLocationQuery } from '../../../../../../utils/routing';
 import { FEATURES, featureAvailable } from '../../../../../../../capture-core-utils';
 
-const getApiCategoriesArgument = (categories: { [id: string]: string } | null | undefined) => {
+const getApiCategoriesArgument = (categories: { [id: string]: string } | null) => {
     if (!categories) {
         return null;
     }

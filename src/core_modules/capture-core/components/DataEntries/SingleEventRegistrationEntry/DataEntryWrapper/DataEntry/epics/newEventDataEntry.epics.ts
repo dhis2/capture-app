@@ -62,7 +62,7 @@ export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsComple
         }),
         filter((action) => {
             const { programId } = store.value.currentSelections;
-            const program = programCollection.get(programId as string);
+            const program = programCollection.get(programId);
             if (!(program instanceof EventProgram)) {
                 return false;
             }
@@ -92,7 +92,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Epi
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
         ),
         filter(() => {
-            const { app: { page } } = store.value as any;
+            const { app: { page } } = store.value;
             return page === 'new';
         }),
         filter((action) => {
