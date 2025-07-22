@@ -1,8 +1,8 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
 import { map, filter, concatMap } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
+import type { ApiUtils, EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
@@ -16,6 +16,7 @@ import {
     getCurrentClientMainData,
     getApplicableRuleEffectsForEventProgram,
     updateRulesEffects,
+    validateAssignEffects,
     type FieldData,
 } from '../../../../../../rules';
 import { getOpenDataEntryActions } from '../';
@@ -37,17 +38,20 @@ import { actionTypes as crossPageActionTypes } from '../../../../../Pages/action
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
 import { newPageActionTypes } from '../../../../../Pages/New/NewPage.actions';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
-import { validateAssignEffects } from '../../../../../../rules';
 import type { QuerySingleResource } from '../../../../../../utils/api';
 import { getCoreOrgUnitFn, orgUnitFetched } from '../../../../../../metadataRetrieval/coreOrgUnit';
 
-export const resetDataEntryForNewEventEpic = (action$: InputObservable) =>
+type SelectionsCompletenessPayload = {
+    triggeringActionType?: string;
+};
+
+export const resetDataEntryForNewEventEpic = (action$: EpicAction<any>) =>
     action$.pipe(
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
         map(() => (batchActions(getOpenDataEntryActions()))),
     );
 
-export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const openNewEventInDataEntryEpic = (action$: EpicAction<SelectionsCompletenessPayload>, store: ReduxStore) =>
     action$.pipe(
         ofType(
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
@@ -81,7 +85,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 : cancelOpenNewEventInDataEntry();
         }));
 
-export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: EpicAction<SelectionsCompletenessPayload>, store: ReduxStore) =>
     action$.pipe(
         ofType(
             newPageActionTypes.CATEGORY_OPTION_SET,
@@ -97,7 +101,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
                 if (![lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]
-                    .includes(triggeringActionType)) {
+                    .includes(triggeringActionType!)) {
                     return false;
                 }
             }
@@ -117,8 +121,6 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             const state = store.value;
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
             const stageContainer = getStageForEventProgram(state.currentSelections.programId);
-            // $FlowFixMe[incompatible-call] automated comment
-            // $FlowFixMe[incompatible-use] automated comment
             const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
             return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
         }));
@@ -132,12 +134,12 @@ const runRulesForNewSingleEvent = async ({
     fieldData,
     querySingleResource,
 }: {
-    store: ReduxStore,
-    dataEntryId: string,
-    itemId: string,
-    uid: string,
-    fieldData?: ?FieldData,
-    querySingleResource: QuerySingleResource,
+    store: ReduxStore;
+    dataEntryId: string;
+    itemId: string;
+    uid: string;
+    fieldData?: FieldData | null;
+    querySingleResource: QuerySingleResource;
 }) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
@@ -152,7 +154,6 @@ const runRulesForNewSingleEvent = async ({
     const currentEvent = { ...currentEventValues, ...currentEventMainData, programStageId };
 
     const { coreOrgUnit, cached } =
-        // $FlowFixMe
         await getCoreOrgUnitFn(querySingleResource)(currentEvent.orgUnit?.id, store.value.organisationUnits);
 
     const effects = getApplicableRuleEffectsForEventProgram({
@@ -177,7 +178,7 @@ const runRulesForNewSingleEvent = async ({
 };
 
 export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (
-    action$: InputObservable,
+    action$: EpicAction<any>,
     store: ReduxStore,
     { querySingleResource }: ApiUtils,
 ) =>
@@ -198,7 +199,7 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (
         }));
 
 export const runRulesOnUpdateFieldForSingleEventEpic = (
-    action$: InputObservable,
+    action$: EpicAction<any>,
     store: ReduxStore,
     { querySingleResource }: ApiUtils,
 ) =>

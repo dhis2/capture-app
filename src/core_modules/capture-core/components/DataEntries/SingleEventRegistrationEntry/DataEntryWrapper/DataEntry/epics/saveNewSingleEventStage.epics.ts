@@ -1,6 +1,6 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import type { ApiUtils, EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAndReturnToList,
@@ -16,7 +16,19 @@ import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.co
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+type SaveEventStagePayload = {
+    dataEntryId: string;
+    eventId: string;
+    formFoundation: any;
+    completed: boolean;
+};
+
+type SaveEventStageFailedMeta = {
+    clientId: string;
+};
+
+
+export const saveNewEventStageEpic = (action$: EpicAction<SaveEventStagePayload>, store: any, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map((action) => {
@@ -40,7 +52,7 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
             return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const saveNewEventInStageLocationChangeEpic = (action$: EpicAction<SaveEventStagePayload>, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map(() => {
@@ -50,7 +62,7 @@ export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, 
         }));
 
 
-export const saveNewEventStageFailedEpic = (action$: InputObservable) =>
+export const saveNewEventStageFailedEpic = (action$: EpicAction<any, SaveEventStageFailedMeta>) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_IN_STAGE),
         map((action) => {

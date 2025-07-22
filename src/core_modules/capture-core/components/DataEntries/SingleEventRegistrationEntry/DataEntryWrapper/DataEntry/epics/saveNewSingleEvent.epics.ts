@@ -1,6 +1,6 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import type { ApiUtils, EpicAction, ReduxStore } from '../../../../../../../capture-core-utils/types';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
@@ -11,7 +11,13 @@ import { getNewEventServerData, getNewEventClientValues } from './getConvertedNe
 import { getLocationQuery, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 
-export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+type SaveEventPayload = {
+    dataEntryId: string;
+    eventId: string;
+    formFoundation: any;
+};
+
+export const saveNewEventEpic = (action$: EpicAction<SaveEventPayload>, store: ReduxStore) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map((action) => {
@@ -31,7 +37,7 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { navigate }: ApiUtils) =>
+export const saveNewEventLocationChangeEpic = (action$: EpicAction<SaveEventPayload>, store: ReduxStore, { navigate }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {

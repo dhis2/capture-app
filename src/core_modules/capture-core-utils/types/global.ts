@@ -4,7 +4,11 @@ import type { Action } from 'redux';
 export type ReduxStore = {
     value: {
         dataEntries: Record<string, { eventId: string }>;
-        currentSelections: Record<string, unknown>;
+        currentSelections: {
+            programId?: string;
+            orgUnitId?: string;
+            complete?: boolean;
+        };
         possibleDuplicates: {
             isLoading: boolean;
             isUpdating: boolean;
@@ -54,6 +58,21 @@ export type ReduxStore = {
         dataEntriesFieldsMeta: Record<string, unknown>;
         formsValues: Record<string, unknown>;
         organisationUnits: any[];
+        app: {
+            page: string;
+        };
+        dataEntriesRelationships: Record<string, any[]>;
+        dataEntriesNotes?: Record<string, any[]>;
+        offline: {
+            online?: boolean;
+        };
+        workingListsTemplates: {
+            eventList?: {
+                currentListId?: string;
+            };
+        };
+        workingListsContext: Record<string, any>;
+        recentlyAddedEvents: Record<string, any>;
     };
 };
 

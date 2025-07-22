@@ -1,12 +1,11 @@
-// @flow
 import { convertDataEntryToClientValues } from '../../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../../events/mainConverters';
-import { type RenderFoundation } from '../../../../../../metaData';
+import type { RenderFoundation } from '../../../../../../metaData';
 import { getLocationQuery } from '../../../../../../utils/routing';
 import { FEATURES, featureAvailable } from '../../../../../../../capture-core-utils';
 
-const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
+const getApiCategoriesArgument = (categories: { [id: string]: string } | null) => {
     if (!categories) {
         return null;
     }
@@ -21,9 +20,9 @@ const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
     };
 };
 
-export const getNewEventServerData = (state: ReduxState, formFoundation: RenderFoundation, formClientValues: Object, mainDataClientValues: Object) => {
+export const getNewEventServerData = (state: any, formFoundation: RenderFoundation, formClientValues: Record<string, any>, mainDataClientValues: Record<string, any>) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+    const mainDataServerValues: Record<string, any> = convertMainEventClientToServer(mainDataClientValues);
 
     return {
         events: [{
@@ -43,15 +42,15 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     };
 };
 
-export const getAddEventEnrollmentServerData = (state: ReduxState,
+export const getAddEventEnrollmentServerData = (state: any,
     formFoundation: RenderFoundation,
-    formClientValues: Object,
-    mainDataClientValues: Object,
-    history: Object,
+    formClientValues: Record<string, any>,
+    mainDataClientValues: Record<string, any>,
+    history: Record<string, any>,
     completed?: boolean,
 ) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+    const mainDataServerValues: Record<string, any> = convertMainEventClientToServer(mainDataClientValues);
     const { teiId, enrollmentId, programId, orgUnitId } = getLocationQuery();
 
     if (!mainDataServerValues.status) {
@@ -79,12 +78,12 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
     };
 };
 
-function getDataEntriesNotes(state: ReduxState, dataEntryKey: string) {
+function getDataEntriesNotes(state: any, dataEntryKey: string) {
     const notes = state.dataEntriesNotes && state.dataEntriesNotes[dataEntryKey];
     return notes ? notes.map(note => ({ value: note.value })) : [];
 }
 
-export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string, formFoundation: RenderFoundation) => {
+export const getNewEventClientValues = (state: any, dataEntryKey: string, formFoundation: RenderFoundation) => {
     const formValues = state.formsValues[dataEntryKey];
     const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
     const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
