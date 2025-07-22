@@ -1,19 +1,19 @@
-// @flow
 import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch } from './actions/tei.actionBatches';
 import { startAsyncUpdateFieldForNewTei } from './actions/tei.actions';
 import { PreTeiDataEntry } from './TrackedEntityInstanceDataEntry.component';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     onUpdateField: (
-        innerAction: ReduxAction<any, any>,
+        innerAction: any,
     ) => {
         dispatch(updateFieldBatch(innerAction));
     },
     onStartAsyncUpdateField: (
-        innerAction: ReduxAction<any, any>,
+        innerAction: any,
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
             asyncUpdateSuccessBatch(successInnerAction);
@@ -23,6 +23,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowFixMe
 export const TrackedEntityInstanceDataEntry = connect(mapStateToProps, mapDispatchToProps)(PreTeiDataEntry);
-

@@ -1,5 +1,5 @@
-// @flow
 import { batchActions } from 'redux-batched-actions';
+import type { ReduxAction } from '../../../../../capture-core-utils/types';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewTei } from './open.actions';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
@@ -22,13 +22,13 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     formValues,
     querySingleResource,
 }: {
-    foundation: ?RenderFoundation,
-    orgUnit: Object,
-    dataEntryId: string,
-    extraActions?: Array<ReduxAction<any, any>>,
-    generatedUniqueValuesCache?: Object,
-    formValues?: Object,
-    querySingleResource: QuerySingleResource,
+    foundation: RenderFoundation | null;
+    orgUnit: any;
+    dataEntryId: string;
+    extraActions?: Array<ReduxAction<any, any>>;
+    generatedUniqueValuesCache?: any;
+    formValues?: any;
+    querySingleResource: QuerySingleResource;
 }) => {
     const generatedItemContainers = await getGeneratedUniqueValuesAsync(
         foundation,
@@ -38,7 +38,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     );
 
     const generatedUniqueValues = generatedItemContainers
-        .reduce((accValuesByKey, container) => {
+        .reduce((accValuesByKey: any, container: any) => {
             accValuesByKey[container.id] = container.item.value;
             return accValuesByKey;
         }, {});
@@ -56,7 +56,7 @@ export const openDataEntryForNewTeiBatchAsync = async ({
         openDataEntryForNewTei(
             dataEntryId,
             generatedItemContainers
-                .reduce((accItemsByKey, container) => {
+                .reduce((accItemsByKey: any, container: any) => {
                     accItemsByKey[container.id] = container.item;
                     return accItemsByKey;
                 }, {}),

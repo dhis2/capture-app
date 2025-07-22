@@ -1,4 +1,3 @@
-// @flow
 import { useSelector } from 'react-redux';
 import { useMetadataForRegistrationForm } from '../../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 import type { RenderFoundation } from '../../../../metaData';
@@ -11,13 +10,13 @@ import type {
 import { geometryType, getPossibleTetFeatureTypeKey, buildGeometryProp } from '../../common/TEIAndEnrollment/geometry';
 
 type Props = {
-    trackedEntityTypeId: string,
-    dataEntryId: string,
-    orgUnitId: string,
-    itemId?: string,
+    trackedEntityTypeId: string;
+    dataEntryId: string;
+    orgUnitId: string;
+    itemId?: string;
 };
 
-function getClientValuesForFormData(formValues: Object, formFoundation: RenderFoundation) {
+function getClientValuesForFormData(formValues: Record<string, unknown>, formFoundation: RenderFoundation) {
     return formFoundation.convertValues(formValues, convertFormToClient);
 }
 
@@ -34,7 +33,7 @@ export const useBuildTeiPayload = ({
 }: Props) => {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
     const { formFoundation } = useMetadataForRegistrationForm({ selectedScopeId: trackedEntityTypeId });
-    const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
+    const formValues = useSelector(({ formsValues }: any) => formsValues[dataEntryKey]);
 
     const buildTeiWithoutEnrollment = (): TeiPayload => {
         if (!formFoundation) throw Error('form foundation object not found');

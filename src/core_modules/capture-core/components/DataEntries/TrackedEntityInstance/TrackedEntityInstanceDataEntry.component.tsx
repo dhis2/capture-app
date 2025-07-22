@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -7,13 +6,13 @@ import {
     withBrowserBackWarning,
     inMemoryFileStore,
 } from '../../DataEntry';
-import type { TeiRegistration } from '../../../metaData';
+import type { TeiRegistration, RenderFoundation } from '../../../metaData';
 
 type FinalTeiDataEntryProps = {
-    orgUnitId: string,
-    teiRegistrationMetadata: TeiRegistration,
+    orgUnitId: string;
+    teiRegistrationMetadata: TeiRegistration;
 };
-// final step before the generic dataEntry is inserted
+
 class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
     componentWillUnmount() {
         inMemoryFileStore.clear();
@@ -33,7 +32,7 @@ class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
 
 const BrowserBackWarningHOC = withBrowserBackWarning()(FinalTeiDataEntry);
 
-class PreTeiDataEntryPure extends React.PureComponent<Object> {
+class PreTeiDataEntryPure extends React.PureComponent<Record<string, unknown>> {
     render() {
         return (
             <BrowserBackWarningHOC
@@ -44,12 +43,16 @@ class PreTeiDataEntryPure extends React.PureComponent<Object> {
 }
 
 type PreTeiDataEntryProps = {
-    orgUnitId: string,
-    trackedEntityTypeId: string,
-    onUpdateField: Function,
-    onStartAsyncUpdateField: Function,
-    teiRegistrationMetadata: ?TeiRegistration,
-    onGetUnsavedAttributeValues?: ?Function,
+    orgUnitId: string;
+    trackedEntityTypeId: string;
+    onUpdateField: (field: string, value: any) => void;
+    onStartAsyncUpdateField: (field: string, value: any) => void;
+    teiRegistrationMetadata: TeiRegistration | null;
+    onGetUnsavedAttributeValues: ((field: string, value: any) => void) | null;
+    fieldOptions: any;
+    formFoundation: RenderFoundation;
+    id: string;
+    onPostProcessErrorMessage: (message: string) => string;
 };
 
 export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
@@ -80,7 +83,6 @@ export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
         }
 
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <PreTeiDataEntryPure
                 onGetValidationContext={this.getValidationContext}
                 onUpdateFormField={onUpdateField}
