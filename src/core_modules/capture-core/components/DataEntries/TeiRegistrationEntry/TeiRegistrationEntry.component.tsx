@@ -86,7 +86,7 @@ const TeiRegistrationEntryPlain =
                               <Button
                                   dataTest="create-and-link-button"
                                   primary
-                                  onClick={() => onSave()}
+                                  onClick={onSave}
                                   loading={isSavingInProgress}
                               >
                                   {saveButtonText}

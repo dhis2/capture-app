@@ -2,25 +2,22 @@ import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch } from './actions/tei.actionBatches';
 import { startAsyncUpdateFieldForNewTei } from './actions/tei.actions';
 import { PreTeiDataEntry } from './TrackedEntityInstanceDataEntry.component';
+import type { ReduxAction } from '../../../../capture-core-utils/types';
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: any) => ({
     onUpdateField: (
-        field: string,
-        value: any,
+        innerAction: any,
     ) => {
-        const innerAction = { type: 'UPDATE_FIELD', payload: { field, value } };
         dispatch(updateFieldBatch(innerAction));
     },
     onStartAsyncUpdateField: (
-        field: string,
-        value: any,
+        innerAction: any,
     ) => {
-        const innerAction = { type: 'UPDATE_FIELD_ASYNC', payload: { field, value } };
-        const onAsyncUpdateSuccess = (successInnerAction: any) =>
+        const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
             asyncUpdateSuccessBatch(successInnerAction);
-        const onAsyncUpdateError = (errorInnerAction: any) => errorInnerAction;
+        const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewTei(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },

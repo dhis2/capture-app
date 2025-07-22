@@ -35,7 +35,7 @@ export type Props = OwnProps & ContainerProps;
 
 type PropsAddedInHOC = {
     onPostProcessErrorMessage: (message: string) => string;
-    onSave: (saveType?: string | null) => void;
+    onSave: () => void;
 };
 
 type PropsRemovedInHOC = {
