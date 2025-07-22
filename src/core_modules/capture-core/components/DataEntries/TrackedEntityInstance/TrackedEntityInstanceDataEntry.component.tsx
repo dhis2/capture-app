@@ -47,8 +47,8 @@ type PreTeiDataEntryProps = {
     trackedEntityTypeId: string;
     onUpdateField: (field: string, value: any) => void;
     onStartAsyncUpdateField: (field: string, value: any) => void;
-    teiRegistrationMetadata?: TeiRegistration | null;
-    onGetUnsavedAttributeValues?: ((field: string, value: any) => void) | null;
+    teiRegistrationMetadata: TeiRegistration | null;
+    onGetUnsavedAttributeValues: ((field: string, value: any) => void) | null;
     fieldOptions: any;
     formFoundation: RenderFoundation;
     id: string;

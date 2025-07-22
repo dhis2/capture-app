@@ -16,7 +16,7 @@ type Props = {
     selectedScopeId: string;
     dataEntryId: string;
     orgUnitId: string;
-    inheritedAttributes?: Array<InputAttribute> | null;
+    inheritedAttributes?: Array<InputAttribute>;
 }
 
 const useInitialiseTeiRegistration = ({

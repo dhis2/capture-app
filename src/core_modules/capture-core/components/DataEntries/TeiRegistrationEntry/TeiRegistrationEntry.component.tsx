@@ -119,7 +119,7 @@ const TeiRegistrationEntryPlain =
   };
 
 export const TeiRegistrationEntryComponent: ComponentType<Props> = compose(
-    withErrorMessagePostProcessor((() => '')),
+    withErrorMessagePostProcessor((({ trackedEntityName }: any) => trackedEntityName)),
     withDuplicateCheckOnSave(),
     withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }: any) => {
         const form = teiRegistrationMetadata && teiRegistrationMetadata.form;

@@ -1,4 +1,5 @@
 import { batchActions } from 'redux-batched-actions';
+import type { ReduxAction } from '../../../../../capture-core-utils/types';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewTei } from './open.actions';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
@@ -21,10 +22,10 @@ export const openDataEntryForNewTeiBatchAsync = async ({
     formValues,
     querySingleResource,
 }: {
-    foundation?: RenderFoundation | null;
+    foundation: RenderFoundation | null;
     orgUnit: any;
     dataEntryId: string;
-    extraActions?: Array<any>;
+    extraActions?: Array<ReduxAction<any, any>>;
     generatedUniqueValuesCache?: any;
     formValues?: any;
     querySingleResource: QuerySingleResource;

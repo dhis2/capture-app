@@ -4,7 +4,7 @@ import { convertClientToForm } from '../../../../converters';
 import type { InputAttribute } from '../../EnrollmentRegistrationEntry/hooks/useFormValues';
 
 type Props = {
-    inheritedAttributes?: Array<InputAttribute> | null;
+    inheritedAttributes?: Array<InputAttribute>;
 };
 
 export const useFormValuesFromSearchTerms = ({ inheritedAttributes }: Props) => {
