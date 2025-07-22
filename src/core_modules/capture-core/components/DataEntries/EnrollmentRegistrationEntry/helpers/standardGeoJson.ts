@@ -1,6 +1,4 @@
-// @flow
-
-export const standardGeoJson = (geometry: Array<number> | { longitude: number, latitude: number }) => {
+export const standardGeoJson = (geometry: Array<number> | { longitude: number; latitude: number }) => {
     if (!geometry) {
         return undefined;
     }

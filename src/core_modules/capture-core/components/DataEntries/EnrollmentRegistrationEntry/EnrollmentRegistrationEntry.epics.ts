@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { pluck, switchMap } from 'rxjs/operators';
 import { empty, from } from 'rxjs';
@@ -11,7 +10,7 @@ import { getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 import type { TrackerProgram } from '../../../metaData/Program';
 
-export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: InputObservable) =>
+export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) =>
     action$.pipe(
         ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
@@ -24,9 +23,9 @@ export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: Input
             programCategory,
             firstStage,
             formFoundation,
-        }) => {
+        }: any) => {
             if (selectedOrgUnit) {
-                let trackerProgram: ?TrackerProgram;
+                let trackerProgram: TrackerProgram | null = null;
                 try {
                     trackerProgram = getTrackerProgramThrowIfNotFound(programId);
                 } catch (error) {

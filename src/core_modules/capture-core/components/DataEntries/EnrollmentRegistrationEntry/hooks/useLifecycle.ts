@@ -1,4 +1,3 @@
-// @flow
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
@@ -16,18 +15,17 @@ export const useLifecycle = (
     selectedScopeId: string,
     dataEntryId: string,
     trackedEntityInstanceAttributes?: Array<InputAttribute>,
-    orgUnit: ?OrgUnit,
-    teiId: ?string,
-    programId: string,
+    orgUnit?: OrgUnit,
+    teiId?: string,
 ) => {
     const dataEntryReadyRef = useRef(false);
     const dispatch = useDispatch();
-    const program = programId && getProgramThrowIfNotFound(programId);
+    const program = selectedScopeId && getProgramThrowIfNotFound(selectedScopeId);
     const ready =
-        useSelector(({ dataEntries }) => !!dataEntries[dataEntryId]) && !!orgUnit && dataEntryReadyRef.current === true;
-    const searchTerms = useSelector(({ newPage }) => newPage.prepopulatedData);
+        useSelector(({ dataEntries }: any) => !!dataEntries[dataEntryId]) && !!orgUnit && dataEntryReadyRef.current === true;
+    const searchTerms = useSelector(({ newPage }: any) => newPage.prepopulatedData);
     const { scopeType } = useScopeInfo(selectedScopeId);
-    const { firstStageMetaData } = useBuildFirstStageRegistration(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const { firstStageMetaData } = useBuildFirstStageRegistration(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const {
         formId,
         registrationMetaData: enrollmentMetadata,
@@ -35,7 +33,7 @@ export const useLifecycle = (
     } = useMetadataForRegistrationForm({ selectedScopeId });
 
     const { formFoundation } = useMergeFormFoundationsIfApplicable(enrollmentFormFoundation, firstStageMetaData);
-    const { programCategory } = useCategoryCombinations(programId, scopeType !== scopeTypes.TRACKER_PROGRAM);
+    const { programCategory } = useCategoryCombinations(selectedScopeId, scopeType !== scopeTypes.TRACKER_PROGRAM);
     const { formValues, clientValues, formValuesReadyRef } = useFormValues({
         program,
         trackedEntityInstanceAttributes,

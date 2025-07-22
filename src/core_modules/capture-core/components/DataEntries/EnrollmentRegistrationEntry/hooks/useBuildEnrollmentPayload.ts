@@ -1,4 +1,3 @@
-// @flow
 import { useSelector } from 'react-redux';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
@@ -35,18 +34,18 @@ type DataEntryReduxConverterProps = {
     dataEntryId: string;
     itemId?: string;
     orgUnitId: string;
-    teiId: ?string;
+    teiId?: string;
     trackedEntityTypeId: string;
 };
 
-function getClientValuesForFormData(formValues: Object, formFoundation: RenderFoundation) {
+function getClientValuesForFormData(formValues: Record<string, unknown>, formFoundation: RenderFoundation) {
     const clientValues = formFoundation.convertValues(formValues, convertFormToClient);
     return clientValues;
 }
 
 function getServerValuesForMainValues(
-    values: Object,
-    meta: Object,
+    values: Record<string, unknown>,
+    meta: any,
     formFoundation: RenderFoundation,
 ) {
     const clientValues = convertDataEntryValuesToClientValues(
@@ -55,7 +54,6 @@ function getServerValuesForMainValues(
         formFoundation,
     ) || {};
 
-    // potientally run this through a server to client converter for enrollment, the same way as for event
     const serverValues = Object
         .keys(clientValues)
         .reduce((acc, key) => {
@@ -71,7 +69,7 @@ function getServerValuesForMainValues(
 const deriveAttributesFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
         .filter(key => !geometryType(key))
-        .map<{ attribute: string, value: ?any }>(key => ({ attribute: key, value: formValues[key] }));
+        .map(key => ({ attribute: key, value: formValues[key] }));
 
 export const useBuildEnrollmentPayload = ({
     programId,
@@ -82,20 +80,20 @@ export const useBuildEnrollmentPayload = ({
     trackedEntityTypeId,
 }: DataEntryReduxConverterProps) => {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
-    const formValues = useSelector(({ formsValues }) => formsValues[dataEntryKey]);
-    const dataEntryFieldValues = useSelector(({ dataEntriesFieldsValue }) => dataEntriesFieldsValue[dataEntryKey]);
-    const dataEntryFieldsMeta = useSelector(({ dataEntriesFieldsMeta }) => dataEntriesFieldsMeta[dataEntryKey]);
+    const formValues = useSelector(({ formsValues }: any) => formsValues[dataEntryKey]);
+    const dataEntryFieldValues = useSelector(({ dataEntriesFieldsValue }: any) => dataEntriesFieldsValue[dataEntryKey]);
+    const dataEntryFieldsMeta = useSelector(({ dataEntriesFieldsMeta }: any) => dataEntriesFieldsMeta[dataEntryKey]);
     const { formFoundation: scopeFormFoundation } = useMetadataForRegistrationForm({ selectedScopeId: programId });
     const { firstStageMetaData } = useBuildFirstStageRegistration(programId);
     const { formFoundation } = useMergeFormFoundationsIfApplicable(scopeFormFoundation, firstStageMetaData);
 
-    const buildTeiWithEnrollment = (relatedStageRef?: {current: ?RelatedStageRefPayload}): {
-        teiWithEnrollment: EnrollmentPayload,
-        formHasError: boolean,
+    const buildTeiWithEnrollment = (relatedStageRef?: {current: RelatedStageRefPayload | null}): {
+        teiWithEnrollment: EnrollmentPayload;
+        formHasError: boolean;
         redirect: {
-            programStageId?: string,
-            eventId?: string,
-        },
+            programStageId?: string;
+            eventId?: string;
+        };
     } => {
         if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
@@ -106,7 +104,7 @@ export const useBuildEnrollmentPayload = ({
             dataEntryFieldsMeta,
             formFoundation,
         );
-        const { enrolledAt, occurredAt, assignee, geometry: enrollmentGeometry } = serverValuesForMainValues;
+        const { enrolledAt, occurredAt, assignee, geometry: enrollmentGeometry } = serverValuesForMainValues as any;
 
         const { stages } = getTrackerProgramThrowIfNotFound(programId);
 
@@ -150,7 +148,6 @@ export const useBuildEnrollmentPayload = ({
             programId,
             orgUnitId,
             attributeCategoryOptions,
-            occurredAt,
         });
 
         const redirect = getRedirectIds({

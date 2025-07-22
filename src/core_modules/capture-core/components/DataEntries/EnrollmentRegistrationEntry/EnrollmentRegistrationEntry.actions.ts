@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const enrollmentRegistrationEntryActionTypes = {
@@ -14,7 +13,16 @@ export const startNewEnrollmentDataEntryInitialisation = ({
     programCategory,
     firstStage,
     formFoundation,
-}: Object) =>
+}: {
+    selectedOrgUnit: any;
+    selectedScopeId: string;
+    dataEntryId: string;
+    formValues: any;
+    clientValues: any;
+    programCategory: any;
+    firstStage: any;
+    formFoundation: any;
+}) =>
     actionCreator(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START)({
         selectedOrgUnit,
         selectedScopeId,

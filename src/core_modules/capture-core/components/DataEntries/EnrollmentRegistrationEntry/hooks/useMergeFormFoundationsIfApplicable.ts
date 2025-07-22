@@ -1,23 +1,21 @@
-// @flow
 import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { RenderFoundation, Section, ProgramStage } from '../../../../metaData';
 
-const addElements = (section, newSection) =>
+const addElements = (section: any, newSection: any) =>
     Array.from(section.elements.entries())
-        .map(entry => entry[1])
+        .map((entry: any) => entry[1])
         .forEach((element) => {
-            // $FlowFixMe[prop-missing] section is missing in FormFieldPluginConfig
             element.section = newSection;
             newSection.addElement(element);
         });
 
-const getSectionId = sectionId =>
+const getSectionId = (sectionId: string) =>
     (sectionId === Section.MAIN_SECTION_ID ? `${Section.MAIN_SECTION_ID}-stage` : sectionId);
 
 export const useMergeFormFoundationsIfApplicable = (
-    enrollmentFormFoundation?: ?RenderFoundation,
-    firstStageMetaData?: ?{ stage: ?ProgramStage },
+    enrollmentFormFoundation?: RenderFoundation | null,
+    firstStageMetaData?: { stage: ProgramStage | null } | null,
 ) => {
     const enrollmentSectionsSize = enrollmentFormFoundation?.sections.size;
 
@@ -33,7 +31,7 @@ export const useMergeFormFoundationsIfApplicable = (
 
         const stageName = firstStageMetaData?.stage?.name;
         const { id, name, access, description, featureType, validationStrategy } = enrollmentFormFoundation;
-        const renderFoundation = new RenderFoundation((o) => {
+        const renderFoundation = new RenderFoundation((o: any) => {
             o.id = id;
             o.name = name;
             o.access = access;
@@ -44,9 +42,9 @@ export const useMergeFormFoundationsIfApplicable = (
 
         enrollmentFormFoundation.sections.forEach(section => renderFoundation.addSection(section));
 
-        firstStageFormFoundation.sections.forEach((section) => {
+        firstStageFormFoundation.sections.forEach((section: any) => {
             const isMainSection = section.id === Section.MAIN_SECTION_ID;
-            const newSection = new Section((o) => {
+            const newSection = new Section((o: any) => {
                 o.id = getSectionId(section.id);
                 o.name = isMainSection
                     ? i18n.t('{{ stageName }} - Details', {

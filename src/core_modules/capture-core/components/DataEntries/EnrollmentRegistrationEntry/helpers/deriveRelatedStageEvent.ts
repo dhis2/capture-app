@@ -1,4 +1,3 @@
-// @flow
 import { ProgramStage } from '../../../../metaData';
 import { getConvertedRelatedStageEvent } from '../../../DataEntries';
 import type { RequestEvent } from '../../../DataEntries';
@@ -11,11 +10,11 @@ export const deriveRelatedStageEvent = ({
     programId,
     teiId,
 }: {
-    serverRequestEvent: ?RequestEvent,
-    relatedStageRef?: { current: ?RelatedStageRefPayload},
-    firstStageMetaData: ?{ stage: ?ProgramStage},
-    programId: string,
-    teiId?: ?string,
+    serverRequestEvent: RequestEvent | null;
+    relatedStageRef?: { current: RelatedStageRefPayload | null };
+    firstStageMetaData: { stage: ProgramStage | null } | null;
+    programId: string;
+    teiId?: string;
 }) => {
     if (relatedStageRef?.current && relatedStageRef.current.eventHasLinkableStageRelationship()) {
         const isValid = relatedStageRef.current.formIsValidOnSave();

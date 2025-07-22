@@ -1,4 +1,3 @@
-// @flow
 import { ProgramStage } from '../../../../metaData';
 import { relatedStageActions } from '../../../WidgetRelatedStages';
 
@@ -17,22 +16,22 @@ export const getRedirectIds = ({
     firstStageDuringRegistrationEvent,
     autoGenerateEvents,
 }: {
-    stages: Map<string, ProgramStage>,
-    linkMode: ?string,
-    relatedStageLinkedEvent: ?{
-        programStage: string,
-        event: string,
-    },
-    firstStageDuringRegistrationEvent: ?{
-        programStage: string,
-        event: string,
-    },
+    stages: Map<string, ProgramStage>;
+    linkMode: string | null;
+    relatedStageLinkedEvent: {
+        programStage: string;
+        event: string;
+    } | null;
+    firstStageDuringRegistrationEvent: {
+        programStage: string;
+        event: string;
+    } | null;
     autoGenerateEvents: Array<{
-        programStage: string,
-        event: string,
-        orgUnit: string,
-    }>,
-}): { programStageId?: string, eventId?: string } => {
+        programStage: string;
+        event: string;
+        orgUnit: string;
+    }>;
+}): { programStageId?: string; eventId?: string } => {
     if (relatedStageLinkedEvent && linkMode === relatedStageActions.ENTER_DATA) {
         return { eventId: relatedStageLinkedEvent.event };
     }

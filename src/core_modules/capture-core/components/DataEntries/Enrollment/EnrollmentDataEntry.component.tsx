@@ -402,6 +402,8 @@ type PreEnrollmentDataEntryProps = {
     firstStageMetaData?: { stage: ProgramStage } | null;
     formFoundation: RenderFoundation;
     enrollmentMetadata: Enrollment;
+    id: string;
+    onPostProcessErrorMessage: (message: string) => string;
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<any> {
