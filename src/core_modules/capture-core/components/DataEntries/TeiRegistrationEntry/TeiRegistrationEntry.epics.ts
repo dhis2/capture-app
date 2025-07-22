@@ -1,4 +1,3 @@
-// @flow
 import { ofType } from 'redux-observable';
 import { pluck, switchMap } from 'rxjs/operators';
 import { empty, from } from 'rxjs';
@@ -11,14 +10,14 @@ import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 
 export const startNewTeiDataEntrySelfInitialisationEpic = (
-    action$: InputObservable,
-    _: ReduxStore,
-    { querySingleResource }: ApiUtils,
+    action$: any,
+    _: any,
+    { querySingleResource }: any,
 ) =>
     action$.pipe(
         ofType(teiRegistrationEntryActionTypes.TEI_REGISTRATION_ENTRY_INITIALISATION_START),
         pluck('payload'),
-        switchMap(({ selectedOrgUnitId, selectedScopeId: TETypeId, dataEntryId, formFoundation, formValues }) => {
+        switchMap(({ selectedOrgUnitId, selectedScopeId: TETypeId, dataEntryId, formFoundation, formValues }: any) => {
             if (selectedOrgUnitId) {
                 try {
                     getTrackedEntityTypeThrowIfNotFound(TETypeId);
@@ -41,4 +40,3 @@ export const startNewTeiDataEntrySelfInitialisationEpic = (
             return empty();
         }),
     );
-

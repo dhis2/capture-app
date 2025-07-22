@@ -1,4 +1,3 @@
-// @flow
 import { actionCreator } from '../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -7,5 +6,5 @@ export const actionTypes = {
 
 export const openDataEntryForNewTei = (
     dataEntryId: string,
-    generatedUniqueValues: Object,
+    generatedUniqueValues: any,
 ) => actionCreator(actionTypes.DATA_ENTRY_NEW_TEI_OPEN)({ dataEntryId, generatedUniqueValues });

@@ -1,9 +1,8 @@
-// @flow
 import { actionPayloadAppender } from '../../../../actions/actions.utils';
 
 export const startAsyncUpdateFieldForNewTei = (
-    innerAction: ReduxAction<any, any>,
-    onSuccess: Function,
-    onError: Function,
+    innerAction: any,
+    onSuccess: (result: any) => void,
+    onError: (error: any) => void,
 ) =>
     actionPayloadAppender(innerAction)({ onSuccess, onError });

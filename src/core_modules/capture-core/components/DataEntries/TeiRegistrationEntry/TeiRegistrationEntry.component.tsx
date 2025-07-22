@@ -1,9 +1,8 @@
-// @flow
 import React, { type ComponentType, useState } from 'react';
 import { compose } from 'redux';
 import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles, WithStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
@@ -18,7 +17,7 @@ import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCh
 import { defaultDialogProps } from '../../Dialogs/DiscardDialog.constants';
 import { useMetadataForRegistrationForm } from '../common/TEIAndEnrollment/useMetadataForRegistrationForm';
 
-const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
+const translatedTextWithStylesForTei = (trackedEntityName: string, orgUnitName?: string) =>
     (<>
         {i18n.t('Saving a {{trackedEntityName}}', {
             trackedEntityName, interpolation: { escapeValue: false } })
@@ -27,12 +26,12 @@ const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
         {i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);
 
-const styles = () => ({
+const styles: Readonly<any> = {
     actions: {
         display: 'flex',
         gap: spacers.dp8,
     },
-});
+};
 
 const TeiRegistrationEntryPlain =
   ({
@@ -49,7 +48,7 @@ const TeiRegistrationEntryPlain =
       isSavingInProgress,
       onCancel,
       ...rest
-  }: PlainProps) => {
+  }: PlainProps & WithStyles<typeof styles>) => {
       const [showWarning, setShowWarning] = useState(false);
       const { scopeType } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useMetadataForRegistrationForm({ selectedScopeId });
@@ -70,6 +69,7 @@ const TeiRegistrationEntryPlain =
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
                       <TrackedEntityInstanceDataEntry
+                          // @ts-expect-error - keeping original functionality as before ts rewrite
                           orgUnitId={orgUnitId}
                           formFoundation={formFoundation}
                           trackedEntityTypeId={selectedScopeId}
@@ -86,7 +86,7 @@ const TeiRegistrationEntryPlain =
                               <Button
                                   dataTest="create-and-link-button"
                                   primary
-                                  onClick={onSave}
+                                  onClick={() => onSave()}
                                   loading={isSavingInProgress}
                               >
                                   {saveButtonText}
@@ -118,13 +118,12 @@ const TeiRegistrationEntryPlain =
       );
   };
 
-export const TeiRegistrationEntryComponent: ComponentType<Props> =
-  compose(
-      withErrorMessagePostProcessor((({ trackedEntityName }) => trackedEntityName)),
-      withDuplicateCheckOnSave(),
-      withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
-          const form = teiRegistrationMetadata && teiRegistrationMetadata.form;
-          return form;
-      } }),
-      withStyles(styles),
-  )(TeiRegistrationEntryPlain);
+export const TeiRegistrationEntryComponent: ComponentType<Props> = compose(
+    withErrorMessagePostProcessor((() => '')),
+    withDuplicateCheckOnSave(),
+    withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }: any) => {
+        const form = teiRegistrationMetadata && teiRegistrationMetadata.form;
+        return form;
+    } }),
+    withStyles(styles),
+)(TeiRegistrationEntryPlain) as ComponentType<Props>;

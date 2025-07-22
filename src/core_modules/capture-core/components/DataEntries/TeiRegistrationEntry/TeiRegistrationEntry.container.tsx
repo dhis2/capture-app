@@ -1,4 +1,3 @@
-// @flow
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
@@ -14,11 +13,12 @@ import { useBuildTeiPayload } from './hooks/useBuildTeiPayload';
 import type { InputAttribute } from '../EnrollmentRegistrationEntry/hooks/useFormValues';
 
 type Props = {
-    selectedScopeId: string,
-    dataEntryId: string,
-    orgUnitId: string,
-    inheritedAttributes: ?Array<InputAttribute>,
+    selectedScopeId: string;
+    dataEntryId: string;
+    orgUnitId: string;
+    inheritedAttributes?: Array<InputAttribute> | null;
 }
+
 const useInitialiseTeiRegistration = ({
     selectedScopeId,
     dataEntryId,
@@ -75,8 +75,8 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
         orgUnitId,
         inheritedAttributes,
     });
-    const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
-    const dataEntry = useSelector(({ dataEntries }) => (dataEntries[id]));
+    const ready = useSelector(({ dataEntries }: any) => (!!dataEntries[id]));
+    const dataEntry = useSelector(({ dataEntries }: any) => (dataEntries[id]));
     const {
         registrationMetaData: teiRegistrationMetadata,
     } = useMetadataForRegistrationForm({ selectedScopeId });
@@ -94,7 +94,7 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> = ({
     }, [id, dataEntry]);
 
     const isUserInteractionInProgress: boolean = useSelector(
-        state =>
+        (state: any) =>
             dataEntryHasChanges(state, dataEntryKey),
     );
 
