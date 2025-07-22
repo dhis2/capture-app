@@ -98,7 +98,7 @@ export const useBuildEnrollmentPayload = ({
         if (!formFoundation) throw Error('form foundation object not found');
         const firstStage = firstStageMetaData && firstStageMetaData.stage;
         const clientValues = getClientValuesForFormData(formValues, formFoundation);
-        const serverValuesForFormValues = (formFoundation as any).convertAndGroupBySection(clientValues, convertClientToServer);
+        const serverValuesForFormValues = formFoundation.convertAndGroupBySection(clientValues, convertClientToServer);
         const serverValuesForMainValues = getServerValuesForMainValues(
             dataEntryFieldValues,
             dataEntryFieldsMeta,

@@ -14,8 +14,8 @@ const getSectionId = (sectionId: string) =>
     (sectionId === Section.MAIN_SECTION_ID ? `${Section.MAIN_SECTION_ID}-stage` : sectionId);
 
 export const useMergeFormFoundationsIfApplicable = (
-    enrollmentFormFoundation?: RenderFoundation,
-    firstStageMetaData?: { stage?: ProgramStage },
+    enrollmentFormFoundation?: RenderFoundation | null,
+    firstStageMetaData?: { stage: ProgramStage | null } | null,
 ) => {
     const enrollmentSectionsSize = enrollmentFormFoundation?.sections.size;
 

@@ -9,7 +9,6 @@ import { openDataEntryForNewEnrollmentBatchAsync } from '../Enrollment';
 import { getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 import type { TrackerProgram } from '../../../metaData/Program';
-// import type { EpicAction, ReduxStore } from '../../../capture-core-utils/types';
 
 export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: any) =>
     action$.pipe(

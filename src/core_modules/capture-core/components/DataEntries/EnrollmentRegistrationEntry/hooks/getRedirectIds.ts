@@ -17,15 +17,15 @@ export const getRedirectIds = ({
     autoGenerateEvents,
 }: {
     stages: Map<string, ProgramStage>;
-    linkMode?: string | null;
-    relatedStageLinkedEvent?: {
+    linkMode: string | null;
+    relatedStageLinkedEvent: {
         programStage: string;
         event: string;
-    };
-    firstStageDuringRegistrationEvent?: {
+    } | null;
+    firstStageDuringRegistrationEvent: {
         programStage: string;
         event: string;
-    };
+    } | null;
     autoGenerateEvents: Array<{
         programStage: string;
         event: string;

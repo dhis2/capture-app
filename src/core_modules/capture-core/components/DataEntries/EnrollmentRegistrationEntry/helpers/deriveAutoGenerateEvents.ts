@@ -23,8 +23,8 @@ export const deriveAutoGenerateEvents = ({
     occurredAt: string;
     programId: string;
     orgUnitId: string;
-    firstStageDuringRegistrationEvent?: RequestEvent;
-    relatedStageLinkedEvent?: LinkedRequestEvent;
+    firstStageDuringRegistrationEvent: RequestEvent | null;
+    relatedStageLinkedEvent: LinkedRequestEvent | null;
     attributeCategoryOptions: { [categoryId: string]: string } | string;
 }) => {
     // in case we have a program that does not have an incident date (occurredAt), such as Malaria case diagnosis,

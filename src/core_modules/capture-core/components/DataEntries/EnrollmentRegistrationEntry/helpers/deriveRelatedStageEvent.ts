@@ -12,7 +12,7 @@ export const deriveRelatedStageEvent = ({
 }: {
     serverRequestEvent?: RequestEvent;
     relatedStageRef?: { current: RelatedStageRefPayload | null };
-    firstStageMetaData?: { stage?: ProgramStage };
+    firstStageMetaData: { stage: ProgramStage | null } | null;
     programId: string;
     teiId?: string;
 }) => {

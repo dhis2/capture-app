@@ -105,7 +105,7 @@ const buildFormValues = async ({
     searchTerms,
     querySingleResource,
 }: {
-    foundation?: RenderFoundation;
+    foundation: RenderFoundation | null;
     clientAttributesWithSubvalues: Array<any>;
     staticPatternValues: StaticPatternValues;
     setFormValues: (values: any) => void;
