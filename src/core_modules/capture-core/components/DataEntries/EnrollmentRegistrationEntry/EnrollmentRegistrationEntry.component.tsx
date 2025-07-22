@@ -1,4 +1,3 @@
-// @flow
 import React, { type ComponentType, useState } from 'react';
 import { Button, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -23,7 +22,7 @@ const styles = () => ({
     },
 });
 
-const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string, teiId?: ?string) => (
+const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string, teiId?: string) => (
     teiId ? <span>
         {i18n.t('Saving a new enrollment in {{programName}} in {{orgUnitName}}.', {
             programName,
@@ -129,9 +128,9 @@ const EnrollmentRegistrationEntryPlain =
 
 export const EnrollmentRegistrationEntryComponent: ComponentType<Props> =
   compose(
-      withErrorMessagePostProcessor((({ enrollmentMetadata }) => enrollmentMetadata.trackedEntityType.name)),
+      withErrorMessagePostProcessor((({ enrollmentMetadata }: any) => enrollmentMetadata.trackedEntityType.name)),
       withLoadingIndicator(() => ({ height: '350px' })),
       withDuplicateCheckOnSave(),
-      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm, onIsCompleting: () => true }),
+      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }: any) => enrollmentMetadata && enrollmentMetadata.enrollmentForm, onIsCompleting: () => true }),
       withStyles(styles),
-  )(EnrollmentRegistrationEntryPlain);
+  )(EnrollmentRegistrationEntryPlain) as any;

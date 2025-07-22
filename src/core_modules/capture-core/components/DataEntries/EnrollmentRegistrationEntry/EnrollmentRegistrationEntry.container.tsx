@@ -1,4 +1,3 @@
-// @flow
 import React, { useRef } from 'react';
 import type { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
@@ -23,7 +22,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     onCancel,
     ...passOnProps
 }) => {
-    const relatedStageRef = useRef<?RelatedStageRefPayload>(null);
+    const relatedStageRef = useRef<RelatedStageRefPayload | null>(null);
     const { orgUnit, error } = useCoreOrgUnit(orgUnitId);
     const {
         ready,
@@ -32,7 +31,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
         formId,
         enrollmentMetadata,
         formFoundation,
-    } = useLifecycle(selectedScopeId, id, trackedEntityInstanceAttributes, orgUnit, teiId, selectedScopeId);
+    } = useLifecycle(selectedScopeId, id, orgUnit, selectedScopeId, trackedEntityInstanceAttributes, teiId);
     const { buildTeiWithEnrollment } = useBuildEnrollmentPayload({
         programId: selectedScopeId,
         dataEntryId: id,
@@ -42,7 +41,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     });
 
     const isUserInteractionInProgress: boolean = useSelector(
-        state =>
+        (state: any) =>
             dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
           || dataEntryHasChanges(state, 'newPageDataEntryId-newTei')
           || dataEntryHasChanges(state, 'relationship-newTei')
@@ -50,7 +49,7 @@ export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({
     );
     const trackedEntityTypeNameLC = enrollmentMetadata?.trackedEntityType?.name.toLocaleLowerCase() ?? '';
 
-    const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }) =>
+    const isSavingInProgress = useSelector(({ possibleDuplicates, newPage }: any) =>
         possibleDuplicates.isLoading || possibleDuplicates.isUpdating || !!newPage.uid);
 
 

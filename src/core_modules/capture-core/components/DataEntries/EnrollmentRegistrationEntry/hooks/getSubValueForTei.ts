@@ -1,5 +1,4 @@
-// @flow
-import type { QuerySingleResource } from 'capture-core/utils/api';
+import type { QuerySingleResource } from '../../../../utils/api/api.types';
 import { dataElementTypes } from '../../../../metaData';
 import { getOrgUnitNames } from '../../../../metadataRetrieval/orgUnitName';
 

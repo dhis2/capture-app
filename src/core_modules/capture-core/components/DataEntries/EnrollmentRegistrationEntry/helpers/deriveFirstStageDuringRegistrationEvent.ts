@@ -6,6 +6,7 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { convertCategoryOptionsToServer } from '../../../../converters/clientToServer';
 import { convertStatusOut } from '../../../DataEntries';
 import { standardGeoJson } from './standardGeoJson';
+import type { ApiAssignedUser } from '../../../../../capture-core-utils/types/api-types';
 
 const convertFn = pipe(convertFormToClient, convertClientToServer);
 
@@ -18,7 +19,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
     attributeCategoryOptions,
     assignee,
 }: {
-    firstStageMetadata: ?ProgramStage,
+    firstStageMetadata: ProgramStage | null,
     programId: string,
     orgUnitId: string,
     currentEventValues?: { [id: string]: any },
@@ -40,7 +41,6 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         status: convertStatusOut(stageComplete),
         geometry: standardGeoJson(stageGeometry),
         occurredAt: convertFn(stageOccurredAt, dataElementTypes.DATE),
-        // $FlowFixMe
         ...(featureAvailable(FEATURES.sendEmptyScheduledAt) ? {} : { scheduledAt: convertFn(enrolledAt, dataElementTypes.DATE) }),
         programStage: firstStageMetadata.id,
         program: programId,
@@ -48,7 +48,7 @@ export const deriveFirstStageDuringRegistrationEvent = ({
         ...eventAttributeCategoryOptions,
     };
 
-    const dataValues = currentEventValues ? Object.keys(currentEventValues).reduce((acc, dataElement) => {
+    const dataValues = currentEventValues ? Object.keys(currentEventValues).reduce((acc: Array<{ dataElement: string; value: any }>, dataElement) => {
         acc.push({ dataElement, value: currentEventValues[dataElement] });
         return acc;
     }, []) : undefined;
