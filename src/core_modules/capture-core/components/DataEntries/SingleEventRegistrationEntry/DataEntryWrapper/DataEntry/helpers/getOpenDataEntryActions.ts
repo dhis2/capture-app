@@ -1,4 +1,3 @@
-// @flow
 import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { loadNewDataEntry } from '../../../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getEventDateValidatorContainers, getOrgUnitValidatorContainers } from '../fieldValidators';
@@ -8,10 +7,9 @@ import { dataEntryId, itemId, formId } from './constants';
 import { addFormData } from '../../../../../D2Form/actions/form.actions';
 import { getCategoryOptionsValidatorContainers } from '../../../../Enrollment/fieldValidators';
 import type { ProgramCategory } from '../../../../../WidgetEventSchedule/CategoryOptions/CategoryOptions.types';
+import type { DataEntryPropToInclude } from '../../../../../DataEntry/actions/dataEntryLoad.utils';
 
-type DataEntryPropsToInclude = Array<Object>;
-
-const dataEntryPropsToInclude: DataEntryPropsToInclude = [
+const dataEntryPropsToInclude: Array<DataEntryPropToInclude> = [
     {
         id: 'occurredAt',
         type: 'DATE',
@@ -46,13 +44,14 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
     {
         id: 'assignee',
+        type: 'assignee',
     },
 ];
 
 export const getOpenDataEntryActions = (
-    programCategory: ?ProgramCategory,
-    selectedCategories: ?{ [key: string]: string },
-    orgUnit: ?{ ...OrgUnit, path: string },
+    programCategory?: ProgramCategory | null,
+    selectedCategories?: { [key: string]: string } | null,
+    orgUnit?: OrgUnit & { path: string } | null,
 ) => {
     let defaultDataEntryValues = {
         orgUnit: orgUnit

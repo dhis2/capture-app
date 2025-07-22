@@ -1,9 +1,8 @@
-// @flow
 import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
-import { type OrgUnit } from '@dhis2/rules-engine-javascript';
+import type { OrgUnit } from '@dhis2/rules-engine-javascript';
 import { DataEntryComponent } from './DataEntry.component';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
@@ -22,14 +21,13 @@ import {
 import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
-import { type RenderFoundation } from '../../../../../metaData';
+import type { RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
-import typeof { newEventSaveTypes } from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => ({
+    const mapStateToProps = (state: any, props: any) => ({
         recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
         ready: !state.activePage.isDataEntryLoading,
         error: !props.formFoundation ?
@@ -39,13 +37,11 @@ const makeMapStateToProps = () => {
         orgUnitName: state.dataEntriesFieldsValue['singleEvent-newEvent']?.orgUnit?.name,
     });
 
-
-    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
+const mapDispatchToProps = (dispatch: any) => ({
+    onUpdateDataEntryField: (orgUnit: OrgUnit) => (innerAction: any) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
 
@@ -55,7 +51,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             startRunRulesOnUpdateForNewSingleEvent({ ...innerAction.payload, uid, orgUnit }),
         ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
-    onUpdateField: (orgUnit: OrgUnit) => (innerAction: ReduxAction<any, any>) => {
+    onUpdateField: (orgUnit: OrgUnit) => (innerAction: any) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
 
@@ -66,11 +62,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
     onStartAsyncUpdateField: (orgUnit: OrgUnit) => (
-        innerAction: ReduxAction<any, any>,
+        innerAction: any,
         dataEntryId: string,
         itemId: string,
     ) => {
-        const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
+        const onAsyncUpdateSuccess = (successInnerAction: any) => {
             const uid = uuid();
             return batchActions([
                 successInnerAction,
@@ -78,7 +74,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
                 startRunRulesOnUpdateForNewSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, orgUnit }),
             ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH);
         };
-        const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
+        const onAsyncUpdateError = (errorInnerAction: any) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
@@ -89,7 +85,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
-    onSetSaveTypes: (newSaveTypes: ?Array<$Values<newEventSaveTypes>>) => {
+    onSetSaveTypes: (newSaveTypes?: any) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
     },
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
@@ -112,7 +108,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         },
 });
 
-// $FlowFixMe[missing-annot] automated comment
 export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(DataEntryComponent)),
 );

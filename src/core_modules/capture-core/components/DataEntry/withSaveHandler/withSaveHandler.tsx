@@ -98,7 +98,7 @@ const getSaveHandler = (
             if (onIsCompleting) {
                 return onIsCompleting(this.props);
             }
-            return [addEventSaveTypes.COMPLETE, newEventSaveTypes.SAVEANDCOMPLETE].includes(saveType);
+            return [addEventSaveTypes.COMPLETE, newEventSaveTypes.SAVEANDCOMPLETE].includes(saveType!);
         }
 
         validateForm(saveType?: string | null) {
